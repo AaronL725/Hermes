@@ -1,0 +1,168 @@
+//+------------------------------------------------------------------+
+//|                                               AI 3 v3.9.6.34 gamma |
+//|                                      January 23, 2020 |
+//| Use at your own risk.                                              |
+//| This EA is dedicated to Mike McKeough,                             |
+//| Rest In Peace.                                                     |
+//+------------------------------------------------------------------+
+
+#include <Trade\Trade.mqh>
+#include <stderror.mqh>
+#include <ChartObjects\ChartObjectsTxtControls.mqh>
+
+#define A 1  // All (Basket of all pairs)
+#define B 2  // Basket
+#define T 4  // Ticket
+#define P 5  // Pending
+
+enum portChgs
+  {
+   no_change = 0,  // No changes
+   increase = 1,   // Increase only
+   any = -1,       // Increase / decrease
+  };
+
+enum entType
+  {
+   disable = 0,  // Disabled
+   enable = 1,   // Enabled
+   reverse = 2   // Reverse
+  };
+
+enum tFrame
+  {
+   current = 0,  // Current
+   m1 = 1,       // M1
+   m5 = 2,       // M5
+   m15 = 3,      // M15
+   m30 = 4,      // M30
+   h1 = 5,       // H1
+   h4 = 6,       // H4
+   d1 = 7,       // Daily
+   w1 = 8,       // Weekly
+   mn1 = 9       // Monthly
+  };
+
+//+------------------------------------------------------------------+
+//| External Parameters Set                                         |
+//+------------------------------------------------------------------+
+
+input string Version_3_9_6_34_gamma = "EA Settings:";
+input string TradeComment = "AI 3.9.6.34 gamma";
+input string Notes = "";
+input int EANumber = 1681348112;  // EA Magic Number
+input bool UseDefaultPairs = true; // Use the default 28 pairs
+input string OwnPairs = ""; // Comma-separated own pair list
+input bool Debug = false;
+input bool EmergencyCloseAll = false;  // *** CLOSE ALL NOW ***
+input string s1 = "";  // .
+input bool ShutDown = false; // *** NO NEW TRADES ***
+input string s2 = "";  // .
+
+input string LabelAcc = "";  // == ACCOUNT SETTINGS ==
+input double StopTradePercent = 10;  // Percentage of balance lost before trading stops
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+input bool NanoAccount = false; // Small Lot Account (0.01)
+input double PortionPC = 100;  // Percentage of account you want to trade (on this pair) -->divided by Numer of Pairs?
+input portChgs PortionChange = increase; // Permitted Portion change with open basket
+input double MaxDDPercent = 90; // Percent of portion for max drawdown level.
+input double MaxSpread = 10; // Maximum allowed spread while placing trades
+input bool UseHolidayShutdown = false; // Enable holiday shutdowns
+input string Holidays = "18/12-01/01"; // Comma-separated holiday list (format: [day]/[mth]-[day]/[mth])
+input bool PlaySounds = false; // Audible alerts
+input string AlertSound = "Alert.wav"; // Alert sound
+
+input string eopb = "";  // -- Opt. with 'Open prices only' --
+input bool EnableOncePerBar = true;
+input bool UseMinMarginPercent = false;
+input double MinMarginPercent = 1500;
+input string eopb1 = "";  // .
+
+input bool B3Traditional = false; // Stop/Limits for entry if true, Buys/Sells if false
+
+input bool UseAnyEntry = true; // true = ANY entry can be used to open orders, false = ALL entries used to open orders
+input string LabelLS = "";  // ----------- LOT SIZE -----------
+input bool UseMM = false; // UseMM (Money Management)
+input double LAF = 0.5; // Adjusts MM base lot for large accounts
+input double Lot = 0.01; // Starting lots if Money Management is off
+input double Multiplier = 3.0; // Multiplier on each level
+
+input string LabelGS = "";  // ------ GRID SETTINGS ------
+input bool AutoCal = false; // Auto calculation of TakeProfit and Grid size;
+input tFrame ATRTF = 0; // TimeFrame for ATR calculation
+input int ATRPeriods = 5; // Number of periods for the ATR calculation
+input double GAF = 1.1; // Widens/Squishes Grid in increments/decrements of .1
+input int EntryDelay = 1200; // Time Grid in seconds, avoid opening lots of levels in fast market
+input double EntryOffset = 0; // In pips, used in conjunction with logic to offset first trade entry
+input bool UseSmartGrid = false; // True = use RSI/MA calculation for next grid order
+
+input string LabelTS = "";  // ===== TRADING =====
+input int MaxTrades = 15; // Maximum number of trades to place (stops placing orders when reaches MaxTrades)
+input int BreakEvenTrade = 5; // Close All level, when reaches this level, doesn't wait for TP to be hit
+input double BEPlusPips = -5; // Pips added to Break Even Point before BE closure
+input bool UseCloseOldest = false; // True = will close the oldest open trade after CloseTradesLevel is reached
+input int CloseTradesLevel = 5; // will start closing oldest open trade at this level
+input bool ForceCloseOldest = true; // Will close the oldest trade whether it has potential profit or not
+input int MaxCloseTrades = 4; // Maximum number of oldest trades to close
+input double CloseTPPips = 10; // After Oldest Trades have closed, Forces Take Profit to BE +/- xx Pips
+input double ForceTPPips = 0; // Force Take Profit to BE +/- xx Pips
+input double MinTPPips = 0; // Ensure Take Profit is at least BE +/- xx Pips
+
+input string LabelES = "";  // ----------- EXITS -----------
+input bool MaximizeProfit = true; // Turns on TP move and Profit Trailing Stop Feature
+input double ProfitSet = 50; // Profit trailing stop: Lock in profit at set percent of Total Profit Potential
+input double MoveTP = 2; // Moves TP this amount in pips
+input int TotalMoves = 2; // Number of times you want TP to move before stopping movement
+input bool UseStopLoss = false; // Use Stop Loss and/or Trailing Stop Loss
+input double SLPips = 30; // Pips for fixed StopLoss from BE, 0=off
+input double TSLPips = 10; // Pips for trailing stop loss from BE + TSLPips: +ve = fixed trail; -ve = reducing trail; 0=off
+input double TSLPipsMin = 3; // Minimum trailing stop pips if using reducing TS
+input bool UsePowerOutSL = false; // Transmits a SL in case of internet loss
+input double POSLPips = 600; // Power Out Stop Loss in pips
+input bool UseFIFO = false; // Close trades in FIFO order
+
+input string LabelEE = "";  // --------- EARLY EXITS ---------
+input bool UseEarlyExit = false; // Reduces ProfitTarget by a percentage over time and number of levels open
+input double EEStartHours = 3; // Number of Hours to wait before EE over time starts
+input bool EEFirstTrade = true; // true = StartHours from FIRST trade: false = StartHours from LAST trade
+input double EEHoursPC = 0.5; // Percentage reduction per hour (0 = OFF)
+input int EEStartLevel = 5; // Number of Open Trades before EE over levels starts
+input double EELevelPC = 10; // Percentage reduction at each level (0 = OFF)
+input bool EEAllowLoss = false; // true = Will allow the basket to close at a loss : false = Minimum profit is Break Even
+
+input string LabelAdv = ""; // .
+input string LabelGrid = ""; // --------- GRID SIZE ---------
+input string SetCountArray = "3,2,2,2"; // Specifies number of open trades in each block (separated by a comma)
+input string GridSetArray = "55,100,115,160"; // Specifies number of pips away to issue limit order (separated by a comma)
+input string TP_SetArray = "10,15,25,50"; // Specifies number of pips TakeProfit (separated by a comma)
+input string LabelRev = ""; // -----------REVERSE-----------
+input entType UseReverseGrid = disable; // Enables the reverse grid function
+input double RevDelay = 60; // seconds delay before opening reverse order
+input string RSetCountArray = "0,0,0,0"; // Specifies number of open trades in each block (separated by a comma)
+input string RGridSetArray = "0,0,0,0"; // Specifies number of pips away to issue limit order (separated by a comma)
+input string RTP_SetArray = "0,0,0,0"; // Specifies number of pips TakeProfit (separated by a comma)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnTick()
+  {
+   // Add the OnTick logic here
+  }
+
+void OnInit()
+  {
+   // Initialization logic here
+  }
+
+void OnDeinit(const int reason)
+  {
+   // Deinitialization logic here
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+

@@ -1,0 +1,52 @@
+// Tradtional trendlines?
+extern bool TraditionalHighLow=true;  // true = sets defaults for hi lo traditional trendlines. Overrides and sets the following settings:
+                                      // INDperiod1&2=1, TraditionalHiLo=1, RestrictHiLo=1, Displayindicator=false;
+// Testing only
+extern bool BasicTestingOverride=false; // overrides everything to set to basic Close
+extern bool TestTL=false;     // shows test trendlines for each stage of algorithm at a specific bar & prints TL details
+extern int TestBar=165;       // run testing module on this bar (Not Operational Yet)
+extern int MessageDetail=3;    // 0 = no information; 1 = print trendline details;  2 =  print reasons for removing duplicate;   3 = print reasons for excluding trendlines (except option 4)
+                               // 4 = print details of trendlines excluded due to indicator hugging trendline
+                               
+// Main settings for non-traditional trendlines
+extern int INDperiod1=7;    // sequences through indicator periods from INDperiod1 to INDperiod2
+extern int INDperiod2=12;   //    for price trendlines set INDperiod1 & 2 = 1;  if INDperiod2=0 or 1, INDperiod2 is turned off
+extern double TouchTolApex2=0.05; // Apex 2 tolerance  (Key value to change: e.g. 0.005-0.2) Default=0.05
+extern int INDType=1;     // moving average: 0=simple 1=exponential 2=Smoothed 
+extern int INDPriceType=0;   // 0=close  1=Open   2=High   3=Low   4=Medium   5=Typical   6=Weighted
+extern int TraditionalHiLo=0;  // 0 = off; 1 = display both High & Low TL at same time;  2 = display INDPriceType (e.g. close) plus High and Low TLs
+extern int RestrictHiLo=1;    // when using High &/or Low : 0 = no restriction
+                              // 1 = restrict trendlines to upper/long for High prices & lower/short for Low prices (Traditional)
+                              // 2 = display only contradictory! (high/short,low/long)
+extern int TolMethod=3;   // method used to calculate tolerance for apex 2 (1=atr, 2=?, 3=standard deviation)  
+extern int TolPeriod=90;  //  period to display tolerance bands for checking touch tolerance 
+extern int MaxStartBars=400;   // Number of bars to start from
+extern int MaxWaveBars=500;   // Total number of bars to use to look for apex 2 & 3 (includes MaxStartBars)
+extern int MaxWave4=0;   // Number of bars extra to use to look for apex 4 (optional)
+
+// Trendline  Criteria
+extern int MaxNumberTL=200;  // Maximum number of trendlines to draw
+//extern double TouchTolw3=0.3;  //  Apex 3 tolerance  ** Doesn't need adjusting **
+//extern double TouchTolOverw2=0.5; // tolerance that indicator can extend over the TL at wave 2.  Note: result is fraction of TouchTolApex2 (e.g. 0.5 * TouchTolApex2)
+extern double HumpTestTol=0.02; // Tolerance used for hump deviation from apex & trendline (ie testing is it a peak or trough
+                                // in relationship to trendline
+extern int HumpDistance=1;     // Number of bars to measure from apex to test it is an apex
+extern double FreeTolTL=0.15;     // Wave needs to go outside of this tolerance band on the trendline to be considered an apex (e.g. 0.15; 0=no tolerance band)
+extern int MinWavePeriod=5;  // Minimum number of bars between each wave
+extern double Proportion=0.1; // Apexes need to be a distance apart based on their length. e.g. 0.2 = 20% separation based on length.
+extern int MaxLengthTL=400; // Maximum length for trendlines
+
+// Breakout - arrows (breakout is on the close on the bar with the arrow)
+extern int EarlyBreakoutBars=4; // Disqualify trendline if breakout within x bars of apex 3 and x bars prior to apex 1
+
+//Display Criteria
+extern bool DisplayIndicator=true;  // display indicator and tolerance lines for apex 2. Only displays last period of indicator.
+extern bool DisplayMarkers=true;   // Draw numbered circles for each 1,2,3 apex on the trendline
+extern bool DisplayOnlyMarker3=true; //  ... only show apex marker 3
+extern bool RemoveDuplicates=true;   // Removes duplicate trendlines from different periods of an indicator (sharing 2 points in time in common)
+extern bool RemoveIfNoPriceConfirm=false;  // Remove trendlines historically that did not have prive action within x bars
+extern int PriceConfirmBars=4; // Price needs to exceed High/Low of breakout bar within x bars 
+extern bool DisplayActiveTLOnly=false;    // true = Show only active trendlines
+extern int BreakoutArrowSize=3; // width 1 - 5
+extern int MarkerSize=3; // width 1 - 5 
+extern int TrendlineWidth=1; // width 1-5

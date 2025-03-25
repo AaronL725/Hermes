@@ -1,0 +1,96 @@
+// 3rd Wave Algorithm 
+// 
+// 
+
+// Tradtional trendlines?
+extern string S1="Section 1: Override trendline constraints - for traditional TL or testing";
+extern bool TraditionalHighLow=false;  // true = sets defaults for hi lo traditional trendlines. Overrides and sets the following settings:
+                                      // INDperiod1&2=1, TraditionalHiLo=1, RestrictHiLo=1, Displayindicator=false;
+extern bool BasicTestingOverride=false; // overrides everything to set to Close data & line chart only & display orange dot every 50 bars
+                                        // INDperiod1=1;  INDperiod2=1; (no moving average) INDPriceType=0; (Close) 
+                                        // TraditionalHiLo=0;  RestrictHiLo=0; RemoveDuplicates=true; MultipleTLConfirm=false;  Displayindicator=true;
+
+// Main trendline constraints
+extern string S2="Section 2: Main trendline constraints";
+extern double TouchTolApex2=0.075; // Apex 2 tolerance  (Key value to change: e.g. 0.005-0.2) Default=0.05
+extern int EarlyBreakoutBars=2; // Disqualify trendline if breakout within x bars of apex 3 and starts x bars prior to apex 1
+extern double DeviationTol=0.15;     // Wave needs to go outside of this tolerance band between apex on the trendline to be considered valid 
+                                  // default is 0.15; 0=no tolerance band; try 1 to remove trendlines that skim along surface)
+extern int MinWavePeriod=5;  // Minimum number of bars between each wave
+extern double Proportion=0.1; // Apexes need to be a distance apart based on their length. e.g. 0.2 = 20% separation based on length.
+extern int MinLengthTL=15; // Minimum length for trendlines (also affected by MinWavePeriod, e.g. if MinWavePeriod=5, minimum length=5*3waves=15)
+extern int MaxLengthTL=400; // Maximum length for trendlines (also affected by MaxWaveBars)
+// Note: Breakout arrows (breakout is on the close of the bar with the arrow)
+                               
+// Further settings for non-traditional trendlines
+extern string S3="Section3: Settings for indicator and general settings";
+extern int INDperiod1=7;    // sequences through indicator periods from INDperiod1 to INDperiod2
+extern int INDperiod2=12;   //    for price trendlines set INDperiod1 & 2 = 1;  if INDperiod2=0 or 1, INDperiod2 is turned off
+extern int INDType=1;     // moving average: 0=simple 1=exponential 2=Smoothed 
+extern int INDPriceType=0;   // 0=close  1=Open   2=High   3=Low   4=Medium   5=Typical   6=Weighted
+extern int TraditionalHiLo=0;  // 0 = off; 1 = on = display both High & Low TL at same time;  2 = display INDPriceType (e.g. close) plus High and Low TLs
+extern int RestrictHiLo=0;    // 0 = no restriction
+                              // 1 = (Traditional) restrict trendlines to upper/long for High prices & lower/short for Low prices 
+                              // 2 = display only contradictory! (high breakout short, low breakout long)
+extern int MaxStartBars=400;   // Number of bars to begin backward trendlines from (e.g. where apex 3 is located)
+extern int MaxWaveBars=500;   // Total number of bars to use to look for apex 2 & 3 (includes MaxStartBars)
+extern int MaxWave4=0;   // Number of bars extra to use to look for apex 4 (optional & not verified)
+
+extern int HumpDistance=1;     // Number of bars to measure from apex to test it is an apex
+extern int MaxNumberTL=500;  // Maximum number of trendlines to draw
+
+extern string S4="Section4: Exclude trendlines based on various post-discovery criteria";
+extern bool RemoveDuplicates=true;   // Removes duplicate trendlines from different periods of an indicator (sharing 2 points in time in common)
+extern bool MultipleTLConfirm=true;  // Only display and record trendlines that have another trendline breakout within x bars
+extern int BreakoutxBars=3;  // Number of bars to look back for more breakouts; 0 = only consider current bar; 1 = current bar, plus forward 1 bar
+extern bool RemoveIfNoPriceConfirm=false;  // Remove trendlines historically that did not have prive action within x bars
+extern int PriceConfirmBars=4; // Price needs to exceed High/Low of breakout bar within x bars 
+
+//Display Criteria
+extern string S5="Section5: Display settings";
+extern bool DisplayIndicator=true;  // display indicator and tolerance lines for apex 2. Only displays last period of indicator.
+                              // is overriden by test settings
+extern bool DisplayApexMarkers=true;   // Draw numbered circles for each 1,2,3 apex on the trendline
+extern bool DisplayOnlyApex3=true; //  ... only show apex marker 3
+extern bool BreakoutArrowsOnly=false;   // remove all trendlines and display only breakout arrows
+extern bool DisplayActiveTLOnly=false;    // true = Show only currently active trendlines (ie no breakouts yet)
+extern int MessageDetail=0;    // 0 = no information; 1 = print trendline details;  2 =  print reasons for removing duplicate;   3 = print reasons for excluding trendlines (except option 4)
+                               // 4 = print details of trendlines excluded due to indicator hugging trendline
+                               // orange dots displayed every 50 bars to help match the information to trendlines on the screen
+extern int BreakoutArrowSize=3; // width 1 - 5
+extern int MarkerSize=3; // width 1 - 5 
+extern int TrendlineWidth=1; // width 1-5
+
+4.86
+- turned chart to line, when in test mode
+- removed trendline testing option from inputs (can be reinstated)
+- moved extern var. around
+- removed HumpTestTol=0.02 from extern var
+- TouchTolw3 name change to TouchTolWide
+- found TouchTolWide & w2gap testing are important for code speed
+- TouchTolOverw2 removed - redundant
+- changed the index buffer
+- added BreakOutBuffer counting
+- added DRAW_LINE to indicator for Basic Testing & single indicator period testing
+- found was unable to stop TLs not displaying when indicator was removed manually.
+
+4.87
+- coded BreakoutBuffer - count of the number of breakouts. +100=long, +1=short
+- added multi trendline confirmation within x bars, which deletes breakout trendlines not involved in multi confirmation
+- added post printout of multi-breakouts (if messagedetail=1)
+- lots of bug fixing for multi-trendine confirmation 
+- all created objects are now set to not be selectable (stops accidental drag & drop)
+- added minimum TL length as external variable
+- fixed bug of recording of breakout before duplicate removed
+- fixed redraw bug for some arrows
+- added sections & description to extern variables
+- added display setting to only show breakout arrows (no trendlines)
+- improved the switching logic for display settings permutations
+
+
+
+Index Buffers
+   0  Indicator
+   1  Ind Tolerance
+   2  BreakoutBuffer - count of the number of breakouts. +100=long, +1=short  (e.g. 301 = 3 long & 1 short breakout occur on that bar)
+   
