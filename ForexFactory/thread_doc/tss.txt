@@ -1,0 +1,21 @@
+//@version=5
+indicator(shorttitle="TSS", title="TSS", overlay=false, timeframe="", timeframe_gaps=true)
+dailyOpen = request.security(syminfo.tickerid,"D",open,lookahead = barmerge.lookahead_on)
+
+mfi = ta.mfi(open,14)
+rsi = ta.rsi(open,8)
+ema1 = ta.ema(open, 7)
+ema2 = ta.ema(open, 20)
+isBuy = (dailyOpen < open) and (rsi > 50) and (mfi > 50) and (ema1 > ema2)
+isSell = (dailyOpen > open) and (rsi < 50) and (mfi < 50) and (ema1 < ema2)
+dir = 0
+cl = color.black
+if isBuy
+    dir := 1
+    cl := color.green
+
+if isSell 
+    dir := -1
+    cl := color.red
+
+plot(dir, style=plot.style_columns, color=cl)

@@ -1,0 +1,1709 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+If you are a one-tool guy and don't like tool boxes, then stop here and return to the Forums overview ( https://www.forexfactory.com/forums ) -- this thread is not for you and you will not only be wasting your time, but mine as well. On the other hand, if you like learning something new and not afraid to learn something that is not only new but rather "alien" compared to the way you've currently been trading, then read on. And to be clear, I'm not pushing Focal Points as the next Holy Grail. It is another style of trading you may find fun and intriguing that breaks-up the boredom of endless screen-staring. I recently learned about Focal Points from @parisboy in the PlanetX thread ( https://www.forexfactory.com/thread/...tx-oscillators ). @parisboy is a brilliant man with a great sense of humor and an expert on envelopes, waves and cycles ( https://www.forexfactory.com/thread/...s-waves-cycles ?). I've known him a few years and read his posts from time-to-time, though they generally fly over my head. My brain marches to an empirical beat, whereas @parisboy's is more theoretical. However, during our recent engagement on the PlanetX thread a few things began to click. I asked a few questions, received nice responses, and then more began to click. And then, at one point, a light bulb went on. Focal Points are super, super easy to trade, plus they are colorful and visually pleasing to the eye. However they aren't used the way you think they might be used -- and that is the catch. If you read the first few posts here and think you understand then, for sure, you don't. You'll need to re-read until that light bulb goes on. I've developed a new Focal Point indicator that I will share and explain its use in a post below. I should also emphasize early on that trading Focal Points is highly discretionary -- you will need to use your brain's pattern-recognition capabilities. The Focal Point strategy does not lend itself to automation -- so, don't expect a future EA. Full disclosure: Focal Points are new to me and as of this writing I have not yet traded them -- I'm an algorithmic trader. However, I plan to incorporate Focal Points into my discretionary trading. Attached Image (click to enlarge) Attached File(s) R4M-FocalPoints-OnChart.ex4 70 KB | 795 downloads | Uploaded Mar 24, 2022 9:48am ################################################################################ Update: 2022-03-23 (Taken from post #88) This post includes an updated version of the R4M-FocalPoints-OnCharts indicator. Using the default settings it does a good job of detecting Focal Points -- though I won't claim it is perfect. As I've touched on above, not all Focal Points are created equal -- at least not visually. The SMA intersections rarely occur at exactly one point -- there is always a bit of a horizontal or vertical offset. Your brain can easily spot the colorful pattern and ignore its imperfections, but that's not so easily done in code without very specific, predefined rules -- that currently don't exist. So, I came up with my own and it seems to work. I am happy to continue refining the detection algorithm. However, if you come across a discrepancy where the detection is wrong or misses an obvious FP then it's okay to complain -- as long as you include a chart that points to the discrepancy and provides enough information that would allow me to reproduce it. If I can't reproduce a problem then I can't fix. Also, I'm not a mind-reader. Let me explain a few of the indicator's features. In the image below the bullish and bearish FPs that the indicator detected are marked by blue and purple circles, respectively. I think of Focal Points in terms of pairs (i.e. couples) of a bullish one coupled with a bearish one. I'll call these FP1 and FP2. In between FP1 and FP2 there will be either a High or a Low. When FP1 is bullish and FP2 is bearish there will be a High, and when FP1 is bearish and FP2 is bullish then there will be a low. Once FP2 is formed the indi has enough information to compute the TargetPrice (yellow line). If current price has not yet reached the guesstimate TargetPrice then the yellow line is solid and may still be valid. However, once the current price has exceeded the guesstimate TargetPrice then it should no longer be considered and it is drawn as a dashed line. Attached Image (click to enlarge) The updated version of the indicator includes two settings: 'Crossing Type' and 'Tolerance'. These come about because, as mentioned above, not all Focal Points are created equal and are described below: Crossing Type: There are 11 crossing types -- 16x32, 16x64, 16x128, 16x32x64, 16x32x128, 16x64x128, 16x32x64x128, 32x64, 32x128, 32x64x128, 64x128. The default is 64x128, since I think that works best. But feel free to experiment with the others. Tolerance: This is the "breathing room" required by the detection algorithm. Intersecting SMAs occur in close proximity to one another, but not at an exact point. This setting is the number of bars that intersecting SMAs are considered to belong to the same FP. The smaller the number the more strict. In the case of 64x128 the Tolerance can be set to '1' since there is only one crossing. In the case of 16x32x64x128 if you use a setting of '1' then you will probably not see any FPs. Attached Image (click to enlarge) Below is an example of a bearish FP where the guesstimated Target Price may still be trade-able because it hasn't yet been exceeded by the current price. Attached Image (click to enlarge) And some tips: 1. Pay attention to the Fractal Channels you see in the background. 2. Pay attention to SMA(128). 3. Trade in the direction of SMA(128). 4. Perhaps it's best to attach the indi twice to a chart -- one using 64x128 and the other 16x128, each using a 'Tolerance' of 1. Don't force it -- if a candidate setup isn't obvious and you feel like you have to ask @parisboy whether or not to enter a trade, then that is your clue not to trade it. When you get your head around this algorithm you won't need to ask questions. If you feel a need to ask questions then that probably means you don't yet have your head around it. I would consider this a highly discretionary strategy. The indicator I've provided is just a tool -- it can not guide your hand to the BUY / SELL button. A tool is only as good as the craftsman who holds it. ################################################################################ Update: 2022-03-24 (Taken from post #136) Here is a new indicator -- R4M-GuppyPoints-OnChart. It is a new concoction that combines the idea behind Focal Points with Daryl Guppy's GMMA (Guppy Multiple Moving Average). The results are similar to FocalPoints and though it may ruffle some feathers, I actually think they are better. I'll explain why below... Attached Image (click to enlarge) Attached File(s) R4M-GuppyPoints-OnChart.ex4 64 KB | 628 downloads | Uploaded Mar 25, 2022 3:58pm GuppyPoints lacks the rich history and theory of FocalPoints, though it does share some similarities. Whereas FocalPoints relies on multiple SMA lines that differ by powers-of-two, GuppyPoints relies on multiple EMA lines who's periods don't follow any particular pattern, as far as I can tell. I suspect they were chosen by empirical observation -- i.e. trial and error. GuppyPoints uses two groups of EMA lines -- long and short. The periods of the long group are 30, 35, 40, 45, 50, 60, and the periods of the short group are 3, 7, 10, 12, 15. In addition, there is no backshift -- which is a YUUUUGE benefit. Hence, there is no extrapolation or extension since the lines reflect the real-time data all the way to the current bar (Bar[0]). In addition, from a programmatic point of view, the rule for detecting crossings is much simpler and does not require a 'Tolerance' or 'Crossing Type' setting. All intersections are created equal. I am NOT advocating the use of GuppyPoints over FocalPoints. I am simply sharing an observation -- make of it as you will.
+
+--- 帖子 #2 ---
+The theory behind Focal Points was developed over 60 years ago by engineers working at the Jet Propulsion Laboratory in California. The JPL is owned by NASA and managed by the California Institute of Technology -- roughly the equivalent of MIT on the West Coast (USA). The engineers were working on missile guidance systems. Certain portions of their algorithms were later found to be applicable to financial trading -- this is where Focal Points enter the scene. Though not widely used (as far as I can tell), they have been adapted and used for decades in trading financial instruments. There are folks here at FF who also use them -- hopefully they will jump in and share some charts, insights and help answer questions as they arise. The Focal Points algorithm requires something that you've probably never applied to trading -- a concept that I'll refer to as a "Leap of Faith". The reason I call it that is because you do not Enter / Exit trades based on BUY / SELL signals that occur on the most recent bars. If you're shaking your head because you don't understand then read that sentence again. The indicator employs 5 back-shifted SMA lines. As a result of the back-shifting the indicator's data ends about 32 bars ago -- though it is extrapolated / extended to the current bar for visual and discretionary purposes. So, once the indicator's data ends and you enter the extended portion you are effectively walking a tight-rope 100 feet off the ground with no net beneath you. This is where "Leap of Faith" comes in. Using historical Focal Points, the algorithm computes a guesstimated TargetPrice . If the TargetPrice looks appealing and suits whatever additional criteria you wish to apply (e.g. R:R, or whatever) then you enter a BUY / SELL trade regardless of what the most recent bars are doing . That's right, you read that sentence correctly. Once a guesstimated TargetPrice has been computed you enter a trade with the TargetPrice as your TakeProfit -- ignoring the most recent price bars -- and then walk away. There is a very high probability the TargetPrice will be reached.
+
+--- 帖子 #3 ---
+For those who have been around for awhile and are familiar with @George's thread where he exhorted "TARGETS, TARGETS, TARGETS", please don't be offended if I draw a comparison to the Focal Points strategy. That battle is over. "TARGETS, TARGETS, TARGETS" referred to historical prices that are likely to be revisited sometime in the future -- but you don't know when. They are future target prices. Focal Points has a similar element -- but differs in a couple of ways: 1. It computes a guesstimated target price. The guesstimated target price is not a historical high / low. It is derived at using a simple calculation. If you can subtract two numbers then you can do it in your head. 2. The guesstimated target price can be used NOW . You don't need to wait for price exhaustion or price exceeding TMA lines. That target price is a destination price that will be arrived at shortly. So, my variation of @George's mantra is "GUESSTIMATED TARGET PRICE, GUESSTIMATED TARGET PRICE, GUESSTIMATED TARGET PRICE". It's a mouth full but, hopefully, you get the gist...
+
+--- 帖子 #4 ---
+Okay -- I'm ready to begin digging into some details... The chart below shows two Focal Points -- circled in yellow. These occur when back-shifted SMA lines intersect. For purposes here, I will focus on SMA(16), SMA(32), SMA(64) and SMA(128) for now. Attached Image (click to enlarge) I've also labeled the portion of SMA(128)'s "extension". The SMA lines are back-shifted 1/2 their period. This means that SMA(128) is back-shifted 64 bars. And that means the SMA(128) line actually ended 64 bars ago. For visual and discretionary purposes the indicator extends the SMA(128) to Bar[0] -- but that is not based on recent price data. The indicator simply extrapolates the line based on the slope 64 bars ago. This is important to grasp. If the light bulb isn't beginning to flicker then read that again. And the chart below shows the Focal Points algorithm in all its glory. This is an example of a Bearish Focal Point. Focal Point #1 (FP1) occurs in a bullish trend and Focal Point #2 (FP2) occurs in a bearish trend. In between FP1 and FP2 is a High. Now, comes the advanced math, so put on your thinking caps: Target Price = FP2 - (High - FP2) The yellow line is the Target Price. If you study the chart for a moment you'll notice that FP2 falls equidistant between the High and the Target Price. In other words, the distance between High and FP2 is the same as the distance between FP2 and Target Price. So, dusting off what you learned in 1st Grade math you can probably guesstimate the Target Price without the use of my "magic mush" indicator (thanks to @moodybot for that one)... Feel free to experiment and play with the indi to get a feel for it. And it goes without saying that should be done on a Demo account. Though the indicator displays markings those are NOT, and I repeat NOT, trading signals. This is a discretionary trading strategy -- it is your brain that decides when to press the BUY / SELL button. Attached Image (click to enlarge) Attached File(s) R4M-FocalPoints-OnChart.ex4 68 KB | 500 downloads
+
+--- 帖子 #5 ---
+A couple of tips: (1) SMA(128) -- this SMA line is "da man". The SMA(128)'s brownish line passes through most all the valid Focal Points. That is probably the first thing I notice. If the SMA(128) line intersects with what looks to be a Focal Point then that is my clue to look closer. (2) Fractal Channels -- in the other thread @parisboy introduced the use of channels for Focal Points. I've taken the liberty of using Fractal Channels in their place. I'm a lazy coder and I had a nice Fractal Channel indicator that serves the same purpose and which I incorporated into the Focal Points indi. If you look carefully at the chart you'll see the fractal channel in dotted gray lines. Here's what I look for: (a) Bearish trend -- the SMA lines are within or below the fractal channel (b) Bullish trend -- the SMA lines are within or above the fractal channel Here's why the fractal channel can be your friend -- it is your one link to reality. Remember -- the SMA lines ended many bars ago and as you look to the right they may not reflect current market conditions. However, the fractal channel does reflect current market conditions. So, if the SMA extensions align with the fractal channel then that should give you a warm fuzzy feeling... Attached Image (click to enlarge)
+
+--- 帖子 #6 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #7 ---
+How to find the main Focal Point of a Swing for the Dummies ! I tried to be empirical !
+
+--- 帖子 #8 ---
+@parisboy -- you are too quick -- I'm still working on post #1!! Thank you for jumping in...
+
+--- 帖子 #9 ---
+A Focal Point is the label given to the Price Bar where converge several Centered Moving Averages of period linked by a factor 2 To fully understand how Focal Point are built and how to trade them, you need to know : how work Moving Averages what are their characteristics what consequences for trading have these characteristics The key is in the "theory" which allows us to understand how Moving Averages really work and what are their real qualities. Let me be clear up to 2006 I was like everyone else, looked at my screen and saw the MA's going up or down. Then I discovered Hurst through a booklet of TradingFive where they explain the CMA crossing of a Full Period CMA (ex: 32) with a Half -Period CMA (ex: 16) to calculate a target price. After 5 / 10 minutes I told myself "I can do it" Then I bought Profit Magic, then the course. where all you have to know about CMA's and MA's is explained in detail. You are a coder, a computer kid era. I began to draw chart in 1972 - pencil, paper , rubber, ruler. You missed that. Because charting manually this way, you HAVE to think BEFORE you draw your chart what you want exactly on your chart, which parameters to use etc otherwise you have to start a new chart manually if it does not fit your requirements. Hence your have to weigh your options. It was exactly similar for Moving Averages. Do you imagine yourself calculating all these MA's manually ? every minute ? To facilitate your work techniques were created and published in newsletter or sold in seminars in the seventies. For example let's take a MA 5. Data are 3,4,5,6,7 = 25. Average = 25/5 = 5. For a CMA you position your average 5 under the number 5 of the data serie which in the middle of the serie , in the center, in third position of 5 Let's now add a new number 8 . As it is a new additional number you add 8 to the total of the previous sum of 5 data (25) and you substract the first number of the data serie (3) Hence we have (25+8-3)/5 = 30 /5 = 6 If you chart that 6, being bigger than 5 your MA goes Up Let's assume your new additional number is 3 , you have (3+25-3) = 25/5 = 5 . Your next average number is 5 . Your charted MA is flat Let's assume your new additional number is 2. you have (2+25 -3) = 24 = 24/5 = 4.8. Your next average number is 4.8 . Your charted MA goes down Your data serie is 3,4,5,6,7. Let's assume that 7 is your last price. In this example as long as your additional price is greater than the price you substract from the total (3) your MA goes up. Your MA goes Up even if your new additional price is lower than your last price as long as this price is greater than 3.
+
+--- 帖子 #10 ---
+This chart was posted yesterday evening by Robots4me. It is a beautiful chart. " Beautiful chart s" are easy to analyze " Beautiful chart s" are easy to trade on this thread you will find the right tools to trade and the right concepts to analyze Price Action 2 Focal Points A Centerline, a Midline A Sinewave Intuitively you understand now why you have so many 50 % retracements in Price
+
+--- 帖子 #11 ---
+Learn to simplify things to understand and analyze Price Action Observe the W Patern What is a W Pattern It is a Double Bottom
+
+--- 帖子 #12 ---
+Yes -- very nice...
+
+--- 帖子 #13 ---
+You will see tons of Double Bottoms and Double Tops Observe how is built a Double Bottom The red Centered Moving Average 16 travels from Focal Point A to Focal Point B buildind 2 Lows. As Trend is up the second Low is higher than the First
+
+--- 帖子 #14 ---
+Yes, I see that. They aren't all as pretty as this one, but I am getting better at spotting them...
+
+--- 帖子 #15 ---
+Simultaneously the Centered Moving Average 32 (blue) travels too from Focal Point A to Focal Point B and makes its Low more or less in the Middle between the 2 Lows of the Centered Moving Average 16. That is logical. Think of these Centered Moving Averages as Simplified Cycles of Price Acttion (a Moving Average "smoothes" Price Action) You do not need to be a rocket scientist to understand that you can have 2 Cycles of 16 Time Unitsperiod within a Cycle of 32 Time Units Period Then you have a " robust, but not bad " explanation de how are built Double Bottoms and conversely Double Tops
+
+--- 帖子 #16 ---
+You know what -- I'm beginning to understand what you write, and that scares me...
+
+--- 帖子 #17 ---
+observe the intermediary low inside the Double Bottom. It is an example that Cycles are additive. Centered Moving Average 64 (lila) and Centered Moving Average 32 (blue) make their Lows in the same area where Centered Moving Area 16 (red) makes its Top. The addition of 2 minus , 1 plus explains this Low of lesser amplitude
+
+--- 帖子 #18 ---
+Are you familar with Fourier Transform?
+
+--- 帖子 #19 ---
+A little bird asked me a question -- what's with all these power-of-2 SMA lines? Why power-of-2? Why not power-of-3 or power-of-1.5? What's "magical" about power-of-2? I haven't read the original research papers from 60 years ago, but I have a good idea why power-of-2 is used. Back in the 1960's computers didn't have the benefit of today's floating-point processors. Those guys at the Jet Propulsion Laboratory were working on missile guidance systems and the computations had to be fast, fast, fast. Computer processors think in binary, and computations using integers that are a power-of-2 don't need to be converted to doubles, or floats. The CPU's used back then would have bogged down if they had to perform a lot of floating-point computations. Integers that are a power-of-two fit perfectly into the CPU's instruction set and don't require time-consuming conversions.
+
+--- 帖子 #20 ---
+Well it is a French guy! I have some knowledge of his work and tons of papers on its use in cycle analysis. (frequencies in time series). Spectral Analysis , Periodogram.
+
+--- 帖子 #21 ---
+Another little bird asked what's with the backshiftng? Why backshift the SMA lines? Again, I haven't read the original reseach but I do have a hunch why... The SMA(16), SMA(32), SMA(64) and SMA(128) are very different. Their moving average periods differ by a lot. Without backshifting, these SMAs would rarely cross. But by backshifting 1/2 their period then they come into better alignment and Focal Points occur more frequently. However, just as in real-life, everything comes with a trade-off. The trade-off with backshifting is that the SMA lines end prematurely and require extrapolation to extend to the end of the chart. Those extensions are not based on price data and are simply extrapolations from where the SMA had ended many bars ago. If market conditions have changed since the SMAs had ended then the SMAs will appear to have no relation to the current price bars. However, according to the theory, the TargetPrice may still be good. That's where the Fractal Channel and your discretion come into play. On the chart below the SMA extensions include small dots. If you remove those portions of the SMA lines then it should become clear what I'm talking about. Attached Image (click to enlarge)
+
+--- 帖子 #22 ---
+now looking back to my student days writing machine code with a 4-bit Motorola processor ... moving bits from one register to another... it was then not easy. then came the 8 bits, then the 16 bits, and now how many bits processors... millions millions of transistors do the job super fast.
+
+--- 帖子 #23 ---
+about Double Bottom the EURAUD 1 mn right now
+
+--- 帖子 #24 ---
+Wow, wow -- I am truly impressed. The software we develop for troubleshooting RF uses the Fourier Transform alogorithm to extract the accumulated frequencies (i.e. sine waves) into individual frequencies that are then displayed by the software. So now we have a convergence of missile guidance systems, financial trading and RF diagnostics. Perhaps at some level every system can be studied as a sine wave?
+
+--- 帖子 #25 ---
+Observe how the Centered Moving Average 128 in in the Center of Price fluctuations Compare with SMA 128 (not centered)
+
+--- 帖子 #26 ---
+I am dubious on the results. . It depends a lot on how you group the results together. I wil pst what I have oon the subject if you are interested. (the Hurst Model)
+
+--- 帖子 #27 ---
+it is late here - see you tomorrow
+
+--- 帖子 #28 ---
+Yes -- please, go for it. I'm not sure how much I'll understand or even know what question(s) to ask, but if you are up to it then let's keep on trucking and see where it leads. BTW -- now that we've got the initial posts out of the way I'll relax the posting requirements so that others can participate if they are so inclined.
+
+--- 帖子 #29 ---
+Chat with you later -- and thank you @parisboy...
+
+--- 帖子 #30 ---
+Attached File(s) FOURIER TRANSFORM FOR TRADERS-Copier.pdf 233 KB | 671 downloads
+
+--- 帖子 #31 ---
+Thanks -- I did browse the first paper "Fourier Transform for Traders" by John Ehlers and got the drift. In the end he concluded that the resolution of his Discrete Fourier Transform (DFT) did not provide sufficient accuracy in low signal-to-noise environments. So, though not directly useful for trading, it's still interesting to learn that someone as accomplished as John Ehlers was even exploring the possibility of applying DFT to trading.
+
+--- 帖子 #32 ---
+Philisophical note: I suspect at some level everything boils down to waves / cycles / frequencies / pendulum behavior. Consider this: * sub-atomic particles are associated with particular frequencies * light travel can be described in terms of a wave * sound travels as a wave * the earth revolves around the sun in a cyclic manner * the ocean currents behave as waves * there is the "circle of life" * and so on I believe the reason is because all of these can be represented in terms of a system that hovers around a midpoint / equilibrium / fair market value. The cyclic behavior is caused by feedback mechanisms that repeatedly pull the system back to midpoint whenever it strays too far to one side. Pulling it back in one direction causes it to travel too far and so a different feedback mechanism pulls it back in the other direction. Competing feedback mechanisms pulling the system back and forth across a midline creates the cyclic behavior. So, how does this apply to trading? Well -- certain indicators are better than others at revealing the pendulum behavior. When you trade in the direction of the pendulum then that provides an edge -- in my opinion...
+
+--- 帖子 #33 ---
+Interesting idea but this is not the reason Hurst did it this way. The reason for using multiples of 2 for moving average lengths relates to the nature of sine waves and cycles and how they interact. I'll attempt to show rather than tell so you can reproduce this if you wish. If you want more details and examples, read Brian Millard's "Channels and Cycles" book which I think covers this in greater detail. Below is a sine wave (white) that has two cycles of 200 periods each. The vertical magenta line shows where the first cycle ends and the second cycle starts. Each cycle is a complete 360 degrees or in other words it returns back to the starting point. Attached Image (click to enlarge) To isolate the cycle, a moving average of half the cycle length is used. The cycle is 200 periods so a 100 period moving average is shown in red below. This moving average has interesting properties because it is related to the underlying cycle length of the white sine wave (divided by 2). The yellow vertical lines show where the moving average slope changes from up to down, which also matches where the sine wave (price) is half way between up and down. The middle magenta line shows where the first cycle ends but also where the red MA changes slope from down to up and matches the 50% mark between the cycle low and cycle high. Attached Image (click to enlarge) The next picture below shows cyan vertical lines that indicate the high and low of the cycle. This is of interest to traders who wish to sell/buy at a good price. The cyan lines match up with the 50% mark of the red moving average. In essence these cyan vertical lines are showing the focal points. But how can one identify the 50% mark of a moving average? Attached Image (click to enlarge) The final picture below shows a green horizontal line. This is also a moving average of the sine wave but it is 2x the length of the red line or in other words it is equal to the full cycle length (200). So we see that where the red line and the green line cross at the zero horizonal line, it also matches up with the cyan vertical lines. Said another way, the 1x length moving average crosses the 2x length moving average at the focal point and this moving average crossing can be used to identify highs and lows of a cycle. Attached Image (click to enlarge) This is the theory anyway. In practice price is not a sine wave but as can be seen from parisboy's many examples, the theory can be applied and is useful quite often. The theory shows that you really just need a MA with half the cycle length and a second with the full cycle length. Tillman used a convergence of moving averages of length, length*2 and length*4 (where length should be half the cycle length) because in practice it can get a bit messy with just two averages and the cycles aren't perfectly repetitive or bounded (trends exist).
+
+--- 帖子 #34 ---
+Thank you very much -- I need a bit more time to digest all this. One question though: You begin by referring to "multiples of 2". I understand that powers-of-2 are also multiples of two, but there is also is a big difference, right? Back in the day when memory was limited to 64K running on 8-bit CPUs then then your code really had to match with the CPU's capability. It didin't matter how elegant the theory -- the real-time performance was critical and using power-of-2 integers saved instructions. Saving on the number of instructions was very, very important. In the 1990's I worked on real-time brain-imaging systems, coding in C. My co-engineer would keep track of the number of lines of assembly code. Back then performance outweighed the elegance of an algorithm. And on a guided missile they didn't have access to a main frame computer for computational purposes -- this all had to be run on miniature hardware in a missile head.
+
+--- 帖子 #35 ---
+Continuing with the pendulum analogy... Does anyone else see how well DssBressert -- the "pendulum" indicator -- aligns with Focal Points? Attached Image (click to enlarge) Attached File(s) DSS Bressert.ex4 12 KB | 403 downloads
+
+--- 帖子 #36 ---
+Using the DSS Bressert.ex4 as a possible over sold / brought indicator to show your swinging back to the target point?
+
+--- 帖子 #37 ---
+Interesting thread. I was confused at first, because you went on the first few posts, without actually defining or explaining what constitutes a "focal point". That is, until PB came along to clear things out. So apparently they are a bit discretionary, but on 2 screenshots of the same pair, you draw 2 different sets of focal points. Can you explain the difference? Attached Image (click to enlarge) Attached Image (click to enlarge) I can see that on one, it's when the majority of MA's cross the 128. But on the other screenshot of the same price action structure, it seems to be more arbitrary, like when red &amp; blue are somewhat close together, but it makes less sense. Thanks for explaining,
+
+--- 帖子 #38 ---
+I would think from just observing that there might be a need to further seperate focal points into major and minor focal points. The big yellow circled are major focal points The squares are minor focal points Would that make sense? @Pairsboy @Robots4me I am closely following this Thread but I likely wont write much, I know that I dont know anything about this. I might ask some stupid questions here and there though if it doesnt disturb the Thread.
+
+--- 帖子 #39 ---
+Thank you for this great post FXEZ
+
+--- 帖子 #40 ---
+Keep in mind this is a continuation of the Focal Points discussion that @parisboy and I began in the PlanetX thread. Wasn't that apparent from what I wrote in post #1? The definition of a Focal Point is not discretionary -- it is well-defined. The crossing of backshifted SMA lines. However, they don't necessarily look as perfect as the cherry-picked ones that have been chosen as examples. Now, as far as how you trade them then, yes, I would say that part is highly discretionary and doesn't lend itself to full automation. However, since you can walk away after opening a trade then one could say they were "semi" automated. I think you'll need to re-read the first few posts until the light bulb goes on. It sounds like you are attempting to fit Focal Points into your current trading methodology. Forget about market structure. Forget about price action. Re-read my first few posts without any bias. That doesn't mean you have to agree. Your initial goal should be to just get your head around it. It's not my or @parisboy's algorithm -- as I wrote above, Focal Points have been around for a long time and have been used in a variety of systems and later adapted to financial markets. @parisboy is much more familiar with Focal Points, their origin and history. I'm here only as the mechanic who builds an indicator that may hopefully facilitate other members to look into them more deeply and consider adding them as a tool to their toolbox.
+
+--- 帖子 #41 ---
+Thank you for the thread i have searched all around forexfactory for focal points, but i was still lost till i came here... i follow this thread diligently and efficiently... once again thank you..
+
+--- 帖子 #42 ---
+You're not getting it. Don't try to shoe-horn the Focal Points algorithm into your existing shoes. Set aside market structure, over sold / bought, support / resistance, supply demand, whatever. Set aside your biases and re-read my initial posts until the light bulb goes on.
+
+--- 帖子 #43 ---
+I know what you mean -- and we can address that shortly. For sure some Focal Points are prettier than others -- though I'm not sure of the value of categorizing them by strength. There is a lot of discretion here. They are new to me, as well. But the more I look at charts then the easier it is to spot them and decide which guesstimated Target Prices I'll take a stab at.
+
+--- 帖子 #44 ---
+even stupid questions have to be answered this allows me (and others) to deepen their analysis and knowledge of the tools and methodology there are 2 kinds of "stupid " questions : the real ones and the false positive example of "false positive" -" in your message 222 you wrote such statement which seems different and slightly contradictory with what you wrote in your message 111" or " Hurst wrote this table in Profit Magic page 57 (see table) I have not understood why he choosed etc" which shows that you have read Profit Magic, at least page 57. it is not a "stupid" question, it is asking for precision example of real stupid questions : hello. it seems very interesting. Could you summarize quickly the Cycle Analysis and the use of Focal Points for Trading profitably.because I have not too much time to invest for studying that. And have you an EA which does the job ? Thanks in advance
+
+--- 帖子 #45 ---
+I was thinking some more about your question and the way I answered. I need to think about this some more. Focal Points are new to me -- I have about a 24-hour head start on you. But I know and trust @parisboy, and my earlier discussion with him really grabbed me. So I decided to jump in with both feet. As far as I know mine is the first MT4 Focal Points indicator. There is no "standard algorithm" for detecting Focal Points. I am in uncharted waters. I think I may need to modify and improve the way I'm detecting and identifying Focal Points. We are looking for 4 crossing lines -- but they don't necessarily have to cross EXACTLY at the same point -- which rarely, if ever, occurs. There needs to be some room for the crossing to "breath". As for exactly what that means, that is what I need to look into further inorder to come up with a codable rule.
+
+--- 帖子 #46 ---
+stupid real messages and my answers https://www.forexfactory.com/thread/...7#post12857407 https://www.forexfactory.com/thread/...5#post12864515 https://www.forexfactory.com/thread/...1#post12868291 https://www.forexfactory.com/thread/...9#post12868579
+
+--- 帖子 #47 ---
+Hello @parisboy, honorable sir, I have a question: Could you summarize quickly just for me the Cycle Analysis and the use of Focal Points for Trading profitably because I have not too much time to invest for studying that. And have you an EA which does the job? Thanks in advance...
+
+--- 帖子 #48 ---
+My 2 cents on the subject.It is a "breadth" / tolerance problem. I am totally illiterate in coding. But I think what I call "operative statistics" could help to take a decision for coding a) we have to determine which price bar is crossed by CMA 16, 32, 54 , 128, 256 b) then we choose which Focal Point we want to Analyze ex ; FP 163264128 c) then we measure the number of bars between CMA 128 crossing with price and the others CMA intersections with Price. d) we determine the parameter which includes "most of" what we visually determined as Focal Points or we reverse engeneered the process we test "what if I use 1, 2, 3 bars distance ?"
+
+--- 帖子 #49 ---
+Yes -- "tolerance" is a better word. The current indi does check for SMA bar crossings. However, I've noticed that crossings don't necessarily fall within the High/Low or Open/Close of a bar. Sometimes they occur above a bar or below a bar. So, I'm going to try a different approach. There are 6 possible SMA line crossings: 16x32, 16x64, 16x128, 32x64, 32x128 and 64x128. I will keep track of each of these line crossings. And then I will loop through all the bars and count how many crossings occur at each bar's ** timestamp **. If a bar's ** timestamp ** has 4 crossings then I will call that a Focal Point. Let's see how that looks...
+
+--- 帖子 #50 ---
+Why you do not need High Mathematics , Fourier Transform and the like to identify Cycles in Price Action
+
+--- 帖子 #51 ---
+Okay -- and where are the Focal Points? Are they buried in there someplace? What's the connection between Cycles and Focal Points?
+
+--- 帖子 #52 ---
+Why you do not need High Mathematics , Fourier Transform and the like to identify Cycles in Price Action a) Envelopes are the FIRST Tool showed and used by Hurst in his book Profit Magic (1970) Hurst used Envelopes to show Cyclicity in price Action, determine Trend(s) and average duration of Cycles. Remember that in 1970 nobody as you and me had access to big computer mainframe. Hence the use of Envelopes hand drawn on chart paper. b) okay Parisboy but right now in 2022 we all have a powerful computer, even if we do not understand how Fourier Transform (or others) works, we punch "enter" and we have all the cycles (frequencies, vibations etc) at work i Price Action. you are 100 % right c) moreover Hurst himself used Fourier Transform and Spectral Analysis to justify his "Nominal Model". Isn't it a proof of the validity of the Fourier Transform (or better likes) ? see Profit Magic - Chapter 11, see also Appendix One
+
+--- 帖子 #53 ---
+Why you do not need High Mathematics , Fourier Transform and the like to identify Cycles in Price Action this an exemple of a spectral analysis which was the basis from which Hurst told us hat he based its "Nominal Model" if you study closely the output - the frequencies at work within the data - you see that the real question is not to get the frequencies at work in the data , but how to assemble, to classify these frequencies to use them in your trading. Envelopes , if not perfect, give you a " robust but not bad'" answer to this question Envelopes have choosen for you and give you an End-Product very close from reality
+
+--- 帖子 #54 ---
+Could you elaborate about the connection between the CMA´s focal points and the envelopes? Are they Traded together? Is that something completely different?
+
+--- 帖子 #55 ---
+Hurst did not used "Focal Points" but he gave us the First Brick : the intersection of the Full Period Moving Average and of the Half Period Moving Average to calculate a Target Price and confirming a Top or a Low. But Hurst wrote (page 98) "This quality of the Half Period can only work, of course if the price-motion model is a correct representation of stock price fluctuations. That it does work - time after time - is very powerful evidence indeed for the validity of the model" It is where is the link between Cycles and Focal Points . You use 5 successive Centered Moving Averages of Period linked by a factor 2 to generate Focal Points. To use the quality of Half Period / Full Period intersection allowing you to calculate an operative Target Price you need that these Centered Moving Averages describes Price Action the most closely possible (with reasonable tolerance) Otherwise you go nowhere. In short your Cyclic Model (parameters) have to be operative. Do you think the 16/32/64/128/256 is "operative" ? PS: note that 140 is closed from 128 by 10 %
+
+--- 帖子 #56 ---
+@parisboy -- what do you think about defining a Focal Point as a crossing of SMA(128) and SMA(32). Visually it looks good and it greatly simplifies this tolerance issue -- in fact, it may go away. We've already agreed that SMA(128) is king. Plus, identifying which Focal Points to trust already requires a fair amount of discretion. We can continue fiddling with this later, but for now I think that 32x128 is the way to go, unless you strongly disagree.
+
+--- 帖子 #57 ---
+thanks for the explaination, this clears up many things to me actually.
+
+--- 帖子 #58 ---
+Here is what the indi looks like when a Focal Point is defined as a crossing of SMA(32) and SMA(128). It looks almost perfect to my eye. Plus, the tolerance issue goes away. Attached Image (click to enlarge)
+
+--- 帖子 #59 ---
+I think we have to test all options to be serious and to know (we have a great coder on this thread! ) CMA 16 gives us only forewarning of a potential Change in Trend Hence it leaves us 32 and 64. It would be useful to compare both solutions on a kind of backtest even empirical.
+
+--- 帖子 #60 ---
+Okay... Another simplifying assumption I'd like to propose: You should only trade in the same direction as the SMA(128). What do you think?
+
+--- 帖子 #61 ---
+Intuitively I am skeptical on monocausal condition. I think this has to be tested too. Look at this EURUSD 1 mn Chart CMA 256 and 128 are down. They have even merged.Now CMA 128 goes slowly Up to go through the confirmed Focal Point 163264 Price goes Up as well as CMA 16 and 32. CMA 64 extension seems to be building a new lower Focal Point 163264. But is it the end of the bearish Swing or will it go lower ? That is the question we need to look at other parameters
+
+--- 帖子 #62 ---
+Hello, Apparently, the numbers 12-24-48-96-192 and 16-32-64-128-256 are connected between them... When i use a set of CMA 192, i can find the quart of cycle same like half between 24 or 32(near) and 48 or 64(near) When i use a set of CMA 384, i can find the quart of cycle same like half between 48 or 64(near) and 96 or 128(near) When i use a set of CMA 768, i can find the quart of cycle same like half between 96 or 128(near) and 192 or 256(near) Attached Image (click to enlarge) When i use a set of CMA 256, i can find the quart of cycle same like 32(near) or 48 and 64 or 96(near) When i use a set of CMA 512, i can find the quart of cycle same like 64(near) or 96 and 128 or 192(near) When i use a set of CMA 1024, i can find the quart of cycle same like 128(near) or 192 and 256 or 384(near) Attached Image (click to enlarge) To know that the half (in average) of 1 cycle is 1/2, example cross to cross or high to low or low to high. Logical More interesting, to know that the quart (in average) of 1 cycle is : 1/6 or 2/6 of period from full cycle (depends where is situated the quart in four stages of cycle(indicated on picture)). Of course, more you multiply more you get half cycle + or - the same like previous full cycle. But, it has been relooked that, cycle(or period) corresponding at cycle calendar is more sensitive... example 1 year/6months/3months/1month/weekly/daily
+
+--- 帖子 #63 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #64 ---
+about 1/4 proportion. CMA 16 lags from 8 Time Units (Bars) in relation to Price when Price Tops When CMA 16 Tops price is 8 Time Units (Bars) Away CMA 32 lags from 16 Time Units in relation to price When CMA 32 (Full period) intersects Price and CMA 16 (Half Period) in the Middle of the Swing CMA 32 is 8 Time Units from where Price previously topped. 8 = 1/4 of 32
+
+--- 帖子 #65 ---
+Yes, pratical example of stats i have. I have too another thing here. I looked in all example i have a little lag more compared to period average, example lag of -128 (for CMA 256) for an average of 120 bars from cross to cross. So, if i reduce the lag of negative shift by 8 (so total of -120) and divided by 2 from each CMA separately, i get the same period average like (256 -128), means 240 high to high(or low to low) and 120 for cross to cross, etc. i show the comparative result on picture. Attached Image (click to enlarge) Same for the others CMA (128 -60, 64 -30, 32 -15), same average, less lag For the CMA 16 -8, its unchanged
+
+--- 帖子 #66 ---
+For CMAs 192/96/48/24/12 Attached Image (click to enlarge)
+
+--- 帖子 #67 ---
+Observe where is Price Top and when CMA 16 (red) made its Top Count bars
+
+--- 帖子 #68 ---
+Observe when CMA 32 (BLUE) intersects with Price and CMA 16 Count Bars
+
+--- 帖子 #69 ---
+Swede's chart
+
+--- 帖子 #70 ---
+Observe when CMA 32 (blue) intersects Price and CMA 16 (red) count bars
+
+--- 帖子 #71 ---
+The interception between CMA 32 and CMA 16 is the same like half period of CMA 32, otherwise said, 16bars.. And too, when the CMA 16 starts to inverse itself
+
+--- 帖子 #72 ---
+Not sure if this works in every case (would need to test a lot more in real time), but in the 2 examples you show, and at the time you show them (important because the MA positions move), the intersection of the CMA 32 and CMA 16 was 50% of the swing.
+
+--- 帖子 #73 ---
+Closed Long position because I have to go
+
+--- 帖子 #74 ---
+Follow Up
+
+--- 帖子 #75 ---
+How would you trade those Focal Points. The second Focal Point is rather flat and the guesstimated TargetPrice won't differ much from the current price. Would you even attempt to trade it or move on? And according to the Focal Point algorithm it looks like you would enter a SELL, right?
+
+--- 帖子 #76 ---
+entry =&gt; target Attached Image (click to enlarge)
+
+--- 帖子 #77 ---
+The reaction of this trendlines. Attached Image (click to enlarge)
+
+--- 帖子 #78 ---
+I would wait wait based on Focal Points. You are right fir the SELL. (depends from the forecasted amplitude of the Swing)
+
+--- 帖子 #79 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #80 ---
+If I may. On the 30min Attached Image (click to enlarge)
+
+--- 帖子 #81 ---
+Look at the Top of Centered Moving Average 16 Look where is Price Action Look the CMA 16 (Half Period) (red) and 36 ((Full Period) blue) when they intersects Count the bars
+
+--- 帖子 #82 ---
+Count the Bars for the new Focal Point 1632
+
+--- 帖子 #83 ---
+Check the confirmation of Focal Point 163264 when CMA 64 (lila) confirms this Focal Point
+
+--- 帖子 #84 ---
+EURUSD 1 mn
+
+--- 帖子 #85 ---
+@parisboy, i think cadjpy will sell from the chart, pls am i correct
+
+--- 帖子 #86 ---
+Your chart includes High 2 -- but there is no way you could know that. The High / Low must be bounded on their left and right by FPs. There is no FP to the right of High 2.
+
+--- 帖子 #87 ---
+Focal Point = 95.400 Low = 94.380 Target = 95.400 + 620 = 96.020 +/- 0.124 I would wait confirmation of the downtrend before selling
+
+--- 帖子 #88 ---
+This post includes an updated version of the R4M-FocalPoints-OnCharts indicator. Using the default settings it does a good job of detecting Focal Points -- though I won't claim it is perfect. As I've touched on above, not all Focal Points are created equal -- at least not visually. The SMA intersections rarely occur at exactly one point -- there is always a bit of a horizontal or vertical offset. Your brain can easily spot the colorful pattern and ignore its imperfections, but that's not so easily done in code without very specific, predefined rules -- that currently don't exist. So, I came up with my own and it seems to work. I am happy to continue refining the detection algorithm. However, if you come across a discrepancy where the detection is wrong or misses an obvious FP then it's okay to complain -- as long as you include a chart that points to the discrepancy and provides enough information that would allow me to reproduce it. If I can't reproduce a problem then I can't fix. Also, I'm not a mind-reader. Let me explain a few of the indicator's features. In the image below the bullish and bearish FPs that the indicator detected are marked by blue and purple circles, respectively. I think of Focal Points in terms of pairs (i.e. couples) of a bullish one coupled with a bearish one. I'll call these FP1 and FP2. In between FP1 and FP2 there will be either a High or a Low. When FP1 is bullish and FP2 is bearish there will be a High, and when FP1 is bearish and FP2 is bullish then there will be a low. Once FP2 is formed the indi has enough information to compute the TargetPrice (yellow line). If current price has not yet reached the guesstimate TargetPrice then the yellow line is solid and may still be valid. However, once the current price has exceeded the guesstimate TargetPrice then it should no longer be considered and it is drawn as a dashed line. Attached Image (click to enlarge) The updated version of the indicator includes two settings: 'Crossing Type' and 'Tolerance'. These come about because, as mentioned above, not all Focal Points are created equal and are described below: Crossing Type: There are 11 crossing types -- 16x32, 16x64, 16x128, 16x32x64, 16x32x128, 16x64x128, 16x32x64x128, 32x64, 32x128, 32x64x128, 64x128. The default is 64x128, since I think that works best. But feel free to experiment with the others. Tolerance: This is the "breathing room" required by the detection algorithm. Intersecting SMAs occur in close proximity to one another, but not at an exact point. This setting is the number of bars that intersecting SMAs are considered to belong to the same FP. The smaller the number the more strict. In the case of 64x128 the Tolerance can be set to '1' since there is only one crossing. In the case of 16x32x64x128 if you use a setting of '1' then you will probably not see any FPs. Attached Image (click to enlarge) Below is an example of a bearish FP where the guesstimated Target Price may still be trade-able because it hasn't yet been exceeded by the current price. Attached Image (click to enlarge) And some tips: 1. Pay attention to the Fractal Channels you see in the background. 2. Pay attention to SMA(128). 3. Trade in the direction of SMA(128). Don't force it -- if a candidate setup isn't obvious and you feel like you have to ask @parisboy whether or not to enter a trade, then that is your clue not to trade it. When you get your head around this algorithm you won't need to ask questions. If you feel a need to ask questions then that probably means you don't yet have your head around it. I would consider this a highly discretionary strategy. The indicator I've provided is just a tool -- it can not guide your hand to the BUY / SELL button. A tool is only as good as the craftsman who holds it. Attached File(s) R4M-FocalPoints-OnChart.ex4 68 KB | 265 downloads PS: My bark is much louder than my bite. Please feel free to ask questions or post comments -- especially charts that include successful or failed trades. Failed trades are particularly interesting because when I study them I might be able to fiddle with the indi to improve its detection. PSS: With regards to fiddling with the settings -- I won't be participating in that exercise. 64x128 works best, but I understand others feel compelled to prove that to themselves.
+
+--- 帖子 #89 ---
+EURUSD 1 mn Opened a Long position
+
+--- 帖子 #90 ---
+EURCHF / H1 -- looks like a SELL to me. Let's see how it plays out... Attached Image (click to enlarge)
+
+--- 帖子 #91 ---
+Closed Long position at Stop Loss while reading the post of Robots4me !
+
+--- 帖子 #92 ---
+@parisboy -- don't READ and TRADE at the same time!!!
+
+--- 帖子 #93 ---
+Target 1,01700 +/- 230
+
+--- 帖子 #94 ---
+Another tip -- maybe it's best to attach the indi twice to a chart -- one using 64x128 and the other 16x128, each using a 'Tolerance' of 1.
+
+--- 帖子 #95 ---
+Okay, cool -- then I'm okay. My TP is closer to 1.0209 but that's probably because the indi is using the earlier High. But all is good -- you've simply demonstrated that when the rubber hits the road @parisboy's brain is still smarter than my indi...
+
+--- 帖子 #96 ---
+we will follow this thing to check PS To follow 28 pairs your indi is necessary to sort things out
+
+--- 帖子 #97 ---
+Do you mean following 28 pairs at the same time on a single chart or dashboard? Probably won't happen -- there is still too much discretion going on and the rules are not well defined. The best I can suggest is to use a symbol changer to quickly traverse all the pairs. Are there symbol changers available in TradingView?
+
+--- 帖子 #98 ---
+A minor tweak to the indicator to support attaching it multiple times (with different settings) to the same chart: Attached File(s) R4M-FocalPoints-OnChart.ex4 70 KB | 256 downloads
+
+--- 帖子 #99 ---
+Target could be reached between March 26 th 21H and March 27 th 03 H
+
+--- 帖子 #100 ---
+Right now is probably not the best time to open a trade -- immediately after the Asian open. I'm looking forward to giving this spin as the London Open approaches.
+
+--- 帖子 #101 ---
+If I remember correctly you follow a lot of pairs. It is where it is fastidious to calculate manually many targets
+
+--- 帖子 #102 ---
+Now hold on a minute -- do you mean to say this strategy also requires patience? You didn't mention that before. I'm not sure I have the right psychology -- patience is definitely not one of my strengths...
+
+--- 帖子 #103 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #104 ---
+Interesting -- I just now noticed the Double Top in your chart. That's another good sign my EURCHF trade is headed in the right direction. Perhaps I'll create another indi that attempts to detect Double Tops / Bottoms.
+
+--- 帖子 #105 ---
+1 Hour = 1 Bar Top Was March 17th 19 H Estimated Focal Point March 22 th 10 H (4 Days and 15 Hour later) I f we consider the Sinewave and the "Mirror Image" (Symmetry)
+
+--- 帖子 #106 ---
+I suppose you'd suggest that I not sit staring at my screen waiting to reach TP...
+
+--- 帖子 #107 ---
+@parisboy i got a question, i really hope you can please dumb things down for me thee usdchf has two focal points with a high in between them, i calculated the target price using FP2-(high-fp2) to be 0.92943+/_ now am i to trade a reversal trade(buy) when price reaches the target price or am i missing the whole thing up i hope my question is not a pain to you, i just really want to get it right
+
+--- 帖子 #108 ---
+@Mafedavid -- thanks for posting your chart -- it also allows me to participate. Check the image below -- it clearly shows the Double Bottom you are referring to. My understanding is that Double Bottoms / Tops are not FPs. That is, there is no guesstimated TargetPrice. A Double Bottom alerts you that price will be trending downward. When you see SMA(32) begin to trend downward then that is a good place to enter your SELL. I suggest that you don't think in terms of "reversals" -- just go with the SMA lines. There is no TargetPrice when trading a Double Bottom -- exiting is left to your discretion. Attached Image (click to enlarge)
+
+--- 帖子 #109 ---
+Guppy (GMMA) Long and Short -- similar to Focal Points, but uses EMAs (instead of SMAs) and different spans. But it again shows price's pendulum-like behavior. Check-out where the Long and Short GMMA lines cross -- almost exactly at FPs -- and often a few bars earlier. Make of it as you will -- I'm simply sharing this as an observation. Attached Image (click to enlarge) Attached File(s) GMMA Long.ex4 10 KB | 200 downloads Attached File(s) GMMA Short.ex4 9 KB | 198 downloads
+
+--- 帖子 #110 ---
+Hey Robo, Many thanks for the new indicator. Any chance of allowing control of the ma's/colour. Tried to hide a couple to keep 3 ma's on the chart but the colours auto refresh. Russ
+
+--- 帖子 #111 ---
+EURCHF 1 H Follow Up of the trade
+
+--- 帖子 #112 ---
+EURCHF 1 H Note the - 43° Channel. Very close from the "45° " Angle defined by Gann as "the most important. The Angle where Price and Time balanced.ving Average Note that a 45° Angle is a 1 Time Unit x 1 Price Unit Moving Average
+
+--- 帖子 #113 ---
+Watching the Gu atm see if prices does turn around to hit the short?
+
+--- 帖子 #114 ---
+Superb Sinewave of the CMA 16 oscillating around the CMA 32 as its downtrending Axis (- 43°)
+
+--- 帖子 #115 ---
+Mafedavid analyze the CMA's similarities on your Chart
+
+--- 帖子 #116 ---
+EURUSD 1 Hour Short Trade Follow Up
+
+--- 帖子 #117 ---
+Thanks for new idea of trading. I am doing scalping in M1 timeframe on Gold by using your indicator on my demo account and i got 6 trades and all hit profit. Gold is more stable and runs in cycle on smaller timeframes. This picture is showing retracement on M1
+
+--- 帖子 #118 ---
+Hi Robots why does the yellow Target line sometimes disappear. Thanks
+
+--- 帖子 #119 ---
+aahmad29, I would say it is a positive and motivating post !
+
+--- 帖子 #120 ---
+EURCHF 1 Hour Envelopes
+
+--- 帖子 #121 ---
+GBPUSD 5 mn Opened Short position Target 1,31350 +/- 80 Intermediary Target 1,31590 +/- 32 Attached Image (click to enlarge)
+
+--- 帖子 #122 ---
+Still unreached
+
+--- 帖子 #123 ---
+Dino -- here's an unfamiliar concept -- how about helping me to help you. Provide a chart and perhaps I can help by reproducing the problem. It could be the yellow line is off screen -- i.e. you may need to zoom out.
+
+--- 帖子 #124 ---
+I have question that please can you check if i was doing calculation correctly and if i was doing correctly then how much drawdown should i expect or i put stop loss at High price. I also attached Zoom out picture
+
+--- 帖子 #125 ---
+1960,12 +/- 0,50
+
+--- 帖子 #126 ---
+This is a highly discretionary strategy. If you've been reading then you'll know that FPs compute a guesstimated TargetPrice. You get to decide what to do with it -- no one is going to hold your hand. Correction: I'm not going to hold your hand, though @parisboy might because he is much more kind and patient than me...
+
+--- 帖子 #127 ---
+It is for training too ! PS I do not discourage somebody who uses a pencil to make calculation
+
+--- 帖子 #128 ---
+Thank you so much for answering my question. Initially i thought you wont answer it because it is very basic question. I was doing testing your method on Gold by using M1 time frame during NY session. All of my trades (8 trades) hit TP but i wasnt sure about stoploss or drawdown. I have two more questions. First question is that in above picture which posted , then it means that price hit SL but eventually hit TP(yellow dotted lie)? am i correct? and my second question is that if i have two focal points in trending session and there is no HIGH price but i have LOW price then how will it be calculated? Thanks again for replying.
+
+--- 帖子 #129 ---
+I am sorry for asking question. I know yellow dotted line is my target price. I only asked you question because you are more experienced trader than me. I am that person who once do homework with pencil to get idea (old school) and again i am sorry.
+
+--- 帖子 #130 ---
+aahmad29 you are welcome on some subjects Robots4me and me , we play the good cop, bad cop trick !
+
+--- 帖子 #131 ---
+@aahmad29 -- no apologies are necessary. I know you are good trader and if you have 8 trades under your belt then you are more experienced with this strategy than me. I was introduced to it last week and spent my time coding rather than trading. This strategy is different than anything I've traded before, plus I trust @parisboy. So, let's have some fun with it and see where it goes.
+
+--- 帖子 #132 ---
+I have opened a Long on XAUUSD 1 mn
+
+--- 帖子 #133 ---
+Yes. And I'm the good cop and you're the bad one, right? @parisboy -- I don't know if I should be admitting this, but if it weren't for forex I'd make a great criminal. It's in my nature...
+
+--- 帖子 #134 ---
+Do you see the Double Bottom ? As the second bottom is higher than the first one, I assume we are going Up
+
+--- 帖子 #135 ---
+Good Lesson Imade the mistake not to check the Envelopes As for now we can qualify this Swing Up as a counter-trenb Movement Hence it will take time to recover
+
+--- 帖子 #136 ---
+Here is a new indicator -- R4M-GuppyPoints-OnChart. It is a new concoction that combines the idea behind Focal Points with Daryl Guppy's GMMA (Guppy Multiple Moving Average). The results are similar to FocalPoints and though it may ruffle some feathers, I actually think they are better. I'll explain why below... Attached Image (click to enlarge) Attached File(s) R4M-GuppyPoints-OnChart.ex4 64 KB | 283 downloads Attached File(s) GMMA Long.ex4 10 KB | 283 downloads Attached File(s) GMMA Short.ex4 9 KB | 276 downloads GuppyPoints lacks the rich history and theory of FocalPoints, though it does share some similarities. Whereas FocalPoints relies on multiple SMA lines that differ by powers-of-two, GuppyPoints relies on multiple EMA lines who's periods don't follow any particular pattern, as far as I can tell. I suspect they were chosen by empirical observation -- i.e. trial and error. GuppyPoints uses two groups of EMA lines -- long and short. The periods of the long group are 30, 35, 40, 45, 50, 60, and the periods of the short group are 3, 7, 10, 12, 15. In addition, there is no backshift -- which is a YUUUUGE benefit. Hence, there is no extrapolation or extension since the lines reflect the real-time data all the way to the current bar (Bar[0]). In addition, from a programmatic point of view, the rule for detecting crossings is much simpler and does not require a 'Tolerance' or 'Crossing Type' setting. All intersections are created equal. I am NOT advocating the use of GuppyPoints over FocalPoints. I am simply sharing an observation -- make of it as you will.
+
+--- 帖子 #137 ---
+XAUUSD 1 mn Follow Up
+
+--- 帖子 #138 ---
+XAUUSD 1 mn Closed Long Position
+
+--- 帖子 #139 ---
+EURCHF 1 Hour Short Follow Up
+
+--- 帖子 #140 ---
+Thanks i will keep posting the screenshots of different currency pair and their results but i have to admit; FOCAL POINT idea is one of my favourite because i believed in same way that cycles are generating and come back to certain point but i couldn't figure it out that how any indicator can help me. Now i am happy that your given indicators are of my great interest and i will keep monitoring the results and will let you know. I am posting AUDCAD chart where price hit TARGET without any drawdown on H1 time frame. Range period is March 17 to Mar 23. This chart is for those who are new like me but it will give you visual idea of strategy.
+
+--- 帖子 #141 ---
+It is the same procedure . The Focal Point is Halfway between a Top and a Low. Hence it depends of the direction of the Trend. If the trend is bearish the Top is ABOVE the Focal Point you calculate from the Top to the Focal Point If the Trend is bullish the Low is UNDER the Focal Point you calculate from the Low to the Focal Point
+
+--- 帖子 #142 ---
+EURCHF 1 Hour Follow Up
+
+--- 帖子 #143 ---
+In progress, audcad h4 time frame
+
+--- 帖子 #144 ---
+My favourite XAUUSD, M1 Time Frame is in progress
+
+--- 帖子 #145 ---
+I have one question that what is the reason that target line changes its location. I am attaching both charts.
+
+--- 帖子 #146 ---
+Here you go, my two trades hit target line (TP). But i wanted to mention one thing that i observed in XAUUSD that price once go to HIGH line and then go to TARGET LINE. So i added second trade with Sell Limit order and it got activated and then hit TP.
+
+--- 帖子 #147 ---
+Look at FP2 -- the purple circle -- its location has changed. You might ask why is that? This is a side-effect of the backshifted SMA lines. Though the SMA lines appear to extend all the way to the right-hand-side, they really end many bars to the left. The most current portions of the SMA lines are simply extrapolated / extended to Bar[0]. If the market has not recently changed then you usually won't notice a difference. But if the market is currently changing then as more recent bars begin to affect the SMA lines you'll see a change in the Focal Points location. I would consider this the strategy's "achilles heal" -- main weakness. However, as in real-life, all good things come with a trade-off -- as I keep reminding my wife...
+
+--- 帖子 #148 ---
+Thanks so now i know the reason why line changed the location
+
+--- 帖子 #149 ---
+Another trade is closed with achieving Target price in M1 time frame. It is not easy to monitor constantly and i found many variations. Once blue circle appeared and then purple circle appeared and blue circle disappeared but i stick with my first signal and hit TP.
+
+--- 帖子 #150 ---
+@aahmad29 -- this is great. Thank you for sharing your charts and trades. I'm following along and learning from you...
+
+--- 帖子 #151 ---
+Thanks but sorry I won’t be posting more charts because I have work tomorrow. If I finish early then will take a look at Gold. If there is enough momentum then will do trading.
+
+--- 帖子 #152 ---
+Hey @aahmad29 -- I really appreciate what you've been posting so far. No pressure -- whenever it's convenient for you. I just wanted to let you know your charts and descriptions are serving as a great learning tool. Again -- thanks very much for taking the time.
+
+--- 帖子 #153 ---
+By the way, I just checked your profile. You're a software tester and your favorite book is "Not believing on books. Believe on practical work." So, you're an empiricist -- makes sense...
+
+--- 帖子 #154 ---
+EURCHF 1 Hour On the way to the target Target 1,01700 +/- 230 1 Hour = 1 Bar Top Was March 17th 19 H Estimated Focal Point March 22 th 10 H (4 Days and 15 Hour later) I f we consider the Sinewave and the "Mirror Image" (Symmetry) https://www.forexfactory.com/thread/...9#post13943719 https://www.forexfactory.com/thread/...7#post13943697
+
+--- 帖子 #155 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #156 ---
+EURCHF 1 Hour Price Target Zone
+
+--- 帖子 #157 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #158 ---
+GBPJPY H1 Guppy &amp; Double-top. Attached Image (click to enlarge)
+
+--- 帖子 #159 ---
+How a Double Top forms itself Char changed due to the vigilance of FundedCoffee
+
+--- 帖子 #160 ---
+Attached Image Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #161 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #162 ---
+At least among Traders.. this is more of a head &amp; shoulders pattern... not a double top.. I dont see it..
+
+--- 帖子 #163 ---
+at least Bishopdotun see one.
+
+--- 帖子 #164 ---
+What has Bisphopdotun´s screenshot to do with the image you have shared? You wrote "How a Double Top forms itself" and then shared an image of a Head and Shoulders.
+
+--- 帖子 #165 ---
+look at these 2 successive posts and try to understand the sequence https://www.forexfactory.com/thread/...3#post13945893 https://www.forexfactory.com/thread/...5#post13945915 sorry you are right. This is the correct double Top pattern. Good that you insisted. Sometimes I can be somewhat stubborn. Old age I presume.
+
+--- 帖子 #166 ---
+I am trying my best but I still dont understand how Bisphopdotun´s double top has anything to do with your head &amp; shoulder image and why you call it a double top. Edit: lets leave it at that...
+
+--- 帖子 #167 ---
+Hi robots4me, An awesome thread you have going. I wish you the best. I wondered how long it would be before someone discovered the value of the focal points. When I first discovered Parisboy thread I could not make sense of all the CMA, FLD &amp; other he was sharing. One day on the Tradingfives site I discovered the Displaced MA's &amp; it was then that I discovered the focal points. Those focal points are very predictive once you understand what they are showing you. I prefer using 3 Displaced MA's. Parisboy has no peers when it comes to CMA, FLD, Hurst &amp; other related topics. Parisboy also takes the time to explain how he is using each. I have my own way of trading that took me many months to fine tune, but had I discovered Parisboy site first I would be completely locked into what he is taking time to share with those willing to learn. I use the CMA's &amp; Displaced MAs as a strong conformation to what my method is telling me. Over the next several days I will try to post up some charts with explanation's. Best of trades to you, my friend.
+
+--- 帖子 #168 ---
+Another trade in Gold is in progress and heading toward TP. I had late entry because i had lunch break and i saw the M1 chart. I have some observations about this method and will share it later tonight.
+
+--- 帖子 #169 ---
+you can do your best you will go nowhere. you were right and I posted the wrong chart. I have changed it. Thanks
+
+--- 帖子 #170 ---
+Here you go price hit TP and you can see that yellow line is little away and it has already been explained that why this happen. But i kept my initial TP. I never thought about trading in Gold because of minimum leverage and high margin but now i am becoming confident in trading Gold. Thanks for this thread.
+
+--- 帖子 #171 ---
+EURCHF 1 mn Double Top in construction
+
+--- 帖子 #172 ---
+EURCHF 1 Hour Closed Short position Robots4me target was reached
+
+--- 帖子 #173 ---
+Very nice -- thanks... One thing that I'm now paying attention to (especially on M1) is whether a FP is formed by the extrapolated / extended lines. I will ignore FPs that are formed using extrapolated / extended lines. That is because the extrapolated / extended portion of the SMA lines is not based on price data. On M1 this means you'll need to wait maybe 16-32 bars, which isn't so bad. On H1 that means waiting a day or two -- which I would find hard to do. I could modify the indicator to ignore the extrapolated / extended portion of the SMA lines when detecting a FP but, on the other hand, the extrapolated / extended portion is often fine to use when the market isn't changing. Again, this is a very cool strategy but it does require a fair bit of discretion -- that's the trade-off.
+
+--- 帖子 #174 ---
+In fact you have 2 Categories of Focal Points : a) the Confirmed Focal Point where several Centered Moving Averages have really converged b) the Potential Focal Point where you suspect an additional Centered Moving Average of degree superior will go through a Confirmed Focal point It is where you make your money
+
+--- 帖子 #175 ---
+Above posted chart had confirmed focal points but not clearly visible because I zoomed out to show the TP. In any way I will keep in mind. Thanks
+
+--- 帖子 #176 ---
+Thanks for updating.
+
+--- 帖子 #177 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #178 ---
+Ahhh -- 'Confirmed' and 'Potential' Focal Points -- excellent, I got it. Thank you...
+
+--- 帖子 #179 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #180 ---
+Right -- got it. Here's a question: Your chart has a mixture of Confirmed and Potential FPs. How would you trade it? What do you do when Confirmed and Potential disagree?
+
+--- 帖子 #181 ---
+Robots4me For your calculations you can generate a Synthetic Focal Point within your Tolerance parameters No need for a Synthetic Focal point when CMA 16 and CM 32 intersects But let's suppose CMA 16/ 32 crosses at 100, CMA 32/64 at 102 and CMA 16/64 at 103, you can average the intersection values and build a Synthetic Focal Point (100+102+103) = 305 / 3 = 101.666 ?
+
+--- 帖子 #182 ---
+Let's see how it has moved in several minutes Potential Focal Points are confirmed which brings nothing to calculate Target Price But we see a Double Top Pattern CMA 256 has made its Top CMA 128 is building its second Top I would be ready to Short
+
+--- 帖子 #183 ---
+EURCHF 1 mn Opened Short position
+
+--- 帖子 #184 ---
+EURCHF 1 mn Short Follow Up
+
+--- 帖子 #185 ---
+Potential Target 1,0280 Intermediary Target 1,02180
+
+--- 帖子 #186 ---
+Target 1,02140 +/-24
+
+--- 帖子 #187 ---
+Target reached
+
+--- 帖子 #188 ---
+Hey R4M, Checking out this Focal Points on Chart indi and am trying to test it on the strategy tester but its not properly updating. Is there any way we can rectify that? Thanks buddy
+
+--- 帖子 #189 ---
+Okay -- you say you would "be ready" to short. I don't know what "be ready" means. What do you have to see in order to pull the trigger?
+
+--- 帖子 #190 ---
+Hi Robots4me and Parisboy, I am planning strategies to trade Gold so that my trades are more secure when I start trading in my Live account and I want your opinion. I am going to use the market insight which my account manager (Broker - BDSWISS) send me daily. It includes Pivot number and long targets and short targets. I am also going to use the strategy which most of trader use it. Trader look at bigger time frame for trend and then trade in smaller time frame. I am going to look target in bigger time frame and then trade in Gold in M1 time frame. what do you guys think and is there anything which I can add? Thanks for all yours efforts.
+
+--- 帖子 #191 ---
+Hindsight traders don't pull trigger.
+
+--- 帖子 #192 ---
+Tres beau trade ! Anticipation, prise de position, cible
+
+--- 帖子 #193 ---
+Hello @aahmad29 -- there is not much I can add. That is way more analysis than I do -- probably because I primarily trade EAs. When discretionary trading I look at the here and now -- I trade what I see. There's no right or wrong approach. Continue what you are doing, and keep your eyes and ears open. Hopefully you will find a routine that consistently works for you -- both from a profit standpoint and one that fits your schedule and the style you like to trade. For example, I could never trade M1 -- I'm just not a screen-starer. I mean, I could if I had to -- but I don't have the patience and don't enjoy trading that way. Others take a different approach and they are free to share that with you here...
+
+--- 帖子 #194 ---
+What's your point? Are you calling me or @parisboy a hindsight trader? I hope not -- you might find yourself standing on shaky ground...
+
+--- 帖子 #195 ---
+simnz I do not understand your remark about "Hindsight trader". Why this remark ? Why now ? why you ? your remark looks like false common sense. It looks good, realist but it is a generality which is enough true to have some credibility, but generally is never tested by the poster on the specific case he coments. It is like "repainting" another magic word we are ALL "Hindsight" traders in some way. Because all what we do is inspired by the past. https://www.forexfactory.com/thread/...torical-levels . Your thread title shows you use historical levels. Isn't it "hindsight" in some way ? Chart Patterns - I have already seen this thing - for example Double Tops or Bottoms Trends " Follow the Trend" " The Trend is my friend". Concretly it means that the trader hopes that the "Trend Direction" will go on as much time as possible so that he can benefit of it. Let's go to the present story : https://www.forexfactory.com/thread/...0#post13946530 In post 182 of this thread at 8.47 pm I generate an analysis of EURCHF 1 mn based on Double Tops. And conclude "I am ready to Short" https://www.forexfactory.com/thread/...6#post13946536 In post 183 at 8.54 pm - 7 minutes later - "I pulled the trigger" opening a Short position https://www.forexfactory.com/thread/...1#post13946541 In post 184 at 8.59 pm - 5 minutes later - I posted a Trade Follow Up https://www.forexfactory.com/thread/...5#post13946545 In post 185 at 9.08 pm - 9 minutes later - I posted a First Target estimation https://www.forexfactory.com/thread/...2#post13946572 In post 186 at 9.45 pm - 37 minutes later - I posted a second Target estimation revised somewhat lower https://www.forexfactory.com/thread/...5#post13946585 Finally in post 187 at 10.02 pm - 17 mn later - I posted that the target was reached Where do you see in this process "hindsight trading ?"
+
+--- 帖子 #196 ---
+@parisboy -- your posts are great. And there are those of us who are following along. I asked a simple question, and @simnz -- for whatever reason, perhaps envy -- chose to take that opportunity to insult us. He doesn't have the slightest clue how Focal Points work -- and he doesn't care. He was just in an insulting mood...
+
+--- 帖子 #197 ---
+Anonymous people getting insulted? Ha ha .
+
+--- 帖子 #198 ---
+Thank you @Robots4me ! I try to be factual. By the way this analysis + trade took 75 mn. It is somewhat long for our patience. Its the reason why I always write : if you want to TRAIN , to TEST these methodologies IMHO it is better to do it on a 1 mn Timeframe. Because you could see between 5 to 10 opportunities a day (it will be useful to know how many in average). Then you HAVE to use parallely Higher Time Frames. Hence you will check that you will endlessly observe the same patterns , the same crossings etc. This way I hope you could understand that Moving Averages deal with numbers represented by points on a screen with limited length and width. This way I hoped everybody will wipe out of his mind the bullshit(s) ideas : it depends of the Time Units and NZ Dollar / Zimbabwe Currency is very specific.
+
+--- 帖子 #199 ---
+@robots4me I have not answered your question about "I do not understand what means I am redy to short" I assume you wanted to the conditions required to "pull the trigger" to code them I have not (codable) answer right now. We have to work on it. The only remark I can made is that I have a tendancy to enter too soon. I think it would be useful to calculate and identify WHEN a CMA turns Reminder : Price Action makes a Top or a Bottom CMA 16 (red) follows 8 Bars later CMA 32(blue) follows 16 Bars later and crosses CMA 16 building a Focal Point 1632 This is an automatic, mathematical process . How to use it to our profit for an optimal Entry ?
+
+--- 帖子 #200 ---
+Thanks @parisboy -- this is an excellent answer. That's really all I needed to know. I am still trying to establish where the boundary lies between discretion and codable rules.
+
+--- 帖子 #201 ---
+@simonz -- how many times have I seen you post this comment? "I mentor retirees free of cost as part of a non-profit community organization." I'd say you are the next coming of Mother Teresa. Either that or you're hoping to drum up more business for your "non-profit". Of course, no insult intended since you are anonymous to me...
+
+--- 帖子 #202 ---
+I would not underline where is the main Focal Point on this Chart because you have to learn to guess it quickly with your eyes
+
+--- 帖子 #203 ---
+Low = 37.500 March 14 th 00.00 FP 16/32/64/128 = 41.700 (Potential FP 16/32/64/128/256 41.700-37.500 = 4.200 Estimated Top= 41.700 + 4.200 = 45.900 +/- 840 Real Top = 45.125 March 25 th 12.00 Swing Amplitude : 45.125 - 37.500 = 7.625 138 x 2 hours Bars from March 14.00 to March 25 th 12.00 55.25 points / bar in average
+
+--- 帖子 #204 ---
+at least 12 times
+
+--- 帖子 #205 ---
+BTCUSD 2 H Good for test BTCUSD is traded 24/24 Round the Clock 4 H very close of 256 (in minutes) 2 H of 128 1 H of 64 30 mn of 32 15 mn of 16
+
+--- 帖子 #206 ---
+Graphically CMA 16 (red) made its Top at 00.00 Price Top was 45.125 Since Price Top we are now 16 bars Price is now 44.520 45.125 - 44.520 = 600 , around - 40 point per bar from the Price top Food for thoughts
+
+--- 帖子 #207 ---
+How many times has it been emphasized this is a discretionary strategy and it is different than anything else you've traded before? This has been stated many times throughout the thread. If you understood how Focal Points are working then you would understand why it can't be backtested. The title of the thread includes the expression: "A Leap of Faith". That is because the guesstimated TargetPrice is created by historical data. It can not be backtested using Strategy Tester. The only way to "backtest" is visual backtesting -- and that will require that you use your brain and discretionary trading skills.
+
+--- 帖子 #208 ---
+Thanks for your reply. I am more interested in the pink and blue signals generated by your indi. I don't know how they are being generated but they look good and wanted to test them on strategy tester and wasn't really looking at the yellow line focal point estimation.
+
+--- 帖子 #209 ---
+They are not signals that you trade. They are historical crossings. Consider them "wake-up calls" to begin paying attention... There are "Confirmed" and "Potential" Focal Points. You can read about the difference in earlier posts. I'm not going to spend time re-summarizing when the information is already available.
+
+--- 帖子 #210 ---
+Could you allow the ma's to be colours, id like to change the others to black, prefer to keep the 128 and firebrick
+
+--- 帖子 #211 ---
+No -- for two reasons... 1. There are 5 SMA lines. I'm not going to clutter the input settings with additional color settings for each SMA so you can fiddle with colors. 2. With everyone using different colors then we lose the ability to share charts because we could no longer identify the different SMAs. These are simple SMA lines. If the indicator is unusable for you without your color preferences then overlay the indicator's lines using MT4's built-in Moving Average.
+
+--- 帖子 #212 ---
+Last night trade on CADJPY M15 Time frame in my Live account, closed in profit as per directions of Focal points.
+
+--- 帖子 #213 ---
+100% Agreed robots4me. Now when we post charts, we are aware of colours and if colours are changed then it will be mixture.
+
+--- 帖子 #214 ---
+Fair enough, was to have the ability to drop the number of ema's to the 2 main ones. But no worries
+
+--- 帖子 #215 ---
+It is a useful built-in possibility available in TradingView that I use to clarify the analysis or show the "propagatuon" of CMA's
+
+--- 帖子 #216 ---
+@apples1978 -- after some reflection I've changed my mind -- your's was a good idea. My apologies for being so gruff. Below is another version of the indicator that allows you to change the colors of the SMA lines. However, the copy of the indicator in post #1 remains unchanged. Attached File(s) R4M-FocalPoints-OnChart.ex4 88 KB | 315 downloads
+
+--- 帖子 #217 ---
+Thanks kindly for this, just allows me to keep the chart clear and bring the other ma's in when i need to reflect deeper. I make sure to have them all on when posting any charts.
+
+--- 帖子 #218 ---
+Patience paid off on CADJPY M15 time frame.
+
+--- 帖子 #219 ---
+Another target on CADJPY H1 Time frame is in progress. Scalping on GOLD continue. I will post charts later
+
+--- 帖子 #220 ---
+Beautiful chart. I also see a Double Top. In fact, I often have an easier time spotting Double Tops / Bottoms than Focal Points. However, with Double Tops / Bottoms you don't get the guesstimated Target Price. Thank you @aahmad29...
+
+--- 帖子 #221 ---
+Hey robots, nice thread, and also nice tool, as usual.
+
+--- 帖子 #222 ---
+Hi @aahmad29. I have a favor to ask -- would you mind sharing the configuration settings you are using. Also, are you running one or multiple instances of the indi (using different settings)? We all understand that what works for you is not guaranteed to work for others -- so, you are under no obligation. I'm curious to learn how you are using the indi and compare it with how I'm using it. Thanks... Here is what I am currently using, but by no means would I claim it is optimal for all pairs / time frames, etc: 3 instances of the indi: (1) 64x128, Tolerance of '1' (2) 16x128, Tolerance of '1' (3) 16x32, Tolerance of '1'
+
+--- 帖子 #223 ---
+Thats my unknown, how to know which probablity to get midline of 256 or inferior... ? Too, im testing my type of CMA, more stable, more clear, more accurated on crossing, created it 3 years ago already, decided to test more with focal. check the picture... Attached Image (click to enlarge)
+
+--- 帖子 #224 ---
+Only one instance. Yes but this is true that i also used other methods for verification. I already mentioned in earlier post e.g looking for trend in bigger time frame. Suppose i am using M1 time frame then i will check M15. I will test three instances as you mentioned and then will let you know about results Attached Image (click to enlarge)
+
+--- 帖子 #225 ---
+@js497 -- what you write is probably true for most of us, as well -- with the exception of @parisboy... Look it -- not only is this new and different for most us, it is highly discretionary. So there won't be a "one shoe fits all" configuration. Please don't be afraid to share your findings -- both good and bad. Not only will we all improve, but it also helps me to better figure out the boundary between what can and can not be coded. If everyone keeps their observations to themselves then I'll do the same and the thread will stagnate. I'll stop thinking of ways to improve the indicator -- or, if I do improve it -- I may decide not to share it. Why should I?
+
+--- 帖子 #226 ---
+Excellent -- this is great. Thank you...
+
+--- 帖子 #227 ---
+I just now looked at your chart and you know the first thing that caught my eye saw? It was the Double Top -- so, immediately I'm looking to go short. At that point I don't need the Focal Points unless I want the guesstimated Target Price. The most important thing for me is to get the direction right. The guesstimated Target Price is kind of like "icing on the cake". That may not be the case for you or anyone else -- but I trade conservatively and I'm happy to bank some green Pips and leave some on the table. If my trade yields 0.5*ADR then I'm good to go and I'll exit, regardless of the Target Price.
+
+--- 帖子 #228 ---
+How do you use three instances? I mean how do you get confirmation that signal is valid?
+
+--- 帖子 #229 ---
+I understand you R4M, however... if you check my CMA on the left, periodicaly it was the end of bottom, it have to be up. I taken the bottom of the range 256 and 128. Now my question is eligible, How to know which midline that the price will "respect", thats my big unknown, like you can see on picture, price has touched 32/16 midline, below the 256/126/64/32/16. Knowing that the price follows the average with up and down around of it. An idea @Parisboy? Attached Image (click to enlarge) you can see swing from minor cycles in cyan, and red of my future setup failed. Edit : I think that, im in error, like high/low or low/high represents half of period of 256 in average, so If 256 turns UP from low, it means its down direction... and inversely. My mistake. Correct me if im wrong @Parisboy ?
+
+--- 帖子 #230 ---
+CADJPY M30 Time frame. One chart is with one instance and other is with three instances as mentioned by robots4me
+
+--- 帖子 #231 ---
+GU Chart not taking this has the h4 tidanes short still but just watching 1 pair atm waiting. 3 applied as robo with tidanes as direction. Second chart same again but just showing the main ma's
+
+--- 帖子 #232 ---
+First of all -- I don't think of them as "signals". To me, a "signal" is a visual mark at the CURRENT timestamp where you decide whether or not to open or close a trade. In the case of Focal Points, I'm looking for "wake-up calls". That is -- the indicator has detected a Focal Point and I need to take a closer look. I don't know how to confirm or validate a Focal Point, and I'm not sure @parisboy does either. But I take into account other clues and if they all seem to point in the same direction then I'll open a trade. In other words -- I use my brain as the final confirmation / validation. And the more I work with Focal Points then the easier it gets to recognize the patterns. As I mentioned a few posts back -- I kind of like Double Tops / Bottoms -- perhaps it's because they seem to be easier for me to spot and I don't need to concern myself with Confirmed / Potential / Validated Focal Points. If there is a nice looking Focal Point nearby -- as in your chart -- then I'm all in.
+
+--- 帖子 #233 ---
+Your question is better answered by @parisboy -- I'm still a rookie when it comes to trading Focal Points. Hopefully he'll awake from his nap shortly...
+
+--- 帖子 #234 ---
+Better Attached Image (click to enlarge)
+
+--- 帖子 #235 ---
+Damn guess you guys found the holy grail, no one taking any losses so far. Time for me to hop on the train huh.
+
+--- 帖子 #236 ---
+FYI -- if you notice my posts now have 'Dislikes' you should know that isn't coming from anyone here -- we're doing great. The member who carries on like a child is DrDave. His feelings were hurt in the TMS thread, and since I've Ignored him then this is the only way he knows how to respond. He's done this in the past -- not only on this thread -- actually going back years and hundreds of my posts. For those of you with young children you may recognize the behavior...
+
+--- 帖子 #237 ---
+Nice. In this chart you traded the Double Top, right? And your blue line was used to guesstimate a Target Price?
+
+--- 帖子 #238 ---
+thats correct
+
+--- 帖子 #239 ---
+I think we have to clarify the terminology. let'use the term " signal " for the coding, for the computer and " candidate " for the methodology . which is true . The methodology gives us "candidates" Action Signal to speak like Hurst. In layman term you can translate that by "pay attention. this could be the right time to open a Short or a Long Position. But it comes with the usual disclaimer "It is your money , not mine. This is in no way an investment advice etc"
+
+--- 帖子 #240 ---
+it is the same reasoning you have a hierarchy in the Double Tops / Bottoms. All Double Tops / Bottoms are not equal. Some have more amplitude than others
+
+--- 帖子 #229 ---
+Yes -- "candidate" is the correct term. I was using "wake-up-call" -- but "candidate' is perfect. Focal Points -- so bar we only have a guesstimated Target Price. We do not have a signal that identifies an optimal price to enter a trade. Entry is discretional and Exit is at a guesstimated Target Price. Double Top / Bottom -- again, Entry is discretional, but Exit is also discretionary. However, if you take a closer look at @js497's charts and the lines he's drawn then I think he may be on to something. There's definitely a pattern. I'll post some example charts shortly, and others can feel free to comment whether they agree or disagree or see other patterns.
+
+--- 帖子 #230 ---
+Below are a couple of examples of Double Tops and how it might be possible to introduce some codable rules to better define Entries. Full disclosure -- this is hindsight trading -- I did not actually Enter trades here. Feel free to critique -- I make no claims this is the best way to treat Double Tops. This is still uncharted waters for me... I'll explain the numbers: 1. This is a 16x32 crossing that precedes a Double Top. 2. The yellow line is drawn from the 16x32 crossing and touches the Low of the gray bar beneath the 2nd peak. Not the first peak -- the 2nd peak. 3. The yellow line crosses a gray bar -- this is where I would enter a SELL trade. Now -- if you are discretionary trading you might choose a better Entry. However, my goal is to come up with a codable rule that works most of the time. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #231 ---
+What is the purpose of this comment in a thread that is not about naked chart trading? If you like to trade "naked" then do it and dont bother other people. What is the sense of this Video? You are just taking trades in a replay mode and not even real trades you are just visually showing where you would take a trade. Completely useless and a waste of time to watch. Instead of wasting your time recording videos about what happened yesterday or 2010 use the time to trade LIVE in a Market where you DONT KNOW WHATS GOING TO HAPPEN. Even my blind Granny can pretend to be a great Trader doing that kind of Videos. If that is even your Video.
+
+--- 帖子 #232 ---
+It's a spam post -- which is why I've banned him. Most members are good -- but when you consider there are over 500,000 of us then for sure there will be a sprinkling of sociopaths.
+
+--- 帖子 #233 ---
+You asked me about methods and other additional tools. I also use this tool to figure out overbought and over sold.
+
+--- 帖子 #234 ---
+If it's not MT4 then it's hard for me to tell what it is. I see +DI and -DI -- is that an ADX indicator? PS: Oops, never mind -- I now see it says 'Average Directional Movement Index', which is ADX.
+
+--- 帖子 #235 ---
+The GU m5 from this morning long hit the tp area. Did not take this as am short biased. However its starting to look good for shorts, late in the day though
+
+--- 帖子 #236 ---
+EURUSD 15 mn Long Follow Up Potential Target 1, 12040 +/- 224
+
+--- 帖子 #237 ---
+USDJPY 1 H How to analyze these charts ?
+
+--- 帖子 #238 ---
+Yes this can be automated... The only question im asking me, is how to differentiate the first and third swing by the way logical, i know visually by amplitude like said Parisboy. if it can help, this picture.. about entry i exited on half of channel, but in this case we can on bottom... Attached Image (click to enlarge) edit : i put the same chart with an explanation on logical exit trade, in more of previous one about logical entry Attached Image (click to enlarge) edit 2 : 88 points of possible profit on Nasdaq... 352 ticks Attached Image (click to enlarge)
+
+--- 帖子 #239 ---
+CADJPY Here is an example of three instances as mentioned by robots4me and one instance which i use. You can see double top and then target price is valid for me.
+
+--- 帖子 #240 ---
+Analysis 1 for Dummies
+
+--- 帖子 #241 ---
+Analysis 2 for Dummies
+
+--- 帖子 #242 ---
+Analyze 3 for Dummies
+
+--- 帖子 #243 ---
+Attached Image (click to enlarge) Centered Moving Average 16 is decelerating we suspect CMA 16(red) is building its Low
+
+--- 帖子 #244 ---
+If you want to read a little more documentation for the Hurst Cycle Analysis , here are three free books and many others: https://www.pdfdrive.com/search?q=hu...&amp;searchin=&amp;em= - Channels &amp; Cycles_ A Tribute to J. M. Hurst - mastering-hurst-cycle-analysis-a-modern-treatment-of-hursts-original-system-of-financial-market-analysis - Mastering Hurst Cycle Analysis - Harriman House
+
+--- 帖子 #245 ---
+FLD 64 - Price offsetted 1/2 period forward (32) confirms Target Price Top = 125.100 Crossing FLD 54 / Price = 123.050 125-100 - 123.050= 2. 050 Target Price = 123.050 - 2.050 = 121+/- 0,4 Real Low 121.316
+
+--- 帖子 #246 ---
+Hello Swingman ! Useful reminder
+
+--- 帖子 #247 ---
+I like it!!
+
+--- 帖子 #261 ---
+Beautiful -- you could bet the family farm on that one...
+
+--- 帖子 #262 ---
+Yes -- I'm working on a Double-Top indicator that focuses on 16x32 crossings...
+
+--- 帖子 #263 ---
+Would everyone agree that a Double Top is always preceded by a 16x32x64 crossing? Attached Image (click to enlarge)
+
+--- 帖子 #264 ---
+Always ? it depends you have theory and practice. In theory yes, always. In pratice not every time. Too, from my statistics based on periods and crossing between cycles CMA, in average yes. So we can conclude that the averages statistic rejoins the theory in general. Here a statistic approach on a data of ES 1min timeframe, 500days You can see the average of period from 64 to 32 is 29 bars (cross to cross) and 4 crossing between CMA 64 and 16 Attached Image (click to enlarge) Picture for CMA 32 and 16 between both Attached Image (click to enlarge)
+
+--- 帖子 #265 ---
+Correction: We have theory, practice and **codable**... So, though it may not be true 100% of the time, if it allows for a codable rule it may be "good enough". So, let me re-phrase the question: Is it "good enough" to assume that Double Tops / Bottoms are preceded by a 16x32x64 crossing? This does NOT mean that a 16x32x64 crossing is followed by a Double Top / Bottom. However, it DOES mean that one property of Double Tops / Bottoms is they are preceded by a 16x32x64 crossing. My goal is to algorithmically detect Double Tops / Bottoms.
+
+--- 帖子 #266 ---
+EURUSD 15 mn building a Double Top ? to follow Basically a Double Top is most of the Time built by a Centered Moving Average 16 Time Unit building 2 Successive Tops and a Centered Moving Average 32 building its Top in between when the Cma 32 Build its Low. The key to understand the phenomenon is that there is 2 different adjacent Cycles whose period is related by 2AND which start at the same point of origin .If the 2 Cycles have not the same point of origin, these 2 Cycles are out of phase and this fact generates a beat .
+
+--- 帖子 #267 ---
+Yes, i understand, and its a good idea to test to code the pattern.
+
+--- 帖子 #268 ---
+HARMONY GOLD 1 H Double Top
+
+--- 帖子 #269 ---
+This one I'm not so sure of. The double tops are further apart than what I'm used to seeing. But we'll see... Attached Image (click to enlarge)
+
+--- 帖子 #270 ---
+This would be based on normal pattern recognition a triple top already and not a double top... I can see though why through the MAs it COULD be considered a double top.. but then again you see the MA symmetry or whatever you want to call it in on the left already showing the double top too and just 3rd touch up after. So if that helps I wouldn't recognize this anymore as a normal double top.
+
+--- 帖子 #271 ---
+QUIZZ : Where is the Optimal position to Short ?
+
+--- 帖子 #272 ---
+@FundedCoffee -- I updated my post to include a chart after you had posted. Another clue as to why I don't think its a Double Top is because it is not preceded by a 16x32x64 crossing. I'm not claiming that my definition is correct all the time or that it is superior to discretion, but as I'm focusing on creating a codable set of rules that are "good enough" at detecting Double Tops / Bottoms then I need to draw a line in the sand somewhere.
+
+--- 帖子 #273 ---
+Triple Tops
+
+--- 帖子 #274 ---
+Yes! Your chart explains exactly what I was thinking. And I would think that is the most occurring/consistent pattern. There are obviously always variations of it in Trading, but as you said everything would be at some point a double top/bot if you were to code variations too. It's more of a discretionary thing.
+
+--- 帖子 #275 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #276 ---
+A new indicator -- R4M-Double-TopBottom. This is a work in progress, so don't book your Hawaiian vacation quite yet. This initial version simply detects 16x32x64 crossings that typically precede Double Tops / Bottoms. The crossings are marked with a yellow 'X'. Double Tops / Bottoms are often easy enough to spot in a glance, but the yellow 'X' provides some validation that what you're considering as a Double Top / Bottom really is preceded by a 16x32x64 crossing. Attached Image (click to enlarge) Attached File(s) R4M-Double-TopBottom-v.0.ex4 62 KB | 190 downloads
+
+--- 帖子 #277 ---
+Russian Dolls : Double Tops within Double Tops Jim Tillman and Double Tops When there is a double bottom or a double top, you should consider that there might be a cycle changing direction half-way between those two points.
+
+--- 帖子 #278 ---
+Now add the double bottoms and we are getting dizzy of the signals we are getting from the indicator. Dont get me wrong, I know what you want to say with it. It's just going to be a problem to code it in a way that it wont clutter the chart with 300signals.
+
+--- 帖子 #279 ---
+Perhaps -- but for there to be any hope of creating **codable** rules I'll need to focus on the ones that are "more equal" than the others. It's okay if we pass on the subtle ones -- we don't need to trade every Double Top / Bottom. These Double Tops / Bottoms seem to be everywhere so it shouldn't be a problem finding an attractive one to trade. BTW -- I'm getting tired of typing Double Top / Bottom, so I will start abbreviating it as DTB.
+
+--- 帖子 #280 ---
+Instead of actually adding more variations I would be interested into filtering them more. Parisboy, if I were to ask you if you could tell me what double tops/bots you like the most to trade, what would be your answer? What DT/DB makes you go "damn I must enter this one"?
+
+--- 帖子 #281 ---
+The new R4M-Double-TopBottom indicator is intended to be used alone -- NOT in conjunction with the Focal Point indicator. So, just 3 SMA lines and a few yellow X's...
+
+--- 帖子 #282 ---
+Double Tops within Double Tops -- reminds me of @George's fractals. I'm not going down that path...
+
+--- 帖子 #283 ---
+Greed ! The potential amplitude of the Swing. You have cost of operation (fee) You do not enter optimally However as the trade develops itself you can anticipate a decent target It is easier to grab 30/40 points on a 100 swing that 3/4 on a 10 points Swing
+
+--- 帖子 #284 ---
+Who is George ?
+
+--- 帖子 #285 ---
+Next version of the DTB indicator. Now it's getting closer to detecting a valid, though simple Double Top / Bottom. Algorithmically, I'm defining a DTB as a 16x32x64 crossing followed by two 16x32 crossings. In the chart below 16x32x64 crossings are marked with a yellow 'X' and 16x32 crossings are marked by 'O'. Attached Image (click to enlarge) Attached File(s) R4M-Double-TopBottom-v.1.ex4 64 KB | 220 downloads
+
+--- 帖子 #286 ---
+As @parisboy has pointed out, not all DTB's are created equal -- so, there remains a fair amount of discretion involved. However, when you spot a good one, it's almost as good as gold. I've yet to see a "good" DTB end as a loser. However, you have to get in early because we still don't have a guesstimate Target Price and the DTB might change at any time. Rather than lots of little trades, I'm thinking the best way to trade DTB is to find an attractive looking one -- there are plenty if you search all 28 pairs -- and trade a larger lot size.
+
+--- 帖子 #287 ---
+Double Tops and Simmetry
+
+--- 帖子 #288 ---
+Jim Tillman and Double Tops When there is a double bottom or a double top, you should consider that there might be a cycle changing direction half-way between those two points.
+
+--- 帖子 #289 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #290 ---
+Updated version of the Double Top / Bottom indicator -- I'm not sure how much further I can take it. The one thing it still misses is a guesstimated Target Price. This version identifies the most RECENT Double Top / Bottom, where a DTB is defined as: a 16x32x64 crossing, followed by two 16x32 crossings. The indi draws a yellow line from the 16x32x64 crossing to the second 16x32 crossing. In the case of a Double Top, I'm thinking that a reasonable SELL entry would be at the Close of the first bearish bar after the second 16x32 crossing. And that is what I've shown in the chart below. Keep in mind this is hot of the press. I'm curious to learn whether this works for others, as well. Attached Image (click to enlarge) Attached File(s) R4M-Double-TopBottom.ex4 66 KB | 235 downloads
+
+--- 帖子 #291 ---
+ah I just realise you are the author of the famous R4M indicators. Thank you for sharing the DB DT indicator. I use RM_detective which has reported an out of range error would it be possible you can spend some time looking in to it, could be you make it running smoother or faster: "2022.03.31 02:59:42.981 R4M-Detective EURUSD,M5: array out of range in 'iCustom_FractalLevels.mqh' (1022,21)" There is also MTF_detective so mystic I could not find a document showing how to use it effectively, maybe you have one?
+
+--- 帖子 #292 ---
+@ntk -- thanks for the good word, but you are treading on thin ice. This thread has absolutely nothing to do with the other indicator -- that was developed in a previous life. Try a different pair or time frame. I hope my message is clear...
+
+--- 帖子 #293 ---
+Hello robot for me i uses a MT4 app to trade I dont have this kind of indicator that you have is there any how you can help me but I have the one meta editor can it work with my mt4
+
+--- 帖子 #294 ---
+@Enagy -- if you don't realize that this is an MT4 indicator and if you don't know how to download and install it then: (a) You aren't ready to trade with it, and (b) You certainly have no clue how to build MT4 software using Meta Editor This isn't a thread for personal consultation. It's 100% transparent and all the information is here. If you don't know what to do with with the indi, well, you might have to do what everyone else has had to do -- study and learn. And don't fall into the habit of asking (or expecting) others to hold your hand -- that is a guaranteed path you'll never succeed at forex trading.
+
+--- 帖子 #295 ---
+Thank you @robotsme I have my mt4 working and I can edit as well,But I thought there is another thing that I can add to it that will make it look like the ones im seee here that just wheat I mean
+
+--- 帖子 #296 ---
+This Focal Point and Double Top / Bottom business really interests me -- more than my initial impression. And though it is my thread, this really is @parisboy's baby. Less than two weeks ago I had never heard of Focal Points or Double Top / Bottom. For sure I'm interested in developing new indicators, but FPs and DTBs introduce something new and different for me -- and that is the blending of theoretical and empirical . @parisboy comes from the theoretical world -- he talks in terms of waves, envelopes, cycles and answers questions with mathematical formulas. I come from the empirical world and think in terms of a pendulum and answer questions by developing software. A pendulum is not theoretical -- it is something you can see and touch. A pendulum has a theoretical basis, but I don't need to understand the theory in order to use it. It's reassuring to know there is a theory that backs it up, but I don't need to understand it in order to use the pendulum as a trading edge. Here's an analogy -- @parisboy is teaching us the how / why an internal combustion engine can be used to power a vehicle, whereas I'm interested in how to drive the vehicle.
+
+--- 帖子 #297 ---
+One of us is confused. The indi being used here is an MT4 indicator. If you download and install the indicator that I shared then what you see will look **exactly** as what everyone else is seeing. There are a couple of settings -- maybe your settings are different than what others are using -- I don't know. In any event, if you download the software that I've shared then you have it all.
+
+--- 帖子 #298 ---
+This is my mt4 that Im talking about and It working BUT I thought I can add any other thing to it that will help my trading I want you to understand me
+
+--- 帖子 #299 ---
+@Enagy -- I don't think you've even installed my indicator, let alone attach it to a chart. Please stop -- you are pre-newbie. After you learn how to use MT4 then it will become clear to you. We're not here to teach you how to use MT4. Of course you are welcome to follow along -- but another pre-newbie post and I'll ban you. This is a distraction that is unfair to me and other members.
+
+--- 帖子 #300 ---
+Below is a chart where I've combined the latest DTB indicator with @Nih98's sweet spot indicator. @Nih98 was a good friend and a mentor to many at FF. He died a young man a few years ago. @Nih98 developed a ton of software that he freely shared. His SweetSpot indi is one that I routinely revisit because it often times does a nice job of creating a "context". In the case of DTB I've seen the SweetSpot lines occur at prices that kind of make sense for DTB trading -- e.g. perhaps marking Entries or Exits? Anyways, if you are curious then check it out and please share anything interesting that you find. Attached Image (click to enlarge) Attached File(s) ! NIH98 SweetSpot Indi.ex4 23 KB | 225 downloads
+
+--- 帖子 #301 ---
+Thank you very much @robots4me for the encouragement
+
+--- 帖子 #302 ---
+Just as in real-life, everything comes with a trade-off. And that is true of Focal Points and Double Tops / Bottoms, as well. The trade-off has been mentioned many times before, but is worth reminding readers... The SMA lines are backshifted by 1/2 their period. That means the most recent portion of the lines (denoted by small dots) are extrapolated / extended from where the real line ended. In other words, the dotted portion of the SMA lines is not based on price data. If the market hasn't changed within the most recent 16-32 bars then all is probably fine. But if the market has changed within the most recent 16-32 bars then the extended portion of an SMA line is NOT valid. In the chart below I show an example where the market has changed, yet the SMA(32) is totally clueless. At this point I would consider the SMA(32) not only invalid, but possibly hazardous to your health... Attached Image (click to enlarge)
+
+--- 帖子 #303 ---
+Personnally i seen a double top based on CMA 64/32, including oscillations from 16/32, and double top forming with 128/64. Good short is preparing
+
+--- 帖子 #304 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #305 ---
+Here is a brief overview of Hurst cycles. Perhaps the comments at the end of the article are interesting:
+
+--- 帖子 #306 ---
+A little "theory' to understand Centered Moving Averages location and their implications for your trading.
+
+--- 帖子 #307 ---
+With your chart are you suggesting that the extended SMA(128) could be used to guesstimate a Target Price? If so, then we've got all the rules...
+
+--- 帖子 #308 ---
+Updated version of the R4M-DoubleTop indicator. This version includes SMA(128) and its extension. So, now, we have it all... (1) Detect simple Double Top / Bottom (16x32x64 crossing, followed by two 16x32 crossings) (2) Entry (after close of bearish bar following second 16x32 crossing) (3) guesstimated Target Price (extended SMA(128) Simple strategy and easy on the eyes. And backed by theory... Attached Image (click to enlarge) Attached File(s) R4M-Double-TopBottom.ex4 53 KB | 299 downloads
+
+--- 帖子 #309 ---
+in this case yes. It is what I do R4M. It is a cybernetic process . I guesstimate the Low AND the Crossing. Same reasoning : all potential Crossings are not equal.. Chart follows soon
+
+--- 帖子 #310 ---
+Excellent -- thank you. You execute a cybernetic process, whereas I execute the rookie process. @parisboy -- slowly, slowly I hope to catch up to you one day. Do you think that's possible or am I just dreaming?
+
+--- 帖子 #311 ---
+Very nice charts and explanations -- thank you...
+
+--- 帖子 #312 ---
+A key point to understand how (Centered) Moving Averages work. Empirical charts for empirical guys ! the bar removed from the count to calculate CMA 32 has a bigger value than the bar added . Hence CMA 32 (blue) continues to go down.
+
+--- 帖子 #313 ---
+I am sure you will one day soon become a strong supporter of the "theory". Some are slower than others !
+
+--- 帖子 #314 ---
+And that's because the backshifted CMA(32) doesn't yet see that new bar. BTW, @parisboy, you write (Centered) Moving Average (CMA). In MT4 the equivalent is "Simple" Moving Average (SMA). I should have mentioned this earlier because at first it confused me.
+
+--- 帖子 #315 ---
+Thanks for updated indicator. I have one old school question for verification In this chart, Entry will be short position where arrow is marked and exit will be next circle? I have another question that for bearish directions ; first circle must be above the second circle and vice versa for bullish directions?
+
+--- 帖子 #316 ---
+I would have traded differently -- I would have entered much earlier, shortly after the second 16x32 crossing is drawn. In fact, I think the optimal entry would have been at the close of the first bearish bar following that second 16x32 crossing. As for the guesstimated Target Price (i.e. Exit) -- keep in mind we are all in the same boat. There isn't an "official" Exit point. However, maybe you use @Nih98's Sweet Spot indi as a clue. Or, as @parisboy just pointed out, maybe you use the extended portion of SMA(128). This is discretionary -- it's not carved in stone what the correct thing is to do all the time. The indi is a tool that helps to visualize certain features -- i.e. to make it easier to draw your attention to certain patterns. At that point you apply discretion and your experience. I continue to gain confidence because I now see similar patterns repeat and they typically go the way I expected. Not always (because I'm a rookie, here) but this strategy definitely works. Plus, there is the added benefit knowing that it is backed by wave theory.
+
+--- 帖子 #317 ---
+Not bad Parisboy, i will think about it too
+
+--- 帖子 #318 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #319 ---
+I have a correction to make regarding a chart I had posted earlier. I had marked as a potential entry for a Double Top the close of the first bearish bar after the second 16x32 cross. In fact, there is no way you could enter that early. The reason is because of the backshifting. Since SMA(16) is backshifted 8 bars and SMA(32) is backshifted 16 bars then the earliest you could have entered a SELL trade was 16 bars after the second 16x32 cross. So, now I'm thinking that soon after you see the second 16x32 cross it will probably be obvious the price is in a down trend and that would be the time to enter the SELL. Attached Image (click to enlarge)
+
+--- 帖子 #320 ---
+Another vision of the concepts Sinewaves Return to the Mean Saving Acc.oount Observe that the 2 surfaces (in red) located UNDER the CMA 128 added together are more or less equal to the only surface (in green) located ABOVE CMA 128 (and Extension)
+
+--- 帖子 #321 ---
+@parisboy -- that is so, so cool!! I just now browsed through many pairs and can see that pattern -- it's easy to spot. So -- if CMA 128 cuts through CMA 16 (your green surface) then you are looking for the CMA 16 to create a red surface of approximately the same area as the red surface preceding the green surface by crossing the CMA 128. So, for this pattern all you need are CMA 128 and CMA 16.
+
+--- 帖子 #322 ---
+interesting Attached Image (click to enlarge) next, Attached Image (click to enlarge)
+
+--- 帖子 #323 ---
+CADJPY is near to end bullish run. Price close to SMA 200
+
+--- 帖子 #324 ---
+Very nice. And you mean "bearish" run, right?
+
+--- 帖子 #325 ---
+Okay -- but I'm not sure where the trade is. Where are you entering trades?
+
+--- 帖子 #326 ---
+R4M, you are the computer genius. I am just the guy who draw lines and color Charts with Paint like kids in elementary school. most of what I do is very simple and cool.
+
+--- 帖子 #327 ---
+The Tillman Method Jim Tillman (1990) of Cycletrend Inc. has developed a number of methods for cycle projections. Tillman uses centered moving averages of half-cycles after having determined the dominant cycle periods. Tillman's analysis concentrates on what he calls "focal points. " Focal points occur when 3 or more half-cycle moving averages cross at roughly the same location. In Figure 19.17, only crossovers of 2 x half-cycle moving averages (11-day and 21 -day) are shown, but Tillman's observations can still be made.
+
+--- 帖子 #328 ---
+The Tillman Method (2) One observation is that focal points occur at roughly the halfway point of cycle advances or declines. Notice the horizontal lines at the 41-day cycle peaks, troughs, and crossovers in Figure 19.17 . The crossovers occur roughly halfway between the peak and trough in points. The practical problem from this observation is that by the time the lagging half-cycle moving averages have crossed, prices have usually already reached their projection. The crossover thus occurs when the cycle is ending its run up or down. When you see a crossover in an upward leg of a cycle, you know that the upward leg is about to peak or already has. In Figure 19.18 , lines are drawn through the high or low of a cycle through the focal point. The upward sloping lines will continue through to the high of the cycle, and the downward sloping lines will continue through to the low of the cycle. The time from the low (high) to the focal point will equal, approximately, the time to that high (low). In our example in Figure 19.18, the time from the first low close to the focal point was 11 days, and 11 days later, the high was reached. The crossover is the center of the cosine wave. It is the center in time as well as distance. If we then draw a trend line between 2 successive focal points, we have an estimate of the direction of the next higher order cycle. Lines drawn parallel to that trend line to the immediate highs and lows will show that the trend is roughly midway between the parallel lines and that they represent the boundaries of the cycle, just as the earlier lines parallel to the moving averages showed. The advantage of using these parallel lines formed from the trend between focal points is that they can be projected into the future, whereas the moving average parallel lines had to be drawn freehand as a guess.
+
+--- 帖子 #329 ---
+The Tillman Method (3) As it rums out, the upper parallel line was broken, indicating that the hypothetical 81-day or longer cycle turned upward again, and that the low in October was a higher order low. To see where that longer cycle is likely to go, we need to analyze the next higher order 81+ day cycles When the parallel lines are decisively broken, we know that the next higher order cycle has changed direction. This makes sense because the parallel lines define the boundaries of the lower order cycle. If they are broken, it must be due to the change in direction of the next higher order cycle. For example, look at early October in Figure 19.19. The lower parallel trend line of the next cycle larger than the 41-day was broken downward. This indicated that the next higher order cycle, say the 81-day or longer, was reversing downward. When we draw the trend line between the 2 focal points on the way down, we can estimate that the crossover occurred when the 41-day low was being formed, and we can draw the 2 parallel lines to that trend, which tell us the approximate bounds of the next rally. By placing a buy order then in the vicinity of 1,185, with appropriate exit stops, we estimate that the 41-day rally will at least run up to the upper parallel line in the vicinity of 1,210. Tillman's method, therefore, is much more precise in measuring not only the cycles, but also their estimated projections.
+
+--- 帖子 #330 ---
+i showed mainly the pattern of DB or DT followed by a retracement on mid line after the pattern. the trade entry was on where price retraces on midline after DT or DB
+
+--- 帖子 #331 ---
+Midline retrace. I see -- very nice. Thank you, @js498.
+
+--- 帖子 #332 ---
+BTC-USD 1 mn A Onz Bottom Pattern Opened a Long Position Entry at the Second Low of CMA 16 (red) Target 46275 +/- 115 Low 45.125 Estimated Focal Point 45.700 45.700 - 45.125 = 575 45.700 + 575 = 46.225
+
+--- 帖子 #333 ---
+How did you know how to draw that dotted-line to get your BUY entry? Were you waiting for the PA to turn upward? Also, what is an "Onz Bottom" pattern? Did you mean "Double Bottom" pattern?
+
+--- 帖子 #334 ---
+The dotted line was the Ascending Angle of CMA 16 (red) when it turned UP I have kept it to observe eventual changes
+
+--- 帖子 #335 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #336 ---
+Follow up
+
+--- 帖子 #337 ---
+A new indicator -- R4M-Sinewaves-Return-To-Mean. I think you're going to like this one. It is based on @parisboy's post #320 ( https://www.forexfactory.com/thread/...9#post13952669 ) where he introduced a new and simple concept -- "Sinewaves Return To Mean". Attached Image (click to enlarge) Note that in the settings you can change which two SMA's to compare. The default is SMA(16) and SMA(128). Check-out the chart below -- this is way too cool. I've attached multiple instances of this indi to the same chart -- SMAs 16x128, 32x128 and 64x128. Notice how the Double Top / Bottoms (DTB) jump out. I'm not sure I marked them all correctly and I'm not sure yet how best to take advantage of what I'm seeing -- but do you see how charting a few simple SMA lines in different ways reveals a ton of clues? In a single glance you can look for Double Tops / Bottoms and Sinewaves returning to mean... Attached Image (click to enlarge) Attached File(s) R4M-Sinewaves-Return-To-Mean.ex4 57 KB | 444 downloads
+
+--- 帖子 #338 ---
+Wow that's freaking awesome, well done R4M
+
+--- 帖子 #339 ---
+Awesome. As usual great work.
+
+--- 帖子 #340 ---
+Since the shaded surfaces in the R4M-Sinewaves-Return-To-Mean indicator hide the underlying PA, then you might consider overlaying with a Heiken Ashi indicator so you can see the bars. Heiken Ashi provides another benefit -- you get to see the true Price Action (PA) that the extended portions of the SMAs don't take into account. In this way you can discern whether the market is continuing as before or changing its behavior. Attached Image (click to enlarge) Attached File(s) Heiken Ashi.ex4 12 KB | 192 downloads
+
+--- 帖子 #341 ---
+Hi RB4 Great thread. Instead of using HA you could also go to properties and tick "Chart on foreground " Cheers Eamonn
+
+--- 帖子 #342 ---
+Ahhh -- excellent idea -- never occurred to me. Thanks @Eamonn...
+
+--- 帖子 #343 ---
+Hi Been messing around with the new indicator this morning on the minute chart on XTI oil Attached Image (click to enlarge) Attached Image (click to enlarge) I've used the equidistant channel from the lowest focal point to the highest focal point on both screen shots then I've copied the line from the equidistant channel to the underside edge of the price action on both. When I got a break of the lower side of the equidistant channel would have went short (yellow arrows). Forget where I actually went short that's got nothing to do with this system. Cheers Eamonn.
+
+--- 帖子 #344 ---
+OK back again just gone long Xti oil on 1 minute lets see Attached Image (click to enlarge)
+
+--- 帖子 #345 ---
+I don't trade below M30, so when it comes to M1 I'm a "fish out of water". Using the Sinewaves-Return-To-Mean indicator it looks to me like a Double Top might be forming. Plus the SMA(128) extension looks to continue to track with PA. So, I'm not sure I would have gone long. Let's see how it goes -- and, if I'm wrong, it would be the first time. And my wife would confirm that... Attached Image (click to enlarge)
+
+--- 帖子 #346 ---
+WOW!!! Attached Image (click to enlarge)
+
+--- 帖子 #347 ---
+Last one of the day lets see if its three out of three Attached Image (click to enlarge)
+
+--- 帖子 #348 ---
+Last one stopped out
+
+--- 帖子 #349 ---
+Thanks for sharing your charts and willingness to make live calls. I'm paying attention and learned from your charts...
+
+--- 帖子 #350 ---
+Are those CCI candles you are using?
+
+--- 帖子 #351 ---
+I'm glad you asked and someone noticed -- no they are not -- they're better. And I will post about them shortly...
+
+--- 帖子 #352 ---
+Tons of clues are also given by Inverse Moving Averages. You just substract your 5 Simple (Centered) Moving Averages from Price Action one at a time. A piece of cake to code. You plot the result as points about a "zero" baseline, but using Histograms or vertical lines from zero to the value of the difference seems to provide the eye withh more information. At least it is what Jim Hurst writes in Profit Magic , page 109 to 112
+
+--- 帖子 #353 ---
+You're going to have to put up with me rambling for a moment, and then I'll share the details... Those additional markings are fractals -- but not just any fractals. I debated with myself whether or not to include them in the chart because they have nothing to do with waves and I didn't want to start down the path of cluttering the charts here with everyone's favorite indicator. Don't get me wrong -- I love indicators -- but this thread is about Focal Points and waves -- both theoretical and practical -- and how to apply them in discretionary trading. And then a light bulb went on. Wave theory and its applied fallout can only provide us with a DIRECTION. No entries. No exits. Only a direction. We are left to our own devices to figure out where to Enter / Exit a trade. You'll note that all the extra lines that we draw from this crossing to that crossing in an effort to guesstimate a good Entry / Exit have absolutely nothing to do with waves. Rather, they are based on empirical observations of what seems to work. My point is that wave theory goes as far as providing a direction, but for Entries / Exits the burden falls on us. Furthermore, the large backshift applied to the SMA lines means that when trading in real-time the SMA lines drawn on the chart aren't even using the most recent price data. With that, the debate in my head ended and I decided to take a look at fractals. I like fractals -- but they are not all created equal. Fractal indicators do NOT repaint, but they are DELAYED. They are DELAYED because it takes from 3 to 7 candles to form a fractal pattern. So, you'll never see a fractal at Bar[0] (the current bar) or Bar[1]. Depending on the fractal level, you might start seeing them beginning at Bar[2]. This complicates their use as trading signals. Also, fractals don't work across different time frames like moving averages do. Given a moving average, you may recognize the pattern as you flip through different time frames. But not with fractals. Fractals are based on a very specific candle pattern. So, if you see a fractal at a specific time stamp on an H1 chart, you won't necessarily see it at that same time stamp in an M30 or M1 chart. With that out of the way, the fractal indicator that I used in that earlier chart comes from master @SwingMan's beautiful fractal indicator. It supports 3 fractal Levels -- Level 1 fractals use a 3-candle pattern, Level 2 fractals use a 5-candle pattern, and Level 3 fractals use a 7-candle pattern. Needless to say, Level 3 fractals are the most strict. In the chart below I've attached the new R4M-Sinewaves-Return-To-Mean and @SwingMan's smFractalLevels_v3j indicator. It has quite a few settings, so I've also uploaded a template file. What I like about Level 3 fractals is they seem to do a good job of identifying Entries. I'm not sure I would rely on them for Exits, but they seem to correspond with Double Tops / Bottoms. Furthermore, and this is key, though Level 3 fractals are delayed 3 bars, that is way earlier than Double Tops / Bottoms which are typically delayed 16 bars (or more). Attached Image (click to enlarge) Attached File(s) smFractalLevels_v3j.ex4 44 KB | 358 downloads Attached File(s) Sinewaves-plus-Fractals.tpl 24 KB | 328 downloads @Swingman, sir, if you are reading please feel free to add / subtract anything I've said above. I can not begin to quantify how much I have benefitted from your software over the past few years. And once again, your software finds itself in one of the strategies that I write about...
+
+--- 帖子 #354 ---
+R4M Even if I like very much when you debate with yourself., this statement is just not true. It is just oui-dire repeated blindly without any verification by many posters (kind of "it repaints" thing. ) A Centered Moving Average uses ALL the available price data, the most recent included. The difference with a "common" Moving Average , commonly used whatever its calculation , is that the last calculated result (including the most recent data) sees its POSITION offsetted back of 1/2 period. Profit Magic Chapter 3, page 65 HOW TO PLOT AND INTERPRET A MOVING AVERAGE PROPERLY There is, however, one small but important characteristic of a Moving Average which they did overlook. This is demonstrated in the Appendix, and described here. A Moving Average is an effective smoother of fluctuating time sequences of data. However, the time relationship between the Moving Average and the data it smoothes is not the one that is always shown on stock price charts. In fact, the Moving Average data point plotted in association with the last price datum should be associated with a price datum one-half the time span (period) of the average in the past ! Let's make this clearer with an example. Suppose we're computing the latest possible Moving Average data point for a 10-week Moving Average of the weekly closing price of a stock. The procedure used is to add up the last 10 weekly closing prices, then divide the sum by 10. Now on stock price charts, the resulting value of the 10-week Moving Average is always plotted at the time of the last price data point used in computing the average. This is incorrect ! The proper time relationship between the computed Moving Average and the stock price data it is smoothing is obtained by plotting the value computed above at a time half-way between the fifth and the sixth previous price data points. This falls in the middle of the week of a weekly chart, and hence is associated with no value for the weekly close of the stock. For this reason, it is always better to use an odd number of data points in preparing a Moving Average, so that there is always a stock price to be associated with each average datum computed.
+
+--- 帖子 #355 ---
+Dear @R4M , I am glad to know that at least you have found interesting what I have posted from time to time, and thank you for your commitment and your last indicators! The fractal indicator is indeed an interesting tool, and one could extend it further with Lindsay's original Trident Trading Strategy. I have to make one short comment, and although your definition of the levels is not entirely correct, the end result is correct. This reminded me of a short story I posted on the forum many years ago after my trip to Tibet ... Correct would be for the parameter Fractal_Bars_LeftRight=1 Level 1=1 bar L/R Level 2=1 Level 1 L/R Level 3=1 Level 2 /L/R and similar for parameter=2. By your definition, levels 2 and 3 appear earlier than the original rules!
+
+--- 帖子 #356 ---
+Excellent post -- a true gem -- thank you, @parisboy. And I am perfectly fine with being wrong -- one of the quickest and most effective ways for me to learn the error of my ways is to stick my neck out and see if it gets chopped off. Kind of like throwing spaghetti at the wall looking for which noodles will stick. I need to noodle (pun intended) on this a bit. And don't worry -- I shall return with questions!!
+
+--- 帖子 #357 ---
+Thank you, @Swingman. I remember the picture, but forgot the story. I hope you don't mind if I repeat it here -- it made me chuckle again. From @Swingman's post in a different thread (circa 2009) https://www.forexfactory.com/thread/...94#post2909494 ##################################################################### To better undestand the power of the mantras, I try to tell you a little story about Buddha: Buddha comes with a small boat on an island and meets a monk there for 5 years repeated the mantra "OM mani padme hom". Buddha asked him why he does: to be able to run on the water. And you can do: no not yet and I do not know why... Buddha tells him: I guess that is due to the mantra because correctly it is "padme hum" and not "padme hom". The monk is grateful and buddha goes further with his small boat. After a mile the monk run after him on the water and asks: how was the correct mantra, I forgot what you've told me... Attached Image (click to enlarge)
+
+--- 帖子 #358 ---
+Okay -- I've done some initial noodling, though I still require more time... Regarding the definition of CMA -- I agree. And MT4's corresponding SMA is computed the same way. It does use all the data -- including the most recent bars. I have a question -- though I first need to create a context. Let's say I'm trading H1 and I'm interested in trading Double Tops / Bottoms. Since Double Tops / Bottoms use 16x32 crossings then the earliest that one can be drawn on a chart is after 16 bars. So, back around Bar[16] I begin to see a DBT being completed. This is great and now I'm looking to go long. So now my question: During the most recent 16 bars the market could make a dramatic downturn and that may not be reflected in the Double Bottom because, though that CMA 32 may include price data from the most recent 16 bars, it also includes price data from earlier bars, which would SKEW it upwards. When trading PA (Price Action) one typically trades in the here and now -- i.e. the emphasis is on the most recent data. It seems to me a "leap of faith" to trust markings that are skewed with older data. Now -- clearly -- Focal Points and Double Tops / Bottoms work, both in theory and in practice. But I would consider this backshifting a weakness or trade-off. There's nothing wrong with that -- **everything** comes with a trade-off. Regarding my comment about the wave theory providing direction, but not Entries / Exits. Sine waves have 3 properties -- frequency, length (i.e. period, span) and amplitude. Sine waves can be added and subtracted. Complex Sine waves can be broken down to their component waves using Fourier Transform. However, there are no straight lines in Sine waves. The problem that keeps popping up here is where to Enter / Exit, and the solutions so far have involved drawing a straight lines from "here" to "there". And the reason? Because it seems to work well. And that is great -- I favor empirical over theoretical. If it works, then I'm all in. Since we've been using straight lines (which have no relation to wave theory) to mark Entries / Exits, then I figured I wouldn't really be deviating from the spirit of the thread if I were to also introduce fractals as another tool to help us identify Entries / Exits. Level 3 fractals seem to be very accurate and they have the benefit of appearing earlier than the completion of a DBT. @parisboy -- over to you, sir...
+
+--- 帖子 #359 ---
+@parisboy -- I'm beginning to come around to see things like you... Okay -- the CMA / SMA lines do use recent data. However, they also use different backshifts. So, there are times when CMA 16 is using real data and CMA 32 is using extrapolated data. That's the part I'm having trouble getting my head around.
+
+--- 帖子 #360 ---
+A new indicator -- R4M-Double-TopBottom- Inverse . I like it. I've marked major transitions above / below the zero baseline with vertical green lines. It aligns well with the R4M-Sinewaves-Return-To-Mean indicator (which would be expected), as well as with @Swingman's fractal indicator. In addition to providing direction I'm thinking it could also be used for Entries / Exits. Attached Image (click to enlarge) Attached File(s) R4M-Double-TopBottom-Inverse.ex4 50 KB | 279 downloads
+
+--- 帖子 #361 ---
+I've modified this indicator and changed the dots to lines... Subtracting the SMA lines from Price action -- i.e. computing the differences or deltas -- has the effect of normalizing data. We are no longer distracted by the absolute price which will always fluctuate. Normalization is a type of filter that can have the effect of removing noise. When you see the lines move in the same direction that may provide another powerful clue. I've also taken the liberty of adding the Double Top / Bottom crossings (16x32 and 16x32x64) -- the same markings as computed in the R4M-Double-TopBottom indicator. Attached Image (click to enlarge) Attached File(s) R4M-Double-TopBottom-Inverse.ex4 58 KB | 427 downloads
+
+--- 帖子 #362 ---
+Hello R4m, Parisboy, and all others. I will like to get some opinions from you... See the gif i did. (Need yet a few little corrections) https://gyazo.com/89a366da4301239d66b9152d483569d7 I used to track all crossing between all CMAs, and put an average in time and price from each swing giving this result. I wanted to know, if i track all minors crossing between 2 focals (one confirmed, one potential), if i take from high and low (all crossing) until potential next high, i get the average midline, if i get from cross to cross (confirmed) to potential next crossing, i get the high and low average midline ? it makes sens to me @Parisboy ?
+
+--- 帖子 #363 ---
+JS497 nice replay of Price Action . agood way to analyze PA and lear. What is the pair ? I could read 1 mn but not the pair name.
+
+--- 帖子 #364 ---
+BTCUSD 1 :n Beautiful Chart to analyze
+
+--- 帖子 #365 ---
+Salut Alain, its MNQ(micro nasdaq) 06-22 (current contract) The replay of PA is cool yes, but not the heart of this tool . It's just to help to understand some situations, instead of waiting real market minute after minute I have a little correction to make about the midline based on high/low (first point confirmed) to vertical line (potential second point) =&gt; i should to get average of all interactions for middle between high to low to high I will add too from cross to cross (first point confirmed) to vertical line (potential second point) =&gt; i should to get average of all interaction for high or low between 2 crossing. i hope that i clear ? I will show result in 2h a little example of result based on 3xCMA Attached Image (click to enlarge)
+
+--- 帖子 #366 ---
+MNQ 1 mn building a Double Top
+
+--- 帖子 #367 ---
+I will compare when my correction of my tool will be done
+
+--- 帖子 #368 ---
+Attachment g
+
+--- 帖子 #369 ---
+I haven't yet received an answer to my earlier questions. That's okay -- I'm reading between the lines and charts... I have a couple of points to make and I'm curious whether they resonate with anyone else... (1) This regards the backshifting. @parisboy refers to CMA and I refer to MT4's SMA -- they are the same. And @parisboy is correct that the CMAs / SMAs of the individual lines displayed on the chart use all the data. However, the different SMAs are backshifted by different values. This means that SMA16 (which is backshifted by 8 bars) has to wait 8 bars before it can cross with an SMA32 (which is backhifted by 16 bars). And a 16x32 cross has to wait 16 bars before it can cross with SMA64 (which is backshifted by 32 bars) to form a 16x32x64 crossing. If I'm trading H1 the price action can change a lot while waiting 16 hours to see a 16x32x64 cross. If the market behavior doesn't change then all is good. But if it does then things could get ugly. So, what's the solution? Is there a solution? I think trading lower time frames addresses this problem. When trading M1 then waiting 16 bars isn't a big deal. The probability of the market changing within the next 16 minutes is much, much smaller than over the next 16 hours (in the case of H1). Is that why most of you guys are trading M1 and not the higher time frames? But, of course, there will always be a trade-off -- M1 bars are less accurate than H1 bars. (2) This regards trading M1. Bars / candles represent accumulated ticks, where a tick is a change in price. The raw data -- in fact, the only data -- are ticks. Your trading software (e.g. MT4, Trading View, etc.) accumulates the incoming ticks to create OHLC bars for your trading pleasure. The more ticks that are accumulated per bar then the more accurate the resulting OHLC. In the case of an instrument that is not actively traded and for which there are few incoming ticks, then a single tick can skew the bar. As a result, M1 bars are much less accurate than H1 bars because their OHLC has many fewer ticks to work with. In the case of a less actively traded pair (e.g. AUDNZD) then this could be problematical. In the case of a highly traded pair (e.g. EURUSD) perhaps less problematical. So, what's the solution? Is there a solution? I'm wondering whether BTC is the way to go when trading M1 since I think it is highly traded and its M1 bars will represent lots of ticks, making its OHLC more accurate. But, of course, there will always be a trade-off -- BTC is highly volatile and may not lend itself to a trend-following type of strategy, which wave theory definitely is. I'm not into trading M1 -- I'm not a screen-starer. And I won't trade BTC -- too volatile for the way I prefer to trade.
+
+--- 帖子 #370 ---
+Stated another way, the theoretical lag of a simple moving average is (n-1)/2. So to center a 10 period SMA on the price the lag is: (10-1)/2 = 4.5 bars and the MA should be shifted back from the current bar this amount to center it on the chart. As you stated, this in between points due to the even number (10). To match discrete chart bars, the back shift could be either 4 or 5 bars with similar results. For an 11 period MA the lag is: (11-1)/2 = 5 bars back from the current bar will center the 11 period MA on the price. If a different moving average is used other than the simple moving average, the theoretical lag will differ based on the weights used and may need to be computed analytically. The lag could be less than (n-1)/2 when the weights are more on the recent bars (i.e. WMA), and greater when the weights are more on the past bars. All this you already know, but others might find my interjections useful.
+
+--- 帖子 #371 ---
+FXEZ, R4M, 2 excellent posts. Thank you. a) I am conscious that the serie 8,16,32,64,128,256 etc is not composed of odd numbers and should be according to the mathematics 9,17,33,65,129,257 It would be interesting to compare the results. Anyway I have always choosen the coherence of the system based on Gann Time Price relationship (the Octave - division by 8) b) About BTC R4M you are right about volatility. But BTC is an excellent support to observe : very active, volatile and traded on week-end which is good for our technical reflexions And as for 1 mn it is excellent for training because it minimize the time you need to observe the results of your hypothesis - ex: the time necessary to see the change of status of a potential Focal Point into a Confirmed Focal Point and their consequences on your Analysis and Trading
+
+--- 帖子 #372 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #373 ---
+I think you're asking the right questions - questions I've asked many times myself as I've worked on this the past couple of years. It's difficult to come up with real-time workable strategy based on these concepts as described by Hurst that fill in all the holes. I've spent a lot of time looking at and creating prediction algos to help in this but ultimately conclude that you need future data to avoid large prediction errors so a different approach is needed. Tradingfives came up with an analytical way to apply the concept of focal points and created a pdf (see parisboy's thread and search the attachments) and a series of training videos. I don't have the software and don't know the exact algorithms used but it seems pretty clear from the videos what he is doing. See videos 1-3 for how he is using the "focal points" to make price and time projections. He uses 3 main tools to do projections: (tools explained in video #3 and how to do projections in videos 1-2) 1) The E tool which gives extensions - calculated by the difference between two clicks on the y axis. He clicks on a swing high or low, then clicks on the MA crossover point after that high or low and it creates a red line the same distance below/above the MA cross. Hurst says allow for 10% error so there should really be 2 lines to give an idea of a range of values for a target. 2) The time tool gives time extensions. He clicks on the MA crossover before the high/low swing price, then the high/low swing price and then the crossover after the high/low swing price. This returns a yellow dot which gives an estimated time range. I think this just takes the absolute value of the two most recent MA cross bars - the swing high / low bar and adds them to the last MA cross to create a time range on the x axis. Hurst basically did the same thing in this picture from chapter 4 of Profit Magic of Stock Transaction timing (figure IV-6) and turned it into a rectangle that takes into account both the high/low price estimates and the min/max time estimates and put it in context of the envelope channels. Attached Image (click to enlarge) 3) The R or regression tool. This isn't so much regression as it is slope extension. He clicks on two points near the end of a moving average and a straight line projects out based on the slope of the moving average at the time. The projected MA crossover (based on the straight line) is used to make projections on recent data of where the move may end and thus where a reversal position could be taken. Anyway, there is more to it than this but I strongly suggest spending the 20 minutes or so to listen to the first 3 videos on the playlist (link below). I think it gives a simple analytical approach that uses many of the tools that are being discussed in this thread and that were introduced by Hurst. https://www.youtube.com/playlist?lis...Sao_qnbj39ayLJ
+
+--- 帖子 #374 ---
+Wow, wow -- there is a lot of meat here, thank you @FXEZ. Between you and @parisboy I have a lot of noodling to do...
+
+--- 帖子 #375 ---
+Attached Image Attached Image Attached Image
+
+--- 帖子 #376 ---
+In short Hurst uses some "Mirror Image" (Symmetry) to build his estimated future Envelopes Attached Image (click to enlarge)
+
+--- 帖子 #377 ---
+Hurst labels " Nest of Lows " the grey zone where several Cycles of different periods converge within the same Time Zone. The reasoning is similar to the "Focal Points" where several Centered Moving Averages of different periods converge towards the same Price Zone In this example Hurst uses another tool the VTL - Valid Trend Line - A Descending Valid Trend Line links adjacent lower Peaks of successive Cycles of the same period. When a Descending VTL is broken on the upside , it means that the Cycle of the degree (period) higher than that of the VTL has made its Low. That creates a Candidate Action Signal to open a Long position. Attached Image (click to enlarge) Attached Image Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #378 ---
+As you can see Hurst : - defines a Time Zone where several Cycles converge to build a Nest of Lows - defines a Price Zone - the Lower Mimit of the Envelope including "most of" Price Action The conjonction or superposition of both Price and Time Zone generates a Potential Reversal Zone. Then Hurst observe the building of 2 different kinds of Valid Trend Lines (VTL) by Price Action Both VTL's are created by Cycles of different Cycles - one Cycle is shorter than the other. The First VTL falls within the Potential Reversal Zone, then the Second VTL too. When Price Action breaks the First VTL on the upside , it means that the Cycle of the Longest Period at work within Price Action has generated its Low and that we have confirmation of a change in Trend. Hurst always writes " use all the tools" . Depending of the conditions some tools are more efficient than others, but all used together it give us a powerful Edge. As you can see it is a rational, logical and efficient system where it is difficult to separate each tool as everything is linked in a way or another.
+
+--- 帖子 #379 ---
+R4M "Wave Theory" is a vast subject. FXEZ, which is a serious guy with a lot of "theoretical" background, could tell us how he considers "wave theory" because he describes itself in his profile as a Wave Analyst. I have very strong opinions (as always ) on " wave theory " (which theory ?), much more on wave theoreticians and much much more on propagandists and marketing men selling "waves" to the Dummies. Obviously we will begin by R.N. Elliott. A nice guy who in his time was very valuable. THis means he focused investors on somme interesting concepts : Market Structure, Big Waves are made of Little Waves and little Waves summed create Big Waves. All that has been yet rationalized under the concepts of Fractals or of Autosimilarity. Basic principle : If you do not take into account the scale, nothing is more similar to a Big Wave than a Little Wave. You can say the same thing for all Chart patterns (Triangles, Head and Shoulders and ..... Double Tops and Double Bottoms/ All that which is now obvious, falled in public domain, was when Elliott wrote "the Wave Principle" very new for the basic investor.
+
+--- 帖子 #380 ---
+Half cycles from high/low presents yet some logic issues to work correctly. However, i'm testing half cycles connecting focals from the baseline (cross-cross), almost done. see both pictures Attached Image (click to enlarge) Attached Image (click to enlarge) based on 192/96/48/24/12 CMA
+
+--- 帖子 #381 ---
+@parisboy -- I have a question / comment about the backshifting that I hope you can address. I'm about to make a controversial statement: There is no reason for CMA 16 to be backshifted by 8. The backshifting should go like this: CMA 16: Backshift = 0 CMA 32: Backshift = -8 (-32/2 + 8) CMA 64: Backshift = -24 (-64/2 + 8) CMA 128 Backshift = -56 (-128/2 + 8) CMA 256 Backshift = -120 (-256/2 + 8) That initial backshift of 8 introduces a lag of 8 that serves no purpose. Using the backshifts I listed above would yield the exact same results with the benefit of CMA 16 not being backshifted. @parisboy -- do you know what I mean?
+
+--- 帖子 #382 ---
+IMHO the best book on Waves - Forex Waves Forex Waves the Initial Test • Year 2005 • • Study on &gt; 29 Millions Ticks in the Forex Euro / Usd Database • • Trader : Duane Archer • Programmer : James Bickford • Main criterion • • The criterion for identifying a configuration in 3 waves is the existing relationship between the heights of each of the 3 waves. • • 3 logical operators : • • &gt; greater than • = equal to • &lt; smaller than
+
+--- 帖子 #383 ---
+We need to test. I am conservative But Moving Averages are so robust a tool you can do almost anything with it and having results.
+
+--- 帖子 #384 ---
+But @parisboy -- there is nothing to test -- neither mathematically nor visually. All the CMA lines can safely be shifted to the right by 8 bars and it won't affect anything, with the exception that all the extensions will be 8 bars shorter and CMA 16 won't have an extention (since it will begin at Bar[0]). And visually, all the crossings will be shifted 8 bars to the right, which has the benefit of not making everything look so far in the distance.
+
+--- 帖子 #385 ---
+Good point R4M! I have done something similar for the Envelopes hence I can not criticize you. Anyway I will test my preference in trading both at the same time. That will test my learning curve too !
+
+--- 帖子 #386 ---
+BTCUSD 1 mn Double Bottom again
+
+--- 帖子 #387 ---
+BTC daily 384/192/96/48/24 Attached Image (click to enlarge)
+
+--- 帖子 #388 ---
+18 Months (78 Weeks) 9 Months (39 Weeks) 4.5 Months (19-20 Weeks) 10 Weeks 5 Weeks
+
+--- 帖子 #389 ---
+Envelopes help to Identify and Classify Waves Envelopes use Centered Moving Averages as Templates (Brian Millard)
+
+--- 帖子 #390 ---
+Big Waves are made of Little Waves (of Lower degree, nature, order)
+
+--- 帖子 #391 ---
+I havent yet known to rectify the correction in the code, sometimes it shows logic corresponding to tillman method, sometimes not, like with your set on BTC weekly. I will do the analyze when its ready
+
+--- 帖子 #392 ---
+Thank you!
+
+--- 帖子 #393 ---
+I love this past sets from tillman method Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #394 ---
+DAX 5 mn Target 14.020 +/- 42
+
+--- 帖子 #395 ---
+BTC Daily Situation i have actually Attached Image (click to enlarge)
+
+--- 帖子 #396 ---
+Finally... Attached Image (click to enlarge)
+
+--- 帖子 #397 ---
+EURUSD 1 mn
+
+--- 帖子 #398 ---
+128/64/32/16 Attached Image (click to enlarge)
+
+--- 帖子 #399 ---
+EURUSD 1 mn Cycle Mode + Bearish Underlying Trend
+
+--- 帖子 #400 ---
+EURUSD 5 mn
+
+--- 帖子 #401 ---
+EURUSD 30 mn
+
+--- 帖子 #402 ---
+Hi I am an old school guy so using old i mean first indicator and using it to trade. I know that first indicator had some deficiencies but still i am more comfortable with it. I am trading Gold by putting limit orders at target price instead of chasing the direction. It is tricky way to trade because you do not know when retracement will happen but still i am using it. Here is my yesterday trade.
+
+--- 帖子 #403 ---
+5min, 256/128/64/32/16 Attached Image (click to enlarge) Attached Image (click to enlarge) 30min, 256/128/64/32/16 Attached Image (click to enlarge) 30min, 128/64/32/16 Attached Image (click to enlarge)
+
+--- 帖子 #404 ---
+Here is another picture where price is trying to get the target price(yellow line). I will have my pending orders waiting for price to come
+
+--- 帖子 #405 ---
+Another flying price of GOLD caught by my pending orders.
+
+--- 帖子 #406 ---
+Another short trade with scalping method. Candle close above Red MA when Red MA is pointing up above all other MA's (sometimes above two MA's) and previous trade rebound point. It means that this is overbought situation but remember not in all cases.
+
+--- 帖子 #407 ---
+DAX 1 mn Double Bottom Second Bottom &gt; First Bottom Trend is UP Jim Tillman and Double Bottom When there is a double bottom or a double top, you should consider that there might be a cycle changing direction half-way between those two points.
+
+--- 帖子 #408 ---
+Only ? What about if second bottom is &lt; first bottom ? like on pictures here ? Attached Image Attached Image
+
+--- 帖子 #409 ---
+Two more trades at same rebound point but overall MA's are showing uptrend in GOLD and Lets see if bottom MA is broken for downtrend or not.
+
+--- 帖子 #410 ---
+Trend should be down. But we need statistics
+
+--- 帖子 #411 ---
+EURUSD Monthly
+
+--- 帖子 #412 ---
+Specify parisboy...
+
+--- 帖子 #413 ---
+Iit would be good to have statistics to validate the patterns to convert them in Action Signal with a % of probability
+
+--- 帖子 #414 ---
+you are not enough clear in details.. Maybe Like it ? Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Be quiet... the calculation is based on fractal, not CMA. This one said... it should be almost the same with little difference. Generaly, the trend patterns like M1 or W1 for example, gives a better % compared to reversal patterns like. What i have looked quickly. But not more in detail yet.
+
+--- 帖子 #415 ---
+This classificaion is known as the "Merrill Waves", the first attempt to rationalize Waves
+
+--- 帖子 #416 ---
+All you have to know about Waves !
+
+--- 帖子 #417 ---
+Yes, my picture stats, shows all pattern on data loaded. And forecast the next wave based on 2 or 3 repetition. example : Based on W5, you get almost of time a M15, next you get almost of time a W14 same for triple repetition (3 patterns).
+
+--- 帖子 #418 ---
+Yes, i know. but if you want stats on double B/T, you need 4 swings ... or we can based it on 3... more simple. 2x patterns where the 3rd swing of last pattern is counted for a total of 4 swings (with 2 patterns) ... to see DB/DT
+
+--- 帖子 #419 ---
+What do you think by "it would be good to have statistics to validate the patterns" ? you have already... connector, etc.. or other thing?
+
+--- 帖子 #420 ---
+we were talking about Double Botoms (or Double Tops) a) you cannot master 32 configurations M &amp; W patterns -which moreover are very close from each other. b) the question is not only to identify the most common patterns but to define "rules" (even of thumb) to use them for trading
+
+--- 帖子 #421 ---
+So , waiting your rules
+
+--- 帖子 #422 ---
+Today's overall performance of trading in XAUUSD. Some untested resistances are there and some are verified multiple times. Target price is not yet achieved
+
+--- 帖子 #423 ---
+Looking your charts aahmad, but aren't you kinda drifting away from the MAs? You are now selling and buying at sup//res and pivot points. What role do the MAs still play in this?
+
+--- 帖子 #424 ---
+I am using this system for scalping in two ways. 1) I put limit orders at Target price (Yellow line). Sometimes Target price shows on both sides (long and short) so I put limit orders on both sides. 2) When Red line MA goes above all other MA’s and candle close above Red line MA , I placed sell order with target of pink line MA and sometimes I hold trade for long time to grab some extra pips if my trade is in trend direction. For long position Red line MA supposed to be at bottom. you can say that I am trying to identify overbought and oversold level with MA’s. I also set target with help of MA’s. Remember this way of trading is not for all currency pairs. At this moment I am trading in AUDCAD and XAUUSD because of their restricted range.
+
+--- 帖子 #425 ---
+May be you will easily understand with this screenshot. If you see all short positions are above Red line MA. Sometimes i close trade early so target is not fixed. I use pivot point, support and resistance areas for further verification and information.
+
+--- 帖子 #426 ---
+My pending order missed in Red area so made late entry and close at support area. I got greedy to get some more pips and waited for price to go in sell zone but i should have stay with my initial decision to have pending order at Yellow target line. I need to work more on my patience and discipline.
+
+--- 帖子 #427 ---
+I think some unexpected price action is going to happen in GOLD because focal points are showing both bullish and bearish targets at same time and then disappear. Last time when this thing happened , XAUUSD had big candles. parisboy already explained the reason behind both targets keep popping up but I was just mentioning my observations of last time PA reacted.
+
+--- 帖子 #428 ---
+MES 1min =&gt; Double Top Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) The circle is complete
+
+--- 帖子 #429 ---
+Basically, not really difficult, about Double Top or Double Bottom. Look... Attached Image (click to enlarge) When you get the cross 2x in Double Top example, its time to look to sell... Attached Image (click to enlarge) When you see third 3rd crossing, its time to look to exit
+
+--- 帖子 #430 ---
+As i suspected that PA will show some unexpected behaviour. Price went up and came down and then again up. My pending order got activated but i closed very early with small profit. Again i have to work on my patience level. Actually i had doubt that price has gone up activated my sell limit order but i was not sure that how much price will go down because yellow target line was below PP. I should have target set at PP. PA missed the target and rebound from PP. Lets see how it reacts before closing the market.
+
+--- 帖子 #431 ---
+My pending orders are survived and closed in Net Profit. Performance of Friday in GOLD is here.
+
+--- 帖子 #432 ---
+Finally version 2 ... I simplified the formula, more right and accurated. Attached Image (click to enlarge)
+
+--- 帖子 #433 ---
+which formula?
+
+--- 帖子 #434 ---
+As usual i setup 3 pending orders and third pending order is at/close to yellow line. Closed three positions in net profit. I should have close the positions at Blue line MA but i decided to close with 60% retracement.
+
+--- 帖子 #435 ---
+Today on MES 1min chart (micro futures sp500) Vertical line on the right, shows the moment where we are (its like a replay mode) in the first time, 128CMA focal1 =&gt; 64CMA focal2 Attached Image (click to enlarge) second time, 256CMA focal1 =&gt; 64CMA focal2 Attached Image (click to enlarge) third time, 256CMA focal1 =&gt; 64CMA focal2 Attached Image (click to enlarge)
+
+--- 帖子 #436 ---
+Another successful use of target price(Yellow Line)
+
+--- 帖子 #437 ---
+Asian session was good
+
+--- 帖子 #438 ---
+So far NY session disappointed me. There is not much action. I only have one pending order (short position) activated.
+
+--- 帖子 #439 ---
+While holding short position in H4 time frame, i got small scalping opportunities for long position in M5 time frame so i took it.
+
+--- 帖子 #440 ---
+Here are different target prices in different time frames. Current Price of XAUUSD is 1978. M5 target price (short) is 1973 and 1970 M15 Target price (long) is 1982 M30 No Target price H1 Target price is 1980 which is already achieved. H4 Target price (long) is 1989 so my scalping area is between 1970 to 1989
+
+--- 帖子 #441 ---
+Closed all positions before London session bring some surprises.
+
+--- 帖子 #442 ---
+I caught nice movement when MA showed me overbought situation right at verified resistance.
+
+--- 帖子 #443 ---
+Last trade was from M5 and now this trade is on M1.
+
+--- 帖子 #444 ---
+Hi R4M do you still feel that Guppy provides better results. I am applying Guppy and traditional moving averages with offsets to Indian markets. Will post some charts shortly. But would love to hear from you. I was also reading a book by trading fives that elaborates on the concepts discussed here. However they recommend finding the true cycle for each stock or instrument and then applying an MA based on this cycle.
+
+--- 帖子 #445 ---
+I'm in uncharted waters here -- @parisboy and others are better suited to answer questions. As an indicator I thought Guppy was interesting -- it used multiple moving averages like Focal Points, but didn't need the backshifting (which I would consider a disadvantage, at least for the way I like to trade). As for trading performance, I couldn't say because I'm currently back to trading algorithmically.
+
+--- 帖子 #446 ---
+Attaching nifty 50 1 minute chart with 2 clear crossings
+
+--- 帖子 #447 ---
+https://www.investopedia.com/terms/g...ng-average.asp I do not play anymore the game " My Moving Average parameters are better than yours" Mpreover it seems obvious but it is not , what do you mean by " better results " ?
+
+--- 帖子 #448 ---
+Wow parisboy the big daddy of cycles is here . Love your posts and your efforts in educating us whether it’s cycles, envelopes whatever. I try to read and understand your posts though I don’t succeed every time :-) Anyway coming to your point what I meant was that there is no calculation nor shifting required in Guppy vis a vis normal moving averages. I shouldn’t say better results but the interpretation and implementation with Guppy seems more straightforward. Regards
+
+--- 帖子 #449 ---
+One of the many opportunities on Nifty today. The circle shows the crossing and the measuring tool shows the near equal move given by market.
+
+--- 帖子 #450 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #451 ---
+Sinewave
+
+--- 帖子 #452 ---
+wow that’s nifty. I tried hard but couldn’t find centered moving averages on tradingview. I always wanted to build envelopes like you
+
+--- 帖子 #453 ---
+offset = minus 1/2 period (length)
+
+--- 帖子 #454 ---
+thanks parisboy but these are not centered moving averages ? These are simple averages. Also how do you get them to project forward ?
+
+--- 帖子 #455 ---
+Also in the offset do I need to write the minus sign ? Thanks again
+
+--- 帖子 #456 ---
+yes
+
+--- 帖子 #457 ---
+projected forward is a Future Line of Demarcation offsett +
+
+--- 帖子 #458 ---
+so this is drawn manually as an extension / projection ? Also these are just SMAs right and not centered averages ? thanks
+
+--- 帖子 #459 ---
+In MT4 and MT5 these are called SMA (Simple Moving Average). Regarding the extension, algorithmically it is drawn by continuing the slope where the SMA line left off. On my indicators and @parisboy's charts, the portion of the SMA that represents the extension has dots.
+
+--- 帖子 #460 ---
+Thanks I was just wondering how parisboy pulled it off in tradingview. I use your scripts/ indicators in mt4 - just trying to understand all the complexities :-)
+
+--- 帖子 #461 ---
+do it manually to understand how it works, how the trend evolves up or down. in this case software is counter productive for all users if you trade one or 2 pairs I do not need R4M or his brother in TradingView to draw a trend line between 2 Focal Points. But I need R4M coding ability if I do the task 100 times a day, 500 times a day or 1.000 times a day because this will save my (precious) time that I could invest on other subjects. As a beginner you have to do all MANUALLY this is IMHO the best way to learn how Hurst tools work. If you just look at charts on your computer you will go nowhere I promise you.
+
+--- 帖子 #462 ---
+Absolutely well said parisboy. However the fear is of doing it incorrectly and then paying the price. Hence the reliance on software. I have done countless courses and learnt hundreds of techniques so far- Elliott; Alligator; Gann; price action, delta neutral options, Hurst, Harmonics, market geometry, etc All I wanted was a simple technique which I could apply daily without drawing complex emblems or grids. I also went through Jenkins and a lot of other books which you shared on the forum. All the reading expanded my understanding but the light keeps flickering, it never turns on fully. Of all the methods I find myself coming back to your thinking again and again because the concept of cycles appeals to me somewhere. Hope the light turns on fully before the end of days :-)
+
+--- 帖子 #463 ---
+DAX 1 mn
+
+--- 帖子 #464 ---
+DAX 1 mn Opening a Long position
+
+--- 帖子 #465 ---
+DAX 1 mn Envelopes as a tool for Cyclic analysis
+
+--- 帖子 #466 ---
+DAX 1 mn Cycles within Cyles (1)
+
+--- 帖子 #467 ---
+DAX 1 mn Cycles within Cyles (2)
+
+--- 帖子 #468 ---
+DAX 1 mn Everything is linked
+
+--- 帖子 #469 ---
+When you say "everything is linked"- what are you referring to ?
+
+--- 帖子 #470 ---
+Nifty today 5 min chart with Guppy crossing: Attached Image (click to enlarge)
+
+--- 帖子 #471 ---
+Waves , Cycles, Sinewaves, Focal Points, Centered Moving Averages, Envelopes, Valid Trend Lines, Future Line of Demarcation all are a specific expression of the same logic
+
+--- 帖子 #472 ---
+Hope I see the light some day. :-)
+
+--- 帖子 #473 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #474 ---
+The MA 16 and 256 crossings look very intuitive. However wouldn’t 256 have a massive lag of -128 ? Then how can one target a buy or sell on its crossing with MA 16 ?
+
+--- 帖子 #475 ---
+First of all, i wanted to say thanks to robots4me and parisboy for introducing this thread and then replying all my questions. I used this method to trade in Gold and getting confidence day by day. I opened this live account since January and i had losses because of one of signal services and then i decided to trade myself. I trade mainly on Gold and if there are not enough opportunities then i trade in AUDCAD. Last week i withdraw profit and now this week i already made withdrawal request of another profit. Overall performance for this week so far.
+
+--- 帖子 #476 ---
+DAX 1 mn Trade Follow Up
+
+--- 帖子 #477 ---
+DAX 1 mn Follow Up
+
+--- 帖子 #478 ---
+Long Trade closed in order not to stay in position overnight
+
+--- 帖子 #479 ---
+What prompted the long position and why did you exit ? Was the decision based on MA or envelopes ? Thanks
+
+--- 帖子 #480 ---
+Do your homework. Read the thread . Analyze the charts. Do not only ask questions. Try to figure some answers.
+
+--- 帖子 #481 ---
+XAUUSD Here are three different time frames and their targets. Current Price - 1950 M15 - Bearish 1945 H1 - Bearish 1926 H4 - Bullish 1986 It means price is gonna fluctuate between 1926 and 1986. So i have setup pending orders at Target prices because target prices are always nice point of rebound. I think cycle is complete at target price so that's why it is nice point of rebound. Lets see what happen?
+
+--- 帖子 #482 ---
+DAX 1 mn
+
+--- 帖子 #483 ---
+DAX
+
+--- 帖子 #484 ---
+Excellent methodology
+
+--- 帖子 #485 ---
+Thanks. Now question is that how do I know that how much will be rebound? Is it going to complete another cycle or not? My methodology is different for setting Take profit. I am giving an example of above posted scenario. I have two bearish target and that’s why I use Pivot point with resistance and support. I found that my first bearish target is close to S1. Second bearish target is close to S3. I added third pending order at S2 because some time price rebound in between two Target prices / yellow lines. If price rebound from S1 then my Take profit is at/close to PP. If price rebound from S2 then my take profit is S1(close the first order with no profit and second order with profit at S1). If price rebound from S3 then I calculate total pips from S1 to S3 and then calculate 60% of those pips and that is my Take profit for all three orders. Same methodology for R1 to R3.
+
+--- 帖子 #486 ---
+Initially PA missed my R2 pending order and price is stuck between PP and R1. I grabbed some pips and adding new position because it looks like PA lost Momentum and Market is returning to its original pattern/behavior until some news comes from press conferences.
+
+--- 帖子 #487 ---
+M15 Bearish Target has been hit @1945 but price is holding for a moment at 1938 and H1 bearish target @1926 is not achieved yet. H4 time frame is giving signs of bullish move because MA's are showing oversold price. Lets see if price hit H1 bearish target before it travel towards H4 bullish target @1986. I got some pips during this time but i am still holding one long position and adding two more @1939 and @1926 so that i can get some more pips tonight or tomorrow.
+
+--- 帖子 #488 ---
+Current price @1934 My H4 time frame is telling me that price is gonna hit 1945 level next week. Today is not enough time fore this quick reaction so I am holding my long position with target of 1945.
+
+--- 帖子 #489 ---
+As I mentioned bearish targets so both targets are achieved today and now long position target for H4 time frame is 1986. Let’s see if price jump to that level next week or not. Bearish targets are not only achieved but there was also good rebound to get some profit.
+
+--- 帖子 #490 ---
+hello all, anyone planning to make an ema focal point indi?
+
+--- 帖子 #491 ---
+do it yourself !
+
+--- 帖子 #492 ---
+I'd like to, if only l were a coder
+
+--- 帖子 #493 ---
+Hi Parisboy, I have constructed the MAs as per your model. I can also spot 2 convergences/ focal points in yellow circles. The current time frame - blue circle has no intersections since the MAs are all backshifted. So how does one take buy/ sell decisions based on lagging intersections ? For example in the chart posted below what action would you have taken based on the chart below ? Thanks Attached Image (click to enlarge)
+
+--- 帖子 #494 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #495 ---
+After reading and re- re- re- reading your old posts I was able to see some light today and could predict the formation of the double top today in Nifty Bank (see chart and marked areas). Is this a correct reading ? Attached Image (click to enlarge)
+
+--- 帖子 #496 ---
+Same instrument on 1 minute chart gave a similar pattern after some time. Only problem was the double top was much lower than expected. Again let me know if the understanding is correct. Attached Image (click to enlarge)
+
+--- 帖子 #497 ---
+You ALWAYS have " similar patterns " . That is why they are labeled "patterns" Trade on a demo account Develop your strategy (hypoyhesis) check the results Analyze why it has failed If the double top is lower than you expected (what it means exactly) it is that for now Price Action is downtrending. Hint second top is slightly lower than the first
+
+--- 帖子 #498 ---
+Thanks- one more question. Do I have to look for double tops and bottoms or is there anything else also that I am missing ? My next objective is to build envelopes like you do for which I know I will have to re- re - re - read your posts :-)
+
+--- 帖子 #499 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #500 ---
+NIFTY 50 1 mn Key Points
+
+--- 帖子 #501 ---
+you can see from your own eyes how Elliotticians are stupid ! and non rational
+
+--- 帖子 #502 ---
+Sorry could not understand this comment. Could you explain ? Thanks
+
+--- 帖子 #503 ---
+Has crude formed a double bottom on 15 min ? Attached Image (click to enlarge)
+
+--- 帖子 #504 ---
+Hi Parisboy, isnt the attached picture that of a failed double top formation ? And if yes how to distinguish a real double top v a fake one ? Attached Image (click to enlarge)
+
+--- 帖子 #505 ---
+it is not a "failed double top" because your Centered Moving Averages are not building one.
+
+--- 帖子 #506 ---
+Thanks for your patience. So you are suggesting that the second top has to be lower than first ? AND in a double bottom, the second bottom has to be higher ?
+
+--- 帖子 #507 ---
+WTI 15 mn Envelopes
+
+--- 帖子 #508 ---
+Do you understand the above chart ?
+
+--- 帖子 #509 ---
+No sir !! I understood the ascending double bottom / top not the envelopes
+
+--- 帖子 #510 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #511 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #512 ---
+Merci ! But what are these new lines (MA1 ?) now ? All I can see are lines pointing upwards :-)
+
+--- 帖子 #513 ---
+have you read the thread ? have you read my thread ? you just show you have not . These "lines " are FLD's - Future Lines of Demarcation. DO YOUR HOMEWORK https://www.forexfactory.com/thread/...s-waves-cycles
+
+--- 帖子 #514 ---
+Ok ! back to home- work
+
+--- 帖子 #515 ---
+Hi Have sent you a PM. Pls check and let me know. Thanks !!
+
+--- 帖子 #516 ---
+NIFTY 50 1 mn A computer can not be a substitute of your brain and my brain is not a substitute of your brain Your diagnostic is excellent. What solutions do you propose ? I had very mixed results today with my current understanding. You need to improve your current understanding I was tracking 1 min on Nifty today and there were multiple crossings between 16 and 32 MA. Sometimes price seemed to totally ignore the crossings and continue in the same direction. Excellent observation. Why ? Propose us an explanation At times 16 X 32 crossing was very powerful at times even the 16 X32 X 64 crossing had very nominal response. What am I missing here ? You are on the right track. Dig deeper. What do you see on the chart ! How does one filter these trades ? All potential"trades" are not tradable - you have to define your trading conditions before "filtering" Does crossing on higher time frame carry more value than smaller time frame ? Yes Is 32 X 64 more important than 16 X 32 ? It depends - why ? Anyway such crossings 32 / 64 are less numerous How do I go ahead from here ? Draw the logical consequences of what you see. All answers to your questions are i the internal logic of the System
+
+--- 帖子 #517 ---
+NIFTY 50 Envelopes What tells you the Envelopes Triad ?
+
+--- 帖子 #518 ---
+NIFTY 50 FLD's
+
+--- 帖子 #519 ---
+NIFTY 50 Follow Up
+
+--- 帖子 #520 ---
+NIFTY 50 1 mn Centered Moving Averages 16 (red) , 32 (blue) , 128 (ocre) What do you see ?
+
+--- 帖子 #521 ---
+missed the trade, but wanted to show this beautiful Double top setup.
+
+--- 帖子 #522 ---
+at the end it looks like a Head and Shoulders pattern
+
+--- 帖子 #523 ---
+on cma inferior yes.
+
+--- 帖子 #524 ---
+Next again... Attached Image (click to enlarge)
+
+--- 帖子 #525 ---
+All i see is that envelope 32 and 128 crashed against the bigger envelope and price came down. This could sound stupid but honestly thats all i see
+
+--- 帖子 #526 ---
+Here I see 16 and 32 oscillating around 128 and the intersections aka focal points moving up continuously. Then I see the last intersection happing lower that the previous one indicating change in trend ? Then i see the projected 128 going through the middle of 16 and 32 thereby ending the downtrend ? Also the 16 and 32 have moved up thereby hinting that 1/2 the upcycle is done and remaining 1/2 is in progress ?
+
+--- 帖子 #527 ---
+DAX 1 mn Focal Points
+
+--- 帖子 #528 ---
+The Underlying Longer Term Trend has 4 Times more influence on Price Action than the shorter trend represented by Envelope 32 - 280 points against 62.5
+
+--- 帖子 #529 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #530 ---
+I understand the dashed brown lines but where do the black dashed lines come from?
+
+--- 帖子 #531 ---
+handy I just forgot to update the chart. Keeping the old trend angles allows to observe the changes in trend
+
+--- 帖子 #532 ---
+DAX 1 mn Long position Opened
+
+--- 帖子 #533 ---
+DAX 1 mn Focal Points are located in the middle of their respective Price Swing
+
+--- 帖子 #534 ---
+Hi Robot4me, sorry if I write to you here but I would like to know how I can get in touch with you. Thank you
+
+--- 帖子 #535 ---
+Again thanks to robots4me and Parisboy. I am successfully trading gold. Performance of this week.
+
+--- 帖子 #536 ---
+Do you mind if I ask how you are trading profitably?? Thanks
+
+--- 帖子 #537 ---
+Yes so far I am doing good but my trading strategy is not recommended. I use three systems for trading. 1) Trading Focal Points 2) Billy and Jim TMA band 3) Supply and demand. I trade against the trend by adding positions. So without proper knowledge and experience , I won’t recommend. Trading focal point gave me idea of market so my analysis is totally based on this system and TMA bands for entry and exits. I am trading successfully for only last three months so this period is not good enough to have experience but I have some previous experience so I am trading.
+
+--- 帖子 #538 ---
+BTCUSD 1 mn Opened Long position
+
+--- 帖子 #539 ---
+What is your strategy for trading focal points? I have been reading parisboy posts for awhile now but havent yet found a strategy to trade with. thanks
+
+--- 帖子 #540 ---
+My interpretation of trading focal points is totally different. I already mentioned detail in last reply but I think I have to do in my old school way. I use three systems for trading Trading focal points Billy and Jim TMA Supply and demand My way of trading is not recommended because I trade against trend. Initially I use Resistance and support levels with limit orders. If price break R3 or S3 level then I add 7 more positions. Here I decide to use other two systems. MA’s ( MA’s of trading focal points) help me to find overbought and oversold level and TMA signal on H4 time frame gives me signal to add positions. My TP is not fix , I change it according to situations. if you see those red arrows, Red line MA is at the top of all other MA's so price overbought and with blue arrow; red MA is at bottom so price is oversold. Sometimes i keep orange/yellow line as target or opposite band. You can see small squares as signal for adding position. Hopefully you got your answer.
+
+--- 帖子 #541 ---
+BTCUSD 1 mn Long position opened
+
+--- 帖子 #542 ---
+Hi aahmad29, Those two thick red lines are a handdrawn or a indi? Thank you.
+
+--- 帖子 #543 ---
+Visit "Billy &amp; Jim TMA &amp;Channel" trading system. All indicators are there. But i wanted to remind you that these indicators are repainting so those indicators are just for your analysis and information.
+
+--- 帖子 #544 ---
+Thanks aahmad29
+
+--- 帖子 #545 ---
+Took this one and moved out the next candle (blue arrow entry and 0.5% target) Attached Image (click to enlarge)
+
+--- 帖子 #546 ---
+Similar setup today Attached Image (click to enlarge)
+
+--- 帖子 #547 ---
+BTCUSD 1 mn Understaning the Mid Channel Pause or the Straddle Trough always refer to the theory for a better understanding of how Cycles generate Chart Patterns
+
+--- 帖子 #548 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #549 ---
+@parisboy Am I correct in this analysis of us30 1mn chart. I placed a long at the focal point indicated by the circle(orange) at around 32.500 and the price hit my Take Profit at 32.598
+
+--- 帖子 #550 ---
+Seems as though I have just found the second Focal Point Indicating the recent top is valid and a return to the mean of the 128 (Black) should be coming soon
+
+--- 帖子 #551 ---
+Short at Focal Point 32.550 has hit TP at 32.482 This is quite the amazing strategy. I hope I am implementing it well.
+
+--- 帖子 #552 ---
+hey robots4me... thanks for beautiful indicator... can you refine the code coz its not updating while backtesting, also lines settings are not getting saved properly, or upload mql for someone to make it faster and update faster
+
+--- 帖子 #553 ---
+A function of random data is still, random. No matter how interesting is this new way of looking at price action, it still doesn't provide you with any significant advantage over just looking at price action with a plain chart. As an example, look at the last few minutes of M1 GBPUSD below. Attached Image (click to enlarge) Now look at the equity curves of baskets of pairs of different currencies on this post . If I didn't tell which is which, would you be able to tell which is which? No.
+
+--- 帖子 #554 ---
+Kaihkaih if you reached the calculated arget. It is the proof that you are correct ! you are on the right track
+
+--- 帖子 #555 ---
+I do not understannd your remark. As for the charts you show in your basket of pairs it is just the "commonality principle" in action in various pairs. Hurst has written about already in his book Profit Magic in 1970
+
+--- 帖子 #556 ---
+Hi, I have no idea if you will read my post. However I was wondering if you could help me have a small script to extend moving averages in Tradingview. Basically I just want to draw a straight line using the last 2 data points of a MA. Thanks in advance
+
+--- 帖子 #557 ---
+Crude 5 min double bottom Attached Image (click to enlarge)
+
+--- 帖子 #558 ---
+Hi, Are you able to project/ forecast the MA in Tradingview ? I have written a script in TV for the displaced MA but cant get them to project the MA in a straight line. I have also written a code to draw a straight line using the last 2 data points of a MA but not able to displace/ offset it. Thanks.
+
+--- 帖子 #559 ---
+Managed to get automation on tradingview done- auto lines drawn- makes life that much easier :-) The measurements are manual, rest is automated Attached Image (click to enlarge)
+
+--- 帖子 #560 ---
+thanks aptx is it possible that you made your script public ?
+
+--- 帖子 #253 ---
+Sure Parisboy, I can share on a 1 to 1 basis since I also had to pay a coder to get my code right. When he highlighted my error I had my hand to my head - a pretty simple one but yeah finally its working.
+
+--- 帖子 #254 ---
+Crude 5 min Attached Image (click to enlarge)
+
+--- 帖子 #255 ---
+Hey @parisboy I've been trying to get this right, I've been using the focal points for a few weeks now successfully but recently took 2 grueling losses. The 16(purple) 32(yellow) and 64(blue) are all pointed down but the 16/32 are about to cross signaling the change of downtrend on the hourly of US30. I extended the black(256) and 128(red) T-34420 or 33108 ?
+
+--- 帖子 #256 ---
+Crude 5 min focal point intersection: Attached Image (click to enlarge)
+
+--- 帖子 #257 ---
+In the Forex market is nothing random or the random result of buyers or sellers. Its driven by people who are able to move it, called the banks. Price has to reach each level at least two times in order to make money for them. Cycles are a real good way to spot this.
+
+--- 帖子 #258 ---
+sorry I have not seen your post Top = 34.300 Potential Focal Point = 33.380 Target 32.460 +/- 184
+
+--- 帖子 #259 ---
+No problem, I understand people are busy with their lives and what not. So did I do this strategy wrong and still get the correct result? T was for target, 1 going up and 1 going down. This is an update, it hit the 33108
+
+--- 帖子 #260 ---
+Hi Sir R4m, I hope you are fine and safe. I am still using some of your "Indicators for Discretionary" indicators (labtrend and trix mostly). https://www.forexfactory.com/thread/...r-discretionar I added just one indicator and it is still doing good with all the Christmas-like colors in it and still addicted with Gold/XAU too. hehe After almost 2 years of trying to use other indicators, always ended up coming back to them and decided to just focus on them instead. And so I did. I even passed MFF using them. Just want to extend my gratitude again. Take care! Regards, Peppaer
+
+--- 帖子 #261 ---
+Hey guys, Great thread, I'm getting a out of range exception because of the array index check.. is there a solution for this? I'm using a custom folder for the indicator -not the root folder. Attached Image (click to enlarge)
+
+
+===== 附件下载链接 =====
+

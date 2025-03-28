@@ -1,0 +1,229 @@
+
+
+//+------------------------------------------------------------------+
+//| 3 Tier London Breakout.mq4 EA, by Squalou
+//|                  User's Guide
+//+------------------------------------------------------------------+
+
+
+This EA trades the "3 Tier London Breakout" strategy posted by mer071898 on forexfactory.com
+thread http://www.forexfactory.com/showthread.php?t=247220
+
+=======================================================================
+* Visual help with or without the "3 Tier London Breakout.mq4" indicator:
+=======================================================================
+
+This EA can be used along with the "3 Tier London Breakout.mq4" indicator for visual help.
+The Indicator will draw the breakout box and TP levels for a given number of days in the past.
+
+The EA can also be configured to draw the breakout box and TP levels by itself, but it will do it only for "today",
+and will draw new boxes&levels formed at the beginning of each new session.
+However, it will not draw box/levels for the days prior to the time you started the EA.
+
+=======================================================================
+!!! IMPORTANT WARNING !!!
+=======================================================================
+
+As a security, when running this EA without changing any inputs, this EA is LOCKED and will NOT send any trades.
+This is to prevent silly "blindly-load-and-run-and-get-burned" kind of negligent behaviour...
+First, you MUST understand how the strategy works, as it is explained in the thread;
+Second, you need to read this User's Guide to understand how to setup the EA inputs, and how to unlock it to allow it to trade.
+Then it is recommended to use the EA on a Demo account for backtesting and forwardtesting,
+in order to get familiar with the use of the EA and its inputs;
+Only after these steps, you can start using it on your live account, AT YOUR OWN RISK.
+
+
+=======================================================================
+* EA Input parameters:
+=======================================================================
+
+extern bool       SendTrades = false;
+	You must set this to true if you want the EA to place trades;
+	By default, the EA will NOT send trades, but only show indicator's boxes and fibs (if "ShowBoxes" is true)
+
+extern double     Lot  = 0.01;
+	number Lots to use for each open trade;
+
+extern double     MaxRisk = 0;
+	Risk management:
+	MaxRisk is used only when not using the Martingale options;
+	It is the percentage of the account free margin that will be used to compute the size of the open orders
+	depending on the stoploss level;
+	if MaxRisk is 0, then the size of open orders will be "Lot";
+
+extern int        MagicNumber=0;
+	the MagicNumber value to be used when opening orders;
+	The EA will open 3 trades at a time, each trade will have a different MagicNumber, as follows:
+	magic number for trade #1 = MagicNumber;
+	magic number for trade #2 = MagicNumber+1;
+	magic number for trade #3 = MagicNumber+2;
+	MagicNumbers are used by the EA to handle its trades, 
+	so it is important to set this value so that they will not interfere with other EA's trades.
+	In particular, you must use DIFFERENT MagicNumber ranges when rnuning this same EA on DIFFERENT PAIRS;
+	When "MagicNumber" is 0, the EA will create a unique MagicNumber range for the current chart/pair;
+	Running multiple EA on different pairs, all with MagicNumber" set to 0 ensures that all trades will have different MagicNumbers.
+
+extern string     StartTime    = "06:00";
+	time for start of breakout box;
+
+extern string     EndTime      = "09:14";
+	time for end of breakout box;
+	Setting the minutes to ":14" ensures that the "last" 15-minutes bar is being included in the box when rnuning the EA
+	on a timeframe lower than M15, which is the timeframe suggested by the startegy.
+	By setting the minutes to ":14", you can run the EA on M1 or M5 charts, and still get the same box and levels as if you were
+	running it on the M15 chart.
+
+extern string     SessionEndTime= "01:00";
+	End of daily session: no new trades will be open after this time;
+	However, the EA will continue to take care of trades that were opened before this time, and which are still open;
+	They will remain open until they either reach their TP or SL.
+	The EA will continue handling the jumping stop on these trades until they close.
+
+extern int        MinBoxSizeInPips = 25;
+	minimum tradable box size in pips (not Points);
+	when the box is smaller than that value, the EA will NOT send trades during this session;
+
+extern int        MaxBoxSizeInPips = 50;
+	maximum tradable box size in pips;
+	The EA will either not trade when the box is larger than that value,
+	or limit the box size to that value, depending on the "LimitBoxToMaxSize" input below;
+
+extern bool       LimitBoxToMaxSize = true;
+	when true, a box larger than MaxBoxSizeInPips will be limited to MaxBoxSizeInPips, 
+	and centered on the EMA of the price during the box time range.
+
+extern double     TP1Factor    = 0.618;
+	the factor applied to the box size to determine the TP target for Trade #1 (TP1).
+	TP1 is the box edge +/- TP1Factor * box_size;
+	Example: if the bow size is 32pips, then:
+	TP1 for Buy  is box High + TP1Factor * 32pips;
+	TP1 for Sell is box Low  - TP1Factor * 32pips;
+
+	Extension to the strategy:
+	--------------------------
+	TP1Factor can be set to be a FIXED PIP value rather than a factor of the box size;
+	When TP1Factor is >=10, it is considered as a FIXED PIPs value to be applied to the box edges;
+	Example: with TP1Factor set to 30:
+	TP1 for Buy  is box High + 30pips;
+	TP1 for Sell is box Low  - 30pips;
+	whatever the box size would be;
+
+extern double     TP3Factor    = 2.000;
+	this is the TP factor for Trade #3 (TP3);
+	The same principles apply as for the TP1Factor input;
+
+Note: trades are sent by bundles of 3 trades, each having a different TP:
+	Trade#1 has TP1 target,
+	Trade#2 has TP2 target,
+	Trade#3 has TP3 target;
+	There is NO TP2Factor input;
+	TP2 is automatically set to be at half-way between TP1 and TP3;
+
+extern double     SLFactor     = 1.000;
+	this is the StopLoss factor for all trades;	
+	The same principles apply as for the TP1Factor input, except that it is a stoploss value;
+
+extern double     LevelsResizeFactor = 1.0;
+	this factor is applied to all TP/SL factors;
+	this can be used to widen or narrow all TP and SL values by the same factor;
+
+extern string     TradeComment="3 Tier London Breakout";
+
+
+extern int        MaxTradesAllowedPerSession=0;
+	Maximum number of 3-trades-series that can be open per session (re-entries);
+	A value of 1 means there will be only 3 trades open during this session (1 series of 3 Trades);
+	When MaxTradesAllowedPerSession is 0, there is no limit on the number of trades open per session;
+
+extern int        MaxLossesAllowedPerSession=0;
+	Maximum number of lost 3-trades-series per session;
+	A value of 1 means the EA will not open new trades after 3 lost trades on this session;
+	By the nature of the strategy, all 3 trades of series will end either all in profit, or all in loss;
+	When MaxTradesAllowedPerSession is 0, there is no limit on the number of losses per session;
+
+extern int        BreakEvenProfitInPips=1;
+	number of pips to lock-in when moving the SL to BE;
+	Trades #2 & #3 are moved to BE+BreakEvenProfitInPips when TP1 is reached
+	(Trade #1 should have reached its TP, unless the spread is high);
+
+
+extern string     martingale_sequence="0,1,2,5,13,34,89,233,610,1597,4181";
+	MARTINGALE multipliers sequence;
+	when the first multiplier of the sequence is 0, the Martingale is DISABLED;
+	In order to enable the Martingale sequence, you should remove the trailing "0,";
+	After a lost series, the size of the next open trades will be determined by the next Martingale multiplier,
+	in order to try to recoup the losses;
+	The Lot multiplier will continue to increase until the losses are COMPLETELY recouped;
+	When the highest multiplier is reached, it is used for all new trades until the losses are COMPLETELY recouped;
+
+
+extern bool       AutoMartingale=false;
+	Auto-martingaling mode:
+	When true, the Lot multiplier will be calculated so that the losses are recouped, and will add the current TP,
+	instead of picking the multiplier in the sequence;
+	This should make the Lot multiplier increase more smoothly, but there is NO LIMIT to the multiplier value,
+	which may become VERY HIGH and produce VERY HIGH RISK in the case of a high number of concecutive losses.
+	 
+
+extern bool       ResetMartAtFirstProfit=false; // when true, the Mart sequence is reset as soon as profitable trade is reached; else it will scale-in until recouped ALL losses;
+	The strategy requires to continue martingaling until ALL losses are recouped;
+	even when a series of trades end-up in profit, the pips recouped by this winning series may not recoup all past losses,
+	even in AutoMartingale mode;
+	This is because the 3 trades are open with the same SL, but different TP values.
+	If only TP1 is reached, and TP1Factor is less than SLFactor, then the won pips will not cover a past lost series,
+	and we should continue to martingale the next trades;
+	When ResetMartAtFirstProfit is true, martingaling will stop at the first profitable series, and the multiplier
+	will be reset to 1.
+	This limits the increase of the martingale multiplier, therefore limiting the risk,
+	but at the cost of possibly not recouping all lost pips.
+
+extern int        Slippage = 3;
+	slippage value in pips for each open trade;
+
+extern bool       brokerIsECN=false;
+	set this to true when your broker is an ECN, which do not accept to send orders with a SL;
+	Orders are open in 2 esparate actions to set to the SL;
+
+**** Settings for autonomously drawing the box and levels, similar to the Indicator's inputs:
+
+extern bool       ShowBoxes    = true;
+	set this to true to make the EA draw the boxes and levels just like the Indicator would do;
+	this avoids using the indicator AND the EA together;
+
+Colors for box and levels zones:
+
+extern color      BoxColorOK   = LightBlue;
+	color of the box when its size is "ok to trade"
+
+extern color      BoxColorNOK  = Red;
+	color of the box when its size is "NOT ok to trade"
+
+extern color      BoxColorMAX  = Orange;
+	color of the box when its size is greater than MaxBoxSizeInPips and LimitBoxToMaxSize is true;
+
+extern color      LevelColor   = Black;
+extern color      SessionColor = Linen; // show Session periods with a different background color
+extern int        FibLength    = 12;
+
+extern bool       showProfitZone = true;  // show profit zone in green 
+extern color      ProfitColor  = LightGreen; // profit zone color
+
+extern string     objPrefix = "LB2-";  // Prefixes of London Breakout Indicator objects;
+
+extern string     Gap="          ";
+
+
+Other martingale sequences, in decreasing aggressivity(risk) order:
+these "inputs" are not uesd in the EA, but only for informational purpose:
+You can can easily copy/paste those martingale sequences to replace the default sequence in set in "martingale_sequence":
+
+extern string     aggressive_fibonacci_sequence="1,2,5,13,34,89,233,610,1597,4181"; // =every second term of fibonacci sequence;
+extern string     powers_of_2_sequence="1,2,4,8,16,32,64,128,256,512,1024,2048,4096";
+extern string     fibonacci_sequence="1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597"; // F(n)=F(n-1)+F(n-2);
+extern string     mild_fibonacci_sequence="1,2,3,4,6,9,13,19,28,41,60,88,129,189,277,406"; // F(n)=F(n-1)+F(n-3);
+
+=======================================================================
+
+
+Squalou
+

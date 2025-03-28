@@ -1,0 +1,1499 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hi traders On the picture # post 2, we can see the moves of the 8 currencies during a session. The main methods to trade are to wait for a cross of 2 currencies and to take position in the good direction. Unfortunately I have never had good results because after a cross often occurs a cross in the other direction. So I have tried another method thinking that if a currency is very strong (or weak) compared to others, its move is over or almost. But I needed a good indicator to compare the strenght ( or the weakness ) of the currency compared to others. Ezios made it ...thank you. This indicator modified by Ezios displays 2 important parameters : DeltaUp and DeltaDown. Explanation : Currency in 1 st position ; Value of Upper Currency (VUC) Currency in 8 st position : Value of Lower Currency (VLC) Average of the 7 Others Currencies : ( A7OC ) Calculation: DeltaUp = VUC - A7OC and DeltaDown = A7OC-VLC. You understand how is calculated the strenght or the weakness compared to the 7 others currencies. Example : On the picture # post 3 , the upper currency is USD with 7.0. The average of the 7 others is ( 6.6+5.9+5.1+3.7+3.1+3.1+1.4)/7 = 4.1 So the DeltaUp is 7.0 - 4.1 = 2.9....same calculation for DeltaDown. More the Delta is high more the probability of return of the currency to others is great. Practice : I live in France... so the London session is perfect for me...30 mn before open until NY open...sometimes later I set delta = 4.4. As soon as the DeltaUp or the DeltaDown reaches this value, the indicator displays the order. If DeltaUp &gt; 4.4, we sell Upper Currency basket. If DeltaDown &gt; 4.4 , we buy Lower Currency basket. To trigger the orders, there are many tools. I use Dashboard Power Meter V3 cust_Curr. Sometimes at the beginning the market is going against us. I trigger another order at delta = 4.8 and another at 5.2. Of course, a SL is an absolute need. You can see another indication on the indicator... Delta 1/8. Delta 1/8 is the calculation of the upper currency versus the lower. The good value of Delta 1/8 is 7 or higher. In this case, the indicator displays the order. So you can trade only the pair and not the basket. Close : Depending your trading style. I'm waiting for a position of the currency in middle of board ( position 4 or 5 ) to close the trades. I suggest strongly too the use of a lock tool to protect your gain ( see post # 39 ) Currently Ezios and faryne are working on an EA to automate the trades with the same trigger as the indicator and 3 levels of delta. For instance with USD upper currency 1 st sell USD basket at 4.4... 2 nd sell USD basket at 4.8 3rd sell USD basket at 5.2. Of course, the levels of delta can be set by the trader according his trading style ( spacing out the deltas during the periods of volatility ) If some coders want to work with us, they are welcome to improve Gabin System. Warning This thread is only for education purpose and you have not to go to live account. Gabin System is a countertrend system used to catch a reversal currency move. So it is risky especially during the periods of volatility. The provided tools in this thread are also for testing and haven't to be used in real account. But if you understand the logic and use Gabin System with your brain avoiding news, with good settings, a correct SL and a lock tool, you can make some decent pips regularly. Enjoy it. Many thanks especially for Ezios, faryne and gvc, the creator of the dashboard below. Don't forget to leave your appreciation on the poll above
+
+--- 帖子 #2 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #3 ---
+Attached Image Attached Image
+
+--- 帖子 #4 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #5 ---
+Example of a good trade
+
+--- 帖子 #6 ---
+...looks interesting, wish you good luck !
+
+--- 帖子 #7 ---
+Thank you. The main difficulty in this system is the entry. We need a good entry to avoid a too important DD. So sometimes we have to add new baskets in order to average. I suggest strongly baskets with small lots. Syndicat, a member, tried the system this week..... IMO DD too big but good results https://www.myfxbook.com/members/Str...ndmade/2421353
+
+--- 帖子 #8 ---
+@Madscalp Nice to see that somebody is playing with currency strength numbers and devising formulas to pinpoint triggers. My "first love" in forex was basket trading. Since a couple of years, my trading is almost exclusively based on currency strength / weakness. Here's my take on what you propose... First and foremost, it is important to understand that this system is countertrend basket trading, using reversion to the mean as main trigger. I am not too sure if this is a good idea (combo of basket and countertrend). Baskets - with the exception of USD - are comprised of 1 major and 6 crosses. i.e. EUR basket: EURUSD (major), EURAUD, EURCAD, EURCHF, EURGBP, EURJPY, EURNZD (6 crosses). What is the common denominator in crosses ? Depending on what the USD is doing, once a couple of crosses start "motoring", they can get to hefty ATRs. i.e. look at the daily range of EURAUD, EURCAD, EURJPY, EURNZD as opposed to the major (EURUSD). Graphically, here's what the "interconnection" looks like. Attached Image (click to enlarge) Back to this "motoring" thing. You go countertrend on a EUR basket, but what if the bottom falls out and EUR tanks across the board ? The crosses will very possibly start tanking big style (read: going against you). Not 1 cross, but mostly 3 to 4. Now for your formula part. Delta up, Delta down, Average Other Currencies, etc. The currency strength meter you are using (FWIW I am using the same): 8 currencies, arithmetic mean = 4.5, the sum of the 8 currency values is always 36. Knowing this and plugging a simple formula into Excel, it's a piece of cake to calculate your initial trigger. Attached Image (click to enlarge) You will buy a first basket when the "weaker currency" value is 0.8. At that value, your delta down &gt;= 4.2. In terms of money management, let's assume that you have a $10K. A conservative (total) lot size for a basket would be 0.10-0.14. Chopped up in 7 pairs that would be 0.02 lots per pair. So, I will replay your trading scenario in slow motion. Please bear in mind that this is not a "black swan" scenario. This scenario will play out at least once per month, but usually 3-4 times. Friday 9 Feb. The time you see in the screenshot of my EAs log file is your (and my) local time. GMT +1. London opens, apparently shortly there is some high impact news on the GBP. Nice, this is maybe going to move things a bit. Let's see what direction the market takes. Attached Image (click to enlarge) Took a while, but your patience is rewarded. Three hours into the London session, at 12h14 to be precise a GBP long basket is triggered. At that moment, GBP CS (currency strength) dips below the 0.8 value. Attached Image (click to enlarge) About 40 minutes later, time to open the second GBP long basket. GBP currency strength value prints 0.40 Attached Image (click to enlarge) Still no pullback, but patience. Reversion to the mean will come, right ? Well, about 1.5 hours after NY open, we get the six sigma event. GBP currency strength goes below 0.1 and a third GBP long basket should be opened. I am not going to run the drawdown numbers, but seeing that there was an additional drop &gt;100 pips (GNPAUD, GBPCAD, GBPJPY) things look rather nasty. Just my thought of course, but a basket of currencies in combination with countertrend trading is something that can very easily spiral out of control. Happy (basket) trading ! LuXing
+
+--- 帖子 #9 ---
+Thx Luxing for your opinion...it's very precious Of course, this system is still experimental...I forgot to say it ...only demo ..no live...no overnight trading...no trading during news (currently GBP is very volatile) I have given a link of trades this week with 40 % profit. For me this trading is too agressive but I think that it's possible to make 1 % daily with a good management without news. I agree with you about issues because last tuesday JPY has been very strong during all the day dropping very late. In these cases, we have to accept a breakeven or a small loss: that's what happened. But your experience is precious since you tell that this "black scenario" can occur 2-3 times a month. So we need a SL. With a daily profit of 1-2 % and a SL (balance - equity) of 5 %, it's still profitable. Once again, we have to beware of the news in London session to optimize the trading. What's your trading approach with the currencies ?
+
+--- 帖子 #10 ---
+thank you Luxing for your contribution. We will try the system in demo step by step to understand the levels of trigger, take profit and stop loss to apply. Preparing me to transform the indicator into ea I post a last version where i put a black background box to hide the lines of graphic that disturb the vision of the values. I cutt off from the input x and y axis because i want all this in fixed position. I will continue the ea adding step by step what we need.
+
+--- 帖子 #11 ---
+At the moment I try to trade all signals when there is a possibility is at the computer , irrespective of sessions.
+
+--- 帖子 #12 ---
+"this trading is too aggressive" Yes it is. As a rule of thumb, consider 1 basket as a single trade. For conservative lot sizing take 0.1-0.15 lots / $10K capital, aggressive lot sizing 0.2-0.3 lots / $ 10K capital. Aggressive would be for example 0.21 lots / 7 (pairs in the basket) = 0.03 lot size per pair. For this sort of system it is essential to control the downside (DD). Overszing / overlevereging will kill it. "you tell that this "black scenario" can occur 2-3 times a month" It's not really a doom scenario, but part of market behaviour. This is why martingale systems eventually crash during extended moves. When I say 2-3 times a month, what I am really saying is that a series of correlated pairs move well beyond their 5/10/20 day Average Daily Range. If you get trapped on the wrong side, you will have to cater for this (trade small). "What's your trading approach with the currencies ?" I do exactly the opposite from what this system does. That is, based on currency weakness I go short (with the trend) whilst this system would go long (contrarian) expecting mean reversion. In essence, IMHO this system could be very successful using the "right" settings. Testing and fine tuning a system is very tedious as there are many variables with many different combinations. A good way to narrow down settings, variables, is by taking screenshots of key numbers at certain intervals, logging data, etc. To conclude, I will give you one important pointer. As I said, I do exactly the opposite from this system. Pareto rule: 80% of my system's trades are during the Asian session and the first hours of London. Very few trades after NY opens. When should your system take the majority of trades and why ? Look at the charts in this post Bottom left is (a variant of) the xADR renko indicator. If (using the xADR indicator's standard setting of 20%) room up/down is exceeded it will light up in red. It means a pair is far up in its range and I / my EA will not trade this pair anymore because trading is about maximising possibilities. What do you think "your" system should do ? Hope this helps you a bit in the right direction. Good luck. LuXing
+
+--- 帖子 #13 ---
+Hi luxing I'm not sure I understood your way of trading with TMM....no matter. I agree with you this system is a countertrend trading but when the delta is big I'm considering that the move is enough important and that the probability of reversal seems high. Nethertheless , i agree , we need a stoploss . If members are interested by this method, let's see their results in next days. If they are bad, let's forget.
+
+--- 帖子 #14 ---
+The momentum is reflected in the price. The graph is about correlation. (Nicely done, post #8) because it is my experience of its veracity. A system should be good if reflect price action, the closer to the price; the better the system. Then, no need to look for correlation. Keep it simple. If you still looking for an entry then concentrate on the graph of post #5. meaning, a filter is necessary. Now, if you decide to use the correlation you can be sure it is real. The logic of your system is very good things happens as you pointed out.
+
+--- 帖子 #15 ---
+Strategy currency strength profitable and promising direction in trading. I have an Advisor who trades on this strategy.Only manufacturing is not the basket of orders, and the individual currencies. Here's a look monitoring: https://www.myfxbook.com/members/Str.../fx-60/2402826
+
+--- 帖子 #16 ---
+Hi LuXing Please could you give any examples of your strategy and your W/R ? Many thanks.
+
+--- 帖子 #17 ---
+Can you maybe explain this strategy a bit more in-depth.
+
+--- 帖子 #18 ---
+Knowing CSM have that calculation made but not showed ( only shows arrows ) but other systems like EAX uses that approach then what is the new here?
+
+--- 帖子 #19 ---
+Post 1, post 18 https://www.forexfactory.com/showthread.php?t=532236
+
+--- 帖子 #20 ---
+Hi man...calm I sell nothing. These tools are available in FF. Really a big thank at the creators mainly gvc.
+
+--- 帖子 #21 ---
+do not mind me please. since some time everyone is a suspect for me out of this yes your new aproach is ... good
+
+--- 帖子 #22 ---
+the only file ex4 provided here is the Ezios' s work but luXing showed that a single CM_Strength may be enough.
+
+--- 帖子 #23 ---
+exactly. I want to follow the rules of madscalp and to build an auto trading ea for this rules and we will see how this will go. if someone wants to trade this system manually there are already the tools to do it.
+
+--- 帖子 #24 ---
+Thanks Ezios. Don't forget 3 levels and a SL.
+
+--- 帖子 #25 ---
+Not the best of ways to determine if a strategy has potential (unless traded 100% mechanically using the same EA, .set file, and broker). Give a strategy to 10 different traders, they will all have completely different results. You want to be basing your decision on that ? My strategy ? As outlined in post #8, it is based on currency strength / weakness, going with the trend (away from the daily open) strongly biased toward shortselling. It is documented in &gt; 1000 posts, many of which include rationale and screenshots, in this thread. W/R ? If you refer to win rate, this is a totally irrelevant performance metric. What if I were to tell you that my system/robot has a 92% winrate ? But based on a sample size of 100 trades I have 92 winners x 5 pips = 460 pips. The 8 losers x 100 pips SL = -800 pips... Is this system profitable ? Could be, but that would depend on the position size of each trade... Even the number of pips is not a good performance metric. Last time I checked, my mortgage had to be paid in €€€, not in win rate % nor in pips. Without going into too much details, profit factor, peak to though drawdown, % equity growth measured over an extended period are far more revealing for a trader/system performance. Read Van Tharpe's "definite guide to position sizing" book. Even though it's 10 years old, it's an excellent manual to measure a strategy's performance (or even 1 strategy traded using an infinite number of settings). Decent results. But... Not much point in posting a demo TE and hiding your entries. If you are afraid of some Chinese guy reverse engineering your EA, better not posting the link to the TE in the first place. Unless of course the TE is to attract investors, in which case it should be a real account and your post belongs in the Commercial Section. Observations at a quick glance (before you were hiding your history): 6 trading days, 200 trades in total of which half involved scaling in. Need bigger trade sample size (z-score it), I haven't seen control mechanism for the downside (equity stoploss of 40% ?). Happy trading guys. LuXing
+
+--- 帖子 #26 ---
+@ Luxing I know the best system in Forex is to go with the trend...with the currencies too. But the problem is that I don't know when the trend starts . Nobody knows it. With the excellent dashboards available in FF, I have tried also methods to determine the entry. Sometimes it's working sometimes it's too late...the move is over. A trading style is based on the probability of win with decent signals. I don't know the signals of the beginning of a trend...you maybe ? So I'm thinking that when a currency is very strong ( or very weak ) versus the others, there is a probability of reversal under certain conditions ( no news , good money management, SL ) Even a simple pullback can be profitable with a lock tool....it's even better if the trend change totally. Every method has its own risk...yours too. I understood that you don't like the system. ...you have warned the readers...thank you.
+
+--- 帖子 #27 ---
+Madscalp we want to make this system as simple as possible. so i will put in the ea only the needed.lot size, magic number, stop loss in currency, take profit in currency, and the signal delta delta1 and delta2 where the ea must to open the 3 baskets. perhaps also a buttom close all is useful when one wants to stop all and close the ea. and this ea will work only for demo accounts. work in progress....
+
+--- 帖子 #28 ---
+Beautiful and much writing but the practical advice is not given and only expressed their criticism. To listen to your advice, I would like to make sure that your strategy is profitable. Show me monitoring? In this topic no one nothing not sells. We are trying to improve this strategy.
+
+--- 帖子 #29 ---
+You are right...the LuXing's warning is heard but his strategy seems logic, not yet profitable.
+
+--- 帖子 #30 ---
+Correct. Lot size is important because the basket have to be composed with small lots (0.01) to make the average.
+
+--- 帖子 #31 ---
+Hi Madscalp . Today I started trading in the Asian session. Sold AUD, NZD, bought JPY, USD - closed at a profit
+
+--- 帖子 #32 ---
+Yes I have seen a signal buy JPY at 6:40 GMT outside my hours of trading. What's your delta ?
+
+--- 帖子 #33 ---
+4
+
+--- 帖子 #34 ---
+Maybe you can set a bit more....
+
+--- 帖子 #35 ---
+I, too, think increase until 4.5
+
+--- 帖子 #36 ---
+For any reason, the Dasboard PowerMeter V3 is not working currently ....and you ?
+
+--- 帖子 #37 ---
+I have works
+
+--- 帖子 #38 ---
+I set again and it's OK now...CPU issue on my computer ? Arrrgh I missed sell AUD a bit after London open
+
+--- 帖子 #39 ---
+Discussion about the London session today : I say again: - my time of trading is 30 mn before London open until NY open - my delta is 4.3 then 4.6 then 5 Today according with the rules...only 2 possible trades ( I missed both due at a computer issue ...no matter ) - Sell AUD basket a bit after London open AUD first dropped to go up again I strongly suggest to use a lock tool...I'm using the settings of the dashboard but you can use another EA ( see below) so when your trade is in a positive territory, you have to use it to protect your trade for AUD it was a simple pullback but with a lock tool you get a small profit or a breakeven - Buy JPY basket a bit before 10:00 GMT same thought Quiet day...bad for trading..I'd just gained a few pips selling USDPY and AUDJPY at LO...on another computer...lol The session is not over but I wait nothing. Have a good day. Beware of overtrading.
+
+--- 帖子 #40 ---
+Finally I repaired my computer and I've shorted USD in NY session ( just for test ) ...2 baskets daily goal reached....350 pips
+
+--- 帖子 #41 ---
+Excellent post!
+
+--- 帖子 #42 ---
+Good night buys, the first version is ready. Keep in mind that it works only on demo account and it will open baskets following the rule of madscalp. when it reaches first loss or first gain it will not open more baskets. if you want to trade more you have to remove and restart. ok? enjoy it and let me know about the results. as it is a automatic trading no time filter only takes signal. no more than 1 basket for every signal detected. bye.
+
+--- 帖子 #43 ---
+"I know the best system in Forex is to go with the trend...with the currencies too." “Best” is subjective, to say the least. Fan boys of trading with the trend are firm believers of Newton’s laws of motion but not everybody’s a fan of Isaac Newton. "But the problem is that I don't know when the trend starts . Nobody knows it." I agree with you: nobody knows when the trend starts. I will even take this one step further: nobody knows what a trend is !!! Is a trend a H1 candle starting at minute zero ? Or maybe a never ending floating 60 x M1 tendency ? Is it the direction of EURUSD since the inception of the Euro ? "With the excellent dashboards available in FF, I have tried also methods to determine the entry. Sometimes it's working sometimes it's too late...the move is over." There is a great collection of dashboards on FF, made by really gifted coders. To my knowledge, none are (consistently) profitable in full automatic mode. If there was one, Forexfactory would be out of business because we would all be filling our pockets, driving Ferraris and having cocktails with the most gorgeous women. As you said, it works until it doesn’t. But then, I think there is no such thing as “one size fits all” (read: 1 .set file for a dashboard EA is suitable for all market circumstances). That is usually the point where traders start curve fitting and devising conservative, moderate and aggressive set files for a robot. "A trading style is based on the probability of win with decent signals. I don't know the signals of the beginning of a trend...you maybe ?" Yes, of course I know the signals of the beginning of a trend. I am not being a smartass here, but the answer is very simple: look in the mirror… You, and only you decide whether or not the trigger should be pulled for a trade on your account. Pulling the trigger means that a pre-defined set of criteria signals a “GO”. Who is it who defines these criteria and who defines when these criteria are met ? "So I'm thinking that when a currency is very strong ( or very weak ) versus the others, there is a probability of reversal under certain conditions ( no news , good money management, SL )" I agree 99%. The 1% is regarding news. It can be your friend in a trade, but also cause nasty slippage or high DD if things do not work out the way you thought. “Even a simple pullback can be profitable with a lock tool....it's even better if the trend change totally. ” Yes, you can trail. Have to give it room to breathe though. % of ATR could be a decent measure. Again, trend change ? What is a trend ;-) “Every method has its own risk...yours too. ” Of course, we would not be trading if we were not embracing the fact that each trade has an uncertain outcome and risk. That goes – without exception – for all trading strategies. My strategy is certainly not an exception. “I understood that you don't like the system. ...you have warned the readers... thank you.” You’re welcome but you misunderstood. It’s quite the contrary. I like systems that have an edge and I believe that this system has an edge. We just differ on how to exploit that edge. I discreetly gave a hint on the exploitation of one of the aspects of the edge in post #12. Most will agree that if an edge is not exploited properly and/or if the downside (DD) isn’t strictly controlled the edge and therewith the likelihood of profitability is gone. Maybe. Maybe not. Who is to say, after all it’s mostly the blind leading the blind in FF. LuXing
+
+--- 帖子 #44 ---
+hi Ezios ! Good job, I checked the shopping cart opens correctly! I propose to add the selection function of a basket of currencies(AUD/NZD/EUR/JPY/AUD/USD/GBP/CHF) at which it will trade, I open the recycle bin by drawdown in percentage, I think it would be better.
+
+--- 帖子 #45 ---
+On my side the EA is not uploading; maybe I am missing something. I will check again. HOWEVER I opened the trades manually. I had a USD basket during Asia session and closed with 100 plus pips profit. I later got AUD basket and it is currently running. Will update result by close of business after trading London and US sessions
+
+--- 帖子 #46 ---
+i dont want to put any button on this robot apart that there are. this is a full automatic sistem. if ou have a signal to add and a trigger rule i can add the trigger rule and the signal but no buttons. if ou want to trade with buttons in ff there are toons of dashboards. try this robot for the original setting or change the risk/reward as you want. that's all.
+
+--- 帖子 #47 ---
+Don't need buttons. You need to install one copy of the EA for example for the AUD basket, another copy for the NZD basket, and then The EA closes a basket of different currencies all together. you need to close the basket for each currency separately. error: 2018.02.20 15:36:30.847 '29660177': order sell 0.01 EURGBP opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] me_TradingDashboard v3.mq4 - Ezios this panel is not working correctly. I already wrote about it
+
+--- 帖子 #48 ---
+Is it possible to set a TP/SL on each open basket (for now, the TP apply on all open orders, so it can be 1/2/3/... baskets). (+ add a reverse option to trade trend instead of mean reverting) Thanks
+
+--- 帖子 #49 ---
+this indicator works very well...I have filter a way to use it to minimize continuous drawdown...Thanks to the originator of this indicator...I will keep posting on anything new i found on this...it will be good if you can code the one we can select time frame like 30 min to 1day
+
+--- 帖子 #50 ---
+Thank you Ezios for your work. Currently the EA seems to open the baskets correctly...to see over time if there is not issue. Later -it's true - you can do a close basket by basket and a close all emergency....it would take a dashboard ...hmmmm. Take your time...you're the only coder here. @ syndicat I don't understand all about your trades you don't close always your baskets ? overnight trading ? https://www.myfxbook.com/members/Str...ndmade/2421353 @ LuXing who said "Who is to say, after all it’s mostly the blind leading the blind in FF." I like this philosophic thought...happily there are a few one-eyed men in FF
+
+--- 帖子 #51 ---
+I begin to trade during the Asian session my time zone is GMT + 8
+
+--- 帖子 #52 ---
+Ah OK you are russian. Greetings from France.
+
+--- 帖子 #53 ---
+I'm from Russia. Greetings from Siberia. This is lake Baikal.
+
+--- 帖子 #54 ---
+Hi Ezios, I tried your EA today. It went very well. You write that when it reaches first loss or first gain it will not open more baskets. It will. It reaches gain and EA opened another basket without restarting EA. Let's see how it will go! Here are the results.
+
+--- 帖子 #55 ---
+in theory it may not occur but perhaps if our platform disconnected after the make profit the ea restarts and make the task. but if the Platform dont disconnect the ea stops. so i am glad that is going well.
+
+--- 帖子 #56 ---
+i repeat. i dont want to make dashboard. the thing i can do to trade basket for basket is to insert in the next version an input string TradebBasket="aud,usd,jpg,...." where you can select wih basket to trade but keep in mind that you have to attach the same ea to each graph if you want to trade a basket at a time and in each chart you have to use different magic number. this is the more easy way for me to do it. i have no more free time.
+
+--- 帖子 #57 ---
+Thank you so much for posting your results; it confirmed that I was going the wrong direction with my trades which I was trading manually. . So my results should improve from now onwards
+
+--- 帖子 #58 ---
+the next version an input string Tradebasket= " aud,usd, jpg,...."- This is what I and asked!!! I see you took the code from this: me_Trading Dashboard v3.mq4 I already many times spoke that in this panel works with mistakes mistakes!!! Did you take lines of code from him??? This error was in the pwtcea Advisor today error:2018.02.20 15:36:30.847 '29660177': order sell 0.01 EURGBP opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] Similar error I had with me_Trading Dashboard v3.mq4 here is an example of early: 2018.02.13 18:36:30.718 '60051764': order sell 0.10 EURCAD opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.13 18:25:51.752 '60051764': order buy 0.10 EURGBP opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.13 16:32:48.243 '60051764': order sell 0.10 EURUSD opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes]
+
+--- 帖子 #59 ---
+this error i think depends from the broker. in my broker there is no so error because the broker dont accept the sl and tp = 0. anyway i will look to my log if there is the error. i ask to you all if you find this error... surely is from your broker.
+
+--- 帖子 #60 ---
+Experts tab: 2018.02.20 19:40:23.374 pwtcea AUDUSD,H1: ButtonCreate: failed to create the button! Error code = 4200
+
+--- 帖子 #61 ---
+no, try it on a fresh chart, as the error code 4200 means "Object already exists", the buttons were created but this error has not hing to do whith the stop loss error is an error on che chart.
+
+--- 帖子 #62 ---
+2018.02.20 20:46:36.553 pwtcea EURJPY,H1: ButtonCreate: failed to create the button! Error code = 4200
+
+--- 帖子 #63 ---
+dont know... perhaps your setting of chart... in my Platform no this error and no ettor noting so i cannot help... sorry.
+
+--- 帖子 #64 ---
+Here's a clean platform 2018.02.20 21:11:01.530 pwtcea AUDNZD,H1: ButtonCreate: failed to create the button! Error code = 4200
+
+--- 帖子 #65 ---
+@Ezios: button create problem can be easily resolved, just make an object delete before create the button
+
+--- 帖子 #66 ---
+this system has no real edge. it works well when market is weak, but will kill the account when strong trend takes place it is purely luck-based system in this form
+
+--- 帖子 #67 ---
+this evening when i come bacik from office i will see my Platform if the log gives some errors but , as no one in this tread reported this , i suppose its only yours problem. if i report the error from me i will try to help but , i repeat , if i have not the error i can not help.
+
+--- 帖子 #68 ---
+Yes we know it. We are waiting for the death... Seriously there is a SL in the system like in all system. Currently we are testing to avoid a death trade or to minimize the loss. Without news, the system is working nicely but on 9 Feb, GBP has dropped hardly during 4 hours. To be honest, I'm waiting again for a same event to judge the method. Maybe a Without News System ?
+
+--- 帖子 #69 ---
+Ezios...just a request for the next version : the EA have to stop itself after a SL maybe can you introduce a reset fonction if the user wants to trade again ? @ syndicat I see on your fxbook on 7 trading days : balance 62 % and equity only 42 % ...is it correct ?
+
+--- 帖子 #70 ---
+i'm not sure if i can do this. surely when stop loss occurs i will remove the ea from the chart and is the responsabilty of trader to restart the ea. i can continue to trade if the gain is hit until stop if it is this the sense.
+
+--- 帖子 #71 ---
+updated monitoring
+
+--- 帖子 #72 ---
+I didn't need SL as far as now...so the EA can start again after a SL ?
+
+--- 帖子 #73 ---
+Triple negation is the first that comes to my mind. A bit confusing, but duly noted: I shall give no more constructive criticism. Mmm, I hate to break the bad news, but statistically in the long run no strategy is profitable . If any, it’s the trader who is profitable (or lucky). Statistical proof in this excellent post . Monitoring of what ? Of my trading account(s) ? That will not make you better traders, nor will it improve this strategy. You are absolutely right to ask somebody for “transparency and proof” if a Fool’s Factory member is selling some junk robot, a service or trading other people’s money. That’s not my case though. Back to the “trying to improve this strategy”. My robot does the exact opposite of this strategy. Hopefully the entries it took in full auto mode can somehow help you guys in finding a sweetspot for entries. I have blacked out some irrelevant information, but the most important (Currency Strength) is printed in the comments column. Attached Image (click to enlarge) Happy basketing. LuXing
+
+--- 帖子 #74 ---
+if i program the nest version to remove itself after a sl obviusly cannot restart by itse.f as it is now if the sl occurs no trades. the only thing is... if the Platform disconnect after sl it will be the ea to continue trading. so it is necessary after sl that ea remove itself if we want to be sure not disaster.
+
+--- 帖子 #75 ---
+I made my own version with some "modifications": -button for close all orders, -button for close each basket, -tp/sl set for each basket (not all open orders) -parameter to "reset" each pair from last open basket (in hours). Let me know if you're insterested. Attached Image (click to enlarge)
+
+--- 帖子 #76 ---
+Many thanks for your post. I see really many good trades with small TP...however it seems not exactly a basket trading It's funny because our both opposite systems are winning today. Maybe a mix of the both ?
+
+--- 帖子 #77 ---
+you very fast coder. and the trigger signal? as mine or manual?
+
+--- 帖子 #78 ---
+I'm thinking it's a adding tool. Welcome faryne. Of course, it's surely useful.
+
+--- 帖子 #79 ---
+For now same logic with 3 steps. I also added a reverse button for news trading for example (hard strong trend), and maybe a parameter to trade trend and mean-reverting same time on different step. Here is the ea. (Some details: I removed the "delta_18", and magic numbers are calculated in the code (for basket management)).
+
+--- 帖子 #80 ---
+wow.... very promising tool... i would not be able to realize this... you very clever coder.
+
+--- 帖子 #81 ---
+Woooh it's a complete EA. Congratulations. What's about reverse button ? I was not in front of my computer and the EA has opened these 14 orders ? it seems according with CHF ?????
+
+--- 帖子 #82 ---
+Thanks, that was a problem. Fixed. Reverse is in parameter. Also added magic number to use EA with the two modes (on 2 different charts) in same time.
+
+--- 帖子 #83 ---
+the issue was that it was not CHF baskets you seem to show some interest for this tool ...for reverting_all option ?
+
+--- 帖子 #84 ---
+ok guys i post version 2. - eliminated the issue of the buttons - create string input for selecting the basket to trade or not - when tp is hit ea continue to trade - when sl is hit ea remove itself from chart. could be easy to do version 2r with the signal reversed so.... only to test the results. I continue to believe in madscalp approach until my demo account will be blown
+
+--- 帖子 #85 ---
+good...it's to avoid to come back in the market if there is a very big move if you trade cautionly avoiding the news...why not ! there will be sometimes the use of the SL like in all system. What are your results in demo ?
+
+--- 帖子 #86 ---
+Hi Syndicat. Did you manage to resolve this error. I am getting the same error: "2018.02.20 23:06:49.023 pwtcea_v2 USDJPY-,H1: ButtonDelete: Failed to delete the button! Error code = 4202" Please let me know if you managed to resolve the error
+
+--- 帖子 #87 ---
+i will going to fix also this... it's error in the functions.
+
+--- 帖子 #88 ---
+these are annoying but unconsistent errors ... now it should be fixed..
+
+--- 帖子 #89 ---
+Excellent work!!! Can add a function to lock profits?
+
+--- 帖子 #90 ---
+Hi traders Beware of GBP news today at 9:30 GMT. I'd like too to thank Ezios and faryne for their work.
+
+--- 帖子 #91 ---
+Good morning, how is it going? from my sie all right. i am running version 2 on my demo account and actually 5 basket open. This night 2 profits. I wait for the first stop loss.... Madscalp you think the friday we have to close the ea or to leave running?
+
+--- 帖子 #92 ---
+Hi Ezios I suggest for settings 4.4 ...4.8...5.2. About friday, my answer is no, don't forget we are in demo...so for testing. We need to test news. I'm thinking about a new option: it's a bool "basket limit option": for instance, after 3 or 4 or 5 basket open, the EA doesn't open new baskets (IMO easy to code)
+
+--- 帖子 #93 ---
+Ezios thank you now there is no mistakes. Put to the test
+
+--- 帖子 #94 ---
+Hey Fatso! Ezios has fixed, now there is no this error. Post 88
+
+--- 帖子 #95 ---
+Thanks; I will test it later after work.
+
+--- 帖子 #96 ---
+Hi faryne Your EA doesn't work properly. The rules are 1st level open 1st basket ...2nd level open 2nd basket....3rd level 3rd basket So in all no more 3 baskets. 10 mn ago, your EA has opened more 7 baskets AUD....happily in profit
+
+--- 帖子 #97 ---
+Yep, just see that. That was a big position. Currently working on it.
+
+--- 帖子 #98 ---
+take profit doesn't work either...
+
+--- 帖子 #99 ---
+Ezios if I select one basket to trade the EA does not open trades...
+
+--- 帖子 #100 ---
+Hi syndicat I didn't trade at 7:30 GMT during asian session. There was probably a sell USD at this time. Have you taken it ? because it has dropped nicely
+
+--- 帖子 #101 ---
+Yes, I sold the USD and closed with profit. I'm starting an experiment with lock-in profits.
+
+--- 帖子 #102 ---
+Sure.... it's a good idea. I suggest at least a breakeven option in positive territory to protect the trade. A lock tool is sometimes useful ...better a small profit than risk a big reversal....see post 39 #
+
+--- 帖子 #103 ---
+i dont fully tested that way but the program will trade the basket only if there is the signal for that basket otherwise no trade. if this dont work i will look for.
+
+--- 帖子 #104 ---
+madscalp as i have programmed the basket open is max 6 because the program opens a basket for every possible signal regardless the currency. the possible signals are 6 3 for delta up and 3 for delta down so in my intention was so.... but this morning i had a problem at my plaform i saw some floating operation that had to be closed... perhaps there is an issue with the stop loss. this evening i will look for this. it s very difficult to program an ea and to make it to go in perfect way... but finally we will succeed.
+
+--- 帖子 #105 ---
+Here is my latest release. Bugs are fixed. I added a breakeven parameter to lock profit @1, and the standard deviation of curencies's strenght to get the "volatility" of forex. It may be a condition to mean reverting. Let me know if everything works well.
+
+--- 帖子 #106 ---
+in teory if we attach in a chart the system counter trend and in another chart the system in trend when counter trend goes stop loss the trend goes in profit so... but with the fluctuation of market ic can happen both system go in profit in different times... i think this is the final solution to have both strategis working together. with Medusa it can be done. ...
+
+--- 帖子 #107 ---
+My idea was to choose the one to trade by the market condition. Working on standard deviation right now.
+
+--- 帖子 #108 ---
+Good thinking ! Getting in interesting territory. Might be a good idea to adjust stdev to cater for volatility decay over time ;-) Jonathan Kinlay explains how you could do that in this article . Of course I am not saying you should, but once adjusted you could maybe think about plenty of neat things such as statistical outliers, ... LuXing
+
+--- 帖子 #109 ---
+Don't worry Ezios you make a wonderful work For any reason a buy GBP didn't open with a displayed signal Could you check that too ?
+
+--- 帖子 #110 ---
+Today, I have not opened AUD
+
+--- 帖子 #111 ---
+The previous version was working fine...minor issue. We ask too many things at the same time. Let our buddies fix the issues quietly.
+
+--- 帖子 #112 ---
+faryne what is the responsibility of this parameter - add new trades ?
+
+--- 帖子 #113 ---
+SM at some point realize this and give a good alternative in this post
+
+--- 帖子 #114 ---
+Nice suggestion. I'm a huge fan of statistical trading. If "false", any new trade will be open (but still profit/loss management). That let you change other parameters (like TP/SL) without reset the timer and reopen same basket.
+
+--- 帖子 #115 ---
+hi guys am in on this. could you pls show your trades with chats for us to understand.
+
+--- 帖子 #116 ---
+difficult to answer.. the display signal was meant for manual trade. when you introduced the logic of 3 steps i did not updated the dispoay signal upon this logic so the signal is display when deltaup &gt;= delta or deltaup &gt;= delta regardless of delta1 and delta2. so.. it depends on wat was this signal and wen and how many basket were opened... I told you no more than 6 basket
+
+--- 帖子 #117 ---
+So for you all is OK in the last version v2 to open trades ? You are welcome. Currently this thread has 6 pages. You can find the spirit of the method. No need charts.
+
+--- 帖子 #118 ---
+yes. unless the string of selection of currencies gives some issue. i did not test it fully. this evening i will do some try and if i see dont working this string is better i remove it. the main goal is to make the system working for all currencies.... we will se... i dont want to co mplicate the task ... e
+
+--- 帖子 #119 ---
+no problem as said above, the EA didn't open a buy GBP with my settings....I don't know why...maybe a mistake from me but I had no basket open at this time many thx jusiur for this link but it seems relevant for a pair no a basket...what do you think about ? interesting concept and in addition certified by LuXing....wooooh surely a good add Gripping reading...I see that your trading style is widely inspired by this theory...small TP big SL Do you note a positive effect in practice ? How do you advise the introduction of this notion in basket trading ? because you trade only pairs
+
+--- 帖子 #120 ---
+faryne You can add moving breakeven? step 4 ? Was opened on 1 shopping cart at AUD value of -4.2, then the value was -3.5 and the achievement of the second time value -4.2 Advisor again opened the basket purchase AUD.....
+
+--- 帖子 #121 ---
+Weird, I had same basket but only open once. Remember that once "Must Wait" is NULL, all signal are reset. So it could take step1 again. Here is the version with breakeven value in parameter (so not trailing, you must change it every time you want). I also added a normalized version of VUC/VLC (SDV) which isthe number of standard deviation exprimed. And the hurst exponent. Don't know if it will be usefull, but I'm testing.
+
+--- 帖子 #122 ---
+Hi Ezios or faryne . I would like to kindly request a SOUND ALERT to the indicator. I am trading manual; so during the day when I am at work I depend on the email alert. However for Asia session its early morning/ just after midnigh t here in South Africa and I will need a SOUND ALERT to be alerted when trading opportunity arises so I wake up to place trades. Your EMAIL ALERT is doing great for me....I just need the SOUND ALERT for ASIA SESSION. Please
+
+--- 帖子 #123 ---
+Hi faryne, I am trying your Ea. It goes well, but I don't know why it opens the same baskets twice. Once would be enough. Look at the screenshot! AUD baskets was opened twice. First time at 18:49:50 and then at 20:46:36. Thank you for your reply.
+
+--- 帖子 #124 ---
+As I said, soon as the timer is at 0 (by default 1 hour next last open basket for each pair), all step and basket are reset. So the EA will reopen the same basket if condition is met. Version with trailing stop (stop set at be_level-be_value).
+
+--- 帖子 #125 ---
+Thank you for your reply. Is it possible to open the baskets for the individual currency only once and not be relied on the timer? Because nobody knows how log will the trade last and it is difficult to set hour on the timer.
+
+--- 帖子 #126 ---
+faryne Now the AUD Delta -5 !!! the EA does not open trading.... USD Delta -4,8 !!! the EA does not open trading....
+
+--- 帖子 #127 ---
+My Ea opened baskets AUD and USD. There must be something wrong with your platform.
+
+--- 帖子 #128 ---
+I agree with syndicat...the EA doesn't work properly..same issue and I don't understand really this timer option faryne ...maybe could you explain your dashboard , for me VUC is Value of Upper Currency and you probably delta ? SDV Hurst ???? Thank you.
+
+--- 帖子 #129 ---
+Is one eye king in the land of the blind ? LuXing
+
+--- 帖子 #130 ---
+Yes, one eye is king in the land of the blind. LuXing
+
+--- 帖子 #131 ---
+Good evening, I did a check on my version 2 on the selection string of the pairs to trade. It warks, but keep in mind you have to insert in the string the value in Upper case (AUD,CAD...) If you insert a blank string any pair is traded and it is for observation of the ea. The edit function to change magic number and lot size on the fly does not work. perhaps I will remove it. you can change this value from the property of the ea as usual.
+
+--- 帖子 #132 ---
+Again, a great story was written by a philosopher. Maybe you should stick to the practical tips and tell us how to insert your stories in EA code???
+
+--- 帖子 #133 ---
+Aw, you are really not the brightest are you ? On top of that, seems you have difficulties in making up your mind. LuXing you are not giving advice, no hang on I don't want your advice unless you prove your strategy is profitable. Oh no no, maybe you should stick to the practical tips and tell us how to insert your stories in EA code. No hang on, before you do that I have a button on my EA that does not work. Aw fuck, now the EA gives me another error. Aw what is it now, the Take Profit doesn't work. Aw I selected a basket but the EA does not open any trades. Aw, but what is the responsability of this parameter in a blackbox I have no knowledge of ? Aw, now the delta is -6 and is does not open trading ! Aw, aw, awful !!! Do you really think i would disclose all my algos and explain YOU how to insert this in "your EA" code ? See phrase #1 of my post. Without too much spoonfeeding, I have given more hints on my EA in this thread than ever before. Anyway, congratulations on the great contributions you have made to this thread mate. They have been very thought provoking indeed. Keep it up demo warrior. "Ce qui importe, ce n'est pas d'arriver, mais d'aller vers." Antoine De Saint-Exupéry Best of luck to all of you bringing this project to a good end, Syndicat will guide the way ! My participation in this one stops here and now. LuXing
+
+--- 帖子 #134 ---
+Calm down philosopher Go... Meditate
+
+--- 帖子 #135 ---
+Good night boys, little modification to my v2. - magic number cut from input... it can be modified by editing and pushing in the button. very confortable for me. - i tried doing the same with lotsize but dont succeed so... leaved in inputs. - add the visualization of magic number and lot size for debugging purpose. - my v2 is running... perhaps this night we will have stop loss .... the black swan.... happy sleeping and be calm.....
+
+--- 帖子 #136 ---
+Quite possibly, the best sequence of posts I have ever seen on FF. Hopefully the drama queens haven't put you off. M.
+
+--- 帖子 #137 ---
+Madscalp hi! What is the maximum Delta Up/ Delta Down value can be?
+
+--- 帖子 #138 ---
+Good morning followers, have you had a good night? this morning i went to see the platform with my v2 running and i noticed 70 open orders (i.e 10 baskets). I was thinking to have programmed so that it never had to appen. I thought the maximum possible was 6 baskets. I remain confused.... in the next update i will insert MaxOrders that i put as default 42 for every magic number. Meanwhile this night no stop loss have arrived we wait for the take profit... who knows? good continuation....
+
+--- 帖子 #139 ---
+Hi Ezios ! I just put your EA on the test ... You have a very small drawdown for 70 orders!!!
+
+--- 帖子 #140 ---
+Your participation ...really ? In FF, I have seen often sarcastic and non constructive people. You are the king. For the first time, you have taken a good decision.....leave this thread and don't come back !
+
+--- 帖子 #141 ---
+meanwhile the ea got take profit and closed all 70 tickets... other turn other gift as we say in italy.... test it ....
+
+--- 帖子 #142 ---
+Congratulations on a great start!!! I will come in may at the Giro d'italia
+
+--- 帖子 #143 ---
+Hi syndicat...I set the maximum delta at 5.2 but in theory it can reach more (see calculation) How many do you have seen ?
+
+--- 帖子 #144 ---
+I've seen 5.2
+
+--- 帖子 #145 ---
+no more ? if it is the case, no problem ...
+
+--- 帖子 #146 ---
+Have to wait for important news and see
+
+--- 帖子 #147 ---
+yes I'm going to remove GBP from EA currently I'm positive with AUD and GBP but I'm going to close GBP nextly Have you made a productive asian session ?
+
+--- 帖子 #148 ---
+I've turned on profit protection, now covers quite a bit of $ 30-50... It is necessary to think further
+
+--- 帖子 #149 ---
+Yes it's really funny ...but I have seen worse in FF since 10 years. Like in the true life, there are brilliant brains which want to display their knowledge with great theories of mathematicians and philosophers. I would have had respect for this kind of people if he had provided us good results of his methods. It is not the case...he just sneers. Maybe we are working for nothing but it's to us to decide. Go on, guys.
+
+--- 帖子 #150 ---
+Hello guys, Latest version attached. Some explanations: Parameters: -t_profit : once reached, all orders opened for one pair are closed -s_loss : once reached (negative), all orders opened for one pair are closed -breakeven_level: once reached, s_loss is set to current pnl-breakeven_value -breakeven_value: trailing stop= distance to set the stop from current pnl -time_spread: minimum time to prevent from re-entering basket (each pair). example "3"= if last trade was 2 hours ago, ea can't trade that pair for 1 hour left. Different levels are not affected : if step 1 was reached and countdown&gt;0, ea can still trade step 2/3. -active_hurst: activate of not hurst display (cpu killer) -reverting_all: revert all orders -step1_min (etc): step to reach to trade -magic_partial: if you apply ea on multiple charts... -alert : activate sound alert on new trade About this version: I added verbose details. Let me know if you met any problem with it. I keep the ea from re-entering same step once countdown is 0. So same basket at same level is always unique. I keep the ea from trading before 3am: signal are made from High/Low on the day. So the first High/Low (0.01am) is irrelevant. Hurst exponent: is the mean of husrt exponent from a basket for each pair. [0:0.5]=mean reverting; [0.5:1]=trending. VUC is the original VUC/VLC form 1st post (signed). SDV is the VUC/VLC normalized by the standard deviation. So VUC=5 could be SDV=2.5 if there is huge dispersion into currencies or SDV=4.5 is the pair is the exception into currencies. Please inform me from any bug. EA: https://www.forexfactory.com/showthr...7#post10804477
+
+--- 帖子 #151 ---
+No problem
+
+--- 帖子 #152 ---
+What's funny to me is that I found the same when counter-trading based on strength, I also looked for the reversal from 28 pairs. Made my own CSM, take the data, break it down into groups, break that into individual pairs, take the average from the 28, sell at % of max, buy at % min...basket after basket.... then whammo, fast big move out of nowhere, classic manipulation. Go with the flow, not against. I now look to manually trade when the fan on my PC goes into overdrive with the data being accumulated... The currencies are moving. Just look at the direction. M.
+
+--- 帖子 #153 ---
+Are you sure that "VUC column" displays delta ? I remember the delta formula Currency in 1 st position ; Value of Upper Currency (VUC) Currency in 8 st position : Value of Lower Currency (VLC) Average of the 7 Others Currencies : ( A7OC ) Calculation: DeltaUp = VUC - A7OC and DeltaDown = A7OC-VLC.
+
+--- 帖子 #154 ---
+Pretty sure yes! Delta=Value of Currency-A7OC i.e. VUC=Delta(1) VLC=-Delta(8)
+
+--- 帖子 #155 ---
+Yes I said many times it's a method against the flow. We are trying to use it a bit as a scalping with many precautions ( avoiding news, SL, lock tool, etc.. etc..) It is clear that during a big battle we'll have to be out of the market. Just curious to see your results...maybe a new constructive thread from you ? You are right. The designation "VUC column" had troubled me
+
+--- 帖子 #156 ---
+Hello faryne! Ea has closed CHF basket according trailing stop. Attached is screenshot with ea's display!
+
+--- 帖子 #157 ---
+Thank you for you reply. Some display fixing. (sorry, it's hard to predict all possibilities)
+
+--- 帖子 #158 ---
+tell magik number for each shopping cart Useful indicator
+
+--- 帖子 #159 ---
+You've got the magic in the order comment.
+
+--- 帖子 #160 ---
+Hello again faryne! Another suggestion for dashboard of Medusa. Ea closed GBP basket. So instead of time EA could display profit or lose at wich orders are closed. Regards
+
+--- 帖子 #161 ---
+I'll see it when you open the recycle bin... I need to now to insert in indicator which I sent hard to write numbers?
+
+--- 帖子 #162 ---
+magic number cannot be changed....
+
+--- 帖子 #163 ---
+No problem I'll add that on next release. I don't understand what you want. Is that EA put magic on display corner? Also working on calendar integration now.
+
+--- 帖子 #164 ---
+Hi faryne, Can your Ea be used for live account or is there any restriction?
+
+--- 帖子 #165 ---
+I put a restriction, not because of any limitation, but because I coded it very quickly and it need to be well tested to debug. I don't want to be responsible for blowing accounts because of code problem (like stop don't work or other).
+
+--- 帖子 #166 ---
+You are a wise man More the robot is improved more it is expensive for sale. Don't forget my royalties faryne Seriously it is really not recommended to go for live account.
+
+--- 帖子 #167 ---
+Weldone Guys you are doing a great Job your indicator is making me extracting money from market..sincerely i have make over 100 usd this week...God Bless You..cheers.Love from Nigeria
+
+--- 帖子 #168 ---
+Thanks for your feedback but be careful. Does your broker accept your orders ? Guys By PM, a friend has warned me that somebody was trying to copy lines of code in order to sell an EA about the system. This system is for free since I don't even know if it is good. So, coders buddies, if you post something, be sure there is a restriction.
+
+--- 帖子 #169 ---
+Hi guys, can anyone tell me, what timeframe the Currency strength is actually working on? Like, Is it the currency strength of the last hour or last 4 hours or 30 minutes...? Does someone know?
+
+--- 帖子 #170 ---
+Hi 1 D
+
+--- 帖子 #171 ---
+Yes they accept the trade..I use your indicator to trade both Spread and Binary OPtion sincerely after adding my own filter to avoid excess drawdown..Its is a wonderful work..thanks
+
+--- 帖子 #172 ---
+Excellent management if you can be in front of your computer. It seems some brokers don't accept. Which one is yours ?
+
+--- 帖子 #173 ---
+am using NordFX for Spread and Binary.com for BinaryOPtions
+
+--- 帖子 #174 ---
+Hi Ezios! The EA opens an incomplete basket... 2018.02.23 06:04:14.208 '60056652': order sell 0.01 CADCHF opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.23 06:04:13.332 '60056652': order sell 0.01 NZDCHF opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.23 06:04:12.521 '60056652': order sell 0.01 GBPCHF opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.23 06:01:03.705 '60056652': order sell 0.01 AUDNZD opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.23 06:01:03.216 '60056652': order sell 0.01 GBPNZD opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.23 06:01:02.647 '60056652': order sell 0.01 EURNZD opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.23 06:01:02.647 '60056652': order sell 0.01 EURNZD opening at market sl: 0.00000 tp: 0.00000 failed [Off quotes] 2018.02.23 06:00:50.678 '60056652': order buy 0.01 CHFJPY opening at market sl: 0.000 tp: 0.000 failed [Off quotes] 2018.02.23 06:00:50.223 '60056652': order buy 0.01 CADJPY opening at market sl: 0.000 tp: 0.000 failed [Off quotes] 2018.02.23 06:00:49.666 '60056652': order buy 0.01 USDJPY opening at market sl: 0.000 tp: 0.000 failed [Off quotes]
+
+--- 帖子 #175 ---
+i told you another time.... i can t help you with this error because from my broker all ok... this error depends on+ your broker. change the broker and you will have no the error. for that of the magic number you have to go with mouse in the magic change it and push on the button. thats all. test....
+
+--- 帖子 #176 ---
+One of the best ways to see if currency trading is right for you is to try a trading demo. You can practice your trading techniques with "play money", so there is no risk involved.
+
+--- 帖子 #177 ---
+I know Madscalp... there is always someone trying to copy good system. In my ea i ave put the restriction ONLY DEMO ACCOUNT but nothing ... if you have a copier you can copy tha trade from demo to real... so in next version i will put expiration date... the world is full of scammers... we work for free and we are testing...
+
+--- 帖子 #178 ---
+Hi, just to understand: in the expert settings I place a stop @ 100 and a take profit @ 10. So if the stop is hit only one time it burns 10 profit cycles, is it correct? Thank you
+
+--- 帖子 #179 ---
+exactly. for now never hit stop. the market moves so that its difficult to reach 100 euro of stop but.. who knows? we are testing...
+
+--- 帖子 #180 ---
+Hi all Congratulations for our coders. At 7:00 GMT, both EA took together the same trades in the same conditions. No errors in expert tab...IMO offquotes issue is due at broker. Just a question for faryne: the chart with EA attached close with 2 conditions: clicking CLOSE ALL button and SL reached. Is it correct ? your "basket close" function is working fine with the mention "Close by user" small suggestion in your next version: a profit/loss indicator like the Ezios's EA.
+
+--- 帖子 #181 ---
+Can't you add a text to the corner of the screen of your ea, that says something like: "For free at forexfactory" so that way, no one can sell your ea, because it says that you can get it here...
+
+--- 帖子 #182 ---
+Hi，Madscalp,both eas default setting？
+
+--- 帖子 #183 ---
+Yeah 4.4...4.8...5.2 sell USD and buy NZD....close USD basket in profit and NZD basket at breakeven
+
+--- 帖子 #184 ---
+Great. Do you mean global profit/loss? because it's currently display for each pair. For closing conditions: TP reached OR SL reached OR trailing stop (locking) reached OR "close all" OR "close basket".
+
+--- 帖子 #185 ---
+Hi faryne Of course it's the global P/L since P/L is displayed for each currency ( it's a child's play for you ) You can display the different mentions but IMO it's important to do an absolute STOP TRADING after a SL . Maybe a reset if the trader wants to come back in the market. What do you think about ? Many people have contacted me by PM for explanations often for the same things. I'm sorry but I can't answer at everybody. Please read the first post and the warning. It seems clear.
+
+--- 帖子 #186 ---
+Something like that?
+
+--- 帖子 #187 ---
+Wonderful. You are a genius. What is your thouhgt about absolute Stop trading after SL ?
+
+--- 帖子 #188 ---
+yes i will put some credit lines in next version too.
+
+--- 帖子 #189 ---
+I try to add my 2 cents with this idea. 1. When the trigger is hit we open a FAKE BASKET: not a real basket on the market, but a basket on the paper. 2. When the loss on the FAKE BASKET is (for instance) -4%, we prepare to open the REAL BASKET. 3. When the loss on the FAKE BASKET is -2% we open the REAL BASKET. 4. We are assuming that the trend has hit the bottom @ -4%. 5. We will close the REAL BASKET @ -4 (loss will be -2%), or we will close the REAL BASKET @ +1% (gain will be +3%). 6. In this way the risk/reward is much better. The power of the system is that we define a clear stop zone and we hope that market has hit the bottom behind us. The problem is how to trace the FAKE BASKET on the paper. I hope it’s clear.
+
+--- 帖子 #190 ---
+Thanks madscalp for your kind gift to ff traders. i think VUC values for different currencies are different.For example GBP is volatile currency so its VUC value easily reach 5 or -5 where NZD currency VUC value on average is 4.7 I want to ask you can you please add one feature in EA so that we can set VUC values according to each currency .i mean the feature like: Min VUC value for GBP= Max VUC value for GBP= Min value for NZD= Max value for NZD= and so on.because when GBP is on the top i need to adjust VUC values for each currency according to their strength thanks a lot for your efforts i found this EA very interesting and profitable.
+
+--- 帖子 #191 ---
+I set an absolute SL which prevent from automatic new open (you must reinit the EA). On the contrary, SL for individual pair is not a EA stopper. Interesting, and definitly not the same result as simply shifting triggers.
+
+--- 帖子 #192 ---
+I will leave this task to faryne... i dont know how to handle a phantom basket or 2 or 3 or 4.... and i like kiss systems....
+
+--- 帖子 #193 ---
+Guys The new ideas are gushing. Me too I'm thinking about a NO MORE button. What is it ? I suppose a period of volatility with already 3 open USD baskets. My DD is increasing dangerously and I see on the indicator another possibility of trade on JPY. Of course, I don't want to open a new basket. So I click on NO MORE button to avoid a new open and keep the control of my 3 baskets. Is it possible ? About the ghost basket, I don't know if faryne can make it. He has already worked a lot this week In addition, we risk to miss some interesting trades. Depending the level...If the ghost basket opens at 4.4 and that there is a reversal, we miss the trade. Or I didn't understood... I'm not sure to understand. NZD is a quiet currency and today it has touched many times an inhabitual VLC of 0.2. What precisely do you propose ? a recalculation of delta ? see with a coder [EDIT] Currently in the day NZD is my only (small) loss in progress ..LOL... happily 3 others good winning baskets
+
+--- 帖子 #194 ---
+This sounds counterproductive to be honest, because it can also work against you. For example, if your "fake basket" ist @ +2% and doesn't go back down, you have to either miss the trade, or, make less profit, than if you would have just entered as the signal was there.
+
+--- 帖子 #195 ---
+Missing a trade to get a high probability entry is a good thing really. AND, "less profit" is not a bad thing at all.
+
+--- 帖子 #196 ---
+Thanks to madscalp for sharing your idea of trading.Thanks to Ezios and faryne for translating this idea into technical tools. I have been testing the strategy for several days. I prefer to trade manually on currency pairs. Revers almost perfectly, especially if they are at R/S levels. Well, you can visually control the SL and TP. I appeal to Ezios A huge relief would be the addition of these options to the indicator cm_mod. I think that many people will support and appreciate this. Attached Image Attached Image (click to enlarge)
+
+--- 帖子 #197 ---
+Hi vinvlad Yes Ezios made an excellent indicator which displays too a good pair to trade. Sometimes I do it also with S/R help like you but curiously the discussion here has been mostly about basket trading. See with him if he wants to make your request.
+
+--- 帖子 #198 ---
+There was a thread named "Basked Trading EA" and there was 3 options in EA for such things: 1.The "Stop After &lt;#&gt;" button. (The EA will stop trading after &lt;#&gt; numbers of baskets traded or profit/loss triggered. 2. "One trade per candle" true/false (if EA is placed on 1hr TF, it will only take 1 trade for every 1hr(4hr,days, weeks, etc.)) 3. Max trades open. You can search for member Seller9. maybe he can advice some coding logic. Are you aware of NZD news before previous day closed? Don't blindly follow indicators, they lag.
+
+--- 帖子 #199 ---
+I think faryne can do that easily. It's just a command to not open momentarily new trades. Sure. It's why we need a news calendar ( post # 29 ) . I admit that I do not always look at minor currencies faryne have to include it in the next version
+
+--- 帖子 #200 ---
+Hi all I have opened on feb 19 a small demo account ( $ 1 000 ) to test the system. You see the results below but there are some mistakes: 1 st from me : several baskets were opened with 0.1 lots...of course only 0.01 lot ...no more 2 nd from EA testing : too many baskets due at bugs So the results turn around 20 % weekly profit instead of 36 %. I set a 5 % SL and it was never reached ( of course it will be one day ) Max baskets in progress : 5....max DD observed : 3 %. What conclusion ? lucky week ? probably... I still don't know the best way to close the trades. Mostly were closed by lock and sometimes the profit continued. Just curious to see your results and to read your suggestions to do even more a safer system.
+
+--- 帖子 #201 ---
+How about using a standalone basket manager like MPTM or Milanese trade manager? They can manage trades based on magic number, trade comment etc.
+
+--- 帖子 #202 ---
+Many thanks. Milanese is a member of Steve Hopwood's forum , I presume ? Where do we can find this trade manager ?
+
+--- 帖子 #203 ---
+I already added On/Off button to stop EA (="add_new_trades" parameter) and buttons to manual open basket with. I also added news filter with: stop trading before/after news, and revert trading only on news. I will not add S/R indicator, because I can't see what to do with. The system is based on Currency, not on pair, so pairs related on same currency can be on support and resistance same time etc. I will not add (for now) the ghost basket idea. Because it's a lot of work (due to passing from basket profit to pairs pips on code) and we don't know if it will add any value. So I propose you to paper trading it (with 2 demo account), and if it's intersting, I will definitively work on that . Feel free to propose your others improvments.
+
+--- 帖子 #204 ---
+OOOPS ...these options are in the settings and no on the dashboard with buttons ...i apologize ..i didn't seen faryne ...you are right...the EA is very complete and now it's up to the trader to make good use of it with his own management just a question : post 186 you showed a screenshot...what's the EA version with news calendar and total P/L ?
+
+--- 帖子 #205 ---
+Yes he is from Steve's forum and here is the link
+
+--- 帖子 #206 ---
+This is the next version (not uploaded yet). I added lot of stuff (included news, buttons, etc.) so I need to test code in live with data and orders. Surely delivered tomorrow.
+
+--- 帖子 #207 ---
+Perfect...faryne. When I'm talking about improvment, I'm thinking about trading management no EA. About ghost basket, I agree with you . It's a lot of coding for an uncertain value. Another request is for Ezios no for you.
+
+--- 帖子 #208 ---
+Madscalp I can add sound alert in the indicator but... for the other options that someone required i have not the idea how thei and what they do so.. if someone have some source code that include this i can to attempt... if not, nothing to do for me.
+
+--- 帖子 #209 ---
+Hi Ezios You are right. A sound alert with Shakira's voice would be wonderful Maybe vinvlad can explicite his request about "AlertCandle"...
+
+--- 帖子 #210 ---
+As far as I understand, this option (Alert Candle) eliminates numerous alerts when a trigger signal appears. For example, when we put the indicator on the chart with tf 1 minute, an alert appears only once after the candle is closed in 1 minute. Again - I'm not a coder, I can be wrong. I sent the code options to you in the PM. Perhaps help. Thank you.
+
+--- 帖子 #211 ---
+OK ...I see your idea....IMO M5 is a good TF...maybe M1 If the signal is confirmed at candle close, it's valid. I'm using the indicator below in M5 to "visualize" the market ( useful for manual trading ) You can send the code to Ezios to know if he can make that.
+
+--- 帖子 #212 ---
+I'm testing the version 5.1
+
+--- 帖子 #213 ---
+Good entry with delta 1-8 &gt; 7 on Daily R2 and Weekly R1 Beware ...maybe just a pullback ? What's the 5.1 ?
+
+--- 帖子 #214 ---
+SwingMans Masterpieces
+
+--- 帖子 #215 ---
+I understand the concept , Vinvlad but keep in mind that if I add this option for current timeframe, for example 5 min , if the signal appears for example at 2:00:35 and then disappears you wll never have the mesage. is this what you want? i dont think that is for this system. we must to meep signals in seconds.
+
+--- 帖子 #216 ---
+I think to understand but I don't know if it can be coded. Let's suppose a delta set at 4.4. The signal is valid only if at the candle end the delta is yet 4.4. It would be necessary to use the indicator below which would display the valid order at the end of the candle ...for instance M1. True improvement ???? A lot of coding work for little added value... Correct session for me and you ? Beware of red news nextly...I'm out of the market
+
+--- 帖子 #217 ---
+Actually it's nothing to code, but IMO i don't see any interest with this strategy.
+
+--- 帖子 #218 ---
+I agree ...our tools are excellent....after, it is the management which makes money...or no Wooooh Sell GBP basket and Buy USD basket too.
+
+--- 帖子 #219 ---
+You are right - a signal for 1 minute. And then it does not repeat. This is if you can not just limit it with one alert.
+
+--- 帖子 #220 ---
+the indicator is used to trade manual so... the decision is of the trader. the indicator displays every signals whe3n they appear... then the trade decides what to do.. it is useless for all of use to concentrata our attention in the thing of discretionary trading. we have to improve the automatic system. the rest is alreay done.
+
+--- 帖子 #221 ---
+Hey, guys! How are the tests of expert advisors? Somebody trades in https://www.lmax.com?
+
+--- 帖子 #222 ---
+i am continuing the test my demo account... for now its in draw down.... no this broker.
+
+--- 帖子 #223 ---
+How many your DD have you seen today ? Curious because it was a good day.... my initial account $ 1 000 from feb 19 so daily 7 %
+
+--- 帖子 #224 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #225 ---
+Hi cpips I have about same results... We don't have to leave turn on the EA 24/24 and close the good trades. manual or EA ?
+
+--- 帖子 #226 ---
+Hi all. My EA don't open trades in 2 days now. What can be wrong? Attached Image (click to enlarge)
+
+--- 帖子 #227 ---
+Maybe restriction by faryne ? If you appreciate the Gabin Sys. , you can poll in post #1
+
+--- 帖子 #228 ---
+What restriction? It's a demo account. I didn't try yet the system.
+
+--- 帖子 #229 ---
+I've had just the idea of the system...I'm not the coder of the EA. IMO the creator faryne will reply you about this issue ...
+
+--- 帖子 #230 ---
+Seeing "too late", it is a problem "rearming" the ea after opening of the day. You can simply reinit the EA, and you should see "H ok" instead of "too late". Maybe an issue with this version.
+
+--- 帖子 #231 ---
+Yes when I reinit the EA it's OK, but we'll see if it stays so. Btw, thanks for EA's to both coders and the brain of this system Madscalp.
+
+--- 帖子 #232 ---
+Hi, Thanks to madscalp,Ezios,faryne... cpips.
+
+--- 帖子 #233 ---
+Good management with London session. Often good opportunities around London open...this morning nothing...no matter.
+
+--- 帖子 #234 ---
+Hi guys, I read the threat and read, any maybe I get it wrong, but madscalp said this is not yet a well demo-tested version, and no one should trade it live. Well, the results start to look better... Is anybody trading the EA on a (small) live account?! Or is it a version that only may be applied to demo account (as I read somewhere). Am just wondering, ...
+
+--- 帖子 #235 ---
+Gabin System is too new to be used in live...we need more feedback. Our coders make an awesome work but they don't want that their tools are used in live...not yet...maybe later...I don't know because I'm not the owner so if you want to go in live, you can spend a little time to begin to trade slowly in manual with the tools post # 1 see too post # 167
+
+--- 帖子 #236 ---
+Hello all, Here is the latest version of Medusa including: -News management (stop trading before x min, auto close positive basket before x min, restart trading after x min, reverse trading on news, etc) -More buttons for manual trading (open/close/on off by pair and total) -Improvments on verbose -Many bugs fixation (like the rearming situation) Need to be test on demo. I'm also working on the "ghost" version. Code is ok, I'm currently testing it. Edit: "Stop for news" verbose was not updated.
+
+--- 帖子 #237 ---
+Wonderful. It's really a masterpiece. Just a clarification about "trending on news" OK it's a reverse function but what's exactly it happens ? The EA takes an opposite basket with a signal or no ? or just manual ?
+
+--- 帖子 #238 ---
+Oh my god, this thread gonna hot! thank you guys very much!!!
+
+--- 帖子 #239 ---
+Wow well done. I love the count down on the news
+
+--- 帖子 #240 ---
+Excellent work!!!
+
+--- 帖子 #241 ---
+Madscalp, Faryne, &amp; Ezios, Fantastic idea and excellent coding skills. Thank you for starting this tread and sharing so generously. Read from the beginning and ready to take it for a test drive. Just download Medusa 5.1 for testing on demo acct. Some questions: 1. What are the settings for "Strategy"? Default is 0 - what are the other possible options? 2. What switches EA from manual to auto trading? 3. Which individual currency value is the key impulse value (Strength, Delta or Ratio) to trigger the EA? Currently, USD is 6.6, 2.37, 1.56. Thanks a million, John
+
+--- 帖子 #242 ---
+1. Strategy is a parameter for hard-coding strategy (like reversal only between some steps, etc.). Currently, only once is coded but I've not tested it yet. So you can let this parameter to 0. 2. 1st solution: "OnOff" button. 2nd: "add_new_trades"=0/1. 3rd: "OF" buttons (by pair). 4th: AutoTrading on MT4. Be aware that 1/2/3 keep the TP/SL management but Autotrading one don't. 3. EA only check the Delta value.
+
+--- 帖子 #243 ---
+Hi Everyone, what your current USD delta reading? Ezios_indy.ex4 and pwtcea reflect two different value, which 1 i should refer to? Attached Image (click to enlarge)
+
+--- 帖子 #244 ---
+Thank you very much!
+
+--- 帖子 #245 ---
+Thank you Faryne for your quick reply. MT4 has "Auto Trading" enabled and Medusa Common Tab has "Allow Live Trading". To confirm, if dashboard shows "Waiting signal" flashing then Medusa EA is in control waiting for Delta value trigger. Thanks again for your work. John
+
+--- 帖子 #246 ---
+the indicator you have to follow if you manual trade. the ea opens automatic trades upon the conditions. about deltaup it can vary in seconds as can vary the currency in top of the list or in botton... so it depends the second. the code from the indicator is the same in the ea for the calculation.
+
+--- 帖子 #247 ---
+yes... it was little draw down... after this my message i got take profit. for now this ea never stop loss with default setting. its good thing... very good....
+
+--- 帖子 #248 ---
+LOL ...testing news I have taken 2 USD baskets but I have forgotten BE lvl at 5 so only $ 5 profit...it's working faryne...please read again post # 237
+
+--- 帖子 #249 ---
+Oh, I didn't see your question. reverse_news change the direction to revert trades on news (if trade_news is 1). But I was testing on USD it might be a bug the basket was shorting.
+
+--- 帖子 #250 ---
+Oh no...no mistake I have set Trading news=true and Trending on news=false...so the EA have taken a correct USD sell. My question is : when Trending on news=true, is the EA taking an opposite trade with the same conditions of delta ?
+
+--- 帖子 #251 ---
+Working to improve news management, but yeah if no revert it is ok. if delta&gt;step1 and trade_news=1 and reverse_news=0 it will SELL if delta&gt;step1 and trade_news=1 and reverse_news=1 it will BUY no other condition is verified for news
+
+--- 帖子 #252 ---
+Hi Ezios, the EA open 7 trades and close automatic, should I reload the EA or the EA will keep working? I am using the EA on POST #125 Thanks, all trade profit!
+
+--- 帖子 #253 ---
+OK it's very clear but traders, be sure to use this option with caution because you can take a ugly DD the currency don't stay a long time with a delta &gt; 5.2
+
+--- 帖子 #254 ---
+This is why trailing stop is VERY important. On news, if you reach 5.2, you must be in profit (with 2 other step) and had locked it with trailing stop.
+
+--- 帖子 #255 ---
+You are right. Fellows, check cautionly the settings before trading.
+
+--- 帖子 #256 ---
+the last version that i did it continues to trade until the stop loss. then it wil auto remove itself from Platform and you will have to restart.
+
+--- 帖子 #257 ---
+Got it, thank you so much!
+
+--- 帖子 #258 ---
+Hmmm with Trending news=true and Trending on news=true....I have had a USD sell instead of a buy please check this last option and maybe renamed "Opposite option" to avoid the confusion
+
+--- 帖子 #259 ---
+Well trending is not an appropriate word. Will change. I'll remove hurst (don't find any edge with) and add "Cost of trading" value which is the cost for opening a basket (basically spread+commission) to monitor it.
+
+--- 帖子 #260 ---
+Tried Medusa this morning. It opened 2 USD baskets on positive Delta and closed with nice profit. It also opened 1 GBP basket on negative Delta in the wrong direction. All went to SL. Does Medusa correctly open both positive Delta and negative Delta baskets at the same time? Or, does only open in one direction? Thanks for the terrific EA. John
+
+--- 帖子 #261 ---
+I'm away form my PC so I'll have to post screen shots of EA settings and trade history this evening. Thanks.
+
+--- 帖子 #262 ---
+Hi all Yesyerday I've wanted to try the last version of medusa for testing the news. For the 1 st, I've set Trending on news= false and for the second, Trending of news=true. Of course it was USD the queen currency but in both cases I have had a sell USD . The results have been bad with a loss of 1.5 % for the day. So my conclusion don't change about news: we have to avoid them...there is an option in the EA for that. If you want to play the news, there are others strategies or you can throw a coin ...50/50. There are others signals in a session out of news. I remind that GS don't have to be used 24/24 but by session...if at the end of the session you observe a loss you cut your position.
+
+--- 帖子 #263 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #264 ---
+Perhaps our coders can code "trade by session 1,2,3" settings.
+
+--- 帖子 #265 ---
+Between the opening and closing of a few seconds.please help?
+
+--- 帖子 #266 ---
+nice indi, any one trading this on manual?, i prefer manual. it would be a great help if there is a alert . Thanks
+
+--- 帖子 #267 ---
+I suspect your SL is -$100 on the EA? If so then it is too small compared to the deal size you are using
+
+--- 帖子 #268 ---
+if you want to use 1 lot for this system you have to put sl to -10000 and tp to 1000 is absurd.... no use lot
+
+--- 帖子 #269 ---
+Today perhaps very strong news and currencies... my ea first time hit stop loss.... making a sum allways is the profit but... continue testing my demo account.. monitoring this evening to restart the ea.
+
+--- 帖子 #270 ---
+Moving fast today. And news coming... Not yet stopped on my side.
+
+--- 帖子 #271 ---
+yes.. we are here for that... testing.. no easy on forex... perhaps it will be helpful this you call the standard deviation of a currency but i know nothing about it and how to exclude it from trading because it is too strong the directio0n???? too complicate to mee....
+
+--- 帖子 #272 ---
+A good day today + 6%!!! I trade with my hands, I use the EA only to open 1 basket.
+
+--- 帖子 #273 ---
+For those that code and mould this indicator..God bless the day you were born...With your indicator i have made hundred of dollars from forex market especially binary options....God bless all the contributors here...I cherish you and love you all.
+
+--- 帖子 #274 ---
+I need a programmer to write an expert Advisor! Anyone interested?
+
+--- 帖子 #275 ---
+What's your idea?
+
+--- 帖子 #276 ---
+idea on this same system! But need only in my terms of reference
+
+--- 帖子 #277 ---
+Another way instead of use the ghost basket, the logic is the same: 1. Wait the trigger as usual, for instance @ delta -4.7 2. Wait the drawdown for instance @ delta -6.5 3. Open the basket when delta returns to -4.7 4. Place the stop @ delta -6.5 5. Difference between open and stop deltas is 1.8, so if we close the basket when delta is -1.1 the risk reward will be 2.
+
+--- 帖子 #278 ---
+That doesn't work like that. Between @-4.7 and @ -6.5, you can virtually have a -30% basket, or a -0.1% basket (if delta jump directly to the max). And, Between a @-0.1% basket and a @-5% basket, you can virtually have the same delta, even a negative differential delta.
+
+--- 帖子 #279 ---
+Yes, now I see the point.
+
+--- 帖子 #280 ---
+please recommend. how to set lots,tp,sl for Medusa？ thanks.
+
+--- 帖子 #281 ---
+Madscalp, i still testing with my ea. Yesterday I got a take profit and a stop loss. Today i got 3 take profit and its in progress to have a 4? take profit. I see this system works well with flat market and when there are the strong movements it hit stop loss. Can you to find an index to measure when market is flat and so i make the ea to trade only on flat market. think about it to improve this madscalp....
+
+--- 帖子 #282 ---
+Hi Ezios, Are you willing to share the indicator which Ezios coded, as per your above comment. I would appreciate you sharing it. Many Thanks Chris
+
+--- 帖子 #283 ---
+Wow, it's like an ATM. Enter the pin code 4.2 4.6 5.0 7.0 and the picture shows how much you downloaded during news EUR, CAD and USD. If you enter the madscalp pin code, you may download more. Expert pwtcea_v2 released it at 09:55 GMT opened 2 baskets NZD and USD, gathered $ 10 to 10:22 GMT. I rebooted the expert. Until 11:40 you can not find a basket. Open USD in a dangerous time, then EUR, again NZD and get 35 deals I think, right in the news. She reached DD -50 $ and more. Then I said, this expert swims in calm waters, not for that time. And when the effect of news drops, usually after 15 minutes, prices have returned. In the end, he closed his baskets and at 13:52 it was over. This is a bit of luck to me as you enter strict news rules. I call it another effect on the first test. I have questions. As far as I read in a topic, if you hit SL, restart the expert. And when he hit TP and closed the baskets, should he be restarted? When will the live account come out? Thank you for the efforts you have made! Attached Image (click to enlarge) Уау, това е като банкомат. Въвеждаш пин код 4.2 4.6 5.0 7.0 и от снимката се вижда колко си изтеглил по време на новини EUR, CAD и USD. Ако въведеш пин кода на madscalp, може и повече да изтеглиш. Експерта pwtcea_v2 го пуснах в 09:55 GMT отвори 2 кошници NZD и USD, събра 10 $ до 10:22 GMT. Рестартирах експерта. До 11:40 не си намери кошница. Отвори USD в опасно време, после EUR, отново NZD и стигна 35 сделки мисля, точно в новината. Достигна DD -50$ и повече. Тогава си казах, този експерт плува в по-спокойни води, не е за това време. И когато намаля ефекта от новините, обикновенно след 15 мин., цените се върнаха. Последователно си затвори кошниците и в 13:52 всичко приключи. Това за мене е и малко късмет, щом въвеждате стриктни правила за новини. Наричам го още ефект на първи тест. Имам въпроси. Доколкото прочетох в тема, ако се удари SL, рестартираш експерта. А когато удари TP и затвори кошниците, трябва ли да се рестартира? Кога ще излезе версия за сметка на живо? Благодаря Ви за усилията, които сте положили!
+
+--- 帖子 #284 ---
+May be we could open a basket just after a strong movement, when we see the volatility is coming down...
+
+--- 帖子 #285 ---
+but first we have to defined what's strong movement. I observed the average level is 4.5 because 36/8 is 4.5. this is the average of each symbol. When there are 4 symbols under 4.5 and 4 symbols over 4.5 this is equilibrium market. when there are for example 6 symbols over 4.5 and 2 under 4.5 is strong when there are 6 under 4.5 and 2 over 4.5 is weak. this is an ipotesi. i can not to trade when strong market because when strong market often there is the stop loss because no inversion. but i want to know if this is the right approach to valutate if strong or weak the market. for now i have 28 market orders open in my ea (4 baskets) and a dd of about 40 euros and market is in equilibrium so.... can not be true valutation of me.... if i have no index to validate the market i cant to take a decision about trade or not trade. For today i had 2 take profit but it can be a stop loss... who knows? ... continuing testing and expecting for new ideas.....
+
+--- 帖子 #286 ---
+this morning nzd basket is very strong. I got in my ea 42 orders 6 baskets and then.. due to a my debugging error another basket was open so 49 orders.... i am in dd about 20 euros but... its a question of luck to have sl or tp... for now i will not go live with this system neither with cent account... we have to find more strict rules.
+
+--- 帖子 #287 ---
+i'm new in forex and i'm following this thread for me it is a risky method but with a filter it's possible de improve it...maybe ? i set the indicator with different TF H4 H1 M30 M15 M5 M1 Earlier in the day there was JPY as a weak currency we see in the pic that the JPY strenght is increasing from H4 to M1 I have bought JPY at this time with success...i don't know if that can be useful for the method create a new indicator which represents the evolution of the currency from H4 to M1 ????
+
+--- 帖子 #288 ---
+Hi, I'm getting error to "Allow Dll files". I've already allowed. Please help me to resolve.
+
+--- 帖子 #289 ---
+interesting. this is a completely different approach from madscal's. it is based on the grow of the strengh of the basket. the rule can be: 6 tf period 3: h4,h1,m30,m15,m5,m1 find a symbol that in every tf is more strong or more weak. when you find it for strong you buy it for weak you sell. when hit tp in currency fixed by user close all baskets wen it sl fixed by user close all bsket. it is easy to say but difficult to do for me.... the coding... but.... if anyone wants to try??? faryne???????
+
+--- 帖子 #290 ---
+as today i am in vacation i enjoyed to do this: modify the indicator cutting off the annoying rectangle and adding black background to not be disturbed by ghe chart. I did 6 different setting for the indicator and attached 6 instances in a single chart. I saved the template. who wants to try this manual can do. if someone find it useful i will to try to merge it in an unique indicator.
+
+--- 帖子 #291 ---
+maybe a bad idea...? it's difficult to test during the news
+
+--- 帖子 #292 ---
+im testind only demo for now. today close 1 take profit and another 35 orders are in the market. i trade from 2 to 22 my broker is gmt+2. i trade max 6 basket at a time. when stop 100 euro the ea auto removes. when tp 10 euro the ea continue to trade. if you want remove close all and remove from chart.
+
+--- 帖子 #293 ---
+hellow Ezios can you code CCFp 5.2 (170606)-MD4-std indicator 0.007 level and 0.005 level break out time sound alert send notification code? regards scalper16
+
+--- 帖子 #294 ---
+dont' know this indicator how it works... perhaps it can be used to measure the streght of all the market to establish the moment when to trade and when not to trade...
+
+--- 帖子 #295 ---
+Ok, I already understood it. Just to mention that my experience shows that this is an absolute scalping. You go in, you take a little and you go out. The next moment again and so on. The picture is visible. I tracked alerts before news, during and after news. If you trade inside a daily chart, such as H1, there are no problems for now. You receive signals, you enter with 7 pairs, maybe seven more, you make $ 10 and go out. EUR-pairs from the day before, noon did nothing during Asia, I manually closed them before LO today. There is no volatility. If you do not, then the currency market is flat. This is a price action signal. If you do not have a trend filter, SnR, pivot or fibo, you are doomed. But that's what the big boys do. News is probably not a problem. Yesterday he did well today. This is a strategy for a highly volatile signal. With such an impression I remain. All day-to-day trading indicators showed a reverse signal and entered big DD, waiting for the news. I use BQR and TDI with EAX dashboard. I was looking for the winner. Again, pwtcea_v2 went into trading GBP and JPY at 12:55 GMT, 35 min ago. big news affecting USD and CAD, but at 13:25 it reached $ 10. Followed by short-term news, within minutes. No winner, egalit. I restrict BQR to many signals, but I am struggling with the big DD. Today's day is not indicative, I guess many systems are green. Attached Image (click to enlarge) Attached Image (click to enlarge) Ок, това вече го разбрах. Само да спомена, че моят опит показва, че това е абсолютен скалпинг. Влизаш, взимаш малко и излизаш. В следващият момент отново и т. н. В снимката се вижда. Проследих сигналите преди новини, по време на новини и след тях. Ако търгуваш на вътре дневна графика, примерно H1, засега няма проблеми. Получаваш сигнали, влизаш с 7 двойки, може с още 7, правиш 10$ и излизаш. Двойките с EUR от предишният ден, след обяд, нищо не направиха по време на Азия, ръчно ги затворих преди LO днес. Няма волатилност. Ако не ги направиш, значи е плосък пазара за валутата. Това е price action сигнал. Ако нямаш филтър за тренд, SnR, pivot или fibo, обречен си. Но така правят големите момчета. Новините вероятно не са проблем. Вчера и днес се справи чудесно. Това е стратегия за силно волативен сигнал. С такова впечатление оставам. Всички индикатори за дневна търговия показваха обратен сигнал и влизаха в голям DD, чакаха новините. Аз използвам BQR и TDI с табло EAX. Търсех победителя. Отново pwtcea_v2 влезе в търговия GBP и JPY в 12:55 GMT, 35 мин. преди т.н. големи новини, засягащи USD и CAD, но в 13:25 постигна 10$. Последваха новините, които краткосрочно въздействат, в рамките на минути. Победител няма, равенство. Аз ограничавам BQR в многото сигнали, но се боря с големият DD. Днешният ден, не е показателен, предполагам много системи са на зелено.
+
+--- 帖子 #296 ---
+I suggest you enter the magical number into the EA settings themselves. Get it out of the buttons. It makes no sense to start EA, have a default number of 6161 and then change it. I took a picture of the dashboard I use to track signals with the same magical number. The other I think is important for EA, prohibiting and resolving automatic trading. Just an example: I launch EA, immediately finds currency for trading and starts deals. The merchant can not blink with his eyes to change the magical number, and what remains to look at the graphics. Предлагам ти магическият номер, да се въвежда в самите настройки на EA. Махни го от бутоните. Няма смисъл да стартираш EA, да е с номер по подразбиране 6161 и после да го променяш. Направих снимка на таблото, което използвам за да проследя сигналите със същият магически номер. Другото, което мисля, че е важно за EA, забраняване и разрешаване на автоматичната търговия. Просто пример: Стартирам EA, веднага намира валута за търговия и стартира сделки. Търговеца няма възможност и да мигне с очите си, за да промени магическият номер, а какво остава да погледне графиките.
+
+--- 帖子 #297 ---
+i use magic 6161 but i do many tries with more ea and they have magic different so i put magic 6464 and i close all... so it is very useful to me to change magic at the fly without to go in the setting and change it. also if i want to watch other eas what they doing i change magic and i see the numbers.. so its the same thing if you dont change it dont look at it. some eas use magic = 0 and i put 0 and i see the trades. so... the other indicators and dashboards that you use i dont know...
+
+--- 帖子 #298 ---
+Parallel to the pwtcea_v2 test, I tested the Medusa. Almost the same proposal. Please put a magical number. Allow currency selections. Just an example: I never trade CHF because my broker requires a big margin and so I release funds for the other couples. I tried to remove Breakeven and TS by entering 0, the basket went in a positive direction, then returned to 0 and closed. Allow the trader to choose whether or not to use TS. Probably I need more explanation from post 251. Example: I want to trade pairs that are not directly related to the news. Naturally, if there is a signal for AUD today, there is a connection with USD and CAD, but if I enter 90 minutes before the news does not trade, it prohibits all pairs with AUD. I entered 1 minute after the news, but EA did not release the pairs list. Absolutely no currency has entered into the terms. That can not be true. I saw opening CAD and JPY from pwtcea_v2 Actually this is a price action signal based on daily chart and I think pwtcea_v2 and Medusa do well in the calculations of signals and logic. Another question is whether this signal is along with the trend, has economic news, has an earthquake happened, someone has resigned or uncle Donald has said some stupidity. Just one example: Correct signal, only 7 pairs, each doing 15 pips = 105. About 10 $ with 0.01. If there is a pair pulling fast and doing more, again $ 10. If there are 2 or 3 more signals, it depends on the day, here are 300 pips. It looks simple, but there is a manual closing. The 7 pairs range between 20 pips and -20, reach 50, return to -30 and so more than 1-2 hours. I will not wait for them, I will just close them with a small profit. It is clear that couples are in consensus. I think that about 300 pips is a very good option for the day. Паралелно с теста на pwtcea_v2, тествах и Medusa. Почти същото предложение. Моля Ви, сложете магически номер. Дайте възможност за избор на валути. Просто пример: Аз никога не търгувам CHF, защото моят брокер изисква голям марджин и така освобождавам средства за останалите двойки. Опитах се да премахна Breakeven и TS, като въведох 0, кошницата отиде в положителна посока, после върна до 0 и затвори. Дайте възможност на търговеца да избира, иска или не, да използва TS. Вероятно ми трябва повече обяснение от пост 251. Примерно: Искам да търгувам двойки, които не са свързани пряко с новината. Естествено, ако има сигнал за AUD днес, има връзка с USD и CAD, но ако въведа 90 мин. преди новина да не търгува, забранява всички двойки с AUD. Въведох 1 мин. след новината, но EA не освободи списъка от двойки. Абсолютно нито една валута не влезе в условията. Това няма как да е вярно. Видях отваряне на CAD и JPY от pwtcea_v2 Всъщност това е price action сигнал на базата на дневна графика и аз мисля, че pwtcea_v2 и Medusa добре се справят в изчисленията на сигналите и логиката. Друг е въпроса, дали този сигнал е заедно с тренда, икономическа новина ли има, земетресение ли е станало, някой си е подал оставката или чичо Доналд е казал някаква глупост. Само един пример: Правилен сигнал, само 7 двойки, всяка прави по 15 пипа = 105. Около 10$ с 0.01. Ако има двойка да дърпа бързо и прави повече, пак 10$. Ако има още 2 или 3 сигнала, зависи от деня, ето ти 300 пипа. Изглежда просто, но има и ръчно затваряне. 7-те двойки варират между 20 пипа и -20, достигат 50, връщат на -30 и така повече от 1 - 2 часа. Няма да ги чакам, просто ще ги затворя с малка печалба. Ясно е, че двойките са в консенсус. Аз мисля, че около 300 пипа, е един много добър вариант за деня.
+
+--- 帖子 #299 ---
+I upload version 3. One has the ablity to set trade time from-to , use time filter true or false open max baskets , set daily profit target so.. if you want trade 1 our a day and take 10 dollars you can.... the settings of default are as i like from my broker. test and good luck.
+
+--- 帖子 #300 ---
+I write slowly and with many mistakes. Only until I write this and you publish the new version. You're incredible! Ok, this is not a big problem. I gave you an example simply, you run EA and immediately make deals. It is clear that it will stay with 6161. The other is more important, authorizing and disabling automatic trading. Manually control when EA is trading. Business sessions have many key moments. For example, during the London session closing the Asian markets, EA has open deals, but I do not want to open new ones at this point because the signal is uncertain. Then come USA. With one click of a button, the merchant can ban the trade for a certain amount of time and start again. If you know you follow news and you are not a risky player, just OFF. Of course, this is just a proposal. I guess the goal is purely automatic trading. Many things are needed to make this happen. It is best for EA to choose the trading time (GMT or PC time). So you can easily avoid inappropriate trading times. There is a very crucial moment. Limiting EA to the number of transactions made at a time. If it does not, you risk the whole balance. Example: The Merchant has no idea which of the eight currencies will signal during the day and puts them all. Only three currencies receive a signal at some time. Theoretically, even just two to go through 2 levels, there are 28 deals, plus the third one in 1 level, another 7, that's a total of 35 deals. Just think if this is the limit of your account and some currency passes the next level. Even if they have a very good signal, margin call. Let's think a little about the options for MM and R:R. Аз пиша бавно и с много грешки. Само докато напиша това и ти публикува новата версия. Невероятен си! Ок, това не е голям проблем. Дадох Ви пример просто, пускате EA и веднага пуска сделки. Ясно е, че ще остане с 6161. Другото е по-важно, разрешаване и забраняване на автоматичната търговия. Ръчно управление, кога EA да търгува. Търговските сесии, имат много ключови моменти. Например по времето на Лондон сесия, затварят Азиатските пазари, EA има отворени сделки, но не искам да отваря нови, точно в този момент, защото сигнала е несигурен. После идват USA. Търговеца с едно натискане на бутон, може да забрани търговията за определено време и отново да стартира. Ако знаеш, че следва новина и не си рисков играч, просто OFF. Разбира се, това е само предложение. Предполагам, че целта е изцяло автоматична търговия. Много неща са необходими, за да се случи това. Най-добре е, в EA да се избира времето за търговия (по GMT или PC време). Така лесно избягваш неподходящите времена на търговия. Има един много ключов момент. Ограничаването на EA в броя на сключените сделки в даден момент. Ако това го няма, рискуваш целият баланс. Пример: Търговеца няма представа, кои от 8-те валути ще имат сигнал през деня и ги пуска всичките. Само три валути, получават сигнал през някакво време. Теоретично, дори само 2 да минат през 2 нива, са 28 сделки, плюс третата през 1 ниво, още 7, това е общо 35 сделки. Просто помислете, ако това е границата на вашата сметка и някоя валута премине следващо ниво. Дори и да са с много изгоден сигнал, margin call. Нека да помислим малко за вариантите за MM и R:R.
+
+--- 帖子 #301 ---
+How can I change Max Baskets 6?
+
+--- 帖子 #302 ---
+ok i understood. but im not ready to handle the news with this ea.. but remember that you can program the day of trading by setting in the string which basket you want to trade if a day there is big news in cad you cut off cad from the string and the ea will not trade cad. if you want to limit the number of basket there is the setting and you do. remember you have to do this when you attach the ea and it will be effect until you remove the ea. when you remove the ea all variables are initialized to their default value. all we want is full automatic but it is impossible. the news... the account balance... the number of basket... is a thing that one must set by himself. ok? test it.
+
+--- 帖子 #303 ---
+i like this idea the true challenge is to find the time of reversal ...LOL yesterday after news there was a good opportunity buying JPY first a big DD then finally a win i'm following you
+
+--- 帖子 #304 ---
+in fact... the reason i put sl of 100 is to give the possibility to the market to move.... in theory you can to attach an ea for every 8 chart and make it to work only in 1 currency 1 for eur 1 for usd 1 for jpg with different magic number and so you can also change the sto ploss and take profit. dont know if this is the right way or it is better to trade all together... we will se...
+
+--- 帖子 #305 ---
+Hi traders. below is my contribution to this thread please find attached two currency strength indicator that I personally use. attached in this post one is called closed cycle v1.5 . it display the major symbols reading. I Have changed the default settings from H4 to M5. and I trade the trend when the different between the symbol is grater than 500.( or as the trader prefer ) also one of the symbols must be red and the other must be blue.
+
+--- 帖子 #306 ---
+The second indicator i use is similar to the one posted in this thread. thus I have found that it gives little different readings. I usually trade the pair that give me reading not less than 2 some times 3. I like trade with both indicator and both must agree to catch good pips from the trend
+
+--- 帖子 #307 ---
+I really do not understand how to change the number of baskets. I want to trade three baskets. For example, EUR passes 1st level and EA opens 1 basket, JPY also passes 1st level and EA opens 2nd basket. Let's say the JPY passes level 2 and EA opens the 3rd basket. I want EA to stop opening more baskets at this point. Attached Image (click to enlarge) Аз наистина неразбирам, как да променя броя на кошниците. Искам да търгувам 3 кошници. Примерно: EUR преминава 1-во ниво и EA отваря 1 кошница, JPY също преминава 1-во ниво и EA отваря 2-ра кошница. Да кажем, че JPY преминава 2-ро ниво и EA отваря 3-та кошница. Искам в този момент EA да спре да отваря повече кошници.
+
+--- 帖子 #308 ---
+f you want do so go in the setting the final string you putonly a pair for example eur it will trade only eur. you change the magic and you attach to a chart for others you do the same. ifyou leave the string full it will trade all.
+
+--- 帖子 #309 ---
+thanx very much for the indicators. i did not understand the picture... you sold gbpjpg pair or you sold the 2 baskets gbp and jpg?
+
+--- 帖子 #310 ---
+Faryne you become famous with your Medusa ea... Look here: https://soehoe.id/medusa-ea.t10218/
+
+--- 帖子 #311 ---
+yes. you sell GBPJPY only. look at the attache picture for more explanation.
+
+--- 帖子 #312 ---
+The problem is that when I enter only one currency, Max Baskets remains 6. Attached Image (click to enlarge)
+
+--- 帖子 #313 ---
+you are right... when itry the ea i forgot to put in the setting.... this updated version. remember tu put the basket in uppercase EUR CAD , USD if not the ea will not work.
+
+--- 帖子 #314 ---
+Just one more clarification. How many times will EUR pairs trade in this case? There is a buy signal, EA opens 7 pairs but does not reach the set TP 10. If there is a second buy signal, EA will open another 7 pairs of EUR? If so, I think it's good to restrict the EUR basket itself from opening new 7 until reaching TP or ST. If it reaches TP 10, EA closes the basket and, if there is a new signal, reopens the basket. And it all ends when Target 50 arrives. Attached Image (click to enlarge) Само още едно уточнение. Колко пъти ще търгува двойките на EUR в този случай? Има сигнал купува, EA отваря 7 двойки, но не достига зададеният TP 10. Ако има втори сигнал за купува, EA ще отвори ли още 7 двойки на EUR? Ако е така, мисля че е добре да се ограничи самата кошница на EUR да не отваря нови 7 до достигане на TP или ST. Ако достигне TP 10, EA затваря кошницата и ако вече има нов сигнал, да отвори отново кошницата. И всичко приключва при достигане на Таргет 50.
+
+--- 帖子 #315 ---
+the signal is 3 step. when 1 step open 7 orders if anoter 1 step no signal when signal 2 step and no sl or tp open other 7 order and so on till 3 step. after 3 step if you have st basket 3 no more orders untill stop loss or take profit. so works....
+
+--- 帖子 #316 ---
+This week I do an experiment: put 8 chart everyone with 1 basket to trade eur,usd,cad,.... for every ea i set max basket 3 tp 5 and sl 50 and max daily profit 25. i want to see every basket how goes.... i put the 3 step 4.2 4.7 and 5.0 and different magic number from each ea 6262...6969.
+
+--- 帖子 #317 ---
+If I understand correctly, the EUR basket can open 21 trades in 3 consecutive signals and reach TP or SL. This is a very large volume of trading, especially for small bills (cents). If you also include a basket limitation, EA can only trade at Level 1, EA to open only 7 deals. In this case, you can include at least two more baskets. This increases your chances of getting good signals in 3 currencies a day, and you can still trade with a volume of 21 (0.21 Lots). The idea is to include more currencies with the best 1st signal. Even in 1 EA can happen, with the same magical number. Merchant does not know which currencies to include. For example, all currencies included, you limit EA, trade up to 3 baskets (ie the first 3 who receive a signal) and a second limit is that each currency trades at level 1. I think it is a better option. Put on all TP 45 (or a basket of 15) as you decide. What do you think? Ако правилно те разбирам, кошницата EUR, може да отвори 21 сделки при 3 последователни сигнала и достигане на TP или SL. Това е много голям обем за търговия, особено за малките сметки (центови). Ако включиш и ограничаване на кошницата, EA да сключва сделки само при ниво 1, т.е. EA да отвори само 7 сделки. В този случай можеш да включиш поне още две кошници. Така увеличаваш шансовете да хванеш добри сигнали, при 3 валути в деня и пак да търгуваш с обем 21 (0.21 Lots). Идеята е, да се включат повече валути с най-добрият 1-ви сигнал. Дори в 1 EA може да стане, с един и същи магически номер. Търговеца не знае кои валути да включи. Примерно: Всички валути включени, ограничаваш EA, да търгува с до 3 кошници (т.е. първите 3, които получат сигнал) и второ ограничение е всяка валута да търгува с ниво 1. Мисля, че е по-добър вариант. Слагаш на всички TP 45 (или на кошница по 15), както решиш. Ти как мислиш?
+
+--- 帖子 #318 ---
+dont know... must try... but if you set all 3 signals to 4.2 and max basket 3 and leave the string all currencies can work. but you must consider the signal is up and down so the signals are 6 3 for up and 3 for down... dont know. try.... i try what i told in the precend post.
+
+--- 帖子 #319 ---
+Sorry friends, but why suddenly you can no longer load on the chart? Grazie
+
+--- 帖子 #320 ---
+I refer to Medusa
+
+--- 帖子 #321 ---
+i tried onlyonce medusa with ootb setting buty tried when market closed. noly 3 o4 raws display but dont know... ebaut my ea... today nzd very strong I had 3 signals and its running. I will add next version the string that's trading. we will see if will revert.. in this case i will have take profit.... its good experiment trying currency one at a time...
+
+--- 帖子 #322 ---
+pardon no nzd usd... sorry...
+
+--- 帖子 #323 ---
+Here updated version.
+
+--- 帖子 #324 ---
+Thanks, I forced you, it's simply spectacular if used with a bit of forex knowledge
+
+--- 帖子 #325 ---
+Feel free to contribute to improve the EA...
+
+--- 帖子 #326 ---
+the situatin of today: - running magic 6161 all currencies wth 5 open baskets and about -11 eur dd - magic 6969 usd took profit 5.61 eur now not trading - magic 6868 nzd took profit 5,29 eur now running 1 basket dd -3,36 eur - magic 6767 jpg no trade - magic 6666 gbp 2 basket open about -11 eur dd - magic 6565 eur profit 5,08 eur no trade - magic 6464 chf profit 5,04 eur no trade - magic 6363 cad profit 5,03 eur running 1 basket in profit 1,97 - magic 6262 aud no trade for today no stop loss encountered. I think this system is going well....see tomorrow
+
+--- 帖子 #327 ---
+I changed slightly the ea: default signal set to 4.2 , 4.7 , and 5.0. Inserted magic number in the input so you can select it when attaching the ea. Added in the display near the magic number the currencies that magic is trading. I remain in the opinion that this system is better to be traded currency by currency with a max of 3 basket open a tp of 5 and sl -50 and lot size 0.01. I will dedicated a magic to every currency startint from 6161 aud to 6868 usd. Now for the moment 6161 is in progres by all the currencies but when will be sl or tp i will substitute that magic. Good testing to all.
+
+--- 帖子 #328 ---
+HI thank you EA sir but i have some problem... news filter not work how to fix it ?
+
+--- 帖子 #329 ---
+Did you allowed dll?
+
+--- 帖子 #330 ---
+yes all are ok
+
+--- 帖子 #331 ---
+Bad day for the system today on my side: I got stop loss from magic 6161 all currencies -100 euro stop loss from magic 6363 cad -50 eur. I am now in the office and have not the detail because i got mail from the Platform. when come back home i will see... perhaps today was nesc on cad currency... i not able for now to handle news... to next post....
+
+--- 帖子 #332 ---
+here the details: magic 6161 stop all currncies stop loss -100 eur auto removed from chart magic 6262 aud profit 5.01 eur now not trading magic 6363 cad stop loss -50 euro autoremoved from chart magic 6464 chf here there is something wrong... dont know what happended has 2 open orders and -5 eur dd.... magic 6565 eur no trade magic 6666 gbp 3 basket open -44 eur dd magic 6767 jpg no trade magic 6868 nzd 3 baskets open -13 eur dd magic 6969 usd no trade so... in conclusion today market very strong and system is in loss... i will not replacing the loosing charts and let the system go on with remaining currencies at the end when nothing remain i will start it from scratch.... best wishes and testing.
+
+--- 帖子 #333 ---
+I've got the best results with this system. These are today's results and my setting.
+
+--- 帖子 #334 ---
+for today this sistem is good because of the market very strong. its good idea to start from daily and end 15m 5m and 1m can be the fake signal. Here we dont trade for the inversion we trade for continuation of trend... every system can be good or bad it depends on the days.....
+
+--- 帖子 #335 ---
+You are right. The market was today very strong. But the entries were opposite the trend. And this is interested that this system was profitable opposite the strong trend. If you look at the screenshot above there were entries on GBP short. It is against the strong trend. I entered. So far so good. Let's wait how it will end.
+
+--- 帖子 #336 ---
+Update for this morning: magic 6262 aud profit 5,03 eur running 1 open basket about -1 eur dd magic 6464 chf 2 market orders opened about -6 eur dd magic 6565 eur no trade magic 6666 gbp got stop loss overnight -50 eur autoremoved from chart magic 6767 jpg no trade magic 6868 nza 3 open baskets about -6 eur dd magic 6969 usd profit 5,02 eur no trade we will see... its like HighLander: only one will remanin..... I am thinking about to add a reversal option for each currency the reversal option can work so: wait for the hgher signal deltaup (5.0) and buy wait for lower signal deltaup (4.7) and buy wait for lower signal deltaup (4.2) and buy for signals for delta down sell. in this way running all 2 settings when there is stop los from one side is profit from the other side but only with the higher signal...
+
+--- 帖子 #337 ---
+Namor explain better your rules i can do ea.... we looking for a system thats profitable the majority of times... you look 6 chart daily 4hr 1hr 30m 15m 5m and then? whats the rule? compare? tell.... i can do ea....
+
+--- 帖子 #338 ---
+Ezios Hello! I asked you to make this indicator a month ago!!! https://www.forexfactory.com/showthr...8#post10774128
+
+--- 帖子 #339 ---
+I don't have time to explain it now. I'll do it in 5-6 hours later.
+
+--- 帖子 #340 ---
+for now i cut off the rectangle and added the background in black next time i will add the signal deltaup and deltadown and the message . for to hae 6 indicators one near the other its better to put the message under the display
+
+--- 帖子 #341 ---
+Hi Ezios, The first screenshot is today's results. The second one is opened trades. On the third one I explain my entry. On the TF1440 is CAD the weakest. In this case I'm looking for CAD to buy. On the TF 240 must be CAD higher than on TF 1440. On the TF 60 must be CAD higher or equal as on TF 240. On the TF 30 must be CAD higher or equal as on TF 60. I think it is irrelevant to use lower timeframe. I didn't enter CADCHF long because CHF was nearest to CAD on TF1440. I hope it is clear for you.
+
+--- 帖子 #342 ---
+Yes I trade like that but it's a method totally different of Gabin S. I'm thinking an indicator with lines would be useful for instance a curve by currency which would show the evolution of the strenght from H 4 to M15.
+
+--- 帖子 #343 ---
+Hi Namor, Thank you for explaining your strategy. Would you please explain what method you use for Take Profit (preferably your recommendation for manual trading). Thank you, much appreciated. Chris
+
+--- 帖子 #344 ---
+My Take profit for 0.01 lot is 37 Eur. For 1 lot it is 3700. My Stop loss for 0.01 lot is 30.
+
+--- 帖子 #345 ---
+Namor but in the picture cad in tf 30 was not higher then tf 60... anyway i uderstood y our rule you go with the trend and not against the trend. if cad is growing y ou buy it not sell ad madscalp system
+
+--- 帖子 #346 ---
+It is not higher, but it is equal. I wrote it in my rules. I don't agree with you. I go against the trend. Look at the daily chart f.e. GBPCAD.
+
+--- 帖子 #347 ---
+excuse Namor in the pictur tf 60 cad whas 5,60 and tf 30 was 5,30.... about the trend i intend the trend of the whole basket not single pairs... here we are basketting...
+
+--- 帖子 #348 ---
+I don't look at the digits, I look at the location. But maybe it would be better to look at the digits. We should try it. It is not important whether we call it with the trend or against the trend. Important is whether it works or not.
+
+--- 帖子 #349 ---
+yes Namor i agree... it must work and work not allways but more often than not working. wirh r:r about 1.1 if not so the system is failure....
+
+--- 帖子 #350 ---
+Ok now about my test: magic 6262 aud got stop loss -50 eur autoremoved from chart magic 6464 chf take profit 5 eur not trading magic 6565 eur 1 bsket open about -1 eur dd magic 6767 jpg no trade magic 6868 nzd 3 basket open -9.42 eur dd magic 6969 usd profit 5.02 not trading it seem no god in this way.. but we will see next days
+
+--- 帖子 #351 ---
+and finally added the signal deltaup deltadown and delta 1/8 to the indicator here you can set tf and period as you want
+
+--- 帖子 #352 ---
+Ezios Thank you for your huge contribution to the development of this theme. I have a request, make a new indicator cm6tf like you used to do cm mod, without the big black square and with the ability to move in the right place , but if you do, an alert and a message on the screen it will be a masterpiece !!!
+
+--- 帖子 #353 ---
+yesterday i forgot to insert the message buy sell and the mail alert. i will nsert input bool blacksquare true or false i will insert the message alert but under the display because of some people want to use this indicator 4 5 6 times one near the other. this evening when coming back from the office.
+
+--- 帖子 #354 ---
+about my test: yesterday nzd got another 5 eur profit and this morning too eur is in progres with a open basket. I will test until all basket go stop los then restart the test with other options. i want to add option down or up to consider only delta down or only delta up signals for example if you put in the string DOWN EUR the ea will trigger only buy basket when delta down signals if you put UP EUR the ea will trigger only sell basket when delta up signals. i want to select the best signals and the best basket to be in action .
+
+--- 帖子 #355 ---
+Ezios explain to me why you need the email alert? The signal lasts for a few seconds. When the message with the alert on the screen is much more convenient and intuitive.
+
+--- 帖子 #356 ---
+personally i dont use mail alert nor manual trading i only automatic but as someone asked me for mail alert in preceding indicator i want to maintain this as no problem for me to insert
+
+--- 帖子 #357 ---
+The message alert on the screen you can do or is it a problem for you ?
+
+--- 帖子 #358 ---
+i will do but not now this evening. now i am in the office
+
+--- 帖子 #359 ---
+See what it looks like to me. Remove this black background, anyone can put the indicator on a black background. Attached Image (click to enlarge) Виж как изглежда при мен. Махнете този черен фон, всеки може да си сложи индикатора на черен фон.
+
+--- 帖子 #360 ---
+greetings to all if you please replace the indicator mentioned in post # 305 with attached updated one. programmers can code this indicator to the experts in this thread to test trading the trend. thank you
+
+--- 帖子 #361 ---
+yes but i like to do bool BlackSquare=false if i want i put BlackSquare=true and the game is done
+
+--- 帖子 #362 ---
+Ezios I didn't see the posts in this thread where you were asked to do a warning under the display??? Under the display is very inconvenient...
+
+--- 帖子 #363 ---
+Hi Ezios, I would tend to agree with syndicat, your indicator is much more useful in it's original form.
+
+--- 帖子 #364 ---
+My friend, I just do not see this option BlackSquare? Attached Image (click to enlarge)
+
+--- 帖子 #365 ---
+Hi AlHaggag Could you explain again how you trade with this indicator ? Thx.
+
+--- 帖子 #366 ---
+please go back to the picture in post #311 page 16 for more explanation. and if its not understood. I will explain again.
+
+--- 帖子 #367 ---
+good evening friends, it does not work me again Jellyfish, empty screen, someone has my same problem?
+
+--- 帖子 #368 ---
+updated cm6tf indicator: put deltaup-down-18 message and signals where in the other indicator - put background as false in the setting if you want turn on true. . i put the indicator in center but you can move where you want by setting xAnchor and yAnchor Closed the discussion about indicator. Who want manual trade use this or cm_mod_v1 its the same a part from setting tf and period.
+
+--- 帖子 #369 ---
+Now about my test: magic 6767 jpg no trade magic 6565 eur 1 basket opened about -4 eur dd magic 6464 chf no trade magic 6969 usd profit 5,06 eur no trade magic 6868 nzd profit 10,21 eur no trade. see tomorrow...
+
+--- 帖子 #370 ---
+Hi Ezios. I am one of those who trade manual with the indicator using email alert. The updated indicator is not sending emails even when I choose email to "true".
+
+--- 帖子 #371 ---
+i will try this option... not tried.
+
+--- 帖子 #372 ---
+ok try now it works...
+
+--- 帖子 #373 ---
+Bravo, it's OK!
+
+--- 帖子 #374 ---
+This morning my test: nothing happend overnight. magic 6565 eur still running 1 basket about -2 eur dd magic 6464 chf no trade magic 6969 usd running 1 basket about +2 eur profit magic 6868 nzd running 3 baskets about -24 eur dd. Next week I will begin another test only on DOWN signals with these parameters: sl -50 tp +5 maxbasket 3 dailytarget 25 in thefollowing order: magic 5151 down aud magic 5252 down cad magic 5353 down chf magic 5454 down eur magic 5555 down gbp magic 5656 down jpg magic 5757 down nzd magic 5858 down usd i will buy the weakest currency when its the signal. i wanted to put sl and tp 1:1 but for now i try this setting. on free time saturday and sunday i will add the option to ea.
+
+--- 帖子 #375 ---
+results for the test today tll now: magic 6868 nzd got stop loss -50 eur autoremoved from chart magic 6565 eur take profit 5,01 eur no trade magic 6464 chf no trade magic 6969 usd 5 eur take profit running 1 basket +1,43 eur profit *************for this week eur and usd was the best profit. we will see next week.
+
+--- 帖子 #376 ---
+Sarted nes tests:from magic 5151 to 5858 with the down option down aud to down usd we will see next week how it goes. i will attach also 6161 eur and 6969 usd with remaining ootb setting
+
+--- 帖子 #377 ---
+Starting this week's test with bad news: magic 5151 down aud got stop loss overnight -50 eur autoremoved from chart magic 5757 down nzd has 2 baskets open and dd about -5 eur magic 6161 eur 1 basket open about +4 eur profit All the other no trade. I have replaced magic 5151 by the default setting trading all signals. I want to make the point of the situation. I am thinking about to do a template of 5 indicators d1 h4 h1 m30 m15 and doing an ea to test the Namor system for trading from gmt 8 to 17 or 7 to 18 and max 3 basket open sl -30 tp +30. We will see if i will be able and what the results. For now good testing to all
+
+--- 帖子 #378 ---
+update for test today: magic 6161 eur got 10 eur profit no trade magic 6969 usd no trade magic 5151 default setting got stop los -100 eur autoremove from chart tomorrow i will attach the same magic 5252 down cad no trade magic 5353 down chf no trade magic 5454 down eur got 5 eur profit no trade now magic 5555 down gbp no trade magic 5656 down jpg no trade magic 5757 down nzd 5.84 eur profit no trading now magic 5858 down usd no trade. i am thinking this system is going well only for eur and usd . we will see next weeks...
+
+--- 帖子 #379 ---
+Good morning, at the moment when i wake up as i have the very short sleeping time I go to see how the platform is going. This night the market was very quiet and the situation is: - magic 5151 all default 3 basket opened -6.44 eur dd - magic 5757 down nzd has opened 2 basket ad is about -9 eur dd all the remaining are doing nothing. Another idea that i had: to put an hedging funcion in each pair and a take profit in each pair. I explain: when each pair reach x pip take profit we close the pair and, when each pair reach x pip of loss, we hedge the pair with the opposite opeeration and wait for break even. To me its not a bad idea in this system. For the take profit no problem opening the order with a take profit in the platform. For the virtual stop loss i have to think how to code. Perhaps testing the Bid of the symbol and when the Bid is at a certain lwevel open the opposite operation. I will think about it.... Good day to all.
+
+--- 帖子 #380 ---
+Good evening, today the system went very good: magic 6161 eur has opened 2 baskets about 1,80 eur in profit magic 6969 usd got 10 eur profit no trade now magic 5151 all default got 30 eur profit and running now 1 backet about 50 cent in profit magic 5252 down cad no trade magic 5353 down chf 5,13 eur profit no trade now magic 5454 down eur 5,07 eur profit running 1 basket now few cent in profit magic 5555 down gbp no trade magic 5656 down jpy 5,06 eur profit now not trading magic 5757 down nzd 2 basket opened -33,33 dd magic 5858 down usd 5 eur profit no trading now as in the life all the strong will survive and will go alive (perhaps).... good testing....
+
+--- 帖子 #381 ---
+Only to update the results of yesterday: magic 5757 down nzd got stop los -50 eur other day other run. It's very boring to test a system but i have to do it. If someone is not interested on my tests tell me and i will stop to post my results. Good day to all.
+
+--- 帖子 #382 ---
+Situation of the system today: - magic 6161 eur 2 basket open about 1,51 eur profit - magic 6969 usd 3 basket opened , about -86 dd - magic 5151 all default hit +53,62 profit . here daily target is 50 so no more trades. - magic 5252 down cad no trade. - magic 5353 down chf no trade. - magic 5454 down eur 5,24 profit no trade - magic 5555 down gbp no trade - magic 5656 down jpy no trade - magic 5858 down usd hit stop loss -50 autoremoved from chart.
+
+--- 帖子 #383 ---
+hi Ezios! You can in pwtceav3ff Advisor.ex4 to replace the indicator cm6tf.ex4 instead of cm_mod_v1.ex4 ?
+
+--- 帖子 #384 ---
+In next version i will add in the inputs tf and period so you can change them. no need to replace indicator its the same. It seems to me the ea already good with this tf. Today the default setting take profit 50 eur daily target. the stop loss occurs only once a week and so.... enyway i can to adjust it...
+
+--- 帖子 #385 ---
+Quite well! When do you plan on releasing a new version?
+
+--- 帖子 #386 ---
+results for today: magic 6161 eur default setting running 2 baskets about be magic 5151 all default hit 54,65 profit now daily target is 50 so now no trading. magic 5252 down cad no trade magic 5353 down chf no trade magic 5454 down eur trading 1 basket about be magic 5555 down gbp 5 eur profit now no trade magic 5656 down jpy no trade magic 6969 usd got stop loss -100 auto removed from chart. New version: - added in the display global tp sl - added input bool usecustomtf default false if you turn to true you can change tf and period if you change tf and period but leave this to false it will have no effect. - when you set usecustomtf to true the actual tf and period will be displayed. - other internal changes in opening and closing orders functions to handle in better way platform errors. good testing.
+
+--- 帖子 #387 ---
+Ezios will this version work on a real account? Are there any restrictions on the period of use? I want to try to put on a real account and test.
+
+--- 帖子 #388 ---
+this ea works only in demo account. its only for test.
+
+--- 帖子 #389 ---
+Can you give me the version for a real account?
+
+--- 帖子 #390 ---
+there are still bugs in this ea.... anyway if y ou want to test y our live account pm me with your email adres and number of account and i will send to you a version with valildity 1 week.
+
+--- 帖子 #391 ---
+k guys... the profit of the ea for this day was about 20 euro for magic 5151 running all devault and other 10 in other 2 magic but... as i had to restart my plaftorm rhe ea did not remember the profit... its a little bug that i will fix next version... good testing to all.
+
+--- 帖子 #392 ---
+only a week... it's ridiculous how you can test the EA in one week??? If you want to sell it, you need to open a branch in the commercial section. This branch was created to improve this strategy , so it is better to post a version here with a deadline of at least one month!!! Traders will test and make suggestions for improvements!!! For the sake of interest, compare the indicator readings on a demo account and on a real account. And you'd be surprised what the difference is in the testimony !!!
+
+--- 帖子 #393 ---
+for now i dont want to sell nothing... only testing... neither me put this on my live account. to me a week ot a month for testing its the same...theproblem with the real account is real money and real people that wont to sell the work of others... so.. if you want 1 month i give 1 month. Me and faryne we are programmers and we protect oru work if you permit and also if you dont permit ok? now stop this discussion from me.
+
+--- 帖子 #394 ---
+I fully support you in your desire to protect your adviser. I suggest you make an Advisor with a limit of one month, with the ability to test both on a demo account and on a real account. Trading on a live account is very different from trading on a demo account where not considered slippage rates, spread widening, requotes, etc. The more people start the EA tests the more accurate the results and faster to find out all the errors in the EA. If you want to test one, I won't bother you... And advice for those who are testing: For a more accurate reading of the indicator, you need to install a script to download the history on currency pairs.
+
+--- 帖子 #395 ---
+I will not put public version for real for all. if someone want 1 month have to pm to me giving his account number.
+
+--- 帖子 #396 ---
+Bugfixed the ea: now go in the history and look for daily profit for any magic. So i can give the situation of today: - magic 5151 all default made 19,75 eur profit now no trading - magic 6161 eur 2 basket opened about -4 dd - magic 5252 down cad no trade - magic 5353 down chf no trade - magic 5454 down eur no trade -magic 5555 down gbp no trade -magic 5656 down jpy 5,05 profit no trade good weekend to all
+
+--- 帖子 #397 ---
+Another thing to fix in this ea is that it executes orders without stop loss and take profit. It can be very risky if the platform disconnect for tecnical problems and you dont see it and the virtual stop loss or take profit cannot be tested by the ea so.... it is necessary to add a guard stop loss and take profit. I will think about it also if i all days go to control the account and theeas but... its better to put stop loss and take profit in the broker platform. I will think about it in new version.
+
+--- 帖子 #398 ---
+New update: i added the ability to put a guard stop loss / take profit for all pairs The option is set to false by default if you turn to true it will put a 100 pip sl and tp guard in every trade opened or if the magic is empty when opening a trade it will modify sl and tp according to your setting. If the option is set to false (default) sl and tp are ignored. When you turn the option to true the sl and tp value are displayed. Added new magic number 8181 whith all default and the sl/tp option set to true and 100 pips.
+
+--- 帖子 #399 ---
+Today catastrofic for the system: magic 5151 all default got stop los -104,52 magic 8181 all default but with 100 pip sl tp got stoploss -100,99 magic 5656 down jpy stop los -51,92 magic 5252 down cad trading 1 basket about be magic 5353 down chf no trade magic 5454 down eur no trade magic 5555 down gbp no trade magic 6161 trading eur 4 basket opened abiut -4 dd. i will attach new magic 8181 with standard setting but 10 pip sl and tp for pair. will see how it does. no time for go live for now..........continuing the test.........
+
+--- 帖子 #400 ---
+last news: magic 5252 down cad got 5 eur profit magic 8181 bought a jpy basket and had stoploss in all 7 pairs -6,55 sl. tomorrow i will attach new 5151 default setting and will continue 8181 magic. applying sl of 10 pips per pair we loose soon or win soon.... it can be a choice.... testing....suer of nothing.
+
+--- 帖子 #401 ---
+system today: magic 8181 all default but sl 10 tp 10 for pair is in profit +5,67 now no trading magic 5151 all default is in profit 40,20 now not trading magic 6161 trading eur 3 basket open about -1 dd magic 5252 down cad no trade remove from chart no more interest magic 5353 down chf no trade remove from card no more interest magic 5454 down eur no trade remove from chart no more interest magic 5555 down gbp got stop loss -50,86 auto removed from chart. 8181 its the most conservative its slight profit but also slight loss..... also 5151 is good for all week is going well... we will see this week.
+
+--- 帖子 #402 ---
+Hi Ezios ! if I open the first set and the signal for the first set again on the next candle, will the EA open another set?
+
+--- 帖子 #403 ---
+no this ea is ontimer not see the candle. every second the ea goest to look for signal. if there is signal first step open a basket and then wait for signal 2 step. no more basket opened for 1 step when signal 2 step is it open another basket and wait for 3 step so..... if you are 2 signals for 1 step eur and use it take the first. no more. usd is out.all mixed. only if you set only a currency then the ea trade all signal in what yu want but tha candle its no matter. the tf and the period you can set. if you set 4h and period 3 the signal is computer on 4h period 3. its the indicator cm6tf.
+
+--- 帖子 #404 ---
+I noticed most stop loss happens on monday . I think because when the market opens there are the gaps and too strong signals and fake signals so... i decide to put a switch to not trade on monday. It is set by default on false so the ea will not trade on monday (not yet tested but its easy to do). The same i did for trade on friday because i dont want to leave opened trades before che close of the market. In demo all is good but in real... the thing is different. so, this switch too is set to false so the ea will not trade on friday by default. Another important change: add a digit in the display and in the indicator's signal. Remember that 4,2 is 4.20 2,7 is 4,70 and so when you see the signal you cen see the exact signal. I wanted to add also trailing and be setting but i wll test next version. good testing.
+
+--- 帖子 #405 ---
+Ok now update from the test: today I made an error: i wanted to make magic 8181 with stop loss and take profit of 10 but I leaved to 100 and so 8181 has behaving as the default setting and made profit 30 eur now is running with 2 basket opened and about -16 dd. nagig 6161 trading eur is about +6 profit with 3 basket opened magic 5151 all default is 2 basket opened and about -17 dd. we will see tomorrow. i will attack new 9191 with standard settings but 10 eur guard sl tp. good testing.
+
+--- 帖子 #406 ---
+Today yen very strong. I imagine there will be stop loss still demoing......
+
+--- 帖子 #407 ---
+Ezios hi! After rebooting the MT4 terminal, the set lot is reset to 0.01. Do so as specified in the settings.
+
+--- 帖子 #408 ---
+i will put lot in the setting as magic. have to fix some other things want to insert also trailing stops.
+
+--- 帖子 #409 ---
+Today got 2 stop loss in magic 5151 all default and 8181 all default with guard sl tp 100 pips. about -89 eur each stop loss . Magic 9191 all default but sl tp of 10 pips got profit 4,55 eur. It's small profit with lot 0.01 but if you put lot 0.10 become good profit for day. magic 6161 all default but trading only eur did not trade. I fixed a bug that let the ea to open too many orders when the terminal was rebooted. I put the lotsize in the setting so as one can change it when attaching the ea. I will leave magic 9191 standard setting with tp sl 10 pips but lotsize 0.10. I will put magic 6161 with standard setting but lotsize 0.10 and tp 20 and sl 10. we will see... It is not clear for me if putting trailing stops and breakeven is an advantage or not. Perhaps it's better and more easy to leave fixed sl and tp . If the trades are good the system will win. Dont wanted to trade on friday but i am too curious to see the results for tomorrow. Good testing.
+
+--- 帖子 #410 ---
+This night the test did not go as i exected too many sl and no take profit because i leaved the global profit to 10 euro but i have to put to 100 because i m ultiplied lotsize by 10. i will adjust now to 100. Huge loss to the account. next week i will change the demo account to another more capitalized.... tests are tests.... money is no true money
+
+--- 帖子 #411 ---
+for the day i will leave to run only this setting. we will see....
+
+--- 帖子 #412 ---
+From next week I will start the test of this system with the rules: no trade overnight only from gmt 6 to gmt 21 -2 hours from start londeon and +2 hour from end london. i willl put oly 2 magic: 6161 standard set but 100 pip sl and 100 tp for guard no trade on monday ad friday and time filter as i told. Magic 9191 with lot 0.1 and all the other values multiplied by 10 and sl and tp 10:10 pips. and time filter as i told. This is the test thet tells if system is profitable or not. Good luck to all and to next week.
+
+--- 帖子 #413 ---
+EZIOS Please reply to my Private Message
+
+--- 帖子 #414 ---
+catastrofic today...
+
+--- 帖子 #415 ---
+i am working to new ea... when its ready for the test i will post it... complete different system... based on trend....
+
+--- 帖子 #416 ---
+for tomorrow and till end of week i will attach this setting:
+
+--- 帖子 #417 ---
+today the system got target profit. We will see tomorrow how the results. Friday no trading.
+
+--- 帖子 #418 ---
+today the system performed very good: daily target 52 euro. For whis week its finished. Next week same setting no monday. If someone wants to test real contact me in pm and give me your account number and mail adres. i will give you the working expiry 01 06 2018. good testing to all.
+
+--- 帖子 #419 ---
+Do you have any perfomance graph for longer period?
+
+--- 帖子 #420 ---
+till now i changed various settings and tested the ea only to frix the bugs. from next week i will test only this setting and sowing avry day the result of my account. no more. we will see the results of this ea in the time...
+
+--- 帖子 #421 ---
+What do you thing about back testing? Is there any possibility? I will help you if there is interest from your side. Your idea looks good.
+
+--- 帖子 #422 ---
+What do you thing about back testing? Is there any possibility? I will help you if there is interest from your side. Your idea looks good.
+
+--- 帖子 #423 ---
+this is multipair system it can't be backtested. the orders opened at a time are 7. only ft in demo accounts.
+
+--- 帖子 #424 ---
+What will be price of version for real account?
+
+--- 帖子 #425 ---
+i give free version for testing until 01-06-2018 you send me number of your real account and your email. after 1-6-2018 in base of profit of this ea i will decide what to do.
+
+--- 帖子 #426 ---
+Good morning to all. Game over for today. The robot got a cycle of take profit and a stop loss New day tomorrow. image attached:
+
+--- 帖子 #427 ---
+New monster in action. It's name is TrendBasket. Tested for the first time yesterdy got good results. I will post this evening the result for today now running....
+
+--- 帖子 #428 ---
+Today the monster is in big dd and it got a sl in a pair. I think i will change sl/tp to 30 pips to reduce the loss and to have the abililty to renew the trades during the day. To me this ea has great potential... we sill see in the tests....
+
+--- 帖子 #429 ---
+Update from 21Feb to 11Apr
+
+--- 帖子 #430 ---
+I think its good result 40% in 2 months.... i have to change the settings often to test the robots but a full time test as this without to change any setting is very useful to all. thanks.
+
+--- 帖子 #431 ---
+I attached all 2 robots to same account. I changed the setting sl/tp of TrendBasaket from 100 to 30 pips. this night little profit from the 2 robots:
+
+--- 帖子 #433 ---
+This evening i will add an option to pwtcea_v3 and TrendBasket : AutoRemoveOnSl true or false. if turn to true the ea will autoremove from chart when global stop loss (as now does) but if you turn to false the ea will continue to trade. This is useful if you want to test the robot in vps leaving it for 2 3 4 months without human intervention.
+
+--- 帖子 #434 ---
+Tday pwtcea_v3 is going good... TrendBasket no good... .I expected more from this robot but... perhaps no good signals. Will wait...
+
+--- 帖子 #435 ---
+New version of the robots: added AutoRemoveOnSl=false if you want the robot to auto remove itself from chart when global sl reached turn it to true.
+
+--- 帖子 #436 ---
+do you use default setting to run this ea?
+
+--- 帖子 #437 ---
+I will put pwtceav3ff in my demo account with the following setting stable running every day for 2 months and we will see the results. here is the setting:
+
+--- 帖子 #438 ---
+rema,ed it to .txt rename to .set
+
+--- 帖子 #439 ---
+use this setting
+
+--- 帖子 #440 ---
+interesting the setting. i will change my demo account. see wat's happen.
+
+--- 帖子 #441 ---
+New version TrendBasketv2ff. Changed the detection of the signal: not only the strenght of the basket but also the position of it. Changed the setting stop loss for pair 30 and tp 10. We take little profit at a time.
+
+--- 帖子 #442 ---
+Changed the setting for pwtceav3. Now its alone in the account and making his profit.
+
+--- 帖子 #443 ---
+hi, Ezios, can you link your ea test account in your TE explore? so we can check these two eas perfromance.
+
+--- 帖子 #444 ---
+i tried to do this thing but didnt be able to do... first problem my broker is not in the list. so.... i will send the result in puctures... if i will find the way i will do trade explorer
+
+--- 帖子 #446 ---
+maybe you can post your performance via myfxbook or mql5 link here. no need to TE.
+
+--- 帖子 #447 ---
+I have mql5 account. I can to try with it... for now the images: - changed setting to TrendBasket sl/tp for individual pair moved to 30 pips. its equal risk/reward. we will see. - pwtceav3ff run with the setting given. only took about 10 eur profit.
+
+--- 帖子 #448 ---
+pardon... posted the picture of yesterday. picture of today:
+
+--- 帖子 #449 ---
+Friday BAD DAY
+
+--- 帖子 #450 ---
+i think the setting of the 3 steps of signal is very important. now i use 4.5 , 5.0 and 5.5. with the default you do many cycles of take profit but when the market moves strongly you get stop loss. The other setting its more strong for the signals you have - take profit but also - stop loss. i think so. we will see...
+
+--- 帖子 #451 ---
+I thing that for succesfull trades is necessary to choose trading hours. But problem is that backtest is not possible. You idea is good but only for exact time.
+
+--- 帖子 #452 ---
+the time i used is from 3.00 to 21.59. my broker is +2 gmt so is gmt from 1.00 to 19.59. you try 2 o4 3 months in your demo account and you see...
+
+--- 帖子 #453 ---
+Is it possible to add another parametr to be able to trade between 6-8am and second period between 10-12 am in one day?
+
+--- 帖子 #454 ---
+i dont want more complicated things... you just can do it attaching 2 different ea with 2 magic numbers and different times.... so no need to do it.
+
+--- 帖子 #455 ---
+You are right. Thank you
+
+--- 帖子 #456 ---
+Hi Ezios ! The maximum indicator reading which I saw always stayed in a value of 5.16 . Maybe it's worth checking the correctness of the calculation ?
+
+--- 帖子 #457 ---
+the calculation i copied from indicator my calculation follow Madscalp's rule and its correct. This the result for today the robots:
+
+--- 帖子 #458 ---
+Help me get answers to these questions: Can the strength of any of the 8 currencies always be the maximum of 5.16 ??? Why in the EA settings 4.5; 5.0; 5.5; if we know the maximum 5.16 ???
+
+--- 帖子 #459 ---
+Hi Ezios Calculation in the indicator is wrong. The sum of all currencies are always 36 !!! In this screenshot, the sum of all currencies is 36.35 ??? Calculation error is almost 1% for each trade . If there are 30 deals in a month ... 30% profit You do not get
+
+--- 帖子 #460 ---
+i added the second digit for more precision of signal. with 1 digit the result is rounded and is 36. no worry. calculation is not wrong. you want to go witn 3 4 5 6 digits? it will be about 36..... for the question of 5.16 you are free to put 5.16 instead of 5.5 no problem for me. everyone tests the sigals he want...
+
+--- 帖子 #461 ---
+Thanks for the explanation Ezios. Can you make the second and third basket of orders open on the next new candle ?
+
+--- 帖子 #462 ---
+the candle is not relevant in this ea. it is an ontimer ea. it calculates the signal every 1 second not every 1 minute candle. i can to add a parameter time in second and you can set to 60 so the ea will calculates every 60 second but i dont advise you to do it. the logic is every 1 second.
+
+--- 帖子 #463 ---
+As a rule, the price reaches 5.0 several times in one or several days. I want there to be a time lag between basket openings. So that the baskets do not open next to the same price. Is obtained if the price immediately bounced back and You have closed basket of, if the price goes against you the drawdown will less.
+
+--- 帖子 #464 ---
+Ezios I give advice which I tried to trade hands and they improve results!!! I also like You want to make this EA profitable !!! Why don't you listen to me?
+
+--- 帖子 #465 ---
+this ea can not to open the same basket 2 times at the same signal every signal is considered only 1 time if y ou get 5.0 trigger only first time the remainder is not considered. if you get 5 down signal same thing. only 2 basket for 2 signals. so the problem does not exist. max basket can be opened is 6. 1 for every signal.
+
+--- 帖子 #466 ---
+For example, I set the settings 4.8 5.0 5.1 and the price goes in one move, and I will open 3 baskets at the same price !!!
+
+--- 帖子 #467 ---
+no it is impossible. it open a basket for every signal. if is not so download the last version. max 6 basket.
+
+--- 帖子 #468 ---
+new version upload. set input log=true every basket is bought or sold it arrives y ou a email with the signal. good luck and good day.
+
+--- 帖子 #469 ---
+4.8-1 cart 5.0 - 2 cart 5.1-3 cart Correct ??? 3 signals - 3 baskets of one currency!!!
+
+--- 帖子 #470 ---
+And all 3 signals can pass in 5 minutes !!! And there will be an opening 3 baskets in 5 minutes !!! Do you understand what I'm explaining to you? Explain why I need an e-mail ??? The EA will become more profitable to trade ??? Add the right things, not the trash...
+
+--- 帖子 #471 ---
+advice to all want to test this ea: attach with your setting and dont change while the ea is running. If you want to change setting change also magic number so it restart the count from zero. I have no more to tell about it and i will not make any changes to this ea. if you dont like it dont test. point.
+
+--- 帖子 #472 ---
+You want it was profitable, but to make changes to improve the work do not want ... What is the point of testing an expert Advisor that does not make a profit ??? Head to think and not just in order to wear a hat !
+
+--- 帖子 #473 ---
+Ok i read more attemption the posts. i didnt understood about what someone wants to say... anyway... i say that if you trade only one synmbol at a time all 3 signals are respected. for example if you do 8 chart every chart one eur one aud one chf etc etc all 3 signals are respected. in this way you have max 6 basket opened and low dd. in the other way if i do the change the basket maximum becamo more more mobe because there are 8*3=24 for high and 24 for low signal possibility. thats is no practicable. so.... i remain the idea to not change anything. i post the results for today:
+
+--- 帖子 #474 ---
+Second observation: if its true that the limit for last signal is 5.16 then the best setting for to catch all 3 signal is 4.5 4.8 5.1 in this way all 3 signals are covered. I expected more from the other robot TrendBasket but I see its not profitable. Perhaps i have to cut off the 15, tf that's irrelevant or i juswt must to cut off the robot itself.. i dont know... time will tell me. Good evening to all.
+
+--- 帖子 #475 ---
+Today i started final tests with setting of signals 4.5 4.8 5.1 . I attached mgic 5555 gbp magic 5656 jpy magic 5454 eur and 5858 usd. its best setting so last and final tests.
+
+--- 帖子 #476 ---
+Hi, friend. I don't understood. Can use in M15/ H1? M5 are more the 500 just trade. then M15 and H1 how much? Where can find this indicator Explanation.... If can email to me: { email address deleted by staff } Thanks.
+
+--- 帖子 #477 ---
+Ok. Little bugfix the ea did not send right value to email for log of signals thats very useful. Today results very good with the setting 4.5 4.8 5.1 i think really the best. Good luck to all.
+
+--- 帖子 #478 ---
+How to attach sdifferent magic for differerent currency. you have strarted 3 EA?
+
+--- 帖子 #479 ---
+Why is big unbalance between Global stop loss and Global take profit? Did you try 50/50?
+
+--- 帖子 #480 ---
+attach each ea with each different magic number in each different chart set the string to wich currency y9u want to trade. stop loss is 100 because the market have to run first to reach the profit. in that period where there are the news the price goes against. if yiu want to try other money management try... it can be useful.
+
+--- 帖子 #481 ---
+Tonight profit with yen and still drawdown sith dollar. We will see if next week there will be the profit...
+
+--- 帖子 #482 ---
+I have the same results as you. Do you thing about reversal strategy? Simply buy instead sell in the sane moment. I know it could be bad but it worth to be tried.
+
+--- 帖子 #483 ---
+reversal strategh i tried but dont work. more and more stop loss then take profits. so... the unique way is to wait for the price to go in your favour. It doesnt exist a allways profitable strategy...... the reversal of trend is the key. You saw TrendBasket and you saw dont work.
+
+--- 帖子 #484 ---
+Week start with loss... dollar big dd and big sl gbp little profit... go on with test...
+
+--- 帖子 #485 ---
+Today jen got profit and gbp still working... we will see tomorrow...
+
+--- 帖子 #486 ---
+Today gbp got sl in 2 pairs. we will see if tomorrow it will recover. Yesterday was about +6 euro but the target is 10 so... no profit. waiting....
+
+--- 帖子 #487 ---
+Today good profit for gbp and eur activated for the first time with this setup. We will see the results.
+
+--- 帖子 #488 ---
+Today gbp hit stop loss in several pairs and is still suffering... eur hit tp in a pair and is still running... for now with this setup the currency allways in profit was jen. we will see next week...
+
+--- 帖子 #489 ---
+This week start new setting and remove all the others.
+
+--- 帖子 #490 ---
+Ezios with this logic, the EA will never earn. think about why nobody's testing.... if you want to create a profitable EA, you need to listen to the advice!
+
+--- 帖子 #491 ---
+i think this setting is good... i want to try for 1 month... then if is not good we will see if i change the ea ... dont know... we will see this month.
+
+--- 帖子 #492 ---
+I'm amazed at your perseverance.
+
+--- 帖子 #493 ---
+The good news for today is that this setup is going well.... testing for 1 month.....
+
+--- 帖子 #494 ---
+hello, can I ask you? Do you have any new results?
+
+--- 帖子 #495 ---
+hi madscalp How was the use of the DeltaUp &amp; DeltaDown with strength currency and Did not you get any results? Has someone else tested in the long run?
+
+--- 帖子 #496 ---
+i tried this ea in various settings but i did not get good results in the long term so i abandoned the project. if someone have new ideas to revive it i will try to look for it.
+
+--- 帖子 #497 ---
+i am a newbie just interested i have been following this thread, please i will like to make a suggestion can we try different use i mean logic of currency strength? like using logic with currency pairs giraia 28 pairs? Closed cucle F1.6?
+
+--- 帖子 #498 ---
+ok my friend... i dont know exactly what setting you are referring to..... anyway im trying the cm_mod1 indicator with delta 1/8 set to 6 for continuation of the trend. I explain: when signal delta 1/8 is &gt;=6 and first currency is goiong up and last goiong down (arrow) i buy the stronger and sell the weaker. tp 10 sl 25. i am trying this in discretionary way and it seems to have good signals. I can think to automatize this. my demo is icmarket account. any suggestion is welcome.
+
+--- 帖子 #499 ---
+ook, just a new thought i like to share if the rate of losses is more than profit why not try to reverse the system and see how it goes , just to always be on the profit side
+
+--- 帖子 #500 ---
+its a fast scalping system. in theory you can go 1:1 for 10 tp and 10 sl but i want to give the market the ability to move alittle against... try yourself the best for you its the same... the more near you put tp the more probability you have to reach the profit. and vice versa. the important is that good signal is move than 50% you understand?????? bye bye.
+
+
+===== 附件下载链接 =====
+

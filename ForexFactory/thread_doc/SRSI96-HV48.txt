@@ -1,0 +1,114 @@
+//------------------------------------------------------------------------------
+// @version=4
+// (c) BrokeTrader 2020
+//------------------------------------------------------------------------------
+study(title="Stochastic RSI 96 and Historcal Volatility", shorttitle="SRSI-96 & HV-48")
+source = close
+TickerId        = tickerid( syminfo.prefix, syminfo.ticker )
+Show5mSignal    = true //input( true, title="Show 5M Signal" )
+ShowVolatility  = true //input( true, title="Show Volatility Signal" )
+
+Offset          = 100
+
+// Levels on chart
+OverSoldLevel   = 5  + Offset
+OverBoughtLevel = 95 + Offset
+LowMidLevel     = 40 + Offset
+HighMidLevel    = 60 + Offset
+
+
+hline( OverSoldLevel, color=#787b86, linestyle=hline.style_dotted, linewidth=2 )
+hline( OverBoughtLevel, color=#787b86, linestyle=hline.style_dotted, linewidth=2 )
+
+hline( LowMidLevel, color=#787b86 )
+hline( HighMidLevel, color=#787b86 )
+
+
+//------------------------------------------------------------------------------
+// Calculate SRSI-96 (1H) for all time frames
+//------------------------------------------------------------------------------
+L60     = 96    
+S60K    = 30    
+S60D    = 6
+_Rsi60      = rsi( source, L60 )
+Rsi60       = security( TickerId, "60", _Rsi60 )
+_Stoch60    = stoch( Rsi60, Rsi60, Rsi60, L60 )
+Stoch60     = security( TickerId, "60", _Stoch60 )
+_StK60      = sma( Stoch60, S60K )
+StK60       = security( TickerId, "60", _StK60 )
+_MSRSI60    = sma( StK60, S60D )
+MSRSI60     = security( TickerId, "60", _MSRSI60 )
+
+
+//------------------------------------------------------------------------------
+// Calculate SRSI-168 5m for all time frames
+//------------------------------------------------------------------------------
+L5 = 168    
+S5 = 10     
+_Rsi5   = rsi( source, L5 )
+Rsi5    = security( TickerId, "5", _Rsi5 )
+_Stoch5 = stoch( Rsi5, Rsi5, Rsi5, L5 )
+Stoch5  = security( TickerId, "5", _Stoch5 )
+_StK5   = sma( Stoch5, S5 )
+StK5    = security( TickerId, "5", _StK5 )
+_MSRSI5 = sma( StK5, S5 )
+MSRSI5  = security( TickerId, "5", _MSRSI5 )
+
+// Not shown in any other than 5m as it doesn't update in real time on higher
+// timeframes
+if timeframe.period != '5'
+    Show5mSignal := false
+
+//------------------------------------------------------------------------------
+// Plot of both SRSIs
+//------------------------------------------------------------------------------
+plot( MSRSI60+Offset, color=#ffb5be, title="d-line",linewidth=2, transp=0 )
+plot( Show5mSignal ? MSRSI5+Offset:na, color=#00b5ff, title="5MS", linewidth=1, transp=20 )
+
+
+//------------------------------------------------------------------------------
+// Volatility Drawings
+//------------------------------------------------------------------------------
+ShowVol() => timeframe.period == '60' ? true : true
+
+hline( 80, linestyle=hline.style_dotted, color=#ff0000 )
+hline( 60, linestyle=hline.style_dotted, color=#ff9800 )
+hline( 40, linestyle=hline.style_dotted, color=#4caf50 )
+hline( 20, linestyle=hline.style_dotted, color=#004d40 )
+
+
+LookBack    = 48
+Annual      = 365
+xPrice      = log( close / close[1] )
+nPer        = 1 //iff(timeframe.isintraday or timeframe.isdaily, 1, 7)
+xPriceAvg   = sma( xPrice, LookBack )
+xStdDev     = stdev( xPrice, LookBack )
+HVol        = ( xStdDev * sqrt(Annual / nPer)) * 100 * 20
+
+// Capped to 99, we don't want to go across the whole indicator window
+if HVol > 99
+    HVol := 99
+
+GetVolColor() => HVol > 80 ? #ff0000 : HVol > 60 ? #ff9800 : HVol > 40 ? #4caf50 : HVol > 20 ? #004d40 : #5d606b
+
+plot( ShowVol() ? HVol : na, color=GetVolColor(), title="Historical Volatility", linewidth=2 )
+
+dt = time + (time-time[10]) * 1
+
+var lA = label.new( dt, 20, ":1", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#004d40 )
+var lB = label.new( dt, 40, ":1", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#4caf50 )
+var lC = label.new( dt, 60, ":2", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#ff9800 )
+var lD = label.new( dt, 80, ":4", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#ff0000 )
+
+if barstate.islast
+    label.delete( lA )
+    label.delete( lB )
+    label.delete( lC )
+    label.delete( lD )
+    if ShowVol() 
+        lA := label.new( dt, 20, ":1", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#004d40 )
+        lB := label.new( dt, 40, ":1", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#4caf50 )
+        lC := label.new( dt, 60, ":2", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#ff9800 )
+        lD := label.new( dt, 80, ":4", xloc=xloc.bar_time, yloc=yloc.price, color=color.blue, style=label.style_none, textcolor=#ff0000 )
+
+// End of Script.

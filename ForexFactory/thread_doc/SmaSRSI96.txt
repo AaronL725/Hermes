@@ -1,0 +1,84 @@
+// SmaSRSI96
+// @version=4
+// Copyright (c) Broketrader 2020 !
+
+study( title="One Hour Swing Trader", shorttitle="SmaSRSI-96", overlay=true )
+ShowE = input( true, title="Show SRSI Signal")
+
+//----------------------------------------------------------------------------
+// SRSI CALC
+//----------------------------------------------------------------------------
+Price       = close
+RsiPeriod   = 96
+StochPeriod = 96
+SmaK        = 30
+SmaD        = 6
+Rsi         = rsi( Price, RsiPeriod )
+Stoch       = stoch( Rsi, Rsi, Rsi, StochPeriod )
+StochK      = sma( Stoch, SmaK )
+MSRSI       = sma( StochK, SmaD )
+
+//----------------------------------------------------------------------------
+// SMA CALC
+//----------------------------------------------------------------------------
+SmaPeriod   = 96
+Sma96       = sma( Price, SmaPeriod )
+
+//----------------------------------------------------------------------------
+// Plot of SMA96 combined with MSRSI
+// Green (bullish) when price above MA96 AND MSRSI > 40
+// Red (bearish) when price below MA96 AND MSRSI < 60
+//----------------------------------------------------------------------------
+Color = color.green
+FillColor = color.green
+bull = true
+
+// Stay with previous signal as long as no new one valid.
+Color := Color[1] 
+FillColor := FillColor[1]
+bull := bull[1]
+
+// Condition for long signal
+if ( close > Sma96 ) and ( MSRSI > 40.0 )
+    Color := color(#1b5e20)
+    FillColor := color.green
+    bull := true
+
+// Condition for short signal
+if ( close < Sma96 ) and ( MSRSI < 60.0 )
+    Color := color(#b71c1c)
+    FillColor := color.red
+    bull := false
+
+if ShowE == false
+    Color := color(#183e7b)
+    FillColor := color.white
+    
+// Plot SMA and hidden price needed for the fill.
+PlotSma = false
+if timeframe.period == '60'
+    PlotSma := true
+
+SmaPlot = plot( PlotSma?Sma96:na, title="SMA96", style=plot.style_line, linewidth=3, color=Color )
+PricePlot = plot( Price, color=na, display=display.none )
+
+// Calculate gradient value, with pseudo trend age. 
+int TrendAge = 1
+for i=0 to 100
+    if Color == Color[i]
+        TrendAge := i
+    if Color != Color[i] 
+        break
+
+colorGreen(Age) => 
+    Age<2 ? color.new(color.green,2) : Age<4 ? color.new(color.green,4) : Age<6 ? color.new(color.green,6) : Age<8 ? color.new(color.green,8) : Age<10 ? color.new(color.green,10) : Age<12 ? color.new(color.green,12) : Age<14 ? color.new(color.green,14) : Age<16 ? color.new(color.green,16) : Age<18 ? color.new(color.green,18) : Age<20 ? color.new(color.green,20) : Age<22 ? color.new(color.green,22) : Age<24 ? color.new(color.green,24) : Age<26 ? color.new(color.green,26) : Age<28 ? color.new(color.green,28) : Age<30 ? color.new(color.green,30) : Age<32 ? color.new(color.green,32) : Age<34 ? color.new(color.green,34) : Age<36 ? color.new(color.green,36) : Age<38 ? color.new(color.green,38) : Age<40 ? color.new(color.green,40) : Age<42 ? color.new(color.green,42) : Age<44 ? color.new(color.green,44) : Age<46 ? color.new(color.green,46) : Age<48 ? color.new(color.green,48) : Age<50 ? color.new(color.green,50) : Age<52 ? color.new(color.green,52) : Age<54 ? color.new(color.green,54) : Age<56 ? color.new(color.green,56) : Age<58 ? color.new(color.green,58) : Age<60 ? color.new(color.green,60) : Age<62 ? color.new(color.green,62) : Age<64 ? color.new(color.green,64) : Age<66 ? color.new(color.green,66) : Age<68 ? color.new(color.green,68) : Age<70 ? color.new(color.green,70) : Age<72 ? color.new(color.green,72) : Age<74 ? color.new(color.green,74) : Age<76 ? color.new(color.green,76) : Age<78 ? color.new(color.green,78) : Age<80 ? color.new(color.green,80) : Age<82 ? color.new(color.green,82) : Age<84 ? color.new(color.green,84) : Age<86 ? color.new(color.green,86) : Age<88 ? color.new(color.green,88) : color.new(color.green,90)
+
+colorRed(Age) => 
+    Age<2 ? color.new(color.red,2) : Age<4 ? color.new(color.red,4) : Age<6 ? color.new(color.red,6) : Age<8 ? color.new(color.red,8) : Age<10 ? color.new(color.red,10) : Age<12 ? color.new(color.red,12) : Age<14 ? color.new(color.red,14) : Age<16 ? color.new(color.red,16) : Age<18 ? color.new(color.red,18) : Age<20 ? color.new(color.red,20) : Age<22 ? color.new(color.red,22) : Age<24 ? color.new(color.red,24) : Age<26 ? color.new(color.red,26) : Age<28 ? color.new(color.red,28) : Age<30 ? color.new(color.red,30) : Age<32 ? color.new(color.red,32) : Age<34 ? color.new(color.red,34) : Age<36 ? color.new(color.red,36) : Age<38 ? color.new(color.red,38) : Age<40 ? color.new(color.red,40) : Age<42 ? color.new(color.red,42) : Age<44 ? color.new(color.red,44) : Age<46 ? color.new(color.red,46) : Age<48 ? color.new(color.red,48) : Age<50 ? color.new(color.red,50) : Age<52 ? color.new(color.red,52) : Age<54 ? color.new(color.red,54) : Age<56 ? color.new(color.red,56) : Age<58 ? color.new(color.red,58) : Age<60 ? color.new(color.red,60) : Age<62 ? color.new(color.red,62) : Age<64 ? color.new(color.red,64) : Age<66 ? color.new(color.red,66) : Age<68 ? color.new(color.red,68) : Age<70 ? color.new(color.red,70) : Age<72 ? color.new(color.red,72) : Age<74 ? color.new(color.red,74) : Age<76 ? color.new(color.red,76) : Age<78 ? color.new(color.red,78) : Age<80 ? color.new(color.red,80) : Age<82 ? color.new(color.red,82) : Age<84 ? color.new(color.red,84) : Age<86 ? color.new(color.red,86) : Age<88 ? color.new(color.red,88) : color.new(color.red,90)
+
+if timeframe.period == '240'
+    ShowE := false
+    
+fill( SmaPlot, PricePlot, color=ShowE==false?color.white : bull?colorGreen(TrendAge):colorRed(TrendAge), transp=50, title="Fill",editable=false)
+
+// End of File.

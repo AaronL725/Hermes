@@ -1,0 +1,1868 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hey All, Time to give back to FX clan a little; Find attached a trading system that xux99 and I have put together, called SSS. To get the thread rolling we can see if anyone can guess what the hell SSS actually means. UPDATE - Tazmaan is helping team SSS out with gathering tick data history for all the pairs that are profitable with EA. This is a mammoth task. Large round of applause for Tazmaan. KUDOS - Hiachiever (Tim) for providing concept of his "Profit Maximizer". We took his idea and mashed it up with other ideas best for SSS usage; called the LPMM. "Large Price Movement Module" UPDATE - I have extended v1.09 to end of Q1 2011 - If the pathetic feedback levels continue, say bye bye to this thread for good. Enough of that malarkey and down to biz; EA goes on a EURUSD/GBPUSD/EURJPY/GBPJPY/USDCHF/USDCAD/AUDUSD M30 &amp; M5 charts at the moment; please test other pairs. Make sure you have valid history H1/H4/D1 for these pairs. (lets stick with M30 for the moment, we will expand out to other time frames later in test phase) Live I DO NOT recommend you use EURCHF pair - Hedge fund dumps tend to create swings/funkiness in this pair that can expose you to large losses - YOU HAVE BEEN WARNED! OOTB the EA is optimized for the above pairs; there are setfiles for 9 pairs and for sure it's profitable on other pairs, that I have yet to optimize; such as GBPAUD/GBPCAD/GBPNZD due to lack of backtest data - forward testing performance has yet to be validated. Back testing. Please try all possible pairs on M30 and report back what you find. Specify low/med/high profit inc. start/finish balance and low/med/high drawdown or in % and the source of historical data your using. Dates that you MUST USE for backtesting are is 2008.01.26 to 2010.01.26. No other dates periods will be reviewed otherwise. Forward testing. I highly recommend we all try and use http://www.mt4i.com . Then the task of data mining performance will be very easy for the SSS team here. Don't take life too seriously and watch the EA do the hard work This is not a holy grail Any thread detractors that fail to keep this space constructive and relaxed will be dealt with in "Hopwood" style A lucky number in chinese See here for my testing reference accounts (v103 link below is actually running v1.09; without MPTM on FXDD -testing has proven without MPTM is best http://www.mt4i.com/users/sss_ea_v103_wo_mptm Basic overview; The Primary Indy is the Price channel stop. Trends are picked up by this great piece of work. Confirmation filters; A) Damani - a rough measure of liquidity and movement of that liquid. Once it states "TRADE" it will look to the final filter. In times of low liquidity and lesser market activity it will print "DO NOT TRADE" and therefore blocks any entry. B) DSS Bressert - This final filter is THE sanity check, prior to passing entry on to the shell EA for execution. (if the shell logic permits - see the great manual for the shell core functionality) Exits, We have 4 methods of taking profits; A) rubbery (ATR) level ; these vary with ATR of the chart pair (set via multiplier) B) Fib based exit C) LPMM D) Close All We have 3 methods of stop loss; A) 1 rubbery (ATR) level ; these vary with ATR of the chart pair (set via multiplier) B) Indicator based exits - different pairs use different indicators/time frames to trigger exit. C) LPMM In a nutshell, that is it. There are a swathe of other xux99 secret sauce bits (MM plus heaps more) in the shell EA which turn this from a mostly winning/but some bigger losing moments EA into a consistent pip machine with less than 12% DD on EURUSD of the last 2 years. A MASSIVE thanks for xux99 who gave his insight, time, quality coding AND documentation skills to this project. If you feel you wish to donate something, xux99 I'm sure will nominate his charity of choice. LIVE version is go. Expiry date is 3 months from today. 1) v1.09 will be released for Demo testing/live work - there will constant cycles of time limited live/demo releases. (this is an attempt to thwart dodgy eBay scammers) Any other suggestions/methods of minimizing the scam factor are welcomed. 2) All live account users are encouraged to provide a mt4i.com or fxbook link to the account. If they wish to maintain some privacy on this, [understandably] they do not have to post and can send me the weblink/password. I will not share with 3rd parties. This is for live forward test information only. 3) If live forward testing goes well - I recommend donating some of the proceeds of your profits to your charity of choice. UPDATE - v1.09 is ready for testers - please make use of mt4i.com so we can share results freely. See above for web links. v1.01 changes a) Fibonacci retracements and extensions based exits. b) ATR based min order distance option rather than hard values. (wider range pairs it can be applied to) c) Price Beyond Pivot - When getting a long signal , rather than immediately opening a trade, a BUYSTOP is placed at the last Pivot High if this is higher than the current price. If last Pivot high is lower than current price just BUY as normal. A pivot high is formed when the middle bar high is higher than closing highs of bars either side. Sell is complete reverse of Buy. The advantage here is if we get a buy signal then place a BUYSTOP and the price suddenly reverses and goes down the order is not sent and we are saved from a loss. We can expire the BUYSTOP after a time or leave it there until we get a new signal at which point we delete it. d) Modify "OppositeSignalExit" logic. Number of chart bar/candles expiry will trigger this exit type. (if enabled) e)Added GMT Broker offset, so start/stop times are referenced back to the same integer and not broker time. v1.02 changes a) Auto GMT offset with fallback to manual offset if auto has problem. (use manual offset for backtesting) b) Monday Trading Start hour/minute. c) Friday Trading Stop hour/minute - no more entries are permitted, but open entries continue to get managed. d) Setting all non profitable trades TP BE +30 (default is 30 but can be changed with setting) when item "Friday trading stop" is triggered. Every candle after, the the BE is reduced by 5 pips (default is 5 but can be changed with setting) until BE (zero=entry price) is reached. e) Friday closing all profitable trades @ hour/minute f) Chart print bug fixed "Trading hours" shows 24:59 for 00:59 time v1.03 changes CloseAfterMinutes: A losing trade is closed after the defined number of minutes since opened. 0 disables this option. v1.04 changes AutoGMT time bug fixed (the bug automatically detected the server time incorrectly) v1.05 changes DSTOffset setting switch added to correctly switch between Summer time during backtesting/live. v1.06 changes CFX broker AutoGMTOffset bug fixed. v1.07 changes Internal development version v1.08 changes Mod; FF Calendar URL has been changed. URL will now be a EA setting so future calendar url changes do not require a recompile. Add; A new LPMM mode (Profit Maximizer) "Large Price Movement Mode" When LPMM mode is active after a big move in the market, all normal TP's are suppressed. LPMM TP is handled by independent Price_Channel_Stop indicator exclusively until trend exhaustion. A number of EA settings have been revised to leverage best results from LPMM. Add; Min and max lots that money management can use Add; Text on chart can be shifted around using settings EU M5 backtest has been attached v1.09 changes Add; FIFO broker rule added. To be used with the CloseAll function. Add; LPMM active/inactive shows on chart. Green for up trend. Red for Down trend. Fix; Chart print function would leave random instances of text "Label". Now fixed. Add; USDCAD &amp; AUDUSD M30 added to current settings. Add; Where profitable, setting files have been updated to use LPMM. Some pairs did not lend themselves to LPMM and therefore do not have LPMM enabled. Great update; big thanks to xux99! Later, getdown71
+
+--- 帖子 #2 ---
+installer is not working
+
+--- 帖子 #3 ---
+I refuse to run .exe files I download off message boards.
+
+--- 帖子 #4 ---
+Getdown and XUX are very reputable. If you do not like it then you can move on. Regards, Jeff
+
+--- 帖子 #5 ---
+It works - try copying exe to hard drive folder that you have permission to access.
+
+--- 帖子 #6 ---
+I've got some spare time to run some tests. SSS shows ane expiration of 1/5/2010... ???? Does this really occur ?
+
+--- 帖子 #7 ---
+Cheers. Got everything. This looks like a classy bit of programming.
+
+--- 帖子 #8 ---
+It's demo account only and expires in around 3 months to make way for enhancements and bug fixes.
+
+--- 帖子 #9 ---
+Good idea setting it for demo only. Perfect for forward testing and fixing any bugs before testing on live accounts. Thanks and I'll forward-test on my demo account.
+
+--- 帖子 #10 ---
+Hi getdown71, Thanks for sharing this EA. I'll put it 1 of my demo account on this EA... Cheers Sahars
+
+--- 帖子 #11 ---
+running it now - !
+
+--- 帖子 #12 ---
+Why the blackbox nature of this EA? As for the meaning of SSS Super Simple System Simply Silly System SMA SMA System Any of those three?
+
+--- 帖子 #13 ---
+Hey RR, The Blackbox approach was collectively agreed upon to prevent ebay scammers from taking the source code and trying to sell it as another system. Something that we have seen a lot of recently. Cheers, getdown71
+
+--- 帖子 #14 ---
+If xux99 is involved, only goodness can come of it. I'm sure he'll roll by and explain how it works soon. Test test test go go go go.... Edit: This looks just like Uranus EA with Damiani indicator added. Damiani indicator is used in the semi famous "You're Lucky EA" (or Blessing 3, can't remember) over on TSD. There is nothing "Black Box" about this EA...
+
+--- 帖子 #15 ---
+I used black box as a generic term. If I can't see the code, I can't be 100% sure what's going on, and thus: black box. I don't mean for it to be derogatory in any way.
+
+--- 帖子 #16 ---
+Hi Joe, xux99 used the same shell EA as Uranus and THV. I saw the synergy of Price Channel Stop, Damiani and DSS Bressert. As it turns out the backtester tends to agree. (not that it means much) It's a "less is more" evolution/devolution, depending on your point of view. BTW your set files from THV and Uranus are right on the money bud. Glad to have you on the SSS team. Cheers, getdown71
+
+--- 帖子 #17 ---
+Will be with the testing Cheers P.S. Is the EA "Plug n Play" type whereby all input fields are by default? I mean, for a start can we just leave it as default and the EA will starts to run?
+
+--- 帖子 #18 ---
+Hi Mr. XUX99, Well done.. the EA so far managed to open with some profit. Since I prefer for scalping method, I changed the default set to my own set as per attached. The profit is not that high, but at least managed to secure the trade. I'm going to do a backtest for this set and I'll post the result to the forum. Cheers Sahars
+
+--- 帖子 #19 ---
+Hi Guys.. Before is too late....please ignore the set that I post in this forum. I just finished the backtest and the result not so good...Well...I think we need to do some fine tuning and see how this indicator behave.... But I believed this EA has potential... Cheers Sahars
+
+--- 帖子 #20 ---
+Yes. The details are in post 1 - EURUSD are the optimized defaults. Other pairs appear to profitable too. Lets find out. Go SSS test team.
+
+--- 帖子 #21 ---
+mos def in that sense
+
+--- 帖子 #22 ---
+This looks like an evolution, hopefully I'll post a set file today so we'll have a baseline to start with. My whole approach to testing/forex in general is to find a new use for something that's been done before. If you think about it almost every invention ever created is just a new use for something that was invented before. Glad to hear someone finds those sets worthwhile, hopefully someone else will take those and make them work in the real world.
+
+--- 帖子 #23 ---
+Hi,many thanks for proposing this EA.I've open a demo account this morning and first microlot short trade launch at 15H GMT+1.As a newbie,I've been around on many interresting threads and learned a lot during these past 15 days. Regards to all. P.S My english is a bit approx,so sorry. Michel.
+
+--- 帖子 #24 ---
+Please see the attached graph, EUR/USD 1 Hr, all default settings. Ignore the the dip in the end, that was just the end of the test. I noticed that there was quite a bit of drawdown. One of the trades that were forced closed at the end of the test had been open since May '09. The EA is profitable, but it might be hard to stomach the drawdown in a live account. I will try and add a stoploss and see what happens, but I have noticed doing so will reduce profitability.
+
+--- 帖子 #25 ---
+Hey Roller, Thanks for the efforts. What source data/broker are you using for you backtesting ? There is a trailing stop loss active in the default settings. Good to have you on the SSS test team. Thanks, getdown71
+
+--- 帖子 #26 ---
+I downloaded Metatrader from the Metaquotes website, and the data is coming from the "Metaquotes Software Corp." The demo account assigned to me is Alpari US, but I haven't started demo testing yet.
+
+--- 帖子 #27 ---
+Looks intriguing. I've seen some very good work from these guys before. Can you give us a basic idea of what it's doing under the hood, though? Just a quick lowdown on the style of trading perhaps, not the actual logic that's being used, of course. I'd just like to know what to expect when testing it.
+
+--- 帖子 #28 ---
+Basic overview; The Primary Indy is the Price channel stop. Trends are picked up by this great piece of work. Confirmation filters; A) Damani - a rough measure of liquidity and movement of that liquid. Once it states "TRADE" it will look to final filter. In times of low liquidity and lesser market activity it will print "DO NOT TRADE" and therefore blocks any entry. B) DSS Bressert - This final filter is THE sanity check prior to passing an entry on to the shell EA for execution. (if the shell logic permits - see the great manual for the shell core functionality) Exits, We have 4 methods of taking profits 2 hard levels in pips for TP1 and TP2 2 rubbery levels that vary with ATR of that pair (set via multiplier) We have 1 method of stop loss 1 rubbery level that varies with ATR of that pair (set via multiplier) In a nutshell, that is it. There are a swathe of other xux99 secret sauce bits in the shell EA which turn this from a mostly winning/but some bigger losing moments EA into a consistent pip machine with less than 12% DD on EURUSD of the last 2 years.
+
+--- 帖子 #29 ---
+I think I had closer to 39% drawdown in my backtest. Were your settings a little different?
+
+--- 帖子 #30 ---
+The settings are default. Your 2 variations to my backtest are; 1) I use FXDD as my demo broker 2) I went back 2 years to present day (and had more profit in the first 5-6 months and therefore lower net drawdown)
+
+--- 帖子 #31 ---
+Seem not bad made some tests on many paird. Will install it now on a server with a good broker and add it to almost ALL pairs. Timeframe 1H ? Regards FX13
+
+--- 帖子 #32 ---
+For details post 1
+
+--- 帖子 #33 ---
+Hey FF I spent last night (yea a friday night...:/) backtesting this EA till i was seeing about 5 or 6 balance lines and a bunch of swiggly green equity lines, mostly winding up in the zero position, as usual.... It was here that i had an epiphany.... All of my previous setups with SL's and TP's failed miserably so most of my newer setups had some sort of TP, no SL, whether a batch %, ATR, trailing stop whatever.... And all of them did ok until some trade comes along and either wipes or threatens to wipe my precious backtesting dollars. So I thought to myself... What if using a TP, even ATR based or otherwise, is just as bad for your equity as using a SL? What is the backtester not showing me in terms of pips left on the table? Which led me to this conclusion: Any system based on any sort to TP or SL will ultimately fail... Why? Because eventually you will hit a string of losses that will damage your account beyond repair or wipe it all together. Run the math, its not that hard. The traditional counter argument to that has been "use good MM". Two problems. Good MM just delays the inevitable and secondly if you set it too low the EA will make like 1% a month. I can get that at my local bank... (I live in Brazil, outrageously high intrest rates...) Some have suggested grid trading as an alternative. Well I could sit here provide you with mathematical explanations of why grid trading wont work long term; or you could scroll a EURUSD chart to Dec 4, 2009 and see for yourself. I could go on and on critiquing the different methods of overcoming this problem but none of them address the fundamental underlying problem. If not TP's and SL's whats the new paradigm shift? We have to start thinking like the brokers, b/c after all 90% of brokers make money and 90% of traders don't. How do brokers make money? Short answer: Spread. How are we going to make money? Spread. I hope the set file attached begins a new way of thinking about EA's here on FF. On the surface it looks insane. Its a martingale with no SL, which should be enough to scare the sweet jesus out of the newbies. Basically we're using the indis and trades to determine market direction. Kind of how a poker player places "tester bets" to see how his opponent reacts. If we hit a new high or low, we increase our trade size hoping to capitalize on an overall move. We make money at the end of the week on the spread between winners and loosers kind of like a broker. If the markets go up, we win, markets go down, we win. We'll break even if the markets go sideways. That's the general working idea. Honestly i don't understand all the math involved behind a loosing week, but it has to do with fast runs late in the week against us/news, indi failure and errors in backtesting. We can also loose if we overexpose ourselves to the market. I don't run news filter on backtests bc i find it unreliable and slows down the process significantly. I'm using GBPUSD and EURUSD m5 in my backtesting and closing weekly but this concept can and should be scaled for the appropriate pair. We can trade on m1 and close every 4 hours for GBPJPY for example or trade EURCHF on h1 and close monthly. Finding the right TF combinations to look at is key for this strategy. As currently built, SSS ea is probably not the best tool for this and probably not where its creators intended it to go. But I hope this set provides us with a roadmap of where to go in the future. Sorry for the short backtest (07.01.09 to 01.29.10) but i only have 8 gb of HD, I'd love to see this run longer term on other pairs.
+
+--- 帖子 #34 ---
+My conclusion is - any predetermined TP/SL EA based on mechanical system which consist of conventional or custom made indicators fails. Look at THV EA thread, system looks good, EA fails. If you experienced trader you would never open those trades on low volatility or news or hundreds other factors like EA does. Surprisingly almost only system which works with indicator based EAs is martingale. They would tell you it doesn't, but it does. You have to work very hard to determine how it works though. Forget about 2% of equity per trade, back test to identify the max movement w/o retracement so you could determine your pip step between trades and how much of $ you need to survive. This is completely different approach. You have to withdraw from your account often too, so if black swan event happens eventually (and it will, believe me) you would lose as little as possible. Did you see many successful live EA statements? Here is one of them (not mine). http://www.onix-trade.net/?act=monit...stat&amp;xid=14780
+
+--- 帖子 #35 ---
+Totally agree. The ONLY thing that works as SL and TP with any accuracy over time and market conditions are fibonacci retracements and extensions. Price respects fib levels more than it does abitrary TakeProfit and Stoploss values.
+
+--- 帖子 #36 ---
+Hi Naynay, Can you detail your idea out, so we could add it to SSS v1.01 ? I think I understand your statement, but I want to be 100% sure. Thanks, getdown71
+
+--- 帖子 #37 ---
+Fibs are mos def an improvement. But only opening orders based on indis and closing them all at a given interval is still better. If your indis are accurate good entries &gt; bad entries = profit. Barring any sort of late move agaisnt our majority position.... After testing pretty much every EA on FF, TSD etc... and many commerical EAs I´m fairly convinced this is the only way to make consitent profits with an EA in MT4. Oh and my motherboard fried last night but i improved orginal set i posted here by reducing min order distance to 0 on GBPUSD although this sent DD through the roof... this should probably be ATR based imo... If 10 pips worked well on GBPUSD, the equivalent ATR should work on other pairs
+
+--- 帖子 #38 ---
+Thanks Joe - Another item for v1.01 - ATR based min order distance.
+
+--- 帖子 #39 ---
+Since I don't really know how your EA trades, I'm not sure it will be much help to you... Having said that, what I am suggesting is an EA that "reads" support and resistance and price action. In manual trading, I can manage a high degree of accuracy when the price breaks these levels. Once the level is broken, you KNOW where the price is eventually going to go. This is where fib retracements come in. When you know where the price is going to go (or where it might go thorugh), then you have your Takeprofit. You stoploss then, would be just behind a fib level where the price would not go (and would be a strange event if it did). I have done some manual trades with some accurate stop loss placement like this, resulting in profitable trades with very little drawdown. Like this, and EA can trade a lot more accurately, but half the battle is knowing WHERE the levels are, and how to read the price action when it occurs... and THAT is not only hard to determine, but hard to code as well (although I am working on trying to do it myself). I am still learning myself.
+
+--- 帖子 #40 ---
+Does your EA use the levels on the DSS or just the colored dots? Thanks Lux
+
+--- 帖子 #41 ---
+Hi All, Just popped it on a EURUSD 4H backtest and its looking good. Over the last year I have gradually moved to longer timeframes as it suits me better. I can manage 4h T/F while in full time employment : work &amp; family.... Will start forward testing tonight &amp; report back in a few weeks. B Rgds WR.
+
+--- 帖子 #42 ---
+Thanks WR and welcome to SSS test team
+
+--- 帖子 #43 ---
+I am no Bobokus, but here is how I use Fibs. Look at the picture whilst reading this (ignore the two buy trades, they are nothing to do with this): Pull the fib to cover the most recent swing. Once the price has retraced to/into the central box created by the 61.8, 50 and 38.2 levels, it is a 'valid' fib. Until this retrace happens, any move outside the swing, I consider to be part of the swing, so I extend the fib. It is brilliant to see how the price eventually fell to T1 (target 1). These moves often hit T2. The turquoise lines obscure the yello high and low lines that are the extent of the fib I pulled. I have drawn them so that a robot I am developing can read the values of the two turquoise lines and calculate all the shown fib values shown by the yellow fib. This is the code that does this: Inserted Code extern color FibLineColour=Turquoise; //Fib double SrLineArray[]; double FibLongT2;//161.8 double FibLongT1;//138.2 double FibR1;//80.9 double FibHigh;//100 double FibLong;//61.8 double FibPivot;//50 double FibShort;//38.2 double FibS1;//19.1 double FibLow;//0 double FibShortT1;//-138.2 double FibShortT2;//-161.8 double LongEntry; double ShortEntry; void GetFibLines() { //User can use horizontal lines to indicate support and resistance. //This function reads these lines, and sets up FibLow &amp; FibHigh //for use in trading decisions. //Cycle through the list of objects and find the total no of appropriate horizontal lines int NoOfLines; if (ObjectsTotal() == 0) return; for (int cc = ObjectsTotal() - 1; cc &gt;= 0; cc--) { string name = ObjectName(cc); int index=StringFind(name, "Horizontal Line"); if (index&gt;-1) { color HorizontalLineColour = ObjectGet(name, OBJPROP_COLOR); if(HorizontalLineColour == FibLineColour) NoOfLines++; }//if (index&gt;-1) }//for (int cc = ObjectsTotal - 1; cc &gt;= 0; cc--) //Cater for users forgetting to add lines, or too bone idle to read the user guide and just go with //default settings if (NoOfLines == 0) return; //FibHigh=0; //FibLow=0; //Resize the array int NewSize = NoOfLines; double array1 = ArrayResize(SrLineArray, NoOfLines); //Read the sr line values into the array int ArrCounter; for (cc = ObjectsTotal() - 1; cc &gt;= 0; cc--) { name = ObjectName(cc); index=StringFind(name, "Horizontal Line"); if (index&gt;-1) { HorizontalLineColour = ObjectGet(name, OBJPROP_COLOR); if(HorizontalLineColour == FibLineColour) { SrLineArray[ArrCounter] = ObjectGet(name, OBJPROP_PRICE1); ArrCounter++; }//if(HorizontalLineColour == FibLineColour) }//if (index&gt;-1) }//for (cc = ObjectsTotal() - 1; cc &gt;= 0; cc--) //Sort the array into ascending order and set the fib highlow ArraySort(SrLineArray,WHOLE_ARRAY,0,MODE_ASCEND); FibHigh = SrLineArray[1]; FibLow = SrLineArray[0]; //Set up the rest of the fib lines double extent = FibHigh - FibLow; FibPivot = NormalizeDouble(FibLow + (extent / 2), Digits); FibLong = NormalizeDouble(FibLow + (extent * 61.8 / 100), Digits); FibShort = NormalizeDouble(FibLow + (extent * 38.2 / 100), Digits); FibR1 = NormalizeDouble(FibLow + (extent * 80.9 / 100), Digits); FibS1 = NormalizeDouble(FibLow + (extent * 19.1 / 100), Digits); FibLongT1 = NormalizeDouble(FibLow + (extent * 138.2 / 100), Digits); FibLongT2 = NormalizeDouble(FibLow + (extent * 161.8 / 100), Digits); FibShortT1 = NormalizeDouble(FibLow - (extent * 38.2 / 100), Digits); FibShortT2 = NormalizeDouble(FibLow - (extent * 61.8 / 100), Digits); //Set up trade entry prices, stoploss extent = (FibR1 - FibLong) / 2; LongEntry = NormalizeDouble(FibLong + extent, Digits); ShortEntry = NormalizeDouble(FibShort - extent, Digits); }//End void GetFibLines() If this is of any use, Nick, feel free to use it. It is only a short hop in the code I have provided to make a robot draw all the fib levels; I have merely chosen not to do so for now. A big problem with this is that there is no code to detect the extent of valid fib automatically. I have to find and draw the fib levels myself. If anybody has the code to detect the swing, this function could become a potent weapon. Incidentally, if anyone wants fibs that look like mine: download the attached template into your template file set up a chart and add fib.tpl to it double click the yellow dotted line, right click it and select Fibo properties from the drop down menu. Change the colour or something insignificant (you can change it straight back again), and any fib you pull after that will look like mine.
+
+--- 帖子 #44 ---
+Thanks for your input Steve. xux99 and I will review and perhaps include that code snippet in the next version that will include fib retracements/extensions.
+
+--- 帖子 #45 ---
+I forgot to upload the template and pic, but they are there now.
+
+--- 帖子 #46 ---
+Thanks Steve. I've been working on an EA that uses fib retracements, and here's a routine I used to find and return the value of a particular fib level. Accepts the arguments (hi, lo) of range to fib, and a fibnumber to determine which fib value to return. Inserted Code double FibFinder (double hi, double lo, int fibnumber) { double f[12]; double ratio=hi-lo; f[1]=lo+(ratio*1.618); //161.8 f[2]=lo+(ratio*1.382); //138.2 f[3]=hi; //100 f[4]=lo+(ratio*0.786); //78.6 f[5]=lo+(ratio*0.618); //61.8 f[6]=lo+(ratio*0.500); //50 f[7]=lo+(ratio*0.382); //38.2 f[8]=lo+(ratio*0.236); //23.6 f[9]=lo; //0 f[10]=hi-(ratio*1.382); //-138.2 f[11]=hi-(ratio*1.618); //-161.8 return(NormalizeDouble(f[fibnumber],Digits)); } Agreed that finding the swing shouldn't be too hard. It would be done by finding the highest high and lowest low within a given time period. The real question is, how long do you want to go back and check for a swing on what timeframe?
+
+--- 帖子 #47 ---
+Hi getdown71, The EA so far perform very well. For the last 3 days the 3 trades and close it partially with average gain 1% daily. Attached the set that I used. Steve...you always come out with a brilliant idea... . The fib line at least will give some ideas the position of the trades... Cheers
+
+--- 帖子 #48 ---
+Hi All, One enhancement you may want to consider for next version that I have found beneficial in an EA I'm testing at the moment. When getting a long signal - rather than immediately opening a trade, put a BUYSTOP at the last Pivot High if this is higher than the current price. If last Pivot high is lower than current price just BUY as normal. A pivot high is formed when the middle bar high is higher than closing highs of bars either side. Sell is complete reverse of Buy. The advantage here is if we get a buy signal then place a BUYSTOP and the price suddenly reverses and goes down the order is not sent and we are saved from a loss. We can expire the BUYSTOP after a time or leave it there until we get a new signal at which point we delete it. In my EA I have an option to Buy Immediate or BuyStop. Its a trending EA but backtests and forwardtests have shown this approach using BUY/SELL stops ( on 1h &amp; 4h ) to be more profitable. B Rgds WR
+
+--- 帖子 #49 ---
+Bookmarked
+
+--- 帖子 #50 ---
+That's the problem, because I want the latest swing that encompases all that follows within the swing, as in the picture I posted. Also, it has to pass my 'validity' test before becoming a tradable fib. Finding it manually is not the problem; automating it is. If I could get my head around an algorithm for this, then I could add automatic Fib functionality to any of my robots - so could anybody else using ff simply by pinching the code. I will keep thinking about it.
+
+--- 帖子 #51 ---
+Excellent idea WR. We will add this to v1.01 This is what Scoobs TCF V2 uses as well - coded by that MQL powerhouse Steve Hopwood.
+
+--- 帖子 #52 ---
+After someone on the thread mentioned trying the EA on lower time frames, I decided to backtest M1. With 1 minor tweak it was looking good. Running on M1 charts using ECN broker. (Collective FX Demo) for 2 days on 10K demo account it's up $770. http://www.mt4i.com/users/sss_ea_v1 EA picks up valid short scalp profit on M1 during larger movements. Drawdown expands as well. During retracement from large movement, the EA picks up more profit and drawdown subsides to smaller level. Interesting to see how it performs in heavy trending conditions. Will post set files in at start of thread soon.
+
+--- 帖子 #53 ---
+How about using fractal signals from a fractal indicator? The fractal indicator is too lagging to be used to trade manually with, but seems to indentify swing candles with a fair degree of accuracy. Either this or the ZigZag indicator....
+
+--- 帖子 #54 ---
+Cheers Naynay. I will give this a look.
+
+--- 帖子 #55 ---
+Hi Guys. I would appreciate it someone has any information regarding this EA. I have installed it on demo with default setting.Please advise and thanks for the EA. Keep up the good work. GOD Bless!!
+
+--- 帖子 #56 ---
+So Naynay, Let me check if I'm getting this. 1) The Fractal code designates the swing candle 2) The Fib code looks at the fib retracements/extensions at that moment "1" above on the chart TF 3) The EA loads those fib values into it's SL and TP registers Correct ?
+
+--- 帖子 #57 ---
+Looking forward to hearing more about this, getdown71. Will you be posting that .set soon?
+
+--- 帖子 #58 ---
+The fractal code generates a bunch of swing candle high and lows. You see them as blue and red dots. Effectively you can generate an array of highs/lows from these values basically reading them from the indicator buffer. Failing that, you could easily just pull the fractal indicator apart and use it as the guts for an EA. Then use the fibfinder code I posted to fib the range of highs and lows out (or just pull a particular fib out). You could then set TPs and SL based on whatever fib you want to trade with. ....which leads us to the main issue. It may be a useful tool, but how are we going to trade these?
+
+--- 帖子 #59 ---
+I see the discussion has centered on fibonacci levels as targets....I have found if you take the high/low and subtract the low from the high, you will get a pip figure then multiply that by 0.618 - then either subtract or add that figure to the high/low you will get a target.. I have used this method for many years, and would be very intrested to see if it could be made into a EA.. I have enclosed a picture as they say its worth many words.. In the picture: the high ( top of blue box) 1.4192 ...... Low 1.4028..... subtract low from high....164 pips.. 164 x 0.618 = 101 pips......break off 1.4028 gives us a target of 1.3927......... As you can see target hit.. Of course you would place a buy and sell order at the high/low levels and take which one breaks...
+
+--- 帖子 #60 ---
+Hey Calstock, Simple approach (less is more IMHO). You use this manually with what kind of hit ratio ? (as a rough guess?) Thanks for your input and welcome to the SSS team. Getdown71
+
+--- 帖子 #61 ---
+Thankyou getdown. yes I use it manually, it works well with a trending market and take advantage of a retractment......but it can be used in a side words moving market and it will catch the breakout and keep the trader out of a ranging market, you can add a buffer margin if you wish and if you wanted to get really into the way I trade you can pick up a break off a earlier candle which would then put you in a profitable trade before it hit the high/low, incase it retracted after a small break.. But that more then likely to diffuclt to code, as I have asked privatly a person on FF to code it and I have paid him but he has vanished with out finishing it...so as I say I think Iam asking to much. So sticking to the simple form of just looking for a break of the high/low.. I really dont want to get into succesfull trade's etc....but I am a proffesional trader ( self employed) both forex and stocks...so i hope that answers the question
+
+--- 帖子 #62 ---
+Looks like a box breakout strategy... I made an EA like this already. I could probably adapt it pretty easily to your rules... but would need more info about how and why and when you create the box.
+
+--- 帖子 #63 ---
+HiGuys. I have run yor EA since yesteday and it has made 3 good trades and NO losses!!!.Hoping to see what it will do today.Thank you
+
+--- 帖子 #64 ---
+ON DEMO that is...hope to see this EA to be profitable so that I can buy from your guys.Please let me know when it ready!!! Thank you
+
+--- 帖子 #65 ---
+Hi. I just thought I'd let you know tat I have 17 trades with EA with no losson my demo account. Regards.
+
+--- 帖子 #66 ---
+Good news Waheed, Can you setup a www.mt4i.com account linked to your demo so we all can see the progress ? Thanks, getdown71
+
+--- 帖子 #67 ---
+FXPRO Financial Services Ltd Account: 2030691 Name: Waheed Jaffer Currency: USD 2010 February 9, 09:30 Closed Transactions: TicketOpen TimeTypeSizeItem PriceS / LT / PClose Time PriceCommissionTaxesSwapProfit 366653292010.02.04 13:25sell0.10eurusd1.383700.000000.000002010.02.04 17:061.379840.000.000.0038.60 366794982010.02.04 17:06sell0.10eurusd1.379570.000000.000002010.02.04 18:411.375400.000.000.0041.70 366871592010.02.04 18:41sell0.10eurusd1.375290.000000.000002010.02.05 02:571.370500.000.00-0.1447.90 367566032010.02.05 14:26sell0.10eurusd1.368350.000000.000002010.02.05 18:381.362000.000.000.0063.50 367849842010.02.05 18:38sell0.10eurusd1.361940.000000.000002010.02.05 20:351.360950.000.000.009.90 367916602010.02.05 20:11sell0.10eurusd1.362370.000000.000002010.02.05 21:001.359290.000.000.0030.80 367930982010.02.05 20:38sell0.10eurusd1.360260.000000.000002010.02.05 20:411.359500.000.000.007.60 367933372010.02.05 20:41sell0.10eurusd1.359270.000000.000002010.02.05 20:461.359260.000.000.000.10 367940432010.02.05 20:50buy0.10eurusd1.359840.000000.000002010.02.05 21:051.360860.000.000.0010.20 367947942010.02.05 21:05buy0.10eurusd1.360930.000000.000002010.02.05 21:181.361760.000.000.008.30 367952482010.02.05 21:18buy0.10eurusd1.361900.000000.000002010.02.05 21:261.362600.000.000.007.00 368049332010.02.08 01:01buy0.10eurusd1.365970.000000.000002010.02.08 01:031.366440.000.000.004.70 368050862010.02.08 01:03buy0.10eurusd1.366700.000000.000002010.02.08 09:441.367230.000.000.005.30 368226192010.02.08 10:05buy0.10eurusd1.367490.000000.000002010.02.08 10:241.368240.000.000.007.50 368257062010.02.08 10:43sell0.10eurusd1.369120.000000.000002010.02.08 11:581.368920.000.000.002.00 368304152010.02.08 12:00buy0.10eurusd1.370010.000000.000002010.02.08 12:331.370750.000.000.007.40 368341362010.02.08 13:03buy0.10eurusd1.369180.000000.000002010.02.08 18:051.370310.000.000.0011.30 368559252010.02.08 18:22buy0.10eurusd1.370790.000000.000002010.02.09 07:381.371640.000.00-0.118.50 368826232010.02.09 07:38buy0.10eurusd1.371870.000000.000002010.02.09 08:571.372610.000.000.007.40 364815212010.02.01 16:00buy0.10gold1086.400.000.002010.02.01 17:241095.720.000.000.0093.20 366610072010.02.04 12:00sell0.10gold1103.631103.631094.132010.02.04 16:151094.130.000.000.0095.00 0.00 0.00 -0.25 507.90 Closed P/L: 507.65 Open Trades: TicketOpen TimeTypeSizeItem PriceS / LT / P PriceCommissionTaxesSwapProfit 368869792010.02.09 08:57buy0.10eurusd1.372730.000000.00000 1.372980.000.000.002.50 0.00 0.00 0.00 2.50 Floating P/L: 2.50 Working Orders: TicketOpen TimeTypeSizeItem PriceS / LT / PMarket Price No transactions Summary: Deposit/Withdrawal: 0.00 Credit Facility: 0.00 Closed Trade P/L: 507.65 Floating P/L: 2.50 Margin: 27.45 Balance: 943.75 Equity: 946.25 Free Margin: 918.80 Details: [IMG]file:///C:/Documents%20and%20Settings/Administrator/Desktop/DetailedStatement.gif[/IMG] Gross Profit: 507.65 Gross Loss: 0.00 Total Net Profit: 507.65 Profit Factor: Expected Payoff: 24.17 Absolute Drawdown: 0.00 Maximal Drawdown: 0.00 (0.00%) Relative Drawdown: 0.00% (0.00) Total Trades: 21 Short Positions (won %): 10 (100.00%) Long Positions (won %): 11 (100.00%) Profit Trades (% of total): 21 (100.00%) Loss trades (% of total): 0 (0.00%) Largest profit trade: 95.00 loss trade: 0.00 Average profit trade: 24.17 loss trade: 0.00 Maximum consecutive wins ($): 21 (507.65) consecutive losses ($): 0 (0.00) Maximal consecutive profit (count): 507.65 (21) consecutive loss (count): 0.00 (0) Average consecutive wins: 21 consecutive losses: 0
+
+--- 帖子 #68 ---
+Can you Pls share your settings, timeframe, currency and broker and lot size.....
+
+--- 帖子 #69 ---
+Hi. I am using FxPro Demo account.Settings are default at 0.1 lots on EUR/USD 1hr chart as the information the ebook supplied the necessary meaning of settings.I have not changed a thing on the EA but made sure that it trades 0.1 lot. At the time of print 20 trades were made and 20 were profitable.However when starting the EA on demo I would get profits ranging fro $30-$60 per trade. Now its has taken less profir between $3-$11 per trade. Some trade run extremely long before closing with no loss an minimal profit.Once a trade closes, another will opem.Never opens more than one trade at a time. NO LOSSES!! NO LOSSES!! NO LOSSES!- It appears that if the trades was bad it will keep the trade open until loss is out of reach. Hopes this helps. I was not able to the MTI4 . th .
+
+--- 帖子 #70 ---
+So you are running it on Live accoint... I think it cannot work on real account... did you get a diff version? Can we use this on any other tf/currency pair?
+
+--- 帖子 #71 ---
+hi there where is that EA? how can i use it? thanx
+
+--- 帖子 #72 ---
+Thats where the EA and all the info is. The next lame question on the thread will have a bullseye painted on their post and will be made an example of. Nuff said.
+
+--- 帖子 #73 ---
+I have placed this EA on EUR/GBP ,EUR/CHF, AUD/USD; and USD/CHF. I will advise the outcome as soon as EA is TP. Thank you. Kind Regards
+
+--- 帖子 #74 ---
+Hi All. I have 5 trades open on these pairs : EUR/USD, EUR/GBP ,EUR/CHF, AUD/USD; and USD/CHF and at the moment they are all open. They were opened on 09022010 and still in minus. Thank you. Regard
+
+--- 帖子 #75 ---
+Yeah right, another EA except this one is a winner! Sure. I just discovered this thread,+ I know xux99 is a helluva programmer from playing around with the THV EA. so for the hell of it, I set the EA as suggested by Waheed's post above this one. I used the Default settings on a 1hr. Eur/Usd chart, I used .1 lot, I did set the news filter and set the hours from Frankfurt to London close. I barely even remembered to check this morning, but SSS entered short around 0600 est server, with a result of well over a 100 pips! That's interesting, I'm not familiar with any of the filters mentioned from post one, so I put up a basic Darryl Guppy 15m chart to determine if I thought the entry was valid, I threw in the TraderatHome pivots and his Coral indicator, added a MACD window. You can see at entry marked by the dotted yellow line that the Guppy is starting to shape up as a short, PA is dropping below the Weekly pivot with the Blue 50ma at the top but well below the Coral, a few bars later the Coral changes color and price plummets. As I'm writing this, price has dropped thru both Support lines another 30 pips. I don't think I would trade exclusively with an EA but if it continues to make entries like this I could use it as a helluva tool, I would enter manualy and manage the trade. Is SSS the Winner, Winner, Chicken Dinner? I guess I'll watch this one for awhile longer.
+
+--- 帖子 #76 ---
+Repeat performance today from the EA, nice 80+ pip move, all was given back with the major news release this morning. FFCal evidently failed in the EA. the message box in left hand corner:"No news data received from FFCal indicator" Once again at entry from the 1 hour yielded a perfect setup on the 15m chart, running pivot to pivot for 35+ pips or if you let it run for the 80. Happy Weekend
+
+--- 帖子 #77 ---
+Thanks for your input and feedback goldsurfer. The potential FFCal issue has been noted. The next version of SSS EA (v1.01) has a number of enhancements being cooked in right now (details in post 1) that will help to address some of the issue found in v1.0 Enjoy your weekend, getdown71
+
+--- 帖子 #78 ---
+Hey SSS just wanted to give you guys a heads up on my progress here. My testing has focused on EURCHF m5 using only bressert (settings in the lower range, testing at 13 and 7 atm) for entries and exiting at either a periodic interval or at a fixed percentage of equity. More to come soon
+
+--- 帖子 #79 ---
+Interested to see how your tests turn out. Any suggestion on enhancements from post 1 ? Thanks for your efforts, getdown71
+
+--- 帖子 #80 ---
+Something like daily close perhaps?
+
+--- 帖子 #81 ---
+Most trades are still in a negative except for small profits on few EUR/USD trades.
+
+--- 帖子 #82 ---
+Testing going nicely at the moment - well in profit after 2 weeks running on 5 major pairs. But EA seems a bit stuck now with MAXOrders Open ( 5 ) but they are all just sitting there not doing much and currently slightly -ve. If these were shares in my investment portfolio I'll probably sell them to make way for something else.. So perhaps an option to close -ve trades after x days. Another possible development to CloseAllLoss is to just close losing trades if these become more than x% of your accountBalance. B Rgds WR
+
+--- 帖子 #83 ---
+UPDATE - whilst xux99 is cooking up v1.01 in the "kitchen de code", I have run another demo since the beginning of the week. (last weeks effort were OK but drawdown was to high IMHO) Check out the above MQL link for details on updated version performance. Notes for this so far very successful demo this week; w) Trading start and stop times have been implemented. This is based on my broker (+1 GMT) however v1.01 will have GMT auto offset built-in so we can all use the same start/stops times from that version on. x) All the exits in the EA have been disabled - get set file attached to this post y) All TP and SL is managed by Steve Hopwood - MPTM EA - get it here http://www.forexfactory.com/showpost...99&amp;postcount=1 z) Chart is M30 only; this appears to give the best results. A balanced blend of price movement vs. filtering out chop.
+
+--- 帖子 #84 ---
+So, Steve's MPTM EA needs to be on a separate chart. How about the set file for MPTM EA? Thanks.
+
+--- 帖子 #85 ---
+Here here, second on that! Please post the set file you used for the MM ea to get your results on the 30m SSS. Cheers
+
+--- 帖子 #86 ---
+Thanks, GetDown. I didn't see a set attached to that post, though. EDIT: Got it: It's in the first post. That set file is for the SSS EA, but seems to include MPTM-type functionality, so I am assuming you have added Steve's code to the bot and we do not need to run MPTM separately?
+
+--- 帖子 #87 ---
+I'll begin forward testing today...
+
+--- 帖子 #88 ---
+To repeat; All SSS EA exits are disabled. All exits are managed exclusively by MPTM EA. MPTM set files for both 4 digit and 5 digit are in post 1.
+
+--- 帖子 #89 ---
+Hi. Look backtest like good result Thank your work But I still say I only belive myself. Can't belive a robot.
+
+--- 帖子 #90 ---
+Thanks, GetDown. I get it now.
+
+--- 帖子 #91 ---
+Thanks getdown71.. I just revised the previous version on my demo account. The previous version is not bad except the DD is quit huge... Now with the Steve MTPM, I presume we shall a better result with lower DD as well. Keep it post and update. Cheers Sahars
+
+--- 帖子 #92 ---
+Is there a plan to put Steve's exits into the EA at a later point of time?
+
+--- 帖子 #93 ---
+None as of yet - however, it could be put into the wish list for v1.02
+
+--- 帖子 #94 ---
+On the wish list then.
+
+--- 帖子 #95 ---
+Have to say I found the original exist were working OK for me on 4H t/f. Are they still there in the original source? How about just a bool option to turn them on / off? BR WR
+
+--- 帖子 #96 ---
+Hi All, Been lurking around for a few months now on here but this is 1st post. Firstly thank you for sharing this EA, the results so far look excellent. I have been testing different methods on demo before going live for around 6 months now and i am looking for a combination of EA trading and manual trading. As i work 9 - 5 i can't trade manually all the time! I have installed this on my ibfx demo account but for some reason i cant get the set files for eur/jpy to work, can anyone help? I am more than happy to share my results of the tests but i need to make sure that i have set everything up correctly as my mt4 knowledge is not the best! Thanks in advance.
+
+--- 帖子 #97 ---
+After a few days of forward testing on e/j, e/u, g/j, g/u, these are my results trading mini lots on MB Trading demo ($10K): Closed orders: Total of 15, +595 pips. Total profit: $60.90 Open orders: Total of 8, -777 pips. Current drawdown: -$280.33 Of all closed orders, all but one were for less than $10, plus or minus. Using .set's from post 1. Perhaps i should increase lot size.
+
+--- 帖子 #98 ---
+I took the txt files from post one and saved them as .set in my /experts/presets folder. Then I loaded the one for the right pair when I initialized the ea. -j
+
+--- 帖子 #99 ---
+Thanks for all the work into this EA, much appreciated. I have it loaded up on GO, all seems to be going good except the MPTM isnt working. Ive used older versions of steves with no problems.
+
+--- 帖子 #100 ---
+If you have a 5 digit broker then use the 4 digit set file. I dont know why but it is working. Go to http://www.forexfactory.com/showthread.php?t=89371 there is a new update of MPTM
+
+--- 帖子 #101 ---
+Sorry I never did get around to posting last week's test to MTi, but here are my impressions: Overall small gain using the sets from first post. Halfway through the week I noticed that it seemed that some trades were getting stuck in more and more DD without any hope of recovering in a realistic timeframe. As a result I set the EA logic to close the trade if an opposite signal occurred. (I wonder if this could be the reason that the test account in post one shows a good closed PL, but with a lot of floating DD is that it does not close trades when new opposite signals arise.)
+
+--- 帖子 #102 ---
+Mind readers us lot - New set files at post 1 have Indicator based exits to help deal with drawdown! Probably best to start a new demo with new settings this week.
+
+--- 帖子 #103 ---
+I have worked out a set for GBP/USD M5 and showed good results in back testing. I started a forward test today and currently showing good results. Keep an eye on the following link for live forward testing of this new set http://www.mt4i.com/users/wilko-sss-gbpusd-m1/stats At the time of posting it has done 491 pips in 18 trades - all successful. To replicate open a GBP/USD M5 chart and apply the attached set using SSS V1.01.
+
+--- 帖子 #104 ---
+Thanks for the m5 set wilko. As a comparison, the h1 default set from first post pulled 798 pips in 8 trades. We'll see how things turn out over the long term i guess
+
+--- 帖子 #105 ---
+One of the things I was trying to work on was reducing DD, however, as you suggest only time will tell.
+
+--- 帖子 #106 ---
+Thanks Wilko. You may have found a good scalper set file. The new set files in post 1 have indicator based exits and different trading times to help deal with drawdown.
+
+--- 帖子 #107 ---
+Hey Tazmaan, The 4 pairs set files on post 1 are M30 BTW. Once you are on demo, can you link up to mt4i.com so we can compare performance. Thanks, getdown71
+
+--- 帖子 #108 ---
+Yes, I have them on m30. I was just stating the difference in # of trades and pips won between the default m30 and wilko's m5 stats so far. Will myfxbook suffice? I prefer it to mt4i
+
+--- 帖子 #109 ---
+fxbook or mt4i.com is fine
+
+--- 帖子 #110 ---
+here ya go http://www.myfxbook.com/members/tazm...ZbduO11CmQ8Zlb A note: largest open dd for this period until now has been -$51.00
+
+--- 帖子 #111 ---
+Nice. Is this using the set files I uploaded last night ?
+
+--- 帖子 #112 ---
+No, previous set files. I didn't realize new ones were put up last night, what's changed about them?
+
+--- 帖子 #113 ---
+New set files at post 1 have Indicator based exits and slightly different trading times to help minimize drawdown/maximize profit.
+
+--- 帖子 #114 ---
+Has the ea been updated also? I noticed in the new set files I see for the first 3 inputs 101H1, 211H4 etc. However, in my settings, I have 1010, 2010 for these same fields (previous set files). Is this one of the changes mentioned? Or has the actual ea been changed to take these types of inputs now?
+
+--- 帖子 #115 ---
+Nice one. I will get a demo running with them on.
+
+--- 帖子 #116 ---
+Yes; (no change to EA - just settings) 2nd digit of 4 digit series is indicator based exit switch (RTFM) 4th digit of 4 digit series is time frame switch. 0 is chart TF, otherwise setting TF H1/H4 etc... should be clear.
+
+--- 帖子 #117 ---
+k thx, i'll setup a second demo with these revised settings
+
+--- 帖子 #118 ---
+Thanks getdown71... So far this EA was running with very low DD. Open a demo at 30M TF and 4 pairs as per set in the 1st post. My live statement can be found here http://www.mt4i.com/users/sahars I got few question...I observed that the EA is closing partially (in this case from 0.02 become 0.01 lots) the trade once is reach the certain pips. My question is the trade was closed partially by the MPTM or the EA itself..!? I also found that once the lots become half i.e. 0.01, do we need to close those trades manually or just leave it the MPTM or the EA to close it...?. In my case I closed all the trade manually using script once the trade reach at certain amount i.e.$50.00. I do this after I found that the EA or MPTM does not close or adjust the TP after the GBPJPY gained almost $50.00 (on 0.01 lots) and later the gain become -ve. I'll keep post the result and let you know guys if I find something issue that be discussed... cheers Sahars
+
+--- 帖子 #119 ---
+Hi Getdown, Can you pls tell us, which files we need use for MPTM. Do we need to use all the files in the Zip file, or only the MPTM is enough?
+
+--- 帖子 #120 ---
+I loaded the EAs on my demo account. Alpari UK today. It took one profit and then it has opened 2 trades which are currently in Loss (more than 100 Pips each). Can anybody confirm their account also took the same trades. Or my settings are wrong? I used the setting file from the first page. ALl the above trades are on EU 30min TF. regards, Prakash
+
+--- 帖子 #121 ---
+Hi Prakash, Make sure you have 4 M30 charts running. EURUSD, GBPUSD, EURJPY,GBPJPY Also make sure you have history for H1/H4/D1 for the above pairs as the entry/exit logic works on multiple time frames. Make sure when you load the settings from post 1 that you enter the Alpari UK GMT offset correctly. One of my demo accounts here has small drawdown with EURUSD. Drawdown is the tax of trading - SSS runs very small drawdown and is part of normal operation. If the trade goes against our entry, the indicator exit logic will minimize the loss. As for your question on MPTM EA find out if Alpari UK is 4 or 5 digit and use that relevant set file.
+
+--- 帖子 #122 ---
+Thanks for you reply. If I want to trade only EURUSD, then also do I need to put it on all the 4 charts. on My account there are still 2 short trades opened today afternoon which are in loss of 100 Pips around. Did you also got such trade today? I feel indicator exit should have worked instead of losing 100 pips. what do you say?
+
+--- 帖子 #123 ---
+I say only 1 M30 chart with SSS EA is required for EURUSD. Another chart GBPJPY M15 for MPTM EA. As for you 100 pip entry situ - that is the luck of the draw, you enabled the expert advisor at the worst possible moment it would appear. I did not have that losing entry.
+
+--- 帖子 #124 ---
+Just chked this http://www.mt4i.com/users/sss_ea_v101 There are so many trades taken as per this... But on my demo account on alpari..it didnt take any trades today... surprising.... Is there any limit on maxm open orders... It still running with 2 short EU from yesterday with loss.....
+
+--- 帖子 #125 ---
+I am very impressed by Wilko's M1 strategy: Wilko M1 SSS MT4i Very low floating DD and lots of profitable trades, even with the market moving as it is. I am looking forward to seeing it trade through the NFP tomorrow as well to see how it handles that.
+
+--- 帖子 #126 ---
+m5 u mean right? or did i miss one?
+
+--- 帖子 #127 ---
+Doh! Taz, you are so right: http://www.forexfactory.com/showpost...&amp;postcount=103 M5 it is .
+
+--- 帖子 #128 ---
+No problem Just wanted to make sure I didn't miss an m1 setup I have been playing with this set in backtest since the start of this year, and have made some tweaks that have made a big difference. Try setting close on opposite signal to true, and see how much better it does. I have also turned off the trading times, so it runs 24hrs. Might take a look at some of the other pairs on m5 now.
+
+--- 帖子 #129 ---
+All - I have posted optimized set files for 2 more pairs EURCHF and EURGBP at post 1. Side note xux99 is cooking up v1.02 now from the wish list. We should feel very lucky that xux99 given is some his time/energy on this project. xux99, I take my hat off to you buddy! Dubble side note. I had to restart my demo that is link in post 1 as the demo server IP address had changed. The re-start during the middle of the week a contributed to minor drawdown for now. Indy based SL will kick in when the moment is right.
+
+--- 帖子 #130 ---
+Hi Getdown, Can you tell me if you are still using the MPTM EA for exits? I noticed that the set files attached to post#1 say "with exits" Can you clarify this so that I know i have the correct settings? Also, have you tried wilko's M5 settings? Sor far results look good. As of Monday i will post my mt4i accounts for this (only just set this up!)
+
+--- 帖子 #131 ---
+Yes, the m5 did really well for the last few days i've been testing it. Started on 3/3 and the m5 results are: 35wins, no losers +448 pips. No open trades currently.
+
+--- 帖子 #132 ---
+Thursday and Friday were particularly good bot testing days as the market really hit hard with volatility. I am very pleased with the way the M5 set handled it and finished the week with all trades in profit. This is only the first live week of testing but looking good. http://www.mt4i.com/users/wilko-sss-gbpusd-m1/stats
+
+--- 帖子 #133 ---
+Top effort Wilko. I shall run a demo of this as well. Later today I'll be posting v1.02. On a side note, the design of SSS, lets many different approach come alive - looking forward to seeing who comes up with what in the future. Set files are backward compatible - So will be interesting to see how WilkocableM5 goes next week as well.
+
+--- 帖子 #134 ---
+Can someone help me please? I am trying to download the exe file but I keep getting some message about an MT platform being open when it is not. I have even downloaded the installer but had no joy. Any ideas? Sorry to be a pain..
+
+--- 帖子 #135 ---
+Sounds confusing to me.....how 'bout reboot
+
+--- 帖子 #136 ---
+ok.. will try that..watch this space!
+
+--- 帖子 #137 ---
+i have been reading the thread and found it really interesting. Im not really new in forex, lost some and now looking for a very good EA netting good pips than burning an account since i cannot trade daily most of the time. But still ofcourse, i have a lot of things to learn. BTW, Thanks to getdown71 for sharing this EA, its seems so promising. since it is saturday here in the PI. im looking forward on forward testing this when the market opens. but to tweak it all perfectly, I just want to have a check. 1. I have EU m30, i loaded the SSS v1.01 template and loaded the EU set file with exit on post 1. Since it says 'with exit' it wont be needing the MPTM EA right? well, I dont know how to use the MPTM EA since i cannot see the set file on http://www.forexfactory.com/showpost...99&amp;postcount=1 . All i can see are scripts and all. or maybe im missing something? please excuse my ignorance on this part. 2. I have my GU M5 chart, using Wilko's M1 set file. Btw, im using instaforex as broker, if someone would ask. and will post results the day after the market opens. If there is something more im missing, please fill me in. Thank you and more power to everyone!
+
+--- 帖子 #138 ---
+I have similar system which turned $2000 to $4988 from Jan, 2010 to Mar, 2010 live trade. These kind of systems is all about mm and cost averaging. The clue is how much lot to open and when to open 2nd, 3rd, 4th,.. etc lots. The problem sometime you go into large floating loss or drawdown. If you can handle the drawdown, and not be greedy. Then you may survive. Also, you need to remove profits occasionally, just keep enough for trading. Goodluck.
+
+--- 帖子 #139 ---
+Hi Viv, Saw your PM, and I thought it best to post so all could benefit. 1) Make sure the installer is located on your hard disk and not a network drive. 2) The installer is very smart, too smart. It check for any instances of "terminal.exe" running. 3) Run task manager and manually kill all "terminal.exe" instances. 4) If no "terminal.exe" instances are running, install should work. This should have this issue sorted.
+
+--- 帖子 #140 ---
+All, As of next week, I'm going to be running dual exits. (for v1.02) This means I will enable ATR based TP &amp; SL in SSS EA (Fib exits have always been enabled) PLUS MPTM partial exits. I'll be posting v1.02 installer soon with new set files. Thanks all, getdown71
+
+--- 帖子 #141 ---
+wow.. ill be waiting for that.. so i could perfectly start the forward testing with your optimal settings.. thanks getdown71!
+
+--- 帖子 #142 ---
+hello i have test ea in end of day yesterday 2 trade 2 win great;-) on the ea i see expiration date 10/05/01 what after this date? and i have no news data receveid from ffcal indicator who can answers ? thanks
+
+--- 帖子 #143 ---
+try checking the the allow DLL imports on the dialog box after dragging the FFCal indi in your chart. it might help.
+
+--- 帖子 #144 ---
+Nice one. I'll get my demo setup to run this next week and post my results. ***** Many thanks to getdown71 and xux99 for all the hard work done on this to date ******
+
+--- 帖子 #145 ---
+Cheers Wilko. Thanks for you efforts on the scalper settings. All - new set files will be posted before Sunday night. More draw-down minimization has been found! (down side is less profits; however stable, small, repeatable profits will win the day)
+
+--- 帖子 #146 ---
+I'm new here.. but im excited.. (",) You guys are so awesome!
+
+--- 帖子 #147 ---
+newest version looks darn sexy
+
+--- 帖子 #148 ---
+7 hours to market open.. am i the only one excited? LOL.. although i have 6 pairs on MT4 loaded with v1.01 and post 1 set files, cant wait for the v1.02 with optimum set files. KUDOS!
+
+--- 帖子 #149 ---
+Does v1.02 require any set files? If so can someone tell me where i can find them as i cant see them in post # 1 Thanks,
+
+--- 帖子 #150 ---
+v1.02 is yet to be uploaded and so with the set files that getdown71 will soon upload. and thats i think is what we are waiting.. (",)
+
+--- 帖子 #151 ---
+The set file are in the zip file but you need to rename them from txt to set
+
+--- 帖子 #152 ---
+I have installed the v1.02 and loaded it on 4 charts m30, EU, EG, GJ, EJ, GU (im using wilkos M5 scalping set file) to test. question, loading the template SSS v1.02, are all ok with these 4 pairs? unlike the SSS v1.01, it has different set files for each pair? Sorry if it looks like a dumb question.
+
+--- 帖子 #153 ---
+dont know what i am doing wrong but i can't find them in the zip file!
+
+--- 帖子 #154 ---
+My bad, they were not in the zipped file. Yet i have them but i cant find where they came from. Attached
+
+--- 帖子 #155 ---
+melpheos, indy360 those set files i guess are for the v1.01. since getdown uploaded the v1.02, i havent seen the v1.01 posted. I am assuming the setting for v1.02 (default) is it universal for all the 6 pairs he is suggesting for SSS. i also saw that v1.02 is using MM as default.
+
+--- 帖子 #156 ---
+great, thanks melpheos
+
+--- 帖子 #157 ---
+can i post my backtest result here?
+
+--- 帖子 #158 ---
+Although the first week of results for the GBP/USD M5 set I posted are looking good, there appears to be an issue with the backtesting results and looks like the account will blow up at some point. I didn't pick this up as I think I had some bad data. Thanks to goldsurfer for the PM and heads up on this issue. I'm working on a new version for v1.02 and use some of the functionality just introduced. I'll probably keep the old one running just to see what it does.
+
+--- 帖子 #159 ---
+any set file for v1.02 as a scalper M5? or you are using the default v1.02 on M5? thanks!
+
+--- 帖子 #160 ---
+sorry but there are some stuffs i dont understand.. Im using v1.02 now, and knowing how the system trade, i have some questions or clarifications now.. EU M30 isnt it about to enter trade on the red mark? price channel up, damiani green, dss blue. EG m30 it entered a buy trade (can be seen with arrows) when damiani is grey? GU M30 pink channel means sell right? DSS down, damiani grey, it opened sell trades. is it me or im not understanding things?
+
+--- 帖子 #161 ---
+i think i saw my own answers. looking on D1 channel and H1 DSS on EG and the rest of the pairs.. although im experiencing some losses. i will post my statement later..
+
+--- 帖子 #162 ---
+Thanks for testing outloud. Are you experiencing drawdown ? (not loss until closed) This is common for sunday/monday open. Please post using www.mt4i.com this way we can share performance stats.
+
+--- 帖子 #163 ---
+Yes, im experiencing losses.. here is my statement.. $500 account (nano) using 3.25% risk now increased to 5% to further test. profit $14+ (net), DD as of now -$3+ (max i saw was $10+ i think) my GU has 2 charts, using v1.01 wilko settings, and GU m30 using v1.02 default (changed the risk as stated above) Some losses came from the m5 scalp, but im looking at GU m30, no losses so far. http://www.mt4i.com/users/outloud20
+
+--- 帖子 #164 ---
+getdown71, i have a question, as you can see on my statement, the 0.16-0.17 trades on GU are the one from scalper since i used fixed lot there, but wilko is using partialclose options (if i observe it right). so the lot usage varies. with the v1.02 what i want is to have is to use my own calculation on using insta, equity/1000 = lots usage. since insta 0.01 lot = $0.01. i noticed that using 3.25% risk or 5.00% is only using around 0.05-0.06. which is i think too low on insta with regards to my demo equity. dumb question but is increasing my MM percentage risk better or have 0.50 lot be fixed and ill set the MM to false? P.S. also to add, the GU sell trades are the ones that came from M30 v1.02
+
+--- 帖子 #165 ---
+Hi Getdown, V1.02 works without MPTM EA or I still need that EA to manage the trades. Anybody running this EA on any other pair (other than GU) with success. Regards, Prakash
+
+--- 帖子 #166 ---
+I have been following this thread with interest. Looks to be a great system. On simulator with Wilko settings it worked fine for a while an then absolutely blew up. His Damiani settings effectively took that filter out of the equation. My question is whether I should be changing the trading times as I live in the UK i.e. EST +5. I have thought it should be 07011600, 18002100 and 23000659 i.e. just adding 5 hrs but please confirm.
+
+--- 帖子 #167 ---
+as per wilko, his m5 cannot be backtest since it will always result to loss at the end.
+
+--- 帖子 #168 ---
+question, on the top right corner.. server time 19:23, GMT offet -14 trading hours 19:00 to 22:00, 2330 to 6:00, 730 to 11:00 we are outside trading hours (if we are outside trading hours, how so? when the broker time is within the 19:00 to 22:00 trading hours?) we are inside news period ( i have checked the FF calendar, news will come 6-7 hours from 19:23, how it says we are inside news period?) pls enlighthen me..
+
+--- 帖子 #169 ---
+Try out the M5 and M30 sets for V1.02 GBP/USD ONLY. The M5 was optimized for 1st Jan 2010 to 7th March 2010 to get current market conditions. I ran it on 1st Jan 2009 - 31st Dec 2009 as out of sample data to confirm its worth. For the most part it works OK but has a dip in december 09. M5 optimization stats from my strategy tester as follows: Attached Image (click to enlarge)
+
+--- 帖子 #170 ---
+Nice work, Wilko. I think the fact that 3-month optimized settings get very decent results at other times also underlines their basic integrity and also the integrity of the EA and the trading method itself.
+
+--- 帖子 #171 ---
+Top notch efforts.
+
+--- 帖子 #172 ---
+3/4 day, but dont have any trades on wilkos m5 is any one whose testing experiencing the same? also, the 1.02 only traded 2 now still on drawdown..
+
+--- 帖子 #173 ---
+Thanks for being part of test team. Please publish your results via www.mt4i.com GMT offset is automatic. Manual is fallback (if auto fails) and for backtesting. The times printed on chart are the times in EA setting's PLUS the offset. NO CHANGES are required. The times entered into EA via settings are optimized. Feel free to try other times, if you like, however these have been proven to be the most profitable via backtest.
+
+--- 帖子 #174 ---
+Why this thread went so silent. Is it because this EA cant trade on Live Account? The performance looks really good. Last one week it gave around 300$ profit with Winning rate of 87%. I feel its really good considering the fact that, mkt was range bound this week. Anybody else care to share their results. Thanks, Prakash
+
+--- 帖子 #175 ---
+@ Wilko Your strategy seems to have been working very well. http://www.mt4i.com/users/wilko-sss-gbpusd-m1 Can you confirm: Were the trades from Monday made with the new version or the old one? Which sets are you running, as I see you have and M5 and M30 strategy here - Wilko M5 and M30 strat I agree that this is a very promising bot. Well done to all involved. I think it is best to keep it as a demo version at least a little while longer just to see how it performs. But after a month or so of continued performance like this, I think it will be very interesting to release on a live account. Cheers Invisible
+
+--- 帖子 #176 ---
+Those stats are from my original v1.01 M5 set which although look good have proven to blow an account in backtesting. I have just let it run to see what it does. My new M5 and M30 sets for v1.02 have not produced any trades for me yet. I am also running Getdowns v1.02 sets and they have not done any GBP/USD trades either. It may be just market conditions stopping it from making a wrong move. If anyone else is running with the v.102 sets and got a trade then please let me know.
+
+--- 帖子 #177 ---
+Interesting. Either the conditions for trading are too tight, or perhaps there is an error in the logic of the latest version which is preventing it. I guess the answer is to back test with that set and the latest version to see if it would trade at some point.
+
+--- 帖子 #178 ---
+******************************************************* To Wilko SSS EA in v1.02 active about 3 days but GBP/USD took trade as far as today. Always go into market in couple of with different Lot. On the whole triggered four. All be hard on in loss about cca 100 pips. Nevertheless EUR pairs are in profit and without losses (several entries and on GBP/JPY in profit). This script is very promising. If may I be to you somehow conducive to, like the it I'll do. Thanks to You to share. Sorry of my bad English.
+
+--- 帖子 #179 ---
+Cable settings are more selective to keep drawdown to acceptable limits in backtesting.
+
+--- 帖子 #180 ---
+Hi. I had a detailed look at the trading patterns in your results with v1.01 because maybe there are ways we can improve things in the EA. Most trades (out of a total of 100 closed trades) seem to be open for a short amount of time, i.e over half the closed trades closed in 2 hours with the majority in 1 hour. Personally, I would be quite nervous in live trading if my trade that was generated by a pattern on a 5 minutes chart was still active after anything more than that, but say we draw the line at 24 hours. The 11 (now closed) trades that were open longer than 24 hours were strangely opened in 3 distinct points in time only: on 03/03 at around 20:15 (6 trades), on 08/03 at 07:00 (2 trades) and on 09/03 at around 19:00. Therefore, i wonder if it would make sense to: 1. expire open trades after a set amount of time, say 24 hours. 2. Allow the EA to only trade one trade maximum every 10 minutes. I don't know what is implemented in v1.02 in this respect but it seems to me if we tweak v1.01 with the above we could be reducing the risk of drawdowns but still have a very profitable EA. Cheers, Fredella
+
+--- 帖子 #181 ---
+Following are last week's results (IBFX). Used set files provided, except used Wilkes set files for GBPUSD 30 &amp; 5 Min. However, there were no trades taken for GBPUSD for the week.
+
+--- 帖子 #182 ---
+Hi Fredella, I like your ideas on improving the v1.01 as it does make lots of trades and does need a tweak to make it great. Unfortunately, we have no access to source code so we would need to ask the mighty xux99 to add these enhancements to v1.01 so that we can test out these observations. I did try this set on v1.02 but does not work the same which is why I came up with the v1.02 set and has yet to make a trade. If xux99 would be so kind to add these enhancements to v1.01 so that these theories can be tested? Perhaps a v1.01b could be created? Many thanks.
+
+--- 帖子 #183 ---
+I shall add an option to close an open trade after a user defined period of time. I will be included in the next EA version.
+
+--- 帖子 #184 ---
+Happy to add the suggested enhancements to v1.03. v1.01/1.02 operate the same when settings are implemented properly. Give me the v1.01 settings and I'll make v1.02 compatible set file.
+
+--- 帖子 #185 ---
+Enhancements for v1.03 1. Open (no profit) trades after a set amount of time (setting expressed in minutes (24 hours = 1440 minutes) are closed. 2. Allow the EA to only trade one trade maximum every 10 minutes. (Similar function trade frequency is covered by MaxOrders and TradesPerSession) therefore this will not be implemented. Thanks, getdown71
+
+--- 帖子 #186 ---
+Awesome, thank you guys. This could lead to even better results. I believe the remaining issue is the conversion of the v1.01 to v1.02 set for the test that is currently running under wilco-sss on MTI. In the mean time i will keep analysing the results on that website. Cheers, Fredella
+
+--- 帖子 #187 ---
+Use CandleTimeFrame to indirectly define the period between trades.
+
+--- 帖子 #188 ---
+Fantastic!!! Looking forward to v1.03.
+
+--- 帖子 #189 ---
+My v1.02 sets have just started to trade. Links to follow: Wilko-SSS-V102-GU-M5 Wilko-SSS-V102-GU-M30 SSS-V102-Standard
+
+--- 帖子 #190 ---
+v1.02 MT4i.com with Wilko setttings is up in post 1
+
+--- 帖子 #191 ---
+Still very impressed with my forward testing of wilko m5 set on v101. Not sure I want to change
+
+--- 帖子 #192 ---
+Yeah the fxbook results look good Tazmaan. I have been keeping an eye on it.
+
+--- 帖子 #193 ---
+It's one of the few things I am testing that hasn't gotten itself into some undesireable open DD for the past few weeks. Am impressed thusfar
+
+--- 帖子 #194 ---
+These results are bloody awesome!
+
+--- 帖子 #195 ---
+I'm getting a number of requests for a live version of SSS. Schedule is as follows; 1) v1.03 will be released for testing - if that all goes well, there will be time limited live/demo release. (this is an attempt to thwart dodgy eBay scammers) 2) All live account users are encouraged to provide a mt4i.com or fxbook link to the account. If they wish to maintain some privacy on this, [understandably] they do not have to post and can send me the weblink/password. I will not share with 3rd parties. This is for live forward test information only. 3) If live forward testing goes well - I recommend donating some of the proceeds of your profits to your charity of choice.
+
+--- 帖子 #196 ---
+i will try to open a account in the broker you refer, i have fxpro atm The charity idea sound good
+
+--- 帖子 #197 ---
+I am with you buddy. More than happy to send money to a charity! Your selflessness (and other coders who share their ideas on other threads) touches and inspires me! Thanks once again!
+
+--- 帖子 #198 ---
+I fully agree with donating some of the proceeds to charity - a great idea.
+
+--- 帖子 #199 ---
+The charity idea is great. Perhaps we could also PM GetDown which charity (not amount, just who) got the money, and he could add that in post 1 - "SSS EA users have supported the following charities....." I think that would give a really positive spin to it too as well as being an encouragement to XUX and GetDown that the effort has been really worthwhile.
+
+--- 帖子 #200 ---
+Hey i just noticed the DD for the wilko sets, on the backtest, are really close to % gain. I wonder if there is correlation or is that just a coincidence? My backtests so far are correlated obviously, but not to the extent that wilko's are
+
+--- 帖子 #201 ---
+Hey SSS just wanted to keep you guys posted on my sets, I'm pretty happy with one setup in particular. It runs on EURCHF m5 or m1. The attached file is about a far as you can take this idea before it wipes. Obviously i wouldn't recomend setting this high.... You can use this as a double or nothing strategy or you can take it way down and use it as a slow earner, it up to you... You can use the same idea for both Uranus and SSS as it only uses DSS bressert. For some reason I get different result with both EA's eventhough its the same shell, so i chose Uranus but i dont think it really matters.... I've been trying to incorporate a swing trade style into this. Basically I've been trying similar setups with EURAUD trading "short only" with mild sucess. Keep up the good work
+
+--- 帖子 #202 ---
+I Agree with Getdown charity plan for a live version and I would like partake. Thanks once again !
+
+--- 帖子 #203 ---
+Thanks for the input Joe! Can you possibly work a SSS based set for us review and test ?
+
+--- 帖子 #204 ---
+EURUSD/GBPUSD/EURJPY/GBPJPY/EURGBP/EURCHF/EURAUD/USDCHF I think 8 pairs is enough - on average the max drawdown is around 8%. The DD for all will not occur simultaneously for all 8 pairs; 1) If you stick with my settings and MPTM 2) Don't use other EA's or manual trades on the account 3) There are many factors that are 8 - this must be lucky!
+
+--- 帖子 #205 ---
+Can you try to make this EA multipair...
+
+--- 帖子 #206 ---
+Multipair EA is not possible - sorry !
+
+--- 帖子 #207 ---
+hello guys, this EA don't take losses ? Maybe i miss something about this EA but in my account for today i have like 350$ WON and -700$ in open trades. need to read some more about it
+
+--- 帖子 #208 ---
+The EA does do SL exits; They are done by ATR and indicators only. (if you use my supplied settings) All the details are in post 1
+
+--- 帖子 #209 ---
+Ok :s, sorry i will check later...
+
+--- 帖子 #210 ---
+Trying it but my plateform get disconnected from time to time and if i do not look it up like it happened the last time trade can go in a very bad direction like i have right now. I have to find another plateform that is more reliable or put in on my work PC (because i can ^^ ) I think we need more details on the different settings because this is very very complex EA (probably one of the most complex i have ever seen in terms of functionnality) so we know what we should try to optimise and what is not necessary to touch.
+
+--- 帖子 #211 ---
+Hi Melpheos, My settings attached to post 1 provide guidance on what parameters to try. However, there are many more combinations than I can test, so I leave that up to the group here. Wilko has found some great cable scalper settings. I encourage you to do the same. The manual is in the installer zip file. v1.03 has just been posted. Kudos to xux99!
+
+--- 帖子 #212 ---
+[quote=getdown71;3563863] 1) If you stick with my settings and MPTM Hi Getdown71, I have been running your V1.02 presets without MPTM and have been getting great results. Started fresh Demo 2 days ago and up 22% already. Presets using TP + TS ATR multiplier working OK so far ...
+
+--- 帖子 #213 ---
+[quote=Jim67;3565299] Good news Jim - glad to have you in the test team. Can you link your demo test to www.mt4i.com Very interested to see your results without MPTM !
+
+--- 帖子 #214 ---
+guys I'm using fxpro to test it, any interest in my statement ? Updated the version, let's see how it goes
+
+--- 帖子 #215 ---
+For sure we are interested. Use www.mt4i.com to link your demo and we can compare you performance with the rest of the team.
+
+--- 帖子 #216 ---
+I have run two days without your set files :s Already fixed that
+
+--- 帖子 #217 ---
+getdown or xux: I think there may be an issue with the fridayclosetrades function. I have it set to 2 (which should mean close all unprofitable positions on friday) yet in backtest I am seeing this doesnt happen. I have open trades for weeks with big dd that don't close until they manage to climb back up to profit. Can you guys check this yourselves to make sure I am not missing something? Thanks!
+
+--- 帖子 #218 ---
+[quote=getdown71;3565342] Hi Getdown, Great work on this EA BTW. All published to new account. Only have last 2days results so far as opened fresh Demo with Bal $300 for realistic test prior to possible live. Pretty good still ....
+
+--- 帖子 #219 ---
+[quote=Jim67;3565438] Jim, have you used www.mt4i.com or www.fxbook.com before ? I prefer www.mt4i.com just for familiarity. Using the publishing feature of MT4, your results get sent to the web site like below http://www.mt4i.com/users/sss_ea_v102
+
+--- 帖子 #220 ---
+[quote=getdown71;3565444] Hi Getdown, Sorry for late reply - am at work and doing between patients!! Never used either - but have opened MT4I account and attached publisher to charts. Easy. Results are uploading live. My username. Thanks again and onward and upward ....
+
+--- 帖子 #221 ---
+[quote=Jim67;3565508] Thanks Jim got it. I see another Aussie in the house!
+
+--- 帖子 #222 ---
+Hi, I am new to the forum and I must say I am really impressed with what I saw on this thread. I would like to test the EA and see what type of results I get. Few Questions: 1. Does Steve's MTPM still need to be running to close trades in version 1.03 or is this feature built into the EA at this point? 2. Wilko - I am very impressed with your GBPUSD optimization you did with version 1. Have you had any similar success with versions 2 or 3? I noticed you made new .set files for version 2, but from what you said, they didn't quite perform the same - maybe I am not understanding correctly. I would really like to look into this more as it looked very successful. getdown71, is there anyway I can still get a hold of version 1.01 simply to tests Wilko's original M5 set for GU? I am interested in seeing where/how it blew up and if there's any way it could be avoided. Thanks in advance guys, and I hope to be working along with you all on this. I will setup am MT4i account soon to post data as well. Andrew
+
+--- 帖子 #223 ---
+[quote=getdown71;3565582] Hey Getdown, another Aussie deservedly having a few on a Fri night at the end of a great week. luv' ya work ... My shout!
+
+--- 帖子 #224 ---
+I just checked FridayClose option and works properly. FridayCloseHour refers to GMT, so maybe it is set by mistake after the market closes.
+
+--- 帖子 #225 ---
+thanks for checking it xux. I will look deeper and rerun tests.
+
+--- 帖子 #226 ---
+i have tested wilko strat in the GBPUSD 5 minuts in V 1.03 and i have changed the Takeprofit and hedge options to true, and the results are in attachment Test in 2009-2010
+
+--- 帖子 #227 ---
+Well done Kaydara - building on Wilko's scalper strategy. What is the maximal drawdown ? Could you try 2008 to 2010 if possible ? Once finalized, please send thru set file once you rename it from .set to .txt Kudos, Nick
+
+--- 帖子 #228 ---
+tonight i will use all my computer power... it's a pitty i can't use my quad core for this... i will create detailed reports and share with you guys
+
+--- 帖子 #229 ---
+i agree with the charity part.. i have been busy this week and havent continued with my testing.. but the live version would be a good thing.
+
+--- 帖子 #230 ---
+8 indeed is a lucky number.. (",)
+
+--- 帖子 #231 ---
+ill start testing on monday using vps.. i bought one recently.. my internet gets disconnected at times.. so vps will do it i think. will post my mti results when i start. kudos to everyone..
+
+--- 帖子 #232 ---
+Kaydara, can you post the set file you used for your test? I have been running tests all week on this m5 gu, but for my test period I am not able to get anything close to that without huge DD. Tried to just tweak the one I have been playing with and turn hedging on, but no go. post that set up and i'll work with it along with you this weekend/next week.
+
+--- 帖子 #233 ---
+btw getdown, is the 1.02 presets can also be used on 1.03? or only 1.02? im sorry, i cant understand the mtmp.. what i used on my test before was a fixed lot. using equity/1000 on a nano, dunno.. lol.. coz im using insta where 0.10 lot = $0.10. thanks thanks!
+
+--- 帖子 #234 ---
+From what I thought, the only difference between 1.02 and 1.03 was the addition of the order open time input (which allows you to close any trade open for x minutes). Am sure I'll be corrected if i'm wrong
+
+--- 帖子 #235 ---
+100% Taz. v1.02 setfiles can be used with v1.03 EA
+
+--- 帖子 #236 ---
+Lol, yeah, i think so too.. so this is just one stupid question.. my apologies..
+
+--- 帖子 #237 ---
+not stupid at all, no worries
+
+--- 帖子 #238 ---
+my set file in attach as soon as i have more data i share. This setup sucks in 2008-2009... i think 2009-2010 was just a matter of luck :s
+
+--- 帖子 #239 ---
+Drawdown reduced 1-2% across all pairs
+
+--- 帖子 #240 ---
+What am I missing here? This is my backtest from 8/30/09 til present on eu m30 with new set file
+
+--- 帖子 #241 ---
+See how v1.02 goes - what is your broker ?
+
+--- 帖子 #242 ---
+wasn't able to get much better with 1.02 either if i recall. broker is gomarket, i trade them live and the demo acts pretty close to the live platform in comparison, so I try to use go demo as much as possible for testing.
+
+--- 帖子 #243 ---
+Tried latest presets of 1.03 But its not that satisfactory. Closed couple of trader in loss for eurjpy and eu. Anybody faced similar issue.
+
+--- 帖子 #244 ---
+Hi Reachjj, I don't think a reasonable assessment of performance can established after 1 day! Come back in a week or two - then will have some real results to mine and review some initial findings. FYI v1.03 presets are almost identical to v1.02. (only ATR for TP &amp; SL have been tweaked mildy to limit drawdown) Do you have a www.mt4i.com web link setup for you demo ? Thanks, getdown71
+
+--- 帖子 #245 ---
+my 1.03 demo havent traded a single one..
+
+--- 帖子 #246 ---
+Firstly I can't emphasize enough the words appreciation and admiration for getdown and xux for sharing their work. True greatness lies beneath the action of sharing this EA and not if the EA itself is profitable. I have a demo running v.103 since yesterday for all 8 pairs and I am going to post the results pretty soon. Being studying forex for the last year and FF for the last six months so that makes me a newbie to this arena. Thank you again for your work it looks extremely promising.
+
+--- 帖子 #247 ---
+I have been running it since Monday, EurUsd has not traded but GbpJpy has done quite few trades and I am am in profit. Have not changed any settings yet but is it normal for it to not stop out?
+
+--- 帖子 #248 ---
+When you say stop out, you mean exit a trade ? if Yes, this is correct operation as partial TP (34%/33%/33% of main entry) via ATR is enabled. If you mean SL - this is done via ATR also PLUS via indicators. You can get details on this if you read manual and review my settings file. What broker and what GMT offset are you using ? (auto setting enabled plus manual GMT number) I assume your using the set files in post 1 ? Do you have www.mt4i.com web link setup as requested in post 1 ? This will better help to review/compare performance across different brokers. Thanks, getdown71
+
+--- 帖子 #249 ---
+Sorry I have set up the account for mt41 but figured i was only running the standard setup and did not want to load you down with the same data. I now have 1 trade on the GBPJPY30M that is 2 cents against me, is this normal behavior or have I missed something? Gary
+
+--- 帖子 #250 ---
+I have been running back tests comparing presets V1.02 to V1.03. Have found V1.03 to be much better (from 10% to 200% better ROI) for all pairs except EURJPY. So am currently running V1.03 on all except EJ which is V1.02 or course. For period 1/1/2010 to 20/3/2010 only EURUSD, EURCHF and USDCHF were negative ... others nicely in profit. Will try tinkering with these presets to get better results. Loving the SSS ....
+
+--- 帖子 #251 ---
+Hey Jim, What broker and back test data source are you using ? Thanks, getdown71
+
+--- 帖子 #252 ---
+Hi GD71, Demo broker was Forex FS and downloaded data via Metaquotes Software corp. Just the standard download procedure thru History Centre using F2 key. Gunna try now with GoMarkets too now - 'cause that's who I'll use for live ...if... soon... ...?
+
+--- 帖子 #253 ---
+i am joining your forward testing team. account is ALpari europe and MT4 was downloaded from their site. 5 digit broker. trading EU on demo, of course. green pips to u all
+
+--- 帖子 #254 ---
+Hi Getdown, Dates that you MUST USE for backtesting are is 2008.01.26 to 2010.01.26. No other dates periods will be reviewed otherwise. may i ask why? just hope it's not because the ea doesn't work outside those dates...
+
+--- 帖子 #255 ---
+Hi All, I have created a demo account on Alpari UK and put the EA on the following charts (all M30): EURGBP, EURJPY, EURUSD, GBPJPY, GBPUSD and USDCHF. I am using 1.03 presets from post 1. The results can be seen on http://www.mt4i.com/users/sss_ea_v103_zkucera . So far, there was only one open trade. I will let it run without MTPM and post an update in few days.
+
+--- 帖子 #256 ---
+Hi Getdown71 Been testing a couple of weeks now, SS 1.02 with the wilko_sss_v1.02_gbpusd_m30 set. I used the set on the 6 Majors and all show a profit I have it mixed in with another 2 EAs but can sort it out on to an Excel should you need it. What I like about it is the very low DD The question I have is when can we go live?,,,,,,,, I’m ready
+
+--- 帖子 #257 ---
+Hi, Does anybody got good scalping settings (M5) with low DD with this EA. I am still struggling to find one..
+
+--- 帖子 #258 ---
+just wanted to thank the creators of this thread and the creator of the EA. i have been testing demo on all 8 pairs at atc brokers and it is doing very well with the 30 min presets in post 1. very low drawdown as well. this might be first ea i would have the confidence of going live with.
+
+--- 帖子 #259 ---
+Hi Richie, Glad to hear testing is going well and welcome to the test team. Could you please publish your demo results using www.mt4i.com so we may compare results across different brokers. What version are you using ? Thanks, getdown71
+
+--- 帖子 #260 ---
+its time to pitch DEMO vs LIVE results. We have seen good performance with demo I think its time for MICRO LIVE accounts tests. some of us are ready to commit small live accounts to this venture, if getdown77 will agree, the EA has passed the first lap of the test. I think we should test drive it now with REAL money and see how it goes. lets see how we get around those little tricks played by the brokers kos
+
+--- 帖子 #261 ---
+Hey Kosomolate, Welcome to the test team. If this week goes well, the live version will be posted next week. BTW, where is your demo www.mt4i.com statement ? Thanks, getdown71
+
+--- 帖子 #262 ---
+thanks getdown71, im using the latest version and presets you have in post 1- i think 1.03. i will get am mt4 live set up. rich
+
+--- 帖子 #263 ---
+I have put most of the set files from post 1 on a demo and tweaked them a little so we will see how this runs. I will post a link to the account soon. Some small trades already taken on EURGBP in the +, so this is a nice start. Thanks for the hard work, guys.
+
+--- 帖子 #264 ---
+Hi Getdown71 et al, Last week I said that V1.03 was better for all pairs except EURJPY. Well having checked results with GoMarkets I retract that staement. V1.03 is better for EJ as well. Just shows how different feeds and data can make the world of difference. I agree that next step is penny account live and see how it goes. I have also been doing a 'shed' load of testing with different inputs etc. I can honestly say now that I take my hat off to you and the SSS team because I realise just how much work it takes to get a optimised set for any one pair. Great work! I will continue to test inputs just in case I hit a good one (and because it's a challenge!) but at present V1.03 wins hands down in my book. Amazing stuff ...
+
+--- 帖子 #265 ---
+if you apply this to EA.,.. wouldnt be a great filter? here
+
+--- 帖子 #266 ---
+Strange thing happened last night 12am, all trades closed out at 770 pips loss. Could that be a SL kicking in or some time limitation on 1.02? file:///C:/Program%20Files/JadeFX%20NEW/Statement.htm
+
+--- 帖子 #267 ---
+HI, Can anybody tell me, how the lotsize is getting calculated. Can we set fixed lots by any way? Thanks, Prakash
+
+--- 帖子 #268 ---
+For manual lot size....RTFM...please
+
+--- 帖子 #269 ---
+Usdjpy/gbpaud/gbpcad/gbpnzd
+
+--- 帖子 #270 ---
+Checked the presets zip @post1 but it has only the original 8 pair sets, am I looking @ the wrong place? P.S. will be posting MT4i demo account running sss v103 for last week on FXCM . Thank u
+
+--- 帖子 #271 ---
+its there now! sorry all
+
+--- 帖子 #272 ---
+I don't think this was asked already, but I think there is an error in the GMT offset calculations. I am using the MBTrading demo account, and I believe the GMT offset should be -4, but the SSS v1.03 calculates it as -3. Before DST, it was -5. Does anyone else see this issue? For now I just manually set it to -4. Thanks.
+
+--- 帖子 #273 ---
+Hi rolleddice, There has been a time bug identified for Sunday evening open for AutoGMT time calculation - this has been resolved for v1.04 which will be released as a live account enabled version this weekend. I think the issue may be that the chart print for GMTOffset does not update correctly - however I think EA is still working correctly as the server time chart print shows 100% correctly. See attachment - perhaps similar to your issue. (these 2 pairs have identical time settings) xux99 FYI - please advise. Thanks, getdown71
+
+--- 帖子 #274 ---
+Hi Getdown Do You still use MPTM for exit? One more question: If autogmtoffset=true...it doesnt matter what manualgmtoffset=, is that correct? Best wishes Elovv
+
+--- 帖子 #275 ---
+just added the 4 new pairs to original 8 on forward test at http://www.mt4i.com/users/mt4iresults . Broker is FxPro demo, 30m charts with recommended presets.... i.e this is straight out of the post one box. impressive early results 4 sure! many thanks to developers and testers here.
+
+--- 帖子 #276 ---
+Hi Elovv, I'm not using MPTM for TP/SL anymore. With the recent optimizations of over 10 pairs the drawdown is under control and that was the main driver behind using MPTM in the first place. Correct - manualgmtoffset is ignored if autogmtoffset=true. However during backtesting autogmtoffset does not work, so you must specify correct manualgmtoffset to obtain more real world aligned results. Thanks, Nick P.S. Elovv have you setup your www.mt4i.com web link for demo testing yet
+
+--- 帖子 #277 ---
+This a v1.03 error caused by a slight inaccuracy of local time. It has been solved in v1.04.
+
+--- 帖子 #278 ---
+Hello all, Just got her set up on 5 pairs 30 min EuroUSD, GBPUSD, EURJPY,GBPJPY, EURGBP. running OOTB with .1 lots on a 3k mini Demo with IBFX. I will keep you posted with my results. Very nice looking BOT! Obviously you are going commercial with this when you prove it is profitable and tweak it, will the people who helped test get a discount? Just wondering cuz some of us dont have a ton of Cash, If I have offended you I appologize I would just hate to get all excited about the system and then not be able to afford it. Thanks again Jim
+
+--- 帖子 #279 ---
+Did you read the first post of the this thread? Regards, Jeff
+
+--- 帖子 #280 ---
+Of course he hasn't.
+
+--- 帖子 #281 ---
+I agree.
+
+--- 帖子 #282 ---
+It's nice that he says it's worth a "ton of cash" though !!
+
+--- 帖子 #283 ---
+And I understand about people stealing code/ideas and doin the ebay thing...as far as hiding the source...I was just wondering because of the expiration date? I obviously have offended people and I am sorry but there have been many good looking systems whose authors started out just to help people then after a few months there became a subscription. I shouldn't have bought it up again please take no offense. Jim
+
+--- 帖子 #284 ---
+I don't think anyone is really offended Jimbo ... we're just having fun with you. As far as I know the SSS team (Getdown71 and xux99) are one of the good guys ... Jim
+
+--- 帖子 #285 ---
+Hi Getdown, Just a question to you. The low DD is acheived only if we allow EA to trade on all your recommended pairs? I was running it only on EU and GU but faced huge DD. Please guide me, if I have to run it on all pairs to achieve good results? Thanks Prakash
+
+--- 帖子 #286 ---
+Please kindly post the EA again or PM me. i will be waiting for it.
+
+--- 帖子 #287 ---
+hi getdown, the ea is flying on my test at http://www.mt4i.com/users/mt4iresults because the indicators used are in a different timeframe to m30, i.e. for eu the price channel is 4h and the dss/damiani are 1h in the sets, i was just checking a recent eu setup (pic attached). maybe i've made a mistake, but thought i'd flag this eu trade (39670212 on my http://www.mt4i.com/users/mt4iresults ) which seems to have not been filtered out by the 1h 7/52/1.4 damiani where the green appears to be BELOW the grey. i'm probably missing something here but u might wanna have a look at this setup on your charts just in case. cheers
+
+--- 帖子 #288 ---
+They are definitely 2 of the smart guys, didn't have muchtime before work to see what was going on but It had closed like 12 successful trades with at least 8 open running in positive territory. I made an error though I set lots to .1 for the mini demo and the trades were very small....I was up like $3 on a 3k lol also is there a template file? my bot is running fine but I cant see any indicators. Thanks Jim
+
+--- 帖子 #289 ---
+default settings from page 1 - all pairs at atc brokers now i started this on 3-23-10. i tried to custom my history but it will prob reset- so go from there on. http://richie456.mt4live.com cant wait to test this live many thanks to thread creators. also does this EA play nice with another EA as i do run one other EA and dont want any issues thanks
+
+--- 帖子 #290 ---
+There is no problem, just make sure the two EAs use different magic numbers.
+
+--- 帖子 #291 ---
+Up just about 1% on the day for the 5 pairs I picked. +27.29 closed with +5.73 still running. on a 3k mini demo at IBFX. Drawdown and margin have been negligible. Would it be possible to run live with as little as $500? Thanks for your hard work! Jim
+
+--- 帖子 #292 ---
+Good work Jimbop! What 5 pairs are you running ? If you had your www.mt4i.com link up and running, I would not need to ask this dumb/time wasting question. Thanks, getdown71
+
+--- 帖子 #293 ---
+GetDown, 5 pairs 30 min EuroUSD, GBPUSD, EURJPY,GBPJPY, EURGBP. I will sign up for that service right away, I messed up though (taking a bit of a beating as My wife rebooted my PC last night) so I have several running negative(basically I lost 10 hours of MM). I think I am going to re-start my test though as this Draw Down is not the robot's fault and therefore shoul not be documented with the results you are Gathering. I will wait till the end of the day and see if it can dig itself out of this hole. If it doesnt I will start a new Demo tonight and make sure to be listed with the service.
+
+--- 帖子 #294 ---
+I was interested to see if it may be worth cutting off trades that are going on "too" long. After all, the M30 sets essentially are intraday trades and I would think it is not worth keeping them running for excessive amounts of time for the following reasons: If it is taking a long time to reach a profit target, then it is increasingly unlikely to do so. If it does, then this is more likely to have been the result of some lucky move of the market in its favor, rather than the result of a good entry. The longer a trade is open, the more vulnerable it is to sudden news events causing market spikes. The sets look for news events at the time of entry, but as a trade drags on, all kinds of other news and market events could occur. I used richie456's data and put it in OpenOffice Calc (spreadsheet). I then reordered the trades by elapsed time. What I found was that trades that were open over 12 hours contributed just over 1% of the closed profit. In other words, the final gain was very small, and in my opinion the risk of having trades like these open so long was not warranted given the very small gain. What I am doing in my test with the latest set files is to have trades expire at 720 minutes (12 hours). I am also having it ignore all but the "high" impact news, after discussion on the Scooby BOJ thread about the inaccuracies in the FF news calendar. The potential downside to the 12 hour-cut off is that perhaps some of these slow-burning trades, if left a long time, can be closed out for a small loss or a moderate gain, whereas closing them at 12 hours could mean closing them while they are in larger loss. My opinion on this is that it affects a small number of trades and the arbitrary nature of the time cut off means that there will be some higher-than-should-have-been losses, and some that will be lower than they otherwise would have been. In addition to this, closing trades at 1/2 day means that they are not just going to keep dragging on through all kinds of news cycles which incur risk. I will post an online link at some point to my results, but I am in the process of moving from one State to another, so that will have to wait. I will report back general results though.
+
+--- 帖子 #295 ---
+Hi Invisible, Best of luck moving! Looking to forward seeing your results soon. Thanks, getdown71
+
+--- 帖子 #296 ---
+SSS 1.04 on jade demo without 720 min restriction http://richie456.mt4live.com SSS 1.04 on jade demo WITH 720 min restriction http://richie456test2.MT4Live.com both were started at the exact same time with the standard default settings in post 1 ( with the exception of the 720 close of course) hope this helps you guys- i really like this EA
+
+--- 帖子 #297 ---
+Thanks Richie456. Interesting to see the results. What is your broker ? Doh - JADE FX - my eyes are painted on! Regards, getdown71
+
+--- 帖子 #298 ---
+JADE FX
+
+--- 帖子 #299 ---
+A big thank you to getdown71 and xux99, and all the others who contributed to this EA! It is great to see both original settings and variations published at MT4i - so we can compare and learn. My test is at: http://www.mt4i.com/users/ sss_cr1 I am building on the very successful approach by Taz. He used v101 and without any time restrictions. My test is SSS v103 on M30, orig set files but no time restrictions, AUDUSD with EURUSD settings, GBPUSD M5/M30 with Wilko settings, no MTPM EA attached, Broker: Collective FX. AUDUSD is just trying something new - no idea if EURUSD settings will work. A question: Is the EA ok if there is a reboot of the VPS or PC? Or are open trades affected, or trades not taken that may have been taken otherwise?
+
+--- 帖子 #300 ---
+VPS/PC reboot should not create any extra entries/exits. I have observed and not seen any issues. Interesting settings Bubo - lets see how AUDUSD goes. Lots of good variations in the mix now. Thanks, getdown71
+
+--- 帖子 #301 ---
+im using eu settings for au as well and it works good so far.
+
+--- 帖子 #302 ---
+Please keep in mind my PC was off for approx 10 hours during which time I had a significant Drawdown, however the robot has recovered from my bonehead play and is still running in the positive. http://www.mt4i.com/users/jimbop Thanks for this incredible tool (still love to have no expiration date) Don't Flame me I was just kidding!!!!!! (sorta) LMFAO! Jim
+
+--- 帖子 #303 ---
+only been a day but the results of the 720 minute close are becoming apparent. curious to see the difference in a couple weeks
+
+--- 帖子 #304 ---
+how come v1.04 is not in your black box mode?
+
+--- 帖子 #305 ---
+Loaded v104 same pairs ootb results are at http://www.mt4i.com/users/jimbop closed all v103 trades with a -3.80 or so. Jim
+
+--- 帖子 #306 ---
+Loaded v104 5 pairs as previously posted on Go Markets , no trades this week yet. No errors in journal. thanks
+
+--- 帖子 #307 ---
+i have uploaded v104 - got a load of zero divide messages. Any advice?
+
+--- 帖子 #308 ---
+No H1/H4/D1 history for the pair u loaded the EA on to. Read post 1 again!
+
+--- 帖子 #309 ---
+Getdown are there indys in the executable file it needs? I just loaded the EA ex4 and not the executable. Would it be possible to post the indies? The exe wont install on my vps without closing the other platforms and they have trades open. Thanks alot!
+
+--- 帖子 #310 ---
+Running the Big 4( Eur/Usd, Cable, Eur/Yen,Gbp/Yen ) using version 4+30m sets from page1, I guess all that matters is where we are now(+60) or where we'll be Friday at close. Notice the Gbp/Yen made a buy but Eur/Yen is short. http://www.mt4i.com/users/goldsurfer ATC Cheers
+
+--- 帖子 #311 ---
+Greetings, all. Yesterday I began a v1.4 OOTB demo with all the pairs recommended in post #1 at IamFX. Here is my statement: http://www.myfxbook.com/portfolio/iamfx-sss-v14/25408 I am using the default set files... I saw there were set files in the v1.3 zip archive. Are those recommended for v1.4 also or should I leave things as-is? Thanks, Scott
+
+--- 帖子 #312 ---
+Install with v103 installer, then manually place v104.ex4 in experts directory and use the v103 presets in zip file.
+
+--- 帖子 #313 ---
+You must close down all MT4 instances to use installer. Then install with v103 installer, then manually place v104.ex4 in experts directory and use the v103 presets in zip file.
+
+--- 帖子 #314 ---
+All, Great trading day here for v104 demo accounts. Have not yet had a chance to look at all demos out there. Does someone want to volunteer to compile a list of all demo account web links and have in 1 post ? Thanks, getdown71
+
+--- 帖子 #315 ---
+Had everything right except the presets. All set now. Thanks for the assistance. Scott
+
+--- 帖子 #316 ---
+Closed all trades due to PC problems, my old backup PC which I used for the SSS bot but does have the most disc space and biggest HD is out of disc space. New one on me and I've been computing for 15+ years. No way it should be. So I gota figure that....Anyways....not a bad week. Plan is next week to run the Big4 again and compare it to a combo of the Big4 and 3-4 more of the optimized currency sets. http://www.mt4i.com/users/goldsurfer Using ATC demo Cheers OK, I got over 200 GB in my MT4 Experts log files, coinciding with the dates this week running v1.04.
+
+--- 帖子 #317 ---
+Me thinks you did not have history for H1/H4/D1 setup before making the EA active. This MUST be done, otherwise the EA will protest ad infinitum about lack of history and there logs will run amok/accumulate.
+
+--- 帖子 #318 ---
+Ok, thanks for responding I am aware of this and have made an effort to set the history in all pairs I trade. In this instance, there were only 4, and pairs I trade anyways, so history should have been there. But maybe, let's see what happens in future. Thanks again and cheers
+
+--- 帖子 #319 ---
+Hi All Sorry no online results from me, but here is the real-time equity graph. As you can see, it got nicely into its stride later in the week and is having a great time now. You can see the limited number of pairs I used on the screen. These are the same as the standard set files, except the trades expire at 720 minutes, and also only high impact news is avoided and nothing else from the news calendar. I suspect I will have this one live shortly, as it is very promising indeed. Invisible
+
+--- 帖子 #320 ---
+sorry if I missed this somewhere, but does a) this works for both 4 and 5 digits brokers? if yes, need I change any setting manually for it to do so? b) this confirm to NFA?
+
+--- 帖子 #321 ---
+It works on 4 digits, 5 digits and ECN brokers. For NFA brokers set Hedge to false and MaxOrders to 1.
+
+--- 帖子 #322 ---
+xux99/getdown: Any idea why this won't backtest/optimize using dukascopy tick data? I had plans to spend some time running optimizations, as I have about 3 years of tick data to work with, however it just doesn't take any trades at all. I have even converted every timeframe for the ea's use, still nothing. What data did you guys use for optimizing your set files provided?
+
+--- 帖子 #323 ---
+Hey Taz, Same path I was going to take next; Looks like you are a little ahead of me. Lets shoot the breeze on this more offline. my Skype ID is getdown71. Thanks, getdown71
+
+--- 帖子 #324 ---
+i will keep testing both with the 720 min close and without but the account without is performing much better at this point. although both versions of SSS are struggling with some DD at this point
+
+--- 帖子 #325 ---
+Getdown: Could an exit be structured to occur with a simple aqua/magenta shift? I think the opposite signal option requires more. Thanks, Glenn
+
+--- 帖子 #326 ---
+Some pairs have this setup already.
+
+--- 帖子 #327 ---
+v1.05 changes DSTOffset setting switch added to correctly switch between Summer time during backtesting/live.
+
+--- 帖子 #328 ---
+SSS 1.04 on jade demo WITH 720 min restriction http://richie456test2.MT4Live.com this has been REMOVED. 720 min close not too good on my end. testing original only.
+
+--- 帖子 #329 ---
+Hi Getdown, i have SSS running on a demo account for a few days but i also use that account to test another strategy, therefor i have all trades mixed. i can identify which ones are of SSS because of the number of lots and today, while looking at the results i saw that the EA only buys?!? surely not normal. should i remove it and reinstall it? or just the settings file? thanks
+
+--- 帖子 #330 ---
+Here is my Demo account results with FXCM running since April 1st. I am running sss103 with default 30min presets. There were a couple of trades open for more than a week!!! (Closed with profit though but with considerable DD) but i think i has something to do with the changing of hours here at my part of the woods.... http://www.mt4i.com/users/pagouras_sss
+
+--- 帖子 #331 ---
+There 2 ways filtering by trade comments or by magic number. Either way can get you over the line. All buys ? Quite possible (whilst a trend is underway) as the EA uses multiple timeframe entry/exit logic which may appear to going against trend in the short term, however when you zoom out to larger timeframes, you see that the trend is quite clearly in 1 direction (with minor retracements etc..)
+
+--- 帖子 #332 ---
+keep up the great work and thanks for sharing this project I am currently testing v.1.04 my results will be at www.mt4i.com/users/dfxt -Rich
+
+--- 帖子 #333 ---
+Can anyone tell me if this ea has a global stop loss because exactly 12am 31st March all trades closed out for around -800 pips. Those pips were the difference between a profit or loss for the month. Going by the time and date I somehow think the broker had something to do with it. Look here= http://www.screencast.com
+
+--- 帖子 #334 ---
+Hi getdown, i only use the SSS on EU. seems to me the trend has been down... not one sell? really seems strange...
+
+--- 帖子 #335 ---
+There is no global stop loss in the current set files is active. SL is handled by indicators only. The midnight liquidity spikes must have taken out indy based exits. (very rarely seen but possible) I suggest getting a new broker. What is the broker you are using for this demo ?
+
+--- 帖子 #336 ---
+hi, iam using 1.03v SSS , getting some wat good results. my method is like- "human instructing the EA what it has to do in the present live market". i will explain my method here. iam using 1min time frame in USD/JPY pair. i have not changed much settings - the changed setting are below DSS Bresert- 1000 the other indicators all - 0000 ( not using them) SL- 30 pips closeAllProfit- 5% money management- true Leverage Percentage- 2.5% lotsPercentage- 0.001 lots- 0.001 ---------------------------- when the market is reaching support and it is in the distance of 20-25 pips to that pivot support ,i add this ea to usd/jpy 1min chart with the above setting and sellect " only longs" option. wat it does is - when markets falling quickly to that support from this 20-25 pips distance ,it takes several buy positions , when market bounce from the support and the profit reaches 5% of my balance ,it closes all my open long positions. same with the resistance zone as well ,when reaching resistance, i take "only shorts". when EA closes all my positions , i remove ea from the chart and wait for the market to reach next nearest support or resistance to add this EA again to the chart with the above settings. As of now its giving good results... as i told you earlier iam using only DSS Bressert indicator for the signals.. Human_&amp;_auto
+
+--- 帖子 #337 ---
+Hi human_&amp;_Auto, Thanks for the alternate setup sounds great and we can't wait to test. Please post your set file (use .txt format) Thanks, getdown71
+
+--- 帖子 #338 ---
+Hello everybody, It is good to see so many forward tests! It would be great to have some more variations tested, such as human_&amp;_Auto, or using the wide arsenal of tools that is supplied in this great EA. I feel we are only using a fraction of what is possible with this versatile EA, and more people could find other avenues that may work. Here is another idea, which i guess we would have to test manually first as I believe it is not in the EA yet. I call it a 'Ratchet Strategy'. Let me explain. Most trade management strategies for baskets or multiple trades are targeted at net profit (or net loss). If the account equity exceeds the account balance by x amount, then you are happy with some good profit and you 'Close-All', and start anew. Another approach of dealing with longer open DD in SSS could be a 'Ratchet Strategy'. You don't care about positive net equity. All you care about is your growth of equity. If equity exceeds a previous equity high by an acceptable x percent or $, then simply close all and start new. This way you can ratchet yourself up even if the EA is in constant open DD as measured by a higher balance and lower equity. But that is fine as long as the equity is growing. I would be interested if anyone would like to try manually, or has seen a tool somewhere that we could attach to a chart in the account where SSS is active.
+
+--- 帖子 #339 ---
+Well pretty happy with first week live using V1.04 default setfiles. Micro account with GoMarkets . Results at http://www.mt4i.com/users/jim67/?rx=1271483680390 Profits +69.29 on $300 account with 0.01 lots Floating DD was only about -15.25 15mins before Fri close - damn GBP sent it -40.89 Great start Getdown + xux99 Looking forward to next week. Cheers
+
+--- 帖子 #340 ---
+Excellent news Jim! Thanks for posting your live stats
+
+--- 帖子 #341 ---
+Hey Bubo, Thanks for the suggestion. Just confirm I have the understanding correct, you are stating that if the MT4 EQUITY "waterline" is exceeded by a gain in %/$/pips (could be EA settings) then all trades close. Correct ? Thanks, getdown71
+
+--- 帖子 #342 ---
+All, As we have seen the EA has had some minor DD recently. Last couple of days the EA has roared back it action. v1.06 is in the cooker - thanks xux99! PLUS some further tweaked set files which HALF the DD for the same test period. (e.g. EURUSD max DD is now 4.5%) Thanks, getdown71
+
+--- 帖子 #343 ---
+Hi getdown71 - Yes, correct. Of course you also need some kind of marker when you freeze that equity high plus target, or it will forever race ahead of you when equity increases. For example, when the equity high has not been exceeded again during x amount of time, or if the equity high is followed by a decrease in equity by an amount y - all signs that things didn't quite work out as planned and that you may want to get out and start fresh with new trades before things get too risky. Would be great to have that in the EA, although I have no data to show it will improve performance or not. Regarding other tests. What exact mptm are you using for forward test in first post: v103 link is actually running v105; with and without MPTM on FXDD - just to compare forward testing results. Also, has anyone tested the following setting: v1.02 changes d) Setting all non profitable trades TP BE +30 (default is 30 but can be changed with setting) when item "Friday trading stop" is triggered. Every candle after, the the BE is reduced by 5 pips (default is 5 but can be changed with setting) until BE (zero=entry price) is reached. I guess Friday Trading stop is referring to: c) Friday Trading Stop hour/minute - no more entries are permitted, but open entries continue to get managed. Keep up the good work.
+
+--- 帖子 #344 ---
+Hey Bubo I'm thinking that MPTM has most of this "waterline" functionality already. (please correct me if I'm wrong) Regarding other tests. What exact mptm are you using for forward test in first post: v103 link is actually running v105; with and without MPTM on FXDD Version or settings of MPTM ? The version is the latest in Steve's FF thread (with contributions from Dave/Cacus/Robert Hill on Yahoo group I believe) Settings file is on post 1; Version on the v103 link is now v106 using FXDD demo. I guess Friday Trading stop is referring to: c) Friday Trading Stop hour/minute - no more entries are permitted, but open entries continue to get managed. Correct. (All depends on the EA settings - what happens after stop time; like below option) d) Setting all non profitable trades TP BE +30 (default is 30 but can be changed with setting) when item "Friday trading stop" is triggered. Every candle after, the the BE is reduced by 5 pips (default is 5 but can be changed with setting) until BE (zero=entry price) is reached. I have checked operation; all appears to be in order, however backtests have shown this not provide any great benefits to DD or Profitability (in fact it lowers profitability) Thanks, getdown71
+
+--- 帖子 #345 ---
+Hi Getdown71, Kudos for such a great EA! I've been testing it for few weeks, but getting mixed results. I just started to run v1.05 and found out that the FFCal still comes with the old news feed URL. If EA is using the FFCal settings within the indicator, then I reckon this should be in FFCal update in the code line 233: Inserted Code string sUrl = "http://cdn.forexfactory.com/ffcal_week_this.xml"; Thanks Aimak PS: my SSS EA stats page
+
+--- 帖子 #346 ---
+Good find Aimak! What broker are you using to test SSS ? BTW there is new version 1.06 with further optimiziations done.
+
+--- 帖子 #347 ---
+I'm using JadeFX, been OK up to now. There was no spike shown on the charts
+
+--- 帖子 #348 ---
+My demo continues to perform well, averaging two percent daily. I am very impressed. Thanks to Getdown and XUX. I quit trying to watch the indicators, since the MTF aspect makes that silly. Glenn
+
+--- 帖子 #349 ---
+Good stuff, Glenn! What version/settings are you using? Would you have an MT4i link? Perhaps I missed it - would be great if we can all contribute with that.
+
+--- 帖子 #350 ---
+Hi, I am newbie here. I have installed this system an loaded the indicaors in my MT4 platform from FXCM demo. I put all the settings and it did not make single trade in last 3 days. Also I would like to ask how to set it to trade 24 hrs? I tried to change th etrade session timings to 0001 to 2359 still no trades. ATR shows it is trade range but there is no trades. somebody can help? Saran
+
+--- 帖子 #351 ---
+Bubo: I am using the exact settings recommended in the zip file on post one. JadeFX is the broker. One pair listed is not offered. I think it is NZDJPY, but not certain. I quit trying to figure out what it is doing, but the results are very nice and steady. Now up 17% since last Monday. I have not yet hooked up with the MT4 stat thing. I presume my results are close to those of Getdown, since he is also on JadeFx. Best regards, Glenn
+
+--- 帖子 #352 ---
+V1.04 chugging along OK - couple of trades (GBPAUD and GBPCAD) been in pretty deep DD now for week + but have improved. see results http://www.mt4i.com/users/jim67
+
+--- 帖子 #353 ---
+Hi Glenn, Would be great to get you hooked up to mt4i.com I have never used JadeFX and very interested to see how performance is on this broker. Thanks for being part of the SSS test team. Getdown71
+
+--- 帖子 #354 ---
+All, Updated version of v1.06 installer in post 1. Sunday market open AutoGMTOffset time bug on Collective FX has been fixed. Please update your setup this weekend. Thanks go out to xux99 for this important bug fix. Getdown71
+
+--- 帖子 #355 ---
+Hi Getdown71, I've got GBPAUD and GBPCAD trades that are over a week old and in pretty heavy DD. I notice from link in post#1 you don't have any of these trades. Are you not running them or has my feed taken these different to yours? see http://www.mt4i.com/users/jim67 Jim
+
+--- 帖子 #356 ---
+anyone had any long term success with this?
+
+--- 帖子 #357 ---
+Getdown: I see that the pound took a huge drop. The current set file is using neither a SL nor the hedge. Perhaps these tools should be deployed in some way. Your thoughts?
+
+--- 帖子 #358 ---
+Hi Getdown71, I'm using Alpari UK for all my tests because I also have a real account with them, thus I prefer to get acquainted to their ways. I just started to test the v1.06 on 3 timeframes (5, 30, 60) in E/U. All EAs that I'm testing now are set public in my Myfxbook account. Thanks Aimak
+
+--- 帖子 #359 ---
+Glenn, My dev role and testing (back/forward) has proven that a hard SL/hedge is not as stable/profitable as the current setup. (My setup uses ATR based SL &amp; TP plus indicator based exits) No doubt there is other setups that I have yet dream up this EA could use; This is the testing teams challenge. Feel free to mod my base setup; digest the manual in full and roll your own setup as well. Wilko has stepped up to this challenge (M5/30 scalper) as have a number of other testers. Thanks, getdown71
+
+--- 帖子 #360 ---
+Here are my forward test results on an Alpari demo account. I have attached the settings file.
+
+--- 帖子 #361 ---
+Thanks for sharing your setfile for EURCHF xux99
+
+--- 帖子 #362 ---
+Nick, Just curious if u were able to get this to backtest on tickdata at all?
+
+--- 帖子 #363 ---
+I run the EA v1.06 in the tester (no optimization) with the attached settings and I cannot make sense of the trades resulted. Hopefully somebody here can explain me what I'm doing wrong? The attached settings file is intended to be run on M5 with TP=8 and no SL. Firstly, the trades are placed with no TP and SL, and later the EA modifies the trades adding a SL and a TP. I revised the settings many times and read the user guide, but I'm unable to figure out why the EA adds a SL, when I expect none, and a TP other than 8.0 pips. Please help Many thanks in advance. Aimak
+
+--- 帖子 #364 ---
+Set VisibleTP and VisibleSL to 0, you have set them to one pip.
+
+--- 帖子 #365 ---
+I am trading with Wilko setups with few changes in various cc pairs on 30M time frame. Though it made quite nice trades most of the times open trades are always have Huge draw downs. But this EA closes trades with little profit are very meager loss.Also I ma not sure most of the times why and it makes trades. I am letting it run for few more weeks. I running this on FXCM demo. http://www.mt4i.com/users/saranFX
+
+--- 帖子 #366 ---
+Oh! So stupid of me I misunderstood "VisibleSL" and "VisibleTP" as being switches not the actual limits in pips as other variables that end with "pips". I tried and the EA behaves more like I expect. Thanks a lot. Aimak
+
+--- 帖子 #367 ---
+UPDATE - Tazmaan is helping team SSS out with gathering tick data history for all the pairs that are profitable with EA. This is a mammoth task. Large round of applause for Tazmaan. See post 1 for v1.07 plans.
+
+--- 帖子 #368 ---
+As I am testing this on a VPS which does not allow me to access the normal program files folder. As a result the installer will not do a complete install, it installs the ea etc to specified folder but still tries to put the license.rtf etc in the default programs folder. I know it is a minor issue but thought it was worth mentioning.
+
+--- 帖子 #369 ---
+It's my pleasure to help any way I can (well not all that pleasurable now, but hopefully after it's all done! lol )
+
+--- 帖子 #370 ---
+Taz you are a star!
+
+--- 帖子 #371 ---
+Thanks, now lets make some money!!
+
+--- 帖子 #372 ---
+Hey FF just wanted to update you guys on my progress, had to take a break from fx for a while to focus on my freelance work.... Here's a live test of what I've been doing http://www.myfxbook.com/members/natchos2/three/22569 Attached is the set, works on EURCHF m5. Works on the elasticity principle so don't try this on pairs that tend to "fall off a cliff". Ohh this is a set for Uranus but since it only uses DSS Bressert the same settings work on SSS Any improvements are welcome. I thank all of your efforts so far. Hope you find this helpful -Joe
+
+--- 帖子 #373 ---
+SSS has done quite well this week. Notching many more profitable trades and trimming drawdown significantly. http://www.mt4i.com/users/sss_ea_v103_wo_mptm/stats http://www.mt4i.com/users/sss_ea_v103_w_mptm/stats Interesting observation is that the account without MPTM has higher net equity than account with MPTM. Balance is almost the same for both accounts. Looking forward to testing the new Dukas tick backtesting set files soon. Tazmaan has got me the data - my workstation is working overtime crunching this new setfiles. Plenty pips to all, getdown71
+
+--- 帖子 #374 ---
+Excellent results. For those of us (like myself) who have minimum lots 10x larger than those on these accounts and so are looking for individual pairs to trade, EURUSD is looking like a good bet. Thanks guys!
+
+--- 帖子 #375 ---
+[quote=getdown71;3655326]Glenn, My dev role and testing (back/forward) has proven that a hard SL/hedge is not as stable/profitable as the current setup. (My setup uses ATR based SL &amp; TP plus indicator based exits) Getdown, Are you referring to the original settings when you say that you are using an ATR based SL? The settings I see have only the TrailingstopAtrmultiplier with a value. This means that you in effect have no stop loss if the trade is negative from the start. Is this correct? thanks
+
+--- 帖子 #376 ---
+Thank you for sharing, Johnny Karaoke !! Awesome stuff !! Do you have an idea what the largest open DD was on your account? And doesn't the EURCHF "fall off a cliff" big time once in a while?
+
+--- 帖子 #377 ---
+The ATR based SL is a TrailingStop. In parallel to this there is a indicator(s) [1/2/3] based exits I have not implemented a "hard" SL. In the scenario you describe, the indicators will stop you out - where it will stop you out will depend on pair/setting and price action. [quote=terminex;3672998]
+
+--- 帖子 #378 ---
+First of all, yes I know backtesting is not that great in MT4. I was wondering if anyone had done some backtesting on earlier years with the 1.06 EURUSD set files? I did most of 2008, and the results were OK, but there were some periods of choppiness and then also some periods of drawdown. I guess I am most interested to see multi-year backtest results with that Dukascopy tick data at 99% quality Not complaining - the EA seems very good - I am just wondering if it is me messin things up.
+
+--- 帖子 #379 ---
+dukascopy tick data only goes back to 2007, sorry
+
+--- 帖子 #380 ---
+Reply to bubo: Largest drawdown on backtest from Jan to Dec 2009 is aprox 30%, largest drawdown demo is about 12%, don't quite remember... I haven't been actively backtesting since Feb. In the interest of full disclosure there is a "black swan" event on the EURCHF in the begging of DEC 2009 that wipes the account. It has to do with liquidity issues and people pulling out money so I don't recommend this be run in DEC or early JAN. Look I've come to the conclusion that EVERY EA will wipe eventually, I've personally tested many commerical EA's and most EA's on FF. The ones that "don't" wipe are the ones that take like 1 trade per month, but if you go far enough those will wipe too. Does EURCHF "fall off a cliff" sometimes? Yes, but what happens is Switzerland has some "informal" policies to keep the franc in check with the EURO, so we can take advantage of that with this setup. If we have enough wiggle room we can survive the fall, most of the time *gulp. EURAUD is also intresting bc of the swap, I'd like to see this run SHORT only (or whatever the positive swap on that is i froget) to see if the swap is worth it. Good luck to all, -Joe Reply to Winst (copypasta from myfxbook): There was a post i made on the SSS thread that talks a lot about the theory behind this, its a long post but worth the read I've come to the conclusion that a 1:3 ratio is ideal. So for example a lot size of 1% and a global TP of 3% etc.... I've stretched this to 2.5 and 7.5 on EURCHF without wiping in from Jan to Dec 2009. I can tell you right off the bat the GU, EU, UJ, UCAD and AudUSD pairs will wipe pretty quickly. The loosing batches also have a cumulative effect on lot size and TP I'm not super familiar with Steve's trade manager, I've played around with it however... Let me know how it goes..... This backtests nicely so I'd recommend running it on the backtester before any demo accounts. I backtested this for over a month to get it just about right. This is really based on chaos theory and all that goodness so starting conditions do a play a role, just a heads up. If we go through May without any big problems I'm going live with this set.
+
+--- 帖子 #381 ---
+That would still give some multi-year results, so I would be interested in seeing how the testing went. Thank you to those who have the processing power to achieve this!
+
+--- 帖子 #382 ---
+I used to like scalpers but I started having scalper-phobia since I purchased fapturbo. They will give you nice long little profits but will eventually give you one HUGE loss at the end that will blow your account. What makes this more special? please enlighten me
+
+--- 帖子 #383 ---
+The fact that it's free
+
+--- 帖子 #384 ---
+I have extra live trading account here with $350 on balance and with 1:400 leverage. Does this EA has autolot feature or do I have to set it manually. If I have to set it manually, what lot should I use for my account?
+
+--- 帖子 #385 ---
+Hi Folks, here are my Forward Testing with this good EA - i have taken the version SSS EA v1.0 since March 5 . Push Me Details : Broker : Forex4You / E-Global Pair : GBPUSD Timeframe : M5 Settings : Wilko Settings Leverage : 1:100 Deposit : 10000$ ( same as 100$ at Micro Cent Account Demo ) Profit : + 67,59 % at the Moment Now, at first - thank you getdown71 for this nice thread and your contribution to the FF Community. I have seen, that the EA has a Protection - it expired on 1.05.2010 . My Results are so good for me, that i will go Live with this. Can you give us this EA SSS v1.01 for the next 3 Month or so - or is this later here a commercial Produkt ? I hope not, so that we can go on the Road on Testing .
+
+--- 帖子 #386 ---
+Howdy, Just a FYI I've tried this robot off and on, usually without good results. I've been running 1.06 for the last 2 weeks, and it was doing very well, everything in profit, etc. In the last 2 days, it's gone crazy - it's opened many orders, including multiple orders of the same currency pair, and has drawn down $700 (using 0.1 lot size). It hasn't closed the orders in the red, but some of the individual orders are down -$150 I'm running it on a Demo FXDD account, H4, EURUSD, USDCHF, USDJPY, GBPUSD, NZDUSD, EURGBP, EURCHF, CHFJPY Default settings, lot size 0.1 I haven't messed with the settings at all (haven't read much about it, just sort of loaded it to see how it went). cheers
+
+--- 帖子 #387 ---
+All, Find attached a hybrid Wilko/Getdown71 set file for SSS. 10K to 25K in 2 years with 14% max DD. Backtest done with M5/M30/H1/H4/D1 Dukascopy tick data (thanks again Taz) @ 99% modelling quality. This be going live next week here. Enjoy the weekend. getdown71
+
+--- 帖子 #388 ---
+Wow! What a nice curve. Does this presume that Version 7 is on its way? Could this sort of thing be duplicated with other pairs? Glenn
+
+--- 帖子 #389 ---
+v1.07 LPMM operation has not yet been fully implemented and has been disabled in this settings file. As for other pairs - who knows? Only 1 way to find out!
+
+--- 帖子 #390 ---
+How come you aren't done with them all yet? lol
+
+--- 帖子 #391 ---
+Excellent work GetDown and Taz. As you said.... good one to go live! (Not sure I will do this next week, though as UK as a bank holiday on Monday, Japan is in a holiday period and then there is NFP on Friday. Probably put it on test for the week though and then live the next.)
+
+--- 帖子 #392 ---
+.... And don't forget the UK General Election next week which is also expected to result in a hung parliament, which the markets could really react badly to. So all in all, I would advise against putting it on GBP pairs next week, unless it is for testing only.
+
+--- 帖子 #393 ---
+Great piece of work. I'll be starting this on a demo account next week.
+
+--- 帖子 #394 ---
+Wilko had 145 consecutive winning trades with zero losses. Stunning, to say the least! This hybrid should squeeze out more money with the ATR feature.
+
+--- 帖子 #395 ---
+Please, I don't know how to open the zip files in post 1. I have only found this thread today. Thank you,
+
+--- 帖子 #396 ---
+Dear users and specially the people who put so much effort in the autotrader programs. first of all i am a total beginner, and since 2 days ago i actually started with meta trader 4. first i did i check the sample of mcad that comes standard in metatrader 4. after that i modified it a bit . experimented with it and it worked. made 60 bucks over 1 year trading using the tester in meta frame 4. then i started to get hooked read tutorials and starting to learn the basics of how to read the graphs better. then found this forum and read about this SSS Ea trader and after seeing how much enthousiam is put in this program and the people that test it. well needless to say i have become hooked too. so i downloaded the program. installed it. read the instruction file. i run it and it seems fine. however metatrader 4 does not do any buy or sell actions. it updates the history. i see the charts. but it wont do buy or sell. after much trying it stil aint working. then i tried the wilco settings and see if i can duplicate his findings with my metatrader 4. i downloaded and installed the same trader. loaded his setting into the SSS autotrader 1.06. run it from march 4 till april 30th. however still no buy or sells. does that maybe got to do that i did not put the GMT time right? or that i have a different leverage setting? wilco has 1:100, i got 1:200. thanks in advance trade4fun
+
+--- 帖子 #397 ---
+As you know, Joe Carioca has an EA idea on posts 372/380. He uses MM/hedge/Bressert. It makes bucketloads of profit, and then after few months, a black-swan event takes it all away and crashes the account. My question is, can this be controlled by using close-all at X % loss? His live test shows a very modest drawdown. If this thing will double the account every month or so, and then suffer a ? 10% stop-loss every two or three months, it should make a fortune. Probably I am missing something. Any thoughts on this? Glenn XUX99 has a 10% close-all at loss in his recent 30 min. preset for Euro/CHF, presumably for the same reason.
+
+--- 帖子 #398 ---
+Howdy, just another quick update from my SSS 1.06 test I'm using H4 time period, default settings, 0.1 lot size, and 8 different currencies. Last week the robot had seemingly gone mad after 2 weeks of working reasonably well, opening many trades, drawing down 1/5 of the demo account, etc. So far this week everything seems to have returned to normal. All open trades closed in profit. It's looking good. The demo account is up $250 so far, over 3 weeks. Good work!
+
+--- 帖子 #399 ---
+Trading of SSS comes in waves with market activity; as does the DD and closout of trades (TP/SL) Have never tried H4 TF.
+
+--- 帖子 #400 ---
+Hello getdown71 I am a very new in forex trade already try demo in every way i can for past 4 months, read every forex reference that i can find been running demo with sss v1.06 for a week now, have a promising result great work, can't wait for the 1.07 version seeing that 1.06 is for demo account only is there a version that i can use with live account? thank you very much browsi
+
+--- 帖子 #401 ---
+just checking, the m5 gbpusd setting for the EA didn't do any trades this few days right? and i am getting "2010.05.05 14:09:32 FFCal: cannot delete file C rogram Files (x86)MetaTrader - FXOpen Microexpertsfiles5-5-2010-GBPUSD.30-FFCal.xml" and similar messages for other pairs. Will this interfere with the operation of the EA? VPS on windows server 2003 x64
+
+--- 帖子 #402 ---
+I´ve ben playing arround with the wilko/getdown G/U 5min settings and tried to test it over a period of 3 years (Jan 2007 - Jan 2010). The only change i made was setting Moneymanagement = true (Risk 3) to include the power of compounding. Watching the graph going up I thought i was going nuts but then, after turning 3500 to over 30.000 there are 3 orders opened on 22.04.2009 and closed a month later because of margin call . I´m trying to understand why this happend. I am right know watching this particular trade on visual mode to see if this is going to happen again. I hope not! Cause this seems to be such an outstanding EA !!
+
+--- 帖子 #403 ---
+I guess this is an illusion created by the wrong setting. I wonder if you've set stoploss for your orders, (or your EA was unable to close the trades for some reasons) check the journal without stoploss, losing orders won't close and winning orders keep gaining profit that's why you see your balance is ever going upward However, your losing trades are still there and you keep increasing orders which potentially include losing orders, then when the margin is hit all your opened trades were closed at the same time. you can check the history to see if all the trades were closed by the date the backtest ends.
+
+--- 帖子 #404 ---
+I have loaded the wilko / getdown settingsfile wich does not seem to have a hard stop. In the journal I can see that ALL trades of those 1030 have been closed within the following days, mostly within hours. But those 2 from 22.04.2009 are left open forever until the account is clean .Maybe bad history data ??? I have to admit that I didn´t fully understand the system yet. But as far as I know the ea is closing trades by opposite signals ? So I thought there is no need for hard sl / TP ? Maybe anyone else could test this date with the wilk0/getdown setfile and report ??
+
+--- 帖子 #405 ---
+Heads up - SSS v1.06 Without MPTM gained 15% in 1 day! http://www.mt4i.com/charts/ResultCha...=1273176603108 With MPTM was 9%
+
+--- 帖子 #406 ---
+Hi getdown, thank you very much for your EA. Please, what is setting for this statement? http://www.mt4i.com/users/sss_ea_v103_w_mptm Thanks
+
+--- 帖子 #407 ---
+Settings in post 1 with risk at 0.65%
+
+--- 帖子 #408 ---
+Getdown do you prefer v3 to the newest version? What time frame are you using? How do I increase lot size? Thank you for your hard work. I look forward to donating money to charity soon!
+
+--- 帖子 #409 ---
+Wilko/Getdown hybrid one day: GBP/USD 3.25 MM %: 4% profit 5 MM % 7% profit GBP USD + Euro/JPY 5 MM% 11% profit (same settings). Still spitting out money like a rigged slot machine.
+
+--- 帖子 #410 ---
+Hi All, I have been (back/forth)testing different combination of parameters and entry conditions seeking a way to avoid the EA opening short near a support or long near a resistance. I think most of the drawdowns are due to such "wrong" trades. So far I had not much success and I believe the DSS may be the key for getting the best entries. What do you think? Aimak
+
+--- 帖子 #411 ---
+Oops. Five min returned to sender. Pretty rocky road on Friday. Deliberately using high leverage. Punished for my sins. hahaha
+
+--- 帖子 #412 ---
+Is it me or the EA with the hybrid settings has been quite the past days? When does 1.6 expire? I don't get any errors so was wondering...
+
+--- 帖子 #413 ---
+I'm running 23 demo EA's, and SSS 1.06 is the only one doing well this week. Last week most of the EA's did pretty well, but this week - not so much. Only a couple show any sort of profit, and all have had several big losses. SSS is up $600 on a $5k demo FXDD account. A couple of trades DD a few hundred, but are starting to come right after several days. Default settings, H4 time frame.
+
+--- 帖子 #414 ---
+Received a message in my mailbox this morning referring to a conversation with XUX99 and another trader. As it seems this is a more actively tested and developed EA then the one I started testing (Simurgh EA), also from XUX99, it will be more effective if I climb on board this train and ride along, maybe on the way helping to provide results that can top this EA. Setting it up at the moment.
+
+--- 帖子 #415 ---
+I dont know what happened but all my open Trades EuGp close at midnight wih a huge loss
+
+--- 帖子 #416 ---
+Hi Pret, Please attach the settings u are using for further investigation. Thanks, getdown71
+
+--- 帖子 #417 ---
+I posted about that a few weeks back, same happened to me exactly at midnight. There's a link to the trades if you care to have a look. Are you using JadeFX?
+
+--- 帖子 #418 ---
+Hi Getdown Firstly i want to say thank you for a excellent bot . I am trading with this bot now for a month now and it performed very well .It out performed all the commercial bots that i am using untill this occured Well done
+
+--- 帖子 #419 ---
+Hi Getdown Set file attached
+
+--- 帖子 #420 ---
+Hi Getdown i attached a exel statement for my trades
+
+--- 帖子 #421 ---
+According to your settings (PriceChannelStop=111D1), all trades were exited by PriceChannelStop indicator that changed direction.
+
+--- 帖子 #422 ---
+Right thank makes sense - at the end of the daily candle, the loss making entries were closed. Cheers xux99
+
+--- 帖子 #423 ---
+Mine are still open with a huge DD.
+
+--- 帖子 #424 ---
+Freddy, are you using the 30min set file from the first page without changers
+
+--- 帖子 #425 ---
+Hi Xux and Getdown thank you for your reply Can you tell me more about why it happened and can u change these settings Thank you gert
+
+--- 帖子 #426 ---
+Hi Xux Getdown Will the channel stop also close low drawdown trades at the end of the day
+
+--- 帖子 #427 ---
+Hello everyone! I've tested this EA and I'm quite satisfied by it's work. I'm talking about 1.06 version. When are you guys going to take away an expiration date and release 1.07 version. Thanks for your work! You are great!
+
+--- 帖子 #428 ---
+Pret, These settings have proven to profitable over the long term using backtesting on tick data history. By all means, do your own experimenatation with settings and please read the manual to better understand the full functionality of SSS EA. I don't trade EURGBP live with SSS ! Thanks, getdown71
+
+--- 帖子 #429 ---
+Hi Paladinen, Glad to hear your satisfied with SSS. Where is your www.mt4.com weblink to share your performance with the rest of the team ? What is the broker you are testing on ? SSS will always have a expiration date - if you know a better way to minimize ebay scamming please let me know. V1.07 will not be released - this is a internal development version only. V1.08 maybe ready in a few weeks. Thanks, getdown71
+
+--- 帖子 #430 ---
+Hi getdown71 I'm testing it with NordFX broker. Here is my Login ang investor password: Login : 89061 Investor : tdm2hlc (read only password) Starting deposit was just 300. At the end of the week it was 616 already. This is really amazing. And what is more I really appreciate the thought that part of the profit should be used for charity. Completely agree. I don't know what ebay scamming is but I'm sure this is not really good thing =)) Ok I'll be waiting for 1.08
+
+--- 帖子 #431 ---
+Hi Getdown I dont know if this is right Bot buys when suppose to sell See attach
+
+--- 帖子 #432 ---
+Please read the manual! The strategy uses multiple time frames - that's why the direction looks different to M30 chart!
+
+--- 帖子 #433 ---
+This still confuses me
+
+--- 帖子 #434 ---
+is "http://www.mt4i.com/users/sss_ea_v103_wo_mptm" still running? EAs made some trades on my side but not reflected inside there
+
+--- 帖子 #435 ---
+i've been testing different settings, but for some reason, i can't make it go long. arethere settings that make this happen or is this only a short EA?
+
+--- 帖子 #436 ---
+Hi All, Just reviewed all my Demo EA's and I've been getting nice results on gbpusd. In summary 710 pips up for May. 96% win rate. I was testing other pairs as well but just realised I was using an old version that had expired. Looking forward to next version as this one expires at the end of the month. B Rgds WR
+
+--- 帖子 #437 ---
+Hi Guys, Thanks for the great EA. Can we use this version live. I didn't see where that was ever determined. Thanks!
+
+--- 帖子 #438 ---
+Thanks for the good feedback. Do you have a web link to share your demo performance ? What broker are you using ? The next version is v1.08 which is under regression test now. Once test is completed, the installer with live account capability will be posted to this thread. Thanks, getdown71
+
+--- 帖子 #439 ---
+Hi Getdown71, I should be all setup. My MT4I id is tallcoolone. I have been testing on my demo account for about a week now. I look forward to version 8, keep up the outstanding stuff. Thanks!
+
+--- 帖子 #440 ---
+Hello. Which changes and addings will be made to 1.08v in comparison to 1.06?
+
+--- 帖子 #441 ---
+v1.08 is the functionally the same as v1.07
+
+--- 帖子 #442 ---
+Hey Getdown, I have been testing this EA, but I'm getting many errors in the journal where is it trying to close orders and it the broker - ALPARI US won't allow because of the FIFO rules. Any guidance? Thanks - Eric.
+
+--- 帖子 #443 ---
+Go Alpari UK.
+
+--- 帖子 #444 ---
+Alpari UK won't allow U.S. customers.
+
+--- 帖子 #445 ---
+There are many ways around that. A UK limited company or an ITC in Malta perhaps is more tax efficient.
+
+--- 帖子 #446 ---
+Awesome efforts of xux99 with addition of the Large Price Movement mode (LPMM). The inspiration for this came from hiachiever "Profit Maximizer" - kudos Tim! See post 1 for change log.
+
+--- 帖子 #447 ---
+Can you pls post the backtest results?
+
+--- 帖子 #448 ---
+Can this ver. be traded live? I'd like to try it out on my penny a/c.
+
+--- 帖子 #449 ---
+Done at post 1
+
+--- 帖子 #450 ---
+Live accounts will be enabled within 1 month as v1.08 is the last version of SSS.
+
+--- 帖子 #451 ---
+Hi Magic Masters, This sounds great. I paid lots and lots of money for crappy robots. I think this one is the real thing. I am regrettably not tecnical enough and too much of an old geezer to understand all the technical stuff, but boy would I love to that see running on my badly depleted account! Any help for non-technical old traders? Cheers, Pipscanfly
+
+--- 帖子 #452 ---
+Er.. so it cannot be used lived til ~ a month later you mean? and any set files for all the other pairs/TF for 1.08?
+
+--- 帖子 #453 ---
+Are there any set files or templates for 1.08 version?
+
+--- 帖子 #454 ---
+Did you check the first post on this thread? If you do, it will answer your question. Regards, Jeff
+
+--- 帖子 #455 ---
+Thank you getdown for fast reply. Awaiting it.
+
+--- 帖子 #456 ---
+Sorry for my ignorance. I've checked first post and found just 1.08 install file. No sets or any kind of it. Thanks
+
+--- 帖子 #457 ---
+Hello, The fiile called EU M5 v1.08 SSS with LPMM change to htm.txt on the first page is the set file. Just change the txt extension when you download it. Regards, Jeff
+
+--- 帖子 #458 ---
+1.06 version had lots of sets, including Euro/usd Gbp/Usd Eur/Gbp etc. All of them were 30min TF. 1.08 version now has just one Euro/Usd set file for 5min TF. Does it mean that all other pairs should use default parameters with 5 min TF?
+
+--- 帖子 #459 ---
+The v1.06 setfiles are compatible with v1.08 - just be careful with LPTMM settings as they will using defaults. (I use 1 instead of the default of 3) The txt file in post 1 is a back test htm file. Hence the "change to htm" name - doh! v1.08 setfiles are coming - perhaps as early as next weekend if time permits.
+
+--- 帖子 #460 ---
+I really would like to test out this ea but I cannot get it to trade on chart or on strategy tester. I have done the installation and have all the indicators. I have put it on the 30 min eurusd chart I have loaded the set file for 30 min eurusd. Anything else I need to do? Thanks Kevin
+
+--- 帖子 #461 ---
+Hello! I was getting ready to install this ea, and share the forward test results via MT4i, but as it is provided as a .exe file, I can't install it on my Linux setup. Have you had any thoughts of changing the distribution method? Charlie
+
+--- 帖子 #462 ---
+Hello, i'd like to try this EA and post forward test using myfxbook but the latest version 1.08 seams that doesn't work, after i put it on the chart i wasn't able to change the settings either using F7 or right mouse button. Thanks
+
+--- 帖子 #463 ---
+SSS v1.08 has a random delay period of up to 10 minutes before placing trades. Just wait and it will start functioning.
+
+--- 帖子 #464 ---
+Install this on a windows platform, then simply copy the indicator/expert files over to your linux pc. I dislike this installer also, as I always have multiple mt4 platforms running, testing many different ea's. So I have to use the above method myself so I don't have to shut down every platform to install SSS.
+
+--- 帖子 #465 ---
+Change your set-up. This is an excellent EA. It's very well worth it to adapt to it instead of wasting the programmers time adapting to you. I've got the latest version running live on the latest 30min EU set. Very impressive!
+
+--- 帖子 #466 ---
+yes, it's working now, thanks this is the link to myfxbook http://www.myfxbook.com/members/gspe/migbank-3s/37288
+
+--- 帖子 #467 ---
+Many many THANKS for your Great work, guys! I'm from Belarus and I'm serfing russian forex ea forums. I haven't seen such a friendly and ready to help forum anywhere before. Thank you!
+
+--- 帖子 #468 ---
+With thanks to Tazmaan, I now have the ea running on all the pairs with .set files in the download (30 min TFs only). My mt4i is here: http://www.mt4i.com/users/fokkercharliesss I look forward to testing, and eventually making some live pips with this! Charlie
+
+--- 帖子 #469 ---
+I'm new to the thread. Looks great! Thank you to getdown71, xux and other contributors for all your work. I put the latest version 1.08 on forward demo using the template. However, I noticed that the template has 2 settings that are different from the M5 backtest: MinOrdersDistanceAtrMultiplier is 0.20 on template and 0.02 on backtest. Threshold_level is 2.0 on template and 1.96 on backtest. I am not familiar with this EA or its underlying strategy (I'm new here ) so I point out these 2 differences in case they are meaningful. I had intended to put the demo up with the backtest settings, but am I better testing with the settings in the template?
+
+--- 帖子 #470 ---
+Good to have you on the test team octomanoak! Please share your forward test using www.mt4i.com Well spotted on the diff between v1.06 settings and v1.08 backtest posted; The backtest posted is part of the v1.08 settings library that is currently being put together as we speak. Some minor tweaks to settings have been made from v1.06 to v1.08. Until all v1.08 settings are done, I suggest ppl use v1.06 set files and set LPMM entry &amp; exits to 1 (rather than the default of 3) Thanks, getdown71
+
+--- 帖子 #471 ---
+Thanks getdown71. I presume I should use the v1.06 set files with the setting changes on 30 minute charts then, rather than 5 minute charts as shown in the backtest?
+
+--- 帖子 #472 ---
+Yes - Best to use v1.06 as baseline with LPTMM e&amp;e set both to 1
+
+--- 帖子 #473 ---
+Got that part. But I use 30 minute charts? Or 5 minute charts?
+
+--- 帖子 #474 ---
+30M
+
+--- 帖子 #475 ---
+Forward demo of SSS EA v1.08 excluding the GbpNzd pair can be tracked at: http://www.mt4i.com/users/ssea108
+
+--- 帖子 #476 ---
+I don't know user SSS EA v1.08. Please tell me how to user it. Thank.
+
+--- 帖子 #477 ---
+RTM=Read the manual. When you install it, there is PDF file that explains everything about SSS EA.
+
+--- 帖子 #478 ---
+Thanks for the new version Getdown and XUX. Loaded.
+
+--- 帖子 #479 ---
+Hi Guys, Great development, I'm really excited about V8. I think it will make me and my church a lot of money(hopefully giving 10%). Do you think it would be possible to tweak the code and little and close the older trades first, so us brothers in the US with US brokers will not get errors when the EA tries to close trades. Please let me know if this is possible. Thanks for all your hard work and generosity. IT IS HUGE. TallCoolOne(Eric).
+
+--- 帖子 #480 ---
+Possible bug with third trading time.
+
+--- 帖子 #481 ---
+I have the same piccture, but with gbp/jpy and 2-nd trading time. Right now it is -150pp. Sold exactly at the minimum 133.09. Possibly bug, I don't know.
+
+--- 帖子 #482 ---
+And another order was opened on gbp/jpy at the local minimum, also sell. But the system exactly shows that this minimum is a risistance level. Well, like the first one -50pp now.
+
+--- 帖子 #483 ---
+Hi I have installed the EA on Tadawul FX on 20.06.2010 17:52 and it has not been trading yet. In the expert error log I find entries for all currency pairs: 2010.06.23 08:09:01SSS FFCal EURAUD,M30: News Indicator is disabled because NO CONNECTION to Broker! I also got an error message 2010.06.23 03:59:56SSS v1.08 EURGBP,M30: invalid lots amount for OrderSend function I use the default settings with the 1.06 set files. Can anybody point out what I might have done wrong? If it is working I have my stats on http://www.mt4i.com/users/tschultz_sss Thanks
+
+--- 帖子 #484 ---
+Closed with overall -130pp, hopefully not -200pp. but still a bit strange orders
+
+--- 帖子 #485 ---
+Hi Team, I'm testing these pairs: EURCHF, EURGRP, EURJPY, EURUSD, GBPJPY, GBPUSD, USDCHF, USDJPY on M30. http://www.mt4i.com/users/tallcoolone 4 winners 0 losers so far.
+
+--- 帖子 #486 ---
+Just a thoughts. Why not make it work on just couple of pairs at the start EURUSD/GBPUSD (Or even one) tune up those pairs and go from there. And EURCHF is untreatable pair it's a counter trade, which could blow up 400-500 pips in the split second in case of SNB intervention. P.S Installed on Demo, placed on couple of pairs no trades taken so far.. Backtest works somewhat, but very, very slow.. Will run it on weekends. Thanks.
+
+--- 帖子 #487 ---
+It is only a test, so why not test everything. The testing is for the EA creators, not me. I don't know what I would do with the testing results. I just want to know what pairs are profitable so that when we go live, I can pick the the pairs that are most promising. When I go live I probably only use a couple of pairs. Thanks for you suggestion. If I were developing my own EA, I would concentrate on one pair for testing, try to make it profitable and move on to the next pair.
+
+--- 帖子 #488 ---
+Wow, again sold Eur/usd at exact minimum... -110pp right now, thats disappointing me
+
+--- 帖子 #489 ---
+I think news got us this time. (FOMC)
+
+--- 帖子 #490 ---
+-120pp closed this night. overall -250pp this week
+
+--- 帖子 #491 ---
+I have several questions. Can this EA be tested with strategy tester? And does the results reflect the real things correctly. I can't get the same result of a backtest as at the first post with 1.08 version. My result is profit-profit-loss-profit-huge loss and thats it.I was trying to use sets for 1.06. sets, that are in backtest at first post, default sets. With 1.06 I'm also having problems with bad backtest. Maybe the market is not analysed well while in backtest?
+
+--- 帖子 #492 ---
+One answer; Its backtestable as thats how the set files were derived. As for all the other noise/posts of yours, it's thru to the spam catcher for me.
+
+--- 帖子 #493 ---
+Ok, I'll stop posting messages if you are not anyhow interested in this information.
+
+--- 帖子 #494 ---
+The problem with "News Indicator is disabled because NO CONNECTION to Broker!" is solved after I put the FFCal Indicator on the chart. However, the invalid lots size shows up for every currency pair. the reason might be that TDFX standard account supports only 0.05 lot size. MODE_MINLOT = 0.05 MODE_LOTSTEP = 0.05 Any idea what I can do or what parameter I have to change? Thanks a lot
+
+--- 帖子 #495 ---
+Paladinen, I have interest, however, I have very little time. So the for me the key to getting things done is concise/clear dialog based on digestion of EA manual and forward testing done prior; as apposed to peppering the thread with a bullet and a note there. Please understand that the SSS EA testers are valued, however time is also valuable. Thanks for your support, getdown71
+
+--- 帖子 #496 ---
+The moneymanagemenent can't handle lotsteps other than 0.01 or 0.1 or 1 lots. I shall fix this in the next version. Meanwhile just disable moneymanagement.
+
+--- 帖子 #497 ---
+Thank you for the reply. I have disabled money management and set lot size to 0.1 but still get "invalid lots amount". do you have any other idea what I can change (except broker)
+
+--- 帖子 #498 ---
+Hi Getdown71 and XUX99, Guys, great EA. Thanks so much for sharing. I can't wait to go live with V8. However, do you guys think you could have SSS V8 close the oldest orders first when multiple orders are open? I use Alpari US and they inforce the FIFO rules. I have to manually close orders when there are more than one open. I think alot of the trades are missing potential profit because of the delay to manually close the trades. Please let me know if this is possible. Thanks! Eric
+
+--- 帖子 #499 ---
+So, you mean that SSS can't close it's orders if more than one is open? Or is it a broker problem?
+
+--- 帖子 #500 ---
+US brokers require you to close order first in first out(FIFO). So what I would like the EA to do is - close the oldest open orders first when it tries to close any orders for a certain pair. If it closes the orders based on Pair/MagicNumber or Pair/Ticket Number, it sometimes may to close newer orders before closing older orders. Theoretically the older orders should be more in profit and then the newer ones. I'm not positive if this what is happening, I'm looking for guidance from the EA creators. Thanks!
+
+--- 帖子 #501 ---
+TCO, Your observations are correct on FIFO, as I have mentioned previously in this thread. I don't have any opinion on FIFO implementation for future versions of SSS; 1) I don't know how difficult it is to implement (xux99 and I will discuss offline) 2) The moving target of the NFA is a merry go round I do not wish support or engage in. 3) US FX market is headed down the toilet with a good chunk of capital moving offshore. Thanks, getdown71
+
+--- 帖子 #502 ---
+Thanks getdown71 for your consideration in this matter - Eric
+
+--- 帖子 #503 ---
+Thank you getdown71 and xux99 for your generosity in sharing the SSS EA. I have been demo testing the EA for 30 days now and my findings are as follows. The broker is IBFX and I am running the EA with the set files with no alterations. The account has gone from $5K to $9.8K in the month and there are around$4.7K of open negative trades at present. For about 3 weeks the open trades sat at around $1.6K negative, but in the last week I have been experiencing a jump in the open negative trades. Can you please advise if what I am experiencing is what you and others are finding that is taking place. Do you recommend any manual intervention from time to time? Your comments would be very welcome. Thanking you PipBear
+
+--- 帖子 #504 ---
+The right answer is switch brokers and let the US brokers suffer for their indifference to their customer's needs.
+
+--- 帖子 #505 ---
+Right on thor68!
+
+--- 帖子 #506 ---
+I may have to switch brokers. However, closing the oldest orders first shouldn't have a net difference on profit and it shouldn't be that hard of a coding change, if you are closing orders anyways. You need to close by pair and position. I just thought i would be a nice change for those of us testing this EA. Thanks!
+
+--- 帖子 #507 ---
+1.08 has an expiration date 1 October 2010. Are you going to release a new version after that? When 1.08 will allow live trading?
+
+--- 帖子 #508 ---
+Some pairs make use of the LPMM, some do not. Live trading ex4 (with 3 month expiry) will be enabled next week. Thanks, getdown71
+
+--- 帖子 #509 ---
+Thank you, guys. Good luck to you. =))
+
+--- 帖子 #510 ---
+Hi Guys, I just set the EA to open 1 trade at a time for each pair. I think that will work great. This EA is very profitable and I'm not the greedy. You guys should check my MT4i statement. This EA is doing very well in demo. Thanks guys so much for sharing your hard work. Eric
+
+--- 帖子 #511 ---
+Eric, Glad to hear you are having great success! SSS strategy eats volatility for breakfast; you now know it to be true. I have noticed you are using pairs that I have not made an optimized set file for. Best of luck on this front; uncharted territory! v1.08 set files have been posted and some pairs do use LPMM to squeeze every last pip out of a trend. Meanwhile what broker are you using again ? Thanks, getdown71
+
+--- 帖子 #512 ---
+Hi Getdown71, I'm using Alpari US. I noticed that sometimes the on screen profit level is in yellow and I see the price has gone thru that price level but the trade wasn't closed and then the trade sometimes goes into a loss. It this because LPMM is activated? I have a current trade open for EURCHF where this is occurring. Thanks - Eric.
+
+--- 帖子 #513 ---
+Next version (v1.09) we will add a text status for LPMM so you can see if it's active or not. I'm getting good performance out Alpari US demo as well. thanks, getdown71
+
+--- 帖子 #514 ---
+??? After reading the above I went to check and realised I am trading 2 pairs on my live account using sss 1.08. live trading has not been enabled?
+
+--- 帖子 #515 ---
+Woah, maybe we have live trading enabled; xux99 was the live account enabled in the last v1.08 installer ? If so, all is good to go for the next 3 months, if not we will post ex4 next week. Have you been getting trades with SSS on your live account zealvix? thanks, getdown71
+
+--- 帖子 #516 ---
+Yea, the 2 pairs are euraud and gbpusd m5. sss 1.08 with 1.06 settings with LPMM on. Using FXOpen Micro (cents account) Btw, will there be 1.08 setfiles for the other pairs in the future or are they no longer recommended with 1.08? Just remembered another question, does sss check only symbol and magic number before interfering with trades? Cause I seem to remember gu m5 ea interfering with GU m30 trades if they have same magic number and the new setfile package have the same number for them, might be something wrong with my memory though.
+
+--- 帖子 #517 ---
+Hey Getdown71, Are/Did you have issues with FIFO, on ALPARI US, if so how did you resolve it or do you close those multiple trades manually. Also, I haven't had any new trades for awhile. Is that because it is Friday, or are the conditions currently not condusive or SSS? Thanks for all your help and responses. E
+
+--- 帖子 #518 ---
+So, you mean that live accounts have been enabled already?
+
+--- 帖子 #519 ---
+Thanks, getdown71
+
+--- 帖子 #520 ---
+hi, i've just started a new demo account for SSS 1.08 with 1.08 settings. If someone is interested the link is http://www.myfxbook.com/members/gspe/broco-3s-108/38939 gspe
+
+--- 帖子 #521 ---
+Hi Apologies if this is a dumb question. I am having problems with loading the preset files for the EA. Normally such files are saved as a .set file but the supplied files are text files? Would somebody please advise where I am going wrong?!! Again sorry if this is a dumb question and thanks in advance. Kevin.
+
+--- 帖子 #522 ---
+just change extension from .txt to .set
+
+--- 帖子 #523 ---
+Thanks Patreze, already tried that but have now noticed my error! Thanks for your quick reply Does this EA trade often? Kevin.
+
+--- 帖子 #524 ---
+Depends, sometimes it opens several trades at a time, sometimes stays still for a whole day. But as usual, it goes with 1-2-3 orders each day on 6 pairs. And now I will repeat my question. Sorry for this. Is live trading already allowed?
+
+--- 帖子 #525 ---
+If you read the manual, you see that days of low market volume there will be no trades (Damiani indicator) eheh Paladinen you are a persistent piece of work! Yes, is the answer.
+
+--- 帖子 #526 ---
+Hey Getdown, Is today such a day, The Damiani indicator on gbpjpy is saying 'DO NOT TRADE'? I assume this means low volume hence no trades? Thanks Kevin.
+
+--- 帖子 #527 ---
+no trades yet this week but very interested to see this in action - many thanks to the dev team! Odysseus
+
+--- 帖子 #528 ---
+I have just stumbled upon this thread to my great luck after seeking out for the most reliable EA ever to find... After reading through the whole thread, I'm pretty sure this is where I'm gonna land with all my focus and energy on better trading forex... I'm really grateful to u all SSS team!!!! Thanks xux99 , getdown and all the members in this thread for friendly and committed environment... Once I start live/demo testing this special bot, I'll post my results to be of some help pals
+
+--- 帖子 #529 ---
+Yep. 100% correct
+
+--- 帖子 #530 ---
+Just one litle doubt. I still didn't understand if i have to put it on a 5m or 30m chart.Sets file are for both timeframes,But the great backtest you posted is for 5mso what do i have to do? P.S:great work, really!
+
+--- 帖子 #531 ---
+Both!
+
+--- 帖子 #532 ---
+Really nice robot, consistent profits. I have read the thread, but could not find the answer to this query- I think that any ea will have good and bad days, and as this one is intended to be run simultaneously on several different pairs, is there any correlation between the losing days on each pair? For instance, if we have a losing day on GBPUSD, do we also tend to have a losing day on EURUSD? Hope that makes sense. Thanks for your handiwork! Charlie
+
+--- 帖子 #533 ---
+My broker is jade fx, that is a GMT+1 broker,do i have to change some parameter?
+
+--- 帖子 #534 ---
+The pairs operate independently on price action and market volume. Does that answer your question ? Thanks, getdown71
+
+--- 帖子 #535 ---
+Sry again about this very very dumb question, but I am no so used to MT4. What is the folder to save these .set config files? Regards Doc
+
+--- 帖子 #536 ---
+You save the .set files in experts/preset folder. You then attach the EA to the chart and load the .set file. Hope this helps. Kevin.
+
+--- 帖子 #537 ---
+Thanks, Getdown, I rather think it does. Have a good week.
+
+--- 帖子 #538 ---
+Hello, again Would anyone like to comment on the backtest I have just run? The ea performs very well (on GU M5, default settings, but GMT adjustment tweaked) until 20 Jan 2010, when it enters 2 long trades... and stays in them for over 3 months. The trades finally close only when the test ends, for losses that wipe out the previous gains made by the robot. Is this: - An artefact of backtesting, that I don't understand, and can be disregarded. - Part of the way the robot works, we need to accept drawdowns sometimes. - Something else? Cheers Charlie PS: I have seen similar effects on other pairs, but not nearly to the same degree.
+
+--- 帖子 #539 ---
+I have the same on all pairs. Honestly, my back tests are rather different from other traders in a bad way. People say they have back tests life here in first post.
+
+--- 帖子 #540 ---
+seriously, i hate to sound like a noob, but I have had 1.08 on 5M charts all week and not a single trade (FXOpen demo acct). Is anyone here running this and using the 5M 1.08 set files as posted and getting trades? If so, which broker? Thanks! Odysseus
+
+--- 帖子 #541 ---
+Same here on a FXPRO MT4 Demo
+
+--- 帖子 #542 ---
+Attached Image (click to enlarge) Attached File(s) EUm30change to htm.txt 60 KB | 503 downloads Euro/Usd 30m 1.08 set NordFX history from real. What am I doing wrong?
+
+--- 帖子 #543 ---
+Attached Image (click to enlarge) Attached File(s) EU5mChange to htm.txt 75 KB | 389 downloads Euro/Usd 5 min NordFX And here is another situation, as mentioned above ending with stop out
+
+--- 帖子 #544 ---
+Points to be mindful in light of all the comments of backtesting; 1) MT4 backtesting accuracy has always been gray subject of conversation - therefore I always use forward testing a a validation of backtesting results. 2) SSS EA is somewhat broker/feed sensitive. FXDD, CFX, ATC and Alpari are all good performers during forwardtest. FXCM is a consistent loser and I'm sure there is other brokers that perform equally bad. 3) Please work on own "broker calibrated" settings using both backtesting AND forwardtesting. Please share the results via MT4i.com and post set files with broker name in the setfile name to the benefit the collective. 4) I have provided baseline settings. I will not be doing any other settings - Tazmaan and I toiled on this for mega hours using Dukascopy history. Be glad that you have some settings to start with! 5) From post 1 " Dates that you MUST USE for backtesting are is 2008.01.26 to 2010.01.26. No other dates periods will be reviewed otherwise. " Ahhhh - glad to get that rant of my chest!
+
+--- 帖子 #545 ---
+totally understand, and really appreciate your efforts. Odysseus
+
+--- 帖子 #546 ---
+No trade for me in the last 4 days on Eurusd 5m. "no news data received from fccal indicator".May it be a problem?
+
+--- 帖子 #547 ---
+I had one trade EUR/USD 5m today, so everything works
+
+--- 帖子 #548 ---
+v1.09 changes Add; FIFO broker rule added. To be used with the CloseAll function. Add; LPMM active/inactive shows on chart. Green for up trend. Red for Down trend. Fix; Chart print function would leave random instances of text "Label". Now fixed. Add; USDCAD M30 added to current settings. Add; Where profitable, setting files have been updated to use LPMM. Some pairs did not lend themselves to LPMM and therefore do not have LPMM enabled. Great update; big thanks to xux99!
+
+--- 帖子 #549 ---
+Lost all deposit with 1.08 just on Eur/Usd 30 min no other pairs. Everything like in a pic, I posted above.
+
+--- 帖子 #550 ---
+What is the context ? backtesting of v1.08/1.09 ? Live ? What settings ? Very cryptic post Paladinen. If you don't give supporting info, trust me, your post will go unanswered.
+
+--- 帖子 #551 ---
+Live. Broker NordFX. 1.08 SSS. EU 30 min 1.08 set file. Sell order 21.07 at 21:00 1.2746 ended with loss at 1.2960. I'm not complaining or anything. I'm using this EA at my own risk and here is my risk. This is just information. Thanks
+
+--- 帖子 #552 ---
+Hey EURUSD close to the end of the week with ECB stress tests on the table. Lots of risk on the table for any trader of EUR crosses. Thanks for the clarity Paladinen.
+
+--- 帖子 #553 ---
+Thanks getdown71. So, this means that I should check traders calendar at the beginning of the week and decide to let SSS trade or not? Really lots of fake movings on EUR crosses. Thanks! I'll try SSS 1.09 I really appreciate your great work guys.
+
+--- 帖子 #554 ---
+Well FF Cal is in SSS EA already and repeating high impact events automatically handled. The ECB stress test is a once off event and cannot be factored in to FF Cal. With the once off events, you need to keep aware of impact and make your own decision to leave on autopilot or not.
+
+--- 帖子 #555 ---
+Ok, now it is completely clear for me. Thanks for explanations=)
+
+--- 帖子 #556 ---
+there is a orderclose and ordersend 4107 error can you please fix that thank you
+
+--- 帖子 #557 ---
+Not enough information to understand what you are talking about. Context and details please otherwise this issue will not get addressed.
+
+--- 帖子 #558 ---
+im getting this error 0.7900500000 is an invalid price 4107 on Ordersend and Orderclose you need in the code Bid and Ask variables NormalizeDouble() thx that will fix
+
+--- 帖子 #559 ---
+what version (v1.08? etc...) what broker (4 or 5 digit needed ?) Just because you have some coding skills does not mean some of the basics can be glazed over!
+
+--- 帖子 #560 ---
+Hi all Once again, thanks for the good work on this EA. The demo that I was running was mysteriously closed by Alpari, so here's a new one, running for 2 weeks: http://www.mt4i.com/users/fokkercharliesss All using the default .set files provided. Will the EA still expire shortly? Are there future versions planned? Charlie
+
+--- 帖子 #561 ---
+v1.09 should be the last version. There is 3 month on the ex4 supplied with the installer. Extended expiry date ex4 will get posted regularly on this thread. Not quite sure if you are using v1.09 set files as EURAUD and EURCHF are not part that approved pair list.
+
+--- 帖子 #562 ---
+Well spotted! I am still using 1.08. I will change over the weekend. Charlie
+
+--- 帖子 #563 ---
+Hello getdown, Are you still running this impressive ea on your mt4i link in your first post? When I check that link it does not show any recent results. Regards, Jeff
+
+--- 帖子 #564 ---
+I've been testing this EA on EU &amp; GU M5 and EU and EJ M30 for a couple of months and I must say I'm very impressed with it's performance. The earlier test was done on ActivTrades demo account but the account has expired and unfortunately, I don't have the stats. It was in profit though. I have not set-up MTI4 but here is myfxbook link to the second round of testing on Alpari UK Demo since early Jul: https://www.myfxbook.com/portfolio/a...sss-demo/40861 You'll need to go custom analaysis and select SSS_EJ&amp;EU_M30 and SSS_GU&amp;EU_M5 to filter out the non relevant trades as I also test another EA on the same account. So far in a little over a month, the EA has gained over 50% running on v1.08 - all default preset file setting. Will update to v1.09 and test the suggested pairs on this demo account.
+
+--- 帖子 #565 ---
+Up and running on Alpari again.
+
+--- 帖子 #566 ---
+Ok Im not going to say if this is a good or bad EA...all I know is there is no way seeing some of the results from other users Im going to use it....the draw down is wicked ! But no offence meant to the current users and also as its free and avalibale to anyone, should I wish to offend anyone either. Check out the stats on "FokkerCharli's" post....seriously like Im going to let a system/EA draw down 1100 + pips....lol Good Luck with your trading
+
+--- 帖子 #567 ---
+Drawdown maximum is approx 15% Some find this OK with conservative money management and some do not (usually scalping oriented traders with large lots!) Slow and steady wins the race and I'm happy with 2% per week!
+
+--- 帖子 #568 ---
+Hi Getdown I see some trades take quite large losses. Is there anyway to limit them to say 100 pip loss? Has limiting stops been tested in the robot by any chance? if not i can start running some tests.
+
+--- 帖子 #569 ---
+The key is the wins are greater than the losses. (large or small) Hard SL has been tested; ATR and other types of exits currently in use have proven to be more stable/profitable in the long run. Correct Money Management and leverage is the answer here. Larger pip based losses are acceptable if the lots are small. Feel free to test otherwise - I have done a massive amount of testing on this front and very clear/confident that current settings are optimal under wildly varying market conditions.
+
+--- 帖子 #570 ---
+I am testing a few variables in your sepcified testing time period.. I will post up results as soon as completed 48hrs worth. Fingeres crossed Otherwise, how has it been performing for you guys today?? I loaded SSS with the deafult ccy/timeframe sets. Its been a tough day for the bot today. Is this the same as what you guys are experiencing?
+
+--- 帖子 #571 ---
+Hi Getdown, Thanks for sharing this great EA, I started using it on my live account today. www.mt4i.com/users/tallcoolone Thanks coding the FIFO rule change.
+
+--- 帖子 #572 ---
+Today has been an excellent day for the bot! (FXDD/Alpari/Go)
+
+--- 帖子 #573 ---
+Ok cool. Im using it with Active trades. So results will be interesting. Switched it on properly at 5pm london time. Had a few tiny winners.. so good so far.. Are the standard scripts being used that were supplied in the zip on ost 1 for the specified CCYs and timeframes? Do you guys leave on all week from sun eve till fri eve? Looks like i will need to get another few screens any excuse though Also, have you considered using these in futures??
+
+--- 帖子 #574 ---
+gd-Yes
+
+--- 帖子 #575 ---
+Ok thx for that. I trade a lot of futures contracts being bund, tnote, dax, eurostoxx, Dow, s&amp;p. I'll have a lil play and see how they come out as well. May need little tweaks to the files to get it right
+
+--- 帖子 #576 ---
+Please see link for records to my account. This was placed live at 5pm London time on a demo server on ActivTrades http://www.mt4i.com/users/bl888
+
+--- 帖子 #577 ---
+GD the trading times. should we use the default trading hours or change to local time? I saw someone who also had a MT4i account who had a GBPJPY deal opened but mine said outside trading hours Actually i have noticed that the EU M30 has different trading house to the EU M5. same on GJ. Is this correct?
+
+--- 帖子 #578 ---
+All trading hours in setting files have been optimized; EURJPY M30 &amp; M5 (and other pairs) have significantly different settings to leverage differing market conditions during various times throughout the day. No need to change ANYTHING, the EA will detect your brokers offset from GMT and auto adjust trading time accordingly.
+
+--- 帖子 #579 ---
+Ok cool.. This bot looks promising. Up 82 pips since 13.30 bur down £4.99. Had to reset as my bl;imin PC crashed overnight. Can you tell me what determine s the entry size on the trade as i see different entry sizes.
+
+--- 帖子 #580 ---
+GD have you had any entry on GBPJPY today? None for me.. only USDCHF, EURUSD, EURJPY
+
+--- 帖子 #581 ---
+Yes. Different brokers/feeds = different results!
+
+--- 帖子 #582 ---
+Which Brokers can you recommend for this EA? Best ones
+
+--- 帖子 #583 ---
+Hi GD Hope your well. Are you running the robot on a live account at all? Which brokers are you using? Im using Activ Trade and not getting much out of them at the moment. Out of interest hows this week been for you? Ive still not had an entry today yet. Bob
+
+--- 帖子 #584 ---
+I was using NordFX broker. As a result a huge drawdown and margin call. I don't recommend this broker for exactly this EA. As for scalping, NordFX is pretty good.
+
+--- 帖子 #585 ---
+The basis of SSS EA is a trend follower across multiple frames; In the absence of trends/liquidity the EA will not enter the market. I strongly recommend a broker that minimum lots are 0.01 and no greater leverage than 100:1 Brokers that do not work well with SSS EA; FXCM NordFX Brokers that do work well with SSS EA; FXDD Alpari (US &amp; UK) Collective FX ATC GoMarket
+
+--- 帖子 #586 ---
+Hey Guys... just zapped through the thread and found it pretty interesting... want to try it on my fxopen demoacc first.. but I failed copying set files into my mt4 folder.... .txt files?! where to put them? kindly regards Phanti ahh Edit: these are the individual settings before starting EA?! : p
+
+--- 帖子 #587 ---
+Instal the file. Unzip the .text files to experts/presets folder and rename them as .SET Load the template in MT4 and change the EA inputs to the CCY profile sets. Hope this helps..
+
+--- 帖子 #588 ---
+Done. Ty. dito!
+
+--- 帖子 #589 ---
+Is anyone still testing this as its gone pretty dead.... What is the feedback or improvement ideas?
+
+--- 帖子 #590 ---
+Testing now with FXDD. Still going not pretty good.
+
+--- 帖子 #591 ---
+any update?
+
+--- 帖子 #592 ---
+hey never tried using an auto trader bot before, is there install instructions somewhere and how to use it instruction??? thank you.
+
+--- 帖子 #593 ---
+No updates and instructions (PDF) are in the installer
+
+--- 帖子 #594 ---
+Before installing this expert advisor go to Tools → Op.ons → Expert Advisors and make sure that “Allow DLL imports” is enabled and “Confirm DLL function calls” is disabled. thats all it said, is there a basic guide somewhere on how to use EA? I found this link is the install similar to this? Ive followed it up to the end, not sure what to do now.
+
+--- 帖子 #595 ---
+This account got blown for margin call, so i guess this ea is not working...?
+
+--- 帖子 #596 ---
+Is this thread stilla active or did it die off!
+
+--- 帖子 #597 ---
+It appears this thread is on it's deathbed; zero feedback from testers as of late. A lot of testers were running too big lot sizes; the key to this EA is small lots and lots of little wins as the market is trending.
+
+--- 帖子 #598 ---
+I am going to do a new set of test for the EA. I still testing it on FXOpen but it never closes losing trades. Might be because it's on an ECN account. The balance increased form 50K to 57K but floating loss is 20k. You can view my stats on http://www.mt4i.com/users/tschultz_sss_fxo . I also tried running it on TDFX but it never done any trades. Really not sure why that is and what's the difference between TDFX and FXOopen. I am going to test it additionally on MBTrading and JadeFX. I will use SSS 1.09 both sets 30M and 5M with two different magic numbers for each set. if the creators of the EA read this we all would appreciate a feedback from you and if you still work on the EA or have given up. Guys, you put so much work in it, don't let it go like that!
+
+--- 帖子 #599 ---
+I'm the creator; it does close losing trades. (backtester will show you this) Very little feedback has me wanting the close the thread thats for sure.
+
+--- 帖子 #600 ---
+Hi getdown71 good to hear from you. I had a closer look at the EA and noticed that it has expired. I was using v1.08 and sometime in September it stop trading. You are right, it still closes trades. For some reason it closed many trades on 8.11.2010 (yesterday). Many of these were pretty old, from August or earlier. It closed some in profit, most in loss. I will add v1.09 to new Demo accounts, FXOpen mini and ECN, TDFX mini and standard (standard min. trade lots are 0.05, next lot 0.05), JadeFX and MBTrading. I have the feeling it's a great EA and want to give it another try. Please tell me, do you use it? Are you still working on it? Your account stats on MT4i for v1.03 seem not too promising and have stopped end of October. If you have a new version please let me know so I can install it straight away. Regards
+
+--- 帖子 #601 ---
+Hi Getdown71, I have run v1.09 for the past month on FXDD without any problem, because I try to folow the trades I am using the 4hr charts. At the moment it is showing a 1.3% gain but I am still working on the settings and use .01 lots on a 5000 demo account. On the 1st November the EA time expired and I cannot locate a new update. Can you point me in the right direction. Great EA Regards.
+
+--- 帖子 #602 ---
+Hi getdown71 I installed the SSS 1.09 on TDFX standard (min lots 0.05, next lot 0.05), on JadeFX (min lots 0.05), and on FXOpen ECN and Mini account. All accounts were open with 10K and leverage of 1:200. I had to constraint the max bars on the charts to 5000 to not use too much memory on my VPS. Hope that is not a problem for the EA. Max bars on history is 100Mio. Here are the links to the MT4i http://www.mt4i.com/users/tschultz_sss_tdfx http://www.mt4i.com/users/tschultz_sss_jadefx http://www.mt4i.com/users/tschultz_sss_fxo_ecn http://www.mt4i.com/users/tschultz_sss_fxo I hope the previous poster was not right and the EA has expired. That would be pretty disappointing after all the work to set it up. I used your templates on every chart and loaded the settings file. The only thing I changed was the magic number for the M5 charts, as well as the trading comment. Everything else is on default. I also made sure I had valid history data for the H1/H4/D1 time frames, and also recalculated all data. I only had one problem with FX Open ECN as they attach a "_A" to their currency pairs and therefore the history data couldn't be downloaded from Metaquote. Also not sure how the EA will react to that. I am very excited how it will work out and hope it is worth it to put some more effort in it. Anything I can do pls let me known. Also, if you new developments please share.
+
+--- 帖子 #603 ---
+Hi My copy of SSS v1.09 made its last trade on the 29th October.. EA now shows ''expiry date 1st November'' no trades since. Hope someone has the update.. Regards
+
+--- 帖子 #604 ---
+My version is expired as well! Not sure if there is a newer version yet.
+
+--- 帖子 #605 ---
+Yes, mine is expired as well. Getdown71, are you working on a new version or was that it?
+
+--- 帖子 #606 ---
+So is v1.09 working for all ? Any enhancements suggested ? Happy to add 3 months to another v1.09 ex4 however, I'm needing some feedback to help focus the efforts.
+
+--- 帖子 #607 ---
+Hi getdown71 I would appreciate a extension for the EA. Also, if possible, could you enhance the EA that it works with brokers that have min. and next lots of 0.05 instead of 0.01? Or are there any settings I can adjust for that? TDFX and JadeFx work with 0.05 lot size. Thanks
+
+--- 帖子 #608 ---
+version expired!!! What to do?
+
+--- 帖子 #609 ---
+Hi getdown 71. Can you give me an indication when you will reset the v1.09 expiry date please. Best regards
+
+--- 帖子 #610 ---
+All, At the risk of sounding full of it; 90% of the comments of recent have been about gimme gimme gimme a new version. Very little live/demo account test data/general feedback. Not happy at all. If these kind of demands continue without feedback (positive/negative is fine) this thread and project will be closed for good! For your consideration. getdown71
+
+--- 帖子 #611 ---
+Hi getdown71, For the sake of new comers in this thread like me to get a chance to test your EA, please extend the expiration date. I'm willing to demo this EA and post statement once a week until I decided to go live or give up. Thanks.
+
+--- 帖子 #612 ---
+Hi, If you look at the date many of the most recent contributors joined FF is within the past few months, myself included. To me your EA seems great but very complex to us new commers , the product of many many hours of coding. During the past month I have tried to get my head arround all the variables while closely monitoring the EA making its trading decisions. I am still trying to understand the effect and meaning of all the many variables. To answer your first criticism, and speaking for myself, I do not concider that I am qualified to comment on such a complex EA untill I understand the system more and have more time to see it in action. Not all of us have a long term association with the workings of the Forex markets, hence my recent membership. I have included the link to last months trading. http://www.myfxbook.com/members/digg/sss-5000/54662 One question.... why does the EA data take time to reappear on the left of the screen after being amended??? I do however look forward to you continuing with the EA. Best regards
+
+--- 帖子 #613 ---
+getdown 71 Many thanks for the extension. I will post my results as I make progress.. Best regards
+
+--- 帖子 #614 ---
+Hi Getdown71 thank you for extending the EA. I have noticed that the EA is very broker sensitive. It is doing best on JadeFx. I gone live with it http://www.mt4i.com/users/tschultz_jadelive/stats but did a mistake at the beginning setting minlot to 0.5 instead of 0.05. I also was opening two more demo accounts with vPE Fx (a German bank) and Inovatrade Fx, both best ECN broker regarding to http://www.100forexbrokers.com/ . I am still waiting for ATC to come back to me. Unfortunately, the EA seem not to trade on ECN accounts. I observed that already on FXOpen ECN. xux99 wrote on 10th April 2010 that it works on ECN broker but it does not with current setting. Can you have a look into that? From all EA the old WILKO set on GBPUSDM5 works best for some reason. I have not done any backtests but already prepared Dukescopy tick data ( http://eareview.net/tick-data/comment-page-1#comments ) and will run the backtest for 2010. I cannot run 2008.01.26 as MT4 suppose to only handle up to 2GB of data. If there is anything I can do to work together with you please let me know. I am a big fan of your EA.
+
+--- 帖子 #615 ---
+Hi All, After a few months away from FF and autotraders I'm back forward testing a couple of EA's including this one. Will report back monthly as anything less is just noise. One question though - is there any way to tell which trigger has closed a trade? I have written several EA's and I always add an InfoFlag = true/false. When true I output the open / closing trigger info to the log file. Is there any way to do this in this EA as there could be a number of reasons why a transactio is closed - SL / TSL / TP / Fib exit / Opposite signal etc. This may be useful to tune the sets files. B Rgds WR
+
+--- 帖子 #616 ---
+which brokers works with this ea, i can do some forward testing. When i look at the setting on txt file and try to put it in the EA's setting, there are some doesnt make sense. such as"CancelAfterBars has 5 values, but in EA, it has 4 spots only.
+
+--- 帖子 #617 ---
+Dear All I am quite interested in forex trading, learn quite a lot, done manual trading but looking for automation since no time to sit in front of computer so surf the net but found there are thousands of robots (EA), some are paid, some are free so don't know how to go about it. Went thru this forum, again found lots of EA so can anyone give simple EA where there is no settings or any parameters to be change since doesn't know how to change code so anybody can give simple EA which achieve good profits if not high profits. There must be some EA which works smoothly without loss, book good profits if not high because many years EA are coming out so someone out there must be knowing. Looking forward for an early positive reply. Thanks
+
+--- 帖子 #618 ---
+Hi All Hope U All had an Nice Weekend. I didn't got answer to below question. I need simple EA (robot) even if it makes minor profit per day will do. I M not looking for high profits in thousands or even hundreds, if it produces 20 to 50$ per day, its fine but it should be well tested EA since I M new, can't take risk. Thousands of EA are there, is there not a simple EA which books minor profit per day ? Looking forward for an early positive reply. Thanks.
+
+--- 帖子 #619 ---
+please help me with this script... every things I do MT4 give me alert that EA initiated with invalid inputs. In raports i have such communications: ordersend error 131 or error opening SELL order: invalid trade volume I use it on XTB platform. Martin
+
+--- 帖子 #620 ---
+Hello all, First a bit of background. I am not a trader (yet) and I've been trying to learn the ropes.... I've opened an account with FXCM and using mirrortrader I'm following experienced traders while I learn the ropes... recent losses have completely wiped out my profit (about $200) and dived into my deposit (500) but I'm working my way back to profit at this time. I've been trying to learn to trade for a short while and had to scrimp and save to get a deposit of 500 for my first account. I just recently gained the confidence to start an account to trade without relying on anyone else. only my decisions... and I'm actually up a couple of dollars from my 100$ deposit... so naturally I have a unique perspective .... (now for the real joy) I backtested your EA since the beginning of the year... and here are my findings (giving back means a lot considering the work that you are doing) first the EA has earned 1200 starting with 10000 at the beginning of 2014 (very nice) (I started january first through april) maybe it's not a good test.... but stick with me... using the EUR/USD 1H 1) the EA seems to favor Sell orders, and when it does... it opens 6 - 8 sell orders within only a couple of hours. because this is my first test I used the default settings (no stop, no TP) then it usually waits through hundreds of pip-losses for the trade to break even. meaning the trade didn't work out... it seems to wait for the trade to break even (even if the trade is -500 pips) it's a strategy that seems to work for it though. a) it's simply concerning to me... I've worked hard to open a $100 Livetest account and a 500 pip loss means that I would be stopped out by my broker due to lack of funds. b) opening 6-8 trades at a time even at .01 lot means that my account would contain no free margin, I understand that this is a VERY minimal account to get started with and I "shouldn't" be trading an account so small but I simply must do something to "get my foot in the door". 2) I see (watching during the backtest) that it appears to miss, or ignore trending markets. (although Eur/USD may not be the market for trends) 3) I estimate that 80% of the loosing long trades start off as winners, then cap off and reverse to loosing.... have found a reversal indicator that may help with this, in "genuine FX profits" (A for-sale system from someone else) I'm not recommending the system, however something similar may help bring your long loosers to winners. One last thing... you have a 3 level ZZ indicator that I had to modify.. the variables you use "box.alerts", and "email.alerts", and 3 others with the dot (".") (something about logs) did not want to compile properly within MT4... Modifying the source to use an underscore "_" instead fixed the issue. here are the stats of my backtest for you (I used MT4).... Thank you for all your hard work and dedication to this EA Bars in test 3785 Ticks modelled 4206815 Modelling quality n/a Mismatched charts errors 3644 Initial deposit 10000.00 Spread Current (25) Total net profit 930.68 Gross profit 1289.28 Gross loss -358.60 Profit factor 3.60 Expected payoff 8.86 Absolute drawdown 1094.64 Maximal drawdown 1108.90 (11.07%) Relative drawdown 11.07% (1108.90) Total trades 105 Short positions (won %) 72 (73.61%) Long positions (won %) 33 (69.70%) Profit trades (% of total) 76 (72.38%) Loss trades (% of total) 29 (27.62%) Largest profit trade 86.97 loss trade -225.99 Average profit trade 16.96 loss trade -12.37 Maximum consecutive wins (profit in money) 17 (288.71) consecutive losses (loss in money) 5 (-18.04) Maximal consecutive profit (count of wins) 423.46 (9) consecutive loss (count of losses) -228.84 (2) Average consecutive wins 6 consecutive losses 2 update: forgot to mention I'm using v1.9 downloaded from this site
+
+--- 帖子 #32 ---
+OMG ! Did you look the date of the last post above yours ? 2011 !! Nobody since that time did use this bot - obviously you wont find someone here using it now ... Usually its not worth to reanimate these typ of threads ...
+
+
+===== 附件下载链接 =====
+

@@ -1,0 +1,1670 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hi community, I read the Bagovino Thread the first time in September 2006. Normally I do not believe in MA-Crossing systems, so I cannot even say, what made me develop an EA based on it. The backward tests were not bad, but who relies on these . So I forward-tested. In the time between begin of October to begin of November the demo account of 5 TUSD was doubled. I was still skeptical so I deleted the account and forward-tested again, again with encouraging results (&gt; +50% in about 2 weeks see please Detailed Statement). So I decided to give you access to this EA (see attachment). 1. Why do you publish it only as .ex4? I need the sources! I have spent literally hundreds of hours programming indicators and experts, sharing them with the community, only to have other people pick up my source code, remove my names and publish it with a few changes as their ea, in some cases even asking money for that. In other cases people messed my codes up completely, but still published them as proper, new versions of indicators, what caused in return other people turn on me about the "garbage" I programmed. So I had my share. I still like to contribute, but I want to control what happens with my projects. This EA is actually even timelimited until Febuary 2006. Until now people only come back to me with errors, problems or other things they are unhappy about. Now I would like to meet the people who are actually happy about what I make (if there are any :-/ ) 2. Ah, you made the statement up! No, send me a PM. I will give you the audit password for the account. It is still running (as long as Alpari lets me have it) and you can see that it is correct. 3. So how are the setups? I use GBP/USD, USD/CHF, EUR/USD, USD/JPY H1 Other pairs and crosses should be as well possible. 4. How do I use the Parameters "ExtMaximumRisk" and "&lt;st1 lace w:st="on"&gt;Lot&lt;/st1 lace&gt;"? If "ExtMaximumRisk" is 0, the value "&lt;st1 lace w:st="on"&gt;Lot&lt;/st1 lace&gt;" is used for your LotSize. If it is not 0 the following formula applies: AccountBalance*ExtMaximumRisk/AccountLeverage/10 The algorithm checks nevertheless existing Min/Max Lotsize and applies these information accordingly. So even if you use a very conservative ExtMaximumRisk, but your MinLotsize is 1 (as for many demo accounts), the system will trade with 1 &lt;st1 lace w:st="on"&gt;Lot&lt;/st1 lace&gt;. 5. Wow, what garbage, you trade without Stoploss / Takeprofit. Wow, no, it is just invisible and intelligent. Ok here is the deal: I have lost in real trading so many trades to "oddities" which involve the SL/TP, that I have become very skeptical. My best trades were crippled by sudden peaks which threw a position into the Stoploss (and only on my server!!!) or even in non-news-times TPs were ignored for up to 15 minutes and up to 10 pips over TP and still the trades had the occasion to go all the way down to be killed somewhere in the deficit (and the SLs were actually hit :-&lt;). /rant on As to my "suspicion": In theory brokers do not gain or loose if we do so. But this theory assumes that the broker actually puts our trades onto the market and there was a counterpart. Big suprise: In retail banking that does not happen. In best case they compound, that means they check from time to time how many trades are short and how many are long, and if there is a big discrepancy then they actually deal the difference. That is the real reasons why they don't like people who trade big lotsize and why people who win alot of money find themselves quickly on manual execution. Not to punish them, but to actually do the trades to avoid the risk. So for the dirty rest of us, which has in theory a 50% successrate, it does not hurt to keep us from winning. Not because they are mean, no: Only because if we win, they actually need to give us something. Something they do not necessarily gained themselves somewhere. I think their servers are "optimized"? An algorithm which has a certain "magnetism" for SLs and a certain avoidance of TPs will actually minimze eventual losses of a broker. And I am not just paranoid. I gathered tick data between different brokers and compared them. It was a very interesting result. /rant off So I have had it and implemented in my EAs "invisible" SL/TP. This changed the success rate of my trade definitely to the better. While experimenting I had the idea to make an intelligent set of SL/TP, that means stops which are not a fix value, but a factor which stands in relation to the actual range of pips (ATR). That means, during times of low volatility the Stops are much more sensitive and close, then during times of high volatility. It seems to work. 6. Why didn't you give us much more parameters to optimize, fine-tune, improve the EA? Because you will cheat yourselves with Over-Optimization. Face it; we all do it, when we have the opportunity. If this EA looses money for you, delete it and ignore me. If it wins, don't get greedy and try to earn more/faster. 7. Do you propose I can trade life with it? Yessss, and how about driving car with a blindfold, if I would ask you? Demo-test it until you are tired and during that time, form an opinion and decide for yourself. I will not respond to any questions which have to do with topics like: - What is the bagovino method - How do I set this EA up - What is metatrader - Why does my backtest does not show the same results as your front-test - Modellquality - etc. etc. There have been too many threads here and on other boards dealing with these questions. Google for them... Sorry, if anything here sounds rude. I prefer straighforwardness. It is more effective. ------ edit 01.12.2006 ------------- ZIPs are now compatible ------ edit 01.12.2006 ------------- I forgot to mention the NFP feature: The EA calculates NFP days and will close positions before the NFP and will not trade during the hours of the NFP and directly following. &lt;!--[if gte vml 1]&gt;&lt;v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75" o referrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f"&gt; &lt;v:stroke joinstyle="miter"/&gt; &lt;v:formulas&gt; &lt;v:f eqn="if lineDrawn pixelLineWidth 0"/&gt; &lt;v:f eqn="sum @0 1 0"/&gt; &lt;v:f eqn="sum 0 0 @1"/&gt; &lt;v:f eqn="prod @2 1 2"/&gt; &lt;v:f eqn="prod @3 21600 pixelWidth"/&gt; &lt;v:f eqn="prod @3 21600 pixelHeight"/&gt; &lt;v:f eqn="sum @0 0 1"/&gt; &lt;v:f eqn="prod @6 1 2"/&gt; &lt;v:f eqn="prod @7 21600 pixelWidth"/&gt; &lt;v:f eqn="sum @8 21600 0"/&gt; &lt;v:f eqn="prod @7 21600 pixelHeight"/&gt; &lt;v:f eqn="sum @10 21600 0"/&gt; &lt;/v:formulas&gt; &lt;v ath o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/&gt; &lt;o:lock v:ext="edit" aspectratio="t"/&gt; &lt;/v:shapetype&gt;&lt;v:shape id="_x0000_i1025" type="#_x0000_t75" alt="" style='width:11.25pt; height:11.25pt'&gt; &lt;v:imagedata src="file:///C:\DOCUME~1\OLIVER~1.TRA\LOCALS~1\Temp\msohtml1\01\clip_image001.gif" o:href="http://www.forexfactory.com/forexforum/images/smilies/frown.gif"/&gt; &lt;/v:shape&gt;&lt;![endif]--&gt;&lt;!--[if !vml]--&gt;&lt;!--[endif]--&gt;
+
+--- 帖子 #2 ---
+for future reference
+
+--- 帖子 #3 ---
+Can't decompress the zip. Could you try uploading it again? Rusty
+
+--- 帖子 #4 ---
+hey there =) i also notice that my stop loss seems to always magically get hit right to the FRIGGIN T. no matter what i do, it gets hit right at the very end. even if i think "ok i will increase it" it gets hit at the very end of a bar...so many times. could you explain this more?
+
+--- 帖子 #5 ---
+Download trial winrar and then un compress it with that.
+
+--- 帖子 #6 ---
+What time frame does this run on?
+
+--- 帖子 #7 ---
+Please read his post I use GBP/USD, USD/CHF, EUR/USD, USD/JPY H1
+
+--- 帖子 #8 ---
+Windows will not open this file...Can someone fix it
+
+--- 帖子 #9 ---
+Yeah Scott, I have xp also but it will not unzip...I will find the Winrar TX
+
+--- 帖子 #10 ---
+&lt;script type="text/javascript"&gt;_register("postmenu_150406", true); &lt;/script&gt; Thank you very much for sharing. I will gladly test your EA, and report back to you. This forum and it members are incredible!
+
+--- 帖子 #11 ---
+Nice work fukinagashi.... I wish you would have told me first!!!! Ha! Ha! Anyway, I look forward to testing this EA as well. We had a very strong trending market during your testing period. It will be interesting to see how this EA does when the market is ranging and choppy! I was wondering if the EA only took trades at certain times like a time filter, or does it place a trade whenever a signal is produced? Thanks, Bagovino
+
+--- 帖子 #12 ---
+5/12 cross and RSI21 + tp/sl is all this EA doing?
+
+--- 帖子 #13 ---
+oh wow, I had winzip in the "enhanced deflate" mode and with that it is only compatible with itself. I fixed that. The zip should now be comnpatible. Sorry
+
+--- 帖子 #14 ---
+I came to the values 5/12 + RSI 14. The RSI signal must be over/under 50 but may nevertheless not be in the &lt;30 or &gt;70 region. The SL/TP are as described in the first post real time factors on the ATR. And I found that a little TrailingsStop helps as well, since I hate to see position, which are profitable to turn against me.
+
+--- 帖子 #15 ---
+I have not given it a thought. I have a job, so my motives are rather, that I do not want to share the code and keep control over the utilization, then earn money with it. So I will produce in time a .ex4 which will be valid for longer.
+
+--- 帖子 #16 ---
+Fukin, The RSI should be 21... Do you find better results with 14? B.
+
+--- 帖子 #17 ---
+My first order just whent in eur/usd sell 1.3237 but there is no sl or tp so how do i know what to put in? Wow, what garbage, you trade without Stoploss / Takeprofit. Wow, no, it is just invisible and intelligent. GOT it Thank you!!!
+
+--- 帖子 #18 ---
+Hi, thank you for sharing your EA. I noticed that it doesnt wait for the candle to close to confirm the crosses. Is that by purpose or do you want it like that? Regards,
+
+--- 帖子 #19 ---
+Hi, i've just put the EA on MT4. But it do not trade because : 2006.12.01 13:11:08 Bag-it v 1.1 GBPUSD,H1: NFP =&gt; Trading disabled Could you help ?
+
+--- 帖子 #20 ---
+Can this EA be traded on a mini account with IBFX? Thanks.
+
+--- 帖子 #21 ---
+If NFP is Non-Farm Payroll, then I would think it is an error in the EA, because this month NFP comes out the second Friday of December. Something about the first Friday is also the first of the month, and they wouldn't have time to prepare a report in time. Or so I read in the News Room here at FF. Rusty
+
+--- 帖子 #22 ---
+Hmmm, bad. Official definition of the date of the NFP is "every first friday of the month for the prior month. That this friday could be a 1st is not unprecedented, but I think Bernake was on holiday :-/. So I wiill update the algorythm for the recogniition of NFP. Hard coded days, for the dates I know (13+ months) and after that my algo.
+
+--- 帖子 #23 ---
+Sure, please read the section regarding Lots and ExtMaximumRisk. If you are not sure, a quick Backtest for maybe just a few days, with a certains set of parameters gives you and idea what effect these parameters have.
+
+--- 帖子 #24 ---
+A very good question. In my personal opinion, a system which reacts on two different indicators (MA-Cross and RSI) does not need to wait for the completion of the candle.
+
+--- 帖子 #25 ---
+I admit, that I have not documented my decision to go down to 14 well enough to now say all convinced, that that is the solution of all your worries. But so much I can say. In my opinion, a signal gets strontger with a longer period, but at the same time, the signal gets "watered down". With a RSI(21) &gt; 50, you have a much clearer Buy Signal, but at the same time, you refer to events which lay back 21 candles and which might no longer be important for the actual trend. But in my oponion two other things have a stronger impact on my results. That is the exclusion of "overbought" and "oversold" RSIs (&lt;30 and &gt;70) and the special SL/TP. Once I have more time, I will try other MA-Cross Systems with that SL/TP mechanism, just to see how striong the impact of this treatment is.
+
+--- 帖子 #26 ---
+F. What do you mean the exclusion of overbought and oversold? Would you mind sharing your SL/TP method? Thanks, Bagovino
+
+--- 帖子 #27 ---
+Fukinagashi, Please see the following screen shot... The EA sold instead of bought. Why whould it do exactly opposite of the system rules? Thanks, Bago
+
+--- 帖子 #28 ---
+It sold because it doesnt wait for the crosses to confirm. Thats why I asked it earlier. I watched it live and the MAs touched within the candle and I think RSI14 touched the 50.
+
+--- 帖子 #29 ---
+Ok Thanks for that.
+
+--- 帖子 #30 ---
+I guess there's something to be said about waiting for the cross of the EMA's and RSI Huh? -160 pip loser. B.
+
+--- 帖子 #31 ---
+Agreed. Also, wouldn't backtest results be completely meaningless since the EA generates signals intra-bar in real world deployment? Backtests would only show genuine crosses (based on end-of-bar data) but that in no way reflects what could have happened intra-bar. Fuki: Thanks for making this available. Any chance of providing a version with an option to only take trades end-of-bar? Also, an option to use RSI(21) rather than RSI(14) would be appreciated for those who would like to stick with the Bago method as stipulated. Thanks! Bill
+
+--- 帖子 #32 ---
+with this system, you HAVE to have it written for trade is activated when the candle CLOSES after the cross. You WILL lose all your cash if you do not. It WILL NOT WORK! There are too many times where it will touch but not cross and bounce back up. it won't work. GLTA
+
+--- 帖子 #33 ---
+Hi Bagovino, As I see it, Fukinagashi uses a 14 RSI without waiting for the close. I think the tickdata just slipped below 50 RSI(14) and triggered a sell.
+
+--- 帖子 #34 ---
+Any MA cross systems should profit in Nov. The question is still, when to use it?
+
+--- 帖子 #35 ---
+Looking at the statement provided by Fuki, the drawdown is 48%. Is that kind of drawdown to be expected with the Bagovino method?
+
+--- 帖子 #36 ---
+I just found out, that I cannot edit the original post on this board. Get me right I do not want to edit anything in there, but I would have liked to keep the most actual stuff in the first post, so no one needs to check the whole thread for that. Pity. So I decided to refer here rather to my webpage . Here you find all updates to bag-it. As too all critics/suggestion: I don't mind suggestions, but don't you think that in the 2000+ existing EAs someone allready catered for your cookie cutter issues? Again I have spent so much time researching with standard philiospies, that I gave up on it. There are now two ways: We willl never have a successfull EA We didn't look at the right spot for it (aka our actual theories are great, but wrong) I had an eye opener at my participation of the starter thread . This guy intentionally/(accidently) kicked at least two standard rules away, and suggested a method, which gained me last year some 3 TUSD (real money). The most hillarious about his method is, that he interpretes the CCI exactly opposite to the classical way. And it works. I still run a variant of the starter method on my real money, and while it is admitedly not consistent, I am - over all - still in the plus with this method. Now how many of your off-the-shelf/consistent-to-your-theoriy systems are giving you positive pips? That would have been acually my mql4 championship Ea if I idiot would not have missed the registration time. Another example: Zonker the actual A1 of the MQL4 Championship. This guy is a major rule breaker. After I have read the source code of his EA I immediatly fell in love with him. He probably has a Mohican and supports Greenpeace events. Just read his source: PHP Code if( sma &gt; Ask ) //Euros going cheap! BUY! BuyEuros = true ; if( sma &lt; Ask ) //Momentum in our favour! BUY!! BuyEuros = true ; if( sma == Ask ) //BuY EUROS NOW!!!, BUY MORE!!! BuyEuros = true ; And? He made 45 TUSD out of 10 USD in just two month. Actually that is wrong. He first lost 70% of the 10 TUSD. And then, out of 3 TUSD he gained 45 TUSD in 7 weeks. And on a related note: His EA poops on closed candles . What do we learn of this? Break rules, is not a "bad thing". I know you guys would be happier to have my EA gain 50% in 2 weeks AND trade on closed candles (me too), but this is not going to happen. I know - like you - why signals of closed candles are "a good thing", but if forex trading would be that easy, there would be more successfull traders out there. As in any kind of investment revenues are linked to risk. Realize: An automized systems, has the disadvantage of emulating the most stupid trader ever. This most stupid trader will be the money-cow for all traders with a IQ of 50+, while it is predictable. It has no chance ... not the slightest chance .... to win, until he becomes ... unpredictable, while remaining consistent. Again. There is a reason why I stop publishing source code. If you want to castrate an EA, don't do it with mine. As far as I know, all attempts to automize the Bagovino method have not been remotely as successfull as my EA. If you don't like how it trades, just ignore this thread. Move on. Here is nothing to see. Only a sad, stupid, silly guy, who thinks he has found the way to beat the market on the long term. Not interesting for you, especially since you guys are already on the sunny side of life with your workings EAs ... or are you not? I assume I will double the money before End of January 2007. Just check my webpage. You will have the publisher statement there, automatically updated all 5 minutes. And if I instead loose it: Wow, you were right! It is that easy.
+
+--- 帖子 #37 ---
+I am too happy to hear that you got a millionair last month, I mean if november is the month for MA cross systems, you probably grasped the opportunity and put all your money 400:1 on one of any MA cross system ... congrats to GP2X!!! I unfortunatly do not have your skill &amp; experience, I am still searching for the fool-proof system. But maybe you would teach me, what kind of system should profit in December? Or January?
+
+--- 帖子 #38 ---
+maybe we can buy at bottom and sell at the top...?
+
+--- 帖子 #39 ---
+fukinagashi. I tried downloading version 11B from your website, it tells me its corrupted when I tried to unzip it.
+
+--- 帖子 #40 ---
+I recall someone making the suggestion to allow the thread starter to modify the first post. The response was it would take a lot of tweaking with the forum software. So while that is in the works, the fix is to ask a moderator to change the first post. Maybe a mod could add your website link to the first post.
+
+--- 帖子 #41 ---
+Chill man, what GP2X was saying is that this Nov is a huge trending market. Any MA cross system would profit in this kind of condition. He didn't say that all Nov is trading market. Bago said the same thing in a few post before.
+
+--- 帖子 #42 ---
+My post to that was not meant serious. Sorry, I should work more with smilies .... BTW I liked
+
+--- 帖子 #43 ---
+fuki im confused. looking at zonker's code, it seems like you are saying that EAs can be worhtless?
+
+--- 帖子 #44 ---
+Thank you for sharing your EA with board. After reviewing your history I would be concerned with your 50% drawdown. You went from $5000 to $10000 very quickly, which is good, but then you went right back to $5000 even quicker.
+
+--- 帖子 #45 ---
+To begin with, yes, an EA can be utterly worthless. Zonkers EA for example is uncapable to deal with a EUR Bear, since it only buys EUR. BUT when you expect a Bullish EUR period for the last quarter of each year (which is a common theory), then his EA is the winner. That is what I mean. I do not claim that I had a genial idea with my expert to trade on unfinished candles. But I do believe that we must attempt to think outside of the box.
+
+--- 帖子 #46 ---
+I perfectly agree with you. I would love to find one day an EA which gains money quickly with only little or no drawdown. (This phrase is not intend to sound cynical, I mean that really!)
+
+--- 帖子 #47 ---
+1) I use FXDD and they're 2 hour ahead of GMT, do I enter "2" in the GMTDiff? For InterbankFX, they use GMT, so I would enter "0" in the GMTDiff? In principal yes. GMTDiff is nevertheless only important for NFP 2) I don't see the NFP input, does EA calculate when not to trade during NFP automatically? It will calculate it automatically until january 2007 (version 11b) 3) Bag uses 21 period for RSI, should I keep 14 as default for the EA? Is this the best setting that you tested? In my testing 14 was better, what does obviously not mean it MUST be better. It is a typical question, a longer period causes more reliable signals, but you miss an early entry. The life test is with RSi(14). 4) Is 1.1b an unlimited version? When may I have the unlimited version? 11b is a limited version. The limitation for the time being is only a tool to keep track of the used experts. Only people who use it will come back to me on the 01.02.2007. 5) I use "1" for ExtMaximumRisk since I trade 4 currency pairs so that a total of 4% ExtMaximumRisk. Is this how I should use it or should I leave it at 0? ExtMaximumRisk is in %. So 1 is 100%. I propose not to risk 100% of you Account balance ;-). For 4% you must take 0.04. This refered to the Risk each EA takes, so if you have 4 Experts you might be invested with 16% of you Account balance. 6) Today (12/5), Expert did not make any trades. Correct? Mine did not make any trades so I just want to make sure. No it did not, but this can differ from broker to broker, so that does not guarantee anything.
+
+--- 帖子 #48 ---
+Just wanted to drop a post saying that I've got this ea running on a demo account. I've followed bag's thread for a while and his methods seem to be great, but as I'm working a full time job I don't have time to sit and watch charts all day. If your automation of his methods work well, it will be excellent indeed.
+
+--- 帖子 #49 ---
+hi i have been using your ea for four days now and i am getting good results attached is my statement for those four days. the open trade is not your ea, but th rest is. we will see what next week will bring Regards JTH
+
+--- 帖子 #50 ---
+I just wanted quickly to mention that my EA actually doubled the account as of yesterday. Please see the online statement. (MT4-Publisher generated) It is now 30 days since the begin of the account and about 2 weeks after the big drawdown. The experiment does not stop here. Lets see when the account is doubled again. I theory this should be before end of january.
+
+--- 帖子 #51 ---
+Oh, I was right with that statement :surprised
+
+--- 帖子 #52 ---
+What fantastic result... sure i will try this EA....
+
+--- 帖子 #53 ---
+Very good results. Cheers
+
+--- 帖子 #54 ---
+After almost doubling my account in a week, it gave it all back and then some in the last 2 days. The losses are huge compared to the gains.
+
+--- 帖子 #55 ---
+Just looking over the losses on fukinagashi's on-line statement, it appears to me the 4H filter isn't part of this EA... This filter would have kept us out a lot of the bad trades.
+
+--- 帖子 #56 ---
+damn your statement says u using 4 pairs with 1 lot each for account of usd5k ????...wow... you are risk taker by the way, why could not i backtest online??? only 1 trade shown in 1 month
+
+--- 帖子 #57 ---
+Hi FUKI, i am develloping an EA too, i have been using bago method for a little while and found out it was really good at making pipe in a trend AND really good at loosing them in a consolidation period, the trick for every trend following system would be to filter out bad trade by trading reverse whenever ranging market is detected. Also trading on longer time frames help filter the news events, their get to be only bumps on the road, you may trade true them and still get better results... As i say, we need a signal to detect when market is a range. It's very hard because most day have a big swing, but sometime consolidation last 1-2 weeks? Anyway what you think of this?
+
+--- 帖子 #58 ---
+Are you useing the 4H filter?
+
+--- 帖子 #59 ---
+Sorry! No! I missed this one??? What is it?
+
+--- 帖子 #60 ---
+I'll do it in the Bagovino method thread, so not to hijack this away from the EA. On the EA, the 4H filter would be a big help.
+
+--- 帖子 #61 ---
+Ok, I know the author of this EA would be pissed at me for asking this question, so maybe someone else can answer it: Do I just place this file in my experts folder to use it? That doesn't seem to work...nor does compiling it....
+
+--- 帖子 #62 ---
+Extract or copy the file to the experts folder and re-start MT4. You do not need to compile it because it is already compiled. It will show up as gray in the navigator because we don't have the the source - *.mq4 version. Just attach it to a chart in the normal manner.
+
+--- 帖子 #63 ---
+Hehe Yves, all you contributions are to the point and correct, I do not mind them at all, but I agree that this discussion should rather be done in the Bagovino thread. I will check the impact of it. I actually like the volatile trading of the EA (thanks to trading on open candles , see the trades it made today. I cashed in a 130 pip move on the GBPUSD, but the USDJPY caused only minor damage (32 pips in three trades). Actual balance: 11.463.54 $ out of 5 TUSD initial investment. Admitedly rackless moneymanagement (1 Lot each time), but I will offer once in a while a consideration of the pip values, which I find much more telling.
+
+--- 帖子 #64 ---
+fukinagashi thanks for this system. i have tested this since december 20. nice results untill now. excellent job.
+
+--- 帖子 #65 ---
+Fuki, If I can make a suggestion.... As a Dpip stated, the 4 hr filter should greatly help your system. In theory anyway. You never know with these EA's. Anyway, it should work well with your EA not waiting for the bar close. All it is, is use an RSI 14 on the 4 hr, but still take the trades on the 1 hr with the RSI 21. When the 4hr RSI 14 is above the 50 line you only take long signals from your 1hr chart. When the 4hr RSI 14 is below the 50 line you only take short trades. If you would be so kind as to test this we'd all greatly appreciate it! Thanks, Bagovino
+
+--- 帖子 #66 ---
+Hi Fuki, thank for your work, your online statement is really really good! However I have a problem with opening position, so I wanna ask help to the people who are using IBFX too. According to Bagovino rules (EMA 5 crosses below EMA 12 and RSI(14) crosses below 50 level) a short position should be opened on cable....and so is on Fuki statement, but on my account nothing happens!!! Maybe in the code there is something about the symbol name and on IBFX I have GBPUSDm instead of GBPUSD.... Anyone else has this problem too?? Thanks
+
+--- 帖子 #67 ---
+This EA hasn't opened any trades for me either on IBFX.
+
+--- 帖子 #68 ---
+If the EA has hardcoded symbols in it, such as GBPUSD, and you are on a mini at IBFX it won't open orders because they code there mini feed with an 'm' at the end. I don't know how this EA is coded, so only the OP can answer that.
+
+--- 帖子 #69 ---
+I'll look into it. It sound promising. By all means thank you for explaining that filter to me. I am a bit short on spare time atm, so I appreciate that.
+
+--- 帖子 #70 ---
+No it has not. It adapts to the exact symbol your system uses. You could actually even trade CFDs or futures with it.
+
+--- 帖子 #71 ---
+Odd and maybe not odd. The EA has some undisclosed features which are not completly according to the "True Bagovino Method (R)", but to find out could you please Check in the "Experts" and the "Journal" Tab of this moment where you expect a buy/sell, if you have any error messages? Since you might have - since then - closed your Metatrader instance, you can still find this in the files \logs\... \experts\log\... of the regarding day. If not you do not find any errors, it is very likely that the signals did not qualify a trade. Now to resolve that issue it would be best to post me a screencapture of the regarding period. Please put up the regarding MAs and RSIs (14) and show please at least 10 candles to the left of the moment, where you expected a signal. One of the undisclosed features has to do with the behaviour of the signals before the acual buy/sell signal. Why the EA is willing to trade before a candle is closed, it is not stupid: The signal must have a history. When I see your screencapture I can tell you if there is a bug (perfectly possible) or if that is intended. But please check your error logs first.
+
+--- 帖子 #72 ---
+Same here since starting on 12-26-06. No errors reported in the Experts or Journal tabs.
+
+--- 帖子 #73 ---
+What broker are you using? I've been running since 12-26-06 demo testing at FXDD, FBFX and IBFX. No trades so far at IBFX. Two trades at FXDD, see attached statement. One trade so far (still open) at FBFX on a EURUSD short at 12/28 22:00 GMT at 1.3147 which is currently down 53 pips. The entries/exits are far off from the results posted here by you and by Fuki's statements. I'm trying to figure out why. I set GMTDiff to 2 for FXDD and 0 for the other two brokers. Changed lots to .50. Applied to the 4 majors at H1. All other settings are defaults. I'd love to be able to corroborate results posted by others. But, so far, I'm far from it. Any clues on what to look for to align my results with those of Fuki's? &lt;table border="0" cellpadding="3" cellspacing="1"&gt;&lt;tbody&gt;&lt;tr align="left"&gt;&lt;td colspan="14"&gt; Closed Transactions: &lt;/td&gt;&lt;/tr&gt; &lt;tr align="center" bgcolor="#c0c0c0"&gt; &lt;td&gt;Ticket&lt;/td&gt;&lt;td nowrap="nowrap"&gt;Open Time&lt;/td&gt;&lt;td&gt;Type&lt;/td&gt;&lt;td&gt;Lots&lt;/td&gt;&lt;td&gt;Item&lt;/td&gt; &lt;td&gt;Price&lt;/td&gt;&lt;td&gt;S / L&lt;/td&gt;&lt;td&gt;T / P&lt;/td&gt;&lt;td nowrap="nowrap"&gt;Close Time&lt;/td&gt; &lt;td&gt;Price&lt;/td&gt;&lt;td&gt;Commission&lt;/td&gt;&lt;td&gt;Taxes&lt;/td&gt;&lt;td&gt;Swap&lt;/td&gt;&lt;td&gt;Profit&lt;/td&gt;&lt;/tr&gt; &lt;tr align="right"&gt;&lt;td title="Deposit"&gt;5478236&lt;/td&gt;&lt;td class="msdate" nowrap="nowrap"&gt;2006.12.26 21:26&lt;/td&gt;&lt;td&gt;balance&lt;/td&gt;&lt;td colspan="10" align="left"&gt;Deposit&lt;/td&gt;&lt;td style=""&gt;5 000.00&lt;/td&gt;&lt;/tr&gt; &lt;tr align="right" bgcolor="#e0e0e0"&gt;&lt;td title="#666 Bag-it v 1.1b[sl]"&gt;5484625&lt;/td&gt;&lt;td class="msdate" nowrap="nowrap"&gt;2006.12.27 05:01&lt;/td&gt;&lt;td&gt;buy&lt;/td&gt;&lt;td style=""&gt;0.50&lt;/td&gt;&lt;td&gt;gbpusd&lt;/td&gt;&lt;td style=""&gt;1.9585&lt;/td&gt;&lt;td style=""&gt;1.9598&lt;/td&gt;&lt;td style=""&gt;0.0000&lt;/td&gt;&lt;td class="msdate" nowrap="nowrap"&gt;2006.12.27 15:16&lt;/td&gt;&lt;td style=""&gt;1.9598&lt;/td&gt;&lt;td style=""&gt;0.00&lt;/td&gt;&lt;td style=""&gt;0.00&lt;/td&gt;&lt;td style=""&gt;0.00&lt;/td&gt;&lt;td style=""&gt;65.00&lt;/td&gt;&lt;/tr&gt; &lt;tr align="right"&gt;&lt;td title="#666 Bag-it v 1.1b"&gt;5484635&lt;/td&gt;&lt;td class="msdate" nowrap="nowrap"&gt;2006.12.27 05:02&lt;/td&gt;&lt;td&gt;sell&lt;/td&gt;&lt;td style=""&gt;0.50&lt;/td&gt;&lt;td&gt;usdchf&lt;/td&gt;&lt;td style=""&gt;1.2201&lt;/td&gt;&lt;td style=""&gt;0.0000&lt;/td&gt;&lt;td style=""&gt;0.0000&lt;/td&gt;&lt;td class="msdate" nowrap="nowrap"&gt;2006.12.28 05:00&lt;/td&gt;&lt;td style=""&gt;1.2266&lt;/td&gt;&lt;td style=""&gt;0.00&lt;/td&gt;&lt;td style=""&gt;0.00&lt;/td&gt;&lt;td style=""&gt;-14.15&lt;/td&gt;&lt;td style=""&gt;-264.96&lt;/td&gt;&lt;/tr&gt; &lt;tr align="right"&gt; &lt;td colspan="10"&gt; &lt;/td&gt; &lt;td style=""&gt;0.00&lt;/td&gt; &lt;td style=""&gt;0.00&lt;/td&gt; &lt;td style=""&gt;-14.15&lt;/td&gt; &lt;td style=""&gt;-199.96&lt;/td&gt; &lt;/tr&gt; &lt;tr align="right"&gt; &lt;td colspan="12" align="right"&gt; Closed P/L: &lt;/td&gt; &lt;td colspan="2" title="Commission + Swap + Profit + Taxes" style="" align="right"&gt; -214.11 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+--- 帖子 #74 ---
+Well your CHF was a valid trade. It went 41 to the down so there were pips to be made. I dont know what the lock profit or trail or take profit or stoploss is in this EA but a move that much in your favor should not end in a loss. It could very well be 40 and with the spread, it just missed. I have had that happen to me many times, just missing my lock and ending up a looser. There was a valid buy long before the close of this trade happend on 2006.12.27 15:00 I doubt this EA is a hard stoploss number. Looks like it may be based on ADR. Given this pairs ADR of around 80-85 and when it sold it had moved about 20 would leave the 65 pip SL that it hit. I dont see it that way myself though. It moved 20 down so that leaves 65 to go down, but 85 to go up. The possible reward is 65, a R to R ratio of only 2:1 would mean a SL of 33 (half of 65) A better SL of 3:1 is 22. In any case this trade should have been shut down long before that kind of loss. Either a smaller SL or the valid cross, A trail, something. There isnt anyone here that would look at that chart in that timeframe and let it run that long with a manual trade. I see the developers philosophy of "room to breathe" but IMHO that was just to much oxygen. It is a good EA, dont get me wrong. I did backtest on a couple pairs a while back and it did make money. It is making money forward testing as well. By analyzing just this trade it does not fit my MM profile.
+
+--- 帖子 #75 ---
+I see just above fukinagashi mentiones 10 candles. It is probable that it didnt take the buy signal and close the sell trade because there was the sell cross within 10 candles previous. Sounds like a good idea to stay out of ranging markets if that is the case. It just didnt work in this particular trade. Its all about odds. If you get it right 51% of the time, you will make money. 2 trades isnt enough to evaluate this billworld. Again, it doesnt fit my MM profile just by looking at this one trade, so thats all I need to know. I am sure my MM is completely different from fukinagashi.
+
+--- 帖子 #76 ---
+Hmm, kinda stuck my foot in my mouth. I see bugys statement for the same trades with a win. Maybe it does fit my MM after all. Billworld, are you staying connected? If there is a trail or anything other than a simple stoploss you have to be connected at all times to work.
+
+--- 帖子 #77 ---
+This is My Statement.....
+
+--- 帖子 #78 ---
+I was running this from one of my Virtual Private Server accounts located at a 24/7 data center. It ran continuously.
+
+--- 帖子 #79 ---
+bago EA is expired now, can you post a new version?
+
+--- 帖子 #80 ---
+my bago EA expired also. is it going to be a new version for the ones that have tried the first? at least that's what fukinagashi said ...
+
+--- 帖子 #81 ---
+I understand that this method works differently than the bagovino, but how exactly does it determine when to enter a trade. I have been wanting to trade this method manually because it has had very good results from backtesting but needs better money management.
+
+--- 帖子 #82 ---
+Sorry for the delay
+
+--- 帖子 #83 ---
+Hi Fukinagashi , I'm having some problems opening the zip file (am I the only one?) Can you post the file without compressing it . Thanks for your hard work . http://www.forexfactory.com/forexfor...ons/icon14.gif Gico
+
+--- 帖子 #84 ---
+It unzipped fine for me and attached to the chart with no problems. I don't think he can attach a file with a *.ex4 extension in this forum. Send me an email if you want me to send it to you as an attachment.
+
+--- 帖子 #85 ---
+hello fukinagashi, I try to backtest this ea, but MT says this version is expired. Does this mean it can only be used for forward test? thanks. Jiang
+
+--- 帖子 #86 ---
+Thank u Fuki!! Any change in v1.2 or only the trial period extension??
+
+--- 帖子 #87 ---
+Hello fukinagashi, Do you mind explaining a bit more on your trailing ATR rules? Also, could you share the parameters' values use in this case? I am new here and am trying out to understand the exit rules for this EA. Thanks alot for your EA. I really learn and enjoy it. Regards, Samuel
+
+--- 帖子 #88 ---
+Ni hao, you guys notice all my mistakes . I try to take a shortcut and forgot the backtesting. Here is the EA which should be backtestable.
+
+--- 帖子 #89 ---
+Aye only the trial period. I am studying the impact of RSI H4 filter, but I am not too happy yet, too many good trades get filtered out as well. I keep you posted.
+
+--- 帖子 #90 ---
+Bag-itv12 - I just wanted to post results for the first day before I change the lot size. Because of some concerns with version 1 and IBFX mini accounts I tested version 2 on a IBFX mini demo account. I also entered .02 for the lot size. The fact that there is a small 'm' after the currency pair like 'EURUSDm' did not cause any problem. The EA also traded the $200.00 lot size just fine for 2 cent pips. Having all the closed trades winners was nice. Thanks fukinagashi.
+
+--- 帖子 #91 ---
+Heres my statement for the updated EA. Only trading 4 biggie pairs. Looks like its about to enter a couple of trades soon. Looks Good!
+
+--- 帖子 #92 ---
+Konnichiwa Got it, Thanks very much. Jiang
+
+--- 帖子 #93 ---
+Hello, I have been trying to save the new Bag-it EA to my experts file under my IBFX file and for some reason it will not let me. I emailed the ED to myself and can now add it to the experts file but when I open IBFX the EA will disapear from the file. Does anyone have any ressomendations that can help me run this EA? Thanks in advance!! Thanks, Larry
+
+--- 帖子 #94 ---
+Hard to tell from your description. Just do the following: Open the zip file with a program like Winzip and extract the file inside which is Bag-itv12.ex4 directly to the \experts folder. This folder is one level below the MT4 folder which in your case is something like Program files\Interbank FX Trader\ . When you re-start MT4 the EA should show up when you open the navigator. It will be gray as shown in the attached picture. This is because you only have the compiled version in the folder. Then just 'right mouse click' on it and select attach or grab it with the mouse and slide it to the chart. Do not try to open or modify the file with MetaEditor. Do not try to compile the file.
+
+--- 帖子 #95 ---
+The 200% Goal was accomplished on Friday 05.01.2006. The system closed the two open orders on the morning of the NFP and has a balance of 15230.01 from 5000 initial investment. Please see my webpage for the detailed online statement: http://fukinagashi.fortunecity.com/statement.htm Again the system supprised me to double "early". Lets focus on the 300% .
+
+--- 帖子 #96 ---
+Hello to everybody! I have the same trouble that Imcarlton had. Can anybody advise smth how to overcome that problem? I have never faced that thing when EA dissapears as soon as I launch Metatrader Thanks!
+
+--- 帖子 #97 ---
+Do you, which have this great results, trade the EA with the properties that came with the EA-file? There is for example the RSI with 14 in it, Bagovino org. it is 21..... ? The Delta inputs are exactly what? StopLossFactor 6.0 means 6 pips? Thanks
+
+--- 帖子 #98 ---
+many thanks 4 the extension until mar07. its a great ea !! why have u given us only until mar07? any chance 2 get a longer extension? keep up the great work
+
+--- 帖子 #99 ---
+Thanks for the suggestion NVWINE. I tried that on my home and work computers and it would not let me add the EA to my IBFX account. I am not sure what is going on. I have never had any issues applying EAs in the past, including the original Bag-it, EA. I will keep trying. Hopefully it will work out. If anyone else has any suggestions, please let me know! Thanks for your help!!!
+
+--- 帖子 #100 ---
+Sorry my suggestions did not help. I sent you a PM with some more questions. If you get it to work please tell us what the problem was.
+
+--- 帖子 #101 ---
+nvwine, Thanks for the PM!! I checked my journal and noticed that a new build was available from IBFX. I contacted them and they sent me the download link - www.interbankfx.com/info/ibsetup4.exe - I downloaded the most recent build. I then added the EA to my experts file and I am now set! Thanks for the suggestion... Hopefully it will help the others having the same issues. Thanks, Larry
+
+--- 帖子 #102 ---
+Before today the ea seems to work porperly. Attached I have statement and charts for 4 pairs that went negative didn't stop or reverse and now pretty deep. I have some ideas for improvement if you want to hear them fukin. If not, I would like to figure out why the EA did this. Also my RSI set to 14 doesn't seem to be a correct entry point for a few of the pairs. Two entries have not waited for RSI confirm once ma crosses. I think this system and ea has a lot of potential. Does anyone know how this could happen and/or how we could fix it? Jar
+
+--- 帖子 #103 ---
+Received this messege in the Experts Log 17:07:21 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: no operation possible because IsTradeAllowed()==false, even after retries. Any idea why??
+
+--- 帖子 #104 ---
+fukinagashi, My Bag-it EA just developed an error that drained my account in about an hour. For some reason it just kept opening and closing EURCAD trades. So far the EA has worked fine including this currency pair. I'm glad for demo accounts. The EA was profitable until now. This is a DANGEROUS problem. If it was a live account - bad news. The demo is run on an IBFX mini account. The times on the statement in the PDF are GMT. The zip file contains the two log files. Any ideas?
+
+--- 帖子 #105 ---
+I would have liked to try it .... I don't understand the trial period? I was watching this thread when it first started ... just havn't heard the latest. I thought it would be a free to use EA .... ? IMO Thanks, ut2DaMax
+
+--- 帖子 #106 ---
+haha, so kawaii guy. Konnichiwa, thanks for the great job.
+
+--- 帖子 #107 ---
+I found also that error: at some point it started opening and closing orders within seconds on eurusd, losing the spread, then stopped this crazy behaviour and continued normally. I think this is very dangerous, it can quickly drain your account, it is not reliable to play this ea on live accounts, especially not having the source code. (note also the fancy '666' signature in the comment!)
+
+--- 帖子 #108 ---
+Hello Fukinagashi! I'm completely new to forex market but I've got some experience in stock's trading before. I like a lot your EA and also Bagovino method because it work simple and anyone can understand it. Also, like many people says, simply things work better than more complicated ones so I’m completely glad to you and Bagovino for share with us yours secrets! After that I would like to suggest you some improvements for your EA regarding money management and trade’s control. Obviously follows are just suggestions and ideas so I will be happy to have your feedback about them. About trading time: do you think that could be possible say to EA day times where is better to avoid to start new trades? (i.e. 30 minutes before news release or so on and also some particular days during week like Monday or Friday) About money management: do you think that could be possible say to EA to check max loss for each day before start a new trade? (i.e. we can fix 600 $ as max daily loss and EA will check if the level has been hit before start a new trade, this with the goal to have major controls on the overall EA work and to preserve equity in event of any EA problem) That's all, hope you will excuse my poor English! Happy pips to you. Alex
+
+--- 帖子 #109 ---
+Any updates on Bag-it? I've been forward testing it on a demo account for 2 weeks and I'm getting great results. So far EVERY trade has been a winner. My $5000 balance has doubled since last Monday! I haven't run into any errors yet. Anyone else have any more information on the errors? Are they being addressed? I'm dying to try this out on a live account but I'd like to test it on a demo for at least 2 weeks with a version that isn't going to malfunction and drain my account! This thread seems to have died down and I'm confused as to why - this EA appears to have enormous potential.
+
+--- 帖子 #110 ---
+That is a server side problem. Try to open a trade manually when that happens and you'll see that this won't be possible neither. Change the server.
+
+--- 帖子 #111 ---
+This oscillation is honestly the worst you can ever have. It happens when the market is active and swings within a small amount of time just to give two opposite signals. This is normally not supposed to happen since I check as well the history of signals before, but it happened. Thats why we fronttest. Long story short: I will protect the v13 against this behaviour, by implementing a timeout. Thank you for remarking and posting this issue!
+
+--- 帖子 #112 ---
+I gave the explanation in Post 1 and repeated and explained it further in Post 15 and Post 47 . I see you seem honestly interested, thus I encourage you to read the thread. (I hope this does not sound rude! )
+
+--- 帖子 #113 ---
+Possible but not foreseen. This brings a rat tail of problems regarding different timezones etc. I had that mess at StrategyBuilderFX and the Hans123 Method &amp; EA and I honestly don't want to get into it agin. Sorry. I guarantee you, if you run any EA on real money, you'll check it hourly if not more frequent . Actually the more superior method of money management is to invest only a certain percentage of the capital (e.g. 2-3%) which can be done by using the parameter "ExtMaximumRisk" (set it to 0.02 and 0.03). Why? Now, I hope you only will use this EA, once you are convinced that it is gaining more money then loosing. So you rather invest consistently small amounts of money, then investing alot and just stop at one point. I should just quickly point out: I do not encourage to use this EA on real money. If you do it, it is utterly at anyones own risk.
+
+--- 帖子 #114 ---
+Hi fukinagashi, thanks for reply! I can understand your position about use of EA with real money, anyway you should know that everyone who play with Forex, Stocks and so on aim to be able to gain real money... Happy pips to you, Alex
+
+--- 帖子 #115 ---
+I'm in. I agree. Live account with 5 minute updates here . The 2 long EURUSD are mine. Everthing else from the time of this post will be made by the Bag courtesy of fukinagashi. Thanks mate.
+
+--- 帖子 #116 ---
+I would guess because risk was 0. Now set to 0.04.
+
+--- 帖子 #117 ---
+Still no trades! Copy experts folder below. Comments please? http://www.wildmonkey.org/fxdd/Bag.jpg
+
+--- 帖子 #118 ---
+I trust Bag-it will spring in to life soon. You can see when it does here . It only allows 15 simultaneous streams so if it doesn't work for you then please try later. And there's some great music playing while we wait.
+
+--- 帖子 #119 ---
+It has been streaming all day with about a 1 minute delay. Hmm... pity there weren't any trades still. Is fukinagashi on holiday? And thanks to everyone who's dropped by.
+
+--- 帖子 #120 ---
+The version 1.3 of Bag-it will be posted soon. I am backtesting the effect of the changes. Stay tuned ... (And yes I admit I was snowboarding this weekend )
+
+--- 帖子 #121 ---
+As to your problem: Diffcult to say. The method does not offer consisten trades. But - since we never know -: You have the smily face in the right top corner? The expert runs 24/24? Do you have error messages in the Expert or Journal tab? (don't be offended by these newbie questions).
+
+--- 帖子 #122 ---
+Glad you're back! Any idea why no trades since loading? Reference above. You watched Bag-it TV yet?
+
+--- 帖子 #123 ---
+Yes, yes and see the previous page for the experts tab image.
+
+--- 帖子 #124 ---
+Thanks for your help elsewhere fukinagashi.
+
+--- 帖子 #125 ---
+Is version 1.3 going to expire to? I just saw this thread and loaded 1.1 but cannot use it
+
+--- 帖子 #126 ---
+... the new one will be out soon - mine's running here . What do you mean you cannot use it?
+
+--- 帖子 #127 ---
+Take a look at the webstream above then look at your Experts Tab - after a few hours you should see something like that. I'll leave my Experts Tab open for the next hour then you can see what I'm talking about. After that it'll switch back to the Trade Tab.
+
+--- 帖子 #128 ---
+You can't use it because it has expired. You need to try 1.2 or else wait for 1.3
+
+--- 帖子 #129 ---
+40 minutes ago it leapt in to action for the first time. Short EURUSD - the only pair it's watching - at 2949. I'm confident it'll be worth the wait. Live profit and loss on Bag-it TV here !
+
+--- 帖子 #130 ---
+Ok, I'll wait to forward test 1.3 then. Do you think by this weekend it will be released? and it won't expire, correct? Thanks
+
+--- 帖子 #131 ---
+Yipppeeeh, it would have been a shame ...
+
+--- 帖子 #132 ---
+Now to our famous version 1.3. It will not trade more often then timeout seconds. I suggest putting the timeout variable to something just below the timeframe, so for H1 this is 3540 (59 min.). Have fun and many pips! I do not encourage to use this EA on real money. If you do it, it is utterly at anyones own risk.
+
+--- 帖子 #133 ---
+Your words are noted. But you've seen my tag. And I'm not really a lover of demos. Cheers mate. I assume if I was to switch now I may expose myself to another trade on the new version? As that may be the case I'll let the current trade run until it is closed by the Bag then switch to the new version.
+
+--- 帖子 #134 ---
+I could not find the timeout variable. My variable set file for v1.3 looks like this: PHP Code Debug = 0 ExtMaximumRisk = 0.00000000 Lot = 1.00000000 GMTDiff = 0 MaxSignal = 1 MAPeriod1 = 5 MAPeriod2 = 12 RSIPeriod = 14 TakeProfitFactor = 0.00000000 StopLossFactor = 6.00000000 trailingStop = 0
+
+--- 帖子 #135 ---
+Will await for the timeframe update Was wondering if trailing stop was a 1/0 variable or do we specify the pips it should trail? Thanks for the great work.
+
+--- 帖子 #136 ---
+I had thought about exiting manually for a profit of $20 at one stage. At 2929 in such a range bound market IMO wouldn't have been bad. This would have allowed me to load V1.3. But I thought I'd let it complete it's cycle just for the exercise. After such a long time resting I thought the Bag needed the run. it was looking a bit flabby. Oh well, c'est la vie. It then opened a trade 3 minutes later in the opposite direction - long - which is down 10 pips as I write. A nice pretty dotted line between the two entry and exit points though and it all went out live on Bag-it TV. Mr F - on the chart it shows a pink triangle. It's at the exit point. I assume that simply means it felt the trade was no longer valid at that point and exited?
+
+--- 帖子 #137 ---
+Great work fukinagashi ! This is my live statement for v1.2: http://www.forexea.com/bagit_12/statement.htm I will set up 1.3 later today and post a link. What is the main difference between v1.2 and v1.3 ? Thank you
+
+--- 帖子 #138 ---
+Well I think Little Bag sneaked in to the lock in on the Chicago PMI numbers. It's recovered and at $10 open profit on the long.
+
+--- 帖子 #139 ---
+Bag those pips Bag-it!
+
+--- 帖子 #140 ---
+That's here .
+
+--- 帖子 #141 ---
+Long exited at the low for the last hour for 22 pips. The hi was anoter 27 pips. Ok with me as it'll probably retrace now. Currently 3004.
+
+--- 帖子 #142 ---
+I'd short EURUSD now at 3004 still. But then I'm not so I won't.
+
+--- 帖子 #143 ---
+Take a look at the attatchment. It certainly does a lot.
+
+--- 帖子 #144 ---
+My little Bag are you listening? This thread is dedicated to you so I know you read every word! MA isn't there yet but I am confident you'll leap in to action while I'm asleep. Retrace now please EURUSD - I want to give the Bag something to do.
+
+--- 帖子 #145 ---
+Thank you. Can you post what each setting does and if it is to be put as a price value or percent value ? Thanks
+
+--- 帖子 #146 ---
+Where is timeout variable ?
+
+--- 帖子 #147 ---
+I don't think it's there - nvwine asked about that on the previous page. I'm still running the previous version until we get some clarification from Bag's dad, Mr. F.
+
+--- 帖子 #148 ---
+Oh, I just checked, it is in there. I just did not define it as extern. Are you guys interested in having access to that variable?
+
+--- 帖子 #149 ---
+Yes please. I just sent you an email on that very subject Mr F.
+
+--- 帖子 #150 ---
+I think she's trying to go short. It does make sense if that's what she wants. 10:00:10 Bag-itv12 EURUSD,H1: OOPSell: 0.00000000 OOPBuy: 0.00000000 10:45:17 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30080000 sl:0.00000000 tp:0.00000000 10:45:17 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 10:45:17 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30070000 sl:0.00000000 tp:0.00000000 10:45:17 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 10:45:22 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30080000 sl:0.00000000 tp:0.00000000 10:45:22 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 10:46:49 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30080000 sl:0.00000000 tp:0.00000000 10:46:49 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 10:46:49 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30070000 sl:0.00000000 tp:0.00000000 10:46:49 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 10:47:04 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30080000 sl:0.00000000 tp:0.00000000 10:47:04 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 10:48:04 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30090000 sl:0.00000000 tp:0.00000000 10:48:04 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 10:59:54 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30090000 sl:0.00000000 tp:0.00000000 10:59:54 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:00:58 Bag-itv12 EURUSD,H1: OOPSell: 0.00000000 OOPBuy: 0.00000000 11:45:48 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30130000 sl:0.00000000 tp:0.00000000 11:45:48 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:46:59 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:46:59 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:47:39 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30130000 sl:0.00000000 tp:0.00000000 11:47:39 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:48:33 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30130000 sl:0.00000000 tp:0.00000000 11:48:33 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:48:33 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:48:33 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:48:49 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:48:49 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:49:16 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30110000 sl:0.00000000 tp:0.00000000 11:49:16 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:51:35 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30110000 sl:0.00000000 tp:0.00000000 11:51:35 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:52:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30100000 sl:0.00000000 tp:0.00000000 11:52:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:52:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30090000 sl:0.00000000 tp:0.00000000 11:52:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:53:10 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30090000 sl:0.00000000 tp:0.00000000 11:53:10 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:53:10 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30100000 sl:0.00000000 tp:0.00000000 11:53:10 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:53:17 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30100000 sl:0.00000000 tp:0.00000000 11:53:17 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:54:40 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30100000 sl:0.00000000 tp:0.00000000 11:54:40 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:57:25 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30110000 sl:0.00000000 tp:0.00000000 11:57:25 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:58:00 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:58:00 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:58:00 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:58:00 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:58:32 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30130000 sl:0.00000000 tp:0.00000000 11:58:32 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:59:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:59:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:59:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:59:01 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 11:59:21 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.10000000 lots @1.30120000 sl:0.00000000 tp:0.00000000 11:59:21 Bag-itv12 EURUSD,H1: OrderSendReliable V0_2_3:error: IsConnected() == false 12:00:32 Bag-itv12 EURUSD,H1: OOPSell: 0.00000000 OOPBuy: 0.00000000
+
+--- 帖子 #151 ---
+Looks like you simply had connection problems. Lux
+
+--- 帖子 #152 ---
+You're right. Just loaded the new version and it shows a timeout. It must be a problem with FXDD because Bag-it TV is streaming fine. Anyway since reloading FXDD all looks ok. No more timeout.
+
+--- 帖子 #153 ---
+Could you kindly clarify what this means? It appears to suggests that the EA will allow up to 3540 individual entries/exits per hour (assuming entries and exits occur in under a second). Is this correct?
+
+--- 帖子 #154 ---
+Hello Why Oh Why, Did you mean that your version now has the timeout variable declared as external? Looking forward to testing out 1.13 but since I do not know the default value I'm apprehensive about loading it. Regards
+
+--- 帖子 #155 ---
+Not me. I just post a fair bit here. Easy mistake sir. I wish I had the patience to learn the language though. Who knows. Maybe one day.
+
+--- 帖子 #156 ---
+No, wrong. Guess again.
+
+--- 帖子 #157 ---
+Wow, speaking about obvious. At the moment when the system tried to send an order, it was not connected. If you scroll all the way up, you probably find a "'xxxxx' login (4.0 ..." "'xxxxx': connect failed [No connection]" "'xxxxx': ping failed" You can have alot of reasons for that. If that happens regularily and you otherwise have an ok connection to the internet, I would change the broker if I would be you.
+
+--- 帖子 #158 ---
+It seems to mean something to you to have a timeout variable which you can actually touch, change, smell, taste ... so let me help you here. But in the end of the day this variable is so unimportant. It just keeps you system from closing and opening orders and the speed of light draining your account. It is almost unimportant how long the timeout is.
+
+--- 帖子 #159 ---
+Live statements: v1.2: http://www.forexea.com/bagit_12/statement.htm v1.3: http://www.forexea.com/bagit_13/statement.htm
+
+--- 帖子 #160 ---
+Cant change RSI, seems stuck on 21. Also, just for the sake of argument, and I know how you feel about stops and all that fukinagashi. I think a hard stop should be in there somewhere if nothing more than a safety net. These are computers, and internet, and they both do strange things. If I had a hard stop of even 100 on the broker side I would at least know that if my PC crashed, internet went out, whatever, I wouldn't loose my ass off. I ran servers for years in managed data centers with redundant backup, and those even went down on occasion. And as far as stop hunting, who cares with a 100 stop. If its that close, just pull the trigger and end my misery. I wouldn't care if it was an int or not, just something.
+
+--- 帖子 #161 ---
+Ta Mr F. I may do that.
+
+--- 帖子 #162 ---
+Just went short - and that is exactly what I would do. Great minds think alike!
+
+--- 帖子 #163 ---
+Thanks for sharing.
+
+--- 帖子 #164 ---
+WhyOhWhy, Which verison of BAg EA are you using now? Thanks shah
+
+--- 帖子 #165 ---
+8 pip loss and waiting again.
+
+--- 帖子 #166 ---
+Hi Shah - you saw it yesterday on Bag-it TV top right corner - thanks for dropping by. But just for you here V1.29. I understand the only difference between that and 1.3 is it has more detailed Debug Information. Is that correct Mr F? Bag is surfing at the moment, relaxing. Left the office because of NFP in 90 minutes. It made that decision itself as you can see on Bag-it TV - I've opened the experts tab for anyone that wants to look. Currently disabled.
+
+--- 帖子 #167 ---
+Wow. Whenever I come across this kind of response to a reasonable question based on insufficient or poorly communicated information, it's a VERY clear signal to exit. I'm out of here!
+
+--- 帖子 #168 ---
+In fairness, IMO, he was joking and I believe he answered the question later anyway. It's the sort of thing I might post on a chat board if I was busy at the time. But I'd make sure I'd answer the question later which I think he did. And, of course, it's all free so I guess we just make our choices and do what we want. Mr F, you and me. For my money I appreciate the work that all EA developers do. And if the question was answered later - I'm really not sure - then, Sir, IMO, most would treat it as the joke it was intended as.
+
+--- 帖子 #169 ---
+A 50 pip spike would of caused the earlier short loss to be a lot more if Miss Bag stayed alive during the NFP.
+
+--- 帖子 #170 ---
+Now with an 80 pip retrace? Any idea Mr F? Would the stop have acted on the 50 pips spike north?
+
+--- 帖子 #171 ---
+Hello everybody! Yesterday morning has happen something wrong with BAG-IT V.1.2. As you can see here http://agos.741.com looking at mine Interbank account BAG-IT has done many entry/exit operations, starting from 8.45, loosing a lot of money . Someone know the reasons? Looking at graph seems that BAG-IT has been triggered many times due to the fact that MM cross themself continuously and also RSI value was near / crossing continuously level 50. Has V.1.3 a filter or so on to avoid this problem? Any suggestions? Thanks a lot for attention. Alex
+
+--- 帖子 #172 ---
+Fukinagashi said the problem was fixed on v1.3 Read post #s: 104, 111, 132, 148, and #158 to see the progression of v1.3b and the fix of the problem I think you are speaking of. Since we just started testing the new version it is hard to tell if other problems will surface but so far it has worked fine for me. Including the close of all positions before NFP.
+
+--- 帖子 #173 ---
+Sweet!
+
+--- 帖子 #174 ---
+Sorry, when you asked me if I was sure you were joking. Obviously an EA which trades that often is not only useless but dangerous and will very likely get you banned from your broker. 3540 is the number of seconds (59 min.) timeout between two trades. But that I explained in post 132.
+
+--- 帖子 #175 ---
+Odd, I am going to check on that. I agree with you, it will be implemented in the next mini release. It will be established as a LastStandStopLoss. You consider that as well necessary for the TakeProfit?
+
+--- 帖子 #176 ---
+Thanks fukinagashi As far as the TP, thats up to you. I don't know your close logic other than bags original, but it doesn't seem to follow that. I did some testing and had some strange things happen with entries going the wrong way. When I get home I will replicate them and post a pic, thats the only way to fully describe it.
+
+--- 帖子 #177 ---
+Here are my settings. Why does the EA not obey my lot sizes? Thanks Debug=0 ExtMaximumRisk=0.40000000 Lot=0.10000000 GMTDiff=2 MaxSignal=1 MAPeriod1=5 MAPeriod2=12 RSIPeriod=14 TakeProfitFactor=1.00000000 StopLossFactor=6.00000000 trailingStop=15
+
+--- 帖子 #178 ---
+Read the first post. It will explain how 'ExtMaximumRisk' and 'Lot' interact together.
+
+--- 帖子 #179 ---
+Some strange things.... http://img184.imageshack.us/img184/6...4721aj8.th.jpg http://img260.imageshack.us/img260/9...5012qd3.th.jpg http://img292.imageshack.us/img292/6...5616lk7.th.jpg http://img61.imageshack.us/img61/477...5924ct0.th.jpg http://img506.imageshack.us/img506/1...0147uo9.th.jpg I scanned Cable for the last year and had those along with a few more. It is obvious that you dont close on a cross. I have to agree that you would get whipped to death doing that, and have ran an EA directly to Bags rules to show. That has been a while though. Sh*t, I have to read Bags rules again. Does he close on RSI or MA cross? To many systems im messing with Anyway, I didnt see where a 100 pip SL would have gotten out of big trades anywhere, but thats just visually, could be even lower, and im sure you know the answer already I am just confused as to your rules for entry and exit, and trying to refine them a little. Im not downin this EA, cause it makes a shitload of profit. Its just everytime i think I have it figured out, it throws another curveball.
+
+--- 帖子 #180 ---
+Little Miss Bag is now ready to go on EURUSD and GBPUSD. Have a great week everyone.
+
+--- 帖子 #181 ---
+Hi, 1. What lot sized did you expect? 2. What lot size happened? 3. What lot sizes are you allowed? =&gt; run the script from here http://codebase.mql4.com/972 and post the results.
+
+--- 帖子 #182 ---
+6 hours ago with a profit the current hour to 88 pips and currently showing 55. Let it roll. It's on GBPUSD - I haven't a clue why I let it run today on cable. Bit of luck I guess. Still no trades on EURUSD this week.
+
+--- 帖子 #183 ---
+Open profit now 75 pips.
+
+--- 帖子 #184 ---
+And now back at 75. Still no EURUSD trade.
+
+--- 帖子 #185 ---
+Here result for last wk trades , default setting TLS 30 pips V13b version canceled trades please disregard , bcz EA did not oppened this trade ,I placed manually and deleted manually . very interesting EA , I will keep testing this EA runnnig 24days 5days a wk . thanks for this EA fukinagashi
+
+--- 帖子 #186 ---
+ops forgot trade results .
+
+--- 帖子 #187 ---
+For 57 pips. Set to 27. 3 pips above low for that hour. A 31 TS would see the trade still open with another 37 pips profit still open at this time. Still happy. Bag TV offline for another 20 minutes.
+
+--- 帖子 #188 ---
+Added USDJPY to GBPUSD and EURUSD. Also added Vegas 1 hour indicator from here . Back in short on GBPUSD by the Bag at 9686 just now.
+
+--- 帖子 #189 ---
+Deleted Vegas due to small chart windows. It doesn't bring much to the table for display purposes here. It needs to be on a full screen chart.
+
+--- 帖子 #190 ---
+Hi, I was expecting my set lot size of 0.1 but I got 1.40 Does 1.3b expire? Also, can you explain what the other settings in the EA do? EDIT: I see where I went wrong ExtMaxRisk Thanks
+
+--- 帖子 #191 ---
+At the time of the announcement GBPUSD was back to Miss Bag's entry point from yesterday and this open trade is now at +81 pips. TS 27 for a guaranteed profit now of 54 pips. There won't be much more in it now so I'll let it close itself on the retrace.
+
+--- 帖子 #192 ---
+If it gets to 108 pips - unlikely - then the TS moves to lock in 81. We'll see. I'm committed to just letting Miss Bag look after herself so I'll be happy with 54. I hope she'll prove me wrong - I've exited elsewhere already.
+
+--- 帖子 #193 ---
+Does 1.3b expire? Also, can you explain what the other settings in the EA do? Thank you
+
+--- 帖子 #194 ---
+To lock in 81. Currently 9590.
+
+--- 帖子 #195 ---
+This EA doing great trades . Hope we can see stop loss setting option in the next version , bcz interbank connection is not good , so if there is No sl is very dangerous when lose server conection .
+
+--- 帖子 #196 ---
+TS now locked in 81. Open profit 101 pips ATM. Next target 9551 - currently 9585. No chance.
+
+--- 帖子 #197 ---
+Agreed. But an option only Mr F when you look at this. The way it works on SL is fine for me.
+
+--- 帖子 #198 ---
+Miss Bag opened short at 9686 and low on the hour was 9575 - 111 pips. TS 27 for GBPUSD - should Miss Bag have moved the TS to 9605? 3 x 27. 30 pips away from the low? Enough for the TS of 27 to move in. Or am I missing a variable here? It retraced to a profit of 79 pips but didn't close. I then closed it manually at 9597 for a profit of 89 pips. What would the TS have been at? Any ideas please?
+
+--- 帖子 #199 ---
+By closing her when she's not ready? Most women get upset when you interrupt their flow. Is she still watching or sulking? Should I buy her some chocolates or something. Maybe a new laptop?
+
+--- 帖子 #200 ---
+Now at 9577! I didn't see that coming today. She knew something I didn't. Any ideas on the above Mr F when you're here would be much appreciated.
+
+--- 帖子 #201 ---
+tell me please, what time this EA will expire?
+
+--- 帖子 #202 ---
+New long EURUSD just opened.
+
+--- 帖子 #203 ---
+Why Oh Why can you please explain me how Sl and TP works ?
+
+--- 帖子 #204 ---
+If that's a general question you need to be here . If it's specific to this EA say that and the author will reply in due course.
+
+--- 帖子 #205 ---
+The EA is braver than me! I wouldn't fancy going long at the moment! Best I can hope for is a break even on this trade IMO. EURUSD is too range bound for the next few weeks. Currently at break even. It needs to move 24 pips north to get 12 - I've amended the TS to 12 just until this trade closes. Will that work Mr F?
+
+--- 帖子 #206 ---
+Looking good for a quick profit.
+
+--- 帖子 #207 ---
+WHAT DOES IT STAND FOR? WHAT IS IT? THANXS.
+
+--- 帖子 #208 ---
+WHAT IS AN "EA" THANXS
+
+--- 帖子 #209 ---
+?
+
+--- 帖子 #210 ---
+So this was a volatile time - UK interest rate. Any idea how far the TS would have gone back to? The TS was set to 27. Does that setting matter. Please, what impact does it have?
+
+--- 帖子 #211 ---
+The current open EURUSD trade status can be seen here together with closed profit on GBPUSD today and all Bag trades to date. Thanks Miss Bag and Daddy Mr. F.
+
+--- 帖子 #212 ---
+EUR/USD lost me $36 today Settings; Debug=0 ExtMaximumRisk=0.00000000 Lot=0.10000000 GMTDiff=2 MaxSignal=1 MAPeriod1=5 MAPeriod2=12 RSIPeriod=14 Timeout=3540 TakeProfitFactor=1.00000000 StopLossFactor=6.00000000 trailingStop=10 What do these do? TakeProfitFactor=1.00000000 StopLossFactor=6.00000000
+
+--- 帖子 #213 ---
+RSI 60 currently. Cross divergence remains. 3036 high for last month. Currently 3030 for 8 pips. I'm assuming TS12 has moved to break even. Not sure. I may exit manually soon if it goes much in to loss. Any pips are a bonus IMO on this one when near the high of such a tight range.
+
+--- 帖子 #214 ---
+See post #1 Par. 5
+
+--- 帖子 #215 ---
+A 12 pip range for the last 6 hours on EURUSD. Currently 18 pips open profit at 3040. Mr F, "...during times of low volatility the Stops are much more sensitive and close." Please can you give me a best guess TS at this point. I've set it to 12. Sorry about all the questions today, I'm just trying to get a better understanding after my earlier confusion.
+
+--- 帖子 #216 ---
+I personally find a trailingstop of 10 very short, independent which system you will use. I know it feels good when the SL is at BE, but I assure you you will blank out toooooo many good trades this way. And then only the bad trades will make all you performance.
+
+--- 帖子 #217 ---
+I know the trade fits the method but the reasons are above. But I'm letting it run and I want Miss Bag to exit just on this trade ASAP. But will it exit or vary the TS as it did earlier? Any ideas? Miss Bag opened short nine hours ago at 9686 and low on the hour was 9575 +111 pips. TS 27 for GBPUSD - should Miss Bag have moved the TS to 9605? 3 x 27. 30 pips away from the low? Enough for the TS of 27 to move in. Or am I missing a variable here? It retraced to a profit of 79 pips but didn't close. I then closed it manually at 9597 for a profit of 89 pips. What would the TS have been at? Any ideas please?
+
+--- 帖子 #218 ---
+Relevant to query above.
+
+--- 帖子 #219 ---
+Hehe you are my favorite customer ... so don't worry. Even if you scare me with your real money trades . TS of 12 is very low.Mind you the TS is the good old standard TS in pips. This is completly illogic, until you make your own experience trading. At the beginning you think TS is the best thing ever until you see how many good trades get destroyed during their retracements, Best guess in my personal experience is to leave TS at 0. Sorry. The SL/TP is a different Story. ATM we have an ATR(14) H1 of 0.0014. If you use the default, you have a SLFactor of 6. That means at this very moment the SL is 84 pips away from the price at which the order was entered. During later night the ATR goes further down to 8 and even 5, so you'll end up to with a very tight SL of 48/30 pips. During the day, the SL increases again. Through a mad dash day, it might get 100/150 pips wide. It sounds scary and yes it CAN get bad, but my testing and my experience showed me, that this is the best possible SL.
+
+--- 帖子 #220 ---
+And now see post #219
+
+--- 帖子 #221 ---
+TS now at 0 - including EUSUSD. Just overnight. For that trade only I'll review it again in our morning. This is a long shot to turn this trade in to closed profit IMO. But I'd hate missing out on an upside breakout more than losing 48 or 30 pips if it turns around as I think it will. We'll see - Miss Bag ain't done too badly today so far. I have a SLFactor of 6 on all three Bag watches. I'm going with your testing and experience that this is the best possible SL. Thanks for your help.
+
+--- 帖子 #222 ---
+Ok, thank you. also, is the new 1.3b version going to expire to?
+
+--- 帖子 #223 ---
+My point was Miss Bag opened short 11 hours ago at 9686 and low on the hour was 9575 for an open profit of +111 pips. TS 27 then for GBPUSD - should Miss Bag have moved the TS to 9605? 3 x 27 (9575 + {3 x TS}). 30 pips away from the low? Enough for the TS of 27 to move in. It retraced to a profit of 79 pips but didn't close. Do you see what I'm getting at Mr F?
+
+--- 帖子 #224 ---
+Are you sure TS should be 0? What are the other recommended settings? Thanks
+
+--- 帖子 #225 ---
+0 is fine matrix. The trade above was closed by Miss Bag for -1. I was expecting a loss of 30. There was a 16 pip range for the last 12 hours on EURUSD. I did think about closing at 18 pips open profit at 3040. But Mr F wrote "...during times of low volatility the Stops are much more sensitive and close." I went with his view and left Miss Bag to it more as an exercise than anything else. Simply, it worked far better than I thought it would. Well done Miss Bag. A one pip loss is, for my purposes, in such a range bound market, outstanding. Bag-it TV is offline until Monday for maintenance. Thanks to everyone that's dropped by. Have a great weekend all. Bag-it has bagged 141 pips to date. Statement updated every 5 minutes here .
+
+--- 帖子 #226 ---
+Hi Fuki, really tricky SL..... ----That means at this very moment the SL is 84 pips away from the price at which the order was entered.----- But do you really mean xx pips away fom entering the order? That doesnt work ??? Or I dont understand ;-) GBPUSD opened @1.9686 Later I had 1.9577 with ATR 34 x6 = 204pips away from entering SL should be 1.9482 ??? Where is my error ??? Chievo
+
+--- 帖子 #227 ---
+Entered EURUSD short at 3010 for ATM 16 open pips. My kinda girl.
+
+--- 帖子 #228 ---
+I still don't see how TakeProfitFactor=1.00000000 and StopLossFactor=6.00000000 work. Please explain again. Not sure about some of the other settings but I'll just leave at default I guess. also, does 1.3b expire? What indicator does it use if any? Thank you
+
+--- 帖子 #229 ---
+Six hours ago with an open profit of 24. Bag-it TV now back online until market close.
+
+--- 帖子 #230 ---
+Hello WoW... Can you tell me were did you have find you php code to present your statement like that ? Thanks in advance.
+
+--- 帖子 #231 ---
+Hi Fuki, Thanks a lot for your job. I love Bagovino method and follow it manually for some time. I just discover this thread today. I'm currently testing Bago EA written by AHA. He said it didn't stick to the real Bago rules as he didn't use filters such as Vegas tunnel to filter trades. Did you took this into consideration or it's just Ema crossing and RSI cross ? I know you're talented programer as you helped me a yr ago programming an Ea and I hope you're EA will be able to reproduce good results we have manually. I will test it forward and post results and maybe I could participate in improving it. Thanks again for sharing. Thierry
+
+--- 帖子 #232 ---
+It just publishes like that in FXDD. Sorry, I don't know anything about php.
+
+--- 帖子 #233 ---
+ok thanks...
+
+--- 帖子 #234 ---
+hi all why oh why, what setting are you using for testing? i see the default RSI 14 are you using that or are you setting it to 21? thanks and a big thanks goes to fukinagashi for creating this EA i'll be forward testing this next week and i'll post the results...
+
+--- 帖子 #235 ---
+I am using the the default RSI 14. Bag TV updated. I see why you asked. Thanks.
+
+--- 帖子 #236 ---
+hi there thanks for the replay, was wondering if using 21 would make a difference, i'll try to test both and see if one works better than the other..
+
+--- 帖子 #237 ---
+You're welcome. 14 lags 21 by about 2 points. Entry is later. Better confirmation, perhaps?
+
+--- 帖子 #238 ---
+fukinagashi, It was a good week for this EA. No complaints or new suggestions this week just congrats and thanks. Have a good time snowboarding next week.
+
+--- 帖子 #239 ---
+141 closed pips profit and 4 open pips. I'm just glad I'm still here. Ta Mr F. I know - risk management for me is zero. I really don't care. Why ?
+
+--- 帖子 #240 ---
+I also had a good week with v1.3b
+
+--- 帖子 #241 ---
+Mr. Fukinagashi gbp long is now 93pips loss, anyone have same result ? sl 84pips still not working . long 19544 gbp/usd . Also we have sell chf 12474 , 63pips loss still open , also sell euro 12980 20pips profit . Could u please let me know your EA position?
+
+--- 帖子 #242 ---
+But you can always check my staus here katiya. Open GBPUSD currently 67 pip loss.
+
+--- 帖子 #243 ---
+Fukinagashi Is that possible place SL and TP imput option on next version ? gbp long closed just now with 150pips loss
+
+--- 帖子 #244 ---
+Today currently +103 pips open profit. Both on GBPUSD.
+
+--- 帖子 #245 ---
+Currently +180 pips. No trades on USDJPY since I added it a week ago. I'll have a look at potential entries - if any - later. But in the meantime has anybody else had a USDJPY trade? Miss Bag is only watching EURUSD, GBPUSD and USDJPY. I've just moved over to wi-fi where I am currently and it's changed my IP addresses and mucked up Bag TV. So that's offline at the moment until I get it sorted. If anybody knows how to sort it out I'll be stating the exact problem here in the next few hours so as not to detract from the business in Mr F's thread. Have a great day everyone and thanks for a great EA Mr F.
+
+--- 帖子 #246 ---
+Hi there WOW; I 'm using Fibo Group Mt4 platform and on the 12th it did open a sell at 121.67 and it is still open at 120.03. again a big thanks goes to the creator of this EA Mr. F
+
+--- 帖子 #247 ---
+Here is my statement for Bag-it i started a few days ago. I hesitate to cut USDJPY loss yesturday as it was obvious it was going wrong way, but I decide to let EA run on his own. looks good so far. Thanks to Fuki !!!! Thierry
+
+--- 帖子 #248 ---
+Any ideas why for yasir and not me Mr F? Apart from 1 reboot since the 12th Miss B has been watching USDJPY full time. I'm on FXDD MT4.
+
+--- 帖子 #249 ---
+Thanks Yasir. Any ideas Mr F?
+
+--- 帖子 #250 ---
+I don't really expect you to reply within 3 minutes! I got an overloaded server message back from FF and I didn't think the previous post got published.
+
+--- 帖子 #251 ---
+I'll have a look.
+
+--- 帖子 #252 ---
+I am on Neuimex with same result ( sell on 12th @121.66)
+
+--- 帖子 #253 ---
+It must be an issue with me or FXDD then. I'm glad everyone's got bundles of open profit there then. Thanks everyone again who replied. Current open GBPUSD for me is +195 pips. Is everyone on that as well?
+
+--- 帖子 #254 ---
+Remember fukinagashi is on holiday. Snowboarding. So it may be a few days. Maybe next week.
+
+--- 帖子 #255 ---
+I thought the SLwould have kicked in by now - just dropped 90 pips! I'm gonna let her run still - she's nearly got as bigger balls as me! Open profit 105 pips.
+
+--- 帖子 #256 ---
+WOW; Your welcome, i have it running on IBFX also and it did too open a trade on JPY around the same price, i think this has something to do with FXDD!!
+
+--- 帖子 #257 ---
+Are you guys saying that Bag-it doesnt perform as well in FXDD? whyohwhy how about trying to increase the slippage? I think FXDD has high slippage... -Mikhail
+
+--- 帖子 #258 ---
+Still no SL hit and open profit now down to 58 pips. Anybody else? What's the setting for Miss Bag's slippage Mik? Thanks for the ideas guys. Any GBPUSD trades closed in the last 6 hours for anyone. If so, I'd appreciate your settings!
+
+--- 帖子 #259 ---
+I have no idea, just a suggestion... I'm not using this EA. sorry. -Mikhail
+
+--- 帖子 #260 ---
+WOW i closed the GBP maually before the drop just see what happens, and guess what, it opened a sell and it is in profit +33...
+
+--- 帖子 #261 ---
+But I did consider it. But thanks guys. For me it defeats the object of the exercise. But I'm not surprised it went short because there would have been a signal to enter immediately based on Bagovino. Well done Yasir. I just want to get sufficiently confident to go to normal lot size. I'll never do that if I muck it about with manual exits - although, clearly, I should have if money was the issue. It's been profitable for most here - including myself - and I want it to prove profitable over a few months and then we'll increase the lot size. But I will not touch it. And Miss Bag will get most upset if I interrupt her in mid flow. You never know, she might know something we don't. But she's got some work to do now to make up for a missed 100+ pip closed profit AND the short position profit she would have got in to if she'd exited with that 100 pips. Even at that level she was still giving back more than 90 pips! Currently +55 open pips. Negative overnight? That would take the biscuit!!
+
+--- 帖子 #262 ---
+I'm running 10 pairs on IBFX mini demo...open trades at this point: usdchf - +152 audusa - +104 eurusd - +101 eurchf - +16 usdjap - -181 gbpjpy - +248 eurgbp - +14
+
+--- 帖子 #263 ---
+I checked my trades and the GBPUSD long closed on 5 out of 5 platforms. I included 3 reports from different servers and the set file in the attached zip. The settings for the set file are the defaults I think and are the same on each platform except for the GMT number. That only effects NFP anyway. Note I am running EA v13 not v13B on all platforms.
+
+--- 帖子 #264 ---
+Exited manually for 47 pips. Goes against what I want to do here but, for me, based on what is happening for everyone else reporting, there is clearly an "error" of sorts. I'll wait for Mr. F to have a look at the debug file. In the meantime Miss Bag's back to watching EURUSD, USDJPY and GBPUSD. I'll check settings my end again as well. And what great results for everyone!
+
+--- 帖子 #265 ---
+Is anybody else publishing auto update results like Mr F's here and mine below? If so, please let us know and I think it will be useful for us all as for confirmation.
+
+--- 帖子 #266 ---
+How do I automate my result? I have my own website ... I would do it if I know how. PM me please.
+
+--- 帖子 #267 ---
+Bag-it v1.2: http://www.forexea.com/bagit_12/statement.htm Bag-it v1.3: http://www.forexea.com/bagit_13/statement.htm
+
+--- 帖子 #268 ---
+Hi, tomstaufer! What settings do you use for Bag-It 1.2 and 1.3?
+
+--- 帖子 #269 ---
+hi tomstaufer, i would also be interested in the settings, but are you using V 1.3b or just 1.3? thanks
+
+--- 帖子 #270 ---
+I am using 1.2 and 1.3 not 1.3b. All on H1. FXDD is GMT+2 so GMTDiff=2. Attached set files.
+
+--- 帖子 #271 ---
+hi, Bagit can be run with others EA ? is there a magic number ? thanks
+
+--- 帖子 #272 ---
+Looking at the closed orders in the history tab i can see it says "Id 666" so i guess this is the id (magic number).
+
+--- 帖子 #273 ---
+Hi There, Read your post &amp; I'm interested in your EA... seems to be working... can you direct me on how I can get a copy. Thanks Ralph
+
+--- 帖子 #274 ---
+tomstaufer..can you plz attache the link where we can get those 2 EA's tia
+
+--- 帖子 #275 ---
+Look at the following pages and posts in this thread: p6 #82 p9 #132 p11 #158
+
+--- 帖子 #276 ---
+I had another good week with Miss Bag. This my statement from the last two weeks with version 1.3b. I use default settings except for ExtMaximumRisk is set at 1.0.
+
+--- 帖子 #277 ---
+Thanks alot ..
+
+--- 帖子 #278 ---
+Is there any genius here who can create a simple way of reporting results in to a database which then displays our cumulaive results in a nice simple web page hosted somewhere. Would anybody report in such a way? For my part, I can´t provide the technical know how but I can provide unlimited space on my servers. I´m thinking of maybe an htm page with an upload tool like here, maybe excel, then the db automatically sorts it out. For my part I just hate looking at different formats, attached excel files here, zips there, etc. Life needs to be easier IMO. It would create a more accurate picture overall. Just a thought.
+
+--- 帖子 #279 ---
+hello Ive started forward testing this EA starting today. whats the "dubug" external variable for? and anybody in the GBPUSD trade right now? I see the EA tried to open trade at 1.9541 but failed to open trade. im using FXDD -Mikhail
+
+--- 帖子 #280 ---
+It creates a file if there's any errors with the EA. I'm not in gbpusd but it did judt go long usdjpy.
+
+--- 帖子 #281 ---
+hi, yes mine also just opened usdjpy. This EA is scary without a visible Stoploss. What if I lose my internet connection or something... Will miss bag get angry if I put SL? -Mikhail
+
+--- 帖子 #282 ---
+Guys! Is it worth forwardtesting Bag v1.2? It is not important to use Trailing stop, as there is not one in Bag v1.3?
+
+--- 帖子 #283 ---
+v1.2 is expired. My v1.3 has a TS. I have not tested it.
+
+--- 帖子 #284 ---
+will v1.3 expire?
+
+--- 帖子 #285 ---
+Mhhh, it seems to be common feeling that my EA is female :-). No, it will not get angry. The next version of Bag-it will even offer visible SLs. I think though you will loose some of the performance when you do that.
+
+--- 帖子 #286 ---
+I trust that you already checked if you had any error messages, so the only other reason is a constant song I sing: Different datafeed causes different indicator behaviour causes different signals causes different trades :-) . (Free after Gertrud Stein "Sacred Emily") It is interesting how Team Alphid made it clear that their Backtests of the BAT method were done with Alpari data and they only discuss its past performance on that data. I have made the same experience. You have 6 different Brokers and you will have 6 different results.
+
+--- 帖子 #287 ---
+Thank you, I would love to see that SL, I keep checking my charts not knowing what my real risk exposure is. Thank you for your work here. Best Regards, Mikhail
+
+--- 帖子 #288 ---
+Many have asked but have not received an answer yet. Hope not, still forward testing.
+
+--- 帖子 #289 ---
+Tada! Version 1.4 Changes: You can now set up fixed StandardSL (in Pips), which will be visible and is ... fix. The feature of my flexible SL is still active, so a position can be closed before the SL is reached, if the systems thinks it is appropriate. Overall I assume that the performance will rather drop if you activate the StandardSL (&gt;0) feature, but I agree that an SL is necessary. No I have no idea what SL would be appropriate, the life test will remain with no fix SL. MagicNumber and Slipage are now parameters which can be changed The bug with the RSI being fix at 21 is fixed The expiry will be 01. May 2007
+
+--- 帖子 #290 ---
+Got expiry date?this EA ain't free?
+
+--- 帖子 #291 ---
+Time of this post 09:15 GMT. Has anyone had any trades opened by v1.4 yet? On IBFX demo and live accounts v1.3 has opened: Buy USDCHF at 03:53 GMT Sell NZDUSD at 08:46 GMT On IBFX demo and live accounts v1.4 has opened no trades. On another brokers demo no trades either. v1.4 has been running since before 23:00 GMT yesterday. Also will v1.4 take over management of trades opened by v1.3 or do I need to close them and start over.
+
+--- 帖子 #292 ---
+I would assume not but I might be wrong. I'm still on 1.3 for gbpusd, eurusd and usdjpy only. The last 2 are open now.
+
+--- 帖子 #293 ---
+Miss Bag's upset and tells me I've got to put some more money in my account. 4 seconds after the short EURUSD a few hours ago she wanted to go short as well on GBPUSD. It didn't open due to FXDD's margin requirements. C'est la vie. I'd have preferred it the other way round. USDJPY long looking good at +57 pips.
+
+--- 帖子 #294 ---
+Hi, fukinagashi: Don't stop testing the version v1.1 Ea in your WEB, your statements in your WEB isn't fresh now. I want compare it with version 1.3 and 1.4 .Because one has no SL, another has SL.
+
+--- 帖子 #295 ---
+v1.4 has an error. After some sleep I still have not had any trades. It is 7 hours after the last post I made. A look at the experts tab shows the problem. I must have not read the experts and journal tabs properly before my last post. fukinagashi, Look at the PDF v1.4 is trying to place orders with invalid stops. I used 70 or 90 for the preset stop on the attempted orders shown. This problem exists in my mini and full size accounts.
+
+--- 帖子 #296 ---
+Thank you, that was what I was missing! Since I did not try the SL I did not see, that the SL is calculated inverse. It is fixed now. I would like to encourage you all, when you have odd behaviours, to check and eventually post your log files.
+
+--- 帖子 #297 ---
+Could you please rephrase your request? I have not the slightest Idea what you say.
+
+--- 帖子 #298 ---
+Yes, this EA has an expiry date. It is free. You can use it freely. You can share it with others. I did not ask for money. The expiry date only keeps people from using old versions and it helps me one day, when the thread gets all quite to estimate if there are still people out there using it.
+
+--- 帖子 #299 ---
+that mean i still can continue using this EA even this EA is expired right?
+
+--- 帖子 #300 ---
+I,m getting quite attached to your EA's. I have 1.4b on my charts now and awaiting first trade. I have existing 1.3b trades still working. My question is,down the road if this thread ends(hoping it doesn't) will we be left with an EA without an expiration date? Thank you so much for all the versions you've shared with us so far!
+
+--- 帖子 #301 ---
+Sure you can use it, but it won't open new trades. I repeat myself Is it really that diffcult?
+
+--- 帖子 #302 ---
+I won't let you down, if that is your worry. One guarantee: Regardles how the outcome of this thread / project / EA is, everyone who constructivly participates will have a version, which will be unlimited. Please people trust me in this: If I base an EA on someone else's method, then I am honorable enough to not make money on that.
+
+--- 帖子 #303 ---
+hi fuki, thanks for your EA, i'm going to test it. I will backtest and forward test it. Tell me how i can help your ?
+
+--- 帖子 #304 ---
+I'm also started forward testing (IBFX, All pairs). Every week I will publish results.
+
+--- 帖子 #305 ---
+Thank you Fukinagashi, I been trying Bag it EA for a few days, because I had been using Sidus/Bagovino method to good effect. The only trade it has opened is GBP/CHF that is +100pips. Well done and keep on doing the good work....
+
+--- 帖子 #306 ---
+bag it 1.2 has been replaced with 1.4b. Live statements: Bag it v1.3: http://www.forexea.com/bagit_13/statement.htm Bag it v.1.4b: http://www.forexea.com/bagit_14/statement.htm
+
+--- 帖子 #307 ---
+Hello Tomstaufer Can you tell me how to attach statement from MT platform to website like in your case? thank you in advance Best regards Aviar
+
+--- 帖子 #308 ---
+I don't get it.. is it free or not? And can I use it past the date shown??? lol... j/k of course
+
+--- 帖子 #309 ---
+Btw, thanks for all your hard work Fukinagashi!!! Fuk it! I'm going to try forward testing this baby... D.
+
+--- 帖子 #310 ---
+Go to Tools-Options_Publisher. Setup ftp transfer there.
+
+--- 帖子 #311 ---
+fukinagashi, Thanks for the new version. v1.4b is working for me. It has now opened buy and sell positions with the correct stoploss on 2 and 4 decimal point currencies on mini and full size accounts. Does the timeout setting effect the ability of the EA to close a position opened less than 1 hour before in a rapidly moving market? If after closing a position the EA has to wait the timeout seconds before initiating a new position, Is there any advantage using a number like 1739 to catch a change at 30 minutes?
+
+--- 帖子 #312 ---
+2007.02.21 19:47:18 Bag-itv14b EURUSDm,H1: #24354394 2007.02.21 11:46 sell 0.30 EURUSDm 1.3125 0.0000 0.0000 1.3127 0.00 0.00 -0.60 Bagovino 666 2007.02.21 19:47:18 Bag-itv14b EURUSDm,H1: OrderSendReliable V0_2_3:apparently successful OP_BUY or OP_SELL order placed , details follow. 2007.02.21 19:47:18 Bag-itv14b EURUSDm,H1: open #24354394 sell 0.30 EURUSDm at 1.3125 ok 2007.02.21 19:47:17 Bag-itv14b EURUSDm,H1: OrderSendReliable V0_2_3: attempted OP_SELL 0.30000000 lots @1.31250000 sl:0.00000000 tp:0.00000000 2007.02.21 19:47:17 Bag-itv14b EURUSDm,H1: #24354368 2007.02.21 11:46 buy 0.30 EURUSDm 1.3127 0.0000 0.0000 1.3125 0.00 0.00 -0.60 Bagovino 666 2007.02.21 19:47:17 Bag-itv14b EURUSDm,H1: OrderSendReliable V0_2_3:apparently successful OP_BUY or OP_SELL order placed , details follow. 2007.02.21 19:47:17 Bag-itv14b EURUSDm,H1: open #24354368 buy 0.30 EURUSDm at 1.3127 ok
+
+--- 帖子 #313 ---
+24354368 2007.02.21 11 :46 buy 0.30 eurusdm 1.31270.00000.0000 1.31310.000.000.001.20 666Bagovino 24354394 2007.02.21 11:46 sell 0.30 eurusdm 1.31250.00000.0000 1.31330.000.000.00-2.40 666Bagovino
+
+--- 帖子 #314 ---
+In your EA inputs or settings, what is 'Timeout' set to? Zero?
+
+--- 帖子 #315 ---
+Timeout=3540
+
+--- 帖子 #316 ---
+Thanks for your answer on the timeout it got me to looking in more detail at my tests. I have the same problem on one Gimex demo platform. Also EURUSD. My other tests do not show any unusual order activity. I have not seen any rapid orders placed like this since the 'Timeout' was added which fixed a similar but much worse problem a few versions ago. I am using v1.4b now. I only had the EA attached to one EURUSD chart. Error information is in the PDF below.
+
+--- 帖子 #317 ---
+I was just wondering which pairs this EA is producing the best results with... anybody know?? I put it on about ten pairs last night - mixed results but mostly down overall. Thanks in advance, D.
+
+--- 帖子 #318 ---
+I am a newbe in Forex market. Fukinagashi, I congratulate for your EA. It looks like very good. :o) If I like to try/test it, where can I download the latest versions (1.3, 1.4 …) and maybe a description about using/setting this EA ? I have some other question: Where accessible template, indicators to Bagovino Method ? Thanks for your helps ! Viatoris
+
+--- 帖子 #319 ---
+fukinagashi, thanks for all your hard work putting this EA together. Looks like it will be a good success for all of us. IMO
+
+--- 帖子 #320 ---
+fukinagashi, what do you think about using Bag-It on CFD? It could help to make some diversification of the trading capital. And what anyone think about that?
+
+--- 帖子 #321 ---
+Bag-it 1.3: http://www.migawka.eu/bagit_13/statement.htm Bag-it 1.4: http://www.migawka.eu/bagit_14/statement.htm Bag-it 1.4b with SL 47 http://www.migawka.eu/bagit_14b_sl47/statement.htm Updated every 1H, All pairs
+
+--- 帖子 #322 ---
+Hi, Here are my statement since I started to test Bag-it. I run it on 4 majors and I choose to let it completely free even if sometimes I have the temptation to close order manually when I think market is about to reverse. So, I had orders up by 60-70 pips closed by the EA in the red. Sometimes I believe it closes on SMA cross, sometimes on RSI cross and sometimes ... I don't know. Maybe exit could be optimized with the use of indicators such as Std Deviation. I love this indicator because I think it's really good in detecting the trend is dying. Exit could be when Std Deviation is declining and reach a certain value (to be set by testing) Of course sometimes we would miss some pips when trend has a second breath but most of the time we would pocket more pips before the trend reversal and I guess never in the red after being far in the green !!!! I don't have much time to backtest but I really think it's worth it to implement that in Bag-it to forward testing. Thanks Thierry
+
+--- 帖子 #323 ---
+As I had quite different results on demo account and on my real account with Bag-it, I noticed that I have significant difference on the RSI value. Right now, RSI value on demo account is 35,7228 and on real account 53,0913 for UsdJpy, 27,6966 on demo and 31,9202 for UsdChf .... Of course both are 14 period on close and Ask&amp;Bid are EXACTLY the same. I ask the reason to Interbk but they said they aren't responsible for indicators they didn't write and have no explanation. So if someone have one .... Thanks Thierry
+
+--- 帖子 #324 ---
+Statement for Bag-it v1.4b. I am running 10 pairs on IBFX demo. Using default settings except maxRisk is set at 1.0. I let Miss Bag run the show. I did not intervene with the EA.
+
+--- 帖子 #325 ---
+does this EA take encounter the new values of the bag system? he added some other requirements. I think it would help greatly if it would conform to that.
+
+--- 帖子 #326 ---
+I'm still on Miss Bag with real $ but I had to remove my signature live statement link because it got polluted with advertising. More here . If anybody can assist I'd appreciate it. Bag TV got mucked up because my static IP went missing - ISP issues will be resolved shortly. So, in the meantime, Miss Bag currently has 2 trades open USDJPY and EURUSD. Both short and Miss Bag exited 1 EURUSD long today for 25 pips. Open trades +29 and -8 respectively. USDJPY from Friday. Have a great week everyone.
+
+--- 帖子 #327 ---
+A couple of trades opened by Miss Bag here .
+
+--- 帖子 #328 ---
+Mr. Fukinagashi First of all thanks for this EA . Please see detailed report for latest version of EA Bag 14b . I started test with default setting and change SL setting for 60 for major pairs and 70pips for jpy crosses . 1)my question is if I change EA setting for MA1 from 5 to 13 and MA2 from 12 to 62 and keep RSI default 14 EA will open order accordingly? 2)Also could you please let me know whats logic to close trades for this EA ? 3) let me know if you have same result as my atach file . Once again thanks for this EA . katiya
+
+--- 帖子 #329 ---
+does this EA have the new rules of the Bag system? if not, can you incorp. them in?
+
+--- 帖子 #330 ---
+http://wildmonkey.org/fxdd/statementsummary1.jpg http://wildmonkey.org/fxdd/statementclosed1.jpg
+
+--- 帖子 #331 ---
+Here my result for latest version gor bag 14b default , with sl setiing . I started this test from 20/feb, so only 10days around 600pips , very good result so far .
+
+--- 帖子 #332 ---
+New short GBPUSD. Bag TV live now.
+
+--- 帖子 #333 ---
+Now in to profit for 20 pips.
+
+--- 帖子 #334 ---
+I'll let the GBPUSD roll - back to +2 pips open there. Both short.
+
+--- 帖子 #335 ---
+Thank you Fukinagashi for this EA. Thanks all for posting these encouraging statements. I will join those who are testing this EA.
+
+--- 帖子 #336 ---
+$230 real profit since the February 1st. IMO very respectable for tiny lots. Bag TV should now be working all the time. Good luck everyone next week.
+
+--- 帖子 #337 ---
+I ran Bag-it v1.4b on all 10 pairs with IBFX demo. Using default settings except MaxRisk is set to 1.0. No intervention was done with EA.
+
+--- 帖子 #338 ---
+I'm real money only on 3 pairs martypatty. Good for you yours is a demo! What are the pairs that have been profitable for you please? I did close the last 2 trades to help her but I wish I hadn't now or there'd be an extra 100 pips open on the table. From memory that's the 3rd manual exit for me. I only exit at 30 pips plus if there are good reasons to do so but I never exit on a loss.
+
+--- 帖子 #339 ---
+Here is my statement for Bag-it since Feb 09th. Not bad ! Fuki could you explain how you close orders. Most of the time it's in accordance with Bagovino method as orders are closed on RSI cross of 50 but sometimes not. Is it an error in the EA or is it normal ? Thanks a lot Thierry
+
+--- 帖子 #340 ---
+$2723 - a nice profit for the lot size. It looks like you're on the same as me plus USDCHF. Looking at it simply and taking in to account martypatty's poor results on 10 those crosses look like the 3 or 4 to stick with.
+
+--- 帖子 #341 ---
+I would agree. I have not had very good results using a lot of crosses. I do think EURJPY is a good pair. At least up to this point. Does anyone else think the newest version's trade selection is slightly different than the previous versions? I'm having a hard time determining the difference because I'm not running all my tests on the the same broker's platforms. Here are my results. I started using a 70 or 90 pip SL depending on the pair. I don't think this is effecting my results because it has rarely been hit. On GBPJPY it saved me pips stopping out at a 90 pip loss.
+
+--- 帖子 #342 ---
+Broker Northern Finance, Demo account Lots = 1 ExtMaximumRisk = 0.02 Debug on GMT = 2 All others default Using on the GBP/USD, USD CAD and USD/JPY for now. Will post a statement in a few days. Thanks for letting me trial the EA, the thread has been interesting reading so far! Cheers, Cal
+
+--- 帖子 #343 ---
+And your first post here. Great to have you aboard. Have a great day.
+
+--- 帖子 #344 ---
+But IMO the previous version exited earlier on a retrace. I have had a 100+ pips open before for it to retrace and still stay open with only 20 left on the table but it's still open. Mr F - when you drop by your considered opinion please sir.
+
+--- 帖子 #345 ---
+Miss Bag got disconnected here due to server issues my end. Did she leap in to action for anyone in the last hour please?
+
+--- 帖子 #346 ---
+On the common pairs I've had one new trade. Buy USDJPY 116.05 At 15:45 GMT. The time of this post is 16:40 GMT. Thanks for your thoughts on differences between versions.
+
+--- 帖子 #347 ---
+Yeah, I thought I missed that one. I had to reboot after installing a new encoder for Bag TV to make it more reliable. It looks like it did the trick because it's not getting stuck anymore. Setup took me ages - so many options I got a bit engrossed and forgot to launch Miss Bag's platform again. Good luck with the trade. I'm seeing 115.96 at the moment which'll probably be consolidation before it goes north with targets I've got elsewhere at 116.17 &amp; 116.48. The Bagovino cross happened when you said. The 30-min RSI has now broken above declining trend lines. Shame Miss Bag missed it here. I'll buy her a few extra bytes later. Have a great week sir. Thanks for your reply. http://www.tradingcentral.com/chart/...0305162637.GIF
+
+--- 帖子 #348 ---
+Hi Guys, I just found the BAG - TV.... Crazy! I will be following this thread. Is the EA available for all or only a select few? Bagovino
+
+--- 帖子 #349 ---
+Newest version is in post #296 of this thread.
+
+--- 帖子 #350 ---
+Thanks for dropping by Daddy Bag.
+
+--- 帖子 #351 ---
+The results have been absolutely stunning thus far on my demo accounts - nearly a 200% return for February. On average how much do the results tend to differ on a live account? I plan to go live this month.
+
+--- 帖子 #352 ---
+Can you post your demo statement Thanks
+
+--- 帖子 #353 ---
+Unfortunately my demo account expired. Is there a way to retrieve the history? When I attempt to login it just says, "invalid account." It has my balance there but no account history.
+
+--- 帖子 #354 ---
+I think so, e-mail the co. with your demo account details and ask for an extension of your account as you want to retrieve historical data from it.
+
+--- 帖子 #355 ---
+Shame I wasn't with you at 116.05. C'est la vie.
+
+--- 帖子 #356 ---
+Hello, looking at your TV (nice) I see the system has entered a buy JPY at 116.41, but the cross signal happened more around 116.05-10, why that dealy before the EA generated the signal. Thanks
+
+--- 帖子 #357 ---
+Thanks for the fedback on Bag TV. The second signal - mine - was caused by RSI dipping below 50 then bouncing back with the earlier EMA cross outstanding Miss Bag's entry requirements are met.
+
+--- 帖子 #358 ---
+Nothing to see here. Keep moving!
+
+--- 帖子 #359 ---
+Hiya , times below are North Finance times On the USD/JPY at 17:45 05th Mar 07 Buy 1.00 at price 116.05, price currently 116.46, about $350 in profit at the moment (50k DEMO Account) On the GBP/USD at 04:48 06th Mar 07 Buy 1.50 at price 1.9263, price currently at 1.9265, about $ 40 in profit On the USD/CAD at 10:45 06th Mar 07 Sell 1.00 at price 1.1776, price currently at 1.1790, about $120 loss at the mo! Cheers, will look forward to seeing what the final profit/loss of the trades are, c'mon the bag! Cheers why oh why, have been hovering about the forum a few weeks trying to learn a little! Cal
+
+--- 帖子 #360 ---
+You're welcome currymonster. EURUSD long now as well with USDJPY in profit - all caught live on Bag TV.
+
+--- 帖子 #361 ---
+here my result from 02/20 almost 10.000USD profit almost 1000pips . I am using default setting SL 50 for major and 70 for JPY crosses .
+
+--- 帖子 #362 ---
+Superb results. Studying now.
+
+--- 帖子 #363 ---
+can somebody please explain- in EA 1.take profit factor?- what measn O? 1? 2? b/ext maximum risk? thx bj
+
+--- 帖子 #364 ---
+Hi Katiya, Very nice results. After studying I will add GBPJPY to the four major or maybe replace USDJPY with has not be very positive. I use GBPJPY with Tkimble daily strategy with good success as price movements are clear and strong. Below is today statement classified by symbol Thierry PS : I still use Bag-itv 13 and did not try new version
+
+--- 帖子 #365 ---
+Nice results, I have several trades in profit now, one loss and one profit trade closed today +150 and -150 ish dollars, so cancelled each other out! Cheers, Cal
+
+--- 帖子 #366 ---
+Ooh before I forget, what stop loss factor are you using? Or default at = 0? Many thanks, Cal
+
+--- 帖子 #367 ---
+I can't be correct in thinking that after setting this thing up it just trades profitably for you? (at current market conditions yada yada) Are others having sucess with this without loads of tweaking and just setting it up? Thanks Ps. Where are the threads with the basic guides to this, and to setting them up i have searched but have not forum.
+
+--- 帖子 #368 ---
+I cleaned out my account in a couple months with these settings that i have... so if its possible to reverse the ea then we would have a killer ea
+
+--- 帖子 #369 ---
+# 47. Probably then you understand why Bag-it cannot have a positive result with that parameter set to 1.0. I am actually rather amazed that your demo account is not margin called.
+
+--- 帖子 #370 ---
+#219 #47
+
+--- 帖子 #371 ---
+The EA does not even exist "a couple months". What settings do you have? You refer to a backtest? Which currencies? What Modelquality? You really trust Backtest? Is there a link between carbondixoid and global warming? ( There sure is global warming, I could hardly snowboard this season!!!) What's wrong with Britney? Why are the tv series of my childhood no longer cool? Why did Anna Nicole Smith need to die? Will my son rather want to play puzzle or ball when I come home of work? You rather like cookies or cake? Questions ... questions ... questions ...
+
+--- 帖子 #372 ---
+Currymonster vbmenu_register("postmenu_236428", true); I use stop loss default at = 6
+
+--- 帖子 #373 ---
+Cake for me please Mr F. With a nice mug of Horlicks. I'm getting on you know.
+
+--- 帖子 #374 ---
+Miss Bag got bored just now with the usdjpy 116.46 long from yesterday. Exited for 6 pips. Anyone else? Nwine perhaps? Miss Bag's got a couple still rolling and she's popped out to the shops for my Horlicks.
+
+--- 帖子 #375 ---
+Yes. Out of the bag (box )! No guides needed just MT4 and learn how to set it up by using whatever trading platform you're on Tom. Or help in the MT4 forum here .
+
+--- 帖子 #376 ---
+Hey..I just installed bag-itv14b on my mt4 and on GBP/USD a cross up on 5/12 and rsi 50+ LONG SIGNAL and crazy EA went short on pair LOL. Did I miss some significant action I need to do? Signal happened 3/7/2007 1500 GMT.
+
+--- 帖子 #377 ---
+Hmm, don't know. Mr F will be along later maybe. My Miss Bag has just got back from the shops with my Horlicks and leapt in to action with a short USDJPY and all 3 opens are now in profit. Bag TV is online all the time now. Feel free to check anytime. I use V1.3.
+
+--- 帖子 #378 ---
+Everybody here voted there ?
+
+--- 帖子 #379 ---
+And I'm off to bed. Goodnight ladies and gents. Will they still be there in the morning? Bag TV should still be running over my night so you can see for yourself. Have a great time!
+
+--- 帖子 #380 ---
+... my son preferred puzzle. He has an amazing skill to hit with his ball expensive objects so puzzle was ok for me ...
+
+--- 帖子 #381 ---
+Now since almost half the posts here seem to ask for the expiry ... I never meant to make secret out of the expiry date. It is almost embarassing, but when I programmed the expiry it would fire off two month too early, so I was reluctant to let you know the dates since they would be wrong. I have now reprogrammed the expiry function and it is now exact and ... tadaaaaa .... you can see it in the comment of the EA. Why the expiry? I want to know if the community activly uses the EA and I want people to use the newest possible versions.
+
+--- 帖子 #382 ---
+The typcial reason for freak incidents like that is when you loose connection for a long time and suddenly the missing data gets charged into your MT and gives for a few seconds odd values. I have that often when I have EA set up and change from one broker to the other with the EAs active. I belive that is the reaons why Metatrader even has this parameter "Disable experts when the account has been change"
+
+--- 帖子 #383 ---
+Thank you for your great support to this EA!!! I hope you will make many many pips with it and will invite me eventually for a week yachting in the carbeen sea when you are rich
+
+--- 帖子 #384 ---
+Thanks you Fuki for this great ea. Renefx
+
+--- 帖子 #385 ---
+It all started with your inspiration. Have a great day. 60 open pips now over our night. A 6 pip loss on USDJPY.
+
+--- 帖子 #386 ---
+Long USDJPY, short EURUSD and new short GBPUSD just opened. 27 open pips profit on the table.
+
+--- 帖子 #387 ---
+100 open pips profit on the table.
+
+--- 帖子 #388 ---
+Hi fukinagashi Many thanks for this amazing EA . I will test this EA during Mar and ,probably will open real account 1K for mini lots Northfinance . Btw open position more than 300pips floating . many thanks
+
+--- 帖子 #389 ---
+And maybe launch Bag TV2?
+
+--- 帖子 #390 ---
+Hi, Fuki: First, Thank you for your kind hearted sharing idea. One quick question. I uploaded the lastest version 14c on my demo account FX Station and got smiley faces on 6 pair currencies, 1 hour charts, before GMT 0. BUT it open only on 1 pair (not all six). IS THIS NORMAL? or did I miss something ? Thanks, Renefx
+
+--- 帖子 #391 ---
+bodshyipmonitor: btw the live forex statements bodshyipmonitor: is losing rite WhyOhWhy: Gents - thanks to everyone who's dropped by - I'm popping out for breakfast Milad: whyohwhy, where to download 1.3? WhyOhWhy: in thread somewhere Milad: in FF, it is 1.1 User guest164 left the room. User guest165 entered the room. WhyOhWhy: 208.97 closed profit at http://www.rheagavin.com + open profit as you see WhyOhWhy: new versions are posted throughout the thread bodshyipmonitor: Closed Trade P/L: -13.95 User guest165 left the room. tjpartners: enjoy your meal WhyOhWhy: bodshyipmonitor look now WhyOhWhy: that is for the period of test on this EA - real money WhyOhWhy: If I lose connection it defaults on the terminal and shows all trades for the life of the account bodshyipmonitor: okie bodshyipmonitor: so what u showing now is demo? aidanpryde: hmm thats the question i had in mind irght now... aidanpryde: why are the statements different for both streams on both sites? aidanpryde: or did i miss something aidanpryde: ? bodshyipmonitor: yeah bodshyipmonitor: i am confused too
+
+--- 帖子 #392 ---
+It is real money bodshyipmonitor. It is not a demo. If I lose connection it defaults on the FXDD terminal and shows all trades for the life of the account which included the trades made in the thread here . I hadn't met Miss Bag at that time. Today, Miss Bag is now in profit $291.91 since the real money account started taking her advice on 1st February 2007. Aidan, the live trading statements will be different for both streams due to a time difference caused by streaming direct here or a re-broadcast where the chat is here . The difference will be no more than a few seconds and I suggest you only use the re-broadcast site as the direct connection to my computer should only be used as a backup. It is there in case the re-broadcast site gets swamped - it does happen now and again. And there's no point in watching both as you can now understand I trust. Everyone who dropped by Bag TV in the last week thanks for all your kind words and encouragement. I'm glad you appreciate it and I hope it will continue to be useful to confirm entry and exit levels that my Miss Bag makes and how her trades compare with all her many relations all over the world. I will always reply to questions here and on Bag TV but if you don't get an immediate answer on Bag TV then post it here and I'll answer when I check in again.
+
+--- 帖子 #393 ---
+It makes sense, as most members who've posted on Bag TV chat have already done, to change your guest name to your Forex Factory name. But it's up to you. Stay as a guest there if you wish. You only need do it once then you'll be remembered on future visits. Milad, I downloaded V1.3 from this thread. Sir, seek and you shall find. Have a great day everyone and I'm now around for the next 8 hours.
+
+--- 帖子 #394 ---
+Not a bad day. http://www.wildmonkey.org/trades080307.jpg
+
+--- 帖子 #395 ---
+You know where to go for the rest. http://www.wildmonkey.org/trades080307end.jpg
+
+--- 帖子 #396 ---
+The only reason I can see for possible confusion is because I used the word test. I view this is a test but it is real money. Obviously, most people only test with a demo account. I did qualify it by saying real money but perhaps that just added to the confusion. The account platform and statement summary that you see delayed by 1 minute and 5 minutes respectively in my signature below are on this account and are as near to live as you can get with current technology. So, again, a live account with real money is what I use to test this EA but it is not a demo account it is real money. Tiny money, yes, but nevertheless, real money.
+
+--- 帖子 #397 ---
+This EA waits in this 6 instances for a signal to enter. If there was only one signal in the time the Ea was active it will not trade more then one position. Have patience, BAG-IT (or rather said the Bagovino method) does sometimes not give signals for several days.
+
+--- 帖子 #398 ---
+do i need to place indicators on the chart to get it to run properly?
+
+--- 帖子 #399 ---
+Wow Fukinagashi, Very impressive.... another month or two of this type of success I may try it live! Bag
+
+--- 帖子 #400 ---
+Hi fuki........ I have read the whole forum and it is very interesting. I like to try on demo account but I having dificulty attaching the EA to MT4. Can you help? I save it to the expert/indicators but when I open the MT4 I can not find it. Appreciate your help AJ
+
+--- 帖子 #401 ---
+I figure out to install it. Thank you anyway. One more questions. ON the inputs Standard SL 0 Take profit factor 0.0 Trailing stop 0 exit maximum risck 0.0 Do I still make some changes? AJ
+
+--- 帖子 #402 ---
+Do you have a link on this EA that explains the settings such as time frames and the appropriate pairs? Thanks..
+
+--- 帖子 #403 ---
+Thx very much for ur answers ! I really appreciate it! Keep up the good work !
+
+--- 帖子 #404 ---
+Using all 10 pairs on IBFX demo, v1.4c. This time using all default settings. Out of the bag....right on the puter. She closed all trades right before the big news event today.
+
+--- 帖子 #405 ---
+Excellent EA, thanks for sharing your work. I have been forward testing Bagit on GBPUSD &amp; EURUSD for a couple of weeks. The GBP results are positive, but on EURUSD the results are currently negative. On EURUSD, Bagit was caught on the wrong side of the market a couple of times triggered by a pullback. Looking at the chart, I don't understand why Bagit didn't go short when the MA &amp; RSI crossed down (red down arrows &amp; white line on attached chart). Has it has missed a trade, or is it working as designed?
+
+--- 帖子 #406 ---
+Here http://www.forexfactory.com/showthread.php?t=7603 and here http://www.forexfactory.com/showthread.php?t=10819 you will find everything you need to know.
+
+--- 帖子 #407 ---
+Heres my weeks bag trading Account: 400821 Name: Callan John Currency: USD 2007 March 9, 22:59 Closed Transactions: TicketOpen TimeTypeLotsItemPriceS / LT / PClose TimePriceCommissionTaxesSwapProfit79896092007.03.05 17:45buy1.00usdjpy116.050.000.002007.03.06 18:00116.230.000.005.46154.8780175312007.03.06 04:48buy1.50gbpusd1.92630.00000.00002007.03.07 06:591.92820.000.00-4.05285.0080176142007.03.06 04:50sell1.00usdcad1.17930.00000.00002007.03.06 09:021.18100.000.000.00-143.9580284302007.03.06 10:45sell1.00usdcad1.17760.00000.00002007.03.07 15:251.17770.000.00-5.70-8.4980352892007.03.06 13:49buy1.50audusd0.77410.00000.00002007.03.07 18:450.77570.000.000.90240.0080656622007.03.07 04:45sell1.00usdjpy116.43117.130.002007.03.07 17:53116.610.000.000.00-154.3680714822007.03.07 06:45sell1.00gbpjpy224.67225.370.002007.03.07 17:31225.030.000.000.00-308.9380719152007.03.07 06:58sell1.00gbpchf2.35932.36430.00002007.03.07 09:422.36430.000.000.00-408.6380826572007.03.07 08:54buy1.00gbpusd1.93131.92630.00002007.03.07 10:031.92970.000.000.00-160.0080912662007.03.07 10:59sell1.00gbpchf2.36042.36540.00002007.03.08 13:092.36540.000.00-37.48-409.1080933642007.03.07 11:45sell1.00gbpusd1.92911.93410.00002007.03.07 21:281.93410.000.000.00-500.0081058462007.03.07 16:47buy1.00usdcad1.17791.17290.00002007.03.08 05:091.17700.000.004.33-76.4781094952007.03.07 18:45buy1.00gbpjpy224.72224.020.002007.03.07 22:57224.330.000.000.00-336.2181096462007.03.07 18:52sell1.00usdjpy116.40117.100.002007.03.08 05:49116.470.000.00-33.88-60.1081156942007.03.07 23:56sell1.00gbpjpy224.30225.000.002007.03.08 05:49224.920.000.00-48.62-532.2881181882007.03.08 01:45sell1.00audusd0.77590.78090.00002007.03.09 16:010.78090.000.00-3.50-500.0081182002007.03.08 01:45sell1.00gbpusd1.92861.93360.00002007.03.08 07:041.93360.000.000.00-500.0081297182007.03.08 06:46sell1.00usdcad1.17741.18240.00002007.03.08 09:011.17850.000.000.00-93.3481389022007.03.08 10:46sell1.00usdcad1.17821.18320.00002007.03.08 15:161.17870.000.000.00-42.4281453542007.03.08 14:46sell0.90gbpusd1.92881.93380.00002007.03.09 03:111.93110.000.000.36-207.0081504712007.03.08 16:45buy0.90usdcad1.18081.17580.00002007.03.09 04:411.17930.000.001.30-114.4781717942007.03.09 03:11sell0.10gbpusd1.93021.93341.92742007.03.09 03:131.93030.000.000.00-1.0081718002007.03.09 03:11sell0.20gbpusd1.93041.93341.92742007.03.09 03:121.93050.000.000.00-2.0081721102007.03.09 03:19sell0.10gbpusd1.93061.93341.92742007.03.09 04:231.93050.000.000.001.0081721132007.03.09 03:19sell0.20gbpusd1.93041.93341.92742007.03.09 04:231.93050.000.000.00-2.0081765232007.03.09 07:53sell0.90usdcad1.17971.18470.00002007.03.09 18:561.17160.000.000.00622.23 0.000.00-120.88-3 257.65 Closed P/L: -3 378.53 Open Trades: TicketOpen TimeTypeLotsItemPriceS / LT / P PriceCommissionTaxesSwapProfit82101502007.03.09 19:19sell0.10gbpusd1.93281.93581.9298 1.93230.000.000.045.00 0.000.000.045.00 Floating P/L: 5.04 Working Orders: TicketOpen TimeTypeLotsItemPriceS / LT / PMarket Price No transactions Summary: Deposit/Withdrawal: 0.00 Credit Facility: 0.00 Closed Trade P/L: -3 378.53 Floating P/L: 5.04 Margin: 193.28 Balance: 47 447.16 Equity: 47 452.20 Free Margin: 47 258.92 Details: [IMG]file:///C:/Program%20Files/MetaTrader%20-%20North%20Finance/Reports/090307.gif[/IMG] Gross Profit: 1 305.41 Gross Loss: 4 683.94 Total Net Profit: -3 378.53 Profit Factor: 0.28 Expected Payoff: -129.94 Absolute Drawdown: 4 000.76 Maximal Drawdown (%): 4 298.09 (8.41%) Total Trades: 26 Short Positions (won %): 19 (10.53%) Long Positions (won %): 7 (42.86%) Profit Trades (% of total): 5 (19.23%) Loss trades (% of total): 21 (80.77%) Largest profit trade: 622.23 loss trade: -580.90 Average profit trade: 261.08 loss trade: -223.04 Maximum consecutive wins ($): 2 (441.28) consecutive losses ($): 13 (-2 877.21) Maximal consecutive profit (count): 622.23 (1) consecutive loss (count): -2 877.21 (13) Average consecutive wins: 1 consecutive losses: 5 Sorry its rather filled the page. The EA doesnt seem to be closing tardes. several times its been over a 1000 dollars in profit grr. Awe well version 14c attached and lets see what happens, Cheers, Cal
+
+--- 帖子 #408 ---
+Sorry about the statement, when I tried to atach it it said error invalid file type grrr! Cheers, Cal
+
+--- 帖子 #409 ---
+That depends what you want to do. If you want to verify the results me and some others here have with the standard settings (to find out if they are true and eventually use them on real money), that stick to them. It is probably important to understand how I got to these parameters. All in the beginning I made quite exhaustive backtests on the 4 majors (90% / 2 years) with this EA and these were the values which are optimal for these 4 majors. I do not believe into having an optimization for each currency. This is for me too much "curvefitting based on past events". But that does not mean that other settings could not be better. I do not have the time to constantly backtest to revalidate the results. And on top of that is the result of backtests not a guarantee for similar real results. The fronttesting though looks very good.
+
+--- 帖子 #410 ---
+http://www.wildmonkey.org/fxdd/BagSummary.jpg
+
+--- 帖子 #411 ---
+Great to have you here as well.
+
+--- 帖子 #412 ---
+sorry, I wanted to write "Keep up the Great work" but cannot edit
+
+--- 帖子 #413 ---
+And 45 for your question elsewhere in case you miss it.
+
+--- 帖子 #414 ---
+Hi Fuki, Thanks for your reply. Renefx
+
+--- 帖子 #415 ---
+... and there now.
+
+--- 帖子 #416 ---
+Did 12% on MIG demo last week, starting today with demo at ibfx. Thanks again, Fuki.
+
+--- 帖子 #417 ---
+Great to have you aboard. And have a great week everyone.
+
+--- 帖子 #418 ---
+I was just going to ask what EA you were using before you used Bagit? it looks like a scalper with a large SL, was it robinhood by any chance? And by the way we were both filled at the exact same price by Mrs Bag in EURO just now...1.3131 goodluck to ya mate. Mikhail
+
+--- 帖子 #419 ---
+Hi Mik, In my journal they were all manual. I've got Robin but never trialed it seriously. The 30 day demo isn't sufficiently long enough to form a view IMO. Great to see we're on an identical trade Mik. Thanks for letting me know. Confirmation on EA trading is always of interest. Now that your Miss Bag's got married I think we'll see a lot of little bags all over the place.
+
+--- 帖子 #420 ---
+Will this be the big one to get EURUSD out of the toilet? It's a loser for me as well ATM. We'll see.
+
+--- 帖子 #421 ---
+At 117.84?
+
+--- 帖子 #422 ---
+118.01 already out
+
+--- 帖子 #423 ---
+i think it will be bye bye cable in a little while. i bought june 19200 puts
+
+--- 帖子 #424 ---
+I got a better price at that one 118.06
+
+--- 帖子 #425 ---
+Exited manually I assume?117.34 for 50 open pips short currently. Good to see you here hornet.
+
+--- 帖子 #426 ---
+Thanks mik. EURUSD back to 16 open pips profit currently for us.
+
+--- 帖子 #427 ---
+New short at 9281 and all 3 are now in profit. 80 open pips as I write.
+
+--- 帖子 #428 ---
+Another Identical trade on my end.
+
+--- 帖子 #429 ---
+Thanks Mik. Sadly, that one's moved against against us at the moment. But the other 2 we're still up. C'est la vie.
+
+--- 帖子 #430 ---
+I ditched the GBPUSD trade at breakeven, and closed EURUSD also for profit, I only left USDCHF and USDJPY now floating around 100+ pips total... I hope mrs. bag doesn't get angry for not leaving her alone to do her thing... Regards, Mikhail
+
+--- 帖子 #431 ---
+And I only did it once! I won't make that mistake again - and it also cost me over a 100 pips on GBPUSD. But closed profit is what counts so well done. And Miss Bag got you in so it's all good.
+
+--- 帖子 #432 ---
+yes, no auto systems here nice to be here. great place, i must say
+
+--- 帖子 #433 ---
+All 3 positions are back in profit with 85 open pips on the table. Nothing closed this week yet.
+
+--- 帖子 #434 ---
+EURUSD long exited just now.
+
+--- 帖子 #435 ---
+Guys! Can anybody help, is the difference between v1.3, v 1.4 and 1.4c in EXPIRY DATE of the EA, and the principle of trading is the same?
+
+--- 帖子 #436 ---
+Hi there I am a newbie and I have been following this thread. I have tried downloading this ea and the previous onesbut get this message 2007.03.13 09:25:23 Bag-itv12 GBPUSD,M30: loaded successfully 2007.03.13 09:25:23 Bag-itv12 GBPUSD,M30: removed Anybody know why or help with this
+
+--- 帖子 #437 ---
+If the two entries you posted are shown in the same order as they were in the journal the EA is loaded. The newest entries are shown on top if you look at the journal by selecting the 'journal tab' in the terminal window. Do you have the little smiling face in the upper right hand corner of the GBPUSD chart? Not related to loading, but check post # 381 for the newest version of the EA. I think most of us use the 1 hour chart not the 30 min..
+
+--- 帖子 #438 ---
+Sorry nvwine They should be the other way round this is the most recent try 2007.03.13 12:20:50 Custom indicator Bag-itv14 GBPJPYm,H1: removed 2007.03.13 12:20:50 Expert 'Bag-itv14' is not custom indicator and will be removed 2007.03.13 12:20:50 Custom indicator Bag-itv14 GBPJPYm,H1: loaded successfully
+
+--- 帖子 #439 ---
+Bag-itv14 is an expert adviser not an indicator. Did you store it as an indicator rather than an expert? Does it show up under experts in the navigator? Experts are stored in a folder titled experts which is the parent folder of the indicators folder.
+
+--- 帖子 #440 ---
+I did say I was a newbie Many thanks nvwine for your help It is now loaded
+
+--- 帖子 #441 ---
+It will not now be at Camstreams. I received this message just now below: "It has come to a point I need to do some housekeeping on Camstreams and unfortunately I can't allow your stream to continue if you wish to just broadcast your PC's screen. Camstreams is a video / webcam site and as such I can't allow people to just capture their screens." The stream will be the same but just from my computer direct. The only thing we lose is the chat but feel free to drop by anytime - still the same music you like as well. 3000+ streams launched over the last month shows it's worth keeping. My signature link will now just launch your default media player direct. Any problems with streaming let me know here and I'll up my bandwidth as required. Have a great day everyone.
+
+--- 帖子 #442 ---
+3 viewers now - let me know if there are any feed issues.
+
+--- 帖子 #443 ---
+USDJPY +125 pips and EURUSD -53. GBPUSD exited by Miss Bag for a loss of 44 pips.
+
+--- 帖子 #444 ---
+GBPUSD.
+
+--- 帖子 #445 ---
+v1.4 unzips fine, but I am unable to open in MetaEditor or attach it to the charts. I beleve its due to being a file with a *.ex4 extension. Can anyone send it to me as an attachment? Whoever can, PM me and I'll send you my email address. Thanks, Dion
+
+--- 帖子 #446 ---
+Hi Fuki, I'm still running bag-it on real account with good results. Would it be possible to add to Bag-it the possibility to move SL to breakeven when we reach 50 pips profit. I have seen many orders being in big profit and close with a good loss. If an order turn from a +50 pips profit to 0, there is a high probability that it continue to the loosing side. Did you try that ? Thanks a lot Thierry
+
+--- 帖子 #447 ---
+Bigger, clearer and better display but no music now. Enjoy. 130 pips up on USDJPY and the other 2 are currently losers.
+
+--- 帖子 #448 ---
+Hi everyone, I'm a little late to the party here, but I'm trying to catch up. Can anyone tell me what the correct settings are in Bag-It 1.4c on IBFX to risk 2% of my account per trade? I've just opened up a $5000 mini account and I set ExtMaximumRisk: 0.02 and Lot: 0.1. This is resulting in $0.10/pip. If I understand things correctly, I should be trading at around $1/pip on a $5000 demo account. Does that mean I should set my Lot: 1.0 and keep my ExtMaximumRisk: 0.02? If anyone can follow that and can point me in the right direction, I'd be very grateful! Thanks in advance, - Mike
+
+--- 帖子 #449 ---
+On an IBFX mini account 1 lot = 10k instead of 100K. The expert expects it to be 100k. What I do is move to the decimal point to the right 1 digit. So instead of using 0.02 set ExtMaximumRisk=0.20 The expert then works fine. The expert ignores the lot setting unless the risk is set to zero.
+
+--- 帖子 #450 ---
+Attached is screenshot of gbp/usd trade entered long and trade still open after reverse signal to go short. No short trade was opened either. Doesn't the EA exit position on recieving reverse signal? Thanks a bunch!
+
+--- 帖子 #451 ---
+nvwine, Thanks! Fukinagashi, Thank you very much for all your hard work and for putting up with all of us "testers". I've actually been working with this EA for a few weeks now. My first attempt was on StrategyBuilder and I must say, this EA very quickly turned a $5000 demo account into a $50 demo account. Now that I'm on InterBank, it seems to be behaving much better. If anyone else had a different experience, I'd be interested in hearing about it. - Mike
+
+--- 帖子 #452 ---
+I'm doing okay in a recent post here or click my 5 minute updated statement below for the picture now. And Miss Bag exited the USDJPY for 126 pips today. Currently 134 pips in the hole for the other 2 open trades from yesterday but my faith remains.
+
+--- 帖子 #453 ---
+Account growth since I met Miss Bag. And now less than a 100 pips in the hole currently. All on FXDD. http://www.wildmonkey.org/fxdd/Detai...tementBag2.gif
+
+--- 帖子 #454 ---
+And for GBPUSD this was why. http://www.tradingcentral.com/chart/GBP_0703141420.GIF
+
+--- 帖子 #455 ---
+Now +20 open pips GBPUSD - let's go north!
+
+--- 帖子 #456 ---
+That'll sort out Miss Bag's current 70 pip loss on short EURUSD. Or will it? Miss Bag thinks so. GBPUSD back to break even.
+
+--- 帖子 #457 ---
+thanks for your work MrFukiNagashi, i use V4 on a demo and on a real account, and the results is very good i hope it will be possible to use a version after the expiy date i'm going to write an EA and make research on bagovino method too, it's seems to be a very good system Together, we will win. Alone, we will die. Bravo !!
+
+--- 帖子 #458 ---
+very good results on EURJPY and USJPY, and i think the bagit will be very good too next weeks and months because i think there will big moves with JPY i am going to try GBPJPY,there will be very big moves too
+
+--- 帖子 #459 ---
+Hi Fuki, Your EA v14c is fantastic !! I used Interbank demo starting with $5000 on 08mar and currently bal is $9589. 20trades with 70% win strike. Will keep testing EA and posting results. Great work
+
+--- 帖子 #460 ---
+EURUSD was closed by Miss Bag in disgust for a 73 pip loss and this cross remains the black sheep of the three she watches. The open GBPUSD has been up to a 45 pip profit and down to a 100 pip loss but is currently still open with an open loss of 8 pips. Closed profit on the week is 27 pips but Miss Bag tells me she's very hopeful for the outstanding GBPUSD trade. I leave Malta in 30 hours for France then UK and back here after a month or so but Miss Bag is going to stay put in Malta watching everything for me. We do get power cuts here - we had one yesterday for an hour or so - but I have a back up power supply and she did fine and didn't lose her connection for more that 1 minute. Has anyone had any profit from the EURUSD? Happy trading everyone and my live statement will still be updated regularly and BAG TV will continue, I hope, uninterrupted. See you all next week.
+
+--- 帖子 #461 ---
+Since 08mar EURUSD is $660 in profit. Working ok. Does anybody know what the difference is between v13 and 14c? thanks
+
+--- 帖子 #462 ---
+Here my result for bag 14b version , default setting SL 50~70 pips . Very good result so far
+
+--- 帖子 #463 ---
+thats is demo right? fantastic results.. if lady bag achieves 10% per month on consisten basis thats more than enuff for me ! I love her! hope she loves me too btw could u post the html statement here! i cannot print that statement.. dunno why! thank u!
+
+--- 帖子 #464 ---
+I hope someone can help me with this. It seems that my trades are getting entered about an hour and a half later than they should according to the indicators. This is causing me to consistantly make loosing trades! Is there some kind of setting that I've got wrong? It's a little hard to tell, but attached is a screenshot of two trades that due to their late entry, were both loosers. Any help would be greatly appreciated ! Thanks, - Mike
+
+--- 帖子 #465 ---
+I just started testing this EA this week. JPY pairs are going strong and are still open. Don't know they'll actually become big winners 'cause there's no T/P listed. That makes me wonder if the profit would evaporate quick once the trend reverses. All losers were coming from the non-JPY pairs so far, so my balance is showing a big loss, but equity is showing a nice gain.
+
+--- 帖子 #466 ---
+Had a poor week using the EA. A winners hard to find.Trading IBFX EUR/USD,GPD/USD,EUR/CHF Strangely couldn't make it's mind on EUR/CHF today. 150307 1745 buy eurchf 1.6098 150307 1746 sell eurchf 1.6094
+
+--- 帖子 #467 ---
+I had a good week with a gain of 349 pips. The high lighted trades are the ones that were made by the Bag-it EA. I'm using version 14b.
+
+--- 帖子 #468 ---
+Guys, please read the first post of this thread. Then read it again. I'm not the author of this EA - Mr F (fukinagashi) is. Your answers are there. If you are seriously considering using this EA then read the whole thread. It really will help you. I'm waiting at the airport with a delay and Miss Bag is working away at my home here. Currently over 200 open pips profit so if they're closed this week it will be the best week ever for me. I'll leave it to Miss Bag as always. 27 closed pips profit for the week so far on only 3 pairs and the equity on this account has now trebled and the balance doubled since 1st February 2007. Personally, I'm getting ready for a big drawdown because I cannot remember having a losing week. It will turn against Miss Bag soon but for the moment I'm enjoying the profits. Overall, IMO, this could turn out to be the first profitable EA long term with sufficient profits possible to cover the hits. And I'll always use it until the account is blown up. If the account ever gets to $5000 I'll then start to withdraw the profit monthly after I've lumped in some proper money. Be nice, wouldn't it? Keep the faith. And a free holiday for Mr F if it ever does get to $5000.
+
+--- 帖子 #469 ---
+who can give me all requared settings for EA? Some one attach here template
+
+--- 帖子 #470 ---
+If we all use the same settings and trade the same pairs it defeats the goal of testing. Read the thread. Start with the defaults. You may want to enter visible stop loses.
+
+--- 帖子 #471 ---
+so should i set these settings 1 Hr chart, plot 5/12 EMA's. Plot RSI set at 21 ?
+
+--- 帖子 #472 ---
+Hi, Why Oh Why! Do you consider EUR/USD, GBP/USD and USD/JPY as the most suitable pairs to trade with Miss Bag? Do you use fixed SL? Thanks!
+
+--- 帖子 #473 ---
+I think most people use trade the EA on the 1 hour chart. I'm not sure what you mean by plot. If you want you can install indicators on a chart and get an idea what the EA is doing. I find it does not always open and close trades where you would expect looking at a chart. The numbers you use would depend on if you want to follow the system outlined at the start of the Bagovino Method thread. If you start with the defaults for a few weeks you can establish a baseline before trying to speed or delay entries.
+
+--- 帖子 #474 ---
+I don't see any money managment setting in this EA, the default setting is 1 lot. Is MM something would be added to the future versions? Thanks!
+
+--- 帖子 #475 ---
+Partially obscured due to the auto online backup. Should be resolved in the next few hours. Have a great week everyone.
+
+--- 帖子 #476 ---
+Wow, for a moment I thought this question was serious. Good Joke, I got all agitated, because I thought you would be one of those morons, who don't even bother reading the thread, or those who have a concentrationspan of a chipmunk on speed. But then it was all evident. You were just being funny
+
+--- 帖子 #477 ---
+I guess I was one of those morons didn't read the thread, but honor is all mine if I made just a good joke. Anyway, I'm learning something new every day and wish this EA will make us laugh all the way to the bank.
+
+--- 帖子 #478 ---
+I'm testing the 1.4c version with IBFX demo on 4 majors + EUR/JPY or GBP/JPY and it is running 24 hours and it has nonly losses and very little profit. What is wrong? What are the optimal settings?
+
+--- 帖子 #479 ---
+For me also. Have you just started? Is so, that would explain it. Fortunately, I am still substantially in profit since 1st February.
+
+--- 帖子 #480 ---
+Are there any optimal settings for this EA that should be entered? THX.
+
+--- 帖子 #481 ---
+Are there any explanation what those different settings mean? The ema's I understand. But stop loss factor, profit factor? Especially on EUR/JPY and GBP/JPY there was a opposite cross, and it should reverse position and it si still pushing it towards the stop loss, even conditions for trade reversal were present. Isn't this indicator stricktly for majors only?
+
+--- 帖子 #482 ---
+Apart from lot size. I set that to 0.1. Anyone got closed profit this week?
+
+--- 帖子 #483 ---
+C'est la vie. But my opinion remains unchanged. And I'm still well in profit even with such a grim week.
+
+--- 帖子 #484 ---
+Can you paste here your EA settings? THX
+
+--- 帖子 #485 ---
+Just saw this thread today and I am interested to start testing this EA from monday onwards. Only one setting I still have doubt about is takeprofitfactor. At this post: http://www.forexfactory.com/showpost...&amp;postcount=219 Fukinagashi explain about the stoploss features and settings but nothing about the takeprofitfactor variable. Should I leave to default=0 ? Anyone been playing with this variable? Thank you in advance Sada PS: Fukinagashi glad to be part of one of your projects again. Remember the Starter EA thread? hehe the little engine that could have.....
+
+--- 帖子 #486 ---
+Hi, Fukinagashi First, sorry for my english, it isn’t very good. Lately I backtest your EA in GBP/USD – H1 - 2006 year (with Money Management ). Result was very good, but there ara some loss trade and some painful drawdown. I analyze some loss trade, and see it, if additional indicator/filter/s (for example H4 Stochastic Oscillator or H4 RSI) would be used, then some loss trades maybe are filtered. Can you analyze it too ? I attache multitimeframe stochastic and RSI for use. THX, Viatoris
+
+--- 帖子 #487 ---
+I don't know what I setup wrong. I'm using IBFX and so far Bagovino method produces constant losses. If any body could share his settings, I would really appreciate that.
+
+--- 帖子 #488 ---
+This thread has been a little quiet lately so I thought I'd report my forward testing from 3-12-07 to 3-29-07 (today). I am using v1.4c with default settings on demo at FXDD only on one pair - GBP/JPY. 13 trades - 7 winning for +1217 pips and 6 losing for -312 pips for a total of +905 PIPS. Thanks Fukinagashi for this great EA.
+
+--- 帖子 #489 ---
+Very nice results. Thanks for sharing.
+
+--- 帖子 #490 ---
+Miss Bag is a bit lonely on her own at the moment but is still knocking in profitable trades for me while I'm travelling elsewhere in Europe. The signature statement is still being updated every 5 minutes automatically but Bag TV is offline until I return in a few weeks. Real money on 3 pairs only. Have a great weekend everyone - mine starts now.
+
+--- 帖子 #491 ---
+I'm using the v14c with deafult settings. The only thing I changed is the GMT shift to 0, since it is on IBFX and risk percentage to 0.03. Everything else is at the default values. It is run on 4 majors and so far only losses. The graphs are set for 1H.
+
+--- 帖子 #492 ---
+Stick with it. It ain't been good for me recently either but overall the profit is still there. Bag TV back online now - take a look next week and compare entries and exits.
+
+--- 帖子 #493 ---
+I think the wheels fell off this EA's wagon recently. The attached PDF shows how one of my demos lost more than 50% in two weeks. It would have been more with margin calls. Up until then the account had slowly gained. I did not do near this bad on my live baby accounts. Proper money management and a limited pair selection helps. But I still lost money. I hope we can return to profits next week. Edit: I was going to say we all lost the last 10 days but after reading post #488 I deleted that comment. Congratulations Sovard.
+
+--- 帖子 #494 ---
+But not nearly as bad as Robin Hood . And some have paid for it! Miss Bag will get sorted soon.
+
+--- 帖子 #495 ---
+Wow, the only person who made money out of this EA was Glenn Bacon the EA system seller! This EA, which was sold for just under $1000, was promoted on the back of no losses during the MQL CHampionship that happen in the last quarter of 2006. These results have thus been proved to have been pure luck. I don't know about the actual strategy, but I do know that the money management is pure folly: you are risking 130-140 Pips just to make 6 pips. The risk/reward ratio is needs to be improved. I hope Glenn can work on improvements that will truely indeed benefit the buyers of this EA.
+
+--- 帖子 #496 ---
+He seems like a genuine guy so I'm sure he will. Bag TV online now ready for the week and a fresh site. Miss Bag approves.
+
+--- 帖子 #497 ---
+Nice to see somebody from Whitefield, UK drop by.
+
+--- 帖子 #498 ---
+It's back and now better than ever. Access through my signature below. Drop by and say hi.
+
+--- 帖子 #499 ---
+Shame Miss Bag didn't keep the USDJPY long open from yesterday but I can see why she exited.
+
+--- 帖子 #500 ---
+Been running for about 2 weeks. Tough week for bag-it. loosing the profit made a week ago. Sada
+
+--- 帖子 #501 ---
+Hello, Just wanted to say thanks to Mr F for this marvelous EA....and to all else who've been testing &amp; making suggestions for improvements. I've been following this thread and running the EA on &amp; off, for some time now-live and with real $$. I don't have any hard &amp; fast numbers to show you today...but thats not what this post is for. Just a post to share a story. I've been trading forex with reasonable success(trading on the same initial investment) for the past 3+ years. From time to time I've taken some pretty good losses (I know... it comes with the territory) and at times have honestly gotten a little disillusioned with the whole Forex thing. This last cpl of weeks have been one of those times. Anyway, to cut a long story short...I loaded v1.4b..it ran a string 5 winners in a row. Oh happy day! The timing couldn't have been better. It was just what I needed.... Thanks again, all. Dion
+
+--- 帖子 #502 ---
+And Dion. A bit better than me lately. But I'm still live with Miss Bag. Real money.
+
+--- 帖子 #503 ---
+When using an EA try to analys the behaviour . Such as how many max . Conc. loss / profit. I do this to my EA, for example my EA have : opp. win/loss 3 : 1, max. conc. win loss 8 :4 so when my EA start the first day loss, I stop, the running, and run it only in the back test for the next day. Until I find 4 times loss or my Balance chart have a good up trend, then I start my EA again. Wow, my english is good today
+
+--- 帖子 #504 ---
+well...that migh work in theory, please tell us if it really works
+
+--- 帖子 #505 ---
+Yup, only theory for you. I can't prove on your EA, or Miss.Bag, I don't know the behaviour of this EA But let me explain how I work, ( hope this is usefull to you) I make an indicator ( I name this indi. a Balancer). This indicator is simulating my trading in every minutes run , so I don't need to run back test all the time. (Look at the chart) By this way you can analys your balance chart and make a good timing when to run EA or not. Or you can try to optimizing your EA even better This you see, it's not just theory, I use it right now
+
+--- 帖子 #506 ---
+Hi everyone, 1.4c has just opened 2 trades sell EUR/USD 1.3415 and sell AUD/USD 0.8237 the cross was valid but RSI is still above 50 in both pairs...any idea why? anybody else got these trades? thanks
+
+--- 帖子 #507 ---
+Is the RSI 14? I've dropped EURUSD as it has rarely been a winner over the last 2 months. But I've never had 2 trades open same cross. You sure she did both? AndAUDUSD I have no knowledge of. Sorry, over my night for the first time in weeks, Windows decided to do a reboot. Looking at the broadcast logs Miss Bag was out of play from 01.00 to around 04.00 GMT. The USDJPY remains open at 05.11 GMT - the time of this post.
+
+--- 帖子 #508 ---
+And edging up slowly.
+
+--- 帖子 #509 ---
+But a nice trade to go to bed on as I'm bullish with a pivot of 119.10 and if we can break through 119.52 it'll open the way to 119.94 and beyond. And all this within 8 hours please forex Gods. Currently at 119.30.
+
+--- 帖子 #510 ---
+No, maybe I forgot to place a "comma" after I write "2 trades, one EUR/USD and one AUD/USD... about RSI...should be 14? i thought it was 21... thanks
+
+--- 帖子 #511 ---
+You may have overlooked a few posts when you read the thread. Take a second look at post #25 which was a reply to a post by Bago who asked a similar question.
+
+--- 帖子 #512 ---
+And exited for 5 pips 4 hours ago on the dip. Now 119.44. Shame. She wouldn't have if the trade was fresher. C'est la vie. Now GU short. Have a piptastic day everyone.
+
+--- 帖子 #513 ---
+Hi, Here are my result since February on Demo account and REAL account. I let demo run alone but it happens I close trades manually on my real account if technical analysis tells me it's going to reverse. It's a real good Ea but able to take all profit back in a few hours if not manually controlled. Hope this help Thierry
+
+--- 帖子 #514 ---
+Thanks. 241.87 on a mix of 0.1 and 0.5 (real money) and 3667.29 on a mini would suggest, on 4 pairs, if the trades are the same it would be better to leave Miss Bag alone? Your thoughts thierrybl please. I haven't crunched the numbers but if you'd traded at the same mix on the demo it would still be more profitable to not exit manually by my first take on the numbers. Am I wrong?
+
+--- 帖子 #515 ---
+Anyone using them? I've looked in the thread but I can't seem to find the GMTDiff for Alpari. I know it's different to FXDD which is 2 and I seem to remember for Alpari it was 1. But that's relying on memory which is not what it was. Assistance anyone please? On another note there was a margin call caused by a short GBPUSD from yesterday and Miss Bag tried to go short on USDJPY several hours ago but insufficient funds due to the open loss. Interestingly, she would have exited by now at a loss on GBPUSD and the profitable short USDJPY would still be open.
+
+--- 帖子 #516 ---
+hi, My feeling when I see accounts fluctuate is that results are better when manually controled. However, Lots should be brought to the same proportion to be compared (i.e. every 0.5 lots profit/loss on real account has to be divided by 5). I don't know if will have time to do that this week-end. Results on real account is biaised as I only close order manually when profit is high but never when in loss, letting SL do it's job, even if it's obvious we are on the wrong side. I think SL controlled with ATR is good but 6 is maybe too much. I think a filter should be added ; I don't know exactly which one but waiting for bar to close could help. I can't open more platforms (not enough memory) and if some of you could test some other settings, I beleive StoplossFactor at 4 and TS at 50 may be interesting. Hope this help Thierry
+
+--- 帖子 #517 ---
+It'll be interesting when or if you have the time.
+
+--- 帖子 #518 ---
+What page is the latest version on for testing? What settings, currencies and timeframe? Thanks
+
+--- 帖子 #519 ---
+Miss Bag is busy.
+
+--- 帖子 #520 ---
+Hello, I am very sorry that I am so rarely present here. I am very busy job &amp; familywise. Since I do not want to slow down the development of this method I have decided to publish the source code. The expiry is already removed, so everyone can use it right away and unlimited. Please feel free to modify the code, publish it etc. Please nevertheless respect that this is supposed to be free software. Thank you in advance.
+
+--- 帖子 #521 ---
+Nice to see you again.
+
+--- 帖子 #522 ---
+many thanks for this ea. I download EA but it is grey and I can't access or modify it. Please help. Thanks
+
+--- 帖子 #523 ---
+Hello Fukinagashi... you are one of the beckons of light in this complex unpredictability of FX... your benevolent gift is much appreciated by all... FX beginners as well as experts... the first group can continue to learn... the second - work on further improvements/development under the Open Source GNU rules... THANK YOU!!! I just finish reading your thread yesterday... downloaded your EA... but it is not loading on the chart... when execute "Compile" there is an error... -------------------- Description Compililng 'Bag-itv15 free version.mq4' 'OrderReliable.mqh' - cannot open the program file 1 error(s), 0 warning(s) File C:\Program Files\FastFX Trader\experts\Bag-itv15 free version.mq4 (23,1) ------------------- I did not change anything... just executed "Compile"... the ERROR is always there... Please help... -tks
+
+--- 帖子 #524 ---
+Thank you. Are the default settings the best to use? What TF and Currencies to use again? I also get this error, and I do have OrderReliable.mqh. You can get it here; http://www.forexmt4.com/_MT4_Include...ble_V0_2_5.mqh
+
+--- 帖子 #525 ---
+matrixebiz... thank you for the link... I'm not a programmer though... would be afraid to touch anything... should we do this correction on our own...?
+
+--- 帖子 #526 ---
+It still get the Compile error when I try to compile, saying it still cannot open the file ? Weird. not sure what's wrong. I guess we'll have to wait for the programmer to respond
+
+--- 帖子 #527 ---
+Anyone?
+
+--- 帖子 #528 ---
+Sorry I have not responded before. I lost count of the times I tried to enter this thread in vain. Damn Hackers!!!!! Ok as already described you need the OrderReliable.mqh. The problem is, that the expert looks actually for the file OrderReliable.mqh, not for OrderReliable_v2.5_blabla.mqh. So you either use the file of the above mentioned link and rename it or you utilise this one . Just to avoid misunderstandings: This file (unpack the zip) in the directory ..\experts\include.
+
+--- 帖子 #529 ---
+Ok, thanks. I did rename it to OrderReliable.mqh. I put the files in the proper directories and tried to compile again and got a couple warnings (see pic). Is it Ok? EDIT: sorry, forgot to attach. EDIT2: I guess it take a while to attach the file.
+
+--- 帖子 #530 ---
+Thank you Fukinagashi... it works!!! ... I just had to do "compile" and your EA located the file in INCLUDE folder... it's alive... hope it will make our trading times/lives simpler to cope with... please let us know how we could follow your steps... we don't want to loose track of you... do you have a blog...? will you be coming back here...? ALL THE BEST TO YOU AND YOUR FAMILY from all of us... -tks for your gift!
+
+--- 帖子 #531 ---
+Can you please help me. I downloaded the EA, but it is grey, which means I can'y open it or change any settings. How do I download the EA sothat it is active? many thanks
+
+--- 帖子 #532 ---
+The EA it self is working fine for me now and not grey. You could download the other file needed here; http://www.forexfactory.com/attachme...1&amp;d=1176824722 Then compile again with both files in the proper directories.
+
+--- 帖子 #533 ---
+Hello Schuette... go to last post by post Fukinagashi... download the OrderReliable.mqh file [he is giving a link there]... [1] place it in the MT4s directory on your C drive =&gt; ..\experts\include. [2] Fukinagashi's EA should be in your experts file [3] right click on EA in your left window... select modify... in the editor... the code window... right click there, anyplace... select compile... [4] restart your MT4... EA should be working now...
+
+--- 帖子 #534 ---
+hey yo ! Whyofwhy allready back to ur beautyful island i hope so.. Wassup with lady bag ? no more videostream Hope everything is well and ya update us soon on your progress! Kind regards, Aidan
+
+--- 帖子 #535 ---
+Miss Bag is suspended at the moment. Great to see you again. I'm hoping someone will take her and change some of the settings for another trial later. She had a great start but gave it back and then some. Yup, back in Malta now and started another journal here which is going quite well. Drop by some time.
+
+--- 帖子 #536 ---
+Is it just me or is there really no post on this since May 07 ??? Can't believe I have reached the end of such an interesting thread... wish it did not end
+
+--- 帖子 #537 ---
+Yeah me2 !
+
+--- 帖子 #538 ---
+Hi guys, Can one of you solve my problem please? During the news, oftenly spreads expanding like hell, for example, with EUR/USD it could be up to 11 pips... So it's very dangerous for us to let our EA working unattendly, and what I would like to do is to lock the spread to max 2 pips for EUR/USD and set OFF our EA or not working during that expanding spread, then when the spread goes back to normal, as 2 pips, our EA will ON again automatically. Thanks in advance for your kind attention, and I hope it maybe usefull for others as well.
+
+--- 帖子 #539 ---
+Can someone post the last bago method EA I can't get it to work in my charts. I dont know what I m doing wrong. Can someone please help me out. Thank you in advance.
+
+--- 帖子 #540 ---
+Probably they just developed it now trying to sell it. Files in download section say free version like it expires. I think I tried the free version once a while ago it didn't do anything that special. Just the same old same old. sevejose click on the side next to the page numbers of the thread where it says "60" it brings up a list of attachments to this thread you can download you have to save them.
+
+--- 帖子 #406 ---
+Mike, take a look at this..... http://www.forexfactory.com/showthre...01#post1566801
+
+--- 帖子 #407 ---
+Где взять файл OrderReliable.mqh ???
+
+--- 帖子 #408 ---
+Hi, I cannot read Arabic, sorry. MANGO, if you are still here send me your e-mail rydnek2@gmail.com I have some input that might help you. Regards
+
+--- 帖子 #409 ---
+hey jodie, insert this code into your EA based on return value you have in start function: a) return value is integer: if (MarketInfo(Symbol(),MODE_SPREAD) &gt;= 2) return(0); b) return value is boolean: if (MarketInfo(Symbol(),MODE_SPREAD) &gt;= 2) return(false); and you should be fine.
+
+--- 帖子 #410 ---
+hey jodie, insert this code into your EA based on return value you have in start function: a) return value is integer: if (MarketInfo(Symbol(),MODE_SPREAD) &gt;2) return(0); b) return value is boolean: if (MarketInfo(Symbol(),MODE_SPREAD) &gt;2) return(false); and you should be fine.
+
+--- 帖子 #411 ---
+Hi GiulioFX, Thanks a lot for your kind attention, I've tried it and it works fine. But is there any such special way or function like simple database could be constructed to allow multiple spread according to the pairs, so we can let our ea trade on any pair, and if possible on any broker as well. Again, I'm thanking you in advance.
+
+--- 帖子 #412 ---
+hello jodie, answer is yes, you can do it. what is required though is more sophisticated approach. you need to have a function that will go thru an array variable which will contain your spread table per broker and returns actual spread. i think i should have a paypal account. regards, giuliofx
+
+--- 帖子 #413 ---
+Hey Jodie, [font=Verdana][size=2][color=#0000ff]giuliofx@gmail.com [/size] How are you? Are you still interested in that spread function per broker and currency? Send me an email: [/font][/color]
+
+--- 帖子 #414 ---
+so where exactly do u put that? thanks
+
+--- 帖子 #415 ---
+int start() { // exit if spread is more than .... if (MarketInfo(Symbol(),MODE_SPREAD) &gt; 2) return(0); HERE IS YOUR CODE return(0); }
+
+--- 帖子 #416 ---
+Hi fukinagashi, I got some good results from Bag-it V1.1, but cant seem to get the same results from the free version. Would it possible to release the source code for Bag-it V1.1. Thanks in advance B.S
+
+--- 帖子 #417 ---
+fukinagashi, think this EA is great. Please can get V1.1 to forward test for 2008. Will post results here weekly. Thanking you
+
+--- 帖子 #418 ---
+i stumbled upon this looking for an EMA SMA cross overindicator....anyone still using this to much success?
+
+--- 帖子 #419 ---
+in attempting to try this i had two errors: Function "ordermodifyreliablesymbol" is not referenced and will be removed from exp-file Function"orderreliablelasterr" is not referenced and will be removed from exp-file what does this mean and how can i fix it?
+
+--- 帖子 #420 ---
+hi, does anyone still use this ea to ft? i extend the bag v1.1 expire date , i think this ea can be work again, anyone want to test ? Attached File(s) Bag-it v 1.2.ex4 42 KB | 383 downloads
+
+
+===== 附件下载链接 =====
+

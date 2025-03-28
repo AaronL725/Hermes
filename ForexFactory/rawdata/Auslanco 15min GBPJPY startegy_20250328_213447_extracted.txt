@@ -1,0 +1,1898 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Developed by Spanishfly based on my original 4hr/1hr MTF strategy. 15 min (Intra-day) GBP/JPY for VT charts . Charts can be downloaded free via www.vtsystems.com ) a).Simple Moving Average 5 close b).Gann Hi Low Activator 10 c).Level stop Reverse version 2 Values : ATR Periods 9 ATR Multiplier 3 d).QQE alert Values: Smoothing Factor 60 Buy : Wait for the two buy alerts.(Green arrow and Blue dot). Buy when the price hits 5 SMA after the two signals. Stop Loss: Right below the confirmation bar on the Gann Hi low Activator line. Take profit: Calculate the distance between OPEN price of the confirmation bar and the price of the Gann Hi low Activator(TFT line) at that point and multiply it by 2. (twice as your stoploss ) My TP targets are as follows and an example of lot allocation(total lots 5): 1st TP: 2 X Stoploss (4-Lots) 2nd TP: Reverse signal confirmation(1-Lot) Total profits for 5 days live forward testing (since 26/August) : 923 pips on TP1 (7 trades) 6 wins 1loss This strategy is currently on Forward testing stage. Please demo trade this at least for 2 months
+
+--- 帖子 #2 ---
+Another example
+
+--- 帖子 #3 ---
+Level stop reverse system down load this to VT charts trading system builder
+
+--- 帖子 #4 ---
+QQE alert . . down load this to VT charts trading system builder Post #170 http://www.forexfactory.com/showthre...=41509&amp;page=12
+
+--- 帖子 #5 ---
+Screen shot
+
+--- 帖子 #6 ---
+Yay m the first to post here other than u aus
+
+--- 帖子 #7 ---
+Hope this works as well as your other strategy!!! Your awesome.
+
+--- 帖子 #8 ---
+What indicator makes the blue dot, Aus? Is that the QQE alert? If we don't have the blue dot, what should the QQE look like at that time?
+
+--- 帖子 #9 ---
+another example On current open trade as @ 2nd September 2007, 0700GMT
+
+--- 帖子 #10 ---
+any idea wats wrong in this set ? the other 2 thick lines are moving averages created by cryten system , black is HiLO , the move was reversed after strong confirmation bar
+
+--- 帖子 #11 ---
+It's the new QQE alert QQE cross the slow RSI.. (above or below 50 line)
+
+--- 帖子 #12 ---
+You have to use only one level stop reverse system, which I have give on this thread. Remove the VT default system.
+
+--- 帖子 #13 ---
+thats the modified one Aus 9 x 3 one ...
+
+--- 帖子 #14 ---
+if i removed the qqe alert (the crypten system) and manually see the 60 smoothed qqe crossin , it works wonderful ! i think the crypten system default values need to be modified then ?
+
+--- 帖子 #15 ---
+HI bro,, Can you give a try to have the VT level stop modified system and QQE alert on MT4.. Thanks in advance..
+
+--- 帖子 #16 ---
+Aus m trying it on mt4 too , it works the same way , someone has given stop level reverse in your other forum , instead another arrow indicator , we can set alarm sound for the qqe crossing , it exactly like vts from my understanding , i can post the template for mt4 here if u want it
+
+--- 帖子 #17 ---
+This looks great, must master it.. thanks auslanco
+
+--- 帖子 #18 ---
+Please do
+
+--- 帖子 #19 ---
+Hey here is the mt4 template , instead of another arrow , the alert is in sound form for qqe crossing , will be helpful if someone can make the arrow crossing indicator instead of sound alert , N Aus can u comment on the correctness of this chart below (on mt4)
+
+--- 帖子 #20 ---
+The MT4 template : no QQE alerts. Instead I have added the QQE indicator QQE indicator for MT4 was created by Que Level stop Reverse indicator was created for MT4 by Brucehven
+
+--- 帖子 #21 ---
+MT4 signals are slightly different. This could be due to different broker platforms. this shouldn't be a big problem.
+
+--- 帖子 #22 ---
+mine has 2 more arrows than yours. what's the problem? i use ibfx.
+
+--- 帖子 #23 ---
+I just back tested this strategy on MT4. It seem to be this stategy works awsome on trending markets but fails on ranging markets.
+
+--- 帖子 #24 ---
+Here is an updated version of my MT4-LevelStop-Reverse indicator. This one has some bug fixes and some changes to the configuration to make it a bit easier. Note, I've started naming the file with the version. Before installing this, if you downloaded my previous version, go to your indicators folder on MT4 and delete "MT4-LevelStop-Reverse.mq4" and "MT4-LevelStop-Reverse.ex4". That will avoid confusion about which one to use. This file is called "MT4-LevelStop-Reverse-vB0-2.mq4". Also, if you want to save a template with this indicator setup, you will need to perform one step first. The arrows that get drawn on the chart are objects that the indicator will delete when unloaded. However, when you save a template, it saves the objects as well which means those arrows will come back every time you load the template which is not the desired behavior. You want the indicator to create and remove the objects. When you have your screen all setup and you want to save the template, first right-click on the chart and choose "Object List". Delete any objects with the name "VTS-xxxxx". Then save your template. The arrows will not be there anymore, but as soon as you reload the template, the indicator will draw them again. Beta Version 0.2 September 2, 2007 This is a combination of two VT Trader trading systems. The first is the default VT-LevelStop-Reverse and the second is one that was modified to allow customizing the ATR settings for calculating the stop line. I've tried to combine these 2 versions into a single MT4 indicator. The default VT version allows you to use two modes, optimized, and manual. Optimized mode calculates the stop line by using a 14 period EMA smoothed ATR(14) multiplied by a fixed multiplier of 2.824. In manual mode, you set a fixed number of pips you want the stop line to be drawn. In my MT4 version, there are two modes: 1. ATR mode (customizable ATR period, multiplier, and smoothing) 2. Fixed stop mode (customizable fixed stop) The input parameters are as follows: UseATRMode - This calculates the stop line based on ATR using customizable period, multiplier and smoothing. NonATRStopPips - If "UseATRMode" is false, then this value is the number of fixed pips to place the stop line. ATRPeriod - If "UseATRMode" is true, then this sets the ATR period. ATRMultiplier - If "UseATRMode" is true, then the ATR value will be multiplied by this value when calculating the stop line. ATRSmoothing -If "UseATRMode" is true, then this will smooth the selected ATR with an EMA of this smoothing period. UpArrowColor - The color the Up arrows will display in. DnArrowColor - The color the Down arrows will display in. ArrowDistance - The number of pips away from the high or low of the bar that the arrow should display. On the colors tab, only the first color is used. It is the color of the dotted stop line. For Auslanco's 15M strategy posted at the beginning of this thread, use the following settings: UseATRMode = true ATRPeriod = 9 ATRMultiplier = 3.0 ATRSmoothing = 0 For the default VT-LevelStop-Reverse behavior, set the following: UseATRMode = true ATRPeriod = 14 ATRMultiplier = 2.824 ATRSmoothing = 14 To use this indicator, copy it to your &lt;MetaTrader Folder&gt;\experts\indicators folder. Then restart MT4. It will appear in the custom indicators list. This is version Beta 0.2. As I get feedback, I will release newer versions as needed.
+
+--- 帖子 #25 ---
+I have the indicators in the strategy builder, but how do I get them to the chart?? I'm using VT. Sorry, I'm computer stupid. Thanks, Brandon
+
+--- 帖子 #26 ---
+Hi Brandon, you right click on the chart and then click "add trading system" then click "vt-level stop-reverse system 02". make sure you click the one with the 02 on the end. because there is a vt default "vt level stop reverse system" and you dont want that so dont get confused. you do the same for the "QQE ALERT" once you add it also in your strategy builder. the QQE alert is what gives you the dots. Hope this helps.
+
+--- 帖子 #27 ---
+Good to go. Ya'll are awesome! Brandon
+
+--- 帖子 #28 ---
+This sounds great and we already have things for mt4. Thanks to everybody.
+
+--- 帖子 #29 ---
+It looks like it is working on MT4 but "Level Stop Reverse Indicator" gives more signals on MT4 which may end with stops. For everyone who is demoing just watch the two platforms (prefably VTT) to take action...
+
+--- 帖子 #30 ---
+Aus weren't you originally running this off of 5 minute charts, not 15?
+
+--- 帖子 #31 ---
+This is to say thanks to Aus, kar, Que and the other wonderful contributors who have made me to fall in love with this wonderful pair. The strategies are all working fine, God bless you all.
+
+--- 帖子 #32 ---
+I run it on a VT stration. As you can see in my chart we have a 8 pips price diffrent in the feed. It makes the candle formation different. I get the feed from vtdemo.fxserver.com Any idea how it can be fixed (I guess you get it from different server)
+
+--- 帖子 #33 ---
+sory here the chart
+
+--- 帖子 #34 ---
+I just went through it and I think I've got it somewhat, but I have some simple questions. 1. How do i know which bar is the confirmation bar? (I went through your examples but I still feel lost lol) 2. Also because of the confirmation bar, I don't get where you put your stop loss. If you could clarify these a little more, I'd appreciate it bro Thanks for sharing.
+
+--- 帖子 #35 ---
+Maybe the confirmation word mixes the idea a bit.In this strategy the confirmation bar is the next bar after the two signals(arrow and the dot). And the stop loss is the Gann level which is under that confirmation bar.
+
+--- 帖子 #36 ---
+Perfect, thank you brok
+
+--- 帖子 #37 ---
+Hi Aus Is the initial stop staying under the Gann line where the comfirmation bar is located or is it trailed under the Gann line as the price moves on into profit
+
+--- 帖子 #38 ---
+Wondering if confirmation bar confirms by the candle type , meaning if we are on sell condition we need the bar to be a sell candle , and buy condition would need the confirmation bar to be a buy candle ... or this doesn't matter , the confirmation bar of any type would still be a confirmation bar and its purpose is only for the stop loss setting up ... ?
+
+--- 帖子 #39 ---
+Well for the moment just by looking last week's data I haven't noticed we should be aware of the candle types.... But off course if the movement were strong then the retracement may be a bull candle on a bearish trend. Just have a look at the last trade oppurtunity on Friday.
+
+--- 帖子 #40 ---
+I am no Aus but as I have followed his posts on all of the threads I can easily say that he is not a trailing stop man
+
+--- 帖子 #41 ---
+I have followed all his posts in other threads too
+
+--- 帖子 #42 ---
+excellent question, I had the same thing in mind maybe auslanco can fill us in..
+
+--- 帖子 #43 ---
+I would like to know if the sma is 3 or 5 periods. My documents have both numbers printed. Which one is the typo and which one is the correct one to use. For now I assume 5 sma. I mitigated from vt to mt4 and imported the parameters and indicators (to many disconnects from VT last weeks). But in mt4 i do not get the dot/qqe crossing confirmation signal. Can this be added? I saw a posting with aus.zip which has this in audible form. Can this be dl and installed wihout losing the proper settings definded by Auslanco? Also, I am looking for the definition of the QQE indicator. I do not have it found/explained in my library of (old school) books. Danny
+
+--- 帖子 #44 ---
+The intial s/l is fixed at the Gann line point of the confirmation bar. After the position has been initiated it works with 2 TP levels. The first TP is 2 times the s/l of the fixed level (a fixed pre-determined TP level) The second TP level is initiated when there is a reversed (opposite) signal given by the strategy. This 2nd. TP (changing/dynamic level) is thus also becoming your "trailing" s/l level. Wichever comes first (the fixed s/l or the 2nd. TP aka. sar level. Fixed s/l hit: Exit and wait for new entry. 2nd. TP hit: Close your last lot. Calculate your new TP and s/l levels. Enter the new position. Danny
+
+--- 帖子 #45 ---
+After reading the documents strategy again I noticed that two different 2nd. TP methods are given. So my previous explanation could be wrong according to this difference. I ask Auslanco to confirm which 2 nd. TP is used. In the doument an example is given where is stated that the 2nd. TP is 3x the S/L level. I guess that is why it is in Beta at the moment. Danny
+
+--- 帖子 #46 ---
+Hi Brok, Check my post where I put the latest version of the indicator and see the note about saving the template. If you save the template with my indicator without getting rid of the arrow objects first, they will be saved with the template which could cause "ghost" arrows to appear later. Not sure if that's the problem or not. Bruce
+
+--- 帖子 #47 ---
+I understand what you say with the ghost arrows but this is not about it. I don't understand the processing of the platforms but somehow there are definetly some differences between VTT and MT4. (on 31/08, GMT 05:00 down arrow and GMT 06:30 up arrow on MT4, none on VTT)
+
+--- 帖子 #48 ---
+Confirmation bar = very next bar after you get both the signals. It has nothing to do with the candle stick bar type.
+
+--- 帖子 #49 ---
+Sorry guys it's a typo. The correct details are you enter the market on 5 SMA. 1st TP level is 2X Stoploss. 2nd TP level is reverse signal confirmation.(it will run all the way until you get a reverse signal)
+
+--- 帖子 #50 ---
+By reverse signal, do you mean when we get both the arrow + dot or just either one of them?
+
+--- 帖子 #51 ---
+The current QQE indicator by Que allows you to set an alert or email when the line crosses but doesn't put the dot on the chart. I think someone already asked Que if he can add this. Let's wait and see what he comes up with. But the alerts should be sufficient as well for now.
+
+--- 帖子 #52 ---
+Both the arrow and dot. Mt4 user dont have the dot.. so please use the QQE cross
+
+--- 帖子 #53 ---
+I'm testing this strategy on all the smaller TF currently. 15 mins gives some clean moves where you can have set of rules and guidelines. 5 mins.. I'm still figuring out where to place the SL etc etc. From this week onwards I'm testing this set up on 1min charts as well. As for now.. 15min has given some very promising results. But I'm yet to test the 15min on a ranging market. So it's not advisable to use this strategy on a real money account yet.
+
+--- 帖子 #54 ---
+I have the settings that you posted for your Beta 0.2 version, but on MT seems to give more signals, here you have 2 pictures attached http://img237.imageshack.us/img237/7615/15minvo4.gif http://img237.imageshack.us/img237/8512/vt15minhb1.gif The blue area on MT shows 2 arrows that we don't find on VT. Just wanted to point this out. P.S I hope the images are clear enough for the specific chart area, since on the VT image I don't have anything to highlight it, except the vertical black line.
+
+--- 帖子 #55 ---
+Aus, do the two signals(arrow and dot) have to be on the same bar....if not, how far apart is acceptable ?
+
+--- 帖子 #56 ---
+Yes, I've seen some discrepancies between VTTrader and my MT4. I believe the formula for the indicator is correct, but different data from different brokers can cause it to show different things. Even just a one pip difference on a bar can be enough for it to trigger the reverse. Plus if the number of bars are not completely identical with the identical prices, that will have some impact on the ATR calculations. When you see the stop line reverse from top to bottom or vice-versa, it means that the bar it is zigzagging across closed past where the stop line was before and triggered the reverse. Thanks for pointing that out and I'll take a look to verify the formula looks intact and inline with the VT side. Bruce
+
+--- 帖子 #57 ---
+So we want a Dot when? This is getting messy, I am looking at an all in one indicator like I did with the Bullseye indicator. But for now 2 questions. 1. When do we want a dot? 2. Do you mind if I take a look at your code Bruce? I am not going to waist time if you do not want me to.
+
+--- 帖子 #58 ---
+Hi Que, You are welcome to look at the code. I posted the mq4 so it's readily available. I believe the dot will show up when the RSIndex crosses the slow line. A blue dot underneath the price when it crosses up and a pink dot above when it crosses down. Bruce
+
+--- 帖子 #59 ---
+Que;1572410]So we want a Dot when? This is getting messy, I am looking at an all in one indicator like I did with the Bullseye indicator. But for now 2 questions. 1. When do we want a dot? When the QQE RSI Index cross the slow RSI. (above or below 50line ) 2. Do you mind if I take a look at your code Bruce? I am not going to waist time if you do not want me to.
+
+--- 帖子 #60 ---
+Problem with what you are asking for. QQE is in a seperate window, therfore any dots I place would be based in the current window of QQE not the chart window. Another option would be a Vert line but that just looks ugly. I am also changing the code a bit to take out the alert as previously asked and adding a Playsound, Comment and Print statement. This will alow you to have custom sounds for each alert. This should help a bit. Looking for the best way to do this.
+
+--- 帖子 #61 ---
+Hope I can get some help please. Trying to understand the ATR Multiplier 3...how does one go about adding this. As well, does it matter what the colour of the arrows are as my set up shows blue arrows/blue dot. And finally, any VT experts can guide me thru deleting the previous Level stop reverse version? Thank you.
+
+--- 帖子 #62 ---
+Hi Que, If you want to place the dots as objects, you can place them in the chart window from your indicator. Just specify window 0 in the ObjectCreate call.
+
+--- 帖子 #63 ---
+Thanks, I was not aware that would do it. Easy to do then. Just updated the sounds. Someone had a very convincing PM. So the new version will not have the alert function, but a Print, PlaySound and Comment. Effectivly the same thing just no popup. I thought about Messagebox, but they are limited, and I do ot like the functionality.
+
+--- 帖子 #64 ---
+Hi Venturess, The two values refer to the "Level Stop Reverse" setups. You will have a chance to set them up when you attach the LSR system to a chart. There is no real need to delete the previous LSR you loaded. The new one will be loaded with a 2 at the end. I think you can work your way through it from here. If not, give a shout. Ron http://www.forexfactory.com/images/icons/icon14.gif
+
+--- 帖子 #65 ---
+Can you be so kind and post indicators you are using in your template? I have QQe but other i cant find
+
+--- 帖子 #66 ---
+The level stop reverse is in this thread. Post 24. Bruce
+
+--- 帖子 #67 ---
+i found. but i need some momentum and gann activator
+
+--- 帖子 #68 ---
+Look in Auslanco's SI strategy thread here: http://www.forexfactory.com/showthread.php?t=41509 There you will find the posting of the Gann indicator by Que. For momentum, you can use the one that comes with MT4, just put a level line at 100. Or you can use this attached indicator to have the middle line be zero. Bruce
+
+--- 帖子 #69 ---
+Fantastic job mate - you guys are really on the ball here - many thanks and even more pips to you, Aus and the crew!!
+
+--- 帖子 #70 ---
+Thanks Ron! I still was wondering why my buy arrow is blue when everyone else is green. Perhaps I should reload the LSR. Thanks again for your help. Venturess
+
+--- 帖子 #71 ---
+Right now i have this situation forming, what can you advice?
+
+--- 帖子 #72 ---
+So, You want a dot when the QQE crosses only after it crosses the 50 line? So for a buy dot, you will trigger on a QQE cross only if the cross is above 50?
+
+--- 帖子 #73 ---
+I think he means the 50 line doesn't matter. Only the cross if the RSI Index and the slow line.
+
+--- 帖子 #74 ---
+Hi Bruce, To use this new indicator of yours, do we still need to have 2 versions of it in our MT4 charts?
+
+--- 帖子 #75 ---
+Not according to Auslanco's 15 min strategy. Just one copy of my indicator and one copy of the QQE. Bruce
+
+--- 帖子 #76 ---
+50 line is not relevant, we want the dot only when the 2 lines cross each other
+
+--- 帖子 #77 ---
+As I had a few PM's asking for both, I made it as customizable as possible from the UI. I think its self explanitory, check it out and see if this is what you guys are looking for. By Default all Dots, Alerts or Emails are off. Aus or whoever can make a template file of this so everyone will have it exactly as you want it.
+
+--- 帖子 #78 ---
+Thanks Bruce
+
+--- 帖子 #79 ---
+Thanks a lot Que Great work, that is what we needed
+
+--- 帖子 #80 ---
+I just have to say... WOW! very good work
+
+--- 帖子 #81 ---
+Indeed. Thanks a lot Que
+
+--- 帖子 #82 ---
+we only need now some wavs telling the different types of alert with a sexy voice
+
+--- 帖子 #83 ---
+I'll leave that up to you heh.
+
+--- 帖子 #84 ---
+I have a sexy voice but I prefer not to listen to my voice.. lol any other volunteers?
+
+--- 帖子 #85 ---
+I can ask my secretary to make a voice over. She is 32, blond, D, blue eyes. But she has no clue what to say. Oh, i forgot she speaks Polish. No takers then, huh?
+
+--- 帖子 #86 ---
+Brucehvn and Que, thanks sooo much! You guys are just awesome!
+
+--- 帖子 #87 ---
+On MT4 platfrom i have the two signals to go short received and the confirmation has just opened at 5 SMA. We can initiate a short position as follow: s/l = tft at confirmation open = 234.05 1 TP = conf. open - 2* (confirmation bar open - 234.05) = 233.33 2 TP = s/l (for now) Is this correct by you Auslanco or am I wrong about something? Danny
+
+--- 帖子 #88 ---
+hey can anyone tell me how do i get the Level stop Reverse version 2 i am just getting the level stop reverse version not the 2nd one what do i do for that?
+
+--- 帖子 #89 ---
+Hi Que I posted a chart in the other thread, mybe I should have posted it here. Please have a look at the chart and the yellow vertical lines where where 15min bars are closed and qqe already crossed. It seems as if the dots are showing one bar late I do not know if I am right or not, this is what I believe Also as you note from the last bar, a number of dots have been placed on the same bar as opposed to one dot, additional dots appear as the price moves on the bar
+
+--- 帖子 #90 ---
+Dl from post 24 The dot is one bar to late indeed it seems. Maybe it can be edited by the designer. Danny
+
+--- 帖子 #91 ---
+Can it be that Que coded it in such a way as to appear at the confirmation bar? Just a thought.
+
+--- 帖子 #92 ---
+What did you do to make the dots appear? I cant seem to get the dots on my charts... Thanks
+
+--- 帖子 #93 ---
+xlr8, you have to select the properties of the qqe_alert indicator. select the inputs tab. set the crosslinealert to: TRUE press ok Should be dotting now Danny
+
+--- 帖子 #94 ---
+The way i see it is the dot appears on previous bar rather than next one, am I mistaken ?
+
+--- 帖子 #95 ---
+Thanks Danny, but I've tried changing the input but the dot still does not appear. At the moment Im using the QQE_ALERT_MTF_V4. Is that the right one to use? Could I be missing some extra steps?
+
+--- 帖子 #96 ---
+In the properties/input of QQE, under dotvisibility, is anything set to true?
+
+--- 帖子 #97 ---
+Ive set both the QQEUPCrossDot and QQEDownCrossDot to 'True' and the dot appears. But are these correct? I mean are these the dots that appear on your charts? Thanks
+
+--- 帖子 #98 ---
+Can anybody be of help, i dont have the dot crossover alert on my QQE alert for MT4.if there vis any post that i can download it from please some on let me know
+
+--- 帖子 #99 ---
+Post #77 for the download.
+
+--- 帖子 #100 ---
+hi Que, there is a bug in the dots... when painting them in the current bar, in each new quote... it creates a trailing of dots in the same bar.
+
+--- 帖子 #101 ---
+yes, i had that same problem.
+
+--- 帖子 #102 ---
+Glad it is slow today as it gives me time to study this 15min stuff. Looks very good so far all the way around. QUESTION: Will the QQE v4 work on auslo's big stratigy if the settings are adjusted as well as it does in the 15min T/F ? I would expect so but want to ask just to make sure.
+
+--- 帖子 #103 ---
+Sorry. I am wondering why I have only Arrows but no dots seems to be appear???
+
+--- 帖子 #104 ---
+Auslo or whom ever is more in the know than I? Please grade my chart and tell me if I have the correct set up? And would Somebody please explain the yellow numbers that keep changing are for and how they are to help? Thanks kevin http://img230.imageshack.us/img230/4...0045ts9.th.gif
+
+--- 帖子 #105 ---
+Hi man, i suppose this yellow numbers show the time to end bar. What indicator you use which draws dots and arrows??? I have only dots :-(
+
+--- 帖子 #106 ---
+The arows are in the "MT Stop and Reverse" settings. I forget what post that is in though. Heck here you go I hope?
+
+--- 帖子 #107 ---
+mt4 level reverse shows the arrows
+
+--- 帖子 #108 ---
+Kevinsw, You should use the GBP/JPY symbol. --- For the question no dot showing: If you do not get a dot check the settings of the QQE indicator. select the indicator select the inputs tab set crosslinealert: TRUE set QQEcrossupdot: TRUE set QQEcrossdowndot: TRUE set QQEcrossupcolor: teal set QQEcrossdowncolor: pink your chart should show in the upper left corner: MT4LEvelStop-Reverse Beta v0.2 On your chart you should have: 5 SMA (red line) Gann HI LO activator. In the datawindow it says TESTING. A dotted line which is the MT4LSR v0.2 with ATRMode set to 9,3,0 And below the chart you have qqe window. Make sure you have the time frame set to 15 . The UP/DOWN arrows and DOTS should be showing Danny
+
+--- 帖子 #109 ---
+hi thanks for ur effort, i think the QQE alert some of us has is not the version thoat has the dot in it, cos i have the cross line alert and it works perfectly but not the dots.please if u can attach ur own vesion for us to download. thanks
+
+--- 帖子 #110 ---
+Ok how is this? http://img236.imageshack.us/img236/9...0046tk2.th.gif
+
+--- 帖子 #111 ---
+Did you try the one in post OPPS wrong indicator..lol You will have to close and reopen your platform then look in the settings for the dots. (close to the bottom)
+
+--- 帖子 #112 ---
+I have attached the QQE indicator to be used for having DOTS on your charts: May the DOT be with you, from now on Danny
+
+--- 帖子 #113 ---
+Ok i removed version 2 and added version 4, still no dots. can't work out were i'm going wrong. any ideas?
+
+--- 帖子 #114 ---
+You have the inputs setting set to true as mentioned int he previous posts?
+
+--- 帖子 #115 ---
+I also lost it now, had the earlier indicators installed, which gave me the dotted line on the QQE, but with the last one, that is suddenly gone and the shape is not the same anymore .
+
+--- 帖子 #116 ---
+hey mate this is a .ex4 file i need a .mp4 file please Thanks Rahul
+
+--- 帖子 #117 ---
+Ok so open up QQE V4, all input settings are false - changed all to true except email, now have dots. no wiser how to use them but at least when i read the thread i have a reference cheers regards MPP
+
+--- 帖子 #118 ---
+The .ex4 file will work by itself, you don't really need the .mq4 file, unless you are going to modify the source code. Just place the .ex4 file in your ....experts/indicator/ folder , and restart the metatrader program.
+
+--- 帖子 #119 ---
+no mate does not ssem to work i added the indicator and restarted the mt4 platform and went to custom indicators there was nothing new? Pls help
+
+--- 帖子 #120 ---
+just set this up and look what i get, three buy arrows and a dot. looking at this chart the currrent candle has touched the 5sma, is this the buy point or do we wait for a better cross of the 5sma? Attached Image (click to enlarge)
+
+--- 帖子 #121 ---
+Bksul, Did you double check your windows explorer to check that the file is really in your experts/indicator folder. Also, look at the start of your custom indicator directory as in the screenshot below. Because of the hash's (###) , it should be near the top of your indicator list. http://www.irieisle-online.com/screen.jpg
+
+--- 帖子 #122 ---
+hey can i have the qqe in mp4 format and i am having problems logging in vt trader any idea about that my username and passwords are correct but i cannot login??? what should i do for that?
+
+--- 帖子 #123 ---
+hi top right hand corner of the thread page, there's a paper clip with the number 21 next to it. click this and look for Auslanco system indicators, it contains all the MT4 items needed the add the Version 4 QQe and you have it all, unzip it and read the readme file for save locations. hope this helps if not let us know and we can list the files you need. regards MPP
+
+--- 帖子 #124 ---
+mate i had a look at all the attachments and found nothin because i need the QQE in .mp4 format does anyone have that? then pls post it Thanks Bksujal
+
+--- 帖子 #125 ---
+quote=bksujal;1573690]mate i had a look at all the attachments and found nothin because i need the QQE in .mp4 format does anyone have that? then pls post it Thanks Bksujal[/quote] if you are running MT4 the .ex4 version works fine on mine so should for you, place the file in you expert indicators file and restart MT4. should be at or around the top of your list (my file location looks like this C:\Program Files\MetaTrader 4\experts\indicators) Attached File(s) ###QQE_Alert_MTF_v4###.ex4 19 KB | 523 downloads
+
+--- 帖子 #126 ---
+Que does not release the mq4 source code. Only the compiled ex4.
+
+--- 帖子 #127 ---
+ok then do one thing give me the link to download mt4 platform because i added the QQE so many times in indicators but it does not seem to load
+
+--- 帖子 #128 ---
+1. Download latest build from website http://www.metaquotes.net/files/mt4setup.exe You can open a demo account on demo server: Enter "Demo.Metaquotes.net:443" in the "Server:" field of the "Server" tab in the "Tools -&gt; Options" menu. Click "Ok". Then go to the "File -&gt; Open an Account" menu and select "Demo.Metaquotes.net:443" at the second registration page. 2. MetaTrader 4 can connect to MetaTrader 4 Server. Ask your broker support team about trading via MetaTrader 4 Server. try this, if i understand you, you are trying to run a MT4 expert on a vt program. if this is the case try looking through the other Auslanco threads, i am sure the Vt files were posted first and then Que converted them. regards MPP
+
+--- 帖子 #129 ---
+plase i need some clarification, when auslanco say wait for the two signal(arrow and dot) to line up, does this mean we can have a situation where they wont line up bcos on my chart it is kind of hard to find them together,they are always two or three candlestick away.
+
+--- 帖子 #130 ---
+I may get corrected on this but i believe, they just need to be present at the same time.
+
+--- 帖子 #131 ---
+The author of the MT4 version of QQE goes by the handle Que around here. He will NOT provide the mq4 extension version of the indicator as it is based upon some code that he does not have permission to distribute. He has been kind enough to provide us what we already have, and we are lucky at that. Please don't pester further for the mq4 extension file. If he can eventually LEGALLY provide it I'm sure he will. For now, you will have to work with the ex4 version, like everyone else. Most of us are not having the trouble you are, so you are probably missing some basic step. Relax. Reload the basic software if you must, and in a focused, deliberate manner, follow the instructions provided to you above. Good Luck.
+
+--- 帖子 #132 ---
+Ok, I know about the multiple dots. I commented out some code last night and forgot to add it back before compiling. As far as the dots placement.... The dots are being drawn correctly. I will try to post a screenshot with why they are in a few minutes, but I assure you, this is correct. As far as the .mp4 code. I can not publish it. Stop PMing me for the code as you will not get it, and honestly it is starting to get a bit annoying. Attached is the new code that fixes the multi dot issue.
+
+--- 帖子 #133 ---
+As I do not have Bruces email. This is altered code of his. I have not gone over the math for accuracy at all and am making the assumption it is correct. This clears up any dots he made previously template or not, and it also clears up his multi dot issue if I did it right. Only spent a few min on it and this is TEST CODE ONLY. ONLY BRUCE CAN RELEASE HIS OWN CODE. *edit* You can use any of this code in your programming.
+
+--- 帖子 #134 ---
+hi Que thanks for the hard work on this. question can this version be placed in the Auslanco template and will it affect the current setup. just trying to trim down the number of charts. i have been makeing the changes manually (add v4 remove v3) seems ok. regards MPP
+
+--- 帖子 #135 ---
+Look at the pictur below. Notice how the cross happens between two bars. This means that the cross was in progress and could change durring the Red lines. Until the bar under the Red line closed, there is no way to ensure the cross will be there at the close of the bar. Thus the dot shows up on the opening bar AFTER the cross has closed. This is the only way to do it correctly.
+
+--- 帖子 #136 ---
+No, the template refers to a specific indicator, and the indicator is named different. I am sure by the end of the day, if everyone is happy with all of the indicators, Someone will make a new zip file with the new template in it.
+
+--- 帖子 #137 ---
+Thanks for the reply, i have just made a change to the layout of MT4, looks better, so now i can keep the 4 charts opened. regards MPP
+
+--- 帖子 #138 ---
+I've put the latest versions of any of my MT4 indicators for Auslanco's strategy in a new thread. Since ForexFactory now allows the thread creator to edit the first post forever, I can keep the latest versions there for you. Just go to the link in my signature. There is an update to the MT4-LevelStop-Reverse there today. Bruce
+
+--- 帖子 #139 ---
+I have not been able to download the zip or compressed templates. But I have no trouble loaded the individual Auslanco indicators. When I have the chart the way I think it is supposed to be then I just "Save Template" and it is available to use again. Is there any real difference in my saved template and the templates that I am unable to download? It works great for me. Thanks for all your help.
+
+--- 帖子 #140 ---
+Nope, no real difference if you've got all the indicators setup with the proper values. Plus it looks the way you want it to When you use someone else's template, then you are stuck with their preferences.
+
+--- 帖子 #141 ---
+anyone tested this yet? all i need is the MT4 Level Stop Reverse indicator, but not sure which one to use..... Que and Bruce, your efforts are mightily appreicated!
+
+--- 帖子 #142 ---
+I posted a new version today at the link in my signature. I haven't looked at what Que did, but we talked about it yesterday so my new version should have the same fixes. The latest version will always be on the thread in my signature from now on.
+
+--- 帖子 #143 ---
+Good work QUE, Is it possible to have EA for MT4 for Auslanco system. Thanks
+
+--- 帖子 #144 ---
+thanks Bruce. I've installed Que's QQE ver 5 and your stoplevel reverse and set the indicators accordingly. So for a trade setup, I simply wait for an arrow and dot to appear side by side?
+
+--- 帖子 #145 ---
+i was just thinking, since we dont have a perfect set up for this strategy,maybe those that think they have a perfect setup can post there chart here, once they think it is set up for a perfect trade then maybe those of us that are still having problem wth our chart can have look
+
+--- 帖子 #146 ---
+first page of this thread has the instructions you seek
+
+--- 帖子 #147 ---
+No offense but I always wonder why one asks for an EA. Is it because you are too lazy to trade on your own, or do you hate to sit in front of charts all day. To be honest I have yet to see an EA stay profitable. With different times that the indicators say trade and yet you know better because the market is ranging too much to make a safe entry. an EA will make many poor choices.
+
+--- 帖子 #148 ---
+Running this strategy on demo. Can't seem to find the 2 signals(dot and arrow) together as per the details on pg 1 of thread. Am I missing something ?
+
+--- 帖子 #149 ---
+Ok, I have not looked at the math of Bruce's indicator but I assume it is correct. Given that, here is a Zip file with all of the indicators and a template. If someone would be so kind as to copy paste the source of the Level Stop Reverse from VT, that would save me the hassle of re downloading the VT platform. Thanks. Que *edit* Please read the Read Me file.
+
+--- 帖子 #150 ---
+the two signals may be a few bars apart but should not be interupted by a signal for the opposite direction
+
+--- 帖子 #151 ---
+There's been another update to the MT4-LevelStop-Reverse indicator due to a bug I found in using a couple buffers. The new version is Beta 0.4 and you can find it at the thread in my signature. Also, because people were asking, I posted Que's indicators in the first post of that thread. Bruce
+
+--- 帖子 #152 ---
+Thanks Bruce Great work
+
+--- 帖子 #153 ---
+I guess you answered my question, thank you for fixing the bug.
+
+--- 帖子 #154 ---
+hey guys i am using the vt charts now how do i change the colour of the dots ??? any idea please reply back. Thanks Bksujal
+
+--- 帖子 #155 ---
+I am not getting any DOTs in the chart. CAn you pl explain how do I get them.?? thanks
+
+--- 帖子 #156 ---
+- Here ya go. I think these are as "perfect" as it gets... Attached Image (click to enlarge)
+
+--- 帖子 #157 ---
+Hows this look. Attached Image (click to enlarge) thats a good 100pips profit, not sure what the TP would have been set at.
+
+--- 帖子 #158 ---
+How about using this indicator attched for TP ? Pivots are main targets but also like to play around resistances and supports.
+
+--- 帖子 #159 ---
+Quick question. When scalping the 1min./5min. does the 5min. qqe need to be crossed in the direction of the scalp?
+
+--- 帖子 #160 ---
+Can someone confirm a chart with me as well. Just wanna make sure if i am on the right page as well.
+
+--- 帖子 #161 ---
+download this and import it to your trading system, you will get dots
+
+--- 帖子 #162 ---
+Auslanco would you trade this (see image) no arrow because the QQE didn't cross but it came close and the other time frames are still bearish? just a thought Attached Image (click to enlarge)
+
+--- 帖子 #163 ---
+Are you sure that your QQE settings are correct. Mine is at 60 and it looks nothing like yours. I could be wrong, but please check it
+
+--- 帖子 #164 ---
+HI your settings should be at 50. did you download the indicators from this thread or just add them? Bruce has all the indicators posted to a new thread if that helps - see top of this page. regards MPP
+
+--- 帖子 #165 ---
+Actually, I just used Que's template posted on page 10 of this thread.
+
+--- 帖子 #166 ---
+MPP 1st page d).QQE alert Values: Smoothing Factor 60 your QQE alert Values: Smoothing Factor 5 Alex
+
+--- 帖子 #167 ---
+Beats me. please remember that this is a new system and since page one there has been 5 versions of the indicator, with changes to things like alerts and smoothing factors. I ain't smart enough to write it, but i will learn to use it. look at the paperclip for latest versions or visit bruce, he keeps them up todate. regards MPP
+
+--- 帖子 #168 ---
+Hi Bruce could you please confirm the smoothing rates, there has been another posting about it on the main thread. some have 60 and some 5. regards MPP
+
+--- 帖子 #169 ---
+For the QQE, it is smoothing 60 for 1M/15M and smoothing 5 for 5M. Those are if you are testing the scapling system. For Auslanco's regular system, it is always smoothing 5. Bruce
+
+--- 帖子 #170 ---
+where can I download this for vt. i tried link but couldn't find it.thankstom
+
+--- 帖子 #171 ---
+- Here ya go, bro: Attached File(s) QQE_alert.vttrs 2 KB | 395 downloads
+
+--- 帖子 #172 ---
+got the two signals to go long g/j waiting to retrace to 5 ema
+
+--- 帖子 #173 ---
+let's c which level will be reached first target or stop loss
+
+--- 帖子 #174 ---
+I'll be amazed if you guys still can manage earning by this system in this ranging market, since Auslanco did mention that the system is no good for times like this week.
+
+--- 帖子 #175 ---
+I have been finding that if you use the QQE on the 4H TF from his other strategy it helps minimize bad trades so when QQE is pointing down take only shorts when it is pointing up take only longs. Other experience from people this week and this strategy would be nice to hear. Thanks
+
+--- 帖子 #176 ---
+looking at the 1m and 15m strategy, i think i have too many dots dots and colours Fifty up - Dodgeblue Fifty down - Crimson QQE cross up - Teal QQE Cross down - Pink Both UP - Blue Both Down - Red Arrows up - Dodge blue Arrow down - Orange red smooth 60 specifically for the 1 and 15m which dots are required and so that we all understand when referenced which coulours should they be. Attached Image (click to enlarge) If i understand correctly we only need the QQE cross up and down and the coulours should be UP - Blue, down - pink just trying to compile a doc with all the info correct and in one place, will then post for all to down load regards MPP First pickings. Attached File(s) Aus's 1m 15m system.doc 718 KB | 1,133 downloads
+
+--- 帖子 #177 ---
+i have back tested this system for 2 weeks and got a cool results win : loss about 24 : 4 and the best frame fot it the 15 min tf and noticed that the perfect signals come when the arrow signal comes before q dots ( the first bar next the arrow or the bar after )
+
+--- 帖子 #178 ---
+Hello guys, Is it possible to Convert MT4 indicator as a Trding system in VTT. If possible pls reply I will attach the indicator..
+
+--- 帖子 #179 ---
+Is VTT the same as VT? if so look through Auslanco threads, all his original setup's were on VT, under the paperclip symble and the top of the page you will find all attachments, you may find them there.
+
+--- 帖子 #180 ---
+Great observation bro, i prefer the 15m scalp also. just a quick question, can you elaborate a bit more or show a diagram to what you mean in the brackets.(the first bar next the arrow or the bar after)? PS, just looking at your coment more, i think i understand the second time ive looked at it. do you mean its better when the dot is on the next bar or second bar after the arrow?
+
+--- 帖子 #181 ---
+24/28 is an excellent 86% winning percentage. Can you also give us an estimate what the pip profit was?
+
+--- 帖子 #182 ---
+15 min strategy, I had the opportunity to do a proper backtest on the MT4 15min strategy, Some amazing results... 91% win ratio with 6813 pips since 8th of April . Therefor we must get at atleast 75% (-15%) on live trading. How ever I have made some changes to the settings and rules of the strategy.. 1. Default stoploss of 60pips, Default Take profit 100 pips 2. You only take the trade if it occurs between 4AM GMT to 1500 GMT 3. I changed the ATR Multiplier 2, ATR period 28 on Level stop reverse indicator to give us early signals. 4. I use QQE 5 &amp; QQE 1 in addition to QQE60 . - after you get the two signals(Arrow &amp; QQE 60 cross signal) You enter after the QQE5 or QQE1 cross the 50 line. - If QQE5 cross to the opposite direction you must exit the trade. - You can reenter a trade when QQE1 touch the 50 line and cross back towards the QQE60. - When you get the proper entry set up , check for the 1hr momentum. If the 1hr momentum and 15 min Momentum on the new confirmation bar shows a very promising trend continuation(45 Degrees plus bent) you dont have to wait untill the 5 SMA touch to enter . 5. Also trailing stop 60pips
+
+--- 帖子 #183 ---
+Originally Posted by monarch http://www.forexfactory.com/images/buttons/viewpost.gif If one becomes careful with their money, and learn to trade with a plan, you will finally get to the point of not losing it, and begin to build your account up so you can take more lots on every trade you take. Trading is about learning, and the greatest obstacle of the learning curve I faced was "ME". You conquer yourself, then you have found true success .
+
+--- 帖子 #184 ---
+Guys a problem: when I try to import de QQe-alert to my VT (in order to see the dots) the indicator builder ask me for a file .vtscr and does not ¨read¨ the QQE-alert.vttrs that you guys provide on the link..... Any help.....
+
+--- 帖子 #185 ---
+first go to: tools - trading system builder - and then import *.vttr file. Then you click at chart and just add new trading system. A.
+
+--- 帖子 #186 ---
+Auslanco, 1. Did your backtest have only one PT (100) and not two as outlined in your first post? 2. Can you give just a little more detail as to how you manage the 60 pip trailing stop, as there are several ways to do it? Thanks
+
+--- 帖子 #187 ---
+hi, I tried to overlay QQE 5 on 60, it shows different 50 level, what can i do to resolve that? thanks
+
+--- 帖子 #188 ---
+2 seperate charts, as they move the 50 will move up and down to allow you to see the top and bottom of the QQE, as the 5 moves different to the 60 the 50 lines moves independant from each other. I'm sure someone will correct this if i'm wrong.
+
+--- 帖子 #189 ---
+posted by Aus on the main thread. Attached Image (click to enlarge)
+
+--- 帖子 #190 ---
+you can put the same fixed min and max levels to the 5 and 60 indicators
+
+--- 帖子 #191 ---
+Mpp thanks for the response. Emda, I was thinking about that as well, but how would you set thesame level for both?
+
+--- 帖子 #192 ---
+Thanks for your time. best regards Lucy Q
+
+--- 帖子 #193 ---
+thx aus . i'll try the new setting but what about momentum period ? should it be 14 ..
+
+--- 帖子 #194 ---
+Auslanco.. how do you measure the angle of the momentum indicator? it depends on the vertical size of the window. it would be nice to have a numerical angle at the right of the line. I can code it. to have precise mechanical momentum signals. maybe only to take the difference between current momentum value and previous bar momentum value and plot it in the chart.
+
+--- 帖子 #195 ---
+maybe a stupid question, but something im curious about (as i like to know WHY I'm doing something rather than just blindly doing it): regarding the 15min strategy, I've set the QQE to place a dot only when it crosses up or down, this I understand, BUT what exactly does the arrow symbolize when it appears?
+
+--- 帖子 #196 ---
+Hi Guys. I am New to this thread. Please explain what the new indicators are QQE 1, QQE 5 and QQE 60. I have been using the QQE indicator version 4 as supplied on the Thread, this was set a 5 smoothing but 0 Timeframe. Please explain Thanks
+
+--- 帖子 #197 ---
+QQE 1 : QQE smoothing 1 qqe 5 : qqe smoothing 5 like the one u r using qqqe 60 : qqe with smoothing 60 and so
+
+--- 帖子 #198 ---
+Momentum is 10 Close
+
+--- 帖子 #199 ---
+thx aus. what about thus trade ??? is it good one to short for target 100 pips
+
+--- 帖子 #200 ---
+Yes I'm currently short on that trade
+
+--- 帖子 #201 ---
+Thanks eng_forex171
+
+--- 帖子 #202 ---
+Can anybody tell me if there is a new QQE Alert indicator or are we using the old indicator??As i can see from my charts,i dont get the red line at 50 for crossover in the QQE60,QQE5 and QQE1. If i were to use QQE from the indicators section i can add the red line at 50 but when i import the QQE ALERT from the current trading systems section, i am unable to add the redline. Can anyone help me with adding the redline pls..Many thx. Also can anyone kindly check my charts attached and see if i am on the right page as regards to the chnages from this morning by auslanco on the 15 Min stratergy..( Pls Note there are no red line in this picture as i am unable to add them) I am Assuming that QQE60= QQE Alert with smoothening of 60 or is QQE 60 = Normal qualitative quantitative estimation with smmothening of 60...whioch of the above is the correct one?? Attached Image (click to enlarge)
+
+--- 帖子 #203 ---
+In your new estrategy you tell: You can reenter a trade when QQE1 touch the 50 line and cross back towards the QQE60. Did you means that after the QQE1 touch the 50 line, it has to go in the same direccion of the QQE60? Thanks for your help.... regards Lucy q.
+
+--- 帖子 #204 ---
+Aus, I was wondering in step 4 if you exit the trade and reenter when QQE1 crosses back toward the QQE 60 do you reset your SL and TP levels from your rentry or do you use the previouse SL and TP. Thanks in advance
+
+--- 帖子 #205 ---
+Can anyone confirm if these setting are correct. i more curious about the true and false in the QQE's a).Simple Moving Average Values: 5 close b).Gann Hi Low Activator Values: 10 c).Level stop Reverse Values: Use ATR mode True Non ATR stop pips 40 ATR Periods 28 ATR Multiplier 2.0 ATR Smoothing 0 D).QQE on 1min and 15 min time frames (3 indicators) Values: Smoothing Factor 60 (QQE 60) Smoothing Factor 5 (QQE 5) Smoothing Factor 1 (QQE 1) E) MOM – Momentum Value: 10 Close F) Trading Hours Values: 4am GMT to 1500 GMT only Additional Settings: QQE 60: Crossfiftyalert false Crossfiftyemail false Crosslinealert true Crosslineemail true Bothalert false Bothalert false Fiftyupdot false Fiftydowndot false QQEcrossupdot true QQEcrossdowndot true Bothupdot false Bothdowndot false Fiftyup dodgeblue Fiftydown crimson QQecrossup teal (change green to match arrow) QQEcrossdown pink (change to red to match arrow) Bothup blue Bothdown red QQE 5 and 1: Crossfiftyalert True Crossfiftyemail True Crosslinealert false Crosslineemail false Bothalert false Bothalert false Fiftyupdot true Fiftydowndot true QQEcrossupdot false QQEcrossdowndot false Bothupdot false Bothdowndot false Fiftyup dodgeblue Fiftydown crimson QQecrossup teal (change to green to match arrow) QQEcrossdown pink (change to red to match arrow) Bothup blue Bothdown red Stop-reverse: UP Arrow Blue (colour of choice Green – Long) Down Arrow Red
+
+--- 帖子 #206 ---
+As long as you have QQE (60),(5),(1) and sma (5) and Gann(10) and Stop Level (28,2) it is OK... Since I don't use the dots (just arrows for Stop Level Indicator) I can't make any comment on the alerts
+
+--- 帖子 #207 ---
+thanks for the reply Brok,
+
+--- 帖子 #208 ---
+Can anyone answer this question also when QQE1 touches the 50 line do you have to wait for both the dotted and the solid line to cross or does the solid line just need to touch the 50 line for reentry. Thanks
+
+--- 帖子 #209 ---
+My take on that is, it just needs to touch and then point the same way as the 60 QQE only not the dotted line.
+
+--- 帖子 #210 ---
+You can reenter a trade when QQE1 touch the 50 line and cross back towards the QQE60. What does that line mean? Please explain it. Are QQE1 and QQE60 overlayed in one graph?
+
+--- 帖子 #211 ---
+I am having problems trying to import this file to the VT Indicator Builder. After downloading the attached file, windows cannot open file and will ask if I want to use a program on line to open or from a program list on my computer. The program on line will direct me to microsoft, or using the program list that will have word, excel, etc. Any help would be greatly appreciated.
+
+--- 帖子 #212 ---
+seperate graphs, QQE1 needs to touch or cross the 50line and then turn back to be heading in the same direction as the QQE60 ie QQE60 is bullish, but QQE1 is bearish, you need to wait for the QQE1 to touch the 50 line and then turn Bullish again hope this helps. MPP
+
+--- 帖子 #213 ---
+MPP, THAKS FOR YOUR HELP...
+
+--- 帖子 #214 ---
+Should the RSI fastlevel be blanked out on the 15 min QQE charts Thanks
+
+--- 帖子 #215 ---
+Hey guys, I am looking to get the QQE indicator coded in visual basic for another charting software other than VT. Problems is I can't find any of the math calculations to do so. If anyone knows how the QQE is calculated or has code that can be converted from mql to visual basic I would appreciate it. Please let me know via PM if you want to be anonymous etc. Thanks!
+
+--- 帖子 #216 ---
+Try PMing Que, I believe he has something, or at least he will able to tell you. They've written the QQE indicator for Metatrader..
+
+--- 帖子 #217 ---
+I'm surprised there isn't more traffic on this thread. The modified version is an amazingly accurate system. I'm making money with it despite paying an outrageous 10 pip spread.
+
+--- 帖子 #218 ---
+do you have a template you could post here so I can compare to what I am setting up as per the instructions
+
+--- 帖子 #219 ---
+Sure. Here it is.
+
+--- 帖子 #220 ---
+thanks a lot
+
+--- 帖子 #221 ---
+It is because the 15 min is discussed in the main thread as well; by the way he has added pivots to the 15m strategy this week, do you have them?
+
+--- 帖子 #222 ---
+No. I haven't seen that. How does he use them?
+
+--- 帖子 #223 ---
+Short signals valid only if below daily pivot and longs above pivot
+
+--- 帖子 #224 ---
+hope this helps Attached File(s) Pivot Points.mq4 10 KB | 1,081 downloads Attached File(s) Auslanco's 1m &amp; 15m system.doc 456 KB | 1,513 downloads
+
+--- 帖子 #225 ---
+Thank you. If you're familiar with the method I have a couple of questions- In the doc you posted it says a fixed 60 pip SL and 100pip TP, then later it talks about setting your stops and profit targets according to various support and resistance points. Which one is used? On a reentry, is all thats required a rebound off the 50 of the QQE1? Does the QQE60 still have to be on the right side of the RSI? Does price have to be on the right side of the Gann? Thank You Bill
+
+--- 帖子 #226 ---
+yes, yess no no yes LOL QQE60 must be correct for all entries, a rebound of the QQE1 is requiered. with regards SL and TP Aus is making some additions to the rules with the adding of the pivots, but basically, as near to the 60 or 100 inline with a support/resistance/gann/pivot sma point. aim for the 100pips but if a pivot or other is at say 85 pips take it. i think thats the new way.
+
+--- 帖子 #227 ---
+Originally Posted by jasonslc http://forexfactory.com/images/buttons/viewpost.gif MPP - I looked at the code and "pivotset" setting relates to daily, weekly or monthly pivots required: daily = 1 weekly = 2 monthly = 3 dont think it is a number you add to gmt Jason tried setting mine to zero and the pivots gone. must be correct. i think we are using daily. which must be why mine was set to 1 then. cheers for the info. MPP
+
+--- 帖子 #228 ---
+Thanks much, MPP. I appreciate it.
+
+--- 帖子 #229 ---
+Great stuff going on here, although it's getting a little complicated with references to other threads (some of which are very long). Guess I'll just have to get my wading boots on eh. Definitely looks promising from what I've seen so far. Hats off to Aus and the rest of you geniuses who figure this sh*t out. Pleasantries aside, I just wanted to raise an issue about the vt trading platform which I have been using recently. I've been getting some irregularities in quotes I am receiving in the CMS demo account I'm using. Compared to my other feeds and platforms, sometimes the current prices I'm getting are way off (right now audusd is 30 pips lower than everywhere else I've looked), plus I'm getting these odd bars forming way outside where they should be. I'm not trading with this account, but I was using it to identify set ups and signals. Anyone else getting the same stuff? I guess the solution is to find a new data source or jump back to MT, which is a shame because I was quite liking VT. Where are you guys getting your feed from?
+
+--- 帖子 #230 ---
+VT might be a great platform but I can't deal with this downtime, disconnections, unreliable feeds, spikes, jumps etc.. I'm going to have to set it up on MT4. What a waste of time. Advice: anyone who has just arrived at this thread save yourself the bother and go straight to the MT4 platform. Open a free demo account that never expires from North Finance - much more reliable.
+
+--- 帖子 #231 ---
+this might save you some reading Attached File(s) Auslanco.doc 418 KB | 1,045 downloads Attached File(s) Auslanco's 1m &amp; 15m system.doc 233 KB | 1,051 downloads
+
+--- 帖子 #232 ---
+Thanks alot MPP, still probably wouldn't do any harm to read through those threads anway.
+
+--- 帖子 #233 ---
+definatly a good read, but not such a panic now, i would look for posts with charts and hunt down Auslanco, Karmostaji and Hakuna matata. posts around these three tend to be the most revealing about the systems.
+
+--- 帖子 #234 ---
+Applying Daily Pivots &amp; 100sma to minimize the fake calls. Long- 15 QQE60 crossed above the Daily Pivot Price is above the 100 sma &amp; LevelStop-Reverse I also use 1hr QQE5 to identify the trend direction
+
+--- 帖子 #235 ---
+Applying Daily Pivots &amp; 100sma to minimize the fake calls. Short- 15 QQE60 crossed down Below the Daily Pivot Price is below the 100 sma &amp; LevelStop-Reverse I also use the 1hr QQE5 to identify the trend direction
+
+--- 帖子 #236 ---
+When you apply the Daily Pivots, you must switch the Daily pivots "start" to the each session times Asian: 19.00 EST London/US: 03.00EST US:8.00EST
+
+--- 帖子 #237 ---
+MPP, Thanks for all your hard work . Very much appreciated bro
+
+--- 帖子 #238 ---
+Is the 0300EST a typo? You had previously said 0400GMT, I believe. Thanks Also, when you say to check the QQE5 on the 1H, what do we look for? Do we look to see if it is above or below the 50 or look to see if it is pointing up or down?
+
+--- 帖子 #239 ---
+Hi billbiss, It has to be the London start which is at 3EST. 1hr QQE5 should be crossed the doted line(RSIslow) to the same direction as the 15min QQE6o signal.
+
+--- 帖子 #240 ---
+Hi Auslanco, I noticed you have QQE60 line drawn in the main charts window. How to do that? Appreciate you or anyone in the know can help me out. Thanks Vincent
+
+--- 帖子 #241 ---
+Mate that is not QQE. On the main chart just use the indicators mentioned
+
+--- 帖子 #242 ---
+Brok, thanks for the reply.
+
+--- 帖子 #243 ---
+here's a little gift for the 15m strategy lovers. throw out the pivot points, the proved crap to me (sorry). throw in a qqe smoothing 40 on m30 chart. enter on 15m stop-level-reverse arrow and TFT/Gann confirmation in the same direction of the m30 qqe40, TP 100pips sl 60pips. DO NOT EXIT ON 15M QQE5 OR QQE1 OR TFT REVERSAL!!!. just let it reach your 100 pips exit only on any sign of reversal on m30 (qqe5, TFT) and also exit on 15m qqe60 reversal.
+
+--- 帖子 #244 ---
+I've Developed a strategy for the m30 chart, it's very close to the 15m Strategy, however, different input values for the indicators, and i think it works way better than m15 strategy. you need the following: (typical Aus System +) 1) TFT/Gann 2) 5sma 3) qqe5 4) qqe40 5) stop-level-reverse ATRPeriod 15 / ATRMultiplier 2.0 Entry: (there are multiple types of entry) 1) enter on 5sma when qqe40 cross, qqe5 confirm, TFT confirm and stopReverse Arrow. TP1 100pips, TP2 175 pips, TP3 on m30 reversal (either qqe40, qqe5, arrow, or TFT) SL 65pips. DO NOT INCLUDE TP2 OF 175PIPS if you see a strong momentum of opposite direction on h1 or h4 charts. you must exit all positions if you see reversal on m30. 2) enter same as above WITHOUT QQE40 CONFIRMATION if and only if qqe5 is in OB or OS levels (short when OB and long when OS) same TPs as above. Re-Entry. entry again on qqe5 and TFT confirmation (same direction of qqe40). TP1 75pips TP2 on m30 reversal.
+
+--- 帖子 #245 ---
+Is this for GBP/JPY? Just a few questions if you don't mind. 1. Does "qqe5 confirmation" mean above/below 50 or does it mean sloping in the direction of the trade? 2. What levels are OB and OS for qqe5? 3. Is a qqe40 cross above/below50 or does it mean a cross above or below the RSI? 4. If it means crossing the RSI, which RSI- the fast or slow? Thanks It looks good.
+
+--- 帖子 #246 ---
+Lilmoe may not agree .. if you look at the chart, the actual shoot down happened when the QQE60 crossed down below the daily pivot. Carbon copy trade of yesterdays NY. Statistically speaking " maximum drawdown: Profit " ratio is -6pips : +86pips on this trade. Yesterday NY trade was -8pips :+43pips. Friday's trade -5pips : +186pips This only shows , good trending rallies happen when the signals occur below(shorts) or above(longs) daily pivot. Until then it's a yo yo ride * Gbp/Jpy spread is not included in the drawdowns.
+
+--- 帖子 #247 ---
+I currently have my nonatrstoppips set at 60 on the stop level indicator. What is the best setting for gj?
+
+--- 帖子 #248 ---
+mine is at 40 it all in the posts i made earlier few pages back
+
+--- 帖子 #249 ---
+Hi All, Thank you Auslanco for sharing your stratergy and to the team of traders for sharing there ideas and thoughts in the GBY/JPY pair. I have been following these threads for some time and amazed at the ending results
+
+--- 帖子 #250 ---
+Hi Aus! All this information on how to use the 15m strat is all over the place. When you get a chance, do you think you can update the 1st post of this thread with the current incarnation of the 15m strategy? I think it would help a lot of people, and by a lot of people I mean me . Again, thanks for your patience and help in bringing this to us little people. Koko
+
+--- 帖子 #251 ---
+I've already posted a word document with this info in it. look under the paperclip and you will find the documents and indicators. hope this helps
+
+--- 帖子 #252 ---
+Hello All, Has any one seen Que lately, I have been missing quite a few of the 15 min. strategy trades, as the best trades in that strategy appear to be in the European market hours. (when I am struggling to stay awake). I know the QQE for MT4 scripted by Que, has an email alert and a pop-up alert, but I wonder if Que, could modify the alerts to allow for user defined multiple audible iterations when, say, the QQE (60 smoothing) has crossed up/down, the slow RSI line. This would be similar to the MT4 alert function that supports a sound alert every " x "seconds, if price reaches a certain value. That way, the alert would act as a sort of alarm function, so we don't necessarily have to stay up all night, then fall asleep, only to see we missed a trade by 1 hour. I am sure others must be experiencing this same problem of missing trades.
+
+--- 帖子 #253 ---
+Not sure if this is going to help, but the indicator is email capable. haven't tested this but, i beleive if you look in MT4 under tools and options you can activate the email alert system. i would like to point out that i am new to mt4, and only recently discovered the email section, but have not tried it. just thought it woould allow you to try something until you find Que.
+
+--- 帖子 #254 ---
+THanks MPP, I think I will just forward the email to my cell phone, and then download/change the SMS message alert tone to a very long or continuously loud tone.
+
+--- 帖子 #255 ---
+Thank you MPP, I found what I assume is the most recent version of this document. It includes using Daily Pivots as one of the confirmations. Just so you and Aus know, I also have about 3 other versions of that same word document that describe completely different versions of the 15m system. Auslanco, I'd like to ask again that you update the first post on this thread with the current version of this system so that others may not get as confused as I was. You may want to include the most current indicators and word documents to provide a simple, single download location. It would also prevent some stupid question posts from people like me Koko
+
+--- 帖子 #256 ---
+Hey Bud Appreciate your compiling the word document. I have it here, I have question tho....document says c).Level stop Reverse Values: Use ATR mode True Non ATR stop pips 40 ATR Periods 28 ATR Multiplier 2.0 ATR Smoothing 0 However if we look at the Post #1 of this thread, it says Period 9, multiplier 2. Could you please confirm. Also, whats the setting for 1HR/4HR aus strategy please. Thank you
+
+--- 帖子 #257 ---
+these settings are correct, the 15m stratagy has been developing on the move as Aus progressed he made changes. the S&amp;R indicator is not used in the 4H system. Happy pippin MPP
+
+--- 帖子 #258 ---
+Refer to Auslanco's update on page 13, post # 182
+
+--- 帖子 #259 ---
+Thanks MPP and limcs, appreciate it.
+
+--- 帖子 #260 ---
+Hi MPP Thanks for all the information. How do I change the daily pivot for the different sessions. I apologise if this is a basic set up but I am not a technical person. Because Auslanco write it in his thread I dont miss it but there are days I miss reading the thread due to work and it has grown so long. Thanking you in advance Senbanda
+
+--- 帖子 #261 ---
+2 ways 1) hold mouse directly on current daily pivot and right click, select daily properties andajust the day start to your required time 2) right click any point on chart and select indicator, select pivot indicator and adjust as per number 1. hope this helps regards MPP
+
+--- 帖子 #262 ---
+thank you MPP Greatly appreciated Senbanda
+
+--- 帖子 #263 ---
+SL 60 pips TP 100 pips is this always the case or is there a different way of calculating the TP for 15m strategy trades?
+
+--- 帖子 #264 ---
+I downloaded the mt file and I just wanted to clarify the custom indicator selections. The variable pivot set value would be 1 ( day ), 2 ( week ) , 3 ( month ) The day start hour we would plug in the proper times 1900 asian, london/us 0300, us 0800 all est. These pivots would apply to all time frames Thanks for your help
+
+--- 帖子 #265 ---
+hi Pip Aus's uses the daily pivot (1), but someone had explained the various numbers so i added them for understanding reasons. the pivot time are changed at the start of each session, except for the US this is changed when london closes (1100est). you need to allow for offsets ie time zone difference (EST to GMT). with regards time frames, the pivots are only used in the 15m stratagy, not the 4h. regards MPP
+
+--- 帖子 #266 ---
+That is usually the case for the moment but when in a long position one have to be careful at R1 level and vice versa for a short... R1 or S1 can also be used as a tp level
+
+--- 帖子 #267 ---
+Great, thanks brok
+
+--- 帖子 #268 ---
+Thank you MPP
+
+--- 帖子 #269 ---
+What should I add on this chart? I dont see any dots before the Arrow.
+
+--- 帖子 #270 ---
+I think that you should add the other customised trading sistem, the QQE60 alert, that will give you the dots....
+
+--- 帖子 #271 ---
+Aus, I have been doing some research into last weeks issues with ranging and came across the following for the mt4-level-stop-reverse indicator. Adjust nonATRstoppips to 100 and change the use atr mode to false. From my manual testing this would have given about 240 ish pips last week. I've attached a chart below to show how it flows.
+
+--- 帖子 #272 ---
+Hello I am new to ff and for trading as well. i know it sounds silly but i am not able to find Level stop Reverse Version 2, QQE Alert and ATR Multiplier on VT charts. Although i found ATR but i could not understand if i hv to to put the value for simple moving average or for wilder. can anyone help me in this? i have windows vista and i am not able to download the links from here so i would be greatful if anyone could send me the links on my email.once again thanks a lot for you learned guys who have put so much of efforts. regards kenneith
+
+--- 帖子 #273 ---
+Hi Kenneith VT i can't help you with but i would advise you to remove the email address, place it in your profile. putting it out here will allow email hunters to send you tons of crap emails. I have posted 2 documents with all the settings for mt4. I am sure someone will be here to help with VT soon. MPP
+
+--- 帖子 #274 ---
+How do I get the Level stop Reverse version 2 I downloaded VT Trader 2 times and alll I have is the old one
+
+--- 帖子 #275 ---
+Hi MPP Thanks for your advise. I have done as you told me. regards
+
+--- 帖子 #276 ---
+Testing trying to get subsciption to work
+
+--- 帖子 #277 ---
+Rusty...this might help....I changed the "DOT Distance" on the QQE indicator to 10 from 25.....it pulls the dot closer to the trend line so you can see it more often. Hope that helps
+
+--- 帖子 #278 ---
+I've read through the thread and am impressed with this strategy. I'm surprised that there aren't many people posting lately however? How is it working for others? If anyone on the thread could tell me how they traded it on Friday I'd appreciate it. After loading the indicators it seemed the strategy gave me a couple clear entries Thursday, but Friday was a bit confusing as GBPJPY was a bit choppy. If anyone could give me feedback on my setup of the indicators and even markyp my chart it would be enlightening. To me it seemed there was a clear trade late in the day when the QQE-5 broke above the 50 and price broke above the daily pivot. Was this the only clear trade indicated by this strategy on Friday? Thanks for your help. LeoM
+
+--- 帖子 #279 ---
+Hi, This is indeed a good strategy but still on a beta test phase. There have been some improvements and filters added. On friday when the indicators have given a long signal one should have waited the price to come over the session pivot and sma100. Once taken over these levels you could enter the trade like you have done so... (long 238,73 ish) Other than that you may have gone short earlier when QQE s were all bearish since the price was below session pivot and ma.
+
+--- 帖子 #280 ---
+what is vt chart trading system? how does it work
+
+--- 帖子 #281 ---
+It's a broker and it works just like one, type in google and you'll get the link
+
+--- 帖子 #282 ---
+Do you use VT chart system or MT4 for Aus's strategy setup?
+
+--- 帖子 #283 ---
+VT chart system for auslanco's strategy
+
+--- 帖子 #284 ---
+Thanks Karmo. Another thing to setup the charts, do we have any template to use or setup each indicator manually everytime?
+
+--- 帖子 #285 ---
+For the 4hr/1hr strategy, you can set it up yourself. all you need is the QQE, Momentum, Gann hilo, and 5sma. After that you can save it as a template so you won't have to set it up everytime. As for the 15m strategy, there are templates floating around here in this thread, click on the attachment button on the top right, it should give you all the attachments in the thread.
+
+--- 帖子 #286 ---
+Thanks for your help. much appreciated. I might bother again if i have difficulties setting my charts up? Do i have to open a live account with vt systems to use the charting?
+
+--- 帖子 #287 ---
+Sure, I don't mind helping if I know/can. No, I'm using their demo account.
+
+--- 帖子 #288 ---
+I checked the atachments on this thread. there are several of them. Some even with same name, some for MT4 and some for VT trader. It is confusing. Would it be possible for you to point me to rite direction or upload the file versions you are using? I'm not in hurry, you can do it whenever you have time. I don't want to use something with out of date and start scratching my head. Thanks in advance.
+
+--- 帖子 #289 ---
+For the 15m trades, QQE alert - Post #161 on this thread VT stop level reverse - Post #3 on this thread by auslanco Setting should be: ATR period: 28 ATR multiplier: 2 check that properties, and if it's diff then change it to what I just typed above. For the 4h/1h strategy, you can open a diff chart and plot the indicators manually.
+
+--- 帖子 #290 ---
+Thanks buddy.
+
+--- 帖子 #291 ---
+by requests.. here is my template http://www.forexfactory.com/showpost...ostcount=41628
+
+--- 帖子 #292 ---
+Thanks Brok for your feedback. Sorry for the long delay in responding. I've added the 100 SMA which I'd overlooked. What are the other added filters that you refer to? I noticed the optional settings adjustment to the 'Level-Stop-Reverse' indicator for ranging periods. Any other filters not posted here?
+
+--- 帖子 #293 ---
+Well, you have to also add 100 sma on H1 for now... therefore to summarise the scalp strategy : Session pivots, sma100, sma5, QQE ((60),(5),(1)), gann, stop reverse on m15 QQE 5, sma 100 on H1... Hope did not miss any other indicators
+
+--- 帖子 #294 ---
+On the GBPJPY today, I had received two dots today and two bars had already formed then it eventually disappeared.
+
+--- 帖子 #295 ---
+What do you think?
+
+--- 帖子 #296 ---
+Can anybody help me to set up the pivot point that I downloaded from this forum for the MT4? all the rest of the indicators were pretty easy...
+
+--- 帖子 #297 ---
+Can anybody upload the latest mt4 indicators of this strategy? I find there are many versions of these indicators,thx
+
+--- 帖子 #298 ---
+Hi there! Dots and arrows will appear and disappear, as the conditions change. But if a candle closes while the conditions are valid (for a dot or an arrow) then they will stay on the chart.
+
+--- 帖子 #299 ---
+See post #265. Always use "daily" and reset the starting time for each trading session (asian, london, ny).
+
+--- 帖子 #300 ---
+There appear to be two acceptable versions. See page 10, posts 138 and 149.
+
+--- 帖子 #301 ---
+Actually, PC, you are only half correct. It is true that the arrows may flash on and off until the candle has closed. However, the dots always appear at the very beginning of the candle change because the dots are based on the close of the previous candle. So dots will never flash on and off. Once you see them, they are gonna stay there for good. M2B
+
+--- 帖子 #302 ---
+on VT, they flash on and off until the candle is closed.
+
+--- 帖子 #303 ---
+Hmm . . . I could have sworn I've seen them disappear. But maybe it was only the arrows. Thanks!
+
+--- 帖子 #304 ---
+This VT user will be watching for it from now on.
+
+--- 帖子 #305 ---
+Can anyone tell me how to erase/delete fibo lines easily from the MT4 charts? I know that I can right click and go through the objects but I can never tell which fibo lines to delete. I click on the show button but if there is more than 1 set of fibo lines I still can't see which one I want to delete. Any help would be appreciated.
+
+--- 帖子 #306 ---
+sure, everytime u draw a fibo, there is that dotted diagonal line, right click on it and choose 'Delete'
+
+--- 帖子 #307 ---
+[quote=karmostaji;1680019]sure, everytime u draw a fibo, there is that dotted diagonal line, right click on it and choose 'Delete'[/quot Thanks Karmo. When I right click I get the drop-down window but I noticed that if I left click it shows the little square light on the fib lines so now I can easily delete it. Thanks again...and let me say I appreciate very much all the great info that you are sharing with us.
+
+--- 帖子 #308 ---
+[quote=PTB;1680087] You are welcome PTB, enjoy
+
+--- 帖子 #309 ---
+hmm, now with UK time changed, do we still use the same Time for plotting Pivot Points on VT? anybody knows?
+
+--- 帖子 #310 ---
+Hi Aus, First of all I would Like to say thanks for the wonderful threads you have started. I have been reading thru them and found the information overwhelming. I have a question. How do I get the 5SMA on my VTI Charts?
+
+--- 帖子 #311 ---
+Plot a 'Moving Average' on your chart, make sure these are the properties: Period: 5 Apply to: close MA method: simple
+
+--- 帖子 #312 ---
+Right click on your chart, choose "Add Studies", then locate and choose "Moving Average". Then follow Karmo's instructions above.
+
+--- 帖子 #313 ---
+Hi Emda, I searched high and low, but can't find the missing components that'll show these excellent bars in the template (for both systems) Please help :-) thanks
+
+--- 帖子 #314 ---
+Thanks Karmostaji &amp; Pip cruiser. Greatly appreciated...
+
+--- 帖子 #315 ---
+Hi Karm. I can see where some might disagree and say it's not worth the effort. But if we are after accuracy we should use "4 est" as the starting hour for London session through Nov 3, and it should be changed at the actual start of that session, which is 8 gmt. This would give us the data we need and it would capture it at the right moment, in my view of things. Starting Nov 4 the U.S. will be back on standard time and we would go back to using "3 est" as the starting hour for London session.
+
+--- 帖子 #316 ---
+Hi Auslanco, I am setting up the 15min GJY indicator system, but I do not see any blue dots on my charts..Can you tell me how to get the blue dot for my charts?
+
+--- 帖子 #317 ---
+Perfect, Thank you PC
+
+--- 帖子 #318 ---
+i've been away for a couple of weeks, so i may need to update some of the info in this doc. it should be near enough to get you started though. anyway here's both the systems. Attached File(s) Auslanco's 1m &amp; 15m system.doc 324 KB | 863 downloads Attached File(s) Auslanco.doc 421 KB | 737 downloads
+
+--- 帖子 #319 ---
+Thanks for the nice summary as always.
+
+--- 帖子 #320 ---
+Hi , l am trying to set up the 15m chart ..Aus strategy but l can't find the level stop reverse version 2 on my vt chart and also having problems finding the ATR multiplier. Please help this newbie .
+
+--- 帖子 #321 ---
+Here's the "level stop reverse" (LSR) you are looking for. The ATR multiplier is one of the parameters for the LSR that you'll setup after install. Let me know if you run into any roadblocks.
+
+--- 帖子 #322 ---
+Pip-Cruiser..many thanks for your help. l still can't find the ATR. And how do l get the red 50 line ? Many thanks
+
+--- 帖子 #323 ---
+Have you imported the QQE and Level Stop Reverse into VT yet? That's the first step. Starting with the VT Trader manager window click on Tools / Trading Systems Builder / Import to start the process. Then locate the files you've downloaded and VT will import them. You might have to do one system (QQE and LSR) at a time. After they're imported, you still need to attach them to a chart. Do this by right clicking on the chart and choosing "Add Trading System". It gives you a list and you can find the ones you've imported. To change the ATR Period to 28 and the Multiplier to 2, right click on your chart and choose "Attached Trading Systems". Then highlight the level stop reverse system you've already attached and click on Properties. A new window will open up that looks like this (below). The bottom two fields are the ones you change:
+
+--- 帖子 #324 ---
+There is no red 50 line for the custom QQE-60 system. At least I haven't found one in the system setups for it. Is that what you're referring to? P.S. - Were you able to get the red lines for the regular QQE indicators (1 and 5)? I can remember having problems with those.
+
+--- 帖子 #325 ---
+Using VT Trader setup. Is it correct that I can take the 15M strategy and its exact settings to 4H without setting changes?
+
+--- 帖子 #326 ---
+Only the 15min chart gets those settings. The other charts use the standard VT QQE indicator (set to a smoothing factor of 5), and the momentum indicator (set to "close" and "10").
+
+--- 帖子 #327 ---
+Great stuff, l have done the LSR and QQE as instructed above. thank you onec again for coming to my aid. As for the red lines for the 1 and 5 QQE l have not been able to do it so please if you can help in any way . thank you
+
+--- 帖子 #328 ---
+Okay, I think we're making progress. The next thing to do is right click on the 15 min chart and choose "Attached Indicators". This brings up your list of indicators and you should highlight one of the QQE's, then click "Properties". Next click on the tab that says "Horizontal Line" and click "New". Then setup things like this (below) and click on "OK". That will take care of one QQE. To setup the other you'll have to follow the same steps.
+
+--- 帖子 #329 ---
+How's this coming along now? If you're still having problems, let us know whether you're using VT or MT4. Thanks!
+
+--- 帖子 #330 ---
+Pip Cruiser, Thanks for your help. I am using VT charts. DO you have the indicator saved as a file that I could download and import?
+
+--- 帖子 #331 ---
+Sounds like you might need the QQE (60) alert system. Technically it's not an indicator, but a system. So you'll need to install it accordingly. Let me know if you run into any problems.
+
+--- 帖子 #332 ---
+hi guys can someone please help me , how can i add the stop reverse system 2 to my vt chart thank u
+
+--- 帖子 #333 ---
+Please see posts 321 and 323 on the previous page.
+
+--- 帖子 #334 ---
+thanks but l can't find QQE on the list by following the steps above. is it because it is a system and not indicator?.
+
+--- 帖子 #335 ---
+Well, then look for "Quantitative Qualitative Estimation". If you've already attached them, the 1 and 5 should be in your "Attached Indicators" list. They're both regular VT indicators (as opposed to the QQE60, which is a custom system and for some reason doesn't come with a red line). If they're not in your list it probably means you haven't attached them to the chart yet.
+
+--- 帖子 #336 ---
+Hi Pips Cruiser, May I get your confirmation that for a buy/sell signal I shall look at the 15M chart for the arrow &amp; QQE60 cross signal? And reference this with the 1M chart for the 2 signals as well? After that get confirmation that the long/short trades must be above/below the Daily Pivot Level? With SL 60 &amp; TP 100 but exit if 15M (or 1M) QQE5 crosses to the opposite direction? Am very confused after reading it for several times now and would like to clarify the above before entering a trade tomorrow to try out this starategy. The 4H1H strategy is easier to understand. Thank you for your help. Regards, Joyrider
+
+--- 帖子 #337 ---
+You're just about there. Leave out the references to the 1min and 5min charts (which the 15min strategy doesn't use), and include QQE1 and QQE5 indicators above the 50 line, and you have the basics of the 15min strategy. Additional areas of confirmation would be the 1hr chart QQE5 crossed over in the same direction as the trade (solid line crossing the dashed line, like the QQE60 on the 15min chart, irregardless of the 50 line); and price above or below the 1hr 100sma in the direction of the trade. If all of these are lined up you have yourself a trade signal.
+
+--- 帖子 #338 ---
+Not to take anything away from this 15 min system but I kind of liked the simplicity of the initial 4hr...1hr system. The problem for me is that I`m not a 4 hr kind of trader. I took a look at the same idea only using the 1 hr instead of the 4hr. as the long timeframe and the 15 min as the short timeframe instead of the 1 hr. In both cases the 2 timeframes are divisible by 4 .It looks like it could work. Has anyone tested this idea at all?
+
+--- 帖子 #339 ---
+randomlight, You might want to look at the 15M system one more time. It's not really that complicated when you get used to it. I use it quite a bit and it works.
+
+--- 帖子 #340 ---
+Let me know if you're still having a problem with this. I remember getting all the indicators setup correctly was a challenge for me at the beginning. But eventually it all comes together, and you can concentrate on trading.
+
+--- 帖子 #341 ---
+Hi Auslanco, Many thanks for sharing this system with us. Did you tried to aply it to any other forex pairs? It seems that we can get best results aplying it to some forex pairs that have strong trending periods. What do you think about AUDUSD and USDCAD ? Thanks in advance for your opinion. Pip
+
+--- 帖子 #342 ---
+many thanks , qqe done. can you please check the attached and let me know if all is alright. thanks.
+
+--- 帖子 #343 ---
+It looks like that might be right. But double check to make sure your QQE1 and QQE5 have "LvlRSIFast" set to white (so it's invisible), and the "LvlRSISlow" set so the Style is a dashed line. I might also mention that you can rearrange the bottom section of indicators by right clicking on one and choosing "Move Frame Up" or "Move Frame Down", until you have them in the order you like. You can also change the individual sizes by clicking on the upper or lower borders to highlight them, and then sliding them up or down. You can even close one by sliding it all the way shut doing this. This will help you control the "look" of the chart, so you have it the way you want. By the way, I didn't notice a Gann HiLo Activator on your chart. If one isn't there, you should add this VT indicator to it, and set the "Lookback periods" to 10. It's a good indicator to have on all your charts when following Auslanco's strategies.
+
+--- 帖子 #344 ---
+Here's how my screen looks, using VT charts, when I'm trading the 15 min strategy. I keep the 15min, 30min, and 1hr charts open. The 15min (on the left) gives me the signals. I use the 30min chart for determining 5sma retrace and entry points. The 1hr chart is good for keeping track of the 1hr 5sma, checking the 1hr QQE status, and the 1hr 100sma price point. I also change the 1hr chart to 4hr now and then to check that QQE, and also it's 5sma.
+
+--- 帖子 #345 ---
+I would try it but I just havent been able to get all the indicators set up for my mt4 yet. thanks
+
+--- 帖子 #346 ---
+Have you tried this thread? It specializes in the MT4 indicators for Auslanco's strategies. http://www.forexfactory.com/showthre...slanco%27s+mt4 You can still post questions here, but it sounds like you're having problems that the other thread can solve.
+
+--- 帖子 #347 ---
+what should be the smoothing factor for QQe?
+
+--- 帖子 #348 ---
+Is this how to trade with the immediate trend? So on 30M chart, you also have Gann Hilo(10), QQE(5) ? : GBP/JPY just made +200 pips from last night london session and missed it! It was a great setup entry @ 239.23 candle open in VT.
+
+--- 帖子 #349 ---
+thank you so very much SIR, can you please tell me what systerms and indicators l will need for the 30m and 1hr charts or if there is a page on this tread. thanks.
+
+--- 帖子 #350 ---
+The other charts should have: QQE (smoothing factor 5), Momentum (10C), Gann HiLo Activator (10), 5sma (sma = simple moving average, the VT indicator is "Moving Average", price = close, periods = 5, and type = simple), 50sma , 100sma , and 200sma (same setups as 5sma, but with periods of 50, 100, and 200). It wouldn't hurt for the 15min chart to have all of these, also, along with the other unique things we've already dealt with.
+
+--- 帖子 #351 ---
+Hi Pips I would like to say thats for picking up on the VT users, I'm ok with MT4 but VT is over my head. hope the pips are good to you regards MPP
+
+--- 帖子 #352 ---
+Can someone post their template for the 15M setup and possibly the indicators? There has been too many different versions of everything out there, its hard to find which is the correct one. For some reason, I never see the dot with the arrow. What conditions causes the arrow to appear on the chart? What conditions causes the dot to appear on the chart?
+
+--- 帖子 #353 ---
+Hi. Which platform are you using, MT4 or VT Trader? I'll try to help you get set up.
+
+--- 帖子 #354 ---
+I'm using MT4. Your help is much appreciated.... ET
+
+--- 帖子 #355 ---
+Alright, I think the best thing you could do is visit this thread, which deals specifically with the MT4 indicators you'll need: http://www.forexfactory.com/showthre...slanco%27s+mt4 and this new Auslanco site, which has a bunch cool stuff including instructions for the 15 minute strategy: http://www.pnwenterprises.com/auslan...instrategy.htm Additionally, there are a couple documents a few pages back from here that were prepared by MPP. This would give you a hard copy of Auslanco's strategies, and perhaps a little different perspective on them than the web site has to offer. Hope this helps!
+
+--- 帖子 #356 ---
+Thanks MPP! I'm just putting in a little time as "pay back" for all I've learned from Aus and the others. I figure it's the least I can do, since (yes) the pips have been good. Hope all is well with you, too! Ron
+
+--- 帖子 #357 ---
+Pips Crusier Pulling down all these indicators didn't fixed the problem with the missing dots.
+
+--- 帖子 #358 ---
+Pips Crusier Its working now, I hit reset for the StopRev, I do not know where I had gotten the settings. I don't know if you can help me, but what conditions causes the arrows and dots to appear, I don't mean which indicator? Its that sometimes I do not see a dot at all when I look back in time even though there was a strong downtrend for GBPJPY.
+
+--- 帖子 #359 ---
+The dots are the easiest to explain. They show up when the QQE60 lines "cross over" in a new direction. The arrow is a little more difficult to explain. But there's a dashed line on my VT Charts called "Trailing Stop Level". This line acts as some sort of boundry line, and when price crosses over it an up arrow or a down arrow appears. If price retraces from that level before the candle closes, the arrow disappears. But if the candle closes while price is over that level, the arrow stays on the chart. You might be able to find this "trailing stop level" line on your MT4 chart, and then you'll probably understand better what's going on.
+
+--- 帖子 #360 ---
+Thanks Pips Crusier for the explanation, things are much clearer now.
+
+--- 帖子 #361 ---
+Since I`m having trouble with the dots can I just watch for the arrows and and then look to see if there is qqe60 cross over also?
+
+--- 帖子 #362 ---
+Definitely! As long you really understand what a QQE cross over is (no offense intended).
+
+--- 帖子 #363 ---
+Have you downloaded and installed the QQE Alert? That's what creates the dots.
+
+--- 帖子 #364 ---
+I have the ###QQE_alert_mtf_v2### Is that the right one? I also have the cross line alert set to "true" No dots though
+
+--- 帖子 #365 ---
+At the bottom of the first post in this thread, there is a version 5. Yours appears to be a version 2, if I'm not mistaken. Maybe it had a bug. http://www.forexfactory.com/showthre...slanco%27s+mt4
+
+--- 帖子 #366 ---
+I just finished checking my charts, and there hasn't been a new dot in quite awhile. The last one was at 10:45AM EST.
+
+--- 帖子 #367 ---
+What should be the smoothing factor in QQE alert? I have downloaded the one available on thread and it defaults to 2 but initial posts from Aus's says it should be 60. big difference. can some1 confirm this?
+
+--- 帖子 #368 ---
+The smoothing factor is 60 for that one.
+
+--- 帖子 #369 ---
+Thanks Pips Cruiser, I downloaded a fresh mt4 platform and loaded the indicators and had the dots right away.It seems that something in the previous loaded indicators stops the v5 from functioning sometimes. I do have a question though.It seems looking back on my charts that 75% of the time the qqe-5 and qqe-1 have already crossed the 50 by the time both the arrow and the dot show up. Is this normal?
+
+--- 帖子 #370 ---
+Yes, that's normal. Depending on price action it works that way sometimes. I remember having a question about that once myself, because the way the documentation is written, it sounds like the QQE60 cross over has to occur before the QQE1 and QQE5 cross over the 50 line. I never did get a straight answer, but noticed that in actual practice "calls" were made regardless of which ones happened first. As long as all these signals were present at the same time, a call was made.
+
+--- 帖子 #371 ---
+I recall reading something on the MT4 FF thread, that with MT4 you're supposed to delete all previous versions of an indicator before you load the new version. I guess they weren't kidding.
+
+--- 帖子 #372 ---
+In the chart of the GBPJPY 15M you can see we never got an arrow for the Asian Session. We should be able to take the trade a long trade since the 5 EMA crosses the Gann Activator [above the Gann in this case], above the Daily Pivot Level, all QQE are above the 50 line and Momentum is above the zero line. Is this correct? We should never take any shorts above the Daily Pivot line if a down arrow should appear with a dot, is this a correct analysis?
+
+--- 帖子 #373 ---
+Hi Et your arrow came about 1400 hrs on 5th Nov (on my timeframe anyway) and the arrow is in play until the next arrow appears, you take longs above the daily pivot and shorts below the daily pivot providing you have the dot and the MOM/QQE's are inline and pointing in the direction of the trade, hope this helps MPP
+
+--- 帖子 #374 ---
+I`m using MT4 and when I adjust my mt4-levelstop-reverse-v1 to the recommended atr ...28 and atr multiplier... 2 , my arrows come down low into my candles .Is this right? I`m including a picture . (I have put black check marks where the imbedded candles appear in the chart) For me the earlier atr ..9 and atr multiplier ..3 look much better.
+
+--- 帖子 #375 ---
+Hi RL Yes your setup looks correct, if you want the arrow further out you can adjust the distance in the MT4 Lavel stop settings, at the bottom you will see they are set to 0 so the arrow appears directly on the line, the only issus with miving them out is they sometimes sit of the page so play with it and see what you think, the multiplier affect the times the arrows appear as this tells the indicator what to look for on the chart to decide when to post the arrows so i would advise you to leave alone unless you understand how they perform and what affects them (over my head). hope it helps MPP
+
+--- 帖子 #376 ---
+I am showing my charts at 9:00 est Nov 6th and I`m hoping someone can tell me if my arrows and dots look in the same place theirs so I know if I have this right, thanks (I`m wondering if other peoples carts look like this for the time so I know if my set-up is correct.)
+
+--- 帖子 #377 ---
+Looks the same as mine, only i'm assuming that the pink line is a 5SMA, if so where is the Gann hilo. or did you leave this and the pivot of to show the chart clearly?
+
+--- 帖子 #378 ---
+Sorry to be a pain, I am currently trying to set up the indicators like RandomLight but I must have missed the thread with all the indicator settings. Couls you or Pipcruiser point me in the right direction. Many Thanks Jeff....
+
+--- 帖子 #379 ---
+Most of the info is on page 1 of his threads, but here are some word docs that contain most of what you need, they haven't been udated recently but should get you started. Attached File(s) Auslanco's 1m &amp; 15m system.doc 324 KB | 588 downloads Attached File(s) Auslanco.doc 421 KB | 505 downloads
+
+--- 帖子 #380 ---
+Thanks MPP I will go and have another read through everything... Regards Jeff...
+
+--- 帖子 #381 ---
+thanks for your help MPP, yes I left gann off but I do use it ,It`s nice to finally have my charts set up right so I know what everyone is talking about. By the way are most people just trading the gbp/jpy with this?
+
+--- 帖子 #382 ---
+there seems to be a mix out there, but most are based around Karmo, Aus and hakuna, personnally i can't be bothered to sit in front of my PC all the time, so i trend some pairs and use one of the others methods when i have time(still trying to learn HM and Karmo's way).
+
+--- 帖子 #383 ---
+Auslanco, i am anew trader. my fx graph not appear sell/buy arrow/dot. pls guide me
+
+--- 帖子 #384 ---
+If it doesn't disappoint you too much to work with someone besides Aus, let us know whether you're using MT4 or VT Trader as your platform. Thanks!
+
+--- 帖子 #385 ---
+what a great teacher, next question, how do l set the times for the pivot points to london time and is there a particular time that l can set it to. and is it possible to change the clock on my vt chart to local time in London. thanks in adavance
+
+--- 帖子 #386 ---
+Hi Amankwa. Hope all is going well. Let's deal with the easy one first. I think you're stuck with EST for the time. I haven't found a way to convert it to local or GMT. But they're coming out with new versions all the time, and I haven't kept up with all the changes. Here's their online help site for documentation and manuals. You might want to take a look at what's available, and use it as a future reference. http://vtsystems.com/en/help/
+
+--- 帖子 #387 ---
+Pivot points are regular VT indicators, and VT has several to choose from. The one used for the 15min strategy is called "Pivot Points - Daily". You add it just like any other indicator, and it goes on your 15min chart. I usually just write down the pivot point and then remove it again, because it distorts the rest of the chart and hides the things I want to see. The tricky part with pivot points is the setup. You have a different setup for each trading session, and it should be done near the beginning of each trading session. The parameter you change each time is the one called, "Calculate Pivot At Hour (EST)". This is basically a starting time. It should be set to 19 for Asian session, 03 for London, and 08 for New York. There is pretty good documentation available already for when to make this change, and what it should be set to. One good source is the new web site for Auslanco's strategies, which includes a page for the 15min strategy. http://www.pnwenterprises.com/auslanco/ Here's what you change on VT for each new session. A small window pops up when you attach the pivot point to the 15min chart. You will change the first field only, so the price data is collected for the correct 24 hour period. For London, you change it at the start of their trading session, and you change it to "03" or "3" (London opening time in EST):
+
+--- 帖子 #388 ---
+The way you look at pivot values after you've attached the indicator, is by clicking on the "Inspect" button on the bottom of the chart, and then moving the cursor to the last 15min candle. The inspect window will look something like this (below). The one called "Pivot Points - Daily Pivot Point" is the one you're after. My screen shot shows the pivot values for the current New York session. Unlike other sessions, it doesn't get setup at the very beginning of the session. You wait until 11AM EST to change it, but when you do change it, you set it to 08 (or just a plain old "8" does the same thing). The other session changes are more straight forward, since the time you change them, and the time you set them to are the same. With New York you continue to use London pivots for awhile after it opens. Once you get in the habit, it only takes a minute to figure out the new daily pivot point, and you'll know what time of day you need to change them. But they are confusing at first, and it might help if you have notes to follow.
+
+--- 帖子 #389 ---
+you have done it again, thanks mate .
+
+--- 帖子 #390 ---
+Good Morning, If one receives a signal to go long, must the QQE60 also be above the 50 line or is it good that the just as long the QQE60 crosses that dotted line [is that the RSI - do not recall]? I know that the doc also says that at least the QQE5 or QQE1 must be above the 50 line to take the trade.
+
+--- 帖子 #391 ---
+Hi, Am just wading through the various threads to get up to speed on the 15 min strat. Any chance including a date in document file name so we know which is latest. I have at least three different versions of the 1min and 15 min Strategy doc. Its a b$%ger working out which is latest definitive version with correct settings. Great thread. Well done Aus and the team.
+
+--- 帖子 #392 ---
+Karmo, is this thing reversing I am short and its hurting daily candle closed at a trend changing levle but this thing touched 236 area and went right back up this is BS!
+
+--- 帖子 #393 ---
+it's not BS, it's normal
+
+--- 帖子 #394 ---
+Also, the BOE announced on rates. That's probably the cause of the spike.
+
+--- 帖子 #395 ---
+put all the doc's in to a folder and display them in detail view or look at properties, should give a created date, might help. but i will add a date to the top of the page. also you can click the paperclip icon at the top of the thread, it will show all posted docs and the date of posting. regards MPP
+
+--- 帖子 #396 ---
+just needs to have crossed the dotted line, above for long trades and below for short trades QQE5 and 1 need to cross the 50line be above (long) or below (short) to take the trade
+
+--- 帖子 #397 ---
+Hello. It needs to be crossed just like the doc describes it. This is a true "QQE cross over". The solid RSI index line crosses the dashed RSI slow line. In the 15min strategy, the only case where QQE's just have to be above (or below) the 50 line, are with the QQE1 and QQE5 on the 15min chart. Every other reference to a QQE cross over refers to the type involved with QQE60. For instance, the 1hr QQE5 cross over. If the 50 line isn't mentioned when a cross over is described, this is the type it's referring to. When a very powerful 15min strategy is in progress, you'll have the 15min QQE60, the 1hr QQE5, and the 4hr QQE5 all crossed over in the same direction this way. It doesn't really matter whether they're above or below the 50 line. Incidently, when the solid line reaches 70 it is considered to be in "over bought" territory, and when it reaches 30 it is in "over sold" territory. This can happen near the end of a bull run or a bear run, respectively.
+
+--- 帖子 #398 ---
+Anyone going to enter on the touch of the 5ma???? I know Karmo doesn't like to trade on the 15m during the US session. Can't say I blame him.
+
+--- 帖子 #399 ---
+it's actually one of Auslanco's rules not to trade the US session, if you look at the doc you will see the trading times.
+
+--- 帖子 #400 ---
+Thanks MPP. You are correct. Sorry Karmo and Auslanco
+
+--- 帖子 #401 ---
+I also spoke a little to soon on the short entry. Got to wait until the confirmation bar!
+
+--- 帖子 #402 ---
+Thanks for that. I tried the document properties trick but it only tells me when saved to my PC. Auslancos web site is a good reference point for newbies like me but again never sure which is the most up to date - his site or your doc.( http://www.pnwenterprises.com/auslan...instrategy.htm ). Now I have read through everything here (not a small task) I have further questions. If re-enterring a position following a pull back past 15 QQE1 and 15 QQE 5 should stops and targets be 60 pips (trailing I think) and 100 pips from that point or from the original entry point at 15 QQE60? Think soemone asked somethign similar but I cannot find it. On my charts 15 QQE1 and 15 QQE5 are always (so far) on exactly same bar. What is purpose of using both? This is a great learning experience. Thx.
+
+--- 帖子 #403 ---
+Revoli, Thanks for the site link. I'm relatively a newbie as well. I've been researching and practicing (ie. losing money on a mini account ) for a little over 2 years. To other newbies out there....you can demo to learn, but there is no experience like the experience of risk, so initially trade with a mini. Risk intensifies emotions which can lead to huge losses.
+
+--- 帖子 #404 ---
+Hello PC. Saw the way u explained setting up of the 'Ausy' chart and it was straight to the point. I believe the explanation is for a VT chart. Do you please know anything about MT4 charts. http://www.forexfactory.com/images/icons/icon5.gif I'm having problems setting up my indicators on the chart (that is, the QQE , SMA , Gann Hi/Lo , and the rest). http://www.forexfactory.com/images/icons/icon9.gif Thanx. I am very new to fx trading (just two months on demo acct. with North Finance).
+
+--- 帖子 #405 ---
+Hi Yemmey. I use VT, so that's my where my strengths are. MPP will help you with MT4, since that's one of his areas of expertise. Good luck with everything!
+
+--- 帖子 #406 ---
+Yes when you re-enter targets are the same, not so sure about the QQE question, they do move differently and are used differently for the re-entry trade. watch them and see how it goes, you will see the movement as time goes on.
+
+--- 帖子 #407 ---
+Hello MPP! I was informed by Pip Cruiser that ur area of expertise is MT4 (@ least in chart matters). I need a hand in setting up my indicators on the Ausy chart. http://www.forexfactory.com/images/icons/icon12.gif
+
+--- 帖子 #408 ---
+Hi Yemmy have you downloaded all the required MT4 files. if load this template into the template folder, restart MT4, open chart, open header chart and look in templates, click on 15m template and all should set correctly. Attached File(s) auslanco 1m 15m.tpl 70 KB | 923 downloads Attached File(s) auslanco.tpl 77 KB | 728 downloads let me know how you get on.
+
+--- 帖子 #409 ---
+by no means an expert, but i have got Aus's system up and running.
+
+--- 帖子 #410 ---
+I'm unto it and I hope it works. Will keep u posted. Thanx.
+
+--- 帖子 #411 ---
+I know that the price will move arounf the 5SMA, but what to look out for the 50SMA, 100SMA &amp; 200SMA? Thanks.
+
+--- 帖子 #412 ---
+Good question. With Auslanco's strategies, we know about retraces to the 30min, 1hr, and 4hr 5sma. We can use them for entry points, and to better understand price movements. You might also remember that the 1hr 100sma is one of things we check for a 15min strategy trade. The 50sma, 100sma, and 200sma are likely areas of support and resistance. Price can have a hard time moving past them. If the 1hr 100sma is just above price, and you go long with a 15min strategy, price might rise as high as the 100sma and stop. Or worse yet "bounce" off it and head the other direction. So it's a good idea to make sure price is above it already if you're going long, or below it if you're going short. 50sma and 200sma act in similar ways, even though they're not mentioned in the strategy docs. You'll read about these in the forums, from the other traders, so it's nice to have them on your charts so you know what they're talking about. Sometimes they'll use 50ema and 200ema instead, but they amount to the same thing. They're potential roadblocks to your TP area that you need to watch out for, but also areas that you can use to your advantage when setting up stop losses.
+
+--- 帖子 #413 ---
+Thats interesting stuff. Having worked through Auslanco's 15 min and 1 hour strats (latter used to great effect today) I am trying to get my head around how entries at retracments to the various sma's are made and more importantly what stops and targets to set having enterred. My current thinking is take a look at what seems sensible making sure the TP is at least twice the stop distance. Any good thoughts/threads on this??
+
+--- 帖子 #414 ---
+H Revoli. This can be a pretty complicated subject, and probably has different answers for traders with different levels of experience. There are advantages to keeping things simple. I've noticed that 100 pips TP and 60 pips SL work very well with the 15min strategy. I haven't had many 4hr / 1hr trades lately, but I do recall using twice the distance for TP as SL, and that does add up to good money management. I think people new at trading should stick to these guidelines. Understanding 5sma retraces can very helpful. I used to watch GBP/JPY price move up and down, and it didn't make much sense. But when I started watching it move in relation to the 15min, 30min, 1hr, and 4hr 5sma levels, it put a whole new light on the issue. All of a sudden it was moving from one 5sma level to the next. It might not be perfectly predictable, but you can see it move from place to place, resting for awhile (actually picking up buys and sells at that price), then moving on to the next. I used to panic when I saw price take off in the opposite direction of my trade. Now I just check to see if it might be moving toward a 5sma, and in most cases it is. Price doesn't always work like this, because other factors might be involved at the time (breakouts, fundamental news, etc.). But it's uncanny how often it does. A person really needs to watch it for themselves to get a feel for it. I think it's part of becoming familiar with the currency pair, and taking some of the monster out of GBP/JPY. You can use your knowledge of 5sma's for entry points. There's usually a delay before price "breaks out" for 100 - 200 pips profit. If possible, wait for price to move (retrace) to a 5sma that will give you a better entry. I prefer the 30min 5sma because it's a nice combination of 1) happening a lot and 2) giving good position. But 15min and 1hr can work too. Get familiar with how often they happen, and how far apart their price points are, and you can make a pretty sound judgement call. Getting a good entry point can keep your stop loss away from price action, and help you get all your pips!
+
+--- 帖子 #415 ---
+For Sunday, what do you suggest I should use as the pivots? Friday's or Thursday's data?
+
+--- 帖子 #416 ---
+I do the regular setup for Asian daily pivots on Sunday, using 19est for the starting hour, and doing the setup at 19 EST or shortly after. It seems to pull in the last 24 hours of data from that point in time, which mostly includes Friday's.
+
+--- 帖子 #417 ---
+For MT4, do you mean you specify DailyStartHours as 19?
+
+--- 帖子 #418 ---
+Well, I don't use MT4. But with VT it wants a starting hour in EST time, and I enter "19".
+
+--- 帖子 #419 ---
+on MT4 19est is the daystartHour for the asian session, but don't forget to allow for your broker offset. i.e. my broker is on gmt so i have to add 4 hours to the est time so i set my DayStartHour to 23. hope this makes sense
+
+--- 帖子 #420 ---
+I have noticed by looking back in time, we will at times miss quite a few trades if we only take trades above/below the daily pivot point. Is anyone following the rules in its entirety? I know the rules is to get the best possible entries to minimize losses....
+
+--- 帖子 #421 ---
+For me personally, the signals don't have to "generate" while on the right side of the pivot point. But before I actually take the trade, price has to move convincingly to the correct side of it. Otherwise I don't consider it a 15min trade, just a scalp, and I don't expect the full amount of pips from it. It can turn on me anytime with that kind of setup, even though there can be pips to make.
+
+--- 帖子 #422 ---
+I have seen the following setup frequently, I just need a confirmation. If the GBPJPY is below the DailyPivot as shown by (1), Momentum is below the 0 line, the QQE60 is under the 50 line, but the QQE60 blue line is still above the dotted signal line. Is this considered a valid trade or should I still wait for the blue line to cross under the dotted line though it's already under the 50 line?
+
+--- 帖子 #423 ---
+The QQE60 bearish condition is when the solid line (in your case blue) is under the dashed line. The 50 line can be ignored. Our original QQE60 indicators didn't even have a 50 line. The 50 line cross over is only used with the QQE1 and QQE5 on the 15min chart. 1hr and 4hr QQE's (both QQE5's) both use the same crossing logic as the QQE60. This is the usual meaning of a QQE "cross over". By the way, your chart does show the QQE60 crossed down (solid line below the dashed line). It appears to have crossed down one or two candles back. Of course, it was below it at the time your arrows are pointing to . . . maybe that's what you were referring to.
+
+--- 帖子 #424 ---
+I miss be missing something here. On my chart where the arrow is at the QQE60 at point 1, the solid blue line is above the dashed line [the purple circle around it]. For any short entries on the 15M TF, the solid blue line must be under the dashed line for the QQE60 no matter when I decide to take the signal. The solid blue line actually went below the dashed line at point 2 [the green circle around it]. I was pointing the above out only to say what happens if I missed the initial entry? Should I just treat it like re-entering another position as outlined in the document? Thanks, ET
+
+--- 帖子 #425 ---
+Okay, I re-read what I wrote, and in the last sentence I should have said that at the place where you have the arrow the solid line was "above" the dashed line . So it was bullish at that point in time, but bearish in the most recent two or three candles.
+
+--- 帖子 #426 ---
+What I see is that at point #1 you didn't "miss" a short entry. There was no short entry to make, because the QQE60 was bullish at the time. The signals would have been more complete six candles later, when the QQE60 crossed bearish. But if you check the 1hr chart you'll see that the 1hr QQE5 was bullish at the time (solid line over the dashed line) so that wouldn't be a good short signal.
+
+--- 帖子 #427 ---
+Now if things had been all lined up for a short signal at point #2, then you would have made a normal trade. No re-entry logic involved, just a regular short 15min trade.
+
+--- 帖子 #428 ---
+Pips Cruiser I have noticed that whenever the 5EMA crosses the Gann, if its under the GANN line, one can usually go short and vice versa for a long. If one waited for the QQE60 cross of the solid blue line with the dashed line, it is somewhat a late entry. There are very few false moves with this EMA/Gann cross.... In the chart I posted with the arrows of entry and actual cross for the 15M TF, it we just take the EMA/Gann cross for a short [EMA under Gann line] - that's almost 170+ PIPs before the QQE60 came into play [solid blue line crossing down the dashed line].
+
+--- 帖子 #429 ---
+I think the market conditions during the past few days have been tough for the 15min strategy. Sharp drops and rises, that sort of thing. I can see what you're saying about the Gann / 5sma right now. But I'm not sure if that would hold up over time . . . maybe it would. You wouldn't be the first to add personal touches to this trade, and there's nothing wrong with that unless you blame others for the results (which I doubt you would). It's a fairly complex strategy, and everyone doesn't like everything about it. I follow the basics but don't necessarily exit trades when it says, or run them during the hours it says, and minor stuff like that. There's room for creativity, that's for sure.
+
+--- 帖子 #430 ---
+hello in the website u said we should use qqe 60 qqe 5 qqe 1 but in the thread u said qqe 60 and about the level stop reverse do we use the system 2 with the 9 and 3 or the new atr periods 28 and 2 thank u
+
+--- 帖子 #431 ---
+Hello. I really should know which platform you're using, because of some differences between MT4 and VT. But the 15min chart uses QQE60, QQE5, and QQE1. The other charts (like 30 min, 1hr, and 4hr) just use QQE5. On VT the QQE60 is part of the QQE alert system, so you don't have to attach a regular QQE60 to the chart. The LSR is version 2 (or modified) and the ATR setups are 28 and 2. You'll have a different LSR depending upon which platform you use.
+
+--- 帖子 #432 ---
+Until I found this thread I have been practicing with Raghee Horner's " 34ema and macd system. This system has to be used on 1hr and 4 hr tf. With a $2000 sum to trade with the GJ was out of my range because of the SL. But after I managed to get the gann, QQE, MOM,50sma and 100sma set up on MT4 -I applied the 34ema and MACD to Aus's system and it works like reading a book on the 5 and 15 tf! The way it works is when the direction crosses the 34ema either up or down you can enter in that direction with hardly any SL at all. This must be verified by the MACD crossing 0. On the 5 min and 15 min you really need all Auslanco's additions avoid whip saws. You can see exactly which candle to enter on by waiting until the first or second candle closed above or below and enter on the next candle at that time. This allows me to play the GJ pair! On Friday I took a deep breath and entered after a long consolodation on the 34. WOW!! I let it run until closing and got out and got in again yesterday. I have doubled my act. in 2 days!! Raghee started trading stocks when she was 18 - 20 years ago. At that time you had to go through a broker. She had a lot of help learning to read charts by long term seasoned brokers that took an interest in her. (very pretty girl) She knows her stuff. I would have used her system all the way but didn't have the money so I bought her books. Since I am a Senior living on SS I have been looking for a way to apply her info at a level where I could afford the SL and still make enough $ to grow. GJ is the perfect marriage for my starting funds to grow the fastest.
+
+--- 帖子 #433 ---
+Let's pre-suppose that the GBPJPY was long since the prior session, and the QQE5 never crossed back down [solid blue never crosses dashed line]as we go into the Asian Session nor did it ever touch the 50 line, how can you use this system to enter? We do not know how far it will go if at all if we jump in many candles later....
+
+--- 帖子 #434 ---
+I think your last sentence answered the question for you. We don't have a very good idea at that point whether a trade would still be profitable or not. It hasn't been thoroughly researched for time limits, plus it's difficult to know how many pips are still left in the upward swing. Ideally of course, you'd notice a 15min trade at the very beginning before price takes off. This allows you to wait for a good entry point. If you miss that, and price starts soaring, you have to make a judgment call. Would it be best to enter right now, or wait for the first retrace? I've handled it differently at different times, and there's no sure answer for this one, either. You can be wrong either way. If you're trying to strictly follow the rules (or maybe we should call them guidelines), then you should wait for a retrace. But in reality, you might not get a good one. Personally, I made 160 pips today off that move on your chart, starting at 228.75. After it went 100 pips I didn't know what it was going to do next. So I moved my SL above the entry point to lock it in 100 pips. Eventually I was almost 200 pips into profit, and adjusted the SL to lock in 160. That was soon hit on a retrace, so the trade ended. Later I noticed that price stopped at the 30min and 1hr 5sma points, and started up again. I entered another long, but I didn't really consider it a 15min strategy trade at that point. I think you're in this type of position now. You might have a good long trade, but it's probably a little late to call it a 15min strategy trade.
+
+--- 帖子 #435 ---
+What MACD value you use and a chart screenshot would make it easier to understand .... as I'm still learning this Auslanco 15min strategy. Thanks
+
+--- 帖子 #436 ---
+MACD - - 5 24 1. The cross over 0 matches the MOM and QQE. Just another verification of Aus. But Raghee just uses default. This morning was great on the 5 min.
+
+--- 帖子 #437 ---
+Hi CB! I would like to know ALL indicators Raghee use since I'm very new in this (fx trading). http://www.forexfactory.com/images/icons/icon12.gif
+
+--- 帖子 #438 ---
+Hi Sri hope this helps Attached File(s) Auslanco's 1m &amp; 15m system.doc 324 KB | 1,778 downloads Attached File(s) Auslanco.doc 421 KB | 1,162 downloads Attached File(s) Pivot Points.mq4 10 KB | 1,022 downloads copy the pivot indicator into the indicator folder in MT4, then restart it. add the pivot to the required chart, once applied you can change the setting(inputs) by right clicking on any of the pivot lines on the chart. pivot set refers to 1- daily 2 - weekly 3 - Monthly you then set the DayStartHour to suit you broker, i.e for me london is 14. hope this helps. MPP you will also find i have posted templates for MT4 in either this thread or the 4h stratagy thread http://forexfactory.com/showthread.php?t=41509 they finish with .tpl, use the paperclip to find them - good practice.
+
+--- 帖子 #439 ---
+Hey Auslanco, I know this is totally off topic, but I had to ask. Do you manage Forex funds? A couple of investors are looking to start up a Forex club to manage funds for clients. Would you be interested in trading for them? If you are interested please send me a PM.
+
+--- 帖子 #440 ---
+I have done all you advised me to do and I got the chart (Ausy) at last, but I could only get the dots and not the arrows.
+
+--- 帖子 #441 ---
+right click on the chart, indicators list and check you have the MT4-levelstop-reverse-vBO-4 open this and check the settings match the document and then close. sometimes this needs to be done to kick start it on new charts, this produces the arrows. the dots are created by the QQE's let me know how you get on.
+
+--- 帖子 #442 ---
+Need some help here guys and gals. I am the one putting together the web site for Auslanco. I have accumulated what I could from other posters such as M2B, MPP, Auslanco, etc and put on the site. Please PM me, I do not want to clutter up the thread with answers to my request. I am now working on the download and links sections. I have some items up there but would like suggestions, especially in the links section. Looking for news, educational links mainly. Ones that will help any newbies and that fit in with Auslanco's overall strategies. In the download section, I really only want to put up items that Auslanco or any of the senior members use to trade Auslanco's strategy. That way it will not get cluttered with "suggestions" from others, who even though they are trying to help, do not fit into this great strategy. Rod
+
+--- 帖子 #443 ---
+A question came up the other day on the main thread about exiting a trade based on the QQE5 crossing over. It took me awhile to realize the true issue, but it turned out to be two different views about the type of QQE cross over that has to occur. One view sees it as the convential cross over of the two QQE5 lines. This makes sense to them because the docs don't mention the 50 line in the "Exit" sentence. The other view sees it as the QQE crossing the 50 line in the opposite direction of the trade. This makes sense because the QQE crossing the 50 line in the direction of the trade is what helped define the trade signal in the first place. The issue grows more interesting if you look at some of the older written instructions. They contain a snapshop of Auslanco's original post. In one sentence he says the QQE crossing the 50 line is a buy signal, and in the next he says that if it crosses back over you must exit: 4. I use QQE 5 &amp; QQE 1 in addition to QQE60. - after you get the two signals (Arrow &amp; QQE 60 cross signal) You enter after the QQE5 or QQE1 cross the 50 line. - If QQE5 cross to the opposite direction you must exit the trade. When looked at this way, one could easily assume he was talking about crossing the 50 line, since he had just mentioned it in the previous sentence. But in future instructions additional info has been added between those two sentences. One includes info about pivots points. Now the web site has info about pivot points, plus a screen shot. If indeed Aus was referring to a cross of the 50 line, it's getting lost in the translation nowadays. I'm inclined to think that a cross over of the 50 line would invalidate the trade, since that's what helped define it in the first place. And that Aus communicated it fairly well in his original post, but that it may have lost it's meaning over time. But I could use a second or third opinion. I've found several questions / answers about "re-entries" in this thread, but didn't locate any regarding the exits. Thanks! P.S. - Here's a partial copy of the instructions (below) so you can refer to easily. The web site has virtually the same thing, plus a screen shot after the pivot info. **************************************************** How to spot a trade opportunity: Buy/Sell signals: After you get the two signals (Arrow &amp; QQE 60 cross signal) You enter after the QQE5 or QQE1 cross the 50 line. Only take the short trade if the signal generates below the Daily Pivot level. Only take the Long trade if the signal generates above the daily pivot level. Exit: If QQE5 cross to the opposite direction you must exit the trade. *****************************************************
+
+--- 帖子 #444 ---
+If u dont mind, what is the MACD setting u used? Thank in adv.
+
+--- 帖子 #445 ---
+its in post 436 bro.
+
+--- 帖子 #446 ---
+Did as u advised and I now have d arrows. http://www.forexfactory.com/images/icons/icon10.gif Thanx a million MPP. Had some technical problems with my ISP in d last 2 or 3 days. Dat's why I couldn't keep u posted earlier than now. Thanx again. U're a time saver/stress braker. http://www.forexfactory.com/images/icons/icon14.gif
+
+--- 帖子 #447 ---
+Hi, could someone help me to put a sound alert when Gann Hilo crosses? Would truly appreciate it!
+
+--- 帖子 #448 ---
+need to be more specific, crosses what? and on which platform?
+
+--- 帖子 #449 ---
+happy trading
+
+--- 帖子 #450 ---
+Hi, thanks for taking notice, MPP. what i meant is when the market price equals to the gann hilo. ie the change of trend. The platform is MT4.
+
+--- 帖子 #451 ---
+has anyone got the MQL4 template version for this 15 min GJ ? I dont mind trying it out. you can pm me with file. A thousand thank u's in advance!
+
+--- 帖子 #452 ---
+may i know what is the setting for Daily Pivot points at start times for mine location? me here is (GMT +8). i dun know wat value i suppose to fill in the Day Start Hour.
+
+--- 帖子 #453 ---
+15min Strategy (Latest Version) I use three time frames for this strategy 15 min, Daily(for daily 5sma confirmation only) and 1hr charts(for 1hr 100sma confirmation only). Indicators for 15 min charts: 1)Quantitative and Qualitative Estimation Indicator (QQE) Go to indicator properties and change the smoothing factor to 60 ( we only use the RS Index(Green line on the QQE indicator as you can see on the posted charts) Level RSISlow(the red dotted line on the QQE indicator as on the posted chart). Note : we ignore the RSI fast line for this strategy. 2)Quantitative and Qualitative Estimation Indicator (QQE) value 5 same as QQE 60: Go to indicator properties and change the smoothing factor to 5 ( we only use the RS Index(Green line on the QQE indicator as you can see on the posted charts) Level RSISlow(the red dotted line on the QQE indicator as on the posted chart). Note : we ignore the RSI fast line for this strategy. Also draw a line across the value 50 as you can see on the posted charts . You can do this on the indicator properties. 3) Level Stop reverse Cycle change these values at indicator properties. ATR Periods 28 (Changed from the previous version) ATR Multiplyer 2.75 (Changed from the previous version) 4) Daily Pivot Change your daily pivot "start time" at the start of every single session. Eg: 19.00 EST for Tokyo 03.00 EST for London 08.00EST for New York 1 Hr charts- 1)100 sma Daily charts 1)5sma ( Newly added) Strategy rules. BUY %. price above the 1hr 100sma %. Price above the Daily 5sma % . Price above the session Daily pivot %. Levels Stop Reverse Indicator- buy arrow %. QQE5 crossed up( RSIndex line-Green crossed upwards the LevelRSIslow)and crossed the 50 line upwards % . QQE60 crossed up( RSIndex line-Green crossed upwards the LevelRSIslow). NOTE: QQE60 has to cross upwards while the price is above the 1hr 100sma and Daily 5sma. If the QQE60 cross upwards for a buy signal from Below the Daily 5sma or 1hr 100sma I don't take that signal. Exit: when QQE 60 cross to the opposite direction Sell signal visa versa. This strategy is only available for VT trader and MT4 users. VT trader charts come with the QQE indicator and Daily Pivots. If you have any questions please direct them to the auslanco-GBP/JPY thread or 15 min strategy thread at Forex Factory Forum. Please note that I receive over 30 emails a day and another 20-30 PM's inquiring about various things. Things are only getting worse with the newly launched signal service. Therefor please dont send me any emails asking silly questions such as "you cant see an arrow on your charts , how to change the indicator colors , where to download the indicators, you having problems downloading the indicators, where to change the indicator values etc etc. If I dont answer your question within 24hrs , the chances are you will never get a reply from me for the relevant email since I have answered the same question many many times before on the forum. There are many competent traders who are using this strategy on the Forex Factory Auslanco GBP/JPY and 15 min strategy thread , and any one of them will be willing to answer your question.
+
+--- 帖子 #454 ---
+Are you still only taking trades between 0400 and 1500 GMT?
+
+--- 帖子 #455 ---
+Does anybody know the equivalent of the 1 hr sma for the 15 minute chart? Also the Daily 5sma for the 15 minute chart?
+
+--- 帖子 #456 ---
+The equivalent? What do you mean? Just put a 100sma on the 1H chart and a 5sma on the daily chart.
+
+--- 帖子 #457 ---
+It would be nicer to have it all on one chart.
+
+--- 帖子 #458 ---
+This would be nice. In theory, you could take the 1hr 100sma and multiply it by 4 (because there are 4 more price bars per hour on the 15min chart than on the 1hr chart). This would come out to 100 x 4 = 400sma on the 15min chart. But in actual practice it doesn't work out exactly right, because new 15min price bars keep closing while the 1hr price bar remains unclosed. This changes the 15min 400sma, while the 1hr 100sma stays the same. So you end up having discrepancies, and the 1hr 100sma is the one that's correct, not the 15min 400sma. Likewise for Daily 5sma, you could take the number of hours in a day (24) and multiply that by 5, which comes out to a 120 hour period. Then you could convert that to a 15min chart using 120 x 4 = 480sma. But again, there will be 15min price bars closing before the daily bar closes, and this will lead to similar discrepancies (this time even more significant), and it will be the Daily 5sma on the daily chart that's the correct one. So your best bet is to get the info from the 1hr and Daily charts. Otherwise your numbers will be different than everyone else most of the time. Hope this helps!
+
+--- 帖子 #459 ---
+Thanks! It's interesting to see how close together those sma's are on the 15 minute chart. Might be something for Aus to look at if there is another strategy change.
+
+--- 帖子 #460 ---
+You can always make notations on the 15min chart. I do that for pivots and the daily 5sma. It would probably work for the 1hr 100sma too, as long as you check the 1hr chart now and then, and keep the 15min notation up to date. Especially on days when it's an issue.
+
+--- 帖子 #461 ---
+Can someone assist me please. I'm using VT and would like to verify I have my level stop reverse set up correctly. The notes tell me: Use ATR mode =True NON ATR = stop pips 40 ATR Periods = 28 ATR Multiplier = 2.0 ATR Smoothing = 0 My indicator is set at: Trailing stop level mode =Volatility ATR Periods = 28 ATR Multiplier = 2.0 There are no options for smoothing which is making me wonder if I have the correct indicator. Thanks in advance..
+
+--- 帖子 #462 ---
+change ATR Mulitplier to 2.75. thanks
+
+--- 帖子 #463 ---
+Thanks Kenneth. So the lack of smoothing on the VT indicator is no issue?
+
+--- 帖子 #464 ---
+%. QQE60 crossed up( RSIndex line-Green crossed upwards the LevelRSIslow). NOTE: QQE60 has to cross upwards while the price is above the 1hr 100sma and Daily 5sma. If the QQE60 cross upwards for a buy signal from Below the Daily 5sma or 1hr 100sma I don't take that signal. To Auslanco or anyone that want to helpme: What does ¨if QQE60 cross upwards FROM BELOW the....¨means? (just means that the price at the moment of the signal can not BE BELOW those indicators values or there is something else -like previous price action- involved in that concept) any help? thanks in advanced. Lucy.
+
+--- 帖子 #465 ---
+that means price should be above 1hr 100sma and daily 5sma when qqe60 crosses slow rsi. hope it is clear now? thanks
+
+--- 帖子 #466 ---
+just change smoothing factor to 0 if there is any figure written as smoothing factor should be zero. thanks
+
+--- 帖子 #467 ---
+[quote=pedaso07;1741667] %. QQE60 crossed up( RSIndex line-Green crossed upwards the LevelRSIslow). NOTE: QQE60 has to cross upwards while the price is above the 1hr 100sma and Daily 5sma. If the QQE60 cross upwards for a buy signal from Below the Daily 5sma or 1hr 100sma I don't take that signal. To Auslanco or anyone that want to helpme: What does ¨if QQE60 cross upwards FROM BELLOW the....¨means? (just means that the price at the moment of the signal can not BE BELLOW those indicators values or there is something else -like previous price action- involved in that concept) any help? Hola! It means that if you get the qqe60 signal when the price is under the daily 5sma or 1hr 100sma he does not like to take the signal.
+
+--- 帖子 #468 ---
+I'll ask them to change the instructions on the web site, so it says that setup is for MT4 only. No smoothing factor is needed for VT.
+
+--- 帖子 #469 ---
+When the pivot is recalculated, does your profit target move to the new R or S value? Thanks
+
+--- 帖子 #470 ---
+I will be working on the changes in the next day or so. Thanks for letting me know. Rod
+
+--- 帖子 #471 ---
+Thanks Rod. You're doing a great job!
+
+--- 帖子 #472 ---
+Kenneith and Cesare76fx: thanks for the help... .
+
+--- 帖子 #473 ---
+Hi Forexnovice &amp; All, It's definitely only me, who can't be able to setup aus's 15min latest version (and the previous), but it really gets me upset. The problem is the: 3) Level Stop reverse Cycle ( Is that mean VT-Level Stop Reverse System?) change these values at indicator properties. ATR Periods 28 (Changed from the previous version) ATR Multiplyer 2.75 (Changed from the previous version) Where can I change these values? In - Edit trading system/Formula? I'd apreciate your answers!! http://www.forexfactory.com/images/icons/icon5.gif http://www.forexfactory.com/images/icons/icon9.gif http://www.forexfactory.com/images/icons/icon5.gif
+
+--- 帖子 #474 ---
+Here is the LSR 4 MT4. Load the indicator on ur platform. Double click on it &amp; under the Inputs Tab u can change the settings. Hope that helps.
+
+--- 帖子 #475 ---
+Forexnovice or Auslanco, pls forward Aus's 15min latest version for NF MT4 to me
+
+--- 帖子 #476 ---
+U will find all the info + downloads here http://www.pnwenterprises.com/auslan...instrategy.htm And the latest Update 2 the 15min strategy here http://www.forexfactory.com/showpost...ostcount=52748
+
+--- 帖子 #477 ---
+thanks Forexnovice! It's OK, but...! http://www.forexfactory.com/images/icons/icon7.gif I've managed, to load LSR in MT4, but how can the QQE be load? Is it in MT4 already by default? If yes, where can it be found? To be frank it would be better to have that LSR for VTtrader cos i've already learned it better. Could you help me what to do? Thanks for all!!!
+
+--- 帖子 #478 ---
+Oh! I think I've found some useful downloads on aus's page...
+
+--- 帖子 #479 ---
+I've downloaded the indicators (ZIP) for aus15m strategy, but they're locked! http://www.forexfactory.com/images/icons/icon9.gif Could anyone let me know the password/s?
+
+--- 帖子 #480 ---
+15min Strategy (Latest Version) Hi Auslanco: Have made changes to the web site. Can you verify that I have everything in there and it is correct. Advise if any thing needs changing. Rod
+
+--- 帖子 #481 ---
+Thanks Forexnovice. I'll download &amp; tryout asap
+
+--- 帖子 #482 ---
+Has anybody made a new template for Auslanco's revised 15 minute Strategy. If so, can they post so I can put it in the download section of the web site.
+
+--- 帖子 #483 ---
+Hi, Im confused about the notes that auslonco was saying " NOTE : QQE60 has to cross upwards while the price is above the 1hr 100sma and Daily 5sma. If the QQE60 cross upwards for a buy signal from Below the Daily 5sma or 1hr 100sma I don't take that signal." What does he mean by cross upwards from below Daily/1hr? Anyone care to share a screenshot of what his trying to say?
+
+--- 帖子 #484 ---
+If the cross occurs and the price has not went above the 1hr 100sma and the Daily 5 sma, he does not take the trade. All 3 have to occur
+
+--- 帖子 #485 ---
+this does not apply to the daily pivot though, right? in the sample trade shown on the 15min site, eventhough the rest of the signals occur below the daily pivot, he waits for a candle to close above the daily pivot and then places the long trade. what is the # of candles we should allow for this move above (or below) the daily pivot to happen? thanks
+
+--- 帖子 #486 ---
+He mentions 5sma and 100sma, are we using the "close SMA"? since on MT4 there are several choices. Anyone please.
+
+--- 帖子 #487 ---
+It is the close SMA he is referring to.
+
+--- 帖子 #488 ---
+yes it's 100sma Close
+
+--- 帖子 #489 ---
+Hello Auslanco, I've downloaded the indicators for VT from your site. Would you Aus please, give me a password or guide how to unzip these ZIP files? Or anyone could help me? If it's public... Thanks a lot
+
+--- 帖子 #490 ---
+I use only MT4, however I downloaded the vt zip folder &amp; managed 2 unzip it without any problem &amp; no Password is required.
+
+--- 帖子 #491 ---
+Hi there, I am using Auslanco's system, I still have some questions though: 1. What's the QQE indicator exactly? I mean how is it calculated? Is it a moving average of the RSI ? Don't really get it... What's the difference with RSI? Because when I compare RSI and QQE for the same time period, it doesn't look alike. I am misunderstanding something I know... 2. I don't get what's the difference between the dots and the arrows either: the dots are settled by the QQE indicator, while the arrows are settled by the reverse level indicator? So what do I look at: the dots alone, the arrows alone or both together? Does it mean that if we have just an arrow or a dot, we can not enter the trade ? 3. What about the Gann indicator? Do you guys still use it despite the new Aus' system ? What's the aim of this indicator in addition to all the others ? I read through the 33 pages of this thread and couldn't find my answers... Thanks for your future reply, I appreciate your help!
+
+--- 帖子 #492 ---
+I'm having some problems with it too. Here's a link to page 22 of this thread. On it you'll find post # 321 and that has an unzipped version of the LSR. A few posts later it describes how to do the setups, and a few posts after that you can find the QQE alert download: http://www.forexfactory.com/showthre...=45076&amp;page=22
+
+--- 帖子 #493 ---
+Hi Michi, 1) Try Googling "qqe indicator" and "quantitative qualitative estimation" for more info. But it's a strength indicator based on multiple RSI settings and a variable smoothing factor. You can view the code on VT Trader. 2) Both the arrow (from LSR) and the dot (from QQE60 cross) are needed. A buy arrow points up, and a sell arrow points down. But an arrow and dot alone do not make a buy / sell signal. All of the things below at the same time equals a "buy". The reverse is a "sell". For more details see page 31 on this thread or the web site. Strategy rules. BUY %. price above the 1hr 100sma %. Price above the Daily 5sma % . Price above the session Daily pivot %. Levels Stop Reverse Indicator- buy arrow %. QQE5 crossed up (RSIndex line-Green crossed upwards the LevelRSIslow) and crossed the 50 line upwards %. QQE60 crossed up (RSIndex line-Green crossed upwards the LevelRSIslow). NOTE: QQE60 has to cross upwards while the price is above the 1hr 100sma and Daily 5sma. If the QQE60 cross upwards for a buy signal from Below the Daily 5sma or 1hr 100sma I don't take that signal. 3) The Gann HiLo Activator isn't specifically used for the 15min strategy, and that's why you won't find much about it on this thread. But you can google "gann hilo activator" for more info. You can also read the first few pages of Auslanco's other threads to see how he uses it in other strategies.
+
+--- 帖子 #494 ---
+Here is a custom alert indicator for MT4 platforms that I find very usefull, along with a short instructional video. Rod So this little video is put together to demonstrate this Visual Interface for MT4. http://www.youtube.com/watch?v=5Ds1BZl78xQ
+
+--- 帖子 #495 ---
+Hi Pips Cruiser, Thanks for your reply. I do not find explanation of the QQE by goggling it, I wrote that on the forum because I made my research before... and couldn't find the code on VT Trader either... I am aware of the system requirements, but the dots are not mentioned specifically in this buy/sell signal requirements. I believe the dots appear once the QQE60 crosses over/under the slower line, right? Even though it's not always the case on my graphs, I believe that's the buy/sell signal requirement in addition to the arrow (regarding the dots), besides all the other requirements with moving averages... Maybe you can just confirm my way of thinking, and if you could just look quicky on the VT Trader website where the QQE code is so I can have a look at it, that would be nice! Thanks anyway buddy for your help! Michi
+
+--- 帖子 #496 ---
+Correct . . . the dot signifies that the QQE60 has crossed (index and slow line), and a QQE60 cross is part of the requirements for a buy or sell. I get quite a few hits on a Google search. But it's also true that it's hard to find very good explanations. You can see the VT indicator code by right clicking on a chart, choosing "Attached Indicators", highlighting the indicator you want to look at, clicking on "Edit", and choosing the "Formula" tab.
+
+--- 帖子 #497 ---
+Hi Pips Cruiser, Thanks for your reply! Ok, I checked your code, I understand it's linked with the RSI to which has been added a smoothing parameter basically... It's just that I don't like using an indicator without knowing its underlying basics. So the figure on the right side of the QQE indicator, for instance: 53.4723, 64.5687, ... are the same as the RSI? That's why we use QQE almost as RSI: buy when over the 50 level, etc ... ? I would also like to know: is this system valid for a M5 or M1 timeframe? Because I used it yesterday on the M5 timeframe but got screwed. Is it another indicator to look at on a shorter term timeframe? Cheers, Michi
+
+--- 帖子 #498 ---
+Hi Michi, You might be a good candidate for naked chart trading. You could learn to read the price bars and their patterns, on multiple time frames, to spot trends and breakouts. There are successful traders using that approach, and the pure market data is contained right there on the charts. Indicators start with that data and build fancy graphical representations of it, with only a few exceptions (like volume). I can understand your wanting to know the underlying principles of the indicators you use. I didn’t have blind faith in the QQE either, and used a demo account until I was convinced that it worked. After that I adopted the 15min strategy as part of my regular trading, and have had success with it ever since. In the process I got to understand QQE behavior better. Aus used to tell us to watch it carefully, catch the movements, and get to know it that way. But even now I don’t understand it perfectly. Partially because it’s one of the newer indicators on the scene, and partially because of the way it was introduced (I know it’s history can be gleaned through Google, because I’ve done it) it remains rather mysterious. That will probably change with time, as more traders use it and it becomes mainstream. The smoothing factor is critical. The lower the number the more quickly it reacts. It could be used to simply measure overbought and oversold conditions, because when it reaches very high and low numbers respectively, that’s what it is signaling. But that’s not the main feature we’re using it for in the 15min strategy; it’s more of an added bonus. "50" can be looked at as neutral territory, though that might be an oversimplification. It originally comes with three moving lines, the RSI index, the RSI fast, and the RSI slow. Plus there’s the option of adding a stationary line, and we create one for “50”. For our purposes we ignore the RSI fast line, and on VT you do this by coloring it white. With the QQE60 we just look for the RSI lines to cross. With the QQE5 we also want it on the correct side of the 50 line. All of this has been adapted (along with other indicators) to sense for and signal an impending "breakout". It has been tested on lower time frames, but with mixed results. I think you’re best off sticking to the 15min chart, or setting up your own experiments on a demo account before using them on the M1 or M5. Here is one reference to that on this thread: http://www.forexfactory.com/showpost...5&amp;postcount=53 I’m perfectly aware this doesn’t answer every question you have, or that you might have in the future about QQE indicators. But at the same time, it’s not anybody’s job here to fully explain it or convince you that it works. Or to even convince you that the 15 minute strategy works. It’s offered as a gift for you to accept or reject, as you feel fit. I think it's wise to have healthy doubts about what you read on any forum, and I would recommend testing any strategy on a demo account until you’re satisfied with the results.
+
+--- 帖子 #499 ---
+Ok thanks a lot! Of course I agree with you, I just wanted to know a lil bit more! Thanks for your explanations, Cheers
+
+--- 帖子 #500 ---
+Hey Aus and all of there that can help me, I took Pivot Point indicator from pwenterprise (Bruce's summarize). I don;t know what is DayStartHour. Anyone can help me ? THx a lot. http://forexfactory.com/images/icons/icon10.gif
+
+--- 帖子 #501 ---
+Change your daily pivot "start time" at the start of every single session. Eg: 19.00 EST for Tokyo 03.00 EST for London 08.00EST for New York
+
+--- 帖子 #502 ---
+Forexnovice, thanks for your directions on the installations of indicators for Aus 15 min strategy for MT4 but I think I still need need more help on the QQE60 &amp; QQE5 and the SMA. Is the SMA same as Moving Averages in MT4? Regards -WT
+
+--- 帖子 #503 ---
+yes they are the same, in MT4 they allow you to select moving averages and then set the type in this case simple and close.
+
+--- 帖子 #504 ---
+Thanks MPP. I quite appreciate your response. Pls confirm if the DayStartHour for Northfinance(GMT+2) for NewYork Session=15. My QQE60 &amp;QQE5 load in Indicator Windows and only show one blue line each. Pls confirm if its ok Regards.
+
+--- 帖子 #505 ---
+Dear Aus, (or Pip_Cruiser... or anybody that can help answer) Should the StopReverse give the buy signal, and, with the QQE 5 just over the 50 line arleady (assuming all other buy signal requirements are in place), do you enter or wait for the retrace that will make the QQE 5 fall below 50 and go up again? I just need to determine how far up over the 50 can the QQE 5 be to be able to enter immediately. I mean I know that if its way up already, I'd have to wait. But what if it's only like at 55 or 60? Would you have any range to consider? (NOTE: Just over is like for example the green line is above 50 while its signal red dotted line is just on the 50 line) Appreciate any answer from anyone who is using this system...
+
+--- 帖子 #506 ---
+right click the qqe and check the colour settings, there should be 3 0=blue 1=255,255,255 and 2=black. try this and see if that changes anything.
+
+--- 帖子 #507 ---
+there's no hard and fast rule on this, but if it's just over as you discribe you should be fine, as you trade with this systme you will get to know whats good and whats not, give it time.
+
+--- 帖子 #508 ---
+Thx, MPP!
+
+--- 帖子 #509 ---
+Thanks MPP. I've checked. The colour settings are exactly as you wrote. Is it sufficient that my QQE only displays blue indicator line and red 50line? Regards -WT
+
+--- 帖子 #510 ---
+as far as i can tell in the 15min strat this is fine, no one has forwarded any ideas for the dotted line that i am awear of, in the 1h &amp; 4h system the line is used. regards MPP
+
+--- 帖子 #511 ---
+Hello there, Can anyone please clarify the "Entry Point at 5SMA" statement. I understand it as the price bar touches the 5SMA line you enter the trade at that point? Am I correct on this. Illustrations will be greatly appreciated.
+
+--- 帖子 #512 ---
+hi, i have problem setting the daily pivot...can someone could explain to me about the time conversion... i'm confused about using EST. how many hours different from GMT? the EST are change within a year right? when does it change? ive google it but make me more confuse... some say its change during march, some during april, and some november..... whatever.... my broker uses GMT +6, and my local time are GMT+8. ive set the chart perfectly... .. but pivot is the only problem... let say (correct me!) the EST are = GMT -5 so, i have to change the pivot : asian : 6 london : 24 / 00 (which one?) us : 21 please help anyone.... i have lost in time... hahaha...
+
+--- 帖子 #513 ---
+hi these are my settings and yes they change but only when the uk changes to british summer time, there is then a delay before EST switches to there summer time so i don't worry about it. check out time and date .com for the difference between countries or for real ease of finding time difference set your forex factory clock to EST and you PC to broker time, clock on wall for local (you then have all the time in the world. LOL) F) Daily Pivot points at start times Values: Pivotset 1 = Daily (1=daily, 2=weekly, 3=monthly) Asian 1900EST 2400GMT (set to 1 for mine) London &amp; US 0300EST 0800GMT (set to 9 for mine) US (after London close 1100est) 0800EST 1300GMT (set to 14 for mine) Change your Daily setting for the start of every session. by my calculations your settings are correct. regards MPP
+
+--- 帖子 #514 ---
+Hello, Can anyone be so kind to confirm if my chart is okay. attached is the screen shot of my chart. I would be glad if somebody can post the screen shot of a chart on M15 where all criteria/conditions are met for a possible trade set-up with detailed explanation. Thanks
+
+--- 帖子 #515 ---
+thanks a lot.... i just found my time again... lol ...
+
+--- 帖子 #516 ---
+Your chart looks complete and accurate to me. Here's a web site you can visit to get detailed setup info: http://www.pnwenterprises.com/auslan...instrategy.htm Good luck with everything!
+
+--- 帖子 #517 ---
+What you're describing is correct. It's when price touches the 5sma line (aka, "5sma retrace"). But I think you should verify that you're learning the most recent version of the strategy, and using the correct settings for the indicators. You might want to visit this web site for a good summary: http://www.pnwenterprises.com/auslan...instrategy.htm
+
+--- 帖子 #518 ---
+Hello and thanks for sharing. System looks great. I have been demo trading it for a few days now and I had a question or better yet an observation. I am using the MT4 set up and I noticed the Stoplevel indicator paints arrows as it crossed up or down live on a bar which may be 2-3 bars befor it actually closes to the other side for a TRUE Arrow and the ghost arrows stay on the chart until you close and re-open. Anyone else seeing this?
+
+--- 帖子 #519 ---
+Hi Pipsqueaker, I did some research, and it appears you're using an old version of the indicator. Visit this web site to pick up the latest version. Remove the old one first, restart MT4, and it should solve the problem. If not, let me know and we'll try something else. http://www.pnwenterprises.com/auslanco/downloads.htm
+
+--- 帖子 #520 ---
+Thanks I will try that but I thought that one was the old one. I am using MT4-LevelStop-Reverse vBO-2
+
+--- 帖子 #521 ---
+Hi Pipsqueaker you should at least be using vBO-4, not sure if there is a later version but this one works fine. Attached File(s) MT4-LevelStop-Reverse-vB0-4.mq4 12 KB | 1,284 downloads hope i uploaded it ok.
+
+--- 帖子 #522 ---
+Here are some notes about "fixes" that made me suspect your problem came from an outdated version (like Beta 0.2, which your file name suggests). You should be using, and the web site should have, version 0.4 just like MPP is sharing. Version Beta 0.3 Delete objects at startup. Use a more unique object name prefix. Change ATRBuffer and SmoothBuffer to be non-indicator buffers. No need for UpSignal and DnSignal to be buffers. Change arrows to display at the stop line. Fix bug on current bar drawing that would cause multiple arrows to appear. Version Beta 0.4 Fix bug in non-indicator buffers that was causing erroneous data in the ATR buffer and smoothing buffer.
+
+--- 帖子 #523 ---
+Great...thanks for the help I will replace the v1. Ken
+
+--- 帖子 #524 ---
+If i am mistaken, we all should now be using version 1 as per advise on Aus's website http://www.pnwenterprises.com/auslanco/downloads.htm . All the other prior BETA versions from VBO-2 ...thru VBO-4 should be deleted and replaced by V1 (version 1). I have been using with ATRperiod=28 and ATRmultiplier=2.75 (was =2.0) and ATRsmoothing=0 with great help.Correct me if am wrong. tq
+
+--- 帖子 #525 ---
+this is correct, but as far as i can tell BO-4 and version 1 are the same - so i never bothered to change it over. your settings are correct.
+
+--- 帖子 #526 ---
+If auslanco made an EA for this system, he will win the ATC 2008
+
+--- 帖子 #527 ---
+just getting to set up the method with help from other users here, but will appreciate if someone could direct me where to find all updated inds, template etc. i set up by following the 15min setup on the website, is that the current settings - seems to be all different
+
+--- 帖子 #528 ---
+from what i have seen on the posted charts - my setup doesnt always have the dot and arrow, in places it has dots only and they are quite far from each other. Sorry guys i cannot write long posts as ff for some reason doesnt allow me to do that and it doesnt allow to upload charts to post - Merlin and gang at ff trying to sort this out So i might have a few posts for the same question
+
+--- 帖子 #529 ---
+I am not aware if its on the thread - but if there could be a post with all current indicators and templates, indicators that if updated could be updated only on that post and all newbies to this method can be referred to that post rather than referring to different inds. on different posts or attaching everytime
+
+--- 帖子 #530 ---
+Hello Me4x, If you just spend a little bit more time reading the thread you would have found the all the depository of the Aus's techniques and indicators. I would prefer to read more inteligent stuff inside here
+
+--- 帖子 #531 ---
+take this one: http://www.pnwenterprises.com/auslan...instrategy.htm
+
+--- 帖子 #532 ---
+Hi sati, Am back to office. check the thread and still found out u still need some clarifications. it good to clear all doubts. Here is a link you will like http://www.forexfactory.com/showpost...ostcount=52748
+
+--- 帖子 #533 ---
+need some advice. Attached you see todays GY chart. As you can see we first have the QQE 5 crossing the 50 line down. Then comes the down arrow made by level-stop-reverse indicator and at last QQE 60 made a cross down. Is that a valid signal - or should I wait for QQE 5 to go above the 50 line and cross back again? Thanks.
+
+--- 帖子 #534 ---
+That was a valid signal. The two lines are crossed bearish, and below the 50 line. Feel free to join other 15 min strategy traders on this thread, if you'd like: http://www.forexfactory.com/showthread.php?t=63831
+
+--- 帖子 #535 ---
+That was a valid signal. the 100+pips was generated from that signal. feel free to always pull the trigger when u hava a clear signal. !5mins strategy is 85% reliable. you are welcome to millionaire's fx club
+
+--- 帖子 #536 ---
+Attached is my daily image... so what do you think about this daily resistance line?
+
+--- 帖子 #537 ---
+Hi, Auslanco, I wish to be added to your trading room. My username is harwedar and my email address is jerrytimmy@yahoo.com . Thanks in advance. harwedar.
+
+--- 帖子 #538 ---
+Hi Auslanco, I really appreciate your effort in assisting others. May the Lord bless you the more. Please I tried to join your trading room but, i was denied access, i was asked to supply password. Kindly assist. My users name is yess, my e-mail is kunle_oshin66@yahoo.ca . Thanks
+
+--- 帖子 #539 ---
+Hi, Could a member confirm when to take a trade. 1) When all conditions are are met? 2 When all conditions are met, we wait for a pullback to 5 SMA then take the trade? Thanks Asw
+
+--- 帖子 #540 ---
+#1 is the correct choice. However, if it's your judgment that price will retrace back for a better entry, you can still do that.
+
+--- 帖子 #541 ---
+I think you got your answer within 24 hours, when price broke through it.
+
+--- 帖子 #542 ---
+Hi Pips Cruiser, Many thanks for your help. Asw
+
+--- 帖子 #543 ---
+Hi Pips Cruiser, Can you explain the 'Squeege Trading System CSo1' to me please? Should I use this system instead of the VT Stop_Level Reverse System?. I am using this on Vt charts for 15min strategy.
+
+--- 帖子 #544 ---
+Good question. I see it's been added to the web site download page, and it has a note about being a replacement for the LSR. I'm not sure that's correct, and I'll look into it. The rest of us are still using the LSR . The only Aus strategy with a mention of the Squeege is Daily Momentum. If the web site is incorrect, I'll see that it gets changed. If it's correct and we really should switch to the Squeege, I'll make sure it gets posted to this thread along with an explanation. Thanks for the heads up!
+
+--- 帖子 #545 ---
+Hi Chris and Pipscruiser: Am checking with Aus now and will change site or add his explanation once he informs me. Rod
+
+--- 帖子 #546 ---
+Hi everyone. I've been following this Auslanco 15-minute strategy for several weeks and I think its one of the best I've seen. Question - my understanding of the method from everything I've read is that long or short trades are taken on either side of the Daily Pivot based on all of the other criteria being met. How about cases where the criteria is met for say a long trade, but price is just above the R1 pivot. Are those valid trades as well where you could set takeprofit to equal the R2 pivot? Likewise how about short trades when price is just below S1 and all setup criteria is met where you could set takeprofit to be equal to S2? Thanks for the great method -wave
+
+--- 帖子 #547 ---
+Thanks for making this change, Rod. It's much clearer now. We will not use the Squeege indicator.
+
+--- 帖子 #548 ---
+They're still valid trades, and you ride them to the R2 or S2.
+
+--- 帖子 #549 ---
+Well, sadly, after a week or so of trading this 15-minute strategy, you get totally clobbered during ranging markets.
+
+--- 帖子 #550 ---
+Auslanco has introduced two filters to stay away from ranging markets.. You shoulld take the LONG signal only if the price is above 1hr 100 and the daily 5sma &amp; for shorts it's visa versa.I find those filters halp you to stay out of most bad trades. No strategy in the world is 100% bullet proof in all market condition. You may have some losses. But this is the best strategy I have come across to trade the GBP/JPY pair IMO. Good Luck
+
+--- 帖子 #551 ---
+hi, can somebody tell me, whats the name of Gann Hi Low Activator 10 on trade station? thanks a lot!
+
+--- 帖子 #552 ---
+Hi Mik is trade station an MT4 platform, if so here's the indicator it need to go into the expert/indicator folder. Haven't been around this much lately so not sure if there is a newer release. Attached File(s) ###Gann_HiLo_Activator_v2###.ex4 2 KB | 802 downloads I'm sure Pips cruiser will let you now if this is wrong best of pips MPP
+
+--- 帖子 #553 ---
+Mik - Check to see if you have an indicator called "Hi Lo Activator". If you do, give that a try with periods = 10. If you don't, try searching Google with this: Tradestation "hi lo activator" I get quite a few hits, and some might lead you to a source. Good luck!
+
+--- 帖子 #554 ---
+ok, thanks a lot!!!
+
+--- 帖子 #555 ---
+Very much appreciated if someone can compile latest files to use in this great system/strategy i.e. templates and indicators/filters as well as the guideline doc such as pdf/doc in form of zip/rar for MT4 usage. I think there is some where here or in other thread but I couldn't find it. Thanks a lot!
+
+--- 帖子 #556 ---
+Here's the best that's available. This web site includes 15 min strategy, 4H / 1H strategy, and the MT4 / VT downloads. http://www.pnwenterprises.com/auslanco/
+
+--- 帖子 #557 ---
+Thanks a lot! Q1: How to restart Daily Pivot? Delete &amp; reinsert again? Q2: There is setting involve QQE1 but none in the posted chart. Purpose? Q3: I can't download any files from the "Downloads" page. Newbie.
+
+--- 帖子 #558 ---
+The QQE1 was used in some older versions, but not the more recent. To download an item: right click on it, then Save As to your computer.
+
+--- 帖子 #559 ---
+The daily pivot “start hour” is changed for each major session, so a 24 hour period leading up to the session is used for the calculation. In VT you use the “Pivot Points – Daily” indicator, then update the “Calculate Pivot At Hour (EST)” parameter with the EST hour. With the MT4 indicator you use the 1 = daily option, then update the “DayStartHour” with the GMT hour. London – at 03:00 EST (08:00GMT), update daily pivot to 3 EST (or 8 GMT) NY – at 11:00 EST (16:00GMT), update daily pivot to 8 EST (or 13 GMT) Tokyo – at 19:00 EST (24:00GMT), update daily pivot to 19 EST (or 0 GMT) You might notice that the pivots are changed every 8 hours. For London and Tokyo it’s at the beginning of the session. The NY session continues to use the London pivot until 11:00EST, but then it’s changed to the actual start hour of the NY session (8 EST or 13 GMT).
+
+--- 帖子 #560 ---
+Thanks for the excellent explaination. Now, I'm in the test mode. Seing is believing, it's a brilliant system. Hope to gain more pips soon!
+
+--- 帖子 #561 ---
+i am newbie to mt4 and do not see a SMA to apply to my 1 hour and daily chart for this strategy. could someone please tell me where i can get it and how to set it up in mt4?
+
+--- 帖子 #562 ---
+1. Just click the newchart button, choose pair and TF 2. click the indicator button, then choose trend, then moving average,then select simple/exponential/etc etc p/s those button/icons are normally on top. hope it helps. good luck.
+
+--- 帖子 #563 ---
+absolutely perfect. thank you. if you could tell me how to make my template with the 2 qqe's, pivots and level stop reverse only appear on my 15 minute chart and not all of them and i will be set to go. i figured it out. right click on the indicator, select properties, visualization, uncheck all time frames, and check the time frame you want it to appear in.
+
+--- 帖子 #564 ---
+1. Just select the TF15 become the current chart (i.e. just click on the 15m chart). Ignore the other chart on other TF 2. Then click all the qqe,pivot,etc ONE by ONE on TF15 chart. You will get nicely stack on top of the other. hope i helps TQ
+
+--- 帖子 #565 ---
+i have a problem,...........please send auslanco 15m gj strategy indicator/template in MT4 format..............I know the website ive download it but............. someone please send it.....I want to compare with mine.........please,,,,,,, xiiifx@yahoo.com
+
+--- 帖子 #566 ---
+I'm not currently using this system - great profits but i don't have the time. you should head over to the QQe thread http://forexfactory.com/showthread.php?t=63831 and talk to them there, they are still in full swing. just before you do that, open the paperclip tag on the top right hand corner of this page, hide the images and you will find the TPL to download
+
+--- 帖子 #567 ---
+Yup, we're still there, and we're still trading this system, so come over and join us if you like and share your experiences and ideas. Questions are always welcome as well of course.
+
+--- 帖子 #568 ---
+I am trying to set up MT4 to demo the 15 min &amp; 4 hr Auslanco strategies and I have two questions about QQE. 1) EA I normally import and use expert advisors with no problem. I have imported the QQE EA (2 versions). Both QQE EAs are greyed out in the EA dropdown menu shown below. The other 2 EAs are working fine. Can anyone suggest where I might be going wrong? 2) Indicator Is there indeed a QQE indicator available? If so, what is the precise name and location of the latest file? " Quantitative and Qualitative Estimation Indicator" is referred to here: http://www.pnwenterprises.com/auslan...instrategy.htm but when I look on the " Downloads " page, there is no indicator with that name. Only an EA (which I can't get to work yet). Thanks in advance for any help. Rob
+
+--- 帖子 #569 ---
+Hello Priceaction, just want to add that there are no EAs that exist for Aus's strategies. They can only be manually traded.
+
+--- 帖子 #570 ---
+Nobitacu, thanks for the quick reply and PM. I really appreciate your help. Now it's clearer. When http://www.pnwenterprises.com/auslanco referred to a file named Quantitative and Qualitative Estimation Indicator , I was looking for that precise file name. Not a file named Que's QQE Alert MTF v5 Thanks again! Rob
+
+--- 帖子 #571 ---
+New to this forum... have read all 38 pages... and have set up the "Aus" reverse on my FXDD Meta Trader platform... seems to be working well...!!! Noticed there was a thread to Oanda ... but for "managers" only I think... cause now I can't find that thread...!!! Anyway... my question is... can the "Aus" system be used on the Oanda platform...??? If so... where would I go to get all the required elements... and how would I load it to Oanda...??? Thanks for your time and consideration...!!! JJ
+
+--- 帖子 #572 ---
+Greetings! MT4 and VT Trader are the only platforms being supported. P.S. - Here's a link to the thread you probably caught a glimpse of. I don't think it helps with what you're trying to do, but I could be wrong. http://www.forexfactory.com/showthread.php?t=50103
+
+--- 帖子 #573 ---
+It cannot get any more obvious than this chart. The chart not only tells you that it is a safe trading guide to follow but also explains step-by-step for newbies and average joes. If you are still fuzzy about reading the chart, I am going to say: refresh your Forex basics here !
+
+--- 帖子 #574 ---
+Thank you...!!!
+
+--- 帖子 #575 ---
+Hello, please confirm if my chart set up is okay. I'm new to FF, this chart is at 14.40GMT, daily pivot at 205.47. I am using MT4. Any response will be much appreciated. Thanks to Auslanco and those who contribute to this forum.
+
+--- 帖子 #576 ---
+for newbie for this system can go to thread QQE for gj trader -thread starter sith lord (I guess something like tht) at dicussion thread there alot discusion on aus 15min thread.
+
+--- 帖子 #577 ---
+my guest is the two lines will go back up alittle.
+
+--- 帖子 #578 ---
+here the link. click here as people there.
+
+--- 帖子 #579 ---
+Thank you B@by trader for your response. I had already refer to sith lord's thread and found it quite helpful.
+
+--- 帖子 #580 ---
+Thanks forexpert for your response, actually I want to find out whether my indicator settings are correct.
+
+--- 帖子 #581 ---
+Hi kathyloh, Your MA's, QQE's, and Gann HiLo all appear to be setup correctly. You might want to double check your Level Stop Reverse to make sure it's setup with ATR Periods = 28 and ATR Multiplier = 2.75. You should have the daily pivot setup according to this post: http://www.forexfactory.com/showpost...postcount=2041 The QQE thread would be a good place to post your pivot point this week, and get a second opinion on how correct it is. Hope all goes well!
+
+--- 帖子 #582 ---
+Hi, Pips_Cruiser Thanks for helping me confirm my chart setting.
+
+--- 帖子 #583 ---
+You're very welcome. Best wishes!
+
+--- 帖子 #584 ---
+If you haven't done so already, you might want to read through this thread: http://www.forexfactory.com/showthread.php?t=63831
+
+--- 帖子 #585 ---
+Can someone give me the correct link to auslancos' link, it's not working. Thanks Gene
+
+--- 帖子 #586 ---
+Hi Gene: I am the guy who put the site together. Here is the address right now, it is numeric ip address as my domain name expired (long story) and I haven't come up with a new one yet. http://66.70.197.110/auslanco/ Rod
+
+--- 帖子 #587 ---
+Maestr2, Thanks I'm most certain that it took a lot of time and dedication to put something like that together and to benefit strangers! WOW You're awesome and a wonderfull person. Gene
+
+--- 帖子 #588 ---
+No problem at all, my little contribution to the cause, since I am still a newbie trading wise.
+
+--- 帖子 #589 ---
+forgive me for posting uj chart here, but the trading room is having difficulty posting charts.
+
+--- 帖子 #590 ---
+Nice work..... Thank you very much.... ET
+
+--- 帖子 #591 ---
+thanks nice work
+
+--- 帖子 #592 ---
+go Long Now!!! target 193 Confirmed
+
+--- 帖子 #593 ---
+I'am not getting the dot when I get a buy or sell signal.I'am using vt demo trading .Somebody please help me out .
+
+--- 帖子 #594 ---
+Have you downloaded and imported the QQE_alert.vttrs file? That's the first step. It's a system as opposed to an indicator. After downloading and saving it, go through: Tools / Trading Systems Builder / Import to bring it into VT Trader. Then right click on your 15 minute G/J chart, choose Add Trading System and pick QQE_alert from the list. Make sure it's set with a smoothing factor of 60 in Properties.
+
+--- 帖子 #595 ---
+Hello, after reading this thread I found that Auslanco dismissed the condition that price has to be above/below daily pivot in the latest version of his strategy. What do you think? Do you still consult the daily pivot before entering a trade? If price fluctuates around daily pivot, do you wait for a clear breakout before you enter?
+
+--- 帖子 #596 ---
+Here’s the strategy from 2 years ago, posted on this thread: http://www.forexfactory.com/showpost...&amp;postcount=453 Here’s the strategy from 1 year ago, posted on his blog. http://www.auslanco-15.blogspot.com/ They look about the same to me and both use the daily pivot. If a newer version exists, I’d prefer reading through the whole strategy before commenting on it. Others probably would too. If you can post a link, please do.
+
+--- 帖子 #597 ---
+Thanks for your answer! Hm, that's strange. I could swear, I read another version without the daily pivot. Can't find it now. Chances are I just overread it once and thought Auslanco dismissed it. Never mind. One more thing: I only had fake signals this week. Furthermore I get only about one signal a day max. with the 15m Auslanco strategy. To those of you trading with this strategy: Do you experience the same? I'm not sure if it's due to market's indecision, wrong indicator adjustements or simply me not knowing how to deal with situations.
+
+--- 帖子 #598 ---
+It's kind of hard to answer some of this, when I don't see your setups and I don't know what time you're at your computer and trading. Here's an extract from his blog (the second link I posted): "Best Times to trade : After 01.00AM EST( 06.00GMT) to 11.00AMEST(16.00GMT) Things to remember: Before you enter a trade, please check for a good profit to loss ratio to the next support or resistance level (TP level). If not do not take the trade.. This system is not the holy grail in Forex. There will be many losing trades during the ranging markets.. Always make sure to secure some pips every 30 to 40 pip move and move your stop loss forward. This strategy is developed only for GBP/JPY pair. However there are some trader who use different settings on the same strategy for other pairs. You are more than welcome to experiment things. You must not trade this strategy until you are fully comfortable trading this on a demo account.. There are manymore things such as indicator behaviors, timing etc etc you will learn only by studying the price action on your own charts.. " The strategy definitely isn't made for ranging markets. The past 24 hours or so GJ has been ranging. During most of the first half of the week, price was above the 1hr 100sma so you wouldn't have had a true short signal. The big move down happened during NY and Asian sessions, which aren't recommended times. It looks like it has been a tough week to catch a good signal with this strategy.
+
+--- 帖子 #599 ---
+Thank you very much, that answers my questions. I'm not that good yet in chart interpretation. I recognize ranging markets only after a little while. Furthermore I'm still somewhat impatient which makes it hard for me to watch the charts all day long without trading. Your post helps me expanding my set of rules. Thank you very much!
+
+--- 帖子 #600 ---
+Pips Cruiser Hi u r here from the begining , could u say this strategy is worth it ? i read all the pages and i prepared my MT4 , will test it live !
+
+--- 帖子 #601 ---
+Hi tar, I stopped using it last summer. Like with most indicator based breakout strategies, it doesn’t work well with ranging or consolidating markets. G/J would break out to one side for 2 or 3 days, then coil back up into a triangle or a range for several more. At it’s worst the strategy would give buy or sell signals just as price was ready to head back the other direction. My work around for this was: When G/J has been ranging lately and you get a trade signal: If price is already near the top or bottom of the daily range , pass up the trade unless price actually breaks out for a new high / low. If price is not near the top or bottom of the daily range , choose a TP target near the top or bottom of the range instead of going for a target beyond it. That would usually help. I also became a believer in taking partial profit and then tightening up the SL (maybe BE+1). Not a bad idea when trading G/ J, even in an obvious trend. The heart of the strategy seems to be the QQE5, QQE60, and Gann HiLo. I think you could use these on any chart from M1 – M30. All the other indicators appear to be designed to keep you on the right side of the trend, keep you out of false breakouts, and identify areas of S/R. Their effectiveness is questionable at times. I think a smart trader with some experience could eventually change them or just do without. Then you’d have a more simple and personalized version.
+
+--- 帖子 #602 ---
+thanks
+
+--- 帖子 #603 ---
+This is a very simple yet powerful trading system that I will try it for sure! Thanks a lot for sharing it. http://www.forexfactory.com/images/misc/progress.gif
+
+--- 帖子 #604 ---
+thank you if your have done picture to share your idea it will much more great
+
+--- 帖子 #605 ---
+Okay. G/J has been ranging for a few days now, let’s look at that. Price has been below the 1H 100sma and the Daily 5sma, so the intraday trend was considered bearish for this system. Only short trades would have been valid. Here’s how you could deal with the ranging conditions: If a short trade signaled at #1 (in the top half of the range) you would take the trade, but you would set a TP just above the low for the day. This would be a way of accepting the fact that price is ranging, and then trading for fewer pips than you would if price was trending. If a short trade signaled at #2 (in the bottom half of the range) you would pass up the trade unless price also breaks through the low for the day. In other words, a 15 minute candle close below the daily low would be an additional trade requirement. This is based on the idea that if price stays range bound there’s not enough room left for a good profit. But if price moves beyond the daily range it’s a sign of a breakout, and you would go for the normal TP areas.
+
+--- 帖子 #606 ---
+Pips Cruiser seems like you have been on the forum for a while. Is Auslanco still trading? I have check his web site, blog spot, but it seems as if he disapeared. Do you know what happened?
+
+--- 帖子 #607 ---
+Thanks Pip Cruiser, this system (15M strategy) has been used since 2006. What is its overall performance? What is the experience n recent months on GY? How about the other systems? 1H/4H strategy? It is interesting to loo at a strategy after 2 years.
+
+--- 帖子 #608 ---
+can you pls send me the indicator or template for mt4 system for this system?
+
+--- 帖子 #609 ---
+Until now I have "programmed" the system, i am to interested. Attached. Gave fun, and PIPs!
+
+--- 帖子 #610 ---
+Hi I want to forward test this system. If someone has MT4 template for this system. Please post. Regards Neo
+
+--- 帖子 #611 ---
+Hi Guys, Ive set this up on MT4 and was keen to talk to anyone that still uses this strategy. if you do and don't mind sharing your thoughts I'd really appreciate you posting the pos/neg on this. So far I'm finding it really hard to call entry MT4 as the dot does not appear at the same time as the Arrow, any ideas?
+
+--- 帖子 #612 ---
+your system is very effective and profitable.... special thanks
+
+--- 帖子 #613 ---
+i have problem setting the daily pivot...can someone could explain to me about the time conversion... my broker uses GMT.and my local time are GMT+3 what they are change daystarthour for Londra,newyork,tokyo open. (i am sorry for bad english..)
+
+--- 帖子 #614 ---
+Have you downloaded the word doc (use the paperclip icon at the top of the page to find it) in there it gives you all the settings, and you don't need to worry about you local time, only your brokers time, which is GMT, then use the time offset for each of the periods. ie broker is GMT, london open is GMT plus 8, so the stting is 8 the rest is in the doc
+
+--- 帖子 #615 ---
+Looking for GBPCHF to go into sell mode--GBPCHF will sell if it BREAK Below 1.6575-Stops 1.6646--Limits 1.6533,1.6444--IT will continue to buy until area is Broken....
+
+--- 帖子 #616 ---
+On the vt system I don't see a version 02 also how do I set the alert on the QQE. Please help.
+
+--- 帖子 #617 ---
+I'm actually using it to decide on trades along with other indi's. This is my primary trigger, the Gann cross and the QQE along with MoM for price action. I've been @ 75% Plus in trade calls either bear or bull. I use it with the G/J, G/U, and E/U. I also have pulled out an Auslanco EA that normally works pretty good on these pairs when the market is swinging. I'm just letting run on a demo account. I am more confident with my trades, thanks to Auslanco trades! Shout out for Aus!
+
+--- 帖子 #618 ---
+It took me a few days to try a figure out the strategy. I would appreciate if someone can confirm that I have got the latest version.1) 15 min chart with Level Stop reverse Cycle: ATR 28 and ATR Multiplier 2.75. 2) QQE 60, QQE 5 and QQe 1, with entries as per original Auslunco plan.3) Daily Pivot for direction.4) 1 hr chart with 100 sma for direction.5) Daily chart with 5 min for direction. Entry conditions as per Auslunco's original plan.Could someone please confirm that these are the basic core indicator settings?Padila
+
+--- 帖子 #619 ---
+If anyone is still reading this thread, please look at the last trade.
+
+--- 帖子 #620 ---
+i thin kthis will go down for a while..... if i wrong thats my fault.... Attached Image (click to enlarge)
+
+--- 帖子 #342 ---
+I see target is 139.03
+
+--- 帖子 #343 ---
+GL thats right...for this week.... not today i think... Attached Image (click to enlarge)
+
+--- 帖子 #344 ---
+I have been demo trading the strategy for the last 4-5 weeks. I have to say, overall I have been on the positive, but only marginally. I will be posting charts soon. The thread seems to be a bit cold. Is there another place to discuss this strategy.Padila
+
+--- 帖子 #345 ---
+Attached Image (click to enlarge) Attached is a recent trade that went for a total of 300 pips. Members trading this method please comment. Padila
+
+--- 帖子 #346 ---
+With 397 posts on FF, you should know better, go and read the manual, now pay attention
+
+--- 帖子 #347 ---
+Attached Image (click to enlarge) Follow on from post #624 above. Very good corroboration with Renko (size 10 pips). Two different charting methods are giving well synchronised signals. Looks very positive so far. A temporal profile will be the best test. Padila
+
+--- 帖子 #348 ---
+I think you mean "Daily chart with 5 sma". There have been 3 versions of this strategy that I know of. The first version is on page 1. It was the last version to use QQE1. The strategy evolved into a second version, which is on page 31, post #453: http://www.forexfactory.com/showthre...66#post1740666 Then a third version was posted to his blog: http://www.auslanco-15.blogspot.com/
+
+--- 帖子 #349 ---
+Here’s an FF thread where we used the 15 minute strategy: http://www.forexfactory.com/showthre...=63831&amp;page=12 Here's a summary of version 2: http://www.forexfactory.com/showthre...86#post1813886 And version 3: http://www.forexfactory.com/showthre...35#post1830635 Here’s a page where we helped someone with MT4 indicators get his QQE setup correctly. He was using the default settings and they were incorrect. You might want to make sure your fast / slow line setups are correct. Most of the QQEs built for MT4 have incorrect defaults. http://www.forexfactory.com/showthre...63831&amp;page=154
+
+--- 帖子 #350 ---
+Nice. This strategy works very well while price is trending. But if the pair is ranging, you'll get some false breakouts.
+
+--- 帖子 #351 ---
+Dear Pips Cruiser, Many thanks for your input. Great to hear from someone who had made such big and original contributions to the method. To hear from you that the method with its original settings is still vaild gives me more confidence to pursue it further. I have gone through the method systematically again. Looking forward to having further interactions. Will be posting charts as I trade. Your input will be highly appreciated. As a junior member, I am not eligible to pm you. Hope you look at this thread often enough. Padila PS yes, I did mean Daily Chart with 5 sma! On post 601 you said that you stopped using the system in 2009. Hope you have started to use it again.
+
+--- 帖子 #352 ---
+Good luck with everything. Nowadays I follow trends, swing trade channels, and watch areas of S/R for entries and exits. It’s a more simple approach, but I wouldn’t call it easy. It takes some knowledge and experience. I have definite things that I look for, but discretion also comes into play. I think your success with the 15 Minute Strategy will depend on how well G/J continues to trend. Strategies like this measure strength on a few different levels. Then a trade is triggered when everything is lined up correctly, and price breaks in the right direction. If G/J keeps moving upwards you’ll do just fine. Best times are from 2 hours before London open (0600 GMT) through the London close (1600 GMT). Asian session can be good at times, but the bad times will eventually overshadow them. So the best policy is to not enter any trades then. The same thing applies for New York session after the London close. There are some other strategies on FF that work on similar principles. One you might want to check out is the Genesis Matrix. It still has a lively thread, you can trade several different currency pairs, and the thread starter is still around. One of their indicators is the Gann HiLo. They use Stochs instead of QQE. You can pick the timeframe you’re most comfortable with. Lots of people are there to answer questions as long as you’ve done your basic homework first. I suspect that strategy would be a good fit for you. Something to think about . . .
+
+
+===== 附件下载链接 =====
+

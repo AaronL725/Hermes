@@ -1,0 +1,1940 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Fellow traders , I am pleased to offer a neural network based scalping system. All you need to do is put the attached EA - nextClose on EURUSD M30 and start reaping the profits. If you want to trade manually follow the red line - thats the NN's predicted close for the 30 minute period. To avoid news realted volatility the EA is by default configured to run 16:00 GMT - 4:00 GMT. You can change these settings if you wish. Setting up : Prerequisite is fann2mql which can be downloaded from : http://go2.wordpress.com/?id=725X134...%2Fdownload%2F The installer should be pointed to install in your MT/experts folder rather than default program files location Last week I managed 145 pips with pretty low running drawdowns. Wishing you success and awaiting your valuable feedback. Updated version: Should work with 4 digit brokers fine. Min Lot Added to fix an issue with no trades being taken when MM on. Add ATR based TP , now the EA picks larger of ATR vs predicted close. Very important Fix - the close happens properly at specified close time Live Results: http://www.mt4i.com/users/nextclose
+
+--- 帖子 #2 ---
+How did you train it?
+
+--- 帖子 #3 ---
+It trains in real time using a 'Sliding window' concept. Once we see some success , I will publish the source code with comments, eventually would like other coders to improve the strategy but it is profitable as it is.
+
+--- 帖子 #4 ---
+I was referring to the initial training. Unless the version for download is 'blank'
+
+--- 帖子 #5 ---
+Thank you for your willingness to share your EA. Could you give a brief explanation of the inputs and what they do - I would have a nosy round the code normally to try and figure it out but that is not possible at the moment. I have just chucked this up on a demo account I have to test EA's so will let you know how it goes. Once again thank you for your generosity.
+
+--- 帖子 #6 ---
+Backtesting produces ZERO trades.. Did EA handle 5-digit brokers? Or for example for SL 100 1 more zero should be add to work on 5 digit brokers? Thanks. Journal Error: "cannot load library "Fann2Mql.dll" thought it's installed already..
+
+--- 帖子 #7 ---
+Ronald, The version for download is indeed blank and will train itself first time you put it on a chart. Jimmy, Working on documetation, once we get some positive results here will upload a pdf. Skyzer, The EA is meant to run on 4/5 digits and also ECN. Backtesting is not possible for some odd reason, for now forward test on a demo account and see for yourself.
+
+--- 帖子 #8 ---
+I had to physically move the Fann2Mql.dll file from where it installed itself (a new folder in my program files) into the library folder - in the experts folder of my MT4 folder. Hope that helps
+
+--- 帖子 #9 ---
+Thank you. The EA is successfully taking trades on my platform at the moment. SL is a bit scary when compared to the TP! Looks like it will need quite a high win to loss ratio (maybe 15:1?) to make profit. Will give it a chance though!
+
+--- 帖子 #10 ---
+You need to go to Program FilesFann2MQL and copy the include and libraries folder where appropriate
+
+--- 帖子 #11 ---
+Thanks, that make sense
+
+--- 帖子 #12 ---
+Alright but EA showing Spread on My screen 14.00000000 13.000000 which is actually 1.3/1.4 pips. Thanks.
+
+--- 帖子 #13 ---
+Thank you! Demo is up and first trade was taken.
+
+--- 帖子 #14 ---
+First trade closed with profit. I have an idea of the inner workings... unless that data you printed to the experts tab is false
+
+--- 帖子 #15 ---
+Yeah 1st three trades have closed in profit for me here. Just waiting to see how many winners it gets compared to the big losers!
+
+--- 帖子 #16 ---
+Jimmy, The SL is only an emergency SL , the EA will close the losing trades much earlier based on projected close.
+
+--- 帖子 #17 ---
+now is GMT 0 GMT offset 20
+
+--- 帖子 #18 ---
+Yeah, we have to figure out GMToffset, cause All brokers have different times, unless EA calculating pure GMT.
+
+--- 帖子 #19 ---
+hi i have installed this now, how do i run it on the mt4, i have copied the files to its appropriate folders... sam
+
+--- 帖子 #20 ---
+it was reading my local machine time as GMT. I tricked it and it is calculating/educating now.
+
+--- 帖子 #21 ---
+Ok thanks for the info neuro - I won't assume anything anymore! I did actually just have a losing trade and it was actually less than the previous winning trade.
+
+--- 帖子 #22 ---
+i don't see a red line? I installed the download right into the libraries folder. I have nextclose with a smily face, but as I say no "red line" or "training" going on?
+
+--- 帖子 #23 ---
+Could someone please explain how to set up. Which files go in which folder? Also, how do I set the GMT correctly? Thank you.
+
+--- 帖子 #24 ---
+Hy, excuse for my english.. I have a real account activetrades... Must I exchange the GMT ? I use VPS services and its time is not as with plattform time.. Thanks
+
+--- 帖子 #25 ---
+The easiest way is to direct the Fann2 installer to the platform/experts folder of choice. This will place all of the files correctly. Rob
+
+--- 帖子 #26 ---
+hi how do i know its training and running because as suggested i have installed the fann directly into experts folder and copied the nextclose.ex4 into indicators folders. please help thank you sam
+
+--- 帖子 #27 ---
+thanks for sharing...
+
+--- 帖子 #28 ---
+Nextclose is an EA. The OP said that already.
+
+--- 帖子 #29 ---
+First, thanks for sharing. Okay, I think nextclose.ex4 goes in the experts folder. I put the fann file in the indicators folder along with stdlib.ex4. Is that correct?
+
+--- 帖子 #30 ---
+Fann dll goes into experts/libraries/
+
+--- 帖子 #31 ---
+RR has explained.
+
+--- 帖子 #32 ---
+hi neuro, how do we tell which order to place long or short ( i'm sorry for the silly question but i need to know), because all it does is give u position i.e red line...please elaborate thank you sam
+
+--- 帖子 #33 ---
+The redline is the projected close price of the current 30M candle. Trade accordingly
+
+--- 帖子 #34 ---
+How long, after everything is set up, until the red line appears?
+
+--- 帖子 #35 ---
+I had a red line within 10 minutes. Already closed the first trade with a profit, and a second trade is on. Rob
+
+--- 帖子 #36 ---
+Okay, I have the NextClose.ex4 in the experts folder and I copied the FANN2MQL.dll into the libraries folder. On the chart it says "NextClose" in the upper right corner with a "smiling Smiley" next to it but it doesn't take any trades and I don't see a "red line" either. In the Navigator window the EA symbol for NextClose is still grey although I did allow LiveTrading??? Strange? Any suggestions would be greatly appreciated. Thank you.
+
+--- 帖子 #37 ---
+For me it seems immediate. Watch the comments section written by the EA in the upper left corner of the chart, there are times when it flickers to 'training xxxx' Also, for neuro, is there some way we can give this EA a 'memory'? I'm assuming the weights are reset to default every time the EA is reset. Can we somehow save weights?
+
+--- 帖子 #38 ---
+how many trades does it average per day? I just set it up and don't see any red line for some reason
+
+--- 帖子 #39 ---
+So I just put EA on 30min EUR.USD chart ?
+
+--- 帖子 #40 ---
+Any errors in the experts/journal tabs?
+
+--- 帖子 #41 ---
+Did you install the Fann2MQL library?
+
+--- 帖子 #42 ---
+Finally! I figured it out. You need to allow dll imports. No one ever mentioned that.
+
+--- 帖子 #43 ---
+hmmm, i have the comments. still no red line yet. target is the current price. maybe it is still training. do the files in that src folder need to go into mt4?
+
+--- 帖子 #44 ---
+Error: 2010.06.07 19:13:46 NextClose EURUSD,M30: cannot load library 'Fann2MQL.dll' (error 126) am using alpari metatrader, but I have several copies of it on my computer. I'm guessing maybe the Fann installer didn't detect it for some reason
+
+--- 帖子 #45 ---
+hmm, it just took a trade. sell 1.1922. T/P shows 0.0000. experts tab does say invalid Take profit price for Order modify function.
+
+--- 帖子 #46 ---
+READ the THREAD. it's only 3 pages man...
+
+--- 帖子 #47 ---
+SL /TP /Trailing - most important. It's not reasonable to have settings as they are in default: 10 pips TP and 140 SL.. Doesn't make any sense, it's like no stop loss at all. And unfortunately it's impossible to backtest it, to verify best settings.
+
+--- 帖子 #48 ---
+If we want it to trade 24 hours do we put "0" for beginhour and endhour?
+
+--- 帖子 #49 ---
+If the TP is 10, what use does trail of 15 have?
+
+--- 帖子 #50 ---
+Perhaps you should read the thread. The 140pip SL is a hard emergency stop. I can confirm the EA closes trades well before the SL.
+
+--- 帖子 #51 ---
+Good question, I change it to 5 Anyways, so far I'm in loss on Demo (2 loses 1 win), so whatever the Stop loss is..
+
+--- 帖子 #52 ---
+Fann installer doesn't detect anything, just creates a new folder in Program Files
+
+--- 帖子 #53 ---
+what values for beginhour and endhour to trade 24 hours?
+
+--- 帖子 #54 ---
+move Fann2Mql.dll to experts/libraries folder of your MT4
+
+--- 帖子 #55 ---
+sky do I put "0" for both beginhour and endhour to trade 24 hours (or "1, etc")?
+
+--- 帖子 #56 ---
+Try this BeginHour 17 EndHour 16 Or BeginHour 23 EndHour 22 Anything should work Otherwise I cannot see the code, but this should work 24 hours logically
+
+--- 帖子 #57 ---
+Just noticed the red line disappear in the middle of a trade. Also, there is no TP in the terminal. Anyone else seeing the same thing? Rob
+
+--- 帖子 #58 ---
+After a trade has been taken, I've seen the red line disappear. After awhile, the red line will appear again even if still in a trade. I don't know the logic of this EA so I don't know if that is out of the ordinary. I suppose not, otherwise why would it do that. As for the TP. At first there was no TP in the terminal. But I noticed a TP appears after some time. I think the idea is to let the trade run at first, hence the trailing profit beyond TP value. I suppose if the trail is not triggered after a certain amount of time, then the TP kicks in. Not 100% sure, just guessing based on my observations so far.
+
+--- 帖子 #59 ---
+my trade started out with 0 in the TP. then a value showed up a bit later. I have yet to see a red line. I guess it is hiding
+
+--- 帖子 #60 ---
+Ronald, Thanks for providing tech support , I couldnt have done it any better. As to your question, previous weights are being used for subsequent trainings. Only first time, weights are randomized. Regarding making the EA trade all the time, set the TimeFilter to false, also if you are seeing too many closes in loss increase the threshhold from 70 to 100 or 120 Trail is not being used currently so ignore it (the EA has an internal fractal TS), but in a subsequent version we will incorporate external TS. Once we have 10+ FF members have more than 50 pips in profit, I promise to publish the sourcecode. Also feel free to try it on different currencies / time frames. It has also been doing ok on AUDCAD M30 - the key is you should have a low spread broker/pair
+
+--- 帖子 #61 ---
+Wow, I missed the time filter option lol. Which way do we move threshold to get less closes in loss, up or down? As for other tf's, is m30 the best one according to the code? If not, which one is and with what parameters? Thanks.
+
+--- 帖子 #62 ---
+yes, we all got it worker out . How big a deal is the offset? Is it my offset or broker offset? I am sure it is broker so I have changed to 3. I am down 26 pips currently on 1st trade but will let you know when +50
+
+--- 帖子 #63 ---
+The offset param was intended to be used only for back testing, leave it alone - the gmt time that the EA displays should be right . Threshold should be increased - maybe 90 should work better for you. We need to play with pairs/timeperiods , so far EURUSD M30 has been producing consistent pips.
+
+--- 帖子 #64 ---
+OK. Have subscribed &amp; have EA on 4 pairs. Will see what happens overnight.
+
+--- 帖子 #65 ---
+Okay, I'll test it out on some demos and let you know what works. If you have any ideas let me know so I can throw them on the demo tests. I'll also let you know if/when I get to +50 pips. Thanks.
+
+--- 帖子 #66 ---
+Neuro, can you explain what the EA was thinking?
+
+--- 帖子 #67 ---
+Exact same trade as mine. Looks like some countertrend DD, to me. Rob
+
+--- 帖子 #68 ---
+I also got a similar trade currently open, but entry and drawdown is a little better. EDIT: EA closed trade just now right after I submitted original post.
+
+--- 帖子 #69 ---
+Neuro, perhaps you could post a trading statement? I'm not really sure what to expect from this EA.
+
+--- 帖子 #70 ---
+Very nice results so far. Continuous trading, no time filter, defaults otherwise.
+
+--- 帖子 #71 ---
+"One swallow does not make a summer" - give it some more time, todays Asian open brought along pent up EURO demand. Look for magic number 345997 : http://www.mt4i.com/users/nasa
+
+--- 帖子 #72 ---
+hey neuro.... looks good.... ..... for those using nfa reg'd brokers , you might need to add a condition.....h Inserted Code //---- if(op == OP_BUY &amp;&amp; Count(OP_SELL) == 0){ //-- //-- and else if( op == OP_SELL &amp;&amp; Count(OP_BUY) == 0){ //----- add function int Count(int type) { int count=0; int i; int total=OrdersTotal(); for(i=0;i&lt;total;i++) { OrderSelect(i,SELECT_BY_POS,MODE_TRADES); if(OrderSymbol() != Symbol()) continue; count++; } return(count); }
+
+--- 帖子 #73 ---
+I don't know if this will work or not. I am getting message: NextClose EURUSDm,M30: dll calls are not allowed; 'kernel32.dll'-'GetTimeZoneInformation'
+
+--- 帖子 #74 ---
+it works..... make sure you have the proper boxes checked to allow dll's..... //---- the only error that you might should see is possibly the hedge-not-permitted and occasionally an ordermodify error, invalid[s/l or t/p]....... both of which are minor coding issues easily fixed..... h
+
+--- 帖子 #75 ---
+Thanks. I'd ticked dll imports globally but somehow it was unticked on the EA.
+
+--- 帖子 #76 ---
+Thanks for sharing Neuro. It's set to trade 24 hours and other settings are default.
+
+--- 帖子 #77 ---
+Thanks for sharing this EA with us. I took a look at your mt4i statement with magic 345997 and the result is quite miserable with profit factor only 1.06. What would it takes to improve this ratio in your opinion? By the way, I saw other magic numbers and their profit factor are as high as 2 to 7. Are they from the same EA and if not, could you elaborate a little on them. Thanks.
+
+--- 帖子 #78 ---
+Hi i installed the EA on 4 pairs today, the smile face its showing, the red line appeared but it hasnt opened any trades yet and its been on for at least 5 hrs and i've seen that some of you guys have had some trades open in this period Anybody have an idea why?
+
+--- 帖子 #79 ---
+hi how do i edit this to read my time (london uk time) and also to run 24 hours because i have tried to open nectclose.exe4 in script editor (but cannot open), please help sam
+
+--- 帖子 #80 ---
+About even currently trading majors. Dozens of trades as expected. I'm sorry I can't assist with the queries above.
+
+--- 帖子 #81 ---
+I actually got to over 50 pips at one point, but am now down to +45 (not including the current -13 on an open trade).
+
+--- 帖子 #82 ---
+Default is set to start trade at 1700 gmt. Does not trade 24 hours unless you change. My results eur: 1 trade +8
+
+--- 帖子 #83 ---
+If you look only for EURUSD trades , you will see over 100 pips - the Profit factor looks bad because of USDCHF &amp; AUDCAD trades. The other EAs are commercial robots that we develop for hedge funds/neuraltraders.info members. Sami - set timefilter to false - but personally I dont recommend trading 24 hrs because of news / hedge funds and other large players' participation 8am est - 1 pm est.
+
+--- 帖子 #84 ---
+ok neuro thanks, BUt how do i let it trade by itself because all i'm doing is following the red line (again do i go long or short)..there are few members in ff who are getting it to run automatic. neuro this system is cool but i need your assistance. ps : im a newbie sami
+
+--- 帖子 #85 ---
+thanks for the EA neuro. I'm going to try this on EU but with short orders only.
+
+--- 帖子 #86 ---
+Which one's your house on Streetview?
+
+--- 帖子 #87 ---
+I forgot to pic the trade summary from my home PC...but since 1200 GMT yesterday my demo acct has lost 500.00+ trading .25/.24 lots Maybe EU is the way to go
+
+--- 帖子 #88 ---
+hi everyone on the platform mt4, in the expert advisor pull down, the nextclose is grey shaded where as the macd and moing averages are not...plus how do i let it trade by itself because all i'm doing is following the red line (again do i go long or short)..there are few members in ff who are getting it to run automatic. neuro this system is cool but i need your assistance.
+
+--- 帖子 #89 ---
+Attached Image (click to enlarge) Starting from last night's Asian session to about middle NY on e/u, set trading to 24 hrs initially just to see how it goes.
+
+--- 帖子 #90 ---
+I put it on both a demo account and a small live account today. Loads of trades in demo, only 1 live. LOL Dont ask me why
+
+--- 帖子 #91 ---
+hi puntarlara how do u let it run on auto because i can't...and also which way do i trade long/short..please advise cheers sam
+
+--- 帖子 #92 ---
+Sami. The autotrading should start at 1 pm est , which is 15 minutes past as of me typing this. Let me know if your first trade was placed, if you see the red line that means NextClose is properly setup.
+
+--- 帖子 #93 ---
+thank u neuro, i been placing trades since i first saw your thread on ff, i hav been hitting positive and some negative results...but how do i go by setting correct trade? when the redline shows in this example 1.19332 do i go short and long? i mean in this example i gone short... i have attached two pages of results..ignore the big loses they were my trades without the nextclose please advise thanks sami
+
+--- 帖子 #94 ---
+hi thx for sharing your ea 2 questions -1- I've installed Nextclose yesterday.. no trades for now is it correct or there's somethin' wrong? I'd like to match my statement with yours... 2- -I can see the red line,I've read all the thread but still don' t understand how to trade manually
+
+--- 帖子 #95 ---
+hi swissforex i'v done those trades as shown BUT because im a newbie i need know to which way to go long/short when the red line appears, even though my results are ok...but i still fail to understand which way to go.. can you shed some light please? sami
+
+--- 帖子 #96 ---
+You should of had a trade by now. I haven't really looked closely at how often it trades, but it's about one per hour. As for manual, I would imagine you trade in the direction of the red line. I believe your stop is the lowest/highest point of the last 10 bars, but I'm not 100% sure on how the stop or take profit goes. I think they alter depending on length of time trade has been opened.
+
+--- 帖子 #97 ---
+I was able to run a backtest on IBFX so I'm not sure what the fuss is about that you can't backtest.
+
+--- 帖子 #98 ---
+No trades for me on IBFX. I have it on EUR/USD and the red line shows. I have it on other pairs, and no red line shows. No trades made on any pairs.
+
+--- 帖子 #99 ---
+Currently running IBFX demo and have had six trades and six winners. I shut down the terminal last night, so I'm sure it would have traded more. I just fired it up again, and it opened a trade within 10 minutes. Make sure you have Fann2 installed properly. Directing it to the platform/experts folder will auto-install all files in their proper locations. Rob
+
+--- 帖子 #100 ---
+hi chicago rob, how do you get it running into auto mode and i cant...i have installed fann into platform/expert folder. please advise..and illustrate if possible much appreciated sami
+
+--- 帖子 #101 ---
+Its working fine on Alpari UK demo. 12 trades since starting it up 11 hours ago. 10 winners, 1 loser, and one open. $6 up on a $5,000 demo. Default settings just switched time to false. Backtester seems to work ok as well.
+
+--- 帖子 #102 ---
+Thanks Rob. I installed it only in "library". Will restart platform &amp; hope to see some trades on my demo.
+
+--- 帖子 #103 ---
+Also have it testing on Alpari UK. It just took 2 big hits the last 2 trades. -49 pips and -47 pips. Before that it was dong well.
+
+--- 帖子 #104 ---
+OK - here the rubber meets the road http://www.mt4i.com/users/nextclose Running nextclose (all defaults) GBPUSD H1 EURUSD H1 GBPCHF H1
+
+--- 帖子 #105 ---
+24 hour?
+
+--- 帖子 #106 ---
+Nope, all defaults which means timefilter is true also one advantage of having a time filter is bad trades all cleaned up 1 hour after closehour (or whatever closeafter setting is ) and we start with clean slate the next afternoon
+
+--- 帖子 #107 ---
+ok, I thought it was 17-4 hours. looked like a trade initiated at that link after 4. Maybe that time is different. What made you switch to H1 instead of the m30?
+
+--- 帖子 #108 ---
+he neuro, i want my nextclose to run auto and i know u said if the red line appears it works fine....but how do the other members on this thread been running auto. please advise thanks sami
+
+--- 帖子 #109 ---
+Loaded up NextClose on EURUSD, USDCHF, and GBPUSD M30 on a FOREX.com demo here: http://www.mt4i.com/users/gain_nextclose No installation issues whatsoever. Looking forward to seeing a trading session with this one tomorrow.
+
+--- 帖子 #110 ---
+Installed on IBFX 5 digit demo account with no limits on trading hours, less than 10 minutes it's given birth to 2 sets of healthy happy PIPS. Well done Neuro, I have attached a template also.
+
+--- 帖子 #111 ---
+I also have no luck in getting this EA to trade automatically using 4 digit broker. However, whenever I change the pair from say AudUsd to EurUsd, it would immediately fire off a trade in EurUsd. I have a feeling that EA would not trade on 4 digits brokers. Could anyone using 4digits broker let us know if you were able to get this EA to run successfully? By the way, I just set up a demo on Alpari 5 digit broker and it trade successfully. Because of this, I am 100% sure now that this EA does not work on 4 digit broker.
+
+--- 帖子 #112 ---
+This does not work properly in auto on 4 digit brokers. You have to open and close it for it to take any trades, which it does straight away. 5 digit works fine in auto.
+
+--- 帖子 #113 ---
+attached it yesterday running for over 10 hrs already.. with no time filters..i dont know whats wrong but it only open 1 trade since it was installed. using jadefx demo with fractal pips.
+
+--- 帖子 #114 ---
+hi i still hav no luck with auto trading, i'm using fxpro demo. yes i have the red line and smiley face but no auto trade..... please help and advise as what is the best course of action thank u in advance sami
+
+--- 帖子 #115 ---
+Check the time settings, set to start at 0 and end at 24 to get it to trade all day.
+
+--- 帖子 #116 ---
+hi fourxxx thank u for that info, but when i change settings it goes back to default, how do i overcome that sami
+
+--- 帖子 #117 ---
+by the way do i leave the platform running or switch get on with other things cheers sami
+
+--- 帖子 #118 ---
+set the time filter to false and just leave your mt4 running - it will have to be a five digit broker for the ea to work properly. I will attach a set file that I use on alpari uk demo which is taking loads of trades - WINNING as well if you want
+
+--- 帖子 #119 ---
+hi puntalara thanks, please do that it will help me enormously if u can share that file with me thanks again sami
+
+--- 帖子 #120 ---
+OK just put this in the preset folder - then open the ea and look at the inputs then click and load the preset named nextclose and off you should go It has to be in a zip file i am afraid, so you will need to unzip it first.
+
+--- 帖子 #121 ---
+thanks puntalara, i'll try it now sami
+
+--- 帖子 #122 ---
+i using fxpro demo does that effect the auto trading coz everyone is talking about 4/5 digits.... sami
+
+--- 帖子 #123 ---
+I think you need to set AutoAdjustDigits to "false" for 4 digit broker. I tried that and it started trading immediately on my 4 digit broker. Maybe it was just a coincidence, but it only did 2 trades in 24 hours while set to "true".
+
+--- 帖子 #124 ---
+If fxpro is 4 digits it will not work - just download alpari uk in demo is my opinion
+
+--- 帖子 #125 ---
+Try the sutoadjustdigit thing I said in my previous post before doing that.
+
+--- 帖子 #126 ---
+I will give it a try - thanks
+
+--- 帖子 #127 ---
+Hi guys, I was having the same problem as sami, two days testing, red line no trades. I have installed puntalara's settings and it's trading now. So thanks a lot mate. This is for neuro. Since I couldn't make the EA to trade automatically I went to your site and downloaded the robots pack, attached NextClose-V13 and started trading immediately. By the way thanks for sharing. Henry
+
+--- 帖子 #128 ---
+Puntalara, on what pairs do you run the EA and what TF? And why did you increase the RiskFactor? Thanks, Oliver
+
+--- 帖子 #129 ---
+I have used on forexmeta, a 4 digit, and it has traded fine.
+
+--- 帖子 #130 ---
+Only run it on eu 30min TF - still will not trade for me on my live 4 digit broker I changed the risk factor to what I use when manually trading live..just to see.
+
+--- 帖子 #131 ---
+Where is that Attachment?
+
+--- 帖子 #132 ---
+Actually I think is the same robot, but for some funky reason, the one posted in here wasn't opening any trades, however the one at neuro's site was. Now I have running the one posted here with puntalara's settings and it's working fine.
+
+--- 帖子 #133 ---
+Can you share those settings? So I can try? Thanks.
+
+--- 帖子 #134 ---
+Download the file on post 120. Hope this helps.
+
+--- 帖子 #135 ---
+Have been running both the original download from 1st page and am trying puntalara's set file , everything looks good but no trades. Red line there, no error messages, smiley face, does it's learning thing, gmt offset shows correct, time filter set to off ect... In the expert tab it says: NextClose EURUSD, M30: Placing buy order EURUSD but no order appears on chart or in trade tab. ( I did also change the lots traded to 0.1 as on MBT a 1.0 lot is 1$ .) I am using it on MBT demo (ecn) Judging from the messages I would say it is a conflict with the broker...? my Norton won't let me download the file from the NT site, might have to disable it to go that route..... any ideas appreciated....
+
+--- 帖子 #136 ---
+What NextClose version is the ex4 file attached to this thread? Also, how is the NextClose.ex4 related to the source file in your other thread?
+
+--- 帖子 #137 ---
+Ok, thanks..
+
+--- 帖子 #138 ---
+Running on Gotrader ok. It just left a sell order behind, time will tell. It may suit a ranging market??
+
+--- 帖子 #139 ---
+Apologies for all the troubles with 4 digit brokers, the issue has been fixed - download the latest version from post 1. Do not use the installer from Neuraltraders.info site, NextClose contained in the exe there is an older version.
+
+--- 帖子 #140 ---
+I don't know what EA is doing, but it doesn't taking any trades on 4 digits or 5 digits brokers. Red line drawing ok, but no trades.. Journal got no errors as well..
+
+--- 帖子 #141 ---
+Close Metatrader. Start up again. You should see the Training message, and numbers generated at the top right. If not, it's not running.
+
+--- 帖子 #142 ---
+Top left you mean, I have all that.. It's showing everything and red line is there, but just not taking any trades.. TimeFilter is False, so it's should trade.. Maybe 5 digits is a problem..
+
+--- 帖子 #143 ---
+I am running live on Gotrader, 5 digit. I set MM to False, .01 lots. Just entered Buy 1.20433. EurUsd, M30. I used the .set file in previous Post, and altered it as above.
+
+--- 帖子 #144 ---
+Yes 5 digits is the problemo. You need to multiply the tp, sl and ts by 10 Scoobs.
+
+--- 帖子 #145 ---
+Skyzer, does your experts tab show: Placing buy order EURUSD mine does but like yours nothing is happening, makes me think there is a conflict with MBT. Anyone else having success placing trades on MBT? will try scoobs suggestion....
+
+--- 帖子 #146 ---
+setting the MM to false brought my ea alive... just entered a buy when I re applied it to the chart.. cool, now lets see what happens...... (this is on MBT ecn broker....)
+
+--- 帖子 #147 ---
+Scooby, I'm not so sure that's the issue. I have it installed on a 5 digit platform and I don't need to multiply anything. Since I installed the previously mentioned set up is working fine. TP 10 pips, Trail 15 pips and SL 140 pips. For some reason is acting funny on both 4 and 5 digit brokers Let's see what the OP says. Henry
+
+--- 帖子 #148 ---
+I am also on a 4-digit broker. EA trained and showed the red line but didn't take any trades. As soon as I turned off MM, it took a trade in all three pairs I have set up. Seems like that is where the issue is.
+
+--- 帖子 #149 ---
+[quote=tommyd;3789400]In the expert tab it says: NextClose EURUSD, M30: Placing buy order EURUSD but no order appears on chart or in trade tab. ( I did also change the lots traded to 0.1 as on MBT a 1.0 lot is 1$ .) quote] I'm having the same problem with GallantFx 5digit. Expert tab says it's placing a buy (or sell) order and nothing ever happens. No errors at all. Only thing i've changed is lot size to .05 because GallantFx minimum is .05 thx, todd
+
+--- 帖子 #150 ---
+OK the results so far - +56 pips - very low drawdowns since last night: http://www.mt4i.com/users/nextclose [quote=todd960960;3790074] The isssue is with minlots when MM is turned on, will fix it next release - as other posters did, turn MM off for now.
+
+--- 帖子 #151 ---
+A good nights trading last night. 11 trades with 7 wins. First trade taken today just after 5pm GMT. I had to reboot my metatrader and when it restarted I don't think the EA picked up the trade again, so I manually closed for a loss. Second trade of the day is up and running so hopefully will be another good night. Cheers Paul
+
+--- 帖子 #152 ---
+He-he,, yes, I'm on MBT Demo, same here "placing Buy order" and nothing happens, could be 5 digit problem, but then we should have error placing a trade, something like "Invalid price..." P.S Trying Alpari now..
+
+--- 帖子 #153 ---
+MBT is an ECN. ECN requires EA to first place trade then modify trade with SL/TP
+
+--- 帖子 #154 ---
+Ok, finally on Alpari trade just taking..
+
+--- 帖子 #155 ---
+Yeap, that could be it! thanks.
+
+--- 帖子 #156 ---
+works fine on alpari uk , testing on eurusd usdjpy usdchf gbp usd , however on u/j it just keeps training and red line doesnt appear , while other pairs are trading . Also how can i change lot size ? i tried to make 0.1 , but it takes 0.02 lot trades
+
+--- 帖子 #157 ---
+I do hope EU turns as I have a buy live on my 4 digit broker. First proper one with the new updated EA. -55 as we speak, in Alpari on my demo account it seemed to close these losing trades out much earlier - hopefully 140 is NOT the SL on this one.
+
+--- 帖子 #158 ---
+neuro how long have u been testing this ? also how is the success rate "live" ? thanks for sharing btw
+
+--- 帖子 #159 ---
+OK, finally is working on several pairs. I changed lots: 0.01 to 0.1 and all pairs are trading now.
+
+--- 帖子 #160 ---
+i'm still having problems with auto on fxpro demo, while alpari uk auto works ok....any suggestions..any fixes please thanks sami
+
+--- 帖子 #161 ---
+These are the issues identified so far that may prevent the EA from autotrading: 1) ECN won't work. 2) Lot size (is your account micro?) 3) MM (set to false if true) 4) Timefilter 5) Threshold I see #5 was changed on the updated version attached in post #1. Neuro, did you change anything else from the original attachment?
+
+--- 帖子 #162 ---
+hi tommyd how do u get to show buy or sell order on yours..... cheers sami
+
+--- 帖子 #163 ---
+Agreed. But a small loss currently on day 3. Trading majors.
+
+--- 帖子 #164 ---
+Anyone running fxpro demo...any hiccups and possible fixes. please share and advise. while on the other hand alpari uk results - 11 auto runs - 9 winners and 2 loses..all auto
+
+--- 帖子 #165 ---
+neuro , have u tested it on other lowspread pairs other than eur/usd?
+
+--- 帖子 #166 ---
+funny thing, changed the magic number and it took a trade instantly.
+
+--- 帖子 #167 ---
+Hello, I installed the EA very quick in 5 minutes on my FxPro demo because I was a bit curious about the trading results...A couple of minutes later the first automatic trade was excecuted on the eurjpy with 0.1 lotsize. Profit was +8 pips. Here are the EA Properties: Right click with mouse on chart and select Expert Advisors / Properties F7 Inputs: Lots = 0.1 UseMoneyManagement = false Risk factor = 0.05 Stop = 140 Trail = 15 TakeProfit = 10 UseFixedTP = true TrailFractal = false ContinousMode = false RiskReducer = 20 MinMSE = 0.0000025 TimeFilter = false SlidingWindow = 16 CloseAfter = 1 BeginHour = 17 EndHour = 4 Threshold = 8 Offset = 2 AutoAdjustDigits = true I hope you can do something with this information... eTrader,
+
+--- 帖子 #168 ---
+I'm testing on all possible pairs...usdpairs
+
+--- 帖子 #169 ---
+hi etrader i hav configured this to your recommendations and saved presets and i'm trying it now, i'll let u know what happens thanks sami
+
+--- 帖子 #170 ---
+hi etrader magic, its taken trade eurusd (long)...keep u updated sami
+
+--- 帖子 #171 ---
+also im trying to understand logic of this ea , because sometimes it takes trades on highly correlated pairs in the same direction ...
+
+--- 帖子 #172 ---
+to neuro, how long you think will take to to complete this product, so far so good...its working. sami
+
+--- 帖子 #173 ---
+I think your EA is going to run into problems with its current SL logic. I'm guessing it is programmed to "hope &amp; pray" for a 50% retrace then it closes the position. Sooner or later; and the way the markets are moving, it will most likely be the former, you will run into a runner that will go the length of the emergency stop. Can you please comment? Thanks.
+
+--- 帖子 #174 ---
+guys for the life of me I cannot get this ea to trade on my ibfx 5 digit demo account. I read through the thread a couple of times and even tried the preset file. I set mm to false I changed the magic number but for some reason no red line, no auto trades. All I get is the alerts. Any ideas?
+
+--- 帖子 #175 ---
+I tried on my IBFX demo three times, and nothing on 5 pairs. Have given up for the time being.
+
+--- 帖子 #176 ---
+That brings up a good question. What is the most one trade can lose? I believe the EA stops the loss well before the emergency stop. Which is great when the EA and terminal are connected and running well. However, I think the emergency stop loss is there in the event the terminal is disconnected or EA is disabled. Which if you win too much will happen. Don't mean to sound cynical, but it's hard to believe they will just sit there and put up with it. Not to mention that a 'true' disconnect could actually happen also. I don't know about anybody else, but I'm also testing this on a live micro account. Sure enough, it isn't trading like it was on demo (as far as frequency of trades). It seems like the only way to get it to trade is remove it from the chart and then put it back on. Have to do that for each trade. Also in the experts journal I see this: 20:14:02 NextClose EURUSDFXF,M30: f2M_destroy(0) returned: 0 and 2010.06.09 20:15:27 NextClose EURUSDFXF,M30: deinitialized I don't know what those mean. Anybody know?
+
+--- 帖子 #177 ---
+(Also for paradoxical) Are you sure the files are all in the right place? Try downloading again from post 1 into My Documents or some other folder outside of MT4. Then manually move the files in the folders to the ones in MT4 (include, libraries). Lastly you download the EA to experts folder (also attached to post 1). Lastly maybe try changing the trailing stop to zero or larger number. Some brokers require a minimum margin before trail can 'kick in'. Even though it isn't being used maybe somewhere in the code it is a conflict. Other than that, I'm out of ideas.
+
+--- 帖子 #178 ---
+I have installed nextclose on my demo account with MIG. I have changed the Lot size to 0.2 because minimum lot is 0.1. It is not taking trade (live trading enabled) but the red line appeared. How to decide buy or sell based on the red line shown? Will your EA enter trade automatically? Thanks!
+
+--- 帖子 #179 ---
+I have the EA downloaded into my MT4 experts. However, the icon is gray not colored. When I load onto a chart, it is an "X" not smiley face. Any ideas?????? Thanks.
+
+--- 帖子 #180 ---
+Is allow live trading enabled in tools/options/expert advisors or experts properties/common or the experts button on the toolbar
+
+--- 帖子 #181 ---
+hey 4ex..... that's just a message..... in the deinit stage a function is being called.... ann_destroy()..... it writes a message in the journal if successfull..... sounds bad but just they way it works......h
+
+--- 帖子 #182 ---
+First of all, thanks to Neuro for the EA, I have used it with good results today, ended at +31 pips. One concern is that a couple of times the red line and TP level for the trade were at extreme levels, one was at about 2,000 pips and the other was about 10,000 pips. That is not a misprint, on one long trade the red line was at something like 2.2xxx. I closed that trade manually in some profit, and the other trade with the 2,000 TP the EA closed the trade at breakeven. I just thought I would post to see if this is normal, are others experiencing similar situations or is it just me? The other trades had a close target. I assume the EA had a reason for the larger targets, maybe conditions would be favorable for a longer run and I guess that's what the TS is for, but still I thought that was a little too extreme to be normal. Thanks for any responses.
+
+--- 帖子 #183 ---
+The EA Has deep DD today. EurUsd has a sell at 1.1969, now 2.0421 . AudUsd has 2 sell trades at .8315 &amp; .83329 , now .8380 . -180 pips @ .01 trades. Also another 50pip loss trade earlier on AudUsd that closed. No more live running with me !!!!
+
+--- 帖子 #184 ---
+Results for previous night (Asian session): eurusd, gbpusd, eurjpy, audusd (M30) Today I will test the EA only on the eurusd and we will see the result this evening... eTrader,
+
+--- 帖子 #185 ---
+I would like to know the logic behind the EA to test manual. Obviously, auto executes the trade instantly, but I just don't trust an EA running without being supervised. And if I'm going to supervise, I rather just do everything manually. Worse case, I could run on demo and then just copy everything to live. Would still like to know the logic however.
+
+--- 帖子 #186 ---
+I'm fairly certain that all the files are in the right place. But just to be on the safe side. I'm going to delete them and reinstall them and see if that helps.
+
+--- 帖子 #187 ---
+NextClose EA EURUSD M30 Date: 10.06.2010 Demo Account Deposit: 10000.00 EUR Until now 4 trades were excecuted during The London session Winners: 3 Losers: 1 01. +08.80 pips 02. +17.30 pips 03. -19.00 pips 04. +17.80 pips Connection lost - Expert Advisor Removed ! Connected - EA active on M30 chart Result: +24.90 pips Account: +10206.99 EUR Profit: +206.99 EUR eTrader,
+
+--- 帖子 #188 ---
+hi etrader r u still using 5min window for trading? sami
+
+--- 帖子 #189 ---
+Good morning, See post #167 SlidingWindow=16 eTrader,
+
+--- 帖子 #190 ---
+hi everyone i'm running alpari uk demo and fxpro demo at this very moment in time.... on alpari uk - on auto - it has placed a buy order on eurusd on fxpro demo - on auto - it has placed a sell order on eurusd same time please explain sami
+
+--- 帖子 #191 ---
+I had put this EA on my Prime4x account twice on 2 different EU M30 charts... It was showing different prediction of closing price and also took one buy and one sell trades... How it is possible....
+
+--- 帖子 #192 ---
+That's what I have as well, same error.
+
+--- 帖子 #193 ---
+i'm testing it on possible pairs to see how goes so far 40 trades since the 9 june 2010 30 wins 10 loses 2 unning at this moment sami
+
+--- 帖子 #194 ---
+Is this version better than the newer version 14 with source code you have here http://www.forexfactory.com/showthread.php?t=222915
+
+--- 帖子 #195 ---
+hullo there partners, i just set up the trading ea on my demo acct, but i'm kinda confuse. I really dont know which start time and end time i should input, and i willl like to know the best TF. Thanks Marseille
+
+--- 帖子 #196 ---
+i think i got it now. i changed the start time to 0, and the end time to 24. Then i changed the offset to 0 and now i just had 1 trade which ended up in profit. How cool is that? This is fun guys. Lots of love Marseille
+
+--- 帖子 #197 ---
+Folks, New version of NextClose has a few important fixes. Please get it, the spread issue is fixed as well. To people who are seeing large dds I'd say try running it in a time period with low volatility, the time filter is there for a reason - however just to test if NextClose is configred properly, its ok to turn the time filter off. We are up 89.7 pips in 2 days lets see how today goes. Will be adding another cross pair today - AUDCAD. NextClose (even the original version) has always worked with ECNs and STPs as all our clients use ECN brokers.
+
+--- 帖子 #198 ---
+i must admit, this ea has a very big potential.
+
+--- 帖子 #199 ---
+NextClose EA EURUSD M30 Date: 10.06.2010 Demo Account Deposit: +10000.00 EUR 8 trades were excecuted Winners: 5 Losers: 3 01. +08.80 pips 02. +17.30 pips 03. -19.00 pips 04. +17.80 pips Connection lost - Expert Advisor Removed ! Connected - EA active on M30 chart 05. -44.00 pips 06. -48.00 pips 07. +21.40 pips 08. +08.10 pips Result for this trading day: Result: - 37.70 pips Account: +9725.26 EUR Loss: -274.74 EUR eTrader,
+
+--- 帖子 #200 ---
+meanwhile heres my trades.. just ignore the trades which has no comments about nextclose.. they are not related to nextclose trades. awesome ea.
+
+--- 帖子 #201 ---
+I have a question... You say the 140 pips SL is an emergency stop.. ok, but what is the maximum possible SL of the EA? I had today in a demo account -100 pips without a stop! Is this normal or is anything wrong?
+
+--- 帖子 #202 ---
+Hi Neuro where can can i get the new version please.... thanks sami
+
+--- 帖子 #203 ---
+hi, can u explain what setting did u use? did u change tp and sl? thanks
+
+--- 帖子 #204 ---
+sami29uk: Post #1 as usual...
+
+--- 帖子 #205 ---
+ok crodzilla thanks, i'll download it now one other thing do i have to uninstall the old one or overwrite this? please advise thanks again sami
+
+--- 帖子 #206 ---
+i placed the robot on my demo acct. it only placed 2 trades and stoped placing. What should i do pls!. Marseille
+
+--- 帖子 #207 ---
+Hi, i've opened an Alpari UK demo, if you are interested in the results you can sse http://www.myfxbook.com/members/gspe/nextclose/35740 Just a question, this EA work on real live account? or works just on Demo account Thanks
+
+--- 帖子 #208 ---
+Hi, Neuro.... can you pls explain why it behaves like this.. Does it mean, it depends on when I put the EA on the chart, based on that it actually trains and predicts the close and since I had put the EA at different times, it is predicting differently...?
+
+--- 帖子 #209 ---
+Neuro I have been testing this for a couple of days using the trading window as recommended. HOwever this mornings last trade just didn't close until it hit SL. Up until this point the EA had been trading well and I was up nicely. From reading the thread I understand that it should have closed as the initial SL is only an emergency SL. I am using Alpari UK. Paul
+
+--- 帖子 #210 ---
+With the new version i think the spread is not correct. I have a spread of 2.0 pips on EURUSD ( Activtrades - 4 Digits) But the EA shows me a spread of 0.20
+
+--- 帖子 #211 ---
+No, just close MT4, then write over it. Restart MT4.
+
+--- 帖子 #212 ---
+i have set money management to false and time filter to false.. other else where on default settings. after observing large drawdowns.. i made a new demo account with much tighter stoploss. we'll see how this goes.
+
+--- 帖子 #213 ---
+Thanks Paul for bringing this up , yes this is a critical bug and I will work on it, for now set the close hour to 23 and see if it closes at 24 gmt (closehour is 1) In the last one hour (23-24) it will try to reduce the takeprofit by 2 pips every 5 minutes, if the trade still doesnt hit tp the EA should force close the trade right at 24.
+
+--- 帖子 #214 ---
+neuro I made the changes as suggested and it immediately took a trade (the first since 17:00GMT. It looks like even when last nights trade hit SL the EA wouldn't open anymore trades as it hadn't performed the close function. It is as if it became frozen. Hope this helps Paul
+
+--- 帖子 #215 ---
+I've given up on this EA. It doesn't seem like a bad EA, but I'm not sure if it produces enough profit (at least not for the risk level). EA's can also be disabled by brokers (disconnects or feeds). Probably best to trade the strategy manual, although you can't do that while you sleep .
+
+--- 帖子 #216 ---
+can the brokers really disable a system or feeds...how? i think if you practice demo on one broker platform and live trade with another broker....i know it sounds silly but at least there is some hope. the system is ok but it needs some attention. i have two demos running one alpari uk and fxpro ..both mix and match neuro keep up the good work, try to to fix the bugs
+
+--- 帖子 #217 ---
+If we all use our own magic numbers it will be harder for any broker to detect how many are using the same EA. It would be better if we could also be able to change the trade comment.
+
+--- 帖子 #218 ---
+No, this is an urban myth that changing the MagicNumber will somehow 'hide' the EA's operation from a broker. Think about it, if a broker has 500+ sell orders on EURGBP all kick off at say 04:05, he doesnt care about the magic number, he knows its a certain commercial EA again. On a general point, some people think that going with ECN or STP brokers will avoid broker intervention. Well it does, but puts you at the mercy of a much spikier data feed direct from the banking system. Many indicator based EA's will not work well on these feeds, plus variation in spreads can be much greater &amp; much more frequent. You will also still be vulnerable to false breakouts caused by market movers. Yes. It's built in to MT4 on the broker side. The broker access allows them to directly affect what happens to every trade. Automatically with many, many variables. If you saw their side of MT4 many would never use it.
+
+--- 帖子 #219 ---
+so basically you guys are saying we cant win because the brokers have an upper hand... ok, how does one become a broker?...what rules and regulations, governmental bodies or bank organisations do you apply for.. what i'm trying to say is that there are many experienced and professional traders out there who with good intention provide so information and ideas and so forth....why can't they if possible organise a broker inc. is possible. i'm sure they have their connections etc. they know the rules and regulations whatever. these traders who can provide a service for novice, professional traders alike for the good of this world. i dont know if thats possible, or anyone has any thoughts or i'm just a newbie who is talking gibberish. BUT i know brokers cant have the cake and eat it at same time, there must be another solution.
+
+--- 帖子 #220 ---
+You are quite right sir. However, changing magic number and trade comment to random user select avoids the criminal broker knowing which EA is being used. Steve Hopwood (the Master EA Maker) says that by changing the Magic number to 0 and leaving trade comment BLANK would suggest a manual trade to the criminal Broker. I see that trade comment states NEXTCLOSE-V15. Maybe NEURO could put in a trade comment field so user can change it the way they want. Kind Regards P.S. for people who are unhappy about the SL setting, they can you mptm to manage the trades.
+
+--- 帖子 #221 ---
+Agreed. And Steve has forgotten more than I'll ever know on EAs.
+
+--- 帖子 #222 ---
+ok how do you comply that blank description sami
+
+--- 帖子 #223 ---
+Yes. The EA needs to be updated so that the comment can be changed or made blank. Also needs to have a max spread option so that no one gets exectued an order with a spread of more than "X" (X= max you are willing to accept).
+
+--- 帖子 #224 ---
+No, you can profit. Best way is to trade large charts (h4 &amp; daily) during heavy volume hours. You will want to give yourself a large stop loss margin, 100+ pips (but never more than 2% of account balance). R/R of 1:2+. You also want to hide the take profit and stop loss. Doing it the way I just described gives you the best odds of profiting. It's hard for a broker to manipulate or interevene against you if done this way. Someone who worked at a dealing desk here (don't remember who) once said a good broker company will try to give you the best customer service and advice they can. They want to retain your account (and get referrals) so you can trade with them on their platform. But once your trade is entered, it's every man for themselves.
+
+--- 帖子 #225 ---
+Does this work with 5 digit brokers? With ECN/STP brokers?
+
+--- 帖子 #226 ---
+Try out The Collective fx.
+
+--- 帖子 #227 ---
+See neuro's post 197. What broker are you wanting to try it on ? I use IBFX demo, 5 digit, non ECN nor STP. cheers scalpz
+
+--- 帖子 #228 ---
+I am trading this on like 20 pairs, and I have never ever seen my CPU this high for so long. Wow... it must be doing some serious calculations!!!!
+
+--- 帖子 #229 ---
+Thanks for the interest in this thread and issue reporting / feedback. Let me know if you find any other issues.
+
+--- 帖子 #230 ---
+This ea is so so so so cool. I thank God for the life of whoever introduced this system here. God Bless That Person. I already had 5 trades that ended in profit. Marseille
+
+--- 帖子 #231 ---
+hi neuro. i dont know if only mine do this. i have the ea attach to 8 pairs, namely UCHF,UG,UJ,EA,uCAD,EU,AU,GU.. all 6 pairs are working fine except for UJ and GU, it seems it is training this 2 pairs endlessly.
+
+--- 帖子 #232 ---
+My results after one night on my live account only on EURUSD... 5 winners (39 pips) 2 losers (8 pips) 1 breakeven + 31 pips The last trade was opened at 22:02 GMT (Trading range 17:00 - 4:00 GMT) Looks really good.. will try it on other pairs
+
+--- 帖子 #233 ---
+hi neuro any updates on the software. also can i change the magic number on my software sami
+
+--- 帖子 #234 ---
+Hello everybody, Everyone is posting results, but is it possible to post also the used Expert Advisor properties ! Especially for the pair eurusd. eTrader,
+
+--- 帖子 #235 ---
+hello everyone, i think i have some solution or part solution to our BRKER PROBLEM!. ok, nextclose is just a name, each individual (FF members) can rename this file anything eg super.exe, anyname.exe etc etc... addition to this the magic number can also be changed to avoid detection. the way you do this have presets saved in the preset folder. for each pair yo have diferent preset. i'm not programmer so dont know how but i know you can do this. like our fellow member said on this thread you dont want everyone going short or long on eurusd using the same name and magic number. please comment and suggest any possible solutions sami
+
+--- 帖子 #236 ---
+I´m using default settings. I have only changed the magic number and the risk factor
+
+--- 帖子 #237 ---
+hi riddler what risk factor are you using please thanks sami
+
+--- 帖子 #238 ---
+hi sami, sry, there I have probably missed.. on the live acc i use actually a fixed lotsize of 0.01 But i will increase the risk factor, when the results be staying so good
+
+--- 帖子 #239 ---
+hi riddler i'm using fxpro demo, the lotsize is 0.1 so what risk factor shall i set this on please sami
+
+--- 帖子 #240 ---
+to everyone can we set the tim 1min and if so what settings can we put in the nextclose parameters thanks sami
+
+--- 帖子 #241 ---
+Hi All I was having pretty good results with the old EA once I got it to start trading. Now, I upgraded to the new EA and the EA has stopped trading. Can antone suggest what might have happened to make it stop. Thanks.
+
+--- 帖子 #242 ---
+I'm live on micro account with IBFX. I started the EA late morning EST (1400 GMT), fixed .01 lots. All other settings default. Brilliant EA! Total: +69 pips.
+
+--- 帖子 #243 ---
+In my Alpari UK demo account eurusd is the only pair that lose. What settings are you using?
+
+--- 帖子 #244 ---
+installed and testing... Thanks neuro. Ron
+
+--- 帖子 #245 ---
+had good demo results on 1st posted version. 10 winners, 2 losers, + 40 pips. (may go back to it) second version was not so good. testing third version now advice...don't trade around news seems to be training neural for long times on many selected pairs. Anyone have the same problem I did when trying to load the FANN file on VPS? VPS error msg says not allowed any best pairs to trade for those who had the courage to go live? -Jacob
+
+--- 帖子 #246 ---
+Default on EURUSD 30min, except for time setting and fixed lots.
+
+--- 帖子 #247 ---
+I just installed the EA. It says now gmt13. trading will begin at GMT17. Is that correct?
+
+--- 帖子 #248 ---
+Thank for your reply, i'll try on a different broker. I can say that on my demo this ea works very well on aususd
+
+--- 帖子 #249 ---
+yes, but you can change the trading hours and the gmt offset in the settings..
+
+--- 帖子 #250 ---
+Even if I change the offset, it doesnt display properly... not sure how it calculates.... Neuro can you pls explain......
+
+--- 帖子 #251 ---
+Thanks Riddler
+
+--- 帖子 #252 ---
+What do you mean Except time setting and fixed lot. Is that different from other pairs. If so what should it be. thanks
+
+--- 帖子 #253 ---
+First trade closed with profit.
+
+--- 帖子 #254 ---
+Maybe EA is good, but it doesn't trading on any of my 2 Demo accs.. Alparti NZ-5 digits, FXDD - 4 digits, Or it takes only 1 trade and nothing after that..
+
+--- 帖子 #255 ---
+I'm not having trouble with that Sky but some are. I have on AlpariUK demo E/D. It's not profitable but I think that's because of the trading hours. But it trades good!
+
+--- 帖子 #256 ---
+Hi Skyzerfx, I trade with Ibfx. I have had 4 trades so far 2 on GU and 2 on Euro One closed with profit, one loss, 2 are still in play
+
+--- 帖子 #257 ---
+Hey neuro, it seems like the backtest runs much more slowly on the latest (today, 11-Jun) version.
+
+--- 帖子 #258 ---
+Hi Neuro, I hope we didn't scare you off.
+
+--- 帖子 #259 ---
+neuro, how can we set the lot size? No matter what I do, it opens .05 size positions
+
+--- 帖子 #260 ---
+Turn off money management and set the lot size field manually.
+
+--- 帖子 #261 ---
+hi neuro, There´s one thing that i don´t understand. I have running it on two separate demo accounts at the same broker. But the EA goes LONG in the one account and SHORT in the other.. exact at the same time. The projected close is also different in both accounts. Is this a error in the EA? it´s curious...
+
+--- 帖子 #262 ---
+I think the reason I'm losing so many trades is my offset. I had it set to 2 and it should have been 1. Collective fx. Correct me if I'm wrong. Offset refers to broker, doesn't it?
+
+--- 帖子 #263 ---
+There were ( in last 4 hrs) 9 trades 7 profit 2 loss 2 more trades are still in play
+
+--- 帖子 #264 ---
+In the last 5 trades I've had one loss. One on the board but it is a U/CHF.
+
+--- 帖子 #265 ---
+hi sanyhuis is offset refers to broker, so setting to 1 from 2 what does that do please thanks sami
+
+--- 帖子 #266 ---
+It has to do with your brokers GMT. But I've noticed that the EA does it for you automatically. So you don't have to worry with it. If you notice in the upper left hand corner it will say GMT 1. That's good. OR it may say GMT2 depending on your brokers time.
+
+--- 帖子 #267 ---
+How much time usually takes neural net training?
+
+--- 帖子 #268 ---
+186 pips in just 3 days, running loss ~ 20 pips. Lets see what next week brings. The key thing is drawdown has been less than 2%.
+
+--- 帖子 #269 ---
+Hi Neuro Can you please post the setting you're using. I'm having pretty good results as well BUT my drawdown is higher. Thanks for this great system!!!
+
+--- 帖子 #270 ---
+Hey neuro, if the backtest results are to be trusted, this system will sometimes go through losing streaks where you hit -140 pip stop loss several times in a row. This would quickly wipe out weeks of steady gains. So these promising forward test results that you and others in the thread are having are not a holy grail, just keep in mind.
+
+--- 帖子 #271 ---
+This is what I would call a casino EA. Great fun, but very dangerous if you are betting the farm on it. An SL in excess of 100 pips to make 8 pips is totally insane.
+
+--- 帖子 #272 ---
+Ah! Another critic w/o reading the thread thru.
+
+--- 帖子 #273 ---
+On how many pairs u are running this on? Can u pls tell if the predicted close depends on the time when i put the ea on. Had asked question few posts back. But didnt get any answer. Pls reply how this works. Thanks in advance.
+
+--- 帖子 #274 ---
+Hi neuro, hope everything is cool. i'v been having not so good results with the latest version next compare to the early version, can you please provide the settings you ar r using for the latest version. for information purposes i'm demoing on alpari uk and fxpro demos. cheers sami
+
+--- 帖子 #275 ---
+Not to poopoo your pips.. But, I ran this and it didn't do very well at all. Had it on 24/7 though, so maybe that was it. I will wait for the next version to evaluate. Seems like a great idea though...
+
+--- 帖子 #276 ---
+Thinking this trading system holds potential profits if only I could get the indicators to work. Installed successfully the setup file Fann2MQL to the expert folder, Installed the NextClose v14 indi to the Indicator folder, indi does show in the navigator column however when I drag and drop unto a 30 m chart doesn't appear to work, also does not appear in the indicator list. Attached a pic showing "nextclose" in navigator list I have tried it on FXPro. Help appreciated..
+
+--- 帖子 #277 ---
+hi deano, you need to put the nextclose.exe in the script folder in order for the robot to work platform/experts/scripts(this is where it goes) just copy and paste.... see it how it goes good luck sami
+
+--- 帖子 #278 ---
+I have the "nextClose" indi in the script folder and from the terminal, I opened the Experts and it says "Compiling "NextClose v 14" Is there a waiting period? Thanks
+
+--- 帖子 #279 ---
+deano try the following, using 5 minutes.... I installed the EA very quick in 5 minutes on my FxPro demo because I was a bit curious about the trading results...A couple of minutes later the first automatic trade was excecuted on the eurjpy with 0.1 lotsize. Profit was +8 pips. Here are the EA Properties: Right click with mouse on chart and select Expert Advisors / Properties F7 Inputs: Lots = 0.1 UseMoneyManagement = false Risk factor = 0.05 Stop = 140 Trail = 15 TakeProfit = 10 UseFixedTP = true TrailFractal = false ContinousMode = false RiskReducer = 20 MinMSE = 0.0000025 TimeFilter = false SlidingWindow = 16 CloseAfter = 1 BeginHour = 17 EndHour = 4 Threshold = 8 Offset = 2 AutoAdjustDigits = true I hope you can do something with this information... eTrader,[/quote]
+
+--- 帖子 #280 ---
+Last week the EA ran just fine for me. Now today I turn on my platform and I keep getting this error in the experts tab. 2010.06.13 17:46:48 NextClose EURUSDgfx5,M30: ERROR: Network RUN ERROR! ann=0 Frustrating to say the least. Tried removing the EA a few times but still no luck.
+
+--- 帖子 #281 ---
+Had a crash first time, now running the training
+
+--- 帖子 #282 ---
+Getting an error saying "Network TRAIN ERROR! ann=0", any idea what is going on?
+
+--- 帖子 #283 ---
+"The SL is only an emergency SL , the EA will close the losing trades much earlier based on projected close." I'm new to neural networks but I will follow this thread with interest.
+
+--- 帖子 #284 ---
+I'm getting this too.
+
+--- 帖子 #285 ---
+dude this is not an indicator nor a script. it should be put directly to experts folder...
+
+--- 帖子 #286 ---
+dude this is not an indicator nor a script. it should be put directly to experts folder...
+
+--- 帖子 #287 ---
+I changed my TF from 30m to 15 and the error went away. Strange.
+
+--- 帖子 #288 ---
+Were you able to change it back to the 30m TF and still not recieve the error? Still getting the error, on all TFs
+
+--- 帖子 #289 ---
+Now the errors are gone and I have the red line ... strange. The line appears to be right at price or very close ... and no trade. What should I expect next?
+
+--- 帖子 #290 ---
+Did everyone get this into the experts file? That's were it goes. Then it works perfectly.
+
+--- 帖子 #291 ---
+Hi neuro, just a question the log files are really necessary? they takes about 6 gb of disk space thanks gspe
+
+--- 帖子 #292 ---
+hi gspe where the logs files located? thanks sami
+
+--- 帖子 #293 ---
+the logs files located are located in ../expert/logs
+
+--- 帖子 #294 ---
+gspe those log files are bigggggggggggg! so what do we do these files neuro please advise sami
+
+--- 帖子 #295 ---
+My GMT is showing my pc time, and I am +8
+
+--- 帖子 #296 ---
+sundog wat settings are u using thanks sami
+
+--- 帖子 #297 ---
+Hi neuro, i'm wrong or the ea forgot to manage some orders?
+
+--- 帖子 #298 ---
+hello how do you set nextclose time to your time in the world... my time is london gmt thanks sami
+
+--- 帖子 #299 ---
+just default settings
+
+--- 帖子 #300 ---
+Yes I know that, it is working now so it must've been something to do with the fact that it was a sunday.
+
+--- 帖子 #301 ---
+Yup feel free to delete log files !!
+
+--- 帖子 #302 ---
+Hi Neuro, Can you pls explain the strategy behind your EA..... Thanks for such a good EA which is making good profit... Thanks, Prakash
+
+--- 帖子 #303 ---
+hi everyone, i'm testing it in fxpro demo and alpari uk on fxpro demo i'm using 1min window - with very good results today. try it and see, im using default settings sami
+
+--- 帖子 #304 ---
+you mean running on 1 min tf? doesnt the Tp of 10 pips is more for 1 min tf?
+
+--- 帖子 #305 ---
+This EA is backwards, it has just sold on an uptrend! Sold EUR/USD @ 1.2276 with TP @ 1.2267 on a 30min TF ,but the trend is up Hmmmm
+
+--- 帖子 #306 ---
+It is expecting a retrace...lets wait
+
+--- 帖子 #307 ---
+If this hits TP, I will..... I will eat my left shoe
+
+--- 帖子 #308 ---
+I dont know, why I am not getting reply from Neuro.... Am I asking something which is wrong? If so, Please tell once and I will stop posting for ever.... Hope you make this a grand success.... Thanks..
+
+--- 帖子 #309 ---
+You only asked your question 1 1/2 hrs. ago. Why don't you give Neuro, a little time to respond. It's not a question he can answer in 1 or 2 sentences. Who know's, he may even be busy trading. Many of the questions people have been asking have already been answered in this thread. Thank you Neuro, for your generosity &amp; patience.
+
+--- 帖子 #310 ---
+hi reachjj i dont know what it is but it appears to be making good progress today compare to friday and thursday, i think To Neuro: any updates on the nextclose thanks sami
+
+--- 帖子 #311 ---
+I asked question last week. I am not referring to my today's question though they are similar...... Thanks, Prakash
+
+--- 帖子 #312 ---
+In Post 1 neuro says, "The installer should be pointed to install in your MT/experts folder rather than default program files location." Where do I find this?
+
+--- 帖子 #313 ---
+So far I have not asked any question. but now I have one. I'd appreciate a reply. Here goes: fann2mql loads only one platform. But when I try to load on another it doesn't let me untill I have uninstalled it. How can I solve this problem? I am trading on 2 MT4 platforms. Thanks, Vinesh
+
+--- 帖子 #314 ---
+hi, just copy the file from one station to other one
+
+--- 帖子 #315 ---
+Vinesh, Just copy the files from the MT4 directories to the other MT4 directories. and then open the platforms. Bruce
+
+--- 帖子 #316 ---
+Will you now?.........:-)
+
+--- 帖子 #317 ---
+Prakash, Maybe if you read post#1 it will answer your questions.
+
+--- 帖子 #318 ---
+Naaa ... didnt have to , the ea closed me out in loss.
+
+--- 帖子 #319 ---
+Does anyone know how to fix the take profit level, it seems to adjust itself from trade to trade?
+
+--- 帖子 #320 ---
+I don't think it takes trend into account. I think the EA just takes the current bar into consideration. That's why it places a red line prior to entering and why the TP varies. The EA does have stretches of profit, but in my opinion this EA is not efficient enough for the risk. Overall it may not even be profittable, but only time will show that. Jesus.
+
+--- 帖子 #321 ---
+Yes, His is Great
+
+--- 帖子 #322 ---
+Could not get this to work on FXPRO so rather than fight with it, deleted it. Next downloaded IBFX, reinstalled the program, from the 30m chart got the smiley face and the training process began, wohoo . Now I am at the waiting period for a trade to enter, still waiting after about 25 minutes for a trade on the E/U. I have now noticed that the the training period and the text associated with it has gone also in the top RH corner is now shows text "netclose v14 with an X I re-adjusted various functions for the EA as per a post from this thread.. I entered a manual trade on my live account about 15 minutes after the above and now up 17 pips . Comments welcomed
+
+--- 帖子 #323 ---
+its just a scalper, not a trender..I am running it on 7 pairs for testing on demo. tp = 5 pips only...get in get out. after another week or so, i will choose the best pair(s) and go live -Jacob
+
+--- 帖子 #324 ---
+Mine closed me out in profit... so does that means you can eat my left shoe. *Short @ 1.2274, 1500 GMT
+
+--- 帖子 #325 ---
+Provided it is new.
+
+--- 帖子 #326 ---
+crodzilla What I dont understand is, why did the ea close me out with a loss and then price move in the right direction? I am using default settings. I noticed you have v15, didnt know there was V15, only have V14
+
+--- 帖子 #327 ---
+Hi Neuro, Firstly thanks for sharing this EA. It's much appreciated. I notice from your MTI page that you seem to be running version 15 now, Is this a bug fix version or an improvement?
+
+--- 帖子 #328 ---
+A bit of both.
+
+--- 帖子 #329 ---
+Neuro did post an update (post #1 updated), I'm not gonna find it for you though.
+
+--- 帖子 #331 ---
+I couldn't see it on the list of attachments for the thread. If anyone can point me at version 15 it would be much appreciated.
+
+--- 帖子 #332 ---
+The one from the first post is version 15.. The filename is wrong, but when you attach it to the chart, it will show you the right version number..
+
+--- 帖子 #333 ---
+Brilliant, thanks!
+
+--- 帖子 #334 ---
+Hi All, I have applied the latest V15 to the EURUSD M30 TF, and let it trade on the default settings. One small issue, is the time setting is 1hr out. I am in the UK, using Alpari UK demo a/c, which displays time 1 hour ahead of real time. I tried altering the 'Offset' input value in the EA properties, hoping that this would correct things, but it didn't work. - Can anyone give advice?? I know its only a minor issue, my trades started at GMT1800 instead of 1700. My first night's trading gave -37 pips, hopefully the rest of the week will be better. I notice that people are trying different currency pairs, TF, and running 24 hours. For starters I plan to run on original settings, unless advised otherwise.
+
+--- 帖子 #335 ---
+but i have problem to open file.exe for include .dll in library's directory. in two different pc. Thanks for help
+
+--- 帖子 #336 ---
+Can somebody post file .dll directly , after that I will copy in it own directory. thanks P.S. Thanks to Neuro for share....
+
+--- 帖子 #337 ---
+Results for last nights session (1700 - 0400 GMT): IBFX live account. Default settings, except using .01 lots, MM off. +4 pips for the session. Not great, but still positive. It catches the small Asian swings with precision. The 1700 GMT trade didn't work out today. I'm going to keep an eye out for it this week. If it is a low probability trade for the NN, I'm going to move to 1800 GMT to start, next week.
+
+--- 帖子 #338 ---
+The defaults on the file I downloaded have trading times set to 1700 - 0300 GMT.
+
+--- 帖子 #339 ---
+Just verified. My defaults are 1700 - 0400 GMT. I Don't know why yours are different.
+
+--- 帖子 #340 ---
+In the actual version 15 the defaults are 1700 - 0300 GMT. @crodzilla Are you sure you have the latest version installed?
+
+--- 帖子 #341 ---
+Your offset should be +2. That's Alpari UK. The EA does it automatically. It's on the chart. You don't have to change the default. I don't think it's active.
+
+--- 帖子 #342 ---
+Hi I am using version 1.4 and so far i liked the EA, the results are mixed but for somereason i have a good feeling for this EA. can someone attach the version1.5 of this EA. Thanks
+
+--- 帖子 #343 ---
+Yes The EA should compute the GMT offset automatically, the manual setting is for testing only. Prakash, The strategy is the neural network computes the projected close for the current candle based on previous patterns. Unfortunately you cant debug a NN, so no easy way of determining 'why' the predicted price. Also the file name is indeed incorrect - the one available on the first post is the latest and greatest, however I am working on a new one with the weekend close fix, all trades should be closed by 4 pm friday, not having this costed us 60 pips on demo. But its recovered nicely since.
+
+--- 帖子 #344 ---
+Please make trade comment user defined in next version. Thanks!
+
+--- 帖子 #345 ---
+Nero, thanks for your EA, I just like to point out that on my demo, the EA is displaying the pc time as GMT, which is out by 8 hours. Default settings. FYI. Tks
+
+--- 帖子 #346 ---
+The EA is displaying correct GMT for me. Does anyone no if it trades on Sunday?
+
+--- 帖子 #347 ---
+Thanks a lot for the reply.....I understand that its difficult to debug. Thought you might know the reason why it predicts the prices differently when put at different time on the same account same pair and same tf..... Some NEW IDEA: We know that, pairs tend to move in correlation with other pairs... Like EURUSD with EURCHF along with Gold etc....... So just thinking if we can train using the corellation pairs...does it gives us some good EA... I dont know much abt NN and trying to learn.... in the meantime, pls think about it if its worth thinking..... Once again, thank you for this gr8 scalping EA. Regards, Prakash
+
+--- 帖子 #348 ---
+When I put the EA downloaded from the first post it shows Version 14 instead of the latest version 15. I have put it on IBFX 5 digit demo version. Though the broker time is GMT 14 . The chart is showing as GMT 20 and GMT offset -6 . May I know how to set it right! Thank you
+
+--- 帖子 #349 ---
+EA did quite well last evening trading 1700 to 4:00 GMT. Don't have the exact numbers with me right now. But I probably had 8 wins 2 losses (average 6-8 pip wins and those 2 losses were only for 10 pips total) trading e/u and cable. Tried trading straight thought the london session the night before......bit mistake. It seems to be more of a range trader so won't handle huge trendy movements very well.
+
+--- 帖子 #350 ---
+As you can see from my previous screenshot, I am indeed using version 15. Enough with the GMT discussion, just set it for the Post US / Asian session. The EA has been very accurate trading the swings.
+
+--- 帖子 #351 ---
+Can some one help me or point me to the place where i can download the v15 of this EA. Thanks
+
+--- 帖子 #352 ---
+Hello Neural &amp; fellow traders, I downloaded version 15 over the weekend, and ran it on default settings, except for money management set (false). Trading live on IBFX small micro acct. at .01 lots. Ran on Eur/Usd only, and ended with 4 pips profit. I'm at work so don't have exact trades but it took 6 or 7 trades. I plan on running it tonite at default again, and adding Eur/Gbp pair as well because the spread is low and this pair ranges well during Asian session. Will keep updating my results. Thank you Neural!
+
+--- 帖子 #353 ---
+When you download the windows installer from the 1st post, it will install version 15, even thou the attachement says ver. 14. SirViver.
+
+--- 帖子 #354 ---
+Thanks dear
+
+--- 帖子 #355 ---
+Hi, if i can suggest, try aud/usd
+
+--- 帖子 #356 ---
+gspe, Thanks for the suggestion, but since the Aud open is during those hours, I think Aud/Usd may be trending then. This EA seems to do best when markets are quiet, and ranging very small according to the author. Thanks and best of luck to you! SirViver.
+
+--- 帖子 #357 ---
+My testing has shown a nice profit on AUDUSD over the last week, this is with default setting.
+
+--- 帖子 #358 ---
+Does anybody know how to get the Fann2 files to install on a VPS as I can not access the system32 folder?
+
+--- 帖子 #359 ---
+You can copy those files onto MT4 libraries folder. That should work.
+
+--- 帖子 #360 ---
+I have done that, it does not work as it needs files in the system32 folder also.
+
+--- 帖子 #361 ---
+you guys run EA on 30min charts? for all the pairs? Are the live results based on 30min charts? Thanks
+
+--- 帖子 #362 ---
+may i know what file is needed in system32 folder? i am facing the same problem. thanks
+
+--- 帖子 #363 ---
+why are their so many people cannot follow simple instructions?..
+
+--- 帖子 #364 ---
+OK, first of all I need to say that I was a bit skeptical about this EA, but the results speak for themselves. I am trading in FxPro demo with a $10,000 USD account. As for the trading hours I have extended them to 5 GMT. Will attach my .set file. One thing maybe Neuro could change is the trade comment, just so that brokers don't start realizing with what they are being hit now and the moment this baby is ready to go live, it doesn't crash and burn. Just my 2 cents I started with this EA yesterday and started my forward test on 8 pairs on 30 min charts: EUR/USD - 25.4 pips GBP/USD - 55.7 pips USD/CHF - 5 pips NZD/USD - 6.9 pips AUD/USD - (-26.1) pips EUR/GBP - 0 pips USD/CAD - (-1.4) pips EUR/CHF - 16.9 pips &lt;---OVERALL TOTALS The results have been impressive: 82.4 pips 74% of trades won (42/57) 10.5 pips largest won trade 20.1 pips largest lost trade 4.65 pips average win -7.54 pips average loss EUR/GBP hasn't traded not even once I traded with 1 lot to see its full potential and determine its limits. Most DD I've seen is 90 pips in open positions. Full stats can be found in: http://www.myfxbook.com/members/chan...lping-ea/35220 Thanks Neuro for this great EA. Having fun with it and will continue with my test! Greetings from Mexico! PS: Attachment is a ZIP that includes .set file, detailed statement, template, and profile.
+
+--- 帖子 #365 ---
+If your are referring to my problem regarding files in the system32 folder perhaps you can point me to where I can find the information as I can not put files in this folder on my VPS as I do not have admin privileges.
+
+--- 帖子 #366 ---
+i am facing the same problem. i have successful install into my local computer and running with no problem. however it is different when i copy all the necessay file into VPS. for your information i am using VPS provided free by my broker. i ask them to help and they consult with Boston. it seems fail and they ask me to consult back the EA provider... this is an error happened in the expert journal "EURUSD,M15: cannot load library 'Fann2MQL.dll' (error 126)" after i put the EA into chart. the Fann2MQL.dll is inside the libraries folder . so i was wondering what file to put into system32.. is the EA was built with visual c++? (i see from src folder) sorry i am not a programmer and i am not sure and system32 need to be installed some file from visual C++ which is not install inside VPS?? sorry i just guess... http://cdn.forexfactory.com/images/icons/icon9.gif
+
+--- 帖子 #367 ---
+There is no template in the zip file. The performance is excellent!!!
+
+--- 帖子 #368 ---
+wow, those are really good results!
+
+--- 帖子 #369 ---
+why do u need a template file?
+
+--- 帖子 #370 ---
+It has been mentioned in the post script that the zip file includes template file. Hence I reminded him that there is no template file in the zip file
+
+--- 帖子 #371 ---
+great results chano12
+
+--- 帖子 #372 ---
+Hye everyone, This is my post here (this thread).. Downloaded the latest EA, but have some difficulties understanding the variables in the input tab Can i have some explaination here about what the variables are (like Epochs, TrailFractal etc). Really appreciate if someone here can list and let me understand them all.. Thanks in advance
+
+--- 帖子 #373 ---
+I have it installed like this and it works, dll libraries to /experts/libraries/ dir and EA to /experts dir. Make sure you allow dll to your EA. Can author of this EA make the comment as external variable? Thanks!
+
+--- 帖子 #374 ---
+yes, already make sure dll libraries allow to /expert/libraries/ dir also already make sure allow dll to the EA as per your picture.. EA is to /expert dir my home computer no problem except at my free VPS from broker i have the error. http://cdn.forexfactory.com/images/icons/icon9.gif
+
+--- 帖子 #375 ---
+We are both in exactly the same boat with boston. Took 10 days a little while ago to get my VPS restarted, I think this is in the too hard basket, I guess we get what we pay for.
+
+--- 帖子 #376 ---
+NextClose on audusd M15 Date 16/06/2010 The EA is working well in a trading range The EA is buying in a downtrend and selling in a uptrend... Results for the audusd in trading range (low volatility): +8,2p / +4,2p / +4,2p / -11,2p / +1,9p / +8,1p / +10,9p / +3,4p / +5,0p / Total: +34,70p Results for the audusd in downtrend: -11,4p / +5,1p / -11,7p / +5,6p / -11,00p Total: -23,40p eTrader,
+
+--- 帖子 #377 ---
+Author recommends to trade M30 timeframe, while you trade M15. Also, he recommends to trade GMT late day and night hours. Maybe that is why your results are not so good... just a thought.
+
+--- 帖子 #378 ---
+I think what he wants to say is that a breakout filter using envelopes, momentum or some other indicator could help for daytime trading.
+
+--- 帖子 #379 ---
+Oops!!! I have re-uploaded with the missing file. Anyways, will continue with my test today... We are 2 hours away from starting. Will post at day-end for the EA. Cheers!
+
+--- 帖子 #380 ---
+when i went to download NextClose-V14.ex4 attached file it came down as a php and not .ex4 is this correct === thanks
+
+--- 帖子 #381 ---
+You need to click on the paperclip top right of screen and download it from there as an .ex4 file Paul
+
+--- 帖子 #382 ---
+Chrome does that to me also, rename the file to match the name you downloaded so it is exactly the same.
+
+--- 帖子 #383 ---
+dude.. time filter is there for a reason..
+
+--- 帖子 #384 ---
+oh my free VPS provider by FX broker managed to solved the problem. today i copy all again the necessary file to expert. now the EA is running happily on demo.i don't know how they solved it. there is no more error at it's expert journal. i will wait for it's first trade. thanks to all. http://cdn.forexfactory.com/images/icons/icon10.gif
+
+--- 帖子 #385 ---
+Results NextClose M30 Date 16/06/2010 Pairs: eurusd, audusd, gbpusd, eurjpy With timefilter Only 2 hours trading: 18 trades, 14 winners, 4 losers +10,7 / +12,1 / +10,6 / +8,1 / +1,2 / -12,0 / -13,0 / +2,8 / +0,2 / +9,7 / +6,7 / +3,2 / +1,3 / +8,0 / +0,3 / +5,6 / -12,0 / -12,4 / Total profit: +31,1 pips eTrader,
+
+--- 帖子 #386 ---
+i advice everyone if youre just using only the nextclose ea then please change your magic number to 0. . so that brokers will not easily know that your using a profitable ea.. if you dont then we will all be busted even before we fire this ea to our live accounts. just my 2 cents.
+
+--- 帖子 #387 ---
+that wont help unless we can also set our own comments
+
+--- 帖子 #388 ---
+My results from last night (1700 - 0300 GMT) EURUSD - 1 Winner, 2 Loser ( -35 pips ) GBPUSD - 0 Winner, 2 Loser ( -128 pips ) AUDUSD - 4 Winner, 2 Loser ( +24 pips ) EURCHF - 0 Winner, 2 Loser ( -34 pips ) EURGBP - 1 Winner, 1 Loser ( -12 pips ) NZDUSD - 0 Winner, 1 Loser ( -6 pips ) USDCHF - 0 Winner, 1 Loser ( -29 pips ) Total: 6 Winner, 11 Loser ( -220 pips ) Max. DD: 14,73% Very bad!! Question to neuro: You have said, that the stop loss from 140 pips is an emergengy stop and it would be close much earlier. But for example at GBPUSD, the price moves down at about 2 pips over the stop loss! How could this be? If the position stopped out earlier, it can open new positions and maybe a few more winners!
+
+--- 帖子 #389 ---
+I see from his handle that he has been "temporarily suspended" for some reason, so you probably won't be getting an answer to your questions..
+
+--- 帖子 #390 ---
+neuro won't answer, he is suspended for placing a link to some external forum where this EA development is continued.
+
+--- 帖子 #391 ---
+hello everyone i'm using fxpro and alpari uk demo, alpari uk making trades but fxpro demo isn't...any suggestions or ideas please thanks sami
+
+--- 帖子 #392 ---
+Last night, news came out for the gbpusd... and this EA just don't work when there is a breakout and a strong trend. Last Friday I had also very bad results (time filter on) for the eurusd (-50 pips) with default settings ! Change the default settings, adjust the Stoploss , Trail and Profit Target. eTrader,
+
+--- 帖子 #393 ---
+My results from 8.6.: default settings, M30, time filter on, Gomarkets AUDCAD +86 pips AUDUSD +67 EURCHF -82 EURGBP -14 EURJPY -128 EURUSD -217 GBPUSD -19 USDCHF -53 Total Pips: -360.8
+
+--- 帖子 #394 ---
+I am using a FxPro demo account for testing the EA without any problem... eTrader,
+
+--- 帖子 #395 ---
+hi etrader, thanks for that... what i have noticed is that the change of magic no. does have some impact on results so please guys and gals change your majjjjik numbr. lets the beat the hooligans (brkrs), sami
+
+--- 帖子 #396 ---
+magic Number will help to change the strategy but it will never change the system... no robots can win above 60% according to my view
+
+--- 帖子 #397 ---
+so turborobot, does this mean nextclose will not give good results even if we change magic no.?, and the brkers are 10 steps in front of us... sami
+
+--- 帖子 #398 ---
+Yes, i know about the news but it was a perfect opportunity to test if the EA close orders automatically when they are in big loss.. What settings do you use for TP and SL?
+
+--- 帖子 #399 ---
+EURUSD 30m, IBFX live account, 1700-0400 GMT. 16 June = -9 pips 17 June = +39 pips
+
+--- 帖子 #400 ---
+crodzilla hours of trade 1700hrs to 0400 hrs only
+
+--- 帖子 #401 ---
+Yes. I am quite satisfied with that timeframe, for now. And, don't forget, if there are any open orders after 0400, they will be closed at 0500 (one hour after close of order window).
+
+--- 帖子 #402 ---
+Default settings are: Stop = 140 Trail = 15 TakeProfit = 10 My settings were: Stop = 10 Trail = 5 TakeProfit = 15 eTrader,
+
+--- 帖子 #403 ---
+its easy to do.. if neuro would allow me i could decompile his ea and delete the "comment" thing.
+
+--- 帖子 #404 ---
+sami, you know forex trading is charity to brokers every time we put a position brokers are the real winners... they win even we loss or win they are happy to our loosing trades because they will do some kinda virchual currency system in the server and make money from our each loosing trades . they know the fact that 1% people only win in fx
+
+--- 帖子 #405 ---
+Results NextClose EA Date 17/06/2010 Pairs: eurusd, gbpusd, audusd Time (GMT): 19.00 - 22.00 Timeframe= M30 Settings: Stop= 10pips Trail= 5pips TakeProfit= 12pips eurusd: +16,2 / +2,1 / -11,6 / +9,9 / +3,8 / +0,7 / gbpusd: +2,3 / +8,0 / audusd: +8,4 / -12,0 / Total Profit= +27,8 eTrader,
+
+--- 帖子 #406 ---
+What is the latest version. I am on V15 and it is not closing trades out at 5.00 as it should. i have trades still open now. This for me is a big loser, trading eu and cable on 30 min chart at default settings.
+
+--- 帖子 #407 ---
+Wow. I've got to say I'm perplexed. The OP has been suspended for spamming as well as found to have multiple user names and you guys are still at it with this thing. Oh well. Keep at it I guess. LOL!
+
+--- 帖子 #408 ---
+oh well some you lose, some you booze
+
+--- 帖子 #409 ---
+I have found that if you have just installed it and you do not get the training message in the top right change time filter to false on each chart. The EA will start training, when training is complete change back to true.
+
+--- 帖子 #410 ---
+I've been running this on my VPS for the last few days just for fun. It's a big loser. It makes a run of profitable trades and then gets wiped out with one big loss. Waste of time.
+
+--- 帖子 #411 ---
+Have been running it for about two weeks and seen minor gains and massive drawdowns. So, I'm finished with this one. BTW, regarding the Magic Number, it only serves to keep orders segregated if you have two or more pairs running the same EA. If you have this EA running on EU, GU and GY, and you have the same magic number for all three EAs, you're confusing the platform. Magic numbers have nothing to do with the broker tracking you. They do that easily enough by seeing the activity in your journal! Goodbye, Ed
+
+--- 帖子 #412 ---
+Yes, everybody please stop using this EA. It will take the heat off of me. I'm up another 60 pips on just EURUSD 30m in my live account. My last trade did not close at 0500 GMT either, but it did close with the TP. I thought it was explained that the last trade of the day would close 1 hour after the designated window. When this thread goes dead, I'll increase my lot size.
+
+--- 帖子 #413 ---
+A special thanks to Neuro for sharing his excellent work and development of Nextclose. I'm not a programmer, I am only a novice in forex and I'm reading a lot and doing experience about forex. http://cdn.forexfactory.com/images/icons/icon7.gif So, I need to understand some things about Nextclose configuration. For example: http://cdn.forexfactory.com/images/icons/icon5.gif - Risk Factor 0.05 or 0.5, etc. .. Is this a percentage value? - Trail . . . refers to the TP and not to stoploss as in other EA it's right ? - Use Fixed TP ? - Trail Fractal ? - Continuous Mode ? - Risk Reducer ? Is this a percentage value? - EPOCHS ?? - MinMSE ? - Sliding Window ? - Close after ? - Begin and Close hours . . . how set ? 07,30 or 0730 or 07:30 ? Which of this is correct ? - Threshold ? - Offset ? One last question. If the broker connection lost , NextClose correctly resumed the same trades without problems ? I'm testing Nextclose across platforms and with different pairs and TF. Soon I will add here the results to share with all. Thanks to anyone can help me
+
+--- 帖子 #414 ---
+I am testing this EA on my IBFX peny account this week. Thus far it has had 12 trades, 9 winners, 3 losers with Net profit of 52 pips. I am increasing the lot size from 1 cent to 10 cents to see how it goes. Wishing you a great weekend. Kind Regards
+
+--- 帖子 #415 ---
+I was wondering how do you guys handle Friday close? To close manually? Thanks
+
+--- 帖子 #416 ---
+unfortunately. neuro cant reply to our questions because his suspended in the forum.
+
+--- 帖子 #417 ---
+do you know why?
+
+--- 帖子 #418 ---
+"Multiple usernames"
+
+--- 帖子 #419 ---
+will he come back?
+
+--- 帖子 #420 ---
+Perhaps you should ask the power(s) that be (Twee)
+
+--- 帖子 #421 ---
+I dont know why but When I tried to instal EA into my MT4 it doesn't work? My broker is XTB(demo - and here I tried to install) and Admiral Markets ( real). Any ideas?
+
+--- 帖子 #422 ---
+If your interested the mq4 file for version 13 is here http://www.forexfactory.com/showthread.php?t=222915 I have been running version 15 and although there are times the draw downs look bad it has been making a nice profit with few losses.
+
+--- 帖子 #423 ---
+Neuro's basic idea may very well be sound and really hasn't changed since the early version he posted in source form. It's a 4 layer NN with 2 internal layers of 12 and 18 neurons, a 1-neuron output layer and an N-neuron input layer where N is the number of price points you're looking at. After training on earlier price data, he feeds the close prices of the N most recent 30 minute bars. The output is a predicted close price for the current bar. If the predicted close price is above the current price, you go long with a TP at the predicted price. Same goes for a predicted close below current price except you go short. There are some other nuances such as only trading during a certain time window, etc. But that's how it works in a nutshell. Unfortunately I think neuro fell into the trap of tinkering with the basic idea too much while also fixing bugs. If he had stuck with fixing bugs it'd probably work better right now. I could see taking the basic NN close price predictor and starting over with a simpler approach. A first step for the interested student would be to determine statistically how accurate the close price predictions are. This would be how one would find if the close price NN has an edge at all. It may or may not but it can be tested and determined. A measurement something like "the NN predicts the close price within X pips Y% of the time" would be useful. I might do this in a month after I've finished the digital signal processing class I'm taking.
+
+--- 帖子 #424 ---
+IMO, 16 input neurons is hardly enough to cover every possible scenario.
+
+--- 帖子 #425 ---
++22 pips for last nights session. (EURUSD only) I'm moving my start time to 1800 GMT because the end of NY session has been active. My 1700 trade has either been a loser or long drawdown, which prohibits profitable swing trades from occuring. The EA trades the swings brilliantly after 1800... currently.
+
+--- 帖子 #426 ---
+Hi All I have the start time set at 1700hrs and finish at 0500hrs...and its working ok, but the offset is set to 0.....I live in London, so my GMT offset is +1, my broker is FXPro which is GMT+3..... So any ideas please what the offset should be please. Im guessing it should be +1. Many Thanks ab1
+
+--- 帖子 #427 ---
+If I remember right, the offset is only for backtesting. If not backtesting just leave at default.
+
+--- 帖子 #428 ---
+has anyone run this yet on a "live" account (not demo)? Odysseus
+
+--- 帖子 #429 ---
+Have you read the last 10 or so posts? Look at post #412 for your answer.
+
+--- 帖子 #430 ---
+Hi Ab1 im using fxpro as well, how are your results with this broker, mine are mixed.. sami
+
+--- 帖子 #431 ---
+Nice expert, thanks! Look great at first and I will check it out...
+
+--- 帖子 #432 ---
+good ea downloading and trying now
+
+--- 帖子 #433 ---
+Hi Sami I think the EA so far has proved profitable on FXPro and Ive been impressed with it, I will continue to test it for another week or so before going live, but so far looks very good. Attached are my results since Ive been using it. Cheers ab1 Attached File(s) FXPRO Next Close.pdf 328 KB | 759 downloads
+
+--- 帖子 #434 ---
+Damn ***%^*%*&amp;**!!!!! I started the expert in the office on my real accaunt and now I see a position on a big minus - over 100 pips.... ***(&amp;^&amp;^*&amp; ..... And now I can't stop the rock and roll...
+
+--- 帖子 #435 ---
+I will think about lowering the **** high level of stop loss - 140 pisp.....
+
+--- 帖子 #436 ---
+IBFX - LIVE account on EURUSD and USDCHF 30min. 1800 - 0500 GMT. +21 pips for last nights session. I had an open USDCHF position open past 0500 into the US session. Luckily it finally closed out when the position went +1. The program closed it out. That needs to be fixed. I'd rather not have a position open for it to "hopefully" become positive. Anyone talk to the originator on his board (the reason why he got kicked?)?
+
+--- 帖子 #437 ---
+I'm testing that thing but the EA is all messed up. Anybody got it to work? PM me. Thanks!
+
+--- 帖子 #438 ---
+Crodzilla, thank you for keeping posting. The reason why he got kicked... honestly I have bad thoughts. 456 pips last session (23/24 June) with 11 pairs, that could be the horror for here advertised brokers. Shame upon him who thinks evil upon it.
+
+--- 帖子 #439 ---
+Vita Im using 7 pairs ...can you tell me what pairs your currently using please. For comparison Im using GBPUSD,EURUSD,USDCHF,AUSUSD,USDCAD,NZDUSD,EURCHF Results continue to look promising (attached below), even though I didnt use the system on Monday, so it has 1 day missing since last Friday, but still impressive. Also worth noting that this account is in GBP. One scarey thing was looking late last night the account was over -£1100 down at one point, but managed to recover, the stats say the maximum draw down has been about 11.5%. ab1 Attached File(s) FXPRO Next Close Statement 2.pdf 432 KB | 637 downloads
+
+--- 帖子 #440 ---
+Nice results, but what are your settings for: Stop = Trail = TakeProfit = UseFixedTP = True or False ? . . . Threshold=? Results (also FxPro): Trading time only from 19.00 GMT - 20.30 GMT 16/06: +31,10 pips 17/06: +27,80 18/06: -19,70 21/06: +42,30 22/06: -24,30 I allready gave it up until I saw your results, so I am a bit curious about your settings. eTrader,
+
+--- 帖子 #441 ---
+Results from session June 23/24 AUDUSD 63 pips 10 Winner/2 Loser EURAUD 185 pips 14 Winner/1 Loser EURCAD 93 pips 8 Winner EURGBP 8 pips 2 Winner EURJPY -22 pips 3 Winner/11 Loser/ BE 1 EURUSD -41 pips 2 Winner/2 Loser GBPJPY 24 pips 8 Winner/2 Loser GBPUSD 47 pips 8 Winner/3 Loser NZDUSD 18 pips 2 Winner USDCAD 58 pips 9 Winner/1 Loser USDCHF 23 pips 7 Winner/2 Loser not bad! ab, please take a look above! I had problems with EURJPY, closed all the time with a loss with almost same pips amount. I set GBPUSD to 0.01 pips but he open positions with 0.02. I noticed the EURUSD results between Crodzilla and mine are completly different, really strange. Here my stat: http://www.mt4i.com/users/vitamaus
+
+--- 帖子 #442 ---
+Etrader and Vita To be honest I cant claim any credit for the settings or the choice of pairs Im using. In an earlier post I saw someone had posted there results, pairs they were using and set up.....I just copied it...I thought no point trying to re-invent the wheel ! Anyway all I did was changed the Lot size being used and created a different magic number for each pair. Im thinking about adding more pairs based on what has low spreads , so that could mean maybe another 3 or 4. I stayed away from any JPY crosses so far, but may add and test some later. ab1 Attached File(s) Nextclose ab set.zip &lt; 1 KB | 540 downloads
+
+--- 帖子 #443 ---
+The EA continues to perform in my live account, IBFX with the micro lots I am comfortable with. The only stray from default settings is trading time: 1800-0400. +52 pips, 7 total trades for EURUSD &amp; USDCHF, 1 loss. I'm probably going to add a couple more pairs next week. Thanks Vita for your update. I think our start times are different. I noticed that if you start to early at the end of the NY session, and the EA gets into a drawdown to start, you will miss out on some smaller swings that the EA could have taken advantage of. That is why I moved my start time to 1800 GMT. I am running a total of 3 EA's. 2 of which are running on EURUSD. My Xbars EA had a trade open into the window for NextClose, so NextClose didn't start trading until later (2100). But those trades were very profitable.
+
+--- 帖子 #444 ---
+Thanks for your info ab1 I have to revise my opinion about Nextclose EA. Here are the results of today (Timefilter: False), Timeframe H1 eTrader,
+
+--- 帖子 #445 ---
+That does NOT look like the NextClose EA Mr. Etrader. Show us the comments column also. NextClose does not open and close a trade in 3 to 10 min on the 1H timeframe, for just a few pips each. Tell us how to replicate that, if you have modified the settings or the EA.
+
+--- 帖子 #446 ---
+better after my setting &gt;&gt;&gt;
+
+--- 帖子 #447 ---
+Oh Yes, it does, all depends on the settings. Settings were the same as ab1 but on timeframe H1. It's really a mess with all these different settings. Some are using AutoAdjustDigits = 0 (False), default was True. Riskfactor: 0.25 (default was 0.05) Risk reducer: 20 (default was 2) Threshold: 70 (default was 8) eTrader,
+
+--- 帖子 #448 ---
+Good morning from Europe, nice results Tashoon, thanks for posting. Please tell us which TF and time settings you used! Unfortunately my vps crashed last night, can not provide proper results. I wanted too much, too much charts, too much timeframes. I have a big one, but for that thing here maybe too small. It seems that confused the EA very much because the results after were just terrible. Happy trading.
+
+--- 帖子 #449 ---
+Hi guys perhaps you have an inspiration why the EA is not trading. I have it on 11 M30 charts with default setting except lots size and magic number. It has not been trading, nor did it attempt to trade. I don't have any errors in the expert log or journal. Also the text in th left upper corner disappeared and I can't get it back even if I open a new chart and attach the EA to it. I am with TDFX on a standard account with minimum and next lot 0.05. Anybody know where the inverter of the EA went to or where we can find a newer version of the EA? Thanks
+
+--- 帖子 #450 ---
+Hi Tschultz, if you speak German I can help you quickly via skype. Cheers
+
+--- 帖子 #451 ---
+If you are on a 5-digit broker, I could understand those settings. You have just turned it into a true scalper, taking small, short trades. I'm not sure that was the intent, but it works! I'm live with IBFX, still a 4-digit.
+
+--- 帖子 #452 ---
+Etrader I like the results you are getting...looks like you are running during the day and on H1, I thought the EA was designed to run from 1700 to 0500 GMT and on M30 timeframe?...but hey , if it works then great. With my settings the account took a massive hit the last few nights...although I am seriously over trading the MM. Start Balance £5000 on 18th June 24th June £6326...although it had been as high as £7000+ 26th (after Friday Close) £5329 with -£1100 in open positions So equity currently £4225 So maybe I should not trade Friday. ab1
+
+--- 帖子 #453 ---
+I got +19 pips trading an hour and a half on Friday (EURUSD &amp; USDCHF). I closed any open trades at the end of the session so as not to keep any open over the weekend. My confidence in this EA is building rapidly. I'm waiting to see what happens when volatility jumps, even in the Asian session.
+
+--- 帖子 #454 ---
+Hi Vita ja ich spreche Deutsch (is my English really so bad, lol). My skype is txc124. Not sure how we can meet on there but I leave it on for next couple of days. Otherwise if you have an idea other members might be interested, too. Thanks and regards Tom
+
+--- 帖子 #455 ---
+crodzilla, Is this what you are using still? NextClose Version 15 IBFX - LIVE account on EURUSDm and USDCHFm 30min. 1800 - 0500 GMT Default settings, except using .01 lots, MM off. Thanks. Bruce
+
+--- 帖子 #456 ---
+Exactly. You got it.
+
+--- 帖子 #457 ---
+Hi Crodzilla can you put your settings on here please.. also, are u using 5 or 15 min time frames. thanks sami
+
+--- 帖子 #458 ---
+I need some help here I'am new to this thread, but i already read almost all posts in this thread. could someone here tell me, i've set everything as told but why this EA didn't open any trades after 2 hours i attach the EA ??? take a look at my picture below... regards Tinorio
+
+--- 帖子 #459 ---
+Brucech has re-inerated my settings exactly, about 4 or 5 posts above...
+
+--- 帖子 #460 ---
+thanks crodzilla, here my results for the day so far on fxpro demo.. its 1450hrs london time sami click the link below D:SAMI FXPRO 27MAY10expertspresetsStatement1.htm
+
+--- 帖子 #461 ---
+here are the results sami
+
+--- 帖子 #462 ---
+I have decided to add AUDUSD, USDCAD and GBPUSD. So far @ 1950 GMT I'm up 29 pips. Keep us updated SAMI, looking good... This is definitely something we need to keep stats on to find consistent returns with certain settings. So far, it looks like there is the scalping version, which looks interesting. And we have the default settings (time exceptions?). I am very encouraged by this technology.
+
+--- 帖子 #463 ---
+hi everyone, just one quick question, what times are the news hours in US and do we disbale NEXTCLOSE in news hours?, i know we have 24/7 news but i just want to know, how it effects the robot or is it only breaking news effects the NEXTCLOSE? thanks sami
+
+--- 帖子 #464 ---
+Crodzilla, you answered this by saying that this was the version you were using. Is this the version posted right now in post #1? I think neuro was a little sketchy in his version numbering...
+
+--- 帖子 #465 ---
+default values are set to avoid the times of greatest volatility caused by news. post no. 1 has version 15, even though it says 14, once loaded it says its 15 in the top left will this thread be moved to the recycle bin because the starter of it was suspended, does anyone know?
+
+--- 帖子 #466 ---
+i can't backtest this EA?can someone explain it?
+
+--- 帖子 #467 ---
+Well, now I'm not happy that I added those extra pairs. There was lots of money moving last night, with no news. CAD selling, and JPY and USD buying moved the market big time. I stopped out of AUDUSD and USDCAD at -140 pips. I still have a floating loss on GBPUSD. Hopefully, the EA can make that up this week.
+
+--- 帖子 #468 ---
+crodzilla, are u saying that putting the extra pairs might effected the performance of this nextclose? sami
+
+--- 帖子 #469 ---
+No. What I am saying is that my timing stinks. And, using the latest version of the EA which would have closed my trades a lot earlier with smaller losses. Version 155 fixes the closing of the trades after 0500 GMT, or whatever you select. I haven't had but a couple of issues with trades staying open past the window. I manually closed trades with small losses. But, the market moved a lot last night, and I didn't get to those trades soon enough.
+
+--- 帖子 #470 ---
+Nextclose v15 EA only on pair EURUSD H1 This afternoon I decided to use the NextClose v.15 only on the EURUSD, because the programmer NEURO said in an earlier post that the EA was profitable for this currency pair. 5 digit broker EURUSD Time Frame: H1 instead of M30 Default settings, so no changes except for: Stoploss (10 pips), trailing stop (5 pips) and TakeProfit (10 pips) ! Settings for Scalping : Lots = 1.0 UseMoneyManagement = False Riskfactor = 0.05 Magic_NUM = Fill in magic number Stop = 10 Trail = 5 TakeProfit = 10 UseFixTP = True TrailFractal = False ContiniuosMode = False Risk Reducer = 2 Epochs = 500 MinMSE = 0.00000250 TimeFilter = False SlidingWindow = 16 CloseAfter = 1 BeginHour = 17 EndHour = 5 Threshold = 8 Offset = default AutoAdjustDigits = True In case AutoAdjustDigits = False, then multiply Stop, Trail and TakeProfit by 10 for 5 Digit Brokers. Result: Trades = 19 (100%) Winning trades = 16 (84.21%) Losing trades = 3 (15.79%) Profit: + 397.04 EUR Remark: TimeFilter was Off (False) eTrader,
+
+--- 帖子 #471 ---
+etrader you are correct there, it appears that it does have positive impact on eurusd pair, i have been getting some very good results with this one. sami
+
+--- 帖子 #472 ---
+What's the point of having time filter 'OFF' if your using beginning and ending hour settings? thx, todd
+
+--- 帖子 #473 ---
+Seriously... Reading through the thread, one loss and everyone is in total panic...! Anyone that does not accept that in forex you will win a load and lose a load and then the remaining balance is yours...... is basically kidding themselves.... and thats only if your good enough and with enough experience to know what your doing. Which takes years of hard graft and tears. I run several robots (always on low risk) and trade manually. You have to keep an eye on robot drawdown, if I see a robot trade at -100 pips, I will look at a chart, draw trend lines , look at S&amp;R, check out higher and lower time frames... etc etc and work out if I should close manually or let it trade out of what looks like drawdown. So what if you win 300 pips and lose 250 pips...your still up 50 pips, but your average trader would consider that sort of figure a disaster and throw this EA into touch. Winning, losing and draw downs are part of this business.
+
+--- 帖子 #474 ---
+backtested the V15 and the results are horrific for me. Anyone doing any of the versions live w/ success?
+
+--- 帖子 #475 ---
+Shh! Keep it down, I want them to quit...
+
+--- 帖子 #476 ---
+Crodzilla, I have set up on IBFX 30 Min. Are the numbers(GMT) in this screen shot the same as yours? Thanks. Bruce
+
+--- 帖子 #477 ---
+LOL...thats funny...but yes I see your point !
+
+--- 帖子 #478 ---
+So its basically break even after 3 weeks.
+
+--- 帖子 #479 ---
+(You need to go to Program FilesFann2MQL and copy the include and libraries folder where appropriate) what do you mean by where appropriate?.....because i have succeeded to copy the NextClose Version in to my EA in my MT platform but the roobot still don't trade what shall i do?
+
+--- 帖子 #480 ---
+Read Post #1 and follow those directions.
+
+--- 帖子 #481 ---
+So it seems. Even though the win rate is quite high, the losers are much larger than the winners and almost overwhelm them.
+
+--- 帖子 #482 ---
+Thanks Sami, pity its not an mq4 version, would like to learn how these neural net bots work. cheers scalpz
+
+--- 帖子 #483 ---
+There is an earlier version with mq4 here http://www.forexfactory.com/showthread.php?t=222915 Don't think Sami will reply anytime soon as he is in the cooler.
+
+--- 帖子 #484 ---
+v156 is out. Big changes in the defaults.
+
+--- 帖子 #485 ---
+....oh yes, he posted the newer version and link. Honestly, I am to stupid to find NextClose V155 there. I have to be a premium member? The versions out here are really confusing. etrader was showing a chart with NextClose V15 in the upper right corner. Can not find it here in the thread. I am using V14 (download from post no. 1) but written in the left upper corner of chart window V15. Would be very nice if somebody could enlighten me. Happy trading!
+
+--- 帖子 #486 ---
+Cant seem to find the newest version. Do you have to be a premium member? only found an outdated package
+
+--- 帖子 #487 ---
+Hello Todd, Good remark ! In the mode TimeFilter = False (off or 0): BeginHour / EndHour are irrelevant or obsolete. The EA can trade continiously. In the mode TimeFilter = True (on or 1): BeginHour and EndHour can be adjusted. This mode is used for periods of low volatility. eTrader,
+
+--- 帖子 #488 ---
+Hi guys, I have loaded the EA, all the .dll and got a smiling face on it. I have loaded it on a #YMU0 chart, 5 min frame, and began a TRAINING NEURAL NET...:MSE: with some running numbers message on the up left corner. The numbers are running for hours till now. Is it right? Am I not supposed to use this EA with index, instead of PAIRS? Is the frame 5 too short? Regards Doc
+
+--- 帖子 #489 ---
+GMT offset should be ZERO (0). IBFX is on GMT time.
+
+--- 帖子 #490 ---
+There isn't much to these MQ4's. They just copy price arrays to pass to the DLL. The DLL does all the heavy lifting for the neural net. If you go to the neurotrader forum, there are some indicators that predict Moving Averages and the RSI.
+
+--- 帖子 #491 ---
+You just have to be registered... its free. Once you log in, all the attachements will show up. Its on the first post. I would post it here, but you really should get it yourself. And I don't want to get banned by either forum.
+
+--- 帖子 #492 ---
+I would put it on pairs: EURUSD, GBPUSD, etc. Use on 30min or 1Hour timeframes. You can of course try others, but it seems the outcome may not be as desired. Always test on a demo account first, to make sure it is running correctly.
+
+--- 帖子 #493 ---
+Thanks for the reply I will try it on pairs with a higher time frame. And of course I am usind a demo account! Regards Doc
+
+--- 帖子 #494 ---
+I have been testing the old v14 for a few days on E/U with more losses than wins. Then i downloaded v15 on post #466 and left all the settings on default and what do you know 9 straight wins in an hour with E/U and G/U for 95 pips
+
+--- 帖子 #495 ---
+hello Sami Yesterday I attached the nextclose155 on my 1 hour chart , but there was no trade . I use interbankfx. Someone can help me, please?
+
+--- 帖子 #496 ---
+im running the new nextclose156 on EU H1 and get strange errors anyone else? cheers thomas
+
+--- 帖子 #497 ---
+Result NextClose v155 EURUSD H1 Date 30/06/2010 Total trades = 13 Winners = 10 (76.92% ) Losers = 3 (23.08% ) Profit = +183.91 EUR eTrader,
+
+--- 帖子 #498 ---
+Hello Thomas, Perhaps you can upload NextClose version 156 EA..., because we don't have it here... Thank you in advance for uploading eTrader,
+
+--- 帖子 #499 ---
+my fault, i thought you got it already here it is thomas
+
+--- 帖子 #500 ---
+hello eTrader what is the name of your broker please?
+
+--- 帖子 #501 ---
+Hi, what's your settings? It looks like that your sl is set to 80.
+
+--- 帖子 #502 ---
+Thanks crodzilla, I will have a look. I can edit &amp; alter mq4 files to sort of get them to try what I want, but DLLs will be a different learning curve. cheers scalpz
+
+--- 帖子 #503 ---
+Thanks for uploading ! eTrader,
+
+--- 帖子 #504 ---
+Hello Gav, FxPro (Cyprus) eTrader,
+
+--- 帖子 #505 ---
+Hello Rootkit, Settings on date 30/06/2010 were: Stop=8 Trail=5 TP=10 pips eTrader,
+
+--- 帖子 #506 ---
+eTrader thank you
+
+--- 帖子 #507 ---
+Result NextClose v156 EURUSD M30 Date 01/07/2010 Morning trades = 6 Winners = 6 Losers = 0 Profit = +243.15 EUR Only for EURUSD Avoid news related volatility ! Settings: Lots = 1.0 UseMoneyManagement = False RiskFactor = 0.2 Magic_Num = Fill in Stop = 8 Trail = 5 TakeProfit = 10 UseFixedTP = True TrailFractal = False ContinuousMode = False RiskReducer = 2 Epochs = 380 MaxEpochs = 1200 ForceIndex = 5.5 TradeOnSunday = False MinMSE = 0.0000025 TimeFilter = False SlidingWindow = 32 CloseAfter = 2 BeginHour = 17 EndHour = 1 Threshold = 8 Offset = 2 AutoAdjustDigits = True eTrader,
+
+--- 帖子 #508 ---
+can you tell me ,why it didn't get any trade ?
+
+--- 帖子 #509 ---
+whats your setting on TimeFilter. i think eTrader is using TimeFilter=off post your settings so we can check.
+
+--- 帖子 #510 ---
+can you attachment file setting .set , i have problems with setting ! thank you
+
+--- 帖子 #511 ---
+Thanks for sharing! Is this a demo account or live account? Do you use timefilter on it?
+
+--- 帖子 #512 ---
+timefilter is false. do i need to change it ?
+
+--- 帖子 #513 ---
+Hi eTrader, I must be missing something here, because I let the system ON since last night and got NO ONE trade here. I am using a demo account, and this is the picture of the charts right now. Would you mind sharing with us your EA setup? Regards Doc
+
+--- 帖子 #514 ---
+are you getting any errors on the experts tab? do you have installed the fann2mql from the first post?
+
+--- 帖子 #515 ---
+It would seem that it is very broker dependent on profit/loss. I ran it on Alpari UK with time filter off for 24 hours and it lost 9% of account balance with 2 winners and 27 loses. Very strange. There is no way I would run it on a live account.
+
+--- 帖子 #516 ---
+im on icm trading and i have the same bad results with nearly the same settings as eTrader
+
+--- 帖子 #517 ---
+From my experience neural price prediction EA's give very different results per broker. I have never figured out why so far.
+
+--- 帖子 #518 ---
+Yes Scooby, the results are simple horrible with Alpari UK/RU-accounts. IBFX and FxPro seems usable. I will watch it for a while, then I would trade live through a copy- EA or -script if the test will be ok. Poka
+
+--- 帖子 #519 ---
+The biggest problem is unless someone knows why it is broker dependent then it is very possible it would work with FxPro for a week, month etc and then STOP working with that broker and work with Alpari or different etc. If the reason is (possible) that it has todo with price feeds or broker training data then it is very worrying and would not be feasible long term. Having looked at the code (briefly) it does seem to be a coin flip 50/50 which ofcourse these type of EA's are until they build up patterns etc. What could be happening is that you lose your connection to the broker and it has to somehow retrain itself which it maybe getting wrong. Scoobs.
+
+--- 帖子 #520 ---
+Hello, I'm using an ann i put together in matlab. I used Du ka sco py and the data from there seems to be ok. My opinion is that the bucket shops play with the numbers to throw off TA indicators so that people will be hard pressed to find patterns out of the data; comes with the territory of semi-regulated forex market.
+
+--- 帖子 #521 ---
+...was up over 100pips till the end of the day. After closing of the last three trades... Result -47 pips.
+
+--- 帖子 #522 ---
+Obviously the data feeds from different brokers will have variations. But brokers aren't going to present a data feed that's bogus enough to throw off TA and pattern detection. It's simply too easy to bust them on it since after all anyone can record data feeds from several brokers and compare them at any time. The only thing I could see getting gamed by a broker is the current quote, where you could get requoted on an actual order.
+
+--- 帖子 #523 ---
+Hi Koyote I installed fann2mql into the experts. Is it ok? Do you think it will work now? Thank you
+
+--- 帖子 #524 ---
+Settings see Post #470 / #507 NextClose V155 ---&gt; Post #470 NextClose V156 ---&gt; Post #507 eTrader,
+
+--- 帖子 #525 ---
+I dont think the bucketshops "play" with their feeds. HOWEVER, I have had several people on the "inside" tell me that each broker will SMOOTH their price feed differently by doing what is called "filtering", which eliminates spikes. If you put up a chart from IBFX (who I have been TOLD is heavily "filtered") side by side to a chart for the same time frame from MIG (who I have been TOLD is relatively unfiltered), they would look vastly different, MIGs would look more jagged and IBFX's more smooth - in other words, the wicks on candles seem "chopped" on the filtered feeds. This can have an impact on a any NN based scalper that in effect is attempting to capture a range of pricing within a candle - the more the candles wicks (extremeties) are chopped (smoothing) by that broker, the tougher it is for the EA to capture its target TP price range. To combat this, this EA has a "time filter" that ATTEMPTS to only trade during quiet "non-volatile" periods, when it can ascertain a stable candle range on which to base a future projection. However, there are sometimes unscheduled news and in fact even unexplained volatility that CAN and does still wreck this entire proposition. I used to have a NN - based EA that used an indicator called NBV (for Near Background Volatility) to filter the signals and not trade during volatile periods, regardless of the time frame, which IMO is a better idea. Another potential way to approach that is to use the well-known Damiani filter in reverse, and only allow one of these signals when Damiani says to NOT trade (due to low volatility). For this Ea to work IMO, it needs 3 things: 1) a volatility filter that works (they seem to use a force index now, I dont like it) 2) super-low spreads from an as-unfiltered-as-possible broker feed. This eliminates most bucket shops right off. Who it might NOT eliminate, Im not sure. Possibly DukasCopy via bridge? 3) a reasonable R:R - u cant have effective SL of 60-80 pips (I know the emergency SL here is 140, but most seem to wait on some recovery and SL with 60-80 often) and take profits of 8-10 pips, and make money long term. Just my opinion. Some people claim that CAN be done if the accuracy is high enough, and I understand mathematically that is true, but it doesnt suit me personally even if this EA COULD be that accurate. Odysseus
+
+--- 帖子 #526 ---
+Running an EA during (very) low volatility periods on a live account is a receipe for disaster. It's at these times that your broker will take the opposite side of your trade knowing they can move the market to your SL's without worrying about being hammered by the big boys. Scoobs.
+
+--- 帖子 #527 ---
+I did find it interesting that the OP selected the period 1700 UTC - 0100 UTC (1300 EST - 2100 EST). Other systems I've looked at for EURUSD do best between London open and New York lunch. This system starts right after New York lunch.
+
+--- 帖子 #528 ---
+#1. This EA and Neural Network usage is written for after hours. Actually, running ANY EA on a live account is a receipe for disaster. #2. Yes, brokers can take an opposite position. But brokers definitely do NOT move the market. You are making the assumption that brokers KNOW what is going to happen to price in the future. Might as well not be a broker, and just trade, if that's true.
+
+--- 帖子 #529 ---
+Brokers have the added advantage of being able to see pending BUY/SELL orders (and their values) at interbank levels which retail traders do not have access too. This doesnt mean they can move the market but they can see what is pending and take positions to their advantage against your positions if need be. Scoobs.
+
+--- 帖子 #530 ---
+Hey, looks great! Follow this thread for the last 24 h now. Could someone tell me about a good setup for IBFX micro account trading a very low lot size (pennies). Maybe send over some preset for it. I am using the lastet Version of NextClose ( V. 156 ). thanks in advance
+
+--- 帖子 #531 ---
+Im not sure this type of EA *can* be successful or not and wasnt trying to judge that - I was just pointing out how the EA is DESIGNED to trade, and what it is looking to try and capture. Low volatility, skinny spreads. So obviously an indicator that attempts to measure that could be useful for this EA. Odysseus
+
+--- 帖子 #532 ---
+what time is NY lunch? yes it does perform good after hours. also it does play good between 6.30 am and 8.30 am london time BUT at your own risk. sami
+
+--- 帖子 #533 ---
+Could someone tell me the settings for trading NextClose on IBFX. What is the thing with 4 or 5 degits? IBFX has 5th decimal pricing, so you have to multiply sl, tp... by 10 am i right? My Settings so far on EUR/USD (30M) are the following: Are they fine? Inserted Code Lots=0.01000000 UseMoneyManagement=0 RiskFactor=0.2000000 MAGIC_NUM=34777 Stop=140 Trail=15 TakeProfit=10 UseFixedTP= True TrailFractal= False ContinuousMode= False RiskReducer=2 Epochs = 380 MaxEpochs = 1200 ForceIndex = 5.5 TradeOnSunday = False MinMSE=0.0000025 TimeFilter= False SlidingWindow=32 CloseAfter=2 BeginHour=18 EndHour=5 Threshhold=8 Offset=2 AutoAdjustDigits= True thanks for your help!
+
+--- 帖子 #534 ---
+I've been forward testing it on IBFX with a 5 digit demo account and didn't have to do anything special. Just make sure AutoAdjustDigits is true.
+
+--- 帖子 #535 ---
+Let it running all day long yesterday on a GPBUSD H1 chart... 24 trades 19 winners 5 loosers Total profit = U$ 645,00
+
+--- 帖子 #536 ---
+Thanks, bro. Yeah actually i´ve now using default settings instead of MM=OFF and changing StartHour from 17 to 18. Thats it, for now.
+
+--- 帖子 #537 ---
+are you live?
+
+--- 帖子 #538 ---
+Not so confident... first time running the EA This is a demo account.
+
+--- 帖子 #539 ---
+kk, anyways nice results. keep on posting. which broker you demo with?
+
+--- 帖子 #540 ---
+www.fxpro.com If I can get a profitable week, I will try it live.
+
+--- 帖子 #541 ---
+Yeah. Same plan as here...
+
+--- 帖子 #542 ---
+Pls post the settings you are using....
+
+--- 帖子 #543 ---
+Here's my setup. IBFX 5 digit demo account $50,000 initial balance All default settings on EA version 156. EA loaded on H1 chart Pair = EURUSD
+
+--- 帖子 #544 ---
+same as here, except with a 30M Chart. What time settings u have stevegee?
+
+--- 帖子 #545 ---
+btw, could someone plz give me information about account size and risk tolerance? is there a problem with trading this technique on small accounts lets say $100.
+
+--- 帖子 #546 ---
+Just the defaults 1700 - 0100 UTC
+
+--- 帖子 #547 ---
+You could probably do it, but I'd turn off money management and set the lot size to 0.01. On a mini account that's $0.01/pip. You max loss would be $1.40 which isn't too bad about 1.5%.
+
+--- 帖子 #548 ---
+well, here we go. thanks. thats exactly what i wanted to hear
+
+--- 帖子 #549 ---
+w0w... This bitch got a mind of its own.... After a few bucks gain last week, this got a mind of its own today. Running on a live account, took over 200 trades in just over 2 hrs, losing equiv to 680 pips. Rapid fire trading, taking both buys and sells, sometimes multiples of the same and closing in the same minute. Throwing this one to the dogs! Micro account...Thankfull for that.... Ewwwwwwwwwwwwwwwwwwww!
+
+--- 帖子 #550 ---
+Here is the 1m Euro chart that shows the trades.... Was applied to a 1hr chart...previous gains of close to 60 pips last week on this pair.... These are the trades from today.
+
+--- 帖子 #551 ---
+NextClose155 working fine here... NextClose156 is dead... Did someone got it working? Regards Doc
+
+--- 帖子 #552 ---
+156 working for me... whats the matter with 156 to you?
+
+--- 帖子 #553 ---
+Loaded it but nothing happens... no trade, no signs...
+
+--- 帖子 #554 ---
+This EA takes a few minutes to get its act together before it displays anything on the chart. You have to be patient. Also, the EA only trades between 1 PM and 9 PM Eastern time US (1700-0100 UTC) Also, check for errors in the "Experts" and "Journal" tabs. This is where the errors are printed if you're missing the neural network DLL, for instance.
+
+--- 帖子 #555 ---
+my 1.56 hasnt taken a trade yet either but could be just cuz of time/day filters and or the force index filter.... Odysseus
+
+--- 帖子 #556 ---
+Me too , no trade
+
+--- 帖子 #557 ---
+Loaded both at the same time... NextClose156 at the left and 155 at the right.
+
+--- 帖子 #558 ---
+hum... started 15 min ago... I think the TimeFilter is working although I had turned it off!
+
+--- 帖子 #559 ---
+anyone got trades on EUR/USD so far?
+
+--- 帖子 #560 ---
+GBPUSD H1 1 trade closed (profit) 1 trade open (losing untill now)
+
+--- 帖子 #561 ---
+Yes
+
+--- 帖子 #562 ---
+Would you mind sharing your sets with us? Regards Doc
+
+--- 帖子 #563 ---
+For v15 only . Lots=10.00000000 UseMoneyManagement=0 RiskFactor=0.05000000 MAGIC_NUM=34777 Stop=10 Trail=5 TakeProfit=10 UseFixedTP=1 TrailFractal=0 ContinuousMode=0 RiskReducer=20 ForceIndex=0.00000000 nn=----Neural Network Settings----- MinMSE=0.00000250 SlidingWindow=32 Epochs=500 MaxEpochs=1200 tf=----TimeFiltering----- TimeFilter=0 CloseAfter=2 BeginHour=16 EndHour=5 Threshhold=8 Offset=2 AutoAdjustDigits=1 v16 doesnt work at all with Alpari (UK) demo, the only thing it did was create 342 losing trades in just over a week. As I stated before the method/EA seems to be very broker dependent for getting any type of profits. Scoobs
+
+--- 帖子 #564 ---
+Can someone post version 155?
+
+--- 帖子 #565 ---
+Here you go.
+
+--- 帖子 #566 ---
+Hi Scoobs I have on v15 useMoneyManagement =true UseFixedTP=true TrailFractal=false How to change it in to =0 thank you
+
+--- 帖子 #567 ---
+false=0 true=1 Scoobs
+
+--- 帖子 #568 ---
+Yea, this thing doesn't work... Don't use this EA...
+
+--- 帖子 #569 ---
+I presume from your chart screenshot that you are using it on 1HR TF and not using the time filter so just leaving it all day? When I use your settings on V15 on FxPro it goes mad and just opens position after position after position. That would be ok if it got the direction right more than it was wrong and/or the average winner was much higher than the average loser but, well it doesn't! The original intention was for the EA to work when the market was quiet and thus I presume there is a lack of impulsive moves in price. Thus from now on I'll run this during London lunch, NY lunch and over night after NY close and see what happens.
+
+--- 帖子 #570 ---
+I don´t know if someone had the same results today. Had a lot of sequential losses in a single candle resulting in a potencial huge loss. Any Ideas on how to avoid it? Presets are: Lots=1.00000000 UseMoneyManagement=0 RiskFactor=0.05000000 MAGIC_NUM=34777 Stop=10 Trail=5 TakeProfit=10 UseFixedTP=1 TrailFractal=0 ContinuousMode=0 RiskReducer=20 ForceIndex=0.00000000 nn=----Neural Network Settings----- MinMSE=0.00000250 SlidingWindow=32 Epochs=500 MaxEpochs=1200 tf=----TimeFiltering----- TimeFilter=0 CloseAfter=2 BeginHour=16 EndHour=5 Threshhold=8 Offset=2 AutoAdjustDigits=1
+
+--- 帖子 #571 ---
+Don't worry. In time this thread will be relegated to the dustbin of FF when the next shiny bauble presents itself.
+
+--- 帖子 #572 ---
+does this system still works
+
+--- 帖子 #573 ---
+anybody?
+
+--- 帖子 #574 ---
+Hi Scoobs I did as you said but EA 155 didn't give any trade . what is the problem? can some one help me please?
+
+--- 帖子 #575 ---
+If you interested in following my trading results for this System please feel free to join my facebook page i´ve setted up publishing them to the wild. http://www.facebook.com/pages/Trade-...34082949945295 I am trading these settings: Pairs: EUR/USD MM: Off Lot Size: 0.01 Hours: 17-1 (GMt 0) Everything else by default, trading this with IBFX (fully automated, running MT4 on a VPS)
+
+--- 帖子 #576 ---
+@lddd: which timeframe are you trading and which version are you using - 155 or 156? Can you please post your complete settings for the EA too? I would much appreciate it. Thanks a lot.
+
+--- 帖子 #577 ---
+Thanks for posting. But i found the is a gap between +9.7 pips to -10.6 pips
+
+--- 帖子 #578 ---
+Results for 06/07/2010 | EUR/USD (M30) Statement http://www.geilo.in/fx/statement0607.jpg
+
+--- 帖子 #579 ---
+Well i´ve started the last day. And i am trading on the following settings (actually standart instead of few) General: Pairs: Only EUR/USD for the moment TimeFrame: 30M NextClose Version: v156 Settings for NextClose: (my.set) Inserted Code Lots=0.01000000 UseMoneyManagement=0 RiskFactor=0.2000000 MAGIC_NUM=34777 Stop=140 Trail=15 TakeProfit=10 UseFixedTP= True TrailFractal= False ContinuousMode= False RiskReducer=2 Epochs = 380 MaxEpochs = 1200 ForceIndex = 5.5 TradeOnSunday = False MinMSE=0.0000025 TimeFilter = True SlidingWindow=32 CloseAfter=2 BeginHour=18 EndHour=5 Threshhold=8 Offset=2 AutoAdjustDigits= True Hope that helps!
+
+--- 帖子 #580 ---
+Hi all! see this result, according to scooby's settings, and version 155, alpari uk. It was placing trades many on one candle, I thought it was supposed to predict the close of the bar and so the trade should be one per candle. Anyway I am not complaining with what it did, if it continues this way... kos
+
+--- 帖子 #581 ---
+Yup. I didn´t catch on all of this system too so far. Some things are still strange to me. Well, at least its seems to work now. Had a lot of trouble attaching it to a chart until it finally triggered any trades. I would like to know more about the backgrounds of this system like Explaining how the neural network works with some more detailed informations on it (it´s quite new to me) ? Explaining what timeframe is best for trading it. ? How long got this system tested? Backtests/Forward Tests? If anyone´s trading this live allready i would be interested in for how long and what you got in performance.
+
+--- 帖子 #582 ---
+And how you avoid "overtraining" the neural network @neuro?. Even if you have contant profits, market conditions will change and signals instantly triggered then are start generating constant loss :/
+
+--- 帖子 #583 ---
+You should read this article and then put NEXTCLOSE in the bin. http://www.forexfactory.com/showthread.php?t=9805
+
+--- 帖子 #584 ---
+what you mean with putting it in the bin? Aren´t you trading NextClose by your self? Whats your conclusion?
+
+--- 帖子 #585 ---
+My conclusion is that it doesnt work and certainly wont work on a LIVE account.
+
+--- 帖子 #586 ---
+well, why you pointed to this thread then? did you read it your sellf? i think there is no automated system that will generate constant profits when you don´t have any idea of howto manage your risk/money.
+
+--- 帖子 #587 ---
+for installer this system i put file nextclose 156.ex4 in my folder expert on metatrade ??? It's ok?
+
+--- 帖子 #588 ---
+no you have to put it in the bin, ask scooby
+
+--- 帖子 #589 ---
+The article doesn't say NNs and AI don't work. It says that they're not magic, not absolutely precise and not a replacement for TA. Here's my take on the article and NNs in general. If patterns exist that have a statistical edge, the NNs are good at finding them. That's all. Much depends on the input to the NN. Don't forget the old computer science acronym GIGO. Regarding the NextClose EA, I have my doubts that it has an edge. I'm planning on doing some science experiments in the next few weeks to see if it actually does. The core concept of NextClose is to feed the last 16 normalized bar close prices into the NN and out comes a normalized prediction of the next close price. I'm not sure this is a reasonable NN approach, hence the science experiments. A NN would be very good at finding candlestick patterns with an edge. These 2 links have very good info on the probabilities for various candlestick patterns: http://thepatternsite.com/CandleContinue.html http://thepatternsite.com/CandleReverse.html These "top 10" candlestick patterns have high probabilities for daily stock prices. Do these patterns apply to M15 bars on EURUSD? Maybe, maybe not. But *some* patterns probably *do* apply. You could do normal statistical studies to find these patterns, or you could use a NN to find them. It's straightforward to program a NN to find these patterns and give a useful output. The beauty of a NN is it's constantly adapting to changing conditions. So as some patterns "stop working", others may become more statistically significant. The NN can adapt to this. Could you just do normal statistical studies periodically to adapt your system to changing conditions? Of course. But NNs provide another way to accomplish the same thing, that's all.
+
+--- 帖子 #590 ---
+well thats exactly what i think. a NN driven system is no money making mashine like every other system isn´t too. Otherwise we all would be rich and banks doesn´t had to employ traders anymore. I also think it still needs adapt changing market conditions. Even if NextClose would make a contant profit it could fail some day, so you have to watch it and work on it like you have to struggle with all in life, nothing is for free. you have to use your brain too, at least a little bit
+
+--- 帖子 #591 ---
+Here's something else to consider regarding the NextClose EA: The initial SL is 140 pips away. Everyone's been fixated on the NN implementation of the EA, but this 140 pip SL always bothered me. Most of the time, the profit is taken about 10 or 20 pips from the open. Much of this EA's high probability comes from the simple fact that the risk:reward is about 10:1. I'll bet if you took random entries with a 10:1 SL:TP you'd have a 90% system too. Of course, you'll occasionally hit that 140 pip loss. If the system doesn't have an edge, you'll gradually lose money over time even though the system has a 90% hit rate.
+
+--- 帖子 #592 ---
+stevegee are you using the defaults on sl/tp ?
+
+--- 帖子 #593 ---
+I'm using default settings on an IBFX 5 digit demo account.
+
+--- 帖子 #594 ---
+kewl, same as here. for how long you trading it allready?
+
+--- 帖子 #595 ---
+First trade was 2010.07.01, so it's been 1 week. Here are the basic stats: 14 trades 12 winners, 2 losers (86% win) Average win: $8.66 Average loss: -$11.49 Largest win: $17.00 Largest loss: -$19.00 Net profit: $80.96
+
+--- 帖子 #596 ---
+loel, what pair/timeframe you trading? I am trading it on EUR/USD (M30) for not even 8 hours, so 1 day and allready had 42 trades triggered...
+
+--- 帖子 #597 ---
+Timeframe H1, EURUSD. One quirk about neural networks is that they don't all train the same, even with the same training data set. The reason is that the neurons have to be initialized to randomized values. So the initial state of the NN isn't going to be the same for you and me. It's not deterministic and *will* affect performance.
+
+--- 帖子 #598 ---
+oh kay understand. thanks for that information. And why trading H1. Is this cause of your prefared trading style or are you expecting better performance on a longer timeframe, could you explain?
+
+--- 帖子 #599 ---
+My backtesting had better results on H1 than on M30.
+
+--- 帖子 #600 ---
+ok, thanks.
+
+--- 帖子 #601 ---
+What is your neural network training period?
+
+--- 帖子 #602 ---
+I HAVE 155ea ON MY CHART BUT THE WAS NO TRADE . I USE INTERBANKFX CAN YOU HELP ME , PLEASE ?
+
+--- 帖子 #603 ---
+Hm, so far it looks like the following: (EUR/USD, M30) Average Win: 1.39 pips / $0.14 Average Loss : -13.32 pips / -$1.33 Total Trades Won: 88 (81%) Total Trades Lost: 17 (19%) Average loss trades are much higher instead of winning ones! BTW: Since the last trading day i got a new line written on my chart saying: Reducing TP by 2 Could someone explain it to me?
+
+--- 帖子 #604 ---
+I actually wonder what this thing is doing at all with the TP? I use the Moneymanagement and FixedTP and have set it to 5 pips. Still it sets the TP to the red-line it displayed before where it supposes the price is going to. Which is almost 20 pips away. I can´t get the EA to set the TP to 5 like I want it. Did anyone else notice that? Also it sometimes doesn´t set my stop loss of 8 pips. It let´s the trade run for a few minutes and then eventually sets it to 8 pips, but sometimes not. Really strange. And what are to RiskAdjuster values and the other undocumented ones?
+
+--- 帖子 #605 ---
+Yeah, got similar problems over here with TP/SL, Risk and so on. Would be nice to get some deeper documentation from Neuro about that.
+
+--- 帖子 #606 ---
+So, i give my voice for some more detailed instructions and notes in general regarding this EA. With all these people asking questions and giving there "best" settings and different versions there´re using i got into disorder. Think i will probably speak for most of the guys around following this thread and seeing capability about NextClose.
+
+--- 帖子 #607 ---
+Should be nice if the owner of the post could clarify our minds a little more...
+
+--- 帖子 #608 ---
+It would be nice except the OP got himself banned LOL.
+
+--- 帖子 #609 ---
+ahahaha, lol...
+
+--- 帖子 #611 ---
+well i am in again, and it looks like the third day loss till now
+
+--- 帖子 #612 ---
+08/07/2010 EUR/USD (M30) Still no good performance Closed P/L: -10.04 Inserted Code 177055858 2010.07.08 00:05 sell 0.01 eurusd 1.26351 1.26510 1.26316 2010.07.08 00:11 1.26510 0.00 0.00 0.00 -1.59 177056308 2010.07.08 00:12 sell 0.01 eurusd 1.26490 1.26643 1.26464 2010.07.08 00:32 1.26643 0.00 0.00 0.00 -1.53 177057067 2010.07.08 00:32 sell 0.01 eurusd 1.26626 1.26581 1.26464 2010.07.08 00:34 1.26581 0.00 0.00 0.00 0.45 177057176 2010.07.08 00:34 sell 0.01 eurusd 1.26567 1.26557 1.26464 2010.07.08 00:55 1.26557 0.00 0.00 0.00 0.10 177057844 2010.07.08 00:55 sell 0.01 eurusd 1.26542 1.26540 1.26464 2010.07.08 00:58 1.26540 0.00 0.00 0.00 0.02 177057898 2010.07.08 00:58 sell 0.01 eurusd 1.26523 1.26515 1.26464 2010.07.08 00:58 1.26515 0.00 0.00 0.00 0.08 177057919 2010.07.08 00:59 sell 0.01 eurusd 1.26500 1.26491 1.26464 2010.07.08 01:00 1.26491 0.00 0.00 0.00 0.09 177057998 2010.07.08 01:00 sell 0.01 eurusd 1.26473 1.26632 1.26462 2010.07.08 01:08 1.26462 0.00 0.00 0.00 0.11 177058152 2010.07.08 01:08 buy 0.01 eurusd 1.26451 1.26297 1.26462 2010.07.08 01:14 1.26462 0.00 0.00 0.00 0.11 177058298 2010.07.08 01:14 sell 0.01 eurusd 1.26471 1.26628 1.26462 2010.07.08 01:15 1.26462 0.00 0.00 0.00 0.09 177058358 2010.07.08 01:16 sell 0.01 eurusd 1.26473 1.26628 1.26462 2010.07.08 01:30 1.26628 0.00 0.00 0.00 -1.55 177058840 2010.07.08 01:30 sell 0.01 eurusd 1.26617 1.26774 1.26454 2010.07.08 01:31 1.26774 0.00 0.00 0.00 -1.57 177059076 2010.07.08 01:31 sell 0.01 eurusd 1.26765 1.26744 1.26492 2010.07.08 01:39 1.26744 0.00 0.00 0.00 0.21 177059765 2010.07.08 01:39 sell 0.01 eurusd 1.26723 1.26713 1.26454 2010.07.08 01:43 1.26713 0.00 0.00 0.00 0.10 177059932 2010.07.08 01:43 sell 0.01 eurusd 1.26701 1.26678 1.26454 2010.07.08 01:51 1.26678 0.00 0.00 0.00 0.23 177060147 2010.07.08 01:51 sell 0.01 eurusd 1.26656 1.26655 1.26480 2010.07.08 02:28 1.26655 0.00 0.00 0.00 0.01 177061094 2010.07.08 02:28 sell 0.01 eurusd 1.26635 1.26630 1.26480 2010.07.08 02:30 1.26630 0.00 0.00 0.00 0.05 177061126 2010.07.08 02:30 sell 0.01 eurusd 1.26616 1.26613 1.26457 2010.07.08 03:12 1.26613 0.00 0.00 0.00 0.03 177061844 2010.07.08 03:12 sell 0.01 eurusd 1.26597 1.26595 1.26453 2010.07.08 03:26 1.26595 0.00 0.00 0.00 0.02 177062094 2010.07.08 03:26 sell 0.01 eurusd 1.26580 1.26569 1.26453 2010.07.08 03:28 1.26569 0.00 0.00 0.00 0.11 177062160 2010.07.08 03:29 sell 0.01 eurusd 1.26551 1.26535 1.26453 2010.07.08 03:52 1.26535 0.00 0.00 0.00 0.16 177062528 2010.07.08 03:52 sell 0.01 eurusd 1.26514 1.26508 1.26448 2010.07.08 05:08 1.26508 0.00 0.00 0.00 0.06 177086300 2010.07.08 16:59 sell 0.01 eurusd 1.26556 1.26556 1.26443 2010.07.08 17:00 1.26556 0.00 0.00 0.00 0.00 177086334 2010.07.08 17:00 sell 0.01 eurusd 1.26541 1.26698 1.26422 2010.07.08 17:15 1.26698 0.00 0.00 0.00 -1.57 177086919 2010.07.08 17:15 sell 0.01 eurusd 1.26682 1.26680 1.26469 2010.07.08 18:16 1.26680 0.00 0.00 0.00 0.02 177088324 2010.07.08 18:16 sell 0.01 eurusd 1.26666 1.26823 1.26469 2010.07.08 19:32 1.26823 0.00 0.00 0.00 -1.57 177090686 2010.07.08 19:32 sell 0.01 eurusd 1.26808 1.26964 1.26584 2010.07.08 19:44 1.26964 0.00 0.00 0.00 -1.56 177091720 2010.07.08 19:44 sell 0.01 eurusd 1.26958 1.26950 1.26726 2010.07.08 19:46 1.26950 0.00 0.00 0.00 0.08 177092012 2010.07.08 19:46 sell 0.01 eurusd 1.26931 1.26908 1.26699 2010.07.08 19:55 1.26908 0.00 0.00 0.00 0.23 177093100 2010.07.08 19:55 sell 0.01 eurusd 1.26896 1.27051 1.26664 2010.07.08 20:01 1.27051 0.00 0.00 0.00 -1.55 177093499 2010.07.08 20:01 sell 0.01 eurusd 1.27038 1.27015 1.26821 2010.07.08 20:16 1.27015 0.00 0.00 0.00 0.23 177094065 2010.07.08 20:16 sell 0.01 eurusd 1.27009 1.26988 1.26788 2010.07.08 20:31 1.26988 0.00 0.00 0.00 0.21 177094330 2010.07.08 20:31 sell 0.01 eurusd 1.26966 1.26953 1.26745 2010.07.08 21:10 1.26953 0.00 0.00 0.00 0.13 177094916 2010.07.08 21:10 sell 0.01 eurusd 1.26935 1.26868 1.26737 2010.07.08 21:58 1.26868 0.00 0.00 0.00 0.67
+
+--- 帖子 #613 ---
+Seems nobody is following this thread anymore? After 2 weeks of letting it run i have to say NextClose doesn´t performs like mentioned by the author. Have a look at the following, Setup: EUR/USD, GPD/USD 1H (standart settings). http://www.flinq.net/screen.jpg
+
+--- 帖子 #614 ---
+My state for today: Inserted Code 81401665 2010.07.22 17:59 sell 0.10 gbpusd 1.52733 1.52726 1.52652 2010.07.22 18:28 1.52656 0.00 0.00 0.00 7.70 34770 NEXTCLOSE-V15-15 81406111 2010.07.22 18:45 buy 0.10 eurusd 1.28985 1.29003 1.29094 2010.07.22 19:45 1.29061 0.00 0.00 0.00 7.60 34777 NEXTCLOSE-V15-15 81281832 2010.07.21 20:02 buy 0.10 audusd 0.88256 0.86826 0.88531 2010.07.22 11:38 0.88531 0.00 0.00 1.86 27.50 34779 NEXTCLOSE-V15-15[tp] 81281868 2010.07.21 20:02 sell 0.10 usdcad 1.04299 1.05729 1.04532 2010.07.22 09:45 1.04532 0.00 0.00 -0.11 -22.29 34778 NEXTCLOSE-V15-15[tp] 81298481 2010.07.21 22:31 buy 0.10 eurusd 1.27672 1.26255 1.28088 2010.07.22 09:55 1.28088 0.00 0.00 -0.21 41.60 34777 NEXTCLOSE-V15-15[tp] 81298549 2010.07.21 22:33 buy 0.10 gbpusd 1.51721 1.50293 1.52114 2010.07.22 10:00 1.52114 0.00 0.00 -0.06 39.30 34770 NEXTCLOSE-V15-15[tp] 81402295 2010.07.22 18:02 buy 0.10 eurusd 1.28985 1.28986 1.29030 2010.07.22 18:16 1.29030 0.00 0.00 0.00 4.50 34777 NEXTCLOSE-V15-15[tp] 81404670 2010.07.22 18:28 sell 0.10 audusd 0.89338 0.90754 0.89294 2010.07.22 19:48 0.89294 0.00 0.00 0.00 4.40 34779 NEXTCLOSE-V15-15[tp] 81404702 2010.07.22 18:28 buy 0.10 gbpusd 1.52656 1.51231 1.52724 2010.07.22 19:23 1.52724 0.00 0.00 0.00 6.80 34770 NEXTCLOSE-V15-15[tp] 81409653 2010.07.22 19:30 buy 0.10 gbpusd 1.52669 1.51243 1.52730 2010.07.22 21:15 1.52730 0.00 0.00 0.00 6.10 34770 NEXTCLOSE-V15-15[tp] 81410789 2010.07.22 19:45 sell 0.10 eurusd 1.29053 1.29041 1.28967 2010.07.22 20:36 1.28967 0.00 0.00 0.00 8.60 34777 NEXTCLOSE-V15-15[tp] 81410988 2010.07.22 19:48 buy 0.10 audusd 0.89281 0.89293 0.89368 2010.07.22 20:00 0.89368 0.00 0.00 0.00 8.70 34779 NEXTCLOSE-V15-15[tp] 81411033 2010.07.22 19:49 sell 0.10 usdcad 1.03808 1.05236 1.03727 2010.07.22 20:05 1.03727 0.00 0.00 0.00 7.81 34778 NEXTCLOSE-V15-15[tp] 81414883 2010.07.22 20:37 buy 0.10 audusd 0.89347 0.87917 0.89384 2010.07.22 21:04 0.89384 0.00 0.00 0.00 3.70 34779 NEXTCLOSE-V15-15[tp] 81415021 2010.07.22 20:38 buy 0.10 eurusd 1.28845 1.28858 1.28929 2010.07.22 20:59 1.28929 0.00 0.00 0.00 8.40 34777 NEXTCLOSE-V15-15[tp] 81414446 2010.07.22 20:32 sell 0.10 eurusd 1.28969 1.28909 1.27969 2010.07.22 20:37 1.28909 0.00 0.00 0.00 6.00 For better performance it should be rewritten on MQL5 and analyze another currencies, I think.
+
+--- 帖子 #615 ---
+well, i took TimeFilter off now...
+
+--- 帖子 #616 ---
+i'v used many many times on demo account many losses, but it looks as though the ea has ran out of steam.
+
+--- 帖子 #617 ---
+Is anybody using this EA still?
+
+--- 帖子 #618 ---
+Nope.
+
+--- 帖子 #619 ---
+Any reason why? I am using it..gives nice results... Did you use it?
+
+--- 帖子 #620 ---
+I have V15 on a demo for 3 weeks now, gives positive results. I have no idea what most of the settings mean, all i changed is the timefilter to trade the London/NY. I put it on a microlot live account with Alpari UK, see what happens.
+
+--- 帖子 #621 ---
+v15 is the one which can be downloaded from the first post of the thread right? if not could you please share it? I am using the version from the first post, but I use the EA without timefilter, since sometime it causes orders to close in minus due the given time, and I use only after NY session starting from 1900 GMT
+
+--- 帖子 #622 ---
+The early version did show a lot of promise, would be nice to just get the bugs out of it rather than the modification that where made after that.
+
+--- 帖子 #623 ---
+Could you please share the first version? Thanks
+
+--- 帖子 #624 ---
+NextClose Versions eTrader,
+
+--- 帖子 #625 ---
+Thanks A lot!
+
+--- 帖子 #626 ---
+i download the nextclose-v14.exp how do i make some change in the code or customized it ? to test it i need the code.mq4 do i miss something ?
+
+--- 帖子 #627 ---
+please i have this thread read, what is the risk for this ea? waht is the experience? best regards vienna
+
+--- 帖子 #628 ---
+I came to the conclusion that this EA and the core concept it was based on did not work. Others in this thread claimed it was a money machine. You'll have to test it for yourself for a few weeks and make your own determination.
+
+--- 帖子 #629 ---
+hello programmers, where I present to you a GMT time - I have in real 13 GMT time - the ea have 11 GMT time , please help me, best regards vienna
+
+--- 帖子 #630 ---
+i can not see the next_close.mq4
+
+--- 帖子 #631 ---
+He never supplied the .mq4. But dont waste your time, it doesnt work. Scoobs.
+
+--- 帖子 #632 ---
+eat alone ... die alone !!! this is the reason it does is not work . if only the idea was shared ,it would be ok . we dont need the letters of the code. most of us can improve something better if the idea has another point of view . am i right scooby doo ?? roff ... roof ... grrrr
+
+--- 帖子 #633 ---
+Good evening these forums beginner so with Forex scalping, so that coinvolge.Ho I read and reread the post, but sorry for my harshness, I could not enter in my MT platform ActivTrades the program here in the thread shows. Kindly if you wanted to sum up all in a dedicated post, would be welcome The expectation and the hope of aid, greetings and thanks "We were not FACTS FOR live as brutes, but to learn FLOOR PLAN"
+
+--- 帖子 #634 ---
+Hello Forum. Recently I started with the trading here is very nice and helpful for me and for all. Well done. Let me ask: is it possible to have a summary of the latest applications of this system 1 minute scalping trade. I have read all the thread page by page translating from English into Italian, I understood enough but I am very confused. I hope it is possible, however I will always follow
+
+--- 帖子 #635 ---
+Hi DearLink of dll has been expired can you please share itthanks
+
+--- 帖子 #636 ---
+Hi.. Can anyone share Fann2MQL.dll Link in 1 page has been remove.. Thanks in advance
+
+--- 帖子 #637 ---
+if you can help me with this Neural Network
+
+--- 帖子 #638 ---
+Hi can you send a set file
+
+--- 帖子 #639 ---
+can someone send me the Fann2MQL.dll
+
+--- 帖子 #640 ---
+2015.11.04 15:49:33.905 Moving Average EURUSD.,M1: unresolved import function call 2015.11.04 15:49:33.905 Cannot call 'Fann2MQL.dll::f2M_create_standard', 'Fann2MQL.dll' is not loaded Anyone else getting this error? I've tried like 5 different versions of the .dll but all result in the same thing.
+
+--- 帖子 #225 ---
+Here you go:
+
+--- 帖子 #226 ---
+2015.11.04 16:24:19.342 NextClose-V15_6 GBPUSD.,M1: cannot load library 'Fann2MQL.dll' (error 126) Still getting this error, installed the runtime libraries and everything. Any figure out a solution for this?
+
+--- 帖子 #227 ---
+I got it working, but now in backtests I'm seeing trades being opened using a TP the same as the open price resulting in just $0.00 profit. What am I missing here? I've adjusted the TP, tried using fixedTP on and off but no affect.
+
+--- 帖子 #228 ---
+tanx
+
+--- 帖子 #229 ---
+Hello friends. After a long time we try to reopen this thread of neural networks, with artificial intelligence http://e.informer.com/fann2mql.wordpress.com/download 32 bit: Fann2MQL.0.2.0.msi This library that does not work downloaded from the zip file made in 2015, must run it (it has no virus, so far), and is installed on the computer. The Ea works without problems, we would have to work it to obtain profitability, and optimize it, I leave them to the whole community.
+
+--- 帖子 #230 ---
+@farmabioq Could you explain what each of these settings does? usefixedTP TrailFractal Continousmode riskreducer epochs maxepoch forceindex minMSE slidingwindow threshold offset
+
+--- 帖子 #231 ---
+farmabioq do you have any recent testing to share with the EA? blam
+
+
+===== 附件下载链接 =====
+

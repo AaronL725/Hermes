@@ -1,0 +1,419 @@
+TEND CATCHING SYSTEM FOR MT5--
+===============================
+
+creating gradient moving average ribbon with gradient moving average indicator- moving _averages
+
+settings- moving average period(length) - starting from 13 ema - end at 50 ema
+        - applied price-close
+        -moving average method- exponential
+        - fast up color- lime
+        -fast down color- deep pink
+        - angle threshhold for color steps- 5
+________________________________________________________________________________________
+
+ATR adaptive JMA--jma period-14, jma phase-0
+-----------------------------------------------------
+color macd candles-12,16
+----------------------------------------
+s----------------------------------------------------------------------------------------
+color stlm histogram settings as it is-
+
+=================================================================================================
+
+1)  chart window system settings-
+-------------------------------------------------------
+Ema variation ribbon-- two ribbon overlap as follow
+--------------------------------------------------
+first ribbon- settings-
+           
+            - period-20, fast speed-2.5, slow speed-1
+            -- colors- ribbon- turquoise and orange rest as it is
+
+second ribbon- (overlap with this settings)-
+
+            -period-13, fast speed-2.5, slow speed-1.8
+            - colors- ribbon- blue and red rest as it is
+------------------------------------------------------------------
+
+
+2)  separate window system settings-
+-------------------------------------------------------
+Ema variation ribbon-- two ribbon overlap as follow
+--------------------------------------------------
+first ribbon- settings-
+           
+            - period-20, fast speed-2.5, slow speed-1
+            -- colors- ribbon- turquoise and orange rest as it is
+
+second ribbon- (overlap with this settings)-
+
+            -period-13, fast speed-2.5, slow speed-1.8
+            - colors- ribbon- blue and red rest as it is
+
+ATR adaptive JMA--jma period-14, jma phase-0
+
+MACDCandleTrend-- Overlap it in both chart and separate window with default settings.
+===================================================================================
+macd_of_qwma--20,50,14 ,,speed= 0.5
+--------------------------------------
+
+leader of macd - default settings-
+--------------------------------------------------------
+AverageDailyRange MT5-- ADRPeriod=30, that will calculate average of adrs of last 30 days
+
+
+t3_velocity_2--  
+
+t3 velocity calculation period-20
+t3 hot value-1
+t3 original tillson calculation- false
+colors normalization period- 13
+color steps for drawing-20
+
+scale settings- fixed minimum =  -1.00300102, fixed maximum - 1.300103
+
+_________________________________________________________________________________________
+
+
+multiple time frame analysis in single chart-- in mt5
+
+ma_-_ribbon_2_2== settings
+
+ten copies of it as per below settings-
+
+1) fast time frame- 1 hour
+   fast ma period-48
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 hour
+   slow ma period -50
+   slow ma method- exponential moving average
+   slow ma price- close
+
+    colors - ma ribbon- lime and red, line width-1
+
+2)  fast time frame- 2 hour
+   fast ma period-13
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 2 hour
+   slow ma period -13
+   slow ma method- exponential moving average
+   slow ma price- close
+
+    colors - ma ribbon- aqua and tomato, line width-1
+
+3) fast time frame- 4 hour
+   fast ma period- 13
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 hour
+   slow ma period -13
+   slow ma method- exponential moving average
+   slow ma price- close
+
+    colors - ma ribbon- ornge and aqua, line width-1
+4)  fast time frame- 1 day
+   fast ma period- 11
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 day
+   slow ma period -13
+   slow ma method- exponential moving average
+   slow ma price- close
+
+    colors - ma ribbon- deep pink and sea green, line width-5
+
+5) fast time frame- 8 hour
+   fast ma period- 13
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 day
+   slow ma period -13
+   slow ma method- exponential moving average
+   slow ma price- close
+
+    colors - ma ribbon- light blue and light salmon, line width-1
+
+6)  fast time frame- 1 week
+   fast ma period- 13
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 week
+   slow ma period - 13
+   slow ma method- exponential moving average
+   slow ma price- close
+
+    colors - ma ribbon- lime green and orange, line width-1
+
+7) fast time frame- 1 month
+   fast ma period- 13
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 month
+   slow ma period - 13
+   slow ma method- exponential moving average
+   slow ma price- close
+
+    colors - ma ribbon- lime green and orange, line width-1
+
+8) fast time frame- 1 day
+   fast ma period-200
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 day
+   slow ma period -198
+   slow ma method- exponential moving average
+   slow ma price- close
+
+   color- ma ribbon- lime green and orange ,line width-1
+
+9)  fast time frame- 1 day
+   fast ma period-48
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 1 day
+   slow ma period -50
+   slow ma method- exponential moving average
+   slow ma price- close
+
+   color- ma ribbon- blue and red, line width-1
+
+10)  fast time frame- 4 hours
+   fast ma period-48
+   fast ma method- exponential moving average
+   fast ma price- close
+   slow time frame- 4 hours
+   slow ma period -50
+   slow ma method- exponential moving average
+   slow ma price- close
+
+   color- ma ribbon- lime green and orange, line width-1
+___________________________________________________________________________
+
+
+ATRStops_v1_Candle-
+
+settings- 
+
+Length=1
+ATRPeriod=7
+Kv=2.2
+Shift=0
+-------------------------------------------------------
+
+ptl indicator-  
+
+fast length-3
+slow length-7
+
+_______________________________
+
+tape macd mt5-  12,26,9
+-----------------------------------
+leader of macd -12,26,9
+______________________________________
+
+XXDPO candle alert indicator-  
+
+value-settings as below
+
+T3
+21
+15
+JJMA
+17
+100
+0
+10
+0.6
+-0.6
+1
+true
+2
+false 
+false
+false
+___________________________________________________
+
+3DMA-indicator-
+
+with max period ma between 193 to 200 and step ma =1, if you load it on h1 chart that shows heatmap of moving averages of all timeframes from h1 to till D1 (till nearly 13 ema D1 on chart as heatmap) (matching nearly ,all short term swing moving averages of all inbetween timeframes ) timeframes ,
+moving averages as heatmap on chart, helps to see where likely move will be looking at heatmap,
+
+what else is needed is to draw a trendline , and wait for trendline to break with heatmap in our favour in all timeframes.
+
+
+------------------------------------------------------------------
+
+MTF MCP PRICE MA DIFFERENCE 1---
+
+MA period-13, ma method- exponential, 
+
+----------------------------
+
+rsi overview indicator-
+
+rsi period -14
+sma rsi period-5
+rsi overbought 70
+rsi oversold-30
+
+--------------------------
+
+sky scraper fix- (all skyscrapper indicators)settings
+
+13
+0.9
+0
+close 
+
+
+upgrades pending on 29-3-19 !!!!!
+
+
+
+____________________________________________________________________________________
+srjs filled with gradient colors mt5--
+
+
+step-1
+----------
+load multiple copies of moving _averages  indicator with following settings to create gradient colored heatmap ribbon on chart
+
+ moving average period (length)  from 50 to 13 with- angle threshold for color steps from 38-1(i.e 50 ema-angle threshold-38, 49 ema- angle threshold-37,48 ema- angle threshold-36,.................,  13 ema- angle threshold-1)( in this descending sequence)
+
+applied price - close
+moving average method- exponential
+fast up color- lime
+fast down color- red  
+
+color settings -- moving average width-5
+
+step -2
+--------
+over above ribbon apply
+
+
+load multiple copies of moving _averages  indicator with following settings
+
+moving average from 12 to 5 ema with angle threshold for color steps-5 for all averages
+
+applied price - close
+moving average method- exponential
+fast up color- lime
+fast down color- red  
+
+color settings -- moving average width-5
+
+
+
+
+
+step -3
+-----------
+
+over above settings apply
+
+ma_-_ribbon_2_2 indicator with following settings-
+
+fast time frame- current
+fast ma period-5
+fast ma method- exponential
+fast ma price- close
+slow time frame- current
+slow ma period- 13
+slow ma method- exponential
+slow ma price- close
+
+color setting 
+
+ma ribbon-- slate grey and dark slate blue
+-----------------------------------------------------------------------------------------------
+visualising transition zones-  do following color changes for step 3- in ma_-_ribbon_2_2 indicator
+
+color setting
+ma ribbon-- lime and red (no need to change anything else in above description)
+
+----------------------------------------------------------------------------
+
+note ----color settings and line width of moving average settings are important to get desired results as is seen in attached images
+
+__________________________________________________________________________________________
+_____________________________________________________________________________
+ribbon of moving average with
+ma_-_ribbon_2_21.00  indicator
+
+overlap two copies with following settings-
+
+1st copy with settigs-
+  exponential moving averages 13 and 200 of current time frame with color setting - teal and medium violet red
+
+overlap on it 2nd copy with settings-
+
+  exponential moving average 13 and 50 of current time frame with color setting- lime green  and deep pink
+
+
+overlap on it 3rdd copy with settings-
+
+  exponential moving average 5 and 13 of current time frame with color setting- aqua and magenta
+
+____________________________________________________________________________________________________________
+
+true gradient colored moving average ribbon for templet --! gradient ma ribbon dark black best 1 true gradient ribbon
+
+
+using indicator - moving_averages(gradient colored moving average
+
+load multiple copies of moving_averages indicator  from moving average 200 ema to 21 ema with angle threshold for color steps=5 , color up- lime , color down- red, and color line thickness=5
+
+load multiple copies of moving_averages indicator  from moving average 20 ema to 17 ema with angle threshold for color steps=5 , color up- lime , color down- red, and color line thickness=5
+
+load multiple copies of moving_averages indicator  from moving average 17 ema to 13 ema with angle threshold for color steps= from 5 to 1(i.e-  17 ema-angle threshold-5, 16 ema-4, 15 ema-3, 14 ema-2, 13 ema-1) , color up- lime , color down- red, and color line thickness=5
+
+this will form gradient ribbon of ema (exponential moving average ) generating on chart heatmap of averages,
+---------------------------------------------------------------------------
+
+over this ribbon load one copy of indicator ma_-_ribbon_2_2 with following setting
+
+ema 5 and ema 13 ribbon with current time frame settings ,, with color up- lime , color down- red, and color line thickness=5
+_______________________________________________________________________________________________________
+
+
+_________________________________________________________________________________
+
+
+
+dema macd zones alerts 2.01
+
+green--7,71,49
+
+red- 85,22,17
+
+max value-20000 to show on all symbols
+______________________________________________________
+
+squeezed one more average--
+
+averaging period- 50
+applied price-close
+speed- 3
+should it be adaptive -true
+
+----------------------------
+
+normalised macd of averages--
+
+settings
+
+macd fast period-5
+macd slow period-26
+average method- linear weighted
+price - close
+normalization period-1
+--------------------------------------------------------
+
+MA Cross 3MACross Alert WarnSig-
+
+13,14 and 50 ema
+--------------------

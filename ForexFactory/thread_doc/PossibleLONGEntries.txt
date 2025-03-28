@@ -1,0 +1,194 @@
+For the TF-group M5 ( I call it TimeFrameLevel1) this are about 8 hours.
+
+
+
+
+A side product of it might be quite interesting: it shows for every minute the exact state of Risk over the 8 hours TF-group M5 ( I call it TimeFrameLevel1)
+    
+I just copied the relevant Log where we got RISK 0
+
+
+
+Possible LONG EUR/USD ENTRY BETWEEN: 11:48 - 17:20 UTC TIME  - (GMT-TIME)  ::: Last_FilterTimeFrame_UTCDateTime is the start time of the last clossed FilterCandle
+
+Ignore in front the Time: this is the time when I calculated the stuff:
+
+
+
+
+#############################################################
+
+JUST for the First example when the Crosses happend: 
+
+LONG_OriginLine_crossed_above_23_6: 
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 11:48:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+      
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_OriginLine_crossed_below_76_4 !!! Pair: EUR/USD. Origin Line just crosses up above 23.6. OriginLine_previous: 23.1655473199 -> OriginLine_now: 36.5215288711
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_OriginLine_crossed_above_23_6 !!! Pair: EUR/USD. Origin Line just crosses up above 23.6. OriginLine_previous: 23.1655473199 -> OriginLine_now: 36.5215288711
+
+
+
+LONG_Stoch_Main_crossed_above_Stoch_HighFrame
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 11:58:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_crossed_below_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 57.5208913649. Stoch_Main_now: 64.6268656716 -> Stoch_HighFrame_now: 62.9012345679
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_crossed_above_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 57.5208913649. Stoch_Main_now: 64.6268656716 -> Stoch_HighFrame_now: 62.9012345679
+
+
+
+
+
+We got LONG_Risk: 0       
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 12:29:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+        
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 79.6987285793 --> above 76.4 or below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 79.6987285793 --> above 76.4 or below 23.6
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_OriginLine_crossed_below_76_4 !!! Pair: EUR/USD. OriginLine_now: 87.1093826163 at or above 76.4.
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_OriginLine_crossed_above_23_6 !!! Pair: EUR/USD. OriginLine_now: 87.1093826163 at or above 76.4.
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_below_80 !!! Pair: EUR/USD. Stoch_Main_now: 82.4579831933 -->  not below 80
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_above_20 !!! Pair: EUR/USD. Stoch_Main_now: 82.4579831933 -->  above 20
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_crossed_below_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main_now: 82.4579831933 at or above Stoch_HighFrame_now: 27.427184466
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_Stoch_Main_crossed_above_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main_now: 82.4579831933 at or above Stoch_HighFrame_now: 27.427184466
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Filter_below_23_6 !!! Pair: EUR/USD. Stoch_Filter_now: 80.8092198847 -->  not below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Filter_above_76_4 !!! Pair: EUR/USD. Stoch_Filter_now: 80.8092198847 -->  above 74.6
+        
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got SHORT_Risk: 4
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got LONG_Risk: 0
+
+
+
+#############################################################
+
+
+
+We got LONG_Risk: 0
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 14:29:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+        
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 81.5462962963 --> above 76.4 or below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 81.5462962963 --> above 76.4 or below 23.6
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> SHORT_OriginLine_crossed_below_76_4 !!! Pair: EUR/USD. OriginLine_now: 51.0078662734 between 23.6. and 76.4
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_OriginLine_crossed_above_23_6 !!! Pair: EUR/USD. OriginLine_now: 51.0078662734 between 23.6. and 76.4
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_Stoch_Main_below_80 !!! Pair: EUR/USD. Stoch_Main_now: 58.0383480826 -->  below 80
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_above_20 !!! Pair: EUR/USD. Stoch_Main_now: 58.0383480826 -->  above 20
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_crossed_below_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 50.6637168142. Stoch_Main_now: 58.0383480826 -> Stoch_HighFrame_now: 57.5208913649
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_crossed_above_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 50.6637168142. Stoch_Main_now: 58.0383480826 -> Stoch_HighFrame_now: 57.5208913649
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Filter_below_23_6 !!! Pair: EUR/USD. Stoch_Filter_now: 83.2064845802 -->  not below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Filter_above_76_4 !!! Pair: EUR/USD. Stoch_Filter_now: 83.2064845802 -->  above 74.6
+        
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got SHORT_Risk: 3
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got LONG_Risk: 0
+
+
+
+#############################################################
+
+We got LONG_Risk: 0    
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 14:39:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+        
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 87.2539320142 --> above 76.4 or below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 87.2539320142 --> above 76.4 or below 23.6
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> SHORT_OriginLine_crossed_below_76_4 !!! Pair: EUR/USD. OriginLine_now: 66.2560091531 between 23.6. and 76.4
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_OriginLine_crossed_above_23_6 !!! Pair: EUR/USD. OriginLine_now: 66.2560091531 between 23.6. and 76.4
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_below_80 !!! Pair: EUR/USD. Stoch_Main_now: 87.4110953058 -->  not below 80
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_above_20 !!! Pair: EUR/USD. Stoch_Main_now: 87.4110953058 -->  above 20
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_crossed_below_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 53.3185840708. Stoch_Main_now: 87.4110953058 -> Stoch_HighFrame_now: 57.5208913649
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_crossed_above_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 53.3185840708. Stoch_Main_now: 87.4110953058 -> Stoch_HighFrame_now: 57.5208913649
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Filter_below_23_6 !!! Pair: EUR/USD. Stoch_Filter_now: 85.7002615398 -->  not below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Filter_above_76_4 !!! Pair: EUR/USD. Stoch_Filter_now: 85.7002615398 -->  above 74.6
+        
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got SHORT_Risk: 4
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got LONG_Risk: 0
+
+
+
+#############################################################
+
+We got LONG_Risk: 0       
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 14:53:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+        
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 91.095890411 --> above 76.4 or below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 91.095890411 --> above 76.4 or below 23.6
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_OriginLine_crossed_below_76_4 !!! Pair: EUR/USD. OriginLine_now: 76.8847795164 at or above 76.4.
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_OriginLine_crossed_above_23_6 !!! Pair: EUR/USD. OriginLine_now: 76.8847795164 at or above 76.4.
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_Stoch_Main_below_80 !!! Pair: EUR/USD. Stoch_Main_now: 68.0654338549 -->  below 80
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_above_20 !!! Pair: EUR/USD. Stoch_Main_now: 68.0654338549 -->  above 20
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_crossed_below_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main_now: 68.0654338549 at or above Stoch_HighFrame_now: 64.6268656716
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_Stoch_Main_crossed_above_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main_now: 68.0654338549 at or above Stoch_HighFrame_now: 64.6268656716
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Filter_below_23_6 !!! Pair: EUR/USD. Stoch_Filter_now: 79.1674820613 -->  not below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Filter_above_76_4 !!! Pair: EUR/USD. Stoch_Filter_now: 79.1674820613 -->  above 74.6
+        
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got SHORT_Risk: 3
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got LONG_Risk: 0
+
+
+
+#############################################################
+
+We got LONG_Risk: 0  
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 15:02:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+        
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 91.4246575342 --> above 76.4 or below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 91.4246575342 --> above 76.4 or below 23.6
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_OriginLine_crossed_below_76_4 !!! Pair: EUR/USD. OriginLine_now: 77.7382645804 at or above 76.4.
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_OriginLine_crossed_above_23_6 !!! Pair: EUR/USD. OriginLine_now: 77.7382645804 at or above 76.4.
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_Stoch_Main_below_80 !!! Pair: EUR/USD. Stoch_Main_now: 74.7510668563 -->  below 80
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_above_20 !!! Pair: EUR/USD. Stoch_Main_now: 74.7510668563 -->  above 20
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_crossed_below_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main_now: 74.7510668563 at or above Stoch_HighFrame_now: 66.1194029851
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_Stoch_Main_crossed_above_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main_now: 74.7510668563 at or above Stoch_HighFrame_now: 66.1194029851
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Filter_below_23_6 !!! Pair: EUR/USD. Stoch_Filter_now: 80.9833839415 -->  not below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Filter_above_76_4 !!! Pair: EUR/USD. Stoch_Filter_now: 80.9833839415 -->  above 74.6
+        
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got SHORT_Risk: 3
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got LONG_Risk: 0
+
+
+#############################################################
+
+We got LONG_Risk: 0  
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO THE RISK CHECKS !!! Using Last_FilterTimeFrame_UTCDateTime: 2008-12-02 17:19:00. Pair: EUR/USD, TimeFrameLevel: TimeFrameLevel1
+        
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> SHORT_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 77.8536108851 --> above 76.4 or below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_PriceLine_above_76_4_OR_below_23_6 !!! Pair: EUR/USD. PriceLine_now: 77.8536108851 --> above 76.4 or below 23.6
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_OriginLine_crossed_below_76_4 !!! Pair: EUR/USD. OriginLine_now: 82.3919107392 at or above 76.4.
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): DO NOTHING --> LONG_OriginLine_crossed_above_23_6 !!! Pair: EUR/USD. OriginLine_now: 82.3919107392 at or above 76.4.
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_below_80 !!! Pair: EUR/USD. Stoch_Main_now: 91.7364016736 -->  not below 80
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_above_20 !!! Pair: EUR/USD. Stoch_Main_now: 91.7364016736 -->  above 20
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Main_crossed_below_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 69.3514644351. Stoch_Main_now: 91.7364016736 -> Stoch_HighFrame_now: 78.1596452328
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Main_crossed_above_Stoch_HighFrame !!! Pair: EUR/USD. Stoch_Main just crossed up above Stoch_HighFrame. Stoch_Main_previous: 69.3514644351. Stoch_Main_now: 91.7364016736 -> Stoch_HighFrame_now: 78.1596452328
+        
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): NOT OK --> SHORT_Stoch_Filter_below_23_6 !!! Pair: EUR/USD. Stoch_Filter_now: 77.1963824289 -->  not below 23.6
+Tue, 02 Dec 2008 19:23:20           TradingInline:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): OK --> LONG_Stoch_Filter_above_76_4 !!! Pair: EUR/USD. Stoch_Filter_now: 77.1963824289 -->  above 74.6
+        
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got SHORT_Risk: 4
+Tue, 02 Dec 2008 19:23:20   Trading:   PMTFStochasticsShiftTimeFrameTrading.doRiskCheckUpdate_ForTimeFrameLevel(): Pair: EUR/USD: TimeFrameLevel: TimeFrameLevel1. We got LONG_Risk: 0
+        
+        

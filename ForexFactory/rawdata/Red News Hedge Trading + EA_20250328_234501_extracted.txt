@@ -1,0 +1,1331 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+This trading strategy is based on taking advantage of high volatility in the market due to high impact red news. In this strategy, we open two trades on two different currency pairs which are known to be correlated (positively or negatively). For example, we open Long positions on both EURUSD and USDJPY a few seconds before a high impact red news in the hope of earning some pips from any imbalance in the basket. I have written an EA that makes it easier to trade this strategy. Attach the EA to one of currency pairs' chart (for example, EURUSD), and enter the hedge currency pair symbol (for example, USDJPY) in the input settings of the EA. There are four buttons to open positions, 1. Buy/Sell: the EA opens a Buy position on the attached chart, and a Sell position on the hedge currency pair. 2. Sell/Buy: the EA opens a Sell position on the attached chart, and a Buy position on the hedge currency pair. 3. Buy/Buy: the EA opens Buy positions on both currency pairs. 4. Sell/Sell: the EA opens Sell positions on both currency pairs. and there are three buttons to close the basket manually. You can specify the net take profit (in money, not pips!) in the input settings of the EA. Positively Correlated Symbols For a pair of symbols that are positively correlated (such as AUDUSD and AUDCAD), use either Buy/Sell or Sell/Buy button. Negatively Correlated Symbols For a pair of symbols that are negatively correlated (such as EURUSD and USDJPY), use either Buy/Buy or Sell/Sell button. Forex Correlation Table Here is a website where you can find a Forex correlation table, https://www.mataf.net/en/forex/tools/correlation for example, AUDCAD ~ EURAUD AUDJPY ~ AUDNZD CADJPY ~ AUDJPY ... How I trade with this strategy: 1. Choose a high impact red news of a major currency, for example AUD. 2. Choose two other major currencies to pair with AUD such that the absolute correlation of two pairs is greater than 0.5, for example AUDUSD and AUDCAD. 3. A few minutes before the news release time, look at a currency strength meter to observe which of above two currencies (USD or CAD) is more powerful. 4. Select a trade button according to both the sign of correlation (this can be automatically done by the EA for you), and the strongest currency you identified in the previous step. See an example here: https://www.forexfactory.com/showthr...4#post10532124 How to load history data for hedge symbols? In order to load history data of hedge symbols, you can follow the steps below: 1. Hit &lt;F2&gt; key to bring up History Center window. 2. Select the symbol (for example, EURUSD). 3. Click on &lt;Download&gt; button. 4. Repeat 1 to 3 for all symbols you want to load history data. Thread Rules: 1. In this thread we discuss only the strategy and the EA presented here. I will IGNORE anyone who writes any irrelevant post in this thread. 2. TBD. == Update 2019-09-14 ====================== Ver. 1.84: An Experimental Currency Strength Meter (CSM) is added to the EA. Recompiled with MT4 build 1220. Attached Image (click to enlarge) Attached File(s) MathTrader7_NewsHedgeEA.ex4 148 KB | 1,650 downloads | Uploaded Sep 14, 2019 8:47pm Note: The CSM needs your broker to provide all major currency pairs to work. Input settings description: 1. Select Auto Time Based Action : - Auto Trade Disabled (default), This option disables auto time based trading. - Buy/Buy : This option makes the EA to open BUY/BUY positions at Auto Action Time. - Sell/Sell : This option makes the EA to open SELL/SELL positions at Auto Action Time. - Buy/Sell : This option makes the EA to open BUY/SELL positions at Auto Action Time. - Sell/Buy: This option makes the EA to open SELL/BUY positions at Auto Action Time. 2. Enter Auto Action Time (broker time): - yyyy.mm.dd hh:mm:ss, for example 2015.11.19 14:29:30 - The EA opens two positions at this time according to Select Auto Time Based Action setting. 3. Auto Button Selection? - If enabled, the EA hides irrelevant trade buttons according to the correlation value between two symbols. 4. Hedge Symbol: - Enter hedge symbol as exactly as it appears on the market watch of your MT4 platform. 5. Net Take Profit (money): - When net profit becomes greater than this value, the EA automatically closes both positions. 6. Net Stop Loss (money): - When net profit becomes less than negative of this value, the EA automatically closes both positions. 7. Equalize Pips? - If enabled, the lot size of trading two positions will be recalculated such that one pip of both symbols will be (approximately) worth equal (see Post 104 ). - If disabled, the EA opens two positions with the user specified lot size. 8.1 Lot Size: 0.1 (default) 8.2 Hedge Lot Size: 0.1 (default) 9. Slippage (points): 30 (default) 10. Magic Number: 1122 (default) - If you want to use the EA on the same symbol twice or more, you have to assign different magic numbers. Otherwise, leave it default. ==================================== How to install this EA on your MetaTrader4 Platform For newbies, here is a video on youtube that shows how to install any EA on MetaTrader 4 platform in 5 easy steps
+
+--- 帖子 #2 ---
+Thank you for your Ea Math have placed it on Usdjpy chart with EURUSD to hedge and clicked Buy/sell button , it opened 0.1 Usdjpy and 0.08 Eurusd may i know why it opened 0.08 in EURUSD ? , will it calculate the perfect hedging lot size ?
+
+--- 帖子 #3 ---
+You're welcome! :-) And you're right! The EA calculates lots to equalize the worth of one point of both currency pairs. I uploaded a new version (v1.10) with an input to let the user enable/disable this function.
+
+--- 帖子 #4 ---
+there is a Bug in Ea, its not closing at desired Profit
+
+--- 帖子 #5 ---
+Please test v1.10, I optimized the close basket functionality to send order close command to the broker server as fast as possible.
+
+--- 帖子 #6 ---
+Other than EU with UJ which will be the best pair?
+
+--- 帖子 #7 ---
+For AUD red news, I trade AUDUSD and AUDCAD. Go for either BUY/SELL or SELL/BUY for this pair of symbols. For today's USD red news, I may go SELL/SELL for both symbols EURUSD and USDJPY.
+
+--- 帖子 #8 ---
+Any more progress? anyone trading with this ea? i got profit buy buy EU and UJ
+
+--- 帖子 #9 ---
+Version 1.15 of the EA released. In this version a bug in auto closing the hedge basket is fixed. I updated Post 1.
+
+--- 帖子 #10 ---
+Dear MathTrader, Thanks for the EA,... truly I need the clear tutorial when to apply BUY/SELL , SELL/BUY, SELL/SELL or BUY/BUY,.... May be you have better clear hints how to determine that operation. Looking forward to have answer from you,... Thanks, Budi
+
+--- 帖子 #11 ---
+Dear Mathtrader Where is is version 1.15. need to download.
+
+--- 帖子 #12 ---
+Download from post 1. MathTrader updated the file (see the section at the end of post1 that says Update, and date after the download link?). Best Regards.
+
+--- 帖子 #13 ---
+Hi, Mathtrader I used your EA with the last NEW : Core Retail Sales. Everything worked perfect...but I asked for 30 bucks and it gave me only $10.91 (LOL) Thanks Best regards BBF
+
+--- 帖子 #14 ---
+Still Ea not closing trades at desired profit , kindly have a look Math Thank you
+
+--- 帖子 #15 ---
+Are you using the last version (v1.15)?
+
+--- 帖子 #16 ---
+Good results! We have to accept what market gives us
+
+--- 帖子 #17 ---
+I am Using v1.10 , sorry i will test latest version As of now the results with this Ea are very good , even we can use it for Scalping have to test it few more days
+
+--- 帖子 #18 ---
+New Version is Perfect Attached Image (click to enlarge)
+
+--- 帖子 #19 ---
+Trading hedge is one of my favorite strategies. As you mentioned, we can use it for scalping here and there. Please post your results which may help other traders to learn this style of trading.
+
+--- 帖子 #20 ---
+Why cant it be Auto trading , we can set small profit and use for scalping leave the trader to chose the option of Buy/sell or Sell /Sell
+
+--- 帖子 #21 ---
+To automate it, the question is what would be the entry logic? When to enter? There must be a logic behind it. I don't think randomly opening hedge positions would be profitable in long run....
+
+--- 帖子 #22 ---
+Interesting strategy,mt7. Although my broker is not allowed EA.But I tested manually this strategy.I used it with the last NEWS：Prelim UoM Consumer Sentiment.Good results. But I still have a doubt.I think the two symbols the fluctuation is not the same.We can win may also lose.This depends on whether we choose to buy or sell.And we need to stoploss?How to takeprofit?
+
+--- 帖子 #23 ---
+Im unable to open the file, i copy and paste across to MQL4 from my download folder but nothing adding to the chart
+
+--- 帖子 #24 ---
+In Post 1, I added a link to a youtube video that shows how to install any EA on MetaTrader 4 platform.
+
+--- 帖子 #25 ---
+Thanks MathTrader 7 you`re a star
+
+--- 帖子 #26 ---
+I wonder about the same criterias?
+
+--- 帖子 #27 ---
+I'd like to add a URL which may help this strategy: http://fxtrade.oanda.com/analysis/currency-correlation It's OANDA free currency correlation tables. ========================================= MathTrader7, Thank you for the EA. Very interesting. I'll try it when the market resumes. I have one quick question. In your post, you mentioned that opening the positions before the new just a couple of seconds. Generally, I think opening positions during the time will lead us to face the widen spreads which may (?) affect the spreads. 1.) Have you ever experienced a case when widen spreads ruined the setup? 2.) Have you tried opening the positions like 5 minutes before the news? If yes, did the position work as well as the one that opened just a few seconds before the news announcement? K-Mun
+
+--- 帖子 #28 ---
+Fantastistic EA. Can you make it have lines for SL and TP and lots auto calculated by risk settings.
+
+--- 帖子 #29 ---
+Hi K-Mun, First, thanks for the correlation table. I will put a link to a website for Forex pairs correlation in Post 1. 1) I have a true ECN account with IC Markets broker, where up to 30 seconds before a high impact red news they keep the spread in a normal range (for example, 0.5 pips for EURUSD). I actually open two positions about 30 seconds before the news release time. 2) No, I never open positions 5 minutes before a high impact red news. Best, Math
+
+--- 帖子 #30 ---
+I think you want to trade straddle strategy where asking for SL and TP. Please note that true ECN brokers won't respect to your SL levels; they close your position at the first available quote (price) which could be hundred pips far from where you have set your SL level. This is also the case for pending orders, they will execute your pending order at the first available quote (price). According to my experience, if you are working with true ECN brokers straddle strategy won't work. But it may work with market makers brokers (but there are other problems with such brokers). The philosophy of this thread's strategy is to hedge one position with another, and without using broker side stop loss / take profit levels.
+
+--- 帖子 #31 ---
+Hi Mathtrader Quickly, about correlation, may I suggest : https://www.mataf.net/fr/tools/01-01-correlation Best regards BBF
+
+--- 帖子 #32 ---
+Actually am working on hegding trades on a pair by opening trades seconds before news(not with pending orders like you assume), closing one at a SL below fib lines (hence the need for lines for positioning the SL. Then lots proportional to the SL position and risk ) allowing the other to run to TP. If it takes. having market maker to carry out the strategy fine
+
+--- 帖子 #33 ---
+Choose two similar ADR currency pairs, will be more safe?
+
+--- 帖子 #34 ---
+Hi MathTrader7, Hm, I have some idea. What about... Calculating historical average correlation in a given timeframe... say EURUSD and USDJPY... we find that they have -0.9 At the beginning of a new time, we calculate again and if the correlation deviates from the average, we will open a position. Essentially, we are assuming that the deviation is temporary and the pair will resume their correlation... For example, at the beginning of the trading day Attached Image (click to enlarge) These two deviate at the beginning of trading day (US EST) So we initiate the positions. We will close when Profit target is reached Correlation back to normal SL is hit K-Mun
+
+--- 帖子 #35 ---
+Placed my first trade with the EA today very please especially as the button goes blank after click thereb preventing multiple compulsive entry. Can we have a way to hide some of the buy/sell buttons that are not to be used. Also line controlled SL , lots proportional to risk and SL settings . The Close button to close all trades( currently it closes only trades opened by the EA) in a pair will be great. Thanks man
+
+--- 帖子 #36 ---
+I can implement a correlation computation between the symbol of the chart that the EA attached to and the symbol that the user sets in the input settings of the EA, and accordingly I can make the EA to hide the buttons that are not to be used. wait for the next versions....
+
+--- 帖子 #37 ---
+Thanks man for the positive consideration. Also I know SL and Tp on each individual trade in pips and/or percentage of account can be great too if am not suggesting too much.
+
+--- 帖子 #38 ---
+Version 1.20 of the EA released. In this version the EA calculates the correlation between two symbols based on which the EA automatically shows the relevant set of buttons for true hedge trading. The user can disable this auto button selection. I updated Post 1.
+
+--- 帖子 #39 ---
+Thanks for sharing your idea. I will think about that...
+
+--- 帖子 #40 ---
+A THING OF BEAUTY MATH THANK YOU!!! What do you think of a money flow cross trigger for auto trigger? Crude but may be effective...
+
+--- 帖子 #41 ---
+You're welcome! :-) Thanks for sharing your idea! I'll study the performance of MFI indicator...
+
+--- 帖子 #42 ---
+This is a great Idea - really would like to test drive it. I have installed the EA but it only shows the 'Close All' Button - Can you please advise? Thanks a mill.
+
+--- 帖子 #43 ---
+Set the first input sttings to false
+
+--- 帖子 #44 ---
+Tried to open trades during the GBP news, at 10.30 (GMT+1) but none of the buttons worked????
+
+--- 帖子 #45 ---
+Probably it was a problem from your broker. I traded it with GBPUSD and EURUSD 30 seconds before news release successfully.
+
+--- 帖子 #46 ---
+Yes, I think so too ....(I used the same pairs like you did...)
+
+--- 帖子 #47 ---
+Hello , me too in GU/EU . % correlation TF H1 = +75% My entry was when GU stochastic was highter but no in area OB (maybe i wrong) ... i will test At the start the trade was fast in profit of 5€ ( 0.5%) but i didn't close it and the trade finished in loss of 10€ (1%) Start : Attached Image (click to enlarge) Close SL (maybe here i could retry with buy/sell the correlation ( Stocastics in OS/OB) Attached Image (click to enlarge)
+
+--- 帖子 #48 ---
+I usually set the lot size to 0.1, with perfect hedge calculation enabled and a target profit of 5 USD. Because EA checks if the net profit is greater than the target profit to close the basket, when price jumps there is a high probability that profit exceeds 5 USD. In my recent trade of GBP red news, it gave me a profit of about 20 USD :-) So, my advice is to set the target profit to a small amount. If the market is generous, it gives us more, if not, there is still higher probability to reach a small amount of profit to close the basket before it goes to loss zone....
+
+--- 帖子 #49 ---
+Oh perfect ( i changed it to 10€ but now i took it in 5E) .. thank you very very mutch
+
+--- 帖子 #50 ---
+You're welcome! :-) And no doubt that one can trade higher lot size and accordingly increase the target profit...
+
+--- 帖子 #51 ---
+Please how is the closing option working can it be made to keep the winning trade open while closing the losing trade? cos currently it seems to close the winning trade if the losing hedge trade is closed.
+
+--- 帖子 #52 ---
+If the basket profit exceeds the Take Profit (money) value, the EA closes both positions. If the user clicks on Close All button, the EA closes both positions regardless of the profit/loss.
+
+--- 帖子 #53 ---
+Fine. But when the user manually closes the losing trade (maybe by setting a SL on it which gets hit like I did) can the winning one be allowed to keep running?.
+
+--- 帖子 #54 ---
+The EA won't work correctly if the user manipulates the open positions...
+
+--- 帖子 #55 ---
+Please make this EA capable of executing "Let your winners run and cut your losers short! "
+
+--- 帖子 #56 ---
+I'm working on a new version (v1.30, as you can see it on the screenshot I attached above) which adds positions in the direction of the winner instead of closing the loser. More about this when my test is done....
+
+--- 帖子 #57 ---
+Hi, Im trading at PFD-NZ and used your EA to my live account for test with 250$ balance and 1:300 of leverage for 100% stop out. i have tested on demo and all working great until i traded on live acc. When i pressed Buy/sell then it opened on a buy position at 0.01 volume. Pls help me ! Thanks
+
+--- 帖子 #58 ---
+What do you mean? the $250 gone?. Your leverage is too much BTW. A need for stoploss in the EA.
+
+--- 帖子 #59 ---
+I mean that when i pressed buy/sell on my live account. The ea opened only buy 0.01 posion instead of 1 buy and 1 sell for 0.1 lot of settings
+
+--- 帖子 #60 ---
+Hello dear, MathTrader7. Thank you for the adviser. I have a question about his work. When we open the deal before the news and hedzhiruem another couple we did not know what the news will be released - positive or negative for the pair. If we assume we have sold GBP / DRC B and bought the EUR / DRC and the news came out negative for the pound and it because it is very volatile and can move 100 points in the opposite direction. The question then becomes what is the meaning of this short-term hedge? If I know that there are strategies work on the correlation of currencies, but then open the transaction only on the basis of large deviations and correlation of currencies
+
+--- 帖子 #61 ---
+Check your MT4 Journal tab for any re-quote error. If that is the case, then it means that your broker had rejected to open a Sell position for the hedge symbol. Increase slippage and trade 30 seconds (not 2-3 seconds) before a red news release time.
+
+--- 帖子 #62 ---
+When you trade a pair with positive correlation, when do you take the Buy/Sell and when the Sell/Buy Button? When do you close manually, before TP or SL is reached ?
+
+--- 帖子 #63 ---
+No one (except for a few people who are releasing a high impact news data) knows about the outcome of high impact red news. So, what I do is to analyze the recent data of that particular news and guess what would be most likely the outcome. Since I may be wrong, I go for hedging to reduce the possible loss of trading red news. For my take profit rule, see Post 48 . For SL, I manually click on Close All button when I feel that it is not promising anymore to keep the positions running. Regarding when to enter, as I mentioned before, I open two positions 30 seconds before a high impact news release time.
+
+--- 帖子 #64 ---
+Thank you.
+
+--- 帖子 #65 ---
+worked perfectly on IC cheers MT
+
+--- 帖子 #66 ---
+You're welcome! :-)
+
+--- 帖子 #67 ---
+I think, mostly the direction of the news-trade is equal to the direction of the last about 5 minutes of the watched pair.
+
+--- 帖子 #68 ---
+This needs a study over past bars...
+
+--- 帖子 #69 ---
+hi MT, Can you please check the files at the attachment. it showed error but i could not know what is it. i can see that in the DEMO account the symbosl go without DOT as normal. ex : EURUSD USDJPY and on the Real Account the symbols go with dots. ex: EURUSD. USDJPY. Please help me with this symbols
+
+--- 帖子 #70 ---
+Sorry I couldn't understand your text because of machine translation (google?) but I think I can refer you to my answer in Post 63 .
+
+--- 帖子 #71 ---
+In real/demo accounts you have to enter the complete name of a symbol. In your example, enter USDJPY. (with a dot at the end of the symbol) as hedge symbol in the input settings of the EA (not USDJPY )
+
+--- 帖子 #72 ---
+thanks so much for your help. it working now.
+
+--- 帖子 #73 ---
+What you think the risk reward ratio should be? means if i start the EA and opened up trades then how i will cum to know that will the overall scenerio become positive or not?
+
+--- 帖子 #74 ---
+Good morning MathTrader7 , wich TF do you looking for watching the correlation ? Becouse in different TF there are different % of correlation , yesterday i tried h1 correlation but maybe is less stable than D1 TF ... what do you think ? Thank you in advance
+
+--- 帖子 #75 ---
+Hello LvCa, and good morning to you from Sweden This is a good question! I use H1 open prices of 200 past bars. This is just to identify if the correlation is positive or negative for two symbols so that the EA hides irrelevant buttons. Best, Math
+
+--- 帖子 #76 ---
+oh , so today i will try the h1 200 periods becouse yesterday i whatched 50period Great regards , from Italy
+
+--- 帖子 #77 ---
+I got the EA to buy and sell the same pair by setting the hedge pair to be same with the hedge pair but now the SL of trade in one pair is an issue. Adding additional trades on winning side also means increasing risk which may not be palatable.
+
+--- 帖子 #78 ---
+Building Permits news is scheduled to release in 2 hours. Let's trade it! I go for BUY/BUY on EURUSD hedged with USDJPY.
+
+--- 帖子 #79 ---
+Thanks , i dont look mutch movment .. maybe they attend the news '' USD FOMC meeting minuts'' release in 5.20 hours and we' ll can see (maybe) a good movment
+
+--- 帖子 #80 ---
+The news result was equal to the forecast, so no big jump in the price. I closed the basket at breakeven. Let's wait for another opportunity.
+
+--- 帖子 #81 ---
+I just tried your EA for the first time on this news release. It all worked okay, except both orders were opened with 0.01 lots, when I set the lot size in the EA to 1.0 lots. Any idea why? This was on IC Markets .
+
+--- 帖子 #82 ---
+Mmmm... it shouldn't! But I'll check this issue... Thanks for reporting!
+
+--- 帖子 #83 ---
+Since its going to be buy/sell anyway a time settings for the news time will be appropriate in case one will not be available to click during the news time.
+
+--- 帖子 #84 ---
+This time i'll try with sell/sell ( 1h and 30 min left) , obvius 30 sec before the news
+
+--- 帖子 #85 ---
+I have the same plan ;-)
+
+--- 帖子 #86 ---
+This is a good idea! But I have to implement net stop loss in money as well.
+
+--- 帖子 #87 ---
+Good evening, This my first post here Just would like to share: I opened Hedge Positions with NZDUSD and GBPNZD since correlation is 90% in 5min and H1 Attached Image (click to enlarge)
+
+--- 帖子 #88 ---
+Yes I noticed how important the net SL is today I had gbpusd and usdjpy open for the building permit and both went into loss at some stage and I wondered what will happen if the scenerio continued. Please do me a favor do the SL for individual trade in pips
+
+--- 帖子 #89 ---
+For which news did you open that basket?
+
+--- 帖子 #90 ---
+i have put target to 1000 or close manually
+
+--- 帖子 #91 ---
+I cashed in about 10 USD for this basket/news. Tomorrow, I am going to trade Retail Sales m/m GBPUSD and EURUSD
+
+--- 帖子 #92 ---
+but i don't understand .. i am in and now in loss of 11 usd ( i dont close it becouse i have 20$ SL ) and i think that EU can go down . TP in EA is 5$ (perfect hedge)
+
+--- 帖子 #93 ---
+What are your lot sizes? Did you do Sell/Sell or Buy/Buy?
+
+--- 帖子 #94 ---
+sell/sell , lot size 0.1 ( EU/UJ) PS : probably it dipend to broker
+
+--- 帖子 #95 ---
+The same settings here. However, I disabled perfect hedge lot calculation for this trade.
+
+--- 帖子 #96 ---
+Thanks for this great EA Math! I tried with the FOMC news today, with original settings (perfect hedge enabled and TP at 5$), EU/UJ, but instead of sell/sell, I went to buy/buy, and got almost 10$ profit on TickMill ECN.
+
+--- 帖子 #97 ---
+You're welcome! :-) And good results! The beauty of this strategy is that, if we target for a small profit, there will be a high probability to exit with some profit regardless of which button we select to trade.
+
+--- 帖子 #98 ---
+USD news during uploading this pic i reached to 220 $ i closed with net profit 166$
+
+--- 帖子 #99 ---
+If you don't mind, I have some suggestions about it: 1 - Insert option to automatically open the orders 30 seconds before the hour and minute the user sets. For example. I can check the news for today, go to EA, insert the trading time of the news I want, and then the EA will open the trades for me 30 seconds before that time and day. The EA could also obtain the high impact news automatically, but that takes a lot more time to do I believe. 2 - Insert option to set a maximum time to wait for the target profit to be reach. If after that time the target has not been reach yet, the EA will set a stop loss or breakeven level and close the order if one of both are hit. I know it will make it more automated and perhaps this is not your intention, but this helps a lot people that may not be available to follow the news 100% of time. Well, these are my thoughts for now. Thanks a lot!
+
+--- 帖子 #100 ---
+You opened the basket half an hour before FOMC news release???
+
+--- 帖子 #101 ---
+Thanks Math! I have a doubt regarding the perfect hedge function. Instead of opening 0.08 EU and 0.1 UJ, the most approximated condition woudn't be 0.09 EU and 0.1 UJ?
+
+--- 帖子 #102 ---
+I'll implement the bold suggestions in the next versions. I didn't get the stop loss policy from your text.
+
+--- 帖子 #103 ---
+actually i opened it before one hour before the news. i saw there is a strong correlation from this site on 5 min, hour, daily, weekly all of them above 90% moreover GBPNZD is high voiltry currency. when i opened the EA i saw Buy/Buy or Sell/Sell i press Sell/Sell https://www.mataf.net/fr/tools/01-01-correlation
+
+--- 帖子 #104 ---
+Good question! Let me explain it. One pip of one lot USDJPY is worth about 8.1 USD (at the moment of writing this post), while one pip of one lot EURUSD is worth 10.0 USD. In order to equalize the worth of pips, we have to open, for example, 1.00 lot USDJPY and 0.81 lot EURUSD. Now, if both symbols move 10 pips in same direction, EURUSD symbol results in +10.0 pip x 0.81 lot x 10.0 USD/pip lot = +81 USD and USDJPY results in -10.0 pip x 1.00 lot x 8.1 USD/pip lot = -81 USD if we assume that EURUSD position would be in profit (and consequently USDJPY position would be in loss). We neglect the small change in one pip worth of USDJPY during the market move, as well as other trade costs such as commision, swap, etc. in this example. Note: It may be better not to call this function as perfect hedge lot size calculation, it's better to be called pip worth equalization.
+
+--- 帖子 #105 ---
+Mr. MathTrader, Check the correlation for EUR/USD and EUR/GBP in onada and the other site. it is a very good correlation. i just jump on them
+
+--- 帖子 #106 ---
+A ok , finally i close the trade in loss (-11€) becouse i go to sleep and i think that i was unlucky becouse it start in fast profit to 4/4,5 € and after it changed direction . Good night all guys
+
+--- 帖子 #107 ---
+Version 1.40 of the EA released. In this version two additional buttons let the user close main and/or hedge position individually. I updated Post 1.
+
+--- 帖子 #108 ---
+MathTrader7, I can't open version 1.4 . Is it due to my platform still on Build 902? All earlier versions I had no problem. I'm thanking you in advance for any assistance towards this issue.
+
+--- 帖子 #109 ---
+Yes, that's because of your MT4 build 902. You can upgrade by adding MetaQuote-Demo account to your MT4 platform. Then restart it.
+
+--- 帖子 #110 ---
+Ok, Will try that. Thanks
+
+--- 帖子 #111 ---
+During news, the price in most cases moves so fast that clicking either close buttons might not be the most effective thing to do instead a preset stoploss on each trade can be a better option.
+
+--- 帖子 #112 ---
+Good moorning GBP news ''Retail Sales'' probably i will take CHF/JPY -GBP/JPY ; corr. -78% (BUY-BUY) I have an hard question that i muast resolve , but is better write it after the news
+
+--- 帖子 #113 ---
+Got 200$
+
+--- 帖子 #114 ---
+One of the most interesting threads I've found in this year! Thank you for sharing.
+
+--- 帖子 #115 ---
+Thanks a lot for the answer Math!
+
+--- 帖子 #116 ---
+Cool thanks again! Regarding the stop loss suggestion, I mean that after some time set by the user after the news, if the positions aren't in profit, the EA could: 1 - Set a Stop Loss of $$, which in case is reach it will close both orders, and 2 - Set a "Negative" Take Profit. For Example: If both orders are showing a loss of -10$, the EA would place a negative Take Profit at -5$. So in case the order's losses reduces from -10$ to -5$, it will close the orders. This is a idea to catch the lowest loss possible. I see some EAs that uses this, and works most of the time, because before going into deeper losses, the market cycles and reduce the losses, before going deep again. Just some suggestions!
+
+--- 帖子 #117 ---
+I have a question 'cause I can not understand one thing: if there is' a news should always cover themselves with a couple who are interested in the news, or simply the correlation ?? (sorry for my English, I make an example) ... If the news on the USD will then: 1- work only on EUR / USD (example) against USD / xxx (only cross with the dollar) ?? 2-Work on EUR / USD vs any cross correlated ?? , good night all
+
+--- 帖子 #118 ---
+Version 1.50 of the EA released. In this version the user can enter time of trade to let the EA automatically open two positions. I updated Post 1 .
+
+--- 帖子 #119 ---
+Thanks very much.
+
+--- 帖子 #120 ---
+...Broker, or pc time?
+
+--- 帖子 #121 ---
+This version is in broker time, but I may change it to local PC time in the next version. Let's see how this version works.
+
+--- 帖子 #122 ---
+It's great but what if it goes in opposite direction? You will loss $200? During news nobody knows where the price will go..
+
+--- 帖子 #123 ---
+You are totally right. But I am testing until I understand this EA correctly.
+
+--- 帖子 #124 ---
+I will test it tomorow
+
+--- 帖子 #125 ---
+Hello MathTrader7 ! I'm basically new in the hedge trading. The first idea comes to my mind: is it proper to use ADR indicator as an additional correlation factor for calculating the lot sizes? For example: I want to trade EUR/USD vs NZDUSD. NZDUSD has lower ADR, so it needs extra multiplier (ADR EUR/USD : ADR NZDUSD). Maybe it's not very useful for a news trading, but for basical it should. The second idea : stop loss for overall loss.
+
+--- 帖子 #126 ---
+Thanks ...
+
+--- 帖子 #127 ---
+can you please post the link where can I create demo account for upgrading the MT4 build 902 to 904 ?
+
+--- 帖子 #128 ---
+Version 1.55 of the EA released. In this version the user can specify a net stop loss in money. The EA closes the basket if either SL or TP reaches regardless of being in Manual or Time Based Auto mode. I updated Post 1.
+
+--- 帖子 #129 ---
+Q: 1. How does it calculate the SL ? 2. correlation calculation for which timeframe is shown on the chart?
+
+--- 帖子 #130 ---
+A: 1. Let me explain it with an example. You set the SL input to 10.0 USD , if the sum of profits of positions becomes equal to or less than -10.0 USD , the EA closes both positions. I assume that your account balance is in USD in this example. A: 2. The correlation is 200 H1 Open prices of the symbols.
+
+--- 帖子 #131 ---
+Thanks MathTrader7. Got it.
+
+--- 帖子 #132 ---
+Another 2 Q: 1. which pairs are the best for positive correlation and negative correlation for this EA? 2. How percentage we should consider for both positive and negative correlation pairs for red news hedging?
+
+--- 帖子 #133 ---
+I personally look at M1 bars of two positively or negatively correlated pairs only at red news time releases to study how they move together. I use H1 correlation with a threshold of 0.5 to quickly filter out non-promising pairs of symbols. For example, if the correlation between two symbols is -0.45, I'll skip to another pair of symbols. After finding a pair of symbols with an absolute correlation greater than 0.5, you need to do your homework by studying M1 bars correlation between them at red news time releases.
+
+--- 帖子 #134 ---
+Gr8 Advice! Many thanks. It will be very much useful for me as I am new in forex.
+
+--- 帖子 #135 ---
+Nice improvements. No individual SL yet and the additional lots?
+
+--- 帖子 #136 ---
+Not yet! I'll implement them in the next versions.
+
+--- 帖子 #137 ---
+Awesome thanks for the update Math!
+
+--- 帖子 #138 ---
+Wow , thank you , i will try it now on CAD news. I will try USDCAD/GBPCAD sell/buy
+
+--- 帖子 #139 ---
+You're welcome! :-)
+
+--- 帖子 #140 ---
+How did it work for you?
+
+--- 帖子 #141 ---
+Hi MathTrader, I was drawn to this as I was looking for something to compliment my normal swing trading. Well, I downloaded your EA and played around with it for a bit. I tried various things: instead of correlated pair, I used a fast moving pair that had good momentum and a free run, or a pair that was about to hit a major s/r level to split for the hedge and I also tried correlated pairs. Anyway, here are the results for a few days testing on demo. Obviously it needs some refining on my part , but I think I can get something out of this. Thanks By the way, today I used GBPCAD and AUDCAD for the CAD news. Got the result
+
+--- 帖子 #142 ---
+Good results! Hedge trading is not limited to high impact red news, neither to highly correlated pairs of symbols. As you use the EA for various trading styles. Please keep posting your findings if you will
+
+--- 帖子 #143 ---
+Hedge trading is completely new to me. I am trying to combine it with what I know best. I'll test it for a bit and hopefully I can find something that will consistently work well . Good job on the EA, thanks again, that works perfectly. The timer addition is godsend as I am not often at my desk for long!
+
+--- 帖子 #144 ---
+Hello, i must try again next week , becouse this trade was fast stopped out (loss -5 , 0.1lot , demo ;-) ) for large spread of my broker . I must filter the avarage spread (broker) , probably max avarage spread that i want (for me) is 3pips (3€) with SL of 10 or 15 PS : Math i have some idea to test next week , i hope that it will be good ;-) but it isn't just news but also outside those zones . obviously if I will like it I will write my idea
+
+--- 帖子 #145 ---
+Yes, you need a good ecn broker. I am testing on FXOpen, seems fine. I am not currently using the SL feature because I want to try the right level. After I have enough appropriate results I will look at the max drawdown and decide from that.
+
+--- 帖子 #146 ---
+Thank you for your suggestion
+
+--- 帖子 #147 ---
+Hope it works for you the next time. Please feel free to write me your idea. I'm also thinking about a separate EA development based on hedge and correlation to scalp the market here and there.
+
+--- 帖子 #148 ---
+Hello, excuse my English, @Mathtrader7 : You can add 2 buttons for taking such position; buy / buy and sell / sell, when a high correlation more pips in less time! Thank you in advance! Excellent working !!!!
+
+--- 帖子 #149 ---
+Ok I found !!!!!
+
+--- 帖子 #150 ---
+Hello Mathtrader7 I tried this EA for a few days last week and saw it can do during red news with good results, but now I can't try with your latest vision , bcoz my broker still use MT4 build 902. Can you establish it for all MT4 vision? I always try with micro lot size, not demo
+
+--- 帖子 #151 ---
+Good morning , tell my 2cent idea is the minumum that i can do ... This is an axample of trading (no news) what i do today : Attached Image (click to enlarge) It was lucky becouse both went into profit. PS : I am a farmer, take my ideas as such
+
+--- 帖子 #152 ---
+I traded Euro this morning too on the German PMI. News was weak, but USDCAD was looking good for a buy, with a little space left before the reversal zone. So, got a result I think I'm going to have to start looking at this seriously now... Great tool, Mathtrader!
+
+--- 帖子 #153 ---
+Wow , good result . You use a very big lot size , not is it too mutch for 1500 account ? Ps , now i am looking for EUR/GBP vs EUR/USD (sell/buy but is maybe earlier to take this , if i will have a good signal of short EUR/GBP i will enter )
+
+--- 帖子 #154 ---
+Well, I'm just playing around... I'm not after many pips. That last trade was 9.6 and 3.7 respectively. See how it goes.
+
+--- 帖子 #155 ---
+Issue: If I go for editing the attached EA parameters and then ok for exit the properties, it becomes vanish sometimes not always. It needs to be attached again. My MT4 build is 910. I always change the magic no. for every attached EA on the chart. Can you pls have a look on the issue?
+
+--- 帖子 #156 ---
+Good results!
+
+--- 帖子 #157 ---
+When it disappears after you edit some of the input settings, do you see a message such as "Auto Trade Time is passed!" on the top-left of the chart?
+
+--- 帖子 #158 ---
+Keep posting your findings!
+
+--- 帖子 #159 ---
+It started , i try the perfect hadge (size) of Math7 I will stop when 2 stoch (or the two currencies ) are touching each other (or max SL of -5% ) Attached Image (click to enlarge)
+
+--- 帖子 #160 ---
+I think we can make it automate for easier forward testing... But first let's see how it works with your test.
+
+--- 帖子 #161 ---
+Yes i must test it atleast for 1 week or more . I start this week a test with ONLY hedging sistem and this is the Myfxbook for this test : https://www.myfxbook.com/members/luc...ertura/1432697 For today i finish my entries and what i like is that today the DD was very little ( 0.5%) with a good profit of 6% . At the end of the week i can do an idea
+
+--- 帖子 #162 ---
+I used to trade in a similar way. It works until (for example) EUR and GBP break their correlation and head off in different directions - which will happen sooner or later. For this reason I like Mathtrader's idea of getting in and out of the market as quickly as possible and relying on the news for volatility, rather than taking longer term trades.
+
+--- 帖子 #163 ---
+Hi skoda2008, Can you explain me how do you select pair for buy and sell based or correlation. For example from the attached table of correlation of major pair can you identify which pairs should be selected for Buy and which pair for Sell.
+
+--- 帖子 #164 ---
+Hi! Can you please share your indicator and template? Thanks!
+
+--- 帖子 #165 ---
+I didn't use a table or calculations to know which pairs were correlated. Just what I guess you could call fundamentals. For example, AUD and NZD tend to follow each other due to close geographical proximity, very similar political/social climate etc. AUD and CAD being resource based currencies and both stable political environments, etc... I then used percentage change from yesterday's close (NY Close) as the "difference factor". Buy the one that was underperforming, sell the one that was overperforming.
+
+--- 帖子 #166 ---
+The first version of the indicator which shows the relative price move between two symbols released. I updated Post 1. I think we can use this indicator to trade two correlated symbols
+
+--- 帖子 #167 ---
+I would think the momentum indy that you created would be a good addition. Was it called need for speed or something like? You are looking to benefit from a quick imbalance in the correlation right?
+
+--- 帖子 #168 ---
+Need for speed? Mmmm.... I remember a good work by Abokwaik named Need4Speed Scalping, but it has nothing to do with the strategy we trade in this thread Yes, the original idea is to benefit from a quick imbalance in the correlation.
+
+--- 帖子 #169 ---
+Abokwaik Need4Speed Scalping that's it. Sorry for the mixup. If that idea could see the imbalance by a momentum burst on one vs the other and trigger the hedge...
+
+--- 帖子 #170 ---
+Sure Attached File(s) OverLayChartLINE.mq4 12 KB | 513 downloads Attached File(s) Stochastic different pairs 1.7_4.mq4 19 KB | 538 downloads For the tpl is simply White chart with these 2 indicators
+
+--- 帖子 #171 ---
+Many Thanks!
+
+--- 帖子 #172 ---
+can you better explaine your strategy ? You sell when ? You buy when?
+
+--- 帖子 #173 ---
+I am using the latest version and it doesnt open any trades. Actually it doesn't update the server time. So I think there is a bug with it.
+
+--- 帖子 #174 ---
+Do you see any error in the Experts tab of the terminal?
+
+--- 帖子 #175 ---
+Hello , i need more time for a good test strategy ...for now i have big problems with the negative correlation and repairing some things of positive correlation : i will have an hard job
+
+--- 帖子 #176 ---
+It says it doesn't have enough money. But its not true. My account is 5k... and the order should be sized at 0.5 lot... I can pretty much open it manually. When clicking on the EA buttons. it opens and closes the positions in terms of seconds.
+
+--- 帖子 #177 ---
+I just found out what the problem was. I needed to let charts of all hedge pairs opened. No matter if they were enabled in the market watch window already... I have done some three losses today during news. But it is working.
+
+--- 帖子 #178 ---
+Glad to hear that you managed to find and solve the problem.
+
+--- 帖子 #179 ---
+I wasn't asked but would like 2 shares my 2 cents. Let's start with the meaning of correlation 1.) 1 = positive correlation; EURUSD GO UP / XXX GO UP ; EURUSD GO DOWN / XXX GO DOWN 2.) -1 = negative correlation; EURUSD GO UP / XXX GO DOWN; EURUSD GO DOWN / XXX GO UP The closer to 1 or -1, the higher the chance of 1.) and 2.) You would want to look for some pair with correlation either close to 1 or -1. EURUSD/EURGBP = 0.98 (positive) It means when EU goes up, the chance is EG will go down and vice versa. So, the hedge then will be "BUY and SELL" or "SELL and BUY" But if the correlation is negative then it will be "BUY and BUY" or "SELL and SELL"
+
+--- 帖子 #180 ---
+Thank you!
+
+--- 帖子 #181 ---
+Good morning , If i have different ADR between 2 pairs , is it better to increase the size of the pair with lower adr? Example (it is only an example) GBPNZD vs EURJPY : GBPNZD : adr 300 , value pips o.7$ (equal to EJ) EURJPY : adr 150 , value pips 0.7$ (equal to GN) Correlated +80% If i buy GBPNZD i must sell the doble size (0.20) of EJ or the size must stay equal (0.10 ) for both pairs ?
+
+--- 帖子 #182 ---
+Hi LvCa, I assume that ADR value is statistically valid (averaged over a long period, 200 days or more for example). Then, if you are going to trade for a long term, I would personally go for selling 0.20 EJ.
+
+--- 帖子 #183 ---
+ok, thanks I appreciate your suggestion
+
+--- 帖子 #184 ---
+Hi Math Trader 7 I have a question!!! I am newest in this thread . Today release red news of GBP . I selected eur/gbp and gbp/chf for trade with -80 correlation in h1 time frame. I selected SELL/SELL in ea settings and after 30-40 min hit to stop loss . If i selected BUY/BUY instead of SELL/SELL , my trades result was profit . Is it true ??? My question is how can i understand BUY/BUY is true or SELL/SELL , for same as these pairs ? Thank you
+
+--- 帖子 #185 ---
+Hi eghbaleh, I traded this red news with GBPUSD and EURGBP, going for SELL/SELL with 0.2 lot size, 10 USD take profit and 30 USD stop loss. The reason I chose SELL/SELL is that I observed that GBPUSD is in down trend, so even if the red news would be good for GBP, it could temprary pull up the price (and it turn out to be good for GBP, and GBPUSD went up for one minute or so, but then it returned back to its main down trend). The EA closed both positions in a total profit of about 10 USD.
+
+--- 帖子 #186 ---
+I traded the same pairs for the GBP release today and chose buy/buy. My reasoning? Look at EurChf. Which is stronger Euro or Swiss Franc? Is it about to hit a S/R level and reverse imminently? It is crucial you use your trading knowledge to decide where EurChf is going. Well, I thought the Euro was stronger so i would want to buy that. The loss on EURGBP was limited due to the strength of the Euro, whereas GBPCHF had a bigger gain due to the weakness of the Swiss Franc.
+
+--- 帖子 #187 ---
+Jarratt Davis also told this but personally i doubt it......
+
+--- 帖子 #188 ---
+This strategy requires double the trading cost.... Will this affect trading performance in the long run?
+
+--- 帖子 #189 ---
+Am I missing something? This strategy can be done by taking just one position... You pick the stronger currency and no need to hedge it...
+
+--- 帖子 #190 ---
+Good morning everyone, I have finished the test for the first week of so much chaos in my trade. Next week I have to improve absolutely becouse in the forex there is no room for sentiment and I, for now, I have too many of these: I always want two pairs are as close up to give a kiss (if then they make love , It would be even better) as in the old days , or... a clear divorce between them if they are correalte negatively and therefore incompatible. Good weekend to everyone.
+
+--- 帖子 #191 ---
+Hi Math Trader 7 I will test it next week and hope to get profit . Thank you so much
+
+--- 帖子 #192 ---
+Hi Jen101 Thanks for your good advise .
+
+--- 帖子 #193 ---
+pardon me, for post no. 18 by techlover, why do we open up one buy and the other sell when they are negatively correlated?
+
+--- 帖子 #194 ---
+If you know which way the news will go.......... Well, I don't
+
+--- 帖子 #195 ---
+The thing is... if you want the long term profitability with this system, you need to be on the right side of stronger pair(currency) most of the time. So it means to have more than 50% success rate - you need predict the outcome of news and be on right side, otherwise you will not make profit in the long run. Basically if you find the stronger currency then the outcome of the news is not so important but problem is finding currently strong currency. I did some backtesting with this system for USD/CAD and EUR/CAD from begining of the 2015. The main rule was enter trade couple of seconds before news. I chose only time when US and CAD news were announced togeher(for example, only US and CAD NFP together, US and CAD trade balance together etc). The results were great, around 500 pips. The positions were always long USD/CAD and short EUR/CAD. But similar results, minus trading cost, were if I enter only long USD/CAD. TP for this test was strictly on close of 3 minutes candle. These results are only possible because us dollar has been objectively stronger than cad for last months. I tried test this on 2013 and 2014, but results were break even(because usd not so strong at these times). My conclusion from this is to find stronger currency and enter only one, possibly two positions with hedge.
+
+--- 帖子 #196 ---
+But you still need to know it to get an edge. The problem with this type of trading is that you are still entering a directional bet! This can be best compared with pairs trading in which you usually bet on the mean return of 2 financial instruments. You basically trade how 2 symbols behave relatively to each other, by hedging you still take a bet on which pair will move stronger than the other based on the outcome of the news. What you are doing is hedge maybe 80% of the movement of the news but your 50% chance of success of being on the correct side of the news does not change. If you are correct the pair will move the same distance apart or together as they will in the opposite case giving you no edge at all. Example: Pair 1 and Pair 2 are positively correlated and Pair1's value will increase if the news are good. Positive News: Long/Short +10 Short/Long -10 Negative News: Long/Short -10 Short/Long +10 The problem is expectations of the news are priced in before the numbers are released meaning that is is only important if the number are better or worse than expected. Those expectations can be found in any news calendar and they come from some of the most reputable bankers (are we going to be more accurate than they are? probably not that's why they are professionals after all). The exact same result can be achieved by trading a single pair with a smaller lot size. You might get some good results now because you tp is fixed and your sl is unlimited and you let it run until your basket is in profit but that will not yield long term profits. This type of trading might be useful trading stocks as good news tend to affect the price more heavily than bad news decrease the value of a stock (at least that is what I have heard but I would need to do some number crunching on that one). I doubt that this philosophy can be applied to forex as you are trading pairs instead of a single underlying. If I am somehow incorrect I am looking forward to someone pointing me out my mistake.
+
+--- 帖子 #197 ---
+Looking at the ForexLive calendar at 3pm GMT we have Pending Home Sales as high impact, but not on FF calendar. I might give it a shot. EU and USDCHF are well negatively correlated, so I am trying to work out where EURCHF is going. I don't normally trade that pair and looking at that chart, I would really steer clear, but as I have to make a decision.... currently I would say Euro has the edge, so I would want to buy that. Of course, things can change in a few hours. If Euro is strong, Swiss Franc weak, and we see USD go up, then the loss on EU would be limited. The gain on CHF would be much bigger relatively, so profit. If USD goes down, then we would see a bigger gain on EU and relatively smaller loss on Chf, so profit.
+
+--- 帖子 #198 ---
+EURCHF fell through support, so I sold instead. I have now SL at 2R, because of volatility and extra spread around news time. It doesn't affect my previous trades. With SL at 2R I need to get the buy or sell right much more than half the time!
+
+--- 帖子 #199 ---
+Big news day tomorrow. I would like to trade the RBA rate as that is always a good mover, but that's 3:30am for me and I'm not prepared to lose my sleep to be sure which way things are going. Though I think AUDUSD and AUDJPY as a sell/buy. UJ is moving well upwards, currently in a bit of a pullback, but it should bounce up again soon. Anyhow, there's plenty more tomorrow. If I'm right about this and time will tell, it could be worth a live account soon. My normal stuff is soooo slow!
+
+--- 帖子 #200 ---
+You are doing your homework very well! P.S. You can set the EA to automatically open positions at the time you are asleep.
+
+--- 帖子 #201 ---
+great idea this one, i was actually about to get started. On something similar. Some of my thoughts to help or add , as have spent a fair bit of time analysing this as a system. To fully automate would be an idea. Ie the start of he week, you review the major releases , only preset the entries for the big releases. , smaller news is pointless in the long run. Im not sure if anyone has discovered good raw data on historical and average pip move and time for each release. I found a programme called news trader pro but they are dodgy. Never sent me a license so don't subscribe. But if anyone knows of a source of solid historic data , would be very grateful . As I think this is key. Eg this would allow you to get more accurate with stop losses and targets. I also think that you should have three potential entry types: 1. One directional trade , entered one minute before news release, with target and stop , and trailing ? This is for when it is quite obvious which way the release is going to go. 2. Hedge , same as above opened just before , release.
+
+--- 帖子 #202 ---
+sorry my iPhone is hard work , contd...... 3. Is a straddle this is riskier as its when slippage can be bad but still a good position in that your orders are preset , and not always both positions will be opened, a safer hedge so to speak . Some other things: by finding a source of good historic news data , you can actually find the optimum pairs to trade for release , and the optimum targets and safest stop losses. And has anyone's tried using fixed spread accounts that stay unchanged for news this maybe a way to avoid slippage etc ? Thanks
+
+--- 帖子 #203 ---
+Thanks. Yes I do use the timer, but I need to see which way things are going, say within half an hour prior. These judgment calls aren't easy, they aren't setups that jump out and hit you in the face!
+
+--- 帖子 #204 ---
+UAH! Good start of the week without negative correlation that i lose them. Attached Image (click to enlarge)
+
+--- 帖子 #205 ---
+oh, have a bad day. I see now that my trades are under a lot of pips but I do not understand: in theory, 80% were positive correlated, now they are at 73%. Probably if I will have to go below the 70% 'close everything in loss EDIT : the cross are CHFJPY vs GBPUSD ( i entered in sell/buy)
+
+--- 帖子 #206 ---
+The EA doenst work on my Broker(ActivTrade). Someone knows what?
+
+--- 帖子 #207 ---
+Hi LvCa, I just wanted to mentioned that I personally never trade two currency pairs with no common currency between them. If I were to trade CHFJPY with another pair, it would be AUDCHF (CHF is the common currency here).
+
+--- 帖子 #208 ---
+Hello MathTrader7 , it is very intresting ... what do you mentioned i used for the news time but now i will try to trade only piar with common currency . Thanks PS : my last test is stopped by a big DD (too mutch risk for me with out filter :-( )
+
+--- 帖子 #209 ---
+You're welcome! :-) Just another tip: Try to compare the strength of non-common currencies (AUD with respect to JPY, in our example, CHFJPY, AUDCHF) to decide going Long/Short. Good luck! Math
+
+--- 帖子 #210 ---
+So i' am no sure to have understood well so i do an example becouse this tip could change my system (absolutly ) Before i traded AUDCHF vs AUDUSD (buy/sell ) with ''common pairs filter'' but without the power filter .. so i could add this power filter : Attached Image (click to enlarge) In the Graph 1 i see that AUDUSD has temporarily follen out with AUDCHF so i will enter only in long AUDCHF and sell AUDUSD : this could be my frist filter BUT....... in the graph 2 i see that CHF have more power than USD so this is not the best time to trade them : probably the two couples could go back to kissing when CHF have LESS power than USD (no now) massimum regard
+
+--- 帖子 #211 ---
+The chart you have attached is a very good example for the explanation. My personal strategy: Wait for the currency strength meter indicator to show a cross, then there would be a high probability [1] that at least one of the currencies (USD or CHF, in this example) to continue in the direction of the cross. In the cross you highlighted in blue, I would go for selling AUDCHF and buying AUDUSD. Note: Always check the correlation between two pairs on H1 (base time frame) and make sure that their absolute correlation over 200 last bars is more than 0.5 (50%). [1] keep in mind that no prediction can be made for sure in Forex market! P.S. Could you please share the currency strength meter indicator?
+
+--- 帖子 #212 ---
+Sure , in the setting you can see only the pairs in the grapic or you can select the pair what you want to see . (i use ''showPairOnChartOnly'' = True ; tf = 0 so the tf is the tf of the chart) Thank you for you suggestion Attached File(s) Nihilist_CSM_mtf_V2.ex4 30 KB | 353 downloads
+
+--- 帖子 #213 ---
+You're welcome! And thanks for the indicator :-) P.S. For those who are wondering why Nihilist_CSM_mtf_V2.ex4 doesn't work, it simply needs the attached indicator, myRSIOMA.ex4, to work properly.
+
+--- 帖子 #214 ---
+I may start implementing an EA to automatically trade based on this currency strength meter indicator and my strategy .
+
+--- 帖子 #215 ---
+Hi Mathtrader, ytd there were news for the FOMC member speech at 6:10PM. Expecting the USD to be hawkish than expected, I had alrdy set the EA according to my broker time to execute right on time at 6:10PM: 1) BUY/BUY for USDCHF and EURJPY (both are negatively correlated) 2) SELL/SELL for EURUSD and USDJPY (both negatively correlated) Am I doing right for the above? Also, the EA does not execute out the actions.. where have I done wrong? Pardon my ignorance.. thanks!
+
+--- 帖子 #216 ---
+Hi, LvCa Just curious... There are so many CSMs available. Do you find any edge over others in Nihilist's CSM? See also: http://www.forexfactory.com/showthre...87#post8599587 Thanks,
+
+--- 帖子 #217 ---
+Good source to find which news is worth trading: http://www.forexpeacearmy.com/commun...ng-signals.19/ You can subscribe it to receive daily email notification.
+
+--- 帖子 #218 ---
+CSM of my choice: http://fxtrade.oanda.com/analysis/currency-heatmap
+
+--- 帖子 #219 ---
+Hello Heispark , Yesterday i attach the Nihilist'CSM in my chart becouse was the first csm that i found in my platform , and that is ''no digital''( have the line with his cross )... so i must try it to tell you if i will have any edge . Thank you for the link
+
+--- 帖子 #220 ---
+You are right. And it no needs to make difficult: hedging two currency pairs with a commun currency in them, is the same as to trade only one pair. For example: long EURUSD and short GBPUSD = long EURGBP. But this doesn't mean that correlation hedge can't work. Just no need to make it complicated. I use this strategy not just before news, but always, independently from every news or not news, just using simply the OverLayChart indicator, and apply grid if it is necessary (most of the time is necessary.) If somebody become ill from using grid, DON'T USE IT!
+
+--- 帖子 #210 ---
+My first live test using NFP. 0.01 lot used and it's closed in profit even before the release... Attached Image Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) More live test will be continued....
+
+--- 帖子 #211 ---
+Another winner. CAD Ivey PMI: Attached Image Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Getting more interesting.... Daily News Information: http://www.forexpeacearmy.com/commun...ng-signals.19/ Currency Correlation: http://www.myfxbook.com/forex-market/correlation Currency Hit Map: http://fxtrade.oanda.com/analysis/currency-heatmap
+
+--- 帖子 #212 ---
+Hello MathTrader7/anyone, can you/anyone pls write a simple EA which will open trade according to the following rules for any time frame. Would appreciate very much if you/anyone advise on this to make it perfect. Entry rules: Buy: if the bullish candle has long body with no lower wicks (belt hold bullish candle) in down trend market Sell: if the bearish candle has long body and no uppers wicks (belt hold bearish candle) in uptrend market Exit rules: TP: manually assign based on time frame SL: manually assign based on time frame Thanks &amp; Best regards SAM
+
+--- 帖子 #213 ---
+Good results! Please keep posting your findings here.
+
+--- 帖子 #214 ---
+Thank you MT7! I will. The news I am interested in this week: http://www.forexpeacearmy.com/commun...-2015_43243_2F
+
+--- 帖子 #215 ---
+You may want to post your request to http://www.forexfactory.com/showthre...05#post8629105 or https://www.forex-tsd.com/forum/deba...60-coding-help , instead of this thread....
+
+--- 帖子 #216 ---
+Another good source to identify high impact news: Inserted Video This weekly video is released every Tuesday either from https://www.youtube.com/channel/UCcn...xoVdbasgeQc_6w or from http://www.jarrattdavis.com/blog/ .
+
+--- 帖子 #217 ---
+Here is the first version of an EA that trades based on Nihilist Currency Strength Meter indicator. When 1st Currency and 2nd Currency power lines cross, the EA opens two hedge positions based on Common Currency . Note 1: This EA needs the attached indicators to be copied in &lt;MQL4\Indicators&gt;. Note 2: This EA is experimental, and is served "as is". Note 3: The EA automatically detects the correct currency pairs made of the input currencies. Note 4: The EA works on any time frame (I am testing it on H1 time frame). Note 5: Attach the EA to one of the pairs you set the EA to trade (for example, the default settings are for AUDUSD and AUDJPY).
+
+--- 帖子 #218 ---
+Thank you for the new tool! Sounds interesting although I don't trust lines crossing stuff any longer....
+
+--- 帖子 #219 ---
+Hi, Thank you for all work and providing EA.
+
+--- 帖子 #220 ---
+Dear Mathtrader I tried to put your new CSHedgeEA in EU H1 chart but immidiate it is removing from the chart. Is there any problem?I copied indicator and put in indicator folder also.
+
+--- 帖子 #221 ---
+Note 5: Attach the EA to one of the pairs you set the EA to trade (for example, the default settings are for AUDUSD and AUDJPY). Attached Image (click to enlarge)
+
+--- 帖子 #222 ---
+You're welcome! :-) Unfortunately the Nihilist CSM indicator is very slow. I am getting the following messages: Attached Image (click to enlarge) I have to develop a CSM indicator/formula to use in my EA which would be much faster
+
+--- 帖子 #223 ---
+Perhaps Hanover can give you some advice or help when you make it....... He's a super expert.
+
+--- 帖子 #224 ---
+Hello , becouse this work (trader) is very very hard , it's no easy (abosute no easy!) This week i try the csm in digital , becouse the nihilist csm is too big for my little pc so... for now i have success (only 3 days) but i want see in bad days before tell anymore. Very good luck at all , i hope to tell good news next week
+
+--- 帖子 #225 ---
+Hi LvCa! I'm so eager to see your results and know about the strategy. Please keep updating us with your progress! Best, Math
+
+--- 帖子 #226 ---
+Honover created a great currency strength indicator , however, unfortunately it is very slow (slower than Nihilist's indicator).
+
+--- 帖子 #227 ---
+Anyone got NZD rate decision trade? I set NU/NJ B/S trade and went to bed but f***ing Windows 10 rebooted my PC without notice before the new... By default, Windows 10 regularly reboot without notice after update, even if I have open apps or documents on it! Now I turned on reboot notification. People in M$ are all nuts. I really hate M$ products.... I will run it on my Macbook from next time... Guys, when you use Windows 10, be careful! Attached Image (click to enlarge)
+
+--- 帖子 #228 ---
+Here is a screenshot of the beta version of my own currency strength indicator (it is still under development). Attached Image (click to enlarge) The blue line shows the strength of NZD while the white line shows the strength of USD . The indicator's base point (reset point in time) is the beginning of the day. What do you think to trade the cross between two currencies strength lines? Did anybody try to trade with such crosses? If so, how profitable is this strategy?
+
+--- 帖子 #229 ---
+Just like any other line-crossing strategies (such as MA), it's prone to whipsaw....
+
+--- 帖子 #230 ---
+So, have you tried a similar strategy based on a cross between two currencies' strength lines? If so, would you please tell me which indicator did you use?
+
+--- 帖子 #231 ---
+I tried Nihilist's CSM as well without much success. May others have different experience though...
+
+--- 帖子 #232 ---
+Thanks! Let's see how trading based on my CSM would work... I am developing an EA for the cross strategy to do forward test.
+
+--- 帖子 #233 ---
+AUD Employment change. One loser... Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #234 ---
+GBP Rate decision. Market wasn't much impressed by the news and I manually closed the trading with small profit. Attached Image (click to enlarge)
+
+--- 帖子 #235 ---
+I think this strategy is called Carry Trade. And it works if the correlation between two currency pairs holds for a long time and that the broker do not change the swap rates regularly. What is your broker by the way?
+
+--- 帖子 #236 ---
+Pepperstone .
+
+--- 帖子 #237 ---
+Hello guys itry to tell an idea that i hope it could be good , i dont' know . in the graph there are 1EA that i use only as an indicator ( no ea) and an indicator of power ( there are many power indicator and this is the ''cash spitting sensor'') . In the ''ea'' are sign in yellow the possible trade with good %correlation , the total spread , etc.. but if we can use the power i think that we can cancel the 3 column with zs indicator and put in only one column with the difference of power. In this example : AUDJPY/CADJPY ( i filetred the pairs with more than +70%correlation and 4pips max spread ) % corr = +81% diff power is -37.3 = AUDJPY have more power tha CADJPY so... ...so i could trade long AUDJPY and short CADJPY (obvius AUD have more power than CAD) Attached Image (click to enlarge) IF it is no an stupid idea and it could be easy to do , i will share the indicators (obvious) if someone want it.
+
+--- 帖子 #238 ---
+Have you been profitable or at least tested and got good performance in demo, mixing these indicators and @MathTrader7 EA? If so please share them
+
+--- 帖子 #239 ---
+USD Core Retail Sales. Another small winner... Attached Image (click to enlarge)
+
+--- 帖子 #240 ---
+Once I've identified pairs with good correlation, and am close to high impact news: Which button to press? (Which direction to enter?) or is this supposed to be indifferent as the hedging takes care of it? I'm trying to understand how this strategy makes money if we're taking (in theory) perfectly hedged positions. If someone could post a complete example of a winning trade (in the scenario that everything goes as planned)! it'd be much appreciated by traders like me who are 100% new to this type of strategy. I've already read the whole thread by the way. Still feel compelled to ask! Thx! DIego
+
+--- 帖子 #241 ---
+I'd bet for stronger currency against weaker one... Either see currency strength meter or analysis report, or just watch the charts... Of course, none of them can guarantee wining trade you know... And this is imperfect hedge...if it's perfect hedge, you don't make/lose any money.
+
+--- 帖子 #242 ---
+I also have had bad results with the nihilists CSM. It was simply to CPU intensive especially using many charts . For CSM I'm using the currency strenght meter and (more important) the rsioma v4. This is the best indi I know.
+
+--- 帖子 #243 ---
+Hi PBPTaker, Thanks for the indicators! :-) Since my CSM indicator is still under development, I'll make an EA using your attached indicators. Let's see how it would work. Best, Math
+
+--- 帖子 #244 ---
+Hi MathTrader7. You can't rely on my (it is not my Indi, I've found it somewhere on FF) CSM because it gives you only the current market view (in opposite to the nihilist csm). I've created a powershellscript which agregates the values from the past and two indicators which are getting the values into a file and the second puts the aggregated values back back to the MT4 into global variables. But this is far too complicated (this is because I do not share my powershell script). Perhaps you knwo how to do this using mql. But using the rsioma it is simply not neccessary to use it. I've modified the TCO-trader to use the rsioma. It works, but it has still to much unnedet code and input parameters in it. If you can help to clean my Tco-Trader ... otherwhise you can have it as an idea. I share my things because I also have found those things free available ...
+
+--- 帖子 #245 ---
+Hello i read your post only now , sorry . The last week was good before the big DD of last day that dragged my account in Break even (near break even with 0.6% of profit ) so i think that the problem (for me ) is the bigger size (0.10 on 1000$ demo account) , probably i must test it with half size. I upload the cash spitting sensor and the csm that i see now called CC (probably is more light than Nihlist's indicator) The EA was only for looking the correaltion , I USE IT ONLY AS AN INDICATOR ( but everyone does as he wishes) . Attached File(s) Cash Spitting Sensor (e).ex4 98 KB | 404 downloads Attached File(s) Cash Spitting Sensor (e).mq4 40 KB | 507 downloads Attached File(s) CC mtf &amp; alerts 2.03 nmc.ex4 121 KB | 402 downloads Attached File(s) CC mtf &amp; alerts 2.03 nmc.mq4 30 KB | 441 downloads Attached File(s) japi-EA-CORR (1).ex4 144 KB | 487 downloads
+
+--- 帖子 #246 ---
+Tradable red news in this week: http://www.forexpeacearmy.com/commun...19-2015.43319/
+
+--- 帖子 #247 ---
+About what currency strength meter indicator write? And what TF is placed? I attach to assess different currency strength meter indicator.
+
+--- 帖子 #261 ---
+If you change the variable "Auto Trade Disabled" to "Sell / Sell" (for example). Expert Advisor will disappear from the chart.
+
+--- 帖子 #262 ---
+That's because you haven't set the time at which the EA must execute Sell/Sell. You need to set a time in the future when you are willing the EA execute an action (for example, Sell/Sell) and then changing the input variable "Auto Trade Disabled".
+
+--- 帖子 #263 ---
+It does not help: 2015.12.19 21:57:00 2016.11.19 21:57:00
+
+--- 帖子 #264 ---
+I tested it again, and it just works fine!
+
+--- 帖子 #265 ---
+MathTrader, I've been playing with the method, just to get the grip of it. Ok, I have not been particularly entering trades precisely at times right before the news, but I did enter when there was some volatility as to have some movement and test the method. I've had 5 winning / 3 losing combinations, for a combined Loss of Around US$10, considering spread and commissions I don't understand how this is supposed to make money, if this is always depending if you enter the "good" or the "bad" side of a symbols movement. How is having two trades supposed to cover the higher trading costs in the long run? Someone please explain the underlying concept of the method. Thanks!
+
+--- 帖子 #266 ---
+Hi acostafulano, I have already mentioned my strategy in previous posts, but I collect them here and later put them in Post 1. How do I trade with this strategy: 1. Choose a high impact red news of a major currency, for example AUD. 2. Choose two other major currencies to pair with AUD such that the absolute correlation of two pairs is greater than 0.5, for example AUDUSD and AUDCAD. 3. A few minutes before the news release time, look at a currency strength meter to observe which of above two currencies (USD or CAD) is more powerful. 4. Select a trade button according to both the sign of correlation (this can be automatically done by the EA for you), and the strongest currency you identified in the previous step. Note: There is no holy grail strategy that makes green pips all the time. Above steps are my own strategy to trade with this EA. Best, Math
+
+--- 帖子 #267 ---
+Is there any body who is testing MathTrader7_CSHedgeEA.ex4 EA?
+
+--- 帖子 #268 ---
+CADCHF buy + EURCAD buy = PT, CADCHF sell + EURCAD sell = SL
+
+--- 帖子 #269 ---
+*** Hedge Move Indicator *** Version 1.10 of the indicator released. The indicator shows the relative price move between two symbols. I updated Post 1. Attached Image (click to enlarge)
+
+--- 帖子 #270 ---
+Version 1.60 of the EA released. In this version a few bugs fixed. I updated Post 1.
+
+--- 帖子 #271 ---
+Hi MathTrader7, Can you please explain on how to interpret the Hedge Move Indicator? Thanks
+
+--- 帖子 #272 ---
+The new version has opened only one pair.
+
+--- 帖子 #273 ---
+Mmmm... Could you check your MT4 terminal log to see if there is any error there? I guess your broker (for some reason) rejected to open the second position.
+
+--- 帖子 #274 ---
+Hi karamaramun, Hedge move indicator shows the relative moves (in points) of two pairs starting from the open price of the day. If two pairs are, for example, highly and positively correlated, then a trade signal could be when they start diverging from each other for more than some amount of points. Best, Math
+
+--- 帖子 #275 ---
+Thanks, I forgot to write in the name suffix pair.
+
+--- 帖子 #276 ---
+Thank you for the explanation. If the indicator shows the number of movement points of a pair, if we are directional bias... say news is expected to positively affect a pair. So doesn't it imply that we should buy the pair that moves with more points and sell the pair with less point as a hedge? K.Mun
+
+--- 帖子 #277 ---
+Happy Cristmas Math7 and happy Critmas at all people . Luca
+
+--- 帖子 #278 ---
+Merry Christmas! :-)
+
+--- 帖子 #279 ---
+Dear Mathtrader Can you make an EA based on this strategy. It should work both in Renko and non Renko chart. https://forexfriends.wordpress.com/2...ading-hedging/ Thanks
+
+--- 帖子 #280 ---
+Version 1.63 of the EA released. In this version a few bugs fixed. I updated Post 1.
+
+--- 帖子 #281 ---
+MathTrader7, i don't see this indicator in the post #1?
+
+--- 帖子 #282 ---
+I will release a new version of the indicator soon.
+
+--- 帖子 #283 ---
+I try this ea but it's not working . it's "there is not enough history data" ,why this happen? Waiting for new version . anyway is there any suggestion which broker suit for this EA ? thanks for sharing
+
+--- 帖子 #284 ---
+I try to attach to chart but it disappear .Can you update it pls Mathtrader7.
+
+--- 帖子 #285 ---
+Version 1.64 of the EA released (I updated Post 1). In this version a few bugs fixed.
+
+--- 帖子 #286 ---
+Thanks MT7,
+
+--- 帖子 #287 ---
+Hi, I just try ver 1.64 , don't know why open order was closed after open 2-3sec please advise Attached Image (click to enlarge) Thanks you
+
+--- 帖子 #288 ---
+Hi, if the net profit reaches either TP or SL, the EA will close both positions regardless of how long it would take. Check your SL setting.
+
+--- 帖子 #289 ---
+Thanks you very much it works now after I input SL for some number, it because I changed SL to "0" because I don't want SL Thanks you
+
+--- 帖子 #290 ---
+it load succesfully now but dont open any order with click button why .?
+
+--- 帖子 #291 ---
+This is a great thread thank you for sharing this hopefully I can test it this week on demo
+
+--- 帖子 #292 ---
+It doesn't work in the strategy tester.
+
+--- 帖子 #293 ---
+You're welcome! :-)
+
+--- 帖子 #294 ---
+Hi MT7, Quote: Choose two other major currencies to pair with AUD such that the absolute correlation of two pairs is greater than 0.5, for example AUDUSD and AUDCAD. Where can i get complete list of Pairs with " absolute correlation of two pairs is greater than 0.5"? ~Jil
+
+--- 帖子 #295 ---
+Here is one such indicator:
+
+--- 帖子 #296 ---
+Thanks MT7. Can you let me know which pair your normally trade? Does the correlation change?
+
+--- 帖子 #297 ---
+You're welcome! I choose two pairs with the most positive (or negative) correlation where their average spread on my broker is minimum.
+
+--- 帖子 #298 ---
+Once you select on pair, how do you decide whether it is BUY/BUY, SELL/SELL etc ? does correlation number changes as market moves? Is that mean we should always choose most positive/negative CR?
+
+--- 帖子 #299 ---
+1. If the correlation is positive, we only use either BUY/SELL or SELL/BUY 2. If the correlation is negative, we only use either BUY/BUY or SELL/SELL - Let's assume that we have selected EURUSD and USDJPY with a negative correlation of -0.85 , and we want to trade a high impact red news of USD . How do I make a decision to trade the news? - I look at a few currency strength indices (including fundamentals) to predict which currency, EUR or JPY is more powerful at the time of trading. - Let's say that it is JPY . In this case I will use SELL/SELL button to open a sell position for EURUSD and a sell position for USDJPY . - If the result of news is very good for USD , EURUSD will go down to my favor while the other pair, USDJPY would go up, however, the strength of JPY would resist more than the weakness of EUR . - If the result of the news is very bad for USD , USDJPY will go down sharply due to strength of JPY , while EURUSD won't go up too sharply due to weakness of EUR . - This is the basis of my reasoning for hitting SELL/SELL , BUY/BUY buttons or just stay away from trading that red news! Best, Math
+
+--- 帖子 #300 ---
+Excellent. Thanks MT7.
+
+--- 帖子 #301 ---
+Hello Math, I'm receiving this error. "there is not enough history data". Nor I was able to execute this EA. I tried the EA from the first post. Please advise Thanks
+
+--- 帖子 #302 ---
+You need to download history data of the symbols you want to trade with this EA.
+
+--- 帖子 #303 ---
+Hello Math. I have downloaded the historical data, I'm reveiving the below error saying that Autotrade time has passed Can you please advise?
+
+--- 帖子 #304 ---
+I uploaded a new version (v1.65), please use this new version. If there is any bug, please let me know.
+
+--- 帖子 #305 ---
+The error still persists. I'm not sure what went wrong.
+
+--- 帖子 #306 ---
+Make sure that you use the last version.
+
+--- 帖子 #307 ---
+Sorry MT7, cant PM you.
+
+--- 帖子 #308 ---
+I am experiencing the same error said above here: "Auto Trade Time is passed". Please, note I redownloaded the version at post number one: there is another version somewhere else? Attached Image (click to enlarge)
+
+--- 帖子 #309 ---
+Ok, so we hedge EURUSD with USDJPY, and try to exploit the imbalance. Why not to buy or sell EURJPY before usd news towards the strongest currency?
+
+--- 帖子 #310 ---
+As already said a couple of weeks ago, I am not able to use this last version of EA, here it is the log (initialization failed, code 32767): Inserted Code 0 08:41:32.968 MathTrader7_NewsHedgeEA EURUSD,H1 inputs: InpAction=0; InpTime=2018.12.12 23:30:00; InpRelevantButtonsOnly=true; InpHedgeSymbol=USDCHF; InpTPmoney=75.0; InpSLmoney=5000.0; InpEqualizePips=true; InpLotSize=1.0; InpSlippage=30; InpMagicNumber=1122; 3 08:41:33.015 MathTrader7_NewsHedgeEA EURUSD,H1: initialization failed (32767) 0 08:41:33.015 MathTrader7_NewsHedgeEA EURUSD,H1: uninit reason 8 0 08:41:33.015 Expert MathTrader7_NewsHedgeEA EURUSD,H1: removed A help will be appreciated. Best regards. /achab
+
+--- 帖子 #311 ---
+It is possible!
+
+--- 帖子 #312 ---
+iam also facing same issue with the latest version 2017.04.04 10:43:39.518 MathTrader7_NewsHedgeEA EURUSD,H1: initialization failed (32767)
+
+--- 帖子 #313 ---
+I'm new to Forex. FF has is an awesome resource. Having stated that I think it's pretty amazing to see your contributions here. I salute you MathTrader7!
+
+--- 帖子 #314 ---
+Version 1.66 of the EA released. I updated Post 1. This version has been compiled with MT4 build 1069.
+
+--- 帖子 #315 ---
+It will be good if one can select the lots for the hedge trade sepratly. Also a option to open a pending order x pips away after initial entry will be great .
+
+--- 帖子 #316 ---
+Version 1.67 of the EA released (I updated Post 1). In this version users can specify the lot size of the hedge symbol separately.
+
+--- 帖子 #317 ---
+Hey MathTrader, do you have version which i can make 2 hedge positions on 1 pair? for example SELL and BUY on EU at the same time
+
+--- 帖子 #318 ---
+Hej! I don't have such version of the EA.
+
+--- 帖子 #319 ---
+Can you please explain or resolve the problem in your EA, I set up $3 as TP and $10 as SL but after experiencing on many pairs trades were closed above $3 please take a look at the screenshot.
+
+--- 帖子 #320 ---
+Hi Math, This EA sounds interesting as I am also an active news trader. I have download your EA and installed it to my MT4. Unfortunately after being successfully installed, it has being automatically removed. Did I do something wrong? Thanks heaps
+
+--- 帖子 #321 ---
+Hi Ferro, The EA must be updated to work with the latest version of MT4. I may release a new version of this EA. Best, Math
+
+--- 帖子 #322 ---
+Version 1.70 of the EA released (I updated Post 1).
+
+--- 帖子 #323 ---
+Thanks Math. You are superb! Will test this ASAP.
+
+--- 帖子 #324 ---
+How to trade on real account???
+
+--- 帖子 #325 ---
+I release a stable version of the EA soon.
+
+--- 帖子 #326 ---
+nice EA mate
+
+--- 帖子 #327 ---
+Version 1.71 of the EA released (I updated Post 1). This version works with the latest version of the MT4 platform and live accounts.
+
+--- 帖子 #328 ---
+it's real good! i must open two chart or one chart？
+
+--- 帖子 #329 ---
+sorry，i know！ haha~，thanks！！！
+
+--- 帖子 #330 ---
+How to set？can't set for hedge！！！ Attached Image Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #331 ---
+Please read the first post, it explains the input settings.
+
+--- 帖子 #332 ---
+Positively Correlated Symbols For a pair of symbols that are positively correlated (such as AUDUSD and AUDCAD), use either Buy/Sell or Sell/Buy button. very soory!!! i don't see it !!!
+
+--- 帖子 #333 ---
+Best EA,well done and thanks for sharing!
+
+--- 帖子 #334 ---
+Manual order? Semi automatic EA?????????
+
+--- 帖子 #335 ---
+You can trade manually or semi-automatic with this EA. Please read the description of the EA in the first post.
+
+--- 帖子 #336 ---
+it say there is not enought history dana (as least 201) for usdjpy, what is that mean..?
+
+--- 帖子 #337 ---
+My had was fulfilled of strategies and I found myself in this thread...It is very interesting because on previous trading years of mine, I did try some similar like this manually, but after few days of success it always failed. I have some simple questions, while I went almost troughout all pages I could not understand very clear the trade enter correctly, some few things. Now lets say, are we trading only on the specific red news of a currecny ?..Because I read somewhere here that it is not neccesery to trade on red news..So, it is to be on red news or on any other criteria ? What I want actually to understand is, lets again saying example, we do have a red news upcoming for AUD after 5 minutes.. Next step we check for pairs. So lets do with AUD/USD and AUD/CAD ... The USD is stronger on daily currency strengh against CAD. USD is 7.0 and CAD is 3.7 (example) Now do we have to decide to going long for AUD/USD and going short for AUD/CAD..or what is the reason to not do the opposite. "3. A few minutes before the news release time, look at a currency strength meter to observe which of above two currencies (USD or CAD) is more powerful. 4. Select a trade button according to both the sign of correlation (this can be automatically done by the EA for you), and the strongest currency you identified in the previous step." Not so clear with this. I can not get the enrtry philosophy with this paragraph, sorry for the silly question. But I believe as this thread is alive and updated it is worth to understand what it is all about. Thanks for enlighten me in advance. Good week to all.
+
+--- 帖子 #338 ---
+Hi freedom48, I personally trade with this EA for red news only. But there are people who use this EA to enter the market with their own entry logic. For your example of AUD USD and AUD CAD, we need to check the currency strength of USD and CAD . Let's say that USD is 7.0 and CAD is 3.6. - If the red news of AUD is good for this currency, then the prediction is that AUDUSD would probably goes up less than AUDCAD because USD is stronger (about twice in our example) than CAD. - If the red news of AUD is bad for this currency, then the prediction is that AUDUSD would probably goes down more than AUDCAD because USD is stronger (about twice in our example) than CAD. Hence, I will SELL AUDUSD and BUY AUDCAD . Best, Math
+
+--- 帖子 #339 ---
+Thank you. Now very clear about without doing any test for the moment. Fundamentals playing important role for the specific pair, in the example here the AUD....Otherwise I wouldn't say and guess it could be important without the red news as others are doing. Without the AUD red news, trade directly USD/CAD. Why others trying it without the role player. So better I will take this on my chart and be able to better analyze. I think somehow behind the 2 years of this EA experience , things were going good. I missed the thread so I can start soon to see forward.
+
+--- 帖子 #340 ---
+Sorry I had to quote again. From your description of the both options , seems like from your sentence that for both options you have to " Hence, I will SELL AUDUSD and BUY AUDCAD . "
+
+--- 帖子 #324 ---
+I didn't understand your message/question here...
+
+--- 帖子 #325 ---
+You're welcome! Sure you can trade USDCAD without looking at any news! :-)
+
+--- 帖子 #326 ---
+Hi back, sorry I was not so clear about my question, I mean: - If the red news of AUD is good for this currency, then the prediction is that AUDUSD would probably goes up less than AUDCAD because USD is stronger (about twice in our example) than CAD. - If the red news of AUD is bad for this currency, then the prediction is that AUDUSD would probably goes down more than AUDCAD because USD is stronger (about twice in our example) than CAD. Hence, I will SELL AUDUSD and BUY AUDCAD . So you mean that in both option of red news ( good or bad) you will make the same action SELL AUDUSD and BUY AUDCAD . ? Or did you mean if the red news for AUD is good we do not trade? When we will do BUY AUDUSD and SELL AUDCAD if USD is 7.0 and CAD is 3.6 in currency strengh meter is remain as my question. I hope now I was more clear. Thank you Math
+
+--- 帖子 #327 ---
+Hi freedom48, Please note that we do an analysis before the red news release time. Let's say that half an hour before a red news for AUD, we analyze the possible outcomes given currency strength values of USD (7.0) and CAD (3.6). So, I will SELL AUDUSD and BUY AUDCAD one minute before the red news release. If the red news outcome is good for AUD, I expect to see more bullish movement in AUDCAD which would cover my loss on selling AUDUSD (and possibly makes a profit in total). And if the red news outcome is bad for AUD, I expect to see a more bearish movement in AUDUSD which would cover my loss on buying AUDCAD (and possibly makes a profit in total). Hope this explanation helps you to get the whole idea :-) P.S. Our analysis is valid as long as the currency strength values are (at least to some degree) correct. Best, Math
+
+--- 帖子 #328 ---
+Thank you much. Now I get it totally clear. In overall from above example it is also very important to seek a pair combination with AUD before the news outcome. A 7.0 can lead to 8 and a 3.6 can wipe out totally till 0.5 or the opposite can happen. So I probably will need to test very often many options . Again thanks for clear my mind. Wish best trades.
+
+--- 帖子 #329 ---
+I downloaded this EA,but it doesn't give correct corealtion pairing,for example when USDJPY is low,GU is high but the options are only both sell or both buy.it should be one buy and one sell option.Pleae fix this,i like this EA very much otherwise. please guide me to latest version.i have the first one only.
+
+--- 帖子 #330 ---
+I always put the latest version of the EA in Post 1. This EA uses D1 candles of two pairs to calculate the correlation over last 200 candles.
+
+--- 帖子 #331 ---
+I am using that EA what is there in post 1 and by the way there is only one version there right? I have seen other traders also having the same problem that this EA is not showing correct correlation.plese refer to this screen shot.
+
+--- 帖子 #332 ---
+A correlation of -0.78 between EURUSD and USDJPY is correct. And for a negative correlation higher than 0.5 we either use the button BUY/BUY or SELL/SELL. Please read Post 1.
+
+--- 帖子 #333 ---
+Thankyou for assisting,but still I don't understand the logic to enter,should we be trading on D1 time frame? red news I trade on 15 min chart normally. please guide me to the psot where I can read more about sound entry other times than news events.
+
+--- 帖子 #334 ---
+does this EA still gives good correlation results?
+
+--- 帖子 #335 ---
+Hi MathTrader7, Does this EA work today? I got a Message up in the left corner "auto trade time has passed!" and it's not working?
+
+--- 帖子 #336 ---
+Version 1.72 of the EA released (I updated Post 1).
+
+--- 帖子 #337 ---
+Tusen takk
+
+--- 帖子 #338 ---
+Varsågod!
+
+--- 帖子 #339 ---
+HI T4Trade. Would you mind to share your template? because my MathTrader7_NewsHedgeEA.ex4 doesnt look like this. And im pretty sure there is some special set up you have there. Thank you.
+
+--- 帖子 #340 ---
+sorry I don't have it,im no more using this EA,but I would like to practice hedging,good luck!
+
+--- 帖子 #341 ---
+Hi MathTrader thank you also from a relative newbie. I have been researching fundamentals for a few months and testing out few strategies including news straddling on demo and live accounts using a custom EA with mixed results. Just came across your EA MathTrader7_NewsHedgeEA.ex4 Uploaded Apr 27, 2018 3:01pm and tried to add this to a Demo account following what I thought were the right steps. Unfortunately I cannot seem to attach the EA to any chart as it drops out following settings update. I am also assuming if the step was successful I would see the EA name on top right hand side of the chart? Is there something I'm missing? I really appreciate your help. Best regards Ben
+
+--- 帖子 #342 ---
+Version 1.73 of the EA released (I updated Post 1). This version is compiled with MT4 build 1126 .
+
+--- 帖子 #343 ---
+Much appreciated MathTrader! I shall get to work
+
+--- 帖子 #344 ---
+Hi MathTrader could you possibly elaborate on how slippage default value of 30 lower or higher impacts potential outcome from the EA? Am I correct in thinking lower slippage value will limit risk but at the expense of hitting stop loss particularly around news release? Just experienced 50 pips slippage on certain Australian news at least according to brokers; in such extreme cases what should the value be around? I'm analysing news impact across multiple pairs and brokers and welcome anything that would assist an analytical approach. Will be more than happy to share results once I get the hang of the tricks of trading around news. Thanks again
+
+--- 帖子 #345 ---
+By the way MT I seem to have a little trouble removing the EA from a chart by Expert Advisors -&gt; Remove - leads to MT session hanging for 10 seconds or more with the buttons remaining on chart. Cheers
+
+--- 帖子 #346 ---
+Hi fairtraderuk, The Slippage in the input settings has a different meaning. When an EA sends an order to the broker's server, it has to mention the price at which the EA wants the broker to open a BUY or SELL position. However, since it takes some time (for example, 200 miliseconds) for the order to be processed by the broker's server, the actual price in the market may have been changed a few points. Slippage tells the broker how much change in the market price is acceptable for the order to be executed. Best, Matt
+
+--- 帖子 #347 ---
+What is your MT4 build version?
+
+--- 帖子 #348 ---
+Mathtrader would it possible for you to perhaps create MT4 Expert Advisor that will monitor the price action of two different currency pairs, e.g. EUR/USD and GBP/USD and calculate the correlation gap between them. The EA should place a trade when the gap reaches a certain level and close the trade in profit when the gap has closed to a preset lower level. I have been testing this strategy and its amazing. I basically have EA's that take care of the trade after I already opened the trade, but I need something that will trigger the trade in the first place.
+
+--- 帖子 #349 ---
+Hi, I sent you a PM in this regard.
+
+--- 帖子 #350 ---
+i have found one problem but i dont know how to slove?
+
+--- 帖子 #351 ---
+In order to load history data of hedge symbols, you can follow the steps below: 1. Hit &lt;F2&gt; key to bring up History Center window. 2. Select the symbol (for example, AUDCAD). 3. Click on &lt;Download&gt; button. 4. Repeat steps 1 to 3 for all symbols you want to load history data.
+
+--- 帖子 #352 ---
+Hi MathTrader apologies for the late response; the build seems to be 1090 May 2017 however the problem seems to have gone away - so thank you! On a separate note and hope this is not too much a rookie question - do you think it would be feasible for this EA or another adapted version to open both Buy &amp; Sell positions at certain minutes/seconds before news and for the EA to close one of the positions once the specific trade has hit a certain money loss but allowing the reverse trade to continue? Having faced slippage, manipulation and market lockout both manually and through an existing EA I am coming to the conclusion that perhaps being in the trade and taking a limited loss could increase the probability of profits(?) Alternatively entering minutes after the news based on historical behaviours could at times be equally profitable. Thanks again for all your efforts and look forward to your comments. Ben
+
+--- 帖子 #353 ---
+Thanks in advance Matt!
+
+--- 帖子 #354 ---
+Hi fairtraderuk! I believe that it is fairly easy to program such idea, but I don't have such EA. Best, Matt
+
+--- 帖子 #355 ---
+Thanks Matt, Based on your expertise do you think the idea of opening synchronised Buy&amp;Sell trades on the same or correlated pair before news release and relying on the EA to close the losing trade reasonably within target during volatile news is realistic or feasible? ie is it worth investing into the idea? Also aside from the great material you kindly share here, do you take on customised development work? Cheers Ben
+
+--- 帖子 #356 ---
+I think we need to backtest this idea to see the results. I haven't traded news like this. /Matt
+
+--- 帖子 #357 ---
+Mathtrader7, Please I need your help with the Mathtrader7_NewHedgeEA. Whenever, I turn off my mt4, the EA get disabled and could not get it on to monitor any pairs opened with it before. Therefore, the take profit will not be active to continue monitoring the trade--have to close it manually. Any help please. I also would appreciate if you add in the input the coordinates xy to help us position the EA in a different location than where it is opening right now such lower, upper, right or left corners. Thank you.
+
+--- 帖子 #358 ---
+Hi friends, can anyone help me please, I was using the Mathtrader7_NewHedgeEA and my MT4 updated to build 1160 and now it does not work anymore. Thank you!
+
+--- 帖子 #359 ---
+Hi MathTrader7 I was trying the NewsHedgeEA and i got a message on MT4 "Incompatible MT4 client build version" Can you please update your NewsHedgeEA for us?
+
+--- 帖子 #360 ---
+Hi, I will take a look at the issue and come back to you.
+
+--- 帖子 #361 ---
+Hi Math, can I use this ea without news?
+
+--- 帖子 #362 ---
+Yes, you can use it to open two positions without waiting for any news.
+
+--- 帖子 #363 ---
+Version 1.74 of the EA released (I updated Post 1). This version is compiled with MT4 build 1170.
+
+--- 帖子 #364 ---
+My MT4 is also version 1170. Unfortunately, when loading your EA, I was prompted to upgrade it. Incompatible?
+
+--- 帖子 #365 ---
+I hope not! :-) Mine is build 1170, I will see what happens when my MT4 platform upgrades...
+
+--- 帖子 #366 ---
+Hi I will check this when i get home on Monday
+
+--- 帖子 #367 ---
+[quote = MathTrader7; 11952127] {quote}我希望不是！:-)我的构建是1170，我会看到当我的MT4平台升级时会发生什么... [/ quote] Emmm loading EA occurs this way
+
+--- 帖子 #368 ---
+I have also build 1170, and I got also a error :
+
+--- 帖子 #369 ---
+I am working on a new version with integrated currency strength meter into the EA. I will release a new version to fix this issue.
+
+--- 帖子 #370 ---
+Version 1.75 of the EA released (I updated Post 1). This version is compiled with MT4 build 1170 (bug fixes).
+
+--- 帖子 #371 ---
+How does the integrated currency strength meter work? thanks
+
+--- 帖子 #372 ---
+Thank you very much MathTrader7, now it's working fine
+
+--- 帖子 #373 ---
+Hello MathTrader7 I am using this current version and I noticed that once I place a hedged trade and either change timeframes or log out and then log back into my mt4 account that the EA no longer seems to track the pips of the hedge trade I just placed. You cant even use the EA to close the trade with the close all button any more. Is this suppose to happen? I kind of like how it was keeping track of the pips I was am winning and losing.
+
+--- 帖子 #374 ---
+The EA is designed for being used for a short time during red news release which we usually do not restart the MT4 platform, or change the timeframe of the chart.
+
+--- 帖子 #375 ---
+Okay thanks
+
+--- 帖子 #376 ---
+Can we go for buy/buy also?
+
+--- 帖子 #377 ---
+Does the EA calculate lot size automatically?
+
+--- 帖子 #378 ---
+In the early versions it does but in the newer versions it is all up to the trader to enter the lot sizes for the main and the hedge symbols.
+
+--- 帖子 #379 ---
+How do we calculate the lot sizes?
+
+--- 帖子 #380 ---
+Basically you need first to find out how much a point of the main and hedge symbols worth in your account currency. Then look at ADR (Average Daily Range) values for both symbols and calculate lot sizes based on these values. Note: do calculation based on the assumption that what would be the profit/loss if the price of the main and hedge symbols goes to X and Y values given Lm and Lh lot sizes for the main and hedge symbols.
+
+--- 帖子 #381 ---
+Version 1.80 released (I updated Post 1). In this version an Experimental Currency Strength Meter is added to the EA. Attached Image (click to enlarge)
+
+--- 帖子 #382 ---
+This thread is not about anything other than the subject of Post 1. You can open a new thread in the Platform Tech Forum for your programming request, or send me a private message (PM). But you are not allowed to write your programming request here in this thread. This is my last warning for you.
+
+--- 帖子 #383 ---
+Hi I will test this tomorrow
+
+--- 帖子 #384 ---
+what do you think about triangular hedge ..is it posibble because i saw consistency in Wuxiaoming System. here is the live account of him. Account login id 60304 Password r6pimbd Server CsiGroupLtd-Live Login only at mobile
+
+--- 帖子 #385 ---
+Man, this is what I’m looking for. Thank you for youur great share of news trigger EA
+
+--- 帖子 #386 ---
+Mathtrader, I'm late to the party with this thread. I'm just now trying to make the EA work. I'm enclosing a screen shot of my settings. I had the time set for 12:20 chart time. I had pressed the BUY/SELL button. 12:20 came and went and nothing happened. The "last known broker time" never advanced from 12:09 which was the time I added the EA to the chart. What did I do wrong? I'm sure I made a stupid mistake. Thanks Attached Image (click to enlarge)
+
+--- 帖子 #387 ---
+Hi billbss, It seems that the EA didn't receive any ticks after you have changed the input settings. Please check your MT4's Expert tab to see if there is any error caused the EA to crash or something? I will try to reporduce this error on my MT4 and come back to you when I have more info about this problem. /Matt
+
+--- 帖子 #388 ---
+I got it working. 1. There was a divide by zero error in the CSM that seemed to mess it up. 2. I changed to the previous version (without the CSM) 3. I found I was using the wrong time. I had assumed the EA wanted chart time. In my case it wanted chart time - 2. The screenshot shows the only settings that let it work. I'm good with that. I can use it. Thank you! Attached Image (click to enlarge)
+
+--- 帖子 #389 ---
+I made $150 on the AUD GDP. Thank you. Couple of questions. If both trades are active how do you ever get into profit or loss so the EA will close the trades? I let the EA initiate the trades and did the rest manually. Is there any other way? Which time frame do you check for correlation and currency strength? Thanks in advance.
+
+--- 帖子 #390 ---
+Great to hear that you made profits using this EA. As written in Post 1, 5. Net Take Profit (money): - When net profit becomes greater than this value, the EA automatically closes both positions. 6. Net Stop Loss (money): - When net profit becomes less than negative of this value, the EA automatically closes both positions. The other way it to close the basket manually using the buttons of the EA. The correlation is calculated based on D1 data. The currency strength calculations are complex, I use both price (M1~H1) and tick volume . /Matt
+
+--- 帖子 #391 ---
+5. Net Take Profit (money): - When net profit becomes greater than this value, the EA automatically closes both positions. 6. Net Stop Loss (money): - When net profit becomes less than negative of this value, the EA automatically closes both positions. How can you have net profit or net loss with the hedge still in place? The net should be roughly zero - one pair in profit and the opposite pair in loss.
+
+--- 帖子 #392 ---
+I'm beginning to see. Sometimes the pairs don't move in the opposite direction like they're supposed to and don't counter balance each other. It takes awhile to get used to this.
+
+--- 帖子 #393 ---
+Let's have an example. The main symbol is EURUSD and the hedge symbol is USDCAD . After opening two positions, if we call the profit on EURUSD, Pm and the profit on USDCAD, Ph , the net profit is just the sum of them, Pnet = Pm + Ph. For example, if Pm is equal to +150 USD (in profit) and Ph is equal to -90 USD (in loss), the net profit becomes + 60 USD (in profit), Pnet = 150 - 90 = 60. There is no guarantee that if one pair (EURUSD) is in profit, the other pair (USDCAD) be in the same amount of loss! Hope this answers your questions.
+
+--- 帖子 #394 ---
+Congratulations on the ea .. I have a question can I insert only the time instead of entering the year, day, month?
+
+--- 帖子 #395 ---
+I also have the same problem as you.help me,thank you
+
+--- 帖子 #396 ---
+From the log data it looks there is a problem with reading GBPJPY values. Try to open a chart of GBPJPY (for example, M1).
+
+--- 帖子 #397 ---
+Hi Math, Just found this thread and your EA looks very promissing - thank you very much for sharing it I have one problem with running it on build 1170, ver 4 When I add EA to chart with settings below it would give thew following error: I know it was previously discussed in hear, so I tried to input date and time 1 hour ahead of mt4 time even though Auto trade was disabled, but it still did not work. I tried next year the same problem Can you kindly help to solve it Thank you in advance !!
+
+--- 帖子 #398 ---
+Hi, I will look at this problem and possibly recompile it with the latest build of MT4.
+
+--- 帖子 #399 ---
+Version 1.81 released (I updated Post 1). This version is compiled with MT4 build 1170.
+
+--- 帖子 #421 ---
+Thanks Math for sharing an interesting EA. Couple of points. 1. When I see the broker time reading is not up to date, I clicked on the EA to open the input window and closed, then the EA does not reflect/read/manage the on-going trades any more. Since it important that the broker time reading be correct in order that the EA opens trades at the input time, it there anyway you can have a button to click so the time reading can be re activated? 2. Re. the CSM how to read the strength, i.e., the upper or lower of the zero line, and/or the length of the bar? Thanks, RS
+
+--- 帖子 #422 ---
+Hi RisingSun! I will fix (1) in the next release. Regarding (2), a CSM bar above (below) zero line means an increase (decrease) to the power of the corresponding currency. The CSM bars are normalized to the maximum absolute power values. In the next versions I am going to remove normalization from EA code in order to show the absolute currency powers. Best, Matt
+
+--- 帖子 #423 ---
+Thank you very much for update Math !! Strange though, now i'm getting different error - buttons and strength meter won't work (I have tested on 2 different brokers MT4 to make sure it is not a problem of MT4) Can you please take a look what may be wrong ? Thanks in advance ! 2019.06.04 15:38:53.947 MathTrader7_NewsHedgeEA AUDUSD..,M15: zero divide in 'CForexStrengthMeter.mqh' (122,28) 2019.06.04 15:38:51.322 MathTrader7_NewsHedgeEA AUDUSD..,M15: initialized 2019.06.04 15:38:51.213 MathTrader7_NewsHedgeEA AUDUSD..,M15 inputs: InpAction=0; InpTime=2020.06.15 14:30:00; InpRelevantButtonsOnly=false; InpHedgeSymbol=EURUSD..; InpTPmoney=5.0; InpSLmoney=10.0; InpLotSize=0.01; InpHedgeLotSize=0.01; InpSlippage=30; InpMagicNumber=1122; 2019.06.04 15:38:31.432 Expert MathTrader7_NewsHedgeEA AUDUSD..,M15: loaded successfully
+
+--- 帖子 #424 ---
+I will look at the problem.
+
+--- 帖子 #425 ---
+Version 1.82 released (I updated Post 1). Note: The CSM needs your broker to provide all major Forex currency pairs to work.
+
+--- 帖子 #426 ---
+How about this MT7 "We can win may also lose.This depends on whether we choose to buy or sell" -&gt; we accept this right?
+
+--- 帖子 #427 ---
+There is no system of trading Forex that wins 100%! Keep this in mind!
+
+--- 帖子 #428 ---
+Yes i know, so i ask we will accept it?because we just predict what red new is good for this currency, what is not good right? or is there anyway to lower the risk? Thanks for your attention
+
+--- 帖子 #429 ---
+If you know this fact, then you have already accepted it; there is no question. Regarding a way to reduce the risk, I would say to use only " high impact red news ".
+
+--- 帖子 #430 ---
+Hi Math, Do you think it would be possible to add in setting suffix/prefix field ? Fot example, I have just downloaded latest version and put it on Rakuten broker where all symbols have "austd" suffix. Now I'm getting error below as CMS wants to get history for all majors, EURNZD in this case while broker has data for EURNZDaustd 2019.06.11 11:09:25.639 MathTrader7_NewsHedgeEA EURUSDaustd,M15: Error!: There is no history data for EURNZD in your broker's server! Many thanks in advance !
+
+--- 帖子 #431 ---
+Hi! I will fix it in the next version.
+
+--- 帖子 #432 ---
+Version 1.83 released (I updated Post 1). The CSM is now working on brokers with suffix symbols.
+
+--- 帖子 #433 ---
+How can I not automate trading? I don't want to buy and sell every time. can you help me
+
+--- 帖子 #434 ---
+I am attaching an experimental version of the EA to this post that reads calendar news of FF and automatically trades. This version is simplified, and its main purpose is to test its functionality . This version only trades "EURUSD" and "GBPUSD" based on High Imapct Red news of "USD" currency and the currency strength meter that I have developed. It works only on demo accounts (the EA is unstable and risky!) and expires at the end of this year. If everything goes well, I would release a full version. If you are using this EA, please share the results and report the bugs in this thread. Note: You need to add the following URL to your MT4 platform, https://cdn-nfs.faireconomy.media . Attached Image Edit: A minor bug fixed. Attached File(s) MT7_NewsHedgeEA.ex4 95 KB | 422 downloads
+
+--- 帖子 #435 ---
+I recompiled the EA with MT4 build 1212.
+
+--- 帖子 #436 ---
+[quote = MathTrader7; 12500091]我用MT4 build 1212重新编译了EA。{file} [/ quote] Can I set up an automated trade? I don't want to buy and sell every time. can you help me
+
+--- 帖子 #437 ---
+Sorry! I can't help you.
+
+--- 帖子 #438 ---
+Ver. 1.84 released (I updated Post 1). Recompiled with MT4 build 1220.
+
+--- 帖子 #439 ---
+@Mathtrader what is the default lot size ?I see the trail version doesn't have any input for a lot size ?
+
+--- 帖子 #440 ---
+The lot size is fixed for now (0.1). The purpose of this version is to test the functionality of the EA (whether it reads the news from FF calendar correctly and executes the orders as planned). Please share your results in this thread if you are using this EA. I am going to further develop this EA (and I also have plans to develop other news based EAs).
+
+--- 帖子 #177 ---
+hello everyone... is there an EA according to below condition i mention.. buy sell both trade should open at once... ( in 1 click i need to put Buy sell Both trades) want to use fixed SL and TP for both trades help me if you can... sorry for my bad english...
+
+--- 帖子 #178 ---
+The EA, as downloaded in post no.1 does not appear to be working. When I drag onto a chart and click okay, it comes up with the message: "Auto Trade Time is passed!" even when "Auto Trade Disabled" is selected in the inputs!
+
+--- 帖子 #179 ---
+Attached File(s) script_cm_open_2_stoporders.mq4 9 KB | 280 downloads Here is a Script that should do what your asking. Make sure you put it in your Script Folder and NOT your Experts Folder. This is a script and NOT an EA. I hope this helps. GL.
+
+--- 帖子 #180 ---
+Thank You very much bojack34 ... I'ii try
+
+--- 帖子 #181 ---
+@ MathTrader7 , see my original post above. Any solution tot he problem I am experiencing with your EA, as I would like to demo the EA? Thanks
+
+--- 帖子 #182 ---
+Tried to trade the NZD newsat 23:45 GMT but also had the same problem saying the auto trade time had passed despite auto trade being disabled. I'm using MT4 version 4.00 build 1260. Any help will be helpful
+
+--- 帖子 #183 ---
+I'm trying to put it on the chart, but a message appears "auto trade time is passed", how can I solve this? Thanks in advance!
+
+--- 帖子 #184 ---
+the ea that is provided when i load it it says that it has been expired
+
+
+===== 附件下载链接 =====
+

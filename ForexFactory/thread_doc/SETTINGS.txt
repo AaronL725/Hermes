@@ -1,0 +1,320 @@
+
+
+============================================================================================================================================================
+
+CORE-
+
+
+qwma_adaptive (mtf + alerts + fl)--(mrtools)-https://forex-station.com/viewtopic.php?f=578480&t=8414844&start=810
+                                   --https://www.forexfactory.com/showthread.php?p=11374143#post11374143
+                          - its color line is aligned with centerline of atr bands. it behaves in line with macd , so using it is mtf mode in single chart clearly shows what is happening in all higher time frames in just one chart at a glance. 
+        
+                  -settings--ma period-25, ma speed-2.5, average price-close, average speed should be adaptive-true,  level type- quantile, floating levels period-5,color change on - outer levels cross., up level-90, down levle-10,jma shift-0
+QWMA adaptive - floating levels 1.2--(MLADEN)--qwma period-25, speed-2, filter to use-0, filter period to use-0,apply filter to -qwma value,levels type-quantile levels, levels period-5
+
+
+macd heatmap 1.1= settings color- color for strong up-lime, color for weak up-red, color for no trend-dim gray, color for weak down-lime, color for strong down-red.
+
+
+heijden_MAC3D=settings
+
+global and local alerts-false
+new global highs and lows alerts-false
+mac3d period1-5
+mac3d period2-21
+mac3d period3-22
+mac3d period4-50
+mac3d index line-50
+shift-1
+display mode chart-candlesticks
+display mode price-2
+displaymode trend1-2
+displaymode trend2-2
+displaymode line width-3
+mac3d period1 color- aquamarine
+mac3d period2 color -none
+mac3d period3 color -none
+mac3d period4 color - magenta
+mac3d index line color-none
+chart background color-black
+chart foreground color- white
+grid color-gray
+grid on off- false
+
+note overlap one more average ribbon nmc indicator on this mac3d indicator(with above settings) with following settings-
+
+one more average ribbon nmc-settings
+time frame current
+oma1 period= 20.55
+oma1 speed=2
+oma1 price=0
+oma1 adaptive=true
+oma 2 period= 50.85
+oma2 speed=0
+oma2 price=0
+oma2 adaptive=true
+interpolate- true
+
+buzzer- settings
+price-0
+length-20
+timeframe-current
+
+step one more average 2.3mtf-settings
+
+time frame- current
+timeframe custome-0
+oma length-25
+oma speed-2.5
+oma adaptive-true
+sensitivity-0.5
+step size-50
+highlow-false
+filter-0
+filter period-0
+
+ptl 2.07- settings
+
+time frame-current
+slow length-7
+show pip displace-0
+fast length-3
+fast pip displace-0
+arrow code down-234
+arrow code up-233
+
+step one more average 2.3mtf histogram- settings
+
+time frame- current
+timeframe custome-0
+oma length-25
+oma speed-2.5
+oma adaptive-true
+sensitivity-0.5
+step size-50
+highlow-false
+filter-0
+filter period-0
+
+10.2 tma slope true 4.3- settings-
+
+other time frames-Select below 0=current tf,1,5,15,30,60,240(h4),1440(daily),10080(weekly),43200(monthly)
+select other tf to show -0
+h pos mtf-5
+v pos mtf-42
+font name-verdana
+font size mtf-12
+eint period-20
+edblhing1 =0.4
+edblow1=-0.4
+atr period-100
+h pos-5
+v pos-22
+font size-12
+font size text-12
+h pos text-5
+v pos text-2
+
+dynamic zones kst (mtf+bars)
+
+time frame= current
+kst type-1
+kst ma type-1
+kst signal ma period-9
+dzlookbackbars-5
+dzstartbuyprobability-0.05
+dzstartsellprobability-0.05
+
+step one more average 2.3 mtf separate window-settings
+
+time frame- current
+timeframe custome-0
+oma length-25
+oma speed-2.5
+oma adaptive-true
+sensitivity-0.5
+step size-50
+highlow-false
+filter-0
+filter period-0
+
+dz tdi polychromatic momentum indicator -settings
+
+rsi period-21
+rsi type rsx(smoothened)
+rsi price to use- heiken ashi trend biased(extreme) price
+rsi price line period-1
+rsi price line jurik phase-0
+rsi price line jurik smooth double-false
+rsi signal line period-9
+rsi signal line jurik phase-0
+rsi signal lind jurik double smooth-false
+deviation calculation type- custom with sample correction
+volatality band period-34
+volatality band multiplier-1.6185
+unique id for indicator-dzz
+adaptive average-false
+show price base line-false
+rsi pbl(0-sma/1-ema/2-smma/3-lwma)-0
+rsi pbl period-18
+show price trend lines-false
+show volatality bands-true
+show market base line-true
+divergence swith- divergence on
+show divergence line on indicator window-false
+show dovergence line on chart-false
+divergence symbol size-2
+upper gap between divergence symbol and indicator line-2
+lower gap between divergence symbol and indicator line-2
+classical divergence visible-true
+hidden divergence visible-true
+bullish divergence color-blue
+bearish divergence color-deep pink
+classical divergence up symbol code-158
+classical divergence down symbol code-158
+hidden divergence up symbol code-158
+hidden divergence down symbol code-158
+momentum length-20
+smoothing length-2
+smoothing phase-1
+dynamic zone look back bars-35
+dynamic zone buy probability-0.05
+dynamic zone sell probability-0.05
+lower 3-10
+lower2-20
+lower1-25
+lower level-32
+middle level-50
+upper level-68
+upper1-75
+upper2-80
+upper3-90
+
+ma of rsx- settings-
+
+rsx length-20
+rsx price to use-close
+rsx signal ma period=3
+signal moving average method-smoothened ma
+lower level-20
+upper level-80
+
+overlap jurik trend strength mtf indicator on above ma of rsx(with setting as above)-
+
+jurik trend strength mtf-settings
+
+rsx length-16
+rsx price to use-close
+jurik smoothing length-1
+jurik smoothing phase-0
+multiplier-1.7
+
+
+
+
+one more average ribbon nmc optimal overlap method-
+
+load first copy with following settings-
+
+time frame-current
+oma 1 period-20.55
+oma1 speed-2
+oma1 price-0
+oma1 adaptive-true
+oma2 period-50.85
+oma2 speed-0
+oma2 price-0
+oma2 adaptive-true
+color settings- 0-dodger blue
+                1-hot pink
+                2- aqua
+                3-yellow
+
+on this overlap another copy of same indicator with following setting-
+
+time frame-current
+oma 1 period-13
+oma1 speed-0
+oma1 price-0
+oma1 adaptive-true
+oma2 period-20
+oma2 speed-2
+oma2 price-0
+oma2 adaptive-true
+color settings- 0-red
+                1-lime 
+                2- aqua
+                3-yellow
+
+
+! ATR Bands 2 best(atr band) settings-ma period-12, ma mode-3, ma price-4, atr period-10,katr-1.1, shift-0
+
+KPSBarColor--
+settings- color- 0- lime, 1-red,2-yellow
+
+step nema-
+nema period-1.52
+nema depth-1
+filter to use for filtering-0
+filter period to use-0
+sensitivity factor-0.5
+steo size period-50
+high/low mode switch-false
+
+
+
+dema macd zones alerts 2-- if zones do not appear on chart then increase max value on indicator to 30000 from default 200
+
+
+
+
+
+==========================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dynamic_zones_adxm_stddev_adaptive--SETTINGS--2,22,2,70,0.1,0.1
+
+
+ 
+
+
+
+
+heiken ashi smoothed oscillator-
+
+use it like macd
+
+pre smoothing average period-26
+pre smoothing average method- smoothened lwma
+pre smoothing average period-12
+pre smoothing average method-smoothened lwma
+signal ma period-9
+moving average method- smoothened lwma
+color change on - change color on slope change
+
+
+
+

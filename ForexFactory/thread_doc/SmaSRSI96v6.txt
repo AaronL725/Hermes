@@ -1,0 +1,113 @@
+//----------------------------------------------------------------------------
+// SmaSRSI96
+// @version=4
+// Copyright (c) Broketrader 2020 !
+//----------------------------------------------------------------------------
+study( title="One Hour Swing Trader", shorttitle="SmaSRSI-96", overlay=true )
+ShowRSISignal   = input( true, title="Show SRSI Signal")
+ShowOnAll       = input( true, title="Show on all TFs")
+TickerId        = tickerid( syminfo.prefix, syminfo.ticker )
+Price           = close
+
+
+//----------------------------------------------------------------------------
+// Optimized Values for EURUSD / XAUUSD (Experimental)
+//----------------------------------------------------------------------------
+GetSmaPeriod()  => syminfo.ticker ==  "XAUUSD" ? 300    : 96
+GetSRSIPeriod() => syminfo.ticker ==  "XAUUSD" ? 400    : 96
+GetTimeFrame()  => syminfo.ticker ==  "XAUUSD" ? "240"  : "60"
+GetSmoothK()    => syminfo.ticker ==  "XAUUSD" ? 20     : 10
+GetSmoothD()    => syminfo.ticker ==  "XAUUSD" ? 20     : 6
+
+FillEUR()       => timeframe.period == 'D' or timeframe.period == 'W' or timeframe.period == 'M' ? false : true
+Fill()          => syminfo.ticker ==  "XAUUSD" ? true :  FillEUR()
+
+
+//----------------------------------------------------------------------------
+// SRSI CALC
+//----------------------------------------------------------------------------
+_Rsi    = rsi( Price, GetSRSIPeriod() )
+Rsi     = security( TickerId, GetTimeFrame(), _Rsi )
+_Stoch  = stoch( Rsi, Rsi, Rsi, GetSRSIPeriod() )
+Stoch   = security( TickerId, GetTimeFrame(), _Stoch )
+_StochK = sma( Stoch, GetSmoothK() )
+StochK  = security( TickerId, GetTimeFrame(), _StochK )
+_SRSI   = sma( StochK, GetSmoothD() )
+SRSI    = security( TickerId, GetTimeFrame(), _SRSI )
+
+
+//----------------------------------------------------------------------------
+// SMA CALC
+//----------------------------------------------------------------------------
+_Sma        = sma( Price, GetSmaPeriod() )
+Sma         = security( TickerId, GetTimeFrame(), _Sma )
+
+
+//----------------------------------------------------------------------------
+// Calculation of Long/Short conditions
+// Long Condition when price above MA96 AND MSRSI > 40
+// Short Condition when price below MA96 AND MSRSI < 60
+//----------------------------------------------------------------------------
+CloseH1         = security( TickerId, GetTimeFrame(), close )
+LongCondition   = ( CloseH1 > Sma ) and ( SRSI > 40.0 )
+ShortCondition  = ( CloseH1 < Sma ) and ( SRSI < 60.0 )
+
+
+//----------------------------------------------------------------------------
+// Update colors according to condition
+//----------------------------------------------------------------------------
+var Color       = color.green
+var FillColor   = color.green
+var LastLong    = true
+
+if LongCondition
+    Color       := color(#4caf50)
+    FillColor   := color.green
+    LastLong        := true
+
+if ShortCondition
+    Color       := color.blue
+    FillColor   := color.blue
+    LastLong    := false
+
+if ShowRSISignal == false
+    Color       := color(#183e7b)
+    FillColor   := color.white
+    
+
+//----------------------------------------------------------------------------
+// Plot SMA and hidden price needed for the fill.
+//----------------------------------------------------------------------------
+PlotSma     = true
+if timeframe.period == 'W' or timeframe.period == 'M' or timeframe.period == 'D'
+    PlotSma := false
+
+SmaPlot     = plot( PlotSma ?Sma:na, title="SMA96", style=plot.style_line, linewidth=3, color=Color )
+PricePlot   = plot( Price, style=plot.style_line,  color=#92969F, display=display.none )
+
+
+//----------------------------------------------------------------------------
+// Calculate gradient value, with pseudo trend age. 
+//----------------------------------------------------------------------------
+int TrendAge = 1
+for i=0 to 100
+    if Color == Color[i]
+        TrendAge := i
+    if Color != Color[i] 
+        break
+
+colorLong(Age) => 
+    Age<2 ? color.new(color.green,2) : Age<4 ? color.new(color.green,4) : Age<6 ? color.new(color.green,6) : Age<8 ? color.new(color.green,8) : Age<10 ? color.new(color.green,10) : Age<12 ? color.new(color.green,12) : Age<14 ? color.new(color.green,14) : Age<16 ? color.new(color.green,16) : Age<18 ? color.new(color.green,18) : Age<20 ? color.new(color.green,20) : Age<22 ? color.new(color.green,22) : Age<24 ? color.new(color.green,24) : Age<26 ? color.new(color.green,26) : Age<28 ? color.new(color.green,28) : Age<30 ? color.new(color.green,30) : Age<32 ? color.new(color.green,32) : Age<34 ? color.new(color.green,34) : Age<36 ? color.new(color.green,36) : Age<38 ? color.new(color.green,38) : Age<40 ? color.new(color.green,40) : Age<42 ? color.new(color.green,42) : Age<44 ? color.new(color.green,44) : Age<46 ? color.new(color.green,46) : Age<48 ? color.new(color.green,48) : Age<50 ? color.new(color.green,50) : Age<52 ? color.new(color.green,52) : Age<54 ? color.new(color.green,54) : Age<56 ? color.new(color.green,56) : Age<58 ? color.new(color.green,58) : Age<60 ? color.new(color.green,60) : Age<62 ? color.new(color.green,62) : Age<64 ? color.new(color.green,64) : Age<66 ? color.new(color.green,66) : Age<68 ? color.new(color.green,68) : Age<70 ? color.new(color.green,70) : Age<72 ? color.new(color.green,72) : Age<74 ? color.new(color.green,74) : Age<76 ? color.new(color.green,76) : Age<78 ? color.new(color.green,78) : Age<80 ? color.new(color.green,80) : Age<82 ? color.new(color.green,82) : Age<84 ? color.new(color.green,84) : Age<86 ? color.new(color.green,86) : Age<88 ? color.new(color.green,88) : color.new(color.green,90)
+
+colorShort(Age) => 
+    Age<2 ? color.new(color.blue,2) : Age<4 ? color.new(color.blue,4) : Age<6 ? color.new(color.blue,6) : Age<8 ? color.new(color.blue,8) : Age<10 ? color.new(color.blue,10) : Age<12 ? color.new(color.blue,12) : Age<14 ? color.new(color.blue,14) : Age<16 ? color.new(color.blue,16) : Age<18 ? color.new(color.blue,18) : Age<20 ? color.new(color.blue,20) : Age<22 ? color.new(color.blue,22) : Age<24 ? color.new(color.blue,24) : Age<26 ? color.new(color.blue,26) : Age<28 ? color.new(color.blue,28) : Age<30 ? color.new(color.blue,30) : Age<32 ? color.new(color.blue,32) : Age<34 ? color.new(color.blue,34) : Age<36 ? color.new(color.blue,36) : Age<38 ? color.new(color.blue,38) : Age<40 ? color.new(color.blue,40) : Age<42 ? color.new(color.blue,42) : Age<44 ? color.new(color.blue,44) : Age<46 ? color.new(color.blue,46) : Age<48 ? color.new(color.blue,48) : Age<50 ? color.new(color.blue,50) : Age<52 ? color.new(color.blue,52) : Age<54 ? color.new(color.blue,54) : Age<56 ? color.new(color.blue,56) : Age<58 ? color.new(color.blue,58) : Age<60 ? color.new(color.blue,60) : Age<62 ? color.new(color.blue,62) : Age<64 ? color.new(color.blue,64) : Age<66 ? color.new(color.blue,66) : Age<68 ? color.new(color.blue,68) : Age<70 ? color.new(color.blue,70) : Age<72 ? color.new(color.blue,72) : Age<74 ? color.new(color.blue,74) : Age<76 ? color.new(color.blue,76) : Age<78 ? color.new(color.blue,78) : Age<80 ? color.new(color.blue,80) : Age<82 ? color.new(color.blue,82) : Age<84 ? color.new(color.blue,84) : Age<86 ? color.new(color.blue,86) : Age<88 ? color.new(color.blue,88) : color.new(color.blue,90)
+
+if timeframe.period == 'D' or timeframe.period == 'W' or timeframe.period == 'M'
+    ShowRSISignal   := false
+
+GetFillColor() =>
+    Fill() ? (LastLong?colorLong(TrendAge):colorShort(TrendAge)) : color.new( color.white, 100 )
+
+fill( SmaPlot, PricePlot, color=GetFillColor(), transp=50, title="Fill", editable=false )
+
+// End of Script.

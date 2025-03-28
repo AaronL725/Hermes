@@ -1,0 +1,82 @@
+//----------------------------------------------------------------------------
+// SRSI-96 Version 8
+// @version=4
+// Copyright (c) Broketrader 2020 !
+//----------------------------------------------------------------------------
+study(title="Stochastic RSI 96", shorttitle="StochRSI-96/168 V8")
+source = close
+TickerId        = tickerid( syminfo.prefix, syminfo.ticker )
+Show5mSignal    = true 
+ShowVolatility  = true 
+Show5mOnH1      = input( true, title="Show 5m SRSI on H1")
+
+// This is to make scale numbers visible
+hline( 105, linestyle=hline.style_dotted, color=#20272f )
+hline( -7, linestyle=hline.style_dotted, color=#20272f )
+
+
+// Levels on chart
+OverSoldLevel   = 5
+OverBoughtLevel = 95
+LowMidLevel     = 40
+CenterLevel     = 50
+HighMidLevel    = 60
+
+
+hline( OverSoldLevel, color=#787b86, linestyle=hline.style_dotted, linewidth=2 )
+hline( OverBoughtLevel, color=#787b86, linestyle=hline.style_dotted, linewidth=2 )
+
+hline( LowMidLevel, color=#787b86 )
+hline( HighMidLevel, color=#787b86 )
+hline( CenterLevel, linestyle=hline.style_dotted, color=#602403 )
+
+//------------------------------------------------------------------------------
+// Calculate SRSI-96 (1H) for all time frames
+//------------------------------------------------------------------------------
+L60         = 96    
+S60K        = 10    
+S60D        = 6
+TimeFrame   = "60"
+
+_Rsi60      = rsi( source, L60 )
+Rsi60       = security( TickerId, TimeFrame, _Rsi60 )
+_Stoch60    = stoch( Rsi60, Rsi60, Rsi60, L60 )
+Stoch60     = security( TickerId, TimeFrame, _Stoch60 )
+_StK60      = sma( Stoch60, S60K )
+StK60       = security( TickerId, TimeFrame, _StK60 )
+_MSRSI60    = sma( StK60, S60D )
+MSRSI60     = security( TickerId, TimeFrame, _MSRSI60 )
+
+
+//------------------------------------------------------------------------------
+// Calculate SRSI-168 5m for all time frames
+//------------------------------------------------------------------------------
+L5  = 168
+S5  = 10
+TF5 = "5"
+
+_Rsi5   = rsi( source, L5 )
+Rsi5    = security( TickerId, TF5, _Rsi5 )
+_Stoch5 = stoch( Rsi5, Rsi5, Rsi5, L5 )
+Stoch5  = security( TickerId, TF5, _Stoch5 )
+_StK5   = sma( Stoch5, S5 )
+StK5    = security( TickerId, TF5, _StK5 )
+_MSRSI5 = sma( StK5, S5 )
+MSRSI5  = security( TickerId, TF5, _MSRSI5 )
+
+// Not shown in higher than 15m 
+if  timeframe.period != '5' and timeframe.period != '15' and timeframe.period != '1'
+    Show5mSignal := false
+
+if timeframe.period == '60' and Show5mOnH1 == true
+    Show5mSignal := true
+
+//------------------------------------------------------------------------------
+// Plot of both SRSIs
+//------------------------------------------------------------------------------
+plot( MSRSI60, color=#ffb5be, title="d-line",linewidth=2, transp=0 )
+plot( Show5mSignal ? MSRSI5:na, color=#00b5ff, title="5MS", linewidth=2, transp=20 )
+
+
+
+// End of Script.

@@ -1,0 +1,36 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// ©JaiBhim
+
+//RSI
+study(title="RSI TMT System", shorttitle="TMT RSI")
+
+//INPUT
+Source = input(close, title="Source")
+
+//RSI
+RSI_Period = input(8, minval=5, title="RSI Length")
+RSI_Positive = input(50, minval=40, title="RSI Positive")
+RSI_OverBought = input(80, minval=51, title="RSI OverBought")
+RSI_OverSold = input(20, minval=1, title="RSI OverSold")
+RSI = rsi(Source, RSI_Period)
+
+
+//DEFINITIONS
+RSI_Up = RSI >= RSI_Positive and RSI < 80
+RSI_Dn = RSI < RSI_Positive and RSI > 20
+
+
+//COLORS
+Color_GREEN = RSI_Up and RSI < 80
+Color_ORANGE = RSI >= RSI_OverBought or RSI <= RSI_OverSold
+Color_RED = RSI_Dn and RSI > 20
+
+
+Plot_Color = Color_GREEN ? green : Color_ORANGE ? orange: Color_RED ? red : red
+
+//PLOTS
+//plot(EMA_Fast, color=blue, title="EMA Fast")
+//plot(EMA_Slow, color=black, title="EMA Slow")
+Histogram = 1
+plot(Histogram ? Histogram : na, title="Histogram", color=Plot_Color, style=columns, linewidth=4)
+hline(0, '0 Line', linestyle=solid, linewidth=1, color=silver)

@@ -1,0 +1,2336 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+The EA is ready and posted on post 618 Here are the updated versions of the Consecutive candle indicator the Volume and volatility indicator and the Jurik Kijun slope indicator. These are needed to run the EA. Attached File(s) consecutive_candles_1_02.ex4 13 KB | 2,299 downloads | Uploaded Jul 26, 2019 4:17am Attached File(s) VolumeAndVolatility_update.mq4 5 KB | 2,319 downloads | Uploaded Jul 26, 2019 4:18am Attached File(s) Jurik_smoothed_Kijun_slope.ex4 34 KB | 2,058 downloads | Uploaded Jul 29, 2019 12:06pm First of all I would like to give thanks to rpasupathy for the idea, Wolf300 and IceRice for their collaboration on the consecutive candle indicator(found here https://www.forexfactory.com/showthread.php?t=908563 ) and Jimmy for the volatility/volume indicator. A special thanks goes to VP from NoNonsenseForex for his ideas and video and blog series. https://nononsenseforex.com/ This post will be for future updates...and will explain the premise behind this thread. Please do not post non related information, we need this to stay on track and clear to follow. The system is comprised of the consecutive candle indicator for 2 confirmations. Then there is a second confirmation indicator. There is a baseline to filter further. Finally there is a volume/volatility indicator. Directions; For a trade we first need Williams %R to go above -20 line or below -80 line. Then we need the consecutive candle indi. to print an arrow in our desired direction (if we are below the -80 line we look for an up arrow, above the -20 line we look for a down arrow). Then we need the indi. to print a candle with a dot (preferably with a lower/higher close than arrow candle). For this to be a valid signal we need 3 things. 1/ Williams % to now move below -20 line or above -80 . 2/ Williams % to be below the 55ema (set to first indicator data) for a sell or above the 55ema for a buy. 3/ Volume/volatility indicator is yellow or green (grey=no trade). If all the above is met we can trade in the desired direction. The following chart shows a buy and a sell following all the above rules. Exit is close of a candle when Williams%R crosses the opposite -20/-80 line. Numbers in yellow boxes are pips gained in the respective trades. SL is up to user...I would suggest a protective one only. Chart is 1hour. Attached Image (click to enlarge) There are some nuances to the confirmations...If we get a signal to trade but the volume/volatility indicator does not agree we can still take the trade if another candle with a dot prints and volume now agrees. This is a valid signal as long as an opposite arrow does not show up. If it does then we do not trade. We must then wait for a full re-confirmation from all indicators. See below; 1/ Williams %R goes below -80 line 2/ Trade to buy is confirmed by all indis. but volume bar is grey (no trade). 3/ An opposite arrow prints...now we wait for a whole new set up. 4-5/ A whole new buy is confirmed but again volume is grey (no trade). 6/ Another opposite arrow prints...now we wait for a whole new set up. 7-8/ A whole new set up is confirmed and this time the volume bar is yellow/green...so a buy trade is executed. 9/ Exit trade after close of first bar where Williams %R is above -20 line. Attached Image (click to enlarge) Another nuance is when the confirmation candle closes and Williams%R is already above/below the -20/-80 lines, then there is no trade. Attached Image (click to enlarge) The Williams %R is found in MT4 under oscillators set to 100. Place a 55EMA on the Williams%R and choose "first indicators data" from the menu. The Consecutive Candle I am using is V1-02 set to default. There are other versions on the "My Last Humble Request" thread in Platform Tech forum. Here is the Volume/volatility indicator. Attached File(s) VolumeAndVolatility update.mq4 5 KB | 2,768 downloads | Uploaded May 7, 2019 9:35pm Here is the Consecutive candles indicator Attached File(s) consecutive candles 1_02.ex4 13 KB | 2,897 downloads The other 2 indicators are in MT4---Williams%R and a 55EMA Finally here is my template Attached File(s) williams2.tpl 2 KB | 2,631 downloads | Uploaded May 8, 2019 8:21am I will post some charts with examples in the next few posts. They will center on XAUUSD 15min to daily charts. I will also be testing the other XAU pairs on the daily and WTI, but these I will only be plotting trades and not actually trading. Chris EA added, thanks to reteid2222 (Retina) Attached File(s) cfudge - Williams, EMA &amp; Vol V2.00 - Forex EA - V8.00.ex4 367 KB | 1,535 downloads | Uploaded Jun 26, 2019 6:23am
+
+--- 帖子 #2 ---
+Feeling great to be the first subscriber to this thread! Best of luck Chris.
+
+--- 帖子 #3 ---
+OK here are screen shots from XAUUSD 5min to daily charts, these are only for proof of concept, so don't look at them too hard lol. The 5min trades are shown on a 15 min chart so they would all fit. The two open trades you see are live trades from 4hr chart (top one) and the 30min chart (lower one) there are plotted trades without #s because they would still be open. HAHA...as a small test (not including the 5min chart) there are two mistakes in the charts one is a missed trade and the other is a wrong trade (not confirmed) can anyone spot them...bit of fun. Chris Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #4 ---
+Can you add the other indicators to this thread please?
+
+--- 帖子 #5 ---
+Done do not know how to load the Williams%R or 55EMA to first post sorry
+
+--- 帖子 #6 ---
+First - thanks. Did you tried any other symbols or just XAUUSD? Anyway it seems too good... I hardly believe there are no people here having problem finding Williams and MA.
+
+--- 帖子 #7 ---
+cfudge, thank you very much for sharing...this looks very powerful,im using various timeframes as your screenshots....will observe behavior on other pairs....keep up you good work man :-)
+
+--- 帖子 #8 ---
+With this set up I have found the best is gold but here is a silver chart 1 hour and a 1 hour WTI chart. I think I have the pips right...silver is divided by 10 but WTI is as it states on crosshair. Chris Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #9 ---
+This looks for me very promising. Please, is there any coder which can integrate that criterias to one indicator? that will be holy grail i think
+
+--- 帖子 #10 ---
+Attachment g Attachment g Hi matthew89, At first, you download all these 3. Put the first 2 indicators in the indicator folder and the 3rd one in the template folder. Restart mt4. Then select the template "williams". Now will have your chart ready. Hope that helps. Thanks.
+
+--- 帖子 #11 ---
+Is there a version for MT5, please?
+
+--- 帖子 #12 ---
+Hey all, Thanks for sharing your work on this cfudge, much appreciated! After adding to my charts and running some visual back-tests with your nuances in mind, it looks like you have a pretty solid system. I'll start forward testing with you this week, it would be great to get involved and share any findings, I may add a currency pair or two into the mix as well. Wishing everyone a profitable week.
+
+--- 帖子 #13 ---
+landorra...go to My last Humble Request thread and ask IceRice if he has this for you, I know he was working on one for MT5. Chris
+
+--- 帖子 #14 ---
+Hello Chris, I`m so glad that you started your thread about your profitable system !! See, as I said, once it is in the right section a lot of people are very interested in your way of profitable trading Please allow me to contribute a bit as you did great in the "my last humble request" thread. I hope this keeps on track and doesn`t confuse subs. You and IceRice (the coder of consecutive candles indis and ea) are very serious about Volume to filter con can trades. I know that ignoring Volume is usually a big mistake in trading. But developing v 01 and v 02 was more about to get in a trade as soon as possible, when volume indicators or volatility indicators need a few candles to react later. Between the lines I wrote in our thread, it was about Price-Action - and Price-RE-Action. My intention was to get in early to have the smallest SL (lower risk), AND be in the trade, BEFORE market RE-ACTS and killed my trade , may it right after a turn or a trend trade. As I appreciate all I hear about improving, I had to study more about Volume and the power behind a move. Here is what I found, and I must say I am amazed how simple this is and that is what I am looking for. "Make things as simple as possible, but not simpler." Albert Einstein Attached Image (click to enlarge) ONLY to illustrate what I mean : First subwindow is current tf force showing what each candle did, second subwindow force indi of M30 and H1 (also each candle) H1 layed above M30 (little trick as I like laying v02 above v01 consecutive candles). Aqua and yellow is H1. Check out the situations when all three align and dots or dots with arrow (change of direction) fit. To make force indi lag and showing an average of x periods, just increase the periods. Attached File(s) Force Histo mtf nmc.mq4 5 KB | 1,290 downloads
+
+--- 帖子 #15 ---
+Hi landorra, IceRice is working on it, he PM me that it will be done next week.
+
+--- 帖子 #16 ---
+OK...time for some hard truths about what is needed for this to be palatable for most people. From the screen shots there is something missing in the equation...namely a SL...I have not used one during the testing because I felt it got us out of a lot of trades. Now, saying that, if you were to put the SL above the trigger candle on a perfect entry near the actual reversal then the SL works great. If you look at post 8, the silver chart is a good example of the trades being at good reversals and it seems almost all those SLs were not hit (if above the entry arrows). Alternately, the WTI chart is a different matter, quite a few of those would have hit SLs and the last trade with a loss of 56 pips would have been a loss of 93 pips. The other subject that need attention is the exits...while I have been exiting when the Williams %R crosses the opposite -20/-80 lines it may be better to exit at the next signal. Another example would be to add trades as Wolf300 suggests, on additional dots, when price is going in our favour, until we get a Williams %R cross on -20/-80 lines. This all requires more testing on the charts...which equates to time and effort, it would be nice if people could take this on and test it more. We all would benefit in the long run. Here is a doc. by Hanover, on how to test for repainting indicators on strategy tester. We are not worried about repainting but this technique could be useful to visually backtest the above scenarios. Attached File(s) Here is an easy way to test indicator repaint.docx 244 KB | 1,015 downloads Chris
+
+--- 帖子 #17 ---
+Subs. will try on Monday. Thanks and Regards
+
+--- 帖子 #18 ---
+[quote=wolf300;12255042]Hello Chris, I`m so glad that you started your thread about your profitable system !! See, as I said, once it is in the right section a lot of people are very interested in your way of profitable trading Please allow me to contribute a bit as you did great in the "my last humble request" thread. I hope this Hello Wolf300, In the above chart, you used candle indicator v 1-2, right? thanks.
+
+--- 帖子 #19 ---
+[quote=salimc;12255102] Hello, in this case, not to clutter the pic for new consecutive candle traders, v 02 only. You can find out, if dot or arrow with dot appears on candle whitch has a lower low AND lower close than prev. candle low (long viceversa). So PA has more power than v 01 where a lower low than prev. candles low triggers. V 02 "can" be used to confirm v 01. I know binnie, any additional indi is to much for you, but you have to admit, they can be very profitable cause confirming...hope you found ninja version of con can.
+
+--- 帖子 #20 ---
+So here is the first live trade of the forward test, it was on XAUUSD 30 min chart. I still have a live 4hr trade open, which is now in profit thanks to todays gap up. Chris Attached Image (click to enlarge)
+
+--- 帖子 #21 ---
+This will be the last post, showing charts results. Do not dwell at these charts, they are just proof of concept...With this post I will have shown trades on all the pairs I am trading and the TFs. This method is crying out for an EA, it's so methodical that it just needs to be left alone on all charts and TF's. If someone is interested in creating the EA or anyone wanting an EA, Let me know via PM or shout on my profile because I would like to open another thread for the EA alone. Here are the rest of the charts...and the pairs and TFs I am trading. Chris Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #22 ---
+I’m using the v.02 indicator and it doesn’t look anything like yours. Virtually every arrow has a dot with it, instead of random arrows with dots.
+
+--- 帖子 #23 ---
+Every arrow has a dot, not all dots have arrows
+
+--- 帖子 #24 ---
+Hi @cfudge thank u for your contribution, can u explain the logic behind volume/volatility indi, as we all know volume in fx isnt really reliable, and yes, i think your strategy will be a great ea, hope some coder can help
+
+--- 帖子 #25 ---
+On the last chart above, I see at least 50 arrows without dots.
+
+--- 帖子 #26 ---
+If you look closely you'll see there is a dot, only the arrow has painted over it, some are clearer than others.
+
+--- 帖子 #27 ---
+OK, that makes sense.
+
+--- 帖子 #28 ---
+Hi cfudge, great new thread looking forward to it all. Has anyone asked ICERICE to correct the EA. I am very keen to see this go all the way.
+
+--- 帖子 #29 ---
+Hi ChicagoRob, let me disturb this thread one last time as it is not appreciated what I bring in here. You as a pure PA trader said "Trade what you see" and that is the best. The price is the truth and after that comes, whatever. Just to correct, consecutive candles v 01, v 02 and v 03 is my idea . Rpasupathy had the idea of "weird candles.ex4" which are totally useless. Please go to "my last humble request" read page one and two, then go to post 73 and you understand what dots and arrows are showing. I mean your question shows, that you did not understand what v 02 is doing. Otherwise you can`t trade what you see , but from now on you get an alert to make things way easier. That was my intention. Cheers
+
+--- 帖子 #30 ---
+I am trying to get a hang of the system i think the buy should have been triggered just after 4 where i circled. can you explain? @cfudge.
+
+--- 帖子 #31 ---
+Thanks, wolf300. I have read My Last Humble Request, but I can see I need to put in more research. My primary areas of study are turning points and continuations in the daily candle. I’ve been around the block with inside bars, outside bars, and various other PA setups. It’s a tough nut to crack. I’m not much of a discretionary trader - I’m more comfortable with mechanical PA strategies. It’ll be interesting to see how this plays out with indicators, which, honestly, I’ve never liked. I’m an old dog, but I’m always ready to learn new tricks.
+
+--- 帖子 #32 ---
+Hi Wolf Sorry about that. LOL...you are not a disturbance, I know what you like and this is not quite it. I did not respond to your post for 2 reasons...1. I did not want to start different things, as we are so early in the thread 2. I did not exactly understand your chart lol...that is on me not you. I had another look and posted in Last Humble Request thread. Chris
+
+--- 帖子 #33 ---
+No trade at your circle because we need another candle with a green dot to confirm after the arrow candle. Chris
+
+--- 帖子 #34 ---
+Hey developers , great Idea that I am currently testing but I have noticed that my volume and volatitility indicator isnt updating unless i keep putting the template over and over again. Any solution ? Thanks lads appreciate the hard work youve put in
+
+--- 帖子 #35 ---
+this is a problem..change TFs quickly to update it. I have contacted the maker of this indicator but no response yet.
+
+--- 帖子 #36 ---
+Appreciate it , works like a charm. Will be active on this forum for testing and other purposes.
+
+--- 帖子 #37 ---
+Hi Chris , Can you have a look at this chart when you have time please. It will be good to see if I am picking up what is needed to trade this properly. Appreciate your feedback. Attached Image (click to enlarge)
+
+--- 帖子 #38 ---
+Hey binnie Yes...perfect entry, I am in on this too. There are two more sells on that chart I am in ...see my chart (red verticle lines). I prefer to close at Williams %R cross of opposite -20/-80 line but I have set a TP exactly like you because I was at work. Chris Attached Image (click to enlarge)
+
+--- 帖子 #39 ---
+So the live forward testing begins. Would you be kind enough to confirm this is a valid entry?
+
+--- 帖子 #40 ---
+You have an arrow, a dot, and a crossover. Looks perfect to me. Must be good, as I see lots of green pips.
+
+--- 帖子 #41 ---
+Same trade as me...looks like you grasped the concept. Looks like price had a different idea... Traveller365, I see you placed a SL, will you be doing that for all your testing? If so it would be nice to get a report of their effectiveness. You have traded at 0.05 lots...I trade the 15 min with 0.05 lots too. While testing I am trading each TF with different lot sizes, to keep track. I use 0.01 on daily trades and then increase 0.01 for additional TFs, so 15min would be 0.05 Chris
+
+--- 帖子 #42 ---
+Many thanks to cja for fixing the update issue with the volume/volatility indicator. Affixed to first post and here. Chris Attached File(s) VolumeAndVolatility update.mq4 5 KB | 522 downloads
+
+--- 帖子 #43 ---
+Hey Chris, Today has been awful all around on the Forex front! On the pairs I trade at least. I'll stick with using an SL for sure, I'll have a play around with placement and incorporating trailing methods etc to see what happens. I know it's a swings and roundabouts thing and there's always a risk of suffocating potential runners early. That's what testing is for though hey! I'll be sure to keep you posted. Are you leaving yours SL-less then? What's your criteria for closing a trade if it goes against you? Great minds, that's pretty much what I'm doing in terms of lot size David P.S. Thanks for the indi update.
+
+--- 帖子 #44 ---
+Post # 10 Edited: This is the updated Volatility Indicator. You can also have it from the first page. Thanks.
+
+--- 帖子 #45 ---
+Hi Traveller365 I am not testing with a SL right now, like you say...we'll see...that's what testing is for. Chrids
+
+--- 帖子 #46 ---
+Absolutely. What's your cut off point though out of curiosity? At what point will you cut your losses if doing it manually? Cheers
+
+--- 帖子 #47 ---
+Gold is giving us quite the run around today!
+
+--- 帖子 #48 ---
+Hi guys Did someone started live with gold?
+
+--- 帖子 #49 ---
+Yesterday took an entry. It was SL. After taking a trade you never know if it is going to the north or south. lol
+
+--- 帖子 #50 ---
+Greetings Salimc - you never know do you. Looks like your entry was per rules - just that market did not wish to play LOL. I hope you jumped on the next signal.? I am trying this in Sim only and still forming my own analysis. Good Luck buddy. Attached Image (click to enlarge)
+
+--- 帖子 #51 ---
+Hi Chris - question please. In my picture, I would have a short available as shown. Price &amp; the W% then range and MA runs flat. Is there a 2nd entry short possible or does price need to re-set back above the -20 level ( -80 for Long signals ) and then exit and cross the MA per normal rules? Cheers mate Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+Hi Guys. Thanks for testing...looking forward to results. Here are my closed trades as of EOD May 09/19. As I have stated, I do not use a SL and there will be inevitable DD and losing trades, because if the price continues up after you sell (like gold did this week) when Williams %R closes beyond the -80, price may be higher than your entry. Anyway, testing still...these closed trades are from 15min, 30min, 1hr and 4hr. I am trying to label the TFs on each trade but I forget ...alot Chris Attached Image (click to enlarge)
+
+--- 帖子 #53 ---
+Awesome work Chris and appreciate for sharing the work to the community...
+
+--- 帖子 #54 ---
+Thanks aaven Are you testing this? If so what parameters are you using, as far as SL and TP and TF? Chris
+
+--- 帖子 #55 ---
+Not Yet Chris... Appreciating you for the the way you constructed the trading logic...
+
+--- 帖子 #56 ---
+Hey binnie No that was not a legit short, firstly there was no volume agreement and secondly, you are right, Williams%R needed to go back above the -20 line because we had a green arrow after the first setup. Please don't be shy about showing some results from you sim trades. Chris @salim; Too bad about the SL, did you take the perfect setup later like binnie showed? See chart. Attached Image (click to enlarge)
+
+--- 帖子 #57 ---
+hi Chris, After that, I left. In fact, I uploaded the chart to show that even you follow 100% rule, still any moment the market may reverse. Today i used a 5 min chart and took 3-4 trades and all of them worked. I didn't upload the chart because I used a different system. In that system, I have added the candle vol.1-2 for the exit only. let me see if it works some few days more. tx
+
+--- 帖子 #58 ---
+Just uploaded the chart to show that after following every rule, the market can do anything, anytime. So no trade without SL. take care
+
+--- 帖子 #59 ---
+Salim, Don't be afraid to test the system without s/l. I am sure Chris has a reason for saying not use S/l and use only protective stop. One can adjust the position size to accommodate for not keeping the S/L or use the system for other financial instruments like options/binary options etc... Thanks
+
+--- 帖子 #60 ---
+I blew many accounts for not using SL. At this phase, I am checking any system with SL. Because a system is successful only when it is with SL or that is not a system but gambling. Because young people who will be following me the next day will also not use any SL, the 3rd he will trade it in a live account and lose their money (as they have less patience at this stage, Once I was also like them). So whatever we do should be in a professional manner.
+
+--- 帖子 #61 ---
+Salim, Yes. I agree with everything you say. My intention of my post was something else. Thanks
+
+--- 帖子 #62 ---
+Just a quick update, I have taken on copper 15min chart. Here are 3 trades that closed today from past few days, if I had used SLs I would have same amount of pips banked. Chris Attached Image (click to enlarge)
+
+--- 帖子 #63 ---
+Anybody get into these nice 5 min trades today? 4hrs...48 pips Chris Attached Image (click to enlarge)
+
+--- 帖子 #64 ---
+Welcome
+
+--- 帖子 #65 ---
+Hello, is it possible to implement the volume indicator in your template, if you haven't already. It doesn't show up in my MT4. Thanks.
+
+--- 帖子 #66 ---
+I am testing M5 (gold) and it goes in profit but with a rather poor R/R of only 1.2 (since jan 15) - SL above arrow (I like to define my risk), exit trailing after 20/80 cross. Winners : 55%. Did you work out any stats for your type of exit?
+
+--- 帖子 #67 ---
+Better you upload your chart with entry and exit. Thanks.
+
+--- 帖子 #68 ---
+Two loosers and a trailed winner Attached Image (click to enlarge)
+
+--- 帖子 #69 ---
+for a better result, you should trade with the 15M chart. When you will get 80% win, then try at 5 min. With 5 min candle, the momentum is too short and even signal can go to the other way. A few days back I have uploaded a 5 min chart. In which it can be clearly seen that in spite of a valid setup the trade moved to the other way. take care.
+
+--- 帖子 #70 ---
+I didn't. Thanks
+
+--- 帖子 #71 ---
+I already tested the M15, hovers around 70% but with an average R/R of 1.0 - so the profit curve is certainly smoother. The next thing to find out, is if actions like moving the SL on a counter - arrow make sense...
+
+--- 帖子 #72 ---
+Hey Go5 Thanks for the test...I looked back over my 5min chart, it shows 51 trades where 38 were winners...or 74% and a total profit of 486 pips. This is since April 22nd 2019 Chris
+
+--- 帖子 #73 ---
+Nice result, april was good! With my SL method I get 63% wins for 570 pips (46 trades). Other months however were not so smooth: Attached Image (click to enlarge) Can you say anything about your average/ max. drawdown?
+
+--- 帖子 #74 ---
+He is not as trained as you, Chris.
+
+--- 帖子 #75 ---
+Try it, you will be able to make it 80%
+
+--- 帖子 #77 ---
+Hi guys, sitting watching this for couple of hours and actually missed the cross of MA. Not sure if I woulda pulled trigger on it anyway - %R did NOT venture beyond the -20 level. Not by much but enough to be outside the rules. What would you have done Chris ? ( &amp; others of course LOL ) Attached Image (click to enlarge)
+
+--- 帖子 #78 ---
+You are correct binnie, would have been a nice trade though Chris
+
+--- 帖子 #79 ---
+Anyone catch this...I was asleep. Chris XAUUSD 15 min. Attached Image (click to enlarge)
+
+--- 帖子 #80 ---
+It was during NY session and I didn't take risk, only got my 20 pips with which I am happy:
+
+--- 帖子 #81 ---
+Good morning all, Wrong time of clock for me too Chris. Sleep time in NZ. I see that Silver also performed just like Gold and I have shown what happened on the Pound too. I have been trialling some futures like Dow and Nas but these do not seem to move in same way. Just looking still but your Gold/Silver &amp; some cross currencies are very promising. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #82 ---
+Hi salim Glad you got some pips from that move... binnie, I had some luck on AUDNZD and GBPCHF when I was testing, originally, with opening and closing on each signal. The only difference is I wasn't using the 55ema or volume, just crosses of the -20/-80 lines. Regular pairs did not seem to respond like gold, silver and oil do with the current system. @all, I am in contact with a coder, whom I have been working with, on some renko EAs. He has had a look at this thread and thinks we could make it into a single indicator, with arrows for signals and a way to signal exits too. Then we might be able to get an EA out of this. I will keep updating as I know more. Chris
+
+--- 帖子 #83 ---
+I found this on the i-net, maybe it helps in coding
+
+--- 帖子 #84 ---
+Thx Chris - I just had a look at US Oil and there was a nice 15min short around 2am US Time. Will be interesting to see how a single arrow type indy will go. Renko is visually really appealing but gees it's hard to jump onto when it starts moving fast LOL.Good luck with the coding project - unfortunately I know Zero - Zip about coding etc but here if I can help in other way. Binnie
+
+--- 帖子 #85 ---
+To catch the moves of Gold you have to be active in London or NY session or you will miss the train
+
+--- 帖子 #86 ---
+Thanks Chris. My personal experience is that price runs faster than the indicator. The candles change colors. Sometimes there is buy and sometimes sell signal because the price moves up &amp; down. So how you will believe in the indicators? I have spend a lot of money on indicators but didn't get me an edge over the market with them. So i better use my own way with Bollinger band. With BB you can gauge the market (at least which I do). I am in short for Gold now. now waiting for the outcome. The SL is a bit higher than yesterdays high. Don't know what will happen after NY opens Thanks.
+
+--- 帖子 #87 ---
+Hi eurix Is this the same indicator? Where did you find it? Chris
+
+--- 帖子 #88 ---
+good work binnie
+
+--- 帖子 #89 ---
+s
+
+--- 帖子 #90 ---
+https://www.cryptocraft.com/showthre...1#post12247591 It seems to be the same, only in mql
+
+--- 帖子 #91 ---
+good work
+
+--- 帖子 #92 ---
+Good day, Salim! To improve the forecast, you can use the statistical advantage. This approach is used in the indicator "consecutive candles" which checks two candles to search for price impulses in the direction of %R, but how effective is it? To answer this question, check with what probability the reversal occurs after X-consecutive candles in one direction. As a result, we will get more reliable settings for candle filtering. According to the results of the analysis, you can set up an indicator of the type “asymmetric fractal” in which the left shoulder will contain the number of bar after which the turn is most often, and the right shoulder will be short - 1 candle (this will be its delay). Here are the results of statistical analysis for a pair of EurUSD m15 on the interval of 10 years: ========== M15 from 01.01.2009 - 01.02.2019 EURUSD,M15: Closing percentage with price increase 12 candles - 83.33% EURUSD,M15: Closing percentage with price increase 11 candles - 70% EURUSD,M15: Closing percentage with price increase 10 candles - 67.74% EURUSD,M15: Closing percentage with price increase 9 candles - 62.5% EURUSD,M15: Closing percentage with price increase 8 candles - 60.05% EURUSD,M15: Closing percentage with price increase 7 candles - 57.73% EURUSD,M15: Closing percentage with price increase 6 candles - 56.73% EURUSD,M15: Closing percentage with price increase 5 candles - 56.17% EURUSD,M15: Closing percentage with price increase 4 candles - 55.36% EURUSD,M15: Closing percentage with price increase 3 candles - 55.02% EURUSD,M15: Closing percentage with price increase 2 candles - 54.17% EURUSD,M15: Closing percentage with price increase 1 candle - 53.04% It is clearly seen that the largest number of successful turns occurs after 11-12 consecutively growing candles. So we can adjust the fractal indicator with the left shoulder equal to 11-12 bar + extremum + 1 bar - the right shoulder (confirmation of the extremum). Asymmetric fractal indicator in trailer. It does not best fit this method, but gives an idea of the work of the statistical advantage. An example of filtering for Gold according to data from Euro on the screen - fractals are marked with rhombuses. On screenshots are three orders for Gold today. At the top, the SL trawl worked, the lower ones were without a trawl.
+
+--- 帖子 #93 ---
+I will show another filter that can be useful for this strategy. This is a Kiosotto indicator (thanks Kilian19@FF &amp; Scriptong, does not draw). Successes, Colleagues, and profit!
+
+--- 帖子 #94 ---
+Genry, Can you kindly show how the indicator increases the odds of better entry. Thanks
+
+--- 帖子 #95 ---
+I showed it on the bottom screen of my first post. For the first order entry condition was: 1. %R in oversold area 2. "VolumeAndVolatility update" - green 3. wlxFractals previously painted a reversing rhombus 4. "consecutive candles 1_02" drew an arrow with a dot 5. if we take the Kiosotto signals into account (third screen), then the histogram level is above two thresholds: 15 and 21. The second order by the usual rules.
+
+--- 帖子 #96 ---
+Thanks Genry...
+
+--- 帖子 #97 ---
+========== Gold M15 from 01.11.2017 - 24.04.2019 XAUUSD,M15: Closing percentage with price increase 14 50% XAUUSD,M15: Closing percentage with price increase 13 33.33% XAUUSD,M15: Closing percentage with price increase 12 57.14% XAUUSD,M15: Closing percentage with price increase 11 69.57% XAUUSD,M15: Closing percentage with price increase 10 66.18% XAUUSD,M15: Closing percentage with price increase 9 59.76% XAUUSD,M15: Closing percentage with price increase 8 57.64% XAUUSD,M15: Closing percentage with price increase 7 56.43% XAUUSD,M15: Closing percentage with price increase 6 56.58% XAUUSD,M15: Closing percentage with price increase 5 57.86% XAUUSD,M15: Closing percentage with price increase 4 56.17% XAUUSD,M15: Closing percentage with price increase 3 55.25% XAUUSD,M15: Closing percentage with price increase 2 54.2% XAUUSD,M15: Closing percentage with price increase 1 52.86% 12 bar pattern: 10 left shoulder + extremum + 1 bar right shoulder
+
+--- 帖子 #98 ---
+Time for another update, just before the long weekend. These are all closed trades from 05/05/19 to 05/15/19 Does no include the XAUUSD5 min trades, I am only paper trading those. Chris Attached Image (click to enlarge)
+
+--- 帖子 #99 ---
+Great Going Chris... Which is the time frame you traded? Thanks
+
+--- 帖子 #100 ---
+Most are labeled in the comments in the pic. I am trading gold 15min to daily Chris
+
+--- 帖子 #101 ---
+Thanks Chris...
+
+--- 帖子 #102 ---
+Trader like you should trade real not in paper lol
+
+--- 帖子 #103 ---
+LOL
+
+--- 帖子 #104 ---
+Those are live trades on a real account. I am only paper trading the other XAU pairs and WTI all on 4hr. Chris
+
+--- 帖子 #105 ---
+Chris, Salim's message was directed at me and he was not implying anything towards you... Thanks
+
+--- 帖子 #106 ---
+Thats were nice to know. Just was joking! lol
+
+--- 帖子 #107 ---
+Nice explanation
+
+--- 帖子 #108 ---
+[quote=Genry_05;12272982]{quote} Good day, Salim! To improve the forecast, you can use the statistical advantage. This approach is used in the indicator "consecutive candles" which checks two candles to search for price impulses in the direction of %R, but how effective is it? To answer this question, check with what probability the reversal occurs after X-consecutive candles in one direction. As a result, we will get more reliable settings for candle filtering. According to the results Hello Genry_05, Sorry for my late reply as I have to take care of certain other things (I am not a full-time trader). You have suggested that the entry criteria will improve if we add 2 more filters like wlxFractals and Kiosotto. So now we will be needing to have 5 indicators with this system. It will be helpful for all of us if you can show us a trade example using these 5 indicators marking the entry and exit. Thanks, Salim
+
+--- 帖子 #109 ---
+Good day, Salim! My reasoning is not final. The Kiosotto indicator with good probability denotes extremes. It is based on the RSI algorithm. With wlxFractals, things are worse - it only partially meets my requirements, but I have not yet met the better indicator . I use these indicators to work with two orders. For the first order entry condition was: 1.% R in extreme area 2. "VolumeAndVolatility update" - green or yellow 3. wlxFractals previously painted a reversing rhombus 4. the Kiosotto histogram level is above threshold 5. if confirmation is necessary, then we are still waiting for the signal "consecutive candles 1_02" The second order is placed according to the rules of the system.
+
+--- 帖子 #110 ---
+Hi Genry, Maybe recently you are trying with these indicators. TF is 15. Instrument any, right? Thanks
+
+--- 帖子 #111 ---
+Yes, I stayed on the TF who recommended cfudge . I have another indicator that helps me make a decision. One trader offered me to correct of this indicators mistakes, I corrected, and then I saw the merits of this indicator. Together with Kiosotto, he helps me understand when %R makes a peak or pit in the extreme zone. Now I will add it to the last screen and you will understand what I am writing about. I hope that these indicators will help to get away from large drawdowns or from unnecessary SLs. Successes, Colleagues!
+
+--- 帖子 #112 ---
+you corrected this indicators mistake means that you have corrected it by changing its settings or coding? Thank you mate
+
+--- 帖子 #113 ---
+His settings were hidden - I made them available and added a second (external) channel.
+
+--- 帖子 #114 ---
+I see. you are a coder then
+
+--- 帖子 #115 ---
+New Abhafxs timing V2L something wrong in my chart?
+
+--- 帖子 #116 ---
+I have the same problem..??
+
+--- 帖子 #117 ---
+This icon shows on the chart the left edge of the channel in the basement. To change the depth of the history you need to change the parameter giPeriod (default = 67) I usually set this parameter by Fibonacci numbers or a multiple of the minutes of the trading day (377/360/233/144/89, etc.) As you use the indicator, you will select the settings that are convenient for your trading.
+
+--- 帖子 #118 ---
+I also have this filter option: the signal forms TMA MACD when it goes beyond the boundaries of Bollinger. Additionally, you can take into account the horizontal levels that are based on the ATR or StdDev. For trading, we take TMA signals when %R (and ABHA) are in the overbought / oversold area. TMA indicator does not draw and does not change signals. cfudge has created an excellent base to which you can add refinement settings to your experience and taste. In the trailer indicator and settings to him as in the screenshot. Just remove the .txt extension from the file name.
+
+--- 帖子 #119 ---
+Please only post charts with the original template, Thank you. We are still testing and we do not need to add/subtract anything at this early stage.. .let's all stay on original track. Here is the template; Attached File(s) williams2.tpl 2 KB | 382 downloads Chris
+
+--- 帖子 #120 ---
+Good, Chris! The template is really great and to trade it in its pure form is also nice for a deposit. Sorry for deviating from the rules of this topic. Genry Attached Image (click to enlarge)
+
+--- 帖子 #121 ---
+No worries Genry, I appreciate what you were doing, I just feel throwing a bunch more indicators in, at this stage, would dilute the testing...if we are not all using the same setups then the lesson is useless. TBH, I'm not sure there are many other testers lol, but I intend to soldier on. Chris
+
+--- 帖子 #122 ---
+eu, m15 Attached Image (click to enlarge)
+
+--- 帖子 #123 ---
+Hi Genry Nice trade...did your other indicators get you in early, before the actual confirmation candle? Chris
+
+--- 帖子 #124 ---
+Good day, Chris! Yes, the entrance was a bit early, but the minimum for placing the SL was close, so I was risking little money. I did not use other indicators, but simply saw the 1-2-3 pattern, which was not at least broken. Therefore, I ventured to place an order a little earlier than WPR broke MA
+
+--- 帖子 #125 ---
+Hi Chris, What's your comment about this trades entry? was it perfect or do you have a comment? ** What's your opinion about using MACD_BB of Genry? Do you think that the entry will be over confirmed if we use it? Thanks.
+
+--- 帖子 #126 ---
+Nice trade Genry. Congrats. Let's wait for Chris's observation &amp; comment.
+
+--- 帖子 #127 ---
+Perhaps some entries I make a virtue of their own experience and they get a little earlier. On my screen you can see that the order was closed by a take. In addition to the 1-2-3 pattern, I applied the graphical system for calculating the entry and exit points. It was not invented by me, the trader DKU showed it on the forexsystemsru.com forum. He did not disclose the methods of construction, but simply showed two screens (buy and sell) and offered to unravel its secret. I managed to solve something, but since the approach was not disclosed, I do not dare to explain it, because I understand that it is completely unknown to me. Therefore, I relate the signals of your trading system and my understanding of the market. But I try to follow the rules that you told: buy close occurred when crossing the -20 level
+
+--- 帖子 #128 ---
+I think the TMA MACD BB indicator has it's merits...like any indicator. It seems to give completely different entry parameters than what we are using here, one would need to build an entirely new system around it. @Genry; those lines on the last post look somewhat arbitrary in there placement, I can see what you did there, but hard to get every one to draw them the same. Like I asked previously... can we just stick to the current idea until proven profitable or not. I am definitely not the smartest one in here Chris
+
+--- 帖子 #129 ---
+Salim, Just my 2 cents brother https://www.forexfactory.com/showthr...3#post12282253 I don't speak for Chris, but it is sort of insulting to the creator if we keep insisting that we add other indicator without giving the original work a serious try.... Thanks
+
+--- 帖子 #130 ---
+Chris, in my opinion, your system works and works stably . I made more trades than posted here (32 transactions) and they all ended in a plus (two trades = 0). Because of my own experience, I see some entry points a bit earlier, but the reason that made me look for these points is the signals of your trading system. As I wrote earlier - I enter two orders and the second order is always in your system and they are all in profit. If I have screenshots that can be explained only by the rules of the system, I’m happy to share them here to increase the positive statistics. Thank you for sharing your ideas, Successes and profit!
+
+--- 帖子 #131 ---
+Nice going Genry...please, do not think I am having a go at you. I understand that there is a number of ways to skin a cat (not condoned lol). I hope you keep trying this and would like it if you would share your findings, for whatever system(results only), with us here as you see fit. I will be interested in what your results are. Chris
+
+--- 帖子 #132 ---
+Does anyone have a suggestion for the EA...what parameters should be selectable or not. Chris
+
+--- 帖子 #133 ---
+Chris, My suggestion for the EA: Since you predominantly trade Gold, the spread widening during iliquid times would eat away the equity if we open a trade during those times. I think having a filter where trades are only opened by the EA when spread falls only within a certain Maximum Limit/ range. Thanks
+
+--- 帖子 #134 ---
+Chris, Another Suggestion: 1. Parameter that enables/disables whether Trading is allowed during High Impact News events, may be the EA needs to link up with what news events are scheduled. 2. Parameter that Enables/Disables- Code Red Option/Panic Button: If equity falls below certain threshold: then close all trades. Thanks
+
+--- 帖子 #135 ---
+Thanks aaven, noted. My other, Renko EAs, have a slippage factor that is settable. This would help. I have been trading, the last few weeks, through news events and different times of day and night not worrying about red news. Will consider your request though.
+
+--- 帖子 #136 ---
+Thank You Chris...
+
+--- 帖子 #137 ---
+[quote=cfudge;12285723]{quote} I think the TMA MACD BB indicator has it's merits...like any indicator. It seems to give completely different entry parameters than what we are using here, one would need to build an entirely new system around it Right you are. Anyway, with this system you have only been trading gold &amp; WTI, right?
+
+--- 帖子 #138 ---
+please read the contents twice. You will see that I didn't add any indicator. I asked Chris his opinion about adding indicator. Everyone can ask a question to anyone. So from where does the question of insulting arise? I am surprised!!
+
+--- 帖子 #139 ---
+[quote=salimc;12291973] Yes Salim, only Gold and WTI.
+
+--- 帖子 #140 ---
+Here are the results up to this week from 05/05/19. I should clarify, this is only trades from XAUUSD 15min up to 4hr and copper 15 min. Chris Attached Image (click to enlarge)
+
+--- 帖子 #141 ---
+This is what I have for the EA outline, so far. I have not added an avoid news feature at this time. Please review...and suggest anything that might have been missed, Chris Attached File(s) Plans for EA.pdf 126 KB | 328 downloads
+
+--- 帖子 #142 ---
+[quote=cfudge;12292185] do u trade regularly during London open? I guess your brokers is AXI. Thanks
+
+--- 帖子 #143 ---
+[quote=salimc;12292290] I mainly trade Asian session after work 3-4pm PST until 9pm PST and try to wake up and check trades around 2-4am PST I am then watching charts from 6:30 to 7:15am PST This is why I want an EA Why do you say AXI?
+
+--- 帖子 #144 ---
+Salim, I wasn't explicitly targeting you. There was no ill will from me brother towards you. Thanks
+
+--- 帖子 #145 ---
+Awesome Chris...You deserve all the credit...
+
+--- 帖子 #146 ---
+Chris, There might be a possible error, running it by you: "Plans for EA For a trade we first need Williams %R to go above -20 line or below -80 line. Then we need the consecutive candle indi. to print an arrow in our desired direction (if we are above the -80 line we look for a down arrow, below -20 line we look for an up arrow) ." (if we are above the -80 line we look for a down arrow, below -20 line we look for an up arrow). My understanding is: It should be reverse: above -80, buy arrow and below -20 down arrow Thanks
+
+--- 帖子 #147 ---
+Nice catch...I have read that so many times and not caught that, thank you. 1st post and PDF updated
+
+--- 帖子 #148 ---
+[quote=cfudge;12292332] Recent days once I opened my position in Asian Session, but the market was so slow that the trade cannot be closed till London open. When London was opened the market turned another way. I have seen the market reverses when London opens and NY opens (most of the time). Only AXI offers gold paired with so many currencies like JPY, NZD. thanks, Salim
+
+--- 帖子 #149 ---
+forget it
+
+--- 帖子 #150 ---
+Added the option to close a single trade if "X" pips in negative. Chris Attached File(s) Plans for EA.pdf 146 KB | 240 downloads
+
+--- 帖子 #151 ---
+Chris, What are your thoughts on this: Including an option for choosing close of trade when it is 'X" pips in profit in addition to close of -20/-80. Example: In cases where there is abnormal movement which is in our favor of, capturing those pips then and there itself instead of waiting for close of -20/-80. Thanks
+
+--- 帖子 #152 ---
+Hi aaven, glad you are on board and helping with this. I thought, at first glance, that you had something there...but after looking at the charts I do not see any advantage with this. If price moves in our favour, dramatically, the cross of the -20/-80 is always the best result. ( I found one, meandering, trade that would have given 19 pips profit instead of the 11 it did give) There doesn't seem to be an advantage with losing trades either. (from just a quick glance) The other problem is what do you set the pip value at? It is not an easy question... Do you have any chart examples to show? Here are a few examples to point out what I mean. (note: the first buy trade is the right one, I missed it on visual backtest and took the second one shown) Chris Attached Image (click to enlarge)
+
+--- 帖子 #153 ---
+Thanks Chris for the kind words. As such i don't have examples, but i agree, after looking visually at few examples, close of -20/-80 is the best exit.
+
+--- 帖子 #154 ---
+Perhaps the average solution would be to transfer a profitable order to breakeven after the price has passed (further options): 1. "when it is' X" pips in profit " 2. %R indicator has passed the -50 level in the opposite direction from -20 / -80 3. Other options for trawling or breakeven, which you know. Note: these techniques are good at high volatility, when the price drastically moves away from the entry point. On the flat, the broker will always find an opportunity to make a puncture with the price and close the order with the minimum profit - this is not a hunt for our order, just the broker works against the general logic of the traders.
+
+--- 帖子 #155 ---
+Here are the results from 05/02/19 to 05/31/19 I missed several good trades this week on 15 min and 1hour...too bad! Chris Attached Image (click to enlarge)
+
+--- 帖子 #156 ---
+Thanks Genry...
+
+--- 帖子 #157 ---
+Much appreciated Chris for sharing the results/work...The results are impressive man.
+
+--- 帖子 #158 ---
+No problem cf.....if you like I ll organize the equipment....and U explain the fishing technique.....
+
+--- 帖子 #159 ---
+reteid2222 The PDF is the latest write up for the EA. The Indicators and Template can be found at Post#1: https://www.forexfactory.com/showthread.php?t=914079 Post#1 also contains some detailed explanation and posts from there contain Trade Examples. Thanks
+
+--- 帖子 #160 ---
+Updated EA PDF Attached File(s) Plans for EA.pdf 147 KB | 346 downloads
+
+--- 帖子 #161 ---
+This is why we need to forward test...I am no longer paper trading the 5 min chart. It has just gone through a large number of sell losses during this recent trend. I will show the 5 min chart to the 4 hr chart showing the same time period. Chris 5 Min Attached Image (click to enlarge) 15 Min Attached Image (click to enlarge) 30 Min Attached Image (click to enlarge) 1 Hour Attached Image (click to enlarge) 4 Hour Attached Image (click to enlarge)
+
+--- 帖子 #162 ---
+Chris, Thanks for sharing your insights man. On 5 Min TF, it was one of those killer trends for 5 Minutes, but is it also possible that at some time we can have a "killer trend" that has the same effect on Killer Trend-15 Min TF/Killer Trend- Hourly etc... What are your thoughts on potentially mitigating the loss by opening only one position and waiting for the exit instead of adding at every signal?
+
+--- 帖子 #163 ---
+5-minute TF is too short!
+
+--- 帖子 #164 ---
+Hi aaven Yes that is always a possibility...however I have backtested the daily for 7 years data and it hasn't happened there. Even through the last monthly downtrend in 2013. Here are some on 1 hour and 4 hour. The 1 hour is heavy loss, but not account devastating the 4hour was saved by our volume indicator. The other factor in all this is, by trading all the other TFs we get to mitigate a lot of the losses with wins on other TFs. Not completely but maybe in the long run this will prove to not turn this into a losing system. There is a lot of work and time to test a system, no easy ways around it. Chris 4 hour trend Attached Image (click to enlarge) 1 hour trend Attached Image (click to enlarge)
+
+--- 帖子 #165 ---
+Thanks Chris...
+
+--- 帖子 #166 ---
+Please can you post your own indicator please
+
+--- 帖子 #167 ---
+Chris, " Even through the last monthly downtrend in 2013." I must have overlooked this line. That's really wonderful. I am not sure, what more anyone can ask for. Looking forward to testing the EA {It would be my first foray in Automated Trading}-Also, i hope i am not putting you in an awkward position- -so far my understanding was the EA would made public-If not, i totally understand. Thanks
+
+--- 帖子 #168 ---
+Sunny, Everything is there in the 1st Post. Thanks
+
+--- 帖子 #169 ---
+No worries aaven...the EA will be free to use
+
+--- 帖子 #170 ---
+Much appreciated Chris...
+
+--- 帖子 #171 ---
+Slight hiccup this week, let's keep going. Chris Attached Image (click to enlarge)
+
+--- 帖子 #172 ---
+EA is in development, will post when finished. Chris
+
+--- 帖子 #173 ---
+Preview how I coded entries &amp; exits....took 3 days to put the ma of wpr into a seperate reuseable class...sry
+
+--- 帖子 #174 ---
+Looking good Are you testing on all pairs 1 hour or several TFs? Chris
+
+--- 帖子 #175 ---
+Attachment 4 H1 and M15 V1.01: corrected errors with sl and tp on multiple pairs...
+
+--- 帖子 #176 ---
+Hi Retina, one thing I noticed from your post above (PDF) is the Consecutive candle indicator once it prints an arrow the signal is not Valid until a candle prints with a dot. That is the signal candle, not just the one with the arrow. Chris
+
+--- 帖子 #177 ---
+So when the trigger "wpr crosses ema 55 and vol is high comes" we have to had an arrow AND THEN afterwards a dot(maybe trigger candle) for the preconditions..ofcourse in the trade direction? What does the consec indicator do? When shows it dot and when arrow? And I expect some guys here to backtest AND optimize the EA on all 28 pairs AND post here ALL 28 set files ...looks good on M15, M30 and H1... This will be 3 * 28=81 set files..... Name it "cfudge - Williams, EMA &amp; Vol V1.01 - H1 - EURUSD.set" for example and pack all optimized files into a rar file and post it here!
+
+--- 帖子 #178 ---
+Posted here....started just now with the first trade: https://www.forexfactory.com/reteid2222#acct.60
+
+--- 帖子 #179 ---
+Can’t get it to work in the tester. Journal: “ Cannot load Experts”
+
+--- 帖子 #180 ---
+Can't get it work too.
+
+--- 帖子 #181 ---
+The problem is that the tester doesn t accept filenames with ","...so just rename it....= remove the ";" sign....
+
+--- 帖子 #182 ---
+Thank you
+
+--- 帖子 #183 ---
+My Trade Xplorer: Today starting 12:00: 2,5% at 19:47 London time ... Good start....let z dance trade! Inserted Video
+
+--- 帖子 #184 ---
+The Indicator shows a dot on all candles that meet the requirements of the indicator. It only puts an arrow on the first candle with an opposite coloured dot, for ease of seeing.
+
+--- 帖子 #185 ---
+So I only need a dot not an arrow...
+
+--- 帖子 #186 ---
+Hi Chris, All the indicators are supposed to be embedded in the EA. So i don't need to put any indicator in the chart. Right? Anyway, I will be using 1 Hour chart for all major and minor pairs except CHF. Thanks
+
+--- 帖子 #187 ---
+Only tried defaults, but higher TFs perform better, albeit with far fewer trades. Best results were on D1, but only 13 trades in 18 months. Could probably add more pairs for increased profits.
+
+--- 帖子 #188 ---
+EA installed and running on standard settings and all pairs. I am going to use the 1H TF, lets see what happens!
+
+--- 帖子 #189 ---
+This is a multipair EA with default all 28 pairs....
+
+--- 帖子 #190 ---
+Just make a backtest....on M15 only 70% profitable over one year....some pairs are really horrible....
+
+--- 帖子 #191 ---
+Sorry....no indicator is embedded you need both external indis in the indicator folder!
+
+--- 帖子 #192 ---
+The reason that the TE is in minus are the open trades....but they are all open so everyone can be a winner....
+
+--- 帖子 #193 ---
+You need an arrow then a dot to confirm the arrow.
+
+--- 帖子 #194 ---
+Salim you just need to have the indis in your indicator folder
+
+--- 帖子 #195 ---
+9 out of 9 winners.....I m total curious when the first loozer come....
+
+--- 帖子 #196 ---
+Hi, are you trading a standard installation with all pairs and all default settings? regards, Peter
+
+--- 帖子 #197 ---
+My tested selection from the 28 pairs....
+
+--- 帖子 #198 ---
+Thanks, have a great weekend
+
+--- 帖子 #199 ---
+Thx....11 trades...11 winners....the rest open with -13%....I m sure(based on my bts) we will do the 30% on end of june.... Greetings and have a nice weekend...
+
+--- 帖子 #200 ---
+That's great news for all of us.
+
+--- 帖子 #201 ---
+Here is a minni run of losses on XAUUSD 15 min with one win at the end Looking back over a couple previous trades this was absorbed. Chris Attached Image (click to enlarge)
+
+--- 帖子 #202 ---
+Made a bit of progress this week (manual trading). Chris Attached Image (click to enlarge)
+
+--- 帖子 #203 ---
+Reteid Based on Post#177: https://www.forexfactory.com/showthr...8#post12326388 It looks there might be some confusion about entry and Chris gave his input on this post https://www.forexfactory.com/showthr...8#post12328428 Does the V1.01 include the correction? Many Thanks for your work in coding the EA Thanks
+
+--- 帖子 #204 ---
+Both statements don t fit together...however the results of the actual version as in my descriptin cant be better for the closed trades...now 12 out of 12 winners....let z see what with the other 12 running trades will happen....
+
+--- 帖子 #205 ---
+I'll code it in mt5 for better testing
+
+--- 帖子 #206 ---
+I have coded it for multiple pairs but you can backtest in only one pair...so no need for mt5!
+
+--- 帖子 #207 ---
+Chris, Is my chart setting ok to trade with the EA?
+
+--- 帖子 #208 ---
+That's great news. Are you using the hourly time for your 25 trades? Thanks.
+
+--- 帖子 #209 ---
+Hi Salim From what I see you have no SL (if that's ok for you, I know you like a sl) Also I would make it so you can have more than one trade in one direction (you are set to only 1 right now) Chris
+
+--- 帖子 #210 ---
+M15 cause on H1 there are not enough trades even on all 28 pairs...
+
+--- 帖子 #211 ---
+Thanks. Then I am going to use m15 to get more trades. In my chart the sl and tp is not visible. But in the EA the the sl &amp; tp is set as 200 points. I uploaded my chart for you to see why the tp and sl is not showing in my chart (if u know the reason )? Thanks.
+
+--- 帖子 #212 ---
+They should be set when the trade started....
+
+--- 帖子 #214 ---
+Hi Everyone; This is an exciting time, on this thread. I would like to thank reteid2222 (Retina) for her hard work on the EA. I would like to ask everyone that has downloaded the EA and is testing to post the pair(s) and TF(s) they are testing on. Any results from a strategy tester is also welcome. I would like to see how many people are trading the EA. If you are then I will like you to like this post so we can get an idea of who is testing. Thanks, Chris
+
+--- 帖子 #215 ---
+I will be using m15 with the default settings for multiple pairs. Hope that will be ok.
+
+--- 帖子 #216 ---
+1 open word(s): I m first wondering why so less people have success in fx....85 downloads the EA...65 the docu.... 0 have tested on M15(which I wrote) and posted the best set files here.... That s ONE reason why people have no success on fx.... I ll do the changes next weekend....
+
+--- 帖子 #217 ---
+Do you read the docu=pdf?
+
+--- 帖子 #218 ---
+Hello and thanks for all your efforts on EA I have read the PDF and it is only three pages which are ENTRY CONDITION and TP CONDITION. There is not any settings descriptions. -As I understood IF I set the EA on just one chart, it trades on all the pairs that is mentioned in the settings. Am I right ? or I have to set it on each chart separately and change the magic number for each one of theme?
+
+--- 帖子 #219 ---
+There is....one chart and set to multipairs...all in the list were traded...we have only a tp in the trade strategy...no "real" sl...tp is when williams reached "the other side"...
+
+--- 帖子 #220 ---
+yes
+
+--- 帖子 #221 ---
+Hi Retina I want to trade one pair with multiple TFs. Is that possible without having all the different TF charts open? If I have to open all the TFs, will I have to set a new magic number for each chart? Chris
+
+--- 帖子 #222 ---
+As I wrote: for each TF one chart...should work but not tested....(so many features inside my framework sry)
+
+--- 帖子 #223 ---
+So I need a different magic number for each chart?????
+
+--- 帖子 #224 ---
+Hi, I tried compiling the VolumeAndVolatility update.mq4 code, and there seems to be a coding error that may affect results. It's a compiler warning only, but being that it is an uninitialized variable issue, results may indeed be affected. Attached is the screenshot.
+
+--- 帖子 #225 ---
+Test is promising. From the image, I am not using stop loss. I just let it run its course. Unfortunately, the result cannot be entirely trusted. I opened some trades of my own and the EA was closing by itself which shouldn't be. It means the magic number is not working for trade closing. You should correct the bug in the next update. I don't believe so much in demo testing. If all goes well for the rest of the month, I will give it a run on a $1k live account and upload the TE. Verdict: Promising . H1 Attached Image (click to enlarge) M15 Attached Image (click to enlarge)
+
+--- 帖子 #226 ---
+same problem here. EA closes other trades with different magic number
+
+--- 帖子 #227 ---
+Warnings of these type are not relevant here....
+
+--- 帖子 #228 ---
+As I started two years ago, the EA framework was for only one pair with no magic number....month for months I have added new features as multiple pairs...so there are maybe errors in situaltions i never have on my vps as 2 EAs on one account... Sinple write me here and I ll correct these errors...
+
+--- 帖子 #229 ---
+Hi Chris, Today till 10 am (London time), the expert adviser opened 6 trades. The EA opened all the trades from a single chart. I didn't touch the default setting yet as there is no such indication from the coder (She knows best about all these settings). Let's wait and see how everything works.
+
+--- 帖子 #230 ---
+Hello Retina, I attach for your kind perusal a trade that the EA took - one of many - on the EURCAD-M15 this morning. Entry time was 08h30 on my charts, but the Williams %R was only @ -28.0323 and the 55-ema @ -28.6585; Oscillator correct. Could one perhaps use the -20 line in this case as an exit to prevent a large loss unless of course one uses a hard-stop.( would have been a -7 points loss) Please note that I am using a 55-ema on the charts (White dotted line) and the same Trend Envelope in Aqua as a filter as it helps me a lot with my everyday trading. My question is whether one could possibly use such a "filter" to prevent a major mishappening from taking place when the EA runs without any supervision? And secondly, would you kindly explain to me why the trade was triggered in the first place based on the Williams and the ema crossing? Thanks in advance for replying.
+
+--- 帖子 #231 ---
+All Win.London Session--17.06.2019.
+
+--- 帖子 #232 ---
+Hello Retina, ps check the bug in the EA. For eurgbp the trade is long. But the EA has opened short order.
+
+--- 帖子 #233 ---
+For gbpnzd the trade is short. But the EA has opened long order. ***The trades which don't have these bugs become profitable. But if there is a bug, it becomes a losing trade.
+
+--- 帖子 #234 ---
+How often the EA starts trading?Which are the best setting? How many trades to be enabled? It has been doing nothing since 10 hours I started it.
+
+--- 帖子 #235 ---
+are you what they call spoon feeder, lol
+
+--- 帖子 #236 ---
+seems like that lol
+
+--- 帖子 #237 ---
+Hello Retina, The EA should open trade after the William% line clearly crosses the 55 ema line and moves upward by 5 pips (approx.). Otherwise, there is a possibility that the trade may change its direction and may result in a large drawdown or even SL (when fixed SL is used).
+
+--- 帖子 #238 ---
+Same here, plus the one mentioned above. I am also testing the Indexes ( Indices is correct, but concerned that not all traders speak English and may not understand) and had a similar occurrence on the GER30. US30 seems to be doing well.
+
+--- 帖子 #239 ---
+We shouldn't expect too from a single EA. Let it work perfectly for 20 pairs (I always exclude CHF pairs in my trade). If the bugs can be removed from this EA, these 20 Pairs will be enough for traders like us. So we should let her work in her own way. She is doing a miracle. So we should be patient and help her with our findings. All the best
+
+--- 帖子 #240 ---
+Could someone please assist me with the display of the EA in the top left hand corner? Mine does not look anything like the ones you are displaying. Thanking you in advance.
+
+--- 帖子 #241 ---
+Yes, I agree with you, hence my supporting your request for looking at a possible glitch. She is a whizz and if anyone can get the better of it, it will be her. Continued success to you all. PS. I also exclude CHF in all its combinations.
+
+--- 帖子 #242 ---
+Change the settings to false
+
+--- 帖子 #244 ---
+chfjpy--wrong entry by the EA. It should be short but the EA opened a long order. Moreover, there is the black color at the volume indicator. So the entry preconditions are also not met.
+
+--- 帖子 #245 ---
+The opening is from 10:45 ....so it can t be from the H1 chart of CHFJPY...it is from the M15 CHFJPY chart!
+
+--- 帖子 #246 ---
+Sorry for my mistake. Yes, it was 15 minutes chart. ps, see the chart.
+
+--- 帖子 #247 ---
+These large drawdowns are due to wrong entry by the EA. If SL was used then it would have been hit.
+
+--- 帖子 #248 ---
+Ok...we are talking here about 0.5 on a distance of 100...maybe the reason is I have not calculated the ema far enough...but this is a minor bug...exit = williams reaches the other "border"!
+
+--- 帖子 #249 ---
+NO...the trade at 12:00 is a short trade!
+
+--- 帖子 #250 ---
+Conditions were fullfilled but there was a cross dn before....that s a bug!
+
+--- 帖子 #251 ---
+Next version: - Original feature: First arrow then do before entry - Removing error that price was over ema crossed dn then up - New feature: williams has to be max "X" value...idea: when williams is to near to border the trade is not meaningful
+
+--- 帖子 #252 ---
+Here is something wrong. I dont see signal for BUY, but EA opened
+
+--- 帖子 #253 ---
+Can you draw a line where it is opened?
+
+--- 帖子 #254 ---
+That is a valid buy Attached Image (click to enlarge)
+
+--- 帖子 #255 ---
+Hi Retina Original feature: First arrow then do before entry - Removing error that price was over ema crossed dn then up - New feature: williams has to be max "X" value...idea: when williams is to near to border the trade is not meaningful The first line is correct arrow then dot for confirmation The second line is ok if you mean during the formation of the candle price goes below/above the 55ema then closes above/below The third line is not part of the rules. If you want to include it please make it so we can turn it off. Chris
+
+--- 帖子 #256 ---
+Then this is not a valid signal:
+
+--- 帖子 #257 ---
+Yes at 12.00 it was a short trade. But the EA opened a BUY trade for it. At the end of the day, price reversed and the trade was closed in profit.
+
+--- 帖子 #258 ---
+The trigger is the cross of the williams with the ema55! At this cross = candle the volume has to be colored or also before? Before this the price is under the ema while the two conseq candle signals were generated.....
+
+--- 帖子 #259 ---
+My chart is different from yours and the trade is a valid one
+
+--- 帖子 #260 ---
+Retina, Thanks for the coding effort. Just a clarification for you: Exit as per rules: "Exit trade after close of first bar where Williams %R is above -20 line." I hope-When you say, William reaches the other border means - You are meaning close of candle and not just touching, right? Thanks
+
+--- 帖子 #261 ---
+It is a valid trade, for "sell", but the EA has opened a buy trade.
+
+--- 帖子 #262 ---
+According to POST #1 rules.... Its a BUY. check the picture... vertical dotted red line is the position taking time.
+
+--- 帖子 #263 ---
+i will post an indicator where only the BUY signal are coded...put it on the chart and please tell me if we are ready! If not: Screenshots with name of pair, time and what seem to be wrong... Greetings....and letz make another 22% percent this week.... Indicator is coming.....sorry....I have just some questions...
+
+--- 帖子 #264 ---
+Trade ok even williams crosses border in different directions?
+
+--- 帖子 #265 ---
+No trade cause no volume...
+
+--- 帖子 #266 ---
+Trade is false...only one dot!
+
+--- 帖子 #267 ---
+False trade cause williams under 20 and only green arrow but do missing...
+
+--- 帖子 #268 ---
+Very positive starting day with EA 1.0, Almost 100 pips grabbed. I would be greatful half of this performance but continuously. Thank you all who work on this system, ea.
+
+--- 帖子 #269 ---
+Sorry but VOL2.0 is not attaching to the charts, not working...
+
+--- 帖子 #270 ---
+As I believe this is an indicator and not EA.
+
+--- 帖子 #272 ---
+Hi Retina I think you said that you were going to fix the entry from the arrow to a dot after the arrow and you have a bug to fix. You said this weekend you would try to fix this. Her are some responses to your questions and charts above. Chris Attached Image Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #273 ---
+i will post an indicator where only the BUY signal are coded...
+
+--- 帖子 #274 ---
+I think the conditions are coded correctly as above....the arrow means here is everything ok so enter with start of the next candle.....
+
+--- 帖子 #275 ---
+Actually that is not right...there needs to be a secondary candle with dot after the arrow candle for a trade to be considered. Please read first post again. Attached Image (click to enlarge) Chris
+
+--- 帖子 #276 ---
+Hello Chris, I think you meant that 2 candles confirmation is needed to make an entry : 1. When an arrow with a dot print on a candle. This is a signal but we don't open a trade. 2. When there will be a dot in the next candle (we open the trade). This way I traded manually. Ps. Correct me if I am wrong. **The First candles signal sometimes is false. So to filter it, a dot in the next candle is required for reconfirmation. Thanks.
+
+--- 帖子 #277 ---
+Thanks for the indicator Retina. When are you going to incorporate it into the EA firstly and secondly, will you post it here when ready? Also, without prejudice, what is the point in testing the current EA version when you have identified "bugs" in it? I know how busy you are and respect your time, hence my question. Continued success to you. H.
+
+--- 帖子 #278 ---
+When are you going to incorporate it into the EA firstly and secondly, will you post it here when ready? Its just the tool to show the buy and sell signals I coded...I ll never use it when the logic is complete coded Also, without prejudice, what is the point in testing the current EA version when you have identified "bugs" in it? The "bugs" are the logic which is not 100% like intended here...How I coded it looks good for me( and my calculations showed this) So i saw that this is a successful EA... I know how busy you are and respect your time, hence my question. Continued success to you. H.
+
+--- 帖子 #279 ---
+Thanking you most sincerely, Retina. Best wishes, H.
+
+--- 帖子 #280 ---
+No Salim the candle with a dot can be several candles after the arrow
+
+--- 帖子 #281 ---
+They can be also on the trigger candle where the crossover ema - williams had happened....as I understand the strategy
+
+--- 帖子 #282 ---
+No that is not correct I posted a picture of the rules a few posts back. Can you change the EA to trade with the rules please.
+
+--- 帖子 #283 ---
+So the dot has to appear 1-.... bars before the crossover.....
+
+--- 帖子 #284 ---
+YES It all has to happen in agreement
+
+--- 帖子 #285 ---
+Yes. The first Dot candle is our trigger Candle?
+
+--- 帖子 #286 ---
+No Salim The arrow paints...then a candle with a dot paints...if all other requirements are in place we trade. The candle with the dot does not have to be immediately after the arrow, there can be several candles with dots after the arrow. We look for the one where the other rules are in agreement. Here Attached Image (click to enlarge)
+
+--- 帖子 #287 ---
+Would it be possible to include a global TP setting? I had a situation last night with +$27 float, which turned into -$8 this morning. It would be nice to have a TP that would work on the entire basket.
+
+--- 帖子 #288 ---
+Thanks pal
+
+--- 帖子 #289 ---
+So far so good Attached Image (click to enlarge)
+
+--- 帖子 #290 ---
+Update M15 Attached Image (click to enlarge) H1 Attached Image (click to enlarge) The H1 result is impaired. The EA on M15 chart close trades opened by the EA on H1.
+
+--- 帖子 #291 ---
+Hi Retina I have an idea for a better entry. Attached Image (click to enlarge) in the H1 chart you see the entrance signal marked in red. I hope that is correct in the 5 minutes chart you will see the same place marked in red. But there is no entry point we are within the -20 position. If i understand the rules. The Blue line is the correct entry in M5. it could minimize the drawdown. it is possible to code an additional Timeframe check with the same rules für better entry timing? Sorry for my bad English Regards Central4
+
+--- 帖子 #292 ---
+Today I have minimum profit but 3x pip floating on profit. What should we do by Friday? Close everything or let them run? How can make it work on Android/IOS MT4 trader? Maybe Williams+m55 with Volume. Any idea? Overall, 9 out of 10 trades clsoed in profit in 2 days...
+
+--- 帖子 #293 ---
+Please BeaterTrader and foff00 which settings are you using for trading? I would like to test it also
+
+--- 帖子 #294 ---
+I use sl as last fractal, tp as Williams. Number of max orders, 20 Timeframe to run ea: 15 mins
+
+--- 帖子 #295 ---
+Please don't try and change the rules. Both of your trades are wrong What we are doing here is trading all TFs from 15min to daily. I suggest this is what you do. Chris
+
+--- 帖子 #296 ---
+Nice going...I let trades run until they close by crossing the opposite line. Chris
+
+--- 帖子 #297 ---
+Ok, thank you cfudge. You guys all creating something special, keep on
+
+--- 帖子 #298 ---
+What does it mean this error?
+
+--- 帖子 #299 ---
+And this error...
+
+--- 帖子 #300 ---
+Thanks to cfudge for this great thread and idea. Also big thanks and respect to reteid2222 for your great work so far. Ive seen your work before and you amaze me. Just testing the EA out on 5min only so I can get a fix on how things are working.I know things are not 100% yet but looks promising in both strategy and programming. . Today as I speak I have my open negative trades are equal to banked closed trades. If I set "allowable trades" to zero would this stop the EA taking trades and allow it to manage the open ones ? Thanks,and I hope to be able to help out with some testings and results. D.
+
+--- 帖子 #301 ---
+Today is really bad. However I got 113 pips profit since Tuesday, now I have 3 usdjpy cannibalized all of them, clsoed them manually, I do not understand why ea did not close it. Opened 3 buys then turnt into freefall..... Do not be too sad, I continue running.
+
+--- 帖子 #302 ---
+Will add basket closing in the next version....
+
+--- 帖子 #303 ---
+And just found the error with closing ALL trades not only with specific magic no....
+
+--- 帖子 #304 ---
+Allowable trades means the maximum of trades running...the EA looks on this restriction if set when =before trying to open new trade...setting to 0 will open no new trades even the old were closed....
+
+--- 帖子 #306 ---
+This function is not working. I set to max no. of 5 trades. But it took 11 trades!
+
+--- 帖子 #307 ---
+Thanks to Retina for her work on the EA. I/we look forward to the next version with bugs and rules fixed and new additions. Thanks to all contributors and testers. Keep up the good work. I am still testing manually, until new EA is out. I will post weekly results again tomorrow. Chris
+
+--- 帖子 #308 ---
+I just want to warn people that I did not have the greatest backtests with normal pairs, my best were commodities like gold, copper, silver... You must do your due diligence on the pairs (and time frames) you wish to trade. This method is not an ATM cash producing system. Some pairs lost money and some TFs were not great, either. My backtests were mostly daily and went back 3-5 years. Just to show a different approach...these tests (see charts) are examples of the first ones done, before I introduced the 55ema, onto the Williams %R. This is the kind of tests you need to do to make sure you are trading profitable pairs. I said a few pages back that testing a system is not an easy task, it takes alot of time and effort. The results of which are now presented in a tidy EA, but backtests are still required to make sure you are going to make profit going forward. Chris Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #309 ---
+Thank you for your reply. So,maybe future version should have a "take no more trades" option, so we can stop trading but allow EA it to manage open positions. That way we can extract ourselves from the market. D. EDIT: maybe as a workaround we can do this now by using the max spread option and adjusting it to 1 point ? D.
+
+--- 帖子 #310 ---
+How would this matter,if ea closes trades on opposite Williams line. Surely it would close a buy trade before being able to open a sell . Its late,maybe im tired and missing something. Thanks, D.
+
+--- 帖子 #311 ---
+Hi nihilist23uk If you are referring to why we would want more than 1 trade open in the same direction, let me suggest, if a trade to sell is opened but price goes against us and Williams%R goes back above -20 line we can then get a new entry at a higher price. Williams%R can then move down over the -80 line giving a profit for the second trade, the first trade may also be in profit but not necessarily. So, instead of being a loss we offset our loss or even get an overall profit by having the second trade opened in the same direction. This goes for 3-4-5...trades, on this same theme, by trading all the TFs we get an extra way to offset losses. Now go to bed Chris
+
+--- 帖子 #312 ---
+Thank you Chris, Im very tired. I was seeing it as a buy and sell open at the same time instead of 2x buys or 2 x sells. Thanks for putting me straight. Good night.
+
+--- 帖子 #313 ---
+Wow....this is time consuming.....
+
+--- 帖子 #314 ---
+You have here set a fixed sl...we don t need this...I ll remove in next version!
+
+--- 帖子 #315 ---
+Next try .....this indicator now shows all entries correctly...
+
+--- 帖子 #316 ---
+Retina, would you mind adding the option to use either 1st, second or 3rd dot in the next version of the EA. My personal feeling is that 3rd is way too late without any disrespect to Chris. Thanking you most sincerely.
+
+--- 帖子 #317 ---
+explain and post some screenshots please1
+
+--- 帖子 #318 ---
+Hi Retina, 90% accuracy to land of gold Aussie. Inserted Video
+
+--- 帖子 #319 ---
+Correct me if I am wrong, but the present entry only comes after the 3rd dot on the candles? I am requesting that we can adjust that ourselves during this testing phase as 3rd candle is too slow. Thanks for your time. Sorry I omitted the screenshot.
+
+--- 帖子 #320 ---
+Great work, Retina! So, I have been running &amp; testing v1.00. But now, V2.02 does not load to my chart. What new or updated indicator am I missing? In my indicator folder I have: consecutive candles 1_02 VolumeAndVolatilty update &amp; use williams2.tpl Thanks, cdk
+
+--- 帖子 #321 ---
+Please do not change the rules, you seem to misunderstand that there is no rule that says we enter on 3rd dot...we enter on a dot when all other criteria are met. It is not difficult to understand really, that is why there are rules. Plus your entry is wrong it should be one candle back...looking at your screen shot. Chris
+
+--- 帖子 #322 ---
+Chris, I am not trying anything of the sort. Sorry that you see it that way. That entry was the EA trading, not manual. I totally agree with your recommendation that the entry should have been one candle earlier. Hercs.
+
+--- 帖子 #323 ---
+Yes the EA got that wrong then and Retina will need to address that in her formula. Nevertheless, when you wrote... Attached Image ...it seems to me that is a rule change.
+
+--- 帖子 #324 ---
+Nice trade on 15min gold Attached Image (click to enlarge)
+
+--- 帖子 #325 ---
+Chris, Why do you think the EA missed this long @ 16h45 close on my M15-chart. 2 candles earlier we had an arrow + a Green dot. 16h45 candle the readings were as follows: WPR @ -20.4080 ( therefore above the -20 level) and the 55-ema @ -26,8342. Vol oscillator on Yellow. Thanks for replying at your convenience. Hercs.
+
+--- 帖子 #326 ---
+Hey Hercs You need to read the first post...that is not a valid buy, by any means. Can you please post an answer to your question so we know you grasp the rules.LOL Chris
+
+--- 帖子 #327 ---
+Result after 1 week H1 Attached Image (click to enlarge) M30 (formerly on M15) Attached Image (click to enlarge) I changed to M30 because M15 had too much noise. M30 trades are better spaced and less frequent Verdict: Decent results
+
+--- 帖子 #328 ---
+.
+
+--- 帖子 #329 ---
+Thank you Retina !
+
+--- 帖子 #330 ---
+Much appreciated Retina. Wishing you a pleasant weekend. Best wishes, Hercs.
+
+--- 帖子 #331 ---
+thanks Retina, installed and ready to go. Hopefully a good week next week. have a great weekend.
+
+--- 帖子 #332 ---
+So, you find it funny Chris? Me too. So maybe I jumped the gun as there was no 2nd Green DOT? But once again, why did that EA not trigger? Here are the rules from P.1 unless you have changed it, but you suggest I reread post #1 so here it is: Best, Hercs. PS. Just downloaded the latest EA so I am anxious to see what happens now. Pleasant weekend.
+
+--- 帖子 #333 ---
+My week just ended up at BE. See things next week. Probably some optimization on sl, and bugfix and all ok.
+
+--- 帖子 #334 ---
+@Hercs Yes you read the first post and all the answers were in front of you but still you missed it. Thats OK, mate, I will describe where you are confused. Consider the following... In order for the signal to be a buy, we need the Williams%R to go below the -80 line , then we need the arrow to print, after which we are looking for a candle with a dot and the Williams%R to have crossed, back above, the -80 line and be above the 55ema. All while the volume indi. is in agreement. I have highlighted the flaw in your reasoning...Just having a bit of fun. Chris
+
+--- 帖子 #335 ---
+I would suggest using the 15min thru to the daily TFs to mitigate losses. Chris
+
+--- 帖子 #336 ---
+Here with 2.0 of EA, do we need to update any of the indicators?
+
+--- 帖子 #337 ---
+Here are the results of manual tests from May 05 2019 until today. These results are from trading XAUUSD 15min to daily and XAGUSD 4hr and Copper 15min. Not all the trades are accounted for as I sleep and work, I do place stop and limit orders if I have missed a trade, but they don't always get triggered. I close some trades in more profit or more loss due to the time I can get to close them. I am assuming it all averages out... Chris Attached Image (click to enlarge)
+
+--- 帖子 #338 ---
+In that case did you find all the tf agreed? If not, what did you do?
+
+--- 帖子 #339 ---
+Hi Salim I treat each TF as if it was a different chart altogether. Chris
+
+--- 帖子 #340 ---
+If you treat them as a different chart that's ok. In that case, you have 5 charts (15m,1H,4H,D,W). But the trading decision you take from which TF chart?
+
+--- 帖子 #341 ---
+Decision is based on each chart. Each chart is treated independently. Open M15: If there is signal to trade take it Open M30: if there is signal to trade take it Do the same for all the time frames stated M15, H1, H4, D and W
+
+--- 帖子 #342 ---
+Not the weekly DD will be too much
+
+--- 帖子 #343 ---
+When you look into the successful trades it is obviously how these were developing:
+
+--- 帖子 #344 ---
+If that is an m30 chart...where is the latest 15min trade? I did say that w/o sl there will be DD :{ Chris Attached Image (click to enlarge)
+
+--- 帖子 #345 ---
+Update after 6 trading days: M30 Attached Image (click to enlarge) H1 Attached Image (click to enlarge) The new version is still closing trades from another magic number. You may want to check. Verdict: Promising. Require manual intervention for trades that get away in reverse direction. Stop loss will turn the bot to a loser. Trades often reverse before going as expected
+
+--- 帖子 #346 ---
+My trades since this morning. Rather disappointing. It seems as if the AUDUSD is not suitable for this EA. Any comments Retina? Please.
+
+--- 帖子 #347 ---
+Yes, looks good, but what is your floating negative level of open trades still to close ? Until we can close a basket of trades completely we wont know how this is going to work. Back testing has yet to show me any pair that is profitable on its own. I know its a difficult as we have to compare individual pairs to a basket. Forward testing so far has better results than back testing,for me anyway. D.
+
+--- 帖子 #348 ---
+Hercs, My Request is: Please stop saying words like- Disappointing etc... Because This is just the testing period-As it can be really discouraging to Chris- After all he is doing it for the community. Also, there seems to be cluster of 4 sell orders on AUDUSD nearly at the same price? May be Chris or Retina can add further insights. Thanks
+
+--- 帖子 #349 ---
+Read my comments again: Require manual intervention for trades that get away in reverse direction. Stop loss will turn the bot to a loser. Trades often reverse before going as expected How you manage trades in negatives is up to you. I am more interested in a tool that takes the trades and closes to a great extent. The rest I can handle. You can see losses in the picture. Thats part of trading. At the moment I have equal amount of DD as profit displayed and thats perfectly fine. I will add more trades to each pair when the opportunity presents itself. Backtesting has no merit in my rule book. Thank you.
+
+--- 帖子 #350 ---
+Glitch with ea. Got two open trades on nzdjpy buy and a sell with ea's tp set to williams border. Buy should have closed before opening a sell. Checking experts log, loads of errors with "invalid price" for close of trades, 2019.06.24 23:30:02.244 cfudge - Williams, EMA &amp; Vol V2.00 - Forex EA - V8.00 AUDUSD,M5: invalid price 0.69637000 for OrderClose function D.
+
+--- 帖子 #351 ---
+In my computer the new version works perfect with the magic numbers. 3 version of this EA and also 2 other EAs are open all with different magic numbers. Thanks again Retina
+
+--- 帖子 #352 ---
+Hi Aaven, Thanks for your post, but seeing that we are in the testing phase, it would be better to use these words now rather than when we are all happy running away with a freight train and all of a sudden the breaks come off. Chris is not a baby and he will appreciate good testing results. Check the fish that he caught! That is not disappointing, but years of fishing. Best,
+
+--- 帖子 #353 ---
+Good morning Chris, Trust the first fish is in the net. Two things plse and "no", I do not wish to change your rules: a) Could Retina possibly change the EA in such a way that when the trade runs in the wrong direction, it be closed when it reaches the entry point to the correct direction? b) Does the function of placing a stop at the previous fractal work? Mine does not seem to. c) Again no change suggestion, but if you use a filter such as the 55-ema on the candles, it might just pull it off. May I suggest you running such a chart for your own edification before commenting. Happy fishing with tight lines. Hercs.
+
+--- 帖子 #354 ---
+If you want to have new features in the next version just add here...will do it in about 4 weeks when I see how this EA works and behaves: Please the format and layout like here: V3.00 Feature idea no 1: &lt;blablabla ...very specific&gt; Screenshots(1-4): &lt;Add to your post&gt;
+
+--- 帖子 #355 ---
+You are a 5-Star, Retina. Mine follows shortly. Best to the best.
+
+--- 帖子 #356 ---
+Hello again Retina, A. Indicates the LONG arrow and the trade was taken correctly according to rules. B. If we use the 55-ema as filter, then that was incorrect and we would have waited for the first SHORT entry @ 10h00. In our present scenario, I would like the EA, to close the long upon the short signal and enter short @ 10h00 irrespective of loss. C. Correctly read from the oscillator. See attached screen shot for your kind perusal and comments. Hercs.
+
+--- 帖子 #357 ---
+Hey Hercs Don't try and butter me up with fish talk...LOL The change you described shows total disregard for the rules. I would suggest that if you want to play with the 55ema on the chart as a baseline, you would wait for proper sell signals, from all indicators and ignore buys. Just using the Williams%R crossing the 55ema, regardless of position, has nothing to do with what we are doing here. I am not saying that it is not a good idea, only that it is a departure from the core entry requirements. Would you be willing to backtest this, visually, and throw up a chart with your results for us all to see? I am not picking on you, thinking about improvements, adjustments is great...but before we add tons of things to the EA we should have a more solid idea on how it looks from a backtest. Retina has a program for easy backtesting, maybe she can share it here. Chris
+
+--- 帖子 #358 ---
+Hi Chris, Thank you for replying. There is no "disregard" intended nor mooted, but let me look at your suggestion tonight and see if I can fit that in with my daily trading. BTW, the new EA is starting to perform nicely. I took Retina's advice and increased the stop with seemingly excellent results. Will place results later this evening. Continued success to you. Hercs.
+
+--- 帖子 #359 ---
+Hello everyone, just dropping by to say, that I am very proud to see that my consecutive candles indicator (coded by IceRice) is well integrated in a profitable system. Please remember: Every time you get an "arrow with dot" you have a "change in market direction" and the opposite is stronger, may it for one candle only. If you get a "dot only" you have a consecutive force in that direction and the dominant party keeps control of the market direction. A profitable way to scale in. Keep up the good work. I will be back when reteid finished the best possible ea about that system , if she ever stops hanging around the Isar river in munich showing off with her bikinis. Wolf
+
+--- 帖子 #360 ---
+Here are my trades since 08h00 my time (+2 GMT ) for your perusal and comments. I AM IMPRESSED, THX. Special mention to Retina for tweaking as well as advice and to the "Boss man" with the fishing rod, for sharing. Continued success to you all. Hercs. PS. I am not too sure about the time between 13h00 est ( my 19h00 ) and my start @ 09h00 which is London open. Scrutinizing that tonight and the rest of the week.
+
+--- 帖子 #361 ---
+Hi Retina. Please consider adding a time filter so we can eliminate taking trades when market opens with stupidly high spreads . Thanks. D.
+
+--- 帖子 #362 ---
+What is the time frame of the EA chart ? cause I am testing the EA as well but on M15 and M30, and since this morning I have many more positions taken. and also please let us know how many open trade you have and also what is the equity? by the way your results are impressive thank you
+
+--- 帖子 #363 ---
+Here is an interesting setup, according to the rules the marked candle is a trade because williams went back above -20 and when the highlighted candle (with arrow and dotted line) printed we were still below 55ema. williams does not have to go back above 55ema just has to be below it. Chris Attached Image (click to enlarge)
+
+--- 帖子 #364 ---
+Good morning Chris, So, what happened next? Huge move against you, just because you were late by one candle, Squire. Totally unnecessary IMHO. Could we talk about it, plse? Hercs.
+
+--- 帖子 #365 ---
+Good day all, My night shift was DISASTROUS to say the very least. I agree with Nihilist about switching off, but for different reasons perhaps. I went from being up by E1,500 to being down by E7,000 over night. Today I will close all trades running by 20h00 my time which is 14h00 EST or 18h00 London time and report back to you all. Don't get despondent yet, there is light at the end of the tunnel , albeit a freight train. Hercs.
+
+--- 帖子 #366 ---
+Hi Tiivaa, Thank you for this message. I use M15 only. There were 2 trades running still when I showed you my results of closed trades. They were both the same currency and negative based on my previous postings yesterday morning. Trade was against the trend and WRONG. The equity was E51,000+ at the time of posting. Cricket fan? Hercs.
+
+--- 帖子 #367 ---
+Hello! It's my first hour here in forex factory. And I happened to have read this thread fortunately. However, I'm quite puzzled if this could be applicable to foreign exchange trading since all (almost I think since I haven't really gone through all rofl) the responses I see here are about silvers and gold. I hope you could help me on this. I really think that this could really be a good system for trading.
+
+--- 帖子 #368 ---
+Any currency. Hercs.
+
+--- 帖子 #369 ---
+I hope that Retina checks in some time today, for my US30-M15 does not take any trades and I would like to know why not, plse Retina. All I have noticed is that the previous Arrow showing that all conditions were met, does not show as you have mentioned in a post earlier that you have removed that feature. Here is a screen-shot of the current long that was missed and Chris when you come on board, could you look at it as well plse. Results this morning are a continuation of last night's performance and not worth showing here. Thanks for responding. Please ignore the 55-ema + Tr.Env. in Aqua. I forgot to remove it. Hercs.
+
+--- 帖子 #370 ---
+Hey Hercs Looks like a solid buy to me. Would have been in good profit too.
+
+--- 帖子 #371 ---
+The EA took both trades...no worries here, closed now in profit. Attached Image (click to enlarge) Here are all 4 closed trades. Attached Image (click to enlarge)
+
+--- 帖子 #372 ---
+Hi Chris, That is why I am so disappointed. Hercs.
+
+--- 帖子 #373 ---
+Hi Chris, I have been forward testing manually &amp; EA for couple of weeks. Mostly to make sure I understand the buy/sell signals of the system. Having some very nice results in several different markets from Forex, commodities, indexes &amp; energies. But I am not sure why the EA closed the sell position on Gold 15 min. I think it should have closed &amp; open the buy at the same time. Thanks for your feedback.
+
+--- 帖子 #374 ---
+Hi, Here is an error that is very confusing. I am not sure if it is the EA or broker or mt4. Feedback?
+
+--- 帖子 #375 ---
+Hi Retina, Thank you for all your hard work! It is much appreciated! I really like &amp; find helpful the total trades, winners &amp; losers of the stats. I would like to see draw down, is that something you would be willing to add? Plus, I see a trade management section with sl, tp &amp; be. I would like to see breakeven functionality that is calculated from ATR &amp; I can adjust the value. But I don't see an active section in the EA for these. Is this something you are building? thanks, cdk
+
+--- 帖子 #376 ---
+That means it is OK now?
+
+--- 帖子 #377 ---
+Could anyone post myfxbook link to monitor EA progress?
+
+--- 帖子 #378 ---
+The first off thank @ reteid2222 and @cfudge for share! This is my report, EA run from 25/6, current Floating P/L is -106$, closed P/L: 37.88
+
+--- 帖子 #379 ---
+Magic Number isn’t working Did anyone notice this? All trades placed on H1 getting closed out by those placed on M30 even though they have separate magic numbers. Latest one is EU trade on H1 closed out on M30. EA version 2.00
+
+--- 帖子 #380 ---
+Good day all, This is for Retina please: Attached screen-print of the Order restrictions - in my case the EA ignored my instructions totally. Would you plse be kind enough to check this out. Thanking you most sincerely, Hercs.
+
+--- 帖子 #381 ---
+This is for Chris ( and others interested ) Good morning Chris, I am going to post 2 screenshots and possibly a third as well regarding Vol&amp;Volatility interpretation for your kind perusal and comments: 1. The Vol&amp;Volatility started on the left and trade could have been taken one candle later - where the vertical line is placed as the WPR crossed the 55-ema by smallest of margins. It stays Green all the way and only switches to Yellow on the longest candle which could be seen as an exhaustion candle. It changes to Yellow and stays Yellow in spite of volume clearly diminishing until the Gray bars started forming. Here is the interesting part, when the next bar prints, it is Yellow. How do you interpret this Yellow Bar? Is it for a LONG as it is still above the 55-ema on the Oscillator or is it perhaps showing volatility in general for further short as you can clearly see between those 2 vertical lines. 2. More interestingly, the second screenshot: Here we also have Yellow Bars from Gray and the interpretation cannot be anything other than that the short is on. Thank you for your time once again and also for "ignoring" my filter on the chart. Successful day to you, Hercs.
+
+--- 帖子 #382 ---
+hi im also getting same error, have you found a solution? any one can share a good set file for this ea thank you
+
+--- 帖子 #383 ---
+I have a lot of trades today that ea should have closed out at Williams opposite either +or - but it has failed to close them. Maybe Retina can take a look when she has time. Thank you. D.
+
+--- 帖子 #384 ---
+Good morning all, Could this be the reason for the EA's "non-performance"? Only Retina can tell us and my suggestion is that we stop testing until such time we hear from her, taking into consideration that it may be 6 - 8 weeks hence. Blessings, Hercs.
+
+--- 帖子 #385 ---
+This is my EA results from June 6 to today. Happy weekend to you guys. Chris Attached Image (click to enlarge)
+
+--- 帖子 #386 ---
+Chris, would you mind sharing your settings of the EA with us all? Thanks in advance. Enjoy the weekend. Hercs.
+
+--- 帖子 #387 ---
+Hi All, Here are a couple of my results from this past week. Which really means very little! A valid test cycle needs at least 1 to 6 months to validate the performance.
+
+--- 帖子 #388 ---
+Hi, Here are few more results after only 1 week. The information that I am after is, what does not work with this setup/EA. Then that will leave us with the best working pairs.
+
+--- 帖子 #389 ---
+Cfudge thats awesome results. Please, can you share your settings? Many thanks
+
+--- 帖子 #390 ---
+Great results. Mine below 2Weeks test result M30 Attached Image (click to enlarge) H1 Attached Image (click to enlarge) I started another testing account to try out different settings: (%R: 140, MA: 240). With visual evaluation, I could avoid a few bad trades. Unfortunately, it looks like the EA is hard coded to trade with (%R: 100, MA: 55). See the trades below. The first 2 sells should have closed when %R touched -80. The last sell is invalid. Attached Image (click to enlarge)
+
+--- 帖子 #391 ---
+This I have never tested....but would be helpfull if you tell me if on both charts they have different magic numbers if opened!
+
+--- 帖子 #392 ---
+Nice to see that people here use the high time consuming coded features of this EA...
+
+--- 帖子 #393 ---
+What is here the problem?
+
+--- 帖子 #394 ---
+Hi....tell me TF, pair and when the trades are triggered....and for each one a screenshot....
+
+--- 帖子 #395 ---
+Yes. They have different magic numbers.
+
+--- 帖子 #396 ---
+Hello EA V1 after 2 weeks 325 closed trades. -0.5 pips/trade open trades = -190 USD
+
+--- 帖子 #397 ---
+EA V2 after one week M15 Max trade = 5 Trades
+
+--- 帖子 #398 ---
+EA V2 after one week M30 Max trades = 5 Trades
+
+--- 帖子 #399 ---
+EA V2 after one week M15 Max trades = 1 Trades
+
+--- 帖子 #400 ---
+Just test this...I implemeted my testing system in the EA...just set the signals so you get every candle one..so easily test on strategytester if it works for you...with my versions everything works....the trades get limited! So this is only a test version for "max trades"!
+
+--- 帖子 #401 ---
+.
+
+--- 帖子 #402 ---
+.
+
+--- 帖子 #403 ---
+Every value in the settings should been taken....I tested %R:140; EMA 240: And the entries were exact where they belong:
+
+--- 帖子 #404 ---
+I m tomorrow till 9 july in vacation...so don t expect any answer from me....
+
+--- 帖子 #405 ---
+Just tested several settings... 100-&gt;120: Works with high volatile pairs like usdjpy 100-&gt;80: Works with low volatile pairs like euraud just test and optimize it s easy cause the strategy works with closed candles...so NO 99% data needed!
+
+--- 帖子 #406 ---
+These settings are only good for some pairs! So test!
+
+--- 帖子 #407 ---
+Hello Retina Is it possible to make a reverse version of EA V2 just for testing an idea ? This is where the idea came to my mind. I checked all the M30 trades during last week and watched the price movement for each of them . in %67 of them price went in negative for at least 10 pips first. this includes open trades too. so if we had taken a reverse position with 10 pips TP and SL, we had 66x10-32x10=340 pips(should be almost $30 with 0.01lot) banked without even an open trade which means no more DD. Just for your info so far we had 80 closed trades with 420 pips banked BUT also we have 17 open trades which are in more than 66$ (697 pips) in loss so far. as you see 420 profit against 697 DD so far. in attached excel file you can find the calculations thank you in advance
+
+--- 帖子 #408 ---
+Is this a break even at 100 Points? Just show 1-2 charts!
+
+--- 帖子 #409 ---
+I am on my phone but we dont need BE. The only thing we need is the same EA Version 2 just with switched position taking. I mean open BUY instead of sell and SELL instead of buy. Thats it. We can call it EA reversed version. About SL and TP they are already in EA V2 so we can use them.
+
+--- 帖子 #410 ---
+It makes not sense reversing the signals cause we are about 70% or more probability...
+
+--- 帖子 #411 ---
+Good morning Retina, Thank you for replying. Looking at the different arrows and how long they stay in that position with price running away from it. How can one be profitable with that huge draw-down? Best wishes.
+
+--- 帖子 #412 ---
+Much appreciated, thx Retina. Will report back by end of trading day today. Best. Hercs.
+
+--- 帖子 #413 ---
+Retina, I know that you are on vacation and I wish you a pleasant stay wherever you are going to, but I am hoping that you will get some time to have a look at this Thread once in a while, hence my post. Firstly, in this case, US30-M15 and longer, the trend was still long in spite of the WPR dipping below the 55-ema and this is where I would like to see the indicator "cfudge-Williams, EA &amp; Vol v2.02 - Simple Arrow + Alert v 8.0" show the change immediately so that the EA can take a long in case it took a short at the first short arrow in Magenta. That would have firstly, been a hedge and secondly, allowed us profit in the long. Also, there is no facility in this indicator to change the value of the Volume &amp; Volatility at present so that we can experiment with different settings. Does the EA read the change in settings that I have made to this indicator? For now, I will change the settings of the Volume &amp; Volatility back to your hard-coded value and just test the EA as such. Best wishes, Hercs.
+
+--- 帖子 #414 ---
+During last week I simultaneously was running 1.0 and 2.0. In the end I got a bad loss (both) From today I just use 2.0, fortunately started brilliantly, already closed 30 pips in profit and floating 90-100 pips in plus. I changed nothing. All running on 15 mins charts.
+
+--- 帖子 #415 ---
+Retina, Herewith a second screen shot of the EA on US30_M15 set to BUYING only. At this point probably unwise to want to test it any further. Hercs.
+
+--- 帖子 #416 ---
+Again in huge loss. The problem with the system, it does not close early the losing trades, 1-2 can ruin days/weekly results. Any suggestion on the stop other then using last fractal?
+
+--- 帖子 #417 ---
+Hi guys im still unable to get any trades from the system. have loaded the templates and ea with smiley face on 15m time frame but no trades its been 4 days now. no error in expert tab or journal tab. what am i doing wrong here, any help is greatly appreciated thanks
+
+--- 帖子 #418 ---
+@Xepo-fx, couple of things to review on your part. 1- make sure you have the pairs spelled correctly in the EA. Each broker could use a different spelling or add a suffix. Such as .ecn. 2- make sure you have all indicators loaded in your mt4/indicator's folder. Such as consecutive candles 1_02 &amp; VolumeAndVolatility update. It should work after that review.
+
+--- 帖子 #419 ---
+I agree, huge losses by this system. I will try using fixed pips: 30 as TP, 20 as SL.
+
+--- 帖子 #420 ---
+Hi Retina, This is a confusing error. It opened a long position and held the position down, then on the move back up it closed the position. When it closed the position, it should have opened a new position.
+
+--- 帖子 #421 ---
+For those interested in Crypto currency. Not a lot of trades but great results.
+
+--- 帖子 #422 ---
+Missed the attachment
+
+--- 帖子 #423 ---
+I don't understand how some of the people on this thread think this is a bad strategy. It's called testing for a reason. Does it have issues to be resolved, of course. That is why we test. But look at the results and if thoroughly tested and fixes are made. Then it can only get better. I am trying to capture enough data to determine which pairs work best with which set up. Then find the pairs that don't work very well and see if I can adjust the settings to get a measurable increase and if not then it is off the list.
+
+--- 帖子 #424 ---
+Hello everyone, I have come across this thread and I find it quite interesting. I started running instances of the EA at different time frames. However, I have noticed that It opens orders at times, when there is no signal. See example below (5 minutes chart). Any assistance will be much appreciated.
+
+--- 帖子 #425 ---
+I believe EA closes orders on different time frames, despite the fact that there are different magic numbers. Attached Image (click to enlarge) I will keep only one tf running, to see if that corrects EA behaviour
+
+--- 帖子 #426 ---
+Have you also noticed that Retina has unsubscribed from this thread? Heartbreaking news.
+
+--- 帖子 #427 ---
+some friendly advice. trading bars like which almost all other retail ''strategies'' are based on is akin to looking for the holy grail and will always end in despair. simply because so much is happening within the time frames it takes the bars to form.
+
+--- 帖子 #428 ---
+Bicarus, Appreciate the feedback. So far the OP-Chris has done a wonderful job of amalgamating various trading behavior aspects into this strategy. I feel It would be more productive if you can give specific pointers/examples specific to the strategy at hand- Looking forward to your insights. PS: I know you are coming from a good place in advising. Thanks
+
+--- 帖子 #429 ---
+Thanks for pointing out. True, she unsubscribed.
+
+--- 帖子 #430 ---
+I wish we had the source code for the EA so we could do some changes. I asked retina for changes but she doesn't like to do it. I think this EA is a winner with just some minor changes.
+
+--- 帖子 #431 ---
+Hi Guys Back when Retina originally asked if we would like her to create am EA, I messaged her a couple of times to ask her if she was working on it and got no response. I then went to the person I was going to have make the EA before Retina volunteered and he did. I have been testing it the last few weeks and we are still fiddling with it to eliminate the bugs. I was hoping to post it today after work but there is still one big bug. It is a bit more comprehensive than the current EA by Retina. Hopefully Retina will continue her great work here and we will have a choice. Here is the set file I am using currently on the EA As you can see it has a lot of the things we asked for for personal options.(not Retinas'). Chris Attached Image (click to enlarge)
+
+--- 帖子 #432 ---
+Here are the results of EA testing since June 05 2019 till today. Chris Attached Image (click to enlarge)
+
+--- 帖子 #433 ---
+Chris, You have my gratitude from the bottom of heart... Thank so much brother...
+
+--- 帖子 #434 ---
+Hi Tiivaa, Absolutely, I agree. Also, Nothing to worry-Chris has it covered. Also, Retina is a primarily a coder more than a trader- Hence the Lot of back and forth in clarifying the strategy.[Not to take away from her effort] Thanks
+
+--- 帖子 #435 ---
+if you are asking what to add or subtract, the answer is none. in today's world of ecn. your gain is simply another trader's loss. if trader A finds his edge. continuously adding gains base on his market structure. there is a trader B which was once profitable base on his market structure and is now no longer because of trader A. trader B will then go to his drawing board and backtest a new market structure to counteract trader A. Soon trader A, will become the trader B and the cycle continues. multiply that by the sheer number of traders and u will have a whole lot of problems. the only constant in this is price structure.
+
+--- 帖子 #436 ---
+Which version of EA does it relate to? 2.0 or a newer one? Which tf and settings?
+
+--- 帖子 #437 ---
+Chris is coming up with his version of the EA-i.e. a new EA-Different from Retina's.
+
+--- 帖子 #438 ---
+Never fever, Chris is here (or still with us!)
+
+--- 帖子 #439 ---
+I guess this means that I can stop testing Retina's version. I did have some pretty good results. I will share my latest info. a little later.
+
+--- 帖子 #440 ---
+Ok, now I understand it. Thank you for Retina's work on the EA, but also thank you for Chris and the new programmer. We are excited to try the new one Happy weekend to all.
+
+--- 帖子 #441 ---
+if that was the case then popular trading edges like support, resistance and pivots wouldn't work anymore so how do you validate this when forex is a decentralised market and price still resist's, support's and pivots in some areas?
+
+--- 帖子 #442 ---
+Hey Chris, are you able to have a look at this EA and figure out what is wrong, please, its based on fibo, but entry and exit is not calibrated not sure if could ad some filters, again this is not a complete EA, if anybody could help coding it please go ahead.
+
+--- 帖子 #443 ---
+This is not the relevant thread-Please go to "Platform Tech" sub forum and post your request.
+
+--- 帖子 #444 ---
+Hi All, I am still testing the EA.
+
+--- 帖子 #445 ---
+as you just said, sr and pivots work in some areas. that doesnt mean that drawing lines on your trading screen and having it broken means that prices are in a breakout mode nor respecting and rejecting the level. fx is only decentralized in terms of execution. but that does not affect the fact that greater market makers and movers are in play (denoted by X). it is simply that you cannot see it the same way u do on a exchange. lp/pop -&gt;X1 , primary need to unload booked orders of all below , prop trading depends on country , non speculative exchanges |-----&gt; original equinex connections are here. this is where u can see true dept of market, market making of rejects below pb -&gt;X2 , custodian works exchanges , cross exchanges to funding currencies , need to unload booked orders of all below |-----&gt; original equinex/b2b connections like primexm/onezero are here. this is where u can see true dept of market, market making of rejects below rb -&gt; X3 used to entail market making, however broker competition too intense, market making no longer a viable biz model. |-----&gt; receiving equinex/etc limitted connection.netting internally or 1 level up till market made rt
+
+--- 帖子 #446 ---
+from the point of a LP one of the many tools at my disposal. scenario; client A, wants Deliverable Euro. 1 month expiry. at 1.2 and i have booked a ton of speculative Euro longs on my book which needs disposal. i can technically burn both ends of the candle and it is legal. or if my DF euro is of greater qty than my booked. i can burn the speculators. vice versa. as the saying goes. buy/sell futs. jizz spot. hedge with options. that is why i say looking at bars and formulating ''strategies'' base of it is pointless. many working parts behind the bars
+
+--- 帖子 #447 ---
+Hi @cfudge, congrats on your strategy, I see a great potential on it. I’ve been testing your entry rules and could find some possible improvements (would be good to have these options on the EA, so we could backtest it and see if it really works): 1- Option to trade without volume and volatility filter, so we can take more trades; 2- Use a simple MA with half the period of the Williams %R (MAs with half period are well known for cycle measures), then when MA slope turns up/down, place a limit order at last trough/peak. Please don’t get me wrong, I’m not trying to change the strategy, just trying to improve it since I’ve found it to be very effective.
+
+--- 帖子 #448 ---
+OK...we think that the EA is ready to test. Very exciting Please note that there will not be anymore additions or changes. This is the final version, if you really need something else added you will need to write your own EA Note that I am only trading XAUUSD 15min to daily charts, XAGUSD 15min and copper 15min. You can trade these as well or trade something different, but remember I had the best results, backtesting, on the gold silver and copper charts. I also think it is best to trade several TFs of the same pairs. (you will need a different Magic number on each TF chart of the same pair) You will need to rename the volatility and consecutive candles indicators like the ones on this post or download the ones from this post. I want to thank everyone who is contributing on the thread and hope this EA can earn some good profits for us. Good Luck to you all, Chris. Attached File(s) consecutive_candles_1_02.ex4 13 KB | 508 downloads Attached File(s) VolumeAndVolatility_update.mq4 5 KB | 519 downloads Attached File(s) WilliamRea.ex4 35 KB | 569 downloads
+
+--- 帖子 #449 ---
+Great Contribution Chris... Your generosity is much appreciated...
+
+--- 帖子 #450 ---
+Hi Chris, Thank you for the hard work and update of system. It might be only my trouble but I do not get the TP settings. "Close a single trade" Available options: 1. None as default. At this case where is tp? 2. "X" negative pips. Doesn't it the SL? 3. bucks amount is clear 4. % of account is clear Not anymore crossing Williams. No ATR to reflect volatility? Why?
+
+--- 帖子 #451 ---
+You can set a global SL for all trades with the SL type option. If you use the single trade, it will take every new trade on a chart and close them according to parameter chosen. If none then TP is Williams%R cross. No, no ATR sorry. Chris
+
+--- 帖子 #452 ---
+Hi Chris, I have replaced the previous EA with the new one which you generously shared. However, it hasn't taken any trade yet. I run it on gold, 15min, default settings and there have been no errors. Additionally, am I right that the EA is not multi pair, and needs to be loaded on each individual chart? Finally, I noticed that there are the default time frames set with certain lots. Is it possible to run the EA on custom time frame eg 10min, 20 min? Thanks a lot.
+
+--- 帖子 #453 ---
+Yes, it needs to be loaded on each chart. You also need the replacement indicators from the post above. I am not sure about TFs I believe there were no trades today on gold 15min. Chris
+
+--- 帖子 #454 ---
+Hey antonios, did you get these trades Attached Image (click to enlarge)
+
+--- 帖子 #455 ---
+No trade so far, I will double check the indicators.
+
+--- 帖子 #456 ---
+Good morning Chris, Thank you for the updates. Mine will be running on US30-M15. Continued success to all. Hercs. Chris, plse see attached screen-print re William% Uplevel @ -80 as well as the one above which is also Uplevel. Should this not have been Downlevel or is it just a typo in as much that you have that covered correctly in the EA coding? Mine did not trade a perfect set up and I can only think that this could be the reason. Kindly reply at your earliest convenience. H.
+
+--- 帖子 #457 ---
+Good Catch Hercs...
+
+--- 帖子 #458 ---
+It Could be just naming error. The EA took the 1st trade-Sell-Conditions met.[The Red Line] Chris can confirm... Attached Image (click to enlarge) Thanks
+
+--- 帖子 #459 ---
+Would you like to hear the GOOD news? Retina has just joined the group again! WELCOME back Retina; trust you had a great break this far. We missed you. Hercs.
+
+--- 帖子 #460 ---
+Hey antonios, any luck. Did you catch these. Attached Image (click to enlarge) This is funny LOL Attached Image (click to enlarge)
+
+--- 帖子 #461 ---
+Hi Chris, This is what I have so far. Started testing around Asian open. But not sure why it missed the 1 hr &amp; 30 min entries. I using the default settings. Any thoughts?
+
+--- 帖子 #462 ---
+Cdk1212, Having the indicators and template will help in troubleshoot. It is hard/impossible just by looking at naked charts. I am using indi's, template and then loaded the EA- we can then watch entries and test for any anomalies. Thanks
+
+--- 帖子 #463 ---
+No, but haven't managed to reload the indicators. Other EA run fine. Due to limited access to the vpn and Interne, most probably I will see it next week. Thanks
+
+--- 帖子 #464 ---
+Dears, cfuge version has been fine Today, even yesterday in profit. Definitely continue testing.
+
+--- 帖子 #465 ---
+Remember...you are going to get DD, just watch your position sizes and trade multiple TFs of same pair and you can ride it out. Yesterday open trades were -$500+ today open positions are $40
+
+--- 帖子 #466 ---
+This is what I had today. It missed a trade on the 4hr today (weird), I am still on an older version till tomorrow though, so we will see next week. Attached Image (click to enlarge)
+
+--- 帖子 #467 ---
+Hi Chris, I was not at the computer, but I only use 15 min TF and only instance per instrument, see screenshot. Somehow the EA opened 2 Gold positions, not the same time. I do not know why. Closed both in good profit. Yes, I'm in DD but I do not get the point why you though that. Some postions are let run in huge loss. Probably better to use ATR to make manual risk: reward settings (2Xatr as SL, 4x ATR as TP). But this is a manual task and the EA is running somewhere else. It is a pity that ATR not implemented in the EA because that would've ensure good risk :reward and also reflect to the volatility (this is why fixed pips are not working on even on same instrument, ie. ranging or trending or directionless market).
+
+--- 帖子 #468 ---
+Chris, Uploaded the renamed indicators and run on gold on all time frames. So far it made 3 transactions on M1 (all profitable). Will keep you posted
+
+--- 帖子 #469 ---
+foff00, Can you please share the settings you are using-A snapshot so we can all be the same page. Also, i take it that you are using S/L and also some T/P instead of using the Williams cross? Thanks
+
+--- 帖子 #470 ---
+Chris, EA took a trade on M5 which doesn't seem to follow the rules... I am using the default settings for the EA
+
+--- 帖子 #471 ---
+Antonios1, Can you post the full view of the chart,please? Thanks
+
+--- 帖子 #472 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #473 ---
+Antonios, I feel there is no error- The price went above -20 +Candle printed+Dot printed+Came below -20 +came below the 55 EMA. If the EA took the order on the Bar with the box, then no error as order was taken before it went into -80. Attached Image (click to enlarge) Thanks
+
+--- 帖子 #474 ---
+I need to read the rules again
+
+--- 帖子 #475 ---
+Antonios It's ok. Please tell me, why you felt the order was wrong. If you can describe your thinking, we can correct it. Thanks
+
+--- 帖子 #476 ---
+Nice, aaven
+
+--- 帖子 #477 ---
+If you wish to use ATR, then when a trade is opened, or anytime, use the current ATR as your global SL for that pair and wait for the cross for TP. Remember that trading on several TFs with the described position sizes will help to not lose account.
+
+--- 帖子 #478 ---
+Hi Guys, I have a question on why the EA closed the open position? The opening of the position is valid, but not short why it would close at that point.
+
+--- 帖子 #479 ---
+Hi All, Here is another example of the above issue.
+
+--- 帖子 #480 ---
+That trade looks fine to me. I think you need to read the rules at the beginning of the thread again.
+
+--- 帖子 #481 ---
+Here is the update of the EA results from June 05 to July 12 2019 Have a good weekend everyone and post some results... Chris Attached Image (click to enlarge)
+
+--- 帖子 #482 ---
+Heres mine cdk1212 Attached Image (click to enlarge)
+
+--- 帖子 #483 ---
+Hi Chris, Looks like the EA is executing properly. Good news! Can you share your settings or is that using the default? I am testing 29 Forex pairs on 15 min &amp; 30 min. charts. It looks like 15 is better, so far. But only 1 week.
+
+--- 帖子 #484 ---
+Here is my results on Gold from 4 hr to 15min, Silver 15min &amp; Copper 15 min.
+
+--- 帖子 #485 ---
+Here is my Crypto results for the week. 15min chart. I will get these connect to myfxbook for verification &amp; graphing
+
+--- 帖子 #486 ---
+@cdk1212 WOW, thats alot of testing My settings are the same as I posted few pages back, all I changed was the position sizes and magic numbers
+
+--- 帖子 #487 ---
+Hi Chris, I trying to understand your logic on 'Close a Single Trade'. You stated; "If you use the single trade, it will take every new trade on a chart and close them according to parameter chosen. If none then TP is Williams%R cross." Is that 'Take Profit'? options are: None "X" negative pips $amount % of account What is confusing is #2, "X" negative pips. That sounds like a stop loss Then on your SL type, you use most of the same language. I appreciate the clarification. tks, cdk
+
+--- 帖子 #488 ---
+I only had this as part of the EA because it was suggested. I would not use it, myself. I understand it as ; 1/ None--do nothing, trade will close at Williams cross. (unless other EA options are in play). 2/ X negative pips--close a single trade (on that pair only) if it goes into negative by X pips. 3/ $amount--close a single trade if it reaches a $ amount in loss. 4/ %of account--close a single trade if it reaches a %of account in loss. This is what I assumed they were for, but maybe they could be set for profit amounts too, I am seeking clarification from the creator of the EA. EDIT: The above is true, only for loss. Chris
+
+--- 帖子 #489 ---
+Hi cdk , Nice result. What's your broker's name? Thanks.
+
+--- 帖子 #490 ---
+Hi Salimc, For Fx, I use EasyMarkets &amp; FXTM , for crypto, I use JAFX.
+
+--- 帖子 #491 ---
+The crypto result is superb !!!
+
+--- 帖子 #492 ---
+Regarding cfuge version, on gold is a beast, on others is a fist... Propably Platinum and Silver have too much spread to cope with 15 mins positions...
+
+--- 帖子 #493 ---
+Hi cdk1212 Please keep us updated of your crypto tests, looks very promising. Chris
+
+--- 帖子 #494 ---
+By cfudge version do you mean the one Retina posted or mine? I am trading silver 15 min and spread is not a problem.
+
+--- 帖子 #495 ---
+Just wanted to give everyone a heads up on what I am working on this weekend. Looks promising on gold 15min chart. There are two exit strategies used (yellow numbers and magenta numbers). The big numbers at the right are the number of pips gained during the tests. The tests were from June 19 to July 12 2019. That's a lot of magenta pips for that short amount of time. With minimal DD. There are main entries and then re-entries. The unusual thing is that when I tested the gold daily chart from 2016 to now the numbers were somewhat larger for the yellow numbers. So I am going to test a few more TFs to get an idea how to proceed. DON'T worry about my commitment to this thread and EA, they are most important to me, but the EA can take care of itself with minimal checking. Anyway here is a snippet of the gold 15min chart I am talking about. Chris Attached Image (click to enlarge)
+
+--- 帖子 #496 ---
+You Rock Brother...
+
+--- 帖子 #497 ---
+I meant what you had posted. I was just guessing spread problem: too high to reach williams% in profit, but I may be wrong. Why is it working on gold and is not on others? Is EA fine tuned for gold? What will happen if volatility or market conditions change (choppy, directionless market or strong trend)? Start testing on cryptos too.
+
+--- 帖子 #498 ---
+Hercs, How is the test going with Dow Jones? Are you also testing the EA on other indices-Please do share any experience of previous test results with Indices. Currently i am testing the EA on VPS- I want to give it a day or two to check if it can handle the load-If it permits-i can create an demo account for testing on Indices like Dow-Dax etc... Thanks
+
+--- 帖子 #499 ---
+There is a bug in the EA...if two trades register at the same time or maybe same TF, on different pairs, only one trade opens. This is being looked at now.
+
+--- 帖子 #500 ---
+My EA Testing Results on Gold:[Demo Account] 2 Trades opened on Gold-15 Minute Time Frame- They are still open. Attached Image (click to enlarge)
+
+--- 帖子 #501 ---
+Thanks for staying on top of things Chris...
+
+--- 帖子 #502 ---
+Here is that discord invite link cdk1212 and of course for everyone too. But please note this group only works on daily charts and you should watch all the videos first before posting. https://discord.gg/xXtvgNd
+
+--- 帖子 #503 ---
+Chris, This link says it is invalid. Thanks
+
+--- 帖子 #504 ---
+Maybe you need the discord desktop app? It works for me. I am new at this discord thing Try this one https://discord.gg/xXtvgNd
+
+--- 帖子 #505 ---
+Hey thanks Chris, I am already a member there. I find it annoying the amount of people and the continuous amount of information to review &amp; absorb on a daily basis. I have developed a nice viewable strategy, but looking to improve before automating.
+
+--- 帖子 #506 ---
+Test results so far-Gold No Open Trades as of now Attached Image (click to enlarge)
+
+--- 帖子 #507 ---
+My day was bad but Gold Platinum again a big loser, who knows why?
+
+--- 帖子 #508 ---
+foff00 Are you using Stop Loss for Platinum? Thanks
+
+--- 帖子 #509 ---
+Interesting result but I need to understand how to configure money management.
+
+--- 帖子 #510 ---
+Is there someone who kindly can explain to me each option? Thank you in advance
+
+--- 帖子 #511 ---
+what difference would it make stop loss hit is still a loss
+
+--- 帖子 #512 ---
+Post 488
+
+--- 帖子 #513 ---
+I know why...I have said over and over again...you should be using multiple TFs for each pair with larger position sizes per smaller TFs and no SLs. That is a hard pill to swallow, I know. It is the best I have come up with so far.
+
+--- 帖子 #514 ---
+Yes, Last Arrow.
+
+--- 帖子 #515 ---
+Basically the system effectiveness will show up if we follow the rules laid out by the creator. In this case, using Stop Loss will give undesirable results. If you insist on using Stop Loss-I would suggest you to experiment-test some scenarios like exiting at fixed t/p instead of Williams crossings-Entering Partial Entries etc... Also remember it stops being "Chris's System" as one starts to change anything. Thanks
+
+--- 帖子 #516 ---
+Ok, it is really a hard pill to take if there is no stop on a position. Is that really SL Type "None" will "do"? Does not close the position? Honestly, I force myself and try it howerver I have proved having no stop loss do not work . My forex trader treacher said: only in case you disperse into very small positions. On contrary, I tried and failed: in a month I doubled my small real account than lost all painfully: unclosed losses accumulated slowly. We will se on Demo here.
+
+--- 帖子 #517 ---
+Want to say this for everyone else as well. In the end it's about knowing yourself and finding what works best for you. I mean everyone should one what they are comfortable with: 1. Position Size 2. Time Frame 3. The Number of Entries 4. Stop Loss/Equity Protection 5. Draw down 6. Duration of the Trade There are going to be trade-offs- Know thoroughly the system you are dealing with. Test the system and see if it matches with your accepted standard of aggressiveness. The system presented is Chris's Solution Statement-Chris not only gave his trading logic, but also spent money from his pocket to code it and gave it to the community. My request is-Please understand the system's behavioral characteristics and because if it doesn't align with one's requirements doesn't necessarily make the system a bad one. Example: if i am comfortable with staying in a trade for a maximum of only one day and if the system has trades that are open till few days- it's not fair to call the system as not working. Please do experiment-share any insights if it can improve the system's characteristics- Not something like, "let's change the ema to 100 instead of 55-not suggestions for the sake of suggestions" Best is to have suggestions that are documented and working: How your suggestion is actually improving the system over the existing criteria etc... Just wanted to put my thoughts out there... Thanks
+
+--- 帖子 #518 ---
+Thank you aaven for your reply, I did not say the system won't work. I said no stop loss is dangerous, but we will see how it performs. Another thing, how can we set the max number of positions? in cfuge version there is not this option available, and Today, for example the EA has opened 3 dji short so I'm already overexposed myself. (0.3 lot dji open on 2000 usd account is too much considering 6x0.1 lots overall, with no SL).
+
+--- 帖子 #519 ---
+This is why I suggested, from the outset, not using a SL or setting a protective SL. If an order is opened and price goes against us with the Williams going back beyond the -20/-80 line, we get an opportunity to get a better price. This is good, but on the below chart we could get a push over -20 and one or all the trades could close in profit. So, the logic I decided on, while manually backtesting this, was to let the system open these kinds of multiple trades and by using the multi TFs and position sizes, previously discussed, we can limit the losing aspect of the system, however, all swords have two edges, the other side of this sword is DD. Ultimately, as aaven put it so nicely, we all need to decide what we are each comfortable with. Chris Attached Image (click to enlarge)
+
+--- 帖子 #520 ---
+foff00 I wasn't explicitly mentioning you- Those were my general thoughts. I understand your predicament- is it the most minimum size on DJI? Can you go further lower-like 0.05 or 0.03? Thanks
+
+--- 帖子 #521 ---
+Hello, I knew your words were general, but I had little "throughlistening". Unfortunately the dji lot sizes only multplications of 0.1 lot. To tell the truth, I do not know if removing SL helped or not, but my day has been excellent so far.
+
+--- 帖子 #522 ---
+I apologize f0ff00... is it a live or demo account? Thanks
+
+--- 帖子 #523 ---
+Do not need to apologize, I respect the honesty. It is a demo account, but if it continues well after one and a half week...(however I'm testing other systems) I plan to go on live. Small account.
+
+--- 帖子 #524 ---
+Thanks foff00...
+
+--- 帖子 #525 ---
+Hi foff00 Please do not go live until I post the new EA with the mentioned bug fix. I am testing it right now, unfortunately it has to be a forward test so not sure when I will know.
+
+--- 帖子 #526 ---
+I am with Axitrader and I am able to place a trade on Dj30 of 0.01
+
+--- 帖子 #527 ---
+Ok, thank you for the warning, you are right. On dji it might differ from broker to broker. Same is for Gold. Ok, thank Okquote=cfudge;12388000]{quote} Hi foff00 Please do not go live until I post the new EA with the mentioned bug fix. I am testing it right now, unfortunately it has to be a forward test so not sure when I will know.[/quote]
+
+--- 帖子 #528 ---
+Today the EA already has closed 21 pips and floating 18 pips in profit. I'm now starting a manual testing on 4H charts without EA, just Williams+55ma and volatility indi, we will see. Any recommendation how to manage? How frequently needed to check? 3 times a day? Use fixed risk: reward ratio?
+
+--- 帖子 #529 ---
+The EA has taken two trades at the same time and on same TFs so all looks good. Will post the update today. Chris
+
+--- 帖子 #530 ---
+Hi, Having some really good results on Crypto. You must be very careful with the lot sizing and only run with the top 3 Crypto's, i. e. Bitcoin, Ripple &amp; Ethereum. I blew up my 1st demo account because I was trying to test all coins and had wrong lot size. I would suggest the smallest lot size.
+
+--- 帖子 #531 ---
+This is when there is no stop loss.... On contrary, manual 4H trading looks good, I applied 2x TP as last top/low (as SL)
+
+--- 帖子 #532 ---
+YEP! Not a good day, i'm afraid, this is even too much DD for me. I am going to have to figure something out to combat it. The obvious is setting a friggin' SL...no shit. The problem, is where? More to come.......
+
+--- 帖子 #533 ---
+Chris, May I suggest using sl = ATR * user input variable (atr*1.5 or atr*.5, manual input depending on market). Then, we could add ATR trailing stop, i.e. atr-trail-sl = atr*.50, manual input depending on market. Food for thought. tks, cdk
+
+--- 帖子 #534 ---
+OK, for those that have not jumped ship...I believe I have figured it out. I have to go to work now but will post later today with some results (good or bad). Chris
+
+--- 帖子 #535 ---
+Dude, I got your back all the way...You can always count me in... Thanks
+
+--- 帖子 #536 ---
+Let me share this week's results with the EA- There were excellent days and terrible ones. On 4H chart manual trading looks more solid. But what I feel that 1:2 risk: reward ratio would not work, better to count on sl and tp at next top/valley. (1:1 ratio) Or just close them all at given profit. What I opened manually yesterday 6 out of 9 in profit. The idea, to open position is excellent, we need to figure out how to manage money. This is the most important anyway.
+
+--- 帖子 #537 ---
+The last few days have been worrisome, to say the least. Yesterday I was in DD $2500 today $193, regardless, that is too high. I have been considering options to overcome this problem, without using a SL. I just think that they will only serve to turn this into a total loss system. I think using small lot sizes across all TFs will be a good move, the lower TFs seem to give the most trades in a particular direction so it may not make sense to place the larger pos. sizes on them. My original idea was that the lower TFs were more volatile and would not be open as long as the larger TFs and a small move from the larger TF would easily close out the lower TF trades. I believe the way forward is a secondary exit indicator, besides the williams cross. My idea is that the secondary exit indicator will take you out of a bad trade before larger DD is taken on. This will be at the expense of a bad trade turning positive. What I have done is go over all the trades the EA has made (I have also made manual trades that the EA missed while testing and updating). The trades were started on June 21. I have looked at gold 15min, 30min, 1hour, silver 15min and copper 15min. The following results were derived from placing a secondary exit indicator, in this case I used the envelopes indicator, from MT4 and closed a trade if a full candle closed on the wrong side of the envelope, (by full candle I mean OCHL). So what this gives us is low risk and high risk (through DD) trades. Conservative and aggressive methods, if you will. I went through the charts and added up all the pips for closed trades using the original rules, I then went back and added up all the pips for each trade using the exit indicator filter and recorded both numbers. The white numbers are with the filter, (close a trade if full candle closes outside envelope) and the magenta ones are original rules, (close with williams cross) The first result is a combination result of the three gold charts mentioned. Attached Image The next is copper 15 min Attached Image Next is silver 15 min Attached Image Here are two examples of the filter in action, one for a buy and one for a sell. Attached Image (click to enlarge) Attached Image (click to enlarge) I would like to hear from some of you on your thoughts on the exit filter idea and if you had a different filter. Please post results not suggestions. Have a good weekend. Chris
+
+--- 帖子 #538 ---
+Here is the result of the testing from outset of June 05 2019 to today. I have included the open P/L Chris Attached Image (click to enlarge)
+
+--- 帖子 #539 ---
+Hello everyone About the second EA, I have just started to test it since 3 days ago on 17th. the test is running on M1, M5, M15, H1 and H4 Tfs and only on GOLD. all trades has been taken 0.01 Lot M1 : 63 closed Trades and -1421 Pips and 2 open trades in -7 Pips DD M5 : 9 closed Trades and +100 Pips and 4 open trades in -562 pips DD M15 : 2 closed Trades and +70 Pips H1 : 2 open trades in +15 Pips H4 : 0 trades Attachments: 1-Excel file = all the trades History sorted in TFs 2- Pictures of chart with drawn M1 closed trades 3-Open trades at the time of market closing on Friday
+
+--- 帖子 #540 ---
+Hi Chris, I don't have any examples of using an additional filter. But have been thinking about using a step-MA for a long time. I found the step-ma to be better than a regular. Analyzing the setup looks promising.
+
+--- 帖子 #541 ---
+These are my testing results so far. Demo Account-Only XAUUSD-Couple of Open Trades which are in profit. Attached Image (click to enlarge) Note: Trades were in draw-down when open, but they closed in profit. Thanks
+
+--- 帖子 #542 ---
+Test Results on GBPNZD-Demo Account Attached Image (click to enlarge)
+
+--- 帖子 #543 ---
+Chris, These are my thoughts: So far the EA is delivering- It is an aggressive system- I am thinking along the lines of Stop Loss in terms of Account Equity- if one's total capital is $10k- run the system with $2500 in the account.Worse case if the account is blown-- Ride through the stomach churning/uncomfortable moments and let the EA do it's thing-let it collect/generate profit $2500 as the upside to this aggressive/risky behavior is increase ROI- Moving forward one can subtract some amount or keep trading with the now $5k- Rinse and Repeat-Of course as the account grows-you would be taking the profits and adjusting the MM plan. Also, running the test for another two months with the original config could tell us if 2.5 K draw-down is an one off event or if it keeps repeating. 2. I trust your judgement on the envelopes filter- I am up for forward testing both with original aggressive MM and with the filter and we can take a call after a certain mini um sample size is achieved. 3. My suggestion for filter-although i don't know how to go back and back test is: Using ADR-something like trades are triggered only after price has done 0.75+ or 75%+ of its ADR-as price will be ripe for a reversal. Thanks
+
+--- 帖子 #544 ---
+@cdk I have tried the step, in the form of the halftrend 2.0 and while promising, it did not scream "USE ME, I'M GREAT". lol @aaven, thanks for your support (you too cdk and tiivaa and foff00) and for testing this with me. I am now looking at the Kijun sen 55, alone, as a nice filter. Will let you know how it turns out. It takes a while to go through the charts though. I will keep testing the original rules as I am happy...ish so far. But I Intend on implementing one or two options for exit filters into the EA. Question...would the filter work better as a stand-alone script or would it be better as part of the EA. (not a coder so...) Chris OH! one change I am going to make is scrap the silver 15min chart and maybe the copper 15min chart.
+
+--- 帖子 #545 ---
+Chris, Filters as part of the EA would be best. By having the filtering logic within the EA- Backtesting the strategy with Filters on Strategy Tester would be possible. The EA could have a section in the parameter, something like: where we can select our choice. "Use Filter" a. None [Goes with original settings- no filter] b. Filter X c. Filter Y Based on the section, the EA would execute trades without filter or with filter X or with filter Y Great Job Chris- Staying on top of things as ever... Thanks
+
+--- 帖子 #546 ---
+Hi Chris, I agree, Kijun sen indicator is a very good option and gives the trade more breathing room. Can you share the version that you are considering? There are so many variations available.
+
+--- 帖子 #547 ---
+Hi aaven, noted, I thought it might be easier to code a script than to change the EA. I have sent the EA coder a message about this so will see what he says. cdk1212 I am just using the ichimoku with all the other stuff turned to no colour. But was going to ultimately get a version of just the Kijun. Do you have one? Her is a peek of the 4 hour results with Kijun 25 as a filter, since Dec 1 2018 to May 23 2019. ( the numbers in squares correspond to the white, filtered results) Again I want an entire candle to close beyond opposite side of Kijun sen. Chris Attached Image (click to enlarge)
+
+--- 帖子 #548 ---
+Hi Chris, I was playing around with different versions and landed on Kijun-Sen-alerts. I have the Kijun set to 50.
+
+--- 帖子 #549 ---
+Thanks cdk1212 I was hoping to just get one with the Kijun sen by itself. I can't imagine all those windows on a chart LOL
+
+--- 帖子 #550 ---
+Yeah, that's true. I like the looks of that Kijun-Sen-alerts and easy to program when color change, then exit position. But it does not solve the problem. What if Williams%R says to enter and Kijun never changes color in that direction? hmmm. This example Kijun is set to 50.
+
+--- 帖子 #551 ---
+This looks a lot better. This example is 2 different Kijun-Sen-Alert; one at 26 &amp; other at 50. It's Gold on a 30 min chart
+
+--- 帖子 #552 ---
+I think I like this one Attached File(s) Jurik smoothed Kijun slope.ex4 34 KB | 299 downloads
+
+--- 帖子 #553 ---
+Hi Cfudge - No Nonsense Forex trader here, I have been using Williams % R in addition to Waddah ATT Explosion (100,30,15,15) for volume indi and LWMA 26 as baseline on 4 hr chart on all 28 currency pairs, would love to help in any way I can! never been profitable on commodities/metals (not much experience) and would love to learn. I've been reading the thread and it looks great. Let me know how I can get involved even if it's back/forward testing. Thanks!
+
+--- 帖子 #554 ---
+Chris, Took it from the same site i think. It is the histogram version of Jurik Kijun Slope. Better Visibility when comparing Trades taken by EA with the indicators setup. Attached Image (click to enlarge) Thanks
+
+--- 帖子 #555 ---
+Hello all, please i need help. I would like backtest this EA. Problem is, that it it not opening trades. I dont know where is the problem.
+
+--- 帖子 #556 ---
+Hi aaven, I never knew this existed, nice one. However we need the one on the chart to see if the candle closes beyond it, not sure if we can get that info from a histogram.
+
+--- 帖子 #557 ---
+Your tester settings should look like this...then should work Attached Image (click to enlarge)
+
+--- 帖子 #558 ---
+Yes Chris...I overlooked that aspect...
+
+--- 帖子 #559 ---
+it looks like this but it doesnt trade
+
+--- 帖子 #560 ---
+Did you load the indies?
+
+--- 帖子 #561 ---
+for sure i did
+
+--- 帖子 #562 ---
+I opened tester as shown and hit start works fine ??????
+
+--- 帖子 #563 ---
+tester is going fine but EA didnt open any trade
+
+--- 帖子 #564 ---
+Sakultrader, Make sure you have the latest consecutive candle &amp; volume and volatility indicators. I had the same problem with the latest version. That fixed it.
+
+--- 帖子 #565 ---
+sorry guys now it works. i download it before but i am and idiot so i didnt chante it in mt4 i am sorry
+
+--- 帖子 #566 ---
+This setup looks to me:
+
+--- 帖子 #567 ---
+hey are you guys testing only on metals? also what broker are you using? I only get gold and silver vs USD with my broker..
+
+--- 帖子 #568 ---
+Axi has more
+
+--- 帖子 #569 ---
+Just an update...I am almost finished testing with the Kijun sen 25 (smoothed 5) on gold 15min to daily. I will publish tomorrow. Chris
+
+--- 帖子 #570 ---
+lo ve kijun sen great baseline
+
+--- 帖子 #571 ---
+yeah i'm in the states, cant open an accunt with axi..
+
+--- 帖子 #572 ---
+Appreciate it Chris...
+
+--- 帖子 #574 ---
+OK...here we go, again, I am sold on the Kijun sen 25, smoothed 5. I will have it added to the EA with those two parameters as user inputs. Here is what time length I have back-tested for each TF, on gold 15 min to daily charts. 15 min since April 6 2019 30 min since Feb. 11 2019 1 hour since Jan. 2019 4 hour since Oct. 31 2018 Daily since July 2012 I would say that the Kijun is not our best friend on the daily All the other Tfs it kept us out of some really big losses (like really big), and the inevitable DD, but I was pleasantly surprised to see that either with the filter or just waiting for Williams cross the system is profitable. Obviously the filter gave us much less profitability, but also gave considerably less DD. The way in which you choose to trade this method will depend on one's choice of risk of DD and higher returns or safety (more losses)and lower returns. Here is the pics of each chart with results for both Kijun sen filter and just williams cross 15 min chart (the second set of numbers are trades taken after April 15, because there were 5 large losses in the beginning of April) Attached Image (click to enlarge) 30 min chart Attached Image (click to enlarge) 1 hour chart Attached Image (click to enlarge) 4 hour chart Attached Image (click to enlarge) Daily chart Attached Image (click to enlarge) Chris
+
+--- 帖子 #575 ---
+Nice Chris, It looks like an aggressive or conservative strategy depending on your settings that you personally choose. Did you try different Kijun settings with different time frames? Meaning, bigger number with higher time frames. Well, that will be up to me to test out. Really nice job!
+
+--- 帖子 #576 ---
+Thanks cdk1212I used the same Kijun for all TFs. You can use wharever you fancy .The best part of all this testing is the knowledge that we will be in tbe black whatever we choose.
+
+--- 帖子 #577 ---
+I wanted to show the power of this system to recover losses. You will notice on the 15 min chart posted above, that there are 2 sets of results. The ones in the box are from April 15 to present and the top ones are from April 6 to present. You can see there is a vast difference in the outcomes of the Williams cross result, while the filtered results are closer in size. On the below image of the 15min chart you will see what I mean about how there are two sides to this system an aggressive and a safe way to trade. There are 5 trades that lost well over 100 pips each (numbers without a white box). These are huge and each with around 200 pips in DD. While the filtered results (numbers with a white box) are much easier to take. The incredible thing to me though is how we were able to overcome such a large loss and come out with an impressive pip count in 4 months on the 15 min chart. Unfortunately There is still the DD Chris Attached Image (click to enlarge)
+
+--- 帖子 #578 ---
+Chris, The fact that the system comes out in black provided it is given time shows the robustness of the strategy/your work. What you have done is no small feat... Thanks
+
+--- 帖子 #579 ---
+OOOOPPPPSSSS!!!! Sorry guys...I totally forgot to post the updated EA with the last bug fix. Here it is. BTW the coder is looking at adding the Kijun sen to the EA now. Attached File(s) WilliamRea-test.ex4 36 KB | 285 downloads
+
+--- 帖子 #580 ---
+Thank You Chris...
+
+--- 帖子 #581 ---
+Hi Guys, As I had promised, report the progress of manual trading of the system. I used 4H and 1H charts and open trades where there is something. I used closed valley/top as SL and same as for TP (rough 1:1 risk : reward). Sometimes I put back to BE. It seems 66% of trades closed in profit. With good money management it seems as an easy and reliable, profitable system.
+
+--- 帖子 #582 ---
+Hey guys, just got done testing on 5 pairs VP recommends back testing to get a general idea of how it will perform on all pairs (eur/usd, aud/nzd, eur/gbp, aud/cad, chf/jpy) It performed profitably on 4 hour (approximately 60%) however I noticed when I added a volume indicator it performed much better. Is there a way to incorporate a volume indi such as "waddah attar explosion" (100,30,15,15) also Chris Im having trouble distinguishing which new post you were talking in the PM for download, will you post it again plz? thanks guys and will continue to report back, though Im noticing with volume it definitely makes a huge difference (closer to 70-75% accross the mentioned currency pairs) Thanks!
+
+--- 帖子 #583 ---
+I meant to say a 2nd volume indicator in conjunction with the one we are using**
+
+--- 帖子 #584 ---
+This is the one I used but there are several different versions so I hear..
+
+--- 帖子 #585 ---
+I updated the 1st post with the updated EA post # and the two indicators needed to make it work properly.
+
+--- 帖子 #586 ---
+Rexwoods, Just my 2 cents- A couple of trades isn't an accurate representation of how a system performs. So before tweaking/adding new indicators, we should have proper documentation as to how the modifications improve over the existing logic. I feel it is best avoided going down that path and just take Chris lead and keep testing the system as it is. Thanks
+
+--- 帖子 #587 ---
+Chris, Just to be on the same page-the updated post#1 refers to the EA with the bug removed and the EA with the Kijun Slope is yet to come, right? Thanks
+
+--- 帖子 #588 ---
+Yes
+
+--- 帖子 #589 ---
+Today just closed manually all open trades. (all manually opened, 1H and 4H) Altogether in 6 trading days 220 EUR profit (5% in a 4000EUR account). Still I do not know if they close on tp or sl but nice to see to open profitable position soooo easy and calm.
+
+--- 帖子 #590 ---
+Way to go foff00 keep it up... Here is my progress report from June 5 to July 26 2019. Happy weekend Y'all Chris Attached Image (click to enlarge)
+
+--- 帖子 #591 ---
+My Report: Original rules-No S/L-Demo Account-Few Open Positions Attached Image (click to enlarge) Thanks
+
+--- 帖子 #592 ---
+Nice aaven...no losses hey, super. looks like we are all in the black this week. Lets see what next week brings
+
+--- 帖子 #593 ---
+great work and results cfudge
+
+--- 帖子 #594 ---
+Here is the updated EA with the Kijun slope addition. Please include the Kijun slope indicator as posted below. I am testing it on gold 15 min only this week. I prefer the williams close personally but would like others to test as well so we know if it is working properly. If I get a chance I will put it into the tester. Chris Attached File(s) WilliamRea_trial.ex4 40 KB | 275 downloads Attached File(s) Jurik_smoothed_Kijun_slope.ex4 34 KB | 341 downloads
+
+--- 帖子 #595 ---
+Thanks a lot Chris... I am looking at the EA. One doubt- "Close by Kijun" is independent/separate of "Close a single trade"? Attached Image (click to enlarge) I mean, if the settings are like this: "SL TYPE": None "Close a Single Trade": None "Close by Kijun": True Then EA will use Kijun as a stop loss? Thanks
+
+--- 帖子 #596 ---
+aaven, the way I have set it up is we need a full candle to close above/below the Kijun line to close a trade. So you can put SL in but the Kijun could initiates before the Sl This was question and answer from coder. Attached Image
+
+--- 帖子 #597 ---
+Just ran a test from June 2 to today on gold 15 min...Kijun set to true 25 period / 5 smoothing. Attached Image (click to enlarge)
+
+--- 帖子 #598 ---
+Post 1 updated
+
+--- 帖子 #599 ---
+Are you running the EA during news events or do you turn it off and back on the avoid the news?
+
+--- 帖子 #600 ---
+Thanks a lot Chris for getting the answer from the coder.
+
+--- 帖子 #601 ---
+Hi Guys, Just realized that I didn't post results for last week. Here are results for Gold, Silver &amp; Copper since 7-11-2019 tks, cdk
+
+--- 帖子 #602 ---
+I forgot to mention that the above demo account started at 50,000. So, the gain is 570.44 in 12 days. I am testing on multiple different markets such as; Gold, oil, indexes &amp; crypto. For crypto currencies, I found 30 min works very well. But you need to be very careful with the lot size and only run it on the main currencies. So, gain is 809.63 since 7-16-19. Plus, not all brokers have the same spread or provide a market 7x24.
+
+--- 帖子 #603 ---
+Hey cdk1212, way to go, looking positive. Just to let you know I gave up on Silver and Copper 15 min due to bad results on backtest. Maybe if more TFs were used it would be better. Chris
+
+--- 帖子 #604 ---
+Here is the Kijun slope added EA. Go to first post to download the three indicator updates needed to make it run. Good luck to all. Chris Attached File(s) WilliamRea Kijun.ex4 39 KB | 451 downloads
+
+--- 帖子 #605 ---
+Hello, please which settings are you using? Thank you
+
+--- 帖子 #606 ---
+Great Job Chris... Staying on top of things as usual...
+
+--- 帖子 #607 ---
+I have only changed the position sizes and everything else is off, except that I am forward testing the Kijun on gold 15min. Attached Image (click to enlarge)
+
+--- 帖子 #608 ---
+Chris To observe the behavior of Kijun Filter- I am looking at 1 Minute Charts with the EA. Might have found a bug- Want to run it by you- Attached Image (click to enlarge) USDCAD-Buy Trade was executed by EA- when full candle closed below Kijun-EA did not close the trade. Later after few candles-EA Close the trade. Below Snapshot- Attached Image (click to enlarge) The broker i am using is FXPro - Below are the settings- Attached Image (click to enlarge) Thanks
+
+--- 帖子 #609 ---
+Hi aaven I will send a screen shot to coder. I ran the tester and it took and closed the trade as it should. Chris Attached Image (click to enlarge)
+
+--- 帖子 #610 ---
+Chris, Kijun Slope is acting as an Exit. If the full candle closes beyond the Kijun slope the exit triggers. There isn't further any other additional condition like: Body Close beyond the Slope+ Kijun Slope should also be golden color for closing sell trades.? Thanks
+
+--- 帖子 #611 ---
+Appreciate it Chris...
+
+--- 帖子 #612 ---
+Hi Chris, Can you please tell me how the volume indicator works? On the volume indicators available in MT 4(especially in mobile) which volume indicator can be useful? OBV?
+
+--- 帖子 #613 ---
+No there is not any other condition.
+
+--- 帖子 #614 ---
+As I understand it, the volume data you receive from your broker will be independent from other brokers. The idea is that each brokers client base are doing similar trades so it should be a fair representation of the actual volume, although a piece of a larger jigsaw.
+
+--- 帖子 #615 ---
+Chris, There is one trading scenario that might need addressing. We are implicitly assuming that Price will be below Kijun Slope when a Sell trade is triggered. In cases where a Sell Trade is triggered and Price is already above Kijun Slope when this happens-Even if price keeps going up- the Kijun Slope exit might not trigger because the price is already up and the exit logic looks for the crossing of the slope and closing of the full candle. I will look for trade examples where this could be a problem. Please do look out for this kind of scenario as well. EDIT: Buy Trade on USDCAD, when Price is already below the Kijun Slope. Attached Image (click to enlarge) EDIT: The Buy Trade was closed even though price is going in our favor. I thought that the Kijun Slope exit would not trigger-but it looks like in scenarios where price is below the kijun slope when the buy is triggered-the EA seems to close the trade after few candles- I will keep looking for more examples. Attached Image (click to enlarge) Thanks
+
+--- 帖子 #616 ---
+So this is a kind of moving average cross of actual broker volumes?
+
+--- 帖子 #617 ---
+Already way ahead of you aaven The logic coded for the Kijun is if a trade is opened but we are already on the wrong side of the Kijun line the EA will wait for, at least, a touch of the Kijun line before looking for a full candle close.
+
+--- 帖子 #618 ---
+OK bug free Attached File(s) WilliamRea2_test (1).ex4 39 KB | 910 downloads
+
+--- 帖子 #619 ---
+Here is updated results from June 5 to Aug. 1 2019 The open trades are from the 4 hr TF and were so close to closing today before the jump up...too bad. Going camping/fishing till monday, have a great weekend everyone. Chris Attached Image (click to enlarge)
+
+--- 帖子 #620 ---
+Chris, That's really impressive... I am currently testing the new version of EA. Will keep you posted. Have a well deserved fun break... Thanks
+
+--- 帖子 #621 ---
+Chris, Potential Bug #1 NZDJPY- 1 Minute- Sell Trade Triggered even though WPR below -80 {one of the nuances of the strategy for entry criteria} Attached Image (click to enlarge) Attached Image (click to enlarge) Thanks PS: using the latest EA
+
+--- 帖子 #622 ---
+Potential Bug#2 Buy Trade on USDCAD- 1 Minute- Exit triggered even though the full candle {OHLC} did not fall outside the Kijun Slope. Attached Image (click to enlarge)
+
+--- 帖子 #623 ---
+Chris, It looks like the bug on Kijun Slope is still present. Many trades it closed as per expected behavior and then this trade happens where it should have closed as per Kijun Slope Exit,but it didn't. 2 Buy trades on EURCHF Attached Image (click to enlarge) EDIT: Settings i use-just in case Attached Image (click to enlarge) Thanks
+
+--- 帖子 #624 ---
+Hi aaven Looks to me (on a cell) that the first 3 charts are fine,, looks like the previous candles were the trigger candles. Last chart is dubious . Make sure you are using the right Kijun slope ...from post 1. That was my problem
+
+--- 帖子 #625 ---
+Chris, Upon close inspection, as you said Bug#1 is not a bug. The previous candle triggered- Trade opened on the next open tick and the same candle also happened to be the trigger for exit. For the rest of what i posted- it looks like some sort of anomaly is still present. When you get back from the vacation please have a second look.... From my end- I will install a fresh copy of MT4-resinstall the indicators again from post#1 and repeat the testing from Monday and check if the behavior persists... Thanks PS: Appreciate you taking time from your break...
+
+--- 帖子 #626 ---
+My Results- No Stop Loss-Demo Account-No Open Positions Attached Image (click to enlarge) Thanks
+
+--- 帖子 #627 ---
+That is a wonderful result, thank you for sharing but I have important questions: 1. You won 89% of trades. If no stop loss, how and where the other 11% were closed. 2. Which EA version and settings did you use?
+
+--- 帖子 #628 ---
+Nice haven Was this with kijun?
+
+--- 帖子 #629 ---
+Chris, These results are from the previous EA-No Kijun. Thanks
+
+--- 帖子 #630 ---
+foff00, I believe they were closed by the exit logic-Cross of WPR to the opposite side- The trades are closed whether in profit or loss. I am using the previous EA-without the bug fix- No Kijun- I am using same settings as Chris- They are here somewhere in an old post. Thanks
+
+--- 帖子 #631 ---
+aaven please which TF and pairs are you trading?
+
+--- 帖子 #632 ---
+Gold-15 Min till Daily.
+
+--- 帖子 #633 ---
+cfudge im really sorry. I've backtested the ea with your settings. It doesn't look that good. I'm using tick data as you can see in the modelling quality, so its valid. Maybe you've different ideas that we can test. I want to help a bit. Do you have Telegram or something else, im not allowed to pm, because this account is new. I've created one only for you &lt;3 Greetings Nick
+
+--- 帖子 #634 ---
+Nick, it looks like you tested a version of EA that had a bug with respect to kijun slope. current version: https://www.forexfactory.com/showthr...4#post12414924 Thanks
+
+--- 帖子 #635 ---
+Thanks for the advice. I've used the other ea. Sadly the results are nearly the same. This time I let the backtest run to the end. Settings and all other infos are in the PDF. Overall no changes in the setfile Nick
+
+--- 帖子 #636 ---
+Nick, It looks like you haven't read thru the whole thread.[I am not trying to be aggressive] few essential things you might have missed about Chris's approach: Like results on any given financial instrument requires deploying the EA on Tf's from 15 Min till Daily and calculating the cumulative p/l. that kijun exit is being considered as an alternative and going with no s/l is the preferred method for Chris. Also-the latest version also needs testing for potential bugs etc... PS: From my understanding MT4 doesn't have back-testing with Tick Data [though the option says "Every Tick] out of the box- MT4 requires 3rd party plugins like Breit Plugin or requires one to use some other paid software. Thanks
+
+--- 帖子 #637 ---
+Thanks aaven. All right man, I understand what you mean. The only thing I want to proove is that these settings, in this timeframe with this currency simply doesn't work. So we must adjust something and I'm open for all ideas. I want to help a bit with the ea thats all. I've used this parameters cause cfudge posted them, that's all. I'm not deep into this system and I can't have an fundamental understanding of its behavior like cfduge. But I've some experience in backtesting EAs. I will contribute a setfile for a specific timeframe and currency if there is a need. Nick PS: You're absolut right. I think its a matter of my language skills, that you doesn't trust my words and I can totally understand this. I'm using Tick Data Suite and yes it's not cheap, but it's essential for backtesting semi-professional EAs.
+
+--- 帖子 #638 ---
+Nick, I understand you want to help with the EA. I welcome your inputs. Just wanted to say, it would be great if all of us were on the same page. You can be really upto speed- the thread is around 30+ pages. Chris and others are open minded- If there is an input that can enhance the results- please definitely do share. Thanks PS: i wasn't aware you used Tick Data Suite and thought those were back-test result using MT4 ohlc data...
+
+--- 帖子 #639 ---
+Chris I did a fresh install of MT4- downloaded the updated indicators from post#1. it seems the bug is still present in the Kijun exit. Attached two examples: 1. GBPUSD- Two sell trades- Kijun Exit did not kick in. Attached Image (click to enlarge) 2. AUDUSD- Kijun Exit kicked in with a delay. must have closed on the candle with the "check mark"-instead exited on the next candle. Attached Image (click to enlarge) Using 1 minute charts for testing-latest ea. Attached Image (click to enlarge) Thanks PS: Hope you had a great weekend.
+
+--- 帖子 #640 ---
+Chris, I observed the scenario: Using the latest version of EA- Sell EURUSD Trades-Opened on wrong side of Kijun Line- They kept going against us- A touch of Kijun Line didn't come into picture- It looks like such trades that actually become runners that contribute to the Drawdown{the trades we are actually trying to avoid using the Kijun Line} Attached Image (click to enlarge) What is your take on this-Do you think it is worthwhile to tweak the Kijun Exit-Something like using a standard deviation to create Upper Boundary for Sell Trades that open on the wrong side of Kijun or should we just let the WPR exit care of the runner and just take the loss. Thanks
+
+--- 帖子 #641 ---
+My suggestion would be to set a SL if you think it has gone too far.
+
+--- 帖子 #642 ---
+I just ran the tester on multiple pairs (exotics too) and indicies and commodities. All were 5 min chart (1min would not load) with every tic It worked flawlessly. I do not know where to go now until another trade shows up. The coder says he is confident he has put failsafes in place to stop the previous bugs. aaven I have to think that the EURCHF trades were server anomalies or something other than the EA??????
+
+--- 帖子 #643 ---
+Chris, The behavior happened on couple of trades and i picked EUCHF as only an example- When the EA originally started trades- the Kijun Exit was working as per logic-After couple of trades- the behavior started showing up. Let's say there is a Server Anomalies- in terms of incoming data feed- it becomes all the more important for us to get to the bottom of this. There is one more bug that i held up from saying- Trade Reconciliation- What did was let the EA open some trades [1 Minute Trades] and just closed the MT4 terminal- After couple of hours-i reopened the MT4- In the hours i shutdown the MT4 there were exit criteria for the opened trades- Of course While the MT4 is closed obviously the EA cannot function/close the trades- . Now after reopening the MT4 the EA is waiting for the exit criteria to happen again to close the trade instead of reconciling and immediately closing the previous trades. Basically i am trying to replicate the EA behavior when disconnection happens- though one could be using VPS- crashes- connectivity lost will be more profound as the account size grows bigger. This testing was done on a separate MT4. I feel both the issues could be connected- What i request you is- Open a MT4 demo account- load the EA on couple of symbols on 1 minute charts-let the EA take the trades[not necessary tobe in front of the system] and after couple of trades are triggered- you could go back at your own convenience to see if the anomaly happened. Thanks
+
+--- 帖子 #644 ---
+My Test Results-Continued-Demo-Open Positions Attached Image (click to enlarge)
+
+--- 帖子 #645 ---
+Here are the updated results from June 5 to August 8 2019 Gold 15min to daily Yes, I see the DD. Chris Attached Image (click to enlarge)
+
+--- 帖子 #646 ---
+June 5 to Aug 16 2019 Still going strong, no change in DD though. Chris Attached Image (click to enlarge)
+
+--- 帖子 #647 ---
+Thank you for the results. From one point, in 2.5 month 20% profit is massive. On the other hand DD is the half of closed profit. That is worrysome. Close them above 1500.
+
+--- 帖子 #648 ---
+results continued- demo-no s/l-open positions Attached Image (click to enlarge) Thanks
+
+--- 帖子 #649 ---
+Is it only Gold 16 mins? Did you close negative positions, you have a big decrease range, before rising again. Anyway excellent results.
+
+--- 帖子 #650 ---
+Thank you foff00 It's on all time frames- except weekly and monthly- yes the equity dipped previous week- recovered this week. No manual intervention from my end to close any positions. Basically Chris has been transparent from the get go that no S/L is the way to go- the EA is not for the faint of heart- not specifically pointing you out, but each one should evaluate how it aligns with their risk tolerance.
+
+--- 帖子 #651 ---
+Nicely Put
+
+--- 帖子 #652 ---
+Yes...that is now...last month it was 100% of profit, next month it will be 30% of profit then 20% then 10%...then ??? I think we can all agree that the EA/method has proven it can make consistent profits. Eventually the floating DD will be insignificant (IMHO).
+
+--- 帖子 #653 ---
+Ok, imagine a fall of market, for example a Trump raises 25% tax against Chinese and trend change, leaving huge DDs with no stops... Anyone tested in ranging market, that could do less harm. I think pairs like usdcad. Anyway, Chris, aaven which version of EA you are running?1.02 or williamrea by Chris?
+
+--- 帖子 #654 ---
+foff00 Yes-a blown accounts is always a possibility. Chris generously gave a solution statement. So it's everyone responsibility to understand the system and test it thoroughly and use it only if it aligns with their risk profile. I am testing the later one. Thanks
+
+--- 帖子 #655 ---
+Can you give me Your template or exact indicator setting ?
+
+--- 帖子 #656 ---
+Post 607 618 template post 1 Use indicators from top of post 1
+
+--- 帖子 #657 ---
+Forward test started on eurusd and usdcad from 5 min to 4H, no sl. Template did not add volume and volatility update so that I added manually. Hope will work. Will post results from time to time.
+
+--- 帖子 #658 ---
+3 days results from eurusd and usdcad. from 5 min to 4H chart, no stop loss. It is interesting to see that only 5 and 15 min positions were activated. Probable there is no meaning to trade on other timeframes. Sometimes DD is worrysome but I could survive (DD was 125 EUR a day before. Those results were not included due to having other system running at that time too)
+
+--- 帖子 #659 ---
+Nice results foffOO keep em comin' You wouldn't have gotten any trades on the higher TFs if the williams stayed over bought/oversold...like gold this week. Here is my results from June 5 to August 23 2019...as always only on Gold 15min to daily. Bit of a jump today in DD...was sitting around 1200+/- all week. Chris Attached Image (click to enlarge)
+
+--- 帖子 #660 ---
+In my eyes the original strategy is good profitable...NO need to put sl into it...you have a "sl" with the dynamic tp which will be sooner or later reached! From the construction of the strategy it is very stable against the problem with waterfalls.. It is NOT like channel strategies where you tp at the other side..my opionion... What could maybe tweaked is the period of the ma and williams...
+
+--- 帖子 #661 ---
+My test results continued-No S/L Attached Image (click to enlarge) Thanks
+
+--- 帖子 #662 ---
+Hi, One VERY important question. What happens to the positions if there is an internet disruption/restart of MT4/restart of computer? When everything resumes what will happen with the positions were already open before? Let them float and make loss forever or continue monitoring and closing them?
+
+--- 帖子 #663 ---
+That's something i would also like to know for the general behavior of an expert advisor...
+
+--- 帖子 #664 ---
+Hi guys, I have asked the coder the question about power cuts, but I imagine there will be no interruption to the EA management of trades, once power is restored, because (as we speak) my computer is turned off and when I restart it tomorrow it will resume as normal. The other question is how are the missed signals handled after a power cut. (@ aaven)
+
+--- 帖子 #665 ---
+Chris, It is weekend-i am holidaying in snoozeville.Don't want to tire my brain out... So, how exactly are the missed signals handled? Thanks
+
+--- 帖子 #666 ---
+Hello , I,´m testing the EA and give me this error , someone could help me about this? . I see in the list of indicator that is charging many times this one, what is the problem? Thanks !
+
+--- 帖子 #667 ---
+Maybe try deleting the indicator and re-instaslling, then refresh the MT4
+
+--- 帖子 #668 ---
+"Array out of range" is an error in the indicator...it MIGHT be a problem with calling the indicator from the EA with invalid values....
+
+--- 帖子 #669 ---
+Here is the answers. Attached Image
+
+--- 帖子 #670 ---
+Thanks so much I deleted and add again and now seems tha is working fine. One more question , I have a friend that is a programer and said me that MT4 has a error when you try codificate a exponencial MM inside to %R indicator , also have this problem if you try to do the same with other indicators , he say me that if you want a real results you have to put a simple MM not an exponencial. Im doing the exits trades with this indicator that is similar to kinjun , you can try if your EA can work better with this one .
+
+--- 帖子 #671 ---
+I have calculated the strategy backwards and am running it on several pairs with %R successful....so in my eyes there is NO need to move from the original strategy but ...but as you see the trades were taken good for my choosen pairs with the exits....... Try "AUDCHF;AUDJPY;AUDNZD;CADCHF;CADJPY;CHFJPY;EURGBP;GBPJPY;GBPUSD;USDCHF;USDJPY" on M15 with %R as exit....
+
+--- 帖子 #672 ---
+Which one of your Trade Explorers is it linked to? Thanks
+
+--- 帖子 #673 ---
+Great, please share your results and finding. Thank you foff00
+
+--- 帖子 #674 ---
+Thank you for this important information. regards foff00
+
+--- 帖子 #675 ---
+In what market condition you expect better results? Trending or ranging?
+
+--- 帖子 #676 ---
+The goal of numbers is that noone(except me) can identify the strategy from the numbers...so my answer of telling you is:
+
+--- 帖子 #677 ---
+I just calculate the best pairs and let it run on them on M15...nothing more....
+
+--- 帖子 #678 ---
+I am just checking, because last time you weren't unable to code the strategy and left it midway. At that time, you had confusion about the rules. It seems, we have to take your inputs with a pinch of salt in absence of any further elaboration.
+
+--- 帖子 #679 ---
+You're no Eagle. You are a 100% decompiler and you decompiled my EA and now you're bluffing as though it is your creation. The trades are identical to that EA when deployed on various timeframes with larger TP. You've been here for 4 years and this is the first success you've had. Enjoy the 400% that my creation gave you, enjoy the ego boost my effort and toil has given you. Decompilers should be hung!!! An Eagle...don't make me laugh!!!: All her his signals are from the decompiled version of this EA traded on different timeframes. https://www.forexfactory.com/showthr...2#post12376702
+
+--- 帖子 #680 ---
+I am just for coding here not for discussions...We had sellers like Ghostbiker, Showing off guys like loozers, proclaimed millionaires with paypal begging account like bluepanther and now "dreamers" like the one here... All these guys have one common: They live in another word and communication is therefore useless and only a waste of time... My #16 is just a personal request from another board, coded and running on M15 on 20 fixed pairs. I got coding request from him: --------------------------------------------------------------------------------- To: reteid2222 | From: mbrown | Sent: Oct 13, 2018 12:18 --------------------------------------------------------------------------------- Hi Reteid, How much you charge for a auto-optimisation function (with code) so my EAs can be optimised periodically without human intervention? Thanks MB I declined to do that...I just have to say "YES" to get this source code...but I wasn t interested...I ll code my own framework.. The pm I sent him was only about the test system....NOT any source code...I was interested if it is part of the quant software... --------------------------------------------------------------------------------- To: mbrown | From: reteid2222 | Sent: Jul 15, 2019 8:41am --------------------------------------------------------------------------------- HI...what test system is this in the picture? https://www.forexfactory.com/showthread.php?t=805805 Greetings Retina That s all...FINISHED! Cause now I have turn to the important things here...
+
+--- 帖子 #477 ---
+Just saying, even if your original/wrong strategy is more successful- you are acknowledging that the Williams %R was the base you built upon. The original creator is Chris, is there anything preventing you from sharing it with him? It is in good faith. If it is not your intention, how does it help when you say it makes "XXX"% and is better, but refuse to go into details.
+
+--- 帖子 #478 ---
+trieuVhh I don't know the full story, but if someone has their work stolen and on top given an impression that you are more competent than the original creator would be a major blow to the gut. So, let us cut some slack to Mr. mBrown. A cursory look says, he gave the EA away for free,"something like safe and reliable.EA". Rather than hacking it, one could have made a polite request that he unlock it for all the 28 pairs, that would have been the right thing. As for reteid- i am just having a discussion and seeking clarification about the inconsistencies- This is what happened- Reteid said he/she would code it- released few versions of the EA- the EA's were not according to the original rules-left abruptly- Chris{the original creator} came up with his version of EA and released for the public-Reteid shows up after some time- Says the following " I have calculated the strategy backwards and am running it on several pairs with %R successful"- What is there to reverse engineer, when the trading logic is clear and open?- Declines to go into details about his/her original/improved/wrong strategy based on Chris work. Thanks
+
+--- 帖子 #479 ---
+https://www.forexfactory.com/showthr...7#post12373367 Please note that there will not be anymore additions or changes. This is the final version, if you really need something else added you will need to write your own EA This is very clearly said that there is NO wish to change anything at this strategy...that s why I was free at this point!
+
+--- 帖子 #480 ---
+Reteid2222 It does not say, you should not share the work with the original creator. 1. Chris shared his work- You claim you have a better version of the same- All i am saying is, it would be in good faith if you share it with Chris only[not with the whole ff community] 2. Currently people are testing the EA's performance and sharing the results. If some one says, "look i am making XXX%" , but it is a different version and does not want go into more details-it does not add value to what is currently being done. Thanks
+
+--- 帖子 #481 ---
+its a fantastic strategy but it have a problem, it shows the arrow one candle late, is there anyway to fix that?
+
+--- 帖子 #482 ---
+This was one problem of my EA and tried to fix that but cause the signals come live very rare that is the big problem...
+
+--- 帖子 #483 ---
+Long weekend...yeah! Here are the results from June 5 to August 30 2019...DD not changed much. Gold charts 15min to daily. Chris Attached Image (click to enlarge)
+
+--- 帖子 #484 ---
+Demo-No S/L-Results Continued Attached Image (click to enlarge)
+
+--- 帖子 #485 ---
+Another week under our belts...DD is gone but closed few 4 hr trades in loss. That is OK. I have realised that this whole time there were two trades from before testing this system that I had forgot about. Right now they account for basically all of the shown DD, so my DD the past few months was not nearly as bad as I thought . Anyway, here are the results from June 5 to Sept 6 2019. Nice weekend to you, Chris. Attached Image (click to enlarge) So what the results tell me is that with an account around $10,000.00 you can run this system with the current parameters, if you had $15,000.00 to $20,000.00 then you could step up the position size and start making a supplemental income.
+
+--- 帖子 #486 ---
+Thanks for showing your results! Is this still without SL and kijun except for M15 (kijun)? Looking at the DD, it seems that if you square the position size to the same DD level, you get far better results with kijun (and on H1 also with arrow SL) - on M15....H1 (got no results for H4, D1).
+
+--- 帖子 #487 ---
+I am Japanese. I would like to know in detail how to use this EA! Please tell me how to install and how to start! Please. * Manbain
+
+--- 帖子 #488 ---
+My results continued Attached Image (click to enlarge) Thanks
+
+--- 帖子 #489 ---
+Couldn't have agreed more with what you said... Major props Chris for making this happen...
+
+--- 帖子 #490 ---
+Nice results aaven...Thank you for you help and dedication to this system. I appreciate it. I think this thread has proved that this concept can bring profits consistently. I am working on another system (just posted an EA tester request with Abokwaik on his thread in Platform Tech). If I can get good results from that, too, then we could have several EAs bringing in steady income I will keep posting weekly results but I feel this thread has come to it's conclusion. Thank you everyone, Chris. PS...It's my birthday today so it is nice to end on a positive note
+
+--- 帖子 #701 ---
+Chris, Attached Image (click to enlarge) Have a great fun filled day... PS: That's wonderful news(the next strategy), i will be keenly following...
+
+--- 帖子 #702 ---
+Happy Birthday - have a grand old day
+
+--- 帖子 #703 ---
+Happy belated Birthday!
+
+--- 帖子 #704 ---
+Here is this weeks report. June 5 to Sept 13 2019 Chris Attached Image (click to enlarge)
+
+--- 帖子 #705 ---
+Hi, Thanks for the update Cheers jf
+
+--- 帖子 #706 ---
+Thank you for your efforts.
+
+--- 帖子 #707 ---
+Are you using the v2.00 of the first post? Only M15? not M15 - daily? Can you provide some results? thank you.
+
+--- 帖子 #708 ---
+Mine....still testing cause on 28 pairs are many problems to solve that you don t have on a one pair ea... This in the screenshot(I know the exits are wrong but nearly) you see the(original) strategy killer! I would: - limit to 1 trade - simply close after max X bars(I would try 50-80) bars.... By the way: The Trade Visualizer is not public just for me cause I found only the hanover version here with too many features...so I just developed my own...with entry and exit proofing now!
+
+--- 帖子 #709 ---
+which one are the best pairs?
+
+--- 帖子 #710 ---
+Results for June 5 to Sept. 20 2019 Again the DD is a lot lower than shown because of the two older trades that are still open. Chris Attached Image (click to enlarge)
+
+--- 帖子 #711 ---
+Thank You Chris...
+
+--- 帖子 #712 ---
+Nice result! Do you try other pairs? Which one are the best ones?
+
+--- 帖子 #713 ---
+Result from June 5 to Sept. 27 2019 Actual DD is about $70 Chris Attached Image (click to enlarge)
+
+--- 帖子 #714 ---
+Thanks Chris...
+
+--- 帖子 #715 ---
+If I choose about 200 candle maximum of the length of a trade I got very good results... This can your coder easily implement and I ll tested it with excellent results on these pairs:
+
+--- 帖子 #716 ---
+Hi Retina By 200 do you mean you close the trade after 200 candles or do you only look back 200 candles or do you mean WPR is set to 200 Please explain Chris
+
+--- 帖子 #717 ---
+Trade is maximal 200 bars ...then closing...and max. 2 trades running... I also tried with a maximal lost of points but get no good results.... These two settings are a good possibility to prevent the CADJPY desaster starting on 4 sept.... And the results where for all pairs(I mean the sum of all pairs) better than in the original version... Starting today a new TE #4 with these pairs on M15....
+
+--- 帖子 #718 ---
+Results from June 5 to Oct 4 2019 Chris Attached Image (click to enlarge)
+
+--- 帖子 #719 ---
+Hello Cfudge, excuse my bad English, I wanted to ask if the version you use is always the post n. 618 only on tf. 15 min? Do you have a template? Thanks. Good job
+
+--- 帖子 #720 ---
+Yes 618 I use 15min to daily .tpl is on bottom of post 1
+
+--- 帖子 #721 ---
+thank you very much
+
+--- 帖子 #722 ---
+Good example how closing after 200 candles rescues the trades: This was just a first try how it works...you can optimize the values in your EA!
+
+--- 帖子 #723 ---
+The problem are the waterfalls(about 180 bars...sl will be in 20 bars...):
+
+--- 帖子 #724 ---
+I would test options SL to prevent them: - No opening of new entry if one or more trades are X points in loss - SL at X points(the worst ...lame....without creativity) - The mininum of the last X candles(for buy) - Entry of trade is when Williams is in the direction of the trade last Y candles - Williams goes to overbought zone(for buy) What do you think? And what about the other strategy? I didn t find any good solutions....
+
+--- 帖子 #725 ---
+Hi Reteid I think the best is still the MTF version of the strategy, meaning, 15min to daily with original rules. I appreciate your tenacity with the testing... That result is with all your EAs or just the williams? Chris
+
+--- 帖子 #726 ---
+Here is the result for June 5 to Oct 11 2019 Broke $1400 DD is not as advertised... Chris Attached Image (click to enlarge)
+
+--- 帖子 #727 ---
+Chris, Thanks for updating the community continuosly... I did not understand broke $1400? Thanks
+
+--- 帖子 #728 ---
+I am back above $1400 on my demo acct. Have a good weekend
+
+--- 帖子 #729 ---
+Thanks Chris... You too have a great weekend...
+
+--- 帖子 #730 ---
+As you see only the williams....new version with limited to 200 bars worked really good the last week on the 19 symbols I set but friday were heavy waterfalls on some pairs....
+
+--- 帖子 #731 ---
+Chris Great work, to be congratulated. Are you all pairs on MTF timeframes or simply gold as you had originally tested? Regards Degsie
+
+--- 帖子 #732 ---
+After removing problems with entries and exists(in my framework) I ll start my DISCORD server for testing Wednesday 8:00 London time.... Greetings R
+
+--- 帖子 #733 ---
+Hi Retied I am having difficulty deciphering your posts/charts. Would you be so kind as to give details of how You are using the EA to take trades (in detail) and what are the differences from the original rules. Correct me if I am wrong...you are entering with just the WPR and 55 ema cross (I do not see where the arrows are coming from) If this is true, in your last post I see a lot of missed entries. Also your exit is WPR entering -80/-20 or 200 candles.
+
+--- 帖子 #734 ---
+As you see there are only the OPEN trades for this pair drawn....
+
+--- 帖子 #735 ---
+Hi R Are you taking the EA for entries only, with no SL and exiting trades manually on the Williams thresholds? Thanks Degsie
+
+--- 帖子 #736 ---
+Everything M15! Exit: Williams other direction + special condition! special condition: max 200 bars for a trade on a trade Working on other conditions...
+
+--- 帖子 #737 ---
+Tested two possibilities which not work: - Fixed sl created by atr values - SL under/ over last X candles
+
+--- 帖子 #738 ---
+Try with placing the SL on the last high (above/below Williams) after a signal shows up. What I mean is, when you get a signal look back at the last high/low when the Williams was above/below the -80/-20 line. Most likely those that hit SL would close as a loss anyway and in most cases the loss would be lower with a SL Give it a try if you can, interested in the result.
+
+--- 帖子 #739 ---
+Results from June 5 to Oct. 18 2019 DD negligible Movin' on up... Chris Attached Image (click to enlarge)
+
+--- 帖子 #740 ---
+Thanks Chris for keeping the community posted of the progress. Have a great weekend...
+
+--- 帖子 #741 ---
+Will not forget to test this...after I fixed problems with the entries on 28 pairs which roobed really much time I have problems with the exits....but after fixing this I ll do this....
+
+--- 帖子 #742 ---
+Results from June 5 to Oct. 25 2019 On the up! Attached Image (click to enlarge)
+
+--- 帖子 #743 ---
+Hello Chris, Do you trade live with any EA ? Regards Salim
+
+--- 帖子 #744 ---
+Hi Salimc The results I post are still demo results, I have not funded my live accounts to the level I want, to trade this EA live. I am hoping to achieve this in the New Year. Presently the EA is making just under 6% per month, that is a good return, I am happy with that. Chris
+
+--- 帖子 #745 ---
+That's nice to know. So now you do you trade manually with your previous William % system ? In that case what is its monthly return? Thanks Salim
+
+--- 帖子 #746 ---
+This is all automatic with EA
+
+--- 帖子 #747 ---
+Hi Reteid Could you please post the latest version of your Williams EA for those who wish to keep testing it. Thanks, Chris.
+
+--- 帖子 #748 ---
+Hi Chris Interesting system. Is the above results based on trading Gold M15 - Daily? I know backtesting should be taken with a pinch of salt. However, have you backtested it over the last couple of years? I think with time one can probably expect some parameter drift, would be interesting to do a parameter analysis in NT8 to see the range of profitable parameters for robustness
+
+--- 帖子 #749 ---
+There has to be a rule for entry that the value of wpr hasn t to be higher than X....otherwise the trade will be closed like this:
+
+--- 帖子 #750 ---
+A typical example that the wpr as exit can t work in waterflows.....
+
+--- 帖子 #751 ---
+How often does that occur? What about a max SL additionally to the WPR exit?
+
+--- 帖子 #752 ---
+Rarely but heavy losses and in multiple pairs....this crashes the account....I ll try a fixed sl or sl under the min/max of last X candles...
+
+--- 帖子 #753 ---
+Results from June 5 to Nov. 1 2019 Still only XAUUSD 15min to daily TFs Looking good...DD at $80 Chris Attached Image (click to enlarge)
+
+--- 帖子 #754 ---
+Here is an Excel worksheet covering the P/L for each week starting from June 05 2019 (first 4 weeks are grouped together). The graph shows the P/L for each week. Chris Attached Image (click to enlarge)
+
+--- 帖子 #755 ---
+Nicely done! New equity highs inbound
+
+--- 帖子 #756 ---
+Here is the account balances, by week. Attached Image (click to enlarge)
+
+--- 帖子 #757 ---
+Not sure how to get ROI by week
+
+--- 帖子 #758 ---
+May be wrong but try this formula? =PROFIT/BALANCE
+
+--- 帖子 #759 ---
+Thanks Lewis... So this is showing ROIs for weekly culmulative and weekly ROI avg. and monthly ROI avg. If this is correct then this is very encouraging. Attached Image (click to enlarge)
+
+--- 帖子 #760 ---
+Excellent Results Chris all around...
+
+--- 帖子 #761 ---
+June 5 to Nov. 8 2019 Nice push up this week, but DD is as shown Chris Attached Image (click to enlarge)
+
+--- 帖子 #762 ---
+I don't know if this has been mentioned before but the EA is closing trades I enter manually that don't even use the EA's indicators.
+
+--- 帖子 #763 ---
+Mexirican, Can you post the log files and the messages in the "Expert' and "Journal" tab. Are you using any other EA in the same MT4? Thanks
+
+--- 帖子 #764 ---
+Results from June 5 to Nov. 15 2019 No DD but took a hit this week. Chris Attached Image (click to enlarge)
+
+--- 帖子 #765 ---
+The closed result should be higher because 3 1 hr trades should be closed. Will show on Sunday, I guess. From June 5 to Nov. 22 2019 Chris Attached Image (click to enlarge)
+
+--- 帖子 #766 ---
+This is the updated chart with the 1hr trades closed Attached Image (click to enlarge)
+
+--- 帖子 #767 ---
+Hi, Would it possible to add inverse trade option, E.g so when a buy signal is generated it puts a sell trade in and vise versa. Thank
+
+--- 帖子 #768 ---
+Results for June 5 to Nov. 26 2019 Not a big change small improvement. Really want the daily to go below -80. Chris Attached Image (click to enlarge)
+
+--- 帖子 #769 ---
+Also any chance of adding martingale for trade recovery
+
+--- 帖子 #770 ---
+Results from June 5 to Dec. 6 2019 Little more profit banked, really would like the daily to go below -80 Chris Attached Image (click to enlarge)
+
+--- 帖子 #771 ---
+June 5 to Dec 19 2019 Still nice and positive. Chris Attached Image (click to enlarge)
+
+--- 帖子 #772 ---
+June 5 to Dec. 20 2019 Almost back to ATH Happy Holidays to everyone, this might be the last update as I need to fund a live account for further testing, I will keep this demo going until then. Chris Attached Image (click to enlarge)
+
+--- 帖子 #773 ---
+Congrats! you've had a very nice 6 months! +33% in 6 months? wow! I'm going to start digging through your thread. Nice job!
+
+--- 帖子 #774 ---
+hello sir what is the seting for the volume and volatility parameter? also for jurik kijun and consecutive candle seting sir? thank you
+
+--- 帖子 #775 ---
+Default except Kijun (which I do not use) I think 26 is a preferred setting
+
+--- 帖子 #776 ---
+June 5 to Dec 17 2019 Back to DD Chris Attached Image (click to enlarge)
+
+--- 帖子 #777 ---
+June 5 to Jan 2 2020 Reality check...DD is terrible. I was wondering about the range we have been in on the Daily and was hoping it would break and we could see how the strategy responds. It's funny because the start of the testing was on an uptrend and it recovered nicely. My concern is that these levels of DD would not be tolerated in a live account and I would be into margin calls by now. The broker is Axitrader Chris Attached Image (click to enlarge)
+
+--- 帖子 #778 ---
+Chris, You are giving out the true picture of what's happening, a rare commodity on FF... Thanks
+
+--- 帖子 #779 ---
+SAD DAY Bye bye to this EA I do want to say that this is not the fault of the EA, it did exactly what I told it to do. Chris Attached Image (click to enlarge)
+
+--- 帖子 #780 ---
+This is a good strategy indeed. Besides being ignored when trying to participate, I'm still making good money using it. https://www.forexfactory.com/attachm...1&amp;d=1586822675
+
+--- 帖子 #352 ---
+Hi, are you trading the system as per OP?
+
+--- 帖子 #353 ---
+Nope. Made two basic modifications: 1- Removed volume and volatility filter, since I didn't see any edge using it; 2- Use a simple MA (place it over %R - based on previous indicator) with half the period of the Williams %R, then when MA slope turns up/down, place a limit order at last trough/peak (last zigzag with same period of %R).
+
+--- 帖子 #354 ---
+Hi, when you say half the period of the Williams %R from the original 100 would now be 50 and the MA from 55 EMA to 55 SMA?
+
+--- 帖子 #355 ---
+Actually I mean that for any period you choose for WPR, use a simple MA over it with half its period (if WPR period is 100, so MA should be 50).
+
+--- 帖子 #356 ---
+Thank you for the clarification
+
+--- 帖子 #357 ---
+Please, somebody tell me the settings for volume-volatility indi.. the template didn't work for me.. Thanks
+
+--- 帖子 #358 ---
+Nice grown but DD high
+
+--- 帖子 #359 ---
+Pls I need help in how to set this signal on the metal 4 trading app
+
+--- 帖子 #360 ---
+Hello, thank you for your efforts Is it possible to send me the final ea?
+
+
+===== 附件下载链接 =====
+

@@ -1,0 +1,1337 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+I start this trading thread to share with fellow traders my trading system.See template_fx attached.Apply it to your chart, any time frame .I prefer one hour ++. Hope you enjoy and try it on Monday. All the indicators included from the internet published resources.The most reliable indicator is IINWMARROWS.mq4.It is the core of this system. It has 95% + successful rate.In another word, if you only trade this arrow. you could be able to make pips.....; Other indicators are used as reference.They are together make a complet system.After you used this system,hope you could share your experience here. And you could make suggestion of any adjustments to make this system promising and more perfect.Thanks! Looking forward to your opinions. Please download all the indicators in post 18 &amp; 19. lyllia
+
+--- 帖子 #2 ---
+Hi. Interesting. Would you mind sharing all of the indicators that produce this templete, i.e., IINWMARROWS.mq4 would be one. Thanks.
+
+--- 帖子 #3 ---
+I find this system is very good.And I perfer somebody could help make a EA from the indicator:IINWMARROWS.mq4,which I have used for a long time.Very reliable,95% successful rate.If somebody could make an EA for it then everybody will be benifit from it. The rules of the Ea are very simple: 1. As soon as the selling arrow appeared the sell position will be open,same for the buy position; 2.sell and buy position close each other. 3.If in one time frame there are several sell arrows(eg.several selling position opned),then the first buy arrow will close all the positions opened.Same for the buy position. 4.no stop loss. 5.no trailling stop.(leave all the positions to the arrow,or you could manually close the postion as you wish). 6.set time frame preference adjustable by the user.eg,user could decide which time frame chart to be used. For example I use daily and 4 hours time frame only. 7.original code of the indicator attached as following: //+------------------------------------------------------------------+ //| IINWMARROWS.mq4 | //| Based on EMA_CROSS.mq4 | //| Copyright ?2006, MetaQuotes Software Corp. | //| http://www.metaquotes.net | //| Last little modified by Iin Zulkarnain | //+------------------------------------------------------------------+ #property copyright "Copyright ?2006, MetaQuotes Software Corp." #property link " http://www.metaquotes.net " //---- #property indicator_chart_window #property indicator_buffers 2 #property indicator_color1 White #property indicator_color2 Red #property indicator_width1 2 #property indicator_width2 2 //---- double CrossUp[]; double CrossDown[]; extern int FasterMode=3; //0=sma, 1=ema, 2=smma, 3=lwma extern int FasterMA= 3; extern int SlowerMode=3; //0=sma, 1=ema, 2=smma, 3=lwma extern int SlowerMA= 3; //+------------------------------------------------------------------+ //| Custom indicator initialization function | //+------------------------------------------------------------------+ int init() { //---- indicators SetIndexStyle(0, DRAW_ARROW, EMPTY); SetIndexArrow(0, 233); SetIndexBuffer(0, CrossUp); SetIndexStyle(1, DRAW_ARROW, EMPTY); SetIndexArrow(1, 234); SetIndexBuffer(1, CrossDown); //---- return(0); } //+------------------------------------------------------------------+ //| Custom indicator deinitialization function | //+------------------------------------------------------------------+ int deinit() { //---- //---- return(0); } //+------------------------------------------------------------------+ //| Custom indicator iteration function | //+------------------------------------------------------------------+ int start() { int limit, i, counter; double fasterMAnow, slowerMAnow, fasterMAprevious, slowerMAprevious, fasterMAafter, slowerMAafter; double Range, AvgRange; int counted_bars=IndicatorCounted(); //---- check for possible errors if(counted_bars&lt;0) return(-1); //---- last counted bar will be recounted if(counted_bars&gt;0) counted_bars--; //---- limit=Bars-counted_bars; for(i=0; i&lt;=limit; i++) { counter=i; Range=0; AvgRange=0; for(counter=i ;counter&lt;=i+9;counter++) { AvgRange=AvgRange+MathAbs(High[counter]-Low[counter]); } Range=AvgRange/10; fasterMAnow=iMA(NULL, 0, FasterMA, 0, FasterMode, PRICE_CLOSE, i); fasterMAprevious=iMA(NULL, 0, FasterMA, 0, FasterMode, PRICE_CLOSE, i+1); fasterMAafter=iMA(NULL, 0, FasterMA, 0, FasterMode, PRICE_CLOSE, i-1); //---- slowerMAnow=iMA(NULL, 0, SlowerMA, 0, SlowerMode, PRICE_OPEN, i); slowerMAprevious=iMA(NULL, 0, SlowerMA, 0, SlowerMode, PRICE_OPEN, i+1); slowerMAafter=iMA(NULL, 0, SlowerMA, 0, SlowerMode, PRICE_OPEN, i-1); if ((fasterMAnow &gt; slowerMAnow) &amp;&amp; (fasterMAprevious &lt; slowerMAprevious) &amp;&amp; (fasterMAafter &gt; slowerMAafter)) { CrossUp[i]=Low[i] - Range*0.5; } else if ((fasterMAnow &lt; slowerMAnow) &amp;&amp; (fasterMAprevious &gt; slowerMAprevious) &amp;&amp; (fasterMAafter &lt; slowerMAafter)) { CrossDown[i]=High[i] + Range*0.5; } } return(0); } //+------------------------------------------------------------------+ Hope somebody here could help!After it has been compiled into Ea,pleae give me a notice:lyllia45@yhoo.com.au Tia. lyllia
+
+--- 帖子 #4 ---
+Don't bother, when you see the code you will see that it repaints.
+
+--- 帖子 #5 ---
+Hi lyllia, I'll take a look into the indicator. If I see it worked well in history, I'll code it for you; no sweat.
+
+--- 帖子 #6 ---
+LOL, you're right. When you hear someone say 95%, you think of the word repaint. Look at attached.
+
+--- 帖子 #7 ---
+Hi nice to meet you here.Are you a programmer?Can you help?Just make an EA for IINWMARROWS.mq4.That will be enough.Do not make it too complicated.The simple, the effective ,the better. If you apply the template to the chart then you will know all the indicators. I try to find them in my system and attached here later on.
+
+--- 帖子 #8 ---
+Yes, I'm a programmer. Are you aware that this indicator has a 95% chance that it repaints?
+
+--- 帖子 #9 ---
+Like I said the arrow will repraint several times in one time frame such as four hours.Which means if four buy arrows appear then four positions will be opened, and the first sell arrow would close them all.It is like a self- position menagement manager. I basically use it in 4hrs time frame.it is quite reliable.In shorter time frame.There are more failed rate when there is congestion area.Because sell and buy arrow close each other all the time.Make little pips or no pips (like stop/loss, not a big deal) but risk reward ratio is still very good once a good potion is opened .All the pips earned back.I prefer using this indicator to make an EA for One hr + .The most important thindg is it is very simple. I like to discuss any issues regarding this system.Thanks for your observation. lyllia
+
+--- 帖子 #10 ---
+Lyllia, I understand. I'll take a shot of coding on the EA. But it's pretty late here; I'm going to code it tomorrow if no one will while I'm sleeping. Post trades you made on demo or live account. That would be interesting as well!
+
+--- 帖子 #11 ---
+I also think the repaint is a good advantage of this indicator. Take 4 hrs's Euro as an example: from 1.2445 area you star to get 7 buy arrows and 6 sell arrows; The positions are all closed. No stop/loss. no failed position. The buy and sell arrows are not even because between 1.2758 and 1.3032 there are two buy arrow and one sell arrow.The sell arrow closed the two buy arrows. And then from 1.3757 to 1.3290 area, There are 6 sell arrows and only 4 buy arrows.which means the first buy arrow has to close the firt two sell arrows and the last sell arrow has not been closed due to no buy arrow appears.Which also mean the down trend maybe continue and we have to wait for it to come out on Monday. lyllia
+
+--- 帖子 #12 ---
+Take your time.If you could do it it will be very much appreciated. I will test it and post result here for further improvment. I also would like everybody share the fruit of the sytem.Because it is hard to get good sytem to trade.Many traders lost their money deserve to get them back if they got a good sytem. Have a good weekend!Looking forward to your EA. lyllia
+
+--- 帖子 #13 ---
+hi iyllia thanks for sharing your system which pairs do you use????
+
+--- 帖子 #14 ---
+please have a look at the chart Euro daily.
+
+--- 帖子 #15 ---
+Chart euro 4hrs
+
+--- 帖子 #16 ---
+euro 1 hr
+
+--- 帖子 #17 ---
+euro weekly
+
+--- 帖子 #18 ---
+All the indicators attached
+
+--- 帖子 #19 ---
+all the indicators continue
+
+--- 帖子 #20 ---
+Anybody who use this system pay attention to IINWMARROWS.mq4 indicator. I do not know the the author but I think we owe to him or her. it is the best reliable indicator I have come cross.Try it for yourself . And if you have a good system or indicator,please introduce them here. If you are a programmer,please help to make it an EA. Please make improvment of this system for non -commercial purpose.Because if a trader get a good system which could make money you do not have to sell the system for commercial purpose.Just help both losing trader and new trader to have a good start.We all know trading is not that easy and simple like those broker said. But if we could have a good &amp; simple trading system,that will make things a lot easier. lyllia
+
+--- 帖子 #21 ---
+Hi there. Please introduse all rules for trade this system , it will help make EA. On your chart You have more indi and I hope You use all of them for generate or confirm signal. Regards Peter
+
+--- 帖子 #22 ---
+Other indicators for visual reference only.Because they are not reliable.Once IINWMARROWS.mq4 come out it confirms all. Use them as reference only for manual trading purpose.Because they are very instructive. For an example,3 level zz moves with th price action until IINWMARROWS.mq4 come out to confirm the major top is in place. Fish yur4ik and IINWMARROWS.mq4 could confirm with each other.But that only for manual trading purpose.If you could work out the way to make both of them confirm each other in one EA it would be better. If it is too complicated just make it for IINWMARROWS.mq4.That will be enough.same apply to Heiken Ashi.A very good indicator. Gann hi-lo and silver trend signal can be used to confirm as well but only for visual manual trading purpose .Because they move with the PA which could make trader confusing. Also for day trader,pay attention to daily R2 and S2.That will be enough for trading. The reason I only suggest IINWMARROWS.mq4 because it is stable and reliable .Thanks for your help! lyllia
+
+--- 帖子 #23 ---
+aud weekly,daily,4hrs
+
+--- 帖子 #24 ---
+I run the indicator IINWMARROWS via the strategy tester [once the arrow is drawn it will stick there and will not be erase even if it redraw]. IMO, the 4H will work a whole lot better than 1H becoz I saw many arrows in 1H chart when in consolidation and too many arrows means kills a lot of profit [which is why u said lower TF doesnt work].
+
+--- 帖子 #25 ---
+3 level zz is in place but it might move with PA because IINWMARROWS.mq4 did not come out.Which might be indicate a new high next week. Then the 3 level zz will adjust itself to the new high. or we wait Monday the IINWMARROWS.mq4 come out to confirm it. 4hr is OK.4hr need a big Green 3 level zz with the confirmation of IINWMARROWS.mq4 to make a new low then goes higher. which principle apply all the time frame.
+
+--- 帖子 #26 ---
+You are right.Please refer to my previous post. As a trader we prefer larger time frame. GBP 4hr there is big green dot but IINWMARROWS.mq4 did not come out .so we have to wait it come out on Monday.
+
+--- 帖子 #27 ---
+4hr's new low is in place ,need new top being confirmed next week.
+
+--- 帖子 #28 ---
+lyllia , The indicators as shown on the attached graph could not be shown on my chart, So what do I do? Especially the buy/sell arrows. You can see the attached.
+
+--- 帖子 #29 ---
+4hr new low is in place, Daily new low is not in place.
+
+--- 帖子 #30 ---
+Opening the template from your first post, I got another picture - without all the indi's ! I can see only the pivots, HA's and the channel ? Is there any alert for the sell/buy arrows ?
+
+--- 帖子 #31 ---
+weekly new high ahead.daily and 4hrs new low need to be confirmed
+
+--- 帖子 #32 ---
+wow ... lyllia you are posting like a machine !!!
+
+--- 帖子 #33 ---
+Weekly and daily new high need to be confirmed.4hr new low need to be confirmed.
+
+--- 帖子 #34 ---
+Try this one. It open trade after bar on which indi generate signal close. Good luck Peter edit look post 62 for correct version
+
+--- 帖子 #35 ---
+You need download all indi for getting the same pic , because now it show only indi which You have in your mt4 folder Hope it help Peter
+
+--- 帖子 #36 ---
+with 4h ejpy chart from 1.22 area to 134.89 area we have 7 buy arrows and only two sell arrows.which means the first buy arrow has been closed by first sell arrow.And left 6 buy arrows have been closed by sell second arrow. Make your own observation. There are so many opportunities in fx trading .So only depends on manual trading is not enough.So an Ea is needed.
+
+--- 帖子 #37 ---
+Thanks for your help! I will try it and post result.
+
+--- 帖子 #38 ---
+i think what kills the arrow is strong reverse like EURUSD recent last 2 arrow. - 250 pips drop.
+
+--- 帖子 #39 ---
+I am not a programmer.Does this EA will close all the postions opened in one time frame? like the one in Ejpy 4 hr chart as per my last post befor this one. For an example I only want to use 4hr time frame . How could I adjust it in your EA.Tia
+
+--- 帖子 #40 ---
+I got this error trying to back test the EA.
+
+--- 帖子 #41 ---
+just attach the EA the the TF u want. If u need to trade on 4H TF, just attached the EA to the 4H TF. The EA will follow the TF on your chart. The EA also identify the trade using magic number.
+
+--- 帖子 #42 ---
+sorry , I make mistake in name indi , here is good look post 62 for correct version
+
+--- 帖子 #43 ---
+It is 4 hr euro chart.there are 6 sell arrows and 4 buy arrows. the first two sell arrows have been closed by first buy arrow; the first buy arrow has been closed by the third sell arrow; the third sell arrow has been closed by second buy arrow; the second buy arrow has been closed by fourth sell arrow; the fourth sell arrow has been closed by third buy arrow; the third buy arrow has been closed by fifth sell arrow; the fifth sell arrow has been closed by the fourth buy arrow; the fourth buy arrow has been closed bu the sixth sell arrow; the sixth sell arrow has not been closed yet; no failed trade. Have a good look yourself.
+
+--- 帖子 #44 ---
+got this error now "TestGenerator: unmatched data error (low value 1.2793 at 2009.03.11 20:00 is not reached from the least timeframe, low price 1.2803 mismatches) " "TestGenerator: unmatched data error (volume limit 3860 at 2009.03.12 04:00 exceeded)"
+
+--- 帖子 #45 ---
+each broker has different 4H candle so their value is different. Yours might have arrow but mine doesnt. Can u post a screen shot of the trades u saw ?
+
+--- 帖子 #46 ---
+I think it generate from indi , 12 of march is a day when was big move on all pair USD
+
+--- 帖子 #47 ---
+The worst trade in this group I think is the fifth sell arrow closed by fourth buy arrow.Maybe you could get 50 pips.
+
+--- 帖子 #48 ---
+2009.03.29 13:48:35 2009.02.04 16:30 lyliaEA: the comment parameter for OrderSend function must be a string Is sombody have this comment? Because I can't udersand it I make sendfunc like: nt=OrderSend(Symbol(),OP_SELL,lots,Bid,slip,0,0,mn,0,Red); where Symbol() return string value
+
+--- 帖子 #49 ---
+here it is
+
+--- 帖子 #50 ---
+Hi there lyllia, G'day mate! Wow.........At the rate at which you are posting charts......it is truly amazing. I have been following all that you have been posting and it is leaving me breathless. Keep up the good work. It is truly impressive. If the indicators do not repaint you have in your possession a great pip making machine. An Ace! What we need now is a good dependable EA. May the PIPS be with you. Trader7
+
+--- 帖子 #51 ---
+you have to make this EA workable.I will test it starting tommorrow.Thanks!
+
+--- 帖子 #52 ---
+May pips with all traders.Hope traders get good luck starting from today.Hope everybody contribute to a good reliable free EA.May God bless trader.
+
+--- 帖子 #53 ---
+BeginnerAlert.ex4 What does this actually do? On lower timeframe ie m1 m5 it gives a more consistant indication it would appear than arrows......... rgds Rob
+
+--- 帖子 #54 ---
+you have to download all the indicators I posted to your metetrader.then apply the template_fx.
+
+--- 帖子 #55 ---
+good go
+
+--- 帖子 #56 ---
+beginner alert is a kind of indicator like fractal.It is very helpful to predict the the potential R &amp; S. If you go through all the time frame of the chart and see the indicator there ,which means the trend might change and IINWMARROWS.mq4 often comes out where the begining alert is.
+
+--- 帖子 #57 ---
+Am a fan of bill williams theory but havge just come across your system and it loks like it works on a ranging market , or does it? i jus wanna know something about these arrows .At what stage do they appear beggining of a candlestick or at the close of it , coz in a live trading situation , that means a lot.Do they disappear once they appear or once they are there they will remain?
+
+--- 帖子 #58 ---
+Download all the indicators I posted to your platform
+
+--- 帖子 #59 ---
+I did it ! No more problems here - it works good now ! Thanks for sharing your system !!!
+
+--- 帖子 #60 ---
+No it works in all markets. you could apply the arrow to your chart and have a study on it. It is a very reliable and stable indicator.Once come out it will stay there .Seldom change the the place.So that's the main reason I recoomend it here. I have observed many arrow indicators.This one is the best like I said. I could not say it is a 100 % stable.But so far I only come cross once it moved the place, only a few pips away from where it originally appeared on 4hr's chart.Not a big deal.Like I said if there are two or more sell or buy arrows appeared the opsite arrow will close them all.
+
+--- 帖子 #61 ---
+on your chart, there is 5 sell arrows and three buy arrows. The first sell closed by first buy; The first buy closed by second sell; the second sell closed by second buy; the second buy closed by third sell; the third and fourth sell cloosed by third buy; the third buy closed by fifth sell; the fifth sell has not been closed, waiting to be closed on monday.
+
+--- 帖子 #62 ---
+I find bug , here is workable version
+
+--- 帖子 #63 ---
+Thanks again. post result tomorrow.
+
+--- 帖子 #64 ---
+How long u have been watching the arrow ? 1 month ?
+
+--- 帖子 #65 ---
+I don't understand this point. Can u give an example with opening and closing of positions. Thnx.
+
+--- 帖子 #66 ---
+have a look at the chart you posted in this thread.Then follow my account of your chart, you will see the point.
+
+--- 帖子 #67 ---
+first sell means first sell arrow.first buy means first buy arrow.
+
+--- 帖子 #68 ---
+as soon as an arrow appears the position is opened.
+
+--- 帖子 #69 ---
+Can u give example ? I am trying to understand how trade is open and close. Please give example, its hard to imagine when I dont understand. Thnx
+
+--- 帖子 #70 ---
+the arrow repaints so if anyone wanna show any chart should run it in strategy tester first so that the arrow will stay there. If u show a normal chart, it will only show after repaint. I can see a different of 2 or more addition of arrow compare to a normal 4H chart. I guess what lyllia shown us is not very accurate. After running the tester, I manual trade 2 weeks data and the result is very bad. Base on my understanding, current position will be close once there is opposite signal and I manual trade that way. The 2 weeks i choose is ranging market. The reason i dont choose trending market to manual back test is becoz anything goes when it's trending and right now market tend to range more than trend.
+
+--- 帖子 #71 ---
+take your chart as ab example: as soon as the first sell arrow appears the sell position is opened.When the first buy arrow appears the sell position has been closed, at the same time a buy position is opened. Do I make myself clear?
+
+--- 帖子 #72 ---
+ok let's wait the monday - since monday we can try this system in forward test ! This will be the only proof !
+
+--- 帖子 #73 ---
+U cannot test only 1 day unless u trade 1H TF which gives even worst results. If u gonna trade 4H TF, u need at least a month to tell. On 4H TF, 1 day only have 6 candle. U cannot tell anything with 6 candle. The arrow doesn't repaint 100%, so u have to wait for at least a month to tell how much it will repaint. I hope I'm wrong and the strategy tester is wrong becoz I wanna make money too. Let's see how it goes for the coming weeks.
+
+--- 帖子 #74 ---
+I hope tommorrow you test real 4hr chart and then you will see the result.What do you mean repaint? you mean sell arrow paint one after another? I do not think there will be problem with that.that only means more potions would be opened.Then they will be all closed by the oppsite signal .
+
+--- 帖子 #75 ---
+Two weekly arrow data all appear on real time chart.you can see it yourself.
+
+--- 帖子 #76 ---
+This is a normal chart u see [repainted]
+
+--- 帖子 #77 ---
+This is the chart after running the strategy tester [no repaint] Everything shown is 4H chart.
+
+--- 帖子 #78 ---
+Like i said before, the arrow doesnt repaint 100%, if u wanna show weekly chart, u got to see for at least a year of data. 1 month only have 4 candles...
+
+--- 帖子 #79 ---
+what chart you applied to ? euro?
+
+--- 帖子 #80 ---
+sorry i didnt mention. yeah u are right. EURUSD. The 1H chart it's even worst. The lower the TF, the more repaint occur becoz there is more candles. For those who doesnt believe it, Monday, use the indicator on 1 min chart and see for yourself how it repaint and how stable it is. I don't understand how u got 95% + successful rate. How long u have been trading this system and how many trades u have trigger so far ? Can u show us some trade statement ? Thnx
+
+--- 帖子 #81 ---
+did yiu see on your chart all the arrows closed each other? They do repaint but they could manage to close all the positions
+
+--- 帖子 #82 ---
+I did mentioned in my previous post I apply it to larger time frame : prefer one hr ++.You wil get good result on 4 hr ,daily chart. Why we have to bother small time frame if we could make money on big time frame and more safer?
+
+--- 帖子 #83 ---
+To say it has a 95% success rate is in my opinion very vague. What do you define as success? Does it hit target profit 95% of the times you have a SL 10 and TP 10 setting? Does it hit target profit 95% of the times you have SL 80 and TP 10 setting? And in addition to the money management, when (open bar, close bar, appearing of arrow) do you enter the trade to achieve this 95% success rate. Please clarify, thanks in advance.
+
+--- 帖子 #84 ---
+lyllia when it 'repaints', your arrows are changing positions and disappearing in live time. Do you understand this? thx, todd
+
+--- 帖子 #85 ---
+I observed this indicator for almost 5 months. It seldom repaint. I do not know why your guys test it, it repaint with such a high frequency? I hope you observ the indicator in real trading session ,then you test it in real time and get real test result. 95 % success rate refer to one hr ++ TF. I hope you could get result afteryou test it for one week.
+
+--- 帖子 #86 ---
+on larger time frame this method could close up to 95 % of the postions opened. For this method no stop/loss no trailing stop. Do I make myself clear?
+
+--- 帖子 #87 ---
+If I understand you correctly, the EA can close 95% of the trades on a larger time frame. I know that 99,9% of the EA's are capable of closing 100% of the trades no matter what timeframe it's being run on. Yes it sounds crazy but that's what I understand from your explaination.
+
+--- 帖子 #88 ---
+Guys , i will be testing this system tmorow first thing and see what happens , if it works it should at least work on an hr time frame , saying it only works on 4hr or daily or weekly is a bit dodgy for me , i wil se, i am lookin for a system that works when the market is ranging and this one works , i will use it , if it doesnt , i wil continue using bill williams chaos theory which has made me money so far.I~ guess its worth a try and if it doesnt , we shouldnt stop looking for systems that work in choppy markets like whats hapening these days .I will definitely give it a go , on an HR tiem farme though , Sorry lly but if it doesnt work on HR i dont see it working on 4hr .
+
+--- 帖子 #89 ---
+the only way to find out whereas indicator repaint or not is testing in 1min chart...i think this is a repaint indicator and dosen't make money.. i yllia repaint means changing position no repeat arrows.........
+
+--- 帖子 #90 ---
+I think if this system can work as prescribed throughout the threads, all of us will be rich.:-), yet, let's see what happens next week. Thanks for your hard work creating this system. I will have a try. Cheers
+
+--- 帖子 #91 ---
+Hi Lillya, I am a newbie. I just would like to clarify. Is this system an autoamtically-generated buy/sell order? Or Do we have to do it manually? I am not so clear when U said for example that once the first Buy arrow appears and the next sell arrow comes up will close the previous (first) buy order and so on. Please clarify it...! Of course, I will test it in a demo account first before going live. Thanks for your great work. Prea
+
+--- 帖子 #92 ---
+I see that someone made an EA while I was sleeping! No worries.
+
+--- 帖子 #93 ---
+U R a big programmer
+
+--- 帖子 #94 ---
+i really hope what u claim is true. If u have been trading for 5 months, i am u have some trade statement to proof u have 95% success rate ?
+
+--- 帖子 #95 ---
+not sure i'm getting the sense of laughter.
+
+--- 帖子 #96 ---
+Did anyone get luck in backtesting?
+
+--- 帖子 #97 ---
+Hi there lyllia, I have been keeping a detailed record of the indicators used by you in your charts for the last 1 hour on the GBPJPY M1 chart where price moves like a wild horse. I have good news and some bad news. Let us first get the bad news out of the way. The ABHA Center Timing Signal repaints big time. A Green bar appeared at 00:45 (GMT) and then disappeared at 00:47. Another appeared at 00:47 and then disappeared at 00:52. The same thing happened to the Red bar at 01:07 when it disappeared at 01:10. This repainting makes the indicator unreliable for trading purposes in real time. Imagine trying to score a goal with moving goalposts! Even if you bend it like Beckham! The Shi Channel repaints as it keeps adjusting to the price range. To be dynamic this is part of its feature. Now for the good news lyllia. I have kept a detailed record of the arrows as soon as they appeared. I am happy to report that once the Big Blue and White arrows appeared they did not disappear. So there is no problem of repainting when trading in real time. The Big Blue and White arrows appear at the close of the bar. The Small Blue and Red arrows appear after the open of the bar. So during the course of the bar the arrows can disappear as price changes. But once the bar closes the arrows do not disappear. For trading purposes the arrows are reliable. Keep up the good work and success will be yours. Trader7
+
+--- 帖子 #98 ---
+Thanks!This is what I said in my previous begining post the arrow are more reliable than other indicators which are included into this system for instructive purpose.
+
+--- 帖子 #99 ---
+Hi Peter,How are you I report bad news first about EA Trading: 4hr ACHF sell arrow appeared at 0.789 but sell position opened at 0.7829; 4hr EJPY sell arrow appeared at 129.94 but position opened at 128.5; 4hr CHFJPY there is no sell or buy singal (arrow) with my normal trading account in asian session.But there are buy and sell signals with demo trading account. buy position opened but sell position not opened. so the buy position could not be closed. so far 100 pips down. 4hr NJPY there is no buy signal in asian time but a buy position has been opened.There is a sell signal in asian time but no sell position opened. so far so far 110 pips down. There are buy signals on 4hr AUD,Euro ,GBP Chart buy position opened but sell position did not close them .no sell positions opened. Good news: 1hr GJPY 200 pips so far, ECAD 50pips, nzd55pips, CADCHF50 pips. EjPY25pips ACHF6 pips.ANZD-6 pips;ACAD-50 pips portfolio balance:$ 34.61 so far
+
+--- 帖子 #100 ---
+@trader7: quite interesting to read that ! So does that even mean - the arrows can be used for smaller TF's ? May be not for 1M - but 5M or 15M ? Or what can you say about the results of your attempts ? The EA isn't optimal so far ?
+
+--- 帖子 #101 ---
+Hey guys i have just backtested lyliaEA Posted on post no 62. Results are no so promising. date of backtesting is from 1-1-2007 to 30-3-1009.just have a look. May be some modification is required in EA.
+
+--- 帖子 #102 ---
+could you find reason why position opened so far from the time an arrow appears? could you make it open the position as soon as possible?It is critical. I leave all the positions to be closed by themselves.Then we can get real result.Because this method based on selfullfilled theory. If they could not make money then we have to throw it away. I am considering to put stop/loss rules into the EA: 1)as soon as the position enter into the positive area the stop/loss will be equal to entry 2)trailing stop will be 10 step forward. Could you do it? Thanks!
+
+--- 帖子 #103 ---
+Anybody made pips using the arrow? please tell us here: What time frame do you think trading it the best? how do you manage the stop/loss and increase risk/ reward rotios?
+
+--- 帖子 #104 ---
+Today the Potential S &amp; R for the pairs: AUSD 0.7134-0.6778 NZD 0.5856-0.5578 EURO 1.3687-1.2992 GBP 1.4676-1.4018 JPY 100.35-95.9 CHF 1.1565-1.1247 CAD 1.2589-1.2187
+
+--- 帖子 #105 ---
+Hi Mate, why you laugh? Could you help to what happened to the EA trading since you are a programmer as well? Please read what I post about EA trading.You peomised to help yesterday.tia
+
+--- 帖子 #106 ---
+hi you have a strange name. I am not a programmar. I just have an idea about a system EA and let people help to make it. People really help here and hope we could further improve it.
+
+--- 帖子 #107 ---
+i think u ask the question too early. IMO, 4H would work better. SL is a must. Like i said before, strong reverse kills you. If any sudden news came out and went 400 pips reverse [quite possible nowadays], it's gonna get ugly. I think a reasonable SL for EURUSD could be 100 pips SL.
+
+--- 帖子 #108 ---
+Since we just start to make it work.I hope people who using the arrow for trading please give us your insight about how to improve it. Thanks!
+
+--- 帖子 #109 ---
+To Lyllia, Your system looks okay but the issue of working with 4H TF is not encouraging at all. I have been using the EA all night and discovered that the EA is actually working according to your description. But my experience in FX taught me that any system that descriminates against TFs is not a good system. A good system should work with any time frame. I started using Peter Crowns DIBS awhile ago and I found out that the Daily Inside Bar is 90% accurate. Please can you modify this system more so that it can trade on all TFs Victus
+
+--- 帖子 #110 ---
+Thanks! I will have a look at it.
+
+--- 帖子 #111 ---
+Hi there. I can't ansver your question , because I do not know which broker You use . Give me information about your broker and correctly pair and time (brokers time) when indi give signal and EA did not open trade or opened with another price , in this case I can make some analize . I do not know , I will have time to make some change in EA before weekend . But You can wright clear rule which You want have in EA and somebody add it to EA , or I will do it if find time. My sugestion - think about filtering bad signal , IINWMARROWS based on crossing two LWMA and I think it not enaph for clear signal. And second thing - 10 pips trailing on 1H or 4H is too tight as for me , especialy with current market. Regards Peter
+
+--- 帖子 #112 ---
+Hi Peter, EA works well on Most positions: ECAD 180 pips so far. The position opened as soon as the arrow appeared; Acad 10 pips.It did not get good luck.The arrow seems positioned itself at 12.30pm but it might appear 2 hrs later because the arrow signal requires the breakout of the previous bar to appear ,plus the spread too wide, the position opened at 16.00pm.so it opened the position 100 pip above.I manually closed it for risk/reward reason.This also might be the reason why some positions are opened too late. CADCHF good 100 pips ; GCHF 20 pips;GBP 40 pips so far. .
+
+--- 帖子 #113 ---
+Anyway - it seems the EA is so far suboptimal ?
+
+--- 帖子 #114 ---
+I feel you just standing there watching cool.Why do not make some positive suggestion or do something?Are you trading for a long time?Share your good skills with us,please.tia
+
+--- 帖子 #115 ---
+What time frame are you using?
+
+--- 帖子 #116 ---
+I prefer 4 hr TF it gives good pips and less stress once the PA in good direction. But for the arrow sometime if PA move too quick,it will be a long candle then it takes time to have next candle to breakout the previous one.When you get signal the price already go up or down a lot.because it is a trending still could manage to make pips, but makes you nervous. If PA basing steady then you will get good entry point.that's a perfect situation to open a position.
+
+--- 帖子 #117 ---
+Hi Peter, I find reason why some position could not be opened or closed:because when I open the metatrder I forget to enable the EA .So some positions opened could not be closed and new position could not be opened.It is my mistake.
+
+--- 帖子 #118 ---
+and for testing purpose I shouldn't close down the the platform.
+
+--- 帖子 #119 ---
+Hi Peter, Are you sure is LWMA? I think is FastEMA. I do notice that sometimes if PA moves quickly that will generate a big candle and an arrow always appears when next candle breakout the previous one.That will give a high level entry signal and make me nervous. about filter I have thought about it before but give it up. I think if the arrow is reliable it is better focus on arrow trading with a good risk management .That will be enough.Since the arrow is reliable, do you think it is necessary to put s/l at entry? You are very helpful.Thanks!
+
+--- 帖子 #120 ---
+What I mean is if closed the position at entry,should trend continue,then we just lost the opportunuty.Because the arrow only open the position once.
+
+--- 帖子 #121 ---
+Peter, Remember if there is a news and there is big Price movement.The arrow will quickly cancel each other's position and open a new position.Am I right?
+
+--- 帖子 #122 ---
+i test this method on 16 pairs,,,, NEVER USE THIS METHOD FOR LOWER 4H WHILE THIS IS VERY PROFITABLE FOR H4 AND HIGHER......
+
+--- 帖子 #123 ---
+Thanks $Aly, how many pips have you made so far? Could you share? This is a no brain trade isn't it?
+
+--- 帖子 #124 ---
+Aud 0.7064-0.6592 Nzd 0.5812-0.5450 Cad 1.2784-1.2344 Jpy 99.77-94.96 Euro 1.3581-1.2842 Gbp 1.4671-1.3841 Chf 1.1618-1.1354
+
+--- 帖子 #125 ---
+Anybody who test this method please share your opinions here and make some recommendation to improve it. For an example, for some congestion area there is high frequency of arrows come out .On higher TF 4hr + .They could manage themselves to close each other and make profit.But for lower TF &gt;1hr,there will be a lot of wishawp signals.that will ruin the profit. Especially those people who have good trading &amp; EA experience please give your advice and help to improve this profitable method.
+
+--- 帖子 #126 ---
+I thank the author of the IINWMARROWS on behalf of all the users who are using this method ; Also thank Pitpiter for his selfless and timely help to make EA for this indicator.
+
+--- 帖子 #127 ---
+To be profitable, good EA is not enough, good (manual) trading skill is required to run that good EA.
+
+--- 帖子 #128 ---
+Sorry spelling mistake:selfishless and timiningly help? My English is still not very good.
+
+--- 帖子 #129 ---
+Saly why can i use it on 4h but not on 1h is there a speciel sort of arrows i shall follow ?? what did you have as a stopploss and target ? best regards
+
+--- 帖子 #130 ---
+Lyllia..!! I put all the indicators and EA and Template that you posted in this thread into my Trading Platform but it did not execute the trades automatically. What is the problem. What trading platform (broker) is yours? Could you please show and post the result of your trading here so that we may see visually how the sytem work? Thanks much. Prea
+
+--- 帖子 #131 ---
+Yes,you are right. But it is not easy to master the good maual trading skills. No matter for experienced trader or beginners. If we could find a short cut to make money and at the same time to learn the skill isn't it a good way to have a better life?
+
+--- 帖子 #132 ---
+Lyllia.. Please respond to my question at post #130. Really appreciate for your hard work and good system. Cheers Prea
+
+--- 帖子 #133 ---
+Are there any people come out to help those people who lost their money? Those people lost their money are crownded gambler? They are innocent aren't they?Do you know in this world there are many people call themselve street smart and screw those innecent people to lose money.
+
+--- 帖子 #134 ---
+I know fx trading could never be easy.Same apply to those so called analysts,advisors etc.
+
+--- 帖子 #135 ---
+I couldn't understand your peoblem.It shouldn't happen if you download all the indicators to your trading platform properly,regardless which broker you use. Follow the following steps; 1.download all the indicators into your indicator file &amp; template into your template file: 2.attach template to your chart; 3.download EA to your expert file and attach it to your chart. When you attach it to your chart ,do not forget to tick the box allow Expert Adviser,and other boxes (anybody could help here give the name of other boxes and tick them all,my platform version is Chinese) 4.click the icon Expert Adviser on your platform to enable EA function. Then EA should work on your trading platform
+
+--- 帖子 #136 ---
+1-as i see hours and hours ,,, when up trend or down trend break and one candle form in opposite way and then it closes now arrows show ...it seems in 1H and lower arrows sometimes (20%) appear on entry point of previous arrow 2-my entry points are after break the blue line (in buy position above the blue line and in sell position below the blue line) and i set my SL (below the blue line in buy and above the blue line in sell positions) 3-i close my position when Fisher_Yur4ik chenge color (red to white or white to red) or before it change when it is going to change
+
+--- 帖子 #137 ---
+I perfer this method for 4hr+ TF and it is safe. Are there anybody here would like to do a test and then report it here: Attach the arrow to your chart: 4hr,daily,nad weekly for all the pairs you could get access to. 1.Find out how many false signal could you find? eg, are there any open positions that could not be closed by the counter arrow. 2.If you find any , please specify the symbol,TF,Time. 3.make a suggestion how to handl such a peoblem.eg how could you manange the risk?
+
+--- 帖子 #138 ---
+it seems great lyllia i took over 300pips from GJ from last night... thanks a lot saly
+
+--- 帖子 #139 ---
+could you please attch your chart here?
+
+--- 帖子 #140 ---
+you did? so do I.
+
+--- 帖子 #141 ---
+it's a no brain trade ,isn't it?
+
+--- 帖子 #142 ---
+I attached all Indicators into: C rogram FilesSIGTraderexpertsindicators , and I attached the Lyllia EA into C rogram FilesSIGTraderexperts , I attached Template FX into C rogram FilesSIGTraderexpertstemplates . However, the EA system has not execute any trade automatically. I also Turn on the Menu “ Expert Advisor” into Green Tick to enable the EA to work. Bt still, it did not work. Could you and anybody else direct me how to do it properly to enable the EA work automatically? Really Appreaciate for your kind help. Cheers, Prea
+
+--- 帖子 #143 ---
+When I test EA I made mistake: I did not let platform continually running. I shut them down. Then when I restart it I did not tick the icon enable EA.And I am wondering why the position could not be closed.That's how I get some good pips.But for test purpose it is not good.Because I want to know how many positions could not be closed in real time. if I exam the chart by eyes I see none.But there is no perfect system in this world .There must be something faulty for any system: For an example, this method when there is congestion area in lower TF &gt;1hr there will be many arrows come out to closed each other frequently.That's something I do not like.So I avoid it.If anybody could solve that problem make it also tradable for lower time frame.it is vey helpful.
+
+--- 帖子 #144 ---
+my entry and exit point
+
+--- 帖子 #145 ---
+[/size][/font] When attach EA to your chart,there will be a dialoge box come out.You have tick all the box to make EA functional.and then click icon on your platform again to make it work. if you see on the right uphand corner of your platform there is smiling face which mean you attach it properly.otherwise No.
+
+--- 帖子 #146 ---
+Lyllia..! Could You please spell it out step by step on how to attach and enable the EA to Work? I am a newbie and just do not know much on the trading platform. Please advise it... I do not know where the smiling face coming up on the right of my uphand. Please show by illustrating it to me in picture. Really appreciate for your kind help and cheers. - PREA
+
+--- 帖子 #147 ---
+Tonight we could make good pips .
+
+--- 帖子 #148 ---
+please see my post 135
+
+--- 帖子 #149 ---
+The most important thing in this system remember is to have your faith in this system: Once the arrow come out in 4hr chart ,play your trade.Like last night all the pairs turn around.According to my experiences,it is very rare that does not work.
+
+--- 帖子 #150 ---
+Dear Lyllia.. I have done it as you told above. But I do not understand when you said OTHER BOXES TO BE TICKED. What I have Ticked was Expert Advisor Box only. Please clarify it. Thanks
+
+--- 帖子 #151 ---
+Why do you mind to shrare the result here by posting the chart and so on? Could you please post it...? We will learn quickly the through visualization Thanks Prea
+
+--- 帖子 #152 ---
+Follow thisi step: 1.attach EA to your chart; 2. a dialogue box pops out ,go to the parameter section and tick all the boxes.then close it. 3.then click your platform:enable EA trading fuction. 4.you will see there is a smiling face on the right uphand of your platform.
+
+--- 帖子 #153 ---
+this one might be more clearer
+
+--- 帖子 #154 ---
+Lyllia, When I insert the EA by clicking at Menu 'Indicator - Custom', No pop-up box coming up. FYI, I saved and copied the EA in the Expert/Indicator Folder already. Am I doing right? If I am wrong, how should I pick up the EA from the Expert Indicator folder? Cheers and Thanks
+
+--- 帖子 #155 ---
+Lyllia,,, I know now how to attach it. I should go to NAVIGATOR. Now smiling face is appearing. Thanks:-) Lyllia,, If I want to stop tarding, how and what should I do then? Do I have to turn off the EA or turn off the Platform trading..? Cheers Prea
+
+--- 帖子 #156 ---
+just disable the EA function on your platform
+
+--- 帖子 #157 ---
+Lyllia,, As I have set up the trading platform with all the lyllia template and activation of EA on 4H Time Frame, Do I just leave it to the EA to execute the trade automatically or Do I have to firstly initiate a trade from each pair? Please Advise. Thanks much, and have a nice pips. Thanks Prea
+
+--- 帖子 #158 ---
+Resistance 0.7064 for today
+
+--- 帖子 #159 ---
+1.4671-1.3841
+
+--- 帖子 #160 ---
+1.3581-1.2842
+
+--- 帖子 #161 ---
+1.1618-1.1354
+
+--- 帖子 #162 ---
+99.77-94.96
+
+--- 帖子 #163 ---
+1.2784-1.2344
+
+--- 帖子 #164 ---
+Hi Prea, This EA is still in testing stage. You could run it with demo account if there is any position opened by EA, you could give it a second thought to open an live account position manually.If after trial of the EA,you are 100 % sure you have a faith in it,then you could run it with your living account. Please truthfully share your experience with the EA. You could apply it with only one chart and save it as a template.Then you could apply the template to any chart.
+
+--- 帖子 #165 ---
+1.save indicator to indicator file; 2.save EA into expert file; 3.save template into template file.
+
+--- 帖子 #166 ---
+Remember market is continuing, for testing purpose you have to leave your platform open during trading weekdays. you can apply EA to each chart seperately or just make an template including EA. Then apply this template to any chart.After you set up everything,click Enable EA icon on your trading platform.
+
+--- 帖子 #167 ---
+you could disable EA by clicking the EA icon .If you want to put it back you could enable it by clicking it again.
+
+--- 帖子 #168 ---
+When enable EA with 4hr chart Please do not switch that same chart to another TF.Because different TF has different arrow,that will ruin the trade opened with 4hr chart.
+
+--- 帖子 #169 ---
+Hi Lyllia A great system that you have there. I was wondering how the abha center timing works. Care to explain further? Thanks
+
+--- 帖子 #170 ---
+It is a cycle identifier:Red signals top might in place,green signals bottom might in place.The indicator is medium reliable.It might repaint.
+
+--- 帖子 #171 ---
+Any one hitting the 95% hit rate or how is it going ? best regards
+
+--- 帖子 #172 ---
+calcute 95% needs at least 10 trades ...we have to wait jgadefelth and see what happened....
+
+--- 帖子 #173 ---
+Hi Peter, on EURO 4hr chart, There is sell arrow on top of the candle with a 100 pips 1.3338-1.3227.The sell postion opened at the end of the candle 1.3227.Then price go up to 133.Eurusd only has 2pips spread.Why the postion opened at the end of the candle?It will completly destroy this method.could you find reason?
+
+--- 帖子 #174 ---
+hi lilya, just curious with those circle (balls ) with numbers indicator, care to share what indi izit? can i have them please. Drac.
+
+--- 帖子 #175 ---
+Could you help to find out what time the arrow appeared on euro 4hr chart?Are there any way to find out?tia
+
+--- 帖子 #176 ---
+go to the start of this thread you will have them all
+
+--- 帖子 #177 ---
+on mine, A sell opened at 16:00 at beginning of a candle, and then a buy opened up, at the 20:00 candle, not closing the sell order. Perfect hedge at the moment, down $15 each.
+
+--- 帖子 #178 ---
+Hi again , I ask You about Your broker . Without that I can't do any analize or just post pic with situation about You asking. I program EA for open pos only with first tic for new bar. I will run EA today and share results tommorow. I'm sure about LWMA , just see code and You will sure too. And information for everybody : for working EA You need put EA file in expert folder , put indi IINWMARROWS to indikators folder , restart your platform , apply EA to chart , make it enable trade automaticaly . If You apply EA for couple pair the better way set every another magic number. I do not think the stoploss will be good for this system , but it just my opinion. Thats it. Regards Peter
+
+--- 帖子 #179 ---
+the arrow appeared when one candle form in opposite of prier candle and break low of prier candle in sell position or high in buy position
+
+--- 帖子 #180 ---
+anyvody get good pips with all nzd pairs?
+
+--- 帖子 #181 ---
+look at this
+
+--- 帖子 #182 ---
+lyllia do U want to enter before arrows appeared????
+
+--- 帖子 #183 ---
+nzdusd 90pips,enzd 250 pips,anzd230 pips.
+
+--- 帖子 #184 ---
+Let's see if the signal is valid
+
+--- 帖子 #185 ---
+NZDUSD H&amp;S formation?
+
+--- 帖子 #186 ---
+Normally 4hr chart trend will last for a while. I have support for NZD for this week around 0.54 or lower area
+
+--- 帖子 #187 ---
+it is impossible.But it makes me nervious when it opened position 100 below the high. how do you think the NZD pairs today? Do we have to take profit manually or wait for the 4 hrs chart opposit signal come out to close them itself? What if the close position will be another 100 pips higher over the low ?That will eat all the pips.But if the trend will last, we could get more pips ahead.what's ous chioce?
+
+--- 帖子 #188 ---
+Enzd come down more than 100 pips from the high if we leave the position to the arrow to close it ,it might have a counter signal that opens the position 100 pips lower than the high.We have to be aware of this.
+
+--- 帖子 #189 ---
+I have two buy signals at JPY and CHFJPY 4hr chart.Again they opened almost 200 pips higher than where the arrow is.Worry me.Can we survive?
+
+--- 帖子 #190 ---
+We have to study on the arrow appearing time on 4hr.It is critical.Before I did not notice arrow will only appear after breakout.If you see the first wave on floowing chart the arrow do not have to break out the previous one to generate signal.Anybody could give logic explanation?
+
+--- 帖子 #191 ---
+I just read somebody's comments on NZD:Kiwi posting a nice H&amp;S on the 4hr. Gotta go to bed now will catch the neckline test tomorrow.--Big Rider
+
+--- 帖子 #192 ---
+hmm .. may be RR (Ronald Raygun - EA programmer) and Swingman could help ? You find them in the AshFX II thread - they are great programmers ! The AshFx system is also a long term (4H + daily) one and a little bit similar. I think a dashboard (swingmans great idea !) would be very good for watching possible signals generated by your system. The dashboard is summerazing all generated signals for all pairs in one table at the given moment. So you can see at any moment what pairs are worth for trading.
+
+--- 帖子 #193 ---
+Good luck!pips are with you!
+
+--- 帖子 #194 ---
+thanks!
+
+--- 帖子 #195 ---
+I never said I promised. I said that if nobody would have made an EA while I was taking a break, I would have made it. So there are errors in the EA that someone made? Write a PM if so.
+
+--- 帖子 #196 ---
+'I would have made it' is a promise' Do not play your words. You are funny ,aren't you? I do not think it is an error.Maybe it is how it works. But I prefer as soon an arrow appears the position will be opened.The problem is I do not know when the arrow will appear.It seems they appear at the end of the candle bar.It is worry.How to improve it? make it working perfect. I do not have that experience that arrow only appears after it breaks the previous bar.But this time looks like it.4hr Euro opened 100 pips lower than the high.But later proves to be a valid signal 100 pips.GBP too opened position 100 pips lower.Still in negtive area. There are also some inside bar signals like first wave in 4hr JPY chart.they are perfect. they gice instant signals and position. Would you please have a look and help since you are also a good programmer. I saw you post here and there wondering around ,why should you spend sometime help us?tia
+
+--- 帖子 #197 ---
+all positions are in profit except GBP.
+
+--- 帖子 #198 ---
+This system is good because it is able to catch up the trend from the very begining.So I do not want to give up. Help please everybody ,give your hand here.
+
+--- 帖子 #199 ---
+see the arrow appear long time but not position opened
+
+--- 帖子 #200 ---
+I take off the EA because in case a position opened it is too low.
+
+--- 帖子 #201 ---
+Hi lillya, i was reading your started thread from the beginning. I would like to trade on the 4 hr. TF. Did you mention the arrows only appear, if the next candle breaks the price? So sometimes the entry would be far away, especially in volatile pairs or times? I also want the EA only to show entry and exit signals so in can trade them manually. I also was wondering what means "3 level zz" to what exactly does it refer? thanks for the good work done so far. piptiger
+
+--- 帖子 #202 ---
+Hi Peter, Thank you for this EA. It seems working well. except after the arrow appeared for a long time the position could not be opened. Take a look at the chart of EJPY my post befor this one. when I saw arrow appears and stay there for a long time and no position opened so I took off the EA. Because I am afraid if a position opened it might too low.But in fact the later the price did come down. Same happened to 4hr Euro and GBP chart. It opened the position 100 pips lower than the high.But euro signal is still valid into profit,GBP now 10 pips negtive. Could you please have a look at the original arrow code I post.They are fast EMA3 and have their rules to make arrow appear.Could you include them into EA start function.Do you think it might help to solve the problem? Before I am doing manual trading,there is no delayed arrow signal.If this problem could be solved that will be perfect.Tia
+
+--- 帖子 #203 ---
+3 level zz is not reliable,it repaint all the time with pA.I put there for count wave purpose.
+
+--- 帖子 #204 ---
+Peter, when I do manual trading as soon as the arrow appears I open the position .Because it is so reliable.I am not hesitating to take action.I know breakout is a good trading principle.But for me it is too late. I am not used to it.If you see the original code of the arrow I m sure you will understand how it works.I know you give a good reliable entry and exist points.If you could combined the two good points together .that will help to make it perfect.
+
+--- 帖子 #205 ---
+lillya, thanks for explanation of "3 level zz". But could you also let me know what i asked: does the arrow only appear, if the price of the next bar is lower/higher as the forgoing bar? like i mentioned i am looking for a system/method for higher TF. best 4hr. It would be also an great help for fellow traders, if there would be an short manual who explains, how the indis itself and the whole system works. What is your preferred pair to trade with? thanks for your dedication to this thread piptiger
+
+--- 帖子 #206 ---
+illya, BTW, i am NOT PITPITER, but my membername is also very close and could be confused. greetings PIPTIGER
+
+--- 帖子 #207 ---
+Hi Peter, Is it not too late to generate singnal after the bar close? This happened to some pairs yesterday. Euro ,GBP,both give the signal after the previous bar close .that's 100 pips under the high.It is too late. If you look at the original code : FASTEMA3,they are very efficient.as soon as the rule has been met the arrow appears. no delayed signal.Could you strickly follow that rule .Or it also might be helpful to include the original code into the EA,which might help to solve this problem? tia,hope you make soem adjustment according to th eoriginal code please.
+
+--- 帖子 #208 ---
+No I did not mention that. I prefer as soon as the arrow comes out the position could be opened. I just observe that the position is too far away from the time an arrow appeared.
+
+--- 帖子 #209 ---
+you guys gottobe kidding - what a waste of time an affords - your ma3 open/close cross repaints, solar wind (your fisher y4rik) - repaints as trooper - and you don't even know this... any EA under this circumstances would be complete waste - there is no reliable becktest - no point p.s. any another ind. would perform same or even better - and w/o lying
+
+--- 帖子 #210 ---
+Hi mate, Please be polite. if you read carefully from the begining you will know this system is only about the arrow.Other indicators are for reference.they are helpful even they are faulty. I do not know why you have to swere ,could you make some positive suggestion? Be happy ,it is good for you!
+
+--- 帖子 #211 ---
+Hi lyllia IINWMARROWS is no more than two 3-period LMA indicators(fast with PRICE_CLOSE, slow with PRICE_OPEN), it does repaint, sometimes frequently. Please have a look at the following two GJ 4H charts: The first one is a normal history chart, the second one comes from MT4 Tester. That is: you will meet 2 more up arrows on chart-2 when trading live, how do you handle it? Cheers, Simon
+
+--- 帖子 #212 ---
+Somebody told me repaint means they are not stable ,move or disappear. I could confirm that they are stable,once they come out ,they remain. If there are more than one arrow appear in one time frame,in EA trading which means sevral positions opened,then the first opposite singal close them all.
+
+--- 帖子 #213 ---
+Hi there. I have observe EA and indi on 5M TF. When bar 1 close arrow was apply on place when now I apply 1 , and latter it lose . As for me it looking that if we have aroow up and get arrow down and on next bar get arrow up again , it canceled arrow down , applied one bar before and in that case we have on chart second up arrow . As I see arrow always apply when bar close . Lyllia , You shoud observe indi and will say your opinie about thing , what I'm talk. Regards Peter
+
+--- 帖子 #214 ---
+Originally Posted by fxxx http://www.forexfactory.com/images/buttons/viewpost.gif you guys gottobe kidding - what a waste of time an affords - your ma3 open/close cross repaints, solar wind (your fisher y4rik) - repaints as trooper - and you don't even know this... any EA under this circumstances would be complete waste - there is no reliable becktest - no point p.s. any another ind. would perform same or even better - and w/o lying [/quote] i was polite - i sayed you indicators are lying, and you didn't even knew about it (it's tells how good you know your system - positive part) p.s.your "arrow" - lwma 3 (open/close cross) ? (on such short per.(3) - can be any Ma) - ma cross alone basically would kill any system on chopy/flat market cheers, mate
+
+--- 帖子 #215 ---
+Hey, lyllia has 95% success rate.
+
+--- 帖子 #216 ---
+Ok I have another look.Try to find repaints.I have used it for a while,only come cross once.It moved a bit but not far from the original place ,maybe 4 or 5 pips away. It is very rare.I insist that it is reliable,usable for trading better than other arrow indicators.this is how I value this indicator.Nothing is perfect in this world.We should allow faulty in anything.For this indicator I have a high opinion of it. The following are the MA that form the indicator:not only LWMA,They are working together make this indicator efficient and reliable. FasterMode=3; //0=sma, 1=ema, 2=smma, 3=lwma FasterMA= 3; SlowerMode=3; //0=sma, 1=ema, 2=smma, 3=lwma SlowerMA= 3; if ((fasterMAnow &gt; slowerMAnow) &amp;&amp; (fasterMAprevious &lt; slowerMAprevious) &amp;&amp; (fasterMAafter &gt; slowerMAafter)) { CrossUp[i]=Low[i] - Range*0.5; } else if ((fasterMAnow &lt; slowerMAnow) &amp;&amp; (fasterMAprevious &gt; slowerMAprevious) &amp;&amp; (fasterMAafter &lt; slowerMAafter)) { CrossDown[i]=High[i] + Range*0.5; (additional filter here) This fuction works very efficient.As soon as the arrow comes out it stay.I give it 95% successful rate. Especially for High TF. If EA could includes the above function into its programming structure.that will be very promising.The only concern after I using the EA is the position opened sometimes too late after the arrow appears. If your guys could do something positive,that will be terrific.Do not kill this system even though it has faulty side .try to solve te problem.I think that's the way to make a perfect system. How do you think.Are there any way we could improve it?
+
+--- 帖子 #217 ---
+Saly how are youdoing with this system ?? Lylia are you still thinking 95% hit rate or was that little to mutch ? im not getting you buy signal and sell signals ? best regards
+
+--- 帖子 #218 ---
+good news tonight: R &amp; S: JPY 100.11-97.34 GBP 1.4636-1.4216 AUD 0.7084-0.6849 EUR 1.3437-1.3058 CHF 1.1590-1.1307 NZD 0.5776-0.5539 CAD1.2482-1.2448 manage your own risk.
+
+--- 帖子 #219 ---
+Hi Peter, I watched whole day and try to find repaint arrow,the result is none. When you give me this EA, you mentioned the signal generated at the close of the bar.I did not pay attention to what you say then.Today I understand what does it mean. Obviously this is not good for trading purpose.and the today 4hr CHF chart sell arrow comes out 1.1449 but the sell position opened after the next candle break out the low of the previous candle at 1.1338.also that's 3.5 hrs later opened this position.And the today's projected maximum low is 1.1309.So As a programmer you could see something wrong with this EA or it is not optimal. I have to tell everybody using this EA please make it optimal or do not use it.It will riun the profit. There is somebody here in this thread mentioned sometimes the entry and exit point is a bit far.I do not agree.Since we have already got a good indicator why shouldn't we have a good EA. This reminds me of some year's ago there is one person who talked to me online: people looking for fine things in life , that's an empty dream.This person played my best friend when he was talking to me as a role of an Expert Adviser. But behind me he also manupulated my situation to destroy me. His best skill is using different prople's name to do different things and nobody believe that's all done by one person.And he thought he played a smart role in life and dare not admit it.He said ' it is not me'.And He talked big and loud about integrity. This person did somethig good for me,I thought I want to know the other side of this person , I did a test . The person showed his teeth.Actually this person know me long time ago before contacting me.Because I am a sort of research target, they tried all means to keep me in the game. Ok just a story to have a fun. Are we a bit far from the entry of a good dream? or the exit is much nearer than the entry? when could we get a true and real Expert Adviser for a good dream? Or it is an empty dream?
+
+--- 帖子 #220 ---
+Lyllia, I placed the EA on four charts: EU, GU, UJ, GJ on Tuesday night. When I awoke in the morning (6am CST) I was -$254 (.01 lots on a standard account). When I got home from work(6 pm CST) all of the lots had closed for -$258 and new lots had opened for +$138. This morning I looked at it again and I was +$749, so I closed out half of each position and let the rest ride. So from since Tuesday night I have a profit of $124 (give or take) and I'm in positive pips with my current trades. I will keep reporting. Thanks Mitch Ok, it's 7:00pm (CST) and my account is at +$500. The only bad part is the the EA opened a sell on EU at 1.3215. It did go down to 1.3192 but then a bar later a buy signal appeared (up arrow) but the EA did not close me out of the sell and open a buy. If it did I would have seen a profit of 225 pips (ouch). Not sure why it did work on that pair.
+
+--- 帖子 #221 ---
+hi lillya , believ in ur dream and you'll definitely get there. Ps. i demo traded only the arrows manually today and they seemed to give good result. I was shooting at anything between 15-20 pips
+
+--- 帖子 #222 ---
+a little problem here.I will attache two 4hr chart of ENZD in this page and next page.you will see the difference and could you guys give me the reason.In this chart there is a buy and sell signal.Buy singal at 2.3317 and then was cancelled at 2.2854.Five figues apart.is it rediculous?This Chart trading with EA.
+
+--- 帖子 #223 ---
+this chart same as above,but it from my live account.There is no buy and sell signals at all after the last sell arrow appears at 2.375 area.Which means the trend has been keeping continuing.Could you guys tell me why the same chart but different result?
+
+--- 帖子 #224 ---
+So I would say if you do manual trading with the arrow ,it is much safer. Only use this EA for testing purpose and a reference for live account trading. Until this EA problem could be solved.
+
+--- 帖子 #225 ---
+Hi Lillya How many pips do you make on average per day with this system(manually) and how many pairs do trade? Thanx it looks promising
+
+--- 帖子 #226 ---
+this system could work well on trending period.not side way period.it eats profit.For example,this morning asian session there is sell signal on euro.aud and also the cross.All in money .but you have to manually closed the position and lock in the profit. Then they go up again during european session there is buy signal appear at 8.pm sydney time that's 70 pips up for AUD until now 50 minutes past no position open. I got two conclusion: 1. This EA still depends on bar breaking out principle. that's the reason why there is buy arrow appearing but no position opened. But for higher time frame position will be opened a bit far away from the time arrow appears.Because the bigger the time frame , the larger the candle length, the far away the position will be opened. 2.In sideway period no matter which time frame if they cancel each other all the time, the chance that making profit is very narrow. That will frustrate trader .So in such a market you have to help it manually closed the position. Now I realize that depending on arrows themselve to self-fulfil their own positions is just a dream. I still insist that this arrow is reliable.Tradable manually.If anybody have suggestion to improve it ,please give us your opinion here.
+
+--- 帖子 #227 ---
+I have to be fair with this EA,it is based on good principle:Break out system.I appreciate Pitpiter's help. I am too greedy and ambitious.Always want something perfect. If there is a kind of way that will make arrows working more efficiently.That would be good.
+
+--- 帖子 #228 ---
+hi lyllia started your system manually and ea demo. thks. may be ronald raygun is able to make another ea to try. where you are ronald?
+
+--- 帖子 #229 ---
+Hi everybody. I run EA on 8 pairs three days ago and it work good , I find just one place , when EA do not open trades on two pairs (GU and GY) in the same time it open trade on NU , it's marked on pic with red vertical line . I think it was problem with communication between terminal and brokers server . I fix problem and will test next week , if it will solwd I will put here new version. Regards Peter EDIT Sorry , It was not opened trades on 3 pairs , EG too , but in the same time
+
+--- 帖子 #230 ---
+Sorry , here is pic
+
+--- 帖子 #231 ---
+Dear Lyllia, I must said, your indicator is the best i have found so far, its marvellous, i used it on 1 M TF during EST time, works marvellous on EURUSD. I have downloaded all the attachment provided but i cany get the bowling ball with number out, i have been searching it for months, i know that is one of the best indi, can you please email them to me, hope it is fine with you.. Thanx my email : venomdrac@yahoo.co.uk DraC
+
+--- 帖子 #232 ---
+... or could you post this indi for all of us ?
+
+--- 帖子 #233 ---
+i did... works marvellous.. just follow the arrows.. please see attached results.
+
+--- 帖子 #234 ---
+VenomDraC Member Everyone else but you almost say it repaints badly and especiall y on timeframes lower than 4h. Repaints means the indicator change after it have an arrow after some time it moves the arrow so it will not be at the same place where it was the first time do you understand this and if so what have you done to prevent it if you think it is a great indicator ? best regards
+
+--- 帖子 #235 ---
+hi lillya where is the Bowling balls Indicator? Post it here for all. Thanks
+
+--- 帖子 #236 ---
+Pitpiter can you have and option for the ea to trade tickmode. That way it will take trades as soon as the arrow appears.
+
+--- 帖子 #237 ---
+I normally wouldn't trade today, but I decided to close out all of my trades this morning (all in profit) and let the EA run (4hr charts). At end of day I have 4 open trades in profit for $88.00. I'll take that anyday! Mitch
+
+--- 帖子 #238 ---
+IF The INDICATOR/ARROW can work at H4 TF, Why Not We just use it at 4H TF then? I use it to trade manually and could make money even though in demo. Will be on live immediately. Let's trade due to the signal asking us to trade rather than our emotion saying to trade. Whatever Lyllia has put here is very fantastic, and let's improve it rather than we keep complaining. Cheers Lyllia and friends.... Thanks much for your hard work
+
+--- 帖子 #239 ---
+Hi VenomDrac, Thanks! I couldn't say my indicator is the best.Actually it is not my indicator.I get it online and recommend it here.I would like everybody who have trouble with fx trading benifit from it. It is not perfect.Like some people found out that it has repaint problem.But according to my observation,very rare.So that's why I give it a 95 % seccessful rate. If we together do our best to perfect it,it will eventually become bowling ball indicator.But EA has to make it work flawless.That will save all the trader's trouble to look at the chart all day to pick up the position.Again I will thank Pitpiter for his efforts into this indicator's EA. I summerized its infinit potential for this indicator, based on the assumption:If it works flawless; 1. It picks up the peaks and bottoms on any time frame for any chart; 2. it save the trouble for trader to gauge the cycle,wave,OB,OS,fibonacci retracement/extention ect. parameters; 3.it is a self-fufilled bowling ball indicator that combines all the merits of all the indicators and theory to trade in fx market or other other financial markets. If we could make it ,that's a big revolution of trading the fx market and it will change the life of all traders. So I hope everybody do your best to make a contribution to this trading system.To make it working perfect. In order to achieve this:we have to find out as much faulty points as possible to improve it. 1. Give us your observation here; 2. make suggestion; 3. if you are experienced trader,financial modelling person and programmer.please give this indicator a hand to to make it perfect to work for traders.
+
+--- 帖子 #240 ---
+Helo I'am not getting the Buy and sell arrow .Somebody help me.What should i do .Here is my chart
+
+--- 帖子 #241 ---
+Hii lyllia ,Should i follow the arrows or the dot ?what is the dot for?
+
+--- 帖子 #242 ---
+Have you download all the indicators?Please go to the first few pages to download them and it is better you go through all the posts with this thread.
+
+--- 帖子 #243 ---
+the arrow not the dot.the dot give you the possibility.
+
+--- 帖子 #244 ---
+Great Work Pipiter and Lyllia... Keep doing good, and I thank you for wonderful Results that I have found out so far due to the EA and the Arrow Indicator.
+
+--- 帖子 #245 ---
+If I have observe indi applying on 5M chart , aways arrow appears after close bar and start next bar . If I'm wrong , please correct me . I tried make EA , which work on open bars value and it didn't opened any trade. As I said before I run EA on 8 pair and it opened all trades correctly with open price for next bar after bar when appear arrow. Now I propose wait on result working EA this week , if I sold problem , which I find - wrigt about in previouse post , I will post here new version for public testing. Regards Peter
+
+--- 帖子 #246 ---
+Is It Possible To trade This System On 5 Min. Chart Manuley Just to Follow The Arroys It Looks Like Can Have A Lot Of Small Gains In Pips
+
+--- 帖子 #247 ---
+Do it
+
+--- 帖子 #248 ---
+Did You Try Thate?
+
+--- 帖子 #249 ---
+When Are The Arrows Forming At The Open Of The Bar Or Diffrent Time?
+
+--- 帖子 #250 ---
+yeah it seems very nice but Fisher is a repaint indicator and arrows appear at the end of bolish or bearish candle on the next candle i got 20 pips and lost 55pips in M5 in live account....
+
+--- 帖子 #251 ---
+hello Lyllia, first i want to thanks you for sharing the system.Then i have a question about ABHA center... how do you use this indicator? have you seen that if you just follow this indicator you have very big winner trade?
+
+--- 帖子 #252 ---
+does this indi repaint?
+
+--- 帖子 #253 ---
+From Friday I had 4 open trades taken by the EA, positive $88. It's now almost 9pm and my trades are up to $428.
+
+--- 帖子 #254 ---
+not tryin to change anything here but to be money reliable, the iinwmarrows needs to be rewritten slightly..... just slightly.... also, small period ma cross systems can whack you pretty good unless filtered.... a filtering in this case would be taking buys only when a slower ma on a couple higher time frames supports the trade.... as example, using the 15 minute chart, take every 3 ma coss buy but only when the 6 period ma's are confirming the buy on the 4 hour and daily charts.... breakevens and trailing stops using lot weighted average price might help to a small degree.... a total profit target would be a definite plus..... using small lots on small timeframes gives the action so often desired while the higher timeframes keep some reality...... the charts included are lyllia's 3 ma cross system with sole exceptions of the 4 hour and day filters.... some losses are unavoidable.......h
+
+--- 帖子 #255 ---
+The IINWMARROWS indicator does repaint!! I followed it all last week when an arrow appears showing either a reverse in trend or a continue in trend if the next candle goes the other way the arrow will disappear, if that fails the arrow will appear again. Sometimes it does not show on the chart unless you restart the platform or reload the indicator then you will see the repaint. I have the screen shots to prove it, as well as the back test that shows trades where arrows were painted but do not show on chart now. All of that being said I still think there may be something here, but I think the method used now will only work in trending markets like now (well sort of) but when you have range bound weeks arrows will be repainting like crazy but you still may able to pick up some pips if you do not wait for exit arrows. I will continue to watch and maybe pick up a trade or two but in no way do I think its near 95% success, sure if you look at a chart it seems that way but its hind sight 20/20 repaint thing its not possible unless you have a time machine, the only thing that is 95% success rate of is them blowing your account sooner or later. My 1 cent Have to save other cent
+
+--- 帖子 #256 ---
+Hi guys, Thanks for help. Like I said before for this system we focus on the arrow trading.Because it is more reliable than other indicators. It seldom repaint if it does repaint. Still give us good pips. I focus on 4 hr's trading because the trend could last longer and could produce more pips.Save us the time busy with more small trades with more risk. I use arrow for trading; Use other indicators as reference to confirm: the wave:3 levl zz; the cycle:Rads MACD, fisher &amp; ABHA.(they do repaint but they help); the possibility:beginer alert; the OB &amp; OS: Pivots. I hope after use this system for a while,you will learn to develope yor own logic. For day trading pivots are important to me .Once the OB &amp; OS level has been reached,the arrow comes in to tell you to trade.
+
+--- 帖子 #257 ---
+Weekly &amp; Daily Euro 1.4187-1.2715, 1.3651-1.3294; Gbp 1.5732-1.3775, 1.5059-1.4568; Chf 1.1713-1.0973, 1.1438-1.1215; JPY 105.6-94.32, 101.87-98.64; Aud 0.7631-0.6590, 0.7290-0.7016; Nzd 0.6099-0.5678 , 0.5966-0.5747; Cad 1.2882-1.1843, 1.2503-1.2153;
+
+--- 帖子 #258 ---
+Did you download all the indicator? read first several page then you are able to do it properly.
+
+--- 帖子 #259 ---
+Hi Lyllia.. are you used an EA in real trading? do you make more profit or lost since you use it? thank you
+
+--- 帖子 #260 ---
+I do not recomment EA for live trading. We still struggle with EA testing. all the problems are discussed in the thread. I hope people could help to solved the problem and make it work.Please read the thread.
+
+--- 帖子 #261 ---
+hi lyllia seems that your method and ea both work well on H4. i use shi channel mtf as support and resistance. thanks
+
+--- 帖子 #262 ---
+Thank you! Could you help to make tthis arrow more reliable?
+
+--- 帖子 #263 ---
+Hi Lyllia Thanks for your great method. I have a small Q. When a thick red line occurs in Abha in H4 is it a trend change? Thanking in advance Senbanda
+
+--- 帖子 #264 ---
+have you got pips from 4hr trading start from NY session?
+
+--- 帖子 #265 ---
+it indicate a possible cycle low or high in that TF is in place.But sometime it repaint with PA.
+
+--- 帖子 #266 ---
+Thanks for your indicator,is it solid?
+
+--- 帖子 #267 ---
+hi 5 usd pairs opened around midday gmt now 170 pips plus (not yet closed)
+
+--- 帖子 #268 ---
+Thank you Lyllia I will monitor it more Senbanda
+
+--- 帖子 #269 ---
+do not know yet, i have only 4 hours experience with this indicator.
+
+--- 帖子 #270 ---
+one more
+
+--- 帖子 #271 ---
+are you a programmer? what's the diffrence between MTF indicator and normal mt4 indicators?tia
+
+--- 帖子 #272 ---
+hi i am not programmer and i just found them this morning from FF forum and now trying myself to understand the difference. but i found them very useful to find support and resistance levels. for example put on H4 chart shi indicator with timeframe value 60 and another indicator with timeframe value 240 and this is some kind of filter for arrows (in case of manual trading). timeframe value 0 works on any timeframe according to this timefame.
+
+--- 帖子 #273 ---
+hi lyllia todays trade with ea 5 usd pairs approx. 350 pips plus closed, 330 plus still opened. with todays market movement your method works well.
+
+--- 帖子 #274 ---
+Do you use both indicators on the same 4 hr chart with different value 60 and 240? could not understand what do you mean? Do you mean you put shi mft on 1hr chart and shi mod on 4hr chart? I have not try them yet.Could you explain the difference or post your chart here.
+
+--- 帖子 #275 ---
+i put on H4 chart first shi indicator with timeframe value 60 and second shi indicator with timframe value 240 (if you like you may add third shi with 1440 daily value). then you can see 4 hours trend and inside 1 hour trend on your chart. sr levels are channel borders and center line. for example where H1 channel crosses H4 channel there is very strong sr level. it makes trading more simple. if you see arrow appears but this trade goes against the trend you can drop this trade and wait for next.
+
+--- 帖子 #276 ---
+It is working well in trending market.The good thing is it catches the trend from very begining.But not working so good in congestion area ,especially in small time frame.when we do manual trading,we have choice to choose when to trade.But working with EA, it is not that simple. When the position opened so late after the arrow appears, the position might be against you. With manaul trading there is no such a problem.As soon as the arrow appears, I could open the positions. Today I did not trade,cause my broker's server has problem,they have to redirect clients to other server which only allow clients to log in no more than 2 minutes,then disconnect it.It is all manupulated. I trade mony years ago,some brokers use this kind of method to do their own good.They make it like accident. In another word,the accident is not real.That's the way how they could benifit themselve by taking advantage of the client.So choose broker like choosing friend,if you go with the wrong one,you always get trouble.And they do this ruthless.They keep talking to you as if they provid good service to help you passing the time.At the same time they are using your money and method to make money for themselves. And they pretend to pity you. And you know what one of them is my best friend I talked about in my little story I posted before.They are not really your friends.They pretend to be, to keep you in the game. They play the game : who is the best cheater who could beat all other people to satisfy themselves.
+
+--- 帖子 #277 ---
+thanks!
+
+--- 帖子 #278 ---
+did you see what I post about S &amp; R ? it seems they will getting there.After they reach the weekly S &amp; R, there will be big move ahead.
+
+--- 帖子 #279 ---
+good system for manual trading on H4. ea trading is now 550 pips plus still opened. thanks
+
+--- 帖子 #280 ---
+I saw you tried many system here.Could you recommend your favorite one so far pleas ?(do not include this one ).
+
+--- 帖子 #281 ---
+I did what you said, but only shi mode appear on 4h,shi mft with 60 and 1440 value do not appear.what's the reason.
+
+--- 帖子 #282 ---
+Hi Lyllia, Can all of us here have the bowling ball indicator, tried the inmarrows today on the H4 chart, results were not that good compared to last week where i concentrated more on 15 M TF and 1 H TF, today the sell arrow on H4 TF appeared when market has started to go against me ( meaning i was still having buy position and waiting for the sell arrow to appear for me to close the buy position, when it started to go short the sell arrow did not appear, the sell arrow appeared after 2 hours of waiting.) left no choice but to hedge them. The bowling ball indicator instead is one of the finest, it tells us to standby when to get out from your position by number 1,2 or 3, so if number 3 comes out, it is the best time to close your position and wait for the buy or sell arrow to come out. This way it is safer, i dont have to close my position when the market has started to go against me. Please let us all have your bowling ball indicator, you will be blessed heaven and earth. DraC
+
+--- 帖子 #283 ---
+Looking onto Lyllias charts it seems to me the so called "ball indicator" may be the "ZZ semafor" ? Try to find it out in the "tsd" Forum - this forum contains a lot of modern (and older) useful indis. This forum houses a lot of programmers too.
+
+--- 帖子 #284 ---
+i do not know what is reason. you have to put on one chart three shi indicators each with different timeframe value: first with value 60, second with 240, third with 1440. try again. regards
+
+--- 帖子 #285 ---
+removing the forward looking code reduces it to the standard ma cross indicator..... also including &lt;= and &gt;= in the appropriate places strenghtens the logic..... keep in mind your settings for the 2 ma's ..... they are so close to being identical that sometimes the micro differences will be missed....h
+
+--- 帖子 #286 ---
+Got it!! Thanx Mandl2007, may God Bless you always... and May the pips be with you!! Drac
+
+--- 帖子 #287 ---
+Can someone explain the zz indicator please? Thanks for the thread
+
+--- 帖子 #288 ---
+hey james..... the zz indicator is basically 3 separate zigzag's in one.... the typical zigzag lines are replaced by numbered dots.... the dots are labled 1, 2 and 3..... if only 1 of the three zigzags turns at that point it's labeled 1..... if 2 zigzags turn at that point it's labeled 2..... if all three turn at the same point it's labeled 3...... zigzag, as you likely know, uses hindsight.... h
+
+--- 帖子 #289 ---
+hayseed is that indicator also repainting or is it usefull ? how do you trade it ? best regards
+
+--- 帖子 #290 ---
+USD/JPY 4HR TF at 00:00 or 21:00 gmt the candle ended with a arrow at the bottom the pair then fell 15 pips, reloaded the platform now arrow is gone, if you were running EA for that pair it should have taken the trade. How do you handle this in real time?????
+
+--- 帖子 #291 ---
+hey jgadefelth..... yes it can at times repaint...... if any indicator marks turning points with such precision , it's reasonably safe to assume it repaints.... but depending on your use, repainting is not neccessarily a negative..... one of the best ways to know for sure is to scan the code for terms like, Low[Lowest and High[Highest ... by definition they are subject to change.....h
+
+--- 帖子 #292 ---
+Thanks. I got it .They look logic.
+
+--- 帖子 #293 ---
+could you explain how to can the code with MT. I want to learn.If you are programmer could you please help to solve the repaint problem?
+
+--- 帖子 #294 ---
+Which pair the arrow on 4hr disappeared? I have many pairs turned around.All the arrows come out and stay.make fantastic trades. use 3 level zz at your own risk,it repaint all the time.I only use it as reference.And use arrow to confirm it.that way gives a high possibility of the the trade set up.
+
+--- 帖子 #295 ---
+Your system is great! I want to thank you and contribute if I can but dont'have much time. so, here's my 2 cents:get rid of all the other indis and just use the arrows BUT to filtrate the trades add the "Laguerre " indi that you can find easily. It works great and filtrate all your signals. For me , the arrows + Laguerre is the perfect weapon. Hope that helps and thanks agaIn for that great system. Alain1
+
+--- 帖子 #296 ---
+I attach some indicators to confirm the trade. Put them on your chart.You will get more confidence. Set shi mtf :TF 60 Set shi mode: TF 240 Wolfwave has its own trend lines to insect with each other to confirm R &amp; S. Use it with Shi to get extra confirmation. ang_PR is turning point indicator. I-drprojection gives predicated S &amp; R when price is in action. buy/sell confirm the trend
+
+--- 帖子 #297 ---
+what tf u use in trade ? thank
+
+--- 帖子 #298 ---
+G macd signal G macd bars
+
+--- 帖子 #299 ---
+4hr
+
+--- 帖子 #300 ---
+hey lyllia.... the arrows no repaint posted eariler should solve it.... if your refering to the 3 level ZZ semafor indicator, it needs to stay as is... to alter it's code will render it less useful..... some indicators will repaint due to poor coding.... such is not the case with zigzag..... it repaints by design and is coded correctly.....h
+
+--- 帖子 #301 ---
+Thanks mate.Would you like help to optimal the EA as well?it will be highly appreciated from all traders. I try your arrow from today.
+
+--- 帖子 #302 ---
+Hi everybody, please try this arrow in the template and give your opinion here after you use it for several sessions. If it is more reliable why wouldn't we make another EA for it? your observation of test is highly appreciated .Please make your contribution to this thread.
+
+--- 帖子 #303 ---
+could you optimate the 3 level zz as well make it more reliable? And also I want to make all the indicators used in this system more reliable .Could you please find their faulty points and correct them?like all the indicators in the sub section of the chart.tia
+
+--- 帖子 #304 ---
+Do we have to change the setting to 2MA when use this indicator? Because in the code it seems they all remain 3MA .could you explain please? And apply it to the 4hr chart.It seems it comes out one bar later than the old ones. is it a delayed singal than the old one? And there are more arrow come out which is uneccessary. I label them on the chart attached. And I saw only there is one place of the code you changed. Are you sure that will make it no repaint?
+
+--- 帖子 #305 ---
+the label moved the place.there are three uneccessary signals on the chart compared with original arrow. they are pre matured signals.
+
+--- 帖子 #306 ---
+simple indicatror
+
+--- 帖子 #307 ---
+are you sure 3 level zz reliable? it repaint all the time .simple not reliable ,not useful.
+
+--- 帖子 #308 ---
+many arrows
+
+--- 帖子 #309 ---
+if we trade with trendline don't see arrow to open position. 3 level zz is not repaint for me see my chart
+
+--- 帖子 #310 ---
+not so bad ,but some arrow prematural
+
+--- 帖子 #311 ---
+so I think shi is important.The two indicators are in harmony to confirm with each other.So the shi has to be reliable.
+
+--- 帖子 #312 ---
+thanks! Alain
+
+--- 帖子 #313 ---
+I've been reading the thread from page one and finally today I gave it a try. And guess what! I closed the trade with +807 pips on the Daily chart. see the attached chart. Thank you very much for the system. I will be trying it more. niksan
+
+--- 帖子 #314 ---
+Thanks to Lillya for the system and Pitpiter for the EA. After using the EA for a while I have one request. The EA currently does not open the trade if there is a requote or other error ("trade context is busy" I have encountered many times). Without a stop loss this will eventually ruine ones account if the EA cannot close a trade once the arrow appears in the other direction. Could it be programmed to overcome this. For example by placing the trade until it is eventually opened.
+
+--- 帖子 #315 ---
+hey lyllia.... by 2 ma's i meant both ma's .... that was a poor choice of words on my part, sorry.... the arrows should mark the bar following the cross ..... at the first tick of the new bar the order is sent.... the picture here shows the orders, each dead on the arrow.... it's common for some signals to be missed... either due to trade context issues, server issues and such..... or it could be protective coding in the ea, such as spread protection...... in the picture can be seen one signal that did not produce a trade..... in this picture you can see the arrows no repaint indicator.... also both ma's.... one is a 3 period linnear weighted on the open and the second is a 3 period linnear weighted on the close..... those settings are from your original indicator..... the arrows line up with the ma cross's, or at least they do here......h
+
+--- 帖子 #316 ---
+God blessed you! Happy trading!
+
+--- 帖子 #317 ---
+Thank you Lang for your Shi.They are very good for short term and long term S &amp; R.
+
+--- 帖子 #318 ---
+could you write an new indicator using these setting? at least we should give it a try if they do not repaint and produce more reliable signal?thanks.
+
+--- 帖子 #319 ---
+Hi all, this is kind off the subject, but I see nicksan's chart shows the EUR/USD as having 5 places after the decimal, I have never seen this before but I am new to Forex. Are you sure you got 800+ pips and not 80+ pips?
+
+--- 帖子 #320 ---
+Hi all, I have been following this thread almost since the beginning although I have not gotten this to work for me I am still trying to follow along. I have been out of the loop for a day or two and now I am kinda lost. Are we still using the arrow as the primary trade setup? Is the file that Hayseed posted arrows no repaint a newer version of IINWMARROWS? The level ZZ indicator and the bowling ball indicator the same thing? Are they used as only secondary conformation or are they more important now? I would be so thank full to anyone that can catch me up. Sorry to ask so many questions. I will contribute in any way I can. I am not a programmer but I am pretty good at research and tracking things down, so Lyllia or anyone else do not hesitate to ask me for some grunt work… Have a great day….
+
+--- 帖子 #321 ---
+hey forextek..... the version i posted was a slightly edited version of the original..... using the no repaint version, the signals should stand and will only be seen after a confirmed cross.... both of which are more inline with a conventional ea's needs........h
+
+--- 帖子 #322 ---
+Thanks for the response hayseed its what I thought but the thread is going so fast makes my head spin. I noticed your chart showing no repaint, did you get a new Ea for that verson?
+
+--- 帖子 #323 ---
+hey forextek..... anytime some posts an idea i'll write an ea just to run it through the paces.... nothing exposes strengths and flaws better .... and sometimes will add or subtract from the original posters idea just for general "what if's"..... just habitual couriosty , nothing more.....h
+
+--- 帖子 #324 ---
+Must be nice to be able to do that and see pretty quick if its something that has worked in the past. I write simple formula programs for backtesting price stratagies with a diff app. but the programing for metatrade is way over my head. Just wondering what the results are with the new revised arrows backtester
+
+--- 帖子 #325 ---
+I used Lyllias template last night for EU and EJ and U/CHF - got at midnight signals with WHITE arrows for EU and EJ - LONG ! Got blue arrow for U/CHF - short. BUT: 9 hours later all these arrows disappeared ! The "balls" shiftting again in the old direction of Price Action. SO it repaints even on the 4H chart ! @ hayseed - where did you post an other "no repainting" version ? So it seems to me it isn't enough to use onla the arrows - we have to use more filters ? Where are writen down detailed and CLEAR rules for this system ?
+
+--- 帖子 #326 ---
+forextek, I trade with FxPro . they have a 5 digit code after the decimal whereas many other systems have 4 digits. If you see the chart I posted, at the bottom of it you will see the trade details. I traded a 0.1 lot and made almost $80. For eur/usd 0.1 lot, 10 pips = $1.
+
+--- 帖子 #327 ---
+Hi, I attached lyllia's template to my chart yesterday and to when I started mt4 again, I started getting frequent signals like the attached pic shows. Any idea why its happening?
+
+--- 帖子 #328 ---
+Yes this comes from one of the indis named "silver ..." - it happens some time .... Btw ... what about repainting ... as I described it above ?
+
+--- 帖子 #329 ---
+Hi Mate, as I said from very begining,in this system,we focus on arrow trading.If it is relaible and can be self fulfil the buy and sell positions as planned.It would be a simple and effective system for everybody to use. If it does have repaint problem,according to your observation,we try to fix the problem.My 4hr charts arrows all stay none of them disappear.All the other indicators for confirmation only like silver trend signal.sometimes it is very helpful.It does repaint with the PA.
+
+--- 帖子 #330 ---
+which means you get buy signal from silver trend indicator which is a small pink arrow used to confirm the trend.It sometimes repaint.you could take it off if you like.
+
+--- 帖子 #331 ---
+Could you make an new arrow indicator and rename it .Also EA let everybody test it please?
+
+--- 帖子 #332 ---
+What You guys think about this kind of IINWMARROWS use? Thats mine template, and IINWMARROWS is used here only for comfirmation or as signal to reenter allready growing or falling trend. ... Sry for OT, lets say its my version of lyllia trading sys it consist of trend follower, lyllia trading sys, RSI trader and some my addons.
+
+--- 帖子 #333 ---
+Could you make an EA to open the position as soon as the arrow appear,it is critical. it means the pips.
+
+--- 帖子 #334 ---
+could you please post your template here? let people try if it is good for use. do you have arrow repaint problem?
+
+--- 帖子 #335 ---
+Your strategy is a very good one i must confess, I have followed it from the beginning. Very impressive! Please if you don't mind, check your arrows with fractals and zig zag indicators if they do about the same thing, let me know how it goes @ sampsonzhiya@yahoo.com then WE can figure something out. I am suggesting this because of 'THE NOISE'. When its all done then we can get back to the noise. See you soon.
+
+--- 帖子 #336 ---
+Hi Peter, how is your EA going? fix the problem?
+
+--- 帖子 #337 ---
+thank you.
+
+--- 帖子 #338 ---
+This system simple :trading the arrow. if it has problem ,fix it. Because it is the most reliable arrow I have come cross.If it works ,it is the most simple system to follow. I insist on using it as the main incator for this system.As I said it seldom repaint.I repeat point several times in this thread.And I do not want to reapeat again. Other indicators for confimation only. After try them you are flexible to decide what's the best combination of all these indicators as a good system for you to use. You could write you own rules of using it and test your rules to see whether they are working for you.If they are not you have to change the system that work for you. I list some indicator's function used in this system in the previous post. I like people to participate in providing a proven system that working in all market situations. If you have any please post here.
+
+--- 帖子 #339 ---
+you are right.Fractal and arrow almost do the same thing. I put them together now for a test. As I remembered fractal is a laggin indicator.I haven't use if for a while. now I test it again.zigzag used with shi is a good combination to fogure out support and resistance.
+
+--- 帖子 #340 ---
+Those are all indicators that I use, when m1 scalping I always check higher TF before going in. And YES, i have repaint problem too but as I wrote before I use IINWMARROWS only as a confirmation.
+
+--- 帖子 #341 ---
+Hello Lyllia. Great stuff!!!! So I have been following the thread from the begining and I think your system has great promise. I have had the EA up and running since fri. april 3 7 am cst. With the exception of 2 five hour periods, and the weekend, it has been running consistantly.I have tweaked my system a little from Lyllias'. I set my template up with three pairs(gbp/jyp,gbp/usd,eur/usd) on the one hour tf. I only have iinwmarrows running on this template otherwise it would be way to cluttered and noisy.I have lyllias full system up on another page for support and verification.So far since Friday, the EA has produced over 1000 pips with verry little involvement on my part. Ocasionally I would add a trailing s/l if I was in front of the computer but other than that, everything was auto generated. A couple of things I would change/improve if possible. 1. Instant execution of order when arrow paints instead of waiting for the candle to end.(we are missing too many pips due to the slow entry, and losing more due to the retracement of the candle.) 2. The application of a trailing stop to the EA. When using the EA on higher tf's a person could really get burned on a sudden heavy price swing. I plan on letting this run for a month and will post my results as the occur. Once again........ Great stuff lyllia, and thanks!! Jim
+
+--- 帖子 #342 ---
+Do you have any idea how many pips the trailing stop will be? If we could solve the slow entry peoblem, the opposite arrow appears and an instant opened order will close the previous position is my original plan. For this plane to be achieved: 1.first we have to solve the arrow repaint problem if ther is any. 2.Secondly, we have to let position to be opened when the arrow appeared. 3. there is no server and terminal connection problem.
+
+--- 帖子 #343 ---
+Which arrow are you using? the no repaint one? or the original one?
+
+--- 帖子 #344 ---
+thanks!
+
+--- 帖子 #345 ---
+I have not seen the arrows repaint. I am using the original indicator, which gives good early signals. Points 2 and 3 are the main problems.
+
+--- 帖子 #346 ---
+trading is all about find support and resistance.Only use 3 level zz as a reference for the short term cycle for the TF chart to trade. Once arrow shows up in conjucture with other indicators showing the bottom or top and 3zz shows three.then the Top and Bottom is formed in that TF.hope this help.
+
+--- 帖子 #347 ---
+I am still using the original one as I have not seem a modified one posted in this thread. As far as the trailing stop loss is concerned, I would say something in the range of 75 pips. It is mainly for protection on big reversal swings(like if some unexpected good or bad news was released). You still want the arrows to do the bulk of the work in closing positions.
+
+--- 帖子 #348 ---
+I see, confussed me at first, so your 800 pips is same as my 4digit 80 pips,, .1 for 5 dig. same as .01 4 digit, thanks for shedding light on it....
+
+--- 帖子 #349 ---
+sorry corppu, but i have seen last night 00.00gmt+3 eurusd arrow up to buy then this morning at 8gmt+3 there was an other arrows going down. then this afternoon no more arrow appearing. regards
+
+--- 帖子 #350 ---
+Well it is strange it does not repaint on yours wonder if its a setting, I see it all the time on 4hr and daily, more on 4hr ofcourse. have you laid hayseeds arrows ontop of the other to see if hayseeds has arrows where the older one does not, that would show repainting? Sometimes if you restart your platform it forces the arrows to dissapear if a change in direction has occured. I wish we had a chat room where we could compare the arrows in real time...... notice the screen shot where there are places where hayseeds arrows are there but the older version is not they dissapeared including the usd/jpy long that I am in right now.
+
+--- 帖子 #351 ---
+Would be great to have an audio alert for the arrows aswell...
+
+--- 帖子 #352 ---
+you are welcome Lyllia when trading with ea you can use attached emergency ea,s. they close all you trades. put them on separate charts. at first try them on demo.
+
+--- 帖子 #353 ---
+I really think that we should get a live chat room and try to solve and see what going on with this repainting problem that some swear they do not see. The thought of this indy not repainting has my mouth watering. I think Hayseeds new indy shows the arrow on the bar that opens after the signal bar closes where the older one puts arrow on the current bar that produces singal as soon as singal is produced, therefore I think Hayseeds will only paint at the end of the bar not in middle as the old one does. Is this correct Hayseed? For any indy to produce a arrow in middle of a bar time, must take a risk of repaint if conditions change in same bar (highs get higher ect), AS I said at top we need a chat room, anyone else like this idea?
+
+--- 帖子 #354 ---
+yes forextek i agree with you about chatroom even if i dont speak good english . it will be great to have a sonor alert when the arrows appears.
+
+--- 帖子 #355 ---
+and i would like to know the exact price when one arrow comes so if we are late we always could enter the trade at that price.
+
+--- 帖子 #356 ---
+hey forextek...... yes your correct..... it will show the first tick of a new bar after a confirmed cross... that's not saying it's a beter/worse signal.... it's common to focus on getting in quick at the earilest possible signal hopeing for the optimum entry.... many times the signal is far from optimum..... the energy, movement, money, required to produce the signal, in this case a moving average cross, can fade quickly.... as it fades the price falls below the initial signals price..... delaying your entry a few bars after the signal can be worthwhile...... or perhaps using limit orders or a combination of both...... run a backtest on most any ea but delay your entry a fews bars...... it's quite rare for the exact signal bar to be the best available entry.......h
+
+--- 帖子 #357 ---
+Thanks! Lang
+
+--- 帖子 #358 ---
+I agree with this idea, could anybody make it?
+
+--- 帖子 #359 ---
+I do not agree.If the old one is not there,it is not supposed to be there.It does not disappear.
+
+--- 帖子 #360 ---
+An email alert would also be great since it is a 4 hr chart. This allows for trading via a smartphone etc.
+
+--- 帖子 #361 ---
+Hi bro please can you post the indi that showes the news time and impact on u chart? Thanx Succes is not an event. It is a process
+
+--- 帖子 #362 ---
+I wish I could see what you see. Check out the two attachments, they are from last week. the second screen shot was taken 5 mins. later after I restrated the platform, I suspected that they may dissapear because of the 2 direction changes in the 4 TF. If you run the backtester you will see where it did do the buy and sell at those times.... Hope we can figure it out...
+
+--- 帖子 #363 ---
+hi lyllia, downloaded your file template_fx.tpl onto my metaforex. but i'm not able to see any arrows....can advise what shld i do? tks.
+
+--- 帖子 #364 ---
+you have to download all the indicators to your indicator file. Template to template file. EA to EA file.
+
+--- 帖子 #365 ---
+tks lyllia
+
+--- 帖子 #366 ---
+Hi, sure its FFcal.
+
+--- 帖子 #367 ---
+Hi Jim Any chance you could post your exact setup (template) TF etc,as I have tried the EA and it just produces loss after loss. This is indeed a great system as I have used it manually if I could get the EA working as you have it would be excellent. Thanks
+
+--- 帖子 #368 ---
+I am sorry to be a pain,Lyllia but can you tell me where to get hold of your indicater 11NWMARROWS.mq4 ......I cant find it !!!
+
+--- 帖子 #369 ---
+The indicator you are looking for is included in the zip file posted by guek04 on post # 340 With the other indicators.... tpl file is on the same post
+
+--- 帖子 #370 ---
+Hey qutek04 Can you give an example of how you would set up a trade using this template, entry/sl/ect Thanks
+
+--- 帖子 #371 ---
+It would be hard to explain You how exactly Im opening positions with it because beside of M1 I use m5, m30 and h1 timeframe, where Im working with trend lines, fibonacci, divergences, support and resistances and sometimes candle patterns. My m5 after whole day looks like that in attachments. m1 timeframe Im using only to confirmation. check those systems: http://www.forexfactory.com/showthread.php?t=148902 http://www.forexfactory.com/showthread.php?t=40325 mine is based on them. The most important for me is technical analize on higher TF. Without strong signal on higher TF I dont even look at m1. My TP is 40 on GBP/JPY 20-30 on GBP/USD Sometimes I determine my TP by fibonacci retracement and expansion. Im not a pro trader, still im more a student than a teacher so if You wanna use it first check it on demo. Have a nice pips!
+
+--- 帖子 #372 ---
+post 18 &amp; 19.
+
+--- 帖子 #373 ---
+thanks for posting the chart here. Could you please post the template and indicators here? It is handy for learn.
+
+--- 帖子 #374 ---
+Are you a programmer yourself?could you do something about it?Please let me know.lyllia45@yahoo.com.au
+
+--- 帖子 #375 ---
+M1 http://www.forexfactory.com/showpost...&amp;postcount=340 M5, m30 and h1 templates and indicators are in attachments.
+
+--- 帖子 #376 ---
+thanks!
+
+--- 帖子 #377 ---
+Anybody could help to solve the EA problem?
+
+--- 帖子 #378 ---
+it is great. I also put lang's Shi on the template,they are togethere to give out sort of R &amp; S projection.
+
+--- 帖子 #379 ---
+lang's Shi? havent heard about it... is that indicator? Could You show it?
+
+--- 帖子 #380 ---
+have a look at post 261 &amp; 270.
+
+--- 帖子 #381 ---
+To Peter, [quote] I have tested the EA during the weekend on euro.The following is what I find out: 1. The ea open position at the end of the bar.This is in line with many EA' s method around.It seems nothing wrong with it.But for trading purpose,sometime it seems like a delayed entry.I have not compared the the time of arrow appearance on EA chart to the arrow on non EA chart.By logic they should appear on the same time. If anybody could help to exam it ,it will be appreciated. 2. If there are more than two opened positions,when an opposite singal appears it only close one position with the other one left unclosed.Then the situation will carry on, there will be always a position unclosed.Which contribute loss of the testing.Because when the PA changes its direction,the unclosed position will be closed in a negative figure and all trade since after will suffer the same.could you help to make EA close all the position? 3.did not find any repaint arrow.
+
+--- 帖子 #382 ---
+hello i just wanna say something for the EA, in fact the problem is not that it repaint or not. The EA must only buy or sell one time, the first time arrow appear and after that the problem Lyllia talk dont exist anymore. (sorry for english)
+
+--- 帖子 #383 ---
+[quote=lyllia;2665679]To Peter, I have noticed the same problems. There should only be one trade opened in one direction at a time and the signals (trades) should be forced through in order to close/open trades and avoid missed/unclosed trades.
+
+--- 帖子 #384 ---
+I would like to see someone post a screen shot showing a backtest on any pair showing buys/sells along with the IINWMARROWS indy, showing an arrow for every trade. (proving there is norepaint Thank you
+
+--- 帖子 #385 ---
+[quote=lyllia;2665679]To Peter, [quote] I have tested the EA during the weekend on euro.The following is what I find out: 1. The ea open position at the end of the bar.This is in line with many EA' s method around.It seems nothing wrong with it.But for trading purpose,sometime it seems like a delayed entry.I have not compared the the time of arrow appearance on EA chart to the arrow on non EA chart.By logic they should appear on the same time. If anybody could help to exam it ,it will be appreciated. I may be wrong, but I think when an EA is being run (or any program), the code says take a long position if condition "X" is true, when the bar opens it looks to see if condition "X" is true if so it takes the position, if not it waits for the next bar to try again, if condition "X" becomes true in the middle of the current bar the EA will not look at it till beginning of next bar, that’s how it reads bar by bar. I am not sure if tick by tick can be used or not if so I bet would be quite a task to code, the only other thing is somehow run the EA on a smaller TF but have the code read off the larger TF that way the EA would take a trade when the smaller TF bar was complete and the Lager TF condition was true.
+
+--- 帖子 #386 ---
+Here is a challenge, open Stratgey tester load LyliaEa as advisor set Tf to 4 hours, check use data, and visual mode, uncheck optimization, and press start, after it opens the chart add the IINWMARROWS indy and the arrows no repaint indy. Run it for several days turn up the speed so it gos trough rather quickly , IINWMARROWS should appear second to last bar and arrows no repaint appear at new bar, see if both indys create same arrows, see where Ea took positions from. Love to see what you get..
+
+--- 帖子 #387 ---
+Lyllia please try this ea. It buys or sells on the closing of the new arrow. I think this is what you were looking for. It still opens the first time on the next bar, but after that whenever the arrows show it opens a new trade. I am not a coder just a cut and paste guy.
+
+--- 帖子 #388 ---
+ok I have a try. thanks!
+
+--- 帖子 #389 ---
+Thank you Lyllia for your system. I borrowed your arrows indicator and now making serious pips(more than 950 in 3 days). I got to have consistency for a few months before I go live. Thank you again.
+
+--- 帖子 #390 ---
+Will You share Youre method to us?
+
+--- 帖子 #391 ---
+How do you use it? what time frame ? template please. thanks a lot.
+
+--- 帖子 #392 ---
+Thanks willmalou. I test only one pair: Euro at the weekend.Now the position will be buy/sell at the close of the bar (not end). When I was doing the test it seems the quick the speed sometimes the remote the position buy/sell.Anybody have the same problem?Maybe in real situation is not same. anybody tried the new EA? and what's the result?any suggestions. I really appreciate perjo and Corppu's suggestion that open one position at one directon. I assum it is on 4hr chart.So the entry(buy/sell) should be determined by the collective comfirmation of all the indicators used in the system like manual trading.That way will get rid of the noise and make consistant profitable pips. If anybody could work out the plan please post here. And let peter and willmalow help us again.Appreciate your help.
+
+--- 帖子 #393 ---
+Hi Lyllia and everyone, Would someone be able to elaborate when does the arrow appears? At the start of a new candle after the last closed candle or at the close of a candle? Thanks..
+
+--- 帖子 #394 ---
+The arrow appears when the cross up /down conditions have been met.See the coding of the indicator (post2).I assum it could be anywhere during the bar formation in any TF.
+
+--- 帖子 #395 ---
+For those who asked me about my system and template. I have to admit that after gaining those pips I lost more than half. so I still have to adjust my system , but the basic principle is there . This is the template and it's self explanatory. I trade on the 4 hr TF 8 different pairs, lot size is .05 and I put a stop loss of 200 pips. I open two orders. On one the take profit is 20 to 25 pips, the other when it reaches that many (20,25) pips the stop loss is moved to break-even and I let it ride. Suggestions are appreciated. I only check the charts every four hours and its less stressful but I do use the help of an EA to move to break-even.
+
+--- 帖子 #396 ---
+I delete last few posts.Because it does not work.So I take it back.
+
+--- 帖子 #397 ---
+hi there i have all of your indicators and your template.... it's different from Lyllia's trading system ...if anyone want to try it i will post them here ..... by the way what's your wins percentage till now my friend???? be happy
+
+--- 帖子 #398 ---
+Why not let's us try them out
+
+--- 帖子 #399 ---
+My winning percentage is about 80% the 20% really gets me. Actually the template I posted is I think an improved version and will try it out. I also think that If I have a loser trade I should get out sooner and lose little instead of losing a lot and that is what happened when I lost more than half of the pips I had already made. One more thing the aqua line on the chart is Mama but I erased the slow line and posted the xpma at (9) instead. Of course this is my main indicator, the arrows and the rest of the indicators are for confirmation only. I made trades this Sunday and banked 60 pips right away and then another 20. This is the template with the trades that were active at this moment. I initiated these trades based on the fact that the trend was down and on the audusd the lines were crossing.
+
+--- 帖子 #400 ---
+can you post the indicator, please?
+
+--- 帖子 #401 ---
+Here is another shot at how my trades developed this morning. I already have a little bit more than 100 pips banked and making more than 250 pips this morning, but I am letting it ride and to see what happenes.
+
+--- 帖子 #402 ---
+Sorry I added wrong since each pip is worth $.50 cents then I have already banked more than 200 pips, as you can see by the balance. This is a brand new account that I started with a $5000.00 dollars. I think this is a pretty good trading system it is just that some of the rules and indicators have to be defined clearly. I wont be this lucky always you know making all of my trades 100% winners, well I am not going to lose any of the trades that are active since the EA has already moved the stop loss to break even, but the percentage is high.
+
+--- 帖子 #403 ---
+The trades that I placed yesterday progressed nicely. But I still sometimes have trouble understanding the EA that breaks even. Because sometimes it does not breakeven and the order to break even is missed. Then I have a loser trade that I have to close out manually. Can somebody explain the proper way to prepare the EA for breaking even. I might be doing something wrong. Anyways at the moment I am making more than 400 pips. Plus 200 already banked for a total of more than 600 pips in less than a day.
+
+--- 帖子 #404 ---
+where is this template I do not see it? was it removed?
+
+--- 帖子 #405 ---
+I am getting killed right now but adjusted the XpMa to (7) . I think this change will prevent this from happening again. Still holding on to the trades but they are all losers. I am losing about $600 dollars at this moment.
+
+--- 帖子 #406 ---
+Looks like this thread is sidetracking. Is anyone working on an EA for Lyllia's original system?
+
+--- 帖子 #407 ---
+I had not posted for a while, I was collecting myself after I saw how the last trades were developing. so I bailed out losing about $900.00 dollars. If I had waited because my SL was 200 pip it would have never hit it, and today I would have been $900.00 dollars ahead. Anyways just wanted to give you guys an update. Nobody has posted nothing so I think I will stop posting. About the EA, I really would like to trust them but I have not found a consist ant EA. If it is profitable I think I would test it first for three month or so. Up to know I have tested FXproadvisors trend catcher and in two weeks it has made close to $2000.00 on a $5000.00 demo account. I also bought the other one called scalper HR1 but that one has lost $3000.00 dollars on 5000.00 demo account. Anyways good bye.
+
+--- 帖子 #408 ---
+can we get a alert on this IINWMARROWS.mq4? You have to be glued to the chart to catch them... thx
+
+--- 帖子 #409 ---
+Hi everyone, I have not post for a while. I tried to solve the problem about this system Ea.Until now getting no where.I am not a programmer myself.but I could read code .Both version of EA are good basically.I think the problem part comes from the Arrow.sometimes it appears very late, but signal is still valid.So that cause the delayed signal of the positon opening. Both EA could not close all the postions opened in one TF. For an example, it there are two selling arrows before a buying arrow,the buying arrow should close the previous two sell positions and open a new buy position as well. Now the real situation is if there are two selling arrows appear one after another. the second sell arrow doesl not SELL instead it closes the previous sell arrow and opens a BUY position. This is definitely wrong about this system.then the buy arrow appears it close the buy position by the second sell arrow and opens a SELL position.then every position after will close each other in red.Do you see what I mean. Anyone could help solve this problem with EA. Like I said I still want to work out better way for EA to trade.Any suggestons?
+
+--- 帖子 #410 ---
+Hi, Can you post the alpha center timesignal indicator from post 209 # 15 Thanks topcat275@yahoo.com
+
+--- 帖子 #411 ---
+Thank you for sharing your strategy Lyllia. The Beginners Alert indicator doesn't update itself properly. I have to switch to different time frames all the time to see it plot it self on the chart again. The arrow one is ok, but only for 1H time frames or above during trending markets, or it'll cause false signals, or very small gains. I tried your EA and it never worked for me. Best of luck
+
+--- 帖子 #412 ---
+That indicator repaints itself, I would not use it.
+
+--- 帖子 #413 ---
+I have just discovered this thread and am very impressed with your manual system. There is a guy named findmanu http://www.forexfactory.com/member.php?u=102657 who has a thread that says he will code an EA for free. I did a search on his thread for "Lyllia" and it seems that no one has ever requested his assistance. Check out his thread, it appears that he has had pretty good success in the past. It would be awesome to get this working as an EA. THANKS FOR ALL YOUR POST. Blessings!!
+
+--- 帖子 #414 ---
+Can anyone tell me how to trigger the trailing stop. The EA doesn't seem to do that automatically
+
+--- 帖子 #415 ---
+Hey Pitpiter, I am interested in this EA of yours, but I would like to use dynamic money-management. I notice in the scalping FX Prime EA you built that you have dynamic code for it. I was wondering what code I should/could add to your Lyllia EA? In fact I would love to have dynamic money-management code that I could cut and past into any and all EA's I test. But for now would be very happy if you can help with the Lyllia EA. Thx DancingPhil
+
+--- 帖子 #416 ---
+Iyllia, thanks for sharing.
+
+--- 帖子 #417 ---
+Did anyone perfect this EA?
+
+--- 帖子 #418 ---
+Why is the only valuable post in the early development of this confusing yet crappy system ignored? noobs are incredible......
+
+--- 帖子 #419 ---
+if this strategy really can make money, i can code for it.
+
+--- 帖子 #420 ---
+I cloned the triple arrow system from Super EZ Forex.. Pretty damn good job if i do say so myself.
+
+--- 帖子 #421 ---
+Thank you but successful traders should always give time and/or money to those that are not as well off as they are. A few traders wanted the indicators to the system I posted yesterday so here they are with the template. Good luck with your trades.
+
+--- 帖子 #422 ---
+Hi everybody, how things are going? welcome to continually contribute to this thread.
+
+--- 帖子 #423 ---
+Hello, you still use this system? How is it going?
+
+--- 帖子 #424 ---
+any chnace to get ea for this indicators?
+
+--- 帖子 #425 ---
+does i_trend indicator makes repaint ?
+
+--- 帖子 #426 ---
+what indicators make this up?
+
+--- 帖子 #427 ---
+I_trend is the same as the ADX indicator and doesn't repaint but you should re-compute it when there is a MT4 update. Here is the .mq4 file.
+
+--- 帖子 #428 ---
+This is the original creator of the Triple Arrow system not Super EZ Forex Inserted Video
+
+--- 帖子 #429 ---
+Triple Arrow indis
+
+--- 帖子 #430 ---
+Attached File(s) Buy-Sell.ex4 3 KB | 1,012 downloads Attached File(s) C-BIRD.ex4 10 KB | 878 downloads Attached File(s) HelpLine.ex4 11 KB | 826 downloads Attached File(s) Info Plus.ex4 49 KB | 838 downloads Attached File(s) TMA-1 (1).ex4 10 KB | 767 downloads Attached File(s) trend filter.ex4 13 KB | 874 downloads Attached File(s) Trum Amazing Bar Chart.ex4 284 KB | 895 downloads
+
+--- 帖子 #431 ---
+Thank you rcrane. Triple Arrow looks like a complex system compared to the simple system I use but there is always added value in trying a new system. The attached chart shows RENKO 10 pips with EMA Cross 5/8.
+
+--- 帖子 #432 ---
+Inserted Video Working well
+
+--- 帖子 #433 ---
+Hi bro, Please could you assist with a template. Thanks
+
+--- 帖子 #434 ---
+Why would you want to?
+
+--- 帖子 #435 ---
+just because i can. Making good profits too. What about you?
+
+--- 帖子 #436 ---
+Hi Mitchwakahn Please see if possible ...please upload template of the chart and all indicators you used. That will help us all. thanks a lot.
+
+--- 帖子 #437 ---
+Good luck to any and all of you that think youll make any money using x3arrow system. Yes, it has some great runs but long term your losers will outweigh the winners very quickly. But at least you guys didnt pay the $300 Pat(owner) charged for the indicators in this system that you can find free online. I was in the SuperEZ group for over a year and quickly realized that Pat (owner) was nothing more than a lier and highly manipulative individual. Trust me guys theres waaaay better systems out ther you can invest your time in.
+
+--- 帖子 #438 ---
+Sir, i am a newbe here i was asking if someone could please mod this lyllia's EA into exponential buying/selling lot size (martingale), please sir do consider , sorry for my eng if any wrong, thnx please reply. https://www.forexfactory.com/attachm...3&amp;d=1238332687
+
+--- 帖子 #439 ---
+Please ask the coders in the " I will code your EAs and Indicators for no charge" thread.
+
+--- 帖子 #440 ---
+Hi Hutch. I'm having trouble with the Infoboard as it's only showing the data you entered manually into it. Is there a way to change this so that the info displayed reflects the chart its on? Thanks heaps
+
+--- 帖子 #89 ---
+This is totally new to me since I never had any problem with that indicator since it exclusively works on the chart it is on. The most likely error I can think of is that you did not click the "Allow DLL import" on the "Common" tab.
+
+--- 帖子 #90 ---
+Hy pls can you gimme the link to that background song on youtube THANKS
+
+--- 帖子 #91 ---
+Do you by chance have an alert for the Little Arrow v2.ex4 indicator?
+
+--- 帖子 #92 ---
+i need help if you can guid me using this indicator Trum Amazing Bar Chart..... the previous one not working on me at all, you dont mine to share with me the new one?
+
+
+===== 附件下载链接 =====
+

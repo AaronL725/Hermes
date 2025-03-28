@@ -1,0 +1,106 @@
+//------------------------------------------------------------------------------
+// SmaSRSI96 Version 10
+// @version=4
+// Copyright (c) Broketrader 2020,2021 !
+//------------------------------------------------------------------------------
+study( title="One Hour Swing Trader 2021", shorttitle="SmaSRSI-96-2021",
+       overlay=true, precision=5 )
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+// Input & Gloval variables
+//------------------------------------------------------------------------------
+TickerId        = tickerid( syminfo.prefix, syminfo.ticker )
+Price           = close
+BackgroundColor = color.new(#20272f,100)
+SXPeriod        = 94
+EmaPeriod       = 44
+TimeFrame       = "60"
+SmoothK         = 10
+SmoothD         = 6
+ShowRSISignal   = true
+
+Fill()          => timeframe.period == 'D' or timeframe.period == 'W' or
+                   timeframe.period == 'M'  or timeframe.period == '240'
+                   ? false : true
+
+
+
+//------------------------------------------------------------------------------
+// SRSI and SMA calculations
+//------------------------------------------------------------------------------
+Rsi             = security( TickerId, TimeFrame, rsi( Price, SXPeriod) )
+Stoch           = security( TickerId, TimeFrame, stoch(Rsi,Rsi,Rsi, SXPeriod) )
+StochK          = security( TickerId, TimeFrame, sma( Stoch, SmoothK) )
+SRSI            = security( TickerId, TimeFrame, sma( StochK, SmoothD ) )
+SMA96           = security( TickerId, TimeFrame, sma( Price, SXPeriod) )
+EMA48           = security( TickerId, TimeFrame, ema( Price, EmaPeriod) )
+
+
+//------------------------------------------------------------------------------
+// Calculation of Long/Short conditions
+// Long Condition when price above MA96 AND MSRSI > 40
+// Short Condition when price below MA96 AND MSRSI < 60
+//------------------------------------------------------------------------------
+
+CloseH1         = security( TickerId, TimeFrame, close )
+LongCondition    = ( CloseH1 > SMA96 ) and ( SRSI > 40.0 )
+ShortCondition   = ( CloseH1 < SMA96 ) and ( SRSI < 60.0 )
+
+
+LongCondition   := EMA48 > SMA96
+ShortCondition  := not LongCondition
+
+
+//------------------------------------------------------------------------------
+// Update colors according to condition
+//------------------------------------------------------------------------------
+var Color       = color.green
+var SmaColor    = color.green
+var FillColor   = color.green
+var LastLong    = true
+
+if LongCondition
+    Color       := color(#4caf50)
+    SmaColor    := color(#4caf50)
+    FillColor   := color.new(color.green,95)
+    LastLong    := true
+
+if ShortCondition
+    Color       := color.blue
+    SmaColor    := color.blue
+    FillColor   := color.new(color.blue,95)
+    LastLong    := false
+
+
+//------------------------------------------------------------------------------
+// Plot SMA and hidden price needed for the fill.
+//------------------------------------------------------------------------------
+PlotSma         = true
+
+if timeframe.period == 'W' or timeframe.period == 'M' or timeframe.period == 'D'
+    SmaColor    := BackgroundColor
+    PlotSma     := false
+
+PriceColor      = BackgroundColor
+Sma4Color       = BackgroundColor
+SmaPlot         = plot( SMA96, title="SMA96", style=plot.style_line,
+                         linewidth=5, color=SmaColor )
+PricePlot       = plot( Price, style=plot.style_line,  color=PriceColor,
+                         display=display.none )
+ExColor         = BackgroundColor
+
+
+GetFillColor() => Fill() ? ( LastLong ? color.new(color.green,90) : 
+                             color.new(color.blue,90)) : FillColor 
+
+
+GetFC() => PlotSma ? GetFillColor() : BackgroundColor
+
+fill( SmaPlot, PricePlot, color=GetFC(), transp=50, title="Fill",
+      editable=false )
+
+
+
+// End of Script //-------------------------------------------------------------
+

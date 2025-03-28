@@ -1,26 +1,32 @@
 import json
+from module.get_threads_link import get_threads_link
+from module.get_threads_detail import crawl_thread
+from module.file_downloader import downloader
+from module.vectorization import ForexVectorDB
+from module.llm import analyze_threads
 import asyncio
-import sys
-from get_threads_link import get_threads_link
-from get_threads_detail import crawl_thread
-from unextracted_files.file_downloader import downloader
-from vectorization import ForexVectorDB
-from llm import analyze_threads
 
-if sys.platform.startswith('win'):
-    asyncio.set_event_loop(asyncio.ProactorEventLoop())
+def run_option_1():
+    try:
+        print("开始获取线程链接...")
+        json_result = get_threads_link(start_page=3, end_page=20)
+        threads_data = json.loads(json_result)
+        print(f"成功获取到 {len(threads_data)} 个线程链接")
+        
+        # 批量抓取内容
+        for thread in threads_data:
+            try:
+                crawl_thread(thread)
+            except Exception as e:
+                print(f"抓取线程时出错: {e}")
+                continue
+        
+        print("所有线程抓取完成")
+    except Exception as e:
+        print(f"获取线程链接时发生错误: {e}")
 
-async def run_option_1():
-    # 获取线程链接并保存
-    json_result = await get_threads_link(start_page=3, end_page=10)
-    threads_data = json.loads(json_result)
-    
-    # 批量抓取内容
-    for thread in threads_data:
-        crawl_thread(thread)
-
-async def run_option_2():
-    await downloader.run()
+def run_option_2():
+    asyncio.run(downloader.run())
 
 def run_option_3():
     try:
@@ -41,15 +47,15 @@ def show_menu():
     print("4. 运行LLM分析")
     print("5. 退出")
 
-async def main():
+def main():
     while True:
         show_menu()
         choice = input("请输入选项 (1-5): ")
         
         if choice == "1":
-            await run_option_1()
+            run_option_1()
         elif choice == "2":
-            await run_option_2()
+            run_option_2()
         elif choice == "3":
             run_option_3()
         elif choice == "4":
@@ -61,4 +67,4 @@ async def main():
             print("无效选项，请重新选择")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()

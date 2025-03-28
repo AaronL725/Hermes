@@ -1,0 +1,70 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © mfeldt
+
+
+//@version=4
+strategy("ModayTuesday", overlay=true)
+
+
+close_on_friday   = input(defval=false,title="Close on Friday",type=input.bool)
+friday_close_hour = input(defval=16,title="Friday close hour",type=input.integer,minval=0,maxval=23,step=1)
+day_start_hour    = input(defval=21,title="Day start hour",type=input.integer,minval=0,maxval=23,step=1)
+cancel_pending_order = input(defval=true,title="Cancel pending order",type=input.bool)
+entry_level           = input(defval=0.1,title="Entry level",type=input.float)
+sl_level              = input(defval=0.1,title="SL level",type=input.float)
+tp_level              = input(defval=0.5,title="TP level",type=input.float)
+
+// works on bars between minute and day
+
+bars_per_period = int(2880/timeframe.multiplier)
+
+
+is_newbar(res) =>
+    t = time(res)
+    not na(t) and (na(t[1]) or t > t[1])
+
+
+new_week = is_newbar("1440") and dayofweek==3
+
+
+
+high2  = float(na)
+low2   = float(na)
+range2 = float(na)
+
+
+
+high2  := (is_newbar("1440") and dayofweek==3) ? highest(bars_per_period)[1]:high2[1]
+low2   := (is_newbar("1440") and dayofweek==3) ? lowest(bars_per_period)[1]:low2[1]
+range2 := (is_newbar("1440") and dayofweek==3) ? highest(bars_per_period)[1]-lowest(bars_per_period)[1]:range2[1]
+
+
+
+traded_this_week=false
+traded_this_week := ((strategy.position_size != 0) or (strategy.closedtrades > strategy.closedtrades[1]))? true : new_week? false:traded_this_week[1] 
+
+
+
+entry_long = high2+entry_level*range2
+tp_long    = entry_long+tp_level*range2
+sl_long    = low2-sl_level*range2
+
+entry_short = low2-entry_level*range2
+tp_short    = entry_short-tp_level*range2
+sl_short    = high2+sl_level*range2
+
+strategy.entry(id="MoTuL",long=true,stop=entry_long,oca_name="MoTu",oca_type=strategy.oca.cancel,when=(traded_this_week==false))
+strategy.exit(id="MoTuLE",from_entry="MoTuL",limit=tp_long,stop=sl_long)  
+strategy.entry(id="MoTuS",long=false,stop=entry_short,oca_name="MoTu",oca_type=strategy.oca.cancel,when=(traded_this_week==false))
+strategy.exit(id="MoTuSE",from_entry="MoTuS",limit=tp_short,stop=sl_short)  
+strategy.close_all(when=(close_on_friday and dayofweek==5 and hour==friday_close_hour))
+
+
+plot(entry_long)
+plot(entry_short)
+plot(tp_long,color=color.green)
+
+plot(tp_short,color=color.green)
+plot(sl_long,color=color.orange)
+plot(sl_short,color=color.orange)
+

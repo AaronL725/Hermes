@@ -1,0 +1,1646 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hi to all my friends out there trying to learn to trade intraday. INTRODUCTION Going to purchase expert advisors from vendors without knowing the strategy that was built in the EA is like building a house without foundation. That is why many of them are percieved not to work because the working strategy is not understood. So I believe it is important that we are on the same page of the manual system before building an EA. MY SYSTEM I have developed a system which caughts the intraday swings of GU on the 30 min chart (can work on other pairs but works best on GU). Now in creating the system, we must understand that the market ranges 70% of the time between support and resistance levels. Until there is a fundamental driver to move price to the next level, where new support and resistance zones are formed. The second thing we must understand that a lot of traders use pivot points as supports and resistance, stops and exits. This we must include in our system. We must also use an indicator to identify the markets turning points as it moves from support to resistance and back. Consequently, the Gann period 5 and SMA 5 would be quite approipate We need an oscillator to identify over bought and over sold conditons where the market is likely to turn so we borrow swingman trix and a stoch set at 833 (actually the swingman trix is similar to the stoch and gives the arrow when the stoch crosses 50) It is also important for us to know the Average Daily Range so we know when price has done its daily range and due for a retracement. System Update 25/5/2010 Due to current market conditions we have adopted a 7sma and 7 gann setting for the 30min tf, which has proved very profitable. If you miss the initial entry, you can wait for price to pullback between the gann and sma to enter the prevailing trend or use the 5 min chart accordingly. System Update 23/6/2010 The System has been consistent with the 7 sma&amp;gann,trix and pivot points on the 30min tf System Update 23/11/2010 The system is traded using the 8sma and 8 gann with the QQE indicator to filter trades on either the 15 or 30 min tf. Happy trading System Update 23/11/2011 While the core of the system has proved robust intraday, the system has been adapted to the daily charts (Gann 8, SMA 8) and has been very successful with less intraday stress.
+
+--- 帖子 #2 ---
+We must give credit to Cobra (THV4) and Swingman for using there indicators. Our chart should look like this below
+
+--- 帖子 #3 ---
+THE TRADING SYSTEM Buy Signal price closes above gann and 5sma, stoch pointing upwards better when breaking above 20 and moving upwards. ADR indicator is green showing market has increasing ATR(good volatility) and swingman trix showing arrow up or increasing momentum to the upside. Sell Signal Opposite of buy signal Risk Management and Targets Enter with 2 minilots First take profit target 40-50 pips or if you buy at pivot level target next pivot level. Second take profit level when stoch reaches overbought or oversold and price is at major support or resistance level or has moved for example from Daily Pivot to R2 level. Of course if price closes below gann in an uptrend then you are out. Stop Loss level. If going long the low of the candle stick that precedes the signal candle(the candle that closes above gann to give the buy signal) TRADING TIMES Works best from London open to 1100 gmt. ADDITIONAL INFORMATION This is the basic system there are other nuances to consider just like trading of the lower tf in the direction of the 30 min trend, buying of retracement, counter trend strategies when price bounces of support and resistance levels etc. But for now the basic strat is profitable. Finally do not risk more than 2% of your capital in a trade. Particularly becos if price hits my stop loss and gives a reverse signal I double on the signal(also part of the advanced strat.
+
+--- 帖子 #4 ---
+Now the indicators and templates, before I discuss what the EA should have for my friend KijKij. You can use any pivot indy or get the THV pivots and THV info panel from Cobra's thread (THV)
+
+--- 帖子 #5 ---
+Now for the EA Development we use the following parameters GU 15 min TF Indicators Gannhilo set to 7 (The core of the system) (best suited for the 15 min chart) MTF Gannhilo set 5 (60 min tf) as trade filter(should be optional) Stoch 833 Buy Signal Price closes above gann and stoch is rising (take trade if gann 5 on 60 min tf is bullish-optional function) Sell Signal Price closes below gann and stoch is falling (take trade if gann 5 on 60 min tf is bearish-optional function) variable tgt and stop loss But EA must close trade on price closing below Gann hilo after buy signal or price closing above gann after a sell signal. Risk management variable must be included. Spread filter also. Trade Time option (system best suited from 0700gmt to 1200gmt) The system is best suited for the GU 15 min chart with a take profit of 40 pips and emergency stop loss of 100 pips. EA must be ready to close trade and take opposite signal. (This reduces your sl to something like 28-30 pips on opposite signal.
+
+--- 帖子 #6 ---
+Additonal Features The user input interface should in addition to the features already outlined for the GU setting contain the following : 1. Gann setting variable. (determine the gann period you want the ea to use) 2. Time Frame Variable (determine the time frame the ea to trade) 3. Upper Time frame trend (determine the upper time frame to be used as a trend filter using the gann) 3a. Upper Time Frame Gann Setting (Gann setting for the upper time frame filter) 4. ATR (10) Percentage Stop Loss (eg. ATR 1.5 would mean the EA would set a stop 1.5 times the ATR (10) of the time frame is being traded. 5. ATR(10) Percentage Take Profit(the same as above) 6. partial close feature variable (to close half the position at a half close tgt and auto move stop to break even) 7. Partial close target variable( set the no of pips for partial close and percentage 8. Final Profit and Stop Loss( must have variable to use the partial take profit setting) 9. A feature should be included to either use the ATR feature or set manual tp or stop loss. However the overiding signal is if the ea gets an opposite signal. It will automatically close the position. 10. Time Delay Variable before taking the oppposite signal. 11 Risk Setting 12 Spread filter 13. Slippage filter 14. Trade Time Variable
+
+--- 帖子 #7 ---
+Thanks okehiedon, well explanation. I will try to code EA for your system. Just keep posting with your live trade images so that I can understand the system more.
+
+--- 帖子 #8 ---
+In continuation of the trading system. I think it is appropiate we first understand the currency pair we trade, its characteristics, behavioural patterns and movement. So we trade the system on the pound dollar usually referred to as cable. I will like to start with a short story. There was this big time, very succesful speculator in the market who trades large orders capable of moving the market. He hired a technical analyst as part of his team since he was a fundamentalist. So on a particular pair the tech was showing him the areas of supports and resistance and price projections with all the familiar technical stuff. He told the speculator to buy at a certain level which was quite a major support. Well the man asked him 'you sure I should buy here' the young man said yes. Okay to the horror of the young man the speculator gave a large sell order at that support level, price raced down as that order went through protective stop orders and the old speculator rubbed his hands as he took profit and then reversed the orders to go long with a grin on his face and smiling to the young tech. Ladies and Gentlemen that story depicts the trading behaviour of the market makers that trade cable. Now let us take a look at an example on the 1 march 2010. Price had got to the physcological support zone between 1.5000 and 1.49655. where all the analyst where speaking of a reversal citing soveriegn buy orders at that level. It was also a point where GU had done its average daily range. I had just placed my long order at that point with a 50 pip stop loss expecting a bounce, no sooner had I completed that order, what happened next would better be imagined than experienced, the market tanked an additonal 176 pips in 15 min before reversing. Why so fast, somebody pushed the market and cleared all those protective stops thus triggering the massive down movement.
+
+--- 帖子 #9 ---
+So the lesson learnt is that as much as possible do not place limit orders at support and resistance levels, cable has the tendency to over reach itself due to activities of market makers and stop hunters. Infact the last trade I posted with the system is a clear example. Wait for that reversal pattern and then follow on, do not anticipate price action. This is the basis for the formation of the system. 2. The london open is the best time to trade cable where there is momentum and volatility, infact you can hardly go wrong if you do not have a percieved notion of where price is going but follow the market makers as the lead price.
+
+--- 帖子 #10 ---
+Understanding when to trade and what moves the market is sin qua non to be succesful at this biz The 2am EDT (7 am GMT) German Dax futures market sets the ball rolling as it usually determines the trend on the euro open and could lead to a strong trend if the numbers are very strong or weak during london open. At 10:30am GMT in London telephone bids at the gold and oil fixings take place, which sets the morning clearing prices for bullion and crude dealers that are then adjusted at 3.30pm GMT local time. At 11am GMT each day in London the British Bankers Association set the inter-bank LIBOR rates, something that sets the tone for lending rates between financial market participants. This adjustments tend to have large impact on cable price movement. Of course the US open and the London fix are other good times to trade cable, though the euro is a better prospect and moves better when the US market is open and the 11am EDT European market close. Now we must also understand that at the end of the U.S. session the pattern is for Asian markets to try and initially reverse U.S. trade direction, although the lack of volume tends to soon allow pairs to find and hold support areas. The European markets tend to move in the same direction as Asian trade More often than not US traders usually reverse london trades if their has been a substantial movement.
+
+--- 帖子 #11 ---
+I will be back later in the day to answer any questions. Please go ahead and post your doubts,contributions and comments
+
+--- 帖子 #12 ---
+Okay lets get back to understanding the intricacies of the system with regards to the pair we trade. I need to say this before now, I usually place limit orders at areas where I expect price to reverse, but after experiencing the over reaching effect of market makers and stop hunters around those levels, I needed to have an edge to help me around those areas, that is why I developed the system with the gann and 5 sma which helps visually to see what is happening around those areas. The 5 sma provides an opportunity to enter on the retrace to it, when price breaks below the gann when going short or above the gann when going long. Watch what happens when price retraces to the area between the gann and the sma, provides good entry opportunities . Also I usually use the mtf stoch set to 60 min on the 30 min tf. The gann actually helps you see the turning points and combined with understanding of candle stick reversal patterns and support and resistance levels you can enter a trade with the highest probability to succeed. Look at all those pin bars and engulfing patterns confirmed by the signals by the system in the chart below. This is the potential of the system
+
+--- 帖子 #13 ---
+Remeber the basic system trades on the 30 min time frame. Gives a good visual presentation of the intraday swings. However, I usually use the 15m tf to get early entries in some circumstances. Particularly if price has moved so fast in a partiuclar direction, comes of a strong support or resistance levels., You could get an earlier entry by using the 15 tf. For those who think that the 30m chart is too slow for them, I suggest you can use the gann 7 and sma 7 on the 15 tf. This is another good option particularly during the london open.But beware there could be lot of false signals later during the day. The 30m tf reduces these fakes and you would caught some part of the cake as price moves on its way. As the say half bread is better than none
+
+--- 帖子 #14 ---
+Now as I said earlier on the system tries to confirm when the market actually turns at support and resistance levels. It is important to note that apart from those distinct levels you get on the 4 hr chart, the next important levels are yesterday's high and low and todays open, watch also how price reacts off the pivot levels. Why the work so well is because most traders that trade cable use them for price projection and stop loss. (Actually I have a system with fibs, yesterdays highs, lows and open) You will normally see that in a uptrend or down trend price pauses at those levels before continuing or reversing, infact they act as bus stations where people get of and some come on. Look at the chart below and see what I mean
+
+--- 帖子 #15 ---
+Okay this morning at london open price was somewhat flat and we had that obvious gap, clearly market sentiment was bearish, based on the goldman issue and the fear of a hung parliament in the UK, I waited for price to pull back between the gann 5 and 5 sma and showed a continuation of the bearish trend below the 5sma and Support 3 and shorted at 1.5234. Chart attached Yea the problem with this trade is the divergence showing with the trix. Also I had the RSI on this template I used they all tell the same story. The core of the system is the gann and 5 sma with the pivots, you can use any oscillator to confirm
+
+--- 帖子 #16 ---
+Taken profits after price hits 1.5200 round number, pysch support after observing some stalling. The low was 1.5190(our 40 pips). Remeber the libor rates and crude and oil price fixing could reverse price at 1100 gmt, so we are out at 30 pips profit (price stalled before getting to our 1.5186 profit tgt).
+
+--- 帖子 #17 ---
+One thing we can see clearly is that the gann 5 give us a perspective of the present momentum, you could have shorted that pair by going down to the 5 min in the direction of the 30 min gann, an mtf strategy. So now I wait till the US open to see what happens. 30 pips in the kitty, could have been more if not for the fear of the presence of the gap which usually gets filled.
+
+--- 帖子 #18 ---
+Now I want to discuss the stop and target of that last trade. According to the system our stop would have been above the candle before the signal candle that closes below the gann, however, that occured during the gap so we placed our emergency stop above present price action at 1.5267 that was some 33 pips and within our risk management. Our profit target was calculated using the Average Daily Range indy which gave us 47 pips at the time of entry, which came to 1.5183 and also a strong support area(that is why I used 1.5186). Well price got to 1.5190 and stalled so I got out at 1.5200.
+
+--- 帖子 #19 ---
+Great explanations. I am following with interest.
+
+--- 帖子 #20 ---
+Okay we had the swing up and a buy signal which ran up 77 pips while I was distracted doing other things (how we need an ea that can trade this system properly).I have highlighted the entry with the vertical line. Price above gann and 5 sma, trix up arrow and stoch rising. Showing the potential of the system. Presently I am looking for short opportunites
+
+--- 帖子 #21 ---
+Okay here is the chart
+
+--- 帖子 #22 ---
+Now closely observe where price reversed at the initial down swing(at S3) and resistance at S1 seems to hold the upswing, might give us short opportunities. We wait and see
+
+--- 帖子 #23 ---
+Okay here are the THV indicators
+
+--- 帖子 #24 ---
+Its been quite a good day for the system and also instructive, the short opportunity did not fully materialise, though price was below gann and 5 sma, the trix did not give a sell signal. However after that we had a buying opportunity, which would have kept us in the money, though I did not take the trade passed my trading time and to close to resistance and the high of the day. So its been a good day. tommorow we shall trade using the tentative ea settings of 7 sma and 7 gann on the 15 min chart and see the difference and by the way, my trades are live trades, my least trade size is 0.1 minilot depending on my stop loss @ fxcm metatrader uk. So you know that this is serious biz. Now the chart and we see what tommorow brings good night.
+
+--- 帖子 #25 ---
+Great. Got 10 pips on down move. Took profit when price bounced 20 pips back.
+
+--- 帖子 #26 ---
+This system compliments my current GU 15 min TF system trading from 7 GMT. Thanks
+
+--- 帖子 #27 ---
+Oh thats great matlobien, Okay we got a long signal lets see how far it goes, however be mindful that we are entering supply zone and we have impact news at 8.30 gmt
+
+--- 帖子 #28 ---
+There is a big battle going on between bulls and bears at 1.5364 area, I have closed half of my position
+
+--- 帖子 #29 ---
+Remeber we have news in 30 min time so beware reduce your exposure and get out at break even at worse case.
+
+--- 帖子 #30 ---
+Great , I got my 40 pips on the up.
+
+--- 帖子 #31 ---
+The 2 indicators crossed at 1.5300 and price closed at 1.5315 above it. I did not enter until Asian high was cleared by 5 pips at 1.545, because on 1 hour TF gann had not turned up yet. I aimed for 1.585 as that was 40 pips and R1. This was on 15 min TF
+
+--- 帖子 #32 ---
+Matoblien very good indeed, you are getting the hang of the system another good day for me too target filled and paid off. Now we wait for the libor rates/ gold and crude oil fixing at 1100 gmt to see the next leg of the cable move. I will use the ea parameters for the us session. However be mindful that if there is no news during the us session price tends to be erractic and choppy.
+
+--- 帖子 #33 ---
+Now the system will also have losses but because of the clear exit signals your losses would be small compared to the winners. Just to let you know that I started trading the system with the ea parameters on the 15 min tf and you can hit 20 pips steady taking every signal and doubling if you have a loss. However allowing the mometum to run till it ends and trying to catch bigger moves at an intraday level made me shift to the 30 min chart. Observing candle stick patterns and support and resistance levels and fib levels increases the potential of the system
+
+--- 帖子 #34 ---
+Yip, the buy signal on 15 min was good for 100 pips today. But I rather make 100% sure and take 40.
+
+--- 帖子 #35 ---
+I unfortunately can't trade US session, but keep on posting. I will drop in as I can.
+
+--- 帖子 #36 ---
+Well, it turned at 11 gmt for 20 pips after some obvious divergence. The only signal that was not corresponding was the gann on the 1 hour tf.
+
+--- 帖子 #37 ---
+Now what we must understand is that the waves on the smaller time frames form the waves on the larger time frames. SO the gann 5 will first react to price action on the 5 min chart, if it contunies in the same direction after a while then you see the reaction on the 15 mtf, if it is sustained then 30 min, 60 min 4 hr and daily in that order. As I said earlier on at 11gmt the fixing of the libor rates,gold and crude fixes affects dollar valuations. At this time of the year it is not so obvious when we get into the summer periods you will begin to see that significant reversals of the inital trend occur between 11 gmt and 1230 gmt before the US open. Now the I hr gann is good for traders who want to swing trade but use the 4 hr chart to determine direction to trade . They identify likely swing points on the 4 hr chart and use the 1 hr gann as an entry signal. Another way of trading the hourly gann is to use it as your trend direction for your 15 min gann. If they do not agree you stay out of the trade. Now to highlight the power of the gann 5 system. Place it on the 4 hr chart on eurjpy and gbp usd, what do you notice. Okay place it on the daily charts of aud jpy and cad jpy, what can you see. I would leave the answers to you. Meanwhile today was another profitable day using our system. Catching the 2 intraday swings on gu nicely. But I think the overall trend is up as price found support at yesterdays high and the 61.8 fib ret of the upswing. Tommorow is another day stay blessed.
+
+--- 帖子 #38 ---
+Got my 20 pips early this morning. Africa rocks. See you at the soccer in 50 days.
+
+--- 帖子 #39 ---
+well I was wondering where the thread went to. I see we have been moved to the trading systems section. Good trade matlobien. No trade for me until impact news at 0830 gmt.
+
+--- 帖子 #40 ---
+I took a quick 20 pips on the reversal as price stalled at 5400 and there was divergence.
+
+--- 帖子 #41 ---
+Price to erratic and candle to big for me to trade after news. Well I got my 40 for the day so I will see you tomorrow. and blessings to you.
+
+--- 帖子 #42 ---
+I also see divergence, so I will be careful.
+
+--- 帖子 #43 ---
+KijKij here are the Gann MTF Indicator.
+
+--- 帖子 #44 ---
+well done matoblien, got in just after the news and was out for some profits as price hits yesterdays high. Remeber as I said earlier the daily hgh and lows of the previous day and open are significant intraday levels. I will wait for a break of the high a pullback and then continuation before I re-enter. However we shall also look out for selling opprotunites based on the system. So we keep an open mind
+
+--- 帖子 #45 ---
+Now while we wait for the next move of the day. Let me re-examine todays possible trades using both the 30 min and the 15 min charts respectively. Trading the 15 min chart could have given you a signal as shown below and a loss then a buy signal afterward. While the 30 min tf would haven given you a buying opportunity at the dip as shown on the chart. Now we must always understand that market makers usually push the market one way at the london open to clear stops before reversing for the main trend of the day (The Big Ben Strategy). That is why you see a lot of volatility between the euro open which responds to the direction of the dax futures and the london open. What is the solution to this dilenma. Personally I double up once on a reverse signal at london open if I am trading on the 15min. I do not think about it because if you allow the fear of reversal get to you will never trade. Just keep your trade size at 2 % and remeber the system ensures that you winners will be far better than your losers. Now the charts
+
+--- 帖子 #46 ---
+However we shall also look out for selling opprotunites based on the system. So we keep an open mind[/quote] I am short cable chart using 15min tf attached
+
+--- 帖子 #47 ---
+Exactly the way I trade. If Frankfurt open gives me a signal I go. At London open I monitor very closely ,sometimes even stop loss to BE. I also don't hesitate to reverse or if price goes in initial direction I look at round numbers or day high low.
+
+--- 帖子 #48 ---
+Yea great minds think alike matlobien Now on a serious note. One of the reasons I opened this thread in the rookie discussion section was to help my friend kijkij get the hang of manual trading. However, the thead was moved to the trading system discussion. Okay no problem. So i would be trying to explain the basics so that KijKij and my other friends can get the hang of manual trading. I know there are many good traders in Forex Factory, which I have personally learnt alot from and I am still learning, so I am obliged to teach others also from my experience. This would be the aim of this thread including the implementation of the system, which has already shown some potential.
+
+--- 帖子 #49 ---
+The first thing we must do to be succesful in forex trading is to know thyself. Personally I went through every single system in forex factory within my first year, but that did not stop me having margin calls for about 4 times. I knew all the theory but when it came to the real thing my mind went blank and i would be following the market basically on instincts. Till I understood that I am quick fingered and always wanted to be in a trade. So my problem was discipline and then I had to devise a system to get me into trades as quick as possible without experiencing too much whipsaw. That is how I came about the gann which I started with a 10 setting before going to its present 5 gann for the 30 min chart. Or if i want to trade on the 15 min I use 7 gann. Now I would advise for starters to those new to forex trading or trying to be successful to start with the 4 hr chart using the system. Get used to taking the trades as the come on the 4 hour close. Write down what you saw as you entered the trade and how you felt. The most important thing at this stage is not whether you loss or profit but whether you are able to follow the rules. Make it a habit. I do this sometimes when the itchy fingers return (Trying to sell resistance and buy support on instinct ). Now trade it on 4 hr gu and also 4 hr Eur Jpy. For those who like the dailies the aud jpy and cad jpy work very well. So lets start from here. In summary know thyself
+
+--- 帖子 #50 ---
+Just took a Long GU on M15, also confirms on H1. Right?
+
+--- 帖子 #51 ---
+After understanding yourself, you must understand the markets. There are 2 basic themes in the market, Risk appetite and Risk sentiment . When the world markets are in risk appetite mode, the stock market is going up, commodities are going up, the market would be bullish on the Australian dollar, The Canadaian Dollar, the Pound and Euro, swiss francs in that order. The dollar and the yen would be sold off. US index would be bearish. etc etc. When the opposite occurs (risk aversion) stock market falls, commodities are sold off, there is flight to safety, the aus and cad dollar, pound and euro and swiss francs are sold of in that order. The yen and us dollar are in demand. When the market is neutral then we have the ranges, were price bounces of support and resistance level. Even when the market is ranging there would be a slight bias to risk appetite or risk aversion Consequently you most know what sentiment drives the market, so even if you are taking counter trend trades, you know what we are doing. Now how do we determine risk aversion or risk appetite without going through too much news and fundamentals. Simply open the daily chart of the yen pairs and look at where they are heading to at a glance you will know what sentiment drives the market.
+
+--- 帖子 #52 ---
+KijKij you are right, but the problem with that trade is that you must read my post on times to trade. I said earlier that the system works best from 7-11 gmt. (You can see the clear signals I am talking about earlier today on your chart, the buy and the sell signal). After that you should wait till the new york open before taking any other trade because the market can go any direction. Secondly the Atr indy(it is not on your chart)is showng red meaning do not trade.
+
+--- 帖子 #53 ---
+Which ATR indi you are talking about? The default one from MT4 or you have other? If you have then please post here with right setting instructions. Thanks
+
+--- 帖子 #54 ---
+I am short cable chart using 15min tf attached[/quote] Another great trade.
+
+--- 帖子 #55 ---
+Thanks for your kind information. My target hit and I made 11 pips.
+
+--- 帖子 #56 ---
+This is the indicator as requested. Now guys just to inform us. On the average is a lot easier to trade the london session before the US session kicks in. There is so much contending variables, trading the us session especially on days were there are no high impact news to set the direction. Price action usually is choppy and then without warning suddenly breaks out in one direction before you know what happens suddenly reverses. So I suggest we all try to maximise the london sessions before 11 gmt. That is all you need to make money in this market. if not we shall be guilty of over trading. Now for guys that want to trade the us session I will be coming out with the intriciacies you require using the system.
+
+--- 帖子 #57 ---
+Would you please be so kind to attach your 15 min template ? Thanks
+
+--- 帖子 #58 ---
+I am short cable chart using 15min tf attached[/quote] What is the extra candle on the right side of the chart?
+
+--- 帖子 #59 ---
+Matlobien, it is the same template I provided on the first page. Just attach the xADR indicator on post 56 and use the mt4 stoch set to 833 instead of the mtf stoch . Secondly change the gann and sma settings to 7 .
+
+--- 帖子 #60 ---
+Well that is the current daily candle, so that yo can easily see the current day trend instead of switching tf. Hope you are enjoying the system. Glad to have you around What is the extra candle on the right side of the chart?[/quote]
+
+--- 帖子 #61 ---
+Now the main challenge for every trader is to overcome the emotional opposite mindsets of fear and greed. The fear of the trade going against you does not allow traders to exploit the full potential of a trade. So instead of getting a 50 pip move we end up with 10 pips and we are happy. The truth is we are not going to be succesful without exploiting the full potential of our trades. For example cable currently has an average daily range of about 125 pips. Most of the moves in cable occurs from the euro open to just before US open. Now with this information we set our trade time from that period and have a mindset that I am trading cable at the right time and should look for at least 40- 50 pips. The system will comfortably give you that. By the way I have always heard traders looking to add filters to an already good system in forex factory(I can tell you better, I have gone thru all the trading systems in forex factory in 2008) so the add indicators upon indicators till the system looses its edge and everyone leaves the thread confused and bewildered. What most people do not understand is that the best filter is the time to trade. Every currency has the best time it moves. Those london guys that trade cable want to make money also, the may push the market one way, but surely if they are to earn there paycheck for that day the market must move in a certain direction, and we are riding on thier tails as retail traders till 11gmt when the fixes begin and price may likely reverse. Secondly keep your risk low that is the only way you can overcome fear and greed. That is the only way you can take a loss and reverse your position immediately in order to follow the market without thinking about the loss and being afraid to reenter a trade. Finally what makes you a successful trader is not your wins but how you handle the losses when the come. Good Night and God Bless.
+
+--- 帖子 #62 ---
+Thanks mate.
+
+--- 帖子 #63 ---
+Well, if I was up at 3 gmt and took the signal then I could have had a nice 50 pips. I traded the breakout after 5 gmt and got 5 after price made pin reverse. Lets see if it reverse at London open.
+
+--- 帖子 #64 ---
+But I was up at 3GMT to R1, that made me 12 pips.
+
+--- 帖子 #65 ---
+Brilliant my friend. Keep going.
+
+--- 帖子 #66 ---
+News drove me down for 20 pips profit. Interesting that low impact news spiked it so much. Luckily my sl was at be.
+
+--- 帖子 #67 ---
+Guys missed all the fun had to take care of other matters this morning. So where are we I see the news is out and price seems to below the gann and sma but there is a lot of indecison on the news outcome. We wait and see.
+
+--- 帖子 #68 ---
+Most of the trades I took this week worked well with a 20 sl and 20 tp. If it is against 1 hr trend I am more careful and will move sl earlier to be or tp between 10 and 20 pips depending on the speed of the move. I haven't had time yet to backrest on just 20 sl and 20 tp, but visually it looks good. As I said previously, this strategy compliments my style of trading and works well for my trading personality. But as our teacher pointed out, you have to learn what suits your personality. Thanks again for you sharing your nethod. God bless and may the pips follow you.
+
+--- 帖子 #69 ---
+As I earlier commented price was below the gann and sma, this is the pullback strategy were price pulled back between the 5 sma and gann before I entered now 25 pips to the good we are looking to exploit the potential of this trade and see how far it goes. Bearish sentiment prevails.
+
+--- 帖子 #70 ---
+Matlobein, well done what we must seek to do is to exploit the market when it goes our way through letting our profits run. Now since you have identified 20 pips as a consistent take profit level for you. Enter with 2 lots take the first at your 20 pips and let the other lot run till the price reaches its ADR or the price closes on the other side of the gann.
+
+--- 帖子 #71 ---
+Taken half of our position off and locked in some pips on the other lot trailing the trade with the gann till it turns.
+
+--- 帖子 #72 ---
+Here we go exploiting the potential of the trade
+
+--- 帖子 #73 ---
+Well done mate, Today I made 23 on GU but I took a long on EU on US open and it suddenly dropped.
+
+--- 帖子 #74 ---
+Hey Okehiedon thanks for sharing the system was scalping using all the stuff u put up and now in 25 pip profit. God bless
+
+--- 帖子 #75 ---
+This market is falling like hot knife and I am in, a traders dream
+
+--- 帖子 #76 ---
+sorry that did not come out well, I am trailing the move down with the gann and would be out with the slightest hint of reversal. Cable tends to reverse very fast.
+
+--- 帖子 #77 ---
+kijkij every currency breathes differently, that is why I named this system gu intraday system. Now I must confess to you that you need to be informed of the general mood and happenings of the market while trading. The Euro is being killed all round today, I took off 50 pips earlier shorting the euro because of the greek problem. I hardly trade that currency but when there is a fundamental driver, that is the best indicator you need. Please stick to one system and one currency pair and if possible one time frame till you achieve some level of consistency. That is the way to do it.
+
+--- 帖子 #78 ---
+Okay guys its been quite a profitable day with the system . However I must warn that not everyday is like this so when you see the opportunity use it well. As a review of todays trade, during our trading time for the system, we had only 2 entries a long and a short(very profitable short). (Chart Attached). The system allows you to exploit the full potential of the intraday trend using the gann as a sort of trailing system as I have shown by my trades. The key is to hit your first initial target and allow the secong position to run. Until you hit the daily ADR, major support/ resistance or gann tells us to exit. There were also various opportunities to enter the intraday trend on the retrace between the sma and gann(which is how I entered the trade on the chart attached in my previous posts). So I call it a day. Will not be trading tomorrow. Need to attend to some domestic issues. By the way, I do not have any phobia to trade on friday, infact they have been some of my best trading days. So God bless and an early good night.
+
+--- 帖子 #79 ---
+Brilliant trading there mate. See you Monday.
+
+--- 帖子 #80 ---
+Ok, so today I had 2 trades. I trade from 5 gmt. First sell got my 20 pips and then the buy got stopped out. So even on a whipsaw day like today I had a BE.
+
+--- 帖子 #81 ---
+I had two trades, GU, EU Long and made 43 pips fro both .
+
+--- 帖子 #82 ---
+Looks like the Asian session is bringing you lots of pips.
+
+--- 帖子 #83 ---
+While back testing this system I just realized again that you cannot just follow any system blindly. You still have to use your brain. Please study the GU behavior by spending time in front of your computer and you will be successful. Many pips to you all.
+
+--- 帖子 #84 ---
+OK-don, what are the blue &amp; red horizontal lines on your charts, what part in the system do they play..Thanks Rebel.
+
+--- 帖子 #85 ---
+I am just using those lines to show the system buy and sell signals. The blue indicates buy the red sell.
+
+--- 帖子 #86 ---
+Okay guys popped in to see what happened today. Glad to hear that we are all making pips. So I want to do a review of today's possible trades. Now from what I saw it was a difficult trading day for any trend following system. But looking at our system I think we could have got a pass mark, trading the 15m gann system. The system identified all the possible intraday swings. Again as I use to say this system has a lot of potential. The attached chart with the blue horizontal lines indicate our buy signals and the red lines the sell signals.
+
+--- 帖子 #87 ---
+Now let me from the benefit of hindsight do a review of what could have happened today, if I had traded. First of all by 0645gmt could have opened my charts and news feeder to have an overview of what happened overnight, to get a feel of the market whether sentiments are bearish or bullish. Know where the current support and resistance levels in cable where for this trade session. By this time my friends matlobien and kijkij who trade the overnight sessions could have made thier daily pips , while I am just getting into the mood. Check the calendar and noted that we have impact news on gu this morning. Entered the buy signal by 0715 gmt. Would nearly have my heart jump out at the whipsaw created by the 7.45 gmt candle. Hit my first profit tgt of 20 pips as price hit todays open. Moved stop to BE waiting for the news. Negative news stopped at BE. Entered the sell signal on account of the negative cable news looking for price to break down, become puzzled and nearly frustated as price action moves up and down. But noticed that price was being rejected at the MS1 level which is acting as resistance. Then I begin to scan other pairs out of impatience with cable's price action and then the news flash, Greece to take EU aid , and watch as the Euro is all round well bid, scan the euro pairs and then jump into eurjpy(my next best favourite pair) targeting 50 pips. Meanwhile with the other eye on GU price action and feeling more comfortable because with eurgbp racing up there is no way GU is going up. Get my 50 pips then one more look at cable, my eyes tired, I leave my computer, come back an hour later, yes! somehow GU got to my target at S2. Then take a look at Eurjpy later in the day, which had done 253 pips and wonder why I did not exploit the full potential of the trade. Well be glad I got out of that frustating GU trade(cos I like quick price action). This is what my day could have been like. The narrative I have given also tells you how I trade and the emotional roller coaster I also go through while trading. But I keep myself disciplined by saying to myself you have a good system do not trade by instinct. Thanks for reading my story.
+
+--- 帖子 #88 ---
+Okay guys one last thing before I shut down. Remeber we trade the 30 min tf with gann 5 and 5 sma but the 15 min with gann 7 and 7 sma settings( you would have more whipsaws if you use the gann 5 setting for the 15min tf). Secondly wait for the close of the candle before you enter a trade Ensure the spreads are normal for us that trade with brokers that use variable spreads. Apply some common sense. Support and Resistance is king in this biz, avoid buying at resistance and selling at support. When the system gives you a sell signal at resistance levels and buy signal at support levels you know you are flowing with the market and have the highest probability trades. Finally do not prempt the system wait for it, price is not running anywhere, I say again wait for the system(emphasis is personally for me ) Have a nice weekend and God Bless
+
+--- 帖子 #89 ---
+Thanks for the explanations my friend. Just out of curiosity. Do you use the same system for EJ ?
+
+--- 帖子 #90 ---
+Yes, Asian will work for Asian! But not forever......
+
+--- 帖子 #91 ---
+Not exactly, The yen pairs are usually more volatile and have thier own charateristics . I usually trade the yen pairs with a longer term perspective in mind. But to get an idea what I am looking for take the 30min gann system(5 gann) and switch it to the 4 hr chart. You would clearly see how I trade the 4hr swings on Eur Jpy. Glad you asked.
+
+--- 帖子 #92 ---
+Okay for the benefit of matlobien, i post my ej chart, and you can clearly see what I am looking for catching the swings of the 4 hr chart. I would not discuss it further. Do not want to deviate from the topic of the thread.
+
+--- 帖子 #93 ---
+Okay guys as we continue in our bid to understand the market and its pyschology I want you to read this invaluable article that helped me from one of the best forex teachers I have come across Effilang. Enjoy http://www.forexfactory.com/showthread.php?t=67190
+
+--- 帖子 #94 ---
+Thank you for your response.
+
+--- 帖子 #95 ---
+Well guys missed the morning bus, cable is already at 1.5495. The order flows are coming from eurgbp, we look for sell signals as price approaches 1.5521 area which is major resistance on the 4 hr or if price pulls back we would look to buy the dips to the sma and gann. Have a nice day.
+
+--- 帖子 #96 ---
+Another great 20 pips at 5:15 gmt. I am starting to like this system more and more. A big thanks to you my friend Ok. Trade safely.
+
+--- 帖子 #97 ---
+Yea no problem it has some potential and quite mechanical with a little understanding of market sentiment, order flows and support and resistance levels you would be making consistent profit.
+
+--- 帖子 #98 ---
+Took another quick 10 pips as it was against major trend.
+
+--- 帖子 #99 ---
+I am short cable, let see what happens. I have to go out but would let the trade be it would either hit my stop loss or take profit. We have made our decision.
+
+--- 帖子 #100 ---
+Yip, as you see on the chart the trix will give an arrow first before price closes under gann. In this case the price did not close under gann and it is against major trend. so I move my si very quickly to be and only take 10 pips. Just the way I trade. Safety first.
+
+--- 帖子 #101 ---
+Just to make it clear, I made my decision on the 8:00 gmt candle. A bit earlier than the system requited.
+
+--- 帖子 #102 ---
+I see that the arrow repainted. So do not get confused. I make my decisions a bit quicker, but also exit quiker. Stay with the original method. It is a good system.
+
+--- 帖子 #103 ---
+The key is to wait for the close and always use the appriopiate settings. Remember when trading the 15min chart we use the gann7 and sma 7 and when trading the 30 min we use the gann 5 and sma 5. . Always note that the arrow is given when price crosses above or below 50 on the stoch setting 833. So if it bounces of the 50 level on the stoch the arrow is given but you need to wait for the close of the candle to confirm. The 7 settings gives less whipsaws and you can easily caught some piece of the action. This is how your 15 min chart should look like.
+
+--- 帖子 #104 ---
+Okay I know some people would be wondering why we have spent more time trading the 15m gann system instead of the 30m gann system. The decision for now was because during our weekly review we observed that the Average True Range of Cable is at a all time low. This implies that cable is ranging though with a slight bulish bias and if we are to caught the intraday swings without getting in too late. We need to use the 15 min tf. Now for info with the ATR so low a break out is pending and so we are prepared mentally to caught it when it happens.Now I post a chart of cable's ATR for you to observe.
+
+--- 帖子 #105 ---
+What is your current si and tp on 15 min tf ?
+
+--- 帖子 #106 ---
+Given the low atr as earlier posted I go for 20-30 pips and place risk at the same level till the ATR improves
+
+--- 帖子 #107 ---
+At last got my 10 pips for today on cable. Could not catch some good moves but hope will do better.
+
+--- 帖子 #108 ---
+Good work kijkij the market is quite slow, there are no fundamental drivers in play so we go for small tp.
+
+--- 帖子 #109 ---
+By way of review though today was quite slow for cable from 0700gmt, we had 2 clear trades before 1100gmt. Of course I took the short as shown in my previous post. Now a little tip I would like to give is that while trading GU keep an eye on eurgbp and eur usd to get a heads up on which currency is in play.Most times during the london session before the US guys come on stream, order flows from eurgbp actually determine what happens on GU. For instance today the old saying ' buy the rumour, sell the fact ' was in play on eurgbp. The market had bought the eurgbp on spec of the aid and sold off after the fact. It was easy to see what drove the gbp up ( order flows from eurgbp) and of course the move was completed when price hit a major support area on the dailies. Finally we shall keep our expectant take profits low till after the May 6 Election were normalcy would return to Cable and we can target plenty of pips.
+
+--- 帖子 #110 ---
+Thanks mate.
+
+--- 帖子 #111 ---
+What a great sell on GU .
+
+--- 帖子 #112 ---
+Great. Keep going. PATIENCE is the name of the game.
+
+--- 帖子 #113 ---
+I hope you all caught the early morning bus. Now we wait out for the next move after the news. I just want you all to see the usefulness of the pivot points. The act as bus stations were price pauses before moving on. In my opinion an essential part of any intraday system. Now I do not think I explained how to use the atr indicator. Observe that the room down (rm dn 23) is in red telling us that cable has completed its average daily range. Consequently at shorting at this point is not a high probability trade, however we can see that room up (rm up 117) is given a margin of 117 pips on the upside which tells us that buying would be the most appriopiate at this point if other indiators line up. So before you enter a trade look at the ATR indicator to know whether there is still room for your trade. Of course nothing is absolute, if we have bad numbers today then GU could tank another 100 pips.
+
+--- 帖子 #114 ---
+Lost 53 pips on GU today. http://cdn.forexfactory.com/images/icons/icon9.gif
+
+--- 帖子 #115 ---
+KijKij, was it with the system ? Could you please post a chart showing your entries and stop loss so that we can see what happened.
+
+--- 帖子 #116 ---
+Took trade at 8GMT cross, set TP at 20 pips but did not set SL. Once I was at 10 Pips profit so I think it will hit my TP but it dropped down quickly and I closed that trade at 53 loss.
+
+--- 帖子 #117 ---
+OUTCH .
+
+--- 帖子 #118 ---
+Well kijkij I think you may have got your time wrong because at 0800 gmt which is 0900 my time, cable was printing 1.5380 as shown in the chart attahed with the black horizontal line. Secondly the sell signal was given by 5.30 gmt, So where did you get the buy signal from? So check your chart once more and confirm.
+
+--- 帖子 #119 ---
+Sorry, I mistyped my local time. Actually I took long at 3GMT. Here:
+
+--- 帖子 #120 ---
+well that was almost good for 10 pips before the system gave you a sell signal, which you would have taken and gotten out at least at a break even or for 5 pips loss on your buy signal. So why did you not take the sell signal, why did you not place a stop loss. Please read my posts again and if followed strictly would put your account in the green. Please always use a stop loss. You need to carefully go through all my posts in this thread, everything you need is clearly outlined In this market there is no room for hope or percieved notion, you trade clearly by a set of rules as this system has given. I have made it like ABC no discretionary jugdement. Go and read Trading in the Zone you need that book to build up your trading physcology. You will succeed
+
+--- 帖子 #121 ---
+Hi guys did not discuss my trades as I wanted to, had my hands full exploiting various trades in quite an exciting and fufilling day. However as a form of review I would post a chart highlighting the different entry signals of the 15min gann system. Of course your targets should be as I have highlighted in my previous post (s&amp;r levels, pivot points etc). The blue arrow indicates the basic sell entry signal The red arrow indicates the retrace entry when price pulls back between the gann and sma and then shows continuation. The aqua arrow shows the basic buy entry which occured at the US open which was of course a loss (after S&amp;P cut the credit rating of Greece to nearly junk). So enjoy and have a good night rest and God Bless.
+
+--- 帖子 #122 ---
+Finally the 30min gann system chart for today Blue arrow basic sell entry Red Arrow retrace entry when price pulls back to the gann and sma. Good Night
+
+--- 帖子 #123 ---
+A bit messy this morning. Already had a loss on my sell.
+
+--- 帖子 #124 ---
+Post a chart so we can analyse what happened. However I picked a quick 21 pips on shorting the retrace to yesterday's low. Remember price may consolidate and lack decisive direction after yesterday's excessive drop. Here is my trade
+
+--- 帖子 #125 ---
+Guys I think we can benefit more if you post the chart of your trades. I know its kind of distractive trading and discussing on forums, but I think we can all get better insights on the market and the system if we do that. Personally if I cannot post while trading I make it a point of duty to post later on in the day. So lets have some more active contribution.
+
+--- 帖子 #126 ---
+Math, if you suffered a loss, that means you SL is too tight. GU in my view is heading to 1.50. OK-don, good work in setting up this simple-to-trade strategy. I love it.
+
+--- 帖子 #127 ---
+Today: EJ: 20 + 20 (Using trend lines) GU: 10 + 20 + 10 ( Using Gann system) EU: 10 (using Gann system)
+
+--- 帖子 #128 ---
+Made my 20 pips back with the buy signal.
+
+--- 帖子 #129 ---
+hello fellows, Have been reading this thread but kept silent. Today is not the best day to trade to many news pressure. But I have made a small trade 15m GU and took fast 14 pips in my pocket. Here is the result. Trade is marked on chart. Attached Image (click to enlarge)
+
+--- 帖子 #130 ---
+Brilliant. Can I borrow some money ?
+
+--- 帖子 #131 ---
+Perfect trade. Exactly as I took it. If you held on a bit longer you would have made your 20 pips. Keep going.
+
+--- 帖子 #132 ---
+Thanks, I will. For me it was safe because on 1h tf we had 2 spikes. Any way market is tricky today.
+
+--- 帖子 #133 ---
+Yip, safety first. Trust yourself.
+
+--- 帖子 #134 ---
+I made pips, not money! http://cdn.forexfactory.com/images/s.../yim/happy.gif
+
+--- 帖子 #136 ---
+Well good we have another trader participating in this thread. Soondock you would not imagine how simple trading can be with this system I have picked no less than 80 pips (trading multiple lots ) on the system today. Trading the basic entries and retrace to gann and sma and taking even the buy counter trend signal. Basically I do my analysis in the morning and mark the possible swing points and I wait for the market to come to those areas, I post my chart and you can see the clear signals I have taken after the one I have posted in the morning. One thing I try to do is trade each system exclusively. Meaning when I am trading the 15 min I go for 20-30 pips per move. Enter again if I have the retrace signal to the gann and sma. I try to keep it simple. Of course I take counter trend trades with half sized position. When I have a genuine fundamental driver I tend to use the 30 min system to trail the trades and maximise profit. Later on if i have the time I would release the long term strategy for the system which can be traded on various pairs on the longer time frames. Infact look at the eurjpy chart I posted sometime back you would get a clue on how I trade the yen pairs, It is very profitable and less strenous you would love it. But first let us fully explore the potential of the 15 and 30 min gann system before we move on
+
+--- 帖子 #137 ---
+Well were did the 5 stars come from, I had no idea other traders were following the thread, Alright thanks everyone. However the last chart, I used the qqe indicator instead of the stoch. I was just playing around with it becos that is what I use for my long term strat. However all these indicators tell the same story. But keep to the stoch, sorry for posting that chart with the qqe.
+
+--- 帖子 #138 ---
+Hi okehiedon, My broker and my time zone GMT+2. For thv pivot's; HrsServerTzFromGMT: 2 HrsChoiceTzFromGMT:0 This is right? Because my chart support res. level different on your chart.
+
+--- 帖子 #139 ---
+My gmt is +1. However the difference is not much between +2 to+1, though sometimes I switch between the 2 time zones if I see a level holding that not obvious to me from my own analysis and time zone. Heads up: I do not expect any body to be in the market FOMC is coming out soon.
+
+--- 帖子 #140 ---
+GBPUSD is resuming its spiral move downwards and is very likely heading towards the 1.5050 mark come tomorrow.
+
+--- 帖子 #141 ---
+hi sir we are following but in silence and i love the system and thnx alot keep the good work
+
+--- 帖子 #142 ---
+This is a very easy system to understand, so you would not have a lot of people asking questions. But don't be fooled. This thread has already over 8000 views and at one stage I saw 35 traders viewing it at once. Well done mate and God bless you for sharing.
+
+--- 帖子 #143 ---
+i just want to say thank you for sharing your experience and time. good luck
+
+--- 帖子 #144 ---
+Okay my morning trade already locked in profit. There was an initial indecison in the market. My entry was based on the retrace to gann and sma using gann 15 system
+
+--- 帖子 #145 ---
+Hi okehiedon, Any idea where the price can go today?
+
+--- 帖子 #146 ---
+picked up &gt;100 pips yesterday as well. who says trading intraday cannot be profitable. You only need to know what you are doing. keep it up guys.
+
+--- 帖子 #147 ---
+Well lost my internet connection as soon as I have finished the last post. Just got back, well price got to my take profit . This is one of the reasons you must always have a stop loss, technical reasons. Now as a review of the london morning session using the gann 15 system, which are always the best times for this system. We had three entries( a fourth one seem to be forming). One was the basic entry signal the other 2 were the retrace to gann and sma (the one I took as shown on the previous posts) as shown with the blue arrows. Also notice the significance of the pivot points as target/stop loss levels and support and resistance zones. Enjoy
+
+--- 帖子 #148 ---
+Sorry KijKij, my internet was off. Well I do not try to predict the market (wrong way to mentally handle the market). Nobody knows what direction or how far it can go. Yes by using support and resistance levels, fib ret, fib expansion, elliot waves, trend lines,gann lines etc, we might have an idea of the swing points in the market. But remeber the market moves based on traders reaction to fundamental news or rumours. Note, I did not say the news moves the market, I emphasise traders reaction to it particulalry when it is unexpected. This is basically what I look for if am trading other pairs pairing weak fundamental currencies with strong fundamental currencies. Okay I stop here this is not a fundies thread. But remeber one law that fundamentals determines the direction while technicals estimate how far. No trade for me with this system on the US session got my daily quota. Will be facing other projects. We must be careful about overtrading.
+
+--- 帖子 #149 ---
+do u mind posting ua 15 minute gu chart @ the moment
+
+--- 帖子 #150 ---
+my charts are already on post 144 and 146 on this same page, by the way the fourth ret to gann and sma is already well in profit as I earlier indicated in post 146. Having slow internet connection, it taking too much time to do anything
+
+--- 帖子 #151 ---
+that was like 30min agao wat about the current one @ the moment it will be much help
+
+--- 帖子 #152 ---
+Alright guys I assume that all of you know the settings for the thv pivot indicator. However my settings are server +1 choice time zone +1. I then set it to fib pivots. Simplicity at it best entering on the retrace to the gann/sma and pivots as I have shown in my life trades in previous post. You will notice that the gann acts like a trend line. Price may sometimes appear to penetrate it, but always wait for the close for confirmation. Never prempt price action. So I post a chart of the 15 min and 30 min system respectively.
+
+--- 帖子 #153 ---
+The long green bar on the right side edge of the chart, what does that mean?
+
+--- 帖子 #154 ---
+That is a Daily Candle so that you don't need to switch between the TFs.
+
+--- 帖子 #155 ---
+Hello M8s, Today was a good day, almost the same as yesterday for this strategy. Nice smooth moves, no rush or something. And now we can see another oportunity formed a few bars before. Unfortunately I am at my day job, was busy and haven't managed to make trades. But I hope you all make good success in trading this approach. Tomorrow is Friday, so mood should be good because of following weekends. Cheers all.
+
+--- 帖子 #156 ---
+Hi okiheidon I have just been reading through your system and would like to thank you for educating me. I have been watching charts, trialling systems on practice accounts and during the last two years I realised that something was happening at certain times during the london session, but couldn't put my fingure on what it was. You have confirmed my thoughts with your explainations - thank you. I will be trialling your system begining tomorrow. GG33
+
+--- 帖子 #157 ---
+GG33 You welcome. I have learnt through others but mainly through my wounds, failures and weaknesses. The truth is what cannot kill you would make you stronger, that is my testimony. Remain Blessed
+
+--- 帖子 #158 ---
+today has started off rather slow... Okehiedon, why is price stalling? can you move this thing please! lol... just kidding. you know what... i play according to the rules and set SL &amp; TP and let the market do its thing. we shall see.
+
+--- 帖子 #159 ---
+I took 20 pips after the 6:00 gmt buy signal. Currently in sell. What is your sl and tp ?
+
+--- 帖子 #160 ---
+I took two Long at 7:15 GMT on GU with 10 and 20 TPs, one has closed and other is still floating! Lets see red or green
+
+--- 帖子 #161 ---
+Anm at work and dont get to do much once i slot in a trade. will hop onto my laptop top see whats happening. Bad way to trade right?
+
+--- 帖子 #162 ---
+Just resolved my day long internet connection problem and I see that you guys have firmly understood the system and can explain it to other traders that join the thread. Thats great. Right now we have bearish momentum(price below gann and sma with all other indicators indicating sell) now be careful the order flows are coming from eurgbp. So things can change when the US boys come to the party and begin to move the dollar. So prepare to go either way as the system indicates. However remember that the US session could be choppy when there are no impact news.
+
+--- 帖子 #163 ---
+Yip, I usually avoid the US session. This week was quit profitable with this system, just made a few silly mistakes trying to preempt market. Next week I will wait for definite signals. Have a great weekend.
+
+--- 帖子 #164 ---
+"Trade what you see and not what you think" is what i learnt here in FF. once again, it has proved to be true. you never know how market will react to a positive or negative number when released. following the system... as i said ealier, i took a loss on GU (-50 pip) as i was not online to see things as they unfold; but i quickly reverse with Gj and made back the loss. this system has posted 3 sell signals since morning. taking the trades and "being PATIENT" would have paid off by now... and hopefully till US session ends. Today is friday... and the big boys will have to sell off some pairs.
+
+--- 帖子 #165 ---
+For the Week: + 230 - 179 ===== + 51 For GU, EU, EJ Hope will do better next week http://cdn.forexfactory.com/images/s...im/winking.gif
+
+--- 帖子 #166 ---
+@Kijkij, slow and steady wins the race. review your trades this week and find out how you missed it. work on your discipline to follow the rules... and you'll be successful. I am also learning and one day... we'll be like okehiedon the master. cant seem to attach a snapshot here.
+
+--- 帖子 #167 ---
+My thats a good result kijkij , we are making progress. congrats
+
+--- 帖子 #168 ---
+50d, if you cannot monitor your trades, you would be better of trading with the 30min gann system which means you can check your chart once every 30 min. I have had bad memories leaving highly leveraged trades on smaller tf without monitoring them. Price could get 2 pips to your take profit and reverse. I only leave my trades if i have taken partial profits and have move stop to BE. Or if i am just to tired (of course my health is better than money) or have to get something pressing done and the trade refuses to move (in this case I may just close for a small loss, if price action is not behaving the way I planned). That reminds me on a general note(no matter the system you are trading) when you have taken a trade and the set up is not following through as it should, get out at the next favourable moment, do not hope, do not begin to pray, just get out and wait for another favourable set up.
+
+--- 帖子 #169 ---
+Now as a way of preparing for next week, do a visual backtest of the trades for this week, following exactly the system rules. Concentrate particularly on the exits, ( as the saying goes amatuers concentrate on entries, professionals on exits ) where would you have taken profit, where would you have placed your stop, what time of the day did price action reverse. Practise the retracement to gann and sma reentry strategy and watch the candlestick patterns that form when this happen, observe what happens on the various pivot levels. Try to adopt a partial profit, move stop to Break Even, trail the other lot till price action turns or exit signal is given trade managment strategy. Get very conversant with reversal candlestick patterns, this would give you a heads up of when best to exit your trade, or enter a new trade. The purpose of this training exercise will give you better confidence in the system and yourself and prepare you mentally to handle what the market throws at you. As a last word, may I reiterate that you spend time to practise exit strategies, let us leave the level of being content with a few pips when we can exploit the potential of each and every swing. Now I would repeat this till somebody catches it, take the gann 30 min system and run it on the 4 hour chart for eurjpy or any other yen pairs and imagine what could have happened if you traded just the gann 5 on a 4hr close. I expect to see somebody come up with a trading strategy on this tip. Good night and God Bless
+
+--- 帖子 #170 ---
+Hope you guys all had a good weekend and carried out the exercise I suggested. There would be bank holiday in the UK on monday, no use given back our hard earned profits to the market. So I suggest no trade for the London session.
+
+--- 帖子 #171 ---
+Thanks for sharing this system, very promising. I have several questions for you and other fellow trader. You mentioned the best trade time is from London Open (7:00 GMT) to 11:00GMT. But I saw some of traders are taking trades outside this period. What is your practice on your live account? will you take trades during Asia session and US session? Unfortunately I am at work during London Open, while I am off at the US Open. If I want to apply this system to US session, what should I pay attention to? When I apply the template you provide, there are two lines named Ap30 and Dn30, are they useful? Thanks for your answer in advance, happy trading Thanks Henry
+
+--- 帖子 #172 ---
+Good Morning! The same to you. I think I will wait for NY. Bank holiday makes market slow.
+
+--- 帖子 #173 ---
+Maybe good decision.
+
+--- 帖子 #174 ---
+Today market looks very slow due to Bank Holiday but I already made 32 on EJ.
+
+--- 帖子 #175 ---
+Cool! did you take entry during Asia session? Please upload the chart.
+
+--- 帖子 #176 ---
+I took two Long trades for 10 and 20 pips at 4:45 GMT and both made me 32 pips. See arrow in image. I also have made 19 pips more on UJ. So total for today are 51 pips.
+
+--- 帖子 #177 ---
+Well done, mate, I had thought it was a short since green arrow pointed down, . It is the bank holiday in JPY and Euro, not sure why it is volatile today. I do not trade for safety.
+
+--- 帖子 #178 ---
+Sorry Henryloving for not answering your questions, I was enjoying my day off . Now as I said earlier it works best during London session. You see the working principle behind the system is to follow the london boys when they move the market.The system gets you in at the beginning of the move cos you are not waiting for any ema to cross or price to be below 50,100 or 200 ema, or the daily trend to be in line with your trade for example. You are basically trading the london momentum. Now, of course it would work in any session but from my experience, the highest pobability trade are during the london session. I trade the US session only when I have a fundamental driver to direct price. The US Session can be very choppy and from my own experience eurusd and eurjpy or usdcad are better trade potentials than GbpUsd during those periods. Now if you decide to trade the US Session, my targets are usually 20-25 pips and I wait for 30 min after the US Stock market opens (that is 1400gmt). I then go down to the 5mins chart (with the gann 15 min system and wait for a signal from the system.) Also observing the 5min candlestick at 1500gmt. If the market has moved before then, I would be reluctant to enter. Let me repeat that as a rule I avoid trading the US session when there is no fundamental driver( impact news). Please note that my handling of the US session is not part of the system, because I basically also trade the eurjpy,usdcad and sometimes eurusd.
+
+--- 帖子 #179 ---
+You can ask kijkij how he trades the system during the Asian Session, he trades basically during that period while I am caughting my sweet sleep so he would be in a better position to give you tips in that line.
+
+--- 帖子 #180 ---
+Thanks mate for the wonderful notes. I have another system to trade London Open and NY Open. I found I often get the best entry during London Open but rarely during NY Open. Your reply is in line with my observation and reveal the underlying logic. Seems you are conservative to trade during US Session. I will try using the method you recommended to demo practise until I got the feeling to trade US session. thanks much. But why do we need watch 5 min candlestick at 15:00GMT? Is the time after 14:00GMT already tradable? Is same Gann 7, SMA 7 setting as M15 applied to 5 min chart? Happy trading, Henry
+
+--- 帖子 #181 ---
+Sorry I meant 1400gmt (1500 my time) becos the US Markets opens at 1330gmt. We want to give the markets time to find a direction
+
+--- 帖子 #182 ---
+I hope you guys are enjoying the ride down
+
+--- 帖子 #183 ---
+okehiedon, can you post your entry?
+
+--- 帖子 #184 ---
+Well that was ages ago and the move is over for 40 pips, but here is the chart. You have to understand that it is not easy to trade manage your position and post at the same time, what I try to do is to save a snapshot of my trade and when I have time I upload. I am already out waiting for impact news. However here is the chart I entered on the retrace strat. You will notice that I missed the initial entry, (was on the forum) so my enrty is not exact. That is why we must concentrate why trading. Luckily price went my way
+
+--- 帖子 #185 ---
+With reference to the trade I just posted what gave me confidence to still enter the trade was that price was rejected forcefully at the open which tells you the big boys are selling. Consequentely price moved down broke yesterday's low and my take profit was at 1.5183 (remeber that level from my previous post).
+
+--- 帖子 #186 ---
+I'm sure matoblien and kijkij who trade earlier would have got the enrty signal at 5.15gmt.
+
+--- 帖子 #187 ---
+thanks okehiedon. now evrything is clear to me..
+
+--- 帖子 #188 ---
+Hi I'm new to this thread I have also been using the gann and Mainly tradeFrank furt open And Few hours into London. Good thread keep it up.
+
+--- 帖子 #189 ---
+Due to news was not sure about GU so I traded EJ for 42 and UJ for 14 and win my today +56 points. http://cdn.forexfactory.com/images/s...m/thumbsup.gif
+
+--- 帖子 #190 ---
+Again, am missing in all these action 'cos am at work and can only post comments, but happy to know the system is really revealing the opportunities in the market. good trade okehiedon, and happy tading to all. Thurs parliament election and friday NFP are key to determine the way forward.
+
+--- 帖子 #191 ---
+Yip.
+
+--- 帖子 #192 ---
+Brilliant mate.
+
+--- 帖子 #193 ---
+KijKij I think I have to enroll in your school for Asian Session Trading Techniques
+
+--- 帖子 #194 ---
+matoblien, when does your trading day starts?
+
+--- 帖子 #195 ---
+Nice joke I see just trend lines and Gann to decide and take action. So some time green and some time red!
+
+--- 帖子 #196 ---
+Hi mate, wondering why you enter at 7:45 candle. It is near the S1. Generally, do you still enter when there is a big move before London Open?
+
+--- 帖子 #197 ---
+5 gmt
+
+--- 帖子 #198 ---
+Nope that is the 0800 candle. If you watch carefully I entered using the retrace strategy after price tested the open and was firmly rejected that told me that there is a large sell order. Secondly at that point I looked at the ADR and it was telling me high to low at that point was 54 pips and there was about about 131 pips to go (look at the ADR on the chart I posted). Now if you noticed price bounced of s1 and then tested the open and that 0745 candle was a bearish engulfing candle in the direction of the current momentum. That told me 2 things that S1 would soon give way and price has to break above the open for bias to change. Also notice all indicators were pointing to more bearish price action. Of course my entry was late (was on the forum then ) but notice where I placed my stop loss above the open.
+
+--- 帖子 #199 ---
+Can you explain more the ADR indicator, how to use it to take the trades? I could not understand what you said in the quoted text.
+
+--- 帖子 #200 ---
+ADR INDICATOR Now the first 2 values are ATR 5 = ATR 20= These compares the ATR values of the last 5 periods with the last 20 periods of the particular time frame. When the colour is green it indicates that the last 5 periods have an increasing range compared to the last 20 periods, indicating increased volatility and implies a favourable conditon to trade. When the colour of the indicator is red it means that the 5 period range of that particular time frame is less than the 20 period and indicates reduced volatility and implies a ranging period. The next two values are the RM UP: RM DN: values These indicate the extent price can go from the current price based on the Average Daily Range of the Pair. When the values are both green it indicates that you have the margin to trade in any direction based on the ADR. If maybe the RMDN: is showing red and the values reading say -30. This indicates that price is well beyond the daily range of that pair by 30 pips and implies that you should avoid taking trades in that direction for there is a potential for reversal The next values give you the ADR for today, yesterday, 5,10 and 20 day daily ranges respectively. You can use this to set your stop losses and targets if trading the longer time frames I think this explains how to use the indicator. I welcome anymore questions
+
+--- 帖子 #201 ---
+[quote=50d;3678671]... GU in my view is heading to 1.50. This thot may be coming true... it was purely based on market Pyschology knowing that 1.55 which was tested once was not retested... other key areas were 1.53, 1.52... 1.515 was another key area but today it gave way; so i will be expecting 1.50 soon. Again, thursday Uk parliament and fri NFP remain key for further direction for this pair.
+
+--- 帖子 #202 ---
+[quote=50d;3695072] Hey guys were did that come from. I think you are in the wrong thread. We trade a system we do not speculate were price will go to.
+
+--- 帖子 #203 ---
+Alright guys the profitability of the system is clear to everyone. I see that many traders would like to use the system for all other pairs and I would be giving the strategy on trading the system for any pair you want. Well It would be proper to start another thread for that but I do not think I want to do that. I would just outline the variation of the system (tommorow), so you Guys can take it from there, then we can get back to the GU system right on this thread.
+
+--- 帖子 #204 ---
+Thanks, very well explained. What is meant by "HiLo" at left top corner of the screen?
+
+--- 帖子 #205 ---
+I think It is Hi and Low
+
+--- 帖子 #206 ---
+IC I mean what does this indicator tell us?
+
+--- 帖子 #207 ---
+I have a full time job and I trade also during this time. But most of times I miss trades because of day job objectives. So I think, also to be a successful trader you should spend your attention only to trading.
+
+--- 帖子 #208 ---
+Today is ranging like monday. I've got a question: why is it that market more or less stops moving after a major buy or sell off like yesterday? Okehiedon... i totally agree with your correction and keeping us on track -no predictions; just trade the system and what you see. thanks.
+
+--- 帖子 #209 ---
+Afternoon folks, I took a long this morning for 18 pips first thing at 7am. Triangle forming so i'll probably stay out (plus we're outside of the optimal time frame) for now but there might be room for a short if this candle closes below Gann. Following with interest, okehiedon. http://i288.photobucket.com/albums/l...recipes/gu.gif
+
+--- 帖子 #210 ---
+The Hilo is the gann price level. Remember it is called the Gann hilo indicator
+
+--- 帖子 #211 ---
+Thats the way to trade look at the market through the eyes of the system. You would keep losses small and have much profit
+
+--- 帖子 #212 ---
+Well I took it down to the trendline then took another once the triangle broke (and retraced to the trendline), hope you don't mind me posting a non-system trade but you've got to grab these opportunities! Will take it down to yesterdays low then finish for the day. Are you going to stay out of cable during the election period Oke? http://i288.photobucket.com/albums/l...ipes/gu2-3.gif
+
+--- 帖子 #213 ---
+Hello. Would like to notice at once that I use a site for text translation from Russian on English - as in English it is not strong. Therefore it will be possible the text it is not correctly translated. Would like to tell many thanks to the founder of the given trading system! System good! At me to steam of requests: - The first, lay out please the indicator which displays levels H and L yesterday and OPEN today. - The second, for some reason does not work for me the indicator "MTF GannHiLo Activator" - in what there can be a problem? If a problem in the indicator which you spread, lay out please the working indicator. Would like to hear from the author of trading system as it defines the intermediate term tendency? What uses for this purpose tools? That is whether interestingly to eat at the author still any additional filters on cutting off of signals generated by the given trading system... Thanks!
+
+--- 帖子 #214 ---
+Mysterio, as I use to say great minds think alike. I entered that same trade on the gann sell entry afer a failure at the daily pivot and the mini double top. Took profits before the news and re entered exactly on the triangle break( I look at other things too but the gann and 5 sma are my deciding factors) where your entry is for the ride down to yesterday lows. Sorry did not post as I was also making a killing on eurjpy. Great trade
+
+--- 帖子 #215 ---
+I've never traded E/J but I had a quick look after you mentioned... not sure about this trade as there has already been a large drop... Took the 4pm GMT shooting star on 15 min chart after it retraced to Gann, it also seems to be a break and retest of a 4h support. Hopefully make it down to S2. Stopped out at B/E...
+
+--- 帖子 #216 ---
+1. The indicator that displays the low, high and open is the THV Pivot Indicator)(one of the best in my opinion).Click the paper clip above and you would get the indicator. 2. Use the gann hilo activator (also on the first page of the thread) not the mtf gann (meant for the multi currency variation of the system I will release later tonight) 3. The strategy I would release tonight would answer all your other questions on the intermediate term tendency so stay tuned
+
+--- 帖子 #217 ---
+70 pips on that trade for me. One of my favorite pairs. it never fails to give me a home run, while waiting for GU. Tonight as a bonus, I would be discussing how I trade other pairs. Just for tonight then we get back to GU
+
+--- 帖子 #218 ---
+Someone asked me about tommorow, fundamentally the position is this, a win for the tories is bullish for the pound a win for any other party is bearish for the pound a hung parliament is bearish also. However, remember buy the rumour sell the fact. Technically the worst case scenario has already been discounted in cable's price so in event of the libs or dems winning the drop would not be so bad. But who cares, we just trade the system.
+
+--- 帖子 #219 ---
+I want to refer to Mysterio chart to state that I took all the trades both the buy and sell signal, the buy signal got just a few pips(I wanted more) and went against me I closed out at 20 pips loss, evaluated the position and doubled on the sell entry and the rest is history. I also have losses but the beauty is how you handle the losses makes you a successful trader. Listen you would have losses but if you have a system that gives you an edge, you would end up profitable at the end of the day.
+
+--- 帖子 #220 ---
+As I earlier stated, I have prepared a seperate presentation for the Gann system for all currency pairs, in my bid not to lose focus from the purpose of the trade since I was not willing to open another thread to discuss it. Unfortunately,it was after the document was prepared in power point that I discovered (short sighted of me) that you cannot post file types of that nature on forex factory. Well I would have to prepare it in a word doc. However I have uploaded it on rapidshare for anyone that wants it now(I hope I am not contravening any rules) The link is http://rapidshare.com/files/38398609...ng_system.pptx Enjoy Note: You must have microsoft power point to view the presentation
+
+--- 帖子 #221 ---
+The attached indys would be required to trade the gann system. It is pertinent to note that this thread would remain solely for following, posting charts and discussing trades based on the GU Intraday System. Anyone that wants to trade the gann system as outlined in the document above can gladly open another thread and I would gladly participate.
+
+--- 帖子 #222 ---
+Thanks for your answer to my post Okehiedon. But we a little each other have not understood - that that the indicator "Gann HiLo Activator" I have understood a kernel of system, but at me a problem with the indicator "MTF GannHiLo Activator". It does not work for me in one of two terminals. I put it on the schedule and among the list of indicators it is, but on the schedule it is not present. Prompt please what is the matter? Can something is necessary in a folder "include" correct? Thanks for presentation! P.S. I use a site for text translation, excuse if something is translated not correctly...
+
+--- 帖子 #223 ---
+Is simply more tremendous - EUR/JPY 100 points! System super! Thanks the author of trading system! P.S. I use a site for text translation, excuse if something is translated not correctly...
+
+--- 帖子 #224 ---
+You can ask me in PM in russian.
+
+--- 帖子 #225 ---
+Hi friend, You can put it in rar archive and attach.
+
+--- 帖子 #226 ---
+I unfortunately on ка cannot send personal messages since only it was registered... I have QIP, Scype, and simply e-mail. How it will be convenient to you to talk?
+
+--- 帖子 #227 ---
+I cannot send personal messages yet. Only it was registered. I have QIP, Scype, and simply e-mail. How it will be convenient to you to talk?
+
+--- 帖子 #228 ---
+skype lockervovun
+
+--- 帖子 #229 ---
+Do u mind posting the tpl for this new system
+
+--- 帖子 #230 ---
+Thats a good idea, by the way how are you folks doing. Its been a good day.
+
+--- 帖子 #231 ---
+Take the template I posted for the GU system, remove the thv pivots and place the other indicators I posted including the MTF Gann and you have the template. Confirm you have gone through the system document.
+
+--- 帖子 #232 ---
+Well remove the indicator and try reinstalling it. You would need to restart your platform after you have done that. If it still does not work you can google the indy and try get another. I see you enjoyed the presentation thats great.
+
+--- 帖子 #233 ---
+okehiedon, can you post todays trades with marked entries?thank you.
+
+--- 帖子 #234 ---
+Remember it's election day here in the UK so you'd need to be brave to trade intraday cable today...
+
+--- 帖子 #235 ---
+I downloaded the presentation but my MS Power Point 2000 is saying that its not valid PPT document. Any idea...
+
+--- 帖子 #236 ---
+dbsys that is not a problem. But I figure that today's trade entries are well defined and quite simple. So to ensure that we are on the same page. I suggest you go ahead and post a chart of what your entries, take profit and stop loss would have been and then I will take a look and make comments. Now in that way you will understand the system better. So I wait for your chart post.
+
+--- 帖子 #237 ---
+I used Microsoft Power Point 2007. However here is it in PDF format
+
+--- 帖子 #238 ---
+Well I must be GU 100 pips GJ 210 pips
+
+--- 帖子 #239 ---
+Painfully enough the system gave a total of 270 pips today but I got only 100 pips. This are days that traders pray for and we must learn to exploit the full potentials. One thing I have come to learn is that currencies of the same region would be affected by the same fundamental factors. The EURO was being slaughtered and its brother the pound was having fun. When the market had somewhat got tired of the EURO it looked for another victim that had uncertainty round it, what better pair than the pound with GJ going down about 560 pips, there is nothing like forex.
+
+--- 帖子 #240 ---
+Hello okehiedon, Excellent information. I have a feeling many people are following your wonderful thread. Regards, Jeff
+
+--- 帖子 #241 ---
+Here is my chart GU 30min. blue line shows when i woke up.. i have not seen any reenter signal so i waited a fresh signal. red vertical line shows my entry after candle close,take profit was todays open 22 pips, stop loss was 30 pips. I got stoped out after a few candles.
+
+--- 帖子 #242 ---
+Dbsys You perfectly understand the system and you traded in line with it. Now the first trade that you took when you woke up was right but notice that the move had begun as far back as 0300 so you should take that in mind in setting your take profit in which 40 pips was fine. Now notice that price broke yesterday's low which tells us that the bears rule and in my previous post I stated that I take counter trend trades with half position and double up on a loss. From where you would have entered that trade was good for 20 pips and you are out for the day(with the 15min gann that was about 37 pips when you add slippage and spread on my platform). Well done . Now that you understand the system go to the 15m gann (remember 7 sma and gann7) which I have been trading. Go through the pdf document I posted you would get new insights into trading the 30m gann system. One final word you can replace the mtf stoch with a normal stoch.
+
+--- 帖子 #243 ---
+Well guys another good day in the market and well on our way to meeting our monthly target. Today was quite unusual and I believe any system could have worked, the problem was the fear of a reversal and buying the tops and bottom of a move (my greatest fear) kept many from exploiting the full potential. Tommorow is when the big boys play,(NFP) but I believe it would be an anticlimax because of the moves we have experienced today. By the way GJ has done 1162 pips and the usually lazy uj 588 pips crazy. On the system, study the pdf document. This market is quite easy to trade if you adhere strictly to a set of rules and cut out hearsays. I remember the first year I started to trade I wiped out my account by listening to so called analyst on a paid subscription service. I found out that most of these guys earn thier living by analysing the market they are not traders. They believe the market is supposed to do this at this point and react at that point, the market does not care, who would have foreseen the carnage we are having today. That' s why I like Eohater's Thread name 'Trade What you see'. Indeed the market can remain irrational for as long as it wants.
+
+--- 帖子 #244 ---
+Thanks jeff nice to have you around
+
+--- 帖子 #245 ---
+Is the OBOS indicator a zig zag? Thank you. Fritz
+
+--- 帖子 #246 ---
+i uploaded the mtf but when i put in my chart it is blank
+
+--- 帖子 #247 ---
+to see mtf you need to have gann hilo activator in indicators folder
+
+--- 帖子 #248 ---
+Thanks for the PDF version, pdf is good to share the dpcuments.
+
+--- 帖子 #249 ---
+is it the one on the first page of this thread cos that one is in my chart
+
+--- 帖子 #250 ---
+yes that one. I had the same problem Also try download it again and delete ### in the name and put it also in the indicators folder that helped me
+
+--- 帖子 #251 ---
+Well guys the last 2 days were out of this world, extraordinary market conditions that were fast and furious and required as little leverage as possible and wide stoplosses. Hope normalcy returns next week. Also hope you guys have gone through the attached PDF and you would be seriously smiling in current market conditions.
+
+--- 帖子 #252 ---
+Nope it is gives a buy signal at oversold conditions and a sell signal at overbought conditions. Very effective on higher tf and as I stated in the pdf you can take those entries given by the indicator on the 30 min chart trading the 4 hr trend. I personally use it as a warning signal of a pending reversal and enter on confirmation with the gann and stoch.
+
+--- 帖子 #253 ---
+so wat u mean is for me to rename the first indicator by removing the ####?
+
+--- 帖子 #254 ---
+the name of original indicator is ###Gann HiLo Activator v2### you should make it Gann HiLo Activator V2
+
+--- 帖子 #255 ---
+Okehiedon, 1) Does OBOS repaint? If it does repaint, how can you tell which one is the real buy/sell arrow signal? 2) Since most of these indicators don't have sound pop up alert, do you glue your eyes to the computer to wait for the signal? How do you do it? 3) You said you enter on confirmation with the Gann and Stock, do you use the THV indicator for confirmation as well or you don't use it since it's lagging? 4) What the size of stop loss do you use? Thanks.
+
+--- 帖子 #256 ---
+Thanks for your questions, the OBOS indicator has an alert, so you do not have to stare at your computer all day. Now the OBOS signal gives you a heads up of overbought and oversold conditions. Because I trade numerous pairs using the 4 hr swing system (while I mainly concentrate on GU with the intraday system), the signal alerts me on a possible trade on a pair. I then observe where price is, are we at strong resistance/support levels do I have a reversal candlestick pattern shaping up, is the stoch overbought, do I have divergence etc. The final confirmation for the trade is if price closes above/below the gann, my stops are usually 10pips above the swing high/swing low. Usually my profit targets are determined if the swing trade is in line with the trend in the daily chart then I look for bigger targets based on (fib extensions, major pivot points) with my r:r not less than 3:1. If it is against the daily trend I look for 2:1. If the dailies is ranging I target the other side of the channel. For the 4hr,30min MTF strat. I only trade the OBOS signals on the 30min in the direction of the 4hr trend as indicated by gann5. The OBOS generally gives a heads up and I wait for confirmation from Gann and stoch to enter. I think all I have said here is contained in the pdf document of the complete system. Just place the indicators on the 4 hr chart and you would clearly understand What I am saying. Have a nice week
+
+--- 帖子 #257 ---
+In order to illustrate my above post I would show 2 examples I took overnight. On friday we had price close below the gann5 on the 4 hr chart on us cad and usdchf. Which means our bias is bearish, we then sold as price pulled back to close the gap overnight. Notice that the obos signal giving us the oversold and overbought conditions, look at how the stoch is supporting the trade. Those 2 trades represently 100 and 120 pips to the green this morning as I post
+
+--- 帖子 #258 ---
+Guys you must understand that you do not need a bunch of indicators to trade. All you need is an indicator you understand. Its strenghts and weaknessess. Now the Gann(which is the core of my system) gives an average value of the high and low of the number of periods imputed. Its weakness is that you must wait for the close for confirmation. Sometimes before the candle closes it would seem as if it is given a signal however at the close the signal may not be there.
+
+--- 帖子 #259 ---
+Excellent trading system - thanks the author! I modernised it under myself a little - I use one another осциллятор and modernised Stochastic. But the essence from it does not vary - a system kernel original. Here today on GBP/USD + 65 points! I use a site for text translation, therefore transfer can be not correct....
+
+--- 帖子 #260 ---
+One of the pillars of succesful trading is to let your profits run and cut you losses as soon as possible. Now let nobody decieve you, if you are to consistently allow your profits to run even in an obvious retracement against your position particulalry while trading the longer term charts, you must understand the fundamental factors that is driving the move. For example apart from the technical indicators giving me a sell signal on the above charts on usdcad and usdchf I posted. I noted the huge aid given for the greek problem, the rumour that SNB would stop intervening in reducing the strength of the swiss francs and the strong employment numbers from canada on friday. Use the weekend to do your fundamental analysis of which currency is likely to move, then wait for price and your technical indies to confirm your fundamental view then enter the position and let your profits run. This is what the big boys listen to before the move price. Yes we trade basically technicals but we must understand the fundamental drivers, influencing price movement. Particularly if you want to trade for a living and be around for as long as possible while using the longer time frames. Now I think I have finished my explanation of the Gann Swing System, let us get back to the GU Intraday system which is already good for 80 pips as I post.
+
+--- 帖子 #261 ---
+I attach indicators which now I use - probably to somebody will be useful. Stochastic-M I use with parametres 8/2/2. Indicator CC (Kl) parametres by default, only I clean superfluous currencies...
+
+--- 帖子 #262 ---
+Thanks for detail explanation. Today early morning I had chance for two good trades on EJ and EU for 4HR swing system but could not catch trades. If I see at this swing 4HR system, its looks it can give some good profits if we trade carefully.
+
+--- 帖子 #263 ---
+Well done Arnej, Everyone must discover what suits him well done.
+
+--- 帖子 #264 ---
+i need to see the chartt on 15min that has gann @ this hour pliz whoever who has it post the chart(current one
+
+--- 帖子 #265 ---
+pliz post ua current chart on gu 15min
+
+--- 帖子 #266 ---
+Do you have any problems with the template?
+
+--- 帖子 #267 ---
+yes sir i uploaded the mtf indi on my chart but is not displayed there someone told me to delet### on gann uploaded on page 1 of this thread so that the mtf one to work but all invain
+
+--- 帖子 #268 ---
+Do you have the normal Gann indy on your indicator folder?
+
+--- 帖子 #269 ---
+do u use the mtf one and if u do pliz somebody post the current chart
+
+--- 帖子 #270 ---
+Put the indicator which I has attached in a folder with indicators and do not change its name - should earn MTF Gannhillo.
+
+--- 帖子 #271 ---
+This is the one I use it is working. Install both the MQ4 and the EX4
+
+--- 帖子 #272 ---
+yes i have all those indi on pg1 and the r well displayed on my chart but for mtf nope.but if u uaself u dont use that its ok with me
+
+--- 帖子 #273 ---
+Arnej: Please tell us moe about your indicators. Why is the stoch M better? What is the CC measuring? Thanks in advance. Glenn
+
+--- 帖子 #274 ---
+Alright guys as I earlier said we would keep things focused on the GU Intraday System. Please do not mix up the systems, the one with the gann mtf as contained in the pdf are the 4 hr swing and 4hr/30 min systems which I introduced in the pdf and I subsequentely gave live examples (still in the usd cad trade for 125 pips took profits at 110 for usd chf). I did not give examples of the GU Intraday because I believe that if you have been following the thread you would understand how that system is being traded. However for the sake of emphasis and for some who have forgotten the rules of the system. I will post a chart of the 2 entries we had during the time I trade. The first was a 43 pip loss. Thereafter we had a buy signal in which I doubled the lot size as prescribed in the rules for only the london open. Took first profit for 40 pips moved stop to BE and took the other lot at MR2 for 80 pips. End of trade for the GU system, though it went up for another 50 pips before 11gmt. Now notice the choppy price action after 11gmt , you can see the divergence on the stoch as price tried to form a new high and was rejected. Watch how price was going no where thru the US open from 1330 gmt though we had a bearish bias with price below gann and sma with the stoch showing lower highs then the sudden drop at the london fix. That is why I usually advice that no matter the system you are trading the US Market can remain irrational if you do not have any impact news to provide direction. So remember the GU Intraday system utilises the gann7 and sma 7 on the 15 min(actually based on current market conditions I tend to prefer it to the gann 5, sma5 , 30 mins setup which is actually safer with less whipsaws). We trade the system with the highest probability from 7 to 11 gmt. We look for 40 pips on out first lot and take off the second lot based on support and resistance or if gann gives an opposite signal. So guys enjoy. A little exercise scroll thru all the pairs with gann5 sma 5 on 30 min and marvel at the beauty of the system to get you into trade as early as possible and keep you in till exhaustion. What more do you want as a Trader than the winning edge the system offers. Good Night and God Bless. O yes the chart farewell
+
+--- 帖子 #275 ---
+hi sir i will post my chart later this my first day on board
+
+--- 帖子 #276 ---
+i stand to be corrected this was my long trade as indicated on 15min chart based on 30min i took a long on the red line is my analysis correct cos my tp hit.i got 63pips on gu right now based on the charts provided i hope am going by the rules
+
+--- 帖子 #277 ---
+I am not saying that Stoch-M is better, It is better for me to work with it. About CC(Kl) you can read in mql4.com. Search there for Claster indicators. This indicator shows most overbouught and oversold currency. How to use it I think you can figure out by yourself. Enable only currencies according to the pair you use, so the cross of them will show you a signal. If you had your own experience before GU Intraday, you can use your knowledges combined with this system.
+
+--- 帖子 #278 ---
+i longed gu again and this time i put 3 lots but with a different tp +32,+35 +41.thanx to the founder i use zigzag and gann.I waitied for it to retrace so that i take it to todays opening price but still not yet.
+
+--- 帖子 #279 ---
+Well done fxrambo I see you have adopted the system to suit your style. I think the system has proved itself. It is left for us the traders to follow the signals and not let emotion ruin your trades. Just look at your charts and see how it caughts all those beautiful swings coupled with the pivots and reversal candlesticks. I think we are going to be very rich by the end of this year. All we need to do is avoid greed and overtrading. Welldone guys
+
+--- 帖子 #280 ---
+Thanks to Okehiedon. I am shocked at how good your systems are!
+
+--- 帖子 #281 ---
+the only one thuing remaining is for me to learn about candlesticks i hope u will update me on this sir
+
+--- 帖子 #282 ---
+ok today i entered my tradings @7.30 and i got +25,+6,+12,+13,+15,+33the makret seems slow today.but this i closed earlier becos on obos signal on 15min chart of which chart continued going up.wat i learnt here i think i lacked patience today and my tp was 4980 based on 4hr but look i went out @ 4924
+
+--- 帖子 #283 ---
+My trade on GBP/USD - profit of +90 points! Thanks the author of trading system!
+
+--- 帖子 #284 ---
+wow that good i can see u took the same place i started my pos @ 7.30 but today i followed the obos so i closed early thanx to the author
+
+--- 帖子 #285 ---
+i short gu again at 11.30 and got +50,+51,+52 this timer i based it on 30min chart and took pos on 15min.now am waiting for long or a retracement for me to short cos 30min chart the cross over have just happen but the candle is too big so may be i wait 4 retracement or another bullish crossover
+
+--- 帖子 #286 ---
+Okehiedon, I notice that OBOS indicator on M30 repaint. It displays many arrows when market going one way. How do you deal with this? How can you tell which one is the real arrow for OB or OS? THanks.
+
+--- 帖子 #287 ---
+Sorry I was not around all day had some domestic issues to sort out which would take me to next week. Now do not use the OBOS on anything less than the 30 min CHART. It would give signals when price is overbought/oversold (Take note EA Trader). Which means a trade is possible. Then you look at the other indicators to enter. The OBOS is sort of a warning signal.
+
+--- 帖子 #288 ---
+That is not repainting in the actual sense. When it appears on the first candle it would continue to appear on subsequent candles to show the overbought/oversold conditon. Should not be used in less than 30 min tf and more reliable on the 4hr tf. Do not trade off the OBOS alone it gives a heads up since it has an alert. Combine it with other indys and you would be fine. Please carefully read the pdf and my posts on how I use it.
+
+--- 帖子 #289 ---
+point taken sir
+
+--- 帖子 #290 ---
+Thanks winsteadglenn for the compliment, All you need is to obey the system rules and ensure that your emotions do not get in the way.
+
+--- 帖子 #291 ---
+i took the the long position on 15min after seeing the retracement and on 1hr the bulls we already crossed the gann and sma i got small profit of +17,+15,+13pips.this r demo only untill i get the system well. now looking 4hr cchart i see it struggling to cross if it does i will long gu high high
+
+--- 帖子 #292 ---
+Fx Rambo which of the systems are you trading. If it is the GU intraday system you do not need all those analysis. Just stick with the 15min gann system (7am -11 gmt) on GU. Do not bother about all other timeframes. All you need to do is zoom out and the major support and resistance levels would be clearly seen. Look at the power of the pivot points how price respects them (see the chart below) For current market conditions, First take profit target is 40 pips (move stop to BE) and let the other run to the closest pivot/sup/res level between 80 to 100 pips from your entry. My trades today, First entry was a loss I entered long at 0700gmt, and did not look at the overbought stoch posn( was thinking if price breaks the pivot it would keep going, (impulse quick fingered trade) and it did not give me my 40 pips (blue horizontal line). Reversed the trade (red horizontal line) as indicated in the rules took profit at MS2. Made my daily profit goal and going out to do other things. Please avoid overtrading have a daily profit goal and also maximum daily loss. Any thing above that is overtrading and not good for you.
+
+--- 帖子 #293 ---
+ok sir i will stick to time and the chart sir
+
+--- 帖子 #294 ---
+All that would be needed for the fifteen and thirty would be time of trade options and the Gann /SMA crosses for entry and exits. From there, one could use Steve Hopwood's Trade Management EA for TP and SL, etc.
+
+--- 帖子 #295 ---
+hi again sir i followed ua advise above and @least today i maximized the profit and something funny i had 7pos opened@ exactly formation @ 7.30 and i got each 30pips.i rode to s1@4571 sir on 15min chart i didnt look @ anything this time. thanx alot and keep on teaching us sir ua help is much appreciated.and u stoch indi.looks good with those red can u share it sir
+
+--- 帖子 #296 ---
+Winsteadglenn, which EA are you talking about?
+
+--- 帖子 #297 ---
+Hello okehiedon, Glenn is referring to the trademanager ea by steve hopwood located in this thread http://www.forexfactory.com/showpost...99&amp;postcount=1 [ It is really a good trade manager ea if you have to be away from your trade for any length of time. Regards, Jeff quote=okehiedon;3728272]Winsteadglenn, which EA are you talking about?[/quote]
+
+--- 帖子 #298 ---
+Well done fxrambo. You are learning fast. The entries are quite simple all you need in the long run is to adjust your Take profit targets based on ATR. For example, the last 2 weeks were quiet volatile were you could hit targets of 150 -180 pips (of course loss the same instantly). Presently I use a conservative 40 pips first target and let the other lot run to a minimum of 80 pips. Okay here is the stoch indy.
+
+--- 帖子 #299 ---
+thnx for the indi.ok about the atr how do u use ATR to determine ua profit target sir.i have read pg 14 everyday on the adr information u posted but am not getting it.if possible explain it with a chart? another question my rmup and rmdn when u said if it shows negative did u mean that ATR as on chart should have eg-30 or when it is red?cos to my chart i havent seen it displaying negative figure but it only show red and green.i hope u understood my question sir
+
+--- 帖子 #300 ---
+Mot a good day at the office today.
+
+--- 帖子 #301 ---
+i longed gu from the redline shown and targetted gu on mr1 let see how it goes
+
+--- 帖子 #302 ---
+my tp hit and we tested the opening all 2pos closed +27,+30 and am still on demo sir still practising untill i get it all on the system.i still need exit straterrgy sir on atr
+
+--- 帖子 #303 ---
+i wonder where the people went here
+
+--- 帖子 #304 ---
+I guess everyone busy... scalped some few pips. keep it up fxrambo... market have been somehow uncertain and choppy... we shall see
+
+--- 帖子 #305 ---
+ya i noticed since yesterday how it is but its not that bad
+
+--- 帖子 #306 ---
+Okay guys I have been busy with non forex related issues. Just having time to drop in and drop out till next week. FX Rambo I admire your courage and steadfastness to learn the system. You asked for an exit strategy using the ATR. The ATR gives you an idea of market volatility and take profit targets and stop loss allowance. For example cable Daily Range is about 260 pips, as compared to 120 pips a month ago. So how do you use this information. First of all your targets would be larger (80-160 pips if you catch the beginning of the move) stops would be more (60-80 pips , the gann exit would get you out of a bad trade within 40-45 pips in line with current market conditions) and off cause you would trade with reduced leverage to compensate for the volatility of the market. FX Rambo you also wanted to know how the room up and room down can be used. Simply, based on the average daily range the indy gives you how far price can go from its present level in either direction. For example right now, looking at my chart GU has an ADR of 260 pips and room up of 232 and room down of 75. Now say I get a sell signal my take profit would be within 70 pips and then I should expect price to reverse. In the same vien there is a lot more room upwards but of course the trend is down.
+
+--- 帖子 #307 ---
+Fx Rambo well done you are beginnning to understand the importance of certain price levels. I have said this before in my intro to the system but for the sake of emphasis, yesterday's high, low and the current day's open are levels were price usually react. Now take a look at the chart I posted below. The yellow line was friday's low level(indicated by the red arrow) which got broken during the asian session on monday to make a new low. Now after that price retraced right back to that same level through out the london and us session and found resistance(and what we call change of polarity from support to resistance) of course a good place to short the market just trading support and resistance. (Now price is moving towards monday's low expect a bounce off that level or a breach and a retrace to that level) Also your intraday targets should be the pivot points especially if they concide with notable support and resistance levels on the hourly and 4hour charts. Finally no matter how technically inclined you are, remeber that the guys that move the market wait for fundamental drivers to determine whether they want to be in the market or not and use technicals to determine entry levels stops and targets. If you do not want to be on the wrong side of their trade you really must understand basic market sentiments, which would guide you when taking trades and assist you to know if you are counter trading or trading with the trend.
+
+--- 帖子 #308 ---
+Sorry I forgot to post the chart.
+
+--- 帖子 #309 ---
+thanx alot sir for ua explaination.by the way do u have an indicator that can display vertical lines that indicate trading session like london and us plizzzzzzz
+
+--- 帖子 #310 ---
+ok this one went bad for in the first place but recovered it in the next trade as shown by the second red horizontal line.there is something am trying to discover but this candle on a white vertical line suprised me it ate my sl on first trade and thats where my trade started.was there news that i didnt know on the effect of that candle on white line?or where did i go wrong?all these i aimed @fpv which was @4358 ok sl was hit and the second attempt as shown on the second white line also hit.so anybody knows went wrong and if it was news pliz somebody explain to me
+
+--- 帖子 #311 ---
+fxrambo... i dont know of any news till london open. I guess it was just the usual european rush prior to london open. we are just 45 mins into london open and market is stalled; waiting to know which direction to go.
+
+--- 帖子 #312 ---
+dear Gud/usd intraday traders, i have heard several opinions about entry and exits but i have not heard about the minimum pips that this system yields in a month. why dont you guys average down.
+
+--- 帖子 #313 ---
+Okay guys I am back after sorting out some domestic issues. Now based on current market conditons(high volatile nature of the market), I did some analysis and have slightly adjusted the settings of the system. We shall concentrate on the 30 min tf with a gann setting of 7 gann. My targets in current market conditons are 100 pips( or within major support and resistance levels) with partial profits at least 50 pips and moving stop to BE. Also note that currently the market begins to move by 6 gmt Secondly based on the volatile markets you can trade any time however must be careful of overbought and oversold conditions. This is how my current charts looks, more visually simple. Stay Tuned
+
+--- 帖子 #314 ---
+Using the revised system, If you miss the initial signal wait for price to pull back to the gann/sma or if it broke a pivot point wait for a retest (change of polarity).
+
+--- 帖子 #315 ---
+It is pertinent to note that the most important part of trading is not your entry but exits. Trade management is crucial in forex trading. As a life example, I had moved my stop loss to break even before the GDP news. Currently taken half of my profits and targeting support 3 as my final target which also happens to be a major support and resistance level on GU right now.However ifI see a pin bar formation or bullish engulfing pattern (30 mintf), I will exit the second half of the trade. So whatever happens my profit for today is made.Here is the chart.
+
+--- 帖子 #316 ---
+Another entry strategy would be to enter the 30 min trend on the 5 min chart. Where you wait for price to retrace and give you a signal in the direction of the prevailing trend. Please note that you do not use the 5 mins for exit(to choppy and you would not be able to ride the trends).
+
+--- 帖子 #317 ---
+Now before I close shop for the day.(Remeber avoid overtrading, when you make your daily profits, go do something else before you hurt your account) It is very important that you have an analysis chart, where you mark out trendlines, support and resistance levels. Fib levels congestion zones etc. This helps you keep in touch with the big picture and the flow of the market. This is my analysis chart with the blue and red lines on the 4hr chart indicating support and resistance levels based on my own perception.
+
+--- 帖子 #318 ---
+Hi okehiedon, can you share your new template/indicators, please? Thanks!
+
+--- 帖子 #319 ---
+Alright here we go just add the fib indy to the other indicators and you have the new template. You can add the stoch indy. It is still useful though I have little use for it at the moment.
+
+--- 帖子 #320 ---
+wow thnx for the new updates sir i was wondering where u went.by the way i have tried instaling the fibo but is not found on my chart did i do something wrong
+
+--- 帖子 #321 ---
+Hi fx rambo, It works for me. Did you put the indy in the experts folder under indicators? Alright guys today has been one of my best days trading the market. The revised system gives you a better perspective. Gets you early into the beginning of a new swing and allows you to hold the trade till you decide to get out. I entered a current trade using the retrace strat as price pulled back within the gann and sma. Already closed half of my long position for 100 pips in GU. Move stop to BE will see what happens. (also had good profits in AudJpy and currently holding a short for euraud 96 pips). Somebody suggested we have a trading room maybe using skype to trade the system.I think it is a good idea and would consider it. Now the chart enjoy, goodnight and God bless.
+
+--- 帖子 #322 ---
+Thnx sir i was able to resolve the problem now is working Another thing sir i see u r having arrows on ua chart is it possible for to share the indi (arrow). Another thing is on ua settings on 30min chart the only thing that has changed is gann which is supposed to be 7gann but the sma will still be 5?
+
+--- 帖子 #323 ---
+Hi Okehiedon, First of all please accept my thanks for sharing this system with us its fantastic. I also second your idea of a skype room whilst trading i think personally it would be great.
+
+--- 帖子 #324 ---
+You would use 7 SMA. Woke up late, long on GU attached chart. Gann signal, price closed above Daily pivot on 30 min. My tgt would be close to yesterdays high. From experience after a trending day like yesterday price trends to consolidate and range. So my targets today would be conservative
+
+--- 帖子 #325 ---
+Hi Okehiedon I was just looking at my charts with your template on it and noticed that the Pivot and Resistance/Support levels appear to be dfferent do i need to make any adjustments?
+
+--- 帖子 #326 ---
+Almost the same m8,
+
+--- 帖子 #327 ---
+[quote=fxrambo;3753769]Thnx sir i was able to resolve the problem now is working Another thing sir i see u r having arrows on ua chart is it possible for to share the indi (arrow). Okay the arrows are just the 4ema /8ema crossover alert. Which I am testing to see the correlation with the Gann system.
+
+--- 帖子 #328 ---
+Good work Soondock we are 30 pips to the good I expect resistance as price hits the open so that could be a conservative target. Your take profits is spot on
+
+--- 帖子 #329 ---
+I have already done it on my tiny account +29pips.
+
+--- 帖子 #330 ---
+Now Guys another thing I look at which I believe a good trader should do is to draw your fibs between the daily highs and low and watch were price bounces. The retracement of yesyerdays move ended at the 61.8% ret level, which was also cluster support area yesterday. Then we had a bullish engulfing candle before the gann system gave us a signal. So we have numerous confluence factors for our long trade.
+
+--- 帖子 #331 ---
+Price is kind of struggling take some profits off. Remeber half bread is better than none
+
+--- 帖子 #332 ---
+Taken some profits off and move stop to BE. The tension is over, free trade now go down to the 5 min and you would observe that price is finding support at the 23.6% ret level and former resistance. Lets see what happens
+
+--- 帖子 #333 ---
+What time frame is your broker server?
+
+--- 帖子 #334 ---
+The 23.6 ret level has held lets see whether we have upward thrust. Now another thing guys you should watch out for is the hourly close, most change of momentum and market direction usually begin during this period.
+
+--- 帖子 #335 ---
+Price as hit the open 40 pips to the good and watch how price react instantly as it hit there
+
+--- 帖子 #336 ---
+broker time is +3 gmt
+
+--- 帖子 #337 ---
+So our morning profits have been made. The indecison candle as price hits the open tells me the buyers are through for now and we might see some retracement. Well anything can happen but we are out for now. I hope you guys have followed my trade and have seen how I do it. I take several factors into consideration particulalry in determining my targets. Keep your eyes on the market open of the current day, high and low of the previous day and you would be in tune with the major market players. Bye for now.
+
+--- 帖子 #338 ---
+Set the pivots to gmt. That is what I use.
+
+--- 帖子 #339 ---
+where did your stochastic gone?
+
+--- 帖子 #340 ---
+How do i set the pivots to gmt?
+
+--- 帖子 #341 ---
+Read post 319
+
+--- 帖子 #342 ---
+Go to the THV Indy and adjust the settings there.
+
+--- 帖子 #343 ---
+Cool, thanks for your great advice.
+
+--- 帖子 #344 ---
+should we set it to GMT+1 because London open is now at GMT+1?
+
+--- 帖子 #345 ---
+Well that is the logical thing to do. Somehow I see the GMT setting gives levels that are respected alot by price action such as I showed yesterday. In any case the jury is still out on that, we would investigate further. By the way I hope you have all made the daily pips. Nice easy trends to catch. Just a heads up when we have the daily ATR going below towards 150 pips and volatilty calming down (presently above 200). We would switch to the 15 min tf with the same settings.
+
+--- 帖子 #346 ---
+Thanks for that, i hope to learn allot from your very useful posts they have taught me allot thanks once again. Any news on that Skype thing?
+
+--- 帖子 #347 ---
+Yep I would try to get around setting it up during the weekend and we can start in June.
+
+--- 帖子 #348 ---
+Do you take any trade today? btw, will you trade on Monday, Friday or not? It seems lots of trader do not trade on Friday and Monday. Just curious what about you?
+
+--- 帖子 #349 ---
+We withdraw our profits at the end of the month to say well done to ourselves However, on a serious note. I personally have no bias on which day to trade. The key is to analyse what happened on the previous days. We had a strong trend on thursday, the probability of market moving strongly without any fundamental driver is low. So expect some consolidation. The reasons why traders do not trade on fridays is because technicals levels are violated, supports and resistances levels may not hold and of course there is a lot of whipsaw. Well right now I am just demo trading on the 5min chart, to sharpen my scalping skills(nothing to do with the system).
+
+--- 帖子 #350 ---
+dear Gud/usd members i would like to ask how many pips did you guys make in the month of may. for me i am +600 pips at the end of may. but i have my own rule for trading this system. with the trix from Thv system serving as my overbought and oversold zone. i currently base in newyork and i work in the market zone, wall street but not in any financial institution yet. i trade forex from 3am est - 7am est and i work as i ticket agent in downtown manhattan. so i know how the big guys in the financial market live thier life. in other to know if you are moving well you need to average down in pips and percentage gain. i made 600 pips in the month of may trading 1000k live account and that count as 60% gains for me.
+
+--- 帖子 #351 ---
+You did very well mate, keep it up. It will be good if you can share some of your trades with images....!
+
+--- 帖子 #352 ---
+With only a couple of things to automate, I am surprised that no one has produced a robot to trade this fine system. Presumably, one could encode a Gann/SMA cross and the Trix, with time filters, and do fairly well. Glenn
+
+--- 帖子 #353 ---
+Well, go ahead!
+
+--- 帖子 #354 ---
+Well I hope you guys had a good weekend. Today is bank holiday in the UK so no trades during the london session(remember forex 101 avoid trading during holidays). Concerning the EA for the system some guys are working on individual projects and we also encourage others to join up. Just use the gann,sma and stoch on variable settings.
+
+--- 帖子 #355 ---
+I agree. Tomorrow will be NFG release day. Be cautious.
+
+--- 帖子 #356 ---
+btw, have you done any trade this week? Please post your entry picture and we can learn from you.
+
+--- 帖子 #357 ---
+Hey, where's everybody? My first post on FF. I'm a member since a while but I'm more active on another forum. Some people already know me... I have coded many eas for a lot of guy our there... ;-) This is a nice strategy and it works! Useful information in this thread. Thanks okehiedon. I have started to trade this strategy last week. Today trade: http://www.mldlfx.com/picts/gu_20100621.gif Last friday trade: http://www.mldlfx.com/picts/20100618.png http://www.mldlfx.com/picts/GU_20100618.png I set my SL at the GANN value of the candle that gives the signal and take profit on 3 different levels: I close 75% of my initial lots at 15 pips (set SL=BE at this moment), 50% of remaining lots at 35pips (set SL to 15) and let go the rest til TP hits 100 or SL hit. I also trail the SL by candle chart (7 back candle) when level 2 is triggered. I follow the strategy entry as described by the author. I look for trade setup between 8h00GMT and 11h00GMT. Total pips for the 2 days: 40pips. Will continue to show my trades if that could interest anyone? Will code an EA around the method if it shows consistent gain. Cheers Mart
+
+--- 帖子 #358 ---
+i also trade this as a secondery system since it was introduced and short med and long term it works
+
+--- 帖子 #359 ---
+Mart welcome to the thread, the system has proved its consistency using the 30 Min gann 7 setup.My first take profit targets have been 40-50 pips and second take profit 80-100 pips. However, I must point out that we are trading a volatile pair and your stop loss placing at the gann value will get hit without the trend changing. Place your stops behind support levels/ pivots in an uptrend and below reistance levels/pivots in a down trend. You will exit a trade manually when price closes the other side of the gann. When price touches the gann it usually gives a retrace entry in the direction of current momentum/short term trend and may take out stops that are too close. So please note and avoid placing stops close to current price action Well guys I have been too busy with other projects/commitments to post regulalry but always around to answer questions. I must also point out that no matter, how good a system is, you must have a feel for current market sentiment per time, this would give you the confidence to ride the current momentum and allow profits to run, this is what we should continually strive for, if you want to be in this biz for a long time. Again today has proved how good the system is with the initial entry and retrace entry as price draws back between the gann and sma so clearly evident. I have also been working with it on Audjpy(The risk appetite/risk averse pair indicator) with some good results. I therefore post the 2 charts GbpUsd and Audjpy. Goodnight and God Bless. Please note if you have any questions ask on the thread and when I am around I will answer them.
+
+--- 帖子 #360 ---
+Thanks a lot. And thanks for your helpful advice. This morning I was a little bit late and took a long (see pic) and grab a small 13 pips. The support (S1) line become a resistance and I took the profit when I felt that the price was to reverse. I'll try to manage my SL the way your described tomorrow. http://www.mldlfx.com/picts/gu_20100622.gif Cheers Martin
+
+--- 帖子 #361 ---
+The chart you posted is a 15min chart, quite choppy at this time more consistent is the 30 min set up.
+
+--- 帖子 #362 ---
+hello guys im up with GBPUSD SMA just cross gann line PS. some of the link from 1st page are broken. I suggest to edit first page and keep up-to-date. I did not read all the thread but as faw as i see now the system is still developing. If you stick to the rules that you create you can profit from the market even with a "white noise" as a indicator best regards
+
+--- 帖子 #363 ---
+6 days of trading 22-29.06.2010 https://ybrptq.blu.livefilestore.com...ownload&amp;psid=1 with some technical view on daily and THV indicator of prev close this is really good system.
+
+--- 帖子 #364 ---
+Welldone falwic. Keep it up. The next thing you need to do is stick to about 2 pairs most 3. A dollar pair (GU), a yen pair(AudJpy/EurJpy and a cross(Eur Aud, EurGbp or Gbp Chf) and know these pairs like the back of your hand, it would increase your confidence and help in taking profits and knowing false moves and reversals, well done.
+
+--- 帖子 #365 ---
+nice system, will try it
+
+--- 帖子 #366 ---
+To all followers of the thread. I have replaced the stoch with the qqe, which is a modified RSI, with the 2 lines representing fast and slow rsi. With a cross indicating change of momentum. Seems to be a good filter for the system. Secondly I have maintained the 30 min tf with the gann 7 and sma 7. Trading both the initial entry and retrace entry. My current chart outlook.
+
+--- 帖子 #367 ---
+What are those little arrows under/above Gann ? Found if the smoothing in QQE is set to 10 instead 5, a lot of whipsaws are filtered.
+
+--- 帖子 #368 ---
+4/8 ema crossover signal
+
+--- 帖子 #369 ---
+welcome back, my friend. and nice to see your uprated system. I have not use this system now, as it seems to me more suitable to London Open while I am not able to trade it. Still searching the system which could allow me trade at NY open. And I can only trade 2~3 hour in the first NY session, 30 TF just has 5~6 bars, which give me very small chance to get a good entry. Please do let me know the success story of your system in NY session.
+
+--- 帖子 #370 ---
+I usually advice that traders who basically trade the NY Open stick to the Eur Usd, Usd Cad or EurJpy becos order flows are more significant in these currency pairs at this time. Secondly you must understand that the market is being driven by sentiments in DJ and SP 500. Also watch out for news releases at this time also. Thirdly the market begins to move 1 hour before the NY Open. You can use the system on EurUsd in combination with pivot points on the 15 min to bank you 20-30 pips during the 3hrs period you trade and close for the day. But you must be ready to reverse yor position without hesistation if the system gives you an opposite signal because of the voliatile and choppy nature of NY. Finally remeber that we are in summer and trading volume is not heavy, thus rande trading is more suitable for this period. I hope this helps
+
+--- 帖子 #371 ---
+Hi Okehiedon, Are you still using this system with great success with 7 SMA and 7 GANN with the files/template from POST#4 and the QQE alert from POST#366? I'm in Australia, and due to work and family commitments, can ONLY trade the London open, so this system would be purrrrfecto for me. With thanks, Nick
+
+--- 帖子 #372 ---
+hello thanks for great work what is the last system and template could you please send files or link
+
+--- 帖子 #373 ---
+Yep as consistent as ever, it is my edge in the wild world of forex Today was quite smooth for GU traders. As shown in my chart the trix called the bullish divergence as shown in the chart warning that the down trend may be coming to an end, a look at eurgbp(remeber we trade london were that currency pair is king) tells us that the big boys are selling the eurgbp at resistance. Then we get our confirmation when price closes above gann and all our indies our screaming buy. The rest is history.
+
+--- 帖子 #374 ---
+Oke, well done bro. Like you said, everyone will have to develop an edge to survive in this game. Been working on mine. Hit a rock sometime in the past and decided to retreat and tidy some rough edges. slow and steady, i am getting there.
+
+--- 帖子 #375 ---
+I've read through this thread and like the consistancy of winning trades, when the rules are followed. There was talk of a Skype room for trading this method in the past. If there is one, may I have the address on Skype or contact information on how to join the room.
+
+--- 帖子 #376 ---
+EA is pratically completed (at least, a pre-version). For those who knows me, you know that I only give the ea to author of the method. Just don't want any on my stuff on ebay! Cause I have used some code taken here and there on the web, I'll do an exception for this one, I'll post instructions and files later this week (time to clean up some stuff in it). Some small backtests for now May4 2010 til today on 15m chart, GANN 7, MA 4, QQE http://www.mldlfx.com/picts/gu3_50pc.gif Same period on 30m chart, GANN 7, MA 7, no QQE http://www.mldlfx.com/picts/gu3_30m_noqqe.gif Ea takes into account pivot lines, R&amp;S and ADR before taking a trade. It's pratically an exact copy of the method... except that the ea can't think so... it will never replace a human for discretion (but you actually know that ). Later, Mart
+
+--- 帖子 #377 ---
+Great Job mart..
+
+--- 帖子 #378 ---
+Hello, Very nice results. If and when you do post it, I can do some optimizing and run backtests as well. Regards, Jeff
+
+--- 帖子 #379 ---
+It is quite simple to avoid the ea being hijjacked and put on Ebay: put it on the site for only a certain period, only the followers of this thread can download it for a week or two or so.
+
+--- 帖子 #380 ---
+great work could you please post the ea for testing and optimisng thanks
+
+--- 帖子 #381 ---
+this is very helpful. thx mate.
+
+--- 帖子 #382 ---
+Live Trading Today. Would Appretiate feedback regarding correct SL and entries. 1st Trade £1 perpoint open: 1.5274 ( first bar under gann not valid as stoch not RED, enter on 2nd bar retrace) SL: 1.5288 TP1: 1.5247 TP2: 1.5199 result = -£12 (stop out NEW siganl NOT SL) 2nd Trade £2 per point ( not comfortable Doubling upb ut part of system) open 1.5285 SL= 1.5258 TP1= 1.5307 50% = £22 TP2= 1.5356 50% = £48 Total = 70 -12 = £58 Profit Picture paints a 1000 words!!! Many Thanks
+
+--- 帖子 #383 ---
+Well done phover I am impressed, I was not in doubt about the ability of the system to be coded to achieve some level of success. So we await the EA.
+
+--- 帖子 #384 ---
+Well done, for following the rules and you can see the gains. As I said before in the thread that GU may have its ranging moments but it is not the norm. Its a traders dream particulalry if you have a basic understanding of the underlying sentiments that drives price action at the moment you are trading. Secondly consistency is the key. It grows your confidence when you stick to the system and go through its strengths and shortcomings and know that overall you would make profits. Once again well done and keep at it.
+
+--- 帖子 #385 ---
+you can contact guys from forum and encripte EA and also include funcion yhat desable ea after about 2 weeks... Guys from THV do this and after few weeks of testing old version in disabled. but most important is to encrypte EA and hide source code. i hate punks from Ebay that selling not thair work ( i saw one who selling one system from this forum for 199$) 2nd this system is preatty sexy but need lot of work to become real EA as i post before i had 10 winning trades in a row but did not enter every signal... wider look needed
+
+--- 帖子 #386 ---
+Hey Falwic, What else do you look for before taking the trade using this system?
+
+--- 帖子 #387 ---
+It would be great to see results form January till present days. Because May was very trending and in long run results could be not so impressive. If you can please show us one test starting form January, no matter what the results will be
+
+--- 帖子 #388 ---
+its hard to explaine Im trading for a living for since 2003 so i spend 14H a day staring at the charts and this is more intuition then ABC approche. i like to take trades with this system after choppy trading day and break prev. high. Daily trend must be in direction of the trade. Vice verse after big move prev day i will trade only after break of prev. hi or lo. i will provide some screens to expline my ideas coz my eng is not so good later today
+
+--- 帖子 #389 ---
+https://ybrptq.blu.livefilestore.com...ownload&amp;psid=1 https://ybrptq.blu.livefilestore.com...ownload&amp;psid=1
+
+--- 帖子 #390 ---
+Hi guys, It's not totally completed yet, but I think it's a good start for those who wants to start playing with the ea and the method. I have found a small problem today with pivot calculation but that doesn't affect so much results but I will work on that this weekend. This is a ruff backtest. I didn't optimize anything yet (I let that to you guys . Just playing with different values. Here is one from January til today on 15m chart. http://www.mldlfx.com/GU3_2010.gif Statement here: http://www.mldlfx.com/GU3_2010.htm My broker is JadeFX, then results can vary depending of your broker. Find attached a ZIP containing required files. The root of the zip contains the ea and the "indicators" folder contains the required indis for the ea to work. Just copy/unzip file in your MT4 corresponding folders. For those trading the method manually, you should already have some of them. I use QQE ADV as the QQE filter. I didn't use the QQE indi suggest by the author but I'll integrated it in the next version. I'M just more familiar with QQE AVD. Still need to find goods setting for M30. I turn it off on 30M timeframe. For M15 timeframe, it does the job of filtering some whipshaw. Here the list of parameters and some explanations. Those familiar with eas won't have any problems to understand everything. I didn't had the time to write a documentation but feel free to ask if it's not clear. Inserted Code extern string _PIVOT = "***** Pivot *************"; extern int Pivot.MyPeriod = PERIOD_D1; extern bool Use.Pivot.Filter = false; extern bool Use.Fib.Pivot.Filter = true; extern bool Fib.pivots = true; extern bool Fib.camarilla = false; extern bool Fib.midpivots = false; extern double Pivot.Thickness = 10; //% extern string _ADR = "***** ADR ******************"; extern int ATR1.Prd = 5; extern int ATR2.Prd = 20; extern double ATR.RoomLimitRatio = 0.2; extern bool ATR.ExcludeSundayData = true; extern double Atr.WaitForPullBack = 0; //0-disable extern int Atr.WaitForPullBackPeriod = 5; extern string _MA = "***** Moving Average *****"; extern int MA.Period = 4; extern int MA.Price = PRICE_CLOSE; extern int MA.Method = MODE_SMA; extern int MA.Shift = 1; extern string _GANN = "*** HILO GANN ACTIV. *****"; extern int GANN.Period = 7; extern int GANN.Shift = 1; extern string _SM = "***** SwingMan TRIX ****"; extern bool SM.Use = true; extern int SM.TRIX_Period = 3; extern string _____Averages_____ = "0=SMA, 1=EMA, 2=SMMA, 3=LWMA"; extern int SM.Mode_Average_1 = 1; extern int SM.Mode_Average_2 = 1; extern int SM.Mode_Average_3 = 1; extern string _____Input_Price_____ = "0=C,4=Median,5=Typical,6=Weighted"; extern int SM.Input_Price = 0; extern int SM.Shift = 1; extern string QQE_Indi = "- - - - - - QQE - - - - - "; extern bool QQE.Use = true; extern int QQE.SF = 5; extern int QQE.RSI_Period = 8; extern int QQE.WP = 3; extern int QQE.Shift = 1; extern string _ORDER = "****** TAKEPROFIT *******"; extern int OR.Trailing = 8; //Candle mode trailing extern double OR.TakeProfit1 = 13; //First TP level + set BE extern double OR.TP1SetSLto = 1; //1=100%=BE, 0.5=50% of distance between SL and openprice extern double OR.Lots1r = 50; //% of lot to close at this TP extern double OR.TakeProfit2 = 40; //Second TP level + set SL at TakeProfit1 extern double OR.Lots2r = 50; //% of remaining lot to close at this TP extern double OR.TakeProfit3 = 100; //Close remaining lot at this TP extern string _STOPLOSS = "******* STOPLOSS *********"; extern int SL.Mode = 1; //0-fixed (SL), 1-GANN, 2-pivot, 3-last fractal extern int SL.Stoploss = 0;//mode=0-&gt;set stoploss value; mode&gt;1 -&gt; minimum stoploss extern string _Order_ = "******* Order info ********"; extern bool EntryAddOrder = true; //true-add order, false:orders are not placed (just an arrow) extern int MaxOrders = 2; extern int TimeBetweenOrder = 5; //min extern int SlippageOpen = 2; extern int SlippageClose = 2; extern int OrderRetry = 3; extern int DelayBetweenRetry = 2000; extern int MagicNumber = 6000; extern string _SL_TS_ = "***** Order Setup ****"; extern bool ECNBroker = true; //Use Market order extern int LotsDigit = 2; //Number of digits for lot extern double MaxLot = 10; //Max number of lot accepted extern double MinLot = 0.05; //Min lot that we can trade bool StopLossAutomatic = false; //if true, SL is set automatically at each new candle double StopLossAutomaticFactor = 0.02; extern string _EXIT = "- - - - - - Exit - - - - - -"; extern bool CloseOnGANNtouch = false; extern bool CloseOnOppositeOrder = true; extern string TS_ = "- - - Break Even - - - -"; extern int TS_SetBreakEvenAt = 0; //When profit reach these pips, SL set to breakeven+LockPips, 0-disable extern int TS_LockPips = 1; extern bool TS_On = false; //Set to True to activate TS extern int TS_TrailingStop = 40; extern int TS_TrailingStep = 2; //Diff between market price and SL extern string _MM_ = "***** Money Management ****"; extern double Lots = 0.05; extern bool RiskMM = true; //risk management extern double RiskPercent = 5; //risk percentage extern string MeansComm1 = "___LOT CALCULATION METHOD___"; extern string MeansComm2 = "MeansType: 1 - Balance, 2 - Equity, 3 - FreeMargin"; extern int MeansType = 1; //MM calculation method extern string _EntrySchedule_ = "******** Schedule *********"; extern bool EntryOnSchedule = true; extern int ScheduleStartHourGMT = 8; extern int ScheduleEndHourGMT = 11; extern bool TradeOnSunday = true; extern int SundayStartHourGMT = 8; //GMT hour extern bool TradeOnFriday = true; extern int FridayStopTradingHourGMT = 11; extern int FridayEndHourGMT = 11; extern bool FridayCloseAllTrades = false; bool FridayKeepSecuredTradeOpen = false; //Secured = SL&gt;=Order OpenPrice extern string _Misc_ = "********** Misc ***********"; extern bool EntryAlert = false; extern bool EntryEmail = false; extern bool ReportEmail = false; extern string ReportSubject = "IDGU report"; extern int BrokerOffsetFromGMT = 1; You'll notice that the EA doesn't place as much trade as we can do manually. It consider only the previous candle and all indis must match to place an order. You have ideas to improve, please share, I'll see what I can do. Important point: the BrokerOffsetFromGMT must reflect the difference from your broker time minus GMT time. It's important! And if your broker time change on winter/summer then you should adjust the offset and backtest period of time where the offset doesn't change. I don't normally trust backtest cause I don't know exactly how the data has been produce (based on what time). I prefer forward cause I know exactly when to change the offset (if I need too). Maybe we should open a new tread in FF for the EA to avoid "ea polution" in this thread. What do you think? Also, english isn't my native language (frend it is), then don't be too ruff with me Have fun. Salut, Martin ps. First EA trade this morning on 30m chart (GANN 7-MA 7)... live. ps2. EA will be available for download til July 23.
+
+--- 帖子 #391 ---
+Many Thanks, Phover. Loaded and ready. Best Regards, Glenn
+
+--- 帖子 #392 ---
+Hey guys, Forgot to say that defaults parameters of the EA have been set for 15m timeframe. You should change the following values as a start for 30m timeframe: MA.Period = 7; QQE.Use = false; SL.Mode = 2; OR.TakeProfit1 = 30; Please feel free to optimize any parameters you want. It surely exist a better settings. Cheers Mart
+
+--- 帖子 #393 ---
+Hi Phover, Thanks for the EA. How do you use pivot points do you use them for target profit/sl level or also for entry direction log only above ppv etc? Thanks.
+
+--- 帖子 #394 ---
+Thanks for the EA phover, hope oke can test it for us, after all he is the man . Rebel. "The wise man knows what he does'nt know*
+
+--- 帖子 #395 ---
+Hi, Actually I use them only for entry. If price under R1, only buy If price over S1, only sell. I need to improve the calculation of my pivots since I found a small problem in my routines this morning. It works as it is now, but it will be better in the next version. I also plan to use S&amp;R levels as target too. I choose a differents approach (3 level takeprofit) to valid the theory before the next step. Still a work in progress. Cheers Mart
+
+--- 帖子 #396 ---
+Phover, thank you for this ea. I got an error 4051. I think it has to do with invalid ticket? I tested it on Alpari ru.
+
+--- 帖子 #397 ---
+I think this is a much better SR indicator then the one that is used now??
+
+--- 帖子 #398 ---
+I am up nicely on the fifteen min. robot for the first flight. I changed the QQE to SF 1 and RSI period to 5, for a good visual match with the Gann cross at 7 and 7. Wow. I can sleep at night in Montana. Nice work, Phover.
+
+--- 帖子 #399 ---
+Cool! Anyone catch the trade today with the EA on 30m? Mart
+
+--- 帖子 #400 ---
+Thanks, Phover. Yes, I caught that ride. It is working very well, indeed. What is Stop Loss Mode Two? Is that an ADR based mode? I should leave the next SL Stop Loss setting at zero? I have set the exit on touch Gann, now. Sometimes waiting until the next candle forms is a bit much. That is a thoughtful feature. Best regards, Glenn
+
+--- 帖子 #401 ---
+Thanks Glenn SL Mode 2 is calculated from S&amp;R. It takes the nearest Support or Resistance level for the SL. This value must be greater than the GANN value (if long) or smaller than the GANN (if short) Here is the relation between SL.Mode and SL.Stoploss SL.Mode/ Description / SL.Stoploss 0 / fixed stop loss / value you want for stop loss 1 / stoploss value equal GANN value / offset added (long) or substract (short) to GANN 2 / nearest S&amp;R / not used 3 / last fractal / not used It seems that my S&amp;R value aren't really accurate. Daily pivot is ok, I need to change my calculation for support and resistance lines. Even if mode 2 works, stoploss calculated are a little bit too far. That gives more room for trades but increase the exposure. Give it a try in demo first (or backtest) to see if stop loss calculated are ok for you... Hope that help Cheers Mart
+
+--- 帖子 #402 ---
+Hi Mart, maybe you can consider to use the above placed SR indicator? It uses 15 min, 1Hr, 4Hr and 1Day sr and you know, a 4hr or Day sr has much more "weight" then other sr values.
+
+--- 帖子 #403 ---
+Hi WillemM, I'm looking at it rigth now. Thanks. Will see what I do after. I'll probably include the calculation in the ea and put them as options. This way, we'll be able to test different scenario. Later Martin
+
+--- 帖子 #404 ---
+Martin: Could the exit be plugged into the three level semaphore, as an option?
+
+--- 帖子 #405 ---
+Could the three-level semaphore be programmed as an exit option? I am running several pairs on demo and noticed that twice it opened trades opposite to the QQE, which was set to True. Overall, quite nice and profitable. Thanks, Martin.
+
+--- 帖子 #406 ---
+Sorry, I missed your previous post... Yeah I could do that. If you have a recent (or prefered) version of the semaphor indicator, send it to me by PM. For the QQE I found a small error in my code that I have already solve. I'm curious to know on which pair do you trade the EA? Any results to share? I'll post an update version of EA beginning of next week. Have a nice weekend. Cheers, Mart
+
+--- 帖子 #407 ---
+Hello Phover, I believe Glenn is using this one. Glenn, can you post your set file? Just save it as a txt file then you can upload it to FF. Regards, Jeff
+
+--- 帖子 #408 ---
+Thanks, Jeff. Roger that. I have tried multiple currency pairs, somewhat at random, including GU/EJ,EU, Euro/CHF, Aud/USD, USD/JPY, USD/CHF. It seems to work well with all of them, except that Aud/USD was only active during the Japanese session. Using 5% MM, I have netted over 1.5% daily, except on Friday, which was about 1%. Beginning precisely at the opening bell of the London market would have improved the outcome. A fixed QQE would have prevented two losses that bit into the profit. My BlackBox VPS just switched to a new server, so most of that demo data is lost. The dropbox.com is wonderful for sliding programs into a VPS, by the way. _Filters_=***** Spread Filter ***** MaxSpread=5 _PIVOT=***** Pivot ************* Pivot.MyPeriod=1440 Use.Pivot.Filter=0 Use.Fib.Pivot.Filter=1 Fib.pivots=1 Fib.camarilla=0 Fib.midpivots=0 Pivot.Thickness=10.00000000 _ADR=***** ADR ****************** ATR1.Prd=5 ATR2.Prd=20 ATR.RoomLimitRatio=0.20000000 ATR.ExcludeSundayData=1 Atr.WaitForPullBack=0.00000000 Atr.WaitForPullBackPeriod=5 _MA=***** Moving Average ***** MA.Period=7 MA.Price=0 MA.Method=0 MA.Shift=1 _GANN=*** HILO GANN ACTIV. ***** GANN.Period=7 GANN.Shift=1 _SM=***** SwingMan TRIX **** SM.Use=1 SM.TRIX_Period=3 _____Averages_____=0=SMA, 1=EMA, 2=SMMA, 3=LWMA SM.Mode_Average_1=1 SM.Mode_Average_2=1 SM.Mode_Average_3=1 _____Input_Price_____=0=C,4=Median,5=Typical,6=Weighted SM.Input_Price=0 SM.Shift=1 QQE_Indi=- - - - - - QQE - - - - - QQE.Use=1 QQE.SF=5 QQE.RSI_Period=14 QQE.WP=3 QQE.Shift=1 _ORDER=****** TAKEPROFIT ******* OR.Trailing=8 OR.TakeProfit1=30.00000000 OR.TP1SetSLto=1.00000000 OR.Lots1r=50.00000000 OR.TakeProfit2=40.00000000 OR.Lots2r=50.00000000 OR.TakeProfit3=100.00000000 _STOPLOSS=******* STOPLOSS ********* SL.Mode=2 SL.Stoploss=0 _Order_=******* Order info ******** EntryAddOrder=1 MaxOrders=2 TimeBetweenOrder=5 SlippageOpen=2 SlippageClose=2 OrderRetry=3 DelayBetweenRetry=2000 MagicNumber=6000 _SL_TS_=***** Order Setup **** ECNBroker=0 LotsDigit=2 MaxLot=99.00000000 MinLot=0.05000000 _EXIT=- - - - - - Exit - - - - - - CloseOnGANNtouch=1 CloseOnOppositeOrder=1 TS_=- - - Break Even - - - - TS_SetBreakEvenAt=30 TS_LockPips=1 TS_On=1 TS_TrailingStop=30 TS_TrailingStep=2 _MM_=***** Money Management **** Lots=0.05000000 RiskMM=1 RiskPercent=5.00000000 MeansComm1=___LOT CALCULATION METHOD___ MeansComm2=MeansType: 1 - Balance, 2 - Equity, 3 - FreeMargin MeansType=1 _EntrySchedule_=******** Schedule ********* EntryOnSchedule=1 ScheduleStartHourGMT=9 ScheduleEndHourGMT=16 TradeOnSunday=1 SundayStartHourGMT=7 TradeOnFriday=1 FridayStopTradingHourGMT=18 FridayEndHourGMT=20 FridayCloseAllTrades=1 _Misc_=********** Misc *********** EntryAlert=0 EntryEmail=0 ReportEmail=0 ReportSubject=IDGU report BrokerOffsetFromGMT=1
+
+--- 帖子 #409 ---
+Hi Guys I want to appreciate the efforts of everyone involved in the EA project. I have not been consistent becos I have travelled out of my country to do a Masters Degree. I think I owe it to everyone in this thread to explain my absence from this profitable system. As much as I can, I would contribute to the testing of the EA and bring to bear my experience in intraday manual trading. Please keep it up
+
+--- 帖子 #410 ---
+wow, cool Thanks Mart for the EA, I will try it out.
+
+--- 帖子 #411 ---
+winsteadglenn this settings is for what TF ? i suspect 15min right?
+
+--- 帖子 #412 ---
+Falwic: Thirty min. TF. , although I am still uncertain about which is better, my friend. The forex factory Supernova EA site suggests a QQEA setting of 1 and 14, and some discussion of using a darfur of 3.5 Something to compare.
+
+--- 帖子 #413 ---
+with imfo like *** OUT OF TRADING SCHEDULE no trades anymore? can i switch this off ?
+
+--- 帖子 #414 ---
+The Yellow dot, third segment of the semaphore, nearly always nails the peak of a move.
+
+--- 帖子 #415 ---
+Well, that might be true, but you cannot be sure, for in a (strong) trending market it moves with the trend. And furthermore it is my opinion, that the more indicators, the worse an ea will be.
+
+--- 帖子 #416 ---
+Yes, it moves with the trend, so one must wait until it decouples from the current candle. But your point is well taken.
+
+--- 帖子 #417 ---
+This is a good system, but I seem to be getting a few false signals with this system. Anybody using any additional filters, please? Thanks Nick
+
+--- 帖子 #418 ---
+Hi everyone, Just a small words to say that I'm still there. Was very busy this week. I have too much project running at the same time Version 1.1 of GU Intraday EA is coming... just a little more patience Cheers Martin
+
+--- 帖子 #419 ---
+Hello Martin, Your work is very much appreciated. Regards, Jeff
+
+--- 帖子 #420 ---
+tradernc, welcome to the dynamic world of forex were nothing is certain. In this biz we try to first understand the market, its sentiment and then apply some indicators in what we call a trading system to give a perspective of the market. Now we must understand that forex trading is seasonal, during summer most of the big boys are on break, so there is light volume and not enough to sustain trends. So we have a lot of whipsaws and volatile movements with pricing actually going nowhere. By september the institutional traders return volume is back and we begin to have sustained trends and definite price action uptill the next summer. So during this period i trade with a reduced lot siz and tend to keep profits targets conservative. Also watching both the 15 min and 30 min chart. If i like what I see thre 15 min chart comes into play. If you are looking for a filter the QQE as stated in my last update of the system in the thread is a good filter. Also you may wish to trade in the direction of the overall trend as highlighted by the 120 ema on the 4 hr chart (20 ema on the daily).Cheers
+
+--- 帖子 #421 ---
+nice system , some false signals overall a good EA...thanks , keep up the good work
+
+--- 帖子 #422 ---
+when will you post the 1.1 version? ...thanks and take care
+
+--- 帖子 #423 ---
+glen could you please post your indicators and template or give me a link to the indicators and post the settings? thank you and sorry to bother you
+
+--- 帖子 #424 ---
+Well, believe me, the more indicators, the less profit. And looking at the picture, there is none whatsoever difference in the ma&amp;gannline and the stochasticTops-Bottems. The best systems have few or none indicators.
+
+--- 帖子 #425 ---
+Have been lurking this thread for sometime. Nice, uncluttered system. Here is my two-cent contribution. Attached is the M30 chart showing divergence in three different instances. In all three, they predicted the following big move before it started. The last one was starting when I took the first pick. Attached Image (click to enlarge) Attached Image (click to enlarge) You can see how the trade has progressed few candles later. I also noticed that the stiffer the slope of the divergence, on PA and/or Trix indicator, the stronger the folllowing move will be. Keep in mind that in trading nothing is 100% sure shot. Nevertheless, every piece helps
+
+--- 帖子 #426 ---
+Kashif Nice to hear from you. The system is still robust in line with the rules ( trade GU 8-12 gmt). The key is no matter how choppy the market is GU, on the basis of higher probability we will have momentum during the period we trade. For example today was choppy but look at the time specified to trade the system. Now for the EA, it would require that it initiates a trade immediately the time set for the system kicks in. It should not wait for a new signal. So for example todays chart the EA should short the pair with the already existing short signal. What it usually does is that it waits for a new signal before it trades.
+
+--- 帖子 #427 ---
+Good evening everybody. I passed all the afternoon to copy and past on a word document all the posts about this system in order to study it straight. I also downloaded all the templates, exe and mq4 and saw all the the changes during the last 5 months in few hours. I guess by a superquick and superficial reading of all the posts that it's a very interesting system indeed and I want to thank you Okehiedon for sharing it and also thans a lot to all those who partecipated in order to make the thing even more clearer and easy to implement and use . I'll spend my weekend to study it and then I am eager to try it. By the way, today it was a massacre for me, probably because of all the news affecting Gbp and Usd and maybe my lack of discipline . Did anybody trade with this system this morning and/or this afternoon? And with what results? Ok then, I am glad to be here now and I'll do my best to actively contribute to this thread . Just one prayer: it happened with two threads that as soon as I got into with a post, everybody disappeared and the thread now is a dead-zone . Promise me that you won't disappear and you'll stay here
+
+--- 帖子 #428 ---
+Fabius where did you get the 'massacre' from. It was another profitable day for the system. This is my chart with the trading hours highlighted. Even if you had traded the us session(which I do not recommend ) you would have been in the green.
+
+--- 帖子 #429 ---
+HI can you please tell me where i can get the indicators to set up my charting like the one you have. It looks so much better to follow the buy and sell signals.
+
+--- 帖子 #430 ---
+Hi, thank you for answering. I got the massacre mainly Gbp/Usd and my lack of patience I guess. I started well with 25 pips profit from 7.30 to 9.19 (Italian time, actually GMT +2). Then I started I sequence of losses due mostly of revenge-trading and maybe because I couldn't manage my positione correctly because all those whicks scared me. I am about to study all your sistem (about 100 pages on word format -but with a lot of charts-) and I am looking forward to test it. First on demo of course
+
+--- 帖子 #431 ---
+Fabius, if you are new to trading i suggest you move over to the eur usd. GU is known for its volatility and sometimes ugly price action. One thing you must understand when trading this system is that you will not enter or exit any trade until the candle closes. Sometimes because of the wicks it might seem that there could be a reversal but it is only market noise. Do not sit down staring at the charts. Take your position in line with the system and only check 15 or 30 min when the candle closes and do nothing till the next candle closes. (15 min tf for now) If you look at today's chart it looks all one way, but in actual fact you were not sure what is happening till the candle closes. It looks nice on hindsight but trading live your emotions will get to you that is why i only look at the candle close. Infact today, once i got the buy signal which concided with my bias for the pair, I entered the trade set my stop loss and take profit and went out to sort out other things. Well price went my way, what if it went against me, no problem it would hit my stop loss( 3 per cent). But I live to trade another day and I believe and have confidence in the system.
+
+--- 帖子 #432 ---
+I see... Thanks for the tips. To tell the truth, I am not very new to trading (I started three years ago with options on indices, stocks and etf's) and I have been trading forex for one year now. From the beginning of this thread, I have downloaded almost 12 indicators and a couple of templates. Could you please tell me which of them are to be used in the present version? Thank you so much.
+
+--- 帖子 #433 ---
+Look at the last chart I posted that is what I am using. Pivot Point, Gann, sma, trix and rsi. THV panel. That is all.
+
+--- 帖子 #434 ---
+Fine, thank you . I thought you were using the QQE (I copied and pasted the posts very quickly so I didn't read them carefully: I am doing this right now). And 5sma on M15, 7sma on M30, correct? Uh, RSI 12 period I guess from the last chart you posted. Monday morning I'll be ready
+
+--- 帖子 #435 ---
+Do not get mixed up, Time Frame 15 min for present conditions Gann period 7 SMA Period 7 RSI 12 Default for the trix. Please read my post and live examples of how I trade with the Pivot Point.
+
+--- 帖子 #436 ---
+I'll do right away As soon as I finish the thread, I'll ask you about gann_swing_system.pptx and if it is important (since I do not know in which folder I should put it). Have a nice weekend
+
+--- 帖子 #437 ---
+Leave the gann swing system for now. If you get the GU intraday you will naturally understand the gann swing. Besides I already have improvements for it.
+
+--- 帖子 #438 ---
+Oke, Can I try this sustem on allpairs other than Gbp/usd? have you experimented it or not? Please.
+
+--- 帖子 #439 ---
+Oke So you want us to change properties of sma from 5 to 7 n also gann 7?/instead of 10!!
+
+--- 帖子 #440 ---
+It has always been Gann 7 from the inception of the system what has been changing is whether we use the 30 or 15 min chart. The Gann 5 is used for the Gann swing system on the 4hr and 30 min combo. I trade GU during london hours and the system is configured to catch the momentum during this periods. My advice stick to one or two pairs if you are trading intraday so it is your choice.
+
+--- 帖子 #441 ---
+Do you have an indicator that highlights the london session?
+
+--- 帖子 #442 ---
+An example of a trade I just entered,let's see how it develops!
+
+--- 帖子 #443 ---
+Hey Buddy just to let you know, you are trading out side the recomended time..
+
+--- 帖子 #444 ---
+Sojmanie, I know that you are not trading the GU Intraday System, though you have the indicators. Even if you want to trade divergences you must wait for price to close below the trendline (as you have drawn in your chart) as a confirmation. It is risky to trade divergences without additonal confirmation, particulalry against the prevailing trend.
+
+--- 帖子 #445 ---
+As you can see we had a sell entry and then a reversal to give a buy entry during our trading time. The point I want to drive home is that if you keep to the trading time for the system, it is rare for cable not to give you momentum to make some money. The one exception I have found is if we have an interest rate decision later in the day, then there would likely not be momentum in the market.
+
+--- 帖子 #446 ---
+......so any trades outside the 8am - 12pm window is not the GU Intraday System??
+
+--- 帖子 #447 ---
+What about now that price has closed below the trendline?
+
+--- 帖子 #448 ---
+Yep, any trade outside the trading system time runs the risk of whipsaw. Please go through the beginning pages of the thread and I explained why. I am not saying you cannot trade the system but in my opinion it is not a high probability trade. Second is that during the US market the eurusd is a better candidate to trade than GU. This is my experience after 3 years of live and active trading in the market.
+
+--- 帖子 #449 ---
+Yep it is a valid trade, but you must ask yourself would you have the momentum to move the market in your direction seeing that you are trading after london close and the market has made its move for the day. Also I think your take profit is unrealistic. Your take profit level should be yesterday,s high where there is high probability for price to get support for the next leg up. You could get lucky
+
+--- 帖子 #450 ---
+I am learning faster than before especially after your comment that I wasn't trading the system!
+
+--- 帖子 #451 ---
+Hi, Yesterday morning I got 27 and 21 pips on GU and 12 on GJ, so... Congratulation to you! And to me too and to my fiancée as well that took care of my trades when I was busy. If you don't mind, I would have some questions to ask. 1) How do you realize that, after a valid signal, the market is going sideways? For example this afternoon on GU (I mean, a situation like this one in the correct trading time). 2) How do you use the RSI you are using in your chart in this moment? I know the fundamental reading of it but since I see that you put also level 30 and 70 on it, I think that it's not mandatory that the line cross the 50 level to go long but it's enough that it crosses the 30 level and head upward? 3) It often happens that when an entry signal is given, there are pivot levels, big round numbers and other likely barriers on the trade's way. Even pretty close to the price. How would you behave in those situations? I read about your entries on supports and resistances, but what about if the price is heading to them after few pips? Do you hold on or take it as TP level? Best and... Thank you P.S. I am still using your MTF Stochastic set on 60 minutes to see what's happening on a higher timeframe and to have another confirm about the major trend: I think that it's really helpful
+
+--- 帖子 #452 ---
+Is this a valid entry?
+
+--- 帖子 #453 ---
+This looks like a valid signal on the 30min chart.
+
+--- 帖子 #454 ---
+I took the same signal as you on fifteen minutes, dear Sojmanie, but it seems it's not willing to go in our direction...
+
+--- 帖子 #455 ---
+Closed with 16 pips gained . It seems there is no momentum enough.
+
+--- 帖子 #456 ---
+It always happen like this, I wait for hours for the price to move after holding on with a potential loss, and when I close with few pips of gain, it suddenly move in my direction for hundreds and thousands pips!
+
+--- 帖子 #457 ---
+Just thought to post today's chart with a valid signal!
+
+--- 帖子 #458 ---
+Here we go again!
+
+--- 帖子 #459 ---
+Black line marks the entry.
+
+--- 帖子 #460 ---
+1 Hr later +30pips.Exited @ S1/MS1
+
+--- 帖子 #461 ---
+Nice move by GU.Did anyone else make money?
+
+--- 帖子 #462 ---
+Hey everybody, today I took this trade as the picture attached. I opened it at 7.35 a.m. (Italian time: GMT +2) @ 1.6020 after the previous high was taken, because the first entry signal was too early in the morning and I waited for the bounce on Gann 7 and the Open Line. I closed the trade @ 1.6055 after 2 hours when it touched Resistance 1 with 35 pips gain . Sojmanie, I am glad you keep on posting your successful trades: they give me more stamina. But Oke is ok? He's not posting for awhile... Huh, did you see the mess of the afternoon (GMT+2 time) ? A lot of false signals but there were a lot of red news.
+
+--- 帖子 #463 ---
+Fabius I am still alive and kicking. I think the system has proved itself so I do not have to show anything. Just obey the rules and you would be okay. I had a very profitable week. Thanks for your concern
+
+--- 帖子 #464 ---
+Hi Oke, I am glad that you are okay but, forgive me, I do not agree with half of your sentence in bold letters. I mean, your system is really profitable and reliable BUT it's not a matter of showing something else to prove it but it' s a matter of helping to deepen the understanding of this method. I bet that the other GU Intraday System traders (newbie and not) would be delighted if you posted your trades at the end of the day (even if not everyday), showing how the creator of the system work, think and gain pips. I guess this is the best way to see how the system properly work and what it can do when bad trades strike in the beginning and people think it's not working.
+
+--- 帖子 #465 ---
+Hi Oke; Good day to you. How is your programme coming? I can attest that the system you put up here is simple and straight foward if one keeps to the simples rules..that is wait and identify market momemtum and trade with it. I have applied it beyond GU and it works. infact right now, I trade most pairs on 30m while analysis is on D1/ W1. I have a question for you: if by 8gmt and market has been running (during the Asian session) what do you do by Europe/ London openl? still go with Gann? sometimes market moves by 50-80 points before london session and you wonder if it will correct or continue trend. your comments...
+
+--- 帖子 #466 ---
+What I do is first check the news to see if the current move is based on fundies. If it is fundy based I wait for price to pull back between the gann and sma then I make my entry. If it is technically based then expect a correction particularly, if current price momentum is against the trend. Then in that case I wait for an opposite signal. However sometimes I take the trade(you never know) and let the market prove that I am wrong then I reverse in its new direction.
+
+--- 帖子 #467 ---
+Since I guess it's really a pity to let this thread die, I would like to help in keeping it alive, so I am going to post my trades in order to share my experience with others (and if other people wanted to post their trades it would be great! ). Today I gained 43 pips on Eur/Jpy that is more smooth like Eur/Usd and not so herratic like Gbp/Usd (I am a newbie with this method, so I prefer docile horses for my rides for the first times... ). Since one picture worths one thousand words, I let my chart speak (I closed the trade since I put my TP on Resistance 1 -maybe in the near future I'll manage to close part of the trade and let the other part run-). My friend Steve has a very good track record for October (the month he started ), so I hope he will join me in sharing his experience. I think we all need to be motivated when things do not go the way we would like. For example yesterday wasn't a good day for GU but it was great for EU and EJ (but unfortunately I was busy in losing on GU to follow other setups... ) This morning I opened my trade as soon as the signal candle closed. I use the Laguerre double oscillator as another confirm for the entry signal (the blue line) and to keep me inside the trade (the red line).
+
+--- 帖子 #468 ---
+Good morning everybody. Today the trade on EJ hit my TP put on the first resistance (the open line) after 30 minutes. +27 pips gained In this very moment the price is going nowhere on the open line but now I am out with my profit . If the price keeps going up, maybe there will be the chance to re-enter on a hi-low when the price bounce on the MA or on Gann and take the high of the previous candle.
+
+--- 帖子 #469 ---
+Last days I didn't like GU very much: it behaved like a fool. Today I entered the trade as usual after the close of the signal candle @1.6122 and after a nasty retracement (35 pips but without closing below Gann, so I hold the position) I closed my position on yesterday's high level at 1.6162 with +40 pips gain . According to Oliver Velez I could have entered as soon as the high of the pullback's third candle (the pin bar) was taken, but I was not sure enough (and I would have scored about the same number of pips). Nice lesson to take not of for the next time
+
+--- 帖子 #470 ---
+Today I got a false signal on EU and closed the trade as soon as the candle closed below Gann. As usual the market suddenly found its way up and I am left here with bad thoughts in my mind... Fortunately I managed to enter on GU after the bounce on SMA7 since, the entry signal was given when I was asleep yet. I closed as soon the price retraced with +38 pips profit Now I am in long on EJ... Let's see what happens
+
+--- 帖子 #471 ---
+As soon as I entered the trade, the price started to go in the opposite direction and hit my 30 pips SL... If anyone had some suggestions or comments, it would be very appreciated
+
+--- 帖子 #472 ---
+Fabius great work for posting your trades. I understand your dilenma. The first thing you must do is try not to watch price action until candles closes. The second thing is to understand that fundamental perceptions determine the direction of price, technicals determine how far it will go before reversal. Consequently, during the london open period, any significant fundie news will change the direction of price. For example the euro was weak on friday because of the irish austerity problem and uncertainties for the greek election. Since we do not trade fundies we just follow the system because it will catch the beginning of a new swing. My approach is to try to trade the london hours and if price stops me I double my lot size to recoup my iniital loss. I do this up to 3 times and then I am out for the day if it fails. (good money management is key) Now trading Eurjpy (chart attached), I use the 30 min chart with an 8sma and 8 gann configuration and aim for 45 pips per swing.(Take note also change the GU to 8sma and 8 gann on 15 min ) I also trade gbpchf using both the 15 and 30 min (It is the pair with the highest daily range currently). I hope this helps. My Eurjpy chart with my trading period highlighted.
+
+--- 帖子 #473 ---
+Hi Oke, thank you for your reply: very useful indeed . This week I am attending to a course of Business English, so that I won't post any charts since I don't think I'll be able to trade, being in that course all day long. I'll make better next week. So long.
+
+--- 帖子 #474 ---
+What to do in this case?
+
+--- 帖子 #475 ---
+I agree with Dzhini. What should it best to do with this kind of ranging market? Okay, maybe staying aside and watch, but I would have understood that it was ranging only after being hit almost three or four times in a row after entering on precise signals . Fortunately this week I am not trading, otherwise with this chart, I am afraid I would have blown my account .
+
+--- 帖子 #476 ---
+I'm using this system on 1hr bars, seems to reduce the false sigs
+
+--- 帖子 #477 ---
+It works
+
+--- 帖子 #478 ---
+Some good signals on several pairs 1hr bars today
+
+--- 帖子 #479 ---
+Gloworm, Are you using the original settings (as in post 1) on the 1hr bars ? Thanks
+
+--- 帖子 #480 ---
+Yes
+
+--- 帖子 #481 ---
+Hi everybody! Last week I was pretty busy so I couldn't post. I apologize. This morning I couldn't take the entry at 7.05 (GMT+1) because I was still sleeping , but I managed to enter as soon as the previous candle's high was taken @1.6021 after it bounced on Gann. When I saw the price bumping the head against Resistance 1, I closed the trade at 1.6062 with +41 pips gain . Did anyone notice that last week the better moves were in the afternoon?
+
+--- 帖子 #482 ---
+At 12.15 I took a short trade on the perfect signal on EU that was also about to take the last swing low @1.3723. After a little panic for the walk about along Resistance 1, I decided to hold the position and tighten my SL. Then I used a 25 pips trailing stop since I had to go to the gym to a class of savate. When I came back, I found that my TS saved most part of the trade and was it @1.3642 with +83 pips gain . Oke, your system rocks!
+
+--- 帖子 #483 ---
+Thanks for the complement. However, you may wish to add the qqe indy on my last post it will filter some of the false signals and give you early warning of reversal thus enhancing your confidence to take the trade.
+
+--- 帖子 #484 ---
+F abius when you add a little fundie to your trading knowledge you would be unstoppable. Remember the US Quant Ease program; the federal reserve is buying back treasury notes with the purpose that freed up money can be invested in other asset classes, hopefully the stocks. This creates the moves in the market as upswing in the stock market will translate to dollar selling and high risk pairs such as aud and nzd, gbp and euro are bought in that order the reverse is the case if the stock market moves down. Today's moves are however caused by the Irish problem and would be the theme for this week. It is a risk averse week
+
+--- 帖子 #485 ---
+Hi Oke, thank you for the input: wich settings on qqe? 1,8,3 or 1,14,3 ? About your fundamental analysis, I see you are very expert on this subject: do you rely on it beside the technical analysis or if the chart tells you something that can be in opposition with fundamentals, you take the trade the same? What do you think about today's charts of GU, EU and EJ? They are pretty scaring, aren't they?
+
+--- 帖子 #486 ---
+Does anybody know if there is an alarm for the crossover between MA and Gann or between price and MA or between price and Gann? I guess it would be pretty useful not to stay gazing at the screen all the time. Thank you This afternoon I missed all the beautiful moves on EJ and EU. No problem: tomorrow is another day
+
+--- 帖子 #487 ---
+Default setting is what I use for the qqe. I have attached it. The GU intraday system is my bread and butter if I trade intraday. But when I am off doing other things such as today (I trade of 4hr, dailies) Combining tech and fundies to the daily chart using the gu intraday system (using gann 8 sma 8) to confirm my sentiment on the dailies. For example, remember I told you of the risk averse mode of the market. I shorted Eur Usd with the above criteria and took 150 pips from 1.3620. Tonight I will take a look at GU using the same process. It has broken significant support on daily at 1.5869 area. Now I would pull my fibs from todays high low range using the GU Intraday system and look to sell at the 38.2 or 50 fib ret or former supt at 1.5860 area because the move is quite extended for now. you can use the system on the dailies with all major pairs, just take a look at cadjpy gbpjpy eurusd, etc you can clearly see the potential and know when a pair is trending and which direction is going. This is how I currently use the system apart from the default approach in this thread
+
+--- 帖子 #488 ---
+Oke! Thank you very much for everything; very interesting indeed and congratulations for your pippage today! I'll make good use of these infos and in the future I hope to be profitable like you
+
+--- 帖子 #489 ---
+Hi, regarding the qqe's settings should I use the default settings 21, 5 (and for all the timeframes)? I am doing very good with it but I would like to be sure about the way you use it. Do you wait for the lines to cross the 50 lines after crossing each other when you want to open a new trade or the first cross with the lines is enough for you if it agrees with the cross between Gann and MA8 on the chart? The last QQE you used before this one had also levels of 30 and 70: are you still using them or we can say that 50 level is enough for our purpose? Thank you Cheers Fabius
+
+--- 帖子 #490 ---
+The QQE is a modified RSI indy and therefore I use 14,5 and trade the crossing of the lines which confirms the gann. The QQE usually gives you an indication of price reversal and I use it to filter the gann signals. It serves also a double purpose as an rsi with settings 70,30,50 which are just to help me know overbought and oversold conditions.
+
+--- 帖子 #491 ---
+hello guys im back... i was away for a moment but im back this is great system. But for me for pr0 traders who spend all time lloking et the market and who knows what drives $$$. im back and system is heavy tasted now
+
+--- 帖子 #492 ---
+Welcome back falwic, however I do not really get you drift, could you explain what you mean
+
+--- 帖子 #493 ---
+Merry Christmas and a Happy new year to every GU Intraday trader
+
+--- 帖子 #494 ---
+And I will say: "Happy New Year" to everyone. - once again, Thank you Okehedion for you have helped refine my intraday trading strategy by the method you've taught in this thread. Looking forward to a better trading year in 2011 as I apply all I have learnt in 2010. Its always getting better. regards mon ami.
+
+--- 帖子 #495 ---
+Happy New Year Brother Okeheidon, i still here, to watch your analys,,
+
+--- 帖子 #496 ---
+Thank you (a bit late, sorry). Happy New Year to you, Oke, and to all the traders fond of this system. I'll make good use of it, in the next years
+
+--- 帖子 #497 ---
+Hi everybody. Firs sorry for me pure english. I m newbie in forex. I try to understand of you system. I know, you use both fundamental and technical an. But which par is good to trade with this system between 4-12 PM GMT? Because i can look on chart only after work. What do you think?
+
+--- 帖子 #498 ---
+Sorry did not answer earlier. The system was originally developed for Gbp Usd, but could be used to trade any pair you want. The time you are given I am afraid, is not the best time to trade forex. Unless you want to try trading the london close at 5pm GMT where there might be enough volatility to give you some pips.
+
+--- 帖子 #499 ---
+Is anyone else in this trade?
+
+--- 帖子 #500 ---
+This is very interesting indicator (Gann Hilo Activator) and I would like someone to code it as Expert Advisor. Thanks
+
+--- 帖子 #501 ---
+There is already an ea on the thread by Phover. Go to the clip and download.
+
+--- 帖子 #502 ---
+Today's Signal!
+
+--- 帖子 #503 ---
+I downloaded and did the backtesting, it was only making entries and exits in the ranging period. Is there a way it can follow Gann hilo activator trend direction? Thanks.
+
+--- 帖子 #504 ---
+Hi Sojmanie The arrows on main window are entries? I was thinking that correct entries are blue and red line. Which i make in your picture. Is it corect? I only learn forex and maybe i miss something.
+
+--- 帖子 #505 ---
+Read the EA Settings, you would understand how to use it.
+
+--- 帖子 #506 ---
+The arrows are the OBOS(Overbought oversold)indicator.They give an early warning signal.
+
+--- 帖子 #507 ---
+Couldn't wait till 8am G.M.T before pulling the trigger on this one.
+
+--- 帖子 #508 ---
+Got my 50pips from the previous trade(previous chart).Let's see how this BUY turns out!Should have traded EUR/USD instead,it's already in the green for BUY!
+
+--- 帖子 #509 ---
+Well done sojmane, I see you have made the system your own. I still use the system and have adopted it for higher time frame daily on various currencies and well in profit on my accounts. Every pair breathes differently but I have found a gann 6 very profitable on most pound pairs on the 4hr and daily. However for GU I use the gann 6 on the 30 min. Here are some of my current trades
+
+--- 帖子 #510 ---
+Then the GU chart on GANN 6 on the 30 min
+
+--- 帖子 #511 ---
+Don't you use any other indicator apart from stochs?
+
+--- 帖子 #512 ---
+First chart is entry(1.6140),second chart is target being hit(1.6100)! This is how the makers make it and the takers take it!
+
+--- 帖子 #513 ---
+Price is going down to 1.6084,and when it breaks this level it will proceed to 1.6041. I'm okay with my 40pips,can't baby sit all day.Besides,remember,DON'T BE GREEDY. SEE YOU GUYS @ THE BANK!
+
+--- 帖子 #514 ---
+What do you think okehiedon? The white horizontal line is weekly resistance and the yellow line is daily resistance!
+
+--- 帖子 #515 ---
+Price has finally hit my projection @ 1.6041 (White line). I should have taken 100pips instead of the 40 I took,but then there will always be other opportunities.
+
+--- 帖子 #516 ---
+Nice and lovely signal on GU 30min. The second chart shows the daily support level where price bounced off to give the signal.
+
+--- 帖子 #517 ---
+Too much indicators lead to confusion and blocks the mind from seeing price. You only need a trend indicator (gann) and an oscillilator (stoch or whatever). Add a little fundie and S&amp;R, thats all you need to make money in this biz
+
+--- 帖子 #518 ---
+Excellent trades Sojmanie. Have a nice weekend
+
+--- 帖子 #519 ---
+Price has finally bounced off 1.6300 and we have a sell signal!
+
+--- 帖子 #520 ---
+Thank you for sharing your system. Just wondering if anyone also use this system for longer time frame to capture more pips.. Such as H4 or even Daily?
+
+--- 帖子 #521 ---
+Yep that is what I currently trade on several pairs. If you go through the thread you would see some charts I posted on the 4 hr chart. However, the settings differ based on the pair. So you cannot use one for the other and you must find out what works best for you.
+
+--- 帖子 #522 ---
+Thank you..I saw some of charts has arrow ( L or S sginal on chart )..Would you able to share you template with us here...Thank you again.
+
+--- 帖子 #523 ---
+The chart with arrows are sojimanie's chart. Go to the clip and all the templates and indicators for the system are there.
+
+--- 帖子 #524 ---
+what it is using KG system,?
+
+--- 帖子 #525 ---
+Since I discover Gann Hilo Activator some months ago, I have made profitable trade with it. But I would like to have its Expert Advisor (EA). Can someone assist, together with instructions on how to use it? Thanks. Woleforex
+
+--- 帖子 #526 ---
+i know that this is intraday thread. But it is possible that someone make a EA for Gunn swing method? This method looks very good for my eyes. I know that here is EA for intraday system from phover. But i dont see anything version 1.1 . Whats happen? Is it done or Is it stop this project? Can i have this version and help me with preferences, or we can help together to find solution. I know i didn help before anything, but im beginer and i try to learn. Maybe i want to much. Maybe you ask why i want EA. The reason is time. Im from midle europe and i work from 7 GMT to 17 GMT on PC. And now you see the reason. :-). I cant try to trade at work after work i try to learn something but it is very difficul to stay concentred 12 hours on PC. Today i will also write a idea which is very similar to gann swing. Thank you for helping and good luck with trading. P.S. is it possible to find somewhere OBOS mq4 file?
+
+--- 帖子 #527 ---
+Varso, I would suggest that since you are a beginner you should trade the system on the higher timeframe chart. Sorry no EA was made for the Gann Swing system. but you can adapt the EA Phover to any timeframe. Just practise with the system and choose one or two pairs to work with. I personally trade the EURUSD and GbpChf on the 4hr chart (current trending pairs) and use GU on the 15 and 30 min chart intraday. Hope this helps
+
+--- 帖子 #528 ---
+Thank you for help. Some advice it better than none. Thank.
+
+--- 帖子 #529 ---
+I am new to forex factory. I started following from page 1. It looks very good. I just wish posted charts would show arrows indicating entry points. Thank you so much for your unselfish sharing. Plan on start using it 4-3. I think there are enough believers to keep this discussion alive and well. Keep up the excellent work.
+
+--- 帖子 #530 ---
+Looks like the thread has died which is a shame. This is a very effective system. I did have a question for Oke or anyone lurking. What's the current preferred Gann and SMA settings for the Euro/USD? I trade: M15 M30 4Hr Daily I'm currently using 7 for the M15 and 8 for M30,4Hr and Daily. Thanks!
+
+--- 帖子 #531 ---
+Settings on the M30=gann-6,sma-6
+
+--- 帖子 #532 ---
+Sojmanie, the thread maybe inactive but the system is not. I trade the eurusd using Gann 3 on the 4 hr, or Gann 7 on the hourly. Attached is my latest live trade on 4hr. Enjoy!
+
+--- 帖子 #533 ---
+Note the updates on Page 1. Charts to illustrate the daily version of the system
+
+--- 帖子 #534 ---
+Thanks okehiedon for the updates, one of the best systems on FF right here, please keep posting your trades as I for one learn so mutch from them.. Rebel
+
+--- 帖子 #535 ---
+Thank you Rebel. Using the daily trend you can trade the hourly in the direction of the daily. Waiting for a pull back against the hourly gann and then a signal enter the trade set you stops (I now use 1/2 daily atr) and get on with your life. You are trading in the direction of the prevailing trend and it is most likely that price will continue in the direction of the trend.
+
+--- 帖子 #536 ---
+do you remember the page or post where creator of EA clearly explain settings ? i have some major issue with 5 digits brokers :/ and dont remember the settings
+
+--- 帖子 #537 ---
+Post 408
+
+--- 帖子 #538 ---
+Thanks Okehiedon, its really amazing how much incredible information is on this one thread - very generous of you.
+
+--- 帖子 #539 ---
+The importance of trading higher timeframe charts is demonstrated by the widget results of 2 of my accounts over a long term. If you cannot make money on the higher timeframe charts. The probablity is that you will keep on losing money on shorter time frame charts which places higher demand on the skill and intellectual capability of the trader. This goes for any system you trade.
+
+--- 帖子 #540 ---
+I'm back to get this thread active again! Just made my easy 40pips!
+
+--- 帖子 #217 ---
+Here's another trade i just entered.
+
+--- 帖子 #218 ---
+Just went through all 37 pages..some work though. Now seen its been traded on higher TFs. So what are the new changes like time to trade (if any on the 4hr charts) and whats the TP and exits like? Ciao! and thanks.
+
+--- 帖子 #219 ---
+Kasapreko. The system is dynamic and there is no one fits all soln. Different pairs on different time frames require slight variations. In all a Gann 5 to 8 works in all pairs on the dailies. While you can use a Gann 3 to 5 to swing trade on the 4 hour chart. Just note that the Gann simply indicates the high or low of a simple moving average. So if price is above say Gann 5. This indicates that price is above a 5 sma set to high and suggest a bullish move.
+
+--- 帖子 #220 ---
+Hello Please Upload last Templates and indicators thanks
+
+--- 帖子 #221 ---
+Go to the attachment clip, they are all there
+
+--- 帖子 #222 ---
+I have been using this system (15M + 1H) for 4 Months. Trading results are very consistent. Thank you, okehiedon
+
+--- 帖子 #223 ---
+Hi everyone, i came across this roum and after reading through the entire pages,i can boldly conclude this system ROCKS. I am a programmer and trade commodities|(Oil and Gold). I just added painting to the Gann(to spiceit up a bit) . Here is how I trade it. On M30 ,I attache the MTF gann(h4,5) and wait for a new M30 candle to close above the previous gann line(for long) or close below(for short). then i enter on the next candle. I then go to M15 to ensure it stays below/above the current H4 gann. If any M15 candle closes in reverse direction to my trade,I close( usually for a small loss). My TP = SL depends on the Low and High. Sorry i cant post any chart now..wud do dat later. Thanks okehiedon .......ok..attached both source code and executable file. if problem persist, just opem the .mq4 with notepad and paste as new indicator. that should help.
+
+--- 帖子 #224 ---
+..some reason this doesn't load up properly and knocks out MT4
+
+
+===== 附件下载链接 =====
+

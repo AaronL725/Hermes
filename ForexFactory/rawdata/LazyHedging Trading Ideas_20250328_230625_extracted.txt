@@ -1,0 +1,1463 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Starting with Post #151 , the idea of trading with the BodySwitch indicator is described and commented on. No new thread has been started yet, so please continue reading from this post. One should try to understand Note #4 below, because that is the idea of the Sliding Hedge. If one uses it, an optimal money management is automatically ensured. In Post #33 one can find an Excel sheet with a comparison of martingale levels. Those who can and want to should try to understand the calculations... ############################################################################ In his thread " Jake Bernstein 10 SMA high 8 SMA low trading system " https://www.forexfactory.com/thread/...high-8-sma-low , @Toto69 presented his personal trading variant with some discretionary trading options. I used to read a couple of books by Jake and here I am posting some comments and indicators for the 10/8 trading idea. Here I only post a small indicator, and when I have time I will continue to post more things and an EA, but everyone can test their ideas and apply other trend following or counter trend variants. If any errors are found, I will update the indicators. Note #1 - The trend is determined when the body of a candle is above/below the HiLo MAs, and that is a little earlier than the rule with the 2-3 highs/lows outside the channel rule. Note #2 - The same indicator can be used for the trend of the upper time frame. One sees quite simply that in a trend zone (D1 e.g.) the number of green bars is greater than the red bars for the long direction e.g. For this reason, one should only take long trends on H1, for example, because the sections in the long direction can cause less losses. Note #3 - The indicator shows possible entries when the trend changes (the short horizontal lines above/below the thicker line = Open_CurrentBar or HiLo_PreviousBar). The first line corresponds to the entry, and the second to the take profit. The distances are calculated from the width of the channel. I recommend that you compare them to the ATR and one will find that my calculation is a little better. Note #4 - The first idea for trading is to set after entry a trailing stop identical to the calculated distance between the lines. At loss when the exit level is reached, one should trade in the opposite direction (a small hedge trade) with the same trailing stop. Anyone who examines this rule will find that the use of a martingale can be very beneficial (I'm curious if someone will do that ...). The number of lots can be calculated with a percentage of the capital, one can limit the number of simultaneous orders, etc. Attached Image (click to enlarge) --------------- There are many ways to trade Jake's channel and I can only post a few comments about my variant. The potential is great if one analyzes and tests a little longer... Attached File(s) smLazyHedging ChannelOsc_v1.3.ex4 16 KB | 2,048 downloads Attached File(s) smLazyHedging TrendOsc_v1.1.ex4 15 KB | 2,113 downloads Attached File(s) smLazyHedging TrendChannel_v1.5.1.ex4 60 KB | 1,570 downloads | Uploaded Feb 17, 2021 4:35am A useful indicator: Attached File(s) smShow HistoryOrders.mq4 7 KB | 960 downloads | Uploaded Aug 24, 2021 8:40pm
+
+--- 帖子 #2 ---
+Hello mr. SwingMan, I really like your indicator smLazyHedging TrendOsc_v1.1 . It suits my style of trading very well. Is it possible to add a sound alert for the color change? I'm using it for scalping, so the sound would be perfect. Thank you for all of your great work!
+
+--- 帖子 #3 ---
+Dear swingman, thank you very much for your generosity. i am still very new here in the forum. and i always see how much work you provide to everyone here for free. thank you very much for that. please excuse me if i ask very stupid questions. can you maybe explain again the three yellow lines. there is one thicker one and two thinner ones. The thicker one is the entry and the two thinner ones? I saw your explanations above. But to be honest, I haven't quite understood them yet. Thank you for your understanding. Many greetings from Meenz to FfM
+
+--- 帖子 #4 ---
+Hi Swingman Thanks for your work, this fits my trading style, now i can see the trend is a easy way. Juan
+
+--- 帖子 #5 ---
+Maybe later...
+
+--- 帖子 #6 ---
+Meenz Helau! The thick line is a reference line, the first thin line is the entry and the second is the take profit. Test the two options for the reference line (Open_CurrentBar and HiLo_PreviousBar), and you can decide which is better for you. If one tests the indicator for a while, one will realize the magnetic properties of the lines ...
+
+--- 帖子 #7 ---
+Lovely indicators, as usual...
+
+--- 帖子 #8 ---
+Generous SwingMan as always, thank you.
+
+--- 帖子 #9 ---
+[quote = SwingMan; 13400249] {quote} Meenz Helau! Die dicke Linie ist eine Referenzlinie, die erste dünne Linie ist der Eintrag und die zweite ist der Take Profit. Testen Sie die beiden Optionen für die Referenzlinie (Open_CurrentBar und HiLo_PreviousBar), und Sie können entscheiden, welche für Sie besser ist. Wenn man den Indikator eine Weile testet, erkennt man die magnetischen Eigenschaften der Linien ... [/ quote] Dear Swingman, thank you very much. Now I have understood it. I will watch the indicators closely Many greetings
+
+--- 帖子 #10 ---
+Hello Swingman Simple idea but it seems efficient, I like it. I'm going to test it on various pairs and timeframes. The one of several later entries with martingale or simple, does not seem a bad idea limiting the number of later entries. Try it with EA in backtesting or better yet, demo account ... would be the best. Thank you very much for your ideas.
+
+--- 帖子 #11 ---
+Forgive my ignorance. What I observe in the lines indicator is that I do not know what type of filter it uses to prevent those lines from reappearing on the contrary when the price turns around after a short time. And another question is why sometimes it opens a few candles of the anterors and, at other times, many candles pass without the lines appearing?. I like how the indicator works, congratulations on it.
+
+--- 帖子 #12 ---
+I'm sorry but I can't do this ... If one has an unknown indicator, one has to study the parameters with options and watch what happens: Trading_Direction = Main_Trend / Both_Directions Enable_UpperTrendFilter = true / false Entry_Value = Open_CurrentBar / HiLo_PreviousBar Range_Calculation = Channel_Range / ATR_Range
+
+--- 帖子 #13 ---
+I understand, go testing parameters. It was in case there was a general answer with some basic parameter. Thanks, I am testing it with the original configuration
+
+--- 帖子 #14 ---
+Interesting, looks like it can be used for scalping at a shorter timeframe to SwingMan
+
+--- 帖子 #15 ---
+3 trades in Demo simply following the colour, hence short trend Vs long trend. Waited till 2nd greenbar / blue bar to confirm and used last swing low as SL then locked in profit and trailed stop till stopped out...... All done in 1min but also looking at 5 min so confirming trend 4 times... Need to work out TP..... maybe 1:1.5 or 1:2 (Missed 1 trade due to coffee break)
+
+--- 帖子 #16 ---
+Yes, an interesting scalping! On M5 you have catch exactly the trend reverse from the quarter level!
+
+--- 帖子 #17 ---
+Here the next reverse?!
+
+--- 帖子 #18 ---
+Swingman could you share the Octaves lines please, I can only find v1?
+
+--- 帖子 #19 ---
+Here the last version:
+
+--- 帖子 #20 ---
+Thanks SM
+
+--- 帖子 #21 ---
+Hi, SwingMan, thanks for wonderful trading system. would it be possible to remove comment section from indicator. happy trading Paresh shah
+
+--- 帖子 #22 ---
+Please write from which indicator ...
+
+--- 帖子 #23 ---
+Dear Swingman, Its hedging Trend channel v 1.4 thanks n regards always. Paresh shah.
+
+--- 帖子 #24 ---
+New version "smLazyHedging TrendChannel_v1.5" OK, we have now two parameters for Comments if you do without my automatic calculation of the lots: Inserted Code Show_IndicatorName =true; Show_Comment =false; Just one comment, because I see that many want to use the indicators for their own systems, that's okay. But, that also means that nobody understood what kind of system was explained here, and I will also give further explanations only if someone tries to think about it.
+
+--- 帖子 #25 ---
+Interesting thread. Congrats on the indicators and input. Subscribing and will take a closer look at strategies around these indicators
+
+--- 帖子 #26 ---
+Hello swingman , the title of the thread states lazy hedging, i understand the use of indicator and trading with regards to higher time-frame ...i would like to know how you implement your style of hedging into this system...looking forward to learn
+
+--- 帖子 #27 ---
+Thanks a lot for modification you have done on indicator. Simple trade system. follow rules as stated will do wonder. god bless you. Happy trading and innovation as always... Paresh
+
+--- 帖子 #28 ---
+what does this D1/H1 shows? please explain more about this,what this calculation is depend on?
+
+--- 帖子 #29 ---
+- Please quote correctly: H1/D1 and not the other way around. - H1 is the current timeframe and D1 the upper timeframe, and the trend directions of the two timeframes can/must match. Why I suggest this is explained in Note #2, and if someone has time should do a little statistic. - Nothing is calculated (except for the spacing between trading levels and lots number for x% risk). If one takes his time, one will find that this has no direct connection with price trending. For me, as a lazy trader, it would take too much energy to analyze the trends. I don't care about the trend as such, it is only important to trade in the current TF the right bars in the upper TF. If there is a strong reversal in D1, one detects this on H4 or H1 and one trades M15, M5 or M1 so that contrary trades can also take place.
+
+--- 帖子 #30 ---
+Hi all. I have been testing the indicator in a basic way and without taking into account other things, in EURUSD and some other in D1 and H4. changing the TP and SL with the lines and the one that gave me the best result has been as in the image, letting the price decide which line to break at the immediate entry (thick line). Poniedo Breakeven when price is 2 pips short of TP1. In pairs with a higher volatility range, I have changed the two final parameters of the indicator (Factor_L1 to 1.5 and Factor _2 to 3.0) to separate the lines from the original configuration by 50% more. The backtest is not very extensive but it has not worked badly, about 2 years in H4. If you take into account trends in higher TF you can improve. In this period of time, he has made 4 negative operations in a row, in case you want to try entering later using martingale ... Attached Image (click to enlarge)
+
+--- 帖子 #31 ---
+I didn't quite understand how you tested it, but it is good if you are satisfied! On many days, if one only trades M5, M15, M30 and H1, one has a positive result at the end of the day. Because you mentioned the martingale: usually one can trade the martingale with doubling up to level 7-8. With the procedure in my Note #4, one can go much higher to about 14...
+
+--- 帖子 #32 ---
+About the martingale I mean making independent entries at another time, accumulating the losses and increasing the lot, in the backtest I have received up to 4 consecutive negatives, although the backtest is not very broad. Can the indicator period be extended? Regarding what it says about the trailing stop, I understand that an entry is made and another order is immediately weighted at the stop point? Or at the point where it is closed with the trailing stop, if the profit is not what is expected? To be able to do 14 is it because when closing with a trailing stop and having some profit, in the next order can the lot price be lowered a little by the previous profit?. Thanks
+
+--- 帖子 #33 ---
+Nice that you are wondering, you analyzed correctly. It's almost like you noticed, but every time you start trailing there is a loss. The new lot is this loss +1 as in the martingale and in normal martingale you always lose your bet. In my simulation (if that's correct) you only lose on average half your bet.
+
+--- 帖子 #34 ---
+It makes perfect sense to use the martingale like this. Assuming that half is lost in each operation, if I see your table correct, being able to drag many more operations in martingale. Another point in favor of this assumed risk is compensated in the case that in an operation with a high number of martingale, if the trailing stop works, it would take us far with a high lot. Mathematically on some occasion it will not work, but if you know how to dose the benefit and the loss when it arrives, that is fine. If each operation we have 50% of losing (although following trends can be reduced theoretically) by a maximum of 14 martingales = 0.5 / 14 = 0.035% of the time we would lose. I use the translator, sorry for my English I will try to test it in demo, but it is difficult manually in small TF
+
+--- 帖子 #35 ---
+I honestly wonder that someone in the forum understood what it was about ... The only disadvantage with this method is that you can only trade with one EA if you want to trade multiple pairs and TFs. Now I don't have the time to do that, but I follow the TFs to H1 every day to get a feeling. I also only noticed a maximum of 4 levels of loss. In my table, one should take risk percentages instead of lots. Then one sees that one has rather small DDs with 0.10% or 0.20% risk, and one can trade 5-10 pairs or TFs at the same time.
+
+--- 帖子 #36 ---
+In case of operating multipairs, I think the risk grows significantly. In case we use a multilevel martingale in several pairs, the margin would decrease faster and we could not reach the possible 12 or 14 martingale as in just one. By cons, the account goes up before I will test it manually and tell you, an alarm could be included in the indicator? How long have you been testing it? Thanks for your knowledge and material.
+
+--- 帖子 #37 ---
+I tested the idea in different versions and stayed with the current form about two months ago. Every day I analyze the signaled trades for 12 forex pairs and the TFs from M5 to H1, sometimes also H4 and D1. It works well for indexes too, and maybe not as well for futures and bitcoins. The idea seems to me to be good to trade intraday the TFs M5 to H1 with a single martingale level, and for a day of loss to set a new basis the next day. The average loss is not 2 per trade as with normal martingales, but around 1.5 or less. I also wrote beforehand that my calculation of the trading distances is surprisingly good compared to ATR (but one should also test from others ...). Manual testing would be difficult for me during the day. For an EA I didn't want to invest time and post here in forum, and one reason is that many download such EAs and do not follow any analyzes. But when I see that there is actually interest and some contributions like yours, I can do that. What alarm did you mean?
+
+--- 帖子 #38 ---
+In summary, I understand that you wait for the indicator to appear, use the first line for entry with stop on the thick line, with take profit on the next thin line to the entry, at the same time with a trailing stop on the thick line (at the same distance between stop and entry). In case of not reaching the tp, it is re-entered once, increasing 1 unit to the loss. And in case of losing it, the martinagala is not increased. Looking for a trend in high time frame and entering the same direction? The problem that by doing just one more re-entry we would go against the possible trend, perhaps 2 levels of martingale, would place us in the direction of the trend. The alarm was referring to an alert, especially to warn in small tf when the indicator is drawn. The EA is interesting since the becktesting would be much faster, but as it says and for the system to work (as always), you must know its operation perfectly before using an EA.
+
+--- 帖子 #39 ---
+You described everything very well. I mentioned a variant with only one bet level for intraday trading, only for M5 and M15 e.g. Sure, someone has to test it, but my impression is that there are enough gains per day to compensate for the losses.
+
+--- 帖子 #40 ---
+Just want to share something, I think it can be valuable for you. Me is working on over 500 MT4s. When I have a bad strategy, something that crashes an account, I keep the chart and the settings forever. Until I find time to break down the cause of the crash. This usually happens within a year or two. Here is the important part. Was passing by few of these in Jan'21, and just added a condition for time . Something like a metronome ? A repeatable trading condition, if the last signal direction was a buy, specific buy of the bottoms, for example. Same for the sells. Run a specific sell on the tops. Just a trading condition that repeats X times every day. The smaller the repeat, the better, me thinks. Suddenly. Out of the blue. These account destroyers have turn into a massive success. Just because I have added time , in the form of a trading condition. And it works on a simple strategies, like breakout, for example, or candles. Imagine, candle-based?!? What could be more simple than that?!? No special filtering and complicated setups. Just anything + time (in the form of a repeatable trading condition of the last signal direction, and you do similar with the next signal direction, ext., ext.). Just mentioning this, if you can use it? As it did solved all my hedging issues. Now, when lazy hedging, i do not use a SL or never close a trade. Just don't have to. The only limitation is the max account trades... If you can't find a use of the time , sorry for the long post . Won't bother you anymore.
+
+--- 帖子 #41 ---
+Thanks for the hint. A whole world uses PA (Price Action) and you use TA (Time Action). Congratulations for the results!
+
+--- 帖子 #42 ---
+I understand time action, but how best do we display that as a picture hmmm ?
+
+--- 帖子 #43 ---
+Hello Swingman. Today I have been testing the system, although not as I would have liked because the trailing stop EA did not work well for this system (it moves with the price in positive), I have looked for another that seems to work from the beginning. I have traded in M-15 because in a lower time frame, having to place the orders manually and the spread ... Generally well, I have had up to 4 entries (pair with little movement and spread too wide), in addition to respecting the levels millimetrically just in the entries and sl of the levels, so the trailing stop did not move. How do you manage in range zones where the trailing stop does not move? takes losses and enters another point on the chart? or keep tickets? Thanks
+
+--- 帖子 #44 ---
+Congratulations Swingman I would like to leave a collaboration here. This system can be fantastic with or active US30. TF M15 A hug to everyone and green pips.
+
+--- 帖子 #45 ---
+- The trailing stop of the system does not have the known function of securing profits, but rather limiting losses to MAE (maximum adverse excursion) minus entry. - For the small time frames you have to have a filter, for example Entrys only for Spread/LevelRange &lt;= 20% - Generally after a loss, which is sometimes very small, it is amazing how easily the increased bet is won later in the chart. As you have noticed, this is the case in the 3rd or 4th step. # In general, you can raise your bet after the loss. (A bet loss consists of the first entry loss (FEL) and the second hedge loss (SHL = FEL + 1). There are always two losses for a negative entry, and the total loss is (1 &lt; Loss &lt; 2). # The other possibility is to add up the results for one or more time frames and pairs in a certain period (1 day, 1 week) and to increase the base bet for the next period if there are losses.
+
+--- 帖子 #46 ---
+That would be good, because I've just decided to make the future EA only available to active members. If one can't comment or test the idea, one don't need an EA, one have a better system ...
+
+--- 帖子 #47 ---
+i think this system works better on h1 or h4,, the setup is very clear, and you can win a lot of pips with higher timeframe.. i saw with m15, when you want to enter the trade after the indis confirm the entry, if the trend is not good you will have a loss trade.
+
+--- 帖子 #48 ---
+Try to forget the term "trend" as it is commonly used. There are also options for trading "with the trend" for this system, but this has to be explained later and actually brings good profits. Within a trend, e.g. on D1, there are, for example, more green bars than red bars for long, which is important. OK, then on H1 or M30 or M15 we try to trade a formation (pattern) at the beginning of a trend that is running in the same direction. If one makes the effort to statistically analyze the trades, one realizes that there are many simple gains. There are also sudden reversals caused by the speculators, and here one wins too. There are certainly also sideways movements with losses, but the hedging steps can compensate for that.
+
+--- 帖子 #49 ---
+I agree Swingman there is no EA that will ever be able to work with ZERO intervention, if it we the case it would already be available FOREX is about hard work not easy money.
+
+--- 帖子 #50 ---
+Always providing good tools for trading. I have adapted your indicator to renko chart. I filter the entries with EMA100. I would miss alerts as another colleague commented, I like it !!!!!! THANK YOU SwingMan
+
+--- 帖子 #51 ---
+Is being worked on! You have 4 wins / 1 loss without filter... Actually for you (Renko) one should be able to enter the upper time frame as a parameter...
+
+--- 帖子 #52 ---
+Attached Image (click to enlarge) It seems to me that trade 3 and 4 are loss, or maybe I have not fully understood entry/exit criteria?
+
+--- 帖子 #53 ---
+You understood the entry criteria, but 4 is a reverse win, see my penultimate proposition in #Post 48!
+
+--- 帖子 #54 ---
+I see that you have the system studied and developed. The trailing Stop is the one that gives magic to the system, since it modifies the levels in the range drawers, helping to chase the price and reduces the loss on many occasions, making us enter the new movement in favor with less level earlier by martingale I like it.
+
+--- 帖子 #55 ---
+I tried to filter failing trades. I do understand the hedging idea. Not sure if this idea is worth looking into. Trend bars are by Xard. In this image only the most recent trade is valid, (Buy trade off a green bar). Attached Image (click to enlarge)
+
+--- 帖子 #56 ---
+Can you please explain what Xard is doing? I do not know. On the left side we have a win. On the right side I also have a win with my broker (maybe you change yours ...) Of course, one has to test the hedging idea, I haven't done that in practice yet, so the thread's title suggests that the idea should be analyzed.
+
+--- 帖子 #57 ---
+SwingMan, when you find some time can you add (optional) 'hedge entry/TP' line to the smLazyHedging TrendChannel_v1.5 indicator? What I mean is that beside entry/SL/TP lines there is another one opposite of entry that represents hedge TP. I think it will beneficial for visual backtest. Thanks! Attached Image (click to enlarge)
+
+--- 帖子 #58 ---
+Maybe help to use the first parameter: Inserted Code Trading_Direction = Both_Directions
+
+--- 帖子 #59 ---
+That's exactly what I meant. I somehow missed that option. Thanks!
+
+--- 帖子 #60 ---
+Found this one a bit odd, maybe it's a bug in the code... When we have short entry, all lines are red but for long entry, they are ( I think properly) coloured blue/red. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #61 ---
+New version "smLazyHedging TrendChannel_v1.5.1" You are right, because of copy &amp; paste the colors were identical. Thanks for the comment. Here is the corrected version.
+
+--- 帖子 #62 ---
+Hi Swingman. Xard always gives his work away for free, but not his code. He seems to calculate the trend bars by the cross of two moving averages, but also they must agree to another trend direction, which I think he is basing on Zig Zag. You can read all about his method here: https://forex-station.com/viewtopic....73#p1295428873
+
+--- 帖子 #63 ---
+Incredible work SM, as always. Now I'm trying to work on an EA that opens the order (above 10MA in case of buy) and closes (below 8MA in case of buy) and vice versa by opening (below 8MA in case of sell) and close (the one above 10MA in case of sell) As I am still learning mq4, I will start from something ready like this attached file. It's like an MA-based stoploss and works well but is triggered on touch with the MA and not after the candle closes (above or below) Well, but it is already a start! Regarding smLazyHedging TrendOsc_v1.1 a very nice option would be an alert. I can try to place it if I have the file. ps. I started a journey of reading all your started threads and the 2,232 thread replies on FF. I have a lot to learn from you sir.
+
+--- 帖子 #64 ---
+Very nice, and I wish you every success! Until you're done, maybe I'll post an alternative exit indicator similar to that for "Mantra Strategy" https://www.forexfactory.com/thread/...e-boat-trading
+
+--- 帖子 #65 ---
+...that would be amazing ! While we still don't have an alert, one option is to use this indicator from Lord Mladen . Besides the lines I also like the colored bars
+
+--- 帖子 #66 ---
+Appearances are deceptive ... Such colored bars as the Heikin Ashi candles are good for getting a global impression of the trend. In practice, however, you also need to know whether a bar is green or red or where the open and close are. I just read an article in Stocks &amp; Commodities: "Ratio Of Red To Green Candles". The author - Ken Calhoun - sells various interesting courses for a lot of money (TradeMastery#com) and in the article he describes exactly what I wrote for free in #Post 1, Note #2 ... One can e.g. program a very simple trend trading system: - trend determined with the HiLo 10/8 MAs - Entrys for HiLo of previous bar if in the last 5 bars at least 3 bars have the same color in the direction of the trend - filter or not with trend of upper time frame - limitation of initial losses with hedging, break even, trailing - exit on my not yet published indicator, or on MAs - reentry in trend
+
+--- 帖子 #67 ---
+you're absolutely right!
+
+--- 帖子 #68 ---
+Thank you for this one Swingman. Luv to have an alert when the signals come up. Have a great weekend, looking forward to next weeks posts.
+
+--- 帖子 #69 ---
+SwingMan, a question regarding smLazyHeading TrendChannel v1.5.1. At the screen-shot below is a typical situation that looks like we won until you check lower TF and see that the price first triggered entry, went to SL and then to TP. The current screenshot is H1/D1 timeframe and when I go to M5 I see M5/H4 timeframe. Is there a way to have entry/tp/sl lines from the H1/D1 time frame when looking at the M5 time frame? Thanks. Attached Image (click to enlarge)
+
+--- 帖子 #70 ---
+The indicator is time frame sensitive.. So your signal on 5 min and on 1 hour wont be the same i think.
+
+--- 帖子 #71 ---
+It would be possible, but will not do, because it has nothing to do with the basic idea. As @Takisd noted, there is no match between the signals, and if you want that, you can draw the charts one below the other.
+
+--- 帖子 #72 ---
+New indicator "smSpreadOsc_v1.0" For scalpers on M1 or M5 it is important to know how the spread develops dynamically. This spread oscillator is used to calculate the percentage: (100 * Spread / ATR). An EMA (50) is calculated with the spread for every tick!. ATR period is 14. I have set a threshold of 20% because scalping above is less economical.
+
+--- 帖子 #73 ---
+I have not deviated from the original idea, but I may not articulate my wish in the best way I want to speed up visual backtesting. I understand that the indicator is time frame sensitive and that was the exact reason to ask for 'feature' so that I can backtest H1 signals on M5 timeframe for better precision . Currently, one needs to jump from timeframe to timeframe and manually draw entry/sl/tp lines on H1 (or compare two charts) then jump to M5 to verify if the entry signal went to TP or SL first. Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) I respect your decision SwingMan. Won't bring this topic anymore. Cheers.
+
+--- 帖子 #74 ---
+Thanks SwingMan for this interesting idea! Little bit confused about rule 4: Note #4 - The first idea for trading is to set after entry a trailing stop identical to the calculated distance between the lines. At loss when the exit level is reached, one should trade in the opposite direction (a small hedge trade) with the same trailing stop. Anyone who examines this rule will find that the use of a martingale can be very beneficial (I'm curious if someone will do that ...). The number of lots can be calculated with a percentage of the capital, one can limit the number of simultaneous orders, etc. I was wondering about 'a small hedge trade' in the opposite direction; for me a hedge trade (hedging) is taking an opposite trade while the first (opposite) trade is still active and 'a small trade' should indicate this trade has a lower lotsize as the first position(?). When I study later posts it seems the first trade is stopped out and a second trade is entered with higher lotsize? thanks Montrose
+
+--- 帖子 #75 ---
+Montose , I also interpreted the 'hedge trade' as opening trade in the opposite direction when the previous hits SL. The difference between the classic Margingage and LazyHeding version is discussed more around post #33 .
+
+--- 帖子 #76 ---
+It seems interesting to me how you want to use the indicator. But that is a step further and I should also think about it. Maybe later I can do an MTF version for the indicator, you can remind me.
+
+--- 帖子 #77 ---
+Please do not forget that the SL is sliding, and not one of the drawn levels, because then it is the classic martingale. That is the decisive idea, as only @gerval has commented so far.
+
+--- 帖子 #78 ---
+I am doing a manual backtesting with that idea. It is a bit expensive to do it like this, but I hope to see the behavior of the Trailing and the Martingale. The way Swingman is aiming with the TS is the only way to have a martingale probably with a chance of survival, or so I hope.
+
+--- 帖子 #79 ---
+Good luck, we all hope so! Unfortunately I can only write the EA a little later, then it will be easier to test and adjust the parameters.
+
+--- 帖子 #80 ---
+Surely I didn't explain it clearly enough, and I don't plan to do that either ... Those who recognize and understand the idea can continue studying or ask specific questions, no problem. The table in #Post 33 should be studied, preferably with percentages. You are right, at exit you close the trade, you take the loss, you add the desired profit and the lotize is increased. Because the SL is sliding, this lot size will be smaller than in the classic martingale and of course you can also use this method for other systems.
+
+--- 帖子 #81 ---
+Good morning Mr SwingMan , I am just newbie to forex and FF forum. Subscribe and love to learn read to every single post.
+
+--- 帖子 #82 ---
+[quote=MoneyZilla;13408539]Just want to share something, I think it can be valuable for you. Me is working on over 500 MT4s. When I have a bad strategy, something that crashes an account, I keep the chart and the settings forever. Until I find time to break down the cause of the crash. This usually happens within a year or two. Here is the important part. Was passing by a few of these in Jan'21, and just added a condition for time. Something like a metronome? A repeatable trading condition, if From your post, I understand that you don't use S/L and manage your trade with hedging. I wonder how do you save your position successfully with hedging? Is it possible to successfully hedge and save a trade? Thanks for your input.
+
+--- 帖子 #83 ---
+There are 4 basic ways to hedge. Each way can have multiple differences. Will not go into details, just laying the most basic ways: 1. Hedge with using a SL. Push and Release technique. Exactly like in skiing. 2. Hedge without using a SL. The most lazy way to hedge. Keep all trades open and close at pips TP target or average pips/$ targets or whatever . This one is the most hard to make profitable, as it is the simplest, less complex way of all. The simpler it is, the harder is to get to. 3. Hedge based on closing the opposite instead of opening a new one. This one is very complicated. 4. Hedge based on equilibrium, i.e. closing the extra heavier side at whatever the TP until both open positions get to an equal number. Constantly maintaining the balance between both. This is used in a trending movement where the trend signals outperform significantly their counterparts. Ideally, in a buy movement, you want to have the buys below the sells, while the buys being the bigger lot. How do you position yourself to make this happen?
+
+--- 帖子 #84 ---
+Thanks for your reply. I am not 'Those who recognize and understand the idea' (I have a low IQ just as MZ) but I have already traded similar strategies on live accounts and want to share my findings just to warn/contribute here, hope this will help. If you start a progression you do not have control anymore; you will have to accumulate positions and have to use stop orders to be sure to be filled at certain prices otherwise your plan will not work. Stop orders = carte blanche for brokers they like it very much. Imagine your accumulated strategy is entering news (huge spreads ) or Asian session (similar). Normally you will avoid these sessions. best Montrose
+
+--- 帖子 #85 ---
+I don't even want to debate how dangerous it is to make progressions. I wrote "a small hedge trade" with the thought that it is not a continuous trading (I also analyzed and renounced that), but step by step for every new signal. My description is surely too short and unclear, I have only presented a possible trading idea and a possible hedge. Certainly only a few will analyze and comment on it. General claims are correct, but don't help me, that's why I'm always happy that someone can contribute. I don't know which strategies you traded - I tested at least three of the ones in the previous post by @MoneyZilla , programmed them and even traded some live without being enthusiastic. In the thread "MGH System (Martingale Grid &amp; Hedging)" I posted an EA which I ran live for a long time until a major loss occurred (1000 € is not that much either ...), and then I stopped it. (roughly like variant 1. at @MoneyZilla ) I also examined the "Snowballs and the anti-grid" by @7bit for a while - (roughly like variant 2. at @MoneyZilla ) etc. ...
+
+--- 帖子 #86 ---
+Based on what I have experienced, with all the strategies that I have been using, hedging is the most profitable. Average of 50% profit in a month.
+
+--- 帖子 #87 ---
+Can you share some good GRID EA for test
+
+--- 帖子 #88 ---
+[quote=SwingMan;13419334]{quote} I don't even want to debate how dangerous it is to make progressions. I wrote "a small hedge trade" with the thought that it is not a continuous trading (I also analyzed and renounced that), but step by step for every new signal. Yes I agree SwingMan, thanks for your reply. It does not matter which strategy we run but if it's using compounding lotsizes; eventually a trade will enter the liquidity provider heaven into news/Asian session. best Montrose
+
+--- 帖子 #89 ---
+I haven't tested a good grid EA yet. But I'm searching for it. I want to test EA's with different methods. Right now, I've been testing two EA's with potentials. One is a hedging EA and another one is a multi-currencies/scalping EA.
+
+--- 帖子 #90 ---
+I have done a small manual backtest of EURUSD on H1, Feb-19 to Jul-19 with a fixed spread of 1.5 pips (15 ticks), it has been 75 cycles (206 trades). I have done it by taking the trades both for and against the indicator. With pending orders in the 2 immediate lines since the indicator appears and using the trailing stop for the sl. I have done it in both directions to know to what extent the indicator was working in the price sense, and also to test the martingale with the trailing stop in a possible more difficult situation. On many occasions the price goes in the same direction as the indicator, but first the price makes a retreat and we touch the sl, so when using the martingale at least 2 or 3 times it benefits us. This chart shows all the trades both for and against the indicator signal and the necessary entries with the martingale and the trailing stop. Attached Image In the following chart, the necessary number of entries with signals against the indicator, average of operations to exit in profit of 3.07. Attached Image In the last chart entering only in favor of the indicator when and the necessary martingale entries to end a cycle (from the time it is entered until it ends in profit), average of operations to exit in profit of 2.33. Attached Image The number is not very extensive, but it brings us a little closer to the idea of using the martingale with the trailing stop, which in many cases benefits us by closing for sl more times, but entering with a lower lot in the next and therefore being able to do more operations until the price goes in our favor. Although at some point the martingale forced us to open too much lot, the question is to know if it takes a long time and we can make the system profitable until that moment arrives. Another possibility to avoid an area in which the price enters the range and opens and closes us many times, is to limit the number of entries (3 or 4) and in case we do not profit, assume the losses and continue with those operations after The indicator will appear again, since several cycles of 3 or 4 consecutive losses are not repeated so many times and according to the necessary average it is 2.33. Although to know that, a much more extensive backtest is needed and in different pairs and timeframes.
+
+--- 帖子 #91 ---
+A very careful evaluation, thank you very much! Is on the Y-axis the maximum level reached (as in my table)? In this case, one can sleep well with 0.1-0.2% risk.
+
+--- 帖子 #92 ---
+sleeping with a martingale is difficult, hehe When I have the numbers in front, I comment on how the TS's route has been and therefore the necessary lot to enter according to their tables.
+
+--- 帖子 #93 ---
+Instead of MG, you might have a look at using a progressive betting sequence like 1-2-3 or 1-3-2-6. That way, as long as you have good statistics of the system's average consecutive winners/losers, you can adapt the type of sequence and control your DD with a good night's sleep... I made a little stop trailer( with xxreema - lol), makes it a bit easier. Attached File(s) INSTANT-TRAIL-STEP.ex4 113 KB | 447 downloads
+
+--- 帖子 #94 ---
+Please all to not post any discussions about martingales here in the thread! I suggested to analyze an alternative to MGs, which I haven't seen anywhere else, @gerval understood what it was about, that's all. About progressive betting I recommend studying the book/e-book and the systems of "roulettetrader#com". There one can maybe learn something and trade "good statistics" successfully.
+
+--- 帖子 #95 ---
+his strategy is great,, i know him, his name is Don.. his progressive trading makes profits way bigger if you have a good system.
+
+--- 帖子 #96 ---
+I understand that the tables that he put, is based on the route of the TS and we would enter and with the lot of the tables combining it. Continuing with the data in the table, in the cycle of 8 operations in favor of the indicator, I do not respect the average of the middle of the route, the maximum that the TS reached in favor was 1/3 of the route in one of the inputs, the The rest was not in favor at all, the price moved between the entry and stop loss levels on many occasions (it is not usual), so the lot we would have had to double in all entries. 0.1-0.2-0.4-0.6-1.2-2.4-4.8-OK The problem is that when the price enters the range, perhaps it is a possibility to stop, take the loss and start another cycle at another point on the chart, for example, the next time the indicator appears, and you could even look for a 3rd cycle. Or ... make a different sequence of entries, for example 2 sales in a row, 3 purchases in a row. It is already a matter of testing. Although if the normal thing is not that 8 operations or more are reached, and the usual thing is that the TS moves in favor avoiding so much lot, it could be sought to make it profitable.
+
+--- 帖子 #97 ---
+I will test your Trailing Stop, thank you.
+
+--- 帖子 #98 ---
+I forgot to activate the TP option, you can download it again. Also - if SwingMan so desires, I'll delete it... Attached File(s) INSTANT-TRAIL-STEP.ex4 120 KB | 478 downloads
+
+--- 帖子 #99 ---
+1) Surefire system? 2) Do not double your lots or the lack of margin will kill your account ? 3) Maybe you just right down the loss and make an increment on next signal if it good and try to profif from this one ? 4) Avoiding swap ? you tp some of your positions to release margin and avoid swap, but maintain lot difference for desired bias. Well those are my guessings, my iq is not 69 =(
+
+--- 帖子 #100 ---
+Unfortunately, for you, I am keeping quite impressive library of the first three hedging ways... Unfortunately, this time for me, the 4th hedge stopped working in my latest EA versions. For quite a while, it seems. When other ways were developed, the 4th one got broken. Historically the 4th was built second... Mr. Programmer will make it work again next week. Hedge 1 Attached Image (click to enlarge) Hedge 2 Attached Image (click to enlarge) Hedge 3 Attached Image (click to enlarge) To crack down hedging, you need an IQ below 75. If you are a happy owner of a higher IQ volumes? I am really sorry...
+
+--- 帖子 #101 ---
+Nah itś not unfortunate, to crack down hedging you only need to know addition and subtraction, if you don't, maybe just use rocks?
+
+--- 帖子 #102 ---
+Dear Marcelo, please do not post your personal opinions and experiences about martingales anymore, this is not a thread for it. If you have the time and pleasure to study, comment or criticize my martingale variant, I would be very satisfied ...
+
+--- 帖子 #103 ---
+Any kid from 1st grade or higher, can bring down the trading business! Poor stupid bankers! I agree with you! Entirely! Just wondering... why they are struggling with hedging, so hard, here, on this forum? Why don't you just help them?🥸
+
+--- 帖子 #104 ---
+I aways agreed with you thats why i hedge, without using MG... Why don't you just help them? - Like you, i just did And i agree with SwingMan, MG will aways blow the account.
+
+--- 帖子 #105 ---
+@MoneyZilla and @Marcelomtn, here I started a private thread for both of you, so that you can only post one here exclusively about my trading idea or forget about them. Opinions and Experiences with Hedging and Martingale .
+
+--- 帖子 #106 ---
+Can anyone help me with a EA like Killa-Gorilla please
+
+--- 帖子 #107 ---
+Hi guys! I tried in many ways to work on my own EA but my knowledge is still limited and so I was not successful However in my search for solutions I found this EA made specifically for Jake Bernstein's MAC (moving average channel). I did some tests but apparently the orders are being made in the opposite direction... Source
+
+--- 帖子 #108 ---
+I've made a few adjustments for you and one can test both directions. I have not analyzed the algorithm for entries.
+
+--- 帖子 #109 ---
+smLazyHedging TrendOsc_v1.1 Nice indicator. Other 2 indi cause mt4 not responding. Jz some idea. if you have smLazyHedging TrendOsc_v1.1 dashboard version might help you re-enter/ filter pair quickly. Anyway, working nicely with below tools.
+
+--- 帖子 #110 ---
+OK, You can also test my Strength Indicators like here: https://www.forexfactory.com/thread/...42#post9016342
+
+--- 帖子 #111 ---
+Greetings SwingMan, I hope this is not much of a bother, would you kindly add alerts to your smACME Rectangle_v2.1 indicator I got this on ex4 because I don´t think you ever share the mql4 for that version. Attached Image (click to enlarge) Attached File(s) smACME Rectangle_v2.1.ex4 14 KB | 408 downloads
+
+--- 帖子 #112 ---
+No problem, here is the indicator, unfortunately I can't make any changes now.
+
+--- 帖子 #113 ---
+For when you have time, I would really appreciate if you can make it work on renko charts, I have been trying to make it work but it still doesn´t appear..
+
+--- 帖子 #114 ---
+Could you pls kindly advise how you want to have alert going off with this smACME Rectangle_v2.1 indicator. and on what reason. Here is one example could you pls show on chart so it is easier for me to understand ON GJ it appears only once while on GU it appears 3x near current price why? and what can you interpret from that appearance? Thanks
+
+--- 帖子 #115 ---
+Got a warning from broker "account due to hyper activity disabled, when use this EA, re check code"
+
+--- 帖子 #116 ---
+system 2 and 3 is impressive, what are requirement on capital, and orders, do you share the hedge EA? or are they commercial?
+
+--- 帖子 #117 ---
+Low risk floats, depending on the time frame traded, usually around 4-8% of a draw-down vs 20-30% of an annual return. These two types of hedging are not suitable for high risk trading, as it is all turns into a gamble, at some point. If one is certain about the direction? Why hedge? Hedging here works at small bites, catching/closing at some fake counter trend movements or corrections. Bigger bites/revs = not proportionally bigger draw-downs... This is a private ai system (indies/eas).
+
+--- 帖子 #118 ---
+Never happend to me...could happen if you set the step too low, like "1". You can try this version with BE (set it outside the TP range to deactivate). Don't set the step very low though. Attached File(s) INSTANT-BE-TRAIL-STEP.ex4 124 KB | 484 downloads
+
+--- 帖子 #119 ---
+i use default setting TSL 100 step 50 TP 100 it continuously sends order modify and broker warns to deactivate account.
+
+--- 帖子 #120 ---
+Found the problem, should be fixed now... Attached File(s) INSTANT-TRAIL-STEP-v1.1.ex4 122 KB | 505 downloads
+
+--- 帖子 #121 ---
+it seems to work now. thanks? what was the issue?
+
+--- 帖子 #122 ---
+The "step" input wasn't linked to any of the relevant code....
+
+--- 帖子 #123 ---
+Hello SM, that so much for the trading system. Please permit me to ask you an ignoramus question. I tried installing this system but couldn't succeed. I did file--MQL4--Indicators. It did not show in the indicator file. Please SM, what do I do to install the LazyHedging Trading System. Thanks for your assistance.
+
+--- 帖子 #124 ---
+if you have saved the files in MQL4/indicators, you have to refresh the navigator, or just restart your MT4 then you will file them in the list, and you can attach them to your chart
+
+--- 帖子 #125 ---
+trailing-stop 100 trailing step 50 takeprofit 100 with this setting does it means EA will start trailing, when user is in profit of 100 pips, EA will remove the TP and starts trailing the SL at/from 50 pips, I am not clear as what is with the last setting could you explain pls. Could you also release the modified source svp, thanks
+
+--- 帖子 #126 ---
+This is really basic stuff and I don't want to clutter this thread; please experiment with all settings and any doubt will vanish... The source is loaded with auto- generated crap and not useful to anyone.
+
+--- 帖子 #127 ---
+it is alright. Thank you again.
+
+--- 帖子 #128 ---
+hello SwingMan, I use your indicator smLazyHedging TrendChannel_v1.5.1.ex4... the indicator is very good, the problem is that when I save it as a template, when I reopen the template, the colors are not seamless, you can you tell me how to fix it...thankyou
+
+--- 帖子 #129 ---
+Maybe it has to do with MT4 functionality. If one load the template in a chart and the colors are not correct, then one should change the time frame and then go back to the old one.
+
+--- 帖子 #130 ---
+hi SwingMan, i have an indicator...i don't know how to show an alert when it changes color from red to green or green to red...can you help me...thank you
+
+--- 帖子 #131 ---
+Expert Advisor smLazyHedging_v3.1 Here I am posting a first version of an EA with the "Hedging Sliding StopLoss". The entries are from the TrendChannel. However, the results are not so good in the tester
+
+--- 帖子 #132 ---
+Fractal Trading System Some indicators. How to trade... everyone can have ideas. Maybe one can achieve good results with the "Hedging Sliding StopLoss".
+
+--- 帖子 #133 ---
+Nice crossing of the support zone.
+
+--- 帖子 #134 ---
+Dear SwingMan What PAIR &amp; TF for EA??
+
+--- 帖子 #135 ---
+Every pair, H1. But is not finished. Only to see and understand the mechanismus.
+
+--- 帖子 #136 ---
+I think it would make perfect sense to apply the Hedging Sliding StopLoss to the fractal strategy... the fractals on the daily chart are often points where the market either continues or reverses the trend ... With the Hedging Sliding StopLoss we would win in both cases. Example D1 (Picture 1) We use the BodySwitch-Indicator to determine the trend - so we know in which direction we want to open our first position. We are in a downtrend, we place a sell stop on the "support fractals" and wait until it is activated. The moment the sell stop is activated, we look at the ChannelOsc and use the channel width as Take Profit and StopLoss (you can try ATR (1x or 1,5) as well) Example H1/D1 (Picture 2) We use the BodySwitch-Indicator to determine the trend (D1). On our H1 chart we set the fractal indicator timeframe to D1 so that we can see the same fractals as on the daily chart. The only difference is that we are trading with the channel width of the H1 chart instead of the channel width of the D1 chart. of course there are many other ways...
+
+--- 帖子 #137 ---
+Example of how the losses for trades are minimized (here for three trades). The small horizontal limits show where the initial losses would have occurred. NZDUSD Attached Image Or here the AUDJPY. The losses were minimized for the first two trades, but not for the third.
+
+--- 帖子 #138 ---
+Fractal - Channel Breakout (MTF) Idea1 (Picture 1): Trend (D1) = Bodyswitch Entry (H1) = Fractal Breakout Idea2 (Picture 2): Trend (D1) = Fractal Breakout (which ist sometimes very similar to ChannelOsc) Entry (H1) = Fractal Breakout In the examples shown, I have set the option "Show all Breakouts true/false" to false... just that you get the main idea.. there are many other breaks in our favor
+
+--- 帖子 #139 ---
+Fractalbreak D1 on H1
+
+--- 帖子 #140 ---
+The Fractal Kiss ... A trading variant is following: - Trend direction from D1 - On H1, if the direction is the same, wait until two fractal lines meets a candle. Note: If a candle of the opposite color appears in a D1 direction (e.g. long / red candle), one can also trade after a single fractal line meets a candle. It goes without saying that the sliding hedge compensates for any losses ...
+
+--- 帖子 #141 ---
+Hey @Swingman -- not too shabby... Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #142 ---
+OK, but the formula for calculating the lots is not correct and I was too lazy to correct it. In the meantime I follow the trading signals of the FractalKiss in several pairs every day, and I feel as happy as the princess who kissed the frog. Soon the prince will come for me too ...
+
+--- 帖子 #143 ---
+The EA is actually quite decent, with some fine-tuning and maybe a few manual interventions it could do really good. The biggest problem is the lot sizing is all over the place. Any chance of releasing it as an MQ4? Cheers, Opita
+
+--- 帖子 #144 ---
+Hi SwingMan Thankyou for the wonderfull work If you Don't Mind can i Get The Source of the smLazyHedging TrendOsc_v1.1 indicator Thank you Sorry for my bad English
+
+--- 帖子 #145 ---
+Here the EA.
+
+--- 帖子 #146 ---
+Here the indicators for you.
+
+--- 帖子 #147 ---
+Thank You
+
+--- 帖子 #148 ---
+Really appreciate it!
+
+--- 帖子 #149 ---
+Hello SwingMan, For the indicator "smBodySwitchTrend", could it be possible to have info shown at the corner of the chart for the D1 direction? It just shows if the smBodySwitchTrend for D1 is UP or DOWN so when we switch to smaller TF we can still see the direction of the D1. Thanks.
+
+--- 帖子 #150 ---
+I'll do that in the near future, when I have the time. Until then, you can study an idea with trading only on D1.
+
+--- 帖子 #151 ---
+Here I post a trading idea on D1, without much comment. One can easily see the entry and exit levels and change the factors for their values. The drawn levels are always valid for the next bar. At the moment the ATR is used as a reference, but slightly better values are calculated in the oscillator. I would now like to try to write an EA.
+
+--- 帖子 #152 ---
+In the previous #Post 151 I posted a small correction for the indicator "smBodySwitch Signals_v1.1!" If you have downloaded version 1.0, please replace it.
+
+--- 帖子 #153 ---
+I recommend OnePIN and PinTRADER from Jagzfx for your indicator..
+
+--- 帖子 #154 ---
+New version "smBodySwitch Signals_v2.0" I wish all readers of this thread a successful year! If one have time, one can study a little the potential of the BodySwitch indicator ... The + and - arrows show the possible profits and losses, and a small statistic calculates possible trading results. Attached Image . Attached Image
+
+--- 帖子 #155 ---
+Hello Swingman, thank you so much for sharing your ideas and work once again!!! I hope you had a good start into the new year. I wish you all the best and especially health. Could you please give a newbie like me info on the indicator? What do the green and pink dots, the green cross and the red bar stand for? Thank you very much. Greetings from Meenz to FFM
+
+--- 帖子 #156 ---
+New version to test: "smBodySwitch Signals_v2.1" - A little more informations. - One can enter the lots for the Win/Loss calculation. - One can enter the maximum spread (e.g. 20) if one shouldn't trade - the background will be gray.
+
+--- 帖子 #157 ---
+Can you share a version that doesn't change the background color？
+
+--- 帖子 #158 ---
+You can set the maximum Spread e.g. on 500.
+
+--- 帖子 #159 ---
+Still automatically change the chart background to white.
+
+--- 帖子 #160 ---
+OK. I'll put a switch in, that's not a problem. But what is the problem? I always believed that if my algorithms are correct, the colors are also correct ... Instead of analyzing the color of the background, one should analyze the background of the indicator, there are enough observations to make. I, too, when the indicator is running, make assessments of the functionality and prepare the changes for the next version. I suspect that all over a hundred downloaders have only collected the indicator for their indicator collection without using it.
+
+--- 帖子 #161 ---
+Could you please explain a little bit the signs (star, ,dots and bars) that the indicator gives? Many thanks
+
+--- 帖子 #162 ---
+Possible trading results for 04.01.2022
+
+--- 帖子 #163 ---
+Would love to see the EA running on this signal and see its result.
+
+--- 帖子 #164 ---
+Until an EA is developed, one should test with pending orders! Comparison with a grid strategie: here is a typical example of today's sliding hedge. - Pair GBPNZD. (The background is gray because the spread is too big and one will not trade.) - The grid has e.g. 227 points spacing. Entry (1.99179), Take Profit (1.99179) and lower grid (1.98952) - If the price reaches (1.99116) falling from the high, one closes the order and one trades a sell. The result: instead of a loss of 227 pts when reaching the lower grid, one loses 63 pts, and one earns 227 pts with the hedge sell.
+
+--- 帖子 #165 ---
+Hi Swingman, thanks for your work can you explain a bit better how this indicator works?? i mean, i see a purple dot, green dot, and a start
+
+--- 帖子 #166 ---
+Oh no, again someone asks without examining the indicator. No problem. It is just a confirmation that all hundreds of downloaders have only downloaded it for their indicator collection. Because there is no interest and no one tests anything, I will not post an EA here either. If I see someone contributing, I'll send it later privately. In general, I do not give detailed explanations, and everyone should get by, if not one should leave indicators alone or trade without indicators. If I can invest many hours, one should also be able to study an indicator in half an hour. I just posted a picture 6 hours ago with a few explanations. All one have to do is start the indicator on a chart and try to understand what I've written. Ai, ai, ai ... - The green / red circles are entry and take profit levels. You can read it when you move the mouse over it, or you can find the names and values in the "Data Window", then identify them in the chart. - In Post #154 I wrote "The + and - arrows show the possible profits and losses". The star should be the plus sign and the line the minus sign, because I couldn't find anything else. Otherwise you can see with the naked eye whether after an entry at the value of the green circle, the red circle has been reached or not (+ and - signs).
+
+--- 帖子 #167 ---
+Thanks. I am a Big follower of Your works I understand they red and green dot. But i ser You use yo hedge some trades. I thought this indicador shows that. GReAT WOrk again. I use this indicador to know they trend .. after that i put a simple martingale EA to Open just to they trend . Works great
+
+--- 帖子 #168 ---
+For today 06 Jan, GBPNZD. As per my chart (GlobalPrime) Entry Buy = 1.99974, TP = 2.00216, SL = 1.99720 If I want to apply the same hedging as per your post, how could this be possible? Entry - TP = 242 that means lower grid = 1.99974 - 0.00242 = 1.99732 &lt;== this should be the TP for the Sell at 1.99720. Or do we have to go to another lower level? And yesterday on GBPNZD, a star should not be marked because SL was hit before the TP.
+
+--- 帖子 #169 ---
+Nice idea of hedging. But I wonder how the SL is calculated? For example with the NZDCAD chart for today, SELL entry = 0.86401, tp = 0.85934, and sl = 0.86553. Points to win = 107 while points to SL = 512. With this type of number, how do we plan for the sliding hedge?
+
+--- 帖子 #170 ---
+You can be right! The Win/Loss arrows are drawn at the end of the day, and it is possible that the SL will be reached before the TP within the day. I can live with it and instead of a 70% hit rate in the statistics, the real rate is only 68% ... With the EA one will find out whether the trading idea works. Here are the "possible" profits until this morning.
+
+--- 帖子 #171 ---
+Forget the term "grid". Please read Post #164 again, where I wrote that you should NOT take the grid distance (PTW=PointsToWin) from the entry, but rather SL=High-PointsToWin (or SL=Low+PointsToWin )! So you have an advantage, and instead of 227 pts you only lose 63 pts and you switch to hedge trading (in the simplest case a martingale), where in this example you win straight away. The money management is optimized automatically! The lots multiplier for a classic grid, for 227 PTW pts Win/Loss is: M = (227 Loss + 227 Win) /227 PTW=2.00 The lots multiplier for the sliding hedge, for 227 pts Win/Loss is: M = (63 Loss + 227 Win) /227 PTW=1.30
+
+--- 帖子 #172 ---
+New indicator version "smBodySwitch Signals_v2.2" Warning! This version can only be downloaded by @Sawaddee and @ordosgoitia , who are using the old version and have posted something... I have made some corrections and some additional information is being written. - The spread limit is now entered as a percentage of the value of the PTW (PointsToWin). If it's more than 25%, maybe one shouldn't make the trade. - For the spread value I calculate an EMA of spread values for the last 40 ticks. A profit has just been made on AUDCAD:
+
+--- 帖子 #173 ---
+AUDCAD. Mine is still in trading. Would it be possible to have a red dot as SL indication for every trade?
+
+--- 帖子 #174 ---
+Change the Broker!
+
+--- 帖子 #175 ---
+Without much testing, here is the version "smBodySwitch Signals_v2.3" with a star for StopLoss on the current bar. Attached Image Please download "Version 2.3.1" from Post #179
+
+--- 帖子 #176 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #177 ---
+@Sawaddee , please read Post #171 again, I think it's right. The star is on the current bar, to see/have the current High and Low
+
+--- 帖子 #178 ---
+I thought SL means the value showed in the box.
+
+--- 帖子 #179 ---
+It would be nice if you and other members read what I have written more carefully. I wouldn't waste any additional time. Post #151 says: If one trades today, one have drawn the signal levels on the previous bar (remains unchanged), and the SL on the current bar (changes during the day). Maybe you think it's better that the stars are also drawn on the previous bar? Here the version "smBodySwitch Signals_v2.3.1" Which is better, then I delete one of the versions?
+
+--- 帖子 #180 ---
+and the SL on the current bar (changes during the day) Perhaps I don't understand the above sentence. I wanted to have the SL shown so that I can backtest day by day and see if SL or TP hit first. If SL was hit then how the sliding hedge would effect the result. But the SL (as red star) showed in the chart, some of them, confused me. For the Sell, SL should be above the entry point. I don't understand how can SL stay at the middle between the entry and TP. I tried my best but if the red star has something more than just SL then perhaps I had missed it. Feel free to reply at your convenience. I don't want to waste more of your time. PS. The red star needs to be the same or the next candle. It makes no difference for me.
+
+--- 帖子 #181 ---
+Thanks for the message, that's how it is, unfortunately. Now you have to fight with my term "sliding stop", or more simply: trailing stop. For a long trade, e.g. for (distance = TP - Entry), the (StopLoss = High - distance) would have to be. That is why the position of the star is independent of TP and Entry. These are values "from yesterday" and the SL is "for today". Entry for today is (yesterday's body high + yesterday's ATR * Entry_Factor). Take Profit for today is (Entry + ATR * TP_SL_Factor) PointsToWin is (ATR * TP_SL_Factor) So that the chart does not appear overloaded, we keep version 2.3.1.
+
+--- 帖子 #182 ---
+Possible trading results for 06.01.2022 Don't forget that one has to subtract the spread value from the profit, because all trading values are calculated with bid prices.
+
+--- 帖子 #183 ---
+Thank you for an interesting system. I completely understand and will test !! Today 7.1. after opening the D1 candle, I entered all the forex pairs according to yesterday's candle. we'll see ..
+
+--- 帖子 #184 ---
+Thank you for your kind explanation. Now I fully understand all the calculations i.e. Entry, TP, and SL.
+
+--- 帖子 #185 ---
+Hi Swing Man, Happy New Year to you and all traders. I put on screen you last version. awaiting for triggering first trade. Attached Image (click to enlarge) This one will be much better and easily with EA.
+
+--- 帖子 #186 ---
+Nice that you test manually! Some pointers: - Because the levels are calculated with bid prices, the average spread should be taken into account. This will also be done later in the EA. It means that - for the Buy Order (Entry = Entry Value + Spread) and (Exit = TakeProfit). - for the Sell Order (Entry = Entry Value) and (Exit = TakeProfit + Spread) If you think that it would be more helpful for manual trading to write in the panel the values calculated in this way, please let us know. - For your orders you can also enter the TakeProfit value. - One must manually track and change the trailing StopLoss. - You can switch off the "Show OHLC" in the chart, it is clearer.
+
+--- 帖子 #187 ---
+Yes I think will be better to write in the panel to not need calculate all the time. Also my observation is that the targets and stops are very tight but maybe that is the strategy. This is one of trading. Attached Image (click to enlarge) most probably we have to choice pairs with tight spreads
+
+--- 帖子 #188 ---
+Let's see how it goes...
+
+--- 帖子 #189 ---
+Please replace the picture with a smaller section, because that way I can't check anything. - For trading, the spread condition is a limit of 25% from PointsToWin, for example. Test with limit 10% and you will see that the background turns gray. - One will see later if the TP and SL are too tight, when the hedging works to eliminate the losses. If so, one can trade e.g. with 10 lots and get rich quickly, no problem. The idea in the thread is hedging (lazy hedging), and not trend trading.
+
+--- 帖子 #190 ---
+Yes, interesting what you're doing, but the StopLoss is not quite right! The star (SL) moves when the High (or Low) changes to account for the sliding hedge. In your charts the SL would be too far ... I have now some time and post later a new version where the spread should be taken into account e.g. for buy orders. For manual orders I will calculate an SL (Initial Stop) from the entry.
+
+--- 帖子 #191 ---
+Thank you. Gotta read this thread better
+
+--- 帖子 #192 ---
+Some of the trade after hit the stop loss continue Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #193 ---
+It is certainly like that within the day. The indicator is intended for hedge trading , not for trend trading , and you have already noticed that the stop loss is quite tight. If one wants to trade manually, one should also set the stops differently. Trading the sliding hedge is extremely difficult and will be programmed with the EA at some point. I mean that the losses can be compensated quickly with the sliding hedge, and without a large increase in the lots. Of course one will be able to determine this with the EA, until then one can carefully trade manually.
+
+--- 帖子 #194 ---
+An example from today. In AUDUSD the sliding stop was reached at (-71 points), then the price turned and (115 points) were gained. I couldn't follow this manually with several pairs, the EA should do that. Some values: SL = Low - 115 = 71298 - 115 = 71413 Loss = Entry - Exit = 71342 - 71413 = -71
+
+--- 帖子 #195 ---
+New indicator version "smBodySwitch Signals_v2.4" A few changes have been made in this version: - An "Initial Stop" is written For manual trading it would be interesting: The star for the SL should initially be drawn for this value. When one reaches the entry, one should have an option for the star to stop for the IS or to move with the SL. Who has an opinion? - For the option "Values_Type = ManualTrading_Values", the spread is taken into account when entering the order. An "M" will appear in the top left corner. - The spread is not taken into account for the option "Values_Type = Calculated_Values". An "C" will appear in the top left corner. Everything relates to the values from the trading panel. The arrows in the chart are drawn with the calculated values.
+
+--- 帖子 #196 ---
+Very interesting system and simple to follow, thank you. My preference would be for a trailing stop loss that can be monitored , manually if preferred.
+
+--- 帖子 #197 ---
+I have a3840 x 2160 screen which compresses the panel so it is unreadable. Would it be possible to add an option to alter spacing in the panel?, I appreciate that this will involve your valuable time. Regards.
+
+--- 帖子 #198 ---
+Please post a chart excerpt with the panel.
+
+--- 帖子 #199 ---
+Screenshot
+
+--- 帖子 #200 ---
+New indicator version "smBodySwitch Signals_v2.5" - "StopLoss_Type" parameter can be "Fixed_StopLoss" and "Trailing_StopLoss" - Separate factors for "TakeProfit" and "StopLoss". Tried with 0.2 and 0.4 values. - One can enter the width and height for the TradingPanel. The text is output with the internal function "Comment" and the font cannot be changed, but the line spacing can be doubled. Now at the weekend, one should start the indicator in the strategy tester and report any errors.
+
+--- 帖子 #201 ---
+Thank you, works perfectly with panel adjustment.
+
+--- 帖子 #202 ---
+That makes me happy! Please post a section of the upper left corner so I can see what it looks like. I'm not interested in the whole chart.
+
+--- 帖子 #203 ---
+Looks like much better. Lets see how will be tomorrow. Attached Image (click to enlarge)
+
+--- 帖子 #204 ---
+Attached Image
+
+--- 帖子 #205 ---
+It's perfect, I'm happy!
+
+--- 帖子 #206 ---
+New indicator version "smBodySwitch Signals_v2.6.1" (See Post #218 / Download a fixed version in Post #219) Money Management was added to the indicator. Because several changes had to be made, please test and report any discrepancies. Please test whether the trailing stop works properly. Here is a little example.
+
+--- 帖子 #207 ---
+version 2.5 looking good. Tree targets hit. Attached Image (click to enlarge)
+
+--- 帖子 #208 ---
+That is ver. 2.6.1 with trailing stop on. Attached Image (click to enlarge)
+
+--- 帖子 #209 ---
+GBPCHF already triggered v. 2.6.1 Attached Image (click to enlarge)
+
+--- 帖子 #210 ---
+I increase a bit the profit factor and stoploss,, some pairs tp and stop is to short,, like 3 pips.. so, i am aiming to 8 pips per trade,, so far is going good.. also works great on h4
+
+--- 帖子 #211 ---
+Without charts I can't know what you're hiring ... Please post some because I wouldn't recommend H4, just when you need action. The system is intended for retirees like me.
+
+--- 帖子 #212 ---
+Trailing stop seems to work. So tomorrow only manually ( buy stop/sell stop) entry and TP. Or like veslup, that only Entry manually and TSL on.
+
+--- 帖子 #213 ---
+That is for today so far. 8 - targets 2 - stops Attached Image (click to enlarge)
+
+--- 帖子 #214 ---
+Well done with entry alone and TSL. For example, that AUDCHF.
+
+--- 帖子 #215 ---
+"The system is intended for retirees like me." as for me
+
+--- 帖子 #216 ---
+Thank for share bro.
+
+--- 帖子 #217 ---
+Please which EA can I conveniently place pending trades including SL ?? For example, buy stop above the current price by 20 pips and SL minus 10 pips I place the display by clicking and then the mouse signs the position on the dot and cross
+
+--- 帖子 #218 ---
+A note: In your charts you can see that the number of lots is zero at the top right: (0.00 Lots). This is a small problem in the program and I will try to fix it in the next version. This happens when Metatrader is started. My current solution is to restart the indicator in all charts, then the calculated number of Lots appears.
+
+--- 帖子 #219 ---
+Fixed version "smBodySwitch Signals_v2.6.1" I found a quick fix. Please replace the old file with the new one in the indicator folder, and restart the platform. For safety, it also saves the old file ... (See Post#222)
+
+--- 帖子 #220 ---
+New fixed version "smBodySwitch Signals_v2.6.1" The writing of the losses in the lower right corner was wrong. Please replace the old file with the new one in the indicator folder, and restart the platform. (See Post#222)
+
+--- 帖子 #221 ---
+I used the script to load the same template for all the charts, it might have affected that.
+
+--- 帖子 #222 ---
+New corrected version "smBodySwitch Signals_v2.6.1" I'm sorry, but only with live prices did I see that in the lower right corner, the results were still written incorrectly. Please replace the old file with the new one in the indicator folder.
+
+--- 帖子 #223 ---
+Comment: If one uses the sliding hedge, the loss is turned into profit! The trailing stop is used to sell at SL, then short with an increased lot number, and win.
+
+--- 帖子 #224 ---
+Could it be possible that the first SL hit then the sliding hedge was opened but then the price revert again? Does the sliding hedge have sl?
+
+--- 帖子 #225 ---
+One repeats everything, level by level. Is a sort grid/martingale trading, with sliding grids and dynamic martingales... Maybe is functioning. Please read Note #4 in the first post and try to understand the table in Post #33 .
+
+--- 帖子 #226 ---
+A pleasure to follow you again on the Swingman thread, undoubtedly the best martingale and trailing stop master. Reading the last messages to understand the operation and test it.
+
+--- 帖子 #227 ---
+Hi @gerval , I am pleased to see that you are still interested in the idea. Maybe you can test the functionality of the indicator because it is the basis for the EA. It can also be easily used for manual trading. I believe that the individual functions are correct now and I can start writing the EA.
+
+--- 帖子 #228 ---
+Almost done for the day. Today I set withhold trailing stop. Not so bad. Attached Image (click to enlarge)
+
+--- 帖子 #229 ---
+mtf added by MrTools; in case you want to say: thank you
+
+--- 帖子 #230 ---
+One can see that the GBPNZD (top right), is profitable after hedging.
+
+--- 帖子 #231 ---
+I have been testing the indicator and the trialing stop system with an EA that does what the indicator says. I have had 6 trades today, 3 winners and 3 losers, but when using the Trailing stop, the losses have been much less than the winners. So great for the results. Without a doubt, a very good solution to keep track of operations with TS as I said a long time ago. But I wanted to show the loss operation to see how it can hurt us significantly when the price enters a range, in case of using reentries, and the manipulation makes the price move between our orders, causing us to buy at a resistance and sell at a support, which forces us to open many operations with a lot increase due to the martingale, although a little reduced due to the TS. In this photo we see how the operation was in favor at first and later it turned around and hit the SL, which had moved through the Trailing stop reducing the loss. Attached Image (click to enlarge) And seeing in detail what the price does in M5, you can see how the orders hit the SL on several occasions, when performing operations against each time the previous one closes us, maintaining the original distance of the first operation between the entry and the TP (8.8 pips). The TS is updated every time the price goes in favor of the entry 1 pip. Attached Image (click to enlarge) To avoid those ranges that can affect us so much in a given time, a solution would be to assume the loss and enter the candle the next day with the increase in lot, so the ranges would affect us less, since we enter at different times from the market, and on several different days. And thanks to the use of the TS as Swingman says, there would be days that the increase in the lot would be much lower than the classic martingale.
+
+--- 帖子 #232 ---
+Thank you for your evaluation, it is very reasonable! A little explanation why I took the factor 0.20 for the TP / SL: - I followed the price movements on H1 for a long time. - A day has 24 hours - The volatility on H1 is approx. Root of 24 = 4.90 approx. 5 - 1/5 = 0.20 One of the notices on H1 was that trading in 3 steps (entry-hedge-hedge) is pretty good. Then repeat. Just one step and increase later would be possible, but not fast enough to get rich. It would also be possible "as basket trading" to place the increased lot number on a different pair. One can check this with the smLazyHedging EA. For me, however, the entries were not profitable enough, which is why I presented here this daily strategy for retirees. Perhaps because of the favorable win/loss ratio, one can renounce on hedging and increase the risk. Let's see.
+
+--- 帖子 #233 ---
+Here is also an attempt for NZDCAD to track the price movements within the day. Hopefully everything is correct, if not one should correct it.
+
+--- 帖子 #234 ---
+Hi Swingman, is there the possibility to increase the font in the trading panel? Thank you
+
+--- 帖子 #235 ---
+Unfortunately the text is written with the internal function "Comment" and one cannot change anything. Of course, one can also do this by program, but it was quicker that way. But, as always, if I don't see anything you're testing or doing, I can't invest any additional time. Now I have to focus on the EA.
+
+--- 帖子 #236 ---
+New indicator version "smBodySwitch Signals_v2.7" Presumably this version will remain valid for a longer period of time. I made one final correction, although no one noted that sometimes when the spread condition was not met, the background in the chart remained gray. The checking has now been done in general, and when the spread is OK again, the background will turn white again. I have set the default setting for the display of the values to "Calculated_Values" in order to be able to follow the development of the prices more easily. Those who trade manually can take the spread into account when ordering, or switch to the setting "ManualTrading_Values".
+
+--- 帖子 #237 ---
+V. 2.7 with trailing stop active. Attached Image (click to enlarge)
+
+--- 帖子 #238 ---
+Thanks Swingman for the indicator update. The photos that I put come from a daily chart, in which the operation is lost (half of the path of the SL is avoided thanks to the TS) and later it was a manual simulation of what it would have been in case of entering re-entries with a spread about 1 pip). But if you have fewer operations for your recovery, I am glad that fewer operations are accomplished. That is the ideal. The EA will be a good tool to work and look for good configurations.
+
+--- 帖子 #239 ---
+EA for simple wait orders https://www.earnforex.com/metatrader...ick-trade-pro/
+
+--- 帖子 #240 ---
+I'm testing and trying to understand how the system works. I'm using the trailing stop function but I seem that at moment the hedging function (reversal trade with lot size increase after a stop loss) is not implemented, is it correct? Have you got a 20 Pts loss on GBPUSD daily? May be I attached the indicator too late in the morning. Thank you
+
+--- 帖子 #241 ---
+- The indicator cannot show reverse orders, it would be too much. - For manual trading, the EA recommended by @Night63 seems to me to be very suitable. - Very well done, but you can post charts, is easier to check the results. - That’s what I said for today.
+
+--- 帖子 #242 ---
+A very useful EA for manual trading!
+
+--- 帖子 #243 ---
+Hello SwingMan, Is this an expert or just an indicator .. because I saw you talking about manual trading so is there are any expert to be the automated
+
+--- 帖子 #244 ---
+- I always write "New indicator version smBodySwitch Signals_vxxx", so what I post IS an indicator and NOT an EA. - When I talk about manual trading, it means that one runs the indicator and trades manual what one thinks is right. One can have one's own ideas, use other indicators, or like @Naight63 posted, based on the calculated values with the indicator give the order with a good EA.
+
+--- 帖子 #245 ---
+In post #241 I posted the status at 17:14. There were 3 wins. Now at 21:37 we have 3 losses (EURUSD, AUDUSD, GBPUSD) I don't know what will happen next with EURUSD, but AUDUSD and GBPUSD were brought into profit with the sliding hedge. Result is 5 wins and 1 loss!
+
+--- 帖子 #246 ---
+Let's hope to be able to find a right variant for the EA. As you have already observed, sometimes there are pronounced sideways movements. For the AUDUSD where I wrote that the loss ends in a profit, 6 levels were necessary. For levels 2 to 4, however, the martingale is reduced by around 15%, and for levels 5 and 6 by around 80% and 70% compared to the classic martingale. Not bad either. There is still the variant that one continues as classic trend trading after a successful entry, as long as the trend line does not change its color.
+
+--- 帖子 #247 ---
+And now the same trade with the classic martingale. There are also 6 levels as in trading with the sliding hedge, but the factor 2 is no longer reduced, and the capital is more heavily used.
+
+--- 帖子 #248 ---
+Sorry but i'm not able to take a better screenshot on my VPS. Anyway, everything is grey at the moment and I seem it's correct. Let see how this trading day will go! Thank you
+
+--- 帖子 #249 ---
+Hi Alberto, please use the version 2.7 in Post #236 I wrote:
+
+--- 帖子 #250 ---
+For today a new version for the indicator "smBodySwitch Signals_v2.8" - I got the impression that sometimes after reaching TP or SL, the indicator forgot that they were reached, so I improved that. - For the current status when entry was reached and TP/SL not yet, I added the information of the percentage achieved. Sometimes one doesn't want to wait until the full 100% is reached.
+
+--- 帖子 #251 ---
+Hi SM, if I use daily charts do I need to switch the Uppder Period parameter to Weekly? Thank you
+
+--- 帖子 #252 ---
+No. I tested on D1 and remain so. If you want, you can take the trend of W1 into account and trade on D1 if the trends match. It's actually quite good to do that.
+
+--- 帖子 #253 ---
+If you plan to trade this system as a basket, one could like a done 4 the day when a certain % gain is reached on the account. Today I have a loss on GBPUSD but I suspect it could be an easy profit with sliding hedge with only one sell.
+
+--- 帖子 #254 ---
+In my evaluation from today were in profit: USDJPY AUDJPY NZDJPY AUDCAD GBPAUD GBPNZD Two pairs that showed losses could be wins: EURNZD EUAUD You are right about GBPUSD, the displayed loss is quickly changed to profit. NOT BAD FOR TODAY.
+
+--- 帖子 #255 ---
+Done for today. 6 wins and 3 losers who became winners after the sliding hedge. SpotBrent closed at 27% profit. Attached Image (click to enlarge) I have no idea if the EA can bring the same results... Of course, only those members who have understood and tested the indicator can test the EA, so that they do not get rich too quickly.
+
+--- 帖子 #256 ---
+Let's suppose this situation: 1st order BUY: stop loss 2nd order SELL: stop loss 3rd order BUY: still opended at daily close Do you close the order at daily closing, or do you leave the trade open in the new day? In this case do you accept another BUY if there is a trigger in the new day or do you wait the previous BUY to be closed?
+
+--- 帖子 #257 ---
+OK. I do sliding hedge calculations in Excel according to post 222. And I drop the chart amount to a minimum. When old, can't stare at the screen all day.
+
+--- 帖子 #258 ---
+I'm sorry, but such scenarios have to be tested first, including parameters, etc. Follow some signals and you will see that sometimes it is advantageous to continue trading on the second day, sometimes to stop. Conclusions can only be made when the EA is finished, at some point...
+
+--- 帖子 #259 ---
+I think you did a calculation like in Post #33 . Can you show me what it looks like?
+
+--- 帖子 #260 ---
+This weekend I do Excel. Now there is another thing to do. Nothing to do with post 33.
+
+--- 帖子 #261 ---
+Hi SM, my spead input is 25 (default) but my CADJPY graph is white, is it correct? Thank you.
+
+--- 帖子 #262 ---
+The spread percentage (Spread/PointsToWin) is limited, not the spread, and you can see that in the TradingPanel. See Post #254 with version 2.8. Please post it.
+
+--- 帖子 #263 ---
+Ok thank you
+
+--- 帖子 #264 ---
+New indicator version "smBodySwitch Signals_v2.9" - For a better overview (only for retirees), the trading panel now has different background colors for active long or short trades. Attached File(s) smBodySwitch Signals_v2.9.ex4 78 KB | 543 downloads An interesting day so far in the morning! 3 winners have been reached. The 3 losers shown, I checked on M5, are also winners after only 2 or 3 levels.
+
+--- 帖子 #265 ---
+Thank you for keeping retirees in mind. Can this be used for index symbols also?
+
+--- 帖子 #266 ---
+Yes, I think about retirees 24/24 hours... Sure one can apply for indexes. I'm just realizing that something is wrong with the currency indexes.
+
+--- 帖子 #267 ---
+The market today is very difficult but the result is not so bad at all. Attached Image (click to enlarge)
+
+--- 帖子 #268 ---
+Just added DAX on my monitor
+
+--- 帖子 #269 ---
+Today I have a banked profit on DAX but it's referred to asian session, it's not so realistic.
+
+--- 帖子 #270 ---
+Hi SwingMan, Thank you for sharing this system, indicators and all your hard work! I have just downloaded and installed the indicators and I was just about to start testing them on demo, however while placing my first order on GBPUSD I noticed the SL level displayed on left top corner panel does not match the actual level displayed on a chart by "cross" (cross level is correct) - please see the screenshot. Attached Image (click to enlarge) That fixed itself after mt4 restart... I think you mentioned about this issue before...
+
+--- 帖子 #271 ---
+The system is actually not suitable for manual trading because one also has to take into account the sliding trailing stop, and that is difficult. In any case, one should not forget that the calculated values are made with bid prices, i.e. the spread must be taken into account. For that you should read post #236: https://www.forexfactory.com/thread/...5#post13855695 There is a switch in inputs. For manual trading Arrows are displayed for calculated values, and values for orders are written in the panel.
+
+--- 帖子 #272 ---
+Thank you SwingMan for your reply. It all makes sense…. I must admit I wanted to test if this system has an edge if traded only manually, without sliding SL - I have very limited time to trade – 2 small kids, full time-long hours job, etc…. Essentially, I am ideally looking to create/find an end-of-day / daily set &amp; forget system. I really like that your system execution is on daily and that It has a fairly small TPs and SLs (so even though it uses daily TF, it can be used to set a large number of trades daily and then one could benefit from the law of large numbers… if it has an edge traded this way…). I may fail, but it could also give me some other ideas… Of course there is an alternative - to use this system the way it was intended to – with an EA… Thanks again for sharing your ideas, I will get and use the version from post #236 as suggested.
+
+--- 帖子 #273 ---
+I wrote Post #236 to read the text, and not apply the posted version.
+
+--- 帖子 #274 ---
+Thanks for clarification...
+
+--- 帖子 #275 ---
+Hi SwingMan, do you also have the indicator for MT5?
+
+--- 帖子 #276 ---
+I'm sorry but I don't intend to program for MT5.
+
+--- 帖子 #277 ---
+I placed yesterday 12 orders, all short, 5 were triggered, 3 winners EURGBP, EURJPY, CHFJPY; 2(1) losers - USDCAD - this could have been a winner with the sliding hedge entry, GBPJPY was only triggered just before the end of the trading day with/by a huuuge spread (my mistake - I should have cancelled this order 1-2 hours earlier).
+
+--- 帖子 #278 ---
+This is true and the EA does not need to send orders 3-5 hours before the end of the day. But I saw from you that one should also close existing orders. OK.
+
+--- 帖子 #279 ---
+Today I have banked profit on GBPJPY, NZDUSD and DAX. Running on GBPUSD, USDJPY and USDCHF at the moment.
+
+--- 帖子 #280 ---
+Nice. An interesting day, today. Until now, 11 Wins, and 2 Losses who are winners after hedging.
+
+--- 帖子 #281 ---
+Hi SM, could you tell if the system can work on GOLD and WTI ? Thank you
+
+--- 帖子 #282 ---
+Please do not ask any questions about trading. I am not a trader and test as little as possible because I lose enough time programming. Why don't you test in the charts, that's easy? Actually, in my previous chart posted, you could see the gold and spot on the right. Click on the chart to enlarge it and one sees everything. Here other charts.
+
+--- 帖子 #283 ---
+Almost the same. Attached Image (click to enlarge)
+
+--- 帖子 #284 ---
+My day was not as good: 6 lost, 2 won. Interestingly enough some trades that you won, I lost.... here are my orders: Attached Image (click to enlarge) It could have been because my broker's (UK IG) new daily candle starts at 00:00 GMT (BST in summer), so I probably have different entrly/tp/sl levels than rest of you... Also, I have noticed the indicator shows 4 wins/profits, not 2, not sure why. Attached Image (click to enlarge) on GBPYJPY for example I marked 3 red levels for entry, SL, TP, - on 5min chart, it clearly shows the SL was hit first: Attached Image (click to enlarge)
+
+--- 帖子 #285 ---
+One should consider please that I have only described a trading idea here. The indicator only makes a rough evaluation of possible outcomes, and cannot take into account intraday movements when calculating profits or losses. Only with the EA will one be able to determine whether the idea of the sliding hedge can win without straining the capital too much, or whether the capital will be used up too quickly. Your example with GBPJPY is one of the worst cases because it took 7 steps to reach the profit. (One will have to determine whether only 3 or 4 steps are sufficient.) In the chart I have drawn thick orange lines between the reverse points. One sees that the distances are mostly smaller than half the WinPoints value! In the Excel spreadsheet in Post #33 one sees that a martingale should have bet 64 lots at this point, and with that trailing hedge only 11.39. (Please calculate with a percentage of the capital instead of lots. 1% risk e.g. Or 0.1%, 0.5% etc.)
+
+--- 帖子 #286 ---
+Thanks for your reply SwingMan. All makes sense . From what I have seen so far the concept of your "sliding hedge" with martingale would greatly improve results. In fact that's probably the only profitable (in a long run) way of using martingale I have ever seen and now consider using... However, I am trying to check first if there is an edge in your system of entries and exits on its own...
+
+--- 帖子 #287 ---
+Very good, when you're done the checking, please let us know... Have you tested the statistics module of the indicator? The number of over 60% wins should perhaps also be present in practice. Meanwhile the EA has started to work and a first version will be available maybe next week. I won't post the EA in the thread (yet) because I don't know if one has understood the indicator BodySwitch how it works, and it would be pointless to use the EA blindly. Only if one has also posted something in the thread, one can write me a PM and later I will send a link to download the EA. The EA needs serious testing before it will eventually work, and I'm not getting any helpful feedback from anonymous downloaders. Here is the chart of GBPJPY-M5 that I evaluated manually beforehand in Post #285. (MoneyManagement is not yet available) One sees that the result is identical.
+
+--- 帖子 #288 ---
+Hello SwingMan, From what I understood about the system, you are looking at the body switch and trading after the signal in that direction, I don't understand why the Results here are Sell to buy back to back?
+
+--- 帖子 #289 ---
+The BodySwitch indicator is a proprietary indicator, and I haven't seen the idea or the algorithm anywhere, maybe there is. The idea came to me after studying the "Mantra" indicator, but it's something completely different. In fact, the trend is signaled because "Big Bars" break through an existing trend level. You will also find some threads in the forum where "Big Bars" are traded. However, I wrote that the trend is not traded, but only a small part of the movement intraday (0.20 of the Volatility=ATR). It's an idea that should be tested to see what that brings, because the tools for this are still under development. In Post #189 I specifically wrote: "The idea in the thread is hedging (lazy hedging), and not trend trading."
+
+--- 帖子 #290 ---
+There is my first test for the EA. The quality of my historical data is very poor, and there are still some bugs in the program that negatively affect the results. If one corrects them, the results will be slightly better.
+
+--- 帖子 #291 ---
+Hi SwingMan, I have 100% history and if you don't have mind I can test it.
+
+--- 帖子 #292 ---
+Thank you very much for your offer. Be the first on the tester list and send you the EA when I have corrected two or three existing errors. I won't have any time and no reasonable price data to be able to test the next versions. In reality, I'm not interested in that either, even if the theory, which is so perfect, can't be applied in practice later...
+
+--- 帖子 #293 ---
+Here is the first version for "smBodySwitch EA_v1.1 ". I tested EURUSD from January 2021. (One should test without VisualMode, it's faster.) It works well for $10,000 in tester and 0.1% risk. My big problem is with the margin/free margin. With InitialDeposit=$1,000, SpecifiedMoney=$1,000 and Risk 1%, the message that the FreeMargin has been exceeded quickly comes up. Already at 0.43 lots. (Typical is to test 6-8 January 2021, then bang it because of level 6 in the martingale.) Setting one to InitialDepot=$10,000 works fine. My account leverage is probably 100:1, and at 500:1, maybe 200:1 might work just fine. To see values for the margin one can set the switch "Show_MarginInfo=true". Maybe someone will explain under what account conditions (capital, leverage, risk) can the EA work with higher martingale levels. See new version in Post #296
+
+--- 帖子 #294 ---
+will u pl share history file
+
+--- 帖子 #295 ---
+Here is the stupid message with the FreeMargin. The display of the many arrows is a small error caused by the message, will correct it.
+
+--- 帖子 #296 ---
+Here is a new version "smBodySwitch EA_v1.2" with a little change: the EA stops when the FreeMargin is not enough anymore.
+
+--- 帖子 #297 ---
+Hi SM, many thanks for the expert. I'm trying to run it on a demo account. When I attach it to a graph, a pending order is immediatly opened. If I try to attach the expert on another symbol, previous pending order is deleted and a new one is opended on the last chart. Is the expert able to run on a single chart?
+
+--- 帖子 #298 ---
+OK, I have now clarified with my broker: my leverage is 30:1, and in Europe one can probably not get a better one for Forex trading. One would now have to adjust in EA the number of pairs traded to the capital and the corresponding pair margin.
+
+--- 帖子 #299 ---
+I can confirm, my demo account with FX Pro is 30:1.
+
+--- 帖子 #300 ---
+30:1 is standard in Europe since ESMA (European Securities &amp; Markets Authority) regulation came in 2018. You can still get a higher leverage in Europe if you a professional trader / have professional account...
+
+--- 帖子 #301 ---
+You're right, one need an account of 500,000, and I'm only missing a few EUR...
+
+--- 帖子 #302 ---
+Testing the indicator on its own, without trailing stop or take profit. When opening a trade I only put the stop and let it run to follow the trend, a couple of days trying it like that, and positive results. If the EA can be added to that... it can improve the results. Attached Image (click to enlarge) So far one operation has been lost with SL. Which would have been recovered in a coverage.
+
+--- 帖子 #303 ---
+If I haven't said so, then I'll repeat: the nude indicator "BodySwitch" should be used for trending trading with appropriate rules. The entry, TP and SL belong to "SlidingHedge" idea. If the "SlidingHedge EA" doesn't bring anything, I have to do something with the trend because of boredom. With the existing EA, one should test what brings to trade only a few levels (3-5 maybe). I underestimated the problem with the leverage and margin, so I will research in this direction. A quick solution would be: Capital 20,000, Risk 1% for Specified_Account=1,000, maximum 5 pairs at the same time. That would burden the private capital with a maximum of approx. 25% margin so that the orders can be carried out.
+
+--- 帖子 #304 ---
+You may think that the EA only has the option to open trades without the sofisticate trailing and hedging. OK, that would be a version for people who look at the screen from time to time.
+
+--- 帖子 #305 ---
+@graphium wrote in post #286 I mentioned it again in post #287 My first tests were with the sliding hedge, but one still needs to do some extra work to get the margin under control. Now I have tested with a slightly improved version "smBodySwitch EA_V1.3" if the theory can work in practice and it seems that it can work for some pairs. One would have to test and post here results for different pairs. Note: (maximTrades=1) so that no reverse trades are started. Here are two evaluations of win/loss trades, without hedging, with a risk of 1% based on ($1,000 AccountBalance) and on (fixed $1,000 capital). The 60 win/40 loss ratio for EURUSD seems to be confirmed. I also tried to start the Optimization, but for reasons unknown to me, it doesn't work.
+
+--- 帖子 #306 ---
+risk of 1% based on ($1,000 AccountBalance)
+
+--- 帖子 #307 ---
+risk of 1% based on (fixed $1,000 capital)
+
+--- 帖子 #308 ---
+I really like this equity curve! Hopefully we will be able to replicate this in live trading!!! Yesterday I had 4 wins (GBPUSD, AUDJPY, AUDUSD, NZDUSD) and 3 loses (GBPJPY, EURJPY, EURGBP). Currently after 3rd day of trading this system (20 trades taken, manually with pending orders, no hedge,) I am at -2R.
+
+--- 帖子 #309 ---
+FYI. Once orders are opened, they got deleted. Even spread &lt; 25%, background still gray.
+
+--- 帖子 #310 ---
+Hi SwingMan, Could you add fixed lot like option ?
+
+--- 帖子 #311 ---
+I can not understand what you did. - In this version of the EA he does not change background colors, maybe you had previously had the indicator in the chart, and the gray color has remained. - I had EURUSD first in the chart, then I have USDCAD. The EA works. Did you click "Allow Live Trading"?
+
+--- 帖子 #312 ---
+I only built for you the option "Enable_MoneyManagement = false". New EA version "smBodySwitch EA_V1.5"
+
+--- 帖子 #313 ---
+I did 2 tries. First. I set up a template then apply this template to all 28 pairs (with AutoTrading button "Off"). When I allow autotrading all 28 EAs start to place the order but when the next pair placed an order the previous pair's order was deleted. I use F7 to reactivate the EA one chart at a time and the same result happens. Order of that pair was placed then cancelled when next pair placed the order. Second. I apply EA one at a time to each pair. The same result. So, the only order I have is the order of the chart that I activate the latest EA. Screenshot when I apply EA to each chart one at a time attached. Strange that no panel info. shown. Setting is default setting. I have not changed anything. A short video clip is attached to show you that the order was deleted when the EA on the new pair is activated.
+
+--- 帖子 #314 ---
+Okay, that's fine. I am very sorry because a little mistake was in program, here the correction. New version "smBodySwitch EA_v1.5" in Post #312.
+
+--- 帖子 #315 ---
+I will not give StopOrders in the next version, because many pairs do not reach the Entries and end with Expiry at 22:00. I will do that by program, because the reverse orders are also sent by program as MarketOrders.
+
+--- 帖子 #316 ---
+Thanks for your work, this fits my trading style, now i can see the trend is a easy way.
+
+--- 帖子 #317 ---
+I am so upset but even with fixed lot I cant perform back test. I don't now what is the reason as I am using Quant data history.
+
+--- 帖子 #318 ---
+I received a chart for Nasdaq in an email. When one compares the BodySwitch indicator to an indicator from a professional program that "is a principle-based trading software which received Reader's Choice Awards from S&amp;C magazine for more than 25 years in a row since 1997", there are not major differences...
+
+--- 帖子 #319 ---
+Today's (day 4) results: 4 wins: AUDJPY, CHFJPY, NZDUSD, GBPUSD; 5 loses: GBPJPY, EURJPY, EURUSD, AUDUSD, USDCAD. Result after 29 trades triggered: -3R
+
+--- 帖子 #320 ---
+Interesting, well done! I must admit I am planning at some to test your indicator as a main signal for trend following system... looking at the chart above it looks promising...
+
+--- 帖子 #321 ---
+The attached picture is the result after v1.5 attached to 28 pairs. Starting account balance is USD5,000 but in the EA I leave it to $1,000 End of day balance is USD5,052.37
+
+--- 帖子 #322 ---
+What first order 0.1 and next 2.58 ?? 3rd 7,68.. Version 1.5 --- SET: ======================================= MagicNumber=1000 Show_MarginInfo=false ____Money_Management=--------------------------------------- maximTrades=20 Trading_Lots=0.1 Enable_MoneyManagement=true Risk_Percent=1.5 Reference_Account=0 Account_SpecifiedMoney=1000.0 ____Factors=--------------------------------------- Entry_Factor=0.5 TakeProfit_Factor=0.2 StopLoss_Factor=0.5 ____Infos=--------------------------------------- Result_Text=0 Show_TradingPanel=true Show_Comment=true Draw_StopLossArrows=true Draw_TradingResults=false Write_SymbolInfo=false Write_ResultsInFile=false ____Spread_Condition=--------------------------------------- Maximum_SpreadPercents=25 ChangeBackground_ForMaxSpread=true ____Other_Inputs=--------------------------------------- Chart_Scale=3 TradingPanelPosition_X=0 TradingPanelPosition_Y=13 TradingPanel_Width=250 TradingPanel_Height=260 Double_LineSpacing=true =======================================
+
+--- 帖子 #323 ---
+Please see attached picture for my setting (default). I can notice that my "Risk_Percent" is only 1.0 while yours shows 1.5 but it should not give such a big difference.
+
+--- 帖子 #324 ---
+At the time I post this message, these are the pending orders for 26 Jan.
+
+--- 帖子 #325 ---
+Be sure to do a few evaluations in the backtest. This is how you realize that not all pairs go well like the EURUSD. I also did a few tests with the Optimization (for 6 months so that it runs faster), but that didn't help much either. I'll use an additional trick to calculate the levels, let's see if that helps.
+
+--- 帖子 #326 ---
+Basically the strategy of AbleSys is to determine the trend with the indicator, and further use fractals and retraces for entries. You can do something similar with the "MTF_Fractal" indicator like this:
+
+--- 帖子 #327 ---
+I think it's to early to make any conclusions from my results. I have just run a simple Monte Carlo simulation based on 60% win rate and series of 30 tests returning either 1 or -1. After just a few runs the lowest negative sum/result was -12!, and there were still a few results still below my trading results.... So I think nothing unusual is happening here.
+
+--- 帖子 #328 ---
+Thanks SwingMan for the info, I was thinking about something similar, but MTF Fractal might actually be better for this.
+
+--- 帖子 #329 ---
+What I would always recommend is the Fractal Kiss idea. Wouldn't be bad to program if someone tests the idea and formulates a few rules.
+
+--- 帖子 #330 ---
+I just did a very quick visual backtest of fractal kiss idea, based on 1D direction and entry on 4H... looks very interesting indeed... I will try to get back to it next day, hopefully I will have a bit more time. ... Today's (day 5) results: 2 trades triggered: EURUSD, USDCHF, both lost. Results after 31 trades: -5R.
+
+--- 帖子 #331 ---
+I seem fractal levels are not stored in buffers from MTF indicator, so I don't know how to recall them.
+
+--- 帖子 #332 ---
+I don't understand the problem, this is not a question for a programmer... One can add to "init()" for better information: Inserted Code SetIndexLabel(0,"Fractal-UP"); SetIndexLabel(1,"Fractal-DOWN"); and one has the values here anyway; Inserted Code UpBuffer[i] = iFractals(NULL,Fractal_Timeframe,1,iBarShift(NULL,Fractal_Timeframe,Time[i])); DoBuffer[i] = iFractals(NULL,Fractal_Timeframe,2,iBarShift(NULL,Fractal_Timeframe,Time[i]));
+
+--- 帖子 #333 ---
+Day 6 results: 10 trades triggered, 2 lost: CHFJPY, EURJPY, 8 winners: AUDUSD, NZDUSD, AUDJPY, USDCAD, GPBUSD, EURUSD, USDCHF, USDJPY, Results after 41 trades: +1R
+
+--- 帖子 #334 ---
+Hi SwingMan, I realize that after restart the EA clear all active position. Could you fix this problem to not delete and close already open positions and if possible to continue manage his positions.
+
+--- 帖子 #335 ---
+OK, you mean the pending orders intraday?
+
+--- 帖子 #336 ---
+Yesterday evening (MEZ) i started the EA with a demo acc. 1.000 USD - all 28 pairs - standard set. Actuall Balance 1.074 USD Thank You!!!!
+
+--- 帖子 #337 ---
+Yes that correct. Also if I have another open positions from myself and activate EA immediately closing all of them.
+
+--- 帖子 #338 ---
+New version of Expert Advisor "smBodySwitch EA_v1.6" I hope that the error has been fixed. Added a parameter (Enable_StealthTrading=true/false) so that for many pairs not all pending orders are sent, because only a part of them are executed. Please test and let me know if this helps.
+
+--- 帖子 #339 ---
+Friday's results 3 wins: AUDUSD, NZDUSD, AUDJPY, 3 loses: USDJPY, USDCAD, EURGBP. Total after 47 trades: +1R
+
+--- 帖子 #340 ---
+The same story. For example I have opened by hand position on EURUSD. When I upload SM EA 1.6 on EURUSD immediately delete my hand open position. Also on same platform working another EA together with SM EA 1.6 when another EA open positions SM EA 1.6 immediately closed all of them.
+
+--- 帖子 #341 ---
+Were the opened orders pending or active orders? I actually deleted existing pending orders, but not active orders, I forgot to check the MagicNumber...
+
+--- 帖子 #342 ---
+I hope to have fixed the error. Generation 3 , with a hopefully better adjustment of the limits to the volatility. Indicator: "smBodySwitch Signals_v3.1" ExpertAdvisor: "smBodySwitch EA_v3.1"
+
+--- 帖子 #343 ---
+As far as I can see nobody has done any tests with historical data. I examined the majors over the weekend and it would be advisable to set "maxTrades=1" so as not to strain capital with the martingale.
+
+--- 帖子 #344 ---
+Here is a result for (maximTrades=3), where one need a little more capital to not exceed the margin. There are still small discrepancies with the martingales, maybe I'll make some adjustments in the future.
+
+--- 帖子 #345 ---
+I mean the active trades. If there are active trades EA immediately closing another one. Can you see on picture I have another EA and hi try to open position but they are closed immediately from SM EA 1.6. Attached Image (click to enlarge)
+
+--- 帖子 #346 ---
+Looks like with new version you fix this problems. I opened position by hand and SM EA 3.1 did not delete. Very nice. Thank you. Tomorrow will test wit another EA I hope will be keep all together.
+
+--- 帖子 #347 ---
+OK, in Post #342 you see that with version 3.1 I sended first a pending and a market order (0.01 lots), and after loading the EA the orders remains undeleted.
+
+--- 帖子 #348 ---
+Maybe yes, Maybe no, one must test. Here is an interesting profit curve for EURCAD between February-2018 and January-2022. The lots are calculated with the AccountBalance, with 1% risk, without martingale.
+
+--- 帖子 #349 ---
+Actually I am testing on real account with real money. The problem is that on real account the spread is quite different from demo account and I cannot trade so much currencies compare with demo account. But any way I will try. I see that in the new version 3.1 EA closed all pending orders in 22:00 Hrs. Will be good if possible as options to activate the new orders next day by himself let say 01:00 Hrs. because before 01:00 usually are very high and after that the spreads going down. If that is possible I will leave to working withhold need to wake up to arrange again for new day.
+
+--- 帖子 #350 ---
+Today the martingale crashed the demo. Too many pairs… which pairs are you @veslup trading live with this EA? Swingmans Testing of the majors without martingale Looks promising. Unfortenatly im Not really familiar with testing - so i use demo accounts. @swingman i saw, that you created a explorer - which pairs are you going to Trade with it? - &gt; edit: now I can see that on the explorer - please excuse this question thank you!!
+
+--- 帖子 #351 ---
+Monday's results: 1 trade 1 loss: USDCHF, after 48 trades i am at 0R
+
+--- 帖子 #352 ---
+Please find attached my real account pairs. I am trading with 0 - max trades. Attached Image
+
+--- 帖子 #353 ---
+Hi Swing Man, The new version 3.1 working perfecto together wit another EA and don't closing other position. Thanks allot once again. Great job.
+
+--- 帖子 #354 ---
+thank you very much!! That means all other settings you have left on default - except max trades? Thank you and many green pips for you
+
+--- 帖子 #355 ---
+That is my setting. Money management according to my account. Attached Image (click to enlarge)
+
+--- 帖子 #356 ---
+thank you very much!!
+
+--- 帖子 #357 ---
+I just checked the orders at midnight. They look awful because of the spreads, you're right, and I also wanted to shift the starting hour by 2-3 hours. But try to set the stealth mode, is a very good solution. (I just did that!) Don't forget what I wrote sometime earlier, that the levels are calculated with bid prices. This is how one also tests its functionality.
+
+--- 帖子 #358 ---
+Tuesday's results 2 trades taken, 1 won: EURUSD, 1 lost AUDUSD. Overall after 50 trades I am at BE
+
+--- 帖子 #359 ---
+Hello SWINGMAN, How are you ? I am watching and reading the thread,... until this BACKTEST result out here. I try with ICMarkets,.. I dont think its different a lot,.. but the result cannot match yours,.. Kindly post your set file please, so we can double check without the hassle. I have also DUKASCOPY data at home,.. I will upload here after check with your set file. Thanks in advance, Cheers, Budi
+
+--- 帖子 #360 ---
+But you have the setup in the picture. Specific are only maximTrades=1 reference_Account=Balance Initial deposit=5000
+
+--- 帖子 #361 ---
+Dear SWINGMAN, Glad to have your reply,... YES ,, I havethat setting CLEAR. But the problem,.. your EA have 2 different "spectacular" result when I backtesting between "Every Tick" and "Control Point". I am using DUKASCOPY tickdata. Below I report to you the result :
+
+--- 帖子 #362 ---
+Here are the result with "Control Point"
+
+--- 帖子 #363 ---
+Normally, "BOTH" method only different by very little ,.. because I am using TICKDATA. May be as a Senior programmer, you will find the bug. Here are my backtesting Setting panel :
+
+--- 帖子 #364 ---
+Unfortunately I have no explanation regarding the tests. I did the same test with Spread=11 as you did. The equity curve is the same as before (with a spread of 2), only the profit is correspondingly smaller. Probably because my data is not quite correct, my tester works in the same way as yours in the second evaluation. I will run the evaluation for 9 pairs this month, and if it ends up with a minus value, program something else...
+
+--- 帖子 #365 ---
+Wednesday's results: 3 loses: EURUSD, USDCHF, USDCAD, 1 win: GBPUSD. -2R after 54 trades. All trades were taken on demo account, set and triggered by pending orders submitted at midnight at the beginning of the daily candle.
+
+--- 帖子 #366 ---
+Hi Swing Man, Can you check there are entry value discrepancy between EA and Indicator. Here USDCAD entry value left corner is 1.04024 and as per EA should be 1.27138 and down in right corner already have profit 83 pt but the order still not yet open. Attached Image (click to enlarge)
+
+--- 帖子 #367 ---
+There will always be small differences between indicator and EA. Only if it is worth using the EA will I invest more time to put everything in order. Now I've found a big bug and I'm working at the stop and start +-3 hours from midnight. With you I see USDCHF in the chart and not USDCAD as you wrote.
+
+--- 帖子 #368 ---
+This is necessary because for your USDCHF the spread at 00:15 was 187 points, far over the calculated entry and WinPoints=83. At 13:34 the spread was 10 points! Such comments need I to make the EA better.
+
+--- 帖子 #369 ---
+New Expert Advisor version "smBodySwitch EA_v3.2" - No orders between 21:00 and 03:00 - Some bugs fixed - The background of the charts changes for active trades (Buy/Sell). A new script "smApplayTemplate AllCharts" with which one can assign a template in all charts of the workspace. This is helpful to save a lot of time. I have now started the Trade Explorer with 28 pairs, leverage 1:500. The parameter (maxTrades=7), let's see what happens.
+
+--- 帖子 #370 ---
+Great Work Swingman I will do foward testing
+
+--- 帖子 #371 ---
+Hi Alberto, watch out for the capital in testing if you test several pairs! With FxPro you have leverage 1:30. Margin for a pair is: Margin=Lots*(100,000/30)=Lots*3,333 For 0.3 lots you need also $1,000 margin. At leverage 1:500, Margin=Lots*200, and for 0.3 lots you need $60 margin. In the test on EURUSD with 7 levels I used once in the year 7.5 lots. The margin would have been $1,500, so I bet $10,000 on Trade Explorer for that reason.
+
+--- 帖子 #372 ---
+My last week Thursday's results are 5 wins, 4 losses, so ended up at -1R after 63 trades. I have decided to pause testing this system with original settings on live market for now and I will try to look into the trend-following idea SwingMan mentioned earlier.
+
+--- 帖子 #373 ---
+You shall never test an EA live again, until the author gives you written confirmation that the program is running error free!
+
+--- 帖子 #374 ---
+I stopped the TradeExplorer because the ReverseOrder was not executed for AUDNZD and also the TrailingStop is not displayed correctly. Now I have to find the causes.
+
+--- 帖子 #375 ---
+For clarification, I have newer used your EA (only indicator). As I mentioned earlier I was trying to test if there is an edge in your system entries and exists on its own based on what your indicator showed at the begining of new daily candle. All the trades were set up via pending orders and traded on demo account (we have already discussed this couple pages back !?)
+
+--- 帖子 #376 ---
+OK, I forgot about that. Then I'm not responsible for what you do, nor do I take part in the profits...
+
+--- 帖子 #377 ---
+Dear SwingMan, Thanks for the V 3.2 --&gt; anyway I try to backtesting this version,... Lets see what will happened. Cheers, Budi
+
+--- 帖子 #378 ---
+New ExpertAdvisor version "smBodySwitch EA_v3.3" - Some corrections and adjustments were made. - Workspace with 28 pairs and 2 dummys. Right now there are three pending orders activated. This is only done near the entry levels so that one does not send 28 pending orders at once, and many are not activated later.
+
+--- 帖子 #379 ---
+Dear SwingMan, Congratulations,.... May you share us the setting you use ? Best Regards, Budi
+
+--- 帖子 #380 ---
+It's the default settings because I load the EA directly and don't want to make any changes. Later when I do any tests I might make adjustments for certain pairs. So far have found in the tester that the default values are satisfactory.
+
+--- 帖子 #381 ---
+Dear SwingMan, DEFAULT setting means "maxim Trades = 10 ", "Reference_Account = Account Specified" , or you change to other setting ? Thanks, Budi Dharma
+
+--- 帖子 #382 ---
+Very good job. When I wakeup morning all orders were on please. No need any more to wait until midnight. Attached Image (click to enlarge)
+
+--- 帖子 #383 ---
+I am not changing anything at this time. If you test and find better settings, let us know. - The "maxTrades" limit the levels of the martingale, and hopefully the margin will be valid at this broker. - The "Reference_Account" is intended for the calculation of the initial lots, which can be increased a lot in martingale.
+
+--- 帖子 #384 ---
+I'm glad because you can now earn many thousands of money while you sleep. (I do that too...)
+
+--- 帖子 #385 ---
+The account in TradeExplorer was heavily used by the trades on NZDCHF because all CHF pairs have leverage 1:33 instead of 1:500 like all others, and the margin was no longer sufficient. So I had to remove these pairs from the workspace: AUDCHF, CADCHF, CHFJPY, EURCHF, GBPCHF, NZDCHF, UJSDCHF. A new account has been created and will be connected to TradeExplorer.
+
+--- 帖子 #386 ---
+Excellent job today until now. On my real account. Attached Image (click to enlarge) Thanks a lot once again SwingMan.
+
+--- 帖子 #387 ---
+I was trying to optimize those 3 factors (Entry, Take Profit, Stop Loss) for GBPUSD. Attached Image (click to enlarge) Here is the best performance report. Attached Image (click to enlarge) One error in the tester journal shows this: OrderSend error: 130 Attached Image Just report back, and maybe need to be checked. Thank you SwingMan.
+
+--- 帖子 #388 ---
+Thanks @kitpu for your analysis! Generally speaking, there are very interesting conclusions: - The entry can be close to the previous high/low of the body (0.1). - The TakeProfit factor remains quite small (0.30). - The StopLoss factor is twice the TakeProfit factor (0.60), and this corresponds to many recommendations for a ratio (1:2 Win/Loss). Many recommend a ratio (2:1 win/loss) but we have to blindly follow @kitpu's proof!
+
+--- 帖子 #389 ---
+It's ok, congratulations, but please delete all CHF pairs if you have leverage of 1:500.
+
+--- 帖子 #390 ---
+I also backtest the same parameter with Entry 0.1/TP 0.3/ SL 0.6 for GBPUSD but using H4 instead of D1. Just to get a sense how the other time frame performs. I got slightly better performance in terms of profit, as attached. Attached Image (click to enlarge) Some OrderSend Error 3 and 130 are still presented in the journal, FYI. Attached Image error code 130 seems to be invalid stops error code 3 is probably invalid trade parameters, don't know what those are Appreciate SwingMan for the efforts. I will test out these parameters for the rest of the pairs and instruments and check back later.
+
+--- 帖子 #391 ---
+Here is a temporary version 3.4.0 Please test the days near the error messages, maybe it will get better. If you post, please include the lines before the messages, maybe I can find the cause faster.
+
+--- 帖子 #392 ---
+Hi SwingMan, please see the attached 3.4.0 tester zipped log (the file size without zipped is huge) as well as the set file. Hope this helps. Cheers.
+
+--- 帖子 #393 ---
+Hello SwingMan, I tried also version 3.4,... Still got error messages,.. as follow,... Hope can help you to make the EA bugless,.. Cheers, Budi
+
+--- 帖子 #394 ---
+I believe the errors are caused by the spread. Here's a small change, test if it helps. Until the errors are fixed, please only test from January 2022 so that I can also have M5 prices. Write the broker and the setting as well, because I have completely different test results for Pepperstone and Valutrades.
+
+--- 帖子 #395 ---
+Dear SWINGMAN, Thanks for your response,... I am testing using DUKASCOPY Tickdata ,... so the data will be OK,.. and complete all the TF. I will retest once again and let you know the result,... Cheers, Budi
+
+--- 帖子 #396 ---
+There are no TF's. Everything is calculated for D1 even if the chart is H4, H1 etc. I must learn to download the Dukascopy data - if that helps...
+
+--- 帖子 #397 ---
+This version looks good to me. Those OrderSend errors no longer appear. Thank you SwingMan.
+
+--- 帖子 #398 ---
+I have backtested from 01.09.2021 till 09.02.2022 for 5 months and after proper reports in "eurusd" installed in demo with another my own EA but it clash with my old robot (EA) and after installation of smBody EA my all trade with SL hits and closing trade in loss in my own EA and sm Body EA open BUY trade 4.13LOT initiated and market crash and 2882.74 open trade yet. is it advisable to install when 1 old robo is working in same acct ? how i can installed both in big equity acct ? Pl. guide me
+
+--- 帖子 #399 ---
+If I understand correctly, the "BodySwitch EA" closes order from another EA. The "BodySwitch EA" works with (MagicNumber=1000), and only closes orders with this number. Inserted Code if(dClose&lt;=lossLevel &amp;&amp; order.MagicNumberX==MagicNumber) If that's how I understand it, you also have "MagicNumber=1000" and have to change the MagicNumber in your EA or in the BodySwitch.
+
+--- 帖子 #400 ---
+Dear SwingMan, I am dedicated this optimized result for EURUSD since 2021 for this THREAD,.. hope helpful. Using Dukascopy Tick data for &gt;99% quality If you all like it I will optimize more pairs. Cheers, Budi
+
+--- 帖子 #401 ---
+If you have time, please test a few more pairs and create a small table with the essential characteristic, possibly also with the largest LotValue. I now have a new EA variant for what I called "Generation-5", and later it would be important to know if it is better or not than "Generation-3". I don't have the time to program it now, but maybe I'll be able to start in about two weeks.
+
+--- 帖子 #402 ---
+MAGIC NO. 1000 FOR SwingMan another Ea having 5 digit magic no. then also any order open with otherthan Swingman it get SL and closed that trade, like that so many order closed hence finally have to stop SwingMan EA and then market gone don and hat trade still open in loss.
+
+--- 帖子 #403 ---
+From your description, with my English I honestly don't understand where the problem is. Maybe if you had written: 1.Start EA1 on pair XXX and EA2 on same pair XXX, 2.EA1 close Order, 3.EA2 dont close, Order etc. You can have two accounts if you use two EAs for the same pairs, or don't use the "BodySwitch EA" anymore. Very simple, you just have to trade on two separate platforms. Or you trade some pairs with one EA and others with the second, no problem.
+
+--- 帖子 #404 ---
+Hi SwingMan, could you please shade some light what the "StealthTrading" parameter is in the EA? Thanks.
+
+--- 帖子 #405 ---
+If you don't know the term "StealthTrading" for the EAs, then you might know "StealthBomber"... If you want to send orders without the broker noticing where is your Entry, TP and SL to fish your lots, then the orders are sent as MarketOrders, then when a BuyStop would have fired them too .
+
+--- 帖子 #406 ---
+Dear SwingMan and all friends, Here are GBPUSD for year 2021-2022 For LARGER lot size, just add in more RISK to go,... Cheers,...
+
+--- 帖子 #407 ---
+ok. Noted ( will not use same pair two different ea, particularly swingman)
+
+--- 帖子 #408 ---
+Here are AUDUSD,....
+
+--- 帖子 #409 ---
+this to be installed as normal ex4 file in mql/ expert folder ? It will start trading in all pairs ? Instead of 1 pair only. ? This will be excellent if it is multi pair... Pl guide .. Will act as per your instruction. Waiting..
+
+--- 帖子 #410 ---
+Even that wouldn't be bad, with 20 pairs at a bet of $5,000 one earns $20,000 in a year... But for multiple pairs one should pay attention to the margin for the largest lot number.
+
+--- 帖子 #411 ---
+Not now. But why? I only program a dashboard with several pairs if someone is satisfied with the EA for a long time. The EA is still in development and testing, and because it works with martingale it can bring big losses.
+
+--- 帖子 #412 ---
+Here are USDCAD with a bit LOW RISK
+
+--- 帖子 #413 ---
+I will calculate as a PACKAGES, when all the pairs finished, likely 0,5% Risk can apply all pairs with satisfied Profit Hoping,.....
+
+--- 帖子 #414 ---
+Here USDCHF ,...
+
+--- 帖子 #415 ---
+For CHF pairs the results are not so good. Away with it... The margin is risky to stop the trade.
+
+--- 帖子 #416 ---
+Here are USDJPY,..also not so good,...
+
+--- 帖子 #417 ---
+Here good enough AUDCAD ,...
+
+--- 帖子 #418 ---
+Here are AUDCHF,...
+
+--- 帖子 #419 ---
+Here are AUDJPY,...
+
+--- 帖子 #420 ---
+Here AUDNZD ( dont try this at home ! ),...
+
+--- 帖子 #421 ---
+Here are CADCHF,
+
+--- 帖子 #422 ---
+Strange... For only 3 losses, such a drawdown?
+
+--- 帖子 #423 ---
+Will check it again after finished with another pairs,...
+
+--- 帖子 #424 ---
+Here are CADJPY,
+
+--- 帖子 #425 ---
+Here are CHFJPY,..
+
+--- 帖子 #426 ---
+I suppose is a hedge trade on a day (weekend?) with gap.
+
+--- 帖子 #427 ---
+Here are EURAUD :
+
+--- 帖子 #428 ---
+Here are EURCAD :
+
+--- 帖子 #429 ---
+Here are EURCHF, always PROBLEM,..dont try this at HOME :
+
+--- 帖子 #430 ---
+Here are EURGBP :
+
+--- 帖子 #431 ---
+Here are EURJPY :
+
+--- 帖子 #432 ---
+Here are EURNZD :
+
+--- 帖子 #433 ---
+Here are GBPAUD :
+
+--- 帖子 #434 ---
+AUDCAD went a wild run today, possibly due to news: Attached Image (click to enlarge) 1: Buy 0.24 lot, hit SL, P/L $-64.75 2: Sell 1.79 lot, hit another SL, P/L $-388.94 3: Buy 11.11 lot, hit TP, P/L 358.91, so overall still P/L $-94.78, with some commission fee. Cheers.
+
+--- 帖子 #435 ---
+I wish you good luck, but I'm done. For several days I tested 28 pairs and found all the shortcomings of the martingale.
+
+--- 帖子 #436 ---
+Here are GBPCAD :
+
+--- 帖子 #437 ---
+Here are GBPCHF :
+
+--- 帖子 #438 ---
+Here are NZDJPY :
+
+--- 帖子 #439 ---
+Here are GBPJPY , danger :
+
+--- 帖子 #440 ---
+Optimization results:
+
+--- 帖子 #441 ---
+Here are GBPNZD :
+
+--- 帖子 #442 ---
+Here are NZDCAD :
+
+--- 帖子 #443 ---
+Congratulations @budidharma19 ! You have traded a whole year with a lot of patience, and your success is visible: you turned $5,000 into $17,900, and even though the HedgeMartingale seemed dangerous at times, your nerves resisted. I can now take your example, transfer $50,000 to my trading account, and this year I can live comfortably with a profit of around $180,000.
+
+--- 帖子 #444 ---
+I recon that he did not trade - he tested on demo. And he invested 5.000 in each test. That is a total of 130.000 and the total gain were 18.000. I guess that I am wrong about this. Sorry to bring it up.
+
+--- 帖子 #445 ---
+Hi Sparrow, messages to you are blocked.
+
+--- 帖子 #446 ---
+I could also have written "had you traded live all year...etc". But then where would be my fun and the recognition and encouragement for @budi's work? Great respect also for the nickname: He can take for his avatar the image of the monk : https://upload.wikimedia.org/wikiped...itoshi1887.jpg Now as far as the practical thing goes, I can't say much, I'm not a trader but you are. I guess that $5,000 can be traded for a while, maybe better with $10,000 and risk 2%. The big problem with the martingales will be the margin, so at first don't trade CHF pairs (leverage 1:30). With these EA, a maximum of maybe 4-5 pairs are traded per day, not all at the same time, and then the margin would be sufficient (for leverage 1:500). I posted the formula: Margin=Lots*(100,000/500) For 1 lot = $200, and for reached 8 lots = $1,600, everything is doable.
+
+--- 帖子 #447 ---
+Here the last NZDCHF :
+
+--- 帖子 #448 ---
+Dear SwingMan and all, Let me deliver my point of view,... The backtest result can be adjusted statistically to be FIX amount of risk. I mean that the "RISK" adjustment can be up and down compared to DRAWDOWN. Lets make the DRAWDOWN FIX,.. lets say USD 1000, and lets assume that 8 pairs traded together. So USD 10000 equity likely enough. I will make table,.. and I will adjust, which PROFIT projection will good for which PAIRS,.. and lets see. But I need time,... Cheers, Budi
+
+--- 帖子 #449 ---
+Last week level 10 was reached in AUDCAD, and the lot number was not increased anymore. If the EA had traded another level, the losses would be compensated!
+
+--- 帖子 #450 ---
+New generation "5" for the BodySwitch signals and for the EA. The reference is no longer at the previous bar, but at the open of the current bar, in the direction of the main trend. The factors without optimization are 0.4, 0.3, 0.3 After my few tests, however, I have no better results than with the 3-versions, and the maximum lot number was often reached... As a conclusion - probably this is not a better version. But I will run them until a substantial loss will take place.
+
+--- 帖子 #451 ---
+_______________ Thanks SwingMan for ALL ur Hard work !
+
+--- 帖子 #452 ---
+Hello Swingman, Would like to first thank you for your contribution in FF as a whole. I however have a request regarding one your fantastic works that I rely on heavily for my trading. Could you kindly add a signal to smBBMA_Amir DB_v2.0? It does screens the pairs and give awesome signals but doesn't give an alert.
+
+--- 帖子 #453 ---
+Hi SM could you confirm that the entry point (for long trades) is defined as follow? Entry_Point = Open[0]+iATR(NULL,0,14,1)*factor I don't know if the ATR inputs are correct. Thank you
+
+--- 帖子 #454 ---
+In principle it is as you wrote. But it is not always the ATR. At some point I found that an optimal value is the minimum value of ATR and the bandwidth of MA's 10 and 8 on the high and low. I posted the indicator. The EA is too dangerous (!) and will not develop it further. Until I program a new one, let it run.
+
+--- 帖子 #455 ---
+The indicator is incorrect.
+
+--- 帖子 #456 ---
+I just started a new thread based on SM Body Switch Indicator. https://www.forexfactory.com/thread/...itch-indicator
+
+--- 帖子 #457 ---
+Hi Dokopy. What do you mean incorrect?. I'm looking at it now on several pairs I traded today and it's very accurate. What is missing is the alerts. It would also be disrespectful for us to discuss this EA here since this is a different thread. Kindly go to the relevant thread and post screenshots showing your charts and the EA so you can verify your claim, I may as well be wrong .
+
+--- 帖子 #458 ---
+Hi @Nonip , I'm sorry I haven't found the right source code yet. Something has been lost.
+
+--- 帖子 #459 ---
+I put it among the other indicators. Cannot move to chart. Is it EA?
+
+--- 帖子 #460 ---
+Yes, its EA. Put it among experts and open it on blank chart.
+
+--- 帖子 #461 ---
+No pressure swingman, will wait patiently .
+
+--- 帖子 #462 ---
+Thanks, I'm glad to try it. The notification can be replaced by placing it on a demo account together with an indicator that signals the opening of trades.
+
+--- 帖子 #463 ---
+Hi Swingman, Any progress on this, I'm missing so many trades and feeling really overwhelmed monitoring a number of charts concurrently. Please SAVE me here .
+
+--- 帖子 #464 ---
+Unfortunately not. I've been suffering from a mouth infection for a week, and I can only answer you when I'm in great pain... But keep asking, maybe I'll find somewhere.
+
+--- 帖子 #465 ---
+Sorry to hear this Swingman, I wish you quick recovery.
+
+--- 帖子 #466 ---
+Hi SM, have a nice recovery!
+
+--- 帖子 #467 ---
+Hi @nonip, because I couldn't find the original code, I've now made an adjustment so that everything works. What kind of alert is that supposed to be? When both arrows appear with the same direction in a TimeFrame? Please compare the functionality in both EAs and write if and what differences there are.
+
+--- 帖子 #468 ---
+Wow swingman You're God sent. I will have a look at both and tell precisely which alert type would be most effective. Thanks again swing man. WOW WOW WOW
+
+--- 帖子 #469 ---
+I hope I’m not demanding too much Swingman. Having worked a little with programmers before, I understand how important it is for you guys that the requirements be as detailed as possible. To this end I will provide attached annotated pictures as well. Terminologies I will use in explaining the alerts; MAHI is MA10 &amp; MA5 high. MALO is MA10 &amp; MA5 low. I’m only interested in the re-entry alerts of BBMA and I hope that this can be achieved through the framework that already exist within the dashboard or with a little adjustment. This happens only after two conditions: 1. After a CSDC (Candlestick direction confirmed) . That is a Candlestick that closes below moving average low (MALO) and Mid BB &amp; vice versa. For initial alert Let’s assume we have a bullish CSDC (current candlestick closes above moving average high (MAHI) and Mid BB) the dashboard should indicate an alert message such as “Bullish CSDC H4”. (This was indicated in the previous dashboard by both the round arrow for MAHI touch and a straight arrow for a bound touch). For reentry alert. Now I would suggest that if within the same timeframe should price touch opposite moving averages (MALO) within the next 7 candles the dashboard should provide an alert “Bullish CSDC reentry H4”. The same should be true for a sell. NB: Kindly ignore the green large line (EMA 50) in the above picture. 1. After a momentum candlestick also known as CSM . This is a Candle stick that closes below the lower BB or above the upper BB. For initial alert Let’s assume we have a bullish CSM (current candlestick closes above top BB) the dashboard should indicate an alert message such as “Bullish CSM H4”. (This was indicated in the previous dashboard by a straight arrow appearing for band touch). For reentry alert. Now I would suggest that if within the same timeframe should price touch the (MALO) moving average low within the next 7 candles the dashboard should provide an alert “Bullish CSM reentry H4”. The same should be true for a sell. I have also attached a word document for the same. Regards, Nonip.
+
+--- 帖子 #470 ---
+I understand that the above suggested adjustments may require your extra effort and time which may not be available now. In that case I would gladly settle for an alert whenever there's a touch of the MALO/MAHI and a Bollinger band at the same time on any timeframe. Regards, Nonip.
+
+--- 帖子 #471 ---
+Pls I need someone to tell me what is happening to cadjpy right now because its not making me happy
+
+--- 帖子 #472 ---
+CAD is strong and Yen is weak so its going up.
+
+--- 帖子 #473 ---
+Hello SwingMan, I hope you are well. You never got back to me regarding this post which I responded to with posts #469 and # 470. TIA. Kind regards, Nonip.
+
+--- 帖子 #474 ---
+Hello SwingMan, I hope you are well. Still hoping you will assist with regards to post 456. TIA. kind regards, Nonip.
+
+--- 帖子 #475 ---
+Hi @Nonip, honestly, I'm very sorry that I don't have time for programming right now.
+
+--- 帖子 #476 ---
+Okay Swingman, I understand. Still very grateful for all your other tools I use .
+
+--- 帖子 #477 ---
+SR SwingMan. Are you so kind to enter BTCUSD in your indicator. Thank you very much Greetings from Tenerife Spain smBBMA_Amir DB_v3.0.ex4
+
+--- 帖子 #478 ---
+do you use this strategy? and wat is the success rate,i always liked this strategy
+
+--- 帖子 #479 ---
+He literally wrote that he doesnt have time for programming currently
+
+--- 帖子 #480 ---
+I did use it for a while but stopped. Its really difficult to monitor multiple pairs with this strategy so you need a good indicator or EA to compliment. It's a good strategy but you have to use good risk management like with every strategy.
+
+--- 帖子 #145 ---
+risk management is very importnat,so jsut pick few pairs and trade,many trades will mess up with account equity
+
+--- 帖子 #146 ---
+Hello. Could you please tell me how to test the smBodySwitch EA_v5.0 on M1 and M5 timeframes? Why does it not trade on these lower timeframes? I want to test it on these timeframes. Please make it possible to trade on lower timeframes. M1, M5. Thanks for the tip.
+
+--- 帖子 #147 ---
+Would you be willing to share the EA that you build with us? thanks.
+
+--- 帖子 #148 ---
+Hello, Is there a chance that you can share a source code? I would like to make some improvements to it to trading needs. thanks.
+
+--- 帖子 #149 ---
+Exceptionally, because today is May 1st, I am posting the source code for smBodySwitch for you...
+
+--- 帖子 #150 ---
+thank you so much!!! this is very incredible, I will make additional changes and share back with you.
+
+
+===== 附件下载链接 =====
+

@@ -1,0 +1,1361 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+My first thread in this forum, I am so excited... The idea for this EA started in another thread: https://www.forexfactory.com/showthread.php?t=792598 Therefore this EA is based on the wonderful EA called “Blessing 3 v3.9.6.09”. The idea to try to build a multipair version came up in the above mentioned thread. After some brainstorming I began to like the idea. Though Blessing and multipair is kind of a contradiction. Blessing has so many parameters to finetune the EA exactly to your pair to trade, the time frame, your risk and and and. But anyway it might be worth a try to find some “global settings” that work well for all pairs. Just adjusted to the time frame and other global parameters (risk, broker and and and). What did I basically do? I took the latest source code from the original thread (“Blessing 3 v3.9.6.13”). … cleaned it from almost all display output … introduced a big struct that holds the variables for the pair to trade The start function is running a long “for to” loop over an array of the structs for the pairs to trade I took out the hedge function only one and fixed magical number to be able to monitor the trades via a dashboard ...moved the main part of the holiday check to the beginning of the start function Sounds simple but gave me some headache as the debug options for bugfixing in MT4 are really poor, compared to a “real” compiler. I can only perform backtesting with one pair at a time, which is not enough for a multipair EA. In realtime mode I can see whether it is working, but it is difficult to see if it is working in the right way . Enough words written: please take a look at the code and feel free to give feedback. There are for sure still many open points that I would love to discuss here in this thread. Especially when it comes to global settings (e.g. number of open trades) that might need to be moved into the struct. And please play around with different set-files to see which settings come close to “one size fits all” (thx Grand Wazoo). As a good starting point I can recommend the collection from Richard96816, that can be found in this post: https://www.forexfactory.com/showthr...4#post12628494 (thanks a million, Richard!) → for backtesting, the setting for „Use the 28 default pairs“ must be set to false and in the „comma separated own pair list“ only the symbol (e.g. XAUUSD) that is used in the tester has to be input. → for live testing (better on a demo first..) please do NOT use small timeframes and many pairs with only one entry condition. The EA will open, close, modify in such a high frequency, that your broker will close your account faster than you can click. Happened to me ;-) Have fun! REMEMBER This is a code for learning and testing purposes only. Everything you do, you do on you own risk! In no event I will be liable for any damages whatsoever.
+
+--- 帖子 #2 ---
+Thanks a lot for starting this journey with new thread I have very little knowledge on coding part but from time to time I can test with the setup I am having and present the case here . Thanks .. yes thanks to Richard also he has given lots of new ideas to use the old blessing code definitely in new way.
+
+--- 帖子 #3 ---
+Remember that post? https://www.forexfactory.com/showthr...7#post12551567 Well, I used the settings and made a backtest from 01.Nov.2019 to 10.Jan.2020. 5 Minutes timeframe, for all 28 pairs. What can I say: that already looks like the winner to be tested on the Blessing-Multipair. Can't wait for Sidney open... Here are the results:
+
+--- 帖子 #4 ---
+Thanks for new 3dand new blessing multipairs... So if i understood the result above are backtested using the 5min set file from other 3d right? What about set file you posted xususd... ? And how many max pairs do you seggests to use to avoid broker limits? Thanks Regards
+
+--- 帖子 #5 ---
+Your welcome! And thank you for joining the thread! Right! I have a bunch of setfiles from the other Blessing thread. I picked that one for backtesting first, as it is alread used successfully on a live account (with the original blessing). That is just a set-file example for backtesting with the MT4 strategy tester. One pair, no 28 default pairs. The number of pairs is not the biggest problem: the entry conditions are much more important. The default setting has only the MA as entry indicator. This opens trades for almost every pair instantly. Good for testing, bad for trading ;-) The set-file I used for backtesting is using Bollinger Bands. Does not open too many trades over the time, not even in the M5 time frame. You can see it in the statistics. Okay, that's backtesting on a demo account. Tonight I will start with forward testing on the demo account... I should get some sleep as well... ************************edit******************************** here is the direct link to the "BLESS 5 MINUTES ALL PAIRS ONE DAY 50 DOLLARS.set": https://www.forexfactory.com/attachm...9&amp;d=1532217693
+
+--- 帖子 #6 ---
+Do we have a setfile to test on monday?
+
+--- 帖子 #7 ---
+Basically you can use any testfile from older "original" blessing versions. Parameters that do not exist anymore will be omitted, new parameters that are not contained in older setfiles will use default settings. As the default for BlessingLite Multipair is UseDefaultPairs = true, you just need to load any blessing setfile that you like and then get started... *************edit********** I will try that one tonight:
+
+--- 帖子 #8 ---
+Good show! You might want to create a settable minimum delay between trades to fix the over-trading problem. That's a common feature on multi-pair EAs. You could save the time from the most recent open of each pair, then compare with current time each attempt to open another trade. Only allow new opens to succeed if elapsed time is greater than some externally set value. Good luck!
+
+--- 帖子 #9 ---
+Thanks for the feedback Richard! That's the way I hope this thread will continue... The challenge is not only over-trading, it is also the "over-modifying". Moving TP, moving buy/sell/limits/stops: all this has to be monitored. I will wait and see how the EA will behave tonight, with the bollinger band indicator compared to the MA. In the backtest even on the M5 timeframe bollinger is much more calm... Thanks... but luck is not the only thing I need: my idea was to use this thread as an open source community. Everybody can and should take a look at the source code and see where it can be improved or find these small bugs... if someone knows how to transfer the code into mq5 quickly, this would be advantageous for debugging. Setting breakpoints in the strategy tester would already save hours during development. Okay, next to-do would be the delay parameter and something like this (setting from a dashboard EA):
+
+--- 帖子 #10 ---
+Thanks for your effort! Looks interesting.
+
+--- 帖子 #11 ---
+The EA works fine in the Strategy Tester but when I try to install it on a live chart, my MT4 won't let me. Accordingly, the following error message appears in the Journal: " 2020.01.12 10:29:02.624 'BlessingLite_3_v3.9.6.24_beta' is not expert and cannot be executed "
+
+--- 帖子 #12 ---
+Which build are you using? Did you put the EA in the right folder? I used the mq4 file in different broker installations, all build 1220. No problems. Compiles without error.
+
+--- 帖子 #13 ---
+I initially encountered the same issue with other Blessing versions and solved changing int start() method with void OnTick(). See here: https://www.forexfactory.com/showthr...4#post12673354 Perhaps it could be useful to update source code naming according to new MT4 Build 600+ compliance. Best regards.
+
+--- 帖子 #14 ---
+Jipp, I was reading about that as well. Anyone knows why it works fine on all my new 1220 build installations? Remember: when you change to OnTick(), you have to change also all the return calls!
+
+--- 帖子 #15 ---
+Just to verify, I placed the EA on to a live chart with no issues, not tried ST but the assumption would be, no issues, (MT4 version 4 build 1220) still testing the older version of blessing. Ursinho, well done and good luck on the new thread D
+
+--- 帖子 #16 ---
+Just to confirm; I am using build 1220 and the EA is in the correct folder. I had been using Blessing_3_v3.9.6.13_beta without any issues.
+
+--- 帖子 #17 ---
+Any messages when you compile it in the Meta-Editor? I will change the code to OnTick when my daughter goes to sleep (probably not before midnight ;-)) )
+
+--- 帖子 #18 ---
+Yes, I forgot to write that to maintain backward compatibility with Blessing code I renamed int start() to int DoStart() called by void OnTick(): void OnTick() { int retValue = DoStart(); } int DoStart() // ex start() { ...
+
+--- 帖子 #19 ---
+No warnings or errors when I compile the .mq4 Attached Image
+
+--- 帖子 #20 ---
+See if that one works, I changed everything to OnXXX...
+
+--- 帖子 #21 ---
+Problem solved. Thanks!
+
+--- 帖子 #22 ---
+this complies fine for me, thanks, loaded on demo
+
+--- 帖子 #23 ---
+it's running... ;-)
+
+--- 帖子 #24 ---
+Ursinho, hope you don't mind me posting this one and only time, I am testing the older version on the same pairs but omitted the CHF crosses, (live) I have been doing some backtesting and found a very good low DD, while I know this is a little conflicting, I thought I may add my post only in the research terms that any good finding can be tuped over to the new version, if however you would like the post removed, or anyone would, I will do so immediately and will not be offended in any way, D
+
+--- 帖子 #25 ---
+Not at all! That's want I wanted, an open discussion... So you are testing each pair in a separate chart, right? Do you use the same setfiles for them? If yes, just share it or use it over the BlessingLite. As I mentioned before: "it's running" does not necessarily mean "it's running properly" ;-)
+
+--- 帖子 #26 ---
+Yes all on separate charts with unique MN, trouble is they use Bollinger bands &amp; MACD in reverse trading, something Blessing light does not allow, or have I missed something? the trades are not as frequent and I may be overstetched a little, however, less frequent will put less stress on the account, I can post the set file if required, thank you for sanctioning my post D EDIT Same set file for all.
+
+--- 帖子 #27 ---
+Sure BlessingLite allows it. The "only" difference to the normal Blessing is, that it runs one setting over many pairs at once. Without needing to open 28 charts and having to think about 28 setfiles...
+
+--- 帖子 #28 ---
+The grid seems to work (but does it work right?):
+
+--- 帖子 #29 ---
+Sorry me bad, your right, click on action and noticed "reverse", ok will continue as is, looks like the thread needs to be clear while your testing, will not be far, D
+
+--- 帖子 #30 ---
+@ll! Here is another reason why I wanted to have the EA as multipair-version: now I can monitor and control all open trades via one dashboard. I can set a basket TP, basket SL, close all manually...
+
+--- 帖子 #31 ---
+Excellent addition
+
+--- 帖子 #32 ---
+... is anyone else besides me enjoying the EA? I think it's fun watching. Better than TV...
+
+--- 帖子 #33 ---
+Suppose I can relate but my own programme is playing, 21 pairs LOL, good luck, time for my bed, hope I wake to us both getting great results, D
+
+--- 帖子 #34 ---
+As I already feared, now comes the difficult part in bugfixing... basically the EA runs. Opens pending orders. Everything was cool. Suddenly it decided to close everything: Closed 15 position because Profit Trailing Stop Reached 50% Analyzing the code, I assume following happened: one pair really reached the condition PTS reached. Went into the Exit Trade Function with the parameter "A" for All. Means: close all positions with the corresponding magic number. --&gt; we have to be sure, that when a condition for a pair is met, only actions for that pair should be taken. In this case "close all positions for that pair". I will dive into the code again... (didn't I want to sleep?)
+
+--- 帖子 #35 ---
+Okay, more coding ahead. But not today, my head is empty. At least I know where to start: In the start function: Count Open Orders, Lots and Totals Check for and Delete hanging pending orders Trade Selection Logic in the subfunction: Exit Trade Function Everywhere, where the OrdersTotal() appears it needs to be replaced by something like "OrdersTotalPair". Which is the sum of struct pairinf { int CbB; // Count buy int CbS; // Count sell int CpBL; // Count buy limit int CpSL; // Count sell limit int CpBS; // Count buy stop int CpSS; // Count sell stop Right? Somebody wants to join me coding...?
+
+--- 帖子 #36 ---
+Some piece of code as discussed in that thread can be used in the part "Count Open Orders, Lots and Totals" https://www.mql5.com/en/forum/142179 Hm, maybe a new function? I will think about it in my sleep... (in C++ or mq5 I would work with doubly linked lists: just a chain of ticket-numbers in the struct. Probably I have to stick with arrays in mq4 though...)
+
+--- 帖子 #37 ---
+First of all I would like to Thank you all the coder whose efforts and talents you shared to us. I try to install on Live account ( XM ultra low) even BlessingLite_3_v3.9.6.24_beta but have no luck. MT4 ver 4.00 Build 1220 2020.01.13 10:53:16.047 Expert BlessingLite_3_v3.9.6.25_beta EURUSD#,M5: removed 2020.01.13 10:53:14.027 Expert BlessingLite_3_v3.9.6.25_beta EURUSD#,M5: loaded successfully
+
+--- 帖子 #38 ---
+In the terminal go to expert and see if there is some kind of error message. Might be a division by zero because of missing market-info for a pair in the list. Known problem, it's on my to-do...
+
+--- 帖子 #39 ---
+Ha! I was thinking too complicated! As simple if(OrderMagicNumber() != Magic || OrderSymbol() != TradePairs[i]) continue; should do it... NOW I can go to sleep ;-) Good night @all!
+
+--- 帖子 #40 ---
+will test this on demo to see how it work and if it really work and if need to be revised
+
+--- 帖子 #41 ---
+nice dashboard to have
+
+--- 帖子 #42 ---
+It works (basically), but please wait: I am just testing the bugfix for closing all positions instead of just closing positions for the TradePair still did not sleep...
+
+--- 帖子 #43 ---
+Try that one, I introduced the TradePair into the ExitTrade... please see if the exits now work better. Still some work ahead...
+
+--- 帖子 #44 ---
+Ok i've started yesterday with setting file you posted and suppose are you using.... (bollinger) But on 5min tf i have totally different pairs traded.... Broker ic markets Sure not the same setting i suppose... Thanks for effort Best regards Attached Image (click to enlarge)
+
+--- 帖子 #45 ---
+unless you did not start the EA exactly at the same time, with exactly the same environment... then it is almost a must that you have different pairs to trade! Don't forget that we are on a fast timeframe... what did you expect? I think I will sleep now... Bugfixed (closing wrong pending positions) version comes today in the evening...
+
+--- 帖子 #46 ---
+Thanks Take care Regards
+
+--- 帖子 #47 ---
+betabugfix looks good, I will let it run for some more time. Behaviour as expected (or at least hoped): here and there small but steady wins, until now low DD. Just like a squirrel ;-)
+
+--- 帖子 #48 ---
+Is this normal? Just order for jpy related pairs? Attached Image (click to enlarge) no it wasn't... now i changed chart (AUDUSD) and load again Ea and i have some order placed for all pairs a part jpy ones....still confused Regards
+
+--- 帖子 #49 ---
+The same here on H1
+
+--- 帖子 #50 ---
+Sticking with the original Inputs / Properties names would have been nice. Especially for compatibility with the Blessing manual and for those of us that have optimized the original a few thousand times ... :-) Also nice when you're looking at the code and making adjustments. That's what all those double semicolons were for.
+
+--- 帖子 #51 ---
+Ah, thanks for this info! When I looked at the code from versions .10 on following, I thought: "what the heck...". Now it makes sense... I think I did it, or at least tried to as much as possible. Many variables just got an pairinfo[]. in front of their original name, as they moved into the big struct. I tried to avoid as much work as possible ;-) ... ... and to keep the blessing "heart" as original as possible (did not get much sleep the last days before Sidney open..)
+
+--- 帖子 #52 ---
+If we wanted to, we could restart from version 09 (or better 13?) again. I stuck with most of the delta-files, that's why I already counted to 26 in the version number. The first approach was to see whether it makes sense to follow the idea of a multipair-Blessing. When I look at the results of my last beta-version (with the 5-minutes set-file) I have to say: certainly yes! The big difference from the original version to the multipair version is "just" the struct and the big for-to loop. And cleaning the code from parts that are not needed or even contraproductive in the multipair version (e.g. ForceMarketCond or hedging on another pair). That the compatibility to older versions is given, can be seen in the fact that older set-files still can be used. Have a great start into the week @ll and thanks for any further helpful input!
+
+--- 帖子 #53 ---
+Hello i would like to report the following bug i guess
+
+--- 帖子 #54 ---
+as to set-files and optimizing, you may want to take a look at Andreas Clenow's new book: Rules and Variations Generally speaking, you should aim for as few rules as possible and as few variations as possible. Once you have arrived at a model purpose, you need to figure out how to formulate this purpose in terms of trading rules. These rules should be as simple and as few as you can muster. Robust trading models, those that work over the long run, tend to be the ones that keep things simple. Any complexity you add needs to pay off. You should see complexity as something inherently bad, something which needs to justify its existence. Any complexity you want to add to your model needs to have a clear and meaningful benefit. Moreover, any complication or rule that you add needs to have a real life explanation. You can’t just add a rule just because it seems to improve backtest performance. The rule needs to fit into the logic of the model purpose and play a clear rule in achieving that purpose. Once you have arrived at a set of rules for testing your market theory, you probably want to try some variations. Note that there is a world apart between testing variations and optimization. As an example, let’s assume that you want to test a mean reversion type of strategy. You believe that when a stock has fallen four standard deviations below its 60 day linear regression line, it tends to bounce two standard deviations up again. Now you already have multiple parameters in play. Modeling and testing these rules is a fairly simple task. You could try a few variations of this, perhaps to expect the bounce by three or five standard deviations, using 30 or 90 day regression or a variation in the target bounce distance. Making a few variations like this can be useful, both for testing parameter stability and to actually trade some variations of the rules to mitigate over-fitting risks. What you don’t want to do is to run an optimizer to figure out that the optimal entry is at 3.78 standard deviations, on a 73 day regression, using a target of 1.54 standard deviations. Such data is absolute rubbish. Optimizers will tell you what the perfect parameters was for the past. They will also con you into a false sense of security, and make you believe that they have any sort of predictive value. Which they don’t. No, skip the optimization. But make a few variations of the rules, using reasonable, sensible numbers. From: Clenow's new book Trading Evolved - Anyone can Build Killer Trading Strategies in Python See also: Carver, Systematic Trading, 2015
+
+--- 帖子 #55 ---
+Oh jeez. We're so far past that book it's not funny. We have Blessing. Yes, it's complex and a hassle to optimize. But god does it work! It was originally designed to change fewer rules, and that works. Or you can change more rules and make more money. You choose. We're not starting from scratch, which is what books like that one usually address. We have a tool that can be relatively easily tailored to almost any currency pair and made to lock into useful repeating patterns. It works! Backwards and forwards! Money in the bank.
+
+--- 帖子 #56 ---
+well, I wasn't trying to undermine your project. What you write tells me, though, that you haven't read any of the books mentioned - but nevertheless feel inclined to criticize their content. I can only hope that you are a bit more rational and diligent in your optimizations. Best of luck.
+
+--- 帖子 #57 ---
+Any idea on this please. I keep seeing this message continuously. Anyway to stop this message please.
+
+--- 帖子 #58 ---
+in the source file, around line 245, find "bool Debug = true;" and set it to "bool Debug = false"; To make it more comfortable, you can write "input bool Debug = false;" In this way you can switch the option on/off via the EA settings. Will change this in the next version.
+
+--- 帖子 #59 ---
+I've read many of the books. Useful and helpful, for writing EAs. All the important (and high-falutin) issues regarding optimization of new EAs. Blessing is not new. It's already written. It works fairly well, better than any others I've tested or written. One issue I left out. Optimization needs to be fast. Because you need to forward test five or 10 or more instances and choose the good ones. That's the main reason many of the classical works suggest a small rule-set, to speed up the terribly slow optimization process. (And to make the results last a long time, which I find less important.) Forward testing is the real test. My apologies if my response was overly strident. It was late. I've read quite a few good books and lots of online discussions with lots of smart people. I'm starting to get the hang of this stuff. :-) I keep having ideas on how to enhance Blessing's trading abilities. And then I remember how effective it is already and how I really don't want to damage it in the process. I've had the idea of deploying a fair number of instances on difference pairs to hopefully make the results more robust. Or perhaps to turn her into a multi-pair system. That seems like pretty good idea. But keeping the core as it is seems like a great plan, at least for now. That means that most of the advanced and foundational optimization techniques are unnecessary and already done. Thanks very much for your contribution to the discussion. I should not have been so dismissive. You put a lot of thought and effort into your post and are very much appreciated for that. Many will likely learn from it, and that's a good thing. Best of luck!
+
+--- 帖子 #60 ---
+first day of trading, demo, let see how it goes
+
+--- 帖子 #61 ---
+Not to worry! People tend to get carried away once they're in the midst of a huge project. Reading your thread one can feel that you're in it, heart and soul - for now. And I very much appreciate that. All the best.
+
+--- 帖子 #62 ---
+means there are still bugs inside i guess
+
+--- 帖子 #63 ---
+2 days of testing, that looks nice!
+
+--- 帖子 #64 ---
+Thanks for the feedback! Yes, also mine looks good in M5 and with the M5 "fits all" setfile. I know, and that is why I posted the mq4 sourcefile, that there are still open points. These need to be handled with care, as debugging is not that easy with MT4. Okay, with live data it is a little bit better, but still a hassle. My biggest headache, still, is the exit-function: I see that it does not work correctly now, as we do not only have one pair but many pairs. Therefore we have to compare magic number and symbols when it comes to pair-related exits (e.g. Profit Trailing Stop Reached) or just the magic number on a full exit (e.g. Equity Stop Loss). Sounds simple but as I am tired, I would appreciate any help ;-) I already made a matrix, on which conditions Blessing closes trades and pending orders:
+
+--- 帖子 #65 ---
+I f I was to rename the EA, I would rename it from "Blessing" to "Squirrel" Started this morning, better don't touch because the exits do not work well up to now
+
+--- 帖子 #66 ---
+Thats True, but still its profitable, iv had 2 or 3 pending loses, but he waits for a little profit on them and it works. Hope that one big lose wont blow all this wins up))
+
+--- 帖子 #67 ---
+please how could we help you? Thanks Best regards
+
+--- 帖子 #68 ---
+could you the dev check the highlighted
+
+--- 帖子 #69 ---
+I am impressed... I was following the GBPJPY during the day, as in another thread we discussed a pattern that assumed "GBPJPY sell". Well, Blessing resolved it alone. Better than me manually... It works. Now comes the finetuning (see above: ExitTrade function) obs: I don't think it is a good idea (please correct me) to use XAUUSD with the settings for the forex pairs at the same time
+
+--- 帖子 #70 ---
+New version (29 beta) in post #1. Hehe, if anyone wondered, why so many trades opened: there was a nice bug that calculated some indicators in a wrong way. Nothing big and impossible to see on the data, the results were good, weren't they? But this is more like winning in the lottery than real forex trading. The actual version is now using the correct indicator parameters. The result is, that less trades open. But better they open in a reliable way than just coincidentally ;-) Known issues: ExitTrades still not merged to multipair (see this post: https://www.forexfactory.com/showthr...3#post12702413 ) Anyway: I am so confident, I put the EA on a small live account. Using a basket stop loss via dashboard, though... Thanks to fxraider for searching and finding that nasty bug!
+
+--- 帖子 #71 ---
+hi, sorry to ask, the ea now is ready to be tested? i want to test it on demo to see how it really work too
+
+--- 帖子 #72 ---
+Hi! On demo it is already running since a while. As I wrote: I am using this version live now! Even knowing some issues with the ExitTrades. On Demo you can test it without problems. It does not even opencloseopencloseopenclose anymore ;-) Have fun and please give us feedback! Maybe you can take a look into the source code, function "ExitTrades". There is my stomache ache...
+
+--- 帖子 #73 ---
+2months? whats the risk like? demo time
+
+--- 帖子 #74 ---
+what time frame, and in which folder should put the setfiles? never used em before
+
+--- 帖子 #75 ---
+Good morning @all! Could not sleep and took a look at my VPS on mobile phone. Quickly got up to fast-fix one annoying bug: when ExitTrades "A" is sent from e.g. Trailing SL reached , then ALL open trades were closed and not only the specific pair. I replaced the "A" with "B" in a new version, hope this already improves things, knowing that this is not all related to ExitTrades @all: I do not want to sound rude, but I was hoping for more help and work-sharing on the code. It is not "my" project. Blessing was left as open source and I started to do a multipair version, trying to stay with the Blessing core. That does not mean that I should do all the work ;-) I do not get paid for this and I am using my holiday time for coding. My wife and kid are not really happy to see a tired husband/dad the whole day... So: please contribute! Thanks (Richard and Neo: thanks for your help)
+
+--- 帖子 #76 ---
+testing is on. using ea v30, preset v24 5min allpairs. please confirm if i am using the right or latest combo
+
+--- 帖子 #77 ---
+ok it was same think i'm studying now....with 0.29....and all orders closed when trailing tp for one order is reached... Now i will try with 0.30 Best regards
+
+--- 帖子 #78 ---
+Looks good! Btw, the V30 version does not need a set-file for the demo-tests. I changed the presets in the code to the values from the 5-minutes-setfile. I am lazy... One hint: change the comment in the settings to e.g. BL30-1 (Blessing 30, first run) and activate the comment in the terminal. In this way you can trace the trades and orders easier. Remember: ExitTrades is still under construction ;-)
+
+--- 帖子 #79 ---
+V30 does not do it anymore (which does not mean that it doesn't hold other surprises for us ;-) )
+
+--- 帖子 #80 ---
+Hi, Thanks for that wonderful EA. In order for me to contribute could you please add a line for brokers with pairs with suffix ? Thanks Best
+
+--- 帖子 #81 ---
+Just for you ;-) Please test it, as I don`t have the possibility to do so... Alternatively , I guess, you can use the V30 version and create your own comma separated list. For example with the suffix "i": AUDCADi,AUDCHFi,AUDJPYi,AUDNZDi,AUDUSDi,CADCHFi,CADJPYi,CHFJPYi,EURAUDi,EURCADi,EURCHFi,EURGBPi,EURJPYi,EURNZDi,EURUSDi,GBPAUDi,GBPCADi,GBPCHFi,GBPJPYi,GBPNZDi,GBPUSDi,NZDCADi,NZDCHFi,NZDJPYi,NZDUSDi,USDCADi,USDCHFi,USDJPYi But please try the v31 and see whether it works... Grüzi!
+
+--- 帖子 #82 ---
+Hi, Thanks amigo ! I've read it twice but i cant find the line for the suffix Attached Image (click to enlarge)
+
+--- 帖子 #83 ---
+No risk, no fun! Soon we will all fall into the grave, become [He] 2s2^2p^2 (C, not CO2) How long do you want to wait? Alternatively you can go to your bank and ask for -1% ;-)
+
+--- 帖子 #84 ---
+Don't need: it should find it automatically... just start the EA. Adding a suffix in the settings would have been too easy ;-)
+
+--- 帖子 #85 ---
+Depends how much 1s 2 2s 2 2p 6 3s 2 3p 6 4s 2 3d 10 4p 3 you take
+
+--- 帖子 #86 ---
+Well done, thanks !
+
+--- 帖子 #87 ---
+sure, then we get news events.. speaking of which does this bad boy have a news filter? well 30%/100% returns always have risk, its implied!
+
+--- 帖子 #88 ---
+And here we go Attached Image (click to enlarge) Attached Image (click to enlarge) With 5 min set Ursinho4711 mentioned The beast love Japan
+
+--- 帖子 #89 ---
+At least it survived this challenge today (on a live account, small but alive)...:
+
+--- 帖子 #90 ---
+i have two running on different brokers and one took a long on eur/cad highs last night and i'm trying to figure out why... it seems to get long on BB breakouts , but mostly shorts them at other times.. is that part of the 'blessing' code? i'd look myself later today but i haven't hacked code since the early naughties. you mean like GODZILLA ??
+
+--- 帖子 #91 ---
+You need to start trades manually or it's open close on it's own? Can somebody post code for this EA?
+
+--- 帖子 #92 ---
+best if you run the ea on demo and live accounts at the same time to see how much difference is there in term of executions. demo test so far is making profit.
+
+--- 帖子 #93 ---
+open positions and profits so far
+
+--- 帖子 #94 ---
+bad day for me, -100
+
+--- 帖子 #95 ---
+same here , but some recover now..... I'd like to change set file to try ... can i use every blessing set file or what? I'm asking because i'm tryong to use an old set file customized by me but seems nothing happen here no any scan from Ea is this normal? Thanks regards
+
+--- 帖子 #96 ---
+seems your h1 set file is better then 5min one...
+
+--- 帖子 #97 ---
+The Squirrel ;-) Thanks for the feedback. My both running EAs, Demo and Live, look well also. Anyway I think we should introduce a new parameter: maximimum pairs to trade at once (MaxTradePairs or something like this). When this number is reached, no new pending orders are placed and all others should be deleted. Setting the value to 0 on a running EA could be used for a slow shutdown, without killing open trades. I follow the EA more or less 24 hours a day&amp;night, good that I don't like to watch TV. Just my family thinks I am a little bit eeehm strange.. I saw that at some time many (20?) pairs were being traded at once. The DD was also getting bigger (3%). I don't know yet, which is a reasonable number. Maybe 7 or 14?
+
+--- 帖子 #98 ---
+paciência, cara. Por isso o nome é Blessing e não corre corre...
+
+--- 帖子 #99 ---
+[quote = ursinho4711; 12706662] The Squirrel ;-) Gracias por los comentarios. Mis dos EA en ejecución, Demo y Live, también se ven bien. De todos modos, creo que deberíamos introducir un nuevo parámetro: pares de maximimum para comerciar a la vez (MaxTradePairs o algo así). Cuando se alcanza este número, no se colocan nuevos pedidos pendientes y se deben eliminar todos los demás. Establecer el valor a 0 en un EA en ejecución podría usarse para un apagado lento, sin matar las operaciones abiertas. Sigo el EA más o menos las 24 horas del día y de la noche, bueno que no me gusta ver la televisión. Solo mi familia piensa que soy un poco eeehm extraño. Vi que en algún momento se intercambiaron muchos (20?) Pares a la vez. El DD también se estaba haciendo más grande (3%). Todavía no lo sé, que es un número razonable. ¿Quizás 7 o 14? [/ Quote] First of all thank you for your work. I don't speak English so I use the translator. I paid a long time ago for a multi-currency EA, it did not work as I expected but it has some characteristics that I considered appropriate at the time. You can control the N. of trades per pair by balance the n. toatla de trades. You can put a limit on opening the trade in% and open again the possibility of continuing to work exceeding a% less. It is a bit complicated to explain but I attach a pdf with the characteristics. If it helps, I am willing to share the code to see if you can work some interesting things. I await your confirmation .. Greetings from Ecuador
+
+--- 帖子 #100 ---
+would be nice if pairs to trade could be chosen. dont like to trade chf, jpy and gbp
+
+--- 帖子 #101 ---
+i think tou can just edit setting file.....and chose your preferred instead of all 28...
+
+--- 帖子 #102 ---
+Jipp, that's it. You can even trade soy-beans if you like ;-) Anyway, my dream would be a dashboard with integrated blessing one day...
+
+--- 帖子 #103 ---
+https://www.forexfactory.com/showthr...9#post12706749
+
+--- 帖子 #104 ---
+Hi All, Could someone point me in the direction of the system philosophy please. I have read the thread and have it running but would like to know more. Regards
+
+--- 帖子 #105 ---
+https://www.forexfactory.com/showthread.php?t=792598 That's where the heart comes from. I've already been using it though long time before joining ForexFactory...
+
+--- 帖子 #106 ---
+Thank you
+
+--- 帖子 #107 ---
+Do you favor one group of settings for all pairs or do you plan on eventually making things more complex?
+
+--- 帖子 #108 ---
+Hi Richard! No, on-size-fits all was my plan. I know that it is difficult to find out and can be a little bit dangerous as Blessing has this Martingale-like style (no, it is not real Martingale), depending on the multiplier. I am just experiencing this on GBPJPY ;-) If it was too complex, it would be like single Blessings on separate charts and no gain. My opinion... you probably thought of an individual settings-array for each pair to trade? The dashboards that I know use one settings for all pairs. Do you have an example for a more complex one? Hm... hm... I mean, that would REALLY be cool to click on a pair in a dashboard and alter the setting individually. hm hm hm... I need some more weeks of holiday...
+
+--- 帖子 #109 ---
+@Richard Individual settings for each pair: I was thinking while doing the laundry... from the programming aspect it is not that difficult, thanks to the struct for each pair to trade. The question is, which parameters should be set individually? All? As I write this, I am thinking of loading parameter files for single pairs. Now I am really on a trip...
+
+--- 帖子 #110 ---
+certainly will be best for each pair to have it own setting since the average daily range is different for most pairs.
+
+--- 帖子 #111 ---
+I've tested quite a few multi-pair EAs. Many start out with very impressive results and then degrade into large draw downs and slow trading after a while or other problems. Here's an example: BGNBGN832CL832CL Inserted Code Symbol Trdes Win% Profit P/day ProfFac STime Etime T/Day EA GBPAUD 7 100% 181.46 5.13 -- 9/09 10/15 0.2 v3w +++++++ GBPCHF 6 100% 198.30 5.05 -- 9/06 10/15 0.2 v3w ++++++ GBPCAD 10 100% 372.94 5.02 -- 9/05 11/18 0.1 v3w ++++++++++ GBPJPY 4 100% 200.81 2.92 -- 9/04 11/12 0.1 v3w ++++ GBPUSD 5 100% 148.29 2.46 -- 9/05 11/04 0.1 v3w +++++ AUDCAD 2 100% 15.15 1.64 -- 9/04 9/13 0.2 v3w ++ EURCAD 2 100% 15.07 1.61 -- 9/04 9/13 0.2 v3w ++ USDCAD 6 83% 164.32 1.49 50.49 9/12 12/31 0.1 v3w ++-+++ CADJPY 5 100% 54.63 1.03 -- 9/05 10/27 0.1 v3w +++++ USDCHF 2 100% 108.92 1.00 -- 9/13 12/31 0.0 v3w ++ NZDJPY 6 100% 102.03 0.89 -- 9/03 12/27 0.1 v3w ++++++ AUDJPY 5 100% 100.23 0.88 -- 9/03 12/26 0.0 v3w +++++ CHFJPY 6 100% 86.56 0.86 -- 9/04 12/13 0.1 v3w ++++++ AUDCHF 1 100% 6.31 0.85 -- 9/06 9/13 0.1 v3w + EURGBP 2 100% 43.23 0.79 -- 9/05 10/29 0.0 v3w ++ EURCHF 1 100% 4.65 0.63 -- 9/06 9/13 0.1 v3w + EURJPY 3 100% 67.55 0.62 -- 9/04 12/23 0.0 v3w +++ USDJPY 3 100% 27.48 0.35 -- 9/04 11/21 0.0 v3w +++ NZDUSD 2 100% 33.12 0.25 -- 9/03 1/15 0.0 v3w ++ AUDUSD 3 100% 24.96 0.19 -- 9/04 1/16 0.0 v3w +++ CADCHF 1 0% -0.54 -0.54 0.00 10/08 10/08 1.0 v3w - Total 82 1955.47 33.12 Wonderful win rate. But it required a $50K account! I've seen others that rack up amazing profits at first, only to stop trading for months with equity tied up in wandering trades. If you could trade five or ten pairs with optimized parameters for each, while profiting from multi-pair basket logic too, you might outperform all the others. Even if you relied on a single genetic optimization pass for each pair I think you could do very well. Fill a folder (directory) with set files and have the EA access them by name creating the pair list and parameters from the files it finds. After reading a file it could be moved to an archive folder. New files appearing in the primary folder would cause old parameters to be overwritten or new pairs to be added. (Or even build in auto-optimization, but that's a whole new batch of craziness.) :-) Trading 28 pairs, especially with the same parameters for each will eventually require a large account or produce unacceptable losses.
+
+--- 帖子 #112 ---
+trading dangerously is not recommended when trading with real hard earned money. play with demo money and learn how Blessing3 works in all market conditions and master how B3 works and tame this monster and take it on your daily stroll in the forex park .. make some money.
+
+--- 帖子 #113 ---
+nice post thanks for the info. i've cut my second demo down to 6-10 pairs that i filter out of the all-pairs EA (the ones it seems to be trading well) . so far this week the all_pairs is up about 4% but it's still holding the EUR/CAD long and a g/j short (2% DD), wonder what it will do.
+
+--- 帖子 #114 ---
+Mine is at the third stage (0.01 / 0.03 / 0.09) and waiting to sell more 0.27 lots... the last stage. Would have done something similar manually ;-) @all thanks for sharing your thoughts and ideas in this thread. I really appreciate it.
+
+--- 帖子 #115 ---
+Hehe, went well. Though I did not sleep much, one eye was with the dashboard. DD went up to -5.65%. Okay, nothing to become nervous about, but as the EA is still in a pre-beta version, I needed to take care of my testing live account. I mean, it is real money. Not too much, but real.. (Blessing)Slippage helped in the gbpaud, took some of the win in the gbpjpy. But so what: this was the only basket that closed with a small minus. All others green and over the testing time, very green in the big basket ;-) Anyway I will reduce the set of pairs, maybe take out gbp and jpy. They make me nervous...
+
+--- 帖子 #116 ---
+Curious, how much did you use for your live account? What would be a nice minimum to use?
+
+--- 帖子 #117 ---
+2000€ But, as Richard already stated, it is not enough if you trade with 28 pairs. As I was watching the EA all the time, I stopped new trades and even closed some green ones manually, to get more margin in case the gbpjpy would need the 0.27 lots. It did not need though, but it was close...
+
+--- 帖子 #118 ---
+Depends on your settings ;-) Remember to have enough free margin if things get tough. If the EA cannot open bigger trades, then the system is worthless. See the example gbpaud in my last screenshot: the EA had a pending order sell limit with 0.09 lots to help the other trades in DD. At 11:20:03 the limit was reached, ten minutes later the basket closed with a win ;-) The gbpjpy was even worse, but came back without needing help from the 0.27 lots. Back to your question: I think not less than 500USD for each pair to trade is the minimum in a real and serious setup. What do the others think?
+
+--- 帖子 #119 ---
+Hmmm, I see. Maybe I should remove some volatile pairs like GBPJPY and also CHF pairs while testing on a small live account. How do you handle weekends? Do you close them all manually on friday or just let them be?
+
+--- 帖子 #120 ---
+i might try close risky pairs before the weekend if they are just floating for a small loss. the demo my all-pairs EA seems to have handled the week well. the second demo i have been filtering and playing with to 'best traded' pairs and it seems to have misshandled eur/cad and decided it wanted to sell 20 mlots of e/u, so not sure if that was me messing with it or what, but interesting to see. the two demos are with two different brokers so it seems it traded and is also holding some pairs the other broker account never opened.. so i will look at those over the weekend. might be to do with the computer rebooting one night or maybe a lost internet connection, not sure ?? have not run EAs for many years
+
+--- 帖子 #121 ---
+Two days trading on demo and it continues loving japan (i wonder why...) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #122 ---
+Hy anyone check this eA on live account or not, anyone have any EA that place sl and tp both i really like Budak Ubat but thats not with SL
+
+--- 帖子 #123 ---
+I was thinking of following: on London close, close all trades in profit (green) close all pending orders for new pairs do not allow pending orders for new pairs let open the other (red) open trades will do that manually today, a flag "UseWeekendShutDown" would be good in the next version Another thing I thought of, to be able to use the lot-increment for open trades: for every pending order on an open trade, reduce the new variable "MaxOpenPairs" (or whatever the name will be) by one and delete the oldest pending orders for a new pair
+
+--- 帖子 #124 ---
+No such issue for me. It traded all sorts of currencies. I'm going to have to remove some pairs and re-test.
+
+--- 帖子 #125 ---
+I've been collaborating with Ursinho (he mentioned me as 'fxraider') to help bug-fix the project and fast-track the testing process. For those interested in assisting, I've attached an MT5 version (based on additional fixes to v3.9.6.30 gamma) that permits multi-pair back-testing. Please be aware that there seems to be an issue with "once per bar" functionality, so I suggest turning that off for the time being. Visual testing in MT5 is SLOW ...but speeds up dramatically when the visual tester window is minimised. Another tip for faster testing is to select the "M1 OHLC" data option (rather that "every tick"), but understand that testing speed is linear, so if a single-pair test takes 1hr then a 28-pair test is going to take about 28 hours. Have fun
+
+--- 帖子 #126 ---
+Thnaks really aprreciate
+
+--- 帖子 #127 ---
+Hy.. is possibile use two isntances of Ea with different magic and set file in the same mt4 ? Thanks Regards
+
+--- 帖子 #128 ---
+Yipp, should not be a problem. Just change the magic number in the settings... all code related to orders use the magic number
+
+--- 帖子 #129 ---
+I started testing it 2 days ago, and so far its performing really well. Can you tell me about option "percentage of balance loss before trading stops", in what order does close trades
+
+--- 帖子 #130 ---
+Here is the code: Inserted Code //+-----------------------------------------------------------------+ //| Calculate Stop Trade Percent | //+-----------------------------------------------------------------+ double StepAB = InitialAB * (1 + StopTradePercent_); double StepSTB = AccountBalance() * (1 - StopTradePercent_); double NextISTB = StepAB * (1 - StopTradePercent_); if(StepSTB &gt; NextISTB) { InitialAB = StepAB; StopTradeBalance = StepSTB; } // Stop Trade Amount: double InitialAccountMultiPortion = StopTradeBalance * PortionPC_; stop_trade_amount = InitialAccountMultiPortion; if(pairinfo[i].PortionBalance &lt; InitialAccountMultiPortion) { if(pairinfo[i].CbT == 0) { AllowTrading = false; if(PlaySounds) PlaySound(AlertSound); Print("Portion Balance dropped below stop-trading percentage"); MessageBox("Reset required - account balance dropped below stop-trading percentage on " + DTS(AccountNumber(), 0) + " " + TradePairs[i] + " " + (string) Period(), "Blessing 3: Warning", 48); return (0); } else if(!ShutDown_ &amp;&amp; !RecoupClosedLoss) { ShutDown_ = true; if(PlaySounds) PlaySound(AlertSound); Print("Portion Balance dropped below stop-trading percentage"); return (0); } } All pending orders are closed in this order: Inserted Code for(int Order = OrdersTotal() - 1; Order &gt;= 0; Order--) AllowTrading is set to false, open trades continue to trade
+
+--- 帖子 #131 ---
+seems backtest results in mt5 are totally different from mt4.. also lot size entries are totally different.... I'll continue my attempts Thanks Regards
+
+--- 帖子 #132 ---
+Not sure why lot sizing should differ between versions - the only things that *might* vary are calculations based on margin requirements as the return values in MT5 are not always the same as in MT4. Beyond that, results should be fairly similar as long as settings are the same... just remember that MT5 testing is subject to things like variable spread and slippage, so the numbers will never be identical.
+
+--- 帖子 #133 ---
+Thank you for the answer
+
+--- 帖子 #134 ---
+Thank you so much Ursinho for your hard work on coding this beast Been following this on a demo - XAUUSD seems to be a pair to ban (closed it manually, opened trade without any logic). Closed all trades in London close, but seems a nice idea to close all trades before weekend auto by default? Gonna keep testing it. Cheers
+
+--- 帖子 #135 ---
+Tomorrow i will try again and I will post result... Thanks Regards
+
+--- 帖子 #136 ---
+Blessing has a lot of testing and history behind it. This multi-pair version: not so much. Especially since it departs from many of the primary techniques used to make the original version profitable. The general idea seemed like a good one. But taking one setup and applying it to many pairs seems almost silly. How is this supposed to work? It certainly doesn't work with the original. Jumping quickly into forward testing and live trading is a little shocking. As if Blessing was a magic wand and applying it to any old crazy scheme will make it profitable. There are lots of powerful things possible with multi-pair EAs. I don't see any of them being applied here yet. Blessing setups for one currency pair very seldom work for other pairs. So how is this iteration of the multi-pair Blessing supposed to work? This is a whole new EA. Very different from Blessing. So a week or two of forward testing means next to nothing. This is where years of data must be traversed to see if this scheme makes sense. Blessing has years of testing built into it and much confidence accrued. This new incarnation is too different to benefit from those years of concerted effort and testing. This new EA seems like a good idea. Especially cashing in on Blessing's success. Sadly, the current version really doesn't seem to do that very well. Blessing is not a set-it-and-forget-it smart EA. From what I've seen converting it to a multi-pair system will not change that. At sometime, perhaps a month or two down the road, you can expect it to crash and burn when just the right set of conditions conspire against it. If you look at specific issues that original Blessing still faces and apply the multi-pair strengths to address them then you could make something even better than Blessing. I don't see that happening here, yet. Blessing is open source, so anyone can change and modify and build upon it, which is very cool. Maybe it's too easy. The biggest, most common failing I've seen of multi-pair EAs is the one-size-fits-all approach to trading a list of pairs.
+
+--- 帖子 #137 ---
+Thanks Richard! This is how I wanted the thread to run: as an open discussion about an open source. I am not the blessing programer. The approach is (still) to make the EA easier to handle and to overview when trading some pairs at the same time. I know that there is no set-file that works perfectly on all pairs. But maybe there is a setting that works good enough for many pairs. In the blessing thread I found this 5-minute timeframe setting that, according to the user, works well since three years on 14 pairs or so. Not making THE huge wins, but consecutive small amounts that sum up at the end. Anyway I will continue working on that multipair idea. See how it can be made more complex without losing the overview. I love coding and while implementing blessing into a multipair (dashboard) environment I understand more and more how the heart of blessing beats. The better you understand an EA, the better you can use it and find the best parameters. Have a great weekend @all!
+
+--- 帖子 #138 ---
+I’m very interested in this. What are some of these things that multi-pair EAs could do? Or can you point me to book or resources that address this? Thanks!
+
+--- 帖子 #139 ---
+I did a reset on my brain to think clearly again... Sounds lika a good approach and not that difficult to program. Okay, I did not think of all details yet (resetting variables, grids...). If the file names follow a rule, e.g. BL3-EURUSD-5MIN, then it's kind of simple though... But first I have to get the the actual version in a stable state. The ExitTrades is still under construction...
+
+--- 帖子 #140 ---
+https://www.forexfactory.com/showthread.php?t=973909
+
+--- 帖子 #141 ---
+if you want to trade XAU there is a set file with a backtest in the original blessing thread that seems okay. i also tried the all pairs with XAU and i agree with you, i think it was lucky to get out of the trades it made.
+
+--- 帖子 #142 ---
+Simplicity is good. File name could be eurusd-5min. The prefix could be the directory name. Even the pair name and timeframe could be contained within the file. I've been tempted to build these into Blessing's settings just to keep everything together and reduce errors. Even if you put a set file on the wrong chart it will still work, though maybe not on the pair and TF in the chart. :-) It would also make the timeframe choice optimizable with Strategy Tester! Not sure why I haven't done that yet! These are key parameters that aren't in the set file at all! Except as comments. :-( Just a thought.
+
+--- 帖子 #143 ---
+Google forex basket trading and stand back! :-)
+
+--- 帖子 #144 ---
+Thank you. First result is a FF thread. Will read up as much as I can from this thread as well as the other search results.
+
+--- 帖子 #145 ---
+how about we codename Blessing Multipair EA : Maddog?
+
+--- 帖子 #146 ---
+Richard's points are very valid to this discussion - if you run the MT5 version then you'll definitely see "crash and burn" scenarios from time to time. I ran a "quick" test from 01/01/2019 through to now and the results were mostly manageable (DD hovering around the $2k level), but there were still several big hits during that relatively short period that would have wiped out a $15k account in hours ...despite starting each sequence with 0.01 lots. Over the past year, I've been able to back-test test a number of multi-pair EAs (Hedge Rocks, Arbitrage Synthetic &amp; a few other triangular systems, Basket 14, Confirm 14, Phantom 14, Trim 6, Multi-Currency Hedge, Slopey Peaky, Steroid Peaky, some of the "spaghetti indicator" variants, and a bunch more) through MT5 and the results have always been the same: crash &amp; burn The basic issue is that you can't anticipate black swan days, nor can you anticipate irrational wild spikes or markets that run away without provocation. With that in mind, the logical approach is Richard's: try to make 100% quickly while risking 50%, and do that on as many pairs as you can in the hope that your successes outpace your failures.
+
+--- 帖子 #147 ---
+yeap run it until you get your money back, take your money and put it somewhere and then let the EA run .. unlikely it will survive six months if it is going to basket trade or grid ie. double down !! as youre trading randomness and there is no real edge, just luck.
+
+--- 帖子 #148 ---
+First of all thanks to everyone for the unemotional discussion. More of it! But this happens to the "normal" Blessing as well. A setup that works good for some weeks can suddenly eat your wins if you just forget about it and don't take the money and run. There is probably no EA out that works alone and let you enjoy the life on the beach. Some work always has to be invested... If there was a holy grail, this forum would not be that full of old folks ;-)
+
+--- 帖子 #149 ---
+Phantastic
+
+--- 帖子 #150 ---
+The best ideas come on toilet ;-) If the multipair-EA is too dangerous for trading alive, it has one big benefit: you can easily forward test (on an demo) your settings. With the dashboard you have an great overview: if things always end in red and never recoup, then change the settings ;-)
+
+--- 帖子 #151 ---
+This is one of the important points why I wanted to have a discussion and a new thread: how should this be implemented in the multi-pair-blessing? Which logic, flow should be behind it? Remember that in the current constellation one pair could eat all the nice wins from all the other pairs.
+
+--- 帖子 #152 ---
+I ran a demo account using the basic Blessing ea starting with $5,000 from last Oct thru December applied to 11 different pairs...showed profit up to $1,300 but then had DD around $4,000...I suspect I was using too many pairs. Few days ago set up new Demo account with $5,000 using 5 pairs...hoping for good results.
+
+--- 帖子 #153 ---
+Something that I've made good use of in other multi-pair systems is a "chipping" mechanism whereby the system identifies a pair that's got into trouble (this can be based on the number of open levels, floating loss, or any combination of relevant criteria) and then automatically reduces whichever order has the largest pip loss provided that it can be done within say 10 pips. For example, assume AUDUSD has 4 levels open and the smallest order is currently 0.05 lots which is negative 200 pips i.e. that order P/L is $-100.00 Now, if GBPUSD has 3 open levels and its basket value is $3.50 per pip then that would result in $35 extra profit if the GBPUSD TP was shifted 10 pips. Since the smallest AUDUSD position (0.01 lots) would require $20 to cover its loss, it would be possible to do that if the GBPUSD basket TP was extended by just 6 pips and, upon closure of the GBPUSD basket, the 0.05 lot AUDUSD order could be reduced to 0.04 lots... or even to 0.03 lots if the GBPUSD basket TP had been extended by 12 pips. The advantage of this method is that it's able to self-adapt i.e. the value of loss that can be offset is dependent upon the the tick value of the donor basket, and that "offset" can easily equate to more than 0.01 lots each time. Moreover, with all pairs helping the struggling basket, drawdowns can be kept in check more effectively.
+
+--- 帖子 #154 ---
+And with a clean dashboard it is easy to overview. I wish the day had 48 hours. 12 for my family and 36 for forex ;-)
+
+--- 帖子 #155 ---
+Hello Ursinho, if all magic numbers are linked together, can blessing close all with a designated TP, think you may know what I am asking, but yeah, all linked to take a collective profit and close all on objective complete, your doing a marvellous job BTW, enjoying seeing some very constructive posts, D
+
+--- 帖子 #156 ---
+Hi Detector! Thanks for the question. At the moment I am using my dashboard for the basket take profit. But my goal was to implement this into blessing. Or, the big goal, implement blessing into a dashboard. As I wrote some time ago, the ExitTrades is still under construction. Should work for single pairs, but the multi-pair idea has not been inplemented yet. I wanted to discuss some points here in this thread. The logic when to exit all, partially, when to delete pending orders and so on. Already implementing a basket close for all open trades sould not be so difficult. I will put it on my priority one list.
+
+--- 帖子 #157 ---
+Thanks for the reply Ursinho,just off the cuff, Blessing has a "cease trading" when the account goes into a X%loss, maybe "close for the day X%profit". Currently looking at the numbers of orders opened, seems, while being a benefit and the heart of the system, it's it's worst enemy at times, also looking at time frequency, some trades minutes, some days, just to let you know the avenue I'm going down with my bit of research/testing, D
+
+--- 帖子 #158 ---
+Multi-pair systems can also be used to feed the flat-weekend frenzy. Profit may take a hit, but with a reasonable target the losers should be overshadowed by the winners. Usually holding over the weekend only if the target isn't hit.
+
+--- 帖子 #159 ---
+Ursinho, would like to ask, how does Blessing capitalise on good trades, sorry if I'm a bit naive, while there are many permutations for setting take profit,BE, has anyone had a Eureka moment in finding such parameters, from my experience, and could be wrong, Blessing does not add to good profit, am I wrong, if not it could be a future concept, please some one could enlighten me. With regard to my last post, on a back test, using max 2 orders, Blessing retained profit, add one more, total 3+, wipe out on close, suppose it's all relative, time frequency, again as a concept could trigger the hedge, ideal situation to take opposite trades but this brings it's own issues with FIFO, just spouting my thoughts, could be contagious, D
+
+--- 帖子 #160 ---
+Hi detector! If you have questions to Blessing itself, there are some threads already treating those questions. There you can also find much (original!) documentation on the EA. Short questions like yours would lead to pages of answers... I did not alter anything in the logic of Blessing. Until now I just took out parts that (I think) do not make sense in a multipair version.
+
+--- 帖子 #161 ---
+Sorry just my thoughts Ursinhoe, don't want to corrupt the thread D
+
+--- 帖子 #162 ---
+No problem at all! To be honest it was a good opportunity to note again that in this thread we should discuss multipair issues. That's why I opened this thread out of that one: https://www.forexfactory.com/showthread.php?t=792598
+
+--- 帖子 #163 ---
+Hello. They could publish the open code of the Ea that works best to add a news filter that works correctly.
+
+--- 帖子 #164 ---
+Next week I will reduce my pairs to trade to following 14 pairs: AUDJPY,AUDUSD,CHFJPY,EURCHF,EURGBP,EURJPY,EURUSD,GBPCHF,GBPJPY,GBPUSD,NZDJPY,NZDUSD,USDCHF,USDJPY I found them in a "basket trade" thread (thanks, Richard!). The reason for this combination is, that they hedge each others. I will analyze it on Demo first. Live account is too exciting in that early development stage. Though I made real (not much, but real) win last week.
+
+--- 帖子 #165 ---
+Many different ways to go with pair selection and orientation. Correlated pairs will show you one set of behaviors and non-correlated pairs a whole different set. Non-correlated pairs might be more profitable and simpler, unless you've got a specific hedge scheme in mind. Non-correlated pairs suggest less chance of news affecting more than one pair, and better diversification. One of the main, easily attainable strengths of a multi-pair Blessing, I suspect.
+
+--- 帖子 #166 ---
+nice work ! can i ask if will be added more indicators ? as example make Blessing more trend trading than anything else .. BB alone dont work (too many false signals) and need a very good trend filter rsi and stoch are no good for forex and there are a lot of better choices than cci as trend yes 1 -5 good trend trades per week in 1 day candle is more profitable than xxx trades per week in 5min (make profits only for the broker)
+
+--- 帖子 #167 ---
+Hi! Thanks for the flowers ;-) To your question: this is something that should be discussed in a "Blessing only" thread. Here is just the try to make a multipair version out of an already existing advisor. Here for example: https://www.forexfactory.com/showthread.php?t=792598 I do not know how good you are in coding, but adding a new indicator into any blessing version is probably the easiest thing to do in this code. This was also the first thing I did, when starting to try to understand the Blessing EA.
+
+--- 帖子 #168 ---
+very helpful: now we know which indicators don't work (for you?) but not one is mentioned that does work (for you?) wasn't it customary - at some stage - not just to make claims (a is x) but to give reasons why (I think a is x because of the following reasons...) arguments, I think, they called it: An argument consists of a conclusion supported by at least one premise. Both conclusions and premises must be statements, that is, sentences with truth value (i.e., that are capable of being either true or false). The point of an argument is to provide evidence for the conclusion (i.e., show why we should believe the conclusion).
+
+--- 帖子 #169 ---
+BS orginal (B3) provides a correlation trade setting that one may select if one feels so inclined!! i've got my filtered pairs running on a better broker this week, will update Friday if it works out. if people are wondering about lot sizes and pairs then the document also talks about that, read: Portion Control.
+
+--- 帖子 #170 ---
+First one has to say that correlation changes over time and across TFs (simply check different TFs on correlation sites) Second: Trading correlated pairs doesn't make all that much sense because a) if pair one does well, the correlated pairs will do well by factor x (depending on correlation) b) if pair one does badly, the correlated pairs will do badly by factor x (depending on correlation) - of course, this is somewhat oversimplified but it explains the general idea of the principle behind correlations. So: one would be better off using only the pair with the smallest slippage and adjust lot-size accordingly. Third: In a drastic event ("black swan") all pairs will be correlated. (Check historic evidence or read the books by Taleb, Nassim Nicholas)
+
+--- 帖子 #171 ---
+Interesting ideas on this thread - very exciting to read! i don't have a lot of experience writing EAs but otherwise have been programming for a few years now. Here are my thoughts: I imagine the Blessing Dashboard to be an overarching aggregator/controller over multiple (implicit) instances of Blessing EA running for different pairs. It would be nice to keep the configuration of the overarching Dashboard relevant. I like Richard's earlier suggestion that each of those instances can be optimized separately. In absence of pair-specific optimization the EA can use a default set (which is similar to applying common set across pairs). I think it might be cool for the Blessing Dashboard to continuously assess which pairs are working well and boost trades on those pairs. Liked the idea with auto-optimization but not sure how that is possible with MT4 APIs - that would very smart, I think. On a separate note, I just started to toy around with automated optimization of Blessing Excellent effort to extent Blessing to an exciting direction! /RATH
+
+--- 帖子 #172 ---
+opened trades -26.XX , closed trades 37.XX on demo Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #173 ---
+Hey how are you backtesting multi pair when mt4 can only test one pair at a time?
+
+--- 帖子 #174 ---
+I was backtesting one pair at the time. Using the "OncePerBar" in the EA and "Open Prices only" in the tester, this is quite fast. Should not make any difference in theory (not taking timing issues into account), as the EA is running all pairs one after the other in a big for-to loop. The only things I cannot test in backtest MT4 is the multipair functionality. I do this live on a demo. User fxtrue (thank you!) supplied a translated version into mql5 to me. Did not have time to test yet, though... (holidayyyyys!)
+
+--- 帖子 #175 ---
+Hello, I just set up an ICMarkets demo account, trading the 28 most important pairs. Curious to see how that will develops. Greetings Peter
+
+--- 帖子 #176 ---
+Hi, Pls clarify if we have to attach the EA with all charts of 28 currency pairs or attach the same with only pair.
+
+--- 帖子 #177 ---
+No! Only one chart! That's the idea of the multipair...
+
+--- 帖子 #178 ---
+Removing GBP and JPY due to risk events might be a good idea after all as AllPairs is in deep short GBP!!
+
+--- 帖子 #179 ---
+I am back to "Demo only" from today on. At least the Beta-Version did not do anything bad and I came out with a small profit (5%) after 8 trading days. Better than -1% from the ECB...
+
+--- 帖子 #180 ---
+Hy... i'm in testing last version but backtesting for just one pair i've different result comparing with last blessing 3.96.13.beta... many more orders ... i supposed logic and code are quite the same...so i'm expecting same result but no way... any suggests? I've checked my set file many time and no difference... Any suggestion? Thanks Regards
+
+--- 帖子 #181 ---
+Hm, should not be a difference. That's one of my tests as well: using AUDCAD and afterwards XAUUSD to compare the results with "normal" Blessing. Try this version: it also has a better a ExitTrades. Just (I hope) the HolidayShutdown is an open point when it comes to Exit. Still open some grid and TP adjustments, that are global but should be related to TradePair. If you think that version suits, I will put in on post #1. Happy trading! Attached File(s) BlessingLite_3_v3.9.6.32_gamma.ex4 192 KB | 589 downloads
+
+--- 帖子 #182 ---
+OK thanks please try this setting tf5 GBPNZD Thanks Regards
+
+--- 帖子 #183 ---
+Strange... I thought everybody had this file... Put this Attached File(s) symbols.zip 17 KB | 631 downloads into the folder \history\default It comes from the change I made, so pairs with a (broker) prefix can be used. Maybe I should have done it in a more simple way ;-)
+
+--- 帖子 #184 ---
+It was just a warning messsage.... Back test started....
+
+--- 帖子 #185 ---
+A typical "Blessing situation", where I probably would have lost trying to save the trade ;-) Blessing kept cool and decided at the right moment. After a huge DD it came back with almost zero. I have to analyze the grid though and TP level. A plus would even have been better...
+
+--- 帖子 #186 ---
+Might be helpful not to refer to MultiBlessing as Blessing.
+
+--- 帖子 #187 ---
+V 3.9.6.24 not beta/gamma .30 ?? Looks like my All-pairs MultiBless (Maddog) managed to get out of G/nzd but still short G/aud and currently has about 30 trades open. It's only just survived drawdown in a 1k demo account this week (possibly up to 50% at one point) so i would think 5k at a minimum, even than that's risky. my filtered pairs (10) demo was heavy on gbp pairs at the start of the week and has also survived, just. Would like to see it close off a few pairs and reduce risk on Friday but i'm not sure it thinks like that. I might help have to help it out during the euro session .
+
+--- 帖子 #188 ---
+Well, the heart is still the same and I try to keep it that way. Knowing that there are still some constructions ahead. But if you feel offended (or maybe there is a TM?) I can think of another name. "Praying" for example...
+
+--- 帖子 #189 ---
+It's just the comment string, I could even write MickeyMouse1.0... if the comment is too long, it occupies too much space in the terminal field. I am just with a small notebook here during my travel...
+
+--- 帖子 #190 ---
+yes good point but 'blessing lite' also.. is this a super special custom AllPairs (rhetorical)? all good noted for future! btw looks like my demo account got out of the gbp/jpy long with $1.2 profit
+
+--- 帖子 #191 ---
+I'm not offended. Just hoping to keep confusion down a bit. I look back and forth between the two groups and sometimes lose track of where I am. :-)
+
+--- 帖子 #192 ---
+just need a confirmation, if the ea is able to detect 4 decimal or 5 decimal brokers.
+
+--- 帖子 #193 ---
+https://www.forexfactory.com/iamretep Hi there, Here you will find the result of the 28 currency pairs from the last three days. Trading started three days ago in the afternoon (GMT+1). With this forward test I want to find out how the current drawdown per tick is developing across all pairs. In a second step, I would like to filter the best portfolios from these 28 pairs. I hope this is helpful. However, at least 1,000 trades are likely to be required to evaluate this analysis, which will take approximately 10 weeks. Greetings Peter
+
+--- 帖子 #194 ---
+Hi! This is more a Blessing question and not a multipair question. Anyway I will answer: Yes! Take a look at the code: Inserted Code temp = (int) MarketInfo(TradePairs[Index]+suffix,MODE_DIGITS); if(temp % 2 == 1)pairinfo[Index].Pip *= 10;
+
+--- 帖子 #195 ---
+I test the baby blessing with the pair of ursinho4711 , let's see what he does next week at Brexit, BlessingLite 3.9.6.24 Demo: Roboforex ECNPro Pairs: AUDJPY, AUDUSD, CHFJPY, EURCHF, EURGBP, EURJPY, EURUSD, GBPCHF, GBPJPY, GBPUSD, NZDJPY, NZDUSD, USDCHF, USDJPY
+
+--- 帖子 #196 ---
+Hello. I have placed a news filter (the one from forex factory) to the gamma version, I hope it works. Don't forget to add in Options, Experts, (x) Web Request URL, add: https://cdn-nfs.faireconomy.media/ff...r_thisweek.xml I have set the configuration of post 7: in TF: 5 minutes. (The news filter does not take into account those of low impact, if those of medium and high impact, I think this would solve several loss problems.)
+
+--- 帖子 #197 ---
+profit 113, float 77.
+
+--- 帖子 #198 ---
+Like a squirrel. Many small nuts fill a big basket ...
+
+--- 帖子 #199 ---
+I took a look at your list: I have almost all of those trades as well. Thumbs up!
+
+--- 帖子 #200 ---
+ursinho4711: What TF do you use?
+
+--- 帖子 #201 ---
+Nice, i will try it out next week.. can you link to the news filter from FF? this one? https://www.forexfactory.com/showthread.php?t=326551
+
+--- 帖子 #202 ---
+5 Minutes. I use the set-file "5Minutes-for-all" from the original blessing thread. Also, as I am still in the trial phase, 5 minutes opens many, but not too many trades.
+
+--- 帖子 #203 ---
+set of : post 7. Pairs all?
+
+--- 帖子 #204 ---
+Yes! And looks like fx4money uses the same. We have both the same entries and exits. I won't say that this is the holy grail. But in the other thread somebody is using that setup since three years and it works, he sais...
+
+--- 帖子 #205 ---
+Thanks friend. We'll see if it improves with the news filter yet. The good thing about using low tf with news filter, is that it avoids any rare, unthinkable fact that happens before a misplaced information for any Ea. Try it in demo account, let's see how it works. (It is not easy to make it work correctly)
+
+--- 帖子 #206 ---
+Could you please post the set file here. Thanks in advance.
+
+--- 帖子 #207 ---
+Hi show this # post 7 BlessingLiteV24-5Min-AllPairs.set.txt
+
+--- 帖子 #208 ---
+Post 7.
+
+--- 帖子 #209 ---
+Thank you.
+
+--- 帖子 #210 ---
+Thanks for your immediate response
+
+--- 帖子 #211 ---
+Thanks a lot for your cooperation! That's what I hoped from this thread. I do not want to be a lone warrior. The code is very complex and it is always good to have a shecond or third thought/idea... Another to-do, that should not be toooooo difficult but is kind of annoying: There is another check for holiday shutdown in the middle of the code. Only that the program never gets there as the first holiday check already inhibts entry into the for-to loop. Okay, not too much happens in there, deleting pending orders mainly. Inserted Code //+-----------------------------------------------------------------+ //| Check Holiday Shutdown | //+-----------------------------------------------------------------+ if(UseHolidayShutdown) { if(HolShutDown == 1 &amp;&amp; pairinfo[i].CbT == 0) { Print("Trading has been paused for holidays (", TimeToStr(HolFirst, TIME_DATE), " - ", TimeToStr(HolLast, TIME_DATE), ")");
+
+--- 帖子 #212 ---
+Hello, I have loaded version 32 gamma and loaded set file 5min all as well. I dont see any trade getting opened. Any idea please. Thanks in advance.
+
+--- 帖子 #213 ---
+See your Spread Brooker and Blessing
+
+--- 帖子 #214 ---
+Kindly attach EA and set files used.
+
+--- 帖子 #215 ---
+Thank ursinho. I think the presence of the Check Holiday code does not work if you put the option in: false before operating, regardless of this, do you want to eliminate this option?
+
+--- 帖子 #216 ---
+To be honest, I was thinking of this. We are adult people (though what we do is somehow childish) and nobody needs to remind me when there is a holiday ;-) If the EA was really THAT reliable that you could let it run for a year without watching... It so fast done manually: set the "ShutDown=true" and then delete the pending orders. When coming back, set the "ShutDown=false". The EA will start looking for entry conditions again. This holidayShutDown is a small neat feature, but it occupies alot of code. A LOT (haha, lot). I can live without it. What does the community say?
+
+--- 帖子 #217 ---
+There it is, delete it, see if it works well.
+
+--- 帖子 #218 ---
+Sent you a message...
+
+--- 帖子 #219 ---
+hello.I sent you my email, have you received it?
+
+--- 帖子 #220 ---
+Sim, obrigado! Looks like we now have some coders who like to form a team. We should just avoid working on different versions. I was thinking of putting the mql onto GitHub.
+
+--- 帖子 #221 ---
+It is a good idea, but friend, people in general are selfish, hopefully this is not so much.
+
+--- 帖子 #222 ---
+going over the week and i'm taking gbp/aud gbp/nzd and gbp/cad out of filtered ATeam - only a small position in the later two which i will close monday morn and gbp/aud is still struggling but hopefully it will get out next week and i'll remove it from AllPairs(filtered#Ateam)Blessing(gamma 2.0) - nearly closed it out for near break-even Friday Asia session but left it (doh!) likely going to replace gbp pairs with eur/aud , chf/jpy and nzd/usd (possibly also cad/chf) and start them on the Allpairs(filtered#Ateam) for Monday - a little concerned about chf/jpy as it's a beast at times but it has won 12 out of 13 last two weeks so it might be doing something right.
+
+--- 帖子 #223 ---
+Downloaded the ea today. will try on Monday. Thanks and Regards
+
+--- 帖子 #224 ---
+Hi, There are various versions(bata, gamma) of Blessing Multipair EA. Which version are you trading/experimenting with, can you please provide a list of pairs and set file? Regards
+
+--- 帖子 #225 ---
+To whom it may concern. Attached you find the results of the first trading week, from 2020.22.01 to 2020.24.01. Greetings Peter
+
+--- 帖子 #226 ---
+Moin Peter ;-) Thanks for sharing you results. Look similar to mine. What I have learned from other multipair systems in the past is, that at some point you have to make a restart. Close all open positions, even in red, and start from scratch. Attached Image Bury them, they are dead horses...
+
+--- 帖子 #227 ---
+I am trying to put the latest trial version in post#1. Im now using version 33-gamma, no setfile as I put my defaults into the code. You are free to change them though. The defaults came from the so often mentioned 5-minutes-all-pairs setfile. Versions from version 30 on should not change the results for the pairs to trade anymore. Before I release a new version, I compare the results for a single pair with the results for the same pair in the "normal" Blessing version. Remember: the heart of the Blessing program has not been changed...
+
+--- 帖子 #228 ---
+[+1] That would be great! Would be easier to submit pull requests for fixes and improved capabilities.
+
+--- 帖子 #229 ---
+Moin, Moin... OK, you are right. To find the best time for exits or entries I need roundabout 1.000 closed trades perhaps more. Next step will be to optimize the number of currency pairs. Greeting Peter ..Servus
+
+--- 帖子 #230 ---
+Hi, I think it is a good idea to develop Blessing Multipair EA in a team. However, I think we shouldn't put the cart before the horse. 1.) The functional logic of your EA, thank you for sharing ursinho4711 :-), seems to be OK except perhaps just small details. 2.) Now we should analyse how the EA behaves in forward testing. I don't think it makes sense to test additional filters at this stage. Blessing has enough alternatives and is powerful enough. At this point the question arises for me, do all filters really work as known from the original? 3.) If yes, we can consider: a) At what times should we trade? (can we continue with the pending orders technology used), b) Which currency pairs are the most successful in combination? c) Is it worth building a .set file for each currency pair and is the performance of a MT4-dashboard sufficient for this? And d) What is the maximum drawdown or the risk of total loss in the interaction of the currency pairs on a tick basis? Greetings Peter
+
+--- 帖子 #231 ---
+How do you intend to leverage multi-pair operation? What mechanisms do you expect to build that will make Blessing more profitable than her single-pair incarnation?
+
+--- 帖子 #232 ---
+Can you make for MT5 so that we can backtest with multiple pairs? Also what indicator is it going on? Just mathematics or is something triggering the entry? What about using an index indicator or sar?
+
+--- 帖子 #233 ---
+Hi! Did you read the thread from beginning on...? Did you also already see the Search function in the forum software..? Here's something to read: Attached File(s) blessing_3_v3.3_manual.pdf 712 KB | 769 downloads
+
+--- 帖子 #234 ---
+Yes... after my post! MT5 a possibility? Forward testing on MT4 isn't really viable to conclude using 28 pairs.... Far too many variables.
+
+--- 帖子 #235 ---
+Did you read the thread? Sure? Mt5 version is still avaible
+
+--- 帖子 #236 ---
+New version V34-Gamma in post #1. Found two static variables inside the main program that probably caused a minor wrong calculation of the take profit when there was more than one pair. Moved the variables into the struct. **edit** I created a github repository. Whoever wants to participate has to register there and send me an e-mail. I will then try to add you to the team...
+
+--- 帖子 #237 ---
+Where I cannot find? If MT5 available why are you guys not testing multiple pairs in backtester?
+
+--- 帖子 #238 ---
+Hi! What about if you sit down and learn a little bit about the forum software. Read threads about Blessing... study documents... ;-) Thanks and have a nice weekend! Attached Image (click to enlarge) Because the day only has 24 hours and I also do not want to get divorced from my beloved wife...
+
+--- 帖子 #239 ---
+Ah thank you did not know you could do that. So that mt5 version is the same as what you've done? Is there the mt5 version with hedging built in? thank you for your reply
+
+--- 帖子 #240 ---
+No problem, we are here to learn, right? (and make some money later) To be honest, I almost do not work with mt5. No time. Who made the "translation" was our friend fxtrue. Now we have a new version v34 which is already a lot better than that one from one week ago. I am fast making updates ;-) The hedging function I removed from the multipair version. I am still thinking to reactivate it, though. More to that later in the "Blessing Setfile" thread... Sun is shining, 38°C. I will go out and enjoy the day...
+
+--- 帖子 #241 ---
+hedging function is good to have. and i would suggest if possible that ea to close all at certain equity percentage increase.
+
+--- 帖子 #242 ---
+Should already do it. Should... no guarantee though. Please try on demo first.
+
+--- 帖子 #243 ---
+Agree, I was trying to find this option in the settings (not sure if the MT5 is different from your version ursinho4711?)
+
+--- 帖子 #244 ---
+Hello Ursinho you really doing a very good job ,, these set working good with me specially on FXch0ice broker ,, but am wondering why EA don't opening any trades when ( small lot account) function = true ? . thank you ..
+
+--- 帖子 #245 ---
+I assume you mean NanoAccount. I don't think FXChoice has NanoAccounts. That setting only changes some size multipliers. Use the one that works. Trust Strategy Tester. :-) Trust good results.
+
+--- 帖子 #246 ---
+O. K How to open trades with 0.01size only instead of 0.05?
+
+--- 帖子 #247 ---
+Read the manual. Use Strategy Tester. See what LAF and Multiplier do.
+
+--- 帖子 #248 ---
+If would probably be helpful to put all the double semicolons back on the external variables so that MPBlessing matches the manual again. I'm pretty sure the comment on NanoAccount is wrong. The double semicolons are necessary due to '#property strict'. The second semicolon presents MT4 with a null comment forcing it to use the old behavior showing the variable name, while the programmer still gets to see the comments. There are probably better ways to describe these variables in the menu, but the manual goes into a whole lot of detail so the discussion here hopefully doesn't have to.
+
+--- 帖子 #249 ---
+i changed pairs to string DefaultPairs[] = {"AUDCAD","AUDUSD","EURAUD","EURCAD","EURUSD","USDCAD"}; and ea only open for eurusd, and not opening other pairs..... any idea why?
+
+--- 帖子 #250 ---
+Hi All. I set my lot size as .10. My first trade is opening correctly with .10 lot size. But I can see my sell/buy limit is opening with .003 and not with .30. Is it default behavior or is it bug. I am using 34 gamma. Thanks in advance.
+
+--- 帖子 #251 ---
+Hii @Urshinho am facing problem with backtesting ,, useing post(1) sets ,, the problem on back test it's not opening any trades even i use Enable once peer bar and open price only mode . thank you .
+
+--- 帖子 #252 ---
+i believe there are still bugs in the coding. i tried to use different multiplier, but new post opened still using default 3.0 multiplier
+
+--- 帖子 #253 ---
+I just ran a quick optimization test. If you turn on Money Management it seems to work.
+
+--- 帖子 #254 ---
+There are so many reasons for this to happen. Check your Journal tab for clues.
+
+--- 帖子 #255 ---
+when you say 'optimization test', do you mean you mean running the mt4 strategy tester over a pair and watching it trade visually? or something else? looking at my filtered #Ateam (Bless-Gamma2.0 ) and so far this week they are trading well, another week or two of this and I might take them live.. most are trading 80%+ win rate !!
+
+--- 帖子 #256 ---
+No visuals necessary. Strategy Tester and comparison of results. Varying Multiplier changes lot sizes and profits progressively just as it's supposed to.
+
+--- 帖子 #257 ---
+That looks like a promising one at the moment. Remember, that timing is important. Might be too late for y'all ;-) Attached File(s) BL-Multi-V34-BB_STOCHinv.set.txt 2 KB | 560 downloads --&gt; takes a while as I uss BB and inverse Stochastic as entry. --&gt; takes a while for TP as I turned on AutoTP and moving TP/Trailing stop
+
+--- 帖子 #258 ---
+Thanks, yes it would be good to put it back in. Only reason I ask re: MT5 version is so that we can backtest on the strategy tester.... As you know MT4 limitation of only one pair means we can't get a grasp on performance. I know there is forward testing but...
+
+--- 帖子 #259 ---
+i see, i'm going about it slightly differently... i'm running about five demo accounts with MP Bless and Standard Blesssing on others and watching them trade live then looking at the results as i tweak variables (and I also get odd differences between accounts to boot which makes me wonder bugs or broker issues? argh!).. so no back-testing just forwarding testing. my PC is grinding hard these days so might be time for an upgrade.
+
+--- 帖子 #260 ---
+Is this default Blessing settings or have they been changed for this specific MT5 version? Trying to use the manual but not coming across very clear to me.
+
+--- 帖子 #261 ---
+Hello i can see some error here on Fxchoice
+
+--- 帖子 #262 ---
+So many millions of things to try, so little time. I'm currently running 22 MT4 terminal instances on this machine. And some MT5s too. With way too many EAs on each one. :-) Forward testing is the key to profiting with EAs. Never stopped to test the differences between instances with the same broker, though I know they exist. As I've written in this thread many times the differences between brokers are usually quite large . Largest in smaller timeframes. Folks using set files from different brokers are making a big mistake. I don't even use set files from one broker to start an optimization for another broker. Starting from scratch is better and faster. Brokers all make up their own data. It's all different. Read your broker's contract! This is why third-party and tick data are useless. This is why I added EnableOncePerBar to Blessing. Read the rest of this thread for more information. It's all there. Edit: Make that the main Blessing thread. Good luck!
+
+--- 帖子 #263 ---
+same for me
+
+--- 帖子 #264 ---
+It would be so good if we could get a fully original MT5 version, anyone up for doing it?
+
+--- 帖子 #265 ---
+which broker? i moved my demos to one broker the other week because i saw better results and just today they sent an email saying my demo accounts are "hyperactive" and they might close some of them down.. might have to split demos to another broker
+
+--- 帖子 #266 ---
+What about you? Will you volunteer to do so? Btw: I stayed up almost all night to learn about the differences mt4&lt;-&gt;mt5
+
+--- 帖子 #267 ---
+You did not read this thread. @Richard: q.e.d.
+
+--- 帖子 #268 ---
+there is no mention of "hyperactivity" in this thread. it's the accounts running allpairs that have been mentioned by the broker, not he ones running single blessing, calm down, get some sleep
+
+--- 帖子 #269 ---
+Good idea... It was in the other thread: https://www.forexfactory.com/showthr...9#post12682129 When you use a 5 minute or higher timeframe and not only MA as entry, then your broker should not claim. Now I will sleep a little bit on the beach (until London Close ;-) )))
+
+--- 帖子 #270 ---
+float 1473, profit 184 not worth it
+
+--- 帖子 #271 ---
+I just spent a couple days this week attempting to convert single-pair Blessing to mt5. (Had a few too many bug problems all at once this week with mt4.) Blessing was made 'strict' compatible with version .10 by a very helpful soul on that list. That was very helpful to the process. mt5 has so many gratuitous differences, it can be a pain. It's surprising there's not a more complete set of libraries available. Or maybe there is and I've missed it ...
+
+--- 帖子 #272 ---
+Perhaps not using that word. But the discussion was had and exists. Has little to do with 'all pairs'. And probably not accounts but specific terminals or EAs. Lots of trades from lots of charts is usually okay. It's too many trades per pair that they don't like. Try reading the first post again. :-) Good luck!
+
+--- 帖子 #273 ---
+Hello All! This is my first post. Attachments are the results I traded on a real account for one week. I started from 100,000 yen and added 200,000 from yesterday. All transactions are conducted with default settings. I think that it is a good EA, but starting trading at 100,000 yen is a risk.
+
+--- 帖子 #274 ---
+Good morning @ll! Had a night of sleep, I really needed it. I will try to write down the zillions of thoughts I had about this EA while I was dreaming... First of all thanks to everyone who contributed in a helpful way... What is the benefit of this EA compared to single Blessings? Good question, maybe we will get more answers in the future. For now I see following: in cooperation with a dashboards, you can have a quick overview about the live performance when changing parameters. Can be used to help your real decisions or for training purposes. A Dashboard imho is a must when trading multiple pairs. Please google or use the search function of the forum. One hint: same magical (EAN) number. Merda, I had my head full of things to write down. I need another coffee...
+
+--- 帖子 #275 ---
+As an interested beginner who wants to have a detailed look at the MP blessing. Are dashboard and EA integrated, i. e. are they one ex.4-file? Or are you in the process of doing that? If not - how would I go about doing/implementing that. Which dashboard? Reference to EA? Which file goes into which folder etc. I know you don't have the time or energy to give me detailed explanations but maybe you can direct a beginner to the links/threads on how to do this. Thanks in advance. By the way - I'm really impressed by all the work you (and a few others) are prepared to put into the Blessing-project. For me at least - it's not that I'm too lazy to get involved (as you sometimes complained when feedback was sparse) but I lack the technical expertise (as yet). So I am rather a pupil in awe.
+
+--- 帖子 #276 ---
+Just came back from the beach and will go to a party now. That's why here comes the short version only. Please use the (excellent) search function of the forum or use google. This is like a training for you: don't need to know everything, just to know where to find the information... 1. open two charts. Apply a template that makes them black. Move the Y-Scale away, sometimes some infos may disturb the screen... 2. on one chart apply the MultiPair-Blessing EA. Use the timeframe you want it to trade with 3. on the other chart put a dashboard. There are plenty of them in the forum. Read the dashboard thread and pick one that suits your needs. I am using some of the boards user Gvc posted (thanks alot, Gvc). 4. MultipairBlessing and Dashboard a) must have the same magical number b) should have the same list of pairs to trade. Both are settings in the EA settings and can be changed. That's it! https://www.forexfactory.com/showthread.php?t=532236
+
+--- 帖子 #277 ---
+please guys need help with backtest ,, i have some error like open simple.raw fails no marketinfo for xauusd
+
+--- 帖子 #278 ---
+Try a different symbol.
+
+--- 帖子 #279 ---
+hows it looking this weekend? my raw AllPairs is taking another hit on GBP - RIP Europe! last week it got out of big DD gbpaud but didn't close at BE, it closed at a semi-reasonable loss. glad i removed gbp/nzd also from my #filteredAteam last week only one that might get pulled out next week is eur/aud as it's slipped under 80% win nzd/chf will play on Ateam next week. may the fx-gods be with you. launching allpair EAs during brexit and global panic is a good test stay rested and hydrated party guy, stay sharp for the FX might join you tho, i'm off for a 4 week jaunt myself next week, trading by the pool
+
+--- 帖子 #280 ---
+Next week, the movement of the GBP pair will need careful attention. But I still want to see the results of the transaction with the default settings.
+
+--- 帖子 #281 ---
+one or two on default allpairs are about to pass level five so watch for how it will try get out of it.. i've changed one demo to only panic at level 8 this week so will see what happens.
+
+--- 帖子 #282 ---
+Hello Jack, Thank you for your suggestions. This morning, I added 200,000 yen again and passed one pair of level 5. And I thing if the amount of this EA does not exceed 500,000 yen, there is a risk. But I will continue to test with my real account, and I will report the results again on this weekend.
+
+--- 帖子 #283 ---
+Hi, ursinho4711 EA (BlessingLite_3_v3.9.6.34_gamma) was installed on two demo MT4 of different brokers, but it is not executing trades on one MT4 and the following message is reflecting on the chart window. "Wait for the next tick". MT4 Journal Message: 2020.02.03 21:33:40.669 BlessingLite_3_v3.9.6.34_gamma XAUUSD.p,M5: No MarketInfo for XAUUSD0.00000000 Set File: BlessingV24beta-XUSUSDTest.set.txt What might be the cause?
+
+--- 帖子 #284 ---
+I'm guessing that Gold is closed - it has different market hours from standard currency pairs.
+
+--- 帖子 #285 ---
+@ursinho ...if you can remember to post the latest mq4 file regularly then I'll try to keep up with you and provide MT5 versions
+
+--- 帖子 #286 ---
+mq5?
+
+--- 帖子 #287 ---
+sadly not - ex5 only
+
+--- 帖子 #288 ---
+Hi, ursinho4711 Could u pls provide mq4 file for BlessingLite_3_v3.9.6.34_gamma. I did not find it on the thread.
+
+--- 帖子 #289 ---
+I started it. Funny that the "easy things" take longer time: string functions for example. Many functions moved from return variables to parameter change via pointers (sorry for my C language...). Very annoying in nested code ("see how cool I can put everything in one line")
+
+--- 帖子 #290 ---
+Hi! To be honest I did not put the mql4 file and only the ex4 in post #1 because I was kind of hmmm sad? Only three friends helped to take a look at the code. So I thought: %§#* leechers... I am in a good mood today, though everything is in red ;-) I will put it on post #1 again...
+
+--- 帖子 #291 ---
+I would like to, but I have zero and I mean zero code knowledge. I can contribute in terms of backtesting or forward testing if one would like. Seem strange someone would release multi currency EA and not for MT5 where you could backtest. I know useless in most case, but could at least see how it all interacts. Forward test is best I agree.
+
+--- 帖子 #292 ---
+This EA is making good results so far and I started this EA last night . The drawdown observed is low as of now. I am unable to do backrest as it creates trades on multiple pairs. Iam running it on demo account for forward test. I liked the concept. Attached the results of my account
+
+--- 帖子 #293 ---
+Wait for the next tick message is showing until anew candle is being formed. I am testing it in demo initially in 15 mins tf. Even I was able to see the message. I have switched to m1 tf. As new candle is formed, the message was changed to running.later I switched back to m15.
+
+--- 帖子 #294 ---
+..thanks dorbthe
+
+--- 帖子 #295 ---
+..thanks fo the EA how come it opens buy stops and sell stops for pairs that are not on the charts
+
+--- 帖子 #296 ---
+why BlessingLite_3_v3.9.6.34_gamma Why does this happen after the BlessingLite_3_v3.9.6.34_gamma is load BlessingLite_3_v3.9.6.30_gamma No such situation thank you The problem has been solved because when setting up multiple foreign exchange pairs, I changed it to 23 pairs instead of 28 pairs. This problem arises
+
+--- 帖子 #297 ---
+Are you trying to do backtest??
+
+--- 帖子 #298 ---
+Why?
+
+--- 帖子 #299 ---
+At the moment I have nice results on a H4 time frame with following strategy: 3 pairs that "hedge each others" (EURGBP,GBPJPY,EURJPY). Autogrid, Profit-Trailing and maybe more important: trailing stop loss. Avoids deep DD. Will let it run until Friday and then analyze... @all (almost) the EA is working. If you have problems, especially with the tester, it is YOUR setup and the problem might lie inbetween your ears. Please do not use this thread for basic MT4 questions. Use the help function, read books, search the forum...
+
+--- 帖子 #300 ---
+For multiple foreign exchange pairs, I'd like to make a suggestion, because the system adopts Martin method to add warehouse, but using this idea, when EA has a foreign exchange pair entering more than two layers of adding orders, if the system is always unilateral, it will be very dangerous. You can use other foreign exchange pairs to solve the foreign exchange loss pair that has already made profits, and even out the profit and loss sheets, the rest are profitable If the foreign exchange pair is running in the system, then there will be no dangerous situation in the EA system. I don't know if I can. The attachment is the reference system. Thank you sorry My English is so poor void CheckOverlapping() { //BUY---&gt; TotalBuyOrders = CountOfOrders(MagicNumberBuy); if (TotalBuyOrders &gt;= 2) { Lpos = 0; Cpos = 0; Lprofit = 0; Cprofit = 0; Lpos = LidingProfitOrder(MagicNumberBuy); Cpos = CloseProfitOrder(MagicNumberBuy); if(Lprofit &gt; 0 &amp;&amp; Lprofit1 &lt;= 0) { if(Lprofit + Cprofit &gt; 0 &amp;&amp; (Lprofit + Cprofit)*100/Lprofit &gt; ProfitPersent) { Lpos1 = 0; CloseSelectOrder(MagicNumberBuy); } } else if(Lprofit &gt; 0 &amp;&amp; Lprofit1 &gt; 0) { if(Lprofit + Lprofit1 + Cprofit &gt; 0 &amp;&amp; (Lprofit + Lprofit1 + Cprofit)*100/(Lprofit + Lprofit1) &gt; SecondProfitPersent) CloseSelectOrder(MagicNumberBuy); } } //&lt;---BUY //SELL---&gt; TotalSellOrders = CountOfOrders(MagicNumberSell); if (TotalSellOrders &gt;= 2) { Lpos = 0; Cpos = 0; Lprofit = 0; Cprofit = 0; Lpos = LidingProfitOrder(MagicNumberSell); Cpos = CloseProfitOrder(MagicNumberSell); if(Lprofit &gt; 0 &amp;&amp; Lprofit1 &lt;= 0) { if(Lprofit + Cprofit &gt; 0 &amp;&amp; (Lprofit + Cprofit)*100/Lprofit &gt; ProfitPersent) { Lpos1 = 0; CloseSelectOrder(MagicNumberSell); } } if(Lprofit &gt; 0 &amp;&amp; Lprofit1 &gt; 0) { if(Lprofit + Lprofit1 + Cprofit &gt; 0 &amp;&amp; (Lprofit + Lprofit1 + Cprofit)*100/(Lprofit + Lprofit1) &gt; SecondProfitPersent) CloseSelectOrder(MagicNumberSell); } } //&lt;---SELL }
+
+--- 帖子 #301 ---
+Good to see you going up the timeframe scale. H4 is usually the most profitable with multi-pairs using the same, relatively simple setups. What do you mean by 'hedge each other'? Are you actually hedging them in some way? (I doubt it.) If not they're actually increasing risk exposure. Deep DD is a double edged sword. It's good to control, but systems with greater drawdown often make more money.
+
+--- 帖子 #302 ---
+Why not. The reason you have code to use at all is because of Blessing's long tradition of open source. You have something else, possibly nefarious, in mind?
+
+--- 帖子 #303 ---
+No, that is why I put it in "". Maybe the "circle secure" fits better? The setup I made, at least it is my idea, is to let the wins run and to bury the dead horses early. I know that Blessing can handle DDs very well. But as I am already using the London Close EA also on another account, that is enough emotional tension for me. Need something more slow and calm...
+
+--- 帖子 #304 ---
+Blessing3 is open source. however BlessingPro is not and become a commercial product by jtatoday. the newer versions like Evolution are all non-open source.
+
+--- 帖子 #305 ---
+These groups all exist because of the open source version of Blessing that a group of traders built starting years ago. JTA helped with coding of more recent versions and was allowed to offer for-pay versions. That mess is all gone now. And the open source remains. I and others are contributing to make it better. The newest versions of Blessing are open source. Non open source outgrowths are not appreciated. Not fair. Not right. We can't continue to build on each others work without source code.
+
+--- 帖子 #306 ---
+I see this EA is doing martingale. not sure how many levels. Any one tried it for long time?
+
+--- 帖子 #307 ---
+One more thing noticed today. While closing the trades it is closing the trade with loss. Since enabled minimal loss, it is not considering the trades opened before one level.
+
+--- 帖子 #308 ---
+Would be good to know if this happens (with exactly the same setup and exactly the same entry date/time) on the "normal" blessing (version 3.9.6.09 to 3.9.6.13) as well. Can this be seen on backtest as well?
+
+--- 帖子 #309 ---
+This is not seen in normal blessing. (version 3.9.6.09 to 3.9.6.13) Normal blessings works fine and handle this situation well. Right now am testing in Demo account.
+
+--- 帖子 #310 ---
+Hi, ursinho4711 BlessingV24beta-XUSUSDTest.set.tx BlessingLite_3_v3.9.6.34_gamma.ex EA is being tested on XAUUSD with 15m tf, but the alarming thing is that the EA keeps on selling in oversold and buying in overbought territories causing undue DD and loss. If Stochastic is enabled to determine Overbought and Oversold, then EA does not open trades. Pls advise to overcome the problem. Secondly, whats the best tf to trade XAUUSD?
+
+--- 帖子 #311 ---
+THE question: does this happen with the "normal" Blessing as well? Then I do not have to look into the code rather you into your settings...
+
+--- 帖子 #312 ---
+Hm, not good. Then I have to dive into the code... Can you please send me the setup-file that you used when this happend?
+
+--- 帖子 #313 ---
+BlessingV24beta-XUSUSDTest.set.tx
+
+--- 帖子 #314 ---
+again... @all (almost) Remember: the "original" Blessing is open source and everyone can find out how it works. There are planty of threads, documentation, examples. The "multipair" version is "just" a stripped version of 3.9.6.13 that runs in a for-to loop over selected pairs. Also this mutlipair-version can be studied as source in post#1. I am doing this project to learn about blessing to find a way to use it over multi-pairs without deep testing of single pairs to brush up my coding skills because it is interesting I am NOT a professional finance guy, just an engineer who studied digital signal processing. I have a real job in the real life and a real family. Please try to contribute and not see me as the service guy who has to solve (your?) problems. I was hoping on a discussion about the code and not just "something is not working". If there should be something that might obviously relate to the multipair migration, please provide as much information as possible. Every detail is important. Do you go to the doctor and say: "hm, today I am not feeling good. Tell me what it is" Or do you rather provide infos like "where it hurts, symptoms, since when, what happened..." This is an open project. Contribute, cooperate, collaborate. ...or forever hold your peace...
+
+--- 帖子 #315 ---
+Blessing does not and can not do martingale. The manual is wrong and should never have used that term. Martingale is a stupid and completely discredited betting system from the 18th century. If you have an infinitely large account martingale will probably work for you. Otherwise, you will most likely lose all your money. Unlike martingale, Blessing can and does make money consistently if carefully applied. Blessing is a Grid system which means it usually makes lots of trades, the sizes and multiples of which are controllable. Blessing can even make single, non-grid trades successfully by setting the grid size to one. It's a very configurable system. But it can not do martingale . Someone needs to edit the Blessing manual and remove 'martingale' references from the text. https://en.wikipedia.org/wiki/Martin...betting_system )
+
+--- 帖子 #316 ---
+Thanks for all you do. The concepts and execution are interesting and inspiring. Your efforts are most appreciated. Hopefully readers will see themselves as important contributors and invest a little time delving more deeply into problems and questions before posting. Experience and testing of the system can be as important as programming. Good luck!
+
+--- 帖子 #317 ---
+Thanks, Rich, for your encouraging words. Saved my (and my family's) weekend... To one of the above posts about basket closing in minus: I just did a backtest "old" and "multipair" with the same settings. And what can I say? Attached Image (click to enlarge) Maybe, and this I cannot test until I have a good MT5 (source) program, it only happens when there is more than one pair? Wrong TP calculation for example...
+
+--- 帖子 #318 ---
+Thanks. It is the same set file which was shared in post1.
+
+--- 帖子 #319 ---
+This is the result of the second week. After adding the deposit up to 500,000 yen trading are well. The total profit for the two weeks was 12,479 yen. I will continue to test this EA.
+
+--- 帖子 #320 ---
+All pairs raw, filtered v1 - v3 survived another week. A-team kicked ass going well with no level 3 trades this week. Ill post more if I can but busy sipping iced teas by the pool n all ,) have a good one.
+
+--- 帖子 #321 ---
+Why not?... 1) because I have an MQL4-&gt;MQL5 converter, so the "source" is basically unchanged 2) because the objective of the exercise was to help Ursinho spot errors much faster than he would have if relying on forward-testing The reason you have code to use at all is because of Blessing's long tradition of open source. - that's great... but who are you to presume that I even use Blessing at all? (for the record, I don't) You have something else, possibly nefarious, in mind? - sad to see you belittle yourself with that snide comment
+
+--- 帖子 #322 ---
+1) already thought so ;-) 2) really appreciate it, thanks alot And more of all I would be happy if we could focus on the code and settings. Battles are wasted time and energy.
+
+--- 帖子 #323 ---
+I'm attaching my edited source code version of "gamma" (for MT4) plus a compiled MT5 version. Please note that the following: 1) there are almost 40 edits / fixes in this version - several of which are critical (they can be located by searching for "fxtrue") 2) I would appreciate my changes being carried through to all new versions of BlessingLite - particularly as many are needed for the MT5 version and I don't have time to waste re-implementing the same fixes over and over 3) there is a potentially-serious underlying issue with incorrectly initialised variables (they intermittently equate to EMPTY_VALUE and result in erroneous values further down the computational chain - sometimes causing 'divide by zero' critical errors) - I have applied fixes to the places I have identified, but the code would benefit greatly from someone trawling through it and finding the root causes 4) the edited source code compiles happily in MT4 and *appears* to run happily in MT5... but I promise nothing, so use entirely at your own risk So, have fun and report any oddities you discover
+
+--- 帖子 #324 ---
+First of all: thanks again for your help, fxtrue! That's the cooperation I was hoping for. Thumbs up and many pips for you! This is an issue in the "original blessings" already. I was really surprised when I did the transmission to the multi-pair and went through the code. No secure against divide by zero. Variables declared, never got initial values (even if it is a zero) yet used. I thought -as the program was open such a long time and was coded by professionals- that this would not appear in a ...09 version anymore. This weekend I was playing with setfiles of the "original blessing" and you cannot believe how often the EA crashed because of zero divides.
+
+--- 帖子 #325 ---
+I'm not sure about that 'coded by professionals' claim. Version .09 has been around quite a long time. It works surprisingly well when it works. I think there's been a realization by many that it needs to be rewritten. But that's a big job, given the poor debugging tools available and many other factors. I think most folks tend to respect the code and try to make as few changes as possible. That's a common approach taken by 'professionals' when fixing bugs or making small changes on someone else's code. Code produced by groups is problematic, especially without coherent rules. Blessing still needs a complete rewrite. I'm too busy using it. That may change. If you see errors that can be easily fixed please point them out when it's convenient. I am admittedly more a user than a writer on this project and my time is sometimes limited. Thanks.
+
+--- 帖子 #326 ---
+Hi,fxtrue I would like to try optimize the setting value for MT5 version BlessingLite_3_v3.9.6.34_gamma_fxtrue.ex5 Could you please help to modify a little for me can testing? all indicator has an option on the setting value, MA, CCI, Bollinger bands, stochastic, MACD Can possible add setting with all value of indicators more like time frame and shift value and all code Period() or _Period change it to ENUM input for select on setting (dropdown like on smart grid setting) if you can help to modify a little testing optimize version will be great, I can try to optimize the best value for everyone. Thank you
+
+--- 帖子 #327 ---
+I'm sorry, but I have to decline - the last thing I want to do is create yet another fork of Blessing, but I'm happy to create MT5 versions of whatever Ursinho releases.
+
+--- 帖子 #328 ---
+The core issue is that Blessing was originally coded by "enthusiastic amateurs" prior to build 600 of MT4 (when "strict" came into being) and those earlier versions of MQL4 were very tolerant of sloppy coding, so variables would be automatically initialised if the coder forgot to do it, and variable types were not enforced. This meant that double types were often used in place of integer parameters and integers were used for dates and/or booleans, so calculations that should have returned "int" values might have unplanned decimal portions, "decimal" results may have been unwittingly truncated, etc. ....fun times
+
+--- 帖子 #329 ---
+I already learned more than thirty years ago not to do things like that. But these times were also fun (more than today)
+
+--- 帖子 #330 ---
+Thank you Mike McKeough, the Blessing Development Group, ursinho4711 and fxtrue (and everyone) for the work you've put into this. I've been testing it live for the second day now... interesting. I basically used your set file settings ursinho4711, with some exceptions (nano account). I'll attempt to keep you posted with results and any potential suggestions. I've never done any coding (unless you count a year back in 7th grade, in which I really don't remember a thing), or even really even looked into a code. The last two days, however, I actually took the moment to open up this EA, and take a look at it's guts. It's very interesting how it's all laid out and is seemingly in "layers." It shows how much time was really put into this.
+
+--- 帖子 #331 ---
+hi ursinho, account size did this test perform on?
+
+--- 帖子 #332 ---
+As a cautionary heads up (I'm not quite sure what happened, yet), I had the settings set for 10 trades at once. I went away and came back to my computer to see more than 20 active trades. I then went into the properties and changed the setting to ***NO NEW TRADES***, turned it to True, and after hitting ok, it immediately Closed ALL the trades. It was not ***CLOSE ALL NOW***, but no new trades. So, not sure what happened there. After reloading chart with EA and getting 25 more trades, I had to just turn all entries to disable to stop more trades. I didn't even think there could be more than 15 at once. Hmm... Will do more testing.
+
+--- 帖子 #333 ---
+Hi Dowde, thanks for the feedback! Number of trades is still from the "old" blessing and relates to one pair, not all pairs of the list. So if you have list of 28 pairs there could be 280 trades. We should install a new parameter "pairs at once". "No new trades" should not close all, just not allow new trades (as the name sais). That's a bug, thanks for reporting it. At the moment, this is what I also do, is to set all entries to disable, as you did correctly...
+
+--- 帖子 #334 ---
+The NO NEW TRADES entry controls the ShutDown variable. To be precise, it stops allowing trades once the basket is closed and the number of open trades drops to zero. The intent is to allow the current basket, if any, to run to completion. There are all kinds of ways of controlling your level of trading and the impact on your account. None of them is really perfect for all situations. (Other than simply keeping a surplus of extra cash in your account! Which is a very good idea.) MinMarginPercent may be helpful. There are various other controls that could be added. Some multi-pair EAs provide quite a list of selections.
+
+--- 帖子 #335 ---
+Hello. You can publish the template, the best template that is working, and the optimal time frame to place the Ea.
+
+--- 帖子 #336 ---
+[quote=ursinho4711;12744909]{quote} 1) Here are those to files we should work with and code in the Blessing Multi pair. Cheers. Attached File(s) RSIOMA Alert.mq4 3 KB | 405 downloads Attached File(s) RSIOMA.mq4 6 KB | 436 downloads
+
+--- 帖子 #337 ---
+It's nice having all the entry possibilities. So far I've only been using MA and Stochastic with decent results. It would be interesting if we, with the EA, had the ability to Enter a trade only when two or more of the parameters were met, e.g., MA and Bollinger both hit. Obviously, this may give us more precise trades...
+
+--- 帖子 #338 ---
+You can it's just possibile by Ea
+
+--- 帖子 #339 ---
+Emmanuel, where would one find Evolution? I’ve tried but the links on his website don’t work... thankyou.
+
+--- 帖子 #340 ---
+By using this setting BlessingV24beta-XUSUSDTest.set.txt , can we trade GU by replace xususd wih GU ?
+
+--- 帖子 #341 ---
+Please Add prefix suffix option a) BlessingLite_3_v3.9.6.34_gamma GBPUSDi,M5: Dashboard detected suffix: i how i fix that ? the issue is i leave it default and have the above message b) when i put manual the pairs like that EURUSDi,AUDUSDi,NZDUSDi,GBPUSDi,USDCADi,USDCHFi,USDJPYi,EURAUDi,EURNZDi,EURGBPi,EURCADi,EURCHFi,EURJPYi,GBPAUDi,GBPNZDi,GBPCADi,GBPCHFi,GBPJPYi,AUDNZDi,AUDCADi,AUDCHFi,AUDJPYi,NZDCADi,NZDCHFi,NZDJPYi,CADCHFi,CADJPYi,CHFJPYi i have these multiple messages for each pair .. BlessingLite_3_v3.9.6.34_gamma GBPUSDi,M5: No MarketInfo for EURUSDii0.00000000 c) if i put the list of pairs with out the prefix "i" i have also error messages .. any ideas ?
+
+--- 帖子 #342 ---
+Yes of course. You can easily coment out the part in the init function of the programm and then use your list with EURUSDi,CADCHFi. somewhere in line 421, put the two // so that you have this line: // getPrefixSuffix(prefix,suffix);
+
+--- 帖子 #343 ---
+I am also wondering this!
+
+--- 帖子 #344 ---
+Can you add maxdd code? i Can't Find it. Or Add the code to close all orders with money loss ? Thanks
+
+--- 帖子 #345 ---
+thank you for your replay, i tried it today but didnt work any other ideas ? i wonder nobody tested in an ECN broker ?
+
+--- 帖子 #346 ---
+a 5k demo (grew to 8k) running 15 pairs lasted two months only to go bust on cad/jpy and gbp/chf this week trading 7.29 lots at the peak it ran out of equity.. to survive further min equity would have need to be 15-20k - other MP Blessing with limited pairs are still trading as i removed jpg chf gbp and eur pairs a few weeks ago -- i'm running three pairs live and its going slow but and only one pair went to 0.09 lots in these last two weeks of chaos. going to reset all pairs demo with 50k to resume forward test.
+
+--- 帖子 #347 ---
+Hey guys, Tried with 200 usd, 1k usd and 3k usd. 200 died after 2 days, 1k looks ok with 40% dd and 3k had 17% dd till now but I need more time in order to know what can survive. Gonna try with 700 usd next week. I'm trying to find the minimal deposit that this EA could last for 1 month. Share your experience about the initial deposit.
+
+--- 帖子 #348 ---
+Good work.
+
+--- 帖子 #349 ---
+Maybe if you shutdown the expert during nfp it can be very cool
+
+--- 帖子 #350 ---
+Good day...please i noticed that the blessinglite ea dosnt pick any trade...since i started using it...it only picked trades on the first day....and since then nothing more.. What could be the problem
+
+--- 帖子 #351 ---
+What is the starting lot? I think that disabling the MM and use 0.01 only is the best approach. 7.29 lots sound bad... Seems like you used MM.
+
+--- 帖子 #352 ---
+MM is False but the multiplier is 3 so with 0.01 starting only takes level 7 to get to 7.29 and to survive it would have needed to keeping buying until level 10 and with a multi of 3 level 10 is 196 lots... so not enough equity for sure if that is how this EA works without MM, lol. maybe the math needs to be looked at past level 4 if you want a true EA or that's where MM will help you ? if my live one ever gets to l4 i will disable it and manage it myself.
+
+--- 帖子 #353 ---
+with the multiplier , one option is to consider close oldest position when you open #5 close #1 open #6 close #2 open #7 close#3 open #8 .... keep only a maximum 5 open positions (in one basket) at any one time. if you keep opening more and more without close oldest, your margin cannot handle the increasing DD.
+
+--- 帖子 #354 ---
+Yes but maybe with a multiplier of 3, you will cut the positions faster? Try to run both demos 1.3 and 3 in parallel and let us know which one survived.
+
+--- 帖子 #355 ---
+i noticed a pattern in that if a pair starts trading to l3 once or twice chances are it will soon get itself in a trade past l3, so i simply removed pairs that the EA gets stuck on l3 often even though they often had the highest profits. thing is it will get some decent profits due to vol out of l3 trades now and then but for how long? maybe only two or three times, sometiems 6 but if im live i want to protect equity not max risk it.. i'd rather bet on the weather. 1.3 might be worth trying but it would depend on how it grids the rebuys.. better re-buying max adrs imo and getting out quick (like you say) otherwise you might as well be buying round numbers or magic lines as you will often be holding negative carries.
+
+--- 帖子 #356 ---
+I'm using a preset I found here somewhere, trying now 1k,1.5k, 3k, removed a few gbp pairs. Will drop the results once ill double. Cheers
+
+--- 帖子 #357 ---
+the DD is too high, you run on 28 pairs so you need 0.8% DD max per pair otherwise you'll burn your account
+
+--- 帖子 #358 ---
+how to limit the pair order (28pair) "MaxTradesPerPair" ?
+
+--- 帖子 #359 ---
+Same here. Using a broker that has ".uk" I edited the source and even added all pairs as custom pairs, got this message: 2020.03.19 16:39:53.198 BlessingLite_3_v3.9.6.34_gamma USDCAD.uk,M5: No MarketInfo for USDCA0.00000000 -- I commented: // getPrefixSuffix(prefix,suffix); And using defaults. Now, under experts: 2020.03.19 16:59:39.943 BlessingLite_3_v3.9.6.34_gamma EURUSD.uk,M5: Broker has disallowed EAs on this account under journal: 2020.03.19 16:59:40.146 '89394': order sell limit 0.01 GBPCHF.uk opening at 1.14950 sl: 0.00000 tp: 0.00000 failed [Trade is disabled] The broker claims that he doesnt block EAs and I have another account with other EAs - no issues. Testing another EA on this account. update: fixed. broker's issue.
+
+--- 帖子 #360 ---
+Forward testing on demo account. Blow my 3000$ account (1:500) in 3 days. It is possible to select the pairs for trading ? 28 pairs must be to high for limited account.
+
+--- 帖子 #361 ---
+there is a crash of EA asking for restart. As it was on VPN didnt see how and when it happened. Did any one else experienced it.
+
+--- 帖子 #362 ---
+Sure, very easy! In the settings, instead of using the 28 default pairs, you can make your own list. Even XAUUSD or whatever is possible. Or EURMXN... The list must be comma separated like XAUUSD,EURMXN,EURUSD,CHFJPY
+
+--- 帖子 #363 ---
+"According to Metaquotes guidelines, an account is considered hyperactive when it exceeds 2,000 messages per day. We are flexible with this guideline and will only contact clients when this threshold is breached by some margin. Your server messages have exceeded 5,000, so we must ask you to take immediate action to bring these down to an acceptable level" Can you check this. It looks like it is sending messages to server way too many times. Can you check this part.
+
+--- 帖子 #364 ---
+Want to test this!
+
+--- 帖子 #365 ---
+Hello! This version have a negative Trailling Stop ? (TSLPips= -10) Thank you so much for your work and for sharing.
+
+--- 帖子 #366 ---
+Thank You!
+
+--- 帖子 #367 ---
+Not knowing anything about code, is there anything I can do to help the project?
+
+--- 帖子 #368 ---
+When I close MT4 open trades are getting closed automatically when it opens again. Any idea please.
+
+--- 帖子 #369 ---
+can you change it ea will order based on 1 pair signal? for example if the sell signal is eurusd then all pairs make a sell order together, thanks
+
+--- 帖子 #370 ---
+Hello. I have only known forex since early 2020. I am unemployed and trying to find work after the Covid-19 epidemic. I have a savings of $ 250. Can I use this capital for your Blessing Multipair EA to trade with real money? I need a passive income to support my family before I can find a job. If you have any other EA that can generate an income of $ 250 / month with a capital of $ 10000, please sell me. I can borrow to buy it. Look forward to receiving your feedback. (I am from Vietnam, my English is not good so I use Google Transler)
+
+--- 帖子 #371 ---
+Dear takeda1312, Only a fool can think, that 250USD robot or system could make you money. It is very very hard to stay in green numbers in a world of Forex. The process of learning and finding the best system that suits you and makes you money is a painful process. Guess how I know. No robot or system for sale wont make you money. There are however goldmine threads here, where you can learn how to be constantly profitable for free. This one f.e. https://www.forexfactory.com/showthread.php?t=574351 Be safe C.
+
+--- 帖子 #372 ---
+Totally agreed. Same with books "How to make Billions in Forex". If I had this holy grail knowledge and the billions... why would I waste time writing a book? I would enjoy champagne on my yacht in Monaco. If I had the perfect system I would not need to sell it... just let it run and enjoy... The only thing EAs can do is help you and take over some stuff you would do manually anyway.
+
+--- 帖子 #373 ---
+Really - the cliché of a successful trader's life? Nothing better comes to mind? Whatever happened to the word "shallow"? If money - if you have it - only leads to repetitive (or competitive?) accumulative consumption it's not worth the effort.
+
+--- 帖子 #374 ---
+Thanks for the (philosophic) answer. Maybe you did not get the intention of my answer: it was not about what to do with billions rather to warn that there are too many people around wanting your money with the promise to make you a billionaire... If I had these $$$ I would not waste my time in Monaco. Wife and children know where to find my credit card ;-)
+
+--- 帖子 #375 ---
+Earning from Forex Market is more about advertising, dummy workshops, offering tools and offering courses from so called guru's who do not trade anymore.
+
+--- 帖子 #376 ---
+Hi Ursinho, Thank you for your humble efforts. I downloaded the 34 version. Tried this. I tested the set file which was already uploaded here before on EURUSD test date - 6th May,2015 to 16th July 2015.. a test time of approx. a week more than 2 months Dukascopy Demo. I am unable to figure why the sudden collapse in the last part of the trade. Is it normal with others. Or is it because I used a set file which is not for EURUSD? Attached Image (click to enlarge) Attached Image (click to enlarge) It works very slow on data and took time around 1 hour or more to complete the test. EDIT -- here is the set file Attached File(s) 200530-euraud-m5-CL.set.txt 12 KB | 346 downloads
+
+--- 帖子 #377 ---
+Hi! I need to see the last results of the results tab and the last messages of the journal tab. The "loss" at the end can have following reasons for example: - Equity stop - Close all orders due to end of test (most probable, according to the graph) or other money management reasons...
+
+--- 帖子 #378 ---
+I think it was due to close all orders. I re-tested with longer time frame and it worked. Thank you for your prompt reply. Will post some more test inputs.
+
+--- 帖子 #379 ---
+Strategy Tester doesn't know how to end a test with open positions. So it sometimes ends with a false large loss if there was a big drawdown at the end. It may signify that your system is experiencing large drawdowns or trading without stops.
+
+--- 帖子 #380 ---
+don't use this ea to trade, trading too many pairs at the same time with martingale is very dangerous. there will be few times in a year when pair moving trending (just like last 2 weeks) when most counter trend martingale strategy traders lost a lot
+
+--- 帖子 #381 ---
+Who said anything about Martingale?
+
+--- 帖子 #382 ---
+Hello, I am newer here.And use this EA is so good so far. But in my Alpari broker,i just found a error: 2020.06.11 09:37:15.174 BlessingLite_3_v3.9.6.34_gamma EURUSD,M5: zero divide in 'BlessingLite_3_v3.9.6.34_gamma.mq4' (1625,67) What is this issue? And i found that i set use all 28 paris,but there are not all 28 paris opend,but in my other broker it works good,so what is my mistake?
+
+--- 帖子 #383 ---
+this ea is not martingale? what does the multiplier in the code for? input string LabelLS = ""; // ----------- LOT SIZE ----------- input bool UseMM = false; // UseMM (Money Management) input double LAF = 0.5; // Adjusts MM base lot for large accounts input double Lot = 0.01; // Starting lots if Money Management is off input double Multiplier = 3.0; // Multiplier on each level
+
+--- 帖子 #384 ---
+You could if you wanted to. But you do not need to. I know, even the (original) documentation uses the word martingale. "Real" martingale uses a doubling of the lots (or jetons in roulette) to at least win the initial bet. Doubling, as we know from the rice grain/chessboard story, soon leads to astronomics sums. 16 levels martingale does not sound much. Looking at the result of 2^16 is opening your eyes. Back to the EA: you can adjust the lots per grid and use TP/SL. Martingale only, if you let it run with doubling the lots in a fixed grid.
+
+--- 帖子 #385 ---
+Can have many, many reasons. What is your entry based on? Maybe (probably) the maximum spread? Anyway, to clarify something: this multipair EA is more for testing purposes on demo accounts than for live trading. With one set-file you can overview many pairs at the same time. IF (!) you found a setting that works for more pairs, then it is a good "live-tool". Combined with a dashboard, or you might loose overview quickly. Basket take profit for all used pairs...
+
+--- 帖子 #386 ---
+Martingale requires the doubling of bet size for each LOSS . That's the simple definition. Blessing certainly cannot do that without changing the code. I doubt Multipair Blessing can either. A small string of losses would bankrupt any account that isn't infinite. I know the Blessing manual mentions Martingale. That's very unfortunate. And very wrong. The simple idea of increasing lot size for subsequent (usually winning) trades makes a lot of sense and is very common in effective trading systems. No one said you had to DOUBLE the size every time. Even if you do it's still not the absurd Martingale betting scheme. Still not doubling in response to a LOSS. That's idiotic. Increasing the trade size incrementally helps with many things including FIFO. With different trade sizes most brokers will allow you to side-step FIFO rules. No doubling necessary. You can close trades in any order. https://en.wikipedia.org/wiki/Martin...betting_system ) Increasing size in the same basket makes sense, that's why grid systems are so popular. It actually reduces risk while increasing potential profit. The thing that scares some traders away is you're no longer trading just one lot. You need a little larger account. And computing risk is a little more complex. You have to know how to add. :-) The manual provides some useful guidelines for controlling risk. Good luck!
+
+--- 帖子 #387 ---
+yes. Thanks. I got the point. I am trying to create new set files testing over 5 years but it hits stop out so its a tough task on mt4. I wish this EA was converted to Mt5. I think it would save time in testing I guess.
+
+--- 帖子 #388 ---
+I understand testing over long periods to develop a new trading strategy. The original Blessing authors probably did that a lot. I'm not sure why you would test over more than a few months with a mature and profitable EA. You're worried about saving time, but you're doing the best thing to waste it. There are perhaps tiny repeating patterns to be found in the market mirroring many days and weeks and months. Then there are the larger, more profitable, repeating patterns that only go back a few weeks or months. The market changes all the time. If you're not writing a new EA testing over years of history is a waste of time.
+
+--- 帖子 #389 ---
+Imho it is a good strategy to find extreme situations in the history. Extreme can be high volatility as well as slow but steady moves. Spikes, that just pass by to hit stop losses. If the EA can survive these exreme situations and works well in a normal environment...: congrats! I was already thinking of opening a new thread "extreme hsitoric situations" to test EAs and settings at these points.
+
+--- 帖子 #390 ---
+Sure. Good for testing a new strategy to see how resilient it is. Not for tuning an existing EA to trade live. Primary testing has already been done with Blessing. You can rewrite it if you want and perhaps make it more adaptable, that would be great. Or you can learn how to use what we've got and make money. :-) I tend to want to edit out extremes in the data, since the likelihood of them happening again is very low. And there are so many different kinds of extremes! I'm not building the EA as much now, I'm using it. If you prefer to optimize just once a year (and accept much lower returns) then maybe keeping those extremes in the data makes sense. Open source means many wonderful things are possible. Everyone is free to build their own version.
+
+--- 帖子 #391 ---
+Thanks for your (as always) helpful answer! Regarding blessing I do not see much to change or improve. As you wrote, it has been tested for such a long time. When I was talking about surviving extremes, I also referred to the settings of an EA. Especially with grid traders I had so many beautiful steady lines in the graph until some events came. And they come, at the moment even more often. With the setfiles and the tester you can try to imagine how high the DD could be. I can guarantee, that the higher the risk the higher the DD will be. So if you want to have a calm life accept small wins here and there. If your strategy test shows a huge DD, you should at least have enough liquidity when going live. This reduces the percentual win though. If you set your "close all at a certain DD" too tight you will see a saw tooth pattern going south. Money management is maybe more important to learn than "readings signals"... Coming back to Blessing (and other grid trading systems): one thing I would like to change or add, is the possibility to use percentage instead of pips. Every pair has a different pip/percentage ratio, but all (?) seem to use Fibo-lines as reference. Which makes sense, the professional programs (probably still programmed in COBOL) use them as well.
+
+--- 帖子 #392 ---
+Hello All i recently joined and am delighted so far with the version of blessinglite which was uploaded here a little while ago. version 3.9.6.31 gamma i believe. In just 2 days of using it, it profited me around 36 pound sterling, starting from a 160 balance. i was wondering if this was the latest verion or if there is a better one out there you guys have developed. Regards Gary
+
+--- 帖子 #393 ---
+Hi gazzamc20 where did you find the ea can I test it? Thanks
+
+--- 帖子 #394 ---
+hello there, it was added as an attachment on one of the first few pages by a member called Ursinho, believe its called BlessingLite_3_v3.9.6.34_gamma. you can test it whenevr you like and adjust it to your needs
+
+--- 帖子 #395 ---
+is it possible to program a set file for this ea in this way for every pair: 1 - first lot 0.15 2 - next open trade 20 pips against the trade with 0.14 and so on for 14 levels till 0.02. 3 - when each trade goes 10pips in profit close it 4 - no stop loss 5 - when equity is &gt;= EquityTarget close all and restart again. is it possoble to make this adding only equititarget variable?
+
+--- 帖子 #396 ---
+hi ursinho, is it possible to make the ea to open post like bellow: 1. sell 0.01 lot after say price 25pip move up, open 2. sell 0.02 lot, condition as above 3. sell 0.03lot (all 1,2,3 have average tp) 4. sell 0.01lot after above 25pip of 3rd sell 5. sell 0.02lot as above 6. sell 0.03lot (all 4,5,6 have another average tp) and so on. and may i know the indicators in your current Blessing multipair?
+
+--- 帖子 #397 ---
+How much, to sell blessinglite.mq5
+
+--- 帖子 #398 ---
+hi ursinho! And so the blessinglite.mq5, do you can to pass to me? I need friend! I have blessinglite.ex5, and I want to transforme in scalping ea to me, my use. Thanks you!
+
+--- 帖子 #399 ---
+Thanks ursinho4711! I already managed to convert blessinglite.ex5 to .mq5. Thank you very much
+
+--- 帖子 #400 ---
+I am using old version Blessing 3, v 3.9.6.09 long time. Now I get a new version 3.9.6.34 gamma. I have question - how can I optimize in MT4 all 3 parameters of Grid Size? In old Blessing I can do it but in new version I can not.
+
+--- 帖子 #401 ---
+For me hedge is much better than SL. I tried every strategy, every indicator, have created tons of EAs, but there is no chance to use SLs. Also I have a very clean vision that trading has two parts: magic/luck or maths. Martin, grid, averaging, hard SL and TP, hard global profit TP and so on is just a magic. No math here. Also this is useless to create sets for pairs. Today they works next day not. Strange that we all are using math (indicators, setups, sequences, calculation) for entries, but not think/program the exits. For me the main question is not where to enter the trade. There are tons of ways to determine good entry. The main question is where to exit the trade. Averaging against trend and waiting (praying) for reversal is pure magic/luck/casino. Wishing good trades recover loss trades - the same. What if we try to program exits? I have noticed that stoch with 100/3/3 settings are good most time for exit. But the problem is that sometimes they (signals) are not appear. Any ideas?
+
+--- 帖子 #402 ---
+monitor this demo acount i use 3 preset for this account ACCOUNT NO 9283299 server FBS -Demo IP Pro3333
+
+--- 帖子 #403 ---
+hello everyone can you tell me why you are giving this error? thank you in advance!
+
+--- 帖子 #404 ---
+Hi all! First of all, I must say that I love this EA and the multipair version! I'm running it for a while in live/real accounts and the results are great with multiplier 2. Is it possible to fix the NO NEW TRADES parameter? It closes all positions after one minute. Thanks
+
+--- 帖子 #405 ---
+Hello I am new here, I love the adventure of trading. I would like to use this robot; Blessing, in its most recent (better) version. 1. Can I have it please? 2. How do I configure it for my real account? Thank you very much in advance Hello I am new here, I love the adventure of trading. I would like to use this robot; Blessing, in its most recent (better) version. 1. Can I have it please? 2. How do I configure it for my real account? Thank you very much in advance
+
+--- 帖子 #406 ---
+So this version of Blessing is the exact same thing as B3, except you can trade all 28 currency pairs on it at once on a single chart? So it still uses the grid style approach then?
+
+--- 帖子 #407 ---
+Hello, does this version not work on real accounts?
+
+--- 帖子 #408 ---
+Thanks for this EA. I have tried it on real account with my set and here is pic of my result for two weeks of trading: started on 2-dec-2020 with $300 and before Christmas I have $600. I am using MA for entry, 5m chart, 1.4 multiplier and 8 currency pairs. MM is false, starting lot is 0.01 and this EA makes around $25 per day with these settings. But I think I am lucky, because $300 as started balance is not enough. Now I am waiting for new year to continue trading with new currency pairs without GBP (I have stopped for the holidays), because currency pairs with GBP are dangerous with that Brexit. But you decide how to risk your money. Cheers and Merry Xmas to all of you.
+
+--- 帖子 #409 ---
+Hello oberton, many thanks for your contribution with the GBP pairs ( MA for entry, 5m chart, 1.4 multiplier and 8 currency pairs) being positive. I have tried it in December as well with 28 pairs (MA for entry, 5m chart, 1.4 multiplier) but it was a compete loss! a few positive but the majority ended up in a loss in my demo account and stopped it. The Brexit problem seems to be solved now. I am starting new in January 2021 with your 8 pairs only Moving average is a tricky thing
+
+--- 帖子 #410 ---
+EA get stucked on w8thing for the next tick and never opens a trade should i w8 it more? i Run it one real cent account!
+
+--- 帖子 #411 ---
+This is an interesting thread . One thought that I have is that the concept of running blessing on a basket of pairs is good, but we need to be careful with correlation between the pairs. Blessings profitability comes from a range of fairly simple entry signals backed up by the hedging/averaging strategy that puts in multiple trades when things go against you. So you will always see steady small profits with occasional large drawdowns. The trick is to pick your settings so you can cope with the large drawdowns. So if you are trading 28 pairs all the time a lot will be dependant on say the usd, and if an event drives the dxy down then you are likely to see many of your pairs going into drawdown together, which will be harder for your account to cope with. A way around this may be to set your basket with uncorrelated pairs like euripy,gbpaud,usdcad,nzdchf and maybe commodities and indices, there are multiple options for this. cheers Don
+
+--- 帖子 #412 ---
+Good Day to all I am interested in forward testing this EA on a demo account. I was able to test it out on strategy tester on single pairs and was happy with the drawdowns and performance. Can someone guide me on applying this EA? Which timeframes and what charts? I applied it on a single EURUSD M15 chart and i get the smiley face showing its working but it still says waiting for the next tic. Thanks to all
+
+--- 帖子 #413 ---
+Hi all. I've been reading through the forum for a long time but it's the first time I'm going to write. I'm using Blessing, it seems to me a great EA. But I have a problem that I can't solve and I haven't seen anything in the manual. I use all the pairs and I use the multiplier X3 and I use it in the 4 hour timeframe. The problem is that sometimes Martinlanga does not do well, I give an example. If my initial lot is 0.1 in the next trade it should be 0.3 and it almost always is, but sometimes he randomly makes the trade of 0.03. It has happened to me many times and I don't know how to solve it. I have a lot of free margin to spare, and I don't know why, or if there is any option that may influence, but reading in the manual I can't find an explanation. I'm using the multipair Blessinglite in this post to download 3.9.6.34 gamma fxtrue, real count in cents from roboforex I would appreciate any help.
+
+--- 帖子 #414 ---
+I leave a capture of the problem, the first lot in the real account is 0.08 and the next operation 0.03, that is the error that I am commenting on.
+
+--- 帖子 #415 ---
+I am having the same problem, the ea isnt working with a start lot size greater than 0.01, as the corresponding trades are calculated incorrectly. I get 0.3, 0.6, 0.04. Can someone fix this problem?
+
+--- 帖子 #416 ---
+My first investment of $300 now growed up to $1000. My leverage is 1:500 and what I see is that $100 per currency pair is good balance for 0.01 as starting lot .
+
+--- 帖子 #417 ---
+Hi everyone! Im new here, i read about this Ea and i decided to try it too, just like many of you i saw this Ea dosen't respect some rules same times, for example i can't make it work the pair or the limit of spread that i select. For example if i put " limit spread 10 " the Ea open position on pair with 30 spread or more... Or if i select just EurUsd and UsdYpn the Ea opens other pairs too... Anyway i'll will try to fix it later, for now i just want to see how it works and the results. My settings now are the same of Oberton, after a week i'll try new strategies
+
+--- 帖子 #418 ---
+Prueba Attached Image (click to enlarge)
+
+--- 帖子 #419 ---
+why u disable hedge?
+
+--- 帖子 #420 ---
+Your file as .txt file extension. remove this and it should work.
+
+--- 帖子 #421 ---
+Just started testing this on a demo account. I'm using oberton's set files and trading the same 8 pairs. Do I need to just apply it to one chart? or do I have to open each individual chart? Thanks
+
+--- 帖子 #422 ---
+Dear oberton, How is your account grow by now
+
+--- 帖子 #423 ---
+Hello Friends, Jagan newbie trader here and my first post. I am newbie to forex algo trading. Attached the blessings EA in charts in demo version. It is not picking any trades. Not sure what mistake I am making. Any inputs in this regard will be of great help. Thanks.
+
+--- 帖子 #424 ---
+I have been running Blessing .34 gamma, with default parameters with a 1000$ demo ECN account for a exactly a week. Return is 18.5% and P/L -20$, lowest P/L was about -90$. I will keep it running for another week.
+
+--- 帖子 #425 ---
+Well well, the account is wiped because of NZD.
+
+--- 帖子 #426 ---
+Feels bad man
+
+--- 帖子 #427 ---
+Can you disable Multiplier for the trades within the same setcountarray block?
+
+--- 帖子 #428 ---
+i have started another demo account with only 5 pairs that are less correlated than the 28 (minus chf) that come with this EA. Let see how it goes.
+
+--- 帖子 #429 ---
+Hi oberton, How is the EA working now? which pairs are you using? Thanks, Salim
+
+--- 帖子 #430 ---
+Hello mate, Which pairs are you using now? Thanks. Salim
+
+--- 帖子 #431 ---
+eurusd, eurcad, gbpaud, nzdcad, usdjpy
+
+--- 帖子 #432 ---
+Only one chart.
+
+--- 帖子 #433 ---
+Hi mate, Thank you for your input. Every weekend do you turn the holiday shut down feature to false? In that case, do you manually close the open and pending trades? Thanks.
+
+--- 帖子 #434 ---
+&gt;&gt;&gt;&gt; eurusd, eurcad, gbpaud, nzdcad, usdjpy that's what I call a 'balanced choice' to pick one pair from each group to trade in a basket of currency pairs. Trading Currency Pairs – Groups 2021 Group#1 AUDUSD EURUSD GBPUSD USDCAD NZDUSD Group#2 EURAUD EURNZD EURCAD EURGBP*** Group#3 GBPAUD GBPNZD GBPCAD Group#4 USDJPY AUDJPY EURJPY GBPJPY SGDJPY Group#5 AUDCAD AUDNZD NZDCAD Group#6 AUDSGD EURSGD GBPSGD USDSGD NZDSGD
+
+--- 帖子 #435 ---
+no i don’t bother with that, I leave it open.
+
+--- 帖子 #436 ---
+actually I built that list from one of your older posts. I take no credit for this idea. Thanks a lot. i see you added a 6th group; which one do you recommend in that group in respect to my list ? Thanks!
+
+--- 帖子 #437 ---
+from Group#6 AUDSGD EURSGD GBPSGD USDSGD NZDSGD my favourite pairs are AUDSGD and USDSGD, but pick only the one from the five SGD pairs with the best setup and show Weekly conditions for swing trading. Avoid narrow range weekly market type conditions.
+
+--- 帖子 #438 ---
+Are you guys able to make this run stable, it seems to crash atleast once per day, on my end. I ended up going for the Blessing single pair instead, running many in parallel.
+
+--- 帖子 #439 ---
+good ea
+
+--- 帖子 #440 ---
+[quote = oberton; 13329009]感谢您使用此EA。我已经用我的套装在真实帐户中尝试过了，这是我连续两周的交易结果的图片：始于2020年12月2日，价格为300美元，圣诞节前为600美元。我正在使用MA进行输入，5m图表，1.4乘数和8个货币对。MM是错误的，起始手数是0.01，使用这些设置，此EA每天大约能赚25美元。但是我觉得我很幸运，因为$ 300的初始余额还不够。现在我正在等待新年继续使用不含GBP的新货币对进行交易（我已假期休假），因为含英镑的货币对在英国退欧中是危险的。但是您决定如何冒险。祝大家圣诞快乐。{image} {file} [/ quote] Are you still using this EA? What is your TF?
+
+--- 帖子 #265 ---
+I amended some codes which could potentially produce errors. Besides, I added "LevelLinearLots" in , which could allow EA to start multiply at levels you define, which could reduce DD.
+
+--- 帖子 #266 ---
+Do you still use your set now?
+
+--- 帖子 #267 ---
+Hi, great work and thanks for sharing. I would like to ask, Im trying MT5 version in strategy tester. On BlessingLite_3_v3.9.6.34_gamma_fxtrue version I get this error : 2021.06.19 08:55:31.612 Core 1 2018.01.03 21:28:20 cannot load indicator 'Moving Average' [4805] 2021.06.19 08:55:31.612 Core 1 2018.01.03 21:28:20 The iMA object was not created: Error4805 It disappear if I use debug True, but I would like to ask if I did something wrong on my side Another question, also with BlessingLite_3_v3.9.6.34_gamma_fxtrue I should use enable once per bar FALSE ? Thanks!
+
+--- 帖子 #268 ---
+1. No error generated 2. Use enable once per bar TRUE. (But you can test if FALSE works as well)
+
+--- 帖子 #269 ---
+Hi Incredibile EA, just 1 annoying problem, it doesnt end backtest, instead I get at end of log a spam of " 2021.07.08 21:42:11.610 Core 1 2020.10.29 23:59:59 Reason; Blessing Removed " It get stuck and Ive to end it manually and restart MT5, so I also dont get report and stuffs to check data. Any solution ? thanks!
+
+--- 帖子 #270 ---
+Hi upon doing some back test it says no market info for audcad but im ticking it with eurusd how come?
+
+--- 帖子 #271 ---
+I only try EA with one pair. Restarting the profile closes all positions. Is there anything you can do about it? EA gets out of a larger drawdown, but premature closure is very undesirable.
+
+--- 帖子 #272 ---
+I think there is a bug in the ea as i have attached the image where sometimes the ea keep on modifying the orders without any reason. I have set max trades to 3 but the ea isnt closing the trades for almost 5 months and then finally closes at a loss. Before that it works properly like it closes the trades when it reaches max trades=3 but sometimes like in the picture it keeps the trades running.
+
+--- 帖子 #273 ---
+Hi guys ,this Ea never opening from a several days
+
+--- 帖子 #274 ---
+you can remove JPY pairs in the code line 251 to prevent large drawdown.
+
+--- 帖子 #275 ---
+please I can someone help Implement the trading logic in blessing mt4 version to this code
+
+--- 帖子 #276 ---
+Hi guys, need help on this error, testing this EA to mt5
+
+
+===== 附件下载链接 =====
+

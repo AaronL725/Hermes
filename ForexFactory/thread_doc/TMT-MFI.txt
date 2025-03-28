@@ -1,0 +1,39 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// ©JaiBhim
+
+//MFI
+study(title="TMT MFI System", shorttitle="TMT MFI")
+
+//INPUT
+Source = input(close, title="Source")
+MFI_OverBought = input(80, title="MFI OverBought")
+MFI_OverSold = input(20, title="MFI OverSold")
+
+//MFI
+source      = hlc3
+length      = input(15, minval=1, title="MFI Length"), 
+// MFI
+upper_s = sum(volume * (change(source) <= 0 ? 0 : source), length)
+lower_s = sum(volume * (change(source) >= 0 ? 0 : source), length)
+
+MFI      = rsi(upper_s, lower_s) //calculo del RSI
+MFI_Positive = 50
+//DEFINITIONS
+MFI_Up = MFI >= MFI_Positive and MFI < 80
+MFI_Dn = MFI < MFI_Positive and MFI > 20
+
+
+//COLORS
+Color_GREEN = MFI_Up and MFI < 80
+Color_ORANGE = MFI >= MFI_OverBought or MFI <= MFI_OverSold
+Color_RED = MFI_Dn and MFI > 20
+
+
+Plot_Color = Color_GREEN ? green : Color_ORANGE ? orange: Color_RED ? red : red
+
+//PLOTS
+//plot(EMA_Fast, color=blue, title="EMA Fast")
+//plot(EMA_Slow, color=black, title="EMA Slow")
+Histogram = 1
+plot(Histogram ? Histogram : na, title="Histogram", color=Plot_Color, style=columns, linewidth=4)
+hline(0, '0 Line', linestyle=solid, linewidth=1, color=silver)

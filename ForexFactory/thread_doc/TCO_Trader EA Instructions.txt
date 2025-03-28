@@ -1,0 +1,179 @@
+TCO Trader EA Instructions
+
+1)  Copy TCO_Trader EA into Experts folder
+2)  Copy macd_adjustable & MA ribbon filled 2 x 14 indicators into the Indicators folder
+3)  Copy the template into Templates folder
+4)  Restart MT4 platform
+5)  Load template onto desired lower time frame chart for each pair you wish to trade.  
+6)  Pull EA over on chart. 
+
+Here are the EA external parameters with a brief description with default settings.
+
+
+Activate_EA = true		- Set to true to turn on trading, false to turn off trading,  The EA will still manage open trades
+
+MaxSpread = 5.0			- Maximum spread allowed, no new trades will be opened if the spread for the pair goes above the MaxSpread 
+
+Slippage = 5			- The allowed trade slippage
+
+MagicNumber = 000		- Magic Number
+
+CheckOncePerBar = true		- Leave this set to true to take trades at close of bar (bar mode), or false to take trades on current bar (tick mode)
+
+Show_Settings = true		- Show Screen Display
+
+Show_Alerts = true;             - Show alterts when placing trades or closing trades.
+
+DisplayColor = MediumBlue	- Set the Screen Display Color
+
+OrderDelay = 12 		- Delay in lower time frame bars from last open order
+
+ClosedOrderDelay = 12 		- Delay in lower time frame bars from last closed order
+
+MaxOrdersPerPair = 8		- Maximum number of trades per pair
+
+Trend_TF = 1440			- Larger Time Frame for Trend Determination  1440 = 1 Day
+
+Lower_TF = 60   		- Lower Time Frame for Order Placement   60 = 1 hour
+
+CloseOnOppositeSignal = true	- If set to true, the EA will close all current open trades if the opposite trade signal is determined
+
+CloseAfterPctProfit = true	- If set to true, EA will close all orders after certain profit percentage reached
+
+ProfitPct = 3.0                 - Percentage profit to reach before closing all orders
+
+CloseAfterPctLoss = false	- If set to true, EA will close all orders after certain loss percentage reached
+
+LossPct = 3.0                   - Percentage loss to reach before closing all orders
+
+Use_PipStep = false		- If set to true, trades won't be taken if within the number of specified pips from the last trade
+
+PipStep = 0                     - Number of pips used for pip step
+
+UseMarginCheck = true 		- If set to true, no new trades will be taken if Margin falls below MinMarginPct
+
+MinMarginPct = 300		- Minimum Margin Limit for allowed trading
+
+GoLongOnly = false		- Set to true to take only buys based on lower TF signal - ingnores automated trend methods
+
+GoShortOnly = false		- Set to true to take only sells based on lower TF signal - ignores automated trend methods
+
+
+Automated Trend Methods
+				1. Ichimoku
+                                2. 20/50 EMA
+				3. MACD
+				4. Turtle Channel      
+
+Trend_Method_1 = 2		- Select 1 of 4 methods             
+Trend_Method_2 = 0		- Select 1 of 4 methods or leave as zero    
+Trend_Method_3 = 0		- Select 1 of 4 methods or leave as zero    
+Trend_Method_4 = 0		- Select 1 of 4 methods or leave as zero        
+
+Lower_TF_Meth = 1		- Set to 1 for Williams % or set it to 2 for Stochastic.
+
+FixedLotSize = 0.01 		- Fixed Lot Size to be used if DynamicLotSize is set to false
+
+DynamicLotSize1 = false		- Set to true to have EA calculate lotsize based on risk entered on the next paramater
+
+EquityPercent = 1		- Risk Percentage used in DynamicLotSize calculation
+
+DynamicLotSize2 = false		- Set to true to use .01 per $1000 Account Equity
+
+LotSizePerBal = 1000		
+
+LotSizePer = 0.01 
+
+TakeProfit = 350 		- Take Profit to be used if Use_ATR_TP is set to false
+
+StopLoss = 250 	      		- Stop Loss to be used if Use_ATR_SL is set to false
+
+Use_ATR_TP = true               - EA will calculate Take Profit based on ATR if set to true, EA will use standard Take Profit if set to false
+
+ATR_TP_TF = 1440 		- Time Frame used for Take Profit ATR, 1440 = Daily, 240 = 4hour, 60 = 1hour
+	
+ATR_TP_Per = 13 		- Number of periods to use for Take Profit ATR
+			
+ATR_TP_Mult = 3 		- Multiply ATR by this to set Take Profit - this could be optimized.
+
+Use_ATR_SL = true 		- EA will calculate Stop Loss based on ATR if set to true, EA will use standard Stop Loss if set to false
+
+ATR_SL_TF = 1440		- Time Frame used for Stop Loss ATR, 1440 = Daily, 240 = 4hour, 60 = 1hour
+	
+ATR_SL_Per = 13 		- Number of periods to use for Stop Loss ATR
+
+ATR_SL_Mult = 2			- Multiply ATR by this to set Stop Loss - this could be optimized.
+
+Use_JumpStop = false 		- Set to true to use Jumping Stop Loss
+
+JumpStopProfit = 10		- If you want 10 pips for Jumping Stop Loss the trade will have to get to 20 pips in profit before the SL is set to 10, it will
+				  have to get to 30 pips in profit for the Jumping Stop Loss to be moved from 10 pips to 20 pips..etc.
+
+Use_BreakEvenStop = false	- Set to true to use Breakeven Stop Loss
+
+BreakEvenProfit = 15		- Minimum profit required in pips before Breakeven Stop Loss
+
+BreakEvenSL = 5			- Stop Loss that is set in pips above/below open order price once the BreakEvenProfit is reached
+
+Use_TrailingStop = false	- Set to true to use Trailing Stop Loss
+
+TrailingStopMinProfit = 10	- Mininum profit required in pips before Trailing Stop Loss is used
+
+TrailingSL = 5     		- Amount of pips to use for Trailing Stop Loss
+
+tenkan_sen = 9			- Leave the next 4 setting as default.  These are standard Ichimoku Settings
+kijun_sen = 26
+senkou_span = 52
+
+KijunSenSL = true		- Set to true to use the KijunSen as a Trailing Stop Loss, will only be set if is above for buys and below for sells the standard or ATR stop loss
+
+StopLossBuffer = 10		- Stop Loss Buffer to be used with KijunSen Trailing Stop Loss
+
+MA_Fast = 20			- Fast MA setting
+
+MA_Slow = 50			- Slow MA setting
+
+MA_MAmethod = 1;   		- 0 - SMA, 1 - EMA, 2 - SMMA, 3 - LWMA
+
+MA_PriceMethod = 0;  		- 0 - Close, 1 - Open, 2 - High, 3 - Low, 4 - Median Price, 5 - Typical Price, 6 - Weighted
+
+EMA_Cross = false		- Set to true to enforce EMA cross - 20EMA above 50EMA for buys, 20EMA below 50EMA for sells
+
+MACD_Fast = 12			- MACD_Fast Setting - keep OOTB default
+
+MACD_Slow = 24			- MACD_Slow Setting - keep OOTB default
+
+MACD_Signal = 9			- MACD_Signal Setting - keep OOTB default
+
+MACD_Method = 1	  		- Set to 1 - MACD Adjustable method, 2 to use MACD Hanover method, 3 to use MACD Traditional method
+
+MACD_Weekly_Confirmation = false  - Set to true to use the Weekly MACD for confirmation
+
+Turtle_TradePeriod = 20         - Donchian channel period for trading signals
+
+Turtle_StrictEntry = false      - Apply strict entry parameters like the Turtles did if true enters on high/low false enters close
+
+WPR_Periods = 14		- Leave next 3 settings as OOTB default
+
+WPR_OB = -20    		- Overbought level
+
+WPR_OS = -80			- Oversold level
+
+WPR_Confirmation = false	- If set to true, signal must go below and above the WPR_OS level for a Buy, Signal must go above and below the WPR_BO lEVEL for a Sell
+				- If set to false, signal just needs to go below the WPR_OS level for a Buy, Signal just needs to go above the WPR_BO level for a Sell
+
+Stoch_KPeriods = 14		- Stochastic K Periods Setting - keep OOTB default
+		
+Stoch_DPeriod = 3		- Stochastic D Periods Setting - keep OOTB default
+
+Stoch_Slow = 3			- Stochastic Show setting - keep OOTB default
+
+Stoch_MAmethod = 0		- 0 - SMA, 1 - EMA, 2 - SMMA, 3 - LWMA
+
+Stoch_PriceMethod = 0		- 0 - Low/High  1 - Close
+
+Stoch_OB = 80 			- Stochastic Overbought level
+
+Stoch_OS = 20			- Stochastic Oversold level
+
+Stoch_Confirmation = false 	- Stochastic signal signal must go below and then above OS for buy and must go above and below OB for sell

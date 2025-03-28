@@ -1,0 +1,1313 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Attached Image (click to enlarge) This thread will be an Open Source Project dedicated to trading Basket(s) off-line charts. It was pulled from the Robot Lab Project as the basket was too big to fit in the lab. The initial version will be a Manual Overdrive, which means that trading decisions are made by the trader not the robot. So the robot will act only as a basket manager allowing to trade the basket off-line chart as close as possible to a normal on-line chart. Next versions will provide Fully Automatic options, so that the Robot will trade/exit according to built-in strategies. Copying Files: Copy Create_Basket_Script_xx.ex4 into ...\MQL4\Scripts\ folder. Latest Version Here Copy Basket_Manager_xx.ex4 into ...\MQL4\Experts\ folder. Latest Version Here M1 Historical Data: Make sure that you have “enough” M1 history data for each pair that will be used in the each basket you create M1 history data can be refreshed by opening each pair on M1 time frame, zoom out to the maximum, scroll back as much as MT4 allows you to, and Refresh the chart by pressing Mouse Right Click and selecting Refresh from the pop up menu. Creating the Basket Place Create_Bastet_Script_xx on a chart of your choice on M1 time frame Input the required information and Press OK: Basket Name : This is a user defined name for the basket. Maximum 12 characters Examples: USDBSKT,#USD#,XYZ01,#A1#,ENRGY,HITECH etc Time Frame Name: The time frame to be used to create the Offline Chart for the Basket (i.e. M15, H1, H4 etc) Basket Pairs: Here you define the Basket Component Pairs. Use Exact Pair Name as it appears in Market Watch. Pairs should be separated by comma Pairs Directional Weight : Direction should be Positive if you want the basket price to go up when the pair price goes up, and Negative if you want the basket price to go down when the pair price goes down, and vice versa Weight : You can simply use 1 (to be discussed later) The script will show an alert with the created basket name/time frame Go to File&gt;Open Offline&gt; and select the basket chart that was created Running the Robot Place the robot Basket_Manager_xx.ex4 on the opened offline basket chart Enjoy Your Shopping ! The Basket Manager Provides: Market Orders Buy Orders (3) Sell Orders (3) Pending Orders Buy Stop Orders (2) Sell Stop Orders (2) Buy Limit Orders (2) Sell Limit Orders (2) All orders offer Draggable SL and TP Lines You can make trade decisions using your favorite strategy/indicator(s) on the off-line chart You can trade multiple basket charts on the same account. Just make sure you give different Magic Number for each Robot Instance. The robot adds 2 digits to the input magic number in order to differentiate between different basket orders . For example if you set the magic number to 999, the first buy basket orders will have an internal magic number of 99901, the first sell basket order internal magic number will be 99911, and so on. So use magic number of 3 to 5 digits in order to allow space for the additional 2 digits added by the robot. Once market order is created, its button will show the current P/L for the underlying set of actual orders. You can close it by pressing on the button showing the P/L. Current P/L of all market orders will show on the Green Button. You can close all the orders by pressing this button. Once a Pending Order is triggered, it will be converted to a Market Order (provided there is space for it). .... to be continued Basket Tools (updated) : Basket Creation Scripts : Version 2 (template option). Post # 88 . Version 3 (multiplication instead of summation) Post # 160 . Basket Manager EAs: Version 2 (FINAL) Post # 84 . Version 3 (FINAL) Post # 309 . A screen shot Attached Image (click to enlarge) Regards, Khalil Abokwaik
+
+--- 帖子 #2 ---
+Hi I am following your work for long time but my way of trading is totally different. I really appreciate your time, dedication and hard work. Time is money in this world.
+
+--- 帖子 #3 ---
+Excellent work Khalil I will run it this week.....
+
+--- 帖子 #4 ---
+Hello abokwaik Thanks for your work very appreciate. In attachment 2 scripts for load history if some people need Regards Attached File(s) LoadAllHistory.ex4 49 KB | 1,063 downloads Attached File(s) ForceLoadHistoricalData.ex4 4 KB | 1,012 downloads
+
+--- 帖子 #5 ---
+Apparently you can create multiple Baskets, and running a Basket Manager on each of them, so things might get messy. A Manager of Basket Managers is required . :nerd: This Manager can run on an on line chart and shows summary information on all baskets, (something similar to iExposure indicator), but on Basket Level instead of Pair level AND with action power.
+
+--- 帖子 #6 ---
+Thank you howa, It would've been great if you could post the MQ4 files also (in case you have them), in order to keep the thread an Open Source Project. Regards,
+
+--- 帖子 #7 ---
+Basket trading is a risky way of trading the market. So I suggest for new traders to be very patient in going live with it. The Major factor in basket trading IMO, is the ART of Creating the Basket . Well, I love cooking. So lets think of the Basket Creation as Making a Salad, a Soup or Main Meal. Ingredients should mix very well together to produce a delicious dish. bon appetit, Attached Image (click to enlarge)
+
+--- 帖子 #8 ---
+If you are planning to trade multiple baskets, you have two options to preserve the basket settings: 1. Save Input Settings in a .set file. The settings can be loaded when you like to create/re-create a specific basket. 2. Create a version of Create_Basket_Script for each basket by modifying the inputs in the MQ4 file and saving the script under a different name. Additional Notes: 1-The Basket Manager EA will know the pairs used to create the basket. 2-It is not necessary to keep the chart of the basket component pairs open after creating the basket. You need only 2 charts to be open, the One you applied the Script to it, AND, the one that you applied the EA to it.
+
+--- 帖子 #9 ---
+You can share your baskets here if you like. This is a basket example of Metals (GOLD,SILVER,Platinum,Palladium) ... quite heavy, Attached Image (click to enlarge)
+
+--- 帖子 #10 ---
+I think the spread calculation in Basket_Manager_02 needs a review. I will do it hopefully before market opens.
+
+--- 帖子 #11 ---
+Hello abokwaik. I just found one of them sorry for that. In attachment Attached File(s) ForceLoadHistoricalData.mq4 5 KB | 954 downloads
+
+--- 帖子 #12 ---
+I love you man
+
+--- 帖子 #13 ---
+OLD CODE : double get_spread() ... spread+=(MarketInfo(pairs[i],MODE_ASK)-MarketInfo(pairs[i],MODE_BID))/Point; CORRECTED CODE: double get_spread() ... spread+=MarketInfo(pairs[i],MODE_SPREAD)*(MarketInfo(pairs[i],MODE_POINT)/Point); Here are the corrected files: (current spread may look huge but that is due to end of week, and should return to normal few minutes after market open) I also added the basket pair names on the offline chart for easier followup. Attached File(s) Basket_Manager_02.mq4 69 KB | 1,002 downloads Attached File(s) Basket_Manager_02.ex4 162 KB | 793 downloads
+
+--- 帖子 #14 ---
+When creating a basket we need to make sure that we do not loose significant digits of pair rates. For example this is a YEN basket where : Pairs = "USDJPY,EURJPY,GBPJPY,AUDJPY,CADJPY,NZDJPY,CHFJPY"; Pairs_DW = " -1 , -1 , -1 , -1 , -1 , -1 , -1 "; / Directional Weight (derection is - (negative) because Yen is on the right side of the pair name), and weight is 1 because its the default, but in this case loosing some details by rounding significant digits Attached Image (click to enlarge) And this is the same basket (with more details), Using directional weight of -1000 instead of -1 Attached Image (click to enlarge) BIG DIFFERENCE ! :nerd:
+
+--- 帖子 #15 ---
+And these are magnified images of the previous two Yen basket charts Poor Details Attached Image (click to enlarge) Rich Details Attached Image (click to enlarge) BIIIIG DIFFERENCE ! :nerd:
+
+--- 帖子 #16 ---
+You see I am focusing at this stage on Building "meaningful" Basket Charts. I consider this stage to be more important than the chart trading itself. Because if the Basket chart looks like a standard pair you can simply trade it like a standard chart, provided of course that you already know that. So the first step after creating a basket is to check the basket chart. Does it have trends Can you spot S/R levels Apply some indicators of your choice, and see how they reflect the price ... etc. It should look like a standard live chart (nor a weird chart which makes no sense and hence can not be traded) Of course based on the M1 history available for underlying pairs you will see that the chart regular some days or months back, but before that you'll notice big jumps as some history data is missing. But no problem with that as we will trade the recent price action of the basket. So if our basket is H1 time frame, 2 months of data will be enough for intra-day trading.
+
+--- 帖子 #17 ---
+With reference to the previous post, this is the Yen basket chart. I have loaded M1 data back till February, 1st. So the chart looks ugly before that date. Not because yen made a big JUMP at end of January BUT because of missing historical data. Attached Image (click to enlarge)
+
+--- 帖子 #18 ---
+In addition to looking into any bugs that might show up during forward testing, I will work this week on developing a Baskets Administrator EA.
+
+--- 帖子 #19 ---
+hi abokwaik, for example, if I want create gbp basket ( all 7 pairs ) Pairs DW ? ( - ) or ( +) ?
+
+--- 帖子 #21 ---
+good work
+
+--- 帖子 #22 ---
+Wonderful work AB! Im not trading at the moment due to other excessive work committments. but Ill give it all a spin and post the trade explorer here when Im less busy. Thanks for all your effort man! You are the best!
+
+--- 帖子 #23 ---
+I just noticed the logo... hahahahahh.. abokwaik, if you did that you are definitely hilarious..
+
+--- 帖子 #24 ---
+Sorry for the late reply. My suggestion for GBP, EUR and USD baskets are as follows //-- GBP BASKET Pairs = "GBPUSD,EURGBP,GBPAUD,GBPCAD,GBPCHF,GBPNZD,GBPJPY";//Basket Pairs Pairs_DW = "+1 ,-1 ,+1 ,+1 ,+1 ,+1 ,+0.01 ";//Pairs Directional Weight //-- EUR BASKET Pairs = "EURUSD,EURGBP,EURAUD,EURCAD,EURCHF,EURNZD,EURJPY";//Basket Pairs Pairs_DW = "+1 ,+1 ,+1 ,+1 ,+1 ,+1 ,+0.01 ";//Pairs Directional Weight //-- USD BASKET Pairs = "EURUSD,GBPUSD,AUDUSD,NZDUSD,USDCAD,USDCHF,USDJPY";//Basket Pairs Pairs_DW = "-1 ,-1 ,-1 ,-1 ,+1 ,+1 ,+0.01 ";//Pairs Directional Weight Again these are just suggestions, you are free to build your baskets the way you like, just make sure it is "meaningful". Regards, EDIT : you can leave XXX/JPY as +1 also. Unless Yen is the basket pair which was discussed in previous posts.
+
+--- 帖子 #25 ---
+I am trying the latest robot version : One bug showed up in Robot: Comment Line is not reset correctly. Fixed version attached. Attached File(s) Basket_Manager_02.mq4 69 KB | 432 downloads Attached File(s) Basket_Manager_02.ex4 162 KB | 356 downloads
+
+--- 帖子 #26 ---
+thanks for suggestions
+
+--- 帖子 #27 ---
+This is the trade carried from Thursday last week on Commodity_Currencies_Basket , (the account linked to Trade Explorer). I have set the TP to $1050, and SL to $1000. Attached Image (click to enlarge)
+
+--- 帖子 #28 ---
+We are almost the same age. I'll take that as " it is definitely hilarious". I see that you dare to ride a dragon ! How about fitting some dragons in a basket
+
+--- 帖子 #29 ---
+It's even hard to fit the balls of a dragon into a basket how will you fit a whole one into it? Man that would be a huge basket
+
+--- 帖子 #30 ---
+You just have to use your imagination !
+
+--- 帖子 #31 ---
+Okay let's be serious.. Although I don't know much about your approach I still find it very interesting.. will dive into it this weekend.. Wish you the very best..
+
+--- 帖子 #32 ---
+Thank you hukam, I think what offered here is a different approach to basket trading than "Basket Trading EA" and similar threads. At least I hope so. Your experience with basket trading is enormous. And your input here will be highly appreciated. I am new to basket trading myself, just exploring some ideas, and would really like to offer something nouveau.
+
+--- 帖子 #33 ---
+I opened this forum in "Trading Discussion" not in "Trading Systems" on purpose. It is project under development Basket trading can be considered as a safe approach to trading the market, as we diversify our risk on multiple instruments, but also risky as our exposure will be higher. It needs deep understanding of how the basket (or baskets) are built, moving, and traded. I don't want newbies to jump in and start trading the system live.
+
+--- 帖子 #34 ---
+Just trying to trade the basket chart as a normal chart. Here is the #COMD# basket posted earlier. Using RSI divergence, it seems that we have a Bullish Divergence so I am going to close the Sell Order, and wait for a confirmation to go long, or a continuation of the down trend. Attached Image (click to enlarge)
+
+--- 帖子 #35 ---
+I closed the Sell trade, and opened a Buy trade (but forgot to change the lot size to 0.1 so it opened with default 0.01). I opened another buy with the correct lot size (0.1), and I will close the first one when its in the green, and give the correct one an hour and see how it performs. Attached Image (click to enlarge)
+
+--- 帖子 #36 ---
+Fabrika'da Bir Türk
+
+--- 帖子 #38 ---
+Can we arrange basket trader as to open charts with template attached Ea s on it
+
+--- 帖子 #39 ---
+Explain further please.
+
+--- 帖子 #40 ---
+When the basket trades opened with their charts.Charts will be opened with Eas attached on it as template.
+
+--- 帖子 #41 ---
+Does anyone here really use trading robots and how many out there are genuine. I have come across a few claiming to deliver 65-80% win-rate but I always try to stay out, never really tried to use one. So I am asking if there is anyone out there who has used one of these and how try they are to their word. Obviously i am trying to avoid falling to some of the many scams in the market.
+
+--- 帖子 #42 ---
+Good Morning. So the trades from yesterday were closed by the Basket Manager at a pre-set loss amount of $1000 (actual $1039). So far it seems that the Basket Manager is working as it is supposed to. Since we are dealing with multiple orders we would expect some delays in opening/closing a set of orders, and accordingly a +/- difference in the closing amount. Below is a screen shot of an excel sheet I prepared to highlight the issue. This is not a malfunction of the robot, but basket traders should be aware of it. Attached Image (click to enlarge)
+
+--- 帖子 #43 ---
+If you mean : When you open the basket offline chart it show with a pre-set template applied to it. The answer, is yes it is possible. I will provide this feature in next version of Create_Basket_Script with an input for template name.
+
+--- 帖子 #44 ---
+Hi moonshot, What I am trying to deliver here and in Robot Lab Project are a set of FREE Open Source Robots based on well-know systems, systems of my own, and systems suggested by members, for traders who don't have enough time to spend in front of screens. A robot Adopter should find HIS best robot(s) with best settings that suites his favorite instruments, time frames, and risk tolerance, and do his homework of back and forward testing before applying to a real account. Don't think robots will make you money while you're sleeping. They require proper management, tweaking every now and then ... They are Tools. Just like a paint brush, it does not make an art piece, its the Painter who does. I am a free tool provider, you must be a good painter to make a living from trading the market. Regards, Khalil
+
+--- 帖子 #45 ---
+So why am I doing this ? I am doing this, for my self in the first place. I am in mid 40s, have a nice living, but who does't want more ? Someday, I will stop my "stressful" daily work, and enjoy life more. I BELIEVE money can be made trading forex. But I don't want it to become another "stressful" daily work, specially when I found out that I am an "emotional trader, with zero discipline". So if money can be made trading forex MANUALLY using some method, Why not automate it since we have the tools for that. But , Why Sharing it with others ? isn't it better to keep it for myself? I am sharing it with others for 2 main reasons : It becomes a commitment, so I have to work harder, and deliver Valuable member feedback
+
+--- 帖子 #46 ---
+I've just noticed that when I bought the Yen Basket, two pairs gave errors, namely CHFJPY and CADJPY, the message in the Journal says "Not Enough Money", although I have 10,000 account and I buying mini (0.1 lot size) ?????? I don't have any clue what could be the issue, I will check the margin required for that EDIT : Don't mind the buy line here as I still didn't configure the correct calculation of basket spread. Attached Image (click to enlarge)
+
+--- 帖子 #47 ---
+İ will wait and thanks for your responce
+
+--- 帖子 #48 ---
+The required margin for a standard lot for CHFJPY is $503 , and for CADJPY is $395. So its not the margin ?????
+
+--- 帖子 #49 ---
+I am trying to MANUALLY trade the basket as a standard chart. Re-bought the COMD basket at Trend Line (check the arrows). Let's see where this will take us. again Don't mind the buy line here as I still didn't configure the correct calculation of basket spread. Attached Image (click to enlarge)
+
+--- 帖子 #50 ---
+I checked FXDD website and it shows the margin required for CHFJPY is $507. Attached Image I am really confused on the error I received in opening a mini lot on CHFJPY 2015.03.10 09:08:43.157 '111795745': order sell 0.10 CHFJPY opening at 122.903 sl: 0.000 tp: 0.000 failed [Not enough money] ANY one knows what is the reason for this ???
+
+--- 帖子 #51 ---
+Anyway, I've closed the yen basket buy order with 3%+ return for the day. I'll monitor the issue with the next order.
+
+--- 帖子 #52 ---
+So what can we do with this: 1. we can try build a range basket and apply a range strategy (small moves) 2. we can try to build trend basket and apply a trend strategy(big moves) 3.we know which pairs are sitting in the basket so we can see which pair is the " mover" of the basket
+
+--- 帖子 #53 ---
+Yes.Currency baskets (i.e. Yen basket, Dollar basket ... etc).. are usually trending. However they are risky because you increase your exposure on the basket base currency. Correlated currencies or instruments baskets are less risky. Non correlated currencies could produce a ranging basket and involve much less risk.
+
+--- 帖子 #54 ---
+ok how we can define a renging basket?
+
+--- 帖子 #55 ---
+For people testing Basket_Manager_02 with Money TP/SL. You need to enable the "Activate Lines" button. I will fix this tomorrow so that money tp/sl are activated through another option. This is what kept the yen orders open because I forgot to activate the lines.
+
+--- 帖子 #56 ---
+I haven't tested that yet. If I want to take a shot, I can try: EURUSD, USD CAD, CAD JPY, AUD NZD, EURNZD, AUDJPY +1 ,+1 +1, +1, -1, -100 Just a thought Edit:modified the weights
+
+--- 帖子 #57 ---
+this two baskets are build only from two pairs Buy EURUSD Buy USDCHF And Buy EURUSD Sell USDCHF how can I make the first one more ranging a the second more tranding
+
+--- 帖子 #59 ---
+There is no point in building a basket for eurusd and usdchf as it already offered by the broker as eurchf pair.
+
+--- 帖子 #60 ---
+I know this but I want to build from it more ranging basket so it was not my final basket
+
+--- 帖子 #61 ---
+One more thing thanks for all your work
+
+--- 帖子 #62 ---
+Ok then. You can use EURUSD, USDCHF with +1,+1. The resulting basket chart should look like EURCHF chart.
+
+--- 帖子 #63 ---
+Should look like but it is not the same,Why is there a difference (not complaning just asking)
+
+--- 帖子 #64 ---
+I would have tried it if I was near my computer. Can you post the resulting chart?
+
+--- 帖子 #65 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #66 ---
+What a beautiful image ! Look similar to me. They will not be exactly the same because of different bidding on basket pairs. But looks very close and hence can be traded.
+
+--- 帖子 #67 ---
+this means that with more pairs I gonna get more incorrect basket??
+
+--- 帖子 #68 ---
+Who said its incorrect ? If you want to trade both EURUSD and USDCHF as two pairs simultaneously then Basket is the Correct way to do it. Trading EURCHF is the INCORRECT way of trading both pairs simultaneously.
+
+--- 帖子 #69 ---
+Difference between a basket of 2 pairs, and, the cross of the same 2 pairs Will not be obvious on higher time frames, but can be noticed on lower timeframes.
+
+--- 帖子 #70 ---
+Gollum , If you're still there, and it wouldn't be much trouble, can you please post the 4 charts EURUSD, USDCHF, BASKET and EURCHF., same time frame and zoom level. and let us see which one represent the 2 pairs better.
+
+--- 帖子 #71 ---
+ok first H1
+
+--- 帖子 #72 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #73 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #74 ---
+the difference is still there
+
+--- 帖子 #75 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #76 ---
+OK. Now let's check the low of the lowest H4 candle in the basket and compare it with the same H4 candle on EU, UCH and ECH. Which H4 candle represent both pairs better, that's the question !
+
+--- 帖子 #77 ---
+So letts say that if I gonna open two pisitions Buy EURUSD and BUY USDCHF then the chart of my account gonna look like the basket chart and not like EURCHF ?
+
+--- 帖子 #78 ---
+If you open a new buy at each candle open and close it at the candle close. YES.
+
+--- 帖子 #79 ---
+And when i gonna open it on the open and then leave it like that for the next 100 candles still basket gonna be more similar??
+
+--- 帖子 #80 ---
+No. my previous answer was clear.
+
+--- 帖子 #81 ---
+To clear out the issue of a basket created combining EURUSD and USDCHF compared to EURCHF nor being exact. I mentioned in the quoted post its because of different bidding. I don't know if you understood this statement, so I'll try to explain it more. EURCHF rate is offered from liquidity providers (major banks), it is not calculated based on EURUSD and USDCHF rates. EURUSD and USDCHF rates are also offered from liquidity providers, and so on. A broker will either average the rate received from liquidity providers, or take maximum bid/ask or use any formula to show its bid/ask price for a pair. You can notice the differences in a same chart at different brokers because they use different liquidity providers or just being market makers.
+
+--- 帖子 #82 ---
+Thanks for clarification
+
+--- 帖子 #83 ---
+Killed few dragons on the way to 9% return for the week on the Yen basket. Touched by their fire but got away in one piece.
+
+--- 帖子 #84 ---
+Here is an "intermediate" update for Basket_Manager_02: Fixes and Updates "Hopefully" a correct calculation for Spread and Ask Line (Kindly test on different baskets and report any issues) Added a separate option for activating/de-activating Money P/L targets Also included a status line at the top of the chart to Current Lot Size, and Money TP/SL Added the Magic Number to the Comment Line, to be used later in Basket Admin. Robot. Known issues not fixed yet: Button Status (pressed when order active and de-pressed when no order) Complete refresh of orders status and all lines on robot re-start. My tests so far were on Market Orders with Money TP/SL, didn't test Pending Orders or TP/SL Lines because of previous spread issue. I'll try to test those next week. Regards, A screen shot of the new update, applied to a newly created basket for Metals. TE attached to my profile, as it seems I can attached only 2 TEs to the thread. Attached Image (click to enlarge)
+
+--- 帖子 #85 ---
+For coders: The best way I could reach for spread calculation of the basket is as follows: Inserted Code double get_spread() { double spread=0,ask=0,bid=0; for(int i=0;i&lt;ArraySize(pairs);i++) { if(dw[i]&gt;0) { bid+=MarketInfo(pairs[i],MODE_BID)*dw[i]; ask+=MarketInfo(pairs[i],MODE_ASK)*dw[i]; } else { ask+=MathAbs(dw[i])/MarketInfo(pairs[i],MODE_BID); bid+=MathAbs(dw[i])/MarketInfo(pairs[i],MODE_ASK); } } spread=(ask-bid)/Point; return(spread); } where dw is the Directional Weight for the pair (which was used in creating the basket). Note the flip of Bid/Ask if dw is negative. I tested this on multiple baskets with heterogeneous Directional Weights, and it seems to be fine.
+
+--- 帖子 #86 ---
+Hai to all, I am also a basket trader, from the old thread, i just keep silent from the opening of this thread, but now its time time to show up, khalil as usual you have done good job, i have got my goal, that 100 percent from a month. for those who want to trade the basket, first play with the basket chart like "what it is doing in volatile period, what is doing while central bank comments, and how it behaving it respective sessions" then have a plan to enter, with right weapons, as a warrior you have know your opponents plus and minus, to attack them correctly, and more over, you have to know your plus and minus like when to move forward and when to retreat, and when to step back. you must sort out all the plans. accept your mistakes, the major part of the trading, it can happen and it will happen [ me too in below images see, i got stuck with EUR/GBP trade for one week now, till there is no place for activating the recovery plan, but in usd/jpy the recovery plan goes well ] , but at the time we have to plan correctly to what to do, whether to activate the recovery plan or to step out and wait for next. weapons means like best strategy, money management , and mental preparation etc Now i am confident that i have a system which can make pips consistently, whether it 100 percent or 50 percent that not a problem, but consistency is the matter. dont try to blame the basket accept it as what it like it will give the pips you need, as i mention in the other thread it is not a get rich quick tool, but a steady income generation tool. take your time and play with the tool you will be happy .
+
+--- 帖子 #87 ---
+Please make the basket manager able to enter trade at a particular pre set time and using vertex indy?
+
+--- 帖子 #88 ---
+Version 2 of Create_Basket_Script New Input: Template_Name = "basket_default" . you can set this to your preferred template name, and when you open the basket offline chart, the template will get automatically uploaded on the chart. (if market is closed like now, Just refresh the Chart were you placed the script) Script: Attached File(s) Create_Basket_Script_02.mq4 15 KB | 652 downloads Attached File(s) Create_Basket_Script_02.ex4 21 KB | 497 downloads Default Template: Attached File(s) basket_default.tpl 16 KB | 583 downloads
+
+--- 帖子 #89 ---
+Thanks for your input, Until now we are still in Manual Drive Mode of the Basket. We need to get used to basket charts, trading them manually for a while. Add Multi-Basket Administrator Robot. Then we can build all different kinds of basket robots. Stay Tuned,
+
+--- 帖子 #90 ---
+Currently I am trading three baskets Manually on 3 demo accounts (2 are already linked to this thread and all linked to my profile) 1. Cmdty_Crncy_Basket_Demo (Commodity Currencies Basket). This basket is actually representing 3 commodity currencies (AUD, NZD and CAD) against (USD, EUR and GBP), below are the pairs in this basket along with their directional weight AUDUSD (+1) NZDUSD (+1) USDCAD (-1) EURAUD (-1) EURNZD (-1) EURCAD (-1) GBPAUD (-1) GBPNZD (-1) GBPCAD (-1) For the last month this basket is in a Correction Uptrend Mode, after a steep down trend. H1 Basket Chart : Attached Image (click to enlarge) H4 Basket Chart : Attached Image (click to enlarge) Current Basket Progress : 11% in 10 days. Please note that I am not trading the basket all time. (Just Testing)
+
+--- 帖子 #91 ---
+2. Yen Basket. This is a specific currency basket (like a currency index). It contains the following pairs, and their directional weights: USDJPY (-1000) EURJPY (-1000) GBPJPY (-1000) AUDJPY (-1000) NZDJPY (-1000) CADJPY (-1000) CHFJPY (-1000) The basket is an intermediate up-trend (Yen appreciating), but suffered deep retrace on Thursday, and couldn't make a higher high on Friday, so we could be see a reversal next week (and hence a continuation of the major down trend). H1 Chart. Attached Image (click to enlarge) Current Basket Progress : 9% in 3 days. Please note that I am not trading the basket all time. (Just Testing)
+
+--- 帖子 #92 ---
+3. Metals Basket. (Gold, Silver, Platinum,Palladium) This is a newly created basket, and contains the following pairs along with their directional weights. XAUUSD (+0.01) -- Gold XAGUSD (+1.00) -- Silver XPTUSD (+0.01) -- Platinum XPDUSD (+0.01) -- Palladium H1 Chart, currently trying to correct upwards after a steep down trend. Attached Image (click to enlarge) Current Basket Progress : 2% in 2 days. Please note that I am not trading the basket all time. (Just Testing)
+
+--- 帖子 #93 ---
+If anyone is testing the basket manager, and like to share their basket setups (as I did in the 3 previous posts), please feel free.
+
+--- 帖子 #94 ---
+Based on recent experience with the Metals Basket, I will add an input for lot size multiplier for each pair in the basket (similar to directional weight), default will be 1. So that when trading the basket the robot will multiply the Fixed_Lot_Size input with this factor for each pair. Multiplier is related to the Pip Value and/or Required Margin for each pair. PS: I think this can be done automatically (I will check).
+
+--- 帖子 #95 ---
+Its great to know you're performing very well with "still" a basic tool, scalper.
+
+--- 帖子 #96 ---
+hi abokwaik, liteforex provides basket chart (mt4) and they have all majors basket. the first picture of their yen basket, and yen basket reads opposite. this means; if yen chart up, yen down. ( all yen crosses up -buy ) the second picture of yours. settings; h1, all7jpy, -1000. but there are big differences between the two charts. liteforex yen basket made lower low ( this means higher high ) but your offline chart different ! also different values in both chart. Why is there such a big difference between the two graphs ? thanks http://i.hizliresim.com/07AQjW.jpg
+
+--- 帖子 #97 ---
+Good observation. l am away from computer now. I will check liteforex tomorrow and compare with mine.Meanwhile you can create a yen basket with +0.1 directional weights and compare with liteforex one. Thanks.
+
+--- 帖子 #98 ---
+direction is no problem. but distances and new levels (higher high/lower low) big problem. this may cause fatal error. you can see another basket writer chart below. this is seller9 basket writer and exactly the same with liteforex. i think something is missing in your basket writer, please check. thanks http://i.hizliresim.com/JpB1kq.jpg
+
+--- 帖子 #99 ---
+I haven't tried the basket writer you mentioned. I don't even know if it is possible to create JPYXXX Basket using it, in order to compare apples with apples, is it possible ? I know it's maybe OK to trade XXXJPY as a basket with reversed entries. But what about a little bit complicated basket like Commodity currencies basket mentioned earlier .? I explained in the Robot Lab and here how I create the basket, and shared the source code for it. Every thing was clear and open for discussion. So if anyone spot an error or knows a better way to accomplish the objective, please share your thoughts. Regards,
+
+--- 帖子 #100 ---
+I do not want you to misunderstand me first. I share only error what I see Perhaps in this way, you can further develop your basket robots. I'm not coder, but experienced trader. İf we create complicated basket, first we need to be sure it is correct that a simple basket. like jpy or eur basket. from each of two different script, must be the same in offline charts. because both apples. (all7 jpy) I believe that you can do better, and I support. please check this thread and liteforex basket charts. http://www.forexfactory.com/showthread.php?t=446654 regards
+
+--- 帖子 #101 ---
+by the way, LiteForex basket formula as follows; USDLFX = ((USDCHF * USDJPY * USDCAD) / (EURUSD * GBPUSD * AUDUSD))^(1/7) EURLFX = USDLFX * EURUSD GBPLFX = USDLFX * GBPUSD etc ... lfx means basket.
+
+--- 帖子 #102 ---
+Using Liteforex MT4, As you can see the XXXJPY offline chart created using my Create_Basket Script (with directional weight of +0.073) is almost identical to LFXJPY chart, which means that the script is working correctly for positive directional weights. However, JPYXXX, I agree with your observation that it should've made HH instead of LH. I need to investigate this and will post the solution once I found it. Attached Image (click to enlarge)
+
+--- 帖子 #103 ---
+I think this is closer, but still not perfect ! LiteForex Yen Basket (LFXJPY) Attached Image (click to enlarge) My Modified Basket (#JPYBSKT) Attached Image (click to enlarge) My Old Basket (#JPYXXX) Attached Image (click to enlarge)
+
+--- 帖子 #104 ---
+my observation. yes i agree, this is closer, but still not perfect. thank you bro http://i.hizliresim.com/M6bDJ7.jpg
+
+--- 帖子 #105 ---
+No, no king. I gegenerated the modified basket using an updated vversion off the script which I didn't post yet.
+
+--- 帖子 #106 ---
+ok, we stand by
+
+--- 帖子 #107 ---
+In the previous version I was simply taking the summation of pair rates or inverse rates multiplied by weights: IF DW[i] &gt; 0 then Basket = Basket + ( DW[i]× Rate [i] ) ELSE Basket = Basket + ( (1/DW[i] ) × Rate [i]) -------------- The updated version uses Multiplication instead of summation, and then takes the n-th root of the result, where n is the number of pairs. IF DW[i] &gt; 0 then Basket = Basket x ( DW[i]× Rate [i] ) ELSE Basket = Basket x ( (1/DW[i] ) × Rate [i]) ------- Then Basket = POWER (Basket, (1/n)) ------- I also tried a new version based on Tick Value (in account currency) and it generated the same chart as the Multiplication version. ----- I also thought of a new formula that i will try to test tomorrow if I can find the time. ---- I am taking this seriously, and I need the basket (any basket) chart to be as INDICATIVE as possible. Otherwise I will drop the project and change to simple multi-pair trading. Regards,
+
+--- 帖子 #108 ---
+dear abok, i want to ask a question. when i want to create new basket,i get an error message. can not open a new candle, the price does not change. what am i doing wrong ? http://i.hizliresim.com/393WD0.jpg
+
+--- 帖子 #109 ---
+There is an input called Template_Name where you need to fill in the template name for the template which will be used when you open the offline chart, or you can set it to 0 if you don't want to use it. The default template is already attached to the same post # 88 which you can copy to templates folder under mt4. Attached Image
+
+--- 帖子 #110 ---
+I hate posting using stupid-phones
+
+--- 帖子 #111 ---
+I think the differences are negligible and should not affect ability to trade them effectively and/or make money. And this similarity is without CHF included in the create_basket_script_02 generated chart as opposed to the LiteForex basket chart which i assume incorporates chf in its code.
+
+--- 帖子 #112 ---
+thank you very much. problem solved
+
+--- 帖子 #113 ---
+Multipair trading is good if we can add Ea s as template.İsnt it
+
+--- 帖子 #114 ---
+falanca, did you try version 2 of Create_Basket_Script ( in post # 88 ) ? Did it work well and showed the template applied when opened the Basket Offline Chart ?
+
+--- 帖子 #115 ---
+Hit SL Amount on METALS basket today (1000), after reaching 50% of profit target (500), what a Daily Reversal ! Attached Image (click to enlarge)
+
+--- 帖子 #116 ---
+Three setups on my radar for this week. One already hit TP...All trades placed using Buy/Sell stop orders with Basket Manager EA. Great job AB.
+
+--- 帖子 #117 ---
+Buystop also triggered on AUD Basket.
+
+--- 帖子 #118 ---
+Sell stop not triggered on Gbp Basket...
+
+--- 帖子 #119 ---
+EDIT: tightened sl to below green candles...
+
+--- 帖子 #120 ---
+Welcome back LITE, Its great that you're testing pending orders. I think they need a review. Kindly report any strange behaviour so that I fix in time. All the best,
+
+--- 帖子 #121 ---
+Will do!
+
+--- 帖子 #122 ---
+Hi abokwaik, let's say I have multiple offline charts which I already created using your script. How do I retrieve which currency pairs in offline chart A or offline chart B or offline chart C. Thx.
+
+--- 帖子 #123 ---
+When you attach the Basket_Manager robot it shows the pair names in the comment line. But I think you want to see the pairs composing the chart without even attaching the robot to it. I will add this in the coming version of the Create_Basket Script along with the updated calculation. Regards,
+
+--- 帖子 #124 ---
+I got it. I didn't use the updated EA.
+
+--- 帖子 #125 ---
+I just created an offline chart based on 7 major currencies which are EURUSD, USDCHF, GBPUSD, USDJPY, USDCAD, AUDUSD, NZDUSD. With DW as following +1,+1,-1,-1,-1,-1,+1. But when I clicked buy or sell from basket manager EA, the EA didn't open any positions. But it showed my market order line on the chart. Did i miss something here? Updated: I created again the same chart, and now the EA worked, it opened positions.
+
+--- 帖子 #126 ---
+We are still in the development and testing phase, with focus on correctly creating the basket chart, and manually trading it. Things to do at this stage: Final version of Create_Basket_Script Full testing of Basket_Manager robot (manual overdrive) Basket Managers Viewer/Controller (to manage multiple basket robots in one screen) Basket Manager History (similar to MT4 trade history) but for the basket itself An indicator to display shape of latest basket candle at 3 higher time frames You input for features at this stage will be valuable.
+
+--- 帖子 #127 ---
+Remember you should keep the M1 chart that you applied the script to it OPEN all the time. And make sure you don't attach any other script or EA to it. The M1 Chart is chart that provides the basket chart with Tick Data. I don't quite understood the logic you used in setting DW for the major pairs : You used : EURUSD, USDCHF, GBPUSD, USDJPY, USDCAD, AUDUSD, NZDUSD -- DW ---&gt; +1,+1,-1,-1,-1,-1,+1 If you want a dollar basket, it should be something like -1,+1,-1,+1,+1,-1,-1
+
+--- 帖子 #128 ---
+just some testing. ehehehe.
+
+--- 帖子 #129 ---
+Hi Abok, thanks for the fantastic tools you provide to us. Just a small detail: the EA has a fixed amount of lots, to insert in the options, for all the pairs indicated in the script, so we cant use it to open trades with a "balanced" hedge as we can do with the mervellous script. Is possible make a modification of the EA in order to send orders with a different amounts of lots, for example EURUSD, GBPUSD, USDCHF +1, +1, +2 ? Thanks again
+
+--- 帖子 #130 ---
+OMG, Simihouse, I was sure I forgot one point in the above To-do list, and this was it. I raised this issue in Post#94 . Thanks
+
+--- 帖子 #131 ---
+inculcate Lots size by risk and breakeven after x pips...
+
+--- 帖子 #132 ---
+Fantastic! just came across this wonderful development. kos
+
+--- 帖子 #133 ---
+Its an FF house after all. So they've just moved the thread to Trading Systems. I am copying the below from a previous post ( Post # 33 ) So for all readers, THIS IS NOT A TRADING SYSTEM YET.
+
+--- 帖子 #134 ---
+You're most welcome kos, I can see you are still basketing (probably coaching by now ) Your input in this ongoing development will be highly appreciated. Khalil
+
+--- 帖子 #135 ---
+Hi abokwaik, when I attached the script to a usdchf M1 chart, it produced a very different offline chart when I attached to usdchf H1. Even though I created offline chart with timeframe H1. Could you help? Thx.
+
+--- 帖子 #136 ---
+fantastic job abokwaik! congrats!
+
+--- 帖子 #137 ---
+Hi abokwaik, this is my another founding. I prepared 2 eurusd chart, both with H1 timeframe (historical data up to 11 Nov 2014). Let's call them, eurusd1 and eurusd2. I attached create_basket_script to eurusd1 with Time_Frame_Name M15, and to eurusd2 with Time_Frame_Name H1. Both used the same pairs EURUSD,USDCHF,GBPUSD,USDJPY,USDCAD,AUDUSD,NZDUSD and DW -1,+1,-1,+1,+1,-1,-1 The offline chart results are the same. I suppose it should have created offline chart with M15 and H1.
+
+--- 帖子 #138 ---
+Script should be attached to M1 chart (as explained on first post), and in the Time_Frame input M15 or H1, and both should have different basket names. Here is the correct way to do what you want: 1. Open 2 M1 charts for EURUSD. 2. On the first chart Attach the script and give the basket a name (e.g. #USDM15#), with Time_Frame M15 3. On the second chart Attach the script and give the basket a name (e.g. #USDH1#), with Time_Frame H1 Now you should have 2 offline charts (#USDM15#, #USDH1#). You must keep the 2 M1 charts open as they will feed the 2 offline charts with tick data. Regards,
+
+--- 帖子 #139 ---
+Hello: I do not understand how to load the offline map, whether there is a detailed description of the basket is a very good deal, and I liked that my English is not good, I'm Chinese. Thank you for your help
+
+--- 帖子 #140 ---
+ALL INDEXES Presets for script " Create_Basket_Script_01.mq4"
+
+--- 帖子 #141 ---
+This put that folder? What is it?
+
+--- 帖子 #142 ---
+Here we go, I feel like naked after moving the thread to Trading Systems. @hukam , Thanks buddy for sharing your set files. @kaixinjili , This is not a trading system, its is still under development. If you are not familiar with basket trading it will be difficult for you to go a long with the ongoing discussion, it will be even more difficult if you don't know English well. What we provided so far are JUST TOOLS. Everything needed for using these tools is explained in post # 1.
+
+--- 帖子 #143 ---
+i spent months trying to get other basket method working reliably on my VPS this looks interesting
+
+--- 帖子 #144 ---
+Greetings all. This is my first post to the forum. 'Basket Robots' is a really very interesting development. I have been following (lurking) on Basket-system threads for 3 years - and this is the best by far. It follows a very good KISS strategy and so my profuse thanks to Abokwaik. Well done, Sir, well done indeed. Many thanks also to Hukam for his excellent 'presets'. This is really KISS! I have not used the preset feature before so I was in the same predicament as @kaixinjili . Jo-san, Kai XJ. In the spirit of co-operation and as a token of my esteem for Messers Abokwaik and Hutam, for info on Presets and the "what, how and when" please see: www.forexmt4.com/How-to/How to use presets.doc - 更多此站結果 I hope it helps you to learn the principles of BT faster than I ever did! Trade canny, Hamish.
+
+--- 帖子 #145 ---
+Abokwaik, Great Work!!! I have been trying the Pending orders but they don't seem to be working. The Market orders I am having no problem at all. They seem to be working great along with the SL and TP. Is anyone else having success with using the Pending Orders? Bruce
+
+--- 帖子 #146 ---
+Thanks Hamish.
+
+--- 帖子 #147 ---
+A note on Money_TP and Money_SL inputs: Because basket is composed of multiple pairs, and there might be multiple orders on each pair, the automatic closing DOESN'T always result the exact value of Money_TP or Money_SL inputs, SPECIALLY in volatile times (red news). The Plus/Minus variance as per my experience with the 3 baskets under forward testing (demo), can go up to 5% (the maximum so far was 3.5%), which happened yesterday on Metals Basket during FOMC, Money_TP was $3100 and closure was $2991. So keep this in mind when setting these two inputs.
+
+--- 帖子 #148 ---
+Thanks brucech, Please note that if you have 3 Buy market orders running, then Pending Buy orders will not trigger. Same for sales orders. EDIT : Make sure also that the Lines are Activated (last button on the bottom of the chart) If this is not what happened with you, I will give it a look. I was going to review pending orders anyway. In relation to this, What if one needs to open more than 3 Buy Orders on the same basket ? This can be done by opening another instance of the Offline Chart, Applying the Basket Manager with DIFFERENT Magic number, this will give you additional 3 orders of each type. Same process can be repeated for additional orders, just MAKE SURE to use DIFFERENT Magic Number for each Basket Manager Instance. Regards,
+
+--- 帖子 #149 ---
+I am testing now Stop and Limit Orders (1 for each type) on Commodity Currencies Basket Attached Image (click to enlarge)
+
+--- 帖子 #150 ---
+OK, Pending orders are not working good, Buy Stop Order was triggered and closed immediately. It actually opened at price = the Stop Order Price + Spread, I think I should remove the spread form the equation. Agreed Pending Orders need a serious review.
+
+--- 帖子 #151 ---
+I found the problem with Pending Orders, its is the SL and TP lines, if not defined they will be equal to the pending order price. I am gonna fix this ASAP. Sorry. For now you can add SL/TP lines to your pending orders to overcome this problem.
+
+--- 帖子 #152 ---
+hi abok, in this yen basket example, all directional weights an equal. but all pairs value not equal. for examples; gbpjpy @ 178.xxx, nzdjpy@ 89.xxx. one of 6 digits, and the other 5 digits. is this a problem ?
+
+--- 帖子 #153 ---
+We are not actually trading the basket chart, we are just using it as an indicator/trigger to open/close orders on the live charts for the composing pairs. We need the basket chart to represent the underlying movement of basket pairs as correctly as possible. Now, taking an example of Yen Basket, lets even take a simpler yen basket "Yen2", with only 2 pairs NZDJPY and GBPJPY, with -1000 DW, on an H1 time frame Lets take the last hour of last week (2015.03.20 23:00) broker FXDD Open Price NZDJPY = 90.668 = 11.0292, close 90.753= 11.0189 , original change= +0.085 , calculated change = -0.0103 Open Price GBPJPY = 179.368 = 5.5751 close 179.354= 5.5755 , original change= -0.014 ,calculated change = +0.0004 Assuming the Summation Method Yen2 Open = 11.0292+5.5751=16.6043, close =11.0189+5.5755=16.5944, calculated change = -0.0099 Now the BIG Question : does the calculated change of -0.0099 correctly represent the movement of NZDJPY and GBPJPY for that hour ? My answer is NO. Weights should be used INTELLIGENTLY to give each pair a FAIR effect on the Basket. I will try to include some Auto calculation (suggestion) for this inside the Script itself. I am on vacation now, but I'll see what I can do. Regards,
+
+--- 帖子 #154 ---
+thanks for reply. have a good vacation. regards
+
+--- 帖子 #155 ---
+Hello Abokwaik, please tell me why you don't see in the graph template shadows candles ? Thank you
+
+--- 帖子 #156 ---
+Possible reasons: (1) you attached the script to a time frame other than M1. (2) Directional Weights are not correct.
+
+--- 帖子 #157 ---
+Yes indeed, you are right. I forgot to set the period of M1. But now everything fell into place. With your permission, I would like to try your wonderful basket Monday. Once again thank you very much.
+
+--- 帖子 #158 ---
+I didn't have the chance to fix some Pending Order issues yet, so I suggest not using them before I post the fix. Market Orders are working correctly, I usually set Money_TP and Money_SL. Enjoy your shopping ,
+
+--- 帖子 #159 ---
+Thanks for the warning. Let's wait for changes.
+
+--- 帖子 #160 ---
+This is the 3rd version of Basket Offline Chart Creator (Create_Basket_Script_03). Its based on multiplication instead of summation (check post # 107 ) I have added also an option for Pair Lot Multiplier to be used when trading the Basket Chart (not implemented in Basket Manager yet). If you guys are satisfied with the charts created by this version, we can move on to focus on Basket Robots. If you are not, kindly post your concerns to be discussed and if possible find solutions for them. Regards,
+
+--- 帖子 #161 ---
+WARNING Use the above script "Create_Basket_Script_03" only for creating the offline chart, and validating these charts. Basket Manager is not updated yet to deal with the offline chart created by this script.
+
+--- 帖子 #163 ---
+The above charts of Create_Basket_Script_03 AND LITEFOREX will not be EXACTLY the same because: Create Basket Script is using M1 for historical data, while LiteForex is using Tick Data. However, I believe they should look the same for LIVE data. Since LITEFOREX Basket is tradeble, LITEForex (as a market maker) may have their own Bid/Ask price for the basket. Again this is not a malfunction in the script, it is the best possible way I could find to represent the basket chart. Regards,
+
+--- 帖子 #164 ---
+hai to all, come close to my target, 100 percent a month, still seven days to go to reach 42 days, another 100+ pips will do it. Meanwhile i have opened a new thread to discuss about the entries and exits and money managements. Please have a look.
+
+--- 帖子 #165 ---
+I agree buddy!
+
+--- 帖子 #166 ---
+Astonishing Results, Scalper. and this is a LIVE account. Can you enlighten us on your basket(s), and the method you use in trading the basket. Thanks, EDIT : OH, I see you opened a new thread Harvesting the pips with a basket . See you there.
+
+--- 帖子 #167 ---
+hai to all, Done it.... 100 percent again in this month too, really clear that basket will and should work, with right partner, MONEY-MANAGEMENT. as always thanks khalil.
+
+--- 帖子 #169 ---
+hai to all, my trade explorer connection is lost , when i delete the TE and create the trade explorer it is not working anyone have the same issue, and my broker bid line and bid price is also differs i dont know what is happening.................
+
+--- 帖子 #170 ---
+check account number &amp; investor pass
+
+--- 帖子 #171 ---
+Thank you for this! I love basket trading I've set it up on a demo account with Trade explorer attached to it, let's see how it fairs I've noticed that when I click on either TP or SL, the basket closes, is that how it's supposed to work? Also, The Money_TP and Money_SL, are they in pips, points or account currency? Thanks.
+
+--- 帖子 #172 ---
+Hi Reamasesa, I don't know which versions of script &amp; robot you're using. Notice that Create_Basket_Script_03 is provided ONLY for testing the Basket Offline Chart, it is not ready for trading with basket manager yet. If you want to test trading you can used Create_Basket_Script_02 (script) and Basket_Manager_02 (robot). Although I prefer you wait until I come back and release Basket_Manager_03 which can trade the chart created by Create_Basket_Script_03 . EDIT : Money_SL and TP are in Money (Dollars or Your account Currency) Regards, Khalil
+
+--- 帖子 #173 ---
+Hi, Thanks for replying I'm using the 02 versions, just playing with them for the time being, I did try the 03 version and liked the new feature but I went back to 02 for playing with the trading options. I'm trying to create a basket for Oil and Gas, I've used the loadallhistory script but still getting this messages, do you know what I need to do to make them go away? Thanks
+
+--- 帖子 #174 ---
+Reamasesa, I have found that after using LoadallHistory script, it is helpful to go into Tools..History Center... and the click on the item you want the history on and times.... This seems to solve the problem for me at times. Bruce
+
+--- 帖子 #175 ---
+Thanks, already did that but it didn't work.
+
+--- 帖子 #176 ---
+The error messages shown are no problem, because the basket history will not be 100% correct, and that is understood by design. However I doubt that your using correct pair names in the basket,for example #CLK5 ???, is this a pair available in your Market Watch ?
+
+--- 帖子 #177 ---
+Hi, Abokwaik How do you trade de basket in the tradeexplorer?
+
+--- 帖子 #178 ---
+Hi, Thanks for replying. Yes, this is a valid symbol with my broker.
+
+--- 帖子 #179 ---
+Just a quick suggestion to modify the creationscript. In my opinion it would be "more correct" to select the opening time of the most frequent symbol and getting the shift value for each pair individually. Only accessing the rates via a single shift values has the disadvantage that: corrupted/missing data of a single symbol will render the chart useless and even worse you won't notice it. You can compare forex pairs with securities with different opening times (like stocks or indices)
+
+--- 帖子 #180 ---
+Entry is manual at this stage. You can trade the basket chart through Basket Manager like any other live chart. Basket Manager is also used for Targets, Pending Orders, Closing ... etc. Later on I will add auto-robots for entry and trade management. Currently I use intra-day support/resistance. You can use your favorite trading method to trade the basket through the Basket Manager. This is the current status of the Metals Basket , See S/R Lines, Trend Lines, Regression Channels ... etc. You can use it as a regular chart. Attached Image (click to enlarge)
+
+--- 帖子 #181 ---
+I think you're onto something, but I didn't quite understand. It'll be great if you can give an example.
+
+--- 帖子 #182 ---
+Hai Khalil , today a terrible day, i have found one thing in the basket manager 2, when a set of orders are already been placed, again if press the sell button, actually it closes all, actually today at first USD has been falling, i entered a sell order , but as soon as i entered it backfired me and rallied, so i wait for the time to start my recovery plan, finally the time come at 3 pm. at the time for activating the recovery i just hit sell button again, but this time all orders was closed[ i know already that it will close ]. But mind pressure created the room for mistake, and i fell for that. so i request you to create a separate button for closing the opened orders. it caused me 60 dollar loss, but if my recovery plan activated right all my positions were in good profit. just i gave a small room for error, and it caused, still i have to learn to avoid the mental pressure, its not a big loss but it hurts , still i am up for 200 percent goal. but something hurts, as i know the plan, and if i executed it right all will went fine. but like a crazy man i wasted all things...
+
+--- 帖子 #183 ---
+Sorry for that. OK, I will create a separate check buttons for closing (like the ones MT4 provides). I will place these buttons on left of buy orders, and right of sell orders.
+
+--- 帖子 #184 ---
+thank you brother
+
+--- 帖子 #185 ---
+As ı understood,Basket manager will be basket manager if we use this with createbasket function .İ am seeking the Abo's last version.I suggest ,İt will be complete multipair trade full manager as he describes
+
+--- 帖子 #186 ---
+I don't have the time right now to recode the indicator but it should be something like this Inserted Code //main for loop for(;;i--) { double openBuffer,closeBuffer .... bool skipFlag = false; //skip the bar if we don't have complete information datetime openTime = iTime(symbol[0],timeframe,i); // symbol[0] --&gt; symbol with the most frequent bars. for(int m = 1: m &lt; symbolCount; m++) { int shift = iBarShift(symbol[m],timeframe,openTime,true); if(shift == -1) { skipFlage = true; break; } else { openBuffer += iOpen(symbol[m],timeframe,shift) + ... * ... ; closeBuffer ..... } } if(skipFlag) continue; //Write values to file } Basically: a shift of 10 could be 7:50 am on one chart and 8:00 am on the other chart. If you get a fixed time and use this to calculate the shift value you are much safer.
+
+--- 帖子 #187 ---
+Update of the chart posted 3 hours ago. See how "basket" price re-acted to S/R line. Attached Image (click to enlarge)
+
+--- 帖子 #188 ---
+Hi, Not sure, but maybe there's a bug calculating the basket performance, see attached.
+
+--- 帖子 #189 ---
+I found some time during vacation to complete version 3 of Basket Manager. I managed also to add scalper.exp request of separate close buttons. This is still a Manager not Robot, as we want to finish the manual trading version and make sure it works correctly before moving to basket robots. Version Update: This version is to be used with Create_Basket_Script_03 Lot size for each pair is calculated using the pair Lot Multiplier used in Create_Basket_Script_03. Note that this is not normalized, so use multipliers that will produce acceptable lot size for your broker. Added separate Close Buttons, and disabled closing from order buttons. Hopefully Fixed Pending Orders issues. I have tested some and they worked OK. Please do more testing, and report any bugs. Removed ASK Line as it was a source of confusion. Shop Carefully, Khalil
+
+--- 帖子 #190 ---
+I think you are running multiple instances of Basket Manager with SAME Magic Number ! EDIT : I will add a validation later on to FORBID using a previously used Magic Number.
+
+--- 帖子 #191 ---
+After closing your current orders. I suggest using the latest versions of (Create_Basket_Script_03 and Basket_Manager_03).
+
+--- 帖子 #193 ---
+What about using the previous close value until a new one is available. This will neutralize null values.
+
+--- 帖子 #194 ---
+You could do that the question is just how accurate that measure is. It's up to the coders choice there and there is no right or wrong just remember that once symbol is "closed" there is no way to trade it.
+
+--- 帖子 #195 ---
+I see what you mean Kilian, and Thanks for your comments. It is advisable for a basket to be homogeneous. So I don't think this will be an issue.
+
+--- 帖子 #196 ---
+I'm pretty sure I'm not. I gave each of the five managers its own magic number. Also, I've noticed that if I restart the MT4, the create basket script needs to be executed again, otherwise the basket charts are not updating. Thanks for Ver. 03!
+
+--- 帖子 #197 ---
+very good, i am thinking about S/R levels but little differently, soon i will message u some ideas . regards hukam
+
+--- 帖子 #198 ---
+This is an update with validated lot size calculation. Again use with Create_Basket_Script_03.
+
+--- 帖子 #199 ---
+Hi, Please, could you check the spread computation. In v3 is quite big. All the best! Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #200 ---
+It seems that you're using incompatible versions of script and manager. You need to use latest Basket_Manager_03 with Create_Basket_Script_03. PS: Spread, Ask Line and Pip value were removed in last version.
+
+--- 帖子 #201 ---
+You are right. Thank you.
+
+--- 帖子 #202 ---
+Hi, The basket closed on SL but the manager still shows "open" trades even though they are closed. Version 03 for both basket and creator. Can we get a trailing stop feature, maybe? Did I mention how much I love basket trading? Thanks for an awesome job.
+
+--- 帖子 #203 ---
+Hai to all, thanks khalil for the changes in the latest version,Then i had overcome the 60 dollar loss by adding another 100 percent to my account, actually still one day to go to end the second month but account went up to 300 percent right now. From here i will change my broker and let you know the fresh start once again. For newcomers please use this with caution suddenly you will be in danger if not used with caution , the key is please have the Fundamentals in your hand, bcoz we are dealing with major economies [just a small hint].
+
+--- 帖子 #204 ---
+hai khalil, i think there is problem in pending orders, it automatically closes the orders. Please have a look. but for basket trading today yet another good day, last day of the month and last day of my testing , looking to add another 60 to 75 percent to the balance to yesterday balance.
+
+--- 帖子 #205 ---
+Just came back from vacation. Job is demanding at the moment. But I'll try to spare some time for basketing
+
+--- 帖子 #206 ---
+I will check and fix. Can we get a trailing stop feature, maybe? Sure. This will be "profit money trailing".
+
+--- 帖子 #207 ---
+I will check pending orders. Great results. Keep it rolling ! Is there any chance of automating your manual trading method?
+
+--- 帖子 #208 ---
+Yes khalil it can be automated,but some things can not be done in coding, I will pm u
+
+--- 帖子 #209 ---
+Hello AB, Thanks for your great effort. Don't mean to be B*&amp;ch but how do i put the right set up for the DW according to percentage in the picture below? Thanks Attached Image (click to enlarge)
+
+--- 帖子 #210 ---
+eur % 57 ? jpy % 13 ? this is madness and usd ? where's dollar ?
+
+--- 帖子 #211 ---
+That's how the dollar index is calculated. Google yourself for more knowledge for your brain. and USD? where is USD? ..... hahahahaha You can't weigh USD$$$ with USD$$$+Other currencies bro..... what a Dumb**s question. My purpose to ask the question is. If we know the percentage of the USD INDEX really calculated, we can implement the setting for any other pair so that our basket is MORE RELIABLE and ACCURATE. Thanks
+
+--- 帖子 #212 ---
+I tried this setup : input string Pairs = "EURUSD ,USDJPY,GBPUSD,USDCAD,USDSEK,USDCHF";//Basket Pairs input string Pairs_DW = "-0.01736, 13.6,-0.084, 9.1, 4.2, 3.6";//Pairs Directional Weight input string Pairs_Lot_Multi = " 1, 1, 1, 1, 1, 1";//Lot Multiplier Here is how I did it. 1. Multiply the numbers by 100 or 1000 to maintain significant digits, I used 100, so for EUR/USD = 0.576 x 100 = 57.6 and so on. 2. For pairs with USD on the Left Side use the resulted numbers (weights) from step 1, so for USDJPY DW will be 13.6 3. for pairs with USD on the Right Side use -1 devided by resulted number from step 1, so for EURUSD DW will be -1/57.6 = -0.01736 Resulted USDIDX Chart Attached Image (click to enlarge) And this is the Dollar Index from FXStreet for the same period /Time frame Attached Image (click to enlarge) If you want the exact prices you can calculate the modifier (instead of 100), but I don't see it necessary as we are using the basket chart as an indicator and we actually trade the basket components.
+
+--- 帖子 #213 ---
+Excellent work, Khalil. Very many thanks. H
+
+--- 帖子 #214 ---
+@AB Indeed it's not neceseary as we can see directly from the USD INDEX. But now i know that not all the pair has the same weight when we want to create a basket of certain currency. And base on the percentage we can now calculate in a CLOSER method. Thanks a lot.
+
+--- 帖子 #215 ---
+To measure the weight of a currency pair, you can use script-SymbolWeight
+
+--- 帖子 #216 ---
+Thanks Bro!!!
+
+--- 帖子 #217 ---
+mr caveman, usdx, reflecting its inception in 1973 ( !!!) which calendar you use i dont know, but we're in 2015 now. usdx is very heavy in european currencies, with a % 57.6 weighting in euro alone, and a total 78.3 weighting in european currincies. also, does not include aud &amp; nzd. do u know aud or nzd ? :nerd: anyway, f*ck nzd &amp; aud, you use sek. finally, if you're looking for a dumb, you should look in the mirror
+
+--- 帖子 #218 ---
+Mr. Brainless and attitute, You are explaining about the picture i already gave. And no one talking about AUD and NZD!!! The point of my picture is to give an idea that not all currency should have the same DW when we create a basket!!! One more Peasized Brain and attitute to add to my ignored list.
+
+--- 帖子 #219 ---
+let's guess, where this guy lives ? http://www.jpsviewfinder.com/jphilip...indonesia1.htm
+
+--- 帖子 #220 ---
+This thread started less than a month ago. Manually trading 3 baskets for about 3 weeks. Current Status: Attached Image (click to enlarge) Note : First basket were traded through Basket Manager ONLY, while the other 2 baskets I entered/exited some trades through mobile phone. I traded the baskets on and off during work and vacation for testing purposes only. My initial conclusion is that Basket Trading can be very profitable. Next step is to develop some basket robots to trade the baskets in fully automatic mode.
+
+--- 帖子 #221 ---
+For example a look at the Yen Basket Chart: Attached Image (click to enlarge) Give a clear indication how it can be traded Simply using intra-day Support/Resistance lines.
+
+--- 帖子 #222 ---
+As the ActivTrades demo account which holds the Cmdty_Crncy_Basket_Demo was expired (ages 1 month), I will remove it and attach the FXDD Metals_Basket_Demo. Meanwhile, this is the latest status of the Cmdty_Crncy_Basket_Demo, before removal. Attached Image (click to enlarge) Attached Image (click to enlarge) This account was traded for about 3 weeks only (as I couldn't trade it while on vacation). However I am satisfied with the performance of this basket with 25.4% (monthly return), and only -3.7% max draw down. and Minimal Effort . Note also that some (stupid-looking) trades were taken during the testing of the Basket Manager, specially the micro ones, but they didn't affect the account very much anyway. I will be using the same basket setup on the first basket robot developed. Regards,
+
+--- 帖子 #223 ---
+Since a long time I've been wondering on which currencies have the major effect the Forex market as a whole. I had a guess, but I wasn't sure. More and more, and with basketing, I became more convinced of my guess on these 2 currencies be Dollar and Yen . Some people may disagree. However I will consider my guess in building the new baskets.
+
+--- 帖子 #225 ---
+Hello, [DELETED TEXT] I'm still not sure how to calculate weight, so if you could explain it to me, it would be great. Thanks. [EDIT] My bad, somehow all the magic numbers got reset to default, changed it and it's working now.
+
+--- 帖子 #226 ---
+Hello Reamasesa, Weights are up to you. The basic idea is to generate a basket chart that is meaningful and trade-able. So for example if you like to make a basket of GBP: you can select few or all pairs of GBP. Suppose you selected GBPUSD, EURGBP and GBPAUD. Possible directional weights for those pairs may be +1, -1, +1. You use + if the basket pair (or pairs) is on the left side of the pair symbol, and - if on right. If you have a specific basket in mind, put here and I'll try o assist you in setting it. ---- If MT4 was restarted, Magic numbers (and other settings) will get reset , also the basket chart will not get updated, so it is better you "hard code" the settings of each basket in a different MQ4 file (Both Script and EA), so that you can retrieve it in such cases. All the best,
+
+--- 帖子 #227 ---
+Any specific methodology attached to achieving this result? DD is particularly impressive. Very nice.
+
+--- 帖子 #228 ---
+I think it varies from time to time. Different currencies hold sway at different points in time(depending on magnitude of influence being considered as a benchmark at a particular instant and also timeframes). Thats what creates the seeming ebb and flow of the market. Enter: Currency Strength Meters; an effort to gauge currency influence and position trades in sync with this pulse and market rhythm. Thats why I believe there is always that one, two or more currency pairs that represent the highest probability setups and trades per time in harmony with the currencies holding sway at that moment. Provided we dont arrive too late to the party. That is also why the FIRST question I believe every trader needs to answer before even contemplating any trades is the question of which currencies(and pairs) to buy/sell and why. Other questions then follow.
+
+--- 帖子 #229 ---
+Entry was manual around Intra-day S/R lines, and exits were managed by the Basket Manager at certain basket profit/loss or TP/SL lines. The trick I believe was in UNDER-trading.
+
+--- 帖子 #230 ---
+This resonates very well with some conclusions I am arriving at after running numerous tests and experiments on complete system configs.(manual). Very interesting confirmation. I think I have arrived at my own personal 'holy grail'. Time will tell...and hopefully my bank account as well!
+
+--- 帖子 #231 ---
+Can you make one basket manager with lots size derived by percentage risk
+
+--- 帖子 #232 ---
+how can i delete old ofline folder ? anybody know ? http://i.hizliresim.com/XBOy9O.jpg
+
+--- 帖子 #233 ---
+Search for files with offline chart name+timeframe in minutes with extention .hst using operating system search utility and delete them. For example search for #10EJ#15.hst and delete it. Or search for *#*.hst and delete them. Regards
+
+--- 帖子 #234 ---
+Yes. When we go fully automatic.
+
+--- 帖子 #235 ---
+okey, i found it. history file thank you http://i.hizliresim.com/P5XqVb.jpg
+
+--- 帖子 #236 ---
+Hi abokwaik, Thanks for your effort in building the EA. It's got good potential from your demo results. Are you currently trading manually off support and resistance? Is it based on some indicator? Would it be possible to share when you enter and exit a basket? I'm trying to demo manual trading like you now. Thanks in advance.
+
+--- 帖子 #237 ---
+Hi fanatics, I will reply to you shortly, and then have a separate detailed post on my 1 month experience developing/trading baskets. Only S/R. But you have to know how to trade S/R on a normal chart before trying that on an offline basket chart. This is a condensed post of a recent intra-day trade traded live step by step using only Support/Resistance Lines and Price Action, no indicators. GBP/USD Live Trade Example. If you mean signals, trades are already shown on trade explorer. If you mean the method of entry and exit, then any successful trading system/method should work on a basket chart as it would work with normal chart, and this is what I tried to prove trading 3 different baskets. Regards,
+
+--- 帖子 #238 ---
+As to me Basket trading platforms must be more simple.We must have a table that shows pair strength and according to this table's signals we must open template charts which are attached with our prefered EAs.And these charts must be renewed on every predicted time.İf chart of any pair was closed accordingto the signals then its orders will be closed naturally.Eitherly orders may be managed by other tools.
+
+--- 帖子 #239 ---
+Many thaks abokwaik for all your effort in making a new way of making offline charts, mainly with the use off opposite pairs. I have been reading all thread with my poor English (I don't know if I understood everything well), and checking your basking create script and I have found some differences with other way I was using up to know. To this moment I am using the "Basket8 new format" indicator attached to create offline charts. When I use your script, the shape of the chart it's quite similar but when I mesure the movement of a wave in the chart created by the indicator, it tells you the exact amount of pips moved by all the basket pairs, whereas in the chart created by your script, the amount of pips it's not the same. I attached the indicator in case it helps you to improve your script. Many thaks for creating this thread..
+
+--- 帖子 #240 ---
+Take a look at the image below Attached Image (click to enlarge) Which chart do you think will be more suitable to trade a JPY basket ? Notice the wicks in the chart generated by Basket8 !
+
+--- 帖子 #241 ---
+When trading multiple pairs as a basket pips don't mean much (if any). Basket Chart is basically used for technical analysis. I prefer money targets when trading baskets over pip targets, although you can use SL/TP lines but they will not be 100% accurate specially if price took a long time reaching them.
+
+--- 帖子 #242 ---
+Baskets can be traded using different approaches. My approach here is to trade a basket using an offline chart as I would trade a normal single pair chart either manually or using a robot. Other approaches were provided by other great contributors (i.e. seller9 HERE and Gvc HERE ).
+
+--- 帖子 #243 ---
+Basket Trading Evaluation after one month of demo trading A month ago, I started testing 3 baskets on different account: Those baskets were : Commodity Currencies Basket: composed of 9 pairs (AUDUSD, NZDUZD, USDCAD, GBPAUD, GBPNZD, GBPCAD, EURAUD, EURNZD and EURCAD) started on March 5th and ended on April 4th (with 3 weeks of trading, and 1 week off) In Market 17% of the time Total trades 447 Return of 25.4% and Max DD of 3.7% With regard to Return vs DD this basket was the BEST and Least Risky out of the 3 baskets, and was traded Completely using the Basket Manager. In the next version of this basket I will remove USD pairs from this basket, meanwhile I will not add JPY pairs. Yen Basket : Composed of 7 pairs (USDJPY, EURJPY, GBPJPY, AUDJPY, NZDJPY, CADJPY and CHFJPY) started on March, 10th and completed 1 month of its life In Market 21% of the time Total Trades 320 Return of 40.5% with Max DD of 11.5% This was a moderate basket with regard to Return vs DD and Risk. It was traded Mostly using Basket Manager. I will remove USDJPY from the New version of this basket ​Metals Basket: ​​Composed of 4 pairs (Gold, Silver, Platinum and Palladium) started on March 12th, and almost completed 1 month of its life In Market 58% of the time. Total Trades 192 Return 73.4% with Max DD of 43% Although return of this basket was the Highest , DD was not acceptable at all. This basket was the hardest to trade using the Basket Manager as pairs were not highly correlated (specially Gold and Palladium), and weights were hard to compute (specially Silver). It was Rarely traded using the Basket Manager. In fact towards end of the month I restricted trading to Gold only. So I would not consider this as a Basket. Metals basket will be retired and will not have a new version. So Baskets 1 and 2 have potential but need some improvements, Basket 3 is definitely out. More to come
+
+--- 帖子 #244 ---
+New Baskets: Commodity Currencies Basket: ​Pairs : GBPAUD, GBPNZD, GBPCAD, EURAUD, EURNZD and EURCAD Directional Weights : -1, -1, -1, -1, -1, -1 Lot Multiplier : 1, 1, 1, 1, 1, 1 Yen Basket : ​​Pairs : EURJPY​, GBPJPY, AUDJPY, NZDJPY, CADJPY, CHFJPY Directional Weights : -1000, -1000,-1000, -1000,-1000, -1000 Lot Multiplier : 1, 1, 1, 1, 1, 1 Dollar Basket : ​​Pairs : EURUSD, GBPUSD, AUDUSD, NZDUSD, USDCAD, USDCHF Directional Weights : -10,-10,-10,-10,+10,+10 Lot Multiplier : 1, 1, 1, 1, 1, 1 ​​
+
+--- 帖子 #245 ---
+I am going to trade the 3 baskets on One account using Robot A, and on a second account using Robot B. Robots A and B are not decided yet.
+
+--- 帖子 #246 ---
+hi abokwaik, i noticed that the number of digits for the jpy charts is 4. I looked at the code and noticed it was written as 3 digits. Even if i changed it to 5 digits to test, the chart is still 4 digits... is this a "feature" of offline charts that the digits is fixed at 4? I tried to load other baskets and the number of digits is still 4
+
+--- 帖子 #247 ---
+Yes. As far as I know it's a limitation in mt4 offline charts
+
+--- 帖子 #248 ---
+Ok thanks for the prompt response!
+
+--- 帖子 #249 ---
+Thanks abokwaik. For my way of trading pips are important. That's why I would like to ask you if its possible to change easily the indicator Basket V8 to work with opposite pairs as your script can do. And as I'm not a programmer, could you explain, if possible, just in a few words which it's the difference between the indicator and the script in it's way of calcultating the offline charts...Thank you...
+
+--- 帖子 #250 ---
+Thanks jjventural a script does its all work in one cycle once attached to a chart and then removed automatically (unless coded otherwise). an indicator repeats its work with each tick until removed from the chart by user. The create basket script is a special kind of script designed to work continously until stopped (by closing the chart, restarting mt4, overwritten by another script, changing time frame ...) as for pips they will not be meaningful in the way i am creating the basket charts especially when having directional weights not equal +1. Regards
+
+--- 帖子 #251 ---
+hi abokwaik, you removed usdjpy from the new yen basket and usdjpy from dollar basket. is there a special reason ? regards
+
+--- 帖子 #252 ---
+hi jj, i checked your indi. num of pairs are 6. jpy basket consists of 7 pairs. ( uj,ej,gj,aj,nj,caj,chj) which on missing and why ? regards
+
+--- 帖子 #253 ---
+Yes. I see USD and JPY as the 2 currencies that affect the market most. I don't want them together in one basket because they might disturb the basket trending. For example: when USD weakens, USDJPY weakens while other JPY pairs get stronger. This is only my opinion and I will put it to test with these baskets. Regards
+
+--- 帖子 #254 ---
+thanks share your opinion and agree with you. in my opinion; usd &amp; yen moving together same direction when the usd down, anti dolar group up (eu,gbp,aud,nzd,chf, cad) in this case; if we're trading the yen basket, we should to buy anti dolar group and sell yen. usually correlation works this way for example : ( usd down senario ) eurjpy - long ( that means eur buy / yen sell ) gbpjpy - long ( that means gbp buy / yen sell ) audjpy - long ( that means aud buy / yen sell ) nzdjpy - long ( that means nzd buy / yen sell ) cadjpy - long ( that means cad buy / yen sell ) chfjpy - long ( that means chf buy / yen sell ) regards
+
+--- 帖子 #255 ---
+Hello AB , sorry for my english is bad. This is my first post on the forum , by the way , I'll follow your threads from the sidelines . I am convinced that your system has a great future. Here and there I have a problem with the script and the manager , but I'll talk about that some other time . Maybe it was a mistake on my part. I see you have great programming skills . I would like to thank you and you wish that you keep doing as you're doing so far . Cheers
+
+--- 帖子 #256 ---
+dolar &amp; yen basket ( yen basket read opposite @ lfx chart ) http://i.hizliresim.com/yPbZBk.jpg
+
+--- 帖子 #257 ---
+Hi kingofmicro, This is because I like to work without the CHFJPY pair, nothing else. When your attach the indicator you can choose in the field "NumOfPairs"= 7 to have all JPY pairs. If you open the indicator in the MetaEditor you can go to line 218 and from there you can change the pairs you want in your basket according to the "NumOfPairs" choosen.
+
+--- 帖子 #258 ---
+Thanks abokwaik, do you think it's possible to change the indicator to work with opposite pairs???...
+
+--- 帖子 #259 ---
+Here is a quick comparison between Basketv8 indicator and my Create_Basket script: Basketv8 uses Summation (the old way I started with in version 1), While Create_Basket uses the Nth Root of Multiplication Summation which I found more accurate (where N=number of pairs in the basket). Basketv8 calculate High and Low same as it calculates Open and Close (inside the main loop), While Create_Basket calculates High and Low on the total (outside main loop), which I found more accurate This in addition also to customized multiplier, and direction which are not available in Basketv8 To sum it up, Create_Basket_Script_03 is the most accurate method I could find to represent a basket in an offline chart, so why to go back ?
+
+--- 帖子 #260 ---
+I understand you abokwaik, but it's just for the movement in pips wich it's very important in my way of trading, nothing else. If it's no possible to change the indicator I understand it. Thanks again for all your patience....
+
+--- 帖子 #261 ---
+No Problem jjventural, I can do it, but the final result will be same as Create_Basket_03. Once Inverse (-ve multiplier) is used or even a positive multiplier Not equal to 1 , PIP meaning is completely changed. More over, the meaning of PIPs is different when trading multiple pairs which have different ADR, spread, tick value, decimal points ... etc. This does not mean that you can not trade the basket chart using pips, however the relation between a PIP on the basket chart is very loosely related to PIPS in underlying pair charts. As a matter of fact I am currently working on the first robot that will trade the basket chart automatically, and its is based on pip change. But pip change here is related to the basket chart only regardless of underlying pairs. May I ask whether your way of trading is based on the basket chart or you just use the basket chart as a trigger to open/close trades on individual pairs ?
+
+--- 帖子 #262 ---
+Sniper mode activated...
+
+--- 帖子 #263 ---
+Hi abokwaik, For trading I use simple moving averages, stochastic and tdi indicator, nothing special, nothing new. I trade the basket as a normal currency pair. I try to go with the trend, wait for a retracement to the moving averages (12,36, 200) and then enter. I look for the last low or moving average position to set stop loss and then look for possible take profit according to resistances, dayly or H4 offline moving averages, fibo projectios.... This is a very typical way of trading. I like to know how many pips I'm risking to see the size of the lot and how many money I could lose in that trade. Same for take profit and see if the trade it's worth or not. For this reason pips are important to me. Up to now I have been trading with USD and JPY basket with the basket v8 indicator that tells me the exact pips that whole basket does. If I want to work for example with AUD pairs I need to introduce opposite pairs like GBPAUD and EURAUD, thing that the indicator can't do at the moment. This it's why I'm looking for modifying the indicator, but I don't know if it's going to work well with opposite pairs...
+
+--- 帖子 #264 ---
+abokwaik İ appreciate your efforts .but İ think we all consider to make seller9 s new project.Have you ever interested with slots.
+
+--- 帖子 #265 ---
+Good Luck.
+
+--- 帖子 #266 ---
+Peak the currencies on the table and trade with your EA s on opened charts.As ı tried to explain you.But I think slots EA also some mixed.İ think we can create sth more useful on the same logic.İf interested ı can go on my idea
+
+--- 帖子 #267 ---
+Hi abokwaik, when I start metatrader this morning the scrip desapear, so it's necessary to start again creating the charts one by one. Whith the indicator it doesn't happend. It's a lot faster to start trading, mainly when I have h4, h1, m15 charts opened at the same time.....
+
+--- 帖子 #268 ---
+Right. And its already mentioned in the thread. I will try to make an indicator version of the script.
+
+--- 帖子 #269 ---
+Go Ahead, I am listening
+
+--- 帖子 #270 ---
+Thank you.... but when you have time. Finish first your EA.... Thanks once more time for your patience...
+
+--- 帖子 #271 ---
+Thanks, Nice. I am open to new ideas. PIPS/SPREAD/PIPVALUE in a Basket Chart This was a major issue for me when I became interested in Basketing (2 months ago) Basket discussion was held in the Robot Lab starting from Post # 509 I suggest you read it through (in case you haven't already) and then we can discuss how the final product would be. Regards
+
+--- 帖子 #272 ---
+Who am I to compare my self with seller9 and other experienced and generous members here at FF. I am merely a junior student in classes of a long list of masters like seller9, cja, Gvc, FerruFx, hanover, PipMeUp ...
+
+--- 帖子 #273 ---
+great news thanks all afort
+
+--- 帖子 #274 ---
+This actually is a very good idea!!!
+
+--- 帖子 #275 ---
+No as to me you are also great and hospitable as other masters
+
+--- 帖子 #276 ---
+Indeed Thank you for all your efforts!
+
+--- 帖子 #277 ---
+Hello Khalil. This is an idea I have been brooding over...let me know if it's something you might be interested in working on and develope further...
+
+--- 帖子 #278 ---
+Thanks for sharing LITE, Few Questions before we "Open Sesame", Are we Buying Only one "Strongest/Weakest" pair based on Basket Analysis ? Or Buying all pairs of the Strongest Baskets and Selling all pairs of the weakest basket ? Is Strength based on RSI, or Percentage Change, or ... ? How HTF (Higher Time Frame), and LTF (Lower Time Frame) Trends are defined ? I see from the chart that both short entries were a bit Late, Aren't they ?
+
+--- 帖子 #279 ---
+This is an update of Basket_Manager_03: Bug Fixed in SL/TP of triggered Pending Orders
+
+--- 帖子 #280 ---
+We trade individual pairs based strictly on 'OPEN SESAME' signals from the BASKET DASHBOARD. Infact only the OS signal need be displayed at all. The other signals can be quietly going on in the background. Strength/Weakness is determined using a custom CSM. (check your PM). LTF/HTF Trends are determined using the SUPERTREND indicator. Period/Multiplier settings are 6/3 and 48/6 respectively on 30M TF charts. Unfortunately I only have the ex4 files. Late entries are very much relative to exits, and only become apparent after the fact. You never know how extended the trend will become. Look at the same trade setup now and the RR obtained thus far. Trade can be kept running for as long as OS remains 'open' and emergency stops can be trailed on individual pairs using LTF trend indicator setttings.
+
+--- 帖子 #281 ---
+Although my time is very limited, This is irresistible I am IN.
+
+--- 帖子 #282 ---
+hi lite, Is it possible to share sesame indicator ? regards
+
+--- 帖子 #283 ---
+I was hoping you might say that
+
+--- 帖子 #284 ---
+That is the indicator Khalil has agreed to work on.
+
+--- 帖子 #285 ---
+Firstly thank you for the great work you have started here, and hope you go very far with this. It has great potential. I've started with your basket today on a demo account and looks very promising, but I just have 2 questions. How can I add a MTF indi onto the basket chart, for instance a H1 and H4 stochastic on a M15 basket chart? Have tried opening all required TF's in the background, but no help. Then I created a EU &amp; EJ basket chart (attached) then opened a sell with the robot, but price went straight through my SL on the basket chart. I've read through the entire thread this morning but didn't see a reference to this, so can you please tell me what am I doing wrong? Thank you
+
+--- 帖子 #286 ---
+Hi fbrand, As for your first question : For MTF indicators to work, you need to create Basket Offline Charts for ALL desired time frames with the SAME Basket Name. As for the second : This is Price Action, If your stop loss is near, it can be hit easily.
+
+--- 帖子 #287 ---
+I think I miss-understood your second question. You're saying that price hit SL but order didn't close . THIS is because the "Lines De-Activated" last button in the screen , you need to Activate the Lines for SL/TP and Pending orders to work.
+
+--- 帖子 #288 ---
+Great, I'll try that and thanx for the quick reply and.
+
+--- 帖子 #289 ---
+The Yen Basket is doing good after removing USDJPY from the basket (although I ran some trades on it outside the basket). Return for this week 17% Return for this month 44% Overall Return (37 days) 65% Mind that this was partially traded through the Basket Manager, and partially manual (on specific pairs). The problem with my way of trading this basket is its hard to automate (specially intra-day swing trading, and averaging). I am trying different robots to run the basket but so far haven't found one that I can rely on to trade the basket in fully automatic mode. Maybe this was a bad idea ? Green Pips to you
+
+--- 帖子 #290 ---
+Here is a quick look at how I currently trade the Yen Basket (this is M30 chart). Attached Image (click to enlarge)
+
+--- 帖子 #291 ---
+Sell Stop Order Triggered: Attached Image (click to enlarge)
+
+--- 帖子 #292 ---
+Currently in Profit after breaking the horizontal support line, and trying now to break the trend line. (changed background to black for easier view) Attached Image (click to enlarge)
+
+--- 帖子 #293 ---
+The trend line (that coincides with previous range top) will be hard to break ... lets see .. Attached Image (click to enlarge)
+
+--- 帖子 #294 ---
+Trend line and previous range top are finally broken, on way to target Attached Image (click to enlarge)
+
+--- 帖子 #295 ---
+If you do find a working robot it would be super but even without it, this basket EA is great
+
+--- 帖子 #296 ---
+Closed at Target . (185 pips=$145, lot size 0.1). Image seconds before close. Attached Image (click to enlarge) Image after close at TP. Attached Image (click to enlarge) Have a good day.
+
+--- 帖子 #297 ---
+Abowaik pardon me but cant we make this EA without offline charts.We shall only put pending orders according to strength of currencies.
+
+--- 帖子 #298 ---
+I am afraid strength (indicators) are usually late.
+
+--- 帖子 #299 ---
+no indicator, yes money
+
+--- 帖子 #301 ---
+Then we can open pendings according to sntiments
+
+--- 帖子 #302 ---
+once again i start learning this...lol you are doing too good.
+
+--- 帖子 #303 ---
+this my yen basket trade plan ( lfx chart, please read opposite - means : lfxjpy down &gt; yen up ) brakeout a very important support http://i.hizliresim.com/GYQMMV.jpg
+
+--- 帖子 #304 ---
+Hi, Thank you for the great tools. Just two small observations related to the last version. I hope it helps. - the second buy limit order opens directly a buy order - both sell limit orders are showing the sl and tp in the wrong places (now sl appears bellow and tp above the sell limit order) All the best!
+
+--- 帖子 #305 ---
+Thanks mcomsa, You are probably right, and I knew why, versions mix-up, sorry . Here, I repeated the last modification on the latest correct version. All should be OK now. Kindly test and report any strange behavior,
+
+--- 帖子 #306 ---
+Thank you, I'll try....
+
+--- 帖子 #307 ---
+Observations on Basket Chart Trading ... Day Trading Support/Resistance (Demand/Supply) zones work Perfectly (Tested on H1 and M30), S/R zones are used for both Entry and Targets Not Suitable for Quick Scalping (because of lack of pairs correlation on lower time frames and heterogeneous spread) Individual basket pairs do not reach S/R zones exactly at the same time, some will be leading, and some will be lagging (I am trying to figure a way to benefit from this situation)
+
+--- 帖子 #308 ---
+Just checked and the problems are not solved yet (I tested the above version).
+
+--- 帖子 #309 ---
+Bug found in 2nd buy limit order line : //--- 2nd buy limit --- if(ObjectFind(0,__lin_buy_limit_2)&gt;=0) { if(Close[0] &gt; ObjectGetDouble(0,__lin_buy_limit_2,OBJPROP_PRICE)) It should be : //--- 2nd buy limit --- if(ObjectFind(0,__lin_buy_limit_2)&gt;=0) { if(Close[0] &lt; ObjectGetDouble(0,__lin_buy_limit_2,OBJPROP_PRICE)) I believe other previous issues are OK ? Thank you mcomsa
+
+--- 帖子 #310 ---
+The 2nd buy limit order line and sl/tp lines for sell limit are working ok. Thank you so much.
+
+--- 帖子 #311 ---
+Hi, Can we get an option to locate the EA at a different side of the screen? I have several charts open and it kinda blocks the bars even with the chart shift on. Thanks. [EDIT] Also, not so sure how to use the pending orders, I click and nothing happens.
+
+--- 帖子 #312 ---
+Hi abokwaik, any news about the indicator version???..... .....Thank you....
+
+--- 帖子 #313 ---
+I'd like to create a 28-pairs offline chart with the Create Basket Script. Is it possible? And if yes, how should I change settings in it? Thank you in advance!
+
+--- 帖子 #314 ---
+Sorry for the late reply, been racing lately We're not talking off-line chart anymore, and I assume the indicator will be in a separate window, Right ?
+
+--- 帖子 #315 ---
+Yes, its possible. 1. You'll need to fill in all the pairs you want separated by commas. 2. Directional Weight can be set to 1 as we are not interested in a specific currency. 3. Make sure you have enough history on all pairs.
+
+--- 帖子 #316 ---
+Source code is already provided. I encourage generous developers to work on such issues if they wish, as I am really short on time here.
+
+--- 帖子 #317 ---
+Hopefully this week I will try to apply and test the Need4Speed concept on Currency Baskets, (not for quick scalping but for Intra-Day Trading).
+
+--- 帖子 #318 ---
+Welcome back abokwaik. I was talking about make an indicator from your script "Create_Basket" as we talked before. Thank you once more time...
+
+--- 帖子 #319 ---
+Thank you, I will try to do it!
+
+--- 帖子 #320 ---
+hi,I want know how can i ues this EA,I try it in an week,but it is any trader,please help me ,thank you .
+
+--- 帖子 #321 ---
+hi，could you teach me how to use this robots ? I use this one in a week ,but it is any trader open ,please help me ,thank you .
+
+--- 帖子 #322 ---
+Hi Abokwaik, I like what you are doing here as I am not so new to Trading the Basket way myself. It is always good to see new ideas and Concepts with Basket Trading and I also like the fact that all codes are open for people to play with and come up with their own Improved Ideas too. Well, if you do not mind, all updated EA's and Scripts should be placed on the First Page, so any one that comes to this thread will have the latest Files on the First Page and prevents people installing the old out of date version and then asking all sort of questions afterwards as will know, there are people that will not READ the entire thread and clog it up with questions. So, if not too much to ask, all modified and updated Scripts and EA's should be placed on the First page please. Just a thought and All the best and I will be sticking around. sharemaster2
+
+--- 帖子 #323 ---
+Great work brother. Pls, one quick question, does the basket manager need vps for its pending order to work or it works normally like mq4 pending order that does not need internet to be activated? Thanks! Phemmy
+
+--- 帖子 #324 ---
+As its a basket pending order the system can not know in advance where the actualpair orders will be. When basket price reaches the pending order level, the EA will issue market orders for basket pairs. So it needs mt4 to be running when basket price reaches pending order level, either through a VPS or by keeping the mt4-PC connected.
+
+--- 帖子 #325 ---
+Thanks, Final version links updated on first page.
+
+--- 帖子 #326 ---
+Thanks. Phemmy
+
+--- 帖子 #327 ---
+Very good job, abokwaik , thank you. long been thought of as a window to get traffic across a basket of currencies, but here such a wonderful job. I trade basket of 28 basic 8 currency pairs - but ask lots for each pair are different. The lot size is determined by the algorithm of the correlation, ADR as well as the most important strength of the currency. Since the strength of the currency changes - accordingly, each new entry you need to collect a new basket .. So - when the basket is collected, it is not clear how it was moving ahead, and what her potential movement. And with this script and expert - all very good at it. That spread basket - which gathered to enter for tomorrow Monday //-- Commodity Currencies BASKET input string Pairs = "AUDCAD,AUDCHF,AUDJPY,AUDNZD,AUDUSD,CADCHF,CADJPY,CHFJPY,EURAUD,EURCAD,EURCHF,EURGBP,EURJPY,EURNZD,EURUSD,GBPAUD,GBPCAD,GBPCHF,GBPJPY,GBPNZD,GBPUSD,NZDCAD,NZDCHF,NZDJPY,NZDUSD,USDCAD,USDCHF,USDJPY";//Basket Pairs input string Pairs_DW = "-1200, -300, -300, -300, -600, 400, 500, -100, -100, -200, -1100, -500, -300, -100, -500, 200, -200, 300, 100, 100, -500, -800, 100, -100, -300, 100, 600, 500";//Pairs Directional Weight input string Pairs_Lot_Multi = " 12 , 3 , 3 ,3 , 6 ,4 ,5 , 1 ,1 ,2 ,11 ,5 ,3 ,1 ,5 ,2 ,2 ,3 ,1 ,1 ,5 ,8 ,1 ,1 ,3 ,1 , 6 ,5 ";//Lot Multiplier input string Template_Name = "0";
+
+--- 帖子 #328 ---
+Hello, traders! provide fresh new script (2110201) 5for trade on D1 //+------------------------------------------------------------------+ input string Basket_Name ="#Day21#";//Basket Name input string Time_Frame_Name = "H1";//Time Frame Name (i.e. M15, H1, D1 ... etc) //-- Commodity Currencies BASKET input string Pairs = "AUDCAD,AUDCHF,AUDJPY,AUDNZD,AUDUSD,CADCHF,CADJPY,CHFJPY,EURAUD,EURCAD,EURCHF,EURGBP,EURJPY,EURNZD,EURUSD,GBPAUD,GBPCAD,GBPCHF,GBPJPY,GBPNZD,GBPUSD,NZDCAD,NZDCHF,NZDJPY,NZDUSD,USDCAD,USDCHF,USDJPY";//Basket Pairs input string Pairs_DW = "1303, 0902, 0901, -1041, 0774, 1051, 0875, 1113, -0629, -0965, -1019, 1233, -1132, -0770, 1157, 0892, 1204, 1230, 1672, 0879, 1116, 0796, 0870, 0645, 0664, -0934, -0726, 1205";//Pairs Directional Weight input string Pairs_Lot_Multi = "3, 2, 2, 2, 4, 1, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 3, 2, 2, 2, 3, 2, 2, 2 ";//Lot Multiplier input string Template_Name = "0"; Этот график гибрид = всех 8 валют USD EUR GBP JPY CHF CAD AUD NZD
+
+--- 帖子 #329 ---
+hihi abokwaik, have few questions pls if you can find the time.. in your own time.. lets say I build AUDx index. input string Pairs = "AUDUSD,AUDCAD,AUDCHF,AUDNZD,EURAUD,GBPAUD, AUDJPY ";//Basket Pairs input string Pairs_DW = " 1,1,1,1,-1,-1,1";//Pairs Directional Weight input string Pairs_Lot_Multi = " 1,1,1,1,1,1,1 ";//Lot Multiplier what interests me is DW. I understand that with all AUDXXX the DW is 1. And with all XXXAUD is -1. But as We have JPY pairs.. AUDJPY, there must be some change in the weight or no? I just need the same weight in the basket as are weights from other currency pairs. (Lets say: if all move 0,10% in strenght of AUD..the basket would move 0,70% in value??) Do I have to change JPYx pairs? Second question: If I put some indicies inside the basket, is this the same story...it is calculated by the percentage change? or the value on the DE10YBEUR, NL25EUR AND UK100GBP with DW 1,1,1 would mean the same influance on the basket by all three indicies? Even thou we have lets say values of indicies of 10500,750, and 1500? Thrid: Mixing currency pairs with commodity indexes and equity indexes. Are there any problems concerning this, or again DW is 1, meaning that they have same influance on the basket? Thank you
+
+--- 帖子 #330 ---
+hihi 21, Its been a while. DW : Directional Weight is VERY IMPORTANT, and not just simply 1 or -1. This is what I wrote in the post you quoted " Weights should be used INTELLIGENTLY to give each pair a FAIR effect on the Basket. " So for the Index Example (DE10YBEUR,NL25EUR ,UK100GBP ) with current prices of (10500,750,1500) respectively, we should use one of them as a reference. It is best to use the largest as a reference in order not to loose important details. So we'll use DE10YBEUR as a reference with DW of 1. DW for UK100GBP will be 10500/1500= 7. and DW for NL25EUR 10500/750=14. By this we assume the daily range of DE10YBEUR is 14 times the daily range of NL25EUR. If this is not true (I don't trade indexes), then we have to adjust these values to better reflect the daily range. Its a trial and error cooking until you get something delicious out of it. ak
+
+--- 帖子 #331 ---
+thanks ill check it in that manner
+
+--- 帖子 #332 ---
+hi Abokwaik, many thanks for great basket script and EA, i'm used basket8 indicator , i see that your method more accurate i just try your script, i'm follow your step, i'm sure that all steps are correct, my question is, why my candle on offline chart doesnt move (i had close and open my MT4 / refresh the chart several time), i compared to indi basket8 , it move like it should. any suggest for my problems ? many thanks for your answer
+
+--- 帖子 #333 ---
+Taken from post # 1 Place Create_Bastet_Script_xx on a chart of your choice on M1 time frame
+
+--- 帖子 #334 ---
+I had done that steps, my candle still freezing
+
+--- 帖子 #335 ---
+Hello Abokwaik, I hope this new year finds you in good health. After a long pause, I'm returning to your wonderful Basket EA and have a question regarding the TP, as you can see from the picture, the TP for the basket is correct but the one in green isn't. There are other trades from other EAs trading the GU that is part of the basket but even if I sum them up the TP is still wrong. Can you check it, please? Also, if this is not too much to ask, can you change the price in the green area to show two places after the decimal point, please? Thanks. [EDIT] I'm also getting these errors, I'm pretty sure it was answered earlier in the thread so I'm reading it from the start. 2016.01.12 00:46:14.349 HistoryBase: 4 errors in '#C5#240'
+
+--- 帖子 #336 ---
+Hello, I know you are busy but when you have the time .... * The lines for opened trades and/or SL/TP don't disappear from the screen after the trades had been closed. * Sometimes the buttons stay clicked even without any trades or lines. * When removing the EA, all the graphics stay on the chart. * Ability to decide where the EA would be placed on chart. * Ability to change comment. * Trailing Stop for the profit. * BE + LOCK for the profit. If I find anything else, I will update here. Thank you very much for this superb EA and generosity.
+
+--- 帖子 #337 ---
+Hi, No matter where I place the SL/TP lines, the TP/SL values from the EA settings are used. Regards.
+
+--- 帖子 #338 ---
+Hi Reamasesa, Which version(s) Script and EA are you using ? downloaded form which post ? Regards, Khalil
+
+--- 帖子 #339 ---
+Hello! ))) I hope you are well and doing great in your new job and life I'm using the latest version from first post, it's the latest 03 with the latest bug fixes.
+
+--- 帖子 #340 ---
+I would also like to have 5 Sell/Buy slots so I can add more then 3 more positions (pending area can stay with 3 position). Thanks.
+
+--- 帖子 #341 ---
+Thanks, same to you. I will try to test it this week, and see if there is a bug.
+
+--- 帖子 #342 ---
+Thanks. I would also like, please, that the TP/sL settings would be for the whole baskets of positions so we can have a dedicated SL/TP for each position using the EA's interface.
+
+--- 帖子 #343 ---
+Hi, Found a bug, I think, in the create basket script, if you give a name that's too long, I tried with #DailyInv#M30 it doesn't create the chart, #DailyI#M30 does. Thanks.
+
+--- 帖子 #344 ---
+Hi, If we could have the opening line stay even if we close the terminal/EA it would be great, I had t oremove the EA and re-attach it and while it measured the profit well, I couldn't see where I started the trade. Any updates on the SL/TP lines, please? Thanks, and when you have the time, let me know and I'll compile all my posts into one so it would be easier to read. Thank you and have a wonderful weekend.
+
+--- 帖子 #345 ---
+Problem! After running the script Create_Basket_Script_03.mq4 ,the terminal is closed. What to do and why it happens ? Attached Image (click to enlarge)
+
+--- 帖子 #346 ---
+Established in another terminal , the problem is gone , but why not create a schedule. I can not understand - why ? Please tell me what to do ?
+
+--- 帖子 #347 ---
+Hi, Try to use 1 for the lot multiplier instead of 0.01, also, make sure you have enough history data for the pairs you want to use.
+
+--- 帖子 #348 ---
+Hello! That was my fault. Of the 243 post copied and pasted , and the error is not noticed AUDUSD, NZDUZD , USDCAD, GBPAUD, GBPNZD, GBPCAD, EURAUD, EURNZD and EURCAD probably why the schedule was not created. Another question : how to turn on the spread ?
+
+--- 帖子 #349 ---
+It is not clear why the price is higher than the opening price , and in fact the amount of negative !?
+
+--- 帖子 #350 ---
+Why are not all open orders in the right direction ?
+
+--- 帖子 #351 ---
+9 orders on demo accounts are closed 18 seconds !!! This is very slow !!! Why is there so long closure ?
+
+--- 帖子 #352 ---
+Hi, When you open a trade you have to pay spread, swap maybe a commission, so let's say for 1 pair it's 1$ if you choose a basket of 8 pairs you start with -8$ for spreads and such. If you want the lot size to reflect a different ratio then you have to select it in the LotMultiplier option of the basket create script. As for the slow execution, it happens, you have for example, 8 orders all need to close and verify, 8 commands are sent and the broker deals with them and sends back a reply. It's slow. If you open, manually, 8 trades and then use one of the close all scripts you will see that no matter what, you get a delay.
+
+--- 帖子 #353 ---
+Hi Novikov, Welcome aboard I appreciate your enthusiasm for the basket system. I would suggest for you to read the whole thread from the beginning (back to Robots Lab if you like) For example, the basket closure time is covered in Post # 42. Same goes to spread, why buy on some pairs and sell on other pairs of the basket ... etc. I will be happy to answer any question that was not answered already. Best, Khalil Are you using an ECN broker ? Because delays are from the broker side not the EA.
+
+--- 帖子 #354 ---
+Hi abokwaik Yes , ECN broker! It should be closed immediately , and even faster on a demo account. 1. Why did the script information expert and different? 2. And I do not work Basket_Manager_03 - do not open the order and Basket_Manager_02 opens, but some orders in the wrong direction. Why when I press the BUY , from 9 orders 2 orders (+1) must be purchased, and 7 (-1) are sold, and the opening 5 sell and 4 buy? p.s. sorry for my bad English, I use a translator .
+
+--- 帖子 #355 ---
+You should use Basket_Manager_03 with Create_Basket_Script_03. Different versions of Script and EA don't work together. There is a link on Post # 1 for latest versions.
+
+--- 帖子 #356 ---
+abokwaik tell me please, why not open the order and why not displayed ask? I use the latest version
+
+--- 帖子 #357 ---
+Chk journal. Are there any errors ?
+
+--- 帖子 #358 ---
+Only such: 2016.02.08 18:00:28.759 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:28.082 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:27.732 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:26.716 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:25.702 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:24.690 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:23.673 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:22.662 HistoryBase: 6 errors in '#Basket#60' 2016.02.08 18:00:21.651 HistoryBase: 6 errors in '#Basket#60'
+
+--- 帖子 #359 ---
+What about Experts tab ?Also Make sure the lot size used is allowed on broker.
+
+--- 帖子 #360 ---
+Experts tab does not show anything . 0.01 Order example, because it is already opened orders .
+
+--- 帖子 #361 ---
+Sorry, I don't know what could be the problem. You can try to close the 2 charts, and re-test again.
+
+--- 帖子 #362 ---
+Closed 2 schedule and did it all over again, even rebooted the terminal - did not help ! ASK Why not displayed? In Basket_Manager_02 appears normal, just not right opens orders. Why are some orders opened in the wrong direction ?
+
+--- 帖子 #363 ---
+I am home now. I will check tomorrow. Good Night
+
+--- 帖子 #364 ---
+Hi Abokwaik, Weird but the trade, on chart, is obviously loosing yet the basket is in profit, I checked the individual trades and it's around 30$ profit (shown as 11$ profit). I've re-ran the create_basket script (latest version) but the chart remained the same. I know you don't have a lot of time but I really really like this EA and hope you can spare some time to check it and maybe even continue working on it. Kind regards.
+
+--- 帖子 #365 ---
+The theme is a good and interesting. I only wish the author was gone. Problems in the expert work not only for me, as well as in several other friends. ASK does not appear, a warrant is not open or open only in the wrong direction.
+
+--- 帖子 #366 ---
+Thank you Abokwaik, This has got to be the easiest Offline Chart Creator that I've ever tried. If you don't mind I'm just going to be a "Lurker" and consume all the information which you and all the members are posting. I've gotten more interested in Basket Trading now that I have Offline charts that actually work. Thank you for your time
+
+--- 帖子 #367 ---
+Abokwaik I am using Create_Basket_Script_03.mq4 w/ Basket Manager 03 I opened up a Sell position on the Yen pairs, but what I got was Buy positions Attached Image (click to enlarge) Attached Image (click to enlarge) Am I doing something wrong or is the script reversed?? MTPockets
+
+--- 帖子 #368 ---
+OK .. figured it out , everything working fine
+
+--- 帖子 #369 ---
+Im seeing same issues other guys are having. Time to reopen this thread maybe?
+
+--- 帖子 #370 ---
+Hi Abokwaik, I hope this message finds you in good health and happy. I've picked this idea while reading an old thread and was wondering if I could use the basket as a Renklo chart. Running the create script and creating a 1M offline chart and than running a Renko generator EA to create another offline chart but with Renko bricks on it. So far, running the create basket script created a 1M offline charts, running the Renko EA (the 4.13 pimped version I've found on this site) created an offline Renko chart but the Renko chart isn't updating at all. I tried refreshing it, removing the tick from the offline chart in chart settings, changing the Renko brick size but nothing seems to work. Any ideas or help would be greatly appreciated. Thanks.
+
+--- 帖子 #371 ---
+I am not sure if an offline chart can be based on another offline chart ! @ FerruFx , @ MathTrader7 , @ Gvc : What do think guys ?
+
+--- 帖子 #372 ---
+Hi Abokwaik, Are there any plans to continue working on this EA, please? Thanks. [EDIT] Also, is there a way to eliminate having this huge bar(s)? I've downloaded all the history my broker has, yet still I'm getting these kind of spikes when I'm creating a new chart. Thanks.
+
+--- 帖子 #373 ---
+Abokwaik Hello! The topic will link died or still continue? Improvements indicators and experts will be more? The indicator does not correctly build the schedule, if the coefficients are different, and the expert and does not work correctly!
+
+--- 帖子 #374 ---
+Hi Abokwaik, Can we get an indicator version for the basket create script, please? Thanks.
+
+--- 帖子 #375 ---
+Why ?
+
+--- 帖子 #376 ---
+Oh my god ! Ronald Raygun is viewing my thread, I am really honored. I love your work man
+
+--- 帖子 #377 ---
+Hi, Because lately I've been connecting to my PC from my mobile and it's hard to deal with a script when I need to restart my terminal. I can manage, but it would be easier for me. Thanks.
+
+--- 帖子 #378 ---
+Hi Abokwaik, I had a power surge this morning and I had to load up everything again, the script didn't survive on my charts. To the best of my knowledge and from what I've tried, I couldn't create a template I can simply load whenever I need the script to generate a new basket chart. I know you're not supporting this EA and script any more but if you do find some time and willing to convert the script to an indicator it would be greatly appreciated. Thanks.
+
+--- 帖子 #379 ---
+I'll see what I can do.
+
+--- 帖子 #380 ---
+Hi Reamasesa, I like your enthusiasm about basket robots. So I decided to give it another shot. I will have to review the work already done, so allow me a week or so to refresh my info. Meanwhile, you and other members who tried the system can post about your experience and required improvements. All the best, Khalil
+
+--- 帖子 #381 ---
+OMGOMGOMGOMGOGMGOMG!!!!! YeS! Thank you very much, I will compile my older notes and new ideas for the basket robot. This is going to be great! Thank you very much for your generosity.
+
+--- 帖子 #382 ---
+A Refreshment : This is a Yen Basket Offline Chart (H1) created by the latest "Create_Basket_Script_03" from Post # 160 . Attached Image (click to enlarge) Basket pairs were set as follows : Attached Image (click to enlarge) And this is a trade taken using S/R and price action on the offline chart Attached Image (click to enlarge)
+
+--- 帖子 #383 ---
+Hi, I'm using +1/-1 as directional, still not entirely sure how to calculate it. Also, on the pairs charts, it looks as if all went up? And you were on sell? How is it the basket is in profit? I'm probably missing something here, right?
+
+--- 帖子 #384 ---
+Hi, I was thinking, before I make any other suggestions based on the current EA, maybe we can change it to a "true" basket EA? I'll explain. Instead of having 4 pending orders (2 of each kind) for both buy and sell, totaling in 3 different basket trades, we can have only three types of orders, market, stop and limit for each basket, so we can place as many pending/market basket orders, that will all go into the cumulative basket and instead of having SL/TP for each basket order, like we have today, the entire basket will have its own TP/SL (and maybe even BE, BE+LOCK, and J/TS). I'm not sure I explained it properly, I can try to elaborate more, if it's needed. This is different from the way the current EA is working, not sure how much effort is needed to make the change to the "Basket" version I've suggested. This will also keep the ability to place pending orders which is a must, in my opinion. Let me know what you think, please, so I'll know if I should compile my notes on the current EA`s bugs and improvements or focus on the new version. Again, I thank you for the time and effort for putting this EA (and script) together and for your willingness to continue its development.
+
+--- 帖子 #385 ---
+The offline chart that triggered the trade is for Yen. So we want to sell Yen against the other currencies. Forex is traded by pairs not currencies. Each pair is composed of a Base Currency and a Quote Currency. The Base currency is the first part of the pair notation while the Quote currency is the second part. For example in the USDJPY pair, the base currency is USD, and the Quote currency is JPY. While in EURUSD pair, the base currency is EUR and the Quote currency is USD. When you buy a currency pair, you are buying the Base Currency of the pair, and Selling the Quote currency of the pair. Yen is presented as a Quote currency in all JPY pair notations. So to SELL the Yen, we need to BUY the XXXJPY pairs.
+
+--- 帖子 #386 ---
+Thank you for explaining, I some times struggle with concepts even though I understand the technicalities of actual trading. So, the directional weight thingie can be used to represent either base or quote, right? I'll have to go back to the post you were explaining how to calculate the directional weight. Maybe this will improve my basket charts. Thanks.
+
+--- 帖子 #387 ---
+It is easy to determine the directional weight for Single Currency Baskets (like EUR, GBP, JPY, CAD ... etc). So for Currency Baskets, We need first to determine the SIGN (+ or - ) for the directional weight (DW). DW will be Positive if the currency is the Base currency in the pair symbol, and Negative if it is the Quote Currency. suppose I want to create a basket for AUD, composed of AUDUSD, GBPAUD, EURAUD, AUDJPY. Then the sign if the DW will be +,-,-,+ respectively. Then we need to determine the VALUE for each DW. The easiest way to do that is to take one symbol as a reference with DW Value of 1. And calculate the other DW values for other symbols by dividing the symbol rate by the reference rate. Using rounded values for pair rates AUDUSD = 0.77, GBPAUD = 1.87, EUAUD=1.45, AUDJPY= 86.0 the Directional Weights for the AUD Basket (AUDUSD, GBPAUD, EURAUD, AUDJPY) will be +1,-2.4, -1.9,+110 respectively. EDIT : For Positive Directional Weight we Divide the Reference Symbol rate by the other Symbol Rate, and for Negative Directional Weight we divide the other symbol rate by the Reference symbol rate. So the Corrected Directional Weights for AUD basket above will be +1,-2.4,-1.9,+0.01 Things get more complicated for Mixed Baskets , for example a Commodity Currencies Basket composed of AUDUSD,USDCAD,NZDUSD,EURAUD,EURCAD,EURNZD,GBPAUD,GBPCAD,GBPNZD.
+
+--- 帖子 #388 ---
+Thanks. The rate is the actual price at the time of calculation? OR based on something else? 0.77/86.... did I get it right? If so, it's not +110, but 86/0.77 is 111...? I'm missing something here? I like the C5 basket, I use +1 for DW on all of it but would love to be able to fine tune it more.
+
+--- 帖子 #389 ---
+Yes it is the actual price at the time of calculation BUT Rounded. It doesn't have to be exact. I Edited my previous post because I calculated the DW incorrectly for AUDJPY. It should be 0.01 not 110 (again rounded), the actual DW is +0.00895 so I rounded it to 0.01.
+
+--- 帖子 #390 ---
+If you use "+1000" instead of "-1000" the chart is upside down compared to the individual charts....
+
+--- 帖子 #391 ---
+I had the same issue............I refreshed the individual charts to make sure the history was OK (see a previous post about this) and the problem went away!
+
+--- 帖子 #392 ---
+Thanks for your work abokwaik. I appreciate your work. However - the Directional weight seems very complicated. Is it explained somewhere in detail? And what do I need to divide with what? This is all a bit confusing to me tbh.
+
+--- 帖子 #393 ---
+I think I invented that OK, lets discuss the basics ... Directional Weights (DW) is in 2 parts, Direction and Weight. Lets start with the Direction, so we leave Weight as 1, and focus on only on the direction Suppose that we are creating a USD basket composed of EURUSD, GBPUSD, USDCAD, USDCHF This is the USD Basket created with direction + for all four pairs (+,+,+,+), so we simply disregarded the USD direction in the pair notation: Attached Image (click to enlarge) And this is the USD Basket created with direction applied with regard to USD position in each symbol (+ if it is the base currency, and - if it is the quote currency) , (-,-,+,+): Attached Image (click to enlarge) Now, which one better represents the USD ? Lets take a look at the US Dollar Index (taken from FXStreet) Attached Image (click to enlarge) So, what do you think ? Direction is important to correctly represent the basket we are trading. PS: I used only 4 pairs for to create USD basket. This is why the USD basket is not exactly as the US Dollar Index which uses more pairs.
+
+--- 帖子 #394 ---
+Hi, Thanks for the explanation, waiting for the weight now Also, did you consider my suggestion regarding the way the basket robot should operate? I'm attaching a screenshot, earlier in this thread you've mentioned something about it caused because of lacking data. I've downloaded all the history my broker has for each pair in the basket, and still get this issue with the large candle that flattens everything else (I haven't seen it in other basket creators but they are different than yours, of course). Thanks.
+
+--- 帖子 #395 ---
+When you get such a weird chart it means that your M1 (one minute) data is not loaded for the displayed period. To fix this, you will need to open the M1 chart for each of the pairs that make the basket, and scroll up (using Page Up) until you reach a date which is at least 1 day before the minimum date on the left side of your chart (in your case 28th March 2016)
+
+--- 帖子 #396 ---
+Thanks, already did that and it did work, gave it another try and it fixed it. Stupid MT4.
+
+--- 帖子 #397 ---
+Of course abokwaik. That part is pretty easy to understand and seems crystal clear to me. But what I don't get is the values themselves. For example if the direction is +, you put for example +1.9, +2.4 etc. Or if you attach it to YEN pairs it has very high numbers like - 1200, -1100 and so on. What I don't understand: how do you get those numbers? I can't wrap my head around how I would calculate it...
+
+--- 帖子 #398 ---
+OK, second part of Directional Weights is the Weight (or value). The Weight is used for 2 reasons: 1. To preserve the DETAILS when inverse (-) direction is used. It is better to show a chart example to understand this point better. The best example is the Yen basket. This is a yen basket using value of -1 for Weights (Poor Details) Attached Image and This is the same yen basket using value if -1000 for Weights (Better Details) Attached Image 2. To Balance the Volatility of the different pairs in the basket. For example if you have GBPAUD and AUDUSD in the same basket, GBPAUD strength/weakness will affect the basket price much more that AUDUSD strength/weakness because ADR for GBPAUD is around 200 pips, while its less than 100 for AUDUSD, so when AUDUSD moves 1 pip, GBPAUD will probably move double that. So to balance the effect of the two pairs on the basket, we either multiply the value for AUDUSD by 2, or divide GBPAUD by 2. I hope its all clear now
+
+--- 帖子 #399 ---
+Thanks for the explanation. So why not use 1000 all the time of it gives better granulation? And how do I know what is the multiplication? Just by ADR?
+
+--- 帖子 #400 ---
+Not necessary. It will only make a difference when using (-) direction on a comparably high rates (like xxxjpy, or Gold rates) as the system calculate the rates by dividing 1 by the pair rate. So for USDJPY H1, suppose the Open=111.100, High=111.255 , Low=111.000, Close 111.170. When we calculate rates for JPYUSD using (-1) they will become Open=0.0090, High=0.0090, Low=0.0089, CLose=0.0089 because Offline Chart allows only for 4 digits. While if we calculate rates for JPYUSD using (-1000) they will become Open=9.0009, High=9.0090,Low=8.9883,CLose=8.9952 Using 10,000 instead of 1000 will be better. For EUR/USD , in a USD basket, using -1 is OK, using -10 is better. More than -10 is not needed Yes, ADR or Daily ATR(50 or 100) is better than dividing the rates against a reference rate as I explained before, because that rate could be high for a pair but that pair doesn't move much.
+
+--- 帖子 #401 ---
+Thank you for the explanation but I still don't get it. What did you subtract from 1 to get those numbers? I'm missing something.
+
+--- 帖子 #402 ---
+Hi, These are my suggestions for the Basket Manager EA. General All orders of the same direction (buy/sell) should be treated as a single basket. All lines should be visible after terminal restart (TP, SL, J/TS, pending lines). When removed, EA should remove itself completely. Basket Creation This should be done using an indicator and not a script so it survives terminal crashes. GUI Six buttons - Market Buy/SEll, Stop Buy/Sell and Limit Buy/Sell BE - This will set the entire basket at BE regardless of EA's settings. BE+LOCK - This will set the entire basket at BE+LOCK regardless of EA's settings. LOCK should be define in EA's settings. TS - This should enable the TS regardless of EA's settings, meaning, TS should start when the button is clicked and not wait for TS_Start. TS settings should be defined in EA's settings. TP - This should enable the TP. SL - This should enable the SL. Close - Should close all orders, delete pending orders as well. Current Profit. EA settings Magic number - user defined. Trade comment - user defined. BE - user defined in currency. LOCK - user defined in currency. Should be activated after BE. TS - true/false. This will enabled a regular TS behavior after Activate_TS has been reached. Should respect BE(+LOCK). Activate_TS - user defined in currency, after which, TS should start, if enabled. JTS - true/false. This will enable JTS behavior after JTS_Jump has been reached. Should respect BE(+LOCK). JTS_Jump - user defined in currency, after which, the JTS will start and if set, should respect BE(+LOCK). Nice to have Close and Reverse. Ability to calculate pips per line, say, if you place a SL, the line should either show the SL in currency or be able to use MT4's crosshair utility to measure the distance. Complex MA/ATR/whatever closure/trailing Fonts and colors for the buttons and lines. Thank you! And if I can help in anyway, please let me know. EDIT: Changed the "Current Profit" to reflect current profit only and not divide it into buy and sell baskets, if one wants to hedge, it's still the same basket.
+
+--- 帖子 #403 ---
+Hi, Do you know when you'd continue working on the Basket EA, please? I just had JPY7 closed for no apparent reason but there was a SL there a few days ago which I removed but the EA still remembered it. I really like this EA and it's one of the best out there in terms of pending orders but I feel it needs a bit more TLC to become better and more stable. For the time being, I'm going to let my other basket trades play out and than remove the EA from my live charts. I really hope you find some time to at least fix this EA if not create a new and better one (I've posted some ideas for one earlier). Thanks.
+
+--- 帖子 #404 ---
+Attached Image (click to enlarge) Hi Abokwaik: What is the meaning of theses errors in journal,i have three basket,for usd, yen and cad , the three m1 chart ,and m30 offlines chart are open ,is it because of history ? is it necessary to have all the included chart in the basket to be opened before running the script ?
+
+--- 帖子 #405 ---
+What about this EA. I personally find it unbeatable. http://www.forexfactory.com/showthre...18#post9058418
+
+--- 帖子 #406 ---
+Oh, Really ! ... Martingale &amp; Hedging, what's new ? Attached Image (click to enlarge)
+
+--- 帖子 #407 ---
+Dear sir, Please let me know where to find the latest revised basket manager EA. I am very interested with it. Thank you
+
+--- 帖子 #408 ---
+Check the links on post#1.
+
+--- 帖子 #409 ---
+Hello abokwaik. I hope you find this worth your time. I'm studying the major 8 pairs, and looking at ways to measure each currency's strength, this seems very similar to what is done here using the baskets. My idea is this: Each pair is measured based on its current price, open and close. Example: GBPJPY (current price &gt; open) = 1 else = 0 giving a total of 7 assuming this is the same across GBPAUD, GBPCHF, GBPCAD, GBPNZD &amp; GBPUSD (opposite for EURGBP of course). The same is done for other pairs. I would like an indicator to show these numbers above &amp; below each candle (see attached picture) for any pair it is attached to, this value will be dynamic for the current bar as it adapts to current price changes but static for previous bars. I want to study the effect of current and past strength. I have an EA that does something close but as I use an expert builder it drains PC resources I can share if you wish. Great job as always
+
+--- 帖子 #410 ---
+Each chart has 2 currencies, So for EURUSD chart it should show EUR strength above the bar, and USD strength below the bar ?
+
+--- 帖子 #411 ---
+Yes. Exactly P.S: I forgot to attach the picture. Its there now
+
+--- 帖子 #412 ---
+Good Night ! This is the "Candle Currency Power Indicator" at work. Attached Image (click to enlarge) Inputs Attached Image Note for coders using iCustom function: set "Show Labels" input to false. First Currency power is in Index 0 Second Currency power is in Index 1
+
+--- 帖子 #413 ---
+Wow so quick! Thank you so much. Fantastic. If I derive anything useful from it you'll be the first to know
+
+--- 帖子 #414 ---
+Err I think there is an error in the calculation. In the picture below [a GBPJPY chart]: JPY finished at 7: This should mean it was a bear bar in ALL 7 of the currency pairs (which isn't possible as the GBPJPY candle was UP) I should explain with a better example. Say on the current candle all 7 crossed pairs compared to its open we have GBPAUD = up +1 for JPY: AUDJPY = dn+1 GBPCAD = up +1 CADJPY = dn+1 GBPCHF = up +1 CHFJPY = dn+1 EURGBP = dn+1 EURJPY = dn+1 GBPJPY = dn +0 GBPJPY = dn+1 GBPUSD = up +1 NZDJPY = dn+1 GBPNZD = up +1 USDJPY = dn+1 Here GBP = 6 and JPY = 7 If the candle should close without change then we will see these values on a bear bar (previous bar)
+
+--- 帖子 #415 ---
+Which TF, and Time. I will check at my side. You know doji candles might print differently on different brokers.
+
+--- 帖子 #416 ---
+I couldn't verify the accuracy for GBP but for JPY those marked X are definitely off, may be more P.S: I watched the calculation go off even on the current candle
+
+--- 帖子 #417 ---
+OK. I found something. I am working on it.
+
+--- 帖子 #418 ---
+I believe it's OK now. Kindly check and report.
+
+--- 帖子 #419 ---
+Great. I will do the checks and get back to you . Thanks again
+
+--- 帖子 #420 ---
+Everything looks OK. One minor addition I hope. Can you include lookback bars as an external input Also I used; variable type [bool], input name [Show_Lables], Value [false] when using iCustom, indicator shows in tester but conditions didn't work
+
+--- 帖子 #421 ---
+The Indicator works as explained A few requests. Could you make it such that it shows resistance and support lines at specified "power" levels Example: @ any where theres a 5 and 1 (specified in indicator properties) it will draw lines (specified number of candles ahead if possible) for either the previous bar or the current bar or both as shown in the picture. P.S: Any specific books articles you can point to for one to properly learn how to code EA's and indicators? I want to be able to code as proficiently as you do.
+
+--- 帖子 #422 ---
+Hello Abokwaik, I would like to have more than three baskets opened at the same time for each position (Sell/Buy). I looked at the code but I'm not entirely sure what to do with it as I'm not too familiar with coding (both general and MQ4). I'd hazard a guess some code needs to be duplicated but I'm not sure how all the buying and selling stuff is connected to the buttons. Could you help me out, please? Thanks.
+
+--- 帖子 #423 ---
+Hello everyone I am trading gbpjpy using grid hedging. ÂÂ Can a basket be based on buy orders only or sell orders only. If yes which trade management does thisÂ d
+
+--- 帖子 #424 ---
+Ok managed to modify another EA i FOUND attached is basket trade manager based on either market buy order type or market sell order type. Yeah sell orders are treated as a basket and vice versa
+
+--- 帖子 #425 ---
+Sorry good people i boo bood. Have just been forward testing the above and they were not working as earlier thought. Finally managed to figure it out. Ok think like this when using this say buy 0.01 at market price 1.51100 put when open price reaches 1.51300 you have $2 profit why not have a pending of 0.03 at 1.51300 when first contract was opened at 1.51100 and then you put this basket EA i am attaching to break even of buy orders $2. If the price breaks out the EA has trailing stop which can go with the break out till it rests. My two cents on strategy of how to use.The beauty is you can grid trade it probably have like three Pending orders above and lets say it was a fake . The price tries to break oout knocks your first PO then breaks even it will close all open orders plus buy and sell pending orders.
+
+--- 帖子 #426 ---
+Dear abokwaik many thanks for your little toy, very nice idea and very useful!! But one thing: could you maybe add in your creater script the possibility to chose individuell timeframes for the offline chart please? I think it could be good to get a better synchrony of the pairs and more exact entrys ....
+
+--- 帖子 #427 ---
+It's already there !? Attached Image
+
+--- 帖子 #428 ---
+Thanks for your fast answer abokwaik. Yes the problem is that you can chose only standard tfs like m5, m15 etc. But i would like to give it a try with s10 or h6 for example
+
+--- 帖子 #429 ---
+Good job abokwaik.Always generous and helping others.God bless you for your immense contribution on FF..I have been looking for a simple basket manager on FF and here on your thread but I havent found anything simple.Most of these basket manager EAs are complicated , not simple..Maybe I havent looked hard enough but I will be very glad if you can direct me to a very simple basket manager EA that manages only opened orders.. Basket manager with the following features Take profit , Stop loss , At Profit , Lock profit .I hope you can help.Thank you and God bless basket trading.
+
+--- 帖子 #430 ---
+And what do you think about my idea dear abokwaik?
+
+--- 帖子 #431 ---
+hi khalil thanks alot again and again I enjoy of your ideas , that is great ---------- i have one error about user32.dll to use basket_manager_03 please Guidance me thanks.
+
+--- 帖子 #432 ---
+Allow DLL Imports.
+
+--- 帖子 #433 ---
+yes, thanks,i thought i must have .dll file that lost! )) but i have error in history data , i loaded data on 4 currency i need but error exist yet..
+
+--- 帖子 #434 ---
+I love the idea of Basket Trading. By creating a Basket, you need to trade everything in the basket though. Anyways, how does the offline chart update itself? Do I have to manually refresh the offline chart? Is there a way to do this automatically like the period converter in mt4? Edit: Fixed it by allowing DLL import.
+
+--- 帖子 #435 ---
+Real Problem: if you close MT4, there is no automatic newstart for the offline-chart. I must put on the script on the chart again. In my case it has nothing to do with DLL, it has always been allowed on my charts. Can anybody help or knows what to do ? I have the feeling, it would be better to have an expert advisor instead of a script for building the offline chart. Master Coder, Abokwaik, please think about an update of your wonderful trading tool.
+
+--- 帖子 #436 ---
+Here is a GBP Index I created and bought just recently because it looks like a falling wedge. It's my first time with directional weights and basket trading. I want to thank abokwaik. Here are my Settings. I based it on (Volatility/Spread from my Broker)*Pip Value GBPAUD,GBPUSD,EURGBP,GBPCAD,GBPCHF,GBPJPY,GBPNZD +11.78766117, +21.61131521, -18.17798157, +11.5866767, +10.65422768, +17.72666621, +8.455471453 Attached Image (click to enlarge)
+
+--- 帖子 #437 ---
+Hi Abokwaik, This EA working on my demo account without any issue but with my LIVE ECN account its not working. Basket chart tick data is not loading and Journal tab showing error "HistoryBase:3388 errors". I think this is because i have ECN LIVE account. Could you please check and update your EA so that it can work for ECN account? I cant use this EA ... Thanks a lot in advance. Please check attached image with error.
+
+--- 帖子 #438 ---
+Hi Morgan, It seems that your live ecn acc is new and doesn't have enough history data. Try using the scripts shared by howa in post # 4 to force history data load. Good Luck, Khalil
+
+--- 帖子 #439 ---
+Hi Abokwaik, I did load all the data available using scrips/manually for all timeframes but still no success. Please take two minuts and take a good look at these two images and guide. Thanks
+
+--- 帖子 #440 ---
+Finally the issue is fixed. On live account Pair symbols has + sign in it. I was using the same preset from demo account. Ahhh .. This small thing cost me FFFing 10-15 hours of troubleshooting. Sorry Khalil for wasting your time too.
+
+--- 帖子 #89 ---
+Hello Kahil and others. Been trading baskets using Seller9 tools. Looking for an alternate through which I have access to the source code. Spent some time on demo trying Create_Basket_Script and Basket_Manager_03. I like the design and "flow" of these tools, but was unable to get the drag and drop SL and TP to work. Before I dig into the source, can you tell me if all the functionality of Basket_Manager_03 has been tested and verified to work as intended? Not asking for debug help -- just direction regarding where things stand. Thank you for sharing source code and being an "open source" prophet. Regards, George
+
+--- 帖子 #90 ---
+Hi Khalil, The basket manager is arranged/designed vertically. Can we arrange it horizontally? also on the left side of the chart?. Also noticed that once we hide the basket manager by clicking 'market orders' button, the activate line button reset itself(if activated &gt; hide &gt; unhide &gt; shows inactivated). Thanks again for such a wonderful tool. One more request is to update the create basket query to generate renko chart instead of candle chart. Your help is highly appreciated. - Morgan.
+
+--- 帖子 #91 ---
+Hello, I found your awesome thread a little while back and have been experimenting with these tools. I use them not so much for basket trading but as a means to create a chart where stat arb concepts can be applied. I'm having some issues with the charts repainting after they are reloaded or simply not painting as they did in the past. Sometimes there will be huge price gaps between candles. I'm not sure if I calculated the weights incorrectly or if there is some other problem. I read over your posts about how to calculate the weights multiple times but I'm not sure you got around to explaining how to calculate the weights for multicurrency baskets. Here are the pairs and weights I'm using for my basket. Pairs: EURUSD,USDJPY,AUDUSD,NZDJPY,GBPCHF,CHFJPY,EURCHF,GBPUSD,EURGBP,GBPJPY,USDCHF,NZDUSD,AUDJPY,EURJPY Weights: -11.4,-670,-10.6,-970,-12.9,-920,-7.2,.1,.1,6.4,.1,.1,8.7,8.8 I've also included a screen shot of the kind of chart that is created. I would really appreciate anyone's help with this. Thank you. Attached Image (click to enlarge)
+
+--- 帖子 #92 ---
+A robot with a dd below 5 and a profit factor over 5 with a stop loss below 40 on any currency, seems like a good idea, doesn't it?
+
+
+===== 附件下载链接 =====
+

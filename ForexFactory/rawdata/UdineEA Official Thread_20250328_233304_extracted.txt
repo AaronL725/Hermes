@@ -1,0 +1,1373 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+[update 17 Sep 2015] UdineEA forward test in demo account is discontinued since it doesn't have any kind of edge over the market, related Trade Explorer is removed. A new Trade Explorer is attached related to this 'idea' on how to trade UdineEA in a different way. Hi All, I'd like to share with you a simple EA coded for 00 Levels thread opened by Udine, I prefer to open a separate thread so to not clutter original thread with post related to this EA, so please direct your questions related to this EA here instead of Udine's thread. [Thread Rules] * No troll, no calling names, no flame are allowed in any form here. We are professional here and act as professional if we want to succeed in our quest. * Inappropriate behaviours will be punished with permanent ban from the thread and reported to the site administrators. * EA is provided as is, there maybe several bugs that could damage seriously your account , so it's completely your decision and your risk to use it with real money . * I'll not share the source code (.mq4) for multiple reasons : mostly because there was a lot of work done to code it, I don't want to find it sold on some scammer site and lastly I'd like to have full control on its development and subsequent versions. * There's no free lunch here, go and do your homework , STUDYING what's about Udine's strategy. This EA is meant as an helping hand but cannot substitute in any way trader's knowledge. * Do not never ask me here (or by pm) for 'custom' changes to this EA. If you do so then I'll charge a fee per hour since I'm a professional coder and if you really need a modify or whatever then you have to pay for my time (which is limited due to my daily job). * There's no commercial interest on my side and everything here is shared for free in the spirit of helping others, if someone is trying to sell my EA please report back. [Note] I think that using w hatever EA without knowledge about its logic coded, it's limit, what can or cannot do, is a recipe for disaster. This is why in this first testing stage , I'm locking the EA to run only on demo account and for limited time ( usually end of each month so to be sure everyone is using latest version), then in due time I will share new version to be traded on real account. In this way we can test it more deeply to find hidden bugs and most important to understand what's logic behind Udine's strategy (which by the way is very simple if you took the time to study it). To be noted that this EA cannot be properly backtested due to news filter presence, so I do not trust it completely because I cannot figure out its statistical behaviour so I cannot evaluate its weakness and limit (max drawdown, max consecutive losses,...) Lastly, since this EA works with TP 5 and SL 10 is very very important that you choose a regulated ECN broker with spreads below 2 pips for official pairs allowed (EJ,EU,GJ,GU) [Technical Details] Latest Version : 1.1.8 [30 May 2015] Expire on : unlimited Account type : all (demo+live) TimeFrame : M30 (locked) Risk Per Trade : &lt; 4% (locked) Pair : EURUSD,EURJPY,GBPJPY,GBPUSD (locked) Entry type coded : Level 1 (Refer to Udine's thread) [Users's Parameters] LotSize (default = 0.01) // only used if MoneyManagement is false (deprecated) StopLoss (default = 10) // Stoploss in pips TakeProfit (default = 5) // Takeprofit in pips MoneyManagement (default = true) // if true then orders are opened based on Risk % of account (deprecated) Risk (default = 2) // only used if MoneyManagement is true - do not use Risk too much high (&lt; 4% is maximum value suggested) MaxLossesPerDay (default = 4) // Max losses per day allowed, if reached EA stops opening trade for the whole day TradeOnlyLondon (default = true) // If true EA places trades only trade during London session (7 GMT - 16 GMT), if false EA places trades always (not suggested) TrailingStop (default = 3.5) // Trailingstop in pips DailyTargetPercentage (default = 2) // Daily target as percentage of account balance , when EA reaches this value stops trading for the whole day. PairSuffix (default = "") // Suffix of pair in case your broker support it (ie GBPJPYi, or EURUSDmicro and so on...) GUI_X = x-axis in pixel for UI GUI_Y = y-axis in pixel for UI [Mandatory Indicators] Wukar_News FFCal-Wukar AbsoluteStrenghtHisto [Template Indicators] Attached Image [Screenshot] Attached Image (click to enlarge) [EA Rules] This EA is designed to place and manage trades according to Level 1 rule from Udine's 00-level strategy, in particular all important informations is collected and shown on chart screen. EA will scan the chart and place trade based on simple rules, it will check for daily open price and place only long if price above, short if price below. Only one trade will be opened per hour and all orders will be done through placing pending orders. Pending orders, if not triggered, will be deleted 5 minutes before an M30 candle is closed. At the start of each M30 candle , EA will place a pending order @ .00 level only if ASH (AbsoluteStrenghtHisto) is changing colour from red to green (long - above daily open) or from green to red (short - below daily open). EA is designed to open only at .00 level (not .50 level) and work only on EJ,EU,GU,GJ ( please don't ask for other currencies,index,metals,cfd and so on...! ) EA will show on chart an yellow line that is to be intended as a *potential* entry. If all conditions are met then EA will automatically place a pending order. No trades will be placed 1 hour before big red News for EUR,JPY,GBP,USD and after half an hour. No trades will be placed if ADR has not space left in pips (up or down depending on daily open side) No trades will be placed if it's long @ .900 level or short @ .100 level No trades will be placed if max losses per days are reached. No trades will be places if daily target level is hit for the day. No trades will be placed before London Open and after London Close (if TradeOnlyLondon is set to true), in particular EA detects automatically London open and close time. [EA Installation] Extract UdineEA_package.rar directly into MT4 root (C:\...\{Your MT4 folder}\) , you'll find UdineEA, indicators and template I'm currently using with Udine EA. After extracting all files , simply open platform and select Udine EA template.tpl from template list and you should are ready to go (just in case check in Expert and Journal tab if some indicators are missing). Finally be sure to see a smiling face in the top-right corner of your screen which indicates UdineEA is running correctly. [Thanks] This thread and UdineEA may exists only through the great thread started by Udine and his very sound trading approach which is helping a lot of traders to become successful, a big thank to Udine ! Cheers, Skyline
+
+--- 帖子 #2 ---
+Once again . I really appreciate your contribution.
+
+--- 帖子 #3 ---
+Thanks really aprreciate....
+
+--- 帖子 #4 ---
+nicely
+
+--- 帖子 #5 ---
+Thanks for the EA, going test it
+
+--- 帖子 #6 ---
+it is work on ea tester?
+
+--- 帖子 #7 ---
+Yes it works but it's useless due to the news filter which cannot be used in backtest.
+
+--- 帖子 #8 ---
+thank for EA going to test demo Nice system
+
+--- 帖子 #9 ---
+i want do backtest on gbp/usd and its show me ea allowed pair G/U e/u .... pleas check, it dosent open any orders what is going on? "2015.03.29 19:53:32.355 2015.01.30 06:13 Udine EA_v112 EURUSD,M30: Alert: Udine EA allowed only on EURUSD,EURJPY,GBPUSD,GBPJPY, please check!! "
+
+--- 帖子 #10 ---
+It's not working on strategy tester
+
+--- 帖子 #11 ---
+in the future Y allowed another pair? one more question i need to open ea on every single chart e/u g/u e/j ,, or only in one?
+
+--- 帖子 #12 ---
+Account type : demo (locked) It means that we cant use it on a live account? Sorry the answer was at the first post I think that using w hatever EA without knowledge about its logic coded, it's limit, what can or cannot do, is a recipe for disaster. This is why in this first testing stage , I'm locking the EA to run only on demo account and for limited time ( usually end of each month so to be sure everyone is using latest version), then in due time I will share new version to be traded on real account. Thanks
+
+--- 帖子 #13 ---
+Very well done, Skyline! I'm curious how this EA will work, taking each and every trade regarding Udine's Level 1 rules, without measuring the risk of the trade (DP, WP, candle formations, possible support/resistance areas etc.) I hope it will work well!
+
+--- 帖子 #14 ---
+Of course you have to put it on every single pair allowed
+
+--- 帖子 #15 ---
+Thank you Skyline! Look forward to the demo results.. Just one question with regard to the installation: you indicate that the ASH indicator is mandatory, but it is not included in the file you provided. Is it already included in the EA or do I have load it myself?
+
+--- 帖子 #16 ---
+Ty PartySheeper You can always turn off EA if you see general market conditions are too risky to place trades.
+
+--- 帖子 #17 ---
+You're are right Adam, sorry it was my fault I've forgot to add mandatory indicators to rar file, please download it again from first post (Udine_package_v1.rar) otherwise EA won't work. Thanks, Skyline
+
+--- 帖子 #18 ---
+Will do, thanks!
+
+--- 帖子 #19 ---
+I've found another bug which prevent EA running correctly (now it should starts in Strategy Tester but it's still useless due to news filter). Please download again UdineEA_package_v2.rar from first post Ty, Skyline
+
+--- 帖子 #20 ---
+I keep getting an error that it can only trade EUR/USD, GBP/USD, etc. There isn't any prefixes at my broker either...
+
+--- 帖子 #21 ---
+Hello skyline, thank you very much for sharing your EA. But there is a problem I don´t understand. Look at the picture!
+
+--- 帖子 #22 ---
+Please download again UdineEA_package_v2.rar from first post
+
+--- 帖子 #23 ---
+same here v113 Regards
+
+--- 帖子 #24 ---
+Please remove v1.1.2 and put v1.1.3 on chart from 1st post , it's working on my platform. Attached Image (click to enlarge)
+
+--- 帖子 #25 ---
+its ok now i forgot to remove from one chart Regards
+
+--- 帖子 #27 ---
+Congrats on this EA and the thread skyline!
+
+--- 帖子 #28 ---
+???
+
+--- 帖子 #29 ---
+Hi Skyline I just got " i-Profittracker_" zero divide error I don't know does it matters but nevertheless...
+
+--- 帖子 #30 ---
+Hi bazze ! The same here ! It seems that's a bug ... kind of ?
+
+--- 帖子 #31 ---
+I don't have this error , maybe you don't have all history shown in your history tab. Btw don't worry it's not used by EA , you can delete it if that error keeps annoying you
+
+--- 帖子 #32 ---
+Yep the zero divide thingy doesnt worry me ... but what about that "Cannot open file ... " remark in the "Expert" tab ? Bazze reported that bug as well ...
+
+--- 帖子 #33 ---
+great work skyline and thank you...btw, we have to download in history all the quotes for those 4 pairs..?
+
+--- 帖子 #34 ---
+Can't see why the spread is to high??? Can you please explain, skyline...
+
+--- 帖子 #35 ---
+Sorry,but have another one that I don't understand also....
+
+--- 帖子 #36 ---
+im running v 113 and all the pairs are saying spread too high even though some of them are like 0.4
+
+--- 帖子 #37 ---
+Hi Im running fxcm us demo server , I can load EUR/USD pair fine ,all be it with the spread error , but as soon as I put the template on any of the other pairs it crashes my MT4 and hangs up. Anyone else seeing this? Edit: got it working now, I needed to put the ea on first then load the indicators and it wouldn't crash...weird still get the spread to high error even though my pairs are all below 1.0, I guess it won't enter with this rule not satisfied Great job btw Skyline , appreciate you putting the work in to code this and sharing it with the group...thank you!
+
+--- 帖子 #38 ---
+Cheers mate, I appreciate all your hard efforts in compiling this EA! Further to the "Spread too high" error, I have watched the charts for some time &amp; can advise that a spread of 0.1 is OK and ready to trade, but as soon as the spread exceeds 0.2 the spread too high error occurs. I hope this helps with bug fixes and testing. Great work mate! Cheers!
+
+--- 帖子 #39 ---
+subscribed!
+
+--- 帖子 #40 ---
+I am looking forward to the development of this EA. Currently trying to make my way through Udine's 00 level trading thread. Quite a ways to go still. Good luck gusy.
+
+--- 帖子 #41 ---
+subscribed
+
+--- 帖子 #42 ---
+Thanks skyline for your effort and EA. My demo have only EU below 2 spread but rest of them have higher. On the other hand my live account have many pairs with lower spreads so will be very interesting to see how things work outs. I have subscribe the thread and will keep the eyes and actively read all post so i keep learning. I will demo EU and will try to contribute if i have something.... thanks once again...
+
+--- 帖子 #43 ---
+Hi Guys, I'll check into the 'spread too high' issue , by the way it's only a simple alarm (even if it's wrong) and doesn't affect the normal EA operations , so you can just ignore it until I fix Cheers, Skyline
+
+--- 帖子 #44 ---
+I've fixed a bug that prevent open orders at correct London open due to DST changes and also spread now is correctly indicated on chart. MANDATORY UPDATE : Please download again UdineEA_v114.rar from first post Cheers, Skyline
+
+--- 帖子 #45 ---
+Good luck on your thread skyline. Subscribe
+
+--- 帖子 #46 ---
+Skyline, job well done.. good luck with the thread, I will be following with interest Udine
+
+--- 帖子 #47 ---
+Thank you Skyline. Much appreciated! I've installed it on a Demo account, looking forward for the 1st setup today to see how 'smart' your code is Cheers, G.
+
+--- 帖子 #48 ---
+Thank you Master Udine !! Your input is really appreciated , if you have the time to set up this tiny EA in your chart P.S.: Ops sorry I've realized just now that I used your nickname without asking you first in thread subject ('UdineEA Official Thread'), hope you don't mind, just in case let me know and I change it. Cheers, Skyline
+
+--- 帖子 #49 ---
+First level 1 for the day for me on EU @ 1.08300 ( IC Markets ), still waiting to be activated Attached Image (click to enlarge) Edit : it was fast , EU to TP Attached Image (click to enlarge)
+
+--- 帖子 #50 ---
+EURUSD Skyline Shouldn't Entry be either 00 or 50 lvl? EA has placed first order on 00 lvl 1.08300 and previous close was on 1.08379. More than enough room to place it on 1.08350 including the spread. Edit: Forgot to mention that it didn't placed any order EA just drew the line.
+
+--- 帖子 #51 ---
+Yes, that was nice. Looked away and the next thing I knew it triggered and exited. Thanks skyline....looking good.
+
+--- 帖子 #52 ---
+Hi skyline, i just downloaded and loaded again. in EU i have 1.2 spread in demo but it still says that spread too high... thanks
+
+--- 帖子 #53 ---
+Hi GoForPip, EA is designed to open only at .00 level Cheers, Skyline
+
+--- 帖子 #54 ---
+Same here, working good so far(at least from the technical point of view) I didn't take this trade on live as I considered to be a risky one(setup candle too big)
+
+--- 帖子 #55 ---
+The same here .. Thanks for great work .. But I think this trade is risky due to prev. candle is too big (The gray dot would prevent me to enter this trade) .. Can you put this rule in next versions? Thanks again
+
+--- 帖子 #56 ---
+no problem at all trading live, so no reason to put in on my chart, as it only works on demo Udine
+
+--- 帖子 #57 ---
+Hi Maadz, please could you read thread rules in 1st post ? * Do not never ask me here (or by pm) for 'custom' changes to this EA. If you do so then I'll charge a fee per hour since I'm a professional coder and if you really need a modify or whatever then you have to pay for my time (which is limited due to my daily job). Cheers, Skyline
+
+--- 帖子 #58 ---
+Hi Skyline, First of all, thank you for your great work. I got a quick question here. Earlier on GBPJPY, the EA gave a hint for a long trade at 177.600. When price crossed up the line, it seems the EA didn't trigger the trade. Do we need to place the order manually instead of EA doing it? Correct me if I was wrong, thanks. Regards, -- Jack
+
+--- 帖子 #59 ---
+Hi Jackok, the yellow line is only a *potential* entry, show as reference , if all conditions are met then a pending order is placed automatically by EA, maybe I have to change a little bit that line description because it's misleading In that particular order on GJ , ASH didn't change color (changed one candle earlier) so no entry. Cheers, Skyline
+
+--- 帖子 #60 ---
+Got it. T hank you for your kind reply.
+
+--- 帖子 #61 ---
+Ty Udine ! I guess at the end of April after 1 month of intensive testing on demo with the help of this amazing community I can share live version Cheers, Skyline
+
+--- 帖子 #62 ---
+It's depends on the definition of "custom" .. since it was a level 1 rule. anyway thanks for your efforts and time .
+
+--- 帖子 #63 ---
+2nd entry &gt;&gt; Ts @ open price
+
+--- 帖子 #64 ---
+Hi Skyline, Thanks for your efforts on this, I am testing your EA eagerly. GBPUSD traded through the yellow line &amp; no trade opened.. Is the "SPREAD TOO HIGH" stopping the trade? I know you mentioned that its only an alert, but should a trade have opened short @1.48300 ? Cheers! See below:
+
+--- 帖子 #65 ---
+eheheh well maybe i have to change 'custom' to 'any' I preferred to not overcomplicate EA in this first stage this is why only coded .00 entry level, maybe in future could consider to add .50 level entry but from test it seems doing good also with basic .00 level Ty for testing Cheers, Skyline
+
+--- 帖子 #66 ---
+The trade was opened, but closed within 1 - 2 minutes by Ts on BE. Perhaps you look to yor account history. I lost commision, skyline could you make an input to avoid this ?
+
+--- 帖子 #67 ---
+Hi Traffex, Trade definitely did not open..I am sitting in front of it, looking at it.. Last trade in my history was 26th March Cheers Dman
+
+--- 帖子 #68 ---
+Hi dman, yes I confirm that label about spread is not preventing EA opening trade, it's just an advise. Maybe your broker doesn't allow for placing pending orders too much near to actual price in my broker this value is 0 pips. You can check this by opening the trade window (F9) and select a pending order, you should see something this 'Open price you set must differ from open price by at least X pips' and in my case X = 0 : Attached Image (click to enlarge) Btw 2.1 pips spread for GU is too much high for Udine system even if you trade in manual without any EA. Cheers, Skyline
+
+--- 帖子 #69 ---
+@Traffex: I confirm your result ! Broker is Global Prime. Ah .. and I see skyline has the same trade in his Trade explorer !
+
+--- 帖子 #70 ---
+Same result for me too !
+
+--- 帖子 #71 ---
+Hi Skyline, Yes you are right.. it must differ by 2 pips for my broker.. So I guess you send an order right on the 00 level? Which means I cannot use this with my broker, as you suggested. Cheers!
+
+--- 帖子 #72 ---
+I also got the GU to TS. Attached Image (click to enlarge)
+
+--- 帖子 #73 ---
+It just depends how far away that 00 level is from your market price at any given time...
+
+--- 帖子 #74 ---
+Anyone in the U,S using this with a decent ECN broker with low spreads , I can see I'm going to get burned on the GBP/JPY with FXCM spreads Thanks Tom
+
+--- 帖子 #75 ---
+It's Daily Pivot
+
+--- 帖子 #76 ---
+Have to confirm the actual 10 pips loss on GBPJPY with GP ! http://www.myfxbook.com/members/TGT_...rading/1201341
+
+--- 帖子 #77 ---
+Same loss.
+
+--- 帖子 #78 ---
+Good to see this strong conformity using different brokers by different traders !
+
+--- 帖子 #79 ---
+Hello @Skyline, first of all, great work! I just sit back and compare signals but I have to confirm @dman7800's statement, no more trade since the EU (I got the same signal!). But after that there should have been signal on GU &amp; GJ. Attached Image (click to enlarge) Attached Image (click to enlarge) Jibala
+
+--- 帖子 #80 ---
+Loss also for me on GJ
+
+--- 帖子 #81 ---
+Hi Jibala, looking at your chart there's no signal on GU (ASH color changed earlier from green to red) but there should be a valid entry on GJ , check if you have any error in Expert/Journal tab or maybe there was some conditions that I cannot see that invalidate trade in your platform.
+
+--- 帖子 #82 ---
+Looks like its working for me? Attached Image (click to enlarge)
+
+--- 帖子 #83 ---
+Any idea what happened here on the GBP JPY trade withe sell stop instead of sell order? http://i.imgur.com/1fp9t1I.jpg
+
+--- 帖子 #84 ---
+Sorry, in the journal there is nothing! The only trade(s) (some from basket I finished already) and the only one with the higher lot size is EU! No errors in journal or something like this. That was the first I was looking for, prior to my post. Jibala Edit: I just saw this: Attached Image (click to enlarge) It's because of the M-Candles?
+
+--- 帖子 #85 ---
+All trades are sellstop or buystop then if triggered become sell order or buy order. It seems your sell stop wasn't triggered , maybe not enough margin left ? Check in platform Journal/Expert tab.
+
+--- 帖子 #86 ---
+No it's not M-Candles, maybe didn't you have enough margin left to open position ? It's hard for me to say what's your problem just looking at a screenshot , sorry Btw, my advice is to test in a fresh demo account running only UdineEA (no other trades opened manually or by other EAs). Cheers, Skyline
+
+--- 帖子 #87 ---
+Thanks Skyline ; I think that was it, the demo I opened defaulted to 50k zero margin!, I opened another demo on FXCM with the smallest account size possible to account for the zero margin. Hopefully it will enter correctly now. thanks again for the support Tom
+
+--- 帖子 #89 ---
+I dont know how old you are, me pretty young but it seems we both need an eye glasses! :nerd: Attached Image (click to enlarge) Attached Image (click to enlarge) Next trade on GJ =&gt; TP Attached Image (click to enlarge) Jibala
+
+--- 帖子 #90 ---
+Good catch Jibala (btw I'm 42 not so young )
+
+--- 帖子 #91 ---
+spoke to soon im getting an invalid sl tp message now on my new demo...any ideas? http://i.imgur.com/HPsY1xS.jpg http://i.imgur.com/PvhdXoW.jpg
+
+--- 帖子 #92 ---
+Recently I got another trade with GBPJPY (btw: entry 117.60 !), hit the TP: + 5 pips !
+
+--- 帖子 #93 ---
+Check this post : http://www.forexfactory.com/showthre...89#post8172989
+
+--- 帖子 #94 ---
+Yes ! This is my current situation up to now (0 pips) : Attached Image
+
+--- 帖子 #95 ---
+So far today.....ootb
+
+--- 帖子 #96 ---
+Yes , I have the same screen as you there, set to zero, so that doesn't appear to be the issue with this one. will try and shut everything down and restart and see if I can get a trade to enter right. Thanks again
+
+--- 帖子 #97 ---
+Compliments for the EA I think you must add command stop when reached daily target a choice like 2% or 2wins
+
+--- 帖子 #98 ---
+Traffex, you have a pm.
+
+--- 帖子 #99 ---
+Hy and sorry for question but why i don't have this pending order at 177.8 for GBP/JPY http://gyazo.com/557b3807aac5666c7c13b03806505e10 What's wrong? Seems all conditions are ok.. Regards edit... but i din't have any pending order so mybe it's not spread related...
+
+--- 帖子 #100 ---
+I saw that there is already present
+
+--- 帖子 #101 ---
+Imho the spread was at that moment a little bit to high! Jibala Edit: Limit of 1.5 for some pairs to small!
+
+--- 帖子 #102 ---
+Yes maybe you're right.... but i think could be really better if spread doesn't hard coded.. Regards
+
+--- 帖子 #103 ---
+I have canceled GU short. Imho GBP still too much strong for short! Attached Image (click to enlarge) Jibala
+
+--- 帖子 #104 ---
+the backtest it takes a really long time but I'm going to find the best settings for each currency, someone has already done something like this?? Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #105 ---
+Thanks for sharing EA Testing out on FXCM Demo on my VPS atm for all four pairs.
+
+--- 帖子 #106 ---
+Hello RoneyFX, How are you dealing with the historical news issue for backtesting?
+
+--- 帖子 #107 ---
+Not working for me on fxcm demo,pending order doesn't appear on the chart.probably because high spread (2.5 pips)
+
+--- 帖子 #108 ---
+my GBP USD trade is still running never hit stop loss , seems like the ea has issues with the TP and SL on fxcm broker sl and tp are always listed as 0.00000 in the order entry part Is there anything anyone can think of , I really don't want to switch brokers because fxcm is the only one for us clients that will come close to the spreads required. Thanks Tom
+
+--- 帖子 #109 ---
+no matter, I take 50 trade and watch the results with the original settings and begin to edit SL / TP / TS until I find the best results, when i get it i do a test of 1 year to see if i actually improved it
+
+--- 帖子 #110 ---
+Some brokers require you to place the order THEN set the stops (through OrderModify). Not sure how the EA is coded...
+
+--- 帖子 #111 ---
+So you're essentially testing it without any news filter?
+
+--- 帖子 #112 ---
+yeah its looking more and more like that .....bugger the U.S and its restrictions...anyone know of a good U.S broker other than FXCM with low spreads?
+
+--- 帖子 #113 ---
+I should do the calculations manually subtracting the trade made during the news and this will be a suicide, in both cases the tests are made on the same orders so no matter
+
+--- 帖子 #114 ---
+That's strange, maybe daily target 2% reached ?
+
+--- 帖子 #115 ---
+Check Udine level 1 rules again Cescof, from your screenshot ASH is always green (did not turn from red to green) , so no entry
+
+--- 帖子 #116 ---
+I already wrote some post ago, spread is not taken into account to place pending orders, it's only a visual information to the trader but EA ignores it !!
+
+--- 帖子 #117 ---
+skyline : I haven't been able to get in or out of a trade properly since open so i don't think this is it , still trying to figure this all out I have made some progress today in that it gets into a trade o.k. without error but the sl and tp are zero and I can't get out without manually adjusting them , someone said I may have to go in manually and edit the sl and tp with some brokers , everything is zero by default when I go into the order. I hope I don't have to do this. Thanks Tom
+
+--- 帖子 #118 ---
+that's exactly how this EA works, pending orders are placed without any sl,tp then when activated are modified , so it's weird is not working on fxcm, will try to test on it...
+
+--- 帖子 #119 ---
+yes that's very strange, will look into this issue
+
+--- 帖子 #120 ---
+thanks , will keep an eye on it , it seems pretty repeatable now though , at least for me . looking at the locations of people running FXCM , they all seem to be from europe , like yourself . but I doubt the server location will make a difference. let me know if you want me to help and test anything this end
+
+--- 帖子 #121 ---
+Thanks for your generosity Skyline. looks like you have put a lot of effort in developing this EA. H/T! I have set time to trade to false since my day job prevents me from trading the preset hours. I will test and share the results of the hours I am able to trade. Regards, TwoUp
+
+--- 帖子 #122 ---
+Skyline, congratulations and thanks for this. Just one quick question, will these EA work correctly if i'm running Wheelbarrow and WUKAR? Cheers Ian
+
+--- 帖子 #123 ---
+UdineEA will handle trailingstop (even if not hiding because it's very risk to not use SL,TP if connection is lost) so there's no need to use other EA like Wheelbarrow or WUKAR, which could create problems, so it's better to use only UdineEA on your chart (and account). Cheers, Skyline
+
+--- 帖子 #124 ---
+Thanks Will sort it out when I get back. Cheers Ian
+
+--- 帖子 #126 ---
+No trade so far by EA. There are lots of news today so might be in Afternoon
+
+--- 帖子 #127 ---
+Yes AKCodingEye, we have to wait , as told by UDINE PDF &amp; BCC
+
+--- 帖子 #128 ---
+1). Why it says 'Spread to HIGH!!!!' 1.9 so high ? 2) Skyline Which broker do you prefer with lowest spreads for this strategy ?? 3) trades open automatically or i have to do it handly buy stop sell stop ? My trade on GbpJpy not oppened, why? Attached Image (click to enlarge)
+
+--- 帖子 #129 ---
+In any case, good job, but the fundamental error is that EA affects other orders. Respectfully.
+
+--- 帖子 #130 ---
+Hi Skyline , im noticing these two errors pop up after a while , each time after I reload the mt4 platform. Is this a problem? , could it be related to fxcm issue I was seeing yesterday...no trades yet so haven't see any entry error Thanks Tom http://i.imgur.com/Vd48YAO.jpg
+
+--- 帖子 #131 ---
+Did you allow DLL - import? Attached Image (click to enlarge) Jibala
+
+--- 帖子 #132 ---
+Do I Have to open manually trades or its something wrong with setups ? GbpJpy trade not oppened... Attached Image (click to enlarge)
+
+--- 帖子 #133 ---
+Hi Mariodrugs, you have to take your time and read 1st post very carefull, then study Udine's level 1 strategy.
+
+--- 帖子 #134 ---
+I was studyiong it long time ago. So my question is. This EA robot open trades automatically or have to open manually?
+
+--- 帖子 #135 ---
+Mariodrugs, this is not a valid trade setup yet , study first post and Udines thread, ea should be automatic but you have no trade setup in place yet.
+
+--- 帖子 #136 ---
+And my question is, why don't you read 1st post of this thread where everything is explained in detail ? http://www.forexfactory.com/showthread.php?t=533099
+
+--- 帖子 #138 ---
+Jibala : no I did not , thank you for pointing that out, maybe that was my problem - we will see! thank you again Tom
+
+--- 帖子 #139 ---
+Possible short EU @1.07300 Attached Image (click to enlarge)
+
+--- 帖子 #140 ---
+I have the same now ;- ) Attached Image (click to enlarge)
+
+--- 帖子 #141 ---
+If you use confirmation what @nasap has described in Udines 00-level post #28236 then "no false signal"! Attached Image (click to enlarge) Jibala
+
+--- 帖子 #143 ---
+Skyline, Just back from traveling past few weeks. Thank you for your willingness to share this EA. You have done a great job in outlining not only the use of the EA, but also how we can participate in it's development on demo until such time as most of the bugs are solved. It is greatly appreciated by all for the time that you have put in to creating and developing this EA and the thread to control it development and use. Many thanks. Bruce
+
+--- 帖子 #144 ---
+You're welcome Brucech !
+
+--- 帖子 #145 ---
+Is this system watch out for support / ressistances ?
+
+--- 帖子 #146 ---
+Hi Skyline, thanks for the thread! I had another EU short come up, however it was during USD Red news, and trade still triggered. Do you have the same your side? Vlad
+
+--- 帖子 #147 ---
+Hi Vlad, thank you for testing this EA No sorry I don't have that pending order placed, maybe some error from Wukar_News ?
+
+--- 帖子 #148 ---
+Hey Skyline, Well WUKAR and FCAL on my chart did indicate that there was news at the correct time (see screen shot) but for some reason the EA still placed the pending order? The WUKAR indicator and your "News = OK TO TRADE" indicator on the left don't seem to be in Sync on my side. Not sure why... Vlad
+
+--- 帖子 #149 ---
+Have a look in Experts tab if there are any error messages. Attached Image (click to enlarge) Jibala
+
+--- 帖子 #150 ---
+Hi I think you are correct! It could have been that DLL imports were disabled earlier. Will see if this fixes it tomorrow. Thanks! Vlad
+
+--- 帖子 #151 ---
+Hello and thank you! In this moment I installed the newest Version (all indicators,template and EA) and it looks like the picture shows.
+
+--- 帖子 #152 ---
+Hi rmndschimdt, what do you think is related that message ? Do you have at least read that message?
+
+--- 帖子 #153 ---
+Hi skyline, I read it and I downloades and installes the newest version. 5 minutes before I found the cause. The EA has problems sometimes to recognize an account as a demo account. I have opened a new demo account and now it works.
+
+--- 帖子 #155 ---
+I seem to have the same problem as you Vlad..news must be out of synch or something http://i.imgur.com/wPy3vVo.jpg
+
+--- 帖子 #156 ---
+Hey everybody, I've been following along for a few days now, even though I think a PT of 5 pips is...??? So, big congratulation to skyline for developing the EA I have the same trade as mentioned in last few posts I notice on my chart that the News indicator seem to be missing bars I thought it was normal until I saw other charts Any ideas or suggestions? I have tried to refresh the chart, re-apply template, change time frames back &amp; forth but still the same? Thanks, John
+
+--- 帖子 #157 ---
+Out of interest, did you change brokers? I know there are a few brokers' servers that are setup incorrectly i.e. they flag demo for live, and live for demo. I guess there is a market niche for brokers catering to people who want to use demo-only stuff on a live account
+
+--- 帖子 #158 ---
+It is normal. Everytime you close / open it gets rid of some old data.
+
+--- 帖子 #159 ---
+Hi everyone, For those struggling with DLL errors, just remember you need to "Allow DLL Imports" both in the MT4 Settings, AND the properties of the EA itself. Vlad
+
+--- 帖子 #160 ---
+There is pending for EUR-JPY Calendar is different, is that a problem or feature? Thanks for support, John
+
+--- 帖子 #161 ---
+Morning All UdineEA opened wrongly an order on GJ when there's red bar on WUKAR_News Attached Image (click to enlarge) I'm looking into this bug and will fix in next release on weekend. Cheers, Skyline
+
+--- 帖子 #162 ---
+Cool Thought it was just me Vlad
+
+--- 帖子 #163 ---
+Hi Erebus, yes I have too a pending short EJ @ 128.800. It's ok that WUKAR_News is different among pairs, this is because it shows impact news (ones in red in FF calendar) related to each currency , so for EURUSD it shows EUR news and USD news, while for GBPJPY shows GBP and JPY news which are different. Edit : EJ Closed by TS (0 pips).
+
+--- 帖子 #164 ---
+Should not have entered that trade. Pairs are not sync! Attached Image (click to enlarge) Jibala
+
+--- 帖子 #165 ---
+Hi Jibala, there would be 1000 reasons to not take that trade but here we are following/testing strictly (simple) rules coded in EA and pair sync analysis isn't coded there Cheers, Skyline
+
+--- 帖子 #166 ---
+Can you please explain what we are looking for on those chart? I see the same red bars in the circled area, how do I read it is not in sync? Thanks, John
+
+--- 帖子 #167 ---
+Skyline, Everything working fine here now. Attached Image (click to enlarge) It triggered fine. I would not normally take this trade as it was so close to DO Line stopped me out at S/L - 10. But everything working brilliant. I'm using IC Markets Thanks Ian
+
+--- 帖子 #168 ---
+If you have a closer look you'll see that the candles I added have a green candle (layer) between! I have chosen it that way so that I see it from the far even. Jibala
+
+--- 帖子 #169 ---
+Okay, Why didn't the following trigger? Attached Image (click to enlarge) Cheers Ian
+
+--- 帖子 #170 ---
+Of course, there is always a reason "not" to take a trade. I only suggest it to prevent from false signals. @Erebus: I just took this 2 manual on GU &amp; GJ (only to illustrate the meaning of "pairs have to be sync") Attached Image (click to enlarge) Jibala
+
+--- 帖子 #171 ---
+Yea i was wondering the same thing
+
+--- 帖子 #172 ---
+Imho too close to the blue DO line. Jibala
+
+--- 帖子 #173 ---
+I have looked close, do you mean that this pair is not breaking the 4 Hour low as shown, unlike the EUR-USD ? Do you trade the 4 Hour candles or just to watch them instead of the 1 Hour candles direction in the original trade specs? Thanks, John
+
+--- 帖子 #174 ---
+You didn't! With a closer look you should have seen that there are 3 candles (overlapped) in each of the lower windows. I hope you will see it now and also EURUSD has green candles inside. Therefore it was a "false signal". For further information read post #28236 of @nasap in 00-level thread of Udine. Attached Image (click to enlarge) Jibala
+
+--- 帖子 #175 ---
+looks like I just got another entry on red news on EU @ 1.07600
+
+--- 帖子 #176 ---
+This was a valid entry mebarrac (apart from the Daily Pivot in the way). Rule is no entries 1 hour before news, and 30 mins after. This order went through 1:30 before USD news. the WUKAR indicators first red bar is actually just a warning that the next bar is a no-go. Vlad
+
+--- 帖子 #177 ---
+no offense - can we keep this to the other thread, this thread should just be on level 1 entries and the ea that skyline has kindly developed for Udines system. I'm sure he will add other filters later like pivots and distance from daily open like udine suggests etc..but we need to have the base system working flawlessly on the ea before we proceed with anything else. edit btw I'm in no way discounting your methods , it looks like a very interesting filter you are using on top of Udines method Thanks Tom
+
+--- 帖子 #178 ---
+Great thank you for explaining that Vlad!
+
+--- 帖子 #179 ---
+Hi JibalaPasan, i got 60 / 1440 layers on price to open only, may I ask you what is your 3 layers?
+
+--- 帖子 #180 ---
+Big Thanks skyline for sharing.
+
+--- 帖子 #181 ---
+Exactly as explained by mebarrac, at this stage my goal is to improve stability and remove bugs , then go to live trading , actually i'm not planning to add further filters otherwise it would be a never ending loop and i don't have such time available. Another reason is that all changes cannot be backtested so there's no way to evaluate beforehand if there's some benefit adding them. Cheers, Skyline
+
+--- 帖子 #182 ---
+I have to officialy says that: Udine EA doesn't works. DONT USE IT ON REAL ACCOUNTS, IT MAKES LOOSES. Attached Image (click to enlarge)
+
+--- 帖子 #183 ---
+Not in my platform..... todsay just 3 order for eur/jpy 1be 1 tp and 1 sl Regards
+
+--- 帖子 #184 ---
+If you read fist post you know that's impossibile use it in real at this stage.... Many of us are really gratetful to Skyline for this really good work considering that 's totally free....So i 'think and is my own opinion your post is not very appropriate here... Kind regards
+
+--- 帖子 #185 ---
+Yes, its demo but this strategy doesnt works so far.. I have my PC turned on 24 / h.
+
+--- 帖子 #186 ---
+Mariodrugs, How long have you used it? Did you read post 1? It can not be used on live/real accounts Skyline wants it to be tested to stabilise it and remove bugs for the whole of April Why not have some patience and report bugs PLEASE STOP FLAMING THE THREAD
+
+--- 帖子 #187 ---
+Hi, no I did´nt. My broker is Global Prime. I opened the 2. Demo and the EA works without problems.
+
+--- 帖子 #188 ---
+Thanks for the reply
+
+--- 帖子 #189 ---
+maybe did you think that this EA placed only winning trades or make you rich overnight ? I guess you have to learn a lot what trading is about... Btw for me today -15 pips (1 w, 1 be , 2 loss) , and one buy stop on EU opened (not triggered yet) @ 1.07800
+
+--- 帖子 #190 ---
+It seems to me the actual result now, following your trade explorer above, is: 1 w, 1 be, 2 loss ... right ? I have the same numbers for today.
+
+--- 帖子 #191 ---
+Hello to all! My results for today: 3 won, 2 loss; 1 be.
+
+--- 帖子 #192 ---
+you're right DerBerliner, i've modified my previous post, today not a good day, not a problem let's see tomorrow Cheers, Skyline
+
+--- 帖子 #193 ---
+I really like to thank you do SkyLine what you are doing Sir And thanks for sharing and give people an opportunity to trade the Forex market fully automated with some great guidelines that makes sense.. So far I tested this system started from this week.... On Monday: 1 Loss Tuesday No trades Wensday 3losses and 1 Win so this week total 4 and 1 W Lets make this the worlds #1 System/EA in the world Lets work together and make this happen
+
+--- 帖子 #194 ---
+@rmndschmidt Hi bro ! Thats "funny" - I'm with GP too, but absolutly no trades with GBPJPY ocured in my fu...ng demo ! I think you didn't any special intervention ? (Have exactly the same results like skyline got them !)
+
+--- 帖子 #195 ---
+Hi, no intervention and no changes in the settings. Just installed and turned on.
+
+--- 帖子 #196 ---
+Why i have other trades ? When we use the same EA in this same time??
+
+--- 帖子 #197 ---
+probably different brokers do your broker allow you to put a pending order at 0points distance from actual price? mine only allow me to put at 20points distance, so if the EA triggers to open an order in less than this the order is not set
+
+--- 帖子 #198 ---
+Guys it's quite normal that we cannot have exactly the same trades each day, there's difference between broker (daily open line, ash indicators, quotes and so on..), I see there is difference also between the same broker on demo maybe due to different server where platform is connected, so be quite and continue test if you enjoy to do this otherwise you always step out and trade manually Udine's strategy as much as you like and most probably with better result than using my EA which is only an experiment. As I wrote in first post , for me this EA is just a test, I don't rely at all on it because any information on past performance cannot be properly analized, maybe there's some potential but we can discover only by forward live test and this means a looot of patience from our side is required ! Cheers, Skyline
+
+--- 帖子 #199 ---
+Here are my trades for today looks like 1 win 1 loss and 3 BE http://i.imgur.com/LnykBVc.jpg
+
+--- 帖子 #200 ---
+I have IC Markets broker. Same as the creator of EA.
+
+--- 帖子 #201 ---
+I agree, lets not complain, but work together to help this EA see it's true potential!
+
+--- 帖子 #202 ---
+Hi, @Mariodrugs; I know it has been said, but it's not really fair to say the EA doesn't work. Aside from a couple of glitches which have been/are being resolved it actually seems well coded and performs as it should. I Have run it all this week and (once i remembered to allow DLL imports ). It took entries as I would expect. So, you really can't take issue with the EA. Did you follow the original thread and trade the method manually? If you did then you should not be surprised that you suffer losses. Actually, in this way I think the choice of Udine's method for an EA test is a curious one. @skyline, please don't get me wrong; I really appreciate your effort and your coding abilities, but as someone who has followed Udine's thread you must have realized that mechanical execution via an EA would not go so well? Probably not the best reflection of your clearly good coding skills. Also, most are probably aware that a short time ago, another member released a dashboard for this method. It's worth asking yourself why he didn't release an EA? I followed the thread for a long time, demo trading for a while, but I moved to live trading smaller risk within a month. In my opinion live trading is the only way to really test something with such tight pip parameters. I traded it for around 6 months before I decided to discontinue. Over that time I was profitable, but my results didn't come close to the ones posted by Udine. Udine's method works for him because he uses his own discretionary analysis to filter the low probability trades. Someone else here has already alluded to such filters, with pair sync, proximity to DO line etc. Without these filters, and without viewing the charts objectively as they evolve dynamically, the 00 method will be a losing one. Mathematically; excluding costs and with the RR ration of 2:1, you must maintain a 66% winning rate to break even overall. With costs and execution factors such as slippage and commissions, that creeps to more like +70%. Just to break even! The overall principle of the method is simple, but making it work is just as difficult as any other. The biggest problem is; once you suffer DD, you will need an excellent win rate to get back on track. 2 wins are needed to not quite cover one full loss, so once you are sitting in around -6% DD, you would need 3 clear winning days to get back to BE. It was for this reason I stopped. I am simply not as good as Udine at filtering. You may ask why I'm bothering to test the EA if I think it will not do well? Simply put; it's always good to know where to find a good coder I know the method, I know how the EA should operate. If it does this well, I may want to employ skyline's services if he is willing. Will still be testing and watching. Good luck all!
+
+--- 帖子 #203 ---
+Yes i was following first original thread of Udine 00 level trading. I couldnt earn by that system. More looses -10 sl than +5 tp. That system was not profitable for me. I though I dont understand that system so exit from that. Now I saw Udine EA Robot! Wow. Maybe this will help me to understand that system! ...nope. it didn't. This is making me that futher confirmed much more that Udine 00. level trading is a scam and doesnt works. You need 100 others techniques and analyses to confirm entry on Udine 00. level. If you dont use 100 other analyses S/R and all other stuff - Udine's startegy won't work!! You do not need Udine entry. You need 100 others analyses and other stuff to enter. So I came to the conclusion that that is not important where we enter or it will be .00 level, .010 level .0234 level 0.456 level 0.900 level .100 level, .6785, .2734, .7654 - The Price Will Do What They Want.
+
+--- 帖子 #204 ---
+Hi Trader34, thank you for your post ! I completely agree with you, infact I wrote multiple times that I don't believe in this EA to be profitable in the long run (+1 years) for a lot of reasons mostly because it cannot backtested with good accuracy. I just coded it as a challenge to see if Udine's strategy could be automatized , the problem I faced then was that original method posted by him was changed over and over adding multiple indicators, filter and so on, so as you said it's impossible to code the whole strategy because a lot of discrectionary is involved and this is the reason why I decided to lock it only to run on demo account to prevent users (as MarioDrugs) in search of the holy grail could burn the account then coming here to complain because lost money. Regards, Skyline
+
+--- 帖子 #205 ---
+It's a worthy challenge, for sure! But I like your EA. I'm no coder, but I appreciate the complexities of getting this method right. As I said, I think you've done a good job. Frankly I don't care if it blows the account. I'm fairly sure it won't be positive. Mariodrugs; It should be obvious to a trader that if you can't manually profit from a system, an EA won't change that. All the mechanical information is in the EA from Skyline. Despite best efforts, it's impossible to code in all the discretionary filters. In the best case, if I were a 00 trader, I would have used this EA to alert me to potential entries. This way, I could focus on other things, and if/when an alert came, I could decide whether or not to trade it. But, I don't trade 00 anymore. Also, fine 00 didn't work for you. But I don't see how you can call it a scam. Udine hasn't sold anything. Hasn't asked for anything (other than a coffee in person! ) I have my own very negative opinions regarding the dashboard, but that was not from Udine himself. Nor as I understand, does he profit from any sales. Udine is still there, offering support, answering questions and updating in that thread, not asking for a cent. I fail to see how this is a scam. I used it, and I made money. Not a lot, and not enough to hold my attention, but I don't blame the method. I don't doubt Udine uses it, and makes money. I can't use the system well, but I don't take it personally. It just doesn't fit my style. Am I a crap trader because I can't replicate Udine's results? If I shared my methods, would you be a crap trader if you could not replicate mine? I'm not picking on you, but it seems you are taking all this too personally. If there was one single answer on how to make money in FX then there would be no need for forums such as this. In a way, you are absolutely right. it doesn't matter what imaginary line the price crosses. All that matters is that you can react to a certain price action, and make money from it.
+
+--- 帖子 #206 ---
+I integrated the 00 method into my trading for a while, back when I was looking for something involving less screen time. It worked out OK for me but ultimately I dropped it. The main reason was that I was just trading my normal (discretional) way within the 00 framework. Because of the discretional aspect required, I commented to Udine that I doubted it would be viable as an EA. He agreed. That being said, I applaud skyline for his efforts and I look forward to seeing where the project goes next Code is reusable, and the project may well spawn on to bigger and better things! In more general terms, I think it is very unlikely that the humble masses will ever manage to create a hands-off EA that can consistently make profits over an extended period of time without manual intervention. Doesn't stop us all from trying though Thanks for sharing skyline
+
+--- 帖子 #207 ---
+Hi Honestknave, yes I can ultimately add a parameter option that turn on/off placing trades so that this ea could act also as a normal indicator that only alert for potential entries , and will be only users care to place the trades, btw we'll see what future bring to us Cheers, Skyline
+
+--- 帖子 #208 ---
+Excellent! I look forward to it
+
+--- 帖子 #209 ---
+Funny to see how you jump from system to system, trying them out for about a week, and then make a conclusion its scam. you have been member of FF since December 14, and you have been jumping from system to system, and saying its scam and forex is based on luck. Hope you soon realize that Trading was never made for you.
+
+--- 帖子 #211 ---
+Naaah, im much longer. I just changed accounts many times
+
+--- 帖子 #212 ---
+Think there is a reason for that
+
+--- 帖子 #213 ---
+Hi Skyline . . good job on your EA, I've been a lurker in Udine system from almost the beginning but never post anything. Just observe and try it on my own account. From what I learn by Udine's Charts and comments, there are more support / resistance levels that we must take into account when we are going to place an entry. (besides pivot levels, big round number, etc). Those levels are happening when the price in the sideways mode, and in my understanding an EA can not locate a dinamic levels like those ( please correct me if I am wrong). That's why by giving an option to make this EA as an indicator to help identifying the possibility of entry will be very useful. may the green pips be with us in the next trade t3ric
+
+--- 帖子 #214 ---
+Jumping from system to system like you are all here
+
+--- 帖子 #215 ---
+yes absolutely, at least for me, but i don't complain yelling about scam alert if I'm unable to make money using a trading system.
+
+--- 帖子 #216 ---
+Spot on!
+
+--- 帖子 #217 ---
+ok, no more spam lets hope EA will work soon !
+
+--- 帖子 #218 ---
+- Happy trading
+
+--- 帖子 #219 ---
+Fully agree with trader34 here. Been following Udine's thread for few months now and guarantee that there is no scam there. Udine is a good person, a giver which offered FF's community a free system asking nothing in return. The system works for some ppl, for some doesn't work ..all depends on ones personality, experience and other factors. Trader34's experience is similar to mine, the system doesn't work for me either and as already mentioned on that thread as well, you need that so called "6th sense" that the successful traders posses to stay away from bad trades. I congratulate Skyline for his effort of creating an EA based on Udine's 1st post and I'm pleased to be a part of this testing group. Even though I also think that, if u are not able to be profitable manually trading a system, an EA won't change the result, I like the general idea of this program placing trades according to the rules and without any discretion(that us humans get affected). I'm looking forward to the end of the month results and if the results would get as bad as I suppose they will be, this system could prove a great reverse trading idea(placing buy instead of sells with 1:2 RR)
+
+--- 帖子 #220 ---
+Just a suggestion and no I'm not running the EA but one of the main things for the 00 system is just 2 hrs each session not running 24/5 maybe this can help with the win rate of the EA. It might work it just might not work running full time. It's all about momentum and liquidity and we are heading to the time of year that it's going to start thinning out. I haven't seen where yall are running session times if you are.
+
+--- 帖子 #221 ---
+Hmm .... no trades in skylines treade explorer ? I had 3 trades = 3 winners today: http://www.myfxbook.com/members/TGT_...rading/1201341
+
+--- 帖子 #222 ---
+Hi DerBerliner good results ! I had internet problem with my laptop, btw took 2 win and 1 be on another demo account running on my vps Cheers, Skyline
+
+--- 帖子 #223 ---
+This EA is good to find ideal SL/TP/TS for each pair, modelling quality seems to be not good but testing it manually the results are same. In the third image you can see the elevate TP in london session(and little sl), now im triying to find a method to take only it without the little constant losses, i find that the most of this big moves are starting on london session, and doing only 2 frist trades the results are awesome, it would be cool if skyline make a string to select trading hours and each TP/SL/TL, the system would make elevate profits because every session need different setting and it would be even more powerful if working on lesses timeframes like m1, i know its different from Udine method but absolutly more profitable What do you guys think about this? http://i.share.pho.to/46f60869_o.gif http://i.share.pho.to/c7b4843d_o.gif http://i.share.pho.to/81a132ac_o.gif http://i.share.pho.to/c1b68727_o.gif http://i.share.pho.to/c2bd5f91_o.gif Attached Image (click to enlarge)
+
+--- 帖子 #224 ---
+No offense bro, but nobody wont relay on BT's with 65% or n/a modelling quality ! If you can get any settings from a BT you are convinced of, anyway be that as it may: so put them into a forward test !!
+
+--- 帖子 #225 ---
+I have tested it manually with same results
+
+--- 帖子 #226 ---
+Ok mate - that sounds good ! So, in this case you could simply post the best setfiles ? Right ?
+
+--- 帖子 #227 ---
+Skyline What's spread you set for each pairs please? On first page it says below 2 pips but it shows Spread Too high for most pairs.
+
+--- 帖子 #228 ---
+Hi AkCodingEye, that write is only a visual alert it doesn't prevent opening order by EA, infact I'll remove because there's a lot of questions about this spread thing. Btw the limit are set as follow : EU ,GU,EJ : 1 pips GJ : 1.5 pips if your broker comes with spread higher than above (as in your case) then it's better to not use UdineEA nor trading Udine method at all (it's only my opinion).
+
+--- 帖子 #229 ---
+Although some news have been out - today I didn't got any trades ... so far. A boring day, monday plus bank holiday ... sit and wait ...
+
+--- 帖子 #230 ---
+Hi I am looking for somebody who will help in coding a EA which will be trading almost all pairs yet it is very simple .
+
+--- 帖子 #231 ---
+Indeed very boring day, I had only one EJ long trade +5 pips , better than nothing Cheers, Skyline
+
+--- 帖子 #232 ---
+EJ Superb day buy at 130.74 hits 131.29 super trade . I have trades in all the pairs . Skype ID : unimakFF
+
+--- 帖子 #233 ---
+Today results 3 wins , 3 be (+15 pips) : Attached Image (click to enlarge)
+
+--- 帖子 #234 ---
+this is cool I had 5 wins and 1 small loss awesome
+
+--- 帖子 #235 ---
+EJ long @130.20 to TP
+
+--- 帖子 #236 ---
+Skyline, Any reason why this is happening, it didn't trigger a trade, just confused me!(Doesn't take a lot)! Attached Image Cheers Ian
+
+--- 帖子 #237 ---
+Yes, I was wondering about same thing. GBPJPY London Open Candle from .200 level
+
+--- 帖子 #238 ---
+Hi Bhutugly, it happens because that line is only a *potential* entry point , if all conditions are met then an order is placed otherwise is not placed. Btw i'm working on a new version (will share on weekend) where all conditions entry are shown clearly on chart , so that you know why an order is not placed. Attached Image Cheers, Skyline
+
+--- 帖子 #239 ---
+Is anyone getting trade entries? Cheers Ian
+
+--- 帖子 #240 ---
+Same here Waiting for new updates... Thanks for effort Regards
+
+--- 帖子 #241 ---
+Very nice filter skyline EA in separated MT4 instance with this filters will help the live account on other MT4 because of the info/checklsit on taking decisions
+
+--- 帖子 #242 ---
+Thanks Skyline for the effort, the ea worlks perfectly ! When do you think to share it for real account ?
+
+--- 帖子 #243 ---
+I'm planning to unlock live account on next month
+
+--- 帖子 #244 ---
+Thanks !!
+
+--- 帖子 #245 ---
+No orders opened so far , waiting for NY session. In the meantime, I'm still working on new interface for new upcoming version , do you like it ? Attached Image
+
+--- 帖子 #246 ---
+Looks great. ;-) Design is everytime on first place. :-D
+
+--- 帖子 #247 ---
+Looks very good!!
+
+--- 帖子 #248 ---
+Looks great.
+
+--- 帖子 #249 ---
+Ty guys ! Mmm i think i have to use a different font since that one (Century Gothic) maybe could not be installed on each pc, so I will use Arial which is standard font : Attached Image
+
+--- 帖子 #250 ---
+I like Tahoma but it's up to you.;-)
+
+--- 帖子 #251 ---
+May I humbly suggest a mono-spaced font such as Courier New? Makes it far easier (for you) to line everything up. Example: Mono-spaced (Courier New) Attached Image Not mono-spaced (Arial) Attached Image And a spacing option for those who have changed their font DPI :nerd: (high res monitors) Just a couple of thoughts
+
+--- 帖子 #252 ---
+Heck, just put a Font option in there PS: I really like Trebuchet MS
+
+--- 帖子 #253 ---
+Really nice, Roll on the weekend! Cheers Ian
+
+--- 帖子 #254 ---
+Molto grande !!!! skyline , non si può immaginare quanto aiuto si sta facendo tutta la comunità di FF (ovviamente Udine ...) Grazie per il vostro grande lavoro. Great, you can not imagine how much help, doing the whole community of FF (of course also Udine) thanks for your great work.
+
+--- 帖子 #255 ---
+Ty all for suggest and help ! Yes I was thinking about mono type font but I don't like very much Courier New even if solve space issue. Also adding an external parameter Font seems to be not ideal because when font is changed the orizzontal separator lines which are something like ________________ is messed up due to difference between fonts so i have to decide beforehand for a fixed font and one that is always found in a pc (like Arial). I have to admit i'm not so good with graphical interface aspect, btw it could be further improved with time Cheers, Skyline
+
+--- 帖子 #256 ---
+today open trades: EUR/JPY Sell 128.90 02 min ago EUR/USD Sell 1.0740 26 min ago
+
+--- 帖子 #257 ---
+It's really looks nice. Great job so far skyline . I had some drawdown on forward test with Fxcm account but looks healthy and green now again. Can't see any error or bug at this moment. Just wonder if you can unlock only pairs in next version so we can test more low spread pairs and it will take same time for testing so atleast after a month we can see which pairs are doing well and will have more chances to catch any bug/error if anyone come across. Just a thought -AK-
+
+--- 帖子 #258 ---
+Both trade for me but not triggered so no trades opened today
+
+--- 帖子 #259 ---
+Why? Triggered for me same broker all closed at tp. Regards
+
+--- 帖子 #260 ---
+As the problem is the broker, I am using IC MARKETS , with TP: 10, TS: 3.5 and SL 10
+
+--- 帖子 #261 ---
+Well had those trades open and they are winners EU and EJ both are winners and are Sell trades I like the Design Skyline Maybe we have to make an option so people can select from what time the day should start, maybe its nothing, and maybe we have all the criteria are met and then we have the same results... But now I see differ results.....we all have to be sure why that is... Just my 2 cents though
+
+--- 帖子 #262 ---
+Doing great Skyline Cheers Udine
+
+--- 帖子 #263 ---
+Hi Skyliner Looking good on demo What broker will you be using when you decide to go live
+
+--- 帖子 #264 ---
+I can confirm "Clipi" ! Have the same two winning trades: http://www.myfxbook.com/members/TGT_...rading/1201341 At the other side: in the near past I (and perhaps some others here) didn't got the same trades like skyline got ! So: obviously we see now already in demos the sensitivity to brokers ! Depending on the brokers the results will even more differ in the case of life trading !
+
+--- 帖子 #265 ---
+My orders was deleted at the end of M30 candle it's a designed feature and weren't triggered, so no trade for me today As outlined by DerBerliner this EA (and all EA for what can matter) has very high broker dependancy, I saw also different trades on the same broker with 2 different demo accounts , so it's not a surprise to have such differences, we cannot overcome this.
+
+--- 帖子 #266 ---
+Thank you Master Udine ! Without your generosity sharing your trading system, none of this would have been possible !
+
+--- 帖子 #267 ---
+I got 3 trades today.. Broker - Tickmill (armada markets) Skyline, Thank You
+
+--- 帖子 #268 ---
+Thanks bro for posting these figures ! Yep ... and again: different results, depending on the broker we/you use !!
+
+--- 帖子 #269 ---
+Yep that's right, unfortunately. But let's try our best, how we can get optimal gains - whichever broker we use ! In any case the spread is most important + the reputation/reliability/honesty of the coosen broker
+
+--- 帖子 #270 ---
+With ThinkForex I got two trades, seems like one was stopped out by the trailing loss, while the other one ran to TP of 10 pips.
+
+--- 帖子 #271 ---
+Yep ! Especially scalper EAs extremly depend on the brokers datasheet ! Like Skyline posted above: even using the same broker on different accounts with the same bot you may get different results ! AND: Take into account: atm we are all on demos ! Imagine what will happen at live accounts !!
+
+--- 帖子 #272 ---
+Happy to see everything is going well. Keep up the good work, Skyline :-)
+
+--- 帖子 #273 ---
+You guys like trading EA's and scalping, check out the results on this ARBITRAGE trading EA
+
+--- 帖子 #274 ---
+As I understand it - this thread is about 00level trading EA ? Right ? .... only about 00level trading EA ! Anyway, so why don't you post anywhere this bot ? Or do you have a link to it ?
+
+--- 帖子 #275 ---
+Yes, only about the EA I hate to say it, but did you read Post # 1 If you don't have comprehension for that, you will not be able to trade this EA Regards, John http://www.forexfactory.com/showthread.php?t=533099
+
+--- 帖子 #276 ---
+I do not understand the relationship between this EA and the 00-level trading? Can you explain this. I have read post 1.
+
+--- 帖子 #277 ---
+why no open position? and Error 2015.04.10 19:20:07.731 2015.03.26 00:00 FFCal-WUKAR EURUSD,M30: Closing URL web connection
+
+--- 帖子 #278 ---
+How that is my problem? What is it you don't understand? Udine trades on 00 level - EA trades 00 level
+
+--- 帖子 #279 ---
+Nevertheless, I do not understand the reason for your message. You write: "This signal is for illustrative purposes only, trades are too fast to be copied Do not subscribe."
+
+--- 帖子 #280 ---
+I have been trading this EA's signals live, you could also check my history on http://www.myfxbook.com/members/lean...system/1208350 So yes, this EA does work with live trading. However I do have to mention that I have it has only been running for one week, and there is some slippage with from my demo account, which is also at the same broker. The slippage is between 0.2-0.5 pips, not that much.
+
+--- 帖子 #281 ---
+Anybody have live trading results with this EA? Their posting (especially profit stats ) would be much appreciated..
+
+--- 帖子 #282 ---
+Hello everyone. (Sorry for my English) From Monday I will also test the EA. Regards.
+
+--- 帖子 #283 ---
+New v1.1.5 released in 1st post ! I've only reorganized the UI to better show all details at once, please test it and report back errors. Now it should be clear when EA place a pending order (all green check marks, if there is at least 1 red cross order is not placed). (note : if you click on 'FF thread link' it should open this thread Attached Image Cheers, Skyline
+
+--- 帖子 #284 ---
+Okay, Downloaded New EA, went upstairs for a shower, come back down +10 pips, very nice. Just 1 pip off hitting target for the day, where can i change this so i can continue testing it today? Just need to check everything triggered correctly. Cheers Ian
+
+--- 帖子 #285 ---
+Hi Ian, for me EU to TP and EJ to TS so only +5 pips but still a good start Daily Target is based on percentage of your equity not on pips, you can change it by raising DailyTargetPercentage variable. Attached Image (click to enlarge)
+
+--- 帖子 #286 ---
+I have 3 Winners and 1 loss E/U, E/J and G/J BUY orders where Winners E/U SELL was a loss a good day start
+
+--- 帖子 #287 ---
+Hello skyline! From today Im testing the EA. Thank you very much for sharing! Greetings, Luy
+
+--- 帖子 #288 ---
+thanks i start test the EA
+
+--- 帖子 #289 ---
+GJ TP
+
+--- 帖子 #290 ---
+hi skyline. is it possible to open Ea for live yet? i would like to test it on cent account rather than demo. thanks
+
+--- 帖子 #291 ---
+I think something does not work well, I'm trying to TP = 10 and TS = 3.5. If you look at today's operations, EJ open 127.7, the price has reached 127.82, should they have closed trade at 127.8 and closed in BE. GJ same, the operation buy at 176.30 seems to have reached a minimum at 176.35, which TrailingStop seems to have failed. very thanks!
+
+--- 帖子 #292 ---
+mille grazie Skyline! Cant wait for the live version
+
+--- 帖子 #293 ---
+Hi Dafa, if there will be no major bug during this week, I will release open live trade on next monday Cheers, Skyline
+
+--- 帖子 #294 ---
+Hi Clipi, ts in my account is working (and also in other users account as far as i can see), keep in mind that trailingstop done with low value 3.5 pips is very sensible to broker spread, latency, requotes and so on, so it's not a very precise function and sometime does not work as intendeed (this is the same as if you use ts built in mt4 or other ts ea like wukar). Cheers, Skyline
+
+--- 帖子 #295 ---
+Great.;-)
+
+--- 帖子 #296 ---
+Hi skyline! Looking forward to go live next week with a small account. Are you planing in the future to add .05 level entrys also? Thanks again, Luy
+
+--- 帖子 #297 ---
+Skyline its possible have a settings time start time end for example we can run on NY time only
+
+--- 帖子 #298 ---
+@ Luy : Actually i'm not planning to modify core entry logic adding .50 level to not over complicated EA which is now more than 1100 lines code @ Juan007 : Maybe in future I could add different switch to let user choose different times to trade, for now you can set TradeOnlyLondon= false so that EA will be enabled to trade full time (I suggest to set this as per default to true which is best period to trade) Cheers, Skyline
+
+--- 帖子 #299 ---
+Hi skyline, I haven't had time, due to other projects, to try your EA yet. But, I did want to make this post to tell you that I admire your preventing the EA from being used on Live until it is fully tested. Your concern for other traders' best interest is evident in this decision, and I applaud you for it! You are a wise and good person! Dial
+
+--- 帖子 #300 ---
+Ty Diallist for your kind word , very appreciated! I'm also thinking to lock max risk allowed to not more than 2% per each pair so to avoid overleverage the account that could lead to big losses and I don't want this to happen to me and other users using this EA. Cheers, Skyline
+
+--- 帖子 #301 ---
+I think that is a good idea too, skyline.
+
+--- 帖子 #302 ---
+Actually, skyline, on further consideration, I will sometimes limit myself to a single, strongest, pair during a trading session, and use 4% risk per trade. So, I would suggest that your live version default to 2%, but be adjustable up to 4%. To everyone reading this: If skyline chooses to adopt my suggestion above, it is up to each of you to manage their risk responsibly. Dial
+
+--- 帖子 #303 ---
+Hi Diallist, thank you for your input. The problem I see is that raising risk to 4% per each pair means a potential overall risk of 16% if EA is used on all pairs allowed (EU,EJ,GU,GJ). So to avoid this EA to be turned into a fast burning account robot, I would prefer to set max risk per trade to 2% which still means a quite high overall 8% risk if used in all 4 pairs. Cheers, Skyline
+
+--- 帖子 #304 ---
+Agreed! If I ever truly need a custom version, I'll hire you for the purpose. Thanks skyline. I've got the EA installed and running. I'll keep you apprised of any bugs. Thanks again for all your hard work on this (1100 lines of code! Whew!) Dial
+
+--- 帖子 #305 ---
+Ty Dial !
+
+--- 帖子 #306 ---
+Skyline, Great work on the EA! I agree with the 2%. Steady and consistent! The account will grow! Thanks for the time you have put into this EA and your willingness to share it here with others. Looking forward to putting this on a live account next week, too. Bruce
+
+--- 帖子 #307 ---
+@skyline A bug, methinks... For both long and short conditions the condition "ADR room down" is the same. I would expect it to toggle to "ADR room up" for long conditions.
+
+--- 帖子 #308 ---
+Hi Skyline, I have been testing this EA for a while. I can confirm that it is working in order so far. Every trade has met all entry&amp; exit rules. I have not seen any major bugs yet. Thank you again for your great EA. I appreciate your time and effort. Keep up your excellent work
+
+--- 帖子 #309 ---
+Hi skyline, Not a bug but a concern. I noticed that when a pending order is placed, there is no SL or TP value. Does this mean we are dependent on the EA to apply them at the appropriate price? I'm am not a fan of "hidden" SL or TP. If my platform goes down right after the trade is triggered, and the market makes a monster move, then our accounts are screwed. Could we have the option to send the SL and TP to the broker, rather than have it hidden? Thanks Dial EDIT: Never mind. I just saw a pending order trigger and the TP and SL appeared. Thanks.
+
+--- 帖子 #310 ---
+Hi Dial, good catch ! I checked code, it's only an error in gui label which I'll fix in next release, btw the logic is still correct so EA even if it's showing ADR room down for long is checking for adr room up condition. Thank you for reporting ! Cheers, Giacomo
+
+--- 帖子 #311 ---
+Hi Dial, yes I'm not a fan of hidden sl and tp too for the same reason, but I had to implement pending order in this way (placing them without any sl and tp) because some mt4 brokers don't allow to set SL/TP beforehand so I prefer to set them by code after pending order is triggered. Doing so there's still the remote chance that a pending order is triggered (turning into a market order) and connection to server is lost before EA could set SL and TP , so it's safe to check platform from time to time (this isn't a set-and-forget EA). Cheers, Skyline
+
+--- 帖子 #312 ---
+Thanks skyline!
+
+--- 帖子 #313 ---
+Did anyone else get a sell GBPUSD trade today? It seems like skyline's didn't get that one.
+
+--- 帖子 #314 ---
+Hello. Daily % achieved. There is no losing positions. EA shows max losses per day reached. Regards. Attached Image (click to enlarge)
+
+--- 帖子 #315 ---
+sell stop, but was deleted.
+
+--- 帖子 #316 ---
+Hi Skyline Thanks very much for your effort for this EA. I've just downloaded your EA and will test it on my demo account. Hoping the best result for this EA. Once again, I'm very appreciate for your hard work. Cheers, Senanata
+
+--- 帖子 #317 ---
+Hi Saek, thank you for reporting ! Will check into this bug and fix asap Cheers, Skyline
+
+--- 帖子 #318 ---
+Hi Skyline This is my first report about UdineEA. I was successful when load the EA and template to the chart. Worked normally on GU, EU and GJ. But I can not attach template to EJ's chart. Everytime I try to do that, my mt4 always crash/hang and not responding as shown on my attachment. Can you tell me what I miss? Regards, Senanata
+
+--- 帖子 #319 ---
+Hi senanata, first put the Chart on D1 timeframe, then load the template and drop it back down to M30. Sometimes the indicators struggle to load on the lower timeframes. Regards Vlad
+
+--- 帖子 #320 ---
+Hi Saek, i checked for your issue , the calc routine seems to be correct, the only thing that could cause wrong counts is if you have orders in the same account opened (manually or by other EAs) which are taken into account in win/be/losses calculations. If this is the case then just be carefull to use this EA only on account where no other trading systems are used. Cheers, Skyline
+
+--- 帖子 #321 ---
+Skyline , Have you considered including the Currency Strength Meter indicator for further filter as been done manually in Udine thread? Kindly look at Robinho and Cycle most recent posts
+
+--- 帖子 #322 ---
+Hi Godwin, Short Answer : No Long Answer : I'd like to keep this EA very simple in it's logic without adding filter over filter, following basic Udine level 1 rules otherwise we can go further in an endless loop and I have no time nor will to follow this path Cheers, Skyline
+
+--- 帖子 #323 ---
+Abrakadabra..!! It works, Vlad. Thank you so much. You're very genius.. And here my result today.
+
+--- 帖子 #324 ---
+Since this new version no one has reported any problems running the EA ?? I have all the indicators in right folder, template apply OK, 30 minutes chart looks same as posted here but when I put the EA on, it gives error message Only for Demo accounts - it is demo account, what could be the problem? See the picture Thanks, John
+
+--- 帖子 #325 ---
+2 possibilities: 1. Some brokers have their servers incorrectly configured (so they flag demo for live, and live for demo) 2. Depending on how the demo check is coded, it could be that the terminal is not connected yet.
+
+--- 帖子 #326 ---
+Hi Erebus, that's very strange, to check demo account I'm using the very basic instruction IsDemo() provided by mql language which returns true if EA is running on a demo account, false otherwise, so there should be some wrong settings on broker server side related to your account which is set as real account even if it's not. I have no other explanation about this sorry Cheers, Skyline
+
+--- 帖子 #327 ---
+Try dropping this script onto a chart and see what the pop-up alert says:
+
+--- 帖子 #328 ---
+can we add paratemer for long only and sell only?
+
+--- 帖子 #329 ---
+Thanks skyline I'll try the Global Prime account, I had 1.14 working there Edit: the script says, you are connected, this server is marked as live
+
+--- 帖子 #330 ---
+Have you tried the standard EA setting in the Common tab? Attached Image (click to enlarge)
+
+--- 帖子 #331 ---
+@ Honestknave : Thank you for helping ! @ Erebus : Could you please also try attached script, and report back related screenshot ? Ty Cheers, Skyline
+
+--- 帖子 #332 ---
+Hi Skyline, Am having the same issue with demo acct, pls see screenshot. All else is working right.
+
+--- 帖子 #333 ---
+Hey Skyline. On this account only works Udine EA. No other transactions. Possible cause: On this account MM 4%&gt;2% daily target, daily target reached.
+
+--- 帖子 #334 ---
+Hey Senanata. Indicator xADR_0.2renko crash. Save the template without xADR_0.2renko. Add it separately.
+
+--- 帖子 #335 ---
+No problem . if it helps , Erebus edited his earlier post to confirm that the server is returning !IsDemo()
+
+--- 帖子 #336 ---
+Hi FireFries, as you see from script , server has flagged your account as real account (wrongly), you have to ask to your broker why they are doing this (maybe a bug on their side), I cannot do anything in this particular case. Cheers, Skyline
+
+--- 帖子 #337 ---
+Hi Skyline On the first page you wrote: * EA is provided as is, there maybe several bugs that could damage seriously your account , so it's completely your decision and your risk to use it with real money . Does it matter, if it only works on a demo account?
+
+--- 帖子 #338 ---
+Thanks for the reply, Skyline, will just wait for the release of live trading. Thanks for the nice template setup too, make it very easy to get it up, Cheers.
+
+--- 帖子 #339 ---
+Just for this trial time as he wrote....so whats the problemRegards
+
+--- 帖子 #340 ---
+Hi cescof I have the same problem as Erebus. That's the situation I can't test it. Would it be life i could test it too. Thanks and good luck!
+
+--- 帖子 #341 ---
+Hi Kofix, of course that statement is not referred to demo account but only if you use (when I'll release) live version of this EA.
+
+--- 帖子 #342 ---
+Hi Saek, ok I've found the error : logic conditions to show both Daily Target and Max Losses Per Day labels were inverted, so that red cross had been referred to above label Daily Target (which it was reached in your case) and viceversa. It'll be fixed in next release. Ty for helping find this nasty bug Cheers, Skyline
+
+--- 帖子 #343 ---
+My results for today:
+
+--- 帖子 #344 ---
+Skyline, Great work on this EA! Its seems to be working great! Question. TradeOnlyLondon (default = true) // If I set this to false so that I can let it run 24/5 DailyTargetPercentage (default = 2) // And set the Daily target as percentage of account balance to 10%, will the EA continue until this value (10%) is reached and then stop trading for the rest of the day? I want to know if the Live account EA will take all trades daily. And not be too restricted by time (24/7) or target percentage (10%). Looking forward to testing this EA on a Live account. Thanks. Bruce
+
+--- 帖子 #345 ---
+@ Skyline I'd also like to say thanks and show the last 2 days since I loaded the latest version EA have been doing great. Good work to everyone involved in the development! Attached Image
+
+--- 帖子 #346 ---
+Hi Brucech, altough I do not endorse such use, if you want to enable EA to trade non stop, you could use something like this : TradeOnlyLondon = false; DailyTargetPercentage = 100; (most unlikely you can hit this on a daily base also because live version will be limited to 4% risk per trade) MaxLossesPerDay = 100; (this will be the worst thing to be done, it's far better to limit to 3-4 max losses per day) In this way EA should work continuosly, please just in case report back possible issue since I've never tester such extreme settings (and never will since are too much risky for my taste). Cheers, Skyline
+
+--- 帖子 #347 ---
+Hi skyline, Watching your EA perform these last two days has been like observing the inner workings of a fully-jeweled, fine Swiss watch! I did notice a bug tonight. A short pending order was placed correctly, but the note said potential long instead of potential short. Thanks Dial
+
+--- 帖子 #348 ---
+Hi Dial, ty for your kind words I'll check into issue you reported but I have to replicate on my platform before to be able to fix it Cheers, Skyline
+
+--- 帖子 #349 ---
+On my side today 2 orders in sl -20pips EUR/JPY anyone? Regards
+
+--- 帖子 #350 ---
+only one losing order form me up until now on EJ
+
+--- 帖子 #351 ---
+For London session losing trades EURUSD -$20 EURJPY -$20
+
+--- 帖子 #352 ---
+Really strange... so you don't have the second order for EUR/JPY? We have same broker... Regards
+
+--- 帖子 #353 ---
+Ok, the last posts are a good occasion for writing my honest view about this EA. No offense, but I have only little hope now after testing the bot myself and watching the testing of others here. I think the high sensitivity to the brokers resulting in serious differences between the single traders here shows step by step that this EA will fail ... yes, of course there will be good days/phases, no doubt, BUT one day its good with one broker, another day its good with another broker ... in a nutshell it's to instabile, not reliable enough ... AND we haven't had here live trading so far !! And in my mind the improper R:R of 2:1 isn't a basic for success ! So, all in all sooner or later the equity will slow down in a stepwise manner .... unfortunately ! Dunno really what to change to improve this bot, but perhaps the 00level startegy is indeed a manual method and the automatisation is impossible or nearly impossible ? All that's only my two pennnies worth !
+
+--- 帖子 #354 ---
+I have nothing personal against you. This is one of most promising ea I have ever seen. It's all on demo account ofcourse and can't wait to test on live with small position size and then I can tell more. I come to this thread after every few hours to check- has skyline released for live early and in case if he surprise us. Even I can see lots of download of EA, atleast say Thanks who share for nothing his more than 1000 line coding ea. Skyline, Again thanks for your EA. Great sole and programmer -AK-
+
+--- 帖子 #355 ---
+No emotions are needed. In any case I/we have to say a big thank you to people like skyline, BUT: Its simply a business for all of us here ... including skyline himself ! At the end, the only important thing is: will an EA (any EA) bring money for a long time or not. If an EA (any EA) fails - that usually happens unfortunately with nearly all of them - we have to accept that ! Nothing more we have to consider.
+
+--- 帖子 #356 ---
+That's odd, I didn't get the second buy EUR/JPY order for both my ThinkForex and FXOpen live accounts. Good thing it was a loss though.
+
+--- 帖子 #357 ---
+I got it - like in skylines account. So you see it again: its a pity, but it's too doubtful ....
+
+--- 帖子 #358 ---
+I also see that Skyline's lots increased, for EUR/JPY yesterday it was 0.05 lots, and today it's at 0.13 lots.
+
+--- 帖子 #359 ---
+3 orders today and -30pip EUR/JPY.... Monitoring this pair for ignore list
+
+--- 帖子 #360 ---
+Hi DerBerliner, I completely agree with you, this EA in the long run will not gain any money , I'm quite sure about that infact I also wrote this in 1st post : 'To be noted that this EA cannot be properly backtested due to news filter presence, so I do not trust it completely because I cannot figure out its statistical behaviour so I cannot evaluate its weakness and limit (max drawdown, max consecutive losses,...)' There's no doubt that this kind of EA with few pips in TP,SL,TS are very sensible to broker data, I've already wrote here that I had (few) different trades using the same EA on two different account in the same broker but it's not an EA issue or some programming bug (at least not that I've yet discovered), so you cannot fix this by adding 'filter'. For the above reason I'll release a 'risk-controlled' live verison where mak risk per trade will be limited to 4% , because EA of this kind could seriously damage a real account. Then will be up to each of you to decide if try to test it in live or not , I think I'll do but with a very little account (less than 500 euro) with 2% risk per trade and will stop at -30% no matter what. Regads, Skyline
+
+--- 帖子 #361 ---
+yes I changed the version yesterday to test latest bug fix , but I forgot to change risk setting which I've changed for today which was a losing day Cheers, Skyline
+
+--- 帖子 #362 ---
+My friend - do you really think that makes sense ? Never ! One day you have good trades with one pair, another day another pair isn't doing in your favour ... So it'll make no difference trading with or without that EURJPY ... (Remember this funny saying: Monday and friday are bad days for trading - the other bad days are tuesday, wednesday and thursday ! )
+
+--- 帖子 #363 ---
+skyline, Thank you for your efforts here. I look forward to testing this. In the best case we will all make a lot of profit. In the worst case we will learn about "discretionary" variables that separate those successful with Udine's 00 strategy from the rest. We both know success is possible. This could be a boon to those like myself (West Coast USA, PST) who have challenges trading the London session and managing a day job. I do hope that you will make MT4 files available so that those so included can stand on the shoulders on Udine and yourself and explore other "discretionary" variables and share the results. It is interesting that this EA is getting different results for different platforms. It is using the same information that manual traders are using to base decisions. Different broker feeds and spreads are expected. We can always change brokers. Are the differences being measured on the same broker feed and location? With the same feed and internet connection this may be cause for concern, ei "stacking the deck" All the Best! dlouw
+
+--- 帖子 #364 ---
+Nothing happened yesterday. No opened trades at all. Open pending order once but cancelled. Don't know why.
+
+--- 帖子 #365 ---
+damn, such an easy thing i miss out. thank!!!
+
+--- 帖子 #366 ---
+Hi Senanata, pending orders that are not triggered at the end of candle are deleted. Cheers, Skyline
+
+--- 帖子 #367 ---
+@senanata Ups ... no trades at all ? That's quite different to all of us here .... That's good luck for you ! God grant that your broker would do all that further in your favour ....
+
+--- 帖子 #368 ---
+It is too early to pass judgement on this EA. Common sense and mathematics tells us that this EA has an edge. Any edge, however small will bring the AWR above the BEWR curve, but the question that remains is whether it is far enough above the BEWR curve to cover transaction costs, and further still above to yield a profit. If it is sufficient, it may do so at a very slow rate, dithering above and below the starting balance, but yielding only a small return each week or month, but a positive return nonetheless. I say we let the EA do its work over a series of 500 or (better) a 1000 trades. Even if it proves to be unprofitable over time, it will at the very least serve as an instructor to us by giving us the opportunity to examine each losing trade for discretionary variables that would have kept us out of the trade. By this I mean, for example, seeing SR or Pivot levels on the chart that are invisible to the EA. Even if it only serves in that capacity, it is still a very valuable tool and was worth all the effort that skyline put into it. As for myself, I withhold judgement until at least 500 trades have been taken. Dial
+
+--- 帖子 #369 ---
+This post should be sticky at each sub-forum here in FF ! Thank You Dial !
+
+--- 帖子 #370 ---
+Looking at actual stats in my demo account UdineEA is opened since 25 days and were placed 36 trades, if my math are correct and trades will be placed at the same pace, to reach 500 trades there would need : Days = (25*500)/36 = 347 days so around 1 year to be able , as Dial said, to evaluate this EA. Do you have the necessary will to accomplish this task ? Do not forget that drawdown period surely will occurs and could be also prolonged (months and months without any equity high). Just to speak, I'm trading a completely different EA (portfolio of 5 EAs) running on real account that is in drawdown (-26%) since when it's started (around 6 months ago). Why do I keep trading it ? Because in that case I've calculated precise statistical numbers and whole portfolio is still below its limits. UdineEA is different because no backtest could be done so we don't know how behaved in past , so we have only to test in forward live. Regards, Skyline
+
+--- 帖子 #371 ---
+I am also hoping same as there is edge in this ea and we can try different variation and idea and test on same time and share result here
+
+--- 帖子 #372 ---
+Hi all, I'd like to send my thank to all fellow traders who send me here and my pm , appreciations message and also for testing and reporting bugs. As promised after a month of demo test, I've just released UdineEA v1.1.6 in 1st post which is enabled to trade on real account. To avoid improper use, I've locked max risk per pair to 4%; if you try to set RiskPerTrade more than 4%, EA will throw an alert and stop trading. I'll manage at the start of next month to fund a tiny live account and link the account here. My task will be to let the UdineEA to run at least 1 year until May 2016 to see real performance. Trade Well! Regards, Skyline
+
+--- 帖子 #373 ---
+Good evening everyone, I'm very interested in the trial of your udineEA since I'm using a complex indicator pre buy or sell manually , Nihilist_Ultra_Trend_V2 Currently I'm testing your udineEA 115 , but I saw that was released a new version . Thanks for any help you can give me
+
+--- 帖子 #374 ---
+Thank You Skyline.
+
+--- 帖子 #375 ---
+Thank you skyline again Is that possible to unlock pairs, so we test more low spread pairs please?
+
+--- 帖子 #376 ---
+Hi Skyline, Can't wait for this. Thanks a lot for your effort, once again. I'll give my live reports asap. Regards, Senanata
+
+--- 帖子 #377 ---
+HI AKCodingEye, Pls see at the 1st post about EA Rules. .....EA is designed to open only at .00 level (not .50 level) and work only on EJ,EU,GU,GJ ( please don't ask for other currencies,index,metals,cfd and so on...! ) Happy Trade, Senanata
+
+--- 帖子 #378 ---
+@Skyline, Thanks for the update mate! Can you tell me, is there anything else changed in the new version of the EA, or just the live trading option? Cheers!
+
+--- 帖子 #379 ---
+@Skyline, Hey mate, I noticed something interesting today, I know it's intentional but not sure if it's accurate. I know there's a max of 1 order per pair, per hour. My EA placed a pending order with did not get taken after 30 mins and so was deleted. This is expected as far as I understand it. However, the max 1 order filter then kicked in and would not trade until the next hour, even though no order was actually filled. This is just for your information, I am not complaining LOL Cheers mate!
+
+--- 帖子 #380 ---
+Hi Firewight, new v1.1.6 has some minor bug fixed nothing to do with logic entry, so in essence is the same as previous 1.1.5, the only difference is that now is able to trade on live account and risk is maxed at 4% per pair (so no fixed risk and money management always on). The '1 max order per hour' rule kicks in only if pending order is actually triggered into a market order (Ive checked again code) so in your case it shouldn't prevent to place another pending order in next M30 candle (of course if entry conditions are met). I've never see such issue , I'll monitor closely to see if I can replicate it. Ty Cheers, Skyline
+
+--- 帖子 #382 ---
+a question, because ASH this with a red cross if at ASH bar is red, and the search for short ASH should be red. with what should execute short order. thank you very much.
+
+--- 帖子 #383 ---
+Hi skyline! Thanks again for your work. I saw the same thing like firewight. A trade wasn´t opened cause of the 1 trade per hour rule. But there was only a potential trade this hour not a real trade. See picture. Hope you all have a good start in the fresh week, Luy
+
+--- 帖子 #384 ---
+Hi Clipi, to give a valid entry ASH has to change its color from green to red , in your screenshot is all the way red so there is no signal for ASH. Cheers, Skyline
+
+--- 帖子 #385 ---
+Hi Luy, ty for reporting bug with screenshot, will check more deeply in source code.
+
+--- 帖子 #386 ---
+hi Skyline, while testing, all checks were green till it reach Pot, didn't trigger. EA looking good, smiley and then mark "Price above pot" as negative.
+
+--- 帖子 #387 ---
+Get anyone triggered the gu long @ 1.4970? I saw that skyline get the short @ 1.4940. I was triggered long and so the short couldn´t get triggered cause of the 1 trade per hour rule.
+
+--- 帖子 #388 ---
+picture
+
+--- 帖子 #389 ---
+I always read 1st post of thread before posting in any thread. Yes i saw that line as well. If you forward test four pairs or eight pairs, does it make any difference. NO. Why can't we test eight pairs on same time and save some time for forward testing. I am not requesting for any changes but requested for more pairs to open. I am seeing this EA has an Edge and Potential. So i couldn't sleep last night and it opened usd/chf trade today just after gbp/usd . Add me as friend and you might be able to see my Trade Explorer.
+
+--- 帖子 #390 ---
+get a error: 2015.04.20 20:47:59.487 Udine EA_v116 GBPJPY,M30: Errore SELL(3) : invalid trade parameters - EntryLong = 177.4
+
+--- 帖子 #391 ---
+Hi jiaxingx, maybe you're using a broker with high spread for GJ and it won't let place trade because entryprice is too much near to actual bid.
+
+--- 帖子 #392 ---
+Hi Luy, as repeted over and over , is it possible to experience broker feed dependancy using this EA, in my case (ICMarkets Demo) only a short was triggered on that trade at 1.4940 Cheers, Skyline
+
+--- 帖子 #393 ---
+I use Ic markets broker,same as yours.
+
+--- 帖子 #394 ---
+that's strange, I don't have that error in my platform , is demo or real account ? maybe something to do with connection to broker server... it's quite difficult for me to debug if I cannot replicate in my platform
+
+--- 帖子 #395 ---
+demo account,continue to test.
+
+--- 帖子 #396 ---
+I can also confirm many data feed freezes from ICM Demo server... This could be contributing to the issues...
+
+--- 帖子 #397 ---
+Skyline, Like yourself I use IC Markets. Strange how we have different days! (Ignore the last order as I was testing another strat but EA kicked in and closed it)! Attached Image (click to enlarge) Strange! Keep up the good work! Ian
+
+--- 帖子 #398 ---
+Hi Skyline Thank you for this EA I currently run this EA on 24 hrs Pepperstone account since Monday What i would like to do is to override trailing stop , is this possible Thank you
+
+--- 帖子 #399 ---
+Hi Bhutugly, I've experienced the same thing using two different account on IC Markets, the EA using low tp,sl and ts is very sensible to connection to the broker server, quotes, and so on, something we already talked about , so no surprise at all.
+
+--- 帖子 #400 ---
+Hi Pret, just set TrailingStop to 0 and it will be disabled.
+
+--- 帖子 #401 ---
+Thanks Skyline will post results later
+
+--- 帖子 #402 ---
+Hi Skyline and everyone. I have been testing this EA only recently and I have it working only today on my IC Markets deomo account. It just closed a profitable trade. I was pleasantly surprised.. I will update future results / issues as I see them.. Keep up the good work Skyline... HZ
+
+--- 帖子 #403 ---
+hi one stupid question i must have different number in each ea pair? or just drag in to the chart with no changes thanks
+
+--- 帖子 #404 ---
+Two looses today. GU and EU. -10 pips. ( still not working correctly EA .. Attached Image (click to enlarge) and my 5 cents.. Attached Image (click to enlarge) =)
+
+--- 帖子 #405 ---
+Hi Mariodrugs, i also took that losses on EU and GU (and a win on GJ) but what you noticed is wrong, in your case EA had worked fine Attached Image (click to enlarge)
+
+--- 帖子 #406 ---
+Ok, I too took a loss on the EU. It took about 27 minutes and the stop loss was hit. For this trade I had changed the EA to TP 8 pips / SL 15 pips to increase the odds. EA is running 24 hrs for all market hours and see how it works out with these TP and SL settings.
+
+--- 帖子 #407 ---
+I had two losses same for eu and GU today. Next trade whenever it takes must be +5 mathematically in order to have an edge. That's my view and watching for next trade.
+
+--- 帖子 #408 ---
+I use to write these rules into mechanical ea. If you want, I can share the code I have. the ex4 file is here. http://www.forexfactory.com/showthre...40#post7840640 God bless,
+
+--- 帖子 #409 ---
+Hi iamgotzaa, good to see you here. Was there any reason why you did not pursue your project further? What were your results? Any challenges? HZ
+
+--- 帖子 #410 ---
+[Mandatory Update v1.1.7] * (bug fix) : fixed bug reported by Luy ( here ) * (bug fix) : fixed minor GUI issue related to LotSize which display multiple decimal digits in some cases. You can download it from 1st post as usual. Cheers, Skyline
+
+--- 帖子 #411 ---
+Thanks mate, loading it now!
+
+--- 帖子 #412 ---
+Thanks for asking. well, i'm working on the new project, personally, that integrating economic news calendar in it. Afraid to share and then it fail. hahaha (actually I don't care)
+
+--- 帖子 #413 ---
+nice, let me try too.
+
+--- 帖子 #414 ---
+Hi skyline; Is there a version is possible, for all pairs, without sending orders, only to use it as an indicator? Thanks
+
+--- 帖子 #415 ---
+Hey iamgotzaa, there are no failures here, only feedback. Thank you for your contribution...
+
+--- 帖子 #416 ---
+I would love to try it out
+
+--- 帖子 #417 ---
+It's losing a lot of pips now, I wonder when it would turn around again.
+
+--- 帖子 #418 ---
+it's the market, maybe tomorrow will be a better trading day
+
+--- 帖子 #419 ---
+Sure - it will turn around again, definitely ... may be even tomorrow ... yep, bevor going deeper again the day after tomorrow ... and the account will burst more sooner then later ... IMHO it's impossible to win using this bot with a RR 2:1 .... only manually trading the 00level can bring gains, at least for some experienced tarders, having what ever additional tools .... There is absolutly no offense against skyline ! I truly wish he could win using his bot ! But something must be changed ... haven't a clue what to do although ... unfortunately.
+
+--- 帖子 #420 ---
+I completely agree, this ea will not gain any money in the long term.
+
+--- 帖子 #421 ---
+Hi Skyline, Fully agree with you, so in this case why not reversing the trades, setting pending sell instead of buy stop?. Having also the RR 1:2 on our side. Think about it Cheers, G.
+
+--- 帖子 #422 ---
+Hi All, I want again to state very clear that I'm not going to do ANY changes to the logic of UdineEA. This is final version and will be not changed anymore (bugfix apart) Take it or leave it. Thank You Skyline
+
+--- 帖子 #423 ---
+Skyline, I am a bit confused here. You have done a tremendous amount of work to code the Udine00 system rules into an EA. I applaud you for this effort. Then you say that you agree it will not make any money in the long term. OK, then you believe there are obviously some discretionary factors in the Udine00 system that are not included in your code. I agree. It seems that if you will not make modifications or release MT4 code to allow others to make modifications the whole project will only establish that the base rules are a win/ no win scenario. What am I missing here? How do you propose to test and identify these factors in a scientific manor if there are no variations or ability to record other data factors with the trades? Respectfully, dlouw
+
+--- 帖子 #424 ---
+@dlouw Yes man - you hit the bull's eye !
+
+--- 帖子 #425 ---
+Hi dlouw, let's start from the begin.... I approached Udine strategy method starting to study his thread, I soon realized that a lot of discrectionality were involved so I stopped at level 1 rules which was 'quite' easy to be turned into an EA, also because I don't had the time to place and babysit trades due to my daily job. Then someone asked me to share this EA for all and I did. The plain and simple truth is that all of Udine's rules cannot be coded into an EA just because there's too much discrectionality involved, while an EA needs some mathematical and fixed rules that can be coded using Mql language. By the way after a good start with some positive trades, UdineEA hits some bad trades (now we are in a drawdown period in my demo account), so users like you started to yell asking to 'filter', to add 'things' , to do this or do that..., based on what ? On nothing , just because there were some losing trades in a row. So Dlouw do you think that I'm here to code whatever 'idea' comes around just because seems nice to be coded or because there is a losing streak? Forget it ! Moreover, where did I wrote that I intend to code 'discretional' Udine rules ? This is UdineEA level1 rules thread not UdineEA all rules thread, i've never thought to do something like that also because as i said before is simply impossible to do. UdineEA logic code phase, as far as I'm concerned, is done; I released live version so now we can only test it as is for at least 1 year (or 500+ trades) to gather some statistical evidence. I'm quite sure this EA will not gain money in the long run , maybe I'm wrong who knows ? The only way to verify this is by testing it as is in live not by changing it (otherwise you have to start again and again your live test) I'm sorry if you, or others, are not comfortable with this, you can always start to code your UdineEA and do whatever you want with it, share your code, add filters, and so on.... Regards, Skyline
+
+--- 帖子 #426 ---
+Hi dlouw, it is always refreshing for me to read a post that is both intelligent and eloquent. I wish more people had your facility with language! That aside, while I understand what you are saying and requesting, given that skyline has chosen (as is his right) to make no more changes and will not release the source code, then it only remains to make use of the EA as a teacher to help us see the very discretionary elements of which you speak. Let the EA run, and then keep a log of all the losing trades and note, when possible, identifiable reasons not to have taken that losing trade. It might be due to SR or Pivots or Fibonacci levels, or channels or any myriad of other things. If enough data is gathered, in an ordered and scientific fashion, then you would then have a very valuable set of reasons not to take trades when trading L1 trades manually. Udine puts it succinctly: "If you don't see a reason to stay out, then take the trade!" Which implies that if you see any reason, or even think you see a reason, then it is better to stay out of the trade. In summary, since no EA changes are forthcoming, then make use of the EA as a grand teacher. Dial P.S. BTW, I am impressed with skyline because he is one of the few people I know who truly understands how trading works and why adding extra filters almost always results in worse trading, and begins a cycle of filter on filter on filter etc.
+
+--- 帖子 #427 ---
+skyline, Please no offense intended. I have a great interest in your work here. I would love to be able to code this myself from scratch. Alas my coding skills are in the rank beginner stages and I am relegated to rely on those with superior skills such as yourself. I can only hack existing code to a degree at this time. By standing on the shoulders of those who have traveled this road the view is much clearer. That being said the idea of having a EA that can monitor the System is very appealing to my selfish side. You see, here in Oregon the London session opens at 12:00 AM and NY at 4:00 PM. It is difficult for me to monitor any of the other discretionary variables and contribute value to your efforts without a significant loss of sleep. All this being said your position is understood and respected. I thank you for your contribution and will look forward to the knowledge gained by this endeavor. And daillist, I sincerely hope that I can make an impact on these forums as eloquent and positive as your own. You contributions are a credit to traders and humanity. Thank you. Green Pips and All the Best, dlouw
+
+--- 帖子 #428 ---
+HI dlouw, ty for your kind reply. I see a lot of you like to explore further deeply Udine strategy to evaluate and try to automatize all rules involved but that's wasn't my intention when I started this thread; I do not have the time nor the will to deeply analyze possible evolution of this strategy. Maybe in future I could share a lite version with source code with just entry rules coded so that it could be further developed if someone want to. Regards, Skyline
+
+--- 帖子 #429 ---
+Hello skyline, I test also your EA and I write from a neutral point of view, because that's not my focus. If dlouw the EA would like to develop: Please give him a chance and share the code with him! It is then possible to test both EA's and that can only be positive but not harm anyone. I hope dlouw would his EA then also share here with all. Best regards Raimund
+
+--- 帖子 #430 ---
+Anyone tried with different TP and SL? I have been testing with various SL and TP. Right now i have 30 SL and 300 TP running with 20 TS. London only - false. http://www.myfxbook.com/members/blue...ine-ea/1211489
+
+--- 帖子 #431 ---
+I am totally with you on this. Skyline is right from his side as well. What Skyline shared with us is more than enough . i was frustrated at one stage when i saw potential in this EA but can't do anything. I tried to PM you to give you direction so you make your own way like me as i don't want to disturb flow here. Looks like your PM is turned off.
+
+--- 帖子 #432 ---
+I'm sorry Skyline, I'm a new member in this forum. I'm testing the new version UdineEA V1.1.7 to last week. It seems to be a great project and so far has been positive . I saw , however, that the trailing stop does not work and always causes a closure to BREAK EVEN. is it the fault of the broker ? I use Pepperstone . thanks
+
+--- 帖子 #433 ---
+Thanks for your consideration!
+
+--- 帖子 #434 ---
+Thank you for the consideration skyline. My PM is on now . Warmest Regards, dlouw
+
+--- 帖子 #435 ---
+Hi, Anyone still running the UdineEA ? Had one winning trade today on EJ Is the EA still running in the Trade manager ? Dont see any trades apear. Hope this thread doesn't die. Cheers Thevarkoon
+
+--- 帖子 #436 ---
+I actually got four trades today, two GBP/JPY were losers, and GBP/USD and EUR/JPY being winners.
+
+--- 帖子 #437 ---
+Hi all, 2 winners 2day EJ + EU Cheers Thevarkoon
+
+--- 帖子 #438 ---
+[Published in first post latest version v1.1.8] * (feature) Removed time limit , UdineEA will work forever Do not ask for changes/improve/optimizazion/whatever to UdineEA, this is final version and in final testing live stage, I no longer modify its code.
+
+--- 帖子 #439 ---
+and so on still in a healthy drawdown
+
+--- 帖子 #440 ---
+and so what do you want exactly ?
+
+--- 帖子 #441 ---
+Hi Skyline, Thanks a lot for your efforts. The EA is giving good results with 10 SL and 50 TP. I have 20 pip trailing, but the trailing option is working as "Break Even" instead of trailing the profit. I could be wrong. Can you please check? Thanks in advance. Bluejack
+
+--- 帖子 #442 ---
+Hi BlueJack, trailing stop internal mechanism has been coded based on Wukar EA used in Udine's thread, so that when profit reach TrailingStop value (deafult 3.5 pips) then stoploss is set to breakeven. Hope this answer your question. Regards, Skyline
+
+--- 帖子 #443 ---
+Skyline, Thank You.
+
+--- 帖子 #444 ---
+Dear Skyline Thank you very much for your effort and sharing the EA. Your work is always appreciated. Have good health to continue your work and giving us good Forex EA. Thanks and Best regards,
+
+--- 帖子 #445 ---
+Hello BlueJack, may I ask you what this means in numbers? Would you please enlighten me? Thanks in advance and a lot of green pips
+
+--- 帖子 #446 ---
+After six months of use in the demo it is clear that this EA as expected will never be profitable. The situation, however, changes dramatically if EA had removed the TP by setting it to 0 (so that trades will never be closed in profit but only at B/E or they run undefinitely), completely changing the initial idea behind original Udine's trading system. What I have infact carried out, on the basis of trades accounted in mt4 history tab, is to consider trades as it were taken with TP = 0 and SL = 10; in particular if a trade was closed at 5 pips in profit I considered it as if it had been closed at breakeven unless price never went to breakeven point (remember that Udine EA trail sl to be when 3,5 pips profit is reached for each order placed so at +5 pips we are sure sl is already at be). The results of my experiment are quite interesting, I summarize them here: [GBPJPY] 41 trades B / E 19 Loss trades (-190 pips) 1 Trade still running (around 680 pips profit floating) [EURJPY] 56 trades B / E 26 Loss trades (-260 pips) 3 trades still running (around 2090 pips floating profit) [GBPUSD] 50 trades B / E 13 Loss trades (-130 pips) 1 trade still running (around 790 pips profit floating) [EURUSD] 62 trades B / E 18 Loss trades (-180 pips) 1 trade still running (around 240 pips profit floating) where for each loss I considered 10 pips (SL = 10) and in total we would have: Tot Lost pips: - 580 (commission costs not accounted) Tot Unrealized pips: + 3560 so around +3000 pips (less commisson costs) of unrealized profit from trading this Udine EA by simply removing TP, with still 6 trades alive and running for further more higher potential profit. On other hand i see in my experiment that there was some trades which also went up in profit (&gt; 500 pips) then went back to b/e so partial profit could also have taken for a much better final result. Obviously, this approach involves the use of very tiny lot size otherwise drawdown could be too deep to be able to recover (absolutely too much high 4% per trade!! Maybe 0.5% per trade or a (low) fixed lot size is the best approach for this method. And what about running trades ? They are not managed by Udine EA so it would be the trader to take care of them and eventually at some point close some of it to replenish balance and smooth equity curve (for more reference study deeply Millipede thread by Pipeasy) All of this once again proves, if proof were needed again, that the approach to limit losses and let profits run is the way to go. Greetings, Skyline
+
+--- 帖子 #447 ---
+Hi Skyline, great that you come back again!! Not sure i have understand you correctly - so you adjusted your trades by assuming the TP =0 / SL = 10, and re-calculate the pips - it turns out TP=0 will give us about 3000 pips. in this case, that will be a great news. Also, btw, for your EA118, is there a way to backtest it - i am not able to because it tries to read the FF Cal news... Appreciate your thoughts !
+
+--- 帖子 #448 ---
+Hi Cjtylor, yes that's exactly what I did, it's a sort of backtest on trades already closed just to see different scenario and different outcomes. It's an interesting try that every trader should do, go in history of you account and take note of all trades taken , you will find very few trades that never come back to open price nor touched stoploss running for hundred or more pips. Of course this experiment should be tried in real live market to draw some conclusion, infact i'm planning to open a tiny live account to try out this variation of Udine EA trading with 0.01 lot using an ECN broker with low spread. Btw I'll attach a trade explorer of this new real live test as soon as it's ready. Unfortunately UdineEA , as stated in 1st post here, cannot be backtested because news filter cannot be simulated , this is why I never trusted it since it was impossible for me to do a deep analysis on statistical behaviour. Regards, Skyline
+
+--- 帖子 #449 ---
+Hi Skyline and All I have just created FXCM -TE-Demo-Public with all default settings except TP:0 and RiskperTrade: 1% as Skyline mentioned earlier for TP. Let's see how it performs --AK--
+
+--- 帖子 #450 ---
+Hi AKCodingEye, I've setup a real account using 0.01 lot (min lot size allowed in my account), I think 1% risk per trade could be too much to go through drawdown. Btw you have to be very very patient to trade like this suffering B/E trades and losses trade after trade for prolonged period.
+
+--- 帖子 #451 ---
+Hi Skyline, do you have a trade explorer for this? Also i have forward test-ed your ea previous but somehow it does not open an trade for a week - i am bit surprise.\ On avg, how many trades do it open in your case? Green pips to you...!
+
+--- 帖子 #452 ---
+Yes i've just created trade explorer but yet no trade opened. Trades opened per week are not so much due to a lot of filters , btw 2/3 trades/weeks for each pair in average should be opened by UdineEA Please recheck if everything is set correctly in your platform. Regards, Skyline
+
+--- 帖子 #453 ---
+Hi Skyline, it tried to open trades today but there is 2 error occured.. 1. Pending order deleted because it's not triggered on M30 Candle --&gt; i actually put EA on M30, do you know why this happend? 2. Set StopLoss Long Invalid trade parameter. Could you help to see what i did wrong? Green pips to you!
+
+--- 帖子 #454 ---
+Hi Cjtylor, first one is not an error , is simply a text log added by me to see when a pending order is deleted by EA since pending order was not triggered at the end of current M30 candle. The other one seems to be some issue related to your broker maybe some issue on platform when trade was placed. Cheers, Skyline
+
+--- 帖子 #455 ---
+Hi skyline; Good entry into EURJPY, patience is the key... I have a few doubts about the expert; Do you use the last V118? A part of BE, TP and SL, the other parameters are default? Thanks
+
+--- 帖子 #456 ---
+Hi chavenznqoos, yes i'm testing it latest v1.18 on demo account with default parameters. But if you look at trade explorer is clear that this EA doesn't have any edge, it's very dangerous to be used in live trading account, so be very carefull. Regards, Skyline
+
+--- 帖子 #457 ---
+But I mean your "Live Udine no TP".It is not based on your last change, with 0,001, SL = 20, BE = 5 and TP = 0? Forgive my ignorance
+
+--- 帖子 #458 ---
+Ops sorry I've misunderstand your question, yes i'm using it with SL = 10 , BE 5 and TP = 0 , actually I have only one runner in EJ around 140 pips in profit But in the meantime there was a lot of trades closed at B/E or in loss , so it's still not in profit. Regards, Skyline
+
+--- 帖子 #459 ---
+hi Skyline, time flies - one month now - how is your forward testing now?
+
+--- 帖子 #460 ---
+Hi Cjtylor, I've discontinued Demo Udine EA that you can see in Trade Explorer (will remove soon from there) since is it obvious that this EA is not profitable. Speaking about the live account running without any TP set, actually I have only one position opened on EJ long @134.70 so around 180 pips right now in floating profit but a lot of other positions closed in loss or at B/E. There would need to catch some other big move so that equity will start to go in positive territory. Numbers in my account : Balance : -8.27% Equity : +7.14% Will attach soon a new Trade Explorer related to this live account ! Cheers, Skyline
+
+--- 帖子 #116 ---
+Hi skyline; With +200 pips you Do not have any plan to protect part of this good entry? Grazie
+
+--- 帖子 #117 ---
+Hi Chaveznqoos, 200 pips are too low amount to even consider some action, at least I would wait up to 500 pips before start some form of trail by using a daily Donchian Channel or something based on daily ATR. Keep in mind that this kind of approach is a position/long term trading style with 500-1000 or even more profit from a single order as main goal. An early trailing could avoid such big gains, I know very hard to keep trading like this (a lot of losing trades coupled by very few winning). I could further consider some future changes to implement some trailing mechanism automatically handled by EA. Regards, Skyline
+
+--- 帖子 #118 ---
+Yes, makes sense !!!! Regards.
+
+--- 帖子 #119 ---
+Grrrrrrrrrrr !!!! bad luck with the entry of EURJPY, but is part of this business in Forex. Regards Skyline
+
+
+===== 附件下载链接 =====
+
