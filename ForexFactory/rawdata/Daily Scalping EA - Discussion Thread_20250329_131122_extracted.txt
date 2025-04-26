@@ -1,0 +1,1052 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hi All this is the thread related to automating using EA , the trading system Part Time Wealth Builder - Daily Scalping started by Tkimble (thanks a lot to him for all his great trading system shared over this forum) Since this post cannot further be modified by me when 48 hours are due, you will find latest EA update in my signature. The Daily Scalping EA is intended to be used with original Tkimble's rules so please refer to his thread to know how it works. User settings usage : GMT_Shift = Your broker shift related to GMT time zone (if it's GMT+3 then put 3 , if GMT-1 then put -1) TakeProfit = Take profit in pips when EA will close current order StopLoss = Stop loss in pips when EA will close current order HourToCloseOrders = Hour when EA will close ALL positions SundayCandleExists = Flag to let the EA to don't take care about Sunday Candle. If your broker get the Sunday candle put true elsewhere put false Lots = Number of fixed contracts (used only if UseMoneyManagement = false) UseMoneyManagement = Flag to let the EA to use money management routine with Risk value per trade Risk = Risk per trade allowed (used only if UseMoneyManagement = true) Slippage = Max slippage allowed in pips MaxLossesTradesPerDay = Max losses trades allowed in a day per single pair (Setting to 2 , if EA will hit 2 consecutive losses in a day then will stop to trade until new day start even if HourToCloseOrders is not reached) Note : The EA will also handle automatically the MagicNumber generation so that you can put it with multiple pairs or multiple EA within the same account without any interference Optimized Settings : TakeProfit = 200; StopLoss = 40; HourToCloseOrders = 17; MaxLossesTradesPerDay = 2; (Optimized settings are still in researching and all traders are encouraged to share his result here) Broker used to test Daily Scalping EA in demo/live account by Skyline : FastbrokersFX Download latest EA EA Settings P.S.: Sorry for my bad english. This isn't my native language
+
+--- 帖子 #2 ---
+Thanks Skyline. I understand TK's concern but I do love your EA. You are the Man. Thanks, Tim
+
+--- 帖子 #3 ---
+Skyline, Thanks for setting up this thread for the EA. Hopefully all the traders using the EA for Kimbles system will start posting and make this thread a very active one. Carol
+
+--- 帖子 #4 ---
+Thanks Skyline - look forward to a long and profitable thread
+
+--- 帖子 #5 ---
+Thanks Skyline to take the lead for this thread
+
+--- 帖子 #6 ---
+Thanks to all you guys !
+
+--- 帖子 #7 ---
+Well OK. Here is my test of since Feb 19. Currently running 1.0e. No intervention except that I changed the closing hour to 16. Two max trades. Youknow, I'm really thinking of ditching GBPUSD. GBPJPY is up 632 pips and the Cable is down over 200. I'm going to try EURJPY and GBPCHF I think. But I'm happy right now!
+
+--- 帖子 #8 ---
+What a great statement, Don. Thanks for sharing.
+
+--- 帖子 #9 ---
+How about a filter like ATR? Thanks.
+
+--- 帖子 #10 ---
+Hi traderone, i see in your file you use 50 pip SL for GBPJPY and you have no SL today. Its better then 40 ?, you allways take 50? Thanks Mobsie
+
+--- 帖子 #11 ---
+Yes, I always have a stop loss. Even today. I think you saw the GBPUSD which was closed at the closing hour rather than by a stop. I have been using 50 for the GBPJPY and 40 for the Cable.
+
+--- 帖子 #12 ---
+Hello, I would like to start testing the EA but what would be the broker time settings for the swiss broker MIG and the US broker IBFX, I am thinking of using 23.00 as the start time or is everyone using 00 hour. Thank you Trimble and Skyline for all your time and efforts
+
+--- 帖子 #13 ---
+Thanks Skyline for starting this thread. Just wanted to mention that the TP on this EA is a great way to make profit when the market wants to range instead of trend. Thanks also for all your hard work on this EA. yezbick
+
+--- 帖子 #14 ---
+Thanks Skyline for this thread. I like two things the Rhythm method has got. First you can overide the opening direction the trade will be put into if you feel the trend is going to change. Second you can make the trailing stop go for one time only which means it will put you into break even when your stoploss no of pips is reached and it has the magic number as one of the options. I am using the rhythm ea for these reasons but it has other problems too. I actually part trade manually and part ea. I use the ea to get into a trade and when I'm not there but have been know to switch to manual if I know I am going to sit at the computer. A foot i both camps I guess
+
+--- 帖子 #15 ---
+Thx for sharing your result Don I've very similar result where gbpjpy is performing really amazing with 200 pips reached a lot of times, later I will post my statement Skyline
+
+--- 帖子 #16 ---
+ChangeLog v1.0g [13 Mar 2007] + Fixed error that prevent the EA to reverse correctly the trade if first order hit SL + Fixed error that prevent to use SL = 0 (Thanks to Mlollar) Download Link http://www.divshare.com/download/225032-79c
+
+--- 帖子 #17 ---
+Thanks Skyline. I understand TK'S concerns but if I had to trade this system manually I would be divorced and out of a job!! I am new to auto trading using an EA and am really enjoying learning . I'm on demo for now.
+
+--- 帖子 #18 ---
+Skyline - don't worry about your English. You're speaking pips! And great credit goes to TKimble too.
+
+--- 帖子 #19 ---
+those that like to use the EA. I am still waiting to use it much as I was having minor problems with it, but will use it once everyone is doing well with it. Thanks, Skyline! All your efforts are appreciated! IMO
+
+--- 帖子 #20 ---
+Thx Max What kind of problem are you experience with this EA ? Skyline
+
+--- 帖子 #21 ---
+Hey skyline, could you post the changed lines of code for g? The reason I ask is I have made a version from F that is entirely based on ATR percentages and i dont want to redo the whole thing or try and find your changes amongst everything. Post the code, I will change mine, then post an ATR Version to play with.
+
+--- 帖子 #22 ---
+Also have you thought about a BE and trail. I have this in my version but BE becomes the SAR, and it seems to work out fine, but it counts as a loss trade, and the trail is also a SAR and it doesnt work well and kills the account. I cant figure out how to do this the way it is coded. When the trail is hit it counts as the SAR and a loss and it should just be a profit. Somehow I think it would be possible with get history, but I cant figure it out. Bah, couldnt wait, here is what I have seen, tell me if I missed anything.... PHP Code static bool FirstOrderDone = false ; // Indica se il primo ordine alle 00 GMT è stato effettuato Added PHP Code FirstOrderDone = false ; Changed this PHP Code Minute ()&lt;= 1 &amp;&amp; DayOfWeek ()&gt;= 1 &amp;&amp; DayOfWeek ()&lt;= 5 ) to this PHP Code DayOfWeek ()&gt;= 1 &amp;&amp; DayOfWeek ()&lt;= 5 ) { Added these to Controlla sl for buy and sell else FirstOrderDone = true; And 2 more else after that.
+
+--- 帖子 #23 ---
+Thank Skyline for the EA! Working well. Skyline, do you think you can add features to allow for additional profit taking at different levels? for eg. if the lot allowed in trade is 0.3 lots, allow for 0.1 lot to profit take at say 50 pips, the second level at 100 and the final level at 200. The same will apply for auto trade reversal. Hope to hear from you soon! Thanks Wee Wee
+
+--- 帖子 #24 ---
+Yes CEO basically I added variable FirstOrderDone to control flow through first order opened at 00 GMT. Anyway I will introduce the ATR in next release.
+
+--- 帖子 #25 ---
+Hi Wee Wee I will think about your suggestion cya, Skyline
+
+--- 帖子 #26 ---
+Is the EA a plugin that can work on any Trading Platform ? I currently have an IG Index account, but have yet tried the EA. Thanks in advance.
+
+--- 帖子 #27 ---
+Skyline,We look forward toward your new EA of TK's new Open-Close methods, as you've stated.Thank you so much for sharing your work with us.Cheers,Andy L
+
+--- 帖子 #28 ---
+EA's will only work with MT4 ( metaquotes software programme) based platforms such as IBFX and FXDD in the US..
+
+--- 帖子 #29 ---
+Skyline, PM me your e mail. Ill send you the ATR version, might save ya some work.
+
+--- 帖子 #30 ---
+ok I'll pm you thx Skyline
+
+--- 帖子 #31 ---
+Hi, I am trying this EA first time... Last night It entered the first trade on GBP/CHF...short 2.3492...today it hit SL at 2.3532... I wonder why it didn't enter the reversal order... Maybe I got some setting wrong...I set the EA according to post #1 Maxlossestradeperday = 3 Am I doing something wrong? Appreciate any help... Regards
+
+--- 帖子 #32 ---
+Do you have 'Use Money Management' set to 'true'...?
+
+--- 帖子 #33 ---
+Hi Toti, it's difficult to analyze what happened to your plaftorm. May be if you will post your expert and journal tab , it's more easy to see if there was some errors. thx Skyline
+
+--- 帖子 #34 ---
+Hi, last night was even worse, it opened the 1st one, then the order hit SL and suddenly opened 3 orders at once, two reverse orders and one same as original...here my settings GMT_shift: 00 Take profit: 100 Stoploss: 40 HourstocloseOrder: 23 SundayCandleExist: true Lots: 0.3 UseMoneyManagment: false Risk: 1 slippage: 3 MaxLossesPerTradeDay: 3 I'm looking at daily chart even though EA says timeframe to be used: 1 hr (I don't know if could affect the performance) Thank you Regards
+
+--- 帖子 #35 ---
+Oh my God ! Toti why do you think I wrote timeframe to be used is H1 ? Just for fun ? :surprised
+
+--- 帖子 #36 ---
+So, I understand I have to attached the EA to 1H TF and if I want to take a look a different TF I need to open a new chart...right? Thanks
+
+--- 帖子 #37 ---
+Yeah ! You got it
+
+--- 帖子 #38 ---
+This has been a rough week so far for me and this system. Maybe tomorrow will be good and then I can end the week with some positive pips.
+
+--- 帖子 #39 ---
+Why is timeframe 1 hour. I thought this was a daily EA. Plus, looking at the code, it uses the daily timeframe. Maybe I missed something. Also, I've only been running the EA for a few days. What has been the experience so far? Profitable? Mike
+
+--- 帖子 #40 ---
+Very tough week compared to previous weeks - I was wondering how the tk daily system would cope with choppy markets and have now found out! That is not to fault the EA which is working flawlessly but more the system which needs some sort of filter to avoid multiple stops...perhaps the next EA should focus on a trending system...even so today is the only day this week which would have resulted in a real loss IF every trade had been taken as per original tk guidlines -all the other days have -eventually- produced a decent amount of pips...
+
+--- 帖子 #41 ---
+Skyline, I wanted to say thanks for considering ATR and also for your efforts here. I'm really curious if this will improve the performance. I've been trying ATR on G/J and looks nice. We could drop the daily trades to 2 or 3 with this filter with some safety. I'll be waiting to test. Thanks again.
+
+--- 帖子 #42 ---
+I was also thinking a percentage of ATR for SL and TP rather than a fixed number of pips each day because daily ranges change. 40 pips may be good today, but when the range increases, you will probably get stoped out alot at 40. Mike
+
+--- 帖子 #43 ---
+I tell ya what. I sent the ATR version of G to skyline for his review, but I havent had any problems YET. So I will post ATR-V-G for you to play with until Skyline posts his. It uses the daily ATR value from the previous day. The period is settable as is the precentage of the ATR for SL/TP/BE. My suggestion would be to optomize the set amount version and compare results with the ATR version. I do like the ATR but what I dont like is I just dont know how much I am risking per day. If I have a 40 SL i know I can limit to 2-3 trades and know a worst case, but with ATR you just dont. The trailing stop is a SAR stop, and will usually kill the account so I would just leave it alone.
+
+--- 帖子 #44 ---
+I loaded 3g today for the first time. Looks like if the trade hits stop loss, it doesn't reverse the direction of the trade. (e.g. if long, hit stop loss, go short). Version 3f did it fine. Also, I have it running on 9 pairs and it's closing blocks of trades at a time. Anyone else see that? Maybe I'll go back to 3f and see if it has that problem. Mike
+
+--- 帖子 #45 ---
+Why not use a % of ATR as the stop also? So for SL you could use 25% and TP use 75%. Using SAR kind of gets away from the original intent of the strategy doesn't it? Mike
+
+--- 帖子 #46 ---
+I'm having trouble getting the EA to work across a number of currency pairs. I attach it to the H1 of the first pair and start it running (ie get a smiley). I then select a second pair and do the same. When I look back to the original pair, the EA appears to be deselected (ie smiley gone replaced by 'x'). Is there a guide to setting this up?
+
+--- 帖子 #47 ---
+extern double ATR_Period = 6; extern double StopLoss_ATR = 0.7; extern double TakeProfit_ATR = 0.7; extern double BreakEvenAfterPips_ATR = 0.7; Uhhhhh, it is .7 is 70% of the ATR period, the period is how many days to look back, just like the ATR indicator. The whole strategy is based on a stop and reverse so I have no idea what you are talking about unless you mean the trail. If thats it, I just put it in there to try, but it doesnt work well. Also here is ver F just in case G has the same problems as mentioned above.
+
+--- 帖子 #48 ---
+Yeah, I was refering to the trailing stop being SAR. I didn't realize it was for the trailing until I reread after my post. I understand how you are using ATR. As far as SAR not part of the strategy, I was referring to the original intent of the stop being less than the TP, and SAR doesn't do that for you. Thanks, Mike
+
+--- 帖子 #49 ---
+Make sure you have "Allow Live Trading" checked in the EA properties and "Expert Advisors" button is green on the toolbar. Otherwise, it works for me. Mike
+
+--- 帖子 #50 ---
+In OrdersLossInDay() line 114 needs to look like this: if (OrderSymbol()==Symbol() &amp;&amp; OrderMagicNumber()==MagicNumber) This way it counts the number of losses per symbol. Otherwise it is counting the number of losses in a day no matter how many pairs you put it on. Mike.
+
+--- 帖子 #51 ---
+No Mike, since the MagicNumber is calculate in unique way for each symbol (and timeframe). As an example let's consider two pairs EURUSD,H1 and GBPUSD,H1 then EA will generate different two MagicNumber let's say 10000 and 20000 so it's enough to have the statement if OrderMagicNumber()==MagicNumber to let EA count its own orders. Let me know if it's clear my explanation Cya, Skyline
+
+--- 帖子 #52 ---
+Hello, I would like to forward test this EA next week but always confused on what to put with this setting, please help. GMT_Shift = Your broker shift related to GMT time zone (if it's GMT+3 then put 3 , if GMT-1 then put -1) How do I know what time my broker is at? I'm in Toronto, Canada which is usually -5GMT, does that really matter? Do I just go to the Brokers website and check their time then check my time and put in the EA whatever +/- hours I need to match my TZ? or is that I put my brokers +/- time according to GMT? Where can I check the GMT time anyway? I don't see SBFX time is on their site. Thanks
+
+--- 帖子 #53 ---
+In the Market Watch window on the left side of the platform, there is a clock ticking. That's the time that your broker is using on the charts. For instance, I'm using InterBank and their time is 0 GMT. So, I leave the setting at 0.
+
+--- 帖子 #54 ---
+Ok, so with SBFX right now their time is 19:18 but GMT right now is 16:18 so I put -3 in the EA? Thanks
+
+--- 帖子 #55 ---
+Hi Matrixebiz, it's simple, just look in mt platform of your broker the market watch hour and calculate how much is the shift from gmt using this site http://www.timeanddate.com http://img147.imageshack.us/img147/5...kerhourfs6.jpg Skyline
+
+--- 帖子 #56 ---
+I don't know if I am right in this, but what I understand as per Daily Method rules, I want the EA to open the 1st trade at first day candle. No matter what the GMT zone it is...So check what (in your local time) your broker opens first candle (mine is 7 PM for instance...I am with MIG, they are swiss and for their 0000 local time represents 7PM for me) so their 1st candle opens 7 PM then I trigger my order at that time (if manual) so I want the EA to do the same..Then in GMT_Shift, I set 0.0 If I am wrong please somebody correct me...but this way is as I am trading this method manually Hope this helps... Regards
+
+--- 帖子 #57 ---
+It looks to me like your broker is 3 hours ahead of GMT, so I would probably put 3 for the shift. Someone correct me if this is not right.
+
+--- 帖子 #58 ---
+Yes it's correct.
+
+--- 帖子 #59 ---
+The original Tkimble's rule states that order must be opened at 00 GMT , this is why I introduced the GMT_Shift, to let EA to open trade accordingly to that rule. Skyline
+
+--- 帖子 #61 ---
+OK, so what I'm telling the EA is what time my broker is using. So in my previous example, my broker is 3 hours ahead of GMT so I was wrong in telling the EA that GMT is -3 but instead I need to tell the EA my broker is 3 hours ahead. Putting a value of 3 and not -3 Ok, thanks
+
+--- 帖子 #62 ---
+Yes, that's correct.
+
+--- 帖子 #63 ---
+You are right if we look at ORIGINAL rules, but as the thread evolve...there were some arguments about that topic... some keep trading original rules and others (like me) took "first daily candle" way...for That reason I said That is my way of trade the method, it is just a different approach..but I think most of the manual traders of this method are using first daily candle... although everybody can take it or leave it... Just an additional idea... Regards
+
+--- 帖子 #64 ---
+Hmm. I'll have to look at my results closer. I was sure the first time I ran it a few days ago that it didn't take any new trades on other pairs once I had 2 losses on all pairs. It also looks like the MN is unique for each order, not for each symbol. So how can you count losses per symbol if you don't include it in the "if" statement? Do me a favor and double check your history? Mine is pretty messed up since I'm running multi-ea's. Thanks, Mike
+
+--- 帖子 #65 ---
+I can certainly get in working on one currency profile, with the live trading allowed and the toolbar EA button on green. However when I switch to view another currency, the EA status shows 'experts are disabled because profile has been changed'. What I'm trying to do is run the EA on several currencies on one instance of Meta Trader. I assume this is possible?
+
+--- 帖子 #66 ---
+What I do is bring up each currency chart that you want to use the EA on. Then attach the EA to one of the currencies and set it up with the settings you want and go on to the next currency and repeat. If you want to see all the charts in one window, you can go to Window on the first line of the tool bar and select how you would like to view them. If you want to view a different Time Frame than the one you are running a currency on, you must bring it in an additional chart. Otherwise, if you switch TFs while the EA is attached, it will shut off the EA on the chart. I hope this helps you and answers your question.
+
+--- 帖子 #67 ---
+Maybe there was other problems with your platform after those 2 orders was closed with sl hit. I'm testing all Daily Scalping EA version with two pairs GBPJPY and GBPUSD and they was handled correctly as far as I can remember. The MagicNumber is unique for each symbol and timeframe (chart) not for each orders within the same chart. I will try to explain with an example : Imagine to put EA on GBPJPY,H1 , so all orders generated by EA will be marked with MagicNumber = 25725. Imagine to put the EA on GBPUSD,H1 so all orders generated by EA will be marked with MagicNumber = 25833. Now your situation could be this : OrderSend(GBPJPY,OP_BUY,.......,25725) &lt;- 1st order opened on GBPJPY then closed with SL OrderSend(GBPJPY,OP_BUY,.......,25725) &lt;- 2st order opened on GBPJPY then closed with SL Note : this two orders are marked with the same MagicNumber 25725 that is unique. OrderSend(GBPUSD,OP_BUY,.......,25833) &lt;- 1st order opened on GBPUSD OrderSend(GBPUSD,OP_BUY,.......,25833) &lt;- 2st order opened on GBPUSD Note : this two orders are marked with the same MagicNumber 25833 that is different from 25725 generated for two orders on GBPJPY. So it's enough to check for MagicNumber to be able to count orders for each chart thus for each different symbol. Finally this is a screenshot taken from my history demo account when on past 14 March there was such a situation with 4 losses over two pairs (GBPUSD and GBPJPY) , as you can see EA handled correctly the orders. http://img174.imageshack.us/img174/7...atementsu6.jpg cya, Skyline
+
+--- 帖子 #68 ---
+@skyline - just wondering if you'll release version h today with C.E.O's ATR mods and whatnot? Thanks
+
+--- 帖子 #69 ---
+No i'm sorry I think someday in next week or later I could release new version since I had an error on v1.0g about stoploss and I'm still investigating about it. Skyline
+
+--- 帖子 #70 ---
+Oh, ok, so what version do you recommend for testing? Can you post it here since all I have is g. Thanks
+
+--- 帖子 #71 ---
+Skyline, You are right again. I must have mistook 2 trades from 2 different EAs. By the way, when you fixed a bug with the way it reverses trades, I don't think it works right. It seems like it hits a SL, it still trades in the same direction rather than reversing. If I understand the rules correctly it should reverse. See my jpg below. Eur/Cad did 3 sells in a row from midnight. Mike
+
+--- 帖子 #72 ---
+Is it just me or is anyone else not seeing orders close at HourToCloseOrders time. I am running MT 4 build 202. Code checks for if ( Hour()==MathMod(Ora+GMT_Shift,24) ) then close all orders for symbol. But orders aren't closing. I changed it to: if ( Hour()==Ora+GMT_Shift ) But that didn't work either. Any ideas or anyone else having problems with orders closing at the hour you set? Thanks, Mike
+
+--- 帖子 #73 ---
+It's strange Mike :| Are you using H1 timeframe ? My orders are always closed correctly but i'm experience another error about opening orders on GBPUSD at midnight. I wish I could have the time to investigate about it but actually i'm a little bit busy I will let you know when I'll find something and fix it
+
+--- 帖子 #74 ---
+I have it on the daily chart. I've looked at the code. Nothing uses the hourly timeframe that I can tell. Why would that make a difference? Mike
+
+--- 帖子 #75 ---
+Yes you're right Mike, that's was true in my very first version completely different that checked on candle H1, now it could be used also in Daily...maybe I have to remove that from comment sorry Maybe what happened to your platform is that it losed the connection from 17 to 18 (if you set the close order time at 17) and then probably the connection turned on after 18, so that the orders wasn't closed. Infact the EA checks only when Hour equal 17 so it will close orders in the interval that goes from 17:00 to 17:59. This obviously isn't correct since it should be Hour &gt;= 17 in order to avoid that possible scenario. I will fix this little bug to handle this case in next version. cya, Skyline
+
+--- 帖子 #76 ---
+Im getting invalid stops on gbpusd at 0 hour. Is that what your getting Skyline? Daily Scalping EA v1.0fATR GBPUSD,H1: ERROR ON BUY ORDER (130) : invalid stops I have no idea why this is happening. im on FBFX like you. Anyone else getting this on other brokers on this pair? Other than that GREAT DAY!! Pipalicious.
+
+--- 帖子 #77 ---
+Yes I'm experience the same error since some day , and only on gbpusd on sell side , very strange, I'll inform you here if I find a solution for this Have a pipastic day Skyline
+
+--- 帖子 #78 ---
+i have started testing version 1.0g on gbp/$, gbp/chf, gbp/yen. it is not reversing the trade after the first loss. this occured wth gbp/$ with today's trading. it opened a sell trade, closed at a loss, but then did not initiate a buy. admin: why can't i attach an htm file to show? edit: i think i figured it out. i recompiled the ea when trades were opened and it reset the variables.
+
+--- 帖子 #79 ---
+Yes exactly BluePearl, this is an action that cannot be done never when an EA is active. EA has to be put on chart , set the parameters then leave it as is without any manual intervention. Anyway in new version in developing, I'm changing the way EA handles the local variables so that even if you'll recompile it reload the values correctly. cya, Skyline
+
+--- 帖子 #80 ---
+with the EA? For example I tried to use the EA for the first time again today and wanted to do a sell on EUR/JPY ..... but the EA was determined to do a buy at 9:00 am ... so now I am long ... knowing it was going to go lower. Again ... how can I determine the direction the EA takes on the first order? I don't want to have candles determine this .... I want to decide direction, not the EA ... Thanks anyone? Again how could I have gone short when the EA was determined to go long? I gave up on using an EA for the Daily, but thought I would try it again, and I find it wants to go in the oposite direction most of the times. I use the 4hr chart ... but I have tried 1hr and its all buy also. Yes I am long .......on EUR/JPY..... thanks to the EA's ......bullheadedness .... to go LONG ...........I could already have netted 100.00 would it have let me go short. I really wish there was a setting to overide the longterm trend for the first trade each day! LOL I also noticed the EA disapears from the Chart after it takes the order .... so it is imposible to change anything. Is this normal for it to exit the chart. I can't change things like [asking manual permission] to fully automated trading after trade has been placed. I do not remember other EA's do this. Thanks anyone!
+
+--- 帖子 #81 ---
+Max this is the EA for Daily Scalping so it follow the basic rule of that method. To do what you want you need to code another EA or simply trade manually Anyway I don't know why do you want to change the rules about the candle, it seems to works really really good. On my superminimicro live account Starting from 12$ it reached 69$ using 0.01 fixed lot on GBPJPY , the account was 6 time more without using any moneymanagement !! (try to think if that was 10000$ with MM enable and 5% risk per trade ) !! Skyline
+
+--- 帖子 #82 ---
+Skyline I agree with you that the EA works very well as is. Its just sometimes that it would be nice if you could control the first trade....thats all. This morning all my indicators were saying lower and it was just frustrating that I did not have this control with the EA. The EA is now short after the first reverse. It is ok if you do not want to code this as an option ... I don't want to change what is very profitable. I just realize now that if I use the EA I have no control over direction it will take. That's fine then .... No problem. I don't want you to change this just for me. Thanks for the explanation. IMO
+
+--- 帖子 #83 ---
+again ........... for all the time and effort you have put into this to help many traders! I commend you for all that you have done for all of us! Very nice of you by the way! CEO also thanks for your contributions with this EA! My Gratitude goes out to all of you! .... IMO
+
+--- 帖子 #84 ---
+Skyline. I'm still using your 1.0f on several accounts. Mostly on GBPJPY and GBPCHF. I think it works like a champ. Thanks (Can't decide if its better with max trades = 2 or maxtrades = 3). Decisions decisions.
+
+--- 帖子 #85 ---
+I guess, when your indicators is against the EA decision about first trade, that your only option is to turn off the EA and trade manually, it's more safe for you
+
+--- 帖子 #86 ---
+Oh you're welcome Max , it's a pleasure to be helpful to other traders here
+
+--- 帖子 #87 ---
+Glad to hear good news from you TraderOne Yes I think that v1.0f is more stable anyway it could suffer on possible problem, maybe you was lucky that never happened to your account Hope that next v1.0h will solve all problems and become the very stable release happy pips
+
+--- 帖子 #88 ---
+ChangeLog v1.0h [20 Mar 2007] + Fixed error on SL and added comment in case of error opening order to better debug EA. + Add global variables MidnightOrderOpened, TradeStatus to avoid losing variable values if recompile after EA is on chart. + Add TrailingStop routine, if =0 Trailing is disable otherwise it will trail using TrailingStop pips. Download Link http://www.divshare.com/download/257426-c0b Edit : please download again v1.0h1 since there was an error on v1.0h that prevent EA from working correctly with multiple pairs.
+
+--- 帖子 #89 ---
+Hey skyline, Im at work and cant test. Is the trail a standard trail or does it SAR when hit? Hoping its standard.
+
+--- 帖子 #90 ---
+The routine is a standard trailing but I didn't check if it stop and reverse, we have to check this but now I'm going to sleep cya, Skyline
+
+--- 帖子 #91 ---
+Skyline, What does this mean... midnight order not assigned and next trade none? I have the EA enabled and switched the GMT to 0.0 (is this correct format). What is the purpose of the other file (ex4) in the zip folder? Does it need to be attached to the daily chart with the EA? Thanks, Daryl
+
+--- 帖子 #92 ---
+Will this lastest version perform the reverse if the position is stopped out? I had a problem also with the last version that the order would not execute.
+
+--- 帖子 #93 ---
+Traderone, would you mind sharing your EA-settings for GPB/JPY? Thanks
+
+--- 帖子 #94 ---
+HI, can someone tell me how to add the EA to metatrader do you save it in experts then indicators file and once installed how do you operate it all help will be much apreciated thanks
+
+--- 帖子 #95 ---
+EA's should be saved into the experts file. Check allow live trading when loaded onto a chart to trade live. STRONGLY suggest demo trading for a month to appreciate how it all works. Best results appear to be 'managed EA' -ie move up stops after a 100 pip gain to protect postion, don't get too greedy - no harm in not trading after a few days nice gains. We are experiencing a very nice trending market at the monent -EA's will wipe out acounts very quickly if this stops if allowed to trade infinitem... GBP/JPY and GBP/CHF best pairs to trade at the moment.. ..just my 2 cents...
+
+--- 帖子 #96 ---
+Thanks PeterSurrey first time i've used an expert advisor in metatrader and thanks for the info I will demo trade first to get a feel for it Thanks again
+
+--- 帖子 #97 ---
+Hi Daryl, that's are only some comment for debug purpouse that help me to find better error, so don't take care about it too much
+
+--- 帖子 #98 ---
+Yes it should stop and reverse correctly. Anyway I want to stress again that after user put the EA over the chart enabling it and setting the parameters , it's mandatory to do not change anything in the metatrader (swithing the timeframe, recompile the EA and so on...). This will avoid a lot of problem in the normal work of EA (this is valid for all EA that you are using) cya, Skyline
+
+--- 帖子 #99 ---
+EA needs to be used with 1 hour charts not daily as in your chart..
+
+--- 帖子 #100 ---
+Skyline, The EA entered a trade at 230.01 and closed the position at 230.86 (GBP/JPY) with the take profit set to 200. Any idea why this would happen? Thanks..
+
+--- 帖子 #101 ---
+Silly me. Probably because the time was set to 17:00.
+
+--- 帖子 #102 ---
+No that's mandatory if you want to backtest the EA , but in live test it's not needed anymore
+
+--- 帖子 #103 ---
+I have been trying the Rhythm EA for a while with mixed results so I thought I would give the Daily Scalping another try. I looked for the latest version on this thread and downloaded it and dropped it on GBPJPY. I expected it to open a trade at the new candle and I had to go out for a couple of hours so I left it to open a trade on its own. Understatement, it has opened and closed hundreds, reduced my account from $4k to about $90. Don’t know what I did wrong but boy am I glad it was only a demo account. Be careful everyone, big lesson to learn, test on a demo before you go live on your account. Andy
+
+--- 帖子 #104 ---
+I believe version G has a glitch. Try version F............it is working fine for me. Tim
+
+--- 帖子 #105 ---
+Same thing happened to me today. It kept opening &amp; closing (same direction) and wiped out my demo as well. It only did this on one of the 4 currencies I was trading. :surprised Any ideas Skyline?
+
+--- 帖子 #106 ---
+This is exactly what Rhythm did to my account. Never worked right. I am hoping this EA will be profitable. I would also never trade live with an EA unless I have enough proof that it does work in forward testing. I think skyline is trying hard to get us a good one going here. IMO
+
+--- 帖子 #107 ---
+To all traders that are experience issue with previous version, please try in demo account latest v1.0h1 and report back if it's working fine. Reminder : after EA is active on your chart do not touch anything in Metatrader otherwise could create problem with EA !!
+
+--- 帖子 #108 ---
+Hi Skyline, It was your latest version as above, downloaded it yesterday. I left it on a daily chart and then went out. Nobody else touched my PC, guaranteed. Wierd huh! Andy
+
+--- 帖子 #109 ---
+I am live with version h as of yesterday. It appears to be running fine. The only hitch that I saw was that it opened today in a sell order instead of a buy. To protect my account I have not been using the MM feature and am only using 1% of my account balance entered manually. The EA reversed itself and is now running in the proper direction. yezbick
+
+--- 帖子 #110 ---
+Hi, I am demoing version "g" and it is working fine to me...I started this week though, so just tried 4 days...Is there anything I should be aware of? Can anybody tell me what this version is doing wrong? I have no problem to switch to version "h" but I don't know if I should since I haven't had any trouble so far... Any help? Thanks
+
+--- 帖子 #111 ---
+which pair are you trading ?
+
+--- 帖子 #112 ---
+Don't use v1.0g it was really unstable with many bugs
+
+--- 帖子 #113 ---
+I have been trading GBPJPY
+
+--- 帖子 #114 ---
+I have been using Rythmn v2 for several weeks now and it appears to be running fine. I have been using it for the basic daily strategy without the TP and have been using the daily scalping for the TP strategy. I like the way the daily scalping runs for the TP strategy. Skyline has done a great job in putting it together. thanks Skyline for all your hard work. yezbick
+
+--- 帖子 #115 ---
+I have several demos of Skyline's Daily Scalping and several of Rhythm. For some reason I have a version of Rhythm that has not placed a trade since Monday. There's plenty of funds in the account, and I have smiley faces in the right hand corner. It's a mystery. Maybe if I disable it and enable it it will work again. Guess I should try that.
+
+--- 帖子 #116 ---
+Me too and sell was the right opening order today since the previous 3 days was all buy
+
+--- 帖子 #117 ---
+Wow then you built it well. Runs according to the original tKimble daily system. Thanks again Skyline.
+
+--- 帖子 #118 ---
+you're welcome yezbick
+
+--- 帖子 #119 ---
+and will switch to the latest to see how it works. I am not kidding or fibbing .... today og opened two orders instead of one ..... LOL .... It bothered me enough to remove the EA and sold for a profit manually on GBP/JPY. Skyline thanks .... I will try the latest version. I have faith that this EA will work very well once all the kinks are worked out. I sure hope so as think is the one of the only EA's that can out-manouver the SHARKS! And they are dertermined to glean from every trader until they are flat broke! Thats why the Daily and Weekly systems shine. And tk, is the Master of winning, and knows just how to play ball with the Sharks and come out on top! IMO
+
+--- 帖子 #120 ---
+Hi Skyline, great to see you're having fun creating another pipMachine : ) In the above post i'm unsure of what parameter you are indicating when you state "it will trail using TrailingStop pips" In the code of the latest v1.0h are the following to tweak: extern double GMT_Shift = 3; extern int TakeProfit = 200; extern int StopLoss = 40; extern int HourToCloseOrders = 17; extern bool SundayCandleExists = false; extern double Lots = 0.1; extern bool UseMoneyManagement = true; extern int Risk = 2; extern int Slippage = 3; extern int MaxLossesTradesPerDay = 2; extern int TrailingStop = 0; So i see where TrailingStop is but where is the "Pips" to set on the TS or is it the "StopLoss" that is doing double duty? THX, : ) Thom
+
+--- 帖子 #121 ---
+Thx Max for your kind words Hope that this EA will help us to better apply the very good method introduced by Tkimble that I will never stop to thank Honestly when I start to code it I thought that it was a simple EA to code but as you see it was more difficult maybe because I'm not a master yet with mql language, anyway it was an interesting challenge for me Skyline
+
+--- 帖子 #122 ---
+Hi Thom nice to see you again here , your comment are always appreciated Maybe due to my limited english I wrote wrong about TrailingStop. I only want to say that the TrailingStop routine is enabled only if value is more than 0 and pips to set on is the TrailingStop variable. So if TrailingStop = 0 then EA don't trail otherwise if it's X (where X is number of trailing pips) it will trail using X pips. Examples : 1) you want to trail for 50 pips then set TrailingStop = 50 2) you don't want to trail at all then set TrailingStop = 0 Hope this time I explained clear otherwise I can only write again in italian eheheh cya, Skyline
+
+--- 帖子 #123 ---
+Thank you Sky!! PERFECT English on your explanaition. Now onto the practical useage of the TrailStop. At some point in this thread (yes i enjoyed reading every post this morning) there were concerns that the TS was either not working properly in the code (though i believe a prior post of yours stated this "bug" had been addressed?), or, the idea of using a TS in this particular model might not be the best money management? Are people using the TS feature of the "H" version, and if so what have you found is working on the GbpUsd, and the GbpJpy pairs? In my manual trading i typicaly would utilize a 55 pip stop loss and about a 35 or 40 pip TS on the Gbp/Usd. As for the G/J ? It is to new to me to know what might be optimal but it sure does, or can range at times in a day. Thanks again for the excellent reply Skyline. : ) Thom
+
+--- 帖子 #124 ---
+you said; .... the very good method introduced by Tkimble that I will never stop to thank ..... I agree .... this is one smart trader! I would prefer to be able to use the EA with this Method though if we can. His MM is where it's at, and I hope one day I also can apply this correctly. It is just too much to take in at times. Again thanks!
+
+--- 帖子 #125 ---
+eheh Thx Thom With v1.0h was introduced for the first time the trailing stop function, personally I don't use it in this EA so I don't test so much to say what's the best trailingstop setting. The question that someone asked , if it's working version H was about if the EA still reverse the position when the S/L is hit , but as I said since I don't use and I didn't backtest the trailing stop feature , I don't know the answer :| Happy pips Skyline
+
+--- 帖子 #126 ---
+LOL, i was going to ask why a new trade has not been initiated yet...then i realized that due to my borker's 5pm New York Daily Candle close that i've still got three more hours to go!!! Silly me. I'm reading through the original thread by TK so i'll not rock the boat and just let the EA do it's thing taking the Daily Candle to close at GMT in stead of looking at the NYmarket's close. But might as well ask the question here...has anyone tested the NYclose as daily candle ? I mean if the brokers look at NY close as the rollover/swap time, why not the daily candle then? Was GMT 0 taken maybe because that was the broker's server time that TK was working with in manual trading? Personaly i find as much relevace for the NY close with respect to the importance that brokers/bankers place on that time of day with the rollover/swap taking place then. Just a ramble that is most likely off topic for strict EA use/testing. : ) Thom
+
+--- 帖子 #127 ---
+Skyline, I really like your contributions to TKs system. You EA is great. I wanted to ask if there is any way to carryover a winning trade to the next day. I tried to back test: Hourtoclosetrade=72 (3 days) and it didn't work. Taking it one step further, it would be cool to adjust the SL to the new dayopen -40 pips. I could do this manually pretty easily if it didn't mess up the running EA. I might try to forward test but I wanted to ask you if it is doable or if you have any suggestions. Thanks!
+
+--- 帖子 #128 ---
+thx Al_Have1 Yes it should be possible to carry over the next day the trade but there's the need to change a little bit the code to adapt to this. Maybe in some next version
+
+--- 帖子 #129 ---
+OK, i understand that if there are three consecutive "Bulls" as in the example below on the Gbp/Jpy daily chart (lower chart - hourly is above) that if this ea had been running for Wednesday's open it would have first opened a sell due to the prior three Bull days, today it happily entered a reverse order and is up 43 pips as i post... http://accrete.com/fx-posts/demopix/...3SkyDSea01.gif so what the EA is doing is counting backward from the current open? So if a newbie were no open this up in a strong bull run, say two weeks of bull dailies, the first trade of the new day will always be a reversal? No problem with that, just trying to understand the logic. . . . And then is there ever a statistical average that says if it goes XX days in one direction count on it continuing? Maybe that's to much math (and i'm in no way inferring it should even be calculated!! Just working the ol' gray matter for the fun of it.) : ) Thom
+
+--- 帖子 #130 ---
+yes exactly Thom, the original Tkimble's method tell that if previous 3 candle are in the same direction then most probably (as Tkimble said) the next one will be a reversal. But if previous 3 candle aren't in the same direction then the next candle will follow only the previous candle trend. The strong point of this method is that is not based on any indicator, it's pure price action, and eventually if the opening direction is wrong then it will reverse trying to follow the correct trend direction. Obviously this isn't a 100% winning method since in strong range market , it could occurs a lot of S/L due to continuosly stop and reverse. This is why I'm usually set in the EA MaxLossesTradesPerDay = 2 and SL=40 so that if EA will hit 2 times the SL the day for me is ranging so it's not worth to continue to trade. In this way I accept a maximun of 80 pips loss for each pair and each day and set my position size accordingly. cya, Skyline
+
+--- 帖子 #131 ---
+So if you have 3 up days in a row, it will not take a long trade on the fourth day. What happens on the fifth day, does it go back to what hits first long or short? If your in a strong run and it takes the trade against the run for a loss will the next trade go ahead and reverse in the direction of the trend? Is there any way that you could make this 3 candle reverse a choice or settable to more days? My bad for all the questions, this is a neat ea. thanks for your work not only on it but to make it understandable to us.
+
+--- 帖子 #132 ---
+Hi droesparky I try to answer below..
+
+--- 帖子 #133 ---
+Here are my results so far with my settings with TF H!, should I be using M5?. Any recommendations on my settings? Mind you I like to test all currencies to see which ones profit most week by week. and I switched to h1 version middle week when it came out GMT_Shift=3.00000000 TakeProfit=24 StopLoss=50 HourToCloseOrders=17 SundayCandleExists=1 Lots=0.01000000 UseMoneyManagement=0 Risk=1 Slippage=3 MaxLossesTradesPerDay=4 TrailingStop=16
+
+--- 帖子 #134 ---
+It's the same using M5 or H1 or D1 as timeframe since the method is based purely on the price that's equal on all timeframe Anyway my settings are slightly different on gbpjpy and EA is performing very well since 20 Feb 2007 : TakeProfit=200 StopLoss=40 HourToCloseOrders=17 SundayCandleExists=1 Lots=0.01 UseMoneyManagement=0 Risk=1 Slippage=3 MaxLossesTradesPerDay=2 TrailingStop=0
+
+--- 帖子 #135 ---
+Skyline, I recently posted that this happened to me too. I found a possible explanation. I have the shift at +2 and hour to close at 23. My thought is it looped open &amp; close over &amp; over in the same direction. At the time, I was thinking that the hour to close didn't have the shift factored in. Hope this helps.
+
+--- 帖子 #136 ---
+Did you try again with latest v1.0h1 ?
+
+--- 帖子 #137 ---
+Sorry, I don't remember because I had to open a new demo act, but I am pretty sure it was h1. I will try to duplicate it. I will report back if I am successful.
+
+--- 帖子 #138 ---
+I've been using Skyline's EAs since he first posted them and I've had next to no problems with them. Only problems I'm having is finding correct settings. Did you have the max trades set 0 or a number? I also have the GMT shift to 0 since I'm using Interbank. Is that who you are using?
+
+--- 帖子 #139 ---
+I am using FXDD for the +2 shift. Max trades was at 0. I was using multiple pairs and G/Y is the one that wiped it out. I have since changed the exit to hour 21 (was at 23 I think) to account for the +2 shift. I thought hour to close meant "close after x hours" rather than "close at x:00 GMT". So, it probably was my settings. I also am using Alpari at 0 shift and have had no problems on that one.
+
+--- 帖子 #140 ---
+Ok, thanks for your reply.
+
+--- 帖子 #141 ---
+Skyline, Can you change the comments in the ordersend functions to have the EA name in it rather than just "BUY ORDER"/"SELL ORDER"? It helps when running multiple EAs on an account. Also, for the function to calculate lots, the following will work better for micro lots (0.01). You will need to create a new external variable: "extern bool AccountIsMicro = true;" double LotsOptimized() { if(mm==false) return(Lots); double lot=Lots; int decimalPlaces=1; if(AccountIsMicro==true) decimalPlaces=2; lot=NormalizeDouble(AccountFreeMargin()*TradeSizePercent/1000.0,decimalPlaces); if(lot&lt;0.1 &amp;&amp; AccountIsMicro==false) lot=0.1; if(lot&lt;0.01 &amp;&amp; AccountIsMicro==true) lot=0.01; if(lot&gt;99) lot=99; return(lot); } Thanks, Mike
+
+--- 帖子 #142 ---
+Hey Ai_Have1, Mine was the same, i bet that is the reason, well done. Skyline keep up the good work, your EA will be the best i'm sure. Andy
+
+--- 帖子 #143 ---
+I am happy with this. 1.0F since last Friday. Started at 6 GMT (shift 6 on IBFX) two max trades. SL 50, TP 140. shut down at 14. I am a happy camper.
+
+--- 帖子 #144 ---
+Traderone, Thanks for posting your statement and settings. Lookin' good! Carol
+
+--- 帖子 #145 ---
+Ok that's no problem Mike I will add it in next version
+
+--- 帖子 #146 ---
+Hi Don, your post took me back to some thoughts i had on what "Day" we might trade. What brought you to testing that particular "Day" / Session? Granted there is a lot of random noise during the Asian and at times a reversal around London Open. I realize this thought process throws more into the original than intended, for that i apologize, but there could be some benefit in this line of reasoning. On Market open this week i'm going to intentionaly test various TS settings to see if this will be a SAR even once TS is hit upon a possible retracement... Does anyone have any report on this fuction in a live trade situation? Also, I am wondering if it might be to have a companion thread that would ONLY list daily/weekly setting suggestions. By Daily/Weekly i'm thinking that we could have some data posted that was due to backtesting results or market "mood" etc that would help us optimize the EA's settings for that period of time as the market remains in a similar range/trend status for a given pair... Maybe if this suggestion is reasonable Skyline could begin the companion thread?? What ya think? Cheers, Thom PS, Skyline, thank you for your time and efforts! Also mlollar, great suggestion on the micro lots, there are probably many (like myself) using micro accounts for this.
+
+--- 帖子 #147 ---
+Here's the entire thread in a single document. I did this for the Daily Scalper thread too.... you can find it at the end of that thread. Cheers! PS) This is to help jumpstart newbies learning how to use the EA....
+
+--- 帖子 #148 ---
+I am jumping on the bandwagon late here but: I downloaded the EA and it wouldn't compile. I looked at the code, and the OrdersHistoryTotal() method is missing. Can anyone help me with this one? Thanks.
+
+--- 帖子 #149 ---
+i have the last version of EA but i cant active it on the expert adviser window dont start sommebody can help me
+
+--- 帖子 #150 ---
+I must be a bit thick since i cannot figure out what GMT Shift setting to use. Can someone confirm gmtshift to be set at 0 when using IBFX? Someone mentioned previously that is should be set to 0 but then I got info i should go with the time at the market watch window? The clock there says 20:00:04 in my Metatrader. What GMT shift does that translate to? Also, Im assuming Sunday Candle does not exist on IBFX?
+
+--- 帖子 #151 ---
+IBFX's server is set to GMT time. At the time of your post the market watch window would be showing the closing time in GMT from last week. IBFX has a Sunday candle all year long.
+
+--- 帖子 #152 ---
+Hi tdion, you have to update your metatrader platform to lastest one build 202 And many thanks for your pdf , I invite all newcomers in this thread to read it Skyline
+
+--- 帖子 #153 ---
+Skyline i start the EA on ibfx 3k gbpusd and gbpjpy i report it muchas gracias
+
+--- 帖子 #154 ---
+The trail is a SAR trail. It kills accounts, dont know why but every backtest done does. I dont believe there is any way to make this a standard trail with the EA programmed the way it is. It would have to place and delete pending orders for it to work, and not use the stoploss signal to reverse orders. Accrete, when TP is hit it SHOULDNT open a new order until the next day. I also have an ATR version that I sent to skyline and posted earlier in this thread but havent updated. I really cant think of a better way to come up with a daily/weekly setting other than a crystal ball. I have done countless backtests and the results are somewhere but a 40 SL for cable and 50 for guppy always come out as best. The atr version did backtest better, and in some cases much better. Ultimately I feel a BE, a trail that works as a normal trail, ability to use ATR, and ability to manually override direction should be the ultimate final goal for this EA. However as it stands I am up 1600 pips since 3/1/07 minus a few days due to errors. All with max 2 losses per day. More to follow...
+
+--- 帖子 #155 ---
+Thank you! It makes sense to me now.
+
+--- 帖子 #156 ---
+C.E.O What settings are you using with the Scalper EA to get these results? I have also given some thought to a BE move instead of a trailing SAR. In the little tessting I have done it appears to take you out of your direction to early though. I will admit my study in this area is not extensive though (only 3-4 weeks of testing). Thanks for your input. yezbick
+
+--- 帖子 #157 ---
+Can anyone post their backtesting results? Do you apply this method to all currency pairs? I am very interested in knowing how this pans out... the method seems a little simple to be an effective winning strategy. How did you determine that if 3 days in a row trade in one direction that it means that the next day is a reversal? Whats the correlation between successive trading days? Seems like each day would have its own independant probability of being up or down (a function of previous events??)... let me know. Thanks.
+
+--- 帖子 #158 ---
+And that would prove...? Why not forward test and post your results. For better or worse, you and we might actually learn something.
+
+--- 帖子 #159 ---
+To get the full info regarding the method i suggest you visit the daily scalping thread: http://www.forexfactory.com/showthread.php?t=13507 . As for backtesting goes I really don't trust those. I prefer live (or demo) testing to validate a method.
+
+--- 帖子 #160 ---
+I would also like to know what your settings are to arrive as fantastic results. Thanks, and good trading.
+
+--- 帖子 #161 ---
+Yes I've wrote already about this. Trailing stop is no good with this SAR method. Why? Because best days are those with nice big move in one direction. But even nice big move in one direction has temporally pullbacks. Trailing stop will cause, that you will enter in wrong direction at these pullbacks. Whole nice move will be wasted. If you want to use trailing stop, then you need to trade only one trade per day. What is OK, but that wouldn't be SAR method any more. That's why I wrote to Skyline week or two ago, that trailing stop is not needed in his EA.
+
+--- 帖子 #162 ---
+Many thanks to Skyline of course for the originator of this EA !!! C.E.O. Thank you for your informative reply. I'm in full agreement with your statement above. I have both the fATR version you posted and the "H" SkyNonATR version and they sure are different inside! Dosn't look like to easy a mod to add the ART to the H but i'm gonna doodle anyway. . . though if you have any intentions of doing the same??? Sure would be happy to forward test. On utilizing ATR as TP/SL i've been testing another ea that is calculating these levels utilizing the past 20/10/5/1 days ave. range which is also an interesting idea but waaaaay away from the original TK idea so i'll stop now. I've seen several trades go from +20 to 30 and crash through the entry only to be -40...the BE idea would be nice to save so that are bound and determined to reverse on us, only problem is we don't know what is a reversal and what is a retracement! Ah, to have that crystal ball or an H.G. Wells time machine. Oh, just remembered, the time machine only went backwards?? CEO are you currently using your ATR tweak and if so which version F, G or ??? OK My doodle...an hour after the original post time... YOU MUST NOT USE THIS IN A LIVE ACCOUNT&gt;&gt;&gt;&gt; DEMO ONLY !!!! I just did a quick cut and paste of what appeared to be the differences, hit "compile" and lo and behold no errors... Then i put it up on the four majors and it did indeed open 4 proper TK trades immedeately (i forgot my 1worldFX feed was at GMT + 3 so trades were entered straight away because that feed was already in a new day. ooopps) Anyway, the TP/SL areas look like the ATR data calculated things nicely so time will tell if it closes out the trades properly. Due to my quick cut/paste there could be some serrious issues with this so PLEASE do not use this in anything other than a demo!! here is the link to the ea, it is a combination of the "F" since that version by C.E.O. and others stated they were not having issues, and Sky's "H". http://accrete.com/fx-mirror/mt4-exp...v1.0hATR01.mq4 : ) Thom
+
+--- 帖子 #163 ---
+Skyline, if there will be next version, would you please add something like this for comment: extern string EAComment; string EA_Comment=""; { EA_Comment = EAComment + " Skyline"; } { Ticket=OrderSend(Symbol().......,EA_Comment,.........); } (this is what I'm adding for my use after your every version update) It is so nice, that you can add some small text, reminder, what settings you use when you are trading several different settings. To all: If there will be Text option in EA settings, you need to keep it short, max 16 characters or there may some problems happen.
+
+--- 帖子 #164 ---
+Settings huh. Well I cant give you a clear answer because I havent used the same settings or EA version for the whole month. As I optomized the pair for the ATR version I switched over to that. The original settings work well but I like to make things better . I am playing 6 pairs however looking if I can force some pips out of the ranging ones. For the month all JPY pairs are positive with guppy being the BIG winner with $13291 trading one lot. All USD crosses are negative with cable being the big looser at $2408 in the red. I will post my statement at the end, however I did get beat up today and am down some 300 pips, almost all loosers. Statistical probability. I dont want to get into the backtesting debate but if you know its limitations it can be a very valuable tool. Forget the 1-5m scalping EA's, you just cant backtest those but this method on a 1hr chart is perfect for testing. Good job Accrete. Im using F, I didnt look at yours yet, but if Skylines next version doesnt have it, I will put it back in along with a BE. Damn, gotta run, finish later........ Change the .txt file to .htm for the report
+
+--- 帖子 #165 ---
+help with Gmt setting please .. i'm using demo with MIG ... i'm not really sure whats the correct setting .. i'm in california now .. does that make any different ..?? thank you..
+
+--- 帖子 #166 ---
+You're a funny guy C.E.O. you and Skyline did all the work! I just mushed'em together hoping they would work. GRIN. The mushed version did work, as in entering trades properly, though i just slapped it up on the four majors (silly me!) in demo and saw two positive trades and two negative ones at the end of the day, closing in the negative. But the ATR was so large that no stop losses were hit, the price just ranged in the ART H/L all day. Not many pips to be had on a day like today with this type of a model, but the simplicity of it is so refreshing it is worth a valid forward test. I like your idea of testing on many pairs, this might be a way to lessen the impact of the ranging days, which i think is what you were saying in your post. Skyline, thanks again for your ongoing tweaking and doodling, you are doing a good thing here that many are greatful for. : ) Thom
+
+--- 帖子 #167 ---
+Skyline its possible the EA will have magicnumber ? to run this ea simultaneosly wiht other thanks
+
+--- 帖子 #168 ---
+WOW, how to blow a demo account in one nite!!!! So i place the mushed version on my charts and changed the settings on the TP/SL/TS. I set the SL to .5 of ATR and the TS to .33 ATR... now i don't know what setting of those two drained the account but when i woke up to check the demo account out it had placed hundreds of orders and closed those orders nearly immedeately with -10 pips or so each! Gotta just laugh at this sort of test and be thankful for demo accounts to blow out during the process. Hey Don? How is your test going with opening the EA at (was it??) the 6am GMT time? : ) Thom
+
+--- 帖子 #169 ---
+Thom, What were your shift and close order settings? Were your orders placed in the same direction (all long) or did it SAR?
+
+--- 帖子 #170 ---
+Hi everyone, and many thanks for all your hard work on this strategy. I have a few comments to offer on time zones. Ranlee, both MIG and Alpari are always on CET (Central European Time). At the moment with summer time, that means that they are 2 hours ahead of GMT. In winter, like the UK, they shift back one hour closer to GMT, so MIG becomes GMT +1. Theoretically, that means that you would have to change your EA every 6 months for the shift, but I don't believe that's necessary, if you consider the following: UK (and US) also have similar shifts for summer time, and my thoughts are that we want our trades to run throughout the year in the same relationship to the main UK and US markets. Hence, if you keep your settings for MIG at GMT +1, they will open at MIG chart time 01.00, which will be an hour ahead of the UK throughout the year and also keep a constant time differential from the US (except for those couple of weeks in March/Oct when the US is out of sync during changeover, but they shouldn't really matter). This also makes backtesting more reliable with these brokers as the main markets are doing their thing at the same relative times (except for Asia). For brokers based on GMT, like Interbank??, despite the original system stating that you enter the trade on the 00.00 open, it appears to make more sense to shift your EA to +1 hour in summer so you still carry the constant relationship to the UK and US markets, especially if you're closing out early. Having said that, there is some argument, esp if you trade yen crosses, for the open time bearing a constant relationship to Asian markets, most of which don't have summer time. To conclude, I would set MIG to +1 throughout the year, so your open is always the 01.00 candle. Also, the only relevance of your local time is when you have to get up in the night! I use a small desktop utility program to help me out which shows multiple timezones and updates automatically for summertime - just Google to find one. I'm also attaching a useful EA which you can attach to MT which shows broker time, GMT, local time, etc. It needs a bit of fiddling around and doesn't update automatically for summer time, but it's quite neat, and I'm sure was posted for open use. I hope this is of some use - it sure is a confusing subject! Dutton
+
+--- 帖子 #171 ---
+Hi Al, the EA was Stopping out and Reversing and doing it again, and again, and again...until the account had only $22 left when i checked the charts about 6 hours later! Thom
+
+--- 帖子 #172 ---
+oh .. yeah, this helps a lot understanding how to Set this GMT setting .. thank you again...
+
+--- 帖子 #173 ---
+aha ... man.. i thought i'm the only one ... wonder why ... help please...
+
+--- 帖子 #174 ---
+Hi Thom which one is the version did you use ? Skyline
+
+--- 帖子 #175 ---
+Skyline, I was reviewing updates to the strategy thread and the suggestion at the following post: http://www.forexfactory.com/showthre...=13507&amp;page=94 was to stay in the trade unless you are supposed to reverse and don't close trades at the end of the day. That would save pips on closing and reopening trades, unless people want to close their trades early. So 3 suggestions: 1. Don't close orders unless the direction is supposed to switch. In which case use the time offset hour. And make this a user option (bool). 2. If you ARE in a trade, and the direction of a new trade would be in the same direction as your existing trade, just move the stop on the old trade to where the new trade's stop would be. If that stop would be past break-even, then you would move the stop on the previous trade, and then enter a second trade (optional) in the same direction. He says this resulted in an additional 2141 pips since 1/1/7. This would make the old trade a freebe and follow the rules for a new trade. 3. Not related to the above. On closing at end of day, check for Friday and change the shift as Friday close is earlier. Unless we are using the above to stay in the trade. Thanks, Mike Lollar
+
+--- 帖子 #176 ---
+This week has been pretty bad, but I'm pleased to have come out on the plus side. +17. This is trading G/J. I'm using Daily Scalping EAv1.0f. Settings: TP - 100 SL - 40 Hour to Close - 17 Max Losses per Day - 2 The other settings are default. Hopefully next week will be better. Thanks Skyline for the EA.
+
+--- 帖子 #177 ---
+Eureka! Are you trading on IBFX? I guess what I'm asking is what time are you initiating your trades? 0 GMT or at another time? thanks.
+
+--- 帖子 #178 ---
+Greetings all. Skyline i was testing my "mushed version" i mentioned in post 168 that's the experiment of taking your "H" and C.E.O.'s ATR versions and combined the two. The first few trades with the default ART .7/.7/.7 settings worked fine (well all trades were opened properly, though the range was so small that they never had a chanc to be hit any of those levels so were still open at the time-to-close setting). What went crazy w/the mushed ea version is that i changed the ART settings around to .7/.5/.33... next time i'll try .7/.7/.5 then another. ....so none of the above was anything "wrong" with any of the original Sky or C.E.O. work, i just tried to combine the two and with the above settings had a bad day! grin. Mike, great ideas on code additions! Don, what was your success rate this week with your settings and the trade-window time mod? (and can you post your settings again with the time-to-trade change you are using?) : ) Thom
+
+--- 帖子 #179 ---
+Hi Don, On this demo, I'm using 0 GMT. Yes, it's with IBFX. Hope this helps. Carol
+
+--- 帖子 #180 ---
+Not a good week. Made 1 pip!!! I'm attaching two statements, one for this week only and one for all history of the account since March 16. The full test is still up 150 pips. I use TP of 150. SL of 50. Max 2 trades. I set the EA for an offset of 6 which opens a trade at 6 GMT, or 2 am Eastern or 1 am Central time in the USA. I am troubled by last night's action a little because the initial order was a sell and the previous day bar was a buy. Don't understand that unless the time offset made it use the current day bar which at that time was down. I haven't noticed that action before. One other oddity was that the EA refused to trade on the 27th. Just nothing. Don't know what happened there.
+
+--- 帖子 #181 ---
+hmmm.....looks like that offset might have something to do with it. On my demo it traded on the 27th, and last night my first order was a buy, just like it should be. I have another demo with the offset of 6 and it didn't trade on the 27th either. BUT..it traded with a buy last night (right direction) last night. Strange.
+
+--- 帖子 #182 ---
+Here's my statement about March 2007 using Daily Scalping EA, notice that even if the overal profit percentage is only 34% , I gained more than 700 pips !! This tell us again that there's no need to search for the almost-100% winning system, but with a good money management and risk:reward the account could grow nicely Settings used in EA are : TakeProfit = 200; StopLoss = 40; HourToCloseOrders = 17; MaxLossesTradesPerDay = 2; P.S.: I'm sorry but actually I cannot handle all the requests about EA improvement. Anyway I want to thank you all for all your ideas and comments Maybe it could be a good idea if someone could reorganize the features to be coded in next version, so when I will be less busy I could take a look and code it. cya, Skyline
+
+--- 帖子 #183 ---
+Skyline thanks somme body have the same month to compare 2 stops and multiple stops? - Reverse Rules If a stop order is hit than we reverse our trade (with the same stop loss and target rules we had before) we continue to reverse multiple times a day if we keep hitting the stop loss until the day is finished (see finish for day rules below) maxlooses perday= 10 .. multiple times
+
+--- 帖子 #184 ---
+i start 3 days ago i have only this statements
+
+--- 帖子 #185 ---
+Lines in red I have coded in my version, If skyline doesn't have the time I would be happy to add these things to his latest version or give the code to add. Overrule direction T/F Go Long T/F (is overrule true) UseATR T/F Sl ATR % TP ATR % BE ATR % ATR Period to use (if using ATR and Sunday exists, use Friday ATR) Fridayclosehour Close all on Friday T/F Carry Trades T/F (don't close orders if same direction) Days to reverse (not sure if this is needed, all tests say 3 is best but right now is useful as an overrule direction set to 1 day to reverse) Extern bool comment= MM for micro lots The only other thing I would like and I am still not sure if it would help is to have the trailing stop work as a trailing stop and not reverse orders when hit. The way it is now, it is basically useless. The only way I can think to do this would be to have the reverse orders pending orders but that would mean a recode. The other benefits I see to that would be the ability to use a BE on active orders without reversing, and the ability to move the pending independently of the active order. Example... Move to BE = 40 Move pending to BE = 55 One more thought I had was how to beat the ranging market. If the ATR was low have a no trade condition... If (ATRvalue ()&lt;= notradevalue()) {TradeMode = "NONE";} This idea is preliminary and I have only visually looked at it, no testing. I would like to hear your inputs on this. I think that covers the request list. Also as a note, I finished the month about 1400 pips up. All JPY crosses positive and all USD crosses negative, USD/JPY positive, 6 pairs, 2 loss per day. I had about 5 no trade days due to errors that most would have ended up positive.
+
+--- 帖子 #186 ---
+AS per daily EA thread suggest the following option for greatest profit: Open trade at 23.00 in same direction as previous days candle Carry over open trade to next day of not stopped out NO TP and 40 SL, max 2 losses per day. Open a new trade in same direction and move stop on old trade to new trade SL Continue opening new trades in same direction until three days is up, changing previous days trade SL to new trade SL.. Reverse direction with one trade after three days and start process again..
+
+--- 帖子 #187 ---
+What do you guys think about this: Instead of entering a buy or sell order you enter a hedge. The second set of orders, lets call them protective, will have a SL and TP of 40. So when ranging you end up with 0 losses. Your risk is when the SL of the protective order is hit and market reverses. But this should happen less often than having a ranging market. Plus you don't need to limit trades. Anyone cares to backtest?
+
+--- 帖子 #188 ---
+I've been testing this on tKimbles open-close trending system. The hedge feature just as you described it has produced fabulous results. Hedging protects your balance while the pair is ranging. The hedge won't be in place when trending due to a lack of need. My backtesting results on the open-close trending from 12-25-06 to date turned a 1,000 pip negative (sum of all stop losses) into a 2000 pip positive. This should work very well in the daily as well. Negatives almost stop completely while profits continue. I may try to study the effects on the daily as well, but it will be a little while before I can get around to it. yezbick
+
+--- 帖子 #189 ---
+Wow Yezbick........what a huge change in the profit margin (from -1000 to + 2000 pips). Can you please explain or tell me where I can read about hedging. That is one feature of trading I am in the dark about. Thanks, Tim
+
+--- 帖子 #190 ---
+Please keep us posted since I'm overwhelmed with projects at the moment. Thanks
+
+--- 帖子 #191 ---
+A hedge is simply when you buy and sell the same currency pair at the same time.
+
+--- 帖子 #192 ---
+There are a couple of areas on forex factory and off that you can find information about hedging. Some people hedge using different pairs, but I don't feel it is an exact science and hence not a perfect hedge. A thread regarding this can be found here: http://forexfactory.com/showthread.php?t=13137 I personally prefer to hedge with the pair that I'm trading and needs hedging. A recent news article by Dailyfx showed the following which gave me the idea to look into it deeper. The article is located here: http://forexfactory.com/showthread.php?t=22633 . It also contains information on hedging and the best pairs to do it in at the time the article was listed. After I read the above article I saw the following thread come through the forum. It is short, but very informative about hedging. It can be found here: http://forexfactory.com/showthread.p...277#post257277 I don't want to go into to much detail here due to the fact that this is Daily strategy EA thread and not a thread about hedging. I beleive though that this could be a very viable option to enhancing his system. hope this helps, if you need additional information please let me know. I'll be posting here when I have the results of how hedging would have affected this system if it was used instead of a SL. yezbick
+
+--- 帖子 #193 ---
+I am new to EA's and I can not get the EA to run live. I put it on the chart and everything but the next trade just says none. What am I not doing? Any help would be great.
+
+--- 帖子 #194 ---
+You need to click 'Allow Live Trades' on the Common Tab under the Properties Section. You will find this if you right click on the chart. If you have a 'Smiley Face, in the upper right hand corner of the chart, then it's attached correctly. There are several reasons that it hasn't produced any trades. Probably because the criteria for entering the trade hasn't been met yet. If your EA is scheduled to enter at 8 GMT time, and it's only 5 GMT time, then no trades will be opened until it's 8 GMT. Perhaps there are errors. You need to look in the Journal tab on the chart and see what it says as well as the Experts tab at the bottom of the chart. I hope this helps. Carol
+
+--- 帖子 #195 ---
+Thanks Yesbick for all the information. This will be a great start. Tim
+
+--- 帖子 #196 ---
+I keep plodding along with my late opening 1.0f. I open the trade at 2 AM EST (6 GMT now) on IBFX. The offset is 6 on IB-FX. TP 150, SL 50, max trades 2. I close the trades after 8 hours (10 AM EST). I like it.
+
+--- 帖子 #197 ---
+How would you define trending? Fundamentals like carry trade unwinding or use an indicator/system or all together?
+
+--- 帖子 #198 ---
+A couple of ways to define trending. First the oposite of trending is ranging which can be seen by a doji candle on the daily chart. Trending for the tKimble daily could be defined as any time the direction is sustained in a given direction for greater than 50 pips. Ultimately, trending is the oposite of what most people call wipsaw. Trending is price based not fundamental or technical based.
+
+--- 帖子 #199 ---
+But how would you know for entering the hedge or not?
+
+--- 帖子 #200 ---
+Basically the rules that I have created and appear to work for the "Open-Close Trending system are that you refuse to take a SL. I hedge instead of taking the SL or SAR in this case waiting for the pair to return to a positive position for the trade position that would have lost pips. I have found that at least in the open close trending the following result happens when I hedge instead of taking the SL and issuing a SAR. There were 13 bad trades since 12-25-06 that resulted in a loss of 1044 pips total. When I hedge instead of taking the SL. 10 of the 13 bad trades resulted in a 2,030 pip profit or a additional 3000+ pips to be added to the already positive system of 5000 plus pips. This brings a total of 8482 pips in the Open Close trending system in the last 3 months or almost 3000 pips a month. Quite a amazing results. I have yet to see how this could be put into place on the tKimble Daily but I feel that the results would be astonishing just as they were in the other system. Hopefully, I'll have a chance to get around to it soon and post the results. Hope this helps, yezbick
+
+--- 帖子 #201 ---
+maybe you would like to share what are your hedging rules? when do you open the hedging position, when do you close it? when do you close the initial position if the market really goes against it? ... and the rest of the details. thanks i'm really looking forward to it.
+
+--- 帖子 #202 ---
+Please give us more explannation as to your hedging strategy, if you dont mind, when do you open the hedge and when do you close the hedge, and how many times do you apply this procedure? Obviously if you keep the hedge on all the time, you will not get any profit or loss.
+
+--- 帖子 #203 ---
+I should have some time to put together a Hedge strategy for the tKimble Daily system &amp; weekly hedging system on Monday and will post the rules, and results here. I'll also post the rules for the "Open-close trending" hedge system at that time as well.
+
+--- 帖子 #204 ---
+Thank you Yezbick for bringing hedging into this thread... and sharing your knowledge... and first of all, thank you Skyline for showing up in Spudfyre's space and opening the door for me to your EA... THANKS! I will be implementing the knowledge you all share, with those of us who are just at the starting line, into my new MT4 soon... will be reporting how that server will deliver on your EA and Yezbick's hedging... again, many thanks! *** C.E.O. tks for your great offer [ pst#185 ]
+
+--- 帖子 #205 ---
+Applying the hedging rules to the tKimble daily has been a little more difficult than I originally thought. It will take more time to figure out how to work it feasibly and simply. I am posting the hedging rules below for tKimbles "open-close trending" system. Hopefully they will not confuse to many people as this is a more advanced form of trading the forex. The most difficult part of this system is keeping track of your positions, espcially if you have more than 1 hedge or hedge plus adjustment running as I have had this past 5 slow days of the GBPJPY. Open Close Trending Hedge System Rules for GBPJPY 25 period Linear Weighted Moving Average applied to Median price (HL/2) with +50 Level &amp; -50 Level Basic rules: 1. Take long position when price goes through +50 level. 2. Take short position when price goes through -50 level. Adjust SL hourly at +50 level if in long position * example: direction is north SL moved up to 25MA -50 every hour. Adjust SL hourly at -50 level if in short position * example: direction is south SL moved up to 25MA +50 every hour. ** Do not adjust SL against your current position. * example: in current long position and 25MA goes down. * Close current long position if price goes through -50 level and open short position * Close current short position if price goes through +50 level and open long position Hedging rules: All of the above rules are the same except for the following changes. 1. Only close a current position with the basic rules if your position is in positive or neutral pips. 2. If your position is in negative pips, place an equal size position in the oposite direction at the +/- 50 levels to hedge your current position. ** Treat any hedge positions the same as you would with all other positions in the above rules. example: North bound hedge position goes positive and is still positive when the market reverses direction south below the -50 level. (only closing your north bound hedge position if your hedge position is + or neutral when your price goes below the -50 level as stated it the hedging rules above). You would close the hedge position at this time. *** Always have pending hedge in place to protect your current position if it goes against you. *** Don't place SL on your current position until it is in a positive territory. Protect your winnings. Adjustment on lot size rules: ** If you are using a flat % of your balance (ex. 2%) then adjust your positions when the price by adding additional lot size when the price goes through the +/-50 level.
+
+--- 帖子 #206 ---
+I have started another thread to get input from the rest of the forum regarding the open-close trending system. I'll be placing updates, charts, and examples at the following location. http://forexfactory.com/showthread.php?t=23718
+
+--- 帖子 #207 ---
+I've been giving serious thought in the development of a daily hedging strategy and I'm striking out. Hopefully those who have some experience will be able to give insight into this perplexing problem. Here are the issues I have come across with. 1. The daily system is set up to close once a day and start back up at a pshycological level (0:00 gmt) How do you create a hedge that can cover for only 1 day. Hedging is generally longer term. 2. Also the daily system because it is daily allows you to use daily compounding for return. If you stop the closure at the end of the day you loose the daily compounding feature. 3. If you let the daily run for greater than 24 hours it looses a lot of the features that are built into it. The big one that perplexes me is when to open and close the hedge. There is no definate position except for time that gives location to hedge. 4. The sheer simpleness of the daily system has no indicators to show the general direction except for the previous days direction. Some type of indicator will need to be placed in order to tell you when you should hedge (ranging times) and when you should not hedge (trending times). Opening at 0:00 gmt and closing at 23:00 doesn't give you a direction to work from. ** That said after several hours of thought - at least off and on thinking. These are the issues I have come across in the development of a hedging strategy for the tKimble Daily. Hopefully someone will be able to shed some light on the above issues and assist with a solution. yezbick
+
+--- 帖子 #208 ---
+I dont know exactally what you are trying to achieve with the hedge. Are you referring to the hedge as in a hedge fund, collecting interest and all or are you just protecting a loosing position until the trend developes. If it is the latter, you might as well just straddle the price by 40 instead of placing a hedge, if for nothing more than to save one spread cost. There is no "ranging indicator" or lots of us would be rich my friend. I have been toying with an ATR value less than x says no trade day but it is hard to come up with a dynamic number from a dynamic number and when you say no trade, thats the day it breaks out BTW, just about got the wish list done on the EA except carry trades from day to day, thats a toughie. Post it in a day or two.
+
+--- 帖子 #209 ---
+I've been watching ATR for filtering trade/no trade days. I haven't done any backtesting but a value of 130 and up for G/J might be a decent filter.
+
+--- 帖子 #210 ---
+yezbick, What I'm testing is fairly simple. I enter a hedged position immediately (instead of a single buy or sell) and I wait for a break-out. While in range I take 0 losses (not exactly cause I loose the spread). My risk is when a new range develops (false break-out) about 50 pips above the entry price. But this should be only 1 day as the next day your orders are set within the new range. If this proves to be true I plan to increase the lots as soon as a new range develops, hoping for a true break-out. Maybe a new thread should be started about this. Let me know if something is unclear.
+
+--- 帖子 #211 ---
+So if I understand you correctly at 0:00 gmt you open 2 positions of equal size in opposite directions (hedge set up) with a 50 pip SL for each of the positions. Could this also be achieved with a 100 pip straddle +/- 50 from the start price? I read something on this that DailyFx posted http://forexfactory.com/showthread.php?t=22633 They shed more light on hedging on their website http://www.fxcm.com/hedging.jsp They also point out the benefit of using the ATR that you mentioned. The ATR idea does intrigue me as a possible solution to being out of the market when the pair is ranging. We should probably start a new thread so we don't confuse the Daily EA people following this thread. We can post our findings back here to be potentially added to the EA.
+
+--- 帖子 #212 ---
+Everyone interested in hedging and/or ATR please visit: http://forexfactory.com/showthread.php?t=23839
+
+--- 帖子 #213 ---
+I have this EA running now on 4 different pairs, and this is my first day using it. Can you tell me if it is set up and running correctly when it says, midnight order: not assigned next trade: none I do have the smiley face so I believe it is set to run, but the above 2 comments make me wonder. I am using ifbx so it should open a trade at 9:00 PM Eastern time (00GMT) I believe. Thank you. Mike
+
+--- 帖子 #214 ---
+I downloaded the daily scalping EA file. How do I use it/apply it? Thank you
+
+--- 帖子 #215 ---
+Please refer to this tutorial on how to use EA with metatrader http://www.pipinion.com/factory/experts.htm Skyline
+
+--- 帖子 #216 ---
+Yes Mike the comments are right and the EA is working properly...maybe I have to choose some meaningful comments
+
+--- 帖子 #217 ---
+Sky, would you please post your settings you used to achieve your pips. Also, please be specific on time zone. Thanks!
+
+--- 帖子 #218 ---
+File Removed Due To An Error Found, Will Post Later&gt;&gt;&gt;&gt;&gt;
+
+--- 帖子 #219 ---
+I'm sorry I cannot post them it's a military secret , if I post here then I have to kill all of you......eheheh joke Ok seriously here's my settings using v1.0h1 : GMT_Shift = 2; TakeProfit = 200; StopLoss = 40; HourToCloseOrders = 17; SundayCandleExists = true; Lots = 0.01; UseMoneyManagement = false; Risk = 0; Slippage = 3; MaxLossesTradesPerDay = 2; TrailingStop = 0; Regarding the GMT_Shift I still don't understand why this cause a lot of pain to the users, for me it really simple to set it whatever broker I'm using. Just pick the time in the navigation bar and check how much hour is different referred to GMT time , then put that value into the GMT_Shift variable, that's all. Since I'm using Fastbrokers for my demo and live test and they are GMT+2 aligned then I use GMT_Shift = 2 as you can see.Infact my order are opened at 2:00 AM that's 00 AM GMT. It's simple cya, Skyline
+
+--- 帖子 #220 ---
+OK, I'm trying to backtest this particular EA (BTW, thanks for the coding guys) and I'm trying to figure out the offset for the hours. I'm on the East coast but InterbankFX is in Salt Lake City Utah. UTC/GMT OffsetStandard time zone:UTC/GMT -7 hours Daylight saving time:+1 hour Current time zone offset: UTC/GMT -6 hours Time zone abbreviation: MDT - Mountain Daylight Time Now, when I enter -6 in the offset I get no results for the strategy tester. When I enter 6 in the offset I get results. Which is correct?
+
+--- 帖子 #221 ---
+The positive 6 is correct. I live in the Central Time zone. It depends on your broker time not your local time. If your Broker is FX DD they are GMT +3 so use 3. If your broker is IBFX then just use no offset because they are on GMT.
+
+--- 帖子 #222 ---
+What I do is open my clock (control Panel&gt;Date/Time) and change the time zone to GMT. Then compare it to the "Market Watch" clock on the MT ticker. MT clock - PC clock = shift Be sure to add 12 to PC if it is PM. My question has always been with the hourtoclose. Is this hours since entry time (MT time + shift) or just MT time?
+
+--- 帖子 #223 ---
+HourToClose is the hour (in GMT) when all orders will be closed automatically. So if you set HourToClose = 17 then all orders will be closed at 17 GMT. Skyline
+
+--- 帖子 #224 ---
+Hello Skyline... thank you again for your EA... I just completed re-reading your posts... downloaded EA from your signature... the settings are... GMT_Shift = 1; TakeProfit = 200; StopLoss = 40; HourToCloseOrders = 17; SundayCandleExists = true; Lots = 0.1; UseMoneyManagement = true; Risk = 10; Slippage = 3; MaxLossesTradesPerDay = 2; TrailingStop = 0; and in your last post you show... GMT_Shift = 2; TakeProfit = 200; StopLoss = 40; HourToCloseOrders = 17; SundayCandleExists = true; Lots = 0.01; UseMoneyManagement = false; Risk = 0; Slippage = 3; MaxLossesTradesPerDay = 2; TrailingStop = 0; Would you please tell me the reasoning behind each setting [if I remember correctly, you once said... "if you could set the UseMoneyManagement = true; you would realize the full potential of this EA"]... -what the UseMoneyManagement = true; does...? EA via your signature... shows UseMoneyManagement = true; you also have... Risk = 10; ... I know, for most of you guys here it's a piece of cake... but could someone explain to me the Risk = 0; vs Risk = 10; settings... thank you very much... PS: Skyline, after reading that you are with fastbrokersfx... I checked their site, spoke with Giovanni and just opened an account with them... -tks BTW: C.E.O. and Accrete... thank you for your contribution and support as well... pls keep your updates coming... Skyline, the last I red, C.E.O. offered to take a lead re further development of your EA... don't remember reading about your response to his offer... did you guys have a conversation on this topic...? -please bring us up to date... -tks
+
+--- 帖子 #225 ---
+Skyline, thanks for your continuing interest in your EA and this thread...and also for the post with your settings. C.E.O....any progress on those tweaks you were working on? They do look yummy. : ) Thom PS : EnkiJr, you are most welcome!
+
+--- 帖子 #226 ---
+I had thought I had everything done, and just set some crazy settings to see if it worked. I have one bug to eliminate and will post it, but i just cant get rid of it. Tried dozens of things. The problem is I dont fully understand why it is doing it, it just doesnt make code sence why. Seems to have a mind of its own
+
+--- 帖子 #227 ---
+Lines in red I have coded in this version, 1.0hATRa Overrule direction T/F Go Long T/F (is overrule true, first direction ONLY places orders normally after that) UseATR T/F Sl ATR % TP ATR % BE ATR % ATR Period (if using ATR and Sunday exists, use Friday ATR) Fridayclosehour Days to reverse Extern bool comment MM for micro lots Decrease Factor(reduce lot size after X losses, probably useless but left it in there) Carry Trades T/F (don't close orders if same direction) Close all on Friday T/F(if carry trades) I have tone some testing but this should be DEMO'ED AND BACKTESTED EXTENSIVELY prior to going live!! Play with it for some days and see if it all works correctly. I had one major bug and it seems to be eliminated, but my brain is so fried I gave up on many thorough backtests and just did a few. It uses the ATR value from the prior DAILY close. In the next progression I would like to see the carry trades added, and the BE and trail to work normally. This may be beyond my ability as i am just a code hack but i do have some ideas after my brain quits steaming. I would also like to hear other ideas to make this bad boy even more profitable. SL, TP, BE_AT are used for both the ATR value and the pip value. Enter pips as normal numbers, and enter ATR values as a decimal fractional value--0.3=3/10ths or 30% Everything else is self explanatary, have fun.
+
+--- 帖子 #228 ---
+Hi EO, Thanks for your effort. Looks promising! Been doing some back testing on the GBPUSD and following happened. Several times there were multiple orders opened within a few minutes. Please have a look at the attachments of one of such occasion, to see what I mean. I’ve tried at all timeframes and did get the same results. Any idea’s? Anyone else getting this? Haven't put a version in a forward test but will do soon. Thanks, Vince
+
+--- 帖子 #229 ---
+Hi EnkiJr, thx for your appreciation Actually since I'm using a very small account I have to turn off the money management feature and use fixed lot 0.01, anyway as I stated the best performance should be with MM turned on and risk not more than 2-3%. About Fastbrokers yes I also know Giovanni (is also one of the co-owner, the other one is Giuseppe) they are working really fine and now will launch new support and forum site fully integrated, I'm sure you will enjoy them as broker
+
+--- 帖子 #230 ---
+Thx CEO for your effort to improve this EA ! Hope to be more available in future to continue developing too Regards, Skyline
+
+--- 帖子 #231 ---
+Hi. Skyline. I used IBFX and if I set GMT_Shift = 0 then I have to change HourToCloseOrders = 15 ? Thank in advance. Cha.
+
+--- 帖子 #232 ---
+Skyline, Would you mind posting a trade history with the EA to take a look at? I ask because I've been attempting to configure the EA using the same settings that you did (except I set my shift to 0 since I'm using IBFX) and backtesting it from 2007/03/05, but I'm not getting anywhere near the pips you are displaying in your posts. I'm trying to figure out what's going wrong.
+
+--- 帖子 #233 ---
+Thanks Vince for the report. I knew I should have tested more. I found the problem, what a difference a 5 is from a 4 LOL. Here is the new version with the sell bug HOPEFULLY repaired. Thanks for testing Vince, keep me posted. EDIT, Well I cant manage to attach anything. May be disabled from the recent attacks? tried zip, rar, mq4, ex4.
+
+--- 帖子 #234 ---
+http://www.divshare.com/download/421658-fc4 Well do it this way then
+
+--- 帖子 #235 ---
+I have loaded but it won't attach to a chart. Please check and advise. Thanks for sharing and I look forward to testing.
+
+--- 帖子 #236 ---
+If IBFX is gmt aligned and you want that your order will be closed at 17 gmt then you have to put HourToCloseOrders = 17
+
+--- 帖子 #237 ---
+Ok here's my latest statement http://www.divshare.com/download/423011-982 As you can see there is some manual trades that I made sometimes, so to catch the right trades generated by EA , choose ones with number 25725 under the price, since that is the magicnumber generated by EA. Anyway sometimes due to various reason (problem with platform, errors on previous version and so on) sometimes the orders wasn't opened correctly following the method. Infact we all know that there is huge difference between backtest result (manual or automatic) and live result, and we have to take care about this. This is why I'm starting to think that backtest are not so usefull until a trading method isn't verified in live when all possible problems could arise Said that , the EA has achieved in my live test 565 pips over 47 trades that is a quite good amount (at least for me) cheers, Skyline
+
+--- 帖子 #238 ---
+Thank a lot skyline. Cha.
+
+--- 帖子 #239 ---
+Hi Skyline. I just tried your latest EA on demo and it's work very well. Got 123 pips only with 3 trades. I used your setting but I changed the trailing stop to 30. Great method and great EA. Thank you TK and Skyline.
+
+--- 帖子 #240 ---
+Hi. I just check IBFX is GMT+0 Cha.
+
+--- 帖子 #241 ---
+There is no best TF for this method since it's based on pure price action, anyway for the best usage of the EA is better to use H1. Actually I'm using EA only on GBPJPY , I don't know how is performing over other pairs
+
+--- 帖子 #242 ---
+Thanks EO, that was quick. Ran some backtests again and problem seem to be gone! Well done. Really like the idea of the adjustable t/p and s/l. Will start a forward test next week. Will keep you posted, Vince
+
+--- 帖子 #243 ---
+Started a forward test yesterday night and I saw the same... :-) Shame it was not on my live account... Thanks for all the effort you have put in your EA! (and the endless other projects you seem to be working on) You do sleep at times too? Cheers, Vince
+
+--- 帖子 #244 ---
+Thx Vince ehehe sometimes I sleep P.S.: Is your avatar taken from some old edition of Flight Simulator ? Some years ago I played a little bit with FS2000 , it was funny
+
+--- 帖子 #245 ---
+A couple of ideas. The break even and trail dont work as a SAR because it looses money so here is what I am thinking. having a flag for if trail or break even is hit it is a win.. bool TrailIsWin int PipsToWin bool BEIsWin For the trail to win you could have a variable for X pips above open price is a win. Say if your trail is hit with 15 pips profit tradewin=1 and shutdown for the day. Today was a great example for when this would be great. I wasnt around to close orders and some were up bigtime only to fall to just a few pips. something like this... PHP Code int OrdersTakeProfit () { int total , cnt ; int TradeWin = 0 ; int hstTotal = OrdersHistoryTotal (); for( cnt = 0 ; cnt &lt; hstTotal ; cnt ++) { OrderSelect ( cnt , SELECT_BY_POS , MODE_HISTORY ); if ( OrderMagicNumber ()== MagicNumber ) { if ( NormalizeDouble ( OrderClosePrice (), Digits )== NormalizeDouble (( OrderOpenPrice (), Digits ) + PipsToWin ) &amp;&amp; TimeDay ( OrderCloseTime ())== Day ()) TradeWin ++; } // if (OrderMagicNumber()==MagicNumber) } // for if ( TradeWin == 1 ) GlobalVariableSet ( "TradeStatus_" + MagicNumber , 0 ); // disable trades //Print("TradeLoss = ",TradeLoss); } Waddya think?
+
+--- 帖子 #246 ---
+C.E.O. thx for the time you've put into your "hack" ; ) I do like the idea of a variable S/L and T/P rather than a rigid set. . . though it does appear the Sky sure has found a groove with the rigid-set and the PoundYen pair. I've got the ATR version loaded on a new mt4 GMT+3 demo feed that mirrors one of my live account feeds so i'll check it out and report back. I can say that once i placed it on two daily charts (EurUsd and GbpUsd) it imedeately opened the appropriate trades. I do like your idea for the additional code-tweak on the BE/TS issue. : ) Thom
+
+--- 帖子 #247 ---
+hello please post your last statement. thanks
+
+--- 帖子 #248 ---
+Hi , here's my latest statement http://www.forexfactory.com/showpost...&amp;postcount=237
+
+--- 帖子 #249 ---
+do you have trade on 19 &amp; 20 april?what is result?
+
+--- 帖子 #250 ---
+19th = 200 pips 20th = -80 pips
+
+--- 帖子 #251 ---
+i have 4 trade today with stop .why ea open 4 trade with stop? thanks
+
+--- 帖子 #252 ---
+Please post your settings Edit : Added in my signature a little live statement taken directly from my live account updated every hour
+
+--- 帖子 #253 ---
+i use last setting that you post. time gmt+2
+
+--- 帖子 #254 ---
+How about a pip filter like reversing after 3 days only if a pip amount is meet. 300? Also look at the last 5 days, if more than 500 reverse
+
+--- 帖子 #255 ---
+That's strange, I had no problem as you can see from my statement. Did you use H1 timeframe ? Try to post your journal and expert report , so it's more easy to analize what happened.
+
+--- 帖子 #256 ---
+running the EA on a demo account with a lot of currency... i will see how it behaves
+
+--- 帖子 #257 ---
+@CEO : Been doing some optimization runs and it seems that changing the sl_AT to 0.4, TP_AT to 0.9 and BEAP_AT to 0.4 gives a rather good result for the GBPUSD over the last ¾ year with Alpari data. BUT.. might be an ‘over optimization’ on my part.. I did try to prevent curve fitting by optimizing over a period of 6 months, shifted 3 months back (so from 2006.07.17 till 2007.01.27) and then testing these found settings over the most recent 6 months (so 2006.10.17 to 2006.04.17) to see if they still give a nice curve/increasing balance for the last 3 months. Looks to me the above mentioned setting work pretty good BUT if you test them over a longer period they aren’t so great (still at breakeven but not really profitable). So my question is therefore do you think this EA is sensitive to ‘seasonal’ market conditions, and needs to be adjusted every x weeks, or should it always ‘work’ with the same settings since it uses ATR to adjust itself anyway… Any thoughts on the matter are much appreciated! Will have a go at GBPJPY soon too. @ Skyline : The avatar is actually a picture I took in my ‘office’. I fly the 757 and 767 for a living. Have a great Sunday all. Vince
+
+--- 帖子 #258 ---
+Uao that's great Vince !! You get a wonderful job !!
+
+--- 帖子 #259 ---
+Hey Vince, what a cool job! I am coming up with the same results on GBPUSD also. I will say that no matter the pair the Sl# keeps coming up as .3-.4 as the winner and the ATR period is around 2 +/- 1. I am having mixed results with the BE. I am getting high numbers or none at all as being beneficial. I am thinking of just leaving it a 0, finding the best SL/TP and then testing the BE to see if it helps. I have not employed the decreasefactor except on a few runs and it does show promise. You do miss out on the initial first run of the trend but it really helps out on the drawdown during a ranging week when you get multiple losses. I have also found the JPY crosses to be the most profitable, and I am keeping maxtrades at 2. I keep seeing the value of the trail and BE being used if it wasnt a reverse order. I believe that is my next step to consider the trail and BE as a win. It should really help on the DD. I will see if I can figure that out soon. Skyline, do you think the code I posted is close to working for that?
+
+--- 帖子 #260 ---
+Sorry CEO I didn't take a look at code posted , anyway I'm sure that you'll find the right solution
+
+--- 帖子 #261 ---
+no mistake... my bad let's back to work!
+
+--- 帖子 #262 ---
+As you said my order on gbpjpy was handled correctly. Just try to post your settings, journal and expert tab reports Skyline
+
+--- 帖子 #263 ---
+Thx skyline, my settings are generally the same with you, i use GMT00, TP999, SL40, SUNDAY FALSE, MM FALSE exit 17 max2 risk2 slippage3 I think the problem with your EA is When it was been first attached to the chart, it will always enter with a buy or sell randomly, then after this day, it might be back to normal, i am not sure... i guess it is. or as you said before, after the EA attaching to the chart, never touch anything ... i wonder if the lots or some settings can be adjusted during the trading process... otherwise.... everytime after the adjustment, the wrong entry comes again.....
+
+--- 帖子 #264 ---
+No I don't think problem is when EA is executed for the first time, since the routine is executed in the same way based on previous candles trend. You said are using Sunday candle = false , which one is your broker ? Are you sure that your broker don't get the sunday candle in the D1 chart ? (just open D1 chart and check if there is a tiny candle for yesterday 22 Apr)
+
+--- 帖子 #265 ---
+Thank you skyline! my broker is Interbank FX, yes it has the sunday candle, but i don't want to rely on the sunday candle for deciding the Monday's trading, so i set it to False... Should I set it True? is that mean the EA will still doing the entry depends on last Friday candle If i set it to True?
+
+--- 帖子 #266 ---
+No Feeder , you are misleading the way it's intended to be used the SundayCandle flag. I will try to explain here : * If your broker get the Sunday candle -&gt; Then you set the SundayCandle flag to true * If your broker don't get the Sunday candle -&gt; Then you set the SundayCanlde to false In this way you tell the EA to don't take care about the sunday candle in any case. Infact I'm using Fastbrokers as broker that get the sunday candle too, so I tell 'Hey EA my broker get that fuc@#.. sunday candle, please don't use it', so I set SundayCandle to true and EA on Monday will check the trend based on previous friday
+
+--- 帖子 #267 ---
+I got it! see ..my poor English understanding ability execuse me...its not my native language as well... I will delete the wrong picture posted above. Again, many many Thanks to you and your great EA!
+
+--- 帖子 #268 ---
+Oh you're welcome Feeder
+
+--- 帖子 #269 ---
+What setting causes the EA to not obey my set SL? I have SL set to 15 but my trades are opening with a SL of 81 ?? MM is off. Please help. Thanks
+
+--- 帖子 #270 ---
+It's difficult to say Matrixebiz, I never experienced this kind of error. Try to analyze the journal and expert report to spot some kind of errors. Skyline
+
+--- 帖子 #271 ---
+Yeah, it's more wierd, the EA apparently didn't even place the orders that are wrong. In pic one it shows my expert tab with order number in question 139092 not even placed but in my history tab it shows 139092 w/81 SL. 139089 placed ok, 139098 (same currency) placed ok w/15 SL. I have other EA's running on the same platform and haven't noticed this. I'll have to look closer. I have 8 platforms running with different EA's I'm running Fast FX Trader from fastbrokersfx.com Can you try their platform to test and see if you get the same wierdness?
+
+--- 帖子 #272 ---
+I'm using too Fastbrokers in my live account and never see this strange behaviour Looking at your report, how could be that you get 2 orders (1 buy and 1 sell) opened at the same time for the GBPCHF ? It seems that order with 81 pips sl wasn't placed by Daily Scalping EA that should place only 1 order at opening day , try to check out Skyline
+
+--- 帖子 #273 ---
+I'll have to keep an eye on it..
+
+--- 帖子 #274 ---
+I trade usaing this EA but seems like the trailing stop is not working properly. Yesterday I've got sell order GBPJPY and I set the trailing stop to 30. After got 45 pips the stop loss hasn't move. Can you explain it why?
+
+--- 帖子 #275 ---
+Check the order number and see if the expert actually made that trade. You might be having the same problem as what I did.
+
+--- 帖子 #276 ---
+I'm running this program with 2 different broker, my demo account is interbankfx and my live account is fxdd. My setting : for Interbankfx: - GMT_shift : 0.0 - sundaycandle: true for fxdd : - GMT_shift : 3.0 - sundaycandle : false But the entry point is not the same, my fxdd account is already open a trade GBPJPY at 2001.04.25 05.55 fxdd time price 237.10. In the other hand my interbank acc hasn't open a trade. What make those 2 different? Can anyone help me?
+
+--- 帖子 #277 ---
+I've already checked it, in the comment coloum said sellorder[sl] so I guess the trade must be made by EA.
+
+--- 帖子 #278 ---
+Hello skyline, when I click on the " Live Result from 6 March 2007 " link in your footer I see an actual Closed P/L: -542.66. Was this correct?
+
+--- 帖子 #279 ---
+oops..................
+
+--- 帖子 #280 ---
+No rschick, you have to check from 6 march 2007 , trades before that date aren't related to Daily Scalping EA
+
+--- 帖子 #281 ---
+Alright so IBFX is GMT aligned. So the shift is 0. Got everything all lined up. Now a new issue has cropped up! I have MT4 installed on 3 computers. My desktop at home, my laptop at home, and my work computer. I've loaded this EA on all three but it only seems to be working on the desktop at home. Correct me if I'm wrong but when I open up MT4 there is supposed to be a little smiley face next to the name of the EA (Daily Scalping EA v1.0h) right? On my laptop and work computers only an X shows up. Also, there is supposed to be some text on the left side if the EA runs properly (Midnight Order, etc.) correct? That doesn't show up either. The laptop WAS working about a week ago when I had mistakenly set the GMT shift to 6 and it was making pips (suprisingly) but around the time I set the GMT shift to 0 it stopped. Anyone have any ideas? Suggestions would be appreciated.
+
+--- 帖子 #282 ---
+You most probably changed/switched the account on your mt4 platform so the EA was disabled. To enabled it again you have to open menu TOOLS -&gt; OPTIONS and search for EXPERT ADVISOR Tab, then you have to check the flag on 'Enable Expert Advisors (Except for Custom Indicator and script)
+
+--- 帖子 #283 ---
+You know I just enabled it and was about to post here reprimanding myself but you beat me to it. Thanks again skyline!
+
+--- 帖子 #284 ---
+Hi Skyline, One more question on daily scalping EA You said that it was intended for scalping, but on your setting, I see that you set TP at 200 ...., do you mean 200 pips? it's so huge, and 200 pips leap is rarely happen overnight. To my knowledge so far, scalping is when you got in and out of a trade by taking profit at 6 pips or less, so it will be small profit but a lot of trade in a day Based on your experience, how many trade per day this EA generate? Thank's and best regards http://www.forex-tsd.com/images/smilies/smile.gif andy_r
+
+--- 帖子 #285 ---
+Guys, Regarding my last post, I think 200 pips on GBPJPY is OK, because it is a forex crosses. It's just because i'm not used to trade that pair ...... keep on scalping skyline !
+
+--- 帖子 #286 ---
+This EA is working great when you use trailing stop because after I backtesting from skyline's live report there is several trade that don't have to losse infact we can still grab 10 pips or more if we use trailing stop. But there is something that bother me, my order at IBFX and FXDD is not the same. Just like today my IBFX demo acc open a buy trade GBPJPY at 238.20 but 5 minutes later my FXDD acc open a sell trade GBPJPY at 238.48. I wonder why? Can anybody answer my question.
+
+--- 帖子 #287 ---
+Hi Alpin, it's very strange, try to check settings about sunday candle that if is set wrong could leads to different orders opened
+
+--- 帖子 #288 ---
+* Removed the statement link from my signature because that report caused some issue with EA (last 27th and 30th opened only 1 order) *
+
+--- 帖子 #289 ---
+Bye bye stupid guy...
+
+--- 帖子 #290 ---
+I've already check it, my FXDD setting the sunday candle is false since FXDD doesn't provide sunday candle and my IBFX setting the sunday candle is true. Are these setting make those two different?
+
+--- 帖子 #291 ---
+No the EA should opens the same orders , maybe something else happened
+
+--- 帖子 #292 ---
+Hi Skyline been following the TK manual and your thread for what seems like a long time and have finally converted from manual and paper over to MT4 EA on MIGFX. Results look pretty good, but was going through the journal and am getting lots of 130 errors invalid stops could this be me and MT4 as i am no expert on using it. Any advice really appreciated
+
+--- 帖子 #293 ---
+Skyline, This was me putting in bad values for the trailing stops i think, how do we use the TS value in the expert? Also when running this against GBP/USD I am experiencing some pretty big drawdown for April are you using GBP/JPY for your 555 pips since March 6th? Thanks great stuff Jeff
+
+--- 帖子 #294 ---
+Hi webdevjeff, may be you are using stop loss to much low and not allowed by your broker. Edit : I'm reading now your post below, actually the TS is not working properly so it's better that you put it 0 to avoid further problem. In next version I'll try to fix. I cannot help on GBPUSD since I never tested it, I'm testing only GBPJPY but now I turned off it on my live account since I'm testing another manual strategy but I'm still monitor Daily Scalping EA in a demo account. Cheers, Skyline
+
+--- 帖子 #295 ---
+Attachment Thanks skyline Just been testing away with different parameter sets for a period of 4th March forwards. Here are my best results so far... I'm going to test these out for a little while and see how it goes. Will keep you posted Jeff.... Sorry put up the wrong zip file before.........duh... :-)
+
+--- 帖子 #296 ---
+Hi can anyone shed some light on what this error is I keep getting 2007.05.08 11:01:32 Daily Scalping EA v1.0hATRb GBPJPY,H1: ERROR ON SELL ORDER (4109) : trade is not allowed in the expert properties Lots :1 Bid :238.94 TP :238.44 SL :239.15 Thanks
+
+--- 帖子 #297 ---
+I am testing Daily GPBUSD with heavy drawdown, USDJPY and EURJPY work OK though.
+
+--- 帖子 #298 ---
+Thanks for this great share brother. I am delighted to use it. All the best
+
+--- 帖子 #299 ---
+I'm testing it too and see some heavy drawdown on Cable. Thanks Skyline for sharing. I'm curious on what are you working now.
+
+--- 帖子 #300 ---
+Hi Guys, yes this past months was terrible for this system, normally I test EA over GBPJPY that seems to performs better than other pairs. Anyway actually i'm trying to study how to apply to this system the antihedge method introduced by Jacko in another thread , which could reduce drastically drawdown. I'll keep you informed here on my progress on this. Skyline
+
+--- 帖子 #301 ---
+hi @ all please let me do my first post on FF i'm normally a read-only-member but my fingers say POST NOW i have made another EA wich seems to perform much better than the latest maybe its because i'm to stupid to finetune the other (if it so please let me know) :surprised so here it is the code is very messy and has no special functions like GMT-shift, moneymanagement, sundaycandle...... and so on but it works i use it with IBFX wich is GMT the EA only opens 2 pos. at 00:01 with SL 40 , get the first pos. TP at 25pips and set the second to break even if there is no TP - it closed all opened pos. at 23:55 i know there is much to improve but this is just a "2h of work" code if you would test it - leave the settings by default and use it with 1h timeframe on G/J i think the first thing to improve is to open two new pos. after SL then it would be much more profitable ....... i have no more time now - questions, suggestions are welcome have a nice day spence ps: the strategytester.txt need to be changed into .htm
+
+--- 帖子 #302 ---
+Welcome Spence and thank you for posting your work But I'd like to point that this is a thread dedicated to develop EA for Daily Scalping method not to find any EA for any method that could be profitable (you will find plenty of EA in the metatrader section or over internet). Said that, maybe your EA could be a good starting point from which it could be developed a better profitable EA than actual Daily Scalping EA but, I'm sorry , this is beyond the purpouse of this thread Regards, Skyline
+
+--- 帖子 #303 ---
+sorry but i think this : http://www.forexfactory.com/showpost...52&amp;postcount=1 is the daily scalping method and my EA does or should follow the rules of this method (the development is not finished) or do you mean this thread is only for the EA of the first post? if i'm wrong please be gentle and i would open my own thread spence
+
+--- 帖子 #304 ---
+Oh ok if you will plan to follow all the Tkimble rules then you are more than welcome to continue to develop and discuss your EA here Cya, Skyline
+
+--- 帖子 #305 ---
+hi spence, IBFX is GMT time ??? I thought Interbank FX sits in Denver and are -7 hour back to GMT http://www.forexfactory.com/images/icons/icon5.gif Thats the GMT shift I have put in !! Can anyone comment on that ?? Cheers Thomas
+
+--- 帖子 #306 ---
+IBFX uses GMT on their charts. Where they are located doesn't have anything to do with it.
+
+--- 帖子 #307 ---
+Result Update - Demo Test (Data Feed by Fastbrokers) [Apr 2007] Opened Trades = 32 Tot. Pips Gained = +36 [Mag 2007] Opened Trades = 27 Tot. Pips Gained = -229 Statement details Apr07-May07 : http://www.divshare.com/download/838436-bc0
+
+--- 帖子 #308 ---
+Hi skyline ... first of all I have to say that is an awesome EA !! I have tried some commerical one (demo) that are not close as good as your...skyline, I have a question ..I am already ~$190 in profit (still demo yet) but the 200 pips T/P is still ~60 pips away. Do I have to close the trades now ?? Or do I let it go ?? How can you take partially profits ?? Does it do a stop and reverse or do I have to start the EA again , once it has closed my trades ?? Many thanks for your help .. Cheers Thomas {image deleted, please repost 600x600 max}
+
+--- 帖子 #309 ---
+Hi Thomas , I'm glad that you like this little EA The EA will close the trades opened for each pair in the same day when : - TP hit (no more trade will be opened until next day) - SL hit (with a stop and reverse will also open another trade for a maximum set by MaxLossesTradesPerDay) - when HourToCloseOrders time will be reached (no more trade will be opened until next day) Happy Pips Skyline
+
+--- 帖子 #310 ---
+Hi skyline, I am seriously thinking of moving to a live account now using your EA... I am $1647.82 in profit - and that's only this week , using an initial deposit (demo) of $3000 !! I have traded 1 lot sizes on 10 currencies simultaneously. One question...in another thread I have read of the VAR option for variable lot sizes and the recommendation not to trade fixes lot sizes. Does your EA has this feature ? Or am I fine using 1 lot on my live account ? Thanks again for your help! Thomas
+
+--- 帖子 #311 ---
+Hi Thomas, don't be drive by this past week and jump to wrong conclusion about this EA. Infact in these days EA is performing really good due to strong uptrend on GBPJPY but in the past months (apr-may) it was not so good and there was bad drawdown. The EA get the feature that you are speaking about , you can just set the UseMoneyManagement = true and Risk = Percentage that you want to risk for each trade , for example Risk=2 will open trade with lot based on 2% of your current equity. Be aware to not overleverage your trades, keep the pair traded low. A good rule could be to add a pair for each 1000$ in the account with risk=1-2% for each trade, so if you get an account with 3000$ you will trade only with 3 pairs (but in general I suggest to use less correlated pairs). I tested EA deeply only with GBPJPY with mixed results so I'm not able to suggest you which other pairs are fine for this EA , you have to check out by yourself. Last words : I cannot guarantee any income using this EA. It's your risk to use it in your live account with real money. Happy pips
+
+--- 帖子 #312 ---
+Hi Skyline, thanks for that. I will try these setting in my demo account. Actually, I think the benefit of trading more currencies simultaneously with this EA is: Diversification !! I mean, no fund manager in the world would trade only one share ...you have to have a diverse portfolio to make a profit. I think that holds true also for currencies and your script would just do that. Of course I have a number of bad pairs ..but I don't worry, because I have more of the good ones...so, trading like 10 currency pairs simultaneously is like an inbuild hedging function. In fact it really looks quite nice on the demo, but I agree the GBP/JPY pair had a major effect on my demo results (50% of the profit are due to the GBP/JPY move). Next week I'll test some other settings of your script and when this turns out to be okay I'll move to live. Hey, skyline...no worries...I won't sue you if this does not turn out to be alright. I never trade with money that I cannot afford to loose... http://www.forexfactory.com/images/icons/icon12.gif Thanks again for your reply ... Thomas
+
+--- 帖子 #313 ---
+I agree with you Thomas , diversification could better handle drawdown periods but if you are willing to use 1 lot for each trade over 10 pairs using only 3000$ account this for me is a suicide strategy that will lead to margin calls. Another aspect to take care is that you cannot use the same settings for all pairs, one thing is 40 pips s/l for GPBUSD and another thing is the same 40 pips s/l for EURGBP , otherwise you will be too much exposed with some currency rather than others. Thus you have to deeply test in demo account best possible settings for all pairs before go live and this could request some months. Anyway I'll be happy if you'll post your results here from your live account using Daily Scalping EA when you'll go live
+
+--- 帖子 #314 ---
+yes, I agree skyline ...I have to test a bit more over the coming weeks. I'll use some conservative money management figures but I will keep trading 10 currencies simultaneously as this give me the hedging/profit results. I am trying to tweak also the S/L &amp; T/P settings. I normally start the EA the Asian session and check beore it the Europe session starts...then I take early profits or close bad trades and leave the rest running...Anyway ..I let you know of some my results ... Thanks a bunch http://www.forexfactory.com/images/icons/icon14.gif Thomas
+
+--- 帖子 #315 ---
+sorry.. please someone comfirm about IBFX Time i thought -1 GMT. I do check their market watch time and GMT time gmt time shown 5.30 and ibfx shown 4.30.. please comfirm it.
+
+--- 帖子 #316 ---
+Skyline: I like your EA, and have demo tested it and when I open the on Tuesday bec I want to see the monday trade first, the EA automatically takes a BUY or a sell trade, how does it know that. I wanted to take a BUy but the EA first trade was a sell, am I missing something here. Thanks Zee
+
+--- 帖子 #317 ---
+Just tested this EA on several brokers and it seems I am experiencing some undesired results. When trades take place a SL, TP is used but it not respected, the EA still closes trades regardless. It does this in seconds or less. I tested the EA with the following brokers Alpari, IBFX, SGB and Aleccoh. I only want to go off Alpari and Aleccoh for now because Aleccoh FX is meant to have no slippage or requotes. When attached to the alpari account it only opens buy trades, but when attached to aleccoh it only opens sell trades. The EA also ignores stop trading after 3 losses per day parameter. I am not sure what is causing this and have no coding experience. Do you think it is the broker or the EA. You see if it was the broker causing this I would have thought they would just disable it, even though it is only on a demo account. Maybe I am being dumb and am missing something? I am using correct settings, optimised ones and also using correct GMT offset. Anyway I messaged skyline about this. See attachments for explanation of my post, you will see what is going on.
+
+--- 帖子 #318 ---
+Hi,Who could help me find a better MA crossing EA?Tksele
+
+--- 帖子 #319 ---
+Hi There. I read the daily scalping thread by Kimble. My question is that this EA doesn't seem to follow the rules. Or maybe I am missing it. It was my understanding that at 2400 GMT you enter and order in the direction of the previous day's trend. And you then enter a trade in the opposite direction 40 pips away. Does this EA enter both orders for you or only one? And you then have to enter the opposite direction order. Thank you!!!
+
+--- 帖子 #320 ---
+can someone pls teach me how to set EA..for auto trade
+
+--- 帖子 #321 ---
+Hi Skyline, i'm in asia and can't download your EA. Could you please post it or something? Really want to try the EA on my demo account. Please help. Regards, EG
+
+--- 帖子 #322 ---
+When I last tried this EA it opened only either long or short orders - depending on which broker I used - not the daily trend.
+
+--- 帖子 #323 ---
+Seme traders have had success with it, if I am not mistaken. http://www.forexfactory.com/showpost...postcount=9478 It is possible brokers know about this EA so they filter it out some how?
+
+--- 帖子 #324 ---
+Here is one version, the latest one taken from the first post.
+
+--- 帖子 #325 ---
+Hi, I've been reading all TK's and this Thread. Great works thumbs up for Skyline and TK. Its just... your link, we cant access it somehow when u r in east asia. Can u place it at another link The stable version v1.0h1 or v1.0f. Bcause with v1.0h, somehow it open position at 00:34 GMT (which i place my v1.0h EA on 1H chart). That cant be rite... am i rite. Im using Fxopen which is +3 GMT so my setup for GMTShift is 3. Without EA its abit annoying wake up on 4 AM in my time(GMT+7). I would apreciatte it when u give me the stable version. Thx byens
+
+--- 帖子 #326 ---
+My suggestion : - Use Local PC time for close position.( which is easier for everyone) - Use Open Position Daily Candle for OP. - Weekly Scalping in EA ( so u dont have to open 2 charts in 1 pair). Idea Weekly scalping is to take long term trading, as backup we have daily trading. So if Weekly make Doji or spinning tops, we still gain pips or either way. Only my suggestion . Im testing manual in mean time, so i wake up or even sleep after OP... if i have to . Its the only way to test original version Daily Scalping from TK for me. Thx. byens
+
+--- 帖子 #327 ---
+And what is the GMT setting, when trading hours are from Sun 17:00 EST - Fri 16:00 EST? Broker is http://www.fxclearing.ca/eng/
+
+--- 帖子 #328 ---
+When i have time, i read this EA done from my admin skyline
+
+--- 帖子 #329 ---
+Hi First: please - excuse my english Second: tribute to tkimble - greate strategy - simplycity rules Third: Skyline - fantastic work - thx for your efforts 4th: one "small" problem with EA - in strategy tester it dosn't reverse position when hit SL - i'm using 1h version (last) Can anyone help my?
+
+--- 帖子 #330 ---
+Hi Guys Having read and re-read this thread just wondered where the ‘veterans’ of this thread are at (Daemien, Petersurrey, Scrat, Yezbick, Skyline, Aktur, Bullrock, toti1972, Piprage, Ryanmel, Driftwood, Hoss, Forexdude, Hondakoron, Grajo, JeremyA, MillerHighLife, Ronald Raygun, U2DaMax, BHoliday, Coolshades etc Has the system been successful over the 18 months?
+
+--- 帖子 #331 ---
+any better EA now? eleforex@163.com
+
+--- 帖子 #332 ---
+Hey Skyline Im a new member and have some questions 1. Can you please tell me what time frame to use Daily Scalping v1.0h.mq4 on ( 1,min, 5min etc...) 2. I would like to use trailing stop with Daily Scalping v1.0h.mq4 , can you please tell me if I can use this with the MM = false? 3. Do you have an explanation on how Daily Scalping stretegy works? 3. Can you please tell me what time frame to use Firebird v1.0a on ( 1,min, 5min etc...) Much appriciate your assistance
+
+--- 帖子 #333 ---
+Skyline Sir, I have some question regarding the setting... same asking as member above my post. What's the money management covers, izit including the maxlossestradeperday, slippage and trailing stop besides the risk? fairylord found most of the EA has MM, but not sure how to clarify which setting is included for the particular EA? another question: what is slippage? thanks, wish to get your reply soon^^ Thanks for sharing Fairylord
+
+--- 帖子 #334 ---
+Sir Skyline, I have new questions.. regarding the GMT_Shift and HourstoCloseOrders setting (what again??? ), i know that Sir has give great explanation and fairylord had also go through those relevant post+reply in this thread.....may be i'm poor in english and lack of relevant timezone knowledge, i still can't get it.... I'm using IBFX and located in Malaysia with GMT+8.... I understand that the GMT_Shift should be followed the broker server time not where the EA located. Hence, My setting for GMT_Shift should be 0, cause IBFX server broker's is GMT 0...So that the EA could open position from 00:00 GMT? But this setting presents not much orders opened. Then, i also tried set it to 8 (cause GMT+8 where i located), somehow the frequency of order opening is much more instead of 0. Now, i confused whether the GMT_Shift should be 0 or 8. Another is regarding the HourstoCloseOrder, default is 17, what does that mean? Izit broker server time 17. all the opened position would be closed regardless the position in profit or loss condition? Or the 17 is the depends on the local time (shown in my pc) where i located? Or the 17 means that if the position in floating situation, but it will float for 17 hours only, then it would be closed if still floating (Without SL setting)? Thanks, Sir.. I really need your reply and support since this is the EA giving the best performance among those I used, at the moment.
+
+--- 帖子 #335 ---
+Anybody still using this EA?
+
+--- 帖子 #336 ---
+Was interested in the setting of the ea used to get those results...working on a reverse system...would love to chat or email with you about it... my email is regalstl@live.com .... thanks
+
+--- 帖子 #337 ---
+Anybody still testing this one or is it Dead
+
+--- 帖子 #338 ---
+This is another scalping EA from the family of fractal scalpers. This is however an entropy scalper. The EA is free to download only for copyright reasons it can't be uploaded here directly. http://beathespread.com/blog/view/15...chaotic-kernel The idea of the EA is to use pockets of predictability. The EA is tested to work on 15 time frame for EURUSD. The EA is brand new so there are not out of sample tests, unlike for the Fractal scalper where there are almost six months of out of sample testing. What I can say is that the EA is not based on the traditionnal technical analysis. The concepts are fairly different. The concept of pocket of predictability: a place of increased predictability, for unknown reason. The EA is measuring it through entropy indicator. If the entropy drops belows a certain level it is time to take a directionnal indication. The directionnal indication comes from a second component, that is a kind of a neural network using the native genetic algorythm. The idea here is that by using it we train to predict only on places that are predictable enough. And that is a main difference from the other artificial intelligence systems that train on unpredictable stuff. The prediction component is using something that exists only under metatrader it is a chaotic kernel that is deemed to be completely novel a very experimental ai design. So this is the basic idea with the main components. Predicatbility component and Prediction component. The final component is about the stop loss, take profit and live hours. Here it is about the market state. Use your judgement here. I have written a lot about market state. Have fun
+
+--- 帖子 #339 ---
+Hi i like to use the ea a minimum acount start 200 eur. Can somebody giwe me the set file for that Regards kristjan
+
+--- 帖子 #340 ---
+Hi everybody. Good day... being a newbie I have no access to some of the categories of the esteemed forum, particularly creating new topic is also lock for me. Since I am one of the small fishes in the river of the FX world, hence I love to exchange some useful stuffs, info and my experience with friends about trading online. If you guys have any tasted EA or decent indicators may share as well. I have been using one of my tasted indicators having clear trend for both the Short and Long Positions. It works so far great, It does auto trades as well but very often. however it helps getting the right trend and placing order and exiting theme right time. If anyone else here is using the same please share your experience. I am so far happy with this tool. Wish you all better luck. Regards Prince
+
+--- 帖子 #171 ---
+Heelo skyline Can u send me the copy of this Ea plzzzz
+
+--- 帖子 #172 ---
+use the website https://greenwichmeantime.com/timepiece/world-clock/ . \\\\\\you will be able to get the shift.
+
+--- 帖子 #173 ---
+did you set mm to true?
+
+--- 帖子 #174 ---
+Hello everybody; i have a robot in my hand. i want to trailing stop in system but i cant do it. is there anyone who can help me? Thanks...
+
+--- 帖子 #175 ---
+anyone that can list all the currency pairs the daily scalping ea can trade on? Does it trade on xau/usd?
+
+--- 帖子 #176 ---
+You will find a lot of EA for position management.
+
+--- 帖子 #177 ---
+Hi, i am trying to download the files but they don't work. I tried with chrome and firefox. Can you help me? thank you
+
+--- 帖子 #178 ---
+See the folder you have set up to download. There should be no problem.
+
+--- 帖子 #179 ---
+Divshare doesn't permitted ti download the file.
+
+--- 帖子 #180 ---
+Found in original thread.
+
+
+===== 附件下载链接 =====
+

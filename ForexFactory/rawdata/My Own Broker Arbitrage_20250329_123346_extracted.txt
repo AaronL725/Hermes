@@ -1,0 +1,1109 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+I'm sure you've heard of Jason Fielder's $2,000 arbitrage product. So I figured I'd release my own script as seen in this video: http://www.RonaldRaygunForex.com/Arbitrage/ In order to download it, I need you to read through the terms and disclaimers on my website here: http://ronaldraygunforex.com/Arbitrage/download.html I apologize for making you do this, but I need to make sure my back is covered in order to prevent more lawsuits. Update: As of build 409, Metatrader has slowed down certain processes to the point where arbitrage using this script is impossible. I am no longer supporting this script.
+
+--- 帖子 #2 ---
+Hi, When try download your script your page says: [an error occurred while processing this directive] Regards,
+
+--- 帖子 #3 ---
+If you're on the final page, try again. Alternatively, PM to me the e-mail address you used. Also, I should note that for the 40 people who have the script, you were all on the first page for an average 42 seconds. I know I'm a pretty fast reader, but nowhere near that fast!
+
+--- 帖子 #4 ---
+Thanks RR , this is really good stuff. I downloaded the scripts onto my Mt4 platform and tried to attach them to a chart. When i try to do so, i immediately get a "13:29:36 Script FXARB Master - Reporter EURUSD,M5: removed" .... is that normal ? Thanks
+
+--- 帖子 #5 ---
+Did you enable DLLs? I stripped out a lot of error checking to make it faster.
+
+--- 帖子 #6 ---
+Yes i did.
+
+--- 帖子 #7 ---
+Also, on the Slave script i get the following : 13:39:07 FXARB Slave - Reporter AUDUSD,M5: loaded successfully 13:39:07 FXARB Slave - Reporter AUDUSD,M5 inputs: DelayCheck=10; 13:39:07 FXARB Slave - Reporter AUDUSD,M5: uninit reason 0 13:39:07 FXARB Slave - Reporter AUDUSD,M5: removed
+
+--- 帖子 #8 ---
+Skype me: Brynmawr114 I need to see your screen.
+
+--- 帖子 #9 ---
+How many brokers are you testing this script on?
+
+--- 帖子 #10 ---
+I have it running on 6 with no problems.
+
+--- 帖子 #11 ---
+I'm not sure what I'm looking for...I don't have it running properly yet but I think I can figure it out. Do you just wait for a signal that pops up on the master script?
+
+--- 帖子 #12 ---
+Master script will show an arb signal the same way the video shows an arb signal.
+
+--- 帖子 #13 ---
+IM a noob so i have no clue what i'm doing. I get call name pipe fail. But RR is used to my noobness Someone can post some screen shots when its working for them.
+
+--- 帖子 #14 ---
+Simple answer is you didn't copy the text from the slave correctly.
+
+--- 帖子 #15 ---
+i just cut n past. here is slave.
+
+--- 帖子 #16 ---
+master
+
+--- 帖子 #17 ---
+ummmmh how juicy thanks for releasing this Ill try when I get home cant wait actually!!!!! thanks RR looks sooooooo nice..
+
+--- 帖子 #18 ---
+Take out "Client Name: "
+
+--- 帖子 #19 ---
+Resolved the error!!!!
+
+--- 帖子 #20 ---
+I'm willing to bet you don't have Build 409
+
+--- 帖子 #21 ---
+I have 409 build.. All seems to be working, still have those error at the bottom. Cheers Garfield
+
+--- 帖子 #22 ---
+I have same error as Garfield - FXDD Build 409
+
+--- 帖子 #23 ---
+ok the names are fixed but nothing is happening. how about some working screen shots, anyone
+
+--- 帖子 #24 ---
+not sure if this is correctly running or not.. this is what my slave and masters look like. Cheers Garfield
+
+--- 帖子 #25 ---
+There is a video in the first post. I was able to get it running for FXDD but not FXSol which is on build 402.
+
+--- 帖子 #26 ---
+Hey Everyone -- couple of tips on setting up the awesome RR script. Ten Helpful Hints 1. Make sure you type in the the _exact_ name shown on your slave chart (including the correct capitalisation) on your master chart where it asks for 'Change me to Slave Name' , you will have a Slave Name for every broker you have running the Slave script. They should all be listed on the master chart. 2. Dont forget to add the slave script to one of your charts on the broker you are using as your Master also, as the master script doesn't gather prices for that broker it just analyses them. 3. The Master script will write a log file to [metatrade_name]expertsfiles -- this will show you the arbs it finds. Make a copy of this csv file and open the copy as the script will continue writing to the original. 4. Arbs will appear in the top left of the chart where you have the Master script running. They appear for as a long as they exist, some arbs exist for milliseconds, so they appear and are gone in an instant. They will appear in the log file however. 5. The script is optimised for speed not presentational elegance so be patient when setting it up. It might be a little awkward but it is fast. You want fast. 6. When you add pairs, a broker you should delete the Reload Brokers text object on the master chart to reload the broker data. 7. If you're having problems (MT4 is awkward) selecting the text objects on the master chart, right-click and choose Object List, from there you are easily select or delete objects. 8. Make sure you have Confirm DLL calls _un_ checked in your Tools&gt;Options&gt;Expert Advisors menu for better performance. 9. Setup a profile which includes all of the pairs after 4-5 brokers and copy the profile across them all, to easily launch all pairs. Timeframe is irrelevant, you just need the charts open so the script can capture the price action data. 10. Make sure you are using build 409 on MT4. You may also find the script currently does not work with IBFX minis, or any other broker using suffix. Try another. Last important RR rule, tell your friends and share your observations!
+
+--- 帖子 #27 ---
+i still have call name pipe failed ill just watch the thread see if i dont find the answer.
+
+--- 帖子 #28 ---
+Hi guys sorry for the newbie question my question is when the script find a arbitage do the script open a trade with the tp? and sl?
+
+--- 帖子 #29 ---
+I had pipe errors too when yu start the slave it will have the slave name top right yu must put this exactly in the master at top left by adding to slave list sometimes you may need to restart slaves and master its working now I think
+
+--- 帖子 #30 ---
+Finally setup... watching 1-2 pip arbs showing up and lasting for a few seconds then no trades Any trades yet anyone? EDIT: oh, it's supposed to just show signals
+
+--- 帖子 #31 ---
+This seems to work beautifully on demo, but has anyone tried it on live? Live has slippage which might ruin things.
+
+--- 帖子 #32 ---
+Im not sure if these scripts actually trade wish they had some enhropy on the universe.. had to stop them I was going crosseyed.. heh maybe if we could show only arbs over a certain pip difference I couldnt enter the trades that fast anyhow.. we need a gui lol nice work tho im jealously impressed maybe the csv files will provide some answers...
+
+--- 帖子 #33 ---
+not yet to trade... it's in the T&amp;Cs in the Risk Disclaimer paragraph: "We provide economic and market information and analyses as an educational service, but does not give trading advice."
+
+--- 帖子 #34 ---
+I know a bunch of you are having some trouble with the script. I'm hosting a webinar in a few hours here: http://www.anymeeting.com/AccountMan...D=EB50DD808749 We'll go over your problems and give a sneak peek into what's forthcoming.
+
+--- 帖子 #35 ---
+think i missed it. was it recorded?
+
+--- 帖子 #36 ---
+Hi Ronald, I missed the webinar, but caught the recording without sound. from what I gather, the script does not trade but just shows arbitrate opportunities? The reason it does not trade is due to a host of execution problems such as latency etc?
+
+--- 帖子 #37 ---
+The arbitrage doesn't work at least last 7 years. It might works if there is a price problem in one of the broker. But don't be surprise after your account will be blocked and profit nullify There is only one way to make profit on the forex market: Study Fundamental and technical analysis, find pattern and train your trading sense. Do not try to catch the brokers. (Remember they hold your funds )
+
+--- 帖子 #38 ---
+Webinar next is up: http://www.anymeeting.com/WebConfere...=RonaldRaygun1
+
+--- 帖子 #39 ---
+Hey, thanks Ronald. Great webinar. It was awesome to see the script working and your demo taking trades on your webcast. Looks really exciting. Can't wait to see how this progresses!
+
+--- 帖子 #40 ---
+Thanks Ronald I shall look forward to see how this progresses
+
+--- 帖子 #41 ---
+Damn i missed it
+
+--- 帖子 #42 ---
+Okay, here's a bit of an update. In short, it's working. It's placing trades and capturing some positive pips from arbs. The problem? Not well enough. There are a number of things which need to be fixed to enable this script to work with multiple brokers. So for those eager to start playing with the trading side of the script, if you're willing to call me, and record yourself promising to absolve me of all liability in exchange for this alpha version of the script, will you do it?
+
+--- 帖子 #43 ---
+Hello all, Seems as though some of you have the scripts up and running. I am getting a combination of errors and still have the Pipes error mentioned previously in the thread. Any help would be much appreciated My screen displays under "Best Prices" as follows: CallNamePipes Failed! [Sig-Demo.com] Last Error: [0] fSuccess: [0] CallNamePipes Failed! [ FXCM -Demo] Last Error: [0] fSuccess: [0] The terminal reports on the Experts tab the following entries: 2011.12.14 19:25:49 FXARB Slave - Reporter: wrong delimiter for FileOpen as BIN function 2011.12.14 19:25:49 FXARB Slave - Reporter: wrong delimiter for FileOpenHistory as BIN function Any ideas as to what setup attributes I am not properly editing? Thanks, RD
+
+--- 帖子 #44 ---
+Attach the slaves first. Attach the master, and watch the three dots after 'running' are they moving?
+
+--- 帖子 #45 ---
+Followed your instructions and removed the master script and then reapplied. No change... and yes the dots are running and incrementing the count in rotation (or so it seems).
+
+--- 帖子 #46 ---
+Okay, are you running Windows 7?
+
+--- 帖子 #47 ---
+No, Windows XP SP3
+
+--- 帖子 #48 ---
+Skype me, you might have an interesting anomaly I need to factor in.
+
+--- 帖子 #49 ---
+RR, I sent you a Skype connect invite. I have rebooted twice and restarted all MT4 platforms. This action has cleared the issue with the "wrong delimiter" errors from prior attempts. It came to mind that these platform installations are not "clean" installations. Could it be that the dll's that your script relies on are not the standard? This could be causing the errors. Along the same lines, are their dll's that are common to Windows 7 and not to Windows XP that may be required support for process calls? Just a couple of thoughts to chew on...
+
+--- 帖子 #50 ---
+Have you? I don't see new requests at Brynmawr114...
+
+--- 帖子 #51 ---
+64 or 32 bit?
+
+--- 帖子 #52 ---
+It was 32 bit and we still couldn't get it working. We concluded a more effective IPC method was required. We may have to use sockets.
+
+--- 帖子 #53 ---
+If you can post up a screen shot of what's happening, let me take a look. Have him put in his PC specs too. Ram, cpu and what else is running at the time (hard drive space doesn't matter unless it's fragged all to hell).
+
+--- 帖子 #54 ---
+Older dell laptop, 1.xx ghz processor, 1GB of ram (Probably DDR2). All I know is my named-pipes implementation doesn't work on his computer.
+
+--- 帖子 #55 ---
+Im on 32 vista bit as well so maybe its time to upgrade to 64 windows. I had pipe errors too 2.69 GHz 3.25 ram
+
+--- 帖子 #56 ---
+Thanks for your effort building building this EA with good potential. I have pipe errors, too. The master switches from pipe errors to running and back every minute. Further i get the BIN errors on master and slave and the Arb Master file cannot be open... I run Windows XP SP2. The Master has suffixed currency pairs.. like EURUSDsuf. Could that be a problem? I added you on skype...
+
+--- 帖子 #57 ---
+The scripts currently cannot handle suffixes so yes that would be a problem. I obviously released too early, but it's nice you are all catching these bugs.
+
+--- 帖子 #58 ---
+XP should be ok on 32 bit. Anything more and he's ran out of memory. His HD is probably fragged all to hell too. Time for him to do some standard maintance on it; clean the drive, defrag etc.
+
+--- 帖子 #59 ---
+Windows changed a little bit of the kernel32.dll from XP to Vista and on up. Switch to a 32 bit XP system w/ a minmum of 1GB of ram. Don't load anything else but your MT4 terminals. It'll work fine then.
+
+--- 帖子 #60 ---
+boerge, patch to sp3. what's your cpu and ram?
+
+--- 帖子 #61 ---
+I can't remember off of the top of my head but there's a way to take the first 6 chars of Symbol() and reset those to a new string variable like Sym. Then just use Sym everywhere. Well, you get the idea. Being blonde in all that I am. LOL
+
+--- 帖子 #62 ---
+nondisclosure00, Actually, I had the same thought and ran several consecutive defrag cycles to reduce that impact. I do that and an intensive virus sweep each week to keep my machine running without issue. I did mention to RR that each year I rebuild my PC. That is normally a New Years weekend task. I will certainly re-attempt the ARB install and testing once that effort is complete and report my findings here.
+
+--- 帖子 #63 ---
+Pair = StringSubstr(Symbol(), 0, 6); Suffix = StringSubstr(Symbol(), 6, StringLen(Symbol()) - 6); Problem is, some brokers have pairs that are both suffix and non suffix.
+
+--- 帖子 #64 ---
+Landing by just to ask if you've managed to get suffix issue resolved. I also want to ask the country code of the contact number you've provided and the times you are available to make recordings of those interested in the alpha version of your system.
+
+--- 帖子 #65 ---
+Country code: US (1) and I have the suffix thing mostly working. Currently working on the signal management. What currently happens is the master sends the trade command to slave 1, waits for the response, then sends the trade command to slave 2. I'm trying to get the commands sent to both slave 1 and slave 2 simultaneously.
+
+--- 帖子 #66 ---
+Looks like jason is closing his doors on his. he never did prove it worked on live accounts. I hope you get yours worked out bro. much respect
+
+--- 帖子 #67 ---
+Jason closing his doors hahahaha lol , what a marketing ploy. It will not work on retail live accounts , i can guarantee you that.
+
+--- 帖子 #68 ---
+can't do it. MT4 is single threaded. The commands coming out of Master 1 will come out in order; not all at once.
+
+--- 帖子 #69 ---
+I'm pretty sure there's a way to send the order to the slave, and not have to wait 5-8 seconds between orders. Worst case, I'll just have to send the order off without waiting for confirmation and hope the slaves will be able to handle it successfully.
+
+--- 帖子 #70 ---
+well if it can be done ronald will fihure it out.
+
+--- 帖子 #71 ---
+Well, there IS a way. Drop off a value into shared memory, have the slave come get the value (value tells it what to do) then have the slave put the result back into shared memory (successful or not); master reads memory and then actions accordingly.
+
+--- 帖子 #72 ---
+nondisclosure seems to be knowledgeable in programming as well, I'm guessing if the guy had the mq4 files then he and RR together could gang up on the concept and figure it out sooner. There's a guy reviewing an arb system updating his results daily check it out on this link, so its not a matter of whether its possible or not, it just needs to be written well, and the right people for that happen to be in this very forum. http://www.moneymakergroup.com/Forex...m-t393026.html
+
+--- 帖子 #73 ---
+I have a feeling I know better how this works. Just need to make it a reality.
+
+--- 帖子 #74 ---
+The guy reviewing the system doesn't even understand it. Jason takes his trades, one buy one sell, and treats them as a BASKET. Thus, when you add the 2 trades TOGETHER, he'll close them at a TP level (where this is set I have no idea) that the both of the trades added together get to.
+
+--- 帖子 #75 ---
+Close, the basket concept I agree with, the TP is ideally set where the normal spread should be. So for the arb script that I'm releasing, I'm programming it so it calculates pip profit as the spread created by the basket of brokers. So when the profit reaches a certain spread level, close the trade.
+
+--- 帖子 #76 ---
+You're talking distance between the 2 brokers prices, right?
+
+--- 帖子 #77 ---
+is this arb or whatever your designing anything like ForexArb, with a one button push and all that?
+
+--- 帖子 #78 ---
+The one being discussed here is expected to be way better than Forexarb because the transactions will be automated. It doesn't necessarily mean that the system will be without flaw, but a genius is surely at work and keeping us hanging on the edges of our seats while he's at it. Just keep on checking the thread, hopefully your patience will reward you in a couple of days.
+
+--- 帖子 #79 ---
+brilliant, i got the demo of forex arb, and although it seems all pretty with all them trades its got listed for anything from 1-9 pips each, being able to take them is a different story hence a 2k-4k price tag is extreme for that. I will watch this thread and see what comes of it, seems the thread owner is doing a good job and keep it up
+
+--- 帖子 #80 ---
+@deankenny21 See the video at the beginning of this thread. That's basically what it will look like. And you can already see how much faster it is than Fielder's arb--and according to the professional programmers, my method is still slow. I'm working on this as much as I can shooting for a release by New Years. The main problem I'm having is reducing the time it takes to execute a full arb trade. Currently it's 8 seconds--not fast enough. Hang tight!
+
+--- 帖子 #81 ---
+good job http://www.forexfactory.com/images/icons/icon14.gif looking foward to see this working and share with us, very2 hope u can make it.btw http://www.forexfactory.com/images/icons/icon3.gif can we have the soft protipe so we can help test n develope together to find if anything still run wrong beside slow.so we can make this soft perfect for everybody.thx b4 http://www.forexfactory.com/images/icons/icon10.gif
+
+--- 帖子 #82 ---
+8 seconds seems like an eternity. How is this possible?
+
+--- 帖子 #83 ---
+Currently, the code sends one trade order to the bid slave, and waits for the response, then it sends the second trade order to the ask slave. I'm working out a way to send the orders and not wait for confirmation. I figure I'd opt to get the confirmation when the next cycle starts.
+
+--- 帖子 #84 ---
+All the best Ronald and happy holidays to all!
+
+--- 帖子 #85 ---
+If you can use your composite quote to determine which is the slow quote (the bid or the ask), and then get a confirmed execution on this first order and only then execute on the second, this might not be so bad, so long as the 2nd quote hasn't moved adversely to the arb since the first was sent. However as we know markets move and the concept of the arb implies simultaneous execution locking in both prices. The realities of the MT4 dealers may require a firm confirmation on the slow quote before executing on the fairly priced offsetting quote. You might also factor in synthetic pairs for (the initial or) offsetting position if they are more favorable, though you add an additional transaction with all the caveats of an additional trade + confirmation. I admire your persistence so don't let my relative pessimism regarding profiting from the final product of this project prevent you from pursuing it further. If one or more dealer consistently uses last look on the orders they may need to be removed from the pool as trading with them with this type of strategy will be no win. The essence of this strategy turns you (the trader) into the last looker and as a result, the broker may opt to follow the same advice as presented in the previous sentence, with regards to removing the trader (you) from their pool.
+
+--- 帖子 #86 ---
+Right
+
+--- 帖子 #87 ---
+Things you gotta think about : 1. Are you 'perceiving' an arb when it doesnt exist - (ie GO/ Pepperstone feed freezes at the moment) - consider using a quorum of brokers, and make sure the feed is still fluid on this and other pairs 2. I am assuming you ar advocating opening/closing on diverse brokers, then waiting for the positions to build (hedged, broker 1 +ve, broker 2 -ve) until a suffcient gap opens (so you dont get accused of hyper scalping) or until a 'hedge reversal' arb presents itself 3. Margin/Equity management - Allthough the OVERALL position is hedged, you will get a mismatch in equity on each side of the hedge. Over time, multiple concurrent open arb's may flatten the equity difference, but eventually to build up will reach limits where you have to address margin usage. In a hurry you could always just close the arb positions (not optimal) 4. You could consider a 'higher' level equity management (meaning more complex) whereby you allow closing a hedged broker 1, by executing on broker 2 -(ie keeping positions open persistently) The need for the equity management is increased, but then you have ultimate choice on which broker pair to use on each trade - and dont have to worry about closing each hedge in profit. The problems (and probably solutions_) are similar in each case, even if it initially appears more complex 5. Use sockets - concurrent execution is easy - you have to be careful of concurrent execution as slippage will be exacerbated. When you wait for confirmation you will be aware of slippage on 1 side and can attempt to compensate the second leg (by rechecking all broker prices) . When you attempt to execute concurrently you can get 2 lots of slippage which then become 'locked' into the arb hedge. Conventional 'institutional' arbitrage often relies on LIMIT orders (zero slippage - you just 'miss'), and consecutive (not concurrent) execution, not MARKET orders - it is easy argue that MARKET orders are exposed to slippage in any case, they will execute, and the penalty on poor slow execution is higher than the saving made in re-examining all brokers for a better leg 2 price - so you might be better to execute concurrently. I am not saying it will not work - just that you need to look at the 'big picture'. If you can build a basic arb strategy that manages to build a net +ve hedge 'pool' of arbs than you are well on the way
+
+--- 帖子 #88 ---
+good post an only your 8th. Are you a rouge programer from jason's staff? lol jk welcome to FF
+
+--- 帖子 #89 ---
+The broker's prices are refreshed immediately before sent from the slave to the master. By the time the prices are decided on for a trade, about 3 + 2 * # of brokers miliseconds have passed. By the time it's displayed on the chart, it's closer to 11 + 7 * # of brokers miliseconds. The prices are fresh, and there is a significantly small window before they are refreshed. I short the broker with the high bid, and long the broker with the low ask. Close the trades when the resulting spread (short broker's ask and long broker's bid) is back in normal territory--as defined by inputs for the EA. Once the spread reaches normal levels, it's a good time to close the trade. Some brokers have arb filtering / detection scripts, I would merely need to hold the trade a little longer--about 1-2 hrs--before closing it. My net profit will be the same, the difference is the margin levels between brokers. Unlike time-based 'arbitrage' where trades have to be closed within seconds of being opened. Margin usage woul merely require that accounts are 'refreshed' periodically. All I'd be doing is transferring from one broker to another. Adds to my spread + commissions cost. I'm well aware of the many infrastructure limitations, which means the best time to profit for this EA/script will likely be after events or instances where different banks become overexposed / underexposed to the currency. As for making it work, this is certainly not institutional grade code. Nondisclosure007 has seen the alpha version, and can verify how inefficient it is. In spite of the inefficiency, it should still be able to pull profits--especially if I'm able to manually enter arbs. Granted, slippage is through the roof, but I still eek out a net 2-3 pip profit.
+
+--- 帖子 #90 ---
+It will pull profits. Yes, the code could use some improvements and it will get it. ianj1, have you Arb'd on retail before?
+
+--- 帖子 #91 ---
+No - not retail But i have on institutional - quite a lot - and i know what the issues are !
+
+--- 帖子 #92 ---
+I've been doing it on retail and have had success. Nothing to write home about, but have had success.
+
+--- 帖子 #93 ---
+My assumption is that nearly all BROKERS (certainly retail MT4 brokers) will last look - its the ones that are slow that are the problem (most people don't realise that 90% of the prices on Currenex are last looked and even the last bastion of institutional NON last look brokers - Hotspot - is suspected to offer limited last looking to some privileged liquidity providers) Of course there are techniques to reduce the likelyhood of a last look, but they will not work on an MT4 broker (in fact they will not work in most cases unless you are talking about accounts in excess of $100k) Rumour has it that LMAX does not last look, but i haven't established that as fact. The top two tier one trading platforms, EBS &amp; Reuters do NOT last look - but they are way beyond any retailer traders reach As i said at the start the best you can hope for is a quick efficient last look Also, don't let anyone fool you into thinking institutional platforms (or rather the underlying liquidity providers) don't play games as well. I KNOW that liquidity providers have been known to 'sour' an execution by delaying the execution if they think they are being gamed.
+
+--- 帖子 #94 ---
+I would confirm that the best way to lose liquidity is to aggressively arb broker platforms. Many platforms are supposed to be anonymous, and the liquidity provider cannot identify you by name, but if they see suspicious or uncomfortable flow they can and may request that their prices are not offered to the owner of that account (you !) again. Over a period of time your liquidity WILL dry up (the account is effectively 'burned' out) , and in rare cases you may be thrown off the platform entirely (albeit quite rarely - a lack or prices on the account is usually enough) In retail, i EXPECT that liquidity providers will NOT try to pick off individual toxic flow - unless you are a large volume player (think 1000+lots per day), but word may get back to the broker leading to adverse consequences With luck, as a retail trader, you might stay under the radar and get away with it Dunno if i can post a URL but if it comes across take a peek at the blog of Xavier Alexandre - from a guy i respect who is VERY knowledgable on the subject "Algos for the masses" (try in google) ( http://xavalex.wordpress.com/2011/11...or-the-masses/ ) "and sophisticated smaller entities traders, who, let us face it, are mostly glorified arbitragers (yes yes this still happens, would you believe it)."
+
+--- 帖子 #95 ---
+I'll try and dig some code out to use sockets from MQL if you want - there are particular threading concerns within MT4 - especially if you want to emit a feed AND respond to order processing requests in a timely manner. I don't have any reusable code OUTSIDE of Mt4 - my stuff is all Java and part of a different system. Of course this might sound like teaching a grandmother to suck eggs ..
+
+--- 帖子 #96 ---
+I appreciate your overall concern for this project. Should your predictions come true, I'll still have a tool to aggregate best bid/ask from various brokers and that in itself will add significant value to my existing trading.
+
+--- 帖子 #97 ---
+As you'll note on the thread, you're not the first one to give me such conclusions. The beauty of my youth is that I'm too naive to know it can't be done.
+
+--- 帖子 #98 ---
+I did this about two years ago. This is when some of the more shady brokers started offering an instrument based upon currency futures. These instruments were supposed to move exactly in time with the live CME currency futures, but I found that there were quite a few timing issues that I took full advantage of. I wrote software to find the arbitrage opportunities, and towards the end, only opened up one leg of the trade, as I knew where it would end up going once the broker rates caught up with the CME rates. I know some people might call this cheating, but the brokers were quite clear that their instrument was only based upon the CME futures, not the acutal futures themselves, and that the prices may be different. I couldn't get it to work profitable with the normal currencies though. The slow execution and constant slippage was just too hard to deal with.
+
+--- 帖子 #99 ---
+I am not trying to be overly negative - i have been toying with the idea of trying it myself - and as you said you get a decent retail aggregator as a side affect (I plan on running strategies outside of Mt4 and just executing on them as an aggregated pool) My real interest is in cross broker equity/position/margin management once the initial arbs have been taken - alongside higher volumes to allow some level of netting - i reckon this stuff might be needed to make it profitable - perhaps i should see if walking is possible before trying to run .. I am sure you can see why i am also interested in economical broker to broker fund transfers (e.g. B2B on Pepperstone, Alpari, IBFX etc) In the institutional world you would simply rely on the prime broker to net positions. If you cannot manage the margin/equity equalisation effectively then equalising by funding could become pretty critical I'll be watching carefully - interested in seeing if walking is possible - then i might get my trainers out ... meanwhile if there is anything i can add ..
+
+--- 帖子 #100 ---
+In terms of equity management, I agree the margin requirements increase significantly, almost to the point where a prime brokerage is more desirable. For the purpose of straight arbitrage, I'm setting up each account so they can individually suffer a 1,000 pip drawdown. I'm pretty sure I can't screw up that much without fixing it.
+
+--- 帖子 #101 ---
+"sockets from MQL?" from terminal to terminal I assume. But please tell me you're not talking about named pipes. Are you?
+
+--- 帖子 #102 ---
+I do not understand what you are looking to do here? Why not simply have a prime broker and make the trade-off between the provider of liquidity? (Lava / Currenex / Hotspotfxi / EBS /etc etc)?
+
+--- 帖子 #103 ---
+Capital, or relatively lack thereof.
+
+--- 帖子 #104 ---
+U need 20K$ for londoncapital..
+
+--- 帖子 #105 ---
+if you were to deal with an aggregrate pool of prices amongst mutilple liquidity providers through say ebs hotspot and lava why would you worry about last look? Most likely your market maker will be different across both or all trades so why would the bank cancel the trade theough last look if they are not exposed to an arb based solely on their own pricing? The time i see lastlook coming into play is if there is an arb based on one provider and he chooses not to respect that order as it exposes the provider. Anyone shed light on this? Also arbing across retail brokers your not only fighting broker spread markup and manipulation but also higher latency as each broker has to send the order to its liquidity provider. If thhe broker is not an ecn they will prob ban you since they wont allow arbing
+
+--- 帖子 #106 ---
+What the broker doesn't allow is time-shifting. That is to say, using a faster feed to predict a slower feed. True arbitrage should not affect the broker provided they are truly a broker in that they pass through your orders.
+
+--- 帖子 #107 ---
+yup thats the problem, not many true brokers. If they hedge your position and they find out you are arbing they may ban you. That may be an urban legend. You are still fighting spread markup on 3rd tier brokers. You also have the backend management to deal with. There are brokers out there now that offer 2nd tier liquidity with DMA access and backend support. Im sure that some of the feeds offer last look and it is used, but that is a mute point as it will happen across any broker aswell. This will allow tighter spreads , but at the cost of higher capital startup (nothing comes for free). Also a note about trading thru the FIX api through the different exchanges like HOTSPOT and LAVA and EBS is that I heard there is a server induced latency of 10 or 15 ms.. not sure why, as arbing should create a more efficient market so why not? Probably the big boys trying to create a monopoly on the strategy. Proof of this and you can really make some money in court I heard ProTrader allows a dual broker arb, the type of arb you are looking for. Its all built in, and you can connect Dukascopy and say MBTrading feeds and let it run all day. It might be a marketing strategy to sway traders away from Mt5 but def worth a try. I myself am more intrested in arbs with more than one leg, if you can do a simple arb, why not use FPI (fractional price inefficiency) to have much more arbs, and they usually last longer? Even the effects of the spread are negated by the quality of arbs that come up. Ofcourse you have to hope that your trading protocol allows you to trade with fractional lot sizes which itself is another problem in that strategy lol. Why is it always so hard?
+
+--- 帖子 #108 ---
+Would a UK based member capital pool allow you to overcome the investment size issue and make the job any easier? We may have the method to do this....not multi-millions but say $25K to $100K or a bit more? Atlas1
+
+--- 帖子 #109 ---
+It's a start. But before even approaching that, I need to get this prototype working My main problem is making the shared pipes reliable. I haven't quite figured that out yet. Someone privately mentioned to me putting all the slave terminals in the expertsfiles folder of the master terminal, so it's just a matter of navigating to the files folder on the slaves. I'm using that as an absolute last resort, because then I'd have to worry about lock files and other nonsense.
+
+--- 帖子 #110 ---
+I suppose you could open sockets between terminals but this would not offer much flexibility with multiple brokers and might run into much more complex state management of messaging/threading I am suggesting using a central server that arbitrates between an arbitrary number of MT4 instances. I currently use such a system to make N:M copying between MT4 instance servers possible (and can include Mt4 brokers if suitable adapters are written) The threading/asynchronous issues can then be dealt with independently of the fragile Mt4 threading model My experience is in Java - but you could equally write it in a weapon of your choice (e.g. dotnet, python etc) Real network sockets from MT4 is not a problem - you can locate the server anywhere reachable
+
+--- 帖子 #111 ---
+I think because: 1. That is beyond the reach of most retail traders - Have you tried to open a real prime broker relationship ? Have you tried getting access to EBS/Reuters ? (Come back when you have) I believe the key (perhaps i misunderstood) unwritten constraint here is RETAIL brokers - please correct me if i got it wrong 2. MT4 brokers do sometimes publish 'attractive' prices - the question is whether they are hit-able (slippage on market orders) And then of course the question is how long you will last on institutional platforms - i can count the days your accounts will be liquid on about three hands. The account relationships with a prime brokerage solution are much more personal - you can't hind 'under the radar' in the same way you MIGHT be able to do in retail
+
+--- 帖子 #112 ---
+The main problem is 'souring' latency, not cancellations (but they are sometimes a problem that must be settled with a 'gentlemen agreement' where goliath usually wins on a dispute over an out trade) - its like picking pennies off a steam roller drum - if you miss your exit - you can be squished! Most instututional arb platforms have a min size of 10 lots or so - arbing 10-50 lots is normal. If a last looker does not like your price and 'sits' on it for 500-1000ms you could be screwed (try it on USD/ZAR or USD/MXN) On odd occasions a participant might DECLINE the trade and it will return to the matching pool - if another participant also sours the trade you could be looking at seconds You have two basic choices in simple arbing - Wait for leg1 to complete before starting leg2, or execute leg1 &amp; 2 together * With market orders you might as well execute both together * With limit orders you have to be careful because either leg1 or leg2 could 'miss' and you could be left with an uncomfortable position. Last look on leg2 is poison as you are then chasing to cover position
+
+--- 帖子 #113 ---
+It is difficult to arb effectively with $20k in institutional. $50k-$100k min is required to get them to give you access to multiple platforms - and that will NOT include EBS/Reuters Prime Broker relationships offer much lower leverage - 15-30:1 is the 'norm' HotspotFxi in particular has a min match specifier on posted orders. Many market makers will specify a min size of 5 lots which means you may not match if you are under 5 lots, even if the price is good - so anything under 5 lots and your odds start sliding
+
+--- 帖子 #114 ---
+I don't think you gain any benefit (other than for simple display), and have lots of minuses in running the master script within MT4. A simple console application functioning as the master would seem the way to overcome much/all of your difficulties. In fact, the more processing you can remove from MT4 the more control over the outcome and performance you should have, including multithreading. edit: I notice Ian said the same thing basically.
+
+--- 帖子 #115 ---
+Coz the banks don't like being dumped with 'hot potatoes' for being 3ms too slow. The brokers are generally fine with it, but if they do not tow the line they will not get the bank liquidity and their spreads will suffer accordingly. Price feeds are conflated (Combining a number of price updates together and emitting them in batch, say every 50-500ms) and sometimes intentionally delayed for 'other' reasons, but i am not aware of core matching induced latency, but liquidity provider 'induced' latency - almost certainly. Of course if am not speaking of retail systems again (sorry - i should stick to context) I would have thought that was minimised with 5 digit price feeds (but then are you considering 4 digit feeds as well?) I guess you are on about opening, say, a 3 leg triangular arb when 1 leg is out of alignment - and then closing when out of alignment in the opposite direction ? I would agree that it is merely a variation on a theme and slightly more likely to work if you can overcome the cost of the third leg, but most of the technology required is the same. On the fractional lot size requirement you only have to support 'normal' (leg 1-3) trades approximately - you don't need to trade an EXACT triangle - any differences can be picked up in a small 4th leg that is far less critical in price. So as long as your leg 1-3 is 10-20+ times larger than the min lot size the costs are manageable
+
+--- 帖子 #116 ---
+To the last point, this is the reason I believe that speed alone with the straight arb isn't the answer to long term success. I'm working on the premise that an algorithmic stat arb approach is required to stick around more than three hands worth of days. I'm well down the path with forward testing and platform tuning and am hoping to be in position to test a small live account in the next few months to determine if this concept will work with larger funds and to also gauge how this approach is received on the retail level. As things move from retail dealers to retail brokers to DMA any perceived advantage of executing from home off the DSL or cable modem would seem to evaporate and strategies like FPI don't seem viable when competing with colocated servers for choice fills. This aside form the points regarding the evaporation of liquidity when attempting a straight arb as the sole approach.
+
+--- 帖子 #117 ---
+do tou have proof that there is latency incclusion to the execution of the strategy
+
+--- 帖子 #118 ---
+Don't be silly !(no offence intended) Remember it is probably not introduced by the broker, but possibly by the liquidity provider - and it could be applied to anonymous accounts or simply individual trades, so it may not be 'personal' It might be unfair practise, but its not illegal practise - so there are no come backs for it. Even if i had proof, it would be professional suicide to discuss it in detail In any case, its all part of the game - we are predatorial, they are defensive - they are tools of the trade. There is no point in pursuing it - just being aware that it might happen. And retail may be completely different (sorry for banging on about this separation) What is really unfair is trade breaking - that can crucify you ! Fortunately it does not happen often
+
+--- 帖子 #119 ---
+All this talk about how arbing wont work makes me wounder even more if what Jason fielder (forexArb) did is really just a 2k scam? I think now we know why he did not automate it. I'm glad i kept my money.
+
+--- 帖子 #120 ---
+i'm glad you kept your money. it's surely a 2k piece of ... whats the point of buying and selling on two brokers to lock in a pip when you still need to close the two positions anything can happen in the mean time.
+
+--- 帖子 #121 ---
+We are not saying it WILL NOT WORK - we are saying it is difficult to get it to work for any SUSTAINED period (say 3 hands worth of days). The easiest brokers to arb are also the 'dirtiest' brokers and are likely to take back any profits .. and perhaps more - or complete screw up trading at significant loss What IS important is to be able to test software in a LIVE environment before spending loads of dosh - especially if the general consensus is that it is unlikely to work well or at all, unless you get strong corroborative evidence that it does/can work in the intended environment EA sellers sometimes rely on the fact that it can be very difficult to get a refund on purchases and that many buyers just will not bother. 2k with no effective trial and no decent corroborative evidence is possibly throwing the money away - or worse Better still - give it to a charity, or even me - i guarantee it will go to a good cause ;-) RR - remember my offer is open - if i can offer a hand, ill try and find the time - no guarantees though
+
+--- 帖子 #122 ---
+I appreciate your offer and may have to take you up on that. Currently I have three components: (Script) Master - This is responsible for receiving the data feeds (terminal, price, and trade) from the slaves, aggregating the information, and distributing instructions (Script) Data Slave - This is responsible for sending the data feeds to the master. (EA) Execution Slave - This is responsible for queuing and executing trade orders. Waiting on the market open to test out this new infrastructure. Should this end up not working, I'll have to move to a mesh network of sorts, and that will definitely be hairy.
+
+--- 帖子 #123 ---
+A mesh will be real hairy as it will grow exponentially as each new broker is added (n^2), whereas a master server will just add 1 connection (or maybe a pair - one for feed and 1 for orders - or possibly worse - one connection per pair to pick up ticks in best time - unless they are aggregated in MT4 before sending over a shared feed for the MT4 instance to the server) per broker (n*m where m is the connections required per MT4 server) Its probably not a good idea to write that server in MQL, but as long as the protocol is standardised you can write it in anything .. If i start something it will be in java so you'd have to be willing to pick it up from that. I can put a basic server, some basic comms, and a feed together if and when you are ready - you can then play about with it as the skeleton would be in place
+
+--- 帖子 #124 ---
+I currently transmit a 1600 character string from each slave. That string has the price, terminal, and trade data. That's about as 'standardized' as I've gotten. In terms of the infrastructure, writing the server in MQL is not ideal, I know. But is definitely a start. Once the market opens, I can test the trade queuing function to accept trade orders from the master, and queue it for the slave to manage.
+
+--- 帖子 #125 ---
+Speculation
+
+--- 帖子 #126 ---
+Thanks for the "fix". Nice pun; even if I do say so myself. It's been a while since I looked at this. Now seems to be a good time to do it again. ProTrader does have it build it. I've played w/ it a lot. Downside is it only connects 2 brokers. I've played w/ FPI but have had a lot of failure w/ it. If it's been successful for you, do you have a good link for me to go read up on it? Thanks.
+
+--- 帖子 #127 ---
+Ah, got it. Although, I'd use something faster than sockets. Yes, it does exist.
+
+--- 帖子 #128 ---
+You're dead on.
+
+--- 帖子 #129 ---
+Damn! You read my mind! LOL That's what I'm working on right now.
+
+--- 帖子 #130 ---
+nondisclosure00, You use ProTrader for arbitrage with 2 retail? brokers ?
+
+--- 帖子 #131 ---
+Yep. I worked it on EURUSD. And it works almost as well as the 2 broker arb I wrote.
+
+--- 帖子 #132 ---
+Nondisclosure, Is there a manual for your 4xarb? Thanks! precords
+
+--- 帖子 #133 ---
+No. I kind of left it as it is because I needed to add more brokers to the mix. That's when I found this thread.
+
+--- 帖子 #134 ---
+Is is just me or do my trades take awfully long to close. (they never close despite hitting a profit) my arb settings for master script is -0.5 for all. Technically trades should close once in 0.5 profit no? My trades are &gt; 0.5 profit but it isnt closed Also, same trades seem to be taken based on a single broker. Shouldn't arbitrage be a pair? Please see screenshot. Somehow when the master sends the close order to the slave, it doesn't close.
+
+--- 帖子 #135 ---
+PM me the e-mail where you received the script.
+
+--- 帖子 #136 ---
+Hello Ronald, My name is Robert and I am new to the forum. I'm Italian and I live in Switzerland. I do not speak English very well but I hope to make me understand (help me the translator of google!) I am interested in forex a few years and I recently received an email that advertised the EA "Forex arbitrage." I started to get interested in the topic and then searching the net I found your EA. Just yesterday I received an email with your upgrade. I tried to install it and I think I've done the right way. But to verify I tell you what I did. I chosee one broker and I installed in metatrader 4, on some chart, the FXARB master and on the same broker in another chart I installed the FXARB slave. I then installed the FXARB slave in another 6 metatrader of other brokers. Messages that appear on the FXARB master indicates that the slaves are connected. At this point, from what I understand, when there are favorable conditions should be open, for example, buy position on the master and at the same time sell position in one of the slaves and it should close automatically when it reaches the set profit. Instead what happened is that we have many positions open on the metatrader where there is the master and slave, and many have closed with several stop-loss and many other positions are still open with significant gains and losses (from 30 to 150 pips). As for the slaves, however, only one has opened many positions and even here many have closed with several stop-loss while others are still open with variable gains and losses. Maybe I did something wrong? What settings do you recommend for the master and slave? I hope I have explained in an understandable way what happened. If you need other elements to understand what happened let me know. Thank you in advance for your support Roberto
+
+--- 帖子 #137 ---
+What I find most bothersome is how some people don't read the instructions they are given. To those who whine that it won't work, build the system and prove me wrong. Stop speculating. I'm here busting my ass trying to prove to myself whether or not it will work, and when it's done I will release it for free. Your collective discouraging comments are not constructive to this thread. It's like I tell my staff, "Don't come to me with problems, bring solutions too." Further: To those badgering me to release the code, I'll give you two options: Wait until I'm comfortable enough with the stability of the code so it's harder for an idiot to blow their account and sues me. Send me $10,000 so I can pay a lawyer the proper retainer to protect me against the lawsuit that will come if an idiot blows his account using the incomplete script. I am writing it completely in MQL and using standard windows DLLs so that nobody can accuse me of hiding code in a DLL. Everything is open and more importantly easily accessible. There are about 600 people who currently have the beta version. There are a number of issues that need to be worked out.
+
+--- 帖子 #138 ---
+So to recap RR Those who are beta testing report problems and thats it. Those who are not beta testing, just sit on your hands and wait. If you were not sent a beta dont ask. The man needs to code.... A second Xmas gift is coming to ff.
+
+--- 帖子 #139 ---
+And this is largely the reason why I'm keeping my programming to myself. People fail to understand proof of concept, and are only concerned with the end result (omg!!11 will i make monies!?).\ You provide something for free and as-is, yet people expect support and seldom offer constructive criticisms, etc. Anyway, good luck with it.
+
+--- 帖子 #140 ---
+Sockets are not a problem - Most C based sockets can work in around 300ns (nano). I have myself managed a round trip (a message from java to MT4 and a response back) in about 1-1.5ms (millisecond) - thats not a problem on MT4 timescales. The advantage of sockets is the simpler server implementation and the potential for access from other machines (maybe an additional 0.5ms within the same LAN)
+
+--- 帖子 #141 ---
+How long would it take to send a ~1500 character string? That's what I'm sending from the slaves to the master.
+
+--- 帖子 #142 ---
+still run at demo, sometimes master script must be reloaded or drag to chart again, because stopped/hangs today start
+
+--- 帖子 #143 ---
+I was thinking a bunch of VM's, w/ a dual nic interface. One to get out on the internet to get the data and the other nic dedicated to a private network (which w/ all being on the same physical machine would just be in memory).
+
+--- 帖子 #144 ---
+It depends on the speed of the connection and how you read/write - to be honest i never timed it as the messages i sent from mt4 and server tended to have an implied context - ie i had a logon phase where details were exchanged which lasted the whole of the session. The theoretical calculation depends on the intervening network speed - 100Mbit (typical cat 5e) lets you transfer 10Mbyte or so of data a second - but only if the packets are sent end to end without requiring acknowledgements - if you get an interactive conversation you are unlikely to improve upon 1-2Mbyte per second. Gigabit will go faster but then application design will play a far larger part in determining effective speed. Additionally, timing over a WAN connection are notoriously difficult to do properly as you have to consider numerous things including tcp window sizes, nagles, packet sizes etc. Then again, at least remoting is possible - local IPC mechanisms dont allow that at all All i needed to send in EACH message was a timestamp, (in theory you don't need that if you can forward the updates in a timely fashion), symbol, price (or a pair if you ship bid/ask at the same time - you might consider sending just the bid/add when one changes - would have to test which one was better) Orders would, of course, need more data - but mostly a reference (sent), price, type, symbol, sl, tp, magic, comment - and receive a ticket,reference(sent), status and opening price back Are you bundling a number of messages together to get to 1600 or are you using fixed width formatting instead of using a delimiter between fields If you are sending along the same network segment 1600 should not be too detrimental - it is 2 network packets - If you were linked over a WAN the time addition might be significant - keeping it below 1400 or so would help (1492 is a common magic packet length), though its likely the Mt4 instances would be running from the same location - your mileage might vary. I think the more interesting challenge is how to respond to messages in a timely manner - polling will slow you right down - using sockets i was able to stop mt4 in a blocking read - waiting for an order request - it was able to receive the message, process the command and respond immediately. The compromise is that it consumes the EA thread and you need to use another EA to send price updates (you get 1 thread per EA) - or you could use a script as they also have a thread, although that might be shared with the GUI - i am not sure as i have not tested - so you might lose responsiveness You don't need this stuff to start with - but its worth having to hand in case you run into threading/co-ordination issues - I appreciate you are working on the logic to start with. Sorry for the long winded answer - but i guess too much is better than too little
+
+--- 帖子 #145 ---
+All EA's, in the same terminal instance, share the same thread. This is for MT4. Metaquotes says in MT5, that's changed. Haven't tested to find out yet.
+
+--- 帖子 #146 ---
+I myself have a program written in C# and C++ (see attached), the project was started about 3 months ago and so far has been tested in demo for more than 1 month. Everything is fine on demo, but when I moved to the live trading. The game is turned over by the slippage from the retail brokers. The FXDD keeps complaining about the off-quotes and re-quotes. same thing happened with the forex.com . BTW, the average order execution time from my program is less than 1 second on most of brokers. The program is also installed on a vps. With all the data (execution time, slippage, vary brokers) I collected, my sense is that the slippage is the most dangerous threat to the system. Unfortunately, I have not been able to make it profitable on the live trading. any thoughts, guys? Thanks,
+
+--- 帖子 #147 ---
+Slippage being #1. I found Freezelevel being #2.
+
+--- 帖子 #148 ---
+nondisclosure00, Thanks for your quick reply... The #3 is broker personality. I tested 6 brokers on demo. One of them is really really bad. basically it tried to screw you up for every single chance. Do you have any thoughts of how to deal with it?
+
+--- 帖子 #149 ---
+Are your difficulties in demo or in live?
+
+--- 帖子 #150 ---
+In live. The system works like a champion in demo. grows everyday. But in live, the slippage is much more serious than I expected (I just tested for a few days on live, though).
+
+--- 帖子 #151 ---
+Presumably you're using market orders? I found that #3 (broker personality) was quite a wild card and spent a lot of time on that one - tuning for the live server. I don't want to turn RR's thread into a help desk but just a couple of comments and some homework. You probably already are but make sure to refresh rates before transmitting. If the rate in your order doesn't match the rate in the broker you get rejected, particularly when using small slippage #s. I've found that this is ESPECIALLY true on live servers and with OrderClose(). Ironically, you may need to reduce the slippage # to a smaller factor and just accept the fact that you're not going to get all those fills on the slow broker, or just keep refreshing rates and attempting to get a fill while the price is attractive for the slow side of the arb. There are a number of issues with order transmission on MT4 brokers. I cover some of those in this article: How to write a close all script (particularly RefreshRates / IsTradeContextBusy / IsTradeAllowed / Slippage) and also see the Notes under OrderSend as well as the NormalizeDouble function in MT4 help if your'e injecting your own prices to get a specific fill on a specific broker. The difficulty comes when trying to actually put on the arb on the 2nd broker. You don't want to put on the offsetting position before you know the slow quote has gotten a fill, and you may consider just executing on the slow quote though that will take some system development if the signals are infrequent. The edge in this arb strategy is getting the fill on the slow broker. The 2nd fill hedges and locks in profit but doesn't add alpha (unless both broker prices are out of whack).
+
+--- 帖子 #152 ---
+Thanks, FXEZ. I don't intend to hijack RR's excellent thread, either. I believed that my problem is also the difficulties for many others who have the same interest in the Arb. system. Our discussion may do some good to the system. Yes, I am using market orders, for sure. You want to grab the opportunity ASAP, right? Yes, I do refresh the rates before sending the orders. But I use a large tolerance on the slippage. Otherwise, the system will get many rejections. especially during the fast movement. Yes, all these has been considered. I also check the order history to ensure the order is actually executed. It is very true that the 2nd broker is hard to control. it is not unusual that only one leg gets filled. As to the offsetting position, if you put another order after one leg is established, is it still the arb system? To me, it is more like to hedge the previous position. I will try to modified accordingly and see how it goes. Thank you very much
+
+--- 帖子 #153 ---
+Oh ! Thats odd coz my home written copier in MT4 has a number of ea's - one per 'signal' it sends - it uses a blocking socket read to ensure a quick response on order processing. I can and do run 5+ of these in a single Mt4 instance (no polling) , and each has the same response characteristics, around 1ms - which says to me that they are each running in a separate thread (I am running the standard WSA socket stuff) The only ill effect is that the same thread is used to show the EA Properties dialog - so you cannot edit the EA properties without first stopping the EA ! I believe there is a single shared trading context - and this stops parallel trading operations, but it is still one thread per EA (to be more precise evidence merely indicates more than one thread concurrently as i have not confirmed that the SAME thread is used for each EA invocation, but it would be an easy way to serialise thread start() method calls if it was a single thread for each EA, instead of some thread pooling/queuing mechanism) This is hinted at in this discussion: http://forum.mql4.com/22585 I do believe the threading model for chart indicators and scripts is different to EA's - I am GUESSING that all indicators run on a single thread, and each script runs on a separate thread, although i have no experience to corroborate this I know the strategy tester is single threaded - are you sure your are not picking your information up from that fact I am a little mystified if i got it wrong, as i have no other way to explain the behaviour i see!
+
+--- 帖子 #154 ---
+FYI on an institutional broker you can trade flat with a limit order and hopefully get a better fill as passive orders rarely get the price improvement - that usually goes to the aggressive leg
+
+--- 帖子 #155 ---
+I have mentioned before that my BELIEF is that, for MARKET orders, concurrent execution is worthwhile as the cost of delay is likely to outweigh the cost of slippage. The slippage limit could help (but is it universally implemented ?) but i bet its not gonna reduce the delay. I promise not to say this again - honest ! If MT4 had LIMIT orders then it would be equally viable to execute concurrently or asynchronously, depending on your opinion at the time I'll add that am also not trying to hijack the thread (but not succeeding very well :-), but hope the shared experience might help RR navigate the pre-trodden minefield that awaits
+
+--- 帖子 #156 ---
+can you be a little more specific w/out giving out names?
+
+--- 帖子 #157 ---
+I did some statistics analysis on the trading history of 6 brokers. The average slippage from the bad boy (~3 pips) is way worse than the other 5 brokers (0~1.5pips). Although they claim they are ECN-type, I refused to believe. Also, the average execution time is more than the others. Basically, I guess they tried to give you the worst price within a given execution time window.
+
+--- 帖子 #158 ---
+Now I'm confused. You can send orders concurrently as long as they are in different MT4 instances.
+
+--- 帖子 #159 ---
+Now this throws a monkey wrench into what metaquotes told me.
+
+--- 帖子 #160 ---
+I sum the slippage of all trades within the forward testing period (one month) for each individual broker and do the average over the total number of trades. Then you know some are good, some are natural and some are bad.
+
+--- 帖子 #161 ---
+I'll see if i can think of a way to demonstrate this without setting up an overly complex test - i guess it should demonstrate a blocking OS call - while using the Win32 API to access the current thread. AT least we could then get the whole picture - I could easily be mistaken as i was chasing effect rather than cause when i implemented the system I'll see if i can do that later today
+
+--- 帖子 #162 ---
+Thank you a LOT ianj1! Let me know what you find.
+
+--- 帖子 #163 ---
+Thank you Ronald for all your hard working and i really wish that all the members will help and share with their comments, so we can all have something good for ourselves!! By the way the Scripts are working well now but it needs some Inputs like Number of Lots and also to make it accept pairs as "EURUSD. / EURUSDm..." i am trying to find a solution for this issue and i will let you know once i have it .. Thank you again!!
+
+--- 帖子 #164 ---
+Hello, Ronald, you're a genius and everybody appreciates your hard work and the fact, that you're releasing it for free is even more amazing. But arbitrage will bring you all trouble or even get your positions cancelled/account banned . Brokerages know what is going on, trust me. I can tell that from my own experience. Regards
+
+--- 帖子 #165 ---
+Then what you're doing isn't true arbitrage.
+
+--- 帖子 #166 ---
+Is that because "true" arbs don't always play out and will have some losses? An account making 1,995 profitable trades out of 2,000 will naturally raise red flags, but one with an 80/20 win loss ratio would stealth the system as just another EA based on technical analysis and is in no way malicious?
+
+--- 帖子 #167 ---
+To a lot of folks in the forex world, arbitrage is using a fast broker's feed to predict a slower broker's feed. That's not what I'm targeting. Arbitrage requires buying in one market, and selling in another simultaneously. In this case, we are looking for two brokers with two different prices for the same pair. If the buying price at one broker is less than the selling price at another broker, then if you buy from the buying broker and sell at the selling broker, you turn a profit. Given the nature of retail forex, you cannot simply buy a pair with one broker, transfer it to another broker and sell it. Instead, you go long with one broker and short with another broker simultaneously. In doing so, you expect the price to move to the middle. At that point, you close the trades with a net profit. The benefit of this sort of arbitrage over time-lag arb is that I can in theory hold the trades open indefinitely (or whenever an account runs out of margin. This means that while I can enter a trade where the spread (bid - ask) is negative, I can also wait for the spread to widen before taking my profits.
+
+--- 帖子 #168 ---
+RR, From what i have seen , the quoted price difference (atleast with retail bucketshop brokers) is almost always caused due to one of the brokers running a slow feed. Or their prices not refreshing or reacting fast enough during news events. This is normally tagged as lag trading with these brokers and more than likely causes them to cancel the profits. I had a pretty decent arb system developed about 4-5 years ago that i used for a little while on some of these brokers until they cancelled out my trades. I am pretty sure you will be running this on ECNs or higher tier brokers where i have no experiece with... howeever if anyone is planning on runiing this on the bucketshops of the world, iam pretty certain it wont end good. Aside from the actual system development that you have been very diligently doing , we also need to identify the broker systems where this will work. Hopefully once the system development is completed(no pressure), we'll start identifying brokers (offline if preferable) where this will work. Regards
+
+--- 帖子 #169 ---
+Nice work RR thanks for sharing so soon! yours looks good mine has open trades still ???? think I may have inputs wrong on master can you please tell me how you set up your inputs for the master thanks in advance
+
+--- 帖子 #170 ---
+A broker's liquidity providers' liquidity providers ultimately are interbanks, and they are sometimes overexposed / underexposed to various currencies which causes a run or a rally on that pair. Now because each interbank does not have the same amount of exposure to each currency pair, you can expect each of them to quote different prices, and some instances where the bid from one bank is greater than the ask from another bank. That's the ideal opportunity.
+
+--- 帖子 #171 ---
+Brokerages have their radars set for arbs, believe me. Now, the bad part is that you're going to get banned like card counting blackjack players do - for something, thats not strictly speaking illegal/forbidden. But I guess that makes you undesirable. Casinos, brokerages don't like to be taken advantage of, no matter what.
+
+--- 帖子 #172 ---
+NQ, I think what this essentially boils down to is the Arb trades made by RR's system are not latency arb's in the way most of us have read about on the internet. Many latency arb strategies are very easy to detect because they either make a zillion trades that are nearly all profitable and close within a second. This is the "latency manipulation" that can be noticed by the broker. I have seen the system in action and due to the time it holds many trades, and that several stop losses do get hit, distinguish this from the subsecond latency arb's so often mentioned in bucketshop's TOS. If you re holding a trade for minutes or even hours, how can the broker prove that you can see the other end of the interbank and are scamming them with this knowledge? To me this seems very hard to prove in this instance.
+
+--- 帖子 #173 ---
+Its not difficult to detect, but they might only really feel it with larger lot sizes when they MIGHT choose to hedge the positions. They would persistently find it difficult to hedge the 'hot potato' they were passed (if they were a slow broker the price would have moved) In that way it appears more like an institutional broker position - and they have no problem spotting those. Even if they didn't actually hedge the trade they would see the price consistently moving away just after the position was opened - software can spot that easily. If the trades are smaller, however - they might not bother, they certainly cannot accuse you of hyper scalping which is another frequently side effect of trying to 'front run' a slow broker feed To disguise it you might be better waiting for the position to reverse - which it would in many cases - and then close at a loss on the 'slow' broker (and a win on the other broker) . Then you would have a mixture of wins/losses that would be more convincing. After all it MAY be only when they consistently lose that they take notice. This might also help in flattening the equity curve which will wander about as the net position moves between the brokers - its the equity 'pump' i mentioned some posts ago. In fact you might manage to stack the equity so that you LOST on the slow broker overall - then they would be happy I don't think its necessary for them to 'prove' anything, unless they are looking to reverse trades or remove profits - an unscrupulous broker is more likley to start slipping you more to compensate - but why would they if you were one of the 95% of 'losers' out there
+
+--- 帖子 #174 ---
+The other 'secret' to this is gonna be VOLUME - you gotta drive those commissions down. Look at the dukascopy commissions if you are running a larger account or larger volumes - they drop like a stone. Also take account of rebates in the calculations. I know the likes of GO did stop rebates, but i think they continued to pay to the announcement rebate end date so you should be ok if you keep a close eye on them
+
+--- 帖子 #175 ---
+Very well said. That exactly is how you play smart and win in this arb game without drawing attention and having your profits cancelled on the slower broker.
+
+--- 帖子 #176 ---
+so how many opportunities for arb does this system produce in say, a weeks time? and other than the broker possibly getting upset, are there any actual legal implications to playing an arb strategy like this? thanks.
+
+--- 帖子 #177 ---
+I don't think, you people, understand what are you talking about.. Let's say you took sell on one broker and buy on the other when prices where apart, then when they came closer together you close both trades, imaging 2 charts one overlay on top of the other, and instruments have a perfect correlation, So ones charts gets apart a bit you sell top one and buy lower one (position same lot) On different brokers. When, eventually, charts merge again you close both positions, SO? you going to have possibly loss on 1 broker and win on the other.. Next time you might have them flipped.. So? you account not going to look like you think (All winners) NO. you going to have winners and losers like any other typical account the only different is, when you took stats from both accounts and apply them together only then you going to see profits.. Now, how come individual broker can get upset??? About what? Nothing unusual will be showing in statement.
+
+--- 帖子 #178 ---
+I have had a few PM's asking me what 'last look' is - so i thought i would explain. This explanation directly refers to the institutional market, but MAY also apply to the retail market TO SOME DEGREE. A pure ECN is when liquidity providers post bid/offer prices to the broker and the broker matches buy/sell orders against the bid/offers. The list of bid/offers is called the ORDER BOOK, and the 'best' bid (highest) and offer (lowest) is called the TOP OF BOOK - that is what you see in most retail price feeds - top of book prices (BTW: L2 is a more complete order book). In AUTOMATCHING the broker will match buy/sell orders against lying bid/offers (according to certain criteria including credit, price, time etc). When NO last look is active the broker will simply INFORM the liquidity provider (bank) that his bid/offer has been hit/matched and send the COMPLETED TRADE details. This process can be very quick (a few ms) With LAST LOOK, just BEFORE the match - the buy/seller detail (price, size and sometimes account detail if it is not anonymous) will be sent to the liquidity provider to ASK them if they want to accept the deal. They are not really supposed to refuse many (very small %) of deals, but the broker WILL NOT PROCEED with the matching operation until the liquidity provider responds. An unscrupulous liquidity provide could dislike the deal but be reluctant to refuse it (they have accept quotas they have to meet) so they MIGHT choose to sit on the deal for a few hundred ms - to 'sour' the deal for the aggressive buy/seller hitting the banks price. LAST LOOK is insidious, they don't need to refuse the deal - just delay it, to do damage. IF they eventually refuse the price- the buy/sell will go back into the matching pool to look at the next best bank price - imagine what happens if the same happens again - time to go on holiday ! None LAST LOOK brokers (or more exactly non last look PRICES) are quite rare, and almost always NOT the best prices (not top of book) so last look prices are very much a fact of life. In the retail market i expect most prices are last look - as long as the broker sends the price to the liquidity provider who can veto the deal or delay the response The ECN/STP question is moot - you can have ECN and LAST LOOK at the same time - and i am not sure if 'pure' ECN brokers with no last look actually exist in MT4 in any case Another term that refers to the same process is AUTOMATCHING - means essentially means NO LAST LOOK In the institutional world, none LAST LOOK brokers are EBS, Reuters and to a large degree HotspotFXi (maybe completely - i am not sure). There are a mix of LAST LOOK and AUTOMATCHING prices on Currenex/Lava(FxAll) In Retail, its POSSIBLE that MB Trading and LMAX are true ECN, and may not last look - and LMAX claimed to me they did not last look - but beyond that i don't know. Dukascopy i SUSPECT has a mix of price types, and perhaps also Integral (FinFX and others). The reason why it is mixed up with ECN terminology is because an ECN implies that normal mortals - you and me - can post bid/offer prices that appear on the order book. Invariable normal mortal prices will NOT have a last look (why should the broker care if normal prices are arb'd) so will likely execute quickly. Its the big liquidity providers (banks) that use it in most cases - and its their prices that are normally at top of book. Unless it is a big important trading platform (the 2 big boys are EBS &amp; Reuters) a bank will be very reluctant to post good prices unless last look is offered by the broker. So no last look, no prices !
+
+--- 帖子 #179 ---
+Hi, Can somebody clarify this please. Suppose i have following prices from different broker for EUR/USD buy - 1.2929 and EUR/USD sell - 1.3001 So i have an arb opportunity. I buy on one side and a sell on other. Sread is 2 pips. Price moves 5 pips up, i have +3 on the buy side and - 7 on the sell side. Where is the profit? Can somebody please explain it more widely, how is the profit generated.
+
+--- 帖子 #180 ---
+i think it's really cool what ronald had done here, yet not profitable, then how jasonfielder get profit??when arb's what we talking about here. i'm newbie @forex thing, just googling about this stuff and read ,want to ask ronald which want's better arb or corelation pairs ex eurusd buy ,another pairs sell (i don't know what pairs) that against eurusd and in the same broker and terminal,which want more profit?thank you.sorry my english bad
+
+--- 帖子 #181 ---
+The arb is 'captured' in the initial 2 deals - you must BUY in one account at a price LOWER than you SELL in another account - in excess of the commission you must pay. Thats why it is difficult to arb - the bid/offer OVERLAP on two opposing brokers must be in excess of all commission - on EU around 0.5-0.7 pips at best (remember you have to pay commission on both brokers) You then leave the hedged position open as long as you like - because it is hedged the net position will not increase or decrease (subject to varying spreads and widening that may differ) The equity on EACH account will vary but not the NET position across the 2 accounts. - you have 'captured' a couple of pips - now you need to 'materialise' them At some time later you can close the positions TOGETHER and with a bit of luck you 'materialise' your couple of pips profit (but remember one account will be higher in equity, slightly more than the other account is lower in equity) The net position does not change over time - it is fully hedged, but ACROSS the broker accounts. You still have to be careful. If, while the position is open, the price goes up 1000 pips - one could could hit its margin limit (whilst the other registers loads of profit) so you need to decide when to close the hedge position - Perhaps a good time would be when it is QUIET (so less slippage)
+
+--- 帖子 #182 ---
+Currency pair correlation changes on a day by day, even minute by minute basis.Mixing an arb with correlated pairs is playing with fire because an arb tends to use higher sizes to materialise the small pips captured. If a correlation breaks you could be slaughtered Once upon a time USD/CHF &amp; EUR/USD were heavily correlated - the cross EUR/CHF was not expected to move much - thats all changed nowadays AUD/USD, USD/CAD are correlated when commodities move NZD/USD, AUD/USD are correlated when risk moves EUR/USD, AUD/USD is correlated when politicians don't interfere ;-) Oil is correlated to USD/CAD - sometimes !
+
+--- 帖子 #183 ---
+Jason never proved his system with 3rd party live statements. i have yet to find anyone on peace army or anywhere brag about live pips. so i think Jason scammed everyone so far
+
+--- 帖子 #184 ---
+Thankyou!
+
+--- 帖子 #185 ---
+are my setting right for master????? 3 pip diff = make trade close on 3 pip profit
+
+--- 帖子 #186 ---
+No with this setup close profit 2pip..
+
+--- 帖子 #187 ---
+In your example, there is no arbitrage opportunity. The bid from one broker has to be higher than the ask from another broker to create the arb opportunity.
+
+--- 帖子 #188 ---
+I was only speaking about Jason's arb $2k system. I have no doubt that there are other arb systems working. I just could not see paying 2k for one that had no proff it worked live. And still there is no postive rantings about how well jason's arb system works. I can't find it. RR is close, just has a few bugs in closing arbs.
+
+--- 帖子 #189 ---
+I agree. I don't see anyone who would shell out $2K for a system that requires the trader to click a button when there is an arb trade. Some arb opportunityies only last 6 seconds.
+
+--- 帖子 #190 ---
+you said u have it, you sale it or used it, if u use it why u don't give us proff, if u sale it why u didn't tested ur self cause it's more easy to sale with ur testimony, are u doubt it to??? http://www.forexfactory.com/images/icons/icon6.gif peace
+
+--- 帖子 #191 ---
+Be careful with this Arbitrage thing. Some brokers don't pay out with standard - noECN brokers... yes the ones with the dealing desk. I'm not sure about doing it with a ECN account is better. A friend of mine have his own Arb EA. He placed $500 in the account and got it up to almost $24,000 about a month later. Then he tried to withdraw. The broker then placed his account into investigation. Following canceled and kept ALL profitable trades. Then banned him. I would like to know if this would have been a happier ending with an ECN broker because there would be no dealing desk and everybody wins.
+
+--- 帖子 #192 ---
+Your friend should seriously consider opening it at a STP/ECN broker
+
+--- 帖子 #193 ---
+First off there would be some blood on my hands after keeping my hard earned money. How ever it was earned. Every broker in the building would need dental work. Even the janitor if I was still mad. Second.... He's a genius can he do it again...
+
+--- 帖子 #194 ---
+I am not a vendor. I am not selling anything. I am a user (not Jason Fielder's EA). Sorry, I cannot discuss commercial EA here - rule #3. Just want to comment on two misconceptions. 1) Arb works in live accounts. You'd better believe it. The profit is 10% of that from trading the demo accounts. 2) Brokers welcome this type of EA (not latency arbitrage) because customers trade more often. Trades last 3, 5, or even 30 minutes that allow the broker to hedge. This is a fact, not a theory.
+
+--- 帖子 #195 ---
+Does RR arb system works on a live account? or it still under development?
+
+--- 帖子 #196 ---
+So are you using the jason field ForexArb? Or another? Your own? No RR's is not ready for live yet. EA has trouble closing trades. I suspect this Arb idea will only work well with ECN/NDD brokers. I know most of these types of brokers want a $2000 min to open account. So by my math if you need 4-6 brokers to find good arbs well.... you can figure out start up cost.
+
+--- 帖子 #197 ---
+Yes, brokers with dealing desk can manipulate the prices, and most of them take profit from your loss, not from the spread or commissions. So if you make profit, then they will lose. I have a few similar experiences with these kind of brokers. Here is a good cartoon about this: http://media.dailyfx.com/plus/dealin...toon-final.flv Theoretically the price manipulations of this kind of brokers would mean more arbitrage opportunities. The only problem is that these brokers usually aren't reliable (problems may be with not just strange quotes, but slow execution speed, big slippages etc.), and it may cause problems when you want to withdraw your money, as ForexPlex wrote.
+
+--- 帖子 #198 ---
+Hi FxSwordfish is that your software that you developed? or purchased it somewhere? How many brokers does one need to make such software create enough opportunities to make it viable. I dont think it will be possible to have arbs with the major currency pairs... most probably most arbs are not with the top 8 (e.g USD, EUR GBP AUD CHF etc...)... I presume that most trades with this kind of software will be less than 5 pips ? any view on this? By the way I havent seen RR commenting on progress with his software ... do u think he changed his mind?
+
+--- 帖子 #199 ---
+I am using a commercial EA but cannot disclose it or I'll get infraction. Google it and you'll find it. Major pairs are the best for arb in contrary to what you think You need at least 2 brokers if you know who they are. Normally, 5-7 brokers are the best. Profit ranges from 1-3 pips. 30-60 pips per day is realistic RR is a smart man. He is onto something great. Hope he doesn't give up.
+
+--- 帖子 #200 ---
+Hi FxSwordfish first of all thank you for your reply. 1. If it is an EA which is commercially available why would u be in breach of anything ... surely the developer of the software would be more than happy to sell more of it. 2. If the arbs are worth 1-3 pips I presume that both the IN &amp; OUT trades of of both legs of the arb are fully automated. 3. Don’t u get re-quotes and surely with such a small margin (1-3 pips) the knock u take with re-quotes eats deep into your profit... just out of curiosity how often does it happen to you (re-quotes) ? 4. Are u generally happy with this EA which u r using... how long have u been using it ? Kind Regards natal
+
+--- 帖子 #201 ---
+I know a lot of people are wondering why I haven't released a live trading version. There is one main problem that I'm running across. The live trading version opens trades beautifully. It cannot close them well. That's the core of the bugs that I am running into. Generally I wouldn't have a problem releasing the code in its present form, if it weren't for those users who are lawsuit-happy. If you want the code in its present form, feel free to PM / e-mail me. I'll simply ask that you contact me on Skype / call me and allow me to record you saying that you promise not to hold me responsible for any adverse effects of this script and understand that there is a very strong chance it will lose money. I have been perusing some other arbitrage style EAs and noticed that they are all most exclusively latency arb--not the type of arb I'm working on. The script that is readily available proves quite clearly the existence of various arbitrage opportunities.
+
+--- 帖子 #202 ---
+Hi Roland Thank you for the update... I did not intend to rush you... release when u r confortable that it is doing what it suppose to do correctly. I may still be interested to play with it do to get the feel... but I will PM u about it. Thanks again for all that your are doing. natal
+
+--- 帖子 #203 ---
+It is the rule of Forex Factory that the individuals cannot promote commercial product. I personally would like to have a group of people use it and form a user group. It's not gonna happen here. Yes, in and out should be automated or it is not worth using. EA should be able to deal with requotes (set max number of attempts) I am just trying it out live. Time will tell. Like they say " It will work, unless it doesn't."
+
+--- 帖子 #204 ---
+Hi FxSwordfish I think that Forex Factory have a problem with vendors trying to promote their products over here, but user discussing what tools they are using should not be a problem. I v been studying the arbitrage option for a while and gains tons of knowledge. I think that your idea of forming a user group regarding the topic is an excellent idea... we can add great value to each other that way. Perhaps we can do it on Skype. Pls PM me if u r keen. Kind Regards natal
+
+--- 帖子 #205 ---
+Are you using the Arb software from the Company in Canada? I have seen in their site but never interested. The company has been in buss for a while. First they had it couple with "client" favority scalper.. meaning when your scalper triggered order. The arb software took the trade with the best price. I guess later they turn it into a stand alone. .
+
+--- 帖子 #206 ---
+Sorry I've been away for a while. Family stuff. What's the error you're getting on the closing of orders? Or is it just not triggering the close?
+
+--- 帖子 #207 ---
+Fielder did his on Demo accounts. Put it on live retail brokers, it falls flat on it's face. He doesn't take into account freeze levels.
+
+--- 帖子 #208 ---
+You don't understand how this arb works. This EA isn't a 'latency' arb. Differences are: Positions are open for longer than 1 second. Can last hours. We rarely get back in on the same pair immediately on the same brokers. You won't have 100% wins on an account. Just won't happen. Brokers look for trades open and closed and opened again etc. in a VERY short amount of time. ie., &lt; 1second. There are more reasons, but I'm just getting back to it here. BTW, I've never been banned from a blackjack table for counting cards. They've just upped the number of decks on my each time. I also spread out my loss hands to "throw them off".
+
+--- 帖子 #209 ---
+By the way, out of interest, is this arb program developed by RR, is it designed for MT4 platform only or for other platforms as well?
+
+--- 帖子 #210 ---
+I can see the close being triggered, but by the time the close is executed, the price has moved and a winning trade turns into a loss. I think it's taking too long to send the 'trade close' message during a cycle. There are sometimes areas where I have as many as 300 unpaired trades open across 6 demo accounts--their pairs often were closed because of the stoploss. In reviewing some of the arb logs, there seem to be fewer arb opportunities showing up. Might suggest that the best time(s) to trade are really end of Q4, beginning of Q1.
+
+--- 帖子 #211 ---
+Hmmmm. This is kind of what I thought. This may require a fundamental change in thought here. One EA per symbol. The loop through all pairs in one EA is taking up time as we can't get to the next pair while we're waiting for the last pair to finish up it's work.
+
+--- 帖子 #212 ---
+MT4 only.
+
+--- 帖子 #213 ---
+I had a similar issue on another EA, running an instance of MT4 per pair worked fine with all instances of MT4 logged in to one account, just all kept apart by magics. But be aware I found a bug in MT4, once I had 100 charts open across x amount of MT4 instances then MT4 started to get buggy, screen updates stopped, menus were inaccessible. A solution was to run a VM and you get another 100.
+
+--- 帖子 #214 ---
+Am going to add support to this post , in an effort to get more people reading it . To re-iterate, the 'normal' reasons for MM type brokers to object to this 'arb style' of trading can be largely mitigated by making sure the positions are open longer (this is NOT an open/close latency arb) and by managing equity so that the more dubious broker accounts lose and the better brokers win (if you dont understand what i mean then you misunderstand the principles behind this arb operation) Its not a perfect technique but will likely satisfy most bucket shops Please don't comment on the merits of general latency arb until/unless you understand how it is intended to work
+
+--- 帖子 #215 ---
+This occurred to me .. I havent look at the scripts yet so pull me up if i have the wrong idea but any mechanism that attempts to export a feed by outputting prices for multiple pairs from 1 EA is going to be EVENT triggered on the chart it is placed, and POLLED for other pairs - and polling just won't hack it ... I would think that you need a dedicate EA per pair so you do at least process each pairs feed events in a timely manner One rebuff to this might be that all or most chart update roughly together, except: 1. They should not 2. If the chart pair is early in the feed update Q it will trigger a poll of other pairs, possibly JUST BEFORE the prices are likely to change on those other pairs !!! So, for accessing the feed, i believe one EA per pair is necessary, and for several reasons
+
+--- 帖子 #216 ---
+It's currently looping through known currency pairs and appending them to a string. That seems to be plenty fast for the reporting script, but not fast enough for the trading script.
+
+--- 帖子 #217 ---
+Maybe I misread but are you reporting every quote every time or just the updated quotes? The former would seem to introduce an obvious bottleneck in the processing (trading script).
+
+--- 帖子 #218 ---
+The slaves loop through the known pairs. If RefreshRates() is true, it has to rescan all the known pairs. If refreshrates() is false, it just resends previously sent data.
+
+--- 帖子 #219 ---
+Keeping one eye on this thread. Maybe it's already noticed, but have a look over here: http://www.forexfactory.com/showthread.php?t=337102 Guy claims that modifieing an order every 28 seconds will keep the connection with mt4 open and thereby a trade will be executed 0.5 seconds longer. Might be usefull here
+
+--- 帖子 #220 ---
+That's actually not a bad idea. I'd go down to 20 sec's on it. Ronald, might be worth it to put out to the testers to see if their order execution speeds get better.
+
+--- 帖子 #221 ---
+RR, I wrote up a bunch of ideas on what I consider a good architecture for this type of project but will forbear. I think the design is causing unnecessary bottlenecks by repeating unchanged data. If you only send changed data from the slaves to the master you have already won (most of) the bottleneck battle. Writing the master as a standalone program will also solve a lot of your speed problems. Best Regards,
+
+--- 帖子 #222 ---
+Hi Esquire Thanks for the info. The initial post was edited and it looks like the original EA was removed and replaced with a new one. Did you download the original EA? .
+
+--- 帖子 #223 ---
+From a programming standpoint how would I get that part to work? My assumption would be that I need to establish static arrays inside the master. I would think that I need to set up some sort of timestamp for each new tick that comes in and compare timestamps with new bids / asks as well as bids/asks against each other.
+
+--- 帖子 #224 ---
+I only recently saw the thread, and the 'revised' EA that goes with it. Presumably, the concept is simple enough: place a pending order for a sell at 0.0000 every 28 seconds, deleting the previous order as need be. It's just a matter of adding that into the slaves' routine.
+
+--- 帖子 #225 ---
+I'd keep it seperate on it's own chart and let it do it's thing. I looked at the code and it's pretty streamlined.
+
+--- 帖子 #226 ---
+How can I change this from a polling infrastructure to an interrupt infrastructure?
+
+--- 帖子 #227 ---
+Well get ready for a memory hog. It goes something like this:
+
+--- 帖子 #228 ---
+I see where you're going w/ this. I can get around the event driven scenerio w/ while(true)....sleep(10). But that's polling. Event or polling, either way; there has to be something to trigger an action to take place. Each pair is good, only if each EA runs in it's own thread. I don't think that's true based on what Metaquotes has told me. But if each EA runs in it's on thread; then it's a no brainer to run an EA on each pair on their own chart. Note: you'd have cut down on candles allowed on each chart. Because the number of candles in memory will grow out of control. I'd keep maybe 5 on the chart and 10 in history. Lets face it, 36 pairs across 6 brokers is 216 charts running all at the same time.
+
+--- 帖子 #229 ---
+nondisclosure basically covered the pseudo code for the slave, except just to clarify: As was pointed out already, running 200-300+ charts may be a deal breaker so an EA per slave broker with polling on each slave may be the better solution.
+
+--- 帖子 #230 ---
+Hi Ron The original EA has been re-posted on this page of the thread: http://www.forexfactory.com/showthre...50#post5307850 The member who re-posted it mentioned that he changed some of the code to improve its functionality. This EA's code is completely different to the EA in post one.
+
+--- 帖子 #231 ---
+Try this as an EA (not a script or indicator) Inserted Code #import "Kernel32.dll" int GetCurrentThreadId(); #import int init() { Print("init,"+GetCurrentThreadId()); return(0); } int deinit() { return(0);} int start() { Print("start,"+GetCurrentThreadId()); return(0); } Drop onto two different pairs and each tick is seemingly on a different thread id - hence a different thread. I recorded the output if the above running on EUR/USD (M1 &amp; M15) &amp; GBP/USD (M15) for a few hours, so 3 charts - 46946 'ticks' in all, the counted how many UNIQUE thread id/pair combinations in all = 3179 If i ignored the pair i saw each of the thread id's use on each chart and there were, wait for it - 1063 unique thread id's in use (for 46946 ticks) From this i assume they are using some form of THREAD POOL - drawing from the pool rather than recreating the thread each time (This is the NORMAL way to implement a multi threaded application) Given the apparent size of this thread pool (quite large in my experience) its also possible that they allocate a new thread each time, and the thread id's are being recycled by the operating system (this is a really horribly inefficient option) I haven't yet established overlapping execution, but i think i have supported my case It means that if you poll GBP/USD on a EUR/USD chart tick, you will NOT be picking GBP/USD ticks up in an event driven manner (but WILL be for EUR/USD) Hence to process multi-pair feeds in a speedy manner you gotta use an EA per chart . I DO believe a SINGLE thread is used for INDICATORS, but i haven't checked that yet Here is a small excerpt - notice the pattern is not regular - they are not invoked in a pattern, so its not a case of receiving an update and flushing all pairs at the same time, every time (I should have added ms accuracy) 21:31:00 Thread Test1 GBPUSD,M1: start,6580 21:31:00 ThreadTest1 EURUSD,M15: start,6372 21:31:00 ThreadTest1 EURUSD,M1: start,7000 21:31:00 ThreadTest1 EURUSD,M15: start,12524 21:31:00 ThreadTest1 GBPUSD,M1: start,5660 21:31:00 ThreadTest1 GBPUSD,M1: start,12936 21:31:00 ThreadTest1 GBPUSD,M1: start,11568 21:31:01 ThreadTest1 GBPUSD,M1: start,6400 21:31:01 ThreadTest1 EURUSD,M1: start,10476 21:31:01 ThreadTest1 GBPUSD,M1: start,7868 21:31:01 ThreadTest1 EURUSD,M15: start,8160 21:31:02 ThreadTest1 EURUSD,M1: start,5984 21:31:02 ThreadTest1 GBPUSD,M1: start,13120 21:31:02 ThreadTest1 EURUSD,M15: start,8816 21:31:03 ThreadTest1 EURUSD,M1: start,6668 21:31:03 ThreadTest1 EURUSD,M15: start,13184 21:31:03 ThreadTest1 EURUSD,M1: start,12660 21:31:03 ThreadTest1 EURUSD,M15: start,12544 21:31:04 ThreadTest1 EURUSD,M1: start,10656 21:31:04 ThreadTest1 EURUSD,M15: start,10004 21:31:04 ThreadTest1 EURUSD,M1: start,12196 21:31:04 ThreadTest1 EURUSD,M15: start,13004 21:31:04 ThreadTest1 EURUSD,M1: start,10484 21:31:04 ThreadTest1 EURUSD,M15: start,8852 21:31:04 ThreadTest1 EURUSD,M1: start,12436 21:31:04 ThreadTest1 EURUSD,M15: start,12592 ....
+
+--- 帖子 #232 ---
+Holy sh*t batman! That adds a new krinkle in the mix. I'm going to have to digest this. THANKS ianj1!!!!!!!!!!!!
+
+--- 帖子 #233 ---
+Or less pairs - Or some way to merge feeds and transmit from the MT4 instance as a single feed. The damage done by reverting to polling will possibly outweigh any disadvantages of multiple EA's. First get it working with reduced feeds, then worry about scaling it up to multiple pairs If a single MT4 instance is setup with all charts, and then saved as a profile, it can be transferred across multiple brokers quite easily. The problem is in the merging of feeds into a single arb control (or matcher) unit OR running one control per pair I would suggest walking before running - get it working quickly and efficiently on a handful of pairs, and then scale - otherwise its possible that the detrimental effects will swamp any positive results before they get a chance to emerge In terms of exact mechanism, you have a choice or languages/architecture. I would choose multiple TCP connections (one per MT4/pair) to a single server (or set of server instances - one per pair), written in Java using blocking IO calls - but that is a reflection of my skill set rather than a claim that it is the only or best way, but scripting is never gonna compete with a more sophisticated multi threaded, event driven system. I once offered to assemble a basic link with a Java server, and EA feeds - am still trying to find time to schedule that if you are interested RR - you can then pick it up from there if you fancy doing a bit of Java - and before we start language wars - Java/Sockets IS FAST ENOUGH - just do not go there ! its 2 orders of magnitude faster than any polling system) Am not gonna consider this unless someone is gonna pick it up and run with it - i do not have the time to follow through with a full system So, is scripting up to the job ? Maybe ? I guess we shall see
+
+--- 帖子 #234 ---
+So your JAVA server would talk to the MT4 clients or to the MT4 servers themselves?
+
+--- 帖子 #235 ---
+Each EA would maintain a direct TCP link to a single Java Server The Java server spawns off another thread to manage each EA connection (Java has no problem maintain hundreds of such connections) - you can if you want spread the MT4 instances across multiple machines in a network and/or run an 6 or 8 core CPU - The Java server would be explicitly multi threaded and should run on a single machine (with or without Mt4 instances) No MT server in the link at all all though i have heard the whispers of sneaking onto the MT4 server feed direct, that would likely involve special protocols (that am sure Metaquotes don't want anyone to know about) which are probably embedded in the MT4 code somewhere. I have links to follow this up but its a side issue It would then require ONE EA for order execution per MT4 (blocked on a connection to the Mt4 server) and possibly multiple MT4 instances per account to mitigate the share context problem in Mt4 that precludes multiple concurrent executions, as well as any 'keepalive' techniques in discussion Trouble is - its a bigger more complex system, but could remove the inefficiencies of other approaches But thats just the start - you have to decide WHEN you have an arb (any large jump in price will look like a potential arb - at least until the second feed catches up) - you might want to look wait for a couple of ticks first, maintain typical latency statistics on each broker, take a quorum on feed to determine the 'outlier', etc And then of course, as RR has seen - you need an equity/margin management strategy Remember - am not trying to shoot this idea down - am just trying to raise the hurdles that have to be crossed at some time and suggest ideas for getting across them I'd love it to work coz i'd be there .. at the front, with my bowl !
+
+--- 帖子 #236 ---
+As universal as Java is, I took one class on it, and was miserable. Maybe Java is an acquired taste, I don't know. I'm working on rewriting my arb scripts so they can work on one pair only. Named pipes clearly don't scale well enough in this application. I need to rethink the architecture entirely to enable 'memory'. The master script is set up in such a way that it recalculates everything on a given tick. That clearly isn't fast enough to place live trades. I really appreciate all the input in getting this thing to work. Profitably.
+
+--- 帖子 #237 ---
+Well, I'm glad you said it first. I was thinking along those lines. A "fat" client to do all the calculating. And then sending back the right signals to the right terminal on what to do w/ a particular pair. Get's the EA's out of the business of managing communications to and from each other.
+
+--- 帖子 #238 ---
+Quote long post with a lot of technical info. Does any one make real profit with this strategy? what brokers do you use for it? Do you withdraw funds?
+
+--- 帖子 #239 ---
+Its not easy to do - as yet there are ZERO systems confirmed to work LIVE, in the current environment, for any period of time Its too early to tell for this implementation - its in early days i think Its a work in progress - not a finished project - and we are just throwing ideas about at the moment, whilst RR (its his thread i hijacked) gets on with the REAL work
+
+--- 帖子 #240 ---
+If by 'REAL work' you really mean: Reading Elaborate And Long- Winded Or Ruined Kode Then yes.
+
+--- 帖子 #241 ---
+This thread is quite interesting and it looks like it has attracted some of the biggest brains on FF. I certainly don’t understand the technical issues as well as many who have posted here but it seems to me that many of these issues could be resolved by taking a different approach to the ARB conditions, so I humbly offer these thoughts to the super brains to see if it can help. Maybe I'm wrong but I don't see the necessity to hedge between 2 brokers. In my mind it makes more sense to trade back to the means. Similar to Bolinger bands but between brokers. I think it would be much better (and more profitable) to only make one transaction with one broker instead of hedging with 2 brokers. Here’s my thought. It is FAR more likely that only one broker is away from the mean. The chances of two brokers both being off the norm at the exact same time in opposing directions is highly unlikely. (Which means by the way, that when trading an ARB with a hedge between brokers your trading the broker with the price anomaly against ANY broker who is at the norm) I think it is much more important to determine which broker is outside of the norm by comparing many brokers to establish the norm and then looking for the anomaly. If 9 out of 10 brokers are at x and one broker is at x+ then we only want to open a position with the 1 broker and trade back to the means. In other words, if all brokers are within 1 or 2 PiPs of one another except Joe's bucket shop, and he is 15 PiPs from the norm, then not only would you NOT need to hedge between brokers, you would now know which broker to trade with, which direction to trade, and for how many PiPs. This would cut the spread costs in half. In addition, trading the anomaly would eliminate the necessity to open and close two positions simultaneously. The downside is that it would need to close as soon as the anomaly gap closes or you could turn a winner into a loser. You couldn’t ride the hedge to safety and then close in several hours like has been suggested, however, I still think it would be easier than trying to open and close 2 positions simultaneously. One of the initial pitfalls I see with this is, if the market moved towards the anomaly. In other words, before Joe's bucket shop moves back to the norm, the market moves towards Joe, or against your position. I'm not sure that this would happen to often but it may require some intelligence built into the program so that it knows when the broker spread is collapsing on the market side and not the brokers side and thereby closes the trade when broker equals market. At least that could minimize your loses. In addition, it seems to me that this should be broken down into two modules. (I think that’s where you guys are headed also.) There are certainly much better/faster platforms to develop an analysis module in than MQL. I think that a standalone module that receives the data, looks for the anomalies that meet a specific criteria, and then sends trade execution info to an EA would be much faster than trying to process the data in MQL. Moreover, by trading the anomalies back to the means with ONE broker we have eliminated the need for simultaneous execution of 2 trades. That should simplify things a great deal. Maybe I missing something here, but could’nt this help solve some of the issues?
+
+--- 帖子 #242 ---
+Yes well, I'm mangling some code right now so touche'.
+
+--- 帖子 #243 ---
+By executing two trades properly, we can hold them open indefinitely--pending margin requirements. That's the largest advantage over trying to figure out whether a broker is leading, or lagging the market. Keep those ideas coming. The beauty of FF is the diversity of creativity that exists.
+
+--- 帖子 #244 ---
+Just had some brainstorming about the leading/lagging part: Either the lagging vs. leading is 'momentarly' (meaning the brokers are more or less leading or lagging the same amount, but all of a sudden one becomes much more leading), or one is leading or lagging for a longer amount of time (which is usually the case I guess) Whenever is momentarly - or whatever would be a good word here - it's going to be hard to determine which is lagging and which is leading. You should wait for another datastreams to confirm that one is leading, in that time the arb will most likely be gone. Whenever one broker is clearly lagging behind another broker, it should be more easy to recognise. There should be something like an array with all the ticks from the last minute, and some really nifty algoritm to determine the time offset between those two. That algoritm is going to be a headache anyway, as broker will post different amount of ticks in one minute. Wouldn't it be usefull to store all tickdata on one server, allow all the calculations to be done there, and return the trade info? Might be easier to orginaze, although it's going to cost you valuable milliseconds. I did start up such a project (using mysql &amp; vb.net), but had to stop saving data due to extremly big db sizes (150 mb a day for 4 (this method should have &gt;10) brokers &amp; 12 pairs, my vps wasn't build for that ) Anyway, just some brainstorming, might help
+
+--- 帖子 #245 ---
+Not that hard. But read earlier on this thread we talk about the "lagging" type of arb. That's not what we're trying to do hear.
+
+--- 帖子 #246 ---
+You need to hedge your position to make sure you can make profit. Lets say Joes is off 3 pips. We are opening the trade waiting for him to come back to the mean price. But until this happen the price could have always changed 30 pips against us and Joe's price is still 3 pips off. You really need the hedge. If Joe's price is higher than it is supposed to be it doesn't mean that the overall pair can still move up, just think about it. The market moves randomly at that point and we don't have any tools to suggest where it is going to move so this would be just guessing.
+
+--- 帖子 #247 ---
+Yes I suppose that is correct. It would be interesting to see how often that occurs versus how often Joe spikes away from the mean and then back. We have been running Jason's ARB program in demo mode just to see how often it records an ARB. I realized from watching it that there is no way to take the ARB at it's peak. Since we don't know how long the ARB will last and how large it will become before it collapses we need to trigger our hedge as soon as it meets our criteria. (i.e X number of PiPs). Therefore, you would never place a trade larger than what your criteria for opening a position was. (No 30 PiP ARBs if your criteria is set to take a trade when an ARB hits 10 PiPs) AND since we don't know how long the ARB condition will last until AFTER it has occurred, we would end up taking all ARBs that meet our criteria even if it collapsed instantaneously. (Since Jason's record of how long the ARB was present and how large it was shows after it has occurred, it's worthless for trading purposes. All it does is show you the opportunity you just missed!) Anyway, how are these two issues addressed in what is being developed here? Or is it even an issue? Not that I wouldn't take 10 PiP hits everyday, but it seems to me that the reality is your never going to hit a 30 PiP ARB unless that is your criteria for taking a position, and that speed of execution is the only solution to trying to take a position before the ARB collapses.
+
+--- 帖子 #248 ---
+You could very possibly get a fill that is much higher arb than your set criteria during news time. Volatility is your friend and slippage is your enemy, assuming you are using a VPS with the least latency to data center.
+
+--- 帖子 #249 ---
+You might want to start running the thing on Live very soon. Arbs always work in demo. You can try Live with tiny lots to see if they really work. You dont want to run out of your 60 day trial period to return the product.
+
+--- 帖子 #250 ---
+You need to remember, this is a "scalping" type system. Small profits. If you're looking for something of that size on a regular basis, this isn't for you.
+
+--- 帖子 #251 ---
+I can assure you now that live 10 pips arbs are non-existent except DURING a news event or intervention, in which case you are as likely to get 20-100 pips slippage as 10 pips of arb. Please don't base your live expectations on performance in demo. Of all strategies for trading an arb has the least correlation between demo and live of any other strategy .. period If they are hittable at all they will be no more than 1 or 2 pips in excess of spread/commission. 10 Pips arbs on demo system are simply because the demo system isn't configured to track live properly. You need to manage your expectations - arbs only work by building a decent profit from a large number of trades, each making 1-2 pips max profit. Arbs in the interbank world are usually in the fraction of a pip range, relying on high volumes and trade sizes
+
+--- 帖子 #252 ---
+I can't say this is typical, but happened quite often. A live trade example. http://i162.photobucket.com/albums/t...oesarbwork.gif
+
+--- 帖子 #253 ---
+Hummmm? It seems to me that the chances of slippage go up exponentially during volatility. Based on the fact that speed of execution is an extremely critical part of this strategy I would think that trying to get fills at the speed of light during a fundy would drop dramatically. In addition, the chances for re-quotes also goes up exponentially during volatility. I would think a re-quote on one side of the hedge and a fill on the other side would be killer for this strategy. I guess I would have to agree with ianj1 “I can assure you now that live 10 pips arbs are non-existent except DURING a news event or intervention, in which case you are as likely to get 20-100 pips slippage as 10 pips of arb. I can’t! I wasn’t one of the lucky ones who got to pay the 2k to purchase the system before the offer period expired. I’ve yet to see any LIVE trading results from anyone. Jason presented NO valid 3rd party evidence of success. Maybe we can get some of the people that shelled out the 2k to provide the evidence of success before their 60 day trial period runs out. I think you misunderstood my question. 10 PiPs was just some arbitrary number I picked for illistration. My question was more along the lines of how do you capture the largest ARB possible? I don’t see any way to take an ARB at it's peak. (if there even is one). Since we don't know how long the ARB will last and how large it will become before it collapses we need to trigger our hedge as soon as we identify the ARB, or as soon as the ARB meets our criteria, say 2 PiPs over spread cost. Correct? If that’s true we would need to take EVERY trade that meets our ARB + Spread criteria as soon as it meets our requirements. Therefore we would never get an ARB greater than our ARB/Spread criteria even if it did occur. Consequently ALL of our trades would be at our ARB/Spread criteria and no greater (baring a lucky, or UN-lucky fill). Correct? Anyway, I guess I was wondering how or if there was a way to take the largest ARB possible if our trigger is at x over spread.
+
+--- 帖子 #254 ---
+Pip-Squeak After what... a month there is still no positive data on forexarb. Either they are all rich or too ashamed to post they've been scammed. Truth be told I don't think very many shelled out the 2k since there was no 3rd party verified statements showing it worked. Now I've been watching the one Fxswordfish has for a week now. It's not cheap but at least he's up like $40 bucks in the first week. That EA developer at least shows real live trades and its closer to what these programing experts on this thread say. And that is, there are not many arbs over a 1/10 of a pip and the system has to be automated or you won't catch them.
+
+--- 帖子 #255 ---
+Has anybody tried this? www.trademakersys.com from an e-mail: " Hi, TradeMaker arbitrage is design for retail traders to do automatic risk free trading. It can be work with upto 10 mt4 brokers same time. The price is for the system is 2000 Usd but we have launching promotion with discount of 40%. We give you All you need is to purchase the license, hire a vps/dedicated server and we configure it for you. We give you a demonstration of video created. "
+
+--- 帖子 #256 ---
+Looks like the $2000 mark is kind of the market price for such product. There are 2 things which I fail to understand: 1. if their program is sooooo good why they don't make millions of $$$ for themselves rather than sharing it with anyone... after all if it is 2. Assuming that there is a reason that it makes better sense to sell such product to others why charge a once off fee ... my business logic tells that it would make more sense to charge a monthly fee of $100-$200, which will attract a lot more clients, becuase they could afford the monthly sub and they will gladly pay a monthly fee from profits they make and eventually such relationship will become win-win forever. The application writer will make more money long term and the clients will happily pay that. It therefore makes me wonder why all of them without exception prefer to go for a once off fee ... it can only be one of two reasons ... a) the program doesn’t really work or there are issues with that which only they know. b) they are simply desperate for the cash and are not business minded people and therefore looking for the short term gratification rather than the long term service provider client relationship.
+
+--- 帖子 #257 ---
+I do not disagree with you both. I am new in this arb trading. Here was one trade happening on Jan 17 when German economic sentiment was released at 5:00 AM eastern standard time. Sell price on top of buy price. Compare "trigger" and "fill price" for slippage. Guess what, net slippage was in my favor and the arb was 12.7 pips. So, I would agree with you more than I disagree with you. It is probably better not to trade the news because the reverse could happen. http://i162.photobucket.com/albums/t...eNewsTrade.gif
+
+--- 帖子 #258 ---
+Fxswordfish, you know quite well that it can go 12 pips your way the one day and 30 pips against you the next day... not sure what are the stats on that, but usually u r going to lose in my view if you trade during volotile times (news etc...)
+
+--- 帖子 #259 ---
+That looks to me like a -12.7 pip 'arb', or about 2.4 pips the other way, but then i don't entirely understand what i am looking at (is it the feed prices at the time of the arb ?)
+
+--- 帖子 #260 ---
+Feed price is the trigger price. Fill price is the transaction price. Arb is defined as (Ask - Bid) between 2 brokers. The arb criteria for the trade is set for 1.9 pips (or -0.00019). As you can see, the trigger price met the criteria (ask 1.27730 - bid 1.27764 = -0.00034). As you know, you always buy ask and sell bid. Normally Ask is higher than Bid. So if Ask - Bid is negative, it is negative "cross-spread" between two brokers. The order came back (ask1.27740 - bid1.27867 = -0.00127). The absolute value is the arb, thus 12.7 pips. Slippage is within the same broker when you compare the market price at the time and the fill price afterwards. Clear as mud?
+
+--- 帖子 #261 ---
+Yea, I hear you. That is why I am evaluating this thing. You may set slippage limit for the open order tighter to avoid being filled with a bad slippage. Order will be cancelled. However, the EA can only control the send order, not the return order. Not 100% fool proof.
+
+--- 帖子 #262 ---
+The thing they're calling "arb" is actually bank flow trading.
+
+--- 帖子 #263 ---
+nondisclosure00, how do you know that ? ... I spoke to them too but it didnt sound like a bank flow trading system not that I m going to use them but still...
+
+--- 帖子 #264 ---
+They're description of what their doing. That's what a bank flow system is.
+
+--- 帖子 #265 ---
+Guys tell me if i'm wrong, because i'm strugling to get the idea on how this works. I mean, i know what an arbitrage is, just this can't get this type of arb. So lets say there is 1pip spread. I buy from Broker A for 1,3000 and Sell from from Broker B for 1,3003 Let's say price moved 5 pips up, i have +4 on buy from Broker A and -6 from Broker B. Then i have to wait until Broker B will have Sell price that is less than Broker A buy price? Lets say in a certain moment Broker B has Sell for 1,3013 and Broker A had Buy for 1,3016. At that moment i need to close my trades very fast. So i sell my Broker A 1,3000 buy for 1,3015(if Buy was 1,3016 and spread is 1pips then we have 1,3015 as sell) and buy back my Broker B sell for 1,3014(spread 1pip) The result is Broker A buy: 1,3015-1,3000 = 15 - 1 pip spread = 14pip profit Broker B sell: 1,3014 - 1,3003 = 11 + 1 pip = 12 pip loss and the overall result will be 2 pips profit. Generaly speaking i need to wait for the price difference to open and then wait for the price difference to close. I'm i right?
+
+--- 帖子 #266 ---
+Is it right to say that high-end computer would be the best to run the futur script? The way i'm looking at it, every nano-second will be important. Malouin
+
+--- 帖子 #267 ---
+RR are you still working on this one?
+
+--- 帖子 #268 ---
+Yes. The current problem is getting the trade out to the brokers in time. Current reaction time is ~10ms. Got to get it down.
+
+--- 帖子 #269 ---
+Ron, is that using this: http://www.forexfactory.com/showthread.php?t=337102 still being too slow?
+
+--- 帖子 #270 ---
+It seems so. I'm sending the intended open price into the comments, and it's showing significant slippage.
+
+--- 帖子 #271 ---
+if there is any way we can help you please just tell us
+
+--- 帖子 #272 ---
+I take it the slippage is bad enought that it takes the trade out of the arb opportunity.
+
+--- 帖子 #273 ---
+My take on this (from way in the back seat) is that some of the trades being taken are latency arbs (though unintended) that may not be feasible due to virtually simultaneous quote changing. The key word is 'virtually' as some quotes are actually changing before others in real time though the time difference between quote receipt of the first and send to the 2nd isn't small enough to allow for a fill on the 2nd (by then the 2nd quote has updated). This would be a case of the 2nd quote lagging but not by enough to profit, but enough to trigger apparent arb opportunities that aren't feasible. Another case might be the leading quote jumping out of alignment (creating what looks like an arb opportunity) then back into alignment, but too quick to allow for a fill. This is probably the minority case and is may be related to the bid/ask bounce in the literature. Somewhere in the mix are the feasible arb opportunities that will need to be identified and categorized separately from the cases listed above (not an easy task). Presumably you're testing this on demo or are you getting this result from live testing?
+
+--- 帖子 #274 ---
+You may be on to something here. It's making me think about it.
+
+--- 帖子 #275 ---
+That would put the distribution at ~10% arbs are genuinely feasible. Just a matter then of identifying which is which.
+
+--- 帖子 #276 ---
+Welcome to my world ! - Here is where institutional and retail diverge, as you need a micro understanding of the feed conflation and liquidity construction of the feed, including, but not limited to: * Do bid/offer change together, or are they 'generally' received together - if so you have to wait for a 'pair' of prices or at least give it time to update * Are sizes of bid/offer lumpy enough to discern the construction of the top of L2 order book (since L2 order books are not generally available on MT4 so you need additional feed information) * Is it a bank or a client price ? * Is the broker a market maker? * What is the 'normal' latency range for the broker (a feed profile) * Is it later than 'normal' * have other prices updated since to show that the feed in GENERAL is ok, * How long were the prices standing before the move * How far out of line is it (yes this matters) * Is it in quorum with other systems (a time based voting system across multiple brokers) Remember a feed is a HISTORICAL record of price and is not a strong indication of what can be hit. An arb on a fast moving market in retail may be impossible to hit unless it is a market maker (who have their own agenda) . On a slow moving system perhaps .. Any good hits on a fast moving system are likely to be micro pull-backs and will manifest themselves as noise countering the general loss due to slippage Recognising a real arb is non trivial - most perceived arbs are merely feed delays - institutional arbs are cause by 3 major conditions: * Feed, liquidity provider delays - they dont like you hitting them, and they DONT last long at all (certainly not seconds) * Client flow - wanting to deal outside the normal range of prices - these are real opportunities, but how do you tell on MT4 * Temporary credit problems where a a price cannot be matched by many participants coz of bilateral credit issues In retail you would additionally be looking at the following opportunities: * Market maker inefficiencies Yes, i know - more questions, not solutions ! But enough for now ..
+
+--- 帖子 #277 ---
+Here are my questions due to lack of knowledge. How does Market Maker work? Is it a "person" who physically takes orders and tries to match them with liquidity providers? How can a person do that with thousands of orders in a second? Why do they do that since ECN/DMA are now available to brokers? (Some brokers even provide 2 types of accounts: market maker and ECN) I have seen and made arb trades between two ECN brokers quite often. Are there inefficiencies between ECN systems?
+
+--- 帖子 #278 ---
+A market maker (or a bucketshop some like to say - but that not always true - there are 'honest' market makers) generally mirrors prices from the REAL world, and takes (most of it at least) the risk on their own book - they rely on the fact that 95% of traders lose, so they pocket the trades - if they identify a reliable profitable trader (those 5%) they will either: * honest: hedge those trades with the real market * questionable: if it a REALLY successful trader they might FOLLOW the trades (without permission of course) * bucketshop: f** about with the execution and feed until the trader becomes non profitable - or leaves Being a market maker is not a problem - its a business decision. F** about with execution/feeds is when it becomes dishonest The whole process is AUTOMATED - MT4 server has the facilities built in, but many brokers use their own systems (e.g. Oanda ) In fact it is a sliding scale - if ALL trades are send to the market, then its an ECN/STP, if all are kept on the books its a PURE market maker. Somewhere in the middle are ... most brokers. So what would you call an ECN/STP broker that accepts micro trades on its own books, and delegates any larger trades to the market: a market maker or an ECN/STP? Also, many small brokers nowadays use a single liquidity provider who nets trades off into the system in general - so even if the broker is pure ECN/STP, he uses a liquidity pool managed by a single liquidity provider - who may keep some of the risk on his book - so the market maker ECN/STP pros/cons still stand but is merely pushed back a level. With a PURE market maker , the back office software probably concentrates on managing BROKER POSITION that will build up on various currencies over time (although their overall profit increases as people lose more, they still must protect themselves from market movements if they have net positions on some currencies) and sometimes they may have manual traders managing the position. Generating broker profit and managing broker position in the market are interrelated. Any market maker system that asks for dealer intervention must be considered as dishonest as, at best, they slow down the trade, and at worse, they intervene, inevitably to the traders detriment. An ECN allows normal retailers (you and me) to place bid/offers on the underlying market. These prices may not be part of a liquidity providers market making so are unlikely to be upset by arbing, and will likely AUTOMATCH quickly (no last look) , so perhaps will be more out of line with the real market (ie a real arb) - Its the point i made previously about identifying a REAL client quote as it is more likely to fill efficiently. Hence an ECN may have more honest opportunities - if you are QUICK ENOUGH, but they are harder to hit BTW to remove confusion - a Market Maker broker is not the same as a Market Maker of prices to an ECN. They are similar underlying principles, but still, 90+% of prices in an ECN/STP are provided by Market Making systems in a liquidity provider somewhere - the difference is that the matching is performed by the broker, not the liquidity provider and is therefore more likely to be honest
+
+--- 帖子 #279 ---
+This is my take in the subject... This may be best understood if we think as if we are the Broker . ( this apply to any type of business that buy and sell any type of product). And for example sake, let say we are a honest one. Also this would be like the “fundamental” aspect of forex, instead of the “technical” side as price fees, platforms, etc. We set up 2 sides of the buss. Market maker side (retail) . I would “buy” from my suppliers (buy or sell) the product and “sell” it (buy or sell) to my clients for a mark up ( my spread) according to market conditions. This would include to/from suppliers and to/from my own clients. ECN side (wholesale), in this case would mean that I would hook up my clients with my suppliers at cost ( their spread) and charge them a commission. What do I need for the business? .. A bunch of suppliers, meaning liquidity providers (LP) as Banks or others. Forex is not a centralized market and everybody quotes a tiny bit different prices all the time (arbitrage occurs ) , therefore the more I have, the best I can provide better prices to my clients. Therefore, I will have arbitrages with other market makers, because my LP s and clients are different (arbitrage occurs ) and also have arbitrages with other ECN brokers because my LP s are different. (arbitrage occurs ) For my retail side I also need an “ order matching ”software. This will allow me to process “ALL” the orders I received, match them (buy/sell) and buy (pass thru) the “difference” from the banks. (remember, we are an honest broker). I would have to be insane not to do that. I mean, why should I pay my liquidity provider their spread if I can match my own buyer with my own seller. … and here is were the “original” Market Maker name comes from...... Example. Say, for whatever reason all my suppliers (LP) have EUR/USD at bid 1.2020 ask 1.2030 (10 pips) . My ECN clients can see that in their platforms. If they want to transact, or not looking the spread.. Is not my fault and I don’t care. Basically all the prices between those 10 pips do not exist at this moment in time (maybe it does from some other bank but not with the one that I work with) . But my retails clients do not see that spread and they keep placing orders, making stops, etc..my software keeps matching and perhaps I fill a “few” of my clients with my own clients at prices that do not exist in the open market.. voila.. I just made my own prices (arbitrage occurs) I am definitely a market Maker. Obviously the ones I do not fill I need to slippage them to the existing price (arbitrage occurs). (Remember, I am an honest broker but not dumb. Why should I sell you something under my cost) . Now, to make sure I don’t lose my shirt I need a Risk Management software. First, to immediately adapt “my spread” to the combination of prices I am being quoted by my suppliers and/or I find between my own pool of clients. Also, I need to make sure the “delay type” of arbitrage software of the world do not take me to the cleaner. In a way it is sad the term “market maker” became synonymous for Bucket shop, but is not so. Like I mention above, a good broker, market maker or not, should continually pass all their “net” exposure (after matching) to liquidity providers. Even if they “hold” a small portion is ok (this is what many say that the brokers is trading against you) as long they have capital to pay up if the market turns against them. The real bucket shops “holds” a lot.. and sometimes all of it. Those are the dangerous ones...if not regulated, run. Because is even possible that may get a white label mt4 set up, and not even have a liquidity provider. Take all the money in deposit..... and just have “play” money in your P/L. If happens that all the traders win one month and ask for withdraws … you know what happens. Then becomes a ponsi scheme.. let do promotions to get more deposits and pay up. Most of the bigger and older brokers are market makers, Alpari, Fxcm , Fxdd to name a few. ..in the “original” meaning, that is good for us. If we want fill at certain price , that does not exist in the Interbank market at one point on time, they may have it for us from between their own pool of clients. In essence, forex not being a centralized market, is full of continuous arbitrages. And if the focus of making arbitrage software (hedge type..the only one that does not step into the honest brokers pocket) remains between the cold reality that if you want to buy, a seller should be found by “your” broker, arbitrage or not. Then and only then we are in the right track. Probably, there are many people making money "prudently" and "quietly" with arbitrage software, between these parameters. .
+
+--- 帖子 #280 ---
+So boil this down for me. Who should we be looking to to open accounts to Arb with?
+
+--- 帖子 #281 ---
+That is enlightening! I appreciate your "sliding scale" analogy. So, Market Makers or even the ECN brokers can program their automated systems to different degrees of screwing power? However, they must balance between keeping the customers happy so they stay and screwing the customers so they don't get screwed? Can a market maker program his system with a higher screwing power towards a specific individual account?
+
+--- 帖子 #282 ---
+Awesome read. So, why does "broker arbitrage" bother those "dishonest market makers"? Don't they make money from spreads regardless? Here was a response from one (dishonest) broker who was complaining about my trading (broker arbitrage) and asked me to stop. They let me keep the profit and did not shut down my account. " The EA you are using is taking advantage of small technical issues and attempting to open positions on non-existent prices." What do they mean by non-existent prices? My orders got filled by the prices they gave me. Is it simply that if the client is winning, market maker must be losing? They don't like losing so they ask you to stop trading the EA, regardless what it is?
+
+--- 帖子 #283 ---
+My experience is "trial and error". You'll find, on the sliding scale, where the broker stands after a few days of trading with them. Trade with ECN brokers. There are plenty enough arbs among them.
+
+--- 帖子 #284 ---
+If it is a market maker using MT4, there are many options available to covertly pick the customer's pockets. This is one of the most discussed options: (the only real defense is not to play their game) http://www.forexfactory.com/showthread.php?t=70582 If it is a true ECN broker who merely makes it off the commission, there is no incentive to muck with the liquidity provider's prices. Interactive Brokers meets that criteria. Caveat: IB sometimes allows its MM Timber Hill to take the other side of the liquidity but always provides price improvement to the customer for the order flow. I'm not aware of any others on the retail level though there may be a few. If it is a broker that markets itself as an ECN but really buckets part or all of the orders then there is an incentive for the broker to take advantage. Many so called ECNs are as has been described - with one or a few liquidity providers and spread rebates for order flow to the broker from the liquidity provider. Those brokers who actively shade prices that are provided by a liquidity provider(s) fall in the murk between this class and the market maker who buckets all orders internally. I think FXCM and Oanda would be classified like this. The answer is yes, particularly when that customer is making a large amount of money. Some brokers are more sophisticated at doing this than others. This is known as individual pricing, and was at one time in the not-so distant past marketed by dealers as a benefit for the customer. Bottom line in broker/dealer discussion for me is: funds safety, and broker incentives. If the broker / dealer has an incentive to steal or an ability to get away with it then they probably will.
+
+--- 帖子 #285 ---
+Think about what makes a dishonest market maker. They bucket all orders. Therefore they have an incentive to speed the process of busting out their clients, so they take an adversarial approach when the customer is making money. They also tend to smooth prices more than honest brokers who simply pass on market prices. The smoothing allows for easier offsetting of client orders. Combined with platform freezing when the smoothed prices are too far away from the market, this can be a powerful tool for these brokers to tilt the odds in their favor. "Don't they make money from the spreads regardless?" This has been asked so many times and is a common misconception. If the "dishonest market makers" take the other side and don't lay off risk and receive a kickback from the liquidity provider then the answer is that no - they don't make from the spread because they're operating a pseudo market which is them vs. you. If you win they lose and vice versa. They just use the technical tools (MT4 plugin) to bust the customers. Most brokers can't survive long term using this business model, however. So the dishonest market makers typically need to offer very low spreads as an incentive to get customers to open accounts. Think of the low posted spreads as as "loss leader". Dishonest brokers make up for it in increased slippage, requotes, platform freezes etc. All of this can be aided by the client use of MT4 for order placement / handling. By the way, the "technical issue" is when a client account makes money.
+
+--- 帖子 #286 ---
+This sums up some of the issues I've been working with for some time. Depending on the goal of the strategy (straight arb or stat arb) some of the issues mentioned may or may not come into play. I've chosen to approach this problem from a more stat arb perspective because I realize as a retail trader I can't count on overwhelming speed and I believe there is more alpha potential riding on the backs of the arbitrageurs rather than attempting to beat them at their own game, because that is so much a speed game. Some of the items are unknowable due to the nature of the feed I'm working with (anonymous) "* Is it a bank or a client price ?" I sidestep some of the microstructure issues as well by allowing alpha creation to come from an algo based on the arb (which allows directional play) rather than the arb itself. Yes that is very true and a point always important to keep in mind. I've been toying with a quorum approach though perhaps a bit different than described. There are also new challenges brought on by a stat arb approach. Riding on the back of the arb trade is fine until the "ambush" or aggressive buy side programs kick in and start pushing price around.
+
+--- 帖子 #287 ---
+Thank you so much. This is eye opening. If we stay away from MT4 (using Protrader, Ninjatrader, Tradestation, etc.), are they still able to cheat, but to a lesser extent? I assume the best way is to use API. In that case, the bucket shops are off the list anyway. Not many or none has API to offer.
+
+--- 帖子 #288 ---
+I have to clarify my view on this - a market maker that 'buckets' most or all trades is not necessarily dishonest ('bucketshop' is almost entirely used as a derogatory term) , and i do not think 'best' is directly related to using an API (see later) I know of a few Market makers who i definitely believe are not 'bucket shops' in the unpleasant sense Anyway - back to the point: * Market Makers are possibly easier to arb but you must be careful not to sting them on profit else the more dishonest types are likely to kick back - for those you should consider manipulating the close to leave losses with the market maker (so they wont mind so much). This may make many market makers viable for arbing - some market makers may detect the arbing (its not difficult to do) and object on principle - but who knows unless you try * ECN/STP are theoretically better/safer to arb, but technically more difficult to in practise, and are likely not as good candidates to try - at least in MT4. An API can make the trading experience more efficient (MT4 servers are sh** and usually overloaded as well) so in general, yes i think an API would make its easier to arb an ECN/STP platform, but not be so relevant to a Market Maker Faster feeds MIGHT help, but not always - the two primary institutional platforms (EBS &amp; Reuters) from which many prices are derived, conflate the price feed so it is delayed in any case. The fastest purchasable feed - EBS live is shockingly expensive (if you have to ask - its too expensive for you) yet only updates maybe 10 times per second - last time i looked at least, so it could help in usage with a market maker - but its directly prohibited against in most terms and conditions - so beware You could probably front run some market makers using that, but woe betide you if you end up in profit (i don't know how many times i have to make this observation - and associated suggestion as to how to work around it - The open and deferred close arb is unique in its ability to choose when to close and therefore where to allocate the profit) So its likely that both have potential but you have to treat them differently But this is all opinion - i'll leave the actual working guys (RR) to establish more facts than my conjecture .. i am clearly too lazy to do any real work ;-)
+
+--- 帖子 #289 ---
+Thank you, Ianj1. How about giving me those names so I can test them live and report back to the group? RR's endeavor needs a boost of encouragement from live trading. I don't mind doing it - the real work Are bucket shops always 4-digit brokers? Why 4-digit anyway?
+
+--- 帖子 #290 ---
+OK, I have put my system on living test with 0.01 lot size. The performance with two brokers is just rarely above even after 2 weeks testing. With 0.1 lot size, most of them are sure loss. The program guarantees the quotes does not change before sending out the orders and my execution is tweaked to be reasonably fast (in average, one is 200ms, the other one is 600ms). The slippage kills the system. I guess this system is really sensitive to the brokers. I've spent so many hours to build the system, now I feel very depressed for the live testing result. Anyone has new idea on how to deal with the slippage?
+
+--- 帖子 #291 ---
+In reality, arbitrage bother all the brokers in general , the dishonest ones just bitch about any and everything because, even if you lose money with them, you are hindering their spreads game. If they are not paying spreads to banks for their net exposure, because they hold all the orders themselves, they must add losses to your losses and deduct from your winnings in top of their spreads. Holding all the trades is an extreme risk for them. So they must earn as much possible and fast from their clients to build capital to pay up in the event market go against them. Forex is a zero sum game. Just imagine that in one day “all” their clients go short. Price move down some 50 pips and everybody wins...they are screwed, and if every body wants withdrawals, they just don’t have the money to pay up and we get screwed a second and final time. Avoid any brokers that is not regulated by a reputable country. Avoid new brokers (not less then 5 years in business). Avoid brokers with little client pools. Avoid brokers that offer low fixed spreads. And here is a long and repetitive history .. hoping to help the understanding of the underlying fundamentals of the forex business. Developers of arbitrage software should understand and user of the software should understand. But here is why it bother the decent brokers: The retail forex has became so competitive between them( in this case talking about all types of brokers , MM, ECN, Banks or whatever level you trade) that all have gone multi-suppliers but basically all funnel down to 4 or 5 different quotes from the major world player that we do not have access to. Also they have been force to lower their spread to stay in business. Therefore, if most have same suppliers, when a real arbitrage occurs ( up in the levels we do not have access to) the arbitrage gets water down and “sort of “ distorted going down the chain because of miliseconds softwares/bridges delays of the player involved. “Banks” adjust their quotes to forex brokers (their pool of clients) according to quotes available to them and/or the flow of orders received. The forex Broker adjust their quotes to us according to Bank quotes and orders received from clients. Now, if our arbitrage software is finding those difference in prices, and you hit them “every time” when happens, in reality , “sort of” technically speaking we are hitting them “ off quotes ” or “ at non-existing prices ” . Not the ones we are getting quoted from them , but rather “off quote” or “non-existing” to them from their Banks, and if the system fills your order, they “may” have to eat the difference.. ... Say, if they pay 0.5 pips to their Banks for your transaction, and they charge you 1.2 pips but in the process you hit them in those “specific” times, sooner rather then later they realize you are using some kind of software to find price differences and they are not getting the 0.7 pips mark up from you, and many times losing 1 or 2 pips money from your transaction. This happens occasionally to all brokers in affords to fill your order, they eat a bit of loss. But if you hit them in a continuous basis, all day long, that is a different scenario to them. They also figure that may lead for you to invite all your friends and neighbors to trade the software there and then what...end up with a bunch of clients they may have to eat their profits in a continuous basis? Not a chance. Lets no be blind in this regard. They really don’t know what type of software we are using, but if your trading all of a sudden goes from 2 transaction a day to a 100, and most are in those “specific times”, it is not difficult to figure you are attempting to advantage from non-centralized price quoting. They will cut you off right away, and suggest you trade in their ECN section if they have that choice. But remember, if you agree to trade that way ..”at market”, understand there is BIG SPREADS sometimes and you need to watch out while you trade. You still must understand even in that environment the price may still move from the time you click your PC and the brokers software route you to that price. No body is trying to screw you. That is “at market” You get what you get for better or worse. As trader we must understand this type of fundamentals. If we do not understand , we are bound to be frustrated and thinking that every stinking broker is trying to screw us. And we spend our entire time looking for the “Holly Broker” 1 pip fixed spread , no slippage. .. yea, right, in what planet? Absolutely NO ONE in the forex business exchange money for free . From the bottom (your friendly money exchanger in your local International airport, up to 30c a pop) to the top (whatever big bank or powerstobe that is). And NO ONE wants to buy it from you or sell to you at Break-even or at a loss. Nothing supersede that reality. Forex is not a centralize market. There is no official “real price or quotes” The real price “to me” is the one “my broker” quotes me and hooks me up from between his suppliers, period. If you have a different brokers you may have different prices at times, that price is also a “real price/quote ” to you, but not me. Unless I have accounts in both and try to play the differences. (arbitrage). As a matter of fact any Bank, broker, or money exchanger can quote you as they darn please. If they are not making money, they just widen their spreads and stay out of the market until they can make some. But they can not stay out of the market for long. They have to be competitive to make money. The same rule apply to the money exchangers at the airport and the Banks. If you have a choice in one airport, you will always exchange in the one with a lesser spread. The one with a greater spread gets no business, not making a dime that day. Does not matter if the exchange rate is 1.20 or 1.50. If they don’t exchange, profit is zippo to them. Recently, as per request of one of my passive investor I tested one commercial software between Alpari UK and Fxdd. The software finds an average of 150 arbitrages per day in demos, and around 75 arbitrages per day (2 pips or over) between real accounts (note; “find” them. I did not execute them). Then, I tested the execution, but setting to 1 arbitrage at the time with a minimum delay of 15m between the open and the close (sort of resembling my own trading habits). Ended up making some 12 pips in one day. Not bad, but here is the thing. One of my accounts loss some $500. and the other won $512 using 0.10 lot. That means if I did it with one full lot. Would have drained $5000 from one account and make $120. That hardly covers the wire fees to replenish from one broker to the other. Conclusion and advise to my investor. Needs at least 15K, per broker, and at least 4 of them to alternate. Recovering cost of the software 3 to 6 months. Bottom line, arbitrages do occurs in a continuous basis. Easy to find, difficult to execute them properly between market reality. If the software execute well, be prudent and discrete to use it. This type of software can never be main stream/massive use. It does take advantage of the Non-centralized market and that is ok, but it does step into brokers pockets sometimes (honest or not). Hit them 4/5 per day, leave them alone the next day. .
+
+--- 帖子 #292 ---
+Absolutely no solution for slippage. Slippage will happens all the time in a non-ECN environment. Slippage is just the adjustment from your broker's Non-ecn pricing to the Price they are getting quoted from their banks at a specific time. Sometimes quotes match, sometime does not. When does not and you wants to transact, your broker's software just take your order to the price they are being quoted. That is the slippage you are getting... and will happens at least 50% of the time when attempting to advantage pricing differences. See the part "Nothing supersede that reality" . from my previous post .
+
+--- 帖子 #293 ---
+And if you use limit order instead market order ? ... you maybe loss trades because your price it's not hit but if you hit you win !?
+
+--- 帖子 #294 ---
+Thank you for your excellent work. Yes, my experience with the live test is that "at the beginning, the slippage is Ok and make me a little bit in profit; later on, I can see the slippage becomes way worse and lead to loss". Exactly the scenario you mentioned. This makes me think that the broker arbitrage is never gonna be your capital-builder. It is not RISK_FREE at all because you are at the mercy of brokers and market conditions.
+
+--- 帖子 #295 ---
+If you do not execute both orders at the same time using market order, the market movement may lead you to one-leg situation (only 1 order is executed). Using limit-order, you are more like guessing market movement, you give a price window (two prices which are very close) where you think the market will eventually bounce between, so you get profit. If the market go against you, the loss is big. It is against the principle of hedging. I think.
+
+--- 帖子 #296 ---
+You are 100% correct. Arbitrage should be just one of the many strategies you use. But it should build capital in the long run if you do not get greedy. Do not get too much discouraged. Some days are are definitely better then others. Software sometimes gets the market conditions+your broker pricing just perfect and you make good pips. Yes, arbitrage is not risk free, but most of the risk is when 1 of the brokers does not execute a trade in the opening or close. But that also can go both ways. You can win or loss in a 50/50 chance. If you get them both. The risk in minimum.. like 1 or 2 pips max. Just dont run your software without supervision. That is plain crazy. Does yours have some king of safety to close a trade after some seconds if one is not executed? .
+
+--- 帖子 #297 ---
+My software will try to close the one-leg order every 30 seconds (5 times maximum, if failed, it will beep and send u an email). I leave it run all day long without any problem. The thing is just slippage which kills the profit. Technically, my software should be responsible fast enough to the market. The best weapon of broker against us is slippage, which does work. I feel it is painful if they gave you 4-5 pips slippage every time. It is just the brute truth, I even got 10 pips slippage. since we are only targeting 1~2 pips every trade, the slippage can wipe all you accumulated profit easily and put your account into red. Technically, my software should be already in a very mature shape (multi-currency, multi-brokers and fast execution). I've been keeping lost money due to ONLY slippage, which none of us has control.
+
+--- 帖子 #298 ---
+You are exactly right. Experience has shown that placing two limit orders (one buy / one sell - even in a forward testing environment) tends to accentuate the negative side of this strategy. When it doesn't work out, one side will get filled - the side that locks in the loss (usually large because the market doesn't come back), while the side that would provide profit goes unfilled too high a percent of the time. And this is with no ill intention from the broker - just simple market mechanics. Two market orders isn't necessarily a panacea either. If you think about it, this strategy (arbitrage) assumes the two prices haven't moved between the time you received the two quotes and processed the arb and sent the orders and received a fill. If you have a 100 millisecond ping (round trip) to both brokers, it took ~ 50 ms to receive the quote + the time to process the quotes to spot the arb opportunity. If you can do the processing in 10ms, and send the order, you can get the order in within 110ms. The broker will take some time filling the order. Let's say you're using the protocol to keep MT4 fill time down . Broker fill time will vary but if it is 200 ms then you have to hope prices haven't changed in that 1/3 of a second since you received the perceived arb opportunity. If the broker is a market maker that buckets your orders they have 200ms to "individually price" your fill into their feed or decide to move the quote, leading to slippage on the user end. (This does happen from real trading experience.) I still feel the best way to put the odds in your favor is to determine which quote is out of alignment / slow, and attempt to get a fill on that price with a small slippage amount (zero). If the order is rejected, refresh quotes and try again as long as the opportunity exists / appears. Once filled, fire off the 2nd order to the 2nd broker to lock in the profit, then apply ian's sage advice: It still isn't a risk free trade as the market can step back after you get your first fill, causing the 2nd order to lock in a breakeven or even a loss if the step back is quick/large. If your first broker filled is a last looker, you will get more step backs. Think about it.
+
+--- 帖子 #299 ---
+Highlighted some particularly interesting comments regarding the mechanics of the broker prices we see vs. the actual prices they receive from their suppliers. It doesn't even take 100 transactions in a single day to alert the broker. A consistent pattern of (small) profits over a couple of weeks will do it given even 5-15 trades per day, particularly if those trades are small or the holding period is small. But if you're making $$$, you're on the radar regardless of the strategy employed. Given how easy it is to create a report and to sort that report by equity change over a given period of time, don't you think that any broker who has a part time intern programmer has a monthly, weekly and daily profits report as shown on IBFX Connect "Top Live Performers" ?
+
+--- 帖子 #300 ---
+With the slow MT4 execution, this should not happen very often and bring more uncertainty, in my opinion.
+
+--- 帖子 #301 ---
+Iceworld79, Your software use MT4 or FIX/Java API ?
+
+--- 帖子 #302 ---
+Institutional arbitrage on liquid pairs is rarely more than a few fractions of a pip, and rarely more than a few 10's of milliseconds - liquid pair arbitrage is removed in co-location in a few ms at most - what remains is low liquidity pairs, matching across geographically distributed matching centres (EBS has 1 in US, 1 in UK and 1 in Asia - Reuters has 1 in UK), and client flow in 2nd tier brokers (non EBS/Reuters rates) . By the time they reach the retail market they have been submerged by the distribution 'artifacts' - ie what you are seeing are likely not the arbs from the institutional market at all - they are likely artifacts of the retail price distribution hierarchy including poorly performing retail trading systems - they are likely NEW arbitrage, not sourced from the top level. They are therefore possibly fresh opportunities - to be taken very carefully I mentioned long ago developing an 'equity pump' or equity management strategy where they are opened for long enough to 'move' equity from one broker to another. You can't guarantee that you can leave the equity in correct broker each time, but over time you should be able to 'steer' the equity sufficiently to balance the broker in most cases In the institutional world prime brokers are used to net positions on brokerage accounts - for a fee of course. These fees are comparably with brokers fees
+
+--- 帖子 #303 ---
+A real limit order (on a non MT4 system) will give you a guaranteed price, but not a guaranteed fill. ie no slippage - but maybe no fill at all Very few MT4 systems offer real limit orders though. (Ill have to eat this comment - its out of date with the thread as the disadvantages have been highlighted earlier) I would guess Oanda are honest , perhaps not arbable, but likely honest Ok - How about a new idea - only execute an arb with a limit order so that it can only slip one way (you cant guarantee it wont slip both ways) but try and ensure that the short term trend is supporting it so more often than not slippage will be covered by price momentum Of course this is not pure arb - its arb entry supported by short term momentum
+
+--- 帖子 #304 ---
+Then make sure you LOSE on the dodgy brokers, and not by similar small amounts each time - just a steady net loss. take yourself off that radar if you can. You can still be detected but you are gonna be further down that list. You have the power to vary the win/loss profile - its just more work to do it
+
+--- 帖子 #305 ---
+MT4 for now. I have an communication adapter architecture, it can be easily changed to Fix/API if someone can show me it does work. I would like to invest the time and efforts on it.
+
+--- 帖子 #306 ---
+It works very well at the prime brokerage level. The problem is that's where a number of HFT firms are trading. These are the guys who measure in micro/nanoseconds.
+
+--- 帖子 #307 ---
+My program is build on ANSI C and use C# to build the GUI. From the appearance of arb opportunity to the order sending, my program should be quick enough (~1ms). The thing is many HFTs use custom hardware, such as FPGA to accelerate (which is my expertise in some way). I know for sure that my program can not compete with FPGA with the speed. If we go that way, we are in a different battle.
+
+--- 帖子 #308 ---
+Or avoid the dodgy brokers but change the underlying strategy so you accept some directional risk with the potential for greater reward than just a pip or two. Perhaps I'm still an idealist but sites like Forex Factory should be filled with threads teaching useful information. Instead of technical analysis or price action, threads on how to design a strategy off the arbitrage trade. If I had started with this it would have saved me a lot of time. This thread and a few (very few) others on this site are on the right track.
+
+--- 帖子 #309 ---
+That's largely the reason why I'm trying to do this at the MT4 broker level. The opportunities are still large enough to work for us, but too small to be profitable for the HFT funds.
+
+--- 帖子 #310 ---
+If I knew how to consistently lose on the dodgy brokers, I really don't need to hedge. The arb swings in either direction in a random fashion. That alone should help you stay below the radar; you end up win and lose 50% of the time with any one broker. In addition, trading with a large pool of brokers should dilute their attention.
+
+--- 帖子 #311 ---
+In a perfect world where re-balancing accounts could be done quickly and without costs (wire fees, etc..) then this would be ideal. In general tough, this is a game best played by HFTs, and any advantage found now might not last long.
+
+--- 帖子 #312 ---
+THANK YOU! I've been saying that for a while now!
+
+--- 帖子 #313 ---
+More like we are the dwarves getting trampled by the giants. Tom Brady felt that. Oh, sorry Pats fans. That was too soon.
+
+--- 帖子 #314 ---
+What exactly are you looking for? I've got a communication adapter to between MT4 and pretty much anything else you can dream up (as long as it can read from unmanaged code). Now, the fix protocol is something I've been dieing to get the time to play with.
+
+--- 帖子 #315 ---
+What I mean adapter is that I only need some client code to translate fix message, no need to change server side. my software is currently using similar thing to communicate with MT4s. I think it is broker personality which matters. Technically, not hard. but to get real profit, I now have some doubts. although sad.
+
+--- 帖子 #316 ---
+Although sad, I found this route might be a dead-end. From this week, 80% percent of my trades turn out to be loss. Same brokers, same software, at the beginning, things are much better. Apparently, brokers has some weapons to defend themselves against arb. You can get something at the beginning, soon the situation will change. Any thoughts?
+
+--- 帖子 #317 ---
+I'm not sure why brokers should prevent this arb? 50 % of your trades at one broker will loose thats a fact.
+
+--- 帖子 #318 ---
+How many brokers are you trading with? You must have drawn their attention. Now they launch the "automated individual pricing" on you by adding more slippage to your orders.
+
+--- 帖子 #319 ---
+Well, in my opinion, it is pretty easy to detect, but I'd rather not reveal it in public
+
+--- 帖子 #320 ---
+I used 4 brokers, one of them is ECN. eventually, all brokers became against me. I guess what you were talking is what they were doing. I've stopped my live testing until some new thoughts come in.
+
+--- 帖子 #321 ---
+Go to 10 brokers. You won't be putting in as many trades to trigger "attention" then.
+
+--- 帖子 #322 ---
+thanks, nondisclosure00. That might be helpful. But one observation I had is that the opportunity trends to focus on 2 brokers (in my case). I think the reason is these brokers manipulate price a lot. you found many fake ones. With 10 brokers, it should help, but I am afraid that same thing may happen. Let's see.
+
+--- 帖子 #323 ---
+There's a weeding out process that needs to be done to get to 10 "trustworthy" brokers. I'd ask everyone who's playing this on live accounts of any kind to keep track and share who you find are trustworthy.
+
+--- 帖子 #324 ---
+Better yet, try only ECN brokers instead of Market Makers. I think you'll still get arbs but less frequent. Once you get the trade, it is solid with least amount of slippage.
+
+--- 帖子 #325 ---
+I agree with you, it is extremely easy for a brokers to make reports and Analise them. And they do in a continuous basis. But it seems you still are under the impression that "all" brokers hold "all" the orders from their clients. Therefore, if we win they lose. Yes, those exist. They are the real bucket shops. But they are the few and do not last long. They are rather ponsi schemes in need of new clients all the time to steal from them. Please forget about them . Stay with the majors or with Banks. But that is not the financial model of the rest of them. To stay in business they must reduce their exposure passing the risk to the banks. In their ECN section they pass 100%, in their MM section goes from 100%, to whatever risk they choose to take. (by the way, if a broker offers ECN, it is a very good sign and hint they are for the long run) Sure, they know who is making money and losing money. But when doing analysis they arrange the spreadsheet according to how much the client is making for them.. . not what client makes. .... . And guess what? The clients that makes the most for the brokers in a consistence basis, are the one that are making money for themselves... so, If we stay in the ballpark of how much they should make according to our volume we are ok. But if our transactions are merely a break-even, or loss for them, regardless of the money we might be wining or losing. They may not want us there. It is very simple to understand. Don't remember if you or some else very wisely started in a previous post... the whole darn problem with these arbs type software is that we cant teach them to differentiate between .. say. a "pure" arb , or merely taking out the broker's piece of the pie. . .
+
+--- 帖子 #326 ---
+Hi.. i had this idea couple of months ago but i couldnt find any info exactly what i want. When i did more research lately ive found this thread by Ronald_Raygun which is exactly what im looking for. When i attached slave script i got this message Hopefully someone help me in this case..
+
+--- 帖子 #327 ---
+As an addition.. I did try to do the steps as mention on Ronald_Raygun webinar.. 1st : I attached Slave script on slave broker 2nd : I attached master script on master broker On the top left corner the running... moving.. (blinking) 3rd : I put my slave name on the "Change Me to the slave name" objects then it stop I did attach the slave script into the master broker and put the name on to the master script. Here is the final result
+
+--- 帖子 #328 ---
+There should be a reference to hPIpe in the experts tab. What value is it? Most of the 'hanging' problems are issues with the scripts not being able to see the named pipe.
+
+--- 帖子 #329 ---
+I just want to make sure and confirm that this is what i get, i dont know wether it is right,, The MT4 on the right is the master
+
+--- 帖子 #330 ---
+Upss.. forgot to attach,, The problem is i dont get any price data on the Master Script (On the left side of the chart) is that normal ?
+
+--- 帖子 #331 ---
+When it start working in live accounts plz PM me. thanks
+
+--- 帖子 #332 ---
+RR, I have a fair amount of C# programming experience and think I might be able to help out with this project. I've read the entire thread (whew...) and performance seems to be something that could be tweaked a bit. I am mostly a lurker on this board so I can't PM you but please contact me to discuss further. Jason
+
+--- 帖子 #333 ---
+HI RR, have you already managed to solve the closing orders issue? cheers!
+
+--- 帖子 #334 ---
+Quotes for real accounts have been really crappy for arbs for the last 15 days, all across major banks--&gt;brokers. Not a lot a volume, few prices available, thus everybody has same prices. Market Makers, like usual show prices in between due to their clients pools but most of the time when trying to execute they take me right up or down to the real pricing (requote). Anybody trying this in real accounts for the last 15 days probably facing same problem. Last Tuesday was ok but now back at the same. J.
+
+--- 帖子 #335 ---
+Jeuro, U use the EA of Ronald in live ? U haven't latency on executions orders ?
+
+--- 帖子 #336 ---
+Hello surfeur: I am not using Ronald's. I am using a commercial software in behalf of one of my clients in live accounts. Not sure what latency you are asking. It will always be latency in executions. I have ping average below 100ms to all the brokers I use. I assume I get executed below 250ms because I have set 250 max loop time to cancel orders automatically. The real time I don't know because I run the software in a complete stealth mode that I don't even get logs for myself. J .
+
+--- 帖子 #337 ---
+I can ping at 10 ms (Using CNS vps) to some brokers but execution is averageing 400-500 ms. are u using a VPS? and if so which one ? thanks natal
+
+--- 帖子 #338 ---
+Hello Natal: I don't use a vps for arb'ing. I have good connection at home and most of the brokers/server I use are relatively close, 2 of then are less then 300km. I will say 400-500ms execution is quite good. In my case I filter a lot. I get a lot more canceled order but the ones that go thru are good from the opening. J. .
+
+--- 帖子 #339 ---
+Hi J Thank u for your reply... I presume that you are in the UK? By the way are u doing Forex arbs only or have tried CFDs too? Is the software taht u r using avaiable to the Public? Regards natal
+
+--- 帖子 #340 ---
+Has anyone experimmented with this method of arbitrage: 1. Use a level2 arbitrage calculator to find opportunities 2. buy EURUSD, sell EURGBP and sell GBPUSD 3. Profit The difference would have to be more than the spread over the 3 trades. Anyone done this in the old days and does it still work now?
+
+--- 帖子 #341 ---
+You have a example ?
+
+--- 帖子 #342 ---
+I am doing it &lt; 2 ms ( millisecond )
+
+--- 帖子 #343 ---
+it's enough to have a arb profit ?!
+
+--- 帖子 #344 ---
+speed is not all
+
+--- 帖子 #345 ---
+If speed is not the most important issue for arbing, then what is ?
+
+--- 帖子 #346 ---
+STP &lt;=&gt; STP if system can not overcome slippage issue, there is no chance of making pips out of trades. and speed is not the main key of doing it
+
+--- 帖子 #347 ---
+are there any brokers with no slippage?
+
+--- 帖子 #348 ---
+sometimes on DMA brokers but very few ms/us.. but you have a fees
+
+--- 帖子 #349 ---
+It seems they've stopped any chance of latency arbitrage, i suspect they've centralised feeds somehow . About 6 months ago, i saw it for myself where you'd get 10 pip spikes on a EURUSD demo account, then 10-60 seconds later, my live account soon followed - easy to scalp and even easier to get greedy. I figured it was because the demo feeds were from co-located ECN feeds that didn't go through any brokers' black-box of dirty tricks where each for...next loop added latency to live accounts. I gave up after MT4 build ~390 when i noticed all feeds were in sync. Latency arbitrage was/is a brokers worst nightmare. If you get caught, there will be repurcussions; only big banks are allowed to cheat the system and front-run price with fantosecond HFT and co-location next to the exchange. You don't need any fancy software, just download MT4 from different brokers and watch one pair across multiple MT4's to see the synchronicity of price dance from different feeds.
+
+--- 帖子 #350 ---
+I think you maybe, be right
+
+--- 帖子 #351 ---
+NYSE corrupt bastards - Latency arbitrage Want to know how much it costs to cheat the system? $5,000 per month . link
+
+--- 帖子 #352 ---
+Is there anybody who is still using this, or similar system, or somebody who is interested in this kind of trading?
+
+--- 帖子 #353 ---
+Did you even bother reading any posts? I wrote this only a few posts above.
+
+--- 帖子 #354 ---
+How could they possibly centralize the feeds? Each dealer is independent and located in different places. They each have different liquidity providers with different spreads / prices. It sounds like you're talking about a MT4 bug fix in the newer versions that impacts MT4 users who were taking advantage of dealer latency by exploiting a bug in the older MT4 terminals.
+
+--- 帖子 #355 ---
+I was thinking perhaps something at the EBS / Reuters layer could have filtered feeds somehow, but i'm not too familiar with the bank architecture stuff, i only know of this picture , but your explanation makes more sense. A simple MT4 bug fix between an MT4 co-located demo ECN feed and a live account that they butcher with slippage, execution, et al via their 'manager' software.
+
+--- 帖子 #356 ---
+Yes, I read the posts, but my question is not about your post. Maybe you misunderstood something. My question has 2 parts: 1. "Is there anybody who is still using this, or similar system": it means, that I'm curious about whether that there is somebody here in the community who uses this, or similar system. This is not connected to your theory. 2. "somebody who is interested in this kind of trading": it means, that I'm curious about whether that there is somebody who still deals with this problem or its solution. This is not connected to your theory. Anyway, if you assume something, it doesn't mean that this is true. This is not about the differences between demo and live accounts. There is no sense to compare demo and live datafeeds. Demo datafeeds are usually different than live datafeeds. If you want to get clear picture, then compare live datafeeds only! This is not about the MT4 build numbers, and bug fixes. If a broker manipulate the quotes or the orders, then it is on server side. MT4 Terminal is just a client. It simply sends requests, and receive answers. The real work is at server-side. And finally here is something interesting: http://www.myfxbook.com/forex-broker-quotes Just click on a broker name on this page, and you will find a list about actual quote-differences compared the broker with other brokers! Do you still believe, that the feeds are synchronized?
+
+--- 帖子 #357 ---
+I learnt of an arbitrage platform that works really well. It works with multiple brokers and has really good features that disguises it from brokers. I cant remember the name now but i'll post it as soon as I do
+
+--- 帖子 #358 ---
+johnny122, did you ever remember the name of the arbitrage platform you mentioned?
+
+--- 帖子 #359 ---
+can anyone tell me tht arbitrage ea really works AND BROKER allow it?
+
+--- 帖子 #360 ---
+Could someone please PM the execution and the new version of the scripts EA for this script I agree to all the risks involved with trading this system.
+
+--- 帖子 #145 ---
+I have been waiting to see if this has produced any decent results before looking at it more closely myself - yours and my approach is comparable - i am just not sure the retail arb opportunities exist and whether any income from it is sustainable/drawable. The fact that the opportunities are likely to be a MISfunction of the broker rather than the market make is sooooo eas for brokers to pull any winnings back from you LMAX might be an exception - they allow passive orders so you can try to "make the arb" happen BTW you could reduce brokerage/transfer costs by setting up a hedged position between the brokers and closing it when it enters profitability (meaning the direction you desire) - the most you can lose is that you transfer the equity in the opposite direction
+
+--- 帖子 #146 ---
+This post is part b** - it was based on my looking at a thread posting nearly a year old and hence it out of "context" sorry
+
+--- 帖子 #147 ---
+Check free AOFeed in aonet.eu You will see a lot of arbitrage opportunities each day. (EURUSD, GBPUSD)
+
+--- 帖子 #148 ---
+1) use fast, dedicated server in Equinix data center(London LD4 , LD5 or New York) in conjunction with brokers who have their trading servers located in the same data center. 2) you need accounts where "Last Look" is not used. 3) software must be fast ~0-1ms reaction. 4) also try brokers who allow arbitrage ( http://www.forexfactory.com/showthre...59#post8283459 ) 5) generally Market Makers are easier for arbitrage 6) don't trade during high impact news(NFP, Rates statements) You can only limit slippage, not fully eliminate. Additionally: it is easier to withdraw money using specially created, trustworthy, true ECN broker account. You don't need to withdraw money from broker that you use for arbitrage! When you gained profits on some account then you can open two opposite orders(same volume) manually: 1st position on account with profits(arbitrage account) and the 2nd position on special ECN account(withdrawal account). You do it to lose profits on profitable arbitrage account but they just go to your ECN account, which will easily let you withdraw your gains.
+
+--- 帖子 #149 ---
+Interesting thread, especially now that I developed my own fast broker arb EAs with two-way interprocess communication and NOT reliant on the OnTick function, which is far too slow for detecting and reacting to arb opportunities. Many say it can't be done successfully, and if somehow you are successful with it, the brokers will cripple your trading. Fair enough, noted.
+
+--- 帖子 #150 ---
+I'm interested in your arb EA development. Could you please share your thoughts about? Thanks
+
+--- 帖子 #151 ---
+Everything one needs to know to find successful trading can be gleaned from a forum like this, youtube videos, other web sites, and years of trying many different things that work some of the time but not all of the time. Think, try, think think think, try try try, think and try some more. Then take a five-year break and think and try some more. Then all will become clear. Oh yeah, you're going to want to learn how to develop software quite well. Peace, out.
+
+--- 帖子 #152 ---
+i cant download can pls send me? or upload? thanks, blackhat1@outlook.es
+
+
+===== 附件下载链接 =====
+

@@ -1,0 +1,1172 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Attached is the EA for the Daily Fozzy method. The method is described here: http://www.forexfactory.com/forexfor...ead.php?t=7984 . The EA was developed jointly by tradeigel and stockwet. The EA has the following features: Automatically opens a new order if criteria is met for a given currency (only one order per currency pair is allowed open at a time.) Allows the trader to take ALL crosses, or, only those that also meet the Bollinger Bands median line criteria. Trader can specify the number of lots to trade. The Stop Loss is automatically set to the preceding bar's high or low value (depending on trade direction.) The SL can optionally be set based on BeachBum's ATR method. Traders can specify a stop loss "cushion" which would place the initial stop loss above or below the high or low based on the number of pips specified (account for double touches, spreads , whatever.) The SL is moved to breakeven when a specified number of pips is reached. A trailing stop feature can be enabled. Traders can specify when to activate the trailing stop and the amount to trail by. A maximum TP amount can also be specified. The EA sets the magic number to 7984 (same as the Fozzy thread id) so that the EA does not impact other trades on the same currency. The EA does not hardcode the daily time period, enabling Fozzy to be run or tested on other time periods. The EA can send alerts to email when a valid signal occurs. Live trading can be disabled in the EA itself. Future possible features: Ability to take partial profit out at a specified target Others? The latest Fozzy EA will always be posted on this first thread to ensure that it is easy to find. If you have any bugs, questions, suggestions, etc., use this forum. If you have questions about the method itself, refer to the main Fozzy thread in the Discussion forum (see link above.) **** UPDATES **** :: 9-29-2006: Changed okToCheck to support trading only on 00 GMT, if the Use_00_GMT variable is set to true. Otherwise, trades open on new bar. :: 9-30-2006: Added parameter to specify MA method. Uses EMA by default now. :: 10-2-2006: Added ability to set SL according to ATR(10) method, as described by BeachBum :: 10-3-2006: Added feature for taking partial profit out at a specified level. User specifies number of lots to take out. Currently, this feature only supports a single partial profit takeout. It looks to see if the order lots is equal to the Lots value. So, the EA can be "tricked" into taking additional partial profit by modifying the Lots value to equal the current open order lots remaining and resetting the partial profit value. :: 10-9-2006: Added alert feature when a cross occurs. Also added Trade_Live parameter to turn live trading on and off. :: 10-17-2006: Bug Fix: TP amount getting set to 0 on B/E and Trailing Stop functions. :: 10-23-2006: Bug Fix (v2.2): RSI MA values being incorrectly calculated in EA. Added feature to include test information as comments in chart window. :: 10-24-2006: Incremented EA version. Fozzy 2.1 is old version with incorrect calculations but positive EA results. Fozzy 2.2 includes the calculation fix. ****
+
+--- 帖子 #2 ---
+Outstanding work stockwet &amp; tradeigel.....thank you very much! I can't wait to test with this EA........
+
+--- 帖子 #3 ---
+I'm new to metatrader, and I had no idea this program was this powerful. I think I've found my new interface. Too bad Oanda doesn't support it.
+
+--- 帖子 #4 ---
+Thanks for sharing, stockwet &amp; tradeigel! I was thinking to make an EA for Fozzy myself, but it's much nicer to just enjoy someone else 's work.
+
+--- 帖子 #5 ---
+Don't be mad if I am wrong, , but there seems to have a bug in the oktocheck() function, in which you use the bar numbers to determine if there is a new opening bar: if (lastBars != Bars &amp;&amp; checkOpenTrade()==0) barOK = true; but when a trade open and stop in the same day, the bar number hasn't changed and the setup may be still there, so the trade will be reopened and stopped out again and again until the setup disappears or the next day coming. I found this in my back tests. I verified this by modified one line in the start() as following and problem solved: if(checkOpenTrade() == 0 &amp;&amp; Hour()==0 &amp;&amp; Minute()&lt;1 &amp;&amp; Seconds()&lt;10) getSignal(); You probably want to fix the oktocheck() instead of doing what I did. Try backtesting GBPUSD in Aug 06 and you will find this bug. Just a tiny problem. THE EA STILL ROCKS!
+
+--- 帖子 #6 ---
+Hey thanks. I'm not sure if this is a bug or not. I was under the impression that there really is only one trade per day since you should be checking at the start of each day. Nothing has been said on the forum about what to do if you're stopped out in the same day. Do you reenter again, or, wait until the next valid signal. It's an excellent observation.
+
+--- 帖子 #7 ---
+Actually, I re-read your post again and realized I may have misunderstood. Are you saying that the EA currently opens up multiple orders if stopped out, or that it does not open up multiple orders and you would like it to? I think I see what you're saying - that the EA opens multiple orders if stopped out and we need to keep that from happening. Tradeigel suggested using time code instead of the bars code. I like that idea. But, when I tested the time code, I got really funny results in strategy tester (not that I know how to use it anyway.) I'll make the change and see how it does. stockwet
+
+--- 帖子 #8 ---
+My backtesting result is pretty bad for both EURUSD and GBPUSD in 2006 (AUG and Sept is good though). I notice you posted in Fozzy's thread that Tradeigel also have different results than yours. I am curious what happened. A way to find it out is to analyze the trade made by the EA one by one. To do that, you may press the "open chart" button on the tester at the right. A chart will be opened with all the trades labeled on it. We can match our charts to see when our results begin to be different (maybe our chart data is different... ). The attached is the chart I produced in that way. The indicators are added on manually, for the convenience to verify the trade setups. You can see they are all valid trade setups according to Fozzy system.
+
+--- 帖子 #9 ---
+Yeah, if a trade is stopped in the same day it opens, and if the setup is still there, it will reopen again. I saw in my backtesting. You may try your EA to backtesting GBPUSD from Aug 01 to Sept 01, which should reproduce the problem. You can open the charts in the tester to see what exactly happened.
+
+--- 帖子 #10 ---
+First, I made a change to the EA. I decided to add a variable to control whether you open based on last bar or based on GMT 00. The reason is that I think some people might want to test or try the EA on lower time periods. When I run results on tick data, I get poor results. Much like yours and tradeigel's. I downloaded Apari 1m data and used that for testing. I'll post a chart of my results as soon as I have a chance. stockwet
+
+--- 帖子 #11 ---
+My data was from Apari... we can match our charts to find out the difference on data too.
+
+--- 帖子 #12 ---
+Is it SMA or EMA? I think Fozzy confirms that he uses EMA and not SMA.
+
+--- 帖子 #13 ---
+I posted a new update to allow the method to be specified as a parameter (MA_Method). By default, it is now set to EMA.
+
+--- 帖子 #14 ---
+will try in demo account
+
+--- 帖子 #15 ---
+Any luck at deciphering the take profit mechanisim from that EA I sent you? Will it provide any value in adding that feature to this EA? Jason
+
+--- 帖子 #16 ---
+Sorry, I took a few days off. I took a look at your code over the weekend. I might see if I can pull it out, but, it also might be easier for me to use code I'm familiar with. In either case, I really appreciate the helpful contribution. Regards, stockwet
+
+--- 帖子 #17 ---
+Stockwet- I modified this, tweaked the values a bit and added a function to use ATR for the stop losses. I think it's improved a bit. I'm new at this, so I may have screwed something up. Take a look at let me know what you think. Thanks for your work, Paul
+
+--- 帖子 #18 ---
+excellent work- how can I change lots to 0.2 or 0.3, I couldnt change to minilots? can you please help me, I have not so greta account Thx bj
+
+--- 帖子 #19 ---
+Paul, Thanks. I'm actually working on a 2.0 with this same feature. I have it done and tested and will post shortly. It looks like you have the right idea here, though. I wasn't sure what the ATR multiplier is for. BeachBum references using a percentage of the ATR, but, I'm not sure what the multiplier you have is meant to do. Also, I found what I think might be an error in your calculation. You have the following for a buy signal: initSL = Ask-(ATRMultiplier*atr())+(Init_Stop_Cushion*Point); I believe it needs to be: initSL = Ask-((ATRMultiplier*atr())+Init_Stop_Cushion*Point)); Or initSL = Ask-(ATRMultiplier*atr())-Init_Stop_Cushion*Point; If your code does work, I'm not quite sure how since the algebra looks a little off to me. But, that could be my mistake also. Also, you can factor in the spread by using the Bid value on the long and the Ask value on the sell for the basis of the stop calculation. I'll probably switch and do that for Fozzy 2.0. Best and good work, stockwet
+
+--- 帖子 #20 ---
+I wanted the stop to be greater than the atr, 3 times to be exact. I was just testing ideas and tossed that in there. I think you're right about the algebra problem, and maybe that's why i was getting some odd looking results/errors. I'll wait to see what you've done with 2.0, as if i read correctly you're going to set it to use a percentage of the atr, so it would be a bit more adjustable than mine. Good idea on the bid instead of the ask, I'll make note of that for next time. Thanks!
+
+--- 帖子 #21 ---
+You can set the lot value by setting Lots=whatever. Please don't run this on a live account, only use these EA's on a demo account.
+
+--- 帖子 #22 ---
+when i wrote whatever and compile- wrote error? certainly not for live account, but I cant on this platform size of account Thx
+
+--- 帖子 #23 ---
+I think the "whatever" refers to "whatever number you want to put in there", not the actual text "whatever". Try to put in 0.2 and see what that does.
+
+--- 帖子 #24 ---
+I wrote 0.2, then compile and in value lots i see 0 except 0.2 thx
+
+--- 帖子 #25 ---
+First, what version of MetaTrader are you using? Second, where are you seeing the "0" at? In the code? Or, are you dragging the EA onto a chart and see it there? Try getting a fresh copy of the EA. But, first, check your MetaTrader version. Go to Help | About and look for Version .... Also, you need to make sure your EA is saved in the Experts directory. You shouldn't even need to compile it - it should compile on it's own.
+
+--- 帖子 #26 ---
+my version 4 build 197 I overwrite 2 to 0.2 et metaeditor, then compile, after it without error, and I see 0 in properties of EA fozzy in input- lots - I dont see 0.2 like is writen in metaeditor thx
+
+--- 帖子 #27 ---
+Unfortunately, I can't seem to duplicate your problem. Which EA are you using? Could you post a screenshot of your inputs box as well as post your EA code so I can see further?
+
+--- 帖子 #28 ---
+ai attach it, inthis chart I chabge to 1 lots, it goes, but not to 0.2 thx
+
+--- 帖子 #29 ---
+Please also attach your code.
+
+--- 帖子 #30 ---
+sorry which code, wher Can I find it
+
+--- 帖子 #31 ---
+The EA that you are trying to compile. It should be in your experts directory.
+
+--- 帖子 #32 ---
+hier is mey experts directory
+
+--- 帖子 #33 ---
+Brainjt, I really think that the best course of action is for you to familiarize yourself better with MetaTrader. My time is such that I can't walk you through the basic tasks needed to get an expert working. I've never heard of Velocity Trading, but, it's possible that mini accounts are not accepted. It's also possible that part of the code you are working with was modified in some way. I really do not know. Please, though, take some time to familiarize yourself with MetaTrader first. stockwet
+
+--- 帖子 #34 ---
+Oh key, sorry
+
+--- 帖子 #35 ---
+I no longer have the ability to edit the first post. So, I am placing the updated Fozzy file right here. I'm calling this version 2.0 since I added a couple significant features - setting the SL using ATR and taking partial profits. Using the ATR for SL seems to have a fantastic impact on the profitability of the EA. I also found that the optimal partial profit amount for EURUSD was 50 pips. I'll go through the settings as a way to describe the features. Version 2.0.0 features: Use_BB_Filter: Specify whether to adhere to the BB medial line rule or not. If set to false, the EA will take ALL crosses regardless of BB median line. Use_00_GMT: If set to true, then, the EA will only place a trade at 00 GMT time. This will prevent the EA from being used on other time periods. Set this to false if you want the EA to check for signals at the close of the bar, which would enable it to be run on other time periods. Lots: Amount of Lots to trade. Take_Partial_Profit_Lots: Amount of lots to take out when the partial profit target is reached. Take_Partial_Profit: Set the partial profit target. At this level, the EA will close a portion of the position equal to the number of lots specified by Take_Partial_Profit_Lots. If you set this to =0, the EA will not take any partial profit out. TakeProfit: Sets the maximum take profit amount. Use_ATR_Stop: Sets the initial SL based on the ATR (10) value, as specified by BeachBum. If you set this to false, the initial SL will be set according to the original fozzy rules - e.g. the high or low of the previous bar depending on trade direction. Use_ATR_Pct: BeachBum recommends using a fraction of the actual ATR value set at 70% or 80% of the ATR. So, if this was set to 70% and the ATR value was 100, then, your actual SL set would be 70 pips from the entry price. Init_Stop_Cushion: You can add an extra cushion to your initial stop if desired. The remaining variables are self-explanatory and previously explained. I have not demo tested this. I don't know if things work quite properly yet. I do expect a bug or two to show up. Let me know what you find. stockwet
+
+--- 帖子 #36 ---
+stockwet............ I for one, really appreciate your work on this EA, thanks! I know what I will be doing this evening after I finish entering my "fozzy" and VP trades. BB
+
+--- 帖子 #37 ---
+Hi All, Well, I've found that when I set the EA to make trades based on GMT (Use_00_GMT = true), the backtesting results are just not that good. There are a LOT of missed trades. Setting the value to false tends to have a few duplicate trades, as Aha had pointed out, but mirrors the charts much more closely. On EURUSD, the most successful combination so far has been with the following: - Use_BB_Filter = true - Use_00_GMT = false (only for backtesting) - Lots = 2 - Take_Partial_Profit_Lots = 1 - Take_Partial_Profit = 50 - Take_Profit = 300 - Use_ATR_Stop = true - Use_ATR_Pct = .7 - TrailingStop = true - TrailingAct = 50 - TrailingStep = 50 - Start_BE = 50 Any settings not mentioned are just default. The result was $15588.02 in NET profit in 59 trades. If you remove the partial profit from the equation, then the net profit becomes $17536 on 34 trades. But, the winning % is reduced. The report for taking partial profit is attached. Also, I tried BeachBum's method of taking all crosses and it just didn't work out no matter how I sliced it. Maybe he can come up with some setting that work.
+
+--- 帖子 #38 ---
+Because I lack experience in backtesting and so I'm not sure about my results, I'm posting the results of one of my tests and would appreciate some feedback. This looks good, but how accurate is it?
+
+--- 帖子 #39 ---
+Hi BeachBum, It does look good initially. But, I read that unless you use the Alpari historical data, you get very poor modeling quality, which skews the actual results. That's probably why my tests using just the crosses (without the BB median line as a filter) ended up totally different than what you have. I'll post my report using your identical settings and see how it compares with the Alpari data. stockwet
+
+--- 帖子 #40 ---
+On closer inspection, it also looks like you are using control points versus ticks, which reduces the model's quality. I'd try it using ticks and see what you get. It takes a little longer to run, but, tends to be more accurate.
+
+--- 帖子 #41 ---
+OK..............I'd appreciate that very much.
+
+--- 帖子 #42 ---
+OK. Here's the same test using Alpari historical data and tick modeling. For some reason, I have data going back to June 04, but, it doesn't start reporting trades until November 04. Weird.
+
+--- 帖子 #43 ---
+thx excellent result on eur usd EA fozzy 2 , this night opened et 00 GMT NZDUSD, only this one, computer choose only this one, the same in your ea? thx P.S. I learned where is code
+
+--- 帖子 #44 ---
+Hi All I'm started demo testing this interesting EA with 4 pairs GBPUSD , EURUSD , USDCHF , USDJPY with Fozzy 2.0 using Alpari broker. I think there is an error when half position is closed for remaining position tp isn't set to 130 (default value) but it's set to 0. Is EA supposed to run in this way so user could decide to put manually tp on remaining position or is this an error? thank you P.S: Looking at code and experts tab it seems that errors occur when order is modified due to partial profit reached but take profit will be set to 0 : Inserted Code {if((OrderStopLoss()) &lt; (Bid-Point*TrailingStep)) // if S/L is lower than Bid-'TrailingStep' [b]{ OrderModify(OrderTicket(), OrderOpenPrice() ,Bid-Point*TrailingStep, 0, 0, GreenYellow);[/b] return(0); } }
+
+--- 帖子 #45 ---
+Nice catch! Let me fix that and post an updated version.
+
+--- 帖子 #46 ---
+The latest Fozzy EA has been posted to the first page of the thread.
+
+--- 帖子 #47 ---
+Thanks for all of the work on this stockwet...
+
+--- 帖子 #48 ---
+oops...and tradeigel.
+
+--- 帖子 #49 ---
+Thx Stock &amp; Trade Another question for you : if an order is still in place after closing a daily candle , stop loss will be adjusted to reflect new ATR value for that pair or it will remain unchanged ?
+
+--- 帖子 #50 ---
+The ATR sets the original stop loss and it stays there until the price reaches the target for moving the SL to breakeven. I've been toying with the idea of trailing the SL based on x times the ATR(10), rather than have a set amount to trail by for all pairs. I thought it would be an interesting way to do trailing stops.
+
+--- 帖子 #51 ---
+Sockwet-thanks for all of your tireless work on th Fozzy method. I like the fozzy on a 4 hour chart and was wondering if you could create an indicator that would signal via email when the rsi amd ma cross. that we wayyyyy cool thanks
+
+--- 帖子 #52 ---
+Trailing based on ATR I think could be a great idea to focus on! FX Market is dynamic so EA should be dynamic too In the same way I'm thinking that using a variable SL could lead to less risk:reward per trade. Basically my idea is this : if an order is still opened and a new daily candle is creating , if new SL=70%ATR is better than older SL (better = more near to breakeven) then it will be changed otherwise older one is still left in place. For example : * Old ATR(10) = 100 -&gt; Old SL = 70 pips , trade still opened was a buy @ 1.600 SL 1.530 * a new daily candle is opening... 1) First scenario : New ATR(10) = 150 -&gt; New SL = 105 pips &gt; 70 pips -&gt; SL not changed 2) Second scenario : New ATR(10) = 80 -&gt; New SL = 56 pips &lt; 70 pips -&gt; SL changed to 56 Could be valid this idea? Edit : Following the same criteria also TakeProfit (one set to 130) could be based on ATR(10) instead to be fixed, am I right?
+
+--- 帖子 #53 ---
+Take a look at version 2.1. It's built in to that version.
+
+--- 帖子 #54 ---
+summitfx................. I'd like to know how you are using the "fozzy" method on 4 hour charts and what the results are. Care to share?
+
+--- 帖子 #55 ---
+Very nice work, thanks for sharing. HZ
+
+--- 帖子 #56 ---
+Hey Bb, I haven't traded it yet but just made an observation. I like the Fozzy on all time frames. I need an alert to catch the signals. It appears the system is working great for you. So simple yet so powerful. I just notice that when the lines cross under any circumstances, it ususally results in a favorable move. I'll post when I learn more SFX
+
+--- 帖子 #57 ---
+Stockwet, I don't mean to "bug" you but I have not been able to generate an alert. Is it working? Thanks
+
+--- 帖子 #58 ---
+I have it running and received an alert today. My suggestion would be to test it out on a low timeframe. Make sure the "Use_GMT" variable is set to false. Also, you need to make sure your email settings are configured in MetaTrader.
+
+--- 帖子 #59 ---
+SW Make sure the "Use_GMT" variable is set to false. that fixed it-Much obliged
+
+--- 帖子 #60 ---
+Hi summit......... OK, thanks for the observation. I will plan on spending some time this weekend going back on 4 hour charts and recording the results to share with everyone here, and I'll be looking forward to your results.
+
+--- 帖子 #61 ---
+Maybe I got that wrong but isn't the S/L wayyyy to far away, stockwet?
+
+--- 帖子 #62 ---
+Welcome back, tradeigel! Well, I'm not sure which SL you're referring to. Could you clarify? While you were away, BeachBum suggested using a percentage of the Daily ATR (10) as a means to set the initial SL. I tested it and it had good backtesting results.
+
+--- 帖子 #63 ---
+I would like very much to run this EA on a mini account. Is it possible? Thanks. Eureka
+
+--- 帖子 #64 ---
+Yes.
+
+--- 帖子 #65 ---
+well...stockwet, I think I'll have a look at the EA this weekend, I'll tell you then what I meant.
+
+--- 帖子 #66 ---
+hi guys, i have a money managment request for Fozzy EA to you great programmers. would it be possible to add a money management feature to the EA? so that we can set for example 1% or 2% etc. risk per trade.i ask because we always have diffrent SL on every new position and therefore also always a diffrent risk level with a fixed lot size and with this money management option the EA can set the lot size with relation to the SL and then we always have have fixed risk per trade. i think it would benefit the EA. what do you think?
+
+--- 帖子 #67 ---
+HI Stockwet or anyone who knows, I'm just wondering what the magic no. is? and means in the EA. and stockwet, what Tp rules did you use for your results. thanks for your time. stricko
+
+--- 帖子 #68 ---
+This is a good idea. I think the variables could get a little complex for the average trader. But, I'll think about a good way to implement it. I was thinking of starting with something simple - limit the maximum number of open fozzy trades.
+
+--- 帖子 #69 ---
+The magic number is a number that allows you to manage trades only with that number for that currency. For instance, assume that fozzy initiates a buy trade. A few hours later, you decide to enter another position (non-fozzy) on the same currency. Well, you don't want fozzy's TP and SL rules being applied to this trade - you have your own rules for it. So, Fozzy is told to only manage trades with the cited magic number. Incidentally, you can't do this using tickets because any time you take partial profit from the ticket, the ticket number changes. TP Rules: Straight from the fozzy trade. I think there's a maximum TP. But, most of the time trades get exited with the trailing stop feature. - Exit 1/2 position at 40 pips. - Move SL to B/E at 40 pips. - Trail 25 pips beginning at +65 pips.
+
+--- 帖子 #70 ---
+thanks stockwet i appreciate your time.
+
+--- 帖子 #71 ---
+I live in Eastern Standard time in U.S., should I set the GMT option to false, or does it not make a difference if I only want to use with daily chart? Also, when I load up the expert, all I see is a frowning face at the top of the page? Is that b/c the market is closed now? If I do backtesting then I do see the indicators in window below and the trades? Am I doing this correctly, I mean is it loaded correctly if I just see the upper right hand corner saying "fuzzy 2-1 and the frowning little face". I read in the middle of the thread that you could no longer update the first page, but the version 2-1 at the first page appears to me to be the latest. Should we disregard the comment in the middle of the thread that the updates could no longer be put in the first page? Thanks
+
+--- 帖子 #72 ---
+WHOA.................take a deep breath. Leave the GMT on true for use with daily charts. You see a "frowning face" because you have not checked the "Allow live trading" box on the "Common" tab of the EA window. If you don't want the EA to automatically trade for you, leave it this way. The "smiling face" will trade for you...........hang on to your wallet! Version "2-1" on the first page is the most current one. If you notice under the heading: "Updates", stockwet put the new EA there on Oct 17. Please disregard the other comments. And just to set the record straight and give credit where it is due: the system is "fozzy"................not fuzzy. Fuzzy is the feeling I have right now after two shots of Grappa.............. ............and a very good and profitable with fuzzy.............I mean "fozzy"..............LOL!
+
+--- 帖子 #73 ---
+You sound a little new to MT4. Take a look at the latest tutorial on experts in this thread: http://www.forexfactory.com/forexfor...ead.php?t=8984 . It's an interactive tutorial and will help you understand why the frownie face is there. The latest is on the first post. I have recently been granted permissions to updated old posts, which wasn't the case when I wrote that statement you are referring to. It doesn't matter where you live. What matters is your server time and whether or not you will be trading lower timeframes. If you want to run the fozzy on 4h or 1h charts, as some do, then set use gmt to false. Otherwise, leave it as is.
+
+--- 帖子 #74 ---
+Thanks Stockwet and Beachbum
+
+--- 帖子 #75 ---
+OK, I checked the "allow live trading" and checked "ask for manual confirmation", this should give me an alert before placing the trade. That way I get notified I think, which is really what I want. I am new to MT4 and not too familiar with it.
+
+--- 帖子 #76 ---
+Backtested EURUSD at the default daily setting 10k went to over 23k at GMT false and 4 hour chart, 10k went to below 7k
+
+--- 帖子 #77 ---
+Hi Over what period of time?
+
+--- 帖子 #78 ---
+Hello, Stock/Trade/BB... When backtesting,why am I showing a chart not showing the original Fozzy indicators? Is there a way to show them? Sorry if this is a knucklehead question. I have read the MT4 tutorials but using MT4 and EA are a new things for me.
+
+--- 帖子 #79 ---
+Hi 4rex, The charts don't show the indicator because there is nothing in the code that tells MetaTrader to combine the RSI, MA and BB indicators. It knows that RSI is used, which is why that indicator shows up in strategy tester. stockwet
+
+--- 帖子 #80 ---
+I had similar results. Daily seems to backtest the best.
+
+--- 帖子 #81 ---
+From April 04 to present
+
+--- 帖子 #82 ---
+Here are just some random thoughts about ATR useage that may be useful to "fozzy" method traders: The current fozzy EA has T/P default settings of 40 and 130. For the sake of my discussion I will use eur/usd as my example pair. Over the past several months the ATR for this pair has hovered around 80. Therefore an initial T/P of 40 represents approximately 50% of the ATR for this period. And the 130 T/P would be approximately the ATR times 1.5 or 150% ATR. Initially these values seem to work well within the scope of the EA. Therefore, it is my position that if a trader would like to use the fozzy EA on other currency pairs which have a significantly different daily ATR, the above percentages of the ATR could be used to establish the two T/P values in the EA. This is exactly what I have done. Last week I set up a series of 18 charts using the fozzy EA on each, and on each chart I manually set the two T/P values in the EA using 50% ATR and 150%. This is a work-in-progress, a forward test, and it will be interesting to see how it develops. Comments and observatons always welcome.
+
+--- 帖子 #83 ---
+Hi BB, This is great. A couple of people have suggested we look at using ATR for TP along with SL. One thing I've noticed, though, is that more trades get taken out with the trailing feature than at the maximum target. I'm not sure how to handle this or whether it would be profitable to just eliminate the trailing feature and go for the max amount. This is where discretionary trading has a bit of advantage over an EA - you can take a lot of other factors into account. Anyway, I think this is a good concept. Regards, stockwet
+
+--- 帖子 #84 ---
+We've been having an issue with the EA where the calculated MA on RSI values differ from what the indicator is giving. This is causing the EA to fire off different signals than if someone is looking at the chart and just using the indicator. I've checked and tested the code over and over and cannot find an issue with the code. It appears to be exactly as it should according to all documentation and the examples I have. I've placed a forum topic with MetaQuotes and will see what they say. I'll also work on an intermediate solution. But, for now, everyone should know that the signals returned on the EA may not match the indicator signals. Regards, stockwet
+
+--- 帖子 #85 ---
+Or is there a problem with the charted indicators, causing the visual cues to not be 100% correct. A cross where there isn't really one, for example?
+
+--- 帖子 #86 ---
+I'm not sure which one it is. But, clearly, there's a problem. I'm hoping that MetaQuotes will let me know what the issue is.
+
+--- 帖子 #87 ---
+Thanks for the nice, concise explanaition of what your are doing in your tests BB, er, Mr.ChevyMan just found your ride pix ; ) (Does a Chevy 327 inside a Toyota FJ40 count me in as a Chevy guy too?? grin.)
+
+--- 帖子 #88 ---
+Actually Thom, IMO it makes you a "Hot Rodder", but not necessarily a "Chevy" man. Either way, you're a good guy in my book, thanks for the complement! (Of course you know my 427 will smoke that 327.....lol!)
+
+--- 帖子 #89 ---
+Hi stockwet........... I wondered about this last week when the indicator you prepared showed six trades but the EA only fired off two. Don't misunderstand me, I like your EA, but I'm old-fashioned, I use it to "alert" me to trades not actually execute them for me. I love the thrill of pulling the trigger on my own $$$ rather than letting personality-less computer code do it for me. That's one of the reasons I don't play slot machines. Please keep us informed as to your progress.
+
+--- 帖子 #90 ---
+Yes, but my 383 stroker will smoke both of them. LOL Chevy Chevy Chevy!
+
+--- 帖子 #91 ---
+Now wait a minute here...................I don't want to take this thread off target, but I think I just got called out. Scott, I'll meet you on the old service road behind the Dairy Queen at 6PM. Be sure to bring a 'cryin towel', you'll need it!...........................
+
+--- 帖子 #92 ---
+Yes, I have another method I use that is much more manual. So, I get my thrill with that. Just remember, though. We don't know yet whether the discrepency is with the EA or the indicators. If the indicators are miscalculating, then, that's a really big problem for MetaTrader, generally. Anyhow, that's why I provide the alert mechanism and the ability to turn live trades off. Lots of guys will trade like you (me too, since I'll be trading this with my oanda account.) Also, you and Scott should put your money where your mouths are - winner gets the other's car. (Hmmm, I wonder how my 2001 Mazda MPV would fare? Yeah, I think I'll stay home for this one.)
+
+--- 帖子 #93 ---
+OK.............since this is a learning process for me, everyday I revert back to fozzy's original description of how he traded and that's when reality takes over. At this time there really is no substitute for making the charts BIG and looking closely at the relationship of the RSI and the MA. Other factors and indicators may assist, but I am really trying to keep this simple and profitable........so far, so good. If it wasn't for the fact that Scott and I are not close to each other, I would seriously consider your suggestion. Yeah right, sure I would!
+
+--- 帖子 #94 ---
+And after your duel i'll meet the winner up at Donner Pass (California Sierra Nevada's) at the entrance to the Rubicon. Winner Takes All. http://www.accrete.com/fx-posts/misp...biconTrail.jpg grin. Thom
+
+--- 帖子 #95 ---
+Taylor, what do you mean by the discrepancy? I read the earlier posts. Are you saying that two identical algorithms can be performed differently in MT4? BB, My baby is never going to see a road race again... I should have kept my mouth shut LOL Thom, Lts go over the the car thread in the Lounge I have question about That Frankentoyota, of yours... Scott
+
+--- 帖子 #96 ---
+Here's a thread that explains it - http://www.metaquotes.net/forum/2457/ . The gist of it, though, is that the EA is calculating the MA on RSI differently from the indicator. In other words, place an RSI on the chart, and then an MA on the RSI indicator. The indicator window will show you the current MA on RSI value. This value is different from the value calculated by the EA. It's probably why the EA isn't always taking trades when there is visual confirmation of a fozzy signal. I've done exhaustive searches and am confident that the code is correct. I think MT4 is just incorrect on it's calculations. If you know of other good MT4 programmers, I wouldn't mind collaborating with them on the problem so that they can verify my code. Tradeigel didn't find anything wrong with it so far, either.
+
+--- 帖子 #97 ---
+Thanks for the explanation. I am going to go read the postings...
+
+--- 帖子 #98 ---
+OK. I have good and bad news. The good news is that I tried something and it seemed to work. I'm not sure why, yet, but, I've got the EA calculating correctly. The bad news is that I think I've found a problem with MetaTrader in that indicators are not getting updated correctly. See the attached screen shot (fozzy1). At the top, you can see the calculations generated by the EA. The first indicator window shows the fozzy indicator that came up when I launched MetaTrader. I had this template already configured. Notice the discrepency in the MA and Bands values, relative to the EA. The next 2 indicators separate out the main parts of fozzy. I added these indicators after bringing up the template. The 2nd indicator down shows the MA drawn on the RSI. The EA and this indicator's values line up. The 3rd indicator down shows Bollinger Bands on the RSI. The Bands value and the EA's bands value also line up. Finally, the last indicator is a full, newly added fozzy indicator with both the MA on the RSI and Bands on the RSI. This should be identical to the first indicator. But, notice that the first indicator is off. To prove this discrepency further, I saved this as a new template, closed my chart, opened a new one, and applied the template to the new chart. The second screenshot shows the results (fozzy2). The combined fozzy indicator seems to be fairly unreliable in recalculating values when a chart is re-opened. Anyone else getting similar problems? stockwet
+
+--- 帖子 #99 ---
+The first post is now edited with the latest fozzy EA. The calculation problem has been solved.
+
+--- 帖子 #100 ---
+stockwet, I see you fixed the problem. That's good. Congrats on this .
+
+--- 帖子 #101 ---
+Thanks. It was a big pain, though.
+
+--- 帖子 #102 ---
+I have some interesting results on these EA's. First, the EA that did not have the calculation fix in it performed the best over anything so far. That's a little scary since I don't know how the RSI MA's were being calculated. Once that was fixed, Fozzy, whether normal or using BB's mods, performed poorly. In fact, the account was blown within the first few months. So, I went to work and started incorporating some of miscon's aspects into the EA. Namely, I worked on setting entries above and below the respective previous high's and low's. That method performed relatively well. At least it left me in the positive. I'll try to run all these through the gauntlet and post some reports. I'll also do some code cleanup and a bit of versioning so that we know what is what.
+
+--- 帖子 #103 ---
+Interesting developments today with the EA. Thanks for your efforts, stockwet.
+
+--- 帖子 #104 ---
+Backtested new (version 10-23-06) on GPBUSD 10k wentg below 2k on version just prior to this one, 10-17-06 version, 10k went to over 23k Something is wrong here, I believe
+
+--- 帖子 #105 ---
+I have a question on today's entries. No trying to rock the boat at all, so please don't take my doodling intending any ill will, just doing some tests to see if we can all profit from them. I have set the MA method to zero as this would be an SMA signal line instead of the default EMA Fozzy. Now i have two identical MT4 demos though the second one has the BBs set at 40 instead of the default 20. Both entered into EurUsd Sells at 1.2545, and on the GBP the BB40 in a Sell at 1.8722 and the BB20 in a Sell at 1.8723 . I would like to compare notes with anyone that may have had their EA set at the default Ema (Per Default Fozzy) with the above two trades if taken. Also, a curiosity, The BB20 tiggered a Buy on the UsdJpy at 119.34 today, but no similar entry on the BB40 test. Thanks in advance. The only reason i don't know is that i've got 10 MT4 platforms running concurrently on my secondary PC and i think that's about maxed out for now. Cheers, Thom
+
+--- 帖子 #106 ---
+Take a look at post 102. I've visually confirmed that the new version is, in fact, taking correct fozzy signals. That's the bad news. The good news is that the fozzy alt method, after preliminary tests, looks highly effective at weeding out negative trades. One of the big problems with fozzy, as it appears, is that it doesn't do well in trending markets. It will throw signals counter to the trend after a retracement has taken place, but then reverse and resume the trend. Setting orders above and below the previous high/low seems to be an effective way of avoiding this most of the time. I have a fozzy alt expert I'm working on now.
+
+--- 帖子 #107 ---
+What time did the expert generate the signal? Which version of the expert are you using?
+
+--- 帖子 #108 ---
+Hi Stockwet , i don't understand very well your point here could you give us an example on chart ? From what i understand Fozzy method is a trend follower system so it's supposed to performing well when a strong trend is in place. Looking at chart for some manual backtest most of time signals seems to lead to profit trades and really few loss occurs even if atr is used as stoploss. On other hand I notice how backtesting with MT4 Strategy Tester is completely unrealiable, infact most of time it opens orders one day later that it should be losing most of profit or in worst case turning in a lose trade when it shouldn't be at all. Image removed, please post no larger than 600x600
+
+--- 帖子 #109 ---
+All, I realized that I did a poor job of separating out versions on this last update. I've updated the front page which includes version 2.1 (without the calculation fix) and version 2.2 (with the calculation fix.) Version 2.1 is the one that performed quite well, while version 2.2 is the most accurate with the system. If you grabbed version 2.1 yesterday, I apologize for the confusion. That version should actually be 2.2. stockwet
+
+--- 帖子 #110 ---
+Skyline, It's pretty evident from looking at the backtesting charts that the method has difficulty in strongly trending market. Take October to December 2004 as an example. The EURUSD experienced a strong bull trend. This caused 2 fundamental problems. 1. The EA would throw signals on minor retracements, causing trades to get stopped out. 2. The EA would not throw bull signals because the bull crosses would often happen above the BB median line. During that period, there were approximately 11 signals. Of those, there were 4 negative trades. Not so bad, except that each negative trade was about 3 times the average win of the remaining 7. Taking the BB filter off seemed to do even worst. If you'd like, you can see for yourself by just looking at how the EA performs in strongly trending markets. Others have mentioned the same thing in other posts, I believe. Regards, stockwet
+
+--- 帖子 #111 ---
+Stock, take a look at this (it's a backtest on EURUSD with latest fozzy starting on oct '04) and i'm still convinced that backtest with strategy tester isn't realiable : Image removed: Please repost no larger than 600x600 I marked 4 days : 4 Oct, 8 Oct, 12 Oct (i'm not sure about this), 14 Oct Isn't supposed that EA fozzy had to open a trade on these days? I think so based on what i understand on fozzy method but Strategy tester doesn't and all trades were winning if opened. Infact it opened first order later on 9 Nov that leads to first loss. From this evidence i cannot say that EA performed so bad in strongly trend market because backtest didn't take care about those winner trades (or open a trade a day later eating most of profit). Isn't it ?
+
+--- 帖子 #112 ---
+Yeah, I have the same problem. I found this post on MetaQuotes website: http://www.metaquotes.net/forum/2458/ . I initially thought that the problem might be related to there not being enough data to calculate the 20 period BB lines. But, I'm not sure.
+
+--- 帖子 #113 ---
+Sorry for a dumb question: I thought that the Fozzy Daily Method indicators was automatically installed when I open the EAFozzy2-2, but there is not one indicator there. Where can I find the complete indicators for this Fozzy Daily Method(EA)?
+
+--- 帖子 #114 ---
+Hi Stockwet, the version i'm testing in your original version 2.1 that i downloaded last Thursday or Friday and these are the first trades of the test. Each trade says they were triggered at 00:00 on the 24th. There are two other areas that the setups differ that i just realized i had not included in my notes in post #105. The BB20 version has BB filter=false, and GMT=false. The BB40 version has both at true. My main point in my post 105 was if anyone had similar trades triggered, and at what price the entries were, using the exponential MA signal line instead of the simple MA as i've got it set to. : ) Thom
+
+--- 帖子 #115 ---
+Constructing EA's versus indicators is a bit of a different beast. You can get information on how to construct the indicators from the original fozzy thread. It's not really a custom indicator either, just a matter of placing indicators on indicators.
+
+--- 帖子 #116 ---
+OK. Thanks, Thom. I've made a bit of a mess with versioning. Yesterday, I posted a version 2.1 that should have been 2.2. I changed all that this morning. The version you have should be a nearly correct 2.1. As for the trades, I didn't see the same things come through. I'm not good to guage against though since mostly I'm working on fixing bugs, testing, or adding new features. I'll look on my other machine though and see what was triggered on those days.
+
+--- 帖子 #117 ---
+Hi LFN, attached you can find template that i'm using in demo Fozzy EA
+
+--- 帖子 #118 ---
+I can see a lot of indicators posted here on the pictures in this tread, RSI/MA and ATR. You have to put in these indicators manually even if you have the EA..?..correct? This is from Fozzys first message in the other tread - "On each chart I have an 8 period RSI. I also have an 8 period MA of the RSI and Bollinger Bands with a 20 period setting, also on the RSI" I cant see anything about the ATR indicator in fozzys indicators.
+
+--- 帖子 #119 ---
+LFN, Welcome to Forex Factory. This is a great place to be with a lot of smart and respectful people. I think you'll enjoy it. Please don't take my comments negatively - it's just constructive criticism. It would be polite if before you posted questions about a particular method, that you take the time to get yourself up to speed. Otherwise, you're asking those of us ahead of you to do extra work to come back and give you the answers. Your question was already asked in the original fozzy thread. Please read the entire thread first. I could go and search out the posting for you with your answer, but, that would rob you of the chance to learn from all the other posts there. Once you're up to speed with the method and have read through this thread, then fire away on your questions. Regards, stockwet
+
+--- 帖子 #120 ---
+I´m really glad you answer me. I´ve spent the last two days reading throught both threads but it takes some time when English isn´t my home language. But I will start over from page 1. Thanks
+
+--- 帖子 #121 ---
+No worries. Your english sounds so good I didn't realize you were having any problems. Here's the post you're looking for: http://www.forexfactory.com/forexfor...60&amp;postcount=6 . The ATR is in there because of some later posts by BeachBum describing how he uses ATR to place stops.
+
+--- 帖子 #122 ---
+OK, rarely do i duplicate posts, but i feel this is important enough to warrant it. I posted this over at the Fozzy Daily thread. I know that some of Stockwet's concern over the past few days has been indicators not behaving properly or similar. Here is my post, i think there needs to be some thought on this one? ====paste of my Fozzy Daily thread post: Hi Paul and thank you for your reply. In looking at your nice chart it appears your feed is similar if not exactly like my IBFX demo feed shown in the lower black background chart shown below (Alpari demo feed is in blue above it). The crazy thing is i had not compared the Alpari chart indicators (which i have used for well over a year to trade manually with success) to the IBFX charts which i use in the 10 or so demo accounts i have EAs running in. http://www.accrete.com/fx-posts/tgle...iscrepency.gif So here is what you see, and this i believe is an issue to be addressed, which i think Stockwet has brought up also(?). If you look at the vertical magenta line running from top to bottom intersecting the yesterday's large bear candle you will see the RSI and Signal crosses are clearly different on the two feeds. Trading manually (off the blue Alpari charts) yesterday i did not enter into the sell that the Fozzy EA triggered via the IBFX (black chart) feed and RSI crossing. Now here is the clincher. As stated, in manually trading this model on 1hr charts over the last year i never entered at the cross just cuz it was a cross. This has saved me lots of lost pips. But here, even if we have another issue; One feed says Cross/Heads Up, the other says No Cross, come back another day. These are very different visual clues. Something to keep in mind if one is dependent upon indicators to help make decisions. Glad i like to trade mostly via TDTL breaks ! They can't lie. In hindsite, i am wondering now if much of the confusion with my posting, and earlier use, of FXSnipers nice Dyanmic RSI was an issue of differences in Data Feeds and not the coding inside his indicator? : ) or should i put a sad one there? , ( Thom
+
+--- 帖子 #123 ---
+USDJPN on Friday, and to buy on Monday 10-23, which would have been a good trade so far. However, I ran the newest version backtesting and this buy signal was not given. I hate to be the messengerr of bad news, but it is what it is.
+
+--- 帖子 #124 ---
+Hi accrete, I've mentioned the problem earlier in one of the threads. It arises from the different opening and closing times of the daily charts (from different brokers). I guess it could be solved by changing the RSI to be calculated with the price values at 00:00 GMT, and not with the daily close price (which changes from one broker to another). Backtesting different values at different times (for example, RSI with prices at 23:00 and not 00:00), might even produce better results. Good luck
+
+--- 帖子 #125 ---
+I'm hoping for an indicator that will give a .wav alert on the Fozzy RSI/MA crossover that will work on any timeframe. I've got MA crossover alert indicator models but nothing for the RSI with an MA together. I'm not a programmer obviously &lt;grin&gt; . Hope some one can help as I trade this on 1Hr because my small account can't handle the daily drawdown requirments.
+
+--- 帖子 #126 ---
+Yes, but the newest version, running in my demo account, triggered the trade. I'd take forward test results over backtesting anyday. It also triggered nzdusd, incidentally.
+
+--- 帖子 #127 ---
+OK, I will keep it running rather than backtested. Are you saying that it triggered while running, but if you back test it does not trigger?????
+
+--- 帖子 #128 ---
+I was thinking about the counter trend signals that generate when a strong trend is present and some retracements occur as part of the trend. What I have been doing is visually interpreting the slope of the 20sma (BB centerline) and the gap to the 8ma. If the gap is large I don't take the counter signals. I know this is subjective but maybe someone can interpret and adjust the signals based on slope of the 20sma?? Ideas anyone? FYI I have been manually testing on a 4hr cable and so far results are very nice. Also someone suggested the idea of adjusting server time to match GMT and recalculating RSI based on those numbers....I think this is a good idea.
+
+--- 帖子 #129 ---
+Stockwet, great work. Thank you. Can you please tell me whats the best setting you have found so far? Thanks.
+
+--- 帖子 #130 ---
+I haven't backtested with current data. I downloaded data from Alpari's site. I haven't done a data refresh in a bit, so, I'm not sure. The other issue is that the new version doesn't backtest well, so, I'm not even getting out of 2005 before the account is blown. So, no, I haven't seen any backtests with recent data.
+
+--- 帖子 #131 ---
+Stockwet, Could I ask a (hopefully) small favour please? I want to apply the following filter to the fozzy entry method: when a signal is generated, only enter the trade if price trades 3 pips under/over the previous candles low/high, with a time limit of two daily candles, so if entry is false on that requirement the order is cancelled at the open of the third candle. So all it should do is create a stop entry order at the desired level, rather than an immediate entry Doing a quick manual check of a 2 year backtest, this simple filter would have kept us out of a lot of bad entries, but of course it also changes the entry level in almost every trade, and subsequently impacts on targets/ trailing stop levels etc right throughout the backtest. There's nothing new in the idea - its one of Demarks filters used on trendline breaks, but I'm finding it immensely helpful in limiting false entries A modification to the EA (which I am personally unable to do - totally illiterate in that regard) would allow this to be checked more accurately I'd greatly appreciate your assistance, and I think this might also be of benefit to all fozzy followers. If its too hard or timeconsuming I shall understand completely thanks (and also thanks for your efforts to date - greatly appreciated)
+
+--- 帖子 #132 ---
+Xerof, I'm working on that already. It's taken from the fozzy-alt thread. I like the idea and agree with you that it will weed out a lot of bad trades. stockwet
+
+--- 帖子 #133 ---
+Oh yes, so it is... , together with some other ideas I will read about later too! Well, thats great. btw, I used ATR 50% instead of 70%, and it left plenty of breathing room for successful trades to mature, the ones that got stopped at the 50 level would have hit 70 on almost every occasion anyway - nice way to improve the r/r ratios! But the filter as described appears to take at least 45% of bad trades out, which will improve my backtest to roughly a win 62%/loss 38% ratio from 56/44 - not too bad huh? I mentioned hi/lo plus/minus 3 pips as the filter - could that be made a user-adjustable number? Sori to sound Oliver Twistesque...lol cheers
+
+--- 帖子 #134 ---
+I have been forward testing Fozzy 2.1 EA for three weeks now. I do not use BB filter and use ATR 70%. Attached is the statement. Pairs with AUD in them did not perform well, others gave good results. The two starts are EURUSD and GBPCHF. Altogether the EA gave 783 pips in three weeks that is nice. I am curious what the results would be if I went live? Since this is a daily strategy, there is no reason for a big difference but who knows. Does anybody have experience with live trading this EA?
+
+--- 帖子 #135 ---
+Hey A1 Cruiser, As you've been testing v2.1, have you notice a difference between what the indicator threw as a trade signal versus what the EA threw? The reason I ask is that version 2.1 had an incorrect calculation on the MA of RSI. In backtesting, though, 2.1 performed much better than the fixed version - 2.2. The live fozzy traders experienced several whipsaws this week. It would have been a rough week for live traders. stockwet
+
+--- 帖子 #136 ---
+Hi Stockwet, Strange enough but last week was the best one in my Fozzy 2.1 EA testing period . All the negative trades happened earlier. Living in Europe, I am usually in bed at GMT 0:00 when the EA places the orders so I do not watch live what the indicator shows at that time. Looking at the charts in the mornings I have not realized significant discrepancies between the EA work and the indicator. I do not have the necessary coding skills but as you pointed out earlier calculation within an EA and in an indicator slightly differs in MT4 and gives different results as well. Unfortunately, I am not capable of analysing the reason for the better backtest results of the miscalculating 2.1 version against the corrected 2.2 version but I can propose the parallel forward test of the two versions. On the base of the good experience of my forward test I am intending to continue with the 2.1 version and if it was help I would post my test results here in the next couple of weeks. Perhaps somebody else has been testing version 2.2 and we can compare the two results (I do not have computer capacity to test the 2.2 version parallel, though I know that would be the right solution).
+
+--- 帖子 #137 ---
+I was looking on the Fozzy forum only. I simply forgot this niche forum under MetaTrader. Must be gettin older than I thought &lt;grin&gt;. Thanks again. I will follow your previously posted instructions setting up the 2.2 version for the alert. [quote=stockwet]Attached is the EA for the Daily Fozzy method. The method is described here: http://www.forexfactory.com/forexfor...ead.php?t=7984 . The EA was developed jointly by tradeigel and stockwet. The EA has the following features: [ snip ]
+
+--- 帖子 #138 ---
+Ok, this is the situation. I dropped the Fozzy EA into the indicators folder in the MT4 program. I run the program and start a new chart. I pull down the "Insert" window move to "Indicators" then to "Custom" and there I cursor to "Fozzy_2.2". I click on it and the windows collapse and there I am staring at the chart I opened without the indicator being loaded. I go "Charts" -then "Indicators list" and sure enough it is not listed as being installed on the chart. I've gone to the Meta Editor found the EA, loaded it into the editor, hit the compile button and it shows "No errors" ect. I've tried to load it several times with the same results. Now, I do run other indicators and EAs on other charts and they will load in the fashion I just went through except that after clicking on them a window will open prompting me to toggle inputs if needed. Thats the story. What's the problem that the EA will not load for me under any senario?
+
+--- 帖子 #139 ---
+The EA belongs in the "Experts" folder, not in the "Indicators" folder. You have placed it one sub-folder too deep in the MT4 program folder.
+
+--- 帖子 #140 ---
+The Fozzy 2.2 EA just issued alerts for EURUSD, GBPUSD and USDCHF. No alert was issued for version 2.1. (Remember, 2.2 is the one that calculates correctly. But, 2.1 is the one that has proven more successful in backtesting.)
+
+--- 帖子 #141 ---
+Thanks again StockWet. I'm new to the MT4 charting and I "stumble" along learning the software. I've used other progs for my emini trading so I've started a new learning curve with this program. Anyway, I'm only now seeing the difference between indicators and EAs. I don't do auto trading, prefer to pull my own trigger, so the EA I see is a trading machine you load up. Anyway I followed your updated instructions to me and it loaded. I set the options as I wanted. There is a "frowney face" in the upper right corner. Should he be smiling? Thanks again as always. - Gee Seven
+
+--- 帖子 #142 ---
+Thanks to you buddy for setting me straight on the folder location for the Fozzy EA. I gave kudos to StockWet instead of you. BUT, you're BOTH a couple of VERY helpful guys. Couldn't survive around here with out either of you. Thanks to all of you who've shown mercy on this klutz as I stumple along through the program. Once, I get it all set up the way I need I can get some sleep letting the occasional alert wake me instead of my alarm clock.
+
+--- 帖子 #143 ---
+Gee Seven, This tutorial will help you out and explain how to get the happy face instead of the frowny face. stockwet http://www.forexfactory.com/forexfor...34&amp;postcount=4
+
+--- 帖子 #144 ---
+You are welcome, good friend.
+
+--- 帖子 #145 ---
+Continuing my forward test on Fozzy 2.1, this week was not as good as the earlier one. The reasons for this are the two bad trades on EURJPY. The other trades balanced those two losses so the overall positive result is 100 pips but only $33.51. The statement is attached, the figures of this week are printed on light yellow background.
+
+--- 帖子 #146 ---
+Here are my results for 2.1 and 2.2. I had slightly different signals for 2.1 than you did. Interesting. stockwet
+
+--- 帖子 #147 ---
+Well, there are differencies, I think concerning EURJPY the difference in signal is significant but not in the result . The reason for this could be the different spread the two brokers use and the different data filtering could also play a role in it.
+
+--- 帖子 #148 ---
+Hi Stockwet, Could you Please check the RSIMA calculation in the EA, since it prints different levels compared to the Fozzy indicators? Good luck and many thanks for sharing
+
+--- 帖子 #149 ---
+I have added fozzy EA and got the smiley face, and "Allow Live Trading" was enabled but the trade dosen't triggered. Am I missing something here?
+
+--- 帖子 #150 ---
+fxwin, Could you specify which EA version you're referring to? The issue is well known with version 2.1. (Please read the updates part of the first post.) If you're referring to version 2.2, the calculations are correct. I've seen, however, that the indicators get out of whack from time to time. Rebuild the indicator from scratch, but use SMA 20, versus the Bollinger Bands and see what you get. stockwet
+
+--- 帖子 #151 ---
+Here are my fozzy results for November. Unfortunately, my FXDD account expired or something, so, I had to restart v2.2 in the middle of the month. Also, I closed all open trades that were set to breakeven today before the holiday. I figured that I would do that in live trading, so, I should do it in the test as well. I'm pleased with the consistency of 2.1. v2.2 seems more volatile. I'm not sure my account would be back at B/E even I hadn't closed all the positions early.
+
+--- 帖子 #152 ---
+You know, something was telling me I should just let the EA go
+
+--- 帖子 #153 ---
+Hi everybody, would it be hard to add SMS or email notification when the cross occurs? Is it difficult to do? Thank you. Add on: Hi Fozzy and crew, quick question. I have added the SendMail function in the Fozzy_2.1 EA to send me email when a cross occurs. Since that signal does not happen too often, I wonder how I could test if that function works. You have any suggestions please?
+
+--- 帖子 #154 ---
+Fozzy EA 2.1 version had a great week again, the results are attached. This week itself gave 680 pips - see the results in the yellow boxes. The overall return over a month is 1563.5 pips, that is great, the ratio of profitable trades is 80%. Congrats to the authors! The most pips was given by USDJPY while the absolute loser is EURJPY with -41 pips. In USD the EA made 20% in a month starting with a USD 5000 account and opening 0.20 lots per trade.
+
+--- 帖子 #155 ---
+PipSteve, That feature is already built into the EA. You have to go to your options in MetaTrader, though, and setup your email information. stockwet
+
+--- 帖子 #156 ---
+I had identical results on version 2.1 as well. 20% return, about 80% profitability (I think it was slightly higher.) This is fairly consistent with the backtesting results as well. I may let the market settle a bit before jumping into my live account. We'll see. Version 2.2 did not do well. I barely finished even for the month.
+
+--- 帖子 #157 ---
+On how many pairs have you been running Fozzy EA2.1? Thanks howard
+
+--- 帖子 #158 ---
+Hi Howard, I attach my presets to this post, so you can check wich pairs have been running with Fozzy EA 2.1 on my computer. I have to remark that AUDUSD is shut down lately because of the earlier losses it caused. I also run XAUUSD (for fancy) but there was only one order on this pair during my one month test period. I run it on daily time frame starting on Sunday evening at 10 PM (GMT). It is on 5/24, so I switch it off on Friday at 10 PM. I live in Europe so my time zone is CET (GMT+1) but Crown FX the broker which demo I run with Fozzy works at GMT and I think this is what counts. I think the data stream of the broker and the spreads are also essential. Crown FX applys 1 pip spread on the 4 majors, their spread on the cross pairs are significantly larger though. I use only demo from them (I am live with others). I am thinking on going live with this EA if its performance will be reliable for another month or such. I have not decided on the broker though so any advice on this would be welcome.
+
+--- 帖子 #159 ---
+that's demo, right? BTW, is anybody running Fozzy EA on a live acc.?
+
+--- 帖子 #160 ---
+Hi A1 Thanks a lot for the feedback. I am using Fozzy method with vegas additions on live account with MIGfx as my MT4 broker, I have other non-MT4 brokers as well. I think the problem with Crown is that your orders have to be 10 pips away from the current price (which does not matter in case of using daily charts) but other members were also complaining that they make a lot of re-quotes, if you are moving from demo to live you should take all these factors into consideration. Regards howard
+
+--- 帖子 #161 ---
+Yes, it's a demo right now. I'm thinking about to go live with this EA provided getting further successful test results. I have not decided on the broker though.
+
+--- 帖子 #162 ---
+Hi Howard, Thank you for the information about Crown. Well, I have live accounts with IBFX and NF as well. NF also requires 10 pips distance from market price concerning stop or limit orders. IBFX has been tending to increase the spread not only around news time but occasionally anytime. So, I'm afraid, finding a good brokerage is as difficult as running a successful trading. (Sorry about being offtopic here ) Anyway, the EA has not placed any orders yet this week. Have you also been running a test with it? Regards, A1
+
+--- 帖子 #163 ---
+I am not running it yet, however it should have placed the following trades this week, could you check if I am right. Monday open short AUD/CAD short EUR/CAD Tuesday open short NZD/USD short AUD/USD howard
+
+--- 帖子 #164 ---
+I do not trade AUDCAD, EURCAD and NZDUSD with this EA, so I don't know whether or not it should have placed such orders. As for AUDUSD, the RSI line just touched the 8SMA then they have been running together. So, I think it was not a real cross - at least according to my setup.
+
+--- 帖子 #165 ---
+A1, Which EA version are you running? If you are running version 2.1, then trades placed cannot be visually confirmed. The calculation does not match up correctly. The reason I still support is because, frankly, it performs better in forward and backward testing than the correct fozzy method. But, looking at charts will not be helpful in determining whether or not a signal should have been fired off. Also, the timeframe and datafeed make a big difference in the signals. This week is going to be a weird week because of the gaps from last week throwing off the MA and RSI calculations. But, I have an IBFX and an FXDD demo account and each of them throws different fozzy signals. Regards, stockwet
+
+--- 帖子 #166 ---
+Hi Stockwet, Yes, I have still been running 2.1 version. I agree with your statements concerning different brokers and datafeeds. This is why I have issues selecting the most suitable broker for trading Fozzy EA. Regards, A1
+
+--- 帖子 #167 ---
+Fozzy EA 2.1 version had a silent week now. There were 6 trades only resulting in 100 pips. The total return is 1663.5 pips, the ratio of profitable trades is still 80%. The highest return was given by GBPCHF with 336 pips while the absolute loser is EURJPY with -41 pips and AUDUSD is also staying in the red zone.
+
+--- 帖子 #168 ---
+G'day all, I'm currently running v2.2 on demo. But, seeing the results posted it might be an idea to run v2.1 as well. Anyway, what I want to ask is would it be possible to include 3 levels of Take Profit (TP1, TP2 &amp; exit) within the EA? I know this request in bordering on customisation, but I've always traded with 3 TP's in the past and am curious to try it with this system. And, I'm sure it would be a usable feature for many others too Cheers, Art...
+
+--- 帖子 #169 ---
+guys can someone help I have the ea loaded, smiley face and all. its been loaded for a week now no trades. and i have this message 2006.12.08 16:50:46 fozzy_2-1 EURUSD,Daily: initialized. But no trades...What have i left out. Use_BB_Filter = false; //Set to false if you want to take ALL crosses regardless of BB median line extern bool Use_00_GMT = true; //Only trade daily charts. Set to false if want to trade lower timeframes extern double Lots = 2.0; //Lots to trade with extern double Take_Partial_Profit_Lots = 1.0; extern int Take_Partial_Profit = 40; //Set to 0 to turn Partial Profit off. extern int TakeProfit = 130; //Where to take profit out at extern bool Use_ATR_Stop = true; //Set to true if set initial stop based on ATR(10) versus high/low prev bar. extern double Use_ATR_Pct = 0.7; extern int Init_Stop_Cushion = 0; //Stops set at previous high/low, plus a little cushion above or below extern bool TrailingStop = true; //Set to true if you want to use the trailing stop extern int TrailingAct = 65; //When to start trailing (BE + Trailing Step) extern int TrailingStep = 25; // How much to trail by extern int Start_BE = 40; // When to move to B/E extern int MA_Method=MODE_EMA; extern int RSIPeriod = 8; // RSI period to use extern int RSIMAPeriod = 8; // MA on RSI period to use extern int BandsPeriod=20; // Bollinger Bands period to use extern bool Alert_Me = true; extern bool Trade_Live = true; extern bool Test_Info = true; Glenn
+
+--- 帖子 #170 ---
+I know someone already asked about mini accounts, but is it possible to use this EA on a micro account?
+
+--- 帖子 #171 ---
+Hi Glenn, This EA does not trade frequently, I had an order on EURUSD on 6 December though, anyway this was the only one on this pair during this week. I will post here my statement a little later and you can check it up when and how did it. Which pairs do you trade with this EA? I mean, does it work on other pairs well, the EURUSD is the only exception?
+
+--- 帖子 #172 ---
+I changed broker for this week and started a new test with North Finance. The week was pretty silent again. There were 4 trades only but every ones were splitted. All of the trades were profitable, the gain is 168 pips .
+
+--- 帖子 #173 ---
+Hi, Anyone can help! If I trade several pair on the same account concurrently, is it necessary to modify the EA and assign different magic number to these pairs?
+
+--- 帖子 #174 ---
+Wilson, yes assign a different magic number to each chart. You dont need to modify the EA, simply change the last digit (or as many you wish) of the magic number in settings when attaching the EA to the chart and you are done.
+
+--- 帖子 #175 ---
+Can you please explain why you need to change the magic number ? Thankyou.
+
+--- 帖子 #176 ---
+Yes, I see it. Thanks for your help
+
+--- 帖子 #177 ---
+Sorry, but I don't see where to change the magic number ... when I drag &amp; drop the EA onto a chart there is NO magic number input on the Inputs screen. The only place to change it is in the EA file itself but that would change it globally. Where are you changing it ?? (Using v2.1).
+
+--- 帖子 #178 ---
+After you right click the EA and select "Attach to chart", a "properties" window will be pop-up. Click "Input" and scroll down, you will see the "magic" that you can modify the magic number. Regards
+
+--- 帖子 #179 ---
+Not on my system I don't ..... are you using v2.1 or v2.2 ?
+
+--- 帖子 #180 ---
+You can easily modify whichever EA you're using so that you can input your own magic number. Right click on the EA in MetaTrader and select "Modify". In the code window, scroll down until you see "int magic ...." Prepend the "int" with "extern" so that it reads "extern int magic ...." This will cause a "magic" property to show up in the input window. Once you make the change, press "compile". You may want to save the EA with a different name to distinguish your newly customized EA from the original and then compile. It's up to you. stockwet
+
+--- 帖子 #181 ---
+I did a quick and lazy modification to the EA to create a magic number from the characters in the symbol on the chart where the EA is added. Basically, it is a sum of the asc codes for the characters in the symbol. Unless you have a broker that trades reverse pairs (USDJPY &amp; JPYUSD), the magic number will be unique for each pair. I am not aware of any metatrader brokers that trade reverse pairs. I also added a line to the comment to show the magic number for the pair. Have fun.
+
+--- 帖子 #182 ---
+Good morning, Can you please advise what the reason is for changing the magic numbers? I am running Fozzy 2.2 on live account with great results, do I need to make this change. I am trading 16 pairs. Thankingyou.
+
+--- 帖子 #183 ---
+Last week I had only two trades on GBPJPY and EURJPY pairs. Both trades were splitted and both were profitable. My setting is "Use_BB_Filter = false"; if I had this setting beeing "true" there then would not have been any trades last week. Attached is my statement, trades of last week are in yellow boxes.
+
+--- 帖子 #184 ---
+Mark3, There is no need to change the magic number unless you attach more than one EA to the same currency pair on the same account. If there are two or more EAs attached to the same currency pair then the magic numbers used by the different EAs should be different ones for the sake of separation of the trades made by the different EAs.
+
+--- 帖子 #185 ---
+Thankyou very much for the reply and good trading.
+
+--- 帖子 #186 ---
+Hi mark3, Can you tell more on you results and how long do you trade with Fozzy 2.2 ? thanks and great trading.
+
+--- 帖子 #187 ---
+I backtested v2.1 on GBPUSD over the past two years on Daily timeframe. I have a modelling quality of 90% and the results weren't impressive at all: about 80% winners but profit factor was just 1.3. This was on FXDD which is GMT+2. Anyone here running it on FXDD ? Is that the best I can expect from this strategy or is the backtest completely unreliable ?? I mean, I know MT4's tester is not great, but a $300 return on a $10k account is not worth trading !!
+
+--- 帖子 #188 ---
+I'm in the middle of optimizing settings for a number of pairs. I have EURUSD, EURJPY and GBPUSD so far. Attached is my report for my best test on GBPUSD. stockwet
+
+--- 帖子 #189 ---
+I'm new to the forum but wanted to extend a personal thank you to Stockwet and others that have spent so much time and effort to develop and refine these tools and indicators for the rest of us. Thanks also to those who have shared their testing results. It is deeply appreciated. Very interesting thread.
+
+--- 帖子 #190 ---
+A1cruiser, The presets you had posted, were they used only on the Daily Timeframe? Have you found any TF better than the other [I am forward testing only]?
+
+--- 帖子 #191 ---
+Hi et_phonehome_2, Yes, I have been using D1 timeframe and I have not tried any other.
+
+--- 帖子 #192 ---
+Thanks stockwet ... but which broker was this with ?? GMT + how much ?
+
+--- 帖子 #193 ---
+Alpari 1m historical data starting with a 10,000 account. Period started July 1, 2004. I think Alpari is GMT +1.
+
+--- 帖子 #194 ---
+I use the fozzy ea 2.20 but sometime appears &lt;order send&gt; 130 is there something wrong in the initsl function regards
+
+--- 帖子 #195 ---
+in the EA fuzzy 2.2, it open a SELL ór BUY position, but Could most be more correct when there is a BUY signal it has to close all the sell orders, and when it indicates a BUY signal it has to close previously the BUY orders? regards
+
+--- 帖子 #196 ---
+I've not programmed it to exit based on the RSIMA crossover. I've never seen a whipsaw so tight like that the trade stayed open when an opposite signal was thrown. I'm sure it could happen, but, it would be such a rare occurrence that I'm not sure it's worth programming in the possibility.
+
+--- 帖子 #197 ---
+Sorry, I'm not sure I follow your question. Could you restate it for me? &lt;/order&gt;
+
+--- 帖子 #198 ---
+stockwet, In post #188 What is the *.set file for?
+
+--- 帖子 #199 ---
+A1cruiser I have used your presets for the GBPUSD EURUSD USDJPY, there have been no trades triggered since Sunday evening. The smiley face is there with autotrade, but no trades have occurred. Any ideas? How about your for these pairs?
+
+--- 帖子 #200 ---
+The SET file is a settings file used to replicate the input parameters I selected. I did an optimization test and came up with the best input parameters for that pair (best = most profitable). I saved those settings as a SET file. In MetaTrader, notice that when you look at the properties for an expert, you have a "Load" button. Use this to import the settings in the SET file. This file is specific to GBPUSD.
+
+--- 帖子 #201 ---
+I had a EURGBP signal fire today, but, other than that, I haven't had a good signal since the 11th. Remember that this is a daily strategy, so, don't expect trade signals all the time. You can increase the number of signals by not using the bb filter. I think version 2.2 might also throw more signals.
+
+--- 帖子 #202 ---
+I did not ask the question correctly. I wanted to know why the set file looks so different than any set file I have. I've made set files for both versions of the EA and they look quite different than your set file.
+
+--- 帖子 #203 ---
+Stockwet, Did your EUR/GBP trade stop out?
+
+--- 帖子 #204 ---
+Yep, looks like it. I've done enough forward demo testing to where I'm going to start shedding some pairs. EURGBP and USDJPY will definitely be out.
+
+--- 帖子 #205 ---
+I don't know. I made it when I was backtesting and it includes the optimization settings, so, I don't know if that impacts what it looks like or not.
+
+--- 帖子 #206 ---
+Hi et_phonehome_2, The only trade I had this week so far was taken at 00:00 GMT+2 on 19 December: Sell GBPJPY @ 228.77; it was stopped out at 10:04 GMT+2 on the same day with StopLoss @ 231.11. That is -234 pips! (Ouch!) Lesson taken: Should be careful with pairs in a long strong trend. A short life retracement could cause painful losses. Should revise my ATR based StopLoss settings.
+
+--- 帖子 #207 ---
+I had finally gotten a position open on the EURUSD yesterday. Is it possible to change the EA Comment to also include the word Fozzy since I am forward testing other EAs? It seems that when a position is altered by the EA, the comment no longer has the word Fozzy, if I am not mistaken. I have this same issue with other EAs.
+
+--- 帖子 #208 ---
+Attached are my test results of last week. This was the first losing week of this EA, the choppy market was not a favourable one for Fozzy EA Merry Christmas Everyone!
+
+--- 帖子 #209 ---
+I've downloaded the Fozzy EA 2.2 and ran a backtest. The modeling quality was only 28% and it's always unprofitable. I'm wondering, to those who say it's been nothing buy profitable, how are you using it. Forward testing I assume.
+
+--- 帖子 #211 ---
+On a second thought, that reaction was not very fair. Let me undo it with an explanation. Model Quality is a problem on your instance of Metatrader. It means you have gaps in the data. With that percentage you have actually huge gaps. So if you do not have the same results like someone with 90% or a fronttest, it means nothing. This here is a very good explanation of background, impact and how to fix it: http://forexfun.blogspot.com/2006/05...atrader-4.html On TSD there is a guy who accomplished to generate 99% Backtesting with a IMHO huge effort. But even if you get there, it is no guarantee to have a successfull system. Even successfull frontesting is a guranatee for success. It just helps you to get close without loosing money. Even then you should start with extremly small lots on real money.
+
+--- 帖子 #212 ---
+Backtesting's only real benefit is to make sure and troubleshoot an EA to make sure it works, that's about it.
+
+--- 帖子 #213 ---
+Yeah the first answer was quite useless, but the second one was useful. I'll do what it suggest's and see how high I get the modeling quality up. Thanks.
+
+--- 帖子 #214 ---
+The week before last week was great but last week was a losing one. Attached are my test results from early December till the last Friday. (There was no trading between Christmas and January 7th.)
+
+--- 帖子 #215 ---
+How's Fozzy v2.2 EA working lately from page 1? And should I also just use the template from page 2 of the main system thread? or is there another indicator in this thread to? Can someone post what each setting does as well? I would like to forward test this. I'm just going to try these settings; Use_BB_Filter=1 Use_00_GMT=1 Lots=0.10000000 Take_Partial_Profit_Lots=0.10000000 Take_Partial_Profit=20 TakeProfit=30 Use_ATR_Stop=1 Use_ATR_Pct=0.70000000 Init_Stop_Cushion=1 TrailingStop=1 TrailingAct=65 TrailingStep=25 Start_BE=40 MA_Method=1 RSIPeriod=8 RSIMAPeriod=8 BandsPeriod=20 Alert_Me=1 Trade_Live=1 Test_Info=1 Thanks
+
+--- 帖子 #216 ---
+G'day all, I've been using the Fozzy EA for almost 4 weeks now. I have left the default ATR_Stop setting to 0.7 however, in some instances it would've been better for the trade if the previous bar's H/L was used as the SL. What I was thinking was a way for the EA to choose between the previous bar's H/L or the ATR_Stop, depending on whichever was the furthest from the entry. This way, when the previous candle has a small range relative to it's history, you're not stuck with a tight SL. Can this be easily incorporated? I think it would be useful to anyone that uses the EA. Cheers, Art..
+
+--- 帖子 #217 ---
+G'day A1, I'm running v2.2 of the EA on demo and also had a losing week last week. However, there were trades carried over the w/e that have since turned out winners, so the loss is only small. At the results are comparable. Cheers, Art..
+
+--- 帖子 #218 ---
+Hi Artamon, Well, for a very short period of time I was testing v2.2 as well. My experience was that v2.1 provided a better performance at that time. So, I stopped with testing v2.2. The results of the different versions can be dependable on the current market conditions though. If you test v2.2 for a longer period, we can compare the results and we will see... Regards, A1
+
+--- 帖子 #219 ---
+G'day all, Firstly, let me state that I have no MT4 programming knowledge. I am using v2.2 and I want to change the alert it sends when trade conditions are met to also include Price, Stop Loss and Take Profit target. Can somebody help me with this? Cheers, Art...
+
+--- 帖子 #220 ---
+Find in the source code the line Inserted Code SendMail("Fozzy Alert", "A bearish fozzy cross has occurred at "+signalTime+" on "+Symbol()); and replace it by Inserted Code SendMail("Fozzy Alert", "A bearish fozzy cross has occurred at "+signalTime+" on "+Symbol() + " Sell @ " + Bid + " SL:" + getInitSL(direction, Ask) + " TP:" +(Bid-TakeProfit*Point)); and find the line Inserted Code SendMail("Fozzy Alert", "A bullish fozzy cross has occurred at "+signalTime+" on "+Symbol()); and replace it by Inserted Code SendMail("Fozzy Alert", "A bullish fozzy cross has occurred at "+signalTime+" on "+Symbol() + " Buy @ " + Ask + " SL:" + getInitSL(direction, Bid) + " TP:" +(Ask+TakeProfit*Point));
+
+--- 帖子 #221 ---
+Many thanks, Fukinagashi. Cheers, Art...
+
+--- 帖子 #222 ---
+Over the past week the Fozzy EA has become the most successful out of all the EAs I am playing with. I would like to thank the two authors, stockwet and tradeigel for developing and posting the EA here. The PDF shows the trades that closed during the past two weeks in my most profitable demo account. Fozzy 2-1 was used. I hope February will be at least half as good as January.
+
+--- 帖子 #223 ---
+I started this on a micro account this week with IBFX and the results were excellent. It only took one loss and that was dwarfed by all the wins. I have it running on all the pairs available with the broker. The settings are trading 2 micro lots and taking profit at 40 with a 25 pip trailing stop at 65. I plan to open up the trailing stop a bit to give the price more room and see how it does this week. I am running version 2-2. I am also wondering if anyone had any trades open tonight? I didnt so I just wanted to make sure. Thanks
+
+--- 帖子 #224 ---
+a1, what is your settings? do you changed just atr? what is your take profit level? or can you attach set file?
+
+--- 帖子 #225 ---
+nvwine, it seems that Take_Partial_Profit is not worth: profit would have been 472 $ higher without it basing on operations in the pdf.
+
+--- 帖子 #226 ---
+Here is my variant, but sell orders dont work. WHY? And besides 75% profit (only on buys)
+
+--- 帖子 #227 ---
+G'day all, I've been running the Fozzy EA v2.2 since the start of January (on MetaQuotes demo) and the individual pairs have performed as follows: AUDJPY +283 AUDUSD +285 CHFJPY +83 EURCHF -108 (plus open trade @ +82) EURGBP +128 EURJPY +267 EURUSD +83 GBPCHF -228 GBPJPY +213 GBPUSD -9 NSDUSD +98 (plus open trade @ +20) USDCAD -314 USDJPY +289 As you can see, the JPY pairs seem to perform rather well with the EA. Does anybody else have stats on how your pairs are performing (v2.1 or v2.2) for comparison? Cheers, Art...
+
+--- 帖子 #228 ---
+very good artamon. 1070 pips in 13 pair. do you mind to going live with fozzy?
+
+--- 帖子 #229 ---
+You can find my settings attached. I have to remark though that my results are not that good lately.
+
+--- 帖子 #230 ---
+I plan to go live with a micro account...problem is too few MT4 brokers offer micro. FXDD does (i have spoken with them) and i believe IBFX does too, but yet to talk to them. I dunno. I have read too many negative things about FXDD, but what's to say my experience won't be positive? Decisions, decisions... Cheers, Art...
+
+--- 帖子 #231 ---
+what is your settings? is it default? i will test it in this month i don't know much about fxdd. using both fxdd and ibfx. there was an error yesterday on fxdd platform, i hope it was only chart error. if not, too many account would blew up ibfx is more reliable but has not fixed spreads . sometimes spread could be 15 pips on cable, espescially on news.
+
+--- 帖子 #232 ---
+How can you go live, it doesn't seem to be doing very good. What version and settings are you using? Thanks
+
+--- 帖子 #233 ---
+1070 pips is not good???
+
+--- 帖子 #234 ---
+Sorry, I mean not good for me I'm using the 'MyFozzy-v2.1' EA with the below settings and am loosing, Where am I going wrong? MagicNumber=11223344 SignalMail=0 EachTickMode=0 Lots=0.01000000 Slippage=3 StopLossMode=1 StopLoss=40 TakeProfitMode=1 TakeProfit=25 TrailingStopMode=1 TrailingStop=10
+
+--- 帖子 #235 ---
+let's wait artamons's reply. maybe we can ue same settings. next 4-6 week i will test this settings too.. when i get sure, will go live too
+
+--- 帖子 #236 ---
+Yes, I am using all the default settings with v2.2.
+
+--- 帖子 #237 ---
+I don't know anything about that EA or how it works. As I stated earlier I am using v2.2 of the Fozzy EA as posted in the first post of this thread. Matrixebiz, in an earlier post you mention the v2.2 EA and it's settings. Why are you now using this other EA? Cheers, Art..
+
+--- 帖子 #238 ---
+So nobody else is using the Fozzy then? C'mon people, some feedback won't kill ya!
+
+--- 帖子 #239 ---
+just started using Fozzy EA v2.2 today, Currently 3 open trades eurgbp/sell,audusd/buy,eurusd/sell. Im testing live at FXDD with 0.04 lots per trade, to get a hang of it first. Will post here my results after a month of forward testing. -Mikhail
+
+--- 帖子 #240 ---
+Hey got a question Artmon. during your forward test how many trades on average where open at the same time? Im getting bored with this 0.04 lots now looking to increase it. but right now i dont know the number of trades to expect so I cant properly optimize the lotsize. Thanks, Mikhail
+
+--- 帖子 #241 ---
+Hey Artamon, Looks good. Be very weary of FXDD. I'm not saying to use CFG, but I use them and I havent had any problems with them yet. Try giving them a call and see what they say. I have a mini account with them. NOT bad. Good Luck.
+
+--- 帖子 #242 ---
+Artamon (and others) Yes I am trading Fozzy (Willf variety now) as are others, and successfully. Others talk of opening micro accounts and going live. What do you guys want, a 100% guarantee of profits and absolutely no losses?? The best thing you can do for yourself is trade for real and follow the rules. A win ratio of 90% does not neccesarily mean success. Read some of van Tharps stuff. One system I trade in commodities has a 28% win rate and makes me lots of money. This is well meaning hard earned advice, not a put down. cheers Mungo
+
+--- 帖子 #243 ---
+hey artamon, i am testing 2,2 since Feb. 1. it just opened 2 orders. eurchf and audusd. then nothing happened. audusd just stopped out. eurchf splited and half is still open. i don't understand why it is not opening new trades! how about your trades?
+
+--- 帖子 #244 ---
+It doesnt open too many orders. If you manually back test the fozzy method you would notice on the average of 2-3 entries per month on each currency pair. -Mikhail
+
+--- 帖子 #245 ---
+Thanks Fozzy, tradeigel and stockwet and all others who added their valuable assistance. I will give the EA a go. Cheers, JC
+
+--- 帖子 #246 ---
+Have a question for experienced Fozzy traders. Does anyone know why the EA shows signals that the indicator with the green line does not? The indicator that shows the green line that goes to 100% for buy and 0% for sell sometimes shows signals but the EA does not enter the trade. Is there a difference in the settings between the two? If so which one is being used by most people? I have read the thread and read a couple of posts about this but it was the part of the thread from last year nothing recent.
+
+--- 帖子 #247 ---
+G'day Mikhail, I've had a total of 55 trades in my 5 weeks of forward testing. The most trades initiated on any one day is 7, but that's only happened once. Commonly you'd get 2 or 3 trades per day, on average. However, you can expect anywhere from 2 to 5 trades open at any one time. Cheers, Art...
+
+--- 帖子 #248 ---
+Master.. I just looking for this EA.. may i know whats the minimum fund to start this.. Let say if i just have US2000 only with 0.1 lot using.. i am using NF broker.. Can u suggest how many pair do i have play.. and which pair more profitable.. I am looking for the EA, because i tired trade manually... Thanks
+
+--- 帖子 #249 ---
+open an demo account and try all pairs at least 1 month. select best performance and low drawdown pairs.. i'm doing it now
+
+--- 帖子 #250 ---
+Something wierd was going on with Fozzy EA v2.2 yesterday. I was in the USDJPY trade then later that day I hit my trailing stop, but right after TS was hit it opened the same position position, I waited for a little profit then closed it manually, but right after i closed it it opened the same position again. I just disabled the EA on that pair after this. Anyone know why EA did that? How to resolve it? Regards, Mikhail
+
+--- 帖子 #251 ---
+maybe re-entry rules.. i don't usually look what it does. normally it splits at +40 then at +65 starts ts action all pairs.. i don't know why i can't make profit just b/e. just wait and see
+
+--- 帖子 #252 ---
+hi... i just want to know... anybody out there have test it on real account... i am using NF.. thanks
+
+--- 帖子 #253 ---
+Hi fellow dayjob holders... I'm new to this topic and I've almost worked myself through all posts... I'm checking out EA v2.2 I've noticed that when it opens a trade it disregards following RSI/MA signals as long the position is open. Am I missing something in the settings? I thought that when a new signal is given we should close the open trade and start a new trade....? (Reverse position) My apologies in case I'm missunderstanding something here. I appreciate your help. Best Regards Colbru
+
+--- 帖子 #254 ---
+Hi all is anybody trading the Fozzy-method now long GBPUSD ? Till
+
+--- 帖子 #255 ---
+Yes me, live. Currently trading fozzy GBPUSD. My results can be found at www myfxreport dot com , then choose fozze from the menu
+
+--- 帖子 #256 ---
+Fozzy 2.2 Default settings Daily Charts Broker: MIG Just change the extension to .html PL 2649.56 in since 2-13-07 to today. 6 closed trades. 1 BE, 5 Profits. 1 open trade which is in the black. Is this a typical report for everyone else, or just a streak of luck?
+
+--- 帖子 #257 ---
+I am looking for an updated list of all brokers that support metatrader.Is anyone kind enough to point me in the right direction?
+
+--- 帖子 #258 ---
+I'm not sure how updated a list you need. Here is a list from a year ago. I think most of the brokers are still in business. Send me a PM if you are looking for a specific broker. For demo trading you can also switch to another broker on the same platform by changing the server files as shown in this thread .
+
+--- 帖子 #259 ---
+Great job of explaining exactly how it works. Thanks a lot
+
+--- 帖子 #260 ---
+My 2.2EA didn´t open a sellorder on EUR/USD on this days opening. It looks on the charts that it should have done that. Or...? (sorry for my bad english)
+
+--- 帖子 #261 ---
+Yes mine didn't either and I thought it was a definate trade.
+
+--- 帖子 #262 ---
+I'm using the 2.1 EA and it opened a sell order.
+
+--- 帖子 #263 ---
+I am wondering why no trades opened on AUD/USD and GBP/USD today. I am using IBFX and I have clear sell signals on both. Perhaps it's due to the funky sunday bars.
+
+--- 帖子 #264 ---
+hello Wiz, i saw the same here and took the GBP short on the signal. i left the AUDUSD alone, the blue and red hadn't wuite crossed on my FXDD platform. i'm also still in the EURUSD from 3/23. good trading to all!
+
+--- 帖子 #265 ---
+G'day Wiz, Be thankful, is all I gotta say. My IBFX live acct DID open trades on AUDUSD, GBPUSD and EURJPY all short and, consequently got creamed. All opened because of that Sunday bar. Cheers, Art...
+
+--- 帖子 #266 ---
+This is just a guess, but: Should Friday and Sunday candles be combined (and treated as one) Or: Should Friday be counted and Sunday ignored?
+
+--- 帖子 #267 ---
+G'day all, I'll preface this by saying that I've PM'd Stockwet requesting a change to the EA. I'm still waiting to hear back. However, in the event that he is too busy to assist at this time is there anybody else here well versed in MT4 coding to make a change for me (and probably many others here). I need (and would appreciate and be eternally grateful - ok, maybe for a few hours, a day tops! : ) someone to make a change to v2.2 EA and either have it ignore the Sunday bar outright or have an option as to whether you want to ignore it or not. It is causing too many premature signals. Would others be interested in such a change? Again, Stockwet may well reply in the affirmative at which case i'll make sure the amended EA get posted here. Cheers, Art...
+
+--- 帖子 #268 ---
+Hello Everyone, I recently updated my MT4 version to build 203 and am with Interbank FX. I was previously using the Fozzy 2.2 EA and for some reason, It will not activate on my MT4. I just get an x in the upper right hand corner of the screen. I removed the EA and added it back under the Expert Advisors, yet when I add it to the chart, it just gives me an x. I also tried adding the Fozzy 2.1 EA and got the same results. Does anyone have any idea why this would be? Thanks in advance for any suggestions. Thanks, Larry
+
+--- 帖子 #269 ---
+Have you pressed the 'Expert advisors' button at the top of MT4? It should be green not red.
+
+--- 帖子 #270 ---
+somebody told me about this But I think This's Really?
+
+--- 帖子 #271 ---
+Thanks nvwine! That worked, overlooked the obvious.
+
+--- 帖子 #272 ---
+Below are my results using the Fozzy 2.2 EA on my IBFX live mini account. This is the first week running this EA. I am super excited by the results, hopfully it continues. Thanks to everyone for their great posts, I have learned a lot!! The only setting that was changed was the lot size to open .02 and close .01 at 40. GBP/USD 108 (1/2 positon at 40, second 1/2 at 68) EUR/USD 88 (1/2 position at 40, second 1/2 at 48) USD/CHF -70 ( Both 1/2s at -35 stop loss) GBP/CHF 40 ( 1/2 position at 40, second 1/2 stopped out at BE) USD/JPY 90 (1/2 position at 40, second 1/2 at 50) Total 256 Wins 4 Loss 1
+
+--- 帖子 #273 ---
+nice result! Would you mind post your ea settings for EUR/USD? Thanks. arui
+
+--- 帖子 #274 ---
+arui, For EUR/USD and all pairs, I am using the settings that are already pre-loaded into the EA. The only change that I made was the lots to .02 and the take profit to .01 for the IBFX mini accounts. Hope this helps. Larry
+
+--- 帖子 #275 ---
+Thanks to Tradeigel and Stockwet for all their work on the development of the Fozzy EA, especially the 2.2 that I have been using over the last two weeks. Thanks to BeachBum for all you insight on the Fozzy method and the ATR!! My second week was also a good week. I made modifications to the EA to adjust the number of lots and take profit lots during three open trades and as a result, I had to manually close out two positions that went above 40 and did not close due to the new take profit level being greater that the entire trade itself. One position moved to break even and closed out before I noticed the mistake I had made. EUR/USD -72 (Both 1/2s at -36 stop loss) GBP/CHF 107 (1/2 position at 40, second 1/2 at 67) USD/JPY 79 (1/2 position at 37, second ½ at 42) – Manually closed the 1st half EUR/CHF 90 (1/2 position at 40, second ½ at 50) EUR/GBP 27 (1/2 position at 27, second ½ stopped out at BE) Manually closed 1st half EUR/GBP -40 (Both 1/2s at -20 stop loss) EUR/JPY 97 (1/2 position at 40, second ½ at 57) EUR/CAD 0 (Both positions stopped out at BE) – Stopped out at BE due to my error in changing the EA. NZD/JPY 133 (1/2 position at 40, second ½ at 93) GBP/JPY 170 (1/2 position at 40, second ½ at 130) Total 591 Wins 7 Loss 2 BE 1 Open Trades NZD/USD -88 (Both 1/2s -44) CHF/JPY -14 (Both 1/2s -7)
+
+--- 帖子 #276 ---
+Very impressive Imcarlton.............I need to take another look at using this EA...........thanks!
+
+--- 帖子 #277 ---
+Thanks Larry, I am going to add more pairs to my testing portfolio.
+
+--- 帖子 #278 ---
+Would it be possible to program the lot to size itself at a percentage of the account total?
+
+--- 帖子 #279 ---
+Imcarlton thanks for your information these is my firts time on this EA v 2.2 do you run 19 pairs on IBFX mini ? your miniaccount is 2k or more ?
+
+--- 帖子 #280 ---
+Jucaorma, I am running the EA on 14 pairs at this time. I removed all the AUD paris because reading the thread it did not sound like those did so well. I am just trading a miro-mini with IBFX, so my account is very small. With the proper MM rules in place I can trade at .03 to .05 depending upon the ATR of the pair. Thanks, Larry
+
+--- 帖子 #281 ---
+Imcarlton thanks i start a demo miniaccount 3k ibfx ea fozy 2.2 14 pair no aud pairs firts order sell nzdusd 0.2 thanks
+
+--- 帖子 #282 ---
+Why did the 2.2 EA open a sell order on USD/EUR. It went straight to the stoploss. I didn´t see any signals (no cross) for sell order on the chart. (sorry for my bad english)
+
+--- 帖子 #283 ---
+ea fozzy 2.2 until today i have a lost -96.81 the ea open new pairs lots 8 pair total opens so will see
+
+--- 帖子 #284 ---
+Lots of red for the third week. Below are my results from 11 trades this week. CHF/JPY 40 (1/2 position at 40, second ½ stopped out at BE) NZD/USD 40 (1/2 position at 40, second ½ stopped out at BE) GBP/USD 40 (1/2 position at 40, second ½ stopped out at BE) USD/CHF -80 (Both 1/2s at -40 SL) EUR/CAD -128 (Both 1/2s at -64 SL) EUR/USD -78 (Both 1/2s at -39 SL) USD/JPY -100 (Both 1/2s at -50 SL) EUR/JPY 86 (1/2 position at 40, second ½ at 46) – I manually added a 20 point trail to the second half. EUR/CAD -136 (Both 1/2s at -68 SL) GBP/JPY 80 (Both 1/2s closed at 40) – My take partial profit lots was accidently set at the same as the initial lots. USD/CAD -90 (Both 1/2s at -45 SL) Total -326 Wins 5 Loss 6 Open Trades EUR/GBP 42 (Both 1/2s up 21) EUR/CHF 20 (Both 1/2s up 10)
+
+--- 帖子 #285 ---
+1. Where you I place the 'fozzy2.2 EA' file on my computer? Which directory? 2. How do I put 'fozzy2.2 EA' on the charts? Which option do I use? How can I import the file? I am using North Finance for trading. 3. I put the 'fozzy2.2 EA' on the main window? Many thanks guys!
+
+--- 帖子 #286 ---
+same problem for me. I tried to attach it as Expert indicator, as a Custom indicator and it doesn't work or show anything. Can anyone explain how to add this kind of indicators to MT4 ? Thanks
+
+--- 帖子 #287 ---
+OK guys (or possibly gals...... ) I'm not an 'EA person' but I will offer this: Did you place the EA in the 'Experts' folder of your MT platform? Not the 'Indicators' folder, but the 'Experts' folder? Did you "turn on" the "Expert Advisors" function in the toolbar on the top of the chart? And lastly, did you apply the EA to the desired currency pair? I played a little with this EA in the early days of it's creation; that's how I did it and it worked for me. HTH!
+
+--- 帖子 #288 ---
+I did what you said but ... here is a screenshot:
+
+--- 帖子 #289 ---
+ok, I think I solved the problem. I selected "Allow live trading". I didn't know that people trust so much machines to let them trade automatically. Personally I trade fibonacci and I prefer to do it manually rather than trust some software. Thanks for the original Fozzy, it's working good on highly volatile pairs like G/Y and G/U
+
+--- 帖子 #290 ---
+Good.........I'm glad you solved the problem. The one thing I overlooked is what you needed to do.................go figure!
+
+--- 帖子 #291 ---
+Being used to the Oanda Trading platform im not really familiar with the feature called Trailing Stop. I tried to perform a serach in the forum to get some more info but i could not find anything useful. Since this is releted to my test with the Fozzy EA I thought i would post the question here instead. Hope you guys don't mind. In the Fozzy EA, lets say price moves 15 pips in my favour. I would like to keep this profit but also not give up the possibility of further profits. What would be my settings for this in the EA? Am I correct to assume that I set option Trailing Act=15 ? Also, would this mean that Trailing Step is the value for the "new" trailing stop in case prize moves further? Example: EUR/JPY, Trailing Act=15, Trailing Step=15. Prize moves +15, this initiates TS which set stop loss att +15 level, prize moves another +15 and Trailing Stop is set at +30 level? Also, with the above settings, prize moves +15 to active TS which will be new stop loss. If prize then moves against me it will close order with +15 profit? Can somone shed some light on this? Or at least point me in the right direction. Cheers Ronny
+
+--- 帖子 #292 ---
+I put on my chart a Fozzy_2.2 EA. Under placing stops section of the Fozzy ebook, Michael discusses a 70% ATR (20) method. My Fozzy_2.2 EA (under inputs) shows variable called Use_ATR_Pct and value 0.7! I guess that my Fozzy_2.2 EA has already activated a 70% ATR automatically, correct? Also it shows a Use_ATR_Stop variable, value true! (My Average True Range shows already a 20 period in the window.) Thanks a lot!
+
+--- 帖子 #293 ---
+I've been looking at a few EA's and what I like about this one is that the settings don't have to be constantly updated. I also like the low drawdown shown here: ************** dot com on the GBPJPY pair. If you are trading with a percent of your balance then everytime you loose your next trade will be with less money. Seems like for every loss in forex it takes 2 wins to make it up. For me an EA that wins more often, but trades less is better. It's not all about pips. It's about increasing your account balance. The perfect EA should work on all pairs without periodic optimization. Still haven't found that one. Back to the ultimate goal - to increase account balance and this seems to be doing that on the GBPJPY pair.
+
+--- 帖子 #294 ---
+Could someone please explain what the settings Trailingact &amp; Trailingstep means in the EA? If I wanted to use a normail trailingstop what would be my settings? I want it to behave is it does when I apply a trailingstop to a manual order
+
+--- 帖子 #295 ---
+Hi All, I've set up my MT4 (StrategybuilderFX btw) to have all 16 pairs charted with the indicators and fozzy2.2 EA running on all the pairs. I noticed that the EAs weren't always opening the orders I'd expected, and saw that error 146 messages were being generated that show 'trade context busy'. I understand that this is due to MT4 only allowing one thread to edit orders at a time, and so with 16 EAs running and this being a daily method so they get triggered at the same time, obviously one goes to open/modify the order and the others are blocked out. I found an 'OrderSendReliable' library file online that's meant to address the trade context issue and added that to my installation and edited the EA to use this library. I'll check it runs ok tonight and providing I've not bodged it up, I'll post the library file and my edited fozzy2.3 EA on here for comment. Hope this helps if anyone had the same behaviour. -TPO.
+
+--- 帖子 #296 ---
+I have the same experience that my fozzy2.2 EA doesn't open the orders automatically when there is a cross!? I don't know what I am doing wrong? Maybe I have to edit my fozzy2.2 EA settings?
+
+--- 帖子 #297 ---
+It depends on why it's not opening the orders - have you checked the EA settings with the explanation given at the beginning of this thread? One main reason in the settings could be that you personally are not using the BBands as a filter but by default the EA does. You should check the tabs in the Terminal panel to see if you are getting errors reported by the OrderSend or OrderModify functions. It'll read ERROR: &lt;OrderSend&gt; 146 or something like that (not at my home PC at the moment). If it is showing that error then hopefully my edits will have fixed that, but this will have to wait a few hours for me to check the results and then write up the details. -TPO.
+
+--- 帖子 #298 ---
+I am using Fozzy 2.2 but have had no signals on any pair for the two weeks it has been running. I have tried the various mods on this forum (Yes it does allow live trades). However when I back test using the identical settings I get signals. I am using the NEXTT terminal (MetaTrader) and have tried with and without the GMT set to 00. Has anyone got any ideas as to where the problem lies - I have spent hours looking through the program, tried versions 2.0, 2.1 as well as 2.2 and with/without BB filter. Could it be fixed using Aplari platform instead of NEXTT?
+
+--- 帖子 #299 ---
+Do you see the little face, or an 'X' in the upper right hand corner of the chart? Is it smiling? After the EA has been running have you looked at the log under the Journal Tab and the log under the Experts Tab? Did either of them have any errors or unusual entries? How many charts have you attached the Expert to?
+
+--- 帖子 #300 ---
+1. Yes I have the smiley face (not personally though when investigating this problem!) 2.Nothing at all in the journal log. 3.I have 9 charts open (1 per pair)
+
+--- 帖子 #301 ---
+Have you enabled the 'Allow live trading' feature on the EA?
+
+--- 帖子 #302 ---
+I have a couple of thoughts. First, If NEXTT is the same as Neuimex, isn't most of the company closed or broke? I could be wrong because I can't read German. If you live in CH you would know more about it than me. I believe only the Tortola office is open. See this thread for Swiss Banking Links and more info. You might want to test with a broker you want to trade with. I've used Neuimex and EAs worked on their platform. The trade reports had the name Gimex at the top. There are a few MT4 brokers that do not enable the use of experts or trailing stops or micro lots for that matter until you request the option turned on. If the use of experts was disabled by your broker it should show up in the logs when the EA tried to trade. Second, You will get more trades with the BB feature turned off and it is good for testing to start with. If you look back and find a day where you know there was a valid Fozzy cross note the date. Then look at the Journal and Expert logs for that day as well as the day before and after. It should show that the EA tried to initiate a trade. There should be some error message. Another good way is to open the Journal and Expert logs starting with the first day of trading for the week and follow them forward to present. You should see where the EA was initiated for each chart to begin with as well as logins etc.. Then it should show some attempted trades. The attempted trades would have a time stamp which would be what your local time is at 0 GMT. I'm assuming there has been at least one Fozzy cross on your charts this week and that your using daily charts with the EA set to trade at 0 GMT.
+
+--- 帖子 #303 ---
+The Terminal journal indicates that the Expert has loaded sucessfully in each case but there are no entries in the Expert journal. Just to confirm to BeachBum - the experts are enabled and allow active trading also. I have run with and without BB filter. There are signals in the strategy tester but they are not present in the 'live' screen. I wonder if it is a Broker problem? I only use NEXTT as a convenient platform - all my trades are placed using FS Spreads so the account is only a demo one. I can try using the Alpari platform - what is the view on the most reliable platform? I only changed to NEXTT because the MetaTrader (MetaQuotes) I was using tended to drop the connection periodically - not useful in the middle of a trade! I really appreciate everyone's help by the way.
+
+--- 帖子 #304 ---
+I'm pretty sure it's because Neuimex has ceased trading... Try again using StrategybuilderFX -TPO.
+
+--- 帖子 #305 ---
+I don't understand why you do not get entries in the Experts tab log. Close MT4 and restart it then check both log windows. I just did that after loading v2.1 on a few charts. Below are the results from the two logs Journal and Experts. You don't need to open the log files just look in the windows on the platform. Remember on the platform the newest line is on top as shown below. Journal Log: Experts Log: You must have entries in the Experts Log at startup for the EAs to work. You can look at the entries I have here. All the entries are from the first few seconds after starting the platform. Although I am not currently using this EA I know the EA would make trades as it is now loaded. I used this EA for several months previously. I don't mean this as an insult but I hope you know you need to have the MT4 platform open with the EAs running 24 hours a day as well as being connected to the internet full time in order for the EAs to operate properly. I agree with TPO. Switch your tests to another platform. It is an easy way to rule out the possible Neuimex issue.
+
+--- 帖子 #306 ---
+AhA! Just downloaded StrategyBuilderFX4 and a totally different picture emerges. There are now entries in both the journal and the expert log - no signals as yet but I don't doubt there will be. SBFX4 is actually quite a bit different to the NEXTT platform by the way. Just to be clear, I am in the UK so how do I treat the GMT time on this platform? I will turn the BBs off for the moment and see what signals arise but I am very optimistic now. Thanks everyone for your help/
+
+--- 帖子 #307 ---
+Great. Glad it is on the right track. If I remember right setting GMT to true forces the start of a new day to 0 server time on your platform. It is not actually GMT unless you trade with a broker that uses a zero gmt server like IBFX. If you set it to false the EA checks for a Fozzy cross at the start of a new bar. You need it set to false if you try the EA on 4hr charts. If you want to test the email and alert functions you can leave GMT = false and use the EA on some small time frame charts to get more crosses for testing purposes. Note on daily charts or with GMT set to true the EA will only originate new trades once per day at the start of the new daily candle. Depending on the broker there can be a Sunday candle issue which can effect the quality of the signals for the first candle of the week.
+
+--- 帖子 #308 ---
+Hi Lavenham, nvwine's post is spot-on, for SBFX the 00:00 time is 10pm in the UK which is very convenient for testing, much better than having to wait till midnight! Nice to see another spreadtrade2win forum user over here -TPO.
+
+--- 帖子 #309 ---
+Hi TPO Yes - I found this by chance. I am trying to use Fozzy to confirm Braintrade signals and on the face of it, it is working well. Basically if BT1 and BT2 signal and the expert also indicates a signal then open on the next daily bar and monitor with BrainTrader trailing stop (or if I am busy, I just set a target of 50 -100 depending on the pair and my gut feeling). Might sound a bit Heath Robinson but it works for me. I love confirming one system with another - some people don't but the results are what count. Getting fozzy Expert to signal has been a personal challenge for me and I am determined to get it signalling properly - normally I don't tinker with my system but this looks worth the effort.
+
+--- 帖子 #310 ---
+I am using MeteTrader 4 to test fozzy EA. After activating the EA, there are no changes on the chart exept for the upper left corner values of RSI, Bands etc. I tryed fozzy 2.2 and fozzy 2.1 - same result. Does anyone have any idea why? Thanks
+
+--- 帖子 #311 ---
+I'm not sure what your expecting. The smiling face on the upper right hand corner should also be there. If it is not start reading at post #296 forward in this thread. This is an expert not a template. If you want to set up a chart to see Fozzy crosses and understand when a trade should happen you should read the other Fozzy threads especially the original one. This expert's purpose is to open and then manage trades not draw lines on your chart.
+
+--- 帖子 #312 ---
+My EA shows 'Use_BB_Filter' true , so I guess that my EA is using BBands! How can I check if my account also using BBands as a filter? By the way, I couldn't find the instructions regarding this at the beginning of the thread. Thanks! Mike
+
+--- 帖子 #313 ---
+Got my first signals on the 4 hour today (USD/JPY, AUD/JPY, AUD/USD, USD/CAD). Many thanks to everyone who helped - it seems the NEXTT server was the problem so I am just using Strategy FX.
+
+--- 帖子 #314 ---
+Somebody care to explain the trailingstop feature?
+
+--- 帖子 #315 ---
+hello, here is a link to an auto updating demo forward test. fozzy 2.2 ea, default settings, 6 pairs (4 majors + eur/chf, eur\jpy), broker : NF. so far so good. http://www.sababafx.com/ft/fozzy/statement.htm thank you for a great EA.
+
+--- 帖子 #316 ---
+Once again im asking the same question.. could someone please explain the trailingstop feature of the EA. If I wanted the EA to use a normal trailing stop, 15 for instance without using the breakeven feature what would be my settings in the EA below? TrailingAct = 65; //When to start trailing (BE + Trailing Step) extern int TrailingStep = 25; // How much to trail by extern int Start_BE = 40; // When to move to B/E Please note that I do not want to use the breakeven feature, just a normal Trailingstop behaviour, for example: I buy EUR/GBP at 0.6793, prize moves 15 pips in my favour to 0.6808. This i would like to be my new stop using TS. So how do i set this. Do i set BE to zero and TrailingAct to zero as well? And trailingstep to 15? Will then my trailingstop be active? Someone please help
+
+--- 帖子 #317 ---
+Hi pl check on test next setings TrailingAct = 0; //When to start trailing (BE + Trailing Step) extern int TrailingStep = 16; // How much to trail by extern int Start_BE = 16; // When to move to B/E have in maind that i don't chack this seting, but it should work GL
+
+--- 帖子 #318 ---
+G'day Ronyn, From what you've written above I read it as you wanting your trailing stop of 15 to kick in when you're @ +15, correct? With what you've written above though, by setting 0.6808 as your stop once you've reached it, you're leaving yourself NO room to move. Setting a trailing stop of 15 here would mean your Stop Loss is at 0.6793 - your entry. If this is what you want then you should do the following: TrailingAct = 15 TrailingStep = 15 Start_BE = 15 This will move your original SL to BE and give you a 15 pip TS when you are 15 pips up. I know you said you didn't care about moving to BE, but by doing this you are effectively moving your SL and locking in that trade. However, even if you don't move you SL to BE, by having a TS of 15 kick in at +15, you are achieving the same thing - just not as cleanly, IMHO. I hope I make sense. Cheers, Art...
+
+--- 帖子 #319 ---
+Thanks for your reply Art. I do realise that by moving the SL I leave little room for the prize to move, but I'm leaning towards securing small profits but also use Trailing Stop as a possibility to gain more on larger moves. In a nutshell this is what I want to acheive: If/When price moves +15 I want to secure those pips no matter what by using TS. If that means being stopped out the next second by the new SL that is fine. At least that is +15 pips in the bag. There is also a possibility that the price moves another +15 and that will be another +15pips. In short, when +15 is reached I want to secure those 15 no matter what happens next. I want to do this by using a normal Trailing Stop. What would my settings be in the EA? Hope I make some sense although its been a couple of hours since my last cup of coffee...
+
+--- 帖子 #320 ---
+Thanks for your suggestion, but does not your suggested settings cause the EA to move SL to breakeven? I do not want that but just a normal trailing stop, so if prize moves +15 this will be my new stop, another +15 this will be my new stop etc. .
+
+--- 帖子 #321 ---
+Anyone else using this EA, please try helping me out with this TS feature, thx
+
+--- 帖子 #322 ---
+Broker: FXDD Pairs: USDJPY,GBPUSD,USDCHF,EURUSD,AUDUSD,EURJPY, GBPCHF,EURGBP,EURAUD,GBPJPY,AUDJPY,NZDUSD,CHFJPY Start Date: 5/22/07 Trades Executed till Now: 54 Total Closed Pips till Now: +1,130 PippinToTheTop!
+
+--- 帖子 #323 ---
+PTTT............I removed the link in your post because it contains promotional ads and is therefore considered spam. However, I think the statement you posted is worthy of consideration and therefore I suggest you post it as an attachment here in this thread. EDIT: I see PTTT has revised his previous post, adding his trade statement, good work!
+
+--- 帖子 #324 ---
+please post this ea with your setting. thanks
+
+--- 帖子 #325 ---
+Check your PMs PippinToTheTop!
+
+--- 帖子 #326 ---
+Certainly impressive results. Why did you choose the 2.1 version instead of the fixed 2.2 version? Better backtest results? I'd be interested in seeing your settings too. Please post them here for everyone to see, not in a PM. Cheers.
+
+--- 帖子 #327 ---
+Bhboy, I found in forward tests that 2.2 was not too impressive, so I recently started 2.1 after hearing so many good things about it. This has NOT been backtested, mainly because I DO NOT trust backtests. I forward test dozens of systems simultaneously. If they win three out of three months of testing then I trade them. The results I posted for fozzy 2.1 are only after 12 trading days, so it will be a while before I consider going live with it, but it sure has been fun watching the pips fly. Let's just see if she can keep it up Cheers, PippinToTheTop!
+
+--- 帖子 #328 ---
+Very nice results!! Only comment is the loses were 0.2 lots and profits were taken 0.1 lots at a time. Whereas total pips lost were calculated on 0.1 lots. Let me know if I misread your statement. But either way very nice results so far for such a short timeframe.
+
+--- 帖子 #329 ---
+Pdhawan, Thanks for pointing that out. You are absolutely correct. So everyone needs to keep that in mind. I actually did not catch that because I am involved with testing and analyzing so many systems. As well as trading several live accounts. PippinToTheTop!
+
+--- 帖子 #330 ---
+Well, as my interest was piqued by pttt's results, I put the 2.1ea on my daily charts this session and left it on all day, here were my settings: http://picnac.com/images/8417Untitled 3.jpg In other words I wanted one lot, stop at 75%ATR and target at 50 pips and then finish. The trouble is, after the t/p or stop or trailing stop was hit, the ea immediately took another trade like so: http://picnac.com/images/8047Untitled 2.jpg Turned out to be a very profitable day (!) but nonetheless unplanned for. Can anyone tell me what's going wrong. It's just a bit of fun on my part but I'd be grateful for any insight. Cheers
+
+--- 帖子 #331 ---
+Michael................I haven't used this EA that was created by Stockwet. I asked him about it yesterday and he has not even looked at it in months. I think you need to find someone who understands MT code to sort this out.
+
+--- 帖子 #332 ---
+I never had results like you show using v2.1 One thing you can try is to set the Use_00_GMT=TRUE. That should force it to only trade at the beginning of the daily bar.
+
+--- 帖子 #333 ---
+you are SO the man. Many times over. I wish I had even an ounce of your programming skills.
+
+--- 帖子 #334 ---
+Yup that's definitely the problem. Use_00_GMT=FALSE is only for testing on lower timeframes than daily. -TPO.
+
+--- 帖子 #335 ---
+As i understand TS: after enabling it, TrailingAct starts the trail feature aftert set pip amount in profit is reached, TrailingStep is an increment number of pips that the trailing stop is moved after reaching set number of pips, StartBE sets StopLoss at breakeven after set number of pips in profit (should be less than TrailingAct).
+
+--- 帖子 #336 ---
+The first link trades .20 lots per trade. If it starts to win the trade to a specific point then it will close .10 lots and let the other .10 lots run until it either hits BE or closes for a profit also. All losses have reflected with a .20 lot size. http://www.pippintothetop.com/fozzy%202.1/report.html On this link there are no partial lots taken into account. It only trades a solid 1.0 lot size per trade. http://www.pippintothetop.com/fozzy%...ta/report.html Enjoy, PippinToTheTop!!
+
+--- 帖子 #337 ---
+PTTP.............anyone who wants to view your statements has to register at the website associated with the two links. Spam? Maybe! I suggest you do what you did last time after I brought this to your attention: just post the statements, perhaps as zip files. Thanks.
+
+--- 帖子 #338 ---
+I'm not having to register, I just see the statement - I do use script blockers though so maybe this is why I'm not asked to register? -TPO
+
+--- 帖子 #339 ---
+BeachBum, To view those two links there is absolutely no registering involved and there never was when I posted it. I unfortunately, do not have the time to upload zip files, so I will make this my last post on this Thread, because I do not want to cross any fine lines perceived by the Administrators. I will continue, however to monitor it and answer any questions people may have of me in the PMs only. Also, I want to encourage everyone who is new to Fozzy to continually test this system because it truly does seem to be very promising. Take Care To All and Happy Trading , PippinToTheTop!!! P.S. If the two links are dead then they will be back up in a couple of hours once I am back home. I am having issues right now with a winsocket 10055 error, which is shutting off my internet after 6 hours, due to the publishing of more than 14 systems to the web in 1 minute intervals individually. I hope to get this resolved in the next few days.
+
+--- 帖子 #340 ---
+What is this?
+
+--- 帖子 #341 ---
+My Apologies to All. Yes BeachBum was right. It does say you need to register. This was a complete mistake and is being corrected immediately!! I have no idea why this happened to these two links. Please DO NOT register because there is NO need!! PippinToTheTop!!!
+
+--- 帖子 #342 ---
+Thank you for initiating efforts to correct this problem!
+
+--- 帖子 #343 ---
+Now I know what it is like to get an egg thrown in my face !!! PippinToTheTop!!
+
+--- 帖子 #344 ---
+Apparently, the problem was that I had transferred some systems from my dedicated server to my home computer this morning to continue my testing of some of the systems. In the process of moving my EA codes for publishing I forgot that I had some programs that were protected with a link code, which got copied to my MT4 platform at home. These link codes have now been removed from the FOZZY EAs. You should NOT see this again fingers crossed. Take Care, PippinToTheTop!
+
+--- 帖子 #345 ---
+hi, im testing the fozzy ea 2.1v, im testing it on alpari and WHC and FXDD only alpari went short on USD/CAD but the other 2 brokers didn't, anyone knows why? thanks
+
+--- 帖子 #346 ---
+A simple answer could be the server time offsets are probably different between the accounts. For example Alpari is +2? and FXDD is +3 and WHC is ??. The new daily candle started at different times. It could also be settings or data feed interruption right at the start of the new day..
+
+--- 帖子 #347 ---
+so how can it be fixed? do i need to set the gmt setting to false?
+
+--- 帖子 #348 ---
+If I remember correctly Fozzy 2.2 already has a fix in the form of time offset input for GMT, but 2.1 doesnt. (?)
+
+--- 帖子 #349 ---
+Hi PippinToTheTop, can you post your settings of ea's and how much was initial balance/capital ? thanks a lot
+
+--- 帖子 #350 ---
+Hi Everyone...i'm Living In Gmt+8 And I'm Using Metatrader As My Broker For A Quite Some Times. After I Found This Thread, I Put This Ea On My Live Trade. And After I Wait For A Few Days, There's No Activity Goi'n On. Does It Has Something To Do With My Gmt Setting? Please Someone Help Me...
+
+--- 帖子 #351 ---
+Pardon me , I'm a noob here, I have a request for Mq4 programmer here. I'm wondering if you could program for Sniper indicator below (Attachment 1) to plot a signal on the main window everytime there's a triger from Sniper (a cross). The signal should look like the Fozzy indicator arrow signal as attachment 2. The reason for this request is that sometimes Sniper produced a potential trade signal whereby undetected by Fozzy, sometimes vice versa. So by doing this I hope to be alert of every potential trade signal by Sniper and Fozzy and at the same time be able to trace previous plot trigers for reference and study. Again pardon my humble request, its not a complicated programming I think but if I do the programming it will become scrap (rojak), heh. Thank you.
+
+--- 帖子 #352 ---
+I hope you mean live forward trading on a demo. Never start out trading any EA on a live account. Did the chart you have the EA attached to have a Fozzy cross using indicators set up for Daily Fozzy trading? If so was your cross with bands or without? Some chart pairs may take quite a while for a proper cross to form using B-Bands. Which version of the EA are you using? Do you see the little smiling face in the upper right hand corner of the chart indicating the EA is enabled and ready for live trading? The EA trades off the server time on the chart not where you are at. Living in the GMT+8 time zone does not make a difference. With the EA's GMT feature checked the EA should only look for new trades at the start of a new daily chart pin.
+
+--- 帖子 #353 ---
+Hi..NVwine.. F.Y.I. I'm using ver. 2.2 and yes there's a smiley face on it and here is my setting: Use_BB_Filter = true; Use_00_GMT = true; Lots = 0.2; Take_Partial_Profit_Lots = 0.1; Take_Partial_Profit = 40; TakeProfit = 130; ATR_Stop = true; Use_ATR_Pct = 0.7; Init_Stop_Cushion = 0; TrailingStop = true; TrailingAct = 65; TrailingStep = 25; Start_BE = 40; MA_Method=MODE_EMA; RSIPeriod = 8; RSIMAPeriod = 8; BandsPeriod=20; Alert_Me = true; Trade_Live = true; Test_Info = true; I can't understand why did you say never start EA on alive account? And another one is " Did the chart you have the EA attached to have a Fozzy cross using indicators set up for Daily Fozzy trading? If so was your cross with bands or without? Some chart pairs may take quite a while for a proper cross to form using B-Bands. " You mean the Fozzy indicator in the live Daily chart? Yes..there is..but nothing happens. And I'm using this type of indicator: AO Fozzy Signal ALL which I took it from the threads and the setting is: RSI Period: 8 RSIMA Period: 8 Bands Period: 20 Bands Shift: 0 Bands Deviations: 2.0 Is there anything wrong with it?
+
+--- 帖子 #354 ---
+By live account I meant one with real money in it not live forward testing. I may not have been clear. I asked you about indicators because the Fozzy EAs may not trade for several days in a row. It is useful for testing to have Fozzy indicators on your chart that are similar to the way you set the EA up. It is the quickest way to spot problems. As far as chart indicators go you will need to check in the main Fozzy thread but my understanding is that the AO Fozzy signal ALL indicator does not use B-Bands so it will give a signal on all crosses. I could be wrong. You have Use_BB_Filter = true in your settings so you may not get a trade that the indicator shows. I'm not as well acquainted with ver.2.2 but to start with you might set the BB filter to false to match the indicator or use a different indicator. You need to be sure the EA has missed a trade it should have taken. If you want more trades set the BB filter to false in the EA. I'd also recommend reviewing your experts log and your journal log. Look for any errors especially once you know there should have been a signal on a given day.
+
+--- 帖子 #355 ---
+How can i load the fozzy_2-2 indicator. ....i need one *.ex4? because i only have fozzy_2-2.mq4 and a can not do nothing with this. What is wrong?
+
+--- 帖子 #356 ---
+have the same problem
+
+--- 帖子 #357 ---
+Hi Stockwet, How can i load the fozzy_2-2 indicator on Metatrader. ....i need one *.ex4? because i only have fozzy_2-2.mq4 and i can not do nothing with this. What is wrong?
+
+--- 帖子 #358 ---
+I've been looking at different ways to automate the trades, and have a question/suggestion. Since we're already using the ATR for our stop, why not use it for our take profit stops too? I'm thinking about using 50% of the ATR as the first take profit point, instead of always using 40 pips. Some pairs might only have 45 as a daily range, so unless we buy at the edge of the bar, we're not going to take profit, and will probably go on to get stopped out. If we would have set it to 50% of 45, we would have taken 22-23pips. Also, I wanted to say that I'm setting my initial take profit differently than the default. I found that this method is more profitable. I'm doing 4 lots, and taking 3 lots off at the initial take profit, and letting the last one run. Backtesting looks promising, but I've only just started testing it on a live practice account. I'd love to hear the communities thoughts. -Dan
+
+--- 帖子 #359 ---
+I don't mean to be a dick, but you need to rtfm.
+
+--- 帖子 #360 ---
+Dan - very interesting first post, sooo much nicer than the usual 'what is fozzy?' type post! I've been testing using the ATR for take profit levels too - at 0.7, 1.0 and 1.3 of ATR(20), but recently have noticed that a first TP level of greater than 50-55 is too high and the trade could reach ~45 pips only to reverse and become a loss. Coolshades is using a 0.5 ATR as a first TP. Your use of 4 lots and taking 3 off at the first TP is something I was thinking of earlier - how are you letting the last lot run? Any target or trailing method in particular? Join us on the skype chat, this is what we babble about all day it seems -TPO.
+
+--- 帖子 #361 ---
+TPO, I'm just leaving the EA at default settings, except for the money management changes. I initally tried 3, and then sell 2 at first chance, and noticed that it was possible to make money in the 2006 calendar year with this EA. After playing with it, I'm comfortable with the 4:3 ratio. When we get to higher lots, it's probably easier to tweak the ratio and be more accurate, but this method offsets the 'wiggle room' needed enough, in case we get a loss instead of a long run, on the running profit. Regarding the ATR take profit levels, if we had it in the EA, we could probably more easily find the 'sweet spot' for it. I can do some things with MQL4, but I don't understand a lot of the things that are going on, even though it's supposedly a simple programming language. Do you know how to program with it? Another thought I had... I wish we could build some logic into the EA, that would trade a certain percentage of the account per trade, instead of fixed lots. So, we could enter 1% or 2%, of our account per trade. That way it's really more automated, and will give a nice compounding affect. I don't know if you've seen this site: http://www.pippintothetop.com/Fozzy%...TA/report.html (sortable tables, btw) but the trader there is trading real money with Fozzy, and posting his trades in psuedo-real time. He started with a fixed amount, and is only trading fixed lots. If he would have compounded the trades, it would be much larger. I'm glad to see the open source spirit of the MQL programmers out here, because it allows us to share our ideas... I heard someone say something, one time... "You can't do greatness by yourself, it requires many people" or something like that. Nice to have people sharing their ideas here. I'd love to join in on the Skype chat, so please send me an email or pm if you don't post the info here. -Dan
+
+--- 帖子 #362 ---
+Hi Dan, Although technically I can code in MQL, it's not exactly my forte and there's so many better coders out there that I tend to let them do the clever work If there is a piece of code to alter lot sizes as a ratio of the account size, I'm sure it'll be on sbfx or forex-tsd somewhere! We could use the EA to test out ATR settings but it's generally best to test using real trades or manual backtesting as the MT4 strategy tester isn't really up to the job IMO. -TPO.
+
+--- 帖子 #363 ---
+Ive just recently downloaded Fozzy 2.2 and after reading a bit of what has been said I dont dont the validity of this system. However I have tried to back test it and got some pretty terrible results. I tried GBPUSD, daily, using the default inputs, every tick (89% quality), got about 50 or so trades all up and the results were bad to say the least. Has anyone else had any luck back testing the EA? If so on what currencies and what time frames?
+
+--- 帖子 #364 ---
+Try some forward testing as well while you are at it. Fozzy has potential, you just have to find the right TP SL levels for yourself They previous success is not a measure of future success .. (its exactly the same with failure)
+
+--- 帖子 #365 ---
+This is a great day for the Fozzy EAs. 6 trades opened and 6 trades in profit. 1 of which the long EURAUD has already closed at full profit. All but one of the following trades have had partial closes and the stop moved to BE +4 with most of the trailing stops active. Open trades are; Long: EURCAD, EURGBP Short: GBPCHF, AUDUSD, EURCHF Trades taken on IBFX using 16,16 with no BB and GMT set to true.
+
+--- 帖子 #366 ---
+I got eurcad only, not sure if settings are right, using ibfx
+
+--- 帖子 #367 ---
+I don't think that there are right and wrong settings. You may do better than I do on other days. I've tried to get my IBFX trades to trigger on the same day as FXDD trades do. It is not always the same but to get the two brokers closer together you need to increase the 8 and 8 to a higher number to compensate for the extra bar (with very little range) that goes into the daily formula on IBFX. I run the EAs on a FXDD demo for comparison with my live IBFX accounts. The trades will never agree completely due to the time difference in the daily candle close. A couple of my IBFX trades today did not get a signal on FXDD. Editing the EAs and adjusting entries is always a work in progress. I find it very useful to run the same EA with the settings and magic number changed on 4 charts for the same pair on a demo. You can then see what changing the 8,8 default does.
+
+--- 帖子 #368 ---
+tks for reply, will try and see what happens
+
+--- 帖子 #369 ---
+somme body can tell me if the EA fozzy 2.2 minilotes run for IBFX example EURUSDm microaccount THANKS
+
+--- 帖子 #370 ---
+Yes it works on IBFX mini accounts. You can enter values at 2 decimal points.
+
+--- 帖子 #371 ---
+thanks a lot
+
+--- 帖子 #372 ---
+Broker-FXDD EA Version 2.2 Default Settings at 2 pips but s/l of 30 pips plus spread Executed on 10/9/07 Bar AUD/USD Sell -68 ( hit 34 pip s/l ) GBP/USD Sell +111 (+40, then +71) EUR/JPY Sell +90 (+40, then +50) Profit +133 pips
+
+--- 帖子 #373 ---
+Hi, Do you know how to get in this site. A password is needed. Thanks
+
+--- 帖子 #374 ---
+i am using ibfx mini and i don't know what put in take partial profits lots i will use "Lots" with 0.01. What i need to put in take partial profits lots? thanks
+
+--- 帖子 #375 ---
+If you are trading with the minimum lot size allowed by your broker and you enter Lots=.01 in the EA you can enter 0 for Take_Partial_Profit_Lots. You would set Take_Partial_Profit to 0 so the EA would not try and close part of the original order . If you look at the source code these instructions are placed as comments at the top next to the external variables. I have never tried running the EA this way so I am basing my answer on the info provided in the source code.
+
+--- 帖子 #376 ---
+taking half (1/2) of 0.01 lot would be 0.005 and another half is running until stoped out or reaching tp
+
+--- 帖子 #377 ---
+ok. thanks for response. and what about DST? Using IBFX will be necessary change the code to works correctally?
+
+--- 帖子 #378 ---
+The Fozzy EA will continue to work during standard time. The Fozzy EAs use the closing time of the bar on the chart the EA is attached to unless you set Use_00_GMT = true. If GMT is set to true the EA will trade on the close of the daily bar even if the EA is attached to a chart with a different time frame. Setting GMT to true does not mean the EA will trade at 0:00 GMT with most brokers except IBFX. The Use_00_GMT setting only forces the use of the daily bar. So the time that the trades are initiated depends on which broker you use. Since different brokers use different closing times. The broker differences discussed in the main thread apply to the EA. You do not get the same entry signals with a broker like IBFX that has a Sunday daily bar. It distorts the 8 and 8 levels. This can be good or bad depending on your perspective. I use a higher number when I use the EA on IBFX. Try running the EA on 3 demo platforms with different settings and compare the trades with manual a chart from FXDD or another non-Sunday bar broker. You will see what I mean. You can also do this type of test on one platform by creating several copies of the the EA and changing the magic number on each copy. Then applying the different versions to several same-pair charts with different settings each time.
+
+--- 帖子 #379 ---
+Hi, I would like to use Fozzy EA only to take care of my orders after I take them manually (BE, SL, and partial profit). Do you know if it's possible to do that ? thanks Thierry
+
+--- 帖子 #380 ---
+I think you could do most of this without the EA. Enter two orders and manage them differently. To manage a trade with the EA I think you would need to enter the trade with a script so you can assign a magic number that matches the one in the EA. You might get some ideas by reading this thread on managing take profit . The thread has an advanced management EA as well as a entry script in it somewhere.
+
+--- 帖子 #191 ---
+Thanks a lot. Enter the trade with a script is a great idea. I should have thought about it ... I 'll see on that thread if I can find it. thanks Thierry
+
+--- 帖子 #192 ---
+I have attached forward test results of Fozzy 2.2 EA on a FXDD demo account. I used default settings. AUDCAD -134 pips AUDJPY -457 pips AUDNZD +278 pips AUDUSD -542 pips CADJPY -407 pips EURAUD -328 pips EURJPY +117 pips EURUSD -261 pips GBPCHF -969 pips GBPJPY -531 pips GBPUSD -4 pips NZDUSD -38 pips USDCAD -630 pips USDCHF -424 pips USDJPY -12 pips
+
+--- 帖子 #193 ---
+This looks bad default setting here, does anyone have any set files that are working better with the fozzy using target,tp , trailing, you really did differant setting per currency pairs because of differant daily ranges
+
+--- 帖子 #194 ---
+I seriously doubt that anyone has written a 'Fozzy' EA that doesn't have "issues". But because I am NOT an EA kinda guy, I could be very wrong! However, I do know that at least one trader has done TradeStation backtesting and confirmed that this method works nicely using different parameters with different pairs. My suggestion: If you are serious about having and using an EA for this strategy, pay someone to do it for you or learn to write it yourself in MT4. And while you're at it, backtest everything in TS. That should keep you busy for a while............. Personally, I prefer the old fashioned way..........manual trading!
+
+--- 帖子 #195 ---
+Just a few suggestions for Fozzy EA testing and/or editing. Some things to play with for a few dozen hours. Try setting the EA up to only trade with the overall trend. Don't run the EA on pairs that aren't trending. Put 3 or 4 TP levels in your EA. Place a larger SL and TP for pairs that pay high swap in the trending direction. Like GBPJPY. Perform many hours of backtesting by hand to determine the best TP levels for each pair. Test different settings than the 8 and 8 for some pairs. Modify the EA to place BE + a few pips instead of a straight BE. Have a user input SL. Do all the same tests on the 4 hour charts. If you are going to run the EA on smaller time frames you might want to edit the EA to only open trades when a new bar first opens. If you are using a broker with a Sunday bar you may need to alter the settings values and prohibit the EA from taking any trades the first day of the week. After testing the above things on the EA with the original incorrect formula then try it using the correct formula. Then try BB on and off. You can also check out the Fozzy EA on TSD. It is written differently. It does not trade very often. I don't like it as well but you may want to integrate a few parts, or at least try it. There is another EA in another Fozzy thread . Look at the code in all 4 EAs maybe a new idea will hit you. I run 2 of my versions on daily charts and one version on 4 hour charts. Above all learn the manual method in the main thread. Follow the manual method on FXDD each day so you have a base line to evaluate the EA's performance. Make a point to check the EA trades shortly after they are opened. Mark them on the chart. Also mark the point where the trade closes so you can compare the amount of movement for each pair. This also makes it easier to compare the EA's trades with the standard base line trades.
+
+--- 帖子 #196 ---
+Just going to start forward testing n will see what the result looks like. The EA looks cool
+
+--- 帖子 #197 ---
+i am testing with IBFX but with very bad results. Like you said maybe it is necessary to change the code to using it with IBFX. I don't think change RSI and MA period is a corret solution because it will change too much the strategy. i still waiting anyone make a "correct" version to use with IBFX.
+
+--- 帖子 #198 ---
+i want to use the EA on 4h charts. Using gmt 00 true on 4h charts would works correct or not? thanks in advance
+
+--- 帖子 #199 ---
+You have to set GMT to false. When GMT is set to true the EA always trades at the start of a new daily bar regardless of the chart time it is attached to. To trade 4h just attach the EA to a 4 hour chart with GMT=false. I have noticed an occasional problem with 4 hour trading. The EA does not always trade at the beginning of a new bar. I have had it take a trade one way, get stopped out, and then take a trade the other way during the same 4 hour bar. It can also be on two adjoining 4hr bars but less than 4 hours apart. This mainly happens on pairs like GBPJPY. Of course it would depend greatly on the size of your stoploss.
+
+--- 帖子 #200 ---
+Hello, Is anyone still trading with the fozzy EA? Mike
+
+
+===== 附件下载链接 =====
+

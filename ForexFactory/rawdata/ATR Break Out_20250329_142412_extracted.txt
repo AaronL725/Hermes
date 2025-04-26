@@ -1,0 +1,1049 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Attached Image (click to enlarge) RISK WARNING All Expert Advisors (Robots), Indicators, Trading Systems posted by me ​are Trading Tools developed for Experimental purposes. Using any of these tools on a real account carries a high degree of risk. I will not be held responsible for any losses incurred by any one uses these tools. ATR Break Out (ABO) Trading System is an automated trading system (aka EA, bot, robot), that uses Average True Range (ATR) break out as an entry signal in the direction of the break out. ABO is using Pending Stop Orders which are calculated based on ATR parameters at the start of new bar. Un-triggered orders are deleted before placing new orders. ABO robot was born at the Robot Lab Project and moved to this dedicated thread to grow on its own. The system uses ATR multipliers (same concept implemented in Big Candle ) for Break Out, Stop Loss, Take Profit and Trailing Stop. Position Size can be fixed or automatically calculated based on Risk Percentage and Stop Loss for each trade. MACD and RSI filters ( suggested by auvergnat78 ) can be optionally applied. System Inputs : Attached Image (click to enlarge) Note : Default ATR period 50 Sample Test Screen Shot : Attached Image (click to enlarge) Sample Test EUR/USD H1 2015 with default settings. Attached Image (click to enlarge) VERSION CONTROL : Version 4: Post # 1. Version 5 (final): Post # 70 . Version 6 (filters) : Post # 104
+
+--- 帖子 #2 ---
+Nice work Abokwaik!! How can i fix the mismatched chart error? tx S
+
+--- 帖子 #3 ---
+Quick Answer : By Loading better historical data. OK. Few words about back testing. Back Testing is not a proof of profitability It is the first tool I use to validate a new trading idea, and make sure the robot is working as per the rules. A good ROI% vs DD% percentage (i.e 2 and above) is an initial indication that the robot may survive market changing conditions, specially when applied to long period and generated good number of trades (min. 30). The purpose of using Filters is to minimize false signals (loosing trades), it will reduce the number of trades taken. Back Testing Data Quality importance increases for lower time frames and decreases for higher time frames Back Testing can be used to reach settings sets that can be used later on in forward testing or live trading So don't mind the mismatched chart errors. The second testing phase of a robot will be by forward testing it on a demo account. If it performs well for at least 30 trades, only then you may try it on a real account.
+
+--- 帖子 #4 ---
+Hi Abokwaik Thank you for your development of this nice Tool. Can i use it for other pairs? or only EURUSD. Regards
+
+--- 帖子 #5 ---
+Demo Trade Explorer Added using a crazy set on EUR/USD H1
+
+--- 帖子 #6 ---
+Tx Abokwaik but i already downloaded all history available. broker is FXCM . Still mismatch error S
+
+--- 帖子 #7 ---
+trading time is based on broker's time or local time computer?
+
+--- 帖子 #8 ---
+Broker time.My settings for EURUSD is for European session.
+
+--- 帖子 #9 ---
+Nice one just like all of your work. Subscribed.
+
+--- 帖子 #10 ---
+It looks very promising for you. I wish you the best in your forward testing, and hopeful for you that you have created a winner
+
+--- 帖子 #11 ---
+Hi Central, Of course you can use it on other instruments. Its a momentum-based strategy, so it better be used with good-trending instruments. I think it should do will with Gold.
+
+--- 帖子 #12 ---
+If you are interested in back testing data quality you can gooogle it and you'll find many resources about the issue. However spending too much time back testing is not recommended. The system idea is very simple (leaving the filters aside), actually the first version was with no filters. And the settings I am using for forward testing are also with no filters (except trading time). So the system idea is to follow the market in the direction of a Sizable break out based on multiples of average candle size (ATR). Take a look at the current GBP/USD H1 chart, where ATR(50) = 20, and using 2 x ATR for Break Out, 2 x ATR for Stop Loss, and 4 x ATR for Take Profit. Does it make sense ?, if yes, start Forward Testing it on a demo account. Attached Image (click to enlarge)
+
+--- 帖子 #13 ---
+As the trade explorer dosn't show current orders (because no trades closed yet). Here are the pending orders placed at EUR/USD H1 as per "crazy_set". Attached Image (click to enlarge) If no order is not triggered within the hour, the robot will delete the pending orders, and open new ones on the new hour based on the then ATR values. And so on until a pending order is triggered. EDIT: to make it clearer
+
+--- 帖子 #14 ---
+I cant see any open pending trades.
+
+--- 帖子 #15 ---
+a Terminology issue maybe ? When I say order I mean Pending Order . When I say trade I mean Market Order. This system is only using Pending Orders. I the Market comes to us and triggered the Pending Order then it will become a Trade.
+
+--- 帖子 #16 ---
+Yes, sorry for my english, i understood it. Backtesting is working, i can see pending orders, but forward doesn't open any pending orders. Startting hour(0-24) is ok, risk pct is ok. Should i atach atr to screen? I dont think so.
+
+--- 帖子 #17 ---
+I just opened a dummy trade on GPB/USD and closed it with 0 profit, Just to enable the Trade Explorer.
+
+--- 帖子 #18 ---
+Make sure you had enabled "Allow Live Trading". Can you see a Smiley Face beside the EA name on the chart ?
+
+--- 帖子 #19 ---
+Yes, thats fine. I will wait to see if anyone else having same problem. And i attached EA to several pairs. Will see... Thank you.
+
+--- 帖子 #20 ---
+I've noticed that one of the old pending orders was not deleted. I will check that and update.
+
+--- 帖子 #21 ---
+This an update with : Fixed Bug of Pending Order Deletion Position size is calculated based on Free Margin instead of Account Balance.
+
+--- 帖子 #22 ---
+Subscribed EA attached to 5 charts on my vps TF H1, GA, EA, AU, GU, EU Current Order http://prntscr.com/8sv3ho
+
+--- 帖子 #23 ---
+In order to catch more trades, I have attached the robot to GBP/USD M30 and GOLD M15 with the same "crazy settings" used for EUR/USD H1.
+
+--- 帖子 #24 ---
+Is it correct? I have oppened 6 pairs and only 1 waiting order Is it looks ok? Attached Image (click to enlarge) or i should change timeframe?
+
+--- 帖子 #25 ---
+Did you enable any FILTERS ?
+
+--- 帖子 #26 ---
+A great work! How many trades on average one can expect from this EA to open per day?
+
+--- 帖子 #27 ---
+After 1h waiting, there are 6 waiting orders Attached Image (click to enlarge)
+
+--- 帖子 #28 ---
+No, it is not related to 1h waiting, it depends on which filters (MACD, RSI) you have enabled. If you use the default inputs that came with the ABO then RSI is already enabled, which is OK. For this reason you have ONLY one pending order per pair (not 2 as in my Trade explorer, because I disabled (ignored) all filter in my crazy settings). Enjoy the ride.
+
+--- 帖子 #29 ---
+I put settings normal, i didnt change anything, i just drag and put into chart your strategy robot. Cheers, Thanks.
+
+--- 帖子 #30 ---
+It depends on pair volatility for the day. AND the Time Frame used. AND the ATR multiplier used. So for example if you are using H4 and set ATR multiplier to 3 you can hardly get one trade per week. While if yor use M5 and set ATR multiplier to 3 you'll probably get 5 trades a day. As you can see from the attached Trade Explorer Gold - M15 triggered 2 orders (as I am using multiple orders per pair). While EUR H1 and GBP M30 didn't trigger any order yet.
+
+--- 帖子 #31 ---
+Think clearly Abok, your backtest covers only a short period where the EUR/USD demonstrated excellent conditions for momentum strategies. For a more rigorous test, consider testing over a longer period of time and over a wider range of instruments.
+
+--- 帖子 #32 ---
+Thanks for your input. This why I use ATR and not Fixed Number of Pips. :nerd:
+
+--- 帖子 #33 ---
+Whats the point of altering the strategy to fit different instruments? Why not fix your granularity?
+
+--- 帖子 #34 ---
+All instruments are using the same settings (check post # 23). i.e. with Multiple Orders set to 99 (abo_crazy_set attached to post # 5) I just used different time frames for different pairs as we are Forward Testing the system.
+
+--- 帖子 #35 ---
+Yes, my point is that its essentially a different strategy when you do that. So, why use a different 'time frame' for different pairs? Hmm, why forward test? Its just like backtesting except that you're forcing yourself to wait for the data. Forgive my questioning, but what does this mean?
+
+--- 帖子 #36 ---
+For Fun I have so much free time I don't know what to do .... It means I think this clearly answers all your questions
+
+--- 帖子 #37 ---
+Yup, it all makes sense now.
+
+--- 帖子 #38 ---
++++++++++++++++++++++++++++++++++++++++++++++++++++ I'm IN! If I can't have fun with life, I'm not awake.
+
+--- 帖子 #39 ---
+OK Atkoys. Reading your last post, I assume you were serious. If so, I am sorry for my impatience. Your Question : Yes, my point is that its essentially a different strategy when you do that. So, why use a different 'time frame' for different pairs? Market is of fractal nature. So in principle if a system works on a certain time frame, it should work on others, provided that transaction cost doesn't become an issue. Your Question : Hmm, why forward test? Its just like backtesting except that you're forcing yourself to wait for the data. Forward Testing a New System (Specially an EA) on Demo is ESSENTIAL in my opinion before going Real: It will reveal any bugs not discovered in back testing. It will give you a feel how the system will work on a real account, specially the WAITING issue Accuracy will be much better than back testing Your question about (Multiple Orders set to 99 (abo_crazy_set attached to post # 5) If your're inquiring about 99 orders: The EA has in input for Maximum Allowed Orders, so I set it to the Maximum which is 99 trades active at one time. If your're asking about the set file it self: It is a setting file that is used with the EA Linked to the explorer, so that everyone knows my settings. The "crazy" name, is just a name. I used "crazy" as it will open multiple orders simultaneously. ​Regards
+
+--- 帖子 #40 ---
+That is obvious and an easy conclusion to arrive at but few people realise that the higher fractal dimensions lead the lower ones. When you scale your system down a 'time frame' you are simply reducing the amount of data required for a trigger while increasing the granularity. Actually no. Thats only a myth. The only kind of 'forward testing' that is notably different from plain old backtesting is walk-forward analysis. The kind of forward testing that you allude to is simply akin to performing a backtest limited to only recent data. This defeats the purpose of testing a system for robustness. Thats quite disconcerting.
+
+--- 帖子 #41 ---
+For last 11 hr, Robot has opened a lot Order but deleted all, no order trigger so far and below is SS for cancelled orders. http://prntscr.com/8t22ui
+
+--- 帖子 #42 ---
+[quote=Atokys;8547826]{quote} {quote} Actually no. Thats only a myth. how ?? It will reveal any bugs not discovered in back testing. It will give you a feel how the system will work on a real account, specially the WAITING issue Accuracy will be much better than back testing
+
+--- 帖子 #43 ---
+Can you post your settings and time frame used ?
+
+--- 帖子 #44 ---
+I am using default setting and H1 tf.
+
+--- 帖子 #45 ---
+In default settings the Break Out ATR Multiplier = 3 and RSI Filter = 1 (yes) So you will not get signals very often. I even use Break Out ATR Multiplier = 2 and RSI Filter = 0 (ignore) on EUR/USD H1 and I didn't get any signal yet. Default settings could fire most probably at Red News time. So my suggestion is to loosen the settings a little bit if you want to get more signals. However, look at my explorer where I used ABO on Gold M15 ---&gt; many false signals in a range market.
+
+--- 帖子 #46 ---
+OK, thank you, I got a SL hit on gbpusd buy
+
+--- 帖子 #47 ---
+ABR (with my settings i.e : SL@4 , TS@6 , TP@20 with multiple orders) is a compounding trend following system, it will suffer many small losses before catching a trend, and when it does, few winners should be able to recover from previous losses and add to equity.
+
+--- 帖子 #48 ---
+you must post a screen shot for your setting both aggressive and normal
+
+--- 帖子 #49 ---
+Normal Settings (used in back tests) Attached Image (click to enlarge) Aggressive Settings (used in forward test) Attached Image (click to enlarge)
+
+--- 帖子 #50 ---
+Result from yesterday: -50 pips USDCAD -50 pips GBPUSD
+
+--- 帖子 #51 ---
+I do not recommend this strategy. It takes only looses after couple of days.. noone was on profit. sorry
+
+--- 帖子 #52 ---
+Great day today with ATR-Breakout Aggressive mode $600 close profit $870 floating profit Update - If trade management features may added to EA. Keep up the good work !!!
+
+--- 帖子 #53 ---
+Closed all positions "manually" for end of week. 15% return in 1st week with 7% max dd. More analysis of robot performance tomorrow. Have a nice weekend.
+
+--- 帖子 #54 ---
+Hi abokwaik, how many pairs are you testing with the aggressive mode? Thanks
+
+--- 帖子 #55 ---
+EUR/USD, GBP/USD, USD/JPY, USD/CAD, Gold. I removed GBP/JPY after one trade. I am gonna do some changes on the pairs traded for next week.
+
+--- 帖子 #56 ---
+Hi, Are there any settings that are somewhere in between the aggressive and default settings? Something that will trade moderately but without waiting long between trades? Thanks.
+
+--- 帖子 #57 ---
+Hi Reamasesa, My problem is that I don't have much time to do all types of testing, this is why I share my ideas and EAs here at FF so that the people who have some free time and resources do the testing and share their findings.
+
+--- 帖子 #58 ---
+Hi, Thanks for replying. I know but I'm pretty new to ATR so I'm not sure where to begin or should I just play with the ATR values and hope for the best. Thanks again.
+
+--- 帖子 #59 ---
+ATR Multipliers, Follow Last Bar Direction, MACD and RSI filter will affect the results. In addition to Trading Time and Max Orders. So you can try out different settings for these parameters of different pairs and time frames.
+
+--- 帖子 #60 ---
+Hi .I have been reading your few ea's all looks good .Could you please add external parameters to have Minimum Lock profit = X Pips and once profit pips are locks so that we should not have some pips in profit better then loss. trailing should activate too say example I would say when in profit 20 Pips Minimum lock profit should be 2 pips and when we cross like 30 pips trailing should activate in step after minimum is lock . Just and idea to save your profit when in possitive .Thanks
+
+--- 帖子 #61 ---
+Thank you redrose, I can include break even stop, however Trailing Stop can achieve the same effect of BE, for now. As for using pips, I prefer using ATR multiples instead of pips as : 1- range for each pair is different (and most probably we will have a multi-pair version in one EA later on) 2- position is calculated based on SL and Risk percentage, so Pips Value for each trade is not the same. I prefer using an option to close at certain increase/decrease percentage in equity instead, what do you think ?
+
+--- 帖子 #62 ---
+Gold was the biggest loser last week and cost ABO 15% loss (half of its returns). Remember, I am trading all instruments with the same settings, which is not suitable for real life. But looking at the Gold M30 chart traded by ABO, it will be hard to trade it even with different settings. As I mentioned earlier, ABO is a trend following system, and it will suffer heavily in range market as we had with Gold last week. Attached Image (click to enlarge)
+
+--- 帖子 #63 ---
+First I would like to thank : the members who had provided valuable feedback on their back and forward testing, specially : imifx , Kubiasty . and the members who expressed their views or requested modification on the EA, including damonl , Atokys , redrose . However, I can see hundreds of EA downloads but with no input . for example : Did anyone forward test on lower time frames (m1 or m5), scalping kind of technique ? or on H4 for a more reliable break out ? Exotic pairs ? ... etc. I hope you can share your experience and thoughts about this EA, in order to continue the development.
+
+--- 帖子 #64 ---
+Hi Khalil, I am running ABO_05 on M5 charts of EU, UJ, AU, UC, AC, CJ, EG, EJ, Gold and UC. I'll post the results at the end of the next week here. Best, Math
+
+--- 帖子 #65 ---
+Great MT7
+
+--- 帖子 #66 ---
+I am thinking to test on H4 for crazy pairs like gbpnzd, eurnzd, usdzar, eursek
+
+--- 帖子 #67 ---
+Hi Thanks for your quick response and reply . I agree with you as i can suggest use to use as percentage profit can be good too i am not so good in Atr as do not use much but i see many of your good ea's cant be ignored just need something like to protect profit against losses as sometime you can make profit but due to news you can loose money when atr might act slower then price action so here it can help you to be sure that you are safe and still have some profit to grow your equity .Just a suggestion from my past experience .Thanks
+
+--- 帖子 #68 ---
+Hey abokwaik: You will find that many people will not say anything, and just take it and run. I merely found the idea interesting, but did not actually download it myself at this time. Mainly, because I would not have time to give it the time it needs to give you proper feedback. If I did have the extra time, I most certain will in the future. I know that testing EA's can be an endless job without help, and so I hope that you get the feedback you are looking for. Taking on something else right now, would just spread me too thin. I hope that you can understand. Who knows.. things can also change really fast, sometimes
+
+--- 帖子 #69 ---
+I am looking to start this Ea by next week on CFDS like DAX FTSE CAC HKI NIKKEI and will try to update the result and maximum support in coming week .With this logic i think another possible is to use Line fractal to do as trailing but with X pips break to confirm the breakout is not false breakout .Will try to collect some idea on trading breakouts .
+
+--- 帖子 #70 ---
+ABO_05 : Update - Bug : EA is opening orders only if total orders ( per account ) is less than max orders - Fixed : EA will open orders only if total orders ( per EA instance) is less than max orders Sorry for any inconvenience ...
+
+--- 帖子 #71 ---
+Hi Khalil,I have started forward testing on a new demo account. I will provide update as the trades progress. Can you please add breakeven option? BE+ x pips at a definable ATR level is a good alternative that you might consider.Cheers.
+
+--- 帖子 #72 ---
+OK. Until BE is added you can use Trailing Stop instead. Have a profitable week
+
+--- 帖子 #73 ---
+i did tried on ENC account, sometimes the Pending order will be execute at 40 pips diff (because of news)... should we incorporate news filter and enter at market order instead placing PO thanks
+
+--- 帖子 #74 ---
+http://www.forexfactory.com/imifx#acct.88 21% gain one week.......
+
+--- 帖子 #75 ---
+Again Euro is doing great and Gold is a looser.
+
+--- 帖子 #76 ---
+This is an EA that will close all account orders at certain profit % or amount. Inputs : Profit to Equity = 0.15 (15%) , to Disable set to 0 Profit Amount = 1500, to Disable set to 0 This EA should be used on a separate chart (one chart). I will be using this along with ABO for now.
+
+--- 帖子 #77 ---
+hi Abokwaik, I made some tests on ABO05 and it seems Macd histo and Rsi options don't work correctly. In fact, the target is to let Ea send buy order only when Macd histo is &gt;0 AND Rsi is getting out of oversold zone (&lt;30 last bar and &gt;30 current bar closed) Vice versa for sell order (macs histo &lt;0 AND Rsi out of overbought zone (&gt;70 last bar and &lt;70 current closed bar). So this is cumulative conditions... I hope this is more clear now, Thanks for yours corrections. Tof
+
+--- 帖子 #78 ---
+Hi auvergnat, Nice to see you here Currently MACD and RSI filters apply to placing pending orders as follows: - MACD &gt; 0 for buy stop, and &lt; 0 for sell stop - RSI &gt; 50 and &lt;70 for buy stop, and RSI &lt; 50 and &gt; 30 for sell stop. So MACD agrees with your requirement, but RSI doesn't. If we limit RSI to only cross of 30 or 70 levels, I think we will have very few signals. One IMPORTANT thing to clarify regrading the MACD and RSI filters : When you suggested these filters, did you mean for placing PENDING Orders or MARKET Orders ?
+
+--- 帖子 #79 ---
+Would it be reasonable to apply RSI and/or MACD on time frames higher than the traded time frame ? For example : ABO is attached to M15 chart, and will place buy orders only of RSI on Daily is &gt; 50 and/or MACD on Daily &gt; 0.
+
+--- 帖子 #80 ---
+Hi I tried for three days on demo account on dax it says invalid stoploss or tp can you post get the mq4 so can add something for cfds after monitoring
+
+--- 帖子 #81 ---
+MACD and RSI filters : - No different TF but if you want to add option, why not ! And pending orders like now, we should have some order on 5M TF with a low ATR multiple of 0,5 for entry (3 for SL, 12 for TP and 6 TS for example).
+
+--- 帖子 #82 ---
+1- So filters will apply to Pending Orders (not Market Orders). 2- using a low ATR (0.5) will simply destroy the robot idea (ATR break out), so basically it will be a MACD or RSI robot instead ... isn't it ?
+
+--- 帖子 #83 ---
+Hi Khalil,Thanks for the Close EA. I suspect there is a bug in the EA. When profit jumped beyond the set %, the EA did not close the trades. Please check. Please add stop loss and breakeven profit to the EA (oliver twist).Regards.
+
+--- 帖子 #84 ---
+You're welcome. The EA is working fine. Just make sure of the following: - EA is enabled. - Profit Percentage is entered in 0.00 notation, (i.e. 5% should be entered as 0.05 not 5 ), and this will be the percentage of dividing current profit by current equity. Note that percentage and profit are disabled if set to 0 or less. As for your request of stop loss and break even, I will add it.
+
+--- 帖子 #85 ---
+1. OK 2. not really destroying ATR ideas cause SL/TP/TS are based on ATR. And I am not locked on 0.5 ATR mutliple, we will see later by testing multiples configurations on ATR and on others paramters once you make modifications tof
+
+--- 帖子 #86 ---
+abokwaik Currency you use the same parameters tested it? Load cycle? I also tested the next, I think very good.
+
+--- 帖子 #87 ---
+Hi Khalil, I am testing it on M15 since couple of days. Looking good so far. Will update once i have 2 weeks of forward test results. Thanks a lot for all the work you have done to help others. You have a big heart.. Bluejack..
+
+--- 帖子 #88 ---
+Hello, can anyone share a good set file for this EA please, I'm willing to run a foreword test
+
+--- 帖子 #89 ---
+Created TE for ATR Breakout Ea today. Didn't do great on first day but shall see after few weeks. Thanks again for sharing your work with us.
+
+--- 帖子 #90 ---
+30% today itself ......... I wish if its my real account Closed 10% profit by EA now total return 49%
+
+--- 帖子 #91 ---
+Hi Abokwaik, I don't understand why no pending orders are sent even with no filters. If i understood the system well, each candle a pending order should be sent and cancelled at the next candle. Then a new order etc.... Am i right? tx S
+
+--- 帖子 #92 ---
+Hi All, really dumb question - but do i need to load the indicators for this EA to work?
+
+--- 帖子 #93 ---
+30% today itself imifx could you add complete set file for all currencies and tf .Thanks
+
+--- 帖子 #94 ---
+These are my current settings used since Monday on M15, 9 pairs : EURUSD, GBPUSD, USDCAD, EURAUD, GBPAUD, EURCAD, GBPCAD, EURJPY. Attached Image (click to enlarge)
+
+--- 帖子 #95 ---
+No indicators are needed to be loaded on to the chart. The EA calls the indicators and apply the settings set in the EA inputs INTERNALLY.
+
+--- 帖子 #96 ---
+Strange Make sure Auto Trading is Enabled, you should see a Smiley face on the right side of EA name on the chart. Attached Image Check also the "Experts" Tab for any errors. Attached Image (click to enlarge)
+
+--- 帖子 #97 ---
+After 10 days of forward testing, my main observation is : the EA does best on High Impact News. This is completely logical, as most probably the break out takes place at news time. So to better test the concept , I am going to activate the EA at news time , on a small time frame M1 or M5 on the pairs affected by the news, with Maximum Orders input set to 3.
+
+--- 帖子 #98 ---
+same observation
+
+--- 帖子 #99 ---
+using aggressive setting check the link below and TF is H1 for gold using M15 tf http://www.forexfactory.com/showthre...88#post8549288
+
+--- 帖子 #100 ---
+One more idea came to me last night : Focus on one pair, Attach the EA to multiple time frames for the same pair (use different Magic Numbers), lets say M5, M15, H1, H4 (with different ATR multiplier settings suitable for each time frame, e.g 3 on M5, 2.5 on M15, 2 on H1, 1.5 on H4) The break out will first hit M5, if Valid, it will continue to M15, if valid it will continue to H1 ... and so on. (Chain Reaction).
+
+--- 帖子 #101 ---
+helloYes there is the sling face and no errorVery strangeS
+
+--- 帖子 #102 ---
+I am testing this on the following pairs on M15 GU AU EJ GA GN EU AN UC UJ Do i need a different magic number for each currency pair?
+
+--- 帖子 #103 ---
+No. You need different Magic numbers ONLY if you run multiple instances of the EA on the same pair.
+
+--- 帖子 #104 ---
+This is a special version for you auvergnat Kindly test and report your views. Attached Image (click to enlarge) New input in red squares.
+
+--- 帖子 #105 ---
+Thanks Abokwaik, i finally realised i had to set Max orders to be at least equal to the number of pairs i am trading, keeping it on 1 - means only one will be open even though i loaded it on 9 pairs
+
+--- 帖子 #106 ---
+This bug was fixed earlier. Please check post # 70 . and Download it from there.
+
+--- 帖子 #107 ---
+Hi abokwaik and Imifx according to your set file and your statement do you close it manually or just run it and leave it to close according to your settings with out manual attempt and according to your open positions lot size on each currency are not same so could you please advise how did you calculate lot size on each currency pair .Thanks
+
+--- 帖子 #108 ---
+Hello Abokwaik, Can you confirme that I should have pending orders on each pair the expert is attached? If yes i have a problem. tx S
+
+--- 帖子 #109 ---
+Cool, Abokwaik, I will test it this weekend. You confirm me that MACD and RSI option are cumulative now (if macd and rsi filters are on yes, buy order is only possible if macd h&gt;0 and Rsi oversold) ? thks for your reply; Tof
+
+--- 帖子 #110 ---
+Yes. And if you want only the level cross you enable the option as well.
+
+--- 帖子 #111 ---
+You're doing very well imifx. But don't rush things. I am waiting to see the worst of this EA. Testing period is still very short and not enough to make any judgement yet.PS: I added your trade explorer to the thread. I hope you don't mind.
+
+--- 帖子 #112 ---
+Please, whats wrong?
+
+--- 帖子 #113 ---
+Did you manually delete some of the pending orders?
+
+--- 帖子 #114 ---
+I have the same problem
+
+--- 帖子 #115 ---
+No, haven't touched it....
+
+--- 帖子 #116 ---
+Abokwaik I noticed that if max order is for the whole portfolio, am i right? That means that if i have the robot running on 2 pairs and max order=1 on each, it won't open orders on both pairs. S
+
+--- 帖子 #117 ---
+Im using version 5 as well on build 890 if my max orders is 1 then it will only set pending orders on one pair...
+
+--- 帖子 #118 ---
+I am not in rush Khalil, I only invest my time with logical ideas, so far i loved ATR Breakout. I dnt mind at all
+
+--- 帖子 #119 ---
+Added 5 most volatile pairs as they dnt need news events to move....... TF H1 due to their volatility initial phase Attached Image Also, i am attaching the .set file as few members asked to share before. Please change the file name to ATR.set (changed as .xls as ff browser not allowing to attach .set file)
+
+--- 帖子 #120 ---
+Have a look !!! Total number of orders opened in 9 days - 6124 Total number of closed trades - 32 (almost 50% return) Attaching closed trades summary in spreadsheet if you want to give it a minute.
+
+--- 帖子 #121 ---
+What are your settings and Pairs/TF?
+
+--- 帖子 #122 ---
+[quote=imifx;8566384]Have a look !!! Total number of orders opened in 9 days - 6124 Total number of closed trades - 32 (almost 50% return) Attaching closed trades summary in spreadsheet if you want to give it a minute. {file}[/quI dont unerstand why you dont trade not only eur pairs.The rest are loosers
+
+--- 帖子 #123 ---
+Good! 01-01-15 -- 23-10-15 Attached Image (click to enlarge)
+
+--- 帖子 #124 ---
+I tried to test Eu h1 since 2007 and it seems to me that with this setting gains with little DD Good EA!!!
+
+--- 帖子 #125 ---
+Live account is in losses i am testing with capital 50$ ICMARKET from yesterday lot 0.01 fix lot so now -10$ closed position down 20% let us see if it blows the live account or make money will update tomorrow afternoon started this ea yesterday.
+
+--- 帖子 #126 ---
+make sure you are using right setting and right pairs.
+
+--- 帖子 #127 ---
+Aggressive setting http://www.forexfactory.com/showthre...88#post8549288
+
+--- 帖子 #128 ---
+[quote=Giannigr;8566409] If you are aware euro pairs are most volatile pairs for last two weeks, First week Mr. Daraghi push it down and 2nd week was for FOMC, so far breakout is easy for euro pairs as its moving in one direction (downtrend). why i am not using only euro pairs ? market condition not always same and we are in testing phase so all pairs need to workout.
+
+--- 帖子 #129 ---
+Hi Imifx make sure you are using right setting and right pairs.// I am using same set file as Post 94 and same currencies same set TF 15 M
+
+--- 帖子 #130 ---
+After closing all orders is set automated trading on the red?
+
+--- 帖子 #131 ---
+Another loss this moning 8 $ Now equity balance is 24 $ - nearly 50% On ic market
+
+--- 帖子 #132 ---
+nice results guys. I am going to put the EA next week on two accounts with different settings on my vps.
+
+--- 帖子 #133 ---
+Here is the result of trading on M5 charts.
+
+--- 帖子 #134 ---
+I think on M5 needs different settings not like the one provided by Khalil
+
+--- 帖子 #135 ---
+Imifx I need some clarification; do you close some of your trades manually or by the EA. Moreover, what is the settings for Gold. I suggest to add silver to your trades, since it goes mostly with gold. Thanks sir.
+
+--- 帖子 #136 ---
+Hello, from yesterday i m using EA for close profit at xxx% profit so EA close once profit reach 10%. For Gold, I am using M15 TF and aggressive setting.
+
+--- 帖子 #137 ---
+Can you please share the settings for this test. Thanks very much
+
+--- 帖子 #138 ---
+Great. Thanks very much.
+
+--- 帖子 #139 ---
+Hi It has covered some losses with 15% profit. My suggestion is to use with profit ea on IC MARKET now loss is -7$ so hope next week it covers and start showing profit running on live account with same setting provided as post 94 15 M same currencies but fix lot 0.01
+
+--- 帖子 #140 ---
+using what settings?
+
+--- 帖子 #141 ---
+Here is my result with H1 Aggressive. I am going to add one more for M5 aggressive next week. I have TE Public demo account anyway so anyone can have a look anytime -AK
+
+--- 帖子 #142 ---
+Thank you all, Regarding ABO @ M5 TF, This should be applied to News time only, with Multiple Orders (Max Orders &gt; 1) and Guarded by a "Close All at proft/loss" Management EA. My 2 cents.
+
+--- 帖子 #143 ---
+Hi paolosurf, It looks nice on the Equity Graph, HOWEVER 137% compunding ROI over 8 years is a meager return. I am sure there is room to improve. Thanks,
+
+--- 帖子 #144 ---
+Hi Khalil, I analyzed the results, and found out that it works the best in trending days. As you mentioned, since we do not know which days market would be trending, it may work the best around news times. Best, Math
+
+--- 帖子 #145 ---
+Hi imifx, Regarding the HUGE number of pending orders, I can find a solution for that by modifying the pending order prices instead of deleting and re-creating, coming in next release. All the best, PS:However, by implementing this solution the Lot Size for SUCH orders will be the same (i.e. not re-calculated at each bar close). Because its not allowed to modify the lot size for a pending order.
+
+--- 帖子 #146 ---
+I really appreciate your support here Math.
+
+--- 帖子 #147 ---
+After what I witnessed yesterday (Friday), where the account rose up to over 30% and finally close at 22% return, it become Essential to implement a profit/loss closing functionality on the basket level.
+
+--- 帖子 #148 ---
+What about a virtual trailing stop on the basket profit? For example, after 10% the EA triggers the virtual trailing stop, if the net profit backs to 5%, it closes the basket, if the net profit goes to 15%, it moves the virtual trailing stop to 10% and so on?
+
+--- 帖子 #149 ---
+You're welcome! :-) Just wanted to add that Gold and USDCHF were the biggest losers . And statistically the trades took around 8 GMT0 where mostly winners.
+
+--- 帖子 #150 ---
+I have a question I answered interference . We must use the version you and me and my partner to get out okay .
+
+--- 帖子 #151 ---
+Hi abokwaik When I make backtesting with set from first post ABO 04 picture with ATR 50 on TF H1 EU), I can't have same results beteween ABO 05 (high profit factor) and ABO 06 (low profit factor). Macd is not active (0=ignore) but RSI is active (1=yes). Can you watch why this two bots don't make identical results with same set ? Tof
+
+--- 帖子 #152 ---
+As I explained in post #78 , Version 5 use of RSI was to buy when RSI &gt; 50 and &lt;70, and sell when RSI is &lt;50 and &gt;30. While in Version 6, I changed it as per your request "Rsi is getting out of oversold zone (&lt;30 last bar and &gt;30 current bar closed) Vice versa for sell order" as in post # 77 . May I ask which setting are you using in Version 6 for : - RSI Upper Level - RSI Lower Level - Use Only Cross of Level (True/False)
+
+--- 帖子 #153 ---
+- RSI Upper Level :70 - RSI Lower Level :30 - Use Only Cross of Level (True/False) False Thks for your last post which clarify me rsi rules on ABO 06. Unfortunetly, I did not find any good results on ABO 06 with macd / rsi options... Tof
+
+--- 帖子 #154 ---
+That is OK auvergnat, Next, I am going to prepare a Lighter version (by removing these filters), and Adding Basket SL, and Profit Trailing. Wish you an all members a very profitable week.
+
+--- 帖子 #155 ---
+Hello, I just start a trading Exp. http://www.forexfactory.com/stoook#acct.08 with aggressive settings. however, i put abokwaik EA for closing at profit. My pairs are EU,GU,UJ,EJ,AU,UC,EG,GJ,NU with max lot of 0.5 lot. and starting balance of 1000
+
+--- 帖子 #156 ---
+Unbelievable ... running profits reached about 12%, but now down to less than 2% since I forgot to attach the close_at_profit EA. Again it is essential to add this feature to ABO in order to benefit from such volatile moments.
+
+--- 帖子 #157 ---
+how do you attach close at profit without removing abo ? i've tried throwing it on chart but it is removing the other one
+
+--- 帖子 #158 ---
+Attach it to a new chart.
+
+--- 帖子 #159 ---
+I have attathhed closed at profit with 10% now again in losses yesterday on live account for IC market currently -18 $ with 0.01 lot yesterday had losses again so the ea is going bunjee jump but since running live it is in negative have not made any profit yet .
+
+--- 帖子 #160 ---
+This is an update of the close_at_profit EA, posted earlier. Some members reported a bugs, but I couldn't catch it at that time. I fixed a similar issue raised on another thread, and applied the same solution her. So this version of the EA should be able to close all orders without a problem. All the best
+
+--- 帖子 #161 ---
+hello abokwaik, I have seen in your TE that there is so many orders opens are you using different time frame? My TE did not open any today and GU and EG from yesterday.
+
+--- 帖子 #162 ---
+I am using M15 since last week, with 3 max orders. We are in a testing phase so I am trying different setups.
+
+--- 帖子 #163 ---
+wow great set up. do you use aggressive settings?
+
+--- 帖子 #164 ---
+ABO back on track, after yesterday's choppy market. I set close_at_profit @ $3,000. And had just close all open positions.
+
+--- 帖子 #165 ---
+Not Exactly. This is the setup I used since yesterday, on M15. Dangerous in Ranging markets though. Attached Image (click to enlarge) Exact Settings on all these pairs: Attached Image (click to enlarge)
+
+--- 帖子 #166 ---
+when we will get this new release?
+
+--- 帖子 #167 ---
+[quote = abokwaik; 8572385] Ide o aktualizácie close_at_profit EA, vytvorené skôr. Niektorí členovia ohlásil chýb, ale nemohol som to chytiť v tej dobe. Opravil som podobný problém zvýšený na inom vlákne, a aplikuje rovnaké riešenie ju. Takže táto verzia EA by mal byť schopný zatvoriť všetky objednávky bez problémov. Všetko najlepšie {file} [/ quote] I would welcome closer, which has only one variable = account balance. After reaching this state enters the default profile.
+
+--- 帖子 #168 ---
+It is not a new release. I just removed the filters, which you already can disable them, resulting the same functionality. I didn't even change the version. Here it is.
+
+--- 帖子 #169 ---
+Few Comments about ATR Break Out System: Depending on which time frame you deploy ABO on, and which settings you use, the system can serve: Scalping Swing Trading Medium to Long Term Trading. Due to false break outs the system will suffer many small consecutive losses in a ranging market When the system catches a valid break out, it can compensate for all previous small losses, plus profit. When Max Orders is used, the system can compound positions. Currently in both directions based on signals (I am studying this and might add an option to trade in one direction until stopped or closed at profit) Trades on USDCAD, this week (Monday and Tuesday): Attached Image (click to enlarge)
+
+--- 帖子 #170 ---
+Hi Mate, do you are using 15 mins tf instead of 1 hour anymore?
+
+--- 帖子 #171 ---
+is it possible to put all currency's in one EA so instead of attaching each time on each chart we can attached it in one chart let say m15 and we set all parameters then the EA reads all charts based on M15 or H1 depending on the first chart. And also we can defined the currencies. This come up in my mind. Thanks
+
+--- 帖子 #172 ---
+Yes, I am using M15. This will allow for more trades, although a bit risky because of more fake signals. The system allows for different trading scenarios as I highlighted before. It would be nice if each tester used different settings in order to better evaluate the performance of the EA. One testing approach I highlighted before regarding hot news trading, I don't know if any one tried it yet. It goes as follows: 1. Pick the pair that you think will be most affected by the news. 2. Disable Auto Trading. 3. Setup the EA on M5, M15,M30 chart for that pair, with max orders 3 or more. 3. Attach the close_at_profit EA on another chart, with set profit target. 3. Activate Trading. We have Red news on GBP within 3 hours from now. If I am available at that time I will try it.
+
+--- 帖子 #173 ---
+It came up to my mind also, StOoOk, and I will do it.
+
+--- 帖子 #174 ---
+Thanks abokwaik
+
+--- 帖子 #175 ---
+Thx for this great EA. Testing it in 5 min and getting good results with the following set: My history tick data is not top notch, but seems good on GU, EU, AU, AJ, EJ, EG, so far...
+
+--- 帖子 #176 ---
+You're Welcome pd9000, One note about your settings is that Trailing Stop is small compared to Break Out and ultimate Take Profit. I prefer Trailing stop to be at least equal to Break Out, if not more, specially on small time frames like M5. All the best.
+
+--- 帖子 #177 ---
+Hi Update live account on ICmarket started 50$ last week now -39$ nearly marjin call let us see how it will recover on 15 M setup same as post 94 with same currencies etc.. Pforit 10% ea attatched one week nearly finish on live account .So will see if it can recover but looks need more improvement .will update again tomorrow .
+
+--- 帖子 #178 ---
+More often than not I would agree, and you most likely you're right. Still my testing gives me slightly more profit and less DD with a somewhat tight TS. The reason beeing that a small trailing stop will of course more often close positions in the money. A break even stop as an addition could perhaps secure more positions, and still give them the necessary ropes to run as far as possible. Again, great work
+
+--- 帖子 #179 ---
+today i have set new account and trade all Currency exept CHF pairs. M15 and risk is 3% with abokwik settings for M15 http://www.forexfactory.com/stoook#acct.33 account went up to 10% in 5 hours and close manually to with profit 8%. aboKwaik, I have realized that close at profit des not work proparly meaning if the start balance is let say 1000 and you have set the take profit to $100 and some of Currencies hit SL and the balance went to $900 after hitting 100$ it will close all position which is $1000 again. i think each time the balance going down the ea looks to the new balance not the initial balance. Thanks
+
+--- 帖子 #180 ---
+You are absolutely right. One solution I can think of right now is to close all positions when Equity reaches a specific amount in money. Another solution would be to not set a Stop Loss, and add a close at a Loss Amount or a Loss Percentage on the close_at_profit EA, or as part of ABO itself. I will try to include these as options in next version. I really appreciate your comments StOoOk
+
+--- 帖子 #181 ---
+abokwaik &amp; St0o0k, This EA is closing all open trades when EquityAmount set is reached. Hope it helps.
+
+--- 帖子 #182 ---
+Thanks very much. I will give it a try.
+
+--- 帖子 #183 ---
+Well thank you. Then stops automated trading?
+
+--- 帖子 #184 ---
+dokopy, If you didn't change the Equity balance to a higher amount after it closes at your desired set Equity Balance, it will close trades opened . The logic is that you have reached your target !
+
+--- 帖子 #185 ---
+Today had to stop the ea because all losses on ICMARKET LIVE ACCOUNT นื 50USD with 0.01 lot same sttings and timeframe as post 94 so now this ea will need more room to improve i am running demo for cfds indexes on icmarket with 3000$ it is up and down nothing much yet but what i see the ea needs to rest like if today is in profit go to sllep next 6 hours etc.. as if you keep on opening on breakout will end losses in long run because i have similar ea using breakout and support ressistance long term is not good but never tried on multiple currencies will upload and see with my ea on multiple currencies may be will survive .Thanks for this ea and the test v 05 is over for me .Their is some scope but need something more to use in this but will start version 6 now on demo for one month Thanks
+
+--- 帖子 #186 ---
+The best would be if EA has changed the profile to another. For example, default.
+
+--- 帖子 #187 ---
+Check this out 48.5% in two days. really amazing. run on 21 TFs with out CHF pairs 15M with 3% risk http://www.forexfactory.com/stoook#acct.33 similar to Mr. AboKwaik setting. Thanks a lot Mr. Khalil. شكرا جزيلا على ما تقدمه لنا
+
+--- 帖子 #188 ---
+i do not think so, you said you run it on $50. give it a try on 1000$ and you can see the difference
+
+--- 帖子 #189 ---
+how do i install this?
+
+--- 帖子 #190 ---
+what is the setting?
+
+--- 帖子 #191 ---
+Look/read the post again!!!:nerd:...
+
+--- 帖子 #192 ---
+Guys, It might be a silly question but I need to know how I get the actual drawdown because the trade explorer here in FF is not accurate in this matter. Thanks.
+
+--- 帖子 #193 ---
+Try myfxbook
+
+--- 帖子 #194 ---
+thanks very much
+
+--- 帖子 #195 ---
+https://www.myfxbook.com/members/Jmd...essive/1418630
+
+--- 帖子 #196 ---
+Thank you all for efforts on this EA. Thought I'd post my best test results so far just in case anyone is interested. I noticed in playing with the trading window that this EA doesn't really like the beginning of the London session. That's if I'm reading these times correctly. I'm using AB0_v6. If I'm right then 13-23 is two hours into the London session. this test is EU from the start of 2015, 15-min TF. Thank you all, again. Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #197 ---
+Hi, Anyone can help with the hours trade? from what Euro opens to NY closes?
+
+--- 帖子 #198 ---
+basically the times in abo is the broker time. Where you can find it in your market watch
+
+--- 帖子 #199 ---
+Thanks. So I need to know what time is abo broker gmt? or is based on what market opens and close so I can adjust my icm broker time.
+
+--- 帖子 #200 ---
+Hi Khalil, Kudos to all you have done for the FF community! Really appreciate the time you spend to research on providing something solid to us. On the topic of ATR breakout. I am testing out your EA and hopeful that the forward tests should reap something good the EA can achieve. I was wondering whether you can give the following some thought :- (a) There is a concept of a Tokyo 5 hour breakout trading methodology which is shared by the TMS guru Emmanuel. He could provide more insights into this . (b) Basically you take the ATR(10) and ATR(20) of the H4 period and calculate the average of both (c) Look at the range traded during the first 5 hours of the Tokyo session (d) If the range is less than the calculated average of the ATRs, there is a good possibility of a breakout from within this range. (e) The trade should be made + or - a certain number of pips upon breakout from the 5 hour tokyo range (f) TP and SL could be a percentage of the calculate average maybe? The idea is to be consistent with bagging 5 to 10 pips on each day/pair without being too greedy I have attached the link to the PDF describing the process shared by Emmanuel for your reference. http://www.forexfactory.com/attachme...mentid=1777873 Think this is feasible as an EA? Thanks again for all what you have provided us with Zz
+
+--- 帖子 #201 ---
+I've installed the close_at_profit EA as the Abo missed taking the profits itself. I guess I simply put the EA on each Chart with the Abo, but how would you configure the values as this kind of depends on the lot size. I've configured the Abo EA as shown by Stoook in the above post. What works for you? Any suggestion much appreciated!
+
+--- 帖子 #202 ---
+You choose what time you would like abo to work.
+
+--- 帖子 #203 ---
+I doubt any used ABO and didn't make profit on NFP today. 20% profit closed within 2 minutes after NFP.
+
+--- 帖子 #204 ---
+Surely my both TE have
+
+--- 帖子 #205 ---
+Mr. Abokwaik, This EA needs news in order to we can see big move. I have an account is doubled today.
+
+--- 帖子 #206 ---
+What was the slippage? BTW I've discovered this fantastic thread just yesterday and I'm going to test this EA as soon as I setup my VPS.
+
+--- 帖子 #207 ---
+Mr. Abokwaik, Can you make a small change in the hour time so you add minutes with hour. For e.g 21:15 instead of 21 only
+
+--- 帖子 #208 ---
+Unfortunately I did not keep ( ( Make optimization in MT4 // give a lot of good results!
+
+--- 帖子 #209 ---
+Yes. But I will do better than this.
+
+--- 帖子 #210 ---
+I don't know about the Slippage. Actually I was out shopping during NFP and I just checked through my smartphone. I will check tomorrow when I get to the office. Have a nice weekend
+
+--- 帖子 #211 ---
+Thanks very much
+
+--- 帖子 #212 ---
+Unfortunately I wasn't as successful with it so far. I've used the same settings you've attached on all EUR, USD, JPY, CAD, JPY pairs on a 3000 € demo account and it lost 30 % since an hour after the US news today. I think there may be an issue with TP, at least when leaving it on its own. Do you guys ever manually close some trades in there or do you use the close_at_profit EA from this thread and which settings do you use?
+
+--- 帖子 #213 ---
+This account went 93% in one week. I did not close any thing since I remove abokwaik ea that close at profit and let it go as far it can. And then close every thing after the news today. Thanks
+
+--- 帖子 #214 ---
+Hi update my account All loss on live account 50$ now last night and in negative on ICMARKET all was set according to post 94 same currencies , time frame with fix lot of 0.01 . will see others if anyone has used on live account could advise the broker you are using &amp; settings. I will test again and will update later as i believe in forward test on live more then demo . anyone using it and could provide with full information will be more helpful .Thanks
+
+--- 帖子 #215 ---
+I do not think you will have enough margi n to trade so many pairs with 0.01 per trade. $50 is too little money to trade so many pairs
+
+--- 帖子 #216 ---
+Hi redrose, Taken from post #47 : "ABR is a compounding trend following system, it will suffer many small losses before catching a trend, and when it does, few winners should be able to recover from previous losses and add to equity." This is very obvious if you look at the Equity Curve on both attached Trade Explorers, and Trade Explorers of other members like StOoOk . (As you probably know I can not attached more than 2 trade explorers to a thread). As for a 50$ account, it will be very risky to apply this approach, specially when trading multiple pairs. This is one of the many PMs I received regarding ABO: " What Eaatr version will have steady gains . And minimal losses The funding I have 100 dollars ." And this was my reply : "You can not trade forex with 100 dollars, unless you look at it as gambling.". All the best Khalil
+
+--- 帖子 #217 ---
+Great EA!
+
+--- 帖子 #218 ---
+Hi, may I ask the time in the setting is local time or broker time ofGMT time?
+
+--- 帖子 #219 ---
+Hi, Does this EA take several position after particular distance of pips or not?
+
+--- 帖子 #220 ---
+It is the broker time in your market watch
+
+--- 帖子 #221 ---
+It is based on average true range of the time frame
+
+--- 帖子 #222 ---
+thanks!
+
+--- 帖子 #223 ---
+Khalil, Im still waiting for a new version that only modified the order not delete and create a new one.. sometimes my broker just denied a new PO Thanks
+
+--- 帖子 #224 ---
+I will not be able to post as much in the coming period as I going into some changes in my life/career.
+
+--- 帖子 #225 ---
+Nonstop messages.
+
+--- 帖子 #226 ---
+Hello, Actually I did not use this EA. I use two scripts. Close all and delete all. You can find them in FF.
+
+--- 帖子 #227 ---
+dokopy, I believe the EA is checking the equity balance every tick . I apply this EA and it will close all trades automatically when target balance reached . No need to manually monitor and close.
+
+--- 帖子 #228 ---
+Is it possible to please delete unnecessary messages?
+
+--- 帖子 #229 ---
+I apologize for Google Translate.
+
+--- 帖子 #230 ---
+I'm not sure and I don't know how.. Maybe some experts can help you.
+
+--- 帖子 #231 ---
+Right click and clear Attached Image (click to enlarge)
+
+--- 帖子 #232 ---
+Amazing result...... Attached Image (click to enlarge)
+
+--- 帖子 #233 ---
+Yup nice. What is the setting? What is your max dd at any time?
+
+--- 帖子 #234 ---
+It must modify the code that did not generate messages.
+
+--- 帖子 #235 ---
+All the best for whatever is to come sir! Hope the change is always for the better.. Zz
+
+--- 帖子 #236 ---
+Setting is aggressive, and Gold time frame M15, rest pairs H1........ for exact setting see here http://www.forexfactory.com/showthre...88#post8549288 for all time drawdown see image
+
+--- 帖子 #237 ---
+All the best for whatever you are going to do, Loads of success
+
+--- 帖子 #238 ---
+what pairs are you trading?
+
+--- 帖子 #239 ---
+Do you test this EA on other timeframe?
+
+--- 帖子 #240 ---
+http://prntscr.com/90sfcu
+
+--- 帖子 #241 ---
+what happened to the trade explorer
+
+--- 帖子 #242 ---
+when we put max order for that chart. We are saying max 3 orders for that pair right? and not the whole account right?
+
+--- 帖子 #243 ---
+nothing, its working fine http://prntscr.com/90t8y1
+
+--- 帖子 #244 ---
+just meant that it doesnt seem accessible
+
+--- 帖子 #245 ---
+Hi imifx, Would you like to tell me how do you close the trade manually or by setting TP.
+
+--- 帖子 #246 ---
+I m using EA to close at 10% profit
+
+--- 帖子 #247 ---
+Hello; Now i'm using ATR Break Out ea, it was opened GBPUSD buy postion, can you explain how it close the position an other hand what is the exit, sl, tp scenario? Thank you
+
+--- 帖子 #248 ---
+You say you are trading 1 hr TF except gold, how come your print screen is 15min TF?
+
+--- 帖子 #249 ---
+There are input parameters for SL TP and Trailing Stop, All in terms of ATR multiples.
+
+--- 帖子 #250 ---
+Frnd I changed the TF in between while dong forward testing, i have msgd u my current tf and setting.
+
+--- 帖子 #251 ---
+Few fellas complaint that my Trade Explorer is not showing and i dnt knw why this is happening, I am not sure if posting myfxbook link here will be good or not but in case u need just inbox me i will send u the link. So far the result is here...... http://prntscr.com/918nb9
+
+--- 帖子 #252 ---
+hello traders, today i going to test the NZD red News
+
+--- 帖子 #253 ---
+Hello fellow traders, First I want to thank ABO for sharing this strategy. I've done some of my own backtesting, and I have come up with settings very similar to the aggressive settings. I tested the EA on the AUD red news last night. No trade triggered, as there wasn't much movement in price. But one thing I noticed is that the pending trades remained opened after my trade stop time. I set my start and stop times around the red news annoucement. My question is should the pending trades remain open after the EA is supposed to stop trading. My preference is to delete all pending trades after trading stop time. Just a suggestion. I am going to try a test again on NZD red news tonight, but don't expect much as it is Asian session. Looking forward to testing on red news in Euro session. Thanks again to ABO.
+
+--- 帖子 #254 ---
+Hi dargane, EA should delete Pending orders after last trading hour. I will check this and update. I've also set ABO on all NZD pairs, H1, break factor of 2. Regards, Khalil
+
+--- 帖子 #255 ---
+Really sill question... but how to avoid the cancelled orders going to account history? or is there a way to delete the "cancelled" from account history?
+
+--- 帖子 #256 ---
+NZD
+
+--- 帖子 #257 ---
+thanks!
+
+--- 帖子 #258 ---
+Hello Everyone, Yesterday was my first day. I did testing and it was very bad...i dont know what mistake i am making.... this is demo account which made $1k+ loss.. Attached Image (click to enlarge)
+
+--- 帖子 #259 ---
+I prefer to stay away from Gold, if you see my Trade Explorer, Gold was the biggest loser. And I stopped trading it with ABO a while ago. I don't say it doesn't work with Gold, but it needs different settings, or at least a higher time frame. Plus : as I mentioned earlier, this is a trend following system, it will suffer many consecutive losses before making recovery winnings. However through 24 days, max draw down was about 15%.
+
+--- 帖子 #260 ---
+Hi I started the test today on cfds but their is error could you fix it at it can not open position as it says invalid stopploss and take profit , another problem i need it to calculate with lst 2 digits to be round figure like .10,.20,.30,.40 etc it can not be .012.024 last digit has to be zero so then it will open position on cfds index could you please fix the v 5 last version to fix this problem.Thanks
+
+--- 帖子 #261 ---
+Hi imifx, would you like share your current time frame and the setting I am using the aggressive mode but consecutive loser at all.
+
+--- 帖子 #262 ---
+I am not able to reply back to your msg, your FF setting not allowing to send u msg.
+
+--- 帖子 #263 ---
+Setting - Aggressive TF and pairs see the screen shot below http://prntscr.com/90sfcu I am using EA to close trades at 10% profit............ PS. Market condition not good for breakout that's why happening some losses, wait for right time.
+
+--- 帖子 #264 ---
+Hey imifx, your trade explorer is back. That's great.
+
+--- 帖子 #265 ---
+great
+
+--- 帖子 #266 ---
+Dear abokwaik; some users using another ea for closing orders when reach %10-15 profit. What is your suggestion for closing orders should we use another ea or wait the ABO_05.ex4 ea close these orders. Because my GBPUSD buy order reached +70 pips and still growing but order SL point did not changed since it opened. I thing may be problem with SL or Trail Stop features. Thank You
+
+--- 帖子 #267 ---
+Using the separate EA for profit taking is suitable for short - term trading (specially news trading). While letting ABO on its own would be suitable for long - term trading specially on higher timeframes with large trailing stop. There is no problem with trailing stop. It depends on how you set it up. for example if your are using H1, and SL ATR multiples = 3, and H1 ATR = 35 pips, it will move stop loss after 3 x 35 = 105 pips in profit. and so on.
+
+--- 帖子 #268 ---
+in starting i was not using separate EA for profit taking. Let the EA to build equity and later use any safe method to secure profit.
+
+--- 帖子 #269 ---
+Hey, I found this ATR Channel indicator on the MQL4 Codebase. I just wanted to get a visual of when a trade's supposed to happen. Thought I'd share it here in case anyone else was interested. Abo, have you determined if the EA closes all pending orders after trading stomp time?
+
+--- 帖子 #270 ---
+Dear abokwaik; Above this thread you are serving your FXDD account, are you using M15 TF or H1 TF? Because EURUSD and GBPUSD very profitable i'm trying to same think that you did. Thank you.
+
+--- 帖子 #271 ---
+There is no answer?
+
+--- 帖子 #272 ---
+Sine Wednesday I am testing it on M30. Before it was on M15.
+
+--- 帖子 #273 ---
+Hi Abokwaik I test your idea Only i changed the ATR Breakout Multiplier for M5-3.0, M15-2.5, H1-2.0 and H4-1.5 Only two Currency EUR/USD GBP/USD Here the tradeexplorer from the last 2 days ATR BREAKOUT MT-5-240-AB-1.5-3.0 Attached Image (click to enlarge) best wishes Central4
+
+--- 帖子 #274 ---
+Thank you Central, I had elaborated more on this testing in post # 172 . So my questions are : - Did you perform the test during red news on these specif currencies.? - Did use a separate EA to close after reaching certain profit (or closed manually), OR left ABO running as per the settings (TP,SL)?
+
+--- 帖子 #275 ---
+Hi Abokwaik I have perform this test 24 hours with red news. especially in red news it work very well. For close i use your close at profit ea with 10% equity close only at friday i closed the trades after london session manually. Thank you
+
+--- 帖子 #276 ---
+Hi abokwaik My request to have version 5 to be fixed to calculate position on last digit to be round figure to open buy sell as ,when last digit is not round figure at claims error to open position on index ,could you please fix this so can test on demo as would like to test few countries as basket .Thanks .
+
+--- 帖子 #277 ---
+This EA works very well on 5 digits brokers.
+
+--- 帖子 #278 ---
+Hi abokwaik Could you please fix the request of post 276 as it is not opening on some index so result is not good So can test further because if can not fix the bug it will not open and close on equity properly Thanks
+
+--- 帖子 #279 ---
+Hi have you stopped this ea can i get the mql the source code so i can fix the bugs as i like this ea for index just need to fix the bug and add something for profit taking etc.. or you can fix as my request .Thanks
+
+--- 帖子 #280 ---
+Hi redrose, Why don't you use Fixed Lot Size input instead of auto position size calculation ? Please try and let me know how it goes. Thanks.
+
+--- 帖子 #281 ---
+Hi I am using fixed lot size but the problem is the price where it need to end with zero round figure on Index some of them like Nikkei HSKI and Nifty they need to be like format 876.50 ,876.40 876.30 can not be with other format so just need to fix the last digit to be round figure as it says error and cannot open buy sell at 876.43 876.51 this is just example of some Index which do not allow to open these figures .Thanks
+
+--- 帖子 #282 ---
+Hi Abokwaik I have traded a similar system for sometime and I think you have created a very good EA here, that can produce excellent results. Here are some thoughts based on my experience trading this way live. 1/ I strongly recommend that you consider trading the EA in only one direction - trade the 15minute or 1hr time frames but base the direction on the daily or weekly trend. I suggest people interested in this method use their favorite long term trend filter on the daily to trade the trends. The beauty of this type of trading means that you get less trades left open as the trend ends and price retreats into the other direction (since it is likely that less trades will breach their breakout ATR range). This is solid logic - but there is a fine balance to get it right. In my opinion your bi-directional set ups as they are will always fail eventually as the open trades that are caught in the wrong direction early on in a trend will sink it. This is especially the case with a strong trend - as is happening now for you. 2/ I am not sure that people fully understand the dynamics of your EA. The relationship between different variables can make or break a breakout systems based on ATR. Everyone needs to get on the strategy tester and run many variations to see these clearly. For example: - the relationship between the Breakout ATR multiplier (ATRM) and the time frame (TF) - the higher the TF the lower you generally want (need) your breakout ATRM. - the relationship between the Stop Loss ATRM and contract size (using risk %) - which is also defined by the TF you are trading on. There is a sweet spot for each TF. - the relationship between the trailing Stop ATRM and the break out ATRM. - also the trailing stop ATRM and the start and ending hours These are just a few of the key relationships that need to be explored to create a very nice trading set up. There is a lot more to this that meets the eye on initial inspection - and your EA allows us to do this well. I have attached a picture of the trades from one set up on a 15min TF for the E/U downtrend through November. This particular set up has produced a nice 3% return with only a 1.3% DD for the period. In some trends I can get it to make 20% in a few months - and in range bound markets it will manage to minimize losses to 1 to 3%. This is tested over many years. 30min, 1hr, and 4hr TF's also produce good set ups. I focus exclusively on risk management - which means I am more interested in minimizing the max DD which usually occurs at the end of each trend. So you need to (1) really get your long term trend filter right first off then (2) develop your set up to minimize the risks in the bad trends or where it becomes choppy and ranging. I will not be posting set ups. They take hours of work to get the balance - and we all need to make this journey or it'll never work for you when you trade them live. But you have created an excellent EA here and it fits well with how I trade - and it allows me to trade lower time frames if I want to. Tim Attached Image (click to enlarge)
+
+--- 帖子 #283 ---
+Ok red. I got it now. The EA is already using the DIGITS supported by the terminal, but it seems to behave differently with indexes as in your case. I will provide an input for the number of digits to fix this issue. All the best
+
+--- 帖子 #284 ---
+Thank you timmy. That is really a valuable feedback. I will consider for next release. All the best
+
+--- 帖子 #285 ---
+Hi abokwaik will wait for the ea and trend filter on daily weekly will be good just add as mtf for sellection because when it has very big move it will always do sideways for a while then rally where we can pick the suitable time frame as trend filter .Thanks
+
+--- 帖子 #286 ---
+Hi abowaik . Any luck to get the update version for the requested error for Index .still waiting to continue the demo test .
+
+--- 帖子 #287 ---
+Hi, did you test this AR_BO EA on any live account? if yes can you post your results please.
+
+--- 帖子 #288 ---
+Hi redrose, I apologize for the delay, as I am really busy these days. Here is an update for you where you can control the Number of Digits used for SL and TP and Trailing Stop. Modify last input (Number of Symbol Digits, -1 to use MT4 defaults) to number of digits allowed for the index, or leave it as -1 to use MT4 default digits for the pair. Please try and let me know if its OK. Regards, Khalil
+
+--- 帖子 #289 ---
+Hi dargane, That is great. Actually I was planning to develop a similar indicator instead of opening too many pending orders. Here is what I am planning to do: 1. Modify the ATR Channel to a Multi_Pair/Multi_Time_Frame version with alerts for manual trading. 2. Build an EA based on the New ATR Channel Break Out indicator. Regards, Khalil
+
+--- 帖子 #290 ---
+With regard to timmy's suggestion of adding a trend filter, The idea will make this a powerful EA. However, each one has his own definition of the trend. To solve this with the current single-pair version it is easy to allow only Long or only Short positions from EA property window. I already applied this to GBP/USD yesterday where I allowed only short positions, and for USD/JPY today where I allowed only long positions, and its working fine. However for a mult-pair version we need a trend filter built into the EA. Suggestions are welcome ...
+
+--- 帖子 #291 ---
+Try trading only the daily Heikin Ashi of yesterdays bar. For example, if yesterdays daily Heikin Ashi is Red only short trades if Green only long trades. Try time frame 15 min bars. Or backtest the EA for the best time frame. I suggest not to turn on the EA first day of the week Monday as the market may still be trying to decide where it wants to go for the coming week and to avoid a possible nasty chop. Just a though
+
+--- 帖子 #292 ---
+Hi Abokwaik Thanks for the new version trailing stoploss , TP , SL looks perfect .but open buy stop sell stop will also require rounded decimal point where i did the back test it says error Please fix it thanks
+
+--- 帖子 #293 ---
+Done.
+
+--- 帖子 #294 ---
+My 2 cents for trend filter, I use 21 and 34 EMA and trade based on daily direction.
+
+--- 帖子 #295 ---
+Agree since it seems this ATR EA is more of a swing trader so daily direction preferred. Like right now the EA is long USDCAD but it might get killed later. Because it might be just testing the 62% fib of the big move yesterday and then down again. I maybe wrong but I'd rather be looking to short USDCAD right now.
+
+--- 帖子 #296 ---
+Thanks for your quick reply and revised EA . for trend filter i suggest use big time frame such as weekly EMA 20 ,50,200 cross and angle of daily time frame should be 2 o'clock or 4 o'clock for short time frame break and sell break on buy this is just my idea if you can use as trend filter .make as external for trend filter .like weekly daily h4 h1 etc.. so can test on many time frame .
+
+--- 帖子 #297 ---
+After taking a deeper look at the ATR_Channel indicator, its a bit different from what I want, as it uses MA to draw the channel instead of current price, it also uses multiple channels instead of one channel. So here is a new indicator that uses the same concept of ABO EA, with the addition of a Higher time frame trend filter (using MA - default daily EMA34). It will show Buy/Sell Signals with optional alert. Currently for one pair/tf.
+
+--- 帖子 #298 ---
+Thnx
+
+--- 帖子 #299 ---
+is it possible to clear the dust from chart, as whenever a new entry or order placed EA leaves a mark on chart and this gonna be huge and mt4 freeze for sometime.
+
+--- 帖子 #300 ---
+Done.
+
+--- 帖子 #301 ---
+wow, many thanks
+
+--- 帖子 #302 ---
+Thank you!
+
+--- 帖子 #303 ---
+I already checked few pairs visually so far and still doing atm with higher tf filter. It's filtering out quite a lot counter trend and looks like it will improve EA result dramatically with less trades and DD. I totally agree with timmy for going with Trend so if possible can we have two tfs filter like father &amp; grandfather you did with stoch ea please if you could.
+
+--- 帖子 #304 ---
+Hello Abokwaik I want to know the expert is adjustable to 5 decimal places? Please help me. Thank you.
+
+--- 帖子 #305 ---
+Hi all, This EA has been working well so far. Thanks to the originator. I would like to know whether the buy sell orders created have trailing SL and TP? Thanks Haemdoc
+
+--- 帖子 #306 ---
+Hi Abokwaik Could you please fix the version 06 to have trailing stoploss , TP , SL to be rounded decimal point same as you did for last version and can you add MA as trend filter and time frame for ema to be :true /False . thanks
+
+--- 帖子 #307 ---
+Testing with new setting with latest EA and closed profit of $800
+
+--- 帖子 #308 ---
+Hi, what time frame, currency pairs and settings you are using?
+
+--- 帖子 #309 ---
+HI imifx, Are these new settings and latest EA results been appended to the currrent Trade explorer, or they are applied to different account ?
+
+--- 帖子 #310 ---
+Current trade explorer
+
+--- 帖子 #311 ---
+I am using M30 time frame for all pairs
+
+--- 帖子 #312 ---
+hi : imifx what settings for 30 M you are using .
+
+--- 帖子 #313 ---
+thx. for reply
+
+--- 帖子 #314 ---
+Just wonder, Do you have any plan for further development of this EA ? As few people asked for MAs as Trend filter.
+
+--- 帖子 #315 ---
+Yes AK, The problem is (as always), I have too many ideas to test out and very limited time (especially with my new job). I hope that you and the other members don't mind me using FF as a storage place for publishing these ideas as my time permits. My ultimate goal is to build a Hybrid Auto-trader implementing the most successful and diverse robots. All the best, Khalil
+
+--- 帖子 #316 ---
+Hi Khalik, All the best for your ultimate goal of developing new hybrid robot.
+
+--- 帖子 #317 ---
+Hi Khalil, I wish you all the best for such endeavors!
+
+--- 帖子 #318 ---
+On the subject of calculating the ATR value, I would like to suggest a more robust method. I believe calculating the ATR based on lower time frames results in erratic values, specially after some big news. When this happens you have a huge ranged bar, and this bar distorts the ATR value until it disappears from the averaging period. Than of course you start having lower ATR values because of the lower volatility which comes sometime after the big news. To smooth this effect my suggestion would be as follows: ATRforTimeFrame = DailyATR(30) /sqrt(1440 / TradingTimeFrame) Than you can multiply this value with your breakout multiplier. Example for trading time frame of 5 minutes: Lets say the daily ATR of 30 periods is 150 pips, so the result becomes: 150 /sqrt(1440/5) --&gt; 150 / 16.97 = 8.84 pips Than you can multiply this ATR value of 8.84 with the breakout multiplier. 1. This method might reduce false breakouts due to artificially low volatility followed by 1 big candle 2. High volatility after a big news event, giving artificially high ATR 3. Might eliminate time filter Just a suggestion...
+
+--- 帖子 #319 ---
+It is a Golden Suggestion.
+
+--- 帖子 #320 ---
+Thanks a lot and thank you for all the hard work you are doing....
+
+--- 帖子 #321 ---
+One more important point which could make this EA more robust. The logic of ATR breakout is comparing whether the price has broken the level (for longs) LowestPoint + (ATR * multiplier) When we put some value as multiplier, we are also estimating the number of bars needed to get to this level. Example: When we put a criteria of 3 as a multiplier we are also saying that we require 9 bars, without realizing that this is the end result. I am basing this logic to square root of time rule, which is simply FutureVolatility = current volatility * Square root of time According to this rule, ATR breakout method would also need the number of bars figure to reach the ATR breakout level. So I would suggest this dynamic breakout criteria, instead of fixed multiplier. According to sqrtof time rule 1 bar volatility would be equal to 8.84 pips (I am using the value from sample calculation in my previous post) 2 bar volatility sqrt(2) * 8.84 3 bar volatility sqrt(3) * 8.84 etc.....So the calculation is sqrt(number of bars from lowest point) = expected range Since the volatility here is sort of standard deviation of the volatility, to find out if a price has broken the ATR threshold (entry point), we need to use ZScores: EntryLevelForLong = LowestPoint + Sqrt(number of bars from lowest point) * 8.84 * ZScore In statistics Z-Score values for various confidence levels would be 1, 1.645, 1.96, 2.58 So the optimization of the EA would be bound to the 4 ZScore values above. This would make the system mathematically sound, and resistant to changes of price behaviour of the pairs in future. Please give your comments and thoughts.. Thanks
+
+--- 帖子 #322 ---
+Thanks for your valuable input GTH, The original idea was for price to break the x level on the current bar. If it does not, a new x level will be created for the next bar, and so on until the "dynamic" x level is broken where a trade is initiated. (where xlevel = current open price + ATR * multiplier). The idea was to catch momentum while its happening. My questions to you are: 1. Are you suggesting to make the levels "static" for a number of bars equal to the selected multiplier ? before creating new level. 2. What is the "LowestPoint" that you're referring to ? as I am using the Open Price of current bar (or the close of previous bar). Regards, Khalil
+
+--- 帖子 #323 ---
+Well I just realized that I was on a different track. I thought you were following ATR channel. Example: Lowest Point of swing + (ATR * multiplier) = Your entry point for long On the other hand, now I understand that you are always seeking (open +(ATR * multiplier)) to enter long. So you are looking for a "longer than usual" bar to enter. Ok than for your method of entry my suggestion of Daily ATR(30) would definately would work. In next post I will try to explain the ATR channel logic, which I suggested recently. I apologize for any confusion caused. Regards, Atilla
+
+--- 帖子 #324 ---
+Khalil, As answers to your questions and brief explanation of my "Channel" logic is as follows: In post 321, I tried to explain "Square Root Of Time Rule". Following this rule we start with a swing low (meaning lowest point of the low after a channel break down). Than for every bar after that we calculate the following EntryLevelForLong = LowestPoint + Sqrt(number of bars from lowest point) * 8.84 * ZScore So at every bar we are calculating a dynamic new level to enter long. Here is an example using 8.84 as ATR value Lowest point =1.3500 1 bar closed, we are in 2nd bar Entry level 2nd bar= 1.3500 +(sqrt(2) * 0.000884 *1.96) = 1.35245 Entry level 3rd bar= 1.3500 +(sqrt(3) * 0.000884 *1.96) = 1.3530 So this keeps on updating with every new bar. This is exactly like SuperTrend indicator, with added feature of sqrt(bars) feature. If you don't have that indicator I will try to find it for you. I hope this makes my logic clear. If not please let me know.
+
+--- 帖子 #325 ---
+Hello Some backtest abo 05(1)from 1min chart eur/usd. I guess this ea doesn't work so fine on the 1 min chart or maybey wrong settings.
+
+--- 帖子 #326 ---
+hello Now on 5 min chart same settings looks better.
+
+--- 帖子 #327 ---
+Hi all. Optimised settings on some pairs with different average trading ranges on H1 TF. Can anyone help me figure out why these low modelling quality and how to improve it? Also there are a lot of mismatched chart errors. What does that mean? How do I do in order to eliminate those errors?
+
+--- 帖子 #328 ---
+I have got the following idea: 1. Choosing the traded pair according to the following criteria: Strongest currency versus weakest ( Strength meter) Momentum increasing up and down. 2. Applying ATR -Break to decide point of entrance and exit, and using the built in position size calculator to limit risk. Can this be unified in one EA?
+
+--- 帖子 #329 ---
+Namaste! First I want to say thank you to Abokwaik and the others for the wonderfull service they do for the members of this forum!!! I have been reading all the posts here and this EA looks interesting. I've tested it on my strategy tester and it shows me only bad results, mabe my setings are wrong. The ideea behind this is very good indeed but if this is a breakout EA mabe you (I say you because I don't know to code) should make it recognise a range before it brea kout or if this is a trend following EA based on a breakout mabe you should make-it trade only after the trend was already established. This are my sugestions and I don't know if my sugestions are good or not. Someone also said that this may also be used as a directional EA put to trade only in the direction of the trend. Regards!
+
+--- 帖子 #330 ---
+Above all Abokwaik, thanks for sharing your nice work. Attached: Back test results for the last 3 years, USDJPY M15; (+38769 USD on 10K starting account) Be careful with the lot size. Please note - time settings are for GMT broker. Forward test is ongoing. With best regards
+
+--- 帖子 #331 ---
+Hello, I have a question about the close_at_profit EA. I could not find a separate thread about that anywhere. I am using the version from post #160 in this thread. There are two options in the Inputs: Profit to Equity Profit Amount Can you explain these two? Is Profit to Equity a percentage? So is that a percentage that the equity is above the account balance? For example, if the account balance is set to 10,000 and the Profit to Equity is 0.1 then it would close all trades at 11,000? And, I don't have an assumption of what the Profit Amount would mean. What I am looking for is an EA that I can say, "At $10,534 please close all open trades". Is that what this EA does? Thank you very much for your help
+
+--- 帖子 #332 ---
+guys be careful with those backtests. A backtest must have 99.9% to be accuracy with all tick data!
+
+--- 帖子 #333 ---
+ABO_06.ex4 EURUSD, 99% Tick Quality (from Dukascopy), 1H, Default settings, "2016.07.01 - 2017.01.01" six month backtest. Result is very bad and unstable!!
+
+--- 帖子 #334 ---
+Try UJ... It was profitable
+
+--- 帖子 #335 ---
+Hello Abo. I have downloaded your ea and will be doing testing as well using the crazy settings, wish me luck!! Thank you for sharing your work with us, much appreciated bro.
+
+--- 帖子 #336 ---
+Genius, genius I say!!!!! You have nailed it and this will ultimately decrease dd, increase profit factor and possibly autofilter the trend direction because it will be calculating true true values!
+
+--- 帖子 #337 ---
+i am using renko charts it is not opening trades 6 months one trade only
+
+--- 帖子 #338 ---
+abo ya habibi help me to find out the problem i am using renko charts and i attached the 05 R v one it i do not know what to do LOL
+
+--- 帖子 #339 ---
+Very good days. I speak Spanish and I am using translator. Reading the original strategy, I guess it's about getting into a big candle. In RENKO all candles are of equal size, so it is advisable to enter an operation using filters such as MACD or RSI. But the strategy would no longer be the original, but it would be worth doing the test. The user can determine the size of the candle according to the calculations of the ATR. For a 5 pips candle it would be ATR 5 x 1 I think you have to take into account when changing the ATR, the SL and TP are also modified. Example of the screenshot for a 10 pips RENKO brick. Please share the results.
+
+--- 帖子 #340 ---
+Hi, When I run this in the Strategy Tester the results show all trades as 1 lot per trade when I want it to use the 0.25% risk percentage! Does risk % work in the tester? Attached Image (click to enlarge) Thanks, Jaan
+
+--- 帖子 #137 ---
+can u share the set file with ea attached in a zip file here or google drive
+
+--- 帖子 #138 ---
+Dear abokwaik , Extraordinary EA, I was looking for this kind of EA. Could you help us in including the list of Symbols, so that we add all the symbols in one Chart itself? I have attached the sample screenshot for your reference. And Other options to "MaxPairTrades" to restrict the pairs of trades at a time, Like I give all 28+ symbols in the list and restrict only any 5 pairs to trades when the given ATR rules meet.
+
+--- 帖子 #139 ---
+Hi friend, love the EA been looking for something like this, is there any chance you could add a saftey for the max spread it will take? Perfect other then that thankyou
+
+--- 帖子 #140 ---
+Many thanks abokwaik! This is great EA idea, also can you please attach mq4 file to another members can attach he idea to test and share if that's good, thanks!
+
+--- 帖子 #141 ---
+Sure, if have mq4 code file, then I can help you done this.
+
+--- 帖子 #142 ---
+Hello, is anyone here still actively working on this strategy? I've recreated it in mql5 and am willing to share it, if any one likes. Like most other strategies it has a profitable and a losing period. The profitable periods are really really good. I think that by figuring out certain market states where it performs well we can identify periods to trade or to not trade. Has any one here thought of this? I know I'm late to this, so I hope any one is still active. Its a very promising strategy. Maybe can figure something out together. Would love to hear any ones findings. Have an amazing day
+
+--- 帖子 #143 ---
+- I think the thread is dead. - The problem with any EA is trading times. @Picasso618 - do you code in MT4 too? Let me know. Tnx
+
+--- 帖子 #144 ---
+Thanks for the response @XavierELVivo. Appreciate it. - Thats unfortunate. I might develop further on the original idea. - You might be right, although i think that by specifying market states we can identify ideal markets to enable certain type of strategies. - I can code in mt4, but i decided to switch to mt5. The platform is more superior in my opinion.
+
+
+===== 附件下载链接 =====
+

@@ -1,0 +1,1304 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+=== Pinbar Trader EA === Hi everyone, welcome ! I would like to present my latest EA. It implements a very basic, but very effective strategy. trading pinbars from weekly S&amp;R levels Strategy: - we wait for a pinbar to appear which rejects a weekly support &amp; resistance level - When the candle with the pinbar is closed we open a new buy/sell trade on the next candle The Pinbar trader EA The pinbar trader EA implements the strategy and has lots of extra features: it scans multiple currencies. So load the EA on 1 chart and it will scan all major currencies by default (you can change which ones in the settings) it can send you alerts when a pinbar is detected on a weekly S&amp;R level it can do auto trading, although please run this on demo first before you decide to go live with this You can choose between a trailing stops or risk:reward exit strategy You can choose if it should use a fixed lot sizes, a fixed amount of $, or a risk % of your account balance It has a news filter implemented to skip trading during news events Installation: Download the zip file and unzip it somewhere copy the pinbartrader.tpl to your MT4 templates folder copy the SupportResistance.ex4 to your MT4 indicators folder copy the PinbarTrader.ex4 to your MT4 experts folder Now start MT4, enable auto trading and DLL imports put the EA on any chart on the Daily (D1) timeframe ! and voila.. By default auto-trading and alerts are turned off. So enable them if you want to use them Source code: Want to get involved ? you can find all source code for this (and my other ea's &amp; indicators) on GitHub https://github.com/erwin-beckers/SimpleTrendReversalEA Backtesting: Attached the results of a 2-year backtest on EURUSD Idea's for the next version/future: - add a distributed S&amp;R filter. Instead of trying to calculate the correct S&amp;R levels, simply download them from a central server. - send alerts for mean reversal setups (and perhaps auto trade those) - open with-the-trend trades on pinbars for pinbars on/to the mean General usage: The EA will show you a table with the pairs which have a pinbar or are at a weekly S&amp;R resistance level. Pairs which don't have any pinbar and are not at a weekly S&amp;R level are filtered out and are not shown. In short.. the EA will only show pairs which looks interesting Off course when time goes by new pairs will be shown or removed automatically. The color of a pair indicates if we are looking to buy (green) or sell (red) When all signals are valid the last column will contain the word buy or sell and when this happens the EA will send you an alert and/or open a trade. If you want to look at the chart , then simply click on the name of the currency pair in the 1st column (e.g. EURUSD in the screenshot) This will open a new chart with the S&amp;R indicator attached so you can take a quick look When auto-trading is enabled the EA will also show you a list of all open trades and a trade statistics panel where you can keep track on its performance Manual Trading The EA can be used as an aid for manual trading or it can do automated trading. For manual trading just set sendAlerts =true (and/or sendEmails = true) The EA will then send an alert (or email) when it detects a valid buy/sell signal. Alerts can even be send to your phone! See here on how to set this up : http://www.cmapllc.com/how-to-set-up...nd-iphone.html When you receive an alert you can look at the chart and if you like the signal or not and perhaps open a trade manually Automated Trading For automated trading just set allowTrading=true and choose your lotsize and exit strategy The EA will open trades automatically when it detects valid buy/sell signals and manage these trades for you. When auto trading you must tell the EA how much money it is allowed to use for each trade Here you have 3 options: MoneyManagement : Fixed Lot Size / trade Set MoneyManagent = UseFixedLotSize and fill in your lotsize under FixedLotSize Each trade opened by the EA will use this fixed lot size Fixed Amount of $ / trade Set MoneyManagement = UseFixedAmount and fill in the amount of under FixedAmount . Note that this is your account currency. So if your account is in EUR then FixedAmount is also in EUR Each trade opened by the EA will use a fixed amount of money. When the SL is bigger it must use a smaller lotsize and when the SL is smaller it can use a higher lotsize. So it will always risk the same amount of money on each and every trade Percentage of Account Balance / trade Set MoneyManagement = UsePercentageOfAccountBalance and fill in the percentage (1-100) under RiskPercentage . Each trade opened by the EA will risk a fixed % of your total balance So if you have a $1000 account and Riskpercentage = 5 it will risk 5% of $1000 = $50,- / trade Exit Strategies Here you can choose between a trailing stop or a fixed Risk/Reward ratio Trailing stop: Set trailingmethod=UseTrailingStops and fill in the OrderHiddenSL, OrderTSx , OrderTSxTrigger levels It uses a hidden / virtual stoploss. This allows us to put the stop loss anywhere without the broker knowing and without any broker restrictions So.. When the EA places a new order then the initial hidden/virtual stoploss is placed at the S&amp;R level then when trade gets into profit we trail the hidden / virtual stoploss like this: when profit reaches Order TS1 Trigger pips, the virtual stoploss is moved to Order TS1 pips when profit reaches Order TS2 Trigger pips, the virtual stoploss is moved to Order TS2 pips when profit reaches Order TS3 Trigger pips, the virtual stoploss is moved to Order TS3 pips when profit reaches Order TS4 Trigger pips, the virtual stoploss is moved to Order TS4 pips when profit goes above Order TS4 Trigger pips then the rest gets trailed with a Trailing Step Risk/Reward ratio Set trailing method = UseRiskRewardRations and set TakeProfit to your R:R
+
+--- 帖子 #2 ---
+ebeckers, thanks for sharing your idea as usual.Where do i find and copy the SupportResistance.ex4 to your MT4 indicators folder copy the PinbarTrader.ex4 to your MT4 experts folder
+
+--- 帖子 #3 ---
+Seems very promising! Subscribed.
+
+--- 帖子 #4 ---
+subscribed.
+
+--- 帖子 #5 ---
+Hi, Thanks for sharing your work here, i have similar liking of this candle pattern based trading method. I have done a my share of research on it as well. Using the weekly support and resistance is a good way to filter these signals indeed. For others they also utilise Pivots, Some use Fibs and others use Value charts. Keeping it simple is great and i will surely be testing your hard work. I look forward to further development if it is required. I also look to assist where i can. I like your trade dashboard and trade info panel. I will also be looking for those two trades that the system has alerted and traded. My only question is the method of entry: Is it an aggressive entry, which means you enter as soon as the bar closes? Market order. Do you wait for retrace? Limit order Break of the nose of the pinbar? Stop order
+
+--- 帖子 #6 ---
+Hi Ebeckers, many thanx to offer this for the FF community, looks like a simple system and effective for price action ,, Pls could you clarify some points ? - I use normally 1000 bar history and default Ea is 3000 bars, is it okay to keep it still at 1000 or it will make conflict somehow with the Ea ? - Also some of the Pinbars patterns might not display the same way , and i think it is best to use the New York close i find almost identical patterns with brokers using +2 gmt, is that what you have used too ? - For now this works on Daily chart only and perhaps do you have any plan to make this work on H4 too? There are quite a few reliable PinBars on that type of TF too - Also is it possible temporarily hyde the box showing data on the chart ? - The Entry is it straight away after PIn Bar forms or does the Ea looks at the next candle for reference ? I have switched to price action and normally i am entering long tailed pin bars or med sized ones from half 50% of it _ If you could confirm ... Thank you and best of luck _
+
+--- 帖子 #7 ---
+Thx.. yeah at the moment the EA simply opens a trader right after the pinbar candle closes. I'll be playing with 50% retracements next week to see if this makes things even better !
+
+--- 帖子 #8 ---
+&gt; I use normally 1000 bar history and default Ea is 3000 bars, is it okay to keep it still at 1000 Fine with me ;-) When there is less then 3000 bars the EA will simply use less bars So 3000 is the max it will use, if there are only 1000. it will use 1000 &gt;Also some of the Pinbars patterns might not display the same way , and i think it is best to use the New York close I agree, NY close brokers are the best, but it depends on which broker you use &gt; i find almost identical patterns with brokers using +2 gmt, is that what you have used too ? I do al my trading on a broker which has NY closing charts. Dunno about other brokers &gt; For now this works on Daily chart only and perhaps do you have any plan to make this work on ha4 too? Yes &gt; Also is it possible temporarily hide the box showing data on the chart ? No, it appears when you have auto trading enabled. But the source code is open to all, so you could change it ;-) Erwin
+
+--- 帖子 #9 ---
+Aww, Lol you faster than me Okay thanx for the answers, not sure if i have seen this before but i like what i see now and it is promising_ What i am careful of when playing Pin bars is to play them only of course when there is a clear trend visible on a Daily Chart to avoid some fake signal. The addition of the Risk Reward Ratio is a good feature Btw,,, So we wait for Monday then _ Nice work man !
+
+--- 帖子 #10 ---
+Yes i agree even the colours sometimes are opposite versus the direction the signals are indicating.
+
+--- 帖子 #11 ---
+Looks interesting! Subbed and keen to follow!
+
+--- 帖子 #12 ---
+This is the kind of stuff i was searching for a lot of time for improve my trading and making it stress-less. Thank you and subscribed :-)
+
+--- 帖子 #13 ---
+Amazing stuff guru Subscribed
+
+--- 帖子 #14 ---
+Nice one ebeckers, this looks good! I'm in!
+
+--- 帖子 #15 ---
+Thank you for creating this thread,Subscribed and All the best!
+
+--- 帖子 #16 ---
+@ebeckers:thank you for this ea, subscribed, renkotop
+
+--- 帖子 #17 ---
+Ebeckers I'm subscribed. Your coding skills and generosity is truely amazing! Thanks
+
+--- 帖子 #18 ---
+I didn't see the template in your zip file. Thanks
+
+--- 帖子 #19 ---
+Great thread. Pin Bar is such a great candlestick, especially when formed in ranging market. Almost similar to Hammer. They fly the pair to a great height.
+
+--- 帖子 #20 ---
+Thank you for sharing, ebeckers ...Up and ready for next week ...
+
+--- 帖子 #21 ---
+I believe this chart was USDJPY Pin Bar formed recently, 25th January. Such Pin Bar or hammer may be ignored because it formed right at the bottom of bearish market. It would not work.
+
+--- 帖子 #22 ---
+Hi, Just passing through, I thought this would be of concern in the NU daily.
+
+--- 帖子 #23 ---
+Smart eye, I see what you mean ,, but the photo was more for illustration purposes , wasn't UJ, i must have moved it to see things around_ i had it on NU and EU as the Ea showed those two pairs on photo, so i thought i would see what type of pin bars they are ,,,in other words if i had seen them on chart how would i trade them and what the Ea would do _ And of course before considering it as a potential reversal candlestick i look at 4/5 things -The Trend -The context of where it forms on a price chart, -The Intersecting points etc ... -How many points of Rejections -Figuring out if the " Smart Money " is attempting fake break outs by taking out all the newbies stops and money Lol you made go back and open my mt4 to look at UJ
+
+--- 帖子 #24 ---
+Hi ebeckers, Thanks for starting this thread and sharing us the Price Action EA. I admire your crystal clear style of explanation, great. I am in. Have a nice weekend. Roy
+
+--- 帖子 #25 ---
+The aspect i want to talk about where pinbars are concerned is for further development as was mentioned above. If one understands this price action, it is one price action method that is really good once done correctly. This system allows any new trader and experienced trader to have a simple system that is very effective. The next thing is that the risk can always be at the same location, as-well as the targets (R/R ratio, pips, previous S/R areas etc) which makes it systematic. The simplicity makes it easy to learn, however it is the proper identification of the best points to enter that separates the type of traders. Good things about it, It does not come very often in the daily timeframe unless observing many types of markets not just FX, but Commodities as well and other tradable markets. Now for the entry versus stop-loss: The different entries have different Stop-loss ratios- Stop order entry and market order entry has a larger stop loss risk to that of the limit order entry- (50% retrace). These three entry types can be found sometimes on the same Signal but not always. It all depends on what the market is doing that determines the entries available: Sometimes the market does not retraces at all and only gives the opportunity for 2 types of entries and that's either the market entry or stop order entry. Personally the best entry in my opinion is the limit order whenever it is possible to take. The plus is that when you are right- the reward can be endless, for example of a signal and size of the signal bar in terms of pips. A long standing position. Eg. Gold/Xauusd on december 12, 2017 Bullish Signal . Gold trade Still running up to now 1202 pips strong. When i am trading pin bars (Trapped Traders) i look for 2 entries, i look for the stop-order and limit order entry. I will expound on the stop-loss differences that i like about the two order types: Let's say the candle in golds case ( Bullish signal 12/12/17) is 100 pips from tail to nose tip: Buy Stop order entry would be at the break of the nose and 100 pips stop-loss at the tail Buy Limit order would be 50% of the candlestick and the stop-loss would be 50 pips for the same signal. I think in this case there was an entry for the Limit order entry, Should price continue to break below the signal bar one would be stopped out at 50 pips rather than 100 pips. Otherwise one can employ a backup plan for trades that don't work out. Like an opposing pending order some pips away from the stop-loss area just in case.-Any thoughts?
+
+--- 帖子 #26 ---
+Pls note we're looking at the weekly S&amp;R levels and not the daily S&amp;R levels Daily S&amp;R levels are more pointing to recent swing hi/lo's and not points where the market reversed. If you for example look at the EURNZD on the W1 timeframe, you will see that market reversed couple of times in the past.
+
+--- 帖子 #27 ---
+Thx for your detailed explanation. It's a bit late now where i live, but i'll study it in more detail tomorrow! but know that 50% retracement entries is already on my todo list for the next version ;-)
+
+--- 帖子 #28 ---
+Yes no problem... Sleep well...There is a lot to discuss on this topic my friend...Later. For the Gold Example posted below.
+
+--- 帖子 #29 ---
+very well done, thanks for sharing. It is really worth to invest time on it. You can count on me for whatever test you need. Any chance to add a traditional TP and trailing without TS1 etc?
+
+--- 帖子 #30 ---
+Question - How long is signal valid before it is null and void? I've got a sell signal for NZDUSD. the pinbar was generated on the 24th, there's been two days trading since, final day had a small retracement. looks like it's testing the weekly resistance level, question is, will market sentiment see the signal and trigger a downtrend or not.. That is the question. Does anyone have experience in how long a pin-bar is generally valid for? An option would be to enter a sell limit order..
+
+--- 帖子 #31 ---
+NZDUSD Pin Bar formed right at the top of bulls. It may not work because the trend is too strong. Just my take. It works best when market ranges or after consolidation
+
+--- 帖子 #32 ---
+Nothing is certain in forex, we can only judge setups by probability. That said... i think we have a situation here where changes are high that the bull trend might come to an end. 1) We have a really strong weekly level here which goes back all the way to march 2004 2) We have a big pinbar at the daily D1 timeframe 3) We even see a (smaller) pinbar on the weekly W1 timeframe 4) We can see that the uptrend has been slowing down the last week/days 5) We can see that the market respected the resistance level on the 24th-26th jan 6) We have a huge gap between price and the mean on the Weekly W1 timeframe, meaning pressure is building up higher and higher and the urge for a mean reversal is getting strong 7) The risk/reward ratio is (potentially) really good and allows for an easy 3:1 and maybe 4:1 All in all good enough for me to take this trade. Off course market can always go against us, so make sure to always use good money management and risk / reward ratios !
+
+--- 帖子 #33 ---
+Pin Bar, Hammer, Shooting Star, Gravestone Doji Bearish/Bullish Engulfing have same validity period. Watch out for reversal especially around clear and visible S/R
+
+--- 帖子 #34 ---
+You're correct. It's a game of probability. That's the reason I used the word " may not ". I did not say " it will not "
+
+--- 帖子 #35 ---
+Hi Ebeckers and everyone here, Whatever post I share am not contradicting your points. Just sharing my take. Ebeckers, as you rightly said, is close to resistance level. I believe you use MA. Bollinger bands is also a MA. I have the chart here which shows the strength of the bulls- the movement are strongly along the upper band. we have to allow to consolidate before joining at this time. Just my take. Pick no offence please
+
+--- 帖子 #36 ---
+Thank you for sharing. Subscribed.
+
+--- 帖子 #37 ---
+No worries mate, I didn't feel offended, sorry if you thought that ;-) Actually I love to hear how you guys &amp; girls are thinking about possible setups. Sadly I don't have any crystal ball, so i'm just sharing how i see the market. But i'm always interested in other opinions so pls keep on sharing your idea's and lets all be open and learn from each other !
+
+--- 帖子 #39 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #40 ---
+Hi Ebeckers. Here is a very good PinBar strategy PDF by Justin Bennett which i use more or less alone. If you can go through it, I am sure you will be able to make your EA alot more accurate, safer and profitable with lower cost losers. https://dailypriceaction.com/pin-bar...e893067a1a7480
+
+--- 帖子 #41 ---
+Thx , but I'm already a lifetime member of DPA for some time there ;-)
+
+--- 帖子 #42 ---
+=== Pinbar Trader EA v 1.20 available === See the 1st post for a new version of the EA Whats new: - 50% retracement entries The EA can now open trades on 50% retracements of the pinbar. When enabled this will give you a much better risk/reward ratio since the stoploss needed is much smaller. But there's also a downside. Not every pinbar will give you a 50% retracement, so you might miss some trades. Can't win them all ;-) You can enable this feature on by setting Use50PercentRetracementEntry to true or false When enabled a new column will be shown called 50%rt as shown in this screenshot..
+
+--- 帖子 #43 ---
+Excellent, Even better if both the Stop order and the limit order can be activated at once on the close of the signal bar. The stop order would be first priority if one needs to close a trade or cut half of it, while the 50% entry could run as long as the pair is trending in that direction as a free trade at breakeven or above the nose of the signal bar.
+
+--- 帖子 #44 ---
+Great! Q. If using R:R do we keep the 'stoplossatzigzag' arrow to true? Despite not having zigzag arrow installed?
+
+--- 帖子 #45 ---
+stoplossatzigzag is not used in this EA. I'll remove the setting in the next version
+
+--- 帖子 #46 ---
+Yes those are good courses and reads...No wonder your info is effortlessly high probability information. Use your cutting edge.
+
+--- 帖子 #47 ---
+Thanks Ebeckers! Ready to follow your fantasy! Paolo
+
+--- 帖子 #48 ---
+ebeckers This is a very nice work you got going here I really like it. I Had a question, would it be very hard for you to add a few more reversal candles to your system?
+
+--- 帖子 #49 ---
+All newbies, please note the rules, I suggest that you read them: https://www.forexfactory.com/userguide.php VIII. No commercial agendas Members may not use Forex Factory to promote a product or service, either their own or someone else's. This includes products or services that are planned for the future. If a member's posts can link them to a forex-related company, they're in violation of this code. Members who are focused on a product or service, or new members who mention a little-know website, are generally suspected to be company shills. Action may be taken against suspected shills without conclusive evidence, as they compromise the integrity of discussions and can be difficult to prove conclusively. Members who wish to promote a commercial product or service must be designated a 'Commercial Member' and are expected to abide by the Commercial Code of Conduct.
+
+--- 帖子 #50 ---
+Is ForexFactory now allowing link to 3rd party commercial websites? Really, if so, I'm totally confused on the policy enforced previously
+
+--- 帖子 #51 ---
+It was not my intention to promote any product or service. I just mentioned the courses i'm a member of Anyway.. i removed the links to those course from the post now Sadly they can still be found since you quoted me :-)
+
+--- 帖子 #52 ---
+Unless you've picked a change in the trend.
+
+--- 帖子 #53 ---
+hey man...thx for the ea great job so far,am trying to run it in my rdp vps for 24hours and i tried many brokers but it doesn't seem to open trades am sure i applied the right setting...ea works fine in my computer but on my rdp server doesn't seems to work ? any advise would be much appreciated
+
+--- 帖子 #54 ---
+can the EA use on any time frame?
+
+--- 帖子 #55 ---
+put the EA on any chart on the Daily (D1) timeframe ! It's on the first post under "installation", all I did was copy and paste exact same notation.
+
+--- 帖子 #56 ---
+Pls look in the experts log for any errors Perhaps you didn't enable auto trading in MT4 or you didn't enable DLL imports ?
+
+--- 帖子 #57 ---
+Dear EBECKERS, Any best setup ? I tried so many times,.. not so good result,... Hope you can guide us with the best setting ,.. Thanks, Paolo
+
+--- 帖子 #58 ---
+I am assuming you trying to forward test this? If so, you are a bit early! There's plenty of good results on backtest.
+
+--- 帖子 #59 ---
+I'm still playing around finding the best settings my self by doing forward &amp; backward tests on multiple currencies When i have more results i'll post them here. For now i suggest to use this EA as an aid for manual trading or use it on a demo for automated trading
+
+--- 帖子 #60 ---
+gchf may be skyrocketting this week . im in
+
+--- 帖子 #61 ---
+new EA does not work, charts candlesticks dissappear when applied.
+
+--- 帖子 #62 ---
+Works perfectly.. The ea creates a black background since you are not interested on the candlesticks of the chart you put the EA on. We just need a blank chart for the EA so it can draw its figures onto it
+
+--- 帖子 #63 ---
+OK Thanks
+
+--- 帖子 #64 ---
+@ebeckers forgive me for pestering you, but for the R:R system to work, it must work off a stop loss. Is this the orderhiddenSL?
+
+--- 帖子 #65 ---
+Hi ebeckers, Thanks for the pinbar ea and strat, I have installed all and the dashboard is presently showing a trade on EURNZD but I have noticed that it is not displaying all the pairs stated in the "Pairs To Trade" section. On my dashboard it is showing only EURNZD, CADJPY, EURGBP, GBPCAD, GBPAUD, GBPJPY, and GBPNZD and most surprisingly it also includes ASK price variations -- eurgbp_ask, audcad_ask, eurjpy_ask, cadjpy_ask, gbpaud_ask, and gbpcad_ask. What am I to do in order to correct this? Thanks for your help. R EDIT: Thought a screen shot would better explain my situation.
+
+--- 帖子 #66 ---
+As stated in the first post, The EA is only showing the pairs where setups are valid or building up Pairs which are not interesting since there is no setup building up at the moment are filtered out and not shown
+
+--- 帖子 #67 ---
+Oh am really sorry for the disturbance. I actually read that part but can't imagine how it didn't click in my head. Thanks for your time. Cheers.
+
+--- 帖子 #68 ---
+The EA began by opening the EurNzd/Sell yesterday nite, and closed due to reverse signal, we will see later what happens _ But this is not the point and i wanted to ask why when modifying the mql4 and compiling ... it becomes full of errors again ? I generally can do little modifications and i careful not to make any mistakes did you do something to it, have you programmed it this way not do allow modifications ? Why give the mql4 then, if that is the case _ Well thanks you for clarifying or ... I think best to Pm you then_ OH btw i did load the Dll and the rest of them but some cannot be found _ thanx
+
+--- 帖子 #69 ---
+No offcourse not. Why would i make all source code available if i dont want you guys to compile it ?? Simply copy all the mqh files to your MQL4/include folder and copy the mq4 experts file to your MQL4/experts folder and you should be able to compile it.
+
+--- 帖子 #70 ---
+Yes i thought so, as you are an honest guy also you made available the mql4 and i did try a few times but all errors again. i asked cos some times coders put some restrictions, but eventually this was not the case_ I compiled and only changed name to PinbarTrader2_mod to differentiate the name with the 1st version also a couple of the dll were not in the list, .. Damn i should send a screenshot but i can't now so later i will do it _ Thanx for assistance
+
+--- 帖子 #71 ---
+Situation at the moment .. Just trying out this nice Ea which looks promising though i think some rules will need to be implemented later on, ex: not to take a hanging man/hammer pin bar,, whatever names in a continuation trend up/down or wait for more confirmation to spot fakez and so on _ Meanwhile i started my trading day and taken some possible trades Non-Auto chart action only I am always curious to see differences between Auto/Non-Auto which means (Emotionless Ea -Vs- Emotional human mind decisions)
+
+--- 帖子 #72 ---
+Dank U wel Erwin !
+
+--- 帖子 #73 ---
+Hey Pipsy forgot you are Dutch too Ea seem to work is it ! but future is unpredictable you never know ,, but we will see what the coding mind of ebeckers has prepared for us Je weet nooit hoe een koe en haas vangt
+
+--- 帖子 #74 ---
+Hi ebecks I appreciate your efforts and all your contributions. This looks very promising and am in on this.
+
+--- 帖子 #75 ---
+ebeckers Once again very nice system you have. If people would have gotten in on the very first signal Friday EUR/USD trading it manually, you could have easily made 140 pips. I am asking is it possible that you could add the piercing line candle and the engulfing candle I think these would be very nice additions.
+
+--- 帖子 #76 ---
+You are quite right there ,, the reason i soon liked this Ea made by Erwin it is not only because of a' pin bar.. ;-) but mostly because i saw the potential that it could expand in another little Monster Ea with more parameters and main patterns _ I agree with the engulfing, however what i see many many time happening, it's the Pregnant Harami Bearish which can act as bearish reversal or bullish continuation .. though often patterns formed in forex charts are confused with stocks non forex charts and have different shape which are similar but not exactly because of the different stock market conditions and close
+
+--- 帖子 #77 ---
+How is the winning percentage look like
+
+--- 帖子 #78 ---
+Yes this could get very big a little at a time, many more reversal candles could be added.
+
+--- 帖子 #79 ---
+You guys should check out Zohebs indicator in the "Price action/system indicator" thread It does exactly what you are requesting. Maybe could be incorporated into your EA nicely Ebeckers. Chris
+
+--- 帖子 #80 ---
+Professionals focus of setups and not percentage winning rate
+
+--- 帖子 #81 ---
+Precisely. It's amazing what can be done with a little bit of maths.
+
+--- 帖子 #82 ---
+We need not too much headache. Stay with trading/chart analyses
+
+--- 帖子 #83 ---
+Hi @ebeckers,, The download zip file only contains the ex4 and tpl files. Are you releasing the source code also? The concept you have here is a good one and I think I would like to see a combination of the order placement as an option (retracement/standard/both) instead of either or. For example 50% of risk on the retracement entry and 50% on the standard entry etc. would alloe for the opportunbity to enjoy both. Thanks for your efforts. maahome
+
+--- 帖子 #84 ---
+come on guys, i didnt write a big long post for nothing, did i ?? If you would have read it you would have seen that the 1st post does contain a link to all sourcecode
+
+--- 帖子 #85 ---
+HI Erwin would be possible just to clarify the functions of these parameters what they do ? I Have used few Trailing Ea's in the past but different terminology could have a different meaning ,,, Cheers
+
+--- 帖子 #86 ---
+pls read the first post. It Explains exactly how this works ;-)
+
+--- 帖子 #87 ---
+Humblest apologies @ebeckers, I am going blind in my old age I think. Thanks again maahome
+
+--- 帖子 #88 ---
+-------7 think Again , u just toooo fukkin Lazy to read JUST 5 PAGES and there's more LAZY fukkers like u 4sure ! but thats OK with me cuz then more $$$$$$$ in d Loser's_Pool
+
+--- 帖子 #89 ---
+hi read it, okay so tsx trigger/ts1.2.3 were was pretty intuitive as per my draw but the second part was not written on 1st page so i assume that must be a parameters like Eax dashboard which should be last order trailed how many pips etc .. _
+
+--- 帖子 #90 ---
+Hi, i was wondering if that would be reasonable and possible to implement one function to ea, 'open chart on signal'. When sognal is generated on certain pair, ea opens chart with defined template. Temlate is sourced in default mt4 directory. That would help to see chart with any template (defined in ea by name) when signal is generated. Thank U.
+
+--- 帖子 #91 ---
+As described in the first post:
+
+--- 帖子 #92 ---
+"when profit goes above Order TS4 Trigger pips then the rest gets trailed with a Trailing Step"
+
+--- 帖子 #93 ---
+ok i see, well then i best use the other trailing i got cheers Payit
+
+--- 帖子 #94 ---
+Hi, thanks a lot for coding such good EAs and indicators. I see you use some very similar codes for this EA as the trend reversal EA, my question is that does the EA has a hard stoploss option? I want to place a hard stop, maybe not the same as the hidden sl, because I want to have protection when something like the flash crash of chf pairs several years ago. Thanks!
+
+--- 帖子 #95 ---
+good question! not at the moment, but next version will have it
+
+--- 帖子 #96 ---
+Thanks in advance! You're the best! and please also update the trend reversal EA to enable it with the same feature, I know a lot of people may have given up the trend reversal strategy after last week's big drawdown, but I personally still believe it might be a good method, which may only need a little bit more filters or discretion. Cheers! Happy Trading!
+
+--- 帖子 #97 ---
+atm =
+
+--- 帖子 #98 ---
+damn.. how did you get 29 trades ?? Mine just took 3 trades so far
+
+--- 帖子 #99 ---
+Hi Ebeckers, Congrats on your post bro. Hope all is going well for you. I will defiantly test your system =) Thanks for the hours of work and sharing your system for free.
+
+--- 帖子 #100 ---
+" damn.. how did you get 29 trades ?? " = sofar just 1 trade completed
+
+--- 帖子 #101 ---
+Not sure what happens if you just fill in TS1 (leave the rest) and the Trailing Step ... if the Trailing Step will trigger or it needs TS4 to trigger, maybe ebeckers can clear up that picture?
+
+--- 帖子 #102 ---
+Anyone else got a GBPCHF BUY signal? For some reason the EA is NOT opening an order...
+
+--- 帖子 #103 ---
+yeah got it! ea is not opening a trade at tbis moment since the spread is too high. it will open it when spread is low again
+
+--- 帖子 #104 ---
+Good feature...
+
+--- 帖子 #105 ---
+Pinbar and simple reversal ea's running at same time - 2 different windows - causes them to share the totals. Also does weird things with yours stop loss. I had a trade yesterday with a 5000+ pip stop loss. I'm a terrible trader but not so much that I need a margin for error that large. ;-)
+
+--- 帖子 #106 ---
+It's good to indicate the time frame
+
+--- 帖子 #107 ---
+"Pinbar and simple reversal ea's running at same time - 2 different windows - causes them to share the totals." = FYI i had just pinbar_EA runnin on this tiny Live US acct.
+
+--- 帖子 #108 ---
+I'm running the SDTR EA and the pin bar EA on the same platform, and there is no issues. Make sure you are using different magic numbers for each chart and EA.
+
+--- 帖子 #109 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #110 ---
+I didn't think I was having a problem, except I wasn't getting any alerts from the Pinbar EA. Come to find out they are both running (by default) the same Magic Numbers. I changed the last digit on each of the magic numbers for the Pinbar EA, saved it, and then removed it from the chart. When trying to reload it, it won't do it. I had to shut MT4 down and start it back up again to get it to load. NOWWWW we'll see how the 2 EAs behavior together.
+
+--- 帖子 #111 ---
+55 pips total on 2 live trades. Have a 3rd that's currently flat.
+
+--- 帖子 #112 ---
+Have mine on D1 and no alerts. Here's a pic of the pairs with potential. Does this match up with anyone?
+
+--- 帖子 #113 ---
+It matches mine.
+
+--- 帖子 #114 ---
+EA opened GBPCHF last night.. So far so good + 17pips
+
+--- 帖子 #115 ---
+Hi ebeckers, first thanks for sharing the EA. Trying to backtested, but facing this error. Do you happen to know how to resolve?
+
+--- 帖子 #116 ---
+Using daily time frame as per the rules.
+
+--- 帖子 #117 ---
+I'm getting the same error when trying to backtest
+
+--- 帖子 #118 ---
+yeah found the bug... will upload new version somewhere tonight
+
+--- 帖子 #119 ---
+GBPCHF - BUY at 0311hrs (+2 GMT) Could someone provide some analysis of this lost trade? This doesn't seem like a great setup to me (please correct me if I'm wrong). Quite a distance from the S/R level. The candle on the 26th suggests a bearish price action. Then the 27th there is resistance with a spinning top bullish pattern. Followed by a potential bullish pinbar, and the trade was entered on the next candle. It seems that that there was something going on at this area, and possibly not the clearest signal for an entry? at 1150 (+2 GMT) this was stopped out.
+
+--- 帖子 #120 ---
+Can Always update the first post...as long as it has version everyone will know its the latest.
+
+--- 帖子 #121 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #122 ---
+@john = still in this trade ! OTOH swissy has Always been Slippery m8
+
+--- 帖子 #123 ---
+There is still a probability that it may work out ( remember not all signals even if it is looking perfect, have to workout positive ), as a signal is only invalidated when the price has broken the tail area where the original risk/protection would have been placed and still valid even if it ranges for days, ranging shakes out those without patience. We should observe what happens at the end of the day, most times when executing on a daily chart traders should look to be in the trade for at least 3 days for argument sake.. When the big boys trade this pattern they don't always move the money protection, until the end of the day or the price made a higher low. We would be surprised to see some of these same signals still valid up to weeks and months away from when they first triggered. It all boils down to the management of the trade. For a system like this, lots of big boys would pay heavily for a system like this...I think the reason for sharing here is to have a collective effort in making what already exist even better. &amp; judging from my side it's very good based on my filters and study. (n.b. a lot of signals exist on lower timeframe but the higher timeframe has a lot less noise and takes a whole day to materialize almost like a set and forget system for those who work or go to school etc, and these points of S&amp;R are essential key zones). For those participating, we all have different perspectives and exposure, whether "new" or at the "been there don't that stage", we should try to constructively point out the little bugs like some have and any advice as to perfecting what can make the difference in whether we make it or not. Many of us look for too much complicated systems and try to make the simple ones more complicated. Trading should not be hard, we should keep it simple. Happy there are many persons interested in this very system. Ebeckers it is a Good System...Simple and gets the Job Done and i know we will make it better. Rinse and repeat=
+
+--- 帖子 #124 ---
+Started ignoring https://cdn-assets.forexfactory.net/...230796_207.gif Davit = hmmm, i wonder why ?
+
+--- 帖子 #125 ---
+" For a system like this, lots of big boys would pay heavily for a system like this..." = damn Right m8 !
+
+--- 帖子 #126 ---
+Hi Ebeckers, i have downloaded EA but SMA200 trend filter seems missing. Can you help on this? Thanks a lot. Kent
+
+--- 帖子 #127 ---
+Make that 3/3. An additional 34 pips on 3rd signal. Nice work EB!
+
+--- 帖子 #128 ---
+fwiw =
+
+--- 帖子 #129 ---
+Trade is still running here. Yesterday we had a pinbar rejecting the weekly level @ 1.31090 Today price retraced to +/-50% of the pinbar and now its slowly moving into profit (in hindsight.. I got in too early, i should have waited for the 50% retrace)
+
+--- 帖子 #130 ---
+My GBPCHF buy trade got stopped out last night.
+
+--- 帖子 #131 ---
+Yes the 50% is the sweet one, though it does not come very often but when it does come it's worth the wait. Usually when this limit order entry is triggered it tends to work out even better than the stop order entry, something for traders to think about. nice one ebeckers...
+
+--- 帖子 #132 ---
+On my live account I'm trading manually and using the EA for signals;-) On my demo account i'm use the EA for automated trading and that on got stopped out indeed
+
+--- 帖子 #133 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #134 ---
+Not trading this strategy live yet, still testing the waters.
+
+--- 帖子 #135 ---
+ebeckers.. Thank You for the EA. Looks very promising. I have been closing the trades manually by checking the 1hr S/R, but EA opens the trade again from where i close. Can we add an option like EA opens trades on only new signals or something that sort of?
+
+--- 帖子 #136 ---
+bluejack. The option is already in the EA.
+
+--- 帖子 #137 ---
+[quote=ebeckers;10726343]{quote} On my live account I'm trading manually and using the EA for signals;-) On my demo account i'm use the EA for automated trading and that on got stopped out indeed[/q Hi ebeckers. Thank you for the EA. Would it be possible to have both, trade opens at the start and as well as the 50% retracement if it occurs. Just a thought. Thanks again.
+
+--- 帖子 #139 ---
+Thank You, but i believe that "allow reentries on the same pair" is a different function.
+
+--- 帖子 #140 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #141 ---
+Did anyone see NZDJPY yesterday??
+
+--- 帖子 #142 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) If she does not close the candle, there is no reason to enter. It could be a breakthrough, but they could be pincers? Ако не е затворила свещта, няма никакво основание за вход. Може да е пробив, но може да са пинцети?
+
+--- 帖子 #143 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #144 ---
+Nice...
+
+--- 帖子 #145 ---
+I did.
+
+--- 帖子 #146 ---
+Does everyone have 2 signals and 3 possible others=5 signals for the day. That being: Eurgbp-Short Cadchf-Short Audusd-Possible Short Gbpcad-Possible Long Eurnzd-Possible Short
+
+--- 帖子 #147 ---
+Did you manage to have all these trades trigger?
+
+--- 帖子 #148 ---
+I have Cad Chf and eur/gbp short triggered.
+
+--- 帖子 #149 ---
+atm = + Not usin VPS and puter was closed for 7 hrs [ 00AM-07AM EST (NY time)] Most likely Will close all trades 1hr B4 NFP = tmw Fri. [07:30 EST] imagin what a Nice profit$ if it was 7bucks /pip instead of .02/pip
+
+--- 帖子 #150 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #151 ---
+Many thanks for sharing, great system!
+
+--- 帖子 #152 ---
+I would like to ask you, what is the difference between the "SimpleDailyTrendReversal" and the "PinBarTrader"?
+
+--- 帖子 #153 ---
+The ea looks more or less the same, but the underlying trading strategies are completely different
+
+--- 帖子 #154 ---
+both of them are made by a very generous member ebeckers here at FF, so some of the options seem very similar. for the difference please read the first page of this thread and first page of https://www.forexfactory.com/showthread.php?t=713593 to see the logics behind both EAs.
+
+--- 帖子 #155 ---
+Thank you!
+
+--- 帖子 #156 ---
+I'm seeing the sell and buy on some of the pairs, but it isn't opening any trades. I have the smiling face- I wonder what I'm doing wrong.
+
+--- 帖子 #157 ---
+spread is probably too high atm, ea will open the trade when spread is loeer
+
+--- 帖子 #158 ---
+I have them both running and have changed the Magic Numbers to avoid conflict, but the PinBar EA isn't giving me any signals, whereas the TrendReversal is constantly giving me alerts. I'm using defaults for everything...maybe I should change some of the parameters? Any ideas?
+
+--- 帖子 #159 ---
+Thats because they are 2 completely different strategies. trend reversal works mostly on H4 and will find much more signals Pinbar works on D1 with weekly levels, so expect just a handful signals a week from this
+
+--- 帖子 #160 ---
+I'd like to make a request to make the alerts for each of those EAs a little more descriptive.
+
+--- 帖子 #161 ---
+Hi ebeckers. Thank you for the EA. Would it be possible to have both option, trade opens at the start and as well as the 50% retracement when it occurs. Just a thought. Thanks again. 1
+
+--- 帖子 #162 ---
+thanks sir. do update us after update the new version, going to backtest and get the feel.
+
+--- 帖子 #163 ---
+will do, but found 1 other bug i'm currently busy fixing Hope to have a new version ready this weekend
+
+--- 帖子 #164 ---
+thanks sir. take your time.
+
+--- 帖子 #165 ---
+Ebeckers I'm subscribed. Your coding skills and generosity is truely amazing! Thanks
+
+--- 帖子 #166 ---
+Simplicity of the Dashboard is great. Thanks Ebeckes for the EA. Hope to be live and profitable, when time is right.
+
+--- 帖子 #167 ---
+Hi, what settings are you using?
+
+--- 帖子 #168 ---
+http://prntscr.com/i95qzm Bug?
+
+--- 帖子 #169 ---
+-------7 = def.
+
+--- 帖子 #170 ---
+= 7
+
+--- 帖子 #171 ---
+Based on those signals today along with NFP as a factor...Would you have traded those? Audjpy- No- If using the stop order, it was not triggered. NzdChf - Yes- If using the 50% ( 68-70 pips gain ) or Stop Order ( 45-50 pips gain ) GbpChf-Yes- If using the 50% ( Don't think it would was triggered ) or Stop Order ( 45 pips gain ) Eurcad - No- Not valid- It does not have a good signal in terms of pinbar requirements, far from the signal CadChf - Yes If using the 50% ( 70-78 pips gain ) or Stop Order ( 52-56 pips gain ) AudCad -No Not valid- It does not have a good signal in terms of pinbar requirements, far from the signal 3 out of 4 Valid signals and 2 not worthy of trading. Trades today Resulting in a " minimum " 140 pips minimum for 2 possible limit order trades and a minimum of 142 pips for stop order trades. Were there any other signals?
+
+--- 帖子 #172 ---
+So we have two concerns and thats the two invalid signals- why did it alert to these two bars that are not pinbars? Probably a bug. Nevertheless it does filter those signals well...Keep it up.
+
+--- 帖子 #173 ---
+Hello PrinceJ58 Really appreciated your work here... I have 2 ideas for this strategy. There are 4 types of combinations can be recongized as reverse pattern. Thus, this Pinbar approach is quite rough, sometimes we will miss signals if it is not a pinbar. Moveover, Daliy candle can be various from different brokers, so as the signals. Finally, TP and SL issues. this picture tells everything. all brokers have same M1 and H1 charts.
+
+--- 帖子 #174 ---
+Hi guys, so first week has past. Let's see how the EA did so far. Like i said before, i use automated trading on a demo account with 0.01 lotsize just to see how the EA is doing in automated trading mode (So don't look at the $ it made, thats pretty low because of the 0.01 lotsize. Instead just look at the pips gained/lost) Note that for my life account i do manual trading only. I do use the EA as an tool which scans the market for me and sends me alerts when something interesting pops up So.. first week the EA did pretty well. It made 7 trades with a 71.43% win ratio In total it made 105 pips and we have a profit factor of 2.36, which is really good And we still have 1 trade running which is currently at +42 pips, so things could be even higher.. Now please note this was with 100% full automated trading If you had traded manually and used the EA for signals you could have made much more. Simply because we humans are stil better at reading the market then computers are ;-) So whats up for next week ? I'm currently busy developing the next release of the EA. it will fix some small bugs and have some new exciting features Things i'm working on is - more candle stick reversal patterns - more candle stick trend continuation patterns and signals - sma 200 trend filter - distributed cloud S&amp;R levels so we have manual spotted S&amp;R levels stored in the cloud which we can all use - and some more stuff
+
+--- 帖子 #175 ---
+Whatever types of daliy candle reverse the market, is all comes from basic N shape in smaller timeframe.
+
+--- 帖子 #176 ---
+.... lower low, 1-2-3 pattern, ABCD .... and so on
+
+--- 帖子 #177 ---
+TP and SL case by case. Near last Top/bottom, 1618 2618 4236 Far from last Top/bottom, 1618 200 2618 SL si always at Fibo 0.0 level.
+
+--- 帖子 #178 ---
+Sorry but i don't understand a bit about what you are trying to explain. Also lets try to keep the thread focused on the original strategy. There are already way to many threads in this forum where people get enthusiastic and post literaly everything they think This cause the few posts about the original strategy to get lost between all those off-topic posts.. So pls guys lets keep this thread relevant to the original strategy. How to trade it, how to improve it and what your results/ideas/suggestions about it are
+
+--- 帖子 #179 ---
+sorry i just want to improve your strategy, but i may go too far from it. thanks again for your sharing! Could you pls explain the logic for calculating the weekly SR levels?
+
+--- 帖子 #180 ---
+the result is encouraging and looks forward it. I agree manual trading would be able to generate relatively higher return, but in certain points EA might outperform than human especially on psychological part such as after consecutive loss, missed the trade due to other commitments and etc, so in my view, EA trading should still be used as part of the trading maybe can allocate the lower capital or lower percentage of risk. this is my personal view.
+
+--- 帖子 #181 ---
+Ok I see where some "pinbars" ended up working out to be hanging man = bullish pinbar end up as a bearish result while there was the opposite a grave stone doji/ inverted hammer =bearish pinbar but ended up as a bullish result. Do we ignore those? I wonder if your update will have any of the following: Cloud cover Morning star - I prefer Evening star- I prefer Beovb Buovb Inside bar Harami Whatever you choose will be good since the pinbar is so good already.
+
+--- 帖子 #182 ---
+yeah i know all these patterns and sometimes its hard to tell if a candle is a pinbar, a doji , a hanging man, shooting star or ... But in my opinion its totally irrelevant if its a pinbar or for example a hanging man. What is relevant is that the price action touched a major S&amp;R level and shows a strong rejection on that level . Like it says ok.. here's the line, we are NOT going to cross it. That reaction may result in one of the various candle stick patterns. My idea is that the ea recognises the fact that we have a strong rejection from the S&amp;R level, not that it can perfectly quantify if its a pinbar or a hanging man ;-)
+
+--- 帖子 #183 ---
+By your analyses it means we did not wait to for TF candle to finally close before we took the position. We have to wait for candle to close before final analyses . In spite of the strong analyses we might take no setup is 100% safe. And so we keep our risk level low
+
+--- 帖子 #184 ---
+Hi, All of them may become a reverse point, pin bar is only one type.
+
+--- 帖子 #185 ---
+You hit the point. When they form on S/R you enter with peace of mind. Sometimes they form their own S/R which becomes so important and reference point-S/R
+
+--- 帖子 #186 ---
+Written Chinese ( Chinese : 中文; pinyin : zhōngwén ) comprises Chinese characters (汉字/漢字; pinyin: Hànzì , literally " Han characters") used to represent the Chinese language . Chinese characters do not constitute an alphabet or a compact syllabary . Rather, the writing system is roughly logosyllabic ; that is, a character generally represents one syllable of spoken Chinese and may be a word on its own or a part of a polysyllabic word. The characters themselves are often composed of parts that may represent physical objects, abstract notions, [1] or pronunciation. [2] Literacy requires the memorization of a great many characters: educated Chinese know about 4,000. [3] [4] The large number of Chinese characters has in part led to the adoption of Western alphabets as an auxiliary means of representing Chinese. [5] That's why i did not understand your post.
+
+--- 帖子 #187 ---
+Anyone else had their dashboard disappear?
+
+--- 帖子 #188 ---
+If there's no valid confirmations on any pair then nothing will be displayed. As soon as one of the criteria becomes valid on a pair it will show on the panel.
+
+--- 帖子 #189 ---
+That's how trading should always be, if no setup no trade. Sometimes we sit there looking for a reason to get in and this is a good feature of the dashboard.
+
+--- 帖子 #190 ---
+Cheers for clarification, and agreed with J58! No signal, nothing to look at! Enjoy our day!
+
+--- 帖子 #191 ---
+Thx for sharing. I will follow....
+
+--- 帖子 #192 ---
+fwiw = The significant announcements and the currencies affected include: 6th February 02:30, AUD, Trade Balance 05:30, AUD, RBA Cash Rate 15:30, CAD, Trade Balance 23:45, NZD, Unemployment Rate 23:45, NZD, Labour Cost Index 7th February 22:00, NZD, Cen Bank Interest Rate 8th February 14:00, GBP, BOE Bank Rate 21:00, MXN, Interest Rate 9th February 15:30, CAD, Employment Change 15:30, CAD, Unemployment Rate *All times are Server Time (GMT+2).
+
+--- 帖子 #193 ---
+Actually it was a signal photo that I used and I waited until the signals played out for the most part before saying such a thing. For e.g, the alert came on Wednesday/thursday and I waited for friday to come close to an end for newyork session before making such analysis. My only Aim is to first understand what the system is doing as there are many pinbars that paint across the market but this system does a process of elimination. I was just looking to see how it did that day. I did it for one day and ebeckers did it for the week as "whole" for both live and demo account also for automated and manual which I really appreciate but I had no images for the signals to do a personal analysis of each signal per day. I love pinbars and I like his system concept so that was my reason for going into it a bit more. For me some traders look for one thing, this could be my one thing. So with his help and my interest trading this method my trading can also remain simply what this dashboard offers. I also like the fact that it was highlighted that the rejection of the area is even more important than the bar itself. I was being very strict with the criteria looking for a specific bar if you understand. Cheers.
+
+--- 帖子 #194 ---
+It's strange EA works in my Mac not in PC.... anyone can help me with please.....
+
+--- 帖子 #195 ---
+Post a screenshot of your mt4 with e.a. loaded open the terminal section and click on expert to see if there are any errors. Right click chart and save picture choose workspace.
+
+--- 帖子 #196 ---
+Sashi, in the files from Ebeckers, when unzippig there are versions MACOS and PC. you must use the PC version for PC.
+
+--- 帖子 #197 ---
+Thank you Prince &amp; Pamc it works now
+
+--- 帖子 #198 ---
+first trade on EA
+
+--- 帖子 #199 ---
+Thought this EA should placed at daily chart?
+
+--- 帖子 #200 ---
+this is the recommendation for today (note i have included more pairs) However, I found some pairs with pinbar is not shown in dashboard under pinbar column e.g. GJ. Anyone can share if i miss out anything?
+
+--- 帖子 #201 ---
+My ea not opening trades , is it something wrong with my settings ?
+
+--- 帖子 #202 ---
+There hasn't been any trade signal yet.
+
+--- 帖子 #203 ---
+same here.... not everyday is a trading day
+
+--- 帖子 #204 ---
+very quiet week... zzzzzZZZZ Lets hope things get better soon :-)
+
+--- 帖子 #205 ---
+Hi ebeckers. How's the new development vertison of pinbar is doing.
+
+--- 帖子 #206 ---
+understood. thanks so much !
+
+--- 帖子 #207 ---
+this is the recommendation for dated on 7 Feb (i have included more pairs) However, I found some pairs with pinbar is not shown in dashboard under pinbar column e.g. GJ. Anyone can share if i miss out anything?
+
+--- 帖子 #208 ---
+EA= EUR AUD lol... i use pinbar EA as scanner.... another good signal...
+
+--- 帖子 #209 ---
+hi sir my account balance is 1100$ in real ... please share with me good set file and ea i m newbie and lost money please help....
+
+--- 帖子 #210 ---
+Do you have strategy. Forex is more than placing buy/sell order
+
+--- 帖子 #211 ---
+If I may advise, stop trading live account and save your trading capital. Go on a diet of demo trading for about six months mainly to develop a simple system and strategy that you are comfortable with. Make yourself a master of that system/strategy first before you go back to live trading; operate on a 0.01 lot first (micro) and see how your system/strategy works in real live trading. Just my 2 cents mate. Trade safe and prosper. KP
+
+--- 帖子 #212 ---
+You just hit the point. He should open same amount in Demo and practice with it.
+
+--- 帖子 #213 ---
+Good day! Very interesting Advisor. Creator - Ebeckers thank you.
+
+--- 帖子 #214 ---
+i try many stragies and robots but i lost 2900$ i research good ea and traders any one help me in forex ....... sorry my bd english
+
+--- 帖子 #215 ---
+Focus on trading around S/R. You're subscribed to this thread. Some would be formed on strong support
+
+--- 帖子 #216 ---
+The strategy of building account is to stay with small lot size. When you have successfully closed your position, if it's enough you can use the profit to add to lot size.
+
+--- 帖子 #217 ---
+forex trading is harder than any common jobs you can find in the market. set and forget EA, winning while sleeping... finally end up with blowing up.
+
+--- 帖子 #218 ---
+hello sir, Is there a set file available to make your EA scan all currencies when SR Level was touched? another good signal in EU session
+
+--- 帖子 #219 ---
+Excuse me, but what does yours do to none of the unknown EA with the Pinar Trader EA - Trading pinbars off weekly S &amp; R levels? You got enough stains on the topic. Open your theme and post graphics as you please. Извинявай, но какво общо има твоето на никой неизвестно EA с темата Pinbar trader EA - Trading pinbars off weekly S&amp;R levels? Достатъчно изцапахте темата. Отворете си ваша тема и си публикувайте графики колкото поискате.
+
+--- 帖子 #220 ---
+Today had a Gold buy signal, but the EA did not opened any trades, can anyone help please? My Autotrading is turned on, I don't know what's wrong
+
+--- 帖子 #221 ---
+Probably the spread is to high ? You can specify the max spread allowed in the settings
+
+--- 帖子 #222 ---
+I think i have make myself very clear on this topic. 1 Switch to H1 TF and find Zigzag reverse signal between EU-NY session. 2 use fibo to exit partially that's all...
+
+--- 帖子 #223 ---
+going to buy...
+
+--- 帖子 #224 ---
+Hi ebeckers, is the pinbar shown in dashboard display for all pairs I put in? Or pinbar at S&amp;R level (which I don't think so).
+
+--- 帖子 #225 ---
+Friend, something did not understand me. You are testing with another EA, this topic is for Pinar Trader EA - Trading pinbars off weekly S &amp; R levels. The other thing is that the strategy of ebeckers is quite different from yours. Looking for Pinbar, the TF H1 is pretty crazy. Приятел, нещо не ме разбра. Ти тестваш с друг EA, тази тема е за Pinbar trader EA - Trading pinbars off weekly S&amp;R levels. Другото е, че стратегията на ebeckers е съвсем различна от вашата. Да търсиш Pinbar, на TF H1 е доста налудничаво.
+
+--- 帖子 #226 ---
+Good day, Colleagues! Dear ebeckers , I appreciate your development. Thank you very much for your work. I wanted to ask you for help, maybe you'll find some precious time. In addition to automatic trading, I trade in the standard way (multicurrency trading). I really like the implementation of TS in your works. You may find it possible to allocate a separate expert Advisor to support open orders on TS (in the standard way or by another expert Advisor), on specific pairs or to accompany a specific order. Sori for my English, thank you very much.
+
+--- 帖子 #227 ---
+hello Check my previous posts, using H1 ZZ to repalce Pinbars on D1. NOT Looking for Pinbars on H1 TF.
+
+--- 帖子 #228 ---
+[quote=ebeckers;10714321]=== Pinbar Trader EA === Hi everyone, welcome.... Want to get involved ? you can find all source code for this (and my other ea's &amp; indicators) on GitHub https://github.com/erwin-beckers/SimpleTrendReversalEA Hi there EBeckers: Thanks for this; good stuff!. I went looking for the Source Code for the SupportResistance Indicator but did not find it. Can you make it available as well?. Thank you. Krismitt.
+
+--- 帖子 #229 ---
+[quote=krismitt;10764813] @krismitt: That's quite simple to find ! Click at "erwin-beckers" in the first line above in this homepage "github" and you'll see all the stuff he coded + posted at this HP !
+
+--- 帖子 #230 ---
+[quote=DerBerliner;10764823] Thanks DerBerliner. Got it!. Cheers.
+
+--- 帖子 #231 ---
+Why this Threat stop out?????????? its good EA and template lets make this thread and ea alive
+
+--- 帖子 #232 ---
+Agree. there is no signals so far this week.
+
+--- 帖子 #233 ---
+I've got a buy signal for GBPNZD (50%RT is off)however no trade has been opened by the EA.
+
+--- 帖子 #234 ---
+Holiday for the system...
+
+--- 帖子 #235 ---
+I'm not loving any of these. Anyone keen on any of them?. Attached Image Regards.
+
+--- 帖子 #236 ---
+Strange. I haven't got any signals. Do you have S R on.???
+
+--- 帖子 #237 ---
+Sure. Cheers.
+
+--- 帖子 #238 ---
+Hi ebeckers, thank so much for your kind sharing.
+
+--- 帖子 #239 ---
+No signal/system can give traders setup everyday/week/month. That's the reason Forex is a game of patience
+
+--- 帖子 #240 ---
+Looks like things have woken up today and going well so far.
+
+--- 帖子 #241 ---
+No successful signal service... You have a nice percentage, is it based of pinbars?
+
+--- 帖子 #242 ---
+Was that even the pinbar strategy I've never seen a day with so many setups.
+
+--- 帖子 #243 ---
+You're correct, no successful signal. That's the reason we need to keep the risk so low, however strong the setup might be. My trades are based on 1. Pin Bar on ranging/sideways 2. Hammer , specially with bullish body on sideways/ranging market. 3. Shooting Star, Gravestone Doji , specially with bearish body and below resistance 4. Bullish/Bearish Engulfing on sideways/ranging market
+
+--- 帖子 #244 ---
+Excellent 1. Pin Bar on ranging/sideways- So the ones that stick out, you don't trade those ones 2. Hammer , specially with bullish body on sideways/ranging market. - So you ignore the bearish colors even if it 3. Shooting Star, Gravestone Doji , specially with bearish body and below resistance- Goodstuff 4. Bullish/Bearish Engulfing on sideways/ranging market- Price-action on a whole What timeframes: H1 H4 D1
+
+--- 帖子 #245 ---
+I trade daily, weekly and 4hr. I use the longer time frame like the weekly to see the long term trend. Then get in using the daily and 4hr.
+
+--- 帖子 #246 ---
+Thanks for responding.
+
+--- 帖子 #248 ---
+u still dont know = demo accts. are Rigged by d dealers aka brokers , to reel in boneheads ! - this post will most likely get me banned by mr.twee lol cuz this site is 98% funded by d dealers soooo many dealers cuz soooo many boneheads , thats fine with me = more $$$ in d loser's_pool 4sure
+
+--- 帖子 #249 ---
+NZDUSD Triggered
+
+--- 帖子 #250 ---
+As a follow up to this i was reading a similar thread which was suggesting that for eg. Say one was using h4 chart different brokers may display different closed bar's depend on their gmt chart differences... or where they receive their price feed data from. Etc etc. So i am wondering if different brokers may experience different closes. I do note the support and resistance info you mentioned.
+
+--- 帖子 #251 ---
+Your market watchlist has duplicated pairs hence the reason for so many signals appearing on the E. A. Dashboard Window. You would have to remove them to have a true reflection. Yet you observe those that highlight sell and buy. You basically have focused on continuation version or usage of these candle patterns with the aim of going as long as the trend allows you to before retracements or and form of complete reversals. Am I right?
+
+--- 帖子 #252 ---
+They triggered nicely, how did they turn out in terms of Risk versus reward? If he did not answer you, I believe there is an input section for the pairs of choice, just click it to see what is in there and add what you want. It should work on other tradable charts as long as they have a valid signal.
+
+--- 帖子 #253 ---
+It would be good if those trading this live or demo share the experience with system as an E.A. or as a means of alerting one to a high probability setup that may bring positive pips.
+
+--- 帖子 #254 ---
+Did USDJPY show up yesterday...anyone with screenshots... The system uses weekly settings though...
+
+--- 帖子 #255 ---
+This is the second week I haven't had any signal yet. Has any one has any trade signals.
+
+--- 帖子 #256 ---
+Some you have to just take manually. Look on eurjpy...Cadjpy.
+
+--- 帖子 #257 ---
+PrinceJ58. Thanks for the in put. But I'm just wondering despite the pinbars are forming on D1 ie e/j and c/j. the Pinbar bot would not send alert or execute the trades. I hope ebeckers would enlighten us with his thoughts.
+
+--- 帖子 #258 ---
+I guess he will..., should all conditions not be met in the algorithm whether it be spread, news etc then it will not issue a signal or a trade, however it may very well work out in manual trading.
+
+--- 帖子 #259 ---
+Yes, i did put in all relevant pairs I want to see, and also confirm there is a pin bar on the selected pair.
+
+--- 帖子 #260 ---
+So far the system was really designed for signals, however those signals maybe automated to trigger a directional trade. Good setups come and do not get triggered and at other times it will be executed. Otherwise its best to just use your discretion at the moment. Ebeckers tested the robot and it gave positive results for the period. I don't remember if it was the first version or present one. He also said it was created for his personal alerts which he took on a manual basis. The manual basis at the moment is likely to yield more than the automation. I suggest that until there is a solution for the challenge faced, use the system as an on screen signal system. It is one of the few free system for this method that filters news, support and resistance, swing high and lows and directional based pinbars that the colours have to match the direction. This is an excellent system and if anyome knows of a way to make it better, the thread is open for suggestions with use of clear examples. Test and test your suggestions, share your thoughts and lets work on this edge based system. Remember the alerts show up at the end of the New York sessions. So where ever a reader is located they can check the chart once for the signals and chill after, if there are none then it did not reach the coded requirements. It's possible there could be a bug or a slight adjustment and the system behaves flawless. Nb. The system is open to be modified he made it available which is great. Should anyone be able to assist and not deviate from the original concept then I don't think he would mind.
+
+--- 帖子 #261 ---
+The pinbar EA opened a long E/J trade.
+
+--- 帖子 #262 ---
+Seems like you in the game!
+
+--- 帖子 #263 ---
+signal found...
+
+--- 帖子 #264 ---
+This is very intersting...Is this based on pinbar?
+
+--- 帖子 #265 ---
+Pinbar....what do you think? Attached Image (click to enlarge) Trade well.
+
+--- 帖子 #266 ---
+Hi my friend, Pinbar is one of the most popular reverse pattern.... but if you switch to smaller Timeframe (H1 is the best, because all brokers share same H1 candle)... you will find all reverse pattrens have same N structures. all detials(entry,TP,SL) are clear on following pictures:
+
+--- 帖子 #267 ---
+Its in a good Place, but you never know until your in...
+
+--- 帖子 #268 ---
+Yes it all boils down to perspective...Good Stuff...
+
+--- 帖子 #269 ---
+Usdjpy and gbpusd....thoughts
+
+--- 帖子 #270 ---
+Put both on the watch list, but I think it's too early for a reversal.
+
+--- 帖子 #271 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #272 ---
+Tools + imagination + Time = all you needed for trading GJ and EJ break 3 Support lvs on D1, trade cancelled.... EA still holding position
+
+--- 帖子 #273 ---
+more signal
+
+--- 帖子 #274 ---
+The challenge i have with fibs, everyone has a different way of drawing it. The points are subjective to perspective... and yet even if drawn incorrectly people still make money. So as long as it works for you no problem. I wont go into that any deeper...can of worms that one. I like your highlighted candlesticks. Good analysist by the way.
+
+--- 帖子 #275 ---
+So can someone post the signals received from the e.a. Judging from my mobile usdjpy, usdchf,audjpy moving quite good. Gbpusd struggling at the moment, will see what London and New york will do for that.
+
+--- 帖子 #276 ---
+thanks for sharing. I get "weekly SR" on mt4, but I don't get the "trend reversal EA"part on my mt4, is there something wrong?
+
+--- 帖子 #277 ---
+They can be used on both reversal and continuation setups
+
+--- 帖子 #278 ---
+Leave heavy foot prints my friend.
+
+--- 帖子 #279 ---
+Ensure that you placed it in the expert folder refresh your mt4 and then look in the navigator panel for the expert advisor if you use the template its possible that the e.a. might ot be attached. So resave it when you attach it with the preferred settings of your choice.
+
+--- 帖子 #280 ---
+Pinbars. I took this Trade and it was a candy. However, I was unsure about the veracity of the Pinbar so I went in with some uncertainty. I have done some reading since then; sharing some excellent resources that are freely available here. Krismitt. Attached File(s) Pin bars-introduction.pdf 175 KB | 753 downloads Attached File(s) Pin bars-advanced.pdf 113 KB | 732 downloads
+
+--- 帖子 #281 ---
+Not from The Pinbar Trader EA, but a nice Weekly Pinbar on USDCHF Attached Image (click to enlarge) Cheers.
+
+--- 帖子 #282 ---
+hi can someone share Dash SDTR pin?? thank
+
+--- 帖子 #283 ---
+AUDUSD. Long Trade. Attached Image (click to enlarge) Attached Image (click to enlarge) Cheerz.
+
+--- 帖子 #284 ---
+Pinbar EA I have enabled the 50% retracement rule but the EA is still taking market orders. Anyone else experiencing this?. Attached Image Cheerz.
+
+--- 帖子 #285 ---
+AUDUSD PINBAR. Still in (Demo Account) Attached Image (click to enlarge) Cheerz
+
+--- 帖子 #286 ---
+AUDNZD Got this signal today and EA opened Trade. Bad location. I will close trade. Attached Image (click to enlarge) Not sure why but EA not doing the 50% retracement and is doing only market entries - even with the 50% enabled. Cheerz.
+
+--- 帖子 #287 ---
+Open Trades Disclaimer: Please note that this is a demo account and I am therefore trading the EA in "experimental mode". Attached Image (click to enlarge) Cheerz.
+
+--- 帖子 #288 ---
+Pinbar Trader EA. I like this EA. I have a habit of over-trading and this will keep me in check Two or three good trades per week and less headaches. Cheerz.
+
+--- 帖子 #289 ---
+Hi, have just come across this thread and downloaded and installed the EA however it will not load onto the template. The template itself loads fine as does the SupportResistance indicator(a fantastic indy in itself). I must be doing someting wrong but am not sure what, I have followed all of the instructions and all other EA's work fine. Any help offered much appreciated. I am talking about pinbar trader eav1.20 Thanks in advance Nut
+
+--- 帖子 #290 ---
+Typical I had no sooner posted this when my error became apparent and we are now up and running. Thanks to all Nut
+
+--- 帖子 #291 ---
+Sweet. Best to you.
+
+--- 帖子 #292 ---
+@ebeckers Thank you very much for sharing this EA ! may i please ask a few questions : 1. When i try to add some more pairs, the buffer of "Tradepairs" seems to be limited. Any plans possibly to increase the buffer ? 2. Sometimes a buy or sell signal appears but goes away after minutes or hour so . Does this mean the signal is no longer valid ? 3. Is there is possiblity to have same EA for trading pinbars from DAILY S&amp;R levels ? Does this require big effort or only one part of the code needs to be changed. I would really appreicate your comment on this ?
+
+--- 帖子 #293 ---
+Hi guys Sorry for the lack of updates. I've been extremely busy with other stuff lately and sadly didn't had much time for forex trading but i'm still visiting this thread a couple of times a week and still got some idea's on how to improve the ea :-) If you have any questions, just ask me, or pm me
+
+--- 帖子 #294 ---
+Nice to have you around Ebeckers Here is a question for you:- https://www.forexfactory.com/showthr...1#post10842331 Cheerz.
+
+--- 帖子 #295 ---
+EURGBP I do not like the position of the Pinbar and the Body is too much. Also, the nose is not much of a Pinocchio Attached Image Can anyone tell how to stop EA from trading the second pair with the subscript? Attached Image (click to enlarge) Note that EA takes Market Order Attached Image (click to enlarge) Despite 50% retracement enabled. Cheerz.
+
+--- 帖子 #296 ---
+Hi Ebeckers, Can this EA be tweaked to take continuation trades. Hopefully you are already working on it. Have a great weekend.
+
+--- 帖子 #297 ---
+Ebeckers , thank you for your contribution , today I got a loud and clear signal on UC , even though it's NFP but classic combination as such is just a piece of gold. Definitely a great addition to the arsenal!
+
+--- 帖子 #298 ---
+Hi Did you edit the pairs in the settings?
+
+--- 帖子 #299 ---
+I have, but the pairs in the settings do not have the "subscript" that are listed in the Marketwatch Window. Cheerz.
+
+--- 帖子 #300 ---
+EURGBP UPDATE Attached Image (click to enlarge) Cheerz.
+
+--- 帖子 #301 ---
+Hi Ebeckers. Thank you for your time and generosity . Would it possible to have both option on trade open with the signal as well as opening another trade if it retrace at %50 . Also could the pinbar be more specific than any kind of pinbar. Thank you in advance.
+
+--- 帖子 #302 ---
+Does you Marketwatch have both regular and "subscript" pairs? If so, did you try have only the 28 regular pairs there with any "subscript" pairs? Just an idea, maybe works, I see a lot of EA have the choice to trade Marketwatch pairs, not this one yet. Also, most EA have the pairs separated by comma or semicolon, this one is just by spacing, not sure why that is. I wonder if it will read those formats? EURUSD USDJPY GBPUSD USDCHF USDCAD AUDUSD NZDUSD EURCHF EURGBP EURCAD EURAUD EURNZD EURJPY GBPJPY CHFJPY CADJPY AUDJPY NZDJPY GBPCHF GBPAUD GBPCAD GBPNZD AUDCHF AUDCAD AUDNZD CADCHF NZDCHF NZDCAD AUDCAD,AUDCHF,AUDJPY,AUDNZD,AUDUSD,CADCHF,CADJPY,CHFJPY,EURAUD,EURCAD,EURCHF,EURGBP,EURJPY,EURNZD,EURUSD,GBPAUD,GBPCAD,GBPCHF,GBPJPY,GBPNZD,GBPUSD,NZDCAD,NZDCHF,NZDJPY,NZDUSD,USDCAD,USDCHF,USDJPY AUDCAD;AUDCHF;AUDJPY;AUDNZD;AUDUSD;CADCHF;CADJPY;CHFJPY;EURAUD;EURCAD;EURCHF;EURGBP;EURJPY;EURNZD;EURUSD;GBPAUD;GBPCAD;GBPCHF;GBPJPY;GBPNZD;GBPUSD;NZDCAD;NZDCHF;NZDJPY;NZDUSD;USDCAD;USDCHF;USDJPY
+
+--- 帖子 #303 ---
+Thanks Erebus. My Marketwatch has both regular and subscript; pairs in the EA Inputs are without subscript. I noticed that with the market now closed I was able to "right click" and "hide" most of the subscript pairs. A couple just will not go.. I will try adding the commas etc. at market open and see what happens. Cheerz.
+
+--- 帖子 #304 ---
+It's worth a try but you probably won't know for sure until Monday When a pair or index will not delete from Marketwatch, there might be a chart open with that pair? Or close and restart, try again, MT4 is very quirky like that
+
+--- 帖子 #305 ---
+Thanks
+
+--- 帖子 #306 ---
+How are the traders using the system? Anyone on full auto or trading signals manually?
+
+--- 帖子 #307 ---
+AUDJPY Traded this one manually from the Pinbar Trader Signal. Attached Image (click to enlarge) Cheerz.
+
+--- 帖子 #308 ---
+Awesome trade.
+
+--- 帖子 #309 ---
+it was a great trade which i missed....lol
+
+--- 帖子 #310 ---
+AUDJPY signal from Pinbar Trader. Attached Image (click to enlarge) Saw it a bit late and missed the retracement. Cheerz.
+
+--- 帖子 #311 ---
+Still in. Attached Image (click to enlarge) Cheerz.
+
+--- 帖子 #312 ---
+it broke that support , with a very bearish candle more to the down side now IMHO
+
+--- 帖子 #313 ---
+adding Morning star ,evening star &amp; shooting star to this system will make it more powerful
+
+--- 帖子 #314 ---
+Why everyone stopped?? How about the ea performance now?
+
+--- 帖子 #315 ---
+I am not enabling the EA but dashboard is always on , when I see a signal I evaluate and enter a manual trade Will post next ones !
+
+--- 帖子 #316 ---
+Awesome...do what works, that is exactly what ebeckers do he uses it as an alert system.
+
+--- 帖子 #317 ---
+Usually when a system based thread has achieved what it was created for, it is expected that the developer and integral participants exit the building and continue using the too or systeml. There is really nothing to write after that. Most times its just issues and updates that will keep most threads going unless it is a discussion based thread.
+
+--- 帖子 #318 ---
+I believe that was the mission, if you go to his resources web page you will observe his further developments that took place in the quiet gifted space he dwells in, cheers. It would be good to post some examples of your statement so we can observe the same high probability setups you look for.
+
+--- 帖子 #319 ---
+@krismitt: I am interested where do got those diamond-types over the PinBar-Candles from? An Indi or Script oir drawn by your own? thanks for an info. Reg.Zack
+
+--- 帖子 #320 ---
+@ebeckers : very interesting idea. Came up with 1 small add...is it possible to show the Monthly and Yearly S/R-lines also. would be a huge advantage for this Indi I think. thanks for an info. Reg.Zack
+
+--- 帖子 #321 ---
+Fractals. Cheerz.
+
+--- 帖子 #322 ---
+@ebeckers: please contact me via PM.Thanks. Could be interesting for both of us i think. Reg.Zack
+
+--- 帖子 #323 ---
+Which one is better... at times only 2 or one will present itself.
+
+--- 帖子 #324 ---
+I have only seen one update on results of the forward testing after week one by Ebeckers. I am wondering if the results have been as positive since last January or have interest in this EA dwindled. Has anyone had positive results with the EA using it in automatic not manual? I ask only because if nobody shows actual results how can you improve on a great tool like this. Ebeckers does a fantastic job of his coding and it would be a shame to let this thread die off. Cheers
+
+--- 帖子 #325 ---
+thanks a lot. Reg.Zack
+
+--- 帖子 #326 ---
+I agree, it will not die...unless mission accomplish.
+
+--- 帖子 #327 ---
+this fractals do repaint ,i tried and dump it like zigzag arrows etc,let me know your experince and way of trading with sfractals please.
+
+--- 帖子 #328 ---
+Fractals always repaint, or actually, they simply appear late because of the way fractals are formed. To learn the math behind fractals you can read here . The way to trade according to fractals, any sort of fractals is this: You always scan 9 bars backwards, and stop your scan on the first fractal you encounter. If you're a manual trader - that's easy. If you're a programmer, this is the way to do it (more or less): Inserted Code double fractalUp=0,fractalDn=0; i=1; while(i&lt;Bars &amp;&amp; (fractalUp==0 || fractalDn==0)) { if(fractalUp==0) fractalUp=iCustom(NULL,0,"sfractals.ex4",0,i); if(fractalDn==0) fractalDn=iCustom(NULL,0,"sfractals.ex4",1,i); i++; } After this code segment, fractalUp and fractalDn will contain the most recent fractal prices it encountered, then you can use any trading strategy you want - stop orders or wait and market order, or anything else.
+
+--- 帖子 #329 ---
+Hello, I was trying to install the EA but for some reason it is all squished. Can someone please help me fix it?
+
+--- 帖子 #330 ---
+Is this forum dead.???????????????????????????????????????????????????????????????????
+
+--- 帖子 #331 ---
+If you keep spamming, yes it will surely die.
+
+--- 帖子 #332 ---
+Hello After thousands of hours spent on my graphs, I apply a similar method since early 2017 I expect a pinbar when it is outside the 70-30 area of the RSI 14. I open 50% of the wick for a better ratio. I apply to TF&gt; H1 I have great ratios and excellent signals! Often there is an appointment at this place with institutions.. That's why I'm curious with this similar method. I wanted to try to backtester this EA, but I'm full of error messages. Is this normal? Attached Image (click to enlarge) Thank you
+
+--- 帖子 #333 ---
+Good to know...post some result then
+
+--- 帖子 #334 ---
+Ok , here is a heads up for GA, pinbar @ weekly S/R level ON THU Fri is retesting &amp; now waiting to see a good PA on smaller frames next week in order to pull the trigger ...
+
+--- 帖子 #335 ---
+Was out all day as i am not a big fan of trading on Friday to see this ... big fat bearish candle , lets see if it will take out previous low so we sell comfortably. Have a good weekend everybody!
+
+--- 帖子 #336 ---
+So after carefully listening to Mr. Price , I decide to go short on GA after previous lows were taken. Target is next daily level , and stop is the high of 34EMA/ coinciding with previous S/R level Let's see how it plays out in this game of patience...
+
+--- 帖子 #337 ---
+GA obediently fell and now it is a risk free trade with +30 pips already...
+
+--- 帖子 #338 ---
+GA Taken out with +5 pips Will keep watching for another chance to sell after PA confirms.
+
+--- 帖子 #339 ---
+@ebeckers: Many Thanks for sharing your experience ! I know you are quite busy.. Once you find some time, it would be very much appreciated if there would be a possibility to: - add an additional choice on top of Use50PercentRetracementEntry, to set a pending order (buy stop) on top of bullish pinbar or (sell stop) at the bottom of bearish pinbar. - Also if there would be a possibility to add a field where one could add additional pip on top or bottom of the pinbar. Thank you very much for your time and support.
+
+--- 帖子 #340 ---
+Hello ebeckers, Where can I get hold of your Dashboard. Couldn't find the download link. It looks great and I wish to have it. Thanks.
+
+--- 帖子 #341 ---
+This indicator looks pretty nice...
+
+--- 帖子 #342 ---
+The systems that are slow based on the timeframe traded and have great potential over the long hall, don't receive much attention. It's quite weird, yet I always see this happening and the systems that have quick and more entry frequency in the market are the ones that are always flooded. Good Stuff Ebeckers...
+
+--- 帖子 #343 ---
+Hello ebeckers, I am still waiting for the link to download the Dashboard Thanks.
+
+--- 帖子 #344 ---
+Hey Paul im curious about your EA youve used for your Supply and Demand Strategy and im wondering if you can possibly share it with, as im trying to use a similar strategy. The EA that duplicates the first order into 10 orders. It would be greatly appreciated.
+
+--- 帖子 #345 ---
+@ebeckers I read through this thread once more and it is amazing I know you still around but you keep comments few. Keep well...
+
+--- 帖子 #346 ---
+Signals still flow... Daily
+
+--- 帖子 #347 ---
+Weekly
+
+--- 帖子 #348 ---
+Monthly
+
+--- 帖子 #349 ---
+Patience, money management and discipline can do a lot for: New traders Experienced traders Traders who seem lost Traders who have given up Traders who chase every new strategy Earn the right for the next trade opportunity, control the risk so the account can survive the tides of the market. Winning &amp; losing trades, comes in and goes out like the sea. N.B. Never let your risk be the tsunami that kills your account but the one to let your account last through the test of times.
+
+--- 帖子 #350 ---
+It's in the zip file........first few posts
+
+--- 帖子 #351 ---
+Anyone dashboard is showing any pairs? Mine is empty for the last 6hrs.
+
+--- 帖子 #352 ---
+Thanks for the EA. Looking forward to testing it!
+
+--- 帖子 #353 ---
+Yesterday still got signal and a trade on GY pair. But today until now the dash is blank and nothing shown.
+
+--- 帖子 #354 ---
+Daily will give you time off periods for trading...this is one depending on the pairs you have implemented. No trade unless there is a setup. You don't lose and you don't win. In fact some setups are still running from previous signals.
+
+--- 帖子 #355 ---
+Precisely...holiday for that setup...probably h4 or h1 may have setups. You could try it out at lower risk. On occasions like this. From M15 to Monthly can be traded you just have to be open to more volatility or noise. It might be less on the accuracy or you might be surprised to find good results just the same. However create your rules and stick to them, Know them inside out.
+
+--- 帖子 #356 ---
+Like this for the whole of today. Tried reload still like that. Anybody got any idea?
+
+--- 帖子 #357 ---
+It just simply means no setup on that timeframe go to m30, h1 and h4 on days like this, remember it takes a while day before the possibility of a new setup on daily timeframe. Remember losses or profits incurred on other timeframes are in your hands.
+
+--- 帖子 #358 ---
+I am just confused. I just start loading it up yesterday with some pairs showing on the dash and today is totally empty. So I thought something is wrong. Anyway I am letting it run on autotrade with 0.01 lot on a real account to see how it fair. Thanks for the information. Will check back again next week.
+
+--- 帖子 #359 ---
+How are you now, when there is no setup on daily usually I would get on m15 back up to weekly. For e.g. Usdjpy lastweek and eurusd this week. M15, m30, H1, H4. Sometimes even monthly look on silver (xagusd). What would be good is: Inside bar Outside bar Engulfing Harami As potential continuation and reversal signals when pinbar is not present.
+
+--- 帖子 #360 ---
+I got a bug where the EA took a trade immediately on closing of the day despite setting the 50%retracement=true. The dash board also showed the 50%rt=true when it is not. I need to switch timeframe then the dash board goes back to normal.
+
+--- 帖子 #361 ---
+I enabled late...
+
+--- 帖子 #362 ---
+Did you use auto-trade? If yes, did you disable and enable everyday?? I closed my EU trade at 20+ pips seeing it stalled.
+
+--- 帖子 #363 ---
+its a sound system, just dont understant why anyone hasnt backtested it yet
+
+--- 帖子 #364 ---
+The 50% retrace don’t seems to work. I set it to true but the EA still opens the trade at the open of the new day candle.
+
+--- 帖子 #365 ---
+I had another pinbar method On, which covers other time frames... I love the system hence the reason I posted here the trade since some persons were having difficulty with the system having alerts. It was meant for feedback to those individuals more than anything else. In a daily basis there are numerous opportunities from m15 to h4 while daily requires 24 hours of cycle for a new alert. While several other signals may trigger within the same 24 hour wih similar results... However these significant zones of support and resistance based on a weekly weighted factor, plays a vital role in the zones being actual reactionary zones beyond just a pinbar pattern. At these zones almost any rejections can be traded from these levels. So the system can be accepting of other candle patterns of reversal or continuation reactions. Cheers... Multi timeframe may just have mix results while h4 to weekly may have more of a solid response to the patterns expected reaction as a higher probability trade. On this system the Trades are not often but worth the patience. Daily have more potency since banks, hedge funds, money managers and other institutions utilize the new yorks daily close for their trading decision hence the results are more potent. One trade example I love is December 12 I believe on gold and a couple weeks before that coming down September 8th 2017. When you observe those trades you will realize the importance of these levels identified by the pinbars, since pinbars usually form at levels of expected breakouts that triggered a Lot buys or sells with stoplosses being triggered and lots of limit orders being activated on the wick zones. After seeing these trades you will think twice about closing trades so fast and let them run for as long as the can in your favour but do you have the patience to let these soldiers fight for you... front line duty is not easy but could lead the way to capturing large profits with little or no risk.
+
+--- 帖子 #366 ---
+I realise people flood the threads which require a Lot more work and those that are out right profitable but slow are more on the ghost town, that has lots of spider Webs on their titles.
+
+--- 帖子 #367 ---
+So you are using the s/r that show on the dashboard and look for trades on lower time frame?
+
+--- 帖子 #368 ---
+It's a different system alltogether... however it picks up the same pinbars...all you would have to do is have the dash board with different magic numbers on h1 h4 daily and weekly.
+
+--- 帖子 #369 ---
+I like to see what s/r you are using. Do you using monthly pivots or weekly pivots values as s/r too? Maybe you could post some trades whether done or ongoing to shed some lights for me to further learn and understand.
+
+--- 帖子 #370 ---
+I would love to however this thread is for weekly support and resistance hence it cannot be discussed in this thread. I respect Ebeckers.
+
+--- 帖子 #371 ---
+Just compared signals and ebeckers signals match even on the m30 currently. ☺
+
+--- 帖子 #372 ---
+Hi ebeckers, can i request the mq4 file for you? I have asked to take on Github, but an error , please help me friend, thanks
+
+--- 帖子 #373 ---
+Hi Zack, I would like t get in touch with @ebeckers relating to this EA. Please help how I would go about doing this? Regards,
+
+--- 帖子 #374 ---
+Easy!. Post here; he will see it. Cheers.
+
+--- 帖子 #375 ---
+Thanks @ krismitt. What is the latest version on the EA? Is it available for download and testing? I only just found the thread and would like to explore this fabulous idea. Does anyone have results generally on the EA? @PrinceJ58 maybe?
+
+--- 帖子 #376 ---
+Everything is in Post No 1, including link to the Source Code, which you can modify as you wish. Cheers.
+
+--- 帖子 #377 ---
+Hi all, It is a great thread. Does anyone consider the body of Pin Bar ? I am looking for an EA make an alert when Smallest body candle within X candles (include Pin bar)/ or Largest range within X candles (whole price range, also include Pin Bar). If anyone has any information about similar indicator, please let me know about it. Thank you
+
+--- 帖子 #378 ---
+Guys, I've been testing this EA on H1 (AutoTrade), 420 pips today alone. Would like to see it do for a sustainable period but I'm fairly impressed nonetheless. Thanks for this EA.
+
+--- 帖子 #379 ---
+Did you run it with defaults?
+
+--- 帖子 #380 ---
+i try also in H1,..but not very lucky,.what is your settings for h1,.?????
+
+--- 帖子 #381 ---
+Lets see how this goes. Attached Image (click to enlarge)
+
+--- 帖子 #382 ---
+Did you change the magic number to run it on h1??
+
+--- 帖子 #383 ---
+Good threads hibernate early...
+
+--- 帖子 #384 ---
+hey PrinceJ58 i tried this EA but couldn't get any consisten tresults. have you any advise / settings that you could share? blam
+
+--- 帖子 #385 ---
+Was it on daily?
+
+--- 帖子 #386 ---
+Possibly.. or h4 i can't quite remember, I just know i had to discontinue the demo after some time testing blam
+
+--- 帖子 #387 ---
+I would say which ever pattern you are interested in: It has to be non repainting have a coder add a risk to reward factor to it Check the different ratios win-rate and that will determine which setup or Risk to Reward is best for your strategy.
+
+--- 帖子 #388 ---
+My broker displays valid pairs like this EURUSD.E AUDCAD.E etc. If I use this in the EAs options I get a message that "no pairs found"Any ideas?
+
+--- 帖子 #389 ---
+I believe pages 30 and 31 spoke to that issue about subscripts it would be good to check the mq4 file to see if it is there in the code or delete the list of other currencies that are not being used in the watch list. Ensure to read pages 30 and 31.
+
+--- 帖子 #390 ---
+Pages 30 and 31 from which thread? OP is not monitoring the thread?
+
+--- 帖子 #391 ---
+This same thread.
+
+--- 帖子 #392 ---
+I can only see 20 pages in this thread.....
+
+--- 帖子 #393 ---
+Please read post: https://www.forexfactory.com/showthr...2#post10858902
+
+--- 帖子 #394 ---
+Attachment g
+
+--- 帖子 #395 ---
+Is the zip file of this EA removed? I cannot find anything to download. Could anyone with this great system share the zip file again please.
+
+--- 帖子 #396 ---
+https://github.com/erwin-beckers/Sim...master/Experts Hope this helps... its a nice e.a. Ensure to use a broker with good spread, like an Ecn or Stp, absolutely no market makers... the reason for that is that if the spreads are too large, the positions will have poor entries and this will impact the risk to reward ratio of the strategy. Note well though, this type of trading requires what most traders don't have= patience.
+
+--- 帖子 #397 ---
+got message unable to download news ... what supposed to do ?
+
+--- 帖子 #398 ---
+AUDJPY Been away from the Charts for a while!. Haven't traded Pinbars for a long time but been looking at this Pinbar Trader this week. Here is one that I think is worth the risk (this is a demo Account). Attached Image (click to enlarge) And the Entry (was a Limit Order at the High of the Pinbar) Attached Image (click to enlarge) . Trade well.
+
+--- 帖子 #399 ---
+AUDJPY - UPDATE: Attached Image (click to enlarge) Trade well.
+
+--- 帖子 #400 ---
+Great stuff krismitt... I am actually testing a mtf pinbar system too, through pending orders. https://t.me/joinchat/AAAAAFixP49h5XGkuravkg Prior to now i was testing other things but i decided to go ahead with pinbars, Filtering them is the hard part.
+
+--- 帖子 #401 ---
+EURJPY Attached Image (click to enlarge) Entry (bounce off 50%) Attached Image (click to enlarge) Trade well.
+
+--- 帖子 #402 ---
+How about the ea performance now?
+
+--- 帖子 #403 ---
+These are profits using this system.I started to check Pinbar trader EA three days ago.It has opened six trades.
+
+--- 帖子 #404 ---
+Yeah a little patience is worth it, is it default settings? Apart from the 50% retrace being activated. limit orders, these sometimes miss potential entries, that the stop orders would pick up. Ever thought of activating one chart as stop orders= buystop sellstop, market orders versus another chart with limit orders, these retracement entries.
+
+--- 帖子 #405 ---
+I just only changed the lot size and used fix lot size. That is all i changed.all others are default settings. I do not know what will happened in the future.will see...
+
+--- 帖子 #406 ---
+Well basically with this method you can basically check 15 minutes before the new trading day, based on the timeframe being daily. Otherwise book a vps to test it so you get a fair evaluation. Best if you have low spreads from your broker end like ecn or stp. Then you'd have to check each pair to see the maximum spread on those being monitored during regular market condition, so you don't miss a trade or filter them out with the spread.
+
+--- 帖子 #407 ---
+I have a problem.Help me to resolve it. I put Pinbar trader EA in to two different mt4 platforms in one VPS. Two different mt4 platforms are Pepperstone and Icmarkets . Pepperstone mt4 is taking positions.already six trades.but when it comes to Icmarkets its not taking positions.no any trade yet. should i change the magic number when i run same ea with two mt4 in one vps? PS : No any errors.all settings are ok.smile face also smiling Thanks
+
+--- 帖子 #408 ---
+Remember the same spread settings, there are about 2 mt4 types that icmarkets carry, one with commissions and swap and the other i believe incorporate those into the spread. So check that first.
+
+--- 帖子 #409 ---
+Lots of pins on Aussie pairs. Weekly.
+
+--- 帖子 #410 ---
+Hello every one! I followed this thread a long time, but the interaction here doesn't seem to be much. Base on the strategy of the Pinbar EA trader, I developed it with more pattern such as Engulfing, inside bar, reversal 02 candle, reversal 03 candle, Fakey. Besides, I added hull moving, RSIoMA with purpose trade follow trend. I tested on M5,M15,M30, and H1 and see result is good on 04 time frames. However, there is one problem that: when i use iCustom, sometime EA was lag, so the entry point be late. I don't know convert Indicators to file *mqh to attached to EA to speed up of trading. If anyone good coding and interesting by this EA, you can help me and people convert indicator to speed up for EA. Thank you very much! I posted 04 files related update this EA. The remaining files remain the same as Ebeckers posted. Attached Image (click to enlarge)
+
+--- 帖子 #411 ---
+Interesting very interesting....
+
+--- 帖子 #412 ---
+Can I ask how to install it? I cannot install .mqh and EA files on my MT4! Thank
+
+--- 帖子 #413 ---
+File *.mqh was attached in EA. You should copy file *.mqh to folder "include", then EA will detect and run. I send more template file for you.
+
+--- 帖子 #414 ---
+Hi, ebeckers Can you share the setting of the results of a 2-year backtest on EURUSD you attached ?
+
+--- 帖子 #415 ---
+Thank you so much for your input on this EA. I have installed all 3 new indicators plus the file to be installed at the 'include' folder and here my template still remains the same as old. pls, what could be the problem?
+
+--- 帖子 #416 ---
+i think the problem is that the Price Action2.mq4 indicator is not detected by the EA. Can someone pls tell me how to fix this problem? It says 'cannot open file'.
+
+--- 帖子 #417 ---
+file Price Action2.mq4 is EA, not indicator!
+
+--- 帖子 #418 ---
+Could you elaborate on how you got it running? What timeframe are you using?
+
+--- 帖子 #419 ---
+Thanks, i've installed in the experts but the same problem persisted. I'm surprised i'm the only one talking about this problem. Also, it could'nt be attached to my chart.
+
+--- 帖子 #420 ---
+He hasn't provided his actual EA that is why it's breaking
+
+--- 帖子 #337 ---
+Oh no, thanks for that observation.
+
+--- 帖子 #338 ---
+I have attached Ea MT4 2 Day but not Open Order Why..? can you help..??
+
+--- 帖子 #339 ---
+Sometimes the day will not have a pinbar and other times alot will be around especially after an impactful news releases. Stophunts etc etc
+
+--- 帖子 #340 ---
+You can take out a cheap vps to test it for a period. Change timeframes, check minimum spread, check if news filters are on. Lots of settings can cause it but when you change to lower timeframe it will show if the e.a would definitely trigger a trade when daily conditions are met, this doesn't happen very often since you have to wait one whole day.
+
+--- 帖子 #341 ---
+Made the post at the wrong location... I apologize.
+
+--- 帖子 #342 ---
+Thanks Ebeckers. It's a great system. I Downloaded the EA and tried to run. I ran two EAs on different pair, and I found the result were different. I'm using the same EA so why the results are different?
+
+--- 帖子 #343 ---
+Question should also cover whether its the same broker. Each broker sometimes vary in the close bars of h4 and daily based on the gmt offset differences.
+
+--- 帖子 #344 ---
+Any updates? How are the results?
+
+--- 帖子 #345 ---
+Thanks Ebeckers and minhquan for the additional indicators. Is there an updated ea for the system? Appreciate your assistance.
+
+--- 帖子 #346 ---
+I updated EA it with more pattern such as Engulfing, inside bar, reversal 02 candle, reversal 03 candle, Fakey and hull moving, rsi without any indicator attached. Ea run faster and more effective.
+
+--- 帖子 #347 ---
+Hei, minhquan, where can I find updated version?
+
+--- 帖子 #348 ---
+I have not update new EA on here because I see the result not as I want. Besides, now I focus trade by manual instead of EA. I take time more than 01 year code EA but almost them that is not effective. So I decide stop coding.
+
+--- 帖子 #349 ---
+Hi guys. Thanks for the brilliant EA and addons here. I got a question: what is the name of the standalone support/resistance indicator used in the pinbartrader? the one that shows historical week, daily, monthlly S/R Levels like in post one? A time ago i have know the name and im pretty sure i got it in the archives somewhere. But cant recall the name. Thanks and have a great one! Klausi
+
+--- 帖子 #350 ---
+Attached File(s) SupportResistance.mq4 7 KB | 273 downloads
+
+--- 帖子 #351 ---
+Hi ebeckers, Your EA is fantastic! Would it possible to change option to either trade with pinbar or without? Thanks a lot!
+
+--- 帖子 #352 ---
+More details required... Assuming you want to trade simply the breakout of weekly highs or lows, there are plenty of existing EA's for that already. Good Luck
+
+
+===== 附件下载链接 =====
+

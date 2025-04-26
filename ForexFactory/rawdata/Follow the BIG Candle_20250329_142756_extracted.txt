@@ -1,0 +1,971 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+This is a very simple idea for Auto-Trading (using Expert Advisor) My idea is to follow the big candle. Open a trade in the direction of the big candle. Big Candle is identified as follows: The size of candle (from Low to High) is greater than ATR(atr_period) x ATR_Multiplier So for example, for GBP/USD, H4, suppose ATR(21) was 30 pips, and we set ATR_Multiplier to 2.5, so we are looking for H4 candles with range &gt; 2.5 * 30 = 75 pips. So If High-Low of current H4 candle reaches 75 we go long if candle is up, and we go short if candle is down. (There is an option to open a trade in the current candle (recommended) OR wait for the candle to close) Take Profit, Stop Loss and Trailing Stop can be of Fixed Pips or Multiple of ATR (recommended). It is preferable to use large TP in order to utilize Trailing Stop which produces better R:R ratio. EA will close the trade if an opposite candle appears, and opens a new trade in the other direction, Or will wait for either SL or Trailing Stop or TP reached and wait for another trigger. Expert Advisor versions: Version 1: Big_Candle_01 , with initial parameters Version 2: Big_Candle_02 , with removed fixed pips and added parameters for Close on Opposite Signal &amp; MA Version 2 for older MT4 builds &lt; 600 : Big_Candle_02_x Version 3: Big_Candle_03 , with added parameters for Break Even Stop &amp; Candle Effective Size Version 3 for older MT4 builds &lt; 600 : Big_Candle_03_x Verison 4 Big_Candle_04 Latest, see post # 226 on Page 14 Khalil
+
+--- 帖子 #2 ---
+Here's the EA. Parameters : tp_pips : Take Profit in Pips, default 0 (in order to use ATR multiples) sl_pips : Stop Loss in Pips, default 0 (in order to use ATR multiples) ts_pips : Trailing Stop in Pips, default 0 (in order to use ATR multiples) If you like to use the above (Fixed Pips instead of ATR multiples, notice if your broker is using 4 or 5 digits. For 4-digit brokers 100 means 100 pips, while for 5-digit brokers it means 100 points, so change it to 1000 if you want 100 pips) atr_period : default 21, you can use other value but its better not less than 14. This is used to get the average candle size. atr_multiple : default 2.5, this is the actual trigger for trade open/close. For larger time frames this multiplier will get smaller, for smaller time frames it should be bigger. (2,2.5,3) are suitable for H4 timeframe. For Daily you can try 1.5 or 2. For H1 3,4,5 and so on. tp_atr : Take profit in terms of ATR multiples, set it High (50,100 ... etc), as we are looking to use Trailing Stop for better RR ratio sl_atr : Stop Loss in terms of ATR multiples. Depends on which pair you are trading (3, 4 or 5 are good for GBP/USD) ts_atr : Trailing Stop in terms of ATR multiples. Again depends on which pair you are trading, 5 is good for GBP/USD candle_period : default 0, means to open a trade before the current candle close. 1 If you prefer to open after candle close. 0 is recommended in order to take advantage of the big candle. risk_perc : Default 0.02 (2%). This is actually not risk percentage, it is the automatically calculated trade size (lots) as a percentage of the current balance (so if set to 0.02 and your current balance is 10,000 , the trade will be opened with 2 micro lots) fixed_lots : default 0. If you like to use fixed lots instead of balance precentage you can set this field to 0.01, 0.1, 0.5, 1 ... etc. depending on your balance. And the system will use this volume for all trades. trail_stop_jump : default 10 pips (for 5-digit broker change to 100). In order to not send many modify orders, it is better to set this to a min. of 5 pips. That's it. Give it a try on DEMO, and share your feedback. I know there could be many ways to improve this EA. In the next few posts I will share some of the testing results. Good Day, Khalil
+
+--- 帖子 #3 ---
+nice, so the calculation to open new order mean where the order start automatically.. right? i'll get it to try. will be back here with the result. Which best timeframe you suggested?
+
+--- 帖子 #4 ---
+These are the test results for GBP/USD, H4 from 1/1/2013 to 31/12/2013. Parameters : tp_pips = 0, sl_pips=0, ts_pips=0, atr_period =21, atr_multiple= 2.5, tp_atr =50, sl_atr =3, ts_atr=5, candle_period =0, risk_perc =0.02 (2%), fixed_lots=0, trail_stop_jump =10
+
+--- 帖子 #5 ---
+Larger time frames are better. Minimum H1, better H4 or Daily.
+
+--- 帖子 #6 ---
+thanks for sharing abok, i make some test and gotta very good results, all of them make prfit. Im very interesting now, will post the charts here soon..
+
+--- 帖子 #7 ---
+I've thought of some improvements on the EA: 1. Include a moving average parameter in order to take only the trades that go with the Trend. 2. Ignore Signals that are way too far from the moving average. 3. Take Partial Profit at specific distance from the moving average, and leave the rest trailed. I'm gonna include these modification in the next release. New ideas are welcome, Happy Trading
+
+--- 帖子 #8 ---
+Waiting
+
+--- 帖子 #9 ---
+What MA period are u looking at 55,60,100,or 200 MA
+
+--- 帖子 #10 ---
+Almost done, MA period will be settable by user. However I think it should be small (20) for Large time frames and large (200) for smaller time frames.
+
+--- 帖子 #11 ---
+ok
+
+--- 帖子 #12 ---
+Here you go. The new release with test results for GBP/USD as before (H4,2013), parameters are in tester image attached. Modifications done are: 1. Removing Fixed TP,SL and Trailing Stop. Every thing will be based on ATR so that it will be easier to apply to any pair. 2. Adding of the following new parameters: Close_on_Opp : Close on Opposite Signal, better set it to false (in order to ride the trend for as long as possible) ma_period : Moving Average Period (for Trend Identification) 20 is OK for GU/H4. ma_open_atr : Max Distance from MA to open a trade (in terms of ATR multples). The idea behind this parameter is that we do not want to open a new trade if price is too far from MA as most probably it will go back to MA. In the test I have set this to 3.0 . So if a Big Bullish candle appears when price is above its MA by 3xATR we will ignore the signal. ma_tp_atr : Distance from MA to take 1st profit (in terms of ATR multples). This is where we take our 1st Take Profit (50% of opened Lots). In the test I have set this to 3.0 . Remaining Lots will be stopped by the trailing Stop. Please note that this is a work in progress, do not try with live trading. Use only for testing or demo. Our goal is to reach an optimum solution. The general idea is to catch price swings based on momentum (hence the big candle). Again, Ideas are welcome. Khalil
+
+--- 帖子 #13 ---
+Notes about the second release: 1. Profit factor has increased from 1.89 to 3.02. We had 18 won trades out of 20 taken !!! 2. Although we have increased the risk percentage from 0.02 to 0.05, relative draw down has not changed much (from 17.19 to 19.12). Maximal draw down is almost the same (17%). As we have many options I encourage everyone to test with different parameter settings on different pairs/timeframes. May be we have some potential here.
+
+--- 帖子 #14 ---
+Hi Abowaik I'd very much like to test your EA, i've added it to my experts folder, but when I go to the Navigator/Experts, to drag it on a chart, it isn't in there? Martin
+
+--- 帖子 #15 ---
+Martin If you're on a new build of MT4 (600 or higher) then EA's and indicators need to go into a different file location Go to where you have stored the EA (presumably in the Experts folder) and copy it. Inside Metatrader click File &gt; Open Data Folder. Then open the MQL4 folder, then the Experts folder, and copy the EA into there. Close and re-open MT4 and the EA should be there Andy
+
+--- 帖子 #16 ---
+Please note that in the latest release of mt4, folders were changed. If you have the latest release, then expert should go in the Experts folder which is under MQL4 folder. (i.e. .../ MQL4/Experts/ ). Regards,
+
+--- 帖子 #17 ---
+Lets try shorter time frames. These are two tests on EUR/USD and GBP/USD on M30 for 2013. Results attached. Notice that since we are using a shorter time frame here, I've set MA to 100 and ATR multiple for candle size to 5. Also the other parameters are bigger (compared to H4). Ideas to improve guys.
+
+--- 帖子 #18 ---
+Thanks for that Andy B, got it working now
+
+--- 帖子 #19 ---
+same test with whatever set i like . wow.. its work too on cent.. should implemented in demo now.. then .. is it ready for live? i m sure 'yesss'.. Attached Image (click to enlarge)
+
+--- 帖子 #20 ---
+abokwaik, I am still on old MT4 and I put it in expert folder and I don't see it in MT4. is this only for build 600?
+
+--- 帖子 #21 ---
+Attached Image (click to enlarge) smaller dd
+
+--- 帖子 #22 ---
+and U/J .. Attached Image (click to enlarge)
+
+--- 帖子 #23 ---
+This is a release for older MT4 versions. It was compiled on Build 445. Let me know if it works/or not. I have put a suffix of "x" in the file name in order to differentiate between the two versions. Regards,
+
+--- 帖子 #24 ---
+The only valid "old" MT4 version should be 509 ...
+
+--- 帖子 #25 ---
+I tried the version compiled with Build 445 on Build 500 and it worked fine. Guys with older versions please try it and let me know if it didn't work along with MT4 Build number. Thanks.
+
+--- 帖子 #26 ---
+Great job guys. Seems you can make it work on any timeframe. Been running tests on 5mins too. Would it be a good idea to be able to set the stop in relation to the Entry Candle and not the ATR? If the entry candle is say 100pips, I would like my stoploss to be bellow the candle, so sl would be say 1.2 x Entry candle. That way its always bellow the entry candle because with news a huge candle appears, very often retraces to the origin and then the rest of the unfilled orders gets filled and it continues in right direction. just a thought, will post some test results in coming weeks.
+
+--- 帖子 #27 ---
+This possible by setting the " sl_atr " parameter to the same amount (or more) of the " atr_multiple " paramter.
+
+--- 帖子 #28 ---
+abokwaik - trail_stop_jump = 5 applies to broker with 4 digits, or 5 digits?
+
+--- 帖子 #29 ---
+For 4-digit brokers you can set it to 5 or 10. While for 5-digit brokers to 50 or 100 (as it will be in points not pips).
+
+--- 帖子 #30 ---
+194 downloads for the 1st version and 86 downloads for the 2nd version. Good. BTW I prefer that we all use the latest version "Big_Candle_02". So, What's next ? I know that each pair/time-frame requires different parameters. So, one of our goals should be to find best parameters for different pairs/tfs for a specific period (say 2013), and then run with the same setup on a different period say (2012 and earlier years for people who have historical data) and see if results were consistent or not. Other goal will be to see where the script fails (makes large loss or high drawdown) and investigate the reasons in order to fix the script accordingly. I am not looking for random huge profits, if we can get 20 to 30% annual profit consistently thats fine with me. In setting the parameters, many things should be considered: Pair Volatility (for example GBP/AUD is much more volatile that EUR/USD) Time Frames (large parameters with smaller time frames and visa/versa) Trending or Ranging pair (for example I don't think it will work with EUR/GBP) Please share your results, comments and improving ideas. Regards, Khalil
+
+--- 帖子 #31 ---
+What is the difference between points and pips?
+
+--- 帖子 #32 ---
+Example with 1.30023 on a 5digits broker ... the last 2 digits represent 2.3 pips or 23 points.
+
+--- 帖子 #33 ---
+I would caution against wasting too much time trying to 'improve' this ea based on backtesting results. I think you will find there are plenty of other problems you will find when running it live. Backtest results on this ea wont have any relationship to how it will perform live. A big bar shows significant momentum which means you are going to slipped massively if you get filled at all. Also big bars typically happen at news which means the spreads are going to be much wider. The backtester wont even take any of this into account but running live both will be in play and will likely add up to maybe 2 or more times ATR (if you even get filled) on almost every trade this ea takes. I am not saying its a bad strategy. In fact its a perfectly logical one but your wasting your time thinking about optimizing backtest results etc when you really need to be live testing and figuring out how to deal with all the requotes, slippage and wide spreads.
+
+--- 帖子 #34 ---
+Great! This is what I want to hear. With respect to every one, this is the most interesting reply so far. Spread : With all auto-trading I prefer to use Fixed Spread. Some Brokers have only Fixed-Spread, and some have both options. For example I changed my account with FXDD from Variable to Fixed spread, and its fixed All the time (around 14 months so far). And hence we are looking for big moves (specially on large time frames) spread will not make a big difference. Slippage : Since we are entering the trade after multiple ATRs, the hot action will be probably ended by then. For example if we are trading the H1 timeframe with atr_multiple of 5, and atr normally around 15pips (for GBP/USD) so we are entering only if the candle size reached 5x15=75 pips and most probably this will be after the slippage fight is over. Back testing and Optimization: We need to test any strategy before going live. Testing on Demo is preferred, but since that will take a long time (specially for large time frames), we are left with Back testing option at least until we are comfortable with the idea. Taking my comments on Spread &amp; Slippage would make back testing not a so bad idea. All my respect, Khalil
+
+--- 帖子 #35 ---
+A couple of comments on using MA (Moving average) related parameters: ma_period : If you set to a value(20,100,200 etc), the system will open trades only if price above the MA. So to disable this parameter you can set to a min. value of 1 ma_open_atr : if set to a value 5, the system will open trades only if distance between current price and the MA is less than 5 x ATR. So if you like to disable it an open trades regardless of distance between price and MA then Set it to a high value (say 100) ma_tp_atr : if set to a value of 5 for example, the system will take profit on 1/2 the position size, and let the rest running until trailing stop is hit. If you want to disable this option you can set it to a higher value than tp_atr so the system will take full profit at tp_atr or trailing stop. One last note on MA, as much as the period is small (5 , 8, 10) as much as we are likely to catch the beginning of the swing. I hope this is useful.
+
+--- 帖子 #36 ---
+Thank you. Abokwaik tests are with a broker with 4 digts.
+
+--- 帖子 #37 ---
+Are you asking or telling ? The tests I attached were with 4-digit broker. The only difference for a 5-digit broker will be that you multiple the trailing stop jump by 10 because for a 5-digit broker this number means points (tenths of pips). I hope this is clear.
+
+--- 帖子 #38 ---
+Hi abokwaik ! I put the EA in the expert folder, but once mt4 launched the file disappeared. Any other EAs would work properly... Any clue ?
+
+--- 帖子 #39 ---
+which mt4 version/build you have? If 600 pls refer to posts 15/16.To know which build# you have:go to Help menu and click About.
+
+--- 帖子 #40 ---
+...build 509
+
+--- 帖子 #41 ---
+nice thread abokwaik, i see potentials in you. looking forward to test your ea later in the day. regards Austine
+
+--- 帖子 #42 ---
+In this case you need to download the expert from post # 23.
+
+--- 帖子 #43 ---
+@ ِAustine : Thanks . I would like see some constructive ideas based on visual testing, along with some screen shots where the script fails, in order to analyze and try to handle in the script before going live.
+
+--- 帖子 #44 ---
+Few ideas for discussion: Out of your tests is it better to open on current candle (candle_period=0) or Previous candle(candle_period=1) ? What if we add a break-even stop ? this will be less than trailing stop. For example Stop Loss could be 5xatr, Trailing Stop 10xatr and the new break-even stop could be 3xatr. Or we move to breakeven after partial profit taking ? If we decide to open based on Previous candle, Should we take the candle SHAPE into consideration (i.e. Hammer, Engulfing ... etc.) ?
+
+--- 帖子 #45 ---
+Tests in real time on a demo account. 12 pairs. Still no position.
+
+--- 帖子 #46 ---
+Which timeframe? Please note that the script is not YET able to trade multiple pairs simultaneously. So. its better for now to stick to one pair, or use multiple demo accounts/different brokers.
+
+--- 帖子 #47 ---
+M30. No couple is not twice. So should not be a problem. On another account I will give another setting.
+
+--- 帖子 #48 ---
+Thanks. Will demo on 4 different pairs in 4 different accounts.
+
+--- 帖子 #49 ---
+Well I have old and new (509 and 600) version of MT4 and neither indicator works ...Thread owner on three pages did not post chart yet
+
+--- 帖子 #50 ---
+Like your simple and easy ideas for this ea. I will download and test it BT 99% on this coming weekend when i free. Will follow this thread... Thanks
+
+--- 帖子 #51 ---
+Please note that this is an Expert Advisor not indicator . It is intended to trade automatically for you. File has to go into experts folder, please review earlier posts. Charts are not of importance in such an EA becuase you can see how the Advisor opens/closes trades using the Strategy Tester (plus of course the strategy description provided in this thread). However, I will not let you leave empty handed. Here's a chart for a trade taken by this Advisor, I hope the chart is clear. The yellow lin in the chart is EMA200 settable from EA in addition to all values shown on the chart ATR/TP/SL/TS...ets. People good with charts please post some trade examples from your visual tests or demo tests. Regards,
+
+--- 帖子 #52 ---
+Well, don't know what to say. No trade taken for me all day long. 4 different accounts with 3 different brokers on M30. Smiley on top right corner ok.
+
+--- 帖子 #53 ---
+Hello Abokwaik, About two years ago I created a very similar EA . Interestingly, believe it or not, I called it exactly like you did, i.e. "Follow the big candle" :-) I spent many weekends testing my sys all over again, improving the parameters, fine-tuning position size, experimenting with using ATR from a higher timeframe, entering on retracement with limit order, using dynamic SL and TP ATR-based, etc, etc. I thought it may be helpful if I share a few things I learned in my journey . You may already know some or all of this. In this case it will be no news. Becasue our systems are so similar, some of my lessons may be relevant. Before I share my inputs, I will honestly and upfront tell you how my work on my system ended. I dropped the idea. I have not even started trading it live. My system failed on demo . It still runs on demo on my VPS, just for fun and for me to see, but it is not making money. To be clear, I am trying to say that your system will not. I hope it will. So here is I would suggest that you consider: test it on high quality historical data . If you trade it on H1, ideally you need 10 years of history, hundreds of trades, not around 40. Where to get it? Ask your broker, try dukascopy data feed, you can also try fxcm but you need to pay for it unless you deposit $5k. make sure you set the realistic spread for backtest. before you trade it live, definitely forward test it on demo . ideally on a VPS, to keep connectivity. this is a kind of trend-following system with high reward : risk ratio, so you cannot afford to miss a trade. see results of demo. compare to backtest results for the same period if you trade it live, start with microlots , risk just $20 per trade. Let it make 20-40 trades and increas the position only if profitable. do not have more than 2-4 parameters , otherwise you risk over-optimization or curve-fitting read the free ebook at mechanicalforex.com , it is the best free material I found on mechanical systems check the stability of the parameters . turn off genetic algo in mt4 and draw a chart of parameter setting vs. balance. If you have great results with TP 35 pips, but very poor with TP 36 pips, it is a very bad sign. Pick a parameter not the highest but in the middle of the "mountain" on the chart. Plot the two parameters map in MT4 and look for green "island", i.e. combination of parameters surrounded by other profitable combinations. This is good. A single green point is bad. Choose not the parameter with the highest profits, but the one in the middle of the green island. notice how many trades per month / per year it is doing . Think if this is acceptable to you. If it does 60 trades per year, will you have patience to let it run? What was the worst losing streak in demo? 4 trades? multiply it by 2 and think it you will be able to withstand it. Adjust position size in such way that even if you lose 8 trades in a row, it will still be an acceptable loss. If position size is so adjusted, is the expected profit satisfactory? check the relation between CAR (compound annual rate) and MaxDD (maximum drawdown) . Good systems have CAR 2x higher than DD. Around 1.5 is still acceptable I guess. Below 1 is bad. BTW, very important, check this NOT on your backtest results posted here. Check it on 10 years of history and hundreds of trades. I am sorry to say that, but with less than a hundred trades (as I saw in attached screenshots from backtester), it may be a curve fit. use static datetime Time[0] kind of code to check for new bar, do not use Volume[0]&gt;0, it is not reliable test it on data feeds from a few different brokers . ideally results should be almost the same. I hope I have not negatively impacted your confidence in sucess. I hope this list of ideas helps you develop this idea to a success. If you follow the suggestions here, you should be safe. Good luck!
+
+--- 帖子 #54 ---
+Sorry for the late reply as I was on holiday for the weekend. Before thinking of starting the thread I searched the net for similar ideas and couldn't find any. I do not know if you have posted your work anywhere on the net, or it was for private use. I thank you for sharing your experience, and I will surely take your comments and advice into consideration. I invite you to stay with us on this thread if you like, and share your thoughts as we go along. Regards, Khalil
+
+--- 帖子 #55 ---
+For the chart lovers: This is a live demo trade (forward testing) taken by the script on M5 timeframe on Friday when I was away. This was meant only to show some charts with live trades. I do not recommend trading this on short time frames as it is not intended for Scalping. The script was running on 5-digit broker. It made 40+ pips on this trade.
+
+--- 帖子 #56 ---
+OK. Here is a Quiz for you on the same chart (attached). Why the EA didn't make a trade on the Big Bear Candle denoted on the chart ??
+
+--- 帖子 #57 ---
+This is disappointing. almost 2 hours with no answer. Anyway, since we are trading using ATR, and at the time the big bear candle ended ATR(21) was around 10 pips, and as per the setup we are opening trades only if the candle size is &gt;= 3xATR=30 pips which is greater than the candle size (18 pips). While in the case of the Bull candle where the Long trade opened Candle size was also around 18 pips, but ATR at that time was 5 (so the candle size was &gt; 3xATR=15 pips). So obviously this is a Volatility Break-out strategy looking to catch long trends.
+
+--- 帖子 #58 ---
+dont be disappointed, u know its weekend and almost all the traders are in Miami beach now good job
+
+--- 帖子 #59 ---
+OK, that explains it. Soon I will post release 3 of this EA, that is able to handle multiple pairs for forward testing. The new release will also have some new parameters Break Even Stop (as explained in post # 44) and probably a new parameter I will name it Candle Effective Size. For Bull candle this will mean Close-Low, and for Bear candle it will mean High - Close.
+
+--- 帖子 #60 ---
+Here is the New Release with 2 added parameters : Break Even Stop (as explained in post # 44) --&gt; to disable this parameter set it higher than Trailing Stop Candle Effective Size (as explained in previous post) : The use of this is that the system will open a trade only if the Close-Low (for Bull candle) or High-Close (for Bear candle) is greater than the Candle Effective Size (in terms of ATR multiples) --&gt; to disable this parameter set it to 0 (zero) I have run the script on the major pairs on M30 time frame with same parameters and period. Results (Excel) and Parameter file attached. Please note that the EA file with _x suffix is for MT4 versions prior to Build 600.
+
+--- 帖子 #61 ---
+Few comments on the above test results: I tested the EA initially for GBP/USD (hence the best results), although I didn't over-optimize. Then I applied the same settings (no change what so ever), to the other pairs, and interestingly all pairs ended with profit. Not amazing profits but at least no loss. Notice that other pair results can highly improve if we choose the "correct" parameter settings (especially ATR multiples). And this is normal in my opinion, compared to different behavior of each pair. The EA made 47% ROI ($32,440) over 14 months on total initial investment of $70,000. The test was done on a short-term time frame (M30), which is some what not reliable to catch big moves. I encourage people with Good Historical Data to test it on different time frames and longer periods 3 to 5 years of data. Regards,
+
+--- 帖子 #62 ---
+Hi Abokwaik Is it possible to get the following data One a big bar is triggered the average pull back against the trade before it comes into profit I have attached a screen shot the bars may not be 'system designed big bars' they are used for example only Each of the hi lighted signals then go into draw down before the significant move happens and Im assuming before the TP is hit Thanks P
+
+--- 帖子 #63 ---
+Sure. I ran the EA against your chart. Results are attached along with parameters used. Please note that as you go with higher time frames ATR values will be smaller. So the parameters used here are smaller that those for M30 time frame.
+
+--- 帖子 #64 ---
+Now I dont want to rock the boat here your far down the line on this one with very good results..Im just throwing odd things in that may gro they may not But On the same chart I posted that the range of the big candle and divide by 2 so if the bar is 60 pips hi to lo then we have a value of 30 pips thats our stop From this we can work out 5% of account .... now the TP is the hi of the down big bar the lo of an up big bar If the TP is hit we get 2 x our risk and our stop loss is 50% of the bib bar candle. This gives us RR of 2;1 and works on the principle that once the big move is over the price retraces to its previous level. But I think it would have to be a news driven big bar you need a big bar that is injected quickly through massive buying selling but doesnt effect the sentiment of the market to much Only a thought if 2 much off subject please delete post or ask me to delete no offence taken ;-)
+
+--- 帖子 #65 ---
+@Paulus: Please note that the last short trade was closed for partial profit $236 in the attached chart. and the remaining position closed by trailing stop on Feb.5th with $570 profit.
+
+--- 帖子 #66 ---
+Sorry I got engaged in a meeting. I will reply as soon as I finish the meeting.
+
+--- 帖子 #67 ---
+OK. I didn't understand exactly what do you mean. However I've posted the rest of the chart the shows the last deal. I tried to change the colors to match yours for easy Comparing. This strategy does not take news or fundamentals into account, although these factors will affect the behavior. It is based mainly on price action. EDIT: re-posted the chart as it was not complete.
+
+--- 帖子 #68 ---
+@ Paulus: Further to my reply above, the EA is using ATR multiples (not fixed pips), and Reward_to_Risk (RR) ration is usually much bigger that 2:1. Basically we are looking to capture evolving trends triggered by Big Candles whenever that is possible. Since we are using ATR, it means that the big candle does not have to be of a fixed size (i.e. 100 pips) during the EA lifetime. No, it will change according to price momentum. This was clear in my earlier posts # 56 &amp; 57.
+
+--- 帖子 #69 ---
+Hi who can post the strategy as mq4 file because i want test it on jforex and dukascopy has only a funktion to compile mq4 files in java files and not ex4 files is that possible?
+
+--- 帖子 #70 ---
+i don't know how exactly set the best parameter for BC3, been trying to make some 'extre3m' set, because i want more position in short time and in short TF.. here's.. Attached Image (click to enlarge)
+
+--- 帖子 #71 ---
+Thank you for your continous contributions. I noticed that Modeling Quality is very low (around 35%), this should at least 80%. As for parameter settings, it should be something that makes sense. for example its reasonable to use 1.5 or 2 ATR multiples on Daily timeframe, while it is not reasonable to use less than 3 on H4, 4 on H1 and 5 on M30. and so on. Also SL should be at least equal to ATR multiples (at least to protect the trigger candle). Trailing Stop should be greater or eaual to SL, and so on. To catch big profits we need to make the TP very high, and exit the trade profitably at the trailing stop instead. The introduction of partail profit taking had made a difference in the results. Partial take profit should be at least as SL (or BreakEven Stop -- introduced in V3). Using larger value for trailing stop will enhance the performance. Out of my tests, especially on smaller time frames: Opening on the next candle resulted better that Opening on Current Candle. I my self did not search for the Ultimate Parameters, as I am still working on the Core Idea. The ideal output that we should be looking for is small losses, huge profits, minimum drawdown, not large number of trades. as the added filter will try to take only the best (A or A+) setups. Regards,
+
+--- 帖子 #72 ---
+Anyone tested this? http://eareview.net/tick-data-suite
+
+--- 帖子 #73 ---
+Some notes on using the "Candle Effective Size" parameter : The "Candle Effective Size" parameter should be set along with "Candle Period" parameter set to 1, otherwise make it 0. Meaning that if we are opening our trades based on the candle Next to the Big Candle, we need the Big Candle to be a Healthy Candle. If the Big Candle is a Bull candle we want to be sure that Bulls are in control, and visa versa. A Healthy candle should have an effective size of at least 1/2 of the candle size. Or in other terms if we set atr_multiple parameter which identifies the Big Candle to 5, then the Candle Effective Size should be at least set to 3. Chart Example: The denoted candle on the chart is a Big "Bull" Candle, however the effective size of the candle "Close-Low" is less than 1/3 of the candle size. Before adding this parameter the system would have traded this candle which might resulted a loss or a large Draw Down. I Hope that the concept is clear.
+
+--- 帖子 #74 ---
+Hello guys. Im new here and i saw this big candle ea. I might try this on my micro account on live after i have done some testing. Do i keed anything else than ATR and this EA?
+
+--- 帖子 #75 ---
+No. Even ATR indicator is not needed as it is included in the EA. However you might add it to the chart for visual following. No live trading please as this is still work in progress. For example I discovered a bug in position size calculation in case your using risk_perc parameter instead of fixed_lots on 5-digit brokers. This will be fixed in the new release.
+
+--- 帖子 #76 ---
+He can you post your new release as a mq4 file? for me is it then possible to test it on dukascopy history tester
+
+--- 帖子 #77 ---
+Yeah. I will test it with demo first. And when you think its ready i will use it first only on my micro account.
+
+--- 帖子 #78 ---
+I am speechless. I might do that depending on member contributions. Any way the strategy is simple and any coder should be able to replicate it on jforex.
+
+--- 帖子 #79 ---
+( Dynamic ATR multiples) vs ( Static ATR multiples) So far we were using Dynamic ATR multiples. Meaning : suppose we had the following setup: ATR period = 21 on M30 timeframe ATR multiples = 5 ATR Stop Loss = 5 ATR Trailing Stop=5 ATR Break Even=3 ATR MA partial Take Proft =5 Now suppose ATR(21) was 10 pips. and a Bull candle appeared of size 60, so we took the Long trade (60&gt;5x10). Our Stop Loss (5x10)=50 pips, and so TS=50 pips, BE=3x10=30pips, PTP=50pips. After 6 hours the ATR(21) became 7 pips. So since we are using Dynamic ATR values, the TS will become 5x7=35pips, and so PTP. BE will become 7x3=21. I don't like this. So may be its better to keep these values as is (Static) when we opened the trade. And they will get re-calculated only for a new trade. I will try to add a parameter for that in the next release and compare the results. Opinions required. Reagards,
+
+--- 帖子 #80 ---
+Are ATR values reliable ? Remember we are using ATR to decide on which is the Big Candle over a period. I ran some tests on GBP/USD H1 and H4 time frames for the period of Jan 1,2014 until Mar 1,2014. All parameters were fixed except ATR Period varying from 10 to 100 with step of 10. On H1 results were as follows: ATR Period _____ Trades _____ Profit _____ Drawdown% ____________________________________________________ 10 _______________ 5 ________ 2,289 _____ 17.81% 20 _____ __________ 4 _____ ___ 2,416 _____ 34.76% 30 _____ __________ 4 _____ ___ 2,261 _____ 34.59% 40 _____ __________ 9 _____ ___ 2,999 _____ 33.14% 50 _____ __________ 8 _____ ___ -3,594 _____ 57.59% 60 _____ __________ 8 _____ ___ 2,885 _____ 33.02% 70 _____ __________ 8 _____ ___ 2,907 _____ 33.04% 80 _____ __________ 8 _____ ___ -3,544 _____ 56.87% 90 _____ __________ 5 _____ ___ 2,306 _____ 35.89% 100 _____ _________ 7 _____ ___ 2,557 _____ 34.00% On H4 results were as follows: ATR Period _____ Trades _____ Profit _____ Drawdown% ____________________________________________________ 10 _____ _____ _____ 5 _____ ___ 2,018 _____ 14.06% 20 _____ _____ _____ 6 _____ ___ 2,603 _____ 20.01% 30 _____ _____ _____ 4 _____ ___ 2,089 _____ 20.22% 40 _____ _____ _____ 1 _____ ___ -4,028 _____ 52.31% 50 _____ _____ _____ 6 _____ ___ 2,678 _____ 20.37% 60 _____ _____ _____ 6 _____ ___ 2,646 _____ 20.39% 70 _____ _____ _____ 4 _____ ___ 2,090 _____ 20.31% 80 _____ _____ _____ 4 _____ ___ 2,072 _____ 20.29% 90 _____ _____ _____ 6 _____ ___ 2,690 _____ 20.38% 100 _____ _____ ____ 4 _____ ___ 2,103 _____ 20.33% As you see all results are consistent except 1 or 2 on each time frame, and that worries me. We need a way to overcome this issue as the selection of ATR period will highly affect the results. What if we take an average of ATR over different ATR periods ? I'gonna try that. Any other ideas how can overcome this problem ? EDIT:re-formatted the data.
+
+--- 帖子 #81 ---
+OK. I smoothed the ATR over 7 different periods based on the period used in the setup, 3 quarters below the given period and 3 quarters above, plus the original period as follows: Suppose the user set ATR Period to 20. The system will generate ATR for the periods 5,10,15,20,25,30,35 and take the average. For ATR Period of 60, periods will be 15,30,45,60,75,90,105. and so on. Results were better and more consistent than previous results without smoothing. H1 Time Frame ATR Period _____ Trades _____ Profit _____ Drawdown% ___________________________________ _________________ 10 ____________ 72 _________ 723 _______ 18.35% 20 ____________ 52 _________ 599 _______ 16.64% 30 ____________ 43 _________ 1,745 _____ 15.78% 40 ____________ 53 _________ 3,672 _____ 11.82% 50 ____________ 43 _________ 3,961 _____ 14.71% 60 ____________ 48 _________ 3,711 _____ 13.97% 70 ____________ 47 _________ 2,592 _____ 16.44% 80 ____________ 40 _________ 2,472 _____ 16.74% 90 ____________ 44 _________ 3,586 _____ 16.69% 100 ___________ 39 _________ 3,472 _____ 17.01% H4 Time Frame ATR Period _____ Trades _____ Profit _____ Drawdown% ___________________________________ _________________ 10 ____________ 14 ___________ 3,979 _____ 14.74% 20 ____________ 10 ___________ 3,371 _____ 15.52% 30 ____________ 10 ___________ 3,346 _____ 15.58% 40 ____________ 13 ___________ 2,188 _____ 15.35% 50 ____________ 9 ____________ 3,100 _____ 18.64% 60 ____________ 9 ____________ 3,050 _____ 18.52% 70 ____________ 10 ___________ 3,375 _____ 16.07% 80 ____________ 10 ___________ 3,397 _____ 15.95% 90 ____________ 8 ____________ 2,306 _____ 15.36% 100 ___________ 10 ___________ 3,403 _____ 16.14% As before starting balance is 10,000 and period Jan 1,2014 to Mar 1,2014.
+
+--- 帖子 #82 ---
+I am sorry, for the H1 time frame the Closed_on_Opposite_Signal was set to true, hence the larger number of trades. I noticed that closing on opposite signal for shorter time frames generates better results, as trend on short time frames don't last long.
+
+--- 帖子 #83 ---
+Was this a waste of time ?. I don't see any real contributions here. Maybe it's better to continue this on my own. In case I don't see you, Good Morning, Good Evening and Good Night !
+
+--- 帖子 #84 ---
+sorry about lack of contribution have been following the thread passively like many others im sure, the system looks to have a lot of potential please keep us updated
+
+--- 帖子 #85 ---
+Good work there abokwaik! I like your idea.. Keep us posted! It will be good to see this put into demo testing
+
+--- 帖子 #86 ---
+Interesting thread, will follow this and try to contribute the best I can. Looking forward to see some demo/live results!
+
+--- 帖子 #87 ---
+Hi Your advisor is very good, thank you good job have you tried to improve money management, I think it will be better. I can do it and provide you some versions, if you send me the program
+
+--- 帖子 #88 ---
+OK. Lets give it one more shot. I have created a Trade Explorer with EA new version (4) and attached it to the thread. The New version along with parameters used in the explorer are attached. Pair used will be GBP/USD Time Frame : M30 . Version Updates: Smoother calculation of ATR Position sizing as risk percentage (bug fixed) Trail Stop Jump internally set for both 4 and 5-digit brokers. Using of Static ATR numbers for SL,TP,TS,BE ... etc. Static means the values calculated at the trade open time, stay the same during the trade lifecycle. Mimimizing and Organizing the parametrs NOTE: I do not have VPS so I am running from my PC.
+
+--- 帖子 #89 ---
+The reason I used M30 is because I would like to see more trades open (on average 5-10 a month). In order to better evaluate the EA. However I still think that higher time frames (H4) will generate more reliable signals.
+
+--- 帖子 #90 ---
+Look you are right, but if you change some features of money management, there will be more interesting results. if you send me QML file, I can try something and discuss it with you, if you don't mind.
+
+--- 帖子 #91 ---
+Position Sizing in the new EA is as follows: If you set the risk_perc to 0.05 and fixed_lots to 0.0. and suppose that current account balance is $10,000, and the calculated Stop Loss is 135 pips. The EA will get the pip value (for GBP/USD) = $10. So our risked amount for this trade is 0.05 x $10,000 = $500. The posotion size = Risked Amount/(StopLoss x PipValue) = $500/(135*10)=0.37 lots. EDIT : And of course it will be rounded to the minimum lot size allowed by the broker.
+
+--- 帖子 #92 ---
+Thanks. did you misspell MQL ? just kidding. This response is for any one asking for MQL file. If you are a programmer, I am sure that it will take you max of 1 hour to develop a similar EA (probably better) based on strategy description in this thread. Some coders might already did that. And if you're not a programmer then you don't need the MQL file anyway. My focus here is to measure the success of this strategy and look for ways to improve it if possible, Or drop the whole idea. As you can see the strategy is not using any complicated or fancy indicators, only the ATR for the candle size, and even I am thinking of replacing ATR indicator with normal average calculation inside the EA. Beleive me, coding is the easy part. So if you are interested to share the "features of money management", please go ahead, so that eveyone benefit.
+
+--- 帖子 #93 ---
+Today is the NFP day. Let's see how the EA will act.
+
+--- 帖子 #94 ---
+As per the current setup of the EA linked to the excplorer, and at the moment, it will be looking for M30 candle &gt; 47 pips. EDIT:Forgot to say on GBP/USD.
+
+--- 帖子 #95 ---
+As Big candle Size is changing witch each candle, Now EA is looking for M30 candle &gt; 52 pips on GU. If NFP numbers are significant I think EA will open its 1st trade.
+
+--- 帖子 #96 ---
+The EA did not open a trade yet. as it waits for the current candle size to get bigger that 55 pips. around 1.6718
+
+--- 帖子 #97 ---
+NFP M30 candle was 1.67725 --&gt; 1.67206 candle size was 52 pips. No trade open as we were looking for 55 pips. Now EA is looking for a candle of size 67 pips.
+
+--- 帖子 #98 ---
+So what is the win ratio for this EA ? I used TP=SL and disabled all other parameters, even MA. So either TP or SL is hit. I ran the test on GBP/USD for the period 1/1/2013 to 28/2/2014, on H1, H4 and Daily timeframes. Excel Sheet with results attached. All results except one showed above 50% win ratio.
+
+--- 帖子 #99 ---
+I am back from weekend, and ran the above test with " Close on Opposite Signal " set to true (or 1). Again all other parameters are disabled (I mean no trailing stop, no break even stop, no partial profit taking, no moving average). I ran the test on GBP/USD H1, H4 and Daily. the Excel sheet attached showing Win Ratio, Expectancy , and Profit. AMAZING Results ! . Specially on larger time frames. I've also attached the test for the best result on daily time frame. Enjoy !
+
+--- 帖子 #100 ---
+For people not familiar with Expectancy. Expectancy is a simple formula you can use to determine how reliable your Forex trading system is. You should go back and look at all your trades that were profitable versus all your losing trades. Then calculate how profitable your winners were versus how much your losers did cost you." Here is the expectancy formula: E= [1+ (W/L)] x P – 1 where: W means Average Winning Trade L means Average Losing Trade P means Percentage Win Ratio Example: You have made 10 trades. Six of them were winning trades and 4 were losing trades. That means your percentage win ratio is 6/10 or 60%. If your six trades brought you profit of $2,400, then your average win is $2,400/6 = $400. If your losses were only $1,200, then your average loss is $1,200/4 = $300. Apply these figures to the expectancy formula: E= [1+ (400/300)] x 0.6 – 1 = 0.40 or 40%. In this example, expectancy of your trading system is 40%. That means your trading strategy will return 40 cents per each dollar invested (traded) over the long term. Above text is taken from : forexsocialtraders
+
+--- 帖子 #101 ---
+Just for the FUN of it. I re-run the test in attached image above with following Risk_Reward Ratio: starting balance 10,000 period 1/1/2013 - 28/2/2014 - GU - Daily Risk_Reward_Ratio 1:1 Profit 27,269 Risk_Reward_Ratio 1:2 Profit 32,800 Risk_Reward_Ratio 2:1 Profit 29,330
+
+--- 帖子 #102 ---
+I ran similar tests on 2012, but most of them failed. I think I am missing something here.
+
+--- 帖子 #103 ---
+You are not necessary missing something. The fact is that an EA won't work with the same setup (settings) in any market situation.
+
+--- 帖子 #104 ---
+That's disappointing. Should we drop auto-trading then or what ?
+
+--- 帖子 #105 ---
+Hi there! i'm a 19 year old student, and i'm new to trading (and the forums, 1st post woooo!) and find your EA quite interesting. I have added the EA, and will wait until the market opens to give it a try!
+
+--- 帖子 #106 ---
+No ... but the deal is to adapt it regularly according to market conditions. And never base your "hope" on backtests ... NEVER. Backtests are useless in my opinion and should be used only to confirm that a strategy is trading as per the rules ... but definitively not for checking profitability.
+
+--- 帖子 #107 ---
+Hi yes I know that the programming of EA will take an hour, but why If you have already done it. I think your money management is not correct, because I have done the taste EUR/USD (fix lot=0, risk = 0,05) as a result the balance was 0. that is why I offer you my money management you can use it and than discuss the result. here is it Balance / (max draw down pips x 1000 / risk percent) where max draw down is the draw down during the test in pips, and the risk percent is the permitted risk of our balance, it means in the worst situation we will lose the amount of risk. For example balance =10000, max draw down pips =300, and the risk percent = 30. In this case size will be 1 lot
+
+--- 帖子 #108 ---
+As an expert in this field, and from your experience, Is it possible to have positive expectancy on the long run using EAs. Or as most do, you need to make consecutive withdrawals each time you double your account ?
+
+--- 帖子 #109 ---
+The Money Management I offer you , it will as riise as it works, so you need not to do withdrawals
+
+--- 帖子 #110 ---
+If I was an EA seller/marketer, I would say YES for sure ... but I am not
+
+--- 帖子 #111 ---
+Here is what I will do starting tomorrow; Run the EA on the following pairs: GBPUSD EURUSD AUDUSD USDJPY EURJPY GBPJPY TF M30 Balance 10,000 risking 1% on each trade. You can view the results on the trade explorer.
+
+--- 帖子 #112 ---
+Just a thought : I am sure that when big candle shows up it means something. It is either a real breakout for a trend start/continuation, OR, stop hunting for a trend reversal. So what if we put a SellStop order below the big candle, and a BuyStop order above the big candle , with stoploss at the other end ?
+
+--- 帖子 #113 ---
+I am thinking also of a better way to identify the Big Candle, I am not sure that using ATR is the best method. I mean the Big Candle should stand out of all recent candles, maybe twice as large as the largest candle in the previous 20 or 50 candles ... I don't know.
+
+--- 帖子 #114 ---
+Hello abokwaik. Check this indi maybe help. Attached File(s) PipKey2.mq4 6 KB | 1,170 downloads Attached File(s) PipKey.mq4 6 KB | 857 downloads Nice day
+
+--- 帖子 #115 ---
+Hello abokwaik. Check this indi maybe help. Attachment Attachment [code]http://forexincomemap.estreamdesk.com/forums/43565/topics/18437[code] Nice day
+
+--- 帖子 #116 ---
+Thanks. I will look into it.
+
+--- 帖子 #117 ---
+I just started the EA now on the demo account linked to Trade Explorer on the six pairs GBPUSD EURUSD AUDUSD USDJPY EURJPY GBPJPY All with the same parameter settings attached to post#88.
+
+--- 帖子 #118 ---
+It seems that this indicator is looking for Pin Bar reversals. Which is a different strategy.
+
+--- 帖子 #119 ---
+Hi, I'm new here, writing from Venezuela. I don't know too much about forex, but I'm trying to get as much knowledge as I can, so I'm really thankful for your work. I think I understand how this system work and although this month don't look to be very volatile I'll be waiting to see the results in your explorer. Wish I can start helping with important comments within a short future. Sorry for my poor english, I'm new with it too.
+
+--- 帖子 #120 ---
+You are welcome. Your English is fine with me as its not my native language. Any ideas on how we can improve this strategy are certainly welcomed. I am working now on developing a new EA around the thoughts in posts # 112 and 113. And at the same time keeping the old strategy working on the demo account for a couple of months and see how it performs. Regards,
+
+--- 帖子 #121 ---
+Hello Check this. Just get a alarm for the big candle on GBPUSD 100 pips,but the alarm never stop so if somebody can modify for have only once alarm will be better. Regards
+
+--- 帖子 #122 ---
+Hello,check also this i dont know EA but i think is what you are searching...maybe Attached File(s) TIMING_SYSTEM_EA.mq4 35 KB | 577 downloads Attached File(s) T-foREX-Follower-v01.mq4 33 KB | 599 downloads Attached File(s) Price acceleration EA.mq4 5 KB | 568 downloads Regards If you dont like i post some indi and EA let me know i will stop
+
+--- 帖子 #123 ---
+Thanks. But I am looking for ideas rather than indicators or EAs. You may stop now.
+
+--- 帖子 #124 ---
+I understand. But maybe the idea is inside the EA i post (i cna not read EA) you can.Also last check this threadhttp://www.forexfactory.com/showthread.php?t=6854No more i promise lol
+
+--- 帖子 #125 ---
+I understand. But maybe the idea is inside the EA i post (i can not read EA) you can.Also last check this threadhttp://www.forexfactory.com/showthread.php?t=6854No more i promise lol
+
+--- 帖子 #126 ---
+No trades for today so far. As EA is currently looking for the below candle sizes on each pair: GBP/USD 74 pips EUR/USD 44 pips USD/JPY 42 pips AUD/USD 49 pips EUR/JPY 80 pips GBP/JPY 103 pips I attached an updated version of the latest EA (same as the one in post#88), the only difference is that it shows the candle size its waiting for on each pair, in Pips (for 4-digit brokers) and in Points (for 5-digit brokers).
+
+--- 帖子 #127 ---
+For the people who like forward test the EA on multiple pairs: If you will use the same settings for all pairs, you can attached the same EA to the charts your are interested in. If you will use different settings for each pair, I think you need to make a different file copy for each pair. for example make a copy named Big_Candle_04_GU for GBP/USD and so on for each pair.
+
+--- 帖子 #128 ---
+is it will be good that use on H1 candle, sir?
+
+--- 帖子 #129 ---
+You can use it on any time frame, although I prefer larger time frames. However you need to change the settings to suite each time frame. For example : One might consider a candle of 20 pips BIG for a M5 time frame, but certainly not big for H1 time frame. Also a candle size that is BIG for EUR/USD might not be BIG for GBP/AUD. Out of my tests on GBP/USD, below are different time frames and suitable size in terms of ATR multiples: M30 : 8xATR (this is what I am using now in the trade explorer for the six pairs) H1: 6xATR H4:4 to 5xATR D1:2 to 3xATR Now for the other parameters, its advisable to use as follows: SL_ATR (Stop Loss) = 2xATR multiples (for example, and taking the numbers above, if your are running on H1 and set ATR multiples to 6, SL should be 12) TP_ATR:10xATR Multiples (so for H1 will be 60) -- we put High TP to keep the profit trades running until stopped by the trailing stop. TS_ATR(Trailing Stop) = 1 to 2 xATR Multiples (so for H1 = 8 or 10) TP_ATR(Partial Take Profit) = 1 to 2 x ATR multiples (so for H1 = 8 or 10) BE_ATR(Break Even) = 1 x ATR Multiples (so for H1 = 6) I hope this is clear.
+
+--- 帖子 #130 ---
+Hi, Thanks for this EA. I´m testing it too on my demo account. I´ll let you know about new positions.
+
+--- 帖子 #131 ---
+Hello and thank you for sharing this, Meta Trader is not working for me here, so I am on VT Trader, hence can not use the script. Would you mind explaining the basic principle to me so I can try to execute it in VT? Simple words please. When I set ATR to 8 days on 30m GBP/USD graph, most candle appear to be higher then ATR. But If i would take on a trade on them I would loose since they returned back on the next candle. Or if you could take a snapshot of your desktop with explanation of few trades. Thank you.
+
+--- 帖子 #132 ---
+@masterok &gt; Meta Trader is not working for me here, so I am on VT Trader, hence can not use the script. I am sure you will try it on demo account not live. In this case you can check the "Brokers" Tab in Forex Facory and open an MT4 Demo for testing and visualizing the concept. &gt; Would you mind explaining the basic principle to me so I can try to execute it in VT? Simple words please. Since you asked, I think many others still confused with the strategy. So I am going to Explain the strategy in Detail with Charts, Won and Lost deals. This will be useful for the people who like to trade it Manually, and for people who like to develop it on different platforms. &gt; When I set ATR to 8 days on 30m GBP/USD graph, most candle appear to be higher then ATR. But If i would take on a trade on them I would loose since they returned back on the next candle. When you set the period in ATR indicator to 8 on M30 time frames, it means 8 M30 candles not 8 Days. However, we are not trading any candle that is higher than ATR, We use ATR Multiples. So if ATR(8) on M30 was reading 12 pips (0.0012) and we set our EA ATR_Multiple parameter to 5, this means that we are trading only the "BIG" candle that is greater than 5x12 (60 pips).
+
+--- 帖子 #133 ---
+Big Candle Trading Strategy 1. Origin : The idea originally came from my many mistakes, and many losses trying to fade the big candles as most of us might do. I was thinking that since price rose for 100 pips in 30 minutes or one hour, then it has to rest and retrace a 30 or 50 pips before continuing up, or if I was lucky it will reverse completely and let me make a fortune. But I was wrong. Most of the time it will continue up, and force you out, before going down. So I though, why I do not try to follow the Big Candles instead of fighting it, and hence cam the idea. I ran some tests and it was profitable. Then I started to optimize the strategy for a better R:R ratio.
+
+--- 帖子 #134 ---
+Big Candle Trading Strategy 2. Sample Charts : This is the current chart of GBP/USD M30. Look at that big candle (highlighted in yellow), this was the NFP candle of latest Friday, however the EA didn't trade it as it was 3 pips less than the calculated size of the BIG candle at the moment using a setting of 8 ATR_Multiples. But its OK as we are going to miss some good trades along the way. Now suppose that our setting was 7 ATR_Multiples and we traded that candle. The red line is our stoploss and the blueline is our breakeven and take profit on 50% of position, and rest of position will be trailed with 60 pips trailing stop.
+
+--- 帖子 #135 ---
+Thank you for the chart. However I still have a question: ATR - is Average True Range, right? The value I set there is 8. The graph appears on the bottom of the chart and values are from 5 to 20 pips only so most of the candles fall in the range. Thats my confusion so far. Sorry for these, but I would like to get the basics of the system right before learning it further. I attached the screenshot. Thank you. For some reason I think the problem is with my indicator, me not setting it up correctly.
+
+--- 帖子 #136 ---
+Big Candle Trading Strategy 2. Sample Charts (Continued): This is a won trade taken by the EA (Big_Candle_04) with same setup running in Trade Explorer.
+
+--- 帖子 #137 ---
+Big Candle Trading Strategy 2. Sample Charts (Continued): We have 2 trades here. Note that the EA took partial profit and then closed the 1st trade at trailing stop. Then opened a 2nd trade as another Big Candle appeared, took partial profit and stopped at the trailing stop.
+
+--- 帖子 #138 ---
+Big Candle Trading Strategy 2. Sample Charts (Continued): This is an example of a Lost Trade [1]. Fortunately it was followed by a winning trade.
+
+--- 帖子 #139 ---
+The indicator is OK. But the Big Candle should be BIG, so it is not equal to ATR, it is equal to N x ATR, N is settable in the EA. for M30 on GBP/USD I used N=8. So if current ATR reading is 10 pips, the BIG candle should be of size &gt;= N x ATR &gt;= 8 x 10 &gt;= 80 pips. Any candle less in size than 80 pips will not be traded. ATR reading will change with each new candle, so suppose on the next candle the reading became 12, now EA will be waiting for candle of size &gt;= 8 x 12 = 96 pip, ... and so on. I hope its clear now.
+
+--- 帖子 #140 ---
+Ok so how about this situation, you would have lost a trade here, wouldn't you? Also how long do you expect to stay in the trade? Do you mostly trade during a day, or how often do you go long with this and for how long.
+
+--- 帖子 #141 ---
+This is a good example. So, I ran the EA on the same period with the same setup running on TE(Trade Explorer). Notice that at this time the EA was waiting for a BIG candle of size &gt; 30.6 pips (306 points). And since the settings says open on the same candle (candle_period=0), the EA opened a trade on this candle after reaching the size of 30.6 pips. I will continue this trade in the next post.
+
+--- 帖子 #142 ---
+In this chart (continued from above) EA took partial take profit. and moved to Break Even.
+
+--- 帖子 #143 ---
+Continued from above. Trailing Stop in action.
+
+--- 帖子 #144 ---
+Finally stopped at Trailing Stop.
+
+--- 帖子 #145 ---
+What i mean is you would only put a trade once the candle is formed. So you would trade this on the next candle which would form on the very top of this large previous one. What your charts show that you are trading it at the bottom, which will not would happen in real life.
+
+--- 帖子 #146 ---
+For the second part of your question: &gt; Also how long do you expect to stay in the trade? Do you mostly trade during a day, or how often do you go long with this and for how long. This is a trend following strategy based on volatility break out, so if a trade worked well it could run for weeks. The strategy is an Auto-Trading strategy using an Expert Advisor, so it will keep running all the time.
+
+--- 帖子 #147 ---
+Finally and after 3 days of waiting the EA opened 2 trades , both long on AUD/USD and EUR/USD. details to come.
+
+--- 帖子 #148 ---
+AUD/USD trade was opened at 12:30 GMT. Chart attached.
+
+--- 帖子 #149 ---
+EUR/USD was opened at 4:30 GMT. Chart attached.
+
+--- 帖子 #150 ---
+You might have noticed that position sizes are different for both trades (0.1 for AU and 0.2 for EU), and that's because the SL on AUD is larger than on EU. Our risk is 1% of account balance on each trade.
+
+--- 帖子 #151 ---
+Hi, since you havent replied to my previous comment, I am going to rephrase the question. Does the system trade when the candle is fully formed and trade starts on next candle? I would assume so. So why in the graph you show you put in a trade in the middle of a candle? you wouldnt do it in real life. This is the graph which i am talking about which you have posted earlier.
+
+--- 帖子 #152 ---
+Did you even read the post you quoted the pic from ?
+
+--- 帖子 #153 ---
+FerruFx, Thanks for such a helpful response. Instead of taking forums space, your time, my time, if you see something wrong then just explain it without asking your questions. Yes i did read his post and it says it took a trade when candle reached 30.6 pips. Does his post answer the question I asked? no. If I asked the question, is there a possibility that something is not clear to me? Yes. So please if you can clear this small question for me, I would be grateful. If not, I think it is fair to say to let the guy behind the system clear this up for me.
+
+--- 帖子 #154 ---
+I've just saw this on my mobile, sorry if I am late in response. Dear masterok, What FerruFX was referring to is the completion of the senctence you cut out of my reply , but thats OK , we all sometimes miss something while reading. This is the text taken from my earlier reply "...Notice that at this time the EA was waiting for a BIG candle of size &gt; 30.6 pips (306 points). And since the settings says open on the same candle ( candle_period=0 ), the EA opened a trade on this candle after reaching the size of 30.6 pips." So what did you miss ? simply the text that I recolored here in blue. As you probably know, each Expert Adisor or Indicator for that matter have some setting parameters which controls the behavior of the EA or indi. For the Big_Canlde EA one of the parameter is the candle_period, when set to 0 it will open during the big candle, and when set to 1 it will open trade after the end of the candle. I hope this is clear, if not please let me know.. Regards, Khalil
+
+--- 帖子 #155 ---
+No, if you read the post so you have the answer to your question ... You should think before writing such things ... You make yourself ridiculous ...
+
+--- 帖子 #156 ---
+From what I read, abokwaik has made clear enough on why the trade open in the middle of the candle. First thing, you need to know why/how the trade is started. Its based on ATR x multiplier. Second thing, you need to know candle_period. If set to 0, it means you can open a trade when the candle hasn't closed yet. If set to 1, then trade is open in the next candle. Hope this clear up and stop wasting our forum space, your time and my time! Let's move on, can't wait to see how's the trade ended.
+
+--- 帖子 #157 ---
+I am sure your not refering to the USD/JPY trade, as it was on strategy tester answering the quiestion in post #140. The EA was not working at the time U/J candle appeared, as I mentioned before I do not have a VPS account, so I am runnning the EA from my PC at work.
+
+--- 帖子 #158 ---
+The EUR/USD trade just closed at loss of 43 pips. a Dollar loss of $86.40 (we were risking $100), and max profit reached through the trade was 29 pips ($59), but did not reach our first take profit or break even. The trade closed at 1.3893, but I am not sure why, as our stoplosss for the trade was 1.3873 ??? If it was closed because of an opposite signal, a new trade (sell) should be opened in place of it.
+
+--- 帖子 #159 ---
+I can not reach the PC which is running the EA untill saturday. But I think that the PC is off some how, I am not sure of that. But my question for technical people is: What if I started the EA from one PC while it is already running on another PC?. I haven't tested that yet.
+
+--- 帖子 #160 ---
+I figured out what happened with EUR/USD trade: The position was closed by the EA due to an Opposite Signal (in this case the appearance of a Big Bear Candle), but the EA was not able to open a short trade because a new candle appear just after the closing of the previous position (16:30 GMT), as the closing was exactly at the candle end time. Here is a re-run of the EA on the same period:
+
+--- 帖子 #161 ---
+I fixed this little bug in the EA, and re-run it on the same period, and here is the output:
+
+--- 帖子 #162 ---
+So the fixed EA opened an opposite trade right after the closing of the first trade which was closed due to opposite signal. And as you saw in the previous chart the next trade was a profitable one. This is one advantage of forward testing. The AUD/USD trade is still running.
+
+--- 帖子 #163 ---
+Thanks for your input and hardwork abokwaik.
+
+--- 帖子 #164 ---
+Narek, I am Sorry I didn't see your post, I was reviewing the whole thread and I just saw it now. I invite you to check my earlier post # 91, I think it says the same thing, doesn't it ? Thanks,
+
+--- 帖子 #165 ---
+EA opened a new short trade on GBP/USD today at 7:30 GMT. It missed the partial TP by few pips. Trade is still running. Chart attached
+
+--- 帖子 #166 ---
+EA opened now a Long position on EUR/USD. Chart attached.
+
+--- 帖子 #167 ---
+EA should open a Long position on EUR/JPY but it didn't. Expert Log doesn't show any error ??? Chart Attached. The Big Candle reached 73 pips while EA was waiting for 54 pips ??
+
+--- 帖子 #168 ---
+EUR/JPY : When I ran on Tester EA showed that it was waiting for a candle of size 82 pips, I think the "Comment" in EA is not updated correctly. Chart from tester attached.
+
+--- 帖子 #169 ---
+Our GBP/USD went well so far, and closed at partial profit. Remaining position is trailed. Chart Attached.
+
+--- 帖子 #170 ---
+Trade Update : AUD/USD AUD/USD long trade is going well now with 50+ pips. Partial take profit is expected at around 0.9140 Chart Attached.
+
+--- 帖子 #171 ---
+seems like the EA is working per your strategy, except the comment not updated..
+
+--- 帖子 #172 ---
+Yes indeed. Internally its working fine. Only the comment showing BC size is not updated. I will fix that later on.
+
+--- 帖子 #173 ---
+Trade update: GBP/USD Remaining position was closed at trailing stop. Net: won 37 pips, $73 total profit. For details check the Trade Explorer.
+
+--- 帖子 #174 ---
+Hi Abok, good chart, after some development, i saw you has been caught the result in BC4 now. glad to know it ...
+
+--- 帖子 #175 ---
+Just Added USD/CAD and NZD/USD to the EA portfolio, as I would like to see more trades taking place. Again all pairs are using the same settings.
+
+--- 帖子 #176 ---
+Can you please attach files? EA and set file. I run nonstop on a demo account.
+
+--- 帖子 #177 ---
+Thanks. and good luck with your new thread "Indonesian Trading Journals". Impressive results indeed. Good luck.
+
+--- 帖子 #178 ---
+Sure. The EA "Big_Candle_04" is basically the same, I only fixed the comment showing the big candle size. EA and the same settings for all the 8 pairs I am trading are attached. If you are planning to run on multiple pairs, please review my post # 127 . EDIT : Those settings are for M30 Time frame.
+
+--- 帖子 #179 ---
+Thank you. Monday I start testing.
+
+--- 帖子 #180 ---
+how can I disable BE and Trailing Stop and partial tp? keeping 0?
+
+--- 帖子 #181 ---
+New Trade: EA opened a long position on USD/CAD. (are you crazy, who buys here ???). In fact, if I was trading manually I might sell. Anyway, this how the strategy is. So lets see how this will end. Trade Chart Attached.:
+
+--- 帖子 #182 ---
+For USD/CAD chart above, remember that I've attached the EA to USD/CAD only today. If it was active yesterday, It would have opened at a better price (around 1.070).
+
+--- 帖子 #183 ---
+Trade Update : AUD/USD. It seems that the Minimum lot size allowed in the demo account is 0.10 (mini), so EA was not able to lock partial profit. but moved the stoploss to break-even. EDIT: No. The problem is with the EA when get disconnected, and reconnected again. What happened is that some variables related to partial profit, and original candle size were not re-initialized correctly. So, for the AUD/USD I will close 1/2 position when profit reached the original 1st TP (@ 0.9140). And I will fix this issue in the EA in the coming days.
+
+--- 帖子 #184 ---
+Mind sharing what happen in 2012 backtest? Could it be the backtest data quality, eg missing data?
+
+--- 帖子 #185 ---
+Well, you will have trades from two EAs on the same account. It is possible to login to one mt4 account from several PCs without any problems. If using the same EAs using the identical magicnumbers (if the EA is hopefully using magicnumbers to identify his trades), they would modify the same trades without to know from each other. Which would not give good results. Apart of that I'm enjoing you thread. My experience says that almost each good written EA with a good strategy works in his intendet market situation. It is hard to detect this market situations in a correct way. Regards PBPTaker
+
+--- 帖子 #186 ---
+Version 4 build 610 Meta Trader, I put the Ex4 file in Experts folder in Program Files\Meta Trader\MQL4\Experts\ where I have Moving Average.mq4 and MACD Sample.mq4. when i start MT4 again I dont have Big Candle in my Experts. Am I doing something wrong? I do turn off MT4 before placing the file into that folder. UPDATE : Whoever has this problem. or just doesnt know how to do this. In new builts what you need to do is go to File - Open Data Folder and then copy ex4 file into Experts folder there.
+
+--- 帖子 #187 ---
+Its SHOWTIME @ FOMC meeting. I'm at home and EA Robot is at Work in Full Thrust. Take it easy boy!
+
+--- 帖子 #188 ---
+It's working great, now I'm gonna try to run it in my demo. ​
+
+--- 帖子 #189 ---
+Impressive results I got yesterday. Thanx
+
+--- 帖子 #190 ---
+Glad to hear that. On Demo account I think , Or not ? Don't you dare !
+
+--- 帖子 #191 ---
+I will try to elaborate on that this weekend if possible.
+
+--- 帖子 #192 ---
+I'm sorry, I think that something is missing some steps. I've MT4 b610 and already paste the Big_Candle_04.ex4 file in the path: C:\Users\USER\AppData\Roaming\MetaQuotes\Terminal\BB190E062770E27C3E79391AB0D1A117\MQL4\Experts. But still can't run it.
+
+--- 帖子 #193 ---
+EA Forward Testing: So far the EA results are OK, even at important news. It was able to close on reverse signals, and open opposite trades in an accepted fashion. However this EA was not meant to be a news trader, or a Scalping trader, as I have much better strategies for these types of trading. But maybe it behaves this way because I have chosen a short time frame (M30) for the live testing, which is not necessarily the best time frame for Long-Term Trend Following trading.
+
+--- 帖子 #194 ---
+EA Forward Testing (Lessons Learned so far): The demo account I opened for this test was a micro account, however I discovered that the minimum lot is 0.1 (which is mini not micro-I don't know why?), and since I'm using a risk percentage of 1% of balance($10,000) which is equal to $100 on each trade, so for a 100 pips SL, EA will open a position of 0.1, and for a 50 pips SL EA will open a position of 0.2. Now if the position was 0.2 or above we are OK, as EA will be able to close 1/2 of the position and trail the rest. But in case the position was 0.1 the EA is not able to close the partial profit so it had closed the whole position which well affect our Trend Following strategy. I will modify the EA to have a minimum position that can be divided (with relation to the broker minimum lot), so ideally the min. position should be at least 2 x minimum lot size.
+
+--- 帖子 #195 ---
+In fact, it's logical that it works well at news times because the main rule is the big candle which is given by important news.
+
+--- 帖子 #196 ---
+Yes, it makes since that it opens the trade at news time because of a Big Candle, but I want it to build on that, not to close for 30 or 50 pips.
+
+--- 帖子 #197 ---
+EA Forward Testing (Lessons Learned -2): EA opened 2 trades on the same Big Candle on USD/JPY (chart attached) Now I know that this deficit was due to closing the Whole position instead of closing partial profit and trail (due to lot size issue raised before) But its better to cater for such cases as it might happen
+
+--- 帖子 #198 ---
+Just set a filter to avoid 2 entries on the same candle.
+
+--- 帖子 #199 ---
+EA Forward Testing (Lessons Learned -3): Usually its very quite for a while before news (so ATR will be small, on M30 it could be 5 pips) Which will affect out settings for Initial TP(50 pips), Stoploss(100 pips), Trailing Stop (50 pips)... Then you have the Big News Candle of 150 pips So what happen is that you close pre_maturely for partial profit Worse is that Trainilig Stop gets hit while trend is still in the building phase This is what happened with USD/CAD (chart attached)
+
+--- 帖子 #200 ---
+Sure. The Ideas explored here (Lessons Learned so far) will be implemented in the next (hopefully Final) release of this EA.
+
+--- 帖子 #201 ---
+Thanks. Magic numbers managed internally (not settable bu user). But my idea was that I want the two copies (clones) of the EA to work as one. In other terms one to be a backup for the other since I am not using VPS. Anyway, maybe this is too much at this stage, and I am sure VPS will be available when working on a Real Account.
+
+--- 帖子 #202 ---
+I don't think that you have to copy it in any place other that ..\MQL4\Experts\ @FerruFX : Any Idea ?
+
+--- 帖子 #203 ---
+In the new builds (600+), the folders for indicators and experts were moved in another location in the computer. To find the folders, open the new platform, then click File &gt; Open Data Folder &gt; MQ4 ... then in the MQ4 folder you will find the experts and indicators folders. Once your tools in the right folders, restart the platform.
+
+--- 帖子 #204 ---
+Although technically possible, it may be possible to faar to complicated to run one EA in such a backup-way. If the magic is not settable by the user then please document it somewhere (e.g. with a "extern string"-command in the settings). This would give a possible way to let the user choose different numbers in other EAs. And of course, you will have errors in the journal when one EA would try to close another which was closed from the other one etc. Possible problems because of different round trip times to the brokers, different RAM and CPU-Allocations of the machines (resulting to faster trades-executions of one compaired to the other). So a lot of things do check in the code.
+
+--- 帖子 #205 ---
+@FerruFX @PBPTaker Thank you for your valuable contributions.
+
+--- 帖子 #206 ---
+Your welcome. The (IT)-technical way is easy (at least to me as an IT-professional), but forex is the actual hard thing to manage.
+
+--- 帖子 #207 ---
+For you any one else still confused with parameter settings, here is Another Look at the EA Parameter Settings (Applicable to Big_Candle_04): atr_period =20 : ATR period (for current time frame) Please refer to posts # 79 &amp; 80 &amp; 81 for more details on how this is handled atr_multiple =8 : ATR Multiple (Trade Trigger) opens a trade if candle reaches atr_multiple * atr value this parameter should be large for short time frames and small for larger time frames out of my observations you can use 8 for M30, 6 for H1, 4 for H4, 2 for D1 and so on. This parameter is very important because it will trigger the trade in the direction of the Big Candle, so we want to make sure that we are correctly identifying the Big Candle When we set to to 8 for example on M30 frame, the trade will open only if the candle size exceeds 8 x ATR, so if ATR was 9 pips, Big Candle should be of size &gt; 8 x 9 (72pips) You have to experement with different pairs and time frames to reach the best value that: Identifies a Big Candle (to avoid false signals) Produces acceptable number of trades (to have reasonable ROI) tp_atr=100 : ATR Multiples for Take Profit If you are looking for Long-term trading keep this parameter high (100,200 ... etc), so that it will not be reached (i.e. Disabled). Because the trade will end at either SL, TS or Opposite Signal If you are Scalping (although not recommended), you can make it small so that it can be hit easily More about the remaining parameter settings later on. Regards, Khalil
+
+--- 帖子 #208 ---
+Another Look at the EA Parameter Settings (Applicable to Big_Candle_04): Continued: sl_atr =20 : Stop Loss in terms of ATR multiples. Now this should be at least equal to atr_muliple parameter, and better to be Twice, for example if the atr_multiple is 8 make sl_atr=16, as some times the consolidation after the big candle can go beyond the candle low/high, but do not make it too big because your R:R ratio will suffer. To Disable Stop Loss (Not recommended) make it very high (100). ts_atr =10 : Trailing Stop, For Trend Following this should be large enough to protect the trade from pull backs. I advise this to be at least equal to atr_multiple, better to be more. To Disable it make it high (100) be_atr =10 : Break Even Stop, EA will move the Stop Loss to Break Even point when the trade profit reaches this value (again in terms of atr). Suggested either equal or less that trailing stop, because if it is larger that trailing stop, then the trailing stop will Override it. To Disable set to high value (100). partial_tp_atr =10 : EA will take partial profit (on 50% of position size) when profit reaches this parameter value (in terms of ATR), ideally this is best to be equal to break even stop. To Disable it set it to high value (i.e. 100). To be continued later ....
+
+--- 帖子 #209 ---
+Another Look at the EA Parameter Settings (Applicable to Big_Candle_04): Continued: candle_period =0 : Candle Period 0 Open on current candle, 1 open on next candle. If you are using low value for atr_multiple its better to open on current candle for better momentum utilization, while if you are using high value for atr_multiple its better to open on next candle (for a better open price). If you chose to open on next candle , it is better to setup also the ef_sz_atr (candle effective size) parameter to be at least 1/2 of atr_multiple to avoid pin-bar or doji candles. risk_perc = 0.01 : risk percentage will determine the trade position size based on Stop Loss level. please refer to post # 91 for more details on this. fixed_lots =0 : Fixed number of Lots, This parameter will determine the Fixed Trade Size regardless of balance and Stop Loss level, and will be used for all new trades. And of course it will override risk_perc parameter. To Disable fixed_lots set it to 0. close_on_opp =1 : 1 to Close on Opposite Signal, or 0 to keep the trade open regardless of opposite signal. Opposite Signal means that another Big Candle appeared in the opposite direction of the open trade. So, should we close the trade immediately or disregard the opposite signal and continue the trade to be closed either at Stop Loss or Trailing Stop instead. If your using Static ATR, and set this parameter to 1, it is not necessary that the EA opens an Opposite Trade right away, as the ATR might be different at this time. While if you are using Dynamic ATR it will open immediately. For a better understanding of Static vs Dynamic ATR please refer to post#79. To be Continued ...
+
+--- 帖子 #210 ---
+Another Look at the EA Parameter Settings (Applicable to Big_Candle_04): Continued: ma_period =20 : Exponential Moving Average Period. If you like to take only trades in the direction of the prevailing trend you can set this parameter to the period that you see suitable for trend identification on the used time frame. To Disable it set it to a low value (3 is OK because a Big Candle will cross EMA(3) for sure). Notice that if you put a high value (100,200 .. etc), you will not be able to catch the start of new evolving trends. Also number of trades will be less ma_open_atr =100 : If you will use the ma_period, maybe you don't want to open trades at a price too far from EMA as most probably it will return to EMA. Here you can set the maximum distance (in terms of ATR multiples) from EMA that you want the EA to open trades, if its more the EA will disregard the signal. To Disable it set it to a high value (100) ef_sz_atr =3.0 : Candle Effective Size(in terms of ATR multples) When used in conjunction with candle_period=1 it will the EA to open the trade only if the Effective Size of the Big Candle is greater than this parameter value (again in terms of ATR multiples) Please review post#73 for details on Candle Effective Size. dyn_atr =0 : Use Dynamic ATR calculation=1 or Static ATR=0. please refer to post# 79 for details on Static vs Dynamic ATRs. That's all regarding the EA (version 4) parameters.
+
+--- 帖子 #212 ---
+One of the new parameters that I am planning to add to version 5 will be : Respect Parent Candle on Higher timeframe. Which means that if for example we are trading H1 and the recent Big Candle on D1 is bullish then we trade only bullish Big candles on H1. What do you think ?
+
+--- 帖子 #213 ---
+what ever u plan to do, always keep an option of ON and OFF.
+
+--- 帖子 #214 ---
+Although the Big Candle concept seems logical, I think we are still not able to Correctly identify the Big Candle. Look at the attached chart for EUR/USD M30 Current. Attached Image (click to enlarge) I still believe that ATR is not the best solution.
+
+--- 帖子 #215 ---
+Hi abokwaik, Just installed the EA v4 for demo trading. It's looking for candle lenght of 4.5x ATR 20, although properties are set at a multiple of 8. Any idea why ?
+
+--- 帖子 #216 ---
+In this thread ( http://www.forexfactory.com/showthread.php?t=459503 ), they are using an indi to identify the largest candle of the last x bars. May be you can experiment with it, i.e. if current candle if the lasgest of the last x bars, then enter trade (may be 2/3 days for M30). Here the indi: Attached File(s) Candle length Identifier.ex4 3 KB | 474 downloads
+
+--- 帖子 #217 ---
+In fact v4 was modified to use a Smoothed ATR value. The below text was taken from post#81. "I smoothed the ATR over 7 different periods based on the period used in the setup, 3 quarters below the given period and 3 quarters above, plus the original period as follows: Suppose the user set ATR Period to 20. The system will generate ATR for the periods 5,10,15,20,25,30,35 and take the average. For ATR Period of 60, periods will be 15,30,45,60,75,90,105. and so on."
+
+--- 帖子 #218 ---
+[quote=abokwaik;7359352]{quote} In fact v4 was modified to use a Smoothed ATR value. The below text was taken from post#81. "I smoothed the ATR over 7 different periods based.... Understood ! Thanks for your explanations !
+
+--- 帖子 #219 ---
+Thanks, I suggested a similar idea in post#113. " I am thinking also of a better way to identify the Big Candle, I am not sure that using ATR is the best method. I mean the Big Candle should stand out of all recent candles, maybe twice as large as the largest candle in the previous 20 or 50 candles ... I don't know. ". But I still need a way to Globally identify a Big Candle, I mean, looking at long historical data for different time frames. What we need is either a variable or a fixed identifier that will generate more good signals than false, and a reasonable number of trades.
+
+--- 帖子 #220 ---
+Some statistics on GBP/USD M30 for the period from 20/6/2011 until today Period M30 candles: 33961 candles Period Days : 1008 days Period Weeks : 144 weeks Period Months : 33.5 Months Period Years : 2.8 years Average Candle Size = 14 Pips Maximum Candle Size = 198 Pips Now what would you consider to be Big Candles over this period ? There are 12561 Candles of size bigger than average (14 pips) There are 2682 Candles of size bigger than Double the average (28 pips) There are 689 Candles of size bigger than Triple the average (42 pips) There are 225 Candles of size bigger than 4 times the average (56 pips) Now , would 56 pips be the most suitable size for a Big Candle on GBP/USD M30 time frame ? This is the type of historical data study I am looking for.
+
+--- 帖子 #221 ---
+Since March 8, over 200 downloads of v4. I hope that who downloaded it had the chance to play with it in the strategy tester. We also have it working on 8 pairs linked to Trade Explorer. I think its about time to start working on version 5 of this EA. Yesterday I explained the input parameters used in v4. And before we go to version 5, I would like to hear from you guys about which parameters you saw effective to keep and which parameters you saw that its not making a big difference to remove. At the same time, any suggestions on replacing ATR with something more reliable are welcome. As I mentioned in earlier posts v4 that is linked to the explorer is not working as intended. and that's because of the minimum lot limitation on my broker.(i.e. all the trades that were opened with 0.1 position size are not working as they supposed to, because the whole positions (0.1 which is not dividable by 2) will be closed at partial profit, hence no utilization of the trailing stop and trend following. This will be fixed in v5, to allow for a minimum dividable position size although it will come with higher risk (and it will be optional). awaiting your feedback ,
+
+--- 帖子 #222 ---
+Hi Abokwaik, Thank you for taking time to introduce this system and refining it. I think since this is a breakout system then we should look for periods when the market picks up momentum. So we should omit periods of low liquidity and exclude its candles from the ATR calculations or at least give them less weight in the formula. When we are taking like 24 ATR for M30 bars in the formula and we see that 12 of them moving in a range bands in a tiny amount of PiPs for each, then those 12 Bars will cause lowering the ATR breakout point we are waiting for and cause false entry. Or we can apply time filter function to start at London open and stop at NY close, or make the calculations in a loop connecting this period close to the other one open and in this case the calculations will depend on healthy M30 Bars! Thank You..,
+
+--- 帖子 #223 ---
+Thanks. Time or session based ATR will not necessarily give better ATR calculation because some currencies are also active in the Asian session (i.e. : JPY, NZD, AUD). However your first suggestion where we exclude very small candles might be a valid one.
+
+--- 帖子 #224 ---
+If you are checking the attached Trade Explorer you'll notice that some trades are still open from last week, and didn't close at SL or TP, and that's because the market is Ranging on those pairs. At some time it should Break-Out and produce either loss or profit closure. You might also notice that the Stop Loss on EUR/USD trade should be 1.3770 not 1.3716 as shown in the explorer, which if lost will result a loss of more than $100 and that's AGAIN because of the EA was not able to open it at the correct position size which should be 0.07 instead of 0.1 because of Minimum Lot Limitation on the Broker. This issue will be fixed in next release in a way that the user can select either to Force the Risk or Force the Position Size to be dividable by 2.
+
+--- 帖子 #225 ---
+In many cases the Big Candle is followed by a consolidation/correction that might consume the whole Big Candle. I am thinking of split the risked position into Two trades : Market Order Pending Limit Order @ 0.75 of Candle Length Still both orders will have the same SL. Of course this will be optional if next version.
+
+--- 帖子 #226 ---
+GBP/USD is so far the best performer on Big_Candle_04, followed by USD/CAD While EUR/USD is the worst, followed by EUR/JPY .
+
+--- 帖子 #227 ---
+Hi! Work is EA ECN broker?
+
+--- 帖子 #228 ---
+I don't see why not.But Demo please.
+
+--- 帖子 #229 ---
+if i want to test this EA , which version should i use ? BC4 ?
+
+--- 帖子 #230 ---
+The Latest version is on Page#9 Post#178. I also updated the Link to version 4 on the First Page. If you are planning to run on multiple pairs, please review post # 127 .
+
+--- 帖子 #231 ---
+This is the current GBP/USD trade. It is a good example on how the EA should work. It closed 1/2 position at partial take profit, moved SL to break even, and now trailing the stop. EDIT : This was because SL was small, so EA was opened the trade with 0.2 lots which is dividable by 2. EDIT : Well, So soon, the remaining position was closed at Trailing Stop. Its again because the Trailing Stop was small. Attached Image (click to enlarge) It was lucky the price missed the Trailing Stop by 1 Point (0.01 pip), before going up again.
+
+--- 帖子 #232 ---
+EUR/USD Trade is till suffering. I think it will hit SL before weekend. Please remember that I am not interfering with the EA work. It does what it does based on the rules. The only hick-up is the Minimum Lot limitation on the broker. EDIT : Sorry about the Trend Lines, they are not related in any way to Big Candle System.
+
+--- 帖子 #233 ---
+The only hick-up is the Minimum Lot limitation on the broker, that based on the set risk percentage of 1% on each trade EA is not able to open the trade at the intended number of lots, and accordingly most of the trades are closed at partial profit as the trade lots (in this case 0.1) are not dividable. This happened Yesterday with AUD/USD Trade. Attached Image (click to enlarge) This trade was opened at 0.1 based on SL and Risk percentage. EA tried to close 50% (0.05 lots) of position at Partial Take Profit, but since the Min Lot Size on the broker is 0.1 it had to close the whole position. Otherwise the other 1.5 of the position should be Trailed by now. I can overcome this issue without modifying the EA by simply increasing the risk percentage to 2% or 3%, but I would rather not at this stage and keep things as is. People using brokers with 0.01 Min Lot size will not have any issues.
+
+--- 帖子 #234 ---
+Just for Fun !
+
+--- 帖子 #235 ---
+I am following the BIG one closely; thank you again for lighting the candles. In post #233 " Otherwise the other 1.5 of the position should be Trailed by now . " Do you mean the other 0.05?
+
+--- 帖子 #236 ---
+Hatem, you are absolutely correct. I ment 0.05. Typing error. Sorry.
+
+--- 帖子 #237 ---
+The EA started making trades on 13/3/2014. So far its been 12 trading days. It went into Loss and Profit, and now on almost break even. I will focus on the Loosing Trades and try to analyze (with the help of you guys) why those trades failed. The Big Looser was EUR/USD (-279 pips, -$370). So lets have a look at the EUR/USD lost trades.
+
+--- 帖子 #238 ---
+Ok, lets....
+
+--- 帖子 #239 ---
+The attached chart shows 3 consecutive losses on EUR/USD on M30 (TF used by EA). Attached Image (click to enlarge) All 3 trades show that EA entered on a Reversing Point. False Break Out.
+
+--- 帖子 #240 ---
+Now lets take a look at H4 Time frame. Attached Image (click to enlarge) Should we have Respected the recent Big Candle on Higher Time Frame (H4 in this case), most of false signals would have been avoided.
+
+--- 帖子 #241 ---
+I am still not sure about "Respect the Parent Big Candle" Concept. and with any EA I think we should accept some loosing trades, but this was an Odd case for EUR/USD.
+
+--- 帖子 #242 ---
+Regarding trades in M30 TF, I think that we enter the trade after the candle has traveled too far and exhausted, this could be due to the issue we discussed before in POST #222 or due to using very large ATR or ATR multiplier so the pips we are seeking are consumed by the move before the entry.
+
+--- 帖子 #243 ---
+Although it is still early to judge the EA, I will keep it running until end of April. But I will increase the risk percentage to 3% instead of 1% in order to allow for proper position calculation. At the mean time my plan for the next Final version will be to make 4 flavors of the EA as follows: Scalping : using M1 or M5 --&gt; Big_Candle_Scalp Short-Term : Using M15 or M30 --&gt; Big_Candle_ST Med-Term : Using H4 --&gt; Big_Candle_MT Long Term : Using D1 --&gt; Big_Candle_LT New parameters to be added include: Retrace percentage for second position. Respect the Big Parent Candle
+
+--- 帖子 #244 ---
+Right. For the Final version I am planning to drop ATR and use Average multiplier on a long period (1 year for M30, 2 years for H4 and so on). This amount will be entered as an input parameter by the user in Fixed Pips (i.e. I will let the user do his calculations and decide what is the proper size for the Big Candle on each pair/tf).
+
+--- 帖子 #245 ---
+Starting today I changed the Risk percentage from 1% to 4% on all pairs. This will allow for better position management but comes at Higher Risk.
+
+--- 帖子 #246 ---
+I got involved in a new project that will take most of my time. I will leave the EA working as is till end of April, and I will try to check the thread from time to time for questions/ideas ... etc.
+
+--- 帖子 #247 ---
+Hi Abok, finally you find the key of this great EA as i see on your BC4 demo chart explorer. I think it's good enough to try bc4 in the live. Do you plan to release bc5 in the future or bc4 was the final? congrats for your new project, hope you pass it with all best.. have a nice day..
+
+--- 帖子 #248 ---
+Thank you ZiC. BC4 is still in the test phase, and I think its better to wait until end of April to evaluate it. As I mentioned before the EA was not working as it is supposed to because of lot size issues related to Minimum Lot set by Broker (which I didn't know when opened that Account). Now with the increased Risk Percentage and accordingly a dividable Lot Size, the EA will try to take advantage of Trend Trading, although this wont be easy as we are using short time frame, but we'll give it a try and see. On the other hand, I've received through my PM, some valuable comments and ideas from respectable FF members on how to improve this EA. Which I will study and incorporate what is possible into BC5 planned on May 2014. Regards and Profitable Trading, Khalil
+
+--- 帖子 #249 ---
+Ok. khalil. i'll keep my eye here waiting for the real phase. Sorry.. i couldn't give some valuable ideas bout the technical system related to this ea, coz im'not expert on it. baw, i'll not stop looking for great system like BC. with all respects.. Ali
+
+--- 帖子 #250 ---
+Unfortunately my PC at work which is running the EA was off last night due to power disconnection. I hope that it did not mess any thing. People planning to use auto trading should have an VPS account.
+
+--- 帖子 #251 ---
+Great job abok! I've written something along the same idea, but a little different...sans indicators. I have a few friends that run live with this same idea, though it is gridded it is based on a Follow the Leader concept...consequently named FTL... It has had it's moments of struggle and is a static TP with a trailstop running on last position taken...but hopefully this gives you the encouragement you need to continue on with your project. See Link HERE .
+
+--- 帖子 #252 ---
+Hey Magix where r u man? it's been long time
+
+--- 帖子 #253 ---
+Hey EG, I built my own little hole in the wall to share some ideas with like minds...only check in at the factory every once in a while. Hope all is well with ya, brother!
+
+--- 帖子 #254 ---
+I don't know what happened with AUD/USD Trade today. Partail TP was not triggered although Break Even and then Trailing Stop was activated.
+
+--- 帖子 #255 ---
+Thank you Magix. I will certainly take a look at FTL.
+
+--- 帖子 #256 ---
+With regard to A/U trade I checked the log, and found out that the TP order was not sent by the EA. I ran the strategy tester (attached) and TP was triggered correctly, however the trailing stop was not triggerd. I think this is related to changes in ATR value calculation if the EA was stopped (and this what happened due to power disconnection on Tuesday).
+
+--- 帖子 #257 ---
+All such cases will be hopefully handled in the Final version.
+
+--- 帖子 #258 ---
+I will explain what happened with the 3 recent consecutive losses on EUR/USD later on the weekend, and how this should be avoided in final ea version.
+
+--- 帖子 #259 ---
+Hi Abokwaik, would like to test ur final version. V4 seems like roller coaster (taking into consideration you not setting in on a vps).
+
+--- 帖子 #260 ---
+This why I am doing forward testing. Once errors are discovred they can be resolved. I only hope that we discover all of them during this short testing period.
+
+--- 帖子 #261 ---
+I started testing this EA on my VPS from today on. Hope to contribute from to perfection of this EA. Peace, Auset
+
+--- 帖子 #262 ---
+Great. Tomorrow is the NFP day, lets see what happens.
+
+--- 帖子 #263 ---
+So what happened with EUR/USD on Thursday: Attached Image (click to enlarge) [1] According to settings a Big Candle appeared, and a Long Trade Taken on Current Candle, and since Candle Size was relatively small, and hence SL is small, a Large position was opened 0.6. If you look at the previous candles they are Very Small, which affected the ATR calculation. The Candle Size was less than 35 Pips, and this should not be considered as BIG candle. This is one of the modifications that need to be done on coming version, where I suggest using a Fixed Size for a BIG Candle looking at at least one year data (for M30 time frame). So for EUR/USD M30 it would be something like 60 Pips . However this trade initially went into loss on the second candle, and then came ECB Press Conference candle and the trade into profit ($160), but didn't reach partial Take Profit. On the same candle (which is a Big Candle), and since we enabled "Close on Opposite Signal" and once the candle became "Red", the trade was closed at loss. [1C]. [2] a Short Trade was open, and we are still in the Big Candle, and since we enabled "Close on Opposite Signal" and once the candle became "Green", the trade was closed at loss. [2C]. [3] a Long trade was open (on the same ECB Conference candle), and it was closed later as Opposite Signal Appeared. However no new short trade was open because the candle does not satisfy the new calculated size of the Big Candle. This was really bad, and it could be worse, I mean if the "ECB Press Conference candle", or a BIG candle in general went into Green and Red many times, EA will open and close at loss. However this scenario can be easily avoided by not allowing the EA to open multiple trades on the same candle. This is a know situation (see post # 197) and a fix is planned for the next version.
+
+--- 帖子 #264 ---
+Hi, http://www.forexfactory.com/showthread.php?t=320940 Can you tell me if your theory is the same as mine?
+
+--- 帖子 #265 ---
+I checked your link, but Nothing much there to compare !. What happened, did you gave up or what? Anyway, I had to check your code to know "your theory". It looks good to me. But different. Thanks for stopping by,
+
+--- 帖子 #266 ---
+Before moving to Big Candle 5, here is a fix of known issues on Big Candle 4, along with a test on GBP/USD 2014 using same settings linked to Trade Explorer. Impressive Results. The new release includes the following fixes: No multiple trades on Same Candle. Partial Take Profit Fixed on MicroLots(0.01). Technical Details : This was done using MODE_LOTSTEP which allows micro on closing, however Minimum Lot to Open a Trade is still using MODE_MINLOT which is a MiniLot(0.1) Test was run on FXDD Real Account with Fixed Spread and it allows micro lot for trade opening. ​​​EA will keep try performing each operation (open, close, move stop ... etc) until done. ​EDIT: reloaded EA after adding Error_Handling
+
+--- 帖子 #267 ---
+Here are the test results for the 8 pairs linked to TE for the period 1/1/2014 to 12/4/2014 using M30 and same settings for all pairs as linked to TE: PAIR $ PROFIT/LOSS ====== ======== GBP/USD +3536 EUR/USD -1222 AUD/USD +2177 NZD/USD +1852 USD/JPY +955 USD/CAD +1101 EUR/JPY -435 GBP/JPY -1683 ============ TOTAL +6281 Remember that settings were initially optimized for GBP/USD and same settings applied to all pairs. Ideally each pair should have its own settings.
+
+--- 帖子 #268 ---
+Side Talk, You think that you have a successful trading strategy, but trading it manually involves fear and greed, so you fail. I have read books and articles on Trader's Discipline as key to success in trading. But couldn't find a way to guarantee discipline better than mechanical trading through an EA. Many would say that mechanical trading systems can NOT be profitable. Is this business only for people with deep pockets? so they sell at yearly high, and buy at yearly low with no stop loss, and keep position open until they get their profit targets. I am confused.
+
+--- 帖子 #269 ---
+Side Talk: I studded hundreds of trading strategies. I even made-up many on my own, and they looked very profitable at first glance. So, I put them in an EA, and they failed on the long run. Well, I was very disciplined but yet failed.
+
+--- 帖子 #270 ---
+Hi Abokwaik, I think your system is very good and it can be and is profitable. It should be revised every three months or so (settings), but in general it is very good. Keep up the good work. lp Dragan
+
+--- 帖子 #271 ---
+Side Talk: The only strategy that worked in all market conditions and on the long run and brought huge profits, required a huge starting balance ($100,000)-not the Big Candle BTW. I hope the Big Candle will show success on the long run, but I'm not very optimistic. Back to work.
+
+--- 帖子 #272 ---
+Thanks for the encouragement. I might loose a trade but never lose HOPE.
+
+--- 帖子 #273 ---
+Some notes on the EA trades : Won Trades: As we are working on M30 time frame, most of the profitable trades were not able to catch a Big Trend, and in most of them the Final Take Profit was less than the Partial Take Profit because of hitting the Trailing Stop too soon, or the micro-trend reversal. Look at the late EUR/USD trade : Attached Image (click to enlarge) So how to work around such cases ? What if we don't trail the stop loss, and keep it at break-even, or even at the original place, AND, Take multiple profit targets as long as the micro-trend goes: For example in the above trade, the partial take profit 50% was taken at 20 pips (as calculated from the settings, 10xATR multiples), so instead of trailing the stop at 10xATR we keep it as is, or move it to break even, and take profit in, lets say 5 steps, 20% for each additional 20 pips in our direction. This will keep us safe from pull-backs in the emerging micro-trend, isn't it.
+
+--- 帖子 #274 ---
+Some notes on the EA trades : Won Trades: Another note about Won Trades. Over 90% of won trades reached Partial Take Profit/Break Even before beating the Big Candle. So what if we minimize the stop loss (currently 20xATR), to be just few pips under/above the Big Candle. This will minimize the loss on almost all lost trades.
+
+--- 帖子 #275 ---
+Hi, the trade you're mentioning is great, everyone would be happy to take its profits and if you look forward there is another big candle and buying oportunity which would also be in profit.. I think that only thing that is missing is that you incorporate tp, sl, 1st tp, trailing and be in pips to the EA in addition to the atr values, so that you can trade either way, or that you can combine both. lp Dragan
+
+--- 帖子 #276 ---
+In fact the other big candle was traded also, see attached image. So out of this micro-trend we got two trades (Yellow Rectangles), but look at what we missed(Gray Rectangle). We exited a winning Buy Trade (missing the momentum that came with the second big candle), and then opened a new buy trade. Foolish isn't it? There were no Opposite Signal during this micro-trend. As for your second suggestion on having levels in Pips in addition to ATR multiples, we had this option in the earlier versions but was only complicating things, specially if you intend to run the EA on multiple pairs. ATR multiples can be easily converted to pips (and this is in fact implemented inside the EA), and ATR multiples makes more sense as they can be easily applied to any pair, any time frame. Regards, Khalil
+
+--- 帖子 #277 ---
+I am raising these issues on trades taken by BC4 as a preparation for BC5, and as I always do, settings will be flexible so that you can enable it or disable to reach your optimum settings for each pair/tf. We started the testing with M30 in order to have more trades to evaluate, although I preferred a larger time frame (H4 ), but what done is done. And I'll continue using the M30 time frame for the rest of this test. I encourage other traders who have the time to test the EA on other time frames (shorter and longer), and on some exotic pairs, and post their findings in order to have some team work here, which will minimize the time needed to reach the final version.
+
+--- 帖子 #278 ---
+Hi Abokwaik, I think that those two trades are great and it doesn't matter that you missed the grey area. When you got the first trade, you didn't know what will happen next, so you didn't miss anything. My view is that you will never get everything. I would very much agree with your idea about the SL being placed below or above the candle and big candle value in pips instead of ATR. lp Dragan
+
+--- 帖子 #279 ---
+Right. No one knows for sure what will happen next. My idea was that instead of Stop Trailing, why don't we try Profit Trailing. Because in most of the winning trades we gave back so much to the market.
+
+--- 帖子 #280 ---
+Technical: I am thinking of how to best implement Profit Trailing (or in other words Taking Profit at pre-defined steps). Requirement Explanation: We have a setting parameter for Partial Profit Taking in terms of ATR multiples, currently set in the EA to 10. So, for example if the BigCandle Trigger size (set currently to 8xATR) was 40 pips, then EA will take partial profit (fixed now at 50% of original position size) when the trade is positive (40x(10/8)) = +50 pips. My new idea is the 50% be a variable settable by the trader. So suppose the trader set this to 20%. This will mean that EA should take profit on 20% of the original position each time the trade moves additional 50 pips in our favor. At the first Profit Taking, SL will be moved to BE, and stay there, not trailed, in order to allow for pull backs without exiting the trade. Implementation: Option 1: Open multiple orders each with different profit taking, and divide the position size equally between them. Example:using the numbers above, and using 20% as profit steps. the EA will open (100/20) = 5 trades. All with the same Stop Loss. 1st with TP=50 pips, 2nd with TP 100 pips, 3rd TP 150, 4th TP 200 pips, 5th TP 250 pips. Once 1st TP is hit, SL for all trades will be moved to break even (opening price). The disadvantage with this option on the current account linked to TE is that the minimum lot size to open is 0.1, so looking at the above example the positions total will be 0.5, each trade is 0.1, which could be more than the desired risk percentage. Option 2: Open one position. and Partially close 20% of original position, each time the price makes additional 50 pips. This option is ideal, but how to know the Original Position. I though of using the Comment field and save the original position there, but comment field will get changed by the broker. Or maybe looking at the history and calculate the original size for the open trade from all related orders ... EDIT: Please note that we can not use calculated memory variables as they will get reset when a disconnection occur. This is a current bug with BC4.
+
+--- 帖子 #281 ---
+The Big Candle 4 was a Big disappointment this month. It certainly needs more work, and better be used on higher time frames, with fixed position sizing. I am posting the MQL source file, for people willing to improve.
+
+--- 帖子 #282 ---
+hi Abo you have an interesting thread here !!! Thanks for posting it. i have not yet tested it, but have some propositions about it: - what order to send ? to answer to it, i should glance at the big picture to know how is the main trend: w1 trend channel let you know if its hard trending, rising or falling, or ranging; it let you also known when/where it should bounce. Then an external daily pivot / weekly pivot ratio will help testing and find secure order, and maybe use of buy/sell stop (for breaking levels) or buy/sell limit order to catch some pullback. - when to place order ? 1) active hours: -1h / +2h around of London/NY open sessions (Tokyo works with the BOJ 2/3 H after opening) 2) news: your EA take advantage of them; maybe some pending orders with expiration will help a lot here. 3) main support/resistance and higher TF pivot: scary to place an order too close of these levels (or use pending orders here too) 4) detection of consolidation zone: after a big move, often the market calm down (smaller candles to tiny ones): here some pending orders can catch the pullback, and also be ready for the next break, continuing the main trend. - money management: should adapt the % risk used depending of the scary levels. Then SL &amp; TS have to glance at these levels also. I am a fan of the huge timeframe trend, before following on smaller ones.
+
+--- 帖子 #283 ---
+Good Points.
+
+--- 帖子 #284 ---
+Comparing ATR vs Standard Deviation : knowing if the market is ranging or trending http://www.forexfactory.com/showthre...71#post5355171
+
+--- 帖子 #285 ---
+This robot will join the Robot Lab Project ​ soon.
+
+--- 帖子 #286 ---
+This EA looks similar to an EA I was always trying to get to work when I was newb. I always got so close and it worked brilliantly in backtest and even in demo but not quite enough oomph in live. On occasions I have gone back to it when I've been bored to find the right settings. It works on a similar principle with "bar size" as one of the main settings. A couple of the other settings were the Break Even or Better function and also could include a TS when a % in profit (similar to you taking partial), More Pips that entered the trade once PA passed the trigger bar by an amount of micro pips (a negative value could be used here) and the last main setting was Bars to Wait that would wait for so many bars after the trigger bar. The EA was designed to be a scalper but I did backtest with the Large Candle theory and often with a 100% success rate... I just was never patient enough to apply it in live trading. Anyway just some ideas to play with. Good luck on the EA. Oh forgot, it also had a time function to only place trades between certain periods too.
+
+--- 帖子 #287 ---
+Thanks for your input Matts and Sorry for the late response, as I spend most of my free time in " Robot Lab ". The "Big Candle" will be discussed and hopefully improved in the Robot Lab. Join us there if you like.
+
+--- 帖子 #288 ---
+Mr.Abokwaik Strike Trader Is Opposite of Your Entries Criteria Because They Use ATRValue SL &amp; TP As A Zone And There SL Value Is Larger And TP Value Is Smaller a M30StopLoss=ATR(20)x6-8 M30TaKeProfit=ATR(20)x10 Negative R:R a1:2? But It suppose To Increase Probability To 74% With Few Draw downs while still having a Large Enough Winning Trades To Yield A Profit. They Also Use Pullback Conclusion For Entries Strike Trader video Inserted Video Inserted Video Inserted Video PS This is a good cost Effective VPS for MT4 https://bestvps.us/ https://www.inmotionhosting.com/vps-hosting Thank You for sharing your EA to fellow Traders Much Apprecieated
+
+--- 帖子 #289 ---
+I have the Ea back tested with m15 on different pairs and it made winner overall except eurchf my modulation quality is not so good but I think it doesn't matter much on a m15 TF gbpjpy http://prntscr.com/86i1l3 gbpusd http://prntscr.com/86i27s looks promising edit: more: if we have winning EA on m15 why not make the TF rolling? You can loose many entries. There is no reason to look only (for example) for a time like 8h00 to 8h14 and 8h15 to 8h29. there could be a trigger from 8h05 to 8h19 or 8h06 to 8h20. So take 15x m1 candles and see if there is a trigger in a (rolling) m15 TF please make me also a version with setting to reverse trade. m1 big candles like to do retrace. And a limit option in pip maybe useful.
+
+--- 帖子 #290 ---
+something is wrong, why this trades closed here http://prntscr.com/86lo1u http://prntscr.com/86loyi
+
+--- 帖子 #291 ---
+Assalamuallaikum Khalil! I have an idea about entry for BigCandle EA (I think this is new idea). To determine big candle we use your basic formula by multiplied ATR value so there is no change for this. What we change is place a pending order (BuyStop on High of Big bullish candle or SellStop on Low of the bearish candle) and we put SL on the opposite side (Low of candle for BuyStop and High of candle for SellStop) generally this is breakout technique. If needed we can set some pips space between High or Low to our pending order. For TP we can add fix number of pips or use auto set as big as SL, if the SL is 30 pips so TP is 30 pips also (1:1 RR) or we use trailing stop to keep our trade long way. For Money Management we use what you've done on the big candle EA or input fix lot size. Oh almost forgot to mention, the pending order that is not hit, will be canceled if the EA generate new signal and put new pending order. And if there is position running, there will be no new entry on same pair for same direction. If new signal found for opposite direction, the running trade will be closed. That's what I think in my head, what do you think?
+
+--- 帖子 #292 ---
+These are 2 quick test versions I made back in January, one using limit orders on retraces and the other using stop orders on break outs. I remember limit orders performed better. You can test them. Source code is provided if coders like to drop in. I am off to a 1-week trip, so might not be able to assist during this time.
+
+--- 帖子 #293 ---
+Alright, Thank you so much I'll check it, maybe I missed this version from this thread By the way, have a safe trip Khalil
+
+--- 帖子 #294 ---
+Thanks. Actually these 2 files were not posted in the thread. They were only experimental and not complete. I checked both and found they were different from what you've suggested. So maybe we can try you suggestion when I am back.
+
+--- 帖子 #295 ---
+I really don't have words to praise you for your intelligence, creativity and the way you make time for the traders community. Really you are a gift to all we people out here. Peace. Happy Trading... Regards...
+
+--- 帖子 #296 ---
+It's Ok Khalil, absolutly no problem, you can do it whenever you have free time only. Thanks.
+
+--- 帖子 #297 ---
+Man! you have another thread.. I just started with your Cross Trader today ... at the moment at page 38 reading... I wanted to setup trade explorer and test it on demo
+
+--- 帖子 #298 ---
+Actually this thread was my first on FF. Good reading with CT, there'll be always room for improvements. I am glad you came back v2vboni.
+
+--- 帖子 #299 ---
+This is interesting... And it doesn't hedge, correct? Look forward to testing your new idea's through the new year.
+
+--- 帖子 #300 ---
+if market made big bull or bear candle then open trade against because market always do retractment.
+
+--- 帖子 #301 ---
+Hi Hirangan, As I am really busy these days, I suggest that you have a look at the ATR Break Out thread, in which I had implemented similar ideas to yours. All the best, Khalil
+
+--- 帖子 #302 ---
+It's Ok Khalil, no problem. I'll check it there. Thank you.
+
+--- 帖子 #303 ---
+This is what I've been working on for you. Testing results are mixed, maybe you and other members can find good settings. Fixed Pips option added in addition to the previous ATR option. Reversal option added. Moving Average filter selectable time frame ... etc. Attached Image (click to enlarge)
+
+--- 帖子 #304 ---
+Abokwaik, this looks very clean and simple! I'm gonna try scalping The Big Candle as soon as time permits Thank u Sir Genious. BoHanna
+
+--- 帖子 #305 ---
+Sorry for late reply Khalil Maybe we need to play around with the parameter to find th better one. By the way, can you make the SL auto placed on High or Low of the candle? (depending to pending order if Buystop at the High so the SL will be at the Low of that candle) Using multiplied ATR to set SL is a bit bigger for me, for TP is no problem using ATR for me as long as we have trailling stop behind (please change the Trailing Stop using fix pips not ATR) . Big Thanks for your Hard Work, may you always in green pips
+
+--- 帖子 #306 ---
+VERY VERY interesting Keep the good work
+
+--- 帖子 #307 ---
+Amazing and simple strategy, i will follow it and make profit daily, thank bro
+
+--- 帖子 #308 ---
+Big candle itself is not enough. We must include volume indicator in decision to open BUY or SELL. If there is significant increase in volume it will confirm
+
+--- 帖子 #309 ---
+For some reasons when I try to test the EA after the first lost trade the tester stops. Anything am doing wrong here?
+
+--- 帖子 #310 ---
+I agree. usually big candle have high volumes.
+
+--- 帖子 #311 ---
+Which version are you testing ? Kindly check journal for possible errors.
+
+--- 帖子 #312 ---
+Hey abokwaik, Thanks for starting the thread and for sharing the EA(s). Good stuff you're doing here man. I would love to ask how do you go about finding possible trade ideas, and more importantly, how do you keep generating them? I just did a backtest on EUR/USD H1 TF, and it looks promising. Having said that, I'll have to take a deeper dive into it. I've been researching the FF forum for a couple of weeks to find practical trading ideas that can be validated with proper data and backtesting tools. I'm wondering if anyone here is working on improving the strategy, or have other interesting trade ideas to discuss and share.
+
+--- 帖子 #313 ---
+Passion for the game. I suggest you check the Robots Lab here at FF. Thank you for your nice words.
+
+--- 帖子 #314 ---
+No better answer. Definitely will. I've just finished this thread. Really enjoyed walking through the ideas generation process, and looking forward to more discussions.
+
+--- 帖子 #315 ---
+Hi Abokwaik, is it possible to incorporate field to include retrace entry i.e. specified by pips amount or fibonacci to the EA? Many thanks.
+
+--- 帖子 #316 ---
+subscribed
+
+--- 帖子 #317 ---
+Just follow Big Candle 1 minute , followed by significant increase in Volume while price breakout ranging market in Asian Session. 30 pips already in hand.
+
+--- 帖子 #318 ---
+is this EA still profitable?
+
+--- 帖子 #319 ---
+Could you publish just an indicator that will somehow identify a candle if it closes xATR past an ma? Would be so helpful.
+
+--- 帖子 #320 ---
+try Big Candle Alert on the the market at metaquotes works great.
+
+--- 帖子 #49 ---
+thx for the share.. can you share the mq file too please? thx in advance
+
+--- 帖子 #50 ---
+Hello, What happened with these project? I was very promising, someone continue on it?
+
+--- 帖子 #51 ---
+hi sir this idea comes to my mind and after searching i realized you make this good expert i was wondering can you explain by detail in one post about last version of this expert(number 7) all inputs??? you have talked about it part by part and its hard to find relevant data among this 17 pages
+
+
+===== 附件下载链接 =====
+

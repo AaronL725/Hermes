@@ -15,6 +15,8 @@ class ForexIndicatorAnalyzer:
         self.current_dir = os.path.dirname(os.path.abspath(__file__))
         self.root_dir = os.path.dirname(self.current_dir)  # 获取项目根目录
         self.vectorized_data_path = os.path.join(self.root_dir, "database")
+        # 添加mediumdata路径
+        self.mediumdata_path = os.path.join(self.root_dir, "mediumdata")
         
         # 加载环境变量
         load_dotenv(os.path.join(self.current_dir, '.env'))
@@ -28,21 +30,18 @@ class ForexIndicatorAnalyzer:
         # 初始化大语言模型
         llm = ChatXAI(
             api_key=self.xai_api_key,
-            model="grok-2-latest",
+            model="grok-3-mini-latest",
             temperature=0.4,
             max_tokens=16000
         )
         
         # 构建精简但高度相关的查询
         query = """
-        RSI, MACD, Bollinger Bands, Stochastic, Moving Average, EMA, SMA, ATR, Fibonacci,
-        indicator parameters, technical indicators, trading rules, entry signals, exit signals,
-        indicator combinations, indicator reliability, confirmation signals,
-
-        quantitative factors, statistical edge, signal generation, algorithmic rules,
-        mean reversion, trend following, breakout strategies, volatility trading,
-        win rate, profit factor, parameter optimization, signal filtering,
-        alpha generation, signal threshold, feature extraction, multi-timeframe analysis
+        technical indicators, trading indicators, oscillators, momentum indicators,
+        trend indicators, volatility indicators, volume indicators, custom indicators,
+        proprietary indicators, indicator names, indicator types, indicator variations,
+        specialized indicators, unique indicators, indicator systems, indicator combinations,
+        indicator methodology, indicator algorithm, trading system indicators
         """
         
         # 初始化token计数器
@@ -135,45 +134,35 @@ class ForexIndicatorAnalyzer:
         
         # 创建提示模板，指导模型对内容进行分析
         template = """
-        You are a professional forex market quantitative analyst, analyzing trading discussions from ForexFactory forums with the goal of extracting valuable information that can be converted into quantitative factors. Based on the following content:
+        You are a professional trader and quantitative analyst with 20 years of experience. Your task is to extract precise information about technical indicators discussed in ForexFactory forums. Based on the following content:
 
         {context}
 
-        Please provide a concise technical analysis summary WITH THE OUTPUT IN CHINESE using this format:
+        Please extract ONLY the names of all technical indicators mentioned in the discussion and output in strict JSON format:
 
-        SUMMARY:
+        ```json
+        [
+          {{
+            "name": "Indicator Name"
+          }}
+        ]
+        ```
 
-        1. Core Quantitative Indicators/Signals:
-           - List all indicators or signals that could be used for quantification
-           - Include relationship or priority between indicators
-           - Note which indicators are acknowledged by most traders
+        This is just an example format. You should extract ALL technical indicators you find, which may be many.
 
-        2. Indicator Parameters and Calculation Methods:
-           - Provide detailed explanation of specific parameter settings for each indicator (periods, thresholds, etc.)
-           - Describe calculation methods or formulas (if mentioned)
-           - How indicators are adjusted under different market conditions
-
-        3. Trading Rules and Trigger Conditions:
-           - Clear definition of entry conditions (e.g., breakouts, crossovers, thresholds)
-           - Exit conditions and stop-loss settings
-           - Risk management rules (position sizing, risk ratios)
-
-        4. Indicator Effectiveness Evaluation:
-           - Traders' assessment of each indicator's reliability
-           - Potential failure scenarios or error sources
-           - Performance differences in specific market environments
-
-        5. Potential Quantitative Factor Construction Directions:
-           - Suggestions for indicator data transformation or combination
-           - Possible time series processing methods
-           - Signal filtering or confirmation mechanisms
-
-        Note:
-        • Focus only on content specifically related to quantitative trading
-        • Keep the format concise and clear
-        • If no relevant content is found, respond with "未找到可用于量化因子构建的有效信息"
-        • Do not add additional analysis or speculation
-        • YOUR ENTIRE RESPONSE MUST BE IN CHINESE
+        Quality requirements for the "name" field:
+        1. Maintain precision and completeness of indicator names (e.g., "Stochastic RSI" rather than simply "RSI")
+        2. If an indicator has specific variants, include this in the name (e.g., "Hull Moving Average" rather than simply "Moving Average")
+        3. Include any unique characteristics or modifiers that make the indicator distinctive (e.g., "3-Line MACD", "Adaptive RSI", "Double Bollinger Bands")
+        4. Be thorough in capturing the full formal name of each indicator to distinguish it from similar indicators
+        5. If an indicator has a custom or proprietary name, preserve that exact naming
+        
+        Important:
+        1. All indicator names must be in English
+        2. If no valid technical indicator information is found, return an empty array []
+        3. Ensure the output is valid JSON format
+        4. Do not add any comments in the JSON
+        5. DO NOT include usage settings, parameters, or descriptions - ONLY extract the names of indicators
         """
         
         # 创建提示对象
@@ -196,12 +185,15 @@ class ForexIndicatorAnalyzer:
 
     def _get_latest_summary_file(self):
         """获取最近的摘要文件"""
-        # 查找根目录下所有的summary文件
+        # 修改为在与main.py同级的mediumdata目录下查找
         summary_files = []
-        for file in os.listdir(self.root_dir):
-            if file.startswith("summary_") and file.endswith(".md"):
-                file_path = os.path.join(self.root_dir, file)
-                summary_files.append(file_path)
+        
+        # 确保目录存在
+        if os.path.exists(self.mediumdata_path):
+            for file in os.listdir(self.mediumdata_path):
+                if file.startswith("summary_") and file.endswith(".md"):
+                    file_path = os.path.join(self.mediumdata_path, file)
+                    summary_files.append(file_path)
         
         # 如果没有找到摘要文件，返回None
         if not summary_files:
@@ -250,6 +242,7 @@ class ForexIndicatorAnalyzer:
             # 准备存储分析结果
             results = []
             total_collections = len(collection_names)
+            skipped_collections = 0
             
             print(f"开始处理 {total_collections} 个集合...")
             
@@ -261,6 +254,7 @@ class ForexIndicatorAnalyzer:
                 # 检查是否已经分析过此集合
                 if title in already_analyzed:
                     print(f"跳过已分析过的集合 [{idx}/{total_collections}]: {title}")
+                    skipped_collections += 1
                     continue
                 
                 print(f"正在处理第 {idx}/{total_collections} 个集合: {collection_name}")
@@ -278,6 +272,11 @@ class ForexIndicatorAnalyzer:
                 })
                 
                 print(f"完成处理: {title}")
+            
+            # 检查是否所有集合都被跳过
+            if skipped_collections == total_collections:
+                print("所有集合都已分析过，无需更新")
+                return []
             
             # 如果存在之前的摘要，将其内容也添加到结果中
             if latest_summary and already_analyzed:
@@ -349,27 +348,33 @@ class ForexIndicatorAnalyzer:
         """
         print("正在分析所有文档中的指标信息...")
         
+        # 获取最新的摘要文件路径
+        latest_summary = self._get_latest_summary_file()
+        
         # 执行指标分析
         results = self.analyze_indicators()
+        
+        # 如果结果为空，表示所有集合都已分析过
+        if not results:
+            print("所有集合都已分析过，无需生成新报告")
+            return latest_summary if latest_summary else None
         
         # 格式化结果
         output = self._format_output(results)
         
         # 生成文件名和路径
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        # 修改为简化的命名规则
         filename = f"summary_{timestamp}.md"
-        # 修改为保存到根目录
-        output_path = os.path.join(self.root_dir, filename)
+        output_path = os.path.join(self.mediumdata_path, filename)
+        
+        # 确保目标目录存在
+        os.makedirs(self.mediumdata_path, exist_ok=True)
         
         # 写入文件
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(output)
         
         print(f"分析报告已保存至: {filename}")
-        
-        # 删除或注释下面这行代码
-        # self._delete_chroma_cache()
         
         return output_path
 

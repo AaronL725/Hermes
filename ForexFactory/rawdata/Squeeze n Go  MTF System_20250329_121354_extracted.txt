@@ -1,0 +1,1226 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+***Changing the logic of the system to align with RickM's methodology. The previous system was based off an experienced coder form TradingView, however I find more merit in RickM's approach.*** This strategy focuses on trading the TTM Squeeze Pro indicator in combination with EMA trend ribbons to filter out fakeouts and align with the trend. It's designed for H1 or M5 timeframes while keeping the daily chart in mind for confirmation. Setup Requirements: EMA Trend Ribbon EMA 21 (White) – The key trend indicator. EMA 34 (Yellow) EMA 55 (Orange) EMA 89 (Red) The ribbon identifies trend direction: Bullish trend: EMAs stacked upward (21 &gt; 34 &gt; 55 &gt; 89). Bearish trend: EMAs stacked downward (21 &lt; 34 &lt; 55 &lt; 89). TTM Squeeze Pro (on TradingView) Focus on the transition from red dots (Bollinger Bands inside Keltner Channels) to black dots. Look for momentum alignment with the squeeze breakout. Entry &amp; Exit Rules Entry: Trade breakouts from red to black dots if the momentum histogram aligns with the trend. Only take trades in the direction of the EMA 21 and the ribbon. Exit : Close the trade when the momentum histogram shifts from red to yellow and begins reversing. Multi-Timeframe Confirmation Always confirm the trend on higher timeframes (Daily or Weekly). Check for squeeze setups across 15M, 30M, and higher timeframes for confluence. FOR REFERENCE FROM TTM SQUEEZE PRO INDICATOR - Beardy_Fred &gt; John Carter creating the TTM Squeeze and TTM Squeeze Pro -&gt; Lazybear's original interpretation of the TTM Squeeze: Squeeze Momentum Indicator -&gt; Makit0's evolution of Lazybear's script to factor in the TTM Squeeze Pro upgrades - Squeeze PRO Arrows For those unfamiliar with the TTM Squeeze, it is simply a visual way of seeing how Bollinger Bands (standard deviations from a simple moving average ) relate to Keltner Channels (average true range bands) compared with the momentum of the price action. The concept is that as Bollinger Bands compress within Keltner Channels, price volatility decreases, giving way for a potential explosive price movement up or down. Differences between the original TTM Squeeze and TTM Squeeze Pro: -&gt; Both use a 2 standard deviation Bollinger Band ; -&gt; The original squeeze only used a 1.5 ATR Keltner Channel; and -&gt; The pro version uses 1.0, 1.5 and 2.0 ATR Keltner Channels . The pro version therefore helps differentiate between levels of squeeze (compression) as the Bollinger Bands moves through the Keltner Channels i.e. the greater the compression, the more potential for explosive moves - less compression means more squeezing. The Histogram shows price momentum whereas the colored dots (along the zeroline) show where the Bollinger Bands are in relation to the Keltner Channels: -&gt; Cyan Bars = positive, increasing momentum; -&gt; Blue Bars = positive, decreasing momentum (indication of a reversal in price direction); -&gt; Red Bars = negative, increasing momentum; -&gt; Yellow Bars = negative, decreasing momentum (indication of a reversal in price direction); -&gt; Orange Dots = High Compression / large squeeze (One or both of the Bollinger Bands is inside the 1st (1.0 ATR) Keltner Channel); -&gt; Red Dots = Medium Squeeze (One or both of the Bollinger Bands is inside the 2nd (1.5 ATR) Keltner Channel); -&gt; Black Dots = Low compression / wide squeeze (One or both of the Bollinger Bands is inside the 3rd (2.0 ATR) Keltner Channels ); -&gt; Green Dots = No Squeeze / Squeeze Fired (One or both of the Bollinger Bands is outside of the 3rd (2.0 ATR) Keltner Channel). Ideal Scenario: As the ticker enters the squeeze, black dots would warn of the beginning of a low compression squeeze. As the Bollinger bands continue to constrict within the Keltner Channels , red dots would highlight a medium compression. As the price action and momentum continues to compress an orange dot shows warning of high compression. As price action leaves the squeeze, the coloring would reverse e.g. orange to red to black to green. Any compression squeeze is considered fired at the first green dot that appears. Note: This is an ideal progression of the different types of squeezes, however any type of squeeze (and color sequence) may appear at anytime, therefore the focus is primarily on the green dots after any type of compression. Entry and Exit Guide: -&gt; John Carter recommends entering a position after at least 5 black dots or wait for 1st green dot ; and -&gt; Exit on second blue or yellow bar or, alternatively, remain in the position after confirming a continuing trend through a separate indicator.
+
+--- 帖子 #2 ---
+Hey relentless Machine...System enthusiast? I like that and can relate to it Can you post few charts, perhaps on the lower time frame(5M or 10M or 15M), have to be conscious of MM and SLs and point out where exactly you would of entered?
+
+--- 帖子 #3 ---
+Hello my friend Ofc, once I'm home I'll upload some more detailed charts.
+
+--- 帖子 #4 ---
+Very nice, simplicity is the key! I suggest Trailing Stop, every time PA gets to the top/bottom of BB. It will prevent from quick PA action hitting full Stop Loss.
+
+--- 帖子 #5 ---
+Lovely idea. Also I had Heikin Candles in those examples but setups were taking with normal candles.
+
+--- 帖子 #6 ---
+My KC (Blue) it's almost always inside the BB (black) Is that right?
+
+--- 帖子 #7 ---
+Are you waiting for Keltner Channel to move inside the Bollinger Bands or viceversa?
+
+--- 帖子 #8 ---
+Sorry mixed it up . Never manually charted squeezes, always used indicator. Wait for BB to enter the KC Once SQUEEZE is located, wait for ST signal and validate with momentum
+
+--- 帖子 #9 ---
+Looks promising, gonna give it a try
+
+--- 帖子 #10 ---
+Works quite well, but with every system you need to use common sense and some discretion. Don't take every setup. I've found more success when analyzing the current squeeze. If the indicators signal a squeeze remember it's based off the last 20 or so candles, so really try to understand and contextualize the squeeze before entering. Even blind I like my odds though
+
+--- 帖子 #11 ---
+Hi Machine....I too have been using various squeeze breakout methods....mainly in lower time frames. What TF's have you been using this for? Thanks
+
+--- 帖子 #12 ---
+Any time frame
+
+--- 帖子 #13 ---
+I see, there is no system which you can use blindly(if there is, you can build EA). What is traded the best with this system?
+
+--- 帖子 #14 ---
+EAs on the platforms retail traders have access to, just can’t stay profitable long term if they’re 100% fully automated. I’ve tried this to the nth degree. They'll work for a few months, but they will eventually fail. Manual trading or semi-manual are the way to go. In other words, the trader needs to be involved and make some decisions because EAs can’t handle 100% of everything on their own, over the long run. That’s just my experience and opinion. Maybe someone out there has figured it out with MQL4 or MQL5, but I haven’t.
+
+--- 帖子 #15 ---
+Any market can create a squeeze, it's just about finding and contextualizing them enough to feel confident in your trade.
+
+--- 帖子 #16 ---
+Some trades consider squeeze a to be valid if only one BB band enters inside the KC bands. I personally like to really see the bands contract nicely and tightly inside the KC
+
+--- 帖子 #17 ---
+I like to see a pinch. Same setup just with ST Oscillator
+
+--- 帖子 #18 ---
+BTCUSD M5 certainly showed the breakout. Attached Image (click to enlarge)
+
+--- 帖子 #19 ---
+and what exactly is preferred to use to contextualise bb squeeze?
+
+--- 帖子 #20 ---
+A nice scalping setup from yesterday afternoon
+
+--- 帖子 #21 ---
+H1 AUDCAD currently in a setup. ST cross while in a squeeze, with momentum turning up. As well as a strong support area broken enticing short orders only for price to return higher shortly after. Could be a considerable amount of trapped traders.
+
+--- 帖子 #22 ---
+BTC on M1, you can see we have a situation here where the bottom BB has contracted into the KC but not the upper band. Technically it's a squeeze, but does it imply any directional bias if only one band is in? Every other rule is valid, ST crossed down and momentum turned down. I'm observing and open to ideas. Maybe both BB bands do not need to pinched within, food for thought
+
+--- 帖子 #23 ---
+When I was trading this method years ago I only took trades where BB's on both sides where within the keltner channel. It's a good system if you are a patient trader. I consistently made money trading it.
+
+--- 帖子 #24 ---
+Good luck with the thread
+
+--- 帖子 #25 ---
+Thanks for the words on encouragement Rocky. I've experienced pretty nice results as well when waiting for both sides. Might not even be worth looking into a one side squeeze,but we shall see!
+
+--- 帖子 #26 ---
+The one side squeeze worked today, but maybe not tomorrow..
+
+--- 帖子 #27 ---
+Look at this setup on GBPNZD on the Daily. Beautiful setup however the bottom BB expanded outside of the KC right before our signal. Rules are important, but so is context. Would we avoid this trade because of one bar? Discretion is an important part of trading and I believe context should be added to any trade you make. However, over fitting a system and making exceptions to compensate for every market conditions is terrible. Still testing the limits of what the squeeze and types of squeezes can offer for opportunities
+
+--- 帖子 #28 ---
+Do you deploy a concept that measures the intensity of the pinch? Not all squeezes are equal right?... Is a squeeze on a pair trending up with the BBs barely weaving in and out of the KC bands equal to a squeeze that's moving completely sideways and the BB has a nice pinch from both sides deep within the KC? There's a few things to keep in mind here as I forward test. What is price doing during the squeeze? What is the shape of the squeeze, or my personal favorite...where are the trapped traders and so forth. One thing I know for certain is price does react to the squeeze concept quite nicely. However picking the direction is God's work. Any slight advantage we can give ourselves is all we need to carve out an edge.
+
+--- 帖子 #29 ---
+BB expanded outside on the Sell side but we are Buying..I would say that as long as Buy BB inside the KC when there is a Buy trade - it is counts as legit squeeze.
+
+--- 帖子 #30 ---
+Interesting... as long as the band thats in the direction of the trade is in a squeeze, the trade stays validated. Will apply to future set ups and see how it pans out.
+
+--- 帖子 #31 ---
+I haven’t set up this template to check myself, but which pair has a trade for Monday using this system? That seems like a good way to figure out which signals or shapes of BB KC, are the most reliable by seeing if they match up with other systems. The most reliable signal is likely the one that comes from independent systems agreeing with each other. I think that's one of the ideas behind the prop firms. The companies buying the signals from the prop firms probably look for agreement across different systems. So, what is the next trade for Monday? That way, others can check their systems to see if they match this one.
+
+--- 帖子 #32 ---
+I'll check now, but you should easily be able to recreate the Super Trend and Squeeze on your platform. The momentum indicator is only on TradingView however. Shouldn't be too hard to follow along.
+
+--- 帖子 #33 ---
+I tried to create a TradingView account to check out this system, but it looks like they ask for a subscription right after signing up.
+
+--- 帖子 #34 ---
+It's free but you can only use two indicators.
+
+--- 帖子 #35 ---
+For example, candle patterns across different timeframes basically show weakness in JPY, so basically buying JPY pairs. Does this template show any buy signals for JPY pairs?
+
+--- 帖子 #36 ---
+AUDCAD on H1 is currently in a setup for long
+
+--- 帖子 #37 ---
+It’s not matching on my end. I don’t have a strong signal for AUDCAD, but if I had to make a call, I’d say sell based on the H3 candle pattern. This would likely only hold for the first three hours on Monday. There’s also a chance Monday could open with a gap down that will just offset or eat up that potential three hour move.
+
+--- 帖子 #38 ---
+Speaking of TradingView and the alignment of signals, here are the Ideas pages for some forex brokers, listed alphabetically: Eightcap: https://www.tradingview.com/broker/Eightcap/ideas/ FOREX.com : https://www.tradingview.com/broker/FOREXcom/ideas/ Fusion Markets: https://www.tradingview.com/broker/FusionMarkets/ideas/ FXCM : https://www.tradingview.com/broker/FXCM/ideas/ IC Markets : https://www.tradingview.com/broker/ICMarkets/ideas/ OANDA : https://www.tradingview.com/broker/OANDA/ideas/ Pepperstone : https://www.tradingview.com/broker/Pepperstone/ideas/ Tickmill : https://www.tradingview.com/broker/Tickmill/ideas/
+
+--- 帖子 #39 ---
+Sounds like a different system, and I wouldn't say this current squeeze n go setup is strong, it's just a setup for reference. Could go either way for sure though, we are all just speculating
+
+--- 帖子 #40 ---
+hello rockypoint! would you mind share your method and indicators if it was based on MT4 platform? Thanks
+
+--- 帖子 #41 ---
+BTC M1 Nice one band setup that went exactly as the system calculates. Price exploded out of the squeeze.
+
+--- 帖子 #42 ---
+There you go, no reason to respect Sell side no squeeze.
+
+--- 帖子 #43 ---
+Hi Machine I reckon you are using a Bollinger Band set on SMA instead of its better back tested settings of EMA. That way you get the both bands aligned correctly. I like both set to 21 MA as you can see with the chart below. Then I would focus on a break away of the white EMA during a Bollinger Band Squeeze. I think BTCUSD offers the best Squeeze setups I have ever seen, especially on the H1 time frame. It’s still a scalping strategy so I never used a trailing stop but just look to exit the position when the momentum stops. And that stoping is when price falls below the white 21 EMA line or if price hits massive resistance zone. Lastly I always look for trend or trend separation from its correct volume value pricing meaning that trade also had a reversal play on VWAP. So you had a combo of a nice a Squeeze/ VWAP setup which is a 88% sure winner always. Currently trading from a Japanese mountain resort north of Sapporo during the holiday break which is a period I love trading due to high volatility / low volume markets. I normally trade reversals mostly during these period's because trends can become a gamble. Cheers
+
+--- 帖子 #44 ---
+Beautiful, will adjust accordingly. Any other input please let us know! I'm also a fan of looking for reversal plays during the squeeze.
+
+--- 帖子 #45 ---
+Hi RickM! kindky which setting are you using for keltner and bb?
+
+--- 帖子 #46 ---
+Hi, I am exploring bb squeeze and how it works, so I can implement it in my system in the future(have spent whole weekend it). Also, it's not clearly exact system as squeeze n Go(not using super trend and momentum yet, but use VWAP instead), so sorry for that too, if ML thinks I shouldn't do that I will delete my post asap. Here is the possible trade I've found on BTC/USD, it is not totally set up yet. Price bounced off of VWAP(light-blue line) before the squee and broke over 21ema(white line),also change oh character on 1h tf. Is it a good idea to enter trade when bb leaves Keltner and price is still above VWAP and 21ema. Thanks in advance.
+
+--- 帖子 #47 ---
+Can you please give an example on how you use the squeeze method with the VWAP. Didn't understood fully from your previous post Thanks
+
+--- 帖子 #48 ---
+Hi arya Bollinger Bands 21 EMA with bands at 2 Keltner Channel 21 EMA with bands at 1.5 I use 21 instead of 20 because it's at Fibonacial Number. It backtests better on price action setups.. As for stop loss, either place it under opposite band or use 2 ATR as a good safety stop. I would demo trade any settings unchanged for at least 100 setups - then judge the results it produces. As a normal guide, it's not usual for me to get 10-12 winners in a row before running into a 4-5 losing trade block.
+
+--- 帖子 #49 ---
+I once saw a tool on Trading view that I liked. Could not find something like it at MT4, so I coded it. Identifying those squeezes and widenings can be a bit tricky for my old eyes. So I made it with bars. Set the MM_Length to the same value as the BB. Set the other parameters to true. Darkred - bands are widening, but are still inside the average of the x bars back. DarkGreen - bands are widening, and are now outside the average of the x bars back. LightGreen - bands are squeezing but are still wider than the average of the x bars back. LightRed - bands are narrower than the average of the x bars back. When bars are green, they are larger than the yellow line. It means that the bands are wider than the average of the last x bars. It is an indicator by the way. You guys might thinks this is overkill and unnessesary, then don't use it. Merry Christmas
+
+--- 帖子 #50 ---
+Any variation and customization is absolutely fine, we're all here to experiment. The initial system was just a concept from a coder on TradingView, I'm not married to it.
+
+--- 帖子 #51 ---
+I just don't understand yet how to use bb squeeze, I am still guessing about where and when to enter
+
+--- 帖子 #52 ---
+Hi Merka I use VWAP if I am looking for Squeeze setups when trading on smaller timeframes with markets that do provide Level 2 data. No wise trader should go long if the VWAP value line is above a strong bearish move, unless it has moved out at least 2 deviations. Almost every single prop firm trader, hedge fund manager and banker these days is now trained to only BUY stock / Future contracts if price is over the daily VWAP line or SELL stock / Future contracts if price is under daily VWAP line.. A public confirmation of this trend was made public by Ken Griffin who runs Citadel LLC, which turns over around 30-40% of total volume on the US Stock Markets. He openly discussed how if he plans to buy 100,000 stock of any company, his traders using Algorithms will attack the order book with 100 size trades for days or weeks till he gets his fill - but only if the orders average close to the Daily VWAP line. The whole world has turned VWAP crazy it seems.. Therefore I don't want to fight against the tide, but rather surf in on the next wave. That BITCOIN trade above had moved out about 2 deviations so was likely to reverse back to the volume average. Therefore a Squeeze setup &amp; a VWAP setup. Unfortunately its no use for Forex Markets and I don't need to tell anyone why.
+
+--- 帖子 #53 ---
+Hi Ju4ara The original idea is you go long if price is above the 21 EMA once the Bollinger Bands move back outside the Keltner Channel. That's the design of this system, but we all may see something else that suits them. Personally, a strong break of the 21 EMA after a Bollinger Band pinch is often enough for me to enter.
+
+--- 帖子 #54 ---
+Sapporo is a beer I drink when going to sushi restaurants in US. It is very famous Japanese beer. Have fun
+
+--- 帖子 #55 ---
+IMO, this is just a way of fooling yourself. Unless you backtest this for a considerable amount of time, you have no way of knowing if you are wasting your time trading this.
+
+--- 帖子 #56 ---
+I respect your opinion and use to think this way when I first started. You want back testing results that tell you that the system works x% of the time. Fundamentally, I don't agree with rigid rule sets and binary operations. IMO, the best trading is done when you can combine the discretional decision making and analysis of a experienced trader with the emotions of a robot. Some here are experienced and some are not. The ones who aren't are usually the ones begging and whining for EAs because the think they plug and play a magical robot and become profitable over night. If you're experienced however, you don't need back test results to understand if a system works for you or not. You need forward testing results to compare to your real life trading experience. The true key is controlling your emotions at the end of the day. Since we disagree fundamentally this thread is probably not for you my brother.
+
+--- 帖子 #57 ---
+Very interesting information. Thank you.
+
+--- 帖子 #58 ---
+NQ Pre Market (Gray dots at top represent squeeze). I removed the components of the actual squeeze(BB and KC) on the screen for clarity This was a one band (top) squeeze Also Momentum bars are hard to see but they're pushing bullish as well
+
+--- 帖子 #59 ---
+Thankyou Rick due to your prompt reply!nice of you
+
+--- 帖子 #60 ---
+SL at BB Attached Image (click to enlarge)
+
+--- 帖子 #61 ---
+FOREX TRADERS When I trade the Squeeze on Forex Markets, I find this setup the best. Generally Forex Markets produce many fake outs so I find it best to trade with a EMA Trend Ribbon (EMA 21 - 34 -55 -89). Most trades I take are on H1 or M5 but I always see what the Daily chart is doing. Using the TTM Squeeze Pro (Tradingview), trade the breakout of RED DOTS (BB inside Keltner Channel) to black dots if the momentum indicator agrees. Below is EURJPY on H1. Here we are only looking for Bearish signals and the take profit signal is when the Momentum Histogram turns from Red to Yellow and moving backwards. Also on the multi - time frame view, there is Squeeze setups on 15M / 30M / W / M If in doubt, the WHITE EMA which is 21 is KING. Cheers
+
+--- 帖子 #62 ---
+Sounds good. Updating the system to align with your methodology as we move forward. First post has been updated. Let's master this approach.
+
+--- 帖子 #63 ---
+For clairty, we should trade the breakout of the black dots to the red dots you mean? The black dots represent the squeeze and when the squeeze releases it will change to red dots right. Then use momentum for confluence.
+
+--- 帖子 #64 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #65 ---
+Hi RickM, is there anyway you could share the indicators and template please?TIA the mtf indicator of the mom and squeeze looks interesting
+
+--- 帖子 #66 ---
+Then we need to learn to evaluate setups into 3 groups - A+ Setups. - B Setups - C Setups We only want to trade A+ Setups at Full size and B Setups at half size. C Setups avoid because the result is small profit for much mental energy. The final step is to practice trading A+ setups with additional trades to obtain BIG Positions. Trade safety guys
+
+--- 帖子 #67 ---
+M1 Gold 2 hours ago
+
+--- 帖子 #68 ---
+Trade still active as histo hasn't changed or momentum
+
+--- 帖子 #69 ---
+Hi sin On Tradingview Platform MTF Squeeze Pro TTM Squeeze Pro EMA Ribbon Cheers
+
+--- 帖子 #70 ---
+Hi, what is considered A+ setup? Thanks.
+
+--- 帖子 #71 ---
+Direction just changed to Bullish, all EMA's pointing up and below the yellow King 21 EMA (per RickM from Japan ), I am simplifying a bit for the sake of this thread, but this first meaningful squeeze I would be taking on Dow Futures 5 Min TF
+
+--- 帖子 #72 ---
+Just now - 1 Min Dow futures
+
+--- 帖子 #73 ---
+Nice one, seems to be squeezing again.
+
+--- 帖子 #74 ---
+I like first squeeze after trend change, after that, I do not like squeezes that did not retrace properly...I would rather load up on the 1st squeeze and manage it with MM 'till the obliiiiivion or 'till I see red histogram. The 3rd squeeze has potential as yellow EMA retraced nicely into the Blue EMA.
+
+--- 帖子 #75 ---
+Agreed. Third one took off haha
+
+--- 帖子 #76 ---
+Hi Ju4ara A+ Setups are always on Trend with price leaving the 21 EMA with Momentum. The original indicator for momentum is using a indicator found on every single trading platform. That's "Momentum " set to 12 with a line through either the 00 or 100. If yo use the TTM Squeeze Indicator - the design was to enter a Long on lite blue and exit after 2 bars of dark blue. Personally I just exit when price crosses back over the 21 EMA Happy Holidays
+
+--- 帖子 #77 ---
+MT4 traders can use Bill Williams Awesome Oscillator. Here you have both the Momentum set to 12 and the Williams. Won't work in ranging - hence the Squeeze strategy.
+
+--- 帖子 #78 ---
+Thanks for making it clear. What timeframe would you recommend to trade indices with bb squeeze?
+
+--- 帖子 #79 ---
+Hi MachineLearn and RickM, Roughly which session and which pairs are do setups appear and are good usually? How many pips do you usually target?
+
+--- 帖子 #80 ---
+Hi. JU4ara Check out Rocky's thread, he only trades ES (US500) on the 1 minute chart and wins every day (Williams%R, SAR X-over 15 minute candles). Personally I like the Two Minute chart for Squueze's but both of us are intraday traders. Otherwise, look at M5 or H1 for the best setups. Cheers
+
+--- 帖子 #81 ---
+Hi Haz Without doubt, the best session to trade is from US Open. If you can trade then, the best in order is US500 / DOW /. Nasdaq / US2000. I am based out of Australia so that time period is hard for me to trade often (US Open starts at 12.30am for me) so I normally trade 3 primary markets during the London session instead. I favour ES / Gold / Oil Futures but also watch EU &amp; Bitcoin. Bitcoin on the One Hour Chart offers perhaps the BEST SQUEEZE'S Setups I have ever seen - always watch it. As for Targets, I don't have any. Just trade the setup till momentum fails (or cross of the 21EMA). On Forex, H1 works best. Cheers
+
+--- 帖子 #82 ---
+Thanks for the reply. What about Forex pairs, any favourites? I'm trying to stay away from indices and crypto. I shall follow this thread to learn more first. Appreciate more examples and guidance from you and MachineLearn when you can share!
+
+--- 帖子 #83 ---
+Which one is recommended to use, HA or candlestick? Because you use both and results of squeeze are different if you use HA.
+
+--- 帖子 #84 ---
+BTC H1 in a squeeze. Orange dots indicate it was extreme at one point during the squeeze which is good. On the lower time frame there was a small breakout from a squeeze but price mildly pulled back. We'll observe what happens when the squeeze ends and what momentum looks like.
+
+--- 帖子 #85 ---
+Correct, I sometimes show HA candles BUT its for illustrations reasons only. Candles &amp; HA focus too much on the CLOSE, we should be studying the range. I trade using BARS , its best to see the range. If you use HA Candles, you need to change the Keltner Band spec's.
+
+--- 帖子 #86 ---
+I am a lousy manual trader. Weak stummock you know. But I think I will have a go with this strategy. It will make life easier if I have a mtf. indicator that sends an alarm when a possible setup occurs. Does anybody else have an interest in that? I can make it if I get help to use the right parameters. Will it be better if I do not pollude this thread with an indicator Machin??
+
+--- 帖子 #87 ---
+RickM, I am trying to make A+ setup entries clear. What if we are in an uptrend, red dots appear before pullback to 21ema and have yellow momentum, then pullback appears, also momentum switches to light blue and dots are still remaining red, is this A+ setup and should I enter right away on red dot or wait for black dot on the next candles with rising momentum? Scenario two is the same case is after pullback momentum also switches to light-blue but dot switched to black, how to enter in this case? And the third scenario is previous 2 scenarios, but red dot then black dot/ red dot then red dot appeared already on pullback. Thanks for patience and Happy holidays.
+
+--- 帖子 #88 ---
+let's pretend there is no range and it is a trend, is this a+ setup or A+ setups are the ones which pulled back from ema with red dot, and red dot appeared on increasing momentum
+
+--- 帖子 #89 ---
+Take the trade on the Black Dot if price is moving away from the 21 EMA with momentum. Risk is low because you can place your stop on the other side of the EMA and hope momentum continues for a while. AVERAGE MOVE FOR A SQUEEZE SETUP =. 6 to 8 Bars then if gifts some more
+
+--- 帖子 #90 ---
+Hokkaido Gokoku - jinja Shrine About 4pm, I found a quiet spot on a bench, near that big tree and began trading. I get my inspiration from those special places in the world that raise my emotional senses - and this 120 year Shrine in the top of Japan was one of those gems. It was just me and the Bitcoin Market without a single other sole anywhere to be seen. I saw a H1 Squeeze setup and took a Long from the 21 EMA - it ran beautifully for 20 minutes but my profits were short lived because it sharply reversed back down to my STOP for a small loss. Bugger, I let a nice gain slip away. Its snowing just a bit more which relaxes me some. I read a news story about BlackRocks EFT being hit my strong withdraws from investors - $100K is too much for some. It hits me hard then that I should only be looking for Shorts so I move down to M5 Chart and look for some Squeeze Setups there. Snow is getting harder, I move uncover near some sort of Lion statue that looks grumpy that I am. Then I see another Squeeze on M5 that is following a Trend, looks like a A+ Setup. Range breakout - Trend - Good Momentum - Leaving the 21 EMA - CHECK. CHECK. CHECK. CHECK I'm in Wind swirls the snow some more and the sun has now set so it's getting dark. I see some worker sweeping away the snow from the entrance but no one else. Trades looking good Here comes the momentum WHAM down it goes Then it drifts, no some fanny car stuff but its still moving down some more so I stay in position. About now this worker starts waving his hands around - to be it means get the hell out of here. I exit this position for a 2.3% gain to my Equity, and shuttle out of the Shrine before this guy with no hair actually slams the door closed as I passed which made me slip down the stairs and fall in a heap at the snow covered pathway below. Laptop in good condition lucky. However a bruised backside to show for my efforts - BUT WHAT A GREAT PLACE TO TRADE That bald head guy was laughing, I am sure of that
+
+--- 帖子 #91 ---
+Beautiful really
+
+--- 帖子 #92 ---
+No worries, fire away
+
+--- 帖子 #93 ---
+RiskFighter, it would be great if you can code MTF squeeze dashboard in MT5, similar to this from TradingView.
+
+--- 帖子 #94 ---
+Damn boyyy, that story almost borders on Romanticism
+
+--- 帖子 #95 ---
+Sorry, I do not have MT5.
+
+--- 帖子 #96 ---
+If you are an MT5 coder(experienced) and know how to code this dashboard indicator, identically to below TV indicator and later to code ea with few simple rules, you may want to DM me or post it here. I been trading through my personal ea for the last 3 years and know that robot is an excellent way to test, optimize and and trade markets forward. In a few weeks if no one comes up with it, I may coded it through my MT5 developers. I will then create ea out of it and put this technique through my vigorous and scientific backtesting and optimization. I studied John Ehlers methods and it is a real science to properly backtest and optimize.
+
+--- 帖子 #97 ---
+Dow Futures 2 Min TF. Blue dots - squeeeeeeeze. 1. Win 2. Yellow EMA went above Blue - No Trade.
+
+--- 帖子 #98 ---
+-&gt; John Carter recommends entering a position after at least 5 black dots or wait for 1st green dot ; and -&gt; Exit on second blue or yellow bar or, alternatively, remain in the position after confirming a continuing trend through a separate indicator.
+
+--- 帖子 #99 ---
+Recent setup... Orange to red to black to green on the entry Also, stayed in a high compression squeeze for a considerable period of time. Attached Image (click to enlarge)
+
+--- 帖子 #100 ---
+Updated first post to include the description of the TTM Squeeze Pro indicator by the author himself. Can add context to the system and also answer any questions about the different colors and dots.
+
+--- 帖子 #101 ---
+Nobody knows what the future will bring but it never hurts to protect yourself with trailing Sl. In a real trading I would of been going to BE or exiting already - do not like this PA(2nd chart) Reentry(3rd Chart) https://www.forexfactory.com/thread/...7#post15099727
+
+--- 帖子 #102 ---
+This is demo trading but would of been done for the day +150.
+
+--- 帖子 #103 ---
+Guys I've spent a bit more than a week to learn how to use bb squeeze(from rockypoint's thread initially) because I saw potential in this strategy. Today, even with stupid mistakes I've made 9RRR with this strategy on us30 and us500, I am not greedy and don't have balls to hold the trade as RickM does, So when I enter, my additional criteria is setting up tp to 5R. Thanks, RickM for sharing your wisdom, still have lots of questions, but will ask after holidays.
+
+--- 帖子 #104 ---
+Here is my first shot for a Squeeze indicator. I am normally a robot programmer so this is out of my comfort zone and it takes time. So today you get an indicator that fills the areas where Keltner lies outside the Bollinger Bands. Don't put the Bollinger and Keltner indicators on your chart, MY indicator prints the Bollinger Bands and the Keltner Channel. You can change nessesary parameters as well as colors to your likings. With this indicator you can have - say 4 different charts on your screen and get notified when there is a setup on one of them. Tomorrow I will add the alarm function - it is not in there yet. The MTF function will come later.
+
+--- 帖子 #105 ---
++1R on Gold Did not enter on two red bars, instead entered on decreasing bullish momentum and on the 5th black dot, after a medium squeeze in the overall direction of the major trend after a small pullback. Not A+ but worked. Can probably hold and move SL. Squeeze ending and bearish momentum kicking in.
+
+--- 帖子 #106 ---
+Observing - Highly Compressed and Bullish Momentum is decreasing in a bearish market, with a bounce off my EMA anchor. Also to note is the length of the squeeze Do we enter on red momentum bars or black dots, not even the slowest of all green dots... hmm This would surely dictate your position sizing? RR stays the same in every setup? Things I'm pondering.
+
+--- 帖子 #107 ---
+Just a post to lighten up this place a bit, and prove you can trade from any where if you have a edge.
+
+--- 帖子 #108 ---
+I agree, just came back from Cabo San Lucas, paid off 4 nights 5 Stars exclusive resort with 2 days trading, while sipping Anejo tequilas. Wife was not excited about me trading a bit, but then was very happy with results O well, you know how the saying go's and I coined it .."I can live without trading, but why?"
+
+--- 帖子 #109 ---
+I could take some notes from you guys, it's all business over here
+
+--- 帖子 #110 ---
+This is the biggest question mark, which colour dot to trade from?. After a few years trading with this strategy (one of a few I trade), I found the best risk reward results come from focusing on price leaving the 21 EMA with momentum on a trending market. I believe we should follow the PA signals more than which colour dot it’s presently at. This enables me to have a very very tight stop / it either works immediately or I am out for a small loss. If you trade with dots, the loss can be far larger
+
+--- 帖子 #111 ---
+Well said love it. This is exactly why I enjoy asking questions out loud. Really let's us hone in on what's important.
+
+--- 帖子 #112 ---
+I just remembered I took few pics from the hotel balcony in the evening, when I traded in Cabo San Lucas...romanticism is my "middle" name
+
+--- 帖子 #113 ---
+Why does the Squeeze setup work? John Carter talks about pressure being trapped inside a Squeeze with will soon act like a spring, exploding price outwards on release. But he is wrong here on this basic explanation. What happens is during a Squeeze period, limit orders are placed either side of compression area in high numbers by impatient traders. Generally it’s 2 to 1 selling limit orders on a bullish trend. Therefore the Squeeze breakout is just a liquidity run towards high imbalance of bids and asks. A bullish trend is therefore the destruction of Sellers Equity. When we add stops, we get a trend continuation of this move called stop runs which is free money if we can stay in for a period.
+
+--- 帖子 #114 ---
+Nice shot, never been there yet but I will add it to my travel list
+
+--- 帖子 #115 ---
+Hi Rick, thanks for your contribuition here. Given that you trade London session due to your location Im curious as to your thoughts on the FTSE? wouldnt that be a good option to replace US500 ? thanks
+
+--- 帖子 #116 ---
+Thank you everyone for all your knowledge and experiences. Here is my template and indicator for MT4.
+
+--- 帖子 #117 ---
+soooo ... what now? should i take it 4 a walk ??? oooorr ??? feed it? oooorr ???? am i suppose to send u money ??? or what??
+
+--- 帖子 #118 ---
+congratulations u have a template
+
+--- 帖子 #119 ---
+prove it. i know different to u soooo .... prove it please
+
+--- 帖子 #120 ---
+You are an IDIOT! Get to Fuck out of here!
+
+--- 帖子 #121 ---
+well well well gotta luv interneters and internet cronies whats da matter pal ? once u ppl start talkin bout anythin WORTH talkin bout THEN Ill start too ..... Ok gotta luv da internet ==== dont need any common snese BUT theres buckets o crud to be had
+
+--- 帖子 #122 ---
+Peter Caleb.... the drunken australian.... membership revoked....keeps reappearing. OP needs to block him
+
+--- 帖子 #123 ---
+ooooo so sorry to interrupt your virtual reality experience do u want fries with that? or maybe a labotomy ? ya know ..... just to help ya get more comfy
+
+--- 帖子 #124 ---
+weeeeell ya gotta admit ==== what im talkin bout is way more entertaining!!!! da stuff u ppl talk bout is soooooooooooooooooooooooo borin !! so uneventful, sooooooo last century !!! so redundant, so outta synch with reality. and DEFINITELY less funny
+
+--- 帖子 #125 ---
+annnnd he's gone..
+
+--- 帖子 #126 ---
+This is my Watchlist template: When a trade is entered, I change to template II.
+
+--- 帖子 #127 ---
+I do trade the DAX at times and I find it better. However the US indices do offer nice trends from around Frankfurt open for around 4 hours which I trade every day. I double the size (or add when in profit soon up) knowing there’s often just one good setup during the London session. The secret is to get out regardless after 5 hours (yes there can be nice long trends but just slow) because your’e get cut up till the New York session starts. Therefore I would trade ES or NQ as my primary London Session markets while keeping away from the DOW during this time as it’s liquidity is terrible. I have 3 primary markets I trade which I map on higher time frames - ES. Gold, Oil On another screen watch screen A I list the DOW, Bitcoin, Russel DAX, EURUSD Futures. Forex markets watch screen B I list the 5 US pairs, EURJPY, GBPJPY and a few commodities. Still it’s better to be a master of a few that try and trade the latest hot market
+
+--- 帖子 #128 ---
+Thanks for the detailed response. Much appreciated
+
+--- 帖子 #129 ---
+Watching on M15. Those small periodes of ranging occurs, but seems to short to really give a valid setup. Then try th siotuation on a shorter TF. In this example it was a fine setup on M5 which I missed because M15 seemed to light.
+
+--- 帖子 #130 ---
+“Most traders take a good system and destroy it by trying to make it into a perfect system.” - Robert Prechter I'll put my hand up and claim I've done that too many times.
+
+--- 帖子 #131 ---
+Hi Machine Learn! You first got me interested in the squeeze when you mentioned it in another thread I follow. Good that you started your own thread on that. I'm curious about your experience with Squeeze Momentum Indicator by LazyBear ( https://www.tradingview.com/script/n...ator-LazyBear/ ) It's currently the most popular indicator on TradingView (90,000+ likes). I've never been able to figure out how to actually use it. What is your, or anyone else's, opinion on this and why BB and KC works better in your method?
+
+--- 帖子 #132 ---
+2 Min Dow Futures now, Blue Dots - squeeze.
+
+--- 帖子 #133 ---
+What's up vmd...It's basically the exact same thing. I would recommend loading up the one from the first page just to avoid confusion for yourself
+
+--- 帖子 #134 ---
+I think his Mindfulness finally went to MindFuck..a bit sad for that person, but trading is definitely for strongminded humans.
+
+--- 帖子 #135 ---
+he he . what can I say? We were told that best trading time is NY session. I was sleeping. Maybe one should not watch US30, US100 and US500 at the same time - eh!
+
+--- 帖子 #136 ---
+I promissed to make an alarm to the MT4 Squeeze indicator. Well, it's done. But as it is Saturday I cannot test it. I will test it Monday and release if it works as intended.
+
+--- 帖子 #137 ---
+Hi Rick, could you elaborate on what you see as the main benefit of using the trend ribbon in addition to the 21 ema? I find the more ema's the more my mind goes walkabout. But, 1 ema and it's like focus without distraction. Thanks for the recent input on the threads. Cheers...
+
+--- 帖子 #138 ---
+Hey Risk, thanks a lot for the Squeeze indicator, the alarm will be a nice addition. Sorry to impose on you like this, but is there any way of adding a button to hide/show the indicator? If its too much to ask dont worry about it
+
+--- 帖子 #139 ---
+I am working on such a button. And I am working another smart thing for you guys. Might be released on Monday too.
+
+--- 帖子 #140 ---
+My take is 2 things. 1 - At least one more EA makes it easier to see in a glance if the chart is trending. 2 - You can use two of the other EMA's to serve as exit/Bounce areas.
+
+--- 帖子 #141 ---
+Nice work Risky, good to have a Coder on board.
+
+--- 帖子 #142 ---
+Thank you. It is nice to know if you are welcome. Sometime coders are not.
+
+--- 帖子 #143 ---
+Hi Focus You could use the 89EMA as your Bias and the 21EMA as a signal to trade provided there is momentum away from the EMA. Forex Markets produce a lot of false breakouts so having a Bias helps for these markets. Then you need to develop a rating for every Squeeze setup you see - A+. B. C Don't trade C setups, just trade A+ &amp; B group Squeeze setups to obtain consistently. Facts are with any Strategy, there is a 48% chance you could lose 7 trades in a row, therefore cut the losers quick and risk letting the winners run &amp; run If I run into a sequence of 3 or more losing trades in a row, I will only trade A+ setups till I get back in the swing.
+
+--- 帖子 #144 ---
+Thanks Rick, that makes sense. @RiskFighter, thanks also. It's late I'll comment further later. Cheers...
+
+--- 帖子 #145 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #146 ---
+hi Machine, any particular reason you trade BTC tether rather than BTCUSD. Thanks
+
+--- 帖子 #147 ---
+Here is demo equity line trading 1 Min Dow Futures for this week, no trading on December 24th and 25th, using squeeze strategy at 50% of the rules and my personal flavors of Money Management. Point is, we all trade differently, for me, I see the relevance to investigate it further.
+
+--- 帖子 #148 ---
+Hi Driven What I see happen in real usage of this system is you get a week full of multiple wins in a row creating great growth curve followed by a few days of negative equity decline pretty much as your graph showed. The reason for the negative growth is normally a trading pair has moved into consolidation on the Daily chart resulting in the trader getting chopped up. Therefore it’s a good idea to check the Daily and Weekly charts and avoid pairs that are range bound. That why trading with a EMA ribbon can also help because your taking the second breakout of consolidation period which increase the chance of a profitable trade.
+
+--- 帖子 #149 ---
+"That why trading with a EMA ribbon can also help because your taking the second breakout of consolidation period which increase the chance of a profitable trade" I agree with above statement from RickM. Yes, it is ranging/chopping and then trending. It happened to be a good trending week at the end...the main point is to keep losses at a minimum when ranging and that is a science on its own. When understanding Money Management correctly, there is no need to look at any other timeframes, then the current one, as none of us has a clue what the next trade will do, regardless of higher timeframes.
+
+--- 帖子 #150 ---
+Hi Driven I agree with most of the stuff you write, however feel multi time frame analyst is still important. Looking at EURUSD on the Daily chart, we can see price is caught within a range set by a candle on Wednesday 18th. This was a high volume day as well so I wouldn't be trading any low timeframe Squeeze's till that range is broken. What is a A++ setup ? Breakout Squeeze on the Daily, H1 &amp; M5 at the same time = $$$$$$$$$$$
+
+--- 帖子 #151 ---
+This is next version of the Squeeze indicator. It now can give an alarm on screen and on your phone. The robot test if the Keltner channels move outside of the Bollinger Channels. This is always a sign of a squeeze. At the moment when both K-channels again are inside the BB-Channels, then the indicator sends the alarm. The robot works on bar close only. Remember to put the 21EMA on the chart. The robot does not print that. NOTE: This is not a sign to enter a trade. There are rules of this strategy to follow. And not all squeezes leads to a setup. NOTE: There are many fine squeezes where K does not get inside BB. So if you lay all your eggs in this indicator, then you will miss some setups. We have been talking about a button that should hide the indicator. Problem is, that the indicator not only works on the BB and K indicator. I have coded it to actually draw theese indicators also. This to be sure that the indi works on the right set of settings on BB and K. SO - if I hide the indicator, then the screen will be all empty. I am handling it like this. When I want the indi to find me some nice squeezes, then I have a template for that. If I don't then I have another template containing the strategy setup including the EMA ribbon.
+
+--- 帖子 #152 ---
+I made a little christmas present for you guys. I am often in a situation where I have time to follow the screen and start a trade. But I do not have the ability to stay at the screen to follow it. So I thought it would be nice with a stand in. So I made an exit robot. You can use a SuperTrend exit or an EMA exit after your choice. Could be one of the EMA's in the ribbon. I use to colour the chart background if I have a trade on that instrument. This way I have a nice overview if I trade say 8 FF pairs. This is why there are some colour settings. If you don't want this function, then you must set all the colours to your chosen background colour. Note you are using it at your own responsibility. If it does not exit as it should, it is your problem. And always use it on demo. Note that you might not always be satisfied with the exit. The bar maybe crossed the Exit EMA and then went back on track. Note that it works on bar close only. Meaning a spike does not trigger an exit. Will I make a trade robot, that can enter trades. No, don't ask. This is a manual strategy. A trading robot will not work. EDIT: This robot works correct only when you trade ONE portion of an instrument. If you add on so that you pocess more than one trade of the instrument, then the exit robot will close only one portion at the end of a bar. There are technical reasons for this.
+
+--- 帖子 #153 ---
+Thanks for doing this for people....too bad you do not code in MT5. MT5 is ment for creating robust ea's/robots.
+
+--- 帖子 #154 ---
+TMI (in bold) and distraction(for me), but RickM, as we say in Australia, mate :
+
+--- 帖子 #155 ---
+I agree Rick, the daily at least should be out of a range for any A setups to appear. I guess for me to not use a ribbon is to only wait for the much bigger timeframes to be in movement so as to only have a lower timeframe bias and trigger ema.
+
+--- 帖子 #156 ---
+Here is my first live trade with the squeeze(not shown as I use different inputs) on 1 Min Dow Futures under the 21 EMA(yellow) ribbon 2nd image - closed that trade for + 91 points.
+
+--- 帖子 #157 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #158 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #159 ---
+My latest live trades, notice how 2 trades, with direction of 21 EMA worked out to full TP. I am done for 2024 and wish everyone a Happy and Healthy and Lucky New Year! Cheers to everyone around the world(including the playa haters), I am outta here
+
+--- 帖子 #160 ---
+Beautiful!
+
+--- 帖子 #161 ---
+GBPCHF CHF pairs are in a lengthy high compression squeeze on H1 while respecting the 21, keep an eye out Looking for a breakout from the 21 with good momentum on the TTSP indicator
+
+--- 帖子 #162 ---
+Nice trade Driven The 21EMA is the prefect entry and exit tool for most setups.
+
+--- 帖子 #163 ---
+Do you find that using the lower timeframe bias with the trigger EMA improves your entry accuracy, or do you sometimes miss opportunities by waiting too long?
+
+--- 帖子 #164 ---
+Hi Risk I am looking forward to running some tests with your EA’s soon. As an ex - coder, I know how many hours it can take (time wasted away from family and friends) to get a decent final product finished even to a workable version. I can’t run them on an Apple Laptop but will test them when back at my trading den in a few weeks time. Cracking work.
+
+--- 帖子 #165 ---
+Great indicator. Here is an example with just showing the squeeze bars for Gold on M1. This highlights the timing of a squeeze on lower timeframes. Attached Image (click to enlarge) We can see the 50 pip box form prior to the NY session, with a 15 minute squeeze at the previous week high, and breakout at 1530 (0830 NY). The day high is put in on another 15 minute rotation, giving a 150 pip move to trade. It's a nice clean indicator.
+
+--- 帖子 #166 ---
+Thanks guys for kind words. We must also remember that the strategy is from Machine and Rick. Thank you for sharing. And a happy New Year to all.
+
+--- 帖子 #167 ---
+My experience of trading (not so much this method because I stumbled on it recently after reading a few of RickM's posts) is that we are always too late or too early for entering trades. Point is: there is never a perfect entry (perhaps the odd one) and in hindsight what might appear to be late is not and what might appear to be early is also not. And then there are the bad entries that go against you. For this method I like what the OP and the participants are posting. Cheers...
+
+--- 帖子 #168 ---
+Hi, Rick Just curious, why do you want to spend your time seeking and playing other systems or strategies if you already have a profitable strategy? To find stronger one? Have Happy New Year anyway.
+
+--- 帖子 #169 ---
+It will gonna be brutally chopped up during choppy conditions like other breakout strategies I believe......... Nothing new.
+
+--- 帖子 #170 ---
+Oh John Carter's Squeeze method:- I used to use this some years ago, and I never managed to get it to work in any meaningful way, it just uses a contraction in prices waiting for the inevitable explosion of price in one direction, or so what John Carter would have you believe. The difficulty is you get many fake-outs, which make this method no better than say, a Bollinger Band or Kelter Channel. John Carter is a well versed personality who makes a fortune from teaching people how to trade, just don't bother..... It's just easier to trade what you think the direction of travail will be. Simples
+
+--- 帖子 #171 ---
+This IS his strategy. Or part of it. BB inside the Keltner shows a Squeeze, and that is what Rick is trading (One of his tools of cause). So this is not another system.
+
+--- 帖子 #172 ---
+You just change the way you trade it, ranging choppy markets you look for smaller wins and get the hell out if it starts to turn against you. Or if PA is super bad you just don't trade. I've used this off an on over the years always made money with it, trade a variation of it now. Except I just use BB's you can pretty much tell when there's a squeeze and when PA ranges just use BB expansions to look for trades.
+
+--- 帖子 #173 ---
+No one has any clue, if it will be a chop or trending market, next second from now. 5% of the people who are successful and trade real live money understand this, that one must take every trade based on the trading plan regardless chop or not in the present trade. Skill lies in the Money Management, not to lose more than planned during chop and to take next trade, hoping for the better, "trending" condition. Money Management trumps over any unplanned losses(speaking on this subject).
+
+--- 帖子 #174 ---
+I don't think so. Last time I heard he was using volume delta and some other volume related stuff.......
+
+--- 帖子 #175 ---
+He uses a few different systems including this one. See post 150.
+
+--- 帖子 #176 ---
+Hi Rover99 I am in agreement with you if you focus on just trading the breakout when the Bollinger Bands expands back outside the Keltner Channel, you will get cut up all day. To make this "idea work", do what most successful traders of this system do which is focus on breakouts from the 21 EMA once a trend has been established or looks likely. This way if the breakout fails, you are either still in profit or occur a tiny loss. The real way to profit from this strategy is to take trades mainly shortly after Frankfurt or New York open as these are the squeezes that work best. Cheers
+
+--- 帖子 #177 ---
+Hi Heispark I still use volume strategy's which is why the Squeeze set up works best on Stocks &amp; Futures. What is a true breakout? That is when we see a Bid/ Ask imbalance of 3 to 1 that's supported by strong bursts of volume as seen on a DOM. Typically this occurs over a 2-3 minute period in 15-30 second bursts. Without this activity, its a fake move generally but you can get those unexplainable moves during low volume periods. Therefore I trade the squeeze mostly on Futures (ES/NQ/Gold/Oil) on the 2 minute chart with aid of a DOM. Been doing that for Futures for a few years now and more on Stocks. Because this forum is more Forex based, I keep the Volume Jargon out of the discussion as its still profitable without it. I don't trade the way John Carter does nor have any association with him or his education company, never even visited his site. PS. I show the standard charts I use on here when I trade Forex Markets often, my Futures Setup is different.
+
+--- 帖子 #178 ---
+First trade of the year for me on Gold Trading the Range breakout of the Aussie Open on Gold with Squeeze setup
+
+--- 帖子 #179 ---
+Dow Futures 1 Min TF, Real Live Trade(open charts for better visuals)..will be taking profits soon.. And here you go(second image) +125 - Done for the Day
+
+--- 帖子 #180 ---
+Here is my latest tool. It shows the Keltner Squeeze status at timeframes M1 to D. It is the blue tool at the top of the chart. It updates every minute. But it shows the status at the latest close of bar at the different timeframes. So the M1 can change often and the D might have a squeeze for days. I am normaly a robot coder and making a new robot is done very fast. Making an indicator is hard and I have worked days on this. And I am not satisfied. I would like the blue boxes to be able to place at any spot at the chart. I know it can be done, but that must be later. Otherwise I think it is working and it will be a nice tool to have. On the chart I have both my Squeeze tools. Again - this is Keltner squeezes, there will be squeeze setups that are not catched by this Keltner tool. Enjoy.
+
+--- 帖子 #181 ---
+Hard work and nice tools RiskFighter, now one can see what timeframe Squeeze occurring. However, I do not recommend looking at other Squeeze time frames to trade on current timeframe. Squeeze on current time frame, whatever time frame you trade is more powerful and much less TMI when it comes to Money Management and MindFuck(Fear and Greed). Simple is the best. 1+1=2.
+
+--- 帖子 #182 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #183 ---
+The idea is that you may not trade lover TF if you have a Squeeze at higher TF. Because the squeeze on higher TF indicates ranging conditions. On the other hand, if the squeeze at HTF turns into a nice breakout, then you have nice conditions on lower TF. This is what Rick calls an A+ setup. Until I get aquainted with this strategy, I will search the A+ setups
+
+--- 帖子 #184 ---
+It is a mantra of mine, that it is important to know when charts are ranging. It can be hard to identify. My mtf Squeeze tool can be helpful. So this can be important when playing the Squeeze strategy from Machin / RickM, but it can in general help to identify ranging markets. Watch this EURJPY. Squeeze on four timeframes. Don't touch it.
+
+--- 帖子 #185 ---
+A little bit of the rant below(giving back to Machine and to FF community), but Mr. Market welcomed me nicely into 2025 I do not really care for A+ or B+ or whatever the grade set up is. Entry mostly is irrelevant and I pay only 10% of my attention to it. Fact, that PA is above/below 21 EMA and breaking out after squeeze on present TF is enough. Money Management (40%) and controlling your MindFuck(Fear and Greed) (50%) is where it's at. 95% of traders look for perfect entries, 5% of successful traders pay attention to other 90%. Here are 2 trades over 2 days for 275 points that were taken with the technique similar to this one...2nd trade is in this thread on the images above. https://www.forexfactory.com/thread/...0#post15105440 I am showing how they looked on Hourly TFs to display 2 days..did not care for grading the setups.
+
+--- 帖子 #186 ---
+Fear and greed are two of the most powerful emotions that influence decision-making in trading, and understanding how they affect behavior is critical for long-term success. Here's why they play such an important role: Fear often arises when a trader experiences losses or perceives risk in the market. It can lead to hesitation, premature exits, or avoiding trades altogether, even when opportunities align with their strategy. Fear of missing out (FOMO) can also push traders into impulsive decisions. Greed manifests as the desire to maximize profits. It can cause traders to hold positions too long, ignore their exit strategy, or over-leverage, leading to significant losses when the market reverses. Risk Management Both fear and greed interfere with disciplined risk management: - Greed may push traders to risk more than they should, violating stop-loss limits or increasing position sizes beyond their plan.
+
+--- 帖子 #187 ---
+BTCUSD M30. Moving away from EMA21 at the right time after the squeeze. Attached Image (click to enlarge)
+
+--- 帖子 #188 ---
+Hi axecap That's the best setup I believe. Trends Bullish, take the bullish breakout from the 21EMA when there is nice momentum. A winning Strategy because its simple.
+
+--- 帖子 #189 ---
+Easy enough bounce off the 21 in the 1 min (entry was on the yellow circle, sorry for not showing precise entry but I do my trading on Ctrader and use MT4 mostly for charting as sometimes it gets too slow and fucks up some of my trades), price was already coming out of a squeeze, and in higher timeframes price has bullish momentum, closed after 15 min candle closed (overlay is 15 min candle)
+
+--- 帖子 #190 ---
+Today we had a mtf squeeze on USDJPY. WOW! This is M15.
+
+--- 帖子 #191 ---
+Hi, would you recommend to enter after squeeze in such situation, and if yes, then which candle would be better to enter? Thanks.
+
+--- 帖子 #192 ---
+Hi Ju4ara In my experience of trading this system, the best signal is obtained from trading a breakout from the 21EMA WHILE the Squeeze is still showing Red circles. Otherwise, if we wait for the green circles to show as our signal - the main move may already be over. Therefore I would have taken that bigger bearish candle just before the black circle appeared. I would want price to stay on the bearish side of the 21EMA or I would exit immediately for a very small loss. The idea is we are looking for a setup that gives us some big runners ideally, not a hand full of small pip winners.
+
+--- 帖子 #193 ---
+@RickM What do you do if price retrace back to 21 EMA? You exit the trade. ok what happens, after above, if the trade resumes to the bearish side again? Do you re-enter again? or only the first signal is worth taking? cheers
+
+--- 帖子 #194 ---
+Hi Merka Most good A+ setups just keep trending so if price retraces, I'll consider exiting if it breaks the 21EMA. I want the trade to work perfectly on entry without delay generally or it's probably not ready to move yet. I am happy to cut it quickly and try again soon after if the setup appears again. Nothing wrong with taking 3 attempts to get on a trend provide the losses are tiny and you let the breakout run some distance when it does move hard. I took 4 failed long trades in a row on BTC in November before I nailed the real move from 77K up to 89K. Cheers
+
+--- 帖子 #195 ---
+Thanks for clarifying. Sometimes I find, when price retrace back to EMA21, the squeeze is over and need to wait for the next squeeze setup. Would be nice if you could share the timing on chart for those 4 attempts for study purpose. Guess will benefit the community on how to apply this strategy Thanks
+
+--- 帖子 #196 ---
+I agree, in fact one of my buddies(Cryptosurf), one of the very few(RickM included) that I respect on FF, probes multiple times before following up with trending position. I, on the other hand, maybe a bit late into the entry and do not probe, but then keep with position and trail it, as it moves my way or use predetermined Stop Loss to exit.
+
+--- 帖子 #197 ---
+I also at times, to get a better entry, get on at limit Buy/Sell, after signs that trend started.
+
+--- 帖子 #198 ---
+First post on this thread I am looking at an approach using RSI (15) as confirmation. The example here is BTC on the daily chart. Trend: All EMAs pointing up for long trades and down for short trades. Entry: shown as a green vertical line... usually on the red or black dots while the Squeeze is still on + noticeable price movement away from the EMA 21 + RSI(15) confirmation breaks above 60, or below 40 Exit: this is the challenging part... John Carter mentions that the average move is 6 candles regardless of timeframe, so this is what I have used in this example.... the exit is shown as a blue vertical line. This works really well for quick moves, but not as well for longer up/down moves, as with BTC in November 2024. Comments welcome
+
+--- 帖子 #199 ---
+Hi pakeha That was a great post so thanks for sharing. I believe the EXIT is the hardest part of this strategy and one I struggled with for quite a while when I first started trading the Squeeze. Also I believe Exit strategy's differ from one market to another, for instance I use a set stop distance when trading shares with the Squeeze and use the 21 EMA as my Exit for Forex and Future Market setups. But even using the 21EMA as an Exit strategy is debatable by many traders because price has stalled and collapsing back to a loss when you Exit instead of taking the profits as momentum stalls earlier. I found taking small profits all the time ensures you miss out on those big runners that COME ALONG OCCASIONALLY. Without those BIG WINNERS, you never truly break away from being a AVERAGE TRADER with average profits. I will try and ADD ANOTHER POSITION at the 21EMA instead of getting out if I think there's a chance price is only in a pullback situation. Using this idea to ADD ANOTHER POSITION at the 21 EMA has enabled me to win 3 trades last year in excess of $100K each. They were all traded in the Australian Stock Market. That is why High Win Rates don't work with the Squeeze Setups, you need to be accepting a few small losses while WAITING PATIENTLY for those runners to come along and then ADD additional trades around the 21EMA. Your'e got it now, go get 'em tiger
+
+--- 帖子 #200 ---
+I never look for quicker profits/exits. In trading, expression "you can not go wrong taking profits" is very wrong. You will go broke taking quick profits. I take full position, no add ons(do not like too much screen time and statistically it works better for me) and mark the furthest point that I believe PA can get to on whatever TF I am trading. And then Money Manage it without Fear and Greed.
+
+--- 帖子 #201 ---
+The other option I am back-testing is when the RSI is above 75 after 6 candles (see green line on RSI on the chart below, or 25 if shorts), is to hold the trade until the blue Squeeze histogram bar displays... this way you can get more of the extended up moves... almost double the return in this example. Trying to find a way to get both the small and bigger moves.
+
+--- 帖子 #202 ---
+Another example of two "hold longer" trades from earlier in 2024
+
+--- 帖子 #203 ---
+Important information I used BB-Keltner Squeeze-FVBO-2.0\EMA\ on tradingview And then add what you said about vwap, a very useful weapon. Thank you.
+
+--- 帖子 #204 ---
+If no fear involved means your edge is the "money managemen" and not the entry setup because no matter what price can go either directions hitting your TP/SL. Isn't it? It's clear you found your own nish edge over the market. Good on you. Cheers
+
+--- 帖子 #205 ---
+Hi, these are losing trades where I have lost full position, are they executed the right way? Thanks.
+
+--- 帖子 #206 ---
+My current position Edit - Closed at BE
+
+--- 帖子 #207 ---
+Hi Ju4ara My opinion is that was a C grade setup because the Squeeze Setup was occurring on a M1 chart and it was around the cross over of the London / New York Sessions. I would forget trading Squeeze's on M1 because the Risk / Reward isn't great. I will trade M2 for A+ Setups or trade good setups on M5. Lets see how it would have gone on M5 - if you had traded earlier, it would of been a great trade. HINT - When trading Gold, forget taking any Squeeze sets Mid Session of London, they need to appear within 3 hours of London Open or DO NOT TRADE Them. Look elsewhere. Edit - M1 only works well on US500 after New York Open, Check out Rocky's thread.
+
+--- 帖子 #208 ---
+Hi RickM, thanks a lot for sharing your wisdom. Where would you locate your sl then, because there after a few candles there is a candle with big wick which would take stoploss if was located just under signal candle’s 21 ema, these long-wicked candles often take me out of position, so what is your opinion on that? Also, would you share some more knowledge for timing and timeframes recommended to use in those time periods? I usually trade gold, us500 and us30 in london session, what would be your advise for these pairs(when to trade and in what timeframe for london session)? Thanks a lot.
+
+--- 帖子 #209 ---
+Hi Ju4ara I always wait for the candle to close before I worry about the 21EMA been taken out, those long wicks are just liquidity runs which I ignore. In the above case, No exit was needed because the close was above the 21EMA on M5. If you are going to trade M1, rather than use the 21EMA, try using the Keltner Channel set to 1.5 as your exit instead. On M2 or higher, the 21EMA is good to use - therefore skip M1 unless you trade US500 30 minutes after New York open. So I mostly trade ES / NQ / Gold / Oil Future's during the London session and if I can stay up to 3am, the start of the New York session. I may trade BITCOIN &amp; EU Future's if something exciting is happening there. I normally trade on M2 (but keep an eye on M5) where I am looking for Squeeze setups on those pairs based around price leaving the 21EMA. I also look for Volatility Contraction Patterns inside a Squeeze Setup PLUS trade another Strategy I'm keeping under wraps till I create a THREAD on it sometime this year. - TRADING SNOW MONKEYS - Houston we have a problem. The chart on Future's M5 Gold directly from COMEX is very different from the CFD Gold chart (Chart 2 posts back) and if you had traded off that CFD chart - YOU WERE TRADING BLIND. The breakout candle on Gold Future's chart was 12 times higher in volume than any other candle on the chart and this information WAS VERY IMPORTANT. To develop this into a setup that offered A+++ - you needed to know which candle it was first, then secondary how to apply this knowledge into creating this fantastic trade entry that A+++ which was about 20 minutes earlier than your traded (Trading Snow Monkeys Strategy). It was on Gold M5 Futures Chart, not Gold M5 CFD Chart - Cheers
+
+--- 帖子 #210 ---
+Hi RickM, thanks for info, waiting for your new thread, would like to gain knowledge from you.
+
+--- 帖子 #211 ---
+What is a VCP Pattern
+
+--- 帖子 #212 ---
+Great model there. I started exploring this concept a bit more and stumbled upon something. Lovely script on TradingView that actually was awarded Editors Picks called Revolution Volatility Bands With Range Contraction Signal VII . As stated by its author it's essentially volatility bands with a technical analysis pattern, the triangle/wedge, which he has called "contraction signal". Put simply: When price is written in blue, volatility overall is falling. When the outer bands start to fatten up in blue, a contraction signal is forming. Works with any length of your choosing. I've tested and this indicator produces squeezes that accurately align with TTM Squeeze Pro. Combined with the 21 EMA, it's another powerful tool to add to the arsenal. Wait for price and bands to be blue then follow typical squeeze and go methodology. Works quite nicely.
+
+--- 帖子 #213 ---
+aren’t we supposed to enter on break of range?
+
+--- 帖子 #214 ---
+BTCUSD M10 Squeezy confluence. Attached Image (click to enlarge)
+
+--- 帖子 #215 ---
+Yes if its a normal Squeeze. If its a Squeeze + VCP Setup, get in early.
+
+--- 帖子 #216 ---
+Looks similar to Patrick Wieland's flag patterns........
+
+--- 帖子 #217 ---
+My observation and experience. I do not probe and do not split positions. It is at most importance for this technique to come in full force on the very first retracement to EMA 21 and then burst away from 21. Expression: ""The early bird gets the worm". This way you come in for a better Entry and better Stop loss. If there was a squeeze before that first burst, that would make that set up A+, but if there is a strong push away from 21, squeeze is not that relevant. Second, Third. etc. push is not as favorable statistically.
+
+--- 帖子 #218 ---
+I have uploaded a couple of tools for this strategy. In this moment there have been 550 downloads. So there are many people that find an interest in this strategy. I think you guys should make a post saying hello to everybody and tell that you are following the thread. It is much more satisfying for OP and and other wise people if they know that there is an interest.
+
+--- 帖子 #219 ---
+Hi Heispark I think you can draw parallels between many pattern shapes but the VCP Pattern was made popular by a Market Wizard who had the best yearly returns of any trader inviewed by Jack Schwager. Mark Minervini used it to twice win the US Investment Championship as an amateur and went on to run his own Hedge fund producing eye popping returns. Minervini emphasizes that specific entry points are needed before you can enter a trade - this way you can be in profit almost straight away rather than suffer long periods of drawdown that destroys traders mindsets. My biggest trade size (Future's or Forex) I ever take is 10 contracts on ES (US500) which is about $120 per tick. A single candle can throw you into the Red $1,000 in under 10 seconds. Hell NO I want accurate entry if I trade that large otherwise the mental pain is very very painful. The Volatility Contraction Pattern works because it creates an IMBALANCE of ASK'S on a Bullish Trend or an IMBALANCE of BID's on a Bearish Trend which creates an breakout.at the expense of reversal traders equity.
+
+--- 帖子 #220 ---
+So, is this basically a vcp pattern? And you enter right before a breakout when the squeeze appears and put your stop loss right below the 21ema, which makes your position more efficient, is that right?
+
+--- 帖子 #221 ---
+Rick, if your SL is taken, are you going to reverse your position immediately? As you know, market makers are not fool and they make fake breakouts time to time, occasionally multiple time in either side to kill breakout traders.
+
+--- 帖子 #222 ---
+This VCP is utmost interesting. Are you making a thread by this Rick? Or can you point in a direction of further reading. I of cause found something, but it is mostly stock related and a bit to short in the explaining. There is something about stage 1 and 2 relation. As it happens I just yesterday made a tool identifying instruments with 3 EMA's pointing in same direction - aligning well and growing. That could be part of a helping tool to identify those nice setups. Finding the trend | Page 15 | Forex Factory
+
+--- 帖子 #223 ---
+I found the books: • Think &amp; Trade Like a Champion: The Secrets, Rules &amp; Blunt Truths of a Stock Market Wizard eBook : Minervini , Mark: Amazon.in: Kindle Store • Trade Like a Stock Market Wizard: How to Achieve Super Performance in Stocks in Any Market: Speak Your Mind and Get the Results You Want : Minervini , Mark: Amazon.in: Books
+
+--- 帖子 #224 ---
+Yes, I’m getting in early because it’s a great VCP setup where’s on a standard Squeeze setup I am waiting for a breakout of range. However I prefer taking trades that are leaving the 21EMA so if the breakout candle is too separated from the 21, it’s a No trade for me.
+
+--- 帖子 #225 ---
+Cheers Risk. Appreciate your efforts &amp; general info. Trade well buddy.
+
+--- 帖子 #226 ---
+Hello, Rick. I use the VCP (Volatility Contraction Pattern) strategy when trading stocks, and it has consistently delivered excellent results for me. Over time, I’ve developed a preference for Point &amp; Figure (P&amp;F) charts to identify VCP patterns, as they provide a cleaner and more straightforward representation of price action without the noise often present in traditional charts. To refine my approach, I use larger box values and longer timeframes on P&amp;F charts for identifying the overall pattern and structure. For entries, I switch to smaller box values and shorter timeframes to pinpoint precise breakout levels with better accuracy. Here’s an example of my most recent trade using this method. Take a look at the P&amp;F chart for pattern identification and the OHLC chart also
+
+--- 帖子 #227 ---
+Hi prestige That's a very interesting post, thanks for sharing. I think I need to study your P&amp;F charts for a while to get my head around the story they are telling. I use the VCP Pattern a lot on Stocks and Future's as well and I agree it's such a great trade setup. Can I ask if you have used much it on trading Forex or Future's Markets and if so please share some of your experience's using this unique Pattern formation. Cheers
+
+--- 帖子 #228 ---
+DOW Futures 2 Min TF, real live trades. As previously stated, the moment EMA 21 cleared, I entered, Profit +150 pips(points), 3 trades (one earlier in London session), done for the day.
+
+--- 帖子 #229 ---
+Hi Risk More strategy's on how to trade the VCP Patterns within Squeeze Setups but more importantly how to trap BIG PLAYERS that are trading like Snow Monkeys. More about that later.
+
+--- 帖子 #230 ---
+RickM , I have to give a compliment , after sooo many years knowing each other, I think I finally grabbed something from you that am trying to incorporate into my scalp trading, 21 (Fib) EMA. The more I look at it, the more I like the Fib and Ema relationship. Be safe as you coming down the mountain skiing. We are in Budapest taking the hot thermal baths.
+
+--- 帖子 #231 ---
+Hi driven That's why I use the 89 EMA as my BIAS TREND Cheers
+
+--- 帖子 #232 ---
+Hi, is this considered a vcp pattern, and if yes, then what timeframe should I use for entry(m5 or m2)? On my own research I found that m2 has too many fakes while m5 is more stable, but gives worse RRR.
+
+--- 帖子 #233 ---
+Thank you for your kind words, Rick! I’m glad you found my post interesting. P&amp;F charts are indeed a fantastic tool for visualizing patterns like VCP, and once you get familiar with them, the clarity they offer can be quite eye-opening. It’s great to hear that you also use the VCP pattern on stocks and futures—I completely agree that it’s a highly effective setup when applied with discipline and the right tools. To answer your question, yes, I have experimented with the VCP pattern in the Forex and Futures markets. In Forex, I primarily apply VCP and other patterns to gold (XAU/USD), and it has given me good results. P&amp;F charts are especially helpful in filtering out noise in such a volatile market, making contractions and breakout points more apparent. However, I don’t use TradingView for P&amp;F or Renko charts, as I’ve found their calculations and formulas for these chart types to be unreliable. Instead, I rely on an Indian market software that provides accurate formulas and calculations for P&amp;F and Renko charts. While this software primarily supports Indian market data (e.g., MCX: GOLD FUTURE instead of XAU/USD), the movements and behavior of both charts are essentially the same. If I spot a long or short setup on MCX GOLD FUTURE, I trade the same setup on XAU/USD. There is a way to integrate live data for Forex, crypto, and other global markets into this software—one of my friends has set it up—but since I focus on stock markets and only trade XAU/USD in Forex, I haven’t added other market data. My approach is consistent across all markets: I start with larger box values and timeframes to identify the broader structure, then shift to smaller box values and timeframes to refine my entry and exit points. It’s a systematic process, and the results have been worth the effort. If you’d like, I can share an example of a Forex or Futures trade where I applied the VCP pattern using P&amp;F charts. Feel free to DM me. here's one example of VCP and Turtle breakout system.
+
+--- 帖子 #234 ---
+A couple of trades I took tonight was on Oil, a nice Break of the 21EMA during a Squeeze and one without the Squeeze and really just an continuation trade. Both on M2 with a decent trade size. The best trades always appear when traders get trapped within a range and have to COVER their positions. Looking at the trades now, I failed to just stay in a LONG position and ADD when price pulled back to the 21EMA. Nice profit but only a B grade for me.
+
+--- 帖子 #235 ---
+Hi prestige I'll PM you, I have a few questions about your setups. I suppose I better ask about your Turtle Breakout Strategy, how does it add value to your trading?. Cheers
+
+--- 帖子 #236 ---
+Hi Ju4ara I would be happy to call that setup a VCP Pattern, very few are prefect. We do need that first downwards move to be a strong rejection and then get higher lows while disregarding wicks. M5 is a good all around timeframe from which we can scalp with good results, I fine personally that M2 works better on Future's because the candle highs and lows are different from CFD charts often meaning the setups are often more available. Cheers
+
+--- 帖子 #237 ---
+I have to commend you on intelligent look at squeeze pattern. It states you started on Forex Factory in 2022. Have you been trading long?
+
+--- 帖子 #238 ---
+This is more for Machine and other subs here.. Rick, I am going to use your chart(last time )..I will repost my below. 50% of my trading is happening on Limit Buy/Sell orders...your chart is perfect for this demonstration. Let the burst away from EMA 21 happen and then wait for retracement to value area(my name for it). I would recommend for more aggressive traders to come in on Full Position on Limit orders, no add ons, first trade on Limit Sell and second trade on Limit Buy. Second chart is my chart from yesterday - Blue circles would of been Limit Buy and Limit Sell.
+
+--- 帖子 #239 ---
+Feel free to post whatever you please here my friend. We are all always expanding our outlook and ideologies on the market.
+
+--- 帖子 #240 ---
+Makes too much sense
+
+--- 帖子 #241 ---
+Quick scan and I found a beautiful setup from a couple days ago. I've coded a simple indicator that can detect a break and retest of the value area as you would call it. (congrestion of green arrows) Then, per usual, couple that with a heavy squeeze and breakout w/ momentum.
+
+--- 帖子 #242 ---
+Squeeze, 21 Break, Retest, Momentum Got in a little late however
+
+--- 帖子 #243 ---
+UJ M5 in a nice squeeze. Overall down trend, price pulled back up and then fell down through 21 and found resistance around the 21 again when attempting to pull back up. Thoughts..
+
+--- 帖子 #244 ---
+I would not trade that with this technique...C- - - set up, high risk, because too large of the retracement up (in black) from short to make sense of it and consider it.
+
+--- 帖子 #245 ---
+What a stock market today in general...Portfolios of people(incl. me) who work with stocks and crypto's rejoiced and rejuvenated. Hard work to research for weeks and months to bring "your best" to portfolios, but I am grateful, of course that hard work pays off . Later today or tomorrow may bring a different market, but the point is, if the portfolio is solid and was at the high, you know it will get there again. Love USA markets! P.S. One of the reason I also trade Index Futures.
+
+--- 帖子 #246 ---
+Worked today, I'll consider it luck
+
+--- 帖子 #247 ---
+Could look at it like, the bigger the retracement the more bullish suckers trapped and the more momentum coming out of the squeeze. The lower high taken out and a trend line break, just for price to plummet on them. Agreed too risky, but I love captializing on trapped retail traders
+
+--- 帖子 #248 ---
+Could but Would Not.
+
+--- 帖子 #249 ---
+Back then i wasn't abele to much trading because of my job, so i trade only breakout strategy so i can set alert on breakout price, i start with trendline breakout but i don't use normal trendline i use 45 degree trendline it give me good result as well i got 8-10 entry in month, then i spent more time on chart and start using turtle breakout as well in intraday in commodity and in stock for positional trade, then one of my friend told me about VCP, i fiend some similarity's in both setup and start doing both and make some scanners and it's made my life easy, now hours of chart reading can be done by 1-2 min. i dont like spending too much time on charts, so this breakout strategy and scanner made my work to easy, we can discuss on this setup and how i select my stock on google meet.
+
+--- 帖子 #250 ---
+i start trading in early 2022, using candlestick, then i discover P&amp;F i trade in Indian stock market and forex.
+
+--- 帖子 #251 ---
+Yesterdays silver trade using Turtle breakout on P&amp;F chart, I think its very similar to Squeeze n Go.
+
+--- 帖子 #252 ---
+Do you find P&amp;F charts useful in FX? Thanks
+
+--- 帖子 #253 ---
+Dow Futures 5 Min TF. Sometimes you get stuck for the looooong(in America)weekend..traveling, just looked at my laptop...O, well..in profit +78 points, not too bad . Relevance: Under EMA 21 and intuition that people will be taking profits going into the long weekend, but under EMA 21, nevertheless.
+
+--- 帖子 #254 ---
+Nice use of limit orders!!! I've been enjoying this thread. This is also a measured move set up. Attached Image (click to enlarge)
+
+--- 帖子 #255 ---
+Hi, I would like to show squeeze entry on btc/usdt 1H after vcp pattern the day before Trump inauguration which will cause bull run(imo). Is it good, or should it be drown as in second screenshot?
+
+--- 帖子 #256 ---
+Hi Ju4ara Here is actually how I would trade this move (if I was trading). VCP Pattern + Squeeze on BTCUSD Skip the trend lines, 95% of retail traders use them and they lose. RULE 1.. There must be a Base low that shows strong rejection. RULE 2.. There must be a higher low (ignore wicks) RULE 3.. There must be a 3rd higher low that's sitting around the 21 EMA Entry is when this 3rd higher low moves away from the 21 EMA ..... just enter with your stop (If BTC / Stocks) below the Wick of the Base Low. So we are getting in early because we want to be in position to take advantage of any POP at breakout area. Breakout traders generally lose these days due to the high amount of Professional traders attacking breakout positions, at least if your in early you will still PROFIT. The idea here is this - WHO'S IN CONTROL, BUYERS or SELLERS. At my entry, I have enough evidence that Buyers are in control now. PS. Not a trade recommendation here only because its a SUNDAY and most professionals are not yet trading. PSPS. I have no evidence VOLUME is of much help on this setup, its a pure Price Action Pattern Only.
+
+--- 帖子 #257 ---
+Hi CashBox Love your Art Work, and some nice points. Having Targets is something many traders like to use, and profit very well from them indeed. I use them for BTC and Stocks myself and do very well, but not fond of them on Futures or Forex. It’s just me. Cheers
+
+--- 帖子 #258 ---
+Hi RickM, so would entry be like this?
+
+--- 帖子 #259 ---
+Yes, P&amp;F charts are incredibly versatile and can be used effectively in every market. They work well for both intraday and positional trading. Why Do I Choose P&amp;F Over Candlesticks? Less Noise: In candlestick charts, there are two dimensions— time and price . During sideways markets, this dual-dimension setup can become very noisy and confusing. It’s challenging to read the market in such conditions, and I’ve found myself overtrading at times because of it, which leads to higher impact costs. With P&amp;F charts, there’s only one dimension— price . A new box or column is created only when the price moves a specific amount. This means in sideways markets, you’ll see fewer setups, which helps to avoid overtrading. Objective Patterns with Simplicity: P&amp;F charts offer very few patterns, and all of them are highly objective. This makes it easier to identify and trade them without confusion. Unlike some candlestick systems where multiple interpretations can lead to uncertainty, P&amp;F patterns are straightforward and reliable.
+
+--- 帖子 #260 ---
+Here's a good walk through explaining the TTM squeeze indicator set ups: Inserted Video
+
+--- 帖子 #261 ---
+Yes, around 103,800 and it when up to 106,420 before it got hit hard by Bearish Delta. I am not keen on trading BTC in the weekends because most pro's aren't there and anything can happen. It seems a better fix to go long in the 90's and go short over 100 at present.
+
+--- 帖子 #262 ---
+Hi RickM, Is this also a vcp pattern? Just want to learn the nature of it, I like how it works.
+
+--- 帖子 #263 ---
+To finish up on above trade, +82 points. O Well, Thank you Mr. Market!
+
+--- 帖子 #264 ---
+While you wait for the answer from RickM, I say it as I see it: "What a horrible PA on this chart". You can pay me, I would never take that trade.
+
+--- 帖子 #265 ---
+Hi, that's why I said "just want to learn the nature of it". I wasn't going to take it, the point of question was getting advise about vcp pattern overall, but thanks for your comment, appreciate it.
+
+--- 帖子 #266 ---
+Hi Ju4ara A VCP pattern is only formed within a tight range - here we use a Bollinger Band Squeeze for this rule. Therefore start looking for areas of low volatility before we can find VCP patterns Cheers
+
+--- 帖子 #267 ---
+First 2 trades under my favorite President, respecting EMA 21.(under/over) She(Dow) did not know which way she wanted to go but we got her at the end. Relevance, I am helping to keep thread going, EMA 21 and a New USA President.
+
+--- 帖子 #268 ---
+Hi, I guess this is a vcp pattern, but so choppy, would it be good entry?
+
+--- 帖子 #269 ---
+Not bad, as far the subject of the thread...I would be bullish here, but come in on Limit Buy.
+
+--- 帖子 #270 ---
+I took the trade, in profit now. I either wait for 5R profit or close the trade after price crosses 21EMA(I do take profit at 5R for not getting harmed psychologically).
+
+--- 帖子 #271 ---
+Another vcp pattern with squeeze entry, correct me if I'm wrong. EDIT: Lost full position on this one.
+
+--- 帖子 #272 ---
+Went to smoke and skipped this nice trade ;(
+
+--- 帖子 #273 ---
+Yes smoking is expensive.
+
+--- 帖子 #274 ---
+lost in London session
+
+--- 帖子 #275 ---
+Hi Ju4ara I'm actually trading that Market presently (ES not CFD), can I give you my view. AND of course its a historical chart so its easy for me to an expert after the fact - The Squeeze occurred 18 bars earlier. When I saw a Squeeze of a 4-5 bars, I go back and look for a rejection move. 1 - Rejection 2- Retest with a lower low (not prefect but good enough) 3- Now I want to trade this Third move down from the EMA 21. I also want 1 - 2 - 3 to be close together which they were. What do you think of this setup, I don't see a setup in your Trade because NO SQUEEZE (at least a few bars min). I always place a BE Stop once it leaves and only use the EMA 21 once its move a reasonable distance. I only starting trading around the time you took the trade so miss my setup. On ES, Profit would be around 15 Ticks. Nothing great but still a nice start to the day.
+
+--- 帖子 #276 ---
+Hi RickM Glad to see your reply, it's the only way I learn something new about squeezes. Could you, please, explain why you looked for rejection before squeeze, waited for retest with lower low and only then entered. Also, there was squeeze on my screenshot with 3 candle duration, isn't that enough? P.S. you said about BE SL, how many candles or distance you wait before placing that stop? Thanks in advance.
+
+--- 帖子 #277 ---
+What about this setup from earlier this month? Maybe not A+ because price pulled back a little further than ideal on the third leg, but you can see price exploded shortly after the setup. High compression squeeze started nice and early and released with Momentum.
+
+--- 帖子 #278 ---
+One more setup occurred on dow 2M, I don’t trade this time tho.
+
+--- 帖子 #279 ---
+Seems nice to me, but there was no signal to enter before break of resistance, then it would be A+ I guess.
+
+--- 帖子 #280 ---
+I like thus setup. Multiple bounces off a strong resistance area. Diamonds signaling retests. Buyers absorbed? Then price starts to enter a high compression squeeze , after squeezing for a bit. VCP pattern appearing now as well and I would expect an explosive move soon. I like to wait for a release personally. You can see a couple strong support zones below that we could use at TP, which we would create a great RR assuming price breaks to the downside.
+
+--- 帖子 #281 ---
+Almost like I can see the future , moments later we get an aggressive more to the downside.
+
+--- 帖子 #282 ---
+Followed by another one Even elif we entered after the first explosive move there is still pips to gain from the second one. Now here's where it gets tough...do we assume that there's enough momentum to break to new lows or do you take your money and run. I would say from observing the squeeze we had to the left which was relatively substantial with tons of buying absorbed, this might be worth sticking around for better RR with a SL moved to BE?
+
+--- 帖子 #283 ---
+There is nothing to assume, every trade is different, you know my mantra - Entries are just 10% of the whole business. At times if I am "wrong"(I do not believe in this word when it comes to trading.), I can still make money properly managing a trade. Start moving towards the other 90% of the business, Money Management(40%), Controlling MindFuck(Fear and Greed)(50%)
+
+--- 帖子 #284 ---
+This is ready to go, but which way. PA isn't the best. More sellers absorbed, more touches, maybe a pop to the upside. I'm considering a LIMIT in the breakout zone
+
+--- 帖子 #285 ---
+WOAH, I can see the future now There's no doubt the squeeze is powerful. Place a limit above or below the breakout zone with a tight stop and you'll make money Was ready for this one this time
+
+--- 帖子 #286 ---
+How do you make money if you are wrong? Are you using a very low reward compared to risk? Or a very quick break even? Or ????
+
+--- 帖子 #287 ---
+Money Management is not taught skill, after years of monitoring your personal behaviors and feelings, it is up to individual trader to decide how much pressure he/she can handle when "wrong" trade does not go traders direction or how much guts trader has to stay in the trade all the way to TP.
+
+--- 帖子 #288 ---
+Could be a good bet here
+
+--- 帖子 #289 ---
+hi guys, I have an issue, soon I will move and will only be able to trade during London session only, but last 3 days I watch and there are no great entry opportunities in first 3 hours of london open. I trade us30, us500 and gold. I understand that these markets work best on new york open, but could you give me an advice on what should I do?
+
+--- 帖子 #290 ---
+Hi Ju4ara The Squeeze Indicator works when the Bollinger Bands slip inside the Keltner Channel as you know. But as they are lagging indicators, the Squeeze had actually started a few bars earlier if you look at the chart. Therefore I looked LEFT to see if there was any Rejection Candle already in a tight range - and saw the setup. The problem with John Carters Setup is it's late to the party at both ends. Meaning the PA is already in Consolidation before the RED dots appear and the signal to trade is often a few bars too late AFTER BREAKOUT has occurred. Therefore many traders like myself feel the 21EMA is a better SIGNAL to trade than waiting for the dots to turn Black or Green. The VCP Pattern over rides the Squeeze signals for me where I am looking for a 1 - 2 - 3 pullback then enter as long as price starts from a consolidation area. Its how I do it - but the basic's of the SQUEEZE setup is still good and valid so find your own edge hat works for you. For a Stop, I really want 10 Ticks or more on ES (US 500) so I use a BE Stop until I feel I will get at least that amount. 10 Ticks on ES is worth about $115 Profit on 1 Contract. Cheers
+
+--- 帖子 #291 ---
+Oh, so that also was a vcp pattern there, it was barely seen, that’s why I missed that point, now I understand why you looked for rejection few bars before. So you wait for at least 10ticks in profit before setting sl to BE?
+
+--- 帖子 #292 ---
+That's 3 in a row, with the limit setup I can catch these impulsive moves. The accuracy and volatility is A1
+
+--- 帖子 #293 ---
+Had this level marked before the spike down, definitely an area of interest. Waiting before setting limit, want to see some more absorbtion, or see the squeeze become highly compressed. If I did set limit I wouldn't target very far Edit - squeeze is currently bouncing between highly compressed and normal compression, still waiting
+
+--- 帖子 #294 ---
+Annnnd there's the drop, 4/4
+
+--- 帖子 #295 ---
+Watching EDIT - Took a small position
+
+--- 帖子 #296 ---
+Very small position but right again. Price pushed right down to our target area
+
+--- 帖子 #297 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #298 ---
+From a verified instutional trading desk employee What "edge" or model gives retail the best chance? While I can't give you a prescriptive answer here, I will suggest what my past response is: identify different market regimes... once you identify a regime (ex. Trump bull run, pandemic black swan event, rising inflation, MBS imbalance, yield inversions, etc) find or create a trading strategy that can be profitable. I will openly share how I approach trading here I break it down like this: - 10% Signal Generation (this is the strategy used, in the case of retail the 50 EMA Crossover, or whatever the signal is) -30% Risk Management (determining where to enter, stop out, add to a winner, or peel off a position) -60% Psychology (some professionals call this a sham and I understand where they are coming from, but the idea is... most retail come into trading from nothing. This aspect is one of the reasons I love the industry, because it allows you to meritoriously earn based on your capacity. However, the harsh reality I have seen: I have given my signals/RNN output to many retail traders and even though the system generates perfect to the tick entries and exits, they will still fail. They allow scarcity mindset, greed, FOMO, whatever emotion you want to take over. This is one of the largest reasons I recommend retail try their best to code their strategies to make execution as rule based, as possible. Why do you think institutions do it?
+
+--- 帖子 #299 ---
+"I am sure you have heard the cliche, "the market will always be there tomorrow". When was the last time you understood: the market tomorrow is not the market today, and the market the day after is not the market tomorrow? Unfortunately, the largest issue I see with retail that manage to escape from the consistent grind to finding the Holy Grail (those that chase guru to guru, or strategy to strategy) only remain profitable in certain regimes. They are never able to create multiple strategies, that work in multiple market regimes, and *most importantly* efficiently deploy the correct strategy in the correct regime. This requires time and experience."
+
+--- 帖子 #300 ---
+Exactly what I been telling you. Read my posts one more time. I am up +15% for the month and will not be trading this month anymore. I am also moving to Hourly charts next month and may decide to be done with Forex Factory. Forex Factory is a great great great tool, it is the only forum I ever participated in. During last year, I believe I "paid back" to certain individuals with my knowledge and experience. Good Luck with ALL to ALL!
+
+--- 帖子 #301 ---
+Is set for lift off
+
+--- 帖子 #302 ---
+Still have problem with self control(psychology), that’s why I’m still not in profit, don’t know how to fix it.
+
+--- 帖子 #303 ---
+Once your trade parameters are set I would recommend walking away and letting your SL and TP do what you set them to do. It also helps to have good RR, because psychologically it's much easier to stomach a loss when you know your wins are 3X more profit.
+
+--- 帖子 #304 ---
+That’s why I trade this strategy for 5R. Still working on myself because sometimes I do something I shouldn’t do.
+
+--- 帖子 #305 ---
+Called it again, been waiting for this all day. 5/5? Limit set below trend break for easy trade
+
+--- 帖子 #306 ---
+No limit set , but curious too see what kind squeeze appears here and if more buyers are absorbed. Conversely seems like a bullish vcp is simulataneously setting up too (kind of) Check back on market open
+
+--- 帖子 #307 ---
+Hi Driven I have tried 3 times to leave Forex Factory, normally lasts about 6 months before the urge to post again occurs and your'e back.. When I came back last time, I set myself a limit of only creating a post if it can be done under 10 minutes. I would say there's many setups I have missed because I was reading FF and NOT CONCENTRATING. Personally I need to scale back my time here sometime soon.
+
+--- 帖子 #308 ---
+Yes, RickM, we keep coming back. I try to only be here on weekends/holidays and skip months at a time unless I find an interesting thread to check in on.
+
+--- 帖子 #309 ---
+IMO you guys aren't on forex factory enough No seriously, between FF and Trading, your life can get consumed. Stay healthy friends.
+
+--- 帖子 #310 ---
+What does VCP stand for? Thanks
+
+--- 帖子 #311 ---
+O My! I am glad I posted "may decide". So it is a "mindfuck" of its own. Thanks for heads up RickM.
+
+--- 帖子 #312 ---
+BTC entered a high compression squeeze and heavy resistance around Christmas, then exploded down and never looked back. Then a few days later, did it again
+
+--- 帖子 #313 ---
+Hi Ju I mostly trade London where I focus on ES / NQ / Gold &amp; Oil Futures so I am in the same situation as yourself. The solution is quite obvious if you only want to trade those markets during London, trade two strategy's. I trade the the VCP Pattern (inside Squeeze's) on a 2 minute Chart during London Open where possible, otherwise 70% of my time is focussed on my primary strategy. On Friday there was very little to trade during the London Session, I quit for the week. If I only want to trade Squeeze Setups during London, I also look at EURUSD - GBPUSD - USDJPY - EURJPY - GBPJPY &amp; BTC on M5 or H1.
+
+--- 帖子 #314 ---
+Hi RickM, Thanks for advice. So do you trade mostly vcp pattern or only vcp pattern on indices and gold? Also, I remember you said that btc and forex works best on H1, do you recommend M5 too?
+
+--- 帖子 #315 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #316 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #317 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #318 ---
+Next setup I'll be waiting for Update Trendline tested again Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #319 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #320 ---
+Loading up
+
+--- 帖子 #321 ---
+Hi Ju M5 if you want to intraday trade Forex, H1 as a second option.
+
+--- 帖子 #322 ---
+Hi RickM, would it be enough to add only one pair to my stack e.g. E/U only, or should I add all pairs mentioned in your previous message? Thanks in advance.
+
+--- 帖子 #323 ---
+hi guys, which candle here would be recommended to enter position?
+
+--- 帖子 #324 ---
+Here would be my entry point, beautiful "rejection" and "early bird gets the worm".
+
+--- 帖子 #325 ---
+Here is "Deep Seek" short trade for +250. Got a signal on Sunday night here, could not resist. Sometimes done for the day, before the day started. 5 Min TF, Dow Futures, Under 21 EMA.
+
+--- 帖子 #326 ---
+Driven NAILED it Your entry isn't a VCP Pattern but its a B Grade Squeeze Setup - worth a shot
+
+--- 帖子 #327 ---
+POP goes the weasel.. Not going to find better RR in many other systems
+
+--- 帖子 #328 ---
+Have them up on one screen and pick the best setup. Only trade 1 US pair or Yen Pair at a time
+
+--- 帖子 #329 ---
+VCP pattern appeared on a graph, but I was waiting for momentum so entered on 4th pullback. EDIT: Lost 2R in this trade, feeling frustrated.
+
+--- 帖子 #330 ---
+New structure showed instead of that one, still a vcp pattern, I've waited for momentum and entered. I just don't understand how would I know there is going to be a new structure in a first place.
+
+--- 帖子 #331 ---
+I am reposting this again, as THIS IS an A+++++++ setup . Give me this set up and I will take it all day long and I can guarantee with proper Money Management and Control of MindFuck, I will be profitable at the end of the month, every month.
+
+--- 帖子 #332 ---
+Could pop either way ofc
+
+--- 帖子 #333 ---
+I think you are taking a pop as an all in all technical analysis....Are you forgetting direction of the markets, perhaps at least on the higher timeframe? Pop happens after a squeeze, but can be continue to be a broadening squeeze instead of pop , so you lose both ways. I would highly recommends to wait for the trades as the one been discussed today....it looks good and feels good, even if Stop out occurs, trader should feel good taking that trade.
+
+--- 帖子 #334 ---
+I have a directional bias that I favor. I proceed with entry conditions based off of these biases which will directly impact my money management and trade setup. For example in this trade that just triggered, my bias is bullish. So when I do get a pop to the upside I have a tighter SL, and more psychological confidence to hold my position. HTF just like any other indicator can sometimes be a fallacy. I typically like to trade the candles im looking at, but I do take it into consideration
+
+--- 帖子 #335 ---
+POP goes the weasel TP HIT
+
+--- 帖子 #336 ---
+The weasel, the weasel, just went POP. To counter the "deepseek", I started my position in NVIDIA! USA, USA .
+
+--- 帖子 #338 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #339 ---
+Staying in the trade when it crossed back above the 21 ema is the trick!
+
+--- 帖子 #340 ---
+If you rephrase the question to "where to add a 2nd trade after moving the S/L to at least BE" My humble opinion would be the 3rd arrow (the righter most). It's the only one that is a momentum candle that also clears the cluster. Given all the MAs on your chart, the first trade is easy to see if you watch for the first pull back after the MAs cross over. The entry (which has been pointed out) just happens to be a momentum candle that also clears the cluster.
+
+--- 帖子 #341 ---
+H1 setup, will take much longer...but I like the odds. Last time a setup appeared like this is took off. Good RR. Could target much more but that's first TP Attached Image (click to enlarge) * Attached Image (click to enlarge)
+
+--- 帖子 #342 ---
+Tricky is what it is. No Mindfuck here..stay the course and get to that promised land we call TP.
+
+--- 帖子 #343 ---
+I just hope NVIDIA keeps providing big volume moves on US Indice's like yesterday. On ES, Volume was 12 times above normal London values - not hard to just trade with the Trend on these days. If we go back to Friday's London Session, Volume was 1/4 normal values - not hard to skip trading the session on those days.
+
+--- 帖子 #344 ---
+That’s what I meant to be honest, thanks.
+
+--- 帖子 #345 ---
+Hi, would you recommend to take this trade? Red dots on Choc + retest of both 21ema and support on black dot with nice rejection 30 mins after London open.
+
+--- 帖子 #346 ---
+- Yes Get rid of Nova Volume - no use whatsoever.
+
+--- 帖子 #347 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #348 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #349 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #350 ---
+In a trade 5 Min TF Dow Futures, managing as I post this and no MindFuck. Relevance, under EMA 21 and to continue supporting Machine thread. Done, +102
+
+--- 帖子 #351 ---
+Found this trade today in london session, on uptrend after pullback from 21ema with small rejection and momentum was not great, but I would still take it because of strong move from 21ema on squeeze. Would rate it as B+.
+
+--- 帖子 #352 ---
+Hi Ju4ara Yes, B+ but it was really an A++++++ There was something more important happening there that as a trader we should have seen. I saw it and added a trade from the first setup on the previous Squeeze. So when price came down to the 21 EMA, it was either a take profit and be happy or look to add an additional trade on Gold. I took this trade on GCJ5 and now I had 2 long positions. I stayed in the trade for a bit longer and took profit higher up. My exit was terrible but the profit was worth in an excess of 2K for entering on single contracts. I really need to talk about the “missing X” soon which is a game changer if you are not already using it. Did you know there was a prefect Squeeze + X on Monday with ES(Us500) that if I was at my trading desk on Monday instead of drinking at a bar - I may have earned 11k on a Setup. I am pissed off I wasn’t trading that night, I missed the prefect trade. I got what I deserved. Driven talks about “Mindfuck” or something similar. If you really want to trade with mindfuck You need “missing x” Cheers
+
+--- 帖子 #353 ---
+RickM, the post above sounds like you still under effect of that drink at the bar. Come on mate, I thought Australians can handle their liquor . "missing X" What the bloody hell you talking about? (I am saying it with an Australian accent)
+
+--- 帖子 #354 ---
+Hi Driven I reckon if you traded with “ missing x, you could double your Mindfuck trades with ease. It’s best I show you guys a chart of the prefect Gold trade from last night that was taken by myself and probably a few thousand professional traders as well. Its a Squeeze entry then managed by “missing X”. For most professional traders, it was just “missing X” Thats when I get back to the trading den for London Open later and find some spare time. Trading comes first and posting on Forex Factory is something I leave for quiet periods when nothings happening. PS. I loved the Monday trade setup so much, I have re traded it 5 times on Replay Mode this week already. Got to love platforms that allow traders to retrade setups to nail trade execution.
+
+--- 帖子 #355 ---
+Playing around coding a Script, based on whats written in here.. Attached Image (click to enlarge) Not finished just yet.. but already looks promising. As RickM wrote several times... there may be more optimal Entries, by using experience. Experience cant be put into code. But once its finished, it may still be useful for some.
+
+--- 帖子 #356 ---
+Looks good Cog, please let us know how it works out.
+
+--- 帖子 #357 ---
+Here is an overview which I made in preperation for Publishing it on FF... (Need that stuff for Tradingview guidelines) The Entries arent filtered out properly as of now. EMA order.. etc are missing. Once I am happy with that, I will post it here. Adaptive Squeeze Intensity Indicator Main Settings Base Length (default: 20) Controls the primary calculation period Minimum value: 10 Adjusts sensitivity of core calculations BB Multiplier (default: 2.0) Bollinger Bands standard deviation multiplier Range: 1.0 to 4.0 Impacts Bollinger Bands width calculation Keltner Channel Multipliers Three separate multipliers for different channel intensities Keltner Channel #1 (default: 1.0) Keltner Channel #2 (default: 1.5) Keltner Channel #3 (default: 2.0) Volume Settings Include Volume Analysis (default: true) Toggles volume consideration in squeeze intensity calculation Volume MA Length (default: 14) Moving average length for volume calculations Volume Threshold (default: 1.5) Determines volume intensity significance Visualization Show Numeric Score (default: true) Displays numeric squeeze intensity score Show Intensity Zones (default: true) Renders background zones representing squeeze intensity Color Customization Bullish and Bearish color selections for visual representation Calculation Methodology Scoring System (0-100 points) The indicator generates a comprehensive squeeze intensity score through four key components: Band Convergence Score (0-40 points) Measures the compression between Bollinger Bands and Keltner Channels Higher convergence indicates stronger potential for breakout Price Position Score (0-20 points) Evaluates price's position relative to the Keltner Channels Assesses how centrally or extremely price is positioned Volume Intensity Score (0-20 points) Optional volume analysis Rewards increased volume activity above a specified threshold Momentum Score (0-20 points) Calculates price momentum using linear regression Measures price movement's strength and direction Squeeze States No Squeeze (Green): Significant market expansion Low Compression (Black): Minimal market compression Mid Compression (Red): Moderate market tightening High Compression (Orange): Significant market compression Visualizations Colored column plot representing squeeze intensity Gradient coloration from transparent to solid based on intensity Optional background zones for visual squeeze intensity levels Optional numeric score label on the last bar Signals Entry Signals 🢁 Arrow indicating potential long entry Triggered during squeeze release Optional background highlight on entry Alert Conditions Extreme Squeeze Alert Triggered when squeeze score crosses above 80 Squeeze Release Alert Signaled on initial squeeze release, indicating potential breakout
+
+--- 帖子 #358 ---
+Here was the Gold Chart from yesterday. The "missing X" is the Mindfuck we should use because its how many professionals trade markets. Step 1 ...... Trade 1 was a Squeeze setup where I took trade 1. Missing X is .............. Anchored Volume Weighted Average Price Step 2 ......... Place a Anchored VWAP indicator on the breakout candle and let the trade run. Step 3 ......... If Price returns to AVWAP, don't exit but rather looked to add an additional trade. Trade 2 Price returns to AVWAP - means Mindfuck Step 4 ......... Add another trade at AVWAP again. If price doesn't bounce long - EXIT whole position. The reason AWAP or VWAP works so well on Stock &amp; Future's charts is because many Hedge Fund / Bank Traders who are building positions are told only to Buy at VWAP or below - NEVER ABOVE. Therefore we have hidden Support or hidden resistance at these spots from Professional traders. If you took this 2 hour trade trade one Gold Future's contract - result would be around $3K profit. The risk would only be around 12 Ticks. There was also a fantastic Squeeze / AVWAP on ES Mini on Monday that was worth $11,000 trading just single contracts at a time (Perhaps I should not of been at a bar). I have traded this one again 5 times on Re-play mode on Motivewave to practice my execution skills. That's Mindfuck Happy Squeeze's next week guys
+
+--- 帖子 #359 ---
+If I may ask. I have been Trading for a long time, finding the "right" Exit has been always a tough one for me when I am adding into a Position. I ended up defaulting for 1 Trade, no scaling in, going for a 1:2RR the math... maths out for me to be profitable, but I do know that scaling is a very powerful way not to only increase your profits, but even decrease your risk. So my question... when do you exit a Trade? And... if your answer is based on Delta/Volume, do you have another method? Edit: I assume there are different methods you use based on different Entry styles. So I suspect the Answer isnt easy to give. 2nd Question: You said the big bois use the VWAP. Is this limited to short term timeframes, or also used in long term Timeframes? Cheers
+
+--- 帖子 #360 ---
+Hi Cog I am a Delta imbalance trader by default so for years I used to hunt 4-12 ticks per trade and exit. On a normal day I used to take 50-80 trade setups per session and used to be totally knacked after 4 hours trading. Profitability was dependent on Market Volatility so on a good day I would kill it and on a low Volatility I would end in RED due to trading costs. What a stupid idea right? I backtested many exit strategy's and always came up with two sure winners. Either 1.. I EXIT a single entry trade as price collapses back over the 21EMA 2.. I place a AVWAP indicator on a breakout candle and keep adding at every bounce until it fails. THIS IS THE BEST STRATEGY I HAVE FOUND IN 30 YEARS TRADING At each further breakout on STRONG VOLUME, we need a new AVWAP on intraday charts. Intraday Charts work best using AVWAP as an Exit Daily Charts work best using Weekly VWAP as an Exit That's my opinion and some may disagree. Cheers
+
+--- 帖子 #361 ---
+RickM, good stuff, but you know that we always disagree(on professional level) with these 2 points. My point for newer and/or loosing traders: 1. Anything to do with volume is totally meaningless, including VWAP and all of it incarnations. 2. It is statistically more beneficial to go in with full position from the start and use Money Management trailing the full position, rather then add on positions to get to full position. MindFuck is what 60% of the business is, controlling Fear and Greed, every new position is a Mindfuck on its own and with full position I am diminishing it. ..not sure if "missing X' is the same thing, most likely not. Chart below is 2Min.TF Gold entry(in hindsight) circled and managing full position , as an example. Arrow ends when full position exits. I do not trade gold but here is a live trade with full position I took on January 27 Dow Futures. https://www.forexfactory.com/thread/...9#post15129209
+
+--- 帖子 #362 ---
+Dow Futures 5 Min TF, MindFuck - can you handle it? Of course Yes and of course I do have feelings Will be moving stops momentarily... And out, +140, Real Live trading, no hindsight here.
+
+--- 帖子 #363 ---
+@RickM, @MachineLearn, Forex Factory, just when I thought I was out - They pulled me back in! Inserted Video
+
+--- 帖子 #364 ---
+Nice one from earlier
+
+--- 帖子 #365 ---
+Nice trade Machine, I can also see a VCP Pattern to strengthen the push upwards
+
+--- 帖子 #366 ---
+I have traded with Driven a few years back and we love to disagree on one subject - VOLUME There is no chance in hell he will ever consider Volume data is of much value in trading, so no point wasting time here debating with him this subject matter. But, perhaps there is one other trader reading this post that can see something in this chart below that may just change their opinion slightly. Volume Data is best used by applying VWAP to intraday charts to show us where the professionals are Buying or Selling. Its next best used for watching the tape (DOM) on Future's and Stock Chart to gain a small advantage here. 1.. When price starts to reverse Bullish, we will see two things. Price up to this moment will hit the Bids and mainly rest against the bids (Buyers). 2.. At the turn, we start to see Bid tick rejection where price hits the Bid and instantly jumps up and hits the Ask's. So now we see every move now being rejected against the Bids and price now just starts to sit more at the Ask's (Sellers). ITS A SHIFT, very small but it can be seen. Many of the most famous traders we all read about swear by the TAPE Now I'll go back in my hole before Driven gives me a hard time
+
+--- 帖子 #368 ---
+That was a hell of the month. I was very active on this thread and decided to post an equity line for the month of January, just to show traders that there are always losing days(circled), profitable days, etc..business is not easy especially during drawdowns, but if you have an edge, overall stats are great, so 46 trades, 10% Relative DD and +16% profit overall. It may bring more haters, but I do not give a crap. Anyway, hello March and projecting good things to come. GL to All!. P.S. @MachneLearn I promise not to hog the thread in March.
+
+--- 帖子 #369 ---
+SMB, an actual prop firm (up to $25,000,000 in capital per trader, not the pay to play fx/cfd places), shows statistics that their best traders are tape readers.
+
+--- 帖子 #370 ---
+Hi Cashbox Exactly, we can also include other great traders like Paul Tudor Jones, Jessie Livermore and Richard Wickoff to name a few. The big point here is THIS is where you see those Algorithm's actually trading against smaller players. The DOM lets us know whether the Buying or Selling pressure is real or fake which can help deciding on whether we should be trading now. On my chart above, I use the AVWAP to show hidden resistance - then look for down Ticks on the 500 Tick chart (ES) and actually enter on an ASK when price is pressuring the BIDS. That's one good trade .
+
+--- 帖子 #371 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #372 ---
+This is is all of our thread brother, hogging can't exist. Look forward to more posts, don't slow down!
+
+--- 帖子 #373 ---
+Hi ML, Could you give the name of the TV "diamond indicator" - thanks in advance buddy. PC
+
+--- 帖子 #374 ---
+https://www.tradingview.com/script/U...es-ChartPrime/
+
+--- 帖子 #375 ---
+I wait for multiple bounces (diamonds) and then look for squeezes that have seen high compression and wait for a breakout. Use VCP and EMAS in confluence. Every timeframe works different for number of retests, types of squeezes and breakouts that work best together
+
+--- 帖子 #376 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #377 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #378 ---
+Continued to fall
+
+--- 帖子 #379 ---
+Thanks a lot! PC
+
+--- 帖子 #380 ---
+took this trade on gold, great vcp pattern, A++ EDIT: I didn't like pa around my tp so took 4.5R instead of 5R EDIT 2: Got to wait a bit more and would take full tp, but still great result
+
+--- 帖子 #381 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #382 ---
+where did you guys learned to read the tape and trade? im 4 years persuing to be a trader, but not seeing much improvement, appreciate it
+
+--- 帖子 #383 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #384 ---
+Hi yeezey First of all you need to trade Future’s or Stocks to even see a tape (DOM or Time &amp; Sales) so that is where you start. I learned basic tape reading skills years ago trading Australian Equities but it wasn’t till I started trading Future’s on Jigsaw that I was able to get a better feel for it. For 1 year, I traded ES (US500 Futures) only with just a DOM, volume profile and a 5 second tick chart where I would watch every tick for over 4 hours. Here I was learning to trade Tick rejections, sweeps, incomplete auctions, liquidity claims, spoofing, HFT manipulation etc to gain a trading edge over other market participants. The idea is we are attempting to identify whether a move is being created due to order manipulation or actual big player intent. These days I study closely on ES, Oil, Gold, EU Future’s to see whether the order size that is hitting the DOM is being accepted and moving price or is it being rejected in the form of a back tick. So I trade my setups like Sqeeze breakouts, VCP Patterns, Liquidity Claims, pullback Patterns then look to trade with the aid of a DOM to see when a move has volume intend from many other trading participants or if it’s from Algo HFT programs. If you are interest in DOM trading, check out Fat Cat on YouTube. Cheers
+
+--- 帖子 #385 ---
+This NASDAQ trade is dedicated to RickM for bringing me back to trade ENQ futures. Although there is no Volume involved whatsoever and no Liquidity Claims , this dedication is True and Valid. Above EMA 21, 5 Min Nasdaq Futures, Will be TP(ing) very very soon....and out + 2% .
+
+--- 帖子 #386 ---
+I would like to expand a bit on how I traded this PA and my thought process as it relates to this thread. 1. PA moved above EMA 21 2. Retracement during the squeeze (and white dots prior) 3. Strong push up 4. Most of the traders who place their stop loss under the Swing were taken out of this trade. Do not do this, leave some room for PA to breeze(hint - use proper position size).
+
+--- 帖子 #387 ---
+Can I take a long position here?
+
+--- 帖子 #388 ---
+Hey guys... here is the Script I have build based on what was written in this Thread. Let me know if there are things you think are wrong. Attached Image (click to enlarge) https://www.tradingview.com/script/z...eze-Intensity/ Key Features Comprehensive squeeze intensity scoring system (0-100) Multiple Keltner Channel compression zones Volume analysis integration EMA-based trend confirmation Proximity-based entry validation Visual status monitoring Customizable color schemes Clear entry signals with directional indicators Components 1. Squeeze Intensity Score (0-100) The indicator calculates a total squeeze intensity score based on four components: Band Convergence (0-40 points): Measures the relationship between Bollinger Bands and Keltner Channels Price Position (0-20 points): Evaluates price location relative to the base channels Volume Intensity (0-20 points): Analyzes volume patterns and thresholds Momentum (0-20 points): Assesses price momentum and direction 2. Compression Zones Visual representation of squeeze intensity levels: Extreme Squeeze (80-100): Red zone Strong Squeeze (60-80): Orange zone Moderate Squeeze (40-60): Yellow zone Light Squeeze (20-40): Green zone No Squeeze (0-20): Base zone 3. Entry Signals The indicator generates entry signals based on: Squeeze release confirmation Momentum direction Candlestick pattern confirmation Optional EMA trend alignment Customizable EMA proximity validation
+
+--- 帖子 #389 ---
+Wow you put in a lot of work. Thank you. Looks good from a quick glance!
+
+--- 帖子 #390 ---
+Thank you! hope its helpful for some. big Love
+
+--- 帖子 #391 ---
+Hi Kalimac I wouldn't now mainly because price action shows 3 failed bullish moves. Now we would have to wait for a break of the last major high - so wait to see if this occurs. My guess is these candles are forming during a low liquidity period so there is no Bullish intent. Cheers
+
+--- 帖子 #392 ---
+I won't discourage your effort, as I've coded couple of scripts around the squeeze myself, which is not an easy task. If you wait for all the confirmations for the signal, then you are likely late to the party all the time, consequently your are shorting the bottom or buying the top. The current version would be more useful to confirm where to exit the position. Just a hint where you should focus more of your time, try to code/test rules where the entry is the most convenient to catch the move. Simple question with a hard answer, how can you define the situation where the impulsive move begins?
+
+--- 帖子 #393 ---
+Read his post again. Cog has made a script based on things discussed in this thread. If you think focus is not correct, then talk to Machine and Rick. Just a hint.
+
+--- 帖子 #394 ---
+Attached Image (click to enlarge) play with the settings... hint... increase the BB multiplier...
+
+--- 帖子 #395 ---
+If I wasn't familiar with the thread, Rick's ideas, I wouldn't bother to add an opinion related to my experience. I tried to help you and other members also, instead got replies with irony. Nevermind. Enjoy your weekend.
+
+--- 帖子 #396 ---
+Hi abuisiam The idea here is we are looking for markets that are in ranging conditions, then hope to time our trades when the market breaks actually out into trending conditions soon after. The A+ trade is the breakout that occurs on a lower time frame market that has a bias that follows the higher time frame trend. This was one of my best trades from last year. Price was trending on the BTC Day chart and I waited for the breakout on the BTC 1 hour time frame to trade. With Forex Markets, I look for trending Day charts first and hunt for breakouts on the 1 hour chart thereafter. I have learned successful traders Buy when the market is very strong with support under price and Sell when the market is very weak with support above price. Most traders want to do the opposite by Selling high or Buying low and that is why many of them lose (They may win 4 in a row but the 5th trade destroys them). The Squeeze indicator alerts us to nice setups if we aren't paying attention. It's our job to establish whether its a A+. B or C setup. Cheers
+
+--- 帖子 #397 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #398 ---
+thanks for your advice, PA still stuck under top
+
+--- 帖子 #399 ---
+From Rick's post: " The A+ trade is the breakout that occurs on a lower time frame market that has a bias that follows the higher time frame trend ." So you need to know the trend. I don't know if this has a value for some of the MT4 traders, but let me share it. I made my own Multi Timeframe MT4 Ribbon indicator . You can define the EMA's you want. Only three though and Machine define four in post #1. So using this indicator you can watch if the EMA's are aligned nicely in higher timeframes. You can define three colours. AColour: The arrow get this colour if the MA is trending AND the very last data is still trending. BColour: The arrow get this colour if the MA is trending BUT the last closed bar goes in the other direction than the trend. NoColour: The EMA's are cluttered - no aligment - not tradeable. Standard colours are White, Yellow and Red. (Changeable). The red colour is used in case of the cluttered picture. In this case there will be a dot in stead of an arrow. Please understand that this is a quickie. You cannot move the indicator to other locations in this version.and there might be other smart features it does not have. Never trade based only on the indicator. You MUST make your own top/down analysis. It is ment as a help, not a trading signal. Let me know if you find errors. Attached an example of the situation on timeframe M5, where the situation is cluttered and the indicator shows a dot. Don't mind the background colours. My robots are set to paint a colour that show the trend in the current timeframe. Useable if you are batch trading. But that is another story. If you want that robot you can find it here: Finding the trend | Forex Factory . Don't read all the thread, goto to post #578.
+
+--- 帖子 #400 ---
+Hi RickM As I understand it this means: find top and bottom of the market I don't understand this clearly. Can you please give me some examples of this. Thanks a lot
+
+--- 帖子 #181 ---
+Hi Cog Comprehensive squeeze intensity scoring system (0-100) This is interesting. How do you make that measure??
+
+--- 帖子 #182 ---
+Hey RiskFighter, I know you are a coder. My Script is open source, I believe the code can explain it better than I could put into written words. But let me know if there are things unclear (or even mistakes in my logic, I am just a hobby coder)
+
+--- 帖子 #183 ---
+Damned - my lazy gene are hurt ;-) OK, I will take a look. Thanks for responding.
+
+--- 帖子 #184 ---
+Hi Kalimac I mean we should be Buying at Highs or Selling at new lows provided price has bounced off Resistance - see my chart below. ( Algo's help because they spoof the market on new highs &amp; lows which supports breakouts ie. I want to see spoofing) Here's an example of my trading NQ today during the London Session today. Generally it's slow on Monday which is a nice way to start the week. My goal is to earn a wage every single night just doing this on ES / NQ or Gold. So generally I am targeting around $500-$700 profit to cover my daily expenses trading these 3 setups. Here is three plays from my playbook. All three setups rely on being able to read the tape. 1. Fade Resistance (yellow) 2. Breakout of Resistance on solid Ask/Bid imbalance (Green) 3. Ask &amp; Bid Flipping on aggressive liquidity runs. (Purple) The secret of trading in my eyes is to trade off Resistance levels. So in a breakout, I want price to bounce of Resistance area and the I want to see the Tape support direction. When price makes NEW HIGHS, we should be only looking for Buys and we should take trades above Resistance. SKILL This is what real trading skill is about, fearless entry's using supply &amp; demand to TAKE THE CORRECT TRADES. Practise - Practise - Practise THEN If during the process of earning a days pay with these 3 plays, I also see a Squeeze Setup, a VCP Pattern or a AVWAP play then I will take it. Otherwise I just trade my 3 plays and read the bloody tape. PS. I lost one trade here, can't remember which one PS. Hint - To trade the NQ Tape, Read MNQ Tape instead.
+
+--- 帖子 #185 ---
+TW has now implemented an ADBlocker check. As I am not paying and use an ADBlocker, I am not allowed to use TW. I find that absolutely fair. As I don't want to use TW, then I will not pay for it and it is now closed area for me. But I think I am covered in the matter of squeeze intencity, because my indicator (uploaded here) only call it a squeeze if the Keltner gets outside the Bollinger. Then it is serious bussiness. However I notice sometimes, that a squeeze only last for 1 or 2 bars. I might make a meassure that set some minimum number of squeezed bars in order to call it a squeeze.
+
+--- 帖子 #186 ---
+Best squeezes happen FAST and if you want to partecipate in the move you have to pay the premium price since there is no pullback. By fast I mean the squeeze duration iseltf is around 2-6 bars, price and volume speed are also moving fast. Usually the move lasts only for several more bars, but the amount % in price change is large. On the other side you have SLOW/LONG squeezes which have duration of 30+ to infinite bars. This is where most people lose as there are many fakeouts. When the proper breakout happens, supported by volume it usually offers a retracement, the first pullback is the best entry. After a long squeeze, the move is steady and supported for longer time. Personally I am using a normalized bollinger band width, which I find more appropriate and sensitive to the extremes (on both sides) and when the volatility starts to rise, compared to the TTM squeeze. Basically it compares the width to prior compressions/extensions instead of local atr bands (keltner channel) as TTM.
+
+--- 帖子 #187 ---
+Thank you. That is valuable info. I will not use TW though. Am very happy with MT4 and I can make whatever tool I like there.
+
+--- 帖子 #188 ---
+Is there a good entry?
+
+--- 帖子 #189 ---
+thanks for sharing I have another question What will you do when this happen?
+
+
+===== 附件下载链接 =====
+

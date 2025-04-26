@@ -1,0 +1,959 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Update again(2015-10-09) in #POST 254: http://www.forexfactory.com/showthre...06#post8531906 ************************************************************************************* Update again(2015-10-03): Attached File(s) News_TDI_Double_Strategy_EA.mq4 60 KB | 3,213 downloads | Uploaded Oct 3, 2015 12:36pm Major improvements in the new version: 1 interface to the panel, more information and more intuitive; 2 adds a news trading strategy that makes it a dual strategy for EA; Post update from: http://www.forexfactory.com/showthre...38#post8522338 ================================================================================== Update description（2015-08-16） : http://www.forexfactory.com/showthre...89#post8437989 IN ADDITION: In order not to affect the confidence of the new entrants, I removed the previous Trade Explorers. new version v2.1 Attached File(s) new TDI method v2.1.mq4 24 KB | 4,666 downloads | Uploaded Aug 16, 2015 2:04pm Hello everyone I am Zuodong Zheng, from China. I would like to share a trading strategy with forexfactory friends as a return to forexfactory, because I have benefited FF for many years. First， English is not my mother tongue, most of the posts I can only use the translation software, may cause the syntax error, or to bring you to understand the confusion, I am very sorry. Secondly , in order to reduce errors and misunderstandings, I will try to describe clearly. At the same time, because I am not a professional foreign exchange traders, busy with own work, to your question may not get instant reply, please forgive. Third, I hope the traders in the proposed problem, can understand the basic concepts of TDI, and to understand the content of the post, so as not to cause unnecessary waste of resources. Fourth, I wrote a EA for the implementation of this strategy, from debugging, optimization, modification, simulation account test, spent three months time, the current version is v2.0. At present, the robot is basically normal operation, earnings stability, the withdrawal is not too big, basically satisfactory. Note that I am not a professional programmer, and professional traders, there may be some problems. Later, please test and make suggestions for improvement, so that EA is more perfect. Maybe you made the suggestion that I might not be able to do it in the program, but I will try my best to finish it. Ok，get down to business. The so-called "New TDI Method" is a trading strategy based on the modified TDI indicator. I think the original TDI trading is not simple, the reaction is not sensitive. So I do not use the original TDI indicator, but the use of alternative solutions to simplify. I only apply three indicator lines instead of the original TDI: 1. RSI (13) as the relative strength index, the application price is close, the color is set to be colorless; 2. SMA (7) as a trading signal line (TSL), applied to RSI, the color is red; 3. SMA (2) as the RSI price line (RPL), also applied to RSI, the color is green. For your convenience, I have attached a template that can be downloaded directly. New TDI's trading method is the same as the original, when the green price line (RPL) with the red trading signal line (TSL), it generates a trading signal, at same time, added the reverse entry point, OBOS strategy etc. In addition, the position can be a variety of ways (SL, TP, reverse cross, BE). Specific methods are as follows: 1. Symbol............All pairs(I generally trade20~ 28 pairs） 2. TimeFrame.......M30 3. SELL Signal（ See figure below） The green line (RPL) crossed down red line (TSL) after Pre-Candle Close, and red line (TSL) &gt;68 4. Buy Signal（ See figure below） The green line (RPL) crossed up red line (TSL) after Pre-Candle Close, and red line (TSL) &lt;32 5. Add Orders（ Corrected ） If the price is running in the Opposite direction as orders, then every 20 points to increase a position, up to 6. 6. Exit Trading a）A single currency pair or basket of profits reached TP； b) A single currency pair or basket of profits reached SL； c) When the opposite direction of the trade signal; d) When setting the break even point, the price is withdrawn to BE. Next step, after I'm considering the maturity, will increase the number of signal filtering options. Trading happiness! Good luck, everyone! ​ Figure1 Attached Image (click to enlarge) Attachments Attached File(s) newTDImethod.tpl 184 KB | 4,940 downloads EA file and other file see #Post 24. http://www.forexfactory.com/showthre...86#post8407086 Good luck, everyone!
+
+--- 帖子 #2 ---
+期待您的策略，中国那个城市？我也是
+
+--- 帖子 #3 ---
+我也是 大家一起交流 留下微信吧 626082835
+
+--- 帖子 #4 ---
+湖北黄石市
+
+--- 帖子 #5 ---
+相互学习，好的，多多指教
+
+--- 帖子 #6 ---
+Have you read TMS 30 thread? Pretty much exactly what we do! http://www.forexfactory.com/showthread.php?t=526735 Instead of opening a new "system" you should of joined us good luck
+
+--- 帖子 #7 ---
+Not exactly. Zoudong trades only outside the 32 and 68 limits, trying to catch the very top/bottoms, probably. There is a difference
+
+--- 帖子 #8 ---
+Hi，Davit I have read TMS 30 theme, is a very good thread, let me benefit a lot. But: 1) trading strategy is still a bit complicated; 2) thread is too long, gathering all kinds of thoughts, has lost the theme, so that the traders at a loss, this is also a lot of good thread the final outcome. 3) the new TDI method has many differences with the TMS strategy. Even if I add on the HeatMap、 the currency strength of the filter in the future, will not be too complex. 4）The new TDI method is easier to program robots. Thanks， good luck.
+
+--- 帖子 #9 ---
+Exactly right. Thank you very much. Trading happy。
+
+--- 帖子 #10 ---
+Thanks for your efforts. I have couple of thoughts: 1.you need to think to use some filters, specially taking a direction or from HTF (4 HR and 1 HR). 2.Cross of green to yellow line at 30 min TF is very important. 3. Cross of 10 EMA 4.Angle of MTF HTF TDI (code is available here on FF) 5.Position adding should have some more filter I mean time min gap and on next cross of green to red, (otherwise in a strong direction you are adding position one after another and there is no sign of reversal). 6.Trade only in direction of daily/ 4hr candle direction. Thanks
+
+--- 帖子 #11 ---
+Hi Zuodong, Very good start with clean chart just the RSI (TDI). Keep it this way, do not add any other technical indicator to the sub-window. The key here is how to trade the price chart and use of the RSI only. I am thinking of what you wrote; &lt;quoted&gt; below. I think we can work together on these and improve the "system". Give me some time. &lt;quote&gt; 1. Symbol............All pairs(I generally trade20~ 28 pairs） 2. TimeFrame.......M30 3. SELL Signal（See figure below） The green line (RPL) crossed down red line (TSL) after Pre-Candle Close, and red line (TSL) &gt;68 4. Buy Signal（See figure below） The green line (RPL) crossed up red line (TSL) after Pre-Candle Close, and red line (TSL) &lt;32 5. Add Orders If the price is running in the same direction as orders, then every 20 points to increase a position, up to 6. 6. Exit Trading a）A single currency pair or basket of profits reached TP； b) A single currency pair or basket of profits reached SL； c) When the opposite direction of the trade signal; d) When setting the break even point, the price is withdrawn to BE. Next step, after I'm considering the maturity, will increase the number of signal filtering options. &lt;unquote&gt; I will be back after my summer vacation. regards,
+
+--- 帖子 #12 ---
+Hi，mkfx Thank you for your advice. I am considering a proper increase of one to two filtering options (as I mentioned before: Currency, Strength HeatMap). But I do not want to increase too much, lest it become a hodgepodge.
+
+--- 帖子 #13 ---
+Thanks, emmanuel In your quote, I found my big mistake, I'm sorry, I'm sorry. 5. Add Orders If the price is running in the same direction as orders, then every 20 points to increase a position, up to 6. Correct for （ Opposite ） Sorry。I will be corrected in the first post。
+
+--- 帖子 #14 ---
+Hi, everyone Please follow the rules (in the first post description) manual trading, in order to be familiar with the trading method. Will be able to put forward specific questions or suggestions. After I will be EA file is sorted, will be released immediately, for everyone to test.
+
+--- 帖子 #15 ---
+hi, i modified an existing indicator TDI Red Green and a MTF 1(requires TDI Red Green Tape), to indicate the cross over according to your rules for anyone that is going to manual trade it. here it is. Attached Image (click to enlarge)
+
+--- 帖子 #16 ---
+I am using TDI since three years ago. The problem with TDI is the problem with all oscillators. Can stay in the 68 or 32 area a lot of time. Let me show you what I mean. Look at the EA picture. Since the first signal the price climbed 400+ pips. Since the H4 signal 216 pips. So the question is: where is TP and where is SL on your method?
+
+--- 帖子 #17 ---
+my two cents: - rsi is a noisy indi - but rsi with divergence is a must have hope rsi will be replaced by rsi-divergence to get better signal
+
+--- 帖子 #18 ---
+hi i think anything more is not perfect, we just find some balance. tp or sp too. or raise the bargaining chip. but increase the risk. ---------------------- to yczzd 我是个新手，谢谢提供常年的积累的经验。 期待您的大招。
+
+--- 帖子 #19 ---
+I know where my TP and SL are because I trade my own method. Though it is not clear for me for this method. What I want to say more is that you need to look at the price behavior in order the method to work. For me the indicator is just a confirmation tool and not the decision tool. I hope this helps.
+
+--- 帖子 #20 ---
+Interesting concept and strategy. Looks good mate I like how your chart is simple. Have you traded your strategy live yet?
+
+--- 帖子 #21 ---
+Hi，majorusa TDI method is not a trend trading, it is impossible to get all the Pips. Therefore, the first strategy for TDI to close the order is the opposite of the cross signal. In my EA， SL or TP is set up by a trader, in two ways. thanks.
+
+--- 帖子 #22 ---
+Completely agree！ Thanks（谢谢！）
+
+--- 帖子 #23 ---
+Still not used in real account, Still in the test. I found your TDI in the real account trading results are very good, I hope to learn from each other.
+
+--- 帖子 #24 ---
+Hi，everyone I will release my robot for everyone to test. Please download the attachment. At the same time, the first post has been updated. Warning: do not use for real account EA file : Copy to \MQL4\Experts Attached File(s) new TDI method v2.0.ex4 41 KB | 2,096 downloads Templates file : Copy to \Templates Attached File(s) newTDImethod.tpl 184 KB | 1,711 downloads Scripts file : Copy to \MQL4\Scripts Attached File(s) Charts Into Alphabetical Order script.ex4 6 KB | 2,127 downloads About Charts Into Alphabetical Order script.ex4 file： Thank stevehopwoodforex.com for providing the script. Usage: 1) open any chart with M30 2) loading template file 3) load and set up the EA file 4) to open the other chart that you want to trade, any timeframe, any other things that do not need to be set up. 5) in the navigation window, find the script folder, and this file, and drag and drop to the chart that has been loaded with EA。 6) all OK Trading Happy zzd
+
+--- 帖子 #25 ---
+Sure. Looking forward to seeing your results. Your Demo results are great
+
+--- 帖子 #26 ---
+Note： The EA including basket trading, so trading volume is large, the risk is also large. Therefore, please set the parameters according to the need to use. If you don't want to trade frequently, you can use a higher time period.
+
+--- 帖子 #27 ---
+hi, what's the EA success rate?
+
+--- 帖子 #28 ---
+Ea how to set parameters? Can you explain, I tested all of a sudden start and a lot of single!
+
+--- 帖子 #29 ---
+Ea how to set parameters? Can you explain, I tested all of a sudden start and a lot of single!
+
+--- 帖子 #30 ---
+what the what? please post in English....it's still an English speaking forum...if you like, please pm each other...you just clutter up the thread!
+
+--- 帖子 #31 ---
+Oh, sorry. I didn't consider the difference between a broker's trading platform. Your platform is 5 digits, and the currency pair has a suffix。 Let me see if I can fix this problem.
+
+--- 帖子 #32 ---
+Your method is good, you could share the TSL indicator, RPL and which shows the opening london, new york and tokyo? thanks
+
+--- 帖子 #33 ---
+Thanks for the indicator! ANy chance you could add an email alert? Thanks!
+
+--- 帖子 #34 ---
+Thank you share your system.. Why I loaded scripts to chart,all charts all closed?
+
+--- 帖子 #35 ---
+uploaded with alerts.
+
+--- 帖子 #36 ---
+thanks for sharing your system! just a question, do I have to wait for the EA to close the trade automatically or do I have to manually close them myself?
+
+--- 帖子 #37 ---
+RPL and TSL is not an indicator, but a moving average, which is described in the first post, and has been included in the template. Forex trade session display is a function module of EA.
+
+--- 帖子 #38 ---
+The average success rate was 60%-70%.
+
+--- 帖子 #39 ---
+Automatically. Of course, you can also manually close orders.
+
+--- 帖子 #40 ---
+Instead of tading with orders in Basket, can you please change the EA to make a single order with SL and TP with TS? Would be of great help. Regards, Paul.
+
+--- 帖子 #41 ---
+hi yczzd glad to see people from china to share something at FF. in fact using TDI trading methods as EAs has been developed several times. i do not see them yielding very promising results. may i ask if you are using this EA forwad testing as your trade explorer?
+
+--- 帖子 #42 ---
+Mind to share how you set the TP and SL? And any preferred time frame and pair?
+
+--- 帖子 #43 ---
+wow.....incredible....thread is ONLY 3 pages long and people won't bother to read.......this has been answered...
+
+--- 帖子 #44 ---
+EA include single symbol SL,TP,BE, the same time include basket SL,TP. I use default settings. At the same time, I hope you look carefully at the first post.
+
+--- 帖子 #45 ---
+Glad to meet you. Yes, The trade Explorer is this EA forwad testing result. In addition, your TDI trading is very good.
+
+--- 帖子 #46 ---
+Hi, everyone Here is the default setting list for the EA parameter: extern int BrokerGMTShift = 2; //Broker GMT shift extern bool DST = true; //Daylight saving time extern double Lots = 0.1; //Fix lots extern int CounterTradeMax = 7; //Max number of Counter Trading extern int CounterTradeGap = 20; //Gap of Counter Trading extern double CounterLotMulti = 1.15; //Multi of Counter Trading extern int SinglePairTP = 40; //TP of Single Symbol Basket extern int BreakevenPips = 25; //Breakeven Point of Single Symbol Basket extern int RSIPeriod = 13; //Period of RSI used TDI extern int RSIPrice = 0; //Apply Price 0=CLOSE, 1=OPEN, 2=HIGH, 3=LOW, 4=MEDIAN, 5=TYPICAL, 6=WEIGHTED extern int SignalLevelUP = 68; //Up Level of Confirm SELL Signal extern int SignalLevelDN = 32; //Down Level of Confirm BUY Signal extern string BTS = "*** Basket Trading Setting ***"; extern double BasketProfitPercent= 5; //TP of all Trading in Percent extern double BasketStoplossPercent = 0; //SL of all Trading in Percent
+
+--- 帖子 #47 ---
+Hi yczzd, Setup the EA to trade for 1 day. Here is the result Attached Image (click to enlarge) Awesome work! Thanks
+
+--- 帖子 #48 ---
+thanks for your replyfor my understanding, your system is essencially a basket profit taken strategy using TDI cross as signal trigger, sell from over bought zone and buy from over sold zone.the explorer shows a good edge here, keep on going. well done!
+
+--- 帖子 #49 ---
+pardon my noob question, how is it that we hit the stop loss and yet the trade turns out profit? is it due to the BE being moved to stoploss?
+
+--- 帖子 #50 ---
+This happened thanks to my wonderful inventions such as "trailing stop (R)" and "Move to BE(R)"
+
+--- 帖子 #51 ---
+yczzd many thanks for ther system and your kindly provided EA. i know you have advised not to use this EA on live account. does that mean it is not live tradeable and locked to demo only? Or is that a suggestion for us. thanks
+
+--- 帖子 #52 ---
+Thanks. Yes, your understanding is basically correct. I would have wanted to join several filtering options, and then I gave up. I want to implement in my next EA version (similar to the dashboard EA) , I'm in programming. good luck
+
+--- 帖子 #53 ---
+Demonstration and real account can be run. No limit. Please pay attention to the risk, in the real account
+
+--- 帖子 #54 ---
+thanks looks good from the test results from you and another member so far...will load this up for market opening tomorrow. ps do you recommend running on fridays?
+
+--- 帖子 #55 ---
+How to set up a SL of 50 pips for a single trade? Your EA doesnt have that option. Regards, Paul.
+
+--- 帖子 #56 ---
+2 questions, please: 1. Can the back-testing be made faster? I'd like to test on history but it is running very slow. 2. As Fxolive said, is it any option (that I missed, maybe) to set up the SL for a trade? Thanks.
+
+--- 帖子 #57 ---
+hi yczzd i see in this setting there is no specific value for SL of a single pair and also not for basket SL in default settings. beware of big gap or black swan or bad connection of broker, because if i understand correctly, if the price is against you, you just use opposite entry signal for exit to cut loss. a reversal big trend can cause a big drawdown.
+
+--- 帖子 #58 ---
+Sorry, Blueseahorse, Wattaman, Fxolive I made a mistake, A single pair does not set a stop, Exit signal it solely on the basis of red and green lines cross. It's easy to add a stop. But I think it's better to deal with a single transaction in accordance with the rules of TDI. Thanks, good luck
+
+--- 帖子 #59 ---
+Hahaha
+
+--- 帖子 #60 ---
+well, it feels more like a martingale way now. if it is so, have to prepare for facing some large floating loss, as well.
+
+--- 帖子 #61 ---
+Thanks for sharing Ycczd. Testing since yesterday but have this error: Attached Image (click to enlarge) Single TP, break even, close on opposite signal and opposite trades do not work. Any clue ?
+
+--- 帖子 #62 ---
+Dude ! Perhaps your broker doesn't match the lot you have chosen ! Although ... you are right I have the same error ...
+
+--- 帖子 #63 ---
+I don't have any errors. EA running good for 2 days now.
+
+--- 帖子 #64 ---
+mine is running here: http://www.myfxbook.com/members/TGT_...v2-m30/1320776 (dont take into account the trades before jul 17 ... that was another bot, switched off already !) I haven't the same trades like "yczzd" ... only the NZDJPY is in my demo. AND: can't understand, why I don't have these multiple trades like "yczzd" has now for instance (NZDJPY) ?
+
+--- 帖子 #65 ---
+Trades are open with correct lot as indicated in the set file. But no new positions taken, break-even, signgle TP etc... Only basket features work correctly.
+
+--- 帖子 #66 ---
+Strange behaviour of this bot ... something is wrong .... ? (My broker is 5 digits ... )
+
+--- 帖子 #67 ---
+My Demo Running. Results look good, but System is dangerous due its high amount of Floating trades, can easily lead to a margin call. http://www.myfxbook.com/members/boed...tdi-20/1320967 Edit: I'd like to see an Option to trade only ONE PAIR at a time. I've got the EA running with 28 Pairs, but as soon at the EA starts opening the first trade of an pair he should stop opening other pairs until the first one is finished trading (all trades closed).
+
+--- 帖子 #68 ---
+Mine too. Just opened a new demo with a 4 digit broker. Will see.
+
+--- 帖子 #69 ---
+But remember - your trades must fulfill a basket of x%. Only having enough trades running the basket TP will be met ! Perhaps it would be good to have risk calculated lot size and not a fix one ! It is always a question of relation between number of pairs/trades - lot size - basket TP% !
+
+--- 帖子 #70 ---
+It looks really a bit like martingale, because the reverse opening orders. TDI has a lot of ways to trade in the FF forum. The main signal is green and red cross. There are two entry points: Above 32 level or below 68 level, and then combined with MA, support, HA candle color, etc to confirm; Below 32 or above 68, and then combined with RSI or Stochs OBOS confirm; I chose the latter。Because OBOS place an order, so once the price reverse motion, we should continue with the documentary in a certain range. It has at least three different, with matingale: 1) reverse position of not more than 7 (recommended); 2) when the opposite green line and red line crossing signal, close order; 3) when the basket of profits or losses is reached, close orders (important); blueseahorse： You are an expert. Learn from you. Trading happy zheng zuodong
+
+--- 帖子 #71 ---
+I'm sitting on 7 open trades short on the EJ -40 or more pips for each position,,,How did you escape this move? Thanks YCZZD!
+
+--- 帖子 #72 ---
+I come here to thank yczzd the excellent method along with EA, see here like this going on my demo account
+
+--- 帖子 #73 ---
+and and In my platform, EA works correctly. 1）Lotsi is fixed. When the reverse billing, calculate the LotSize, does not match the decimal and brokers may. But will eventually get the right results. 2）Single TP don't be too big, $50 is ok 3）Breakeven don't be too big, &lt;30 is ok, when BE is hited, will setup SL to Openprice+5 or -5, When a currency pair has a number of orders, the average price of the opening price is calculated. 4）a order is basket too.
+
+--- 帖子 #74 ---
+Awesome! Thanks so much!
+
+--- 帖子 #75 ---
+Thnk u yczzd for sharing your system and ea. Here's my first demo with this strategy. Attached Image (click to enlarge)
+
+--- 帖子 #76 ---
+Ok...Figured out the problem,,it was taking a position every 2 pips not every 20,,all is good!
+
+--- 帖子 #77 ---
+why it opens so many trades
+
+--- 帖子 #78 ---
+Add a zero to your gap counter in the EA..Looks like the EA was coded for a 4 digit broker,,Correct me if I'm wrong
+
+--- 帖子 #79 ---
+where is it
+
+--- 帖子 #80 ---
+Its the Gap of Counter Trading line... TP of Single Symbol Basket line and Break-even Point lines should have an added zero also,,Maybe YC can clarify
+
+--- 帖子 #81 ---
+@yczzd Could perhaps add a second option for the basket TP ? I mean additionally to the % TP - a fixed TP = fixed number EUR or USD (depends on the account currency). Thx (And yes: I have no probs/errors using the same 4 digit broker "NordFX" like you - so likely the error in the MT4 tab "Expert Advisor" is caused by this issue ?)
+
+--- 帖子 #82 ---
+thanks yccd for your ea! it worked out pretty well except for the drawdown that was quite huge that might attract a margin call for small accounts like mine! was thinking how I can adjust the parameters to suit our trading style for eg. at one point of time, only 0.1 lot sized trades and maximum of 5 trades to be opened etc? saw in the parameters factors like max no. of counter trades and multilots.. any guide to adjust these to our trading style and advantage? thanks!
+
+--- 帖子 #83 ---
+You could (or must even ? ) set a basket SL - that thingy at least may save your shirt in a worst case scenario ... and a worst case will happen one day - sooner or later, perhaps more sooner then later, we never know - but for sure !
+
+--- 帖子 #84 ---
+By the way. I had two Demos running, one 30min TF and another 60min TF. The 60min turned out to be way better even tough less signals (which is good coz of the floating DD) still more profitable. Check it out. Every TF lower 30min just failed terribly.
+
+--- 帖子 #85 ---
+So: let's run it on the daily chart ? Just a thought ...
+
+--- 帖子 #86 ---
+This strategy/EA contains grid trading with martingale: and that is extremly dangerous, especially at lower timeframes. You never know about market reversal, noone can predict it - who knows - will it happen or not, or better to say: yes, it will happen in any case, but when ? There is only one way: set the basket SL at the same number (or lower to get R:R higher/better then 1:1) as the TP is - 5% TP like now OOTB + 5% SL (now, OOTB = 0%). (Although: the above trade explorer looks excellent for now !! .... but let's wait the days with more stormy market conditions ....)
+
+--- 帖子 #87 ---
+how many pairs you are running in the trade explorer above?
+
+--- 帖子 #88 ---
+18 pairs. Attached Image (click to enlarge)
+
+--- 帖子 #89 ---
+YCZZD你好： 很高兴看到这帖子出现中文， ，准备好好试一下这个ea jhh
+
+--- 帖子 #90 ---
+Wanted to backtest some stuff with a smaller lot than 0.1 ... but just getting Ordersend Errors in the Journal...any ideas?
+
+--- 帖子 #91 ---
+欢迎你。这个论坛里中国人应该不少，高手也很多。希望多交流，共同提高。我的英文太臭，要是哪儿有这样规模的中文论坛那就太好了。 Welcome. In this forum, the Chinese people should be quite a lot, Ace is also a lot of. Hope to more exchanges and jointly improve. My English is too bad, It would be nice if there was such a Chinese Forum.
+
+--- 帖子 #92 ---
+Sorry. boederzeng I didn't go back to the test. Do not know whether it can be used back testing。 As to what's going to happen, I don't know. However, on my platform, Forward test has been very normal and stable。
+
+--- 帖子 #93 ---
+Hi，DerBerliner I am very sorry, because my English is too bad, all of my posts are the credit of the translation software. I have some difficulty in understanding your post. Sorry
+
+--- 帖子 #94 ---
+yczzd thanks for the promising looking system. just to reiterate piptalks question, should we be adding an extra zero to all options if we are using a 5-digit broker? thanks
+
+--- 帖子 #95 ---
+Yes, you should. According to my 5-digit tester, the 20-pip gap input is spacing out counter trades every 2 pips, so an extra zero must be added. Likewise, for the TP and BE settings.
+
+--- 帖子 #96 ---
+thanks man
+
+--- 帖子 #97 ---
+Hey I like your ea idea can you share the source code? I would like to alter how it recovery loss trade and possibly trailing behavior.
+
+--- 帖子 #98 ---
+yes,it is right... this ea contains grid trading with martingale.. i test it,default setting,maxdd is about $3000.（2014/12-2015/5)(EU/USD) so,the risk is not low.
+
+--- 帖子 #99 ---
+我不知道是不是我设置错误，回归测试时，始终出现一些错误（虽然能正常进行）。。我用的是5位小数和3位的broker。 （my english is poor,so i just use google Translation.） I do not know if I set up wrong, when regression testing, always some errors (although they would normally be). . I use 5 decimal places and 3 of the broker.
+
+--- 帖子 #100 ---
+Hi, oneffone I didn't go back to the test. Do not know whether it can be used back testing。 As to what's going to happen, I don't know. However, on my platform, Forward test has been very normal and stable。 The EA design did not consider the 5 digit quotation platform. I will solve this problem in the next EA version（This program is being debugged）。 Give a screenshot Attached Image (click to enlarge)
+
+--- 帖子 #101 ---
+right on, I see. but i was wondering if you are using basket SL or not, because the default setting is zero. and a few thoughts on this EA: a filter for market condition may be needed, because this type of trading will act well in a certain ranging period, but not in a heavily trending market or sideway market, because it needs retracement to recover your reversed built up postions. just my 2 cents trade well.
+
+--- 帖子 #102 ---
+Guys, I am new here and I need help. I have downloaded all three files from post # 24 and put them in respective folders. I have loaded template in my many pairs. My MT4 auto trading is also on. But auto trades are not initiating. Can you please help me?
+
+--- 帖子 #103 ---
+Hi Yc, i tried to setup as per your post: Set the ea on one chart and drag the script on to the same chart. But, only one chart remains open other charts have not opened. Is this how it is supposed to be or will the script open all other charts?
+
+--- 帖子 #104 ---
+yczzd - I read your post but unable to understand the following: "If the price is running in the Opposite direction as orders, then every 20 points to increase a position, up to 6" Question 1: Wouldn't that increase my losses since it's going opposite my direction? Question 2: If I add up to 6 orders, where do I put my SL? (can't seem to find the thread on this?) - please explain or draw on chart if you don't mind. Attached is my current chart per your instructions steps. Thanks! Cheers.
+
+--- 帖子 #105 ---
+The basket stop is set to 0 by default, this is my test TDI in case of OBOS, reverse order to open the probability of 6~7 position, and the drawdown level of funds. I suggest that the basket stop is set to 10~20 (of balance 10%-20%). You are right to increase filtering, and it really needs to be filtered. Because TDI trading rules are very simple, without filtering, will be frequent transactions and losses. FF forum inside the TDI trading post a lot, but it is beginning to be simple, as many of the filter was set to become unusually complex，make the majority of people unable to adapt, and lose interest. I'm thinking about adding two more filtering options in the new version. My first priority is Currency Strength, and HeatMap. Here, I also hope that some people give advice or ideas, to set the filter, only two, only two. no more. Thank you good luck
+
+--- 帖子 #106 ---
+Hi, I just found this thread simple strategy, interesting. But the EA uses a martingale system which is a killer account solution. having multiple trades, ok, we can have multiple signals, but we should be able to disable the martingale. tips I'm using when I create EAs.... to make the EA faster in back tests, insures that you test if its a new candle, if not, just do nothing, this boost the back tests. and if you calculate the MA on top of the RSI in the EA itself (rather than relying in an indicator), insures its calculated for the past X candles, like the past 100 candles are only calculated, else it could be very slow too. ​continue your good job
+
+--- 帖子 #107 ---
+Disabling the marti is an easy deal, I think: set the param "Multi of Counter Trading" to 1.00 instead of 1.15 like now OOTB ! You may also alter the grid itself by changing the param "Gap of Counter Trading" !
+
+--- 帖子 #108 ---
+I know but this limits the EA to 1 trade only additional signals will be ignored. its why the martingale/grid option should be optional. but not the number of trades.
+
+--- 帖子 #109 ---
+Are you sure ? Check the parameter "Max number of Counter Trading" in the settings - that's the number of trades allowed.
+
+--- 帖子 #110 ---
+Hey, everybody. Please look at the front of the post, #105, #70,#1, about Martingale explanation. If you don't want to reverse trading, set "Max number of Counter Trading" to 0, OK! This EA will only be executed in accordance with the Red Green Cross strategy
+
+--- 帖子 #111 ---
+hi yccd and all, i have done some changes to my settings for gap counter, TP n Breakeven for single symbol basket each adding a zero behind for my 5 digit broker. the whole day it only had 2 trades and refused to close them. had to manually close one of them while it was still in green. just thought these might help in building up the ea.
+
+--- 帖子 #112 ---
+lets not give up people! i believe in this ea and im gonna keep tuning the settings and testing the ea till it suits my trading style.�💪💪😠😍😊
+
+--- 帖子 #113 ---
+Lower the basket close percentage - it should work.
+
+--- 帖子 #114 ---
+How do I lower the basket close percentage? TP of single symbol basket, Breakeven for single symbol basket or TP/SL of all trading in %?
+
+--- 帖子 #115 ---
+Hi yczzd, Your script file doesnt work. When I opened the script file, my chart will automatically closed. Is it any way to run the script file? Thanks.
+
+--- 帖子 #116 ---
+I have altered settings of TP of all trading in % to 2.5. Due to my 5 digit broker, other settings changed are TP n BE of single symbol basket and gap counter to which I added an extra zero behind the default settings. Let's observe from here...
+
+--- 帖子 #117 ---
+yes i did that too ad zero to gap counter TP and BE. percentage closure you try and mimic to scale how yczzd is trading. good day on both my m30 and h1 demos.
+
+--- 帖子 #118 ---
+Thanks for this EA. In enter a trade it seems very good, however I did test it in a very short time. As I understood the function of "Tp of Single Symbol Basket" is a value of USD ...Can that be in pips? And also the SL value in pips and BE in pips...Maybe there I did miss something or did not understand. Thanks to reply me back in advance. Because otherwise in any lot size trading change we have to change all this values in all pairs.. Note: I did understand the TDI rule SL green cross red ..But apply a pip rate option would increase the style of the trade, as well as a TSL option.
+
+--- 帖子 #119 ---
+im thinking that for some of the pairs we go 5 min or 15 min to increase the frequency of trades. this way, for some of the slow days like yesterday, the basket will be filled with more different pairs to diversify the trading pairs.
+
+--- 帖子 #120 ---
+sounds like a good idea to me . but for currency strength and heatmap, are you refering to same indicator? and is it used for gauge each pair movement amplitude in certain period of time? how exaclty are you trying to use it, any ideas? for me, personally, i would like put a boudary line for only sell below it and buy above it. at least in a heavy down trend market, once price is below the line, i will not do any more buy actions, vice versa.
+
+--- 帖子 #121 ---
+hi Yczzd, i test your EA and run well. But i want to ask something, do this EA will close other trades not open by EA? My trade all closed when change day profit or not. Do you use any magic number on the EA for separate other entry? You see the screenshoot, 1 trade open by EA, others are not. but all closed at same time before change day. Please fix it if you not have magic number, will be better. Attached Image (click to enlarge) tq
+
+--- 帖子 #122 ---
+Not a good idea - IMHO ! You never can predict the price movement, yesterday it was calm today it's not calm ... who, the hell knows what will be tomorrow ? Any (trending) event - especially at lower TFs M5/M15 - will kill your account ! Yesterday it could have been worked out, tomorrow it wont ! And yes: where are no (for ever) calm or (for ever) wild pairs ... market conditions change = "character" of any pair will change. Btw ... interesting watching of the trade explorer above: looks really great furthermore !
+
+--- 帖子 #123 ---
+how about filter high impact news? can use ffcal indicatior..
+
+--- 帖子 #124 ---
+[quote=DerBerliner;8416117]{quote} Not a good idea - IMHO ! You never can predict the price movement, yesterday it was calm today it's not calm ... who, the hell knows what will be tomorrow ? Any (trending) event - especially at lower TFs M5/M15 - will kill your account ! Yesterday it could have been worked out, tomorrow it wont ! And yes: where are no (for ever) calm or (for ever) wild pairs ... market conditions change = &amp;quot;character&amp;quot; of any pair will change. Your right bro. I tried the 5 min TF and boy it created massive damage to my AUD/CAD and EUR/AUD trades. there were some red impact AUD news to start with. hmm..
+
+--- 帖子 #125 ---
+You say the method can refer here： http://www.forexfactory.com/showthread.php?t=511468 His strategy was to look at the beginning, but later it changed. My strategy is to refer to http://www.forexfactory.com/showthread.php?t=437318 ，Combined TDI method。The direction of the transaction is not the same, not very applicable to the filtering method you mentioned。
+
+--- 帖子 #126 ---
+... Ignored So you see (at the same time: you saw it already) it on your own experience .... using grid trading is dangerous in any case: you never ever can predict the moves, the market doesn't care about your wishes and expectations !
+
+--- 帖子 #127 ---
+yup.. will try demo-ing on the 1 hr TF n observe from there. how is everyone doing for the trades?
+
+--- 帖子 #128 ---
+Only close the order Comment for newTDImethod。
+
+--- 帖子 #129 ---
+both my m30 and h1 demos are doing well. promisng start to say the least
+
+--- 帖子 #130 ---
+yczzd thanks for this great EA. are you planning to share the mq4 file? thanks
+
+--- 帖子 #131 ---
+Ok, will try again tonight until next week. You see my trade not hit any TP or SL, but it closed all the same time. I wonder if the EA which closed all the position even not open by the EA. thanks yczzd
+
+--- 帖子 #132 ---
+good for u! will go on to try 1 hr..
+
+--- 帖子 #133 ---
+Hi All Here,s what happened on the AUD/NZD chart earlier this morning just take a look at the attached chart its self explanatory.What or were is the stoploss on this EA as you can see its up to about minus $90 and still did not close.It ended up loosing nearly $700 on this pair which has not retraced.I notice that yczzd did not include AUD/NZD in his trading pairs. From a 3000.00 demo which grew to 3500.00 in two days in right now at 2600.00 and nearly used full margin 20.00 too close for comfort (it seems to close trades before it does blow the account. This system still needs some work.I can try running at 1hr like someone suggested any other suggestions?
+
+--- 帖子 #134 ---
+This is why AUDNZD did all that loss, not indifferent to the news market, any EA would struggle to do this is to the human attention to the news.
+
+--- 帖子 #135 ---
+Try using basket SL. Mine is set at 5% so the hit on AUDNZD was limited.
+
+--- 帖子 #136 ---
+Hi, mastercraft 1)Gap of Counter Trading is too small, should setup to &gt;200 for 5 digits broker; 2)Basket SL suggestions set to less than 20% of balance; 3)Read #105, #110 posts, please.
+
+--- 帖子 #137 ---
+my m30 demo was on the right side of that AUDNZD move. great EA so far after correcting gap counter, TP and BE for 5-digits broker.. lets hope it continues.
+
+--- 帖子 #138 ---
+Namely bcz of the AUDNZD (7 trades open now !) the margin level is down to 200% ... not so far away from the MC ! Yes, of course we may survivethis time, no doubt ! But we won't survive next time ! Personally, not me style of trading .... over and out !
+
+--- 帖子 #139 ---
+Why do we have such serious differences ? That looks really strange ... I would be cynical about such inconsistent behaviour.
+
+--- 帖子 #140 ---
+minus 7 % ... but the point is: the margin level will reach soon the damn 100% .... do you the feel the breath of Death ?
+
+--- 帖子 #141 ---
+minus 8 right now ... can you see the Reaper ?
+
+--- 帖子 #142 ---
+well different demos, different brokers, different feeds, different times the demo was started - all can have a bearing
+
+--- 帖子 #143 ---
+Right man ! So we have no reliability, more a question of luck .... gambling ... ?
+
+--- 帖子 #144 ---
+the best way is increase the gap between 2 trades. i tested near 3 years. finally i identified it. 20 is not good. best value is 58. and multiplication should 1. anybody investigate those areas?
+
+--- 帖子 #145 ---
+.... testing 3 y. even - could you survive the fu...ng black swans using these params ?
+
+--- 帖子 #146 ---
+Actually I tested with mentioned parameters. Result was good and if you can start with cent account you will never loss because you can manager the risk , at the same time you need to check ea behaviors.
+
+--- 帖子 #147 ---
+hi. i get this error, why?
+
+--- 帖子 #148 ---
+Hello to all, these are the results of the EA from last 2 days Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #149 ---
+Hi Given1988, astonishing results you got. why does my EA results differ so much from yours?? mine is a 5 digit broker and I have set Gap of counter trading, TP and BE of single symbol basket to be at 200, 400, 250 respectively. TP and SL i have set each at 5% but considering that the EA has some floating profits and losses that it refused to close these 2 days, I am considering to fix it at 2-3%. TF i am using 1 hour. Any thing different from yours, Given1988?
+
+--- 帖子 #150 ---
+[Quote = menpowerup; 8419293] Ciao Given1988, risultati sorprendenti che hai. Perch il mio risultati EA differiscono cos tanto dalla tua ?? il mio un broker 5 cifre e io ho stabilito Gap di counter trading, TP e BE di singolo simbolo del carrello per essere rispettivamente a 200, 400, 250. TP e SL Ho impostato ciascuno al 5%, ma se si considera che la EA ha alcuni utili e le perdite che si rifiutava di chiudere questi due giorni galleggianti, sto considerando di risolvere il problema al 2-3%. TF Sto usando 1 ora. Qualsiasi cosa diversa dalla tua, Given1988? [/ Quote] the use of graphics M30 with normal settings I increased only lots, my broker is 5 digits but now I have changed some settings to see how it behaves ... the settings I use now are: Attached Image (click to enlarge)
+
+--- 帖子 #151 ---
+赞一个先！
+
+--- 帖子 #152 ---
+@Given1988: 2 days ? That means absolutly nothing ! Use this, like every other, bot at least 2-3 months ... if it will survive 2-3 months ... (But good to see you using a basket SL, althogh 15% is a bit high ? Anyway it's your choice !)
+
+--- 帖子 #153 ---
+sorry but how come you have finished testing this EA? ok are only three days that I try it but so far the results are important, I remind everyone that I changed some parameters to decrease the drawdown ... you can follow my test here http://www.myfxbook.com/members/Dona...-trend/1324461
+
+--- 帖子 #154 ---
+Hey, and those results are only from trading with that EA and your settings? Right? Would be interesting to see how it looks in a month or two. D.
+
+--- 帖子 #155 ---
+nice going so far. what settings are you using to avoid drawdown? thanks
+
+--- 帖子 #156 ---
+Yep that's the point ! Anyway ... let's watch it further ! Who knows, may be we'll see some surprising things ?
+
+--- 帖子 #157 ---
+I think it is a great EA, if you pay attention to important news or to exceptional events the EA may be important, the next week will use it in a real account with little money. Attached Image (click to enlarge)
+
+--- 帖子 #158 ---
+why cant i get it work. help me please
+
+--- 帖子 #159 ---
+is there way to add daily target parameter for this ea and lot size change like 0.02 ?
+
+--- 帖子 #160 ---
+FYI, I've backtested this EA on quite a few settings over various time periods and not seeing any decent results. It looks a little dangerous to me.
+
+--- 帖子 #161 ---
+Oh, gosh, four days trip, just come back, my account is already lose one's beyond recognition. Sorry。
+
+--- 帖子 #162 ---
+both my H1 and m30 accounts are doing really well. 0.2 lot start, 5% basket close
+
+--- 帖子 #163 ---
+your JPY pair has problem when setting tp or sl. I think it's a problem from calculating points. I see sl on GJ go up to 9000 pts. That's crazy
+
+--- 帖子 #164 ---
+Holi crap ! So, what happened ? Looking the trade explorer right now I must say: game over here ?
+
+--- 帖子 #165 ---
+I keep getting this msg in Journal in the MT4 2015.08.07 12:47:30.290 '2407266': order sell 0.20 EURCHF opening at 1.07552 sl: 0.00000 tp: 0.00000 failed [Not enough money] Theres $2200.00 in the account but using H1 time frame
+
+--- 帖子 #166 ---
+it's look good at the beginning did you changed setting or something
+
+--- 帖子 #167 ---
+Yep ! The market conditions did change ... they are now directed "against" the strategy the bot is based on !
+
+--- 帖子 #168 ---
+It seems I should continue to improve the robot again. I hope you can help
+
+--- 帖子 #169 ---
+I' m running 2 demo accounts on M30. One with martingale and basket SL. Took a limited hit last week but nothing unbearable. Another with no martingale and basket SL. Doing well.
+
+--- 帖子 #170 ---
+I can forward you my whole source code for my ea which include recovery, sortof selective martingale. Here is my thread http://www.forexfactory.com/showthre...480917&amp;page=22 There are a couple people running live account for this. (thanks to them!)
+
+--- 帖子 #171 ---
+Today running this EA with a profit of 100 euro with lotsize 0.1 on demo. I only trade the 8 biggest pairs.
+
+--- 帖子 #172 ---
+Day 05/08 to 10/08 the day and made $ 30 profit, and has even opened orders with $ -40 loss, in a $ 500 demo account with lot 0:01 watch images:
+
+--- 帖子 #173 ---
+Hi Kaixinjili, Can you share the time indicator? Thx.
+
+--- 帖子 #174 ---
+What are those pairs?
+
+--- 帖子 #175 ---
+Your approach may be a reference for everyone. Do you mind sharing your experience?
+
+--- 帖子 #176 ---
+At this moment I have 120 euro profit only last night and the day must begin. I use the following pairs: audusd eurusd usdjpy usdcad eurgbp gbpusd Adn the following settings: Attached Image
+
+--- 帖子 #177 ---
+Look the trade explorer above: Game over here - accept it at the end !!
+
+--- 帖子 #178 ---
+Attached Image (click to enlarge) With no martingale.
+
+--- 帖子 #179 ---
+OK bro that looks good ! So post your fully settings for the EA bringing these fine results !
+
+--- 帖子 #180 ---
+I close this day with 168 profit and no open orders. Let's see what happens the next day. Settings and which pairs you can find a few posts above.
+
+--- 帖子 #181 ---
+Default setting + no martingale + 5% basket SL and TP. Still early to have any conclusion but definitely better that martingale and no basket SL IMO.
+
+--- 帖子 #182 ---
+Hi Fbird, May I know what is the "no martingle" setting? Josh
+
+--- 帖子 #183 ---
+Here is the result of test on M1 and M30 It is a 5 digit broker. Notice that the gap on the setfile has additional 0. Keep testing.
+
+--- 帖子 #184 ---
+HI, EVERYONE Sorry, my account is over. Parameter settings need to be adjusted: Lots, Counter trading, Basket TP&amp;SL must match, to get good results. Good Luck, everyone
+
+--- 帖子 #185 ---
+After 2 good days, My account is also over. My profit today was again around the 150 euro, but now I have open trades for 2000.
+
+--- 帖子 #186 ---
+my H1 demo is still going strong, started couple weeks back
+
+--- 帖子 #187 ---
+And what is your max dd?
+
+--- 帖子 #188 ---
+M1 Trades using M1 set file posted earlier
+
+--- 帖子 #189 ---
+Guys ! You may have a good time, a good period, with promising results - no doubt ! However, after that nice time the day will become you loose your shirt ! Look the trade explorer above - would you really put any real money into a bot trading like this ? All these grid trader may perhaps work for someone, BUT you have to watch all the trades close and all the time plus you must have enough experience for manual interventions at the right time !!! That's not easy !!!!!!
+
+--- 帖子 #190 ---
+please see myfxbook here, 22 pairs: https://www.myfxbook.com/portfolio/n...-v2-h1/1334791 Attached File(s) new tdi h1set.txt &lt; 1 KB | 586 downloads
+
+--- 帖子 #191 ---
+What pairs are u trading with m1?
+
+--- 帖子 #192 ---
+Thx blamshakk for the link and especially for the setfile ! That looks good all in all. Perhaps you showed new hope + chances ? Looking your MFXB results, presumably I could this baby a new try.
+
+--- 帖子 #193 ---
+Hi,yczzd! Have you finished,We are looking forward to it.
+
+--- 帖子 #194 ---
+Hello, your system is good, if you could go there the mq4 could work to improve results
+
+--- 帖子 #195 ---
+Still not finished. This period of time official busy, there has been no free time, but the overall project to complete 70%.
+
+--- 帖子 #196 ---
+Thank you, Given1988. I made a little adjustment to the EA: 1 reduce the number of reverse transactions; 2 to increase the reverse transaction between 50 points; 3 remove CounterLotMulti; 4 increase in a single currency to stop; 5 It expands the scope of Level, reduces the chance of trading, and improves the success rate. The latest version of v2.1, see annex. 1# post at the same time update. IMPORTANT: Of course, the parameters of the EA also have to be repeated testing, to get the results for you. IN ADDITION: In order not to affect the confidence of the new entrants, I removed the previous Trade Explorers. Attached File(s) new TDI method v2.1.mq4 24 KB | 906 downloads
+
+--- 帖子 #197 ---
+The M1 and M30 setfiles are identical, correct?
+
+--- 帖子 #198 ---
+Not much different. The main difference - gap- BE- TP
+
+--- 帖子 #199 ---
+When I open the two files in word pad, they appear to be identical. Correct me, if I'm wrong.
+
+--- 帖子 #200 ---
+May I suggest to pay attention to the following when testing/using this EA: - Pay attention to volatility (Example:ADR) of pairs, different pair has different volatility and may need different setting of Counter trend gap, position sizing, and TP value. - Pay attention to baskets of pairs that you choose, example if you have several pair under GBP, once the currency goes oversold a lot and triggers buy, you might have several GBP pairs triggered at the same time, eg GBPJPY, GBPAUD, GBPCHF.... this will increase the exposure to a single currency and might cause serious drawdown. - In my opinion, for those using higher TF for this EA, I suggest for highly trending pairs to set "only long" or "only short" following the long term trend, this will reduce the chance of counter trend + martingale (For those still using counter trend setting) Regards, Clive
+
+--- 帖子 #201 ---
+Excuse me, the default setting is five digit broker?
+
+--- 帖子 #202 ---
+can anybody help me i cant make it work thanks
+
+--- 帖子 #203 ---
+right click on graph&gt; Expert Advisors&gt; Prperties&gt; under Common tab, make sure "Allow live trading" box is ticked. Also check your MT4 window, there should be a Auto Trading tab, next to New Order. Make sure it is pressed too.
+
+--- 帖子 #204 ---
+thanks it worked
+
+--- 帖子 #205 ---
+Yczzd Hello, I wanted to thank you for sharing the mq4, after studying it I noticed some mistakes in version 2.1, and in the version 2.0 with some modifications could be better, for not working from scratch on version 2.0, you can also have the mq4 version 2.0? Thank you
+
+--- 帖子 #206 ---
+result of version 2.0 from 31.07.2015 to date 18.08.2015 at $ 500 with lot account 0.01, now changing to version 2.1 and follow the tests, thanks for sharing Zuodong Zheng
+
+--- 帖子 #207 ---
+The Ea got very great potential, i have been running back test for this year for me to examine maximum drawdown and preferred lot size, so far it's been good, but it doesn't seem to break the month of June ane July this year, good someone be kind enough in their time, to backtest the ea on EurUsd in the month of June and July. Regards, Festus
+
+--- 帖子 #208 ---
+May I know what was the pair you tested, setting / set file, time frame and broker ?
+
+--- 帖子 #209 ---
+Here's the full report
+
+--- 帖子 #210 ---
+Hi,Blam You are welcome. Attached File(s) new TDI method v2.0.mq4 25 KB | 670 downloads
+
+--- 帖子 #211 ---
+Hi，everyone Here is the result of the v2.1 version of the last week. In the demo account. In the future, I'm not going to update this EA. I will try my best to complete another new integrated version. Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #212 ---
+Hi，Brothers Future versions will be like this. Attached Image (click to enlarge)
+
+--- 帖子 #213 ---
+hi yvzzd, what are the settings you use for your test version 2.1?
+
+--- 帖子 #214 ---
+can you share it with us?
+
+--- 帖子 #215 ---
+hello, 我是taiwan 人 is there anyway i can contact you ? keep up with your EA!!
+
+--- 帖子 #216 ---
+Hi Yczzd: Thank you for your contribution. Can you provide the version 2.1 settings that you test? by the way Can you also give us newTDI_db this ea? 謝謝 Yczzd的貢獻 能不能請你提供2.1的setting 檔案以及 newTDI_db 這個EA?
+
+--- 帖子 #217 ---
+Many thanks
+
+--- 帖子 #218 ---
+result of yesterday to today was evil, first test with the version 2.1 think it needs adjustments
+
+--- 帖子 #219 ---
+One important question to adjustments: If I do change the lot entry size, which other parameters I do have to change also? Because I have good backtest on 0.1 lot size, but when I change it to 0.01 lot, the profit should be divided with 10 also. But it is not so (...so I need to know which other parameters need to be adjusted as well. Please who experienced and knows the parameter explanations can help me? Thanks to all edit in example: extern int SinglePairTP = 40; //TP of Single Symbol Basket is that dolars or pips.....I need to know if I cahnge from 0.1 lots enter to 0.01 lots enter, which other parameters need to be changed? Thank for helping me..
+
+--- 帖子 #220 ---
+I think a great idea to know which batch use, with batch of 0.01 fared well, put 0.02 in version 2.1 and was evil
+
+--- 帖子 #221 ---
+sorry for my English
+
+--- 帖子 #222 ---
+I've noticed from several single-pair demos, that the EA always closes out multi-level trades for a loss or BE. It never reaches TP before closing(and it doesn't matter what the TP is set to in the EA). Is this normal?
+
+--- 帖子 #223 ---
+Hi Given1988, Did you modify version 2.1? If did , can share ? Thank.
+
+--- 帖子 #224 ---
+I updated the EA newTDImethod VER2.0. 1.Add MagicNum 2.Add usefixlots parameter Who can help to backtest 90% and post the test report? Thank. @yczzd 能加个QQ吗，请教几个问题。 我的QQ939008551，共同交流进步
+
+--- 帖子 #225 ---
+Where is everyone?
+
+--- 帖子 #226 ---
+was doing well v2.0 H1 demo (almost doubled account in a month) but got wiped out by black monday. i dont this is a fair indictment of the system which has potential. will restart a fresh demo on for monday
+
+--- 帖子 #227 ---
+I think it is a fair indictment, bcz events like these fucking black mondays may ocure at every time anew, again and again !! And you never ever know when it will happen, infact you can't predict the black swans ............
+
+--- 帖子 #228 ---
+What filters condition added better? The 21EMA is ok?
+
+--- 帖子 #229 ---
+You are 100% right, bcz of this i follows 1. Use stop loss 2. Don't increase the lot size even after 200/300 % profit. 3. Withdraw the initial deposit as soon as possible after making profit.
+
+--- 帖子 #230 ---
+Hi Zuodong, Can you modify my TDI divergence indicator attached? seems like sometimes the capture of divergence does not work. Please see screenshot attached. Thanks. Attached Image (click to enlarge)
+
+--- 帖子 #231 ---
+Hi What not show Basket
+
+--- 帖子 #232 ---
+Hi Yczzd... Do u run it with default setting or use any other setting???? Pls share ur set file also.... Another question, Do i need to set this EA on separate pair..... Or it can open trade of various pair even it set on one pair???
+
+--- 帖子 #233 ---
+Dear Yczzd, good morning First of all thanks for your generosity in sharing your work, I would ask you please share market hours indicator, which appears in the sub window. Very thankful Bravo7
+
+--- 帖子 #234 ---
+my default setting Attached Image (click to enlarge) Btw, the EA only work on one pair.
+
+--- 帖子 #235 ---
+Sorry, Bravo That isnt a indicator. it is in EA programming.
+
+--- 帖子 #236 ---
+Hi,yczzd. I found a bug in your EA(v2.1) program. line34: extern int BreakevenPips = 25; //Breakeven Point of Single Symbol Basket line 199: if(SinglePairTradeNum&gt;0 &amp;&amp; SinglePairBE==false &amp;&amp; PairProfit&gt;=BreakevenPips ) Are you sure " PairProfit&gt;=BreakevenPips " right? Unit of PairProfit is US Dollar(maybe), Unit of BreakevenPisp is point. Can you compare it with different units?
+
+--- 帖子 #237 ---
+Hi yczzd Possible explain
+
+--- 帖子 #238 ---
+Hi Why not me . This Basket
+
+--- 帖子 #239 ---
+hey yczzd any updates on the dashboard?
+
+--- 帖子 #240 ---
+Haha....good one
+
+--- 帖子 #241 ---
+在这里看到自己人，真是太兴奋了。 TDI这个指标我也关注了很久了，也使用了一段时间了，希望在这里能学到更多！ 谢谢题注的付出。希望有一个共同的平台，比如qq群，可以方便国人之间交流这个TDI Thank u
+
+--- 帖子 #243 ---
+how many chinese are wandering in this forum? and how many are contributing ? do we really need an additional group to do all the discussion ? or just here is quite enough ? because here there are serious people from differnt countries to share to communicate rather than messy chinese native forums which are full of advertises and frauds ...
+
+--- 帖子 #244 ---
+u are quite right.thank u for your advice.
+
+--- 帖子 #245 ---
+I'm sorry, my friends. Because of my time is very limited, the upgrade and perfection of this EA has not been completed. But I would like to publish it first, so that we give it a test. Major improvements in the new version: 1 interface to the panel, more information and more intuitive; 2 adds a news trading strategy that makes it a dual strategy for EA; Possible problems: After the basket was closed, the program was suspended, probably the problem of array computing is being excluded. The SL and TP of the news trade module may need to be improved. See the next post in detail First post updated at same time Attached File(s) News_TDI_Double_Strategy_EA.mq4 60 KB | 732 downloads
+
+--- 帖子 #246 ---
+shot1 Attached Image (click to enlarge) Brief description max profit: Maximum profit and time in the process of running the program min profit: Minimum profit and time in the process of running the program close all: Manually close all orders pips: Pips from the opening price of the day imp: Important influence level of news, divided into high, medium and low(only display High and Medium impact news less than 12hours ) counterdown: The rest of the time the news release currency: The currency of the news atr5: ATR indicator, period is 5, TF is D1， Will be used as a stop loss TSL,RPL,etc: TDI indicator value of red line and green line Left lower corner: 10 news events that will be released recently Good luck
+
+--- 帖子 #247 ---
+Parameter setting Attached Image (click to enlarge) Attached Image (click to enlarge) input string style ="===== Trading Style ====="; input ENUM_TST TradingStyle =2; //=0 is OBOS; =1 is Trend; =2 is News （=1 trend no code yet. ) input string news ="===== News Pending Trading Setup====="; input int SecondBeforeNews=90; //Pending order Time(second) before Red news post input int PendOrderGapPips=10; //Gaps of Pending placed away price of current input double NewsTPinDollars =50; (when UseMM=true, TP is calculated auto) input double RiskMoneyPercent=3; //Percentage equity loss for each trade,0 means fix_lots (advise 1%-3%) input double RiskRatio =0; //Reward/risk ratio, 0 means use ATR to stoploss input bool UseMM =true; //Auto calculate Lot,TP,SL input bool FilterUseCC =true; //Use Currency Strength Filter (coding still) good luck yczzd
+
+--- 帖子 #248 ---
+thanks
+
+--- 帖子 #249 ---
+perfect effort. im testing
+
+--- 帖子 #250 ---
+Thanks Trading happiness yczzd
+
+--- 帖子 #251 ---
+Hello everyone. Somebody have this indi? Thanks in advance BR Attached Image
+
+--- 帖子 #252 ---
+here it is
+
+--- 帖子 #253 ---
+Thanks olvus
+
+--- 帖子 #254 ---
+Hi, everybody The latest version of debugging is completed, released for testing. The EA contains two separate trading strategies: 1) TDI method. The method follows the previous trading ideas, the refinement and refinement, eliminating a number of small bug. 2) News trading methods. Contains two trading module. a) news release before 1 minute, in the current price above and below 10 points placed two pending buystop and sellsstop; b) use news released before the currency's strength(Filter used CC) to confirm the price movements direction, create a market order directly。 Good luck Attached Image (click to enlarge) EX4 Attachment Attached File(s) News_TDI_Double_Strategy_EA.ex4 186 KB | 1,053 downloads yczzd
+
+--- 帖子 #255 ---
+you have given such a great effort to develop this ea. Congratzz. will see result. I have put it to my vps. let see how its work. I have on news filter and currency strength meter.
+
+--- 帖子 #256 ---
+Thanks. Have a good trading zzd
+
+--- 帖子 #257 ---
+Just passing by but very impressed by your work and sharing . I just have to say thanks and for this simply fantastic job. My inputs are 1) For the the TDI method, this EA will work great during Asian trading session with news filter for pairs having upcoming news within say 5 hours time ( well this will effectively eliminate trading JPY and AUD pairs during that session). While the news trading method can be applied at the same time to pairs with news. 2) For the pending order method of news trading, the reality is that, due to slippage, spread widening, broker manipulation leading to the problem of entry price being substantially worst than the desired entry at news time, such a good strategy may not yield the desired result. A way to help the problem of entry price being substantially worst than the desired entry at news time, is to make a choice for the EA to immediately close out trades on pairs where the actual entry is x pips beyond the placed pending order thereby leaving only trades on the pairs with " good " entry running. 3) Inculcate these indicators vertex and deseert with the TDI cross entry condition which the EA presently uses. Thanks once more.
+
+--- 帖子 #258 ---
+[Attached is a better version of the bressert indy. I uploaded the Need 4 speed indy it will be great to have its values added up for several pairs about 3 minutes before a news event then make the entry based on the bull/bear higher value.
+
+--- 帖子 #259 ---
+anyone demoing this?
+
+--- 帖子 #260 ---
+can you share mql4 file?
+
+--- 帖子 #261 ---
+Hi, everyone！ Attached is the latest version of .mq4 file， Hope to feedback your use of experience or improve suggestions。 Good lucky! Attached File(s) News_TDI_Double_Strategy_EA.mq4 83 KB | 845 downloads
+
+--- 帖子 #262 ---
+Thanks bro...
+
+--- 帖子 #263 ---
+Thanks. Bressert indy is far better than tdi so please add the improved breesert indy which I posted earlier.
+
+--- 帖子 #264 ---
+Hello yzccd I like the News TDI Double Strategy EA, it works great on demo, but when i try it on a live account, i get "off quote" errors .
+
+--- 帖子 #265 ---
+Is there any Plans for an EA on the original TDI? I still prefer this Indicator....The weakness is the absence of EA
+
+--- 帖子 #266 ---
+thanks for posting yczzd. is it best to use default settings also can you tell us the difference between the two demo accounts on your trade explorers? many thanks
+
+--- 帖子 #267 ---
+Hi, pitcher I'm sorry, I don't know what's going on. In the program, I do not have any restrictions. Please check it carefully.
+
+--- 帖子 #268 ---
+Hi, blamshakk The first one is the TDI trading, the second is the news event trading mode
+
+--- 帖子 #269 ---
+so is one of them TDI and new combined, and the other is just news? or is one of them just TDI, and the other is just news. sorry for the confusion I cannot seem to find the setting which switches off one and switches off the other, please advise thanks
+
+--- 帖子 #270 ---
+Blamshak The two strategies can only be used independently. In Trading Style setup 0: TDI(OBOS) mode; 1: Trend mode;(not used) 2: News mode;
+
+--- 帖子 #271 ---
+thanks for clarification. maybe i think you should rename obos mode to TDI mode to make it clearer, small cosmetic fix will try the news mode
+
+--- 帖子 #272 ---
+Good Day all,Im getting multible openings of the same pair,max counter trading set to 3.Which other paramater should I adjust? Thanks
+
+--- 帖子 #273 ---
+One more thing do I just need to tick 'Allow DLL imports' or allow import of external experts or both?
+
+--- 帖子 #274 ---
+Hi，mastercraft. Please refer to the description of the following parameters: input string tm ="===== Trading Manage ====="; input double Lots =0.1; //Fix lots input int CounterTradeMax =5; //Max number of Counter Trading input int CounterTradeGap =30; //Gap of Counter Trading in Pips,x10 for 5 digits input double CounterLotMulti =1; //Multi of Lot for Counter Trading input int SignalLevelUP =70; //Level of OverBought input int SignalLevelDN =30; //Level of OverSell
+
+--- 帖子 #275 ---
+你好，我也是中国的，希望能够多多学习和交流。
+
+--- 帖子 #276 ---
+​你好，请多指教！可以加入微信群（搜索“啊菄微”加入，里面有好几个朋友） Hi，please advise！
+
+--- 帖子 #277 ---
+你好， 搜索不到。
+
+--- 帖子 #278 ---
+[quote=yczzd;8559036]{quote} ​你好，请多指教！可以加入微信群（搜索啊菄微加入，里面有好几个朋友） Hi，please advise！ 是啊，搜不到。
+
+--- 帖子 #279 ---
+I dont have any numbers in the table..... Anyone has the same problem? Thanks for sharing mate
+
+--- 帖子 #280 ---
+[quote=Jordanlc;8559192] 在我私人信箱里留下微信号或手机号。​ Leave a number of WEIXIN or mobile phone in my private mail box.
+
+--- 帖子 #281 ---
+yczzd thanks again for the EA, just had my first (and profitable) set of trades on the NZD trade balance news. couple of questions - i've set the trade size @ 0.2 lots but all trades taken were 0.01 lots. please see screenshot for my settings. also, the figures displayed on the IMP/Countdown/Currency columns are occasionally disappearing. It was worse yesterday, and no trades were taken, I dont know if there is a correlation? running on a Global Prime demo with history force loaded. any advice would be much appreciated Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #282 ---
+Hi, blamshakk 1. About lots: is my mistake. first redownload attachment, second, UseMM set to false. 2. News disappearing: there is not correlation. Just to update, a few seconds to recover. Attached File(s) News_TDI_Double_Strategy_EA.mq4 83 KB | 1,152 downloads
+
+--- 帖子 #283 ---
+Hi Yczzd, Good day, thanks for the EA. After I installed in MT4, I'm getting this message. Attached Image (click to enlarge) Please guide me? Another question, can this EA used for OBOS and Trend? Looking forward for your reply. Regards,
+
+--- 帖子 #284 ---
+thanks man
+
+--- 帖子 #285 ---
+same here, not quite sure what went wrong....
+
+--- 帖子 #286 ---
+hey yczzd sorry to be a nuisance, and i'm not sure that this affects the trade, but on the world clock indicator on the bottom right of the screen it says london time is 9.25am, when it's actually 8.25am here in london local time. broker time is correct as GMT +2 10.25am : Attached Image
+
+--- 帖子 #287 ---
+Sorry Jay, the reasons for Zero divide, I'm not sure. Maybe it's because of the 5 decimal places. Another, this EA used OBOS and News double strategies.
+
+--- 帖子 #288 ---
+Yes, you are right. Because London and brokers have just cancelled the daylight saving time (2015-10-25), therefore, you will need a slightly modified parameter table: your Broker GMT Offset, and DST set to false another, Newyork cancelled the daylight saving time is 2015-11-01, so displayed Newyork time is correct untill 2015-11-1.
+
+--- 帖子 #289 ---
+ah that was it thanks, it was the DST setting oh and this has not made a losing trade yet in 2 days of operation (news mode) one thing im wondering is that i do not see pending trades set - do those happen invisibly or is it straight to market orders?
+
+--- 帖子 #290 ---
+hey jay280584 for zero divide, you should usually make sure you have enough history loaded by running this script attached on any chart. usually takes about 10 - 15 min or so to run. then you can try restarting your platform regards
+
+--- 帖子 #291 ---
+input bool FilterUseCC =true; //Use Currency Strength Filter and Market Orders Set it to false, then Executive pending order.
+
+--- 帖子 #292 ---
+Good Day all I really dont know how to fix this in spite of YCZZDs instructions to go over the parameters.I still getting one pair opening 2,3 or 4 times at the same time.Can anyone help? Thanks
+
+--- 帖子 #293 ---
+Hi Yczzd, Thanks the issue solved. I've activate this EA for EU and GB pair using OBOS method. I'll update the result later. Regards,
+
+--- 帖子 #294 ---
+Hi, mastercraft Attachment is my setup file for news trading. only set Trade Style to 0 if you want trading TDI(OBOS), try it, good luck. Attached File(s) NewsTradeSetupFile.txt &lt; 1 KB | 759 downloads
+
+--- 帖子 #295 ---
+Thanks YCZZD i have it set to those parameters but it just happened again cad/jpy just opened 6 positions at the same time in OBOS I cant seem to fix it!!
+
+--- 帖子 #296 ---
+Ok i think it was the gap of counter trading needing another Zero
+
+--- 帖子 #297 ---
+You should gap*10 if your broker is 5digits. Have a good trading.
+
+--- 帖子 #298 ---
+hello guys why that order not show up?and is openning that trade no matter what tdi type i set. update: fixxed after restart mt4
+
+--- 帖子 #299 ---
+Must be the same EA and the same comment。
+
+--- 帖子 #300 ---
+is ok now after i restarted and loaded again. thx for answer. made some of 40 $ over night.i closed at LO the basket manual.
+
+--- 帖子 #286 ---
+Pretty good。 However, I do not use Pending orders mode, I use a market order entery.
+
+--- 帖子 #287 ---
+Hi Yczzd and all! Thank you for your great contribution. I am wondering whether anyone is getting good results with the new version of the EA, and if yes, if you could share your settings. Also, the dashboard is great, but I need a visual tip on what the EA is doing... Thanks again!!
+
+--- 帖子 #288 ---
+Hi Yczzd! The "CLOSE ALL" b utton is not work in my mt4.
+
+--- 帖子 #289 ---
+ZD, thanks for your contribution. Though I did not used EA before, and do not know how to use it. Still hope this thread will not sink. Hope more and more compatriot could share their methods and experiences. Please add my WX: Saionbus-Lin
+
+--- 帖子 #290 ---
+Thanks for share this ea, anyway any chance to add trailing stop function?
+
+--- 帖子 #291 ---
+Hey YCZZD! How's things? Are you still working on this EA?
+
+--- 帖子 #292 ---
+I can't get any version of this EA to backtest, what am I missing? It just zips through the tick data super fast but makes no trades and gives no errors.
+
+--- 帖子 #293 ---
+Hi everybody: This was a very interesting thread i have ever encountered , why it has been discontinued, YCZZD is so generous in sharing his great effort and intelligence with others ,i wonder why he left this thread , and if he is working still active in any other thread???
+
+--- 帖子 #294 ---
+All the BT failed on the early version. It said critical error on the EA. On the last version it doesn't make any open order.
+
+--- 帖子 #295 ---
+Good afternoon, anyone who can continue with this system?
+
+--- 帖子 #296 ---
+Hi, What is with this EA wrong? First day of my tests an EA catch 6x TP.
+
+--- 帖子 #297 ---
+Hello can u add tp sl and trailing in pips mode not percentage Also invalid lots amount can u fix it
+
+--- 帖子 #298 ---
+Good afternoon, anyone who can continue with this system?
+
+--- 帖子 #299 ---
+Bug error Fixed news calendar! By luiz Moura Progrmamer! Like FOFO: UPdated
+
+--- 帖子 #300 ---
+thank you i m testing it i notice that missing a trend filter , a long trend filler
+
+--- 帖子 #301 ---
+Please someone added the after double top or double botton the confirmation for open the trades? and alert bos msg also push cellphone notification
+
+--- 帖子 #302 ---
+Please can you add the after double top or double botton the confirmation for open the trades? and alert bos msg also push cellphone notification
+
+--- 帖子 #303 ---
+What's the news Indy please?
+
+--- 帖子 #304 ---
+I read this thread with a lot of enthusiasm thinking this might be a good EA. Sadly it abruptly stopped. Is anybody out there that is willing to revive this and enhance this EA? I am a willing and able tester, but not a developer.
+
+
+===== 附件下载链接 =====
+

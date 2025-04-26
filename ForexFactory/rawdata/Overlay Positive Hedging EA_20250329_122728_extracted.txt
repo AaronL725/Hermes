@@ -1,0 +1,1151 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hi. I found this EA on another medium. Below is a description given by the author. I am just starting to experiment with this and will post my results. INTRODUCTION This technique was introduced by the fellow’s traders Meet Joe Black, Maidin and several others (sorry if their names are not mentioned here) in the other forum. To acknowledge their contributions I would like to thank and congratulate to all those involved in the development of this trading technique. The technique can be briefly explained as follows: 1. CONCEPTS a) Usually, a few of the forex instruments (symbols), so called pairs in a plain language move in line with the other pair. For example GBPUSD (GU) and EURUSD (EU), often move in the same direction. However, some of them move in the opposite direction such as EURUSD with USDCHF. A couple of pairs that move in the identical direction is said to have a positive correlation, while couples move in opposite direction are negatively correlated. If we simultaneously enter the market by buying GU and selling EU at the same time, we were in position of hedging or so called locking b) Although GU and the EU usually move in the same direction, its movement distance in pip between GU and EU is differ. Generally, based on the past records, movement of GU is bigger than EU. In order to balance the movement of these pairs in monetary value, let say in the USD currency, we use the ratio of Average Daily Range (ADR) between these pairs to determine the number of lots to be used during trading. The average ratio of ADR of the EU over GU in the period of the last 365 days is approximately 0.8. This means, if GU moves in a day by 200 pips, the EU is expected to move a total of 160 (= 0.8x200) pips. To get a proper balance of hedging in the USD, we use a smaller lot in GU. If we trade EU with 1.0 lot, then the traded lot for GU should be 0.8 lot, which is a result of ADR ratio (0.8) multiply with traded lot in EU (1.0 lot). 2. ENTRY AND EXIT Although most of the time GU and EU usually move in tandem, there are certain situations cause the trend of GU is opposite with the trend of EU. When the pairs are moving contrary, the number of pips of movement to the contrary is called the gap. We can enter the market when the gap for the movement in the opposite direction between the GU and the EU is significantly bigger (minimum recommended gap is 100 pips). Let say at the time the 100 pip gap is occurred, trend of GU is up and trend of EU is down, then we are advised to enter the market by selling GU and buying EU simultaneously (if movement of GU is downtrend and oppositely the movement of EU is uptrend, we will buy GU and sell EU). When GU and EU are beginning to move back in similar direction (or is said to close the gap), our open posts are believed to be in the profit territory, and we should be out of the market. To close the gap from previous situation which is GU is upward and EU is downward, GU must go down, and the EU have to go up, or GU has to move down substantially, or another possibility is the EU has to move up substantially. Numbers of individual lots recommended to be used for Pair 1 (let say GU, for GU-EU couple) in the market are based on the ADR ratio between the two pairs. So if we are using 1 lot for EU, then we suppose to use 0.8 lot for GU. 3. TAKE PROFIT (TP) AND STOP LOSS (SL) All the open posts in this technique use the Open TP and open SL. You have to float the posts until the floating pips or the profit in USD value from these two pairs become positive. 4. WHAT TO DO IF FLOATING DISTANCE (GAP) IS GROWING? If the market against your opened positions, you can enter new posts of GU and EU for the second time (We name it as second layer of your posts) and so on for every increment of floating loss at certain distance (measured in pips). For GU with EU combination, the recommended distance for each layer is 100 pips. If your pairs at the last layer accumulate a net profit (recommended between 100-50pip), you should close these profitable posts and float the others. 5. EQUITY MANAGEMENT OR MONEY MANAGEMENT (MM) For equity 1k USD, each layer should use a size of lot of 0.05 units to 0.1 units. (A traded lot of 0.1 units usually called as 10 cents, which a movement of 1 pip is equivalent of 10 cent in the value of money). If a lot of 10 cents in size is used in the trading, your account should be able to sustain in the market to the floating loss at least at 10 layers or 1000 pip loss. 6. PURPOSE OF THE THREAD To facilitate a manual trading, a robot called Overlay Positive Hedging has been developed. Since the robot is still under testing and development phase, I open this thread mainly for sharing its setting, ideas, errors-debugging, or what ever thing that can improve its function as well as its performance. Any suggestions to modify or upgrade the robot are very much welcomed. Discussion in this thread should be focused on developing the robot. The developed robot that can be used in a forward test for verifying the technique is a profitable method or to monitor its drawdown. Back test for the robot can not be carry out as it involves two different pairs This robot is based on overlay hedging technique. It may be used for couples of pairs which have a positive correlation pair (example the GU with EU) 7. SETTING Settings for parameters used by this robot are as follows: Chart If you want to trade a two way (overlay hedging) on a couple of GBPUSD-EURUSD, the robot should be installed on both charts, which are GU chart and EU chart. The robot should be placed in the chart of Pair 1 (GBPUSD), and a same robot in the chart of Pair 2 (EURUSD). If you are trading is only one way only, put the robot in one chart only, either in chart of Pair 1 (GBPUSD ) or Chart of Pair 2 (EURUSD) Time Frame The robot can be placed on any time frame. However D1 timeframe of the charts belong to the traded pair has to updated. This is necessary for proper ADR ratio calculation by the robot. Two-way trading (overlay hedging) For a two-way trading or called overlay hedging (traditional hedging). Two Robot’s parameters must be set as follows: 1. In the chart of Pair 1 (let say GBPUSD): a. TradeCouple1 = true b. TradeCouple2 = false 2. In chart of Pair 2 (let say EURUSD): a. TradeCouple1 = false b. TradeCouple2 = true One-way trading (overlay) Put the robot in one of the chart (either chart of Pair 1 or chart of Pair 2). If you want to buy Pair 1 and sell Pair 2, set the robot’s parameters as follows a. TradeCouple1 = true b. TradeCouple2 = false OR, if you want to sell Pair 1 and buy Pair 2, set the robot’s parameters as follows a. TradeCouple1 = false b. TradeCouple2 = true Robot Parameter Setting 1. Lots = 0.1 Number of lots for the second Pair (Pair 2). Suppose the setting is Pair 1 and Pair 2 is GU and EU, respectively. Lot used by the first Pair (Pair 1) depends on the ratio of Average Daily Range (ADR) between the two pair. Suppose the parameter settings for” Lots” is 0.1, thus Lot used for Pair 1, which is GU is “Lots” multiply with ADR ratio = 0.1 x 0.8 = 0.08 units. Lot for Pair 2, which is EU = “Lots” = 0.1 units 2. LayerDistance = 100 Distance in pip between each layer or level to open the next a couple of posts at the new Layer. 3. UseTakeProfitByPip = true If you want to close your posts by pip acquired, set this parameter to TRUE. Otherwise FALSE if not used. 4. TakeProfit = 80 To define total profit in pips of the Pair 1 plus Pair 2 at the last layer. Once the couple of pairs acquired the defined profit in pips, the robot will close the posts at the last layer. 5. UseTakeProfitByUSD = false If you want to close your posts defined by value of money in USD, set this parameter to TRUE. Otherwise FALSE if not used. 6. TakeProfitInUSD = 100 To define total net profit in USD from Pair 1 plus Pair 2 at the last layer. Once the couple of pairs acquired the defined profit in USD, the robot will close the posts at the last layer 7. MaximumLayer = 5 Maximum layer or level to be opened by the robot. There is no specific number for the maximum layer. 8. Pair1 = GBPUSD A full name of symbol or pair for Pair 1. Pair 1 must have a larger ADR than Pair 2. 9. Pair2 = EURUSD A full name of symbol or pair for Pair 2. Pair 2 must have a smaller ADR than Pair 1 10. Note1 = "Couple 1: Buy Pair1 Sell Pair2" A reminder note that “Couple 1” is to enter a Buy for Pair 1and Sell for Pair 2. 11. Note2 = "Couple 2: Sell Pair1 Buy Pair2" A reminder note that “Couple 2” is to enter a sell for Pair 1 and a buy for Pair 2. 12. TradeCouple1 = true If you want a trading by buying Pair 1 and Selling Pair 2, set this parameter TRUE. 13. TradeCouple2 = false. If you want a trading by selling Pair 1 and Buying Pair 2, set this parameter TRUE. 14. ADR_Day = 365 To define a number of days to calculate the Average Daily Range. Subsequently, the robot used the calculated ADR for obtaining a ratio of ADR between Pair 2 with Pair 1 15. UseManual_ADR_Ratio = true If you want no of lot of Pair 1 is calculated based on parameters set by the ADR_Ratio, set this parameter to TRUE. Otherwise, the robot will determine ADR ratio by its own. 16. ADR_Ratio = 0.8 This is ADR ratio between Pair 2 and Pair 1. If UseManual_ADR_Ratio = true, this ratio is used to calculate a traded lot for Pair 1. 17. MagicNo = 90000 Couple identification number for each couple of pairs. For instance, if you want to trade a couple of GU-EU, this number suppose to be set similar in the GU and EU chart. If a different couple is to be used in trading, for example a couple of AUDUSD-NZDUSD, you have to change the parameter into other numbers, such as 90001. Use the same number for the parameter in both charts AUDUSD and NZDUSD. See Overlay indicator to visualize overlays. http://www.forexfactory.com/showthread.php?t=158161 Not sure what kind of Overlay the EA is using. EDIT: 5/11/12 Thanks to the efforts of KingHigh, we have a readable translation of the original .ex4 decompile. Edit 5/14/2012: Bug removed from KingHigh's translation. Damn, does that sound Biblical or what? Edit 5/16/2012 Version 3: Bug in SendSell(...) regarding return(Ticket) fixed, KingHigh. Edit 5/17/2012: Set files for my local PC version settings attached. Recommended initially by Paulss DISCLAIMER: THIS THREAD HAS GROWN QUICKLY. THE EARLY RESULTS SEEM POSITIVE, BUT USE THIS LIVE AT YOUR OWN RISK. THE THREAD AUTHOR NOR ANY OF ITS PARTICIPANTS SHALL BE HELD LIABLE FOR ANY LOSSES INCURRED THROUGH THE USE OF THIS EA ON LIVE MONEY.
+
+--- 帖子 #2 ---
+interesting concepts...will play the ea
+
+--- 帖子 #3 ---
+The whole key in this system is to recognize when correlations starts to change and act as needed. Use the attached to see the correlation difference compared to the charted pair. Most of the overlay indicators for MT really suck. Pro-realtime has great overlays, but its overpriced. Anyway, if nothing else this EA is a starting point, let's see what happens.
+
+--- 帖子 #4 ---
+i tried backtest ea default settings - posted error
+
+--- 帖子 #5 ---
+Hi. The author mentioned it can't be backtested because it has to trade in 2 pairs at the same time. I got awful results overnight on 5 min TF with more or less default settings. Trying it now on 15min. This thing certainly takes a lot of trades, it's too bad an indicator wasn't provided with the EA, so the logic can be better understood. There is no IP protection on this, so anyone out there feel free to decompile the ex4 and post. I will do the same. Edit: by default the hedge ratio is set 1 EU to .8 GU. It's obvious this needs to be adjusted so i set the manual hedge setting to false so i think it should use the adr to calculate it now. Still testing on Finfx, set the TP to 10 for now. Will experiment with other settings later. Obviously, this will not work with pwned (by cftc) US based brokers
+
+--- 帖子 #6 ---
+I am testing now, in M5, positive now result seems good, will post report few days later. It's a good EA.
+
+--- 帖子 #7 ---
+the whold human history is a wonderful cycle that keeps repeating itself. this EA will fail to 99% who read this thread.
+
+--- 帖子 #8 ---
+Care to explain?
+
+--- 帖子 #9 ---
+this is just sell eurgbp (using the author's example that gu rise like crazy, and eu rise like crazy) in 0.2 lot when eurgbp in a seemingly overbought condition, isn't this? FF is full of these kind of systems. the reason that i don't favor it: 1. it often works, but not becoz it is magic, it is becoz the market is often ranging, and if you sell eurgbp when it looks overbought, you are often correct. this is the fundamental of this system. 2. newbies might not know the point 1 above. when eurgbp stays overbought for 2 weeks (a trend comes), newbies' account will explode instantly. and they still don't understand why, or believe the "gap" will be filled. 3. even this "gap" thing is an advantage (an inefficiency of the market), it is hardly possible for a retailer trader like me to use, since Wall St guys apparently have faster computer and broker feed....... move on to something else, unless you are very resourceful in programing, statistics, and hardware.
+
+--- 帖子 #10 ---
+Right well thanks for bringing up the points. I posted the EA here before really testing it because there are many creative and technical minds here that can give suggestions on improvement. I have seen the concern about it being eurgp trade. Potentially we can come up with some unique ways to monitor EG and make the EU/GU a more favorable trade. I am shortly going to load this to my vps (pm me for name). You can get less than 1 ms ping to FinFX if you have premium account, $2,000 USD. I think this is affordable to most on here. On another thread we are exploring these kinds of advanced hedging relationship using R and other statistical tools. It is convenient to use MT at face value, but with statistical analysis you can make more informed decision. So we will see where this goes.
+
+--- 帖子 #11 ---
+Basic_Setting=----------------- Basic Setting ----------------- Lot=0.10000000 LayerDistance=100 UseTakeProfitByPip=1 TakeProfit=80 UseTakeProfitByUSD=0 TakeProfitInUSD=100.00000000 MaximumLayer=5 Pair_Setting=----------------- Pairs Setting ----------------- Pair1=GBPUSD Pair2=EURUSD Note1=Couple 1: Buy Pair1 Sell Pair2 Note2=Couple 2: Sell Pair1 Buy Pair2 TradeCouple1=1 TradeCouple2=0 ADR_Setting=------------------ ADR Setting ------------------ ADR_Day=365 UseManual_ADR_Ratio=1 ADR_Ratio=0.80000000 MagicNo=90000 Gross Profit:122.31Gross Loss:12.65Total Net Profit:109.66 Profit Factor:9.67Expected Payoff:4.06 Absolute Drawdown:0.00Maximal Drawdown:4.14 (0.04%)Relative Drawdown:0.04% (4.14) Total Trades:27Short Positions (won %):14 (78.57%)Long Positions (won %):13 (84.62%) Profit Trades (% of total):22 (81.48%)Loss trades (% of total):5 (18.52%) Largestprofit trade:23.46loss trade:-4.14 Averageprofit trade:5.56loss trade:-2.53 Maximumconsecutive wins ($):8 (54.39)consecutive losses ($):1 (-4.14) Maximalconsecutive profit (count):54.39 (8)consecutive loss (count):-4.14 (1) Averageconsecutive wins:4consecutive losses:1
+
+--- 帖子 #12 ---
+Nice work on the settings, this is 5 min tf correct? I will try these out later. vps or broadband connection?
+
+--- 帖子 #13 ---
+TF is M1, it is broadband conection.
+
+--- 帖子 #14 ---
+now, how about today's result? very interested to see...... thankx
+
+--- 帖子 #15 ---
+Please forgive me, but gpbusd and eurusd correlation is dictate by the eurgbp action, if eurgbp move down of let's say 100 pips, we'll have a "gap" of 100pips between eurusd and gbpusd, when eurgbp go up again (if) the ea make profit. Why not simply trade eurgbp?
+
+--- 帖子 #16 ---
+I found this EA after reading about this system: http://bit.ly/IAxhLB It relies on pairs to be 70-80% correlated to be tradable. One possible way to hedge the eurgbp exposure is simple trade the same EA on 2 other pairs with a similar amount of correlation. So for example the setup: EA on GU / EU as described above. BUT ALSO, put it on EURGBP / USDCAD to hedge that exposure. You could turn trading OFF on the eurgbp pair, otherwise you will be exposed again. So that leaves you trading those 3 pairs in which all 3 maintain roughly 70-80% correlation give or take, depending on timeframe. For ideas: http://www.forexticket.us/en/tools/01-01-correlation
+
+--- 帖子 #17 ---
+Gross Profit:322.77Gross Loss:114.42Total Net Profit:208.35 Profit Factor:2.82Expected Payoff:1.57 Absolute Drawdown:0.00Maximal Drawdown:22.37 (0.22%)Relative Drawdown:0.22% (22.37) Total Trades:133Short Positions (won %):69 (72.46%)Long Positions (won %):64 (50.00%) Profit Trades (% of total):82 (61.65%)Loss trades (% of total):51 (38.35%) Largestprofit trade:29.52loss trade:-20.14 Averageprofit trade:3.94loss trade:-2.24 Maximumconsecutive wins ($):8 (54.39)consecutive losses ($):2 (-22.37) Maximalconsecutive profit (count):54.39 (8)consecutive loss (count):-22.37 (2) Averageconsecutive wins:2consecutive losses:1 TF=M1, I will try M5 today result not bad. will keep going to test.
+
+--- 帖子 #18 ---
+yes, this guy say the exactly what the EA do.
+
+--- 帖子 #19 ---
+That's great Paul. Which broker are you on? I just loaded it to PFG Best. Though they are US based, they just started to offer hedging.
+
+--- 帖子 #20 ---
+Source code has been added to post #1
+
+--- 帖子 #21 ---
+Did you test on live account? Show us some ss from live account.
+
+--- 帖子 #22 ---
+I am testing this on 2 demo accounts with 2 different brokers. One of account is working fine but I it is not working on the other account. I am getting the following notification "zero divide". Can someone help me fix this? Its not trading at all.
+
+--- 帖子 #23 ---
+this performance shows a shocking potential of the system. if this is general performance, this EA must have a very redundant edge vs the market, which is really shattering my belief. i'll try it after work today. thanks to Paulss and DirtyBrown.
+
+--- 帖子 #24 ---
+There is definately variability in how the EA functions by broker. Which brokers are you using? Also please post a screenshot from your journal tab it may have clues. I'm also having a problem. Using the settings recommended by Paul with .1 lots, it will only trade eurusd. I get this on 2 brokers, finfx and pfg best. Maybe i didnt set something right. Here is my set file, Paul do you see a problem?
+
+--- 帖子 #25 ---
+there is no condition to restrict/trigger the EA to trade, if i read the source code right. this is an always-in system, i guess. but how come there is no entry condition? I didn't see the 1st post's entry condition in the source code.
+
+--- 帖子 #26 ---
+I saw the ea buy 1 lot on first pair and 0.80 on the second pair so if your broker dont allow micro lots it cant work because the minimun is 0.1 and with this setting the ea need to buy 0.1 on first pair and 0.08 on the second
+
+--- 帖子 #27 ---
+Works with Micro's on trading point! Thanks chrys I think that was it. For some reason a lot of brokers offering demos dont offer micro demos. Probably to try and make you overly greedy as a newb. If anyone has a list of broker demo's offering micro please post here. Unfortunately they got a$$fvcd by dodd-frank so US residents cant direct have accts there now. Of course, to the sophisticated money manager there are sever legal recourses to this minor inconvenience!
+
+--- 帖子 #28 ---
+I test in 2 demo broker they are fxcm and hotforex, hotforex have lower spread it's result is better than fxcm. I used 0.01 lot
+
+--- 帖子 #29 ---
+Hi, i want to use this ea but when i put it on my chart i got the error Overlay Positive Hedging v1a~ EURUSD-,M1: zero divide What i have to do?
+
+--- 帖子 #30 ---
+Hi, Paulss: Could you please elaborate how the EA does what that guy said? I could not identify the "gap" on chart when the EA enters. How do you overlay the two charts?
+
+--- 帖子 #31 ---
+Ok, the EA work not on my ECN Account by FXPrimus
+
+--- 帖子 #32 ---
+Try on Pepperstone , armanda, it working fine.
+
+--- 帖子 #33 ---
+closed trades look good but some drawdown as well today.. how is everyone's drawdown so far?
+
+--- 帖子 #34 ---
+my new demo so far up 1% for one day. say, 20000$ capital, i use 0.2 lot vs 0.16 lot, closed 5 pairs now. nima, i don't believe this. why does this EA has such an edge? the edge is too big to be true. i just cannot understand the code's entry logic, who can help me on this? max DD is approximate same as profit, that is, 1% or so. thanks for the thread, i'll help the development of the EA/system, if you need. let me know.
+
+--- 帖子 #35 ---
+Good to hear the results. Key will be to see how it manages the drawdown in the coming days.
+
+--- 帖子 #36 ---
+definitely an issue.... both my 1m and 5m demos are in drawdown i suppose this should be where the edge is in this system... that because the pairs are correlated sooner or later they will meet again and we will get out of the drawdown its just a matter of seeing how long that process is going to be
+
+--- 帖子 #37 ---
+hi guys, is there any difference placing this EA at different timeframe? i tested the ea using default settings. 2 trades so far. 1st trade gain of $2 (5m timeframe) 2nd trade floating gain of $20 (5m timeframe but switch halfway to 1m) Not sure how to check drawndown though.
+
+--- 帖子 #38 ---
+I also plied this EA for 2 days and left it running on ADSL connection overnight and now for 48 hours... and so far up 3% both days. Got it running over Monday, will check on Tuesday to see what happens.
+
+--- 帖子 #39 ---
+Guys, form what I can see the most drawdown I've gone into so far is approximately 3% - which is considered extremely good for EA's! So why's everyone complaining about DD's? Am I missing something here? Has someone even exceeded 10%? I know its still early days for this EA but I must say after a week's testing that I'm pretty impressed with it so far. Gains are about the same as the DD - so 2 - 3% a day, man, I'll have that anyday!
+
+--- 帖子 #40 ---
+That's good to know. Well for me personally maybe I'm just so used to EA's showing promise at first then inevitably failing. I was only able to run it for less than 24 hours on a proper broker. However, based on your feedbacka dn from others, drawdown does not seem to be a problem yet. Thanks for the info.
+
+--- 帖子 #41 ---
+WOW.... ok now this could make the weekend more interesting. Charvo..and anyone else with some MQL skills. I have found a script that can do multiple pair backtesting. In fact, the author developed it to test another hedging strategy!!!!! -&gt; http://articles.mql4.com/445 It seems only minor changes to the coding would be needed to allow us to backtest this EA. ... I don't need to tell anyone this could have a huge impact. Reposting portion of article, there's a video at the bottom of it being used: Break Through The Strategy Tester Limit On Testing Hedge EA [ ru ] http://www.mql4.com/i/print.gif Introduction An idea of testing hedge EA in the strategy tester will be given in this article. As you know, the strategy tester has its own limit unabling to open any order for another symbol. Every user that would like to test his/her own hedge Expert Advisors needs to test it/them live only. But does this limit our capabilities? I am sure that every hedge trader needs to test his own EA before trading live. So, I am giving the idea of generating a virtual strategy testing behavior (tester-like) to you all with hope that it can help us break through the mt4 strategy tester limit and hope that it will useful for further usage. The Concept Of Virtual Tester The idea of a virtual tester appeared in my head while working with "Files" function in mq4. An idea of taking some important data from a file to set a virtual trading scheme has come out of my brain, "Can this be an answer of testing my hedge EA ?" Let's try it out. My virtual tester does not need any other external program or software. Everything can be done by means of mq4 parameters. The concept of this virtual tester is to let the indicated parameters of opening or closing hedge orders tell us to collect the necessary data. Such as opening price, opening time, closing price, closing time and all other important data. After the necessary data is set, they will be used for comparing with the latest tick value of any compatible type, such as open price and last Bid, or open price and last Ask. Such values can lead us to the profit calculation method that will guide us to collect a new group of data after they meet the closing hedge condition. These groups of data will be exported to a file for the further usage. After the testing is done and all data types are collected to a file(s), we will be able to see "how the hedge EA is performed ". By getting the data from these files to plot them as an indicator of the performance's curve, I think we can finish the virtual testing of our hedge EA. By this concept, I assume that we can get the testing result that is similar to the real strategy tester result. By the way, this is only an idea of creating a tester for hedge Expert Advisors. I will not guarantee that it will be exactly the same as a real tester. But hope that it will be a good reference for future usage. Now let's begin.
+
+--- 帖子 #42 ---
+If you could do that, it would be great. Fingers crossed!
+
+--- 帖子 #43 ---
+right, that's still early my "best" EA can show 100% increase in equity in 2 month. the equity curve is straight up, beautiful. then DD comes to wipe out all profit. this is not abnormal for many "looks-promising" EAs.
+
+--- 帖子 #44 ---
+i'll look into this in fact, on FF there's a great programmer, ZZNBRM i called him ZZ anyway. his neat script can do similar multi-pair backtesting...... i was lazy back then to learn his procedure...... edited: seemingly doable, but 've identified these issues: 1. Your EA works on 1min or 5min data? but the script uses 1hour data for backtest only. 2. your EA has multiple entries (5 layer) algorithm, the tester script doesn't have it let me understand the EA logic first, then we can modify the script accordingly. ......reading the code and scratching my face now......man, the EA still shows no entry condition to me, LOL.......
+
+--- 帖子 #45 ---
+I have something that might help you, will discuss on PM. The set files I posted are from Paul's recommendation, done on 1 minute charts.
+
+--- 帖子 #46 ---
+Is this some kind of combination of grid trading, hedging and correlation?
+
+--- 帖子 #47 ---
+I try 2 broker, fxcm and hotforex, fxcm had lost and hotforex had profit. it is a good ea, but need to fine tune set file. below is the 2 broker myfxbook https://www.myfxbook.com/portfolio/o...dging-1/298913 https://www.myfxbook.com/portfolio/o...ng-fxcm/298971 will keep to test and tune it.
+
+--- 帖子 #48 ---
+Has anyone tested this ea today? Any results?
+
+--- 帖子 #49 ---
+im running a 1m and 5m demo, 2 pairs (well 4 total) each, both are doing well, 5m at the moment has more drawdown
+
+--- 帖子 #50 ---
+Hello Paulss! I get an error when trying to open the fxbooks. :-|
+
+--- 帖子 #51 ---
+Hey Dirtybrown, Any more feedback on backtesting this baby? I'm still having really great results so far - still never hit more than 3% dd and made $ 200 on 0.1 lots since yesterday on Pepperstone . Account size: $ 2500 - so not bad! I'm willing to throw this on a live account with really small lotsizes (0.01) in a week or two - but I do want to see if I can backtest over the longterm first - wanna see whats the worst that can happen..
+
+--- 帖子 #52 ---
+Would you mind posting your results?
+
+--- 帖子 #53 ---
+Me too having decent results though there is possibility of drawdown. What I am doing is, running both ways together with different magic numbers, buysell and sellbuy GU/EU. Interesting possibilties. However, lotsize has to be correct to allow ratio of 1.0/0.8. So 0.01 lotsize may not work unless broker allows 0.008! We need to run 0.1 size with 2 decimal lotsize brokers. So lotzie turns out to be big if we are testing live unless we use nanolot brokers. Thanks anyways to DB.
+
+--- 帖子 #54 ---
+Ah, mate - didnt even think of that. You are most certainly right - and probably something a simple backtest would have revealed... Thanks lol - caould have caused me issues down the road...
+
+--- 帖子 #55 ---
+Click to see my daily growth on Pepperstone. This should give peeps some idea of how the EA trades and how it manages DD's etc. http://www.myfxbook.com/members/burn...9YVzwm9GkywxiO
+
+--- 帖子 #56 ---
+NOTE: i had a 12 hr. power outage yesterday on these results Yes I need to get my VPS up again. I have a good one. If anyone needs a good vps PM I'll tell you who I use. I am glad to see drawdown has level itself off here since Sunday it has not changed much for me. So My skepticism is slowly *very slowly* waning..
+
+--- 帖子 #57 ---
+Looks good
+
+--- 帖子 #58 ---
+what timeframe are you using? very little drawdown is impressive...
+
+--- 帖子 #59 ---
+trading for a few days so far...
+
+--- 帖子 #60 ---
+Hey bro Sorry forgot to add that - its running on the 1M GU chart. The settings are as per Dirtybrown. But I've uploaded the set file below.. Hope it helps! Attached File(s) oph set.zip &lt; 1 KB | 1,140 downloads
+
+--- 帖子 #61 ---
+Wow, see you've added some other pairs as well.. Didnt know the EA could do that. Looking really good bro! Does the same EA trade off all 4 charts? Or do you have 2 instances running? I'd like to give it a test on your settings if possible? Set files/s would be nice!
+
+--- 帖子 #62 ---
+Glad to see ur back Dirtybrown! I'm having sum fun with ur EA here as you can see Any progress on the possibility of backtesting this sucker?
+
+--- 帖子 #63 ---
+Thanks yeah we had a huge storm come through and knock out a power pole. That's my sign yo get back to the vps even though I hate the cost. Charvo is dilligently re-writing the extracted code and re-ordering it so it makes more sense.. so progress is being made. Stay tuned!
+
+--- 帖子 #64 ---
+i reckon that 2 months forward testing should do the same work let's just patiently run it for some days. the EA is actually trading eurgbp. if u compare your trading records, imagine that u enter/exit eurgbp at the same time with 1 lot (assuming 1 lot eur, 0.8 lt gbp). the profit would be same (approx. due to spread). also, the 1 vs 0.8 is not for ADR ratio. essentially, it is just the price(against USD) of eur vs that of gbp. that is, 1.3x/1.6x = 0.81 = the price of eur against gbp.
+
+--- 帖子 #65 ---
+Awesome mate! Thats great news! And Chavro, if you're reading this - we're rooting for ya brov! As for the VPS - ye, cant autotrade without one.. I'm not always close to my computer but its so easy to log onto my VPS from my iphone to check on things - couldnt live without that!
+
+--- 帖子 #66 ---
+Hey Charvo - pleased to meet you bro! Anyhow, ye I reckon 2 months should do the trick. I am keen to throw it on one of my live accounts to test it out thou. But I want to risk the absolute minimum lots that this EA can effectively go. What would you say is the minimum lotsize we can go with this EA? Especially seeing as it opens 0.10, 0.08, 0.06 lots etc. I was thinking to maybe exactly half that so it goes 0.05, 0.04, 0.03. You reckon that would work? If I'm going to trow this baby on a live account I want to risk bare minimum - just to test it out.
+
+--- 帖子 #67 ---
+nice to meet you too! 0.05 vs 0.04 should be okay. don't use 0.04 vs 0.03, that's a little bit off the 0.80x price of eurgbp. i strongly recommend u NOT to try it on LIVE yet because: see the default setting: a. TradeCouple1 = true b. TradeCouple2 = false this is actually "only short eurgbp" as the EA only sell eu and buy gu, now look at the eurgbp chart of last few days, you'll see it of coz makes money. try set it this way a. TradeCouple1 = true b. TradeCouple2 = true the EA will do both long and short, run demo a week, then decide if u really want it on LIVE.
+
+--- 帖子 #68 ---
+profit wise, it may be same as eur/gbp trade. But from a risk perspective, as long as you aren't overhedged one side of the trade will beat the other. On my vps I will try to add trading for usdcad, matching it up with eur/gbp as mentioned in a previous post. This may fully take care of the open exposure.
+
+--- 帖子 #69 ---
+Ye ur right - I'll hold off from throwing it on a real account. Was merely to see if it takes trades the same way.. But, patience, in this game, can save you a lot of money lol! Thanks for the advice mate..
+
+--- 帖子 #70 ---
+Yeah no reason to rush into it until we understand it better. Everyone can help by trading it with partially correlated pairs from the mataf site. We are just starting the journey.
+
+--- 帖子 #71 ---
+I don't want to press our luck, but... does anyone has any idea why this works so well?
+
+--- 帖子 #72 ---
+sure you can trade it on other pairs, this is the originator thread for the ea have a read of the first few posts: http://forums.babypips.com/free-fore...-strategy.html to sum up, here are some correlated pairs: EURUSD/GBPUSD AUDJPY/CADJPY AUDCHF/NZDCHF EURJPY/GBPJPY all you have to do to trade them is to type them in in the 'pairs' settings in EA inputs. rest is essentially out of the box. choose a lot size to suit your risk. so on each demo i have two pairs, two charts running, making a total of four currency crosses. thats just my setup at the moment. i will try your setup as well and report back, seems to have the least drawdown
+
+--- 帖子 #73 ---
+Study the differences of correlation on the chart using the indi i posted. When correlation starts to change is when this thing will profit.. since its an "always in system", great if it works most of the time.. and that seems to be the case.
+
+--- 帖子 #74 ---
+Hi, Dirtybrown. I am familiar with correlation, but in my experience, this kind of trading (sort of a "hedging") often leads to a serious drawdown. Here it does not happen.
+
+--- 帖子 #75 ---
+We are all just not used to seeing an EA that doesn't care which direction the market moves. Every trader's dream.
+
+--- 帖子 #76 ---
+not being offensive, but why do you say it is the "originator thread for the EA"? the entry logic of babypips and here are completely different. only thing that's same is the pair choice. this EA HAS NO entry condition, in other words, it JUST enters. plz correct me if i'm wrong.
+
+--- 帖子 #77 ---
+It is only a matter of months before we become billionaires, quit our day jobs, give interviews in forbes and rolling stone, hanging out with the jet set and all that s*it.
+
+--- 帖子 #78 ---
+Hi, do the settings differ if you have a 5 digit broker vs a 4 digit broker?
+
+--- 帖子 #79 ---
+Not sure, HF is 5.
+
+--- 帖子 #80 ---
+Hey bro! Thanks for getting back to me on this! I'll give it a shot with the other pairs and see how it goes.. Only thing I reckon is that if we start using more pairs on the same account we'll start seeing more DD. Currently I'm getting almost 3% - but add 4 other pairs and it could go up to 20 % if every pair is in DD - well thats what happened to a guy in the babypips thread. He said his GU pair only ever went into max DD of 3% thou - so thats good to know! Anyhow, I'm feeling hopeful for this EA - its producing sum great results so far, but we need to be careful not to get emotionally ahead of ourselves. Lots of Hedging EA's look great in the beginning of a backtest, but then a month down the line you hit 50%+ DD's or blows the account. This one does seem to have a nice edge thou - so like I said, I'm feeling hopeful. We need to wait this out to see what happens.
+
+--- 帖子 #81 ---
+Ok EA has been running for nearly and week and I am up 10%, not too bad... and as we are short and paying spread twice, which is a bummer... and cause the EUR is in downward trend, we are seeing little DD and nice returns, am not 100% convinced with this EA yet, but we will see how this runs.
+
+--- 帖子 #82 ---
+Has anyone closed all his/hers trades at the end of a trading day?
+
+--- 帖子 #83 ---
+I also had a bit of DD today - 4.2%. But it seems to be recovering now. Went down to level 5. 4.2% is still very little for an EA thou... So we'll see what happens. Up over 7% since Monday, so not bad! Also, if you're able to get part of your spread back as an IB with your broker this kind of trading can make you a lot of extra cash - so its not always a bad thing to pay spread twice. Especially if the EA still makes money... In that case anything above breakeven is good! And no, I dont close trades at the end of the day. Made 2% while I slept last night so, not bad... Dont think rangebound markets like we normally have in Asia session affects this kind of trading much. So I personally dont see a reason to close the trades during Asia.
+
+--- 帖子 #84 ---
+Well I have left it running 24/7 on a PC connected to the net, and I dont close any trades, I leave the EA to do it.
+
+--- 帖子 #85 ---
+Hi, Asian session is not the reason why I'm asking. I have read that you can't withdraw money from your account until all trades are closed. Also, broker does not use your capital for available margin, he uses your equity. Therefore, if you have booked some profits, but floating is negative, you are actually in a losing position. Am I making any sense here?
+
+--- 帖子 #86 ---
+Ye totally - but If I'm in a position to withdraw from my account then I would close all trades for that period. I'll def close all trades every Friday at least in anticipation for the weekend - there's no way I'd leave those running. If ever I wanted to do a withdrawal I would just do it then...
+
+--- 帖子 #87 ---
+And what if the negative floating is higher than booked profit at Friday? As I've seen it in this thread on someones attachment, profit was around 170 $, and floating was negative -192 $. Today I've booked 26 $, and my current floating is negative 39 $. So it could all easily end up in a loss. That is why I asked awhile ago is this some sort of a grid trading.
+
+--- 帖子 #88 ---
+Someone has said there are no conditions, this EA just takes trades... dangerous if true and I think that might be right... as I just watched the EA close out and trade and open up and new one straight after.... annoying!
+
+--- 帖子 #89 ---
+The goal of the thread is to improve it, once we fully understand how it works of course. Maybe if the trades could be limited to only enter when there is a measurable correlation change. That may solve this over trading.. if indeed it is over trading.
+
+--- 帖子 #90 ---
+Maybe based on that correlation indicator you posted? Enter a trade only when readings are negative, say -0,5? Take no trade while it is above zero?
+
+--- 帖子 #91 ---
+Yes, or with a chart overlay indicator there are many around. I'll post one later..
+
+--- 帖子 #93 ---
+Please see the link below for the description on the working of EA. It is in post 26 and it is the only post in English in this thread. http://www.forexisbiz.com/showthread...-Hedging/page3 Regards, hnk
+
+--- 帖子 #94 ---
+Excellent, thanks a lot for posting this. I had found the ex4 on a different forum. I have updated post 1 with this description, much better than the last one full of malay terms For anyone wanting to read the forum in english, google chrome has an automatic translator -&gt; https://www.google.com/chrome
+
+--- 帖子 #95 ---
+What about those indicators?
+
+--- 帖子 #96 ---
+The EA does not work as stated.
+
+--- 帖子 #97 ---
+see here http://www.forexfactory.com/showthread.php?t=158161
+
+--- 帖子 #98 ---
+Sitting on 11% now with a max DD of just over 5%.. I noticed that with my settings the EA only ever takes 0.1 lot orders and doesnt scale down to 0.08, 0.06 etc. And I'm getting pretty good results so far... Go check my history and you'll see.. Benefit of that is that I can set a fixed lot size of say 0.05 and effectively lower my DD by half, or even less.. Obliviously gains would be less thou... Have a look: http://www.myfxbook.com/members/burn...9YVzwm9GkywxiO
+
+--- 帖子 #99 ---
+This is the author's premise: When the pairs are moving contrary, the number of pips of movement to the contrary is called the gap. We can enter the market when the gap for the movement in the opposite direction between the GU and the EU is significantly bigger (minimum recommended gap is 100 pips). Let say at the time the 100 pip gap is occurred, trend of GU is up and trend of EU is down, then we are advised to enter the market by selling GU and buying EU simultaneously (if movement of GU is downtrend and oppositely the movement of EU is uptrend, we will buy GU and sell EU). Looking through the code, I don't see any statistical correlation being calculated at all. So its probably just looking at pip values to determine the mentioned "100 pip gap". If you could actually trigger the EA at a certain delta of real, statistically calculated correlation over the last X bars...could help this work as intended. On my recent journeys into statistical packages, I've learned some things about the complexities of calculating true correlation. To do it for real, there are some tests that have to be done to prove it statistically significant. Don't see how this can be done in metatrader, something like R or Matlab does it though. 7bit has a Metatrader to R python interface that could be used for this purpose. For now though, may be best to simply use the MT indi I posted. Let's figure out a correlation difference/delta that the EA will always check before trading. Just my 2 cents, open to other suggestions on limiting trading. IMO it's making way too many trades and needs to be limited in some manner. Another Suggestion Wel all know the euro is in huge turmoil and will probably go down against USD for a while. With that said, I think this system will work better on some non-USD cross pairs. Problem there is spreads , but I think any situation that gets you stuck long eurusd will end up bad.
+
+--- 帖子 #100 ---
+Hey guys! I have been manually trading correlation with good success...I use the method employed by the thread starter on the baby pips named kelton, I make 2.5-3% a day...we don't use indicators, we just superimpose two charts which are 1 Min TF zoomed all the way out, with the top chart semi transparent, using Vitrite (free), so both pairs are visible. This gives true real time correlation, which no indicator can give, because they can never resolve the rescaling problem. Anyway, this EA looks promising, if can sense true correlation, by just seeing the pixel count difference between two identical charts...if it doesn't, it may not be as reliable...now, about DD...as long as you set this up where it has, say 5 max baskets (two currency pairs is a basket, one sold, one bought) and the total lots in trade allow 500 pips to move against them, you'll be just fine. This general idea requires some patience, but the gap will ALWAYS close, so it is possible to have no losses (besides the losing hedged pair, of course that's on almost every trade) with this in mind, I have found the 1min TF the best, because the trades are open the shortest, so the gap won't have a chance to get really big, which if it did, it would be like trading on daily TF...this won't happen on 1 min TF, also the entry points are better using 15 pip gap (first layer), 30 pip gap (second layer) 45 pip gap (third layer), and 60 pip gap (fourth layer)...you will rarely see any gap above this on 1 min TF, so these entry points have given me best balance on profit, number of trades, and DD. Again on 1 min TF, you don't need to think about a SL, gap always closes, and if 6 hours is too long for you, winning the lottery won't even make you happy. I would like an EA, because I miss a lot of trades while I'm asleep. Also, when it says EA opens trades every 100 pip gap, that must mean 10 pips, right? Maybe because of 5 digit broker, also 0.1 lot is $1, not $0.10.
+
+--- 帖子 #101 ---
+Thanks for finding this thread pipster, your input is extremely valueable. All I can say is that it's a truly ingenius method to see the overlay. There s a java based program called Pro Realtime that does good overlays, but its overpriced. This software works perfectly outside of metatrader to make it transparent. Here is my chart, this is the gap right? Attached Image (click to enlarge) hERE IS THE APP: http://www.vanmiddlesworth.org/vitrite/
+
+--- 帖子 #102 ---
+Agreed mate! Your input is highly appreciated ThePipster! Its def answered some of my questions.. Please feel free to share more! We'd love to improve this in any way we can..
+
+--- 帖子 #103 ---
+How do I create this overlay with Vitrite? Could someone help me, please?
+
+--- 帖子 #104 ---
+after install, hold down ctrl - shift 5 with the window you want to be made transparent active. This will make the active window see through. What interesting is you can do the same for the browser. So right now as i type this, i can see price action through the words. pretty neat.
+
+--- 帖子 #105 ---
+Thanks, man. And how do I deactivate it?
+
+--- 帖子 #106 ---
+Nevermind, got it.
+
+--- 帖子 #107 ---
+I've gone ahead and set my basket (layering distance) on the EA to 150 instead of 100 as per your recommendation. I'm sure this would help with DD. Again, DD hasnt even crossed 10% on my account yet and I'm up 12% already.
+
+--- 帖子 #108 ---
+Your fxbook looks great! May I ask which settings and which pair(s) you're trading? I ran this for two days with default settings and had nothing but losses. I'm running it on an FXCM demo.
+
+--- 帖子 #109 ---
+Sure mate, please see the set file attached. Running it on the GU chart on 1m TF. I just changed my layering distance to 150 a few minutes ago tho - that change isnt in the set file. Want to test it to see how that pans out.. Oh, my broker is Pepperstone . Attached File(s) oph set.zip &lt; 1 KB | 599 downloads
+
+--- 帖子 #110 ---
+Hi Folk, I have find this interesting hedge ea built in 2008,that use correlation,gap,dynamic layers and other parameters. I ask to some programmer to read the code and let us to undestand how is work and let start to test on yours pc and vps. Thnk's
+
+--- 帖子 #111 ---
+at this moment, ea has booked 85 pips and floating +32 pips. If it would only continue this way
+
+--- 帖子 #112 ---
+Ye, Im also so happy with it so far! Its performing awesomely so far...
+
+--- 帖子 #113 ---
+Personally i stop the ea because after 4 days with out close the trades i had the floating loss double of the equity profit so for me have no reason for go on.
+
+--- 帖子 #114 ---
+Hmmm.... well, my results are only todays trading.
+
+--- 帖子 #115 ---
+You do not need to do that, you need the chart overlay, does the same thing. you can find it here on FF.
+
+--- 帖子 #116 ---
+Dont mean to be rude... but read from the link provided, very simple and clever!
+
+--- 帖子 #117 ---
+4 brokerage account set up?The set is not successful. Automated Trading is unable to work
+
+--- 帖子 #118 ---
+If you compare any overlay indicator to just using two charts, with the top semi-transparent, using Vitrite, you'll see they are different...only seeing the real charts is accurate. Dirtybrown, you're getting the idea, your chart looks good, yes we are trading knowing that the gap will close. Keep it up with the EA! I'm very curious to see difference since you changed layers to 15 pip gaps, burningmunke, and congrats, marijan993! also, quick question...have you guys had actual losses since using this EA? the equity graph should be pretty much straight line, it shouldn't be closing any trades at a loss...also a good way to know if EA is working if is it opens both pairs that it is trading at the same time, and then closes them at the same time, when TP is hit.
+
+--- 帖子 #119 ---
+Where did you get this from? that's crazy!¡?¿!¡
+
+--- 帖子 #120 ---
+Hi, pipster and thank you. No, I don't have any loss, but I traded this only today. Here is my statement for today. Please disregard first two trades, they were done manually, I tested something else.
+
+--- 帖子 #121 ---
+Good morning to all. This is what I got with 2 days of trade. sorry for my english.
+
+--- 帖子 #122 ---
+I'm running this EA on a demo account since monday afternoon with the default settings on EURUSD/GBPUSD with 0.1 and 0.08 lots. The biggest floating loss I saw (I'm running the EA countinously, so there are times when I can't monitor it) was around -250 USD. The overall result till this moment is +530 USD profit and a floating -55 USD loss, but it will turn into profit sooner or later.
+
+--- 帖子 #123 ---
+GLAD this is working good so far for you guys...looking at equity graphs, maybe the dips are DD, and only visible because you guys have only been trading for a few days-short time...another thing about gap size: if you open trades with only 10 pip gap, the spread eats a most of that, so that's why profit is much smaller there...my broker sometimes has spreads above 10 pips for both pairs combined, so that's why I go with 15 pips minimum....lookin good!
+
+--- 帖子 #124 ---
+do not be fooled by 2 or 3 days results the default setting of the EA is simply "short EURGBP", and for past few days, EG has been kept dropping. that's why "crazy profit". now, i quote myself again. set a. TradeCouple1 = true b. TradeCouple2 = true so that it is really trading both up and down of the market and ONLY THIS WAY the result is the true performance of the EA. not a surprise to me, my current gained profit is approx. = DD. profit comes from short eurgbp, and DD comes from long eurgbp. (i used eurgbp as 1 lot eurusd + 0.8 lot gbpusd on opposite direction = 1 lot eurgbp)
+
+--- 帖子 #125 ---
+why is it worthy of looking at? original link? the file you posted is NOT readable. only the .mq4 file is readable.
+
+--- 帖子 #126 ---
+Is a hedge ea that seem to have interesting parameters built in... The forum of the ea owner no longer exist
+
+--- 帖子 #127 ---
+Hey pipster - been running it since Monday and no, no losses. Not sure if you've seen my myfxbook link yet? The bot also opens and closes both trades at the same time - just as you said.. Here's my myfxbook if you havent checked it yet: http://www.myfxbook.com/members/burn...9YVzwm9GkywxiO
+
+--- 帖子 #128 ---
+thanks, so hard to read this kind of cracked code...... but this EA looks much closer to what the 1st post describes, imho. have you tested it before? if so, what's it like? maybe i'd try it a couple of days.....
+
+--- 帖子 #129 ---
+Prompt “please enable all pairs on market watch window”
+
+--- 帖子 #130 ---
+I start to run it today and after make first buy/sell orders on the 2 pairs is only make a buy stop grid for both pairs. I dont know the rules of the ea or maibe what is needed to set propely on setting tab
+
+--- 帖子 #131 ---
+nice myfxbook...trades look good there....when you changed the pips from 100 to 150, did you change your target, too? default is 80, right? So, maybe something just less than 150??? Good gap right now...
+
+--- 帖子 #132 ---
+Is this what we are trying to achieve chaps? http://www.forexfactory.com/showthre...t=85097&amp;page=8
+
+--- 帖子 #133 ---
+This was with a 12 hr power outage monday so it should be a bit better than this. I have also followed pipster's recommendation to set the layer level to 150 as of just now.
+
+--- 帖子 #134 ---
+Great trades, dirty brown, and no actual losses! Now I'm going to break down some of those numbers, but don't feel like you need to change anything, OK? If I had this $10,000 in the account and I had tried and tested this EA, and had faith it would work, I would have the lots traded as 10 times the size that these were, so 0.8, instead of 0.08 lots...what this means is you just move the decimal over one place on each bottom line number, so this shows 40% profit, with 7.4% max drawdown, no actual losses, again....I know my manual strategy is a winner, but if this keeps this up, let's just say I recommend you make sure to pay your taxes...again I am not recommending you increase your lots or trade size, I just wanted to point out how powerful those numbers are!!! My personal goal is 4% profit, consistently, every trading day, which will result in doubling account in 20 trading days, which turns $1000 into $10,000 in 60 trading days, which is less than 90 total days! This can be done with proper risk management, which this strategy lends a better edge to!
+
+--- 帖子 #135 ---
+I guess it just seems like the drawdown increases with profit. When trading manually, you should not be in a single pair trade for days correct? I'm just wondering what happens to the trades it opened on 5/4. You think these trades will eventually resolve just like the others for the most part? Attached Image (click to enlarge)
+
+--- 帖子 #136 ---
+yeah, almost same thing as the babypips' thread what do you think? will this work?
+
+--- 帖子 #137 ---
+I have 2 demo, one is FXCM and it loss, one is Hotforex and it have profit, they run and same time and have same setting, spread is important.
+
+--- 帖子 #138 ---
+Hi, Dirtybrown. Would you mind explaining how did you create this overlay with vitrie? When I use it, it applies on entire metatrader, not just on one window. Thanks.
+
+--- 帖子 #139 ---
+You need two Instances of Metatrader from the same Broker Look like this
+
+--- 帖子 #140 ---
+Thanks
+
+--- 帖子 #141 ---
+Great trades, dirty brown, please would you put on your current settings?
+
+--- 帖子 #142 ---
+Take this with the grain of salt that the EA may not use the same exact criteria for entry, which is fine, as long as it stays profitabl, in other words, if I were manually trading your screen shot, dirty brown, I would have entered trades when gapped 15 pips apart, using EU price scale, and closed when they touch...so I would still be in the trade going on the chart, can't see the TF, but the question about staying in a trade for long time is answered by only using 1min TF, then you won't be in trade for long time, remember this is correlation, so it's all about relativity, not actual numbers...since we don't know exactly how EA gets its entries, I would just let it do it's thing, it looks really good, so far! I guess you could see how long the longest trade it has held open is, but I'll bet it's reasonable! Keep it up! For encouragement, I'm up 16 % for this week!
+
+--- 帖子 #143 ---
+I think I'm about to lose. Until now, EA has booked 270 pips, and floating is negative: -416 pips. Since it's Friday, I will close all open trades by the end of the day (as someone recommended, no open trades during weekend) and will probably result in a loss. Any comments on this?
+
+--- 帖子 #144 ---
+Is the ea supposed to open pairs of trades, or triples? sometimes it opens 2 trades, and sometimes it opens 3 trades.
+
+--- 帖子 #145 ---
+Ye I'm also in a bit of DD - 9%.. Still up almost 15% thou.. What do you normally do on Fridays Pipster? Its still quite a while before makets close thou - so I'll wait it out and see what happens..
+
+--- 帖子 #146 ---
+if youre trading demo, keep trades open, for sure...this is correlation, you are betting the gap will close again. If it's live account, then do what you want, just know that I trade correlation with no SL at all! that means no losses! Now, you and dirtybrown seem to be saying that there is DD at the same time the trades show profit? or are you saying after a trade closes, when the next trade opens it goes into DD for a while and THEN comes back to profit and close? I'm not clear what you guys are saying.
+
+--- 帖子 #147 ---
+as of right now, I show 15-20 pip gap on EUGU pairs, so I have a trade open right now...gap should close before market closes, but if it doesn't I personally will keep trade open, because correlation will eventually always come back- that is the key to this strategy...if your EA isn't opening only two pairs, opposite trades at a time, something sounds wrong!
+
+--- 帖子 #148 ---
+Well, the trades have gone into DD every day so far - but when the gap closes at around the end of the day the EA takes profits and DD's become 0 again. EA is trading the same way its been since inception - Its just the Friday question... I wouldnt have worried about it at all if not for that... It is on demo so I'll just leave it - even if it means over the weekend to see what happens, but it'll probably take profits by the end of the day... Will see..
+
+--- 帖子 #149 ---
+if trades close in profits a few hours before market close, I would turn EA off for the week, then start it Sunday again...If trades keep open, and especially if gap is widening more, keep it open...gap is widening now...
+
+--- 帖子 #150 ---
+Thanks Pipster - appreciate your info mate! I will do as you say..
+
+--- 帖子 #151 ---
+It seems like the drawdown increases after it closes profitable trades. Need to do more study on exactly the string of events. Outside of any changes to the EA itself, one method for the EA I'm thinking to reduce drawdown is to simply close all trades after X amount of time. Then, wait to visually see correlation on the overlays before turning it on again. This would make it more manual, but also limit it's "wild west" approach to opening trades when correlation delta's may or may not be in play. Just a thought..
+
+--- 帖子 #152 ---
+Not to diverge from this thread, which is probably just for this EA, but a programmer on the baby pips thread just posted a semi-manual EA, which you decide when to enter the trade, and then it has your pre-programmed criteria for closing the trade at your TP level as a percentage of profit of your account size...it opens both trades, opposite, with one action...I haven't personally tried it yet.
+
+--- 帖子 #153 ---
+Well, I wont mind giving that a shot if you mont mind sharing your strategy then Pipster? Becuase I would honesltly have no idea on where and when to enter at this stage...
+
+--- 帖子 #154 ---
+to trade my manual strategy, I highly recommend you read the baby pips thread, stat arb pairs trading strategy by kelton, it's very simple.
+
+--- 帖子 #155 ---
+Here are some results using the EA on a leading VPS. Equity curve is smoother, and drawdown currently is about $24 more than booked profit. For anyone not as familiar with EA's, execution of any strategy based on a short TF will be extremely dependent on your infrastructure. More so network latency above all else. MT and the EA use very little hardware resources, but the latency can deeply effect your exit point. I can get a 17 milisecond ping time to fxcm . So with this sort of strategy eeking out a few partial pips here and there can add up to a whole lot by week's end. PM if you want to know who I use. They used to publish a broker ping list from their servers. NY, Cali and London locations so you can move it around at will depending on broker location. NOTE: the results I posted prior were not from a vps but my PC. Due to a power outage those results should not be used for final judgement.
+
+--- 帖子 #156 ---
+Ok, market will soon be closed, it is hard to expect some outrageous movement. How will EA react, remains to be seen. For now, I think it will end up in a loss. It booked 207 pips, and floating negative is -424 pips. I'm experiencing some difficulties with my internet connection, so EA couldn't work properly ( I hope that was the reason for negative pips ). I think I will have it up and running by the next week and give this EA one more chance.
+
+--- 帖子 #157 ---
+Yeah any downtime is pretty much death for this EA. So it is becoming obvious anyone wanting to truly test the EA pay the money and use a VPS. On top of lower latency, you get nearly 100% uptime.
+
+--- 帖子 #158 ---
+Attached Image (click to enlarge) This is a hedge spread generated by 7 bit's python to R interface. Wondering if the EA is turned on only after 2 standard deviation change in the spread.. then at some point in the future letting it manage open trades but not open new ones. You can see in this basket some consolidation times at certain deviation levels. If these areas can be avoided that may be a huge part of making this "smarter" about when to trade. Granted, the Arbomat system is giving specific hedge ratio's based on current conditions. But in my experience, you can glean a lot of the price movement of all 3 by looking at a spread chart like this. To see more research go here -&gt; http://www.forexfactory.com/showthread.php?t=262827
+
+--- 帖子 #159 ---
+How I do I run 2 instances of Meta trader from the same broker...please.
+
+--- 帖子 #160 ---
+are you saying, dirty brown, that the EA is opening more than the two pair trade at one time? Isn't it supposed to wait until spread widens another 10 or if you changed it, 15 pips? I also thought there is a max open trades command that you could change to smaller amount? I have heard of other EA's entering based on SD, but not sure if that is same as my visual pips, looking at naked superimposed charts with Vitrite pogibaby, yes, two instances from same broker...if you use two different brokers, the difference in their spreads will mess up the charts...if you have difficulty launching two instances of mt4, just copy mt4 folder to another folder with different name, it should let you launch two instances, then.
+
+--- 帖子 #161 ---
+so you have trades a couple days old, dirtybrown? just today I just closed a trade that started at 11:00am CST, the one I posted a bit about, with 14 pip profit, including spread taken away, closed at 1:10pm CST.
+
+--- 帖子 #162 ---
+I took the decoded MQ4 and went through my methodical conversion to meaningful code. HAS NOT BEEN TESTED. I am currently trying to figure out the code. What I do see is that there is no attemp to look for a GAP to instigate a start of the first level or any level. SoOOO - if there are programmers out there who can take a look that would be great. I could not help myself, so I cleaned up the code to use an order retry selected by user. Have also added a reporting mechanism for error situations that are time stamped. If you are not a programmer, please do not clutter the thread with unuseful questions that I won't answer. I gave credit for derviative code in the mq4 file. KingHigh
+
+--- 帖子 #163 ---
+Here is a pic of two indicators that I wrote to display and overlay of two pairs. What I do is look at the last N bars and shift both pairs to oscillate about 0. The first shows an unsmoothed overlay and and the second show a smoothed overlay. The last chart displays the overlay differences and a predicted level to Buy/Sell - the green dashed lines. BTW - The Blue and Light Blue lines show the EURCHF overlay. Any thoughts on these.
+
+--- 帖子 #164 ---
+Hi, KH: i've gone thru the code (original one) a few times. i feel it is just doing these: 1. enter the market when there is no position (both long and short, if set both trade groups = true); 2. if bid/ask moves against the last position and reach 100 pips (10 pips for 5-digit broker) from the last position's entry price, add another position; 3. do the crap in 2nd step repeated for 4 times (by default 5 layers). since the default setting is "short eu buy gu" (same as short eurgbp), and this past weeks happened to be EG diving. therefore many testers have got encouraging results......and still excited...... to fulfil the 1st post or babypips' thread method, we need to find a way to code the EA to reflect the GAP, (or widening spread, or divergence, or two pairs go against each other........) my own idea is, for example, use default setting, so only look for eurgbp short: i wish EU goes higher, and GU goes lower or flat; or i wish EU goes flat, and GU goes lower; then the EA code can go this way: if EU ask/bid &gt; 5 MA for 10 pips, AND EU's 5 MA pointing up, AND GU ask/bid &lt; 5 MA for 10 pips, AND GU's 5 MA pointing down; there should be a GAP now! and the EA should enter short EU long GU (or short EG). this logic is NOT hard to add in the EA, but there is an obvious problem preventing me from doing it: when a trader watches an overlay chart, even when EU is far under GU, the logic/condition I described above may still be likely to happen. And selling EU buying GU is very likely a wrong move when EU is far under GU. anyway, i've been wondering how to reflect this "gap" thing into the coding for quite a few days. maybe another longer MA? ......wish someone can shed a light...... good weekend...
+
+--- 帖子 #165 ---
+Would you mind sharing these indicators? It is difficult to tell just by looking at the picture. Also, I think they should be applied on positively correlated pairs.
+
+--- 帖子 #166 ---
+-CHARVO It does seem very difficult to translate true correlation into code, but this EA sort of is on to something...I was brainstorming about this a while back...thinking that if at any given time, if I opened opposite trades on a demo account with EU and GU pairs, then when the separated, I could see the gap in P/L on demo...then when it reached a certain point, I could enter on real account...this could be used for reference, sort of like the EA opens it's first trade, the problem is, it needs to open that first trade only when the pairs are touching on 1min TF...maybe starting the EA while they are touching would be successful? It should then close the NEXT trade in profit, and back at "ground zero"....someone should try this next week, demo of course...also if we used the EA this way, then program the first "tester" trade to open with smallest possible lot size, then the real trades at the layers with the desired lot size. What do you guys think?
+
+--- 帖子 #167 ---
+wow, you shed a lot of lights on my head your idea is very creative(but not alone), the "test" trades may be easily coded as phantom trades, though it might sound hard. let me try your way coding this weekend. thanks as to the starting point, maybe i'll use eurgbp when its momentum is very low as eurusd touches gbpusd.
+
+--- 帖子 #168 ---
+AWESOME THANK YOU!! The thread is indebted to you KingHigh for re-writing this code to be more meaningful. Now people like me who aren't MQL virtuoso's can start to tinker with the code...and maybe even more importantly, get it to work the the custom multiple pair backtester here -&gt; http://articles.mql4.com/445 I will take a stab at getting the EA to work with the backtester this weekend. Posting the KingHigh translation to post #1. Kinghigh, once again we are indebted. So I'm working on some code, as is Charvo. Amazing what teamwork can do for us all.
+
+--- 帖子 #169 ---
+Another approach I thought about for multi-pair backtesting is well... Metatrader 5 Yes, the script is in mql4. I was able to run a conversion process to convert the code the mql5. Unfortunately, after resolving several errors I gave up.. it would not compile giving over 100 errors. If anyone out there is interested in the approach, this describes how scripts in mt4 can be used to parse mql4 source to mql5... though it may be very imperfect syntax. http://metatrader5.blogspot.com/2009...-5-script.html
+
+--- 帖子 #170 ---
+I've translated the original overlay EA into MT5, but the logic doesn't work under MT5 as it is The problem is that there is always only ONE open position for any instrument at any given time if you open a position at 1.30 and add another at 1.2990 the MT5 result will be a single position with an average of 1.2995 and that's causing a problem with the layers secondly there is no long/short in one pair at the same time with MT5 The .mq5 goes to MQL5/experts The .mqh goes to MQL5/include
+
+--- 帖子 #171 ---
+Only for your back testing purposes, if you can code the EA to open the actual trade in EG as single pair directional trade, using "phantom trading" for the trades it does currently, in other words, phantomize the current trades it does, while adding some code for it to trade the EG only at the layer levels at the same time, with of course the appropriate direction, I.e., selling the EG when The EA would be selling the EU,buying GU, then closing the EG when it closes the other trades, with no regard for EG pip move,(it wouldn't be necessary) this will give an accurate indication, may not have same $$$ amount, but graph curve will appear the same shape. I. Could say other things about the EG, but better keep it simple, and on topic.
+
+--- 帖子 #172 ---
+I have runned this on for 2 days, around 30 hours i suppose. with the default setting but initially seeing red? but i have tried altering the settings and it started earning again. and my broker is go markets . and im delighted to see the results, starting funds: 5000 Profit : 512.34 Loss: 89.23 I am still trying to improvise the settings and also apply it on other pairs. I will post my settings probably after a few days of testing it. Hope that it will help with the development.
+
+--- 帖子 #173 ---
+Well thanks for the concerted effort on this. My intention in trying to convert to mq5 was to be able to use the multi pair backtester. You are right, as I read more about mq5 and their FIFO limits. total BS. Maybe someone can find it useful.
+
+--- 帖子 #174 ---
+Hi, did you close out your open positions and this was the result?
+
+--- 帖子 #175 ---
+Yeah I closed all my positions before the market closed. what do you think about it? well i have to admit in the middle of testing i did alter the lots of pip and stuff. thats why i dont want to post it here after confirming everything that is profitable. keen for another set of settings?
+
+--- 帖子 #176 ---
+Interesting... cause in my mind one scenario for limiting this thing is closing out trades at some point... while hopefully not eating away all booked profits. Keep us updated we will be very interested to see your settings, as most of us are using the recommendations from Paulss so far.
+
+--- 帖子 #177 ---
+I saw from the babypips thread someone trading EG based on EU / GU, this can definately work. Food for thought, perhaps over the coming days someone can pick upon this and code a simple EA. I need to fish through the babypips thread and find the EA you mentioned. Thanks again for the info.
+
+--- 帖子 #178 ---
+DB, If you download a Sigtrader MT4, you will find that they have currency strength charts - EURLFX, USDLFX, GBPLFX. You can use what ever indicators you want to determine how to trade EG. KingHigh
+
+--- 帖子 #179 ---
+Okay, please read this post carefully, as I have dug into everybody's results and comments and am summarizing and then asking questions... Dirty brown, on your first account detail post on this EA, it shows trades going both ways, buying EU, selling GU, AND...selling EU while buying GU, which is different than the other account detail posts and different than what Charvo was saying about the EA only selling EU, buying GU...and the results on that account summery as well as Paulss's first two days were incredibly good, and I mean unbelievable! Then on your last account summery you posted, closed trades profits were good, but there are some WEIRD open trades, looks like some where only single sell EU pair trades, which didn't appear to have their GU partner opened with them...also the account summery is difficult to digest because the order of the trades listed seem out of order, at least of time of opening trades...comparing it to the first account summery, which showed each trade opened both pairs at the same time...whatever changed there could be what all the growing DD and on closed trades are about??? Also, when you started the EA, did it immediately open that first trade? If not, how long did it take? I don't see that it opened trades as soon as others were closed, so I am not so sure about Charvo's theory on an initial test trade. Also, very important! If you count the number of trades that are still open, it's very obvious it's way more than the five "baskets" or layers that the EA should be allowing, that might explain some DD, too. We need to find out if this means it opens only five layers from one given original entry point, then may have another "original entry point" opened with it's own five layers??? If that's true, it needs to be limited to only one original entry point, with desired layers from that. If anybody started the EA this last Monday between 10am and 3pm CST, just know the pairs were perfectly correlated, and I mean on top of each other that whole time, with no gaps at all...slow trading day, but I say all this because, that probably would have been a good time to have started the EA, on correlation...anybody who happened to do this at that time, please post your results since then, because it will greatly help us understand this EA! I am not advocating that anybody try making EA trade EG, because it is directional, and as much as it is debated, there are pip size, scale size, and other differences, plus it's directional, not "hedged"...that last post was just a suggestion for back testing only! Yes, I have had some success with EG, but just look at a daily chart to see how much you would have lost holding a buy over last weekend! The Euro isn't coming back, at least not for a while. 1 min TF, hedging EU and GU, or similar correlated pairs has a successful, proven track record with many, many traders, they are using the Vitrite technique, of course. If we can get EA to replicate PaulSS's first two days to continue on............ Burningmunke has 14+%, now....he would probably have beaten my 19% gain for the week, with a small increase in lot size!....I don't understand his unclosed trades, either. If your curious why a successful manual trader like me wants this EA to work? I don't have much time to spend in front of a screen, either...plus, there are always 3-6 trades that I miss out on while asleep.
+
+--- 帖子 #180 ---
+Thanks for taking the time to go through it all, the thread is quickly growing which is great. See below:
+
+--- 帖子 #181 ---
+Thanks for taking the time to go through it all, the thread is quickly growing which is great. See below: Okay, please read this post carefully, as I have dug into everybody's results and comments and am summarizing and then asking questions... Dirty brown, on your first account detail post on this EA, it shows trades going both ways, buying EU, selling GU, AND...selling EU while buying GU, which is different than the other account detail posts and different than what Charvo was saying about the EA only selling EU, buying GU...and the results on that account summery as well as Paulss's first two days were incredibly good, and I mean unbelievable! Then on your last account summery you posted, closed trades profits were good, but there are some WEIRD open trades, looks like some where only single sell EU pair trades, which didn't appear to have their GU partner opened with them... can you point these out to me pls? also the account summery is difficult to digest because the order of the trades listed seem out of order, at least of time of opening trades...comparing it to the first account summery, which showed each trade opened both pairs at the same time...whatever changed there could be what all the growing DD and on closed trades are about??? One thing to keep in mind for the statement posted for the EA that's been running for a bout a week, that was the one with the 12 hr power outage on Monday so if you notice weird things on here that may explain it. I probably shouldln't have posted it, cause it will not be fair to the EA. I did make 1 change to the settings, after you recommended to burningmunke to change leveldistance to 150 from 100. I did the same... sorry!! I know you said I shouldn't, and that may also be confusing the interpretation. Also, when you started the EA, did it immediately open that first trade? If not, how long did it take? Yes, the EA seems to always take trades just as soon as its turned on. I don't see that it opened trades as soon as others were closed, so I am not so sure about Charvo's theory on an initial test trade. Also, very important! If you count the number of trades that are still open, it's very obvious it's way more than the five "baskets" or layers that the EA should be allowing, that might explain some DD, too. We need to find out if this means it opens only five layers from one given original entry point, then may have another "original entry point" opened with it's own five layers??? If that's true, it needs to be limited to only one original entry point, with desired layers from that. Digging further into this question. Let me try to summarize some of the code after spending some time reading it (realizing i'm no mql programmer but do have a programming background).. This statement evaluates the Buy/sell, sellbuy preset variable: Inserted Code if( Buy1Sell2 ) //boolean, so if =true, evaluates below code: if( GetBuyOrderCount( Pair1, MagicNo ) &lt;= 0 ) SendBuy( B1S2, Pair1, ScaledLots, 1, MagicNo ); if( GetBuyOrderCount( Pair1, MagicNo ) == 1 &amp;&amp; GetSellOrderCount( Pair2, MagicNo ) &lt;= 0 ) SendSell( B1S2, Pair2, BaseLots, 1, MagicNo ); This says if there are no current open buy/sell orders..make them, this is proof of what I said that it immediately opens trades regardless of anything else besides no other trades being open. I see this as a major flaw, at the very least users first starting the EA need to be very aware of current market conditions. Inserted Code if( GetFloatingPip( BUY1SELL2 ) &lt;= ( -LevelDistance ) &amp;&amp; GetBuyOrderCount( Pair1, MagicNo ) &lt; MaximumLevel ) This seems to check if current floating profit/loss is less than or equal to the pre-defined level distance AND the count of buy orders is less than (NOT less than or equal to) than the predefined 5, then do the below code. the fact that &lt; is used instead of &lt;= suggests to me first trades it places are level 1.. So in fact this means there is only 4 levels opened after the initial (bogus) trade that is done when the EA is turned on........problem you think? Inserted Code { LstBuyTicket = GetLastBuyTicket( Pair1, MagicNo ); LstBuyLevel = GetLastBuyLevelNbr( Pair1, LstBuyTicket, MagicNo ); if( GetBuyOrderCount( Pair1, MagicNo ) &lt;= LstBuyLevel ) SendBuy( B1S2, Pair1, ScaledLots, LstBuyLevel + 1, MagicNo ); if( GetBuyOrderCount( Pair1, MagicNo ) == LstBuyLevel + 1 &amp;&amp; GetSellOrderCount( Pair2, MagicNo ) &lt;= LstBuyLevel ) SendSell( B1S2, Pair2, BaseLots, LstBuyLevel + 1, MagicNo ); if( UseTakeProfitByPip == TRUE &amp;&amp; GetFloatingPip( BUY1SELL2 ) &gt;= TakeProfit ) { LstBuyTicket = GetLastBuyTicket( Pair1, MagicNo ); LstSellTicket = GetLastSellTicket( Pair2, MagicNo ); if( LstBuyTicket &gt; 0 &amp;&amp; LstSellTicket &gt; 0 ) CloseLastBuy( LstBuyTicket, Pair1 ); } if( UseTakeProfitByUSD == TRUE &amp;&amp; GetFloatingUSD( BUY1SELL2 ) &gt;= TakeProfitInUSD ) { LstBuyTicket = GetLastBuyTicket( Pair1, MagicNo ); LstSellTicket = GetLastSellTicket( Pair2, MagicNo ); if( LstBuyTicket &gt; 0 &amp;&amp; LstSellTicket &gt; 0 ) CloseLastBuy( LstBuyTicket, Pair1 ); } } If anybody started the EA this last Monday between 10am and 3pm CST, just know the pairs were perfectly correlated, and I mean on top of each other that whole time, with no gaps at all...slow trading day, but I say all this because, that probably would have been a good time to have started the EA, on correlation...anybody who happened to do this at that time, please post your results since then, because it will greatly help us understand this EA! I am not advocating that anybody try making EA trade EG, because it is directional, and as much as it is debated, there are pip size, scale size, and other differences, plus it's directional, not "hedged"...that last post was just a suggestion for back testing only! Yes, I have had some success with EG, but just look at a daily chart to see how much you would have lost holding a buy over last weekend! The Euro isn't coming back, at least not for a while. 1 min TF, hedging EU and GU, or similar correlated pairs has a successful, proven track record with many, many traders, they are using the Vitrite technique, of course. Exactly, we can't lose sight of the simplicity.. and I'm afraid that is what's happening. As a parallel path to the current efforts on this thread, I am going to open a thread in the Platform Tech forum on calculating correlation with a free add on library to python called NumPy. I found an example in a book that gives the exact code to calculate correlation, covariance and all kinds of other neat stuff. I've mentioned previously the difficulty of performing true statistics in mql. Using Numpy, we can conceivably let python do the correlation and spit a number to the EA (via the 7bit Python -&gt; MT interface) which can then be used as a primary trade filter, by calculating a correlation delta. When the gap starts to close, we should notice the delta of correlation over the last X bars to change by a certain percent. When the change hits a predefined threshold, a trade could be opened. To me, this is a much more accurate way to quantitatively filter entries than just looking at pip distances. I started: http://www.forexfactory.com/showthread.php?t=361703 If we can get EA to replicate PaulSS's first two days to continue on............ Burningmunke has 14+%, now....he would probably have beaten my 19% gain for the week, with a small increase in lot size!....I don't understand his unclosed trades, either. If your curious why a successful manual trader like me wants this EA to work? I don't have much time to spend in front of a screen, either...plus, there are always 3-6 trades that I miss out on while asleep. Me too, my job drains the life out of me .. don't exactly want to stare at a screen more than I already do. Hopefully this will make us rich someday, it will just take some effort and we will do it.
+
+--- 帖子 #182 ---
+Thanks for your reply, dirtybrown, and first the 15 pip spread was just a suggestion, sorry, didn't mean to make you think you needed to do anything either way, I don't think that or the power problems matter as far as what I'm finding, which is:1. If you look at your first posted account summary, at the top the first trade (which means both pairs) was profitable, within ~3 hours, then next trade opened in the same minute (musta been moving 10 pips fast) but in the opposite direction, buying EU, selling GU, which means the EA wasn't doing what We thought, just selling (effectively, not literally) the EG only. It closed a lot later, but in profit. 2. The EA had four trades going, (8 actual trades, of course) before it closed the first one, which then it immediately opened another trade, all eventually profitable. 3. Looking at bottom of same account summary, there are 6 trades still open, that's more than five! I would blame power outage, but your other account summaries also have more than 5 trades still open, so EA isn't sticking to 5 levels, unless it's maybe 5 levels added to "bogus" trade. I'm very thankful for your effort, as well as everybody trying to work this! Now, we may have some contradictions here, but please, anybody running this EA, don't stop, if you have good profit, while it may seem illogical, the P/L doesn't lie!!! Maybe for DD control, you could lower the max open trades some, but quick note on this...if your VPS can handle multiple instances, try to keep the EA you already have running, going as is, and make your mods to run on a different instance, so you can compare the old with the mod, doesn't hurt, and very educational...the programmer, medisoft, on baby pips was trying 6 versions of his own EA at same time and we were all surprised when the least likely criteria was the best, (and the simplest, funny, huh?) so don't throw away the free ATM machine! The first results did tell us a story. And when introduced to correlation/stat arb, I was pretty skeptical, myself, until I tried it and, well,... 1. No losses 2. Profit speak for themselves!
+
+--- 帖子 #183 ---
+I had the EA attached on both EURUSD and GBPUSD and had 19 trades open on Friday...
+
+--- 帖子 #184 ---
+Firstly, I would like to thank you Dirty Brown introduce us this great EA then we have this opportunity to use it. This EA is great but maybe need some improvement or maybe we don't know it well. This is my new test using demo account: Broker: Hotforex VPS: CNS (very fast connection with Hotforex) TF: M1 Set: Basic_Setting=----------------- Basic Setting ----------------- Lot=0.05000000 LayerDistance=150 UseTakeProfitByPip=1 TakeProfit=80 UseTakeProfitByUSD=0 TakeProfitInUSD=100.00000000 MaximumLayer=5 Pair_Setting=----------------- Pairs Setting ----------------- Pair1=GBPUSD Pair2=EURUSD Note1=Couple 1: Buy Pair1 Sell Pair2 Note2=Couple 2: Sell Pair1 Buy Pair2 TradeCouple1=1 TradeCouple2=1 ADR_Setting=------------------ ADR Setting ------------------ ADR_Day=365 UseManual_ADR_Ratio=1 ADR_Ratio=0.80000000 MagicNo=90000 you can view the statement http://www.myfxbook.com/members/paul...exm1cns/304067 Generally, the result is very good, I deposit $500 and have 24% profit in 2 days, but I found some strange trade and question. 1. Support by the EA rules, each trade are open parallel by 2, one is sell and one is buy at the same time. But I found some trade are open parallel by 3 trade, you can check it at the open tab and history tab. 2. I'm not sure the TakeProfit=80 is 80pip or 8pip 3. I would like to learn more about DD, then I can control enough fund on for the margin level when I open a real account. But some of this trade eventually are profit. Another testing already 1 week http://www.myfxbook.com/members/paul...dging-1/298913 Set file almost same above one. Lot=0.02 LayerDistance=100 MaximumLayer=10 TF: M5 In both testing, profit is great but we need to learn more in control DD. I believe this is a great EA and concept is good and safe. Please Advise.
+
+--- 帖子 #185 ---
+Would you mind if I pm you? I want to ask you a few questions about your manual trading, and I don't want to mess the EA thread with it. Thanks.
+
+--- 帖子 #186 ---
+Anybody is welcome to PM me anytime!
+
+--- 帖子 #187 ---
+Great results, Paulss's! The only reason for the DD is the same thing we are trying to figure out: You have 45 open trades, which is 22 (and 1/2?) "baskets" ...umm we need to figure out why that isn't being limited to 5 (10 total trades), like the EA says. If somebody can figure out how to limit the total number of open trades, that's really the only recommended change from me, because your profits don't lie...it would be a bummer, though, if this EA got stuck on bad open trades maxed out at 5, for a long time...maybe this is meant to be used with smaller lot size and the open trades waited out until they eventually profit? Nobody can afford for that to go on, I mean the longer the EA runs, the more open trades it leaves, making DD increase, maybe those are orphans, meant to have been closed at some time?
+
+--- 帖子 #188 ---
+Thanks, yeah actually I've been using sigtrader for some time now its great. I use a computationally intense VSA template on the dollar index when manually trading any major, it works quite nicely.
+
+--- 帖子 #189 ---
+As I post before that the EA sometime open 3 trade (not 2 trade), today, I found the reason is I open 2 chart (EU and GU) and run EA on both chart, I think this is the reason why it open 3 trade. Now I open 2 chart(EU &amp;GU) and run EA in EU chart only. Up to now the trade are in normal.
+
+--- 帖子 #190 ---
+By market close on Friday I still had some positions open for a DD of approximately 7% - and I decided to leave it to see what happens today. Well, I'm happy to say that the EA managed to close out 3 levels of profitable orders and now I'm up almost 16%. I manually closed level 1 + 2 becuase I didnt think that the market would go much further in recouping those - so I closed them at -17 total. lol. http://www.myfxbook.com/members/burn.../oph-ea/302314 On another note - an idea ! Not that it is groundbreaking in any way - but I had an idea on using this EA more effectively. It would require some work on the trader's side thou - making it not totally automated. What I was thinking is that we manually check for the gap's. Once we see a gap of our predefined, desired size we launch the EA - but, with the correct settings, eg. GU has a gap of 20 pips above EU - set EA to place a short position on GU and long position on EU and hedge from there accordingly, lets say 5 levels. We either set TP's on every level as it currently stands, or if we want to stick to the babypips.com manual version of the system we only set a TP on the first level and once that gets hit close all orders (1-5) for profit. That way, we know that the gap has been effectively closed as it takes profit at the basic level. Does any of this makes sense? I hope so lol - not the best at explaining things. The downside of this way is that we have to ofc look for the gaps with the best God given indicator at our disposal - our eyes. From there, once we apply the EA we can go play golf or something (whatever you like - where I'm from we surf so... ). The EA should at this point trade just like we would have traded it manually.. Anyhow, just my 2 cents. Maybe this inspires people smarter than me to come up with something even better.. lol
+
+--- 帖子 #191 ---
+Hello.. I have experience using this Overlay Hedging EA in 6 months... After I use this EA 3 months...slippage can kill your account because orphans orders and too much floating... This is is good and best for make money... But this need modifiaciton:- 1- Add function check orphans orders..If one coulpes have only one pairs, so must orphans orders must delete for balance hedging... 2- Add functon Close All after profit target reach..example...If 20% close all for reduce floating... Thanks U....
+
+--- 帖子 #192 ---
+the two last posts I think make good sense, this EA may work great if started with the best timing, and if we can modify it to just take only up to 5 trades max at one time, no orphans. I might work good enough this way to start it once over once per day, at best time seen on charts.
+
+--- 帖子 #193 ---
+Hi KingHigh and all, many thanks for your patience in doing such a boring job. I just came into this thread and used your translated version. I noticed a little bug in your order retry routine for Sell order. A return(Ticket); is missing causing the sell cycle to be excecuted TradeMgmtRetry times. That shoud be the fixed code. Inserted Code int SendSell( string Mode, string Pair, double Lots, int Level, int Magic ) { string CommentStr = Mode + " - Level " + Level; for( int i = TradeMgmtRetry; i &gt; 0; i-- ) { RefreshRates( ); double Price = NormalizeDouble( MarketInfo( Pair, MODE_BID ), MarketInfo( Pair, MODE_DIGITS ) ); int Ticket = OrderSend( Pair, OP_SELL, Lots, Price, 5, 0, 0, CommentStr, Magic, 0, Red ); if( Ticket &gt; 0 ) { if( OrderSelect( Ticket, SELECT_BY_TICKET, MODE_TRADES ) ) Print( "SELL order #", OrderTicket( ), " opened at ", OrderOpenPrice( ), " :", TimeToStr(TimeCurrent(),TIME_DATE|TIME_SECONDS) ); [b][color=red]return(Ticket);[/color][/b] } Sleep( 3000 ); } string AlertMsg = "#2: Error opening SELL order; Error Code: "+GetLastError( )+": "+ErrorDescription( GetLastError( ) )+" :"+TimeToStr(TimeCurrent(),TIME_DATE|TIME_SECONDS); FailureAlert( AlertMsg ); } Regards, skipperxit
+
+--- 帖子 #194 ---
+Yes, you are right, the EA will create a lot of orphan order after some trade. this trade cannot close because they all have big DD. The EA will open 4 orders on each point Couple 1 - buy GU &amp; sell EU Couple 2 - sell GU &amp; buy EU the bug is in the Take Profit and close order. i.e we set TP=8pip and the total sum of the 2 orders of couple 1 reach 8pip profit. This mean when each Couple fulfill 8pip take profit level (Total sum of 2 order in each couple reach 8pip) then the EA will close these 2 order (couple 1). The point is here, it left 2 order (Couple 2) and these are the DD creator in the future. If the EA can calculate both 4 orders (2 couple), and the total sum of these 4 order reach the TP level, then closed both 4 order. this will not create the orphan. The concept is 4 order open at the same time, and 4 order close at the same time. Could someone modify the code?
+
+--- 帖子 #195 ---
+not sure if i understand u correctly let's say the EA trade both directions, and it has: pair group 1: 0.1 lot buy eurusd; 0.08 lot sell gbpusd; and pair group 2: 0.1 lot sell eurusd; 0.08 lot buy gbpusd; now @ TP = 8 pips, the EA should close one group. you meant(?) the EA is supposed to close all 4 positions. but i observed, when pair group 1 is in profit of 8 (or more) pips, the pair group 2 was never above water , how can the EA close it? the EA should take a loss on pair group 2?
+
+--- 帖子 #196 ---
+IMHO, the EA should never have opened those orphan trades, they are backwards, aren't they?
+
+--- 帖子 #197 ---
+DirtyBrown, Please update post 1 so that it is correct. Thx, KingHigh
+
+--- 帖子 #198 ---
+what does "orphan" trade mean exactly? from my experiences ( i have 1000$ exited profit, and -1000$ floating DD now), the EA just closed a pair of eurusd and gbpusd, if this pair reaches profit target. The EA will never touch a pair of eurusd and gbpusd if this pair has NOT reached the profit target. (the EA actually trades without a Stoploss!!! ) where's orphan come from? are you saying one single position was left behind instead of a pair of positions? even so, that's not a major problem/cause for the DD.
+
+--- 帖子 #199 ---
+charvo: I have seen that you post several times regarding bi-direction test of EA. 1. I am 100% agree with you that current success of EA test is due to EG went down. If I am not wrong, everybody has certain DD on last Friday due to EG grow up. But it was solved because EG went down today. 2. But you will not get good result if you test in bi-direction because both side of trades conflick. IMO, you have to set either TradeCouple1 = true; TradeCouple2 = false; or TradeCouple1 = false; TradeCouple2 = true; It means that you have to know the trend of EG for this EA. If there are method to know the trend of forex, most of EA will be success and better that this EA. 3. I do not think this EA can get constant profit in long term excpet the you complete change the hedging method.
+
+--- 帖子 #200 ---
+if you look at Dirtybrown's last account statement, all those open trades are orphan trades, some are just single pair, others were opened and never came to TP, probably opened in wrong directions... It may be true about EG going down, but dirtybrown's first account statement looks different than the rest in that it has trades going the other way that profited, too????
+
+--- 帖子 #201 ---
+Have so much to read and respond to, for now please see this statement.
+
+--- 帖子 #202 ---
+I'm sorry for impeding the progress of the thread by doing something really stupid. Over the weekend I put the KingHigh EA on a chart just to make sure it would load ok. But I forgot to take it off before trading started!!!!!!!!!!!!! I'm such an idiot..edit: for what it's worth I just attach KH tpl. I put it on GU, default settings which is true false, so it would buy gbpusd and sell eurusd. THIS IS IN ADDITION TO THE OTHER EA'S already running on eu gu with Paulss settings but with 150 layer. So its running both.. Anyway, go by my VPS results if trying to evaluate the basic functioning of the EA. My local PC account will be used for experimentation.
+
+--- 帖子 #203 ---
+a couple of months ago, I've coded a few multi currency (hedging) EAs under MT5 to check whether this kind of trading could lead to a longterm edge or not. The short summary of my results is: NOT I've tried dozens of combinations of correlated/uncorrelated pairs with whatever entry criterions you can imagine, averaging up/down, martingaling, trading short/long only, fixed single TP, fixed basket TP and what not I always got into a situation during backtest where you, if traded live, never would have gone through the DD and instead pulled the rip line
+
+--- 帖子 #204 ---
+Here are my current VPS results. Notice how smoothe the equity curve is.
+
+--- 帖子 #205 ---
+The funny thing my mistake shows that you can give it a bias at certain times and profit handsomely. How many of us think euro will go up? When using other directional indicators, you can use this thing to make scalps. This of course changes the whole original intent of the system to hedge everything. But if greece defaults, wouldn't you want to be biased against eu? This could be a semi-high frequency directional system with underlying hedges.
+
+--- 帖子 #206 ---
+it was actually my belief that this kind of "hedge" EA should not work. but that babypips thread really confuses me so that i think maybe i give it a try. that babypips thread does seem to have a few traders who have high rate of profitable trades (both direction). i'm trying to code something to simulate that. when done, will post here.
+
+--- 帖子 #207 ---
+that's okay, if the left trades are in pairs (eurusd vs gbpusd), that are not orphans. the EA will not exit a pair when they are not in profit. on the other hand, the losing trades will be there forever, you have to figure out an exit urself.
+
+--- 帖子 #208 ---
+DB, the profit is less than DD. the EA is killing the account.
+
+--- 帖子 #209 ---
+The whole point of stat arb/pairs trading is the expectation that one of the pairs loses, but the other profits more, so net profit...the pairs are entered at a gap and then they can go up, down sideways, whatever with no change in bottom line P/L, the only thing that makes the DD is the widening of the gap, and so the profit is always reached when the gap closes. That is why I don't need a stop loss, because the pairs will always come back to correlation, and revert to mean, also...in 1 min TF, and since no SL, no losses, ever! It's unbelievable! But true for me and many others. Euro won't survive, Greece is only the first to fall, then Italy, then Spain...those people don't work or produce, they just sit at home and collect taxes from working Germans...bums!
+
+--- 帖子 #210 ---
+Hi, pipster, with all due respect, i have exact opposite view. the correlation could be gone, and forever gone. hence the DD could be more and more and never recover. 1st thing is that we need to admit it is actually trading EURGBP, if anyone can prove me it is NOT, I'll be so grateful and award him $100 thru paypal. 2nd thing is that looking at EURGBP, as you said, if eur is doomed, then it goes down all the way, then all "buy eurusd sell gbpusd" positions will sink to bottomless hole too.
+
+--- 帖子 #211 ---
+Hi Dirtybrown, looking at both your statements some of the GU is at 0.06 lot. How did the EA end up with such lot size? i thought EA was suppose to use 0.08 v 0.10?
+
+--- 帖子 #212 ---
+Some FTests: http://www.myfxbook.com/members/cusber/oph/305833 GBPUSD EURUSD true true ADR 1.0 max floating DD 495.88 http://www.myfxbook.com/members/cusber/oph4/305415 Magic:900000 USDCHF EURUSD true true ADR 1.0 Magic:900001 USDCHF EURUSD true true ADR 0.8 Magic:900002 USDCHF EURUSD true false ADR 0.8 Magic:900003 USDCHF EURUSD false true ADR 0.8 Magic:900004 USDCHF EURUSD true false ADR 1.0 Magic:900005 USDCHF EURUSD false true ADR 1.0 Max DD:-2103.4 http://www.myfxbook.com/members/cusber/oph-1/305743 GBPUSD EURUSD true false ADR 1.0 MaxDD:-83.35 http://www.myfxbook.com/members/cusber/oph3/305746 USDCHF EURUSD true false ADR: 0.8 MaxDD: -184.42 http://www.myfxbook.com/members/cusber/oph5/305748 magic: 900000 CADJPY AUDJPY true false 1.0 magic: 9001 AUDJPY CADJPY true true 1.0 magic:3 GBPUSD GBPUSD true true 0.8 MaxDD:-770.91 http://www.myfxbook.com/members/cusber/oph6/305753 magic:90000 GBPUSD EURUSD true false 1.0 magic:900001 GBPUSD EURUSD true true 0.8 MaxDD:-531.88 http://www.myfxbook.com/members/cusber/oph8/305759 magic:90000 GBPUSD EURUSD true false 0.8 magic:423425 GBPUSD EURUSD layer:150 true true 1.0 MaxDD:-542,91 http://www.myfxbook.com/members/cusber/oph9/305761 magic:90000 GBPUSD EURUSD true false 1.0 magic:9000012 GBPUSD EURUSD layer:150 true true 0.8 magic:90021 GBPUSD EURUSD layer:150 true false 0.8 MaxDD:-824.86
+
+--- 帖子 #213 ---
+I believe this EA can perform very good if the currency pair are highly correlation, the reason why we have large DD recently, because EU and GU are not in highly correlation. please see this correlation chart in difference period. http://fxtrade.oanda.com/analysis/currency-correlation http://www.forexticket.co.uk/en/tools/01-01-correlation I found there are 2 set pair they are highly correlation. 1. AUDUSD/NZDUSD (almost over 90% in 1 week over to 1 year period) 2. EURUSD/USDCHF (it is negative correlation but have highly percentage, almost over 90% in 1 week over to 6 month period) 3. XAUUSD/XAGUSD (this pair have high risk, ADR ratio is 1:21, that means 0.01 lot gold to 0.21 silver, due to 365 ADR calculated by robot) I just start a demo on both pair, EURUSD/USDCHF got a good profit 10% in 1 hour and have no large DD. you can have a test...
+
+--- 帖子 #215 ---
+dont worry men... your floating is your profit... no need stop loss... u must have true money management...
+
+--- 帖子 #216 ---
+Hi, Charvo. I think that correlation can never disappear. In essence, EUR, GBP and CHF are same currency, only with different names. I agree that trading EURUSD/GBPUSD is trading EURGBP but with to big differences: volatility and volume. 1. Volatility: when trading EU/GU you are trading 3 currencies, while when trading EG you are trading only 2. When they move, they move based on economy each represent, but also they move in a relation to each other. Therefore, EU/GU will "jump up and down" far more than EG. 2 Volume: there is far more money and traders involved in EU/GU than in EG, which will have them move at different speed and direction, especially in short-term. Overall, on long term, EG will reflect EU/GU movement, but we are interested in short-term discrepancies to make money. This is just my opinion, I could be wrong and I welcome anyone's insight on this. I hope it helps a bit, Charvo.
+
+--- 帖子 #217 ---
+Yes...Aud/nzd is good.. 1stly u must repair this EA... even AUDUSD/NZDUSD also can kill u because orphans order and no close all..
+
+--- 帖子 #218 ---
+For those who want see multi pair in 1 chart, you can use FXCM trading station, then open a chart and you can add other currency in a single chart, very easy and fast. you can open a demo in FXCM.
+
+--- 帖子 #219 ---
+Thanks for that Paul! I am not finding the demo account link on their site thou - it would seem that you can only open a $50 micro account?
+
+--- 帖子 #220 ---
+www.fxcm.co.uk top menu bar select Trading Platforms Desktop Forex Trading press Free Practice Account fxcm.com or fxcm.co.uk both ok....select Practice Account
+
+--- 帖子 #221 ---
+Ah, I went to fxcm .com.. Ty mate
+
+--- 帖子 #222 ---
+Marijan993 is right, use forex ticket to find correlation for any combination of pairs, you'll see that short term, like 5 min is almost always out of correlation for EU/GU pairs, but at weekly, it is 0.80, or 80% which is what we want...now, could these pairs go worse, like 50%?...yes, but over time, not immediately, and I am wary of Euro crisis, too, but if they boot Greece out, and Italy and Spain straighten up, after some loss, it could come back.I agree about EG, yesterday I was trading big gap that made good profit, and the EG had gone way down to 0.8060, but it did eventually come back up to 0.8011, so good profit for someone to trade that way, several traders do it. Profit for pip is nice, $1.61 vs. $1 for EU/GU, and less margin required, since only one position. It has flaws when traded with this strategy, correlation on higher time frames. The 1 min TF is why you don't have to worry about eternal separation, smaller profits in pips, but nil risk! The problem with socialism is: you run out of other people's money!
+
+--- 帖子 #223 ---
+Also thebritish gov't has laws about the pound keeping within 6% of euro's movement, which kept by central bank...this is not smart, because when the mark fell hard in 1992, they removed this requirement, and Soros made big bucks shorting the pound, and said he would be shorting the Euro the same way today.
+
+--- 帖子 #224 ---
+Hi pipster. The way I see the situation for eur/gbp.. the question has to be asked does the EU / GU move dictate movement of eurgbp or at times is eurgbp influencing the EU/ GU. I think the answer is it depends on the precise moment you are talking about. For me in thinking about thi squestion ... I go back to the basics. what currency is used in 75% or more forex transactions? the usd. Since this is the case, it seems to me that eurgbp is more of a by product of dollar trading. Maybe this is wrong, just some conjecture on my part. I'll post some correlation charts later to try and show what I'm talking about. To all those that have asked me questions, my deep apologies as I'm busy with my day job this week. I promise to reply to everything this evening. Thanks and glad to see so many great minds collaborating and figuring this thing out!
+
+--- 帖子 #225 ---
+hahahaha... god damn, so many possibilities. See I can close all trades now if I wanted in profit. This is my local PC version with the KH EA running on top of the normal setup. Great to know euro is going to shit, then you can just turn on one side one direction.
+
+--- 帖子 #226 ---
+Hit 20% today... http://www.myfxbook.com/members/burn.../oph-ea/302314 Still very impressed!
+
+--- 帖子 #227 ---
+Hey looks good, can you post your set files if you didn't already? Looks like your drawdown came back better than on my vps.. but probably because we started it at different times.
+
+--- 帖子 #228 ---
+Sure mate, see attached. Its still the same set file as before - only I changed the gap to 150 - same as you did.. Attached File(s) oph set.zip &lt; 1 KB | 511 downloads
+
+--- 帖子 #229 ---
+Hi Paul, could you tell me how are you fixing the same scale for both currencies with the fxcm platform please?
+
+--- 帖子 #230 ---
+Closed all trades, turned off EA. Will turn it on again at the right time.. This is my local PC copy again with the extra KH ea. I know I turned this into tons of "orphaned" trades, but I wonder if the positions went against if you could turn the hedge back on so it would "parent" the single euro trades... or otherwise you could manually hedge them with a pending order. Just an idea who knows if it could work consistently....
+
+--- 帖子 #231 ---
+After login the Trading station (main program), open a chart (sub-program) i.e you select EURUSD as the chart pair, then you can insert other currency pair into this chart. very sample and good.
+
+--- 帖子 #232 ---
+I understand Paul but I have different scales. For instance I have a "step" of 50 pips for GU and 25 pips for EU. On your picture I see that you have the same steps (10 pips) for the 2 currencies...
+
+--- 帖子 #233 ---
+Yes Pipster...entirely agree with you, this is the true philosophy of hedging pairs and this strategy is only available in the forex market and, by my point of view, is the "only" way to make money from it...no indicators, no SL, no mambo jambo etc. The nature of specific pairs is the correlation, a couple of pairs highly correlated can loose for a short time the correlation but soon or late they will come back home. So, this EA is a good tool for work with hedging pairs and for "hedging the hedge". You must run two instances of the EA in two different charts, setting TradeCouple1=True and TradeCoiple2=False on one chart and TradeCouple1=False and TradeCouple2=True in the other. You must also change the magic number, select the TP at 100 dollars (with a standard lot) and SET THE LAYERS=1. Because the principle is hedging the hedge and maintain the DD soustainable, if you add more trades in one direction you unbalance the hedge and automatically you are in a directional trade. After that, let the EA run..let the market go freely. As soon as a gap in one direction start, you start collect money from a couple, and collect DD in more or less the same amount from the other...as soon the trend change you'll get the opposite results. In this way you get money balancing the DD and you should be able to keep the DD substainable hedging the trades.
+
+--- 帖子 #234 ---
+you are good! that makes sense to me...somebody willing to try this?
+
+--- 帖子 #235 ---
+Simihouse thank you. So normaly the EA should ALWAYS open 2 pairs or 4 trades max. Is this right ? if there is 2 sells and 1 buy, something is wrong isn't it ?
+
+--- 帖子 #236 ---
+It does make A LOT of sense. I will load these settings on new instances on my VPS. This sounds like the key to making it work for real as a profitble hedge system.
+
+--- 帖子 #237 ---
+No Idea.. that is not what I set it. But I think that's from my local PC version, which I pretty much totally screwed with the settings on so don't take it seriously.
+
+--- 帖子 #238 ---
+Wow thanks for testing so many settings. Mind posting your .set files for the threads reference?
+
+--- 帖子 #239 ---
+I also thought about using it on gold/silver, will do it with some new settings. Will trade gold/silver on VPS. I've read that too high correlation can be bad and lead to both sides losing with spread just be careful.
+
+--- 帖子 #240 ---
+Try settings from Simihouse.. Also I saw 3 trades on the same time stamp. I just noticed it on my local PC version when I turned the EA back on it did that.. Well, we know the starting logic needs some work, thats why you have to be careful when you start it and be sure to use a chart overlay which I know you do.
+
+--- 帖子 #241 ---
+The beauty is that the EA can be applied to the market in so many ways. With enough people testing out settings after a while we can mesh the settings giving lowest drawdown with those giving the highest profit. Just a matter of time.
+
+--- 帖子 #242 ---
+overlay chart install it in indicator folder
+
+--- 帖子 #243 ---
+Live statement here is a setup as you described. Notice the 2 separate magic numbers.. http://www.mt4i.com/users/heliosphan here are the templates EDIT: Sorry the layers updated to 0 and restarted.
+
+--- 帖子 #244 ---
+hi, there is "return(Ticket);" still missing or?
+
+--- 帖子 #245 ---
+Have any statements using these settings you care to share?
+
+--- 帖子 #246 ---
+Hey.. Can u updated latest version...? Function: 1- Close All.. 2- Close orphans orders... sample code: Inserted Code //tambahan orphan order... if ((TickDelay == 15) &amp;&amp; (CloseOrphanedOrders)) { for (int l_pos_1 = 0; l_pos_1 &lt; 500; l_pos_1++) { int count = 0; for (int i=OrdersTotal()-1; i &gt;= 0; i--) { if (OrderSelect(i, SELECT_BY_POS, MODE_TRADES)) { if (OrderSymbol() == Pair1 || OrderSymbol() == Pair2) { if (OrderMagicNumber() == Magic+l_pos_1) count++; } } } if (count == 1) CloseBatch(l_pos_1); } TickDelay = 0; } TickDelay++; //code last..........
+
+--- 帖子 #247 ---
+And code close All.... Inserted Code void CloseAll() { double l_ask_0; double l_bid_8; for (int l_pos_16 = 0; l_pos_16 &lt; OrdersTotal(); l_pos_16++) { if (OrderSelect(l_pos_16, SELECT_BY_POS, MODE_TRADES) == TRUE) { if (OrderSymbol() == Pair1 || OrderSymbol() == Pair2 &amp;&amp; (OrderMagicNumber() &gt;= Magic &amp;&amp; OrderMagicNumber() &lt;= Magic + 500) &amp;&amp; OrderCloseTime() == 0) { l_ask_0 = MarketInfo(OrderSymbol(), MODE_ASK); l_bid_8 = MarketInfo(OrderSymbol(), MODE_BID); if (OrderType() == OP_BUY) { OrderClose(OrderTicket(), OrderLots(), l_bid_8, Slippage, Blue); Sleep(2000); } else { if (OrderType() == OP_SELL) { OrderClose(OrderTicket(), OrderLots(), l_ask_0, Slippage, Red); Sleep(2000); } } } } } }
+
+--- 帖子 #248 ---
+Hello all, first sorry for my english. I tried this EA on Demo Acc by Oanda for three days got profit for 15% à day. But on Real Account, it does nothing after open 1 Buy and 1 Sell trade at the beginning, mean, not open another trade anymore and also close one. Broker told me that Oanda doesn't support EAs with "Magic Number", so my question, can I only give up it and other EAs with "magic number" or can man modify it so that it works on plattforms like Oanda. Thanks
+
+--- 帖子 #249 ---
+i was testing the EA on Oanda Mt4 demo too. It only opens one trade at a time. Does not seems to close trade. Most of time i closed manually when in profit.
+
+--- 帖子 #250 ---
+Hmm, on Oanda is this EA not usable cos the Fifo FIFO regulations, what means u cannot close one trade if there is an older trade of the same quantity on the same currency pair. But this EA closes Trades from the last to the earlier. I have modified the code so that it close from the first one. On Demo works still good, but on real account it does nothing after the first 2 trades.
+
+--- 帖子 #251 ---
+With the settings I suggested above you should have anytime 4 trades open: 1 buy and 1 sell 1 lot EU and 1 buy and 1 sell 0.8 lots GU. I'm running the EA on SIG Trader and on GCI MT4 and untill now I no experienced any orphan trade. Remember set the layers to 1. Otherwise the EA will open more and more trades as the gap widening and this maybe can cause the problem of orphan trades. On GCI (Demo) since yesterday I got 598 $ and the actual DD is around 1000 $.
+
+--- 帖子 #252 ---
+Reason of Big DD If you run this EA for a time period, say few days later. You will found a lot of Big DD in the open trade. One of the reason I know is we use the wrong ADR Ratio in the second couple pair. but this will ONLY apply to the 2 pair currency are highly correlated condition. Setup as below (example): (EA in Pair1 Chart) Pair1: AUDUSD Pair2: NZDUSD TradeCouple1: True TradeCouple2: False ADR_Ratio: 0.8 (EA in Pair2 Chart) Pair1: NZDUSD Pair2: AUDUSD TradeCouple1: True TradeCouple2: False ADR_Ratio: 0.8 When trade open it will become Buy AUDUSD 0.04 Lot Sell NZDUSD 0.05 Lot Buy NZDUSD 0.04 Lot Sell AUDUSD 0.05 Lot At the final, most big DD will become positive You can try this setting.... This case WILL NOT apply to the condition of 2 pair are not in highly correlation (2 pair goes separate direction)
+
+--- 帖子 #253 ---
+The settings are OOTB except for the changes already posted. Here are some more: http://www.myfxbook.com/members/cusber/oph-h-2/306797 Lot=1.00 UseTakeProfitByUSD=1 TakeProfitInUSD=100 MaximumLayer=0 Pair1=EURUSD Pair2=GBPUSD TradeCouple1=0 TradeCouple2=1 ADR_Ratio=0.8 MagicNo=90001 ---------------------------------------------------------------------- Lot=1.00 UseTakeProfitByUSD=1 TakeProfitInUSD=100.00 MaximumLayer=0 Pair1=EURUSD Pair2=GBPUSD TradeCouple1=1 TradeCouple2=0 ADR_Ratio=0.8 MagicNo=90000 ------------------------------------------------------------------------------- ------------------------------------------------------------------------------- http://www.myfxbook.com/members/cusber/oph-h-1/306792 Lot=1.00 UseTakeProfitByUSD=1 TakeProfitInUSD=100.00 MaximumLayer=0 Pair1=GBPUSD Pair2=EURUSD TradeCouple1=0 TradeCouple2=1 ADR_Ratio=0.8 MagicNo=90001 ------------------------------------------------------------------------------------ Lot=1.00 UseTakeProfitByUSD=1 TakeProfitInUSD=100.00 MaximumLayer=0 Pair1=GBPUSD Pair2=EURUSD TradeCouple1=1 TradeCouple2=0 ADR_Ratio=0.8 MagicNo=90000 --------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------- http://www.myfxbook.com/members/cusber/oph-h/306535 Lot=1.00 UseTakeProfitByUSD=1 TakeProfitInUSD=100.00 MaximumLayer=0 Pair1=GBPUSD Pair2=EURUSD TradeCouple1=1 TradeCouple2=0 ADR_Ratio=1 MagicNo=90000 ------------------------------------------------------------------------------------------ Lot=1.00 UseTakeProfitByUSD=1 TakeProfitInUSD=100.00 MaximumLayer=0 Pair1=GBPUSD Pair2=EURUSD TradeCouple1=0 TradeCouple2=1 ADR_Ratio=1 MagicNo=90001
+
+--- 帖子 #254 ---
+Seems good but one thing,what's the defferent between buy eurusd&amp;sell gbpusd together and buy eurgbp only? I mean,if you buy eurusd&amp;sell gbpusd together it is same that you buy eurgbp. So,trading so,it means if eurgbp go up 100pips,you think it will go down 100pips than.Will this works?
+
+--- 帖子 #255 ---
+Sorry Paulss, but in this way the trades are unmbalanced. The ADR value should be the same for each pair of the couple. in the original settings the EU has an ADR slightly higher than GU so the lots are calculated in a 0.8 ratio: Buy 1 lot EU Sell 0.8 lots GU Sell 1 lot EU Buy 0.8 lots GU in this way the hedge is balanced.
+
+--- 帖子 #256 ---
+Yes. Mathematically is the same, but practically is different. if you buy and sell in the same time EG in two different charts and manage to draw the profits in the winning side and let the losses go in the other, you could stay in DD forewer, because, for example, the buy EG cannot reach again the opening price and than go in profit. Working with pairs allows you to go back in profit not at a specific value of a pair, but at a specific value of the "spread" between the pairs related. So it's not exactly the same.
+
+--- 帖子 #257 ---
+Yes, the v2 on first post still lack return(Ticket); on SendSell() routine Fixed by myself skipper
+
+--- 帖子 #258 ---
+for (int l_pos_16 = 0; l_pos_16 &lt; OrdersTotal(); l_pos_16++) doesn't work correctly...the loop has to be the other way round: for (int l_pos_16 = OrdersTotal()-1; l_pos_16&gt;=0; l_pos_16--) Imagine you have two open orders that are to be closed These orders carry the index 0 and 1 If you close the first order (index=0) the remaining order would automatically be assigned index=0...so your loop with l_pos_16=1 wouldn't get that order and it would stay open
+
+--- 帖子 #259 ---
+You're right, assuming that the Trade Panel is sorted by date/time (default) or by ticket and not, e.g., by pair. Otherwise, the order #0 is always the last in the list. In any case, doing as you suggest even the FIFO rules are respected. skipper
+
+--- 帖子 #260 ---
+I think the "spread" between the EU&amp;GU is the EG. if you buy 1lot EU,you buy 100K EUR,and you sell 0.8 lot UG,you sell 80K GBP,than,it is same you buy 1lot EG. I don't mean to buy and sell EG at same time but to buy it only. understand me?sorry for my poor english.
+
+--- 帖子 #261 ---
+Dear Mahanxiong, maybe I should explain better...I told you already that you are right...but the system works exactly buying and selling in the meantime the same pair EG, perfectly hedged, but not directly, beside the correlated pairs EU and GU. And this is not exactly the same.
+
+--- 帖子 #262 ---
+yes...u right..i show sample only.. Can u make modify this EA for check orphans orders...?
+
+--- 帖子 #263 ---
+simi, if it is same, it is same in every aspects. very simple way to find out: put up a demo account, buy 0.1 lot eu, sell 0.08 lot gu; then sell 0.1 lot eg. this is a perfect hedge (with a few cents unmatched). if they are different, you'll see a loss or profit. but you won't be able to see it! i really wish you can show me a proof that "they are different".
+
+--- 帖子 #264 ---
+Hello everyone, I am watching this thread siliently from couple of days. Already doing demo trading of this. And above statement made is absolutely correct in my opinion.
+
+--- 帖子 #265 ---
+That ADR is also confusing to many. The real reason of 0.8 is simply because eurgbp = 0.80xx.
+
+--- 帖子 #266 ---
+Based on what parameter do you want to CloseAll orders?
+
+--- 帖子 #267 ---
+Just so you all know, for my manual strategy, I use equal lots of EU and GU, so 1.0 buy on one 1.0 sell on the other, because a pip is $1 on each.
+
+--- 帖子 #268 ---
+sorry, but I'm not going to make any changes in the code - it's only a decompiled version and so it's hard to read - it's not BTable and so it could take a lot of time to see whether a "bug" was fixed or not, or whether a bugfixing resulted in producing a new bug as I posted earlier I made several tests with MT5 and wasn't satisfied with the results. Currently we are in a trend and if you're on the right side, this concept will make money. But there will come some extreme unfavorable market conditions where DD becomes a big big issue and then you have to decide But I like this concept in general and that's why I'm here. Looking for inspiration and maybe a single post will shed some light upon the missing piece of the puzzle
+
+--- 帖子 #269 ---
+my local PC version statement, pls refer to my earlier posts regarding directional trades that were taken that have contributed to the profit. Standard Paulss settings now being used again after those trades were closed out.
+
+--- 帖子 #270 ---
+Good point, can anyone starting out new demo's try it on equal lot sizes as mentioned by thepipster? I'll set some on my vps as well, getting all of my test accounts on mt4i so I don't have to keep posting statements manually.
+
+--- 帖子 #271 ---
+DB - here is a correction to the code fixing SendSell(...) regarding return(Ticket). Sorry for the oversight. KingHigh
+
+--- 帖子 #272 ---
+I've done exactly this. See the screenshot. The red lines are the ask line, so one can see the spreads in the pairs (it's around 3 pips for EU and around 4 pips for GU and EG). So combined when I opened the trades there was a starting 11 USD loss due to the spreads, now it's in -21 USD. So something is not working, only 45 mins elapsed since I opened the trades and there is a loss already (it's keep growing as I'm typing this). On another chart (and another broker) I keep tracking the gap between EU/GU with indicators and the simple overlay with vitrite. At the time when I opened the trades there was around a 16 pip gap between the 2 pairs (measured on the EU chart), and now it's around 13 pips. So on the EU/GU sell/buy there would be a 3 pip gain in this 45 mins and on the EG there would be a 0.2 pip loss (not counting the spreads).
+
+--- 帖子 #273 ---
+from -11 to -21 that's a huge gap. that kind of market inefficiency is unbelievable. is ur demo account's capital based in USD or EUR? when we say 0.1 vs 0.08, it has to be USD-based accounts. if trading 0.1 lot, i do see a few dollars inefficiency now and then, but not enough to make profit of it. but ur -11 to -21, that's a huge advantage that we can use if that's often seen.
+
+--- 帖子 #274 ---
+I think an example from statistics can put to rest concerns related to eur/gbp trading and the broader hedge system. Even if you don't care about this program, spss, watch these videos to get a better idea of the principles behind what we are discussing Pearson correlation: From my understanding, this is the basic visual 1 to 1 correlation (or inverse correlation) principle we use on chart overlays. It is the basic method: http://how2stats.blogspot.com/2011/1...tion-spss.html Partial correlation: Correlating 2 sets of time series while controlling for the effects of a third: http://how2stats.blogspot.com/2011/1...tion-spss.html We are talking about 2 different kinds of correlation when we talk of correlation between EU /GU and correlation between EU /GU while controlling for the effects eurgbp may have. 2 different kinds of statistical comparisons. One method is not necessarily any better than the other, it is just a different type of study using more data. Therefore I think we can only stay concerned with the movements of EU / GU.
+
+--- 帖子 #275 ---
+No problem thanks for the update, it's now in post #1.
+
+--- 帖子 #276 ---
+The equity curves aren't looking that bad, if there weren't the ugly spikes Depending on when you started, a downspike could lead to a 50+% DD of your starting balance. The test was eurusd vs. gbpusd with a layer distance of 50pips (average down only) and a basket takeprofit of $100 Initial balance $10K and 0.1 lots for both pairs - year to date The upper graph is showing long eurusd/short gbpusd and the lower the other way round
+
+--- 帖子 #277 ---
+not bad, but is this MT5 EA a direct conversion from the original EA? is this for 1H timeframe or 1Minute timeframe?
+
+--- 帖子 #278 ---
+Yes, but looking good!!! Did you use any of the code from the converted version or did you write it from scratch?
+
+--- 帖子 #279 ---
+it's "my own" EA but based on the same grid principle There's no entry criteria so the EA opens the hedge as soon as it's started After TP for a basket is reached the next hedge is opened directly after closure...and here's the first point that doesn't make sense why close the basket if you're afterwards going to trade the same direction anyway missing the piece of the puzzle...
+
+--- 帖子 #280 ---
+Well jus tbecause you enter on a grid doesn't mean you have to exit on a grid.. Dare I, for the first time on the thread bring up an indicator. But maybe you can use the EA to check the pair that is in profit. For the profitable pair, check it against a Laguerre indicator. For Laguerre, when price crosses above .15 buy, crosses below .75 sell. It can be very accurate for manual trading. So maybe an mt5 version of this could be used to stay profitable trade pairs??
+
+--- 帖子 #281 ---
+been there, done that...not Laguerre but several other indicators I didn't get an edge and always ran into the spikes even random choice of long/short combination led to an overall positive outcome it has to go into the supply/demand direction i think, but that's rather complicated for now (at least for me)
+
+--- 帖子 #282 ---
+that's long audusd vs. short nzdusd It's working in 2012...didn't test prior because of missing historical data (and that's a big big issue with MT5) but you always run into a spike that is big enough to kill the account
+
+--- 帖子 #283 ---
+long nu/short au
+
+--- 帖子 #284 ---
+updated these settings with layer level = 1, was 0 Mt4i link in my signature reflects these settings.
+
+--- 帖子 #285 ---
+those result above looks like have huge drawdown tho
+
+--- 帖子 #286 ---
+Drawdown should be limited to this range while getting consistent profit, we will see.
+
+--- 帖子 #287 ---
+what about backtest result ?? and btw how long u've been using this EA ? is this ea hedging with some martingale or averaging ?
+
+--- 帖子 #288 ---
+Read post #1 and see this: http://www.forexfactory.com/showthre...12#post5673312 Can't backtest multi pair hedge with standard means, so forward test only. Call it what you want, it's a pure hedge strategy no indicators just numbers and math.
+
+--- 帖子 #289 ---
+thats doing great... is that real account ? btw, how can i set this ea for mini account ?
+
+--- 帖子 #290 ---
+I have went through the code and think I understand it. There are some peculiarities that do look strange. For Clarification: everything in this EA is based of Points and not Pips. Pips are thrown around in post 1 when in fact he means Points - for Levels, for TP, etc. I have commented the code as can be viewed below. IMHO there is no question that orphan trades could be generated. For each pass, we could match all of the Buy/Sell orders by level and close orphans - easy-peasy. Here is what I think needs to be done. 1. We need to automate the identification of a significant GAP in software between Pair1 and Pair2 before opening any new hedge - a buy and a sell. I have software that can do this. 2. We need to establish the market trend from the Dailys using an RSI approach so that we are not blindly running both sides when we are trending. When we are ranging we can/should run both sides - BUY1SELL2 &amp; SELL1BUY2 - which is 70% of the time. 3. We should check both the BUY1 and the SELL2 to see if they are both in profit and if so close both to minimize the build up of DD. We now need to want for another GAP opportunity before opening a new BUY1/SELL2. 4.Everytime we open one side at T0 and the other side at T1, we are building in DD that has to be overcome. 3. If we closed one of the two, we need to open an opposing order for whatever was sold to minimze the loss that we may have to overcome. 4. For every tick we are taking a look at our P&amp;L based on the status of the last two hedge buy &amp; sell orders - ONLY. The lower levels are ignored unless they pop to the top level. We need to go through all of the lower levels and look for opportunities to close levels a predetermined amount/pips lost/ elapsed time or whatever. Regarding using different Lot Sizes for the two Pairs - The reduced lotsize for GU reduces the profits possibilites and increases the DD possibilities from the more volitile Pair. So - if we are planning on having a higher win rate from this EA then we have more to gain from wins that we are going to lose from DD - IMHO. WE should run equal Lotsizes. With Regards, KingHigh PHP Code ////////////////////////////////////////////////////////////////////// // Check For No Open Trades in Buy1Sell2 Mode - Open initial Buy/Sell ////////////////////////////////////////////////////////////////////// if( Buy1Sell2 ) { // New!! - Wait For GAP with Sell2 &gt; Buy2 with idea that the pos corr will bring them back together. if( GetBuyOrderCount ( Pair1 , MagicNo ) &lt;= 0 ) SendBuy ( B1S2 , Pair1 , ScaledLots , 1 , MagicNo ); // With GAP Found, we always Sell2 if( GetBuyOrderCount ( Pair1 , MagicNo ) == 1 &amp;&amp; GetSellOrderCount ( Pair2 , MagicNo ) &lt;= 0 ) SendSell ( B1S2 , Pair2 , BaseLots , 1 , MagicNo ); // First we never add a level beyond the MaxLevel // AND if we find a loss in "Pts" &gt;= preset amount we investigate whether to Buy/Sell if( GetFloatingPts ( BUY1SELL2 ) &lt;= ( - NewLevelTriggerInPts ) &amp;&amp; GetBuyOrderCount ( Pair1 , MagicNo ) &lt; MaximumLevel ) { LstBuyTicket = GetLastBuyTicket ( Pair1 , MagicNo ); LstBuyLevel = GetLastBuyLevelNbr ( Pair1 , LstBuyTicket , MagicNo ); if( GetBuyOrderCount ( Pair1 , MagicNo ) &lt;= LstBuyLevel ) // Only Buy if our Buy ct matches what we expect SendBuy ( B1S2 , Pair1 , ScaledLots , LstBuyLevel + 1 , MagicNo ); if( GetBuyOrderCount ( Pair1 , MagicNo ) == LstBuyLevel + 1 &amp;&amp; GetSellOrderCount ( Pair2 , MagicNo ) &lt;= LstBuyLevel ) // Only Sell if our Sell ct matches what we expect SendSell ( B1S2 , Pair2 , BaseLots , LstBuyLevel + 1 , MagicNo ); } // Regardless, we always check for PROFIT - and Buy/Sell accordingly if( UseTakeProfitByPts == TRUE &amp;&amp; GetFloatingPts ( BUY1SELL2 ) &gt;= TakeProfit ) { LstBuyTicket = GetLastBuyTicket ( Pair1 , MagicNo ); LstSellTicket = GetLastSellTicket ( Pair2 , MagicNo ); if( LstBuyTicket &gt; 0 &amp;&amp; LstSellTicket &gt; 0 ) CloseLastBuy ( LstBuyTicket , Pair1 ); // Here is the first problem, we calculated the profit using both the BuyFloat and the SellFloat, but we only closed the BUY. // To me, both should be closed to keep balance, no orphans, etc. // At this point we don't really know if the profit came from the Buy side order. } if( UseTakeProfitByUSD == TRUE &amp;&amp; GetFloatingUSD ( BUY1SELL2 ) &gt;= TakeProfitInUSD ) { LstBuyTicket = GetLastBuyTicket ( Pair1 , MagicNo ); LstSellTicket = GetLastSellTicket ( Pair2 , MagicNo ); if( LstBuyTicket &gt; 0 &amp;&amp; LstSellTicket &gt; 0 ) CloseLastBuy ( LstBuyTicket , Pair1 ); // Here is the first problem, we calculated the profit using both the BuyFloat and the SellFloat, but we only closed the BUY. // It is asumed that the Buy Float is positive without actually checking. // We don't really know if the profit came from the BUY1 side order or the SELL2 side order. // To me, both should be closed to keep balance, no orphans, etc. // Maybe, we are using Buy1Sell2 because we believe that we are in a BUY TREND, leave the sell order as is and capture a new profit from up trend. // The problem is that EU and GU will naturally trend together - why leave behind a sell that probably will trend up. } ////////////////////////////////////////////////////////////////////////////////////////////// // OK up until now we have been doing the every tick bookkeeping, Checking for no open trades, // Checking for new Level to open a new hedge, Checking for Profits. Pretty easy to understand so far. ////////////////////////////////////////////////////////////////////////////////////////////// LstBuyTicket = GetLastBuyTicket ( Pair1 , MagicNo ); LstBuyLevel = GetLastBuyLevelNbr ( Pair1 , LstBuyTicket , MagicNo ); LstSellTicket = GetLastSellTicket ( Pair2 , MagicNo ); LstSellLevel = GetLastSellLevelNbr ( Pair2 , LstSellTicket , MagicNo ); if( LstBuyLevel &gt; LstSellLevel ) { BuyFloat = GetBuyFloatInPts ( LstBuyTicket , Pair1 , MagicNo ); if( BuyFloat &gt; 0 ) // If we have extra BUY1 and that last Buy is in Profit - any amount - we close it. CloseLastBuy ( LstBuyTicket , Pair1 ); else // Otherwise we send a Sell2 order to true up Buy asell count. SendSell ( B1S2 , Pair2 , BaseLots , LstBuyLevel , MagicNo ); // Otherwise we try to balance the trades by adding a Sell order } if( LstSellLevel &gt; LstBuyLevel ) // This is just the reverse of the previous block of code More Buy1s than Sell2s { SellFloat = GetSellFloat ( LstSellTicket , Pair2 , MagicNo ); if( SellFloat &gt; 0 ) CloseLastSell ( LstSellTicket , Pair2 ); else SendBuy ( B1S2 , Pair1 , ScaledLots , LstSellLevel , MagicNo ); } }
+
+--- 帖子 #291 ---
+Wall street has been pairs trading for years, morgan stanley started it in the 80's read the attached for more background. This isn't some hokey BS martingale strategy, read up on the first part of this PDF and you will get a theoretical background of why this kind of trading can make you rich. I use 7bit's python interface that loads data from metatrader to R in realtme and generates mean reversion plots like this: Attached Image (click to enlarge) Note that you have to reverse the sign on the hedge ratios. so that 100 should be -100, so short. Something backwards in the code, but it really does work. My bias would be to short dollar based on mean reversion of this chart now, so that may make me want to open directional short dollar trades for a short period based on other directional indicators, close them out some in profit some loss. Then start all over again, that's what happened (sort of by mistake) on my local PC demo. Note don't get confused with the default way most are running, this is one of my own variants, trying as many settings as possible is my goal now.
+
+--- 帖子 #292 ---
+Dear Iwjw, your backtests are wonderfull indeed. This is the demonstration that the system works on the long run. You must also think that with the settings that i suggested above, the DD is reduced as it's hedged and the DD in one way is the gain in the other. I want ask you if you can backtest on MT5 the EA with the same settings but without the layers, using layers=1. Thanks
+
+--- 帖子 #293 ---
+to not get confused, the BTs posted are not from the EA from post #1 it's my own development but based on the same principle so testing your settings isn't possible as I posted earlier it's no longer possible with MT5 to have a long and short at the same time...they close each other out also you can only have a single position/pair and that's why the MT5 version of the overlay EA doesn't work without major changes
+
+--- 帖子 #294 ---
+Hey KING HIGH... I know its good for add RSI for entry... When u can update function check orphans orders..?
+
+--- 帖子 #295 ---
+Thanks for all of the notes - I'll surely be spending (part of) the weekend going through it.
+
+--- 帖子 #296 ---
+I'm currently playing around with an indicator that's showing me the price difference between now and xx bars back On M15 with xx=24 (6 hours) im currently getting EURUSD: -51 pips GBPUSD: -111 pips EURGBP: +24 pips So assuming I would have opened a short gu/long eu (what would be considered as long eurgbp) 6 hours ago, I would have +60pips/$60 on the hedge, but only +24pips/$39 on a long in eurgbp Does this example show me that trading the hedge really is something different than trading the cross or am I missing something?
+
+--- 帖子 #297 ---
+u missed the lotsize, probably. it should be (1 eu + 0.8) gu vs 1 eg. therefore, 51 - 111*0.8 = 37.8 pip (eu gu) vs 24 pip (eg) now consider pip-value: 1 pip eu = 1 pip gu = 1$. 1 pip eg = 1$ * 1.27 (current eu price) /0.80xx (current eg price) = 1.58 $ (in fact, gbp's usd price) now calculate: 37.8 * 1 (eu gu) = 37.8 $ 24 * 1.58 (eg) = 37.9 $ what's the difference here??? just a few cents....... funny thing is ppl wouldn't believe what i'm keep posting. most of the efforts here probably will end-up in vain. this is not the 1st thread dreaming about this. Edited: i'm not bashing the overall pair trading idea. what i try to say is that most of the demo being run are meaningless since the EA is running with a bias (either long or short). a EA can deal with both directions with little DD should be what to look for. what i guess are important is to realise these few things in the EA: 1. identify a widening gap(spread) of two pairs, which this EA does NOT; 2. deal with BOTH long and short and have a way to exit (not only TP, but also SL); which again, the EA does NOT Last note: this EA may only work on 1minute or 5minute timeframe, because the eurgbp may be trending on longer timeframe. in other words, the so-called correlation could be gone long enough (months) to kill an account. (pull a chart of eurgbp, why deny it?)
+
+--- 帖子 #298 ---
+I have been testing since Sunday with the EUR (pair 1) at 0.09 buy and GBP (pair 2) 0.10 sell. I made EUR pair one because it had a larger ADR. I also set manual ADR to false. I am up 4.5% or $255 for the week. The down draw was 9.5% about $450. Broker is FXDD. I am happy with it so far.
+
+--- 帖子 #299 ---
+It doesnt work mid to long term. The reason it may work now is down to what is happening in the market and allot of luck. Wait and see what happens when the carry trade unwinds. Your accounts will be empty in a short period of time. You need to work out what is the carry trade in a given period. Yes, the big boys do it but they have the benefit in knowing what carry trade to use based on interest rate differentials between say USD, JPY etc etc. A strategy in which an investor sells a certain currency with a relatively low interest rate and uses the funds to purchase a different currency yielding a higher interest rate. A trader using this strategy attempts to capture the difference between the rates, which can often be substantial, depending on the amount of leverage used. Scoobs
+
+--- 帖子 #300 ---
+VastaVista has been trading this for six months with success, maybe he can tell us how has he been doing this.
+
+--- 帖子 #301 ---
+Hi Scooby thanks for your valuable input. I thnk it's important to make a distinction here. Pairs trading does work, this implementation might be flawed for longer term trading. But I think now most of the close followers of the thread understand how it is trying to work, that is the most important part. The way I see it, just a matter of getting the EA coded properly, to "hedge the hedge" .. to limit drawdowns. Other approaches could be temporary directional trading at certain times as I've shown.
+
+--- 帖子 #302 ---
+Thanks for your insight Scoobs (my nick name in High School). Where can you find out more about the carry trade.
+
+--- 帖子 #303 ---
+hey i understand alot of the trading strategies that go into a forex system but im still having trouble with understand what i need to do to "properly" adjust my settings in the indicators parameters in my example i was looking for settings for a 5 minute chart because from my backtesting i looked at it has the capabilities to show a trend and still give fast results due to a 5 minute chart (please excuse my nieveness) lol but like if anyone could help me on setting parameters for a 5 minute indicators for the chart it would be much appreciated.
+
+--- 帖子 #304 ---
+Hi Charvo... 1. Can you give a bit more detailed explaination here of this again please? 2. Am I correct in you saying that EU = 1 lot and GU = 0.8 lot (is this right for buy and sell, i.e if you buy or sell GU, it will always GU = 0.8 lot?
+
+--- 帖子 #305 ---
+See results, DD has been very low since starting fresh EDIT: tuesday. Something weird is happening recently though, it has started to open 3 trades at a time again. Look at the trades from the 17th and the opens. Doesn't make sense, maybe I somehow triggered a bug when I removed the extra EA I added by mistake. That shouldn't matter 4 days later though.. Can't argue with profit. Posted .set file from my local PC version to post #1.
+
+--- 帖子 #306 ---
+Next week I will try 2 new things: a) Equal lot sizes. b) Timing the start of the EA AND close of all trades according to mean reversion of 3 pairs: EU / GU / UC using R. Why UC? Cause I've found for the majors, these 3 are generally the most correlated across most TF's. so.. I will start the EA when a new trading week has started AND: The blue line from R has moved at least 1 standard deviation from its previous point. By the time either the next standard deviation starts getting hit or you are in sufficient profit to close all trades and make good profit, close all trades. Stop the EA. Then wait for the next standard deviation to get hit, turn it on again... etc. Remember, correlation is just a statistical calculation. The DELTA of correlation is what makes us money. We don't want to be in the midst of a huge consolidation when turning on the EA, I think using mean reversion of the dollar may prevent this. For more information on using mean reversion in R, see this: https://sites.google.com/site/prof7b...r-metatrader-4 http://www.forexfactory.com/showthread.php?t=262827 Will find out next week if this can make a difference. Not sure what TF to load R with yet still researching. Observe that attached is an hourly chart (it's hard to make out the time scales compared to MT charts), suffice it to say since before Tuesday we just entered a new standard deviation level for these correlated pairs.. AND turning the EA on around this time has resulted in profit with extremely low DD. On the attached, DD did spike some, but is now nearly flat. I could close out all trades and walk out with a tidy 2 day profit and wait till next week to turn it on again.
+
+--- 帖子 #307 ---
+Attached Image (click to enlarge) See this, just eurusd and gbpusd, different chart when calculated but basically giving the same info just inverted from the above chart. Sine it looks to be bouncing off the 2nd lower standard deviation, may be an opportune time to start the EA fresh.
+
+--- 帖子 #308 ---
+Attached Image (click to enlarge) With 1 min data. Probably best to use...See how wide the standard deviations go as much as 6. Wonder what would happen if you start the EA at those extended levels.. VS. right at the mean, this I'm not sure of will be sure to pay closer attention to drawdown at the different levels. Encourage everyone to setup this tool
+
+--- 帖子 #309 ---
+Anyone look at spread trading commodities? Attached is a spread chart for Wheat vs. KC Wheat. Seems like it would allow you to average in if your initial position moves against you.
+
+--- 帖子 #310 ---
+Interesting, I don't trade futures but the opportunities are probably more obvious than FX. Unfortunately I can't change the default symbols in the Arbomat EA that sends data from metatrader to R (you are supposed to be able to do that if anyone can figure it out pls let me know). Anyway, you could compare Gold and Silver and trade those on some fx brokers. Surely some opportunities there, but the spread costs and slippage may be a problem not seen in more liquid dollar pairs.
+
+--- 帖子 #311 ---
+Sorry Iwjw, but is possible for you backtest in MT5 THIS EA with the settings: Trade couple 1=true Trade couple 2=false TP= 100 usd Lots= 1 Layers=1 and in a different BT the same settings but TradeCouple1=false TradeCouple2=true So we can understand something more about the real DD.
+
+--- 帖子 #312 ---
+sorry, as I said before: the MT5 version of this EA doesn't work as it's supposed to do The ordermanagement is totally different from MT4 so the MT5 version is of no use
+
+--- 帖子 #313 ---
+My conclusion is that... trading on both side ie.. (BuyEU/SellGU and SellEU/BuyGU) will not be profitable bcos it creates a band... a band of drawdown. Each take profit amount is get added to that band. As the profit increases so the drawdown. Right now, I am trading in one direction only with layer gap of 1000 (instead of 100) and small take profit of 10 pips. Its looks fine till now. Ea is trading calmly and so me. I am in no hurry to bcome millionaire.
+
+--- 帖子 #314 ---
+could you post an account summary, please? And when you say one direction, does that mean one direction at a time? in other words on trade sell GU, buy EU, until closed in profit, then the next trade set could be buy GU, sell EU? or is it only one of those no matter what?
+
+--- 帖子 #315 ---
+Everyone wants a set and forget EA that doesn't require any strategy, unfortunately an EA that will work blindly at all times is very rare so if that is what anyone is seeking no point reading this thread. You will need to first understand how the EA works and learn how to apply it at the right times is my interpretation to making it profitable .. look at my statements. I have closed the EA now and will restart next week, profit statement later.
+
+--- 帖子 #316 ---
+see below
+
+--- 帖子 #317 ---
+Can you give a breakdown of pip size with EU against GU and how you have derived 1 and 0.8?
+
+--- 帖子 #318 ---
+ok, 1 lot eu = 100000 eur that you paid 127000 usd to buy (or sell). 1 lot eu = 100000 gbp that you paid 158000 usd to sell(or buy) as you see, 158000 &gt; 127000, this means if a trader buy 1 lot eu and sell 1 lot gu, the position is not really hedged (assuming correlation exits). it is in fact you are MORE on sell side of gu. in order to be hedged (on position size), it should be: 127000 usd vs 127000 usd; 127000 usd can get you 100000 eur$, that's 1 lot; how much lot 127000 usd can get you gbp$? 127000/1.58(gu price) = 0.803xxx (just approx.) so a trader use 127000 usd to get 0.80 lot of gu.
+
+--- 帖子 #319 ---
+DB, i think that the direction you head into is promising. this EA seems more like a semi-auto EA. i imagine a scenario like this: i get up in the morning, check the market, decide EG is more likely to go up, then i turn on the EA to do "buy eu sell gu" = true; leave it alone, by maybe US market close, the EA stops trading and closes all positions. next day, i do the same shit. as i guess, this is not a time-consuming thing to spend a couple of minutes everyday to turn on the EA. as i put 'red font' above over "more likely" is because we don't need to be very accurate in our reading. as this EA shows, unless EG is in a fierce trend (losing correlation) like last week, the EA still can reap in profit, even we guess the daily move wrongly.
+
+--- 帖子 #320 ---
+Closed these trades blindly this morning just before leaving for work. Could have been stopped Thursday afternoon for over $100 more profit. Post it to prove a point that the EA can be timed for better performance.
+
+--- 帖子 #321 ---
+checking the market...isn't that something the EA could do for you if the EA knew what to look for? trading only in a specified time window should also be doable so semi-automated isn't neccessarily where we have to end up with this ea
+
+--- 帖子 #322 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge) EDIT: See that standard deviation suddenly spike down towards 2? this looks like the inverse of my floating equity curve. Just a few days ago the basket was near breakeven, with the dollar movement really saw value shoot up. even though the hedge ratios change, they are just used for entry and the chart remains valid as long as you update it on the next trade. Here is something to think about over the weekend. I placed this hedge while experimenting with the Arb-o-mat. Wanted to know: if I hedge every major dollar pair like its telling me, can i eventually make money and not get huge DD? Answer: YES. I don't dispute Charvo's calculation above on EU / GU ratio. But there are more time sensitive ways it can be calculated depending on market conditions and number of pairs you want to trade. It can be done in R. In the above example, on 4/26, I took those positions based on hedge ratios calculated by arbomat. Since there is a documented bug on the positive negative sign,( you take the position in the opposite number direction) you have to reverse the direction. Anyway, the drawdown has never been bad on this hedge, never more than $500. The basket jumped huge this week though! now at $2,426.00 profit (minus swap fees). It's conceivable that a plot of the equity curve measured in standard deviations on a demo account could form rules for entry/exit of live trades, in proportions given by the hedge ratios given by R at the time the trades are done. I can give more details how it's calculating if interested, don't expect metatrader to be able to do the same thing. I'm looking at some software that can broadcast my R charts over the web. So next week check back I'll hopefully have links posted to several baskets.
+
+--- 帖子 #323 ---
+Yes, exactly. Come to think of it, no reason you couldn't also use any other standard directional system to time it also. The advantage being that if your wrong you are hedged and can mitigate losses... versus a few manual trades, which could get stopped out and take away several profitable trades. Hedging is a different mindset to trading that most are used to. Hopefully we'll go from overlay hedge EA users to hedge funds managers getting laid everyday we'll see!
+
+--- 帖子 #324 ---
+Yes.. you can pull it from R. See this code from arbomat. Using 7bit's framework, you can embed python commands to trigger R statements to manipulate the data. See my signature on how to setup the interface and custom DLL to trigger R, a free statistical package -&gt; http://www.r-project.org/ Inserted Video Inserted Video Interesting video on fx hedging: Inserted Video Back to arbomat, this is how the EA loads R with FX data: Inserted Code void onTick(){ int units, units1; int i; // update the last row if (!trend){ for (i=0; i&lt;pairs; i++){ if (symb[i] != Symbol()){ prices[i] = iClose(symb[i], 0, 0); }else{ prices[i] = 0; } } Rv("current_others", prices); Rd("current_this", Close[0]); Rx("regressors[1,] &lt;- current_others"); Rx("regressand[1] &lt;- current_this"); }else{ for (i=0; i&lt;pairs; i++){ prices[i] = iClose(symb[i], 0, 0); } Rv("current_all", prices); Rx("regressors[1,] &lt;- current_all"); } plot(); Inserted Code void onOpen(){ int i, ii, j; int ishift; // if any pair has less than back bars in the history // then adjust back accordingly. back = back_bars; if (ObjectGet("back", OBJPROP_TIME1) != 0){ back = iBarShift(NULL, 0, ObjectGet("back", OBJPROP_TIME1)); } for (i=0; i&lt;pairs; i++){ if (iBars(symb[i], 0) &lt; back){ back = iBars(symb[i], 0) - 2; // use the third last bar. } } ArrayResize(coef, pairs); ArrayResize(prices, pairs); ArrayResize(regressors, back * pairs); ArrayResize(pred, back); Ri("back", back); Ri("pairs", pairs); // fill the matrix of regressors // and then copy it over to R for (i=0; i&lt;back; i++){ for (j=0; j&lt;pairs; j++){ ishift = iBarShift(symb[j], 0, Time[i]); regressors[i * pairs + j] = iClose(symb[j], 0, ishift); } } Rm("regressors", regressors, back, pairs); // do the regression // first we need a regressand if (trend){ // we simply use a straight line that will be our ideal trend // note that it points downward since the history is ordered backwards Rd("trendslope", 0.01); Rx("regressand &lt;- trendslope - trendslope * seq(1, back) / back"); }else{ Ri("cthis", this + 1); // counting starts with 1 Rx("regressand &lt;- regressors[, cthis]"); // use this column as regressand Rx("regressors[, cthis] &lt;- rep(0, back)"); // set the column to zero in the matrix } Rx("y &lt;- regressand"); // stupid R will remember the variable names so we Rx("x &lt;- regressors"); // have to be careful how we name them in the formula Rx("model &lt;- lm(y ~ x)"); // fit the model Rp("summary(model)"); // get the coefficients Rgv("coef(model)[-1]", coef); // remove the first one (the constant term) Rx("stddev &lt;- sd(resid(model))"); stddev = Rgd("stddev"); // convert the coefficients to usable hege ratios by multiplying // xxx/usd pairs with their quote. The results can then be // conveniently interpreted as multiples of needed Lots or Units. // also take care of the special case when fitting a spread // instead a trend for (i=0; i&lt;pairs; i++){ // if we fit a spread then all pairs except this one are on the other // side (negative) and this one (the regressand) is 1 by definition if (!trend){ if (i == this){ coef[i] = 1; }else{ coef[i] = -coef[i]; } } // convert to units if (StringSubstr(symb[i], 0, 3) == "USD"){ coef[i] = coef[i] * iClose(symb[i], 0, 0); } // The following makes sure that if the first pair is an USD/XXX pair // it is normalized to 1 again and the lot sizes of the other ones // instead made smaller by the same factor. if (!trend){ if (StringSubstr(Symbol(), 0, 3) == "USD"){ coef[i] = coef[i] / Close[0]; } } } // format a string that presents the hedge ratios // to the user and that will be displayed in the plot // it will also multiply them with base_units so you // have some reasonable numbers for your oanda account ratios = "hedge ratios [multiples of Lots]\n"; for (i=0; i&lt;pairs; i++){ ratios = ratios + symb[i] + " " + DoubleToStr(MathRound(base_units * coef[i]), 0) + " (" + DoubleToStr(GlobalVariableGet(GLOBALNAME+Symbol()+Period()+"_"+symb[i]),0) + ")\n"; } Comment(ratios); plot(); } void plot(){ static int last_back; // predict and plot from the model Rx("pred &lt;- as.vector(predict(model, newdata=data.frame(x=I(regressors))))"); if (!trend){ if (last_back != back){ plotRemove("others"); plotRemove("spread"); last_back = back; } // plot into the chart Rgv("pred", pred); plotPrice("others", pred, clr_below, clr_above); Rgv("regressand-pred", pred); plotOsc("spread", pred, 1, 0, clr_spreadline, clr_spreadline); label("spread_cur", 10, 70, 1, DoubleToStr(pred[0] / Point / 10, 1), Lime); } // make the R plot (optional) if (Rplot){ Rs("descr1", Period() + " minute close prices"); Rs("descr2", "begin: " + TimeToStr(Time[back-1]) + " -- end: " + TimeToStr(Time[0])); Rs("ratios", ratios); Rx("options(device='windows')"); if(trend){ Rx("curve &lt;- rev(pred)"); // it is still ordered backwards, so we reverse it now Rs("lbly", "combined returns"); Rx("linea &lt;- trendslope/back"); }else{ Rx("curve &lt;- rev(regressand - pred)"); Rs("lbly", "spread"); Rx("linea &lt;- 0"); } Rx("plot(curve, type='l', ylab=lbly, xlab=descr1, main='Arb-O-Mat', sub=descr2, col='cornflowerblue')"); Rx("abline(0, linea, col='cornflowerblue', lty='dashed')"); Rx("abline(stddev, linea, col='green', lty='dashed')"); Rx("abline(2*stddev, linea, col='green', lty='dashed')"); Rx("abline(-stddev, linea, col='green', lty='dashed')"); Rx("abline(-2*stddev, linea, col='green', lty='dashed')"); Rx("text(0, range(curve)[2], ratios, adj=c(0,1), col='black', font=2, family='mono')"); } } See https://sites.google.com/site/prof7b...thread-problem
+
+--- 帖子 #325 ---
+on a second thought, you are right. i'm a lousy trader. if ask me where eg will go, i'll see where 10ma, 20ma points at, + previous bar is break up or down, which may be easily coded into the EA. thanks for the reminder.
+
+--- 帖子 #326 ---
+I'm all for that!
+
+--- 帖子 #327 ---
+http://www.mathworks.com/matlabcentr...exchange/13171
+
+--- 帖子 #328 ---
+Excellent... thank you very much!
+
+--- 帖子 #329 ---
+hello, im gonna forward test this ea next week , first using mini account 500$. is there any recommendation setting for this ea into the mini account ?
+
+--- 帖子 #330 ---
+Would just say use the set files on post #1 and start at the the open of trading, I'll be starting fresh on my demo account also. According to what I see this is a good time to kick it off....subject to change of course.
+
+--- 帖子 #331 ---
+Dirty Brown, You should go to the site below to get a really good thread on CoIntegration. It was started and then has mysteriously stopped with any substance. I believe the originator, Mediator, and some others have went off to develop on there own. Nevertheless, it is a GREAT read about using CoIntegration, R, and Forex. Regards http://www.stevehopwoodforex.com/php....php?f=5&amp;t=113
+
+--- 帖子 #332 ---
+Hey thanks for pointing this out!!! I had no idea anyone wrote an EA using the interface. No mention of it on the synthetic hedge forum .. Will try it out next week.
+
+--- 帖子 #333 ---
+I think we should take one step back for a second with this EA and dos some fundamental analysis. The issue we have not discussed is why is there is large drawdowns? My simple answer is you can't have everything, for instance broader analysis of EURUSD and GBPUSD (old pair) vs another example like NZDUSD AUDUSD (new more highly correlated pair) shows that the reason for the large drawdowns in the old pair is the large gapping that occurs, this causes profit to increase as it gaps and meets and so on. Whereas with the new pair there is less gapping and higher correlation so that this will lead to more consistent and lower profits but less drawdowns (or possibly many more drawdowns in quantity but less total potential loss). Is this the experience of people with drawdown vs profit for the old pair and the new pair (any more highly correlated pair). If so then it would make sense to trade the new pair at a higher lot level, risk profile?
+
+--- 帖子 #334 ---
+I've done quite a bit of research and passively experimented on other pairs besides gbpusd eurusd, but most seem to get eaten up by spread and are not profitable. In my journey so far, I've read you can't run this method on pairs too highly correlated. While there will be less DD, there will be less deviation. We need deviation to make money. Please try it on audusd nzdusd. May work manually, but not sure the EA would make good use of them. These are 90% or higher correlated on most TF, so it would be like trading eurusd usdchf. This is mentioned on the babypips thread.
+
+--- 帖子 #335 ---
+This EA appears to be meant to be trades with both trade1 and trade2 as true, which I know isn't default, but think about this...When this EA is started, immediately it opens the first basket of trades, which would be BuyEU, SellGU, with default settings, but, when the trade2 is on, that first opening has another two trades opposite of the other two,SellEU, BuyGU...this creates an actual directional hedge for that first open, so that it synthetically cancells out, until one of the sets randomly runs into a TP...which is where the next trade for the other (trade2) opens next layer, then either the prices will move into that (trade2)'s TP, or go further and open trade2 next layer while hitting another TP of Trade1, which opened another trade right where it had hit first TP...on, and on it goes...it makes me think the TP level in pips needs to be the same as the layer setting...whad'ya think 'bout that?
+
+--- 帖子 #336 ---
+Buy EU Sell GU = buy eur/gbp this system will make money very fast when eur/gbp is uptrend on sideway, and will fail terribly when eur/gbp is downtrend. see the eur/gbp chart for april it was downtrend until 15th may, many trader lost their money during that period. eur/gbp start to rise on 16th may, and of course traders are making profit using this system during this period. good luck to all of you.
+
+--- 帖子 #337 ---
+Could this be of any help? http://articles.mql4.com/445
+
+--- 帖子 #338 ---
+yes, but if you turn on trade2=true, then Sell EU Buy GU = sell eurgbp... so, I got this EA going myself, and turned the trade2 to true and set the TP the same as layer level, 100 which is 10 pips, then I set the max layers to ten, this is on $10,000 demo...in two days it has $2000 profit, now, that is with the DD at a large number, but the EA was started when EG was about 0.8070, and now it is down to 0.8012, or so...what has happened is it opened trades as the gap expanded that much, then the gap has been flunctuating between 6th and 8th layers, so that is where the profit came from, the DD has stayed about the same and either will increase if EG goes much lower, or decrease with some TP's hit, too, if EG goes higher back up to initial starting point...I'm just using EG as reference for gap, so it's easy to understand.
+
+--- 帖子 #339 ---
+My demo now has $3350 profit, the extra layers works well, just have to make sure the lot size is small to handle DD, because about 4 of these layers have stayed open since I started the EA...which make me think it may be best to start EA when the correlation spread is 0 on almost every TF, instead of at a deviation.
+
+--- 帖子 #340 ---
+Maybe it can be dealt with this way: after a trade was open by a specific amount of time (24 h for example), EA triggers trades specifically designed to counter those opened trade and closes all of them at break even. What do you think?
+
+--- 帖子 #341 ---
+Same thing i mentioned few posts before. Trading on both side, creates a band.. a band of drawdown. as the profit increases, drawdown too increases. What comes in my mind is... instead of adding pairs at certain pips layer distances why not add them after some time interval say every 1hr.
+
+--- 帖子 #342 ---
+this attached version modified to filter hours of trade but i also think news filter would be valuable thing to have I've try to figure out for hours trying to into icustom funtion to call FFCal into the EA, but without any success. any expert coder can give it a shot. some coding example in the header of the FFCal indi of how to do icustom. was doing great before "Non-Farm Employment" press release. here's more info about news filter: http://www.tradingsystemforex.com/mq...ws-filter.html
+
+--- 帖子 #343 ---
+I think the strategy works but the EA does not. I did some manual backtesting of an EURUSD/GBPUSD spread trade (attached). What I did was compare the price of EURUSD and GBPUSD at 1 minute intervals throughout the day, and charted the pip difference between the two pairs. As the starting reference point I tried midnight, 8am and 9am. You can see from the charts that the spread between the two pairs widens then invariably closes. Towards the end of the day the spread sometimes widens and never returns. (To change the date of a chart, click on the "Reset 8am" page, and change the date by clicking on the filter in the top left cell - the chart should update automatically). I think a valid strategy would be: - at 8am, "reset" by assuming EURUSD and GBPUSD are equal - as the spread between the two widens, sell the pair that rises (in relation to the other pair) and buy the pair that falls at various pip intervals (ie as the spread widens to 10 pips, 20 pips, 30 pips etc) - close the trade when spread reaches 0 - close any open trades at the close of the London session - possibly for a loss - stoploss when the spread widens too far (up to you), and wait until the next day to trade again This strategy would have losses but I believe that the losses would be offset by the winning trades. I tried to program the strategy using noprogra.com but it was too difficult for me. Anyone else interested in giving it a go?
+
+--- 帖子 #344 ---
+Sorry for the english fx4money everything as you said I did not notice it, thanks! When you ask a trader ... and what type of analysis should I use the Fundamental or Technical Analysis? RE: Both as a complete one another. So maybe the correlation of currencies need a bit of fundamental analysis or technical or fx4money just say .... When EUR / GBP with this trend of rising use - Buy EUR / USD Sell GBP / USD = buy EUR / GBP When EUR / GBP with this trend of falling use - Sell EUR / USD Buy GBP / USD = Sell EUR / GBP More why not just buy or sell EUR / GBP? Answer here: http://www.forexfactory.com/showthre...01#post5668101 I think this should improve our success rate
+
+--- 帖子 #345 ---
+Just out of interest has anyone had any success with EURCHF EURUSD which are totally negatively correlated pairs. I imagine this will profit from the large gaps that are created?
+
+--- 帖子 #346 ---
+The same stuff over and over again and people never learn.
+
+--- 帖子 #347 ---
+Hi just found new version of the ea somewhere on net please try.
+
+--- 帖子 #348 ---
+nice.. thx
+
+--- 帖子 #349 ---
+...sorry, I don't understand but...can someone tell me why I have to put the Robot for Two-way trading (overlay hedging) in two charts? why not only in one chart and set the parameters TradeCouple1 = true &amp; TradeCouple2 = true? I don't see any difference if I do this. ...also is there a different between the Robot's v1a and v3? thanks!!!
+
+--- 帖子 #350 ---
+this EA is basicly trading EUR/USD, and use GBP/USD as hedging. when you check on couple 1 and couple 2, both of EUR lot size are 0.1 (orignal setting) and GBP are 0.8. you never know when EUR is go up or down,( if you know it for sure,you will just trade eur/usd along), so the best way to trade this EA is turn both couple on. the result will be 1 couple will make money, but the other will sufer a foating loss. this EA can use on any timeframe, because the EA open or close trade is depend on the layer distance and the max layer you set,which means you will get the same result on any timeframe. the only thing you have to care about is your account shoud be big enough to carry the DD. right now, i open both couple, and have total 1 lot EUR and 0.8 lot GBP, DD is 900 USD the only thing bothers me is how to lower the floating loss, i am doing some experiment now, like lower the layers or change the lot size at the end if i want to stop use the EA. will post more results later if i got any new discover about this EA. after all, this EA is profitable so far, i make 1000 usd in my live account in 2 weeks, and i keep the EA running 24/7
+
+--- 帖子 #351 ---
+I am new in this Topic , Its Really Interesting , Some guys Really Made Profit with it. Can i get It's Final Version which is using in live accounts,... Keep it Up
+
+--- 帖子 #352 ---
+the voodoo never works...doesn't it.
+
+--- 帖子 #353 ---
+Is this thread dead? Any updates?
+
+--- 帖子 #354 ---
+I just fininshed reading all the posts .. nearly crosseyed ... and I am as surprized as you are. Halfway through the posts there was a new thread started so I checked that out and it also died suddenly. Apparently the contributors lost interest? If anybody is out there please clarify the situation. Thanks, BT5
+
+--- 帖子 #355 ---
+all adherents were wiped out as usual ....sad.
+
+--- 帖子 #356 ---
+Hi guys! Can anyone give me advice or idea for what i have think of, below? I am trying to build a system with martingale + hedging, and this is 100% profitable system. For the example below, Pair 1: EURUSD Pair 2: GBPUSD Correlation: High positive correlation Daily range average : EURUSD = 90-100 pips Daily range average : GBPUSD = 150-200 pips Case 1: Long: EURUSD Short: GBPUSD Market moves downward, i apply martingale method for losing position (EURUSD) until price breakeven and goes profit with trailing stop. Meanwhile, i apply martingale method also for winning position (GBPUSD) with trailing stop and hedging I know that if i use martingale method in losing position, i will get margin call due to large position size are added in, so i use hedging method with martingale method also to offset back the drawdown. The purpose of doing this is to minimize margin call. And at the same time, capture the profit as much as possible for pair GBPUSD. This system for this case seem doing well. Case 2: Long: EURUSD Short: GBPUSD Market moves upward, and i apply the same as case 1. However, i will get some drawdown because of the "Daily range average", For this case, GBPUSD will lose more than EURUSD, but i think this will somehow minimize the margin call/drawdown by hedging. Until i get exit from trailing stop with in profit. My question: What's the worst outcome would be? How do i deal with case 2? Appreciate if you could advice me.
+
+--- 帖子 #357 ---
+bullbear You are assuming that the same price movement will be for both EURUSD and GBPUSD, when always one will more then the other hence your hedging will always have a separation in it not to mention the spreads and slippage. I have developed an indicator specifically for hedging with specific conditions. So if anyone is interested and knows of an EA or can develop one for the indicator do send me a message.
+
+--- 帖子 #358 ---
+... or maybe just the opposite... (I think it's more 'natural' for people to keep it a secret when they find something profitable, as opposed to when they get their butt kicked - we're not THAT far away from the other species we share the earth with (well... sharing is even too big a worth), no matter how much we like to think we're a completely different animal ... ;-) just my 2 cents...
+
+--- 帖子 #359 ---
+I put this overlay positive ea on my live account. I watched it on a demoaccount for 2 weeks and really like what I saw.It made money fast. Actually too fast for my taste. It felt a little risky. The default settings if you sell eur/usd for 1 lot buy the gbp/usd for .8. I think there would be less drawdown if you changed the gbpusd to .9. I have had the take profit set to 10 pips. I have the metatrader set on 1 minute charts. I think these two things brings a better success rate and let chance for drawdown. Does anyone want to work on this with me?
+
+--- 帖子 #360 ---
+Well done. However, it doesn't work when the carry trade starts to unwind or the correlation fails. When that happens then it will empty your account very fast if you don't have tight stops. Its been tried, failed, tried, failed over many years. If it was that simple then everyone would be doing it. Scoobs.
+
+--- 帖子 #361 ---
+Im not so sure this cant work. If you lower the leverage. Keep the tp tight. Eventually the currency pairs will correlate again.
+
+--- 帖子 #362 ---
+They will correlate again but not enough to recover the gap created previously. If the EURGBP keeps moving down/up then your gap can never close to previous levels to allow that particular trades to show a positive profit. It all depends when you open the trades. If it was that simple then hedge funds would be doing it constantly with 100000K contracts and distort the market. The reason they don't do it is because it is more complicated than just opening the two trades at any point in time and hoping they will close in profit when they cross again. If it did work then brokers would widen the spread across the two trades when they figured out people were doing it. But hey, don't take my word for it, carry on. There have been more correlation/hedge EA's and systems on FF than any other type of system over the years and nobody has ever managed to get it to work 24/7 across a trading year and shown a profit.
+
+--- 帖子 #363 ---
+hedge with ea or simple hedge is not working now days. to open and to close hedge you need to know some fundamental or technically reason behind the pairs.
+
+--- 帖子 #364 ---
+I like it.
+
+--- 帖子 #365 ---
+Hi gays. Sorry for the long article but I think it important to put here. Maybe you can clarify some doubts and shed light on the problem. And maybe add new modifications to the EA Regards. "Forex and the Triangular Strategy unveiled ..." Intricacies in 2006, motivated by a detailed explanation of investor Michal Kreslik a hedging strategy between Forex pairs, known as FPI (Fractional Product Inefficiency) and became fashionable among investors that market. This technique, in fact, was a long-standing way of trying to obtain excess returns with little risk in Forex, a sort of triangle pairs. The triangular arbitrage is a Forex strategy that is theoretically a "risk free". As the name suggests, this method includes three different currency pairs simultaneously in the operation and aims to take advantage of small differences in the exchange rate, taking advantage of a market inefficiency. In Forex, the price of a currency pair depends on the price of one or more currency pairs. The basic formula to relate three pairs with three different currencies is as follows: (a / b) * (b / c) * (c / a) = 1 And a, b and c, different currencies. http://blogs.advfn.com/wp-content/bl.../fpi_index.jpg Above, a chart showing the momentary inefficiency of three pairs (EUR / USD - GBP / USD and EUR / GBP). Possibility of arbitrage thus occurs whenever this equation does not equal 1. In this triangle we bought A / B and then buy B / C, and finally sell C / A, capturing a small profit when the equation is different from 1 . the chance of profit is maximized using brokers and margin trading with higher amounts. For example, a / b = EUR / USD b / c = USD / CHF c / a = CHF / EUR EUR / USD = 1.3282 USD / CHF = 1.1417 CHF / EUR = 1 / 1.5166 In this case, (values extracted in 28/01) we have a difference of 2 pips than expected. In late 2008, Daniel Fenn and Sam Howison Institute of Mathematics of Oxford, Mark McDonald and Stacy Williams Research Center Forex HSBC and colleague Neil Johnson of the Department of Physics at the University of Miami published a detailed article about the study triangular arbitrage strategy, called "THE MIRAGE oF tRIANGULAR ARBITRAGE iN tHE SPOT FOREIGN EXCHANGE MARKET". http://blogs.advfn.com/wp-content/bl...fpi_spread.jpg Graphs showing the variation of spreads (the real market) of three pairs studied. In the extensive study, the researchers through various studies of seasonality, changes in spreads, duration of opportunities, the returns showed that triangular arbitrage do exist in the forex market, but the vast majority lasting for less than 1 second and are in their most, only 1 pip. http://blogs.advfn.com/wp-content/bl...1/fpi_time.jpg Above, variations of equation (range) triangulation pairs during the study period. The best opportunities occur much less frequently and in periods of greater liquidity, but these opportunities are taken off the market very quickly. The study also demonstrates that the forex market is becoming more efficient, and this is explained by the increasing use of electronic platforms and automating estratégias.' Ie, for this strategy, a lot of technology available and fast brokers.
+
+--- 帖子 #366 ---
+lol
+
+--- 帖子 #367 ---
+Please, What is the function of "TradeMgmtRetry" In the current version 3.3? Tks.
+
+--- 帖子 #368 ---
+Hi, May I know how you calculate ADR ratio between two pair?
+
+--- 帖子 #369 ---
+Dear DirtyBrown. I wanna ask you, if someone wants to install any EA on the chart for some one else on his or her laptop and doesn't want to let him know about this or doesn't want to let him install the same EA further on more computers or laptops, how can I prevent this. Thanks Rocky
+
+--- 帖子 #370 ---
+HI , why when i put the ea overlay positive hedging on BT i see this msg ---Overlay Positive Hedging v1a- EURUSD,M5: #1: Error opening BUY order; Error Code: 0: unknown symbol Overlay Positive Hedging v1a- EURUSD,M5: OrderSend error 4106 Overlay Positive Hedging v1a- EURUSD,M5: unknown symbol name GBPUSD for OrderSend function and when i charge the GBPUSD ITS THE SAME .... WHY HAPPEND THIS ONE pls help
+
+--- 帖子 #371 ---
+I tested this system manually with 30 Day interval on H1 chart with EURUSD &amp; GBPUSD.This Work. Here are Settings - Data settings only valid for 20 Days.After , it expires.Then you need to put indicator again.And wait for this : Difference &gt;=3000 Points , Buy which is low and sell which one is high.Maximum drawdown =300 with 0.1; Replace in overlay indicator. int _BarsCount=120; int Day=20;//This field should be within 20 days.You can test by changing this. int _FirstBar = 120*(Day-1); int _LastBar = 120*Day;
+
+--- 帖子 #372 ---
+Hello is anyone still using the EA , i'm having good results on Demo accounts till yesteday the EA decided to open a long eur/usd with 220 full Lots and my account went from 100.000$ to 55000 $ , i wanted to go live with the EA but it seems there is a bug somewhere can anyone help please Thank you
+
+--- 帖子 #373 ---
+Hi Dirtybrown, After I download and do some testing on the EA, I have a few questions as below: 1. Is it possible to add in an extra setting that enable user to decide the different lot size (may be bigger lot size than the 1st layer) for 2nd layer entry onward? 2. I found out that this EA only close each layer entry for 2nd layer entry onward (if 2nd layer entry is open and target profit is hit, EA only close 2nd layer and leave the 1st layer entry open), is it possible to do some amendment that this EA will close all the layer (1st and 2nd layer) together when the target profit is hit? Appreciate that who can help on this. Thanks for your EA and hope to get your feedback soon. Prominent88
+
+--- 帖子 #374 ---
+Hello, after many hours of testing I released the the entre of new trades (layers) has a bug. Because as it measures the gap between the actual bid and last Ask trade it open multiple layers on same price during big spread on important news or rollover. You need to creat spread filter and measure de distance from last ask to actual ask. It’s ok also for take profit trigger. i have coded it. And the results are very different... PS: Also don’t forget to monitor the gap and ema20 to understand the market is changing and the pairs are correlating again. best of luck.
+
+--- 帖子 #375 ---
+Hi Jorgeemec, can you please share your coded version ? Regards
+
+--- 帖子 #376 ---
+Attached File(s) Daily Hedge_EA.mq4 8 KB | 1,364 downloads
+
+--- 帖子 #377 ---
+Thanks, Which timeframe and on which Pair should be installed? Regards
+
+--- 帖子 #378 ---
+Dirty Brown was leave us... What the reason? No one knows......
+
+--- 帖子 #379 ---
+You should turn off the EA when big news happen as the correlation breaks and then wait until is normal again.
+
+--- 帖子 #380 ---
+Anyone still using this EA? I have tested the EA on live account, but I experience every secon day, that the EA starts to open and close EURUSD sell orders continously - until I disable the EA. I have just experienced it again, made 70 trades within 2 minuts. The loss is not hugh, because I were sitting at my MT4, but if it has happend during night, I might have lost my 2000usd account. Anyone experienced the same issues ? I have now added a Sleep(90000) after OrderSend(), so EA will wait 1,5 min before trying to open a new order again. I suppose, it is marked conditions that make the EA work incorrectly or maybe interference from other running EA's on the same MT4. Thanks
+
+--- 帖子 #77 ---
+Sharing this EA hedging strategy. Watch the vid link. Inserted Video
+
+--- 帖子 #78 ---
+Inserted Video
+
+--- 帖子 #79 ---
+i have coded and tested this strategy into EA SWING : Inserted Video What can i say ? this strategy in for people that never have normal signal in their head and thay dont know at all forex... and its blow accounts in long range. The worst that if you trade 0.01 0.02 0.04 0.08 0.16 ..... at the end if you lucky and close last order in Plus finally you will receive same in money as you would receive from first order 0.01 in plus... Nothig interesting and very big risk with low profitable %
+
+--- 帖子 #80 ---
+Regarding this : 1) correlation not exist (its only in our mind). If 2 pairs were correlated some period - nodoby promice that they continue do it in future. 2) Doing grid orders with correlation sigral - worst thing that exist in forex 3) EURUSD 1 lot and GBPUSD 0.8 based at ADR also not correct. Better use MQL standard function called COST OF PIP
+
+
+===== 附件下载链接 =====
+

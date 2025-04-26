@@ -1,0 +1,1043 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Monday/Tuesday Breakout EA Note: this thread is NOT about discussing this very simple strategy. If you want to discuss the strategy and interact with other traders who are using it in a variet of ways, I suggest that you go over to @4ectasy's thread here: https://www.forexfactory.com/showthread.php?t=976730 This thread is dedicated solely to my EA which implements the simple MondayTuesday Breakout strategy; settings, results and, of course, issues you may have. This thread is NOT about the strategy itself (see above). I will NOT code EAs for you, so please don't ask. I will NOT share the source code, so please don't ask. Attached Image (click to enlarge) Version 1.091: Removed the expiry date. Attached File(s) MoTuBo_EA 1.091.ex4 226 KB | 1,426 downloads | Uploaded Feb 23, 2021 4:06pm Version 1.09: Disable any order checking while trading has been disabled (stops unnecessary messages being output to the journal). Add new Min Range filter. Attached File(s) MoTuBo_EA 1.09.ex4 225 KB | 1,040 downloads | Uploaded Jun 26, 2020 3:55pm Version 1.08: Enforce the maximum and minimum broker lot sizes. While this was supposed to be happening all along, it would appear that a bug was bypassing this check. Add new 'Indicator' mode. The EA can be operated in two modes: EA: It works as originally intended. Indicator: It doesn't open or manage orders, it simply plots the lines and boxes. Expose object prefix as a parameter. The items on the chart are all prefixed with a value to make then unique to the EA. This can be changed in the rare insance where the EA clashes with another indicator. Add the weekl's range to the display. Allow maximum trades per week to be amended. The default is '1', but this can be changed to whatever value you want. I recommend that you leave this at 1. Attached File(s) MoTuBo_EA 1.08.ex4 221 KB | 1,095 downloads | Uploaded May 10, 2020 11:58pm Version 1.071: Fixed bug in startup calculation of previous weeks' ranges. Increased the maximum number of weeks to draw boxes and guides to 200. Added check for Auto Trading button not being activated. Info panel now displays some previously-missed parameters. Attached File(s) MoTuBo_EA 1.071.ex4 217 KB | 723 downloads | Uploaded Apr 21, 2020 12:21am Version 1.07: Fixed trailing stop bug when two orders for the same pair are active. Added BE and TS Trigger guides. Added option to display boxes and giudes for up to 4 weeks. Added option to close all trades at the end of the trading period. If trading period is set to be either Monday or Tuesday, the range calculation is adjusted to finish the hour before trading starts. New trigger guides: Attached Image Attached File(s) MoTuBo_EA 1.07.ex4 213 KB | 729 downloads | Uploaded Apr 10, 2020 8:07pm Version 1.062: Fixed a bug in the TradingHours function. Allow 2 trades to be open for the same pair, but only one can be for the current week. Efficiency improvements when running in the tester. Info panel debugging tweaks. Attached File(s) MoTuBo_EA 1.062.ex4 178 KB | 878 downloads
+
+--- 帖子 #2 ---
+Settings Money Management This governs how lot sizes for trades are calculated, and there are three methods: Attached Image You select which method you want to use and then set the associated setting(s) (Fixed lots, Lots per 100 of balance or Risk percentage. For Risk Percentage, you can choose what value to use as the basis of the percentage calculation: Attached Image Lots Size Maximum and Minimum Attached Image If you set a maximum lot size, and the calculation comes to more, the lot size will be capped at the value you set. If you set a minimum lot size, and the calculation comes to less, the lot size will be increased to the value you set. HOWEVER: if "Trade if less than minimum?" is set to false, and the calculated lot size is lower than the minimum set, the EA will NOT enter the trade, as it is deemed too risky. Break Even Attached Image There are three settings: No break even: basically, don't use the break even. Pips profit: moves stop to break even (i.e. the entry price) when the price is in profit by the specified number of pips. Factor of Stop Loss: moves the stop to break even when the price is in profit by a factor of the Stop Loss. e.g. If the stop loss is 150 pips and the factor is set to 0.5, when the price gets to 75 pips in profit (150 x 0.5), the stop loss will be moved to break even. Break Even Pips is the number of pips to use for method 1. Pips to lock in on break even: when moving the stop to break even, you can specify a number of pips of profit to lock in. Trailing Stop Attached Image There are four settings: No trailing stop. Regular trailing stop: triggered when the price is in profit by the Regular trailing stop start, and is moved in steps set in the Regular trailing stop step setting. Follow MA: the trailing stop is triggered when the price is in profit by the factor of the stop loss specified (e.g. if the stop loss is 150 pips and the factor is set to 0.75, the trailing stop is triggered when the price reaches 112 pips (150 x 0.75). The stop is then trailed along the line of a moving average with the period specified. Previous high/low: the trailing stop is moved when the previous three candles form a new low or high.
+
+--- 帖子 #3 ---
+Reserved 2
+
+--- 帖子 #4 ---
+subscribed
+
+--- 帖子 #5 ---
+Thanks for starting this thread and this will afford us the opportunity to fine tune the Ea well and proffer suggestions were necessary
+
+--- 帖子 #6 ---
+Hey there Paul...I'd just want to clarify a couple of things with the settings Trade Management:- .....Break Evan (Factor of SL)........As in 1 would be 1 to 1, 2 would be 1 to 2?? .....Trailing Stop High/low.........Is that actual swing on the current time frame be it 1hr, 4hr, Daily, Weekly candle close?
+
+--- 帖子 #7 ---
+Break even factor of SL: yes, 1 would be 1xSL, 2 would be 2xSL Trailing stop high/low currently looks at the previous three candles, and if they form a high (when going short) or low (when going long) then the stop is moved to the high/low. A high would be where the middle candle body is higher than the two either side, and the current candle is lower than all three. I plan on reviewing this as my testing has shown the high/low not to be so good for profitability.
+
+--- 帖子 #8 ---
+Subscribed! I'll test it and comment any error or improvement. Thx for your work @PaulDV.
+
+--- 帖子 #9 ---
+Could you explain the strategy itself? And I have an idea, since you shared this EA, can you code an EA for me? I really like to see the source code so I can understand the EA better. Please share.
+
+--- 帖子 #10 ---
+Some brief analysis for the week: 27 pairs triggered. 14 trades closed. 13 trades still open (following some interesting back testing I've been doing, I chose not to close manually this week to see how the trades play out over Monday/Tuesday of next week). Chose this week to double up on my risk (bloody daft in hindsight), giving a much greater loss than would otherwise have been registered. Of the trades that are closed: 11 Lost 3 Won So, down 8 losses, which would normally have been 8%, but seeing as I'd doubled my risk, its actually 16%... Analysing the entries: If I had amended the trading hours to start from 18:00 on Wednesday (something which someone else had pointed out to me previously), the outcome would have been VERY different: 3 losses 3 wins ...basically a neutral week.
+
+--- 帖子 #11 ---
+Very funny.
+
+--- 帖子 #12 ---
+[quote = Anusragger; 12857532] Pourriez-vous expliquer la stratégie elle-même? Et j'ai une idée, puisque vous avez partagé cette évaluation environnementale, pouvez-vous coder une évaluation environnementale pour moi? J'aime vraiment voir le code source afin que je puisse mieux comprendre l'EA. Veuillez partager. [/ Quote] You are a funny guy . The strategy is explained here https://www.forexfactory.com/showthread.php?t=976730 and why do you want the code ? to improve the EA ? maybe are you a coder ? PaulDV made an amazing coding job. I don't think he needs your help.
+
+--- 帖子 #13 ---
+Thanks Paul for sharing the new version of the EA, was excited to see you put in the close all on friday option. As i am in Australia i get a couple hours into the london session then feel like sleeping. So i closed all manually around midnight and did ok for the week. have updated now to this new version so looking forward to it. Question: Is their still a bug for the strategy tester present in this version as i cant get it to run?
+
+--- 帖子 #14 ---
+Hi, I think there has been some misunderstanding: there isn’t a close all on Friday setting. Also, yes the bug that was affecting the strategy tester was fixed in this version, so perhaps you could explain what you mean when you say you can’t get it to run?
+
+--- 帖子 #15 ---
+Paul with reference to the start time you mentioned (18.00 Wed) What were you referring to? Because the Asian session is generally regarded as the fake out session has any body tried launching the EA at the open of the London session or similar.
+
+--- 帖子 #16 ---
+Start time of Wednesday at 18:00...not really sure how to put it any other way.
+
+--- 帖子 #17 ---
+Paul, here are my results from last week. At the outset I should say, with Covid-19 and NFP messing with the markets, it might have been prudent to sit out last week, but since I'm testing on a DEMO account, I jumped in! My setup: 17 pairs, closed candles only to calculate range and trading delayed until 18 hours after Wednesday open (except for 3 of the 17 pairs, which I set to open at Wednesday open). The rest of my settings were typical: 50% SL, 100%TP, 15% entry ratio, etc. Within a few hours of the Wed. open, the 3 pairs I had set to open at Wed. open, all hit SL. Between 18 hours and about 22 hours after Wed. open, three more pairs hit SL. At this point in the week, I was 902 pips negative. My analysis at the time showed if the first 3 trades had been set to open at the same time as the others, or I had used high/low for the range calculation, they would have been OK. Since the second 3 trades opened at +18 hours, if they had used high/low to calculate the range, they would have been OK too. The remaining pairs did fine although none were close to hitting TP. I closed all pairs about an hour before market closed and finished the week -318 pips. This wasn't too bad considering I was down 902 pips 2 days prior and I knew why! Now that the week has ended, I have 2 thoughts regarding the settings: 1.) delaying the start of trading for 18 hours was a good thing last week, in fact, a longer delay would have been better. Opening as late as Thursday open +1, would have worked well. It remains to be seen if this past week was an anomaly in this regard or if such a long delay would work long term. 2.) For range calculation, for using closed candles to work, I believe you need to use a larger SL and a larger entry ratio; say 25% to 35%. Next week, I'll go back to high/low for my range calculation but I may revert to closed candles on an individual pair basis, if a pair has a very long wick involved in its range calculation (see pic below). In such a case I'd try a 60% SL and 25% (or 30%) for an entry ratio. You could incorporate an Auto range setting into the EA, wherein the default was high/low but if a wick involved in the range calculation was longer than say 50 pips, the range calculation changed to open/close and increased the entry and SL to 25%/60%, or something along these lines. Just thinking out loud! As far as V1.061 is concerned, it worked exactly as I told it to! I've now installed V1.062. If I could ask for one future addition, that would be, when using a trailing stop, it would be nice to see a line at the trailing-stop start/trigger level. Paul, keep up the good work! Attached Image (click to enlarge)
+
+--- 帖子 #18 ---
+Paul, By the way, what type of MA do you use for the trailing stop MA? Thanks!
+
+--- 帖子 #19 ---
+Thanks Paul, when i seen the Friday trading limit i assumed this was a close all at that time and got excited lol Any chance of putting that into a future release? close out the basket 1 or 2 hrs prior to close on Friday I will give the strategy tester another shot tonight and figure it out, if i cant get it to work i will post any errors and screenshots.
+
+--- 帖子 #20 ---
+hi paul, i was using 1.05 version last week on DEMO. entry:15%, stop:50%;TP:1SL, BE:0.85SL and first time: risk_percentage from balance=1%. it was an up and down... i really have to learn: don't touch til friday anyhow... i haven't this time. can i place 2 requests? - to mimic my live-account would it be possible the have a "manual" balance amount to overrige the actual? - would it be possible to have a "close orders at" possibility? thanks again for this amazing EA.
+
+--- 帖子 #21 ---
+Yes, a close all function sounds like a good addition - I'll put it on the list.
+
+--- 帖子 #22 ---
+EMA based on the Open - this keeps it tight, but as it's based on the open it should follow more naturally for a trailing stop.
+
+--- 帖子 #23 ---
+Auto-range would be possible, of course, but I suspect that it would add a level of complexity that most users wouldn't cope well with. But I'll think about it and let you know. I like the idea of seeing the trigger level for the trailing stop...maybe the break even too.
+
+--- 帖子 #24 ---
+Close all orders is on the list. The manual balance request seems very specific to me and is not something I feel would be used by anyone (except perhaps yourself). Maybe it would be better to amend the balance on your demo account if that's really all you're planning on using it for?
+
+--- 帖子 #25 ---
+ok, paul. thanks!
+
+--- 帖子 #26 ---
+Like this perhaps: Attached Image (click to enlarge)
+
+--- 帖子 #27 ---
+Perfect !
+
+--- 帖子 #28 ---
+Basic question about the EA use: we need to change magic number for each new pair, or can we use the same for all pairs? Thank you PaulDV for sharing this with all of us!
+
+--- 帖子 #29 ---
+I personally use the same magic number. At the end of the UK trading week I use a script to close down all open trades by the magic number I use for this strategy
+
+--- 帖子 #30 ---
+Same for all pairs - unless you specifically want to use different ones of course.
+
+--- 帖子 #31 ---
+hey all i'm using v1.062, i don't have a single trade or pending. display recognises it's wednesday and so 'yes' for trading allowed. anyone else seeing the same thing? blam
+
+--- 帖子 #32 ---
+This EA does not place pending orders, so that's normal. For the pairs that you decided to trade this week, did any of them cross the buy/sell lines up until now?
+
+--- 帖子 #33 ---
+hi paul and thanks for sharing EA can you please tell me what is the current range in info panel?
+
+--- 帖子 #34 ---
+what you say is: Daily Forex candles begin and end at 5 pm New York time, every trading day of the year Therefore, Wednesday candle begins at 5 pm Tuesday in New York Convert that to your local time Now add 18 hours, that is 18:00 on the Wednesday candle Which is 11 am Wednesday in New York, just convert to your local time Any trader that doesn’t keep an eye on London and New York time, why not? Cheers
+
+--- 帖子 #35 ---
+thanks, that clear it up blam
+
+--- 帖子 #36 ---
+Hello everyone, with version 1.062 of EA, I can't get automatic trading to work. On mt4 it is activated and the imput value are default. Can anyone help me? Thanks.
+
+--- 帖子 #37 ---
+Same for me - we have it running on VPS different pairs and for testing different start days - nothing happened - work still in progress I guess. .
+
+--- 帖子 #38 ---
+Please show us one chart of a pair that should have been triggered by the EA, so we can see if there's anything wrong with your setup.
+
+--- 帖子 #39 ---
+Hi Isreis, as you can see, the face on the top right of the screen dont't smile...
+
+--- 帖子 #40 ---
+You guess wrong. None of the pairs have triggered yet. Have you properly understood the strategy and how the EA works? If not, then you should read up on both.
+
+--- 帖子 #41 ---
+Current range is the range in pips this week.
+
+--- 帖子 #42 ---
+USDCAD box set for Mon with start trdg Tue - the box seems to go to end Tue not considering the settings to Mon only The original setting for start Wed I don't think there is any pair that even moved out of the MoTu box so far- reason I was experimenting with Mon only because times are not always as volatile as in the last few weeks. .
+
+--- 帖子 #43 ---
+I guess that's why I said guess - anyway I know none of the pairs have triggered but since your EA has the option to set the starting day I set it to Tues and as per my screenshot it should have triggered. .
+
+--- 帖子 #44 ---
+Nope - that still shouldn't have triggered. Why do you think it should have triggered? As I said, you need to understand the strategy. Thanks for pointing out the issue with the box being drawn beyond the start time - it's currently hard-wired for Monday/Tuesday (as per the strategy), but I guess it does make sense to stop drawing the box if the start day is prior to Wednesday.
+
+--- 帖子 #45 ---
+If the smiley face is sad, it means the Autotrading is turned off. Check the EA settings, "Common" tab for Autotrading tick, like below, and also mt4 menu Options-&gt; Expert advisors-&gt; Allow automated trading. This being said, two pairs just triggered for me -&gt; audcad and nzdcad.
+
+--- 帖子 #46 ---
+GBPUSD: Attached Image EURAUD: Attached Image
+
+--- 帖子 #47 ---
+perfect. now works. thanks.
+
+--- 帖子 #48 ---
+Ok thanks - was not aware it was hard wired - will adjust accordingly. And yes, GBPUSD just opened a buy trade .
+
+--- 帖子 #49 ---
+Don't forget Friday is a holiday. Attached Image (click to enlarge)
+
+--- 帖子 #50 ---
+The EA on my demo account has triggered the exact 2 trades Thanks (IC Market Demo)
+
+--- 帖子 #51 ---
+I have two EURGBP trades running now - one left over from last week that I didn't close. A good first test of the multi-trade processing in the next version... Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+I activated the EA this morning and during the past hour 9 trades have been activated, more are close to activation. GBP/USD - Buy AUD/CAD - Buy EUR/AUD - Sell AUD/CHF - Buy NZD/CAD - Buy AUD/CAD - Buy EUR/AUD - Sell NZD/CAD - Buy EUR/GBP - Sell Great EA, well done, will see how the trades play out.
+
+--- 帖子 #53 ---
+Hello all, Tell me, the adviser installed and didn’t change anything in the settings, why doesn’t it open deals? what needs to be changed? I have installed EUR / USD H1 GBP / USD H1
+
+--- 帖子 #54 ---
+Given the fact that you have been a FF member for 1 day only, in my opinion, you are the problem Learn how to use Metatrader and learn how to use EA’s Try University of YouTube, it’s great Or Uncle Google
+
+--- 帖子 #55 ---
+clickclack you should load the adviser on many more H1 pairs, to increase the chance that trades will be opened blam
+
+--- 帖子 #56 ---
+I closed all my trades for this week 5 minutes ago because of the bank holidays tomorrow so it has been a god week. Thank you fore this promising EA PoulDV.
+
+--- 帖子 #57 ---
+UPDATE: with ~25 hours left in the trading week, 16 of the 19 pairs I'm trading have triggered. 4 of the 16 are slightly negative but I'm up over 620 pips, so all is fine. I delayed the start of trading to Thursday +1 hour. That worked fine too but I missed 2 trades that I thought might not retrace and trigger, so I triggered them manually. I also had 2 pairs that had very long wicks in their Monday/Tuesday range calculation, that I switched to candle bodies only for range calculation. I have no TP level set but am trying out the MA trailing stop, with a tight 13 period setting. So far, so good. EA is working perfectly.
+
+--- 帖子 #58 ---
+Just uploaded version 1.07 to the first post. Enjoy.
+
+--- 帖子 #59 ---
+Thanks for that, going to be awesome going forward I set the number of weeks to display to " 0 " but it still has 4 boxes on the chart? Regards PS, forgot to say, also tried 3, 2, and 1 but it is stuck on showing 4 weeks, changed timeframe to refresh, nothing happens
+
+--- 帖子 #60 ---
+Bugger! Thanks, I'll take a look.
+
+--- 帖子 #61 ---
+Just a typo on one line... Was working before, so don't know why I even updated that code... Anyway, fixed now! Thanks EDIT: the minimum number of weeks is 1, so if you set it to zero, internally it will default to 1.
+
+--- 帖子 #62 ---
+this is my result (default setting) last week :
+
+--- 帖子 #63 ---
+Good evening, would it be possible to include in the EA the possibility to trade in reverse? I would like to go short if the price exceeds the maximum and long if it exceeds the minimum. Thanks a lot!
+
+--- 帖子 #64 ---
+Maybe I'm lost, but the Maximum and Minimum of what exactly? Cheers
+
+--- 帖子 #65 ---
+I believe he means that it should go short when it hits the long entry and long when it hits the short. Sometimes, strategies work better in EAs when the signals are inverted - bit counter-intuitive, I agree, but I have seen instances of it. It woudl be a simple addition, so I'll think about it for a future version.
+
+--- 帖子 #66 ---
+Okay, my psychic powers are weak on Monday mornings good luck to him Paul, what would be involved to have this as an Indicator only? Guess I could just run with Auto Trading off Do you MT5 at all? Thanks, John
+
+--- 帖子 #67 ---
+Good morning, you understand what I meant. Thank you.
+
+--- 帖子 #68 ---
+That (very nice) EA is based on an indi. Take a look at following thread: https://www.forexfactory.com/showthread.php?t=976730 About the idea, inverting the strategy: it's like a lottery, or you need to make long term statistics for each pair. And hoping that this will continue in the future. I prefer to hedge and go out with break even or small profit. At the moment I use the indi as levels for a grid/hedge trader EA.
+
+--- 帖子 #69 ---
+Hi John, Out of curiosity, I have upped the maximum number of weeks for the drawing of the boxes and guides to 50 and it works pretty well, so may up it further still to, say 200. Using this, as you say, simply turning off auto trading would be one way. That said, all of the code I've developed is in self-contained routines, so I could just lift it all out and stick it into a separate indicator instead. I'll have a look when I've got a bit more spare time. I have never used MT5 - how much better than MT4 is it? I am aware that the code in MQL5 is not hugely different to MQL4, but my code would still require some modification to work. If I think it's worth the leap, then I'll have a play and see what I can do.
+
+--- 帖子 #70 ---
+Hi PaulDV When backtesting i currently get this error when attempting to use Every Tick. "2020.04.13 20:54:18.463 2019.01.02 00:00:10 MoTuBo_EA 1.07 USDJPY,M30: array out of range in 'MoTuBo_EA.mq4' (866,31)" When i use mode = Control Points then the backtest runs and shows results etc. I am currently using Tick Data Manager and Dukascopy data, also tested it with Alpari data and same error. Unticked "use Tick data" and it ran in "every tick" mode. Really strange error and cant figure it out... if its something that makes sense to you and can fix great anyways i have loaded up the EA for this week and currently running Entry Ratio of 20% and SL Ratio of 55% using TP factor of 2 and BE/TS set at factor of 1. Also testing it out on XBRUSD and USDSGD which is why i wanted to backtest
+
+--- 帖子 #71 ---
+This happens with my tester when there is no historic data. Either you use a start at a later start point or you force download of historic data. There is an indicator here somewhere in the forum...
+
+--- 帖子 #72 ---
+I can replicate this also when using control points as the mode and going beyond the date range. which makes sense. I figured it out, in version 1.062 using tick data on every tick worked fine, the new addition of up to 4 week historical lines means the EA requires up to 4 weeks historic information from the date you select in the strategy tester. In my Tick Data settings i found this "Bars before data" set to 100 bars, when 4 weeks worth of data is somewhere around 1300ish bars @ 30m per bar. Set that to 1500. Now working.
+
+--- 帖子 #73 ---
+Thanks, yes, I found this too, and have fixed it for the next version.
+
+--- 帖子 #74 ---
+Hi, what the time frame that you use? thanks
+
+--- 帖子 #75 ---
+Monday and Tuesday are Daily for the High and Low But the rest is only price, same on every time frame
+
+--- 帖子 #76 ---
+Hy Paul .... are these stop at be normal? i'm quite confused... Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #77 ---
+What are you confused about?
+
+--- 帖子 #78 ---
+Paul, No idea about coding but the impression that I had was that MT5 is way different from MT4, hence coders were averse to learning a new language (or whatever) The reason that I was avoiding MT5 was the huge library of indicators gathered over the years, and the familiarity of MT4 However, losing everything, and searching for a new method, this Monday Tuesday, which uses only price, was ideal time to swap over to MT5 If you do learn to code MT5, you should register on MQL website and be rewarded for your efforts (trying to avoid that nasty 4 letter word) Thanks for your help
+
+--- 帖子 #79 ---
+@Paul...I got on several pairs "Sell Order Send failed with error #4109"! Any idea? Thanks, jdva
+
+--- 帖子 #80 ---
+@Paul...I'm currently trading manually the London BO on daily basis and M15 tf successfully. Do you think it is possible to adjust your EA accordingly to allow using it every day? Attached Image (click to enlarge) Thanks, jdva
+
+--- 帖子 #81 ---
+What are your rules? Just enter trade once it breaks the box?
+
+--- 帖子 #82 ---
+I believe what he said was, he's trading the London breakout, so he wants to use the EA to enter trades EVERY day I guess, on the break of previous days high or low, not a true London breakout is it? Just love the questions with so little information don't you? Or questions with mis-information like I want to trade in reverse at the Maximum
+
+--- 帖子 #83 ---
+Sorry for confusion... very simple rules: Entry on breakout after 10h CET (7h server-time, 8h GMT) on M15 candle close outside the box built from daily open to London open every day.
+
+--- 帖子 #84 ---
+Trade is not allowed. Enable checkbox "Allow live trading" in the Expert Advisor properties
+
+--- 帖子 #85 ---
+Well, anything is possible, but in this instance, that's actually quite a major change to the logic, as it currently looks at day numbers and only expects to open the one trade per week per pair. I'll add it to the list of things to look into, but I can't promise anything, I'm afraid.
+
+--- 帖子 #86 ---
+OK Paul thanks...sorry for my beginner mistake !
+
+--- 帖子 #87 ---
+No need to do that, they are trading that method in this thread and Swingman has already produced an excellent box indicator I suggest people do some "hard" work instead of expecting to be spoon fed on every whim https://www.forexfactory.com/showthread.php?t=985026 Cheers
+
+--- 帖子 #88 ---
+Hello guys....it seems to be a promising week....here is my open trades with this excellent EA
+
+--- 帖子 #89 ---
+What are your Stop Loss and Take Profit settings please? Must be tight as NZDUSD almost at profit, should let it run...
+
+--- 帖子 #90 ---
+Thank you it was factor 1.5 now I had setup with 2.0. But do you think I should take 2.5 insted.
+
+--- 帖子 #91 ---
+That is a far better manual trading method than TOTB for european people because we can already trade in the morning after breakfast instead of later after lunch. Of course one can use the very useful SwingMan's indicators too. Moreover it is more profitable... !
+
+--- 帖子 #92 ---
+Subscribed. Will try tomorrow. Thanks and Regards
+
+--- 帖子 #93 ---
+Thanks you for your EA, but I think it has some mistake that SL and TP, following the theory SL is 10% of range and TP is 50% of range. Can you fix it?
+
+--- 帖子 #94 ---
+you joined 1 hour 40 minutes ago, either you don’t know what you’re doing or the best troll ever?
+
+--- 帖子 #95 ---
+Very good week i hope profit for all with this good idea and expert PaulIV i'm using v. 1.062 it is good in backtest according to stoploss by MA but it is not working in live trading would you check please
+
+--- 帖子 #96 ---
+Firstly, you're using an old version - you should be using 1.07. Secondly, please explain "not working" - that doesn't give me anything to go on. Thirdly, it's working for me...
+
+--- 帖子 #97 ---
+I want to deal with the new version 1.07 but in backtests i got errors: 2020.04.16 10:12:21.055 2019.12.30 00:02:00 MoTuBo_EA 1.07 EURUSD,M15: not initialized 2020.04.16 10:12:21.055 2019.12.30 00:02:00 MoTuBo_EA 1.07 EURUSD,M15: array out of range in 'MoTuBo_EA.mq4' (866,31) So i use the old version until u solve it i saw that in previous posts. Secondly "not working" means not modifying the stop loss according to MA moving with the price and i did that manually. Thank you.
+
+--- 帖子 #98 ---
+Ah yes, back test in 1.07 is bugged - will release the fix this weekend. Trailing Stop should be working fine - the most likely reason for it not moving is that it hasn't triggered yet. What pair are you talking about, and what did you set for the trigger?
+
+--- 帖子 #99 ---
+May i know you all using which pairs to run ? this week i am running EURUSD, GBPUSD, USDCAD, USDJPY, USDCHF, AUDCAD, AUDNZD, EURAUD, EURCHF, EURNZD, GBPCAD and still floating loss.
+
+--- 帖子 #100 ---
+This is a great EA, happily using it for some time, so thanks a lot! I've started to experiment with BE and TS, and noticed that for some of the pairs the trade is started and then immediately stopped out, since SL for some reason is set (by the EA) at the same values as sell/buy: Attached Image (click to enlarge) These are the parameters I am currently using for all the pairs: Any help would be appreciated. Perhaps I've misunderstood the settings somehow?
+
+--- 帖子 #101 ---
+@PaulDV I could make a multipair version, please contact me if you are interested
+
+--- 帖子 #102 ---
+The Break Even is at 15 pips ? Have a look at 1 minute charts to see what happened
+
+--- 帖子 #103 ---
+Thanks, Erebus. I checked and I now realize I totally misunderstood the BE method.
+
+--- 帖子 #104 ---
+My demo is going great guns. Four winners and 104 pips positive float.
+
+--- 帖子 #105 ---
+Version 1.071 uploaded to first post.
+
+--- 帖子 #106 ---
+Hi Paul, Thanks again for doing this great job, this new update shows Zero divided error for some pairs that i have open position carried over from last week, see image please. Count meter error for EU gone when i opened and pushed OK bottom again. TIA
+
+--- 帖子 #107 ---
+Thanks - looking at the code, I'd say that the open trades started one week earlier than the number of weeks that you have the guides drawn for - would that be correct? If so, for now, I suggest upping the number of weeks to encompass the trades you have running. This wasn't a scenario that I'd anticipated, so will need to apply a fix for the next release.
+
+--- 帖子 #108 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #109 ---
+@EAforextrade looks good! did you change the settings or did you use the default settings?
+
+--- 帖子 #110 ---
+Yes they opened last week, will up weeks to 2 now. Can EA manage current and new positions separately? update: I increased number of weeks for those have open positions but chart doesn't show previous zones. IT does show if there is no open position.
+
+--- 帖子 #111 ---
+No modeling quality and 1287 mismatched chart errors.
+
+--- 帖子 #112 ---
+Yes, it can handle up to around 4 separate trades on the same pair at a time. I'm curious about how your charts look: the error you showed would mean that the EA is not running on those charts, yet you say that you see the current week's range? I've done some testing, and although I can see how the code could end up with an error, I don't seem to be able to reproduce it. I have some trades open from last week, and have removed the EA from them and re-applied it using a variety of settings, but all of them have worked. I'll keep on trying though. One thing: on the open trades, does it show the stop loss in the comments like "[SL155]"?
+
+--- 帖子 #113 ---
+Thank you for trying, however poor quality tick data and fixed spread = bad back test. I've seen commercial EA's being sold for hundreds showing results like these, and when put on real accounts, or tested using quality tick data, the results are always apallingly bad. If you want 'proper' tests, you need to use 99.9% quality tick data and variable spreads .
+
+--- 帖子 #114 ---
+Please see image, EA is running, number of week is on 5, it doesn't show past ranges and not current week correctly either.
+
+--- 帖子 #115 ---
+Totally agreed. And even this remaining 0.1% can kill your account if you do not have an emergency chute. Sometimes one pip can decide over weal and woe...
+
+--- 帖子 #116 ---
+Yeah, that's clearly not right. Can I suggest that you close the chart and start with a fresh chart and attach the EA to it (assuming you haven't already done so)? If you get the same, can you tell me if there are any error messages in the log/journal? Thanks.
+
+--- 帖子 #117 ---
+I noticed it happens when the "Numbers of Weeks to Display" parameter is set to a value that is beyond the available history data on the chart timeframe the EA is running on. Switching TFs and scrolling back a little fixes the issue.
+
+--- 帖子 #118 ---
+I have not read the whole 100 pages of the strategy thread and i apologize in advance if it has been discussed already (and probably has). Would it make sense to not trade during a specific week if the range of MoTu reaches a certain level of (or exceeds) the weekly average range ? (high volatility filter).
+
+--- 帖子 #119 ---
+Sorry Paul i already closed open position, chart fixed when i closed and opened MT4 so zone area looks good now.
+
+--- 帖子 #120 ---
+Yes, that's true, and is due to the platform running out of historic data until you wind back through the charts. Refreshing the EA once more data has loaded reloads and recalculates the guides again.
+
+--- 帖子 #121 ---
+Great idea, what exactly does your backtesting show would be the appropriate percentage of AWR to use? And maybe you could check when the MonTue range is small, do trades enter and then get stopped out due to volatility or price reversal? What is needed is a precise, ideal setup, perhaps 2/5ths of the AWR, before entering, a guarantee in Forex is always good. Do you have a good indicator for AWR? Maybe Paul can incorporate into the EA display; ADR would be great there too? In a sense, the extra entry range beyond the Monday Tuesday range, prevents the situation you mention, don't you agree?
+
+--- 帖子 #122 ---
+Ive tried tickstory on another EA but didnt get it to work and took a long time to load data. Need a faster pc and another go with the setup. Ive got it loaded on a demo to see what it does. Its extreme setting though so be amazed it works. Will see and let you know.
+
+--- 帖子 #123 ---
+Makes sense similar to a max % daily range on an daily BO box EA I've seen before.
+
+--- 帖子 #124 ---
+This error message appeared but buy order already sent Attachment g
+
+--- 帖子 #125 ---
+look at post#84...
+
+--- 帖子 #126 ---
+"Allow live trading" checkbox already checked and order placed and executed (Look at attached picture) at post#124
+
+--- 帖子 #127 ---
+"Look at attached picture" The face in the top right is frowning, meaning that trading is not enabled, which would explain the error message. As to why you would already have an active trade, I can't explain without reviewing logs etc., but it does sound odd. Have you got the EA on two charts for the same pair, with one enabled and the other not, perhaps?
+
+--- 帖子 #128 ---
+Having some sort of filter based on AWR could be a good idea, and I can certainly code it in, but the main issue is one of data and analysis: what should the filter be set to; how should it vary from one week to the next; should it take volatility into account...these are quite difficult questions for me to answer as I'm simply not experienced enough of a trader.
+
+--- 帖子 #129 ---
+Agreed with you let me explain now i know why that happened cause i'm using MQL VPS (face in the top right is frowning) and i got this error for that from the terminal and thanks for this version MA trailing stop working perfect Thank you PaulDV for your great expert
+
+--- 帖子 #130 ---
+Hy Paul, could you readd option for open order only if candle is closed? Thanks Regards Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #131 ---
+Nice one (first): Attached Image (click to enlarge)
+
+--- 帖子 #132 ---
+Paul, i've been following your thread and the basic strategy by 4ecstasy for quite some time now. I really appreciate your hard work - thanks alot for the well done EA. Beside trading it live on several fx pairs with mixed results (still figuring out how to choose the most promising pairs by tuesday), i gave it a shot on indices. Looking good so far: Attached Image (click to enlarge) All trades are executed correctly except Nikkei 225 (JP225) which gives me the following error: Attached Image (click to enlarge) I guess error 131 is related to the calculated lotsize of 526, is it? In case you might be interested in the settings - here you go: Attached Image (click to enlarge) Thanks much DT
+
+--- 帖子 #133 ---
+Thank you. Yes, error 131 means the lot size is invalid. But I see that you've set the max lot size to zero, which should cap it at the broker's maximum. Could you show me a screenshot of the symbol's specification like this: Attached Image (click to enlarge) Thanks.
+
+--- 帖子 #134 ---
+Thanks for the hint, Paul. Seems like my broker has a limit of 250 lots for trading JP225: Attached Image (click to enlarge) Any chance to get this "bug" fixed with the next update? Thanks DT
+
+--- 帖子 #135 ---
+Paul Are you using default settings? if not can u share your settings. Thank you
+
+--- 帖子 #136 ---
+Will do.
+
+--- 帖子 #137 ---
+I am yes, apart from doubling the risk at the moment to 2%.
+
+--- 帖子 #138 ---
+Another proof, that algorithms are creating the courses when there are no *** news. Take a look how some lines just lay one over the other: Attached Image (click to enlarge) Already Monday/Tuesday defined yesterday's and today's levels. You just need to know which ones will be the ones ;-)
+
+--- 帖子 #139 ---
+Nice one (second) Attached Image (click to enlarge)
+
+--- 帖子 #140 ---
+Hi Paul, False Breakout plays out most of times these days, could you please add order limit option so we can run it on another account and compare the result with current one? I remember some one has suggested it earlier too. TIA Moe
+
+--- 帖子 #141 ---
+i can still open any trade with this EA, any sugestions? thanks
+
+--- 帖子 #142 ---
+This question is like if you go to a workshop and say: "my car is making funny noise. Any suggestion?" ...what do you think the mechanic would reply?
+
+--- 帖子 #143 ---
+HI ，sir, i found Version 1.071 not work correct with AUDJPY today. open price diffrent with indicator
+
+--- 帖子 #144 ---
+Could you explain what you mean by "order limit option" please?
+
+--- 帖子 #145 ---
+As ursinho4711 says, you will need to explain what your issue is a little clearer. A screen print of your chart along with the parameters would be helpful too.
+
+--- 帖子 #146 ---
+Please explain what the issue is. Perhaps include a screenprint of the chart you're having issues with, along with the parameters that you have setup would be helpful.
+
+--- 帖子 #147 ---
+[quote=PaulDV;12922360]{quote} Please explain what the issue is. Perhaps include a screenprint of the chart you're having issues with, along with the parameters that you have setup would be helpful.[/ as you can see it . trigger price not same as indicator ... i both set at 0.25
+
+--- 帖子 #148 ---
+also wrong with nzdcad \ nzdjpy
+
+--- 帖子 #149 ---
+also with usdcad ..
+
+--- 帖子 #150 ---
+Sure, i mean putting Sell limit and Buy limit orders in break outs instead of Stop orders. these option can work when we are in long side-way market. TIA Moe
+
+--- 帖子 #151 ---
+[quote=xzdluu;12922494] My suggestion is to show more of the EA settings on the screen, give Paul something to work with And remove all other indicators off the chart, I mean are you running an EA or trading manually? Zoom to 1 hour to show clearly what is happening @ Paul , really testing your psychic ability the last few days here Attached Image (click to enlarge)
+
+--- 帖子 #152 ---
+The problem has been solved after I restart EA, the ENTry price is correct now . it seems EA cant refesh itself.
+
+--- 帖子 #153 ---
+EAs tend to refresh only when added to a chart for the first time, you switch pairs or timeframe, or manually refresh the EA itself. After that they should simply operate as normal.
+
+--- 帖子 #154 ---
+Hmmm, still not clear on what you want - the EA doesn't use stop orders, it uses market orders in order to avoid having lots of pending orders hanging around. Can you explain how you would like to see it working?
+
+--- 帖子 #155 ---
+Sorry for making confusion, yes it doesn't put pending so it simply should open opposite position. IE, when break out to upside, it should open SELL instead of Buy and vise versa for breaking out from down side. Why asking for that? because my observation shows that there are 3 types of movement after break out that if we open opposite order following can happen. 1- Sharp break out with little retracement - hit SL ( SL will be outside of range in this case). 2- break out with big retracement that we can close in BE or with little profit. 3- False break out - will hit TP or BE or manual close with little TP. In all 3 types manual intervention needed to manage positions, as said earlier i would like to forward test it along with current one. Considering that forex is in ranging most of time or in trend with big retracement so this can make edge for opposite system. TIA Moe
+
+--- 帖子 #156 ---
+I coded the idea of the system quickly in pinescript, see here: https://www.tradingview.com/script/A...uesday-System/ It may not reflect the exact original idea, but it's public and the source is open, so feel free to adapt.
+
+--- 帖子 #157 ---
+Last 3 weeks
+
+--- 帖子 #158 ---
+Thanks, that's great, but you left out the important bits like which pairs, what settings, etc...
+
+--- 帖子 #159 ---
+Thanks, but this is probably better off in the thread that covers the strategy, not here.
+
+--- 帖子 #160 ---
+I use all majors, minors, gold, oil, and Equity Sentry v1.4c with 10 % profit for the account...
+
+--- 帖子 #161 ---
+Paul, I hate to ask you to add a variable to your EA, as there seems to be many such requests being thrown at you, but I do have a simple (I hope) one to suggest. Could you make the number of trades allowed per week, a variable? I'm trying to eliminate the situation wherein price triggers a trade, then reverses, goes the opposite direction and hits SL. In many such cases, price then proceeds past the opposite trigger and on to where TP would have been hit. A loss could be avoided with a tight Break even setting and a second trade being activated. In that case, if the trade reversed, it would be closed by the Break even setting, then a second trade would be opened in the opposite direction when price crossed the trigger. I can see one problem with tight Break even's being, price often retraces, without hitting SL, then continues in the original direction. Accordingly, a second (or even a third) opening could be in either direction. I hope that makes sense? Thanks and keep up the good work!
+
+--- 帖子 #162 ---
+That is simplicity itself, as the variable was originally in the list of parameters and I have simply hidden it. I'll default it to 1 and allow it in the parameters. That said, I doubt it will actually help as a loss is often followed by a win, a win followed by a loss, and a loss followed by another loss, and, occasionally, a win followed by another win...so it will be interesting to see just how effective it would be. Of course, there's no reason why you can't enter a second order yourself manually at the entry lines when the first order is closed.
+
+--- 帖子 #163 ---
+Version 1.08 has been posted to post #1.
+
+--- 帖子 #164 ---
+Thanks
+
+--- 帖子 #165 ---
+Attached Image (click to enlarge) Attached File(s) SuperGuppy.txt 5 KB | 229 downloads
+
+--- 帖子 #166 ---
+I put 2 for the allowed trades, thinking it would be to allow a second trade when the first was closed out But it opened 2 trades for the first signal line on 9 pairs so far Click my name and scroll down to the #2 Trade Explorer, heck, you know how to do that
+
+--- 帖子 #167 ---
+Sorry about that - Your interpretation is the intended functionality, so I'll have to take a look at the logic again. But, I did say that I recommend you stick to using '1' EDIT: found it! Literally a 1-character change to the code! There are two variables that control the number of trades for a pair: one controls the maximum number of trades that can be open at one time, the other the maximum number of trades for a pair for any given week - this overrides the first. I exposed the latter, but I must have been testing with multiple trades in the past, and had left the maximum number of open trades as 2. While the max trades per week as 1, it was overriding the max open trades, but when set to 2, the max open trades suddenly came into play...hence 2 trades opened. I'll post a quick fix shortly. EDIT2: Now I remember why I set max open trades to 2: to allow a trade to carry over to the following week, but still allow a new trade to be opened for the new week. So, the logic will need to be reviewed to allow the proper intended functionality...this will take me a little longer that I'd thought.
+
+--- 帖子 #168 ---
+No rush, it's only on demo, this is why we are testing for you, if we stick to the suggestion of 1, never find the error Thanks, John
+
+--- 帖子 #169 ---
+I noticed the same thing. Multiple trades are opening simultaneously rather than consecutively. The other thing I noticed was, some trades were being closed by the Break even function that didn't come close to hitting the Break even level I'd set (0.24 x SL, zero pips to lock-in). Finally, I received error #133 when trying to open a buy on XAUEUR. The size of the trade was well within range. Here's a copy of the journal entry. I received this entry a dozen times, or so. Yes, I had both SL and TP set at the same levels as all other pairs. Thanks Paul ! Attached Image (click to enlarge)
+
+--- 帖子 #170 ---
+Could you provide an example of one of the trades that were closed by the BE function? Regarding the XAUEUR trade: take a look at the last part of the message - trading was disabled...this is usually down to your broker disabling trading on that instrument.
+
+--- 帖子 #171 ---
+Paul, eg. NZDJPY - opened today at 02:54:30 / $65.054. It was closed by SL at 03:20:26 / $65.057. It shows the SL was set at $65.054. I had Break even set at 0.25 x SL, which I don't believe price ever got close to. It was a Demo account, although I don't believe that had any bearing. Thanks!
+
+--- 帖子 #172 ---
+What were your entry parameters, and what is your brokers offset?
+
+--- 帖子 #173 ---
+Paul, My broker's offset is GMT+2 hours. I was using closes to determine range, an entry ratio of 10% (I know, just trying different things) and a SL of 50%.
+
+--- 帖子 #174 ---
+It'll most likely be spread. These are the two candles responsible: Attached Image Depending on your broker's feed and spread, it looks like an entry was triggered on the first candle (giving the red line as the entry price), and the second candle then opened and continued short, most likely triggering the break even, and then turned around and stopped out.
+
+--- 帖子 #175 ---
+That’s a shame really, NZD pairs are powering on, and more to come IMHO Attached Image (click to enlarge)
+
+--- 帖子 #176 ---
+What's going on here Paul? See the date, only just opened now, some calculation possibly? On Edit: Just realized that the narrow 19 pip range account for the large trade size, and the red status of stop loss, must be alright Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #177 ---
+This weeks result
+
+--- 帖子 #178 ---
+This week I'm testing EA with OOTB settings and Erebus settings. Both are at a loss.
+
+--- 帖子 #179 ---
+mine was a win this week. you have to know to close the trades when you are in good profit, usually wednesday evening or thursday afternoon are good times to do this. another thing that was profitable for me this week was following Dtde's advice on post 132 to use them on indices, his settings are there. that was a very nice start this week blam
+
+--- 帖子 #180 ---
+I use all majors, minors, gold, oil, and Equity Sentry v1.4c. Before with 10 % profit target for the account, now I'm testing 5%
+
+--- 帖子 #181 ---
+Thank you, I also try the indexes. Which TF to use?
+
+--- 帖子 #182 ---
+When PRICE breaks the chosen level of Monday and Tuesday, it does it on all time frames
+
+--- 帖子 #183 ---
+No worries dokopy. The EA is timeframe-independent, meaning you can set it up on whatever timeframe charts you like, it doesn't affect the result. I have mine set at the default H1 good luck blam
+
+--- 帖子 #184 ---
+Worth doublechecking that statement in case you use the MA Trailing Stop ? @PaulDV
+
+--- 帖子 #185 ---
+The timeframe really doesn't matter for entries - they will be the same regardless; however, if you are using the trailing stop, then you will get differing results depending on the timeframe you use. I suggest that you set up some tests by duplicating the charts on different timeframes (remember to use a different magic number for each timeframe) and see the results for yourselves.
+
+--- 帖子 #186 ---
+Hit +20% - I'm done for the week!
+
+--- 帖子 #187 ---
+Time travel much? is it Wednesday already where you are ? looking at the trade explorer the positions opened today.. what I'm I missing here.
+
+--- 帖子 #188 ---
+What would be the differences in the way a TS behaves with H4 vs. D1?
+
+--- 帖子 #189 ---
+Same question, here. I still have to wait another day, before the EA starts trading.
+
+--- 帖子 #190 ---
+Lol - I've been experimenting and back-testing a variation of the strategy, which uses the first 10 hours of Monday to set the range, and then monitor and close all trades when it hits +10% (I've got my risk ramped up to 2% at the moment, which is why I used 20% this week). Just 11 pairs: AUDCAD, AUDCHF, AUDJPY, AUDUSD, EURAUD, EURCAD, EURGBP, GBPAUD, GBPCHF, GBPJPY, GBPNZD.
+
+--- 帖子 #191 ---
+so that's a no for time travel, I see are you adding it as another entry type or a separate EA?
+
+--- 帖子 #192 ---
+No, I'm just using the existing EA, but with different settings.
+
+--- 帖子 #193 ---
+Don't know what's happened to the Blueberry Demo account that I'm running the EA on, lost connection about 9 hours ago, but it came back Then a few hours ago, it dropped connection again and still dead Used to be that the demo would expire at the end of the month, then some went to a 30 day limit Anyway, I see OANDA is in Australia now, might set that up for next week wow, as I posted that, looked over at my other screen, and it's live again, WTF ??
+
+--- 帖子 #194 ---
+Hi PaulDV, Firstly sorry for my bad English. Thanks for this great EA. But I faced some problems this week. For GBPNZD, EA didn't open trade and give an error message. For GBPAUD, EA opened a trade but not TP and no SL. Gave a message. For both pairs, I attached the screenshots for my parameters and the error messages. Best regards,
+
+--- 帖子 #195 ---
+Hi again PaulDV, For EURGBP I faced sam problem. EA opened an order but not TP and SL gave an error message as attached screen shot.
+
+--- 帖子 #196 ---
+Hi again PaulDV, I have another problem. For all pairs; Trade Allowed: parameter is "No- Market is closed" But today is Wednesday. Why this situation could become? I didn't understand. Please help with my problems. The screenshot is for example. Thanks,
+
+--- 帖子 #197 ---
+What's the broker? Some broker stopped trading high volatility pairs; did you get any emails from them? Cheers, Blueberry is steaming along good now
+
+--- 帖子 #198 ---
+4 weeks result
+
+--- 帖子 #199 ---
+Hi, sorry for the delay in replying but work has been a bit crazy lately. As Erebus says, which broker are you using? I won’t go as far as to say there isn’t a problem with the EA, but it’s a little suspicious that you’re experiencing so many issues on so many different pairs, that it’s likely to be your broker that’s causing the issues...especially if you’re trying to trade on a live account. Error 147 means that your broker has disabled some aspect of trading. Error 4112 isn’t even listed in the MQL4 manual, so I’m not sure what that is, but the error codes around it would indicate that, again, the broker has disable some trading conditions, e.g. disallowed shorting or a pair. Market closed would be due to your broker not responding to requests about the details for the currency pair. If the broker won’t supply details, then the EA asssumes that the market is closed, and will not attempt to trade. I would review your choice of broker. EDIT: further digging on error 4112 shows that it means that your broker has disabled the use of EAs...get a different broker!
+
+--- 帖子 #200 ---
+Nice one Toppi...looking good!
+
+--- 帖子 #201 ---
+good job bro
+
+--- 帖子 #202 ---
+Bugger this, ranging market, I'm moving on signature is new demo, click to learn more adios, amigos
+
+--- 帖子 #203 ---
+Hi Paul, Thank you for your contribution to the thread. Can you share the EA to close all the trades at specific profit?
+
+--- 帖子 #204 ---
+Things are looking much better this week, than they've looked for quite a while. I'm following Paul's lead by starting trading earlier than before; Monday at 6:00 PM. Here are my results so far this week: Attached Image Attached Image (click to enlarge)
+
+--- 帖子 #205 ---
+Will try it soon. Thanks and Regards
+
+--- 帖子 #206 ---
+Closed early for roughly 15% profit...not by choice though: I was testing my own equity sentry EA and a bug triggered the closing of all trades! Looks like it was just as well though as the markets appear to have turned around.
+
+--- 帖子 #207 ---
+Quite useful, thanks)
+
+--- 帖子 #208 ---
+Nice results but starting to trade on Monday it's not even close to this strategy...
+
+--- 帖子 #209 ---
+True, it's not entirely following the initial strategy, but at it's heart, it's the same; it's just the time allocated to deriving the range that has changed. For me, this sprung out of something someone said over on the main strategy thread. I took some time to analyse the figures for the past 12 months, and did some testing and some tweaking and came up with a subset of the strategy that seems to be doing well...adapt and survive Still in testing at the moment, but it's looking promising, and it looks like I have a nice new EA (I'm cheekily going to call it Equity Guardian, lol) to close all my trades when I reach a certain profit (or, heaven forbid, a loss!). When I'm happy with it, I'll post it for everyone to use.
+
+--- 帖子 #210 ---
+Monday in 18.00 or as PaulDV wrote - uses the first 10 hours of Monday? https://www.forexfactory.com/showthr...8#post12947838 Thanks I understood!!! You have 8 hours difference with PaulDV!
+
+--- 帖子 #211 ---
+The new EA is looking good so far this week... Attached Image
+
+--- 帖子 #212 ---
+Further to what Paul mentioned; I have 10 trades open, all in profit. I set the start of trading at Monday, 18:00 but Monday, 16:00 would have been much better. I'll try that next week.
+
+--- 帖子 #213 ---
+market seem to be making big moves earlier and earlier in the week since this system came to notice, some 200% ranges on pairs on Monday alone
+
+--- 帖子 #214 ---
+Hit my target for the week! Attached Image
+
+--- 帖子 #215 ---
+7 weeks
+
+--- 帖子 #216 ---
+If u don't mind showing your history of trades? Or if you could tell how big were the lot sizes and how many trades total were opened?
+
+--- 帖子 #217 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #218 ---
+Paul is this new setting / configuration now recommended, or, are you testing for a few more weeks before it becomes the new default. Is the new setting just suiting to current conditions? As it differs from the original strategy. Just want to be sure my demo defaults are still recommended. Thanks again. I like your new guardian
+
+--- 帖子 #219 ---
+I am going to refrain from recommending any specific settings for the strategy, but I can say that I am using these settings on my live account at present. The original strategy (and therefore settings) remains unchanged, I have simply done some back testing (ok, quite a LOT of back testing, actually) and made some tweaks for my own personal use. I would encourage anyone using this strategy to test on their own broker, as price feeds from different brokers CAN have a huge effect on this strategy, and also recommend that people continue testing periodically as the markets change. The Guardian EA is now downloadable from another thread: https://www.forexfactory.com/showthread.php?t=1003301
+
+--- 帖子 #220 ---
+has anyone backtested or forward tested this on many pairs? or indicies also i am about to embark into a jounrney!
+
+--- 帖子 #221 ---
+That depends on what you mean by "this". If you're referring to the EA, then yes, that has been tested on practically every pair and index available and simply works. If you're referring to the strategy it employs, then you're best going over to the main strategy thread and asking there, as there are many people applying the same strategy but in a variety of ways. Hope this helps.
+
+--- 帖子 #222 ---
+Hi Paul, how are you. Great work,, your EA seems to be consistent now with you new set. Can you share a picture of the setting,, that way we can guide it.
+
+--- 帖子 #223 ---
+Hi! Congrats, great result! But as was written before, this is not the strategy (Mo-Tu-Box and the follow the breakout). Or was the EA looking at Mo-Tu from last week? As I understood, the EA now allows something like this? Have a sunny and healthy day @all!
+
+--- 帖子 #224 ---
+And as I said before, it IS the same strategy (i.e. a breakout). The only change is the period used to derive the range. Accordingly, the EA allows you to set your own trading period: Attached Image As you can see, I've set it to start trading from 10am on Monday. This means that it will use the range as governed by the markets between 00:00 and 09:59 on Monday.
+
+--- 帖子 #225 ---
+These are my settings. Any you can't see are at the defaults. Attached Image (click to enlarge)
+
+--- 帖子 #226 ---
+[quote = PaulDV; 12977221] {quote} {image} [/ quote] Thanks for your great EA paul. In the test you are currently using for the MOTU system starting on Mondays, are you using all 28 pairs? Thank you
+
+--- 帖子 #227 ---
+Pairs I'm using are: AUDCAD, AUDCHF, AUDJPY, AUDUSD, EURAUD, EURCAD, EURGBP, GBPAUD, GBPCHF, GBPJPY, GBPNZD Settings are as per my previous post.
+
+--- 帖子 #228 ---
+Hi Paul! Thanks for the quick and helpful answer! Just one small question (same confusion as always): 00:00 refers to your broker time? Meaning GMT+3? Box closes one minute before London Open? Remember, that we have GMT, Broker Time, Local Time...
+
+--- 帖子 #229 ---
+Paul, it looks like we are able to trade the daily BO as well...that would be very handy ! Where can I download it?
+
+--- 帖子 #230 ---
+Not so, I'm afraid - it's hard-wired to start the range period from 00:00 on Monday.
+
+--- 帖子 #231 ---
+Looks like an issue with the data on your client. You may need to cleanse your test data...but I don't know how to do that I'm afraid.
+
+--- 帖子 #232 ---
+yo have to change money managment to fixed lot the row above lot size
+
+--- 帖子 #233 ---
+cescof, thank you..got it...
+
+--- 帖子 #234 ---
+Hi Paul, may i ask how you backtested the pairs you mention? Did you do it in the Strategy Tester? I ask because that's what I did, and - since I got bad results on some of the pairs you included - I decided to test them in another MT4 setup (different broker, but dl'ing from history center as well) and sadly got even more different results. So I really wonder if Strategy Tester is reliable for this kind of strategy, or it is a more general problem with the Strategy Tester. Any input welcome!
+
+--- 帖子 #235 ---
+Thank you for your excellent EA. On my broker and I think most others a bar/candle's open, high, low and close are all recorded using the SELLING price. If your EA uses the high selling price as a trigger to go long it should try take into account the spread at the time of trading to make some allowance for the fact that we do not know what the spread was at the time that the high that we are using for the trigger was formed. Generally we should also be careful not to use ranges formed when there was exceptional volatility when spreads would have been very big. I have not found back testing to be the best way to test a strategy because of the inclination to play around with the settings for the best results, I an testing your EA going forward on a demo account, last week was good using the Monday start. Most strategies that look good looking back do not always work as well going forward due to the many influences on the markets and I have found that a large portion of good sense should always be part of a strategy going forward.
+
+--- 帖子 #236 ---
+Thankyou. I do like the idea of using the ask price when recording the long entry. This would be possible when forward testing, of course, but, as you have said, we don't know what the spread was historically, so looking back won't be as accurate. But I will look into building this in. Curve fitting is very difficult to avoid, as we tend to do it subconsciously, so I do agree with your commend on back testing, especially when it comes to 'tweaking' settings. Personally I find using broad brush strokes to be a little more forgiving when 'going live' than trying to find the 10th of a percent of a value that gives the 'best' results. For my part, I back-tested visually on every currency pair (using the indicator mode), recording the results for each week (took a while!), and discarded all pairs that didn't generate at least 40% win rate (I'm using R:R of 1:2). I then back tested the same period using the strategy tester and some good quality tick data, which pushed some pairs up and took others down, and again I eliminated any with a win rate of less than 40%. The list of pairs I gave above are the result, based on my broker ( IC Markets ), but may well be different for another, so I would always encourage people to do their own back testing rather than simply blindly following someone else's settings and hoping for the best.
+
+--- 帖子 #237 ---
+Paul DV. I would love to get in contact with you, please provide me with the best way to get a hold of you!
+
+--- 帖子 #238 ---
+PM me.
+
+--- 帖子 #239 ---
+10% target profit reached, all trades closed by Equity Guardian. Impressive stuff by both EA's
+
+--- 帖子 #240 ---
+Hi LarryK, Please share your orders (closed or open) with profits by pips. I'll check my orders with yours for broker's reliability. Thanks, Best regards,
+
+--- 帖子 #241 ---
+Attached Image (click to enlarge) Demo account so numbers mean little
+
+--- 帖子 #242 ---
+still impressive though Larry.
+
+--- 帖子 #243 ---
+[quote = LarryK; 12989855] 10% de beneficio objetivo alcanzado, todas las operaciones cerradas por Equity Guardian. Impresionante material de ambos EA [/ quote] I am almost in BE I did not have that% of profit that broker you use
+
+--- 帖子 #244 ---
+are you using default settings?
+
+--- 帖子 #245 ---
+Could you pls share your settings?
+
+--- 帖子 #246 ---
+Mo 00-10h EA today +4% Attached Image (click to enlarge)
+
+--- 帖子 #247 ---
+Great, it is very good to start after 10 gmt for the strategy, very good results in two weeks.
+
+--- 帖子 #248 ---
+Trailing profit hit on demo at around 13%: Attached Image (click to enlarge) Attached Image Live hit profit target of 50%: Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #249 ---
+So i suppose using equity guardian you have disabled all tp and sl in every single pair with MoTu.... right? Thanks Regards
+
+--- 帖子 #250 ---
+No, I always use a SL. I set TP to 3 x SL.
+
+--- 帖子 #251 ---
+10 weeks, still going up. Now I also use EG 1.13
+
+--- 帖子 #252 ---
+Hi Paul Is this the new EA or are you still testing
+
+--- 帖子 #253 ---
+Equity Guardian is another EA that manages the equity on an account. I'm using it to close all trades opened by MoTuBo when a certain profit target has been reached - in this week's case, the target was 20% but the trades all got closed at 13% when the markets reversed.
+
+--- 帖子 #254 ---
+This based on Wednesday triggers or Monday triggers? Looks nice and steady
+
+--- 帖子 #255 ---
+Did the Equity Guardian evaluate the market turnover and close 13% before reaching the 20% target?
+
+--- 帖子 #256 ---
+Monday
+
+--- 帖子 #257 ---
+I was using a trailing profit target, so when the markets reversed for a time and the accrued profit fell, it closed out when the profit hit the trailing profit, which was at 13% at the time.
+
+--- 帖子 #258 ---
+You closed manually because the market turned around. EA didn't do it. Did I understand correctly? Or did EA close in a way called Trailing SL? In one position.
+
+--- 帖子 #259 ---
+I'm using Equity Guardian to manage the equity. That closed the trades for me.
+
+--- 帖子 #260 ---
+50% profit target attained on live trades is amazing.
+
+--- 帖子 #248 ---
+Small account, so I wasn't that bothered, but just seeing if I can use MoTuBo and EG to recoup the losses I made using another EA. Currently got the risk set at 5% per trade, but each time the smallest lot size appears as 0.02, I will lower the risk% by 1% and the profit target by 10% (so, 4% and 40%, etc.), until the risk% reaches 1%...if the account gets there!
+
+--- 帖子 #249 ---
+Is this take profit target easily achievable?
+
+--- 帖子 #250 ---
+Not sure, but let's do the maths: Max of 11 trades. Risking 1% per trade, that's a max loss of 11% if it all goes wrong. Using R:R of 1:2, that's a max win of 22%. We know that a gain of between 5% and 10% is achievable, especially using Equity Guardian. This equates to roughly 25%-50% of the maximum (so, we're not being too greedy!). Scale up the risk to 5% per trade: Max loss of 55% if it all goes wrong (bugger!). Max win of 110%. Making a gain of between 27.5%-55% not inconceivable. I increased the R:R to 1:3 ( taking the max possible win up to 165% ) and let Equity Guardian do its thing, being sure to give the trailing profit a large headroom to work (trail by 20%) and trust to the market. Breakdown of the trades for this week: 9 trades total. 2 full losses (-10%) 1 full win (+15%) 6 floating profit at close: +12.5% +1.25% +7.5% +10 +11.25% +2.5% What are your thoughts?
+
+--- 帖子 #251 ---
+Sounds interesting, looks promising. It's now a matter of sustaining a good results on the long term.
+
+--- 帖子 #252 ---
+Have you maintained the stop loss ratio of 50% or you have changed it?
+
+--- 帖子 #253 ---
+Please change the thread - Commercial Content Forum.
+
+--- 帖子 #254 ---
+Did I write something about commercial? This https://www.forexfactory.com/showthread.php?t=976730 EA is open code:
+
+--- 帖子 #255 ---
+"into a multipair EA. Meaning, I don't need to open a chart for each pair to trade. And it works (ICMarkets-Demo)... If anyone is interested to pimp this system here into a multipair, please contact me. I have some experience now how to do program it quite quickly... This weeks closed trades with the "brother" EA: {image} Running trades now (11:45 GMT)"
+
+--- 帖子 #256 ---
+Still the same.
+
+--- 帖子 #257 ---
+Are you offering to change my EA to run on multiple pairs? To other people?
+
+--- 帖子 #258 ---
+Hi! I do not understand the confusion. I was asking YOU (or whoever is the "owner" of the EA) whether you would be interested in trying this in a multipair. How can I offer something that I do not have? From my experience with the "brother" from the other thread, that uses a similar attempt, I thought it might be worth a try. Just one chart instead of 28 (or whatever). If you are not interested, no problem. I really do not understand why user dokopy jumped on my post. I have nothing to do with him/her/diverse.
+
+--- 帖子 #259 ---
+hey ursinho i think dokopy interpreted what you posted as you offering your services to convert EA's to multipair for a fee. You didn't mention anything about money, but he obviously inferred that (incorrectly in my opinion) thanks for sharing the multipair version btw - do you usually run it on all 28 pairs? blam
+
+--- 帖子 #260 ---
+As blamshak said, it's all due to how your post could be interpreted - it did sound to me like you were offering to amend this EA, which seemed a bit cheeky. But never mind. Have I considered updating it to run on just one chart? Yes, I have. But I won't be doing it. The EA you linked to uses pending orders, this EA doesn't - it monitors the price levels and opens market orders only when necessary. So, while I could amend the EA to monitor multiple pairs, it would be very processor-intensive and will either slow your machine down significantly, or will miss entering/exiting trades correctly, which is why I won't be doing it. Besides, it doesn't take much effort to open a chart and drag an EA onto it, and it also gives you the ability to run different settings for each pair.
+
+--- 帖子 #261 ---
+Every idea is welcome. This was formulated quite unhappily.
+
+--- 帖子 #262 ---
+PaulDV, thanks for your EA and this concise, clean, thorough and focused thread. Kind regards
+
+--- 帖子 #263 ---
+I could see the markets brought good profits to this strategy this week, but unfortunately the Equity Guardian EA exited me too early.
+
+--- 帖子 #264 ---
+yes last week was a great week for the EA on currencies, I exited a lot later than usual (Friday) One tip I would highly recommend is to open another demo and try this EA on indices, for the month or so I have tried that (after a suggestion by Toppi) it has absolutely rocked blam
+
+--- 帖子 #265 ---
+Thanks for your ea! I will test this we and share result Everybody trying to use news filter? Attached Image
+
+--- 帖子 #266 ---
+Any changes to be applied? Thanks
+
+--- 帖子 #267 ---
+no you can just use default to start testing with blam
+
+--- 帖子 #268 ---
+Version 1.09 has been uploaded to the first post. This is an optional upgrade and doesn't contain any bug fixes. Only upgrade if you want the additional filter.
+
+--- 帖子 #269 ---
+Will do. Thanks
+
+--- 帖子 #270 ---
+hi is the the default settings of latest version good enough as secure-safe config ? and if default is when what is an aggressive one config ?
+
+--- 帖子 #271 ---
+Looks like a dead thread here, not suprising because it doesn't work often enough to be profitable, a real killer when the market ranges, so needs work like waiting for a pair to trend or at least move in a direction for a few days. I gave the EA a try for 2 weeks on a mini live account and lost more than I wanted and realise that backtests prove nothing except what worked in that period of time. I am reverting to finding HH LL with price action at support or resistance on 1 hour or higher depending on my schedule, the old KISS formula. Cheers to all here who were here.
+
+--- 帖子 #272 ---
+Has there been an update to the question of "max open trades" that was discussed back on post #167 - May 13th? I have tried to read the threads since, but may have missed it? I know your recommendation at the time 1.08 was released was to keep this at 1, but would really be interested in seeing how this would play out if the EA could enter a second trade during the week, provided the first trade has already closed. PS. I think your work with this EA is really great and am glad I found it.
+
+--- 帖子 #273 ---
+This EA is multi pair , so we need to put an EA only to only 1 chart in any time frame right ?
+
+--- 帖子 #274 ---
+Breakouts are one of the most common trading strategies that you can carry out, they involve identifying a key price level you expect the price to break through, and then buying or selling at that price to take advantage. if the ATR is reached earlier in the week it may be prudent to be on the lookout for potential market failures in the latter half of the week as they could be the marking of a false break and/or possible outright reversal.
+
+--- 帖子 #275 ---
+This is my result of September for V1.09 Attached Image (click to enlarge)
+
+--- 帖子 #276 ---
+MT4? Use this to make separate reports, trades have to be in the History and then define the dates in this Indicator Good trading Attached File(s) TradeReport_compact.mq4 53 KB | 541 downloads
+
+--- 帖子 #277 ---
+Good results, but (there is always a "but"): take a look at the GBP trades. And then take a look at the GBP news, Don't extrapolate your results from two weeks into eternity...
+
+--- 帖子 #278 ---
+After many tests I managed to find a set of parameters that seems to be profitable, if anyone wants to use it they can feel free! Only use GBPYPJ!
+
+--- 帖子 #279 ---
+Dear @PauDV, Thanks for the works, but it seems like i could not backtest your EA ( ver 1.09 ), how can we fix this? Looking for your reply, Best regards, THIEN.
+
+--- 帖子 #280 ---
+ver 1.09
+
+--- 帖子 #281 ---
+My Sep 2020 report for EA v1.09
+
+--- 帖子 #282 ---
+Thanks for this, Which pairs are you trading?
+
+--- 帖子 #283 ---
+11 pair that show the result
+
+--- 帖子 #284 ---
+thanks for sharing your experience with the EA. does the ea work as you asked above? So on one chart and all set pairs are traded automatically?
+
+--- 帖子 #285 ---
+What are your settings friend?
+
+--- 帖子 #301 ---
+Default setting and use trailing stop at MA30
+
+--- 帖子 #302 ---
+Toppi, what does the 8% refer to, and are you using default settings here besides the 8%?
+
+--- 帖子 #303 ---
+I don't see how anyone is getting good results with this ea, I'm down 40% on my demo in just a few days.. Any tips?
+
+--- 帖子 #304 ---
+Don't trade during USA Presidential ELECTION week
+
+--- 帖子 #305 ---
+I disagree. The secret to using this EA is using it on indices, instead of on currencies. It's doing well on indices on my six-month old demo, and this week has been another profitable week blam
+
+--- 帖子 #306 ---
+Which indices do you use it on specifically? All of them? And which settings are you using?
+
+--- 帖子 #307 ---
+US30, AUS200, FRA40, GER30, UK100, JPN225, HK50. I have mine on H1 charts. Bear in mind your broker might have slightly different names for them, but it will be obvious which is which. Setfile attached - ***remember to remove the '.txt' suffix to make it work***. 1. Take profit when you can get it, usually by Thursday late afternoon if the basket is good, then it should be in profit. Depending on chart structure and if you think the moves have more juice left in them, you may want to leave the basket open until Friday. I usually close all trades together as a basket, less hassle. 2. When you close the basket, remember to switch off autotrading on your terminal, or pairs may re-enter trades upon hitting relevant levels again - you don't want this to happen, as these trades may reverse because the steam has usually gone out of the move by this point. 3. Remember to re-enable trading on your terminal Sunday / Monday or Tuesday. Just make it a regular thing so you will remember. blam Attached File(s) MoTuBo Dtde post 132 indices mod.set.txt 2 KB | 402 downloads
+
+--- 帖子 #308 ---
+My results so far since 2020/07/01 on a live cent account Had one losing month Using the Monday breakout setting Dropped GBP/NZD Spreads are way to high Attached Image (click to enlarge)
+
+--- 帖子 #309 ---
+Nice results. How about your settings on Monday? Thanks
+
+--- 帖子 #310 ---
+Hi Morne, I tried this strategy when it first came out and it didnt really go that well for me at the time. I note the pairs that you have settled on to trade, would you mind letting me see the EA settings that you are using? I would like to try it again and would appreciate the help. regards, Peter
+
+--- 帖子 #311 ---
+Same settings as Paul basically go and check post224
+
+--- 帖子 #312 ---
+Thanks, I will do that now.
+
+--- 帖子 #313 ---
+LOL not everything revolves around the USA calm down
+
+--- 帖子 #314 ---
+It looks like you have the best results I've seen so far, do you mind sharing your set?
+
+--- 帖子 #315 ---
+check post 225 also blam
+
+--- 帖子 #316 ---
+Hi Paul, as the others have said both the Equity guardian and the MoTu ea have expired. I am busy managing live trades so Im pretty confused as to why this wasnt mentioned before that there is an expiry date. Could you please upload latest versions asap or let us know what is going on?
+
+--- 帖子 #317 ---
+hello Paul same for me . EA expired. Could you please provide a free expiration version ? cheers
+
+--- 帖子 #318 ---
+Same here.
+
+--- 帖子 #319 ---
+Apologies to all who have been inconvenienced by the EA expiring. As some of you may have noticed, I haven't been on FF for a while, and while I won't go into details, this was due to a number of things conspiring to keep me from doing a lot of things I would have liked to do. Let's just say that it's been an "interesting" 6 months... Regarding the EA expiring, that was an oversight on my part. I use a number of common routines in the coding of my EAs and indicators, and one of them contained the expiry code that I was using for another EA when it shouldn't have. I have removed the expiry date, so it should work now...if anyone is interested to do so that is! Again, apologies for the issues.
+
+--- 帖子 #320 ---
+Good to see you back, hope you are well. Thank You
+
+--- 帖子 #321 ---
+I'm back on the case! The next version will include an optional trend filter, which will take a trade only in the direction of the detected trend. The visuals are also updated to show only the necessary guides for the current trend. Screenshots from AUDJPY: 1) Long trend - trade taken would have been a win. Attached Image (click to enlarge) 2) No trend - no trade would have been taken, keeping you out of a losing trade. Attached Image 3) Short trend - no trade would have been triggered, which would have kept you out of a wild ride for the week! Attached Image
+
+--- 帖子 #322 ---
+Thanks a lot Paul
+
+--- 帖子 #323 ---
+Wild ride to say the least! Attached Image (click to enlarge)
+
+--- 帖子 #324 ---
+I am using PaulDV EA 1.091 version. Should I use the News Filter True or False? Thanks. Pramod
+
+--- 帖子 #325 ---
+LIVE or DEMO? If demo, run 2 accounts, 1 for True, 1 for False Live? up to you I think
+
+--- 帖子 #326 ---
+Thank you Erebus. My account is a LIVE account and have installed the EA on 28 pairs. It is doing good so far. Should I close all open trades by end of Friday? What is recommendation? Appreciate your help. With regards, Pramod
+
+--- 帖子 #327 ---
+If it was me, I would close everything on Friday sometime, but as I said before, it's up to you
+
+--- 帖子 #328 ---
+After years of trading, my personal opinion and advice: avoid to go to sleep with open positions and never take them over the weekend. Sure depends on your strategy and leverage. I have some XAUSUSD that I hope to close in profit someday that I keep over a longer time. But my daily "work" should end at the end of the day. Since I follow that strategy I sleep much better and I can also relax much better over the weekend. Set a goal, set limits. Follow your rules. Okay, that's general bullshit. But you asked... P.S.: don't be greedy
+
+--- 帖子 #329 ---
+Thank you. Will follow your advice to close all open trades by end of Friday.
+
+--- 帖子 #330 ---
+My 1st week was a profitable week. But, the 2nd week was a brutal losing week with default settings (Wed start) on 28 pairs. I am going to try it with PaulDV settings (Post # 224 &amp; 225) on 11 pairs only. Let us see.
+
+--- 帖子 #331 ---
+welcome to have another multipair EA here!!
+
+--- 帖子 #332 ---
+what setup do you suggest?
+
+--- 帖子 #333 ---
+You can refer PaulDV's settings on Post # 224 &amp; 225.
+
+--- 帖子 #334 ---
+i try backtest and full loss
+
+--- 帖子 #335 ---
+I am using PaulDV's settings on Post # 224 &amp; 225 with Min Lot Size = 0.01 and Max Lot Size = 0. Why the EA is opening 0.02 or 0.03 lots sometimes?. Do I need to change Max Lot Size = 0.01 as well?
+
+--- 帖子 #336 ---
+If you're using money management, then the lot size will change depending upon the size of the SL. You can switch this off and use a fixed lot size in the settings: Attached Image
+
+--- 帖子 #337 ---
+Can you show me your installation v1.091
+
+--- 帖子 #338 ---
+is anyone still running this EA? or perhaps Paul, can you backtest last week? I see a great hit rate, reference to the original thread no buffer, and strict 2 to 1 TP https://www.forexfactory.com/thread/...9#post13500589 I found a key criterion was that the Mon Tue range was low volatility, staying close to the range of only 1 day of ADR(20) Comments? Attached Image (click to enlarge)
+
+--- 帖子 #339 ---
+Show me a picture of how to install Equity Guardian EA
+
+--- 帖子 #340 ---
+Hi Erebus! An interesting observation. What margin are you using for the comparison with the ADR? It looks like 20%-25% would have kept out of losing trades pretty well.
+
+--- 帖子 #137 ---
+Happy new week sir still on standby
+
+--- 帖子 #138 ---
+I'm not using any; it was just a review of the week, and I read that many had a tough week. However, I don't expect the same every week, especially this week, at least not on the same pairs for sure. I see GBP is taking off very strong on Monday
+
+--- 帖子 #139 ---
+Dear, can you share your settings and TF
+
+--- 帖子 #140 ---
+What template are you using? Is it different from Paul's?
+
+--- 帖子 #141 ---
+MY own, can't you read on the charts? NOT running the EA Just did a review of the past week.
+
+--- 帖子 #142 ---
+PaulDV Seems there is a Zero Divide Error with the EA. See below for what my log says. 1 18:03:46.360 MoTuBo_EA 1.091 U30USD,H1: zero divide in 'MoTuBo_EA 1.091.mq4' (808,63) 3 18:03:46.360 MoTuBo_EA 1.091 U30USD,H1: not initialized 0 18:03:46.360 MoTuBo_EA 1.091 U30USD,H1: uninit reason 8 0 18:03:46.360 Expert MoTuBo_EA 1.091 U30USD,H1: removed
+
+--- 帖子 #143 ---
+Hi PaulDV, This is my first FF post, so a little about me before I get my begging bowl out! :-) I'm UK-based and have been trading forex for over 10 years with positive results. I was first introduced to this strategy, early 2019, and since it has been my go-to strategy and a very successful one at that! I was quite keen to use your EA, and have been doing so for over two months. It does what it says on the tin, with an excellent set of options and MM methods. Kudos to you Paul! I also trade a "Daily" version of this, with the box drawn between 00:00-09:00 candles, UK time. For this method, I also use a number of indicators to conform entry, but nonetheless, another profitable strategy. My request is for the EA to have an option to set the start and end times for the MoTu box or certainly to set the server time offset. Why? In order to allow broker's server time variances. With my current broker, UK midnight is 03:00 server time. It'd be great to have this as an option. It is true that one setting does not fit everyone's trading styles. Everyone needs to test and optimise for their balance, broker and style. Thankfully, over the last four years, I've pinned it down for me. I'm not sure if you're actively developing this, or if you have conditions to continue development. If I can help facilitate this, please let me know. I recall seeing something that you've been working on additional filters, but can't seem to locate that version. Any pointers would be apreciated. Once again, A cracking job! Best wishes Abdul-Khaliq
+
+--- 帖子 #144 ---
+Are there any Setfiles available ? When i use at is it loses every Trade on any major Pairs
+
+
+===== 附件下载链接 =====
+

@@ -247,7 +247,63 @@ class ForexFactoryCrawler:
         start_post_num = (page_num - 1) * len(posts) + 1
         result_texts = []
         
+        # 添加附件收集列表
+        attachments = []
+        
         for i, post in enumerate(posts):
+            # 提取附件链接 - 搜索不同可能的附件容器
+            post_attachments = []
+            
+            # 检查附件框架
+            attachment_frames = post.find_all('div', class_='flexposts__attachments-frame')
+            for frame in attachment_frames:
+                links = frame.find_all('a')
+                for link in links:
+                    if 'href' in link.attrs:
+                        href = link['href']
+                        text = link.get_text().strip()
+                        
+                        # 将相对URL转换为绝对URL
+                        if href.startswith('/'):
+                            href = f"https://www.forexfactory.com{href}"
+                        
+                        # 跳过图片文件
+                        if not self.is_image_file(href, text):
+                            post_attachments.append((href, text or "附件"))
+            
+            # 检查其他可能的附件元素
+            attachment_divs = post.find_all(['div', 'a'], class_=lambda c: c and ('attachment' in c or 'file' in c))
+            for div in attachment_divs:
+                if div.name == 'a' and 'href' in div.attrs:
+                    href = div['href']
+                    
+                    # 将相对URL转换为绝对URL
+                    if href.startswith('/'):
+                        href = f"https://www.forexfactory.com{href}"
+                    
+                    text = div.get_text().strip()
+                    # 跳过图片文件
+                    if not self.is_image_file(href, text):
+                        post_attachments.append((href, text or "附件"))
+                else:
+                    links = div.find_all('a')
+                    for link in links:
+                        if 'href' in link.attrs:
+                            href = link['href']
+                            
+                            # 将相对URL转换为绝对URL
+                            if href.startswith('/'):
+                                href = f"https://www.forexfactory.com{href}"
+                            
+                            text = link.get_text().strip()
+                            # 跳过图片文件
+                            if not self.is_image_file(href, text):
+                                post_attachments.append((href, text or "附件"))
+            
+            # 将本帖子的附件添加到总列表
+            if post_attachments:
+                attachments.extend(post_attachments)
+            
             # 直接字符串处理替代DOM操作，提高性能
             post_html = str(post)
             
@@ -273,7 +329,26 @@ class ForexFactoryCrawler:
             if post_text:
                 result_texts.append(f"--- 帖子 #{start_post_num + i} ---\n{post_text}\n\n")
         
-        return "".join(result_texts)
+        # 返回帖子内容和附件信息
+        return "".join(result_texts), attachments
+
+    def is_image_file(self, url, filename):
+        """判断文件是否为图片"""
+        image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.svg']
+        
+        # 检查URL或文件名是否包含图片扩展名
+        url_lower = url.lower()
+        filename_lower = filename.lower()
+        
+        for ext in image_extensions:
+            if ext in url_lower or filename_lower.endswith(ext):
+                return True
+            
+        # 额外检查URL中的图片标识
+        if 'image' in url_lower or 'photo' in url_lower or 'picture' in url_lower:
+            return True
+        
+        return False
 
     def crawl_pages(self, start_page=1, end_page=10000):
         # 爬取指定页码范围的所有页面
@@ -309,7 +384,10 @@ class ForexFactoryCrawler:
             output_file = os.path.join(self.output_dir, f"{cleaned_title}_{current_time}_extracted.txt")
             
             # 处理第一页内容
-            first_page_processed = self.process_content(first_page_content, start_page)
+            first_page_processed, first_page_attachments = self.process_content(first_page_content, start_page)
+            
+            # 收集所有附件
+            all_attachments = first_page_attachments
             
             # 同步开始URL解析
             with ThreadPoolExecutor(max_workers=1) as url_executor:
@@ -356,7 +434,9 @@ class ForexFactoryCrawler:
                         for future in concurrent.futures.as_completed(future_to_page):
                             page_num = future_to_page[future]
                             try:
-                                processed_results[page_num] = future.result()
+                                processed_content, page_attachments = future.result()
+                                processed_results[page_num] = processed_content
+                                all_attachments.extend(page_attachments)
                             except Exception as exc:
                                 print(f"处理第 {page_num} 页时出错: {exc}")
                     
@@ -367,8 +447,29 @@ class ForexFactoryCrawler:
                         f.write(processed_results[page_num])
                         f.flush()
                     
-                    # 写入附件链接
+                    # 写入附件链接 - 添加去重逻辑
                     f.write("\n===== 附件下载链接 =====\n\n")
+                    
+                    # 保留所有非图片附件，但去重
+                    if all_attachments:
+                        # 使用URL作为键进行去重
+                        unique_attachments = {}
+                        for href, text in all_attachments:
+                            if text and href and not self.is_image_file(href, text):
+                                # 使用URL作为键，如果已存在则跳过
+                                if href not in unique_attachments:
+                                    unique_attachments[href] = text
+                        
+                        # 为了可读性添加一个空行
+                        if unique_attachments:
+                            # 按文本排序并写入唯一附件
+                            sorted_items = sorted(unique_attachments.items(), key=lambda x: x[1].lower())
+                            for href, text in sorted_items:
+                                f.write(f"{text}: {href}\n")
+                        else:
+                            f.write("未找到非图片附件\n")
+                    else:
+                        f.write("未找到附件\n")
             
             print(f"所有页面爬取完成，总耗时 {time.time() - start_time:.2f} 秒")
             print(f"内容已保存到: {output_file}")
@@ -442,8 +543,8 @@ if __name__ == "__main__":
             "link": "https://www.forexfactory.com/thread/1328362-gold-xauusd-with-bitefx"
         },
         {
-            "title": "New Variation on 7 am to 9 am Breakout Strategy",
-            "link": "https://www.forexfactory.com/thread/171613-new-variation-on-7-am-to-9-am"
+            "title": "The Skill Check",
+            "link": "https://www.forexfactory.com/thread/741060-the-skill-check"
         }
     ]
     

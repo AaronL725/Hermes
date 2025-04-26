@@ -1,0 +1,1286 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+MURREY ADVISOR V2.3 MoStAsHaR15 2010 Timeframe : 4 Hrs Pairs : EURUSD, GBPUSD, USDJPY, USDCAD, AUDUSD, NZDUSD, and EURGBP. I have developed this indicator based on my observations. It is based on the principles of Support and Resistance using Murrey Lines and Trend strength &amp; direction using ADX. The indicator will plot Murrey lines. It will highlight areas from -2/8P to 0/8 AND 8/8 to +2/8P with a red color to indicate that these two areas follow additional rule. The rule is that only LONG positions will be allowed below 0/8 and only SHORT positions will be allowed above 8/8. The indicator can automatically recognize the current Murrey support and resistance and will show how many pips still there to reach the levels. BUY ENTRY The indicator looks for the following: EMA(5,close) &gt; EMA(6,open) by 5 points at least AND close of last candle Close[1] is no more than 25 pips above EMA(5,close) . Current candle open (Open[0]) &gt; support by 3 points at least. Main ADX &gt; 21 and increasing while ADX(+) &gt; ADX(-) by 3 points at least. High of both current and last candles (H[0,1]) &lt; resistance by 10 points at least. Price should be below 8/8 Murrey level SELL ENTRY The indicator looks for the following: EMA(5,close) &lt; EMA(6,open) by 5 points at least AND close of last candle Close[1] is no more than 25 pips below EMA(5,close) . Current candle open (Open[0]) &gt; resistance by 3 points at least. Main ADX &gt; 21 and increasing while ADX(-) &gt; ADX(+) by 3 points at least. Low of both current and last candles (L[0,1]) &lt; resistance by 10 points at least. Price should be above 0/8 Murrey level The indicator shows status of each condition on real-time. Once conditions achieved, recommendations will be shown as “Go Long” or “Go Short” while “Hold!” is shown if any of the conditions is not satisfied. The indicator gives an alert once a signal is generated. Once you get in LONG position, then your TP = next resistance (usually from 30 to 60 points based on Murrey span) and SL = -30 points. RESULTS So far, I am getting around 75% success rate and overall it is making good money based on manual trading on both Demo and Real accounts. I have been developing this strategy since 2005 and it evolved from different indicators and timeframes until it is in this form in this version (v2.3) . MURREY ADVISOR EA V1.0 We have produced the 1st version of EA that uses this strategy. Highlights are as follows: You have to attach both EA V1.0 and Murrey Advisor V2.3 to the same chart as the EA imports the data through the chart. EA will trade one position per pair max as long as there is enough money. Lot size is 0.1 and can be changed (external variable). Take Profit (TP) will be next Murrey Support/Resistance as per strategy. Stop Loss (SL) will be -30 points and can be changed (external variable). Trailing Stop (TS) is 15 and can be turned off if set to 0 (external variable). Open positions will be closed automatically either by: (i) TP, (ii) SL, (iii) TS, (iv) if close of last candle close[1] is less than EMA(6,o) by 15 points as it is likely for the pair to go in reverse. Murrey Advisor v1.0 can support only 4-digit brokers as of now. Work in progress to support 5-digit brokers as well. ATTACHMENTS: Attached is the latest version v2.3. You need to pick up the right version for you based on your broker digits either 4 or 5. EA v1.0 can only support 4 digit brokers as of now. Below is a snapshot of the indicator showing SELL entry for EURGBP: http://img214.imageshack.us/img214/5652/eurgbpsell.gif
+
+--- 帖子 #2 ---
+Very interesting indicator. Do you wait for the h4 candle to close for entry or you enter as soon as there is a signal?
+
+--- 帖子 #3 ---
+What I have been doing is that I get in immediately whenever there is a signal even if the candle did not close with exception after weekend. I usually wait at least for the close of one new candle to confirm the direction during the opening of Asian market after the weekend.
+
+--- 帖子 #4 ---
+Please post the remaining required indicators. Thanks
+
+--- 帖子 #5 ---
+Il try it for next few weeks now. Thanks dude
+
+--- 帖子 #6 ---
+There is no other indicators required. You just install the MQL4 file and insert the template. You should get it setup.
+
+--- 帖子 #7 ---
+Thanks buddy
+
+--- 帖子 #8 ---
+subscribed. Would want to do a test of your indi and respond. Peace!
+
+--- 帖子 #9 ---
+good work... thanks
+
+--- 帖子 #10 ---
+Thanks for dropping by and waiting for your results.
+
+--- 帖子 #11 ---
+So it cant be used on 15 min or 30 min timeframes ?
+
+--- 帖子 #12 ---
+The example violates the above rules, since you're going short at the 4/8 pivot, instead of MM levels above 8/8. Please advise. Rob
+
+--- 帖子 #13 ---
+Excellent work, mostashar15. I have been playing around with Murrey on the D1 for a while recently and it is interesting how price tends to respect these lines quite a lot. This is definitely a good candidate for an EA. I wonder if Sir Steve Hopwood would be interested... I would like to add that it would also be useful to have Steve's Trade Manager EA manage the trades. When I was trying to some trading off the D1 Murreys, I was using this EA to manage the trade. I found the following features useful, and you might want to try them as this may improve the profitability in the case where the price reverses without quite touching the TP line: Instant trailing stop : As soon as the trade starts moving in the direction of the trade, this feature the starts trailing the SL. So if your SL is set at 30, then it will trail at 30 pips. Tightening SL : Once the trailing SL reaches certain levels, then the Trade Manager EA tightens the trailing stop. The two points are at 50% of the TP level and 80% of the TP level. So if you have a trailing 30 pip stop, then you could have this tightened to 15 pips when the trade reaches 50% of the TP and then to 7 pips when the trade reaches 80% of the TP level. In other words as you get closer to the TP, then you lock in progressively more profit. I hope this is a help to you. Thank you very much for sharing. Invisible
+
+--- 帖子 #14 ---
+I don't recommend other time frames than 4 hrs.
+
+--- 帖子 #15 ---
+@ ChicagoRob The way I understand it is between 0 and 8 levels, then you can go either long or short. If price is above 8/8 then you can only go short, and below 0/8 you can only go long. @ mostashar15 Sometimes Murreys will suddenly change. Does your indicator automatically do that, or do we need to refresh the chart by changing to another TF and back again to see that?
+
+--- 帖子 #16 ---
+No it does not. 8/8 to +2/8P =&gt; go for SELL signals only. 0/8 to 8/8 =&gt; go for both BUY and SELL signals. -2/8 to 0/8 =&gt; go for BUY signals only. I hope this clarifies it.
+
+--- 帖子 #17 ---
+Yes, your understanding is correct. Regarding sudden change of Murrey Levels, if you use 4hr time frame as proposed by this strategy then the change will not happen before days and sometimes weeks.Therefore, what I suggest is that to refresh the chart everyday just in case.
+
+--- 帖子 #18 ---
+Sorry Invisible, I overlooked your post. I like your suggestions and sure will be considered during EA developments. I appreciate the time.
+
+--- 帖子 #19 ---
+Yes, it does. Sorry for the confusion, since there is another MM system floating around that advises to only initiate trades at the extreme levels. The analogy is price equates to a rubber band: the farther away it gets from the mean, the higher the force to return to the mean. Rob
+
+--- 帖子 #20 ---
+The Murray and recommendations portion are not showing up on my platform FXDD. Any suggestions? Thanks
+
+--- 帖子 #21 ---
+I am not sure why, but try to add the indicator from custom indicators list manually without the template. Also, please PM me with a snapshot of your screen to hep further.
+
+--- 帖子 #22 ---
+Please post the respective indicators. Thanks
+
+--- 帖子 #23 ---
+Since you are not waiting for the candle close and your indi shows real time status, is it possible to add a feature to indi which shows the price the signal is given so that if a trader is not in front of the screen while the signal is given, he/she can open the position later on especially if the position is in a loss? Regards
+
+--- 帖子 #24 ---
+nice thread...subscribed... waiting for results
+
+--- 帖子 #25 ---
+Eur/usd buy signal
+
+--- 帖子 #26 ---
+Thank you for posting this. I have been using MM lines for some time and they are very helpful and your system appears to be a very nice way to intergrate them. Started demo this morning +26 EUR/USD so a nice start. Once again thank you.
+
+--- 帖子 #27 ---
+Thank you for system. Regards.
+
+--- 帖子 #28 ---
+I would like to share my results so far with this version 2.2
+
+--- 帖子 #29 ---
+I am glad that was successful. I was away from my platform and thus I could not get in otherwise, it would have even improved the indicator success statistics. Thanks
+
+--- 帖子 #30 ---
+I am not so good with MQL4. I have very basic and limited knowledge. I will see what I can do with this regard.
+
+--- 帖子 #31 ---
+lets see this short signal
+
+--- 帖子 #32 ---
+Your entry will be interesting to me since you are using different broker platform than mine. I am using FxSol which uses USA eastern time. My new candles are @ 8:00, 12:00, 16:00, 20:00 and 4:00 ET therefore, I still have about 73 minutes till new candle.
+
+--- 帖子 #33 ---
+EA buggy ? attached on chart but nothing happens : p
+
+--- 帖子 #34 ---
+thnx for ur reply... a nice work , as u said ,we r testing , i hope that it will works fine ...
+
+--- 帖子 #35 ---
+So in case with CAD you wait for close of the candle? Are yours MM levels any different form the ones tahshoon posted?
+
+--- 帖子 #36 ---
+this is my clasic chart .. to compare
+
+--- 帖子 #37 ---
+After my close of 4Hr candle, now I have Go Short on USDCAD. Let us see
+
+--- 帖子 #38 ---
+Simply, once you see Go Short, just get in. I am not sure what tahshoon used to plot Murrey Lines but for my case I used one existing code for Murrey (I just forgot who originally developed it) then I added the additional required indicators.
+
+--- 帖子 #39 ---
+This is strange. It should work.
+
+--- 帖子 #40 ---
+we have a long signal , watching ...
+
+--- 帖子 #41 ---
+wow so far this is working out out lovely, later this week i will post my results.
+
+--- 帖子 #42 ---
+Do you think you can update this thread like daily to show the trades you have made each day using this. Although i do find the tool really really easy to use (nice interface) I think it would be useful because for those of us using this tool now we can check to see if we are making the right trades with you.
+
+--- 帖子 #43 ---
+Also installed the system and give it a try. Maybe some mistake/MT bug/my user setting ? I see the "Pips till ..." in 3 digit way. Anyone else with same "bug" ?
+
+--- 帖子 #44 ---
+Great work Mostashar15. Very nice indicator and simple to use. Will try it out and provide feedback. Thanks for sharing.
+
+--- 帖子 #45 ---
+Hi On my 4 hour chart EUR/USD its also saying PIPS to resistance 332. I dont know, but I think its the way my MT4 is setup with decimal placing. I think it should be read as 33 pips.
+
+--- 帖子 #46 ---
+Who is your broker? It is interesting because you are getting the entry signal ahead of us. This should give you better position and profit than us.
+
+--- 帖子 #47 ---
+Nice chart Tahshoon. I notice your 4 hour MACD is different from mine. Which MACD are you using.
+
+--- 帖子 #48 ---
+Very nice work. Will follow along.........
+
+--- 帖子 #49 ---
+Sure, I will do. As I said I cannot watch all trades as I might be away from my platform. I think if everybody shares his results, we will be able to cover most of them.
+
+--- 帖子 #50 ---
+This is due to the way you have MT4 leverage setup. The way you need to read this is by placing decimal spot one place to the left.
+
+--- 帖子 #51 ---
+I guess, because the code is made for 4 digit broker. I will modify and share to suit 5 digit brokers as well.
+
+--- 帖子 #52 ---
+Thanks for the nice words. I'll be waiting for your results.
+
+--- 帖子 #53 ---
+It is because your are using 5 decimal broker. I will be modifying the code to suit everybody.
+
+--- 帖子 #54 ---
+mostashar15 Hi There Good Work it appears Curious as to the selection of pairs that you trade? You had best results on these vs. other currency pairs? cheers
+
+--- 帖子 #55 ---
+If you can maintain this level of consistency, you will be a rich man, indeed. Rob
+
+--- 帖子 #56 ---
+mr.mostashar ... i see that ur rang is higher than mostashar to be... a nice work, more than excellent , my broker is uranus investment -dubai
+
+--- 帖子 #57 ---
+the macd u saw in my chart is down there(attachment) if u want it to be like mine make the setting to show histo=true u r welcome
+
+--- 帖子 #58 ---
+mostashar15 Closed my trades for the day... 3 trades... EUR USD +26 EUR GBP +19 USD CAD +16 Total for day +61 To be honest the EURGB USDCAD have more miles in them but thats my day done. Qs Do you hold overnight ever? If in a trade and the signal turns to hold do you exit? If you exit and the trend regains original path, when will the EA send a new signal? Sorry if these are junior school questions. Thanks for 61 pips. Abiento.
+
+--- 帖子 #59 ---
+Thx ! Great work btw Closed Trades: EUR/USD +32 USD/CAD +11 Still open: USD/JPY and another USD/CAD
+
+--- 帖子 #60 ---
+a nice job done ... mostashar thnx very much
+
+--- 帖子 #61 ---
+Target Achieved, +22 pips
+
+--- 帖子 #62 ---
+I turned 100 pound account (it still a demo account) into 150 pounds today with 0.50 per PIP. Here were my trades. Eur/USD = 40 pips USD/CHF = 32 pips USD/JPY = 31 pips USD/CAD = 8 pips (not sure if this trade was done on a 4h time chart looks odd to me) I am still running another trade on the USD/CAD which I am shorting and I am 8 pips up. Anyway 111 PIPS banked today !! Honestly I have never ever made 111 PIPS in my wildest dreams ! I am in total shock its a bit insane i expecting some turn of events to even up the scores this week and bring me back to reality. Big thanks from me !
+
+--- 帖子 #63 ---
+26+15+15=56 pips. I use signal same scalping. Thank you friend.
+
+--- 帖子 #64 ---
+Done for the day USD/JPY +20,5 USD/CAD be total 63,5 - not that bad
+
+--- 帖子 #65 ---
+This version should work with 5 digit brokers. Please let me know once you try it and works fine for you so that I will update post #1 to include this version as well.
+
+--- 帖子 #66 ---
+Wo0o0o0oW Very glad to see this numer of pips earned by this code. I think today was a good day for trading which triggered this much of signals. Typical days maybe you will see around 60 pips as an average. Congrats
+
+--- 帖子 #67 ---
+setup for 5 digit broker is working very nice,all thnx for our mostashar for a great well done job ...
+
+--- 帖子 #68 ---
+Yes, he is.
+
+--- 帖子 #69 ---
+Wo00o0oW Look who is here. Thanks Steve for dropping by. I will be curios to see what your hands will do for us. I just cannot wait.
+
+--- 帖子 #70 ---
+Thanks for the trial. I will update the Post #1 accordingly.
+
+--- 帖子 #71 ---
+I do not really understand indicators, but do know this: rather than have separate indis for 4 and 5 digit crims, have one that will identify the number of digits in the quote and take things from there. I think the attached does this. When you are sure it works equally well on 4 digit crim accounts (I have only tested it on 5 digit), then simply delete the 'Mod Steve' from the indi name and replace the current versions with this single one.
+
+--- 帖子 #72 ---
+You are welcome to this thread....and we believe you will make this new strategy a masterpiece with your EA Thank you once again for all your support in the forum
+
+--- 帖子 #73 ---
+Oops. Forgot to attach it. Here it is.
+
+--- 帖子 #74 ---
+Sir Steve's in the house. Woot! BTW, just closed a demo long on EURGBP using Steve's MPTM to manage it: $23 Monopoly dollars profit on 0.1 lot. Could possibly have been left to run for longer, but I had the trailing stop tightening to lock in profits and it did just that. Cheers! Invisible
+
+--- 帖子 #75 ---
+Yes he is, and very, very interested. mostashar15, anyone who spends 5 years developing a system then shares it with others deserves some attention. In order to code an ea to trade signals from the indi, it needs to store something in a buffer that the ea can interrogate to see what the current status is. Looking through the code, there is no such buffer but I see these three lines of code: string advisor = "HOLD!"; advisor = "Go Long"; advisor = "Go Short"; If someone here can add a buffer that holds: 0 for "HOLD!" 1 for "Go Long" 2 for "Go Short" at these points, then I can take things from there. Ok, so I am going to play with this, but an indi coder can probably save me a shed-load of chaos and confusion.
+
+--- 帖子 #76 ---
+there's no automatic sl/tp when i go short? or did i miss s.th? thank you so much for your content and ideas and your development.. 5 years of work and we just have to download 2 files in 10 seconds and start trading... uhhm that's pretty unfair... I'd voucher for you but still can't best regards Phanti
+
+--- 帖子 #77 ---
+I was watching some of the failing signals. As you see once there is a trend up, the candle will move above EMA(5,close) {the green line} and after some time, it will retrace back to test EMA(5,close) and continue moving up. I noticed whenever the prices is over 25 pips above EMA(5,close), then it re-traces back. Therefore, I am thinking to add a new condition which is Close[0] is not more than 20 pips above EMA(5,close) in case of long and not more than 20 pips below EMA(5,close) in case of short. I believe this will not affect number of trades dramatically. but rather will improve profitability further. Any suggestions and thoughts?
+
+--- 帖子 #78 ---
+I think we should try whether number of trades is being damaged... less trades + better profit &gt; more trades and less profit... let's give it a try got another question: why exactly those 7 pairs and no other pairs? do u have special reasons ? best regards Phanti
+
+--- 帖子 #79 ---
+Ok, we will keep using the current version for more time and collect more feedback. Regarding the 7 pairs, there are two reasons: They gave me better results with old versions but to be honest with you I did not test on this version. The other reason, is that I like to take pairs with no more than 5 pips max spread and as per my broker FxSol, it is those pairs.
+
+--- 帖子 #80 ---
+This indicator will not do any trading for you. It is all manual. Our friend Steve is working on developing EA to do it on Auto.
+
+--- 帖子 #81 ---
+Different pairs have different volatility, so I would not suggest to use the same number of pips for all. The same refers to SL. I personally use ATR to define the values.
+
+--- 帖子 #82 ---
+Yes, I do in particular for AUDUSD and NZDUSD as they see some good moves during Asian market. No I don't. It is either TP or SL. Yes, it will give another signal. But you may want to look at this observation before you try to decide to get in again. We have not incorporated this yet in the code becasue we want to run the current version (v2.2) more time then we collect feedback. http://www.forexfactory.com/showpost...9&amp;postcount=77 Do not worry. We are all here to learn, buddy. Enjoy it
+
+--- 帖子 #83 ---
+I don't like the idea of having high SL because now if the trade hits your SL, then it will more likely eat profit of two or three winning trades. Therefore, what I see is to hold whever you are away from EMA(5,close) by more than 20 pips and allow some retrace then get in with much lower SL.
+
+--- 帖子 #84 ---
+well okay let's see... more pairs = more trades = more profit... but big spreads minimize wins or even don't make any sense to start trading with a low tp etc. let's see this thread just needs more feedback to improve system
+
+--- 帖子 #85 ---
+This is an important point for Steve's EA. I think there are two ways forward: The EA could just take the first signal after a breach of the Murray line and then ignore any subsequent ones until there was another Murray line breach. The EA could take every signal, even if there are several after the same Murray line has been breached. Personally, I would tend to favor the former, as the risk with taking subsequent entries is that the market might be ranging rather than powering towards the TP, so it is less likely to produce a good trade. Also, the price is much more likely to be closer to the TP area on the second trade signal (I just saw 3 on the hour just now and this was the case with all of them), so the R:R is going to be much poorer. Perhaps this could be an option in the EA: When in a trade, ignore any changes to the status and just let it run, or to close the trade when status changes to "hold". In fact, it would be very useful to be able to test these two in parallel to see which was more profitable.
+
+--- 帖子 #86 ---
+I strongly agree.
+
+--- 帖子 #87 ---
+Can you share yours colorful MACD? It is easy to read, isn't it? Cheers
+
+--- 帖子 #88 ---
+don't know but maybe we can set a ts or s.th like that when conditions are changing
+
+--- 帖子 #89 ---
+The beauty of having this encoded in an EA would be that we can run different scenarios in both back and forward testing to see which are best. mostashar15 has already given us a good 5 years of work on this, so we know what we are starting with is very solid. Then with Steve's automation it should be possible make it even better. If it can at least follow mostashar15's rules, then we already know it is 75% accurate with good R:R for him on live and demo, so that would be very nice to replicate in itself.
+
+--- 帖子 #90 ---
+I have downloaded their platform and opened a demo account with them. I will be testing their platform. Hopefully, this will yield more pips since their 4 hr candle is closing 1 hour ahead of FxSol.
+
+--- 帖子 #91 ---
+its here ... no problem http://www.forexfactory.com/showpost...5&amp;postcount=57
+
+--- 帖子 #92 ---
+Loaded Steve's ver on FXDD (EUR/USD H4),4digit, and IamFX (EUR/USD H4) 5 digit. I don't have Daily Range Statistics on either chart. Also the +,- on each Murray line is "0". I switched time frames to try for reset but still no data. Any ideas? Paul
+
+--- 帖子 #93 ---
+I tried it but did not work with me either.
+
+--- 帖子 #94 ---
+Could a coder familiar with indicators follow up Steve's request here? http://www.forexfactory.com/showpost...2&amp;postcount=75 Thanks Invisible
+
+--- 帖子 #95 ---
+Mine have gone too. As I pointed out earlier, I do not understand indis. Over to you lot. Produce on that I can interrogate to produce figures that an ea can use and I can code the ea. Until someone does this, there is nothing I can do.
+
+--- 帖子 #96 ---
+Among all the winning trades today, I have seen two losses: 1. EURUSD (-29 pips) 2. USDJPY (-33 pips) The common between the two trades is what I talked about before. There was a very long candle that breached a Murrey level but as the new candle opens, it retraces back. This can be filtered easily by looking for EMA(5,close) is no more than 25 pips below the close of last candle Close[1] in case of LONG and no more than 25 pips above Close[1]. To be honest, I have already modified the code to incorporate this change in v2.3 but I will not share now. However, I will share some results from both to compare. Regards
+
+--- 帖子 #97 ---
+Why? Will you share with us later? This improved version will be helpful, at least i think, for Steve's coding of your system into a profitable EA. Do you have intention to sell it later? I really hope not. If i've misunderstood your intention, please forgive me. Cheers.
+
+--- 帖子 #98 ---
+If I have intentions to sell, I would not have told you with the change. I believe with the current performance, there are some people who maybe willing to buy it if I sell it for US$ 30 and only if I manage to sell 1000 copies, this is US$ 30,000. You know, it is not a bad idea at the end. I am just kidding This code is no longer mine now, because it will contain thoughts, suggestions and experience of everybody here in this thread. If I decide one day to use it commercially, then I will have first to get your permission.
+
+--- 帖子 #99 ---
+a suggestion you can use a certain % of the ATR as yr SL. e.g 50% or 70%
+
+--- 帖子 #100 ---
+Hi, you might find this indicator useful - It simply displays the distance of price to the ma, so you can easily tell if it is higher than 25 pips. For 5 digit brokers, it'll show 10 pips as 100. Pardy
+
+--- 帖子 #101 ---
+This should do the trick. In honesty I haven't tested it yet though... If you call it with iCustom with an offset of 0 it should return: 0 for Hold 1 for long 2 for short I could also code the EA, but since you seem to be able to pump them out quicker than I can turn my PC on I'll leave it to you.
+
+--- 帖子 #102 ---
+USD/CAD as well
+
+--- 帖子 #103 ---
+Einstein&gt;Chuck Norris&gt; Steve Hopwood &gt;Lindsay Lohan&gt; mostashar15
+
+--- 帖子 #104 ---
+Hi, I did not see these losses. Where did you place your stop loss for these trades ? Did it retrace back more than 30 pips or were you using the next S/R lines as your SL ? I saw a loss of around 50 Pips on Euro/Jpy. I got buy signal at 00:01 at 14th when price was at 107.838. The price then retraced way back taking out my SL at 107.410. Here is the action on the 4 hour chart I recieved the buy signal at the very start of the 4 hour bar.
+
+--- 帖子 #105 ---
+Fantastic. Thanks very muich.
+
+--- 帖子 #106 ---
+sl/tp -30/30 Lindsay Lohan&gt; mostashar15????
+
+--- 帖子 #107 ---
+PhAnTi' ... u r in mostashar15 thread
+
+--- 帖子 #108 ---
+Also got a buy signal on Eur/GBP as it passed the 0.8361 but there is big resistance here.
+
+--- 帖子 #109 ---
+exactly... and Lindsay Lohan isn't better than mostashar... ... plz back to topic!
+
+--- 帖子 #110 ---
+u can go to that Lindsay Lohan...thread and sing with him
+
+--- 帖子 #111 ---
+Why do i get a sell signal here when TP would only be 8 PIPS away (next support level) and SL would be 52 PIPS (next resistance level) ? Thanks
+
+--- 帖子 #112 ---
+i had this signal just before the german news... then said its not wise to trade before the news ...
+
+--- 帖子 #113 ---
+hmm take tp the support after the support and sl the next resistance ?!
+
+--- 帖子 #114 ---
+i wonder why i did not recieve this signal ..
+
+--- 帖子 #115 ---
+i don't have Daily Range statistics.... 0 0 0 0 0 0 ?
+
+--- 帖子 #116 ---
+i think, its because of time,candles in my broker system is faster than urs 1 hour ,mostashar15 noticed that yesterday...
+
+--- 帖子 #117 ---
+so does that mean you will get different signals and trades ? Did you get same signals that I recieved ? I just got one to short Eur/Jpy
+
+--- 帖子 #118 ---
+Hi, try this version i modified it for 4/5 digts brokers. The only thing that doesn't work is the clock, i can't still find the code in the indy to modify it. Tell me if it works for you gspe
+
+--- 帖子 #119 ---
+plz,see this post ... http://www.forexfactory.com/showpost...7&amp;postcount=46 i dont have croses in my platform( didnt put them )... i didnt see that .
+
+--- 帖子 #120 ---
+This does not display any data, so I am not sure if this means it is not calculating any results. Whilst you are fixing it, could you adapt it to cater for x digit criminals so we do not have to muck around with separate indicators? Cheers
+
+--- 帖子 #121 ---
+It works... thank you very much
+
+--- 帖子 #122 ---
+USDCAD is still LIVE with me. It is now +24
+
+--- 帖子 #123 ---
+I was planning to keep it hidden little bit further, but I have noticed most of the bad signals are similar and could have been filtered out. I am attaching v2.3 for trial purposes and compare performance to v2.2. I have used the modified version by gspe as a basis so that this new version suits both 4 and 5 digit brokers. Thanks gspe It is not for SALE yet
+
+--- 帖子 #124 ---
+This MM H4 indy seems to work normally like an indicator, late signal. But it's support and resistance areas are quite good. So I take trades when I see multiple failure, and also when I see things like in the posted chart, an inside bar was broken after failure to move up, I go with the break.
+
+--- 帖子 #125 ---
+Are you able to fix this? When I add Skoda's code to return the status of the indi as either 0, 1 or 2 the display stops. The indi still generates signals (just picked up an eu 'Go short' alert on the H1) but does not display the figures. The problem is caused by ExtBuffer[0] = 0; Comment this out and re-compile and the display is fine. I can even code the EA with the indi like this as I really only need to know if the buffer holds a value of either 1 or 2; it would just be good to know the indi is working properly. Cheers
+
+--- 帖子 #126 ---
+USD/CAD worked for me aswel. I had it open since yesterday and just closed it (approaching 0/8 and there is not much range in last few days) with 20 PIPS profit.
+
+--- 帖子 #127 ---
+I am not familiar with ATR. Can you explain how you can use 50% or 70%? Thanks
+
+--- 帖子 #128 ---
+Thanks buddy, I have modified the code already.
+
+--- 帖子 #129 ---
+Thanks Skoda for jumping just in the right time.
+
+--- 帖子 #130 ---
+Now, we will be waiting for your EA, Good Luck
+
+--- 帖子 #131 ---
+Hi The code will look for any opportunity that can give you more than 10 pips. But, you have to make decision whether you want to get in or not based on Reward/Loss ratio. I believe V2.3 (if works fine) will increase the probability of a trade to go in your direction.
+
+--- 帖子 #132 ---
+I believe this would have been filtered out in the new version, let us see upcoming similar entries.
+
+--- 帖子 #133 ---
+im sure that u r doing a great job,thnx for sharing ur experience with us
+
+--- 帖子 #134 ---
+To me the most accurate SL should be if the 4Hr candle closes below EMA(5,close) in case of LONG which means the uptrend is broken and vise versa in SHORT. As I said before, the pair will tend to move above EMA(5,close) the green line but after sometime will tend to retrace to test this line and continue moving up. However, if EMA(5,close) is so close or far then, you may use 25 - 30 pips as SL. In conclusion, I believe SL setting needs further optimization and feedback about how to further improve.
+
+--- 帖子 #135 ---
+In most of the cases, you will both receive the same signal, however, since he is one hour in advance, he will get better position in the entry. Since this strategy is based on observations and trial &amp; error, I have downloaded his platform to check both. I believe there might be an incentive. But, we need to test on the long term at least.
+
+--- 帖子 #136 ---
+Great Work, thanks buddy. I have captured your name in V2.3 in the THANKS section since I used your version as a basis for developing 2.3.
+
+--- 帖子 #137 ---
+You did the right move
+
+--- 帖子 #138 ---
+After those big moves which were against the trend, most likely we will not see entry signal before next candle after 4 hrs from now.
+
+--- 帖子 #139 ---
+how to set sl/tp?
+
+--- 帖子 #140 ---
+Sorry about the blank display on the previous version. Here is the latest version (2.3) updated to put out values to the external buffer for an EA to use. This time it has been tested and works. The number next to "MA" in the indicator window is the value it is sending out.
+
+--- 帖子 #141 ---
+Meet Louise, named as the contributor who told me to come here wished. Nothing sophisticated yet - just a straight tp and sl. A few points: you need to have the attached version of the indi in your indicator's folder. This returns the value of the current indi signal as hold, go long or go short. The version in post 1 does not have this. you need to run the ea on a separate chart to the indi, otherwise the flashing screen will drive you to drink 'n drugs. your Journal tab will fill to overflowing with 'unknown subwindow' errors: I know, so don't tell me about them. There is nothing I can do about them, so don't tell me about them. I do not know what causes them, so don't tell me about them. I do not know how to cure them, so don't tell me about them. Anyone who does tell me about them proves conclusively they have not been bothered to read this and gets a blast from me. Possibly followed by a visit from a hitman. Over to the indi-coders for this one. Louise automatically accommodates to x digit criminals, so enter tp and sl as proper pips, not piplets. set CriminalIsECN to true if your criminal insists on two-stage order sending. This now includes IBFX. make sure your indicator inputs are the same as those you input into Murray Advisor. The colours were an attempt to stop the flashing; they do not work. As usual, the code is my copyright only because this is the state of the law here in the UK. I hereby give full permission to coders to use it in any way. Feel free to add sophisticated mm functionality and anything else you might find useful. Let's see if Louise has staying-power.
+
+--- 帖子 #142 ---
+ohh yes Baby! Thank you so much! ohh Steve...Lindsay is starting to make movies again...
+
+--- 帖子 #143 ---
+USDCAD now closed with me +40 pips.
+
+--- 帖子 #144 ---
+when did you enter? i got in yesterday evening and got -30 loss with sl/tp -30/30
+
+--- 帖子 #145 ---
+Last night two signals..... USDCAD -30 USDJPY -30 Looking @ updated indicator now.....
+
+--- 帖子 #146 ---
+I am attaching here my latest results with v2.2. As you see we are achieving almost 70% success rate and we were able to earn a total of +188 pips but we lost -131 pips which leaves us with a net of +57 pips. If we filter out last two losing trades as v2.3 would have done then we would had lost only -74 pips leaving a net profit of +114 pips. Thanks
+
+--- 帖子 #147 ---
+the yesterday cad-usd short signal cant be a loser in any way ... take a look here,plz http://www.forexfactory.com/showpost...8&amp;postcount=31
+
+--- 帖子 #148 ---
+Attached Image (click to enlarge) went it immediately when signal came ...yesterday eve...
+
+--- 帖子 #149 ---
+Ma 0.00000 ?!
+
+--- 帖子 #150 ---
+My SL was 1.0292 It is only 5 pips that made me make +40 and you lose -30 Sorry
+
+--- 帖子 #151 ---
+no problem buddy : D but let me plz know for the future... how do you set sl tp? 40/40 ?
+
+--- 帖子 #152 ---
+sorry bit of a noob question when it comes to setting up the EA. Is the procedure, to open all the charts that i want to trade to 4H TF, then attach louise to them and select live trading and see that there is a smiley face top right corner ?
+
+--- 帖子 #153 ---
+open Charts as usual... open template and start EA...but on another chart of the same pair as Steve recommended...
+
+--- 帖子 #154 ---
+The errors in the journal are caused because the indicator is trying to display it's info in a sub-window, but when the indicator is called by the iCustom function there is no sub-window for it to write to. The only way out that I can see is to open the indicator &amp; ea on the same chart (the journal errors then stop), but then you are left with problem 2 as mentioned above. Over time the journal will create a large file on your hard disk...
+
+--- 帖子 #155 ---
+Yesterday I came across this thread and was impressed..I downloaded fer 2.2 and installed. Last evening @ 7:45 pm EST I recvd a short gor USD/CAD and a long for EUR/GBP, and never recvd another signal. This AM I downloaded and installed ver 2.3, since then I have recvd no signal at all. Helppp from anyone.. regards sfg7th
+
+--- 帖子 #156 ---
+Great work, guys and thanks for the EA, Steve. Will be testing as usual.
+
+--- 帖子 #157 ---
+i might be wrong, but i think this EA will really kick in, by making Shorts TP = &lt;Pips till support value&gt; Long TP = &lt;Pips till reistance value&gt; Also vice versa for the SL. I have no idea how to program Mq4 one day i will learn.
+
+--- 帖子 #158 ---
+Hi Steve Backtesting is slow, but it seems that it is doing OK with 30 TP and 30 SL on EURUSD. Thanks for taking on Louise! I was wondering whether it might be possible to have the TP at the next Murrey line and whether it would be possible to integrate some of the MPTM functions to lock in profits? Cheers Invisible
+
+--- 帖子 #159 ---
+I believe now we have a LONG entry signal by v2.2 while v2.3 is not giving this signal. V2.3 says EURUSD has to retrace at least 25 points (above EMA(5,close)) then entry is possible. Let us see
+
+--- 帖子 #160 ---
+Both V2.2 and V2.3 say SHORT for USDJPY.
+
+--- 帖子 #161 ---
+I think v2.3 is doing fine. The faulty signal from v2.2 has just hit SL. V2.3 has saved me -30 pips. This is very good start. Let us keep watching.
+
+--- 帖子 #162 ---
+Surprisingly I do NOT have that problem if I load the indi on the same chart with EA.
+
+--- 帖子 #163 ---
+See the picture.
+
+--- 帖子 #164 ---
+Thanks Steve. I appreciate your work to get this done. May I suggest the path forward: 1. We need a volunteer to test the EA continuously preferably if someone has VPN. 2. We need to continue developing this code further to capture what was proposed in "Next Developments", if you don't mind Steve.
+
+--- 帖子 #165 ---
+I'm short on usdjpy with 35/35 sl/tp ...hope this time it works : P what tp/sl do u prefer guys?
+
+--- 帖子 #166 ---
+Neither do I, it's probably got to do with the colours people are using, if they are using the provided template etc.
+
+--- 帖子 #167 ---
+Another solution is to import the indi code into Louise. I might look at this tomorrow.
+
+--- 帖子 #168 ---
+My SL = 83.38 You are on demo, aren't you?
+
+--- 帖子 #169 ---
+Of course not. Anyone can adapt my code and carry it forward.
+
+--- 帖子 #170 ---
+Thanks. I will be looking into it if I can do something.
+
+--- 帖子 #171 ---
+Exactly what I was thinking. So it's a race then!
+
+--- 帖子 #172 ---
+Left the EA running for last 6 hours on my demo account but results are not looking too good right now there are a number of trades going pear shaped and the two that have completed have both hit a 30 pips SL which I set. However I believe in both these cases (EUR/USD AUD/USD) may have been avoided if the EA was running on version 2.3 ? In both cases the Buy signal was given after a very large bullish last session which looks like there is more than 25 points past the 5 ema Is it possible to update the v2.3 for this EA ?
+
+--- 帖子 #173 ---
+so from what i understand the current Ea based on 2.2 version ? i will try 2.3 until the new Ea appear
+
+--- 帖子 #174 ---
+I am not that pro in EA making, but I believe the enclosed files should work based on v2.3. Please let me know.
+
+--- 帖子 #175 ---
+Would it be worth having the EA take the trade only the first time a signal is generated after a breach of the Murray? Otherwise there can be new signals arising which are not as profitable as the price bounces between the Murray lines.
+
+--- 帖子 #176 ---
+Hi Steve, I have isolated the code for murray calculation from the indicator. Attached a function that you can use directly in your ea (the indicator won't be need for the ea to work). Prototype of the function is: int GetMurraySignal(int P, int StepBack) return 0: hold -1: go short 1: go buy Didn't test it, but you'll tell me if it works. Function will work on 4 and 5 digits crim. Cheers, Mart
+
+--- 帖子 #177 ---
+Oh my God, this Japanese news flipped the table. SL hit. I think losses due to news will be inevitable no matter what your indicators are.
+
+--- 帖子 #178 ---
+You can't account for everything.
+
+--- 帖子 #179 ---
+no I'm live...but microaccount...don't like to test on demo 3 trades : 3 losses (35/35 sl/tp).... but I still trust this system ; p
+
+--- 帖子 #180 ---
+mostashar , im afraid that all these changes will damage the basic thought of the indicator ,and for a while we have nothing ....like many threads before in the forum ...
+
+--- 帖子 #181 ---
+Absolutely fantastic Mart. Stunning contribution. About a gazillion thanks. Ok guys, dump your adulterated indi's and go back to post 1 to re-download the one appropriate to your criminal that we know works properly. I will add Mart's code to Louise, do a quick backtest to make sure and release the update asap.
+
+--- 帖子 #182 ---
+Actually, Mart, it looks as though you have simply attached the indi with a different name. Have I missed something?
+
+--- 帖子 #183 ---
+Hi I tried testing this 2.3 v of the EA, so I found a buy signal on 15 min chart (just for testing purposes) and attached Louise to the chart and i got the following errors please see attached.
+
+--- 帖子 #184 ---
+skoda, sorry, I completely missed this first time around. I just had a look at 'attachments' to see why people are talking about V2.3 Many apologies. I am keeping this in reserve, and waiting on Mart's reply to my latest. Louise will be a lot quicker if we can incorporate the indi code within hers. Cheers
+
+--- 帖子 #185 ---
+Your ea's are not enabled.
+
+--- 帖子 #186 ---
+there something i don't understand here see this pic: http://img823.imageshack.us/img823/8147/123vn.gif it shows here that the 5 EMA didn't came over the 6 EMA but it dose or this a new condition :EMA(5.c) &amp; EMA (6.o)
+
+--- 帖子 #187 ---
+good point...hmmm ,is this demo or live? with time u r using?
+
+--- 帖子 #188 ---
+Oups so sorry! That's what happen when you go sleeping all day at 3h00am Find attached the corrected file Cheers, Mart
+
+--- 帖子 #189 ---
+Fantastic Mart. You are one of the stars of FF.
+
+--- 帖子 #190 ---
+short signal on NZDUSD, sl/tp 35/35... Let's see whether this is gonna be my first profit trade with this system : P
+
+--- 帖子 #191 ---
+Hi all, First of all, thanks mostashar15 for sharing your system. Phanti, this signal in NZD/USD is with v2.3 or v2.2 because I´m testing v2.3 and I don´t have this signal yet, I think it´s coming soon but not yet.....
+
+--- 帖子 #192 ---
+welli do use v2.3 ....which broker u use? what time u have?
+
+--- 帖子 #193 ---
+I use IBFX, now all conditions are ok for Short, only EMA 5 &amp; EMA 6 is not ready (False).....
+
+--- 帖子 #194 ---
+i do indeed like this system - much like the one (below) i've enjoyed trading with for some time
+
+--- 帖子 #195 ---
+hmm let's see .... I personally triggered 3 trades last 2 days, all stopped out by sl 35/35 ... hope this one is going to work now
+
+--- 帖子 #196 ---
+I hope too, but I don´t understand why I don´t have these signal.....
+
+--- 帖子 #197 ---
+don't know... but seems like another fail....sl will be hit soon : S 4 trades, 4 failes....hmm...
+
+--- 帖子 #198 ---
+Its a demo account on Al trade well i still don't under stand the function of the Ema i mean i know what the EMA do in the 2.2 version
+
+--- 帖子 #199 ---
+In v2.2, it used to show TRUE only when EMA(5,c) &gt; EMA(6,o) by 5 pips but now in v2.3, it will only show TRUE if: 1. EMA(5,c) &gt; EMA(6,o) by 5 pips, AND 2. Close of last candle is no more than 25 pips above EMA(5,c). Thanks
+
+--- 帖子 #200 ---
+I appreciate all the efforts to develop the EA but I have to say this. Unless, we use support and resistance in considerations, this might not give real picture of the strategy. As of now, EA is sending buy/sell orders with 30 pips TP and SL. However, maybe the next resistance/support is only 20 points, therefore, you will see the pair going in your favor direction but not able to reach to your TP point. Therefore, we need someone to export the value of Sup and Res to EA as well through the buffer. TP then will be equal to Res in case of BUY and equal to Sup in case of SELL. SL can be taken simply as 30points since this version v2.3 will not give entry unless you are not more than 25 pips away from EMA(5,c), therefore 30 points is good enough for SL. Thanks
+
+--- 帖子 #201 ---
+That's why my trades aren't succesful so far i think : ) hope s.o. can do this
+
+--- 帖子 #202 ---
+I was reviewing chart but I did not see any potential signals over 4 Hr chart. Can you confirm that you are using 4H chart. Can you please attach a snapshot of your chart and indicate th candle that triggered entry for you?
+
+--- 帖子 #203 ---
+Attached Image (click to enlarge) hm using v2.3 went short on vertical line as signal appeared
+
+--- 帖子 #204 ---
+hmm i think ADX wasn't increasing
+
+--- 帖子 #205 ---
+there are/were no signals for majors all day. but EUR/CHF - EUR/JPY and USD/JPY look promising.
+
+--- 帖子 #206 ---
+I wonder if some mql4 GURU can help us show status of signal by putting the cursor over any previous candles, just like attached snapshot.
+
+--- 帖子 #207 ---
+I see it is almost like a pattern that every pair which goes away from EMA(5,C) will retrace back to test EMA(5,C) again. Look at the beautiful chart of EURUSD. I am sure we can develop some strategy to get some pips as well in case of retracing. So, if you miss the big candle at least you will get some from its retrace. It needs more observations but hopefully not another five years. Anyway for those who like only to follow the trend once retracing happens and bounced back from EMA(5,C) then this is a very good signal that the pair will continue its direction. I am sorry if I repeated this so many times and I am very sorry if you already know this. Regards
+
+--- 帖子 #208 ---
+I don't know what you mean by "all day" and I don't know what you mean by "majors". There was a losing short on USD/JPY taken at 21:00 09/14. There was a winning long on EUR/GBP at 01:00 09/15. There was a losing short on NZD/USD at 11:00 09/15. I exited the EUR/GBP trade at resistance. If I had tried for 35 pips, it would have lost. I made 15 pips on it.
+
+--- 帖子 #209 ---
+Exactly, this is what I said. It will be always a weak point in the current EA.
+
+--- 帖子 #210 ---
+No signals for me with v2.3 all day, and for me it´s a "good signal"......
+
+--- 帖子 #211 ---
+Wonderful job Mostashar. Congratulations. Am I right that your indicator browses the ADX? It must do so to make its buy, sell, hold recommendations. I ask so that I can eliminate it from the bottom of my chart. I don't think using that space for ADX is of any purpose, is it? Already in the calculation. Best to you, Forest
+
+--- 帖子 #212 ---
+I wonder ... is it possible to make the SL a variable whereby you run it through the back test and MT4 can tell you which level SL yielded the best results ? Is that what people call magic number ? (I heard that reffered to a couple of times)
+
+--- 帖子 #213 ---
+Yes, you are correct. You can remove ADX from your screen as it is being calculated in the code itself.
+
+--- 帖子 #214 ---
+Wo0o0o0oW I just managed to establish communication between the indicator and EA I am trying to make. I just managed to call current Support, Resistance and current Signal. See below snap. I used some command to read the data directly from the chart which indeed worked. The comments at the left were printed by EA. Now, I will be completing the EA so that once it triggers an order, it will immediately have its correct TP and SL as per the strategy. HELP! Can somebody share the code to allow multiple trades but on different pairs? I kind of struggle to make it with my limited knowledge .
+
+--- 帖子 #215 ---
+Fantastic. I find that someone who understands their own indi and can code the trading ea to go with it is better placed to do the coding, so I am gracefully stepping aside. Turning a single-trade ea into a multi-pair trader is complicated. I have attached one of the Boris Schlossberg multi-pair traders I wrote a few months ago. Have a look when you are ready, and see if there is anything that will help you. Chief requirements are: a method of allowing the user to input the trade pairs in one input, and dividing that up into a pairs array. creating variables that hold the Symbol(), Point, Digit, Ask and Bid for each pair via the MarketInfo function If all this gets a bit complicated for you, I can always do the conversion and you can take matters from there. So, just sing out if you need any help. Once you see how it is done, coding multi-traders is only a bit more complicated than single-pair traders.
+
+--- 帖子 #216 ---
+Thanks Steve for jumping to help as usual. Why does it have to be this complicated? Why can't you make something that does the follwoing: 1. Once EA initiated on EURUSD for example. 2. It will wait for the trigger. 3. It will scan open oredrs and if there is no open EURUSD positions, then 4. It will do Buy or Sell I believe this can be made simple but I don't know how to make.
+
+--- 帖子 #217 ---
+After some Googling, I have done something but it looks there is still a mistake somewhere. Can you look into it and figure out why it did not work? By the way, I put the BUY conditions in this version to be Hold! just to test the code if it will trigger and Buy orders since we have no signals as of now. You can see how I called the data from the indicator: Inserted Code string CurrentResTxt = ObjectDescription("TSR7"); string CurrentSupTxt = ObjectDescription("TSR5"); string TradingStatus = ObjectDescription("25"); double CurrentRes = StrToDouble(CurrentResTxt); double CurrentSup = StrToDouble(CurrentSupTxt); Comment("MoStAsHaR15 FoReX - Murrey Advisor EA v1.0", "n","Only use with 4Hr timeframe", "n","Current Resistance - ",CurrentResTxt, "n","Current Support - ",CurrentSupTxt, "n","Current Signal - ",TradingStatus);
+
+--- 帖子 #218 ---
+A few things. First, add a couple of routines to tell you what is going on immediately. So, I have added: Inserted Code int init() { //---- Comment(".........................Waiting for the first tick"); //---- return(0); } int deinit() { //---- Comment(""); //---- return(0); } The first tells you that there has not been a tick yet. The second clears the comment so you know you have not forgotten to re-compile - and you will forget and wonder why the screen has not changed. Guess how I know? Futher down, these three lines stop your code executing further: Inserted Code if(buys &gt; 0) return(buys); else if(sells &gt; 0) return(-sells); else return(0); One way or another, everything ends in return, which means the code can go no further. Use the Alert() function in debugging. I have added Alert(TradingStatus); immediately after the lines I described earlier but commented out. This shows that TradingStatus is empty on my chart, so your OrderSend() commands cannot execute. If you have an object called "25" on your chart called "HOLD!" or "Go Short" for testing purposes, then it is the above 3 lines that are stopping the trade executing. Incidentally, notice the #include statements I added to the start of your code. Then see the error code I added to your if(TradingStatus == "HOLD!") code block. The #include statements allow the error reporting. Error reporting is essential for the developer to know when things are going wrong. It seems to me that you are trying to do too much too early. Tackle one problem at a time so: learn to extract and display information from the indi learn to use this info to send trades third learn how to know when trades already exists so that step 2 is avoided when unnecessary add mm facilities I hope this helps. Sing out when you need more info. Fell free to pinch my code for your own use. You are doing the right thing here. In the absence of being a trained programmer, the only way to learn to code is to do it.
+
+--- 帖子 #219 ---
+I think I did it. I just tried it and worked fine. Please try on a demo account and let me know so that we can proceed further improvements if the basic functions work properly. Both the indicator and EA have to be added to to each chart simultaneously. Regards
+
+--- 帖子 #220 ---
+mostashar15 and Sir Steve.... Go Team EA! Thanks guys. Will be testing.
+
+--- 帖子 #221 ---
+Wonderful. I didn't realise we can get the value of a label this way; this will make my life easier in the future. Your stop loss calculations will not work for 5 digit criminals. It will always be a tenth of what is required; this will often result in a stop that is too close to the market to be allowed, and throw up 'invalid stops' errors.
+
+--- 帖子 #222 ---
+Mmmmm, at least you found one thing new to you in my code. How do you propose to fix it?
+
+--- 帖子 #223 ---
+great work So how this new Ea put the take profit and Sl lvls next support/resistance ?
+
+--- 帖子 #224 ---
+good work mostashar , but, which indicator to be added(v2.2 or v2.3) with ea plz ?? ,its working fine now with v2.2 until u tell me and i have nzd short signal now triggered ... thnx
+
+--- 帖子 #225 ---
+You make the stop loss a variable. Either extern int StopLoss = 30; if you want to make it a user input, or int StopLoss = 30; if you want to keep it internal. Then you put this snippet in your init() function: Inserted Code //Accommodate different quote sizes double multiplier; if(Digits == 2 || Digits == 4) multiplier = 1; if(Digits == 3 || Digits == 5) multiplier = 10; if(Digits == 6) multiplier = 100; StopLoss*= multiplier; This automatically adapts the stop loss to x digit accounts. Lunatic as it sounds, apparently some wally-plonker-utter-tosspot crims are quoting 6 ditits these days. Then your buy code becomes: Inserted Code ticket=OrderSend(Symbol(),OP_BUY,Lots,Ask,3,NormalizeDouble(Ask - (StopLoss * Point), Digits),CurrentRes,"Murrey Advisor EA v1.0",1070,0,Green); and your sell code: Inserted Code ticket=OrderSend(Symbol(),OP_SELL,Lots,Bid,3,NormalizeDouble(Bid+(StopLoss*Point), Digits),CurrentSup,"Murrey Advisor EA v1.0",1070,0,Red); Edited version attached. There is some extra code to add if there is a possibility of a zero stop loss, but you can worry about that later on. You can see what is required if you look at Louise's code.
+
+--- 帖子 #226 ---
+HI I took 20 pips from the USDJPY on signal yesterday. Funny it was off the retrace candle. There was a bull spike candle 0.00 hours Followed by another uptick candle at 04.00 Then the 08:00 hour candle retraced. I got a buy signal in the candle at 11:00 at took 20 pips. I am on GMT +1 but my charts show + 2 I.E 8am for me my chart show 6.00am... Now upgraded to version 3 and today is will see if any trades triggerd. Lot of NEWs out today so...ooooohhhh. Results for week (demo) so far, though I'm not around to trade every signal. 13th EUR USD +26 13th USD CAD +16 13th EUR GBP +19 14th EUR GBP -35 15th USD JPY +20 Total +46 Thank you Mostashar15
+
+--- 帖子 #227 ---
+uhhm completely different results than mine....what sl/tp u use?
+
+--- 帖子 #228 ---
+i think 3.2 to have the added condition to filter out those ''retracement-trades''
+
+--- 帖子 #229 ---
+just closed eurusd + 30 this is the first signal for me with 2.3 version but it was about hit the stop loss after 5 pips my stop loss was -40 but i think it was much safer to make SL the Previous support see this pic i entered on the vertical line http://img842.imageshack.us/img842/6409/123ri.gif also it hit the next Resistance ...and it retrace from the the EMA very good
+
+--- 帖子 #230 ---
+its really annoying something wrong with the indi its 2.3 its disappear http://img580.imageshack.us/img580/7138/123eqw.gif Its on Altrade and there another qus I have two accounts fxopen and altrade ....the problem is both gave diffrent signal i may got signal on altrade but not on fxopen i dono why maybe due diff time in both servers ?
+
+--- 帖子 #231 ---
+If you use the version I posted earlier in this thread it should not disappear: http://www.forexfactory.com/showpost.php?p=4020418 Make sure you rename the file to be the same as the one you were using (so that the EA knows where to find it).
+
+--- 帖子 #232 ---
+thx buddy im gona try
+
+--- 帖子 #233 ---
+Thanks my master
+
+--- 帖子 #234 ---
+Yesterday, I got in with EURUSD after it bounced back from EMA(5,c) even though thee was no signal but I wanted to test this strategy and today got up with +100 pips in account. This never happened to me. I will try to see if I can incorporate this in new versions if it works most of the times.
+
+--- 帖子 #235 ---
+i just attached EA to the named pairs...let's see how it will work
+
+--- 帖子 #236 ---
+shot nzdusd btw
+
+--- 帖子 #237 ---
+what is the difference between your system and mer07198's which works on daily time frame..I see that sometime back you were posting on his thread??? also do we have all the bugs out of it, I lost on all three trades last week??? sfg7th
+
+--- 帖子 #238 ---
+me as well
+
+--- 帖子 #239 ---
+TP: Next Support SL: -30
+
+--- 帖子 #240 ---
+It can work with either version. But, use it with v2.3.
+
+--- 帖子 #241 ---
+Hi PhAnTi' My stop loss was 30 my TP is 30 but any doubt and I'm out. If you drop the chart to hourly you will see the entry bar and the following bull bar where profit came from (though I don't trade hourly only 4 hour, sticking with system). Could someone explain the following (at the risk of looking dumb - still, no ego) The indi status Long Status Current Open&gt;Sup (+3p) OK so I read open greater than support +3 pips. Which support is this? Is it the Murry line because the price is often way above ML+3 and yet it still does not trigger. Its the one indi that seems to take an age to turn positive. Much appreciation to everyone. Thnx
+
+--- 帖子 #242 ---
+very nice so in EURUSD today i shouldn't get with 30+ only i could take 54+ but no problem
+
+--- 帖子 #243 ---
+hi everyone, are we testing on the Murray EA advisor v1 or are we trading using the 2.3 template (post 1) ? Thanks
+
+--- 帖子 #244 ---
+i trade only london and early ny session so i didn´t notice the first two and kiwi. sry for that
+
+--- 帖子 #245 ---
+best regards
+
+--- 帖子 #246 ---
+usdjpy long let's see : p
+
+--- 帖子 #247 ---
+guys something wrong with my system here and i did not get this long call on usd/jpy. I am using version 2.3. I also tried strategy test on the EA advisor 1 and did not get a single trade opportunity in the last month.
+
+--- 帖子 #248 ---
+Hi All, No signal here. I have 2.3 without ea., using IBFX demo. pipsacker
+
+--- 帖子 #249 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #250 ---
+Can u check to see which version u have installed ? maybe you are still using 2.2 ?
+
+--- 帖子 #251 ---
+tpl ma 2.3 and EA v.1 and indicator 2.3
+
+--- 帖子 #252 ---
+very strange we should have the same setup and the same readings ... i will reinstall and start again.
+
+--- 帖子 #253 ---
+do oyu use H4 timeframe?
+
+--- 帖子 #254 ---
+Not signal for me, V2.3, IBFX Demo, still waiting......
+
+--- 帖子 #255 ---
+I'm on FXopen.com live
+
+--- 帖子 #256 ---
+I reinstalled everything but i still have Hold signal on H4 timeframe. The long signal is failing on account of the EMA5&amp;6
+
+--- 帖子 #257 ---
+I don't know what's the matter... using v3.2 , EA v1 uhhmm maybe systeminventor got an idea ; D
+
+--- 帖子 #258 ---
+just for clarrity i am assuming thats a typo and you meant 2.3 not 3.2 ? anyway good luck in your trade
+
+--- 帖子 #259 ---
+yes it is, sry
+
+--- 帖子 #260 ---
+I tried backtesting the updated version of the EA (1.0) yesterday, but had no trades at all for 2010 to end of July on EURUSD. This does not seem right. There were no errors in the journal. As anyone else been able to backtest successfully (this latest one, not the original Steve H one)?
+
+--- 帖子 #261 ---
+did tried for backtest but same thing to me.
+
+--- 帖子 #262 ---
+ياعطيك العافية هنا افضل من المتداول على الاقل تلاقي ناس تساعد بي المواضيع تفضل زور المواضي التي عرضها بي فوريكس فاكتوري
+
+--- 帖子 #263 ---
+Backtesting does not work, because you cannot get historical data for the signals. It can only work on forward testing.
+
+--- 帖子 #264 ---
+شكرا لك ولكل منتدى متعته.
+
+--- 帖子 #265 ---
+I am happy to see such positive results. Wish you green pips continue
+
+--- 帖子 #266 ---
+Sometimes, it happens to hit SL and immediately next candle, you will get another entry signal. You just go again and might be get lucky this time.
+
+--- 帖子 #267 ---
+The official EA is the one I posted here as it applies the strategy in terms of TP and SL. Unfortunately, until now it works only with 4 digit brokers. http://cdn.forexfactory.com/attachme...1&amp;d=1284585098
+
+--- 帖子 #268 ---
+Main difference: (1) He is using daily timeframe while I use 4Hr timeframe. (2) He depends only on Murrey while I depend on other indicators such as ADX and EMA(5,C) and EMA(6,O).
+
+--- 帖子 #269 ---
+I am sure v2.3 does better job.
+
+--- 帖子 #270 ---
+hmm im sorry what is the 4 digit brokers and 5 digit brokers just a small explain so is ALtrade works with the EA or FXopen?
+
+--- 帖子 #271 ---
+looks like yes
+
+--- 帖子 #272 ---
+To clarify it: If 2.3 gives a signal then by default 2.2 will give the same signal. But, If 2.2 gives a signal, then not necessarily 2.3 will give this signal.
+
+--- 帖子 #273 ---
+i have now another signal ( nzd ),yen signal before ... two signals triggered now ,v2.3 with ea ...
+
+--- 帖子 #274 ---
+Now at 16:00 EST candle, I have the following: EURUSD - LONG - TP = 1.3123 - SL: -30 NZDUSD - SHORT - TP = 0.7202 - SL = -30 Also, I am in already with past signal for USDJPY - LONG - TP = 85.94 (Now it is HOLD) Let us see ...
+
+--- 帖子 #275 ---
+I'm surprised you say this, as the point of running an EA through the strategy tester is to run it against past price data to see how the strategy would have fared. Of course, the results are not perfect, but if you have an equity line straight down to zero, you know you have a problem. Another warning sign is a lot of errors in the journal. In the case of this EA, it did not produce any results, but also no errors. I have not written EAs, but I have modified EAs and have seen this kind of thing before where I have accidentally set the logic up so that it would be impossible to ever get a trade. (You can imagine how this could happen: Only sell when the price is over the 5EMA and below the 5EMA, for example. Obviously logic like this will result in no trades.) We know from your manual trading that there should be some trades being taken over an 7-month period, so it makes me wonder whether there is a logic issue in the conditions required for a buy or sell in the EA which is not right and which is therefore causing this situation where no trades are ever sent, but that there are also no errors.
+
+--- 帖子 #276 ---
+What about EURUSD signal? Did you get anything?
+
+--- 帖子 #277 ---
+yes...1 min ago ... u r right
+
+--- 帖子 #278 ---
+Hi, Yeah i know, you enhanced the 2.3. But the problem I and a few other users are seeing is that we are not getting any signals on 2.3 and some other people are seeing signals. For example today I got no signals on Euro/USD or USD/JPY. But from posts here i take it that some people have. I am not sure why this is (maybe broker).
+
+--- 帖子 #279 ---
+Backtesting does not work with me too ,huge errors in the journal ... im going to find another way to do so ...
+
+--- 帖子 #280 ---
+as you can see my eur/usd is hold. On this chart, what do i have to manually measure to see if it satisfies the distance ? is it the close of the previous bar (green hammer) with the blue line or with the red line ? Anyway results are Blue line = 16 pips Red line = 38 pips unless the problem is because my broker is using 5 digits and not 4 ? Because on the crosshair it read 160 pips ?
+
+--- 帖子 #281 ---
+Are you having any signals now?
+
+--- 帖子 #282 ---
+nope ... I wonder if it is the 5 digit issue ?
+
+--- 帖子 #283 ---
+Yes, you are correct. It has to do with the 5 digits. I thought we solved this problem but seems it did not work. You may use the enclosed version and see if you get the signal.
+
+--- 帖子 #284 ---
+By the way MURREY ADVISOR EA v1.0 does NOT support 5 digit brokers but being revised to do so.
+
+--- 帖子 #285 ---
+Hi, Same problem for me, not signal with v2.3 yesterday and today, I´ve download your last indicator, let´s see (I´m 5 digit broker too)....
+
+--- 帖子 #286 ---
+Ah! That explains the backtesting results (or lack of). Thanks for noticing that.
+
+--- 帖子 #287 ---
+do you use the EA?
+
+--- 帖子 #288 ---
+Did you try this revised version? http://cdn.forexfactory.com/attachme...3&amp;d=1284670494
+
+--- 帖子 #289 ---
+Hi All, Anyone have any trades open. Downloaded the revised version, no trades now. pipsacker
+
+--- 帖子 #290 ---
+Hi folks, I'm testing on 2 demo accounts w/ 2 brokers (Capital Market Services UK Ltd -&gt; got 2 orders = eurusd, nzdusd - MAv2.2.5digit; Gain Capital - Forex.com UK -&gt; got 1 order = nzdusd - MAv2.3dual).
+
+--- 帖子 #291 ---
+I have revised Post #1 to include latest versions. Please refer to and get the correct version.
+
+--- 帖子 #292 ---
+I can confirm this new revised 2.3 is now working for me ! I found a "Go Long" signal on 15 min USD/CHF (not that you are supposed to trade on 15 min signals). However the MA EA does not seem to work with it.
+
+--- 帖子 #293 ---
+Thanks for this great system!
+
+--- 帖子 #294 ---
+I have added the templates as well in Post #1. 5-digit broker clients may want to re-download the file, I think there might have been a mistake. I tried it with FXCM 5-digit platform and it worked on EURUSD 4Hr. I am sorry.
+
+--- 帖子 #295 ---
+just recvd long signal for pound/yen and dollar/yen and short for nsd/usd...anyone else get same
+
+--- 帖子 #296 ---
+With the last 2.3 version, signals are working good on 5 digits. Thanks mostashar15!
+
+--- 帖子 #297 ---
+Hi Mostashar, Any idea why i get signals Go long for for usdjpy and eurusd on one broker (GCI) and yet nothing on Alpari? i am using the v2.3 manual version. it seems like its sensitive to broker or am i doing something wrongz/
+
+--- 帖子 #298 ---
+Are you using the last version? Alpari is working with the last 2.3 version... update from 1st post.
+
+--- 帖子 #299 ---
+I am with Alpari aswel, and if you compare your 4 hour chart with that of Mostashar you will be suprised to know that it looks quite different. So my guess is that this must be sensitive to broker (i.e. the data they give) and therefore is leading to different signals.
+
+--- 帖子 #300 ---
+Hehe Motasher, the joys of managing a thread are manifold. juzgood, you are dead right. Different criminal = different feed = different everything else.
+
+--- 帖子 #301 ---
+I guess one of them is 5 digit broker who has the signal while other broker is 5 digit broker. If so, please refer to Post #1 and get the correct versions for each broker.
+
+--- 帖子 #302 ---
+GBP/JPY is not part of the recommended currency but it is up to you to try it. NZDUSD has SHORT signal on my platform as well.
+
+--- 帖子 #303 ---
+Yes, it does depend on broker supplied data. In particular closing price of last candles beside high and low. Can you attach both charts to compare data?
+
+--- 帖子 #304 ---
+Good News finally.
+
+--- 帖子 #305 ---
+Hi All, My IBFX demo is now showing signals with latest revision. pipsacker
+
+--- 帖子 #306 ---
+so far usdjpy &amp; nzdusd go long and short for me. I did counter more long for usdjpy. hope to see more green pips. eurjpy did open today. actually i like to trade gbpjpy &amp; eurjpy.
+
+--- 帖子 #307 ---
+montashar15.. why you develop your indi at TF4? any specific reason for that? Is it because at TF4 is a almost confirm signal.
+
+--- 帖子 #308 ---
+Hi All, Took the NZD/USD &amp; EUR/USD signals. Down a little, but they look like they should go in the right direction. Thanks, mostashar15. pipsacker
+
+--- 帖子 #309 ---
+Fantastic, and thanks for the help. I assume stoploss for this system is always at 30pips and tp is at the support is go short and resistance is go long.
+
+--- 帖子 #310 ---
+It looks Asian session might not be good for the strategy. We need to keep it running and optimize performance based on different sessions. Let us see .... By the way, is there anyone following us here who can keep the EA running 24 hrs to give us 360 panorama view of EA performance? I will need this person to run SPECIAL EDITION for trial purposes while we keep tracking of v2.3 on this thread.
+
+--- 帖子 #311 ---
+Yes i am running all 7 pairs with the EA for 24hrs
+
+--- 帖子 #312 ---
+Will it be a good idea to exit if the signal changed back to hold?
+
+--- 帖子 #313 ---
+guys how i can know if my broker is 4 or 5 digit to pick the right EA
+
+--- 帖子 #314 ---
+currently running 7 pairs plus ej n gj. hope to see gud result from this EA &amp; indi.
+
+--- 帖子 #315 ---
+Mostashar15... any specific answer for this question??? TQ
+
+--- 帖子 #316 ---
+buy signal on USD/CHF 20 min ago
+
+--- 帖子 #317 ---
+Hi all, I´ve just downloaded last version in post 1, let´s see how it works today....
+
+--- 帖子 #318 ---
+It will be less confuse for users if indicator will have name indicator not advisor. rgsd
+
+--- 帖子 #319 ---
+for me it doesn't work....got problems with sl/tp 8 tardes, 7 loss 1 win... don't know
+
+--- 帖子 #320 ---
+how this could happen u mean -30 pip isn't enough -50 maybe better?
+
+--- 帖子 #321 ---
+I don't know....it's curious.... maybe u guys can post results to compare? would be appreciate
+
+--- 帖子 #322 ---
+hi all maybe some one can help on backtest the EA i get this line "10:45:06 TestGenerator: unmatched data error (low value 1.2764 at 2010.09.07 12:02 and price 1.2758 mismatched)" my broker is 4 digits. thanks
+
+--- 帖子 #323 ---
+Guys we should all be using 2.3 by now. Maybe would be a good idea to post daily results and to compare trades ? Will be interesting to know how it plays out. Because of the different brokers we may get different results (which is interesting) so try to do a screen grab when you do a entry.
+
+--- 帖子 #324 ---
+i gess you are right we need to see some daily results but the problem is different brokers im mean here different 4 hours candle close cause diff signle if it was on 1 hour there was no way to get different results
+
+--- 帖子 #325 ---
+mr.mostashar ,do u think that trading with 4H chart to win 30 points is the goal of the system???bec. trading with large time frame is to get more points than a smaller time frame chart... just think about it plz...thnx
+
+--- 帖子 #326 ---
+On 9/12 I had 4 trades 3 were losers, 9/15 3 trades all were losers, 9/16 3 trades all were losers..??????all trades were manual live???
+
+--- 帖子 #327 ---
+yeah it's a bit curious...
+
+--- 帖子 #328 ---
+i think you should have won on your EUR/USD trade ! my charts show that it crossed your TP before the SL. you should have won. maybe your broker did not trigger your TP ? I wish i got signal for that trade.
+
+--- 帖子 #329 ---
+mind u the obvious thing is that if you are consistently getting loosers ... reverse your signals and you will be onto winners. basically system needs to be backtested.
+
+--- 帖子 #330 ---
+current eurgbp and usdchf is reaching stoploss
+
+--- 帖子 #331 ---
+i guess this system not so good for ranging days...
+
+--- 帖子 #332 ---
+Can people post the their broker and the offset while posting the results. I think, then we can decide which broker with wht offset we would get the best results. Mostashar, Can this be used on lower tfs? on 1H atleast. If so, we all can test and I believe we shud have a similar results regardless of the broker. 4H tf seems to be resulting in different signals for diff brokers (mainly because of different offsets). I am running the EA on 2 brokers, Prime4x and Liteforex . Both seem to be working fine. 4 trades on each for last 2 days (different trades on diff account) and 3 of them were in profit and one in BE. Will continue to keep it running for few more days Thanks, Prakash
+
+--- 帖子 #333 ---
+hmm guys don't use it Live... i think this EA needs some configuration.... I don't know what's the matter, mostashar seems to trading well with it... hmm
+
+--- 帖子 #334 ---
+I 'think' problem with the usdchf trade was that previous day range was almost double to the average. Therefore market is correcting itself today. Just guessing.
+
+--- 帖子 #335 ---
+Yes, it is. 4Hr TF gives additional filter. I started this indicator with 1Hr TF it gave some success but I much liked 4H4 TF signals.
+
+--- 帖子 #336 ---
+EA v1.0 17, Sep. 2010 results: EURUSD = +44 (Asian Session) NZDUSD = -30 (Asian Session) AUDUSD = -30 (Asian Session) EURGBP = -30 (Asian Session) --------------------------------- Total = -46 USDJPY is still live (-10)
+
+--- 帖子 #337 ---
+which broker you are using?
+
+--- 帖子 #338 ---
+mostashar15 is there way to put an arrow on the chart whenever the signal is. That would help for backtesting. What do you think?
+
+--- 帖子 #339 ---
+Yes, I agree. This system is good for trending markets but the strategy is supposed not to give a signal if it is not trending. We will keep watching and see how we can improve as required.
+
+--- 帖子 #340 ---
+Please check private messages.
+
+--- 帖子 #341 ---
+I am working on something similar but would take time.
+
+--- 帖子 #342 ---
+i don't think these losses because of Asian Session its hard to trade with 4 H and pick the Session
+
+--- 帖子 #343 ---
+FxSol Demo
+
+--- 帖子 #344 ---
+Well, I never had this very high failure rate on the manual system. I usually trade Europe and US sessions and don't trade Asian session because it is too late.
+
+--- 帖子 #345 ---
+NZD/USD recvd sell signal @ 16:00 (EST) @ 0.72419, next 2 bars were bulls highs of 0.72915 and 0.73254. USD/JPY rcvd buy Signal @ 16:00 @85.254, sideways move bulls &amp; bears up to 85.645 two bars later.. suggestions/problems???
+
+--- 帖子 #346 ---
+Hi All, Asian turned against me too. NZD/USD -30.5 &amp; EUR/USD +24.3, loss of 6.2 micro pips. Could have held EUR/USD a bit longer and ended with a few positive pips. pipsacker
+
+--- 帖子 #347 ---
+i think the best develop for this indi is to make these arrows it will make us could easily back test to see if the indi is good or need more modification
+
+--- 帖子 #348 ---
+الاخ المستشار السلام عليكم كان بودي لو كان الجهد الذي يبذل منصبا على تحسين اداء المؤشر الذي قلتم انكم بذلتم فيه الكثير من الجهد والمعرفة ... وهو ما كان يستحق ان يبذل فيه المزيد ، لا ان تهدر بغيره من الطاقات والوقت في جعله يتلاءم مع المتاجرة الآلية ... كأن ينظر لتحسين ادائه لكسب المزيد من النقاط او ان يعمل على زيادة الفلترة لتقليص الدخول الغير صحيح ... شاكرا لكم حسن ادائكم و تعاونكم متمنيا منكم اخذ هذه السطور من باب الحرص على عدم اهدار المجهود الذي بذلتموه مشكورا ... ودمتم بود
+
+--- 帖子 #349 ---
+I noticed the new indicator for 5 digit the adx graph is missing, is it not needed???
+
+--- 帖子 #350 ---
+Hi sfg7th, Mostashar15 said it was already in the indicator, no need to show it. pipsacker
+
+--- 帖子 #351 ---
+و عليكم السلام و رحمة الله و بركاته بالفعل انا حاليا اقوم بتحسين اداء المؤشر وقمت بعمل بعض التعديلات و اود اختبارها قبل نشرها للجميع.
+
+--- 帖子 #352 ---
+good news im waiting for the new modification to test it with you
+
+--- 帖子 #353 ---
+have the mm 2.3v 5d template chart (cad/JPY) cannot get the 2.3v EA to attach..the 1v will attach but get error msg (error opening sell order :130)..any suggestions also got msg that Expert advisor 5 d 2.3v is an indicator and cannot be excuted??
+
+--- 帖子 #354 ---
+wow! are you using the EA or manual?
+
+--- 帖子 #355 ---
+It looks you are trying to use EA with 5-digit broker which does not support yet. You may try to download 4-digit broker platform to try EA otherwise, you may use this indi manually.
+
+--- 帖子 #356 ---
+It looks 5-digit version still has some bugs, please only use with 4-digit brokers. I will delete from 1st post. Sorry for that
+
+--- 帖子 #357 ---
+Currently have "go long' on EUR/USD on IBFX and Think Forex. Has started the up move already 3 pips in profit.
+
+--- 帖子 #358 ---
+strange... no trade on my side yet
+
+--- 帖子 #359 ---
+Hi, This was beginning of last week and there was no EA at the time.
+
+--- 帖子 #360 ---
+It looks you are using 5-digit broker. There is a bug in the 5-digit broker as printed in my signature. Please don't use this version until I fix it.
+
+--- 帖子 #361 ---
+I see my account with FxSol is having a signal (NZDUSD:LONG) but other account with Uranus does not.
+
+--- 帖子 #362 ---
+anyone have an explanation why the signals I recv are for the wrong direction..9/19 21:00 signal was to go long,GBP/AUD @ 1.66793, price dropped to 1.65220..of the Past 13 trades 11 were losers and 2 small winners? all were manual trades with MBTrading live...suggestions/comments
+
+--- 帖子 #363 ---
+Don't use with 5-digit brokers.
+
+--- 帖子 #364 ---
+can someone tell me how to delete indicators from the navigator screen on Meta 4..I have deleted all the murray advisors and EA's (except current one's) from the folders, but all the old deleted ones still show up when i open navigator??
+
+--- 帖子 #365 ---
+i am using 4 digit but no signal at all today
+
+--- 帖子 #366 ---
+I've been testing this strategy for 6 days. I have been using 30 tp and 30 sl after 17 trades my balance hasn't changed (it was 50.000 now 49980). I was wondering what is the main difference between version 2.2 and 2.3 ?
+
+--- 帖子 #367 ---
+im using it now on 30 min and i dont see much different 2 win tades 3 loss but in 30 min you get more signles than 4 H so you might get profits
+
+--- 帖子 #368 ---
+Disregard---I finally figured it out...
+
+--- 帖子 #369 ---
+has anyone recvd a signal this evening???it's 9:00pm EST and nothing so far, reloaded the 4 d ver from post 1 about 6:00pm?/
+
+--- 帖子 #370 ---
+ON IBFX and Think Forex long @ 2:30 ET, short GBP/JPY
+
+--- 帖子 #371 ---
+Hello I did some minor changes and now testing on 1 Hr Time frame. Once proven to be profitable, I will be sharing the new files. I just got in EURUSD (LONG) an closed with +52 pips. I need to continue the test till the end of this week to conclude about those changes. Let us see ...
+
+--- 帖子 #372 ---
+good work.
+
+--- 帖子 #373 ---
+very good , im sure that u r doing well ... waiting for modifications
+
+--- 帖子 #374 ---
+I seem to have problems with the 4 hr 4digit version..have not recvd a signal since yesterday evening @ start of trading session..did recv a signal on 2 pair @ 06:39 today that was accidently on 1 hr TF, but were wrong direction..using MBT ECN live any help/comments?
+
+--- 帖子 #375 ---
+just recvd signal (12:41 EST) for short..with 2 bull candles ???/something is not right??/
+
+--- 帖子 #376 ---
+Was just going thru the code and can make out that, we are not using MagcNumber while checking if we have the pair is already opened or not. So If I am running 2 EAs, this EA wont open a trade if the other ea already opened a trade on that particular Pair. Can somebody fix this please.
+
+--- 帖子 #377 ---
+Finallya 18pips win from eg
+
+--- 帖子 #378 ---
+Last Results Update: EURUSD +52 USDJPY +27 USDCAD -30 AUDUSD +44 EURGBP +56 EURGBP +10
+
+--- 帖子 #379 ---
+this is from auto trading or manual trading.. and is it with H1 or H4 tf
+
+--- 帖子 #380 ---
+Auto - some 4hr and some 1 hr. I am running two different EAs.
+
+--- 帖子 #381 ---
+Dear M ostashar15, could you tell me please what is the main difference between version2.2 and 2.3 ? I am still using 2.2 .I use it for 4hour and daily charts. My broker is 4 digit and signal perfectly works. Nevertheless after 23 trades it seems like a sum zero game so far.
+
+--- 帖子 #382 ---
+2.3 has a feature to filter some of the big candles after which you will see a retrace. Use 2.3
+
+--- 帖子 #383 ---
+Hey MoStAsHaR15, any advances on 5 digits advisor? Thank you!
+
+--- 帖子 #384 ---
+I am now focusing only on improving indicator and EA performance. Once, we are satisfied with performance then, we will develop 5-dig versions. Thanks
+
+--- 帖子 #385 ---
+MOS...your EA only has a mq4 file, all the other EA's on my system contains an exe. file???also will the 4 digit version not work on the ECN 5 d broker??Also the 4digit advisor doesn't seem to work on 5d broker??
+
+--- 帖子 #386 ---
+please read the first thread its not that long.
+
+--- 帖子 #387 ---
+Mostasher, I use 2 different brokers. I am running Ea and got Nzd/usd long signal (4hours) now. Order has opened. Meanwhile I got another signal from my other broker which says usd/jpy short(4hours). To sum up I haven't received same signal from different brokers. By the way both are 4 digit brokers. Have you got any idea about this issue ?
+
+--- 帖子 #388 ---
+To start off with, I read all 26 pages and really like what you guys are accomplishing Now my question is this, I have a 5 digit broker and is it now in place to make use of Murrey Advisor 2.3 with "ma 2.3 tpl" only attached to 4H chart or the "dual .mq4" as I get two different views. I understand that the EA is not working with 5 digit brokers at the moment. Being only "ma 2.3 tpl" attached it's straight manual for now? Or is there still some tweaking to take place with the 5 digit template version?
+
+--- 帖子 #389 ---
+This could happen as I depend on high, low and close of candles. As you know, different brokers will give different data. It is OK just follow any signal you have.
+
+--- 帖子 #390 ---
+Thanks for reading all posts. As of now, I don't recommend using 5 digit version. What you can do is to download 4 digit platform and run the 4 digit version.
+
+--- 帖子 #391 ---
+Ok, to do this is to open my 4 digit demo platform and apply the signal trades onto my 5 digit manually live, would that be correct?
+
+--- 帖子 #392 ---
+Just to update about progress, Below is the results so far. Actually, I am running two versions on on 4 hr and another one on 1 hr. Those versions have been modified and are different than the ones you are running. I will be sharing those files soon after further testing. We might end up by recommending running both Time frames together.
+
+--- 帖子 #393 ---
+Looks good, I have 4 digit broker one side with EA and 5 digit broker on the other side to see how this plays out. Would love to see the final 5 digit version but no rush.
+
+--- 帖子 #394 ---
+wow results are looking goood ! usd/jpy has a 100% success rate for this system that could be great pair for this system ?
+
+--- 帖子 #395 ---
+The following situation happens quite often to many traders. Look it over and see if it has been happening to you:You have been faithfully following your trading plan and the rules you've set for trading. By following them you are now in a trade that doesn't look so good. At the same time, by following your trading plan, you see that you've missed a beautiful move in a different market, one that could have made you a lot of money.You are in a bad trade and you've missed out on a great trade. You become disgruntled. You think to yourself that your trading plan must not be so great. You think there must be a better methodology that you should use that will prevent this from happening. You think to yourself,
+
+--- 帖子 #396 ---
+Hi there, I read through the majority of the posts to get caught up, seems like it's a nice indicator. I'm having trouble downloading the indicator though. I am able to get the Murry Adviser EA 4dig v1.0.mq4 one with no problem, click on it and it saves it okay but the second file: Murrey Advisor v2.3 4dig.zip When I click on it, it tries to save attachment.php and not the zip file?? Anyone have any idea why this is happening or have an alternative way to get this file? Thank ya..thank ya very much
+
+--- 帖子 #397 ---
+instead of the file in post 1 go to attachment file (upper right corner with paper clip) and download the file from there
+
+--- 帖子 #398 ---
+Thanks sfg7th, I used the paperclip and was able to download the file that way. Now to find a broker that uses 4 digits now, I have the FXCM , IBFX and FxPro demos and they all have five digits, any suggestions on a broker that uses 4 digits? Thank ya, Thank ya very much. E
+
+--- 帖子 #399 ---
+I am using FxSol UK
+
+--- 帖子 #400 ---
+when u downloaded the attachment as it is (( attachment .php )), then re name it as zip file like this (( attachment .zip )) , try it and every thing will be ok
+
+--- 帖子 #401 ---
+I use hedefonline and tadawul.
+
+--- 帖子 #402 ---
+I check out fxsol and noticed their spread are higher than most brokers by at leSt 1pip on all majors
+
+--- 帖子 #403 ---
+Hi guys, Thanks for the responses, I will check those out. E
+
+--- 帖子 #404 ---
+Nice , and mine? Look at the time :-)
+
+--- 帖子 #405 ---
+not sure why, mine is pretty bad. total l had 9 trades 6 losses...
+
+--- 帖子 #406 ---
+hi hutrader can i know which broker are you using and which version?
+
+--- 帖子 #407 ---
+here is the result.... http://www.myfxbook.com/members/luca...yadvisor/51742
+
+--- 帖子 #408 ---
+link dosn't work u guys have good results ...so is every one here use 2.3 auto EA or what ?
+
+--- 帖子 #409 ---
+Sorry link here http://www.myfxbook.com/members/luca...yadvisor/51742
+
+--- 帖子 #410 ---
+Is there an update on the testing, MoStAsHaR15? Thanks.
+
+--- 帖子 #411 ---
+I need another week to tell ...
+
+--- 帖子 #412 ---
+Many thanks to you and have a great weekend. Carol
+
+--- 帖子 #413 ---
+Does anyone have the time left indicator that displays the time in the lower left corner of the template we use to setup charts? Thanks Paul
+
+--- 帖子 #414 ---
+Try this. It shows time and spread.
+
+--- 帖子 #415 ---
+Hi mostashar, 1. Many thanks to you and all contributors here. I want to share some interesting points, while testing your system (w/ EA from Steve). Please check my chart attached. It should be described fine in chart. I would think about setting up TP 2 or 3 pips above support (while go short) or 2 or 3 pips below resistance (while go long). In may chart you can see, that my good running trademissed TP by 1 pip, then it hit my SL (-30 pips). What do you think about that? 2. While testing this EA, I would like to know, how that setting (trailing stop) works here. I didn't see, that my SL was moving, while trailing stop was set in EA settings (default = 15 pips).
+
+--- 帖子 #416 ---
+Hi mostashar15 and others .... so we are trading here on the TF H4 - but the sl is only 30 pips ? It seems to me this sl is too small for such a high FT ? Usually a sl of 3 ATRs is recommended for any TF. That means the sl for TF H4 must be approximately 100 - 200 pips ... and dependent on your trading capital we can use only 0.05 ... 0.01 lot. In any case using only sl 30 pips we will be stoped out very often.
+
+--- 帖子 #417 ---
+Hello! I confirm, that trailing stop is not working.
+
+--- 帖子 #418 ---
+Hi All, Is anyone trading this system manually with success? pipsacker
+
+--- 帖子 #419 ---
+we r waiting mostashar for a new modification to test it ... i hope that it will be this weak
+
+--- 帖子 #420 ---
+I think this thread has died, like others..
+
+--- 帖子 #148 ---
+Anyone still trading this system?
+
+--- 帖子 #149 ---
+To tell you the truth I am only watching the 4 digit broker for signals on my 5 digit account but nothing happening, just looking at a "hold" signal the whole time, so not sure why this thread is so quiet.
+
+--- 帖子 #150 ---
+Hi Mostashar15, I would like to show the Daily Range Statistic only into my chart. How could I do that? However, I do not know at all for coding or change the script for mq4 file. Would you please send me the DRS mq4 file? Thank you in advance.
+
+--- 帖子 #151 ---
+HI motashar, nice work here. Any updates yet? lol
+
+--- 帖子 #152 ---
+Hi Guys, just came accidentally to this "died" threat and I thought that I might say a few words regarding this system, because it seems to be interesting, but unfortunately for some/most here not really working. I came around Murrey Math 2 years ago and on the first sight it was an simple and easy to trade system by looking at the charts. But I made the experience most here made: sometimes it worked good, sometimes it worked very bad. It took me some weeks to understand why. To put it simply: Murrey Math is a fractal approach. You can not win with this system by only looking and judging from one timeframe. What does that mean? E.g.: If you try to trade this one on the 4h TF and the price is around the -1/8 line (in falling trend), you would think that chances are as high as around 95% to see price reversing here and run between 2 and 4 Murrey Math trading lines to the upper direction. But now comes the tricky part: each TF has its own Murrey Math octave. What the heck does that mean: Simply, it means: when you are in 4h TF on MMTL -1, you can be on daily TF for example just at the other end, at MMTL 8 or +2/8. And that had severe implications and might be the main reason for the failure of this system: it is not a MTF approach. The second reason for the different results here is clearly the 4h TF. 4h candles are very tricky, because most brokers have different closing times for their 4h candles. Results here would have been more equal when this system would have been run on 1h TF. Murrey Math works on all TF because it is fractal. So what can I advise to make this system working: a) do not use the 4h TF. Use the 1h TF. I do most of my Murrey Math related trading on 15min TF, and time my entries on 5 and 1min TF b) make it an MTF approach: open up a 1, 5, 15 and 60min chart and place the Murrey Math lines on it. See how this 4 TF's interact. If you place a short on 15min TF wait the price to be between 7/8 and +2/8. I prefere the +1/8 line on the first try to penetrate it (here are chances highest to get a very nice rebound). But try to time the move on 1min and 5min TF too. When you get such a move and the higher TF, e.g. the 1h TF is in accordance there is only very limited chance that you will suffer a loss. sometimes I even take a look at the 4h TF to get the idea where price is located. When I get a move where 3 or 4 TF's are in accordance regarding their MMTL I call it "the ducks are in a line". If 1,5 and 15 min TF are in accordance trade on the 5 min If 5, 15, 60 are in accordance trade on the 15 min If 15, 60, 240 are in accordance trade on 60min c) do not, repeat not, trade this here introduced single timeframe approach as an EA, unless the EA is changed and is able to take the, at least, upper TF into consideration. When you trade Murrey Math you do not need additionally support/resistance lines or pivot points, since the MMTL are just that. Better take a look at or search for the real support and resistance zones in the charts and look, if they align with Murrey Math. If you have questions sent me an email since I will not follow this thread. Best of luck to you, Markus
+
+--- 帖子 #153 ---
+Hye, Is there any 5 digit version which works without bugs ? Thanks
+
+--- 帖子 #154 ---
+Thanks, it's been a while ...
+
+
+===== 附件下载链接 =====
+

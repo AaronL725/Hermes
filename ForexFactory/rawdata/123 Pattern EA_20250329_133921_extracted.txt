@@ -1,0 +1,1013 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Please note this EA's basic logic has been stolen and sold without permission using the name USDBOT. I advise that you obtain a refund immediately from Clickbank if you purchased USDBOT. The original EA has been and always will be freely available here. ________________________________________________ Original Post: Welcome! I have seen numerous threads here regarding the classic “123” or “ABC” setup. Well, I would like to introduce you to an EA that actually follows the 123 setup with good accuracy. I call it the Opto123 EA . Major credit goes to Ronald Raygun who worked hard to code the logic of the ZigZag indicator. I must also give mention to MatrixeBiz for his work on the multiple TP’s. Thanks to you both! I have posted 3 pdf articles for those who want to learn what the setup is or need a memory refresher. Please take the time to read them so as not to fill this thread with newbie questions. The 123 setup is most reliable on the daily timeframe and the MT4 ZigZag indicator appears to work best when set to (2,1,1). I have posted my set file in the zip. This set file won’t work on all pairs – try it on EU and UJ to start. The EA is set up for a 4 digit broker, so add an extra zero for 5 digit brokers (ie. 250 = 25 pips). Enjoy! _
+
+--- 帖子 #2 ---
+Here is an explanation of some of the settings for Opto123: Pipbuffer – adjust entry point (point 2) by a set number of pips. As you read in the articles I posted above, the EA enters a trade when price goes past point 2. This setting adjusts the entry relative to point 2. A positive number means that price will have to surpass point 2 and enter later than normal. A negative number means that the trade will be entered before price reaches point 2. Remember to enter an extra zero for 5 digit brokers. Use_Partial_Close – setting true will activate closing part of a trade using settings below ClosefromInitialLotSize – setting true will close a percentage of the initial lot size, rather than a percentage of remaining lot size PipTarget1 – when profit (in pips) reaches this amount, the specified percentage of lots will be closed ( CloseLotsPercentage_1 ) and you may move the stop loss as well( moveSL_1 ). You may do this up to 4 times – any remaining lots open will follow the hard TP . Example: I use a 5 digit broker. My take profit is set at 4000 and 1000 trading 1 lot. I activate partial close to true. My first pip target is set at 20 pips (enter 200 in EA), so the EA will close 25 percent of the trade (.25 lots) and move the stop loss to –50 pips (enter –500 in EA). The second pip target is set at 40 pips and will close another 25 percent of the initial 1 lot trade if ClosefromInitialLotSize is set to true. The third target is 100 pips and close another 20 percent. The fourth target is 200 pips and close another 20 percent. Since only 90 percent of the initial trade was closed, the last 10 percent (.1 lots in this case) will follow the hard initial TP (which was 400 pips). I hope this makes sense!
+
+--- 帖子 #3 ---
+I would like to further develop certain additions to the EA to make it better – especially when to exit a trade. Perhaps there is a programmer willing to put more time into this so that we can test it. 1. As you read in the articles above, one suggested method of taking profit is to add the distance from “point 1 and 2” to point 3. So, if point 1 = 1.5000 and point 2 = 1.5200 and point 3 = 1.5150, when the trend continues back to 1.5200 again we would enter at 1.5200 and TP would be 1.5300. (200 pips added to point 3 of 1.5100). Note this is the same as a Fibonacci expansion where TP is 100% level. 2. Another TP method is to add the distance from “point 2 and 3” to point 2. So, if point 1 = 1.5000 and point 2 = 1.5200 and point 3 = 1.5150, when the trend continues back past point 2 again, we would enter at 1.5200 and TP would be 1.5250 (50 pips added to point 2 of 1.5100). 3. May introduce other filters/adjustments – such as analyzing the size of the pullback/retracement (point 2-3 distance) and compare it to the initial swing (point 1-2 distance). If a certain ratio is met, then take the trade. 4. May add a martingale muliplier. 5. Sliding SL- trendline drawn from point 1 to point 3 and the stop loss moves along this trendline as subsequent candles are drawn.
+
+--- 帖子 #4 ---
+Do you have any complete description/manual for your EA ?
+
+--- 帖子 #5 ---
+ok, i'll backctest..is it work both for demo &amp; live?tq.
+
+--- 帖子 #6 ---
+I've been interested in the 123 setup for a while. I'll enjoy reading the PDFs, good to see some progress with this method. Many thanks.
+
+--- 帖子 #7 ---
+Yes, there seems to be several strategies using the 123 strategy - such as "The System II - With Irony" found here: http://www.forexfactory.com/showthread.php?t=80290 And I'm sure others will find ways to implement this setup in their trading strategies and be more profitable!
+
+--- 帖子 #8 ---
+Hi Mandl, Unfortunately I don't have a manual prepared. I posted the pdf's in post #1 for you to learn the logic of the EA/123setup. Then in post #2 I added some specifics on some of the user defined parametersin the EA. The other parameters should be self-explanatory (take profit, stop loss, trailing stop, move stop, etc)... If I have time, I may put something more formal together. Try using my set file if you are having trouble setting up the EA. The trailing stop works well too to capture the longer trends.
+
+--- 帖子 #9 ---
+An alternate 1-2-3 entry
+
+--- 帖子 #10 ---
+Interesting, I'll check it out!
+
+--- 帖子 #11 ---
+Can you please prepare the set file for 5 digit broker. Finding it difficult to set. Thanks
+
+--- 帖子 #12 ---
+Can you put the source up ? The mq4 file..
+
+--- 帖子 #13 ---
+Hi, I had the same issue as well. fxtrader08
+
+--- 帖子 #14 ---
+I will post a new set file for you when I get back home - but really you just add an extra zero to any price inputs. So, instead of 5 you enter 50, for example.
+
+--- 帖子 #15 ---
+Just checked the set file and it is already set up for a 5 digit broker. So, just load in the set file and everything should be good to go! Go ahead and forward or backtest!
+
+--- 帖子 #16 ---
+done!
+
+--- 帖子 #17 ---
+Bookmarked. Thanks
+
+--- 帖子 #18 ---
+I tried using the EA in strategy Tester but I get a message stating tha EA is no in Live mode please change setting.....How di I get to test the EA in ST?
+
+--- 帖子 #19 ---
+Hi opto. Is there any progress on this ea?
+
+--- 帖子 #20 ---
+how about posting a screenshot of the chart ? thanks .
+
+--- 帖子 #21 ---
+Hi all, Has anybody interested in developing this EA further. Looks like it does well if we switch this on/off or (long only or short only) based on the trend. Regards, Prakash
+
+--- 帖子 #22 ---
+This has promise if followed through...imho. Ron
+
+--- 帖子 #23 ---
+I am just wondering if USDBOT is the copy of this EA. So I wanted to know if there was any progress on this EA. May be the creator of this EA can help us knowing that.
+
+--- 帖子 #24 ---
+It appears that this is the source of the USDBOT (selling for $149 with 2 upsells...the PDF for $47 and an additional robot for $77, which may to no surprise have been taken from somewhere) optojay, what do you say? I believe ClickBank willl process a refund(s) for anyone who purchased USDBOT (and any upsells) in good faith. Thank goodness for ClickBank. Best to all, Ron
+
+--- 帖子 #25 ---
+Yes, I bought it 2 days back and found the similar set of parameters and got this doubt. Then tried running them for some period in backtesting and both were taking trade similarly. Though they are claiming they are updating the system I believe the source is this EA in this thread. Can the Owner of this EA take any action against USDBOT or its not possible? Regards Reachjj
+
+--- 帖子 #26 ---
+How did you get it to work in strategy tester?
+
+--- 帖子 #27 ---
+Reach or anyone else using this, what timeframes are you using it on please...is anything other than daily recommended? Thanks Magou
+
+--- 帖子 #28 ---
+I am running it on H4. even backtest gives avg result with this compare to H1 where it had heavy drawdown.
+
+--- 帖子 #29 ---
+Thanks Reach..have you been running live long? How are the results?
+
+--- 帖子 #30 ---
+Hi Reach. Kindly post your set file. Cheers
+
+--- 帖子 #31 ---
+I just found this thread through a link on the FPA's USDBOT review. The original version of the USDBOT is virtually identical to this EA. In the newest update he has removed most of the user parameters, but it is still the same EA. His second EA, the USDBOT Adaptive is just a Stochastic oscillator and a trailing stop. Probably stolen from here as well. His manual trading strategies are exact, word for word, identical to the two you offer. Without the true authers credentials. Please do your own testing and spread the word. I would like to see this guy shut down and all sales refunded.
+
+--- 帖子 #32 ---
+Same problem with the USDBOT. I had to attach it to an active account on the testing computer first, demo is ok. Then the strategy tester worked.
+
+--- 帖子 #33 ---
+Thank you Ken for answering my question. I am running this on a demo and noticed that it does not execute automatically . I see it draw the lines to short / long. I thought it would execute it but it did not. I verifed the parameters and everything seems fine. Have I missed a step for auto execution or is this really a manually trigger EA. Once again thank you for the answer
+
+--- 帖子 #34 ---
+Please note this EA's basic logic has been stolen and sold without permission using the name USDBOT. I advise that you obtain a refund immediately from Clickbank if you purchased USDBOT. The original EA has been and always will be freely available here. Please do not get scammed by these thieves making money off of the hard work of others.
+
+--- 帖子 #35 ---
+Forex Peace Army has been testing USDBOT with some success. They are using: 01.26.10 USDBOT installed on Daily EURUSD and USDJPY charts with recommended parameters for 5-digit brokers... http://www.forexpeacearmy.com/metatr...or/usdbot/demo Does anyone know what those .set files are??? Jim (MrChips)
+
+--- 帖子 #36 ---
+thnx but coud not download it as mq4 any help? is it indicator or just expert?
+
+--- 帖子 #37 ---
+Just place the mq4 into the experts folder and close your platform. when you bring your platform up (reload) the MT4 will automatically configure so that you can place it on a chart. I did it, no problem.
+
+--- 帖子 #38 ---
+I am getting very impressive results for the one week I forward test this EA. Instead of placing it on H1 or H4 or Daily, I placed it on M15 charts, on both USDJPY and EURUSD. Also, I have set the TP and SL to 70. Others remain unchanged. I have managed 130% in profit from a 3000 demo account within a week.
+
+--- 帖子 #39 ---
+Mastery, what lot size are you using. I have initiated a trailing stop instead of manipulating TP and SL. The lot size I was using was .01 and I have changed it to .05 on a current balance of 563, My last two trades were actually multiples of 120 and 64 trades, don't know why. But that's ok my balance is up 160%. Thanks for your post, I will look at the 15m tf.
+
+--- 帖子 #40 ---
+Hi Can either of you post your .set file you're using. Thanks
+
+--- 帖子 #41 ---
+Yes, my Opto123 EA is capable of making 100% return per pair in a given year on the daily timeframe. It is less reliable on shorter timeframes, but could likely be improved by changing various settings and using additional filter (as I have already suggested in previous posts). Please post your ideas for improving my EA as well as any success you have had already. I will look at coding it into the EA if it is helpful.
+
+--- 帖子 #42 ---
+Hi... Can you please tell, ,which tf you are using and which currency pair you used and how many days it took to make 160%. Its really exciting to see so much of profit.... Which version of USDBOT you are using? also whats your lotsize.
+
+--- 帖子 #43 ---
+I am using the 1H TF. Attached is a mt4 statement that can answer a lot of your questions. The version iam using is the Version I and it looks like the ea in this thread. MT4 Stats - Share your MetaTrader 4 Statements with the world
+
+--- 帖子 #44 ---
+So, you are running it on 1h on GBPUSD as well?. interesting.... I can see there were many 100 pip losses and there is a fall on the account balance..... So, its not performing well correct?..... AM I MISSING something here....?
+
+--- 帖子 #45 ---
+I backtested the EA, in January it performed really well, but in Novmber and December 2009 the results were much worse.
+
+--- 帖子 #46 ---
+I think you need a filter of current trend direction, like SMA 200 or SMA 50.
+
+--- 帖子 #47 ---
+Can anyone post the .set file you're using to get such great results. Thanks Jim (MrChips)
+
+--- 帖子 #48 ---
+MrChips, sorry about just letting you hang out there, but the settings that I use are the same as what comes with this ea as specified in the first post of this thread with the exception of lot size which is .01 and trailing stop which is true. MT4 Stats - Share your MetaTrader 4 Statements with the world One thing that I see that needs work is the pair eurousd, if you look at my statement you can see that my losses come from this pair. and my time frame is 1 hr. Hope this is helpful. I don't know about you but I can't wait for Sunday evening. There is still a lot to learn. AND i wonder if those large number of orders are coming back. I never befor have had to deal with "negative available margin".
+
+--- 帖子 #49 ---
+Actually if I could control the eurousd I would be in "high cotton" right now. But the large number of losses you see happened on Friday when the ea took a buy and of course we know what happened. Before the fall Friday my balance was around 1,179. I had a gut feeling that the ea was wrong on the trade but by just seeing what this thing would do, I found out. Next time gut feeling trumps. I need to cut losses, especially when this ea takes 60+ trades at a time. Ya'll understand that from my vantage point the Eurobot and the Ea from this thread are identical. I have the ea on two other brokers and no trades to this time. But I definately can recommend FXSalt. It is a shame I can''t use them since they don't (actually they said it was Citibank) take US citizens on account.
+
+--- 帖子 #50 ---
+For those that is interested, below is my settings. 1. I used it on M15, both EURUSD and USDJPY. 2. I don't have a fixed lot size, I have turned on Money Management, I just let the EA goes as if the EA is great, than it will grow my account as the time goes by. 3. I do agree with keysharp that EURUSD contributed most of the loses that incurred in the EA. SignalsOnly=0 Alerts=0 SignalMail=0 PlaySounds=0 ECNBroker=0 PipBuffer=0 EachTickMode=1 Lots=1.00000000 MoneyManagement=1 Risk=3 Slippage=5 UseStopLoss=1 StopLoss=100 UseTakeProfit=1 TakeProfit=70 UseTrailingStop=1 TrailingStop=30 MoveStopOnce=0 MoveStopWhenPrice=50 MoveStopTo=3 Remark2= Remark3=== Other Settings (ZIG ZAG SYSTEM) == ExtDepth=2 ExtDeviation=1 ExtBackstep=1 Remark4=== Partial close lot management == Remark5=== Two options for Partial closing; == Remark6=== Close Percent of Initial Lotsize == Remark7=== or Close Percent of Remaining Lotsize == Use_Partial_Close=1 CloseFromInitialLotsize=1 PipsTarget_1=10 CloseLotsPercentage_1=10.00000000 Move_SL_1=1 PipsTarget_2=20
+
+--- 帖子 #51 ---
+By the way, I need some clarification on the following 3 variables. MoveStopOnce=0 MoveStopWhenPrice=50 MoveStopTo=3 My understanding is that this setting will move the SL to 3 when the price is 50 pips if MoveStopOnce = 1. But I am not sure what happens if I leave it at 0 as it is the default. Can someone please explain so that this can be further optimized. I am also thinking if there is anyway that this EA will automatically move the SL from 70 pips (my initial SL) to TS (30 pips) once it starts to make profit (+1 pips) and trailing from there - this will reduce the loses if there is a whipsaw in time. I saw this method in another EA that I tried, but cannot remember the name ... quite sometime back. Thank you.
+
+--- 帖子 #52 ---
+This is my MT4 statement. Please ignore the GBPUSD pair as I am running 2 EAs on the same account, just want to simulate the real life where you may run 2 EA on the same account. http://www.mt4stats.com/sig1/mastery.gif You can see that the SL is different from time to time as I am trying to play with the settings as the time goes by. Hope this will help in better improve this EA.
+
+--- 帖子 #53 ---
+I hope someone can explain to me, as I am unable to replicate the same result when I do the backtest for the same period with the same broker. In forward test I have a few large loses with EURUSD while USDJPY are mostly winners, but the backtest on the same period, I got the opposite result. I am confused. I am always thinking that the backtest is the same as performing a live trading using historical data and thus they should be identical? The only explanation that I can find is that there are flaws in the strategy tester, or the data that it uses, is not accurate. Anyone care to enlighten me? Thank you.
+
+--- 帖子 #54 ---
+Hi Mastery I'm impressed with your results to say the least! In your post for above for Feb 5 you stated that you had set TP and SL to 70, but in your post for the Feb 7 you stated in the settings that you use that the SL was 100 with the TP of 70 can you confirm the right settings that your using? (may be I'm reading your settings wrong) I've only just joined this forum as I found this thread through the link on the FPA's USDBOT review. so I'm a rookie when it comes to both forex &amp; using EA software is new to me as well and still getting to grips using the MT4 software as well! lol so this forum and the FPA's is a BIG education to me, and I thank you for your answer And to Optojay I must thank you for bring it to my (&amp; a whole lot other traders) attention about your software and it been ripped off &amp; being sold commercially and I hope you get due credit for your time and hard work in the making of this software in due course Thanking you for your time and attention I hope you all have a pip filled trading day! Take care and be lucky Cheers Colin
+
+--- 帖子 #55 ---
+Some broker's historical data is atrocious. I have seen gaps of several hours in 15M data as recent as the day before. That is one explanation and is easy to identify. The other factor you have to consider is the Strategy Tester will always fill at the exact price point you want and real money trading doesn't always work that way. Also the spread is fixed in Strategy Tester. These things become easy to spot if you know what to look for.
+
+--- 帖子 #56 ---
+Colin, Thanks for pointing that out! I have been changing my SL a lot and myself also lost track of which SL that I am using ... but I think set SL to 70 is good enough. When the market is going against you, 70 and 100 to me, does not make a lot of difference and in that aspect, normally I will close the trade before it hits SL as I am still monitoring the trades. Because from the past trends, when the market is gaining momentum, it will goes the same direction for the rest of the day after it passes 30 - 50 pips in one direction, think that is how the breakout strategy based on for what I know.
+
+--- 帖子 #57 ---
+From beginning of trading yesterday to apparently the close of trading for this period, the USDBot increased my account by 19% . It seems that trading with this Bot starts on Asian session and closes with London. MT4 Stats - Share your MetaTrader 4 Statements with the world I do need some comments on a possible problem with Opto 123, I have it on three pairs on FXJade since Friday morning and so far nothing. I placed USDBot on Iam last Thursday and so far nothing. Your thoughts will be appreciated.
+
+--- 帖子 #58 ---
+You are still using the USDBOT on 1HR EU.... and those GU trades are from a diff EA.... Can you please post your settings please. Also which broker you are using this on....
+
+--- 帖子 #59 ---
+Hi ReachJJ, I do trade GU, it is the best performer as of right now. I do use the 1hr TF. When I figure out how to attach settings I will post them. But I use the basic settings as are in the Opti123 attached in the first post. But, I did change lot size to .05 and use a trailing stop at 30 pips. If I see that I need to close a group of trades on a pair I adjust the trailing pips closer like on the eu I was on 30 pips and moved to 15 pips.
+
+--- 帖子 #60 ---
+Ok... so you are using this EA on GU?.. I thought this EA was made only for EU and UJ :-)
+
+--- 帖子 #61 ---
+Hi I'm running the EA on 4 pairs: A/U; U/J; G/U; U/C I left it on the over night and when I come in this AM-I have + $1,275 but the drawdown is $2,725 and it just keeps opening orders. I have 15 open orders on those 4 pair - wow. I think I need to check my settings. Is there a way to limit the number of trades? Jim (MrChips)
+
+--- 帖子 #62 ---
+I have to plead ignorance, it works just great on GU. The ea I am using on FXSalt is the USDBot and not opti123, the settings for both are the same.
+
+--- 帖子 #63 ---
+MrChips What are your lot sizes. When I first set up this ea I was on .01 and when it started trading all available margin went into the trade and I ended up with anywhere from 60 to 120 trades on one pair. Then I changed my lot size to .05 and that reduced the number of trades. Like you, I do not know what determines how many trades will be taken at any given time. Would you mind telling me who your broker is. Mine is FXSalt, I have the ea on demos with Iam and Jade but there are no trades on them. MT4 Stats - Share your MetaTrader 4 Statements with the world
+
+--- 帖子 #64 ---
+I 'm using Mastery's set file which has 1.0 as the lot size. The account is with MIG Bank.
+
+--- 帖子 #65 ---
+MrChips, Just checked my platform on Salt and I have 68 trades of .01 lots apiece. I had changed back to .01 to see if I was correct and Yes I am. It cleaned out my available margin but it is not so bad when the drawdown is positive. I tell you if Salt would allow me to sign on I would definitely go live.
+
+--- 帖子 #66 ---
+Ya'll we have action all three of my demo's have activity two are with USDbot and one is Opti123. All three have used all of my available margin to trade but only one broker is making a margin call warning and that is Jade. Stay tuned. MT4 Stats - Share your MetaTrader 4 Statements with the world
+
+--- 帖子 #67 ---
+I havent seen anyone explain this yet, and I dont know if this will get posted. They dont seem to be posting my comments anymore. Perhaps they dont want to hear about marketing hacks stealing their members property. Anyway, Move Stop Once turns the feature on or off, its a true or false setting. Move Stop When Price is the number of pips in profit that the feature is activated at. And, Move Stop To is the number of pips in profit to move the stop to. The Move_SL features under the partial close section work in a similar manner. This is what I have deduced through testing. I could be wrong, and would appreciate any corrections. The TS will only trail once your in profit by the set amount. It wont trail from the +1 pip position.. That why with MetaTrader its nice to have the Move Stop feature to move the stop to breakeven quickly and then trail a wider stop. In this case, we also have the choice of the partial closing features, which actualy work on the opto123, I didnt believe it was possible. On the USDBOT they never seemed to work right.
+
+--- 帖子 #68 ---
+Optojay, Your Ea provides some very good trades but if the TP is not hit then PA can turn and go in the other direction. I have a 50,000 that had a drawdown of +12,000 and I checked back in on it and it is at -6,000. There is a chance I missed my profit. The stop loss was at 30 and wasn't close to being hit, so what is one to do, watch and close manually? My other two demo's closed for peanuts. Shame to see all that profit go to waste. never mind your second post explained it all
+
+--- 帖子 #69 ---
+Hi This EA reminds me a little like Firebird. It's a good EA BUT if you blink too many times it will kill your account. I have way too many trades open - it's on a demo so I can live with it BUT it's out of control. I don't program but if I did I would try to put some setting in so that it would limit the number of open positions you could have at a time. I have 3 G/U trades open for -$1,200 drawdown. And 3 A/U trades with -1,000 drawdown. On the bright side, it hasn't lost a trade yet +$2,650. Any programers willing to try something like that??? Jim (MrChips)
+
+--- 帖子 #70 ---
+MrChips, your ea must not be using all of your available margin like mine did. I did get hit by margin calls since the pa on eu has gone south. The only pair that has lost for me has definitely been the EU. I don't miond the quantity of trades it's the cleaning out of my available margin that bothers me. If this goes into substantial draw down then I do have problems, maybe I should have closed out when I had a profit going (about 11%). But I do have to say it is exciting "flying by the seat of your pants".
+
+--- 帖子 #71 ---
+Just check my account and it seems that the EA needs manual intervention everyday. I also get all trades on -ve and drawdown is huge. Will further tone down the TP and SL to see the performance for next day.
+
+--- 帖子 #72 ---
+Hi I don't know what'e going on. I now have a profit of $3,250 and a drawdown of $670. I reduced the lot size on all pairs and I turned Money Management on. What I see happening is it's closing trades without hitting the TP or the SL. So the profit is not as large BUT still no losing trades!!! If you know how th turn history into report I'll show you what's going on. That's doing the trick so far. Jim (MrChips)
+
+--- 帖子 #73 ---
+Just a question.....under money mangement I see risk...therefore if you put money mangement on and say risk to 2.....( I assume that would be 2% ).....that should control the amount of postions...??? Or am I completly wrong....
+
+--- 帖子 #74 ---
+A small thought. I had MM on and risk at 0. The ea would not trade. In the upper left corner I had a message that I had a false risk parameter. so if you use MM then you apparently need to put in a risk factor. When I moved MM to off then the Ea script in left corner came back as normal.
+
+--- 帖子 #75 ---
+Why does this not surprise me?
+
+--- 帖子 #76 ---
+The fantastic gains I had this week have been negated byfalse trades in the Eu (again), so therefor I am moving this tf to daily. I noticed today that not all brokers treat this EA the same. I have different trades, one has made no trades since early morning, one has given me a profit of over 400 on a 656 account, and one has lost 600 (you guessed it EU).
+
+--- 帖子 #77 ---
+Hi Someone here said that they had purchased US$BOT - if you did can you please upload the manual. I want to try some different settings and I need to know what each setting is supposed to do? I open opto123 on 1 account Monday - thru today $4,200 in profit. Open on another account with different broker -$1,300 5 hours!!! Thanks in advance!!! Jim (MrChips)
+
+--- 帖子 #78 ---
+Be careful with this thing it can easily go the other direction. I am using very conservative settings after all the losses the past two days.
+
+--- 帖子 #79 ---
+hi mrchips! that is great, can you just list the settings you used. or is it at the default settings thanks kos
+
+--- 帖子 #80 ---
+As far as the manual is concerned I do not recall a manual that explained what the settings did. The first two posts tell you more that USDBot did in any manual.
+
+--- 帖子 #81 ---
+I've been playing with a few different set files. I'm uploading them all. The one I used first was Mastery's - but the drawdown was so bad I had to try some others. Some with MM - that seemed to slow it down a little Some with partial closings - that was OK too. It doesn't seem to like 1.0 lots with only sl &amp; tp - it goes crazy. ALSO, I do NOT use it on EU. I read from keysharp that all his losses were with EU - so I believed him. It seems it like certain brokers - The one with the most success is MIG - the least FXDD. I can't figure the thing out BUT I'm having fun trying!!! Good Luck!!! Jim (MrChips)
+
+--- 帖子 #82 ---
+hello mr.chips, i believe i have the manual for usdbot. if you would like it, please let me know i can attach it here. btw, im about as new as you can get. you attached some new "presets," which one is good to use? thank you,
+
+--- 帖子 #83 ---
+I'm trying to find out myself. The mastery one goes out of control after awhile. Try trailing &amp; mm - they're both a little mre conservative. If you would be so kind to attach that manual I would appreciate it. Thanks! Jim (MrChips)
+
+--- 帖子 #84 ---
+oh jeez...i cant b/c it says this "Exceeds your quota by 936.9 KB.) if you're new around here they really treat you like a step child. tried zipping the file and it says this: " Exceeds your quota by 741.5 KB." ok so i figured out a way: http://rapidshare.com/files/349406514/USDBOTGUIDE.pdf.html hope this helps, if not i can see if i can find more.
+
+--- 帖子 #85 ---
+The input settings "MoneyManagement" and "Risk" are not working as I expected they would. My account balance = USD $5,000. It is a demo standard account with a 5-decimal broker (IBFX demo account). "Lots" = 1.25 "MoneyManagement" = True "Risk" = 6 "UseStopLoss" = True "StopLoss" = 240 (really 24 pips; extra zero for 5-decimal account) I am willing to risk $300 of my $5,000 account on a given trade. $300 of $5,000 is 6%. Trading EUR/USD only, 1.25 standard lots is $12.50 per pip. $12.50 per pip x 24 pips = $300. That is why I set "Risk" = 6, believing that the setting of 6 would represent 6% risk. Lo and behold, when the 123 pattern EA opened a trade, it opened the trade with a lot size of 0.25, not 1.25 as I expected it would. I am not using trailing stops, partial closing of positions, or any of the other input settings available with this EA. Can any of you explain how these settings work, and how I can accomplish the desired money management scheme that I have described above? Thanks.
+
+--- 帖子 #86 ---
+Hello, I'm trying to set up Opto123 with PartialClose which I found very interesting. I use it on EU with M15. SL=30 TP=200 Lots=0.4 The one problem I have notice is with PipsTarget_1 which is set up to 15pips. When it reach 15 pips it closes 25% (0.1) but it doesn't move SL for 30pips up. I'm trying to cut losses on first PipsTarget and to move SL but it stays where it was. I was in a good trade and hit PipsTarget_2 which is set up to 50pips. Then SL moved for a specified amount under Move_SL_2=30. Problem is that it works on PipsTarget_2 but SL stays where it was on PipsTarget_1. Anyone with this problem? Regards!
+
+--- 帖子 #87 ---
+Came across your thread and I noticed some people having some losses have a look at this and maybe you can add it to your code. http://code.google.com/p/aivengo/sou...?spec=svn4&amp;r=4
+
+--- 帖子 #88 ---
+Everybody needs to read the second post of this thread.
+
+--- 帖子 #89 ---
+Solved! If I put 0 for Move_SL_1 then I have a problem. Just put Move_SL_1=1 and there you go. Keep in mind that EA first modifies trade and then closes part of it, so you must calculate to have 10 pips between targeted SL &amp; PipsTarget_1 when SL_1 moves up. Best regards!
+
+--- 帖子 #90 ---
+This is from Forex Peace Army!!! In case you missed it, USDBot looks like it turned out to be a scam due to software piracy. There are a couple of others that the FPA is checking into. The Scam Investigations Committee can't just slap a scam label on an EA as soon as a report comes in about a possible case of pirated software. If they did that, someone would get the bright idea to report every EA as pirated. You can read the FPA Scam finding here... USDBot.com Blacklisted by FPA It has a link to the report from 4xProject.com if you want more details.
+
+--- 帖子 #91 ---
+Thanks MrChips, that was very informative and helpful. Now we need to ask Optojay about the use of this ea, since there was a reference that the developers did not use the EA.
+
+--- 帖子 #92 ---
+1 and 0 are often on off settings, but I didnt realize it was so for the Move_SL settings. I thought this was the distance from breakeven to move the stop to. When I tested with Move_SL=1, it moved the stop to 1 pip past breakeven. What happened when you use a larger number? I will test this myself, but just thought I'd ask. This Patial Close feature is quite interesting. I didnt think this was even possible with MetaTrader. The USDBOT Guide offers no useful information. Even when he upgraded with the explanation of the user controls it was only the basic controls that we all know, and the day after that he completely changed the EA as his theft started to become known.
+
+--- 帖子 #93 ---
+Also, can someone explain how "MoveStopOnce", "MoveStopWhenPrice", and "MoveStopTo" work together? What I want to do is move my stop once and only once when the price is exactly half way to my profit target, thereby guaranteeing that the trade cannot end up a losing trade. How can I do it with these three input settings? Any changes needed to these settings for 5-decimal brokers?
+
+--- 帖子 #94 ---
+Move Stop Once is the on off setting Move Stop When Price is how many pips in profit to be when this feature is activated Move Stop To is how many pips in profit to move the stop to this is just like a more advanced breakeven setting where you can actually instruct it to move the stop a certain number of pips into profit. Very similar to the Pips Target and Move_SL settings under the Partial Close. Has anyone tried using a negative number of pips to actualy trail the stop loss? Say at 15 pips profit we move the stop to -50 from a preset stop of 100, then at 30 pips the Trailing Stop takes over.
+
+--- 帖子 #95 ---
+Mr Chips, I just mentioned above in a previous post about the USDBOT manual. He only covered the most basic settings. Please, when you quote profits in dollars its a pretty useless reference. It relates specificaly to your account size and the amount of risk your taking on. However, its nice to see that it can make a quick profit, unfortunately it can give it back just as quick. My forward test of the USDBOT version, across 4 pair, I added the gbpusd and the eurjpy, is just about breakeven. Most of the trades so far have been large losses and small wins, with about a 10 to 1 spread. The ocassional large win is what has kept it going. Running on the H1, with a $1000 demo account with a 5% risk setting on all pairs, and default settings, I am currently showing: eurjpy -209.84 eurusd -88.10 gbpusd -8.40 usdjpy +227.30 this has only been 10 days, but still.... next week I will eliminate the eurjpy and add the usdchf. So far it seems to like the lower volitility usdjpy, and the usdchf isnt that much different. Perhaps this can beat the eurusd. Note: I didnt change the default settings, so this gives a bit more leeway to the less volitlie pair. The default settings in the usdbot are identical to the opto123, so most trades were closed for 1 pip gain, as per the PipTarget_1 setting. For some reason though the USDBOT doesnt take partial profits like the opto123, even though its set to. Next week I will also switch the test to the opto123. It just seems fair as these are identical and I have already refunded the USDBOT. Besides the newest version of the USDBOT is a completely different EA.
+
+--- 帖子 #96 ---
+Hi I have the same questions about the settings - that's why I was asking someone that purchased the USDBOT to post the manual to the system. I'm having fun playing with it BUT I like to figure out what the thing is doing!!! Thanks Jim (MrChips)
+
+--- 帖子 #97 ---
+It seems that "MoveStopOnce" is a true false statement. "MoveStopWhenPrice" is asking how many pips do you want the price to advance before setting stop. So if your TP is 100 then this will be 50 or whatever you want. "MoveStopTo" is asking where in pips do want the stop. Here you place the stop a certain number of pips below the above price position like 10 or 20. If you put it too close then you may be stopped out before its time.
+
+--- 帖子 #98 ---
+Mr LLong, excuse the duplication, some of us are a little slow. It is snowing in my part of the world and that is a little unusual, so been in and out helping to clean out the grocery stores. I have refunded two demo accounts and starting over with tighter sl and attempting to use trailing stop losses. this AM about 4:30 I had to close UJ because my 5,000 account with Masterforex was up 2,700 and there was not a sign that the trailing stop was in play. So I closed out the the trades manually, all 30 something. I was very opportune in that the PA was starting to go south so I salvaged 1,993. I think that for next week I am will try to get something going that will maximize profit when the PA gets up as it did this morning like 16 pips, I don't necessarily want to place a sl and have the pa come back to it and lose a lot of what had been gained. maybe closing out trades partially and moving the stop is the best way. Got all weekend to think about this.
+
+--- 帖子 #99 ---
+Mr.Chips, with all due respect - I posted on Feb 4th (post 34 on this thread) that my EA was stolen and that USDBOT was a scam! Of course, it is nice to have FPA and 4xProject back up my statements. My apologies for not being around lately to answer people's questions regarding the Opto123 EA. It looks like several of you have been doing that for me! Thanks, Ken Long, for example. It seems some are trying to run this on smaller than the recommended Daily timeframe. Please test on daily TF to understand the EA logic. As with most price action patterns, the 123 setup is most reliable on longer TF. Also, I do not advise using the EA on live accounts yet. As with all EA's, it has good times and bad times.
+
+--- 帖子 #100 ---
+It's nice to see some interest in this thread again. (Although too bad it was mostly due to USDbot). Nonetheless, I intend to spend more time here again and I would like to develop the EA further as I do believe the 123 setup has a legitmate trading "edge". I know some would argue and debate this, but this is my belief. Please post or PM me any ideas or indicators that may improve the 123 entry (please provide any manual backtests you have done to support your thoughts).
+
+--- 帖子 #101 ---
+Guys, I think this EA does not really perform well in M15 timeframe. The performance are really unpredictable and up to now, I have my 100% profit returned to broker. However, am still trying to recover the account using a higher timeframe - 1 hour and 4 hour. Can't share anything interesting at the moment as I have yet to get anything that is promising. And for the 3 settings - MoveStopOnce, MoveStopWhenPrice and MoveStopTo, I am unclear if it works or not, as some times I see it kicks in, sometime even when I am in large profit and the SL is still in its original setting ...
+
+--- 帖子 #102 ---
+Ahh the pain, me and my friends have done that countless times! Don't worry, you'll soon get over it.
+
+--- 帖子 #103 ---
+c'mon, 6% of 5K is $300, thats 3 mini lots at 100:1, close enough. Most risk settings just calculate a percentage of your free margin and have nothing to do with the actual risk... if you wish to take into account your stop, divide this 24 pip stop, or whatever your stop is at the time, into 100. This will give you the difference between your actual risk and the model risk, in your case about a multiple of 4. Simply multiply this by your 6% risk and you should be all set, a 24% risk setting should compensate for your 24 pip stop and give you a full position.
+
+--- 帖子 #104 ---
+You werent slow. They had me quarantined to delayed posting for being new here. Maybe they've gotten over it, or maybe its just the weekend. What a wuss of a storm, everyone got great snow except us... Boston/Cambridge
+
+--- 帖子 #105 ---
+Yes, I know what you mean. In North Georgia and a few snowflakes will close schools. But we did get about three inches. This is the most we have gotten in several years. In fact this year has been wetter and colder than normal. right now i could use a little global warming.
+
+--- 帖子 #106 ---
+global warming: you may not need to wish to much for it;but, one of the classical consequences of global warming is an increase in average precipitation over the northern hemisphere.
+
+--- 帖子 #107 ---
+As long as it is warm. It will also help with the over population of the Atlanta area and the lack of water over the past several years. But then again being a resident since 56 I do not recall all these difficulties before the national interstate system went into effect. things were slow and easy, we slept with windows wide open latches on the screen door. Now these houses are fortresses with alarms special windows and in some areas with bars. so I guess global warming is not a good thing if it moves a lot of folks into our state. But still it has been really cold for a long time. But I have to say the bug problem will be more easily handled this year since there will be fewer of them. Really hate it when there is a positive for every negative or visa-versa.
+
+--- 帖子 #108 ---
+yikes...those are a lot of problems. anyhow, i hope someone updates this thread and their latest developments.
+
+--- 帖子 #109 ---
+Well here we go, at 6:20 GU took a trade (actuallu 203 of them) at .01 lots and used half of the available margin on a 3,000 account. Right now it is down about 325 not to be concerned. I do not use money management. SL is 70 and Profit is 400 with the percentage closings available in settings. It will be interesting.
+
+--- 帖子 #110 ---
+I have read and re-read all of the answers to all of the questions (not just mine) about setting the input parms to achieve trailing stops, partial position closes, etc. I am more confused than ever. Allow me to just lay out what I want the EA to do for me, and maybe the EA's author, optojay, can make it clear to me. 1. I want to use risk management and put 6% of my current account balance at risk on any one trade. 2. Lot size is 1.25. 3. Stop loss is 24 pips. 4. Take profit is 16 pips. 5. If the trade moves in my favor by 8 pips, I want to close out 1/2 of my position (.625 lots) and move the stop loss on the remaining 1/2 of my position to the price at which I originally entered the trade, so that if the price reverses and keeps going against me, I will at worst have a net break even trade. I am trading in a 5-decimal demo account. Optojay, anyone else, can you straighten me out? Thanks.
+
+--- 帖子 #111 ---
+hopeless system, 90% to be, i reckon, because i saw its martingale-like position sizing. geez, a system like 1-2-3, should have advantage/profit solely using a simple buy 1 lot, tp or sl. if the hope is on martingale MM, then the system is hopeless.
+
+--- 帖子 #112 ---
+How can anyone find a set file that guarantees profit? I find that different brokers give different results with the same set file. I think you have to start with a basic, demo and change the settings to benefit the account with a certain broker. I really don't think you can find a set file that will do what you want.
+
+--- 帖子 #113 ---
+I have posted the set file below in zipped format for you to use on a 5-decimal account. Basically, you set your hard TP and hard SL as normal. Then you go to partial close lot module at the bottom. You would set Pips_Target_1 at 80 and Close_Lots_percentage at 50. (thus closing 50% of your lots at 8 pips profit). Then just make sure Pips_Target_2 is larger than your hard TP (already set to 160) and it will close out the remaining 50% of your lots at 16 pips profit. I also posted my backtest from Oct.1st until now on the UJ - not bad, if I may say! 9% profit on one pair with 5% drawdown and 1 consecutive loss. Interestingly, a martingale approach may do nicely with this system (as I suggested in post #3 of this thread). I don't know how some of you are getting 100+ trades opened simultaneously. As you can see, I only got 23 trades over 4 months. Hope this helps!
+
+--- 帖子 #114 ---
+Guarantees profit? There are no guarantees in forex trading... Yes, different brokers have slightly different feeds/data and you may get differing results...I can only imagine that this problem is magnified on scalp-like trading. The 123 setup should not be traded as a scalper system.
+
+--- 帖子 #115 ---
+Be aware the money management module is not just a simple calculation. Some of you are expecting that if you enter 1% for risk the EA will use a lot size that is 1% of your account lost if your SL is hit. This is the MM code: Inserted Code //Money Management sequence if (MoneyManagement) { if (Risk&lt;1 || Risk&gt;100) { Comment("Invalid Risk Value."); return(0); } else { [b][color=blue]Lots=MathFloor((AccountFreeMargin()*AccountLeverage()*Risk*Point*BrokerMultiplier*100)/(Ask*MarketInfo(Symbol(),MODE_LOTSIZE)*MarketInfo(Symbol(),MODE_MINLOT)))*MarketInfo(Symbol(),MODE_MINLOT);[/color][/b] } } You can see that after the "Lots=" that it is dependent on FreeMargin, Account leverage, your Risk Input, and other parameters. The code also requires you to enter a number between 1 and 100 percent. A workaround (as another member has suggested), you can estimate a percentage to risk to have the EA trade an approximate lot size. For example, on a $10k account I set MM at 6% to make the EA trade approximately .41 lots of EU (which would be approx. 1% risk on a 24pip SL - .41lots * $10/pip * 24 pips SL = $99 = 1% of $10k account). Make sense? Good!
+
+--- 帖子 #116 ---
+Hi Opto I am analysing the result of your opto 123 v 1.1 EA, which i have been running on gbp 1 min demo account For completed trades, in the comments, there is a comment that says 'from #923737XXXX' or 'to#945454545XXX' - what trades do they represent. There are other trades that say 123 Sell#127XXX and so on. Are there 2 trading strategies there or what. Thanks
+
+--- 帖子 #117 ---
+I have placed this ea on Masterforex and this morning @ 9:14 it picked up 42 trades @lots of .10, used 2150 of margin leaving 5140 available, and by 9:23 an additional number of trades come on raising margin to 3400 and the total trades to 70. All this on USDJPY. And as I am writing, this ea is still taking trades because margin is up to 4500. I take it that this is what's called the martingale system. But it doesn't read right. I thought martingale made up losses by increasing trade numbers. I do not have losses to make up. I don't know where this comes from, but I do have MM off.All other settings are as provided except sl and tp. I started this account on 2/11 with 5,000, it is on 6,949 and currently in a 157 draw down and adding trades.
+
+--- 帖子 #118 ---
+Are you using the Opto123 EA with the set file I posted a few hours ago? Does it open all these trades in the strategy tester too? There is definitely no Martingale strategy in this EA.
+
+--- 帖子 #119 ---
+Can you please explain how it determines the lotsize. I have 200$ account and what risk I should use to get the correct lotsize. Also, if I enable MM, it does only calculate the Lotsize for a trade or does it do anything else like managing the open trades (closing for breakeven or anything else) Thanks for you reply. Prakash I had put it on 10k demo account EU 1 hour chart. First it made a loss of 9.5k leaving only 500 $ in a single day :-( Today, it made 500$ into 1300$.... it used different lotsizes with MM turned ON. So want to know, how exactly it calculates this. Can you try to enhance this, by using some trend filters?
+
+--- 帖子 #120 ---
+Optojay, I am embarrassed but this is the USDBot. I have been treating it as the OPto123, which I do have on two other demos. And no this is not the new set file. I used the file as it came with the ea. and made adjustment to sl and tp. I have compared the settings of both ea's and don't see a difference. So that is why I haven't thought about scrapping USDB, I will change over to Opto123 as soon as all trades clear so there won't be any question.
+
+--- 帖子 #121 ---
+Well, this is interesting, at 8 this morning I had a balance of 6949 now the balance after all trades cleared is 9,867. the trades taken were from JPY and Eu.
+
+--- 帖子 #122 ---
+Hey Key Which bot did that? US$ or OPTO? So far I'm using the new set file that Opto posted and very good results! I'm using 15 min as TF - I think Opto's Bot was or is supposed to use 4HR or Higher
+
+--- 帖子 #123 ---
+Mrchips I have to say that it was US$, even though I think both are the same. I am using the 1hr time frame. It has done better than those higher. I only get about two or three trades but they come in bunches. My next chore is to down load the new set file and install. good luck to you.
+
+--- 帖子 #124 ---
+In a previous post I was relating about the 100+ trade situation, well the ea again took trades this time in USDCHF and only 10 trades. Go figure. MT4 Stats - Share your MetaTrader 4 Statements with the world
+
+--- 帖子 #125 ---
+Optojay, thanks for the .set file. I will go ahead and give it a try. Also, I am having the opposite problem that other contributors to this thread are having. I am not getting any trades on the D1 and H4 time frames. I am getting two or three trades a day on the H1 time frame. I am trading only EUR/USD, not USD/JPY because in earlier trials, USD/JPY performed poorly. Maybe I should fire up USD/JPY again with this .set file.
+
+--- 帖子 #126 ---
+Optojay, which broker(s) do you recommend for U.S. citizens to trade the Opto123 EA? I have read tons of broker reviews at Forex Peace Army and other places. By and large, *all* of them get pretty lousy reviews. Thanks.
+
+--- 帖子 #127 ---
+Tested for 24hrs live 10 pairs, 16tp24sl....set file... no trades? This right? Hats off to opto for sharing and coding
+
+--- 帖子 #128 ---
+I set up Interbank today with 3 pairs 30 sl and 400 TP with 30 as trailing stop. Have trades going as of now used up all of my available margin. I have had JadeFX running for 5 days no trades. Took it off line. Yes I am using the set files from Optojay, just changed thwe tp and sl.
+
+--- 帖子 #129 ---
+Strange I tried with jadefx too with no trades....no errors for me but -always printed a line blue or red, when suggesting short entry or long entry in top left corner -never entered when price got there
+
+--- 帖子 #130 ---
+Just happened to be up, it's 2:39 in the morning. But the same for me. I have another broker, I amFX that is doing the very same thing.
+
+--- 帖子 #131 ---
+Damn you're in EST! Yeah would like to get to the bottom of it... I guess only opto can help!
+
+--- 帖子 #132 ---
+yep, and I am going back to bed. And you are right, opto can help.
+
+--- 帖子 #133 ---
+night mate
+
+--- 帖子 #134 ---
+alright anybody what is a "invalid lots number for close order function", I found this in the experts file of my metatrader. also what are the blue vertical lines and how do they work. What triggers a trade?
+
+--- 帖子 #135 ---
+Is is possible to set the maximum number of trades, by pair, that can be opened at the same time? I have Opto 123 running. It opened and closed 134 trades in 18 hours and made $1953 @ .05 lot size. This was using 8 different currency pairs on a FXDD demo account. Unfortunately, the are 28 open trades with a -753 return. I have had 2-3 new trades all open in less than a minute. I would like to just open 1 trade and close it before opening a new one(same currency pair). I am using the Use_Partial_Close = "T". It appears that, hypothetically, the the number of trades can grow expotentially until they create a stopout, regardless of the account balance. (I up to a $100,000 demo account size. Every one below that blew out!) Any suggestions?
+
+--- 帖子 #136 ---
+Hey etvolare, glad you said something. I have had that same situation all week. I started the ea on sunday and it has made me about 9,000 over my equity. the most trades I received is 224, all winners. I have had losses but this ea has brought the balance back up and almost tripled my money. Now as to how to control the trades? the only way I know at the moment is by increasing the lot size. But even then it may clear your available margin and maximize your trades, but there will be fewer trades. I have noticed that this ea will not always make large number of trades. How and why that happens, I do not know. I hope Opto is somewhere around to read this.
+
+--- 帖子 #137 ---
+Etvolre, what are your settings and what is your timeframe? You should not have blown your accounts unless your Sl is too large. The trades will increase as the PA is favorable ( as it seems to me) but they will stop when you run out of margin. And this is when you run into trouble when drawdowns start creating margin calls. Use the settings that Opto put on a post two pages back and you can download. They seem to help.
+
+--- 帖子 #138 ---
+Hi: I am testing 123 E.A. with two brokers each with about 10 currency pairs. Time frame =1H, Settings ipbuffer=1,Lots=0,MM=true,Risk=5,Slippage=5,UseStopLose=true, SL=20,UseTakeProfit=true,TP=40,UseTrailingStop=true,TS=30,MovingStopOnce=true MovingStopWhenPrice=20,MoveStop=3. Results are dismal! Losing/wing ratio about 3(or 4) to 1. I did not count them. I had it tested more than two weeks and there were 6-10 trades each days. My two demo $4000 account each lost about $500. I am new in forex and this forum and I am looking for suggestion to improve this 123E.A. performance? Any comment would be appreciated.
+
+--- 帖子 #139 ---
+Guys, lots of questions coming - which is good. But please, read through posts 1, 2 and 3 of this thread . I didn't post all that material for shits and giggles. I posted that material so that you can learn the logic of how the EA trades. Please test the EA in the strategy tester visually and test your settings over at least a 6 month period (even a whole year) to learn how it works. If you read these first 3 posts properly, you would see that this EA is recommended on the DAILY timeframe. You should only get 30-50 trades PER YEAR PER PAIR on this timeframe (so of course forward testing for only 24 hrs would unlikely net you any trades!). Doing a visual backtest on smaller timeframes appears to be less consistent in profitability. I will not help troubleshoot the EA on smaller timeframes. I still do not understand why some of you are getting so many trades opening and blowing your margin. As you saw in my posting recently, my drawdown was less than 5%. You should only be getting 2 to 4 trades per month per pair. Please post your settings and a backtest over the last 3 months to demonstrate your blown account - maybe then I can help you further.
+
+--- 帖子 #140 ---
+I use Alpari-UK as I am Canadian and can open an account there. For US citizens, I would stick to the larger brokers even though they all have had good and bad reviews. Big names like Alpari, Dukascopy, FXCM , FXDD would be places I would check first and do research and due diligence on. Note I have not tried these brokers live and am certainly not an expert on brokers or endorsing them.
+
+--- 帖子 #141 ---
+Attached is my settings and trade results... I would like to just open 1 trade per pair, let the partials work, and then have it close itself. I was hoping there would be a setting for maximum trades/pair open at the same time. I have had this do the same thing for timeframes from 1m to 4h. I never did try at Daily. No reason to, the ea was making trades thru all the other time frames. I dunno...
+
+--- 帖子 #142 ---
+can you pls send the settings along with the tf which you used. Thanks, Prakash
+
+--- 帖子 #143 ---
+Hi etvolare I saw your setup on your excel spreadsheet. I'm having a problem setting up my set file from your setup there. Is it possible to post your .set file? I like your results even though there were too many trades for one day. I would like to try your settings and see if I can tame the EA. Thanks
+
+--- 帖子 #144 ---
+Opto any ideas why it doesn't work on jadefx platform? Strange, kinda curious
+
+--- 帖子 #145 ---
+Interesting ea, can anybody tell me why it opens image editor when I try to download that ea file in post #1. Thanks a lot for any help.
+
+--- 帖子 #146 ---
+I got the same issue. Anyone can assist where did I go wrong? I have attached a pic in word format
+
+--- 帖子 #147 ---
+I have finally finished reading this Thread and know that with without a doubt, I will make money with this EA until the brokers get fed up with it. But then with a bit of human intervention the brokers can't really stop a good trend EA when the user identifies the trend and sets the EA to either "long only" or "short only". Heck I have made money with the old Forex Autopilot simply by identifying the trend and getting out of the trades before the trend reverses by using various indicators. When the trend comes close to ending, I simply turn off that Particular EA until another trend resumes. No EA has the magic grail to function on it's own without human intervention. Not saying that one will never be programmed but when it is released the banks will have it first and fight tooth and nails not to lets us have at it. But the one word of advise I have for the posters of this trend is " DISCIPLINE ". Happy Trading and learn to master this trade, it can pay off BIG TIME! PS: Some of you I PMed before finishing reading the Thread, my apologies.
+
+--- 帖子 #148 ---
+Is their a indicator that just shows the 123 pattern
+
+--- 帖子 #149 ---
+Try attaching it to a chart first. Even on a demo account, attaching it to a live chart will activate it
+
+--- 帖子 #150 ---
+This is one of the best ways I know to use an EA, especially ForexAutoPilot. Let the EA do the short term trading 24/5, and you choose and assign the longer term direction.
+
+--- 帖子 #151 ---
+See the big "expert advisor" button at the top of metatrader? Hit it and the EA will work on any chart as well as in the strategy tester. You'll see a big happy face when the button is active.
+
+--- 帖子 #152 ---
+opto how come it doesn't on jadefx? the demo link is here http://www.jadeinvestments.com/demo.htm had all functions switched on for allowing live trading could it be the symbol names? they are nine characters in length
+
+--- 帖子 #153 ---
+Hi SIM, had the same problem with I am FX as i did with Jade and closed it up. Don't know what it is , it may be the broker. Masterforex and Interbank are doing ok.
+
+--- 帖子 #154 ---
+I am not an expert on EA's whatsoever, so I have a question that may seem dumb. In the very first post of the thread it lists some downloadable files for us to get started using this system. One of the files it lists is the "opto123.zip" file, and another file listed is the "opto123 EA v1.1.mq4". I would like to know what is the difference between the two files. Aren't they both EA's? Which one do I install into my trading platform? Again, excuse my ignorance in these matters. I'm just a simple trader unaccustomed to the complex world of EA's.
+
+--- 帖子 #155 ---
+Hidden in one of the above paragraphs was the statement that the zip file was a file on his settings, so the other is your EA. Just download and the platform will open the mq4 file. Open the zip file and download in the settings folder.
+
+--- 帖子 #156 ---
+Thank you Keysharp. I got the EA installed on my charts. I tried to install the "opto123.zip" file the exact same way as I did the EA, but it will not install that way. Am I doing something wrong? How is it suppose to be installed? (By the way, this question is for whomever knows the answer).
+
+--- 帖子 #157 ---
+Once you have downloaded into your download file, double click on the folder. If nothing happens then you need to download a program to unzip the zip file. Once you unzip the file then you can copy it to the settings folder in your experts file. If your operating system is windows and a new version the zip program is already in there, and when you click on the file then it will in a different window ask you if you want to unzip and you ok the request and it will open.
+
+--- 帖子 #158 ---
+Thinking about adding a 70 SMA filter.
+
+--- 帖子 #159 ---
+Optojay, Would you kindly supply the .set files for both 4-decimal and 5-decimal brokers to do the following: When trade is opened: Stop Loss = 24 pips Take Profit = 24 pips When 12 pips in profit: Close 1/2 of the position. For the other half of the position, reset stop loss = 12 pips (from the 12 pips already in profit), leave take profit = 24 pips (from original entry price), and let the trade ride to conclusion with no further modifications. For example, buy 1.00 lots EUR/USD at 1.3470. Stop loss = 1.3446 Take profit = 1.3494 Price hits 1.3482. Close 1/2 of the position (0.50 lots) at 1.3482 for a 12-pip profit. For the other 1/2 of the position: Reset stop loss = 1.3470. Leave take profit = 1.3494. Let the trade ride out to conclusion with no further modifications. Thank you for sharing your EA with us. So far, I am having very good success with it in a demo account.
+
+--- 帖子 #160 ---
+4 and 5 digit set files as you requested, Dennis. Please go through them and try to understand the settings. I may add more information in post#2 where the settings are explained. Glad to hear you are getting some positive results!
+
+--- 帖子 #161 ---
+Hi, I looked through the above file you prepared for dennis ,the 4 digit one at least, and I can't find what contribute to his requirement of "resetting" stop loss at 12 pips from the current price. Isnt it the MOVE_SL that contributes to it? And here are some questions of my own, 1. What does a negative number in MOVE_SL 1/2/3 means for a "buy" order and a "sell" order? 2. Can trailing stops work properly with partial close (With/without move_sl) ? Or one must be disabled for the other to work Thanks
+
+--- 帖子 #162 ---
+Optojay, illustration by example might work best to clear up all of the confusion surrounding your EA that I see on this thread. Would you kindly take us through your example in post #2 step-by-step, showing us where S/L gets set with each partial close, using the following hypothetical scenario? Hypothetical scenario: Buy 1.00 lots of EUR/USD at price = 1.38000. The price moves straight up in your favor to 1.42000 or beyond. Please show it to us in a format like this: 1. Buy 1.00 lots EUR/USD at price = 1.38000. S/L = 1.37000. T/P = 1.42000. 2. Price hits 1.38200. 0.25 lots closed at 1.38200. S/L moved to 1.3870 (Or 1.3770? Or 1.38500? Or 1.37500? Move_SL_1 = -500 confuses the heck out of me! ). . . . and so on through to the conclusion of the trade at price &gt;= 1.42000. Thanks!
+
+--- 帖子 #163 ---
+I think I understand this now. What Move_SL_1 = 0 does after the trade has moved 12 pips in my favor ( PipsTarget_1 = 120 for 5-decimal broker) is move S/L from its original position of 24 pips ( StopLoss = 240 for 5-decimal broker) away from the original entry price to zero pips away from the original entry price . Zero pips away from the original entry price is now 12 pips away from the current price . I am now guaranteed at worst a break even trade. If the price continues to go in my favor for 12 more pips, I end up with a 12-pip profit for the first half-lot and a 24-pip profit for the second half-lot. This is exactly what I want the EA to do. In other words, Move_SL_1 / 2 / 3 / 4 are price points relative to the original entry price of the trade. Am I correct, optojay? As for the question of whether the trailing stop settings work in concert with the partial close settings, I'm not sure. My intuition tells me that trailing stop and partial closes are mutually exclusive with this EA, but I will defer to optojay to clarify this point. Thanks!
+
+--- 帖子 #164 ---
+Sorry Guys..for interrupted ur discussion But i have face problem when i put the mt4 file to my mt4 chart but it didnt appear. am i missing any setting?
+
+--- 帖子 #165 ---
+Sorry Guys again ...My Problem Solved..anyway Thanks for the EA
+
+--- 帖子 #166 ---
+Glad we could help!
+
+--- 帖子 #167 ---
+Excuse me I am a newbie but when I click on the mql4 file button I get an attachment php that I cannot open. Help please
+
+--- 帖子 #168 ---
+Don't try to open anything just drag the ea onto the chart and it should open itself. The mt4 platform will do the opening of the mql4 file. When you copy the ea into the experts folder be sure that you have closed your platform. If you have not then close it and reopen. Then you can load the chart with the ea by dragging. I am guessing at what your problem is, so excuse if I am to wordy.
+
+--- 帖子 #169 ---
+Optojay, Does Opto123 work with ECN brokers? With ECN brokers, you (or your EA) cannot place stop loss and/or take profit points on a market order at the time the order is placed. Instead, you have to first place the order, then modify it to add stop loss and/or take profit. In other words, it's a 2-step process with ECN brokers. Does your EA have the intelligence built in to know if it is dealing with an ECN broker? I am evaluating a couple of ECN brokers right now, so I need to know. Thanks.
+
+--- 帖子 #170 ---
+Yes, the EA is intelligent enough! Simply set "ECNBroker" to True in the EA and it should place the orders properly.
+
+--- 帖子 #171 ---
+Optojay, see post #163. Do I understand this correctly?
+
+--- 帖子 #172 ---
+Optojay, The broker I am demoing with has GMT offset zero. On Fridays, they shut trading down at 21:00 GMT (1:00 PM Pacific, 4:00 PM Eastern here in the U.S.). Trading resumes on Sundays at 23:00 GMT (3:00 PM Pacific, 6:00 Eastern in the U.S.). One daily candle closes and another one opens at 00:00 GMT (4:00 PM Pacific, 7:00 Eastern). Trading with your EA on daily charts as you suggest, what is your recommendation regarding having the EA turned on or off Fridays, Sunday, Mondays, and major U.S. holidays? What about trades that are opened on Thursday, but have not yet hit S/L or T/P by the end of trading on Friday? Leave them open through the weekend, or close them out at the end of trading on Friday, whether the trades are in profit or loss? And turning it back on Sundays -- should I turn it back on at 23:00 GMT or wait until 00:00 GMT? I think I should wait until 00:00 because the Sunday "daily" candle represents only one hour. Thanks.
+
+--- 帖子 #173 ---
+Yes, you got it right! You have to think of everything relative to the original entry. As for the trailing stop, I think it works together with moving stops - but probably best to use one or the other to make things less confusing. Since the trailing stop is updated every pip, it will override the moving stop settings rendering them essentially useless (if you activate both functions). I recommend choosing one or the other, not both.
+
+--- 帖子 #174 ---
+There's a bug when many/some files are downloaded from forexfactory, or, you're using the Chrome browser (which causes the error for me) ... regardless, your file is downloaded, except it's not been named properly because the filename did not get passed along. You need to rename the attachment.php file to the name of the file that you actually downloaded, and then move it to the appropriate MT4 directory.
+
+--- 帖子 #175 ---
+Thank you for the help
+
+--- 帖子 #176 ---
+Okay, I have done a backtest of the Opto123 EA (the EA that is in the first post of this thread) using the "Strategy Tester" in the FXDD platform. I did not use the "opto123.zip" file because I couldn't get it to work. From what I understand, the zip file is the settings file that Optojay is using. Whatever the case, I only backtested with the opto123 EA and nothing else. I did not change the settings in the EA whatsover. GBP/USD was the currency I tested. I backtested over a one year period of time - from March 1st 2009 thru March 1st 2010. The time frame I used was the Daily time frame. As I mentioned above, I backtested using the FXDD platform (demo account). Here are my results: GBP/USD - Daily chart time frame 119 Total Trades = 119 wins &amp; 0 loss. Winning percentage = 100% Average profit of each trade = $54.33 Net Profit = $6465.00 I want to point out I know very little about EA's. And I know very little about all the various ways to use the "Strategy Tester" (the Strategy Tester, of course, is built into the Metatrader platform to backtest a EA -- I assume). I do not quite understand exactly what the "Optimzation" in the Strategy Tester is meant for or exactly how to use it. Therefore, I did not use it. My big question in regards to my backtesting is... ARE MY RESULTS REAL??? I completely understand demo trading will not give the exact results as "real" trading, but ... 119 WINS and ZERO LOSSES OVER A ONE YEAR TIME PERIOD!?? Is there any truth that my backtest results show I have a good chance of being really successful with this EA, if I use it in real trading the same as I did with my backtest trading? OR, is the "Strategy Tester" completely unreliable and cannot be trusted whatsoever? I would appreciate any and all comments about my results and the use of the Strategy Tester ... and whether it indicates whether this EA will be successful.
+
+--- 帖子 #177 ---
+I'm willing to bet your results are not real, as in they "cant" be real. Regardless I decided to test the exact same time period using the method you described on my IBFX account using the MTF backtester. 102 Total Trades 37 Short (78% Won) 65 Long (80% Won) Average 80% Winning trades.. yet somehow my account LOST money. Ehh, just goes to show that you can have a system with 80% winning trades and still loose money. Now if we can get out of the loosers faster and stay in the winners longer....
+
+--- 帖子 #178 ---
+Ok, I repeated this test on FXDD. Feb 28 09 - Feb 29 10, daily time frame, 10k account trading 1 full lot. 0 mismatched chart errors. The EA opened 88 trades, 2 were full 100 pip $1000 losses, the avg profit was only $28.76, for a $472.40 gain, 1.24 profit factor. The 2 losses occured on 11/23/09 @02:45, and 8/3/09 @09:05. As with any EA, if you get a questionable result, retest. If you hope to run it live, test on many time periods, and look for problems. If you can find problems in the backtest they will almost assuredly show up in forward testing. This EA is interesting to watch trade, but these parameters risk too much for the size of the average gain. The first partial close and move_SL_1 at 10 pips tends to lock in a lot of small profits, which arent strong enough to counter the effects of a few large losses.
+
+--- 帖子 #179 ---
+Opto Hello I really like this expert advisor! I need Your help please. Can You write me pls exactly the default set for 5 decimals broker. All trades thats open the ea closed in minus i dont know so much, but i will very happy if You post all settings step by step. I will appreciate it! Pip Buffer must to be 2 or 20(for 5 decimals) As i saw it will be very profitable EA, only need optimization. Thank You for the big job, i was thinking maybe to buy GBPBOT, but after this forum here everything changed my mind. Thank You vinnieforex
+
+--- 帖子 #180 ---
+test
+
+--- 帖子 #181 ---
+Thank you optojay and RR, EA is quite promising. But it is terrible slow Is here (or somewhere) thread, where you discussed developement of this EA?
+
+--- 帖子 #182 ---
+Can anyone explain to me how I can add a function to Opto123 to set a limit on the number of trades that can be opened at one time? (per pair) After that user defined limit is reached, wait until they close (due to TP or SL or whatever), reload and wait for the next trigger. I sometimes get 4-5 trades open for the same pair. To to control that now, I just close the Opto123 EA until the trade is done and then re-start it. The function would have to look if there is a currently an open trade or the limit is reached for that specific pair and if so, wait until it closes. Otherwise, go ahead and open new ones up to the limit. I realize this is probably counter to the original design strategy, but it would be beneficial to allow a user (me) to define the number of trades that can be opened simultaneously.
+
+--- 帖子 #183 ---
+Hello to all on the thread. Have spent a rainy afternoon here in Mississippi reading through the thread. I've gotten some chuckles from some of the newbie questions. Reminds me of myself a few years ago. Was wanting to shed some light on why different brokers give different results. At least 4 things need to be known about your broker..... 1. MinLotSize This is the smallest increment by which you can open, close or partially close an order. 1.0 lot is a 10dollar a pip order on g/u.(if it was g/j it would be 10yen a pip) 0.1 lot is a dollar a pip and 0.01 lot is a dime a pip..... if your server's minlotsize is .1 then you cannot send any order to it smaller than 0.10 such as .09 not only that but if minlotsize is .1 you can not send any order to open,close or partially close an order that is not divisible by .1 that is to say ......it will reject an order for .12 or 1.12 or anyorder that has anything but zero in the second decimal place. Or you will get the message that KeySharp asked about on Feb. 18th in post #44 "alright anybody what is a "invalid lots number for close order function", I found this in the experts file of my metatrader. So open your demo account and place a .01 manual order and see if will accept it. If not then try a .1 Now you see why you can open a 2.5 lot order but you cannot close half which is 1.25 lots......it wants 1.2 or 1.3 ...not 1.25 This problem can be addressed in the Ea code by making the calculated lot size round to the nearest minlotsize by using the NormalizeDouble function in the code. 2. Does your Broker allow partial closes? Some do not .......needless to say this plays havoc with an Ea trying to use this option. So open a 1lot trade in your demo and then try to close part of it. 3. Beware! Some brokers will allow you to do things on their demo accounts that you can not do on a live account so if you decided to go live, do all these tests on that live server first! 4. Make sure what your lot size and leverage really are on your server you are testing/trading on.....look at your margin required when you open an order and see if it is really true that you have 100:1 or whatever leverage. and when you throw in a .1 order look at how much a pip it is really gaining/losing. For instance on most brokers what I said above is correct, 0.1 is a tenth of a lot (which is a minilot), Which is a dollar a pip on g/u. But not on an IBFXMINI account they are in their own world and 0.1 is really a tenth of a MINI lot or a dime a pip.....on an IBFX standard acount 0.1 is a tenth of a lot like normal. Also keep in mind that some pairs require more margin than others. if you trade a minilot in the gbpusd you are trading 10,000units,(10,000 british pounds)........presently 1.4992 or 14,992.00 X leverage = margin.....if you have 200:1 which is .5% then you have to put up a half of a percent of 14,992 in margin or 14,992 DOLLARS X .005 =74.96 in margin(for 100:1 149.92 in margin) If however you are trading usdjpy, it is 10,000 units (Dollars) X .005 which is 50.00 instead of the almost 75 dollars required for same size trade in g/u. Same with Usdchf....50.00 so pairs makes a difference too. So you can trade 3 usdjpy for the same margin of 2 gbpusd. Since most here seem determined to trade less than the recommened (and wisely so) daily timeframe. The ZZ function default parameters in the Ea are not preset to accomodate this insanity. I will look at the code now and get a grip on how it "thinks" and see what can be tweaked for giggles and kicks.... Please if you will .......OptoJay .....give me a brief explanation of the EXTDepth, Deviation and Backstep to save me some "playing with settings" time. Also you may want to look at your post #3 again and check on your numbers you use there .....I think you may find a typo or two.....either that or I cant read or do math anymore lol. Greetings to all and I will check back in when I get done poking around in the code......Pipip........JimDandy Good Trading to All! p.s will look into making ea recognize when it is on either a 4 or 5 decimal place server and set lotsizes accordingly so that we dont have all these different 5decimal place and non5 decimal presets floating around. you just enter 40 if you want 40 pips and let it translate it to 400 if thats what is needed.
+
+--- 帖子 #184 ---
+Is it possible for any programmer out there to modify the EA. Rather than having specific take profit, could it be possible to just stop and reverse? i.e. once you've entered a trade and an opposite signal appears, the 1st trade closes and the new signal is taken. Or does the EA already do this?...
+
+--- 帖子 #185 ---
+Hi, optojayoptojay: How to open and use your set file? Howdoes the EA find the patter? Does it depend what time time you are using or it is built in by finding the patter on daily time frame? In other words, do you have to use daily chart to get correct patter? Thanks.
+
+--- 帖子 #186 ---
+Dennis, Still having success with your settings? Or, have you improved it? Just came to know this thread. Hope you are having success. Cheers.
+
+--- 帖子 #187 ---
+Hello there Mr. Optojay, your EA; Opto 123 is the best EA I have used and it's the EA I am using on my live account. Yeah sure I'm not using the standard time frame and the zig zag parameters need to be regularly adjusted. I am using Go Markets and I've noticed that at times the EA from this site closes trades before they hit the stop loss which is a worry. My computer is newly formatted and running perfectly. Thank you Mr Optojay!
+
+--- 帖子 #188 ---
+Can you share us your settings ? and on wich pair or time frame you are using this EA with the best results Thanks. Yoenes
+
+--- 帖子 #189 ---
+is it possible to have riskier option to buy/sell at point 2.. as part of breakout strategy, when a certain level breaks, to act at point 2, when price retests the broken level as support/resistance..?????
+
+--- 帖子 #190 ---
+Hi, I’m quite new to trading. I’ve been messing around with demo accounts with various brokers for about a year now. I’ve tried many EAs, some bought (not doing that again), some written my self and some freeware. None have ever made any money on backtest or forward test on demo accounts until this one. I’ve tried testing the system on GDPUSD on daily time frame over one, two, five and ten year periods with various Stoploss and Takeprofit levels. I set the start account up as 10,000 in all cases. I set the risk to 2 (this ensured that I only ever had a Lot size of 0.1 for testing). The best results I have had has been with a Stoploss of 100 pips and TakeProfit of 400 pips (I know sounds risky but works best) this doubled the 10,000 to 20,000 over 10 years (not earth shattering but not bad either). I then tried setting the moving StopLoss at different values from 25, 50, 75 &amp; 100. All gave worse results. However it seemed on some occasions that the StopLoss was not moving correctly. I then tried the Partial Close with Initial Lot size with Pips_Target, CloseLotsPercentage and Move_SL set to (100, 25, 10), (200, 25, 100), (300, 25, 200), and (350, 12, 275). This was a disaster at first but then I noticed that the Moving StopLoss was bouncing around all other the place. When I got to my 200 point it moved to 100 but then when the price moved back below 200 the StopLoss moved back to 10. Something was very wrong. Time to do what I do best. Look at the code. The main area of code to look at is a methods called ‘ManageOrders’. After some testing code this has had the following code in it. if (Move_SL_1 &gt; 0) OrderModify(OrderTicket(), OrderOpenPrice(), OrderOpenPrice() + Move_SL_1 * Point, OrderTakeProfit(), 0, CLR_NONE); this I changed to if (Move_SL_1 &gt; 0 &amp;&amp; OrderOpenPrice() + Move_SL_1 * Point &gt; OrderStopLoss()) { OrderModify(OrderTicket(), OrderOpenPrice(), OrderOpenPrice() + Move_SL_1 * Point, OrderTakeProfit(), 0, CLR_NONE); } I did the same for Move_SL_2 through _3 and similar for the Sell condition but checked it was always ‘less than “&lt;”’ as opposed to ‘greater then “&gt;”’ This improved the situation but the StopLoss was still not staying in place all the time and would still revert back to other odd positions. I searched the code for OrderModify and found two other places where the StopLoss is modified. I put similar logic in those also. They were in the start method for setting BreakEven and TrailingStop stoploss. I changed the code as here OrderModify(OrderTicket(),OrderOpenPrice(), PotentialStopLoss, OrderTakeProfit(), 0, MediumSeaGreen); To if(PotentialStopLoss &gt; OrderStopLoss()) OrderModify(OrderTicket(),OrderOpenPrice(), PotentialStopLoss, OrderTakeProfit(), 0, MediumSeaGreen); with the “&gt;” replaced with “&lt;” for the sell order. Basically a stoploss should only move towards the TakeProfit point or stay where it is. This improved the situation greatly but I also noticed that on some orders the moving Stoploss was still not working correctly. On closer examination I discovered this was happening when and after two orders had been live at the same time. I looked again at the code. ManageOrders has a logical error in it. It has the following code for (int i=0;i&lt;OrdersTotal();i++) { if(OrderType() == OP_BUY &amp;&amp; OrderSymbol() == Symbol() &amp;&amp; OrderMagicNumber() == MagicNumber) { . . Etc. The problem is, although all the orders are gone through in the for loop, no order is ever selected so the rest of the logic always runs on whatever the last order to be selected by other code was. And it does it for the number of orders active BUT always on the same order. To correct this I’ve placed an OrderSelect after the loop ‘for’ line. This leaves only one logical error left that I know of. The conditional test of (OrderLots() == Lots). I can see why it’s there. The amount of Lots to sell at Pips_Target 2, 3 &amp; 4 would be difficult to work out if you don’t know what the original lot size was so these are worked out when the Lot Size is worked out. I’m sure there could be a better way of doing this,( some king of MultiDimension Array for all possible LotSizes) but at 01:30 am I’m not up to it. However there is no reason why the StopLoss position can not be set and this would be better than doing nothing so I’m moving this test to just before the OrderClose statement. I’ll test these and let you know how it goes. I hope you take these comments in the spirit they're meant, and if I’ve mistakenly assumed something I should not please let me know. Happy Trading &amp; Coding
+
+--- 帖子 #191 ---
+It would have to be coded, so the answer is 'YES' if you can specify it some one can code it. I'd like to see the TakeProfit and StopLoss worked out from the Points 1, 2, and 3 then the TakeLoss and StopLoss parameters used as a precentage factor on these. Don't know if it will make it better but it woukld be nice to try. I'm sure the gap betwean 1,2 and 2,3 should be able to tell you something about the reletive strength of the pattern but I'm not sure what yet. Also using points 1, 2 and 3 to work out StopLoss and TakeProfit are more likly to give an EA that will work well across all timeframes I would have thought.
+
+--- 帖子 #192 ---
+No the EA will work on any timeframe. As long as the 123 pattern develops, the EA will pick it up. To use the set file, you must download the zip file in the first post. Unzip the file (should be a .set file). Then when the EA is loaded on the chart or in the strategy tester of MT4, load the set file and all the presets will be loaded. Any problems, please consult the MT4 help file.
+
+--- 帖子 #193 ---
+everything is in the first 3 posts...please read again...
+
+--- 帖子 #194 ---
+I have made suggestions in post #3 as to ideas on how to improve this EA(please re-read them). I have been so busy with the work and the birth of my 2nd child, that I haven't had time to test the EA further. See if you can figure any relationship between the 3 points.
+
+--- 帖子 #195 ---
+Guys &amp; Gals, Thanks for all your suggestions and questions. Unfortunately several have been repeated a few times as well as answered in the first 3 posts. I have had lots of periods of successful tests with the EA, but nothing longterm that wasn't due to severe curvefitting. (yes, I tried various combinations of TP and SL as well as partial profits and trailing stops - and yes this took a long time as the EA is CPU intensive.) I still believe the 123 setup does have an edge, but there has to be more input than just simply a swing low, then a swing high, then a higher low, and then a higher high for a long entry (and of course opposite for a short entry). I think one of the better ideas are incoporating trendline bounces and support&amp;resistance bounces and targets. If anyone is knowledgeable in this area, please contact me. If you have ideas, send me a PM/email after you have paper traded your idea. Thanks, Optojay
+
+--- 帖子 #196 ---
+I think you are correct, The pattern by its self is not reliable. I've changed your program to Set StopLoss and TakeProfit in accordance with the Documentation on 123 pattern. I've made other changes to the program to accommodate this change. The only problem I have is the Lot size increases too quickly risking too much of the account than I would be happy with. When you take into consideration that the original Lot size is worked out on a fixed StopLoss of 20 points and some of the StopLoss points that I'm setting using the Point 1 (your point3 in the program) are a lot bigger than that, it's not surprising. When I ran this over a ten year backtest for GBP USD from 1978 with a $10,000 start account it ended with $178,000. (not earth shattering but definitely earth moving). I’ve tried running it over H4, H1, M30, M15, M5 and M1 but that was disappointing. However, on analysing the results I seem to have uncovered something that maybe interesting. I have not fully checked this out yet but it would seem to make sense. If we take the normal 1 2 3 pattern for a BUY with a Low High Low, If we check the gradient between the first Low and the one before (position -1 in the series -1, 0, 1, 2, 3). When this is negative (going down) we seem more likely to get a winning trade, when it is positive (going up) we seem more likely to get a losing trade. The same appears to be true for SELL but the other way round (point -1 to 1 positive likely good short trade, negative likely bad short trade. In short if the gradient is against the direction of the trade it seems more likely to be a successful trade. If you think about it this makes sense. It is a reversal signal after all. I’ve also noticed that the pattern does not perform so well when a pair is trading sideways. I’m looking at an ADX indicator to see what level gives good and bad trades but have not done enough on this yet to comment. Happy Trading &amp; coding
+
+--- 帖子 #197 ---
+In my use of this remarkable EA I have found only a few things to be a problem. Which currency pairs to trade and when to trade them. USD unemployment news events and certain GBP news events can literally turn the whole market upside down and then all hell breaks loose. So developing the trading psychology is my focus at the moment because I believe this is what prevents most people from making serious money on the Foreign Exchange. I mean... I have turned a $25,000 demo into $107,000 in five days and that's not the only time. This EA spits out sometimes 50 trades at a time! It launches! If it's possible can someone please add "avoid news events", no trade for a certain period in minutes before and after news events. At least a "trade Friday-true/false" parameter would be helpful. I've added the news events indicator and the Opto 123 I use because I've found it to work perfectly every single time. To the person who can do this I say... may your camel spit nothing but gold... Tomislav
+
+--- 帖子 #198 ---
+If someone produces a working version of Opto 123 that can avoid news events and have the option of not trading on Fridays then I SHALL reveal my 30 minute chart settings for EUR/USD, AUD/USD, USD/JPY, USD/CHF, NZD/JPY, GBP/USD that work 100% of the time except for trades opening just before news events, slow ranging markets and sudden market reversals (news events!). A few months ago I turned a $10,000 demo into $25,000+ on NFP Friday with 4 currency pairs in 3 hours. I'm not joking and no B.S here. I am just SICK of coming home and seeing that trades have opened just before before a major news event and then losing on my real money account. As you may have realised: you can't afford to lose with Opto 123. Losing too often with this EA will devastate one's account. Let everyone make money I say. If no-one here can do it then I'll just have to find a programmer who can. Best Regards, Tom P.S Main point is huge profits can be made from news event movements. But not from trades opening just before news events.
+
+--- 帖子 #199 ---
+Opto123 EA v1.2 has a news filter and the option to stop trading after a user defined hour of Friday. This hour is in hhmm format and setting it to blank disables FridayStopTradingHour function.
+
+--- 帖子 #200 ---
+Yeah give and take and offering some tasty bait seems to be the quickest way to get things done on this planet. 30 minute charts leave ExtDeviation and ExtBackstep on 1. EUR/USD ExtDepth 26-18 AUD/USD 18-13 USD/JPY 22-18 GBP/USD 26-18 NZD/JPY 18 USD/CHF 26-18 Take profit 25-45+ and stop loss 60-90 pips as an approximate guide.
+
+--- 帖子 #201 ---
+How do I get the news filter to work properly? I've noticed that the news filter get's it's info from Forex Factory. I live in Australia. Is there something I need to set up like time zones or something with the Forex Factory web site?
+
+--- 帖子 #202 ---
+News filter should work properly regardless of the time zone.
+
+--- 帖子 #203 ---
+Ok then I've set my news filter to avoid only high impact news events. Even with it set at 10 minutes before and 10 minutes after it is always showing that "we are in news perioid" even though we're not. How come? It's showing it right now at 23:00 GMT Sunday night and I'm pretty sure there are no news events now. I've even adjusted the forex calendar time to match my computer time. Does the News events filter in Opto 123 V1.2 work for you?
+
+--- 帖子 #204 ---
+It works for me with high impact news. Use the attached FFCal and allow DLL imports.
+
+--- 帖子 #205 ---
+That one works perfectly. Thanks for your tenacious assistance.
+
+--- 帖子 #206 ---
+Sorry maybe stupid guestion ,but to where we put the FFCal? thanks
+
+--- 帖子 #207 ---
+You know what would be a great solution for the currency pairs that like to go against the zig-zag? A reverse trade option. Then Opto 123 V1.2 would be an absolute monster of an EA. Anyone able to add this and willing to share? FFCAl goes in the indicators folder in response to the last question. Best Regards, Tom
+
+--- 帖子 #208 ---
+I shall add the reverse signal option and release a new EA version in a few days.
+
+--- 帖子 #209 ---
+Ok, glad you posted this, as I'm making my way through the thread. I was getting worried from all the people talking about DD, margin calls etc. I just completed a 3 yr. back test on EUR/USD daily with settings out of the box 1k-5K straight up
+
+--- 帖子 #210 ---
+Hi All 123 pattern is very good strategy but be careful because all of 123 patterns don't go to profit. also sometimes there are pattern into patterns. it means you have 123 pattern and inside this, you can find a smaller 123 pattern. In my idea, the best time frame for 123 pattern is H4. What is your idea?
+
+--- 帖子 #211 ---
+Thanks XUX99! Looking forward to it.
+
+--- 帖子 #212 ---
+Hi my friend I have other questions, Can you tell me when did you start working with this method (I mean 1-2-3)? What currencies do you suggest for this method? What is your favorite time frame for 1-2-3 strategy? and how many pips have you received yet ? Thanks a lot for your attention.
+
+--- 帖子 #213 ---
+Yes there are times when the zig zag does and doesn't work. Depends on the size of the zig zag and market conditions. A larger zig zag has more inertia behind it and will normally go into profit unless there is ranging... (this is where a reverse trade will work!) I've tested a lot of currencies and there are currency pairs that consistently go against the zig zag so a trade in the opposite direction will go into profit and this will also allow for a smaller stop loss. Talk more about this and the settings when the Opto 123 with reverse trade option arrives... awesome!
+
+--- 帖子 #214 ---
+Hi everybody, I want thankfully everybody who impruve this thread and help to develope the core idea. I was study your files and demo the last EAs version...so this is what I find. I do not know if I did well or did bad....but only did what you people said here before and what you see is what I get. Plis, correct if I can do it better...instead of that...Im happy whit the results, Tomislav, can you tell me what is the better preset to config the EA? Thank you and thank you all in advance. Best regards. Popeye
+
+--- 帖子 #215 ---
+New features of Opto123 EA v1.3. MaxOrders: Maximum allowed number of open orders of the same direction. ReverseSignals: A long signal opens a short order and vice versa. LongColour: Arrow colour of long orders and lines. ShortColour: Arrow colour of short orders and lines. Pip values should not be multiplied by 10 for 5 digits brokers.
+
+--- 帖子 #216 ---
+I would first of all like to thank XUX99 for an unbelievable effort! In response to the other questions I believe that there are things you have to work out for yourself like SL,TP levels and chart TFs. I've learned the hard way... on my own and still am learning and am still striving to make a consistent profit on the Forex Market. The beautiful thing about the zig zag strategy is that it's visual and you can see what is happening right before your eyes. No invisible indicators. Everyone has a trading style and that's up to the individual. I prefer the 30min,1 hr and 15min charts because they indicate what is happening right now. GBP/CHF, GBP/AUD, GBP/CAD, AUD/CAD, GBP/JPY, EUR/JPY, EUR/CAD love to go against the zig zag. Try 18-13 ExtDepth on 30 min chart. See for your self. I normally use 18. CHF/JPY does go with the zig zag but loves to spend a lot of time in draw down (and has more drawdown than profit) so this is where a reverse trade will work. Try 26-18-13 Ext Depth on 30 min chart or even 26-18 on a 15 min chart. TP &amp; SL is up to you. Late last week a trade on GBP/AUD went into 100 pip drawdown before it went into a 350+ pip profit. A lot of the time it wont go into profit so I'd rather capitalise on the drawdown with a reverse trade of 50+ pips to be safe and a stop loss of 30 or so pips. AUD/USD and AUD/JPY are consistent winners with the normal zig zag trade 18 Ext Depth on 30 min chart. I'd prefer to trade EUR/USD all the time cause of the low spread but it just get's too messy and ranges and I'm no expert analyst! Try a reverse trade. Same goes with USD/CHF. One day it's Doctor Jeckyll and then it turns into Mr. Hyde after a few major US news events. USD/CAD shoots through like a rocket at times but this is another one where the reverse trade will work wonders but you have to watch the market. NZD/JPY was a consistent winner for a long time with the zig zag but only recently has become a culprit where the reverse trade will love this one. But then the market can change after a news event or two so no guarantees. I've attached a file that might be of interest for those of you who haven't seen it. I would like to use it all the time but because I live in Australia it would entail me getting up at 2.00am so it's not practical at this time. Good luck with Opto V1.3 and thanks again XUX99 and Mr. Optojay of course.
+
+--- 帖子 #217 ---
+Wow, guys. This thread has really been busy since I last checked last. Glad to see some coding help. Thank you to all who have contributed. I have been looking for someone to add additional ideas to the original EA and it looks like some have already been added! I will have to put a renewed effort into developing this further. In fact, just the other day I was looking for some code to "stop and reverse" similar to the PowerSM EA here: http://www.forexfactory.com/showthread.php?t=75394 Seems like something similar to this has been implemented in version 1.3. Cheers, Jay
+
+--- 帖子 #218 ---
+Unfortunately, v1.3 isn't triggering any trades on backtesting...and there aren't any error messages in the journal to figure out why. This version will run without FFCal present, right? (ie. I assume using FFCal is optional) Is it possible to implement a "stop and reverse" function when a SL is reached? Thanks!
+
+--- 帖子 #219 ---
+Unfortunately it's not opening any trades in forward testing for me. Loaded v1.3 last night, and nothing. I have FFCal on charts too.
+
+--- 帖子 #220 ---
+Once it wasn't working for me because I left ECN Broker parameter on false. Can't think of anything else. It works perfectly... there's no doubt.
+
+--- 帖子 #221 ---
+I use FXDD which I think is not ECN, right? So, if should be false, right? I changed Max Orders from 0 to 10. I am just trying to figure out what I did wrong. I have the same magic number on the EURUSD and USDJPY. Are there any other pairs that I could add? Please advise. Thanks. misterpipster
+
+--- 帖子 #222 ---
+If forgot, thank you for your response. I also have the ea on 4 hr. charts. Is this the best or is the daily the best? I guess we are all trying to find out what the optimal settings and timeframes to use. Maybe someone can put up there paramenters or sets. Please advise. I am really looking forward to getting this thing going. Thanks again. misterpipster
+
+--- 帖子 #223 ---
+I've just read that FXDD is an ECN and market maker so whatever is applicable for your account is applicable I guess. The EA works perfectly so either ECN true or false shall work. STP brokers require ECN true... Opto 1.3 works with or without the FFCAL indicator. If you'd like to use the indicator you just need to drop it into the indicator folder and you don't even need to attach it to your chart: it reads the indicator regardless. The other day I had a sell with USD/JPY (18 EXTDEPTH 30 min chart) that went into profit only 20pips because it had come to the end of the downward trend. Does anyone know of an indicator that best recognises the nearing of the end of an upward or downward trend without too much lag? This is a really important question I believe. Support, resistance, currency strength, oversold, overbought? I tried looking at a few but most of them don't seem to make sense or they tell you way after the fact which is useless (lagging). Optojay I don't know about the back-testing because I never backtest... just forward testing for me (a bit lazy I guess).
+
+--- 帖子 #224 ---
+Hi Tomislav, I still haven't been able to get into any trades with my ea yet. Have you gotten into any today? If you are, then something is wrong with my settings. Please advise. Thanks. Misterpipster
+
+--- 帖子 #225 ---
+hello guys i noticed after put this EA on chart, it looks for a long or short entry and it is diferent in each time frame, so my question is: for this EA, what is the best time frame?
+
+--- 帖子 #226 ---
+Opto123 v1.4 has many new features as requested by the members of this thread.
+
+--- 帖子 #227 ---
+the higher TF, less trades... so safer
+
+--- 帖子 #228 ---
+Awesome work, Xux99! Most of my suggestions in post#3 have now been implemented into the EA and are ready for testing. Much appreciated.
+
+--- 帖子 #229 ---
+I've just come back from a working trip and have come back after 5 days to find this. Bloody excellent! Heaps to learn I think. I might have a question or two in the near future but I'd just like to say who is this guy XUX99? What an absolute legend. Oh and I've had only AUD/USD and AUD/JPY left to trade without my presence (now this takes courage). AUD/JPY 4 successful trades. I had left it to open a max of 2 trades per hit. AUD/USD has gone a bit squiggly and has not made any trades this week. I've posted the settings in a previous page (14). I trust these two currencies not because I'm Australian but because they respect the zig zag a lot more. I've loaded the EA onto a 30 min chart but I can't seem to get the zig zag indicator lines to show up. XUX99 would it be possible to supply a simple set file that enables the display of the indicator lines so I can start to understand how the new parameters work? Or even to let me know which parameters are currently inhibiting the display of the vertical indicator lines? Thanks again XUX99 and Ronald!
+
+--- 帖子 #230 ---
+I have fixed a bug that triggered additional invalid signals, please download the EA again.
+
+--- 帖子 #231 ---
+Instead of the vertical lines indicating points 1,2 and 3, the new version now draws a line connecting points 1 and 2, a line connecting points 2 and 3 and a breakout horizontal line. They should appear with default settings.
+
+--- 帖子 #232 ---
+Xux, got the backtester to work now. The logic isn't quite right - it's missing some easily identifiable 123 setups and entering incorrectly elsewhere. Even the original version of Opto123 EA missed some occassionally, but was catching some that v1.4 missed. This makes me want to re-think if there is a better way than the ZigZag indicator to have the EA "read the charts for the setup"...
+
+--- 帖子 #233 ---
+Can anyone tell me where I can download the latest version and it's setting? Thanks
+
+--- 帖子 #234 ---
+From my backtests I didn't see any zigzag based 123 setups that the EA didn't catch. Fractals could be an alternative way to identify 123 formations.
+
+--- 帖子 #235 ---
+I'll post some screenshots later when I get home from work. I have looked at Fractals as well, but they seem to repaint badly. So, I stuck to the ZigZag. However, it still misses some valid entries. I wonder if there is a better way to "hardcode" the raw price action of the 123setup and Ross Hooks so that all of them get traded. It's funny how easy it is to spot with the human eye, but so hard to get a computer to recognize it!
+
+--- 帖子 #236 ---
+OK, Xux99. Please find attached a zip file with examples of some problematic trades and a .doc file. Please email me to discuss further. Thanks!
+
+--- 帖子 #237 ---
+backtested this version but it doesnt do any trade.
+
+--- 帖子 #238 ---
+Hello Optojay, please could you attach (or send me) original version of this EA from Ronald Raygun without matrixebiz´s modifications (probably version 1.0)? Thank you very much.
+
+--- 帖子 #239 ---
+Hi XUX99 I'm very interested in the Min/Max12distance and Min/max23distance parameters. I've never done this before so what tool or method would you or anyone use to measure appropriate lengths? Is it a guessing game or do you just visually estimate. I'm guessing using method one (atr) would be useful. Can I leave buffer type on 0 while using method 1 on min/max12 distance types? I hope I'm making sense. When I place my pointer on the zig zag lines it gives price value for each point. I suppose this is one way to work out the lengths. How would you work out the appropriate lengths in an ATR value? I'm out of my depth here I suspect. Can you point me in the right direction so I can find out more about all of this? Also I placed Opto 1.4 with USD/CAD on live account with money management off and lots set to 0.0. It shouldn't make a trade. It then placed one 0.01 trade and then drew another line from point 3 to the entry point. Because I had placed trend line exit to true it then drew another blue trend line from point 2 to entry point (or there abouts). The trade because it was in draw-down closed for a small loss as soon as it hit the suspect trend line and then it opened another trade which I then closed for a small loss. If the suspect trend line didn't interfere the trade would have won around 30 pips. Is the appearance of the second blue trend line supposed to happen or was it a bug? This was with real money and an accidental discovery. The previous Opto's would not place a trade with MM turned off and lots set to 0.0. Please look into this XUX99. Tom
+
+--- 帖子 #240 ---
+Hi XUX99 I'm very interested in the Min/Max12distance and Min/max23distance parameters. I've never done this before so what tool or method would you or anyone use to measure appropriate lengths? Is it a guessing game or do you just visually estimate. I'm guessing using method one (atr) would be useful. The best values and types for Min/Max12distance and Min/max23distance can only be found by optimization for each pair and timeframe. Can I leave buffer type on 0 while using method 1 on min/max12 distance types? I hope I'm making sense. Yes, each type can be differrent. When I place my pointer on the zig zag lines it gives price value for each point. I suppose this is one way to work out the lengths. How would you work out the appropriate lengths in an ATR value? I'm out of my depth here I suspect. Can you point me in the right direction so I can find out more about all of this? You can attach ATR indicator on the chart to show you ATR values. Also I placed Opto 1.4 with USD/CAD on live account with money management off and lots set to 0.0. It shouldn't make a trade. The EA automatically corrects invalid lot values. It then placed one 0.01 trade and then drew another line from point 3 to the entry point. Because I had placed trend line exit to true it then drew another blue trend line from point 2 to entry point (or there abouts). The trade because it was in draw-down closed for a small loss as soon as it hit the suspect trend line and then it opened another trade which I then closed for a small loss. If the suspect trend line didn't interfere the trade would have won around 30 pips. Is the appearance of the second blue trend line supposed to happen or was it a bug? For each open trade, a seperate trendline is drawn. Can you post a screenshot of this case?
+
+--- 帖子 #241 ---
+I did think of that after I deleted the chart. It was a selling entry point. It looked like a buy position became active at the same (without a buy trade open) although I have turned hedging off. I applied ATR indicator to chart on NZD/JPY 30 min. It states ATR(14) 0.0939 on the left and on the right it states 0.2513 high and 0.0743 low. I have three values and four parameters to fill. Which value goes where? I feel like I'm in kindergarten again lol. My original zig zag settings are 18-1-1 ExtDepth etc... Min12distance: Max12distance: Min23distance: Max23distance:
+
+--- 帖子 #242 ---
+ATR changes in real time and a value of 0.0939 on the left, means about 9.39 pips. The distance is calculated by dividing the approximate desired pips distance with ATR. If distance should be about 50 pips then the ATR multiplier is 50/9.39=5.32. Of course, in a more volatile period, ATR increases and cosequently the distance also increases, making it adaptable to market behaviour. Below is an example of ATR based values: Min12Distance 5.32 Min12DistanceType 1 Max12Distance 8 Max12DistanceType 1 Min23Distance 3 Min23DistanceType 1 Max23Distance 6 Max23DistanceType 1
+
+--- 帖子 #243 ---
+Awesome XUX99 for the generous help. I've been testing Opto 1.4 and so far I've realised that Opto 1.4 only places a single trade at a time. The previous versions pumped out tens and tens of trades when permitted but Opto 1.4 only puts out a single trade even though I've set the max trades to five. The pumping out of many trades is what gave the original Opto's their appeal. I've also attached a gif of a trade example where the trade had closed out well before the TP and I wasn't home when it happened so I'm at a loss as to why. I've listed the parameters that I've changed on the GBP/USD chart. The trade 0.1 lot closed at -$1.48 trend line exit-true max orders-5 (only one order placed) take profit-45 break even-40 lock profit-20 hedge-true (default-this might have been the problem with the USD/CAD trade mentioned before). Lots-0.1 Money management-off No stop loss was set just trend line exit I apologise in advance if I've just done something silly as this is a rather sophisticated EA but I know for sure that it isn't spitting out the trades like the older version. Is there a setting I can adjust for that. It pains me a little to keep asking for help but I realise that it's for the good of this EA and the thread. Tom.
+
+--- 帖子 #244 ---
+I've been testing Opto 1.4 and so far I've realised that Opto 1.4 only places a single trade at a time. The previous versions pumped out tens and tens of trades when permitted but Opto 1.4 only puts out a single trade even though I've set the max trades to five. Only one trade per pattern is opened. An additional trade can be opened when the next 123 pattern is formed. I've also attached a gif of a trade example where the trade had closed out well before the TP and I wasn't home when it happened so I'm at a loss as to why. I can't find a reason, you can use the Screenshots option for help. I shall soon post a new version
+
+--- 帖子 #245 ---
+I hope this helps...
+
+--- 帖子 #246 ---
+How would this work if I only wanted to start out on 1 currency (The E/U)? My manual trading gives me about 3-5 signals a month. Does that sound about right?
+
+--- 帖子 #247 ---
+I personally find it amazing (not good amazing) how much this market can change in a short period of time. The zig zag settings I posted previously do still work but no where near as well as they did a few months ago. The zig zag patterns on a lot of the currencies are not being adhered to. It looks as though the larger TF's are the better bet for consistency (told you so some would say). It's a challenging business the "Old" Forex.
+
+--- 帖子 #248 ---
+Opto123 v1.42 has minor improvements in trading logic.
+
+--- 帖子 #249 ---
+Nice work with Opto so far xux99 What are the minor improvements with 1.42 ? Top effort!
+
+--- 帖子 #250 ---
+Long and short signals can be simultanuously valid. The number of trades per 123 pattern is now user defined.
+
+--- 帖子 #251 ---
+Thanks for the details xux99
+
+--- 帖子 #252 ---
+Hello Optojay, please could you attach (or send me) original version of this EA from Ronald Raygun without matrixebiz´s modifications (probably version 1.0)? Thank you very much.
+
+--- 帖子 #253 ---
+Maya, Here is the original version.
+
+--- 帖子 #254 ---
+Many thanks!
+
+--- 帖子 #255 ---
+The EA is working nicely but there is something odd happening. The SL is not correctly calculated, and it seems that the trailing stop is also not working well. Please see attached. Thanks again for the time invested improving this great EA. Aimak
+
+--- 帖子 #256 ---
+VisibleSL and VisibleTP are multipliers of the hidden values, not pips, so you shouldn't set them to so big numbers. According to the user guide "The stop loss is relative to point 1 or point 3 levels". You have set Point1or3SL to 1 and to StopLoss to 70. This means 70 pips are added/subtracted to Point 1 level. I suppose you want to place stop loss at Point 1 level exactly, in this case set StopLoss to 0. What is the trailing stop problem?
+
+--- 帖子 #257 ---
+Hi Xux can you please explain the SL i set it on SL1 or 3 to 3 Thinking that a retracement to 3 should trigger SL but on 2 occasions it overshoots the SL Apart from the above the ea is great Thank you Gert
+
+--- 帖子 #258 ---
+Make sure StopLoss is 0 as it is added to Point 3 stop loss level.
+
+--- 帖子 #259 ---
+Stoploss is set to 0 I have now set TrendlineExit to true to see what happens
+
+--- 帖子 #260 ---
+I have read and followed this thread with great interest. Except. . .... Opto123 EA v1.4 and v1.4.2 that are posted in the zip file extract as .exe and behaves like a virus when I run it thus getting quarantined by Norton Antivirus and deleted. So. . .. why are the latest versions .exe, not even .ex4 which would make sense? Can someone post the .mq4 or the .ex4 version 1.4.2 please and thank you.
+
+--- 帖子 #261 ---
+I get this error message in the experts tab.... FFCal cannot delete file C rogram FilesInstaTrader Opto123v.1.42files12/27/2010-USDJPY1440-FFCCal.xml
+
+--- 帖子 #262 ---
+Newcomer testing opto132 v1.42 on 4H charts - have got my mind round 123 trading and now using demo account for ea and live account to manually trade. Many thanks for manuals and installation software. Will be back and have some questions once I have some experience under my belt.
+
+--- 帖子 #263 ---
+Well certainly chose a good week to test Opto123 v1.42 on 4H timeframe with the EUR moves. Watched trades on demo account and cherry picked on live account - demo account achieved a 50% return but must remember it was a very special week with some unexpected long term reversals. Only took trades on my live account where my manual trading rules were confirmed. Learnt alot, especially from looking at the losing trades on some of the less traded pairs. Now updating my probability analysis to fine tune the minimum and maximum settings for the 4H charts. I think I should examine the 1H data on the basis of dropping down one TF to quantify movements - would you agree? Has anyone any data setup for this anaylsis?
+
+--- 帖子 #264 ---
+i have been trying unsuccessfully to program this strategy for scalping on smaller TFs. i am glad to have come across this thread. thanks for the hard work. i like the idea because it is very basic and the losing trades can be reduced by adding filters.
+
+--- 帖子 #265 ---
+thanks again. i've just went through the code and everything is organized and logical. my coding skills degraded over time and i need to practice again.
+
+--- 帖子 #266 ---
+One of the reasons I love this EA is because of it's ability to really make great profit if you allow it to open multiple trades. I've left this EA because it's become clear that the zig zag pattern has become unreliable for consistent profits. When the price is pushing firmly it will go through the zig zag and profit but when the price is running out of steam it'll then go the other way and usually hit the stop. I've used larger ext depth settings to try and catch a larger zig zag shape like 18-1-1 on 30mins and 12-1-1 on 1HR. A lot of the times it really helps. I honestly believe that a high/low or RSI filter (or both but I think RSI would really benefit the most) to control entry points is something worth considering as an addition to this excellent EA. Then it would be more reliable using smaller zig zags like 12-1-1 on 15 minute charts so it'll trade most days. I think I might have a point but if any one has something to add that would be great. Tom P.S Yes I think an R.S.I filter with adjustable periods, shifts, RSI up and down values would work great.
+
+--- 帖子 #267 ---
+so this 123 ea is no longer used or working?
+
+--- 帖子 #268 ---
+Very nice. Thanks, Can you let me know when we can enter before the breakout of 2. Is there any indicator pair which can help us to entry early in this pattern Because at time we can see that same pattern in bigger time frame quite visible but due to non proper strategy, we are unable to trade it successfully &amp; got stopped even being right most of the time. If any body has anything, lets help each other. thanks
+
+--- 帖子 #269 ---
+Opto123 v1.5 has an option to use default ZigZag, MA based ZigZag or internally calculated ZigZag for 123 pattern.
+
+--- 帖子 #270 ---
+Nice one!
+
+--- 帖子 #271 ---
+When it comes to the truth I suppose I've given up on this EA quite a while ago. It works great in certain market conditions but then it usually leads to disappointment. With all the different available settings I suppose there is a possibility of achieving some good settings but it takes time and and hours of testing and then even that usually leads to disappointment. At the end of the day a typical EA of this sort will put you behind once a few stops are hit and you'll probably experience a up/down/up/down type of growth pattern... you might as well sell potatoes or mangoes at your local market. Personally I'd use a wide zig zag like 12 or 18 on 1 hr TF during afternoon news time (using one or two of the majors) set it to max open trades, no stop loss and let it rip. Probably not worth the effort for most. That's Forex reality
+
+--- 帖子 #272 ---
+I think "trading session" didn't work, I try to change 00001200 didn'work. I want to set from 22.00-02.00, so I set it to TradingSessions1 = 00000100 and TradingSessions2 = 22002400 didn't too Somebody help me please...
+
+--- 帖子 #273 ---
+hi I am from Germany and the EA have found with you and find the class. until now I have always worked with the 1.1 version. can one tell a couple of times settings for version 1.5 me. it should run on a M15 AUD / USD. I see there not yet really. Thank you
+
+--- 帖子 #274 ---
+I know this thread hasn't been posted to for a while but I have been testing out the 123 pattern and getting some good test results. The latest version of opto123 is ver 1.5 and with all the changes to mt4 this wouldn't compile but xux99 has been a great help and pointed me in the right direction. The compiled version for the latest MT4 is here for those that want to test it.
+
+--- 帖子 #275 ---
+would be amasing if you could describe the functions of this ea
+
+--- 帖子 #276 ---
+Just go to post 269 of this thread and you will find the user guide in pdf format that you can download. This describes all the settings.
+
+--- 帖子 #277 ---
+@Dalek: Do you have the compied versions of the two indis as well ? The two ones in the folder in post 269 dont work, they are to old for the newer MT4 build versions 6xx/7xx ...
+
+--- 帖子 #278 ---
+I have attached a compiled version of the MA based ZigZag. The FFCal was superseded due to FF date format changes, I suggest that you go to this thread and maybe download the latest version from there:- http://www.forexfactory.com/showthread.php?t=250544 Cheers
+
+--- 帖子 #279 ---
+Ok thx buddy ! So plz add your setfile you used getting good results ... this EA has a lot of params, it would be good to have at first a look what's reasonable to put in. And another request: could you plz add the compiled ex-file FFcal-file you have in your MT4 platform ? That would be easier, in that hanover thread couldn't find any fresh, actual file for this indi.
+
+--- 帖子 #280 ---
+The FFcal indicator was written by Derk Wehler, not me, and you'll find it in this thread .
+
+--- 帖子 #281 ---
+I have attached a setfile I am using for testing. Regarding FFcal, I do not use it but follow hanovers suggestion above and you should be able to find it. Attached File(s) optosettings.zip 2 KB | 1,544 downloads
+
+--- 帖子 #282 ---
+Thank you
+
+--- 帖子 #283 ---
+I have attached an EURUSD strategy test on a 4 hour chart between 2011.01.04 &amp; 2013.04.05. About 26 months. The settings file is also attached. It trades about once every 2 - 3 weeks. Attached Image (click to enlarge)
+
+--- 帖子 #284 ---
+At which time frame ? And which pair(s) ?
+
+--- 帖子 #285 ---
+EURUSD 4H
+
+--- 帖子 #286 ---
+Thanks for the settings. They work well, however, I'm not sure I understand how to test this EA properly. I've tried different settings for AU and GU and the results are random, at best. Can you elaborate some more on the settings, please? I've read the PDF file but can't produce good results. Thanks
+
+--- 帖子 #287 ---
+Hello, Can some one tell me that why this EA is opening multiple trades, instead of only 1 trade at zig breakout, many trades are open simultaneously on the same candle as price is breaking last low/high multiple times on the same candle, please tell me any solution to resolve this problem, thanks for your support
+
+--- 帖子 #288 ---
+Hello, I can backtest the version but when i run the autotrader it doesn't open any order. Does anyone has an idea to solve this? tx
+
+--- 帖子 #289 ---
+does this ea show multiple 123s in the same direction or multiple timeframe 123s?
+
+--- 帖子 #290 ---
+There is a setting for multiple trades. Set TradesPerDirection = 1. Then only one trade will be opened.
+
+--- 帖子 #291 ---
+It could be many things, have a look in the journal and see if the order has been sent and if there is an error message.
+
+--- 帖子 #292 ---
+It does multiple 123's in the same direction if you allow it.
+
+--- 帖子 #293 ---
+o.k. thanks are you using the version in the first post
+
+--- 帖子 #294 ---
+I have a later version that compiles with the latest version of metatrader and a minor bug fix but it is pretty much the same. I have attached it here.
+
+--- 帖子 #295 ---
+Is there someone using this system on a live system? I use this on demo for a while and have good results. SO is it save to go live?
+
+--- 帖子 #296 ---
+How long did you use it on demo ? Which settings ? OOTB ? Any MyFXBook links available ?
+
+--- 帖子 #297 ---
+It is cool!))) I didn't see any drawing or some graph about your strategy. I know the sistem 123 but I will have to know your point of view.
+
+--- 帖子 #298 ---
+I noticed that EA rarely fails over 3 consecutive trades, which would be very interesting to integrate a small martiganla augmentar lot size after a loss. That if, placing a limit of Additions. EA using TF1min with SL=10 TP = 5 works well but with the handicap of RR2: 1 is difficult to leave positive. so the utilitzación a little serious martingale perfect. i need to add an option to multiply lot size after a lost trade (x1.5 or x2 or x3)? Example: multiplier (x2) Lot size: 0.1 TP = 5 SL = 10 If price reaches SL, following operation is performed with 0.2 lot, if price reaches SL again, the next operation is performed with 0.4 lots if this operation comes to TP, the next operation will be performed again with 0.1 lots finally put a limit mutipliers. could someone help me to add a little martingale in this EA? very thanks.
+
+--- 帖子 #299 ---
+Hi, Can you provide me the data set file for the above M1 TF and mentiontioned settings, also any kind of backtest or live reports?? Regards....
+
+--- 帖子 #300 ---
+Hi subbusuper!! I have not made any backtest, I have been testing for a week in TF M1, I have positive proof to the break point number 2 and with a very small TP for a week about 75% went to TP i 25% to SL TP = 5 SL = 10. Now I'm trying with 5M TF SL TP i = 10 = 10, results are not very promising. I think the system 123 can be profitable but it would be interesting after a defeat to double or triple the size of the lot. I operate only in London session.
+
+--- 帖子 #301 ---
+Hi Clipi, Thanks a lot for the reply and file. I saw you are trying hard to add martingale in this EA. Good work. Can you please inform me on what all pairs you applied this EA in London session? Keep it in touch brother. Thanks once again...
+
+--- 帖子 #302 ---
+Hi, I guess you attached the dataset file of 5M TF which you are testing at present. I wanted the dataset file of 1M TF in which you saw 75% positive result. Hope you changed only TP=10 from TP=5. Please do inform me about the pairs you tested 1M TF... Regards..
+
+--- 帖子 #303 ---
+yes only to change TP 5, all else equal. EA run in pairs with very little spread, I was running on EU and GU. EU best results.
+
+--- 帖子 #304 ---
+Set TradePerPattern to 1. That should do it.
+
+--- 帖子 #305 ---
+HI I just the opto123 v1.1.mq4, and when I tried to compile at mql4, the ea given this errors Does anybody has fixed this issues already, please share the opto 123 fixed. best regards miguel
+
+--- 帖子 #306 ---
+Try version 1.52 from post #294.
+
+--- 帖子 #307 ---
+I see that just now this EA has been downloaded 805 times since I posted it. It would be interesting to hear peoples experiences and especially if they are trading it on a live account. Please let other people know how you are going. Thanks.
+
+--- 帖子 #308 ---
+Do you mean the OPTO123? downloaded 8105 I am using it, it is great when the trend is good, but often get sucked it on a false breakout it would need a bit of tweaking to add some filters are you able to do it?
+
+--- 帖子 #309 ---
+I am talking about the latest version 1.52 which you can get from post #294.
+
+--- 帖子 #310 ---
+Latest is version 1.7
+
+--- 帖子 #311 ---
+Damn ! Version 1.52 ... Version 1.7 .... that's a bit confusing: so, where is this latest version
+
+--- 帖子 #312 ---
+Thanks Can you please upload this version
+
+--- 帖子 #313 ---
+Hi its great ea but would it be possible to have option to trade manually? i.e to have messagebox with yes or no option to execut the order so that the trader to decide to go for it or to wait fo another entry
+
+--- 帖子 #314 ---
+Hi everyone.. Have read all the post and am going to do some testing on the lower time frames m1-m15 as I hate to leave trades in over weekends or longer..Maybe someday that kind of trading will appeal to me .. I'll post my results ...thks all for most interesting work
+
+--- 帖子 #315 ---
+Hi all. Was doing some testing over the weekend here is one result...used ticks noweekend download from SQ tick downloader and set file see if others get same result ??
+
+--- 帖子 #316 ---
+I attached indicator to clear chart and don't see anything, just bars of new chart. What is wrong?
+
+--- 帖子 #317 ---
+What indicator did you attach?
+
+--- 帖子 #318 ---
+This one:
+
+--- 帖子 #319 ---
+Well that is an EA so of course it will do nothing.
+
+--- 帖子 #320 ---
+What TF is this EA most profitable on?
+
+--- 帖子 #257 ---
+OK. do you have indicator?
+
+--- 帖子 #258 ---
+What indicator?
+
+--- 帖子 #259 ---
+Perhaps he means an indi for the detection of 1-2-3 signals ? I know a variety of them exist in the inet .... but must be candid, never understood which of them is really good enough that means ist the best ? Any thoughts or proposals ?
+
+--- 帖子 #260 ---
+Has anyone can share their settings on every pair? I'm kinda slow on how to use this EA.. Thanks!
+
+--- 帖子 #261 ---
+anyone using this method,sounds good system,how about EA?
+
+--- 帖子 #262 ---
+Where is the Version 1.7 Also Can any one explain what is buffer and Distance Type And how to use Zigzag will default value is fine
+
+--- 帖子 #263 ---
+Dude ! Look the very low activity here - this thread is nearly dead .... like most others.
+
+--- 帖子 #264 ---
+Hello there, I have been looking around for this EA for a while. I want to use it on renko charts, with EMAs 12 &amp; 36. If the 12 EMA crosses above 36, a buy trade on the first 123 pattern and vice versa for shorts. Is it possible to limit the number of trades per crossover? Secondly I would like the EA to open the trade not when the price crosses point 2, but when the first bar closes after point 3. I appreciate any help. Please advice. Thank you so much once again for this EA.
+
+--- 帖子 #265 ---
+Wanman, did you ever backtest the 1-2-3 EA?
+
+--- 帖子 #266 ---
+Hello! For a long period I tested this EA and came to the conclusion that it is necessary to introduce small changes. xux99, If you see this message, please write and I will try to describe the changes that I spoke about. Hello! For a long period I tested this adviser and came to the conclusion that it is necessary to introduce small changes.
+
+--- 帖子 #267 ---
+I will try your EA , thanks
+
+--- 帖子 #268 ---
+Does anyone still use this EA? How were the results? I run Version 1.5 and EA cannot set TP and SL. Below is values I use: 1. PointSL: 3 (PointSL: The stop loss is relative to point 1, 2 or 3 levels plus spread for shorts. Set it to a number from 1 to 3. 0 disables this option.) 2. StopLoss: 0 (StopLoss: Value of stop loss.) 3. StopLossType: 0 (StopLossType: Type of stop loss. 0 means pips, 1 means ATR based and StopLoss value is a multiplier of ATR. The same types apply to the following settings as well.) 4. TakeProfit1:0 (TakeProfit1: Value of the first take profit. ) 5. TakeProfit1Type:0 (TakeProfit1Type: Type of the first take profit) Please help me. Thank you.
+
+--- 帖子 #269 ---
+https://qforex.win/ expert advisors Opto123 latest version of EA
+
+--- 帖子 #270 ---
+Thanks Jiayu will give this EA a go . Has anyone else tested the latest version above
+
+--- 帖子 #271 ---
+I put the indicator inside the indicators folder and the following message appeared below. you did not allow your expert to run live change your settings and apply the again.
+
+--- 帖子 #272 ---
+i can make ea based on your strategy for free, just PM me and provide the necesary indicators.
+
+
+===== 附件下载链接 =====
+

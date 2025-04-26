@@ -1,0 +1,1211 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hi, This EA is based on my " Trade the Slope System " and my Multi EMA system. link to TTS System http://www.forexfactory.com/showthread.php?t=52355 {see post 244 to download the EA} {sell only ea see post #311} THIS EA IS ONLY FOR EUR/USD. IT MIGHT WORK WITH OTHER PAIRS, BUT BOTH VARIABLES AND SETTINGS ARE OPTIMIZED FOR ONLY EUR/USD Setting for the EA (Only 15 Min or higher) Chart Eur/USD SL - False TS - 18 TP - 30 * I did not manuplated the historical data in in my video. You can use these settings from 2001-08-01 to 2008-03-16, to get the same results. Why these dates. I'll explain later. This is BETA V2.0. In my video i think i was running V4.5. ] New test video (if the video is not clear play in few min. Read more info on my youtube channel) Inserted Video Preview my EA on YouTube Link: Inserted Video Thanks, EMATRADER
+
+--- 帖子 #2 ---
+Any results from live trading?
+
+--- 帖子 #3 ---
+This is the same EA running on Extreme scalping mode on different pairs at once on 5M Chart.
+
+--- 帖子 #4 ---
+Is there any audio on the youtube video?....I could not hear a thing...
+
+--- 帖子 #5 ---
+That is pretty impressive. When can we start forward testing?
+
+--- 帖子 #6 ---
+.
+
+--- 帖子 #7 ---
+Hi EMATRADER, you might need to post the EA in order to have some programmer put his hands on it to make the modifications you need, thanks for sharing, looks like it might be the best EA
+
+--- 帖子 #8 ---
+I'd be more than happy to help in the programming aspect. Just PM me or post here. -Darren
+
+--- 帖子 #9 ---
+Here's my try for your code request, looks kind of simple really, is this what you're looking for? Your EA looking very promising, hope we can try it out soon! Inserted Code extern bool UseLotIncrement = true; extern double StartingSize = 1.0; extern double EndingSize = 10.0; extern double Lots = 1.0; int init() { Lots = StartingSize; } Put this at one line before your OrderSend: Inserted Code if (UseLotIncrement == true) { Lots = Lots + 0.1; if (Lots &gt; EndingSize) Lots = EndingSize; } Then just use the global variable Lots in your ordersends, such as: Inserted Code OrderSend(Symbol(),OP_BUY,Lots,Ask,Slippage,0,0,Comment,MAGIC,0,Green);
+
+--- 帖子 #10 ---
+Thanks for the codes. Its late night here. I'll try it tomorrow.
+
+--- 帖子 #11 ---
+Is there a link to test your Ea?
+
+--- 帖子 #12 ---
+Extremely impressive. Will you be posting the final version here? Rob
+
+--- 帖子 #13 ---
+Correct me if I'm wrong, but are we looking at 1-pip TPs at $10/pip? Is this even doable on a live account feed? Rob
+
+--- 帖子 #14 ---
+EMATrader, Do you intend to share this EA or not? It would be helpful to know your intentions so I know whether to keep monitoring your thread. It's like the guy winning the lottery coming up to you and saying "hey look at me" every single week. We can all see it's successful. Please let us all know. Thanks, fxtrader08
+
+--- 帖子 #15 ---
+I am interested in testing your ea but I cannot locate the slope direction indicator. Please help
+
+--- 帖子 #16 ---
+Like he (ematrader) said, its here:- http://www.forexfactory.com/showthread.php?t=52355 on first post
+
+--- 帖子 #17 ---
+your EA sounds amazing will you cher it with us???
+
+--- 帖子 #18 ---
+its not ea, its indicator
+
+--- 帖子 #19 ---
+He said he can't find the indicator...
+
+--- 帖子 #20 ---
+I just sent you a PM.
+
+--- 帖子 #21 ---
+Hi EmaTrader. Looks interesting. Is it your intention to provide the EA for others to test also, or are you just looking for programming assistance? Understand if you are planning to keep it to yourself, however it is a little confusing with your YouTube video calling it a Free Forex EA. As stated by someone else earlier, it would be good to know your intentions. Thanks.
+
+--- 帖子 #22 ---
+Hi ForexKiwi, I'm not planning to sell this EA. Anyone will be able to download this EA once it is completed. Though, it will be a protected copy; either dll or just protected ex4 file. I want to protect the system and prevent anyone making illigal copies and selling it online. (I'll make more money by trading this system rather than selling it Regards, EMATRADER
+
+--- 帖子 #23 ---
+Hi ematrader, I can't seem to open my PM inbox, appears that my junior member status prevents it! Alternatively you can email me at: x#b*t@hotmail.com (replace # with y, * with o), thanks!
+
+--- 帖子 #24 ---
+That's the real test of someone with a successful EA! When you can say I will make more from trading it than selling it.
+
+--- 帖子 #25 ---
+Thanks for sharing your findings and success with your EA. Keep us posted. I can't wait to test and hopefully use your EA.
+
+--- 帖子 #26 ---
+Go to my first post . New test video is uploaded on youtube. Thie video is still being processed. Video quality will improve it is processed. Read more info on my youtube channel. Test done on EUR/USD 15M Chart Test is done from 2001-2008 (ZERO TRADE LOSS) Turnned 50K to almost 1.37 Million MaxLot @ 50 incr.@ .1
+
+--- 帖子 #27 ---
+looks promising - looking forward to testing it
+
+--- 帖子 #28 ---
+Seriously...EPIC. When are you going to post it again?
+
+--- 帖子 #29 ---
+Look forward to doing a little forward testing on this one! Should be interesting..... You have my attention Ema..... :nerd:
+
+--- 帖子 #30 ---
+I have been running "Buy Only" and "Sell Only" EA on live account with very good results. I lost only one trade in appox. 5 months. However, i have been trading this system manually since more than 2 years. This system works perfectly without any complex indicators, calculations etc. Though, i had to stay in front my pc most of the day.
+
+--- 帖子 #31 ---
+Thanks for getting us all excited. We'd like to try it out. Anything we can do to help move the process along - even your trading method step by step so we can do it manually would be good. Cheers
+
+--- 帖子 #32 ---
+Doh!! Rules are in post 1. No worries - look forward to EA.
+
+--- 帖子 #33 ---
+Interesting. Signing up to your thread.
+
+--- 帖子 #34 ---
+I observe your EA with great enthusiasm, it’s very impressive. If you want to develope this EA, the only mode it’s to test and test it again. How could be test it if you don’t share it? I think you need some help from a professional programmers. Just check in this forum and you’ll find them. I hope that will be free, if it’s a profitable EA, it doesn’t make sense to sell it. You choose to share it in 01.01.2010, I hope that will be a lucky day for all of us. Best regards PS Soon I will share a program to manage the forex from home: a forex dashboard. The date 01.01.2010
+
+--- 帖子 #35 ---
+This EA is going to be fun to test!
+
+--- 帖子 #36 ---
+what is this? http://www.forexfactory.com/showpost...76&amp;postcount=6 Second 100$ profit trade from the top 13:35 Sell 1.00 1.50314 S/L 1.50245 ??????? T/P 1.50214 Profit ???? 100$? For the same mini-lot you got 100$ profit instead of $10 for 10 pips, funky stop loss, which supposed to be higher Then Entry Short Price? Photoshop got broke? No losses ha? Ever? Right.
+
+--- 帖子 #37 ---
+10 pips * 1 lot = 100$ ever heared of a thing called "trailing stop"?
+
+--- 帖子 #38 ---
+A VERY observant eye SkyzerFX! I'm curious to hear why this is???? Sure looks off to me as well! :nerd:
+
+--- 帖子 #39 ---
+SL was above the TP on a short what's wrong with that?
+
+--- 帖子 #40 ---
+I always trade from STD account. I never had Mini,Micro,Nano accounts... thats a waste of time for me. 10pip on std account is 100$. No SL in my system only TS. Photoshop? uhnnnn! I think u didn't watch the videos yet. Hope this helps.
+
+--- 帖子 #41 ---
+I don't see any error or fake in this..
+
+--- 帖子 #42 ---
+ummm ... maybe ur confused with this. System was running on 1pip TP untill the new news release. then i manually changed it to 10pip tp. maybe now its more clear. lem me know.
+
+--- 帖子 #43 ---
+ematrader how's the progress going did you find a solutio
+
+--- 帖子 #44 ---
+issues resolved lot increments Issues still not resolved (Lets go one by one) EA opens one trade at a time only. What i want is... If one long trade is open EA should keep opening trades (long and short) if new conditions are met according to the system regardless of number of long and short position are still open. (Thats how i trade this system manually) I'm using this code in my EA, but its not helping. extern int MaxTrades = 10; Its still open one trade at a time, and will not open another trade untill the open trade is closed. I'll miss many trade if i'm trading from bigger timeframe i'e: 1h and up.
+
+--- 帖子 #45 ---
+Interesting I see, should be an easy fix. Lucky compared to the trouble aicccia is having on the other thread! Very complex problem
+
+--- 帖子 #46 ---
+Ouch!! Maybe you need to watch better...where there are 10$ profits I see only 1 pip moves... Am I missing something?? It seems to me that you enter in every thread to destroy it..
+
+--- 帖子 #47 ---
+Please visit that link again http://www.forexfactory.com/showpost...76&amp;postcount=6 (my previous post) and check all of the $100 profit traders That exact one just an example... All of those trades are screw up.. Sell 1.00 1.50314 S/L 1.50245 T/P 1.50214 You saying that 1.50245 higher than 1.50314? And another one just below that one 2009 12.04 13.49 SELL 1.00 Price: 1.50008 SL:1.49940 TP:1.49908 Profit: $100 I'm Asking AGAIN: HOW come Stop Loss On the SHORT trade could be below SELL entry price itself??? P.S Chris_B, Thanks, yes, those where 1 pip trades, sorry, 5 digits got me there, you right... Then why would EA set TP at 1 pip? It's all strange..
+
+--- 帖子 #48 ---
+After going back and looking again....Everything looks right to me. I though that MT put a "T" inside the icon for your Buy/Sells if there was a trailing stop, however, it only has the "T" when that trade is still open. The history does not reflect a TS icon. Sry to jump to conclusions and can't wait to see the progression. I did notice you said you raised your TP around news. Any type (news) in particular or just med-high impact?
+
+--- 帖子 #49 ---
+Like stated before... a Trailing Stop And like stated before he raised to 10pip TP for news
+
+--- 帖子 #50 ---
+The stop is trailed...it's absolutely normal... When the stop is trailed it moves...so it can move also below sell entry...
+
+--- 帖子 #51 ---
+you are right and you are not missing anything. it is a1 pip move.
+
+--- 帖子 #52 ---
+Some programmer are requesting for codes to help me solve some of the problems with my EA. As i said the EA will be only available to everyone on 01-01-10. Again, my EA will be 100% free. I want to do the modification myself, during this i will for sure a bit a programming as well. Here is the sample EA generated by an online tool. Any programer here. Can you please modify this EA so it can open more then one trade at a time.
+
+--- 帖子 #53 ---
+I suppose the problem is in this part of the code: //Check position bool IsTrade = False; for (int i = 0; i &lt; Total; i ++) { OrderSelect(i, SELECT_BY_POS, MODE_TRADES); if(OrderType() &lt;= OP_SELL &amp;&amp; OrderSymbol() == Symbol()) { IsTrade = True; if(OrderType() == OP_BUY) { //Close Here you are defining a control of the open positions... and: //Buy if (Order == SIGNAL_BUY &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if(!IsTrade) { //Check free margin if (AccountFreeMargin() &lt; (1000 * Lots)) { Print("We have no money. Free Margin = ", AccountFreeMargin()); return(0); The part in red is the control...it tells the EA to not open a new trade if a trade is still in progress..
+
+--- 帖子 #54 ---
+I think Chris_B is right, I commented out the lines and if-else portions using IsTrades, see if it works now.
+
+--- 帖子 #55 ---
+Worth looking into...seems you have got something going on ematrader. All the best in sorting it out, and superior of you to consider offering it. I will keep glued to progression and also go through your other thread. Ron
+
+--- 帖子 #56 ---
+hey ematrader.... you can add a condition that will allow for the user to select 1 trade or multiple trades ..... just in case someone prefers single trades..... Inserted Code //Buy if (Order == SIGNAL_BUY &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if(!IsTrade || MultipleOrders) { you can see i added MultipleOrders to the if(!IsTrade) condition.... also add code below to inputs..... do same for sell side.....h Inserted Code extern bool MultipleOrders = true; //-- //-- Inserted Code //Sell if (Order == SIGNAL_SELL &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if(!IsTrade || MultipleOrders) {
+
+--- 帖子 #57 ---
+Along with all the others here, I'm very interested in watching your EA do its thing and take it for a testdrive. Anyway, I want to thank you in advance for your obvious hard work. I'm relatively new here and can't contribute anything to your programming questions, but this thread has inspired me to take a closer look at your manual "Trade The Slope" system, as mentioned in the first post. Taken a couple of small trades based on it, to see how it plays out. You stated that your EA is also based on a multi EMA system I would also like to take a look at. Is that system mentioned somewhere here on FF or hasn't that seen daylight (yet)? Anyway, I have this thread bookmarked and am eager to learn more...
+
+--- 帖子 #58 ---
+Thanks again. quick test : its working now
+
+--- 帖子 #59 ---
+Thanks, i'll add these in ea as well
+
+--- 帖子 #60 ---
+I never posted my Multi EMA system. Instead i worked on EA. This EA is based on both systems. However, you can always trade manually from TTS.
+
+--- 帖子 #61 ---
+Already started doing that. Curious to see if it does its magic for me..
+
+--- 帖子 #62 ---
+Hi Ematrader Have been following this thread with interest. I am not a coder/programmer etc, but I am happy to help where can. In Jan 2010, I will be happy to assist in forward testing if requied. Cheers Ezzy
+
+--- 帖子 #63 ---
+I take my hat off in saying well done EmA Trader.
+
+--- 帖子 #64 ---
+Looking forward to your ea ematrader. Quite an impressive performance shown in your vids. If you have any more snags in the ea, just ask. I'm sure many of us here will do what little we can to help. Will also be spending some time on your TTS system thread. cheers scalpz
+
+--- 帖子 #65 ---
+Finally, we have someone who is not trying to sell his EA and scalping the individual trader. Finally, we have someone who may have a good trading system and he is not going to milk the market with $ 49.00 trading seminars. Finally, there is a breath of fresh air in this Forum. Thanks for the EA when it comes out. One more thing, is there audio on the videos on youtube.com. I could not hear a thing. I checked my sound card..Just wondering. Thanks for all the hard work in this thread. If i knew how to code, I sure would lend a hand. I told all of my buddies in our trading room about this thread. I hope this EA is better than that Idiot Steinitz robot that claims it is not a loser...Looking forward to more great posts on this thread. thanks again.
+
+--- 帖子 #66 ---
+WOW! Looks like this thread is getting hot! The EA will be the most looking forward "thing" into the new year!
+
+--- 帖子 #67 ---
+Ditto to what others have said. If I knew how to program MQL I would love to help out. Thanks to all who are lending a hand. It is much appreciated. And special thanks to Ematrader. Very much looking forward to it. dave
+
+--- 帖子 #68 ---
+I'm using the code blew in my EA. * EA does not cap MaxTrades to 3, it keep opening trades. . MultipleOrders function is working fine * In addition to Maxtrade issue, can someone please advice me how to program this EA, such that when MultipleOrders is set to True EA only opens next trade in oppsite direction of the current trade. i.e: If current is long on eur/usd then Maxtrade value function open all short untill long is closed. and vise versa. Thanks in advance. extern bool MultipleOrders = True; extern int MaxTrades = 3; //Buy if (Order == SIGNAL_BUY &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if(!IsTrade || MultipleOrders) { //Sell if (Order == SIGNAL_SELL &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if(!IsTrade || MultipleOrders) {
+
+--- 帖子 #69 ---
+Very much looking forward to seeing this progress. I'm a big fan of the slope indicator and use it on several strategies. Good luck.
+
+--- 帖子 #70 ---
+Any ideas on how to hear it. Thanks Ezzy
+
+--- 帖子 #71 ---
+Ezzy, My videos does not have any sound.
+
+--- 帖子 #72 ---
+No probs ematrader, thanks for your response, I'll have another look at them later. Cheers
+
+--- 帖子 #73 ---
+A quick &amp; dirty solution is to add OrdersTotal() vs maxtrades check before initiating the trade: Inserted Code //Buy if (Order == SIGNAL_BUY &amp;&amp; OrdersTotal() &lt;= MaxTrades &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if( !IsTrade || MultipleOrders ) { //Sell if (Order == SIGNAL_SELL &amp;&amp; OrdersTotal() &lt;= MaxTrades &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if( !IsTrade || MultipleOrders ) { A more elegant solution would be to do a proper counting function to count only trades opened by this EA so it won't mess up your manual trades, or other EA trades: Inserted Code int CountTrades() { // Count current trades by this MAGIC int cpt, result = 0; for(cpt=0;cpt&lt;OrdersTotal();cpt++) { OrderSelect(cpt,SELECT_BY_POS,MODE_TRADES); if ( OrderSymbol()==Symbol() &amp;&amp; OrderMagicNumber()==MAGIC ) result++; } return(result); } extern bool MultipleOrders = True; extern int MaxTrades = 3; //Buy if (Order == SIGNAL_BUY &amp;&amp; CountTrades() &lt;= MaxTrades &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if(!IsTrade || MultipleOrders) { //Sell if (Order == SIGNAL_SELL &amp;&amp; CountTrades() &lt;= MaxTrades &amp;&amp; ((EachTickMode &amp;&amp; !TickCheck) || (!EachTickMode &amp;&amp; (Bars != BarCount)))) { if(!IsTrade || MultipleOrders) {
+
+--- 帖子 #74 ---
+Thanks again man!
+
+--- 帖子 #75 ---
+Hi Ematrader, Thanks for sharing your EA/system. It looks very promising and I can't wait to try it out. You mentioned that the EA had one lost in 5 months. If I may ask, how many pips was this loss? I'm big on money management and I'm curious to know what risk/reward this EA has as well as recovery time after a loss. You also mentioned that there is no SL in the system, only TS and TP. Is there at least an emergency SL in case of PC/internet issues? Also, are you using hidden TS and TP? Thanks, Stimuls
+
+--- 帖子 #76 ---
+Hi...when you started this thread i took a look at your Trade The Slope System and it's interesting ;-) I'm trying a very scalping version using only 5M and 1M and I have to say that it gives good signals...
+
+--- 帖子 #77 ---
+Hi, Loss was 100 pips. About profit... lot lot more then the loss. I keep changing my TP and TS levels according to the current events ie. news. EA will recover a loss of 100 pip in less than 48h. absolute drawdown is between 7% and 10% depending on the setting. The EA does not have hidden TS and TP yet.
+
+--- 帖子 #78 ---
+Sounds the dogs danglies, EMA. Got my interest, certainly!
+
+--- 帖子 #79 ---
+Thanks Ema, I was expecting a much larger loss so I'm impressed. How would you adjust the TS and TP when high impact news is near? Raise TP and tighten SL? Thanks, Stimuls
+
+--- 帖子 #80 ---
+Wellwell, this looks very nice, looks like the EA gives nice results! Keep up the good work! Ematrader, I hope u can give all of us a very nice 2010
+
+--- 帖子 #81 ---
+i been testing out m5 and m1 also got nice 50pip total at US open on 3 pairs. Looks very interesting Ematrader
+
+--- 帖子 #82 ---
+Ematrader, Looks like you use your EA flexibly according to current events. Presuming you will be able to give us a few guidelines on what variations have worked for you when you release the EA on 1st Jan? Looking forward to giving this a test drive to see what it can do!
+
+--- 帖子 #83 ---
+Still no audio on the Youtube videos. I'm certainly looking forward to forward testing this.
+
+--- 帖子 #84 ---
+See post #71
+
+--- 帖子 #85 ---
+Thanks for the info.
+
+--- 帖子 #86 ---
+very impressed.. looking forward to download the EA and maybe help to optimization.
+
+--- 帖子 #87 ---
+Why do I get the feeling that I'm being sold something?
+
+--- 帖子 #88 ---
+We have been told many times that this EA will be offered for FREE on 01/01/10 @ 12a.m. Although, with this type of intrest, I can't help but wonder if it will go commercial 01/02/10 @ 12a.m. No offense to you Ematrader, you just have quite a few holding their breath! I do however look forward to the release if it does remain FREE!
+
+--- 帖子 #89 ---
+Well he said himself he'd rather make money using it himself, which means it is a profitable EA otherwise he would be more inclined to sell it. I think a worse case is him not sharing it - it's not like he came here to just announce results and make a release date, he actually required some free help
+
+--- 帖子 #90 ---
+I completely agree Sim! So far he has only exhibited traits of an honest one, and the help that he has required kinda rules out a marketing scheme, which usually would be in the final (if not complete) stages when debuting for the hook of noobs! Only time (like 19 days and 20something Hrs....ish) will tell if it (EA) and he (Ema) are what they claim! I'm hoping for it to be a GREAT NEW YEAR if I was to pick sides though....
+
+--- 帖子 #91 ---
+Hi everyone, First, The EA will be 100% FREE. Second MaxOrder is now okay but still need programming help (see my post #68) I search all over the internet past few days did not found anything that will help.
+
+--- 帖子 #92 ---
+You did say that you have used this for the past 5 months in a real money account, correct?
+
+--- 帖子 #93 ---
+Well, if I knew how to program I would definitely help you out. Good luck though. This sounds promising.
+
+--- 帖子 #94 ---
+I'm an idiot who needs help. I have downloaded the slope indicator to the expert advisors section of my metatrader account but I cannot get it to show on a chart. Please, someone, advise me.
+
+--- 帖子 #95 ---
+From your example, it appears that your EA will be opening trades in groups or cycles? If I understand it correctly, for each "cycle" there will be only one parent trade (ie. SELL) that will repeatedly open child trades of the opposite type (BUYS) until MaxTrades limit is hit. Once that parent closes, the cycle begins again, regardless of whether any children are still open? Please refer to the code below if thats the case... Inserted Code extern bool MultipleOrders = True; extern int MaxTrades = 3; // When EA starts, init parent variables... // REMINDER: Whenever closing a parent trade, reset its ParentTicket to -1 and ParentType to "none". init() { ParentTicket = -1; ParentType = "none"; } if (MultipleOrders == true) { // If MultipleOrders option is true, look for parent orders created by this EA.... // - If no parent exists (ParentTicket variables are still in default values), // begin new cycle by creating a new parent trade (buy or sell), // and save its ticket to "ParentTicket" variable, and trade type to "ParentType" variable. // - Else, if parent exists, determine whether to create children? Their type will be opposite of parent... if ( ParentTicket == -1 &amp;&amp; ParentType == "none" ) { // buy .... .... ParentTicket = OrderSend(..........); ParentType = "buy"; // sell .... .... ParentTicket = OrderSend(..........); ParentType = "sell"; } else { // if MaxTrades not yet hit, create children.... // if Parent is a buy, create a sell Child // if Parent is a sell, create a buy Child if ( CountTrades() &lt;= MaxTrades ) { if ( ParentType == "buy" ) // sell if ( ParentType == "sell" ) // buy } } } else { // MultipleOrders == false, do normal buy &amp; sells // buy // sell }
+
+--- 帖子 #96 ---
+You've answered your own question
+
+--- 帖子 #97 ---
+Hi there, thanks for the sharing EA you provided, Is really helping a lot for us. Waiting your upload EA on 01-01-10. cheers
+
+--- 帖子 #98 ---
+Copy the Indi to... C:/ProgramFiles/*YOUR BROKER*/Experts/Indicators
+
+--- 帖子 #99 ---
+Then the Indi should show up in your "Custom Indicators" tab inside MT4. Drag and Drop to chart.... Hope this helps...let me know if you still are having problems.
+
+--- 帖子 #100 ---
+Whether he decides to sell it or offer it for free is his agenda, I take his word in good faith and the EA will be free.
+
+--- 帖子 #101 ---
+that's my opinion too, give ematrader a chance to prove if his intentions and words are honest, which I not doubt! time will tell I'm looking also at the TTS method, looks good.
+
+--- 帖子 #102 ---
+Hi ematrader - does the code attached to this from mcko do what you were looking for. Is there any particular rules for when to open the child/retracement trades. If not quite what you wanted, ask your questions again in a different way. I will have another look at your earlier posts to see if they would fit with this type system. cheers scalpz
+
+--- 帖子 #103 ---
+They stay only 16 days of attended end to “the great day.” I am really curious. I hope that you will put also the file with the parameters of this ea, Optimization set (.set)
+
+--- 帖子 #104 ---
+Aren't you a little concerned with Liquidity issues from all of these people using your EA? Ask Tim Hayder (if you don't know who it is, then you probably aren't ready to fully automate your account yet) and he'll tell you...more than 50 people using the EA will have all brokers looking for it and disrupting trades. I appreciate your willingness to help everyone, but in reality you will be hurting yourself. Just a thought. Darren
+
+--- 帖子 #105 ---
+I agree this is very true. I used a few EA's in the past and found myself receiving a telephone call from ODL saying that I was using "FAP Turbo" which I wasn't but a number of people were. They closed down my account..... Don't know how it would pan out on an ECN broker account with MB Trading but we'll have to wait and see. I don't even know if this EA will be compatible with a 2 stage broker. fxtrader08
+
+--- 帖子 #106 ---
+That's a funny comment, to think that 50 people using the same EA on various brokerage feeds will disrupt trade liquidity. .... 3.3 Trillion dollar transactional market vs. 50 retail traders. Why would a broker bother?
+
+--- 帖子 #107 ---
+Whilst 50 of us trading with the money we got from our piggy banks at home will not have any effect at all on liquidity, clearly ODL (which were high up in my book of best brokers) had an issue with a number of people using the same or similiar EA's.... fxtrader08
+
+--- 帖子 #108 ---
+Banks trade with trillions of dollars from thousands of clients. Let's say each of us have a $100,000.00 forex account. Do you think the banks will care? Besides if 50 people keep winning there will be at least 2 newbie traders for each of us losing thier money trading blindly. Forex is the highest liquidity market and there is absolutely nothing to worry about. FAPturbo is not illegal, I know several traders that use it and not a problem. They wouldn't allow Metatrader 4 platform if the e.a.'s were a potential harm to the forex market. Many forex brokers offer Automated trading from other service providers. Automated trading or no, there will always be winning and losing systems, but that doesn't worry anybody. Not even the US stock market worries about winning automated trading. And you are worried about Forex liquidity? LMAO
+
+--- 帖子 #109 ---
+You dim-wit's! Not BANK liquidity...your broker "real-time" liquidity. Of those who think this is so "silly"...how many of you have legit payed for an EA and used it longer than 5 months... ???
+
+--- 帖子 #110 ---
+I would say that clearly ODL has a problem with any trader that wins more than he /she loses. They obviously are taking the other side of the trade AGAINST you. A broker should be there to facilitate your entry into the market, period. A broker that holds the other side of the trade has a vested interest in you losing. I do believe I would take my business elsewhere.
+
+--- 帖子 #111 ---
+I agree. Only those who have a broker who trades against them will have a problem with this EA. If you do have a broker like that, change to one who just makes on the spread and swap.
+
+--- 帖子 #112 ---
+I might try MB Trading.... But they only offer USD accounts and I dont feel comfortable taking a long term bet on the USD. My base currency is GBP. Will have to have a long hard think about it. fxtrader08
+
+--- 帖子 #113 ---
+I was referring to that too. What are the chances of all 50 users using the same broker? Unless EMA turns out to be a commercial seller, requesting an affiliate brokerage sign up, what are the odds? What are the odds there's enough of us, who actually USE the EA properly on OOTB settings to cause liquidity connections problems? It's a farcry, and not much of a problem to really be worrying about.
+
+--- 帖子 #114 ---
+If I am not wrong, Tim's EA's trade exotics or low liquidity crosses? Theres a big difference between trading say.. eur/usd and trading eur/cad. A very very big difference. There may be a few EA hunting brokers out there *Cough* interbankfx *Cough* but trading a grid EA for example, is not harmful to a broker who nets or client hedges. The only brokers who will be effected are those who are trading 100% against all trades. Which given market conditions, is a good way to go bankrupt these days. Either way, an ECN wil fix your problems.
+
+--- 帖子 #115 ---
+Go with JadeFX. ECN broker run by EA traders. Less than 1 pip on EURUSD and USDJPY with .5 pip commission.
+
+--- 帖子 #116 ---
+Hi Ematrader You posted a pretty amazing trade history a few weeks ago. I'm just wondering if you have continued to trade the EA in the past couple of weeks while you have been modifying it, and if so whether it has continued to show similar results? Thanks ForexKiwi
+
+--- 帖子 #117 ---
+Phoned ODL a few weeks ago they said they were completely ECN and took profit only from commission?
+
+--- 帖子 #118 ---
+I hope Pilotui didnt get U skared with his information, and U are still willing to share yours EA in the New Year , It would be nice for a change to really start making money on this market So far I am playing with sample that U posted here on the demo account, but Iam not sure sample it seems something dont complete is one thing and I am not sure with setting is the other thing. Christmas Grreeting to all of traders on FF. Santaklos
+
+--- 帖子 #119 ---
+Very impressive video on the first page. Will wait for release of the EA. Best wishes
+
+--- 帖子 #120 ---
+"more than 50 people using the EA will have all brokers looking for it and disrupting trades" -- now that's the dumbest thing I've ever heard. Did you just fall off the turnip truck yesterday?
+
+--- 帖子 #121 ---
+Could you supply a little more information on jadeFX such as where they're located, funds required to open an account, etc.? Thanks.
+
+--- 帖子 #122 ---
+I agree 100% with you! LOl Merry Xmas to all of us at FF. Bomi, Houston, Tx Looking forward for this FREE EA in the New Year 2010. May Godd Bless Us LOOSERS all the money that we have lost in the past! LOL AMIN!
+
+--- 帖子 #123 ---
+You can find the full info here... http://www.jadeinvestments.com Originally I opened a small $500 account just to check them out. You can not trade micro lot as they have no dealing desk. Smallest lot size is .1 standard lots. Margin for .1 lot on EURUSD is $80. So far my experience has been good. Even during news time you rarely see more and a pip or two change in spread and that usually very quick. On average their EURUSD spread is around .4 to .7 pips during regular hours. Commission is 50 cents on .1 lot.
+
+--- 帖子 #124 ---
+Thanks, John.
+
+--- 帖子 #125 ---
+Hi EMATRADER! There are only 5 days ! I hope that will be a historical day! If you need some help, just ask for it. Merry Christmas and God bless you!
+
+--- 帖子 #126 ---
+ema, I have been working with mt4 for the past few months and realised that the tester is extremely unreliable because often the data is corrupt. I messed around with mql for a while, then finally realised the best way to have a solid system (for testing first, then trading), is to have another program monitor the price feed from mt4 (by creating a bridge), save the data into a database, then run tests on that data. These systems are not easy to design at all, need to take into account things like spikes (lasting for seconds) in the prices from your broker, If you are not a seasoned programmer, you will find great difficulty in coding it - espeically with Mql. Anyways, just thought I would comment because I'm using a similar system but the slopes are decided by the parabolic sar indicator. Best wishes, merry xmas and a happy new year. PS. I am also "certain" as I can be from the work i've done so far, to make a profitable expert advisor, you need to have some form of human input/part in the decision making, even if it is only to help the program understand whether the market is trending etc etc.
+
+--- 帖子 #127 ---
+Says the guy with 39 posts. Here's an excerpt from a PROFESSIONAL EA coder... "by limiting the licenses will ensure that all those who purchase this EA don't suffer liquidity issues by everyone trading the same pair as their accounts grow. As had happened with other famous EAs. The smaller the foot print this EA makes on the market, the better it is for all of us." Call me an idiot if you want...wait till you start trading LIVE (which most of you won't) after 3 consecutive winning trades your broker will start dumping the connection, canceling your trades etc... there are hundreds of these stories...just use GOOGLE
+
+--- 帖子 #128 ---
+Here's some great trading insight I found in one of your WHOPPING posts (only a few were NOT in the C4-Scalping thread...yeah you got suckered in on that didn't you?) http://www.forexfactory.com/showthre...76#post2709076 johnthom Member Member Since Apr 2009 36 Posts I have an improvement on this system 1) Get a coin. 2) Flip the coin. 3) Heads go long. 4) Tails go short. 5) Don't bother with a stop loss. 6) Let trade run until hell freezes over. No wonder you're hoping for the HOLY GRAIL to just be GIVEN to you. Pathetic...have you tried creating YOUR OWN strategy or do you just surf the Factory ragging on other peoples thoughts.?
+
+--- 帖子 #129 ---
+Interesting. Signing up to thread. But not the mud slingers...
+
+--- 帖子 #130 ---
+Ah, I think you missed the point.. this is called sarcasm but if you want to believe it's a strategy, go ahead by all means, start flipping! Regarding the other non-sense, get a real broker. They don't f with your trades. You are just spreading the same old sore-loser b.s that every one harps on and on about. It's always the brokers fault. Yeah. I hope you don't consider the number of posts == to successful trading or you will be sadly disappointed. Go ahead friend, take your next shot. I really don't care about you or what you have to say. The first lesson I learned about trading is to ignore your type. Happy Holidays.
+
+--- 帖子 #131 ---
+What has become clear once again is; there will always be vested interests trying to prevent successful strategies and systems from entering public domain. Whatever their interests are, they must take note that consistent performers such as fapturbo and megadroid are being used on live accounts by thousands without affecting liquidity or trade quality. I have seen such attempts previously on here, for no reason an individual or a group of like minded people suddenly show up on the noteworthy threads and either begin discrediting the system or scaring the developer away.
+
+--- 帖子 #132 ---
+Mainly an issue with low liquidity and hence high spread pairs like EURCAD. Not so much with EURUSD. The EA will need hidden SL/TP and order resend functions, along with the already mentioned emergency SL (as Steve Hopwood calls it, "shirtsaving"). Uber-kudos to ematrader.
+
+--- 帖子 #133 ---
+I have a feeling that this guy just blew his account
+
+--- 帖子 #134 ---
+Yes, there are always the paranoid that believe all the lies and stories of other losing traders. Probably naysayers that dont want others to win with a twisted thought that the more that people lose the more money for them, lol. I think I already heard them all in just 3 years of trading. "The broker chases my stops." "My broker reverses the market on me." "My broker dont let the market reach my ea's tp." Fap turbo and megadroid are illegal." "You can't win more than 10 times in a row without a loss." "If you make more than a million in less than a year rest assured you will be investigated by the FBI." "You need to have 4 different brokers and used them randomly if you want to win consistently" and many other funny stories even published by suppossed "pros" that only sell trading books and seminars of their successful strategies, but they never trade. Just let ematrader post his ea. It's not like everyone will run to their pcs trade live with 100 standard lots and will drain the market in 5 seconds. Most of us know MM and will not keep using an ea that produces more than 5 consecutive losses and no one will be federally prosecuted for using a profitable ea. So relax and wait! Happy Holidays to everyone!
+
+--- 帖子 #135 ---
+Hey EMA. Thank you for your generosity. Now, I was wondering if you are running this EA on a demo account at the moment in preparation for release? If you are, would it be possible to publish some of those results, or a link to MT4Live.com, or similar? In anticipation, Invisible
+
+--- 帖子 #136 ---
+Signing up to thread! Thanks ematrader!
+
+--- 帖子 #137 ---
+The results displayed are great. The decidion to give it out free is also very great. Well done ematrader. I await 1st January 2010 to have my copy. Thank you ematrader.
+
+--- 帖子 #138 ---
+EMA, you seems to have a good system... will check out on 1 Jan 2010... ;-) Thanks for sharing.. ;-)
+
+--- 帖子 #139 ---
+Thank you very much, Ematrader! Waiting Jan, 1. Happy New Year for everybody!
+
+--- 帖子 #140 ---
+hi im new here. Personally i enjoy trading so i dont want a robot to be stealing my fun. is there any description on the methodology so that i can trade it manually?
+
+--- 帖子 #141 ---
+Ematrader, your PT is 1 pip? Interesting.....
+
+--- 帖子 #142 ---
+EmaTrader placed a link of his strategy in his first post. Here it is: http://www.forexfactory.com/showthread.php?t=52355
+
+--- 帖子 #143 ---
+My stocking is open with a smile. Thank you EmaTrader for your generosity and I look forward to enjoying the EA.
+
+--- 帖子 #144 ---
+ah i actually read that already. but according to the front page this EA wouold be based on both his EMA and slope strategy.
+
+--- 帖子 #145 ---
+Ematrader have you tried to run the EA on demo in real time ? because there is a lot of EAs that show miracles on back test and fail in real time due to the methods of calculations used in indicators
+
+--- 帖子 #146 ---
+I don't know if I'm the only one who has checked the prices but 1 PIP TP and no SL??
+
+--- 帖子 #147 ---
+Already explained...
+
+--- 帖子 #148 ---
+1 pip tp with a broker that has an $8 per lot commission isn't good. You would pay out $8 on a $10 trade at 1 lot. Also are the settings for a 5 digit broker automatic, and are ECN orders that can't be opened with TP or SL recognized by this EA
+
+--- 帖子 #149 ---
+Ematrader: Nice job with this thread and the information you've given...many thanks.
+
+--- 帖子 #150 ---
+i can test it with real money if u need
+
+--- 帖子 #151 ---
+My hats off to anyone who would put this much time and effort into programing an EA just to give it away. At least allow us to send donations for your time once its out. Tomi
+
+--- 帖子 #152 ---
+In what timezone does ematrader reside? Just wondering because there might be a lot of "It's 12:30am and the ea hasn't been posted yet..."
+
+--- 帖子 #153 ---
+It's not call "giving away." It's call sharing and that's what Forex Factory is about. We are here to share our findings and help others. Hundreds or maybe thousands of systems and ea's have already been shared in Forex Factory. One thing i like about FF is the fact that a lot of great talented traders and programmers are here to support and help develop other's ideas. Efforts? We all put our time and efforts at a given time to share it with pleasure and hope that it will light the road of other traders. We all help either backtesting or supporting a thread with our posts. Donations would be considered semi-commercial and if it comes to Donations then Forex Factory will start accepting donations from each of its member for giving us a place to learn and discuss our forex trading. It's your first post, perhaps you are new, be careful with the donations idea. I don't think Forex Factory would like ematrader to start accepting donations
+
+--- 帖子 #154 ---
+Srsly man look , you said that broker will try to dump your connection etc,etc , but now simply math ok if this bot provide 100 traders in 1 day with 1 pip profit YOU WILL EARN 100pip , broker if he had average 3 pip spread he will earn 300 pips , broker will just love u
+
+--- 帖子 #155 ---
+Hi EmaTrader, I've watched your video. A lot of non-technical movements underwent on M15 between 2001-2008, such as Schedule News Announcement, Breaking News and Central Bank Intervention. Personally, perhaps, due to my knowledge limitation, I can't imagine how it is possible for a technical method, especially a mechanical method executed by an EA, can overcome fundamental disturbance caused by news. It is amazing that your EA enjoys zero loss in hundreds of trades (100% hit rate!). I think even the most sophistic backtesting parameter fitting cannot achieve this. And as it seems you use only EMA to achieve this result. This is simply amazing. Look forward to forward test your EA. kk007
+
+--- 帖子 #156 ---
+Are you coming back?
+
+--- 帖子 #157 ---
+Again, anyone know what timezone ematrader is?
+
+--- 帖子 #158 ---
+How many timezones are there in Canada?
+
+--- 帖子 #159 ---
+6 I believe....
+
+--- 帖子 #160 ---
+ematrader, Just registering my interest in your EA. I hope that your previous offer to post the EA still holds firm - it does indeed sound too good to be true. Best wishes to everyone following this thread for 2010.
+
+--- 帖子 #161 ---
+yeah count down till today. Finally EA launch soon...thx ematrader
+
+--- 帖子 #162 ---
+TODAY IS THE DAY ?
+
+--- 帖子 #163 ---
+hmmmmm.....
+
+--- 帖子 #164 ---
+Tomorrow is the DAY... 01-01-2010
+
+--- 帖子 #165 ---
+Can't wait until tomorrow to load this up Have a great new year Everyone
+
+--- 帖子 #166 ---
+Hmmmm . . . .
+
+--- 帖子 #167 ---
+Hi EMA, If you do read this thread again, I'd like to thank you for bringing my attention to the "Slope Direction Line", seems wizardserg@mail.ru wrote it - is that you?. The .mq4 shows its the moving average of the ma's. I'm now using this slope indicator code instead of a the parabolic sar indicator code for my system. Initial tests show it works much better. thank you
+
+--- 帖子 #168 ---
+My suspicion is will this EA work in conditions like yesterday and today when Gbp and Eur traded like crazy??
+
+--- 帖子 #169 ---
+wheres my EA ?
+
+--- 帖子 #170 ---
+Mate this only happend on last year days
+
+--- 帖子 #171 ---
+"dil" made a good point earlier. He said if we the ea is shooting for 1 pip trades, how would you profit if the spread is about 2 or 3. In other words 10 ea trades will mean cost at least 30 pips on a 3 pip spread. Brokers will surely be happy. Secondly, I want to know what broker ematrader uses? anyone know?
+
+--- 帖子 #172 ---
+If it sounds too good to be true...
+
+--- 帖子 #173 ---
+Then it probably is...
+
+--- 帖子 #174 ---
+What time zone is EMATRADER in? Maybe it was too good to be true.....1 January 2010 12.36am GMT.
+
+--- 帖子 #175 ---
+He is in Canada I believe.
+
+--- 帖子 #176 ---
+We'll have some time to wait then! Happy New Year to All. All the best fxtrader08
+
+--- 帖子 #177 ---
+As the viewing list grows!!! T-Minus...............
+
+--- 帖子 #178 ---
+5 more timezones in Canada left = 1 to 5 more hours to go...
+
+--- 帖子 #179 ---
+well in his profile it sez he started a thread, about quebec looking for fellow traders in the region, so i think if he is infact there, ummmm its already past midnight......... no matter, its given me somthing to do today! cheers!
+
+--- 帖子 #180 ---
+and the list grows and grows
+
+--- 帖子 #181 ---
+I suspect that with all the traders watching (with experience, skills, knowledge, of all types and levels) it's very likely this trading system will get a good "going over" and lessons will be learned, and hopefully, opinions will be shared...some honestly and some not. Happy New Year and Successful Trading 2010!!
+
+--- 帖子 #182 ---
+What a wasted thread. It should be put in the recycle bin. Absolutely nothing producting in here, sadly. We're past midnight in all time zones. Warm Regards, fxtrader08
+
+--- 帖子 #183 ---
+Still 10:20 here California time PST! Same for those Canadians just above us.
+
+--- 帖子 #184 ---
+Wheres my EA man ? you will give me my EA ? wheres ea Inserted Video
+
+--- 帖子 #185 ---
+that were ready to fall on their swords for this guy!!??? Relax, he probably just wanted some free programming help, got it and moved on. Do you really think it was the holy grail? With 1 pip TP's? If so go look up C4 Scalping or Nitro trading...they have some pretty nice fake MT4 Screenshots of ridiculous "too good to be true" profits. Everyone relax...who know's he's probably out celebrating the new year!
+
+--- 帖子 #186 ---
+Houston, I think we have a problem.
+
+--- 帖子 #187 ---
+Dude im so angry right now
+
+--- 帖子 #188 ---
+It's April Fools Day in December!!!
+
+--- 帖子 #189 ---
+70% that he will back and share ea , cuz look he created and uploaded his own slope indicator , 30 % that he will never comeback
+
+--- 帖子 #190 ---
+Anyway is a new year now. Happy new year to all trader here. May the pips collects everyday. Cheers
+
+--- 帖子 #191 ---
+The free cheese line is -----&gt; over there.
+
+--- 帖子 #192 ---
+12AM is not midnight (2400). Give the guy a chance to wake up and nurse his hangover FFS.
+
+--- 帖子 #193 ---
+Most here seem to be ready to hang EmaTrader without a trial, the motto seems to be "Gimme this for free or you are a crook &amp; a liar". If he wanted free programming he wouldn't have to open a thread or lie to you, there are free forums where coders do stuff for free. Well done boys Happy New Year
+
+--- 帖子 #194 ---
+Yeah like i said in my previous post He created his own indicators and shared with us i tried its working but i dont like scalping by myself so EA help will be very good
+
+--- 帖子 #195 ---
+..a bit of a cynical way to start the new decade.
+
+--- 帖子 #196 ---
+Love that family guy
+
+--- 帖子 #197 ---
+I don't know whether I am lucky or not. I found this thread only 2 days ago and have spent quite a bit time to think about the feasibility of what posted here. In the reply to report forward result, Ematrader gave a screen shot. I don't think any of the values shown has problem. But there are two things missing for me to confirm it is forward result: 1. No Broker Name on the Chart - For real trading platform, the broker name would appear lower left of the MT4 Chart, while for backtesting result broker name may not be presented. 2. The order no of each order is intentional hidden. For real trade, the order no. should be have a particular digit format, but for backtesting, the order no. is in numerical sequence. Before I can see these two information on the screenshot, I am not convinced it is from forward trading. Success rate can be 100% if historical data is used with hindsight intentionally. http://cdn.forexfactory.com/attachme...1&amp;d=1259976870
+
+--- 帖子 #198 ---
+ematrader : EA will be posted here on 01-01-10 @12AM now we are :@ http://wwp.gmt-5.com/
+
+--- 帖子 #199 ---
+As said, trade success rate can be 100% if historical data is used with hindsight intentionally through an EA (or simply naked eye! ).
+
+--- 帖子 #200 ---
+Happy new year I am looking forward that!
+
+--- 帖子 #201 ---
+I feel like such an idiot.
+
+--- 帖子 #202 ---
+I 'm still hoping ematrader put on ea as promised
+
+--- 帖子 #203 ---
+Ematrader put put a test EA here fr the programmers to look at. He said it wasn't his real version. But you can put it on a demo and try the 1 pip TP if you like. My guess is it works in a similar way to his final EA. If you look at the code it does use multiple MAs as a trigger. My thought is that the risk(no SL) to reward (1pip) is wacky especially if you're trading 1 full lot. I manually traded the slope system years ago and had some good results. But I was using the Daily charts with multiple timeframe agreement. I forget what the SL and TP were back then. I would agree with Scooby that it would be great to see ematrader put the EA on Myfxbook to see real trading results. I'd like to see one account trading his 5 minute strategy and then a second trading a higher timeframe strategy. Happy New Year to all! Sandy
+
+--- 帖子 #204 ---
+I just went through his slope direction system thread until about post #320 where it all went to crap because people started adding other indicators. This looks like it is a multi timeframe (MTF) system that checks for the direction of three timframes and makes sure that they are all moving in the same direction. This is a very simplistic apporach and logical method to trading. If you go through that thread and take note of what indicators are posted where in the thread, Ronald Raygun has done a lot of work on this already including an EA, it would not be that difficult to code this with something like: If timeframe longest trend = UP If timeframe long trend = up If timeframe short = down then up = BUY That's it....very simple It may be worth going through that thread in the event ematrader has left the building. However, he may have been at a very 'exciting' new years eve party, familiy emergency, etc. and is not available right now. Either way...I'm already working on this...... Happy New Year!
+
+--- 帖子 #205 ---
+*cough* James16 Chart Thread http://www.forexfactory.com/showthread.php?t=2331 Jacko's Forex House of Pleasure and Pain http://www.forexfactory.com/showthread.php?t=27286 Trade Using VSA (Volume Spread Analysis) http://www.forexfactory.com/showthread.php?t=157629 ^^ Check 'em out. Happy New Year's. &lt;3
+
+--- 帖子 #206 ---
+Have some patience guys.
+
+--- 帖子 #207 ---
+Ok, Glad to see you back ematrader! Me and othes are here waiting for you and that great ea.
+
+--- 帖子 #208 ---
+I hope we don't have to wait untill 2010 first of April to see that treamendous EA... !!!
+
+--- 帖子 #209 ---
+Hi, Ematrader is noz active yet, not a goo start for this year. Regards and happy New Year. Milex3
+
+--- 帖子 #210 ---
+I believe the long term slope system is quite good, If you are no longer trading it, have you found something better? Best Wishes for the new year Ben
+
+--- 帖子 #211 ---
+Hi Blue. With my schedule I'm still looking for that elusive EA because I don't have a lotof time to do manual trading. Best wishes to you too Sandy
+
+--- 帖子 #212 ---
+People...have some faith. If you don't have the patience for this then do us all a favor and teach yourself the MT4 language and code your own EA.
+
+--- 帖子 #213 ---
+He said to have patience. Lets minimize our comments and wait for the day. We are still in 1.1.10. So lets wait and see.
+
+--- 帖子 #214 ---
+Concur!
+
+--- 帖子 #215 ---
+The "EA"?? this guy made was done using an online code generator, the Expert Advisor Builder website, as seen from the mq4 file he posted. Why would anyone expect this to be the best EA in the history of the world. He may have tweaked it to fit the backtesting data perfectly, but going forward is quite a different animal. LOL. Oh and I forgot to tell you 1 pip TP and no SL....keep on waiting guys and gals...but you are better off going to the code generator site and doing it yourself. It's not so difficult to do...he apparently did it with very limited MQL programming knowledge.
+
+--- 帖子 #216 ---
+We have been owned
+
+--- 帖子 #217 ---
+Hi guys Can someone please post source code of Slope direction line indicator. Thanks in advance berche
+
+--- 帖子 #218 ---
+Berche, You can find the code for the indicator here: http://codebase.mql4.com/source/6111 (edit) I have also attached it to this post. good luck.
+
+--- 帖子 #219 ---
+Hi people, I think the post by Darkstar on the link below will be help/enlighten some folks on this thread: http://www.forexfactory.com/showthre...dge#post206698 Also, maybe the impatient gentlemen here should be a bit more thankful and give ematrader a break - he has already given you a "Method/System" to use, maybe one of you could get a programmer to code it for you, it shouldn't be too difficult - all it requires is dosh. Good luck
+
+--- 帖子 #220 ---
+Thanks deergo
+
+--- 帖子 #221 ---
+http://www.funnyanimalsite.com/pictu...tient_Bear.jpg
+
+--- 帖子 #222 ---
+http://www.masalatime.com/img/82424.jpg
+
+--- 帖子 #223 ---
+The EA will be posted in only few hours from now. People who dont have patient, i don't know how they r making money in forex.
+
+--- 帖子 #224 ---
+Hi I can understand people being angry. But please be patient, maybe ematrader is busy or can not post or something has happened to prevent him posting in this forum. Maybe he did not have time and there is no EA. If we wait I ma sure if the guy has gone through the trouble of starting a thread he would let everyone know. Happy and very Prosperous new year to all.
+
+--- 帖子 #225 ---
+Sorry i didnt saw this -,. The EA will be posted in only few hours from now. People who dont have patient, i don't know how they r making money in forex.
+
+--- 帖子 #226 ---
+EA will be available in few min from now. However, before i'll post some important information about this EA.
+
+--- 帖子 #227 ---
+THIS EA IS ONLY FOR EUR/USD. IT MIGHT WORK WITH OTHER PAIRS, BUT BOTH VARIABLES AND SETTINGS ARE OPTIMIZED FOR ONLY EUR/USD Setting for the EA (Only 15 Min or higher) Chart Eur/USD SL - False TS - 18 TP - 30 * I did not manuplated the historical data in in my video. You can use these settings from 2001-08-01 to 2008-03-16, to get the same results. Why these dates. I'll explain later. This is BETA V2.0. In my video i think i was running V4.5.
+
+--- 帖子 #228 ---
+See post #1 to download the EA
+
+--- 帖子 #229 ---
+okay, i think i can't attach it post # 1
+
+--- 帖子 #230 ---
+Is the slope indicator built into the ea, or if that is required, is there a specific version of that needed?
+
+--- 帖子 #231 ---
+Thanks EMA trader, can I contact you through email? Can you pm me your email? I have few questions for you. thanks
+
+--- 帖子 #232 ---
+finally
+
+--- 帖子 #233 ---
+Thanks EMATrader. I'm looking forward to testing next week
+
+--- 帖子 #234 ---
+Thanks Ematrader. I'll test the EA on demo and let you know how I do. HAPPY NEW YEAR
+
+--- 帖子 #235 ---
+Is this coded for 5 digit brokers? I am noticing a ton of order modify errors already. Thanks for posting it as you promised, even with all the stupid bashing posts for no reason.
+
+--- 帖子 #236 ---
+I am testing it on a 5 digit broker and I am getting 130 errors
+
+--- 帖子 #237 ---
+Thank you ematrader for posting an EA as promised. Can you please explain what you have discovered when you have used a stop loss? Also, what is the difference between this V2 ea and the v4.5 that you originally posted the results from? Have you decided to keep that version to yourself, or does this have overall better results than v4.5? Cheers ForexKiwi
+
+--- 帖子 #238 ---
+doesnt work for me too.
+
+--- 帖子 #239 ---
+Hopefully by then i will be able to post the complete guide how to trade this EA. since this is not the final version, it is "semi-automated" ea. Unfortunatly, I had some big issues with the final version when i ran it live with "ibfx". The final verison will be only posted if these issues are solved. I hope you guys can understand that.
+
+--- 帖子 #240 ---
+what type of errors?
+
+--- 帖子 #241 ---
+I am getting 130 errors. These are usually associated with to tight of stops but if the stop is set to 30 as default that doesn't make sense. When I run it throught the backtester it never takes a trade just gives me the 130 error in the journal.
+
+--- 帖子 #242 ---
+okay i'll upload it again. I don't know what went wrong. Though, change the setting to as same as on post #1
+
+--- 帖子 #243 ---
+I don't know what went wrong uploading the first one. Please give a try to this one. and lem me know.
+
+--- 帖子 #244 ---
+error 130 is Invalid stops. I got error 145 when using FxOpen to test (4 digital) error 145 is Modification denied because order too close to market.
+
+--- 帖子 #245 ---
+Yes when I turn off the stop loss (False) It then runs. I'll run some tests
+
+--- 帖子 #246 ---
+see post 244 and dowload the new file
+
+--- 帖子 #247 ---
+download the new file from post 244. maybe something went wrong with the first one.
+
+--- 帖子 #248 ---
+Ema wtf ?
+
+--- 帖子 #249 ---
+if your a running on 5digit broker. change tp to 300 and sl to false and tl to 180. it should work.
+
+--- 帖子 #250 ---
+Yep... 5 digit broker was the problem. It is working fine now. It looks very interesting.
+
+--- 帖子 #251 ---
+follow the setting and the dates from post #1 for back testing or live or demo trading wait for the complete guide. make sure u have upto date data from u broker for the dates in post #1 download the new file from post #244
+
+--- 帖子 #252 ---
+same .it works fine for me now.....by using FxPro to Test Thank you Ematrader
+
+--- 帖子 #253 ---
+for backtesting use only the dates from post#1 for demo or live trading wait for the complete guide.
+
+--- 帖子 #254 ---
+I'll begin forward testing as well next week via FXDD. But, the last trade lost $16,360. Bought at 1.5973 on 7/15/2008 and stopped out at 1.4337 on 12/23/2009
+
+--- 帖子 #255 ---
+You're awesome EMA! Another fine example of FF members that are willing to give and do. I appreciate your time and willingness to do what you are. Thumbs up from CA!
+
+--- 帖子 #256 ---
+man man man FOLLOW THE DATES FOR BACKTESTING FROM THE POST #1 ONLY AND ONLY THESE DATES FOR DEMO OR LIVE TRADING WAIT FOR THE COMPLETE GUIDE
+
+--- 帖子 #257 ---
+What is the problem of the final version.? We may help for you...
+
+--- 帖子 #258 ---
+PLEASE FOLLOW THESE DATES FOR BACK TESTING PORPSE ONLY from 2001-08-01 to 2008-03-16
+
+--- 帖子 #259 ---
+Ema will you add SELL function ?
+
+--- 帖子 #260 ---
+sorry about that...will download the historical data...
+
+--- 帖子 #261 ---
+It still gets the error 145 when testing in FxOpen I think the spread is too high in FxOpen (2pips)??
+
+--- 帖子 #262 ---
+Plz downlaod the new file from post #244 if u have problem with fxopen try i with ibfx. update data then run for the dates from post#1. i must work.
+
+--- 帖子 #263 ---
+ematrader with 5- 10 tp it's working perfectly
+
+--- 帖子 #264 ---
+The profit factor is so high it's not even giving a number for it!
+
+--- 帖子 #265 ---
+i was also wondering this. Im getting great results from backtest but only buys. looks promising
+
+--- 帖子 #266 ---
+TS code doesnt seem to work at all. Have a feeling this code needs ALOT of work?
+
+--- 帖子 #267 ---
+Yes it will work for those dates. But it fails during the huge trend reversal in Aug-Oct of 2008. If an EA is to be successful it needs to be able to operate in all market conditions. This one appears to have problems in trends heading South. If you trade without stops and can endure DD as long as you are in the general trend direction all is good. But if the trend reverses and you hold without a stop it can destroy your account. If I am wrong I would be happy to be corrected but this EA will have open trades in DD if you trade without stops and the trend goes short. Many folks lost a lot of money during that reversal.
+
+--- 帖子 #268 ---
+Backtest graph with the correct dates...
+
+--- 帖子 #269 ---
+Thanks ematrader, I think you have done too much work already. Let me help you to explain about the date between 2001 and 2008. With a Buy-only no Stop Loss setting, yes it is a 100% success rate system! And it is really profitable and easy to operate. Thanks for your New year present! kk007
+
+--- 帖子 #270 ---
+as i said b4. wait for complete guide if u want to test it other then these days or demo or live test it. this is beta v2.0 and its semi-automated ea. hope this helps. read my prev. post
+
+--- 帖子 #271 ---
+I will wait for the rest of the strategy. My only point was that buying the Euro during that time frame was always a winner trade if you held it. But When the big reversal hit and the Euro bottomed out at 1.25 area.. well a lot of buy strategies lost money and ended in margin calls. I wold love to know what you would have done to protect the strategy when the Euro fell from it's high of 1.6 down to 1.25 without almost any retracement. I am not trying to be negative, I just speak from experience, as I blew up an account during that time with a similar strategy. Since then I am very cautious about EAs that work during certain dates but fail during others. You have to have a back up plan for such contingencies and often those back up plans make the strategy less appealing during "normal" times. I will continue monitoring the thread with great interest.
+
+--- 帖子 #272 ---
+dil can you please post your settings please? did you get it to work?
+
+--- 帖子 #273 ---
+Ematrader when will you have the complete version
+
+--- 帖子 #274 ---
+yeah with sell , it would be great
+
+--- 帖子 #275 ---
+Guys how to change to microlot 0.01 doesnt work i want to test this ea live with 100$
+
+--- 帖子 #276 ---
+ema posted the same repeated answer 4 times and nobody seems to stop and listen. what's the hurry?
+
+--- 帖子 #277 ---
+I hope I could have been able to predict the big Bullish trend for the next few years when I was at 2001. Otherwise, success will only be guranteed with hindsight! hahahahahhahahahaha. But if I have this kind of predictive power, I don't need an EA at all to help me to become extremely profitable. hahahahahahahaha
+
+--- 帖子 #278 ---
+Has anyone achieved 90% tick modeling yet? With out that ALL backtesting results are WORTHLESS!
+
+--- 帖子 #279 ---
+Take a look. Just ran with ematrader's suggested dates and settings. Cheers
+
+--- 帖子 #280 ---
+Ematrader will you be sharing the full version? I hope so. My backtest trades work successfully except for the last trade. Do you know why?
+
+--- 帖子 #281 ---
+Thanks!
+
+--- 帖子 #282 ---
+Am I to believe you're all excited about an EA producing a profit after severe curve fitting or am I missing something?
+
+--- 帖子 #283 ---
+ematrader, Great job and I think it's awesome that you're sharing some of your work with everyone. I wish you the best year with this business as well as everything else in life. I was just reading through some of the posts, I rarely read these forums at this point and now I remember why. Honestly, can you people just stop and think for a second, and read what he has to say instead of just babbling on about nonsense? Numerous times he mentioned that this is a SEMI-AUTOMATED EA, that he is testing his stuff on V4.5 and this is only 2.0. He also noted to wait until he writes up the damn thing before you start trading this demo or live and this is only to test it on specific historical data. Why in the world can't you guys just wait, do as he said and test it if you're interested but don't give him crap about an unfinished product because IT's NOT FINISHED. He already shared more than probably most of you and if you can't see the benefit of his work then you're just blind. He is providing you with a technique, entries/exits, a basis for a strategy. He is not your mum and won't hold your hand 24/7 while you use something that he made out of pure enjoyment and trying to help you guys. Whether he will release the final thing and how final and fully automated it will be is for him to decide. Maybe a fully automated EA isn't the best idea in this case and maybe it's better as a semi. Here's food for thought if you haven't thought about it yet to improve your trading if you are interested in what he's doing here and maybe you're just oblivious. ematrader is providing you with a way to get into the market and out profitably. That is one small part of trading. Look at the entries/exits, where, when they occur. Drawdowns, how to maybe filter them and pick the best ones or manage your money and the position. A static optimized SL/TP is not always a best way since volatility in the market changes due to many variables, maybe a dynamic SL/TP would be better. I'm sure there are many things you can take a way from his system and I know I had an idea for something I'm working on from it that I will have to test out so I'm grateful. I'm sorry ematrader about rambling on in your thread, shoot me a msg if you want me to edit this out, but it's really upsetting me because a lot of the time talent and raw ideas and new products get shunned because there's just so much drama and hype about nothing to the point where it gets annoying and too time consuming to keep on going. I'm glad you have the patience and wish you all the best.
+
+--- 帖子 #284 ---
+Very well said. Patience is an important part of trading.
+
+--- 帖子 #285 ---
+its great. some of the trades in gets into can be pretty hairy, in some trades it can be inthe hole more than 1000 pips, and yet it still holds out for long periods, this would be to much for me to tolerate on a live account. sooooo i will have some thinking to do about this, and it would be a sound idea if i am CERTAIN the market is in a srong north trend..... hmmmmmmmmmm
+
+--- 帖子 #286 ---
+Hmmmmm. I'm sure EmaTrader has fully tested with the use of a Stop Loss but it sure would be hard not to have one on a live account. Would be interesting to see how a Stop Loss effects the win/loss ratio and overall profitability. Who knows, maybe the v4.5 strategy EmaTrader is yet to release uses a emergency S/L??? Guess with a bit of patience we will see.
+
+--- 帖子 #287 ---
+EMA much thanks for this. I would suggest contacting SteveHopwood on FF who I'm sure would be more than happy to take your EA to the next stage. He's an awesome coder and very giving.
+
+--- 帖子 #288 ---
+Hi EMA, I have been following your thread and like to crongrats you on a fine job. After seeing your thread last year, it gave me inspiration to develop a pip raiding EA also. Although it works successfully you would need capital to run it as I use 500 pip stops for just 7-12 pips rewards. Although it runs 98% accurate on its entrys, it will get caught in long term trends. I am only mentioning this as I will can offer assistance when it comes to progamming. If you need any help I will be more than happy to get your system perfected. The more fingers in the development makes for a better grail. PM me if you need any help with the development. I am also happy to discuss what I have created, all be it a simple system.
+
+--- 帖子 #289 ---
+When more details unfold (EMAs manual) I would def. recommend that! If it is worth pursuing..... and there IS a "Next" level for the EA..... Mr. Stevehopwood will take it there! And to say "Giving" is an understatement!!! (imho) Anyway I DO like what your thinkin over there cgldsmth!!
+
+--- 帖子 #290 ---
+naww...you are not missing anything...but don't be so negative...if exactly the same data as the data tested happens to occur again in the future, ..well then you will not have any losing trades...just save the EA in case this 1 in a trillion occurence happens...and if this 1 in a trillion occurence were to happen again, you would not know until after it had already happened...too late load the EA. LOL
+
+--- 帖子 #291 ---
+Yeah guys without SELL its very risk..
+
+--- 帖子 #292 ---
+What the hell is wrong with u? This thread is full of your temporary opinions and no one cares. ematrader owes u jack the way u go on about sounds like u paid him for it big time...just keep your opinions to yourself
+
+--- 帖子 #293 ---
+Setting for the EA (Only 15 Min or higher) Chart Eur/USD SL - False TS - 18 TP - 30 yes is profit ematrader. Thanks for the sharing. Hope will trade it Live soon. Wait for your guide.
+
+--- 帖子 #294 ---
+The EA seems to work OK on the right side of a tranding market... but the big draw down (see the chart) is not ecceptable and it might bust one's account when trend reverses.
+
+--- 帖子 #295 ---
+You have summed it up. Happy new year guys and pls learn to be patient as this is a very vital virtue for trading. I wish you all a year 2010 full of pips...converted to raw cash.
+
+--- 帖子 #296 ---
+jonaslt is totally correct please be patient!!! Thanks ematrader for sharing with us your ideas.
+
+--- 帖子 #297 ---
+Just remember this thought. There was a guy selling an EA and showed a 100% win rate over a 7 year period. It was the EUR/USD and all it did was buys. What no backtest shows is where you get killed on retracement on these things. Backtests are not reliable indicators of how an EA works in real time. See pic below. 2001 to May 2008
+
+--- 帖子 #298 ---
+Yeah it's so obvious it doesn't even need an explanation... just let the followers learn themselves I suppose
+
+--- 帖子 #299 ---
+Ematrader. Thanks for your excellent work. !!
+
+--- 帖子 #300 ---
+I prey to god that nobody tries to run this on a live account. But I guess the only way for people to learn is the hard way. Any CB interventions or major reversals and you will end up with ZERO in your trading accounts.
+
+--- 帖子 #301 ---
+Yes. I've posted the same chart eariler @ post #272, but the backtesters just keep ignoring the bigger picture and the truth. Best Wishes for all!
+
+--- 帖子 #302 ---
+Hi Ematrader, Thanks you for the new version EA. I tested it according to your setting - without SL, TP 30, TS 18 using the time period 01.012008 to 31.01.2008. The reults looks good until the last trade#98 which show a huge loss. Please let me know what went wrong. Thanks. Emmanuel
+
+--- 帖子 #303 ---
+Guys, the ea is only programmed to perform well in a bullish market, it only do BUYS. No sell and worse of all is that it needs No stop loss to do good, the trend reverses and your account is fried within minutes. I know I wouldn't go live with this ea, not even with my worst enemy's money. I am not prepared to lose so much money!
+
+--- 帖子 #304 ---
+Thank you ematrader for sharing.. I believe the most important things to create any profitable strategys is : 1. entering strategy. 2. exiting strategy. 3. money management strategy. If you ignore any of this important things, your strategy fail !! On your expert i see entring strategy and some of money management ( Take Profit ) but this is not completly money managment. you finished alredy one step ( entering strategy ), now go to the next step ( exiting strategy ) and then to the last step ( money management strategy ) and i am sorry for my bad english Thank you again and good luck Best regards Adel AlMajed
+
+--- 帖子 #305 ---
+Oct. 2008 had the biggest moves ever in Forex, at least in the last decade. That month was an aberration not the norm. No EA or trading system will survive that month unless it was lucky enough to be on the right side of those monster moves. The problem with backtesting is it does not show what can be done in real time. I dont recommend running an EA during certain news periods and many will do fine if you follow some basic rules. All EAs are based on some kind of indicators and indicators do not show or predict big news movement. If on Jan 4, 2010 the USA raised its interest rate by 1 point no indicator is going to help you with the market moves for several days. So dont even bother with back tests during those kind of times, even with SL they wont give you the real picture. Backtest can only at best let you know two things. Your EA works and what it will do on a general basis. If you dont believe me, do what I did. I ran an EA for one month and then ran it on a backtest for the same month. The compared results were not very close. Until this EA is forward tested you will not really know what will happen. However, a no SL system will always run into a perfect storm at some point so there must be a place of cutting your loses. It is just part of trading that you have to mentally deal with.
+
+--- 帖子 #306 ---
+can you even read the numbers? read the damn date again.
+
+--- 帖子 #307 ---
+I agree that without a SL this ea will eventually blow an account. Also the drawdown would be quite big. One option would be to look into adding a hedging strategy to the EA when the trade started to move against you. Ex: long trade moves 50 pips against you enter a short trade. Trade moves another 50pips against you enter another short trade. (The 50 pips is an example. You;d have to experiment and optimize) I still think a reasonable SL is needed
+
+--- 帖子 #308 ---
+I thought here (forexfactory) traders are very well educated or atleast they are here to learn and share the trading ideas. People here can't even follow what i said. ow many times i said backtest only during these dates, and do not trade on demo or live untill i will post the complete guide. By the way this is beta 2.0, this one only have ema system and works from single time frame. the final version works from mutitime frame and have both ema and slope system in it. i've been trading with this system now almost 6 months. Anyways, i'm was not selling, and will not sell this system at any cost. To cut it short, i'll post sell only ea from beta 2.0. in few min. I'll not take my time to write how to trade this system. When we know ... place sell ea or buy ea. If you like it you guys may continue the thread from here on. Or even start a new one to disscuss between you guys. I did not knew i will have to deal with such people here @ FF. I was not really sure why 95% of trader loss money, but i'm pretty sure now. Happy Trading.
+
+--- 帖子 #309 ---
+Sell only EA
+
+--- 帖子 #310 ---
+I'll try to simmer the fire that's brewing here a little before ematrader splits early. I jumped the gun as well on the dates and I apologize for that. Any successful trader will tell you that to follow the long term trend is where you want to be. If you have an EA that recognizes that and only trades in that direction and has positive results, great. Thinking ahead here...I've been following Phillip Nells 4 hour strategy here and it is a great method to determine the strength of the trend. Since ematrader's EA only places buys for now, then when that 4hr longer term trend is up, run this EA...that's how I would use this with that 4 hour method. If the trend is channeling or down, don't run the EA. ematrader said this is a semi-automatic EA, meaning there must be some human internvention with it = yes YOU actuallly have to do something. I'm thinking this is an early version of the EA and along with the directions to be posted later, I'm sure there will be a downtrending version that gets upload here later. Unless of course the lack of patience here runs him off. Channeling trends are where some EA's get killed but there are a few simple indicators FOR THE LONGER TERM CHARTS that you can use to tell you to stay out. This is where the semi-automatic intervention may come in where you have to determine which buy only, sell only, or no trade variables are set. This is what I'm working on so I'm just thinking out loud with all of this. Give ematrader a break, chance, time, whatever you want to call it and let's just see what comes out of it all.... And there ya go....YOU determine the trend direction and run it...
+
+--- 帖子 #311 ---
+" I did not knew i will have to deal with such people here @ FF. I was not really sure why 95% of trader loss money, but i'm pretty sure now. Happy Trading." and that is called hitting the nail on the head.....
+
+--- 帖子 #312 ---
+. I did not knew i will have to deal with such people here @ FF. I was not really sure why 95% of trader loss money, but i'm pretty sure now. Happy Trading.[/quote] After reading the posts of the last few days I completely agree with your last sentence. Some of the posts were constructive but the great majority came accross as posturing children. Some of us who have been following this thread greatly appreciate your efforts and desire to share them publicly. Personally based on the recent comments in the foregoing posts I would have been out of here long before you decided to pack it in. Nobody needs to put up with this kind of BS particularly when you are trying to be helpful. I will look over your EA's and forward test them on a demo and if I feel that I can offer constructive suggestions I will PM you. Thanks for the effort. We are both out of here.
+
+--- 帖子 #313 ---
+ematrader or anyone else that is familiar with the slope indicator mentioned in the first post, how is the trend change calculated? Is it just the cross of a few WMA or is there something else to it? I looked over the thread where ematrader discussed his manual system but again a lot of it is just filled with nonsense, I couldn't find the actual mechanics of the indicator discussed. Again, thanks ematrader for sharing your methods and putting up with all of this, Jonas
+
+--- 帖子 #314 ---
+Here's the code for those of you who are interested:
+
+--- 帖子 #315 ---
+Can anyone assist me on this? I had the same issue as "emmanuel7788" and I used the correct settings and dates. I used "no SL, TP30, TS18, . But at the last trade, it says "close at stop" under "type" of trade in the results. Hence, produces a huge loosing trade. Does anyone know why?
+
+--- 帖子 #316 ---
+When im testing this i have got error after modification. I have tested two uploads but the same error 130 what is wrong??
+
+--- 帖子 #317 ---
+I experienced the same thing . But anyway just wanted to thank ematrader for his efforts and his new years present to all of us who can appreciate it ........Happy New Year ! We could all use the help Im sure .
+
+--- 帖子 #318 ---
+http://www.bztoons.com/toons/idiot.jpg
+
+--- 帖子 #319 ---
+Since you posted for the first time in this thread. The dates are 2001-08-01 ... 2008-03-16
+
+--- 帖子 #321 ---
+Start at post 230
+
+--- 帖子 #322 ---
+This has already been covered. You need to add a zero to TP and TS, etc.
+
+--- 帖子 #323 ---
+Can i know are the SELL we also use this setting? "Setting for the EA (Only 15 Min or higher) Chart Eur/USD SL - False TS - 18 TP - 30 "
+
+--- 帖子 #324 ---
+Hi would you please combine these 2 EA in to one EA .. then we can have a backtest . and see the result.. tnx
+
+--- 帖子 #325 ---
+You simply cannot expect a novice programmer to code an expert-advisor which will have consistent profits. In London, trading companies pay groups of programmers 60K plus to develop/maintain trading systems. The key to any long-term successful expert advisor will be how well it is able to "Adapt/Change" its entry/exit criteria. You can either: 1. program it to adapt on its own (this will require substantial code, certainly some form of relational database involved and object oriented programming) 2. have a human element (input), that helps the expert advisor understand how the market is trending or which strategy to use. With both points, one would need to employ a series of strategies which the human or program would choose to use for an interval of time. I commend ematrader for his efforts. Good luck all
+
+--- 帖子 #326 ---
+It can and is done by using known market patterns with +/- degrees of deviation. My trading floor employees people todo this but what it does is give BUY/SELL/CLOSE signals, it is then upto the individual trader to accept or ignore based on his/her knowledge of the current market conditions. Scoobs.
+
+--- 帖子 #327 ---
+I have still order send error 130:/ i have to set stop loss to get working this.... what the ST is??
+
+--- 帖子 #328 ---
+Ematrader: Thanks for the EA...nice work. I look forward to putting in some more time to understand the potential use of your strategy.
+
+--- 帖子 #329 ---
+ematrader, please include the equity recorder library from here: http://codebase.mql4.com/6217 into the EA and then produce a proper equity chart and post it here. Your Balance-Curves are meaningless, we need to see the total equity instead which is the only important number in this whole game.
+
+--- 帖子 #330 ---
+I have used Fap Turbo, Steinitz and Pipzu and they all have stops and still blew up accounts, so my point is to learn to trade yourselves and use the email feature in the EA to analize entry in the trade. Only take positions with the trend from the higher time frames. Give Ematrader a break He is only like a lot of us trying to get meat for the gravey. If I were Him I would not even post here any more! You Guys are hostile!!!!!!!!!!!!!!
+
+--- 帖子 #331 ---
+Hi Ema I am not sure if you are reading posts here or not, would not blame you if you don't. I thank you for sharing your EA. I will try it on demo as you suggested and I will wait for further instruction/documents/versions etc. It will be fun to forward test it. I am aware that you mentioned that the EA is for 15 min TF or higher, therefore I assume that 4hr and daily tfs are also suitable. Cheers and thanks.
+
+--- 帖子 #332 ---
+Shame, Shame, Shame.... I have been following this thread since last year (2009), and I must say, I totally agree with ematrader. I thought ppl come here to learn n share. Ematrader is trying to share, NOT TO SELL his system. And worst of all, I don't think he forced anybody to come and read his thread. He has repeatedly stated that the version he posted is beta V.2, which means it is not the final version. He has repeatedly stated just try to backtest on a specific dates. He will post the final version when it is available. To those of you who are so SMART, can't you understand what he meant? Why did you come to this thread in the first place? Coz you wanna know if his ea can make money for you, right? Why can't you let him finish his work and present the final version? Then, and only then can you post any criticism to the ea. If you don't like what you see, by all means, go somewhere else. I believe there are still others who would like to follow this thread. If you are so SMART, why don't you share your trading system. I am sure you are not doing so well yourself. So give others a chance to share theirs. Sorry if my comment sound disturbing. I just wish that in this New Year, we learn to give people a chance to share their thought. We are not forced to, in any way, to follow. SO, if we don't like it, just leave.. Happy New Year and Happy Trading...
+
+--- 帖子 #333 ---
+Pipchaser, I agree with you completely and hope ematrader will come back to the thread. Although, I'm not sure he will at this point and I don't blame him a bit. I personally trade several systems and markets ( forex, s&amp;p 500, russell 2000) but am always eager to learn new things. That's what makes a successful trader....one who is eager to learn. Cheers.....
+
+--- 帖子 #334 ---
+i have better ea on live 100% a month
+
+--- 帖子 #335 ---
+??
+
+--- 帖子 #336 ---
+I come back to this thread because it is delicious, and for no other reason.
+
+--- 帖子 #337 ---
+WELL SAID! Happy New Year to all!
+
+--- 帖子 #338 ---
+Dil, No offence but what you have just said means nothing to me, at least. What i mean is don't bring this ( i have better ea on live 100% a month ) up if you are not prepared or willing to share with us here in FF. By just simply making a statement or saying without any support or evidence, you are just TCSS. Well, i do hope you will prove me wrong later. If so, please accept my apology. P.S. If you do not know what's TCSS, ask a Singaporean or Malaysian friend.
+
+--- 帖子 #339 ---
+yep i will post statement.
+
+--- 帖子 #340 ---
+Sorry if i sound harsh. Please clarify if you are willing to let people in FF to use this particular EA. If your intention is commercial, you can PM me. Thanks.
+
+--- 帖子 #341 ---
+Here is a very simple EA that has some code that I think you may be able to integrate into your EA to solve some of your programing problems. Enjoy.
+
+--- 帖子 #342 ---
+What would be the settings for the attached EA?
+
+--- 帖子 #343 ---
+Hello Everyone, Happy new year everyone and may this year bring you more pips and less drawdowns... I am programmer and have had a hand in doing lots of coding on MT4 here and there.. I need to bring to your attention something about EAs... Whatever EA that your program and find successful without SL will eventually blow your Account because of difference in Equity and Balance curves.. I wrote several EA and was amazed by how well they do on Strategy tester... and I came to 1 single conclusion... If you need a good EA then u need an EA that requires human intervention... Ematrader presented his EA and yes it is working and works very well but u need to work with it too not pure Auto. All my EA and EA I program for people I ask them to manage the trades WHY? too much assumptions that EA makes are what we hard code to it so some might not be exactly what we need. Time period are not relevant to working of an EA, your decision on when it should trades are what are very important... My advice to Ematrader... Look @ the direction of Higher TF make sure you are not against them @ all cost because TREND is ALWAYS YOUR FRIEND it will get you out of Err eventually.. Just my 2 pips brain... SmartFX
+
+--- 帖子 #344 ---
+hi and happy new year for all too , i have an ea and its great on working with no sl , i mean that maybe u r wrong sir
+
+--- 帖子 #345 ---
+Nope I am not wrong if u play any EA without SL with a period and the test ends before the trades come to your direction it will surely have that angled end we are seeing people posting here... If it is working ok it means trades are always closing in your direction or you have counter measures which any smart person must put.. Some will martingale and some will hedge depends on you... SmartFX
+
+--- 帖子 #346 ---
+What, can't come up with anything to prove it? Photoshop quit working?
+
+--- 帖子 #347 ---
+No trading strategy? Lucky? In october alone that month I made more pips than a normal year... I wished every month was like that particular October you speak of... I raked in almost 12,000 pips that month alone !
+
+--- 帖子 #348 ---
+12,000 pips. Live or demo? Full lot or .01 per pip? Not being negative but I've traded for 5 yrs and never made more than 950 in a month trading full lots live. Care to share your secret? Clarification: 950 pips were made once in Jan 2009 trading gbp/usd and Eur/usd and it was somewhat lucky as eur and gbp dropped dramatically in Oct 2008 with fall of Bear-Stearns. I average about 200-275 per month....if I'm lucky.
+
+--- 帖子 #349 ---
+950 pips a month will do me!
+
+--- 帖子 #350 ---
+I was talking about EAs. Most of them either got killed or had record hauls. My point is EAs are indicator driven but major News stories overide indicators. That is my point. If you back test an EA and it fails during the month of OCT 08, it doesnt mean it is a bad EA just that it is not designed for major news events. That is the point I was trying to make. Sorry if that wasnt clear.
+
+--- 帖子 #351 ---
+I agree. My experience with EAs over a 3 year period is you need to know what the trading philosophy is so you can overide it (human intervention) when something happens that the EA cant handle. That is why buying an EA without knowing its weaknesses (all of them do) is a recipe for a disaster. Actually I have done better countertrend trading than trend trading because price will always retrace but the trend may not. You dont know when or where the trend stops or starts and when you recognize a trend it probably will change when you enter. Peter principal thing.
+
+--- 帖子 #352 ---
+As with any Trading Strat: EA to be Successful: It does not have to trade... It has to let the market come... It should not chase the market... Any successful Forex Trader know that this are the Key of any Trading System: 950pips a month I will live like a King.. 12000pips a month well I will buy the moon... SmartFX
+
+--- 帖子 #353 ---
+I guess the OP has gone missing?
+
+--- 帖子 #354 ---
+To me this picture looks just like MARTINGALE http://www.forexfactory.com/attachme...8&amp;d=1262441491
+
+--- 帖子 #355 ---
+Hi, first post here but I would like to ask what growth you saw from 12,000 pips? What were your position sizes? 12,000 pips can be the same as 1,200 pips if using different MM. Regarding EA: I guess the manual is no longer forth coming?
+
+--- 帖子 #356 ---
+hii all , just for the EA i hope that its a good one but to confirm success of the EA as a traider for 8 years with an experince i have a graet method to test the EA for any period we need and then we can se the real result and start making money my laydies......
+
+--- 帖子 #357 ---
+making a thousand pips a month is not so hard. all u need is discipline and understand hw market move. on the minimum i make 500pips a month, by the way that my monthly target and i risk around 10% (awesome ryt) dont be surprised. i learnt this by blowing several account but now im there.so making 12000 pips a month by trading purely mechanical method is more than possible.i have made 5000pips before.i dont use a complicated system but a very very simple methods.i dont realy believe in stuffs people say around here and all the books i have read. if u wanna know more u can pm me. let me give an example. GPBJPY move an average of 500pips on a 4hr swing and that happen let say 3 to 4 times a month. if u can catch lets say 100 to 200pips of that, do the math what will that be in month???and lets say u trade two pairs. u can see its very very possible
+
+--- 帖子 #358 ---
+live risking 1.5% of equity per trade, so the lots vary. Please understand that I don't want to disclose the size of my account. there's no secret. It's simply following price. i buy strength and sell weakness. of course October was an abnormal month and 2008 an abnormal year... i don't ever expect to get that results again...i wish. Although 2009 was more normal it still managed to get an average of 900 pips per month, May and July were the biggest months with more than 1500 pips each. best wishes of a profitable 2010 to everyobody
+
+--- 帖子 #359 ---
+i guess it depends on the EA's. if we're talking the normal and common EA's of scalping etc like fapturbos and megadroid's of this world, i would agree with you. but my strategy is simple enough to be transformed into an EA and I'd bet the results would be very similar to manual trading. it all depends on what the strategy the EA is based on is.
+
+--- 帖子 #360 ---
+i know. Pips are not important because one can have positive pips and have a negative P&amp;L or negative pips and have profits to show. it only makes sense stating pips if we use the same position size for every trade. For someone that has a variable position sizing etc it's the bottom line that matters. anyways if i remember correctly without reaching for my records, october increased my account around 100+% risking 1 - 1.5% per trade. sorry for the several posts in a row
+
+--- 帖子 #361 ---
+Can you please start a thread or share your simple system with us. Thanks Prakash
+
+--- 帖子 #362 ---
+Hi All I would love to learn a system that could safely get me 900 to 1000 pips per month. Would anyone who has such a system please share that system with the forum. I would really appreciate it - I recently lost my job and I need to find a new source of income. Thanks in advance for any help offered. Jim (MrChips)
+
+--- 帖子 #363 ---
+If you are new to the Forex market, and I'll assume you are, it takes time to become a profitable trader. Some people become profitable in months and some never do. This forum is a great place to learn. Salvador has a method he uses and I'm sure he has spent alot of time refining his entries and exits. I have a method I use ( THV4 from Cobra ) and it's profitable for me. I average 200-275 pips per month on full contracts ( $10 per pip ). I'm retired so it supplements me very well but it is still work. My goal for this year is 30 pips per day. Good luck.
+
+--- 帖子 #364 ---
+Your first priority is looking for another job. If you've truly caught the trading bug, learn about the subject in a calm environment without the worries of paying bills. There are a few exceptional individuals who learned to trade profitably in less than a year but that's very rare. I can assure you that the level of effort to learn to trade profitably is equivalent to earning a degree. There are many aspects to this business and you can't gloss over any of them. Trading isn't like learning to juggle or some other parlor trick that someone can show you in a few hours.
+
+--- 帖子 #365 ---
+Sound advice.
+
+--- 帖子 #366 ---
+Thread officially hijacked. Thank god.
+
+--- 帖子 #367 ---
+Dear Jim As they say no pain no gain. This is a great place to learn, you lost your job so you have plenty of time on your hand. Study Audio, Study video, Study text, Study Charts. There are great resources for free (do not need to buy expensive books, DVDs etc) so at this time when finances are in bad shape you do not need to spend any money, although I think it is better to read large volume of text printed rather than on screen. So a printer, Ink and paper would help. open 2 or 3 demo accounts and practice different systems, etc. I totally agree that to be successfull trader you need to 1st Degree standard (i.e. at least 4 to 6 hours per day for at least 12 to 18 months). Good Luck.
+
+--- 帖子 #368 ---
+Salvador, I would like to program an EA based on your trading style, can you let us know your simple strategy and i am sure with the help of the forum, it may be possible to have a successful EA, either semi-auto or fully automated. thankks
+
+--- 帖子 #369 ---
+anyone has tried to use it on demo in past two days ? any results ?
+
+--- 帖子 #370 ---
+EMA, where are you ? Hope you haven't given up on us !
+
+--- 帖子 #371 ---
+Don't be a hater, be a congratulater. Thanks for the EA, its on my demo and we will see how it goes now...
+
+--- 帖子 #372 ---
+i have received alot of messages regarding the system i use and how easy it can be to make 500pips a month. i know of people on the forum that make up to 5000pips and above a month, so 500pips is so small compare to what this set of guys make though there are few of them. if its ok i can share my system here or better still start a thread
+
+--- 帖子 #373 ---
+Who wouldn’t be interested in such a system and I’m no exception . Please post details
+
+--- 帖子 #374 ---
+i would be keen into your system as well, let me know if you start a thread.
+
+--- 帖子 #375 ---
+Same here beejay, I wouldn't mind knowing either. I can code EAs as well, so if anybody has a profitable, MECHANICAL system (a system with strict entry, exit rules) that they'd like converted into an EA, please PM me.
+
+--- 帖子 #376 ---
+hi man iam looking for EA that makes 5000 pips per month it will be amazing and if u can help me and share the EA with me it will be great thanks a lot , my mail :fadi.safieh@gmail.com . i will be happy if you got EAs that makes 500 pips a month for sure. thanks and have a nice day .
+
+--- 帖子 #377 ---
+BRING IT ON!
+
+--- 帖子 #378 ---
+yes go on~~~
+
+--- 帖子 #379 ---
+Always looking for a free handout. Find your own EAs.
+
+--- 帖子 #380 ---
+Whats the link for the thread "make 500pips a month" Hosted by BeeJay?
+
+--- 帖子 #381 ---
+Your first priority is getting another job. Trading with pressure on you in order to get an income especially in your situation, usually goes the bad route. my method is nothing fancy. Just ATR stops and going with the trend. I don't day trade due to time constraints so I'm more of a swing trader so value per pip can't be higher if i would be day trading. Once I finish college I'll make a decision to either find a job or experiment for a few months the day trading business. As for the method is pretty simple. Going with the trend. I also use EW theory but just in order to identify the choppiness periods and know when they are over. I wouldn't advise for you to go day trading. First find a job. Then gradually try to save part of your income to an account and start to trade bigger timeframes. Dailies are pretty good in my opinion. You won't win as much money due to pip value but the priority is having the execution right, and the dailies are more forgivin
+
+--- 帖子 #382 ---
+I will look into it and warn everybody if i decide to share. I have a simple one that I shared in another forum if you want to take a look: I have no idea how it performs on lower time frames and how successfull it is in Forex. In equities it has worked very well on the dailies, so it is my assumption it MAY work on lower time frames as well... http://www.donnaforex.com/forum/index.php?topic=82.0 To sum up is: RSI(55) and RSI(14) if both above the 55 level, trade long. Accumulate everytime RSI crosses over 55 again if it gone lower than 55 at some point. Under 45 level is the same but for shorts. between 45-55 on RSI(55) I consider we may be in a sideways market, so trade carefully. I used ATR as stops or just higher lows or lower highs as stops. If one's long and RSI(14) goes under 55 level do nothing but be prepared if price starts to go down. if it reverses and goes over 55 again accumulate. again i have no idea how it works on lower timeframes but if you code we can check if it's profitable or not.
+
+--- 帖子 #383 ---
+Salvador, can you speak to the "EW" theory? I'm with you on trading with the trend and have been using multiple Moving Averages. Works fine during the trend but the choppy periods eat me alive. Searching for some tips on identifying trend/choppy periods "in advance". Thnx, Pip Parade
+
+--- 帖子 #384 ---
+I have made an EA that trades on the Salvador System, it is showing good results as a pipraider taking 10 pips per trade. I am just touching up the code to be allowed to trade both pips and with exits using salvadors system. I will post the EA tonight, ready for tests and see what recommendations others can add to it. Maybe EMAtrader can see if the idea can help his system as well. Thanks Salvador for the ideas.
+
+--- 帖子 #385 ---
+V nice of u man
+
+--- 帖子 #386 ---
+Can anyone code this system into an EA? it's a powerful trading system for the GBP/JPY. Im not sure if it works for other pairs as well. It's a system which my friend purchased. The strategist is a lady in South Africa. Who aims for 30-50pips a night with one simple trade on 5min chart. Its supposedly really good and it uses Boll. Bands with RSI. Take a look at my attachment. It shows the instructions of the strategy. This will make a good EA because it's a simple strategy. Let me know if you or anyone believes they can code this into an EA.
+
+--- 帖子 #387 ---
+Hola Salvador (me imagino por el nombre que hablas español), but anyway let´s do it in english, i would like to contact you if possible please PM me
+
+--- 帖子 #388 ---
+Sorry, I have not finished the exit strategy for the RSI EA, I will have it done over the weekend for everyone to have a look at. but the system will need some improvements on a smaller time frame. lets hope we can get the input to make it work.
+
+--- 帖子 #389 ---
+I have attached the RSI Based EA, it is not complete, but can be used to test the pipraiding section. settings are as follows, WaitState - Set in minutes, this is the amount of minutes the system needs to wait once a trade has been entered. It is used to eliminate whipsaws. Lots - how many lots to open per position. TakeProfit - used only in pipraiding mode, how pips to take profit. StopLoss - used only in pipraiding mode, how pips to before taking loss. PipRaiding - set to True to trade in pipraiding mode. False will set it into the RSI trading system, only the placement of the entry orders are functional in this mode at this stage. I hope to complete the exit strategy over the weekend. Pipfactor is used in the main trading system which is not complete, I will explain this setting in the next release.
+
+--- 帖子 #390 ---
+thanks tokyojon i have no idea how it works on forex or in lower time frames as i said before but it may work i don't know. The rules regarding exits etc can be a bit tricky to code since they can be subjective (either at a higher low or using some kind of volatility stop). also whenever i'm long and see an acumullation signal, if that signal was issued at around the same price of a previous entry I ignore it, because there's no reason to accumulate one more entry if your last entry was still around break even. The goal here is to pyramid and have lot of entries along a trend, and only allowing one to be in the red. So if we happen to enter at the end of a trend we may be stopped out in the red for this last entry but then we already had 9-10 entries in profit accumulated. Here are a few examples on a couple of currencies and a stock index: Green with arrows are original entries... dark greens are acummulation points. orange is acummulation points for shorts. It served me well when i traded stocks during the bear market. Also it got me out of the way on the strong rebound on S&amp;P500 in March. It triggered a buy only at 860 points although in some stocks i was trading i was already long at around March 13th because some stocks started triggering buys on both RSI's around that time, especially retail, tech, etc etc... Although I don't trade this system anymore it is now a sub-system of my main trading system/strategy. In my opiinion a trading strategy needs to have at least a couple subsystems like long-term, a trend based, oscilator based and mean revert system.
+
+--- 帖子 #391 ---
+thanks salvador for the charts, i will have a look them over the weekend and see if i can come up with a complex equation on exits. I used the waitstate to try and and stagger the entries, but i like the idea of staggering the entries. I will include this in the next version. I will also use support and ressistance levels in the later version, as if the price is approaching a support, i would be hesitant to enter enter longs and vica versa.
+
+--- 帖子 #392 ---
+Salvador, can you speak to the "EW" theory you referred to in post 381? I'm with you on trading with the trend and have been using multiple Moving Averages. Works fine during the trend but the choppy periods eat me alive. Searching for some tips on identifying trend/choppy periods "in advance". Thnx, Pip Parade
+
+--- 帖子 #393 ---
+I believe Salvador was referring to Elliot Wave theory.
+
+--- 帖子 #394 ---
+I've heard of it but am not familiar with how it works. Any insights to this short of going back to school?
+
+--- 帖子 #395 ---
+EW theory is something it requires study and practice just to get the handle of it... First time I got with it it was so confusing thinking of 1 of A of 2 of 3 of A. Geez... Anyways nothing to teach regarding it nothing better than going to the source... I'll post a pdf of the book later in here you can study from there... In summary I try to avoid larger degree 4th waves which are typically constitude of a pattern of 3-3-3-3-3 waves or a-b-c-d-e ; and take the form of a triangle Have a good weekend everyobody
+
+--- 帖子 #396 ---
+Thanks Salvador, I'll keep an eye out for the PDF. Until then I think I'll just go stand in the corner until it's safe to come back out.... Happy weekend everybody.
+
+--- 帖子 #397 ---
+Hi EmaTrader, Any Progress on this EA? I am sure if we can make it automatically take the Long/Sell based on the trend it becomes a very good EA. Please come back to help us to improve this. Regards, Prakash
+
+--- 帖子 #398 ---
+Hi hall, the stoploss is not profitable.Cover drawdaun EURUSD-AND-USDCHF. //+------------------------------------------------------------------+ //| Variable Begin | //+------------------------------------------------------------------+ double Var1 = iClose("EURUSD", PERIOD_M15, Current + 0); double Var2 = iClose("USDCHF", PERIOD_M5, Current + 0); double Var3 = iHigh("EURUSD", PERIOD_M15, Current + 0); double Var4 = iLow("EURUSD", PERIOD_M15, Current + 0); double Var5 = iHigh("USDCHF", PERIOD_M5, Current + 0); double Var6 = iLow("USDCHF", PERIOD_M5, Current + 0); //double Var7 = iClose("EURCHF", PERIOD_M5, Current + 0); //double Var8 = iOpen("EURCHF", PERIOD_M5, Current + 0); double Buy1_1 = iClose("EURUSD", PERIOD_M15, Current + 0); double Buy1_2 = iHigh("EURUSD", PERIOD_M15, Current + 1); double Buy2_1 = iClose("USDCHF", PERIOD_M5, Current + 0); double Buy2_2 = iLow("USDCHF", PERIOD_M5, Current + 1); //double Buy3_1 = iClose("EURCHF", PERIOD_M5, Current + 0); //double Buy3_2 = iOpen("EURCHF", PERIOD_M5, Current + 0); double Sell1_1 = iClose("EURUSD", PERIOD_M15, Current + 0); double Sell1_2 = iLow("EURUSD", PERIOD_M15, Current + 1); double Sell2_1 = iClose("USDCHF", PERIOD_M5, Current + 0); double Sell2_2 = iHigh("USDCHF", PERIOD_M5, Current + 1); //double Sell3_1 = iClose("EURCHF", PERIOD_M5, Current + 0); //double Sell3_2 = iOpen("EURCHF", PERIOD_M5, Current + 0); double CloseBuy1_1 = iClose("EURUSD", PERIOD_M15, Current + 0); double CloseBuy1_2 = iLow("EURUSD", PERIOD_M15, Current + 1); double CloseBuy2_1 = iClose("USDCHF", PERIOD_M30, Current + 0); double CloseBuy2_2 = iHigh("USDCHF", PERIOD_M30, Current + 1); //double CloseBuy3_1 = iClose("EURCHF", PERIOD_M5, Current + 0); //double CloseBuy3_2 = iOpen("EURCHF", PERIOD_M5, Current + 0); double CloseSell1_1 = iClose("EURUSD", PERIOD_M15, Current + 0); double CloseSell1_2 = iHigh("EURUSD", PERIOD_M15, Current + 1); double CloseSell2_1 = iClose("USDCHF", PERIOD_M30, Current + 0); double CloseSell2_2 = iLow("USDCHF", PERIOD_M30, Current + 1); //double CloseSell3_1 = iClose("EURCHF", PERIOD_M5, Current + 0); //double CloseSell3_2 = iOpen("EURCHF", PERIOD_M5, Current + 0); //+------------------------------------------------------------------+ //| Signal Begin(Entry) | //+------------------------------------------------------------------+ if (Buy1_1 &gt; Buy1_2 &amp;&amp; Buy2_1 &lt; Buy2_2 ) Order = SIGNAL_BUY; if (Sell1_1 &lt; Sell1_2 &amp;&amp; Sell2_1 &gt; Sell2_2 ) Order = SIGNAL_SELL; GetOrder Buy EURUSD AND Buy USDCHF and close all Buy or take profit EURUSD or USDCHF EXAMPLE:EURUSD OPEN BUY-BUY-SELL CLOSE ALL BEACOUSE TAKE PROFIT 10 POINT.................UP USDCHF OPEN BUY-BUY-SELL NO CLOSE ALL BEACOUSE TAKE PROFIT -10 POINT................................DN Your positions is blindet.This martingale no moutch Drawdaun.
+
+--- 帖子 #399 ---
+Hi, strategy money management is: brakeout..............eurusd if up Buy 0.15 lots and usdchf Buy 0.10 brakeout revers.....eurusd if dn Sell 0.35 lots and usdchf Sell 0.20 brakeout revers.....eurusd if up buy 0.75 lots and usdchf buy 0.40 eurusd=Tot.lots is: eurusd Buy 0.15+Buy 0.75=0.90 eurusd Sell 0.35 =-0.35 -------------------------------- Tot. +0.55 usdchf=Tot.lots is: usdchf Buy 0.10+Buy 0.40=0.50 usdchf Sell 0.20 =-0.20 -------------------------------- Tot. +0.30 Hall deal +0.85 close all positions MaxTrade 12 StpLoss all deal 188pips.
+
+--- 帖子 #400 ---
+where do i find the mq4 file,theres no installation files to download can somebody direct me to the download page,please
+
+--- 帖子 #61 ---
+I am looking for a good profitable scalper EA but can't just find the correct one, your EA looks good but any EA that open trades instead of pendings? Or if you can direct me on the forum, would be appreciated.
+
+--- 帖子 #62 ---
+is it possible to backtest it in MT4?
+
+--- 帖子 #63 ---
+Any system with a 99% win rate is a time bomb, that 1% loss is more than enough to wipe out your entire year of winning. The reason behind the big dip at the end should be more than obvious: low TP and high SL/NO SL. Be very afraid of any system with a 90%+ win rate, be very afraid.
+
+
+===== 附件下载链接 =====
+
