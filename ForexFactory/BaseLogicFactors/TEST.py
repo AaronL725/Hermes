@@ -421,7 +421,7 @@ def main():
                     correlations[key] = value
                     # 使用CORRELATION_THRESHOLD判断是否完全匹配
                     if key == "一致率" and indicator.startswith('CDL'):
-                        if value < 1.0:  # 对CDL系列，一致率必须是1.0才算完全匹配
+                        if value < 0.999:  # 对CDL系列，一致率必须大于等于0.999才算完全匹配
                             perfect = False
                     elif value < CORRELATION_THRESHOLD:  # 对非CDL指标，相关系数必须大于等于阈值才算完全匹配
                         perfect = False

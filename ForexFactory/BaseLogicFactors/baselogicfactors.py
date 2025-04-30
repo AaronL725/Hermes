@@ -219,174 +219,6 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLDOJI(high, open, low, close, vol, oi):
-        """
-        CDLDOJI - Candlestick Doji Pattern
-        
-        # CDLDOJI指标是用于识别Doji（十字线）蜡烛图形态的指标
-        # 计算方法：当开盘价和收盘价非常接近时（实体小于蜡烛范围的某个百分比），形成十字线形态
-        # 用途：用于识别市场犹豫不决的状态，可能预示着趋势反转
-        """
-        # 获取数据维度
-        tdts, secs = high.shape
-        
-        # 初始化结果数组
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        
-        # BodyDoji的平均周期，通常为3
-        BodyDojiPeriod = 3
-        
-        for sec in range(secs):
-            for ts in range(tdts):
-                # 数据验证
-                if ts <= BodyDojiPeriod or close[ts, sec] != close[ts, sec]:
-                    continue
-                    
-                # 数据准备
-                _high = high[:ts + 1, sec]
-                _open = open[:ts + 1, sec]
-                _low = low[:ts + 1, sec]
-                _close = close[:ts + 1, sec]
-                _vol = vol[:ts + 1, sec]
-                _oi = oi[:ts + 1, sec]
-                
-                # 使用getavailabledata函数获取可用数据
-                myopen = getavailabledata(_open, ts + 1)
-                myhigh = getavailabledata(_high, ts + 1)
-                myclose = getavailabledata(_close, ts + 1)
-                mylow = getavailabledata(_low, ts + 1)
-                myvol = getavailabledata(_vol, ts + 1)
-                myoi = getavailabledata(_oi, ts + 1)
-                
-                # 计算实体大小
-                realbody = np.abs(myclose - myopen)
-                
-                # 计算蜡烛图范围（这里假设BodyDoji类型对应高低点之差的一定比例）
-                candleRange = myhigh - mylow
-                
-                # 初始化BodyDojiPeriodTotal
-                BodyDojiPeriodTotal = 0
-                
-                # 计算前BodyDojiPeriod个周期的candleRange总和
-                for i in range(ts - BodyDojiPeriod, ts):
-                    # 确保数据有效
-                    if i >= 0 and candleRange[i] == candleRange[i]:
-                        BodyDojiPeriodTotal += candleRange[i]
-                
-                # 计算平均值
-                if BodyDojiPeriod > 0:
-                    BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod
-                else:
-                    BodyDojiAverage = 0
-                    
-                # Doji判断：实体大小小于等于平均范围的一定比例
-                # 设定一个较小的系数，例如0.1，表示实体大小不超过平均范围的10%
-                DojiBodyCoef = 0.1
-                
-                # 判断当前k线是否是Doji
-                if realbody[ts] <= BodyDojiAverage * DojiBodyCoef:
-                    result[ts, sec] = 100
-                else:
-                    result[ts, sec] = 0
-                    
-        return result
-    
-
-    @staticmethod
-    @nb.njit
-    def MACD(high, open, low, close, vol, oi, fastperiod=12, slowperiod=26, signalperiod=9):
-        """
-        # MACD - Moving Average Convergence/Divergence
-        # MACD是一种趋势跟踪动量指标，展示了证券价格的两个移动平均线之间的关系
-        """
-        tdts, secs = high.shape
-        
-        # 初始化结果数组
-        macd_line = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        macd_signal = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        macd_hist = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        
-        # 如果慢周期小于快周期，交换它们
-        if slowperiod < fastperiod:
-            slowperiod, fastperiod = fastperiod, slowperiod
-        
-        # 处理使用默认值的特殊情况
-        if slowperiod == 0:
-            slowperiod = 26
-            k_slow = 0.075  # 固定值26
-        else:
-            k_slow = 2.0 / (slowperiod + 1.0)
-        
-        if fastperiod == 0:
-            fastperiod = 12
-            k_fast = 0.15  # 固定值12
-        else:
-            k_fast = 2.0 / (fastperiod + 1.0)
-            
-        k_signal = 2.0 / (signalperiod + 1.0)
-        
-        # 计算所需的回溯周期
-        lookback_signal = signalperiod - 1
-        lookback_slow = slowperiod - 1
-        lookback_total = lookback_signal + lookback_slow
-        
-        # 遍历每个证券
-        for sec in range(secs):
-            # 对于每个证券，一次处理所有时间点
-            _close = close[:, sec]
-            
-            # 如果没有足够的有效数据点，则跳过这个证券
-            valid_points = np.sum(~np.isnan(_close))
-            if valid_points <= lookback_total:
-                continue
-                
-            # 获取可用的收盘价数据
-            valid_close = _close[~np.isnan(_close)]
-            valid_length = len(valid_close)
-            
-            # 计算慢速EMA
-            slow_ema = np.zeros(valid_length)
-            slow_ema[0] = valid_close[0]
-            for i in range(1, valid_length):
-                slow_ema[i] = valid_close[i] * k_slow + slow_ema[i-1] * (1 - k_slow)
-            
-            # 计算快速EMA
-            fast_ema = np.zeros(valid_length)
-            fast_ema[0] = valid_close[0]
-            for i in range(1, valid_length):
-                fast_ema[i] = valid_close[i] * k_fast + fast_ema[i-1] * (1 - k_fast)
-            
-            # 计算MACD线 (快速EMA - 慢速EMA)
-            macd_values = fast_ema - slow_ema
-            
-            # 计算信号线 (MACD的EMA)
-            signal_values = np.zeros(valid_length)
-            signal_values[0] = macd_values[0]
-            for i in range(1, valid_length):
-                signal_values[i] = macd_values[i] * k_signal + signal_values[i-1] * (1 - k_signal)
-            
-            # 计算柱状图 (MACD线 - 信号线)
-            hist_values = macd_values - signal_values
-            
-            # 将结果映射回原始数据中的有效位置
-            valid_indices = np.where(~np.isnan(_close))[0]
-            
-            # 从lookback_total开始输出结果
-            output_start = lookback_total
-            if output_start < valid_length:
-                result_idx = 0
-                for i in range(output_start, valid_length):
-                    orig_idx = valid_indices[i]
-                    macd_line[orig_idx, sec] = macd_values[i]
-                    macd_signal[orig_idx, sec] = signal_values[i]
-                    macd_hist[orig_idx, sec] = hist_values[i]
-                    result_idx += 1
-
-        return macd_line, macd_signal, macd_hist
-    
-
-    @staticmethod
-    @nb.njit
     def ATR(high, open, low, close, vol, oi, timeperiod=14):
         """
         # ATR - Average True Range
@@ -1037,99 +869,6 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def AROON(high, open, low, close, vol, oi, timeperiod=14):
-        tdts, secs = high.shape
-        result_up = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_down = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < timeperiod:
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-        
-            # 初始化输出数组
-            aroon_up = np.zeros(len(valid_high))
-            aroon_down = np.zeros(len(valid_high))
-        
-            # 初始化变量
-            factor = 100.0 / timeperiod
-            start_idx = timeperiod
-        
-            if start_idx > len(valid_high) - 1:
-                continue
-            
-            today = start_idx
-            trailing_idx = start_idx - timeperiod
-            lowest_idx = -1
-            highest_idx = -1
-            lowest = 0.0
-            highest = 0.0
-            out_idx = 0
-        
-            while today < len(valid_high):
-                # 处理最低价
-                tmp_low = valid_low[today]
-                if lowest_idx < trailing_idx:
-                    lowest_idx = trailing_idx
-                    lowest = valid_low[lowest_idx]
-                    i = lowest_idx
-                    while i <= today:
-                        tmp = valid_low[i]
-                        if tmp <= lowest:
-                            lowest_idx = i
-                            lowest = tmp
-                        i += 1
-                elif tmp_low <= lowest:
-                    lowest_idx = today
-                    lowest = tmp_low
-                
-                # 处理最高价
-                tmp_high = valid_high[today]
-                if highest_idx < trailing_idx:
-                    highest_idx = trailing_idx
-                    highest = valid_high[highest_idx]
-                    i = highest_idx
-                    while i <= today:
-                        tmp = valid_high[i]
-                        if tmp >= highest:
-                            highest_idx = i
-                            highest = tmp
-                        i += 1
-                elif tmp_high >= highest:
-                    highest_idx = today
-                    highest = tmp_high
-                
-                # 计算Aroon Up和Aroon Down
-                aroon_up[today] = factor * (timeperiod - (today - highest_idx))
-                aroon_down[today] = factor * (timeperiod - (today - lowest_idx))
-            
-                out_idx += 1
-                trailing_idx += 1
-                today += 1
-        
-            # 映射结果回原始数组
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result_up[orig_idx, sec] = aroon_up[i]
-                result_down[orig_idx, sec] = aroon_down[i]
-    
-        return result_up, result_down
-
-
-
-    @staticmethod
-    @nb.njit
     def AROONOSC(high, open, low, close, vol, oi, timeperiod=14):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
@@ -1337,146 +1076,14 @@ class BaseLogicFactors:
         return result_upper, result_middle, result_lower
 
 
-
-    @staticmethod
-    @nb.njit
-    def BETA(high, open, low, close, vol, oi, timeperiod=5):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (close[i, sec] == close[i, sec] and 
-                    vol[i, sec] == vol[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < timeperiod:
-                continue
-            
-            # 提取有效数据，这里假设BETA指标使用close和vol作为两个输入序列
-            valid_close = close[valid_mask, sec]
-            valid_vol = vol[valid_mask, sec]
-        
-            # 初始化输出数组
-            beta_values = np.zeros(len(valid_close))
-        
-            # 初始化lookback period
-            nb_initial_element_needed = timeperiod
-            start_idx = nb_initial_element_needed if nb_initial_element_needed < len(valid_close) else len(valid_close)
-        
-            if start_idx >= len(valid_close):
-                continue
-            
-            # 初始化变量
-            trailing_idx = start_idx - nb_initial_element_needed
-            last_price_x = trailing_last_price_x = valid_close[trailing_idx]
-            last_price_y = trailing_last_price_y = valid_vol[trailing_idx]
-        
-            # 预热期处理
-            S_xx = 0.0
-            S_xy = 0.0
-            S_x = 0.0
-            S_y = 0.0
-            i = trailing_idx + 1
-        
-            while i < start_idx:
-                tmp_real = valid_close[i]
-                if last_price_x > 1e-10 or last_price_x < -1e-10:
-                    x = (tmp_real - last_price_x) / last_price_x
-                else:
-                    x = 0.0
-                last_price_x = tmp_real
-            
-                tmp_real = valid_vol[i]
-                if last_price_y > 1e-10 or last_price_y < -1e-10:
-                    y = (tmp_real - last_price_y) / last_price_y
-                else:
-                    y = 0.0
-                last_price_y = tmp_real
-            
-                S_xx += x * x
-                S_xy += x * y
-                S_x += x
-                S_y += y
-                i += 1
-        
-            # 主计算阶段
-            out_idx = start_idx
-            n = float(timeperiod)
-        
-            while i < len(valid_close):
-                tmp_real = valid_close[i]
-                if last_price_x > 1e-10 or last_price_x < -1e-10:
-                    x = (tmp_real - last_price_x) / last_price_x
-                else:
-                    x = 0.0
-                last_price_x = tmp_real
-            
-                tmp_real = valid_vol[i]
-                if last_price_y > 1e-10 or last_price_y < -1e-10:
-                    y = (tmp_real - last_price_y) / last_price_y
-                else:
-                    y = 0.0
-                last_price_y = tmp_real
-            
-                S_xx += x * x
-                S_xy += x * y
-                S_x += x
-                S_y += y
-            
-                tmp_real = valid_close[trailing_idx]
-                if trailing_last_price_x > 1e-10 or trailing_last_price_x < -1e-10:
-                    x = (tmp_real - trailing_last_price_x) / trailing_last_price_x
-                else:
-                    x = 0.0
-                trailing_last_price_x = tmp_real
-            
-                tmp_real = valid_vol[trailing_idx]
-                if trailing_last_price_y > 1e-10 or trailing_last_price_y < -1e-10:
-                    y = (tmp_real - trailing_last_price_y) / trailing_last_price_y
-                else:
-                    y = 0.0
-                trailing_last_price_y = tmp_real
-            
-                tmp_real = (n * S_xx) - (S_x * S_x)
-                if tmp_real > 1e-10 or tmp_real < -1e-10:
-                    beta_values[i] = ((n * S_xy) - (S_x * S_y)) / tmp_real
-                else:
-                    beta_values[i] = 0.0
-                
-                S_xx -= x * x
-                S_xy -= x * y
-                S_x -= x
-                S_y -= y
-            
-                trailing_idx += 1
-                i += 1
-        
-            # 映射结果回原始数组
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = beta_values[i]
-    
-        return result
-
-
-
     @staticmethod
     @nb.njit
     def BOP(high, open, low, close, vol, oi):
-        """
-        BOP - Balance Of Power
-        计算方法：(收盘价 - 开盘价) / (最高价 - 最低价)
-        用途：衡量市场买卖力量的平衡
-        """
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (high[i, sec] == high[i, sec] and 
@@ -1486,25 +1093,25 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < 1:
+            if len(valid_indices) == 0:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # 计算BOP值
+            # Calculate BOP values
             bop_values = np.zeros(len(valid_high))
             for i in range(len(valid_high)):
                 temp_real = valid_high[i] - valid_low[i]
-                if temp_real <= 1e-10:  # 避免除零，使用小阈值
+                if temp_real <= 0.0:
                     bop_values[i] = 0.0
                 else:
                     bop_values[i] = (valid_close[i] - valid_open[i]) / temp_real
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = bop_values[i]
@@ -1520,7 +1127,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (high[i, sec] == high[i, sec] and 
@@ -1532,19 +1139,16 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # 初始化结果数组
-            cci_values = np.zeros(len(valid_high))
-        
-            # 计算lookback period
+            # Initialize circular buffer simulation
             lookback_total = timeperiod - 1
             start_idx = lookback_total if timeperiod > 1 else 0
         
-            # 预热期处理：计算前timeperiod-1个点的典型价格
+            # Warm-up period: Fill initial buffer
             circ_buffer = np.zeros(timeperiod)
             circ_idx = 0
         
@@ -1554,37 +1158,36 @@ class BaseLogicFactors:
                     circ_buffer[circ_idx] = typical_price
                     circ_idx = (circ_idx + 1) % timeperiod
         
-            # 主计算阶段
+            # Main calculation loop
             for i in range(start_idx, len(valid_high)):
-                # 计算当前典型价格
+                # Calculate typical price for current bar
                 last_value = (valid_high[i] + valid_low[i] + valid_close[i]) / 3.0
                 circ_buffer[circ_idx] = last_value
             
-                # 计算平均值
+                # Calculate mean of buffer
                 the_average = 0.0
                 for j in range(timeperiod):
                     the_average += circ_buffer[j]
                 the_average /= timeperiod
             
-                # 计算平均偏差
+                # Calculate mean absolute deviation
                 temp_real2 = 0.0
                 for j in range(timeperiod):
                     temp_real2 += abs(circ_buffer[j] - the_average)
             
-                # 计算CCI
+                # Calculate CCI
                 temp_real = last_value - the_average
                 if temp_real != 0.0 and temp_real2 != 0.0:
-                    cci_values[i] = temp_real / (0.015 * (temp_real2 / timeperiod))
+                    cci_value = temp_real / (0.015 * (temp_real2 / timeperiod))
                 else:
-                    cci_values[i] = 0.0
+                    cci_value = 0.0
             
-                # 更新循环缓冲区索引
-                circ_idx = (circ_idx + 1) % timeperiod
-        
-            # 映射结果回原始数组
-            for i in range(start_idx, len(valid_indices)):
+                # Map result back to original array
                 orig_idx = valid_indices[i]
-                result[orig_idx, sec] = cci_values[i]
+                result[orig_idx, sec] = cci_value
+            
+                # Update circular buffer index
+                circ_idx = (circ_idx + 1) % timeperiod
     
         return result
 
@@ -1592,64 +1195,84 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDL2CROWS(high, open, low, close, vol, oi, body_long_period=10):
+    def CDL2CROWS(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        lookback_total = 2  # As per TA-Lib, need 2 prior candles for CDL2CROWS
+    
+        # Lookback period as per TA-Lib (2 days for pattern + additional for BodyLong average)
+        lookback_total = 2
+        body_long_period = 10  # Default period for BodyLong average as per TA-Lib
     
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
                     open[i, sec] == open[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
                     close[i, sec] == close[i, sec]):
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) < lookback_total + body_long_period:
                 continue
             
             # Extract valid data
             valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
             # Initialize output for valid data
             temp_result = np.zeros(len(valid_high))
         
-            # Calculate BodyLongPeriodTotal for rolling average of body long
-            body_long_trailing_idx = 0
+            # Initialize BodyLongPeriodTotal for trailing average
             body_long_period_total = 0.0
+            body_long_trailing_idx = 0
         
-            # Initial sum for body long average before start index
-            start_idx = lookback_total
-            if start_idx - 2 - body_long_period >= 0:
-                body_long_trailing_idx = start_idx - 2 - body_long_period
-                for i in range(body_long_trailing_idx, start_idx - 2):
+            # Calculate initial sum for BodyLong average
+            for i in range(body_long_period):
+                if i < len(valid_high):
                     body_long_period_total += abs(valid_open[i] - valid_close[i])
         
-            # Main loop starting from lookback_total
-            for i in range(start_idx, len(valid_high)):
-                # Check for CDL2CROWS pattern
-                if (valid_close[i-2] > valid_open[i-2] and  # First candle is white (bullish)
-                    abs(valid_close[i-2] - valid_open[i-2]) > (body_long_period_total / body_long_period if body_long_period > 0 else 0) and  # Long body
-                    valid_close[i-1] < valid_open[i-1] and  # Second candle is black (bearish)
-                    valid_open[i-1] > valid_close[i-2] and  # Gap up between first and second
-                    valid_close[i] < valid_open[i] and  # Third candle is black (bearish)
-                    valid_open[i] < valid_open[i-1] and valid_open[i] > valid_close[i-1] and  # Open within second candle's body
-                    valid_close[i] > valid_open[i-2] and valid_close[i] < valid_close[i-2]):  # Close within first candle's body
+            # Start processing from lookback_total
+            for i in range(lookback_total, len(valid_high)):
+                # Calculate candle color (1 for white/up, -1 for black/down)
+                color_i2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
+                color_i1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
+                color_i = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Calculate real body for i-2
+                real_body_i2 = abs(valid_close[i-2] - valid_open[i-2])
+            
+                # Calculate BodyLong average
+                body_long_average = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
+            
+                # Check if real body at i-2 is long
+                is_body_long_i2 = real_body_i2 > body_long_average
+            
+                # Check if there is a gap up between i-2 and i-1
+                is_gap_up = valid_open[i-1] > valid_close[i-2]
+            
+                # Check conditions for Two Crows pattern
+                if (color_i2 == 1 and  # First candle is white (up)
+                    is_body_long_i2 and  # First candle has long body
+                    color_i1 == -1 and  # Second candle is black (down)
+                    is_gap_up and  # Gap up between first and second candle
+                    color_i == -1 and  # Third candle is black (down)
+                    valid_open[i] < valid_open[i-1] and  # Third opens below second's open
+                    valid_open[i] > valid_close[i-1] and  # Third opens above second's close
+                    valid_close[i] > valid_open[i-2] and  # Third closes above first's open
+                    valid_close[i] < valid_close[i-2]):  # Third closes below first's close
                     temp_result[i] = -100
                 else:
                     temp_result[i] = 0
                 
-                # Update BodyLongPeriodTotal for next iteration
+                # Update trailing sum for BodyLong average
                 if i - 2 >= 0:
-                    body_long_period_total += abs(valid_open[i-2] - valid_close[i-2])
+                    body_long_period_total += abs(valid_close[i-2] - valid_open[i-2])
                 if body_long_trailing_idx < len(valid_high):
-                    body_long_period_total -= abs(valid_open[body_long_trailing_idx] - valid_close[body_long_trailing_idx])
+                    body_long_period_total -= abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
                     body_long_trailing_idx += 1
         
             # Map results back to original array
@@ -1664,13 +1287,12 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDL3BLACKCROWS(high, open, low, close, vol, oi, shadow_period=3):
+    def CDL3BLACKCROWS(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (3 days for pattern + shadow_period for averages)
-        lookback_total = 3 + shadow_period
-    
+        lookback_total = 3  # Lookback period for 3 Black Crows pattern
+        shadow_very_short_period = 3  # Period for calculating average shadow, as per TA-Lib default
+
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -1682,42 +1304,52 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) <= lookback_total:
                 continue
-            
+
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
-        
-            # Initialize shadow totals for the three candles
-            shadow_totals = np.zeros(3)
-            shadow_trailing_idx = 0
-        
-            # Pre-calculate shadow totals for the initial window
-            for i in range(shadow_trailing_idx, lookback_total - 3):
-                shadow_totals[2] += valid_high[i-2] - valid_low[i-2] if i >= 2 else 0
-                shadow_totals[1] += valid_high[i-1] - valid_low[i-1] if i >= 1 else 0
-                shadow_totals[0] += valid_high[i] - valid_low[i]
-        
-            # Main loop starting from lookback_total
-            for i in range(lookback_total - 1, len(valid_high)):
-                # Calculate candle colors (1 for bullish, -1 for bearish)
+
+            # Initialize arrays for shadow calculations
+            shadow_very_short_period_total = np.zeros(3)
+            shadow_very_short_trailing_idx = 0
+            start_idx = lookback_total
+
+            # Warm-up period for shadow averages
+            if start_idx > shadow_very_short_period:
+                shadow_very_short_trailing_idx = start_idx - shadow_very_short_period
+            else:
+                shadow_very_short_trailing_idx = 0
+
+            i = shadow_very_short_trailing_idx
+            while i < start_idx and i < len(valid_high):
+                if i >= 2:
+                    shadow_very_short_period_total[2] += valid_high[i-2] - valid_low[i-2]
+                if i >= 1:
+                    shadow_very_short_period_total[1] += valid_high[i-1] - valid_low[i-1]
+                shadow_very_short_period_total[0] += valid_high[i] - valid_low[i]
+                i += 1
+
+            i = start_idx
+            while i < len(valid_high):
+                # Calculate candle colors (1 for white, -1 for black)
                 color_3 = 1 if valid_close[i-3] > valid_open[i-3] else -1
                 color_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
                 color_1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
                 color_0 = 1 if valid_close[i] > valid_open[i] else -1
-            
+
                 # Calculate lower shadows
                 lower_shadow_2 = valid_open[i-2] - valid_low[i-2] if color_2 == 1 else valid_close[i-2] - valid_low[i-2]
                 lower_shadow_1 = valid_open[i-1] - valid_low[i-1] if color_1 == 1 else valid_close[i-1] - valid_low[i-1]
                 lower_shadow_0 = valid_open[i] - valid_low[i] if color_0 == 1 else valid_close[i] - valid_low[i]
-            
+
                 # Calculate shadow averages
-                shadow_avg_2 = shadow_totals[2] / shadow_period if shadow_period > 0 else 0
-                shadow_avg_1 = shadow_totals[1] / shadow_period if shadow_period > 0 else 0
-                shadow_avg_0 = shadow_totals[0] / shadow_period if shadow_period > 0 else 0
-            
+                shadow_avg_2 = shadow_very_short_period_total[2] / shadow_very_short_period if shadow_very_short_period > 0 else 0
+                shadow_avg_1 = shadow_very_short_period_total[1] / shadow_very_short_period if shadow_very_short_period > 0 else 0
+                shadow_avg_0 = shadow_very_short_period_total[0] / shadow_very_short_period if shadow_very_short_period > 0 else 0
+
                 # Check 3 Black Crows pattern conditions
                 if (color_3 == 1 and
                     color_2 == -1 and
@@ -1734,18 +1366,17 @@ class BaseLogicFactors:
                     result[valid_indices[i], sec] = -100
                 else:
                     result[valid_indices[i], sec] = 0
-            
-                # Update shadow totals
+
+                # Update shadow totals for next iteration
                 for tot_idx in range(2, -1, -1):
-                    curr_candle_idx = i - tot_idx
-                    trail_candle_idx = shadow_trailing_idx - tot_idx
-                    if curr_candle_idx >= 0:
-                        shadow_totals[tot_idx] += valid_high[curr_candle_idx] - valid_low[curr_candle_idx]
-                    if trail_candle_idx >= 0:
-                        shadow_totals[tot_idx] -= valid_high[trail_candle_idx] - valid_low[trail_candle_idx]
-            
-                shadow_trailing_idx += 1
-    
+                    if i - tot_idx >= 0:
+                        shadow_very_short_period_total[tot_idx] += valid_high[i - tot_idx] - valid_low[i - tot_idx]
+                    if shadow_very_short_trailing_idx - tot_idx >= 0:
+                        shadow_very_short_period_total[tot_idx] -= valid_high[shadow_very_short_trailing_idx - tot_idx] - valid_low[shadow_very_short_trailing_idx - tot_idx]
+
+                i += 1
+                shadow_very_short_trailing_idx += 1
+
         return result
 
 
@@ -1756,13 +1387,13 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # TA-Lib默认的BodyLong和BodyShort周期
-        BodyLongPeriod = 5
-        BodyShortPeriod = 3
-        lookbackTotal = 2  # 需要前2根K线来计算当前K线的形态
+        # Define lookback period as per TA-Lib (2 days prior for pattern recognition)
+        lookback_total = 2
+        body_long_period = 3  # Default period for long body average as per TA-Lib
+        body_short_period = 3  # Default period for short body average as per TA-Lib
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (high[i, sec] == high[i, sec] and 
@@ -1772,70 +1403,70 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookbackTotal:
+            if len(valid_indices) <= lookback_total:
                 continue
             
-            # 提取有效数据
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # 初始化BodyLong和BodyShort的累加值
-            BodyLongPeriodTotal = 0.0
-            BodyShortPeriodTotal = 0.0
+            # Initialize trailing indices for body averages
+            body_long_trailing_idx = 0
+            body_short_trailing_idx = 0
         
-            # 计算初始的BodyLongPeriodTotal (前BodyLongPeriod个周期的实体大小总和)
-            BodyLongTrailingIdx = 0
-            for i in range(BodyLongTrailingIdx, min(BodyLongPeriod, len(valid_close))):
-                if i <= len(valid_close) - 2:
-                    BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
+            # Initialize totals for body averages
+            body_long_period_total = 0.0
+            body_short_period_total = 0.0
         
-            # 计算初始的BodyShortPeriodTotal (前BodyShortPeriod个周期的实体大小总和)
-            BodyShortTrailingIdx = 0
-            for i in range(BodyShortTrailingIdx, min(BodyShortPeriod, len(valid_close))):
-                if i <= len(valid_close) - 1:
-                    BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
+            # Calculate initial totals for body long average (i-2)
+            for i in range(body_long_trailing_idx, min(body_long_period, len(valid_high))):
+                if i + 2 < len(valid_high):
+                    body_long_period_total += abs(valid_close[i] - valid_open[i])
         
-            # 主计算循环
-            start_idx = max(lookbackTotal, BodyLongPeriod + 1, BodyShortPeriod)
-            for i in range(start_idx, len(valid_close)):
-                # 计算BodyLong和BodyShort的平均值
-                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
-                BodyShortAverage = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+            # Calculate initial totals for body short average (i-1)
+            for i in range(body_short_trailing_idx, min(body_short_period, len(valid_high))):
+                if i + 1 < len(valid_high):
+                    body_short_period_total += abs(valid_close[i] - valid_open[i])
+        
+            # Start processing from lookback_total
+            for i in range(lookback_total, len(valid_high)):
+                # Calculate real body for i-2 and i-1
+                real_body_i2 = abs(valid_close[i-2] - valid_open[i-2])
+                real_body_i1 = abs(valid_close[i-1] - valid_open[i-1])
             
-                # 计算当前K线和前两根K线的实体大小
-                realbody_i_2 = abs(valid_close[i-2] - valid_open[i-2])
-                realbody_i_1 = abs(valid_close[i-1] - valid_open[i-1])
-            
-                # 判断前两根K线的颜色
-                color_i_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
+                # Calculate candle color for i-2 and i
+                color_i2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
                 color_i = 1 if valid_close[i] > valid_open[i] else -1
             
-                # 判断3INSIDE形态
-                if (realbody_i_2 > BodyLongAverage and
-                    realbody_i_1 <= BodyShortAverage and
+                # Calculate body averages
+                body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
+                body_short_avg = body_short_period_total / body_short_period if body_short_period > 0 else 0.0
+            
+                # Check for 3 Inside pattern conditions
+                if (real_body_i2 > body_long_avg and
+                    real_body_i1 <= body_short_avg and
                     max(valid_close[i-1], valid_open[i-1]) < max(valid_close[i-2], valid_open[i-2]) and
                     min(valid_close[i-1], valid_open[i-1]) > min(valid_close[i-2], valid_open[i-2]) and
-                    ((color_i_2 == 1 and color_i == -1 and valid_close[i] < valid_open[i-2]) or
-                     (color_i_2 == -1 and color_i == 1 and valid_close[i] > valid_open[i-2]))):
-                    result[valid_indices[i], sec] = -color_i_2 * 100
+                    ((color_i2 == 1 and color_i == -1 and valid_close[i] < valid_open[i-2]) or
+                     (color_i2 == -1 and color_i == 1 and valid_close[i] > valid_open[i-2]))):
+                    result[valid_indices[i], sec] = -color_i2 * 100
                 else:
                     result[valid_indices[i], sec] = 0
-            
-                # 更新BodyLongPeriodTotal和BodyShortPeriodTotal
-                if i - 2 >= 0:
-                    BodyLongPeriodTotal += abs(valid_close[i-2] - valid_open[i-2])
-                    if BodyLongTrailingIdx < len(valid_close) - 2:
-                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
-                    BodyLongTrailingIdx += 1
-            
-                if i - 1 >= 0:
-                    BodyShortPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
-                    if BodyShortTrailingIdx < len(valid_close) - 1:
-                        BodyShortPeriodTotal -= abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
-                    BodyShortTrailingIdx += 1
-    
+                
+                # Update body totals for next iteration
+                if i - 2 >= body_long_trailing_idx and i - 2 < len(valid_high):
+                    body_long_period_total += abs(valid_close[i-2] - valid_open[i-2])
+                    if body_long_trailing_idx < len(valid_high):
+                        body_long_period_total -= abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
+                    body_long_trailing_idx += 1
+                
+                if i - 1 >= body_short_trailing_idx and i - 1 < len(valid_high):
+                    body_short_period_total += abs(valid_close[i-1] - valid_open[i-1])
+                    if body_short_trailing_idx < len(valid_high):
+                        body_short_period_total -= abs(valid_close[body_short_trailing_idx] - valid_open[body_short_trailing_idx])
+                    body_short_trailing_idx += 1
+                
         return result
 
 
@@ -1848,8 +1479,7 @@ class BaseLogicFactors:
     
         # Lookback period as per TA-Lib (3 prior candles needed)
         lookback_total = 3
-    
-        # Near period for averaging candle range, typically 14 in TA-Lib
+        # Near period for candle range averaging, typically 14 in TA-Lib
         near_period = 14
     
         for sec in range(secs):
@@ -1872,67 +1502,60 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize NearPeriodTotal for averaging
+            # Initialize NearPeriodTotal for averaging candle ranges
             near_period_total_3 = 0.0
             near_period_total_2 = 0.0
-            near_trailing_idx = 0
+            near_trailing_idx = lookback_total - near_period
         
-            # Pre-calculate initial NearPeriodTotal for the first valid output point
-            start_idx = lookback_total
-            if start_idx < near_period:
-                near_trailing_idx = 0
-            else:
-                near_trailing_idx = start_idx - near_period
-            
-            i = near_trailing_idx
-            while i < start_idx and i < len(valid_high):
-                if i >= 3:
-                    near_period_total_3 += valid_high[i-3] - valid_low[i-3]
-                if i >= 2:
-                    near_period_total_2 += valid_high[i-2] - valid_low[i-2]
+            # Warm-up period for NearPeriodTotal calculation
+            i = near_trailing_idx if near_trailing_idx >= 0 else 0
+            while i < lookback_total and i < len(valid_high):
+                if i - 3 >= 0:
+                    near_period_total_3 += valid_high[i - 3] - valid_low[i - 3]
+                if i - 2 >= 0:
+                    near_period_total_2 += valid_high[i - 2] - valid_low[i - 2]
                 i += 1
         
-            # Main calculation loop
-            i = start_idx
-            while i < len(valid_high):
+            # Main calculation loop starting from lookback_total
+            out_idx = lookback_total
+            for i in range(lookback_total, len(valid_high)):
                 # Determine candle colors (1 for bullish, -1 for bearish)
-                color_3 = 1 if valid_close[i-3] > valid_open[i-3] else -1
-                color_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
-                color_1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
+                color_3 = 1 if valid_close[i - 3] > valid_open[i - 3] else -1
+                color_2 = 1 if valid_close[i - 2] > valid_open[i - 2] else -1
+                color_1 = 1 if valid_close[i - 1] > valid_open[i - 1] else -1
                 color_0 = 1 if valid_close[i] > valid_open[i] else -1
             
-                # Calculate averages for Near range
+                # Calculate averages for Near period
                 near_avg_3 = near_period_total_3 / near_period if near_period > 0 else 0.0
                 near_avg_2 = near_period_total_2 / near_period if near_period > 0 else 0.0
             
-                # Check conditions for 3 Line Strike pattern
+                # Check for 3 Line Strike pattern
                 if (color_3 == color_2 and 
                     color_2 == color_1 and 
                     color_0 == -color_1):
+                    # Check open price conditions within range of previous candles
+                    min_3 = min(valid_open[i - 3], valid_close[i - 3])
+                    max_3 = max(valid_open[i - 3], valid_close[i - 3])
+                    min_2 = min(valid_open[i - 2], valid_close[i - 2])
+                    max_2 = max(valid_open[i - 2], valid_close[i - 2])
                 
-                    # Check if open prices are within the range of prior candles
-                    min_3 = min(valid_open[i-3], valid_close[i-3])
-                    max_3 = max(valid_open[i-3], valid_close[i-3])
-                    min_2 = min(valid_open[i-2], valid_close[i-2])
-                    max_2 = max(valid_open[i-2], valid_close[i-2])
+                    open_cond_2 = (valid_open[i - 2] >= min_3 - near_avg_3 and 
+                                  valid_open[i - 2] <= max_3 + near_avg_3)
+                    open_cond_1 = (valid_open[i - 1] >= min_2 - near_avg_2 and 
+                                  valid_open[i - 1] <= max_2 + near_avg_2)
                 
-                    open_check_2 = (valid_open[i-2] >= min_3 - near_avg_3 and 
-                                   valid_open[i-2] <= max_3 + near_avg_3)
-                    open_check_1 = (valid_open[i-1] >= min_2 - near_avg_2 and 
-                                   valid_open[i-1] <= max_2 + near_avg_2)
-                
-                    if open_check_2 and open_check_1:
+                    if open_cond_2 and open_cond_1:
                         if (color_1 == 1 and 
-                            valid_close[i-1] > valid_close[i-2] and 
-                            valid_close[i-2] > valid_close[i-3] and 
-                            valid_open[i] > valid_close[i-1] and 
-                            valid_close[i] < valid_open[i-3]):
+                            valid_close[i - 1] > valid_close[i - 2] and 
+                            valid_close[i - 2] > valid_close[i - 3] and 
+                            valid_open[i] > valid_close[i - 1] and 
+                            valid_close[i] < valid_open[i - 3]):
                             result[valid_indices[i], sec] = 100
                         elif (color_1 == -1 and 
-                              valid_close[i-1] < valid_close[i-2] and 
-                              valid_close[i-2] < valid_close[i-3] and 
-                              valid_open[i] < valid_close[i-1] and 
-                              valid_close[i] > valid_open[i-3]):
+                              valid_close[i - 1] < valid_close[i - 2] and 
+                              valid_close[i - 2] < valid_close[i - 3] and 
+                              valid_open[i] < valid_close[i - 1] and 
+                              valid_close[i] > valid_open[i - 3]):
                             result[valid_indices[i], sec] = -100
                         else:
                             result[valid_indices[i], sec] = 0
@@ -1942,18 +1565,15 @@ class BaseLogicFactors:
                     result[valid_indices[i], sec] = 0
             
                 # Update NearPeriodTotal for next iteration
-                if i < len(valid_high):
-                    if i >= 3:
-                        near_period_total_3 += (valid_high[i-3] - valid_low[i-3])
-                    if i >= 2:
-                        near_period_total_2 += (valid_high[i-2] - valid_low[i-2])
-                    if near_trailing_idx < len(valid_high):
-                        if near_trailing_idx >= 3:
-                            near_period_total_3 -= (valid_high[near_trailing_idx-3] - valid_low[near_trailing_idx-3])
-                        if near_trailing_idx >= 2:
-                            near_period_total_2 -= (valid_high[near_trailing_idx-2] - valid_low[near_trailing_idx-2])
-                    near_trailing_idx += 1
-                i += 1
+                if i - 3 >= 0:
+                    near_period_total_3 += (valid_high[i - 3] - valid_low[i - 3])
+                if i - 2 >= 0:
+                    near_period_total_2 += (valid_high[i - 2] - valid_low[i - 2])
+                if near_trailing_idx - 3 >= 0:
+                    near_period_total_3 -= (valid_high[near_trailing_idx - 3] - valid_low[near_trailing_idx - 3])
+                if near_trailing_idx - 2 >= 0:
+                    near_period_total_2 -= (valid_high[near_trailing_idx - 2] - valid_low[near_trailing_idx - 2])
+                near_trailing_idx += 1
     
         return result
 
@@ -1986,7 +1606,6 @@ class BaseLogicFactors:
             if len(valid_indices) < lookbackTotal:
                 continue
             
-            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
@@ -1995,11 +1614,11 @@ class BaseLogicFactors:
             # Initialize period totals for averages
             BodyLongPeriodTotal = 0.0
             ShadowLongPeriodTotal = 0.0
-            ShadowVeryShortPeriodTotal_1 = 0.0
             ShadowVeryShortPeriodTotal_0 = 0.0
+            ShadowVeryShortPeriodTotal_1 = 0.0
             BodyShortPeriodTotal = 0.0
         
-            # Calculate initial totals for averages before startIdx
+            # Calculate initial totals for averages
             BodyLongTrailingIdx = lookbackTotal - BodyLongPeriod
             ShadowLongTrailingIdx = lookbackTotal - ShadowLongPeriod
             ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
@@ -2015,9 +1634,9 @@ class BaseLogicFactors:
             for i in range(BodyShortTrailingIdx, lookbackTotal):
                 BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
         
-            # Main loop for pattern detection
+            # Main calculation loop
             for i in range(lookbackTotal, len(valid_high)):
-                # Check for 3 Stars in the South pattern conditions
+                # Check for 3 Stars in the South pattern
                 if (valid_close[i-2] < valid_open[i-2] and  # Bearish first candle
                     valid_close[i-1] < valid_open[i-1] and  # Bearish second candle
                     valid_close[i] < valid_open[i] and      # Bearish third candle
@@ -2025,17 +1644,17 @@ class BaseLogicFactors:
                     (valid_close[i-2] - valid_low[i-2] if valid_close[i-2] >= valid_open[i-2] else valid_open[i-2] - valid_low[i-2]) > (ShadowLongPeriodTotal / ShadowLongPeriod) and  # Long lower shadow first candle
                     abs(valid_close[i-1] - valid_open[i-1]) < abs(valid_close[i-2] - valid_open[i-2]) and  # Smaller body second candle
                     valid_open[i-1] > valid_close[i-2] and valid_open[i-1] <= valid_high[i-2] and  # Second candle opens above first close
-                    valid_low[i-1] < valid_close[i-2] and valid_low[i-1] >= valid_low[i-2] and  # Second candle low within first range
+                    valid_low[i-1] < valid_close[i-2] and valid_low[i-1] >= valid_low[i-2] and  # Second candle low within first candle range
                     (valid_close[i-1] - valid_low[i-1] if valid_close[i-1] >= valid_open[i-1] else valid_open[i-1] - valid_low[i-1]) > (ShadowVeryShortPeriodTotal_1 / ShadowVeryShortPeriod) and  # Long lower shadow second candle
                     abs(valid_close[i] - valid_open[i]) < (BodyShortPeriodTotal / BodyShortPeriod) and  # Short body third candle
                     (valid_close[i] - valid_low[i] if valid_close[i] >= valid_open[i] else valid_open[i] - valid_low[i]) < (ShadowVeryShortPeriodTotal_0 / ShadowVeryShortPeriod) and  # Short lower shadow third candle
                     (valid_high[i] - valid_close[i] if valid_close[i] >= valid_open[i] else valid_high[i] - valid_open[i]) < (ShadowVeryShortPeriodTotal_0 / ShadowVeryShortPeriod) and  # Short upper shadow third candle
-                    valid_low[i] > valid_low[i-1] and valid_high[i] < valid_high[i-1]):  # Third candle within second range
+                    valid_low[i] > valid_low[i-1] and valid_high[i] < valid_high[i-1]):  # Third candle within second candle range
                     result[valid_indices[i], sec] = 100
                 else:
                     result[valid_indices[i], sec] = 0
                 
-                # Update rolling totals for averages
+                # Update period totals
                 BodyLongPeriodTotal += abs(valid_close[i-2] - valid_open[i-2]) - abs(valid_close[BodyLongTrailingIdx-2] - valid_open[BodyLongTrailingIdx-2])
                 ShadowLongPeriodTotal += (max(0.0, valid_close[i-2] - valid_low[i-2]) if valid_close[i-2] >= valid_open[i-2] else max(0.0, valid_open[i-2] - valid_low[i-2])) - \
                                          (max(0.0, valid_close[ShadowLongTrailingIdx-2] - valid_low[ShadowLongTrailingIdx-2]) if valid_close[ShadowLongTrailingIdx-2] >= valid_open[ShadowLongTrailingIdx-2] else max(0.0, valid_open[ShadowLongTrailingIdx-2] - valid_low[ShadowLongTrailingIdx-2]))
@@ -2045,12 +1664,11 @@ class BaseLogicFactors:
                                                 (max(0.0, valid_close[ShadowVeryShortTrailingIdx] - valid_low[ShadowVeryShortTrailingIdx]) if valid_close[ShadowVeryShortTrailingIdx] >= valid_open[ShadowVeryShortTrailingIdx] else max(0.0, valid_open[ShadowVeryShortTrailingIdx] - valid_low[ShadowVeryShortTrailingIdx]))
                 BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i]) - abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
             
-                # Increment trailing indices
                 BodyLongTrailingIdx += 1
                 ShadowLongTrailingIdx += 1
                 ShadowVeryShortTrailingIdx += 1
                 BodyShortTrailingIdx += 1
-    
+            
         return result
 
 
@@ -2061,109 +1679,118 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Define lookback periods for different candle averages as per TA-Lib defaults
-        ShadowVeryShortPeriod = 7
-        NearPeriod = 10
-        FarPeriod = 20
-        BodyShortPeriod = 5
+        # Define lookback periods for different candle ranges as per TA-Lib defaults
+        ShadowVeryShortPeriod = 3
+        NearPeriod = 3
+        FarPeriod = 3
+        BodyShortPeriod = 3
         lookbackTotal = max(ShadowVeryShortPeriod, NearPeriod, FarPeriod, BodyShortPeriod) + 2
     
         for sec in range(secs):
-            # Initialize arrays for rolling totals
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for moving averages
             ShadowVeryShortPeriodTotal = np.zeros(3)
             NearPeriodTotal = np.zeros(3)
             FarPeriodTotal = np.zeros(3)
             BodyShortPeriodTotal = 0.0
         
-            # Calculate trailing indices for each period
-            ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
-            NearTrailingIdx = lookbackTotal - NearPeriod
-            FarTrailingIdx = lookbackTotal - FarPeriod
-            BodyShortTrailingIdx = lookbackTotal - BodyShortPeriod
+            # Initialize trailing indices
+            start_idx = lookbackTotal
+            ShadowVeryShortTrailingIdx = start_idx - ShadowVeryShortPeriod
+            NearTrailingIdx = start_idx - NearPeriod
+            FarTrailingIdx = start_idx - FarPeriod
+            BodyShortTrailingIdx = start_idx - BodyShortPeriod
         
-            # Pre-calculate totals for the lookback period
-            for i in range(ShadowVeryShortTrailingIdx, lookbackTotal):
-                ShadowVeryShortPeriodTotal[2] += max(high[i-2, sec] - close[i-2, sec], 0.0) if close[i-2, sec] > open[i-2, sec] else max(open[i-2, sec] - high[i-2, sec], 0.0)
-                ShadowVeryShortPeriodTotal[1] += max(high[i-1, sec] - close[i-1, sec], 0.0) if close[i-1, sec] > open[i-1, sec] else max(open[i-1, sec] - high[i-1, sec], 0.0)
-                ShadowVeryShortPeriodTotal[0] += max(high[i, sec] - close[i, sec], 0.0) if close[i, sec] > open[i, sec] else max(open[i, sec] - high[i, sec], 0.0)
+            # Calculate initial totals for ShadowVeryShort
+            for i in range(ShadowVeryShortTrailingIdx, start_idx):
+                ShadowVeryShortPeriodTotal[2] += max(valid_high[i-2] - valid_close[i-2], 0.0) if valid_close[i-2] > valid_open[i-2] else max(valid_open[i-2] - valid_high[i-2], 0.0)
+                ShadowVeryShortPeriodTotal[1] += max(valid_high[i-1] - valid_close[i-1], 0.0) if valid_close[i-1] > valid_open[i-1] else max(valid_open[i-1] - valid_high[i-1], 0.0)
+                ShadowVeryShortPeriodTotal[0] += max(valid_high[i] - valid_close[i], 0.0) if valid_close[i] > valid_open[i] else max(valid_open[i] - valid_high[i], 0.0)
         
-            for i in range(NearTrailingIdx, lookbackTotal):
-                NearPeriodTotal[2] += max(close[i-2, sec] - open[i-2, sec], 0.0) if close[i-2, sec] > open[i-2, sec] else max(open[i-2, sec] - close[i-2, sec], 0.0)
-                NearPeriodTotal[1] += max(close[i-1, sec] - open[i-1, sec], 0.0) if close[i-1, sec] > open[i-1, sec] else max(open[i-1, sec] - close[i-1, sec], 0.0)
+            # Calculate initial totals for Near
+            for i in range(NearTrailingIdx, start_idx):
+                NearPeriodTotal[2] += valid_high[i-2] - valid_low[i-2]
+                NearPeriodTotal[1] += valid_high[i-1] - valid_low[i-1]
         
-            for i in range(FarTrailingIdx, lookbackTotal):
-                FarPeriodTotal[2] += max(close[i-2, sec] - open[i-2, sec], 0.0) if close[i-2, sec] > open[i-2, sec] else max(open[i-2, sec] - close[i-2, sec], 0.0)
-                FarPeriodTotal[1] += max(close[i-1, sec] - open[i-1, sec], 0.0) if close[i-1, sec] > open[i-1, sec] else max(open[i-1, sec] - close[i-1, sec], 0.0)
+            # Calculate initial totals for Far
+            for i in range(FarTrailingIdx, start_idx):
+                FarPeriodTotal[2] += valid_high[i-2] - valid_low[i-2]
+                FarPeriodTotal[1] += valid_high[i-1] - valid_low[i-1]
         
-            for i in range(BodyShortTrailingIdx, lookbackTotal):
-                BodyShortPeriodTotal += abs(close[i, sec] - open[i, sec])
+            # Calculate initial totals for BodyShort
+            for i in range(BodyShortTrailingIdx, start_idx):
+                BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
         
-            # Main calculation loop starting from lookbackTotal
-            for i in range(lookbackTotal, tdts):
-                # Check for valid data
-                if (high[i, sec] != high[i, sec] or open[i, sec] != open[i, sec] or
-                    low[i, sec] != low[i, sec] or close[i, sec] != close[i, sec]):
-                    continue
-                
-                # Calculate candle colors (1 for white/up, -1 for black/down)
-                color_2 = 1 if close[i-2, sec] > open[i-2, sec] else -1
-                color_1 = 1 if close[i-1, sec] > open[i-1, sec] else -1
-                color_0 = 1 if close[i, sec] > open[i, sec] else -1
-            
-                # Calculate upper shadows
-                upper_shadow_2 = high[i-2, sec] - close[i-2, sec] if color_2 == 1 else open[i-2, sec] - high[i-2, sec]
-                upper_shadow_1 = high[i-1, sec] - close[i-1, sec] if color_1 == 1 else open[i-1, sec] - high[i-1, sec]
-                upper_shadow_0 = high[i, sec] - close[i, sec] if color_0 == 1 else open[i, sec] - high[i, sec]
-            
-                # Calculate real bodies
-                real_body_2 = abs(close[i-2, sec] - open[i-2, sec])
-                real_body_1 = abs(close[i-1, sec] - open[i-1, sec])
-                real_body_0 = abs(close[i, sec] - open[i, sec])
-            
+            # Main calculation loop
+            i = start_idx
+            while i < len(valid_high):
                 # Calculate averages
-                shadow_avg_2 = ShadowVeryShortPeriodTotal[2] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
-                shadow_avg_1 = ShadowVeryShortPeriodTotal[1] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
-                shadow_avg_0 = ShadowVeryShortPeriodTotal[0] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
-                near_avg_2 = NearPeriodTotal[2] / NearPeriod if NearPeriod > 0 else 0.0
-                near_avg_1 = NearPeriodTotal[1] / NearPeriod if NearPeriod > 0 else 0.0
-                far_avg_2 = FarPeriodTotal[2] / FarPeriod if FarPeriod > 0 else 0.0
-                far_avg_1 = FarPeriodTotal[1] / FarPeriod if FarPeriod > 0 else 0.0
-                body_short_avg = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                ShadowVeryShortAvg2 = ShadowVeryShortPeriodTotal[2] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+                ShadowVeryShortAvg1 = ShadowVeryShortPeriodTotal[1] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+                ShadowVeryShortAvg0 = ShadowVeryShortPeriodTotal[0] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+                NearAvg2 = NearPeriodTotal[2] / NearPeriod if NearPeriod > 0 else 0.0
+                NearAvg1 = NearPeriodTotal[1] / NearPeriod if NearPeriod > 0 else 0.0
+                FarAvg2 = FarPeriodTotal[2] / FarPeriod if FarPeriod > 0 else 0.0
+                FarAvg1 = FarPeriodTotal[1] / FarPeriod if FarPeriod > 0 else 0.0
+                BodyShortAvg = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
             
-                # Check 3 White Soldiers pattern conditions
-                if (color_2 == 1 and upper_shadow_2 < shadow_avg_2 and
-                    color_1 == 1 and upper_shadow_1 < shadow_avg_1 and
-                    color_0 == 1 and upper_shadow_0 < shadow_avg_0 and
-                    close[i, sec] > close[i-1, sec] and close[i-1, sec] > close[i-2, sec] and
-                    open[i-1, sec] > open[i-2, sec] and open[i-1, sec] <= close[i-2, sec] + near_avg_2 and
-                    open[i, sec] > open[i-1, sec] and open[i, sec] <= close[i-1, sec] + near_avg_1 and
-                    real_body_1 > real_body_2 - far_avg_2 and
-                    real_body_0 > real_body_1 - far_avg_1 and
-                    real_body_0 > body_short_avg):
-                    result[i, sec] = 100
+                # Check for 3 White Soldiers pattern
+                if (valid_close[i-2] > valid_open[i-2] and  # First candle is white
+                    (valid_high[i-2] - valid_close[i-2] if valid_close[i-2] > valid_open[i-2] else valid_open[i-2] - valid_high[i-2]) < ShadowVeryShortAvg2 and  # Short upper shadow
+                    valid_close[i-1] > valid_open[i-1] and  # Second candle is white
+                    (valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_open[i-1] - valid_high[i-1]) < ShadowVeryShortAvg1 and  # Short upper shadow
+                    valid_close[i] > valid_open[i] and  # Third candle is white
+                    (valid_high[i] - valid_close[i] if valid_close[i] > valid_open[i] else valid_open[i] - valid_high[i]) < ShadowVeryShortAvg0 and  # Short upper shadow
+                    valid_close[i] > valid_close[i-1] and valid_close[i-1] > valid_close[i-2] and  # Increasing closes
+                    valid_open[i-1] > valid_open[i-2] and  # Increasing opens
+                    valid_open[i-1] <= valid_close[i-2] + NearAvg2 and  # Second open near first close
+                    valid_open[i] > valid_open[i-1] and  # Increasing opens
+                    valid_open[i] <= valid_close[i-1] + NearAvg1 and  # Third open near second close
+                    abs(valid_close[i-1] - valid_open[i-1]) > abs(valid_close[i-2] - valid_open[i-2]) - FarAvg2 and  # Increasing body size
+                    abs(valid_close[i] - valid_open[i]) > abs(valid_close[i-1] - valid_open[i-1]) - FarAvg1 and  # Increasing body size
+                    abs(valid_close[i] - valid_open[i]) > BodyShortAvg):  # Significant body size
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = 100
                 else:
-                    result[i, sec] = 0
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = 0
             
-                # Update rolling totals
-                for totIdx in range(3):
-                    new_shadow = max(high[i-totIdx, sec] - close[i-totIdx, sec], 0.0) if close[i-totIdx, sec] > open[i-totIdx, sec] else max(open[i-totIdx, sec] - high[i-totIdx, sec], 0.0)
-                    old_shadow = max(high[ShadowVeryShortTrailingIdx-totIdx, sec] - close[ShadowVeryShortTrailingIdx-totIdx, sec], 0.0) if close[ShadowVeryShortTrailingIdx-totIdx, sec] > open[ShadowVeryShortTrailingIdx-totIdx, sec] else max(open[ShadowVeryShortTrailingIdx-totIdx, sec] - high[ShadowVeryShortTrailingIdx-totIdx, sec], 0.0)
-                    ShadowVeryShortPeriodTotal[totIdx] += new_shadow - old_shadow
+                # Update totals for next iteration
+                for totIdx in range(2, -1, -1):
+                    if i - totIdx >= 0 and ShadowVeryShortTrailingIdx - totIdx >= 0:
+                        ShadowVeryShortPeriodTotal[totIdx] += (max(valid_high[i-totIdx] - valid_close[i-totIdx], 0.0) if valid_close[i-totIdx] > valid_open[i-totIdx] else max(valid_open[i-totIdx] - valid_high[i-totIdx], 0.0))
+                        ShadowVeryShortPeriodTotal[totIdx] -= (max(valid_high[ShadowVeryShortTrailingIdx-totIdx] - valid_close[ShadowVeryShortTrailingIdx-totIdx], 0.0) if valid_close[ShadowVeryShortTrailingIdx-totIdx] > valid_open[ShadowVeryShortTrailingIdx-totIdx] else max(valid_open[ShadowVeryShortTrailingIdx-totIdx] - valid_high[ShadowVeryShortTrailingIdx-totIdx], 0.0))
             
-                for totIdx in range(1, 3):
-                    new_near = max(close[i-totIdx, sec] - open[i-totIdx, sec], 0.0) if close[i-totIdx, sec] > open[i-totIdx, sec] else max(open[i-totIdx, sec] - close[i-totIdx, sec], 0.0)
-                    old_near = max(close[NearTrailingIdx-totIdx, sec] - open[NearTrailingIdx-totIdx, sec], 0.0) if close[NearTrailingIdx-totIdx, sec] > open[NearTrailingIdx-totIdx, sec] else max(open[NearTrailingIdx-totIdx, sec] - close[NearTrailingIdx-totIdx, sec], 0.0)
-                    NearPeriodTotal[totIdx] += new_near - old_near
-                
-                    new_far = max(close[i-totIdx, sec] - open[i-totIdx, sec], 0.0) if close[i-totIdx, sec] > open[i-totIdx, sec] else max(open[i-totIdx, sec] - close[i-totIdx, sec], 0.0)
-                    old_far = max(close[FarTrailingIdx-totIdx, sec] - open[FarTrailingIdx-totIdx, sec], 0.0) if close[FarTrailingIdx-totIdx, sec] > open[FarTrailingIdx-totIdx, sec] else max(open[FarTrailingIdx-totIdx, sec] - close[FarTrailingIdx-totIdx, sec], 0.0)
-                    FarPeriodTotal[totIdx] += new_far - old_far
+                for totIdx in range(2, 0, -1):
+                    if i - totIdx >= 0 and FarTrailingIdx - totIdx >= 0:
+                        FarPeriodTotal[totIdx] += (valid_high[i-totIdx] - valid_low[i-totIdx])
+                        FarPeriodTotal[totIdx] -= (valid_high[FarTrailingIdx-totIdx] - valid_low[FarTrailingIdx-totIdx])
+                    if i - totIdx >= 0 and NearTrailingIdx - totIdx >= 0:
+                        NearPeriodTotal[totIdx] += (valid_high[i-totIdx] - valid_low[i-totIdx])
+                        NearPeriodTotal[totIdx] -= (valid_high[NearTrailingIdx-totIdx] - valid_low[NearTrailingIdx-totIdx])
             
-                new_body = abs(close[i, sec] - open[i, sec])
-                old_body = abs(close[BodyShortTrailingIdx, sec] - open[BodyShortTrailingIdx, sec])
-                BodyShortPeriodTotal += new_body - old_body
+                if i >= 0 and BodyShortTrailingIdx >= 0:
+                    BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
+                    BodyShortPeriodTotal -= abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
             
-                # Increment trailing indices
+                i += 1
                 ShadowVeryShortTrailingIdx += 1
                 NearTrailingIdx += 1
                 FarTrailingIdx += 1
@@ -2181,10 +1808,10 @@ class BaseLogicFactors:
     
         # Define lookback periods for different candle body types as per TA-Lib defaults
         body_long_period = 10  # Default for BodyLong in TA-Lib
-        body_doji_period = 10  # Default for BodyDoji in TA-Lib
-        body_short_period = 10  # Default for BodyShort in TA-Lib
+        body_doji_period = 3   # Default for BodyDoji in TA-Lib
+        body_short_period = 5  # Default for BodyShort in TA-Lib
     
-        # Lookback total is 2 days prior to current for pattern recognition
+        # Lookback total is 2 days prior data needed for pattern recognition
         lookback_total = 2
     
         for sec in range(secs):
@@ -2198,56 +1825,54 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total + 1:
+            if len(valid_indices) < lookback_total:
                 continue
             
-            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize totals for rolling averages
-            body_long_total = 0.0
-            body_doji_total = 0.0
-            body_short_total = 0.0
-        
-            # Calculate initial totals for body ranges
+            # Initialize trailing indices for rolling averages
             start_idx = lookback_total
-            body_long_trailing_idx = start_idx - 2 - body_long_period
-            body_doji_trailing_idx = start_idx - 1 - body_doji_period
-            body_short_trailing_idx = start_idx - body_short_period
+            body_long_trailing_idx = 0
+            body_doji_trailing_idx = 0
+            body_short_trailing_idx = 0
         
-            i = max(0, body_long_trailing_idx)
-            while i < start_idx - 2 and i < len(valid_high):
-                body_long_total += abs(valid_close[i] - valid_open[i])
-                i += 1
-            
-            i = max(0, body_doji_trailing_idx)
-            while i < start_idx - 1 and i < len(valid_high):
-                body_doji_total += abs(valid_close[i] - valid_open[i])
-                i += 1
-            
-            i = max(0, body_short_trailing_idx)
-            while i < start_idx and i < len(valid_high):
-                body_short_total += abs(valid_close[i] - valid_open[i])
-                i += 1
+            # Initialize period totals for body averages
+            body_long_period_total = 0.0
+            body_doji_period_total = 0.0
+            body_short_period_total = 0.0
         
-            # Main loop for pattern detection
+            # Warm-up period: Calculate initial totals for body averages
+            for i in range(body_long_trailing_idx, min(start_idx - 2, len(valid_high))):
+                if i >= 0 and i < len(valid_high) - 2:
+                    body_long_period_total += abs(valid_close[i] - valid_open[i])
+            for i in range(body_doji_trailing_idx, min(start_idx - 1, len(valid_high))):
+                if i >= 0 and i < len(valid_high) - 1:
+                    body_doji_period_total += abs(valid_close[i] - valid_open[i])
+            for i in range(body_short_trailing_idx, min(start_idx, len(valid_high))):
+                if i >= 0:
+                    body_short_period_total += abs(valid_close[i] - valid_open[i])
+        
+            # Main calculation loop
             for i in range(start_idx, len(valid_high)):
+                if i - 2 < 0 or i - 1 < 0:
+                    continue
+                
                 # Calculate real body sizes
-                body_2 = abs(valid_close[i-2] - valid_open[i-2])
-                body_1 = abs(valid_close[i-1] - valid_open[i-1])
-                body_0 = abs(valid_close[i] - valid_open[i])
+                real_body_2 = abs(valid_close[i-2] - valid_open[i-2])
+                real_body_1 = abs(valid_close[i-1] - valid_open[i-1])
+                real_body_0 = abs(valid_close[i] - valid_open[i])
             
-                # Calculate averages
-                body_long_avg = body_long_total / body_long_period if body_long_period > 0 else 0.0
-                body_doji_avg = body_doji_total / body_doji_period if body_doji_period > 0 else 0.0
-                body_short_avg = body_short_total / body_short_period if body_short_period > 0 else 0.0
-            
-                # Determine candle colors (1 for bullish, -1 for bearish)
+                # Calculate candle colors (1 for bullish, -1 for bearish)
                 color_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
                 color_0 = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Calculate averages for body comparisons
+                body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
+                body_doji_avg = body_doji_period_total / body_doji_period if body_doji_period > 0 else 0.0
+                body_short_avg = body_short_period_total / body_short_period if body_short_period > 0 else 0.0
             
                 # Check for gaps
                 gap_up_1_2 = valid_low[i-1] > valid_high[i-2]
@@ -2255,45 +1880,42 @@ class BaseLogicFactors:
                 gap_up_0_1 = valid_low[i] > valid_high[i-1]
                 gap_down_0_1 = valid_high[i] < valid_low[i-1]
             
-                # Check for bullish abandoned baby
-                bullish_condition = (color_2 == 1 and 
-                                   color_0 == -1 and 
-                                   valid_close[i] < valid_close[i-2] - body_2 * penetration and 
-                                   gap_up_1_2 and 
-                                   gap_down_0_1)
+                # Check Abandoned Baby pattern conditions
+                is_abandoned_baby = False
+                if (real_body_2 > body_long_avg and
+                    real_body_1 <= body_doji_avg and
+                    real_body_0 > body_short_avg):
+                    if (color_2 == 1 and color_0 == -1 and
+                        valid_close[i] < valid_close[i-2] - real_body_2 * penetration and
+                        gap_up_1_2 and gap_down_0_1):
+                        is_abandoned_baby = True
+                    elif (color_2 == -1 and color_0 == 1 and
+                          valid_close[i] > valid_close[i-2] + real_body_2 * penetration and
+                          gap_down_1_2 and gap_up_0_1):
+                        is_abandoned_baby = True
             
-                # Check for bearish abandoned baby
-                bearish_condition = (color_2 == -1 and 
-                                  color_0 == 1 and 
-                                  valid_close[i] > valid_close[i-2] + body_2 * penetration and 
-                                  gap_down_1_2 and 
-                                  gap_up_0_1)
-            
-                # Check if pattern conditions are met
-                if (body_2 > body_long_avg and 
-                    body_1 <= body_doji_avg and 
-                    body_0 > body_short_avg and 
-                    (bullish_condition or bearish_condition)):
+                # Set output value
+                if is_abandoned_baby:
                     result[valid_indices[i], sec] = color_0 * 100
                 else:
                     result[valid_indices[i], sec] = 0
                 
-                # Update rolling totals
+                # Update rolling totals for body averages
                 if i - 2 >= 0:
-                    body_long_total += abs(valid_close[i-2] - valid_open[i-2])
-                if body_long_trailing_idx >= 0 and body_long_trailing_idx < len(valid_high):
-                    body_long_total -= abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
-                body_long_trailing_idx += 1
-            
+                    body_long_period_total += abs(valid_close[i-2] - valid_open[i-2])
+                    if body_long_trailing_idx < len(valid_high):
+                        body_long_period_total -= abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
+                    body_long_trailing_idx += 1
+                
                 if i - 1 >= 0:
-                    body_doji_total += abs(valid_close[i-1] - valid_open[i-1])
-                if body_doji_trailing_idx >= 0 and body_doji_trailing_idx < len(valid_high):
-                    body_doji_total -= abs(valid_close[body_doji_trailing_idx] - valid_open[body_doji_trailing_idx])
-                body_doji_trailing_idx += 1
-            
-                body_short_total += abs(valid_close[i] - valid_open[i])
-                if body_short_trailing_idx >= 0 and body_short_trailing_idx < len(valid_high):
-                    body_short_total -= abs(valid_close[body_short_trailing_idx] - valid_open[body_short_trailing_idx])
+                    body_doji_period_total += abs(valid_close[i-1] - valid_open[i-1])
+                    if body_doji_trailing_idx < len(valid_high):
+                        body_doji_period_total -= abs(valid_close[body_doji_trailing_idx] - valid_open[body_doji_trailing_idx])
+                    body_doji_trailing_idx += 1
+                
+                body_short_period_total += abs(valid_close[i] - valid_open[i])
+                if body_short_trailing_idx < len(valid_high):
+                    body_short_period_total -= abs(valid_close[body_short_trailing_idx] - valid_open[body_short_trailing_idx])
                 body_short_trailing_idx += 1
     
         return result
@@ -2306,145 +1928,15 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Define lookback periods as per TA-Lib defaults
+        # Define candle average periods as per TA-Lib defaults
         ShadowShortPeriod = 5
         ShadowLongPeriod = 5
         NearPeriod = 5
         FarPeriod = 5
         BodyLongPeriod = 5
     
-        # Total lookback period (maximum of all periods + 2 for pattern detection)
+        # Lookback period as per TA-Lib (maximum of the periods + 2 for the pattern)
         lookbackTotal = max(ShadowShortPeriod, ShadowLongPeriod, NearPeriod, FarPeriod, BodyLongPeriod) + 2
-    
-        for sec in range(secs):
-            # Initialize arrays for period totals
-            ShadowShortPeriodTotal = np.zeros(3)
-            ShadowLongPeriodTotal = np.zeros(2)
-            NearPeriodTotal = np.zeros(3)
-            FarPeriodTotal = np.zeros(3)
-            BodyLongPeriodTotal = 0.0
-        
-            # Trailing indices for rolling window calculations
-            ShadowShortTrailingIdx = lookbackTotal - ShadowShortPeriod
-            ShadowLongTrailingIdx = lookbackTotal - ShadowLongPeriod
-            NearTrailingIdx = lookbackTotal - NearPeriod
-            FarTrailingIdx = lookbackTotal - FarPeriod
-            BodyLongTrailingIdx = lookbackTotal - BodyLongPeriod
-        
-            # Pre-calculate period totals for the lookback period
-            for i in range(ShadowShortTrailingIdx, lookbackTotal):
-                ShadowShortPeriodTotal[2] += max(high[i-2, sec] - close[i-2, sec], 0.0) if open[i-2, sec] > close[i-2, sec] else max(open[i-2, sec] - close[i-2, sec], 0.0)
-                ShadowShortPeriodTotal[1] += max(high[i-1, sec] - close[i-1, sec], 0.0) if open[i-1, sec] > close[i-1, sec] else max(open[i-1, sec] - close[i-1, sec], 0.0)
-                ShadowShortPeriodTotal[0] += max(high[i, sec] - close[i, sec], 0.0) if open[i, sec] > close[i, sec] else max(open[i, sec] - close[i, sec], 0.0)
-        
-            for i in range(ShadowLongTrailingIdx, lookbackTotal):
-                ShadowLongPeriodTotal[1] += max(high[i-1, sec] - close[i-1, sec], 0.0) if open[i-1, sec] > close[i-1, sec] else max(open[i-1, sec] - close[i-1, sec], 0.0)
-                ShadowLongPeriodTotal[0] += max(high[i, sec] - close[i, sec], 0.0) if open[i, sec] > close[i, sec] else max(open[i, sec] - close[i, sec], 0.0)
-        
-            for i in range(NearTrailingIdx, lookbackTotal):
-                NearPeriodTotal[2] += high[i-2, sec] - low[i-2, sec]
-                NearPeriodTotal[1] += high[i-1, sec] - low[i-1, sec]
-                NearPeriodTotal[0] += high[i, sec] - low[i, sec]
-        
-            for i in range(FarTrailingIdx, lookbackTotal):
-                FarPeriodTotal[2] += high[i-2, sec] - low[i-2, sec]
-                FarPeriodTotal[1] += high[i-1, sec] - low[i-1, sec]
-                FarPeriodTotal[0] += high[i, sec] - low[i, sec]
-        
-            for i in range(BodyLongTrailingIdx, lookbackTotal):
-                BodyLongPeriodTotal += abs(close[i-2, sec] - open[i-2, sec])
-        
-            # Main calculation loop starting from lookbackTotal
-            for i in range(lookbackTotal, tdts):
-                # Check for valid data
-                if (high[i, sec] != high[i, sec] or low[i, sec] != low[i, sec] or
-                    open[i, sec] != open[i, sec] or close[i, sec] != close[i, sec]):
-                    result[i, sec] = 0.0
-                    continue
-                
-                # Calculate candle color (1 for white/up, -1 for black/down)
-                color_2 = 1 if close[i-2, sec] > open[i-2, sec] else -1
-                color_1 = 1 if close[i-1, sec] > open[i-1, sec] else -1
-                color_0 = 1 if close[i, sec] > open[i, sec] else -1
-            
-                # Calculate real body sizes
-                realbody_2 = abs(close[i-2, sec] - open[i-2, sec])
-                realbody_1 = abs(close[i-1, sec] - open[i-1, sec])
-                realbody_0 = abs(close[i, sec] - open[i, sec])
-            
-                # Calculate upper shadows
-                uppershadow_2 = high[i-2, sec] - close[i-2, sec] if open[i-2, sec] <= close[i-2, sec] else high[i-2, sec] - open[i-2, sec]
-                uppershadow_1 = high[i-1, sec] - close[i-1, sec] if open[i-1, sec] <= close[i-1, sec] else high[i-1, sec] - open[i-1, sec]
-                uppershadow_0 = high[i, sec] - close[i, sec] if open[i, sec] <= close[i, sec] else high[i, sec] - open[i, sec]
-            
-                # Calculate averages for comparison
-                near_avg_2 = NearPeriodTotal[2] / NearPeriod if NearPeriod > 0 else 0.0
-                near_avg_1 = NearPeriodTotal[1] / NearPeriod if NearPeriod > 0 else 0.0
-                far_avg_2 = FarPeriodTotal[2] / FarPeriod if FarPeriod > 0 else 0.0
-                far_avg_1 = FarPeriodTotal[1] / FarPeriod if FarPeriod > 0 else 0.0
-                bodylong_avg = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
-                shadowshort_avg_2 = ShadowShortPeriodTotal[2] / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
-                shadowshort_avg_1 = ShadowShortPeriodTotal[1] / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
-                shadowshort_avg_0 = ShadowShortPeriodTotal[0] / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
-                shadowlong_avg_0 = ShadowLongPeriodTotal[0] / ShadowLongPeriod if ShadowLongPeriod > 0 else 0.0
-            
-                # Advance Block pattern conditions
-                if (color_2 == 1 and color_1 == 1 and color_0 == 1 and
-                    close[i, sec] > close[i-1, sec] and close[i-1, sec] > close[i-2, sec] and
-                    open[i-1, sec] > open[i-2, sec] and open[i-1, sec] <= close[i-2, sec] + near_avg_2 and
-                    open[i, sec] > open[i-1, sec] and open[i, sec] <= close[i-1, sec] + near_avg_1 and
-                    realbody_2 > bodylong_avg and uppershadow_2 < shadowshort_avg_2 and
-                    ((realbody_1 < realbody_2 - far_avg_2 and realbody_0 < realbody_1 + near_avg_1) or
-                     (realbody_0 < realbody_1 - far_avg_1) or
-                     (realbody_0 < realbody_1 and realbody_1 < realbody_2 and
-                      (uppershadow_0 > shadowshort_avg_0 or uppershadow_1 > shadowshort_avg_1)) or
-                     (realbody_0 < realbody_1 and uppershadow_0 > shadowlong_avg_0))):
-                    result[i, sec] = -100
-                else:
-                    result[i, sec] = 0
-            
-                # Update period totals for next iteration
-                for totIdx in range(3):
-                    new_val = max(high[i-totIdx, sec] - close[i-totIdx, sec], 0.0) if open[i-totIdx, sec] > close[i-totIdx, sec] else max(open[i-totIdx, sec] - close[i-totIdx, sec], 0.0)
-                    old_val = max(high[ShadowShortTrailingIdx-totIdx, sec] - close[ShadowShortTrailingIdx-totIdx, sec], 0.0) if open[ShadowShortTrailingIdx-totIdx, sec] > close[ShadowShortTrailingIdx-totIdx, sec] else max(open[ShadowShortTrailingIdx-totIdx, sec] - close[ShadowShortTrailingIdx-totIdx, sec], 0.0)
-                    ShadowShortPeriodTotal[totIdx] += new_val - old_val
-            
-                for totIdx in range(2):
-                    new_val = max(high[i-totIdx, sec] - close[i-totIdx, sec], 0.0) if open[i-totIdx, sec] > close[i-totIdx, sec] else max(open[i-totIdx, sec] - close[i-totIdx, sec], 0.0)
-                    old_val = max(high[ShadowLongTrailingIdx-totIdx, sec] - close[ShadowLongTrailingIdx-totIdx, sec], 0.0) if open[ShadowLongTrailingIdx-totIdx, sec] > close[ShadowLongTrailingIdx-totIdx, sec] else max(open[ShadowLongTrailingIdx-totIdx, sec] - close[ShadowLongTrailingIdx-totIdx, sec], 0.0)
-                    ShadowLongPeriodTotal[totIdx] += new_val - old_val
-            
-                for totIdx in range(1, 3):
-                    new_val = high[i-totIdx, sec] - low[i-totIdx, sec]
-                    old_val = high[FarTrailingIdx-totIdx, sec] - low[FarTrailingIdx-totIdx, sec]
-                    FarPeriodTotal[totIdx] += new_val - old_val
-                    new_val = high[i-totIdx, sec] - low[i-totIdx, sec]
-                    old_val = high[NearTrailingIdx-totIdx, sec] - low[NearTrailingIdx-totIdx, sec]
-                    NearPeriodTotal[totIdx] += new_val - old_val
-            
-                new_val = abs(close[i-2, sec] - open[i-2, sec])
-                old_val = abs(close[BodyLongTrailingIdx-2, sec] - open[BodyLongTrailingIdx-2, sec])
-                BodyLongPeriodTotal += new_val - old_val
-            
-                # Increment trailing indices
-                ShadowShortTrailingIdx += 1
-                ShadowLongTrailingIdx += 1
-                NearTrailingIdx += 1
-                FarTrailingIdx += 1
-                BodyLongTrailingIdx += 1
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLBELTHOLD(high, open, low, close, vol, oi, body_long_period=10, shadow_very_short_period=7):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib
-        lookback_total = max(body_long_period, shadow_very_short_period)
     
         for sec in range(secs):
             # Create valid data mask
@@ -2457,7 +1949,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) <= lookbackTotal:
                 continue
             
             # Extract valid data
@@ -2467,58 +1959,129 @@ class BaseLogicFactors:
             valid_close = close[valid_mask, sec]
         
             # Initialize period totals for averages
-            body_long_period_total = 0.0
-            shadow_very_short_period_total = 0.0
+            ShadowShortPeriodTotal = np.zeros(3)
+            ShadowLongPeriodTotal = np.zeros(2)
+            NearPeriodTotal = np.zeros(3)
+            FarPeriodTotal = np.zeros(3)
+            BodyLongPeriodTotal = 0.0
         
-            # Calculate initial totals for BodyLong and ShadowVeryShort
-            body_long_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
+            # Initialize trailing indices
+            ShadowShortTrailingIdx = lookbackTotal - ShadowShortPeriod
+            ShadowLongTrailingIdx = lookbackTotal - ShadowLongPeriod
+            NearTrailingIdx = lookbackTotal - NearPeriod
+            FarTrailingIdx = lookbackTotal - FarPeriod
+            BodyLongTrailingIdx = lookbackTotal - BodyLongPeriod
         
-            for i in range(lookback_total):
-                if i < body_long_period:
-                    body_long_range = abs(valid_close[i] - valid_open[i])
-                    body_long_period_total += body_long_range
-                if i < shadow_very_short_period:
-                    shadow_very_short_range = valid_high[i] - valid_low[i]
-                    shadow_very_short_period_total += shadow_very_short_range
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body and shadows
-                real_body = abs(valid_close[i] - valid_open[i])
-                candle_color = 1 if valid_close[i] > valid_open[i] else -1
-                lower_shadow = valid_open[i] - valid_low[i] if candle_color == 1 else valid_close[i] - valid_low[i]
-                upper_shadow = valid_high[i] - valid_open[i] if candle_color == 1 else valid_high[i] - valid_close[i]
+            # Warm-up period: Calculate initial totals
+            i = ShadowShortTrailingIdx
+            while i < lookbackTotal:
+                ShadowShortPeriodTotal[2] += max(valid_high[i-2] - valid_close[i-2], 0.0) if valid_close[i-2] > valid_open[i-2] else max(valid_open[i-2] - valid_close[i-2], 0.0)
+                ShadowShortPeriodTotal[1] += max(valid_high[i-1] - valid_close[i-1], 0.0) if valid_close[i-1] > valid_open[i-1] else max(valid_open[i-1] - valid_close[i-1], 0.0)
+                ShadowShortPeriodTotal[0] += max(valid_high[i] - valid_close[i], 0.0) if valid_close[i] > valid_open[i] else max(valid_open[i] - valid_close[i], 0.0)
+                i += 1
+            
+            i = ShadowLongTrailingIdx
+            while i < lookbackTotal:
+                ShadowLongPeriodTotal[1] += max(valid_high[i-1] - valid_close[i-1], 0.0) if valid_close[i-1] > valid_open[i-1] else max(valid_open[i-1] - valid_close[i-1], 0.0)
+                ShadowLongPeriodTotal[0] += max(valid_high[i] - valid_close[i], 0.0) if valid_close[i] > valid_open[i] else max(valid_open[i] - valid_close[i], 0.0)
+                i += 1
+            
+            i = NearTrailingIdx
+            while i < lookbackTotal:
+                NearPeriodTotal[2] += valid_high[i-2] - valid_low[i-2]
+                NearPeriodTotal[1] += valid_high[i-1] - valid_low[i-1]
+                i += 1
+            
+            i = FarTrailingIdx
+            while i < lookbackTotal:
+                FarPeriodTotal[2] += valid_high[i-2] - valid_low[i-2]
+                FarPeriodTotal[1] += valid_high[i-1] - valid_low[i-1]
+                i += 1
+            
+            i = BodyLongTrailingIdx
+            while i < lookbackTotal:
+                BodyLongPeriodTotal += abs(valid_close[i-2] - valid_open[i-2])
+                i += 1
+            
+            # Main calculation loop
+            i = lookbackTotal
+            while i < len(valid_high):
+                # Calculate candle color (1 for bullish, -1 for bearish)
+                color_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
+                color_1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
+                color_0 = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Calculate real body sizes
+                realbody_2 = abs(valid_close[i-2] - valid_open[i-2])
+                realbody_1 = abs(valid_close[i-1] - valid_open[i-1])
+                realbody_0 = abs(valid_close[i] - valid_open[i])
+            
+                # Calculate upper shadows
+                uppershadow_2 = valid_high[i-2] - valid_close[i-2] if valid_close[i-2] > valid_open[i-2] else valid_high[i-2] - valid_open[i-2]
+                uppershadow_1 = valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_high[i-1] - valid_open[i-1]
+                uppershadow_0 = valid_high[i] - valid_close[i] if valid_close[i] > valid_open[i] else valid_high[i] - valid_open[i]
             
                 # Calculate averages
-                body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_period_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
+                ShadowShortAvg_2 = ShadowShortPeriodTotal[2] / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
+                ShadowShortAvg_1 = ShadowShortPeriodTotal[1] / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
+                ShadowShortAvg_0 = ShadowShortPeriodTotal[0] / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
+                ShadowLongAvg_0 = ShadowLongPeriodTotal[0] / ShadowLongPeriod if ShadowLongPeriod > 0 else 0.0
+                NearAvg_2 = NearPeriodTotal[2] / NearPeriod if NearPeriod > 0 else 0.0
+                NearAvg_1 = NearPeriodTotal[1] / NearPeriod if NearPeriod > 0 else 0.0
+                FarAvg_2 = FarPeriodTotal[2] / FarPeriod if FarPeriod > 0 else 0.0
+                FarAvg_1 = FarPeriodTotal[1] / FarPeriod if FarPeriod > 0 else 0.0
+                BodyLongAvg_2 = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
             
-                # Belt Hold pattern logic
-                if real_body > body_long_avg:
-                    if (candle_color == 1 and lower_shadow < shadow_very_short_avg) or \
-                       (candle_color == -1 and upper_shadow < shadow_very_short_avg):
-                        result[valid_indices[i], sec] = candle_color * 100
-                    else:
-                        result[valid_indices[i], sec] = 0
+                # Check for Advance Block pattern
+                if (color_2 == 1 and color_1 == 1 and color_0 == 1 and
+                    valid_close[i] > valid_close[i-1] and valid_close[i-1] > valid_close[i-2] and
+                    valid_open[i-1] > valid_open[i-2] and
+                    valid_open[i-1] <= valid_close[i-2] + NearAvg_2 and
+                    valid_open[i] > valid_open[i-1] and
+                    valid_open[i] <= valid_close[i-1] + NearAvg_1 and
+                    realbody_2 > BodyLongAvg_2 and
+                    uppershadow_2 < ShadowShortAvg_2 and
+                    ((realbody_1 < realbody_2 - FarAvg_2 and realbody_0 < realbody_1 + NearAvg_1) or
+                     (realbody_0 < realbody_1 - FarAvg_1) or
+                     (realbody_0 < realbody_1 and realbody_1 < realbody_2 and
+                      (uppershadow_0 > ShadowShortAvg_0 or uppershadow_1 > ShadowShortAvg_1)) or
+                     (realbody_0 < realbody_1 and uppershadow_0 > ShadowLongAvg_0))):
+                    result[valid_indices[i], sec] = -100
                 else:
                     result[valid_indices[i], sec] = 0
-            
-                # Update trailing totals for next iteration
-                if body_long_trailing_idx < len(valid_high):
-                    old_body_long_range = abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
-                    new_body_long_range = abs(valid_close[i] - valid_open[i])
-                    body_long_period_total += new_body_long_range - old_body_long_range
-                    body_long_trailing_idx += 1
                 
-                if shadow_very_short_trailing_idx < len(valid_high):
-                    old_shadow_range = valid_high[shadow_very_short_trailing_idx] - valid_low[shadow_very_short_trailing_idx]
-                    new_shadow_range = valid_high[i] - valid_low[i]
-                    shadow_very_short_period_total += new_shadow_range - old_shadow_range
-                    shadow_very_short_trailing_idx += 1
-    
+                # Update period totals
+                for totIdx in range(2, -1, -1):
+                    curr_val = max(valid_high[i-totIdx] - valid_close[i-totIdx], 0.0) if valid_close[i-totIdx] > valid_open[i-totIdx] else max(valid_open[i-totIdx] - valid_close[i-totIdx], 0.0)
+                    trail_val = max(valid_high[ShadowShortTrailingIdx-totIdx] - valid_close[ShadowShortTrailingIdx-totIdx], 0.0) if valid_close[ShadowShortTrailingIdx-totIdx] > valid_open[ShadowShortTrailingIdx-totIdx] else max(valid_open[ShadowShortTrailingIdx-totIdx] - valid_close[ShadowShortTrailingIdx-totIdx], 0.0)
+                    ShadowShortPeriodTotal[totIdx] += curr_val - trail_val
+                
+                for totIdx in range(1, -1, -1):
+                    curr_val = max(valid_high[i-totIdx] - valid_close[i-totIdx], 0.0) if valid_close[i-totIdx] > valid_open[i-totIdx] else max(valid_open[i-totIdx] - valid_close[i-totIdx], 0.0)
+                    trail_val = max(valid_high[ShadowLongTrailingIdx-totIdx] - valid_close[ShadowLongTrailingIdx-totIdx], 0.0) if valid_close[ShadowLongTrailingIdx-totIdx] > valid_open[ShadowLongTrailingIdx-totIdx] else max(valid_open[ShadowLongTrailingIdx-totIdx] - valid_close[ShadowLongTrailingIdx-totIdx], 0.0)
+                    ShadowLongPeriodTotal[totIdx] += curr_val - trail_val
+                
+                for totIdx in range(2, 0, -1):
+                    curr_val_far = valid_high[i-totIdx] - valid_low[i-totIdx]
+                    trail_val_far = valid_high[FarTrailingIdx-totIdx] - valid_low[FarTrailingIdx-totIdx]
+                    FarPeriodTotal[totIdx] += curr_val_far - trail_val_far
+                    curr_val_near = valid_high[i-totIdx] - valid_low[i-totIdx]
+                    trail_val_near = valid_high[NearTrailingIdx-totIdx] - valid_low[NearTrailingIdx-totIdx]
+                    NearPeriodTotal[totIdx] += curr_val_near - trail_val_near
+                
+                curr_val_body = abs(valid_close[i-2] - valid_open[i-2])
+                trail_val_body = abs(valid_close[BodyLongTrailingIdx-2] - valid_open[BodyLongTrailingIdx-2])
+                BodyLongPeriodTotal += curr_val_body - trail_val_body
+            
+                # Increment indices
+                i += 1
+                ShadowShortTrailingIdx += 1
+                ShadowLongTrailingIdx += 1
+                NearTrailingIdx += 1
+                FarTrailingIdx += 1
+                BodyLongTrailingIdx += 1
+            
         return result
-
 
 
     @staticmethod
@@ -2527,7 +2090,7 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (4 prior candles needed for pattern)
+        # Lookback period as defined in TA-Lib for CDLBREAKAWAY (5 bars needed for pattern)
         lookback_total = 4
     
         for sec in range(secs):
@@ -2550,160 +2113,81 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # BodyLong period as per TA-Lib (typically 10 for candlestick patterns)
-            body_long_period = 10
-            body_long_period_total = np.zeros(len(valid_high))
-        
-            # Initialize BodyLongPeriodTotal for the first valid points
-            for i in range(body_long_period, len(valid_high)):
-                if i == body_long_period:
-                    for j in range(i - body_long_period, i):
-                        body_long_period_total[i] += abs(valid_close[j] - valid_open[j])
-                else:
-                    body_long_period_total[i] = (body_long_period_total[i-1] + 
-                                                abs(valid_close[i-1] - valid_open[i-1]) - 
-                                                abs(valid_close[i-1-body_long_period] - valid_open[i-1-body_long_period]))
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body for i-4 candle
-                real_body_i4 = abs(valid_close[i-4] - valid_open[i-4])
-                body_long_avg = body_long_period_total[i] / body_long_period if body_long_period > 0 else 0.0
-            
-                # Determine candle colors (1 for bullish, -1 for bearish)
-                color_i4 = 1 if valid_close[i-4] > valid_open[i-4] else -1
-                color_i3 = 1 if valid_close[i-3] > valid_open[i-3] else -1
-                color_i1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
-                color_i = 1 if valid_close[i] > valid_open[i] else -1
-            
-                # Check conditions for Breakaway pattern
-                if real_body_i4 > body_long_avg:
-                    if (color_i4 == color_i3 and 
-                        color_i3 == color_i1 and 
-                        color_i1 == -color_i):
-                        if color_i4 == -1:
-                            # Bearish Breakaway conditions
-                            gap_down = valid_open[i-3] < valid_close[i-4]
-                            high_low_check_2 = valid_high[i-2] < valid_high[i-3] and valid_low[i-2] < valid_low[i-3]
-                            high_low_check_1 = valid_high[i-1] < valid_high[i-2] and valid_low[i-1] < valid_low[i-2]
-                            close_check = valid_close[i] > valid_open[i-3] and valid_close[i] < valid_close[i-4]
-                            if gap_down and high_low_check_2 and high_low_check_1 and close_check:
-                                result[valid_indices[i], sec] = color_i * 100
-                            else:
-                                result[valid_indices[i], sec] = 0
-                        elif color_i4 == 1:
-                            # Bullish Breakaway conditions
-                            gap_up = valid_open[i-3] > valid_close[i-4]
-                            high_low_check_2 = valid_high[i-2] > valid_high[i-3] and valid_low[i-2] > valid_low[i-3]
-                            high_low_check_1 = valid_high[i-1] > valid_high[i-2] and valid_low[i-1] > valid_low[i-2]
-                            close_check = valid_close[i] < valid_open[i-3] and valid_close[i] > valid_close[i-4]
-                            if gap_up and high_low_check_2 and high_low_check_1 and close_check:
-                                result[valid_indices[i], sec] = color_i * 100
-                            else:
-                                result[valid_indices[i], sec] = 0
-                    else:
-                        result[valid_indices[i], sec] = 0
-                else:
-                    result[valid_indices[i], sec] = 0
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLCLOSINGMARUBOZU(high, open, low, close, vol, oi, body_long_period=10, shadow_very_short_period=4):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib logic (maximum of the two periods)
-        lookback_total = max(body_long_period, shadow_very_short_period)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
             # Initialize output array for valid data
-            valid_result = np.zeros(len(valid_high))
+            pattern_values = np.zeros(len(valid_high))
         
-            # Initialize trailing totals for BodyLong and ShadowVeryShort
-            body_long_total = 0.0
-            shadow_very_short_total = 0.0
+            # BodyLong period for averaging candle range (default from TA-Lib)
+            body_long_period = 10
+            start_idx = max(lookback_total, body_long_period)
         
-            # Calculate initial totals for the lookback period
-            body_long_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
+            # Pre-calculate real body and candle range for efficiency
+            real_body = np.abs(valid_close - valid_open)
+            candle_range = valid_high - valid_low
         
-            for i in range(lookback_total):
-                if i < body_long_period:
-                    body_range = valid_close[i] - valid_open[i] if valid_close[i] >= valid_open[i] else valid_open[i] - valid_close[i]
-                    body_long_total += body_range
-                if i < shadow_very_short_period:
-                    shadow_range = valid_high[i] - valid_low[i]
-                    shadow_very_short_total += shadow_range
+            # Initialize trailing total for BodyLong average
+            body_long_period_total = 0.0
+            body_long_trailing_idx = start_idx - body_long_period
         
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body and shadows
-                real_body = valid_close[i] - valid_open[i] if valid_close[i] >= valid_open[i] else valid_open[i] - valid_close[i]
-                body_long_avg = body_long_total / body_long_period if body_long_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
+            # Calculate initial total for BodyLong average
+            for i in range(body_long_trailing_idx, start_idx):
+                if i >= 4:
+                    body_long_period_total += candle_range[i - 4]
+        
+            # Main calculation loop starting from lookback period
+            for i in range(start_idx, len(valid_high)):
+                # Calculate BodyLong average
+                body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
             
-                # Determine candle color (1 for bullish, -1 for bearish)
-                candle_color = 1 if valid_close[i] > valid_open[i] else -1
-            
-                # Calculate upper and lower shadows
-                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
-            
-                # Check for Closing Marubozu pattern
-                if real_body > body_long_avg:
-                    if candle_color == 1 and upper_shadow < shadow_very_short_avg:
-                        valid_result[i] = 100 * candle_color
-                    elif candle_color == -1 and lower_shadow < shadow_very_short_avg:
-                        valid_result[i] = 100 * candle_color
+                # Check for Breakaway pattern conditions
+                if i >= 4:
+                    # Condition 1: First candle has long body
+                    cond1 = real_body[i - 4] > body_long_avg
+                
+                    # Condition 2: First three candles have same color
+                    color_i4 = 1 if valid_close[i - 4] > valid_open[i - 4] else -1
+                    color_i3 = 1 if valid_close[i - 3] > valid_open[i - 3] else -1
+                    color_i1 = 1 if valid_close[i - 1] > valid_open[i - 1] else -1
+                    color_i = 1 if valid_close[i] > valid_open[i] else -1
+                    cond2 = color_i4 == color_i3 and color_i3 == color_i1
+                
+                    # Condition 3: Last candle is opposite color of first three
+                    cond3 = color_i1 == -color_i
+                
+                    # Condition 4: Specific pattern based on direction
+                    if color_i4 == -1:  # Bearish first candle
+                        cond4 = (valid_open[i - 3] < valid_close[i - 4] and  # Gap down
+                                valid_high[i - 2] < valid_high[i - 3] and
+                                valid_low[i - 2] < valid_low[i - 3] and
+                                valid_high[i - 1] < valid_high[i - 2] and
+                                valid_low[i - 1] < valid_low[i - 2] and
+                                valid_close[i] > valid_open[i - 3] and
+                                valid_close[i] < valid_close[i - 4])
+                    else:  # Bullish first candle
+                        cond4 = (valid_open[i - 3] > valid_close[i - 4] and  # Gap up
+                                valid_high[i - 2] > valid_high[i - 3] and
+                                valid_low[i - 2] > valid_low[i - 3] and
+                                valid_high[i - 1] > valid_high[i - 2] and
+                                valid_low[i - 1] > valid_low[i - 2] and
+                                valid_close[i] < valid_open[i - 3] and
+                                valid_close[i] > valid_close[i - 4])
+                
+                    # If all conditions are met, set the pattern value
+                    if cond1 and cond2 and cond3 and cond4:
+                        pattern_values[i] = color_i * 100
                     else:
-                        valid_result[i] = 0
-                else:
-                    valid_result[i] = 0
+                        pattern_values[i] = 0
             
-                # Update trailing totals
-                if i >= body_long_period:
-                    old_body_range = valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx] if valid_close[body_long_trailing_idx] >= valid_open[body_long_trailing_idx] else valid_open[body_long_trailing_idx] - valid_close[body_long_trailing_idx]
-                    new_body_range = real_body
-                    body_long_total += new_body_range - old_body_range
-                    body_long_trailing_idx += 1
-            
-                if i >= shadow_very_short_period:
-                    old_shadow_range = valid_high[shadow_very_short_trailing_idx] - valid_low[shadow_very_short_trailing_idx]
-                    new_shadow_range = valid_high[i] - valid_low[i]
-                    shadow_very_short_total += new_shadow_range - old_shadow_range
-                    shadow_very_short_trailing_idx += 1
+                # Update trailing total for next iteration
+                if i >= 4 and body_long_trailing_idx >= 4:
+                    body_long_period_total += candle_range[i - 4] - candle_range[body_long_trailing_idx - 4]
+                body_long_trailing_idx += 1
         
             # Map results back to original array
             for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
+                if valid_indices[i] >= start_idx:
+                    result[valid_indices[i], sec] = pattern_values[i]
     
         return result
-
 
 
     @staticmethod
@@ -2783,310 +2267,13 @@ class BaseLogicFactors:
         return result
 
 
-
-    @staticmethod
-    @nb.njit
-    def CDLCOUNTERATTACK(high, open, low, close, vol, oi, equal_period=10, body_long_period=10):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib logic (maximum of the two periods)
-        lookback_total = max(equal_period, body_long_period)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize output array for valid data
-            out_values = np.zeros(len(valid_high))
-        
-            # Initialize trailing totals for Equal and BodyLong periods
-            equal_period_total = 0.0
-            body_long_period_total_1 = 0.0  # For i-1
-            body_long_period_total_0 = 0.0  # For i
-        
-            # Pre-calculate trailing totals before start index
-            equal_trailing_idx = lookback_total - equal_period
-            body_long_trailing_idx = lookback_total - body_long_period
-        
-            # Calculate initial EqualPeriodTotal
-            for i in range(equal_trailing_idx, lookback_total):
-                if i >= 0:
-                    equal_period_total += abs(valid_high[i] - valid_low[i])
-        
-            # Calculate initial BodyLongPeriodTotal for both current and previous candle
-            for i in range(body_long_trailing_idx, lookback_total):
-                if i >= 0:
-                    body_long_period_total_1 += abs(valid_open[i-1] - valid_close[i-1]) if i > 0 else 0.0
-                    body_long_period_total_0 += abs(valid_open[i] - valid_close[i])
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate candle color (1 for bullish, -1 for bearish)
-                color_i = 1.0 if valid_close[i] > valid_open[i] else -1.0
-                color_i_1 = 1.0 if valid_close[i-1] > valid_open[i-1] else -1.0
-            
-                # Calculate real body sizes
-                real_body_i = abs(valid_close[i] - valid_open[i])
-                real_body_i_1 = abs(valid_close[i-1] - valid_open[i-1])
-            
-                # Calculate averages
-                equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
-                body_long_avg_1 = body_long_period_total_1 / body_long_period if body_long_period > 0 else 0.0
-                body_long_avg_0 = body_long_period_total_0 / body_long_period if body_long_period > 0 else 0.0
-            
-                # Counterattack pattern logic
-                if (color_i_1 == -color_i and  # Opposite colors
-                    real_body_i_1 > body_long_avg_1 and  # Previous body is long
-                    real_body_i > body_long_avg_0 and  # Current body is long
-                    valid_close[i] <= valid_close[i-1] + equal_avg and  # Close within range
-                    valid_close[i] >= valid_close[i-1] - equal_avg):
-                    out_values[i] = color_i * 100.0
-                else:
-                    out_values[i] = 0.0
-            
-                # Update trailing totals
-                if i - equal_trailing_idx >= 0:
-                    equal_period_total += abs(valid_high[i] - valid_low[i])
-                    if equal_trailing_idx >= 0:
-                        equal_period_total -= abs(valid_high[equal_trailing_idx] - valid_low[equal_trailing_idx])
-            
-                if i - body_long_trailing_idx >= 0:
-                    body_long_period_total_1 += abs(valid_open[i-1] - valid_close[i-1]) if i > 0 else 0.0
-                    body_long_period_total_0 += abs(valid_open[i] - valid_close[i])
-                    if body_long_trailing_idx >= 0:
-                        body_long_period_total_1 -= abs(valid_open[body_long_trailing_idx-1] - valid_close[body_long_trailing_idx-1]) if body_long_trailing_idx > 0 else 0.0
-                        body_long_period_total_0 -= abs(valid_open[body_long_trailing_idx] - valid_close[body_long_trailing_idx])
-            
-                equal_trailing_idx += 1
-                body_long_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = out_values[i]
-    
-        return result
-
-
-
     @staticmethod
     @nb.njit
     def CDLDARKCLOUDCOVER(high, open, low, close, vol, oi, penetration=0.5):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # BodyLong的平均周期，通常为10
-        BodyLongPeriod = 10
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < BodyLongPeriod + 1:
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # 初始化输出数组
-            temp_result = np.zeros(len(valid_high))
-        
-            # 计算lookback period
-            lookback_total = BodyLongPeriod
-        
-            # 初始化BodyLongPeriodTotal
-            BodyLongPeriodTotal = 0.0
-            BodyLongTrailingIdx = 0
-        
-            # 预热期处理：计算初始的BodyLongPeriodTotal
-            for i in range(lookback_total):
-                if i < len(valid_high) - 1:
-                    real_body = abs(valid_close[i + 1] - valid_open[i + 1])
-                    BodyLongPeriodTotal += real_body
-        
-            # 主计算阶段
-            out_idx = 0
-            for i in range(lookback_total, len(valid_high)):
-                if i >= 1:
-                    # 判断Dark Cloud Cover形态
-                    # 前一根K线为阳线
-                    is_bullish_prev = valid_close[i - 1] > valid_open[i - 1]
-                    # 前一根K线的实体长度大于平均实体长度
-                    real_body_prev = abs(valid_close[i - 1] - valid_open[i - 1])
-                    body_long_avg = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
-                    is_body_long = real_body_prev > body_long_avg
-                    # 当前K线为阴线
-                    is_bearish_current = valid_close[i] < valid_open[i]
-                    # 当前K线开盘价高于前一根K线最高价
-                    is_open_above_high = valid_open[i] > valid_high[i - 1]
-                    # 当前K线收盘价高于前一根K线开盘价
-                    is_close_above_open_prev = valid_close[i] > valid_open[i - 1]
-                    # 当前K线收盘价低于前一根K线收盘价减去实体长度的penetration比例
-                    penetration_threshold = valid_close[i - 1] - real_body_prev * penetration
-                    is_close_below_threshold = valid_close[i] < penetration_threshold
-                
-                    if (is_bullish_prev and is_body_long and is_bearish_current and 
-                        is_open_above_high and is_close_above_open_prev and is_close_below_threshold):
-                        temp_result[i] = -100
-                    else:
-                        temp_result[i] = 0
-                
-                    # 更新BodyLongPeriodTotal
-                    if i < len(valid_high) - 1:
-                        current_real_body = abs(valid_close[i] - valid_open[i])
-                        trailing_real_body = abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
-                        BodyLongPeriodTotal += current_real_body - trailing_real_body
-                        BodyLongTrailingIdx += 1
-                out_idx += 1
-        
-            # 映射结果回原始数组
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = temp_result[i]
-    
-        return result
+        BodyLongPeriod = 10  # TA-Lib default for BodyLong average period
 
-
-
-    @staticmethod
-    @nb.njit
-    def CDLDOJISTAR(high, open, low, close, vol, oi):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # TA-Lib默认的BodyLong和BodyDoji周期
-        BodyLongPeriod = 10
-        BodyDojiPeriod = 3
-        lookbackTotal = max(BodyLongPeriod + 1, BodyDojiPeriod)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookbackTotal:
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # 初始化输出数组
-            temp_result = np.zeros(len(valid_high))
-        
-            # 初始化BodyLong和BodyDoji的累加值
-            BodyLongPeriodTotal = 0.0
-            BodyDojiPeriodTotal = 0.0
-        
-            # 计算初始的BodyLongPeriodTotal (前BodyLongPeriod个周期)
-            BodyLongTrailingIdx = 0
-            for i in range(BodyLongTrailingIdx, min(BodyLongPeriod, len(valid_high) - 1)):
-                BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
-        
-            # 计算初始的BodyDojiPeriodTotal (前BodyDojiPeriod个周期)
-            BodyDojiTrailingIdx = 0
-            for i in range(BodyDojiTrailingIdx, min(BodyDojiPeriod, len(valid_high))):
-                BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
-        
-            # 主计算循环，从lookbackTotal开始
-            for i in range(lookbackTotal, len(valid_high)):
-                # 计算前一天的实体大小
-                realbody_prev = abs(valid_close[i-1] - valid_open[i-1])
-                # 计算当前天的实体大小
-                realbody_curr = abs(valid_close[i] - valid_open[i])
-                # 计算前一天的颜色 (1为阳线, -1为阴线)
-                candle_color_prev = 1 if valid_close[i-1] > valid_open[i-1] else -1
-                # 检查是否有跳空
-                gap_up = valid_open[i] > valid_close[i-1]
-                gap_down = valid_open[i] < valid_close[i-1]
-            
-                # 计算BodyLong和BodyDoji的平均值
-                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
-                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
-            
-                # 判断是否为Doji Star形态
-                if (realbody_prev > BodyLongAverage and
-                    realbody_curr <= BodyDojiAverage and
-                    ((candle_color_prev == 1 and gap_up) or
-                     (candle_color_prev == -1 and gap_down))):
-                    temp_result[i] = -candle_color_prev * 100
-                else:
-                    temp_result[i] = 0
-                
-                # 更新BodyLongPeriodTotal
-                if i - 1 >= BodyLongTrailingIdx:
-                    BodyLongPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
-                    if BodyLongTrailingIdx < len(valid_high):
-                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
-                    BodyLongTrailingIdx += 1
-                
-                # 更新BodyDojiPeriodTotal
-                BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
-                if BodyDojiTrailingIdx < len(valid_high):
-                    BodyDojiPeriodTotal -= abs(valid_close[BodyDojiTrailingIdx] - valid_open[BodyDojiTrailingIdx])
-                BodyDojiTrailingIdx += 1
-        
-            # 映射结果回原始数组
-            for i in range(lookbackTotal, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = temp_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLDRAGONFLYDOJI(high, open, low, close, vol, oi, body_doji_period=3, shadow_very_short_period=3):
-        """
-        CDLDRAGONFLYDOJI - Dragonfly Doji Candlestick Pattern
-    
-        Identifies the Dragonfly Doji pattern where the open and close are at or near the high of the day,
-        with a long lower shadow and little to no upper shadow.
-        """
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib
-        lookback_total = max(body_doji_period, shadow_very_short_period)
-    
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -3098,68 +2285,68 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 2:  # Need at least 2 bars for pattern
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Lookback period as per TA-Lib (1 prior bar for pattern + BodyLongPeriod for average)
+            lookback_total = BodyLongPeriod + 1
             if len(valid_indices) < lookback_total:
                 continue
             
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
+            # Initialize output array for valid data
+            pattern_values = np.zeros(len(valid_high))
         
-            # Initialize period totals for averages
-            body_doji_period_total = 0.0
-            shadow_very_short_period_total = 0.0
+            # Calculate initial BodyLongPeriodTotal for the first window
+            BodyLongPeriodTotal = 0.0
+            for i in range(lookback_total - BodyLongPeriod, lookback_total):
+                if i > 0:  # Need previous bar for real body calculation
+                    real_body = abs(valid_close[i-1] - valid_open[i-1])
+                    BodyLongPeriodTotal += real_body
         
-            # Calculate initial totals for BodyDoji and ShadowVeryShort ranges
-            body_doji_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
-        
-            for i in range(lookback_total):
-                if i < body_doji_period:
-                    body_range = abs(valid_close[i] - valid_open[i])
-                    body_doji_period_total += body_range
-                if i < shadow_very_short_period:
-                    shadow_range = valid_high[i] - valid_low[i]
-                    shadow_very_short_period_total += shadow_range
+            BodyLongTrailingIdx = lookback_total - BodyLongPeriod
         
             # Main calculation loop starting from lookback_total
             for i in range(lookback_total, len(valid_high)):
-                # Calculate real body and shadows
-                real_body = abs(valid_close[i] - valid_open[i])
-                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
+                # Check for Dark Cloud Cover pattern
+                if i > 0:  # Need previous bar
+                    # First bar must be bullish (white candle)
+                    prev_color = 1 if valid_close[i-1] > valid_open[i-1] else -1
+                    # Current bar must be bearish (black candle)
+                    curr_color = 1 if valid_close[i] > valid_open[i] else -1
+                    # Previous real body size
+                    prev_real_body = abs(valid_close[i-1] - valid_open[i-1])
+                    # Calculate average body length for comparison
+                    BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                
+                    if (prev_color == 1 and  # Previous bar is bullish
+                        prev_real_body > BodyLongAverage and  # Previous body is long
+                        curr_color == -1 and  # Current bar is bearish
+                        valid_open[i] > valid_high[i-1] and  # Current opens above previous high
+                        valid_close[i] > valid_open[i-1] and  # Current close above previous open
+                        valid_close[i] < valid_close[i-1] - prev_real_body * penetration):  # Penetration condition
+                        pattern_values[i] = -100
+                    else:
+                        pattern_values[i] = 0
             
-                # Calculate averages
-                body_doji_average = body_doji_period_total / body_doji_period if body_doji_period > 0 else 0.0
-                shadow_very_short_average = shadow_very_short_period_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
-            
-                # Dragonfly Doji conditions:
-                # 1. Real body is very small compared to average body
-                # 2. Upper shadow is very short compared to average shadow
-                # 3. Lower shadow is long compared to average shadow
-                if (real_body <= body_doji_average and
-                    upper_shadow < shadow_very_short_average and
-                    lower_shadow > shadow_very_short_average):
-                    result[valid_indices[i], sec] = 100
-                else:
-                    result[valid_indices[i], sec] = 0
-            
-                # Update period totals by subtracting oldest value and adding newest
-                if body_doji_trailing_idx < len(valid_high):
-                    old_body_range = abs(valid_close[body_doji_trailing_idx] - valid_open[body_doji_trailing_idx])
-                    new_body_range = abs(valid_close[i] - valid_open[i])
-                    body_doji_period_total += new_body_range - old_body_range
-                    body_doji_trailing_idx += 1
-            
-                if shadow_very_short_trailing_idx < len(valid_high):
-                    old_shadow_range = valid_high[shadow_very_short_trailing_idx] - valid_low[shadow_very_short_trailing_idx]
-                    new_shadow_range = valid_high[i] - valid_low[i]
-                    shadow_very_short_period_total += new_shadow_range - old_shadow_range
-                    shadow_very_short_trailing_idx += 1
+                # Update BodyLongPeriodTotal for next iteration
+                if i > 0 and BodyLongTrailingIdx > 0:
+                    prev_real_body_new = abs(valid_close[i-1] - valid_open[i-1])
+                    prev_real_body_old = abs(valid_close[BodyLongTrailingIdx-1] - valid_open[BodyLongTrailingIdx-1])
+                    BodyLongPeriodTotal += prev_real_body_new - prev_real_body_old
+                BodyLongTrailingIdx += 1
+        
+            # Map results back to original array
+            start_idx = lookback_total
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result[orig_idx, sec] = pattern_values[i]
     
         return result
-
 
 
     @staticmethod
@@ -3168,147 +2355,174 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
+        # Lookback period as defined in TA-Lib for CDLENGULFING (needs 2 bars)
+        lookback_total = 1
+    
         for sec in range(secs):
-            # Lookback period for CDLENGULFING is 1 as it needs the previous candle
-            lookback_total = 1
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
         
-            for ts in range(lookback_total, tdts):
-                # Check for valid data
-                if (high[ts, sec] != high[ts, sec] or 
-                    open[ts, sec] != open[ts, sec] or 
-                    low[ts, sec] != low[ts, sec] or 
-                    close[ts, sec] != close[ts, sec] or
-                    high[ts-1, sec] != high[ts-1, sec] or 
-                    open[ts-1, sec] != open[ts-1, sec] or 
-                    low[ts-1, sec] != low[ts-1, sec] or 
-                    close[ts-1, sec] != close[ts-1, sec]):
-                    continue
-                
-                # Determine candle color (1 for bullish, -1 for bearish)
-                curr_color = 1 if close[ts, sec] > open[ts, sec] else -1
-                prev_color = 1 if close[ts-1, sec] > open[ts-1, sec] else -1
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookback_total:
+                continue
             
-                # Bullish Engulfing Pattern
-                bullish_engulfing = (curr_color == 1 and prev_color == -1 and
-                                   ((close[ts, sec] >= open[ts-1, sec] and open[ts, sec] < close[ts-1, sec]) or
-                                    (close[ts, sec] > open[ts-1, sec] and open[ts, sec] <= close[ts-1, sec])))
+            # Extract valid data
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize output for valid data
+            engulfing_values = np.zeros(len(valid_open))
+        
+            # Start processing from lookback_total index
+            for i in range(lookback_total, len(valid_open)):
+                # Determine candle color for current and previous bar
+                current_color = 1 if valid_close[i] > valid_open[i] else -1
+                prev_color = 1 if valid_close[i-1] > valid_open[i-1] else -1
             
-                # Bearish Engulfing Pattern
-                bearish_engulfing = (curr_color == -1 and prev_color == 1 and
-                                   ((open[ts, sec] >= close[ts-1, sec] and close[ts, sec] < open[ts-1, sec]) or
-                                    (open[ts, sec] > close[ts-1, sec] and close[ts, sec] <= open[ts-1, sec])))
+                # Bullish Engulfing: Current is bullish, previous is bearish
+                bullish_engulfing = (current_color == 1 and prev_color == -1 and
+                                    ((valid_close[i] >= valid_open[i-1] and valid_open[i] < valid_close[i-1]) or
+                                     (valid_close[i] > valid_open[i-1] and valid_open[i] <= valid_close[i-1])))
+            
+                # Bearish Engulfing: Current is bearish, previous is bullish
+                bearish_engulfing = (current_color == -1 and prev_color == 1 and
+                                    ((valid_open[i] >= valid_close[i-1] and valid_close[i] < valid_open[i-1]) or
+                                     (valid_open[i] > valid_close[i-1] and valid_close[i] <= valid_open[i-1])))
             
                 if bullish_engulfing or bearish_engulfing:
-                    if open[ts, sec] != close[ts-1, sec] and close[ts, sec] != open[ts-1, sec]:
-                        result[ts, sec] = curr_color * 100
+                    if valid_open[i] != valid_close[i-1] and valid_close[i] != valid_open[i-1]:
+                        engulfing_values[i] = current_color * 100
                     else:
-                        result[ts, sec] = curr_color * 80
+                        engulfing_values[i] = current_color * 80
                 else:
-                    result[ts, sec] = 0
-                
+                    engulfing_values[i] = 0
+        
+            # Map results back to original array
+            for i in range(len(valid_indices)):
+                if i >= lookback_total:
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = engulfing_values[i]
+    
         return result
 
 
 
     @staticmethod
     @nb.njit
-    def CDLEVENINGDOJISTAR(high, open, low, close, vol, oi, optInPenetration=0.3):
+    def CDLEVENINGDOJISTAR(high, open, low, close, vol, oi, penetration=0.3):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Define lookback periods for different candle body types as in TA-Lib
-        BodyLongPeriod = 5
+        # Define lookback periods for different body types as in TA-Lib
+        BodyLongPeriod = 10
         BodyDojiPeriod = 3
         BodyShortPeriod = 5
-        lookbackTotal = 2  # Need at least 3 candles (i-2, i-1, i) for pattern
+        lookbackTotal = 2 + max(BodyLongPeriod, max(BodyDojiPeriod, BodyShortPeriod))
     
         for sec in range(secs):
-            # Initialize totals for rolling averages
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize trailing indices for rolling sums
+            start_idx = lookbackTotal
+            BodyLongTrailingIdx = start_idx - 2 - BodyLongPeriod
+            BodyDojiTrailingIdx = start_idx - 1 - BodyDojiPeriod
+            BodyShortTrailingIdx = start_idx - BodyShortPeriod
+        
+            # Initialize rolling sums for body averages
             BodyLongPeriodTotal = 0.0
             BodyDojiPeriodTotal = 0.0
             BodyShortPeriodTotal = 0.0
         
-            # Initialize trailing indices for rolling window
-            BodyLongTrailingIdx = lookbackTotal - 2 - BodyLongPeriod
-            BodyDojiTrailingIdx = lookbackTotal - 1 - BodyDojiPeriod
-            BodyShortTrailingIdx = lookbackTotal - BodyShortPeriod
-        
-            # Pre-calculate initial totals for averages before startIdx
-            i = max(0, BodyLongTrailingIdx)
-            while i < lookbackTotal - 2:
-                if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
-                    BodyLongPeriodTotal += abs(open[i, sec] - close[i, sec])
+            # Calculate initial sums for BodyLong
+            i = BodyLongTrailingIdx
+            while i < start_idx - 2:
+                if i >= 0:
+                    BodyLongPeriodTotal += valid_high[i] - valid_low[i]
                 i += 1
             
-            i = max(0, BodyDojiTrailingIdx)
-            while i < lookbackTotal - 1:
-                if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
-                    BodyDojiPeriodTotal += abs(open[i, sec] - close[i, sec])
+            # Calculate initial sums for BodyDoji
+            i = BodyDojiTrailingIdx
+            while i < start_idx - 1:
+                if i >= 0:
+                    BodyDojiPeriodTotal += valid_high[i] - valid_low[i]
                 i += 1
             
-            i = max(0, BodyShortTrailingIdx)
-            while i < lookbackTotal:
-                if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
-                    BodyShortPeriodTotal += abs(open[i, sec] - close[i, sec])
+            # Calculate initial sums for BodyShort
+            i = BodyShortTrailingIdx
+            while i < start_idx:
+                if i >= 0:
+                    BodyShortPeriodTotal += valid_high[i] - valid_low[i]
                 i += 1
             
-            # Main loop starting from lookbackTotal
-            for i in range(lookbackTotal, tdts):
-                # Check if current data point is valid
-                if (high[i, sec] != high[i, sec] or low[i, sec] != low[i, sec] or 
-                    open[i, sec] != open[i, sec] or close[i, sec] != close[i, sec] or
-                    high[i-1, sec] != high[i-1, sec] or low[i-1, sec] != low[i-1, sec] or 
-                    open[i-1, sec] != open[i-1, sec] or close[i-1, sec] != close[i-1, sec] or
-                    high[i-2, sec] != high[i-2, sec] or low[i-2, sec] != low[i-2, sec] or 
-                    open[i-2, sec] != open[i-2, sec] or close[i-2, sec] != close[i-2, sec]):
-                    result[i, sec] = 0
-                    continue
-                
+            # Main calculation loop
+            i = start_idx
+            while i < len(valid_high):
                 # Calculate real body sizes
-                realBody2 = abs(close[i-2, sec] - open[i-2, sec])
-                realBody1 = abs(close[i-1, sec] - open[i-1, sec])
-                realBody0 = abs(close[i, sec] - open[i, sec])
+                realbody_2 = abs(valid_close[i-2] - valid_open[i-2])
+                realbody_1 = abs(valid_close[i-1] - valid_open[i-1])
+                realbody_0 = abs(valid_close[i] - valid_open[i])
             
-                # Calculate candle colors
-                color2 = 1 if close[i-2, sec] > open[i-2, sec] else -1
-                color0 = 1 if close[i, sec] > open[i, sec] else -1
+                # Calculate candle ranges for averages
+                range_2 = valid_high[i-2] - valid_low[i-2]
+                range_1 = valid_high[i-1] - valid_low[i-1]
+                range_0 = valid_high[i] - valid_low[i]
             
                 # Calculate averages
                 BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
                 BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
                 BodyShortAverage = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
             
-                # Check for gap up between i-2 and i-1
-                gapUp = min(open[i-1, sec], close[i-1, sec]) > max(open[i-2, sec], close[i-2, sec])
-            
-                # Check Evening Doji Star pattern conditions
-                if (realBody2 > BodyLongAverage and  # First candle is long
-                    color2 == 1 and  # First candle is white (bullish)
-                    realBody1 <= BodyDojiAverage and  # Second candle is doji
-                    gapUp and  # Gap up between first and second candle
-                    realBody0 > BodyShortAverage and  # Third candle is long
-                    color0 == -1 and  # Third candle is black (bearish)
-                    close[i, sec] < close[i-2, sec] - realBody2 * optInPenetration):  # Penetration condition
-                    result[i, sec] = -100
+                # Check for Evening Doji Star pattern
+                if (realbody_2 > BodyLongAverage and  # First candle is long white
+                    valid_close[i-2] > valid_open[i-2] and  # First candle color is white
+                    realbody_1 <= BodyDojiAverage and  # Second candle is doji
+                    valid_open[i-1] > valid_close[i-2] and  # Gap up between first and second
+                    realbody_0 > BodyShortAverage and  # Third candle is long black
+                    valid_close[i] < valid_open[i] and  # Third candle color is black
+                    valid_close[i] < valid_close[i-2] - realbody_2 * penetration):  # Penetration check
+                    result[valid_indices[i], sec] = -100
                 else:
-                    result[i, sec] = 0
+                    result[valid_indices[i], sec] = 0
                 
-                # Update rolling totals
+                # Update rolling sums
                 if i - 2 >= 0:
-                    newBodyLong = abs(close[i-2, sec] - open[i-2, sec]) if close[i-2, sec] == close[i-2, sec] else 0.0
-                    oldBodyLong = abs(close[BodyLongTrailingIdx, sec] - open[BodyLongTrailingIdx, sec]) if BodyLongTrailingIdx >= 0 and close[BodyLongTrailingIdx, sec] == close[BodyLongTrailingIdx, sec] else 0.0
-                    BodyLongPeriodTotal += newBodyLong - oldBodyLong
-                    BodyLongTrailingIdx += 1
-                
+                    BodyLongPeriodTotal += range_2
+                if BodyLongTrailingIdx >= 0:
+                    BodyLongPeriodTotal -= valid_high[BodyLongTrailingIdx] - valid_low[BodyLongTrailingIdx]
                 if i - 1 >= 0:
-                    newBodyDoji = abs(close[i-1, sec] - open[i-1, sec]) if close[i-1, sec] == close[i-1, sec] else 0.0
-                    oldBodyDoji = abs(close[BodyDojiTrailingIdx, sec] - open[BodyDojiTrailingIdx, sec]) if BodyDojiTrailingIdx >= 0 and close[BodyDojiTrailingIdx, sec] == close[BodyDojiTrailingIdx, sec] else 0.0
-                    BodyDojiPeriodTotal += newBodyDoji - oldBodyDoji
-                    BodyDojiTrailingIdx += 1
+                    BodyDojiPeriodTotal += range_1
+                if BodyDojiTrailingIdx >= 0:
+                    BodyDojiPeriodTotal -= valid_high[BodyDojiTrailingIdx] - valid_low[BodyDojiTrailingIdx]
+                if i >= 0:
+                    BodyShortPeriodTotal += range_0
+                if BodyShortTrailingIdx >= 0:
+                    BodyShortPeriodTotal -= valid_high[BodyShortTrailingIdx] - valid_low[BodyShortTrailingIdx]
                 
-                newBodyShort = abs(close[i, sec] - open[i, sec]) if close[i, sec] == close[i, sec] else 0.0
-                oldBodyShort = abs(close[BodyShortTrailingIdx, sec] - open[BodyShortTrailingIdx, sec]) if BodyShortTrailingIdx >= 0 and close[BodyShortTrailingIdx, sec] == close[BodyShortTrailingIdx, sec] else 0.0
-                BodyShortPeriodTotal += newBodyShort - oldBodyShort
+                i += 1
+                BodyLongTrailingIdx += 1
+                BodyDojiTrailingIdx += 1
                 BodyShortTrailingIdx += 1
             
         return result
@@ -3346,65 +2560,70 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize period totals for averaging
+            # Initialize period totals for body calculations
             BodyLongPeriodTotal = 0.0
             BodyShortPeriodTotal = 0.0
             BodyShortPeriodTotal2 = 0.0
         
-            # Calculate initial totals for BodyLong and BodyShort
-            BodyLongTrailingIdx = lookbackTotal - 2 - BodyLongPeriod
-            BodyShortTrailingIdx = lookbackTotal - 1 - BodyShortPeriod
-        
-            for i in range(BodyLongTrailingIdx, lookbackTotal - 2):
-                if i >= 0:
+            # Calculate initial totals for BodyLong (i-2 candle)
+            BodyLongTrailingIdx = 0
+            for i in range(BodyLongPeriod):
+                if i < len(valid_high) - 2:
                     BodyLongPeriodTotal += abs(valid_open[i] - valid_close[i])
-                
-            for i in range(BodyShortTrailingIdx, lookbackTotal - 1):
-                if i >= 0:
-                    BodyShortPeriodTotal += abs(valid_open[i] - valid_close[i])
-                    if i + 1 < len(valid_open):
-                        BodyShortPeriodTotal2 += abs(valid_open[i + 1] - valid_close[i + 1])
         
-            # Main calculation loop starting from lookbackTotal
-            for i in range(lookbackTotal, len(valid_high)):
+            # Calculate initial totals for BodyShort (i-1 and i candles)
+            BodyShortTrailingIdx = 0
+            for i in range(BodyShortPeriod):
+                if i < len(valid_high) - 1:
+                    BodyShortPeriodTotal += abs(valid_open[i] - valid_close[i])
+                if i < len(valid_high) - 2:
+                    BodyShortPeriodTotal2 += abs(valid_open[i+1] - valid_close[i+1])
+        
+            # Start processing from lookbackTotal
+            start_idx = lookbackTotal
+            for i in range(start_idx, len(valid_high)):
                 # Calculate real body for current and previous candles
-                realbody2 = abs(valid_open[i - 2] - valid_close[i - 2])
-                realbody1 = abs(valid_open[i - 1] - valid_close[i - 1])
-                realbody0 = abs(valid_open[i] - valid_close[i])
+                realbody_i2 = abs(valid_close[i-2] - valid_open[i-2])
+                realbody_i1 = abs(valid_close[i-1] - valid_open[i-1])
+                realbody_i = abs(valid_close[i] - valid_open[i])
             
-                # Calculate averages
+                # Calculate candle color (1 for bullish, -1 for bearish)
+                color_i2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
+                color_i = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Check for gap up between i-2 and i-1
+                gap_up = min(valid_open[i-1], valid_close[i-1]) > max(valid_open[i-2], valid_close[i-2])
+            
+                # Calculate averages for comparison
                 BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
                 BodyShortAverage = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
                 BodyShortAverage2 = BodyShortPeriodTotal2 / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
             
-                # Check conditions for Evening Star pattern
-                if (realbody2 > BodyLongAverage and
-                    valid_close[i - 2] > valid_open[i - 2] and  # Bullish first candle
-                    realbody1 <= BodyShortAverage and
-                    valid_open[i - 1] > valid_close[i - 2] and  # Gap up
-                    realbody0 > BodyShortAverage2 and
-                    valid_close[i] < valid_open[i] and  # Bearish third candle
-                    valid_close[i] < valid_close[i - 2] - realbody2 * penetration):
+                # Evening Star pattern conditions
+                if (realbody_i2 > BodyLongAverage and
+                    color_i2 == 1 and
+                    realbody_i1 <= BodyShortAverage and
+                    gap_up and
+                    realbody_i > BodyShortAverage2 and
+                    color_i == -1 and
+                    valid_close[i] < valid_close[i-2] - realbody_i2 * penetration):
                     result[valid_indices[i], sec] = -100
                 else:
                     result[valid_indices[i], sec] = 0
                 
                 # Update trailing totals
-                if i - 2 >= 0:
-                    BodyLongPeriodTotal += abs(valid_open[i - 2] - valid_close[i - 2])
-                    if BodyLongTrailingIdx >= 0:
-                        BodyLongPeriodTotal -= abs(valid_open[BodyLongTrailingIdx] - valid_close[BodyLongTrailingIdx])
+                if i - 2 >= BodyLongPeriod:
+                    BodyLongPeriodTotal += abs(valid_close[i-2] - valid_open[i-2])
+                    BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
                     BodyLongTrailingIdx += 1
                 
-                if i - 1 >= 0:
-                    BodyShortPeriodTotal += abs(valid_open[i - 1] - valid_close[i - 1])
-                    if BodyShortTrailingIdx >= 0:
-                        BodyShortPeriodTotal -= abs(valid_open[BodyShortTrailingIdx] - valid_close[BodyShortTrailingIdx])
+                if i - 1 >= BodyShortPeriod:
+                    BodyShortPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                    BodyShortPeriodTotal -= abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
+                    BodyShortPeriodTotal2 += abs(valid_close[i] - valid_open[i])
+                    if BodyShortTrailingIdx + 1 < len(valid_high):
+                        BodyShortPeriodTotal2 -= abs(valid_close[BodyShortTrailingIdx+1] - valid_open[BodyShortTrailingIdx+1])
                     BodyShortTrailingIdx += 1
-                
-                BodyShortPeriodTotal2 += abs(valid_open[i] - valid_close[i])
-                if BodyShortTrailingIdx - 1 >= 0:
-                    BodyShortPeriodTotal2 -= abs(valid_open[BodyShortTrailingIdx - 1] - valid_close[BodyShortTrailingIdx - 1])
     
         return result
 
@@ -3412,400 +2631,101 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLGAPSIDESIDEWHITE(high, open, low, close, vol, oi, near_period=3, equal_period=3):
+    def CDLHANGINGMAN(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (minimum data needed to start calculation)
-        lookback_total = max(near_period, equal_period) + 2
+        # Define lookback periods for different candle characteristics as in TA-Lib
+        BodyShortPeriod = 10
+        ShadowLongPeriod = 10
+        ShadowVeryShortPeriod = 10
+        NearPeriod = 10
+    
+        # Total lookback period as per TA-Lib
+        lookbackTotal = max(BodyShortPeriod, max(ShadowLongPeriod, max(ShadowVeryShortPeriod, NearPeriod + 1)))
     
         for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
+            # Initialize period totals for averaging
+            BodyPeriodTotal = 0.0
+            ShadowLongPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+            NearPeriodTotal = 0.0
         
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
+            # Initialize trailing indices for rolling window calculation
+            BodyTrailingIdx = lookbackTotal - BodyShortPeriod
+            ShadowLongTrailingIdx = lookbackTotal - ShadowLongPeriod
+            ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
+            NearTrailingIdx = lookbackTotal - 1 - NearPeriod
         
-            # Initialize output for valid data
-            valid_result = np.zeros(len(valid_high))
+            # Warm-up period: Calculate initial totals for averages
+            for i in range(BodyTrailingIdx, lookbackTotal):
+                if i < tdts and high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                    BodyPeriodTotal += abs(close[i, sec] - open[i, sec])
         
-            # Initialize trailing totals for Near and Equal periods
-            near_period_total = 0.0
-            equal_period_total = 0.0
+            for i in range(ShadowLongTrailingIdx, lookbackTotal):
+                if i < tdts and high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                    ShadowLongPeriodTotal += min(close[i, sec], open[i, sec]) - low[i, sec]
         
-            # Calculate initial totals for Near and Equal periods
-            near_trailing_idx = lookback_total - near_period
-            equal_trailing_idx = lookback_total - equal_period
+            for i in range(ShadowVeryShortTrailingIdx, lookbackTotal):
+                if i < tdts and high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                    ShadowVeryShortPeriodTotal += high[i, sec] - max(close[i, sec], open[i, sec])
         
-            for i in range(near_trailing_idx, lookback_total):
-                near_range = valid_high[i-1] - valid_low[i-1] if i > 0 else 0.0
-                near_period_total += near_range
-            
-            for i in range(equal_trailing_idx, lookback_total):
-                equal_range = valid_high[i-1] - valid_low[i-1] if i > 0 else 0.0
-                equal_period_total += equal_range
+            for i in range(NearTrailingIdx, lookbackTotal - 1):
+                if i < tdts and high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec]:
+                    NearPeriodTotal += high[i, sec] - low[i, sec]
         
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Check for gap conditions (up or down)
-                gap_up_1 = valid_open[i-1] > valid_close[i-2] if i >= 2 else False
-                gap_up_2 = valid_open[i] > valid_close[i-2] if i >= 2 else False
-                gap_down_1 = valid_open[i-1] < valid_close[i-2] if i >= 2 else False
-                gap_down_2 = valid_open[i] < valid_close[i-2] if i >= 2 else False
-            
-                # Check candle colors (white candles, close > open)
-                color_1 = valid_close[i-1] > valid_open[i-1] if i >= 1 else False
-                color_2 = valid_close[i] > valid_open[i]
-            
-                # Calculate real body sizes
-                real_body_1 = abs(valid_close[i-1] - valid_open[i-1]) if i >= 1 else 0.0
-                real_body_2 = abs(valid_close[i] - valid_open[i])
-            
-                # Calculate averages for Near and Equal
-                near_avg = near_period_total / near_period if near_period > 0 else 0.0
-                equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
-            
-                # Conditions for pattern recognition
-                if ((gap_up_1 and gap_up_2) or (gap_down_1 and gap_down_2)) and \
-                   color_1 and color_2 and \
-                   real_body_2 >= real_body_1 - near_avg and \
-                   real_body_2 <= real_body_1 + near_avg and \
-                   valid_open[i] >= valid_open[i-1] - equal_avg and \
-                   valid_open[i] <= valid_open[i-1] + equal_avg:
-                    valid_result[i] = 100.0 if gap_up_1 else -100.0
-                else:
-                    valid_result[i] = 0.0
-            
-                # Update trailing totals for next iteration
-                if i < len(valid_high):
-                    new_near_range = valid_high[i-1] - valid_low[i-1] if i > 0 else 0.0
-                    old_near_range = valid_high[i-1-near_period] - valid_low[i-1-near_period] if i > near_period else 0.0
-                    near_period_total += new_near_range - old_near_range
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, tdts):
+                if (high[i, sec] != high[i, sec] or low[i, sec] != low[i, sec] or 
+                    open[i, sec] != open[i, sec] or close[i, sec] != close[i, sec] or
+                    i - 1 < 0 or high[i-1, sec] != high[i-1, sec]):
+                    result[i, sec] = 0
+                    continue
                 
-                    new_equal_range = valid_high[i-1] - valid_low[i-1] if i > 0 else 0.0
-                    old_equal_range = valid_high[i-1-equal_period] - valid_low[i-1-equal_period] if i > equal_period else 0.0
-                    equal_period_total += new_equal_range - old_equal_range
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLGRAVESTONEDOJI(high, open, low, close, vol, oi, body_doji_period=3, shadow_very_short_period=3):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib logic
-        lookback_total = max(body_doji_period, shadow_very_short_period)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize period totals for BodyDoji and ShadowVeryShort
-            body_doji_period_total = 0.0
-            shadow_very_short_period_total = 0.0
-        
-            # Calculate initial totals for the lookback period
-            body_doji_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
-        
-            for i in range(lookback_total):
-                if i < body_doji_period:
-                    body_doji_range = valid_high[i] - valid_low[i]
-                    if body_doji_range == body_doji_range:  # Check for NaN
-                        body_doji_period_total += body_doji_range
-            
-                if i < shadow_very_short_period:
-                    shadow_very_short_range = valid_high[i] - valid_low[i]
-                    if shadow_very_short_range == shadow_very_short_range:  # Check for NaN
-                        shadow_very_short_period_total += shadow_very_short_range
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body and shadows
-                real_body = abs(valid_close[i] - valid_open[i])
-                lower_shadow = valid_open[i] - valid_low[i] if valid_close[i] >= valid_open[i] else valid_close[i] - valid_low[i]
-                upper_shadow = valid_high[i] - valid_open[i] if valid_close[i] >= valid_open[i] else valid_high[i] - valid_close[i]
-            
-                # Calculate averages
-                body_doji_avg = body_doji_period_total / body_doji_period if body_doji_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_period_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
-            
-                # Check for Gravestone Doji pattern
-                if (real_body <= body_doji_avg and
-                    lower_shadow < shadow_very_short_avg and
-                    upper_shadow > shadow_very_short_avg):
-                    result[valid_indices[i], sec] = 100
-                else:
-                    result[valid_indices[i], sec] = 0
-            
-                # Update period totals by subtracting trailing value and adding current
-                if body_doji_trailing_idx < len(valid_high):
-                    trailing_body_range = valid_high[body_doji_trailing_idx] - valid_low[body_doji_trailing_idx]
-                    if trailing_body_range == trailing_body_range:
-                        body_doji_period_total -= trailing_body_range
-                    current_body_range = valid_high[i] - valid_low[i]
-                    if current_body_range == current_body_range:
-                        body_doji_period_total += current_body_range
-                    body_doji_trailing_idx += 1
-            
-                if shadow_very_short_trailing_idx < len(valid_high):
-                    trailing_shadow_range = valid_high[shadow_very_short_trailing_idx] - valid_low[shadow_very_short_trailing_idx]
-                    if trailing_shadow_range == trailing_shadow_range:
-                        shadow_very_short_period_total -= trailing_shadow_range
-                    current_shadow_range = valid_high[i] - valid_low[i]
-                    if current_shadow_range == current_shadow_range:
-                        shadow_very_short_period_total += current_shadow_range
-                    shadow_very_short_trailing_idx += 1
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLHAMMER(high, open, low, close, vol, oi, body_short_period=5, shadow_long_period=5, shadow_very_short_period=5, near_period=5):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (maximum of the periods used)
-        lookback_total = max(body_short_period, shadow_long_period, shadow_very_short_period, near_period + 1)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize period totals for averages
-            body_period_total = 0.0
-            shadow_long_period_total = 0.0
-            shadow_very_short_period_total = 0.0
-            near_period_total = 0.0
-        
-            # Trailing indices for rolling window
-            body_trailing_idx = 0
-            shadow_long_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
-            near_trailing_idx = 0
-        
-            # Pre-calculate initial totals for the lookback period
-            for i in range(lookback_total - body_short_period, lookback_total):
-                if i >= 0:
-                    body_period_total += abs(valid_close[i] - valid_open[i])
-            for i in range(lookback_total - shadow_long_period, lookback_total):
-                if i >= 0:
-                    shadow_long_period_total += max(valid_close[i], valid_open[i]) - valid_low[i]
-            for i in range(lookback_total - shadow_very_short_period, lookback_total):
-                if i >= 0:
-                    shadow_very_short_period_total += valid_high[i] - min(valid_close[i], valid_open[i])
-            for i in range(lookback_total - near_period - 1, lookback_total - 1):
-                if i >= 0:
-                    near_period_total += valid_high[i] - valid_low[i]
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate averages
-                body_avg = body_period_total / body_short_period if body_short_period > 0 else 0.0
-                shadow_long_avg = shadow_long_period_total / shadow_long_period if shadow_long_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_period_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
-                near_avg = near_period_total / near_period if near_period > 0 else 0.0
-            
-                # Hammer pattern conditions
-                real_body = abs(valid_close[i] - valid_open[i])
-                lower_shadow = max(valid_close[i], valid_open[i]) - valid_low[i]
-                upper_shadow = valid_high[i] - min(valid_close[i], valid_open[i])
-                near_value = valid_low[i-1] + near_avg
-            
-                if (real_body < body_avg and
-                    lower_shadow > shadow_long_avg and
-                    upper_shadow < shadow_very_short_avg and
-                    min(valid_close[i], valid_open[i]) <= near_value):
-                    result[valid_indices[i], sec] = 100
-                else:
-                    result[valid_indices[i], sec] = 0
-            
-                # Update rolling totals
-                if i < len(valid_high):
-                    # Add new values
-                    body_period_total += abs(valid_close[i] - valid_open[i])
-                    shadow_long_period_total += max(valid_close[i], valid_open[i]) - valid_low[i]
-                    shadow_very_short_period_total += valid_high[i] - min(valid_close[i], valid_open[i])
-                    if i < len(valid_high) - 1:
-                        near_period_total += valid_high[i-1] - valid_low[i-1]
-                
-                    # Subtract old values
-                    if body_trailing_idx < len(valid_high):
-                        body_period_total -= abs(valid_close[body_trailing_idx] - valid_open[body_trailing_idx])
-                    if shadow_long_trailing_idx < len(valid_high):
-                        shadow_long_period_total -= max(valid_close[shadow_long_trailing_idx], valid_open[shadow_long_trailing_idx]) - valid_low[shadow_long_trailing_idx]
-                    if shadow_very_short_trailing_idx < len(valid_high):
-                        shadow_very_short_period_total -= valid_high[shadow_very_short_trailing_idx] - min(valid_close[shadow_very_short_trailing_idx], valid_open[shadow_very_short_trailing_idx])
-                    if near_trailing_idx < len(valid_high) - 1:
-                        near_period_total -= valid_high[near_trailing_idx] - valid_low[near_trailing_idx]
-                
-                    # Increment trailing indices
-                    body_trailing_idx += 1
-                    shadow_long_trailing_idx += 1
-                    shadow_very_short_trailing_idx += 1
-                    near_trailing_idx += 1
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLHANGINGMAN(high, open, low, close, vol, oi, body_short_period=10, shadow_long_period=10, shadow_very_short_period=10, near_period=10):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (maximum of the periods used)
-        lookback_total = max(body_short_period, shadow_long_period, shadow_very_short_period, near_period + 1)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize period totals for averages
-            body_period_total = 0.0
-            shadow_long_period_total = 0.0
-            shadow_very_short_period_total = 0.0
-            near_period_total = 0.0
-        
-            # Trailing indices for rolling window
-            body_trailing_idx = 0
-            shadow_long_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
-            near_trailing_idx = 0
-        
-            # Pre-calculate initial totals for the lookback period
-            for i in range(lookback_total - body_short_period, lookback_total):
-                if i < len(valid_high):
-                    body_period_total += abs(valid_close[i] - valid_open[i])
-            for i in range(lookback_total - shadow_long_period, lookback_total):
-                if i < len(valid_high):
-                    shadow_long_period_total += valid_low[i] - min(valid_close[i], valid_open[i])
-            for i in range(lookback_total - shadow_very_short_period, lookback_total):
-                if i < len(valid_high):
-                    shadow_very_short_period_total += max(valid_close[i], valid_open[i]) - valid_high[i]
-            for i in range(lookback_total - near_period - 1, lookback_total - 1):
-                if i < len(valid_high):
-                    near_period_total += valid_high[i] - valid_low[i]
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
                 # Calculate real body and shadows for current candle
-                real_body = abs(valid_close[i] - valid_open[i])
-                lower_shadow = valid_low[i] - min(valid_close[i], valid_open[i])
-                upper_shadow = max(valid_close[i], valid_open[i]) - valid_high[i]
+                real_body = abs(close[i, sec] - open[i, sec])
+                lower_shadow = min(close[i, sec], open[i, sec]) - low[i, sec]
+                upper_shadow = high[i, sec] - max(close[i, sec], open[i, sec])
             
-                # Calculate averages
-                body_avg = body_period_total / body_short_period if body_short_period > 0 else 0.0
-                shadow_long_avg = shadow_long_period_total / shadow_long_period if shadow_long_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_period_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
-                near_avg = near_period_total / near_period if near_period > 0 else 0.0
+                # Calculate averages for comparison
+                BodyAverage = BodyPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                ShadowLongAverage = ShadowLongPeriodTotal / ShadowLongPeriod if ShadowLongPeriod > 0 else 0.0
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+                NearAverage = NearPeriodTotal / NearPeriod if NearPeriod > 0 and i - 1 >= 0 else 0.0
             
-                # Check Hanging Man conditions
-                if (real_body < body_avg and
-                    lower_shadow > shadow_long_avg and
-                    upper_shadow < shadow_very_short_avg and
-                    min(valid_close[i], valid_open[i]) >= valid_high[i-1] - near_avg):
-                    result[valid_indices[i], sec] = -100
+                # Hanging Man pattern conditions
+                if (real_body < BodyAverage and
+                    lower_shadow > ShadowLongAverage and
+                    upper_shadow < ShadowVeryShortAverage and
+                    min(close[i, sec], open[i, sec]) >= high[i-1, sec] - NearAverage):
+                    result[i, sec] = -100
                 else:
-                    result[valid_indices[i], sec] = 0
+                    result[i, sec] = 0
             
-                # Update rolling totals
-                if i < len(valid_high):
+                # Update rolling totals for next iteration
+                if i < tdts:
                     # Add current values
-                    body_period_total += abs(valid_close[i] - valid_open[i])
-                    shadow_long_period_total += valid_low[i] - min(valid_close[i], valid_open[i])
-                    shadow_very_short_period_total += max(valid_close[i], valid_open[i]) - valid_high[i]
-                    if i - 1 < len(valid_high):
-                        near_period_total += valid_high[i-1] - valid_low[i-1]
+                    BodyPeriodTotal += abs(close[i, sec] - open[i, sec])
+                    ShadowLongPeriodTotal += min(close[i, sec], open[i, sec]) - low[i, sec]
+                    ShadowVeryShortPeriodTotal += high[i, sec] - max(close[i, sec], open[i, sec])
+                    if i - 1 >= 0:
+                        NearPeriodTotal += high[i-1, sec] - low[i-1, sec]
                 
                     # Subtract trailing values
-                    if body_trailing_idx < len(valid_high):
-                        body_period_total -= abs(valid_close[body_trailing_idx] - valid_open[body_trailing_idx])
-                    if shadow_long_trailing_idx < len(valid_high):
-                        shadow_long_period_total -= valid_low[shadow_long_trailing_idx] - min(valid_close[shadow_long_trailing_idx], valid_open[shadow_long_trailing_idx])
-                    if shadow_very_short_trailing_idx < len(valid_high):
-                        shadow_very_short_period_total -= max(valid_close[shadow_very_short_trailing_idx], valid_open[shadow_very_short_trailing_idx]) - valid_high[shadow_very_short_trailing_idx]
-                    if near_trailing_idx < len(valid_high):
-                        near_period_total -= valid_high[near_trailing_idx] - valid_low[near_trailing_idx]
+                    if BodyTrailingIdx < tdts and BodyTrailingIdx >= 0:
+                        BodyPeriodTotal -= abs(close[BodyTrailingIdx, sec] - open[BodyTrailingIdx, sec])
+                    if ShadowLongTrailingIdx < tdts and ShadowLongTrailingIdx >= 0:
+                        ShadowLongPeriodTotal -= min(close[ShadowLongTrailingIdx, sec], open[ShadowLongTrailingIdx, sec]) - low[ShadowLongTrailingIdx, sec]
+                    if ShadowVeryShortTrailingIdx < tdts and ShadowVeryShortTrailingIdx >= 0:
+                        ShadowVeryShortPeriodTotal -= high[ShadowVeryShortTrailingIdx, sec] - max(close[ShadowVeryShortTrailingIdx, sec], open[ShadowVeryShortTrailingIdx, sec])
+                    if NearTrailingIdx < tdts and NearTrailingIdx >= 0:
+                        NearPeriodTotal -= high[NearTrailingIdx, sec] - low[NearTrailingIdx, sec]
                 
                     # Increment trailing indices
-                    body_trailing_idx += 1
-                    shadow_long_trailing_idx += 1
-                    shadow_very_short_trailing_idx += 1
-                    near_trailing_idx += 1
+                    BodyTrailingIdx += 1
+                    ShadowLongTrailingIdx += 1
+                    ShadowVeryShortTrailingIdx += 1
+                    NearTrailingIdx += 1
     
         return result
 
@@ -3905,12 +2825,14 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLHARAMICROSS(high, open, low, close, vol, oi, body_long_period=10, body_doji_period=3):
+    def CDLHARAMICROSS(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (maximum of body periods + 1 for prior day check)
-        lookback_total = max(body_long_period, body_doji_period) + 1
+        # Define lookback periods for BodyLong and BodyDoji as per TA-Lib defaults
+        BodyLongPeriod = 10
+        BodyDojiPeriod = 3
+        lookbackTotal = max(BodyLongPeriod + 1, BodyDojiPeriod)
     
         for sec in range(secs):
             # Create valid data mask
@@ -3923,110 +2845,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize totals for rolling averages
-            body_long_period_total = 0.0
-            body_doji_period_total = 0.0
-        
-            # Calculate initial totals for BodyLong and BodyDoji ranges
-            body_long_trailing_idx = 0
-            for i in range(body_long_trailing_idx, min(body_long_period - 1, len(valid_high) - 1)):
-                body_long_period_total += abs(valid_close[i] - valid_open[i])
-                body_long_trailing_idx += 1
-            
-            body_doji_trailing_idx = 0
-            for i in range(body_doji_trailing_idx, min(body_doji_period, len(valid_high))):
-                body_doji_period_total += abs(valid_close[i] - valid_open[i])
-                body_doji_trailing_idx += 1
-            
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body sizes
-                real_body_prev = abs(valid_close[i-1] - valid_open[i-1])
-                real_body_curr = abs(valid_close[i] - valid_open[i])
-            
-                # Calculate candle averages
-                body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
-                body_doji_avg = body_doji_period_total / body_doji_period if body_doji_period > 0 else 0.0
-            
-                # Harami Cross logic as per TA-Lib
-                max_curr = max(valid_close[i], valid_open[i])
-                min_curr = min(valid_close[i], valid_open[i])
-                max_prev = max(valid_close[i-1], valid_open[i-1])
-                min_prev = min(valid_close[i-1], valid_open[i-1])
-            
-                # Check if previous day was a long body
-                if real_body_prev > body_long_avg:
-                    # Check if current day is a doji-like body
-                    if real_body_curr <= body_doji_avg:
-                        # Check for Harami Cross pattern (doji within previous body)
-                        if max_curr < max_prev and min_curr > min_prev:
-                            # Determine color of previous candle and assign value
-                            candle_color = 1 if valid_close[i-1] > valid_open[i-1] else -1
-                            result[valid_indices[i], sec] = -candle_color * 100
-                        # Check for Harami pattern (not necessarily cross, but contained)
-                        elif max_curr <= max_prev and min_curr >= min_prev:
-                            candle_color = 1 if valid_close[i-1] > valid_open[i-1] else -1
-                            result[valid_indices[i], sec] = -candle_color * 80
-                        else:
-                            result[valid_indices[i], sec] = 0
-                    else:
-                        result[valid_indices[i], sec] = 0
-                else:
-                    result[valid_indices[i], sec] = 0
-                
-                # Update rolling totals for next iteration
-                if i - 1 >= body_long_period - 1:
-                    body_long_period_total += abs(valid_close[i-1] - valid_open[i-1])
-                    body_long_period_total -= abs(valid_close[i-1-body_long_period] - valid_open[i-1-body_long_period])
-                else:
-                    body_long_period_total += abs(valid_close[i-1] - valid_open[i-1])
-                
-                if i >= body_doji_period:
-                    body_doji_period_total += abs(valid_close[i] - valid_open[i])
-                    body_doji_period_total -= abs(valid_close[i-body_doji_period] - valid_open[i-body_doji_period])
-                else:
-                    body_doji_period_total += abs(valid_close[i] - valid_open[i])
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLHIGHWAVE(high, open, low, close, vol, oi, body_short_period=3, shadow_very_long_period=3):
-        """
-        CDLHIGHWAVE - Candlestick High Wave Pattern
-    
-        Identifies the High Wave candlestick pattern where the body is short
-        compared to the average and both upper and lower shadows are very long.
-        """
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib
-        lookback_total = max(body_short_period, shadow_very_long_period)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) < lookbackTotal:
                 continue
             
             # Extract valid data
@@ -4036,59 +2855,152 @@ class BaseLogicFactors:
             valid_close = close[valid_mask, sec]
         
             # Initialize output array for valid data
-            valid_result = np.zeros(len(valid_high))
+            out_values = np.zeros(len(valid_high))
         
-            # Initialize trailing totals for body and shadow averages
-            body_period_total = 0.0
-            shadow_period_total = 0.0
+            # Initialize trailing indices and period totals
+            BodyLongTrailingIdx = 0
+            BodyDojiTrailingIdx = 0
+            BodyLongPeriodTotal = 0.0
+            BodyDojiPeriodTotal = 0.0
         
-            # Calculate initial totals for body and shadow ranges before start index
-            body_trailing_idx = 0
-            for i in range(lookback_total - body_short_period, lookback_total):
-                if i < len(valid_high):
-                    body_range = abs(valid_close[i] - valid_open[i])
-                    body_period_total += body_range
+            # Warm-up period for BodyLong
+            for i in range(BodyLongTrailingIdx, min(lookbackTotal - 1, len(valid_high))):
+                if i < BodyLongPeriod:
+                    BodyLongPeriodTotal += abs(valid_open[i] - valid_close[i])
         
-            shadow_trailing_idx = 0
-            for i in range(lookback_total - shadow_very_long_period, lookback_total):
-                if i < len(valid_high):
-                    shadow_range = valid_high[i] - valid_low[i]
-                    shadow_period_total += shadow_range
+            # Warm-up period for BodyDoji
+            for i in range(BodyDojiTrailingIdx, min(lookbackTotal, len(valid_high))):
+                if i < BodyDojiPeriod:
+                    BodyDojiPeriodTotal += abs(valid_open[i] - valid_close[i])
         
-            # Main loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body and shadows for current candle
+            # Main calculation loop
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate real body for previous and current candle
+                realbody_prev = abs(valid_open[i-1] - valid_close[i-1])
+                realbody_curr = abs(valid_open[i] - valid_close[i])
+            
+                # Calculate averages
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
+            
+                # Harami Cross pattern logic
+                if realbody_prev > BodyLongAverage and realbody_curr <= BodyDojiAverage:
+                    max_curr = max(valid_close[i], valid_open[i])
+                    min_curr = min(valid_close[i], valid_open[i])
+                    max_prev = max(valid_close[i-1], valid_open[i-1])
+                    min_prev = min(valid_close[i-1], valid_open[i-1])
+                
+                    if max_curr < max_prev and min_curr > min_prev:
+                        # Full Harami Cross pattern
+                        candle_color = 1 if valid_close[i-1] > valid_open[i-1] else -1
+                        out_values[i] = -candle_color * 100
+                    elif max_curr <= max_prev and min_curr >= min_prev:
+                        # Partial match (still within previous candle range)
+                        candle_color = 1 if valid_close[i-1] > valid_open[i-1] else -1
+                        out_values[i] = -candle_color * 80
+                    else:
+                        out_values[i] = 0
+                else:
+                    out_values[i] = 0
+            
+                # Update period totals for next iteration
+                if i - 1 >= BodyLongTrailingIdx:
+                    BodyLongPeriodTotal += abs(valid_open[i-1] - valid_close[i-1])
+                    if BodyLongTrailingIdx < len(valid_high):
+                        BodyLongPeriodTotal -= abs(valid_open[BodyLongTrailingIdx] - valid_close[BodyLongTrailingIdx])
+                    BodyLongTrailingIdx += 1
+            
+                if i >= BodyDojiTrailingIdx:
+                    BodyDojiPeriodTotal += abs(valid_open[i] - valid_close[i])
+                    if BodyDojiTrailingIdx < len(valid_high):
+                        BodyDojiPeriodTotal -= abs(valid_open[BodyDojiTrailingIdx] - valid_close[BodyDojiTrailingIdx])
+                    BodyDojiTrailingIdx += 1
+        
+            # Map results back to original array
+            for i in range(len(valid_indices)):
+                if i >= lookbackTotal:
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = out_values[i]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLHIGHWAVE(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods as per TA-Lib defaults
+        BodyShortPeriod = 10  # Default period for BodyShort in TA-Lib
+        ShadowVeryLongPeriod = 10  # Default period for ShadowVeryLong in TA-Lib
+        lookbackTotal = max(BodyShortPeriod, ShadowVeryLongPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize period totals for averaging
+            BodyPeriodTotal = 0.0
+            ShadowPeriodTotal = 0.0
+        
+            # Calculate initial totals for BodyShort and ShadowVeryLong
+            BodyTrailingIdx = 0
+            ShadowTrailingIdx = 0
+            for i in range(lookbackTotal):
+                # Body range for BodyShort (real body size)
+                body_range = abs(valid_close[i] - valid_open[i])
+                BodyPeriodTotal += body_range
+            
+                # Shadow range for ShadowVeryLong (high - low)
+                shadow_range = valid_high[i] - valid_low[i]
+                ShadowPeriodTotal += shadow_range
+        
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate real body and shadows
                 real_body = abs(valid_close[i] - valid_open[i])
                 upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
                 lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
             
                 # Calculate averages
-                body_avg = body_period_total / body_short_period if body_short_period > 0 else 0.0
-                shadow_avg = shadow_period_total / shadow_very_long_period if shadow_very_long_period > 0 else 0.0
+                BodyAverage = BodyPeriodTotal / BodyShortPeriod
+                ShadowAverage = ShadowPeriodTotal / ShadowVeryLongPeriod
             
-                # Check High Wave pattern conditions
-                if (real_body < body_avg and 
-                    upper_shadow > shadow_avg and 
-                    lower_shadow > shadow_avg):
-                    # Output 100 for bullish (close > open) and -100 for bearish (close < open)
-                    valid_result[i] = 100.0 if valid_close[i] > valid_open[i] else -100.0
+                # Check High Wave conditions
+                if (real_body < BodyAverage and 
+                    upper_shadow > ShadowAverage and 
+                    lower_shadow > ShadowAverage):
+                    result[valid_indices[i], sec] = 100 if valid_close[i] > valid_open[i] else -100
                 else:
-                    valid_result[i] = 0.0
+                    result[valid_indices[i], sec] = 0
+                
+                # Update trailing totals
+                # Remove oldest value and add newest value for Body
+                oldest_body_range = abs(valid_close[BodyTrailingIdx] - valid_open[BodyTrailingIdx])
+                BodyPeriodTotal += real_body - oldest_body_range
+                BodyTrailingIdx += 1
             
-                # Update trailing totals for next iteration
-                if i - body_short_period >= 0:
-                    old_body_range = abs(valid_close[i - body_short_period] - valid_open[i - body_short_period])
-                    body_period_total += abs(valid_close[i] - valid_open[i]) - old_body_range
-            
-                if i - shadow_very_long_period >= 0:
-                    old_shadow_range = valid_high[i - shadow_very_long_period] - valid_low[i - shadow_very_long_period]
-                    shadow_period_total += (valid_high[i] - valid_low[i]) - old_shadow_range
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
+                # Remove oldest value and add newest value for Shadow
+                oldest_shadow_range = valid_high[ShadowTrailingIdx] - valid_low[ShadowTrailingIdx]
+                ShadowPeriodTotal += (valid_high[i] - valid_low[i]) - oldest_shadow_range
+                ShadowTrailingIdx += 1
     
         return result
 
@@ -4097,17 +3009,9 @@ class BaseLogicFactors:
     @staticmethod
     @nb.njit
     def CDLHIKKAKE(high, open, low, close, vol, oi):
-        """
-        CDLHIKKAKE - Candlestick Hikkake Pattern
-    
-        Identifies the Hikkake pattern, a candlestick pattern used to detect potential reversals or continuations.
-        The pattern consists of a specific three-bar formation followed by a confirmation.
-        Returns 100 or -100 for initial pattern detection and 200 or -200 for confirmation.
-        """
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        lookback_total = 3  # As per TA-Lib lookback for CDLHIKKAKE
-
+    
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -4118,22 +3022,31 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) < 3:  # Need at least 3 data points for pattern recognition
                 continue
             
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
+            # Initialize output array for valid data
+            temp_result = np.zeros(len(valid_high))
+        
+            # Lookback period as per TA-Lib (3 bars for Hikkake pattern)
+            lookback_total = 3
+            start_idx = lookback_total
+        
+            if len(valid_high) <= start_idx:
+                continue
+            
             # Initialize pattern tracking variables
             pattern_idx = 0
             pattern_result = 0
         
-            # Pre-warmup phase (before start index)
-            start_idx = lookback_total
+            # Warm-up period processing (before start_idx)
             i = start_idx - 3
             while i < start_idx and i < len(valid_high):
-                if i >= 2:  # Ensure enough data for comparison
+                if i >= 2:  # Need at least 2 previous bars
                     if (valid_high[i-1] < valid_high[i-2] and 
                         valid_low[i-1] > valid_low[i-2] and
                         ((valid_high[i] < valid_high[i-1] and valid_low[i] < valid_low[i-1]) or
@@ -4146,31 +3059,30 @@ class BaseLogicFactors:
                         pattern_idx = 0
                 i += 1
         
-            # Main computation phase
-            i = start_idx
-            out_idx = start_idx
-            while i < len(valid_high):
-                if i >= 2:  # Ensure enough data for comparison
+            # Main calculation loop
+            for i in range(start_idx, len(valid_high)):
+                if i >= 2:  # Need at least 2 previous bars
                     if (valid_high[i-1] < valid_high[i-2] and 
                         valid_low[i-1] > valid_low[i-2] and
                         ((valid_high[i] < valid_high[i-1] and valid_low[i] < valid_low[i-1]) or
                          (valid_high[i] > valid_high[i-1] and valid_low[i] > valid_low[i-1]))):
                         pattern_result = 100 * (1 if valid_high[i] < valid_high[i-1] else -1)
                         pattern_idx = i
-                        if out_idx < tdts:
-                            result[valid_indices[out_idx], sec] = pattern_result
+                        temp_result[i] = pattern_result
                     elif (i <= pattern_idx + 3 and
                           ((pattern_result > 0 and valid_close[i] > valid_high[pattern_idx-1]) or
                            (pattern_result < 0 and valid_close[i] < valid_low[pattern_idx-1]))):
-                        if out_idx < tdts:
-                            result[valid_indices[out_idx], sec] = pattern_result + 100 * (1 if pattern_result > 0 else -1)
+                        temp_result[i] = pattern_result + 100 * (1 if pattern_result > 0 else -1)
                         pattern_idx = 0
                     else:
-                        if out_idx < tdts:
-                            result[valid_indices[out_idx], sec] = 0
-                out_idx += 1
-                i += 1
-            
+                        temp_result[i] = 0
+        
+            # Map results back to original array
+            for i in range(len(valid_indices)):
+                if i >= start_idx:
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = temp_result[i]
+    
         return result
 
 
@@ -4279,11 +3191,83 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Define lookback period as per TA-Lib (2 days for pattern recognition)
+        # Define lookback period as per TA-Lib (2 days for pattern + additional for averages)
         lookback_total = 2
-        # Define periods for body calculations as per TA-Lib defaults
-        body_long_period = 10
-        body_short_period = 10
+        body_long_period = 10  # Default period for long body average as per TA-Lib
+        body_short_period = 10  # Default period for short body average as per TA-Lib
+    
+        for sec in range(secs):
+            # Initialize variables for body averages
+            body_long_period_total = 0.0
+            body_short_period_total = 0.0
+        
+            # Calculate initial totals for body averages before start index
+            body_long_trailing_idx = lookback_total - body_long_period
+            body_short_trailing_idx = lookback_total - body_short_period
+        
+            for i in range(body_long_trailing_idx, lookback_total):
+                if i >= 0:
+                    body_long_period_total += abs(open[i, sec] - close[i, sec])
+        
+            for i in range(body_short_trailing_idx, lookback_total):
+                if i >= 0:
+                    body_short_period_total += abs(open[i, sec] - close[i, sec])
+        
+            # Main loop starting from lookback_total
+            for i in range(lookback_total, tdts):
+                # Check data validity
+                if (open[i, sec] != open[i, sec] or close[i, sec] != close[i, sec] or
+                    open[i-1, sec] != open[i-1, sec] or close[i-1, sec] != close[i-1, sec]):
+                    result[i, sec] = 0
+                    continue
+            
+                # Calculate candle colors (negative for bearish)
+                color_prev = -1 if close[i-1, sec] < open[i-1, sec] else 1
+                color_curr = -1 if close[i, sec] < open[i, sec] else 1
+            
+                # Calculate real body sizes
+                real_body_prev = abs(close[i-1, sec] - open[i-1, sec])
+                real_body_curr = abs(close[i, sec] - open[i, sec])
+            
+                # Calculate averages for body comparison
+                body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0
+                body_short_avg = body_short_period_total / body_short_period if body_short_period > 0 else 0
+            
+                # Check Homing Pigeon pattern conditions
+                if (color_prev == -1 and color_curr == -1 and
+                    real_body_prev > body_long_avg and
+                    real_body_curr <= body_short_avg and
+                    open[i, sec] < open[i-1, sec] and
+                    close[i, sec] > close[i-1, sec]):
+                    result[i, sec] = 100
+                else:
+                    result[i, sec] = 0
+            
+                # Update trailing totals for next iteration
+                if i - body_long_period >= 0:
+                    body_long_period_total += abs(close[i-1, sec] - open[i-1, sec])
+                    body_long_period_total -= abs(close[i - body_long_period - 1, sec] - open[i - body_long_period - 1, sec])
+                else:
+                    body_long_period_total += abs(close[i-1, sec] - open[i-1, sec])
+                
+                body_short_period_total += abs(close[i, sec] - open[i, sec])
+                if i - body_short_period >= 0:
+                    body_short_period_total -= abs(close[i - body_short_period, sec] - open[i - body_short_period, sec])
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLIDENTICAL3CROWS(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Lookback period as per TA-Lib (3 days for pattern recognition)
+        lookback_total = 3
+        shadow_very_short_period = 3  # Default period for ShadowVeryShort as per TA-Lib
+        equal_period = 3  # Default period for Equal as per TA-Lib
     
         for sec in range(secs):
             # Create valid data mask
@@ -4299,157 +3283,62 @@ class BaseLogicFactors:
             if len(valid_indices) < lookback_total:
                 continue
             
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize output array for valid data
-            temp_result = np.zeros(len(valid_open))
-        
-            # Initialize trailing totals for body calculations
-            body_long_total = 0.0
-            body_short_total = 0.0
-        
-            # Calculate initial totals for body averages
-            body_long_trailing_idx = 0
-            body_short_trailing_idx = 0
-        
-            for i in range(lookback_total - 1, min(body_long_period + lookback_total - 1, len(valid_open))):
-                if i >= lookback_total - 1:
-                    body_long_total += abs(valid_close[i - 1] - valid_open[i - 1])
-            for i in range(lookback_total - 1, min(body_short_period + lookback_total - 1, len(valid_open))):
-                if i >= lookback_total - 1:
-                    body_short_total += abs(valid_close[i] - valid_open[i])
-        
-            # Main calculation loop
-            for i in range(lookback_total - 1, len(valid_open)):
-                # Calculate body averages
-                body_long_avg = body_long_total / body_long_period if body_long_period > 0 else 0.0
-                body_short_avg = body_short_total / body_short_period if body_short_period > 0 else 0.0
-            
-                # Check for Homing Pigeon pattern
-                if i >= 1:
-                    # First candle is black (bearish)
-                    first_candle_bearish = valid_close[i - 1] < valid_open[i - 1]
-                    # Second candle is black (bearish)
-                    second_candle_bearish = valid_close[i] < valid_open[i]
-                    # First candle has long body
-                    first_body_long = abs(valid_close[i - 1] - valid_open[i - 1]) > body_long_avg
-                    # Second candle has short body
-                    second_body_short = abs(valid_close[i] - valid_open[i]) <= body_short_avg
-                    # Second candle opens lower than first candle
-                    second_opens_lower = valid_open[i] < valid_open[i - 1]
-                    # Second candle closes higher than first candle
-                    second_closes_higher = valid_close[i] > valid_close[i - 1]
-                
-                    if (first_candle_bearish and second_candle_bearish and 
-                        first_body_long and second_body_short and 
-                        second_opens_lower and second_closes_higher):
-                        temp_result[i] = 100
-                    else:
-                        temp_result[i] = 0
-            
-                # Update trailing totals
-                if i >= body_long_period:
-                    body_long_total += abs(valid_close[i - 1] - valid_open[i - 1])
-                    body_long_total -= abs(valid_close[body_long_trailing_idx - 1] - valid_open[body_long_trailing_idx - 1]) if body_long_trailing_idx > 0 else 0.0
-                    body_long_trailing_idx += 1
-                if i >= body_short_period - 1:
-                    body_short_total += abs(valid_close[i] - valid_open[i])
-                    body_short_total -= abs(valid_close[body_short_trailing_idx] - valid_open[body_short_trailing_idx]) if body_short_trailing_idx >= 0 else 0.0
-                    body_short_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total - 1:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = temp_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLIDENTICAL3CROWS(high, open, low, close, vol, oi):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # 定义TA-Lib中使用的默认周期参数
-        ShadowVeryShortPeriod = 3
-        EqualPeriod = 3
-        lookbackTotal = 2  # 需要前两个周期的数据来计算当前周期的结果
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookbackTotal:
-                continue
-            
-            # 提取有效数据
+            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # 初始化滑动窗口总和
-            ShadowVeryShortPeriodTotal = np.zeros(3)
-            EqualPeriodTotal = np.zeros(3)
+            # Initialize arrays for rolling totals
+            shadow_very_short_total = np.zeros(3)
+            equal_total = np.zeros(3)
         
-            # 计算初始的滑动窗口总和
-            ShadowVeryShortTrailingIdx = max(0, lookbackTotal - ShadowVeryShortPeriod)
-            EqualTrailingIdx = max(0, lookbackTotal - EqualPeriod)
+            # Calculate initial totals for ShadowVeryShort
+            shadow_very_short_trailing_idx = 0
+            if shadow_very_short_period > 0:
+                shadow_very_short_trailing_idx = lookback_total - shadow_very_short_period
+                if shadow_very_short_trailing_idx < 0:
+                    shadow_very_short_trailing_idx = 0
+                
+            equal_trailing_idx = 0
+            if equal_period > 0:
+                equal_trailing_idx = lookback_total - equal_period
+                if equal_trailing_idx < 0:
+                    equal_trailing_idx = 0
+                
+            # Initialize ShadowVeryShort totals
+            for i in range(shadow_very_short_trailing_idx, lookback_total):
+                for tot_idx in range(3):
+                    if i - tot_idx >= 0:
+                        shadow_very_short_total[tot_idx] += max(valid_high[i - tot_idx] - valid_low[i - tot_idx], 0.0)
         
-            i = ShadowVeryShortTrailingIdx
-            while i < lookbackTotal:
-                if i - 2 >= 0:
-                    ShadowVeryShortPeriodTotal[2] += valid_high[i-2] - valid_low[i-2]
-                if i - 1 >= 0:
-                    ShadowVeryShortPeriodTotal[1] += valid_high[i-1] - valid_low[i-1]
-                ShadowVeryShortPeriodTotal[0] += valid_high[i] - valid_low[i]
-                i += 1
-            
-            i = EqualTrailingIdx
-            while i < lookbackTotal:
-                if i - 2 >= 0:
-                    EqualPeriodTotal[2] += valid_high[i-2] - valid_low[i-2]
-                if i - 1 >= 0:
-                    EqualPeriodTotal[1] += valid_high[i-1] - valid_low[i-1]
-                i += 1
-            
-            # 主计算循环
-            i = lookbackTotal
-            ShadowVeryShortTrailingIdx = i - ShadowVeryShortPeriod
-            EqualTrailingIdx = i - EqualPeriod
+            # Initialize Equal totals
+            for i in range(equal_trailing_idx, lookback_total):
+                for tot_idx in range(2, 0, -1):  # Only for indices 2 and 1 as per C code
+                    if i - tot_idx >= 0:
+                        equal_total[tot_idx] += max(valid_high[i - tot_idx] - valid_low[i - tot_idx], 0.0)
         
-            while i < len(valid_high):
-                # 计算当前K线的颜色（-1表示阴线）
+            # Main calculation loop starting from lookback_total
+            for i in range(lookback_total, len(valid_high)):
+                # Calculate candle color (negative for bearish)
                 color_2 = -1 if valid_close[i-2] < valid_open[i-2] else 1
                 color_1 = -1 if valid_close[i-1] < valid_open[i-1] else 1
                 color_0 = -1 if valid_close[i] < valid_open[i] else 1
             
-                # 计算下影线长度
+                # Calculate lower shadow
                 lower_shadow_2 = valid_open[i-2] - valid_low[i-2] if color_2 == -1 else valid_close[i-2] - valid_low[i-2]
                 lower_shadow_1 = valid_open[i-1] - valid_low[i-1] if color_1 == -1 else valid_close[i-1] - valid_low[i-1]
                 lower_shadow_0 = valid_open[i] - valid_low[i] if color_0 == -1 else valid_close[i] - valid_low[i]
             
-                # 计算ShadowVeryShort的平均值
-                shadow_avg_2 = ShadowVeryShortPeriodTotal[2] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0
-                shadow_avg_1 = ShadowVeryShortPeriodTotal[1] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0
-                shadow_avg_0 = ShadowVeryShortPeriodTotal[0] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0
+                # Calculate averages for comparison
+                shadow_avg_2 = shadow_very_short_total[2] / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
+                shadow_avg_1 = shadow_very_short_total[1] / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
+                shadow_avg_0 = shadow_very_short_total[0] / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
             
-                # 计算Equal的平均值
-                equal_avg_2 = EqualPeriodTotal[2] / EqualPeriod if EqualPeriod > 0 else 0
-                equal_avg_1 = EqualPeriodTotal[1] / EqualPeriod if EqualPeriod > 0 else 0
+                equal_avg_2 = equal_total[2] / equal_period if equal_period > 0 else 0.0
+                equal_avg_1 = equal_total[1] / equal_period if equal_period > 0 else 0.0
             
-                # 判断是否符合Identical Three Crows形态
+                # Check conditions for Identical Three Crows pattern
                 if (color_2 == -1 and lower_shadow_2 < shadow_avg_2 and
                     color_1 == -1 and lower_shadow_1 < shadow_avg_1 and
                     color_0 == -1 and lower_shadow_0 < shadow_avg_0 and
@@ -4462,36 +3351,36 @@ class BaseLogicFactors:
                     result[valid_indices[i], sec] = -100
                 else:
                     result[valid_indices[i], sec] = 0
-                
-                # 更新滑动窗口总和
-                for totIdx in range(2, -1, -1):
-                    if i - totIdx >= 0:
-                        ShadowVeryShortPeriodTotal[totIdx] += (valid_high[i - totIdx] - valid_low[i - totIdx])
-                    if ShadowVeryShortTrailingIdx - totIdx >= 0:
-                        ShadowVeryShortPeriodTotal[totIdx] -= (valid_high[ShadowVeryShortTrailingIdx - totIdx] - valid_low[ShadowVeryShortTrailingIdx - totIdx])
-                    
-                for totIdx in range(2, 0, -1):
-                    if i - totIdx >= 0:
-                        EqualPeriodTotal[totIdx] += (valid_high[i - totIdx] - valid_low[i - totIdx])
-                    if EqualTrailingIdx - totIdx >= 0:
-                        EqualPeriodTotal[totIdx] -= (valid_high[EqualTrailingIdx - totIdx] - valid_low[EqualTrailingIdx - totIdx])
-                    
-                i += 1
-                ShadowVeryShortTrailingIdx += 1
-                EqualTrailingIdx += 1
             
+                # Update rolling totals for ShadowVeryShort
+                for tot_idx in range(2, -1, -1):
+                    current_range = max(valid_high[i - tot_idx] - valid_low[i - tot_idx], 0.0) if i - tot_idx >= 0 else 0.0
+                    trailing_range = max(valid_high[shadow_very_short_trailing_idx - tot_idx] - valid_low[shadow_very_short_trailing_idx - tot_idx], 0.0) if shadow_very_short_trailing_idx - tot_idx >= 0 else 0.0
+                    shadow_very_short_total[tot_idx] += current_range - trailing_range
+            
+                # Update rolling totals for Equal
+                for tot_idx in range(2, 0, -1):
+                    current_range = max(valid_high[i - tot_idx] - valid_low[i - tot_idx], 0.0) if i - tot_idx >= 0 else 0.0
+                    trailing_range = max(valid_high[equal_trailing_idx - tot_idx] - valid_low[equal_trailing_idx - tot_idx], 0.0) if equal_trailing_idx - tot_idx >= 0 else 0.0
+                    equal_total[tot_idx] += current_range - trailing_range
+            
+                shadow_very_short_trailing_idx += 1
+                equal_trailing_idx += 1
+    
         return result
 
 
 
     @staticmethod
     @nb.njit
-    def CDLINNECK(high, open, low, close, vol, oi, equal_period=3, body_long_period=5):
+    def CDLINNECK(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (maximum of the two periods)
-        lookback_total = max(equal_period, body_long_period)
+        # Define constants for lookback periods as per TA-Lib defaults
+        EqualPeriod = 10
+        BodyLongPeriod = 10
+        lookbackTotal = max(EqualPeriod, BodyLongPeriod)
     
         for sec in range(secs):
             # Create valid data mask
@@ -4504,7 +3393,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) <= lookbackTotal:
                 continue
             
             # Extract valid data
@@ -4513,211 +3402,57 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize output array for valid data
-            temp_result = np.zeros(len(valid_high))
+            # Initialize totals for Equal and BodyLong ranges
+            EqualPeriodTotal = 0.0
+            BodyLongPeriodTotal = 0.0
         
-            # Initialize trailing totals for Equal and BodyLong ranges
-            equal_period_total = 0.0
-            body_long_period_total = 0.0
+            # Calculate initial totals for the lookback period
+            EqualTrailingIdx = 0
+            BodyLongTrailingIdx = 0
         
-            # Calculate initial totals for lookback period
-            equal_trailing_idx = lookback_total - equal_period
-            body_long_trailing_idx = lookback_total - body_long_period
+            for i in range(lookbackTotal):
+                if i < EqualPeriod:
+                    EqualPeriodTotal += abs(valid_close[i] - valid_open[i])
+                if i < BodyLongPeriod:
+                    BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
         
-            for i in range(equal_trailing_idx, lookback_total):
-                if i >= 0:
-                    equal_period_total += abs(valid_open[i] - valid_close[i])
-        
-            for i in range(body_long_trailing_idx, lookback_total):
-                if i >= 0:
-                    body_long_period_total += abs(valid_open[i] - valid_close[i])
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Check for In Neck pattern
-                if i > 0:
-                    # First candle is black (bearish)
-                    candle_color_prev = -1 if valid_close[i-1] < valid_open[i-1] else 1
-                    # Second candle is white (bullish)
-                    candle_color_curr = 1 if valid_close[i] > valid_open[i] else -1
-                    # Real body of first candle
-                    real_body_prev = abs(valid_close[i-1] - valid_open[i-1])
-                    # Calculate averages
-                    equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
-                    body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
-                
-                    if (candle_color_prev == -1 and
-                        real_body_prev > body_long_avg and
-                        candle_color_curr == 1 and
-                        valid_open[i] < valid_low[i-1] and
-                        valid_close[i] <= valid_close[i-1] + equal_avg and
-                        valid_close[i] >= valid_close[i-1]):
-                        temp_result[i] = -100
-                    else:
-                        temp_result[i] = 0
-            
-                # Update trailing totals
-                if i > 0:
-                    equal_period_total += abs(valid_open[i-1] - valid_close[i-1])
-                    body_long_period_total += abs(valid_open[i-1] - valid_close[i-1])
-                
-                    if equal_trailing_idx < len(valid_high):
-                        equal_period_total -= abs(valid_open[equal_trailing_idx] - valid_close[equal_trailing_idx])
-                    if body_long_trailing_idx < len(valid_high):
-                        body_long_period_total -= abs(valid_open[body_long_trailing_idx] - valid_close[body_long_trailing_idx])
-                
-                    equal_trailing_idx += 1
-                    body_long_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = temp_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLINVERTEDHAMMER(high, open, low, close, vol, oi, body_short_period=3, shadow_long_period=3, shadow_very_short_period=3):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (maximum of the periods)
-        lookback_total = max(body_short_period, max(shadow_long_period, shadow_very_short_period))
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize period totals for averages
-            body_period_total = 0.0
-            shadow_long_period_total = 0.0
-            shadow_very_short_period_total = 0.0
-        
-            # Trailing indices for rolling window
-            body_trailing_idx = 0
-            shadow_long_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
-        
-            # Pre-calculate initial totals for the lookback period
-            for i in range(lookback_total):
-                # BodyShort range (real body size)
-                body_range = abs(valid_close[i] - valid_open[i])
-                body_period_total += body_range
-            
-                # ShadowLong range (upper shadow)
-                if valid_close[i] >= valid_open[i]:
-                    shadow_long_range = valid_high[i] - valid_close[i]
-                else:
-                    shadow_long_range = valid_high[i] - valid_open[i]
-                shadow_long_period_total += shadow_long_range
-            
-                # ShadowVeryShort range (lower shadow)
-                if valid_close[i] >= valid_open[i]:
-                    shadow_very_short_range = valid_open[i] - valid_low[i]
-                else:
-                    shadow_very_short_range = valid_close[i] - valid_low[i]
-                shadow_very_short_period_total += shadow_very_short_range
-        
-            # Main calculation loop starting from lookback_total
-            out_idx = lookback_total
-            i = lookback_total
+            # Main calculation loop
+            outIdx = lookbackTotal
+            i = lookbackTotal
             while i < len(valid_high):
-                # Calculate real body
-                real_body = abs(valid_close[i] - valid_open[i])
-            
-                # Calculate upper shadow
-                if valid_close[i] >= valid_open[i]:
-                    upper_shadow = valid_high[i] - valid_close[i]
-                else:
-                    upper_shadow = valid_high[i] - valid_open[i]
+                if i >= 1:
+                    # Check for In Neck pattern
+                    # Condition 1: Previous candle is black (bearish)
+                    prev_color = -1 if valid_close[i-1] < valid_open[i-1] else 1
+                    # Condition 2: Previous candle has long body
+                    prev_body = abs(valid_close[i-1] - valid_open[i-1])
+                    body_long_avg = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0
+                    # Condition 3: Current candle is white (bullish)
+                    curr_color = 1 if valid_close[i] > valid_open[i] else -1
+                    # Condition 4: Current open below previous low
+                    # Condition 5 & 6: Current close between previous close and previous close + equal average
+                    equal_avg = EqualPeriodTotal / EqualPeriod if EqualPeriod > 0 else 0
                 
-                # Calculate lower shadow
-                if valid_close[i] >= valid_open[i]:
-                    lower_shadow = valid_open[i] - valid_low[i]
-                else:
-                    lower_shadow = valid_close[i] - valid_low[i]
-                
-                # Check for gap down condition
-                gap_down = False
-                if i > 0:
-                    prev_body_high = max(valid_open[i-1], valid_close[i-1])
-                    curr_body_low = min(valid_open[i], valid_close[i])
-                    if curr_body_low < prev_body_high:
-                        gap_down = True
-            
-                # Calculate averages
-                body_avg = body_period_total / body_short_period if body_short_period > 0 else 0.0
-                shadow_long_avg = shadow_long_period_total / shadow_long_period if shadow_long_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_period_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
-            
-                # Inverted Hammer conditions
-                if (real_body < body_avg and 
-                    upper_shadow > shadow_long_avg and 
-                    lower_shadow < shadow_very_short_avg and 
-                    gap_down):
-                    result[valid_indices[i], sec] = 100.0
-                else:
-                    result[valid_indices[i], sec] = 0.0
-                
-                # Update rolling totals
-                if i + 1 < len(valid_high):
-                    # Add new values
-                    new_body_range = abs(valid_close[i] - valid_open[i])
-                    body_period_total += new_body_range
-                
-                    if valid_close[i] >= valid_open[i]:
-                        new_shadow_long_range = valid_high[i] - valid_close[i]
+                    if (prev_color == -1 and 
+                        prev_body > body_long_avg and 
+                        curr_color == 1 and 
+                        valid_open[i] < valid_low[i-1] and 
+                        valid_close[i] <= valid_close[i-1] + equal_avg and 
+                        valid_close[i] >= valid_close[i-1]):
+                        result[valid_indices[i], sec] = -100
                     else:
-                        new_shadow_long_range = valid_high[i] - valid_open[i]
-                    shadow_long_period_total += new_shadow_long_range
+                        result[valid_indices[i], sec] = 0
                 
-                    if valid_close[i] >= valid_open[i]:
-                        new_shadow_very_short_range = valid_open[i] - valid_low[i]
-                    else:
-                        new_shadow_very_short_range = valid_close[i] - valid_low[i]
-                    shadow_very_short_period_total += new_shadow_very_short_range
+                    # Update totals for next iteration
+                    if i >= EqualPeriod:
+                        EqualPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                        EqualPeriodTotal -= abs(valid_close[EqualTrailingIdx] - valid_open[EqualTrailingIdx])
+                        EqualTrailingIdx += 1
                 
-                    # Subtract old values if within window
-                    body_trailing_idx = i - body_short_period + 1
-                    if body_trailing_idx >= 0:
-                        old_body_range = abs(valid_close[body_trailing_idx] - valid_open[body_trailing_idx])
-                        body_period_total -= old_body_range
-                    
-                    shadow_long_trailing_idx = i - shadow_long_period + 1
-                    if shadow_long_trailing_idx >= 0:
-                        if valid_close[shadow_long_trailing_idx] >= valid_open[shadow_long_trailing_idx]:
-                            old_shadow_long_range = valid_high[shadow_long_trailing_idx] - valid_close[shadow_long_trailing_idx]
-                        else:
-                            old_shadow_long_range = valid_high[shadow_long_trailing_idx] - valid_open[shadow_long_trailing_idx]
-                        shadow_long_period_total -= old_shadow_long_range
-                    
-                    shadow_very_short_trailing_idx = i - shadow_very_short_period + 1
-                    if shadow_very_short_trailing_idx >= 0:
-                        if valid_close[shadow_very_short_trailing_idx] >= valid_open[shadow_very_short_trailing_idx]:
-                            old_shadow_very_short_range = valid_open[shadow_very_short_trailing_idx] - valid_low[shadow_very_short_trailing_idx]
-                        else:
-                            old_shadow_very_short_range = valid_close[shadow_very_short_trailing_idx] - valid_low[shadow_very_short_trailing_idx]
-                        shadow_very_short_period_total -= old_shadow_very_short_range
+                    if i >= BodyLongPeriod:
+                        BodyLongPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
+                        BodyLongTrailingIdx += 1
             
                 i += 1
     
@@ -4842,12 +3577,14 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLKICKINGBYLENGTH(high, open, low, close, vol, oi, shadow_very_short_period=7, body_long_period=10):
+    def CDLKICKINGBYLENGTH(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib logic
-        lookback_total = max(shadow_very_short_period, body_long_period)
+        # Define lookback periods for averages as per TA-Lib defaults
+        ShadowVeryShortPeriod = 2
+        BodyLongPeriod = 10
+        lookbackTotal = max(ShadowVeryShortPeriod, BodyLongPeriod)
     
         for sec in range(secs):
             # Create valid data mask
@@ -4860,86 +3597,80 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) <= lookbackTotal:
                 continue
             
-            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
             # Initialize arrays for storing running totals
-            shadow_very_short_total = np.zeros(2)
-            body_long_total = np.zeros(2)
+            ShadowVeryShortPeriodTotal = np.zeros(2)
+            BodyLongPeriodTotal = np.zeros(2)
         
             # Initialize trailing indices for rolling window
-            shadow_very_short_trailing_idx = lookback_total - shadow_very_short_period
-            body_long_trailing_idx = lookback_total - body_long_period
+            ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
+            BodyLongTrailingIdx = lookbackTotal - BodyLongPeriod
         
-            # Pre-calculate totals for the lookback period
-            for i in range(shadow_very_short_trailing_idx, lookback_total):
-                shadow_very_short_total[1] += max(valid_high[i-1] - valid_close[i-1], valid_open[i-1] - valid_low[i-1]) if i > 0 else 0
-                shadow_very_short_total[0] += max(valid_high[i] - valid_close[i], valid_open[i] - valid_low[i])
-            for i in range(body_long_trailing_idx, lookback_total):
-                body_long_total[1] += abs(valid_close[i-1] - valid_open[i-1]) if i > 0 else 0
-                body_long_total[0] += abs(valid_close[i] - valid_open[i])
+            # Warm-up period: Calculate initial totals for averages
+            for i in range(ShadowVeryShortTrailingIdx, lookbackTotal):
+                ShadowVeryShortPeriodTotal[1] += max(valid_high[i-1] - valid_close[i-1], valid_open[i-1] - valid_low[i-1]) if i > 0 else 0
+                ShadowVeryShortPeriodTotal[0] += max(valid_high[i] - valid_close[i], valid_open[i] - valid_low[i])
+        
+            for i in range(BodyLongTrailingIdx, lookbackTotal):
+                BodyLongPeriodTotal[1] += abs(valid_close[i-1] - valid_open[i-1]) if i > 0 else 0
+                BodyLongPeriodTotal[0] += abs(valid_close[i] - valid_open[i])
         
             # Main calculation loop
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate candle color for current and previous bar
-                color_prev = 1 if valid_close[i-1] > valid_open[i-1] else -1
-                color_curr = 1 if valid_close[i] > valid_open[i] else -1
+            i = lookbackTotal
+            while i < len(valid_high):
+                # Calculate candle properties
+                color_i = 1 if valid_close[i] > valid_open[i] else -1
+                color_i1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
             
-                # Calculate real body and shadows
-                real_body_prev = abs(valid_close[i-1] - valid_open[i-1])
-                real_body_curr = abs(valid_close[i] - valid_open[i])
-                upper_shadow_prev = valid_high[i-1] - max(valid_close[i-1], valid_open[i-1])
-                lower_shadow_prev = min(valid_close[i-1], valid_open[i-1]) - valid_low[i-1]
-                upper_shadow_curr = valid_high[i] - max(valid_close[i], valid_open[i])
-                lower_shadow_curr = min(valid_close[i], valid_open[i]) - valid_low[i]
+                realbody_i = abs(valid_close[i] - valid_open[i])
+                realbody_i1 = abs(valid_close[i-1] - valid_open[i-1])
+            
+                uppershadow_i = valid_high[i] - max(valid_close[i], valid_open[i])
+                lowershadow_i = min(valid_close[i], valid_open[i]) - valid_low[i]
+                uppershadow_i1 = valid_high[i-1] - max(valid_close[i-1], valid_open[i-1])
+                lowershadow_i1 = min(valid_close[i-1], valid_open[i-1]) - valid_low[i-1]
             
                 # Calculate averages
-                body_long_avg_prev = body_long_total[1] / body_long_period if body_long_period > 0 else 0
-                body_long_avg_curr = body_long_total[0] / body_long_period if body_long_period > 0 else 0
-                shadow_short_avg_prev = shadow_very_short_total[1] / shadow_very_short_period if shadow_very_short_period > 0 else 0
-                shadow_short_avg_curr = shadow_very_short_total[0] / shadow_very_short_period if shadow_very_short_period > 0 else 0
+                body_long_avg_i = BodyLongPeriodTotal[0] / BodyLongPeriod if BodyLongPeriod > 0 else 0
+                body_long_avg_i1 = BodyLongPeriodTotal[1] / BodyLongPeriod if BodyLongPeriod > 0 else 0
+                shadow_short_avg_i = ShadowVeryShortPeriodTotal[0] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0
+                shadow_short_avg_i1 = ShadowVeryShortPeriodTotal[1] / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0
             
-                # Check for gap conditions
-                gap_up = valid_low[i] > valid_high[i-1]
-                gap_down = valid_high[i] < valid_low[i-1]
-            
-                # Check kicking pattern conditions
-                if (color_prev != color_curr and
-                    real_body_prev > body_long_avg_prev and
-                    upper_shadow_prev < shadow_short_avg_prev and
-                    lower_shadow_prev < shadow_short_avg_prev and
-                    real_body_curr > body_long_avg_curr and
-                    upper_shadow_curr < shadow_short_avg_curr and
-                    lower_shadow_curr < shadow_short_avg_curr and
-                    ((color_prev == -1 and gap_up) or (color_prev == 1 and gap_down))):
-                    # Determine which body is longer for signal direction
-                    signal_idx = i if real_body_curr > real_body_prev else i-1
-                    signal_color = 1 if valid_close[signal_idx] > valid_open[signal_idx] else -1
-                    result[valid_indices[i], sec] = signal_color * 100
+                # Check for kicking pattern conditions
+                gap_condition = (color_i1 == -1 and valid_low[i] > valid_high[i-1]) or (color_i1 == 1 and valid_high[i] < valid_low[i-1])
+                if (color_i1 == -color_i and
+                    realbody_i1 > body_long_avg_i1 and
+                    uppershadow_i1 < shadow_short_avg_i1 and
+                    lowershadow_i1 < shadow_short_avg_i1 and
+                    realbody_i > body_long_avg_i and
+                    uppershadow_i < shadow_short_avg_i and
+                    lowershadow_i < shadow_short_avg_i and
+                    gap_condition):
+                    stronger_candle = i if realbody_i > realbody_i1 else i-1
+                    stronger_color = 1 if valid_close[stronger_candle] > valid_open[stronger_candle] else -1
+                    result[valid_indices[i], sec] = stronger_color * 100
                 else:
                     result[valid_indices[i], sec] = 0
             
-                # Update rolling totals
-                for tot_idx in range(1, -1, -1):
-                    if tot_idx == 1 and i-1 >= 0:
-                        body_long_total[tot_idx] += abs(valid_close[i-tot_idx] - valid_open[i-tot_idx])
-                        body_long_total[tot_idx] -= abs(valid_close[body_long_trailing_idx-tot_idx] - valid_open[body_long_trailing_idx-tot_idx]) if body_long_trailing_idx-tot_idx >= 0 else 0
-                        shadow_very_short_total[tot_idx] += max(valid_high[i-tot_idx] - valid_close[i-tot_idx], valid_open[i-tot_idx] - valid_low[i-tot_idx])
-                        shadow_very_short_total[tot_idx] -= max(valid_high[shadow_very_short_trailing_idx-tot_idx] - valid_close[shadow_very_short_trailing_idx-tot_idx], valid_open[shadow_very_short_trailing_idx-tot_idx] - valid_low[shadow_very_short_trailing_idx-tot_idx]) if shadow_very_short_trailing_idx-tot_idx >= 0 else 0
-                    elif tot_idx == 0:
-                        body_long_total[tot_idx] += abs(valid_close[i-tot_idx] - valid_open[i-tot_idx])
-                        body_long_total[tot_idx] -= abs(valid_close[body_long_trailing_idx-tot_idx] - valid_open[body_long_trailing_idx-tot_idx]) if body_long_trailing_idx-tot_idx >= 0 else 0
-                        shadow_very_short_total[tot_idx] += max(valid_high[i-tot_idx] - valid_close[i-tot_idx], valid_open[i-tot_idx] - valid_low[i-tot_idx])
-                        shadow_very_short_total[tot_idx] -= max(valid_high[shadow_very_short_trailing_idx-tot_idx] - valid_close[shadow_very_short_trailing_idx-tot_idx], valid_open[shadow_very_short_trailing_idx-tot_idx] - valid_low[shadow_very_short_trailing_idx-tot_idx]) if shadow_very_short_trailing_idx-tot_idx >= 0 else 0
+                # Update running totals for averages
+                for totIdx in range(1, -1, -1):
+                    if i - totIdx >= 0 and BodyLongTrailingIdx - totIdx >= 0:
+                        BodyLongPeriodTotal[totIdx] += abs(valid_close[i-totIdx] - valid_open[i-totIdx])
+                        BodyLongPeriodTotal[totIdx] -= abs(valid_close[BodyLongTrailingIdx-totIdx] - valid_open[BodyLongTrailingIdx-totIdx])
+                    if i - totIdx >= 0 and ShadowVeryShortTrailingIdx - totIdx >= 0:
+                        ShadowVeryShortPeriodTotal[totIdx] += max(valid_high[i-totIdx] - valid_close[i-totIdx], valid_open[i-totIdx] - valid_low[i-totIdx])
+                        ShadowVeryShortPeriodTotal[totIdx] -= max(valid_high[ShadowVeryShortTrailingIdx-totIdx] - valid_close[ShadowVeryShortTrailingIdx-totIdx], valid_open[ShadowVeryShortTrailingIdx-totIdx] - valid_low[ShadowVeryShortTrailingIdx-totIdx])
             
-                shadow_very_short_trailing_idx += 1
-                body_long_trailing_idx += 1
+                i += 1
+                ShadowVeryShortTrailingIdx += 1
+                BodyLongTrailingIdx += 1
     
         return result
 
@@ -4947,12 +3678,13 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLLADDERBOTTOM(high, open, low, close, vol, oi, shadow_period=3):
+    def CDLLADDERBOTTOM(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (4 prior candles + shadow period for averaging)
-        lookback_total = 4 + shadow_period
+        # Lookback period as defined in TA-Lib (4 prior candles + current)
+        lookback_total = 4
+        shadow_very_short_period = 3  # Default period for shadow calculation as per TA-Lib
     
         for sec in range(secs):
             # Create valid data mask
@@ -4965,7 +3697,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) <= lookback_total:
                 continue
             
             # Extract valid data
@@ -4974,159 +3706,64 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize shadow very short period total for averaging upper shadow
-            shadow_very_short_period_total = 0.0
-            shadow_very_short_trailing_idx = lookback_total - shadow_period
+            # Initialize shadow calculation
+            shadow_very_short_total = 0.0
+            shadow_trailing_idx = 0
         
-            # Calculate initial total for shadow average
-            for i in range(shadow_very_short_trailing_idx, lookback_total):
-                if i >= 0 and i < len(valid_high):
-                    # Upper shadow calculation for bearish candle (as per TA-Lib ShadowVeryShort)
-                    if valid_close[i] < valid_open[i]:
-                        shadow_range = valid_high[i] - valid_open[i]
-                    else:
-                        shadow_range = valid_high[i] - valid_close[i]
-                    if shadow_range == shadow_range:  # Check for NaN
-                        shadow_very_short_period_total += shadow_range
+            # Warm-up period for shadow calculation
+            for i in range(shadow_very_short_period):
+                if i < len(valid_high):
+                    shadow_very_short_total += valid_high[i] - valid_low[i]
         
             # Main calculation loop starting from lookback_total
             for i in range(lookback_total, len(valid_high)):
-                # Ladder Bottom pattern conditions
-                # Check for three consecutive bearish candles (days -4, -3, -2)
-                color_m4 = -1 if valid_close[i-4] < valid_open[i-4] else 1
-                color_m3 = -1 if valid_close[i-3] < valid_open[i-3] else 1
-                color_m2 = -1 if valid_close[i-2] < valid_open[i-2] else 1
-                # Check for bearish candle on day -1
-                color_m1 = -1 if valid_close[i-1] < valid_open[i-1] else 1
-                # Check for bullish candle on current day
+                # Calculate candle colors (1 for white, -1 for black)
+                color_4 = 1 if valid_close[i-4] > valid_open[i-4] else -1
+                color_3 = 1 if valid_close[i-3] > valid_open[i-3] else -1
+                color_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
+                color_1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
                 color_0 = 1 if valid_close[i] > valid_open[i] else -1
             
-                # Calculate upper shadow for day -1
-                upper_shadow_m1 = valid_high[i-1] - max(valid_open[i-1], valid_close[i-1])
-                # Calculate shadow average for comparison
-                shadow_very_short_average = shadow_very_short_period_total / shadow_period if shadow_period > 0 else 0.0
+                # Calculate upper shadow for i-1
+                upper_shadow_1 = valid_high[i-1] - max(valid_open[i-1], valid_close[i-1])
             
-                # Check all conditions for Ladder Bottom pattern
-                if (color_m4 == -1 and color_m3 == -1 and color_m2 == -1 and  # Three bearish candles
+                # Calculate shadow average
+                shadow_avg = shadow_very_short_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
+            
+                # Ladder Bottom pattern conditions
+                if (color_4 == -1 and color_3 == -1 and color_2 == -1 and  # Three black candles
                     valid_open[i-4] > valid_open[i-3] and valid_open[i-3] > valid_open[i-2] and  # Decreasing opens
                     valid_close[i-4] > valid_close[i-3] and valid_close[i-3] > valid_close[i-2] and  # Decreasing closes
-                    color_m1 == -1 and  # Fourth bearish candle
-                    upper_shadow_m1 > shadow_very_short_average and  # Long upper shadow on day -1
-                    color_0 == 1 and  # Bullish candle on current day
+                    color_1 == -1 and  # Fourth black candle
+                    upper_shadow_1 > shadow_avg and  # Long upper shadow on fourth candle
+                    color_0 == 1 and  # White candle on current day
                     valid_open[i] > valid_open[i-1] and  # Current open above previous open
                     valid_close[i] > valid_high[i-1]):  # Current close above previous high
                     result[valid_indices[i], sec] = 100
                 else:
                     result[valid_indices[i], sec] = 0
-            
-                # Update shadow total for next iteration (sliding window)
-                if i - 1 >= 0:
-                    # Remove oldest shadow value
-                    old_idx = i - 1 - shadow_period
-                    if old_idx >= 0:
-                        if valid_close[old_idx] < valid_open[old_idx]:
-                            old_shadow_range = valid_high[old_idx] - valid_open[old_idx]
-                        else:
-                            old_shadow_range = valid_high[old_idx] - valid_close[old_idx]
-                        if old_shadow_range == old_shadow_range:
-                            shadow_very_short_period_total -= old_shadow_range
                 
-                    # Add newest shadow value
-                    if valid_close[i-1] < valid_open[i-1]:
-                        new_shadow_range = valid_high[i-1] - valid_open[i-1]
-                    else:
-                        new_shadow_range = valid_high[i-1] - valid_close[i-1]
-                    if new_shadow_range == new_shadow_range:
-                        shadow_very_short_period_total += new_shadow_range
-    
+                # Update shadow total for next iteration
+                if i < len(valid_high):
+                    shadow_very_short_total += (valid_high[i] - valid_low[i])
+                    if shadow_trailing_idx < len(valid_high):
+                        shadow_very_short_total -= (valid_high[shadow_trailing_idx] - valid_low[shadow_trailing_idx])
+                    shadow_trailing_idx += 1
+                
         return result
 
 
 
     @staticmethod
     @nb.njit
-    def CDLLONGLEGGEDDOJI(high, open, low, close, vol, oi, body_doji_period=3, shadow_long_period=3):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        lookback_total = max(body_doji_period, shadow_long_period)
-
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-
-            # Initialize period totals for BodyDoji and ShadowLong
-            body_doji_period_total = 0.0
-            shadow_long_period_total = 0.0
-            body_doji_trailing_idx = 0
-            shadow_long_trailing_idx = 0
-
-            # Pre-calculate initial totals for the lookback period
-            for i in range(lookback_total):
-                if i < body_doji_period:
-                    body_range = abs(valid_close[i] - valid_open[i])
-                    body_doji_period_total += body_range
-                if i < shadow_long_period:
-                    shadow_range = valid_high[i] - valid_low[i]
-                    shadow_long_period_total += shadow_range
-
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body and shadows
-                real_body = abs(valid_close[i] - valid_open[i])
-                lower_shadow = valid_open[i] - valid_low[i] if valid_close[i] >= valid_open[i] else valid_close[i] - valid_low[i]
-                upper_shadow = valid_high[i] - valid_open[i] if valid_close[i] >= valid_open[i] else valid_high[i] - valid_close[i]
-                body_range = real_body
-                shadow_range = valid_high[i] - valid_low[i]
-
-                # Calculate averages
-                body_doji_avg = body_doji_period_total / body_doji_period if body_doji_period > 0 else 0.0
-                shadow_long_avg = shadow_long_period_total / shadow_long_period if shadow_long_period > 0 else 0.0
-
-                # Long Legged Doji condition
-                if (real_body <= body_doji_avg and 
-                    (lower_shadow > shadow_long_avg or upper_shadow > shadow_long_avg)):
-                    result[valid_indices[i], sec] = 100
-                else:
-                    result[valid_indices[i], sec] = 0
-
-                # Update period totals by subtracting trailing value and adding current
-                if body_doji_trailing_idx < len(valid_high):
-                    trailing_body_range = abs(valid_close[body_doji_trailing_idx] - valid_open[body_doji_trailing_idx])
-                    body_doji_period_total += body_range - trailing_body_range
-                    body_doji_trailing_idx += 1
-
-                if shadow_long_trailing_idx < len(valid_high):
-                    trailing_shadow_range = valid_high[shadow_long_trailing_idx] - valid_low[shadow_long_trailing_idx]
-                    shadow_long_period_total += shadow_range - trailing_shadow_range
-                    shadow_long_trailing_idx += 1
-
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLLONGLINE(high, open, low, close, vol, oi, body_period=5, shadow_period=3):
+    def CDLMARUBOZU(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib logic (maximum of body and shadow periods)
-        lookback_total = max(body_period, shadow_period)
+        # Define lookback periods for BodyLong and ShadowVeryShort as per TA-Lib defaults
+        BodyLongPeriod = 10
+        ShadowVeryShortPeriod = 10
+        lookbackTotal = max(BodyLongPeriod, ShadowVeryShortPeriod)
     
         for sec in range(secs):
             # Create valid data mask
@@ -5139,240 +3776,84 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) <= lookbackTotal:
                 continue
             
             # Extract valid data
             valid_high = high[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
             valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize period totals for body and shadow
-            body_period_total = 0.0
-            shadow_period_total = 0.0
+            # Initialize totals for rolling averages
+            BodyLongPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
         
-            # Calculate initial totals for body and shadow ranges
-            body_trailing_idx = 0
-            shadow_trailing_idx = 0
+            # Calculate initial totals for BodyLong and ShadowVeryShort
+            BodyLongTrailingIdx = 0
+            ShadowVeryShortTrailingIdx = 0
+            startIdx = lookbackTotal
         
-            for i in range(lookback_total):
-                if i < body_period:
-                    body_range = abs(valid_close[i] - valid_open[i])
-                    body_period_total += body_range
-                if i < shadow_period:
+            for i in range(BodyLongTrailingIdx, startIdx):
+                if i < len(valid_high):
+                    # BodyLong range is typically the real body size
+                    real_body = abs(valid_close[i] - valid_open[i])
+                    BodyLongPeriodTotal += real_body
+        
+            for i in range(ShadowVeryShortTrailingIdx, startIdx):
+                if i < len(valid_high):
+                    # ShadowVeryShort range is typically the shadow size
                     upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
                     lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
-                    shadow_period_total += upper_shadow + lower_shadow
+                    ShadowVeryShortPeriodTotal += min(upper_shadow, lower_shadow)
         
             # Main calculation loop
-            for i in range(lookback_total - 1, len(valid_high)):
+            outIdx = startIdx
+            while outIdx < len(valid_high):
                 # Calculate real body and shadows for current candle
-                real_body = abs(valid_close[i] - valid_open[i])
-                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
+                real_body = abs(valid_close[outIdx] - valid_open[outIdx])
+                upper_shadow = valid_high[outIdx] - max(valid_open[outIdx], valid_close[outIdx])
+                lower_shadow = min(valid_open[outIdx], valid_close[outIdx]) - valid_low[outIdx]
+                candle_color = 1 if valid_close[outIdx] > valid_open[outIdx] else -1
             
                 # Calculate averages
-                body_avg = body_period_total / body_period if body_period > 0 else 0.0
-                shadow_avg = shadow_period_total / shadow_period if shadow_period > 0 else 0.0
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
             
-                # Check if current candle meets long line criteria
-                if (real_body > body_avg and 
-                    upper_shadow < shadow_avg and 
-                    lower_shadow < shadow_avg):
-                    candle_color = 1 if valid_close[i] > valid_open[i] else -1
-                    result[valid_indices[i], sec] = candle_color * 100
+                # Marubozu condition: long body and very short shadows
+                if (real_body > BodyLongAverage and 
+                    upper_shadow < ShadowVeryShortAverage and 
+                    lower_shadow < ShadowVeryShortAverage):
+                    result[valid_indices[outIdx], sec] = candle_color * 100
                 else:
-                    result[valid_indices[i], sec] = 0
+                    result[valid_indices[outIdx], sec] = 0
+            
+                # Update rolling totals
+                if outIdx + 1 < len(valid_high):
+                    # Add new values
+                    new_real_body = abs(valid_close[outIdx] - valid_open[outIdx])
+                    new_upper_shadow = valid_high[outIdx] - max(valid_open[outIdx], valid_close[outIdx])
+                    new_lower_shadow = min(valid_open[outIdx], valid_close[outIdx]) - valid_low[outIdx]
+                    new_shadow = min(new_upper_shadow, new_lower_shadow)
                 
-                # Update trailing totals for next iteration
-                if i < len(valid_high) - 1:
-                    # Remove oldest value and add new value for body
-                    if body_trailing_idx < len(valid_high):
-                        old_body_range = abs(valid_close[body_trailing_idx] - valid_open[body_trailing_idx])
-                        body_period_total -= old_body_range
-                        body_trailing_idx += 1
-                    new_body_range = abs(valid_close[i + 1] - valid_open[i + 1])
-                    body_period_total += new_body_range
+                    BodyLongPeriodTotal += new_real_body
+                    ShadowVeryShortPeriodTotal += new_shadow
                 
-                    # Remove oldest value and add new value for shadow
-                    if shadow_trailing_idx < len(valid_high):
-                        old_upper_shadow = valid_high[shadow_trailing_idx] - max(valid_open[shadow_trailing_idx], valid_close[shadow_trailing_idx])
-                        old_lower_shadow = min(valid_open[shadow_trailing_idx], valid_close[shadow_trailing_idx]) - valid_low[shadow_trailing_idx]
-                        shadow_period_total -= (old_upper_shadow + old_lower_shadow)
-                        shadow_trailing_idx += 1
-                    new_upper_shadow = valid_high[i + 1] - max(valid_open[i + 1], valid_close[i + 1])
-                    new_lower_shadow = min(valid_open[i + 1], valid_close[i + 1]) - valid_low[i + 1]
-                    shadow_period_total += (new_upper_shadow + new_lower_shadow)
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLMARUBOZU(high, open, low, close, vol, oi, body_long_period=10, shadow_very_short_period=4):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (maximum of the two periods)
-        lookback_total = max(body_long_period, shadow_very_short_period)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize output array for valid data
-            valid_result = np.zeros(len(valid_high))
-        
-            # Initialize trailing totals for BodyLong and ShadowVeryShort
-            body_long_total = 0.0
-            shadow_very_short_total = 0.0
-        
-            # Calculate initial totals for the lookback period
-            body_long_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
-        
-            for i in range(lookback_total):
-                if i < body_long_period:
-                    body_range = abs(valid_close[i] - valid_open[i])
-                    body_long_total += body_range
-                shadow_range_upper = valid_high[i] - max(valid_open[i], valid_close[i])
-                shadow_range_lower = min(valid_open[i], valid_close[i]) - valid_low[i]
-                shadow_very_short_total += max(shadow_range_upper, shadow_range_lower)
-        
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate real body and shadows for current candle
-                real_body = abs(valid_close[i] - valid_open[i])
-                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
-            
-                # Calculate averages
-                body_long_avg = body_long_total / body_long_period if body_long_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
-            
-                # Marubozu condition check
-                if (real_body > body_long_avg and 
-                    upper_shadow < shadow_very_short_avg and 
-                    lower_shadow < shadow_very_short_avg):
-                    candle_color = 1 if valid_close[i] > valid_open[i] else -1
-                    valid_result[i] = candle_color * 100
-                else:
-                    valid_result[i] = 0
+                    # Subtract trailing values
+                    if BodyLongTrailingIdx < len(valid_high):
+                        old_real_body = abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
+                        BodyLongPeriodTotal -= old_real_body
                 
-                # Update trailing totals for next iteration
-                if i - body_long_period >= 0:
-                    old_body_range = abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
-                    body_long_total += real_body - old_body_range
-                    body_long_trailing_idx += 1
+                    if ShadowVeryShortTrailingIdx < len(valid_high):
+                        old_upper_shadow = valid_high[ShadowVeryShortTrailingIdx] - max(valid_open[ShadowVeryShortTrailingIdx], valid_close[ShadowVeryShortTrailingIdx])
+                        old_lower_shadow = min(valid_open[ShadowVeryShortTrailingIdx], valid_close[ShadowVeryShortTrailingIdx]) - valid_low[ShadowVeryShortTrailingIdx]
+                        old_shadow = min(old_upper_shadow, old_lower_shadow)
+                        ShadowVeryShortPeriodTotal -= old_shadow
                 
-                if i - shadow_very_short_period >= 0:
-                    old_shadow_range_upper = valid_high[shadow_very_short_trailing_idx] - max(valid_open[shadow_very_short_trailing_idx], valid_close[shadow_very_short_trailing_idx])
-                    old_shadow_range_lower = min(valid_open[shadow_very_short_trailing_idx], valid_close[shadow_very_short_trailing_idx]) - valid_low[shadow_very_short_trailing_idx]
-                    old_shadow_range = max(old_shadow_range_upper, old_shadow_range_lower)
-                    shadow_very_short_total += max(upper_shadow, lower_shadow) - old_shadow_range
-                    shadow_very_short_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLMATCHINGLOW(high, open, low, close, vol, oi, equal_period=14):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (1 day for pattern recognition)
-        lookback_total = 1
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
+                    BodyLongTrailingIdx += 1
+                    ShadowVeryShortTrailingIdx += 1
             
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize output array for valid data
-            temp_result = np.zeros(len(valid_high))
-        
-            # Calculate initial EqualPeriodTotal for the first window
-            equal_period_total = 0.0
-            equal_trailing_idx = max(0, lookback_total - equal_period)
-            for i in range(equal_trailing_idx, lookback_total):
-                if i >= 0 and i < len(valid_high):
-                    candle_range = valid_high[i] - valid_low[i] if (valid_high[i] == valid_high[i] and valid_low[i] == valid_low[i]) else 0.0
-                    equal_period_total += candle_range
-        
-            # Main calculation loop
-            for i in range(lookback_total, len(valid_high)):
-                # Check for Matching Low pattern
-                # Condition 1: Two consecutive bearish candles (close < open)
-                is_bearish_1 = valid_close[i-1] < valid_open[i-1] if (valid_close[i-1] == valid_close[i-1] and valid_open[i-1] == valid_open[i-1]) else False
-                is_bearish_2 = valid_close[i] < valid_open[i] if (valid_close[i] == valid_close[i] and valid_open[i] == valid_open[i]) else False
-            
-                # Calculate average range for Equal comparison
-                equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
-            
-                # Condition 2: Closes are approximately equal (within average range)
-                close_diff_upper = valid_close[i-1] + equal_avg
-                close_diff_lower = valid_close[i-1] - equal_avg
-                is_close_equal = (valid_close[i] <= close_diff_upper and valid_close[i] >= close_diff_lower) if (valid_close[i] == valid_close[i] and valid_close[i-1] == valid_close[i-1]) else False
-            
-                # Set result based on conditions
-                if is_bearish_1 and is_bearish_2 and is_close_equal:
-                    temp_result[i] = 100
-                else:
-                    temp_result[i] = 0
-                
-                # Update EqualPeriodTotal for next iteration
-                if i < len(valid_high):
-                    current_range = valid_high[i] - valid_low[i] if (valid_high[i] == valid_high[i] and valid_low[i] == valid_low[i]) else 0.0
-                    trailing_range = valid_high[equal_trailing_idx] - valid_low[equal_trailing_idx] if (equal_trailing_idx >= 0 and equal_trailing_idx < len(valid_high) and valid_high[equal_trailing_idx] == valid_high[equal_trailing_idx] and valid_low[equal_trailing_idx] == valid_low[equal_trailing_idx]) else 0.0
-                    equal_period_total += current_range - trailing_range
-                    equal_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = temp_result[i]
+                outIdx += 1
     
         return result
 
@@ -5384,10 +3865,12 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Define lookback periods as per TA-Lib defaults
-        BodyShortPeriod = 5
-        BodyLongPeriod = 5
-        lookbackTotal = 4  # Need 5 candles (i-4 to i) for pattern recognition
+        # Define constants for body periods as in TA-Lib
+        BODY_SHORT_PERIOD = 5
+        BODY_LONG_PERIOD = 5
+    
+        # Lookback period as per TA-Lib (4 prior candles needed for pattern)
+        lookback_total = 4
     
         for sec in range(secs):
             # Create valid data mask
@@ -5400,7 +3883,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookbackTotal:
+            if len(valid_indices) <= lookback_total:
                 continue
             
             # Extract valid data
@@ -5409,88 +3892,83 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize arrays for body calculations
-            BodyPeriodTotal = np.zeros(5, dtype=np.float64)  # 0-3 for Short, 4 for Long
-            out_values = np.zeros(len(valid_high), dtype=np.float64)
+            # Initialize body period totals for short and long
+            body_period_total = np.zeros(5)
+            body_short_trailing_idx = 0
+            body_long_trailing_idx = 0
         
-            # Initialize trailing indices for rolling sums
-            start_idx = lookbackTotal
-            BodyShortTrailingIdx = start_idx - BodyShortPeriod
-            BodyLongTrailingIdx = start_idx - BodyLongPeriod
+            # Initialize output index
+            out_idx = lookback_total
         
-            # Pre-calculate initial sums for Body averages before start_idx
-            for i in range(BodyShortTrailingIdx, start_idx):
-                if i >= 0:
-                    BodyPeriodTotal[3] += abs(valid_close[i-3] - valid_open[i-3]) if i-3 >= 0 else 0.0
-                    BodyPeriodTotal[2] += abs(valid_close[i-2] - valid_open[i-2]) if i-2 >= 0 else 0.0
-                    BodyPeriodTotal[1] += abs(valid_close[i-1] - valid_open[i-1]) if i-1 >= 0 else 0.0
+            # Pre-calculate initial body totals for short and long periods
+            if out_idx >= BODY_SHORT_PERIOD:
+                body_short_trailing_idx = out_idx - BODY_SHORT_PERIOD
+                for i in range(body_short_trailing_idx, out_idx):
+                    body_period_total[3] += abs(valid_close[i-3] - valid_open[i-3]) if i >= 3 else 0.0
+                    body_period_total[2] += abs(valid_close[i-2] - valid_open[i-2]) if i >= 2 else 0.0
+                    body_period_total[1] += abs(valid_close[i-1] - valid_open[i-1]) if i >= 1 else 0.0
         
-            for i in range(BodyLongTrailingIdx, start_idx):
-                if i >= 0:
-                    BodyPeriodTotal[4] += abs(valid_close[i-4] - valid_open[i-4]) if i-4 >= 0 else 0.0
+            if out_idx >= BODY_LONG_PERIOD:
+                body_long_trailing_idx = out_idx - BODY_LONG_PERIOD
+                for i in range(body_long_trailing_idx, out_idx):
+                    body_period_total[4] += abs(valid_close[i-4] - valid_open[i-4]) if i >= 4 else 0.0
         
-            # Main loop for pattern recognition
-            for i in range(start_idx, len(valid_high)):
-                # Calculate real body sizes
-                realbody_i4 = abs(valid_close[i-4] - valid_open[i-4])
-                realbody_i3 = abs(valid_close[i-3] - valid_open[i-3])
-                realbody_i2 = abs(valid_close[i-2] - valid_open[i-2])
-                realbody_i1 = abs(valid_close[i-1] - valid_open[i-1])
+            # Main loop for pattern detection
+            for i in range(out_idx, len(valid_high)):
+                # Calculate real body for comparison
+                real_body_4 = abs(valid_close[i-4] - valid_open[i-4]) if i >= 4 else 0.0
+                real_body_3 = abs(valid_close[i-3] - valid_open[i-3]) if i >= 3 else 0.0
+                real_body_2 = abs(valid_close[i-2] - valid_open[i-2]) if i >= 2 else 0.0
+                real_body_1 = abs(valid_close[i-1] - valid_open[i-1]) if i >= 1 else 0.0
             
-                # Calculate candle colors (1 for bullish, -1 for bearish)
-                color_i4 = 1 if valid_close[i-4] > valid_open[i-4] else -1
-                color_i3 = 1 if valid_close[i-3] > valid_open[i-3] else -1
-                color_i = 1 if valid_close[i] > valid_open[i] else -1
+                # Calculate candle averages
+                body_long_avg = body_period_total[4] / BODY_LONG_PERIOD if BODY_LONG_PERIOD > 0 else 0.0
+                body_short_avg_3 = body_period_total[3] / BODY_SHORT_PERIOD if BODY_SHORT_PERIOD > 0 else 0.0
+                body_short_avg_2 = body_period_total[2] / BODY_SHORT_PERIOD if BODY_SHORT_PERIOD > 0 else 0.0
+                body_short_avg_1 = body_period_total[1] / BODY_SHORT_PERIOD if BODY_SHORT_PERIOD > 0 else 0.0
             
-                # Calculate averages for comparison
-                avg_body_long_i4 = BodyPeriodTotal[4] / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
-                avg_body_short_i3 = BodyPeriodTotal[3] / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
-                avg_body_short_i2 = BodyPeriodTotal[2] / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
-                avg_body_short_i1 = BodyPeriodTotal[1] / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                # Check candle colors (1 for bullish, -1 for bearish)
+                color_4 = 1 if valid_close[i-4] > valid_open[i-4] else -1 if i >= 4 else 0
+                color_3 = 1 if valid_close[i-3] > valid_open[i-3] else -1 if i >= 3 else 0
+                color_0 = 1 if valid_close[i] > valid_open[i] else -1
             
                 # Check for gap up between i-4 and i-3
-                gap_up_i3_i4 = valid_open[i-3] > valid_close[i-4] if color_i4 == 1 else valid_open[i-3] > valid_open[i-4]
+                gap_up_3_4 = valid_open[i-3] > valid_close[i-4] if i >= 4 else False
             
-                # Pattern conditions as per TA-Lib logic
-                if (realbody_i4 > avg_body_long_i4 and
-                    realbody_i3 < avg_body_short_i3 and
-                    realbody_i2 < avg_body_short_i2 and
-                    realbody_i1 < avg_body_short_i1 and
-                    color_i4 == 1 and
-                    color_i3 == -1 and
-                    color_i == 1 and
-                    gap_up_i3_i4 and
+                # Pattern conditions for Mat Hold
+                if (real_body_4 > body_long_avg and
+                    real_body_3 < body_short_avg_3 and
+                    real_body_2 < body_short_avg_2 and
+                    real_body_1 < body_short_avg_1 and
+                    color_4 == 1 and
+                    color_3 == -1 and
+                    color_0 == 1 and
+                    gap_up_3_4 and
                     min(valid_open[i-2], valid_close[i-2]) < valid_close[i-4] and
                     min(valid_open[i-1], valid_close[i-1]) < valid_close[i-4] and
-                    min(valid_open[i-2], valid_close[i-2]) > valid_close[i-4] - realbody_i4 * penetration and
-                    min(valid_open[i-1], valid_close[i-1]) > valid_close[i-4] - realbody_i4 * penetration and
+                    min(valid_open[i-2], valid_close[i-2]) > valid_close[i-4] - real_body_4 * penetration and
+                    min(valid_open[i-1], valid_close[i-1]) > valid_close[i-4] - real_body_4 * penetration and
                     max(valid_close[i-2], valid_open[i-2]) < valid_open[i-3] and
                     max(valid_close[i-1], valid_open[i-1]) < max(valid_close[i-2], valid_open[i-2]) and
                     valid_open[i] > valid_close[i-1] and
                     valid_close[i] > max(max(valid_high[i-3], valid_high[i-2]), valid_high[i-1])):
-                    out_values[i] = 100
+                    result[valid_indices[i], sec] = 100
                 else:
-                    out_values[i] = 0
+                    result[valid_indices[i], sec] = 0
             
-                # Update rolling sums for body averages
-                if i < len(valid_high):
-                    BodyPeriodTotal[4] += abs(valid_close[i-4] - valid_open[i-4]) if i-4 >= 0 else 0.0
-                    if BodyLongTrailingIdx - 4 >= 0:
-                        BodyPeriodTotal[4] -= abs(valid_close[BodyLongTrailingIdx-4] - valid_open[BodyLongTrailingIdx-4])
-                
-                    for totIdx in range(3, 0, -1):
-                        BodyPeriodTotal[totIdx] += abs(valid_close[i-totIdx] - valid_open[i-totIdx]) if i-totIdx >= 0 else 0.0
-                        if BodyShortTrailingIdx - totIdx >= 0:
-                            BodyPeriodTotal[totIdx] -= abs(valid_close[BodyShortTrailingIdx-totIdx] - valid_open[BodyShortTrailingIdx-totIdx])
+                # Update body period totals
+                if i >= 4:
+                    body_period_total[4] += abs(valid_close[i-4] - valid_open[i-4])
+                    if body_long_trailing_idx < len(valid_high) - 4:
+                        body_period_total[4] -= abs(valid_close[body_long_trailing_idx-4] - valid_open[body_long_trailing_idx-4]) if body_long_trailing_idx >= 4 else 0.0
+                for tot_idx in range(3, 0, -1):
+                    if i >= tot_idx:
+                        body_period_total[tot_idx] += abs(valid_close[i-tot_idx] - valid_open[i-tot_idx])
+                        if body_short_trailing_idx < len(valid_high) - tot_idx:
+                            body_period_total[tot_idx] -= abs(valid_close[body_short_trailing_idx-tot_idx] - valid_open[body_short_trailing_idx-tot_idx]) if body_short_trailing_idx >= tot_idx else 0.0
             
-                BodyShortTrailingIdx += 1
-                BodyLongTrailingIdx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookbackTotal:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = out_values[i]
+                body_short_trailing_idx += 1
+                body_long_trailing_idx += 1
     
         return result
 
@@ -5498,15 +3976,15 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLMORNINGDOJISTAR(high, open, low, close, vol, oi, penetration=0.3):
+    def CDLMORNINGDOJISTAR(high, open, low, close, vol, oi, optInPenetration=0.3):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         # Define lookback periods for different body types as in TA-Lib
-        BodyLongPeriod = 10
+        BodyLongPeriod = 5
         BodyDojiPeriod = 3
         BodyShortPeriod = 5
-        lookbackTotal = 2  # Need at least 2 previous candles for pattern
+        lookbackTotal = 2  # Need 3 candles for pattern (i-2, i-1, i)
     
         for sec in range(secs):
             # Create valid data mask
@@ -5519,79 +3997,100 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookbackTotal:
+            if len(valid_indices) < lookbackTotal + max(BodyLongPeriod, BodyDojiPeriod, BodyShortPeriod):
                 continue
             
-            # Initialize trailing indices and totals for rolling averages
-            BodyLongTrailingIdx = lookbackTotal - 2 - BodyLongPeriod
-            BodyDojiTrailingIdx = lookbackTotal - 1 - BodyDojiPeriod
-            BodyShortTrailingIdx = lookbackTotal - BodyShortPeriod
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
         
+            # Initialize totals for body averages
             BodyLongPeriodTotal = 0.0
             BodyDojiPeriodTotal = 0.0
             BodyShortPeriodTotal = 0.0
         
             # Calculate initial totals for body ranges
-            for i in range(BodyLongTrailingIdx, lookbackTotal - 2):
-                if i >= 0 and valid_mask[i]:
-                    BodyLongPeriodTotal += abs(close[i, sec] - open[i, sec])
-            for i in range(BodyDojiTrailingIdx, lookbackTotal - 1):
-                if i >= 0 and valid_mask[i]:
-                    BodyDojiPeriodTotal += abs(close[i, sec] - open[i, sec])
-            for i in range(BodyShortTrailingIdx, lookbackTotal):
-                if i >= 0 and valid_mask[i]:
-                    BodyShortPeriodTotal += abs(close[i, sec] - open[i, sec])
+            start_idx = lookbackTotal
+            BodyLongTrailingIdx = start_idx - 2 - BodyLongPeriod
+            BodyDojiTrailingIdx = start_idx - 1 - BodyDojiPeriod
+            BodyShortTrailingIdx = start_idx - BodyShortPeriod
         
-            # Main loop starting from lookbackTotal
-            for i in range(lookbackTotal, tdts):
-                if not valid_mask[i]:
-                    continue
-                
-                # Calculate averages for comparison
+            # Initialize totals for BodyLong (i-2)
+            i = BodyLongTrailingIdx if BodyLongTrailingIdx >= 0 else 0
+            while i < start_idx - 2:
+                if i >= 0:
+                    BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
+                i += 1
+            
+            # Initialize totals for BodyDoji (i-1)
+            i = BodyDojiTrailingIdx if BodyDojiTrailingIdx >= 0 else 0
+            while i < start_idx - 1:
+                if i >= 0:
+                    BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
+                i += 1
+            
+            # Initialize totals for BodyShort (i)
+            i = BodyShortTrailingIdx if BodyShortTrailingIdx >= 0 else 0
+            while i < start_idx:
+                if i >= 0:
+                    BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
+                i += 1
+        
+            # Main loop for pattern detection
+            i = start_idx
+            while i < len(valid_high):
+                # Calculate averages
                 BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
                 BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
                 BodyShortAverage = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
             
-                # Check Morning Doji Star pattern conditions
-                if (i >= 2 and valid_mask[i-1] and valid_mask[i-2]):
-                    # First candle: Long black body
-                    realbody2 = abs(close[i-2, sec] - open[i-2, sec])
-                    is_long_black = realbody2 > BodyLongAverage and close[i-2, sec] < open[i-2, sec]
+                # Check for Morning Doji Star pattern
+                if i >= 2:
+                    # First candle (i-2): Long black body
+                    realbody2 = abs(valid_close[i-2] - valid_open[i-2])
+                    color2 = -1 if valid_close[i-2] < valid_open[i-2] else 1
                 
-                    # Second candle: Doji with gap down
-                    realbody1 = abs(close[i-1, sec] - open[i-1, sec])
-                    is_doji = realbody1 <= BodyDojiAverage
-                    gap_down = max(open[i-1, sec], close[i-1, sec]) < min(open[i-2, sec], close[i-2, sec])
+                    # Second candle (i-1): Doji with gap down
+                    realbody1 = abs(valid_close[i-1] - valid_open[i-1])
+                    gapdown = max(valid_open[i-1], valid_close[i-1]) < min(valid_open[i-2], valid_close[i-2])
                 
-                    # Third candle: White body with penetration
-                    realbody0 = abs(close[i, sec] - open[i, sec])
-                    is_short_white = realbody0 > BodyShortAverage and close[i, sec] > open[i, sec]
-                    penetration_check = close[i, sec] > close[i-2, sec] + realbody2 * penetration
+                    # Third candle (i): White body
+                    realbody0 = abs(valid_close[i] - valid_open[i])
+                    color0 = 1 if valid_close[i] > valid_open[i] else -1
                 
-                    if is_long_black and is_doji and gap_down and is_short_white and penetration_check:
-                        result[i, sec] = 100
+                    # Pattern conditions
+                    if (realbody2 > BodyLongAverage and
+                        color2 == -1 and
+                        realbody1 <= BodyDojiAverage and
+                        gapdown and
+                        realbody0 > BodyShortAverage and
+                        color0 == 1 and
+                        valid_close[i] > valid_close[i-2] + realbody2 * optInPenetration):
+                        result[valid_indices[i], sec] = 100
                     else:
-                        result[i, sec] = 0
-                    
-                    # Update rolling totals
-                    if i - 2 >= 0 and valid_mask[i-2]:
-                        BodyLongPeriodTotal += abs(close[i-2, sec] - open[i-2, sec])
-                    if BodyLongTrailingIdx >= 0 and valid_mask[BodyLongTrailingIdx]:
-                        BodyLongPeriodTotal -= abs(close[BodyLongTrailingIdx, sec] - open[BodyLongTrailingIdx, sec])
-                
-                    if i - 1 >= 0 and valid_mask[i-1]:
-                        BodyDojiPeriodTotal += abs(close[i-1, sec] - open[i-1, sec])
-                    if BodyDojiTrailingIdx >= 0 and valid_mask[BodyDojiTrailingIdx]:
-                        BodyDojiPeriodTotal -= abs(close[BodyDojiTrailingIdx, sec] - open[BodyDojiTrailingIdx, sec])
-                
-                    if valid_mask[i]:
-                        BodyShortPeriodTotal += abs(close[i, sec] - open[i, sec])
-                    if BodyShortTrailingIdx >= 0 and valid_mask[BodyShortTrailingIdx]:
-                        BodyShortPeriodTotal -= abs(close[BodyShortTrailingIdx, sec] - open[BodyShortTrailingIdx, sec])
-                
+                        result[valid_indices[i], sec] = 0
+            
+                # Update totals for next iteration
+                if i >= 2:
+                    BodyLongPeriodTotal += abs(valid_close[i-2] - valid_open[i-2])
+                    if BodyLongTrailingIdx >= 0:
+                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
                     BodyLongTrailingIdx += 1
+                
+                if i >= 1:
+                    BodyDojiPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                    if BodyDojiTrailingIdx >= 0:
+                        BodyDojiPeriodTotal -= abs(valid_close[BodyDojiTrailingIdx] - valid_open[BodyDojiTrailingIdx])
                     BodyDojiTrailingIdx += 1
-                    BodyShortTrailingIdx += 1
+                
+                BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
+                if BodyShortTrailingIdx >= 0:
+                    BodyShortPeriodTotal -= abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
+                BodyShortTrailingIdx += 1
+            
+                i += 1
     
         return result
 
@@ -5604,9 +4103,9 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         # Define lookback periods for BodyLong and BodyShort as per TA-Lib defaults
-        body_long_period = 10  # Default period for BodyLong in TA-Lib
-        body_short_period = 3  # Default period for BodyShort in TA-Lib
-        lookback_total = 2 + max(body_long_period, body_short_period)
+        BodyLongPeriod = 10
+        BodyShortPeriod = 3
+        lookbackTotal = 2 + max(BodyLongPeriod, BodyShortPeriod)
     
         for sec in range(secs):
             # Create valid data mask
@@ -5619,7 +4118,201 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize period totals for body calculations
+            BodyLongPeriodTotal = 0.0
+            BodyShortPeriodTotal = 0.0
+            BodyShortPeriodTotal2 = 0.0
+        
+            # Calculate initial totals for BodyLong (i-2 candle)
+            BodyLongTrailingIdx = 0
+            for i in range(BodyLongTrailingIdx, min(BodyLongPeriod, len(valid_close) - 2)):
+                if valid_close[i + 2] == valid_close[i + 2]:
+                    BodyLongPeriodTotal += abs(valid_close[i + 2] - valid_open[i + 2])
+        
+            # Calculate initial totals for BodyShort (i-1 candle and i candle)
+            BodyShortTrailingIdx = 0
+            for i in range(BodyShortTrailingIdx, min(BodyShortPeriod, len(valid_close) - 1)):
+                if valid_close[i + 1] == valid_close[i + 1]:
+                    BodyShortPeriodTotal += abs(valid_close[i + 1] - valid_open[i + 1])
+                if i < len(valid_close) and valid_close[i] == valid_close[i]:
+                    BodyShortPeriodTotal2 += abs(valid_close[i] - valid_open[i])
+        
+            # Start processing from lookbackTotal
+            start_idx = lookbackTotal
+            for i in range(start_idx, len(valid_close)):
+                # Calculate real body sizes
+                realbody_i_2 = abs(valid_close[i - 2] - valid_open[i - 2])
+                realbody_i_1 = abs(valid_close[i - 1] - valid_open[i - 1])
+                realbody_i = abs(valid_close[i] - valid_open[i])
+            
+                # Calculate candle colors
+                color_i_2 = 1 if valid_close[i - 2] > valid_open[i - 2] else -1
+                color_i = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Check for gap down between i-2 and i-1
+                gap_down = valid_open[i - 1] < valid_close[i - 2] if color_i_2 == -1 else False
+            
+                # Calculate averages for comparison
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                BodyShortAverage = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                BodyShortAverage2 = BodyShortPeriodTotal2 / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+            
+                # Morning Star pattern conditions
+                if (realbody_i_2 > BodyLongAverage and
+                    color_i_2 == -1 and
+                    realbody_i_1 <= BodyShortAverage and
+                    gap_down and
+                    realbody_i > BodyShortAverage2 and
+                    color_i == 1 and
+                    valid_close[i] > valid_close[i - 2] + realbody_i_2 * penetration):
+                    result[valid_indices[i], sec] = 100
+                else:
+                    result[valid_indices[i], sec] = 0
+            
+                # Update trailing totals
+                if i - 2 >= BodyLongTrailingIdx + BodyLongPeriod:
+                    old_body_long = abs(valid_close[i - 2 - BodyLongPeriod] - valid_open[i - 2 - BodyLongPeriod])
+                    new_body_long = abs(valid_close[i - 2] - valid_open[i - 2])
+                    BodyLongPeriodTotal += new_body_long - old_body_long
+                    BodyLongTrailingIdx += 1
+            
+                if i - 1 >= BodyShortTrailingIdx + BodyShortPeriod:
+                    old_body_short = abs(valid_close[i - 1 - BodyShortPeriod] - valid_open[i - 1 - BodyShortPeriod])
+                    new_body_short = abs(valid_close[i - 1] - valid_open[i - 1])
+                    BodyShortPeriodTotal += new_body_short - old_body_short
+                
+                    old_body_short2 = abs(valid_close[i - BodyShortPeriod] - valid_open[i - BodyShortPeriod])
+                    new_body_short2 = abs(valid_close[i] - valid_open[i])
+                    BodyShortPeriodTotal2 += new_body_short2 - old_body_short2
+                    BodyShortTrailingIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLONNECK(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define constants for lookback periods as per TA-Lib defaults
+        EqualPeriod = 5  # Default period for Equal candlestick range
+        BodyLongPeriod = 10  # Default period for BodyLong candlestick range
+        lookbackTotal = max(EqualPeriod, BodyLongPeriod) - 1
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for moving averages
+            EqualPeriodTotal = 0.0
+            BodyLongPeriodTotal = 0.0
+        
+            # Calculate initial totals for Equal and BodyLong ranges
+            EqualTrailingIdx = 0
+            BodyLongTrailingIdx = 0
+        
+            for i in range(EqualPeriod - 1):
+                if i < len(valid_high) - 1:
+                    EqualPeriodTotal += abs(valid_close[i + 1] - valid_open[i + 1])
+        
+            for i in range(BodyLongPeriod - 1):
+                if i < len(valid_high) - 1:
+                    BodyLongPeriodTotal += abs(valid_close[i + 1] - valid_open[i + 1])
+        
+            # Start processing from lookbackTotal
+            start_idx = lookbackTotal
+            for i in range(start_idx, len(valid_high)):
+                # Check if previous day was black (bearish) candle
+                prev_color = -1 if valid_close[i - 1] < valid_open[i - 1] else 1
+            
+                # Calculate real body of previous day
+                prev_realbody = abs(valid_close[i - 1] - valid_open[i - 1])
+            
+                # Calculate current day color (white/bullish)
+                curr_color = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Calculate averages
+                EqualAverage = EqualPeriodTotal / EqualPeriod if EqualPeriod > 0 else 0.0
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+            
+                # Check On-Neck pattern conditions
+                if (prev_color == -1 and
+                    prev_realbody > BodyLongAverage and
+                    curr_color == 1 and
+                    valid_open[i] < valid_low[i - 1] and
+                    valid_close[i] <= valid_low[i - 1] + EqualAverage and
+                    valid_close[i] >= valid_low[i - 1] - EqualAverage):
+                    result[valid_indices[i], sec] = -100
+                else:
+                    result[valid_indices[i], sec] = 0
+            
+                # Update totals for next iteration
+                if i < len(valid_high) - 1:
+                    # Add new value and subtract oldest value for Equal
+                    if EqualTrailingIdx < len(valid_high) - 1:
+                        EqualPeriodTotal += abs(valid_close[i] - valid_open[i])
+                        if EqualTrailingIdx < len(valid_high) - EqualPeriod:
+                            EqualPeriodTotal -= abs(valid_close[EqualTrailingIdx] - valid_open[EqualTrailingIdx])
+                        EqualTrailingIdx += 1
+                
+                    # Add new value and subtract oldest value for BodyLong
+                    if BodyLongTrailingIdx < len(valid_high) - 1:
+                        BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
+                        if BodyLongTrailingIdx < len(valid_high) - BodyLongPeriod:
+                            BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
+                        BodyLongTrailingIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLPIERCING(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # BodyLong period as defined in TA-Lib, typically 10
+        BodyLongPeriod = 10
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < BodyLongPeriod:
                 continue
             
             # Extract valid data
@@ -5629,351 +4322,57 @@ class BaseLogicFactors:
             valid_close = close[valid_mask, sec]
         
             # Initialize output array for valid data
-            valid_result = np.zeros(len(valid_high))
+            piercing_values = np.zeros(len(valid_high))
         
-            # Initialize trailing totals for BodyLong and BodyShort
-            body_long_total = 0.0
-            body_short_total = 0.0
-            body_short_total2 = 0.0
+            # Initialize BodyLongPeriodTotal for two periods (current and previous day)
+            BodyLongPeriodTotal = np.zeros(2)
+            BodyLongTrailingIdx = 0
         
-            # Calculate initial totals for BodyLong (i-2) and BodyShort (i-1 and i)
-            start_idx = lookback_total
-            body_long_trailing_idx = start_idx - 2 - body_long_period
-            body_short_trailing_idx = start_idx - 1 - body_short_period
+            # Lookback period as per TA-Lib (start after BodyLongPeriod)
+            lookbackTotal = BodyLongPeriod
         
-            # Pre-calculate BodyLong totals
-            for i in range(body_long_trailing_idx, start_idx - 2):
-                if i >= 0:
-                    body_long_total += abs(valid_open[i] - valid_close[i])
-        
-            # Pre-calculate BodyShort totals
-            for i in range(body_short_trailing_idx, start_idx - 1):
-                if i >= 0:
-                    body_short_total += abs(valid_open[i] - valid_close[i])
-                    if i + 1 < len(valid_high):
-                        body_short_total2 += abs(valid_open[i + 1] - valid_close[i + 1])
-        
-            # Main loop starting from lookback_total
-            for i in range(start_idx, len(valid_high)):
-                # Calculate real body for i-2, i-1, i
-                real_body_i2 = abs(valid_open[i - 2] - valid_close[i - 2])
-                real_body_i1 = abs(valid_open[i - 1] - valid_close[i - 1])
-                real_body_i = abs(valid_open[i] - valid_close[i])
+            # Initialize trailing sums for BodyLong averages
+            if len(valid_high) > lookbackTotal:
+                for i in range(BodyLongTrailingIdx, lookbackTotal):
+                    BodyLongPeriodTotal[1] += abs(valid_close[i-1] - valid_open[i-1]) if i > 0 else 0
+                    BodyLongPeriodTotal[0] += abs(valid_close[i] - valid_open[i])
+                BodyLongTrailingIdx = lookbackTotal - BodyLongPeriod
             
-                # Calculate averages
-                body_long_avg = body_long_total / body_long_period if body_long_period > 0 else 0.0
-                body_short_avg = body_short_total / body_short_period if body_short_period > 0 else 0.0
-                body_short_avg2 = body_short_total2 / body_short_period if body_short_period > 0 else 0.0
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate real body for current and previous candle
+                realbody_prev = abs(valid_close[i-1] - valid_open[i-1])
+                realbody_curr = abs(valid_close[i] - valid_open[i])
             
-                # Check conditions for Morning Star pattern
-                if (real_body_i2 > body_long_avg and  # First candle has long body
-                    valid_close[i - 2] < valid_open[i - 2] and  # First candle is bearish
-                    real_body_i1 <= body_short_avg and  # Second candle has short body
-                    valid_open[i - 1] < valid_close[i - 2] and  # Gap down between first and second
-                    real_body_i > body_short_avg2 and  # Third candle has long body
-                    valid_close[i] > valid_open[i] and  # Third candle is bullish
-                    valid_close[i] > valid_close[i - 2] + real_body_i2 * penetration):  # Penetration condition
-                    valid_result[i] = 100
+                # Calculate BodyLong averages
+                BodyLongAverage_prev = BodyLongPeriodTotal[1] / BodyLongPeriod if BodyLongPeriod > 0 else 0
+                BodyLongAverage_curr = BodyLongPeriodTotal[0] / BodyLongPeriod if BodyLongPeriod > 0 else 0
+            
+                # Piercing pattern conditions
+                if (valid_close[i-1] < valid_open[i-1] and  # Bearish previous candle
+                    realbody_prev > BodyLongAverage_prev and  # Long body previous
+                    valid_close[i] > valid_open[i] and  # Bullish current candle
+                    realbody_curr > BodyLongAverage_curr and  # Long body current
+                    valid_open[i] < valid_low[i-1] and  # Current opens below previous low
+                    valid_close[i] < valid_open[i-1] and  # Current closes below previous open
+                    valid_close[i] > valid_close[i-1] + realbody_prev * 0.5):  # Current closes above midpoint of previous body
+                    piercing_values[i] = 100
                 else:
-                    valid_result[i] = 0
+                    piercing_values[i] = 0
+                
+                # Update trailing sums for BodyLongPeriodTotal
+                for totIdx in range(1, -1, -1):
+                    curr_range = abs(valid_close[i-totIdx] - valid_open[i-totIdx])
+                    trail_range = abs(valid_close[BodyLongTrailingIdx-totIdx] - valid_open[BodyLongTrailingIdx-totIdx]) if BodyLongTrailingIdx-totIdx >= 0 else 0
+                    BodyLongPeriodTotal[totIdx] += curr_range - trail_range
             
-                # Update trailing totals
-                if body_long_trailing_idx >= 0:
-                    body_long_total += abs(valid_open[i - 2] - valid_close[i - 2])
-                    body_long_total -= abs(valid_open[body_long_trailing_idx] - valid_close[body_long_trailing_idx])
-                if body_short_trailing_idx >= 0:
-                    body_short_total += abs(valid_open[i - 1] - valid_close[i - 1])
-                    body_short_total -= abs(valid_open[body_short_trailing_idx] - valid_close[body_short_trailing_idx])
-                    body_short_total2 += abs(valid_open[i] - valid_close[i])
-                    if body_short_trailing_idx + 1 < len(valid_high):
-                        body_short_total2 -= abs(valid_open[body_short_trailing_idx + 1] - valid_close[body_short_trailing_idx + 1])
-            
-                body_long_trailing_idx += 1
-                body_short_trailing_idx += 1
+                BodyLongTrailingIdx += 1
         
             # Map results back to original array
             for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLONNECK(high, open, low, close, vol, oi, equal_period=10, body_long_period=10):
-        """
-        CDLONNECK - On-Neck Pattern
-        Identifies a bearish continuation pattern where a long black candle is followed by a white candle
-        that opens below the previous low and closes near the previous low.
-        """
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (maximum of the two periods)
-        lookback_total = max(equal_period, body_long_period)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize period totals for Equal and BodyLong ranges
-            equal_period_total = 0.0
-            body_long_period_total = 0.0
-        
-            # Calculate initial totals for the lookback period
-            equal_trailing_idx = 0
-            body_long_trailing_idx = 0
-        
-            for i in range(lookback_total):
-                if i < equal_period:
-                    equal_range = valid_high[i] - valid_low[i] if valid_high[i] == valid_high[i] else 0.0
-                    equal_period_total += equal_range
-                if i < body_long_period:
-                    body_long_range = abs(valid_close[i] - valid_open[i]) if valid_close[i] == valid_close[i] else 0.0
-                    body_long_period_total += body_long_range
-        
-            # Start processing from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Check for On-Neck pattern conditions
-                if i > 0:
-                    # Condition 1: Previous candle is black (bearish)
-                    prev_color = -1 if valid_close[i-1] < valid_open[i-1] else 1
-                
-                    # Condition 2: Previous candle has long body
-                    prev_body = abs(valid_close[i-1] - valid_open[i-1])
-                    body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
-                
-                    # Condition 3: Current candle is white (bullish)
-                    curr_color = 1 if valid_close[i] > valid_open[i] else -1
-                
-                    # Condition 4: Current open is below previous low
-                    open_below_low = valid_open[i] < valid_low[i-1]
-                
-                    # Condition 5 & 6: Current close is near previous low (within Equal range)
-                    equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
-                    close_near_low_upper = valid_close[i] <= valid_low[i-1] + equal_avg
-                    close_near_low_lower = valid_close[i] >= valid_low[i-1] - equal_avg
-                
-                    if (prev_color == -1 and 
-                        prev_body > body_long_avg and 
-                        curr_color == 1 and 
-                        open_below_low and 
-                        close_near_low_upper and 
-                        close_near_low_lower):
-                        result[valid_indices[i], sec] = -100
-                    else:
-                        result[valid_indices[i], sec] = 0
-            
-                # Update rolling totals for Equal and BodyLong ranges
-                if i >= equal_period:
-                    old_equal_range = valid_high[i - equal_period] - valid_low[i - equal_period] if valid_high[i - equal_period] == valid_high[i - equal_period] else 0.0
-                    new_equal_range = valid_high[i] - valid_low[i] if valid_high[i] == valid_high[i] else 0.0
-                    equal_period_total += new_equal_range - old_equal_range
-            
-                if i >= body_long_period:
-                    old_body_long_range = abs(valid_close[i - body_long_period] - valid_open[i - body_long_period]) if valid_close[i - body_long_period] == valid_close[i - body_long_period] else 0.0
-                    new_body_long_range = abs(valid_close[i] - valid_open[i]) if valid_close[i] == valid_close[i] else 0.0
-                    body_long_period_total += new_body_long_range - old_body_long_range
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLPIERCING(high, open, low, close, vol, oi, body_long_period=10):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < body_long_period + 1:
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # 初始化输出数组
-            piercing_values = np.zeros(len(valid_high))
-        
-            # 初始化BodyLongPeriodTotal数组，用于存储两个周期的累加值
-            body_long_period_total = np.zeros(2)
-            body_long_trailing_idx = 0
-        
-            # 计算lookback period
-            lookback_total = body_long_period
-        
-            # 预热期处理：计算初始的BodyLongPeriodTotal
-            if lookback_total < len(valid_high):
-                for i in range(body_long_trailing_idx, lookback_total):
-                    body_long_period_total[1] += abs(valid_open[i-1] - valid_close[i-1]) if i > 0 else 0
-                    body_long_period_total[0] += abs(valid_open[i] - valid_close[i])
-                body_long_trailing_idx = lookback_total - body_long_period
-        
-            # 主计算循环
-            for i in range(lookback_total, len(valid_high)):
-                # 计算Piercing形态条件
-                if i > 0:
-                    # 前一根K线为阴线 (收盘价 < 开盘价)
-                    candle_color_prev = -1 if valid_close[i-1] < valid_open[i-1] else 1
-                    # 当前K线为阳线 (收盘价 > 开盘价)
-                    candle_color_curr = 1 if valid_close[i] > valid_open[i] else -1
-                    # 前一根K线的实体长度
-                    real_body_prev = abs(valid_close[i-1] - valid_open[i-1])
-                    # 当前K线的实体长度
-                    real_body_curr = abs(valid_close[i] - valid_open[i])
-                    # 计算BodyLong平均值
-                    body_long_avg_prev = body_long_period_total[1] / body_long_period if body_long_period > 0 else 0
-                    body_long_avg_curr = body_long_period_total[0] / body_long_period if body_long_period > 0 else 0
-                
-                    # 判断Piercing形态
-                    if (candle_color_prev == -1 and
-                        real_body_prev > body_long_avg_prev and
-                        candle_color_curr == 1 and
-                        real_body_curr > body_long_avg_curr and
-                        valid_open[i] < valid_low[i-1] and
-                        valid_close[i] < valid_open[i-1] and
-                        valid_close[i] > valid_close[i-1] + real_body_prev * 0.5):
-                        piercing_values[i] = 100
-                    else:
-                        piercing_values[i] = 0
-            
-                # 更新BodyLongPeriodTotal
-                for tot_idx in range(1, -1, -1):
-                    curr_range = abs(valid_open[i - tot_idx] - valid_close[i - tot_idx]) if i - tot_idx >= 0 else 0
-                    trail_range = abs(valid_open[body_long_trailing_idx - tot_idx] - valid_close[body_long_trailing_idx - tot_idx]) if body_long_trailing_idx - tot_idx >= 0 else 0
-                    body_long_period_total[tot_idx] += curr_range - trail_range
-            
-                body_long_trailing_idx += 1
-        
-            # 映射结果回原始数组
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
+                if i >= lookbackTotal:
                     orig_idx = valid_indices[i]
                     result[orig_idx, sec] = piercing_values[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLRICKSHAWMAN(high, open, low, close, vol, oi, body_doji_period=3, shadow_long_period=3, near_period=3):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib logic (maximum of the periods)
-        lookback_total = max(body_doji_period, max(shadow_long_period, near_period))
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize period totals for averages
-            body_doji_period_total = 0.0
-            shadow_long_period_total = 0.0
-            near_period_total = 0.0
-        
-            # Calculate initial totals for the lookback period
-            body_doji_trailing_idx = 0
-            shadow_long_trailing_idx = 0
-            near_trailing_idx = 0
-        
-            for i in range(lookback_total):
-                if i < body_doji_period:
-                    body_doji_period_total += abs(valid_open[i] - valid_close[i])
-                if i < shadow_long_period:
-                    shadow_long_period_total += max(valid_high[i] - valid_open[i], valid_close[i] - valid_low[i])
-                if i < near_period:
-                    near_period_total += valid_high[i] - valid_low[i]
-        
-            # Main calculation loop
-            for i in range(lookback_total - 1, len(valid_high)):
-                # Calculate averages
-                body_doji_avg = body_doji_period_total / body_doji_period if body_doji_period > 0 else 0.0
-                shadow_long_avg = shadow_long_period_total / shadow_long_period if shadow_long_period > 0 else 0.0
-                near_avg = near_period_total / near_period if near_period > 0 else 0.0
-            
-                # Calculate real body and shadows
-                real_body = abs(valid_open[i] - valid_close[i])
-                lower_shadow = valid_open[i] - valid_low[i] if valid_close[i] >= valid_open[i] else valid_close[i] - valid_low[i]
-                upper_shadow = valid_high[i] - valid_close[i] if valid_close[i] >= valid_open[i] else valid_high[i] - valid_open[i]
-                high_low_range = valid_high[i] - valid_low[i]
-            
-                # Rickshaw Man conditions
-                if (real_body <= body_doji_avg and
-                    lower_shadow > shadow_long_avg and
-                    upper_shadow > shadow_long_avg and
-                    min(valid_open[i], valid_close[i]) <= valid_low[i] + high_low_range / 2 + near_avg and
-                    max(valid_open[i], valid_close[i]) >= valid_low[i] + high_low_range / 2 - near_avg):
-                    result[valid_indices[i], sec] = 100
-                else:
-                    result[valid_indices[i], sec] = 0
-            
-                # Update period totals for next iteration
-                if i + 1 < len(valid_high):
-                    # Add new values
-                    body_doji_period_total += abs(valid_open[i + 1] - valid_close[i + 1])
-                    shadow_long_period_total += max(valid_high[i + 1] - valid_open[i + 1], valid_close[i + 1] - valid_low[i + 1])
-                    near_period_total += valid_high[i + 1] - valid_low[i + 1]
-                
-                    # Subtract trailing values
-                    if body_doji_trailing_idx < len(valid_high):
-                        body_doji_period_total -= abs(valid_open[body_doji_trailing_idx] - valid_close[body_doji_trailing_idx])
-                        body_doji_trailing_idx += 1
-                    if shadow_long_trailing_idx < len(valid_high):
-                        shadow_long_period_total -= max(valid_high[shadow_long_trailing_idx] - valid_open[shadow_long_trailing_idx], valid_close[shadow_long_trailing_idx] - valid_low[shadow_long_trailing_idx])
-                        shadow_long_trailing_idx += 1
-                    if near_trailing_idx < len(valid_high):
-                        near_period_total -= valid_high[near_trailing_idx] - valid_low[near_trailing_idx]
-                        near_trailing_idx += 1
     
         return result
 
@@ -5985,12 +4384,8 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as defined in TA-Lib (typically 4 for this pattern)
-        lookback_total = 4
-    
-        # Define periods for body calculations as in TA-Lib
-        body_short_period = 5  # Default short body period from TA-Lib
-        body_long_period = 5   # Default long body period from TA-Lib
+        # Define lookback period as per TA-Lib (4 periods for the pattern + additional for averages)
+        lookback_total = 4 + 5  # 4 for pattern, 5 for BodyLong/BodyShort averages
     
         for sec in range(secs):
             # Create valid data mask
@@ -6012,105 +4407,89 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize output array for valid data
-            valid_result = np.zeros(len(valid_high))
+            # Initialize arrays for body period totals (5 periods as in C code)
+            body_period_total = np.zeros(5, dtype=np.float64)
+            body_short_period = 3  # TA_CANDLEAVGPERIOD(BodyShort)
+            body_long_period = 5   # TA_CANDLEAVGPERIOD(BodyLong)
         
-            # Initialize body period totals for long and short
-            body_period_total = np.zeros(5)  # Indices 0 and 4 for long, 1-3 for short
-        
-            # Calculate initial body period totals
+            # Calculate initial BodyPeriodTotal for short and long
             body_short_trailing_idx = lookback_total - body_short_period
             body_long_trailing_idx = lookback_total - body_long_period
         
-            # Pre-calculate initial sums for body averages (before start index)
-            i = max(0, body_short_trailing_idx)
-            while i < lookback_total:
-                if i - 3 >= 0:
-                    body_period_total[3] += abs(valid_close[i - 3] - valid_open[i - 3])
-                if i - 2 >= 0:
-                    body_period_total[2] += abs(valid_close[i - 2] - valid_open[i - 2])
-                if i - 1 >= 0:
-                    body_period_total[1] += abs(valid_close[i - 1] - valid_open[i - 1])
-                i += 1
-            
-            i = max(0, body_long_trailing_idx)
-            while i < lookback_total:
-                if i - 4 >= 0:
-                    body_period_total[4] += abs(valid_close[i - 4] - valid_open[i - 4])
+            # Initialize BodyPeriodTotal for short periods (indices 1-3)
+            for i in range(body_short_trailing_idx, lookback_total):
+                body_period_total[3] += abs(valid_close[i-3] - valid_open[i-3])
+                body_period_total[2] += abs(valid_close[i-2] - valid_open[i-2])
+                body_period_total[1] += abs(valid_close[i-1] - valid_open[i-1])
+        
+            # Initialize BodyPeriodTotal for long periods (indices 0 and 4)
+            for i in range(body_long_trailing_idx, lookback_total):
+                body_period_total[4] += abs(valid_close[i-4] - valid_open[i-4])
                 body_period_total[0] += abs(valid_close[i] - valid_open[i])
-                i += 1
-            
-            # Main loop starting from lookback_total
+        
+            # Main calculation loop starting from lookback_total
+            out_idx = lookback_total
             i = lookback_total
-            body_short_trailing_idx = i - body_short_period
-            body_long_trailing_idx = i - body_long_period
         
             while i < len(valid_high):
-                # Calculate body averages
-                body_long_avg_4 = body_period_total[4] / body_long_period if body_long_period > 0 else 0
-                body_short_avg_3 = body_period_total[3] / body_short_period if body_short_period > 0 else 0
-                body_short_avg_2 = body_period_total[2] / body_short_period if body_short_period > 0 else 0
-                body_short_avg_1 = body_period_total[1] / body_short_period if body_short_period > 0 else 0
-                body_long_avg_0 = body_period_total[0] / body_long_period if body_long_period > 0 else 0
-            
-                # Calculate real bodies
-                real_body_4 = abs(valid_close[i - 4] - valid_open[i - 4])
-                real_body_3 = abs(valid_close[i - 3] - valid_open[i - 3])
-                real_body_2 = abs(valid_close[i - 2] - valid_open[i - 2])
-                real_body_1 = abs(valid_close[i - 1] - valid_open[i - 1])
+                # Calculate real body sizes
+                real_body_4 = abs(valid_close[i-4] - valid_open[i-4])
+                real_body_3 = abs(valid_close[i-3] - valid_open[i-3])
+                real_body_2 = abs(valid_close[i-2] - valid_open[i-2])
+                real_body_1 = abs(valid_close[i-1] - valid_open[i-1])
                 real_body_0 = abs(valid_close[i] - valid_open[i])
             
+                # Calculate candle averages
+                avg_body_long_4 = body_period_total[4] / body_long_period if body_long_period > 0 else 0
+                avg_body_short_3 = body_period_total[3] / body_short_period if body_short_period > 0 else 0
+                avg_body_short_2 = body_period_total[2] / body_short_period if body_short_period > 0 else 0
+                avg_body_short_1 = body_period_total[1] / body_short_period if body_short_period > 0 else 0
+                avg_body_long_0 = body_period_total[0] / body_long_period if body_long_period > 0 else 0
+            
                 # Determine candle colors (1 for bullish, -1 for bearish)
-                color_4 = 1 if valid_close[i - 4] > valid_open[i - 4] else -1
-                color_3 = 1 if valid_close[i - 3] > valid_open[i - 3] else -1
-                color_2 = 1 if valid_close[i - 2] > valid_open[i - 2] else -1
-                color_1 = 1 if valid_close[i - 1] > valid_open[i - 1] else -1
+                color_4 = 1 if valid_close[i-4] > valid_open[i-4] else -1
+                color_3 = 1 if valid_close[i-3] > valid_open[i-3] else -1
+                color_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
+                color_1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
                 color_0 = 1 if valid_close[i] > valid_open[i] else -1
             
-                # Check pattern conditions
-                if (real_body_4 > body_long_avg_4 and
-                    real_body_3 < body_short_avg_3 and
-                    real_body_2 < body_short_avg_2 and
-                    real_body_1 < body_short_avg_1 and
-                    real_body_0 > body_long_avg_0 and
+                # Check pattern conditions as per C code
+                if (real_body_4 > avg_body_long_4 and
+                    real_body_3 < avg_body_short_3 and
+                    real_body_2 < avg_body_short_2 and
+                    real_body_1 < avg_body_short_1 and
+                    real_body_0 > avg_body_long_0 and
                     color_4 == -color_3 and
                     color_3 == color_2 and
                     color_2 == color_1 and
                     color_1 == -color_0 and
-                    min(valid_open[i - 3], valid_close[i - 3]) < valid_high[i - 4] and
-                    max(valid_open[i - 3], valid_close[i - 3]) > valid_low[i - 4] and
-                    min(valid_open[i - 2], valid_close[i - 2]) < valid_high[i - 4] and
-                    max(valid_open[i - 2], valid_close[i - 2]) > valid_low[i - 4] and
-                    min(valid_open[i - 1], valid_close[i - 1]) < valid_high[i - 4] and
-                    max(valid_open[i - 1], valid_close[i - 1]) > valid_low[i - 4] and
-                    valid_close[i - 2] * color_4 < valid_close[i - 3] * color_4 and
-                    valid_close[i - 1] * color_4 < valid_close[i - 2] * color_4 and
-                    valid_open[i] * color_4 > valid_close[i - 1] * color_4 and
-                    valid_close[i] * color_4 > valid_close[i - 4] * color_4):
-                    valid_result[i] = 100 * color_4
+                    min(valid_open[i-3], valid_close[i-3]) < valid_high[i-4] and
+                    max(valid_open[i-3], valid_close[i-3]) > valid_low[i-4] and
+                    min(valid_open[i-2], valid_close[i-2]) < valid_high[i-4] and
+                    max(valid_open[i-2], valid_close[i-2]) > valid_low[i-4] and
+                    min(valid_open[i-1], valid_close[i-1]) < valid_high[i-4] and
+                    max(valid_open[i-1], valid_close[i-1]) > valid_low[i-4] and
+                    valid_close[i-2] * color_4 < valid_close[i-3] * color_4 and
+                    valid_close[i-1] * color_4 < valid_close[i-2] * color_4 and
+                    valid_open[i] * color_4 > valid_close[i-1] * color_4 and
+                    valid_close[i] * color_4 > valid_close[i-4] * color_4):
+                    result[valid_indices[i], sec] = 100 * color_4
                 else:
-                    valid_result[i] = 0
-                
-                # Update body period totals for next iteration
-                if i - 4 >= 0 and body_long_trailing_idx - 4 >= 0:
-                    body_period_total[4] += abs(valid_close[i - 4] - valid_open[i - 4]) - abs(valid_close[body_long_trailing_idx - 4] - valid_open[body_long_trailing_idx - 4])
-                for tot_idx in range(3, 0, -1):
-                    if i - tot_idx >= 0 and body_short_trailing_idx - tot_idx >= 0:
-                        body_period_total[tot_idx] += abs(valid_close[i - tot_idx] - valid_open[i - tot_idx]) - abs(valid_close[body_short_trailing_idx - tot_idx] - valid_open[body_short_trailing_idx - tot_idx])
-                if body_long_trailing_idx >= 0:
-                    body_period_total[0] += abs(valid_close[i] - valid_open[i]) - abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
-                
+                    result[valid_indices[i], sec] = 0
+            
+                # Update BodyPeriodTotal for next iteration
+                body_period_total[4] += abs(valid_close[i-4] - valid_open[i-4]) - abs(valid_close[body_long_trailing_idx-4] - valid_open[body_long_trailing_idx-4])
+                body_period_total[3] += abs(valid_close[i-3] - valid_open[i-3]) - abs(valid_close[body_short_trailing_idx-3] - valid_open[body_short_trailing_idx-3])
+                body_period_total[2] += abs(valid_close[i-2] - valid_open[i-2]) - abs(valid_close[body_short_trailing_idx-2] - valid_open[body_short_trailing_idx-2])
+                body_period_total[1] += abs(valid_close[i-1] - valid_open[i-1]) - abs(valid_close[body_short_trailing_idx-1] - valid_open[body_short_trailing_idx-1])
+                body_period_total[0] += abs(valid_close[i] - valid_open[i]) - abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
+            
                 i += 1
                 body_short_trailing_idx += 1
                 body_long_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
     
         return result
+
 
 
     @staticmethod
@@ -6145,70 +4524,66 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize totals for rolling averages
+            # Initialize totals for averaging
             ShadowVeryShortPeriodTotal = 0.0
             BodyLongPeriodTotal = 0.0
             EqualPeriodTotal = 0.0
         
             # Calculate initial totals for the lookback period
             for i in range(lookbackTotal):
-                if i < ShadowVeryShortPeriod:
+                if i < len(valid_high):
                     # ShadowVeryShort range (high - low for simplicity as in TA-Lib)
                     ShadowVeryShortPeriodTotal += valid_high[i] - valid_low[i]
-                if i < BodyLongPeriod:
-                    # BodyLong range (absolute difference between open and close)
+                    # BodyLong range (absolute body size)
                     BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
-                if i < EqualPeriod and i > 0:
-                    # Equal range (absolute difference between open and close of previous candle)
-                    EqualPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                    # Equal range (for open price comparison, using body size of previous candle)
+                    if i > 0:
+                        EqualPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
         
             # Start processing from lookbackTotal
             for i in range(lookbackTotal, len(valid_high)):
                 # Calculate candle color (1 for bullish, -1 for bearish)
-                color_current = 1 if valid_close[i, sec] > valid_open[i, sec] else -1
-                color_prev = 1 if valid_close[i-1, sec] > valid_open[i-1, sec] else -1
+                color_current = 1 if valid_close[i] > valid_open[i] else -1
+                color_prev = 1 if valid_close[i-1] > valid_open[i-1] else -1
             
                 # Calculate averages
-                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
-                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod
                 EqualAverage = EqualPeriodTotal / EqualPeriod if EqualPeriod > 0 else 0.0
             
                 # Calculate real body and shadows
-                real_body = abs(valid_close[i] - valid_open[i])
-                lower_shadow = valid_open[i] - valid_low[i] if color_current == 1 else valid_close[i] - valid_low[i]
-                upper_shadow = valid_high[i] - valid_close[i] if color_current == 1 else valid_high[i] - valid_open[i]
+                real_body_current = abs(valid_close[i] - valid_open[i])
+                lower_shadow_current = valid_open[i] - valid_low[i] if color_current == 1 else valid_close[i] - valid_low[i]
+                upper_shadow_current = valid_high[i] - valid_close[i] if color_current == 1 else valid_high[i] - valid_open[i]
             
-                # Separating Lines pattern conditions
+                # Check Separating Lines pattern conditions
                 if (color_prev == -color_current and  # Opposite colors
-                    valid_open[i] <= valid_open[i-1] + EqualAverage and  # Open within range of previous open
+                    valid_open[i] <= valid_open[i-1] + EqualAverage and  # Open prices are close
                     valid_open[i] >= valid_open[i-1] - EqualAverage and
-                    real_body > BodyLongAverage and  # Current candle has long body
-                    ((color_current == 1 and lower_shadow < ShadowVeryShortAverage) or  # Bullish with short lower shadow
-                     (color_current == -1 and upper_shadow < ShadowVeryShortAverage))):  # Bearish with short upper shadow
+                    real_body_current > BodyLongAverage and  # Current candle has long body
+                    ((color_current == 1 and lower_shadow_current < ShadowVeryShortAverage) or  # Bullish with short lower shadow
+                     (color_current == -1 and upper_shadow_current < ShadowVeryShortAverage))):  # Bearish with short upper shadow
                     result[valid_indices[i], sec] = color_current * 100
                 else:
                     result[valid_indices[i], sec] = 0
                 
-                # Update rolling totals
-                if i + 1 < len(valid_high):
-                    # Add new values
-                    ShadowVeryShortPeriodTotal += (valid_high[i] - valid_low[i])
-                    BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
-                    if i > 0:
-                        EqualPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                # Update totals for next iteration
+                if i < len(valid_high):
+                    new_shadow_very_short = valid_high[i] - valid_low[i]
+                    new_body_long = abs(valid_close[i] - valid_open[i])
+                    new_equal = abs(valid_close[i-1] - valid_open[i-1]) if i > 0 else 0.0
                 
-                    # Subtract trailing values
-                    ShadowVeryShortTrailingIdx = i - ShadowVeryShortPeriod
-                    if ShadowVeryShortTrailingIdx >= 0:
-                        ShadowVeryShortPeriodTotal -= (valid_high[ShadowVeryShortTrailingIdx] - valid_low[ShadowVeryShortTrailingIdx])
+                    old_shadow_very_short_idx = i - ShadowVeryShortPeriod
+                    old_body_long_idx = i - BodyLongPeriod
+                    old_equal_idx = i - EqualPeriod
                 
-                    BodyLongTrailingIdx = i - BodyLongPeriod
-                    if BodyLongTrailingIdx >= 0:
-                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
+                    old_shadow_very_short = valid_high[old_shadow_very_short_idx] - valid_low[old_shadow_very_short_idx] if old_shadow_very_short_idx >= 0 else 0.0
+                    old_body_long = abs(valid_close[old_body_long_idx] - valid_open[old_body_long_idx]) if old_body_long_idx >= 0 else 0.0
+                    old_equal = abs(valid_close[old_equal_idx-1] - valid_open[old_equal_idx-1]) if old_equal_idx > 0 else 0.0
                 
-                    EqualTrailingIdx = i - EqualPeriod
-                    if EqualTrailingIdx > 0:
-                        EqualPeriodTotal -= abs(valid_close[EqualTrailingIdx-1] - valid_open[EqualTrailingIdx-1])
+                    ShadowVeryShortPeriodTotal += new_shadow_very_short - old_shadow_very_short
+                    BodyLongPeriodTotal += new_body_long - old_body_long
+                    EqualPeriodTotal += new_equal - old_equal
     
         return result
 
@@ -6216,12 +4591,15 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLSHOOTINGSTAR(high, open, low, close, vol, oi, body_short_period=10, shadow_long_period=10, shadow_very_short_period=10):
+    def CDLSHOOTINGSTAR(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (maximum of the averaging periods)
-        lookback_total = max(body_short_period, max(shadow_long_period, shadow_very_short_period))
+        # Define lookback periods for different candle components as per TA-Lib defaults
+        BodyShortPeriod = 10
+        ShadowLongPeriod = 10
+        ShadowVeryShortPeriod = 10
+        lookbackTotal = max(BodyShortPeriod, ShadowLongPeriod, ShadowVeryShortPeriod)
     
         for sec in range(secs):
             # Create valid data mask
@@ -6234,7 +4612,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) <= lookbackTotal:
                 continue
             
             # Extract valid data
@@ -6243,71 +4621,90 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize period totals for averages
-            body_period_total = 0.0
-            shadow_long_period_total = 0.0
-            shadow_very_short_period_total = 0.0
+            # Initialize period totals for averaging
+            BodyPeriodTotal = 0.0
+            ShadowLongPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
         
-            # Trailing indices for rolling window
-            body_trailing_idx = 0
-            shadow_long_trailing_idx = 0
-            shadow_very_short_trailing_idx = 0
+            # Calculate initial totals for the lookback period
+            BodyTrailingIdx = 0
+            ShadowLongTrailingIdx = 0
+            ShadowVeryShortTrailingIdx = 0
         
-            # Pre-calculate initial totals for the lookback period
-            for i in range(lookback_total):
+            for i in range(lookbackTotal):
                 # BodyShort range (real body)
-                body_range = abs(valid_close[i] - valid_open[i])
-                body_period_total += body_range
-            
+                BodyPeriodTotal += abs(valid_close[i] - valid_open[i])
                 # ShadowLong range (upper shadow)
-                shadow_long_range = valid_high[i] - max(valid_open[i], valid_close[i])
-                shadow_long_period_total += shadow_long_range
-            
+                if valid_close[i] >= valid_open[i]:
+                    ShadowLongPeriodTotal += valid_high[i] - valid_close[i]
+                else:
+                    ShadowLongPeriodTotal += valid_high[i] - valid_open[i]
                 # ShadowVeryShort range (lower shadow)
-                shadow_very_short_range = min(valid_open[i], valid_close[i]) - valid_low[i]
-                shadow_very_short_period_total += shadow_very_short_range
+                if valid_close[i] >= valid_open[i]:
+                    ShadowVeryShortPeriodTotal += valid_open[i] - valid_low[i]
+                else:
+                    ShadowVeryShortPeriodTotal += valid_close[i] - valid_low[i]
         
-            # Main calculation loop starting from lookback_total
-            for i in range(lookback_total, len(valid_high)):
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, len(valid_high)):
                 # Calculate real body
                 real_body = abs(valid_close[i] - valid_open[i])
-            
                 # Calculate upper shadow
-                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-            
+                if valid_close[i] >= valid_open[i]:
+                    upper_shadow = valid_high[i] - valid_close[i]
+                else:
+                    upper_shadow = valid_high[i] - valid_open[i]
                 # Calculate lower shadow
-                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
-            
+                if valid_close[i] >= valid_open[i]:
+                    lower_shadow = valid_open[i] - valid_low[i]
+                else:
+                    lower_shadow = valid_close[i] - valid_low[i]
                 # Calculate averages
-                body_avg = body_period_total / body_short_period if body_short_period > 0 else 0.0
-                shadow_long_avg = shadow_long_period_total / shadow_long_period if shadow_long_period > 0 else 0.0
-                shadow_very_short_avg = shadow_very_short_period_total / shadow_very_short_period if shadow_very_short_period > 0 else 0.0
+                body_avg = BodyPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                shadow_long_avg = ShadowLongPeriodTotal / ShadowLongPeriod if ShadowLongPeriod > 0 else 0.0
+                shadow_short_avg = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
             
                 # Check for Shooting Star pattern
-                if (real_body < body_avg and
-                    upper_shadow > shadow_long_avg and
-                    lower_shadow < shadow_very_short_avg and
-                    i > 0 and
-                    min(valid_open[i], valid_close[i]) > max(valid_open[i-1], valid_close[i-1])):
-                    result[valid_indices[i], sec] = -100
+                if i > 0:
+                    # Real body gap up condition
+                    real_body_gap_up = min(valid_open[i], valid_close[i]) > max(valid_open[i-1], valid_close[i-1])
+                    if (real_body < body_avg and 
+                        upper_shadow > shadow_long_avg and 
+                        lower_shadow < shadow_short_avg and 
+                        real_body_gap_up):
+                        result[valid_indices[i], sec] = -100.0
+                    else:
+                        result[valid_indices[i], sec] = 0.0
                 else:
-                    result[valid_indices[i], sec] = 0
+                    result[valid_indices[i], sec] = 0.0
+                
+                # Update period totals by adding current and subtracting trailing
+                # BodyShort update
+                BodyPeriodTotal += abs(valid_close[i] - valid_open[i])
+                BodyPeriodTotal -= abs(valid_close[BodyTrailingIdx] - valid_open[BodyTrailingIdx])
+                BodyTrailingIdx += 1
             
-                # Update rolling totals
-                if body_trailing_idx < len(valid_high):
-                    body_range_old = abs(valid_close[body_trailing_idx] - valid_open[body_trailing_idx])
-                    body_period_total += real_body - body_range_old
-                    body_trailing_idx += 1 if body_trailing_idx + body_short_period <= i else 0
-                
-                if shadow_long_trailing_idx < len(valid_high):
-                    shadow_long_range_old = valid_high[shadow_long_trailing_idx] - max(valid_open[shadow_long_trailing_idx], valid_close[shadow_long_trailing_idx])
-                    shadow_long_period_total += upper_shadow - shadow_long_range_old
-                    shadow_long_trailing_idx += 1 if shadow_long_trailing_idx + shadow_long_period <= i else 0
-                
-                if shadow_very_short_trailing_idx < len(valid_high):
-                    shadow_very_short_range_old = min(valid_open[shadow_very_short_trailing_idx], valid_close[shadow_very_short_trailing_idx]) - valid_low[shadow_very_short_trailing_idx]
-                    shadow_very_short_period_total += lower_shadow - shadow_very_short_range_old
-                    shadow_very_short_trailing_idx += 1 if shadow_very_short_trailing_idx + shadow_very_short_period <= i else 0
+                # ShadowLong update
+                if valid_close[i] >= valid_open[i]:
+                    ShadowLongPeriodTotal += valid_high[i] - valid_close[i]
+                else:
+                    ShadowLongPeriodTotal += valid_high[i] - valid_open[i]
+                if valid_close[ShadowLongTrailingIdx] >= valid_open[ShadowLongTrailingIdx]:
+                    ShadowLongPeriodTotal -= valid_high[ShadowLongTrailingIdx] - valid_close[ShadowLongTrailingIdx]
+                else:
+                    ShadowLongPeriodTotal -= valid_high[ShadowLongTrailingIdx] - valid_open[ShadowLongTrailingIdx]
+                ShadowLongTrailingIdx += 1
+            
+                # ShadowVeryShort update
+                if valid_close[i] >= valid_open[i]:
+                    ShadowVeryShortPeriodTotal += valid_open[i] - valid_low[i]
+                else:
+                    ShadowVeryShortPeriodTotal += valid_close[i] - valid_low[i]
+                if valid_close[ShadowVeryShortTrailingIdx] >= valid_open[ShadowVeryShortTrailingIdx]:
+                    ShadowVeryShortPeriodTotal -= valid_open[ShadowVeryShortTrailingIdx] - valid_low[ShadowVeryShortTrailingIdx]
+                else:
+                    ShadowVeryShortPeriodTotal -= valid_close[ShadowVeryShortTrailingIdx] - valid_low[ShadowVeryShortTrailingIdx]
+                ShadowVeryShortTrailingIdx += 1
     
         return result
 
@@ -6315,12 +4712,12 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLSHORTLINE(high, open, low, close, vol, oi, body_period=5, shadow_period=5):
+    def CDLSPINNINGTOP(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (maximum of body and shadow periods)
-        lookback_total = max(body_period, shadow_period)
+        # BodyShort average period as defined in TA-Lib, typically 5
+        BodyShortPeriod = 5
     
         for sec in range(secs):
             # Create valid data mask
@@ -6333,7 +4730,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < lookback_total:
+            if len(valid_indices) < BodyShortPeriod:
                 continue
             
             # Extract valid data
@@ -6342,161 +4739,42 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize period totals for body and shadow
-            body_period_total = 0.0
-            shadow_period_total = 0.0
-        
-            # Calculate initial totals for body and shadow ranges
-            body_trailing_idx = 0
-            shadow_trailing_idx = 0
-        
-            for i in range(lookback_total):
-                if i < body_period:
-                    body_range = abs(valid_close[i] - valid_open[i])
-                    if body_range == body_range:  # Check for NaN
-                        body_period_total += body_range
-                    
-                if i < shadow_period:
-                    upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-                    lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
-                    if upper_shadow == upper_shadow and lower_shadow == lower_shadow:
-                        shadow_period_total += upper_shadow + lower_shadow
-        
-            # Main calculation loop
-            out_idx = lookback_total - 1
-            for i in range(lookback_total - 1, len(valid_high)):
-                # Calculate real body and shadows for current candle
-                real_body = abs(valid_close[i] - valid_open[i])
-                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
-            
-                # Calculate averages
-                body_avg = body_period_total / body_period if body_period > 0 else 0.0
-                shadow_avg = shadow_period_total / shadow_period if shadow_period > 0 else 0.0
-            
-                # Check if current candle is a short line
-                if (real_body < body_avg and 
-                    upper_shadow < shadow_avg and 
-                    lower_shadow < shadow_avg):
-                    candle_color = 1 if valid_close[i] > valid_open[i] else -1
-                    result[valid_indices[i], sec] = candle_color * 100
-                else:
-                    result[valid_indices[i], sec] = 0
-                
-                # Update trailing totals for next iteration
-                if i + 1 < len(valid_high):
-                    # Remove oldest value and add new value for body
-                    if body_trailing_idx < len(valid_high):
-                        old_body_range = abs(valid_close[body_trailing_idx] - valid_open[body_trailing_idx])
-                        if old_body_range == old_body_range:
-                            body_period_total -= old_body_range
-                        body_trailing_idx += 1
-                    
-                    new_body_range = abs(valid_close[i] - valid_open[i])
-                    if new_body_range == new_body_range:
-                        body_period_total += new_body_range
-                    
-                    # Remove oldest value and add new value for shadow
-                    if shadow_trailing_idx < len(valid_high):
-                        old_upper_shadow = valid_high[shadow_trailing_idx] - max(valid_open[shadow_trailing_idx], valid_close[shadow_trailing_idx])
-                        old_lower_shadow = min(valid_open[shadow_trailing_idx], valid_close[shadow_trailing_idx]) - valid_low[shadow_trailing_idx]
-                        if old_upper_shadow == old_upper_shadow and old_lower_shadow == old_lower_shadow:
-                            shadow_period_total -= (old_upper_shadow + old_lower_shadow)
-                        shadow_trailing_idx += 1
-                    
-                    new_upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
-                    new_lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
-                    if new_upper_shadow == new_upper_shadow and new_lower_shadow == new_lower_shadow:
-                        shadow_period_total += (new_upper_shadow + new_lower_shadow)
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLSPINNINGTOP(high, open, low, close, vol, oi, body_period=10):
-        """
-        CDLSPINNINGTOP - Candlestick Spinning Top Pattern
-        Identifies Spinning Top pattern where the body is small compared to the average body
-        and both upper and lower shadows are larger than the body.
-        """
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < body_period:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize output array for valid data
-            valid_result = np.zeros(len(valid_high))
-        
-            # Calculate lookback total (start index for output)
-            lookback_total = body_period
-        
-            # Initialize body period total for trailing average
-            body_period_total = 0.0
-            body_trailing_idx = 0
-        
-            # Pre-calculate initial body period total
-            for i in range(lookback_total):
+            # Initialize BodyPeriodTotal for the first window
+            BodyPeriodTotal = 0.0
+            for i in range(BodyShortPeriod):
                 if i < len(valid_high):
-                    body_range = abs(valid_close[i] - valid_open[i])
-                    body_period_total += body_range
+                    BodyPeriodTotal += abs(valid_close[i] - valid_open[i])
         
-            # Main calculation loop
-            out_idx = 0
-            for i in range(lookback_total, len(valid_high)):
+            # Start processing from lookback period
+            start_idx = BodyShortPeriod
+            for i in range(start_idx, len(valid_high)):
                 # Calculate real body
                 real_body = abs(valid_close[i] - valid_open[i])
             
-                # Calculate average body over period
-                body_average = body_period_total / body_period
+                # Calculate average body size over the period
+                BodyAverage = BodyPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
             
                 # Calculate upper and lower shadows
                 upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
                 lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
             
-                # Check Spinning Top conditions:
-                # 1. Real body is smaller than average body
+                # Spinning Top condition:
+                # 1. Real body is small (less than average body size)
                 # 2. Upper shadow is larger than real body
                 # 3. Lower shadow is larger than real body
-                if (real_body < body_average and 
+                if (real_body < BodyAverage and 
                     upper_shadow > real_body and 
                     lower_shadow > real_body):
-                    # Output 100 for white candle (bullish), -100 for black candle (bearish)
+                    # Determine candle color (positive for bullish, negative for bearish)
                     candle_color = 1 if valid_close[i] > valid_open[i] else -1
-                    valid_result[i] = candle_color * 100
+                    result[valid_indices[i], sec] = candle_color * 100
                 else:
-                    valid_result[i] = 0
+                    result[valid_indices[i], sec] = 0
                 
-                # Update body period total for next iteration
-                if body_trailing_idx < len(valid_high):
-                    body_period_total += abs(valid_close[i] - valid_open[i])
-                    body_period_total -= abs(valid_close[body_trailing_idx] - valid_open[body_trailing_idx])
-                    body_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
+                # Update BodyPeriodTotal for next iteration
+                if i + 1 < len(valid_high):
+                    BodyPeriodTotal += abs(valid_close[i] - valid_open[i])
+                    BodyPeriodTotal -= abs(valid_close[i - BodyShortPeriod] - valid_open[i - BodyShortPeriod])
     
         return result
 
@@ -6508,12 +4786,12 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Define lookback periods as in TA-Lib
+        # Define lookback periods as per TA-Lib defaults
         BodyLongPeriod = 10
-        BodyShortPeriod = 10
+        BodyShortPeriod = 5
         ShadowVeryShortPeriod = 7
         NearPeriod = 7
-        lookbackTotal = max(BodyLongPeriod, max(BodyShortPeriod, max(ShadowVeryShortPeriod, NearPeriod))) + 2
+        lookbackTotal = max(BodyLongPeriod, BodyShortPeriod, ShadowVeryShortPeriod, NearPeriod) + 2
     
         for sec in range(secs):
             # Create valid data mask
@@ -6535,63 +4813,73 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize period totals for averages
+            # Initialize trailing totals for averaging
             BodyLongPeriodTotal = np.zeros(3)
             NearPeriodTotal = np.zeros(3)
             BodyShortPeriodTotal = 0.0
             ShadowVeryShortPeriodTotal = 0.0
         
             # Initialize trailing indices
-            BodyLongTrailingIdx = lookbackTotal - BodyLongPeriod
-            BodyShortTrailingIdx = lookbackTotal - BodyShortPeriod
-            ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
-            NearTrailingIdx = lookbackTotal - NearPeriod
+            start_idx = lookbackTotal
+            BodyLongTrailingIdx = start_idx - BodyLongPeriod
+            BodyShortTrailingIdx = start_idx - BodyShortPeriod
+            ShadowVeryShortTrailingIdx = start_idx - ShadowVeryShortPeriod
+            NearTrailingIdx = start_idx - NearPeriod
         
-            # Pre-calculate initial totals for averages
-            for i in range(BodyLongTrailingIdx, lookbackTotal):
-                BodyLongPeriodTotal[2] += max(valid_close[i-2] - valid_open[i-2], 0.0) if valid_close[i-2] > valid_open[i-2] else max(valid_open[i-2] - valid_close[i-2], 0.0)
-                BodyLongPeriodTotal[1] += max(valid_close[i-1] - valid_open[i-1], 0.0) if valid_close[i-1] > valid_open[i-1] else max(valid_open[i-1] - valid_close[i-1], 0.0)
+            # Warm-up period: Calculate initial totals for averages
+            for i in range(BodyLongTrailingIdx, start_idx):
+                BodyLongPeriodTotal[2] += abs(valid_close[i-2] - valid_open[i-2]) if i >= 2 else 0.0
+                BodyLongPeriodTotal[1] += abs(valid_close[i-1] - valid_open[i-1]) if i >= 1 else 0.0
         
-            for i in range(BodyShortTrailingIdx, lookbackTotal):
-                BodyShortPeriodTotal += max(valid_close[i] - valid_open[i], 0.0) if valid_close[i] > valid_open[i] else max(valid_open[i] - valid_close[i], 0.0)
+            for i in range(BodyShortTrailingIdx, start_idx):
+                BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
         
-            for i in range(ShadowVeryShortTrailingIdx, lookbackTotal):
-                ShadowVeryShortPeriodTotal += valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_high[i-1] - valid_open[i-1]
+            for i in range(ShadowVeryShortTrailingIdx, start_idx):
+                ShadowVeryShortPeriodTotal += valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_open[i-1] - valid_close[i-1] if i >= 1 else 0.0
         
-            for i in range(NearTrailingIdx, lookbackTotal):
-                NearPeriodTotal[2] += valid_close[i-2] - valid_open[i-2] if valid_close[i-2] > valid_open[i-2] else valid_open[i-2] - valid_close[i-2]
-                NearPeriodTotal[1] += valid_close[i-1] - valid_open[i-1] if valid_close[i-1] > valid_open[i-1] else valid_open[i-1] - valid_close[i-1]
+            for i in range(NearTrailingIdx, start_idx):
+                NearPeriodTotal[2] += abs(valid_close[i-2] - valid_open[i-2]) if i >= 2 else 0.0
+                NearPeriodTotal[1] += abs(valid_close[i-1] - valid_open[i-1]) if i >= 1 else 0.0
         
             # Main calculation loop
-            for i in range(lookbackTotal, len(valid_high)):
-                # Check for Stalled Pattern conditions
-                if (valid_close[i-2] > valid_open[i-2] and  # First candle is white
-                    valid_close[i-1] > valid_open[i-1] and  # Second candle is white
-                    valid_close[i] > valid_open[i] and      # Third candle is white
+            i = start_idx
+            while i < len(valid_high):
+                # Stalled Pattern conditions
+                if (valid_close[i-2] > valid_open[i-2] and  # White candle 2 days ago
+                    valid_close[i-1] > valid_open[i-1] and  # White candle 1 day ago
+                    valid_close[i] > valid_open[i] and      # White candle today
                     valid_close[i] > valid_close[i-1] and valid_close[i-1] > valid_close[i-2] and  # Upward trend
-                    (valid_close[i-2] - valid_open[i-2] if valid_close[i-2] > valid_open[i-2] else valid_open[i-2] - valid_close[i-2]) > BodyLongPeriodTotal[2] / BodyLongPeriod and  # Long body for first
-                    (valid_close[i-1] - valid_open[i-1] if valid_close[i-1] > valid_open[i-1] else valid_open[i-1] - valid_close[i-1]) > BodyLongPeriodTotal[1] / BodyLongPeriod and  # Long body for second
-                    (valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_high[i-1] - valid_open[i-1]) < ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod and  # Short upper shadow for second
+                    abs(valid_close[i-2] - valid_open[i-2]) > BodyLongPeriodTotal[2] / BodyLongPeriod if BodyLongPeriod > 0 else 0.0 and  # Long body 2 days ago
+                    abs(valid_close[i-1] - valid_open[i-1]) > BodyLongPeriodTotal[1] / BodyLongPeriod if BodyLongPeriod > 0 else 0.0 and  # Long body 1 day ago
+                    (valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_open[i-1] - valid_close[i-1]) < ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0 and  # Short upper shadow yesterday
                     valid_open[i-1] > valid_open[i-2] and
-                    valid_open[i-1] <= valid_close[i-2] + (NearPeriodTotal[2] / NearPeriod) and  # Second opens near first's close
-                    (valid_close[i] - valid_open[i] if valid_close[i] > valid_open[i] else valid_open[i] - valid_close[i]) < BodyShortPeriodTotal / BodyShortPeriod and  # Short body for third
-                    valid_open[i] >= valid_close[i-1] - (valid_close[i] - valid_open[i] if valid_close[i] > valid_open[i] else valid_open[i] - valid_close[i]) - (NearPeriodTotal[1] / NearPeriod)):  # Third opens near second's close
+                    valid_open[i-1] <= valid_close[i-2] + (NearPeriodTotal[2] / NearPeriod if NearPeriod > 0 else 0.0) and
+                    abs(valid_close[i] - valid_open[i]) < BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0 and  # Short body today
+                    valid_open[i] >= valid_close[i-1] - abs(valid_close[i] - valid_open[i]) - (NearPeriodTotal[1] / NearPeriod if NearPeriod > 0 else 0.0)):
                     result[valid_indices[i], sec] = -100
                 else:
                     result[valid_indices[i], sec] = 0
-                
-                # Update period totals
+            
+                # Update trailing totals
                 for totIdx in range(2, 0, -1):
-                    BodyLongPeriodTotal[totIdx] += (max(valid_close[i-totIdx] - valid_open[i-totIdx], 0.0) if valid_close[i-totIdx] > valid_open[i-totIdx] else max(valid_open[i-totIdx] - valid_close[i-totIdx], 0.0)) - \
-                                                   (max(valid_close[BodyLongTrailingIdx-totIdx] - valid_open[BodyLongTrailingIdx-totIdx], 0.0) if valid_close[BodyLongTrailingIdx-totIdx] > valid_open[BodyLongTrailingIdx-totIdx] else max(valid_open[BodyLongTrailingIdx-totIdx] - valid_close[BodyLongTrailingIdx-totIdx], 0.0))
-                    NearPeriodTotal[totIdx] += (valid_close[i-totIdx] - valid_open[i-totIdx] if valid_close[i-totIdx] > valid_open[i-totIdx] else valid_open[i-totIdx] - valid_close[i-totIdx]) - \
-                                               (valid_close[NearTrailingIdx-totIdx] - valid_open[NearTrailingIdx-totIdx] if valid_close[NearTrailingIdx-totIdx] > valid_open[NearTrailingIdx-totIdx] else valid_open[NearTrailingIdx-totIdx] - valid_close[NearTrailingIdx-totIdx])
+                    if i - totIdx >= 0 and BodyLongTrailingIdx - totIdx >= 0:
+                        BodyLongPeriodTotal[totIdx] += abs(valid_close[i-totIdx] - valid_open[i-totIdx])
+                        BodyLongPeriodTotal[totIdx] -= abs(valid_close[BodyLongTrailingIdx-totIdx] - valid_open[BodyLongTrailingIdx-totIdx])
+                    if i - totIdx >= 0 and NearTrailingIdx - totIdx >= 0:
+                        NearPeriodTotal[totIdx] += abs(valid_close[i-totIdx] - valid_open[i-totIdx])
+                        NearPeriodTotal[totIdx] -= abs(valid_close[NearTrailingIdx-totIdx] - valid_open[NearTrailingIdx-totIdx])
             
-                BodyShortPeriodTotal += (max(valid_close[i] - valid_open[i], 0.0) if valid_close[i] > valid_open[i] else max(valid_open[i] - valid_close[i], 0.0)) - \
-                                        (max(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx], 0.0) if valid_close[BodyShortTrailingIdx] > valid_open[BodyShortTrailingIdx] else max(valid_open[BodyShortTrailingIdx] - valid_close[BodyShortTrailingIdx], 0.0))
-                ShadowVeryShortPeriodTotal += (valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_high[i-1] - valid_open[i-1]) - \
-                                              (valid_high[ShadowVeryShortTrailingIdx-1] - valid_close[ShadowVeryShortTrailingIdx-1] if valid_close[ShadowVeryShortTrailingIdx-1] > valid_open[ShadowVeryShortTrailingIdx-1] else valid_high[ShadowVeryShortTrailingIdx-1] - valid_open[ShadowVeryShortTrailingIdx-1])
+                if i >= 0 and BodyShortTrailingIdx >= 0:
+                    BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
+                    BodyShortPeriodTotal -= abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
             
+                if i - 1 >= 0 and ShadowVeryShortTrailingIdx - 1 >= 0:
+                    current_shadow = valid_high[i-1] - valid_close[i-1] if valid_close[i-1] > valid_open[i-1] else valid_open[i-1] - valid_close[i-1]
+                    trailing_shadow = valid_high[ShadowVeryShortTrailingIdx-1] - valid_close[ShadowVeryShortTrailingIdx-1] if valid_close[ShadowVeryShortTrailingIdx-1] > valid_open[ShadowVeryShortTrailingIdx-1] else valid_open[ShadowVeryShortTrailingIdx-1] - valid_close[ShadowVeryShortTrailingIdx-1]
+                    ShadowVeryShortPeriodTotal += current_shadow
+                    ShadowVeryShortPeriodTotal -= trailing_shadow
+            
+                i += 1
                 BodyLongTrailingIdx += 1
                 BodyShortTrailingIdx += 1
                 ShadowVeryShortTrailingIdx += 1
@@ -6603,19 +4891,12 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLSTICKSANDWICH(high, open, low, close, vol, oi, equal_period=3):
-        """
-        CDLSTICKSANDWICH - Candlestick Stick Sandwich Pattern
-    
-        Identifies a specific candlestick pattern where a bullish candle is sandwiched
-        between two bearish candles, with specific price relationships.
-        """
+    def CDLSTICKSANDWICH(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (needs 2 previous candles)
-        lookback_total = 2
-    
+        lookback_total = 2  # As per TA-Lib, lookback for CDLSTICKSANDWICH is 2
+        equal_period = 3    # Default period for Equal average as per TA-Lib
+
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -6630,422 +4911,59 @@ class BaseLogicFactors:
             if len(valid_indices) <= lookback_total:
                 continue
             
-            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
             # Initialize output array for valid data
-            valid_result = np.zeros(len(valid_high))
-        
-            # Calculate initial EqualPeriodTotal for the lookback period
-            equal_trailing_idx = 0
-            equal_period_total = 0.0
-            start_idx = lookback_total
-        
-            # Pre-calculate initial total for Equal range
-            for i in range(equal_trailing_idx, start_idx):
-                if i >= 0 and i - 2 >= 0:
-                    equal_range = valid_close[i-2] - valid_open[i-2] if valid_close[i-2] >= valid_open[i-2] else valid_open[i-2] - valid_close[i-2]
-                    equal_period_total += equal_range
-        
-            # Main calculation loop
-            for i in range(start_idx, len(valid_high)):
-                # Check candle colors: bearish-bullish-bearish pattern
-                color_2 = -1 if valid_close[i-2] < valid_open[i-2] else 1
-                color_1 = -1 if valid_close[i-1] < valid_open[i-1] else 1
-                color_0 = -1 if valid_close[i] < valid_open[i] else 1
-            
-                # Calculate Equal average for comparison
-                equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
-            
-                # Check pattern conditions
-                if (color_2 == -1 and 
-                    color_1 == 1 and 
-                    color_0 == -1 and 
-                    valid_low[i-1] > valid_close[i-2] and 
-                    valid_close[i] <= valid_close[i-2] + equal_avg and 
-                    valid_close[i] >= valid_close[i-2] - equal_avg):
-                    valid_result[i] = 100
-                else:
-                    valid_result[i] = 0
-                
-                # Update EqualPeriodTotal for next iteration
-                if i - 2 >= 0:
-                    old_range = valid_close[equal_trailing_idx-2] - valid_open[equal_trailing_idx-2] if valid_close[equal_trailing_idx-2] >= valid_open[equal_trailing_idx-2] else valid_open[equal_trailing_idx-2] - valid_close[equal_trailing_idx-2]
-                    new_range = valid_close[i-2] - valid_open[i-2] if valid_close[i-2] >= valid_open[i-2] else valid_open[i-2] - valid_close[i-2]
-                    equal_period_total += new_range - old_range
-                equal_trailing_idx += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLTAKURI(high, open, low, close, vol, oi):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Define candle average periods as per TA-Lib defaults
-        BodyDojiPeriod = 3
-        ShadowVeryShortPeriod = 3
-        ShadowVeryLongPeriod = 3
-    
-        # Lookback period as per TA-Lib
-        lookbackTotal = max(BodyDojiPeriod, max(ShadowVeryShortPeriod, ShadowVeryLongPeriod))
-    
-        for sec in range(secs):
-            # Initialize period totals for averages
-            BodyDojiPeriodTotal = 0.0
-            ShadowVeryShortPeriodTotal = 0.0
-            ShadowVeryLongPeriodTotal = 0.0
-        
-            # Trailing indices for sliding window
-            BodyDojiTrailingIdx = lookbackTotal - BodyDojiPeriod
-            ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
-            ShadowVeryLongTrailingIdx = lookbackTotal - ShadowVeryLongPeriod
-        
-            # Pre-calculate totals for the lookback period
-            for i in range(BodyDojiTrailingIdx, lookbackTotal):
-                if i >= 0 and i < tdts:
-                    if open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
-                        BodyDojiPeriodTotal += abs(close[i, sec] - open[i, sec])
-        
-            for i in range(ShadowVeryShortTrailingIdx, lookbackTotal):
-                if i >= 0 and i < tdts:
-                    if high[i, sec] == high[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
-                        upper_shadow = high[i, sec] - max(open[i, sec], close[i, sec])
-                        ShadowVeryShortPeriodTotal += upper_shadow
-        
-            for i in range(ShadowVeryLongTrailingIdx, lookbackTotal):
-                if i >= 0 and i < tdts:
-                    if low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
-                        lower_shadow = min(open[i, sec], close[i, sec]) - low[i, sec]
-                        ShadowVeryLongPeriodTotal += lower_shadow
-        
-            # Main calculation loop starting from lookbackTotal
-            for i in range(lookbackTotal, tdts):
-                # Check for valid data
-                if (high[i, sec] != high[i, sec] or low[i, sec] != low[i, sec] or 
-                    open[i, sec] != open[i, sec] or close[i, sec] != close[i, sec]):
-                    result[i, sec] = 0
-                    continue
-            
-                # Calculate real body and shadows for current candle
-                real_body = abs(close[i, sec] - open[i, sec])
-                upper_shadow = high[i, sec] - max(open[i, sec], close[i, sec])
-                lower_shadow = min(open[i, sec], close[i, sec]) - low[i, sec]
-            
-                # Calculate averages
-                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
-                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
-                ShadowVeryLongAverage = ShadowVeryLongPeriodTotal / ShadowVeryLongPeriod if ShadowVeryLongPeriod > 0 else 0.0
-            
-                # Takuri pattern conditions
-                if (real_body <= BodyDojiAverage and
-                    upper_shadow < ShadowVeryShortAverage and
-                    lower_shadow > ShadowVeryLongAverage):
-                    result[i, sec] = 100
-                else:
-                    result[i, sec] = 0
-            
-                # Update period totals for next iteration
-                if i + 1 < tdts:
-                    # Add current values
-                    BodyDojiPeriodTotal += abs(close[i, sec] - open[i, sec])
-                    ShadowVeryShortPeriodTotal += upper_shadow
-                    ShadowVeryLongPeriodTotal += lower_shadow
-                
-                    # Subtract trailing values
-                    if BodyDojiTrailingIdx >= 0 and BodyDojiTrailingIdx < tdts:
-                        if open[BodyDojiTrailingIdx, sec] == open[BodyDojiTrailingIdx, sec] and close[BodyDojiTrailingIdx, sec] == close[BodyDojiTrailingIdx, sec]:
-                            BodyDojiPeriodTotal -= abs(close[BodyDojiTrailingIdx, sec] - open[BodyDojiTrailingIdx, sec])
-                
-                    if ShadowVeryShortTrailingIdx >= 0 and ShadowVeryShortTrailingIdx < tdts:
-                        if high[ShadowVeryShortTrailingIdx, sec] == high[ShadowVeryShortTrailingIdx, sec]:
-                            upper_shadow_trail = high[ShadowVeryShortTrailingIdx, sec] - max(open[ShadowVeryShortTrailingIdx, sec], close[ShadowVeryShortTrailingIdx, sec])
-                            ShadowVeryShortPeriodTotal -= upper_shadow_trail
-                
-                    if ShadowVeryLongTrailingIdx >= 0 and ShadowVeryLongTrailingIdx < tdts:
-                        if low[ShadowVeryLongTrailingIdx, sec] == low[ShadowVeryLongTrailingIdx, sec]:
-                            lower_shadow_trail = min(open[ShadowVeryLongTrailingIdx, sec], close[ShadowVeryLongTrailingIdx, sec]) - low[ShadowVeryLongTrailingIdx, sec]
-                            ShadowVeryLongPeriodTotal -= lower_shadow_trail
-                
-                    # Increment trailing indices
-                    BodyDojiTrailingIdx += 1
-                    ShadowVeryShortTrailingIdx += 1
-                    ShadowVeryLongTrailingIdx += 1
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLTASUKIGAP(high, open, low, close, vol, oi, near_period=3):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < near_period + 2:  # 需要至少near_period + 2个数据点
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # 初始化输出数组
             temp_result = np.zeros(len(valid_high))
         
-            # 计算lookback period
-            lookback_total = near_period + 2
-        
-            # 如果数据不足lookback_total，跳过
-            if len(valid_high) < lookback_total:
-                continue
-            
-            # 初始化NearPeriodTotal
-            near_period_total = 0.0
-            near_trailing_idx = 0
-        
-            # 初始计算NearPeriodTotal
-            for i in range(near_trailing_idx, near_period):
-                near_period_total += valid_high[i] - valid_low[i]
-        
-            # 主计算循环
-            for i in range(near_period, len(valid_high)):
-                # 检查是否满足Tasuki Gap条件
-                # 条件1：向上跳空
-                condition1 = (
-                    valid_open[i-1] > valid_close[i-2] and  # 跳空
-                    (valid_close[i-1] - valid_open[i-1]) > 0 and  # 前一根阳线
-                    (valid_close[i] - valid_open[i]) < 0 and  # 当前阴线
-                    valid_open[i] < valid_close[i-1] and valid_open[i] > valid_open[i-1] and  # 开盘价在实体内
-                    valid_close[i] < valid_open[i-1] and  # 收盘价低于前一根开盘价
-                    valid_close[i] > max(valid_close[i-2], valid_open[i-2]) and  # 收盘价高于前前一根最高价
-                    abs((valid_close[i-1] - valid_open[i-1]) - abs(valid_close[i] - valid_open[i])) < (near_period_total / near_period)  # 实体大小接近
-                )
-            
-                # 条件2：向下跳空
-                condition2 = (
-                    valid_open[i-1] < valid_close[i-2] and  # 跳空
-                    (valid_close[i-1] - valid_open[i-1]) < 0 and  # 前一根阴线
-                    (valid_close[i] - valid_open[i]) > 0 and  # 当前阳线
-                    valid_open[i] < valid_open[i-1] and valid_open[i] > valid_close[i-1] and  # 开盘价在实体内
-                    valid_close[i] > valid_open[i-1] and  # 收盘价高于前一根开盘价
-                    valid_close[i] < min(valid_close[i-2], valid_open[i-2]) and  # 收盘价低于前前一根最低价
-                    abs(abs(valid_close[i-1] - valid_open[i-1]) - (valid_close[i] - valid_open[i])) < (near_period_total / near_period)  # 实体大小接近
-                )
-            
-                if condition1:
-                    temp_result[i] = 100  # 向上跳空形态
-                elif condition2:
-                    temp_result[i] = -100  # 向下跳空形态
-                else:
-                    temp_result[i] = 0
-                
-                # 更新NearPeriodTotal
-                if i < len(valid_high):
-                    near_period_total += (valid_high[i] - valid_low[i]) - (valid_high[near_trailing_idx] - valid_low[near_trailing_idx])
-                    near_trailing_idx += 1
-        
-            # 映射结果回原始数组
-            start_idx = lookback_total - 1
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = temp_result[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLTHRUSTING(high, open, low, close, vol, oi, equal_period=3, body_long_period=5):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (maximum of the two periods)
-        lookback_total = max(equal_period, body_long_period)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize totals for Equal and BodyLong periods
+            # Calculate initial EqualPeriodTotal for the first window
             equal_period_total = 0.0
-            body_long_period_total = 0.0
-        
-            # Calculate initial totals for the lookback period
             equal_trailing_idx = 0
-            body_long_trailing_idx = 0
+            start_idx = lookback_total
         
-            for i in range(lookback_total):
-                if i < equal_period:
-                    equal_range = valid_close[i] - valid_open[i] if valid_close[i] >= valid_open[i] else valid_open[i] - valid_close[i]
-                    equal_period_total += equal_range
-                if i < body_long_period:
-                    body_long_range = valid_close[i] - valid_open[i] if valid_close[i] >= valid_open[i] else valid_open[i] - valid_close[i]
-                    body_long_period_total += body_long_range
-        
-            # Main calculation loop
-            for i in range(lookback_total, len(valid_high)):
-                # Check for Thrusting pattern conditions
-                if i > 0:
-                    # Condition 1: Previous day is bearish (close < open)
-                    prev_color = -1 if valid_close[i-1] < valid_open[i-1] else 1
-                    # Condition 2: Previous day body is long
-                    prev_body = abs(valid_close[i-1] - valid_open[i-1])
-                    body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
-                    # Condition 3: Current day is bullish (close > open)
-                    curr_color = 1 if valid_close[i] > valid_open[i] else -1
-                    # Condition 4: Current open below previous low
-                    # Condition 5: Current close above previous close + equal average
-                    equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
-                    # Condition 6: Current close <= previous close + 0.5 * previous body
-                
-                    if (prev_color == -1 and
-                        prev_body > body_long_avg and
-                        curr_color == 1 and
-                        valid_open[i] < valid_low[i-1] and
-                        valid_close[i] > valid_close[i-1] + equal_avg and
-                        valid_close[i] <= valid_close[i-1] + prev_body * 0.5):
-                        result[valid_indices[i], sec] = -100
-                    else:
-                        result[valid_indices[i], sec] = 0
+            if start_idx < len(valid_high):
+                for i in range(equal_trailing_idx, start_idx):
+                    if i >= 2:
+                        equal_period_total += valid_high[i-2] - valid_low[i-2]
+                equal_trailing_idx = start_idx - equal_period
             
-                # Update totals for next iteration
-                if i >= equal_period:
-                    old_equal_range = valid_close[i - equal_period] - valid_open[i - equal_period] if valid_close[i - equal_period] >= valid_open[i - equal_period] else valid_open[i - equal_period] - valid_close[i - equal_period]
-                    new_equal_range = valid_close[i - 1] - valid_open[i - 1] if valid_close[i - 1] >= valid_open[i - 1] else valid_open[i - 1] - valid_close[i - 1]
-                    equal_period_total += new_equal_range - old_equal_range
-            
-                if i >= body_long_period:
-                    old_body_long_range = valid_close[i - body_long_period] - valid_open[i - body_long_period] if valid_close[i - body_long_period] >= valid_open[i - body_long_period] else valid_open[i - body_long_period] - valid_close[i - body_long_period]
-                    new_body_long_range = valid_close[i - 1] - valid_open[i - 1] if valid_close[i - 1] >= valid_open[i - 1] else valid_open[i - 1] - valid_close[i - 1]
-                    body_long_period_total += new_body_long_range - old_body_long_range
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLTRISTAR(high, open, low, close, vol, oi, body_period=3):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (2 days prior for pattern recognition)
-        lookback_total = 2
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize output for valid data
-            out_values = np.zeros(len(valid_high))
-        
-            # Initialize body period total for doji calculation
-            body_period_total = 0.0
-            body_trailing_idx = 0
-        
-            # Pre-calculate initial body period total for the first valid window
-            for i in range(body_period):
-                if i < len(valid_high):
-                    body_range = valid_high[i] - valid_low[i]
-                    body_period_total += body_range
-        
-            # Start processing from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Calculate body average for doji detection
-                body_average = body_period_total / body_period if body_period > 0 else 0.0
-            
-                # Check if all three candles are doji (small body compared to average range)
-                body_2 = abs(valid_close[i-2] - valid_open[i-2])
-                body_1 = abs(valid_close[i-1] - valid_open[i-1])
-                body_0 = abs(valid_close[i] - valid_open[i])
-            
-                if (body_2 <= body_average and 
-                    body_1 <= body_average and 
-                    body_0 <= body_average):
-                    out_values[i] = 0
-                
-                    # Check for bearish pattern (gap up between first two candles and third below second)
-                    if (max(valid_open[i-1], valid_close[i-1]) > max(valid_open[i-2], valid_close[i-2]) and
-                        max(valid_open[i], valid_close[i]) < max(valid_open[i-1], valid_close[i-1])):
-                        out_values[i] = -100
-                
-                    # Check for bullish pattern (gap down between first two candles and third above second)
-                    if (min(valid_open[i-1], valid_close[i-1]) < min(valid_open[i-2], valid_close[i-2]) and
-                        min(valid_open[i], valid_close[i]) > min(valid_open[i-1], valid_close[i-1])):
-                        out_values[i] = 100
-                else:
-                    out_values[i] = 0
-                
-                # Update body period total for next iteration
-                if i - 2 >= 0:
-                    old_range = valid_high[body_trailing_idx] - valid_low[body_trailing_idx]
-                    new_range = valid_high[i-2] - valid_low[i-2]
-                    body_period_total += new_range - old_range
-                    body_trailing_idx += 1
+                # Main calculation loop
+                for i in range(start_idx, len(valid_high)):
+                    # Check for Stick Sandwich pattern
+                    if i >= 2:
+                        # Candle colors: -1 for bearish, 1 for bullish
+                        color_2 = -1 if valid_close[i-2] < valid_open[i-2] else 1
+                        color_1 = -1 if valid_close[i-1] < valid_open[i-1] else 1
+                        color_0 = -1 if valid_close[i] < valid_open[i] else 1
+                    
+                        # Calculate Equal average
+                        equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
+                    
+                        # Pattern conditions
+                        if (color_2 == -1 and 
+                            color_1 == 1 and 
+                            color_0 == -1 and 
+                            valid_low[i-1] > valid_close[i-2] and
+                            valid_close[i] <= valid_close[i-2] + equal_avg and
+                            valid_close[i] >= valid_close[i-2] - equal_avg):
+                            temp_result[i] = 100
+                        else:
+                            temp_result[i] = 0
+                    
+                        # Update EqualPeriodTotal for next iteration
+                        if i < len(valid_high):
+                            equal_period_total += (valid_high[i-2] - valid_low[i-2]) if i >= 2 else 0.0
+                            equal_period_total -= (valid_high[equal_trailing_idx-2] - valid_low[equal_trailing_idx-2]) if equal_trailing_idx >= 2 else 0.0
+                        equal_trailing_idx += 1
         
             # Map results back to original array
             for i in range(len(valid_indices)):
-                if i >= lookback_total:
+                if i >= start_idx:
                     orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = out_values[i]
+                    result[orig_idx, sec] = temp_result[i]
     
         return result
 
@@ -7053,98 +4971,14 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def CDLUNIQUE3RIVER(high, open, low, close, vol, oi):
+    def CDLTASUKIGAP(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # 对应TA-Lib中的BodyLong和BodyShort的平均周期，常用默认值
-        BodyLongPeriod = 5
-        BodyShortPeriod = 3
-        lookbackTotal = 2  # 需要前两根K线数据
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    open[i, sec] == open[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookbackTotal:
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_open = open[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # 初始化BodyLong和BodyShort的累加值
-            BodyLongPeriodTotal = 0.0
-            BodyShortPeriodTotal = 0.0
-        
-            # 计算初始的BodyLongPeriodTotal (前BodyLongPeriod个周期)
-            BodyLongTrailingIdx = 0
-            for i in range(BodyLongTrailingIdx, min(BodyLongPeriod, len(valid_high))):
-                if i <= len(valid_high) - 3:  # 确保有足够的数据
-                    BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
-        
-            # 计算初始的BodyShortPeriodTotal (前BodyShortPeriod个周期)
-            BodyShortTrailingIdx = 0
-            for i in range(BodyShortTrailingIdx, min(BodyShortPeriod, len(valid_high))):
-                if i <= len(valid_high) - 1:
-                    BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
-        
-            # 主计算循环
-            for i in range(lookbackTotal, len(valid_high)):
-                # 计算Unique 3 River形态的条件
-                # 条件1: 前两根K线为阴线，实体较长
-                realbody_2 = valid_close[i-2] - valid_open[i-2]
-                realbody_1 = valid_close[i-1] - valid_open[i-1]
-                realbody_0 = valid_close[i] - valid_open[i]
-                body_long_avg = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
-                body_short_avg = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
-            
-                if (realbody_2 < 0 and abs(realbody_2) > body_long_avg and  # 第一根阴线，实体长
-                    realbody_1 < 0 and  # 第二根阴线
-                    valid_close[i-1] > valid_close[i-2] and  # 第二根收盘价高于第一根
-                    valid_open[i-1] <= valid_open[i-2] and  # 第二根开盘价低于或等于第一根
-                    valid_low[i-1] < valid_low[i-2] and  # 第二根低点低于第一根
-                    realbody_0 > 0 and abs(realbody_0) < body_short_avg and  # 第三根阳线，实体短
-                    valid_open[i] > valid_low[i-1]):  # 第三根开盘价高于第二根低点
-                    result[valid_indices[i], sec] = 100
-                else:
-                    result[valid_indices[i], sec] = 0
-            
-                # 更新BodyLongPeriodTotal
-                if i - 2 >= 0 and BodyLongTrailingIdx < len(valid_high):
-                    BodyLongPeriodTotal += abs(valid_close[i-2] - valid_open[i-2])
-                    if BodyLongTrailingIdx >= 0:
-                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
-                    BodyLongTrailingIdx += 1
-            
-                # 更新BodyShortPeriodTotal
-                if i >= 0 and BodyShortTrailingIdx < len(valid_high):
-                    BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
-                    if BodyShortTrailingIdx >= 0:
-                        BodyShortPeriodTotal -= abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
-                    BodyShortTrailingIdx += 1
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CDLUPSIDEGAP2CROWS(high, open, low, close, vol, oi, body_long_period=10, body_short_period=10):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib (2 days for pattern + max of body periods for averages)
-        lookback_total = 2 + max(body_long_period, body_short_period)
+        # Lookback period as defined in TA-Lib (2 days for pattern recognition)
+        lookback_total = 2
+        # Near period for averaging candle range, typically 14 in TA-Lib
+        near_period = 14
     
         for sec in range(secs):
             # Create valid data mask
@@ -7160,103 +4994,184 @@ class BaseLogicFactors:
             if len(valid_indices) < lookback_total:
                 continue
             
-            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize totals for body averages
-            body_long_total = 0.0
-            body_short_total = 0.0
-        
-            # Calculate initial totals for body averages
-            body_long_trailing_idx = 0
-            body_short_trailing_idx = 0
-        
+            # Initialize NearPeriodTotal for averaging candle range
+            near_period_total = 0.0
+            near_trailing_idx = 0
             start_idx = lookback_total
-            if start_idx > len(valid_high):
-                continue
-            
-            # Initialize trailing indices for rolling window
-            body_long_trailing_idx = start_idx - 2 - body_long_period
-            body_short_trailing_idx = start_idx - 1 - body_short_period
         
-            # Calculate initial sums for body averages
-            i = body_long_trailing_idx if body_long_trailing_idx >= 0 else 0
-            while i < start_idx - 2 and i < len(valid_high):
-                if i >= 0:
-                    body_long_total += abs(valid_close[i] - valid_open[i])
-                i += 1
-            
-            i = body_short_trailing_idx if body_short_trailing_idx >= 0 else 0
-            while i < start_idx - 1 and i < len(valid_high):
-                if i >= 0:
-                    body_short_total += abs(valid_close[i] - valid_open[i])
-                i += 1
-            
-            # Main loop for pattern detection
+            # Calculate initial NearPeriodTotal for the first window
+            if start_idx >= near_period:
+                near_trailing_idx = start_idx - near_period
+                for i in range(near_trailing_idx, start_idx):
+                    near_period_total += valid_high[i] - valid_low[i]
+        
+            out_idx = start_idx
             i = start_idx
+        
             while i < len(valid_high):
-                if i - 2 >= 0:
-                    # Calculate body averages
-                    body_long_avg = body_long_total / body_long_period if body_long_period > 0 else 0.0
-                    body_short_avg = body_short_total / body_short_period if body_short_period > 0 else 0.0
+                # Calculate candle color (1 for bullish, -1 for bearish)
+                def candle_color(idx):
+                    return 1 if valid_close[idx] > valid_open[idx] else -1
+            
+                # Calculate real body size
+                def real_body(idx):
+                    return abs(valid_close[idx] - valid_open[idx])
+            
+                # Calculate candle range
+                def candle_range(idx):
+                    return valid_high[idx] - valid_low[idx]
+            
+                # Calculate average for Near period
+                near_average = near_period_total / near_period if near_period > 0 else 0.0
+            
+                # Check for Tasuki Gap pattern
+                if i >= 2:
+                    # Bullish Tasuki Gap (Upward gap followed by bearish candle)
+                    bullish_condition = (
+                        valid_open[i-1] > valid_close[i-2] and  # Gap up
+                        candle_color(i-1) == 1 and  # Bullish candle on day 1
+                        candle_color(i) == -1 and  # Bearish candle on day 2
+                        valid_open[i] < valid_close[i-1] and valid_open[i] > valid_open[i-1] and  # Open within previous body
+                        valid_close[i] < valid_open[i-1] and  # Close below previous open
+                        valid_close[i] > max(valid_close[i-2], valid_open[i-2]) and  # Close above gap
+                        abs(real_body(i-1) - real_body(i)) < near_average  # Similar body sizes
+                    )
                 
-                    # Check pattern conditions
-                    # First candle: White (bullish)
-                    first_candle_white = valid_close[i-2] > valid_open[i-2]
-                    # First candle: Long body
-                    first_body_long = abs(valid_close[i-2] - valid_open[i-2]) > body_long_avg
-                    # Second candle: Black (bearish)
-                    second_candle_black = valid_close[i-1] < valid_open[i-1]
-                    # Second candle: Short body
-                    second_body_short = abs(valid_close[i-1] - valid_open[i-1]) <= body_short_avg
-                    # Gap up between first and second candle
-                    gap_up = valid_open[i-1] > valid_close[i-2]
-                    # Third candle: Black (bearish)
-                    third_candle_black = valid_close[i] < valid_open[i]
-                    # Third candle opens above second candle's open
-                    third_open_above = valid_open[i] > valid_open[i-1]
-                    # Third candle closes below second candle's close
-                    third_close_below = valid_close[i] < valid_close[i-1]
-                    # Third candle closes above first candle's close
-                    third_close_above_first = valid_close[i] > valid_close[i-2]
+                    # Bearish Tasuki Gap (Downward gap followed by bullish candle)
+                    bearish_condition = (
+                        valid_open[i-1] < valid_close[i-2] and  # Gap down
+                        candle_color(i-1) == -1 and  # Bearish candle on day 1
+                        candle_color(i) == 1 and  # Bullish candle on day 2
+                        valid_open[i] < valid_open[i-1] and valid_open[i] > valid_close[i-1] and  # Open within previous body
+                        valid_close[i] > valid_open[i-1] and  # Close above previous open
+                        valid_close[i] < min(valid_close[i-2], valid_open[i-2]) and  # Close below gap
+                        abs(real_body(i-1) - real_body(i)) < near_average  # Similar body sizes
+                    )
                 
-                    if (first_candle_white and first_body_long and 
-                        second_candle_black and second_body_short and 
-                        gap_up and third_candle_black and 
-                        third_open_above and third_close_below and 
-                        third_close_above_first):
-                        result[valid_indices[i], sec] = -100
+                    if bullish_condition or bearish_condition:
+                        result[valid_indices[i], sec] = candle_color(i-1) * 100
                     else:
                         result[valid_indices[i], sec] = 0
-                    
-                    # Update rolling sums for body averages
-                    if i - 2 >= 0 and body_long_trailing_idx >= 0 and body_long_trailing_idx < len(valid_high):
-                        body_long_total += abs(valid_close[i-2] - valid_open[i-2])
-                        body_long_total -= abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
-                    if i - 1 >= 0 and body_short_trailing_idx >= 0 and body_short_trailing_idx < len(valid_high):
-                        body_short_total += abs(valid_close[i-1] - valid_open[i-1])
-                        body_short_total -= abs(valid_close[body_short_trailing_idx] - valid_open[body_short_trailing_idx])
-                    
-                    body_long_trailing_idx += 1
-                    body_short_trailing_idx += 1
-                
-                i += 1
+                else:
+                    result[valid_indices[i], sec] = 0
             
+                # Update NearPeriodTotal for next iteration
+                if i + 1 < len(valid_high):
+                    near_period_total += candle_range(i) - (candle_range(near_trailing_idx) if near_trailing_idx < len(valid_high) else 0)
+                    near_trailing_idx += 1
+            
+                i += 1
+        
         return result
 
 
 
     @staticmethod
     @nb.njit
-    def CDLXSIDEGAP3METHODS(high, open, low, close, vol, oi):
+    def CDLTHRUSTING(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib (needs 2 previous candles)
+        # Define constants for lookback periods as per TA-Lib
+        EqualPeriod = 3
+        BodyLongPeriod = 5
+        lookbackTotal = max(EqualPeriod, BodyLongPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for Equal and BodyLong periods
+            EqualPeriodTotal = 0.0
+            BodyLongPeriodTotal = 0.0
+        
+            # Calculate initial totals for Equal period (range is typically high-low for candlestick)
+            EqualTrailingIdx = 0
+            for i in range(EqualTrailingIdx, min(EqualPeriod, len(valid_high))):
+                if i > 0:
+                    EqualPeriodTotal += (valid_high[i-1] - valid_low[i-1])
+        
+            # Calculate initial totals for BodyLong period (range is typically close-open absolute)
+            BodyLongTrailingIdx = 0
+            for i in range(BodyLongTrailingIdx, min(BodyLongPeriod, len(valid_high))):
+                if i > 0:
+                    BodyLongPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+        
+            # Start processing from lookbackTotal
+            outIdx = lookbackTotal
+            i = outIdx
+        
+            while i < len(valid_high):
+                # Calculate candle color and real body for previous day (i-1)
+                if i > 0:
+                    prev_color = 1 if valid_close[i-1] >= valid_open[i-1] else -1
+                    curr_color = 1 if valid_close[i] >= valid_open[i] else -1
+                    prev_realbody = abs(valid_close[i-1] - valid_open[i-1])
+                    # Calculate averages
+                    EqualAverage = EqualPeriodTotal / EqualPeriod if EqualPeriod > 0 else 0.0
+                    BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                
+                    # Thrusting pattern conditions
+                    if (prev_color == -1 and
+                        prev_realbody > BodyLongAverage and
+                        curr_color == 1 and
+                        valid_open[i] < valid_low[i-1] and
+                        valid_close[i] > valid_close[i-1] + EqualAverage and
+                        valid_close[i] <= valid_close[i-1] + prev_realbody * 0.5):
+                        result[valid_indices[i], sec] = -100
+                    else:
+                        result[valid_indices[i], sec] = 0
+                
+                    # Update totals for next iteration
+                    if i >= EqualPeriod:
+                        EqualPeriodTotal += (valid_high[i-1] - valid_low[i-1])
+                        EqualPeriodTotal -= (valid_high[EqualTrailingIdx-1] - valid_low[EqualTrailingIdx-1]) if EqualTrailingIdx > 0 else 0.0
+                        EqualTrailingIdx += 1
+                
+                    if i >= BodyLongPeriod:
+                        BodyLongPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx-1] - valid_open[BodyLongTrailingIdx-1]) if BodyLongTrailingIdx > 0 else 0.0
+                        BodyLongTrailingIdx += 1
+            
+                i += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLUNIQUE3RIVER(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback period as per TA-Lib (2 days prior data needed)
         lookback_total = 2
+    
+        # Define candle body periods as per TA-Lib defaults
+        body_long_period = 10
+        body_short_period = 10
     
         for sec in range(secs):
             # Create valid data mask
@@ -7278,228 +5193,233 @@ class BaseLogicFactors:
             valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Start processing from lookback_total
-            for i in range(lookback_total, len(valid_high)):
-                # Determine candle colors (1 for bullish, -1 for bearish)
-                color_i_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1
-                color_i_1 = 1 if valid_close[i-1] > valid_open[i-1] else -1
+            # Initialize trailing indices for body averages
+            start_idx = lookback_total
+            body_long_trailing_idx = start_idx - 2 - body_long_period
+            body_short_trailing_idx = start_idx - body_short_period
+        
+            # Initialize period totals for body averages
+            body_long_period_total = 0.0
+            body_short_period_total = 0.0
+        
+            # Calculate initial totals for BodyLong
+            i = body_long_trailing_idx if body_long_trailing_idx >= 0 else 0
+            while i < start_idx - 2 and i < len(valid_high):
+                if i >= 0:
+                    body_long_period_total += abs(valid_close[i] - valid_open[i])
+                i += 1
+            
+            # Calculate initial totals for BodyShort
+            i = body_short_trailing_idx if body_short_trailing_idx >= 0 else 0
+            while i < start_idx and i < len(valid_high):
+                if i >= 0:
+                    body_short_period_total += abs(valid_close[i] - valid_open[i])
+                i += 1
+            
+            # Main calculation loop
+            for i in range(start_idx, len(valid_high)):
+                # Calculate real body for current and previous candles
+                real_body_i_2 = abs(valid_close[i-2] - valid_open[i-2]) if i-2 >= 0 else 0.0
+                real_body_i = abs(valid_close[i] - valid_open[i])
+            
+                # Calculate candle color (1 for bullish, -1 for bearish)
+                color_i_2 = 1 if valid_close[i-2] > valid_open[i-2] else -1 if i-2 >= 0 else 0
+                color_i_1 = 1 if valid_close[i-1] > valid_open[i-1] else -1 if i-1 >= 0 else 0
                 color_i = 1 if valid_close[i] > valid_open[i] else -1
             
-                # Check conditions as per TA-Lib logic
-                if (color_i_2 == color_i_1 and 
-                    color_i_1 == -color_i and
-                    valid_open[i] < max(valid_close[i-1], valid_open[i-1]) and
-                    valid_open[i] > min(valid_close[i-1], valid_open[i-1]) and
-                    valid_close[i] < max(valid_close[i-2], valid_open[i-2]) and
-                    valid_close[i] > min(valid_close[i-2], valid_open[i-2])):
-                
-                    # Check for gap conditions
-                    if color_i_2 == 1:
-                        # Bullish case: check for gap up between i-2 and i-1
-                        gap_up = max(valid_close[i-2], valid_open[i-2]) < min(valid_close[i-1], valid_open[i-1])
-                        if gap_up:
-                            result[valid_indices[i], sec] = color_i_2 * 100
-                        else:
-                            result[valid_indices[i], sec] = 0
-                    else:
-                        # Bearish case: check for gap down between i-2 and i-1
-                        gap_down = min(valid_close[i-2], valid_open[i-2]) > max(valid_close[i-1], valid_open[i-1])
-                        if gap_down:
-                            result[valid_indices[i], sec] = color_i_2 * 100
-                        else:
-                            result[valid_indices[i], sec] = 0
+                # Calculate body averages
+                body_long_avg = body_long_period_total / body_long_period if body_long_period > 0 else 0.0
+                body_short_avg = body_short_period_total / body_short_period if body_short_period > 0 else 0.0
+            
+                # Check Unique 3 River pattern conditions
+                if (real_body_i_2 > body_long_avg and
+                    color_i_2 == -1 and
+                    color_i_1 == -1 and
+                    valid_close[i-1] > valid_close[i-2] and
+                    valid_open[i-1] <= valid_open[i-2] and
+                    valid_low[i-1] < valid_low[i-2] and
+                    real_body_i < body_short_avg and
+                    color_i == 1 and
+                    valid_open[i] > valid_low[i-1]):
+                    result[valid_indices[i], sec] = 100
                 else:
                     result[valid_indices[i], sec] = 0
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def CMO(high, open, low, close, vol, oi, timeperiod=14):
-        tdts, secs = close.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < timeperiod:
-                continue
-            
-            # 提取有效数据
-            valid_close = close[valid_mask, sec]
-        
-            # 初始化变量
-            lookback_total = timeperiod - 1 if timeperiod > 1 else 0
-            start_idx = lookback_total
-        
-            # 特殊情况：timeperiod为1时直接返回收盘价
-            if timeperiod == 1:
-                for i in range(len(valid_indices)):
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = valid_close[i]
-                continue
-            
-            # 初始化计算
-            today = 0
-            prev_value = valid_close[today]
-            prev_gain = 0.0
-            prev_loss = 0.0
-        
-            # 第一个循环：计算初始的gain和loss
-            today += 1
-            for i in range(timeperiod):
-                temp_value1 = valid_close[today]
-                temp_value2 = temp_value1 - prev_value
-                prev_value = temp_value1
-                if temp_value2 < 0:
-                    prev_loss -= temp_value2
-                else:
-                    prev_gain += temp_value2
-                today += 1
-        
-            # 初始平均值
-            prev_loss /= timeperiod
-            prev_gain /= timeperiod
-        
-            # 处理到start_idx之前的数据（预热期）
-            while today < start_idx and today < len(valid_close):
-                temp_value1 = valid_close[today]
-                temp_value2 = temp_value1 - prev_value
-                prev_value = temp_value1
-                prev_loss *= (timeperiod - 1)
-                prev_gain *= (timeperiod - 1)
-                if temp_value2 < 0:
-                    prev_loss -= temp_value2
-                else:
-                    prev_gain += temp_value2
-                prev_loss /= timeperiod
-                prev_gain /= timeperiod
-                today += 1
-        
-            # 主计算循环
-            for i in range(today, len(valid_close)):
-                temp_value1 = valid_close[i]
-                temp_value2 = temp_value1 - prev_value
-                prev_value = temp_value1
-                prev_loss *= (timeperiod - 1)
-                prev_gain *= (timeperiod - 1)
-                if temp_value2 < 0:
-                    prev_loss -= temp_value2
-                else:
-                    prev_gain += temp_value2
-                prev_loss /= timeperiod
-                prev_gain /= timeperiod
-            
-                temp_value3 = prev_gain + prev_loss
-                if temp_value3 > 1e-10:
-                    cmo_value = 100.0 * ((prev_gain - prev_loss) / temp_value3)
-                else:
-                    cmo_value = 0.0
                 
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = cmo_value
-    
+                # Update trailing totals for next iteration
+                if i-2 >= 0 and body_long_trailing_idx >= 0 and body_long_trailing_idx < len(valid_high):
+                    body_long_period_total += abs(valid_close[i-2] - valid_open[i-2])
+                    body_long_period_total -= abs(valid_close[body_long_trailing_idx] - valid_open[body_long_trailing_idx])
+                if body_short_trailing_idx >= 0 and body_short_trailing_idx < len(valid_high):
+                    body_short_period_total += abs(valid_close[i] - valid_open[i])
+                    body_short_period_total -= abs(valid_close[body_short_trailing_idx] - valid_open[body_short_trailing_idx])
+                
+                body_long_trailing_idx += 1
+                body_short_trailing_idx += 1
+            
         return result
 
 
 
     @staticmethod
     @nb.njit
-    def CORREL(high, open, low, close, vol, oi, timeperiod=30):
+    def CDLUPSIDEGAP2CROWS(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
+        # Define lookback periods for BodyLong and BodyShort as per TA-Lib defaults
+        BodyLongPeriod = 10
+        BodyShortPeriod = 10
+        lookbackTotal = 2  # Need at least 2 previous candles for pattern recognition
+    
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
-                if (close[i, sec] == close[i, sec] and 
-                    vol[i, sec] == vol[i, sec]):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < timeperiod:
+            if len(valid_indices) < lookbackTotal:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
             valid_close = close[valid_mask, sec]
-            valid_vol = vol[valid_mask, sec]
         
-            # 初始化输出数组
-            correl_values = np.zeros(len(valid_close))
+            # Initialize totals for BodyLong and BodyShort averages
+            BodyLongPeriodTotal = 0.0
+            BodyShortPeriodTotal = 0.0
         
-            # Lookback period
-            lookback_total = timeperiod - 1
-            start_idx = lookback_total
+            # Calculate initial totals for BodyLong (2 candles back)
+            BodyLongTrailingIdx = 0
+            if len(valid_close) >= BodyLongPeriod + 2:
+                for i in range(BodyLongTrailingIdx, BodyLongPeriod):
+                    BodyLongPeriodTotal += abs(valid_close[i] - valid_open[i])
+                BodyLongTrailingIdx = 0
         
-            if start_idx >= len(valid_close):
-                continue
-            
-            # 初始化累加器
-            sum_xy = 0.0
-            sum_x = 0.0
-            sum_y = 0.0
-            sum_x2 = 0.0
-            sum_y2 = 0.0
+            # Calculate initial totals for BodyShort (1 candle back)
+            BodyShortTrailingIdx = 0
+            if len(valid_close) >= BodyShortPeriod + 1:
+                for i in range(BodyShortTrailingIdx, BodyShortPeriod):
+                    BodyShortPeriodTotal += abs(valid_close[i] - valid_open[i])
+                BodyShortTrailingIdx = 0
         
-            # 初始窗口计算
-            trailing_idx = 0
-            for today in range(trailing_idx, start_idx + 1):
-                x = valid_close[today]
-                sum_x += x
-                sum_x2 += x * x
-                y = valid_vol[today]
-                sum_xy += x * y
-                sum_y += y
-                sum_y2 += y * y
-        
-            # 计算第一个相关系数
-            trailing_x = valid_close[trailing_idx]
-            trailing_y = valid_vol[trailing_idx]
-            temp_real = (sum_x2 - ((sum_x * sum_x) / timeperiod)) * (sum_y2 - ((sum_y * sum_y) / timeperiod))
-            if temp_real > 1e-10:
-                correl_values[start_idx] = (sum_xy - ((sum_x * sum_y) / timeperiod)) / np.sqrt(temp_real)
-            else:
-                correl_values[start_idx] = 0.0
+            # Start processing from lookbackTotal
+            for i in range(lookbackTotal, len(valid_close)):
+                # Calculate BodyLong and BodyShort averages
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                BodyShortAverage = BodyShortPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
             
-            # 主循环：滑动窗口计算后续相关系数
-            trailing_idx = 1
-            for today in range(start_idx + 1, len(valid_close)):
-                sum_x -= trailing_x
-                sum_x2 -= trailing_x * trailing_x
-                sum_xy -= trailing_x * trailing_y
-                sum_y -= trailing_y
-                sum_y2 -= trailing_y * trailing_y
-            
-                x = valid_close[today]
-                sum_x += x
-                sum_x2 += x * x
-                y = valid_vol[today]
-                sum_xy += x * y
-                sum_y += y
-                sum_y2 += y * y
-            
-                trailing_x = valid_close[trailing_idx]
-                trailing_y = valid_vol[trailing_idx]
-                trailing_idx += 1
-            
-                temp_real = (sum_x2 - ((sum_x * sum_x) / timeperiod)) * (sum_y2 - ((sum_y * sum_y) / timeperiod))
-                if temp_real > 1e-10:
-                    correl_values[today] = (sum_xy - ((sum_x * sum_y) / timeperiod)) / np.sqrt(temp_real)
+                # Check for Upside Gap Two Crows pattern
+                if (
+                    # First candle (i-2) is white (bullish)
+                    valid_close[i-2] > valid_open[i-2] and
+                    # First candle has long body
+                    abs(valid_close[i-2] - valid_open[i-2]) > BodyLongAverage and
+                    # Second candle (i-1) is black (bearish)
+                    valid_close[i-1] < valid_open[i-1] and
+                    # Second candle has short body
+                    abs(valid_close[i-1] - valid_open[i-1]) <= BodyShortAverage and
+                    # Gap up between first and second candle
+                    valid_open[i-1] > valid_close[i-2] and
+                    # Third candle (i) is black (bearish)
+                    valid_close[i] < valid_open[i] and
+                    # Third candle opens above second candle's open
+                    valid_open[i] > valid_open[i-1] and
+                    # Third candle closes below second candle's close
+                    valid_close[i] < valid_close[i-1] and
+                    # Third candle closes above first candle's close
+                    valid_close[i] > valid_close[i-2]
+                ):
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = -100
                 else:
-                    correl_values[today] = 0.0
-        
-            # 映射结果回原始数组
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = correl_values[i]
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = 0
+            
+                # Update trailing totals for next iteration
+                if i - 2 >= 0 and BodyLongTrailingIdx < len(valid_close):
+                    BodyLongPeriodTotal += abs(valid_close[i-2] - valid_open[i-2])
+                    if BodyLongTrailingIdx + BodyLongPeriod < len(valid_close):
+                        BodyLongPeriodTotal -= abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
+                    BodyLongTrailingIdx += 1
+            
+                if i - 1 >= 0 and BodyShortTrailingIdx < len(valid_close):
+                    BodyShortPeriodTotal += abs(valid_close[i-1] - valid_open[i-1])
+                    if BodyShortTrailingIdx + BodyShortPeriod < len(valid_close):
+                        BodyShortPeriodTotal -= abs(valid_close[BodyShortTrailingIdx] - valid_open[BodyShortTrailingIdx])
+                    BodyShortTrailingIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLXSIDEGAP3METHODS(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        lookbackTotal = 2  # As per C code, need 2 previous candles for calculation
+    
+        for sec in range(secs):
+            for ts in range(lookbackTotal, tdts):
+                # Data validation: ensure current and previous 2 candles have valid data
+                if (high[ts, sec] != high[ts, sec] or
+                    open[ts, sec] != open[ts, sec] or
+                    low[ts, sec] != low[ts, sec] or
+                    close[ts, sec] != close[ts, sec] or
+                    high[ts-1, sec] != high[ts-1, sec] or
+                    open[ts-1, sec] != open[ts-1, sec] or
+                    low[ts-1, sec] != low[ts-1, sec] or
+                    close[ts-1, sec] != close[ts-1, sec] or
+                    high[ts-2, sec] != high[ts-2, sec] or
+                    open[ts-2, sec] != open[ts-2, sec] or
+                    low[ts-2, sec] != low[ts-2, sec] or
+                    close[ts-2, sec] != close[ts-2, sec]):
+                    continue
+            
+                # Calculate candle colors (1 for bullish, -1 for bearish)
+                color_i_2 = 1 if close[ts-2, sec] > open[ts-2, sec] else -1
+                color_i_1 = 1 if close[ts-1, sec] > open[ts-1, sec] else -1
+                color_i = 1 if close[ts, sec] > open[ts, sec] else -1
+            
+                # Check if first two candles have same color and third is opposite
+                if color_i_2 == color_i_1 and color_i_1 == -color_i:
+                    # Check if current open is between previous candle's open and close
+                    prev_max = max(close[ts-1, sec], open[ts-1, sec])
+                    prev_min = min(close[ts-1, sec], open[ts-1, sec])
+                    if open[ts, sec] < prev_max and open[ts, sec] > prev_min:
+                        # Check if current close is between candle from 2 periods ago's open and close
+                        prev2_max = max(close[ts-2, sec], open[ts-2, sec])
+                        prev2_min = min(close[ts-2, sec], open[ts-2, sec])
+                        if close[ts, sec] < prev2_max and close[ts, sec] > prev2_min:
+                            # Check for gap conditions based on color of first candle
+                            if color_i_2 == 1:
+                                # For bullish first candle, check for gap up between i-2 and i-1
+                                gap_up = min(open[ts-1, sec], close[ts-1, sec]) > max(open[ts-2, sec], close[ts-2, sec])
+                                if gap_up:
+                                    result[ts, sec] = color_i_2 * 100
+                                else:
+                                    result[ts, sec] = 0
+                            else:
+                                # For bearish first candle, check for gap down between i-2 and i-1
+                                gap_down = max(open[ts-1, sec], close[ts-1, sec]) < min(open[ts-2, sec], close[ts-2, sec])
+                                if gap_down:
+                                    result[ts, sec] = color_i_2 * 100
+                                else:
+                                    result[ts, sec] = 0
+                        else:
+                            result[ts, sec] = 0
+                    else:
+                        result[ts, sec] = 0
+                else:
+                    result[ts, sec] = 0
     
         return result
 
@@ -7510,7 +5430,6 @@ class BaseLogicFactors:
     def DX(high, open, low, close, vol, oi, timeperiod=14):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        unstable_period = 25  # TA-Lib default unstable period for DX
     
         for sec in range(secs):
             # Create valid data mask
@@ -7522,7 +5441,8 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            lookback_total = timeperiod + unstable_period if timeperiod > 1 else 2
+            # Lookback total includes timeperiod and unstable period (25 as per TA-Lib)
+            lookback_total = timeperiod + 25 if timeperiod > 1 else 2
             if len(valid_indices) <= lookback_total:
                 continue
             
@@ -7531,18 +5451,18 @@ class BaseLogicFactors:
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
+            # Initialize output array for DX values
+            dx_values = np.zeros(len(valid_high))
+        
             # Initialize variables
             prev_minus_dm = 0.0
             prev_plus_dm = 0.0
             prev_tr = 0.0
-            dx_values = np.zeros(len(valid_high))
-        
-            # Initialize first point
             prev_high = valid_high[0]
             prev_low = valid_low[0]
             prev_close = valid_close[0]
         
-            # First loop: Initialize cumulative values for MinusDM, PlusDM, and TR
+            # First loop: Warm-up period to accumulate initial sums (timeperiod-1 iterations)
             for i in range(1, timeperiod):
                 temp_real = valid_high[i]
                 diff_p = temp_real - prev_high
@@ -7563,8 +5483,9 @@ class BaseLogicFactors:
                 prev_tr += tr
                 prev_close = valid_close[i]
         
-            # Second loop: Handle unstable period
-            for i in range(timeperiod, timeperiod + unstable_period + 1):
+            # Second loop: Unstable period processing (26 iterations as per TA-Lib)
+            unstable_period = 25 + 1
+            for i in range(timeperiod, timeperiod + unstable_period):
                 if i >= len(valid_high):
                     break
                 
@@ -7590,8 +5511,8 @@ class BaseLogicFactors:
                 prev_tr = prev_tr - (prev_tr / timeperiod) + tr
                 prev_close = valid_close[i]
         
-            # Calculate first DX value
-            start_idx = timeperiod + unstable_period
+            # Calculate first DX value after warm-up and unstable period
+            start_idx = timeperiod + unstable_period - 1
             if start_idx < len(valid_high):
                 if prev_tr > 1e-10:
                     minus_di = 100.0 * (prev_minus_dm / prev_tr)
@@ -7650,163 +5571,15 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def HT_DCPERIOD(high, open, low, close, vol, oi):
-        tdts, secs = close.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        rad2Deg = 180.0 / (4.0 * np.arctan(1.0))
-        lookbackTotal = 32  # As per TA-Lib unstable period for HT_DCPERIOD
-
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookbackTotal:
-                continue
-
-            valid_close = close[valid_mask, sec]
-            smoothed_values = np.zeros(len(valid_close))
-            period_wma_sub = 0.0
-            period_wma_sum = 0.0
-            trailing_wma_value = 0.0
-            trailing_wma_idx = 0
-            today = 0
-
-            # Initial WMA calculation for first 3 points
-            temp_real = valid_close[today]
-            period_wma_sub = temp_real
-            period_wma_sum = temp_real
-            today += 1
-
-            temp_real = valid_close[today]
-            period_wma_sub += temp_real
-            period_wma_sum += temp_real * 2.0
-            today += 1
-
-            temp_real = valid_close[today]
-            period_wma_sub += temp_real
-            period_wma_sum += temp_real * 3.0
-            today += 1
-
-            # Complete initial WMA for remaining 9 points (total 12 points for initialization)
-            for i in range(9):
-                temp_real = valid_close[today]
-                period_wma_sub += temp_real
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += temp_real * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_values[today] = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-                today += 1
-
-            # Hilbert Transform variables
-            hilbert_idx = 0
-            detrender_even = np.zeros(3)
-            detrender_odd = np.zeros(3)
-            q1_even = np.zeros(3)
-            q1_odd = np.zeros(3)
-            ji_even = np.zeros(3)
-            ji_odd = np.zeros(3)
-            jq_even = np.zeros(3)
-            jq_odd = np.zeros(3)
-
-            period = 0.0
-            prev_i2 = 0.0
-            prev_q2 = 0.0
-            re = 0.0
-            im = 0.0
-            i1_for_odd_prev3 = 0.0
-            i1_for_odd_prev2 = 0.0
-            i1_for_even_prev3 = 0.0
-            i1_for_even_prev2 = 0.0
-            smooth_period = 0.0
-
-            while today < len(valid_close):
-                adjusted_prev_period = (0.075 * period) + 0.54
-                today_value = valid_close[today]
-                # Update WMA
-                period_wma_sub += today_value
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += today_value * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_values[today] = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-
-                if today % 2 == 0:
-                    # Even Hilbert Transform
-                    detrender_even[hilbert_idx] = adjusted_prev_period * smoothed_values[today]
-                    q1_even[hilbert_idx] = adjusted_prev_period * detrender_even[hilbert_idx]
-                    ji_even[hilbert_idx] = adjusted_prev_period * i1_for_even_prev3
-                    jq_even[hilbert_idx] = adjusted_prev_period * q1_even[hilbert_idx]
-                    if hilbert_idx == 2:
-                        hilbert_idx = 0
-                    else:
-                        hilbert_idx += 1
-                    q2 = (0.2 * (q1_even[hilbert_idx] + ji_even[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_odd_prev3 = i1_for_odd_prev2
-                    i1_for_odd_prev2 = detrender_even[hilbert_idx]
-                else:
-                    # Odd Hilbert Transform
-                    detrender_odd[hilbert_idx] = adjusted_prev_period * smoothed_values[today]
-                    q1_odd[hilbert_idx] = adjusted_prev_period * detrender_odd[hilbert_idx]
-                    ji_odd[hilbert_idx] = adjusted_prev_period * i1_for_odd_prev3
-                    jq_odd[hilbert_idx] = adjusted_prev_period * q1_odd[hilbert_idx]
-                    q2 = (0.2 * (q1_odd[hilbert_idx] + ji_odd[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_even_prev3 = i1_for_even_prev2
-                    i1_for_even_prev2 = detrender_odd[hilbert_idx]
-
-                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
-                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
-                prev_q2 = q2
-                prev_i2 = i2
-
-                temp_real = period
-                if im != 0.0 and re != 0.0:
-                    period = 360.0 / (np.arctan(im / re) * rad2Deg)
-                temp_real2 = 1.5 * temp_real
-                if period > temp_real2:
-                    period = temp_real2
-                temp_real2 = 0.67 * temp_real
-                if period < temp_real2:
-                    period = temp_real2
-                if period < 6:
-                    period = 6
-                elif period > 50:
-                    period = 50
-                period = (0.2 * period) + (0.8 * temp_real)
-                smooth_period = (0.33 * period) + (0.67 * smooth_period)
-
-                if today >= lookbackTotal:
-                    orig_idx = valid_indices[today]
-                    result[orig_idx, sec] = smooth_period
-                today += 1
-
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def HT_DCPHASE(high, open, low, close, vol, oi):
+    def HT_TRENDLINE(high, open, low, close, vol, oi):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Constants from C code
-        temp_real = np.arctan(1.0)
-        rad2deg = 45.0 / temp_real
-        const_deg2rad_by360 = temp_real * 8.0
-        lookback_total = 63  # As per C code for HT_DCPHASE
+        lookback_total = 63  # As defined in C code with unstable period
         smooth_price_size = 64  # Size for circular buffer simulation
     
         for sec in range(secs):
-            # Create valid data mask
+            # Data validation mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -7816,7 +5589,6 @@ class BaseLogicFactors:
             if len(valid_indices) <= lookback_total:
                 continue
             
-            # Extract valid data
             valid_close = close[valid_mask, sec]
             output = np.array([np.float64(np.nan)] * len(valid_close))
         
@@ -7844,575 +5616,20 @@ class BaseLogicFactors:
                 period_wma_sub += temp_real
                 period_wma_sum += temp_real * 3.0
         
-            # Process next 34 points for WMA as per C code
-            i = 34
-            smoothed_value = 0.0
-            while i > 0 and today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += temp_real * 4.0
-                if trailing_wma_idx < len(valid_close):
-                    trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_value = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-                i -= 1
-        
-            # Initialize Hilbert Transform variables
-            hilbert_idx = 0
-            detrender_even = np.zeros(3)
-            detrender_odd = np.zeros(3)
-            q1_even = np.zeros(3)
-            q1_odd = np.zeros(3)
-            ji_even = np.zeros(3)
-            ji_odd = np.zeros(3)
-            jq_even = np.zeros(3)
-            jq_odd = np.zeros(3)
-        
-            period = 0.0
-            prev_i2 = 0.0
-            prev_q2 = 0.0
-            re = 0.0
-            im = 0.0
-            i1_for_odd_prev3 = 0.0
-            i1_for_odd_prev2 = 0.0
-            i1_for_even_prev3 = 0.0
-            i1_for_even_prev2 = 0.0
-            smooth_period = 0.0
-            smooth_price = np.zeros(smooth_price_size)
-            smooth_price_idx = 0
-            dc_phase = 0.0
-        
-            # Main loop starting from lookback period
-            while today < len(valid_close):
-                adjusted_prev_period = (0.075 * period) + 0.54
-                today_value = valid_close[today]
-            
-                # Update WMA
-                period_wma_sub += today_value
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += today_value * 4.0
-                if trailing_wma_idx < len(valid_close):
-                    trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_value = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-            
-                # Store smoothed value in circular buffer
-                smooth_price[smooth_price_idx] = smoothed_value
-            
-                # Hilbert Transform calculations
-                if (today % 2) == 0:
-                    # Even index processing
-                    detrender_even[hilbert_idx] = (0.33 * smoothed_value) + (0.67 * detrender_even[(hilbert_idx + 2) % 3])
-                    q1_even[hilbert_idx] = (0.33 * detrender_even[hilbert_idx]) + (0.67 * q1_even[(hilbert_idx + 2) % 3])
-                    ji_even[hilbert_idx] = (0.33 * i1_for_even_prev3) + (0.67 * ji_even[(hilbert_idx + 2) % 3])
-                    jq_even[hilbert_idx] = (0.33 * q1_even[hilbert_idx]) + (0.67 * jq_even[(hilbert_idx + 2) % 3])
-                    hilbert_idx = (hilbert_idx + 1) % 3
-                    q2 = (0.2 * (q1_even[hilbert_idx] + ji_even[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_odd_prev3 = i1_for_odd_prev2
-                    i1_for_odd_prev2 = detrender_even[hilbert_idx]
-                else:
-                    # Odd index processing
-                    detrender_odd[hilbert_idx] = (0.33 * smoothed_value) + (0.67 * detrender_odd[(hilbert_idx + 2) % 3])
-                    q1_odd[hilbert_idx] = (0.33 * detrender_odd[hilbert_idx]) + (0.67 * q1_odd[(hilbert_idx + 2) % 3])
-                    ji_odd[hilbert_idx] = (0.33 * i1_for_odd_prev3) + (0.67 * ji_odd[(hilbert_idx + 2) % 3])
-                    jq_odd[hilbert_idx] = (0.33 * q1_odd[hilbert_idx]) + (0.67 * jq_odd[(hilbert_idx + 2) % 3])
-                    q2 = (0.2 * (q1_odd[hilbert_idx] + ji_odd[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_even_prev3 = i1_for_even_prev2
-                    i1_for_even_prev2 = detrender_odd[hilbert_idx]
-            
-                # Update Re and Im
-                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
-                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
-                prev_q2 = q2
-                prev_i2 = i2
-            
-                # Calculate period
-                temp_real = period
-                if im != 0.0 and re != 0.0:
-                    period = 360.0 / (np.arctan(im / re) * rad2deg)
-                temp_real2 = 1.5 * temp_real
-                if period > temp_real2:
-                    period = temp_real2
-                temp_real2 = 0.67 * temp_real
-                if period < temp_real2:
-                    period = temp_real2
-                if period < 6:
-                    period = 6
-                elif period > 50:
-                    period = 50
-                period = (0.2 * period) + (0.8 * temp_real)
-                smooth_period = (0.33 * period) + (0.67 * smooth_period)
-            
-                # Calculate DC Period and Phase
-                dc_period = smooth_period + 0.5
-                dc_period_int = int(dc_period)
-                real_part = 0.0
-                imag_part = 0.0
-                idx = smooth_price_idx
-                for i in range(dc_period_int):
-                    temp_real = (i * const_deg2rad_by360) / dc_period_int
-                    temp_real2 = smooth_price[idx]
-                    real_part += np.sin(temp_real) * temp_real2
-                    imag_part += np.cos(temp_real) * temp_real2
-                    idx = (idx - 1) if idx > 0 else (smooth_price_size - 1)
-            
-                temp_real = np.abs(imag_part)
-                if temp_real > 0.0:
-                    dc_phase = np.arctan(real_part / imag_part) * rad2deg
-                elif temp_real <= 0.01:
-                    if real_part < 0.0:
-                        dc_phase -= 90.0
-                    elif real_part > 0.0:
-                        dc_phase += 90.0
-                dc_phase += 90.0
-                dc_phase += 360.0 / smooth_period
-                if imag_part < 0.0:
-                    dc_phase += 180.0
-                if dc_phase > 315.0:
-                    dc_phase -= 360.0
-            
-                # Store output if beyond lookback period
-                if today >= lookback_total:
-                    output[today] = dc_phase
-            
-                # Update circular buffer index
-                smooth_price_idx = (smooth_price_idx + 1) % smooth_price_size
-                today += 1
-        
-            # Map results back to original array
-            for i in range(len(valid_indices)):
-                if valid_indices[i] >= lookback_total and i < len(output):
-                    result[valid_indices[i], sec] = output[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def HT_PHASOR(high, open, low, close, vol, oi):
-        tdts, secs = high.shape
-        result_inphase = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_quadrature = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        lookback_total = 32  # As per TA-Lib source code
-    
-        for sec in range(secs):
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            valid_close = close[valid_mask, sec]
-            smoothed_values = np.zeros(len(valid_close))
-        
-            # WMA initialization
-            trailing_wma_idx = 0
-            today = trailing_wma_idx
-            period_wma_sub = 0.0
-            period_wma_sum = 0.0
-            trailing_wma_value = 0.0
-        
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub = temp_real
-                period_wma_sum = temp_real
-        
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sum += temp_real * 2.0
-        
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sum += temp_real * 3.0
-        
-            i = 9
-            while i > 0 and today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += temp_real * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_values[today - 1] = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-                i -= 1
-        
-            hilbert_idx = 0
-            detrender_even = np.zeros(3)
-            detrender_odd = np.zeros(3)
-            q1_even = np.zeros(3)
-            q1_odd = np.zeros(3)
-            ji_even = np.zeros(3)
-            ji_odd = np.zeros(3)
-            jq_even = np.zeros(3)
-            jq_odd = np.zeros(3)
-        
-            period = 0.0
-            prev_i2 = 0.0
-            prev_q2 = 0.0
-            re = 0.0
-            im = 0.0
-            i1_for_odd_prev3 = 0.0
-            i1_for_odd_prev2 = 0.0
-            i1_for_even_prev3 = 0.0
-            i1_for_even_prev2 = 0.0
-        
-            while today < len(valid_close):
-                adjusted_prev_period = (0.075 * period) + 0.54
-                today_value = valid_close[today]
-            
+            # WMA for next 34 points as in C code
+            for i in range(34):
                 if today < len(valid_close):
-                    period_wma_sub += today_value
+                    temp_real = valid_close[today]
+                    today += 1
+                    period_wma_sub += temp_real
                     period_wma_sub -= trailing_wma_value
-                    period_wma_sum += today_value * 4.0
-                    trailing_wma_value = valid_close[trailing_wma_idx]
-                    trailing_wma_idx += 1
-                    smoothed_values[today] = period_wma_sum * 0.1
-                    period_wma_sum -= period_wma_sub
-            
-                if today % 2 == 0:
-                    # Even Hilbert Transform
-                    detrender_even[hilbert_idx] = smoothed_values[today] * adjusted_prev_period
-                    q1_even[hilbert_idx] = detrender_even[hilbert_idx] * adjusted_prev_period
-                    if today >= lookback_total:
-                        orig_idx = valid_indices[today]
-                        result_quadrature[orig_idx, sec] = q1_even[hilbert_idx]
-                        result_inphase[orig_idx, sec] = i1_for_even_prev3
-                    ji_even[hilbert_idx] = i1_for_even_prev3 * adjusted_prev_period
-                    jq_even[hilbert_idx] = q1_even[hilbert_idx] * adjusted_prev_period
-                    if hilbert_idx == 2:
-                        hilbert_idx = 0
-                    else:
-                        hilbert_idx += 1
-                    q2 = (0.2 * (q1_even[hilbert_idx - 1 if hilbert_idx > 0 else 2] + ji_even[hilbert_idx - 1 if hilbert_idx > 0 else 2])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[hilbert_idx - 1 if hilbert_idx > 0 else 2])) + (0.8 * prev_i2)
-                    i1_for_odd_prev3 = i1_for_odd_prev2
-                    i1_for_odd_prev2 = detrender_even[hilbert_idx - 1 if hilbert_idx > 0 else 2]
-                else:
-                    # Odd Hilbert Transform
-                    detrender_odd[hilbert_idx] = smoothed_values[today] * adjusted_prev_period
-                    q1_odd[hilbert_idx] = detrender_odd[hilbert_idx] * adjusted_prev_period
-                    if today >= lookback_total:
-                        orig_idx = valid_indices[today]
-                        result_quadrature[orig_idx, sec] = q1_odd[hilbert_idx]
-                        result_inphase[orig_idx, sec] = i1_for_odd_prev3
-                    ji_odd[hilbert_idx] = i1_for_odd_prev3 * adjusted_prev_period
-                    jq_odd[hilbert_idx] = q1_odd[hilbert_idx] * adjusted_prev_period
-                    q2 = (0.2 * (q1_odd[hilbert_idx] + ji_odd[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_even_prev3 = i1_for_even_prev2
-                    i1_for_even_prev2 = detrender_odd[hilbert_idx]
-            
-                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
-                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
-                prev_q2 = q2
-                prev_i2 = i2
-            
-                temp_real = period
-                if im != 0.0 and re != 0.0:
-                    period = 360.0 / (np.arctan(im / re) * (180.0 / (4.0 * np.arctan(1.0))))
-                temp_real2 = 1.5 * temp_real
-                if period > temp_real2:
-                    period = temp_real2
-                temp_real2 = 0.67 * temp_real
-                if period < temp_real2:
-                    period = temp_real2
-                if period < 6:
-                    period = 6
-                elif period > 50:
-                    period = 50
-                period = (0.2 * period) + (0.8 * temp_real)
-                today += 1
-    
-        return result_inphase, result_quadrature
-
-
-
-    @staticmethod
-    @nb.njit
-    def HT_SINE(high, open, low, close, vol, oi, unstable_period=63):
-        tdts, secs = close.shape
-        result_sine = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_lead_sine = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= unstable_period:
-                continue
-            
-            # 提取有效数据
-            valid_close = close[valid_mask, sec]
-            lookback_total = unstable_period
-        
-            # 初始化常量
-            temp_real = np.arctan(1.0)
-            rad2deg = 45.0 / temp_real
-            deg2rad = 1.0 / rad2deg
-            const_deg2rad_by_360 = temp_real * 8.0
-        
-            # 初始化WMA计算变量
-            trailing_wma_idx = 0
-            today = trailing_wma_idx
-            period_wma_sub = 0.0
-            period_wma_sum = 0.0
-            trailing_wma_value = 0.0
-        
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub = temp_real
-                period_wma_sum = temp_real
-            
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sum += temp_real * 2.0
-            
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sum += temp_real * 3.0
-            
-            # WMA计算循环
-            i = 34
-            smoothed_value = 0.0
-            while i > 0 and today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += temp_real * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_value = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-                i -= 1
-            
-            # 初始化Hilbert变换变量
-            hilbert_idx = 0
-            detrender_even = np.zeros(3)
-            detrender_odd = np.zeros(3)
-            q1_even = np.zeros(3)
-            q1_odd = np.zeros(3)
-            ji_even = np.zeros(3)
-            ji_odd = np.zeros(3)
-            jq_even = np.zeros(3)
-            jq_odd = np.zeros(3)
-        
-            period = 0.0
-            prev_i2 = 0.0
-            prev_q2 = 0.0
-            re = 0.0
-            im = 0.0
-            i1_for_odd_prev3 = 0.0
-            i1_for_odd_prev2 = 0.0
-            i1_for_even_prev3 = 0.0
-            i1_for_even_prev2 = 0.0
-            smooth_period = 0.0
-        
-            # 初始化平滑价格缓冲区
-            smooth_price_size = 100
-            smooth_price = np.zeros(smooth_price_size)
-            smooth_price_idx = 0
-            dc_phase = 0.0
-        
-            # 主循环
-            while today <= len(valid_close) - 1:
-                adjusted_prev_period = (0.075 * period) + 0.54
-                today_value = valid_close[today] if today < len(valid_close) else 0.0
-            
-                if today < len(valid_close):
-                    period_wma_sub += today_value
-                    period_wma_sub -= trailing_wma_value
-                    period_wma_sum += today_value * 4.0
-                    trailing_wma_value = valid_close[trailing_wma_idx] if trailing_wma_idx < len(valid_close) else 0.0
-                    trailing_wma_idx += 1
+                    period_wma_sum += temp_real * 4.0
+                    if trailing_wma_idx < len(valid_close):
+                        trailing_wma_value = valid_close[trailing_wma_idx]
+                        trailing_wma_idx += 1
                     smoothed_value = period_wma_sum * 0.1
                     period_wma_sum -= period_wma_sub
-                
-                smooth_price[smooth_price_idx] = smoothed_value
-            
-                if today % 2 == 0:
-                    # Even Hilbert Transform
-                    detrender_even[hilbert_idx] = smoothed_value * 0.33 + detrender_even[(hilbert_idx + 2) % 3] * 0.67
-                    q1_even[hilbert_idx] = detrender_even[hilbert_idx] * 0.33 + q1_even[(hilbert_idx + 2) % 3] * 0.67
-                    ji_even[hilbert_idx] = i1_for_even_prev3 * 0.33 + ji_even[(hilbert_idx + 2) % 3] * 0.67
-                    jq_even[hilbert_idx] = q1_even[hilbert_idx] * 0.33 + jq_even[(hilbert_idx + 2) % 3] * 0.67
-                
-                    if hilbert_idx == 2:
-                        hilbert_idx = 0
-                    else:
-                        hilbert_idx += 1
-                    
-                    q2 = (0.2 * (q1_even[hilbert_idx] + ji_even[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_odd_prev3 = i1_for_odd_prev2
-                    i1_for_odd_prev2 = detrender_even[hilbert_idx]
-                else:
-                    # Odd Hilbert Transform
-                    detrender_odd[hilbert_idx] = smoothed_value * 0.33 + detrender_odd[(hilbert_idx + 2) % 3] * 0.67
-                    q1_odd[hilbert_idx] = detrender_odd[hilbert_idx] * 0.33 + q1_odd[(hilbert_idx + 2) % 3] * 0.67
-                    ji_odd[hilbert_idx] = i1_for_odd_prev3 * 0.33 + ji_odd[(hilbert_idx + 2) % 3] * 0.67
-                    jq_odd[hilbert_idx] = q1_odd[hilbert_idx] * 0.33 + jq_odd[(hilbert_idx + 2) % 3] * 0.67
-                
-                    q2 = (0.2 * (q1_odd[hilbert_idx] + ji_odd[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_even_prev3 = i1_for_even_prev2
-                    i1_for_even_prev2 = detrender_odd[hilbert_idx]
-                
-                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
-                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
-                prev_q2 = q2
-                prev_i2 = i2
-            
-                temp_real = period
-                if im != 0.0 and re != 0.0:
-                    period = 360.0 / (np.arctan(im / re) * rad2deg)
-                
-                temp_real2 = 1.5 * temp_real
-                if period > temp_real2:
-                    period = temp_real2
-                temp_real2 = 0.67 * temp_real
-                if period < temp_real2:
-                    period = temp_real2
-                if period < 6:
-                    period = 6
-                elif period > 50:
-                    period = 50
-                
-                period = (0.2 * period) + (0.8 * temp_real)
-                smooth_period = (0.33 * period) + (0.67 * smooth_period)
-                dc_period = smooth_period + 0.5
-                dc_period_int = int(dc_period)
-            
-                real_part = 0.0
-                imag_part = 0.0
-                idx = smooth_price_idx
-                for i in range(dc_period_int):
-                    if idx >= 0 and idx < len(smooth_price):
-                        temp_real = (float(i) * const_deg2rad_by_360) / float(dc_period_int)
-                        temp_real2 = smooth_price[idx]
-                        real_part += np.sin(temp_real) * temp_real2
-                        imag_part += np.cos(temp_real) * temp_real2
-                    if idx == 0:
-                        idx = smooth_price_size - 1
-                    else:
-                        idx -= 1
-                    
-                temp_real = np.abs(imag_part)
-                if temp_real > 0.0:
-                    dc_phase = np.arctan(real_part / imag_part) * rad2deg
-                elif temp_real <= 0.01:
-                    if real_part < 0.0:
-                        dc_phase -= 90.0
-                    elif real_part > 0.0:
-                        dc_phase += 90.0
-                    
-                dc_phase += 90.0
-                dc_phase += 360.0 / smooth_period
-                if imag_part < 0.0:
-                    dc_phase += 180.0
-                if dc_phase > 315.0:
-                    dc_phase -= 360.0
-                
-                if today >= lookback_total:
-                    orig_idx = valid_indices[today]
-                    result_sine[orig_idx, sec] = np.sin(dc_phase * deg2rad)
-                    result_lead_sine[orig_idx, sec] = np.sin((dc_phase + 45) * deg2rad)
-                
-                smooth_price_idx = (smooth_price_idx + 1) % smooth_price_size
-                today += 1
-            
-        return result_sine
-
-
-
-    @staticmethod
-    @nb.njit
-    def HT_TRENDLINE(high, open, low, close, vol, oi):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        lookback_total = 63  # As per C source code
-
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-
-            # Extract valid data
-            valid_close = close[valid_mask, sec]
-            output = np.array([np.float64(np.nan)] * len(valid_close))
-
-            # Initialize variables for WMA calculation
-            trailing_wma_idx = 0
-            today = trailing_wma_idx
-            period_wma_sub = 0.0
-            period_wma_sum = 0.0
-            trailing_wma_value = 0.0
-
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub = temp_real
-                period_wma_sum = temp_real
-
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sum += temp_real * 2.0
-
-            if today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sum += temp_real * 3.0
-
-            # WMA for first 34 periods
-            i = 34
-            while i > 0 and today < len(valid_close):
-                temp_real = valid_close[today]
-                today += 1
-                period_wma_sub += temp_real
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += temp_real * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_value = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-                i -= 1
-
+        
             # Hilbert Transform variables
             hilbert_idx = 0
             detrender_even = np.zeros(3)
@@ -8423,9 +5640,9 @@ class BaseLogicFactors:
             ji_odd = np.zeros(3)
             jq_even = np.zeros(3)
             jq_odd = np.zeros(3)
-            smooth_price = np.zeros(7)  # Size as per typical implementation
-            smooth_price_idx = 0
+        
             period = 0.0
+            smooth_period = 0.0
             prev_i2 = 0.0
             prev_q2 = 0.0
             re = 0.0
@@ -8434,303 +5651,142 @@ class BaseLogicFactors:
             i1_for_odd_prev2 = 0.0
             i1_for_even_prev3 = 0.0
             i1_for_even_prev2 = 0.0
-            smooth_period = 0.0
+        
+            # Circular buffer for smooth price
+            smooth_price = np.zeros(smooth_price_size)
+            smooth_price_idx = 0
+        
+            rad2deg = 45.0 / np.arctan(1.0)
             i_trend1 = 0.0
             i_trend2 = 0.0
             i_trend3 = 0.0
-            rad2deg = 45.0 / np.arctan(1.0)
-
-            while today < len(valid_close):
-                adjusted_prev_period = (0.075 * period) + 0.54
-                today_value = valid_close[today]
-                period_wma_sub += today_value
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += today_value * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_value = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-
-                smooth_price[smooth_price_idx] = smoothed_value
-
-                if (today % 2) == 0:
-                    # Even index processing
-                    detrender_even[hilbert_idx] = (0.091 * smooth_price[(smooth_price_idx - 6) % 7]) + (0.369 * smooth_price[(smooth_price_idx - 4) % 7]) - (0.73 * smooth_price[(smooth_price_idx - 2) % 7]) + (0.27 * smooth_price[smooth_price_idx])
-                    q1_even[hilbert_idx] = (0.27 * detrender_even[hilbert_idx]) + (0.73 * detrender_even[(hilbert_idx - 1) % 3]) - (0.369 * detrender_even[(hilbert_idx - 2) % 3]) - (0.091 * detrender_even[(hilbert_idx + 1) % 3])
-                    ji_even[hilbert_idx] = (0.27 * i1_for_even_prev3) + (0.73 * i1_for_even_prev2) - (0.369 * detrender_even[(hilbert_idx - 2) % 3]) - (0.091 * detrender_even[(hilbert_idx + 1) % 3])
-                    jq_even[hilbert_idx] = (0.091 * q1_even[(hilbert_idx + 1) % 3]) + (0.369 * q1_even[(hilbert_idx - 2) % 3]) - (0.73 * q1_even[(hilbert_idx - 1) % 3]) + (0.27 * q1_even[hilbert_idx])
-                    if hilbert_idx == 2:
-                        hilbert_idx = 0
-                    else:
+        
+            out_idx = 0
+        
+            while today <= len(valid_close) - 1:
+                if today < len(valid_close):
+                    today_value = valid_close[today]
+                    period_wma_sub += today_value
+                    period_wma_sub -= trailing_wma_value
+                    period_wma_sum += today_value * 4.0
+                    if trailing_wma_idx < len(valid_close):
+                        trailing_wma_value = valid_close[trailing_wma_idx]
+                        trailing_wma_idx += 1
+                    smoothed_value = period_wma_sum * 0.1
+                    period_wma_sum -= period_wma_sub
+                
+                    smooth_price[smooth_price_idx] = smoothed_value
+                
+                    adjusted_prev_period = (0.075 * period) + 0.54
+                
+                    if today % 2 == 0:
+                        # Even index processing
+                        detrender = (0.0962 * smoothed_value + 0.5769 * detrender_even[2] - 0.5769 * detrender_even[0] - 0.0962 * detrender_even[1])
+                        q1 = (0.0962 * detrender + 0.5769 * q1_even[2] - 0.5769 * q1_even[0] - 0.0962 * q1_even[1])
+                        ji = (0.0962 * i1_for_even_prev3 + 0.5769 * ji_even[2] - 0.5769 * ji_even[0] - 0.0962 * ji_even[1])
+                        jq = (0.0962 * q1 + 0.5769 * jq_even[2] - 0.5769 * jq_even[0] - 0.0962 * jq_even[1])
+                    
+                        detrender_even[0] = detrender_even[1]
+                        detrender_even[1] = detrender_even[2]
+                        detrender_even[2] = detrender
+                    
+                        q1_even[0] = q1_even[1]
+                        q1_even[1] = q1_even[2]
+                        q1_even[2] = q1
+                    
+                        ji_even[0] = ji_even[1]
+                        ji_even[1] = ji_even[2]
+                        ji_even[2] = ji
+                    
+                        jq_even[0] = jq_even[1]
+                        jq_even[1] = jq_even[2]
+                        jq_even[2] = jq
+                    
                         hilbert_idx += 1
-                    q2 = (0.2 * (q1_even[(hilbert_idx - 1) % 3] + ji_even[(hilbert_idx - 1) % 3])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[(hilbert_idx - 1) % 3])) + (0.8 * prev_i2)
-                    i1_for_odd_prev3 = i1_for_odd_prev2
-                    i1_for_odd_prev2 = detrender_even[(hilbert_idx - 1) % 3]
-                else:
-                    # Odd index processing
-                    detrender_odd[hilbert_idx] = (0.091 * smooth_price[(smooth_price_idx - 6) % 7]) + (0.369 * smooth_price[(smooth_price_idx - 4) % 7]) - (0.73 * smooth_price[(smooth_price_idx - 2) % 7]) + (0.27 * smooth_price[smooth_price_idx])
-                    q1_odd[hilbert_idx] = (0.27 * detrender_odd[hilbert_idx]) + (0.73 * detrender_odd[(hilbert_idx - 1) % 3]) - (0.369 * detrender_odd[(hilbert_idx - 2) % 3]) - (0.091 * detrender_odd[(hilbert_idx + 1) % 3])
-                    ji_odd[hilbert_idx] = (0.27 * i1_for_odd_prev3) + (0.73 * i1_for_odd_prev2) - (0.369 * detrender_odd[(hilbert_idx - 2) % 3]) - (0.091 * detrender_odd[(hilbert_idx + 1) % 3])
-                    jq_odd[hilbert_idx] = (0.091 * q1_odd[(hilbert_idx + 1) % 3]) + (0.369 * q1_odd[(hilbert_idx - 2) % 3]) - (0.73 * q1_odd[(hilbert_idx - 1) % 3]) + (0.27 * q1_odd[hilbert_idx])
-                    q2 = (0.2 * (q1_odd[(hilbert_idx - 1) % 3] + ji_odd[(hilbert_idx - 1) % 3])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[(hilbert_idx - 1) % 3])) + (0.8 * prev_i2)
-                    i1_for_even_prev3 = i1_for_even_prev2
-                    i1_for_even_prev2 = detrender_odd[(hilbert_idx - 1) % 3]
-
-                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
-                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
-                prev_q2 = q2
-                prev_i2 = i2
-                temp_real = period
-                if im != 0.0 and re != 0.0:
-                    period = 360.0 / (np.arctan(im / re) * rad2deg)
-                temp_real2 = 1.5 * temp_real
-                if period > temp_real2:
-                    period = temp_real2
-                temp_real2 = 0.67 * temp_real
-                if period < temp_real2:
-                    period = temp_real2
-                if period < 6:
-                    period = 6
-                elif period > 50:
-                    period = 50
-                period = (0.2 * period) + (0.8 * temp_real)
-                smooth_period = (0.33 * period) + (0.67 * smooth_period)
-
-                dc_period = smooth_period + 0.5
-                dc_period_int = int(dc_period)
-                idx = today
-                temp_real = 0.0
-                for i in range(dc_period_int):
-                    if idx - i >= 0:
-                        temp_real += valid_close[idx - i]
-                if dc_period_int > 0:
-                    temp_real = temp_real / dc_period_int
-
-                temp_real2 = (4.0 * temp_real + 3.0 * i_trend1 + 2.0 * i_trend2 + i_trend3) / 10.0
-                i_trend3 = i_trend2
-                i_trend2 = i_trend1
-                i_trend1 = temp_real
-
-                if today >= lookback_total:
-                    output[today] = temp_real2
-
-                smooth_price_idx = (smooth_price_idx + 1) % 7
-                today += 1
-
+                        if hilbert_idx == 3:
+                            hilbert_idx = 0
+                        
+                        q2 = (0.2 * (q1 + ji)) + (0.8 * prev_q2)
+                        i2 = (0.2 * (i1_for_even_prev3 - jq)) + (0.8 * prev_i2)
+                        i1_for_odd_prev3 = i1_for_odd_prev2
+                        i1_for_odd_prev2 = detrender
+                    else:
+                        # Odd index processing
+                        detrender = (-0.091 * smoothed_value + 0.369 * detrender_odd[2] + 0.7199 * detrender_odd[1] - 0.369 * detrender_odd[0])
+                        q1 = (-0.091 * detrender + 0.369 * q1_odd[2] + 0.7199 * q1_odd[1] - 0.369 * q1_odd[0])
+                        ji = (-0.091 * i1_for_odd_prev3 + 0.369 * ji_odd[2] + 0.7199 * ji_odd[1] - 0.369 * ji_odd[0])
+                        jq = (-0.091 * q1 + 0.369 * jq_odd[2] + 0.7199 * jq_odd[1] - 0.369 * jq_odd[0])
+                    
+                        detrender_odd[0] = detrender_odd[1]
+                        detrender_odd[1] = detrender_odd[2]
+                        detrender_odd[2] = detrender
+                    
+                        q1_odd[0] = q1_odd[1]
+                        q1_odd[1] = q1_odd[2]
+                        q1_odd[2] = q1
+                    
+                        ji_odd[0] = ji_odd[1]
+                        ji_odd[1] = ji_odd[2]
+                        ji_odd[2] = ji
+                    
+                        jq_odd[0] = jq_odd[1]
+                        jq_odd[1] = jq_odd[2]
+                        jq_odd[2] = jq
+                    
+                        q2 = (0.2 * (q1 + ji)) + (0.8 * prev_q2)
+                        i2 = (0.2 * (i1_for_odd_prev3 - jq)) + (0.8 * prev_i2)
+                        i1_for_even_prev3 = i1_for_even_prev2
+                        i1_for_even_prev2 = detrender
+                
+                    re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
+                    im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
+                    prev_q2 = q2
+                    prev_i2 = i2
+                
+                    temp_real = period
+                    if im != 0.0 and re != 0.0:
+                        period = 360.0 / (np.arctan(im / re) * rad2deg)
+                    temp_real2 = 1.5 * temp_real
+                    if period > temp_real2:
+                        period = temp_real2
+                    temp_real2 = 0.67 * temp_real
+                    if period < temp_real2:
+                        period = temp_real2
+                    if period < 6:
+                        period = 6
+                    elif period > 50:
+                        period = 50
+                    period = (0.2 * period) + (0.8 * temp_real)
+                    smooth_period = (0.33 * period) + (0.67 * smooth_period)
+                
+                    dc_period = smooth_period + 0.5
+                    dc_period_int = int(dc_period)
+                    idx = today
+                    temp_real = 0.0
+                    for i in range(dc_period_int):
+                        if idx - i >= 0:
+                            temp_real += valid_close[idx - i]
+                    if dc_period_int > 0:
+                        temp_real = temp_real / dc_period_int
+                
+                    temp_real2 = (4.0 * temp_real + 3.0 * i_trend1 + 2.0 * i_trend2 + i_trend3) / 10.0
+                    i_trend3 = i_trend2
+                    i_trend2 = i_trend1
+                    i_trend1 = temp_real
+                
+                    if today >= lookback_total:
+                        output[out_idx] = temp_real2
+                        out_idx += 1
+                
+                    smooth_price_idx = (smooth_price_idx + 1) % smooth_price_size
+                    today += 1
+        
             # Map results back to original array
             for i in range(len(valid_indices)):
-                if valid_indices[i] >= lookback_total and i < len(output):
-                    result[valid_indices[i], sec] = output[i]
-
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def HT_TRENDMODE(high, open, low, close, vol, oi):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        lookback_total = 63  # As per C source code
-
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-
-            valid_close = close[valid_mask, sec]
-            result_temp = np.zeros(len(valid_close))
-
-            # Initialize variables as per C code
-            i_trend1 = i_trend2 = i_trend3 = 0.0
-            days_in_trend = 0
-            prev_dc_phase = dc_phase = 0.0
-            prev_sine = sine = 0.0
-            prev_lead_sine = lead_sine = 0.0
-            temp_real = np.arctan(1.0)
-            rad2deg = 45.0 / temp_real
-            deg2rad = 1.0 / rad2deg
-            const_deg2rad_by_360 = temp_real * 8.0
-
-            # WMA initialization
-            trailing_wma_idx = 0
-            today = trailing_wma_idx
-            period_wma_sub = valid_close[today]
-            period_wma_sum = valid_close[today]
-            today += 1
-            temp_real = valid_close[today]
-            period_wma_sub += temp_real
-            period_wma_sum += temp_real * 2.0
-            today += 1
-            temp_real = valid_close[today]
-            period_wma_sub += temp_real
-            period_wma_sum += temp_real * 3.0
-            today += 1
-            trailing_wma_value = 0.0
-
-            # WMA for first 34 periods
-            for i in range(34):
-                temp_real = valid_close[today]
-                period_wma_sub += temp_real
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += temp_real * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_value = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-                today += 1
-
-            # Hilbert Transform variables
-            hilbert_idx = 0
-            detrender = np.zeros(3)
-            q1 = np.zeros(3)
-            ji = np.zeros(3)
-            jq = np.zeros(3)
-            period = 0.0
-            prev_i2 = prev_q2 = 0.0
-            re = im = 0.0
-            i1_for_odd_prev3 = i1_for_even_prev3 = 0.0
-            i1_for_odd_prev2 = i1_for_even_prev2 = 0.0
-            smooth_period = 0.0
-            smooth_price_size = 64  # Assuming a reasonable size based on C code
-            smooth_price = np.zeros(smooth_price_size)
-            smooth_price_idx = 0
-            out_idx = 0
-
-            while today < len(valid_close):
-                adjusted_prev_period = (0.075 * period) + 0.54
-                today_value = valid_close[today]
-                period_wma_sub += today_value
-                period_wma_sub -= trailing_wma_value
-                period_wma_sum += today_value * 4.0
-                trailing_wma_value = valid_close[trailing_wma_idx]
-                trailing_wma_idx += 1
-                smoothed_value = period_wma_sum * 0.1
-                period_wma_sum -= period_wma_sub
-                smooth_price[smooth_price_idx] = smoothed_value
-
-                if (today % 2) == 0:
-                    # Even Hilbert
-                    detrender[hilbert_idx] = (0.0962 * smoothed_value + 0.5769 * detrender[(hilbert_idx - 2) % 3] - 0.5769 * detrender[hilbert_idx] - 0.0962 * detrender[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    q1[hilbert_idx] = (0.0962 * detrender[hilbert_idx] + 0.5769 * q1[(hilbert_idx - 2) % 3] - 0.5769 * q1[hilbert_idx] - 0.0962 * q1[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    ji[hilbert_idx] = (0.0962 * i1_for_even_prev3 + 0.5769 * ji[(hilbert_idx - 2) % 3] - 0.5769 * ji[hilbert_idx] - 0.0962 * ji[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    jq[hilbert_idx] = (0.0962 * q1[hilbert_idx] + 0.5769 * jq[(hilbert_idx - 2) % 3] - 0.5769 * jq[hilbert_idx] - 0.0962 * jq[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    hilbert_idx = (hilbert_idx + 1) % 3
-                    q2 = (0.2 * (q1[hilbert_idx] + ji[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_even_prev3 - jq[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_odd_prev3 = i1_for_odd_prev2
-                    i1_for_odd_prev2 = detrender[hilbert_idx]
-                else:
-                    # Odd Hilbert
-                    detrender[hilbert_idx] = (0.091 * smoothed_value + 0.822 * detrender[(hilbert_idx - 2) % 3] - 0.822 * detrender[hilbert_idx] - 0.091 * detrender[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    q1[hilbert_idx] = (0.091 * detrender[hilbert_idx] + 0.822 * q1[(hilbert_idx - 2) % 3] - 0.822 * q1[hilbert_idx] - 0.091 * q1[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    ji[hilbert_idx] = (0.091 * i1_for_odd_prev3 + 0.822 * ji[(hilbert_idx - 2) % 3] - 0.822 * ji[hilbert_idx] - 0.091 * ji[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    jq[hilbert_idx] = (0.091 * q1[hilbert_idx] + 0.822 * jq[(hilbert_idx - 2) % 3] - 0.822 * jq[hilbert_idx] - 0.091 * jq[(hilbert_idx + 1) % 3]) * adjusted_prev_period
-                    q2 = (0.2 * (q1[hilbert_idx] + ji[hilbert_idx])) + (0.8 * prev_q2)
-                    i2 = (0.2 * (i1_for_odd_prev3 - jq[hilbert_idx])) + (0.8 * prev_i2)
-                    i1_for_even_prev3 = i1_for_even_prev2
-                    i1_for_even_prev2 = detrender[hilbert_idx]
-
-                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
-                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
-                prev_q2 = q2
-                prev_i2 = i2
-                temp_real = period
-                if im != 0.0 and re != 0.0:
-                    period = 360.0 / (np.arctan(im / re) * rad2deg)
-                temp_real2 = 1.5 * temp_real
-                if period > temp_real2:
-                    period = temp_real2
-                temp_real2 = 0.67 * temp_real
-                if period < temp_real2:
-                    period = temp_real2
-                if period < 6:
-                    period = 6
-                elif period > 50:
-                    period = 50
-                period = (0.2 * period) + (0.8 * temp_real)
-                smooth_period = (0.33 * period) + (0.67 * smooth_period)
-                prev_dc_phase = dc_phase
-                dc_period = smooth_period + 0.5
-                dc_period_int = int(dc_period)
-                real_part = 0.0
-                imag_part = 0.0
-                idx = smooth_price_idx
-                for i in range(dc_period_int):
-                    temp_real = (i * const_deg2rad_by_360) / dc_period_int
-                    temp_real2 = smooth_price[idx]
-                    real_part += np.sin(temp_real) * temp_real2
-                    imag_part += np.cos(temp_real) * temp_real2
-                    idx = (idx - 1) if idx > 0 else (smooth_price_size - 1)
-
-                temp_real = np.abs(imag_part)
-                if temp_real > 0.0:
-                    dc_phase = np.arctan(real_part / imag_part) * rad2deg
-                elif temp_real <= 0.01:
-                    if real_part < 0.0:
-                        dc_phase -= 90.0
-                    elif real_part > 0.0:
-                        dc_phase += 90.0
-                dc_phase += 90.0
-                dc_phase += 360.0 / smooth_period
-                if imag_part < 0.0:
-                    dc_phase += 180.0
-                if dc_phase > 315.0:
-                    dc_phase -= 360.0
-
-                prev_sine = sine
-                prev_lead_sine = lead_sine
-                sine = np.sin(dc_phase * deg2rad)
-                lead_sine = np.sin((dc_phase + 45) * deg2rad)
-
-                dc_period = smooth_period + 0.5
-                dc_period_int = int(dc_period)
-                idx = today
-                temp_real = 0.0
-                for i in range(dc_period_int):
-                    if idx >= 0:
-                        temp_real += valid_close[idx]
-                        idx -= 1
-                if dc_period_int > 0:
-                    temp_real = temp_real / dc_period_int
-
-                trendline = (4.0 * temp_real + 3.0 * i_trend1 + 2.0 * i_trend2 + i_trend3) / 10.0
-                i_trend3 = i_trend2
-                i_trend2 = i_trend1
-                i_trend1 = temp_real
-                trend = 1
-                if ((sine > lead_sine) and (prev_sine <= prev_lead_sine)) or ((sine < lead_sine) and (prev_sine >= prev_lead_sine)):
-                    days_in_trend = 0
-                    trend = 0
-                days_in_trend += 1
-                if days_in_trend < (0.5 * smooth_period):
-                    trend = 0
-                temp_real = dc_phase - prev_dc_phase
-                if smooth_period != 0.0 and (temp_real > (0.67 * 360.0 / smooth_period)) and (temp_real < (1.5 * 360.0 / smooth_period)):
-                    trend = 0
-                temp_real = smooth_price[smooth_price_idx]
-                if trendline != 0.0 and np.abs((temp_real - trendline) / trendline) >= 0.015:
-                    trend = 1
-
-                if today >= lookback_total:
-                    result_temp[today] = trend
-
-                smooth_price_idx = (smooth_price_idx + 1) % smooth_price_size
-                today += 1
-
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
+                if i >= lookback_total and i - lookback_total < len(output):
                     orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = result_temp[i]
-
+                    result[orig_idx, sec] = output[i - lookback_total]
+    
         return result
 
 
@@ -8741,9 +5797,6 @@ class BaseLogicFactors:
         tdts, secs = close.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib
-        lookback_total = timeperiod - 1
-    
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -8752,34 +5805,32 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) < timeperiod:
                 continue
             
             # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # Pre-calculate constants for linear regression
-            sum_x = timeperiod * (timeperiod - 1) * 0.5
-            sum_x_sqr = timeperiod * (timeperiod - 1) * (2 * timeperiod - 1) / 6
-            divisor = sum_x * sum_x - timeperiod * sum_x_sqr
+            # Precompute constants for linear regression
+            SumX = timeperiod * (timeperiod - 1) * 0.5
+            SumXSqr = timeperiod * (timeperiod - 1) * (2 * timeperiod - 1) / 6
+            Divisor = SumX * SumX - timeperiod * SumXSqr
         
-            # Start calculation from the point where we have enough data
-            start_idx = lookback_total
+            # Calculate linear regression for each valid position
+            start_idx = timeperiod - 1
             for i in range(start_idx, len(valid_close)):
-                sum_xy = 0.0
-                sum_y = 0.0
-            
-                # Calculate sums for linear regression
+                SumXY = 0.0
+                SumY = 0.0
                 for j in range(timeperiod):
                     temp_value = valid_close[i - j]
-                    sum_y += temp_value
-                    sum_xy += j * temp_value
+                    SumY += temp_value
+                    SumXY += j * temp_value
             
                 # Calculate slope (m) and intercept (b)
-                m = (timeperiod * sum_xy - sum_x * sum_y) / divisor
-                b = (sum_y - m * sum_x) / timeperiod
+                m = (timeperiod * SumXY - SumX * SumY) / Divisor
+                b = (SumY - m * SumX) / timeperiod
             
-                # Calculate the regression value at the last point
+                # Calculate the regression value at the last point of the window
                 reg_value = b + m * (timeperiod - 1)
             
                 # Map back to original index
@@ -8795,9 +5846,10 @@ class BaseLogicFactors:
     def LINEARREG_ANGLE(high, open, low, close, vol, oi, timeperiod=14):
         tdts, secs = close.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        PI = 3.141592653589793
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -8807,38 +5859,39 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 初始化输出数组
-            angle_values = np.zeros(len(valid_close))
-        
-            # 预计算常数
+            # Pre-calculate constants for linear regression
             SumX = timeperiod * (timeperiod - 1) * 0.5
             SumXSqr = timeperiod * (timeperiod - 1) * (2 * timeperiod - 1) / 6
             Divisor = SumX * SumX - timeperiod * SumXSqr
         
-            # 主计算循环
-            for today in range(timeperiod - 1, len(valid_close)):
+            # Start index matches TA-Lib lookback
+            start_idx = timeperiod - 1
+        
+            # Calculate linear regression angle
+            for i in range(start_idx, len(valid_close)):
                 SumXY = 0.0
                 SumY = 0.0
-                for i in range(timeperiod):
-                    tempValue = valid_close[today - i]
-                    SumY += tempValue
-                    SumXY += i * tempValue
             
-                # 计算斜率 m
+                # Calculate sums for current window
+                for j in range(timeperiod):
+                    temp_value = valid_close[i - j]
+                    SumY += temp_value
+                    SumXY += j * temp_value
+            
+                # Calculate slope (m)
                 if Divisor != 0:
                     m = (timeperiod * SumXY - SumX * SumY) / Divisor
-                    # 计算角度（弧度转角度）
-                    angle_values[today] = np.arctan(m) * (180.0 / np.pi)
+                    # Convert slope to angle in degrees
+                    angle = np.arctan(m) * (180.0 / PI)
                 else:
-                    angle_values[today] = 0.0
-        
-            # 映射结果回原始数组
-            for i in range(timeperiod - 1, len(valid_indices)):
+                    angle = 0.0
+                
+                # Map result back to original array
                 orig_idx = valid_indices[i]
-                result[orig_idx, sec] = angle_values[i]
+                result[orig_idx, sec] = angle
     
         return result
 
@@ -8851,7 +5904,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -8861,29 +5914,38 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 计算线性回归截距
+            # Pre-calculate constants for linear regression
             SumX = timeperiod * (timeperiod - 1) * 0.5
             SumXSqr = timeperiod * (timeperiod - 1) * (2 * timeperiod - 1) / 6
             Divisor = SumX * SumX - timeperiod * SumXSqr
         
-            # 开始计算线性回归截距
+            # Start index for output (matches TA-Lib lookback)
             start_idx = timeperiod - 1
-            for i in range(start_idx, len(valid_close)):
+            if start_idx >= len(valid_close):
+                continue
+            
+            # Main calculation loop
+            for today in range(start_idx, len(valid_close)):
                 SumXY = 0.0
                 SumY = 0.0
-                for j in range(timeperiod):
-                    tempValue = valid_close[i - j]
-                    SumY += tempValue
-                    SumXY += j * tempValue
             
-                # 计算斜率 m
+                # Calculate sums for current window
+                for i in range(timeperiod):
+                    tempValue = valid_close[today - i]
+                    SumY += tempValue
+                    SumXY += i * tempValue
+            
+                # Calculate slope (m)
                 m = (timeperiod * SumXY - SumX * SumY) / Divisor
-                # 计算截距
+            
+                # Calculate intercept
                 intercept = (SumY - m * SumX) / timeperiod
-                orig_idx = valid_indices[i]
+            
+                # Map result back to original array
+                orig_idx = valid_indices[today]
                 result[orig_idx, sec] = intercept
     
         return result
@@ -8896,9 +5958,6 @@ class BaseLogicFactors:
         tdts, secs = close.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per TA-Lib
-        lookback_total = timeperiod - 1
-    
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -8907,33 +5966,29 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) < timeperiod:
                 continue
             
             # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # Pre-calculate constants as per C source
-            sum_x = timeperiod * (timeperiod - 1) * 0.5
-            sum_x_sqr = timeperiod * (timeperiod - 1) * (2 * timeperiod - 1) / 6
-            divisor = sum_x * sum_x - timeperiod * sum_x_sqr
+            # Pre-calculate constants as per C code
+            SumX = timeperiod * (timeperiod - 1) * 0.5
+            SumXSqr = timeperiod * (timeperiod - 1) * (2 * timeperiod - 1) / 6
+            Divisor = SumX * SumX - timeperiod * SumXSqr
         
-            # Calculate slope for each valid position
+            # Calculate linear regression slope
             slope_values = np.zeros(len(valid_close))
-            start_idx = lookback_total
+            start_idx = timeperiod - 1
         
             for today in range(start_idx, len(valid_close)):
-                sum_xy = 0.0
-                sum_y = 0.0
+                SumXY = 0.0
+                SumY = 0.0
                 for i in range(timeperiod):
-                    temp_value = valid_close[today - i]
-                    sum_y += temp_value
-                    sum_xy += i * temp_value
-            
-                if divisor != 0:
-                    slope_values[today] = (timeperiod * sum_xy - sum_x * sum_y) / divisor
-                else:
-                    slope_values[today] = 0.0
+                    tempValue = valid_close[today - i]
+                    SumY += tempValue
+                    SumXY += i * tempValue
+                slope_values[today] = (timeperiod * SumXY - SumX * SumY) / Divisor
         
             # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
@@ -8946,197 +6001,12 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def MACDEXT(high, open, low, close, vol, oi, fastperiod=12, fastmatype=0, slowperiod=26, slowmatype=0, signalperiod=9, signalmatype=0):
-        tdts, secs = close.shape
-        result_macd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_signal = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_hist = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Swap fast and slow periods if necessary
-        if slowperiod < fastperiod:
-            temp_period = slowperiod
-            slowperiod = fastperiod
-            fastperiod = temp_period
-            temp_matype = slowmatype
-            slowmatype = fastmatype
-            fastmatype = temp_matype
-    
-        # Calculate lookback periods for MA functions (simplified as max periods)
-        lookback_fast = fastperiod - 1
-        lookback_slow = slowperiod - 1
-        lookback_largest = max(lookback_fast, lookback_slow)
-        lookback_signal = signalperiod - 1
-        lookback_total = lookback_signal + lookback_largest
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # Extract valid data
-            valid_close = close[valid_mask, sec]
-        
-            # Allocate temporary buffers for fast and slow MA
-            temp_size = len(valid_close)
-            fast_ma_buffer = np.zeros(temp_size)
-            slow_ma_buffer = np.zeros(temp_size)
-        
-            # Compute Fast MA
-            if fastmatype == 0:  # SMA
-                for i in range(fastperiod - 1, temp_size):
-                    if i >= fastperiod - 1:
-                        sum_val = 0.0
-                        for j in range(i - fastperiod + 1, i + 1):
-                            sum_val += valid_close[j]
-                        fast_ma_buffer[i] = sum_val / fastperiod
-            else:  # EMA as default fallback
-                alpha = 2.0 / (fastperiod + 1)
-                for i in range(temp_size):
-                    if i == 0:
-                        fast_ma_buffer[i] = valid_close[i]
-                    else:
-                        fast_ma_buffer[i] = alpha * valid_close[i] + (1 - alpha) * fast_ma_buffer[i - 1]
-        
-            # Compute Slow MA
-            if slowmatype == 0:  # SMA
-                for i in range(slowperiod - 1, temp_size):
-                    if i >= slowperiod - 1:
-                        sum_val = 0.0
-                        for j in range(i - slowperiod + 1, i + 1):
-                            sum_val += valid_close[j]
-                        slow_ma_buffer[i] = sum_val / slowperiod
-            else:  # EMA as default fallback
-                alpha = 2.0 / (slowperiod + 1)
-                for i in range(temp_size):
-                    if i == 0:
-                        slow_ma_buffer[i] = valid_close[i]
-                    else:
-                        slow_ma_buffer[i] = alpha * valid_close[i] + (1 - alpha) * slow_ma_buffer[i - 1]
-        
-            # Compute MACD Line (Fast MA - Slow MA)
-            macd_buffer = np.zeros(temp_size)
-            for i in range(temp_size):
-                macd_buffer[i] = fast_ma_buffer[i] - slow_ma_buffer[i]
-        
-            # Compute Signal Line
-            signal_buffer = np.zeros(temp_size)
-            if signalmatype == 0:  # SMA
-                for i in range(signalperiod - 1, temp_size):
-                    if i >= signalperiod - 1:
-                        sum_val = 0.0
-                        for j in range(i - signalperiod + 1, i + 1):
-                            sum_val += macd_buffer[j]
-                        signal_buffer[i] = sum_val / signalperiod
-            else:  # EMA as default fallback
-                alpha = 2.0 / (signalperiod + 1)
-                for i in range(temp_size):
-                    if i == 0:
-                        signal_buffer[i] = macd_buffer[i]
-                    else:
-                        signal_buffer[i] = alpha * macd_buffer[i] + (1 - alpha) * signal_buffer[i - 1]
-        
-            # Compute Histogram
-            hist_buffer = np.zeros(temp_size)
-            for i in range(temp_size):
-                hist_buffer[i] = macd_buffer[i] - signal_buffer[i]
-        
-            # Map results back to original array
-            start_idx = lookback_total
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result_macd[orig_idx, sec] = macd_buffer[i]
-                if i >= lookback_total:
-                    result_signal[orig_idx, sec] = signal_buffer[i]
-                    result_hist[orig_idx, sec] = hist_buffer[i]
-    
-        return result_macd, result_signal, result_hist
-
-
-
-    @staticmethod
-    @nb.njit
-    def MACDFIX(high, open, low, close, vol, oi, signalperiod=9):
-        tdts, secs = close.shape
-        result_macd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_signal = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_hist = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # Create mask for valid data
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_close = close[valid_mask, sec]
-            valid_indices = np.where(valid_mask)[0]
-        
-            # Check if there is enough data
-            if len(valid_close) < 34 + signalperiod - 1:  # Lookback period for MACD FIX
-                continue
-        
-            # Initialize arrays for EMA calculations
-            ema12 = np.zeros(len(valid_close))
-            ema26 = np.zeros(len(valid_close))
-            macd_line = np.zeros(len(valid_close))
-            signal_line = np.zeros(len(valid_close))
-            hist_line = np.zeros(len(valid_close))
-        
-            # EMA12 and EMA26 coefficients (fixed for MACDFIX)
-            k12 = 2.0 / (12.0 + 1.0)
-            k26 = 2.0 / (26.0 + 1.0)
-        
-            # Calculate EMA12 and EMA26
-            for i in range(len(valid_close)):
-                if i == 0:
-                    ema12[i] = valid_close[i]
-                    ema26[i] = valid_close[i]
-                else:
-                    ema12[i] = valid_close[i] * k12 + ema12[i-1] * (1.0 - k12)
-                    ema26[i] = valid_close[i] * k26 + ema26[i-1] * (1.0 - k26)
-        
-            # Calculate MACD Line (difference between EMA12 and EMA26)
-            for i in range(len(valid_close)):
-                macd_line[i] = ema12[i] - ema26[i]
-        
-            # Calculate Signal Line (EMA of MACD Line)
-            k_signal = 2.0 / (signalperiod + 1.0)
-            for i in range(len(valid_close)):
-                if i == 0:
-                    signal_line[i] = macd_line[i]
-                else:
-                    signal_line[i] = macd_line[i] * k_signal + signal_line[i-1] * (1.0 - k_signal)
-        
-            # Calculate Histogram (difference between MACD Line and Signal Line)
-            for i in range(len(valid_close)):
-                hist_line[i] = macd_line[i] - signal_line[i]
-        
-            # Map results back to original array
-            start_idx = 33  # TA-Lib MACD output starts after lookback period
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result_macd[orig_idx, sec] = macd_line[i]
-                result_signal[orig_idx, sec] = signal_line[i]
-                result_hist[orig_idx, sec] = hist_line[i]
-    
-        return result_macd, result_signal, result_hist
-
-
-
-    @staticmethod
-    @nb.njit
     def MAXINDEX(high, open, low, close, vol, oi, timeperiod=14):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if high[i, sec] == high[i, sec]:
@@ -9146,13 +6016,13 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_high = high[valid_mask, sec]
         
-            # 初始化输出数组
+            # Initialize output array for max index values
             maxindex_values = np.zeros(len(valid_high))
         
-            # 计算lookback期
+            # Set lookback period as per C code
             nb_initial_element_needed = timeperiod - 1
             start_idx = nb_initial_element_needed if nb_initial_element_needed < len(valid_high) else len(valid_high) - 1
         
@@ -9171,25 +6041,28 @@ class BaseLogicFactors:
                     highest_idx = trailing_idx
                     highest = valid_high[highest_idx]
                     i = highest_idx
-                    while i + 1 <= today:
-                        i += 1
+                    while i < today + 1:
                         tmp_val = valid_high[i]
                         if tmp_val > highest:
                             highest_idx = i
                             highest = tmp_val
+                        i += 1
                 elif tmp >= highest:
                     highest_idx = today
                     highest = tmp
                 
-                maxindex_values[out_idx] = highest_idx
-                out_idx += 1
+                if out_idx < len(maxindex_values):
+                    maxindex_values[out_idx] = highest_idx
+                    out_idx += 1
+                
                 trailing_idx += 1
                 today += 1
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = maxindex_values[i - start_idx]
+                if i - start_idx < len(maxindex_values):
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = maxindex_values[i - start_idx]
     
         return result
 
@@ -9206,20 +6079,18 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # Create a mask for valid data points
+            # Create a mask for valid data
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (high[i, sec] == high[i, sec] and 
                     low[i, sec] == low[i, sec]):
                     valid_mask[i] = True
         
-            # Get indices of valid data
+            # Get valid data indices
             valid_indices = np.where(valid_mask)[0]
-        
-            # If no valid data, skip to next security
             if len(valid_indices) == 0:
                 continue
-        
+            
             # Extract valid high and low data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
@@ -9229,7 +6100,7 @@ class BaseLogicFactors:
             for i in range(len(valid_high)):
                 medprice_values[i] = (valid_high[i] + valid_low[i]) / 2.0
         
-            # Map results back to original array
+            # Map results back to the original array
             for i in range(len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = medprice_values[i]
@@ -9244,7 +6115,6 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
         unstable_period = 25  # TA-Lib default unstable period for MFI
-        lookback_total = timeperiod + unstable_period
     
         for sec in range(secs):
             # Create valid data mask
@@ -9257,7 +6127,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) <= timeperiod + unstable_period:
                 continue
             
             # Extract valid data
@@ -9266,7 +6136,7 @@ class BaseLogicFactors:
             valid_close = close[valid_mask, sec]
             valid_vol = vol[valid_mask, sec]
         
-            # Initialize output array for this security
+            # Initialize output array for MFI values
             mfi_values = np.zeros(len(valid_high))
         
             # Initialize circular buffer simulation for positive and negative money flow
@@ -9274,16 +6144,20 @@ class BaseLogicFactors:
             neg_mf_buffer = np.zeros(timeperiod)
             buffer_idx = 0
         
-            # Initialize sums
+            # Initialize sums for positive and negative money flow
             pos_sum_mf = 0.0
             neg_sum_mf = 0.0
         
-            # Start from the first valid point
+            # Calculate lookback total as in TA-Lib
+            lookback_total = timeperiod + unstable_period
+            start_idx = lookback_total
+        
+            # Initialize previous typical price
             today = 0
             prev_value = (valid_high[today] + valid_low[today] + valid_close[today]) / 3.0
             today += 1
         
-            # First loop: Initialize the buffer with first timeperiod values
+            # Warm-up period: First timeperiod points
             for i in range(timeperiod):
                 temp_value1 = (valid_high[today] + valid_low[today] + valid_close[today]) / 3.0
                 temp_value2 = temp_value1 - prev_value
@@ -9305,18 +6179,8 @@ class BaseLogicFactors:
                 
                 buffer_idx = (buffer_idx + 1) % timeperiod
         
-            # Check if we can output the first value after lookback
-            start_idx = lookback_total
-            if today > start_idx:
-                temp_value1 = pos_sum_mf + neg_sum_mf
-                if temp_value1 < 1.0:
-                    mfi_values[start_idx] = 0.0
-                else:
-                    mfi_values[start_idx] = 100.0 * (pos_sum_mf / temp_value1)
-        
-            # Second loop: Process data until start_idx if not reached
-            while today < start_idx and today < len(valid_high):
-                # Remove oldest values from sums
+            # Process until start_idx (unstable period)
+            while today < start_idx:
                 pos_sum_mf -= pos_mf_buffer[buffer_idx]
                 neg_sum_mf -= neg_mf_buffer[buffer_idx]
             
@@ -9340,9 +6204,9 @@ class BaseLogicFactors:
                 
                 buffer_idx = (buffer_idx + 1) % timeperiod
         
-            # Main loop: Process remaining data
+            # Main calculation loop
+            out_idx = start_idx
             while today < len(valid_high):
-                # Remove oldest values from sums
                 pos_sum_mf -= pos_mf_buffer[buffer_idx]
                 neg_sum_mf -= neg_mf_buffer[buffer_idx]
             
@@ -9364,19 +6228,19 @@ class BaseLogicFactors:
                     pos_mf_buffer[buffer_idx] = 0.0
                     neg_mf_buffer[buffer_idx] = 0.0
                 
-                temp_value1 = pos_sum_mf + neg_sum_mf
-                if temp_value1 < 1.0:
-                    mfi_values[today - 1] = 0.0
+                temp_total = pos_sum_mf + neg_sum_mf
+                if temp_total < 1.0:
+                    mfi_values[out_idx] = 0.0
                 else:
-                    mfi_values[today - 1] = 100.0 * (pos_sum_mf / temp_value1)
+                    mfi_values[out_idx] = 100.0 * (pos_sum_mf / temp_total)
                 
                 buffer_idx = (buffer_idx + 1) % timeperiod
+                out_idx += 1
         
             # Map results back to original array
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = mfi_values[i]
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result[orig_idx, sec] = mfi_values[i]
     
         return result
 
@@ -9388,49 +6252,38 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per C source code
-        nb_initial_element_needed = timeperiod - 1
-    
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
-                if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec]:
+                if close[i, sec] == close[i, sec]:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= nb_initial_element_needed:
+            if len(valid_indices) < timeperiod:
                 continue
             
             # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
         
-            # Initialize output array for valid data
-            midpoint_values = np.zeros(len(valid_high))
+            # Calculate MIDPOINT
+            midpoint_values = np.zeros(len(valid_close))
+            nb_initial_element_needed = timeperiod - 1
         
-            # Start index for output as per C source code
-            start_idx = nb_initial_element_needed
-        
-            # Compute midpoint for each valid data point starting from start_idx
-            for today in range(start_idx, len(valid_high)):
+            for today in range(nb_initial_element_needed, len(valid_close)):
                 trailing_idx = today - nb_initial_element_needed
-                lowest = valid_low[trailing_idx]
-                highest = valid_high[trailing_idx]
-            
-                # Find highest and lowest in the window
+                lowest = valid_close[trailing_idx]
+                highest = lowest
                 for i in range(trailing_idx + 1, today + 1):
-                    tmp_high = valid_high[i]
-                    tmp_low = valid_low[i]
-                    if tmp_low < lowest:
-                        lowest = tmp_low
-                    if tmp_high > highest:
-                        highest = tmp_high
-            
-                # Compute midpoint
+                    tmp = valid_close[i]
+                    if tmp < lowest:
+                        lowest = tmp
+                    elif tmp > highest:
+                        highest = tmp
                 midpoint_values[today] = (highest + lowest) / 2.0
         
             # Map results back to original array
+            start_idx = nb_initial_element_needed
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = midpoint_values[i]
@@ -9445,9 +6298,6 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # Lookback period as per C source code
-        lookback = timeperiod - 1
-    
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -9457,7 +6307,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback:
+            if len(valid_indices) < timeperiod:
                 continue
             
             # Extract valid data
@@ -9467,17 +6317,20 @@ class BaseLogicFactors:
             # Initialize output array for valid data
             midprice_values = np.zeros(len(valid_high))
         
-            # Start index for output as per C source code
-            start_idx = lookback
+            # Set lookback period as per C code
+            nb_initial_element_needed = timeperiod - 1
+            start_idx = nb_initial_element_needed
         
-            # Compute midprice for each valid point after lookback
-            for today in range(start_idx, len(valid_high)):
-                trailing_idx = today - lookback
+            # Main calculation loop
+            out_idx = 0
+            today = start_idx
+            while today < len(valid_high):
+                trailing_idx = today - nb_initial_element_needed
                 lowest = valid_low[trailing_idx]
                 highest = valid_high[trailing_idx]
+                trailing_idx += 1
             
-                # Find min and max over the timeperiod window
-                for i in range(trailing_idx + 1, today + 1):
+                for i in range(trailing_idx, today + 1):
                     tmp_low = valid_low[i]
                     if tmp_low < lowest:
                         lowest = tmp_low
@@ -9485,8 +6338,9 @@ class BaseLogicFactors:
                     if tmp_high > highest:
                         highest = tmp_high
             
-                # Calculate midprice as per C source code
                 midprice_values[today] = (highest + lowest) / 2.0
+                out_idx += 1
+                today += 1
         
             # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
@@ -9504,43 +6358,37 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
+                if low[i, sec] == low[i, sec]:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
-            valid_close = close[valid_mask, sec]
+            # Extract valid data
+            valid_low = low[valid_mask, sec]
         
-            # 初始化输出数组
-            minindex_values = np.zeros(len(valid_close))
-        
-            # 计算lookback期
-            nb_initial_element_needed = timeperiod - 1
-            start_idx = nb_initial_element_needed if nb_initial_element_needed < len(valid_close) else len(valid_close) - 1
-        
-            if start_idx >= len(valid_close):
-                continue
-            
+            # Initialize variables for MININDEX calculation
+            nb_initial_needed = timeperiod - 1
+            start_idx = nb_initial_needed if nb_initial_needed < len(valid_low) else len(valid_low) - 1
             out_idx = 0
             today = start_idx
-            trailing_idx = start_idx - nb_initial_element_needed
+            trailing_idx = today - nb_initial_needed
             lowest_idx = -1
             lowest = 0.0
+            minindex_values = np.zeros(len(valid_low))
         
-            while today < len(valid_close):
-                tmp = valid_close[today]
+            while today < len(valid_low):
+                tmp = valid_low[today]
                 if lowest_idx < trailing_idx:
                     lowest_idx = trailing_idx
-                    lowest = valid_close[lowest_idx]
+                    lowest = valid_low[lowest_idx]
                     i = lowest_idx
                     while i <= today:
-                        tmp_val = valid_close[i]
+                        tmp_val = valid_low[i]
                         if tmp_val < lowest:
                             lowest_idx = i
                             lowest = tmp_val
@@ -9553,91 +6401,12 @@ class BaseLogicFactors:
                 trailing_idx += 1
                 today += 1
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = minindex_values[i]
     
         return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def MINMAX(high, open, low, close, vol, oi, timeperiod=14):
-        tdts, secs = high.shape
-        result_max = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_min = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        nb_initial_element_needed = timeperiod - 1
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= nb_initial_element_needed:
-                continue
-            
-            valid_close = close[valid_mask, sec]
-            out_max = np.zeros(len(valid_close))
-            out_min = np.zeros(len(valid_close))
-            out_idx = 0
-            today = nb_initial_element_needed
-            trailing_idx = 0
-            highest_idx = -1
-            highest = 0.0
-            lowest_idx = -1
-            lowest = 0.0
-        
-            while today < len(valid_close):
-                tmp_low = valid_close[today]
-                tmp_high = valid_close[today]
-            
-                if highest_idx < trailing_idx:
-                    highest_idx = trailing_idx
-                    highest = valid_close[highest_idx]
-                    i = highest_idx
-                    while i < today + 1:
-                        tmp_high = valid_close[i]
-                        if tmp_high > highest:
-                            highest_idx = i
-                            highest = tmp_high
-                        i += 1
-                elif tmp_high >= highest:
-                    highest_idx = today
-                    highest = tmp_high
-                
-                if lowest_idx < trailing_idx:
-                    lowest_idx = trailing_idx
-                    lowest = valid_close[lowest_idx]
-                    i = lowest_idx
-                    while i < today + 1:
-                        tmp_low = valid_close[i]
-                        if tmp_low < lowest:
-                            lowest_idx = i
-                            lowest = tmp_low
-                        i += 1
-                elif tmp_low <= lowest:
-                    lowest_idx = today
-                    lowest = tmp_low
-                
-                out_max[out_idx] = highest
-                out_min[out_idx] = lowest
-                out_idx += 1
-                trailing_idx += 1
-                today += 1
-        
-            # 映射结果回原始数组
-            for i in range(nb_initial_element_needed, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result_max[orig_idx, sec] = out_max[i - nb_initial_element_needed]
-                result_min[orig_idx, sec] = out_min[i - nb_initial_element_needed]
-    
-        return result_max, result_min
 
 
 
@@ -9649,7 +6418,7 @@ class BaseLogicFactors:
         result_min = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -9659,14 +6428,14 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 初始化输出数组
+            # Initialize output arrays for max and min indices
             out_max_idx = np.zeros(len(valid_close))
             out_min_idx = np.zeros(len(valid_close))
         
-            # 计算lookback期
+            # Set initial lookback period
             nb_initial_element_needed = timeperiod - 1
             start_idx = nb_initial_element_needed if nb_initial_element_needed < len(valid_close) else len(valid_close) - 1
         
@@ -9675,7 +6444,7 @@ class BaseLogicFactors:
             
             out_idx = 0
             today = start_idx
-            trailing_idx = today - nb_initial_element_needed
+            trailing_idx = start_idx - nb_initial_element_needed
             highest_idx = -1
             highest = 0.0
             lowest_idx = -1
@@ -9689,12 +6458,12 @@ class BaseLogicFactors:
                     highest_idx = trailing_idx
                     highest = valid_close[highest_idx]
                     i = highest_idx
-                    while i + 1 <= today:
-                        i += 1
+                    while i <= today:
                         tmp_high = valid_close[i]
                         if tmp_high > highest:
                             highest_idx = i
                             highest = tmp_high
+                        i += 1
                 elif tmp_high >= highest:
                     highest_idx = today
                     highest = tmp_high
@@ -9703,27 +6472,29 @@ class BaseLogicFactors:
                     lowest_idx = trailing_idx
                     lowest = valid_close[lowest_idx]
                     i = lowest_idx
-                    while i + 1 <= today:
-                        i += 1
+                    while i <= today:
                         tmp_low = valid_close[i]
                         if tmp_low < lowest:
                             lowest_idx = i
                             lowest = tmp_low
+                        i += 1
                 elif tmp_low <= lowest:
                     lowest_idx = today
                     lowest = tmp_low
                 
-                out_max_idx[out_idx] = highest_idx
-                out_min_idx[out_idx] = lowest_idx
+                if out_idx < len(out_max_idx):
+                    out_max_idx[out_idx] = valid_indices[highest_idx] if highest_idx >= 0 else np.nan
+                    out_min_idx[out_idx] = valid_indices[lowest_idx] if lowest_idx >= 0 else np.nan
                 out_idx += 1
                 trailing_idx += 1
                 today += 1
         
-            # 映射结果回原始数组
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result_max[orig_idx, sec] = out_max_idx[i - start_idx]
-                result_min[orig_idx, sec] = out_min_idx[i - start_idx]
+            # Map results back to original array
+            for i in range(len(valid_indices)):
+                if i >= start_idx:
+                    orig_idx = valid_indices[i]
+                    result_max[orig_idx, sec] = out_max_idx[i - start_idx]
+                    result_min[orig_idx, sec] = out_min_idx[i - start_idx]
     
         return result_max, result_min
 
@@ -9746,8 +6517,7 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            lookback_total = timeperiod + unstable_period if timeperiod > 1 else 1
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) <= timeperiod + unstable_period:
                 continue
             
             # Extract valid data
@@ -9758,8 +6528,8 @@ class BaseLogicFactors:
             # Initialize output array for this security
             minus_di_values = np.zeros(len(valid_high))
         
+            # Handle special case when timeperiod <= 1
             if timeperiod <= 1:
-                # Special case for timeperiod = 1
                 prev_high = valid_high[0]
                 prev_low = valid_low[0]
                 prev_close = valid_close[0]
@@ -9767,11 +6537,9 @@ class BaseLogicFactors:
                     temp_real = valid_high[i]
                     diff_p = temp_real - prev_high
                     prev_high = temp_real
-                
                     temp_real = valid_low[i]
                     diff_m = prev_low - temp_real
                     prev_low = temp_real
-                
                     if diff_m > 0 and diff_p < diff_m:
                         tr = max(valid_high[i] - valid_low[i], 
                                 max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
@@ -9783,14 +6551,131 @@ class BaseLogicFactors:
                         minus_di_values[i] = 0.0
                     prev_close = valid_close[i]
             else:
-                # Normal case for timeperiod > 1
+                # Initialize variables
                 prev_minus_dm = 0.0
                 prev_tr = 0.0
                 prev_high = valid_high[0]
                 prev_low = valid_low[0]
                 prev_close = valid_close[0]
             
-                # First loop: Initialize MinusDM and TR sums
+                # First loop: Warm-up period to accumulate initial sums
+                for i in range(1, timeperiod):
+                    temp_real = valid_high[i]
+                    diff_p = temp_real - prev_high
+                    prev_high = temp_real
+                    temp_real = valid_low[i]
+                    diff_m = prev_low - temp_real
+                    prev_low = temp_real
+                    if diff_m > 0 and diff_p < diff_m:
+                        prev_minus_dm += diff_m
+                    tr = max(valid_high[i] - valid_low[i], 
+                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
+                    prev_tr += tr
+                    prev_close = valid_close[i]
+            
+                # Second loop: Unstable period processing
+                for i in range(timeperiod, timeperiod + unstable_period):
+                    temp_real = valid_high[i]
+                    diff_p = temp_real - prev_high
+                    prev_high = temp_real
+                    temp_real = valid_low[i]
+                    diff_m = prev_low - temp_real
+                    prev_low = temp_real
+                    prev_minus_dm = prev_minus_dm - (prev_minus_dm / timeperiod)
+                    if diff_m > 0 and diff_p < diff_m:
+                        prev_minus_dm += diff_m
+                    tr = max(valid_high[i] - valid_low[i], 
+                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
+                    prev_tr = prev_tr - (prev_tr / timeperiod) + tr
+                    prev_close = valid_close[i]
+            
+                # Set first output value after unstable period
+                if prev_tr > 1e-10:
+                    minus_di_values[timeperiod + unstable_period - 1] = 100.0 * (prev_minus_dm / prev_tr)
+                else:
+                    minus_di_values[timeperiod + unstable_period - 1] = 0.0
+            
+                # Main loop: Calculate remaining values
+                for i in range(timeperiod + unstable_period, len(valid_high)):
+                    temp_real = valid_high[i]
+                    diff_p = temp_real - prev_high
+                    prev_high = temp_real
+                    temp_real = valid_low[i]
+                    diff_m = prev_low - temp_real
+                    prev_low = temp_real
+                    prev_minus_dm = prev_minus_dm - (prev_minus_dm / timeperiod)
+                    if diff_m > 0 and diff_p < diff_m:
+                        prev_minus_dm += diff_m
+                    tr = max(valid_high[i] - valid_low[i], 
+                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
+                    prev_tr = prev_tr - (prev_tr / timeperiod) + tr
+                    prev_close = valid_close[i]
+                    if prev_tr > 1e-10:
+                        minus_di_values[i] = 100.0 * (prev_minus_dm / prev_tr)
+                    else:
+                        minus_di_values[i] = 0.0
+        
+            # Map results back to original array
+            start_idx = timeperiod + unstable_period - 1 if timeperiod > 1 else 1
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result[orig_idx, sec] = minus_di_values[i]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def MINUS_DM(high, open, low, close, vol, oi, timeperiod=14):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        unstable_period = 25  # TA-Lib default unstable period for MINUS_DM
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= timeperiod + unstable_period - 1:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+        
+            # Initialize output array for valid data
+            minus_dm_values = np.zeros(len(valid_high))
+        
+            # Handle special case when timeperiod <= 1
+            if timeperiod <= 1:
+                prev_high = valid_high[0]
+                prev_low = valid_low[0]
+                for i in range(1, len(valid_high)):
+                    temp_real = valid_high[i]
+                    diff_p = temp_real - prev_high
+                    prev_high = temp_real
+                
+                    temp_real = valid_low[i]
+                    diff_m = prev_low - temp_real
+                    prev_low = temp_real
+                
+                    if diff_m > 0 and diff_p < diff_m:
+                        minus_dm_values[i] = diff_m
+                    else:
+                        minus_dm_values[i] = 0
+                start_idx = 1
+            else:
+                # Initialize variables
+                prev_minus_dm = 0.0
+                prev_high = valid_high[0]
+                prev_low = valid_low[0]
+            
+                # First loop: Sum up initial Minus DM values for first timeperiod-1 periods
                 for i in range(1, timeperiod):
                     temp_real = valid_high[i]
                     diff_p = temp_real - prev_high
@@ -9802,11 +6687,6 @@ class BaseLogicFactors:
                 
                     if diff_m > 0 and diff_p < diff_m:
                         prev_minus_dm += diff_m
-                
-                    tr = max(valid_high[i] - valid_low[i], 
-                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
-                    prev_tr += tr
-                    prev_close = valid_close[i]
             
                 # Second loop: Handle unstable period
                 for i in range(timeperiod, timeperiod + unstable_period):
@@ -9824,22 +6704,14 @@ class BaseLogicFactors:
                     prev_minus_dm -= prev_minus_dm / timeperiod
                     if diff_m > 0 and diff_p < diff_m:
                         prev_minus_dm += diff_m
-                
-                    tr = max(valid_high[i] - valid_low[i], 
-                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
-                    prev_tr = prev_tr - (prev_tr / timeperiod) + tr
-                    prev_close = valid_close[i]
             
-                # Set first output value after lookback period
-                start_idx = lookback_total
-                if start_idx - 1 < len(valid_high):
-                    if prev_tr > 1e-10:
-                        minus_di_values[start_idx - 1] = 100.0 * (prev_minus_dm / prev_tr)
-                    else:
-                        minus_di_values[start_idx - 1] = 0.0
+                # Set the first output value after unstable period
+                start_idx = timeperiod + unstable_period - 1
+                if start_idx < len(valid_high):
+                    minus_dm_values[start_idx] = prev_minus_dm
             
-                # Main loop: Calculate remaining Minus DI values
-                for i in range(start_idx, len(valid_high)):
+                # Main loop: Calculate remaining Minus DM values
+                for i in range(start_idx + 1, len(valid_high)):
                     temp_real = valid_high[i]
                     diff_p = temp_real - prev_high
                     prev_high = temp_real
@@ -9851,132 +6723,11 @@ class BaseLogicFactors:
                     prev_minus_dm -= prev_minus_dm / timeperiod
                     if diff_m > 0 and diff_p < diff_m:
                         prev_minus_dm += diff_m
-                
-                    tr = max(valid_high[i] - valid_low[i], 
-                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
-                    prev_tr = prev_tr - (prev_tr / timeperiod) + tr
-                    prev_close = valid_close[i]
-                
-                    if prev_tr > 1e-10:
-                        minus_di_values[i] = 100.0 * (prev_minus_dm / prev_tr)
-                    else:
-                        minus_di_values[i] = 0.0
+                    
+                    minus_dm_values[i] = prev_minus_dm
         
             # Map results back to original array
-            start_idx = lookback_total if timeperiod > 1 else 1
-            for i in range(start_idx - 1, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = minus_di_values[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def MINUS_DM(high, open, low, close, vol, oi, timeperiod=14):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        unstable_period = 25  # TA-Lib默认不稳定期 for MinusDM
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= timeperiod + unstable_period - 1:
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-        
-            # 计算lookbackTotal
-            if timeperiod > 1:
-                lookback_total = timeperiod + unstable_period - 1
-            else:
-                lookback_total = 1
-            
-            # 初始化输出数组
-            minus_dm_values = np.zeros(len(valid_high))
-        
-            # 特殊情况：timeperiod <= 1
-            if timeperiod <= 1:
-                prev_high = valid_high[0]
-                prev_low = valid_low[0]
-                for i in range(1, len(valid_high)):
-                    temp_real = valid_high[i]
-                    diff_p = temp_real - prev_high
-                    prev_high = temp_real
-                    temp_real = valid_low[i]
-                    diff_m = prev_low - temp_real
-                    prev_low = temp_real
-                    if diff_m > 0 and diff_p < diff_m:
-                        minus_dm_values[i] = diff_m
-                    else:
-                        minus_dm_values[i] = 0
-                # 映射结果回原始数组
-                for i in range(lookback_total, len(valid_indices)):
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = minus_dm_values[i]
-                continue
-        
-            # 正常情况：timeperiod > 1
-            # 初始化阶段
-            prev_minus_dm = 0.0
-            prev_high = valid_high[0]
-            prev_low = valid_low[0]
-        
-            # 第一个循环：初始化MinusDM的累计值
-            for i in range(1, timeperiod):
-                temp_real = valid_high[i]
-                diff_p = temp_real - prev_high
-                prev_high = temp_real
-                temp_real = valid_low[i]
-                diff_m = prev_low - temp_real
-                prev_low = temp_real
-                if diff_m > 0 and diff_p < diff_m:
-                    prev_minus_dm += diff_m
-        
-            # 第二个循环：处理不稳定期
-            for i in range(timeperiod, timeperiod + unstable_period):
-                if i >= len(valid_high):
-                    break
-                temp_real = valid_high[i]
-                diff_p = temp_real - prev_high
-                prev_high = temp_real
-                temp_real = valid_low[i]
-                diff_m = prev_low - temp_real
-                prev_low = temp_real
-                if diff_m > 0 and diff_p < diff_m:
-                    prev_minus_dm = prev_minus_dm - (prev_minus_dm / timeperiod) + diff_m
-                else:
-                    prev_minus_dm = prev_minus_dm - (prev_minus_dm / timeperiod)
-        
-            # 记录第一个输出值
-            if timeperiod + unstable_period - 1 < len(valid_high):
-                minus_dm_values[timeperiod + unstable_period - 1] = prev_minus_dm
-        
-            # 主循环：计算剩余的MinusDM值
-            for i in range(timeperiod + unstable_period, len(valid_high)):
-                temp_real = valid_high[i]
-                diff_p = temp_real - prev_high
-                prev_high = temp_real
-                temp_real = valid_low[i]
-                diff_m = prev_low - temp_real
-                prev_low = temp_real
-                if diff_m > 0 and diff_p < diff_m:
-                    prev_minus_dm = prev_minus_dm - (prev_minus_dm / timeperiod) + diff_m
-                else:
-                    prev_minus_dm = prev_minus_dm - (prev_minus_dm / timeperiod)
-                minus_dm_values[i] = prev_minus_dm
-        
-            # 映射结果回原始数组
-            for i in range(lookback_total, len(valid_indices)):
+            for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = minus_dm_values[i]
     
@@ -9991,7 +6742,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -10001,16 +6752,17 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 计算MOM值
+            # Calculate MOM
             mom_values = np.zeros(len(valid_close))
             for i in range(timeperiod, len(valid_close)):
                 mom_values[i] = valid_close[i] - valid_close[i - timeperiod]
         
-            # 映射结果回原始数组，起始索引为timeperiod
-            for i in range(timeperiod, len(valid_indices)):
+            # Map results back to original array
+            start_idx = timeperiod
+            for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = mom_values[i]
     
@@ -10025,7 +6777,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (high[i, sec] == high[i, sec] and 
@@ -10037,12 +6789,12 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # 计算TR (True Range)
+            # Calculate True Range (TR)
             tr_values = np.zeros(len(valid_high))
             tr_values[0] = valid_high[0] - valid_low[0]
             for i in range(1, len(valid_high)):
@@ -10051,17 +6803,14 @@ class BaseLogicFactors:
                 tr_3 = abs(valid_close[i-1] - valid_low[i])
                 tr_values[i] = max(tr_1, tr_2, tr_3)
         
-            # 处理timeperiod=1的特殊情况，直接返回TR
+            # Handle special case when timeperiod <= 1
             if timeperiod <= 1:
                 for i in range(len(valid_indices)):
                     orig_idx = valid_indices[i]
-                    if close[orig_idx, sec] > 1e-10:
-                        result[orig_idx, sec] = (tr_values[i] / close[orig_idx, sec]) * 100.0
-                    else:
-                        result[orig_idx, sec] = 0.0
+                    result[orig_idx, sec] = tr_values[i] * 100.0 / valid_close[i] if valid_close[i] > 1e-10 else 0.0
                 continue
         
-            # 计算ATR初始值
+            # Calculate ATR using Wilder smoothing
             atr_values = np.zeros(len(valid_high))
             first_atr = 0.0
             for i in range(timeperiod):
@@ -10069,16 +6818,19 @@ class BaseLogicFactors:
             first_atr /= timeperiod
             atr_values[timeperiod-1] = first_atr
         
-            # 使用Wilder平滑计算后续ATR
-            for i in range(timeperiod, len(valid_high)):
+            # Unstable period handling as per TA-Lib
+            unstable_period = 25  # TA_GLOBALS_UNSTABLE_PERIOD for NATR
+            for i in range(timeperiod, timeperiod + unstable_period):
+                if i < len(tr_values):
+                    atr_values[i] = (atr_values[i-1] * (timeperiod - 1) + tr_values[i]) / timeperiod
+        
+            # Main calculation loop for ATR
+            for i in range(timeperiod + unstable_period, len(tr_values)):
                 atr_values[i] = (atr_values[i-1] * (timeperiod - 1) + tr_values[i]) / timeperiod
         
-            # 处理不稳定期 (TA-Lib默认不稳定期为timeperiod)
-            unstable_period = timeperiod
-            start_idx = timeperiod - 1 + unstable_period
-        
-            # 计算NATR = (ATR / Close) * 100
-            for i in range(start_idx, len(valid_high)):
+            # Calculate NATR = (ATR / Close) * 100
+            start_idx = timeperiod - 1
+            for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 if valid_close[i] > 1e-10:
                     result[orig_idx, sec] = (atr_values[i] / valid_close[i]) * 100.0
@@ -10092,51 +6844,42 @@ class BaseLogicFactors:
     @staticmethod
     @nb.njit
     def OBV(high, open, low, close, vol, oi):
-        """
-        OBV - On Balance Volume
-        OBV是一个累积成交量指标，根据价格变动方向累加或减去成交量。
-        计算方法：如果当日收盘价高于前一日，则累加当日成交量；如果低于前一日，则减去当日成交量。
-        用途：用于衡量资金流入和流出，预测价格趋势。
-        """
-        tdts, secs = high.shape
+        tdts, secs = close.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (close[i, sec] == close[i, sec] and 
                     vol[i, sec] == vol[i, sec]):
                     valid_mask[i] = True
         
-            # 获取有效数据的索引
+            # Get valid indices and data
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < 1:  # 需要至少一个数据点
+            if len(valid_indices) < 1:
                 continue
-        
-            # 提取有效数据
+            
             valid_close = close[valid_mask, sec]
             valid_vol = vol[valid_mask, sec]
         
-            # 初始化OBV值
+            # Initialize OBV calculation
             obv_values = np.zeros(len(valid_close))
-            if len(valid_close) > 0:
-                obv_values[0] = valid_vol[0]
-                prev_close = valid_close[0]
-            
-                # 主计算循环，严格遵循C源码逻辑
-                for i in range(1, len(valid_close)):
-                    current_close = valid_close[i]
-                    if current_close > prev_close:
-                        obv_values[i] = obv_values[i-1] + valid_vol[i]
-                    elif current_close < prev_close:
-                        obv_values[i] = obv_values[i-1] - valid_vol[i]
-                    else:
-                        obv_values[i] = obv_values[i-1]
-                    prev_close = current_close
+            prev_obv = valid_vol[0]
+            prev_close = valid_close[0]
+            obv_values[0] = prev_obv
         
-            # 将结果映射回原始数组
-            # TA-Lib从第一个有效数据点开始输出OBV
+            # Calculate OBV for each valid data point
+            for i in range(1, len(valid_close)):
+                current_close = valid_close[i]
+                if current_close > prev_close:
+                    prev_obv += valid_vol[i]
+                elif current_close < prev_close:
+                    prev_obv -= valid_vol[i]
+                obv_values[i] = prev_obv
+                prev_close = current_close
+        
+            # Map results back to original array
             for i in range(len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = obv_values[i]
@@ -10151,7 +6894,7 @@ class BaseLogicFactors:
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
         unstable_period = 25  # TA-Lib default unstable period for PLUS_DI
-
+    
         for sec in range(secs):
             # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
@@ -10170,14 +6913,157 @@ class BaseLogicFactors:
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Initialize output array for this security
-            plus_di_values = np.zeros(len(valid_high))
+            # Initialize variables
+            prev_plus_dm = 0.0
+            prev_tr = 0.0
+            prev_high = valid_high[0]
+            prev_low = valid_low[0]
+            prev_close = valid_close[0]
         
-            # Handle special case when timeperiod <= 1
+            # Handle timeperiod <= 1 case
+            if timeperiod <= 1:
+                for i in range(1, len(valid_high)):
+                    temp_real = valid_high[i]
+                    diff_p = temp_real - prev_high
+                    prev_high = temp_real
+                
+                    temp_real = valid_low[i]
+                    diff_m = prev_low - temp_real
+                    prev_low = temp_real
+                
+                    # True Range calculation
+                    tr = max(valid_high[i] - valid_low[i], 
+                             max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
+                    prev_close = valid_close[i]
+                
+                    if (diff_p > 0) and (diff_p > diff_m):
+                        if tr > 1e-10:
+                            result[valid_indices[i], sec] = diff_p / tr
+                        else:
+                            result[valid_indices[i], sec] = 0.0
+                    else:
+                        result[valid_indices[i], sec] = 0.0
+                continue
+        
+            # First loop: Initialize PlusDM and TR sums for first timeperiod-1 points
+            sum_plus_dm = 0.0
+            sum_tr = 0.0
+            for i in range(1, timeperiod):
+                temp_real = valid_high[i]
+                diff_p = temp_real - prev_high
+                prev_high = temp_real
+            
+                temp_real = valid_low[i]
+                diff_m = prev_low - temp_real
+                prev_low = temp_real
+            
+                if (diff_p > 0) and (diff_p > diff_m):
+                    sum_plus_dm += diff_p
+                
+                # True Range calculation
+                tr = max(valid_high[i] - valid_low[i], 
+                         max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
+                sum_tr += tr
+                prev_close = valid_close[i]
+        
+            # Set initial smoothed values
+            prev_plus_dm = sum_plus_dm
+            prev_tr = sum_tr
+        
+            # Second loop: Handle unstable period
+            for i in range(timeperiod, timeperiod + unstable_period):
+                if i >= len(valid_high):
+                    break
+                
+                temp_real = valid_high[i]
+                diff_p = temp_real - prev_high
+                prev_high = temp_real
+            
+                temp_real = valid_low[i]
+                diff_m = prev_low - temp_real
+                prev_low = temp_real
+            
+                prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod)
+                if (diff_p > 0) and (diff_p > diff_m):
+                    prev_plus_dm += diff_p
+                
+                # True Range calculation
+                tr = max(valid_high[i] - valid_low[i], 
+                         max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
+                prev_tr = prev_tr - (prev_tr / timeperiod) + tr
+                prev_close = valid_close[i]
+        
+            # Set first output value after unstable period
+            start_idx = timeperiod + unstable_period - 1
+            if start_idx < len(valid_high):
+                if prev_tr > 1e-10:
+                    result[valid_indices[start_idx], sec] = 100.0 * (prev_plus_dm / prev_tr)
+                else:
+                    result[valid_indices[start_idx], sec] = 0.0
+        
+            # Main loop: Calculate remaining PLUS_DI values
+            for i in range(start_idx + 1, len(valid_high)):
+                temp_real = valid_high[i]
+                diff_p = temp_real - prev_high
+                prev_high = temp_real
+            
+                temp_real = valid_low[i]
+                diff_m = prev_low - temp_real
+                prev_low = temp_real
+            
+                prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod)
+                if (diff_p > 0) and (diff_p > diff_m):
+                    prev_plus_dm += diff_p
+                
+                # True Range calculation
+                tr = max(valid_high[i] - valid_low[i], 
+                         max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
+                prev_tr = prev_tr - (prev_tr / timeperiod) + tr
+                prev_close = valid_close[i]
+            
+                if prev_tr > 1e-10:
+                    result[valid_indices[i], sec] = 100.0 * (prev_plus_dm / prev_tr)
+                else:
+                    result[valid_indices[i], sec] = 0.0
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def PLUS_DM(high, open, low, close, vol, oi, timeperiod=14):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        unstable_period = 25  # TA-Lib default unstable period for PLUS_DM
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= timeperiod + unstable_period - 1:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+        
+            # Initialize output array for this security
+            plus_dm_values = np.zeros(len(valid_high))
+        
+            # Handle lookback and start index as per TA-Lib
+            lookback_total = timeperiod + unstable_period - 1 if timeperiod > 1 else 1
+            start_idx = lookback_total if timeperiod > 1 else 0
+        
+            # Case for timeperiod <= 1
             if timeperiod <= 1:
                 prev_high = valid_high[0]
                 prev_low = valid_low[0]
-                prev_close = valid_close[0]
                 for i in range(1, len(valid_high)):
                     temp_real = valid_high[i]
                     diff_p = temp_real - prev_high
@@ -10188,25 +7074,16 @@ class BaseLogicFactors:
                     prev_low = temp_real
                 
                     if diff_p > 0 and diff_p > diff_m:
-                        # True Range calculation
-                        tr = max(valid_high[i] - valid_low[i], 
-                                max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
-                        if tr > 1e-10:
-                            plus_di_values[i] = diff_p / tr
-                        else:
-                            plus_di_values[i] = 0.0
+                        plus_dm_values[i] = diff_p
                     else:
-                        plus_di_values[i] = 0.0
-                    prev_close = valid_close[i]
+                        plus_dm_values[i] = 0
             else:
-                # Normal case with timeperiod > 1
+                # Initialize variables
                 prev_plus_dm = 0.0
-                prev_tr = 0.0
                 prev_high = valid_high[0]
                 prev_low = valid_low[0]
-                prev_close = valid_close[0]
             
-                # First loop: Initialize PlusDM and TR sums
+                # First loop: Sum up PlusDM for the first timeperiod-1 periods
                 for i in range(1, timeperiod):
                     temp_real = valid_high[i]
                     diff_p = temp_real - prev_high
@@ -10218,12 +7095,6 @@ class BaseLogicFactors:
                 
                     if diff_p > 0 and diff_p > diff_m:
                         prev_plus_dm += diff_p
-                
-                    # True Range calculation
-                    tr = max(valid_high[i] - valid_low[i], 
-                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
-                    prev_tr += tr
-                    prev_close = valid_close[i]
             
                 # Second loop: Handle unstable period
                 for i in range(timeperiod, timeperiod + unstable_period):
@@ -10235,26 +7106,16 @@ class BaseLogicFactors:
                     diff_m = prev_low - temp_real
                     prev_low = temp_real
                 
+                    prev_plus_dm -= prev_plus_dm / timeperiod
                     if diff_p > 0 and diff_p > diff_m:
-                        prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod) + diff_p
-                    else:
-                        prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod)
-                
-                    # True Range calculation
-                    tr = max(valid_high[i] - valid_low[i], 
-                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
-                    prev_tr = prev_tr - (prev_tr / timeperiod) + tr
-                    prev_close = valid_close[i]
+                        prev_plus_dm += diff_p
             
-                # Set first output value
-                start_idx = timeperiod + unstable_period - 1
-                if prev_tr > 1e-10:
-                    plus_di_values[start_idx] = 100.0 * (prev_plus_dm / prev_tr)
-                else:
-                    plus_di_values[start_idx] = 0.0
+                # Set the first output value after lookback
+                if timeperiod + unstable_period - 1 < len(valid_high):
+                    plus_dm_values[timeperiod + unstable_period - 1] = prev_plus_dm
             
-                # Main loop: Calculate remaining values
-                for i in range(start_idx + 1, len(valid_high)):
+                # Main loop: Calculate remaining PlusDM values
+                for i in range(timeperiod + unstable_period, len(valid_high)):
                     temp_real = valid_high[i]
                     diff_p = temp_real - prev_high
                     prev_high = temp_real
@@ -10263,201 +7124,16 @@ class BaseLogicFactors:
                     diff_m = prev_low - temp_real
                     prev_low = temp_real
                 
+                    prev_plus_dm -= prev_plus_dm / timeperiod
                     if diff_p > 0 and diff_p > diff_m:
-                        prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod) + diff_p
-                    else:
-                        prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod)
-                
-                    # True Range calculation
-                    tr = max(valid_high[i] - valid_low[i], 
-                            max(abs(valid_high[i] - prev_close), abs(valid_low[i] - prev_close)))
-                    prev_tr = prev_tr - (prev_tr / timeperiod) + tr
-                    prev_close = valid_close[i]
-                
-                    if prev_tr > 1e-10:
-                        plus_di_values[i] = 100.0 * (prev_plus_dm / prev_tr)
-                    else:
-                        plus_di_values[i] = 0.0
+                        prev_plus_dm += diff_p
+                    
+                    plus_dm_values[i] = prev_plus_dm
         
             # Map results back to original array
-            lookback_total = timeperiod + unstable_period - 1 if timeperiod > 1 else 1
-            for i in range(lookback_total, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = plus_di_values[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def PLUS_DM(high, open, low, close, vol, oi, timeperiod=14):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        unstable_period = 25  # TA-Lib默认不稳定期 for PLUS_DM
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= timeperiod + unstable_period - 1:
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-        
-            # 计算lookbackTotal
-            if timeperiod > 1:
-                lookback_total = timeperiod + unstable_period - 1
-            else:
-                lookback_total = 1
-            
-            # 初始化输出数组
-            plus_dm_values = np.zeros(len(valid_high))
-        
-            # 特殊情况：timeperiod <= 1
-            if timeperiod <= 1:
-                prev_high = valid_high[0]
-                prev_low = valid_low[0]
-                for i in range(1, len(valid_high)):
-                    temp_real = valid_high[i]
-                    diff_p = temp_real - prev_high
-                    prev_high = temp_real
-                    temp_real = valid_low[i]
-                    diff_m = prev_low - temp_real
-                    prev_low = temp_real
-                    if diff_p > 0 and diff_p > diff_m:
-                        plus_dm_values[i] = diff_p
-                    else:
-                        plus_dm_values[i] = 0
-                # 映射结果回原始数组
-                for i in range(len(valid_indices)):
-                    if i >= lookback_total:
-                        orig_idx = valid_indices[i]
-                        result[orig_idx, sec] = plus_dm_values[i]
-                continue
-        
-            # 正常情况：timeperiod > 1
-            # 初始化变量
-            prev_plus_dm = 0.0
-            prev_high = valid_high[0]
-            prev_low = valid_low[0]
-        
-            # 第一阶段：初始化PlusDM的累加值
-            for i in range(1, timeperiod):
-                temp_real = valid_high[i]
-                diff_p = temp_real - prev_high
-                prev_high = temp_real
-                temp_real = valid_low[i]
-                diff_m = prev_low - temp_real
-                prev_low = temp_real
-                if diff_p > 0 and diff_p > diff_m:
-                    prev_plus_dm += diff_p
-        
-            # 第二阶段：处理不稳定期
-            for i in range(timeperiod, timeperiod + unstable_period):
-                if i >= len(valid_high):
-                    break
-                temp_real = valid_high[i]
-                diff_p = temp_real - prev_high
-                prev_high = temp_real
-                temp_real = valid_low[i]
-                diff_m = prev_low - temp_real
-                prev_low = temp_real
-                if diff_p > 0 and diff_p > diff_m:
-                    prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod) + diff_p
-                else:
-                    prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod)
-        
-            # 记录第一个有效输出值
-            if timeperiod + unstable_period - 1 < len(valid_high):
-                plus_dm_values[timeperiod + unstable_period - 1] = prev_plus_dm
-        
-            # 第三阶段：主计算循环
-            for i in range(timeperiod + unstable_period, len(valid_high)):
-                temp_real = valid_high[i]
-                diff_p = temp_real - prev_high
-                prev_high = temp_real
-                temp_real = valid_low[i]
-                diff_m = prev_low - temp_real
-                prev_low = temp_real
-                if diff_p > 0 and diff_p > diff_m:
-                    prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod) + diff_p
-                else:
-                    prev_plus_dm = prev_plus_dm - (prev_plus_dm / timeperiod)
-                plus_dm_values[i] = prev_plus_dm
-        
-            # 映射结果回原始数组
-            for i in range(len(valid_indices)):
-                if i >= lookback_total:
-                    orig_idx = valid_indices[i]
-                    result[orig_idx, sec] = plus_dm_values[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def PPO(high, open, low, close, vol, oi, fastperiod=12, slowperiod=26, matype=0):
-        tdts, secs = close.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < max(fastperiod, slowperiod):
-                continue
-            
-            # 提取有效数据
-            valid_close = close[valid_mask, sec]
-        
-            # 计算快速和慢速移动平均
-            fast_ma = np.zeros(len(valid_close))
-            slow_ma = np.zeros(len(valid_close))
-        
-            if matype == 0:  # SMA
-                for i in range(fastperiod - 1, len(valid_close)):
-                    if i >= fastperiod - 1:
-                        fast_ma[i] = np.mean(valid_close[i - fastperiod + 1:i + 1])
-                for i in range(slowperiod - 1, len(valid_close)):
-                    if i >= slowperiod - 1:
-                        slow_ma[i] = np.mean(valid_close[i - slowperiod + 1:i + 1])
-            else:  # EMA as default fallback (can be extended for other MA types)
-                alpha_fast = 2.0 / (fastperiod + 1)
-                alpha_slow = 2.0 / (slowperiod + 1)
-                for i in range(len(valid_close)):
-                    if i == 0:
-                        fast_ma[i] = valid_close[i]
-                        slow_ma[i] = valid_close[i]
-                    else:
-                        fast_ma[i] = alpha_fast * valid_close[i] + (1 - alpha_fast) * fast_ma[i - 1]
-                        slow_ma[i] = alpha_slow * valid_close[i] + (1 - alpha_slow) * slow_ma[i - 1]
-        
-            # 计算PPO值
-            ppo_values = np.zeros(len(valid_close))
-            start_idx = max(fastperiod, slowperiod) - 1
-            for i in range(start_idx, len(valid_close)):
-                if slow_ma[i] > 1e-10:  # 避免除零
-                    ppo_values[i] = ((fast_ma[i] - slow_ma[i]) / slow_ma[i]) * 100.0
-                else:
-                    ppo_values[i] = 0.0
-        
-            # 映射结果回原始数组
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
-                result[orig_idx, sec] = ppo_values[i]
+                result[orig_idx, sec] = plus_dm_values[i]
     
         return result
 
@@ -10466,36 +7142,36 @@ class BaseLogicFactors:
     @staticmethod
     @nb.njit
     def ROC(high, open, low, close, vol, oi, timeperiod=10):
-        tdts, secs = high.shape
+        tdts, secs = close.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= timeperiod:
+            if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 计算ROC值
+            # Calculate ROC
             roc_values = np.zeros(len(valid_close))
             start_idx = timeperiod
         
             for i in range(start_idx, len(valid_close)):
                 trailing_idx = i - timeperiod
                 temp_real = valid_close[trailing_idx]
-                if temp_real > 1e-10:  # 避免除零
+                if temp_real != 0.0:
                     roc_values[i] = ((valid_close[i] / temp_real) - 1.0) * 100.0
                 else:
                     roc_values[i] = 0.0
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = roc_values[i]
@@ -10511,7 +7187,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -10521,25 +7197,30 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 计算ROCP
-            rocp_values = np.zeros(len(valid_close))
-            start_idx = timeperiod
+            # Initialize output array for this security
+            roc_values = np.zeros(len(valid_close))
         
+            # Set start index based on timeperiod
+            start_idx = timeperiod
+            if start_idx >= len(valid_close):
+                continue
+            
+            # Calculate ROCP
             for i in range(start_idx, len(valid_close)):
                 trailing_idx = i - timeperiod
                 temp_real = valid_close[trailing_idx]
-                if temp_real > 1e-10:  # 避免除零
-                    rocp_values[i] = (valid_close[i] - temp_real) / temp_real
+                if temp_real != 0.0:
+                    roc_values[i] = (valid_close[i] - temp_real) / temp_real
                 else:
-                    rocp_values[i] = 0.0
+                    roc_values[i] = 0.0
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
-                result[orig_idx, sec] = rocp_values[i]
+                result[orig_idx, sec] = roc_values[i]
     
         return result
 
@@ -10552,7 +7233,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create mask for valid data
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -10562,13 +7243,14 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid close data
             valid_close = close[valid_mask, sec]
         
-            # 计算ROCR
+            # Initialize output array for valid data
             rocr_values = np.zeros(len(valid_close))
-            start_idx = timeperiod
         
+            # Calculate ROCR starting from timeperiod
+            start_idx = timeperiod
             for i in range(start_idx, len(valid_close)):
                 trailing_idx = i - timeperiod
                 temp_real = valid_close[trailing_idx]
@@ -10577,7 +7259,7 @@ class BaseLogicFactors:
                 else:
                     rocr_values[i] = 0.0
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = rocr_values[i]
@@ -10593,7 +7275,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -10603,28 +7285,36 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 计算ROCR100
+            # Initialize output array for valid data
             rocr100_values = np.zeros(len(valid_close))
+        
+            # Set start index based on timeperiod
             start_idx = timeperiod
+            if start_idx >= len(valid_close):
+                continue
+            
+            # Calculate ROCR100
+            out_idx = start_idx
+            trailing_idx = 0
         
-            for i in range(start_idx, len(valid_close)):
-                trailing_idx = i - timeperiod
+            while out_idx < len(valid_close):
                 temp_real = valid_close[trailing_idx]
-                if temp_real > 1e-10:  # 避免除零
-                    rocr100_values[i] = (valid_close[i] / temp_real) * 100.0
+                if temp_real != 0.0:
+                    rocr100_values[out_idx] = (valid_close[out_idx] / temp_real) * 100.0
                 else:
-                    rocr100_values[i] = 0.0
+                    rocr100_values[out_idx] = 0.0
+                out_idx += 1
+                trailing_idx += 1
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = rocr100_values[i]
     
         return result
-
 
 
     @staticmethod
@@ -10726,145 +7416,9 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def SAR(high, open, low, close, vol, oi, acceleration=0.02, maximum=0.2):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) < 2:  # 需要至少2个数据点
-                continue
-            
-            # 提取有效数据
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-        
-            # 初始化变量
-            start_idx = 1  # TA-Lib从第二个点开始计算
-            if start_idx >= len(valid_high):
-                continue
-            
-            # 调整加速因子
-            af = acceleration
-            if af > maximum:
-                af = acceleration = maximum
-            
-            # 初始化SAR计算
-            today_idx = start_idx
-            new_high = valid_high[today_idx - 1]
-            new_low = valid_low[today_idx - 1]
-        
-            # 确定初始趋势方向
-            ep_temp = 0.0
-            if valid_low[today_idx] < valid_high[today_idx - 1]:
-                is_long = 0
-                ep = valid_low[today_idx]
-                sar = new_high
-            else:
-                is_long = 1
-                ep = valid_high[today_idx]
-                sar = new_low
-            
-            new_low = valid_low[today_idx]
-            new_high = valid_high[today_idx]
-            sar_values = np.zeros(len(valid_high))
-        
-            # 主计算循环
-            out_idx = 0
-            while today_idx < len(valid_high):
-                prev_low = new_low
-                prev_high = new_high
-                new_low = valid_low[today_idx]
-                new_high = valid_high[today_idx]
-                today_idx += 1
-            
-                if is_long == 1:
-                    if new_low <= sar:
-                        is_long = 0
-                        sar = ep
-                        if sar < prev_high:
-                            sar = prev_high
-                        if sar < new_high:
-                            sar = new_high
-                        if out_idx < len(valid_high):
-                            sar_values[out_idx] = sar
-                            out_idx += 1
-                        af = acceleration
-                        ep = new_low
-                        sar = sar + af * (ep - sar)
-                        if sar < prev_high:
-                            sar = prev_high
-                        if sar < new_high:
-                            sar = new_high
-                    else:
-                        if out_idx < len(valid_high):
-                            sar_values[out_idx] = sar
-                            out_idx += 1
-                        if new_high > ep:
-                            ep = new_high
-                            af += acceleration
-                            if af > maximum:
-                                af = maximum
-                        sar = sar + af * (ep - sar)
-                        if sar > prev_low:
-                            sar = prev_low
-                        if sar > new_low:
-                            sar = new_low
-                else:
-                    if new_high >= sar:
-                        is_long = 1
-                        sar = ep
-                        if sar > prev_low:
-                            sar = prev_low
-                        if sar > new_low:
-                            sar = new_low
-                        if out_idx < len(valid_high):
-                            sar_values[out_idx] = sar
-                            out_idx += 1
-                        af = acceleration
-                        ep = new_high
-                        sar = sar + af * (ep - sar)
-                        if sar > prev_low:
-                            sar = prev_low
-                        if sar > new_low:
-                            sar = new_low
-                    else:
-                        if out_idx < len(valid_high):
-                            sar_values[out_idx] = sar
-                            out_idx += 1
-                        if new_low < ep:
-                            ep = new_low
-                            af += acceleration
-                            if af > maximum:
-                                af = maximum
-                        sar = sar + af * (ep - sar)
-                        if sar < prev_high:
-                            sar = prev_high
-                        if sar < new_high:
-                            sar = new_high
-        
-            # 映射结果回原始数组
-            for i in range(out_idx):
-                if i + start_idx - 1 < len(valid_indices):
-                    orig_idx = valid_indices[i + start_idx - 1]
-                    result[orig_idx, sec] = sar_values[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def SAREXT(high, open, low, close, vol, oi, start_value=0.0, offset_on_reverse=0.0, 
-               acceleration_init_long=0.02, acceleration_long=0.02, acceleration_max_long=0.2,
-               acceleration_init_short=0.02, acceleration_short=0.02, acceleration_max_short=0.2):
+    def SAREXT(high, open, low, close, vol, oi, startvalue=0.0, offsetonreverse=0.0, 
+               accelerationinitlong=0.02, accelerationlong=0.02, accelerationmaxlong=0.2,
+               accelerationinitshort=0.02, accelerationshort=0.02, accelerationmaxshort=0.2):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
@@ -10885,58 +7439,53 @@ class BaseLogicFactors:
             valid_low = low[valid_mask, sec]
         
             # Initialize parameters
-            af_long = acceleration_init_long
-            af_short = acceleration_init_short
-        
-            # Cap acceleration factors
-            if af_long > acceleration_max_long:
-                af_long = acceleration_max_long
-            if acceleration_long > acceleration_max_long:
-                acceleration_long = acceleration_max_long
-            if af_short > acceleration_max_short:
-                af_short = acceleration_max_short
-            if acceleration_short > acceleration_max_short:
-                acceleration_short = acceleration_max_short
+            af_long = accelerationinitlong
+            af_short = accelerationinitshort
+            if af_long > accelerationmaxlong:
+                af_long = accelerationinitlong = accelerationmaxlong
+            if accelerationlong > accelerationmaxlong:
+                accelerationlong = accelerationmaxlong
+            if af_short > accelerationmaxshort:
+                af_short = accelerationinitshort = accelerationmaxshort
+            if accelerationshort > accelerationmaxshort:
+                accelerationshort = accelerationmaxshort
             
-            # Determine initial position (long or short)
+            # Determine initial direction
             is_long = 0
-            if start_value == 0.0:
+            if startvalue == 0.0:
                 if valid_high[1] - valid_low[1] > 0:
                     is_long = 0
                 else:
                     is_long = 1
-            elif start_value > 0:
+            elif startvalue > 0:
                 is_long = 1
             else:
                 is_long = 0
             
-            # Initialize SAR and EP (Extreme Point)
+            # Initialize SAR and EP
             today_idx = 1
             new_high = valid_high[0]
             new_low = valid_low[0]
         
-            if start_value == 0.0:
+            if startvalue == 0.0:
                 if is_long == 1:
                     ep = valid_high[today_idx]
                     sar = new_low
                 else:
                     ep = valid_low[today_idx]
                     sar = new_high
-            elif start_value > 0:
+            elif startvalue > 0:
                 ep = valid_high[today_idx]
-                sar = start_value
+                sar = startvalue
             else:
                 ep = valid_low[today_idx]
-                sar = abs(start_value)
+                sar = abs(startvalue)
             
-            # Update new high and low for current position
             new_low = valid_low[today_idx]
             new_high = valid_high[today_idx]
-        
-            # Initialize output array for valid data
             sar_values = np.zeros(len(valid_high))
         
-            # Start from index 1 as per TA-Lib logic
+            # Main calculation loop
             out_idx = 0
             while today_idx < len(valid_high):
                 prev_low = new_low
@@ -10953,11 +7502,11 @@ class BaseLogicFactors:
                             sar = prev_high
                         if sar < new_high:
                             sar = new_high
-                        if offset_on_reverse != 0.0:
-                            sar += sar * offset_on_reverse
+                        if offsetonreverse != 0.0:
+                            sar += sar * offsetonreverse
                         sar_values[out_idx] = -sar
                         out_idx += 1
-                        af_short = acceleration_init_short
+                        af_short = accelerationinitshort
                         ep = new_low
                         sar = sar + af_short * (ep - sar)
                         if sar < prev_high:
@@ -10969,9 +7518,9 @@ class BaseLogicFactors:
                         out_idx += 1
                         if new_high > ep:
                             ep = new_high
-                            af_long += acceleration_long
-                            if af_long > acceleration_max_long:
-                                af_long = acceleration_max_long
+                            af_long += accelerationlong
+                            if af_long > accelerationmaxlong:
+                                af_long = accelerationmaxlong
                         sar = sar + af_long * (ep - sar)
                         if sar > prev_low:
                             sar = prev_low
@@ -10985,11 +7534,11 @@ class BaseLogicFactors:
                             sar = prev_low
                         if sar > new_low:
                             sar = new_low
-                        if offset_on_reverse != 0.0:
-                            sar -= sar * offset_on_reverse
+                        if offsetonreverse != 0.0:
+                            sar -= sar * offsetonreverse
                         sar_values[out_idx] = sar
                         out_idx += 1
-                        af_long = acceleration_init_long
+                        af_long = accelerationinitlong
                         ep = new_high
                         sar = sar + af_long * (ep - sar)
                         if sar > prev_low:
@@ -11001,9 +7550,9 @@ class BaseLogicFactors:
                         out_idx += 1
                         if new_low < ep:
                             ep = new_low
-                            af_short += acceleration_short
-                            if af_short > acceleration_max_short:
-                                af_short = acceleration_max_short
+                            af_short += accelerationshort
+                            if af_short > accelerationmaxshort:
+                                af_short = accelerationmaxshort
                         sar = sar + af_short * (ep - sar)
                         if sar < prev_high:
                             sar = prev_high
@@ -11012,7 +7561,7 @@ class BaseLogicFactors:
         
             # Map results back to original array
             for i in range(len(valid_indices)):
-                if i > 0:  # Start output from second point as per TA-Lib
+                if i > 0:  # Start from second point as per TA-Lib
                     orig_idx = valid_indices[i]
                     result[orig_idx, sec] = sar_values[i-1]
     
@@ -11027,7 +7576,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -11037,10 +7586,10 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 计算移动平均值 (SMA)
+            # Calculate moving average for valid data
             mov_avg = np.zeros(len(valid_close))
             for i in range(timeperiod - 1, len(valid_close)):
                 sum_val = 0.0
@@ -11048,433 +7597,33 @@ class BaseLogicFactors:
                     sum_val += valid_close[j]
                 mov_avg[i] = sum_val / timeperiod
         
-            # 计算标准差
+            # Calculate standard deviation using precalculated moving average
             stddev_values = np.zeros(len(valid_close))
-            for i in range(timeperiod - 1, len(valid_close)):
+            for out_idx in range(timeperiod - 1, len(valid_close)):
+                start_sum = out_idx - timeperiod + 1
+                end_sum = out_idx
                 period_total2 = 0.0
-                for j in range(i - timeperiod + 1, i + 1):
-                    temp_real = valid_close[j]
+            
+                # Calculate sum of squared values for the current window
+                for k in range(start_sum, end_sum + 1):
+                    temp_real = valid_close[k]
                     period_total2 += temp_real * temp_real
             
                 mean_value2 = period_total2 / timeperiod
-                temp_real = mov_avg[i]
-                temp_real *= temp_real
-                mean_value2 -= temp_real
+                temp_real = mov_avg[out_idx]
+                mean_value2 -= temp_real * temp_real
             
                 if mean_value2 > 1e-10:
-                    stddev_values[i] = np.sqrt(mean_value2)
+                    stddev_values[out_idx] = np.sqrt(mean_value2)
+                    if nbdev != 1.0:
+                        stddev_values[out_idx] *= nbdev
                 else:
-                    stddev_values[i] = 0.0
-                
-            # 应用nbdev因子
-            if nbdev != 1.0:
-                for i in range(timeperiod - 1, len(valid_close)):
-                    if stddev_values[i] > 1e-10:
-                        stddev_values[i] *= nbdev
+                    stddev_values[out_idx] = 0.0
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(timeperiod - 1, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = stddev_values[i]
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
-    def STOCH(high, open, low, close, vol, oi, fastk_period=14, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0):
-        tdts, secs = high.shape
-        result_slowk = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_slowd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) == 0:
-                continue
-            
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Calculate lookback periods as per TA-Lib logic
-            lookback_k = fastk_period - 1
-            lookback_kslow = slowk_period - 1 if slowk_matype == 0 else slowk_period - 1
-            lookback_dslow = slowd_period - 1 if slowd_matype == 0 else slowd_period - 1
-            lookback_total = lookback_k + lookback_kslow + lookback_dslow
-        
-            if len(valid_high) <= lookback_total:
-                continue
-            
-            # Initialize variables for FastK calculation
-            temp_buffer = np.zeros(len(valid_high) - lookback_k)
-            out_idx = 0
-            trailing_idx = 0
-            today = lookback_k
-            lowest_idx = -1
-            highest_idx = -1
-            lowest = 0.0
-            highest = 0.0
-            diff = 0.0
-        
-            # Calculate FastK
-            while today < len(valid_high):
-                tmp_low = valid_low[today]
-                if lowest_idx < trailing_idx:
-                    lowest_idx = trailing_idx
-                    lowest = valid_low[lowest_idx]
-                    i = lowest_idx
-                    while i < today + 1:
-                        tmp = valid_low[i]
-                        if tmp < lowest:
-                            lowest_idx = i
-                            lowest = tmp
-                        i += 1
-                    diff = (highest - lowest) / 100.0
-                elif tmp_low <= lowest:
-                    lowest_idx = today
-                    lowest = tmp_low
-                    diff = (highest - lowest) / 100.0
-                
-                tmp_high = valid_high[today]
-                if highest_idx < trailing_idx:
-                    highest_idx = trailing_idx
-                    highest = valid_high[highest_idx]
-                    i = highest_idx
-                    while i < today + 1:
-                        tmp = valid_high[i]
-                        if tmp > highest:
-                            highest_idx = i
-                            highest = tmp
-                        i += 1
-                    diff = (highest - lowest) / 100.0
-                elif tmp_high >= highest:
-                    highest_idx = today
-                    highest = tmp_high
-                    diff = (highest - lowest) / 100.0
-                
-                if diff != 0.0:
-                    temp_buffer[out_idx] = (valid_close[today] - lowest) / diff
-                else:
-                    temp_buffer[out_idx] = 0.0
-                
-                out_idx += 1
-                trailing_idx += 1
-                today += 1
-        
-            # Calculate SlowK using MA
-            slowk_values = np.zeros(len(temp_buffer))
-            if slowk_matype == 0:  # SMA
-                for i in range(slowk_period - 1, len(temp_buffer)):
-                    sum_val = 0.0
-                    count = 0
-                    for j in range(i - slowk_period + 1, i + 1):
-                        if temp_buffer[j] == temp_buffer[j]:
-                            sum_val += temp_buffer[j]
-                            count += 1
-                    if count > 0:
-                        slowk_values[i] = sum_val / slowk_period
-        
-            # Calculate SlowD using MA
-            slowd_values = np.zeros(len(temp_buffer))
-            if slowd_matype == 0:  # SMA
-                for i in range(slowd_period - 1, len(temp_buffer)):
-                    sum_val = 0.0
-                    count = 0
-                    for j in range(i - slowd_period + 1, i + 1):
-                        if slowk_values[j] == slowk_values[j]:
-                            sum_val += slowk_values[j]
-                            count += 1
-                    if count > 0:
-                        slowd_values[i] = sum_val / slowd_period
-        
-            # Map results back to original array
-            start_idx = lookback_total
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result_slowk[orig_idx, sec] = slowk_values[i - lookback_k]
-                result_slowd[orig_idx, sec] = slowd_values[i - lookback_k]
-    
-        return result_slowk, result_slowd
-
-
-
-    @staticmethod
-    @nb.njit
-    def STOCHF(high, open, low, close, vol, oi, fastk_period=5, fastd_period=3, fastd_matype=0):
-        tdts, secs = high.shape
-        result_fastk = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_fastd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Calculate lookback periods as per TA-Lib
-        lookback_k = fastk_period - 1
-        lookback_fastd = fastd_period - 1 if fastd_matype == 0 else fastd_period * 2 - 1  # Approximate for other MA types
-        lookback_total = lookback_k + lookback_fastd
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize temporary buffer for FastK calculation
-            temp_buffer = np.zeros(len(valid_high))
-            out_idx = 0
-            trailing_idx = 0
-            today = lookback_k
-        
-            while today < len(valid_high):
-                lowest_idx = -1
-                highest_idx = -1
-                lowest = 0.0
-                highest = 0.0
-                diff = 0.0
-            
-                # Find lowest in window
-                tmp = valid_low[today]
-                if lowest_idx < trailing_idx:
-                    lowest_idx = trailing_idx
-                    lowest = valid_low[lowest_idx]
-                    for i in range(lowest_idx + 1, today + 1):
-                        tmp = valid_low[i]
-                        if tmp < lowest:
-                            lowest_idx = i
-                            lowest = tmp
-                    diff = (highest - lowest) / 100.0
-                elif tmp <= lowest:
-                    lowest_idx = today
-                    lowest = tmp
-                    diff = (highest - lowest) / 100.0
-                
-                # Find highest in window
-                tmp = valid_high[today]
-                if highest_idx < trailing_idx:
-                    highest_idx = trailing_idx
-                    highest = valid_high[highest_idx]
-                    for i in range(highest_idx + 1, today + 1):
-                        tmp = valid_high[i]
-                        if tmp > highest:
-                            highest_idx = i
-                            highest = tmp
-                    diff = (highest - lowest) / 100.0
-                elif tmp >= highest:
-                    highest_idx = today
-                    highest = tmp
-                    diff = (highest - lowest) / 100.0
-                
-                # Calculate FastK
-                if diff != 0.0:
-                    temp_buffer[out_idx] = (valid_close[today] - lowest) / diff
-                else:
-                    temp_buffer[out_idx] = 0.0
-                
-                out_idx += 1
-                trailing_idx += 1
-                today += 1
-        
-            # Calculate FastD using appropriate MA type
-            fastd_values = np.zeros(len(valid_high))
-            if fastd_matype == 0:  # SMA
-                for i in range(fastd_period - 1, out_idx):
-                    sum_val = 0.0
-                    count = 0
-                    for j in range(i - fastd_period + 1, i + 1):
-                        if j >= 0:
-                            sum_val += temp_buffer[j]
-                            count += 1
-                    if count > 0:
-                        fastd_values[i] = sum_val / count
-            else:
-                # Simplified EMA for other MA types (approximation)
-                alpha = 2.0 / (fastd_period + 1)
-                prev_ema = temp_buffer[0]
-                for i in range(out_idx):
-                    if i == 0:
-                        fastd_values[i] = temp_buffer[i]
-                    else:
-                        fastd_values[i] = alpha * temp_buffer[i] + (1 - alpha) * prev_ema
-                    prev_ema = fastd_values[i]
-        
-            # Map results back to original array
-            start_idx = lookback_total
-            for i in range(start_idx, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                fastk_idx = i - lookback_fastd
-                if fastk_idx >= 0:
-                    result_fastk[orig_idx, sec] = temp_buffer[fastk_idx]
-                if i - lookback_fastd >= 0:
-                    result_fastd[orig_idx, sec] = fastd_values[i - lookback_fastd]
-    
-        return result_fastk, result_fastd
-
-
-
-    @staticmethod
-    @nb.njit
-    def STOCHRSI(high, open, low, close, vol, oi, timeperiod=14, fastk_period=5, fastd_period=3, fastd_matype=0):
-        tdts, secs = close.shape
-        result_fastk = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-        result_fastd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= timeperiod + fastk_period + fastd_period - 2:
-                continue
-            
-            # Extract valid data
-            valid_close = close[valid_mask, sec]
-        
-            # Step 1: Calculate RSI
-            rsi_values = np.zeros(len(valid_close))
-            up_avg = 0.0
-            down_avg = 0.0
-        
-            # Initialize first RSI value
-            if len(valid_close) > timeperiod:
-                for i in range(1, timeperiod + 1):
-                    delta = valid_close[i] - valid_close[i-1]
-                    if delta > 0:
-                        up_avg += delta
-                    else:
-                        down_avg += abs(delta)
-                up_avg /= timeperiod
-                down_avg /= timeperiod
-            
-                if down_avg > 1e-10:
-                    rsi_values[timeperiod] = 100.0 - (100.0 / (1.0 + up_avg / down_avg))
-                else:
-                    rsi_values[timeperiod] = 100.0 if up_avg > 0 else 0.0
-        
-            # Calculate subsequent RSI values using Wilder smoothing
-            for i in range(timeperiod + 1, len(valid_close)):
-                delta = valid_close[i] - valid_close[i-1]
-                up_val = delta if delta > 0 else 0.0
-                down_val = abs(delta) if delta < 0 else 0.0
-            
-                up_avg = ((up_avg * (timeperiod - 1)) + up_val) / timeperiod
-                down_avg = ((down_avg * (timeperiod - 1)) + down_val) / timeperiod
-            
-                if down_avg > 1e-10:
-                    rsi_values[i] = 100.0 - (100.0 / (1.0 + up_avg / down_avg))
-                else:
-                    rsi_values[i] = 100.0 if up_avg > 0 else 0.0
-        
-            # Step 2: Calculate Stochastic RSI (FastK and FastD)
-            stochrsi_fastk = np.zeros(len(valid_close))
-            stochrsi_fastd = np.zeros(len(valid_close))
-        
-            # Calculate FastK
-            for i in range(timeperiod + fastk_period - 1, len(valid_close)):
-                period_low = rsi_values[i]
-                period_high = rsi_values[i]
-                for j in range(i - fastk_period + 1, i):
-                    if rsi_values[j] < period_low:
-                        period_low = rsi_values[j]
-                    if rsi_values[j] > period_high:
-                        period_high = rsi_values[j]
-            
-                if period_high - period_low > 1e-10:
-                    stochrsi_fastk[i] = 100.0 * (rsi_values[i] - period_low) / (period_high - period_low)
-                else:
-                    stochrsi_fastk[i] = 0.0
-        
-            # Calculate FastD based on matype (0 for SMA)
-            if fastd_matype == 0:  # Simple Moving Average
-                for i in range(timeperiod + fastk_period + fastd_period - 2, len(valid_close)):
-                    sum_fastk = 0.0
-                    count = 0
-                    for j in range(i - fastd_period + 1, i + 1):
-                        if stochrsi_fastk[j] == stochrsi_fastk[j]:  # Check for non-NaN
-                            sum_fastk += stochrsi_fastk[j]
-                            count += 1
-                    if count > 0:
-                        stochrsi_fastd[i] = sum_fastk / fastd_period
-                    else:
-                        stochrsi_fastd[i] = 0.0
-        
-            # Map results back to original array
-            lookback_total = timeperiod + fastk_period + fastd_period - 2
-            for i in range(lookback_total, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result_fastk[orig_idx, sec] = stochrsi_fastk[i]
-                result_fastd[orig_idx, sec] = stochrsi_fastd[i]
-    
-        return result_fastd  # Returning FastD as primary output per common usage
-
-
-
-    @staticmethod
-    @nb.njit
-    def SUM(high, open, low, close, vol, oi, timeperiod=14):
-        tdts, secs = close.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        lookback_total = timeperiod - 1
-    
-        for sec in range(secs):
-            # 创建有效数据掩码
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if close[i, sec] == close[i, sec]:
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
-                continue
-            
-            # 提取有效数据
-            valid_close = close[valid_mask, sec]
-        
-            # 初始化结果数组
-            sum_values = np.zeros(len(valid_close))
-        
-            # 初始化阶段：计算前timeperiod个数据的累加和
-            period_total = 0.0
-            trailing_idx = 0
-        
-            if timeperiod > 1:
-                for i in range(lookback_total):
-                    period_total += valid_close[i]
-        
-            # 主计算阶段：滑动窗口计算SUM
-            out_idx = 0
-            for i in range(lookback_total, len(valid_close)):
-                period_total += valid_close[i]
-                temp_real = period_total
-                period_total -= valid_close[trailing_idx]
-                trailing_idx += 1
-                sum_values[i] = temp_real
-                out_idx += 1
-        
-            # 映射结果回原始数组，从lookback_total开始输出
-            for i in range(lookback_total, len(valid_indices)):
-                orig_idx = valid_indices[i]
-                result[orig_idx, sec] = sum_values[i]
     
         return result
 
@@ -11486,9 +7635,9 @@ class BaseLogicFactors:
         """
         TRANGE - True Range
         True Range is the greatest of the following:
-        - High of the current day minus low of the current day
-        - Absolute value of high of the current day minus close of the previous day
-        - Absolute value of low of the current day minus close of the previous day
+        - High of the current period minus low of the current period
+        - Absolute value of high of the current period minus close of the previous period
+        - Absolute value of low of the current period minus close of the previous period
         """
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
@@ -11527,7 +7676,6 @@ class BaseLogicFactors:
                 tr_values[i] = greatest
         
             # Map results back to original array
-            # TA-Lib starts output from index 1
             for i in range(1, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = tr_values[i]
@@ -11539,16 +7687,16 @@ class BaseLogicFactors:
     @staticmethod
     @nb.njit
     def TRIX(high, open, low, close, vol, oi, timeperiod=30):
-        tdts, secs = close.shape
+        tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
-        # 计算lookback period，与C源码保持一致
+        # Calculate lookback periods as per TA-Lib
         ema_lookback = timeperiod - 1
         roc_lookback = 1
         total_lookback = (ema_lookback * 3) + roc_lookback
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -11558,38 +7706,47 @@ class BaseLogicFactors:
             if len(valid_indices) <= total_lookback:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 计算第一层EMA
-            k = 2.0 / (timeperiod + 1)
-            ema1 = np.zeros(len(valid_close))
-            ema1[0] = valid_close[0]
-            for i in range(1, len(valid_close)):
-                ema1[i] = ema1[i-1] + k * (valid_close[i] - ema1[i-1])
+            # Calculate EMA smoothing factor
+            k = 2.0 / (timeperiod + 1.0)
         
-            # 计算第二层EMA
-            ema2 = np.zeros(len(valid_close))
-            ema2[ema_lookback] = ema1[ema_lookback]
-            for i in range(ema_lookback + 1, len(valid_close)):
-                ema2[i] = ema2[i-1] + k * (ema1[i] - ema2[i-1])
+            # First EMA
+            temp_buffer = np.zeros(len(valid_close))
+            for i in range(len(valid_close)):
+                if i == 0:
+                    temp_buffer[i] = valid_close[i]
+                else:
+                    temp_buffer[i] = temp_buffer[i-1] + k * (valid_close[i] - temp_buffer[i-1])
         
-            # 计算第三层EMA (TEMA)
-            ema3 = np.zeros(len(valid_close))
-            ema3[ema_lookback * 2] = ema2[ema_lookback * 2]
-            for i in range(ema_lookback * 2 + 1, len(valid_close)):
-                ema3[i] = ema3[i-1] + k * (ema2[i] - ema3[i-1])
+            # Second EMA
+            temp_buffer2 = np.zeros(len(valid_close))
+            for i in range(len(valid_close)):
+                if i == 0:
+                    temp_buffer2[i] = temp_buffer[i]
+                else:
+                    temp_buffer2[i] = temp_buffer2[i-1] + k * (temp_buffer[i] - temp_buffer2[i-1])
         
-            # 计算ROC (Rate of Change)
+            # Third EMA
+            temp_buffer3 = np.zeros(len(valid_close))
+            for i in range(len(valid_close)):
+                if i == 0:
+                    temp_buffer3[i] = temp_buffer2[i]
+                else:
+                    temp_buffer3[i] = temp_buffer3[i-1] + k * (temp_buffer2[i] - temp_buffer3[i-1])
+        
+            # Calculate ROC (Rate of Change) on triple EMA
             trix_values = np.zeros(len(valid_close))
-            for i in range(total_lookback, len(valid_close)):
-                if ema3[i-1] > 1e-10:  # 避免除零
-                    trix_values[i] = 100.0 * (ema3[i] - ema3[i-1]) / ema3[i-1]
+            for i in range(1, len(valid_close)):
+                if temp_buffer3[i-1] > 1e-10:
+                    trix_values[i] = 100.0 * (temp_buffer3[i] - temp_buffer3[i-1]) / temp_buffer3[i-1]
                 else:
                     trix_values[i] = 0.0
         
-            # 映射结果回原始数组
-            for i in range(total_lookback, len(valid_indices)):
+            # Map results back to original array
+            start_idx = total_lookback
+            for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = trix_values[i]
     
@@ -11600,11 +7757,8 @@ class BaseLogicFactors:
     @staticmethod
     @nb.njit
     def TSF(high, open, low, close, vol, oi, timeperiod=14):
-        tdts, secs = close.shape
+        tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Lookback period as per TA-Lib
-        lookback_total = timeperiod - 1
     
         for sec in range(secs):
             # Create valid data mask
@@ -11614,36 +7768,44 @@ class BaseLogicFactors:
                     valid_mask[i] = True
         
             valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookback_total:
+            if len(valid_indices) < timeperiod:
                 continue
             
             # Extract valid data
             valid_close = close[valid_mask, sec]
+        
+            # Initialize output array for this security
+            tsf_values = np.zeros(len(valid_close))
+        
+            # Calculate lookback period (start index)
+            lookback_total = timeperiod - 1
+            start_idx = lookback_total
         
             # Pre-calculate constants for linear regression
             sum_x = timeperiod * (timeperiod - 1) * 0.5
             sum_x_sqr = timeperiod * (timeperiod - 1) * (2 * timeperiod - 1) / 6
             divisor = sum_x * sum_x - timeperiod * sum_x_sqr
         
-            # Calculate TSF values
-            tsf_values = np.zeros(len(valid_close))
-            for today in range(lookback_total, len(valid_close)):
+            # Main calculation loop
+            for today in range(start_idx, len(valid_close)):
                 sum_xy = 0.0
                 sum_y = 0.0
+            
+                # Calculate sums for linear regression
                 for i in range(timeperiod):
                     temp_value = valid_close[today - i]
                     sum_y += temp_value
                     sum_xy += i * temp_value
             
-                # Calculate slope (m) and intercept (b) for linear regression
+                # Calculate slope (m) and intercept (b)
                 m = (timeperiod * sum_xy - sum_x * sum_y) / divisor
                 b = (sum_y - m * sum_x) / timeperiod
             
-                # Forecast value at the end of the period
+                # Calculate forecast value
                 tsf_values[today] = b + m * timeperiod
         
             # Map results back to original array
-            for i in range(lookback_total, len(valid_indices)):
+            for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = tsf_values[i]
     
@@ -11654,10 +7816,6 @@ class BaseLogicFactors:
     @staticmethod
     @nb.njit
     def TYPPRICE(high, open, low, close, vol, oi):
-        """
-        TYPPRICE - Typical Price
-        Typical Price is the average of high, low, and close prices for a given period.
-        """
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
@@ -11670,10 +7828,10 @@ class BaseLogicFactors:
                     close[i, sec] == close[i, sec]):
                     valid_mask[i] = True
         
-            # Get valid indices
+            # Get valid data indices
             valid_indices = np.where(valid_mask)[0]
         
-            # If no valid data, skip to next security
+            # Skip if no valid data
             if len(valid_indices) == 0:
                 continue
         
@@ -11682,7 +7840,7 @@ class BaseLogicFactors:
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Calculate Typical Price for valid data points
+            # Calculate TYPPRICE for valid data
             typprice_values = np.zeros(len(valid_high))
             for i in range(len(valid_high)):
                 typprice_values[i] = (valid_high[i] + valid_low[i] + valid_close[i]) / 3.0
@@ -11698,210 +7856,12 @@ class BaseLogicFactors:
 
     @staticmethod
     @nb.njit
-    def ULTOSC(high, open, low, close, vol, oi, timeperiod1=7, timeperiod2=14, timeperiod3=28):
-        tdts, secs = high.shape
-        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
-    
-        # Sort periods in descending order as in C code
-        periods = np.array([timeperiod1, timeperiod2, timeperiod3])
-        sorted_periods = np.sort(periods)[::-1]
-        optInTimePeriod1 = sorted_periods[0]
-        optInTimePeriod2 = sorted_periods[1]
-        optInTimePeriod3 = sorted_periods[2]
-    
-        # Calculate lookback period
-        lookbackTotal = optInTimePeriod1 - 1
-    
-        for sec in range(secs):
-            # Create valid data mask
-            valid_mask = np.zeros(tdts, dtype=np.bool_)
-            for i in range(tdts):
-                if (high[i, sec] == high[i, sec] and 
-                    low[i, sec] == low[i, sec] and 
-                    close[i, sec] == close[i, sec]):
-                    valid_mask[i] = True
-        
-            valid_indices = np.where(valid_mask)[0]
-            if len(valid_indices) <= lookbackTotal:
-                continue
-            
-            # Extract valid data
-            valid_high = high[valid_mask, sec]
-            valid_low = low[valid_mask, sec]
-            valid_close = close[valid_mask, sec]
-        
-            # Initialize totals for each period
-            a1Total = 0.0
-            a2Total = 0.0
-            a3Total = 0.0
-            b1Total = 0.0
-            b2Total = 0.0
-            b3Total = 0.0
-        
-            # Prime the totals for each period as in C code
-            start_idx = lookbackTotal
-            for i in range(start_idx - optInTimePeriod1 + 1, start_idx):
-                if i >= 0 and i < len(valid_high):
-                    tempLT = valid_low[i]
-                    tempHT = valid_high[i]
-                    tempCY = valid_close[i-1] if i > 0 else valid_close[0]
-                    trueLow = min(tempLT, tempCY)
-                    closeMinusTrueLow = valid_close[i] - trueLow
-                    trueRange = tempHT - tempLT
-                    tempDouble = abs(tempCY - tempHT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    tempDouble = abs(tempCY - tempLT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    a1Total += closeMinusTrueLow
-                    b1Total += trueRange
-        
-            for i in range(start_idx - optInTimePeriod2 + 1, start_idx):
-                if i >= 0 and i < len(valid_high):
-                    tempLT = valid_low[i]
-                    tempHT = valid_high[i]
-                    tempCY = valid_close[i-1] if i > 0 else valid_close[0]
-                    trueLow = min(tempLT, tempCY)
-                    closeMinusTrueLow = valid_close[i] - trueLow
-                    trueRange = tempHT - tempLT
-                    tempDouble = abs(tempCY - tempHT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    tempDouble = abs(tempCY - tempLT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    a2Total += closeMinusTrueLow
-                    b2Total += trueRange
-        
-            for i in range(start_idx - optInTimePeriod3 + 1, start_idx):
-                if i >= 0 and i < len(valid_high):
-                    tempLT = valid_low[i]
-                    tempHT = valid_high[i]
-                    tempCY = valid_close[i-1] if i > 0 else valid_close[0]
-                    trueLow = min(tempLT, tempCY)
-                    closeMinusTrueLow = valid_close[i] - trueLow
-                    trueRange = tempHT - tempLT
-                    tempDouble = abs(tempCY - tempHT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    tempDouble = abs(tempCY - tempLT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    a3Total += closeMinusTrueLow
-                    b3Total += trueRange
-        
-            # Main calculation loop
-            today = start_idx
-            trailingIdx1 = today - optInTimePeriod1 + 1
-            trailingIdx2 = today - optInTimePeriod2 + 1
-            trailingIdx3 = today - optInTimePeriod3 + 1
-            outIdx = start_idx
-        
-            while today < len(valid_high):
-                # Calculate terms for current day
-                tempLT = valid_low[today]
-                tempHT = valid_high[today]
-                tempCY = valid_close[today-1] if today > 0 else valid_close[0]
-                trueLow = min(tempLT, tempCY)
-                closeMinusTrueLow = valid_close[today] - trueLow
-                trueRange = tempHT - tempLT
-                tempDouble = abs(tempCY - tempHT)
-                if tempDouble > trueRange:
-                    trueRange = tempDouble
-                tempDouble = abs(tempCY - tempLT)
-                if tempDouble > trueRange:
-                    trueRange = tempDouble
-            
-                # Update totals
-                a1Total += closeMinusTrueLow
-                a2Total += closeMinusTrueLow
-                a3Total += closeMinusTrueLow
-                b1Total += trueRange
-                b2Total += trueRange
-                b3Total += trueRange
-            
-                # Calculate output
-                output = 0.0
-                if b1Total > 1e-10:
-                    output += 4.0 * (a1Total / b1Total)
-                if b2Total > 1e-10:
-                    output += 2.0 * (a2Total / b2Total)
-                if b3Total > 1e-10:
-                    output += (a3Total / b3Total)
-            
-                # Subtract trailing values
-                if trailingIdx1 < len(valid_high):
-                    tempLT = valid_low[trailingIdx1]
-                    tempHT = valid_high[trailingIdx1]
-                    tempCY = valid_close[trailingIdx1-1] if trailingIdx1 > 0 else valid_close[0]
-                    trueLow = min(tempLT, tempCY)
-                    closeMinusTrueLow = valid_close[trailingIdx1] - trueLow
-                    trueRange = tempHT - tempLT
-                    tempDouble = abs(tempCY - tempHT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    tempDouble = abs(tempCY - tempLT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    a1Total -= closeMinusTrueLow
-                    b1Total -= trueRange
-            
-                if trailingIdx2 < len(valid_high):
-                    tempLT = valid_low[trailingIdx2]
-                    tempHT = valid_high[trailingIdx2]
-                    tempCY = valid_close[trailingIdx2-1] if trailingIdx2 > 0 else valid_close[0]
-                    trueLow = min(tempLT, tempCY)
-                    closeMinusTrueLow = valid_close[trailingIdx2] - trueLow
-                    trueRange = tempHT - tempLT
-                    tempDouble = abs(tempCY - tempHT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    tempDouble = abs(tempCY - tempLT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    a2Total -= closeMinusTrueLow
-                    b2Total -= trueRange
-            
-                if trailingIdx3 < len(valid_high):
-                    tempLT = valid_low[trailingIdx3]
-                    tempHT = valid_high[trailingIdx3]
-                    tempCY = valid_close[trailingIdx3-1] if trailingIdx3 > 0 else valid_close[0]
-                    trueLow = min(tempLT, tempCY)
-                    closeMinusTrueLow = valid_close[trailingIdx3] - trueLow
-                    trueRange = tempHT - tempLT
-                    tempDouble = abs(tempCY - tempHT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    tempDouble = abs(tempCY - tempLT)
-                    if tempDouble > trueRange:
-                        trueRange = tempDouble
-                    a3Total -= closeMinusTrueLow
-                    b3Total -= trueRange
-            
-                # Store result
-                if outIdx < tdts:
-                    orig_idx = valid_indices[today]
-                    result[orig_idx, sec] = 100.0 * (output / 7.0)
-            
-                today += 1
-                trailingIdx1 += 1
-                trailingIdx2 += 1
-                trailingIdx3 += 1
-                outIdx += 1
-    
-        return result
-
-
-
-    @staticmethod
-    @nb.njit
     def VAR(high, open, low, close, vol, oi, timeperiod=5):
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if close[i, sec] == close[i, sec]:
@@ -11911,52 +7871,52 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_close = close[valid_mask, sec]
         
-            # 初始化变量
+            # Initialize variables for calculation
             nb_initial_element_needed = timeperiod - 1
             start_idx = nb_initial_element_needed if nb_initial_element_needed < len(valid_close) else len(valid_close) - 1
         
             if start_idx >= len(valid_close):
                 continue
             
-            # 初始化累加器
+            # Initialize period totals for warm-up
             period_total1 = 0.0
             period_total2 = 0.0
             trailing_idx = start_idx - nb_initial_element_needed
         
-            # 预热期处理：计算初始的累加值
+            # Warm-up period: calculate initial sums
             i = trailing_idx
-            if timeperiod > 1:
-                while i < start_idx:
-                    temp_real = valid_close[i]
-                    period_total1 += temp_real
-                    temp_real *= temp_real
-                    period_total2 += temp_real
-                    i += 1
+            while i < start_idx and i < len(valid_close):
+                temp_real = valid_close[i]
+                period_total1 += temp_real
+                period_total2 += temp_real * temp_real
+                i += 1
         
-            # 主计算阶段
+            # Main calculation loop
             out_idx = start_idx
             while out_idx < len(valid_close):
                 temp_real = valid_close[out_idx]
                 period_total1 += temp_real
-                temp_real *= temp_real
-                period_total2 += temp_real
+                period_total2 += temp_real * temp_real
             
                 mean_value1 = period_total1 / timeperiod
                 mean_value2 = period_total2 / timeperiod
             
-                temp_real = valid_close[trailing_idx]
-                period_total1 -= temp_real
-                temp_real *= temp_real
-                period_total2 -= temp_real
+                # Subtract the oldest value for sliding window
+                if trailing_idx < len(valid_close):
+                    temp_real = valid_close[trailing_idx]
+                    period_total1 -= temp_real
+                    period_total2 -= temp_real * temp_real
+                    trailing_idx += 1
             
-                # 计算方差：E(X^2) - (E(X))^2
-                if out_idx >= nb_initial_element_needed:
-                    result[valid_indices[out_idx], sec] = mean_value2 - mean_value1 * mean_value1
-                
-                trailing_idx += 1
+                # Calculate variance
+                variance = mean_value2 - mean_value1 * mean_value1
+                if out_idx < len(valid_indices):
+                    orig_idx = valid_indices[out_idx]
+                    result[orig_idx, sec] = variance
+            
                 out_idx += 1
     
         return result
@@ -11966,10 +7926,6 @@ class BaseLogicFactors:
     @staticmethod
     @nb.njit
     def WCLPRICE(high, open, low, close, vol, oi):
-        """
-        WCLPRICE - Weighted Close Price
-        Weighted Close Price is calculated as (High + Low + 2*Close)/4
-        """
         tdts, secs = high.shape
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
@@ -11991,15 +7947,15 @@ class BaseLogicFactors:
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # Calculate Weighted Close Price
-            wcl_values = np.zeros(len(valid_high))
+            # Calculate WCLPRICE for valid data
+            wclprice_values = np.zeros(len(valid_high))
             for i in range(len(valid_high)):
-                wcl_values[i] = (valid_high[i] + valid_low[i] + (valid_close[i] * 2.0)) / 4.0
+                wclprice_values[i] = (valid_high[i] + valid_low[i] + (valid_close[i] * 2.0)) / 4.0
         
             # Map results back to original array
             for i in range(len(valid_indices)):
                 orig_idx = valid_indices[i]
-                result[orig_idx, sec] = wcl_values[i]
+                result[orig_idx, sec] = wclprice_values[i]
     
         return result
 
@@ -12012,7 +7968,7 @@ class BaseLogicFactors:
         result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
     
         for sec in range(secs):
-            # 创建有效数据掩码
+            # Create valid data mask
             valid_mask = np.zeros(tdts, dtype=np.bool_)
             for i in range(tdts):
                 if (high[i, sec] == high[i, sec] and 
@@ -12024,70 +7980,66 @@ class BaseLogicFactors:
             if len(valid_indices) < timeperiod:
                 continue
             
-            # 提取有效数据
+            # Extract valid data
             valid_high = high[valid_mask, sec]
             valid_low = low[valid_mask, sec]
             valid_close = close[valid_mask, sec]
         
-            # 初始化输出数组
+            # Initialize output array for valid data
             willr_values = np.zeros(len(valid_high))
-        
-            # 计算起始索引
-            nb_initial_element_needed = timeperiod - 1
-            start_idx = nb_initial_element_needed if nb_initial_element_needed < len(valid_high) else len(valid_high) - 1
+            nb_initial_needed = timeperiod - 1
+            start_idx = nb_initial_needed if nb_initial_needed < len(valid_high) else len(valid_high) - 1
         
             if start_idx >= len(valid_high):
                 continue
             
-            # 初始化变量
             out_idx = 0
             today = start_idx
-            trailing_idx = start_idx - nb_initial_element_needed
+            trailing_idx = today - nb_initial_needed
             lowest_idx = -1
             highest_idx = -1
             diff = 0.0
             highest = 0.0
             lowest = 0.0
         
-            # 主循环，计算WILLR
             while today < len(valid_high):
-                # 处理最低价
+                # Handle lowest value update
                 tmp = valid_low[today]
                 if lowest_idx < trailing_idx:
                     lowest_idx = trailing_idx
                     lowest = valid_low[lowest_idx]
                     i = lowest_idx
-                    while i + 1 <= today:
-                        i += 1
+                    while i < today + 1:
                         tmp = valid_low[i]
                         if tmp < lowest:
                             lowest_idx = i
                             lowest = tmp
+                        i += 1
                     diff = (highest - lowest) / (-100.0)
                 elif tmp <= lowest:
                     lowest_idx = today
                     lowest = tmp
                     diff = (highest - lowest) / (-100.0)
                 
-                # 处理最高价
+                # Handle highest value update
                 tmp = valid_high[today]
                 if highest_idx < trailing_idx:
                     highest_idx = trailing_idx
                     highest = valid_high[highest_idx]
                     i = highest_idx
-                    while i + 1 <= today:
-                        i += 1
+                    while i < today + 1:
                         tmp = valid_high[i]
                         if tmp > highest:
                             highest_idx = i
                             highest = tmp
+                        i += 1
                     diff = (highest - lowest) / (-100.0)
                 elif tmp >= highest:
                     highest_idx = today
                     highest = tmp
                     diff = (highest - lowest) / (-100.0)
                 
-                # 计算WILLR值
+                # Calculate WILLR value
                 if diff != 0.0:
                     willr_values[today] = (highest - valid_close[today]) / diff
                 else:
@@ -12096,10 +8048,3943 @@ class BaseLogicFactors:
                 trailing_idx += 1
                 today += 1
         
-            # 映射结果回原始数组
+            # Map results back to original array
             for i in range(start_idx, len(valid_indices)):
                 orig_idx = valid_indices[i]
                 result[orig_idx, sec] = willr_values[i]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def AROON(high, open, low, close, vol, oi, timeperiod=25):
+        tdts, secs = high.shape
+        result_up = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_down = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= timeperiod:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+        
+            # Initialize output arrays for Aroon Up and Down
+            aroon_up = np.zeros(len(valid_high))
+            aroon_down = np.zeros(len(valid_high))
+        
+            # Set start index as per TA-Lib logic
+            start_idx = timeperiod
+            out_idx = 0
+            today = start_idx
+            trailing_idx = start_idx - timeperiod
+            lowest_idx = -1
+            highest_idx = -1
+            lowest = 0.0
+            highest = 0.0
+            factor = 100.0 / timeperiod
+        
+            while today < len(valid_high):
+                # Process lowest for Aroon Down
+                tmp = valid_low[today]
+                if lowest_idx < trailing_idx:
+                    lowest_idx = trailing_idx
+                    lowest = valid_low[lowest_idx]
+                    i = lowest_idx
+                    while i <= today:
+                        tmp = valid_low[i]
+                        if tmp <= lowest:
+                            lowest_idx = i
+                            lowest = tmp
+                        i += 1
+                elif tmp <= lowest:
+                    lowest_idx = today
+                    lowest = tmp
+            
+                # Process highest for Aroon Up
+                tmp = valid_high[today]
+                if highest_idx < trailing_idx:
+                    highest_idx = trailing_idx
+                    highest = valid_high[highest_idx]
+                    i = highest_idx
+                    while i <= today:
+                        tmp = valid_high[i]
+                        if tmp >= highest:
+                            highest_idx = i
+                            highest = tmp
+                        i += 1
+                elif tmp >= highest:
+                    highest_idx = today
+                    highest = tmp
+            
+                # Calculate Aroon Up and Down
+                aroon_up[today] = factor * (timeperiod - (today - highest_idx))
+                aroon_down[today] = factor * (timeperiod - (today - lowest_idx))
+            
+                out_idx += 1
+                trailing_idx += 1
+                today += 1
+        
+            # Map results back to original array
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result_up[orig_idx, sec] = aroon_up[i]
+                result_down[orig_idx, sec] = aroon_down[i]
+    
+        return result_up, result_down
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLHAMMER(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods as per TA-Lib defaults
+        BodyShortPeriod = 5
+        ShadowLongPeriod = 5
+        ShadowVeryShortPeriod = 5
+        NearPeriod = 5
+    
+        # Total lookback period for starting index
+        lookbackTotal = max(BodyShortPeriod, ShadowLongPeriod, ShadowVeryShortPeriod, NearPeriod + 1)
+    
+        for sec in range(secs):
+            # Initialize period totals for averages
+            BodyPeriodTotal = 0.0
+            ShadowLongPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+            NearPeriodTotal = 0.0
+        
+            # Trailing indices for rolling window calculations
+            BodyTrailingIdx = lookbackTotal - BodyShortPeriod
+            ShadowLongTrailingIdx = lookbackTotal - ShadowLongPeriod
+            ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
+            NearTrailingIdx = lookbackTotal - 1 - NearPeriod
+        
+            # Warm-up period: Calculate initial totals for averages
+            for i in range(BodyTrailingIdx, lookbackTotal):
+                if i >= 0 and i < tdts:
+                    # BodyShort range (Close - Open)
+                    if close[i, sec] == close[i, sec] and open[i, sec] == open[i, sec]:
+                        BodyPeriodTotal += abs(close[i, sec] - open[i, sec])
+        
+            for i in range(ShadowLongTrailingIdx, lookbackTotal):
+                if i >= 0 and i < tdts:
+                    # ShadowLong range (typically lower shadow)
+                    if low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                        ShadowLongPeriodTotal += min(open[i, sec], close[i, sec]) - low[i, sec]
+        
+            for i in range(ShadowVeryShortTrailingIdx, lookbackTotal):
+                if i >= 0 and i < tdts:
+                    # ShadowVeryShort range (typically upper shadow)
+                    if high[i, sec] == high[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                        ShadowVeryShortPeriodTotal += high[i, sec] - max(open[i, sec], close[i, sec])
+        
+            for i in range(NearTrailingIdx, lookbackTotal - 1):
+                if i >= 0 and i < tdts:
+                    # Near range (typically high - low of previous candle)
+                    if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec]:
+                        NearPeriodTotal += high[i, sec] - low[i, sec]
+        
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, tdts):
+                # Check data validity
+                if (high[i, sec] != high[i, sec] or low[i, sec] != low[i, sec] or 
+                    open[i, sec] != open[i, sec] or close[i, sec] != close[i, sec] or
+                    i - 1 < 0 or high[i - 1, sec] != high[i - 1, sec] or low[i - 1, sec] != low[i - 1, sec]):
+                    result[i, sec] = 0
+                    continue
+            
+                # Calculate real body
+                real_body = abs(close[i, sec] - open[i, sec])
+                # Calculate averages
+                body_avg = BodyPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                shadow_long_avg = ShadowLongPeriodTotal / ShadowLongPeriod if ShadowLongPeriod > 0 else 0.0
+                shadow_short_avg = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+                near_avg = NearPeriodTotal / NearPeriod if NearPeriod > 0 else 0.0
+            
+                # Hammer pattern conditions
+                if (real_body < body_avg and
+                    (min(open[i, sec], close[i, sec]) - low[i, sec]) > shadow_long_avg and
+                    (high[i, sec] - max(open[i, sec], close[i, sec])) < shadow_short_avg and
+                    min(close[i, sec], open[i, sec]) <= low[i - 1, sec] + near_avg):
+                    result[i, sec] = 100
+                else:
+                    result[i, sec] = 0
+            
+                # Update rolling totals for next iteration
+                if i + 1 < tdts:
+                    # Update BodyPeriodTotal
+                    if close[i, sec] == close[i, sec] and open[i, sec] == open[i, sec]:
+                        BodyPeriodTotal += abs(close[i, sec] - open[i, sec])
+                    if BodyTrailingIdx >= 0 and close[BodyTrailingIdx, sec] == close[BodyTrailingIdx, sec] and open[BodyTrailingIdx, sec] == open[BodyTrailingIdx, sec]:
+                        BodyPeriodTotal -= abs(close[BodyTrailingIdx, sec] - open[BodyTrailingIdx, sec])
+                
+                    # Update ShadowLongPeriodTotal
+                    if low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                        ShadowLongPeriodTotal += min(open[i, sec], close[i, sec]) - low[i, sec]
+                    if ShadowLongTrailingIdx >= 0 and low[ShadowLongTrailingIdx, sec] == low[ShadowLongTrailingIdx, sec] and open[ShadowLongTrailingIdx, sec] == open[ShadowLongTrailingIdx, sec] and close[ShadowLongTrailingIdx, sec] == close[ShadowLongTrailingIdx, sec]:
+                        ShadowLongPeriodTotal -= min(open[ShadowLongTrailingIdx, sec], close[ShadowLongTrailingIdx, sec]) - low[ShadowLongTrailingIdx, sec]
+                
+                    # Update ShadowVeryShortPeriodTotal
+                    if high[i, sec] == high[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                        ShadowVeryShortPeriodTotal += high[i, sec] - max(open[i, sec], close[i, sec])
+                    if ShadowVeryShortTrailingIdx >= 0 and high[ShadowVeryShortTrailingIdx, sec] == high[ShadowVeryShortTrailingIdx, sec] and open[ShadowVeryShortTrailingIdx, sec] == open[ShadowVeryShortTrailingIdx, sec] and close[ShadowVeryShortTrailingIdx, sec] == close[ShadowVeryShortTrailingIdx, sec]:
+                        ShadowVeryShortPeriodTotal -= high[ShadowVeryShortTrailingIdx, sec] - max(open[ShadowVeryShortTrailingIdx, sec], close[ShadowVeryShortTrailingIdx, sec])
+                
+                    # Update NearPeriodTotal
+                    if i - 1 >= 0 and high[i - 1, sec] == high[i - 1, sec] and low[i - 1, sec] == low[i - 1, sec]:
+                        NearPeriodTotal += high[i - 1, sec] - low[i - 1, sec]
+                    if NearTrailingIdx >= 0 and high[NearTrailingIdx, sec] == high[NearTrailingIdx, sec] and low[NearTrailingIdx, sec] == low[NearTrailingIdx, sec]:
+                        NearPeriodTotal -= high[NearTrailingIdx, sec] - low[NearTrailingIdx, sec]
+                
+                    BodyTrailingIdx += 1
+                    ShadowLongTrailingIdx += 1
+                    ShadowVeryShortTrailingIdx += 1
+                    NearTrailingIdx += 1
+    
+        return result
+
+
+
+
+
+
+### end here
+
+    @staticmethod
+    @nb.njit
+    def BETA(high, open, low, close, vol, oi, timeperiod=5):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask for close and open (used as inReal0 and inReal1 in C code)
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (close[i, sec] == close[i, sec] and 
+                    open[i, sec] == open[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < timeperiod:
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]  # inReal0 in C code
+            valid_open = open[valid_mask, sec]    # inReal1 in C code
+        
+            # Initialize variables as per C code
+            nb_initial_element_needed = timeperiod
+            start_idx = nb_initial_element_needed if nb_initial_element_needed > 0 else 0
+        
+            if start_idx >= len(valid_close):
+                continue
+            
+            trailing_idx = start_idx - nb_initial_element_needed
+            last_price_x = trailing_last_price_x = valid_close[trailing_idx] if trailing_idx >= 0 else 0.0
+            last_price_y = trailing_last_price_y = valid_open[trailing_idx] if trailing_idx >= 0 else 0.0
+        
+            # Initialize summation variables
+            S_xx = 0.0
+            S_xy = 0.0
+            S_x = 0.0
+            S_y = 0.0
+        
+            # Warm-up period: calculate initial sums
+            i = trailing_idx + 1 if trailing_idx + 1 < start_idx else start_idx
+            while i < start_idx and i < len(valid_close):
+                tmp_real = valid_close[i]
+                if last_price_x != 0.0:
+                    x = (tmp_real - last_price_x) / last_price_x
+                else:
+                    x = 0.0
+                last_price_x = tmp_real
+            
+                tmp_real = valid_open[i]
+                if last_price_y != 0.0:
+                    y = (tmp_real - last_price_y) / last_price_y
+                else:
+                    y = 0.0
+                last_price_y = tmp_real
+            
+                S_xx += x * x
+                S_xy += x * y
+                S_x += x
+                S_y += y
+                i += 1
+        
+            # Main calculation loop
+            out_idx = start_idx
+            n = float(timeperiod)
+            trailing_idx = start_idx - nb_initial_element_needed
+        
+            while i < len(valid_close):
+                tmp_real = valid_close[i]
+                if last_price_x != 0.0:
+                    x = (tmp_real - last_price_x) / last_price_x
+                else:
+                    x = 0.0
+                last_price_x = tmp_real
+            
+                tmp_real = valid_open[i]
+                if last_price_y != 0.0:
+                    y = (tmp_real - last_price_y) / last_price_y
+                else:
+                    y = 0.0
+                last_price_y = tmp_real
+            
+                S_xx += x * x
+                S_xy += x * y
+                S_x += x
+                S_y += y
+            
+                # Subtract trailing value
+                if trailing_idx < len(valid_close):
+                    tmp_real = valid_close[trailing_idx]
+                    if trailing_last_price_x != 0.0:
+                        x = (tmp_real - trailing_last_price_x) / trailing_last_price_x
+                    else:
+                        x = 0.0
+                    trailing_last_price_x = tmp_real
+                
+                    tmp_real = valid_open[trailing_idx]
+                    if trailing_last_price_y != 0.0:
+                        y = (tmp_real - trailing_last_price_y) / trailing_last_price_y
+                    else:
+                        y = 0.0
+                    trailing_last_price_y = tmp_real
+                
+                    S_xx -= x * x
+                    S_xy -= x * y
+                    S_x -= x
+                    S_y -= y
+            
+                # Calculate BETA
+                tmp_real = (n * S_xx) - (S_x * S_x)
+                if tmp_real != 0.0:
+                    beta_value = ((n * S_xy) - (S_x * S_y)) / tmp_real
+                else:
+                    beta_value = 0.0
+            
+                if out_idx < len(valid_close):
+                    orig_idx = valid_indices[out_idx]
+                    result[orig_idx, sec] = beta_value
+            
+                trailing_idx += 1
+                i += 1
+                out_idx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLBELTHOLD(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods as per TA-Lib defaults for BodyLong and ShadowVeryShort
+        BodyLongPeriod = 5
+        ShadowVeryShortPeriod = 5
+        lookbackTotal = max(BodyLongPeriod, ShadowVeryShortPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize trailing totals for moving averages
+            BodyLongPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+        
+            # Calculate initial totals for the lookback period
+            BodyLongTrailingIdx = 0
+            ShadowVeryShortTrailingIdx = 0
+        
+            for i in range(lookbackTotal):
+                # BodyLong range is typically close-open difference for real body
+                BodyLongRange = abs(valid_close[i] - valid_open[i])
+                BodyLongPeriodTotal += BodyLongRange
+            
+                # ShadowVeryShort range for shadows
+                if valid_close[i] > valid_open[i]:
+                    ShadowRange = valid_high[i] - valid_close[i]
+                else:
+                    ShadowRange = valid_open[i] - valid_low[i]
+                ShadowVeryShortPeriodTotal += ShadowRange
+        
+            # Start processing from lookbackTotal onwards
+            outIdx = lookbackTotal
+            while outIdx < len(valid_high):
+                # Calculate real body
+                realBody = abs(valid_close[outIdx] - valid_open[outIdx])
+            
+                # Calculate candle color (1 for bullish, -1 for bearish)
+                candleColor = 1 if valid_close[outIdx] > valid_open[outIdx] else -1
+            
+                # Calculate shadows
+                upperShadow = valid_high[outIdx] - max(valid_open[outIdx], valid_close[outIdx])
+                lowerShadow = min(valid_open[outIdx], valid_close[outIdx]) - valid_low[outIdx]
+            
+                # Calculate averages
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod
+            
+                # Belt Hold pattern logic
+                if realBody > BodyLongAverage:
+                    if candleColor == 1 and lowerShadow < ShadowVeryShortAverage:
+                        result[valid_indices[outIdx], sec] = 100
+                    elif candleColor == -1 and upperShadow < ShadowVeryShortAverage:
+                        result[valid_indices[outIdx], sec] = -100
+                    else:
+                        result[valid_indices[outIdx], sec] = 0
+                else:
+                    result[valid_indices[outIdx], sec] = 0
+            
+                # Update trailing totals
+                # Remove oldest value
+                oldBodyLongRange = abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
+                BodyLongPeriodTotal -= oldBodyLongRange
+            
+                oldShadowRange = valid_high[ShadowVeryShortTrailingIdx] - max(valid_open[ShadowVeryShortTrailingIdx], valid_close[ShadowVeryShortTrailingIdx]) if valid_close[ShadowVeryShortTrailingIdx] > valid_open[ShadowVeryShortTrailingIdx] else min(valid_open[ShadowVeryShortTrailingIdx], valid_close[ShadowVeryShortTrailingIdx]) - valid_low[ShadowVeryShortTrailingIdx]
+                ShadowVeryShortPeriodTotal -= oldShadowRange
+            
+                # Add newest value
+                newBodyLongRange = abs(valid_close[outIdx] - valid_open[outIdx])
+                BodyLongPeriodTotal += newBodyLongRange
+            
+                newShadowRange = valid_high[outIdx] - max(valid_open[outIdx], valid_close[outIdx]) if valid_close[outIdx] > valid_open[outIdx] else min(valid_open[outIdx], valid_close[outIdx]) - valid_low[outIdx]
+                ShadowVeryShortPeriodTotal += newShadowRange
+            
+                # Increment indices
+                BodyLongTrailingIdx += 1
+                ShadowVeryShortTrailingIdx += 1
+                outIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLCLOSINGMARUBOZU(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods for BodyLong and ShadowVeryShort as per TA-Lib defaults
+        BodyLongPeriod = 10
+        ShadowVeryShortPeriod = 10
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < max(BodyLongPeriod, ShadowVeryShortPeriod):
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize output array for valid data
+            temp_result = np.zeros(len(valid_high))
+        
+            # Calculate lookback total as per TA-Lib
+            lookback_total = max(BodyLongPeriod, ShadowVeryShortPeriod)
+            start_idx = lookback_total if lookback_total < len(valid_high) else len(valid_high) - 1
+        
+            if start_idx >= len(valid_high):
+                continue
+            
+            # Initialize totals for BodyLong and ShadowVeryShort
+            BodyLongPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+        
+            # Calculate initial totals for the lookback period
+            BodyLongTrailingIdx = 0
+            ShadowVeryShortTrailingIdx = 0
+        
+            for i in range(start_idx):
+                # BodyLong range is typically close - open (real body)
+                BodyLongRange = abs(valid_close[i] - valid_open[i])
+                BodyLongPeriodTotal += BodyLongRange
+            
+                # ShadowVeryShort range is typically high - low for shadow calculation
+                ShadowVeryShortRange = valid_high[i] - valid_low[i]
+                ShadowVeryShortPeriodTotal += ShadowVeryShortRange
+        
+            # Main calculation loop
+            for i in range(start_idx, len(valid_high)):
+                # Calculate real body
+                real_body = abs(valid_close[i] - valid_open[i])
+            
+                # Calculate candle color (1 for bullish, -1 for bearish)
+                candle_color = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Calculate upper and lower shadows
+                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
+                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
+            
+                # Calculate averages
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+            
+                # Check for Closing Marubozu pattern
+                if real_body > BodyLongAverage:
+                    if candle_color == 1 and upper_shadow < ShadowVeryShortAverage:
+                        temp_result[i] = 100
+                    elif candle_color == -1 and lower_shadow < ShadowVeryShortAverage:
+                        temp_result[i] = -100
+                    else:
+                        temp_result[i] = 0
+                else:
+                    temp_result[i] = 0
+            
+                # Update totals for next iteration
+                if i + 1 < len(valid_high):
+                    # Add current range
+                    new_body_range = abs(valid_close[i] - valid_open[i])
+                    new_shadow_range = valid_high[i] - valid_low[i]
+                
+                    BodyLongPeriodTotal += new_body_range
+                    ShadowVeryShortPeriodTotal += new_shadow_range
+                
+                    # Subtract trailing range if within bounds
+                    if BodyLongTrailingIdx < len(valid_high):
+                        old_body_range = abs(valid_close[BodyLongTrailingIdx] - valid_open[BodyLongTrailingIdx])
+                        BodyLongPeriodTotal -= old_body_range
+                        BodyLongTrailingIdx += 1
+                
+                    if ShadowVeryShortTrailingIdx < len(valid_high):
+                        old_shadow_range = valid_high[ShadowVeryShortTrailingIdx] - valid_low[ShadowVeryShortTrailingIdx]
+                        ShadowVeryShortPeriodTotal -= old_shadow_range
+                        ShadowVeryShortTrailingIdx += 1
+        
+            # Map results back to original array
+            for i in range(len(valid_indices)):
+                if i >= start_idx:
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = temp_result[i]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLCOUNTERATTACK(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods as per TA-Lib defaults
+        EqualPeriod = 2
+        BodyLongPeriod = 10
+        lookbackTotal = max(EqualPeriod, BodyLongPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for Equal and BodyLong periods
+            EqualPeriodTotal = 0.0
+            BodyLongPeriodTotal = np.zeros(2, dtype=np.float64)
+            EqualTrailingIdx = 0
+            BodyLongTrailingIdx = 0
+        
+            # Warm-up period for Equal
+            for i in range(EqualTrailingIdx, lookbackTotal):
+                if i < EqualPeriod:
+                    EqualPeriodTotal += abs(valid_close[i] - valid_open[i])
+        
+            # Warm-up period for BodyLong
+            for i in range(BodyLongTrailingIdx, lookbackTotal):
+                if i < BodyLongPeriod:
+                    BodyLongPeriodTotal[1] += abs(valid_close[i] - valid_open[i])
+                    if i + 1 < len(valid_close):
+                        BodyLongPeriodTotal[0] += abs(valid_close[i + 1] - valid_open[i + 1])
+        
+            # Main calculation loop
+            for i in range(lookbackTotal, len(valid_close)):
+                # Calculate candle color for current and previous day
+                color_prev = 1 if valid_close[i - 1] > valid_open[i - 1] else -1
+                color_curr = 1 if valid_close[i] > valid_open[i] else -1
+            
+                # Calculate real body for current and previous day
+                realbody_prev = abs(valid_close[i - 1] - valid_open[i - 1])
+                realbody_curr = abs(valid_close[i] - valid_open[i])
+            
+                # Calculate averages
+                EqualAverage = EqualPeriodTotal / EqualPeriod if EqualPeriod > 0 else 0.0
+                BodyLongAverage_prev = BodyLongPeriodTotal[1] / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                BodyLongAverage_curr = BodyLongPeriodTotal[0] / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+            
+                # Counterattack pattern logic
+                if (color_prev == -color_curr and
+                    realbody_prev > BodyLongAverage_prev and
+                    realbody_curr > BodyLongAverage_curr and
+                    valid_close[i] <= valid_close[i - 1] + EqualAverage and
+                    valid_close[i] >= valid_close[i - 1] - EqualAverage):
+                    result[valid_indices[i], sec] = color_curr * 100
+                else:
+                    result[valid_indices[i], sec] = 0
+            
+                # Update totals for next iteration
+                if i - EqualPeriod >= 0:
+                    EqualPeriodTotal += abs(valid_close[i - 1] - valid_open[i - 1])
+                    EqualPeriodTotal -= abs(valid_close[i - EqualPeriod - 1] - valid_open[i - EqualPeriod - 1])
+            
+                for totIdx in range(1, -1, -1):
+                    if i - totIdx >= 0 and i - totIdx - BodyLongPeriod >= 0:
+                        BodyLongPeriodTotal[totIdx] += abs(valid_close[i - totIdx] - valid_open[i - totIdx])
+                        BodyLongPeriodTotal[totIdx] -= abs(valid_close[i - totIdx - BodyLongPeriod] - valid_open[i - totIdx - BodyLongPeriod])
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLDOJISTAR(high, open, low, close, vol, oi):
+        """
+        CDLDOJISTAR - Candlestick Doji Star Pattern
+    
+        Identifies a Doji Star pattern where a Doji appears after a long body candle
+        with a gap between them, indicating potential reversal.
+        """
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define periods for averaging candle body sizes as per TA-Lib defaults
+        BodyLongPeriod = 10
+        BodyDojiPeriod = 3
+    
+        # Lookback period as per TA-Lib (maximum of the two periods + 1 for previous candle)
+        lookbackTotal = max(BodyLongPeriod, BodyDojiPeriod) + 1
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize output array for valid data
+            out_values = np.zeros(len(valid_high))
+        
+            # Initialize trailing totals for body averages
+            BodyLongPeriodTotal = 0.0
+            BodyDojiPeriodTotal = 0.0
+        
+            # Calculate initial totals for BodyLong
+            BodyLongTrailingIdx = lookbackTotal - 1 - BodyLongPeriod
+            if BodyLongTrailingIdx < 0:
+                BodyLongTrailingIdx = 0
+            for i in range(BodyLongTrailingIdx, lookbackTotal - 1):
+                BodyLongPeriodTotal += abs(valid_open[i] - valid_close[i])
+        
+            # Calculate initial totals for BodyDoji
+            BodyDojiTrailingIdx = lookbackTotal - BodyDojiPeriod
+            if BodyDojiTrailingIdx < 0:
+                BodyDojiTrailingIdx = 0
+            for i in range(BodyDojiTrailingIdx, lookbackTotal):
+                BodyDojiPeriodTotal += abs(valid_open[i] - valid_close[i])
+        
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate BodyLong average
+                BodyLongAverage = BodyLongPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+            
+                # Calculate BodyDoji average
+                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
+            
+                # Calculate real body for current and previous candle
+                realbody_prev = abs(valid_open[i-1] - valid_close[i-1])
+                realbody_curr = abs(valid_open[i] - valid_close[i])
+            
+                # Determine candle color for previous day (1 for bullish, -1 for bearish)
+                candle_color_prev = 1 if valid_close[i-1] > valid_open[i-1] else -1
+            
+                # Check for gap up or gap down
+                gap_up = valid_open[i] > valid_close[i-1] if candle_color_prev == 1 else False
+                gap_down = valid_open[i] < valid_close[i-1] if candle_color_prev == -1 else False
+            
+                # Check Doji Star conditions
+                if (realbody_prev > BodyLongAverage and  # Previous candle has long body
+                    realbody_curr <= BodyDojiAverage and  # Current candle is Doji
+                    ((candle_color_prev == 1 and gap_up) or  # Bullish with gap up
+                     (candle_color_prev == -1 and gap_down))):  # Bearish with gap down
+                    out_values[i] = -candle_color_prev * 100
+                else:
+                    out_values[i] = 0
+                
+                # Update trailing totals for next iteration
+                BodyLongPeriodTotal += abs(valid_open[i-1] - valid_close[i-1])
+                BodyLongPeriodTotal -= abs(valid_open[BodyLongTrailingIdx] - valid_close[BodyLongTrailingIdx])
+                BodyDojiPeriodTotal += abs(valid_open[i] - valid_close[i])
+                BodyDojiPeriodTotal -= abs(valid_open[BodyDojiTrailingIdx] - valid_close[BodyDojiTrailingIdx])
+            
+                BodyLongTrailingIdx += 1
+                BodyDojiTrailingIdx += 1
+        
+            # Map results back to original array
+            for i in range(len(valid_indices)):
+                if i >= lookbackTotal:
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = out_values[i]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLDRAGONFLYDOJI(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define constants for averaging periods as in TA-Lib
+        BodyDojiPeriod = 3
+        ShadowVeryShortPeriod = 3
+    
+        # Lookback period as per TA-Lib
+        lookbackTotal = max(BodyDojiPeriod, ShadowVeryShortPeriod)
+    
+        for sec in range(secs):
+            # Initialize variables for trailing totals
+            BodyDojiPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+        
+            # Initialize trailing indices
+            BodyDojiTrailingIdx = lookbackTotal - BodyDojiPeriod
+            ShadowVeryShortTrailingIdx = lookbackTotal - ShadowVeryShortPeriod
+        
+            # Warm-up period: Calculate initial totals for averages
+            for i in range(BodyDojiTrailingIdx, lookbackTotal):
+                if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                    BodyDojiPeriodTotal += abs(close[i, sec] - open[i, sec])
+        
+            for i in range(ShadowVeryShortTrailingIdx, lookbackTotal):
+                if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                    ShadowVeryShortPeriodTotal += high[i, sec] - low[i, sec]
+        
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, tdts):
+                if high[i, sec] != high[i, sec] or low[i, sec] != low[i, sec] or open[i, sec] != open[i, sec] or close[i, sec] != close[i, sec]:
+                    result[i, sec] = 0
+                    continue
+                
+                # Calculate real body and shadows
+                real_body = abs(close[i, sec] - open[i, sec])
+                upper_shadow = high[i, sec] - max(open[i, sec], close[i, sec])
+                lower_shadow = min(open[i, sec], close[i, sec]) - low[i, sec]
+            
+                # Calculate averages for comparison
+                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+            
+                # Dragonfly Doji conditions:
+                # 1. Real body is very small (less than or equal to average body)
+                # 2. Upper shadow is very short (less than average shadow)
+                # 3. Lower shadow is long (greater than average shadow)
+                if (real_body <= BodyDojiAverage and
+                    upper_shadow < ShadowVeryShortAverage and
+                    lower_shadow > ShadowVeryShortAverage):
+                    result[i, sec] = 100
+                else:
+                    result[i, sec] = 0
+            
+                # Update trailing totals for next iteration
+                if i + 1 < tdts:
+                    # Add current candle range to totals
+                    if high[i, sec] == high[i, sec] and low[i, sec] == low[i, sec] and open[i, sec] == open[i, sec] and close[i, sec] == close[i, sec]:
+                        BodyDojiPeriodTotal += abs(close[i, sec] - open[i, sec])
+                        ShadowVeryShortPeriodTotal += high[i, sec] - low[i, sec]
+                
+                    # Subtract trailing candle range from totals
+                    if BodyDojiTrailingIdx < tdts and high[BodyDojiTrailingIdx, sec] == high[BodyDojiTrailingIdx, sec]:
+                        BodyDojiPeriodTotal -= abs(close[BodyDojiTrailingIdx, sec] - open[BodyDojiTrailingIdx, sec])
+                    if ShadowVeryShortTrailingIdx < tdts and high[ShadowVeryShortTrailingIdx, sec] == high[ShadowVeryShortTrailingIdx, sec]:
+                        ShadowVeryShortPeriodTotal -= high[ShadowVeryShortTrailingIdx, sec] - low[ShadowVeryShortTrailingIdx, sec]
+                
+                    # Increment trailing indices
+                    BodyDojiTrailingIdx += 1
+                    ShadowVeryShortTrailingIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLGAPSIDESIDEWHITE(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback period as per TA-Lib (2 days for pattern recognition)
+        lookback_total = 2
+    
+        # Define periods for Near and Equal averages as per TA-Lib defaults
+        near_period = 14
+        equal_period = 14
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookback_total:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for Near and Equal periods
+            near_period_total = 0.0
+            equal_period_total = 0.0
+        
+            # Calculate initial totals for Near and Equal ranges
+            start_idx = lookback_total
+            near_trailing_idx = start_idx - near_period
+            equal_trailing_idx = start_idx - equal_period
+        
+            if near_trailing_idx < 0:
+                near_trailing_idx = 0
+            if equal_trailing_idx < 0:
+                equal_trailing_idx = 0
+            
+            for i in range(near_trailing_idx, start_idx):
+                if i < len(valid_high):
+                    near_period_total += valid_high[i] - valid_low[i]
+                
+            for i in range(equal_trailing_idx, start_idx):
+                if i < len(valid_high):
+                    equal_period_total += valid_high[i] - valid_low[i]
+        
+            # Main calculation loop
+            out_idx = start_idx
+            i = start_idx
+            while i < len(valid_high):
+                if i >= 2:  # Need at least 2 previous candles for pattern
+                    # Check for gap up or gap down conditions
+                    realbody_gapup_1 = valid_close[i-1] > valid_open[i-2]
+                    realbody_gapup_2 = valid_close[i] > valid_open[i-2]
+                    realbody_gapdown_1 = valid_close[i-1] < valid_open[i-2]
+                    realbody_gapdown_2 = valid_close[i] < valid_open[i-2]
+                
+                    # Check candle colors (white candles for both)
+                    color_1 = valid_close[i-1] > valid_open[i-1]
+                    color_2 = valid_close[i] > valid_open[i]
+                
+                    # Calculate real body sizes
+                    realbody_1 = abs(valid_close[i-1] - valid_open[i-1])
+                    realbody_2 = abs(valid_close[i] - valid_open[i])
+                
+                    # Calculate averages for comparison
+                    near_avg = near_period_total / near_period if near_period > 0 else 0.0
+                    equal_avg = equal_period_total / equal_period if equal_period > 0 else 0.0
+                
+                    # Check all conditions for Side-by-Side White Lines pattern
+                    if ((realbody_gapup_1 and realbody_gapup_2) or (realbody_gapdown_1 and realbody_gapdown_2)) and \
+                       color_1 and color_2 and \
+                       realbody_2 >= realbody_1 - near_avg and \
+                       realbody_2 <= realbody_1 + near_avg and \
+                       valid_open[i] >= valid_open[i-1] - equal_avg and \
+                       valid_open[i] <= valid_open[i-1] + equal_avg:
+                        result[valid_indices[i], sec] = 100 if realbody_gapup_1 else -100
+                    else:
+                        result[valid_indices[i], sec] = 0
+                else:
+                    result[valid_indices[i], sec] = 0
+                
+                # Update trailing totals
+                if i < len(valid_high):
+                    current_near_range = valid_high[i] - valid_low[i]
+                    current_equal_range = valid_high[i] - valid_low[i]
+                
+                    if near_trailing_idx < len(valid_high):
+                        old_near_range = valid_high[near_trailing_idx] - valid_low[near_trailing_idx]
+                        near_period_total += current_near_range - old_near_range
+                    else:
+                        near_period_total += current_near_range
+                    
+                    if equal_trailing_idx < len(valid_high):
+                        old_equal_range = valid_high[equal_trailing_idx] - valid_low[equal_trailing_idx]
+                        equal_period_total += current_equal_range - old_equal_range
+                    else:
+                        equal_period_total += current_equal_range
+                    
+                i += 1
+                near_trailing_idx += 1
+                equal_trailing_idx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLGRAVESTONEDOJI(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods as per TA-Lib defaults
+        BodyDojiPeriod = 3
+        ShadowVeryShortPeriod = 3
+        lookbackTotal = max(BodyDojiPeriod, ShadowVeryShortPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize period totals for averaging
+            BodyDojiPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+        
+            # Calculate initial totals for BodyDoji and ShadowVeryShort
+            BodyDojiTrailingIdx = 0
+            ShadowVeryShortTrailingIdx = 0
+        
+            for i in range(lookbackTotal):
+                # BodyDoji range is typically the real body size
+                BodyDojiRange = abs(valid_close[i] - valid_open[i])
+                BodyDojiPeriodTotal += BodyDojiRange
+            
+                # ShadowVeryShort range is typically the high-low range
+                ShadowVeryShortRange = valid_high[i] - valid_low[i]
+                ShadowVeryShortPeriodTotal += ShadowVeryShortRange
+        
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate real body and shadows
+                real_body = abs(valid_close[i] - valid_open[i])
+                lower_shadow = valid_open[i] - valid_low[i] if valid_close[i] >= valid_open[i] else valid_close[i] - valid_low[i]
+                upper_shadow = valid_high[i] - valid_open[i] if valid_close[i] >= valid_open[i] else valid_high[i] - valid_close[i]
+            
+                # Calculate averages
+                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod
+            
+                # Gravestone Doji conditions:
+                # 1. Real body is very small compared to average
+                # 2. Lower shadow is very short compared to average
+                # 3. Upper shadow is long compared to average
+                if (real_body <= BodyDojiAverage and
+                    lower_shadow < ShadowVeryShortAverage and
+                    upper_shadow > ShadowVeryShortAverage):
+                    result[valid_indices[i], sec] = 100
+                else:
+                    result[valid_indices[i], sec] = 0
+            
+                # Update trailing totals
+                # Remove oldest value and add newest value for BodyDoji
+                oldest_body_range = abs(valid_close[BodyDojiTrailingIdx] - valid_open[BodyDojiTrailingIdx])
+                newest_body_range = abs(valid_close[i] - valid_open[i])
+                BodyDojiPeriodTotal += newest_body_range - oldest_body_range
+                BodyDojiTrailingIdx += 1
+            
+                # Remove oldest value and add newest value for ShadowVeryShort
+                oldest_shadow_range = valid_high[ShadowVeryShortTrailingIdx] - valid_low[ShadowVeryShortTrailingIdx]
+                newest_shadow_range = valid_high[i] - valid_low[i]
+                ShadowVeryShortPeriodTotal += newest_shadow_range - oldest_shadow_range
+                ShadowVeryShortTrailingIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLINVERTEDHAMMER(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods for different candle components as in TA-Lib
+        BodyShortPeriod = 10
+        ShadowLongPeriod = 10
+        ShadowVeryShortPeriod = 10
+        lookbackTotal = max(BodyShortPeriod, max(ShadowLongPeriod, ShadowVeryShortPeriod))
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for averaging
+            BodyPeriodTotal = 0.0
+            ShadowLongPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+        
+            # Calculate initial totals for the lookback period
+            for i in range(lookbackTotal):
+                # BodyShort range (real body)
+                BodyPeriodTotal += abs(valid_close[i] - valid_open[i])
+                # ShadowLong range (upper shadow)
+                ShadowLongPeriodTotal += max(valid_high[i] - max(valid_open[i], valid_close[i]), 0.0)
+                # ShadowVeryShort range (lower shadow)
+                ShadowVeryShortPeriodTotal += max(min(valid_open[i], valid_close[i]) - valid_low[i], 0.0)
+        
+            # Start processing from lookbackTotal
+            BodyTrailingIdx = 0
+            ShadowLongTrailingIdx = 0
+            ShadowVeryShortTrailingIdx = 0
+        
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate real body
+                real_body = abs(valid_close[i] - valid_open[i])
+                # Calculate upper shadow
+                upper_shadow = max(valid_high[i] - max(valid_open[i], valid_close[i]), 0.0)
+                # Calculate lower shadow
+                lower_shadow = max(min(valid_open[i], valid_close[i]) - valid_low[i], 0.0)
+                # Calculate body gap down condition
+                gap_down = 1 if i > 0 and min(valid_open[i-1], valid_close[i-1]) > max(valid_open[i], valid_close[i]) else 0
+            
+                # Calculate averages
+                BodyAverage = BodyPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                ShadowLongAverage = ShadowLongPeriodTotal / ShadowLongPeriod if ShadowLongPeriod > 0 else 0.0
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod if ShadowVeryShortPeriod > 0 else 0.0
+            
+                # Check Inverted Hammer conditions
+                if (real_body < BodyAverage and 
+                    upper_shadow > ShadowLongAverage and 
+                    lower_shadow < ShadowVeryShortAverage and 
+                    gap_down == 1):
+                    result[valid_indices[i], sec] = 100
+                else:
+                    result[valid_indices[i], sec] = 0
+                
+                # Update totals by adding current and removing trailing
+                BodyPeriodTotal += abs(valid_close[i] - valid_open[i])
+                ShadowLongPeriodTotal += max(valid_high[i] - max(valid_open[i], valid_close[i]), 0.0)
+                ShadowVeryShortPeriodTotal += max(min(valid_open[i], valid_close[i]) - valid_low[i], 0.0)
+            
+                if BodyTrailingIdx < len(valid_high):
+                    BodyPeriodTotal -= abs(valid_close[BodyTrailingIdx] - valid_open[BodyTrailingIdx])
+                if ShadowLongTrailingIdx < len(valid_high):
+                    ShadowLongPeriodTotal -= max(valid_high[ShadowLongTrailingIdx] - max(valid_open[ShadowLongTrailingIdx], valid_close[ShadowLongTrailingIdx]), 0.0)
+                if ShadowVeryShortTrailingIdx < len(valid_high):
+                    ShadowVeryShortPeriodTotal -= max(min(valid_open[ShadowVeryShortTrailingIdx], valid_close[ShadowVeryShortTrailingIdx]) - valid_low[ShadowVeryShortTrailingIdx], 0.0)
+                
+                BodyTrailingIdx += 1
+                ShadowLongTrailingIdx += 1
+                ShadowVeryShortTrailingIdx += 1
+            
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLLONGLEGGEDDOJI(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define periods for averaging as per TA-Lib defaults
+        BodyDojiPeriod = 3
+        ShadowLongPeriod = 3
+        lookbackTotal = max(BodyDojiPeriod, ShadowLongPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for averaging
+            BodyDojiPeriodTotal = 0.0
+            ShadowLongPeriodTotal = 0.0
+        
+            # Calculate initial totals for BodyDoji and ShadowLong
+            BodyDojiTrailingIdx = 0
+            ShadowLongTrailingIdx = 0
+            startIdx = lookbackTotal
+        
+            for i in range(BodyDojiTrailingIdx, startIdx):
+                if i < len(valid_high):
+                    BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
+        
+            for i in range(ShadowLongTrailingIdx, startIdx):
+                if i < len(valid_high):
+                    ShadowLongPeriodTotal += max(valid_high[i] - valid_low[i], 0.0)
+        
+            # Main calculation loop
+            outIdx = startIdx
+            i = startIdx
+            while i < len(valid_high):
+                # Calculate real body and shadows
+                realBody = abs(valid_close[i] - valid_open[i])
+                upperShadow = valid_high[i] - max(valid_open[i], valid_close[i])
+                lowerShadow = min(valid_open[i], valid_close[i]) - valid_low[i]
+            
+                # Calculate averages
+                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
+                ShadowLongAverage = ShadowLongPeriodTotal / ShadowLongPeriod if ShadowLongPeriod > 0 else 0.0
+            
+                # Long Legged Doji condition
+                if (realBody <= BodyDojiAverage and
+                    (lowerShadow > ShadowLongAverage or upperShadow > ShadowLongAverage)):
+                    result[valid_indices[i], sec] = 100
+                else:
+                    result[valid_indices[i], sec] = 0
+            
+                # Update totals for next iteration
+                if i + 1 < len(valid_high):
+                    BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
+                    if BodyDojiTrailingIdx < len(valid_high):
+                        BodyDojiPeriodTotal -= abs(valid_close[BodyDojiTrailingIdx] - valid_open[BodyDojiTrailingIdx])
+                    ShadowLongPeriodTotal += max(valid_high[i] - valid_low[i], 0.0)
+                    if ShadowLongTrailingIdx < len(valid_high):
+                        ShadowLongPeriodTotal -= max(valid_high[ShadowLongTrailingIdx] - valid_low[ShadowLongTrailingIdx], 0.0)
+            
+                i += 1
+                BodyDojiTrailingIdx += 1
+                ShadowLongTrailingIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLLONGLINE(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods as per TA-Lib defaults
+        BodyLongPeriod = 5
+        ShadowShortPeriod = 5
+        lookbackTotal = max(BodyLongPeriod, ShadowShortPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize period totals for BodyLong and ShadowShort
+            BodyPeriodTotal = 0.0
+            ShadowPeriodTotal = 0.0
+        
+            # Calculate initial totals for BodyLong and ShadowShort ranges
+            BodyTrailingIdx = 0
+            ShadowTrailingIdx = 0
+        
+            for i in range(lookbackTotal):
+                if i < BodyLongPeriod:
+                    BodyPeriodTotal += abs(valid_close[i] - valid_open[i])
+                if i < ShadowShortPeriod:
+                    ShadowPeriodTotal += max(valid_high[i] - valid_open[i], valid_close[i] - valid_low[i]) if valid_close[i] >= valid_open[i] else max(valid_open[i] - valid_low[i], valid_high[i] - valid_close[i])
+        
+            # Main calculation loop
+            outIdx = lookbackTotal
+            i = lookbackTotal
+            while i < len(valid_high):
+                # Calculate real body and shadows
+                real_body = abs(valid_close[i] - valid_open[i])
+                upper_shadow = valid_high[i] - max(valid_open[i], valid_close[i])
+                lower_shadow = min(valid_open[i], valid_close[i]) - valid_low[i]
+            
+                # Calculate averages
+                BodyAverage = BodyPeriodTotal / BodyLongPeriod if BodyLongPeriod > 0 else 0.0
+                ShadowAverage = ShadowPeriodTotal / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
+            
+                # Check for Long Line pattern
+                if real_body > BodyAverage and upper_shadow < ShadowAverage and lower_shadow < ShadowAverage:
+                    candle_color = 1 if valid_close[i] > valid_open[i] else -1
+                    result[valid_indices[i], sec] = candle_color * 100
+                else:
+                    result[valid_indices[i], sec] = 0
+                
+                # Update period totals by subtracting oldest value and adding newest
+                if i >= BodyLongPeriod:
+                    BodyPeriodTotal += abs(valid_close[i] - valid_open[i]) - abs(valid_close[BodyTrailingIdx] - valid_open[BodyTrailingIdx])
+                    BodyTrailingIdx += 1
+                
+                if i >= ShadowShortPeriod:
+                    new_shadow = max(valid_high[i] - valid_open[i], valid_close[i] - valid_low[i]) if valid_close[i] >= valid_open[i] else max(valid_open[i] - valid_low[i], valid_high[i] - valid_close[i])
+                    old_shadow = max(valid_high[ShadowTrailingIdx] - valid_open[ShadowTrailingIdx], valid_close[ShadowTrailingIdx] - valid_low[ShadowTrailingIdx]) if valid_close[ShadowTrailingIdx] >= valid_open[ShadowTrailingIdx] else max(valid_open[ShadowTrailingIdx] - valid_low[ShadowTrailingIdx], valid_high[ShadowTrailingIdx] - valid_close[ShadowTrailingIdx])
+                    ShadowPeriodTotal += new_shadow - old_shadow
+                    ShadowTrailingIdx += 1
+                
+                i += 1
+            
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLMATCHINGLOW(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        EqualPeriod = 14  # Default period for Equal average as per TA-Lib
+
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 2:  # Need at least 2 points for pattern recognition
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Lookback period as per TA-Lib (1 day for pattern + EqualPeriod for averaging)
+            lookback_total = 1 + EqualPeriod
+            if len(valid_indices) < lookback_total:
+                continue
+            
+            # Initialize EqualPeriodTotal for averaging candle range
+            EqualPeriodTotal = 0.0
+            EqualTrailingIdx = 0
+        
+            # Warm-up period: Calculate initial EqualPeriodTotal
+            for i in range(EqualTrailingIdx, lookback_total - 1):
+                EqualPeriodTotal += valid_high[i] - valid_low[i]
+        
+            out_idx = lookback_total - 1
+            while out_idx < len(valid_high):
+                # Check for Matching Low pattern
+                if out_idx >= 1:
+                    # Candle color check: both should be black (bearish)
+                    color1 = -1 if valid_close[out_idx - 1] < valid_open[out_idx - 1] else 1
+                    color2 = -1 if valid_close[out_idx] < valid_open[out_idx] else 1
+                
+                    if color1 == -1 and color2 == -1:
+                        # Calculate Equal Average for range comparison
+                        EqualAverage = EqualPeriodTotal / EqualPeriod if EqualPeriod > 0 else 0.0
+                        if (valid_close[out_idx] <= valid_close[out_idx - 1] + EqualAverage and
+                            valid_close[out_idx] >= valid_close[out_idx - 1] - EqualAverage):
+                            result[valid_indices[out_idx], sec] = 100
+                        else:
+                            result[valid_indices[out_idx], sec] = 0
+                    else:
+                        result[valid_indices[out_idx], sec] = 0
+                    
+                    # Update EqualPeriodTotal for next iteration
+                    if out_idx < len(valid_high):
+                        EqualPeriodTotal += (valid_high[out_idx] - valid_low[out_idx])
+                    if EqualTrailingIdx < len(valid_high):
+                        EqualPeriodTotal -= (valid_high[EqualTrailingIdx] - valid_low[EqualTrailingIdx])
+                        EqualTrailingIdx += 1
+                    
+                out_idx += 1
+            
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLRICKSHAWMAN(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods for different candle components as per TA-Lib defaults
+        BodyDojiPeriod = 3
+        ShadowLongPeriod = 3
+        NearPeriod = 3
+        lookbackTotal = max(BodyDojiPeriod, ShadowLongPeriod, NearPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize period totals for averaging
+            BodyDojiPeriodTotal = 0.0
+            ShadowLongPeriodTotal = 0.0
+            NearPeriodTotal = 0.0
+        
+            # Calculate initial totals for the lookback period
+            for i in range(lookbackTotal):
+                # BodyDoji range (real body size)
+                BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
+                # ShadowLong range (high-low range for shadow calculation)
+                ShadowLongPeriodTotal += valid_high[i] - valid_low[i]
+                # Near range (high-low range for near calculation)
+                NearPeriodTotal += valid_high[i] - valid_low[i]
+        
+            # Start processing from lookbackTotal index
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate real body
+                real_body = abs(valid_close[i] - valid_open[i])
+                # Calculate lower shadow
+                lower_shadow = valid_open[i] if valid_close[i] >= valid_open[i] else valid_close[i]
+                lower_shadow = lower_shadow - valid_low[i]
+                # Calculate upper shadow
+                upper_shadow = valid_high[i] - (valid_close[i] if valid_close[i] >= valid_open[i] else valid_open[i])
+                # Calculate high-low range
+                high_low_range = valid_high[i] - valid_low[i]
+            
+                # Calculate averages
+                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod
+                ShadowLongAverage = ShadowLongPeriodTotal / ShadowLongPeriod
+                NearAverage = NearPeriodTotal / NearPeriod
+            
+                # Rickshaw Man conditions
+                if (real_body <= BodyDojiAverage and
+                    lower_shadow > ShadowLongAverage and
+                    upper_shadow > ShadowLongAverage and
+                    min(valid_open[i], valid_close[i]) <= valid_low[i] + high_low_range / 2 + NearAverage and
+                    max(valid_open[i], valid_close[i]) >= valid_low[i] + high_low_range / 2 - NearAverage):
+                    result[valid_indices[i], sec] = 100
+                else:
+                    result[valid_indices[i], sec] = 0
+            
+                # Update rolling totals
+                if i + 1 < len(valid_high):
+                    # Remove oldest value and add newest for next iteration
+                    BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i]) - abs(valid_close[i - BodyDojiPeriod] - valid_open[i - BodyDojiPeriod])
+                    ShadowLongPeriodTotal += (valid_high[i] - valid_low[i]) - (valid_high[i - ShadowLongPeriod] - valid_low[i - ShadowLongPeriod])
+                    NearPeriodTotal += (valid_high[i] - valid_low[i]) - (valid_high[i - NearPeriod] - valid_low[i - NearPeriod])
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLSHORTLINE(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define constants for candle average periods as per TA-Lib defaults
+        BodyShortPeriod = 5
+        ShadowShortPeriod = 5
+    
+        # Lookback period as per TA-Lib (maximum of the periods used)
+        lookbackTotal = max(BodyShortPeriod, ShadowShortPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < lookbackTotal:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize period totals for body and shadow
+            BodyPeriodTotal = 0.0
+            ShadowPeriodTotal = 0.0
+        
+            # Calculate initial totals for body and shadow ranges
+            BodyTrailingIdx = 0
+            ShadowTrailingIdx = 0
+        
+            for i in range(lookbackTotal):
+                # Body range for BodyShort (typically close - open)
+                body_range = abs(valid_close[i] - valid_open[i])
+                BodyPeriodTotal += body_range
+            
+                # Shadow range for ShadowShort (typically high - low for total candle height)
+                shadow_range = valid_high[i] - valid_low[i]
+                ShadowPeriodTotal += shadow_range
+        
+            # Start processing from lookbackTotal onwards
+            outIdx = lookbackTotal
+            while outIdx < len(valid_high):
+                # Calculate real body size
+                real_body = abs(valid_close[outIdx] - valid_open[outIdx])
+            
+                # Calculate upper and lower shadows
+                upper_shadow = valid_high[outIdx] - max(valid_open[outIdx], valid_close[outIdx])
+                lower_shadow = min(valid_open[outIdx], valid_close[outIdx]) - valid_low[outIdx]
+            
+                # Calculate averages
+                BodyAverage = BodyPeriodTotal / BodyShortPeriod if BodyShortPeriod > 0 else 0.0
+                ShadowAverage = ShadowPeriodTotal / ShadowShortPeriod if ShadowShortPeriod > 0 else 0.0
+            
+                # Check if current candle matches ShortLine pattern
+                if (real_body < BodyAverage and 
+                    upper_shadow < ShadowAverage and 
+                    lower_shadow < ShadowAverage):
+                    # Determine candle color (1 for bullish, -1 for bearish) and multiply by 100
+                    candle_color = 1 if valid_close[outIdx] > valid_open[outIdx] else -1
+                    result[valid_indices[outIdx], sec] = candle_color * 100
+                else:
+                    result[valid_indices[outIdx], sec] = 0
+                
+                # Update period totals by removing oldest and adding newest
+                if outIdx - BodyShortPeriod >= 0:
+                    old_body_range = abs(valid_close[BodyTrailingIdx] - valid_open[BodyTrailingIdx])
+                    new_body_range = abs(valid_close[outIdx] - valid_open[outIdx])
+                    BodyPeriodTotal += new_body_range - old_body_range
+                    BodyTrailingIdx += 1
+                
+                if outIdx - ShadowShortPeriod >= 0:
+                    old_shadow_range = valid_high[ShadowTrailingIdx] - valid_low[ShadowTrailingIdx]
+                    new_shadow_range = valid_high[outIdx] - valid_low[outIdx]
+                    ShadowPeriodTotal += new_shadow_range - old_shadow_range
+                    ShadowTrailingIdx += 1
+                
+                outIdx += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLTAKURI(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Define lookback periods for different candle parts as in TA-Lib
+        BodyDojiPeriod = 3
+        ShadowVeryShortPeriod = 3
+        ShadowVeryLongPeriod = 3
+        lookbackTotal = max(BodyDojiPeriod, ShadowVeryShortPeriod, ShadowVeryLongPeriod)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize period totals for averaging
+            BodyDojiPeriodTotal = 0.0
+            ShadowVeryShortPeriodTotal = 0.0
+            ShadowVeryLongPeriodTotal = 0.0
+        
+            # Calculate initial totals for the lookback period
+            for i in range(lookbackTotal):
+                # BodyDoji range (real body size)
+                BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
+                # ShadowVeryShort range (upper shadow)
+                ShadowVeryShortPeriodTotal += max(valid_high[i] - max(valid_open[i], valid_close[i]), 0.0)
+                # ShadowVeryLong range (lower shadow)
+                ShadowVeryLongPeriodTotal += max(min(valid_open[i], valid_close[i]) - valid_low[i], 0.0)
+        
+            # Main calculation loop starting from lookbackTotal
+            for i in range(lookbackTotal, len(valid_high)):
+                # Calculate averages for comparison
+                BodyDojiAverage = BodyDojiPeriodTotal / BodyDojiPeriod
+                ShadowVeryShortAverage = ShadowVeryShortPeriodTotal / ShadowVeryShortPeriod
+                ShadowVeryLongAverage = ShadowVeryLongPeriodTotal / ShadowVeryLongPeriod
+            
+                # Calculate current candle metrics
+                real_body = abs(valid_close[i] - valid_open[i])
+                upper_shadow = max(valid_high[i] - max(valid_open[i], valid_close[i]), 0.0)
+                lower_shadow = max(min(valid_open[i], valid_close[i]) - valid_low[i], 0.0)
+            
+                # Check if current candle matches Takuri pattern
+                if (real_body <= BodyDojiAverage and
+                    upper_shadow < ShadowVeryShortAverage and
+                    lower_shadow > ShadowVeryLongAverage):
+                    result[valid_indices[i], sec] = 100.0
+                else:
+                    result[valid_indices[i], sec] = 0.0
+            
+                # Update rolling totals by adding current and subtracting trailing
+                if i - BodyDojiPeriod >= 0:
+                    BodyDojiPeriodTotal += abs(valid_close[i] - valid_open[i])
+                    BodyDojiPeriodTotal -= abs(valid_close[i - BodyDojiPeriod] - valid_open[i - BodyDojiPeriod])
+                
+                if i - ShadowVeryShortPeriod >= 0:
+                    ShadowVeryShortPeriodTotal += max(valid_high[i] - max(valid_open[i], valid_close[i]), 0.0)
+                    ShadowVeryShortPeriodTotal -= max(valid_high[i - ShadowVeryShortPeriod] - max(valid_open[i - ShadowVeryShortPeriod], valid_close[i - ShadowVeryShortPeriod]), 0.0)
+                
+                if i - ShadowVeryLongPeriod >= 0:
+                    ShadowVeryLongPeriodTotal += max(min(valid_open[i], valid_close[i]) - valid_low[i], 0.0)
+                    ShadowVeryLongPeriodTotal -= max(min(valid_open[i - ShadowVeryLongPeriod], valid_close[i - ShadowVeryLongPeriod]) - valid_low[i - ShadowVeryLongPeriod], 0.0)
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CDLTRISTAR(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        BodyDojiPeriod = 3  # Default period for BodyDoji average as per TA-Lib
+
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    open[i, sec] == open[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 3:  # Need at least 3 candles for Tristar pattern
+                continue
+
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_open = open[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+
+            # Initialize output array for valid data
+            temp_result = np.zeros(len(valid_high))
+
+            # Lookback total as per C code (2 prior candles needed)
+            lookback_total = 2
+            start_idx = lookback_total
+
+            if start_idx >= len(valid_high):
+                continue
+
+            # Initialize BodyPeriodTotal for trailing average calculation
+            BodyPeriodTotal = 0.0
+            BodyTrailingIdx = 0
+
+            # Calculate initial BodyPeriodTotal for the first valid window
+            for i in range(BodyTrailingIdx, start_idx):
+                if i < len(valid_high):
+                    candle_range = valid_high[i] - valid_low[i]
+                    if candle_range == candle_range:  # Check for NaN
+                        BodyPeriodTotal += candle_range
+
+            # Main loop starting from start_idx
+            for i in range(start_idx, len(valid_high)):
+                # Calculate real body for current and previous two candles
+                realbody_2 = abs(valid_close[i-2] - valid_open[i-2])
+                realbody_1 = abs(valid_close[i-1] - valid_open[i-1])
+                realbody_0 = abs(valid_close[i] - valid_open[i])
+
+                # Calculate average body range for comparison (based on i-2 as in C code)
+                BodyDojiAverage = BodyPeriodTotal / BodyDojiPeriod if BodyDojiPeriod > 0 else 0.0
+
+                # Check if all three candles are Doji-like (small body compared to average range)
+                if (realbody_2 <= BodyDojiAverage and 
+                    realbody_1 <= BodyDojiAverage and 
+                    realbody_0 <= BodyDojiAverage):
+                    temp_result[i] = 0
+
+                    # Check for bullish Tristar (gap up between first and second candle)
+                    if (min(valid_open[i-1], valid_close[i-1]) > max(valid_open[i-2], valid_close[i-2]) and
+                        max(valid_open[i], valid_close[i]) < max(valid_open[i-1], valid_close[i-1])):
+                        temp_result[i] = -100
+
+                    # Check for bearish Tristar (gap down between first and second candle)
+                    if (max(valid_open[i-1], valid_close[i-1]) < min(valid_open[i-2], valid_close[i-2]) and
+                        min(valid_open[i], valid_close[i]) > min(valid_open[i-1], valid_close[i-1])):
+                        temp_result[i] = 100
+                else:
+                    temp_result[i] = 0
+
+                # Update BodyPeriodTotal for next iteration (add new, remove old)
+                if i + 1 < len(valid_high):
+                    new_range = valid_high[i-2] - valid_low[i-2]
+                    old_range = valid_high[BodyTrailingIdx] - valid_low[BodyTrailingIdx]
+                    if new_range == new_range:  # Check for NaN
+                        BodyPeriodTotal += new_range
+                    if old_range == old_range:  # Check for NaN
+                        BodyPeriodTotal -= old_range
+                    BodyTrailingIdx += 1
+
+            # Map results back to original array
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result[orig_idx, sec] = temp_result[i]
+
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CMO(high, open, low, close, vol, oi, timeperiod=14):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < timeperiod:
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize variables
+            lookback_total = timeperiod - 1 if timeperiod > 1 else 0
+            start_idx = lookback_total
+        
+            # Handle special case when timeperiod is 1
+            if timeperiod == 1:
+                for i in range(len(valid_indices)):
+                    if i >= start_idx:
+                        orig_idx = valid_indices[i]
+                        result[orig_idx, sec] = valid_close[i]
+                continue
+            
+            # Initialize variables for CMO calculation
+            today = 0
+            prev_value = valid_close[today]
+            prev_gain = 0.0
+            prev_loss = 0.0
+        
+            # First loop: Calculate initial sums for gains and losses
+            today += 1
+            for i in range(timeperiod):
+                temp_value1 = valid_close[today]
+                temp_value2 = temp_value1 - prev_value
+                prev_value = temp_value1
+                if temp_value2 < 0:
+                    prev_loss -= temp_value2
+                else:
+                    prev_gain += temp_value2
+                today += 1
+        
+            # Calculate initial averages
+            prev_loss /= timeperiod
+            prev_gain /= timeperiod
+        
+            # Handle data before start_idx
+            while today < start_idx and today < len(valid_close):
+                temp_value1 = valid_close[today]
+                temp_value2 = temp_value1 - prev_value
+                prev_value = temp_value1
+                prev_loss *= (timeperiod - 1)
+                prev_gain *= (timeperiod - 1)
+                if temp_value2 < 0:
+                    prev_loss -= temp_value2
+                else:
+                    prev_gain += temp_value2
+                prev_loss /= timeperiod
+                prev_gain /= timeperiod
+                today += 1
+        
+            # Main calculation loop
+            out_idx = 0
+            while today < len(valid_close):
+                if today >= start_idx:
+                    temp_value1 = prev_gain + prev_loss
+                    if temp_value1 > 1e-10:
+                        result[valid_indices[today], sec] = 100.0 * ((prev_gain - prev_loss) / temp_value1)
+                    else:
+                        result[valid_indices[today], sec] = 0.0
+                    out_idx += 1
+            
+                temp_value1 = valid_close[today]
+                temp_value2 = temp_value1 - prev_value
+                prev_value = temp_value1
+                prev_loss *= (timeperiod - 1)
+                prev_gain *= (timeperiod - 1)
+                if temp_value2 < 0:
+                    prev_loss -= temp_value2
+                else:
+                    prev_gain += temp_value2
+                prev_loss /= timeperiod
+                prev_gain /= timeperiod
+                today += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def CORREL(high, open, low, close, vol, oi, timeperiod=30):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask for close and vol (used as inputs for correlation)
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (close[i, sec] == close[i, sec] and 
+                    vol[i, sec] == vol[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < timeperiod:
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+            valid_vol = vol[valid_mask, sec]
+        
+            # Initialize lookback period as per C code
+            lookback_total = timeperiod - 1
+            start_idx = lookback_total if lookback_total < len(valid_close) else len(valid_close) - 1
+        
+            if start_idx >= len(valid_close):
+                continue
+            
+            # Initialize variables for sliding window sums
+            sum_x = 0.0
+            sum_y = 0.0
+            sum_xy = 0.0
+            sum_x2 = 0.0
+            sum_y2 = 0.0
+        
+            # Initial sum calculation for the first window
+            trailing_idx = start_idx - lookback_total
+            for today in range(trailing_idx, start_idx + 1):
+                x = valid_close[today]
+                y = valid_vol[today]
+                sum_x += x
+                sum_y += y
+                sum_xy += x * y
+                sum_x2 += x * x
+                sum_y2 += y * y
+        
+            # Calculate first correlation value
+            trailing_x = valid_close[trailing_idx]
+            trailing_y = valid_vol[trailing_idx]
+            temp_real = (sum_x2 - ((sum_x * sum_x) / timeperiod)) * (sum_y2 - ((sum_y * sum_y) / timeperiod))
+            correl_values = np.zeros(len(valid_close))
+            if temp_real > 1e-10:
+                correl_values[start_idx] = (sum_xy - ((sum_x * sum_y) / timeperiod)) / np.sqrt(temp_real)
+            else:
+                correl_values[start_idx] = 0.0
+        
+            # Main loop for remaining points using sliding window
+            for today in range(start_idx + 1, len(valid_close)):
+                # Remove trailing values
+                sum_x -= trailing_x
+                sum_y -= trailing_y
+                sum_xy -= trailing_x * trailing_y
+                sum_x2 -= trailing_x * trailing_x
+                sum_y2 -= trailing_y * trailing_y
+            
+                # Add new values
+                x = valid_close[today]
+                y = valid_vol[today]
+                sum_x += x
+                sum_y += y
+                sum_xy += x * y
+                sum_x2 += x * x
+                sum_y2 += y * y
+            
+                # Update trailing values for next iteration
+                trailing_idx += 1
+                trailing_x = valid_close[trailing_idx]
+                trailing_y = valid_vol[trailing_idx]
+            
+                # Calculate correlation
+                temp_real = (sum_x2 - ((sum_x * sum_x) / timeperiod)) * (sum_y2 - ((sum_y * sum_y) / timeperiod))
+                if temp_real > 1e-10:
+                    correl_values[today] = (sum_xy - ((sum_x * sum_y) / timeperiod)) / np.sqrt(temp_real)
+                else:
+                    correl_values[today] = 0.0
+        
+            # Map results back to original array
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result[orig_idx, sec] = correl_values[i]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def HT_DCPERIOD(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        lookback_total = 32  # As per C code, lookback total is 32 + unstable period, but we handle it as 32 for start index
+        rad2deg = 180.0 / (4.0 * np.arctan(1.0))
+
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookback_total:
+                continue
+
+            # Extract valid close data
+            valid_close = close[valid_mask, sec]
+
+            # Initialize variables for WMA calculation
+            trailing_wma_idx = 0
+            today = trailing_wma_idx
+            period_wma_sub = 0.0
+            period_wma_sum = 0.0
+            trailing_wma_value = 0.0
+
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub = temp_real
+                period_wma_sum = temp_real
+
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sum += temp_real * 2.0
+
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sum += temp_real * 3.0
+
+            # WMA for remaining initial points
+            i = 9
+            while i > 0 and today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sub -= trailing_wma_value
+                period_wma_sum += temp_real * 4.0
+                trailing_wma_value = valid_close[trailing_wma_idx]
+                trailing_wma_idx += 1
+                smoothed_value = period_wma_sum * 0.1
+                period_wma_sum -= period_wma_sub
+                i -= 1
+
+            # Hilbert Transform variables
+            hilbert_idx = 0
+            detrender_even = np.zeros(3)
+            detrender_odd = np.zeros(3)
+            q1_even = np.zeros(3)
+            q1_odd = np.zeros(3)
+            ji_even = np.zeros(3)
+            ji_odd = np.zeros(3)
+            jq_even = np.zeros(3)
+            jq_odd = np.zeros(3)
+
+            period = 0.0
+            prev_i2 = 0.0
+            prev_q2 = 0.0
+            re = 0.0
+            im = 0.0
+            i1_for_odd_prev3 = 0.0
+            i1_for_odd_prev2 = 0.0
+            i1_for_even_prev3 = 0.0
+            i1_for_even_prev2 = 0.0
+            smooth_period = 0.0
+
+            while today < len(valid_close):
+                adjusted_prev_period = (0.075 * period) + 0.54
+                today_value = valid_close[today]
+
+                # WMA calculation
+                if today < len(valid_close):
+                    period_wma_sub += today_value
+                    period_wma_sub -= trailing_wma_value
+                    period_wma_sum += today_value * 4.0
+                    trailing_wma_value = valid_close[trailing_wma_idx]
+                    trailing_wma_idx += 1
+                    smoothed_value = period_wma_sum * 0.1
+                    period_wma_sum -= period_wma_sub
+
+                # Hilbert Transform logic
+                if (today % 2) == 0:
+                    # Even index processing
+                    detrender_even[hilbert_idx] = (0.0962 * smoothed_value) + (0.5769 * detrender_even[(hilbert_idx - 2) % 3]) - (0.5769 * detrender_even[hilbert_idx]) - (0.0962 * detrender_even[(hilbert_idx - 1) % 3])
+                    q1_even[hilbert_idx] = (0.0962 * detrender_even[hilbert_idx]) + (0.5769 * q1_even[(hilbert_idx - 2) % 3]) - (0.5769 * q1_even[hilbert_idx]) - (0.0962 * q1_even[(hilbert_idx - 1) % 3])
+                    ji_even[hilbert_idx] = (0.0962 * i1_for_even_prev3) + (0.5769 * ji_even[(hilbert_idx - 2) % 3]) - (0.5769 * ji_even[hilbert_idx]) - (0.0962 * ji_even[(hilbert_idx - 1) % 3])
+                    jq_even[hilbert_idx] = (0.0962 * q1_even[hilbert_idx]) + (0.5769 * jq_even[(hilbert_idx - 2) % 3]) - (0.5769 * jq_even[hilbert_idx]) - (0.0962 * jq_even[(hilbert_idx - 1) % 3])
+                    hilbert_idx = (hilbert_idx + 1) % 3
+                    q2 = (0.2 * (q1_even[(hilbert_idx - 1) % 3] + ji_even[(hilbert_idx - 1) % 3])) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[(hilbert_idx - 1) % 3])) + (0.8 * prev_i2)
+                    i1_for_odd_prev3 = i1_for_odd_prev2
+                    i1_for_odd_prev2 = detrender_even[(hilbert_idx - 1) % 3]
+                else:
+                    # Odd index processing
+                    detrender_odd[hilbert_idx] = (0.0962 * smoothed_value) + (0.5769 * detrender_odd[(hilbert_idx - 2) % 3]) - (0.5769 * detrender_odd[hilbert_idx]) - (0.0962 * detrender_odd[(hilbert_idx - 1) % 3])
+                    q1_odd[hilbert_idx] = (0.0962 * detrender_odd[hilbert_idx]) + (0.5769 * q1_odd[(hilbert_idx - 2) % 3]) - (0.5769 * q1_odd[hilbert_idx]) - (0.0962 * q1_odd[(hilbert_idx - 1) % 3])
+                    ji_odd[hilbert_idx] = (0.0962 * i1_for_odd_prev3) + (0.5769 * ji_odd[(hilbert_idx - 2) % 3]) - (0.5769 * ji_odd[hilbert_idx]) - (0.0962 * ji_odd[(hilbert_idx - 1) % 3])
+                    jq_odd[hilbert_idx] = (0.0962 * q1_odd[hilbert_idx]) + (0.5769 * jq_odd[(hilbert_idx - 2) % 3]) - (0.5769 * jq_odd[hilbert_idx]) - (0.0962 * jq_odd[(hilbert_idx - 1) % 3])
+                    q2 = (0.2 * (q1_odd[(hilbert_idx - 1) % 3] + ji_odd[(hilbert_idx - 1) % 3])) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[(hilbert_idx - 1) % 3])) + (0.8 * prev_i2)
+                    i1_for_even_prev3 = i1_for_even_prev2
+                    i1_for_even_prev2 = detrender_odd[(hilbert_idx - 1) % 3]
+
+                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
+                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
+                prev_q2 = q2
+                prev_i2 = i2
+
+                temp_real = period
+                if im != 0.0 and re != 0.0:
+                    period = 360.0 / (np.arctan(im / re) * rad2deg)
+                temp_real2 = 1.5 * temp_real
+                if period > temp_real2:
+                    period = temp_real2
+                temp_real2 = 0.67 * temp_real
+                if period < temp_real2:
+                    period = temp_real2
+                if period < 6:
+                    period = 6
+                elif period > 50:
+                    period = 50
+                period = (0.2 * period) + (0.8 * temp_real)
+                smooth_period = (0.33 * period) + (0.67 * smooth_period)
+
+                if today >= lookback_total:
+                    orig_idx = valid_indices[today]
+                    result[orig_idx, sec] = smooth_period
+
+                today += 1
+
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def HT_DCPHASE(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 63:
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize constants
+            temp_real = np.arctan(1.0)
+            rad2deg = 45.0 / temp_real
+            const_deg2rad_by_360 = temp_real * 8.0
+            lookback_total = 63
+        
+            # Check if enough data after lookback
+            if len(valid_close) <= lookback_total:
+                continue
+            
+            # Initialize WMA variables
+            trailing_wma_idx = 0
+            today = trailing_wma_idx
+            period_wma_sub = 0.0
+            period_wma_sum = 0.0
+            trailing_wma_value = 0.0
+        
+            # Initial WMA calculation for first 3 points
+            temp_real = valid_close[today]
+            today += 1
+            period_wma_sub = temp_real
+            period_wma_sum = temp_real
+        
+            temp_real = valid_close[today]
+            today += 1
+            period_wma_sub += temp_real
+            period_wma_sum += temp_real * 2.0
+        
+            temp_real = valid_close[today]
+            today += 1
+            period_wma_sub += temp_real
+            period_wma_sum += temp_real * 3.0
+        
+            # Calculate WMA for next 34 points
+            for i in range(34):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sub -= trailing_wma_value
+                period_wma_sum += temp_real * 4.0
+                trailing_wma_value = valid_close[trailing_wma_idx]
+                trailing_wma_idx += 1
+                smoothed_value = period_wma_sum * 0.1
+                period_wma_sum -= period_wma_sub
+        
+            # Initialize Hilbert Transform variables
+            hilbert_idx = 0
+            detrender_even = np.zeros(3)
+            detrender_odd = np.zeros(3)
+            q1_even = np.zeros(3)
+            q1_odd = np.zeros(3)
+            ji_even = np.zeros(3)
+            ji_odd = np.zeros(3)
+            jq_even = np.zeros(3)
+            jq_odd = np.zeros(3)
+        
+            period = 0.0
+            prev_i2 = 0.0
+            prev_q2 = 0.0
+            re = 0.0
+            im = 0.0
+            i1_for_odd_prev3 = 0.0
+            i1_for_odd_prev2 = 0.0
+            i1_for_even_prev3 = 0.0
+            i1_for_even_prev2 = 0.0
+            smooth_period = 0.0
+        
+            # Circular buffer for smooth price
+            smooth_price_size = 64
+            smooth_price = np.zeros(smooth_price_size)
+            smooth_price_idx = 0
+        
+            dc_phase = 0.0
+            out_idx = 0
+        
+            while today < len(valid_close):
+                adjusted_prev_period = (0.075 * period) + 0.54
+                today_value = valid_close[today]
+            
+                # Update WMA
+                period_wma_sub += today_value
+                period_wma_sub -= trailing_wma_value
+                period_wma_sum += today_value * 4.0
+                trailing_wma_value = valid_close[trailing_wma_idx]
+                trailing_wma_idx += 1
+                smoothed_value = period_wma_sum * 0.1
+                period_wma_sum -= period_wma_sub
+            
+                # Store smoothed value in circular buffer
+                smooth_price[smooth_price_idx] = smoothed_value
+            
+                # Hilbert Transform calculations
+                if today % 2 == 0:
+                    # Even index processing
+                    detrender = (0.0962 * smoothed_value + 0.5769 * detrender_even[2] - 0.5769 * detrender_even[0] - 0.0962 * detrender_even[1]) * adjusted_prev_period
+                    q1 = (0.0962 * detrender + 0.5769 * q1_even[2] - 0.5769 * q1_even[0] - 0.0962 * q1_even[1]) * adjusted_prev_period
+                    ji = (0.0962 * i1_for_even_prev3 + 0.5769 * ji_even[2] - 0.5769 * ji_even[0] - 0.0962 * ji_even[1]) * adjusted_prev_period
+                    jq = (0.0962 * q1 + 0.5769 * jq_even[2] - 0.5769 * jq_even[0] - 0.0962 * jq_even[1]) * adjusted_prev_period
+                
+                    hilbert_idx += 1
+                    if hilbert_idx == 3:
+                        hilbert_idx = 0
+                    
+                    q2 = (0.2 * (q1 + ji)) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_even_prev3 - jq)) + (0.8 * prev_i2)
+                    i1_for_odd_prev3 = i1_for_odd_prev2
+                    i1_for_odd_prev2 = detrender
+                
+                    # Update even arrays
+                    detrender_even[0] = detrender_even[1]
+                    detrender_even[1] = detrender_even[2]
+                    detrender_even[2] = detrender
+                    q1_even[0] = q1_even[1]
+                    q1_even[1] = q1_even[2]
+                    q1_even[2] = q1
+                    ji_even[0] = ji_even[1]
+                    ji_even[1] = ji_even[2]
+                    ji_even[2] = ji
+                    jq_even[0] = jq_even[1]
+                    jq_even[1] = jq_even[2]
+                    jq_even[2] = jq
+                else:
+                    # Odd index processing
+                    detrender = (0.0962 * smoothed_value + 0.5769 * detrender_odd[2] - 0.5769 * detrender_odd[0] - 0.0962 * detrender_odd[1]) * adjusted_prev_period
+                    q1 = (0.0962 * detrender + 0.5769 * q1_odd[2] - 0.5769 * q1_odd[0] - 0.0962 * q1_odd[1]) * adjusted_prev_period
+                    ji = (0.0962 * i1_for_odd_prev3 + 0.5769 * ji_odd[2] - 0.5769 * ji_odd[0] - 0.0962 * ji_odd[1]) * adjusted_prev_period
+                    jq = (0.0962 * q1 + 0.5769 * jq_odd[2] - 0.5769 * jq_odd[0] - 0.0962 * jq_odd[1]) * adjusted_prev_period
+                
+                    q2 = (0.2 * (q1 + ji)) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_odd_prev3 - jq)) + (0.8 * prev_i2)
+                    i1_for_even_prev3 = i1_for_even_prev2
+                    i1_for_even_prev2 = detrender
+                
+                    # Update odd arrays
+                    detrender_odd[0] = detrender_odd[1]
+                    detrender_odd[1] = detrender_odd[2]
+                    detrender_odd[2] = detrender
+                    q1_odd[0] = q1_odd[1]
+                    q1_odd[1] = q1_odd[2]
+                    q1_odd[2] = q1
+                    ji_odd[0] = ji_odd[1]
+                    ji_odd[1] = ji_odd[2]
+                    ji_odd[2] = ji
+                    jq_odd[0] = jq_odd[1]
+                    jq_odd[1] = jq_odd[2]
+                    jq_odd[2] = jq
+            
+                # Update Re and Im
+                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
+                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
+                prev_q2 = q2
+                prev_i2 = i2
+            
+                # Calculate period
+                temp_real = period
+                if im != 0.0 and re != 0.0:
+                    period = 360.0 / (np.arctan(im / re) * rad2deg)
+                temp_real2 = 1.5 * temp_real
+                if period > temp_real2:
+                    period = temp_real2
+                temp_real2 = 0.67 * temp_real
+                if period < temp_real2:
+                    period = temp_real2
+                if period < 6:
+                    period = 6
+                elif period > 50:
+                    period = 50
+                period = (0.2 * period) + (0.8 * temp_real)
+                smooth_period = (0.33 * period) + (0.67 * smooth_period)
+            
+                # Calculate DC Period and Phase
+                dc_period = smooth_period + 0.5
+                dc_period_int = int(dc_period)
+                real_part = 0.0
+                imag_part = 0.0
+                idx = smooth_price_idx
+            
+                for i in range(dc_period_int):
+                    temp_real = (i * const_deg2rad_by_360) / dc_period_int
+                    temp_real2 = smooth_price[idx]
+                    real_part += np.sin(temp_real) * temp_real2
+                    imag_part += np.cos(temp_real) * temp_real2
+                    if idx == 0:
+                        idx = smooth_price_size - 1
+                    else:
+                        idx -= 1
+            
+                temp_real = np.abs(imag_part)
+                if temp_real > 0.0:
+                    dc_phase = np.arctan(real_part / imag_part) * rad2deg
+                elif temp_real <= 0.01:
+                    if real_part < 0.0:
+                        dc_phase -= 90.0
+                    elif real_part > 0.0:
+                        dc_phase += 90.0
+            
+                dc_phase += 90.0
+                dc_phase += 360.0 / smooth_period
+                if imag_part < 0.0:
+                    dc_phase += 180.0
+                if dc_phase > 315.0:
+                    dc_phase -= 360.0
+            
+                # Store result if past start index
+                if today >= lookback_total:
+                    orig_idx = valid_indices[today]
+                    result[orig_idx, sec] = dc_phase
+            
+                # Update circular buffer index
+                smooth_price_idx += 1
+                if smooth_price_idx >= smooth_price_size:
+                    smooth_price_idx = 0
+                
+                today += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def HT_PHASOR(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result_inphase = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_quadrature = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        rad2Deg = 180.0 / (4.0 * np.arctan(1.0))
+        lookbackTotal = 32
+
+        for sec in range(secs):
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookbackTotal:
+                continue
+
+            valid_close = close[valid_mask, sec]
+            trailingWMAIdx = 0
+            today = trailingWMAIdx
+            tempReal = valid_close[today]
+            today += 1
+            periodWMASub = tempReal
+            periodWMASum = tempReal
+            tempReal = valid_close[today]
+            today += 1
+            periodWMASub += tempReal
+            periodWMASum += tempReal * 2.0
+            tempReal = valid_close[today]
+            today += 1
+            periodWMASub += tempReal
+            periodWMASum += tempReal * 3.0
+            trailingWMAValue = 0.0
+
+            i = 9
+            while i > 0:
+                tempReal = valid_close[today]
+                today += 1
+                periodWMASub += tempReal
+                periodWMASub -= trailingWMAValue
+                periodWMASum += tempReal * 4.0
+                trailingWMAValue = valid_close[trailingWMAIdx]
+                trailingWMAIdx += 1
+                smoothedValue = periodWMASum * 0.1
+                periodWMASum -= periodWMASub
+                i -= 1
+
+            hilbertIdx = 0
+            detrender = np.zeros(3)
+            Q1 = np.zeros(3)
+            jI = np.zeros(3)
+            jQ = np.zeros(3)
+            period = 0.0
+            outIdx = 0
+            prevI2 = 0.0
+            prevQ2 = 0.0
+            Re = 0.0
+            Im = 0.0
+            I1ForOddPrev3 = 0.0
+            I1ForEvenPrev3 = 0.0
+            I1ForOddPrev2 = 0.0
+            I1ForEvenPrev2 = 0.0
+
+            while today <= len(valid_close) - 1:
+                adjustedPrevPeriod = (0.075 * period) + 0.54
+                todayValue = valid_close[today]
+                periodWMASub += todayValue
+                periodWMASub -= trailingWMAValue
+                periodWMASum += todayValue * 4.0
+                trailingWMAValue = valid_close[trailingWMAIdx]
+                trailingWMAIdx += 1
+                smoothedValue = periodWMASum * 0.1
+                periodWMASum -= periodWMASub
+
+                if (today % 2) == 0:
+                    detrender[hilbertIdx] = (0.0962 * smoothedValue) + (0.5769 * detrender[(hilbertIdx - 2) % 3]) - (0.5769 * detrender[hilbertIdx]) - (0.0962 * detrender[(hilbertIdx - 1) % 3])
+                    Q1[hilbertIdx] = (0.0962 * detrender[hilbertIdx]) + (0.5769 * Q1[(hilbertIdx - 2) % 3]) - (0.5769 * Q1[hilbertIdx]) - (0.0962 * Q1[(hilbertIdx - 1) % 3])
+                    if today >= lookbackTotal:
+                        if outIdx < tdts:
+                            orig_idx = valid_indices[today]
+                            result_quadrature[orig_idx, sec] = Q1[hilbertIdx]
+                            result_inphase[orig_idx, sec] = I1ForEvenPrev3
+                            outIdx += 1
+                    jI[hilbertIdx] = (0.0962 * I1ForEvenPrev3) + (0.5769 * jI[(hilbertIdx - 2) % 3]) - (0.5769 * jI[hilbertIdx]) - (0.0962 * jI[(hilbertIdx - 1) % 3])
+                    jQ[hilbertIdx] = (0.0962 * Q1[hilbertIdx]) + (0.5769 * jQ[(hilbertIdx - 2) % 3]) - (0.5769 * jQ[hilbertIdx]) - (0.0962 * jQ[(hilbertIdx - 1) % 3])
+                    if hilbertIdx + 1 == 3:
+                        hilbertIdx = 0
+                    else:
+                        hilbertIdx += 1
+                    Q2 = (0.2 * (Q1[(hilbertIdx - 1) % 3] + jI[(hilbertIdx - 1) % 3])) + (0.8 * prevQ2)
+                    I2 = (0.2 * (I1ForEvenPrev3 - jQ[(hilbertIdx - 1) % 3])) + (0.8 * prevI2)
+                    I1ForOddPrev3 = I1ForOddPrev2
+                    I1ForOddPrev2 = detrender[(hilbertIdx - 1) % 3]
+                else:
+                    detrender[hilbertIdx] = (0.091 * smoothedValue) + (0.822 * detrender[(hilbertIdx - 2) % 3]) - (0.411 * detrender[hilbertIdx]) - (0.091 * detrender[(hilbertIdx - 1) % 3])
+                    Q1[hilbertIdx] = (0.091 * detrender[hilbertIdx]) + (0.822 * Q1[(hilbertIdx - 2) % 3]) - (0.411 * Q1[hilbertIdx]) - (0.091 * Q1[(hilbertIdx - 1) % 3])
+                    if today >= lookbackTotal:
+                        if outIdx < tdts:
+                            orig_idx = valid_indices[today]
+                            result_quadrature[orig_idx, sec] = Q1[hilbertIdx]
+                            result_inphase[orig_idx, sec] = I1ForOddPrev3
+                            outIdx += 1
+                    jI[hilbertIdx] = (0.091 * I1ForOddPrev3) + (0.822 * jI[(hilbertIdx - 2) % 3]) - (0.411 * jI[hilbertIdx]) - (0.091 * jI[(hilbertIdx - 1) % 3])
+                    jQ[hilbertIdx] = (0.091 * Q1[hilbertIdx]) + (0.822 * jQ[(hilbertIdx - 2) % 3]) - (0.411 * jQ[hilbertIdx]) - (0.091 * jQ[(hilbertIdx - 1) % 3])
+                    Q2 = (0.2 * (Q1[(hilbertIdx - 1) % 3] + jI[(hilbertIdx - 1) % 3])) + (0.8 * prevQ2)
+                    I2 = (0.2 * (I1ForOddPrev3 - jQ[(hilbertIdx - 1) % 3])) + (0.8 * prevI2)
+                    I1ForEvenPrev3 = I1ForEvenPrev2
+                    I1ForEvenPrev2 = detrender[(hilbertIdx - 1) % 3]
+
+                Re = (0.2 * ((I2 * prevI2) + (Q2 * prevQ2))) + (0.8 * Re)
+                Im = (0.2 * ((I2 * prevQ2) - (Q2 * prevI2))) + (0.8 * Im)
+                prevQ2 = Q2
+                prevI2 = I2
+                tempReal = period
+                if Im != 0.0 and Re != 0.0:
+                    period = 360.0 / (np.arctan(Im / Re) * rad2Deg)
+                tempReal2 = 1.5 * tempReal
+                if period > tempReal2:
+                    period = tempReal2
+                tempReal2 = 0.67 * tempReal
+                if period < tempReal2:
+                    period = tempReal2
+                if period < 6:
+                    period = 6
+                elif period > 50:
+                    period = 50
+                period = (0.2 * period) + (0.8 * tempReal)
+                today += 1
+
+        return result_inphase, result_quadrature
+
+
+
+    @staticmethod
+    @nb.njit
+    def HT_SINE(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result_sine = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_lead_sine = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 63:
+                continue
+            
+            valid_close = close[valid_mask, sec]
+            lookback_total = 63
+        
+            # Initialize constants
+            temp_real = np.arctan(1.0)
+            rad2deg = 45.0 / temp_real
+            deg2rad = 1.0 / rad2deg
+            const_deg2rad_by_360 = temp_real * 8.0
+        
+            # Initialize WMA variables
+            trailing_wma_idx = 0
+            today = trailing_wma_idx
+            period_wma_sub = 0.0
+            period_wma_sum = 0.0
+            trailing_wma_value = 0.0
+        
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub = temp_real
+                period_wma_sum = temp_real
+        
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sum += temp_real * 2.0
+        
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sum += temp_real * 3.0
+        
+            # WMA calculation for initial 34 periods
+            i = 34
+            while i > 0 and today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sub -= trailing_wma_value
+                period_wma_sum += temp_real * 4.0
+                if trailing_wma_idx < len(valid_close):
+                    trailing_wma_value = valid_close[trailing_wma_idx]
+                trailing_wma_idx += 1
+                smoothed_value = period_wma_sum * 0.1
+                period_wma_sum -= period_wma_sub
+                i -= 1
+        
+            # Initialize Hilbert Transform variables
+            hilbert_idx = 0
+            detrender_even = np.zeros(3)
+            detrender_odd = np.zeros(3)
+            q1_even = np.zeros(3)
+            q1_odd = np.zeros(3)
+            ji_even = np.zeros(3)
+            ji_odd = np.zeros(3)
+            jq_even = np.zeros(3)
+            jq_odd = np.zeros(3)
+        
+            period = 0.0
+            prev_i2 = 0.0
+            prev_q2 = 0.0
+            re = 0.0
+            im = 0.0
+            i1_for_odd_prev3 = 0.0
+            i1_for_odd_prev2 = 0.0
+            i1_for_even_prev3 = 0.0
+            i1_for_even_prev2 = 0.0
+            smooth_period = 0.0
+        
+            # Circular buffer for smooth price
+            smooth_price_size = 64
+            smooth_price = np.zeros(smooth_price_size)
+            smooth_price_idx = 0
+        
+            dc_phase = 0.0
+            out_idx = 0
+        
+            while today < len(valid_close):
+                adjusted_prev_period = (0.075 * period) + 0.54
+                today_value = valid_close[today]
+            
+                # WMA update
+                period_wma_sub += today_value
+                period_wma_sub -= trailing_wma_value
+                period_wma_sum += today_value * 4.0
+                if trailing_wma_idx < len(valid_close):
+                    trailing_wma_value = valid_close[trailing_wma_idx]
+                trailing_wma_idx += 1
+                smoothed_value = period_wma_sum * 0.1
+                period_wma_sum -= period_wma_sub
+            
+                smooth_price[smooth_price_idx] = smoothed_value
+            
+                if (today % 2) == 0:
+                    # Even Hilbert Transform
+                    detrender_even[hilbert_idx] = (0.0962 * smoothed_value) + (0.5769 * detrender_even[(hilbert_idx - 2) % 3]) - (0.5769 * detrender_even[hilbert_idx]) - (0.0962 * detrender_even[(hilbert_idx - 1) % 3])
+                    q1_even[hilbert_idx] = (0.0962 * detrender_even[hilbert_idx]) + (0.5769 * q1_even[(hilbert_idx - 2) % 3]) - (0.5769 * q1_even[hilbert_idx]) - (0.0962 * q1_even[(hilbert_idx - 1) % 3])
+                    ji_even[hilbert_idx] = (0.0962 * i1_for_even_prev3) + (0.5769 * ji_even[(hilbert_idx - 2) % 3]) - (0.5769 * ji_even[hilbert_idx]) - (0.0962 * ji_even[(hilbert_idx - 1) % 3])
+                    jq_even[hilbert_idx] = (0.0962 * q1_even[hilbert_idx]) + (0.5769 * jq_even[(hilbert_idx - 2) % 3]) - (0.5769 * jq_even[hilbert_idx]) - (0.0962 * jq_even[(hilbert_idx - 1) % 3])
+                
+                    if hilbert_idx == 2:
+                        hilbert_idx = 0
+                    else:
+                        hilbert_idx += 1
+                
+                    q2 = (0.2 * (q1_even[(hilbert_idx - 1) % 3] + ji_even[(hilbert_idx - 1) % 3])) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[(hilbert_idx - 1) % 3])) + (0.8 * prev_i2)
+                    i1_for_odd_prev3 = i1_for_odd_prev2
+                    i1_for_odd_prev2 = detrender_even[(hilbert_idx - 1) % 3]
+                else:
+                    # Odd Hilbert Transform
+                    detrender_odd[hilbert_idx] = (0.091 * smoothed_value) + (0.822 * detrender_odd[(hilbert_idx - 2) % 3]) - (0.822 * detrender_odd[hilbert_idx]) - (0.091 * detrender_odd[(hilbert_idx - 1) % 3])
+                    q1_odd[hilbert_idx] = (0.091 * detrender_odd[hilbert_idx]) + (0.822 * q1_odd[(hilbert_idx - 2) % 3]) - (0.822 * q1_odd[hilbert_idx]) - (0.091 * q1_odd[(hilbert_idx - 1) % 3])
+                    ji_odd[hilbert_idx] = (0.091 * i1_for_odd_prev3) + (0.822 * ji_odd[(hilbert_idx - 2) % 3]) - (0.822 * ji_odd[hilbert_idx]) - (0.091 * ji_odd[(hilbert_idx - 1) % 3])
+                    jq_odd[hilbert_idx] = (0.091 * q1_odd[hilbert_idx]) + (0.822 * jq_odd[(hilbert_idx - 2) % 3]) - (0.822 * jq_odd[hilbert_idx]) - (0.091 * jq_odd[(hilbert_idx - 1) % 3])
+                
+                    q2 = (0.2 * (q1_odd[(hilbert_idx - 1) % 3] + ji_odd[(hilbert_idx - 1) % 3])) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[(hilbert_idx - 1) % 3])) + (0.8 * prev_i2)
+                    i1_for_even_prev3 = i1_for_even_prev2
+                    i1_for_even_prev2 = detrender_odd[(hilbert_idx - 1) % 3]
+            
+                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
+                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
+                prev_q2 = q2
+                prev_i2 = i2
+            
+                temp_real = period
+                if im != 0.0 and re != 0.0:
+                    period = 360.0 / (np.arctan(im / re) * rad2deg)
+            
+                temp_real2 = 1.5 * temp_real
+                if period > temp_real2:
+                    period = temp_real2
+                temp_real2 = 0.67 * temp_real
+                if period < temp_real2:
+                    period = temp_real2
+                if period < 6:
+                    period = 6
+                elif period > 50:
+                    period = 50
+                period = (0.2 * period) + (0.8 * temp_real)
+                smooth_period = (0.33 * period) + (0.67 * smooth_period)
+            
+                dc_period = smooth_period + 0.5
+                dc_period_int = int(dc_period)
+                real_part = 0.0
+                imag_part = 0.0
+                idx = smooth_price_idx
+            
+                for i in range(dc_period_int):
+                    if idx >= 0 and idx < smooth_price_size:
+                        temp_real = (float(i) * const_deg2rad_by_360) / float(dc_period_int)
+                        temp_real2 = smooth_price[idx]
+                        real_part += np.sin(temp_real) * temp_real2
+                        imag_part += np.cos(temp_real) * temp_real2
+                    if idx == 0:
+                        idx = smooth_price_size - 1
+                    else:
+                        idx -= 1
+            
+                temp_real = np.abs(imag_part)
+                if temp_real > 0.0:
+                    dc_phase = np.arctan(real_part / imag_part) * rad2deg
+                elif temp_real <= 0.01:
+                    if real_part < 0.0:
+                        dc_phase -= 90.0
+                    elif real_part > 0.0:
+                        dc_phase += 90.0
+            
+                dc_phase += 90.0
+                dc_phase += 360.0 / smooth_period
+                if imag_part < 0.0:
+                    dc_phase += 180.0
+                if dc_phase > 315.0:
+                    dc_phase -= 360.0
+            
+                if today >= lookback_total:
+                    if out_idx < len(valid_indices):
+                        orig_idx = valid_indices[out_idx]
+                        result_sine[orig_idx, sec] = np.sin(dc_phase * deg2rad)
+                        result_lead_sine[orig_idx, sec] = np.sin((dc_phase + 45) * deg2rad)
+                    out_idx += 1
+            
+                smooth_price_idx = (smooth_price_idx + 1) % smooth_price_size
+                today += 1
+    
+        return result_sine
+
+
+
+    @staticmethod
+    @nb.njit
+    def HT_TRENDMODE(high, open, low, close, vol, oi):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 63:
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+            lookback_total = 63
+        
+            # Initialize variables
+            temp_real = np.arctan(1.0)
+            rad2deg = 45.0 / temp_real
+            deg2rad = 1.0 / rad2deg
+            const_deg2rad_by_360 = temp_real * 8.0
+        
+            # WMA initialization
+            trailing_wma_idx = 0
+            today = trailing_wma_idx
+            period_wma_sub = 0.0
+            period_wma_sum = 0.0
+            trailing_wma_value = 0.0
+        
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub = temp_real
+                period_wma_sum = temp_real
+        
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sum += temp_real * 2.0
+        
+            if today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sum += temp_real * 3.0
+        
+            # WMA for initial 34 periods
+            i = 34
+            smoothed_value = 0.0
+            while i > 0 and today < len(valid_close):
+                temp_real = valid_close[today]
+                today += 1
+                period_wma_sub += temp_real
+                period_wma_sub -= trailing_wma_value
+                period_wma_sum += temp_real * 4.0
+                if trailing_wma_idx < len(valid_close):
+                    trailing_wma_value = valid_close[trailing_wma_idx]
+                trailing_wma_idx += 1
+                smoothed_value = period_wma_sum * 0.1
+                period_wma_sum -= period_wma_sub
+                i -= 1
+        
+            # Hilbert Transform variables
+            hilbert_idx = 0
+            detrender_even = np.zeros(3)
+            detrender_odd = np.zeros(3)
+            q1_even = np.zeros(3)
+            q1_odd = np.zeros(3)
+            ji_even = np.zeros(3)
+            ji_odd = np.zeros(3)
+            jq_even = np.zeros(3)
+            jq_odd = np.zeros(3)
+        
+            period = 0.0
+            prev_i2 = 0.0
+            prev_q2 = 0.0
+            re = 0.0
+            im = 0.0
+            i1_for_odd_prev3 = 0.0
+            i1_for_even_prev3 = 0.0
+            i1_for_odd_prev2 = 0.0
+            i1_for_even_prev2 = 0.0
+            smooth_period = 0.0
+        
+            # Circular buffer for smooth price
+            smooth_price_size = 64
+            smooth_price = np.zeros(smooth_price_size)
+            smooth_price_idx = 0
+        
+            dc_phase = 0.0
+            prev_dc_phase = 0.0
+            prev_sine = 0.0
+            sine = 0.0
+            prev_lead_sine = 0.0
+            lead_sine = 0.0
+            i_trend1 = 0.0
+            i_trend2 = 0.0
+            i_trend3 = 0.0
+            days_in_trend = 0
+        
+            out_idx = 0
+            start_idx = lookback_total if lookback_total < len(valid_indices) else len(valid_indices) - 1
+        
+            while today < len(valid_close):
+                adjusted_prev_period = (0.075 * period) + 0.54
+                today_value = valid_close[today]
+            
+                # WMA calculation
+                period_wma_sub += today_value
+                period_wma_sub -= trailing_wma_value
+                period_wma_sum += today_value * 4.0
+                if trailing_wma_idx < len(valid_close):
+                    trailing_wma_value = valid_close[trailing_wma_idx]
+                trailing_wma_idx += 1
+                smoothed_value = period_wma_sum * 0.1
+                period_wma_sum -= period_wma_sub
+            
+                smooth_price[smooth_price_idx] = smoothed_value
+            
+                # Hilbert Transform calculations
+                if today % 2 == 0:
+                    # Even index calculations
+                    detrender_even[hilbert_idx] = (0.33 * smoothed_value) + (0.67 * detrender_even[(hilbert_idx + 2) % 3])
+                    q1_even[hilbert_idx] = (0.33 * detrender_even[hilbert_idx]) + (0.67 * q1_even[(hilbert_idx + 2) % 3])
+                    ji_even[hilbert_idx] = (0.33 * i1_for_even_prev3) + (0.67 * ji_even[(hilbert_idx + 2) % 3])
+                    jq_even[hilbert_idx] = (0.33 * q1_even[hilbert_idx]) + (0.67 * jq_even[(hilbert_idx + 2) % 3])
+                
+                    hilbert_idx = (hilbert_idx + 1) % 3
+                    q2 = (0.2 * (q1_even[(hilbert_idx + 2) % 3] + ji_even[(hilbert_idx + 2) % 3])) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_even_prev3 - jq_even[(hilbert_idx + 2) % 3])) + (0.8 * prev_i2)
+                    i1_for_odd_prev3 = i1_for_odd_prev2
+                    i1_for_odd_prev2 = detrender_even[(hilbert_idx + 2) % 3]
+                else:
+                    # Odd index calculations
+                    detrender_odd[hilbert_idx] = (0.33 * smoothed_value) + (0.67 * detrender_odd[(hilbert_idx + 2) % 3])
+                    q1_odd[hilbert_idx] = (0.33 * detrender_odd[hilbert_idx]) + (0.67 * q1_odd[(hilbert_idx + 2) % 3])
+                    ji_odd[hilbert_idx] = (0.33 * i1_for_odd_prev3) + (0.67 * ji_odd[(hilbert_idx + 2) % 3])
+                    jq_odd[hilbert_idx] = (0.33 * q1_odd[hilbert_idx]) + (0.67 * jq_odd[(hilbert_idx + 2) % 3])
+                
+                    q2 = (0.2 * (q1_odd[(hilbert_idx + 2) % 3] + ji_odd[(hilbert_idx + 2) % 3])) + (0.8 * prev_q2)
+                    i2 = (0.2 * (i1_for_odd_prev3 - jq_odd[(hilbert_idx + 2) % 3])) + (0.8 * prev_i2)
+                    i1_for_even_prev3 = i1_for_even_prev2
+                    i1_for_even_prev2 = detrender_odd[(hilbert_idx + 2) % 3]
+            
+                re = (0.2 * ((i2 * prev_i2) + (q2 * prev_q2))) + (0.8 * re)
+                im = (0.2 * ((i2 * prev_q2) - (q2 * prev_i2))) + (0.8 * im)
+                prev_q2 = q2
+                prev_i2 = i2
+            
+                temp_real = period
+                if im != 0.0 and re != 0.0:
+                    period = 360.0 / (np.arctan(im / re) * rad2deg)
+                temp_real2 = 1.5 * temp_real
+                if period > temp_real2:
+                    period = temp_real2
+                temp_real2 = 0.67 * temp_real
+                if period < temp_real2:
+                    period = temp_real2
+                if period < 6:
+                    period = 6
+                elif period > 50:
+                    period = 50
+                period = (0.2 * period) + (0.8 * temp_real)
+                smooth_period = (0.33 * period) + (0.67 * smooth_period)
+            
+                prev_dc_phase = dc_phase
+                dc_period = smooth_period + 0.5
+                dc_period_int = int(dc_period)
+                real_part = 0.0
+                imag_part = 0.0
+                idx = smooth_price_idx
+            
+                for i in range(dc_period_int):
+                    if idx < 0:
+                        idx = smooth_price_size - 1
+                    temp_real_val = (i * const_deg2rad_by_360) / dc_period_int
+                    temp_real2 = smooth_price[idx]
+                    real_part += np.sin(temp_real_val) * temp_real2
+                    imag_part += np.cos(temp_real_val) * temp_real2
+                    idx -= 1
+            
+                temp_real = np.abs(imag_part)
+                if temp_real > 0.0:
+                    dc_phase = np.arctan(real_part / imag_part) * rad2deg
+                elif temp_real <= 0.01:
+                    if real_part < 0.0:
+                        dc_phase -= 90.0
+                    elif real_part > 0.0:
+                        dc_phase += 90.0
+            
+                dc_phase += 90.0
+                dc_phase += 360.0 / smooth_period
+                if imag_part < 0.0:
+                    dc_phase += 180.0
+                if dc_phase > 315.0:
+                    dc_phase -= 360.0
+            
+                prev_sine = sine
+                prev_lead_sine = lead_sine
+                sine = np.sin(dc_phase * deg2rad)
+                lead_sine = np.sin((dc_phase + 45) * deg2rad)
+            
+                # Trendline calculation
+                dc_period = smooth_period + 0.5
+                dc_period_int = int(dc_period)
+                idx = today
+                temp_real = 0.0
+                for i in range(dc_period_int):
+                    if idx >= 0:
+                        temp_real += valid_close[idx]
+                    idx -= 1
+                if dc_period_int > 0:
+                    temp_real = temp_real / dc_period_int
+            
+                trendline = (4.0 * temp_real + 3.0 * i_trend1 + 2.0 * i_trend2 + i_trend3) / 10.0
+                i_trend3 = i_trend2
+                i_trend2 = i_trend1
+                i_trend1 = temp_real
+            
+                trend = 1
+                if ((sine > lead_sine) and (prev_sine <= prev_lead_sine)) or ((sine < lead_sine) and (prev_sine >= prev_lead_sine)):
+                    days_in_trend = 0
+                    trend = 0
+                days_in_trend += 1
+                if days_in_trend < (0.5 * smooth_period):
+                    trend = 0
+            
+                temp_real = dc_phase - prev_dc_phase
+                if smooth_period != 0.0 and (temp_real > (0.67 * 360.0 / smooth_period)) and (temp_real < (1.5 * 360.0 / smooth_period)):
+                    trend = 0
+            
+                temp_real = smooth_price[smooth_price_idx]
+                if trendline != 0.0 and np.abs((temp_real - trendline) / trendline) >= 0.015:
+                    trend = 1
+            
+                if today >= start_idx:
+                    orig_idx = valid_indices[today]
+                    result[orig_idx, sec] = trend
+            
+                smooth_price_idx = (smooth_price_idx + 1) % smooth_price_size
+                today += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def MACDEXT(high, open, low, close, vol, oi, fastperiod=12, fastmatype=0, slowperiod=26, slowmatype=0, signalperiod=9, signalmatype=0):
+        tdts, secs = close.shape
+        result_macd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_signal = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_hist = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) == 0:
+                continue
+
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+
+            # Swap periods and matypes if slowperiod < fastperiod
+            if slowperiod < fastperiod:
+                temp_period = slowperiod
+                slowperiod = fastperiod
+                fastperiod = temp_period
+                temp_matype = slowmatype
+                slowmatype = fastmatype
+                fastmatype = temp_matype
+
+            # Calculate lookback periods for MA functions (simplified as direct periods)
+            lookback_fast = fastperiod - 1 if fastperiod > 1 else 0
+            lookback_slow = slowperiod - 1 if slowperiod > 1 else 0
+            lookback_largest = max(lookback_fast, lookback_slow)
+            lookback_signal = signalperiod - 1 if signalperiod > 1 else 0
+            lookback_total = lookback_signal + lookback_largest
+
+            if len(valid_close) <= lookback_total:
+                continue
+
+            # Allocate temporary buffers for fast and slow MAs
+            temp_size = len(valid_close) - lookback_signal
+            fast_ma_buffer = np.zeros(temp_size)
+            slow_ma_buffer = np.zeros(temp_size)
+
+            # Calculate Fast MA
+            if fastmatype == 0:  # SMA
+                for i in range(fastperiod - 1, temp_size):
+                    sum_val = 0.0
+                    for j in range(i - fastperiod + 1, i + 1):
+                        sum_val += valid_close[j]
+                    fast_ma_buffer[i] = sum_val / fastperiod
+            else:  # Simplified EMA for other matypes
+                alpha = 2.0 / (fastperiod + 1)
+                fast_ma_buffer[fastperiod - 1] = valid_close[fastperiod - 1]
+                for i in range(fastperiod, temp_size):
+                    fast_ma_buffer[i] = alpha * valid_close[i] + (1 - alpha) * fast_ma_buffer[i - 1]
+
+            # Calculate Slow MA
+            if slowmatype == 0:  # SMA
+                for i in range(slowperiod - 1, temp_size):
+                    sum_val = 0.0
+                    for j in range(i - slowperiod + 1, i + 1):
+                        sum_val += valid_close[j]
+                    slow_ma_buffer[i] = sum_val / slowperiod
+            else:  # Simplified EMA for other matypes
+                alpha = 2.0 / (slowperiod + 1)
+                slow_ma_buffer[slowperiod - 1] = valid_close[slowperiod - 1]
+                for i in range(slowperiod, temp_size):
+                    slow_ma_buffer[i] = alpha * valid_close[i] + (1 - alpha) * slow_ma_buffer[i - 1]
+
+            # Calculate MACD Line (Fast MA - Slow MA)
+            macd_buffer = np.zeros(temp_size)
+            for i in range(max(fastperiod, slowperiod) - 1, temp_size):
+                macd_buffer[i] = fast_ma_buffer[i] - slow_ma_buffer[i]
+
+            # Calculate Signal Line
+            signal_buffer = np.zeros(temp_size)
+            if signalmatype == 0:  # SMA
+                for i in range(signalperiod - 1 + lookback_largest, temp_size):
+                    sum_val = 0.0
+                    for j in range(i - signalperiod + 1, i + 1):
+                        sum_val += macd_buffer[j]
+                    signal_buffer[i] = sum_val / signalperiod
+            else:  # Simplified EMA for other matypes
+                alpha = 2.0 / (signalperiod + 1)
+                start_idx = lookback_largest
+                if start_idx < temp_size:
+                    signal_buffer[start_idx] = macd_buffer[start_idx]
+                    for i in range(start_idx + 1, temp_size):
+                        signal_buffer[i] = alpha * macd_buffer[i] + (1 - alpha) * signal_buffer[i - 1]
+
+            # Calculate Histogram
+            hist_buffer = np.zeros(temp_size)
+            for i in range(lookback_total, temp_size):
+                hist_buffer[i] = macd_buffer[i] - signal_buffer[i]
+
+            # Map results back to original array
+            for i in range(lookback_total, temp_size):
+                orig_idx = valid_indices[i]
+                result_macd[orig_idx, sec] = macd_buffer[i]
+                result_signal[orig_idx, sec] = signal_buffer[i]
+                result_hist[orig_idx, sec] = hist_buffer[i]
+
+        return result_macd, result_signal, result_hist
+
+
+
+    @staticmethod
+    @nb.njit
+    def MACDFIX(high, open, low, close, vol, oi, signalperiod=9):
+        tdts, secs = close.shape
+        result_macd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_signal = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_hist = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 26 + signalperiod - 1:  # Need enough data for MACD and signal
+                continue
+        
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize arrays for MACD calculation
+            macd_values = np.zeros(len(valid_close))
+            signal_values = np.zeros(len(valid_close))
+            hist_values = np.zeros(len(valid_close))
+        
+            # MACD FIX uses fixed 12 and 26 periods for EMA
+            fast_period = 12
+            slow_period = 26
+        
+            # Calculate EMA for fast and slow periods
+            fast_ema = np.zeros(len(valid_close))
+            slow_ema = np.zeros(len(valid_close))
+        
+            # EMA multipliers
+            fast_multiplier = 2.0 / (fast_period + 1)
+            slow_multiplier = 2.0 / (slow_period + 1)
+        
+            # Initialize first EMA values
+            if len(valid_close) >= fast_period:
+                fast_ema[fast_period - 1] = np.mean(valid_close[:fast_period])
+            if len(valid_close) >= slow_period:
+                slow_ema[slow_period - 1] = np.mean(valid_close[:slow_period])
+        
+            # Calculate subsequent EMA values for fast
+            for i in range(fast_period, len(valid_close)):
+                fast_ema[i] = (valid_close[i] - fast_ema[i - 1]) * fast_multiplier + fast_ema[i - 1]
+        
+            # Calculate subsequent EMA values for slow
+            for i in range(slow_period, len(valid_close)):
+                slow_ema[i] = (valid_close[i] - slow_ema[i - 1]) * slow_multiplier + slow_ema[i - 1]
+        
+            # Calculate MACD Line (difference between fast and slow EMA)
+            for i in range(slow_period - 1, len(valid_close)):
+                macd_values[i] = fast_ema[i] - slow_ema[i]
+        
+            # Calculate Signal Line (EMA of MACD Line)
+            signal_multiplier = 2.0 / (signalperiod + 1)
+            if len(valid_close) >= slow_period - 1 + signalperiod:
+                signal_values[slow_period - 2 + signalperiod] = np.mean(macd_values[slow_period - 1:slow_period - 1 + signalperiod])
+        
+            for i in range(slow_period - 1 + signalperiod, len(valid_close)):
+                signal_values[i] = (macd_values[i] - signal_values[i - 1]) * signal_multiplier + signal_values[i - 1]
+        
+            # Calculate Histogram (difference between MACD and Signal)
+            for i in range(slow_period - 1 + signalperiod - 1, len(valid_close)):
+                hist_values[i] = macd_values[i] - signal_values[i]
+        
+            # Map results back to original array
+            start_idx = slow_period - 1 + signalperiod - 1
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result_macd[orig_idx, sec] = macd_values[i]
+                result_signal[orig_idx, sec] = signal_values[i]
+                result_hist[orig_idx, sec] = hist_values[i]
+    
+        return result_macd, result_signal, result_hist
+
+
+
+    @staticmethod
+    @nb.njit
+    def MINMAX(high, open, low, close, vol, oi, timeperiod=14):
+        tdts, secs = high.shape
+        result_max = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_min = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < timeperiod:
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize output arrays for this security
+            out_max = np.zeros(len(valid_close))
+            out_min = np.zeros(len(valid_close))
+        
+            # Set initial lookback period as per C code
+            nb_initial_element_needed = timeperiod - 1
+            start_idx = nb_initial_element_needed if nb_initial_element_needed < len(valid_close) else len(valid_close) - 1
+        
+            if start_idx >= len(valid_close):
+                continue
+            
+            out_idx = 0
+            today = start_idx
+            trailing_idx = start_idx - nb_initial_element_needed
+        
+            while today < len(valid_close):
+                tmp_high = valid_close[today]
+                tmp_low = valid_close[today]
+                highest_idx = -1
+                highest = 0.0
+                lowest_idx = -1
+                lowest = 0.0
+            
+                if highest_idx < trailing_idx:
+                    highest_idx = trailing_idx
+                    highest = valid_close[highest_idx]
+                    i = highest_idx
+                    while i <= today:
+                        tmp_high = valid_close[i]
+                        if tmp_high > highest:
+                            highest_idx = i
+                            highest = tmp_high
+                        i += 1
+                elif tmp_high >= highest:
+                    highest_idx = today
+                    highest = tmp_high
+                
+                if lowest_idx < trailing_idx:
+                    lowest_idx = trailing_idx
+                    lowest = valid_close[lowest_idx]
+                    i = lowest_idx
+                    while i <= today:
+                        tmp_low = valid_close[i]
+                        if tmp_low < lowest:
+                            lowest_idx = i
+                            lowest = tmp_low
+                        i += 1
+                elif tmp_low <= lowest:
+                    lowest_idx = today
+                    lowest = tmp_low
+                
+                if out_idx < len(out_max):
+                    out_max[out_idx] = highest
+                    out_min[out_idx] = lowest
+                out_idx += 1
+                trailing_idx += 1
+                today += 1
+        
+            # Map results back to original array
+            for i in range(start_idx, len(valid_indices)):
+                if i - start_idx < out_idx:
+                    orig_idx = valid_indices[i]
+                    result_max[orig_idx, sec] = out_max[i - start_idx]
+                    result_min[orig_idx, sec] = out_min[i - start_idx]
+    
+        return result_max, result_min
+
+
+
+    @staticmethod
+    @nb.njit
+    def PPO(high, open, low, close, vol, oi, fastperiod=12, slowperiod=26, matype=0):
+        tdts, secs = close.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < max(fastperiod, slowperiod):
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+        
+            # Calculate fast and slow moving averages based on matype
+            fast_ma = np.zeros(len(valid_close))
+            slow_ma = np.zeros(len(valid_close))
+        
+            if matype == 0:  # SMA
+                for i in range(fastperiod - 1, len(valid_close)):
+                    fast_ma[i] = np.mean(valid_close[max(0, i - fastperiod + 1):i + 1])
+                for i in range(slowperiod - 1, len(valid_close)):
+                    slow_ma[i] = np.mean(valid_close[max(0, i - slowperiod + 1):i + 1])
+            else:  # EMA as default fallback (simplified for numba compatibility)
+                alpha_fast = 2.0 / (fastperiod + 1)
+                alpha_slow = 2.0 / (slowperiod + 1)
+                for i in range(len(valid_close)):
+                    if i == 0:
+                        fast_ma[i] = valid_close[i]
+                        slow_ma[i] = valid_close[i]
+                    else:
+                        fast_ma[i] = alpha_fast * valid_close[i] + (1 - alpha_fast) * fast_ma[i - 1]
+                        slow_ma[i] = alpha_slow * valid_close[i] + (1 - alpha_slow) * slow_ma[i - 1]
+        
+            # Calculate PPO
+            ppo_values = np.zeros(len(valid_close))
+            start_idx = max(fastperiod, slowperiod) - 1
+            for i in range(start_idx, len(valid_close)):
+                if slow_ma[i] > 1e-10:  # Avoid division by zero
+                    ppo_values[i] = ((fast_ma[i] - slow_ma[i]) / slow_ma[i]) * 100.0
+                else:
+                    ppo_values[i] = 0.0
+        
+            # Map results back to original array
+            for i in range(start_idx, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result[orig_idx, sec] = ppo_values[i]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def SAR(high, open, low, close, vol, oi, acceleration=0.02, maximum=0.2):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < 2:  # Need at least 2 points to start
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+        
+            # Initialize parameters
+            af = acceleration
+            if af > maximum:
+                af = acceleration = maximum
+            
+            # Determine initial position (long or short)
+            is_long = 1 if valid_high[1] > valid_low[1] else 0
+        
+            # Initialize variables
+            today_idx = 1
+            out_idx = 0
+            sar_values = np.zeros(len(valid_high))
+            new_high = valid_high[0]
+            new_low = valid_low[0]
+        
+            if is_long == 1:
+                ep = valid_high[today_idx]
+                sar = new_low
+            else:
+                ep = valid_low[today_idx]
+                sar = new_high
+            
+            new_low = valid_low[today_idx]
+            new_high = valid_high[today_idx]
+        
+            # Main calculation loop
+            while today_idx < len(valid_high):
+                prev_low = new_low
+                prev_high = new_high
+                new_low = valid_low[today_idx]
+                new_high = valid_high[today_idx]
+                today_idx += 1
+            
+                if is_long == 1:
+                    if new_low <= sar:
+                        is_long = 0
+                        sar = ep
+                        if sar < prev_high:
+                            sar = prev_high
+                        if sar < new_high:
+                            sar = new_high
+                        sar_values[out_idx] = sar
+                        out_idx += 1
+                        af = acceleration
+                        ep = new_low
+                        sar = sar + af * (ep - sar)
+                        if sar < prev_high:
+                            sar = prev_high
+                        if sar < new_high:
+                            sar = new_high
+                    else:
+                        sar_values[out_idx] = sar
+                        out_idx += 1
+                        if new_high > ep:
+                            ep = new_high
+                            af += acceleration
+                            if af > maximum:
+                                af = maximum
+                        sar = sar + af * (ep - sar)
+                        if sar > prev_low:
+                            sar = prev_low
+                        if sar > new_low:
+                            sar = new_low
+                else:
+                    if new_high >= sar:
+                        is_long = 1
+                        sar = ep
+                        if sar > prev_low:
+                            sar = prev_low
+                        if sar > new_low:
+                            sar = new_low
+                        sar_values[out_idx] = sar
+                        out_idx += 1
+                        af = acceleration
+                        ep = new_high
+                        sar = sar + af * (ep - sar)
+                        if sar > prev_low:
+                            sar = prev_low
+                        if sar > new_low:
+                            sar = new_low
+                    else:
+                        sar_values[out_idx] = sar
+                        out_idx += 1
+                        if new_low < ep:
+                            ep = new_low
+                            af += acceleration
+                            if af > maximum:
+                                af = maximum
+                        sar = sar + af * (ep - sar)
+                        if sar < prev_high:
+                            sar = prev_high
+                        if sar < new_high:
+                            sar = new_high
+        
+            # Map results back to original array
+            for i in range(len(valid_indices)):
+                if i > 0:  # Output starts from second point
+                    orig_idx = valid_indices[i]
+                    result[orig_idx, sec] = sar_values[i - 1]
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def STOCH(high, open, low, close, vol, oi, fastk_period=14, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0):
+        tdts, secs = high.shape
+        result_slowk = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_slowd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Calculate lookback periods based on TA-Lib logic
+        lookback_k = fastk_period - 1
+        lookback_kslow = slowk_period - 1 if slowk_matype == 0 else slowk_period - 1
+        lookback_dslow = slowd_period - 1 if slowd_matype == 0 else slowd_period - 1
+        lookback_total = lookback_k + lookback_kslow + lookback_dslow
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookback_total:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize temporary buffer for Fast %K calculation
+            temp_buffer = np.zeros(len(valid_high))
+            out_idx = 0
+            trailing_idx = lookback_total if lookback_total < len(valid_high) else 0
+            today = trailing_idx + lookback_k if trailing_idx + lookback_k < len(valid_high) else trailing_idx
+        
+            lowest_idx = -1
+            highest_idx = -1
+            lowest = 0.0
+            highest = 0.0
+            diff = 0.0
+        
+            while today < len(valid_high):
+                tmp_low = valid_low[today]
+                if lowest_idx < trailing_idx:
+                    lowest_idx = trailing_idx
+                    lowest = valid_low[lowest_idx]
+                    i = lowest_idx
+                    while i <= today:
+                        tmp = valid_low[i]
+                        if tmp < lowest:
+                            lowest_idx = i
+                            lowest = tmp
+                        i += 1
+                    diff = (highest - lowest) / 100.0
+                elif tmp_low <= lowest:
+                    lowest_idx = today
+                    lowest = tmp_low
+                    diff = (highest - lowest) / 100.0
+                
+                tmp_high = valid_high[today]
+                if highest_idx < trailing_idx:
+                    highest_idx = trailing_idx
+                    highest = valid_high[highest_idx]
+                    i = highest_idx
+                    while i <= today:
+                        tmp = valid_high[i]
+                        if tmp > highest:
+                            highest_idx = i
+                            highest = tmp
+                        i += 1
+                    diff = (highest - lowest) / 100.0
+                elif tmp_high >= highest:
+                    highest_idx = today
+                    highest = tmp_high
+                    diff = (highest - lowest) / 100.0
+                
+                if diff != 0.0:
+                    temp_buffer[out_idx] = (valid_close[today] - lowest) / diff
+                else:
+                    temp_buffer[out_idx] = 0.0
+                
+                out_idx += 1
+                trailing_idx += 1
+                today += 1
+        
+            # Calculate Slow %K using MA
+            slowk_values = np.zeros(len(valid_high))
+            if slowk_matype == 0:  # SMA
+                for i in range(slowk_period - 1, out_idx):
+                    sum_val = 0.0
+                    count = 0
+                    for j in range(i - slowk_period + 1, i + 1):
+                        if j >= 0:
+                            sum_val += temp_buffer[j]
+                            count += 1
+                    if count > 0:
+                        slowk_values[i] = sum_val / slowk_period
+        
+            # Calculate Slow %D using MA on Slow %K
+            slowd_values = np.zeros(len(valid_high))
+            if slowd_matype == 0:  # SMA
+                for i in range(slowk_period - 1 + slowd_period - 1, out_idx):
+                    sum_val = 0.0
+                    count = 0
+                    for j in range(i - slowd_period + 1, i + 1):
+                        if j >= slowk_period - 1:
+                            sum_val += slowk_values[j]
+                            count += 1
+                    if count > 0:
+                        slowd_values[i] = sum_val / slowd_period
+        
+            # Map results back to original array
+            start_idx = lookback_total
+            for i in range(start_idx, len(valid_indices)):
+                if i - start_idx < out_idx:
+                    orig_idx = valid_indices[i]
+                    result_slowk[orig_idx, sec] = slowk_values[i - start_idx + lookback_dslow]
+                    result_slowd[orig_idx, sec] = slowd_values[i - start_idx]
+    
+        return result_slowk, result_slowd
+
+
+
+    @staticmethod
+    @nb.njit
+    def STOCHF(high, open, low, close, vol, oi, fastk_period=5, fastd_period=3, fastd_matype=0):
+        tdts, secs = high.shape
+        result_fastk = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_fastd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Lookback calculation as per TA-Lib
+        lookback_k = fastk_period - 1
+        # Simplified lookback for MA calculation (assuming SMA for matype=0)
+        lookback_fastd = fastd_period - 1 if fastd_matype == 0 else fastd_period - 1
+        lookback_total = lookback_k + lookback_fastd
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookback_total:
+                continue
+            
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize temporary buffer for FastK calculation
+            temp_buffer = np.zeros(len(valid_high))
+            out_idx = 0
+            trailing_idx = 0
+            today = lookback_k
+        
+            while today < len(valid_high):
+                lowest_idx = -1
+                highest_idx = -1
+                lowest = 0.0
+                highest = 0.0
+                diff = 0.0
+            
+                # Calculate lowest
+                tmp = valid_low[today]
+                if lowest_idx < trailing_idx:
+                    lowest_idx = trailing_idx
+                    lowest = valid_low[lowest_idx]
+                    for i in range(lowest_idx + 1, today + 1):
+                        tmp = valid_low[i]
+                        if tmp < lowest:
+                            lowest_idx = i
+                            lowest = tmp
+                    diff = (highest - lowest) / 100.0
+                elif tmp <= lowest:
+                    lowest_idx = today
+                    lowest = tmp
+                    diff = (highest - lowest) / 100.0
+            
+                # Calculate highest
+                tmp = valid_high[today]
+                if highest_idx < trailing_idx:
+                    highest_idx = trailing_idx
+                    highest = valid_high[highest_idx]
+                    for i in range(highest_idx + 1, today + 1):
+                        tmp = valid_high[i]
+                        if tmp > highest:
+                            highest_idx = i
+                            highest = tmp
+                    diff = (highest - lowest) / 100.0
+                elif tmp >= highest:
+                    highest_idx = today
+                    highest = tmp
+                    diff = (highest - lowest) / 100.0
+            
+                if diff != 0.0:
+                    temp_buffer[out_idx] = (valid_close[today] - lowest) / diff
+                else:
+                    temp_buffer[out_idx] = 0.0
+                
+                out_idx += 1
+                trailing_idx += 1
+                today += 1
+        
+            # Calculate FastD using MA (simplified as SMA for matype=0)
+            fastd_values = np.zeros(len(valid_high))
+            for i in range(fastd_period - 1, out_idx):
+                if i >= fastd_period - 1:
+                    sum_val = 0.0
+                    count = 0
+                    for j in range(i - (fastd_period - 1), i + 1):
+                        if temp_buffer[j] == temp_buffer[j]:  # Check for NaN
+                            sum_val += temp_buffer[j]
+                            count += 1
+                    if count > 0:
+                        fastd_values[i] = sum_val / fastd_period
+        
+            # Map results back to original array
+            start_idx = lookback_total
+            for i in range(start_idx, len(valid_indices)):
+                if i - lookback_fastd < out_idx:
+                    orig_idx = valid_indices[i]
+                    result_fastk[orig_idx, sec] = temp_buffer[i - lookback_fastd]
+                    result_fastd[orig_idx, sec] = fastd_values[i - lookback_fastd]
+    
+        return result_fastk, result_fastd
+
+
+
+    @staticmethod
+    @nb.njit
+    def STOCHRSI(high, open, low, close, vol, oi, timeperiod=14, fastk_period=5, fastd_period=3, fastd_matype=0):
+        tdts, secs = close.shape
+        result_fastk = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+        result_fastd = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= timeperiod + fastk_period + fastd_period - 2:
+                continue
+        
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+        
+            # Step 1: Calculate RSI
+            rsi_values = np.zeros(len(valid_close))
+            up_avg = 0.0
+            down_avg = 0.0
+        
+            # Initialize first period for RSI
+            for i in range(1, timeperiod + 1):
+                delta = valid_close[i] - valid_close[i-1]
+                if delta > 0:
+                    up_avg += delta
+                else:
+                    down_avg += abs(delta)
+        
+            if timeperiod > 0:
+                up_avg = up_avg / timeperiod
+                down_avg = down_avg / timeperiod
+        
+            # Calculate first RSI value
+            if down_avg > 1e-10:
+                rs = up_avg / down_avg
+                rsi_values[timeperiod] = 100.0 - (100.0 / (1.0 + rs))
+            else:
+                rsi_values[timeperiod] = 100.0 if up_avg > 0 else 0.0
+        
+            # Calculate remaining RSI values using Wilder smoothing
+            for i in range(timeperiod + 1, len(valid_close)):
+                delta = valid_close[i] - valid_close[i-1]
+                up_val = delta if delta > 0 else 0.0
+                down_val = abs(delta) if delta < 0 else 0.0
+                up_avg = ((up_avg * (timeperiod - 1)) + up_val) / timeperiod
+                down_avg = ((down_avg * (timeperiod - 1)) + down_val) / timeperiod
+                if down_avg > 1e-10:
+                    rs = up_avg / down_avg
+                    rsi_values[i] = 100.0 - (100.0 / (1.0 + rs))
+                else:
+                    rsi_values[i] = 100.0 if up_avg > 0 else 0.0
+        
+            # Step 2: Calculate Stochastic FastK and FastD from RSI
+            fastk_values = np.zeros(len(valid_close))
+            fastd_values = np.zeros(len(valid_close))
+        
+            # Calculate FastK
+            for i in range(fastk_period - 1, len(valid_close)):
+                # Get the window of RSI values for FastK calculation
+                window_start = max(0, i - fastk_period + 1)
+                window_rsi = rsi_values[window_start:i + 1]
+                window_high = np.nanmax(window_rsi)
+                window_low = np.nanmin(window_rsi)
+            
+                if window_high - window_low > 1e-10:
+                    fastk_values[i] = 100.0 * (rsi_values[i] - window_low) / (window_high - window_low)
+                else:
+                    fastk_values[i] = 0.0
+        
+            # Calculate FastD based on matype (0 for SMA)
+            if fastd_matype == 0:  # Simple Moving Average
+                for i in range(fastk_period + fastd_period - 2, len(valid_close)):
+                    window_start = max(0, i - fastd_period + 1)
+                    window_fastk = fastk_values[window_start:i + 1]
+                    valid_window = window_fastk[~np.isnan(window_fastk)]
+                    if len(valid_window) > 0:
+                        fastd_values[i] = np.mean(valid_window)
+        
+            # Map results back to original array
+            lookback_total = timeperiod + fastk_period + fastd_period - 2
+            for i in range(lookback_total, len(valid_indices)):
+                orig_idx = valid_indices[i]
+                result_fastk[orig_idx, sec] = fastk_values[i]
+                result_fastd[orig_idx, sec] = fastd_values[i]
+    
+        return result_fastd  # Returning FastD as primary output per common usage
+
+
+
+    @staticmethod
+    @nb.njit
+    def SUM(high, open, low, close, vol, oi, timeperiod=14):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if close[i, sec] == close[i, sec]:
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) < timeperiod:
+                continue
+            
+            # Extract valid data
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize variables for SUM calculation
+            lookback_total = timeperiod - 1
+            start_idx = lookback_total if lookback_total < len(valid_close) else len(valid_close) - 1
+            if start_idx >= len(valid_close):
+                continue
+            
+            # Initialize period total for the first window
+            period_total = 0.0
+            trailing_idx = start_idx - lookback_total
+        
+            # Warm-up period: sum the first window of data
+            if timeperiod > 1:
+                for i in range(trailing_idx, start_idx):
+                    period_total += valid_close[i]
+        
+            # Main calculation loop
+            out_idx = start_idx
+            i = start_idx
+            while i < len(valid_close):
+                period_total += valid_close[i]
+                temp_real = period_total
+                if trailing_idx < len(valid_close):
+                    period_total -= valid_close[trailing_idx]
+                trailing_idx += 1
+                if out_idx < len(valid_close):
+                    result[valid_indices[out_idx], sec] = temp_real
+                out_idx += 1
+                i += 1
+    
+        return result
+
+
+
+    @staticmethod
+    @nb.njit
+    def ULTOSC(high, open, low, close, vol, oi, timeperiod1=7, timeperiod2=14, timeperiod3=28):
+        tdts, secs = high.shape
+        result = np.array([np.float64(np.nan)] * (tdts * secs)).reshape(tdts, secs)
+    
+        # Sort periods in descending order as in C code
+        periods = np.array([timeperiod1, timeperiod2, timeperiod3])
+        sorted_periods = np.sort(periods)[::-1]
+        timeperiod1 = sorted_periods[0]
+        timeperiod2 = sorted_periods[1]
+        timeperiod3 = sorted_periods[2]
+    
+        # Calculate lookback total as per TA-Lib
+        lookback_total = timeperiod1 - 1
+    
+        for sec in range(secs):
+            # Create valid data mask
+            valid_mask = np.zeros(tdts, dtype=np.bool_)
+            for i in range(tdts):
+                if (high[i, sec] == high[i, sec] and 
+                    low[i, sec] == low[i, sec] and 
+                    close[i, sec] == close[i, sec]):
+                    valid_mask[i] = True
+        
+            valid_indices = np.where(valid_mask)[0]
+            if len(valid_indices) <= lookback_total:
+                continue
+            
+            # Extract valid data
+            valid_high = high[valid_mask, sec]
+            valid_low = low[valid_mask, sec]
+            valid_close = close[valid_mask, sec]
+        
+            # Initialize totals for each period
+            a1_total = 0.0
+            a2_total = 0.0
+            a3_total = 0.0
+            b1_total = 0.0
+            b2_total = 0.0
+            b3_total = 0.0
+        
+            # Prime the totals for each period as in C code
+            for i in range(lookback_total - timeperiod1 + 1, lookback_total):
+                if i >= 0:
+                    temp_lt = valid_low[i]
+                    temp_ht = valid_high[i]
+                    temp_cy = valid_close[i-1] if i > 0 else valid_close[0]
+                    true_low = min(temp_lt, temp_cy)
+                    close_minus_true_low = valid_close[i] - true_low
+                    true_range = temp_ht - temp_lt
+                    temp_double = abs(temp_cy - temp_ht)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    temp_double = abs(temp_cy - temp_lt)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    a1_total += close_minus_true_low
+                    b1_total += true_range
+        
+            for i in range(lookback_total - timeperiod2 + 1, lookback_total):
+                if i >= 0:
+                    temp_lt = valid_low[i]
+                    temp_ht = valid_high[i]
+                    temp_cy = valid_close[i-1] if i > 0 else valid_close[0]
+                    true_low = min(temp_lt, temp_cy)
+                    close_minus_true_low = valid_close[i] - true_low
+                    true_range = temp_ht - temp_lt
+                    temp_double = abs(temp_cy - temp_ht)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    temp_double = abs(temp_cy - temp_lt)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    a2_total += close_minus_true_low
+                    b2_total += true_range
+        
+            for i in range(lookback_total - timeperiod3 + 1, lookback_total):
+                if i >= 0:
+                    temp_lt = valid_low[i]
+                    temp_ht = valid_high[i]
+                    temp_cy = valid_close[i-1] if i > 0 else valid_close[0]
+                    true_low = min(temp_lt, temp_cy)
+                    close_minus_true_low = valid_close[i] - true_low
+                    true_range = temp_ht - temp_lt
+                    temp_double = abs(temp_cy - temp_ht)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    temp_double = abs(temp_cy - temp_lt)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    a3_total += close_minus_true_low
+                    b3_total += true_range
+        
+            # Main calculation loop
+            today = lookback_total
+            out_idx = lookback_total
+            trailing_idx1 = today - timeperiod1 + 1
+            trailing_idx2 = today - timeperiod2 + 1
+            trailing_idx3 = today - timeperiod3 + 1
+        
+            while today < len(valid_high):
+                # Calculate terms for current day
+                temp_lt = valid_low[today]
+                temp_ht = valid_high[today]
+                temp_cy = valid_close[today-1] if today > 0 else valid_close[0]
+                true_low = min(temp_lt, temp_cy)
+                close_minus_true_low = valid_close[today] - true_low
+                true_range = temp_ht - temp_lt
+                temp_double = abs(temp_cy - temp_ht)
+                if temp_double > true_range:
+                    true_range = temp_double
+                temp_double = abs(temp_cy - temp_lt)
+                if temp_double > true_range:
+                    true_range = temp_double
+            
+                # Update totals
+                a1_total += close_minus_true_low
+                a2_total += close_minus_true_low
+                a3_total += close_minus_true_low
+                b1_total += true_range
+                b2_total += true_range
+                b3_total += true_range
+            
+                # Calculate output
+                output = 0.0
+                if b1_total > 1e-10:
+                    output += 4.0 * (a1_total / b1_total)
+                if b2_total > 1e-10:
+                    output += 2.0 * (a2_total / b2_total)
+                if b3_total > 1e-10:
+                    output += (a3_total / b3_total)
+            
+                # Subtract trailing values for period 1
+                if trailing_idx1 >= 0:
+                    temp_lt = valid_low[trailing_idx1]
+                    temp_ht = valid_high[trailing_idx1]
+                    temp_cy = valid_close[trailing_idx1-1] if trailing_idx1 > 0 else valid_close[0]
+                    true_low = min(temp_lt, temp_cy)
+                    close_minus_true_low = valid_close[trailing_idx1] - true_low
+                    true_range = temp_ht - temp_lt
+                    temp_double = abs(temp_cy - temp_ht)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    temp_double = abs(temp_cy - temp_lt)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    a1_total -= close_minus_true_low
+                    b1_total -= true_range
+            
+                # Subtract trailing values for period 2
+                if trailing_idx2 >= 0:
+                    temp_lt = valid_low[trailing_idx2]
+                    temp_ht = valid_high[trailing_idx2]
+                    temp_cy = valid_close[trailing_idx2-1] if trailing_idx2 > 0 else valid_close[0]
+                    true_low = min(temp_lt, temp_cy)
+                    close_minus_true_low = valid_close[trailing_idx2] - true_low
+                    true_range = temp_ht - temp_lt
+                    temp_double = abs(temp_cy - temp_ht)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    temp_double = abs(temp_cy - temp_lt)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    a2_total -= close_minus_true_low
+                    b2_total -= true_range
+            
+                # Subtract trailing values for period 3
+                if trailing_idx3 >= 0:
+                    temp_lt = valid_low[trailing_idx3]
+                    temp_ht = valid_high[trailing_idx3]
+                    temp_cy = valid_close[trailing_idx3-1] if trailing_idx3 > 0 else valid_close[0]
+                    true_low = min(temp_lt, temp_cy)
+                    close_minus_true_low = valid_close[trailing_idx3] - true_low
+                    true_range = temp_ht - temp_lt
+                    temp_double = abs(temp_cy - temp_ht)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    temp_double = abs(temp_cy - temp_lt)
+                    if temp_double > true_range:
+                        true_range = temp_double
+                    a3_total -= close_minus_true_low
+                    b3_total -= true_range
+            
+                # Store result
+                if today >= lookback_total:
+                    orig_idx = valid_indices[today]
+                    result[orig_idx, sec] = 100.0 * (output / 7.0)
+            
+                today += 1
+                trailing_idx1 += 1
+                trailing_idx2 += 1
+                trailing_idx3 += 1
     
         return result
 

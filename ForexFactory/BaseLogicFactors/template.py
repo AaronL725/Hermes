@@ -18,20 +18,25 @@ def find_indicator_file(indicator_name, directory='ta_func'):
     返回:
         str: 实现该指标的C文件的路径
     """
+    # 获取当前脚本的目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # 构建ta_func的完整路径
+    ta_func_dir = os.path.join(current_dir, directory)
+    
     # 转换为大写以便一致匹配
     indicator_name = indicator_name.upper()
     
     # 查找 ta_INDICATOR.c 文件
     indicator_file = f"ta_{indicator_name}.c"
-    full_path = os.path.join(directory, indicator_file)
+    full_path = os.path.join(ta_func_dir, indicator_file)
     
     if os.path.exists(full_path):
         return full_path
     
     # 如果没有直接找到，搜索可能包含它的文件
-    for filename in os.listdir(directory):
+    for filename in os.listdir(ta_func_dir):
         if filename.lower().endswith('.c') and indicator_name in filename.upper():
-            return os.path.join(directory, filename)
+            return os.path.join(ta_func_dir, filename)
     
     return None
 
@@ -112,26 +117,26 @@ def create_indicator_prompt(c_source_code, indicator_name):
     indicator_code = indicator_name.split(' - ')[0] if ' - ' in indicator_name else indicator_name
     
     template = """
-    # 你的角色
-    你是一位专精于量化交易和数值计算的高级工程师，擅长C语言到Python的代码转换以及使用numba优化Python代码实现高性能的技术指标计算。
+    # Your Role
+    You are a senior engineer specialized in quantitative trading and numerical computation, skilled in converting C code to Python and using numba to optimize Python code implementation for high-performance technical indicator calculation.
 
-    # 你的任务
-    请将提供的C语言代码{indicator_name}指标核心算法转换为Python代码，保持完全相同的逻辑功能，但使用numpy和numba优化性能。
+    # Your Task
+    Please convert the provided C language {indicator_name} indicator core algorithm into Python code, maintaining exactly the same logical functionality, but optimizing performance using numpy and numba.
 
-    # 输入参数要求
-    你生成的Python函数必须接受以下参数：
-    - high, open, low, close, vol, oi: 六个2D NumPy数组，形状为(tdts, secs)
-    - 该指标特定的参数（需要提供一个常用的默认值）
+    # Input Parameter Requirements
+    Your generated Python function must accept the following parameters:
+    - high, open, low, close, vol, oi: Six 2D NumPy arrays with shape (tdts, secs)
+    - Parameters specific to this indicator (a common default value needs to be provided)
 
-    # 输出要求
-    - 返回一个与输入相同形状(tdts, secs)的2D NumPy数组
-    - 对于无效数据点应使用np.nan填充
-    - 确保输出的起始索引与TA-Lib完全一致
+    # Output Requirements
+    - Return a 2D NumPy array with the same shape (tdts, secs) as the input
+    - Fill invalid data points with np.nan
+    - Ensure the output starting index matches TA-Lib exactly
 
-    # 代码结构要求
-    - 必须以@staticmethod和@nb.njit装饰器开头
-    - 必须处理数据有效性（针对NaN值和边界情况）
-    - 可以使用getavailabledata函数来处理有效数据，也可以使用与C语言源码中逻辑相同的方法：
+    # Code Structure Requirements
+    - Must begin with @staticmethod and @nb.njit decorators
+    - Must handle data validity (for NaN values and edge cases)
+    - Can use getavailabledata function to handle valid data, or use the same logic as in the C language source code:
     ```
     @nb.njit
     def getavailabledata(target,length):
@@ -146,99 +151,110 @@ def create_indicator_prompt(c_source_code, indicator_name):
         return np.array(new_target)
     ```
 
-    # 可用算子列表
-    以下是你可以使用的所有算子，附带详细的输入和输出格式说明：
+    # Strictly Avoid Using Future Data
+    1. When processing the t-th data point at any time, only data points at t and before can be used, absolutely cannot directly or indirectly access data after t
+    2. When using numpy vectorized operations, extra caution must be taken:
+       - Must ensure calculations at each index position only depend on current and previous data
+       - Avoid functions that might implicitly include future data, such as in rolling operations, windows must explicitly only include current and previous data
+       - When using mask operations, ensure only past data is indexed
+    3. Loop calculations must proceed in chronological order (from past to present), cannot reverse or skip access
+    4. Ensure all operators are applied in ways that don't cause data leakage:
+       - Sliding window operations like SMA must only use data up to the current time point
+       - When calculating trend or momentum indicators, reference points must be strictly before the current point
 
-    ## 基础运算
-    - ADD(X:np.array, Y:np.array) -> np.array: 元素级加法，返回X和Y对应元素相加的数组，形状与输入相同
-    - SUB(X:np.array, Y:np.array) -> np.array: 元素级减法，返回X减去Y的数组，形状与输入相同
-    - MULT(X:np.array, Y:np.array) -> np.array: 元素级乘法，返回X和Y对应元素相乘的数组，形状与输入相同
-    - DIV(X:np.array, Y:np.array) -> np.array: 元素级除法，返回X除以Y的数组，形状与输入相同
-    
-    ## 数学函数
-    - ABS(X:np.array) -> np.array: 返回X的元素级绝对值，形状与输入相同
-    - SQRT(X:np.array) -> np.array: 返回X的元素级平方根，形状与输入相同
-    - EXP(X:np.array) -> np.array: 返回X的元素级指数函数值(e^x)，形状与输入相同
-    - LN(X:np.array) -> np.array: 返回X的元素级自然对数，形状与输入相同
-    - SIN(X:np.array) -> np.array: 返回X的元素级正弦值(输入为弧度)，形状与输入相同
-    - COS(X:np.array) -> np.array: 返回X的元素级余弦值(输入为弧度)，形状与输入相同
-    
-    ## 统计函数
-    - MEAN(X:np.array) -> float: 返回X中所有非NaN值的平均值，返回单个浮点数
-    - STD(X:np.array) -> float: 返回X中所有非NaN值的标准差，返回单个浮点数
-    - CORR(X:np.array, Y:np.array) -> float: 返回X和Y的Pearson相关系数，返回单个浮点数，范围[-1,1]
-    
-    ## 时间序列操作
-    - DELAY(X:np.array, param:int) -> np.array: 将X向后移动param步，前param个位置填充NaN，形状与输入相同
-    - TSMAX(X:np.array, param:int) -> np.array: 返回每个位置过去param个周期内(包括当前)的最大值，形状与输入相同，前param-1个位置为NaN
-    - TSMIN(X:np.array, param:int) -> np.array: 返回每个位置过去param个周期内(包括当前)的最小值，形状与输入相同，前param-1个位置为NaN
-    - CROSS(X:np.array, Y:np.array) -> np.array: 检测X上穿Y的位置，返回布尔数组，上穿位置为1，其他为0，形状与输入相同
-    
-    ## 移动平均类
-    - SMA(X:np.array, period:int) -> np.array: 简单移动平均，对X计算过去period个周期的算术平均值，前period-1个位置为NaN
-    - EMA(X:np.array, period:int) -> np.array: 指数移动平均，使用2/(period+1)作为平滑因子，前period-1个位置为NaN
-    - WMA(X:np.array, period:int) -> np.array: 加权移动平均，权重线性递减，前period-1个位置为NaN
-    - DEMA(X:np.array, period:int) -> np.array: 双重指数移动平均，计算2*EMA(X)-EMA(EMA(X))，减少滞后
-    - TEMA(X:np.array, period:int) -> np.array: 三重指数移动平均，计算3*EMA-3*EMA(EMA)+EMA(EMA(EMA))
-    - TRIMA(X:np.array, period:int) -> np.array: 三角移动平均，对X先计算一个SMA再计算另一个SMA
-    - KAMA(X:np.array, period:int) -> np.array: 考夫曼自适应移动平均，自动调整平滑因子
-    - MAMA(X:np.array, fast_limit:float=0.5, slow_limit:float=0.05) -> tuple: 返回MESA自适应移动平均元组(MAMA, FAMA)
-    - T3(X:np.array, period:int, vfactor:float=0.7) -> np.array: 提尔森T3移动平均，减少滞后和噪声
-    - MA(X:np.array, period:int, ma_type:int=0) -> np.array: 通用移动平均，ma_type为0-8的整数选择不同类型
-    
-    ## 累积/滑动窗口计算
-    - ROLLING_SUM(X:np.array, param:int) -> np.array: 计算X每个位置过去param个周期的和，前param-1个位置为NaN
-    - ROLLING_MEAN(X:np.array, param:int) -> np.array: 计算X每个位置过去param个周期的平均值，前param-1个位置为NaN
-    - EWM(X:np.array, alpha:float) -> float: 指数加权平均，alpha为平滑因子(0-1)，返回单个浮点数
-    - ROLLING_EWM(X:np.array, alpha:float) -> np.array: 滑动指数加权平均，对每个位置计算截至该位置的指数加权平均
+    # Available Operators List
+    The following are all operators you can use, with detailed input and output format descriptions:
 
-    # 重要提示
-    1. 你的代码必须与C语言源代码保持完全相同的算法逻辑和计算步骤，必须包括：
-       - 完全相同的算法核心转换逻辑
-       - 完全相同的滑动窗口计算方式
-       - 完全相同的边界条件处理
-       - 完全相同的逻辑流程和分支判断
-       - 完全相同的数学计算公式和方法
-       - 完全相同的变量累积性质和顺序
-       - 完全相同的计算循环结构
+    ## Basic Operations
+    - ADD(X:np.array, Y:np.array) -> np.array: Element-wise addition, returns an array with elements of X and Y added together, shape same as input
+    - SUB(X:np.array, Y:np.array) -> np.array: Element-wise subtraction, returns an array with X minus Y, shape same as input
+    - MULT(X:np.array, Y:np.array) -> np.array: Element-wise multiplication, returns an array with elements of X and Y multiplied together, shape same as input
+    - DIV(X:np.array, Y:np.array) -> np.array: Element-wise division, returns an array with X divided by Y, shape same as input
     
-    2. 特别注意以下关键点必须精确保持：
-       - 必须完全遵循C源码中的不稳定期(lookback period)处理方法，包括任何特殊的初始化过程
-       - 如果C源码中有Wilder平滑，必须使用相同的平滑方法、相同的公式和相同的应用位置
-       - 保持输出的起始索引与TA-Lib完全一致，不得自行决定输出起点
-       - 必须使用与C源码相同的索引计算逻辑，确保数据正确对齐
-       - 如果C源码中使用 +=（累加）操作，必须在Python中保持同样的累加逻辑和顺序
-       - 如果C源码分多个循环处理数据，必须在Python中保持相同的分阶段处理逻辑
-       - 严格遵循C源码中的变量处理流程、更新频率和计算顺序
-       - 确保数值精度与C源码一致，添加必要的浮点精度保护（如除零检查，使用小阈值如1e-10）
-       - 对于依赖其他指标的复合指标（如ADXR依赖ADX），必须确保基础指标的计算与C源码完全一致
-       - 如果指标有特定的不稳定期（如ADX的25周期不稳定期），必须准确实现这一特性
+    ## Mathematical Functions
+    - ABS(X:np.array) -> np.array: Returns element-wise absolute value of X, shape same as input
+    - SQRT(X:np.array) -> np.array: Returns element-wise square root of X, shape same as input
+    - EXP(X:np.array) -> np.array: Returns element-wise exponential function value (e^x) of X, shape same as input
+    - LN(X:np.array) -> np.array: Returns element-wise natural logarithm of X, shape same as input
+    - SIN(X:np.array) -> np.array: Returns element-wise sine value (input in radians) of X, shape same as input
+    - COS(X:np.array) -> np.array: Returns element-wise cosine value (input in radians) of X, shape same as input
     
-    3. 实现结构必须严格按以下阶段划分：
-       - 初始化阶段：设置正确的lookback期，与C源码完全对应
-       - 数据验证阶段：确保有足够的样本点计算指标
-       - 预热期处理：按照C源码中的预热过程，为指标计算做准备（不输出）
-       - 不稳定期处理：专门处理预热后的不稳定期数据（如果C源码中有此逻辑）
-       - 主计算阶段：对每个证券(sec)单独进行整个计算过程，输出最终结果
-       - 确保每个阶段都与TA-Lib源码流程一致，包括循环结构和计算顺序
+    ## Statistical Functions
+    - MEAN(X:np.array) -> float: Returns mean of all non-NaN values in X, returns a single float
+    - STD(X:np.array) -> float: Returns standard deviation of all non-NaN values in X, returns a single float
+    - CORR(X:np.array, Y:np.array) -> float: Returns Pearson correlation coefficient of X and Y, returns a single float, range [-1,1]
+    
+    ## Time Series Operations
+    - DELAY(X:np.array, param:int) -> np.array: Shifts X backward by param steps, fills the first param positions with NaN, shape same as input
+    - TSMAX(X:np.array, param:int) -> np.array: Returns maximum value for each position over the past param periods (including current), shape same as input, first param-1 positions are NaN
+    - TSMIN(X:np.array, param:int) -> np.array: Returns minimum value for each position over the past param periods (including current), shape same as input, first param-1 positions are NaN
+    - CROSS(X:np.array, Y:np.array) -> np.array: Detects positions where X crosses above Y, returns a boolean array, 1 at crossing positions, 0 elsewhere, shape same as input
+    
+    ## Moving Averages
+    - SMA(X:np.array, period:int) -> np.array: Simple moving average, calculates arithmetic mean of X over the past period periods, first period-1 positions are NaN
+    - EMA(X:np.array, period:int) -> np.array: Exponential moving average, uses 2/(period+1) as smoothing factor, first period-1 positions are NaN
+    - WMA(X:np.array, period:int) -> np.array: Weighted moving average, weights decrease linearly, first period-1 positions are NaN
+    - DEMA(X:np.array, period:int) -> np.array: Double exponential moving average, calculates 2*EMA(X)-EMA(EMA(X)), reduces lag
+    - TEMA(X:np.array, period:int) -> np.array: Triple exponential moving average, calculates 3*EMA-3*EMA(EMA)+EMA(EMA(EMA))
+    - TRIMA(X:np.array, period:int) -> np.array: Triangular moving average, calculates one SMA of X then another SMA
+    - KAMA(X:np.array, period:int) -> np.array: Kaufman adaptive moving average, automatically adjusts smoothing factor
+    - MAMA(X:np.array, fast_limit:float=0.5, slow_limit:float=0.05) -> tuple: Returns MESA adaptive moving average tuple (MAMA, FAMA)
+    - T3(X:np.array, period:int, vfactor:float=0.7) -> np.array: Tillson T3 moving average, reduces lag and noise
+    - MA(X:np.array, period:int, ma_type:int=0) -> np.array: Generic moving average, ma_type is integer 0-8 to select different types
+    
+    ## Cumulative/Sliding Window Calculations
+    - ROLLING_SUM(X:np.array, param:int) -> np.array: Calculates sum of X over the past param periods at each position, first param-1 positions are NaN
+    - ROLLING_MEAN(X:np.array, param:int) -> np.array: Calculates mean of X over the past param periods at each position, first param-1 positions are NaN
+    - EWM(X:np.array, alpha:float) -> float: Exponentially weighted mean, alpha is smoothing factor (0-1), returns a single float
+    - ROLLING_EWM(X:np.array, alpha:float) -> np.array: Rolling exponentially weighted mean, calculates exponentially weighted mean up to each position
 
-    4. 对于涉及Wilder平滑的指标，必须遵循以下计算公式：
-       - 初始值 = 前N个值的简单平均
-       - 后续值 = (前一个平滑值 * (N-1) + 当前值) / N
-       - 确保平滑因子、初始化逻辑和应用位置与TA-Lib完全一致
+    # Important Notes
+    1. Your code must maintain exactly the same algorithm logic and calculation steps as the C language source code, must include:
+       - Exactly the same core algorithm conversion logic
+       - Exactly the same sliding window calculation method
+       - Exactly the same boundary condition handling
+       - Exactly the same logical flow and branch judgment
+       - Exactly the same mathematical calculation formulas and methods
+       - Exactly the same variable accumulation properties and order
+       - Exactly the same calculation loop structure
     
-    5. 对于复合指标（如ADXR = (ADX + 前N个周期的ADX)/2）：
-       - 必须先完整计算基础指标的所有值
-       - 然后按照C源码逻辑对这些基础指标进行组合
-       - 不要在计算基础指标的同时尝试计算复合指标
-       - 确保使用正确的数据索引关系（如当前值与N周期前的值）
+    2. Pay special attention to the following key points that must be kept precisely:
+       - Must fully follow the unstable period (lookback period) handling method in the C source code, including any special initialization process
+       - If there is Wilder smoothing in the C source code, must use the same smoothing method, formula, and application position
+       - Maintain the starting index of the output exactly consistent with TA-Lib, must not decide the output starting point yourself
+       - Must use the same index calculation logic as the C source code to ensure data is correctly aligned
+       - If += (accumulation) operations are used in the C source code, must maintain the same accumulation logic and order in Python
+       - If the C source code processes data in multiple loops, must maintain the same staged processing logic in Python
+       - Strictly follow the variable processing flow, update frequency, and calculation order in the C source code
+       - Ensure numerical precision is consistent with the C source code, add necessary floating-point precision protection (e.g., division by zero checks, using small thresholds like 1e-10)
+       - For composite indicators that depend on other indicators (e.g., ADXR depends on ADX), must ensure the calculation of the base indicator is exactly consistent with the C source code
+       - If the indicator has a specific unstable period (e.g., ADX's 25-period unstable period), must accurately implement this feature
+    
+    3. Implementation structure must be strictly divided according to the following stages:
+       - Initialization stage: Set the correct lookback period, exactly corresponding to the C source code
+       - Data validation stage: Ensure there are enough sample points to calculate the indicator
+       - Warm-up period processing: Follow the warm-up process in the C source code to prepare for indicator calculation (no output)
+       - Unstable period processing: Specifically handle unstable period data after warm-up (if this logic exists in the C source code)
+       - Main calculation stage: Perform the entire calculation process separately for each security (sec), output the final result
+       - Ensure each stage is consistent with the TA-Lib source code flow, including loop structure and calculation order
 
-    # C语言源代码
+    4. For indicators involving Wilder smoothing, must follow these calculation formulas:
+       - Initial value = simple average of the first N values
+       - Subsequent values = (previous smoothed value * (N-1) + current value) / N
+       - Ensure the smoothing factor, initialization logic, and application position are exactly consistent with TA-Lib
+    
+    5. For composite indicators (e.g., ADXR = (ADX + ADX from N periods ago)/2):
+       - Must first calculate all values of the base indicator completely
+       - Then combine these base indicators according to the C source code logic
+       - Do not try to calculate the composite indicator while calculating the base indicator
+       - Ensure using correct data index relationships (e.g., current value with value from N periods ago)
+
+    # C Source Code
     ```
     {c_source_code}
     ```
 
-    # 参考示例1 - ATR指标
+    # Reference Example 1 - ATR Indicator
     @staticmethod
     @nb.njit
     def ATR(high, open, low, close, vol, oi, timeperiod=14):
@@ -313,7 +329,7 @@ def create_indicator_prompt(c_source_code, indicator_name):
         
         return result
 
-    # 参考示例2 - CDLDOJI指标
+    # Reference Example 2 - CDLDOJI Indicator
     @staticmethod
     @nb.njit
     def CDLDOJI(high, open, low, close, vol, oi):
@@ -388,7 +404,7 @@ def create_indicator_prompt(c_source_code, indicator_name):
                     
         return result
 
-    # 参考示例3 - ADXR指标
+    # Reference Example 3 - ADXR Indicator
     @staticmethod
     @nb.njit
     def ADXR(high, open, low, close, vol, oi, timeperiod=14):
@@ -580,13 +596,18 @@ def create_indicator_prompt(c_source_code, indicator_name):
 
         return result
 
-    现在请根据给出的C语言核心算法，按照以上要求和参考示例，实现{indicator_code}指标的Python代码。特别注意保持与C源码完全相同的计算逻辑、不稳定期处理、索引对齐和数据流程。
+    Now please implement the Python code for the {indicator_code} indicator based on the C language core algorithm provided, following the requirements and reference examples above. Pay special attention to maintaining exactly the same calculation logic, unstable period handling, index alignment, and data flow as in the C source code.
     """
     
     return template.format(indicator_name=indicator_name, indicator_code=indicator_code, c_source_code=c_source_code)
 
-def append_to_file(generated_code, file_path="baselogicfactors.py"):
+def append_to_file(generated_code, file_path=None):
     """将生成的代码添加到文件末尾"""
+    # 如果未指定文件路径，使用当前脚本同目录下的baselogicfactors.py
+    if file_path is None:
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(current_dir, "baselogicfactors.py")
+    
     # 检查文件是否存在
     if not os.path.exists(file_path):
         print(f"错误：文件 {file_path} 不存在")
@@ -653,18 +674,22 @@ def append_to_file(generated_code, file_path="baselogicfactors.py"):
 
 def generate_indicators():
     """主函数：生成指标并添加到baselogicfactors.py"""
+    # 获取当前脚本目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
     # 检查文件是否存在
-    base_file = "baselogicfactors.py"
+    base_file = os.path.join(current_dir, "baselogicfactors.py")
     if not os.path.exists(base_file):
         print(f"错误：{base_file} 文件不存在，请先创建该文件")
         return
         
     # 从.env文件加载API密钥
-    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+    parent_path = os.path.dirname(current_dir)  # ForexFactory目录
+    env_path = os.path.join(parent_path, "module", ".env")
     load_dotenv(env_path)
     
     # 获取Grok API密钥
-    grok_api_key = os.environ.get("XAI_API_KEY_Aaron")
+    grok_api_key = os.environ.get("XAI_API_KEY_WT")
     
     # 初始化Grok模型
     model = ChatXAI(model="grok-3-latest", temperature=0.2, api_key=grok_api_key)
@@ -799,10 +824,10 @@ def generate_indicators():
     
     # 检查已有的指标 - 改进的检测逻辑
     try:
-        with open("baselogicfactors.py", 'r', encoding='utf-8') as f:
+        with open(base_file, 'r', encoding='utf-8') as f:
             existing_code = f.read()
     except FileNotFoundError:
-        print(f"错误：baselogicfactors.py 文件不存在，请先创建该文件")
+        print(f"错误：{base_file} 文件不存在，请先创建该文件")
         return
     
     # 使用正则表达式查找所有已实现的指标函数

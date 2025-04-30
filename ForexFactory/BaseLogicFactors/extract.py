@@ -14,20 +14,25 @@ def find_indicator_file(indicator_name, directory='ta_func'):
     返回:
         str: 实现该指标的C文件的路径
     """
+    # 获取当前脚本的目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # 构建ta_func的完整路径
+    ta_func_dir = os.path.join(current_dir, directory)
+    
     # 转换为大写以便一致匹配
     indicator_name = indicator_name.upper()
     
     # 查找 ta_INDICATOR.c 文件
     indicator_file = f"ta_{indicator_name}.c"
-    full_path = os.path.join(directory, indicator_file)
+    full_path = os.path.join(ta_func_dir, indicator_file)
     
     if os.path.exists(full_path):
         return full_path
     
     # 如果没有直接找到，搜索可能包含它的文件
-    for filename in os.listdir(directory):
+    for filename in os.listdir(ta_func_dir):
         if filename.lower().endswith('.c') and indicator_name in filename.upper():
-            return os.path.join(directory, filename)
+            return os.path.join(ta_func_dir, filename)
     
     return None
 

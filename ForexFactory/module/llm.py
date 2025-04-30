@@ -30,18 +30,19 @@ class ForexIndicatorAnalyzer:
         # 初始化大语言模型
         llm = ChatXAI(
             api_key=self.xai_api_key,
-            model="grok-3-mini-latest",
+            model="grok-3-latest",
             temperature=0.4,
             max_tokens=16000
         )
         
         # 构建精简但高度相关的查询
         query = """
-        technical indicators, trading indicators, oscillators, momentum indicators,
-        trend indicators, volatility indicators, volume indicators, custom indicators,
-        proprietary indicators, indicator names, indicator types, indicator variations,
-        specialized indicators, unique indicators, indicator systems, indicator combinations,
-        indicator methodology, indicator algorithm, trading system indicators
+        technical indicator name, indicator calculation formula, indicator usage guide,
+        trading indicator parameters, default parameter values, indicator interpretation,
+        trading signals explanation, indicator implementation method, indicator mathematical formulas,
+        MACD calculation, RSI formula, candlestick patterns, indicator buy sell signals,
+        indicator overbought oversold levels, indicator divergence, indicator crossover signals,
+        price action patterns, indicator source code examples, indicator reading instructions
         """
         
         # 初始化token计数器
@@ -134,35 +135,55 @@ class ForexIndicatorAnalyzer:
         
         # 创建提示模板，指导模型对内容进行分析
         template = """
-        You are a professional trader and quantitative analyst with 20 years of experience. Your task is to extract precise information about technical indicators discussed in ForexFactory forums. Based on the following content:
+        你是一位拥有20年经验的专业交易员和量化分析师。你的任务是从ForexFactory论坛讨论中提取重建技术指标所需的关键信息。基于以下内容：
 
         {context}
 
-        Please extract ONLY the names of all technical indicators mentioned in the discussion and output in strict JSON format:
+        请提取讨论中提到的技术指标信息，并按照以下严格的JSON格式输出：
 
         ```json
         [
           {{
-            "name": "Indicator Name"
+            "指标": "指标名称",
+            "用法": "详细描述指标的计算方法、参数设置和使用技巧"
           }}
         ]
         ```
 
-        This is just an example format. You should extract ALL technical indicators you find, which may be many.
+        分析指标时，请提供：
+        1. 完整准确的指标名称
+        2. 用法部分应包含：
+           - 指标的计算方法或数学公式
+           - 关键参数设置及其默认或推荐值
+           - 如何解读指标及其交易信号
+           - 实现过程中需要注意的特殊情况
+           - 任何有助于程序员重建此指标的细节
 
-        Quality requirements for the "name" field:
-        1. Maintain precision and completeness of indicator names (e.g., "Stochastic RSI" rather than simply "RSI")
-        2. If an indicator has specific variants, include this in the name (e.g., "Hull Moving Average" rather than simply "Moving Average")
-        3. Include any unique characteristics or modifiers that make the indicator distinctive (e.g., "3-Line MACD", "Adaptive RSI", "Double Bollinger Bands")
-        4. Be thorough in capturing the full formal name of each indicator to distinguish it from similar indicators
-        5. If an indicator has a custom or proprietary name, preserve that exact naming
-        
-        Important:
-        1. All indicator names must be in English
-        2. If no valid technical indicator information is found, return an empty array []
-        3. Ensure the output is valid JSON format
-        4. Do not add any comments in the JSON
-        5. DO NOT include usage settings, parameters, or descriptions - ONLY extract the names of indicators
+        以下是格式示例：
+
+        ```json
+        [
+          {{
+            "指标": "MACD",
+            "用法": "接收收盘价序列，按默认快速期12、慢速期26、信号期9计算MACD线（快速EMA减慢速EMA）、信号线（MACD线的EMA）和柱状图（两线差值）。当MACD线上穿信号线时发出看多信号，下穿时发出看空信号；柱状图的高度和方向反映动量强弱。"
+          }},
+          {{
+            "指标": "RSI",
+            "用法": "接收收盘价序列，按默认周期14计算价格涨跌比率，输出0–100区间的相对强弱指数。一般将70以上视为超买、30以下视为超卖；指数的背离（与价格高低点不一致）可提示潜在趋势反转。"
+          }},
+          {{
+            "指标": "CDLDOJI",
+            "用法": "接收开盘、最高、最低、收盘价序列，检测"十字星"形态——开盘价与收盘价几乎相等的烛线。当该模式出现时返回非零整数，否则返回0；用于识别市场犹豫状态，常在趋势末端或反转前出现，需要后续烛线确认。"
+          }}
+        ]
+        ```
+
+        重要注意事项：
+        1. 如果讨论中缺少某些实现细节，请在"用法"字段中注明"未提供详细实现方法"
+        2. 优先处理具有明确实现细节的指标
+        3. 确保输出是有效的JSON格式
+        4. 如果未找到有效的技术指标信息，返回空数组 []
+        5. 专注于帮助下一个模型成功重建这些指标
         """
         
         # 创建提示对象
