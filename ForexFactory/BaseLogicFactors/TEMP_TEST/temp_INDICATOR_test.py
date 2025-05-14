@@ -1,8 +1,128 @@
+import numba as nb
 import numpy as np
+from operators import *
+from baselogicfactors import getavailabledata
+import matplotlib.pyplot as plt
 import talib
 import time
-from baselogicfactors import BaseLogicFactors
+import matplotlib
 import inspect
+
+# 设置中文字体支持
+matplotlib.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei', 'Arial Unicode MS']  # 优先使用的中文字体
+matplotlib.rcParams['axes.unicode_minus'] = False  # 解决保存图像时负号'-'显示为方块的问题
+
+
+@staticmethod
+@nb.njit
+def CDLHARAMICROSS(high, open, low, close, vol, oi, body_long_period=10, body_doji_period=3):
+    tdts, secs = high.shape
+    result = np.full((tdts, secs), 0, dtype=np.float64)
+
+    # 根据TA-Lib计算lookback
+    lookback_total = max(body_long_period, body_doji_period) + 1
+
+    for sec in range(secs):
+        # 找出所有非NaN数据
+        valid_mask = np.zeros(tdts, dtype=np.bool_)
+        for i in range(tdts):
+            valid_mask[i] = (high[i, sec] == high[i, sec] and 
+                             low[i, sec] == low[i, sec] and 
+                             open[i, sec] == open[i, sec] and 
+                             close[i, sec] == close[i, sec])
+        
+        valid_indices = np.where(valid_mask)[0]
+        if len(valid_indices) < lookback_total:
+            continue
+        
+        # 移动startIdx如果没有足够初始数据
+        startIdx = lookback_total
+        
+        # 初始化trailing索引，精确匹配TA-Lib
+        body_long_trailing_idx = startIdx - 1 - body_long_period
+        body_doji_trailing_idx = startIdx - body_doji_period
+        
+        # 初始化period totals
+        body_long_period_total = 0.0
+        body_doji_period_total = 0.0
+        
+        # 计算初始period - bodyLong从trailing到startIdx-2
+        i = body_long_trailing_idx
+        while i < startIdx - 1:
+            idx = valid_indices[i]
+            real_body = abs(close[idx, sec] - open[idx, sec])
+            body_long_period_total += real_body
+            i += 1
+        
+        # bodyDoji从trailing到startIdx-1
+        i = body_doji_trailing_idx
+        while i < startIdx:
+            idx = valid_indices[i]
+            real_body = abs(close[idx, sec] - open[idx, sec])
+            body_doji_period_total += real_body
+            i += 1
+        
+        # 主计算循环
+        outIdx = 0
+        i = startIdx
+        
+        while i < len(valid_indices):
+            idx = valid_indices[i]
+            prev_idx = valid_indices[i-1]
+            
+            # 计算实体大小 - TA_REALBODY宏
+            real_body_prev = abs(close[prev_idx, sec] - open[prev_idx, sec])
+            real_body_curr = abs(close[idx, sec] - open[idx, sec])
+            
+            # 计算平均值 - TA_CANDLEAVERAGE宏
+            body_long_avg = body_long_period_total / body_long_period
+            body_doji_avg = body_doji_period_total / body_doji_period
+            
+            # 获取K线颜色 - TA_CANDLECOLOR宏
+            candle_color = 1 if close[prev_idx, sec] >= open[prev_idx, sec] else -1
+            
+            # 检查是否满足模式条件
+            if (real_body_prev > body_long_avg and          # 第一根：长实体
+                real_body_curr <= body_doji_avg):           # 第二根：十字线
+                
+                # 获取实体的最大和最小值
+                max_prev = max(close[prev_idx, sec], open[prev_idx, sec])
+                min_prev = min(close[prev_idx, sec], open[prev_idx, sec])
+                max_curr = max(close[idx, sec], open[idx, sec])
+                min_curr = min(close[idx, sec], open[idx, sec])
+                
+                # 检查包围情况 - 完全匹配TA-Lib源码中的条件
+                if (max_curr < max_prev and min_curr > min_prev):
+                    # 完全包围 - 强烈信号 
+                    result[idx, sec] = -candle_color * 100
+                elif (max_curr <= max_prev and min_curr >= min_prev):
+                    # 接触但仍包含 - 对应C源码中的较弱信号
+                    result[idx, sec] = -candle_color * 80
+                else:
+                    result[idx, sec] = 0
+            else:
+                result[idx, sec] = 0
+            
+            # 更新移动总计 - 精确匹配TA-Lib实现
+            # 先加后减，保持滑动窗口
+            body_long_period_total += real_body_prev
+            long_trailing_idx = valid_indices[body_long_trailing_idx]
+            body_long_period_total -= abs(close[long_trailing_idx, sec] - open[long_trailing_idx, sec])
+            
+            body_doji_period_total += real_body_curr
+            doji_trailing_idx = valid_indices[body_doji_trailing_idx]
+            body_doji_period_total -= abs(close[doji_trailing_idx, sec] - open[doji_trailing_idx, sec])
+            
+            # 增加trailing索引
+            i += 1
+            body_long_trailing_idx += 1
+            body_doji_trailing_idx += 1
+            outIdx += 1
+
+    return result
+
+
+
 
 def generate_test_data():
     """
@@ -53,12 +173,12 @@ def generate_test_data():
     
     return high, open_price, low, close, vol, oi
 
-def test_indicator(indicator_name, high, open_price, low, close, vol, oi, params=None):
+def test_indicator(indicator_func, high, open_price, low, close, vol, oi, params=None):
     """
     通用指标测试函数
     
     参数:
-        indicator_name: 指标名称
+        indicator_func: 指标函数
         high, open_price, low, close, vol, oi: 价格和交易量数据
         params: 指标的额外参数字典
     
@@ -68,23 +188,17 @@ def test_indicator(indicator_name, high, open_price, low, close, vol, oi, params
     if params is None:
         params = {}
     
-    # 获取BaseLogicFactors中的指标函数
-    our_func = getattr(BaseLogicFactors, indicator_name)
-    
-    # 检查指标函数的参数
-    sig = inspect.signature(our_func)
-    param_names = list(sig.parameters.keys())
-    param_names = param_names[6:]  # 跳过固定的high,open,low,close,vol,oi参数
+    # 获取指标函数名称
+    indicator_name = indicator_func.__name__
     
     # 准备调用参数
     call_params = {}
-    for name in param_names:
-        if name in params:
-            call_params[name] = params[name]
+    for name, value in params.items():
+        call_params[name] = value
     
-    # 直接调用我们的指标实现，不进行预处理
+    # 直接调用指标实现，不进行预处理
     try:
-        our_result = our_func(high, open_price, low, close, vol, oi, **call_params)
+        our_result = indicator_func(high, open_price, low, close, vol, oi, **call_params)
     except Exception as e:
         error_msg = f"{indicator_name} 自定义实现计算出错: {str(e)}"
         print(error_msg)
@@ -258,7 +372,6 @@ def test_indicator(indicator_name, high, open_price, low, close, vol, oi, params
                 talib_results_full.append(talib_res_full)
             
             talib_result = tuple(talib_results_full)
-            
         else:
             # 大多数指标只需要收盘价
             mask = ~np.isnan(close_1d)
@@ -273,17 +386,18 @@ def test_indicator(indicator_name, high, open_price, low, close, vol, oi, params
         
         # 重建结果数组，填充NaN
         num_samples = len(high_1d)
+        valid_indices = np.where(mask)[0]
         
         # 处理多返回值情况
         if isinstance(talib_result, tuple):
             talib_results_full = []
-            valid_indices = np.where(mask)[0]
             
-            # 如果是HT_PHASOR指标，则已经在上面处理过了
+            # 特殊处理HT_PHASOR指标
             if indicator_name == 'HT_PHASOR':
-                # 不需要再次处理
+                # 此处已在上面处理过，不需要重复
                 pass
             else:
+                # 其它指标的常规处理
                 for res in talib_result:
                     talib_res_full = np.full(num_samples, np.nan)
                     if len(res) > 0:
@@ -294,8 +408,8 @@ def test_indicator(indicator_name, high, open_price, low, close, vol, oi, params
                 
                 talib_result = tuple(talib_results_full)
         else:
+            # 单返回值情况
             talib_result_full = np.full(num_samples, np.nan)
-            valid_indices = np.where(mask)[0]
             
             if len(talib_result) > 0:
                 result_offset = len(valid_indices) - len(talib_result)
@@ -340,7 +454,7 @@ def test_indicator(indicator_name, high, open_price, low, close, vol, oi, params
                     print(f"    {names[i]}相关系数: {correlation:.6f}")
                     result_dict["correlations"][names[i]] = correlation
                 elif indicator_name == 'AROON':
-                    names = ['Aroon下降', 'Aroon上升']
+                    names = ['Aroon上升', 'Aroon下降']
                     print(f"    {names[i]}相关系数: {correlation:.6f}")
                     result_dict["correlations"][names[i]] = correlation
                 elif indicator_name == 'BBANDS':
@@ -377,52 +491,141 @@ def test_indicator(indicator_name, high, open_price, low, close, vol, oi, params
             print(f"    没有足够的非NaN值进行比较")
             result_dict["correlations"]["相关系数"] = None
     
-    return result_dict
+    return result_dict, our_result, talib_result
 
-def main():
+def visualize_indicator(indicator_name, our_result, talib_result, ohlc_data):
     """
-    主测试函数
+    可视化指标对比结果
+    
+    参数:
+        indicator_name: 指标名称
+        our_result: 自定义实现的结果
+        talib_result: TA-Lib的结果
+        ohlc_data: 包含high, open_price, low, close的元组
     """
+    high, open_price, low, close = ohlc_data
+    
+    # 扁平化我们的结果（取第一个证券）
+    if isinstance(our_result, tuple):
+        our_results_flat = [res[:, 0] for res in our_result]
+    else:
+        our_results_flat = [our_result[:, 0]]
+    
+    # 准备TA-Lib结果
+    if isinstance(talib_result, tuple):
+        talib_results_flat = list(talib_result)
+    else:
+        talib_results_flat = [talib_result]
+    
+    # 设置图表
+    plt.figure(figsize=(15, 10))
+    
+    # 获取结果的数量
+    num_results = max(len(our_results_flat), len(talib_results_flat))
+    
+    # 为每个结果创建一个子图
+    for i in range(num_results):
+        ax = plt.subplot(num_results + 1, 1, i + 1)
+        
+        # 获取当前结果
+        our_flat = our_results_flat[i] if i < len(our_results_flat) else None
+        talib_flat = talib_results_flat[i] if i < len(talib_results_flat) else None
+        
+        # 创建掩码用于有效数据点
+        if our_flat is not None and talib_flat is not None:
+            mask = ~np.isnan(our_flat) & ~np.isnan(talib_flat)
+        elif our_flat is not None:
+            mask = ~np.isnan(our_flat)
+        elif talib_flat is not None:
+            mask = ~np.isnan(talib_flat)
+        else:
+            continue
+        
+        valid_indices = np.where(mask)[0]
+        if len(valid_indices) == 0:
+            continue
+        
+        min_idx = np.min(valid_indices)
+        max_idx = np.max(valid_indices)
+        plot_range = range(min_idx, max_idx + 1)
+        
+        # 为结果命名
+        if indicator_name == 'MACD':
+            names = ['MACD线', '信号线', '直方图']
+            result_name = names[i] if i < len(names) else f"结果{i+1}"
+        elif indicator_name == 'KDJ':
+            names = ['K', 'D', 'J']
+            result_name = names[i] if i < len(names) else f"结果{i+1}"
+        elif indicator_name == 'AROON':
+            names = ['Aroon上升', 'Aroon下降']
+            result_name = names[i] if i < len(names) else f"结果{i+1}"
+        elif indicator_name == 'BBANDS':
+            names = ['上轨', '中轨', '下轨']
+            result_name = names[i] if i < len(names) else f"结果{i+1}"
+        elif indicator_name in ['HT_PHASOR', 'HT_SINE']:
+            names = ['临场', '二次谐波']
+            result_name = names[i] if i < len(names) else f"结果{i+1}"
+        else:
+            result_name = f"结果{i+1}"
+        
+        # 绘制我们的结果
+        if our_flat is not None:
+            ax.plot(plot_range, our_flat[plot_range], 'b-', label=f'自定义{result_name}')
+        
+        # 绘制TA-Lib结果
+        if talib_flat is not None:
+            ax.plot(plot_range, talib_flat[plot_range], 'r--', label=f'TA-Lib {result_name}')
+        
+        # 设置标题和图例
+        ax.set_title(f'{indicator_name} - {result_name}')
+        ax.legend()
+        ax.grid(True)
+        
+        # 如果是最后一个结果，添加差异图
+        if i == num_results - 1 and our_flat is not None and talib_flat is not None:
+            # 计算差异
+            diff = our_flat - talib_flat
+            
+            # 创建差异子图
+            ax_diff = plt.subplot(num_results + 1, 1, num_results + 1)
+            ax_diff.plot(plot_range, diff[plot_range], 'g-', label='差异 (自定义 - TA-Lib)')
+            ax_diff.axhline(y=0, color='r', linestyle='-', alpha=0.3)
+            ax_diff.set_title(f'{indicator_name} - 差异')
+            ax_diff.legend()
+            ax_diff.grid(True)
+    
+    # 调整布局
+    plt.tight_layout()
+    plt.show()
+
+def test_current_indicator():
+    """
+    测试当前文件中定义的指标函数
+    """
+    # 获取当前模块中的所有函数
+    current_module = globals()
+    indicator_functions = []
+    
+    for name, obj in current_module.items():
+        # 检查是否是可能的指标函数
+        if callable(obj) and name.isupper() and name not in ['SMA', 'EMA', 'WMA']:
+            # 检查函数是否接受6个基本参数
+            sig = inspect.signature(obj)
+            params = list(sig.parameters.keys())
+            if len(params) >= 6 and params[:6] == ['high', 'open', 'low', 'close', 'vol', 'oi']:
+                indicator_functions.append((name, obj))
+    
+    if not indicator_functions:
+        print("没有找到指标函数！")
+        return
+    
+    # 打印找到的指标函数
+    print(f"找到 {len(indicator_functions)} 个指标函数:")
+    for name, _ in indicator_functions:
+        print(f" - {name}")
+    
     # 生成测试数据
     high, open_price, low, close, vol, oi = generate_test_data()
-    
-    # 用于汇总的变量
-    missing_indicators = []
-    perfect_match = {}
-    imperfect_match = {}
-    error_indicators = {}
-    
-    # 相关系数判定阈值
-    CORRELATION_THRESHOLD = 0.995  # 设置相关系数完全匹配的阈值
-    
-    # 需要测试的指标列表
-    indicators = [
-        'AD', 'ADOSC', 'ADX', 'ADXR', 'APO', 'AROON', 'AROONOSC', 'ATR', 'AVGPRICE',
-        'BBANDS', 'BETA', 'BOP', 'CCI', 'CDL2CROWS', 'CDL3BLACKCROWS', 'CDL3INSIDE',
-        'CDL3LINESTRIKE', 'CDL3STARSINSOUTH', 'CDL3WHITESOLDIERS', 'CDLABANDONEDBABY',
-        'CDLADVANCEBLOCK', 'CDLBELTHOLD', 'CDLBREAKAWAY', 'CDLCLOSINGMARUBOZU',
-        'CDLCONCEALBABYSWALL', 'CDLCOUNTERATTACK', 'CDLDARKCLOUDCOVER', 'CDLDOJI',
-        'CDLDOJISTAR', 'CDLDRAGONFLYDOJI', 'CDLENGULFING', 'CDLEVENINGDOJISTAR',
-        'CDLEVENINGSTAR', 'CDLGAPSIDESIDEWHITE', 'CDLGRAVESTONEDOJI', 'CDLHAMMER',
-        'CDLHANGINGMAN', 'CDLHARAMI', 'CDLHARAMICROSS', 'CDLHIGHWAVE', 'CDLHIKKAKE',
-        'CDLHIKKAKEMOD', 'CDLHOMINGPIGEON', 'CDLIDENTICAL3CROWS', 'CDLINNECK',
-        'CDLINVERTEDHAMMER', 'CDLKICKING', 'CDLKICKINGBYLENGTH', 'CDLLADDERBOTTOM',
-        'CDLLONGLEGGEDDOJI', 'CDLLONGLINE', 'CDLMARUBOZU', 'CDLMATCHINGLOW',
-        'CDLMATHOLD', 'CDLMORNINGDOJISTAR', 'CDLMORNINGSTAR', 'CDLONNECK',
-        'CDLPIERCING', 'CDLRICKSHAWMAN', 'CDLRISEFALL3METHODS', 'CDLSEPARATINGLINES',
-        'CDLSHOOTINGSTAR', 'CDLSHORTLINE', 'CDLSPINNINGTOP', 'CDLSTALLEDPATTERN',
-        'CDLSTICKSANDWICH', 'CDLTAKURI', 'CDLTASUKIGAP', 'CDLTHRUSTING', 'CDLTRISTAR',
-        'CDLUNIQUE3RIVER', 'CDLUPSIDEGAP2CROWS', 'CDLXSIDEGAP3METHODS', 'CMO',
-        'CORREL', 'DEMA', 'DX', 'EMA', 'HT_DCPERIOD', 'HT_DCPHASE', 'HT_PHASOR',
-        'HT_SINE', 'HT_TRENDLINE', 'HT_TRENDMODE', 'KAMA', 'LINEARREG',
-        'LINEARREG_ANGLE', 'LINEARREG_INTERCEPT', 'LINEARREG_SLOPE', 'MA', 'MACD',
-        'MACDEXT', 'MACDFIX', 'MAMA', 'MAX', 'MAXINDEX', 'MEDPRICE', 'MFI', 'MIDPOINT',
-        'MIDPRICE', 'MIN', 'MININDEX', 'MINMAX', 'MINMAXINDEX', 'MINUS_DI',
-        'MINUS_DM', 'MOM', 'NATR', 'OBV', 'PLUS_DI', 'PLUS_DM', 'PPO', 'ROC', 'ROCP',
-        'ROCR', 'ROCR100', 'RSI', 'SAR', 'SAREXT', 'SMA', 'STDDEV', 'STOCH', 'STOCHF',
-        'STOCHRSI', 'SUM', 'T3', 'TEMA', 'TRANGE', 'TRIMA', 'TRIX', 'TSF', 'TYPPRICE',
-        'ULTOSC', 'VAR', 'WCLPRICE', 'WILLR', 'WMA'
-    ]
     
     # 指标参数配置
     indicator_params = {
@@ -447,78 +650,22 @@ def main():
         'CDLMORNINGSTAR': {'penetration': 0.3}
     }
     
-    # 检查BaseLogicFactors类是否实现了所有指标
-    available_indicators = []
-    for indicator in indicators:
-        if hasattr(BaseLogicFactors, indicator):
-            available_indicators.append(indicator)
-        else:
-            print(f"BaseLogicFactors中未找到指标: {indicator}")
-            missing_indicators.append(indicator)
-    
-    # 依次测试每个可用的指标
-    for indicator in available_indicators:
-        params = indicator_params.get(indicator, {})
+    # 为每个找到的指标运行测试
+    for name, func in indicator_functions:
+        print("\n" + "="*50)
+        print(f"测试指标: {name}")
+        print("="*50)
+        
+        params = indicator_params.get(name, {})
         try:
-            result = test_indicator(indicator, high, open_price, low, close, vol, oi, params)
-            if result["error"]:
-                error_indicators[indicator] = result["error"]
-            else:
-                # 检查是否是完全匹配
-                perfect = True
-                correlations = {}
-                
-                for key, value in result["correlations"].items():
-                    if value is None:
-                        continue  # 跳过没有足够非NaN值的比较
-                    correlations[key] = value
-                    # 使用CORRELATION_THRESHOLD判断是否完全匹配
-                    if key == "一致率" and indicator.startswith('CDL'):
-                        if value < 0.995:  # 对CDL系列，一致率必须是0.995才算完全匹配
-                            perfect = False
-                    elif value < CORRELATION_THRESHOLD:  # 对非CDL指标，相关系数必须大于等于阈值才算完全匹配
-                        perfect = False
-                
-                if perfect and correlations:
-                    perfect_match[indicator] = correlations
-                elif correlations:
-                    imperfect_match[indicator] = correlations
+            result_dict, our_result, talib_result = test_indicator(func, high, open_price, low, close, vol, oi, params)
+            
+            if not result_dict["error"]:
+                # 可视化结果
+                print("\n生成可视化对比...")
+                visualize_indicator(name, our_result, talib_result, (high, open_price, low, close))
         except Exception as e:
-            error_msg = f"{indicator} 测试失败: {str(e)}"
-            print(error_msg)
-            error_indicators[indicator] = error_msg
-        print()  # 为每个指标之间添加空行
-
-    # 打印总结
-    print("\n" + "="*50)
-    print("测试结果总结")
-    print("="*50)
-    
-    # 打印未找到的指标
-    for indicator in missing_indicators:
-        print(f"BaseLogicFactors中未找到指标: {indicator}")
-    print()
-    
-    # 打印完全匹配的指标
-    print(f"完全匹配（{len(perfect_match)}个）：")
-    for indicator, correlations in perfect_match.items():
-        print(f"    {indicator}：")
-        for key, value in correlations.items():
-            print(f"        {key}: {value:.6f}")
-    print()
-    
-    # 打印不完全匹配的指标
-    print(f"未完全匹配（{len(imperfect_match)}个）：")
-    for indicator, correlations in imperfect_match.items():
-        print(f"    {indicator}：")
-        for key, value in correlations.items():
-            print(f"        {key}: {value:.6f}")
-    print()
-    
-    # 打印出错的指标
-    print("出现错误：")
-    for indicator, error in error_indicators.items():
-        print(f"    {error}")
+            print(f"测试失败: {str(e)}")
 
 if __name__ == "__main__":
-    main()
+    test_current_indicator()
