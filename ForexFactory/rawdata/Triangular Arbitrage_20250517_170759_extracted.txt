@@ -1,0 +1,780 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Admin, Please Delete Thread.
+
+--- 帖子 #2 ---
+I forgot to post the formula..... A/B * B/C = C/B A,B,C = your pairs. Note some pairs are represented "backwards" so you have to divide by 1 to get the correct value. If this formula is not true then you have an arbitrage opportunity. you can realize your profits in any of the currencies by changing what you are buying or selling. Also note that you have to use the correct value (bid or offer) depending on the direction you are going.
+
+--- 帖子 #3 ---
+In order to do it, we will need an arbitrage calculator, as this opportunities disappear very quickly.
+
+--- 帖子 #4 ---
+rather than looking for arbs based on the present time, would it be possible to "create" an arb based on possible future prices. eg if the prices are currently equal then there is no arb, but what if you bought and sold after the price has moved X amount of pips to "create" an arb?
+
+--- 帖子 #5 ---
+are you talking about futures/forwards - spot arb or are you talking about a projected spot price. futures/spot arbs are pretty well known and do not present themselves very often but I like the idea projecting a price and trading 3 currenciy pairs. If you know that one of the 3 is going in a particular direction you can in theory take a corresponding position in all 3 pairs knowing that they will all "share" a value somewhere down the road. Might be a usefull way to predict the short term market direction.... Someone please post some Ideas.
+
+--- 帖子 #6 ---
+This generally doesn't work, I'm afraid. For one, you lose on the swap/interest - with Oanda most triangular arb's cost around 1.5% / year. Secondly, how are you going to take profit? If one pair moves 10%, the other two pairs will move a combined 10% in the other direction giving 0% return. If you take profit on the winner, the losers are still there to drag you down. It is true that inefficiencies in the forex markets will cause one of the pairs to be over/under valued slightly, but this is usually one 1-2 pips and always well within the spread. For retail forex, there are no triangular arb opportunities worth doing. I have, by the way, tried this in a game account. I setup two arbs using eur/usd, usd/jpy, and eur/jpy going both directions. I made a profit on both by closing the winners at a resistance level and waiting for the losers to retrace. So in opposition to everything else I've said, you can do this profitably. I just don't think it's worth it.
+
+--- 帖子 #7 ---
+Arbitrage opportunities, no... Correlation , yes. It may be helpful to look at a heatmap but I think perhaps the most practical way is just to scan through a few charts and see what is getting weaker or stronger. For example, EUR/USD may be heading up. Is the euro strengthening this session or is the dollar weakening? Say that the AUD/USD , GBP/USD and XAU/USD are all heading up... Well, it means weak dollar , not necessarily strong euro. Then, lets say that you see EUR/CHF heading down... Should be ok to trade EUR/USD long and EUR/CHF short in this case.
+
+--- 帖子 #8 ---
+What could be useful and worth trying though, is cluster indicator. I've heard about it from a fella trader and have read about it but not much. Basically it takes one currency and compares it against other pairs. Ideally it should compare it against 24 pairs, but then it gets so laggy that any computer will freeze, so i believe the indicator uses 8 pairs only to compare the pair to. This way you can see if the currency is appreciating or depreciating against many other currencies. Please see the link below, you'll find much more info there about this indicator. http://articles.mql4.com/484
+
+--- 帖子 #9 ---
+That article is a lot to digest but looks potentially very useful. Could you do the same thing by creating a currency basket in a game account? For example, place $1,000,000 long on USD and divide up the $1,000,000 short positions among the currencies you want to measure against. The hard part would be how much to allocate per currency - I'm not sure that you would want to give equal weight to each. You would measure the strength of the currency by the growth of the NAV - as the currency strengthens, NAV rises.
+
+--- 帖子 #10 ---
+I really don't have much knowledge to share on this subject. What I think you could do is measure the negative correlation between usd and the currencies you want to sell. It has to be negative, right? You long usd then you want the pairs you sold to go in the opposite to usd direction, if not, then I did not understand what you mean. The only problem I'm seeing with all this, is that what you really need, is to forecast the direction of the dependent currency, in our case usd. If you don't know where this one is going, correlation gives you no new information. It's a given that once two currencies are negatively correlated, then one going up means the other going down, how can you benefit from this if you have no confidence in the direction of the first one? The only thing that will work is what works on all the perfect competition markets (planty of buyers and planty of sellers) - support, resistance, and some sort of a sign that the price is making a turn. May be institutional traders can benefit from microscopic things like arbitrage and stuff, but it simply is not doable for retail traders.
+
+--- 帖子 #11 ---
+Finding arbitrages in all sorts of different markets is the only reliable way to make money (while these inefficiencies exist). Strategies based on price indicators don't work very well (all technical indicators are price based), since they tell you what happened in the past, not what is happening now and you are looking for patterns that are suppose to have a high probability of recurring, but they don't have to... I am very much interested in arbitrage in the forex market, but I have been unable to find anything so far. Is anyone else working along similar lines?
+
+--- 帖子 #12 ---
+Here's what I've found on the internet, an example of the arbitrage on foreign exchange: So you need at least three brokers to do this sort of thing, and the three brokers have to share the same datafeed, am I getting it right?
+
+--- 帖子 #13 ---
+The product of 2 major pairs does not give the cross pair in right proportions directly. There is a dynamic ratio of lots involved for zero net exposure. http://www.forexfactory.com/showthread.php?t=62477
+
+--- 帖子 #14 ---
+slippage makes triangular arbitrage totally impossible in the retail fx market. you think brokers are that stupid?
+
+--- 帖子 #15 ---
+Hedge System is better, but you´ll need some indicators to indicate entry/exit positions. Best Regards, Marcelo Marques
+
+--- 帖子 #16 ---
+I have written an algorithm which can find arbitrage among major pairs in less than 20 milliseconds . If used the right technology, It can find arbitrage among major pairs in less than 10 milliseconds , The only problem is that no retail broker allows you to trade in Tri Arb. If you open a postion, the only way to close it is by selling your holdings back into the original pair. One thing I can imagine big banks and hedge funds doing is to have multiple brokers and spread the trades across each broker. Also, arbitrage doesn't have to be only among three pairs. If you have 5 pairs like USD, AUD, JPY, EUR, and JPY, the program that I wrote gives me the arbitrage something like USD -&gt; EUR -&gt; JPY -&gt; GBP -&gt; AUD -&gt; USD. One thing to notice is that arbitrage only exists if the spread is less than 2 pips. If its more than 2 pips, it ends up costing you instead. If anyone is interested in seeing the results of my algorithm, message me.
+
+--- 帖子 #17 ---
+Lets see it...
+
+--- 帖子 #18 ---
+Another useless thread which is good for nothing ...
+
+--- 帖子 #19 ---
+Sure, Just post some prices and I'll produce the output..... Just gimme the prices for USD, EUR, JPY, and GBP and I'll give it to you. The following is the output from LIVE going prices from one of the brokers who charges more then 3-4 pip spread. Thus, you end up having a loss. However, if a broker(s) charge you spread less than (or equal to ) 2 pips, we could end up with a profit. See the sample output for my program below. ========================================================== Current Time: 3:36:8:1200040568046 Bid: 1.4781 Ask: 1.4784 Buy Interest: -2.18 Currency 1: EUR Currency 2: USD ID: 0 Index: 0 Lot size: 100000 Max: 1.4816 Min: 1.4775 Pip Value: 10.0 Points: 4 Point Size: 1.0E-4 Sell Interest: 1.89 Bid: 109.14 Ask: 109.17 Buy Interest: 10.33 Currency 1: USD Currency 2: JPY ID: 1 Index: 1 Lot size: 100000 Max: 109.7 Min: 108.64 Pip Value: 9.16 Points: 2 Point Size: 0.01 Sell Interest: -11.89 Bid: 161.36 Ask: 161.4 Buy Interest: 13.21 Currency 1: EUR Currency 2: JPY ID: 8 Index: 8 Lot size: 100000 Max: 162.3 Min: 160.72 Pip Value: 9.16 Points: 2 Point Size: 0.01 Sell Interest: -15.2 Bid: 213.1 Ask: 213.18 Buy Interest: 25.75 Currency 1: GBP Currency 2: JPY ID: 9 Index: 9 Lot size: 100000 Max: 215.14 Min: 212.05 Pip Value: 9.16 Points: 2 Point Size: 0.01 Sell Interest: -29.63 Bid: 0.7566 Ask: 0.7571 Buy Interest: -6.19 Currency 1: EUR Currency 2: GBP ID: 7 Index: 7 Lot size: 100000 Max: 0.7584 Min: 0.7537 Pip Value: 19.53 Points: 4 Point Size: 1.0E-4 Sell Interest: 5.36 Bid: 1.9524 Ask: 1.9528 Buy Interest: 4.83 Currency 1: GBP Currency 2: USD ID: 2 Index: 2 Lot size: 100000 Max: 1.9636 Min: 1.9503 Pip Value: 10.0 Points: 4 Point Size: 1.0E-4 Sell Interest: -5.56 Pair USD-&gt;GBP at 0.5120852109791069 New Investment Amount: 100000.0 x 0.5120852109791069 = 51208.521097910685. Pair GBP-&gt;EUR at 1.320829480914014 New Investment Amount: 51208.521097910685 x 1.320829480914014 = 67637.72434012771. Pair EUR-&gt;JPY at 161.36 New Investment Amount: 67637.72434012771 x 161.36 = 1.0914023199523007E7. Pair JPY-&gt;USD at 0.009160025648071814 New Investment Amount: 1.0914023199523007E7 x 0.009160025648071814 = 99972.73243128155. Total milliseconds taken to produce this result is 15. Press Enter to continue..... =========================================================
+
+--- 帖子 #20 ---
+Svm I am very interested in arbitrage PERIOD, and it doesn't have to be in FOREX. One mexican claimed if he sends 100 US$ to Guatemala, converting it to its currency and then sending the guatemalan currency to his native Mexico, it will become 1,200 pesos. If he sent $100 directly to Mexico, it will become 1,000 pesos in Mexico. I am interested in the results of your algoritm!!
+
+--- 帖子 #21 ---
+The results have been posted up there. I mentioned before that spread really does matter. The reason for time is that you have to be fast enough to find it. Otherwise, it could be gone from the market by the time you find it. Just look at the past data of EUR/USD e.g. There are instances when the price changes more than 3 times within a second. Tell you what. Why don't you post some prices for the majors (EUR, USD, GBP, JPY) and with spread of less than 2 pips. I'll post some results of your prices. (along with time it takes to calculate)
+
+--- 帖子 #22 ---
+I find this method pretty useful. Gives you a big picture view of market behavior. See the snapshot, these calculations allow me to predict which direction the currency is going to be pulled. Dont just look at one pair and decide weather its going up or down, with this method you know.
+
+--- 帖子 #23 ---
+Hi Kurka Fund, Are you actually trading on these figures? And how long does the anomoly last, is it for a few seconds, or long enough to put a trade in. And I wonder how often a difference of 5 pips comes up. Thanks for sharing.
+
+--- 帖子 #24 ---
+Yes this is what I use to determine my entry and exit points, sometimes it will hold a position for a few extra pips if the market consensus is pulling that pair in a particular direction. The consensus price is simply a validation price for the pair based on triangular relationships with other currency's. These are not true arbitrage opportunities, the purpose is to determine the short term direction of a pair based on a broader market picture. The logic is that the market will always correct itself. These are the same kind of calculations that banks use to determine the pricing that they are going to offer liquidity at (+- commissions/spread). You still need to know what is moving the market at a particular time. Example during the NY session the USD is going typically move first so you would use these calculations to follow USD movements, but during the asian session you might want to trade USD following JPY movements.
+
+--- 帖子 #25 ---
+I wrote a Script that places arrows on the chart of the EURUSD when the Actual price is greater or less than the calculated price. The arrows are placed live in real market conditions at the correct Bid or Offer. 159 pips in a few hours is not to shabby.
+
+--- 帖子 #26 ---
+Also the calculations can be used to calculate strength and direction for every currency.
+
+--- 帖子 #27 ---
+problem with arb is brokers will keep their feed arb-free... an internal arb is likely never to show up. so arbing across multiple brokers is the best bet... i have a thread on this called broker stop hunting.... merlin says he was making profits w/ the same idea. merlin, if you read this, did it continue doing well?
+
+--- 帖子 #28 ---
+Your never going to find Arb opportunities. If they come up my systems will get to it first anyway. This is not true Arbitrage Its basically just calculating what the market thinks the price should be. For example if you have great upward momentum in the USD, other currency's will have to adjust. So you simply take a position to capitalize on the adjustment. One cool thing about forex is volatility, one move causes a chain reaction with other currencys. Like making waves at 2 ends of the same pool, the waves will eventually pan out when the energy is lost but until they do you have all sorts of different directional waves that you can catch (in theis case calculate). The calculations account for the difference in the bid and offer (spread) via a std deviation. It will not be profitable if you are trying to trade the market mover, its more like follow the leader. But as we see in the chart even the EurUSD has to make adjustments when other pairs move. (or maybe im just extremely lucky) Either way its an idea that should be discussed. Anyone here have any other Ideas for using multiple pair calculations/indicators to trade???
+
+--- 帖子 #29 ---
+Hi Kurka Fund, This is an indicator but it needs to be put in the experts folder. Have a look at the thread at TSD it was started by a guy called Nicholishen. Hope it helps
+
+--- 帖子 #30 ---
+Arbitrage is very interessting of course but not possible for the average retail guy. One point is that you have to buy and sell up to 1 unit not mini or micro lots. That's basicly basicly what ruins it for the retail guy along with the big cumulativ spread. The total spread of your triarb ring has to be as small as possible.
+
+--- 帖子 #31 ---
+If you read the post this is not true arbitrage. The goal here is not to take multiple positions (Hedging is pretty useless, you need market exposer to make money) its simply to calculate what the market thinks the price of a pair should be and trade accordingally.
+
+--- 帖子 #32 ---
+Sure you can predict the price which would make the market efficient again. Will the actual price close the gap? Maybe. Will there be enough pips inbetween to overcome the spread? Hardly. Even if the market price would catch up with the PPI every tick that'd just mean you have a new price level which is just as hard to predict as the real price. It's like seeing just one stair of a stairway. You don't know whats next.
+
+--- 帖子 #33 ---
+I agree, if you read the posts I account for the spread using a Std deviation. I wrote a quick EA that buys EURUSD when its over priced and sell when its under priced. Testing cannot be accurate for this type of EA since it involves 1min data from 36 currency pairs (MT4 crashes after about 300 bars) but the results are impressive. Im thinking that if you determine the daily direction then turn a system like this on and just take positions in that direction all day you can do pretty well. How about some creative money management ideas for a system like this ? Does anyone here have something to contribute? The tone of the post on this site are starting to sound like more of a Forex Bi*$hing and moaning session (" spreads are to high", "Brokers are out to get me") than a constructive forum for serious forex traders. Dont get me wrong, I do love occasionally reading posts by a trader that went the wrong way and has a new conspiracy theory that explains how his broker conspired with the rest of the forex world to stop him out on his 3 mini lot position. (((Greedy bankers stealing my $3.))) But the value of a fourm like this is the collective knowledge and experience of the members discussing and coming up with new ideas.
+
+--- 帖子 #34 ---
+So what's the real problem with your EA? Is it just MT4 itself? Then maybe we should move on to an ECN with a good API. I'm also very interessted in arbitrage because it's totaly different from sell when price falls and vice versa.
+
+--- 帖子 #35 ---
+The logic in the EA is good. The problem is with the MT4 back tesing, Its really hard to back test with these kind of calculations. Every 100 milliseconds the EA has to calculate: The correlations of 36 currency pairs to across 35 other pairs. 3-8 Triangular validations for each pair 8 major currency indexes the relationship of each Triangular validation to the Index the direction of each index a consensus value for each pair Then using the consensus values starting back at #1 to compare it to the actual price. And thats just the begining to figure out what the currency sould be. We still havent gotten into the trading logic or the order managemet. I have this EA running live now but it crashes due to memory problems, I have another post RE Mt4 memory issues. Bottom line its kinda complicated and thats why I started this thread. I need logical ideas how to use this method.
+
+--- 帖子 #36 ---
+forgive what may be a naive question.. but why? I mean why every 100 milliseconds? Most MT4 brokers take 5 to 15 seconds to confirm a trade on a good day..(Im talking real account)..LoL I must be missing something here? IMHO trying to develop an EA to expliot triangular arbitrage using MT4 brokers is a triumph of hope over experience.. That said, you are obviously (a) a skilled programmer &amp; (b) an experienced trader. So I wish you well with your quest..I do remember some guys that used to operate such a system some years ago as part of a fund, but on a very large scale using direct access to bank feeds. I think they were based in Dublin, Ireland. FX is a very joined up market and becoming more so every day. Im more interested in the potential of your work for identifying the development of relative strength winners in complex market moves..
+
+--- 帖子 #37 ---
+Hi Kurka Fund, Would you be willing to share the scripts you mentioned in your earlier post? regards waltini
+
+--- 帖子 #38 ---
+Here are some live results since market open yesterday. 222 profitable trades in one night is not too bad IMO.
+
+--- 帖子 #39 ---
+Impressive to say the least- A couple of quick questions, if I may: I assume that have some market exposure in your trades and this is not tri-arb correct? It seems your using the correlations of bunch of pairs and creating 'synthetic prices' for each and trading pairs that are not trading at their synthetic or ideal price. Can you give any of the base calculations for determining the synthetic price or true market price, or even a hint if you're keeping it 'close to the vest'. Thanks in advance, Smoke
+
+--- 帖子 #40 ---
+Correct this is not Tri arbitrage in its true form. Yes creating synthetic prices is correct, I called it consensus pricing. The formula is posted in the second post.
+
+--- 帖子 #41 ---
+I see now what you're doing. I was just reverse engineering your screen shot you posted earlier. I'll plug it in and give it a go. Smoke
+
+--- 帖子 #42 ---
+Um - please explain "reverse engineering your screen shot"... and "I'll plug it in and give it a go."
+
+--- 帖子 #43 ---
+So I turned it into an indicator and plotted the pricing (as a MA) on the EURUSD chart. As you can see currently according to the CHF, the EURUSD should be priced higher and according to JPY &amp;&amp; GBP it should be lower. any ideas on turning this into a tradable strategy?
+
+--- 帖子 #44 ---
+I cant run a 1min backtest for more that 2-3 day period....
+
+--- 帖子 #45 ---
+Well, I'm just saying I figured out the way you were doing the claculations to get the 'consensus price' from your screen shot you posted in #22....and I'm going to plug these calculations into my auto-trading system in MS Excel and see how it all works out. Smoke
+
+--- 帖子 #46 ---
+kurka looks interesting at first glance.... thanks for sharing. will try to put time into it in the near future.... -t
+
+--- 帖子 #47 ---
+Made a few changes to the order logic, Now it uses oscillators of the pricing indexes instead of moving averages. much mor active.
+
+--- 帖子 #48 ---
+25% modeling quality
+
+--- 帖子 #49 ---
+Looks interesting. But isn't 25% modelling quality all one should expect on the 1M? Have you ever actually seen it higher on a 1M system? Even with quality data from Alpari, I still seem to get 25% trading 1M systems.
+
+--- 帖子 #50 ---
+Live testing is up 37% since this weeks market open trading only minilots ($10,000 each position) There is a floating drawdown equal to about half of the profit but it hedged with about 15% short exposure. Does FF have an FTP server that I can post live results to? This system really needs some creative order management any ideas ?
+
+--- 帖子 #51 ---
+Hello Kurka! Where i can find your EA and your indicator?
+
+--- 帖子 #52 ---
+The knowledge you seek can be found HERE
+
+--- 帖子 #53 ---
+Hi Kurka, I sent you a PM. Can you please reply? I have some more ideas... Thank you.
+
+--- 帖子 #54 ---
+Post your Ideas. . . Thats why I started this thread, to discuss new trading ideas. Also, I have received a few emails from people wanting to help test this EA. Thanks for the offer, but I have adequate computer power to test it myself. Again the focus of this thread is to "grow" some new ideas. We can all write our own EA's with the ideas posted here. And if your new and dont quite knwo how to write an EA there are plenty of resources to help you out (its really simple, we chould do a MQL for dummies book). Iif you cant figure out how to write your own EA with the resources on these fourms, Tarading Forex is probably outta your league anyway save you money and try something else. On the other hand, if you post some fresh/interesting ideas there are plenty of people here that will probabally code it for you (myself included) for free just because its something new. But please dont ask for handouts or act like the programmers and traders on these fourms owe you anything.
+
+--- 帖子 #55 ---
+So what do you think about moving away from MT4? There are plenty of better plattform than MT4. Neoticker etc etc.
+
+--- 帖子 #56 ---
+I dont use MT4 for any real trading, just for development because its so much easier to write the code and test it out. Cuts the time to market for new strategies. Here is the Live testing results from yesterday through this morning. I had to start a new demo account because the one I started on Sunday froze up. 372 for $2,940. I am going to work on some money management today to see how I can improve it. Also, Please do not PM or email me asking for this EA. I am posting the results of my testing to show that the method works. You can use the formulas and methods I shared above to write your own. If you have some good ideas to add to it then maybe we can collaborate.
+
+--- 帖子 #57 ---
+pdf version of this entire thread attached (easier reading)
+
+--- 帖子 #58 ---
+Does anyone know if arbitrage is easier in the Futures Markt? What kind of arbitrage would this be? Certainly no TriArb.
+
+--- 帖子 #59 ---
+Hi Kurka Fund, I have been doing my calculations following your posts. Can you tell me how you deal with the spreads for the different pairs? You did mention in your post a reference to standard deviation but I can't find it. I have done my calculations one the prices at close of business on friday and for bid prices for the eur/usd I had a range of 11 pips. Using the ask prices I had a range of 14 pips. Do you average the bid/ask before doing your calculations or do you use two different values? For example the bid prices on the AUD triangle were 7 pips lower than the Eur/Usd bid and the ask prices were 7 pips higher than the Eur/Usd ask price. Many thanks
+
+--- 帖子 #60 ---
+&gt;I dont use MT4 for any real trading, just for development because its so much easier to write the code and test it out. Cuts the time to market for new strategies. well the above tells me you're not an idiot and that's good. which broker do you use for real trading? you have an impressive win loss ratio but thats countered by the loss on your open positions. i'm struglin to understand what it is you're actually doing. one idea i had was to calc an index for each currency ( not a currency pair) find the one that is trending up strongest and the one that is trending down strongest and then trade the pair. i'm working with mbt's api to do some short term trading. my goal is +0.3% per day steve
+
+--- 帖子 #61 ---
+There are..even on MT4..but since neither on thread nor forum subject..PM me.
+
+--- 帖子 #62 ---
+Kurka, I am not asking for handouts. And please see the new PM I sent you. I hope I'm not wasting my time writing you. What I think we need is a summary of everything we currently know. It's hard to add new ideas and contribute when we're unsure of some basic things. These things are specific and can't just be Googled. Screenshots and equity curves show little, actually, about the way things work. And as we all know, MT4 isn't that reliable for backtesting. For starters, what are you doing in terms of TP and SL? On one of the screenshots it looked like you were using no SL, which is extraordinarily dangerous because it only takes 1 losing trade to ruin the whole bunch. You mentioned something about reversal signals as well? Is that in place of a fixed TP? I'm thinking that we should use the OrderReliable functions found in the OrderReliable.mqh (freely available) to place the orders rather than the standard OrderSend function. It's much more efficient. Also, perhaps we can implement some sort of MM function that will use a fixed percentage of equity, rather than fixed lot size, to place orders with. This will allow for exponential profits, rather than linear. You mentioned adding an overall higher-trend confirmation and only taking trades in that direction. That seems like a good idea. RSI would suffice for this purpose.
+
+--- 帖子 #63 ---
+Ok just to clarify how the formula works ... Solving for EURUSD (Verification$/Cross$ * Base$/Verification$ = Base$/Cross$. ) The actual Price of EURUSD = 1.5786 (AUDUSD * EURAUD = EURUSD) So if the AUDUSD = .9607, and EURAUD = 1.6430 According to the AUD Triangular relationship to the EURUSD. The EURUSD should = 1.5784 (.9706 * 1.6430 = 1.5784) In this case the Actual price is 2 pips higher than the price according to the AUD triangular relationship. This is within the Std deviation (spread) and not significant. But if say the EURUSD was really trading at 1.5790 then we would take a short EURUSD position hoping that the market will correct itself. taking it one step further you verify the price against all the major currencies and determine if the price should be higher, lower or if its correct. Now we use all that info to determine what positions to take.
+
+--- 帖子 #64 ---
+1. you probabally are wasting your time with me if you dont have any fresh ideas. 2. Im not back testing, I have been posting forward tests. 3. No TP or SL just using signals and reverse signals. 4. Order reliable is great (but not really a fresh idea) here is the function that I use for orders.. PHP Code void SendOrder (){ int ticket = 0 ; int err = 0 ; int c = 0 ; int Attempts = 100 ; for( c = Attempts ; c &gt;= 0 ; c --){ HealthCheck (); RefreshRates (); ticket = OrderSend ( O_Symbol , O_Type , O_Lots , O_OpenPrice , O_Slippage , O_StopLoss , O_TakeProfit , O_String , O_Magic , O_Exp , O_Color ); if ( ticket &gt; 0 ) {Print( " Order Symbol : " O_Symbol , " Order Type : " O_Type , " Lots : " O_Lots , " Open Price : " O_OpenPrice , " Slippage : " O_Slippage , " Stop Loss : " O_StopLoss , " Take Profit : " O_TakeProfit , " " O_String , " Order Magic : " O_Magic , " Order Exp : " O_Exp , " Order Color : " O_Color , " Open Time : " OrderOpenTime (), " EA Took " , GetTickCount () - TickStart , " milliseconds" );break;} err = GetLastError (); if( err == 0 || err == 2 || err == 4 || err == 6 || err == 8 || err == 9 || err == 64 || err == 128 || err == 132 || err == 133 || err == 137 || err == 139 || err == 141 || err == 146 ){ //Sleep and retry errors Print( "....................... Sleep And Retry Error Code= " , err , " " ErrorDescription ( err )); Sleep ( 10 ); continue; } if( err == 135 || err == 136 || err == 138 ){ // price change errors Print ( "..................Invalid Price " O_String + " .............." ); WindowScreenShot ( "S_REQUOTE_" + Month ()+ "_D" + Day ()+ "_H" + Hour ()+ "_M" + Minute ()+ "_S" + Seconds ()+ ".gif" , 1440 , 900 ); Print( "....................... Price Error Code= " , err , " " ErrorDescription ( err )); start (); //restart and make sure that new price meets our entry criteria break; } else{ // other errors Print( ".......................Error Code= " , err , " " ErrorDescription ( err )); break; } } } void ModifyOrder (){ int ticket = 0 ; int err = 0 ; int c = 0 ; int Attempts = 100 ; for( c = Attempts ; c &gt;= 0 ; c --){ HealthCheck (); RefreshRates (); ticket = OrderModify ( M_Ticket , M_Price , M_StopLoss , M_TakeProfit , M_Exp , M_Color ); if ( ticket &gt; 0 ) { Print( " Ticket : " , M_Ticket , " Price : " , M_Price , " Stop Loss : " , M_StopLoss , " Take Profit : " , M_TakeProfit , " Exp : " , M_Exp , " EA Took " , GetTickCount () - TickStart , " milliseconds" );break;} err = GetLastError (); if( err == 0 || err == 2 || err == 4 || err == 6 || err == 8 || err == 9 || err == 64 || err == 128 || err == 132 || err == 133 || err == 137 || err == 139 || err == 141 || err == 146 ){ //Sleep and retry errors Print( "....................... Sleep And Retry Error Code= " , err , " " ErrorDescription ( err )); Sleep ( 10 ); continue; } if( err == 135 || err == 136 || err == 138 ){ // price change errors Print ( "..................Invalid Price " O_String + " .............." ); WindowScreenShot ( "S_REQUOTE_" + Month ()+ "_D" + Day ()+ "_H" + Hour ()+ "_M" + Minute ()+ "_S" + Seconds ()+ ".gif" , 1440 , 900 ); Print( "....................... Price Error Code= " , err , " " ErrorDescription ( err )); start (); //restart and make sure that new price meets our entry criteria break; } else{ // other errors Print( ".......................Error Code= " , err , " " ErrorDescription ( err )); break; } } } void CloseTicket (){ int ticket = 0 ; int err = 0 ; int c = 0 ; int Attempts = 100 ; for( c = Attempts ; c &gt;= 0 ; c --){ HealthCheck (); RefreshRates (); ticket = OrderClose ( C_Ticket , OrderLots (), C_Price , C_Slippage , White ); if ( ticket &gt; 0 ) {Print ( CloseString );break;} err = GetLastError (); if( err == 0 || err == 2 || err == 4 || err == 6 || err == 8 || err == 9 || err == 64 || err == 128 || err == 132 || err == 133 || err == 137 || err == 139 || err == 141 || err == 146 ){ //Sleep and retry errors Print( "....................... Sleep And Retry Error Code= " , err , " " ErrorDescription ( err )); Sleep ( 10 ); continue; } if( err == 135 || err == 136 || err == 138 ){ // price change errors Print ( "..................Invalid Price " CloseString + " .............." ); WindowScreenShot ( "S_REQUOTE_" + Month ()+ "_D" + Day ()+ "_H" + Hour ()+ "_M" + Minute ()+ "_S" + Seconds ()+ ".gif" , 1440 , 900 ); Print( "....................... Price Error Code= " , err , " " ErrorDescription ( err )); start (); //restart and make sure that new price meets our entry criteria break; } else{ // other errors Print( ".......................Error Code= " , err , " " ErrorDescription ( err )); break; } } } 5. Read this on MM ... http://articles.mql4.com/631 6. Explain RSI would suffice for this... I appreciate your efforts, but I am really only interested in NEW ideas. I dont care how crazy they seem - just has to be NEW. Thank You
+
+--- 帖子 #65 ---
+First I have to thank KurkaFund, this is one of the more interesting threads I have read for a while. One question came to my mind. If you are using other pairs as a triangular correlation tool to check the value of one pair, how do you know that the inefficiency is in that pair that you are looking at and not in one of the other pairs? If you are only trading one pair and not all of them then you definitely want the inefficiency to be in the current currency. You could always eliminate the verification pairs by checking their relative values by triangles as well, I'm not sure if that is what you are actually doing..
+
+--- 帖子 #66 ---
+Thats why time of day is so important here, I have another thread where Im trying to follow worldwide stock indexes. You have to follow different verifications currencys during different times of day. Example follow the JPY during the asian session.... Explain "eliminate the verification pairs by checking their relative values by triangles as well" Thanks
+
+--- 帖子 #67 ---
+Started this testing account on Friday afternoon. The computer froze up with some open positions (12) on Monday ( a holiday), When I restarted MT the positions were closed for a $670 loss. The win/loss ration is 245/28 is still pretty impressive. I am working on some other indicators (which I will share) http://forexfactory.com/showthread.php?t=88653 that should help determine which currency is moving the market at any given time. this will result in a substantial increase in trade volume. Please help with the development of the posted indicator if you can...
+
+--- 帖子 #68 ---
+Mmmmmm.....lol
+
+--- 帖子 #69 ---
+K Fund, I've experimented with this idea over a year ago and while doing it, I came up with essentially the same idea as Kreslik with his FPI. Coded FPI and actually ran it on MBT, but stopped now as I don't think it's worth it in my current implementation, at least not on MBT (plus, I make much more trading manually old fashion way). Your post reignited my curiosity again and I'm working on it in my spare time with fundamental idea coded and undergoing testing. In one of your posts you mention calculating major currency Indexes and then relating your triangular rings to it and keeping a tab on the direction of the indexes. Those two criterias look to me as filters more than actual signals. Also, instead of tracking the time of day and putting weights on the pairs, I simply put weights on each pair in the ring and calculate the weight of the entire ring and then calculate weighted theoretical bid and ask. Having those I compare to the actual bid and ask and if satisfies my preset deviation, I fire an order. Hope some more people can contribute to the topic.
+
+--- 帖子 #70 ---
+Your correct, I am using the calculated prices as more of a filter to determine the short term market pressures (5-15 min) this allows me to determine overbought or oversold conditions. Then if the really short term (1-3 min ) pricing is outside of the the std deviation (+spread) I use it as a signal and take a position. then I hold it until the market corrects or reverses. I disagree with weighting everything the same throughout the day. The reason being: If you run simple currency correlations through out the day you will not get any statically significant results, (basically you get white noise) but if you compartmentalize the day by market times you end up with some pretty significant findings. I break the market hours down to 7 separate categories. London,LondonNY,NY,Sydney,SydneyTokyo,Tokyo,TokyoLondon. then further break that down by News announcements (which usually occour during the beginning of a new market opening.) and weekly open and close.... (begining of the week is usually pretty unpredictable and the end is usually pretty slow.) this gives us roughly 40 distinct markets on any given week and each market is influenced by different factors. Determining what is making the market move at any given time is pretty important and constantally changing. Every trading system (espically technical systems) should take this into account. If you don't your trading based on LUCK. Technical systems are like looking at white noise on a TV screen and determining which pixels are going to turn black and which ones are going to be white. There is simply no pattern unless you can figure out how to filter the noise correctly.
+
+--- 帖子 #71 ---
+May be this file help. I have calculated currency index and based on that Actual value and calculated value shown. To get live data of currency you have to do following On MT4 Go to Tools - Option then in server select check box Enable DDE Server Restart MT4. Open Excel file....it will ask to update pop up window. click update and you will get live rate on excel file About Currency Index: You can get Currency index chart on Liteforex MT4. Or use below indicator to get Currency index on your currenct MT4
+
+--- 帖子 #72 ---
+Have you posted your scripts,calulators,indicators I am searching and not finding, could you directed me
+
+--- 帖子 #73 ---
+Spend your time developing instead of searching for handouts.
+
+--- 帖子 #74 ---
+Hi Kurka Fund, I decided to put together the same indicator chart you posted in post 43. The indicator i created is incredibly tight and the consensus price is spot on. Theres no significant deviations to suggest any trading opportunities. Your chart seems to have huge deviations. Does this have anything to do with the weights you selected according to time of day and news events etc etc.... PS i wanted to post a picture but didn't have time to upload the image... Cheers Gosko
+
+--- 帖子 #75 ---
+I also wanted to test the method and coded a my own little indicators that looks for deviations for current pair vs. all pairs on the platform automatically. My feeling is that there definitely is something very interesting here that needs further research. I even did the line as an oscillator (see the picture). Did you use M1 Chart? There definitely are not big differences on higer tf charts.. EDIT: There was a bug regarding different sized histories of different pairs therefore the pics I posted don't tell anything and had far too big deviations... I deleted the incorrect pic. At the current version that I have on my screen there are almost not any differences between consensus and the price.
+
+--- 帖子 #76 ---
+So here are the results of live testing on a new demo account for the past 24 hours. Again this is just entrys and exits based on signals and reverse signals. 325 positions with only 25 losses in 24 hours is pretty good. Average trade time is 6 minutes and 13 seconds. All but 2 positions were profitable by one or more pips within 2 minutes of opening. Every position was profitable at at least one point, the losses were simply held onto for too long. I really need to figure out which currency's to follow at different times of day. ( http://forexfactory.com/showthread.php?t=88653 ) Does anyone here know how to have MT4 pull data off other websites? following the global stock indexes would help this system out allot. (I will share the EA with anone that can figure that out)
+
+--- 帖子 #77 ---
+I use xxx whcmarket xxx WHC has gold, oil, index , others for mt4
+
+--- 帖子 #78 ---
+I need the stock indexes around the world.
+
+--- 帖子 #80 ---
+Are these live real money results? With demo it's quite possible to profit from methods with only few pips of profit but when using live version it's not at all so easy.
+
+--- 帖子 #81 ---
+I know it still is not all the indexes around the world - but you can get the DJI,DAX, SP500 and NASDAQ from xxx fxpro xxx through MT4
+
+--- 帖子 #82 ---
+Kurka, Are you always entering a position when all triangulations show the same thing, UP for all, Down for all or using only the consensus value and check with the entry? (consensus = MA of all triangulations) I made a little test for myself and found that using all triangulations possible for entry when they all allign to the same signal and consensus as target it's ok. When of course this is profitable so spread included here. I will try also instead of TP to close when one of the triangulations changes from up to down or viceversa. As for SL i think/haven't tested yet close when half of the triangulations changed. Please let me know if you tryed any of these cases. How did performed for you? Thanks, Victor
+
+--- 帖子 #83 ---
+Sorry for my stupid question, but i didn't understand about Are you always long USDCHF and short USDJPY in Desequilibrum ? or sometimes short USDCHF and long USDJPY
+
+--- 帖子 #84 ---
+Hi again, I attach here what i coded based on kurka's suppositions that the real price of a currency is the consensus one which can be calculated triangulating with main currencies: I did it for EURCHF because my broker doesn't have all kurka posted in the first post so i took just 1 pair and tested for that one. SO for euchf we can triangulate this: EURCHF AUDCHF EURAUD EURCHF CHFJPY EURJPY EURCHF GBPCHF EURGBP EURCHF USDCHF EURUSD So the price of eurchf in the ea i did is calcualted taking into reference, AUD,JPY,GBP,USD. The consensus is the ma of those. How it works: if 3 of 4 show the same and consensus also is alligned with them- ea will go and trade. Ea will close when an oposite singal will come. I think kurka did the same but i believe it is not right to close on opposite signal because market can be regulated back slow and we don't get the signal. (ex 2 of 4 go oposite,1 or 4.. after a fiew bars it's back but we haven't got the signal for back) Anyway the entry i think it's right, what i want is oppinions about a better exit if any interested in this strategy. About the colors in the top of the screen: Green - out of std deviation channel: should go up Blue - it's between std deviation: we don't care Red - out of std deviation channel: should go down. First price is real price: (Ask) - second consensus of the next 4. I used Ask everywhere and added or subtracted (spread+1) pips to check check if price is out of "spread range". Don't know if it's right but seems to show too manny buy signals lol. Mabe (ASK+ BID) / 2 instead? ... The transaction it makes it's only for testing purposes what you should look for is the colors/values in the top-left corner. Test on EURCHF- m1. p.s It might have logic errors/codding errors: this was coded in 2 hours and not tested more than 15 minutes , so please let me know if you find any. Please let me know what you think, Victor
+
+--- 帖子 #85 ---
+I will put on demo ... i saw only little set EA , very simple Thx.
+
+--- 帖子 #86 ---
+Tried to load it but I get a cross instead of a smily. Journal says EA loaded successfully and I get Old Tick listed in my Journal. How long does it take for the first trade to occur.
+
+--- 帖子 #87 ---
+I have tried the EA on IBFX and Velocity I have put it on the 1 min EURCHF Chart defaults vicEURCHF_m1ArbitrageEURCHFm,M1: zero divide What could be causing this? Thanks for attempting to create the EA.. Bruce
+
+--- 帖子 #88 ---
+Hi, The zero-divide or nothing to happen i got when i had no data loaded for any of the pairs the ea uses. I listed up in my message what pairs you have to have, if the broker doesn't support 1 of them you might get that zero divide: I use formul AB * BC = AC where for example CHFJPY * 1 / EURJPY = EURCHF so you don't have EURJPY loaded or in the broker symbols you get a 0 there and 1/0 =&gt; zero-divide. So try to load all those pairs and if you don't have any of them than the ea won't work for you. I use alpari and i have all of them here. The transactions are not important at this level they use a simple test rule which might not be the one kurka uses or not be the right one. (which i'm prety sure about anyway) The propuse is to see how the triangulations are calculated and how the consesuns is also calculated in relation to eurchf. You should see some texts in the top-left corner and colors changing. So, again: this is not a tradeable ea it's for testing purposes. Thanks, Victor
+
+--- 帖子 #89 ---
+About the settings, because it's a test ea i used a fixed Lots there, no MM coded just to test entry/exit. The other setting is SL: ea will place orders with no TP but for SL i placed there a number just in case something happens and ea doesn't monitor the trade anymore it will close at 50 SL. You don't have to change those things this is far from a working ea just a test for entry/close and idea of kurka. This was just for myself to see how the market reacts when more currencies "think" that one currency has to be valued lower/higher. But i've seen manny people were interested and i thought i would help if i post here my first test. If it goes well with 1 currency i might code the whole thing with all the list in the first post, will see... Anyway there are some things to be cleared for myself before and mabe others have ideas. Some of the would be: Are the calculations right? Thanks, Victor
+
+--- 帖子 #90 ---
+Z the logic is correct. I agree with your comment about not trading reverse signals, Usually the market just returns to equilibrium rather than reversing. . . I think a more logical order management would be just to take a pip as soon as you have it as a counter trend system or hold on to positions that agree with your fundamentals. I used it as my entry logic for yesterdays and todays trades with the EURUSD (in addition to my fundamentals which said long positions only) and closed 262 positions at a 100+ pip Take Profit, 34,729 pips in less than 48 hours has to be a record somewhere. I guess I should give some credit to the employment numbers that caused the jump too... Going to be a good weekend....
+
+--- 帖子 #91 ---
+I only get zero divide when trying to backtest the EA which would not work of course because you can't replay all pairs needed at the same time. My demo broker is Finex which offers all of the mention pairs still no trade.
+
+--- 帖子 #92 ---
+Kurka, There is also something that i've recently discovered which i don't know how you handle and would like to know, if you can tell me. If i use the Ask price the triangulations for ask are calculated, and i obtain some values. If i use Bid the values i obtain for the calculated currency are not in the spread zone of the initial calculated values for Ask not even near. So the triangulation for Ask and Bid are much more far between eachothers than real Ask and Bid values. In this case which one will can be followed? Always i will have a triangulated consensus ask value that is predisposed for showing BUY positions and a bid value that will show more often SELL signals. Or the negate: If using Ask it would be harder to see Sell signals, and for Bid harder to see BUY signals. Another problem - technical this time: If the EA runs on currency X and needs the values from currencies A,B,C if A,B,C changes X will not change. If X changes A,B,C values will be read. So at time T i might have a good signal for Buy or Sell but won't be found/shown by the EA because X was not updated by the metatrader even if A,B,C changed. This way you can fail to open new positions or fail to close when would be the time or close with loss a good position. RefreshRates doesn't solve the problem because Start is executed only when a new "feed" from currency X was received. If this cannot be solved i'm thinking of writing my own code that uses the packets metratrader switches on LAN with the broker server. This way it could be solved your other problem of checking some data from another website. So instead of using a platform i could make my own standalone exe that communicates with broker server and also with other servers for additional informations. Anyway have to see how it performs further, will see... Attached is a picture of problem 1 if anyone interested to see it. - check In the top chart is the ASK price triangulated and in the bottom one the BID - check the big differences. Tjpld: Forgot to tell you, this ea can't be backtested only forwardtested. Backtest anyway can't be done here i would need thick charts very very accurate.The trade is not essential at this point, it was placed there just for test there are bigger problems than that trade . Ok, Have a nice weekend, i wait the next week to play with it more. Congrats for the thread/idea kurka, it set me back to work.
+
+--- 帖子 #93 ---
+Somehow I dont get a smiling face. Am I missing some Dlls?
+
+--- 帖子 #94 ---
+Zmax, Yes.....Found the problem.... not all currencies present... Switch to FXDD and now no errors..... but have to wait until market open for it to work.. Thanks. Bruce
+
+--- 帖子 #95 ---
+In an EA like this you have to use a continuous loop in order to have the correct pricing at any given time. I loop my Start function like this.. Just make sure that all your functions dont close the loop or return the start(). PHP Code int start () { while( IsConnected ()){ TickStart = GetTickCount (); //Count milliseconds for each loop for code optimization CheckBid = Bid ; // set Bid to correct value for calculations for upcoming cycle MarketHours (); //Check to see what the market conditions are if( OrdersTotal () &gt; 0 ){ ManageOrders ();} // Look for open orders and manage them Triggers (); //Check to see if there are any new order opportunities ChartComment (); Sleep ( 10 ); } return( 0 ); } Also when considering Bid, Ask spread in your calculations you have to validate the price each way for the currency pair that you want. Example if you looking for signals on EURUSD according to the AUD. a buy signal would use ASK("EURUSD") &lt; BID("AUDUSD") * ASK("EURAUD") But a sell signal would use BID("EURUSD") &gt; ASK("AUDUSD") * BID("EURAUD"). Hope that helps you out... Finanaly got someone here to discuss and bounce ideas off.
+
+--- 帖子 #96 ---
+If you take three charts with the same EA, and use global variables, I think you haven't the problem.
+
+--- 帖子 #97 ---
+I don't much about tri/arbs... but the banks are paying big bucks if you know anything about this.... check any job hunting site and you will see this, so there has to be something there if they are paying £200K basic, plus bonus.
+
+--- 帖子 #98 ---
+Zmax, are you able to make a indicator? thank you. And thank you Kuka too.
+
+--- 帖子 #99 ---
+Post a link ...
+
+--- 帖子 #100 ---
+Kurka, Thanks for the idea kurka i was thinking more to what SwingMan said of using an EA on many charts which will save any modification of price somewhere and the one that runs on base curency to use that info. (global variables SwingMan said) Anyway your idea seems to be easier to implement but i think it will crush metatrader if i don't close somehow the loops when another thick comes. I think i will use the volume for this: i will save static volume when entering the loop and when it changed it means a new thick was received and close the loop, will test some more to see if it works. What i want to do is to keep only 1 loop at a time. Are you using GetThickCount for that? Basicaly something that changes when new thick comes has to be used, GetThickCount also, should be ok i think. Another thing: taking positions only in the direction of your fundamentals i think it's not very good because market can have desequilibrium in both sides of the consensus, at different moments of time, even if the main trend is in one direction. Taking positions only in one direction because of fundamentals, might loose a lot of good positions. After all we are targeting 1pip in 80% of trades, or something like that. Anyway the TP seems to be clear, 1 pip for all trades and more for those where market sais it is still desequilibrated and will go more. For SL i think the opposite could do it for now but i'm not very sure about. Also taking fundamentals into consideration(indicators/indexes or other stuff) won't change the pure idea of trading the market based on what "Market Thinks"? A desequilibrium is something that happens all the time and it's regulated back because of logical mathematical reasons but fundamentals are speculations. About MM for my own case i'm thinking of something very hardcore: I'll test it for a week or so and see which was the biggest drawdown i had for a given pair, i add a fiew more pips for margin and use the maximum lot availble taking those things into consideration and the current equity. This way the profit will increase exponentialy. It might break the account fast but it might also grow it exponentialy fast. I will do it anyway in demo . Basicaly i will agree to see an X% drawdown, if the drawdown i see on the testing week is smaller, i will increase the lot size until that drawdown will touch my X% of the account size. I think the safest thing would be to see which is the biggest drawdown in pips for a period of time,...the bigger period the better and use that info and the current equity to obtain the lot size. The idea is to know that the drwadown won't go more than X% and knowing that i will use my maximum lot size for that to happen. Please let me know what you think. Also, instead of using the whole equity for this drawdown touch thing i can divide the equity in a fiew parts and play with one part at a time as it would be the whole equity. If it doubled i take 25% and give to other parts and so on. Can be done many things if you know that the ea it's going on positive side . Giraia_br I can make an indicator but it's not profitable, this strategy aims most of the time for 1 pip so trading manualy using an indicator would be a had ache. Anyway you can use the colors the test ea draws to trade manualy if you realy want it. Thanks, Victor
+
+--- 帖子 #101 ---
+This tool may provide a useful perspective: http://www.forexfactory.com/showpost...05&amp;postcount=5 A given triangle's trendiness (or lack thereof) can be visualized at an interesting scale. It looks like it could be useful in figuring out appropriate SL &amp; TP levels for larger scale trades. Thanks for the interesting thread, guys!
+
+--- 帖子 #102 ---
+There are already thousands of arbitrage hedge funds. Arbitrage is one of the oldest ways to make money. Remember Nick Leeson. And that's a long time ago. Banks don't need people that teach them about arbitrage.
+
+--- 帖子 #103 ---
+Kurka said &gt;"Example if you looking for signals on EURUSD according to the AUD. a buy signal would use ASK("EURUSD") &lt; BID("AUDUSD") * ASK("EURAUD") But a sell signal would use BID("EURUSD") &gt; ASK("AUDUSD") * BID("EURAUD"). My way of thinking is if the markets were efficient then BID("EURUSD") = BID("AUDUSD") * BID("EURAUD") and ASK("EURUSD") = ASK("AUDUSD") * ASK("EURAUD") so when entering a long EURUSD position you want the ASK("EURUSD") - 3 pip &lt; ASK("AUDUSD") * ASK("EURAUD") 3 pips for: 1 pip to cover commission 1 pip to cover the spreads . (so only at high volume times otherwise you will soon be toast) and 1 pip for profit but since the eurusd has the highest trading volume i would expect it to have the most inertia so i would assume that it would be better to trade the AUDUSD or the EURAUD instead but the tighter the spread the easier it is to make a profit so i would assume the EURGBP would be the best pair to trade with this strat steve
+
+--- 帖子 #104 ---
+this is the way i understand this but i was afraid of make a stupid question. what i think is that when it happen (using your example what is what i can understand) banks that have 0 cost to trade will enter their big lots trying to cath 1 pip and doing that price never will go -3 maybe. But Kuka's EA works so i can't understand this.
+
+--- 帖子 #105 ---
+Ah mistake, I understand now, you don't return from start or from the loop and keep it continous. Yeah my mistake i thought you make a new loop each time start is executed and have to somehow get rid of the other loop. Got it now, thanks Kurka. Thanks, Victor
+
+--- 帖子 #106 ---
+Zmax. Should i go long when at least 3 turn to green. Correct? i understand that need to be Billy the Kid there will be a newer version today? many thanks.
+
+--- 帖子 #107 ---
+That version there only has Ask,Ask,Ask so i think it's not correct, anyway try. It will show you a lot of long signals. About new versions, i'm testing,trying myself and also very busy with my work so if any i will upload, if not...not . Thanks, Victor
+
+--- 帖子 #108 ---
+Here you go, if you get the job let me know... 10% finding fee lol... http://www.jobserve.com/WFC96BD42C55EC242.jsjob
+
+--- 帖子 #109 ---
+Still can't get the EA to work. Not even with FXPro which offers nearly every pair out there.
+
+--- 帖子 #110 ---
+Did you press the expert advisors button in the toolbar to make it start?
+
+--- 帖子 #111 ---
+Found one more tricky thing: if i use for example this pair nothing has to be reverted because we have the pairs as they are written and the formulas are those: buy: ASK("EURUSD") &lt; BID("AUDUSD") * ASK("EURAUD") sell: BID("EURUSD") &gt; ASK("AUDUSD") * BID("EURAUD") but when using something like: ASK(EURCHF) &lt; BID(1 / CHFJPY) * ASK(EURJPY) i think it should be reverted so: buy: ASK(EURCHF) &lt; ASK(1 / CHFJPY) * BID(EURJPY). If not doing this we can get buy/sell signals at the same time and we are not equilibrated on the reverted pairs. Is that right, can anyone confirm? You can aslo see from the picture attached: all non-reverted pairs hav the BID &lt; ASK which is normal but for jpy it's inverted so i think they have to be also reverted.
+
+--- 帖子 #112 ---
+I think the Bid and Ask are like this.. For Buy Signals CHF/JPYAsk EUR/CHFAsk (EUR/JPY)Bid EUR/CHFAsk (EUR/GBP)Bid (GBP/CHF)Bid EUR/CHFAsk (EUR/USD)Bid (USD/CHF)Bid For Sell Signals (CHF/JPY)Bid (EUR/CHF)Bid EUR/JPYAsk (EUR/CHF)Bid EUR/GBPAsk GBP/CHFAsk (EUR/CHF)Bid EUR/USDAsk USD/CHFAsk This is all very interesting... thanks guys for sharing.. Bruce
+
+--- 帖子 #113 ---
+Bro , i already running EURCHF 1 minute for 5 hours... didn't take any trade ... i already load pairs EURUSD , USDCHF.
+
+--- 帖子 #114 ---
+Forgot to mention; Then plug them into the equation, but remember to look carefully at the equation that Kurka shared... remember that the equation results should be close to the live Ask or the live Bid depending upon if you are solving for a Buy ASK or a Sell Bid. Verification$/ Cross$ * Base$/ Verification$ = Base$/ Cross$ Bruce
+
+--- 帖子 #115 ---
+brucech, This is the way i calculated the composite prices before but with the formula used by kurka and with that mention of switching ask with bid when we have reverted pairs i get a composite price and all components at equilibrium &lt; in spread zone. So i believe that statisticaly the market should be at eqilibrium 90% of time and 10% out of it so we can profit only when it's desequilibrated. Using ask,ask,ask or bid,bid,bid i got desequlibrated results all the time so it can't be true, i think. So i'm looking right now for what i want to see, an equilibrated market most of the time and try to get the small desequilibrations when the appear. The picture below is after i applied the "kurka formula" and "inverted kurka" for inverted prices. It's all blue so it's equilibrated, when the consensus and more than 3 signals change it should be a good entry signal. Chou: The pupose of it is not to trade it's for me too see the equilibrium in the market for a given pair so if it shows the colors in the top of the screen than it works, if doesn't show than i don't know what to say check the "expert advisors" button, check "allow live trading", make sure you have all the pairs.... I coded it for myself and it did what i wanted to do now i'm not using it anymore. If you want to use it and if it's ok for you use it... Also that is the ask,ask,ask version so from my oppinion it's not right, if you think it right use it but you have to trade manualy. I even don't remember if it trades or not, anyway as i said the purpose is to show those colors and text in the top of the screen NO MORE THAN THAT!. What happens now to me it's exactly like someone found a bottle with juice on the street and went to the market and told the vendors that the juice is not good...I can't make anything if the juice is not good, for me it was and after i drinked a bit i threw the bottle on the street. One more thing: It works on EURCHF 1min i think i said that. Thanks, Victor
+
+--- 帖子 #116 ---
+Thanks, Victor, for that thought. That indeed is something to consider. Bruce
+
+--- 帖子 #117 ---
+Here is my version (it's an indicator). It currently uses close price because historical ask/bid prices are not available and I wanted to have visual of the correlation. It tries to find all possible currency pair combinations that include the current pair as an opponent. Counter is the list on what currencies the program tries to use as validation currencies. If you want to get validation against one currecy only, just give one currency as the against parameter. I'll probably add live ask/bid price lines later from the moment the indicator has been opened (Sorry source not available and there probably are bugs) this and against are the currencies that the line will be drawn for, if they are left empty the program automatically uses the current pair countercurrencies for example eurusd, this=eur against=usd
+
+--- 帖子 #118 ---
+More live testing .... Ok I started testing with a few new parameters at the begining of this week about 28 hours ago. Parameter 1 = hold on to trades when the market is trending. We have had 3 strong downtrend's. 1 downtrend got stopped out, EA froze up with a stack overflow error, positions would have otherwise been profitable current price is 1.5590 stoploss was 1.5660 . Parameter 2 = Scalp when the market is flat. This mode just takes positions for a 1 pip profit until the market decides which direction to move. In this case mostly short positions. position sizing is equal to the sq root of Equity * 500
+
+--- 帖子 #119 ---
+General overview of the trading activity
+
+--- 帖子 #120 ---
+EA in Action
+
+--- 帖子 #121 ---
+Kurka, This is what happened to my test ea monday. I got a nice down trend but the entries generated by the "equilibrium rule" were right before a retrace. I've seen you haven't used a sl so you got the whole trend but i used one and i got a kick . Shouldn't we use a sl? After all using fundamentals for trend determination is just a speculation and trading without sl could result in a disaster if trend reverses. Take your picture for example: after you entered those sell positions the price went up and reversed after a fiew bars to the trend direction, but if trend wouldn't be reversed there, you would have destroied that account. (a lot of sells in an up trend) Another thing which i've seen my ea does and have also seen yours seems to do also: if i get a signal 3 times in a second the ea enters 3 times, is that wise?(basicaly we average down if doing so and increase the risk) If we aim for 1 pip than that should be ok but taking into consideration that no sl used than it's not. I will try to test it with 1 trade/bar if signal there and find a sl that makes me happy. I want to see the same hit ratio with a relative small sl so that i can calculate the RR. Ex: 5 pip sl, 1 pip tp and winloss ratio 10/1 or something like that, you know what i mean.... Edit: I've also seen that sometimes when i get a desequilibrium and enter, my position will close in 1 second or so, price jumps back to equilibrium in no time. (bank manipulation/correction i think) but sometimes not. What could be the reason of that? Sometimes they correct the price and sometimes not...? Thanks, Victor
+
+--- 帖子 #122 ---
+This is "the kick" i was speaking about : The red bar shows where the positions were opened and after that you can see a retrace until high 1.6117 but my SL was at 1.6112, 10 pips higher than the entered position.... I played the same steup but on EURCHF m1. I thinking of increasing the SL, 10pips is too small anyway or use an opposite signal to exit on both lossing position/winning one. But opposite signal taking doesn't reflect the equilibration,desequilibration theory... Kurka how do you close your positions i've seen they don't close at the same time as it should if you would follow an opposite signal. How will your positions close in case of loss? (opposite signal?) Image attached. Thanks, Victor
+
+--- 帖子 #123 ---
+Victor, I am wondering about orders starting from below the blue 11633411... all six orders were opened at 16:00..... only once above this does the statement show this happen and that only shows two orders at 11:10 .... Can you explain this? Thanks. Bruce
+
+--- 帖子 #124 ---
+If you are interested, I can give you an access to an FTP server, so you can post the result with a hot link. [color=#0000ff]Info@strategybank.co.il [/color] Regards,
+
+--- 帖子 #125 ---
+brucech, It opened 6 orders beause it got 6 signals one after another in on the same bar. I explained in my previous message that this could happen and that this seems to hapen in kurka's ea too, i think. Thanks, Victor
+
+--- 帖子 #126 ---
+Hmm, In this picture you can see what trades occured today on EURCHF m1. I got 4 buys but right after the signal i a retrace was recorded, what could that mean? Mabe i'm going in the wrong direction and we could exploit the retrace instead of the move itself.. The buys are market in the picture by 4 vertical green lines. Thanks, Victor
+
+--- 帖子 #127 ---
+Victor, You mean during this trading period the EA only found 4 desequilibration buy signals? And that after each one of those 4 trades from the 4 desequilibration buy signals, that there was a retrace? hmmmm.... From the entry to the bottom of each retrace was about how many pips? Then maybe the EA could put in a pending buy X pips from the signal so it would be within the retrace pip total.... Just a thought... Bruce
+
+--- 帖子 #128 ---
+Zmax, I forgot to ask... Could you give us examples of desequilibration consensus that the EA took trades on those buys? Bruce
+
+--- 帖子 #129 ---
+Zmax, As far as the entry's go for testing I am allowing a new position every time I get a signal. I want to see exactly how many signals I receive so that I can determine the best way to eliminate the bad ones. I will pventually change this to a stepped up averaging rule, allow 3-6 positions in one direction at different levels - say 3 pips apart. Exits are now based on 1) end of a trend 2) scalping rules, 1-3 pips TP 3) support and resistance levels... I abandoned the reverse signal theory a while ago. I dont know why all my positions arent closing at the same time. Do you know how to make this happen (close multiple orders at once). Also I am using a stop loss now based on a 4 hour support and resistance level. usually 50 or so pips. Im also finding it allot more important to "weight" certain validation currencies during different times of day. (still trying to get the stck index indicator to work right)
+
+--- 帖子 #130 ---
+brucech, Yeah only 4 desequilibration for eurchf in about 12 hours of testing today. The desequilibrations are marked with green lines in the pictures i've uploaded before. EA entered based on kurka's formula and inverted kurka formula for the inverted pairs. Placing a pending order i don't think it's a good idea because i don't know how big the retrace is and if i would know that it happens always i will trade the retrace always and also trade the main direction at the same time. Kurka, Lol i tryed support-resistance for target but don't know what to say... I've seen that a good target could be for buy: break of "blue line" support from support-resistance indicator attached and for a sell position: break of resistance line from the indicator. Anyway i've also seen positions stoped early with fiew pips from a large move, so will test more. Mabe a s/r on higher tf. Thanks, Victor
+
+--- 帖子 #131 ---
+For closing all orders at the same time you can: move for all those orders sl to the same place. If price hits sl, all will be closed at the same time. Using closeOrders(...) you can't do that. I was thinking of moving the sl under suppor/resistance of that indicator i attached earlier. If the line is broken all the orders are stoped at the same time... Thanks, Victor
+
+--- 帖子 #132 ---
+Kurka, There is some good info here that might help with weighting certain pairs during different sessions... http://www.cyrox.com/forum/index.php?topic=25.0 Most of the data is later in the thread, posted by "coolo".
+
+--- 帖子 #133 ---
+Ok so I changed the algos to calculate the consensus pricing based on MA's instead of real pricing. (High+Spread for Ask and Low for Bid) This basically widens the gap between overbought and oversold equilibrium pricing by a few pips resulting in fewer more profitable and less risky trades. Here is a screen shot of the live testing for the past few hours on EURUSD...
+
+--- 帖子 #134 ---
+!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--- 帖子 #135 ---
+Hi Kurka Fund, I have heard people talk about different price feeds for live and demo accounts. I was wondering if you had tried this method on your live account and if not are you anticipating any problems.
+
+--- 帖子 #136 ---
+Kurka, I don't understand how you get so manny trade opportunities in a day or so. I get 4-8 day and no more. Will add today the eurusd pair to see if that one is much more desequilibrated than my eurchf. Thanks, Victor
+
+--- 帖子 #137 ---
+Hi Zmax, If you look back to post #35 Kurka explains the steps he takes to get trade signals. He mentions calculating correlations and indexes. I think he uses these values along with the triangular relationships to place trades. I think its a very complicated process..... Do you have any idea what those steps involve? Cheers Gosko
+
+--- 帖子 #138 ---
+Gosko, Yeah i know how he corelates the currencies and also how to enter/exit based on that. Indexes are used for main trend determination i think, i don't use that because i believe it's speculation to say that if dow jones goes down - dollar will do the same for x minutes/hours from now. Anyway i use it for eurchf not eurusd, mabe eurusd generates more signals. By 6-8 signals/day i mean 6-8 normal entries not how manny times the ea will enter. My ea enters about 50/60 positions /day but there are only 6-8 different signals. His ea does the same i think, read the page before thisone. I will make mine to enter only once /bar i think it's better so. That corelation 35 to 36 for me is 1 to 4 because i use only 1 main currency and correlate with 4. He uses 35 and corelates to whatever the matches. Thanks, Victor
+
+--- 帖子 #139 ---
+Hi Zmax, I suspect that he's getting more signals because he's using "35 to 36". I don't have direct experience with these consensus calculations in an EA, but I've looked at a number of multipair measurements and I have the sense that those extra inputs are giving his system more actionable data to work with. I don't know if that could account for the entire difference in signal frequency, but it could be part of it. Another thing that comes to mind is if you are using standard deviation(s) of the spread as a filter as Kurkafund mentioned, perhaps using a smaller amount, ie., even a fraction of stddev, it would let more signals get through. (But it could also reduce your signal quality too...) Good luck!
+
+--- 帖子 #140 ---
+Hi, This is what the ea did today. The green vertical lines show where the ea opened (4) buy positions. The yellow dots showed where those positions were closed. (position 1: 2pips, - position2: 7pips, -position3 10pips) I use as stop for an order the support/resistance of the support resistance indicator i posted yesterday. The last position was weird, it was possible to take that scalping pip because the market was flat...but where could the ea know that thing? So it didn't take the point (at that white circle in the picture) and currently is -18 pips. The initial sl used is the resistance/support for h1 but i think i should change it to m1 because we acctualy try to hit a fiew pips and having a big sl is not a good idea i think. Also the ea opens only 1 position/bar. Technical, I have a fiew positions because i use 1 position /bar not all positions that the ea will open if each signal would be taken. Spread is included because i compare bid with ask, and ask with bid so no problems with that. I do the calculations for eurchf and all the composite pairs that can create eurchf so i think my calculations are right i think. Now what i've discovered so far about this subject: Sometimes the price goes direcly up if the consensus is up, sometimes makes a small retrace and goes up, sometimes not... So my conclusion: 1) I don't have enough trades so that i can make a statistical rule for this triangulation theory or my calculations are somewhere wrong. 2) The triangulation doesn't work as expected so the theory is not good. Because brokers/banks can manipulate the prices the way they want. If anyone understands the concept (i think i understood it ) and wants to check my calculations and give a second oppinion about this triangulation/consensus please let me know. I will give you my ea so you can test /check with it what i say here. But please don't ask me to send it and after tell me you don't know how to use or ask me what it does or things like that. I will post it on the thread if kurka agrees, because this is his thread and don't want to offend him by posting a "workable" version. Please let me know what you think, Thanks, Victor
+
+--- 帖子 #141 ---
+Everyone, What happend to everyone? I had to be away for over a week and I get back to find that this thread has gone quiet. Bruce
+
+--- 帖子 #142 ---
+lol bruce, that's standard forex factory operating procedure!
+
+--- 帖子 #143 ---
+check post number 1 - the author got tired of the lack of constructive input I think. The number crunching and programming was way out of my league so all I could do was lurk - interesting concepts I thought
+
+--- 帖子 #144 ---
+Maybe he found a way to make it work effectively and is on his way to becoming a multimillionaire and wants to hide any remains of his strategy. Just a thought.
+
+--- 帖子 #145 ---
+I use 3-way hedge Carry Trade and it is much better than the "2 way, 2 broker carry trade" that most know. As you may not know it, some brokers charges more or less swaps on certain currency pairs such that, if you hedge them 3 way, you get positive swaps daily. currently, there are 2 brokers out there where you can arb their swaps. Dont ask me which or someone will kill the goose that lay the egg.
+
+--- 帖子 #146 ---
+Interesting BK.... apparently you have researched this to the Nth degree and found something that just about everybody overlooks. Love it.
+
+--- 帖子 #147 ---
+For more information on this 3-way hedge carry, I am posting this screen shot, notice the highlighted pairs; it is showing a positive swap of $25 a day if you go Short GBPJPY, Long NZDJPY, and Long GBPNZD. The risks is the cost of the spread and over time, this spread cost is overcome by the ever accumulating daily swaps. The beauty of this 3-way carry trade is, you dont have to move money from one broker to balance the accounts as the hedge is always balanced within the same broker. Monthly ROI (excluding cost of spread) ranges from +5% to +20%! Obviously, the pairs I trade is not in this screen shot *For info on 3-way hedge (or arb), dig up on FPI (Fractional Product Inefficiency)
+
+--- 帖子 #148 ---
+can u explain please, it also shows a -41.
+
+--- 帖子 #149 ---
+If you go Short GBPJPY, Long NZDJPY, and Long GBPNZD, you get $25 a day. If you go Long GBPJPY, Short NZDJPY, and Short GBPNZD, you get -3\41 as shown. This carry chart is broker specific and does not apply to ALL brokers. So dont do it unless you fully understand FPI.
+
+--- 帖子 #150 ---
+There are several Triangular Arbitrage Calculators available. I have one coded in VBA that runs an automatic mode as well as a manual. We also run a black box application that trades on multiple FIX API compliant price feeds.
+
+--- 帖子 #151 ---
+so to enter the trade is not only calculate the spread with 3 pairs wich are a neutral position? Meaning, a average joe like me could not trade this? and this broker is reliable? thanks in advance
+
+--- 帖子 #152 ---
+Is there a free online calculator to determine market neutral positions and appropriate lot sizes for FPI?
+
+--- 帖子 #153 ---
+For anyone who is interested, there is a very good post about this topic here: http://forum.vamist.com/blog/theecon...p?showentry=10 Unfortunetly, that thread died about a year ago. I would love to discuss this in more detail with anyone who has experience, we can also do this in private via PM or email.
+
+--- 帖子 #154 ---
+Hi, How manny days you have to keep the circle open to get positive? (spread-cost to be overtaken by daily swaps?) From what i've seen in your picture if you take the second entry GBPNZD...you would wait less than for the +25/day. (but basicaly long term +25 would overtake +22 and a fiew missing days) Anyway kurka's strategy discussed before it's not about that, i researched all the summer the subject and got to the point where i trade only spikes predicting the direction and some sizes(targets) before happening. This is much more profitable than swap collecting . It's interesting how those borkers can offer money to people, actuly it's their money what you collect . Seems to be a problem for that broker so "golden goose" as you say. Thanks, Victor
+
+--- 帖子 #155 ---
+Yes. You are basically taking the broker's money. This is why BK does not want to share what broker he is using (which is understandable). If everyone jumped on this, the broker would figure it out and correct their swap rates. Side note - interesting story: I work at a large university here in the US. I was researching "covered interest arbitrage" and swap arbitrage and found several articles in financial publications about this topic (mostly from 10+ years ago). One of the authors of the paper turned out to be a faculty member in the next building to where I work. This guy has his PhD in finance, worked as a currency trader in banks, hedge funds, etc. (he knows his stuff). Anyway, I spoke to him briefly about this topic and he just laughed at me. His point was that its near impossible for any retail trader to make money in the currency markets. He said if you do make money, you have found a "glitch in the system" that will eventually be exploited to the point where you can no longer make money. This is something I have always believed and it was scary to hear a professional echo this belief. So congrats to Burger King and anyone else who has found a way to "beat the system". Enjoy it while it lasts! I feel very sorry for everyone who is trying to make money using moving averages and all these technical - price based indicators provided by your broker. Do you really think they would give you the proper tools to take their money? Its like a bank giving you the access codes to their alarm system. LOL
+
+--- 帖子 #156 ---
+that is what i am thinking. Could this lastmor than 3 months? I Think sooner Bugerking account grows too much they will have a look at his statements and maybe they will not pay him... no?
+
+--- 帖子 #157 ---
+Hi, I wanted only to ask a question, the thread is almost dead, hope anyone reads. I worked all the summer for this triangular arbitrage system kurka presented and i feel i'm very close to truth. I trade 99% only spikes and i feel that still there is a problem which i haven't found because it should be 100%. What i want to ask is: Is there anyone that understands everything spoken in this thread and is interested to trade this informations and also wants to see my work? I'm out of time and need more live testers,more opinions, this system works only live btw. (you can't backtest) If there is interest we could make a group or something and continue with this further. I can get the direction of the spike but the size it's aproximated by the triangulations and usualy is 1/4 - to 1/10 of the actual spike size so that would have to be improoved also. So if anyone interested please contact me. I basicaly want to see people that participated in thread discussion. Thanks, Victor
+
+--- 帖子 #158 ---
+Hi, Yeah i know, there are lots of "golden egg gusses" but the problem is that it might change the swap before i have payed the cumulated spreads . Also some of those gusses change it on daily basis some ...not. Those that are more stable are not so profitable. In my picture i made a simulation for 300$ acount and the daily return. Thanks, Victor
+
+--- 帖子 #159 ---
+ZMAX: Let me ask you a question: are you trying to execute trades on the entire ring? If so, this is going to be impossible with a retail broker. If I understand correctly, Kurka is only trading one pair out of the entire ring -- basically trading in the direction of the "inefficient" pair. Is that what you are doing? If so, it sounds like you're on the right track. Also, in reading your Post #158, if you are closing out your trades before the end of the trading day, why are worried about swap (unless you are trying to collect the swap). Anyway, I sent you a PM. CA1962
+
+--- 帖子 #160 ---
+Hi, I'm trading only the ineficient pair. Speaking in FPI terms 1 ring is 1 triangulation here. I have many triangulation that have 1 comon pair, that is the pair i'm calculating the value for. About the swap that's something else it's not related to this strategy i only replayed to burgerking. Thanks, Victor
+
+--- 帖子 #161 ---
+Yes I am using this style in my live account . Works well. You can make money while hedged
+
+--- 帖子 #162 ---
+Could you post your indicators or direct me to where and find them thank you
+
+--- 帖子 #163 ---
+works well until broker X sees that they are losing a crap load of money and re-adjusts their swap.
+
+--- 帖子 #164 ---
+Those rates are based off the country's interest rates. Can't be changed overnight "The banks decide that. They use a complicated formula that i'm not familiar with. I know that the interest rates for the countries plays into it, as well as demand for the currencies. Our liquidity providers tell us what to charge or pay on the swap" "They do not follow a specific schedule. In the past they have gone about 6 months without a change then changed twice in a period of 2 months" Quote from broker XXXX
+
+--- 帖子 #165 ---
+Thats good to hear. This post scared me http://www.forexfactory.com/showthread.php?t=107255 and this article on cnbc http://www.cnbc.com/id/26886826 Seems the recent times are having a negative effect on swap rates and some brokers are naturally passing it on to their customers.
+
+--- 帖子 #166 ---
+about the swaps Bugerking gave the best answer. the worst think can happen is not the end of positive spreads but the end of higher leverage. Is it possible or i am paranoic?
+
+--- 帖子 #167 ---
+What does Swap has to do with triarb?
+
+--- 帖子 #168 ---
+You know, as an trader, analyst and software developer, I cringe over the multiple responses of people looking to do the very same thing. Things that have been done for years. Triangular arbitrage is available, but you have to have the right connectivity. Im certainly not talking about retail connectivity either. Credit lines, and multiple bank feeds are what create the opportunity to use the methodology. Yes you have to have the right equipment as well. We use a 8 Core 3.6 Ghz dual CPU. We also have a black box to complete the trades. But just so you know.. You can trade correlation with a broker like Oanda , but if you know how, you can ALSO trade triangular. Completely, with anonymity. Get your trading right, quantum analytics will bring out the logic that shows you what to do and how to do it. 99% of the participants here dont yet get it. By the way... you cannot do it through GUI, it has to be an independent API fed box.
+
+--- 帖子 #169 ---
+To those who are running this (or modification of) system now, how is the performance in this market environment lately?
+
+--- 帖子 #170 ---
+Any form of arbitrage relies on volatility. I am assuming you are familiar with the current markets status quo...Its a black box.. not a modified application.
+
+--- 帖子 #171 ---
+Yes we run arbitrage, linear and triangular.
+
+--- 帖子 #172 ---
+Ok, I’m new here and this will be my first post. After some time going over the triangular arbitrage idea, I developed a little system that runs in an old beat up laptop with XP and Excel 2003. It communicates trough the Fix Gateway and is able to place up to 4 confirmed combinations (rings, 3 legs, etc.) per second. It calculates more than 100 currencies real-time and places combinations with positive results automatically. Basically I start the system, sit down, and watch it taking decisions for me. The only input I have to do is when the orders get confirmed in negative do to slippage (normal market movement, latency, last look, etc.). The only problem I have so far is what to do with this thing? I have been banned from couple of brokerage houses for many reasons and the few others lack of proper liquidity providers. Sorry Metatraders real triangular arbitrage does not work in those types of video games platforms. Don’t get mad, arbitrage is a function of exchange not trade! I don’t leave positions open or care about interest rates. I’m only looking for the price discrepancies. I hope somebody has a good idea! The only one that can say that triangular arbitrage is a risk free investment is someone that has never done it.
+
+--- 帖子 #173 ---
+Hi, Cwitts do you send market orders only? I know there are ways to send limit orders (that guarantee the price) and you don't get slipped, do you use any of these?. Do you trade the pure ring A*B = C? With market orders you are pretty much screwed because if 1 single order fills at a crap price the whole ring dies.
+
+--- 帖子 #174 ---
+Mr. cwitts..Four trades per second?? You need to be a bit quicker than that, more effectively, in the Real market you need to have performance metrics like below this in order to successfully trade triangular arbitrage. Four trades per second will deplete your account on spread alone, not to mention that once you are in the real market and not through a mousetrap broker you will have commission expenses on top of your latency. Be sure you have the capability to net your trades and not have to reverse them either. FYA (for your advice) make sure your old pc can handle multiple price feeds through multiple direct connects in a data center, not remotely through internet. It doesnt work. Sorry to dissapoint you. Also, your application also if using a standard FIX Gateway/engine, and you havent spent atleast $ 10,000 on a ultra high frequency engine, then your efforts are in vain, as the traders who trade triangular will get to EVERY trade before you do. FYI.. these are REAL performance metrics and solely for our triangular arbitrage module. 16.00.10:765: Triangular Arbitrage END (0 ms) 3298 times &lt;1ms 15.57.09:328: Triangular Arbitrage END (1 ms) 94 times 16.00.04:328: Triangular Arbitrage END (2 ms) 30 times If your trading Linear arbitrage you should be sure that your performance is well below this. I wish you the best of luck, contrary to what it may sound like, just offering a bit of advice... as unless your able to cough up rather large expenses an old PC wont handle the computations.
+
+--- 帖子 #175 ---
+@Mr. Zmax I’m not a fan of FPI. I just went through the whole Kreslik thing two days ago and found some incorrect premises that perpetuated the search for a sustainable FPI practice. On the other hand I rather use market orders and if they slip they slip. I rather realize my loss immediately and place new combinations than to dwell on open positions waiting to be filled. For me FPI is another way to buy low and sell high. I might be wrong. @Mr. Rockshore Like I said earlier, I’m new in these types of forums. But one of the things I have notice is people criticizing others and then asking them how they do it. I think you are not one of them, because it seems like you already know how to do Triangular Arbitrage and you won’t gain anything from bashing my technique, right? But I’m going to level with you. I can place thousands of trades in a second, that’s a given and I don’t have to make a complex system to do that. I need to clarify you, that four combinations (rings) per second are not the same as 4 trades per second. Each combination is a Triangular Arbitrage opportunity in itself with the profits deposited into my account. Each combination needs to be calculated, executed and confirmed for others to be placed. When you refer to spreads depleting my account I can only imagine that you are implying that I am trading FPI, but no, I’m doing Triangular Arbitrage. The more feeds you have not necessarily translate into profits. Obviously if you are just measuring the market, the more feeds you have, the more price discrepancies you will find and the happier your hopes and dreams are going to be. But when you start executing with real money you will bump into slippage, delays, latency, last look and other well known problems. Then you will ask yourself, why in practice I have so much arbitrage and why I get so much slippage with real money? Simple your data feed does not reflect the executable prices of the real market. That’s when probably you decided to create an arbitrage calculator for everyone to use. My strategy is much simpler. With a DSL connection I can connect to Currenex with almost no delay through FIX. Actually, from the many trades with slippage none, I want to be clear, none, have been due to connectivity. I analyze and place my orders in fractions of a second and my codes are so simple that can run in my old beat up laptop. Trust me to avoid slippage we thought of doing a collocation in NY, but it was not even necessary. I had to strip my algorithm from useless calculations to make it work more efficient. My best guess is that behind all the layers of code you are using to filter and process data, you need to blame connectivity for the delay you are experiencing. It seems a little simplistic to think that for $10,000.00 I can solve the problem of traders getting before I do. My system gets what it sees in real-time. I know that I don’t have access to the best prices and I only get to see my broker’s liquidity, but I assure you the other traders doing arbitrage are not my problem. As a matter of fact I thought you were one of them. I exchange money. I don’t open rings and wait for the market to improve to close them. I execute combinations that are settled T+2 and then the money is ready in my account (the way it should be). They are self netted and I don’t have to close any positions. Quote: “ FYA (for your advice) make sure your old pc can handle multiple price feeds through multiple direct connects in a data center, not remotely through internet. It doesnt work. Sorry to dissapoint you.” Two things from your comments: Multiple direct connects in a data center sounds like home made slippage. Lots of price discrepancies (arbitrage opportunity) but slippage and the other don’t mess with my old laptop. LOL. I don’t use it for the market anymore but is still around! PS. I don’t trade play money.
+
+--- 帖子 #176 ---
+Hi, I also tested on a FIX broker in this way: Starting with let's say 100k (test lot) SELL EURGBP - 100k eur* EG.bid(0.90865) =&gt; 90865 gbp SELL GBPUSD - 90865 * GU.bid(1.50125) =&gt; 136411 usd BUY EURUSD 136411 / EU.ask(1.36397) =&gt; 100010 eur So i placed 3 market orders with sellGB(100k) sellGU(136411) buyEU(100010) and i should have had a profit of 10eur no? But what happened is my price changed 1 pip on EG,1 pip GU and + commisions and i got -10eur lol. So i thought there is no way doing this sending 3 market orders all at once. And you need a strategy for placing the orders, sending 2 orders first than closing them with the 3-rd and other things. (this way it worked) Also, CX is a crap broker from my point of view. There are banks("liquidity providers") like CBS and others that have unlimited time to confirm a filled trade - ex: you bought from them and they wait - if price is going down - you get a reject if price is going up you get a fill (lastlook overused). If you have the bad luck to get a lastlooker on the counterparty you loose for sure. So overall you were positive or more negative on cx lol? Maybe your pool there doesn't contain CBS, i tried the same thing and was always slipped - i had to look for +5pips profit rings to get 1pip if lucky, and that happens very very rare, doesn't worth. Please let me know, Zmax
+
+--- 帖子 #177 ---
+Can you explain what do you mean by 'FPI' ? I don't understand this bit. Can you give an example what exactly are you doing?
+
+--- 帖子 #178 ---
+FPI : http://kreslik.com/forums/viewtopic....er=asc&amp;start=0 Regards Ludo.
+
+--- 帖子 #179 ---
+Mr. Zmax; I gain nothing by criticizing, in fact it could be quite negative if used incorrectly. I'm pointing our the multiple issues we went through as well before completion and implementation. Mr. Cwitts is merely just finding them, and although he says he does trade real money, there are a few things which cause the concern. I am all for the little guy believe me, If I could offer any sort of insight I'd do it gladly. Yes we trade arbitrage all day long in multiple formats, linear, triangular and through market making just like the liquidity providers do.. We are liquidity providers, just from a buy-side customer perspective. To verify this look at the most recent issue of e-forex and the article on Direct Market Access . Which brings me to one of the pieces of criticism.if your using an opaen source engine for FIX then he has a 15 millisecond inherent latency...I guarantee this... As the FIX engine we have was developed by the very same developers who developed QuikFIX.. And the reason they developed their own was because of this latency. So if you think you dont have latency you should do some extensive performance profiling on packets and kernel objects to know exactly how long it takes you to receive the quote and respond. If you use wireshark it will give you the time stamp on the incoming messages for your quotes. Combine the efforts to measure your latency there is some. With last look, we have no liquidity providers that have last look We remove them from our Liquidity on the network side. All of this is a benefit of Direct Market Access, not having a brokerage to control or manage the details till long after the trades are executed. Multiple networks benefits us, the permutations for Triangular grows with the number of price quotes... If your able to manage CEP (complex event processing) with multi connects (direct, not through internet) then the price aggregation shows you best price available.... This itself creates more linear and triangular opportunities as your best pricing in the aggregation is slimmer... spreads are typically less than 2 10ths of a pip in the majors... a half a pip out of parity creates opportunities, trade them! uote=cwitts;3568260] @Mr. Zmax I’m not a fan of FPI. I just went through the whole Kreslik thing two days ago and found some incorrect premises that perpetuated the search for a sustainable FPI practice. On the other hand I rather use market orders and if they slip they slip. I rather realize my loss immediately and place new combinations than to dwell on open positions waiting to be filled. For me FPI is another way to buy low and sell high. I might be wrong. @Mr. Rockshore Like I said earlier, I’m new in these types of forums. But one of the things I have notice is people criticizing others and then asking them how they do it. I think you are not one of them, because it seems like you already know how to do Triangular Arbitrage and you won’t gain anything from bashing my technique, right? But I’m going to level with you. I can place thousands of trades in a second, that’s a given and I don’t have to make a complex system to do that. I need to clarify you, that four combinations (rings) per second are not the same as 4 trades per second. Each combination is a Triangular Arbitrage opportunity in itself with the profits deposited into my account. Each combination needs to be calculated, executed and confirmed for others to be placed. When you refer to spreads depleting my account I can only imagine that you are implying that I am trading FPI, but no, I’m doing Triangular Arbitrage. The more feeds you have not necessarily translate into profits. Obviously if you are just measuring the market, the more feeds you have, the more price discrepancies you will find and the happier your hopes and dreams are going to be. But when you start executing with real money you will bump into slippage, delays, latency, last look and other well known problems. Then you will ask yourself, why in practice I have so much arbitrage and why I get so much slippage with real money? Simple your data feed does not reflect the executable prices of the real market. That’s when probably you decided to create an arbitrage calculator for everyone to use. My strategy is much simpler. With a DSL connection I can connect to Currenex with almost no delay through FIX. Actually, from the many trades with slippage none, I want to be clear, none, have been due to connectivity. I analyze and place my orders in fractions of a second and my codes are so simple that can run in my old beat up laptop. Trust me to avoid slippage we thought of doing a collocation in NY, but it was not even necessary. I had to strip my algorithm from useless calculations to make it work more efficient. My best guess is that behind all the layers of code you are using to filter and process data, you need to blame connectivity for the delay you are experiencing. It seems a little simplistic to think that for $10,000.00 I can solve the problem of traders getting before I do. My system gets what it sees in real-time. I know that I don’t have access to the best prices and I only get to see my broker’s liquidity, but I assure you the other traders doing arbitrage are not my problem. As a matter of fact I thought you were one of them. I exchange money. I don’t open rings and wait for the market to improve to close them. I execute combinations that are settled T+2 and then the money is ready in my account (the way it should be). They are self netted and I don’t have to close any positions. Quote: “ FYA (for your advice) make sure your old pc can handle multiple price feeds through multiple direct connects in a data center, not remotely through internet. It doesnt work. Sorry to dissapoint you.” Two things from your comments: Multiple direct connects in a data center sounds like home made slippage. Lots of price discrepancies (arbitrage opportunity) but slippage and the other don’t mess with my old laptop. LOL. I don’t use it for the market anymore but is still around! PS. I don’t trade play money. [/quote]
+
+--- 帖子 #180 ---
+Rockshore, I don't understand something, this DMA is basicaly connecting all the price feeds from 12 or more brokers (number doesn't matter). You say FIX takes 15seconds for processing - how is DMA connected to these brokers if not with FIX, most of the ECNs use FIX? Also all these brokers are not in the same facility so you need a private line to them from the place where DMA server is, no? If you have EBS from London (stupid example because EBS has in servers in NY too) and CX from NY you get from start 1ms ping to CX and 35ms ping to EBS ..the feed from EBS will be delayed and if i trade from london i get the price before you lol. I don't understand how and why you think you get first on the price with the DMA... Please explain, i'm very curious and interested about this. Thanks, Zmax
+
+--- 帖子 #181 ---
+Hi Mr. Zmax, If Mr. Rockshore has multiple feeds combined he will increase his liquidity pool. Since not all of them are timed correctly he is creating artificial price discrepancies in his own calculations. Then he says he is a MM from the buy side, so seems to me that I want him as a liquidity provider. Guess who is going to create the best arbitrage opportunities for me? Mr. Rockshore, I am sure you know the difference between tradable prices or an indicative price (non-tradable price that turns into slippage if traded) so I won’t argue anymore with you about whom does Triangular Arbitrage better. My original post was to the idea of where to hook my system to trade Triangular Arbitrage. It seems that you are doing your thing through a DMA and I am glad for you. My motivation is simple: keep enjoying life and make couple of net positive points daily. Your motivation is move your corporate structure, hire more people, have more clients and be all for the little guy. Sounds very interesting and innovative! So, is your hedge fund profitable because of arbitrage trading or for charging the little guy front loads, back loads, commissions, large percentages of the net profits, etc? A good piece of information that you should share with the world and the little guys is the list of liquidity providers involved in such a despicable practice of “Last Look”. You said you have identified them and oust them from your pool. You will feel like a hero after people start taking them out from their accounts. Maybe in the future that practice will be banned. Maybe not banned but at least I will have access to refrain from a trade simply because I feel like it, like a big bank. PS. If you are trading half a pip discrepancies seems to me that you are just getting the leftovers. I think that you need to be quicker or maybe slower!
+
+--- 帖子 #182 ---
+Well cwitts.... We don't have customers... And reading is more important than anything here... I said 15ms..not seconds.. So before you respond innocently inexperienced. You should read the post correctly. QuickFix has a 15 millisecond latency on all messages...The very reason we use high end engines and not Quickfix. Our processing is on synchronized streams, and yes we have an increased number of trades, and faster access to the trades with structured complex event processing. So keep using off the shelf fix engines we prefer it that way! Your ability to read increased a bit when you almost comprehended our removal of price streams from out own liquidity that uses last look. Unfortunately you must not have comprehended correctly as your response was certainly anger oriented.. What's even more fun is the want to show you what real high freq. Trading is like so you can get a grasp on reality and your dreams!
+
+--- 帖子 #183 ---
+Mr. Rockshore, Read, write and comprehend is what I am trying to do but if you are blaming me for other people’s posts then I will lose too much time going over your ambiguous information and knowledge. I have never mentioned anything about 15 seconds so get over your tantrum. Read the whole thread if you need to and you will find that I have never mentioned anything about 15 seconds. In another topic you mentioned and I quote from your post #179: “ With last look, we have no liquidity providers that have last look We remove them from our Liquidity on the network side.” So I asked you politely to share those liquidity providers so we can do something about it and you attack me with no remorse. So far I have been blamed and my strategy bashed by you couple of times without you sharing anything positive. Is like you are trying to have us in suspense for something that you are doing which is neither receiving the proper credit or is not profitable at all. Not to mention trying to sell your “in-house” Fund. Oops, that’s right you don’t have customers, only partners. Like Wal-Mart! One good thing you have done is create a little awareness for DMA and you can keep up being positive if you can share your wisdom in this subject. Please let us know if you are profitable doing Triangular Arbitrage only. It seems that you are spending too much time trying to convince me that I am wrong. Sorry to all the rest of the traders here, sometimes moving forward requires wasting a little time with these types of individuals. Eventually they go back hiding with their negative thoughts or they realize what these forums are for. Mr. Rockshore, we are trying to move our ideas forward. You can help or you can be that little barrier, you choose!
+
+--- 帖子 #184 ---
+I'm not on here to attack whatsoever. We've been trading FX since 1990... Long before internet brokers were around and all trades were done via telephone. Even during volatile moments everything was done over phone or telex. I'm all for the little guys ingenuity and development of correct trading practices. I can only suggest things in correct form that would assist them. The FPI that was spoken about is merely a dreamscape of using a mouse trap of a broker, if there was a true market, there's no reason to hold any positions. They should be opened only when profitable and they should be settled through the use of STP and CLS Bank. The likes of a certain Canadian organization would be a great facility for this type of activity as their prices are regularly spiked away from market rates just to steal from their clients via hitting stops.. But.. for the quick responding traders (few) in their customer base are able to capitalize on their spikes.. and when they are able to trade quickly, the brokerage ALWAYS cancels the trade and closes the customers account. So this would be an ideal facility to temporarily trade the "rings".. Not to mention that since the FPI paper was written, response times in trading platforms have gone from the 10 ms level to mere microseconds in high frequency applications. The FPI paper is now irrelevant as the competition in the style has effectively wiped out the small remnants of those trades. Your not going to make a living off of it over the long haul when you have to routinely change brokers if your catching their spikes. DMA, is the required Direct Market Access that you truly need to succeed in this market over the long haul (without having to regularly change brokers. DMA effectively removes the brokers completely from the trade-life cycle with the exception of them providing a Prime Brokerage Service. Establishing credit lines, (not margin-but real credit), cross-clearing a.k.a. 'cross margining' and allowing positions in EBS, Reuters, Currenex, Lava, Hotspot etc etc to all counter-balance one another for the netting of trades and providing settlement services regardless of where the trades were made. DMA is effective when there's a true ECN type venue, and not a quasi ECN as most 'brokers' provide. If the broker is willing to step back and simply manage credit for the commission structure.. then you most likely have the Direct Market Access you need. The only condition to that is making sure that the broker servicer you use does not have any added spread into the pricing. This isn't the easiest thing to do, but is certainly attainable through productive relationship nuturing. Re: Tradeable Prices vs. Indicative Circumvent the last look providers and make sure your DMA is true and you don't have to worry or be concerned with indicative pricing, indicative pricing is typically reserved for quote service providers or those brokers that use and offer substandard execution platforms. The brokers will always use the infamous last look... steer clear of them if your attempting any form of arbitrage or using an efficiency model. There are a slew of banks whom are ruthless in their 'oops factor', the oops factor in high freq. trading from a Liquidity Provider is use of the ability on last look. Here is where the bank (not broker) as all brokers use last look against you. But, here is where the bank is in receipt of your order and double checks it electronically for trade well after he/she submitted a streaming and executable quote into an ECN. I will not prostitute a list of bank names, as one day those will possibly change, and certainly negative reprocussions are not wanted. But, be sure when your using an ECN, that your Prime Service provider removes those institutions that are known to use last look... It's my belief that if someone makes a quote, they better be ready to stand behind it... so last look providers are effectively unwilling to conform to industry standards and hurt the bottom line of the customers that bring them business in hopes of justifying their own presence. Those institutions do not get our business or the potential of it. I wish I could elaborate more, but I hope its been enlightening.
+
+--- 帖子 #185 ---
+Enlightening indeed!!!! But I am still a little confused on the fact that you have created a DMA to connect to other DMA’S (Currenex, Integral, Hot Spot…) and you are faster. If I understand correctly, your competitive advantage is an aggregator for the best prices of all the liquidity providers (except the ones that play with the Last Look) from the different “ECN’S”/DMA’S. Then you execute your trading strategies (which I don’t think we need to discuss them). At the end of your executions the clearing for all these multi-platforms is done in-house? I have to digest all this information in order to post or ask something intelligent. Thanks for sharing your experiences.
+
+--- 帖子 #186 ---
+DMA is the direct access to the market place.. Currenex, Integral.. EBS etc are the market place venues... but DMA is the access without the middleman (broker entity interfering with the pricing or adding latency or by literally restricting you to trading with him/her alone as the counterparty)... credit lines are extended to the venues.. and there is a handshake between us and the prime broker that says we will manage properly our credit exposure so we dont come up on credit-watch. So.. no redundancy on DMA duplicity, just direct access without a brokers interference. After the trades are executed, our prime broker is then electronically notified and the trade settled immediately with them where our credit is netted out vs trades on the multiple venues. So trading 100M on one, and 100M on another gives us zero exposure. Yes we aggregate all the feeds into one central view which when trading triangular our spreads are typically less than a half pip on all majors with a few million in available bid/offer size on all legs when talking triangular. I'm glad I was able to put some light on the subject.
+
+--- 帖子 #187 ---
+Rockshore, Is there any way to trade against lastlookers if you can't remove them from the pool by the broker? CX is full of lastlookers, from my point of view, untradable like that...You always get another price, if you send limit ioc - you get a confirmed fill after 1 second or more, that's not fair at all. Thanks,
+
+--- 帖子 #188 ---
+I have a tool that is as close to a "retail" aggregator as I have ever seen. As a matter of fact I don't think anyone has built what I use to catch inverted markets on retail spreads. I am looking to add PB and know FCStone well, but would like to know who else plays in that space for small volume traders 1-2B month. I already know Anthony B. @ Advance Markets who is mentioned in the article you refered to, but I need others. We connect to Dukas, DBFX and MBT but we may have just fallin into a wanna be prices engine with those types of outfits?? Anyway Rockshore I would love to compare notes and as you, I have been in this sense before the net was involved. My first online account was a 4 digit account number with FXCm 2001 and so I don't plan on wasting your time. I am however well aware I live under a rock and don't network enough in the biz. I find your posts similar to my mindset and understanding. Let's see if I am right.
+
+--- 帖子 #189 ---
+The only way to trade against them.... remove them, don't trade with them and let everyone know who they are... tactfully and not by a means where it could come back to bite you later when your looking to expand on your relationships.
+
+--- 帖子 #190 ---
+The only issue with retail aggregation.. is that prices are skewed to entice trades, we've tried methods similar to this with retail aggregation, but find that the 'requote' scenarios or unfilled orders are proportionately high and thus make it difficult to focus on the trade as most attention is tilted towards obtaining better pricing and fighting 'when' to trade against those skewed prices. Dukas prices seem to be more in-line with the global market, as they aggregate true feeds themselves. The latter of the three you mentioned I'd never touch with a 50' pole. Bad fills, skewed prices against your positions with "routinely-random" price spikes. Sure we can compare notes, and yes there are firms that would suit you better thats for sure. One of the firms you mentioned has the connectivity you could use effectively, but with higher frequency comes more eyes on your strategy and theirs... Their strategy being to protect their interests in their price feeds... not neccessarily looking out for your interests. I'd suggest a firm or two that also trades aggressively and is in line with wanting high volume and will protect your trading activity with solid and tradeable prices while keeping the commission to a minium.
+
+--- 帖子 #191 ---
+We see the Market Makers take one side and not the other all the time. We have actually started using the tool as a indicator to notify us of "guaranteed" slippage, and started thinking of making markets ourselves with our own 20 or so accounts using 3 rings in the majors and have this indicator act as a safety measure against slippage. The first retail prime broker on the planet We increased our fills almost 400% doing this so triangle arb and market making off-setting risk etc would be possible and very efficient. I would prefer however to keep refining the tool for the future high frequency and volume trading that the market will embrace or become a market maker this year. Please share the other shops or partners aside from Dukas you would seek out. Dukas is good and I always get my fills ALWAYS, but after multiple visits they still are behind in a few areas and I hate the way they are moving towards meta and retail MQL crap. I am not sure if I can PM here at the factory because I am a noob. HEY MODERATOR/ADMIN can you fix that? In the mean time please email me or post the brokers names. I would do a gotomeeting and show the price aggregation tool. It's fun to show during heavy trading.. looks like a Xmas tree with all the different prices. We average 30K off markets with 10 brokers a day. Like you say though means nothing unless you can capture and have them filled. No matter who you recommend I hope we have them already or have a positive past with their API department because it gets real expensive to add new brokers. PS for those wondering if this is easy.. No. We have 56 servers with dedicated ISP's straight to the brokers. We monitor price 24 hours a day. Let me break that down you have 1000ms in a second 60 seconds in a minute 60 minutes in an hour and 24 of those a day. We work with 10 retail outfits equaling 86 million cells a day to watch. SQL can keep up over time Oracle only and a great IT department/team. No one man bands brothers and sisters. I would assit any looking to work hard and develop something that makes sense. Don't reach out with secrets cause there are few if any. As for triangle arb though we use best bid best ask and spread the volume around. We trade 20+ times a day and that is because we avoid noise, and always stay away from slippage using the tool and it's a nice living. You can do it with the correct technology, analysis and speed. Happy trades
+
+--- 帖子 #192 ---
+fxsoftware, What clearing firm you use? If no clearing then the differences are so big that it worths for you to open/close each trade from the ring? Thanks
+
+--- 帖子 #193 ---
+Is this an arbitrage that I can use ? is calculation correct ? Symbol Act Price Quantity EURUSD Buy 1.21837 1000000 USDCAD Buy 1.01742 1218370 CADJPY Buy 89.091 1239594 EURJPY Sell 112.887 1000000
+
+--- 帖子 #194 ---
+Hedge is a simple mathematical draft Lets make things simpler and lets picture the Forex quotes as the plain mathematical fractions. Let’s have three Forex symbols, represented by commonplace fractions: a / b = 2.5 b / c = 2 c / a = 0.2 Are we able to derive the values of a, b and c variables from these three expressions? No without a comparison to some other value. But what we know is the relation between the values though. Twitter me at mr_forex and I can get you up to speed. In this example, there are three fractions (FX symbols): a / b b / c c / a and three separate variables (currencies): a b c The quotes (the values of these fractions) in this example are not random. Actually, even though we don’t know the values of a, b and c, there is a mutual relationship between the above fractions. We can even derive the third fractions value from the first two: a / b = 2.5 b / c = 2 c / a = ? c / a = 1 / ((a / b) * (b / c)) c / a = 1 / (2.5 * 2) c / a = 1 / 5 c / a = 0.2 A simple test reveals the product of the fractions values is 1 and thus the results are ok: (a / b) * (b / c) * (c / a) = 1 2.5 * 2 * 0.2 = 1 We can derive the value of any of the above three fractions if we know the value of the two others . We may generalize that in a set of n fractions where every individual variable is present exactly twice, we only need to know (n 1) fractions values to derive the value of the last, unknown fraction. Obviously, this is true for any n , i.e. for any number of fractions where every individual variable is present exactly twice. We will call the set of fractions that feature the attribute of having every individual variable present exactly twice a ring since it resembles a closed ring of variable FX symbols: just fractions Now this is going to be more interesting. Lets substitute the variables and fractions for FX currencies and symbols now: Variables: a = EUR b = USD c = CHF Fractions: a / b = EUR/USD b / c = USD/CHF c / a = CHF/EUR Now wait! There’s no CHR/EUR symbol, only EUR/CHF! You’re right. We simply do: CHF/EUR = 1 / (EUR/CHF) I hope that I aroused your curiosity about what is the product of this ring (the three FX symbols? quotes). Is it 1 as in the example above with fractions? Let’s see: EUR/USD = 1.1840 USD/CHF = 1.3145 EUR/CHF = 1.5565 The product of the ring : 1.1840 (EUR/USD) * 1.3145 (USD/CHF) * (1 / 1.5565) (1 / (EUR/CHF)) = 0.999915194 Voila! It’s almost one. Why it’s not exactly one we’ll soon discuss. But it’s clear the principle is the same as with the fractions above. Complementarily For sure, as was the case with the fractions above, we can derive the price of whichever of the quotes in ring if we know the other two: EUR/USD = 1.1840 USD/CHF = 1.3145 EUR/CHF = ? EUR/CHF = 1 / (1 / (EUR/USD) / (USD/CHF)) or better EUR/CHF = EUR/USD * USD/CHF EUR/CHF = 1.1840 * 1.3145 EUR/CHF = 1.5564 Bingo! We’ve just recreated a price for EUR/CHF from the other two quotes. Again, our reverse engineering came up with the price 1.5564 instead of 1.5565 and we’ll cover that later. For a recap, the first 1 in the equation EUR/CHF = 1 / (1 / (EUR/USD) / (USD/CHF)) Is there because there’s no CHF/EUR ( c/a ) quote on the market, only EUR/CHF, so we need to invert it this way. The second 1 in the equation is there because the overall product of all the fractions (Forex quotes) equals 1. So we are simply dividing consecutively this overall product (1) by the rest of the fractions in ring to come up with the last missing fraction (quote). Remember, this rule applies to any number of fractions (quotes). If we had a set of 20 Forex quotes and every individual currency would be present exactly twice in that set (thus, they would form a ring), we would be able to devise the value of whichever of these 20 quotes based on the values of the rest of the quotes. The fractional product almost never equals 1 Now you may be asking what is so amazing about being able to tell the overall product of the Forex quotes (fractions) in ring is one? Frankly, the amazing thing about it is: The product almost never is exactly 1. Have a look at the product of the close prices on 15 min chart: You WILL see, the product oscillates around the ideal value of 1, but it rarely equals 1 sharp. This fact alone disproves the Efficient Market Hypothesis which maintains that the market prices are efficient and it's not possible to take advantage of market inefficiency on a regular basis. Certainly, one of the factors contributing to the fact that the product is not exactly 1 constantly is that we are not using a mean value between Bid and Ask, but instead only a Bid price here. But that would account only for an absolute shift from the ideally effective product of 1, not for the wild oscillation we can see on the screenshot. Now whatever is the reason for the value of the product not being the correct value of 1, this obvious inefficiency that can be capitalized on . The value of the product oscillates moderately during the quiet market times, but the amplitude widens considerably during the times when the market is fast-moving: This along with 10 years of software development and wonderful relationships allows me to many many "hedge" sort trades in forex. Don't listen to those that haven't been there. If you want to you can make money on this I do everyday! I do however have 300K servers and the best team of programers in the biz, but I can help those willing to work and be good value add partners.
+
+--- 帖子 #195 ---
+at www.forexgeneral.info it is very good and free too!
+
+--- 帖子 #196 ---
+this document also helped me to better understand the consensus price. Fxsoftware, have you tried the CAX? http://vcapfx.com/
+
+--- 帖子 #197 ---
+Rockshore, I'm curious... Can the average trader start accounts with the below mentioned companies without having to shell out tens of thousands of dollars? Thanks, Brent
+
+--- 帖子 #198 ---
+SOME ONE USE THE INDI EUR_CHF ARBITRAGE BY VICTOR : ??? 1.I NEVER GET RED SIGNAL EVEN WHEN THE PAIR GOES LOT OT DOWN . 2. I CHECK THE GBP PRICE AGAINST THE EUR/CHF I CALC . GBP/CHF * EUR/GBP -- &gt; UP 2 PIPS FROM THE PRICE SHOWN I TEST IT IN THE SAME BROEKER . SO WHAT IS THE VALUE CALCULATED ? the con price near the actual price : is calculated all the magors pairs against the main pair ? is it the avg(4 currency above ) ? or (for eur/chf )= avg(all the magors : gbp,usf,aud,cad,jpy,nzd) ?
+
+--- 帖子 #199 ---
+i think about family groups : europe -- euro,gbp,chf moves together carry : aud cad nzd move together usd/jpy behave different than other pairs . if we take for example ; aud/usd then we can focus on the aud+cad+nzd netween them and between the usd .not need another cross so ergent . i test the eur/chf against : gbd . aud.usd.jpy in the indicator eur_chf_arb. the aud all day was green and jpy was between red and blue . so the gbp and usd was the trigger to go long . but not very long because the consenzos was neto : 2 - 5 pips up the actual. another advise : if you can watch back the big moves of the day . then in the interval period , watch the price between the other pairs which belongs to them. by statistic research the calculator can have nice results ... i hope .
+
+--- 帖子 #200 ---
+Hey, rqmorris. Can you help? this link you typed don't work at all.
+
+--- 帖子 #201 ---
+I contacted this company after your post. They where fast to respond and didn't add any value in the end. You see it's a nice accompliahment to connect to ECN's, but the true test is doing it all the time with all of them... For those of you that even understand what that means continue on otherwise reread or contact someone for help. Oh an BTW I am not talking about taking advantage of the list of companies on "www vcapfx com's page because they are simply software providers. I think too many people get that mixed up. Traders don't, but people or noobs do. Anyway for those still tracking here I will continue. I find these connections are only as good as those that you may have an account with for example to use currenex, fxall etc you need a good broker/market maker that allows you their API or connection. These companies service the market makers and not those reading here on the factory (99.999% of the time) So if you have been following this thread and weeding out the crap you are still asking yourself how do I do this and the answer is still the same. Build connections, relationships, and fund accounts with good STP outfits and have your own software to mange them. I again will say it load and clear I arb everyday the FX and my counterparts love my flow. We continue to hire quants and build more and more complex and simple G.A's It's the only way to do it. I think I may even start an exchange among users, or become my own seller of bids and asks. After all I get better pricing than any PB I know Also let's try and keep this thread about real arbitrage and not stupid EA's that use the words "forex arb" trying to selling their next replacement for blablaturbo for bozos, clowns, friends and their affiliates. We all have enough junk to worry about with the NFA clouding the US markets right now. The only real way to make money is with smart flow and aggregation. I want to again refocus this thread on those out there wanting to add value to technology and making money with prices and not affiliate commissions.
+
+--- 帖子 #202 ---
+I found your writeup a few pages back so this should get me started. In the meantime I sent you a PM. Based on a post of yours I read you said something to the effect that you couldn't PM? So I don't know if you will get it or not if that is the case... but I thought I would let you know just in case.
+
+--- 帖子 #203 ---
+No matter how many requests I get to suck my brain I still have not really found people that add any value. We traded as a company 2,000,000,000 in November. I have $500,000 in personal money being traded and now much more in partners. This is the DEAL and ONLY deal. I will allow anyone that is willing to QA "test and report issues" my platform and dedicate 2-4 hours a day on the bettering the software direct access to trade their own money with it. Don't PM, Email, or call anymore if you are not ready to do this, and for those of you out there still doubting find someone else in the business that traded 2 billion last month.
+
+--- 帖子 #204 ---
+Correct formula is A/B * B/C = A/C Given A =1 B = 2 C = 4 1/2 * 2/4 = 1/4 1/2 * 1/2 = 1/4 (True) Your formula is A/B * B/C = C/B 1/2 * 2/4 = 4/2 1/2 * 1/2 = 2/1 (False) So substituting the variables for 3 related currenices, EUR, CHF, USD: A/B * B/C = A/C Given: A = EUR B = USD C = CHF ASSUMING; A/B = EUR/USD = 1.4087 B/C = USD/CHF = .9199 A/C = EUR/CHF = 1.2958 I added 4 pips to the bid side since the markets are closed, but thepoint is pretty much to do this when they are closed to see that the arb does not exist (for the formula is true) which is more or else exactly what oanda .com is showing at 3:34 AM 3/27/2011 is proving with a EUR/CHF cross rate of 1.2958 But spreads on crossrates do make them suitable for trading. You have to (ahead of time, through the use of stops) capture abnormalities in the 2 liquid pairs. Simply put, if the crossrate and either one of the related pairs move (or do not move) in which makes the formula false (or makes the arb "present itself"), then you have an opportunitiy on the other liquid pair, either buying or selling its undervaluation or overvaluation for a couple of pips, before the opportunity goes away. And goto a site like: http://www.fxintel.com/live/ which could add more pips. Now mutiply this by any account, 10 broker accounts and 100 stops set on 50 currenices and several of these transitive arbs running simultaneously with 3-9 currencies, and a dash of VIX, then you have a recipe for good arb business.
+
+--- 帖子 #205 ---
+Profitsee, Could you please share with us some screenshots that show how you do what you mentioned below? Thanks. Bruce
+
+--- 帖子 #206 ---
+The math part, the hard part, seems easy enough. If the calculated value is &gt; the actual value (EUR/CHF), then go long in EUR/CHF (possible short in the other 2). Vise versa on the other end. My question is this: Are you using ask or bid prices? I could see doing this w/ MA's. It would make getting the Stddev values easier too. Also, does it really matter what the either 2 Symbols are? As long as B is the same in the other 2 symbols? Ie, above it is USD. It would seem a simple thing to code.
+
+--- 帖子 #207 ---
+Does anyone know what Kurka did for his exit strategy?
+
+--- 帖子 #208 ---
+Have you tried PMing him? Mind you he seemed like a fairly high level quant who was wasn't interested in helping anyone else unless you offered serious value. Of course you could just experiment with exits in your backtesting until you get something worthwhile.
+
+--- 帖子 #209 ---
+Yeah, I'm going to have to. I don't think I've got a good understanding of this though. I have 3 pairs: a: EURUSD b: EURGBP c: GBPUSD Now, taking into account the formula: b*c="synthetic" a. So, if "synthetic" a &gt; a then go long on a and short on b and c. Vise versa the other way. Am I correct for the basics? I've got the spread and safe "window" figured out.
+
+--- 帖子 #210 ---
+That's right in principle. However I believe that Kurka's trading methodology was as follows build a consensus price (synthetic a) for each pair if the synthetic price for a (say EU) is &gt; or &lt; than actual a (EU) by a statistically significant margin (you need to read the thread to see what threshold he was using) then go short, or long respectively on that pair in anticipation that the big boys would quickly arbitrage the price difference away using their DMA (direct market access). he also included market session timing and SP500 filters to improve his results basically the method is to acknowledge that the big boys can do triangular arbitrage because they have super fast market access at ludicrously low commission, and we retail traders can't but we can anticipate the results of their actions and profit from them I suspect this is still a viable approach. But you need to be able to code. There is another probably much easier and less risky method of using triangular arbitrage to gain the swap as a carry trade back in this thread somewhere - worth having a look for.
+
+--- 帖子 #211 ---
+I do code. That's why I wondering about it. I've read the thread twice, but I couldn't find the "statistically significant margin" he was talking about. Maybe I missed it. Do you remember? I'm going to re-code my EA to take a position on the actual pair and opposite on the opposing 2 pairs.
+
+--- 帖子 #212 ---
+Found it. Std Deviation.
+
+--- 帖子 #213 ---
+Sent you a PM about it too. If consensus price &gt; than actual price + std dev + spread then buy as actual is oversold If consensus price &lt; than actual price + std dev + spread then sell as actual is overbought cheers f451
+
+--- 帖子 #214 ---
+Sounds interesting. A lot better than actually doing three trades and paying spread and commission three times. Did somebody already try that out? Cheers, TraderJF
+
+--- 帖子 #215 ---
+TraderJF, Working on it in code. manual isn't fast enough.
+
+--- 帖子 #216 ---
+That's kind of what I thought, but I have take the stddev in code from a moving average. And on the 1min chart, the std dev+spread isn't that big. My spread that I was using was bigger (spread of actual price + plus my slippage + plus "padding"). Only problem was I stayed in position until TP or SL was hit. I need to get a good exit routine in there too. And I've got an idea for it.
+
+--- 帖子 #217 ---
+Ok, I hope none of the originals, ie. Kurka, left. I'm going to post source code for anyone who wants to take a crack at it. I'm not getting anywhere near the results in my forward testing that others got.
+
+--- 帖子 #218 ---
+The real T.A.S. http://www.myfxbook.com/members/4XFX...scanner/105189
+
+--- 帖子 #219 ---
+It's always interesting to see what people come up with to try to tri-arb on the 'retail side'. Not to be overly critical of your results so far as I know it's only 88 trades at present... ...but do you believe this has an 'edge'? ...have you factored in the commissions? (because you are currently on demo) another note... sometimes you only have a correlation on, just EUR/USD and GBP/USD?
+
+--- 帖子 #220 ---
+Well, that's the other key that was not talk about a lot in this thread. The CC (correlation coefficient) would need to be large and negative (as close to -1 as you can get) to get the biggest bang for the buck on a straight-up arbitrage deal. Second, I've looked at a few of these FX arbitrage threads now and many of them go back to 2006-2008. Most people were trading on a single platform and attempting to arbitrage against a single pool of liquidity provided by their retail broker. Of course, that presented a problem because the dealing source was the same entity - your broker. However, things change a bit when you can use a single trading platform, but connect to multiple dealing sources - multiple pools - and multiple brokers/intermediaries simultaneously/seamlessly. Third, if you need more than a good arbitrage scanner/calculator, you need a calculator/scanner and trade execution from within the same platform, against multiple liquidity pools where the arbitrage opportunities are more easily detected and not subject to broker manipulation. Of course, that solution will also need to afford you the ability to account for differences in spreads among the multiple dealing sources as well. Aside from attempting to build an MT4 EA to do this, or building a full-blown arbitrage module through a custom API solution against a retail trading platform, the only way I know of to do this would be through something like the ProTrader trading platform, which allows the "retail guy" multiple dealing rate source access through a single trading interface AND a built-in Arbitrager that also executes trades in real-time, according to the arbitrage parameters established by the trader. An Arbitrager solution for Retail FX, really does need to be as fully integrated into the trading platform as possible, as time is of the essence in such transactions.
+
+--- 帖子 #221 ---
+Well, in essence then, it's possible. I've been curious about MT4 multi-terminal. Wondering what, if any, possibilities are there to code for it. Just haven't had time to look into it yet.
+
+--- 帖子 #222 ---
+Hey Non-d: Good work. I just took a look at your code. The only advice I can offer at this time is that all variables should be static. "Time is of the essence" in this endeavor and allocating variables more than once is a waste of time. Can you post any recent test run results? Thanks, Ken
+
+--- 帖子 #223 ---
+There might be a more eloquent way at hand. Check out my thread here: http://www.forexfactory.com/showthread.php?t=296172 . I'm trying to explore that solution as well. I missed any opportunity to test it out this week, because I just installed it late Friday night and had some difficulty with the broker Connections. I'll give it a go next week, however. Anything ND is always fascinating. Nothing new about Arbitrage, but quite frankly, I've never seen a fully integrated Arbitrager feature as part of a multi-intermediary trading platform with auto-trade execution on both sides. Anyway......
+
+--- 帖子 #224 ---
+Sorry, ND was meant as Non-Directional Trading. I just recognized that ND can be extracted from your ForexFactory UID. Just to clarify.
+
+--- 帖子 #225 ---
+BTW, Non-D. ProTrader uses PTL Builder as its IDE and PTL is its native code base. However, using PTL Builder (the IDE) it can compile your MQL code and generate a PTL project file that references your MQL source code. You can then run that newly compiled MQL on the ProTrader platform as a Custom Indicator, or Trading System. You can also do things in reverse by using ProTrader's PTL Builder to generate native MQL. I don't know if anyone has done this yet, but I would think that a really good test for PTL Builder, would be the compiling of ZUP, so that's what I'm going to attempt to do, to see if I can get the ZUP .mq4 (mql) to run inside a ProTrader platform without puking all over itself. If it can handle ZUP, then I would think that it could handle just about any MQL/MQ4 indicator and/or trading system (EA). I'll be doing this over in my other thread on the Arbitrager, as a robustness test for ProTrader. I'm sure others have more experience with going from MQL to PTL, so I hope they join the thread I created on ProTrader Arbitrager.
+
+--- 帖子 #226 ---
+Jet, This caught my attention. I'm on vacation until 6/4, but I've been trying to keep up w/ this because I see potential. Can you get me a link to where I can snargle a copy of ProTrader? Thanks. I'll check out your other thread too!
+
+--- 帖子 #227 ---
+Not good. Before I went in vacation, I had about an 85% win rate, but the losses were staggering.
+
+--- 帖子 #228 ---
+Just thought Id comment here, not trying to be rude, but with the smoothing algorithms on any mt4 broker, its really not possible whatsoever to trade triangular arbitrage. Leases on algo engines that do trade it provide you the DMA needed without the latency issues native not just in mt4 buy any platform that costs less than 100k to just lease for a cple years. The good ones put there have transaction times in the 20 microsecond range.. so competing with that with any other application is like swimming up the Rio Grande. I obtained one and it works well but its not a cheap ticket application. Best of luck! Trade well!
+
+--- 帖子 #229 ---
+Sorry for the typos.. Im on a smart phone.. dang thing is dumb. Lol
+
+--- 帖子 #230 ---
+Non-d: What broker are you using? 4 or 5 digit? Thanks, Ken
+
+--- 帖子 #231 ---
+"smoothing algorithms"? On a live account?
+
+--- 帖子 #232 ---
+IBFX and 5 digit.
+
+--- 帖子 #233 ---
+Yes, mt4 has a smoothing algorithm that stops quotes when 4 consecutive quotes are oitside the range of its previous quote. It makes arbittage impossible because you need the volatility in order to trade arbitrage in mt4
+
+--- 帖子 #234 ---
+In addition, non-disclosure, the mt4 virtual dealer double checks all trades against arbitrage or other forms of predatory trading.
+
+--- 帖子 #235 ---
+Caerus, is this documented anywhere?
+
+--- 帖子 #236 ---
+I am not sure how is the algoritm... Can anybody help on this? Thanks
+
+--- 帖子 #237 ---
+I'm sure if you post the spreadsheet, people in here will be more than happy to take a look.
+
+--- 帖子 #238 ---
+Thanks.!
+
+--- 帖子 #239 ---
+Hı any clue about error129 ıs thıs an error to stop arbıtrage. walker
+
+--- 帖子 #240 ---
+Hi fxsoftware, I find I cannot PM as well; being new in this forum. If you still are looking for partners in improving your systems as well as trade their own money I will be able to assist you in this. I have extensive experience in computer software and systems in general (19 years); and am considered a genius in the field by my peers. I have started developing my own forex software recently and am interested in your offer if still valid. Please reply to this post or PM me if interested. Kind Regards, Mark
+
+--- 帖子 #229 ---
+Hi FxSoftware... If you wish I can Test your system With Real Money and 2 Hours daily. I have 2 VPS trading now. How is the deal ? Thanks in advance.
+
+--- 帖子 #230 ---
+Did you successfully develop your software
+
+--- 帖子 #231 ---
+Hi: I know this is an old thread, but lately I just tried the same thing (without knowing this thread beforehand). What I found is : this is not working anymore. -- My testing environment: 1) FIX engine which can do "price-to-trade" (more than 3 trades) within 1 ms. 2) Cross-connected to the server or Server located in the same building (I tested more than one environment) 3) Prime brokerage account which allows me to link to ECNs (such as CNX) in live. Or the account link to a ECN aggregators. The point is, the majority of liquidity now has last-look (LL) feature. That is the case in ECNs like CNX and FXall, and of course those ECN aggragators. With LL, LPs can always wait up to few hundreds ms before executing the hit order. This few hundred ms will eliminate the "market imperfection" triangular is targeting. So even execution time from the trader side can be faster than millisecond, or even micro level, it is all useless. There are few no-last-look (NLL) environment. For example, CNX has NLL stream, but its NLL pool is very shallow (banks usually dont participate), too shallow that no way to support triangular. LMAX is another NLL environment. I have also tried it once, but its suspected market issue* can destroy triangular as well. *people who are interested can check DonnaForex, there is one thread discussing this issue. Therefore, as far as I know, there is no environment to implement this strategy, not just in retail world, but also in prime brokerage* because of last look . *even in prime brokerage, majority liquidity still comes from big banks, which favors LL. -- Following is some brief summaries: 1) The liquidity up-stream is from major banks, they have LL feature. So no matter which broker in use, it is always that case. 2) For the ECN pool, participated LPs follow the rules of a particular ECN (say, CNX and FXall will have different rules), but these rules either protect LPs with LL or with other methods, so that LPs are willing to participate (if not, they might simply leave.) 3) Because of this LL thing, triangular is not implementable. btw, but maybe the use of triangular to be some kind of indicator has some potentials. This is als main content of this thread. -- Above is according to my tests and my personal research. I hope they are helpful to people. If there is anything wrong, or I miss some points, it is very welcome to have any comment and feedback. Many thanks, Wjack.
+
+--- 帖子 #232 ---
+I see this thread dead arbitrage makes sense if the variable always returns to zero.
+
+--- 帖子 #233 ---
+the biggest thing is swap that you have to pay per day.
+
+--- 帖子 #234 ---
+Nice work kurka. Well done. kurka would you be willing to open source your idea there. If so, could you please share this indicator's source code for further development. TYIA for your consideration. Cheers
+
+--- 帖子 #235 ---
+I want to thank Kurka, for his ideas that he have shared with us. He showed us a concept for a trading method and challenged some of us, to think differently about the price and how to approach it, or see it differently at least. With that I mean calculating synthetic prices of different triangular pairs, to determine short time price prediction. I've had my eye on "triangular arbitrage" for some time now, still ready to dive even more into it in the future. The thing is that arbitrage works the same everywhere, but latency is the killer. I would say that arbitrage on the normal market is almost impossible, almost because it can show promise with a sub 10ms connection, to a trustworthy broker that does not charge an arm and a leg in commission and spread. A LOT to ask, but still possible What Kurka presented here is unbalanced "arbitrage" or better to say....following unbalanced consensus pricing. Because of that, exits are the key. Whoever wants, to nail his concept down, should focus on that. Below are pictures of Kurka's backtest of his EA for the 3 day period, that I took as a reference, compared to my backtest of EA, following the same method. I've got it quite close and I am happy with my results. I would say my EA did as almost 4 times more trades then his; 1623 compared to his 412 to be exact. I've managed to keep similar DD and win/loss ratio as Kurka...except my EA was more active. Overall profit is a bit higher but in the same ballpark, which tells me, his TP was variable, mine is not. It makes more sense to me to take couple of pips, as soon as equilibrium presents, rather than projecting the longer trends. Attached Image (click to enlarge) Below it's a picture of my backtest over the same period. Attached Image (click to enlarge) Below is a live demo account with my EA running. Some extra bells and whistles were added. Primary logic is the same. I do use weekly and daily fundamentals in my algo. Attached Image (click to enlarge)
+
+--- 帖子 #236 ---
+https://www.forexfactory.com/leppozdrav hi friend. Where is this ea? Can send file bere? Thanks
+
+--- 帖子 #237 ---
+Is that possible to share the EA please? December would be a perfect month to get this into action
+
+--- 帖子 #238 ---
+Hi is this System still working till date? Can anyone share their opinion?
+
+--- 帖子 #239 ---
+I HAVE AN EA FOR ARBITRAGE TRADING CONCEPT IT WORKS PERFECT PUT HAVE SOME ERRORS THAT IT OPEN WRONG POSITIONS, AND I THING THAT IS BECAUSE OF ERRORS IN SOME FILES OF EA SHOWED IN T Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) HE ATTACHED PIC
+
+--- 帖子 #240 ---
+hi, would you still have this EA to share?
+
+--- 帖子 #241 ---
+Hi everyone, here's a triangular arbitrage trade I've been in since April 29th. I'm looking at higher time frames and longer term trades. Attached Image (click to enlarge)
+
+--- 帖子 #242 ---
+Hi @fortyfive20 From your trading window images it seems this triangular trade you're in is not very well balanced, as you're net long of GBP and net short of USD. There's even some exposure on EUR, while the EURGBP pip value is not the same as the other pairs. This triangular combo would have been in better balance if one had gone short on GBPUSD instead.
+
+--- 帖子 #243 ---
+"The safest during periods of high Forex index fluctuations is to manually apply triangular arbitrage."
+
+--- 帖子 #244 ---
+"It has a much more complex calculation than it seems, and it's not as low-risk a method as believed. However, when compared to the risk in individual pairs, it is a much safer method. Instead of dedicating years to indicators, it seems more reasonable to focus on this method."
+
+--- 帖子 #245 ---
+minimum stress, minimum risk, sufficient profit.
+
+--- 帖子 #246 ---
+Hi Jjxiv, thanks for the reply! Quick question, why short GBPUSD? That pair already hit my target profit and currently the EURUSD and the EURGBP positions are also in profit. What type of info or indicators (not technicals) should I be looking at before making these trades? Thank you!
+
+--- 帖子 #247 ---
+Hi everyone! Been following this thread for a while now and I've decided to work on a little something of my own: Attached Image (click to enlarge)
+
+
+===== 附件下载链接 =====
+
+未找到附件

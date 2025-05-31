@@ -1,0 +1,759 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Original thread information: This thread is dedicated to the on-going development of the AshFX Daily EA that I wrote. Please remember that I didn't develop the AshFX strategy. Any questions regarding the actual system should be handled on forexmoments original thread. Please use this thread as a place to post positive suggestions, bugs, and general discussion of the EA and it's results. For information and discussion of the AshFX system please refer to this thread here... http://www.forexfactory.com/showthread.php?t=91789 I was asked to start my own thread and so I would like to keep this thread about the EA I've developed. I would not like to start mixing different versions of EAs written by several others. Hopefully in doing this we all stay on track and of one mind and I will implement all the ideas I can for the EA as long as they enhance the original system and remain true to where it came from. New EAs can be written for other ideas so let's keep on track for each of the ones I've developed. Source Code (Very Important): Poll: Do I have to share my source code? Want a version that will work on live and demo accounts? Send me an e-mail: matt@tabonetech.com Settings: Inserted Code //+------------------------------------------------------------------+ //| Input variables | //+------------------------------------------------------------------+ extern string TradingParameters = "------------------------------------------------------------"; extern double Order01LotSize = 0.20; //Order lot size (Not placed if = 0) extern int MaxDiffFromOpen = 0; //Maximum difference from the open of the current bar, i.e. no greater than 10 pips higher from open if long and vice versa extern bool TakeSSTrades = true; //Take second strength trades? extern string StopLossParameters = "------------------------------------------------------------"; extern bool TPBeforePSARTrail = false; //Does take profit need to be reached before PSAR trailing is enabled? extern bool TrailWithPSAR = true; //Take the value of the previous bar's PSAR and updates stop loss if beneficial to trade extern int Order01TrailStopAmount = 30; //Pips to trail once take profit is hit extern string EmailParameters = "------------------------------------------------------------"; extern bool EmailNewOrdersPlaced = false; //Send e-mail whenever an order is placed (even limit and stop orders) extern bool EmailProfitLossSummary = false; //Send profit/loss summary anytime order count changes (does not count pending orders) extern string MiscParameters = "------------------------------------------------------------"; extern bool DisplayProfitLoss = true; //Display history of trades? extern int OrderSlippage = 3; //How many pips can the order placement vary? extern int EAMagicNumber = 20080706; //Used to determine orders placed by this EA Revision Notes: Inserted Code //+------------------------------------------------------------------+ //| Revision notes | //+------------------------------------------------------------------+ /* Version 1.0e: * EA will now only set to break even if stop loss is negative to order Version 1.0f: * AO must comply on second strength trades * Combined 2 orders into 1 (now closes half when take profit is hit) * Wait for TP or SL before closing with AO (Once TP is hit AO can close trade anytime when criteria is hit) * TPBeforePSARTrail added (Does take profit need to be reached before PSAR trailing is enabled?) * TrailWithPSAR added (take the value of the previous bar's PSAR and updates stop loss if beneficial to trade) * Order01TrailStopAmount added (amount to trail once take profit is hit) Version 1.0g (131 downloads): * DisplayProfitLoss added (Display Profit/Loss on Chart comments?) * Added ability to choose different time frames * Fixed bug: opens new trades if MT4 is closed and reopened * Send E-mail when new orders are placed * Send E-mail when order total changes (does not count pending orders) Version 1.0h (46 downloads): * Fixed bug where order stop loss gets set to 0 when order is split Version 1.0i (195 downloads): * Fixed bug where indicators where not being read soon enough when restarting MT4 Version 2.0: * Fixed bug with pip calculation on profit display * Fixed problem with E-mail display text * Modified key areas to work with live accounts * Live version made available Pending additions/changes: * E-mail status of EA * Order modified, closed, deleted, etc.? (Not sure how far to go just yet) * Manage only * Place trades only */ string Version = "AshFX AutoTrader v2.0"; Special Notes : It is extremely important that MT4 run all week with the charts open and EA attached. No EA can do its thing unless everything is running. That's why you have an EA to trade for you. The EA will only run on demo accounts. I will release a live version if it pans out to be something. I will try to post weekly updates at least of the results. Currently supported brokers : All Here are some of my other threads you might find interesting... "The Pip Nailer" (EA - MTaboneWeb) AshFX Daily (EA - MTaboneWeb) DailyHighLow (EA - MTaboneWeb) GrabMyOrders (EA - MTaboneWeb) TossUp (EA - MTaboneWeb) Weekly Open EA A special thanks to all who have supported this EA and continue to support it.
+
+--- 帖子 #2 ---
+This post from the AshFX thread has made me think. http://www.forexfactory.com/showpost...postcount=1225 I was wondering if there should be an option in the EA to trail the order(s) with the PSAR from one bar to the next. Whatever the value was for the previous bar would be the new SL. Each of the 2 orders could have a True / False option for the PSAR trailing stop loss adjustment. I would also like to incorporate a typical type of trailing stop feature. Thoughts?
+
+--- 帖子 #3 ---
+I also intend to implement the first step for jimsforex from the AshFX thread. This would be were the EA places the trades but does not manage the trades once they're placed. I am thinking of how to incorporate some of his other ideas. These changes will have to wait a week or two since I'm out of town until the 18th. Original posts... http://www.forexfactory.com/showpost...postcount=1186 http://www.forexfactory.com/showpost...postcount=1188 http://www.forexfactory.com/showpost...postcount=1203
+
+--- 帖子 #4 ---
+MT, Thanks for your continuing refinements to this EA. Jim
+
+--- 帖子 #5 ---
+Just a couple of observations. Has anyone done any research about the direction of the Stoch signal and main from the bar prior to the signal bar to the signal bar? Does it improve the win ratio if they are both slanted in the direction of the potential trade in addition to the cross? I noticed when the first trade hit TP the SL on the second trade is moved to the entry price. This causes the loss of spread when a 2nd. trade hits the SL. I think it would be better to have zero loss or even a 1-5 pip gain on the 2nd SL after a profitable trade.
+
+--- 帖子 #6 ---
+Here's the latest trades.
+
+--- 帖子 #7 ---
+mtaboneweb, I know your busy with this ea but when your done can you write an ea for one of my systems??
+
+--- 帖子 #8 ---
+Sure send me a PM about the system or post the thread and I'll take a look.
+
+--- 帖子 #9 ---
+You should have mail : )
+
+--- 帖子 #10 ---
+Looks like it's progressing well. Will you open the code up to allow for assistance with development, or are you keeping it closed for security? I'd like to help add a feature or two, or if you'd rather keep your work secure maybe request a feature...? Basically what I'd like is for the EA to have a notify via email feature, where it would mail a comment out whenever it places/modifies/closes a trade.
+
+--- 帖子 #11 ---
+That can be added. I don't post my source code. I work hard on my EAs and right or wrong, my system or someone else's, it's my time and work behind the EAs. A lot of people wont like that answer and I apologize but it's what I'm comfortable with and I believe anyone who contributes is allowed their own comfort levels. I not saying I will charge eventually because that wont happen either. It's not my system I just wrote an EA for it. This is just my comfort level and since I wrote it I would like to keep control of how it's developed and how ideas are implemented. I program for a living so all I need is ideas/suggestions and then I'll figure out how well they fit into the EA and how they're implemented. My apologies if this twists anyone out of shape. Also, I was asked to start my own thread and so I would like to keep this thread about the EA I've developed. I would not like to start mixing different versions of EAs written by several others. Hopefully in doing this we all stay on track and of one mind and I will implement all the ideas I can for the EA as long as they enhance the original system and remain true to where it came from. New EAs can be written for other ideas so let's keep on track for each of the ones I've developed.
+
+--- 帖子 #12 ---
+It doesn't twist me out of shape. I work for a software development company so I understand your desire for closed source. Thank you for your time and effort so far, it's appreciated. Regarding a previous comment: "This post from the AshFX thread has made me think. http://www.forexfactory.com/showpost...postcount=1225 I was wondering if there should be an option in the EA to trail the order(s) with the PSAR from one bar to the next. Whatever the value was for the previous bar would be the new SL. Each of the 2 orders could have a True / False option for the PSAR trailing stop loss adjustment. I would also like to incorporate a typical type of trailing stop feature. Thoughts?" I'd be careful with using the PSAR values for SL...any period of low volume/low volatility could potentially create an overly-tight stop. Best to start with a "typical" trailing stop (be sure to use the built in MT4 capability for this and not your own, as many brokers will shut down accounts that do constant execution updates of stop orders due to bandwidth/server problems caused by such)
+
+--- 帖子 #13 ---
+Thanks fro the tip, and your support. I'll keep that in mind about the trailing stop.
+
+--- 帖子 #14 ---
+mtaboneweb,Maybe you can start a ea development/programming thread .....just my two cents
+
+--- 帖子 #15 ---
+He's not bad, is he.
+
+--- 帖子 #16 ---
+Hard to say with closed source However, the properties and setup for his EA give hint at some well made software.
+
+--- 帖子 #17 ---
+I have 2-3 more to post as well. Just haven't had the time to do it all at once. Thanks for the support.
+
+--- 帖子 #18 ---
+Hello Ash,No not from what I can see... Nice system by the way. Are trade entries are similar because we use stoc.. and AC. I dont use PSAR or AO thought.
+
+--- 帖子 #19 ---
+mtaboneweb, I have your AshFX_AutoTrader EA on my FXDD demo account, and I think your EA runs good. I just found out today, there may be some pairs missed out like: GBPJPY. I am talking about missing this pair on First Signal Trade (ie, TakeSSTrade=false). Can you please double check it for us? Like to know why. Thanks. Trader8686 --------------------------- Just like to learn it better!
+
+--- 帖子 #20 ---
+I can't see my charts right now but one common misunderstanding is the AO and AC. For a trade to be first strength then the AO AND AC both must be green (long) or red (short). In other words, they have to agree. My guess, without seeing the chart, is that the AO and AC didn't agree on the GBP/JPY.
+
+--- 帖子 #21 ---
+I was wrong. I just checked it and the Stoch was below 50. It was a 2nd strength trade. I have TakeSSTrade=true so the EA placed the trades for me.
+
+--- 帖子 #22 ---
+Today's trades and history.
+
+--- 帖子 #23 ---
+hello, thank you for sharing, btw how much the stop loss?
+
+--- 帖子 #24 ---
+Depends on the setup. It's all handled by the EA based on the AshFX system.
+
+--- 帖子 #25 ---
+Thank you for this developing EA. I hope you will give this for free as soon it is ok.
+
+--- 帖子 #26 ---
+I have to say that I can't wait for this EA to be released for live accounts. The System is great and this EA is awesome... Check out my results.
+
+--- 帖子 #27 ---
+There are some additions I would like to implement and that will require some testing. I don't see it being that far off.
+
+--- 帖子 #28 ---
+Thanks for the support.
+
+--- 帖子 #29 ---
+Please tel me how to instole the EA after I copied in the C:\Program Files\FXDD - MetaTrader 4\experts I have to do somthing more ?
+
+--- 帖子 #30 ---
+Just restart MT4 if it was already open when you copied the EA. After that, open a chart, change time frame to daily, and attach the EA. When you attach make sure the Allow live trading checkbox is checked.
+
+--- 帖子 #31 ---
+I sont have to open mata aditer ?
+
+--- 帖子 #32 ---
+The EA is already compiled.
+
+--- 帖子 #33 ---
+the 5t. rool for entry is (for sell ) ANDthe candle is a bearish candle ( or for buy a bullish )I wont to back test the system without this rool how can I take it out of the EA
+
+--- 帖子 #34 ---
+I'm not sure what your asking. Could you clarify?
+
+--- 帖子 #35 ---
+I think this person wants to backtest without the rule which states that a candle must be green/red (long/short)
+
+--- 帖子 #36 ---
+Mate, We are all following and testing. So far so good. Keep it up. Just waiting for the live version.
+
+--- 帖子 #37 ---
+Hi all, i had attach the file so what am i expect to see?
+
+--- 帖子 #38 ---
+Thats correct
+
+--- 帖子 #39 ---
+That could be programmed for sure but it goes against the rules of the AshFX system. Also the take profit, stop loss, etc. is set from that bar. If it's red when it should be green then calculations wouldn't be performed correctly. Example: Long trades should be Close of signal bar - Low of signal bar. If it's a down bar rather than an up bar then Close - Low wouldn't make any sense as far as the system is constructed.
+
+--- 帖子 #40 ---
+will EA auto adjust the SL and TP?
+
+--- 帖子 #41 ---
+does your EA calculate the S/R too?
+
+--- 帖子 #42 ---
+At this point the EA sets everything based off the original system. I have plans to implement some additions like trailing stop and even a trailing stop that's based on the PSAR value although it doesn't do either right now.
+
+--- 帖子 #43 ---
+I'm still looking for a reliable indicator that can be used for S/R. I was using "Support and Resistance (Barry)" manually but it doesn't seem to do very well. In some cases it went well beyond the S/R and made profit and then sometimes not so it was kind of a toss up. Any suggestions? Maybe one that does well in a daily time frame?
+
+--- 帖子 #44 ---
+I added a Settings section to the first post to explain the options.
+
+--- 帖子 #45 ---
+Please check post 1.
+
+--- 帖子 #46 ---
+The two trades above were opened yesterday but closed today by the EA without hitting their targets or stop loss. Closed out shortly after the change of day. Am I doing something wrong when implementing the EA?
+
+--- 帖子 #47 ---
+I believe they hit their exit criteria according to the system (AO changed colors).
+
+--- 帖子 #48 ---
+Don't think so. Yes, they changed to green but this is not an exit criteria for a long.
+
+--- 帖子 #49 ---
+Actually it is. See the screen shot of the pdf. You can also see the portion explaining that for a second strength trade the AO doesn't have to be compliant and that it will usually change colors but in this case did not. I didn't develop the system, only the EA to trade it according to the rules. The EA did what it was supposed to do according to the rules. This may require some tweaking for special scenarios since it's mechanical rather than manual.
+
+--- 帖子 #50 ---
+I would seriously question whether the AO changing to green on a long trade is a criterion for exiting the trade. I took a look at the screenshot as you recommended, but that only reinforces my opinion. Regarding exiting a trade, it states "So if you're long, you would exit the second half of your position when the AO eventually turns red." In this case, it turned green, which further validated the long position. The screenshot also notes, in regard to SS trades, "when taking a long, if the AO isn't compliant, one can still take the trade; it will usually turn green within the next couple of candles." That's exactly what happened, so why would that be a basis for exiting the position?
+
+--- 帖子 #51 ---
+It changed to green on the current bar. The EA and the system is based off of completed bars. It should be clear looking at the chart that the previous bar ( not the bar where the trade was closed) was even lower than the bar before that (which was the signal bar). On the very next bar it placed the long orders at the open of the bar and when it rolled over to today's bar it hadn't increased. The bar where the buy was initiated was lower the the bar where the trade was signaled. forexmoments has said repeatedly that he works on completed bars. It does not matter that the current bar is turning green because the previous closed bar was the signal for it to close. Like I've said before, I did not develop the system. I only developed the EA to trade the system precisely by the rules given by forexmoments. In this particular case it could end up being unfortunate that the trades closed early. I totally agree at this very moment with you but if it had continued down or does turn around before the end of this bar and be even lower then you would be upset that the trade lost even more money hitting a stop loss possibly. As far as I'm concerned the EA did exactly what forexmoments laid down as the rules. People who trade this system manually or with an EA need to ignore the current bar and look bar at the previous closed bars. That is where all the decisions are made.
+
+--- 帖子 #52 ---
+Let me clarify, I have no ax to grind at all. I don't use the EA yet, but appreciate all the hard work that went into it. In fact, I did not take this trade manually either because I felt the long signal came too close to past resistance. In this specific instance, I felt compelled to post because I thought edeyj999 made a valid point, and it would give you an opportunity to explain how the EA works just so we all could understand it a little better. Let me go through some of the points that you made and perhaps you can clarify my understanding of how you interpret the AshFX rules. That's absolutely correct. As I stated previously, the green candle appeared exactly two bars after the signal candle, which Ash noted often happens on SS trades. In regard to the height of the bar, I wasn't aware that was taken into account in deciding whether a trade would end. Are you saying the EA detected that and closed the trade for that reason? Are you saying the trade was closed by the EA due to the fact that the bar was lower than the previous one? Again, I wasn't aware that the height of the bar mattered, but if you programmed that into the EA, it's good to know. I certainly understand you did not develop the system, and I'm not trying to give you flak for being kind enough to develop an EA for the system. However, I would still respectfully disagree that this trade closed "precisely" by AshFX rules, unless I'm totally misunderstanding something about the system. The trade never reached the stop loss. If you're saying it closed because of the red AO bar on 7/21, doesn't that actually conflict with AshFX rules for SS trades, since the rules mention that the AO will "usually turn green with the next couple of candles", which is exactly what happened. I understand it's impossible to program every possible scenario into an EA, and perhaps this is one of those scenarios, but I just don't see how closing this specific trade conforms "exactly" to AshFX rules. I agree. I've made it a practice not to ever criticize the trade decisions of others, or to denigrate the work of a well-intended EA programmer, and, again, that's certainly not my intent here. It could be that I'm still misunderstanding what you're saying.
+
+--- 帖子 #53 ---
+The color of the bar is determined by how it compares to the previous bar. If it's less than then it's red and if it goes higher then green. Each progressively larger/higher bar will continue to be green until the first bar that is less and then that bar will be red. In the EA I don't see Red/Green I see values higher/lower (less than / greater than). I believe there would have to be something custom to be able to accommodate a second strength trade if the AO doesn't comply when the trade is initiated. On one hand the AO is specifically used as an exit and then dismissed for a period of time in the case of a second strength trade. The EA would have to be taught the difference and yet still know when it actually needed to use the AO as a signal to close the trade(s). Perhaps a variable for number of bars it's excused before it uses the AO as an exit possibility? You see what I mean? Even if both trades are open and the AO changes under the right circumstances then I feel both should be closed even if the first hasn't hit the take profit. It may not hit the take profit thus leaving it to double back and hit the stop loss eventually. In this case an extra bar of forgiveness might have done the trick but how much slack do you give these things? It also might have been a bad thing as well. In a manual world then the system would have human intervention but the EA is purely technical only doing what it was told to do. Suggestions?
+
+--- 帖子 #54 ---
+That certainly makes sense, and I see now why you referred to the height of the bar. Now I know why the word "conundrum" was invented . . . just to describe this situation, because I'm not sure there's a ready answer for that problem. It would be interesting to have Ash comment on how often SS trades includes a red AO bar. If it's relatively rare, perhaps the EA could "ignore" those trades. To my admittedly untrained eye, that seems easier than developing an EA that could somehow distinguish when to continue or exit a trade based on a rule that varies based on the type of trade (Standard vs. SS). I see exactly what you mean, and I don't see that there's an easy solution to those issues. Understood, and again, no instant "fix" comes to mind on this specific problem. During the height of popularity for the OzFX thread, I was asked by one of the EA developers on that thread to test the EA prior to its publication and give honest, candid feedback on any flaws, "bugs", or failure to conform to system rules that I observed, and we exchanged dozens of e-mails in the process. As a result, I'm used to doing that, and again, meant no disrespect toward your efforts. I appreciate that developing an EA to everyone's satisfaction is almost impossible and often a thankless task. One of the reasons for noting the issues I saw was to see if it solicited some suggestions from users of the EA or just interested observers. Sometimes the solution is easier than it would seem at first glance, so perhaps some traders would like to offer their input.
+
+--- 帖子 #55 ---
+this EA will not attach to my charts. any ideas on what the problems might be?
+
+--- 帖子 #56 ---
+Well, after a good night's sleep, I do have a couple of suggestions regarding how the EA might handle SS trades where the AO bar does not conform i.e. still green on a Short trade, still red on a Long trade. I took a look at the 4 major currency pairs over the past 6 months. Over that span, I found 30 trades that would be defined as AshFX SS trades. Of those, the vast majority, 26, conformed completely (in other words, the AO bar conformed with the rest of the trade signal). In only 4 cases was there a situation similar to what was encountered on the eur/jpy trade we were discussing. If that same percentage is somewhat similar for all the currency pairs, would it be possible for the EA to do one of these two suggestions?: 1. Ignore a trade altogether if the AO is not compliant. I realize that does not conform completely with AshFX rules, but it also prevents trying to figure out how to program the EA to exit per AshFX rules in this type of trade scenario. Of the 4 trades I found where the AO was not compliant, some were losing trades and none turned into large winners, so I'm not sure that eliminating them from the trading system would change the results much at all. On average, this type of trade situation only came up once every 6 months per currency pair on the 4 pairs I tested, so eliminating the "non-conforming" trade would not seem to affect overall performance much at all. 2. Open the trade only when the AO is compliant with the rest of the trade signal. As the rules state, that usually happens within a couple of bars anyway. Neither of these suggestions is perfect, since they do not match the AshFX rules exactly, but at this point, the EA exit strategy for this type of trade is not perfect either. All in all, it might prove to be a more manageable way for the EA to handle the trade and would eliminate a repeat of the EUR/JPY exit situation.
+
+--- 帖子 #57 ---
+I would have to say suggestion 1 is the easiest and maybe the best as well. If suggestion 2 were implemented then the EA would need to look back further than it does now looking for a trade that might have been close but AO was compliant. In doing that it might lead to bugs allowing trades to be placed when they weren't valid to begin with. I really do appreciate any and all suggestions. It's just been a little crazy maintaining 4 of my own threads and EAs for each one plus bug testing, etc. I spent the entire day today bug testing my WeeklyOpen EA. It was very frustrating. Some times it seems you have to over do everything when writing an EA just to make sure there's no way for the broker to mess it up and then sometimes it's just a bug that stays hidden for a good long while. Thanks for your help/support.
+
+--- 帖子 #58 ---
+For a trade to be compliant, doesn't a long trade need AO to go short and a short trade look for a long AO? Red AO is simply current AO less than previous AO Green AO is simply current AO greater than previous AO If we opened long, we're looking for a change from green to red, so--assuming 1 is the current bar--we're looking for 1 &lt; 2 &gt; 3. If we opened short, we're looking for a change from red to green, so--assuming 1 is the current bar--we're looking for 1 &gt; 2 &lt; 3. I don't see why this can't be implemented...
+
+--- 帖子 #59 ---
+Folks, I have just come back to this thread after a couple of days away and see that my original posts have generated some discussion! Just to put my cards on the table and as a preamble to my comments below I would like to state a few things: 1. Anything I say is not a criticism but is meant to be constructive. 2. The way the EA exits trades will not really affect me because I only intend to use the EA to confirm my interpretation of possible trade entries (although I had hoped it might be useful to determine if ASHFx weekly would be profitable just by taking the trade signals and exiting per the rules with no human intervention). 3. I am a system developer and know how difficult it can be to create something from a user specification. Ash has done a good job with his specification but in my opinion there are some areas that need further clarification. I think this is borne out by the fact that we disagree with the exit rules for these trades. 4. My view of the system is exactly that of YEN44X for these trades. The points I would like to make are as follows: 1. When I read the rules, it suggests to me that only the second half of a trade should look for a change of colour of AO. And then, for a long, the AO would turn from green to red, and vice versa for a short trade for the trade to be closed (not just a change of colour regardless). Now, I do have a problem with this in that there have been trades recently where the first part of the trade has not hit SL or TP before the AO changes colour. Ash's specification does not state what to do in these circumstances. Leaving those trades to run invariably means that they (both halves) hit SL with large losses (due to the SL being set at the prior swing high or low). As a result, I have been monitoring the system from the start of July and, for closed trades, the system is in a large loss. I think further clarification is needed for this scenario from Ash. 2. You mention only taking trading decisions on completed candles. I don't think this is correct. The decision for entry is only ever taken on a closed candle but the exit decision is taken on the current candle. SL or TP will only ever happen during a trading session so will be for a current candle. The only other exit criteria is when the current bar on the AO changes colour - again, this can only happen on the current open candle. 3. My final point is regarding trade entry. These trades entered when both the AO conflicted and the stochs were above/below their ideal. The way I read the spec these are independent trade factors. There is nothing in the spec that says the trade is valid if both these factors occur. Ash would need to confirm that the combination of the two still makes a valid trade. So, that's my take on things. I would be happy to participate in any discussions you may have regarding these or other rules of the system. I am also happy to try to contact Ash for clarification if you wish. I am also mindful that the EA is yours and you must decide how you want to play it. Those of us that decide to use it do so in the knowledge that any trade we place is at our risk not that of the EA. Sorry for the length of the post but I thought I may be able to help. Thanks for your efforts so far.
+
+--- 帖子 #60 ---
+I just found this . Ash states that AO is not considered until first TP is hit and then anytime after that could close the 2nd trade. If both are open then regardless of AO color the trades both remain active until 1st TP is hit or the both hit the SL. Of course this is not explained thoroughly in the pdf but it's news to me now and something I think can be implemented relatively easily. Do you agree? I agree, if you would like to get further verification that this is the case then please let me know.
+
+--- 帖子 #61 ---
+Yes, I agree with the first point. Hope its not too much work to include that as a check. I will see if I can email or PM Ash to determine the second point. Thanks.
+
+--- 帖子 #62 ---
+That would be great. I know we had this discussion once before on the AshFX thread, and I was pretty sure that they were NOT independent factors, but your argument is persuasive, so it would be interesting to see what Ash will say.
+
+--- 帖子 #63 ---
+Here is what I've compiled for additions to the AshFX EA. Does anyone see anything I missed or have suggestions about the proposed changes? ADX (DMI) addition ( Original post ) Implementing a possible ADX/DMI filter to be used in trading decision (True/False) Trailing stop options Add traditional trailing stop Add trailing stop based on PSAR Only adjusts stop loss if greater/less than before and if both are set to true then takes whichever one secures the most profit SS trades AO must comply Exit rules 1st trade rides until TP or SL, period . 2nd trade only closes on AO color change if 1st order has hit TP and/or stop loss is set to break even or better (trailing stop has moved the stop loss) If conditions are right for AO to be considered as a close, then it happens immediately upon the right signal (not on close of bar) This may confuse people in a situation where the end of the bar doesn't look like it should have been a signal but somewhere along the way it actually was. If during an active bar on any tick the condition is right then the 2nd trade will be closed. Example, long trade may still end in a green bar but somewhere during that bar it was actually less than (red) than previous bar and trade closed. E-Mail updates Trade placed (True/False) Trade modified (True/False) etc., suggestions? Does this look right?
+
+--- 帖子 #64 ---
+Looks great to me . . . thanks for all the hard work.
+
+--- 帖子 #65 ---
+One question now that I look at this again: If we choose not to employ the trailing stop, is the standard stop loss still automatically moved to BE when the first lot closes per AshFX rules? Thanks.
+
+--- 帖子 #66 ---
+Yes. It would update to break even. Let's say you had a traditional trailing stop plus the PSAR trailing stop. Break even is part of the system and would happen but if you had True on the other 2 as well then the EA would look at each one never countering the other unless it secured more profit for the trade. Obviously once break even is set then if both trailing stops were set to true then they would each in turn try to continuously look to set the bar higher based on their values/calculations but never backwards. Most people would choose one or the other but it would work just as well with both. If you look at enough charts it would appear that over time the PSAR would really make a good trailing stop gradually ensuring less of a loss and then beyond as a profit protector. As a trend gets closer to the end the PSAR gets closer and closer to the low/high of the current bar. Of course there is always the chance that your trade will go bad right away. Also the way I would implement the PSAR trailing stop would be by moving the stop loss up to the level of the previous bar's PSAR value so it wouldn't be happening during the current bar. The PSAR just seems to ride nicely above or below the current direction and from what I've read is what it was initially developed for just that.
+
+--- 帖子 #67 ---
+Very nice. I've never been a fan of trailing stops because traders tend to set the TS too tight and get prematurely stopped out of a trade that still has legs to run, but the use of the PSAR as a way to determine the trailing stop makes all kinds of sense.
+
+--- 帖子 #68 ---
+Would it be possible to include a "Manage Only" feature on the EA for those of us who prefer to use our discretion on which trades to open, but would like the convenience of the EA handling everything else? I tested an EA on the OzFX system thread prior to its publication that had that feature and it worked very well. I attached it and the instruction PDF to this post in case you would like to see how it operated.
+
+--- 帖子 #69 ---
+does anyone has the result ? thx
+
+--- 帖子 #70 ---
+Hi All This EA has had a great week so far. I too had the trades from the first part of the week close early but at least they were in profit! I first started this account trading manually. . .had a rough go of it and ended up at even after about two weeks trading. Decided this week to give this EA a chance and it seems to take trades very well. I think the solution you have come up with regarding the AO compliance for SS trades makes sense. Thanks for the hard work programming mtaboneweb. Attached Image (click to enlarge) I am tempted to close these trades but I have decided to let the account run managed by the EA only. So far so good but then again one week does not provide much of a test for the system or the EA.
+
+--- 帖子 #71 ---
+This has been requested by others and is something I plan on implementing.
+
+--- 帖子 #72 ---
+Awesome . . . thanks.
+
+--- 帖子 #73 ---
+Something like place trades trades only and manage only or both.
+
+--- 帖子 #74 ---
+"Manage only" would be sufficient for me because I like to enter my own trades, and tend to ignore a number of the AshFX signals if I see strong S &amp; R near the signal price.
+
+--- 帖子 #75 ---
+mtaboneweb, check pm thanks
+
+--- 帖子 #76 ---
+i am a newbie on this thread .i want to know if we can use the EA on live account by now ,or is there is a new development on the EA.
+
+--- 帖子 #77 ---
+Responded today.
+
+--- 帖子 #78 ---
+Please refer to 1st post for revision notes and new EA download.
+
+--- 帖子 #79 ---
+Thanks for the updates!
+
+--- 帖子 #80 ---
+My pleasure, thanks for the suggestions/support.
+
+--- 帖子 #81 ---
+Wow! I am very tempted to close some of these manually! I can't stand it! I really hope some of these come in soon before I lose whats left of my mind (the other brain cell!!!!). . . Attached Image (click to enlarge) Thanks mtaboneweb for the updated EA, I will download it shortly for additional testing. . . when I last looked the page 1 EA still said version e. Is it now version f? Is it possible to include the letter in the actual EA file name so we know which version we are testing? thanks again. ..
+
+--- 帖子 #82 ---
+Leaving the name unchanged makes it simple to just overwrite the EA in the Experts folder without having to change anything on your charts. Also, check the upper left corner of the chart in your screen shot. I always display the version number on the chart. You are currently using version 1.0 d .
+
+--- 帖子 #83 ---
+Can we use this to any TIME FRAME?
+
+--- 帖子 #84 ---
+The AshFX system was developed to run on Daily charts. I would not use anything but that.
+
+--- 帖子 #85 ---
+Also, for those who may have found this thread and not read the original, you should use FXDD. I do highly suggest reading the original thread. AshFX Daily
+
+--- 帖子 #86 ---
+I did not see the the little d before on my chart! thanks for pointing that out. I now understand how you are working your updates. Thanks for your continued support. . .
+
+--- 帖子 #87 ---
+While this EA was developed around a daily TF system there is nothing stopping you from testing it on lower time frames if you wish to, however, this EA was written to use the parameters given by the original AshFx thread which state: 1. use FXDD and 2. Use Daily TF Testing continues...
+
+--- 帖子 #88 ---
+Actually, the EA is hard coded to use a daily time frame when getting the values for the indicators. Example... Inserted Code PSAR0 = NormalizeDouble(iSAR(NULL, PERIOD_D1, 0.03, 0.2, 0), Precision); PSAR1 = NormalizeDouble(iSAR(NULL, PERIOD_D1, 0.03, 0.2, 1), Precision); PSAR2 = NormalizeDouble(iSAR(NULL, PERIOD_D1, 0.03, 0.2, 2), Precision); AC0 = iAC(NULL, PERIOD_D1, 0); AC1 = iAC(NULL, PERIOD_D1, 1); AC2 = iAC(NULL, PERIOD_D1, 2); StochMain0 = NormalizeDouble(iStochastic(NULL, PERIOD_D1, 5, 3, 3, MODE_SMA, 0, MODE_MAIN, 0), 4); StochMain1 = NormalizeDouble(iStochastic(NULL, PERIOD_D1, 5, 3, 3, MODE_SMA, 0, MODE_MAIN, 1), 4); StochMain2 = NormalizeDouble(iStochastic(NULL, PERIOD_D1, 5, 3, 3, MODE_SMA, 0, MODE_MAIN, 2), 4); StochSignal0 = NormalizeDouble(iStochastic(NULL, PERIOD_D1, 5, 3, 3, MODE_SMA, 0, MODE_SIGNAL, 0), 4); StochSignal1 = NormalizeDouble(iStochastic(NULL, PERIOD_D1, 5, 3, 3, MODE_SMA, 0, MODE_SIGNAL, 1), 4); StochSignal2 = NormalizeDouble(iStochastic(NULL, PERIOD_D1, 5, 3, 3, MODE_SMA, 0, MODE_SIGNAL, 2), 4); AO0 = iAO(NULL, PERIOD_D1, 0); AO1 = iAO(NULL, PERIOD_D1, 1); AO2 = iAO(NULL, PERIOD_D1, 2); Of course it doesn't have to be hard coded for "PERIOD_D1". Do you guys think it may work in different time frames because I could replace "PERIOD_D1" with "NULL" and it would use whatever time frame you have it set to. Actually, I'll do that on the next revision.
+
+--- 帖子 #89 ---
+I've added that to the 1st post. Anyone who wants to see what's next can look at the 1st post under the " Pending additions/changes " section. If you see something missing or something you'd like to suggest then I'll keep that section up to date.
+
+--- 帖子 #90 ---
+You already answered your own question, but let me add that I think that's a great idea. On the old OzFX system, I actually did far better using 4-hour charts instead of Daily for several months, so having that flexibility with the EA for AshFX would be very helpful.
+
+--- 帖子 #91 ---
+I think that's it then. You can always have the choice to continue on Daily charts if you wanted to stick to the original system.
+
+--- 帖子 #92 ---
+Great Idea mtaboneweb. . .I love your forward thinking. . . I do think it could work in lower TF but of course one would have to alter the SL's and TP's (imho)
+
+--- 帖子 #93 ---
+They would probably be smaller since the bars would be smaller.
+
+--- 帖子 #94 ---
+very good
+
+--- 帖子 #95 ---
+I would just like a moment to say thanks for all your hard work - keep it up!
+
+--- 帖子 #96 ---
+Yes, this is an example of a small bar (probably from a 4-hour chart).
+
+--- 帖子 #97 ---
+And, then there's the very small bars on the 60-min chart, which we'll refer to as a mini-bar for EA purposes. This trader apparently doesn't use 60-min charts.
+
+--- 帖子 #98 ---
+Hey... You buying? Cause I'll be there...
+
+--- 帖子 #99 ---
+Sure, I'll buy you a "small" drink. Sorry to mess up your thread with my warped sense of humor. It's Friday night and I'm sitting home posting on FF. What a life, eh?
+
+--- 帖子 #100 ---
+Boy, it's a good thing I have better things to do... Hey wait a minute, what am I doing? I have cold Stella in the fridge, gotta go. Have a great weekend.
+
+--- 帖子 #101 ---
+Stella! (from a bit on Seinfeld, lol)
+
+--- 帖子 #102 ---
+No, I was talking about Stella Artois but that Seinfeld episode is hilarious.
+
+--- 帖子 #103 ---
+What a small world . . . I used to date Stella Artois, but she was HOT when I knew her.
+
+--- 帖子 #104 ---
+Hi, what settings are you guys using for the EA? I'm backtesting with the defaults but it only makes 1 trade a month...
+
+--- 帖子 #105 ---
+Default settings on hourly charts. I've have several trades so far.
+
+--- 帖子 #106 ---
+Here is the first completed trade for the EAU/CAD on the latest version. 185 pips.
+
+--- 帖子 #107 ---
+This has been a great trade, but I think 185 pips may be a misprint. The signal candle closed at 1.6004, so with the 9-pip spread at FXDD the buy would have been at 1.6013, and the high price today was 1.6139, so the maximum gain would have been around 127 pips, unless you're combining the first closed lot with the second open lot. Is that what you actually meant?
+
+--- 帖子 #108 ---
+Yes, combined. See profit/loss in upper left corner of the chart? 2 trades and 185 pips between the 2.
+
+--- 帖子 #109 ---
+Hi MTaboneWeb, I am a bit confused about the settings. Some posts ago you wrote that the EA should run with hourly settings. But the attached chart showed clearly a daily chart. What is the right setting please? BTW, maybe I have some settings wrong, because I have no trade so far. Thanks for your help! cyborg
+
+--- 帖子 #110 ---
+Sorry, I will learn to read the fine print one of these days. Anyway, a very nice EA trade. I wanted to make sure you didn't have the upgrade super-deluxe Early Entry EA. If you did, I wanted to order it too.
+
+--- 帖子 #111 ---
+I was about to ask the same thing
+
+--- 帖子 #112 ---
+My apologies, I thought I was replying to a PipNailer EA question. You are right, the charts are daily although the next version will allow for any time frame. Thanks for catching that.
+
+--- 帖子 #113 ---
+Is there an early entry EA floating about?
+
+--- 帖子 #114 ---
+Thanks for your reply! So the right setting is daily chart? And is it possible that there was no trade the last 24 hours? Thanks cyborg
+
+--- 帖子 #115 ---
+Only in my fertile imagination. Sorry, that was just a misguided attempt at humor.
+
+--- 帖子 #116 ---
+Here is my history since Sunday's open.
+
+--- 帖子 #117 ---
+Please see post #1 for EA, settings, revision notes.
+
+--- 帖子 #118 ---
+Does it matter what the magic number is? I set it to 1, then 2, etc for each chart the EA is attached to - still no trades after two days...
+
+--- 帖子 #119 ---
+The magic number can be the same for all charts as long as your not duplicating currency pairs. If you wanted to run 2 charts for EUR/USD for example (Daily/Hourly) then each of those 2 would need unique magic numbers. If you were running 18 different pairs then they could all use the same number. Inserted Code //check to see if order already exists for (cnt = 0; cnt &lt; OrdersTotal(); cnt++) { OrderSelect(cnt, SELECT_BY_POS, MODE_TRADES); if (OrderSymbol() == Symbol() &amp;&amp; OrderMagicNumber() == EAMagicNumber) { As you can see from the code above both Symbol and magic number have to match before EA does anything with the order.
+
+--- 帖子 #120 ---
+Caught something else, check 1st post for EA and notes.
+
+--- 帖子 #121 ---
+Is it possible that I'm not getting any trades because I'm on Vista? Will download and run this on an XP Virtual machine and see what happens
+
+--- 帖子 #122 ---
+It shouldn't have anything to do with Vista. I will tell you though, the last time it placed any trades was for CAD/JPY on 7/29 and I'm running 18 currency pairs. Before that was EUR/CAD on 7/28 and GBP/USD on 7/25. Basically 3 signals out of 18 pairs for the past few days. It just doesn't have many signals but that's not a bad thing.
+
+--- 帖子 #123 ---
+Hello All I have been running this EA on a demo account for about two weeks now. Performance has been excellent. . . Attached Image (click to enlarge)
+
+--- 帖子 #124 ---
+Excellent, thank you for sharing your results with us.
+
+--- 帖子 #125 ---
+Hi ! This EA runs only in begin of the day, in 00:00h time broker? regards, Felipe
+
+--- 帖子 #126 ---
+Hi Meta, The EA version "f" took 2 trades audjpy and cadjpy and i just saw that no SL or TP appear on MT4. Are SL or TP shadow or is it a bug from the EA and I have to enter SL and TP myself ? (Note that shadow order would be great as I don't like my broker to see my SL / TP)
+
+--- 帖子 #127 ---
+Wow, you have been one busy EA programmer! I think the recent additions will enhance the EA even further, and I appreciate all the hard work. As you probably remember, my #1 "wish list" project is the "Manage Only" feature. Is that still a ways down on the priority list, or is there a chance it will be coming soon? Thanks again for all the improvements.
+
+--- 帖子 #128 ---
+I've been using the EA since July 14th. I started with a demo amount of $3000 and I'm currently at $4320. I have adjusted TP's and SL's for some trades based on price action and support and resistance. Overall, this so far is a great system when used with some basic trading discipline and the EA seems to be working great. One question about the EA...the newer versions don't have the TP displayed. Is this by design or is there something in the parameters I need to configure differently?
+
+--- 帖子 #129 ---
+It runs at each completed candle to determine if a trade is initiated so if Daily then yes it's like you say but if hourly then every hour. Special note: The EA does far more than just open trades. The EA manages any trades with each tick of the chart. It's important that you leave MT4, the charts, and the EA all running as long as the market is open.
+
+--- 帖子 #130 ---
+It's an unfortunate bug I've been trying to squash. I think I've finally exterminated it and will post shortly.
+
+--- 帖子 #131 ---
+Thanks for your support. I am hoping this modification isn't far off but I've been very popular lately and been asked to write several EAs. It's all very flattering really but it's kind of consuming my life right now. I have a full time job, 3 kids, a wife, and now forex factory all begging for attention. I do enjoy what I do and especially programming and writing these EAs but I have to try to balance. Oh yeah, and I quit smoking 26 hours ago after being a pack a day smoker for the last 21 years . I'm not upset, in fact I really do enjoy being a part of this forum. Please feel free to suggest new changes, report bugs, etc. any time you like and I will try to take care of them in a timely manner. Thanks again, Matt
+
+--- 帖子 #132 ---
+My goodness, amigo, you're taking multi-tasking to a whole new level. Keep it balanced . . . family first and the rest will fall into place, and good luck on the "clear lungs" project.
+
+--- 帖子 #133 ---
+It's by design since the EA splits the order now when take profit is hit. The EA checks the comment on the order which is where I store the take profit we're looking for. It's great that your account is doing well considering the amount of changes/bugs in the EA. I know I've posted a lot of revisions but I like to stay on top of things when I catch something and post it asap.
+
+--- 帖子 #134 ---
+Thanks, today feels a little nerve racking but it will pass. When my 11 year old daughter continuously asks/begs me to quit smoking, how can I refuse. Of course I need to do it anyways.
+
+--- 帖子 #135 ---
+Please check the first post for download of new EA and revision notes.
+
+--- 帖子 #136 ---
+Thanks for the clarification...never noticed the TP in the comment line. Are you taking/doing anything to help quit smoking? I quit 7 months ago with the help of some supplements. They take the edge off... Thanks again for your hard work on the EA
+
+--- 帖子 #137 ---
+Just the patch (Step 1). Actually yesterday was easier than today but it's all mental since I'm actually getting my nicotine from the patch. I would really like to go outside for a smoke right now but I have to resist. It really is a lifestyle change.
+
+--- 帖子 #138 ---
+You hang in there...it's worth the pain. Anytime you want a smoke, instantly divert your mind to something else. Also the carrot and celery sticks help... You can do it!
+
+--- 帖子 #139 ---
+Thanks for the support.
+
+--- 帖子 #140 ---
+My friend successfully quit smoking, he's been smoke-free for 2 years now. He said whenever he got cravings he would Google pictures of smoker's lungs, lol
+
+--- 帖子 #141 ---
+I'll try that, lol.
+
+--- 帖子 #142 ---
+12 years quit for me. It is the best thing i ever did and i am sure you will feel the same way.
+
+--- 帖子 #143 ---
+Due to a bug which has since been fixed the EA actually took 2 trades on the GBP/USD on the same day. I was making changes and restarted MT4 to see it open a second time but like I say it's fixed now. + 427 pips. This is because of the 2 trades that both hit their take profit and then split. Trailing the orders with a 30 pip stop loss made sure the other half of the orders remained positive. Also if you look closely you can see where the stop loss changed before the take profit following the previous bar's PSAR value. Trailing with the PSAR turned out to be a good thing with the Pipnailer because I only lost 3 pips on a trade that turned around on me on the next bar rather than the original stop loss that was set.
+
+--- 帖子 #144 ---
+Here you can see where the stop loss has been moved down to the previous bar's PSAR value. This is a setting (True/False). I really think this was a good addition but each person has the option to use it or not.
+
+--- 帖子 #145 ---
+Nice Job!
+
+--- 帖子 #146 ---
+Your welcome and Thanks to you for all your efforts programming.
+
+--- 帖子 #147 ---
+Congrats on getting off the weed Matt. 21 years is a long time and smokes are an extremely hard habit to break. You will feel better for it in a while.
+
+--- 帖子 #148 ---
+Hi Metaboneweb, Noted that you've been working very hard on this project and many thanks for sharing your work. Could you please tell me whether the PSAR setting is still at the original 0.03/0.2 or you have changed it to 0.02/0.2?
+
+--- 帖子 #149 ---
+Thank you, it's the original setting. Has it changed on the original thread? I haven't been keeping up with that one as well as I probably should.
+
+--- 帖子 #150 ---
+I'm sure I will. It's a complete life change when you just wake up one day and stop doing something that you did 20 times a day (pack of cigarettes). First thing in the morning, last before bed, before and after meals, before and after... Bottom line, my family is very happy and I'm sure I will too one day. Took me 21 years to program my life in a direction so it doesn't just shift over night but I'm not going back. Tried the Google images (smokers lungs) and it did make me want to stay on track.
+
+--- 帖子 #151 ---
+I've created another thread for a very simple EA I wrote for a friend. Check it out if you like. GrabMyOrders (EA - MTaboneWeb)
+
+--- 帖子 #152 ---
+I've created another thread for a very simple EA I wrote for a friend. Check it out if you like. TossUp (EA - MTaboneWeb)
+
+--- 帖子 #153 ---
+Wow, you're on a roll today lol. Keep up the good work
+
+--- 帖子 #154 ---
+I quit smoking this week and now I'm just trying to stay busy.
+
+--- 帖子 #155 ---
+Hi mtaboneweb, I was trying to test your EA, installed on two demo accounts on Sunday night. But so far no trade at all for almost whole week for both demos. All default settings on daily chart. Any suggestions? Thanks!
+
+--- 帖子 #156 ---
+Which broker are you using? Does the EA have a smiley face or a frown on your charts?
+
+--- 帖子 #157 ---
+Hi mtaboneweb, The two demos are on ODL and Forex.com Yes, I see smiley face on both. What I am missing? Thanks
+
+--- 帖子 #158 ---
+Di d you check off "Allow Live Trading?"
+
+--- 帖子 #159 ---
+Be honest and tell me what you think... Poll: Do I have to share my source code?
+
+--- 帖子 #160 ---
+Here's where I'm at with the EA. Results have been very good so far.
+
+--- 帖子 #161 ---
+Thanks et_phonehome, yes, I did, otherwise, I don't think I will not see smiley faces. Question to you all, Do I need to put any indicators on the chart? Can anyone please share template you are using and working? Thanks very much!
+
+--- 帖子 #162 ---
+You don't need to attach any indicators but can find a template file on the original thread (post 1). When you apply the template you will need to also attach the EA again since it will make it go way.
+
+--- 帖子 #163 ---
+looks pretty good, i'll start this demo up next monday
+
+--- 帖子 #164 ---
+Hello mtaboneweb Please could you explain what are the red PSAR? dots on your charts? Can I find it in the AshFX template and do I need it? Thanks cyborg
+
+--- 帖子 #165 ---
+Thank for your explanation. I try my demo it is so good and profitable
+
+--- 帖子 #166 ---
+Version 1.0e , default settings 23jul-1aug p.s. mtaboneweb, you using version 1.0j, what is the differents from 1.0i and when it will be available?
+
+--- 帖子 #167 ---
+That information is in the first post under revision notes.
+
+--- 帖子 #168 ---
+There are some red and green dots on my charts that show support/resistance. It's an indicator called "Support and Resistance (Barry)" but I haven't found it to be useful. I just haven't removed it from my charts.
+
+--- 帖子 #169 ---
+Thanks for clarification and PLEASE keep on your great work! cyborg
+
+--- 帖子 #170 ---
+I will continue on my daily testing this week but have also set up another installation of FXDD to test all pairs with 4 hour time frames as well.
+
+--- 帖子 #171 ---
+One half closed for 43 pips the other half being trailed.
+
+--- 帖子 #172 ---
++53 pips.
+
+--- 帖子 #173 ---
+Hit stop loss.
+
+--- 帖子 #174 ---
++94 pips.
+
+--- 帖子 #175 ---
++36 pips.
+
+--- 帖子 #176 ---
+Currently up $685.31.
+
+--- 帖子 #177 ---
+Wow . . . an impressive start to the 4H trades! You're rolling in the demo dollars today, eh?
+
+--- 帖子 #178 ---
+I would most definitely run this on a live account if I had one. The WeeklyOpen EA is doing very well too.
+
+--- 帖子 #179 ---
+Hello All! Fantastic system and interesting EA... I'm just wondering why this seems to work in forward tests but have quite bad results in backtesting, any idea? Mtaboneweb, can I kindly ask you why you removed the EAs? Any bug?
+
+--- 帖子 #180 ---
+where did the EA go? i don't see it posted on the first post anymore thx
+
+--- 帖子 #181 ---
+The first post's information has been updated.
+
+--- 帖子 #182 ---
+Due to personal reasons I will be closing this thread down. As you all know from my posts, this system was not mine and I've never made any claims in that direction. I merely wrote an EA to trade it automatically. The amount of downloads and requests for live versions have been overwhelming and I thank anyone who has contributed here. For more information about the system please refer to the original thread where forexmoments has been more than generous in sharing his system and coaching. I believe there have been other EAs developed that you may find useful on his thread as well. AshFX Daily
+
+--- 帖子 #183 ---
+While I respect your right to do what you want with your thread, I'm sure a lot of people will be saddened to hear that you're closing it. I personally never used the EA, but wrote several posts defending your right to keep your source code. I'm still puzzled as to why, but you opened another thread inviting people's opinions on whether you should share your source code, and then seemed hurt and dismayed by the few that felt you should. The vast majority supported your view, and yet you seemed more concerned with the few who didn't. I'm not sure why you ever asked the question if you didn't want the inevitable answers. That's a shame, because you walk away worse for the experience, and the many who enjoyed your EA are now left wondering why.
+
+--- 帖子 #184 ---
+Yen, I've always looked forward to your responses and respected them. The source code poll has left a sour taste in my mouth because of the threats that my source will be decompiled whether I give my permission or not. Bottom line is, I'm not comfortable with that. If I was then I would have just been posting my source to begin with and none of this would even be a concern. I was looking to jar people into wanting to be active in helping. You take a look at someone like forexmoments. He's had massive success with his threads and strategies but he's even put some boundaries down. He wont hold your hand for every single trade, come over to your house and place the trades, monitor them, split the orders at the right moment, trail your stops, send you email alerts, and the list goes on and on. I've seen him post on more than one occasion that he wont always be available and wont always say everything he's doing or even why. That is all very understandable and we all appreciate his time. Now along comes me who takes all the effort out of it by writing an EA to do it all. It's based on his system but it's not the same service. The EA wont take a break or really require you to do anything. It allows people to be completely ignorant to the system. I feel that's worth something. Now before anyone pipes up with anything I didn't say money. I would gladly share the EA with anyone who has helped me like I feel I'm helping. Share your thoughts, post your results, report bugs, share different settings you've tried and what worked and what didn't. Now if you haven't done any of that other than post "Where's the live version?", or PM'd me saying "Gimme, gimme, gimme" then I'm not inclined or required to do any of that in my opinion. You have to start seeing what I'm saying. I can't post the code anymore because it's open to the world and not just those who I see as being helpful. I pulled the code for all because it brings me back to my comfort area. I wont release the AshFX or PipNailer EAs anymore because they don't belong to me. I have a full right to use them myself because I spent the time to learn the system and coded something to do it for me. It's the same as me doing it myself except I wrote a program to do it without me. The lines become cloudy very quickly because Ash developed the system and I wrote an EA to trade it. I've asked his opinion on some ideas I had about how to distribute the EA and he was not in full agreement with them although we both understand the opposite sides. He feels since his thread is free it should remain freely discussed and that is his choice and I respect that. Again, he has outlined his involvement and it's limitations. The EA, in my opinion, is quite another matter. This response is meant to be taken in a general manner and does not directly point to anyone specifically.
+
+--- 帖子 #185 ---
+Well, best wishes to you. Don't let all this make you start smoking again. I do have one question, and I'm not being sarcastic in any way. I just don't have any knowledge whatsoever of your area of expertise, so let me ask completely naively: Since you've already given your ingenuity and labor away in the form of an EA at no charge, what's the major issue if someone does decompile it? It seems to me you've already given away the recipe, and now if someone wants to alter it, how does that affect you? As I said, I'm completely ignorant regarding your line of work, but maybe you can "dumb it down" for me and explain why this is such an issue for programmers such as yourself. Thanks and good luck to you!
+
+--- 帖子 #186 ---
+Since you call it a recipe, lets say you're a cook by profession that creates a dish that everyone likes. Now another cook takes that recipe and changes one or two things and starts serving it at his restaurant. If being a cook was how you made your living wouldn't that upset you even a bit. Especially if you knew those other cooks wouldn't know the first thing about creating their own recipe to begin with. Now they sell it to a major company or somewhere else and you receive nothing for your efforts. All because they paid for a decompiler once again using no effort of their own taking the easiest road they possibly can. If you were a newspaper journalist and spent time taking pictures, interviewing, writing some major story that was going to earn you some sort of credit and a passing jogger swipes all your work from your hands and now it's his and not yours anymore. I could go on and on... I will not post code of any sort on these forums again. Some will say that's harsh but I've seen more than one of my EAs being sold on the net. It's my own fault really, because I've made the same mistake again. I just thought I was a little better protected withholding my source code. As it turns out, that's not the case.
+
+--- 帖子 #187 ---
+If code protection and integrity is really what you're after, your best option is an EA hosted on your own server, which then sends signals out to other EAs. Effectively, there is one broadcast EA, and many receiver EAs. The account copier comes to mind. Basically: Set the signal transmitter on the Investor login of the account Set the signal receiver on your own account Let the transmitter communicate trades to the receiver. I personally will be using this in the automated trading championships. Hopefully the "Better" NN will be working well enough to help me return another 1300%.
+
+--- 帖子 #188 ---
+People are selling it? Don't they know that it only works on demo accounts? Your other point - I know an EA that won't work until you put in an activation key generated by the author, you could try that.
+
+--- 帖子 #189 ---
+Thank you Ronald. Although you have not always agreed with me 100%, I've always valued your opinion and appreciate your support. I will look into that above. Best of luck with your EA and the championship.
+
+--- 帖子 #190 ---
+People have sold previous EAs I've either written or participated in. It still leaves you at their mercy by supplying them with the EA in the first place.
+
+--- 帖子 #191 ---
+mtaboneweb Thanks for your participation. I am sorry to hear you have reached the decisions that you did. I respect your right to do as you wish with your programming skills. Your EA helped me to see that Ashfx dailly is an excellent system, so I owe you a thanks for that.
+
+--- 帖子 #192 ---
+As it turns out I will be keeping this thread open for a little while longer to post results and discussion and for those who have already downloaded the EA previously.
+
+--- 帖子 #193 ---
+Just for the record .. . Attached Image (click to enlarge) My demo running the EA has just tipped over the 6000.00 mark.
+
+--- 帖子 #194 ---
+Great! I am glad to hear this, I will continue to post results as long as I am running your EA.
+
+--- 帖子 #195 ---
+Very nice.
+
+--- 帖子 #196 ---
+Thanks for your support.
+
+--- 帖子 #197 ---
+Here's my history to date on from the latest version of the EA on Daily charts.
+
+--- 帖子 #198 ---
+Here's my history to date on from the latest version of the EA on 4 hour charts.
+
+--- 帖子 #199 ---
+Hi! it happened I started using the ea on August 4. Results are very interesting, +95.64 on closed trades, and currently +92.11 in the open ones. Indeed I am not using all the pairs available. From today I plan to use it on another account, with different settings. Keep up the good job: it needs anyway time to be tested adequately.
+
+--- 帖子 #200 ---
+Nice to hear! Your work is highly appreciated. I am a programmer too (C++), and have also released a lot of free work over the years. I did a patch which makes Skies Of Arcadia on PC Dreamcast emulation work properly, and also No CD cracks for early versions of the game Sacred. Even though what I released was helpful and working, lots of people just wanted more all the time or complain or ask the same questions forever so I lose heart (interest) and left those threads. Sometimes people don't understand (or don't want to understand) that programming/testing/debugging these things take a huge amount of time. Lately I have been working on a set of 15 TV3D game programming tutorials, but I continue those because the community support is great. I think this is mostly due to the community being composed of programmers who appreciate the time taken. IMHO, a free ea is always going to be better than no ea. Just ignore those few who complain, and concentrate on those who support your efforts.
+
+--- 帖子 #201 ---
+My sentiments exactly. You've done an incredible job Matt, and have been a huge help. I'll continue to post my results as well...currently up $1623 since 7-14...and keep up the good work with smoking...
+
+--- 帖子 #202 ---
+Thanks for your support.
+
+--- 帖子 #203 ---
+Great results. Thanks for sharing.
+
+--- 帖子 #204 ---
+Mta you wouldn't be interested in making one final EA would you...? I'm still new to forex but I made a system that seems very promising. Please let me know if you're interested and I'll send you the template and a screenshot of my progress so far Thanks
+
+--- 帖子 #205 ---
+Send me a private message and we can discuss it.
+
+--- 帖子 #206 ---
+Hi Meta, How sad a few AHs did get rid of your enthousiasm ,hard working and sharing spirit. Once again a few negative grinch ruins a nice thing a majority of people were enjoying. Btw it's your choice and your right and we just have to respect it.
+
+--- 帖子 #207 ---
+Matt, I want to add my thanks for the EA. I am still running it but only to confirm the signals I see visually (I think I mentioned that in a previous posting). If you wish I will delete it from my system. It's a shame that some folk can't just take it at face value but have to go further than you are comfortable with. Unfortunately that's life in my experience. Copyrighting code is very difficult for the individual (not too easy for large corporations either!). Anyway, I wish you all the best in your endeavours.
+
+--- 帖子 #208 ---
+Here is the open status of the EA. Note the stop loss being moved slightly down following the PSAR value and lowering the risk.
+
+--- 帖子 #209 ---
+Looks like some new trades have opened and the overall balance is down now. At one point it was up a little over $200 profit.
+
+--- 帖子 #210 ---
+What pairs are everyone testing?
+
+--- 帖子 #211 ---
+I've been testing all pairs open to me except things like gold, silver, etc.
+
+--- 帖子 #212 ---
+Currently testing 18 pair. The EUR/JPY is taking quite a ride...we'll see how it ends up.
+
+--- 帖子 #213 ---
+History.
+
+--- 帖子 #214 ---
+Open.
+
+--- 帖子 #215 ---
+History.
+
+--- 帖子 #216 ---
+Open.
+
+--- 帖子 #217 ---
+History.
+
+--- 帖子 #218 ---
+Open.
+
+--- 帖子 #219 ---
+History.
+
+--- 帖子 #220 ---
+Open.
+
+--- 帖子 #221 ---
+This thread is dying now that it is not about sharing anymore...
+
+--- 帖子 #222 ---
+Are you planning on trading live with the system mta?
+
+--- 帖子 #223 ---
+I don't have a live FXDD account yet but was planning on working in that direction.
+
+--- 帖子 #224 ---
+Below is all the currency pairs that have actually had trades on the EA so far.
+
+--- 帖子 #225 ---
+AUD/NZD
+
+--- 帖子 #226 ---
+CAD/JPY
+
+--- 帖子 #227 ---
+EUR/CAD
+
+--- 帖子 #228 ---
+EUR/CHF
+
+--- 帖子 #229 ---
+EUR/JPY
+
+--- 帖子 #230 ---
+GBP/JPY
+
+--- 帖子 #231 ---
+GBP/USD
+
+--- 帖子 #232 ---
+Complete Daily history.
+
+--- 帖子 #233 ---
+Daily open trades.
+
+--- 帖子 #234 ---
+4 hour open trades.
+
+--- 帖子 #235 ---
+It should go without saying but I should mention that just because the 4 hour time frame is down does not mean that the 4 hour time frame isn't good for certain pairs.
+
+--- 帖子 #236 ---
+Positive 4 hour time frame pair (AUD/CAD).
+
+--- 帖子 #237 ---
+Positive 4 hour time frame pair (CAD/JPY).
+
+--- 帖子 #238 ---
+Positive 4 hour time frame pair (EUR/AUD).
+
+--- 帖子 #239 ---
+Positive 4 hour time frame pair (EUR/GBP).
+
+--- 帖子 #240 ---
+Hi, I see that you made almost 2K but then on other screenshot it seems you lose them and also lost another 1K. The system is irregular? Thanks
+
+--- 帖子 #133 ---
+Positive 4 hour time frame pair (EUR/USD).
+
+--- 帖子 #134 ---
+Positive 4 hour time frame pair (GBP/CHF).
+
+--- 帖子 #135 ---
+Positive 4 hour time frame pair (GBP/JPY).
+
+--- 帖子 #136 ---
+Positive 4 hour time frame pair (USD/JPY).
+
+--- 帖子 #137 ---
+First, I'm running a complete set of pairs on Daily charts and also another complete set on 4 hour charts. There are 2 different demo accounts. The daily is doing very well overall. It's true that the 4 hour demo is not doing as well but I would not likely run all pairs on a live account anyways. That's why I test all pairs to see which ones to the best and the previous screen shots show that some pairs are doing very well even after several trades.
+
+--- 帖子 #138 ---
+Daily charts (history). EA has closed half the NZD/USD order and is trailing the remainder by 30 pips.
+
+--- 帖子 #139 ---
+Daily charts (open). You can see the second half of the NZD/USD and the other 2 full orders.
+
+--- 帖子 #140 ---
+The latest history I've been posting is since 7/28 and has bee n doing well. Some of the previous posts were back when I was still fixing bugs in the EA. I'm not saying it wont lose here and there but you can't place all your stock in those older screen shots either.
+
+--- 帖子 #141 ---
+To all, I appreciate your time, support, and feedback. Due to certain circumstances I am closing down all my threads here because I can no longer support them. Not because I mentally can't but my purpose here has become skewed and I'm now in a gray area. I really don't want to say more than that so I hope you'll forgive me for being quick. Thanks again, Matt
+
+--- 帖子 #142 ---
+Hi MTaboneWeb I've try your AshFX EA and PipsNailer EA with demo A/c most of the MT4 Brokers and it really profitable.Don't you have LIVE EA? Jerry
+
+--- 帖子 #143 ---
+Did a live version of this EA (or any other EA mentioned on the first page of this thread) became available? Cheers
+
+
+===== 附件下载链接 =====
+
+未找到附件

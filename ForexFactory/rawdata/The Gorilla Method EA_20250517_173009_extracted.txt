@@ -1,0 +1,618 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Aloha everyone, In order to keep the Gorilla EA separate from the Gorilla Method thread from Cm7, I am setting up this thread. Please keep the discussion only to the EA’s. I will post any modifications and improvements to the EA here. If you are involved in the testing of the EA, please post your results here at the end of each week. Previous EA posts copied below: ------------------------------------------------------- Gorilla v1.0 ------------------------------------------------------- I modified one of my other EA’s to the Gorilla trading rules. To run this EA, put the nonlagdot file in the indicators folder and compile, put the currencySignals file in the include folder (do not need to compile), and the Gorilla_EA_v1.0 in experts folder and compile. Entry rules and exit rules are in the comments at the top of the EA code. I also added a few options and additional features: - AutoMagicNumber: if this is true, you don’t need to assign a magic # for all major pairs and major crosses. If false, you can pick a magic #. This is useful if you want to stay in a position longer term and add to it, remove the EA, then set a new EA with AutoMagicNumber = false and you can assign a new magic #. If the EA closes out the 2nd position due to trading rules, the first will be open still (since different magic #). - longTarget / shortTarget: manually set these is you want to get out at a specific price. I like to set at swing highs / swing lows as that’s where people usually put SL and it’s a good place to exit as SL are run. - wantLongs / wantShorts: self-explanatory - useNLD filter: non lag dot (NLD) is evaluated on 5 and 15 min charts. Both must indicate up for longs. If price is falling on 1 hr chart at/near EMA30, and useNLD = true, then EA will not enter till price heads up on 5, 15 min TF’s. - pipsFromEMA: number of pips from EMA30 to enter trade (assuming other criteria is met). Set to 0 to enter at EMA30. - X offset: this is for moving the text on the right of the EA if it doesn’t fit on your screen. - use_sl_and_tp: if true, both values must have a value other than 0. If you want 30 pip SL and don’t want to use a TP, put TP as a large amount (200 or something). If you put 0, then it will TP at the ask and exit right away - trailStop_std: self-explanatory - MaxSpread: self-explanatory There is also a feature for preventing new trades beyond weekly R2 or below weekly S2, or if in a position to exit there at the R2 or S2. I’ve done statistical analysis, and the probability of closing beyond the weekly R2 / S2 is not that high so best to exit or stay out. The EA also shows the strength for each currency which make up the currency pair from the 5 min to 4 hr TF’s. The strength goes from -7 to 7 for each currency. So if you have EUR = 5, USD = -6, the difference is 11, which is a pretty good trend. I think that entering only long when the difference in trend is strong on 4 hr or 1 hr might be the way to go. Right now these currency strength numbers do not affect the EA trading logic, but I may incorporate it into future versions. This can hopefully filter out the chop and only get in on longer term trends. In the next version, I plan on adding a feature to write to a .csv file when every trade is entered the currency strength values, and then later write to a file when the trade was closed and reason for closing (4 &lt; 15 EMA, etc.). I think having data like this will help guide us to when the EA is trading well (in good long term trends, etc.). Let me know if anyone has any questions, or thoughts how to improve the EA. ------------------------------------------------------- Gorilla v1.1 ------------------------------------------------------- I have been working on the Gorilla EA v1.1 (attached below), and another different project which I hope will be much better than Gorilla. I still need to test both. I would appreciate help from people in this forum for testing Gorilla EA 1.0 and 1.1 (with 2 different options). I need to compare to see which one is better. Test with the standard settings in the EA, except v1.1 will need to change one option. Requesting several people test on demo accounts 24/5, and at the end of the week post the account history for their files here. I would like testing to be done from 1/2/19 to 2/1/19. After that, I will do analysis of output files, and look at the EA and see where it can be improved. The EA must be checked at the start of the Asian session, and reset if profit hit or stopped out as per the trading logic. Testing must be done on the following pairs: AUDCAD AUDCHF AUDJPY AUDNZD AUDUSD CADCHF CADJPY CHFJPY EURAUD EURCAD EURCHF EURGBP EURJPY EURNZD EURUSD GBPAUD GBPCAD GBPCHF GBPJPY GBPNZD GBPUSD NZDCAD NZDCHF NZDJPY NZDUSD USDCAD USDCHF USDJPY I will be testing my new advanced EA and also Gorilla v1.1. If my new EA (and future modifications) are profitable, I will share with people who help out in testing for the full month for Gorilla EA 1.0 and 1.1 (with 2 different options). I will also create a new thread for my new EA as it departs so much from the Gorilla EA logic. Now ... the changes I made from v1.0 to v1.1: // v1.1 - added EMAdistance which will verify that the distance from the EMA4 to EMA15 and EMA15 to EMA30 // is at least x pips. This will prevent entries when prices are flat and little to no distance between EMAs. Default x = 5 // - added prevEMA4 and prevEMA15. This is the previous value of the EMA's 1 hr back. EMA4 must be &gt; prevEMA4 // and EMA15 must be &gt; prevEMA15 for longs. Opposite for shorts. // - added AutoPipsFromEMA. If this is set to true, then pipsFromEMA = 30 for larger moving pairs, and 20 for normal pairs // - added NLD filter so 5 min NLD and 15 min NLD (shorter term trends) must align to everything else for buys/sells // - added if beyond daily R2, then exit on 5 min NLD change. // - notification of reason for exiting after trade closed in upper right part of the screen. // - move SL to b/e once R1/S1 hit // // - added option to only trade if price above/below weekly pivot (weeklyPivotFilter). if weeklyPivotFilter = true: // - price &gt; weekly pivot // - 4hr EMA4 &gt; EMA15 // - 4 hr EMA4 &gt; prev. EMA4 (same for EMA15) The entry logic seems to be working fine. The only thing I have not tested yet is to move SL to b/e once R1/S1 hit. Please let me know if there are any issues in the EA not executing as it should (trading rules are at the top of the EA). I think a lot of the changes I made to the EA will eliminate a lot of the chop and bad trades. Again, I need several people to test the following after the New Year on all pairs for 1 month on demo, and post the trade history at the end of each week for the following EA tests: - Gorilla v1.0 - Gorilla v1.1 (weeklyPivotFilter = false) - Gorilla v1.1 (weeklyPivotFilter = true) I have many new ideas to improve the trading logic (coded into my new EA which I am separately testing), and will gladly share if people help out in testing the above for 1 month. ------------------------------------------------------- 1/7/2019 v 1.0a and 1.1a - removed currency signal calculations to free up memory usage ------------------------------------------------------- ------------------------------------------------------- 1/13/2019 Gorilla v1.2 - v1.0a logic was modified and added a trailing SL. When pipsToTrailSL (default setting = 5) is exceeded, EA will trail SL and exit on 15 min NLD change. Gorilla v1.3 - v1.1a logic was modified and added a trailing SL. When pipsToTrailSL (default setting = 5) is exceeded, EA will trail SL and exit on 15 min NLD change. ------------------------------------------------------- Regards, EZcurrency
+
+--- 帖子 #2 ---
+Messaged you
+
+--- 帖子 #3 ---
+.
+
+--- 帖子 #4 ---
+Weekly pivot TRUE is that ok?
+
+--- 帖子 #5 ---
+Is anyone else experiencing very high RAM usage when running the Gorilla EA on multiple pairs? I have it on 15 pairs and my MT4 terminal is using around 2.5GB RAM. I have no other indicators on the charts. If I use 28 pairs it would be near 5GB just for one instance of MT4. This is the case with both v1.0 and v1.1.
+
+--- 帖子 #6 ---
+Yes it hits the CPU pretty hard and each new pair consumers a fair amount of RAM.
+
+--- 帖子 #7 ---
+Hi EZ, Will try to run the EA this week. Last week still no trade opens. Thanks
+
+--- 帖子 #8 ---
+The ea does not work any ideas
+
+--- 帖子 #9 ---
+Good morning fellow traders
+
+--- 帖子 #10 ---
+Try removing the EA and restarting again by reattaching the EA It should work fine. If not, it has not calculated the pivots correctly, and is using data from 2 weeks ago instead of last week. EZ
+
+--- 帖子 #11 ---
+Hi this is what i get . i tried it didnt work this is the error
+
+--- 帖子 #12 ---
+Yes, I noticed that as well. I believe it is from calculating the currency strengths in the upper right corner. This is done through the include file, and is quite computationally intensive. I'll see if I can modify it so it doesn't use so much RAM. Right now the currency strengths are not used for the EA (I was going to incorporate into future versions), so I can also totally remove which would make the EA run smoother ... but then I can't use those strengths in the future. EZ
+
+--- 帖子 #13 ---
+Did you compile it after putting in the experts folder?
+
+--- 帖子 #14 ---
+i did i get lots of erros
+
+--- 帖子 #15 ---
+You need to put the currencySignals file in the include folder &amp; compile. Also put the non lag dot in indicator folder and compile. EZ
+
+--- 帖子 #16 ---
+Cool worked fine thnx. after moving that file to include and compling it. also what time frame and the settings? is it built in or i need to modify it ? thnx
+
+--- 帖子 #17 ---
+1 hr TF. Everything else should be default EA settings, except if you test v1.1 you can disable the weekly pivot filter (set = false) if you don't want to use it. Initial test last week said leaving it = true is better. EZ
+
+--- 帖子 #18 ---
+Hi EZ, Sorry not good with techs....can you tell me how to compile the file please? Thanks
+
+--- 帖子 #19 ---
+Good morning Bro......Hope to get more bananas this year. Thanks for the method
+
+--- 帖子 #20 ---
+Good morning Jakarta
+
+--- 帖子 #21 ---
+Hi EZ, It seems that I didn't include the currencySignals indi in my downloads so ran last week without; is that going to be a problem? Do I need to do it for the future (just concerned about the ram issue mentioned earlier).
+
+--- 帖子 #22 ---
+@ ezcurrency Have you managed to make a PIN as I discussed with you in PM last month? If you do that because the PIN for EAX is server based it will solve all the issues people are having with RAM issues and because it can be run "naked" it will be much easier to obtain the results you need to improve the profiability. OR maybe you want to ask coders that have made PINS for EAX to do so ... Up to you ... your "baby" ... just trying to help with development/profitability
+
+--- 帖子 #23 ---
+after a failure of the gorilla strategy on the backtest, i tweak it a little to be at least a lil profitable in long term trading on eurusd h1 timeframe, man my Recycle Bin is tired! that's why i decide to upload it in here first so maybe it will help someone in some how Attached Image (click to enlarge)
+
+--- 帖子 #24 ---
+1.1/false today's transactions
+
+--- 帖子 #25 ---
+I didn't look at the EAX yet (been busy), but I think I'll just modify my code by taking out the currency strength info. It is not used in the trade logic, and so is doing millions of calculations for nothing. I'll post here the EA's after I modify. There is also an error in the SL which sometimes puts 30 as the price instead of 30 pips away which I need to fix. EZ
+
+--- 帖子 #26 ---
+Hi Ez, Would it be hard to have the EA display the EMA's and also the Weekly Pivots? Just to track/compare entries etc I know I can manually add them on teh EA but would be nice if they could be drawn. Cheers
+
+--- 帖子 #27 ---
+EZ, thank you for sharing your EA. I have been testing it for a while but my results have not been great so I have not commented. The last 24 hours have produced some good results so I thought I would post info. Attached Image (click to enlarge)
+
+--- 帖子 #28 ---
+Thanks for the update ... If you have no objection and give permission, as you have Copyright on your code, I will try to get a coder who is familiar with EAX PIN construction to code PINS around your mq4 ... is that OK?
+
+--- 帖子 #29 ---
+Yeah I'm just reviewing some of the losses and they appear to have opened outside the Criteria of the original method.
+
+--- 帖子 #30 ---
+Hi EZ, Just about to inform you about the SL, mine did that too. Thanks
+
+--- 帖子 #31 ---
+Hi Gang, EZ Since sunday EA1.0 Rocks...330 Pips in positive And 1.1( false/ true) without reset are both barely BE... EZ, is this totally useless for you to test witout reset??? Just let me know...As you know l cannot reset at work... Thanks
+
+--- 帖子 #32 ---
+330 pips?? All three of my tests are running seriously negative
+
+--- 帖子 #33 ---
+Let me see if I can do it. If not, I can at least display the numerical values. EZ
+
+--- 帖子 #34 ---
+The last 24 hrs looks good! Of course 1 day does not make/break the system. That's why it needs 1-2 months of testing. Also, it will not be profitable on all pairs. Once we have lots of data, we can then analyzed and remove out the poorly performing pairs. EZ
+
+--- 帖子 #35 ---
+Sure, that would be awesome! I just don't have the time now to spare to learn the EAX EA.
+
+--- 帖子 #36 ---
+Awesome! Can you post the trade history for the past 24 hrs? Depending on how it exits, the EA may or may not need to be reset. Just check all pairs when you are home. EZ
+
+--- 帖子 #37 ---
+Hi EZ, Are my results different than the other testers'? Attached File(s) 1.docx 14 KB | 310 downloads Attached File(s) 1false.docx 15 KB | 264 downloads Attached File(s) 1true.docx 14 KB | 221 downloads
+
+--- 帖子 #38 ---
+I'm sure they are different. Post people are only posting the trade history at the end of the week. But with people trading on different brokers and different price feeds, entries / exits will be different. This system needs a minimum of 1 month testing to see if it makes $ or not ... and to give us relevant data to see which pairs are performing and where we can make improvements. Regards, EZ
+
+--- 帖子 #39 ---
+I'll defer to your knowledge and expertise; it just sounds like my results might be WAY different. Cheers!
+
+--- 帖子 #40 ---
+I removed all of the currency strength calculations which were not used in the EA so won't affect the logic. This will definitely use less RAM and less processing power. v1.1a and 1.0a are on the first post to download. If you are testing the EA's, remove the current EA and use these and processor and memory usage will decrease quite a bit. I still have to fix the stop loss problem ... but I don't think it will affect results much as price would cross the EMA30 or EMA4 cross the EMA15 and exit before SL hit. Regards, EZ
+
+--- 帖子 #41 ---
+I started v1. 1 with default parameters on 30/12 and got some good trades. Check the explorer below for details. During the day I check on mt4 mobile for closed trades, login to vps and restart the whole mt4 session for reseting. Thank you EZ.
+
+--- 帖子 #42 ---
+Thanks for linking the test to the trade explorer! Results are good so far! Its been a short time, so lets see how it does over 1-2 months. If you can think of any improvements let me know. Once you have at least a month of data, I would appreciate it if you could post the detailed trade history over that month. I can then load into excel and create a pivot table which would help us know which pairs are profitable to trade in this system, and which are not. Mahalo! EZ
+
+--- 帖子 #43 ---
+Will do... If you have a template of the data you want in the excel I could save them into this format. Regards Antonios
+
+--- 帖子 #44 ---
+If you just save as detailed report at the end of the week, it saves as html. I can then just copy and paste into Excel. Thanks, EZ
+
+--- 帖子 #45 ---
+We leave the other settings default?
+
+--- 帖子 #46 ---
+What’s your min deposit for this EA? I know demo doesn’t matters but if we go live acct. thanks
+
+--- 帖子 #47 ---
+Yep!
+
+--- 帖子 #48 ---
+Depends how much risk you want to take. I would say 1:1 leverage (so 0.1 lots for each $10k in the act, or 0.01 lots for each $1k). EZ
+
+--- 帖子 #49 ---
+you are killing me man cheers dico lolz
+
+--- 帖子 #50 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #51 ---
+Yep. I need to fix that but been busy. Normally the SL wouldn't be hit anyway, and the EA would exit on the 4x15 EMA's, or 30 EMA. EZ
+
+--- 帖子 #52 ---
+How is the EA testing going? Please post results for the week after Friday end of day. Thanks! EZ
+
+--- 帖子 #53 ---
+I'm going to set it up this weekend, but can't put all three. Only have space for two more MT4 on my VPS. I'm thinking both v1.1 if that's okay with you.
+
+--- 帖子 #54 ---
+Sounds good!
+
+--- 帖子 #55 ---
+EURUSD, H1, v1.1a - "Beyond Weekly R2S2 - trade closed" what's wrong?
+
+--- 帖子 #56 ---
+Hi EZ, Please see below some error messages I got for GBPNZD. I hope it makes sense to you. Regards, Antonios 2019.01.10 2019.01.10 10:02:08.023 '9137823': order sell 0.10 GBPNZD opening at market sl: 1.88375 tp: 1.86575 failed [Invalid S/L or T/P] 2019.01.10 10:02:25.757 '9137823': order sell 0.10 GBPNZD opening at market sl: 1.88365 tp: 1.86565 failed [Invalid S/L or T/P] 2019.01.10 10:02:29.242 '9137823': order sell 0.10 GBPNZD opening at market sl: 1.88360 tp: 1.86560 failed [Invalid S/L or T/P] 2019.01.10 11:09:57.523 '9137823': order sell 0.10 GBPNZD opening at market sl: 1.88323 tp: 1.86523 failed [Invalid S/L or T/P] 2019.01.10 20:01:24.529 '9137823': order sell 0.10 GBPNZD opening at market sl: 1.88244 tp: 1.86444 failed [Invalid S/L or T/P]
+
+--- 帖子 #57 ---
+Just remove the EA and set up again on the chart and it should be fixed. EZ
+
+--- 帖子 #58 ---
+Runing the ea in live and demo accouts looks so far au and nu loosers only eu and uj winner have not tried other pairs but not too many trades so we shall see .
+
+--- 帖子 #59 ---
+I m sorry in south Germany we have snow catastrophy! And I am full time employee doing many extra hours... I will try to start this week end Attached Image (click to enlarge)
+
+--- 帖子 #60 ---
+Wow, crazy!
+
+--- 帖子 #61 ---
+Gorilla v1.1 standard settings weekly results. Some ideas so far: 1. Trailing stop 2. Money management (to define lots based on risk %) Thanks again for the effort!
+
+--- 帖子 #62 ---
+Hi EZ, here's the results for week2. Attached File(s) week2.zip 11 KB | 298 downloads
+
+--- 帖子 #63 ---
+Hi EZ Here my results Sorry they are only HTML Hope this helps anyway Attached File(s) EZ EA Testing.rar 15 KB | 316 downloads
+
+--- 帖子 #64 ---
+I live in Canada.....and even I think that is a CRAZY amount of snow! Wow!
+
+--- 帖子 #65 ---
+Hi EZ, I didn't get to my charts in time before the markets closed for the weekend so I have a boatload of open trades in the three EAs. I am planning to wait until the markets open again, then close all the trades and submit my Detailed Statement for the three. Unless you would prefer them now? There are a lot of open trades though, might skew the results. Cheers!
+
+--- 帖子 #66 ---
+My result For week 2
+
+--- 帖子 #67 ---
+Results for this week. I had some computer issues on Thu where my computer was off for a few hours, and so EA was not managing trades.
+
+--- 帖子 #68 ---
+How can I find out what happened here... Shows a good entry and nice follow through but ended up a small loss... I had the default setting -- 30 pip SL -- should be higher? It didn't even get started before it ended...
+
+--- 帖子 #69 ---
+No it was a joke. This picture is not from here... We have a lot of snow but not that much
+
+--- 帖子 #70 ---
+Also - do the EA's push the SL/TP numbers on to the trade server? I've been having some connectivity issues on the weekend(s) and concerned they might carryover during the week... Just concerned when an EA opens a trade and the connection goes down - if all is well?
+
+--- 帖子 #71 ---
+Thanks everyone for posting the results this week! Ben - can you either post in .zip, or just the html? I can't open the file you uploaded. Thanks, EZ
+
+--- 帖子 #72 ---
+Yep, better to wait till they close. You can also post the end of next week for 2 weeks of data. Thanks, EZ
+
+--- 帖子 #73 ---
+Either SL was hit (you should probably disable in the future and not use SL/TP as the EA logic would exit), or it miscalculated the R2/S2 and exited. Not sure ... but the EA should have stayed long and that would have been a nice trade rather than a loss. If it happens again, please post screenshot again. Thanks, EZ
+
+--- 帖子 #74 ---
+Yes, it should post SL and TP on server. There is an issue (sometimes) if you put SL = 30, it usually correctly puts the SL where it should be ... but then other times put it at the price = 30. Depending on what pair you are trading and if long or short, this would result in an error. For now (till I can fix the SL error), I would just put it = false. As long as the EA is running, it would exit on the logic (4EMA x 15EMA, price hits 30 EMA, or a couple of other criteria documented in the EA at top). I think adding a trailing SL would be beneficial so will work on that next. EZ
+
+--- 帖子 #75 ---
+So if I take the SL.TP off that is ok - make them "0"? Looking at the numbers - it got me out at .00033 -- so, 30 plus slippage... I personally like a trailing stop.
+
+--- 帖子 #76 ---
+Yep, I would set it = 0. I am going to add a trailing SL with the Non Lag Dot (NLD) indicator on either 15 or 30 min chart. This is a great trailing stop. The EA will look at the prev. bar's NLD to not have refresh issues. I'll change it and post on this thread soon. EZ
+
+--- 帖子 #77 ---
+Hi EZ Strange it was already in zip format... Did that happened to others downloaders too? Then l will post 3 separate files Seems HTML format is not supported to upload...Then have renamed .txt...Once downloaded...rename it whatever you prefer... As you will see version1.0 is the only one with positive results...Others 2 are always negative since the begining...Perhaps the ''no reset'' factor... So what are the sumary for others testers then Attached File(s) Statement 1.0.txt 29 KB | 295 downloads ? Let me know if it works on your side Have a nice week everybody
+
+--- 帖子 #78 ---
+Everyone, Thanks for the testing! I've noticed that for some people v1.0 is better, and for some v1.1 is better. Some users commented that a trailing SL would benefit, and I also have noticed this as well. I modified the EA's to add a trailing SL feature, and posted on the first page: Gorilla v1.2 - v1.0a logic was modified and added a trailing SL. When pipsToTrailSL (default setting = 5) is exceeded, EA will trail SL and exit on 15 min NLD change. Gorilla v1.3 - v1.1a logic was modified and added a trailing SL. When pipsToTrailSL (default setting = 5) is exceeded, EA will trail SL and exit on 15 min NLD change. I believe this will greatly increase profits once we are in a trade and in profit. For this week, please test v1.2 (if your v1.0 has been making profits) and test v1.3 if your v1.1 has been making profits. Also free free to test both. :-) Regards, EZ
+
+--- 帖子 #79 ---
+Second trade explorer v1.3 created. Just to clarify, pipsToTrailSL left at 5 pips. Do we need to change the value of trailSL from default 0?
+
+--- 帖子 #80 ---
+No, but just make sure use_sl_and_tp = false.
+
+--- 帖子 #81 ---
+So the trades will open without preset sl at 30pips and tp at 150pips?
+
+--- 帖子 #82 ---
+Correct. There has been an intermittent bug with the SL, so best to disable at this time. I haven't had the time to debug and fix it. The exit logic will still work (cross 30 MA, 4EMA cross 15EMA, or trailing SL). That would close trade most likely before SL hit. EZ
+
+--- 帖子 #83 ---
+Will do, thanks!
+
+--- 帖子 #84 ---
+Hi All, Can anyone provide some advice on how to upload my results? I have been able to save my results as a Detailed Report finally and they are saved as HTML, but I can't upload them...apparently the "format is not supported" here. I read ben.deschain's fix but don't know if that works or not. Help is always appreciated!
+
+--- 帖子 #85 ---
+Hi EZ, Just to confirm: we ARE still closing any open trades at the end of NY, right? Then resetting?
+
+--- 帖子 #86 ---
+add them to a zip file
+
+--- 帖子 #87 ---
+Yep! To upload, you can save as a pdf, or save as .txt and see if you can import into Excel, then upload. Thanks! EZ
+
+--- 帖子 #88 ---
+Just for FYI images - I was unable to be home to close the EA by NY 5pm close... Not sure what would had happened if I were here and reset at 5:01pm But more for "teaching" purposes... Thanks for the opportunity!!!!
+
+--- 帖子 #89 ---
+Hi EZ, OK... finally got my shit together. I can download Detailed Statements, I can save them and convert them into an Excel format and will upload as such. I've started EAs 1.2 and 1.3 in their own accounts, in ADDITION to 1.0, 1.1 False and 1.1 True. I've started 1.2 and 1.3 this evening about an hour ago. On Saturday, I will submit a detailed statement for each account for the past two weeks (as I was unable to submit this past week's results due to a case of mild retardation). OK......
+
+--- 帖子 #90 ---
+Awesome! Thanks Ozy! ;-) EZ
+
+--- 帖子 #91 ---
+So I have Gorilla v1.3 on EUR/USD 1H/ I am in Ottawa Canada, so its EST here. What time does the Asian Session start, and if I am reading the thread correctly, we are to close the EA at 4:30pm when NY closes. Thanks for the help.
+
+--- 帖子 #92 ---
+If you click on the time on the calendar on https://www.forexfactory.com/ and set it to your time, scroll down to the very bottom of the page on the right you will see when markets open/close. EZ
+
+--- 帖子 #93 ---
+My trial is based on 24/7 run. I missed the point when to switch on and off the EA. I just reset it when I realise that an order has been closed. EZ, shall I change this trial style? Thank you
+
+--- 帖子 #94 ---
+Sorry EZ, Been trying to do the test but my laptop just can't take it. Will try to get a PC but will need time to get my hand on one. Thanks
+
+--- 帖子 #95 ---
+I will install this on my VPS for the following pairs: NZDUSD USDCAD USDCHF USDJPY Will report back at the end of the month
+
+--- 帖子 #96 ---
+Then just run 1 EA (v1.2 or 1.3).
+
+--- 帖子 #97 ---
+Will do....thanks.
+
+--- 帖子 #98 ---
+EZ, I test 1.1 and 1.3 to see the impact of stop loss. A few minutes ago eurusd was sold by 1.1 but not by 1.3. In theory, they should have the same entries, shouldn't they?
+
+--- 帖子 #99 ---
+Yes, that is strange as they have exactly the same entry criteria. Did you have the same settings for both EA's when you ran? Please check the experts tab at the bottom of MT4 as that is where error messages, trade execution messages, etc. appear. Were there any errors? Thanks, EZ
+
+--- 帖子 #100 ---
+Why do not open orders? version 1.3
+
+--- 帖子 #101 ---
+Ah, I see. There is this weird bug where it sometimes calculates the pivots correctly, and sometimes wrong. In the screenshot it is wrong as it shut down as it thinks its beyond the weekly R2 or S2. If you ever see that, remove the EA from the chart and set it up again. You should see it working then. EZ
+
+--- 帖子 #102 ---
+I should have done that, but I was at my mobile, so the remote desktop is not very convenient for this. Moreover, I restarted 1.3 as it closed positions later. However I will keep an eye on this. Thanks, Antonios
+
+--- 帖子 #103 ---
+What exactly should be set up? I installed EA with default settings. And if this is some kind of mistake, you can not fix it? So that when you install EA, it works without problems
+
+--- 帖子 #104 ---
+The impact of setting 5pips s/l on 1.3 is obvious. Is this something you were expecting EZ?
+
+--- 帖子 #105 ---
+Hi EZ, Is it worth not running the EA on Mondays?
+
+--- 帖子 #106 ---
+antonio, could you share the .set configuration file of gorilla ea?
+
+--- 帖子 #107 ---
+The gorilla method should not be traded on mondays! Now we know why... Ezcurrency, can you change the EAs and put the option "not on mondays"?
+
+--- 帖子 #108 ---
+Default settings for 1.1 Default settings for 1.3, with s/l @ 5 pips, as EZ suggested. I check from mobile mt4 if any positions closed and if so, I shut down and restart mt4 session on vps (this is easier from a small screen on vps).
+
+--- 帖子 #109 ---
+With regards to re-setting the EAs, I check them all right around the Tokyo open and close any open trades. I then close each of the platforms and re-launch them. I do not make any other adjustments or resets during the day or night. I believe I confirmed this was ok with EZ, so if it's not correct, I need to know ;-)
+
+--- 帖子 #110 ---
+Whats the setup for 1.3? Default settings and 5pip SL? Which pairs and TF? Thank you in advance
+
+--- 帖子 #111 ---
+I believe that settings for 1.3 are default, "use sl and tp" set to False, and trailing stop is set to 5
+
+--- 帖子 #112 ---
+Beyond Weekly R2S2 False, With 1.3 this is the Norm' ????
+
+--- 帖子 #113 ---
+Hi i am new in trading, I have been doing some manual trades this years and explore multiple EA' s on mt5. Unfortunatly my forex company not have compatibility to mt4 plataform and I am paying to much comision and high spread. Can you recomend me a suitable broker for this ea? I need one that support demo accounts to do live tests. Is there a version for mt5 of thia EA? If not, there is a method to convert the code from mt4 to mt5? Let me know if I have to move this question to another section!! Thanks a lot for the E.A!! looks very good i am looking forward to do some tests and give you my feedback.
+
+--- 帖子 #114 ---
+Welcome Martinuy, which Broker do you use? It´s strange because every standard broker should offer MT4. MT4 is still much more used by traders, than MT5 or any other trading plattform.
+
+--- 帖子 #115 ---
+Ill try then
+
+--- 帖子 #116 ---
+EZ, EA 1.3 placed a stop order, although s/l and t/p are false
+
+--- 帖子 #117 ---
+Its a local broker from my country call regum, which ones are more suitable for trading with this robot?
+
+--- 帖子 #118 ---
+Thanks for letting me know. I'll check the code as that shouldn't happen.
+
+--- 帖子 #119 ---
+Hello bro. The Ea 1.3 still has the problem of Sl See image 1 Also, it has a problem of computing the pivots, especially with the pairs of GBP AND CHF. ( can someone else confirm this) ps: testing with 2 brokers. Same problem mentioned above.
+
+--- 帖子 #120 ---
+Week 03/2019 results. Comments so far: 1. EA 1.3 looks safer with s/l 5 pips 2. Stop loss 30 pips appears sometimes also in EA 1.3 3. Possibly Monday is a bad day, but I will leave EA open 24/6 to check 4. I cannot judge pivot calculation, but why not use the indicator originally suggested by CM7 at Gorilla system? Thank you EZ and the rest of people for this development. EZ, do the result look any promissng? You can always check at my profile for visual comparison of the two versions of the EA. I have created 2 dedicated explorers.
+
+--- 帖子 #121 ---
+Hi EZ, here are my week three results for v 1.0 - v 1.1a false - v 1.1a true Week3 I'll crank up v1.3 as well. I've found version 1.1 false to be the best performer. Although it is on a different Broker to the other two. Could we have an indication on page 1 of all the versions you want tested and choices of settings within the EA . I can test 4 at the moment, after that I run out of processing grunt. Thanks for your work on this. Attached File(s) Week3.zip 17 KB | 274 downloads
+
+--- 帖子 #122 ---
+EZ, does the new version need to be reset daily as well? I keep forgetting to do that.
+
+--- 帖子 #123 ---
+Hi everybody, EZ For this week l have tested only (1X) 1.0 and (2x) 1.2 Result are positive 113 Pips (.1*1130) for 1.0 Result are negative 89 and 148Pips on both 1.2 with different brokers...Will continue testing this week... Just wondering why results are so differents from broker to another...and if we can rely on results based on demo feed... EZ if you absolutely want to see my .txt file let me know...will post it to you... Have a nice WE to all
+
+--- 帖子 #124 ---
+Not sure why this didn't buy... sorry, from a few days ago also here were the results this week. the EU were not Gorilla transactions... And the Cancelled Sell Limit was something I did - not EA...
+
+--- 帖子 #125 ---
+It could be different price feeds on the 2 different brokers -- so pivots are calculated differently. I know about the SL. That should be fixed in the next version release ... but I want to test v1.2 and 1.3 more before the next version.
+
+--- 帖子 #126 ---
+Yep, 1.3 looks good this week. Lets keep testing! EZ
+
+--- 帖子 #127 ---
+I think 1.2 and 1.3 should be tested, but (1) with default settings, and (2) set Sl trailing activation at 10 rather than 5 pips (5 is the default). EZ
+
+--- 帖子 #128 ---
+Only if it gets in and exits a trade.
+
+--- 帖子 #129 ---
+I will change s/l to 10pips for next week for 1.3 Keep up the excellent job!
+
+--- 帖子 #130 ---
+Setting up an EA on MT4 is new to me, I have only down loaded 1.3, if I right click a chart, then open expert advisers, then open properties, there is the down load. Also its in Experts via File/open data folder/ MQL4 But nothing is active
+
+--- 帖子 #131 ---
+subscribed
+
+--- 帖子 #132 ---
+Check first post for installation. "... To run this EA, put the nonlagdot file in the indicators folder and compile, put the currencySignals file in the include folder (do not need to compile), and the Gorilla_EA_v1.0 in experts folder and compile..."
+
+--- 帖子 #133 ---
+Please forgive the basic newbie verification... The TS activating option is the big arrow and not below -( set Sl trailing activation at 10 rather than 5 pips (5 is the default).) correct?
+
+--- 帖子 #134 ---
+week3
+
+--- 帖子 #135 ---
+Hi EZ, Here's my results for the past 2 weeks (missed last week). Couldn't get to the charts before the Friday close so the statements include trades that are still open. As far as settings, I think I screwed something up. All EA version settings have been at default, except for: 1.0 ..... use SL TP: False 1.1 True and 1.1 False : - use SL TP: True - SL 30 - TP 90 *** I think I have the 1.0 and the 1.1 versions settings reversed *** 1.2 and 1.3 ..... use SL TP: False pips to trail SL: 5 It looks like you want us to change the pipsToTrailSL to 10, right? And I have not changed the Trail SL: 0 to deactivate - 0 setting as mentioned by Dogalot's post above in ANY of the versions . Maybe a definitive word on versions and settings to test is warranted. Sorry for the confusion. Attached File(s) EA Test 1-0.xlsx 27 KB | 187 downloads Attached File(s) EA Test 1-1 False.xlsx 25 KB | 230 downloads Attached File(s) EA Test 1-1 True.xlsx 24 KB | 193 downloads Attached File(s) EA Test 1-2.xlsx 17 KB | 198 downloads Attached File(s) EA Test 1-3.xlsx 16 KB | 216 downloads
+
+--- 帖子 #136 ---
+Hi Ozymandias, can you share the statement of 1.3? Wit Drowdown and other stats. Thank you
+
+--- 帖子 #137 ---
+Sure. Attached File(s) EA Test 1-3 Additional.xlsx 13 KB | 248 downloads Here's the additional information for EA 1.3
+
+--- 帖子 #138 ---
+EZ, can you update first post with rules, etc. What you need us to do. Or can we go crazy with the settings (please not this). Since 1.3 is based on 1.1's logic, do we have to test both pivot false/true like on 1.1?
+
+--- 帖子 #139 ---
+Can't get the nonlagdot indy to load.
+
+--- 帖子 #140 ---
+Gorilla 1.3 See images -7 with IcMarkets -1.8 with Exness A huge difference!!
+
+--- 帖子 #141 ---
+Sorry everyone for being away from the thread ... been super busy! It seems like 1.3 is doing the best, but we should test more with pivot = true, and pivot = false. At the end of the month I'd like for everyone to post an entire month's details of trades. I will do a summary and pivot tables (please save in excel if you could, otherwise txt file or html is fine), and we can see which version is best and which pairs the EA works best on. After that, I will work on a version 2.0 to correct any issues (like the SL), and see if we can improve trade logic. EZ
+
+--- 帖子 #142 ---
+How can you test something if it doesn't work? I am the first to hand you a report on the work of EA:
+
+--- 帖子 #143 ---
+I am running this on NZDUSD USDCAD USDCHF USDJPY and it does open positions. Just not on a daily basis. My report will come in at the end of the month. Keep up the good work
+
+--- 帖子 #144 ---
+Hi EZ, I know a number of people have asked about what settings we should be using. Can you confirm that the following settings are correct for each of the EAs? Thanks! 1.0 All default, except: Use SL TP: True 1.1 True and 1.1 False All default, except: Use SL TP: False TS set to: 5 WeeklyPivotFilter: False (for 1.1 False) and True(for 1.1 True) 1.2 and 1.3 All default, except: Use SL TP: False TS set to: 10
+
+--- 帖子 #145 ---
+Today positions bro. (See images) After opening a position today, the Ea get blocked (can't compute pivots), so I have to reopen mt4 again. Can we fix this problem urgently Ez. It will affect the EA results and makes them less accurate. Thnx again Ez.
+
+--- 帖子 #146 ---
+I know this is for EZ to answer, but honestly. Get your head out of your ass and in the game. These tests have been running for past three weeks , with 5 different versions of the EA, over 28 pairs !
+
+--- 帖子 #147 ---
+Not sure what triggered this trade... just information... nice that it did
+
+--- 帖子 #148 ---
+Remove the EA from the chart and reattach and it should work. It won't trade above the weekly R2 or below the S2 as statistics which I have indicate a weekly close beyond that level isn't likely. EZ
+
+--- 帖子 #149 ---
+Correct!
+
+--- 帖子 #150 ---
+I've been quite busy with work, so probably won't work on a new version at least till the end of the month. I also first want to see the results people had after a month of testing. EZ
+
+--- 帖子 #151 ---
+Except that I've mentioned few post before that 1.2 and 1.3 is somewhat the definitive version (for now) of 1.0 and 1.1 and ask EZ if we should test 1.3 with pivot true/false and he himself said yes (in the post you quoted), so..
+
+--- 帖子 #152 ---
+Clearly a VS but no entry?!?!?
+
+--- 帖子 #153 ---
+The EA wants to be sure of an uptrend, so checks many things. One of them is (EMA4hr4 &gt; prev4hrEMA4). In the screenshot, the EMA 4 is falling, so no trade. EZ
+
+--- 帖子 #154 ---
+If the 'system' is wanting the drop (or rise) back to the 30, wouldn't the 4 be declining (rising) anyway? As long as the 4 &gt; 15&gt; 30 (or 4 &lt; 15 &lt; 30) - not the angle of 4... I thought it was that after the trade is in, to watch if the 4 continues and crosses the 15?
+
+--- 帖子 #155 ---
+Why did it get out so quickly?
+
+--- 帖子 #156 ---
+Results for v1.1 and v1.3 for week 4 (19/1-25/1).
+
+--- 帖子 #157 ---
+The past week -- THANK YOU!!!!! EZ!!!!! (V1.3) On the spreadsheet - the second page has EuroUsd - not gorilla method
+
+--- 帖子 #158 ---
+Hi EZ, here are my results for Week4, they are all in profit. Attached File(s) Week4.zip 23 KB | 252 downloads
+
+--- 帖子 #159 ---
+It hit the weekly R2, so the EA exits and shuts down. Statistically the price will not go much beyond or close beyond the weekly R2, but in this case it did. In the next version, I'll make an option to disable that. Regards, EZ
+
+--- 帖子 #160 ---
+Great results! For v1.3, did you just run with the default settings? extern bool weeklyPivotFilter = true; extern bool EnableTrading = true; extern bool wantLongs = true; extern bool wantShorts = true; extern bool AutoPipsFromEMA = true; extern int pipsFromEMA = 20; extern int pipsToTrailSL = 5; extern int EMAdistance = 5;
+
+--- 帖子 #161 ---
+Nice! Was v1.3 just the default settings? At the end of the month next week, that would be great if everyone who has been testing for 3-4 weeks to post their entire trading results for the entire time. After that, I'll work on the next (and hopefully final) version. Regards, EZ
+
+--- 帖子 #162 ---
+Post 147 are my settings for last week. If you use the data on the spreadsheet – don’t use sheet2 for your calculations - they are not all the same setting
+
+--- 帖子 #163 ---
+so far
+
+--- 帖子 #164 ---
+Hi EZ, I thought the "pipsToTrailSL" was supposed to have been changed to 10 for v 1.2 and 1.3
+
+--- 帖子 #165 ---
+I believe EZ made that comment from the trading activity (submitted results) with the setting "5" - "1st (or second ) round submitted results" - "to see what 10 will do" ... Just to clarify, when the results "you" submit, just be sure it is clear what 'settings' you used for the duration (currently I think there are at least 9 possibilities)... Whatever 'set up' you were running is what EZ needs to know.
+
+--- 帖子 #166 ---
+Hi i sucessfull install the version 1.3 but from last friday that i launch it with a demo account but don't see any proffit only 1 trade win (friday only i run it with 0.3 sizes and then 0.01) The setting that I am using are from the post 144. Any clue? On monday we should not consider running the E.A.? Thanks!!
+
+--- 帖子 #167 ---
+1.3 (false) did more than 70 pips last week Attached the results of today..
+
+--- 帖子 #168 ---
+Hi EZ, please find attached my findings for this EA for this month Please note that test began at 17-01 on pairs NZDUSD USDCAD USDCHF USDJPY. I have been using the V1.3 and standard settings I am pleased with this results. I will keep testing these and add four more pairs. Please let me know if you need more data from the last periode
+
+--- 帖子 #169 ---
+Hi EZ, here's my results for the Month. I've included the html and csv files. Is is possible to close trades at the appropriate time within the EA Daily? save doing it manually. ver 1.1a trail 5 pips false weekly ver 1.1a trail 5 pips true weekly ver 1.0a default values ver 1.3 trail 10 pips Attached File(s) Monthly reults Excel.zip 21 KB | 224 downloads Attached File(s) Monthly reults.zip 39 KB | 193 downloads
+
+--- 帖子 #170 ---
+Hi EZ, that one was with default values on ver 1.3 - last week was done with trail of 10 pips. If you need any variations on the trailing tested let me know. It will be clearer when we pick the best performing pairs.
+
+--- 帖子 #171 ---
+Here is the updated excel file - 1.3 with the 10 setting. Not as good as last week - closed out the week with 0.22 loss. Thanks Again EZ!!
+
+--- 帖子 #172 ---
+Hi EZ, Here's my month of test results. Unfortunately, for the first three weeks, I had the 1.1 (True) and 1.1 (False) "Use TP and SL" set to true. The past week has been correct. Hope this is still useful. Cheers! Attached File(s) 1 EA 1-0.xlsx 44 KB | 204 downloads Attached File(s) 2 EA 1-1 TRUE incorrect setting.xlsx 29 KB | 184 downloads Attached File(s) 3 EA 1-1 TRUE correct setting.xlsx 16 KB | 184 downloads Attached File(s) 4 EA 1-1 FALSE incorrect setting.xlsx 31 KB | 202 downloads Attached File(s) 5 EA 1-1 FALSE correct setting.xlsx 15 KB | 180 downloads Attached File(s) 6 EA 1-2 ts at 5.xlsx 25 KB | 206 downloads Attached File(s) 7 EA 1-2 ts at 10.xlsx 19 KB | 194 downloads Attached File(s) 8 EA 1-3 ts at 5.xlsx 21 KB | 177 downloads Attached File(s) 9 EA 1-3 ts at 10.xlsx 20 KB | 201 downloads
+
+--- 帖子 #173 ---
+Gorilla v1.1 default options. I plan this week not to start on Monday and change default target from 150 to 90 pips. Gorilla v1.3 this week with s/l at 10pips, but changed back to 5 on Thursday as performance was not good. Again, I plan not to start on Monday. Thank you EZ!
+
+--- 帖子 #174 ---
+Thanks everyone for posting the monthly results. As I have time this week I'll analyze and post my findings here. Hopefully this can guide us in the future what works and what does not work which I can implement in the next version. Thanks, EZ
+
+--- 帖子 #175 ---
+FYI: I am continuing to test EA 1.2 and 1.3 ...... unless there is no further point?
+
+--- 帖子 #176 ---
+Just a curiosity - this is the GEA1.3 with 10 TS (though the TS t doesn't matter for this question)... Why didn't the EA get in earlier - closer to the 30 -- or was the completion of the candle the trigger for this trade to execute? See the retracement to the 30 and thought it might be the EA waiting for a "closed candle" but that didn't seem to fit either. Just wondering... EURUSD - not exactly sure the time - but closer shot...
+
+--- 帖子 #177 ---
+Lot of reasons but you have to check them with your settings and checking some of them is only possible on the moment you see an entry but the EA does not take the trade, not afterwards. // v1.1 - added EMAdistance which will verify that the distance from the EMA4 to EMA15 and EMA15 to EMA30 // is at least x pips. This will prevent entries when prices are flat and little to no distance between EMAs // - added prevEMA4 and prevEMA15. This is the previous value of the EMA's 1 hr back. EMA4 must be &gt; prevEMA4 // and EMA15 must be &gt; prevEMA15 for longs. Opposite for shorts. // - added AutoPipsFromEMA. If this is set to true, then pipsFromEMA = 30 for larger moving pairs, and 20 for normal pairs // - added NLD filter so 5 min NLD and 15 min NLD (shorter term trends) must align to everything else for buys/sells // - added if beyond daily R2, then exit on 5 min NLD change. // - notification of reason for exiting after trade closed in upper right part of the screen. // - move SL to b/e once R1/S1 hit // // - added option to only trade if price above/below weekly pivot (weeklyPivotFilter). if weeklyPivotFilter = true: // - price &gt; weekly pivot // - 4hr EMA4 &gt; EMA15 // - 4 hr EMA4 &gt; prev. EMA4 (same for EMA15)
+
+--- 帖子 #178 ---
+I attached my results from the last 3 weeks from my demo account, the 2 initial weeks I used 1.3 false then swith to 1.1 true this week (0.10 lots) and have better results. I am thinking in put in real account 1.1 True but i have some doubts, the trades must be manually close or its better to let the E.A. do the work? any recomendation on using this version of the EA on real? Thanks a lot!
+
+--- 帖子 #179 ---
+Here are the results summariez. I also considered if we didn't trade the ones with 25% or less win rate (in the future eliminate these trades). It looks like v1.1a trail 5 pips with weekly pivot = false is the best results. I'll modify the EA and make a new version to close at the end of the day and reset automatically. I first want to take a look at other peoples results as time permits. Regards, EZ
+
+--- 帖子 #180 ---
+What broker is that? Horrible commissions. It really eats into the profits! EZ
+
+--- 帖子 #145 ---
+I am still testing it, and won't trade on a real account yet. Also working on a few other EA's as well for testing. EZ
+
+--- 帖子 #146 ---
+Thanks a lot EZ!! The auto reseting and auto close trades would be very nice. In the meanwhile i will put an automatic reset of the machine before open market.
+
+--- 帖子 #147 ---
+Here are the results last week for G13 with the 10 setting... I apologize that I didn't reset the EAs as readily as I did the previous 2 weeks. Don't know if that would have made a difference or not...
+
+--- 帖子 #148 ---
+Thanks for the future mods EZ, I've removed the bad pairs from the relevant EA's and kicked them off again to see the difference.
+
+--- 帖子 #149 ---
+I am with FXChoice. Commissions are $7.00 per 1.0 lot trade round trip. I believe it seems high on my statements because it is a CAD account and not USD.....something I will be changing shortly just for ease of accounting.
+
+--- 帖子 #150 ---
+I like Oanda ...
+
+--- 帖子 #151 ---
+Soooo....where are we on this? Should we be doing something that would help?
+
+--- 帖子 #152 ---
+Been super busy at work, so don't have the time now to dedicate to the Gorilla EA. Also, been working on a couple of other FX projects that are more pressing. Maybe in the future I can come back to it. Regards, EZ
+
+--- 帖子 #153 ---
+The source code is at the start of this thread, so folks can feel free to modify/work on it. Not sure when I'll come back to it as going on travel in a couple of weeks. EZ
+
+--- 帖子 #154 ---
+Thanks, EZ!!! We greatly appreciate what you've done thus far!!! Hope your endeavors lead to tranquility - and thanks again for your guidance! I'm willing to keep using at least one of the versions... From what has been collected thus far, what generally seemed to be the best set of pairs with which EA ver and settings? Not necessarily asking you EZ specifically, but from the others as well ( rostaus ?)... I did not collect any of the others uploads - but I might go back and try to compile the entries - unless someone else started such a project? I don't have any of the GA-EA's running this week, but will try next week and post results...
+
+--- 帖子 #155 ---
+Hi Rostaus, can you shared you modifications to the EA Gorilla Method, thanks in advanced...
+
+--- 帖子 #156 ---
+EA is for mt4. Does this help?
+
+--- 帖子 #157 ---
+Hi eduarescobar, the mods were only the pairs that did not perform for the EA's. EZ listed them earlier. I'll wait until EZ returns to do more testing.
+
+--- 帖子 #158 ---
+OK, thanks Rostaus
+
+--- 帖子 #159 ---
+The list was in https://www.forexfactory.com/showthr...5#post11983625 Looks like using v1.1a with Pivot = false. I wonder if EZ was able to make the auto closing changes to the EA version? I'm going to set up the latest posted - and trade just a few of the pairs.
+
+--- 帖子 #160 ---
+Hey Rostaus - what was there trailing stop setting when you submitted your results - or did you have one in the settings??
+
+
+===== 附件下载链接 =====
+
+1   EA 1-0.xlsx: https://www.forexfactory.com/attachment/file/3197785?d=1549229619
+1.docx: https://www.forexfactory.com/attachment/file/3155565?d=1546920276
+1false.docx: https://www.forexfactory.com/attachment/file/3155566?d=1546920276
+1true.docx: https://www.forexfactory.com/attachment/file/3155569?d=1546920276
+2   EA 1-1 TRUE incorrect setting.xlsx: https://www.forexfactory.com/attachment/file/3197788?d=1549229619
+3   EA 1-1 TRUE correct setting.xlsx: https://www.forexfactory.com/attachment/file/3197789?d=1549229619
+4   EA 1-1 FALSE incorrect setting.xlsx: https://www.forexfactory.com/attachment/file/3197791?d=1549229619
+5   EA 1-1 FALSE correct setting.xlsx: https://www.forexfactory.com/attachment/file/3197792?d=1549229619
+6   EA 1-2 ts at 5.xlsx: https://www.forexfactory.com/attachment/file/3197794?d=1549229619
+7   EA 1-2 ts at 10.xlsx: https://www.forexfactory.com/attachment/file/3197797?d=1549229620
+8   EA 1-3 ts at 5.xlsx: https://www.forexfactory.com/attachment/file/3197800?d=1549229620
+9   EA 1-3 ts at 10.xlsx: https://www.forexfactory.com/attachment/file/3197802?d=1549229620
+EA Test 1-0.xlsx: https://www.forexfactory.com/attachment/file/3175052?d=1548017141
+EA Test 1-1 False.xlsx: https://www.forexfactory.com/attachment/file/3175054?d=1548017141
+EA Test 1-1 True.xlsx: https://www.forexfactory.com/attachment/file/3175056?d=1548017141
+EA Test 1-2.xlsx: https://www.forexfactory.com/attachment/file/3175057?d=1548017141
+EA Test 1-3 Additional.xlsx: https://www.forexfactory.com/attachment/file/3175480?d=1548046508
+EA Test 1-3.xlsx: https://www.forexfactory.com/attachment/file/3175058?d=1548017141
+EZ EA Testing.rar: https://www.forexfactory.com/attachment/file/3162934?d=1547262719
+Monthly reults Excel.zip: https://www.forexfactory.com/attachment/file/3196457?d=1549091505
+Monthly reults.zip: https://www.forexfactory.com/attachment/file/3196459?d=1549091505
+Statement 1.0.txt: https://www.forexfactory.com/attachment/file/3164160?d=1547412025
+week2.zip: https://www.forexfactory.com/attachment/file/3162865?d=1547249057
+Week3.zip: https://www.forexfactory.com/attachment/file/3173836?d=1547871883
+Week4.zip: https://www.forexfactory.com/attachment/file/3185666?d=1548508049

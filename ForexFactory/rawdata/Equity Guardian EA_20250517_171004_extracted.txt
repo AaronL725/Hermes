@@ -1,0 +1,757 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Equity Guardian EA This little EA is designed to protect your account from unexpected drawdowns and/or lock in profits. Note: It does NOT place orders. It does NOT amend existing orders. It can be used alongside any other EA or manual strategy that you care to use. Features Monitors EQUITY, not simply floating profit/loss. Can monitor all trades, trades submitted by any EA or trades submitted by a specific EA. Closes all monitored trades if equity falls below a specified loss limit (expressed in either an amount or a percentage of the opening balance) Closes all monitored trades if equity reaches a specified profit target. Can disable auto trading when close is triggered. Example Information Panel Attached Image Parameters Attached Image (click to enlarge) The parameters should be self-explanatory, but for clarification: Currency pairs All pairs Current pair only Magic Number to Monitor for 0 = None : The EA will monitor ALL trades regardless of their magic number. -1 = All EA trades : The EA will monitor and control only trades submitted by an EA, i.e. trades opened manually will not be affected or included in the profit/loss calculations. &gt;0 = Only trades for the requested magic number will be monitored. Date of opening balance The date and time that EA is to calculate the initial balance from. Refresh interval How often the EA checks the equity (in seconds). Close values Percentage of balance - the profit and loss figures are a percentage of the initial balance. Amount of money - the profit and loss figures are a specific amount (in the account currency). Profit target The profit point at which the EA will be triggered (e.g. 10% profit or $100 profit, depending on the Close Basis). If set to zero, the EA will not check for a profit amount, and will never close while the account is in profit. Loss limit The loss point at which the EA will be triggered (e.g. 5% loss or $100 loss, depending on the Close Basis). If set to zero, the EA will not check for a loss amount, and will never close while the account is in loss. THIS IS NOT RECOMMENDED! Include commission? Whether or not to include commission ans swap fees when calculating the current profit amount. Close based on date/time? Whether or not to close all trades (regardless of profit or loss) at a specific date and time. Date and time to close Self-explanatory. Close pending orders? Whether or not to close pending orders when the close is triggered. Disable AutoTrading? When set to true, the EA will disable AutoTrading when triggered. Enable trailing profit? Whether or not to enable the trailing profit feature. Trailing profit trigger level The point (in either percentage of opening balance or a specific amount - see Close values parameter ) at which the trailing profit is triggered. Trail profit by The distance behind the current profit the trailing profit should be kept at. Trailing profit step The amount by which the trailing profit is to be moved each time. Version 1.142: Expiry date extended to end December 2022. Attached File(s) Equity Guardian 1.142.ex4 99 KB | 5,113 downloads | Uploaded Jan 30, 2022 6:45am Version 1.141: Expiry date extended to end June 2021. Attached File(s) Equity Guardian 1.141.ex4 99 KB | 1,251 downloads | Uploaded Feb 23, 2021 2:53am Version 1.14: Tidy up processing around profit target being hit. Don't check if profit target has been reached is set to zero. Don't check if max loss reached if zero. Attached File(s) Equity Guardian 1.14.ex4 97 KB | 1,832 downloads | Uploaded Jun 28, 2020 4:58am Version 1.13: Bug fix: stop current trailing profit resetting itself. Bug fix: when resetting by turining on AutoTrading, use today's date for calculation of opening balance. Attached File(s) Equity Guardian 1.13.ex4 96 KB | 1,504 downloads | Uploaded Jun 6, 2020 5:46am Version 1.12: Bug fix: corrected trailing profit function (properly this time!). Corrected calculation of opening balance for new accounts. Corrected the trigger for scheduled close. Added details to notifications. Version 1.11: Bug fix: stop crash on new accounts. Bug fix: corrected trailing profit function. Version 1.10: Added option to monitor just the current symbol. Added option to close pending orders. Added option to trail profit. Added option to send notifications. Added option to include commission and swaps in profit calculation. Added option to trigger close on specific date and time. Various changes to the information panel. Corrected the calculation for the opening balance. Version 1.00: Version 1.141: Expiry date extended to end June 2021.
+
+--- 帖子 #2 ---
+Good job as always. You run it only on monday? The default settings are the ones you are using?
+
+--- 帖子 #3 ---
+Thanks buddy! I assume that you're talking about this EA, yes? I start it on Sunday evening (it can be earlier if you wish) with the Monday start date for the initial balance. Once it's active, it will stay active until the desired profit or loss is hit, and will then deactivate AutoTrading (if you have it set). After that, I simply wait until the weekend (or following Sunday) and then activate AutoTrading again, and the EA resets itself automatically, calculating the new balance as of the point you reactivate AutoTrading. The settings are simply down to what profit target and loss limit you want to use.
+
+--- 帖子 #4 ---
+So simple and at the same time very effective. Thank you very much for sharing. One question, when closing at loss does it consider the closed/realized losses? What i mean say i don't want to lose more than 500$ after activating the ea, so when will all the orders get closed, at -500$ floating equity? Or, say due to stoploss already 200$ loss realized, so -300$ floating equity ea will close all orders? Best Regards.
+
+--- 帖子 #5 ---
+Thanks man. This will come in very handy. Looks easy to use also.
+
+--- 帖子 #6 ---
+The loss you enter is the loss it will monitor for. So, to use your example: Opening balance is, say, $10,000. You set max loss to $500. The close won't trigger until your EQUITY (i.e. both realised and floating profit/loss) reaches $9,500. So, if you have some trades that close, realising $200 profit, your balance will be at $10,200, but the EA is still looking to close if the EQUITY touches $9,500. Hope this helps.
+
+--- 帖子 #7 ---
+Amazing. Thank you. Best Regards.
+
+--- 帖子 #8 ---
+Paul, I have used it already and works great.... I am treating every day as a new day....is there anyway to have a parameter "Start Guarding Equity at " " 0000(as an example) "Close All Trades at = " " 2259(as an example) Guardian then will start anew everyday and exit all trades at specific time, profit or loss.
+
+--- 帖子 #9 ---
+thanks for the EA PaulDV. I think maybe this thread would be better placed in the 'platform tech' section blam
+
+--- 帖子 #10 ---
+I think you’re right, but I don’t seem to be able to find how to move the thread. Any ideas?
+
+--- 帖子 #11 ---
+I reported it, and you’re still here
+
+--- 帖子 #12 ---
+This is really cool. Well done Paul.
+
+--- 帖子 #13 ---
+Yup, still here!
+
+--- 帖子 #14 ---
+Could it have a time close, like close on next date 4 gmt in the morning whatever the prof or loss.. I have to wake up by alarm early in the morning to close trades. Thanks and reggards
+
+--- 帖子 #15 ---
+Already on the list of improvements!
+
+--- 帖子 #16 ---
+thanks for posting this do yu have semi martingale ea?
+
+--- 帖子 #17 ---
+Can we add 'partially trail stops' option for the orders eitherly to that EA. And if we say false for' disable trade on close option',it would work uninterruptly isnt it
+
+--- 帖子 #18 ---
+The next version includes a trailing profit option. This works similar to a trailing stop, except that it keeps a track of profit, not stop levels. e.g.: Trailing profit trigger = $250 Trailing distance = $100 Trailing step = $10 In this example, when the profit hits $250, the trailing profit is triggered. The trailing profit is moved to $100 behind the current profit ($150) When the profit increases to $260 (so, +$10 - the 'step'), the trailing profit will be moved again to within $100 of the new profit ($160). If the price retraces, and the profit falls below the trailing profit, the close is triggered. You can set the profit target to zero, and use the trailing profit to lock in as much as possible.
+
+--- 帖子 #19 ---
+No ı ment 'partial trail stops option for the orders merely
+
+--- 帖子 #21 ---
+It seems like you are asking for a trailing stop on each individual position? There are plenty of EA that will do that for you Equity Guard watches all trades and closes by equity gain or loss by percentage Probably could run both at the same time but kind of defeats the purpose Good luck
+
+--- 帖子 #22 ---
+I'm not sure what you mean by that. Do you mean an option to start moving the stops of the orders?
+
+--- 帖子 #23 ---
+Paul, I beleive your response was that it is "Already on the list of improvements!" Am I correct?
+
+--- 帖子 #24 ---
+The next version contains an option to trigger a close at a specific date and time. But it doesn't have the ability to schedule a restart, which is what I think you're after? You would need to reset the EA and enter a new close date and time.
+
+--- 帖子 #25 ---
+Yes, Paul, I am asking for restart. Your Equity Guardian will have much more wider application. I also trade breakouts but analyze each day as a new day, including fundamentals, higher TF, previous day momentum, etc.. Anyway you can incorporate Restart New Day = True/False?
+
+--- 帖子 #26 ---
+This is not really in line with the purpose of the EA and is a rather specific feature that I don't feel that many people would use. There is also a workaround, in that you can manually restart the whole process each day, which means that it can still be used in the way you are wanting albeit not automatically. And finally, coding in such a feature is not as simple as it may at first seem, as there a number of questions around how it should work, what additional parameters would need to be coded in, what settings to present to users, etc. I'll add this to the list of things to bear in mind for later development, but for now, there are more useful features to be added.
+
+--- 帖子 #27 ---
+"Can disable auto trading when close is triggered." Isn't it a problem that EA will turn off automatic trading? EA will turn off.
+
+--- 帖子 #28 ---
+No, the AutoTrading button only determines whether or not EAs can open or amend trades, it doesn't stop them from running.
+
+--- 帖子 #29 ---
+Version 1.10 has been uploaded to the first post. Let me know if you experience any issues, or have any questions.
+
+--- 帖子 #30 ---
+Yes.Sure.Ea will also take control for orders eitherly when controlling Equity.Option will be like that Trail stop every order %50 for every 100 pip;true Trail starts:100 pips(X pips) Trail stops;50 pips(x pips)
+
+--- 帖子 #31 ---
+thanks really appreciate your work is amazing Best regards
+
+--- 帖子 #32 ---
+I thought so. Then no, that's not the ethos behind this EA - it simply monitors equity and does not interfere with trades/orders placed by other EAs as that may also affect the strategy used by those EAs. This is a tool to use in an attempt to avoid larger than wanted drawdowns and/or take profits at a predetermined level. It is not a trade manager.
+
+--- 帖子 #33 ---
+Thank you.
+
+--- 帖子 #34 ---
+Thanks for the beautiful EA, Paul. It seems my personal request sent to you as PM may now be unnecessary.
+
+--- 帖子 #35 ---
+Hi Paul, its awesome Ea to lock your positions in case something terrible happens. Is it posiblle to further develop EA from standalone Locker to Locker+Unlocker.
+
+--- 帖子 #36 ---
+Just wondering why am seeing this on the panel even after imputing all necessary parameters?
+
+--- 帖子 #37 ---
+After deactivating auto-trading, EA can do nothing.
+
+--- 帖子 #38 ---
+Paul, you can see that profit is at 7% plus, trailing at 7% is not triggered.
+
+--- 帖子 #39 ---
+That looks extremely odd - you don'even have a border on th epanel. Can you try shutting down you terminal and restarting it, and then adding the EA again please?
+
+--- 帖子 #40 ---
+That's not true. EA's still run, they simply cannot do anything with orders or trades.
+
+--- 帖子 #41 ---
+That's just a screenshot of my terminal after I've been messing around with it...basically all trades were already closed when I started the EA.
+
+--- 帖子 #42 ---
+No, this is my terminal.....trailing at 7% is not triggered...
+
+--- 帖子 #43 ---
+My trailing profit too was not triggered when it should have
+
+--- 帖子 #44 ---
+I've done as you asked me to do but the problem persisted. It happens in a new demo account I just opened but not so in my existing real account. Here is the error message.
+
+--- 帖子 #45 ---
+Ah sorry, I can see that now - I thought you were questioning my screenshot. I'll take a look. This was definitely working, so I'll have to do some digging. Would you chcek the journal to see if you have encountered any errors please?
+
+--- 帖子 #46 ---
+Thanks for showing me the errors - makes it totally clear where the issue lies! All my testing was done on existing accounts, and I hadn't taken a zero starting balance into account! Noob error! Fix incoming...
+
+--- 帖子 #47 ---
+No errors...installed, removed few times...
+
+--- 帖子 #48 ---
+Version 1.11 has been uploaded to the first post. Sorry for the issues guys.
+
+--- 帖子 #49 ---
+Thanks for the update. I still need to clarify this; pls see my snapshot, my 'opening balance, profit target and loss limit are not seen or calculated. I do not have a zero balance. I have 3,000 on demo account
+
+--- 帖子 #50 ---
+I think I know what the issue is... Can you try setting the magic number to monitor for to '1' and let me know if that fixes the opening balance figure please? If it does, then I know the solution. Thanks.
+
+--- 帖子 #51 ---
+No it didn't solve the problem
+
+--- 帖子 #52 ---
+Paul, ea did not exit all trades pendings and still ongoing at allocated time of 06/04 at 2259. You can see that I exited trades manually on 06/05 at 0002
+
+--- 帖子 #53 ---
+Could you show me the errors in the Journal and/or Exports tabs please? I notice from your earlier screenshot, that you have some error messages regarding hedging not being allowed. Could it be that your broker requires FIFO closing?
+
+--- 帖子 #54 ---
+Found the issue and it will be corrected in the next version.
+
+--- 帖子 #55 ---
+Version 1.12 has been uploaded to the first post.
+
+--- 帖子 #56 ---
+Many thanks!
+
+--- 帖子 #57 ---
+There were errors on hedging and I know what they are but by the time of closing all was clean...orders just did not closed, as you have seen on my image. I can not show journal or experts as I restarted mt4. Can you test it out on your end?
+
+--- 帖子 #58 ---
+Oh, I see - you said "did not exit all trades" which implies that it exited some but not others. I believe you found the same issue I did which is that the schedule close did not work as intended - it does now.
+
+--- 帖子 #59 ---
+Okthx
+
+--- 帖子 #60 ---
+Paul, here we have Trailing activated, 10 minutes later it shows "Not Triggered", trades still going... I noticed that "Not Triggered" comes and go's intermittently...I think when the Trailing is reached, ea does not exit nd just go's into the "Not Triggered"
+
+--- 帖子 #55 ---
+Wow, not seen that before. Thanks for reporting it. I’ll take a look over the weekend.
+
+--- 帖子 #56 ---
+Version 1.13 has been uploaded to the first post. Have a good week everybody.
+
+--- 帖子 #57 ---
+Sir, much thanks for this EA.
+
+--- 帖子 #58 ---
+Love this EA. It is what is needed to manage proper money management.
+
+--- 帖子 #59 ---
+An EA i needed
+
+--- 帖子 #60 ---
+so on reaching target it switches the auto trading off. but is there a way auto trading can be restarted automatically next day. or there is no such option.
+
+--- 帖子 #61 ---
+Paul, this is another request from another trader for what I asked before: to be able to restart the next day anew. I have been trading new positions new day for the past few years. This would be very helpful if ea had these parameters. "Start Guarding Equity at " " 0000(as an example) "Close All Trades at = " " 2259(as an example) - it already does this
+
+--- 帖子 #62 ---
+May be just resetting after reaching those equity limits whether it is loss or profit based on target and then, but only way it is controlling all.other EAs after closing trades is by switching auto trade off. Once auto trading is off there is no way for EA to be triggering any events.... Can you make "auto trading off" feature changeable variable. So resetting will close all trades on desired equity level reached. And it resets everything. So eas will open trades again if needed fresh.
+
+--- 帖子 #63 ---
+thank you, very nice work, got some ideas to add and tweak to it if possible: 1. adjust option to monitor the magic number of the EA required to be controlled, to enter multiple magic numbers separated by coma (to control multiple specific EAs in same time). 2. option to prevent controlled EA from opening other positions on 2nd pair if we run it on multiple pairs and it already started signal on one of the pairs. 3. Max lot allowed to be opened and other one for total lot size. Thank you again.
+
+--- 帖子 #64 ---
+Post 16
+
+--- 帖子 #65 ---
+I have a silly ? Is your system only for mt4/mt5? Can it be utilized on other platforms?
+
+--- 帖子 #66 ---
+There's no such option. You can simply activate AutoTrading again yourself, and the EA should reset and pick up the balance as at that date.
+
+--- 帖子 #67 ---
+I'll think about it, but as I've said before, although it may sound simple, it's quite a bit more involved than that.
+
+--- 帖子 #68 ---
+The AutoTrading off is already an option.
+
+--- 帖子 #69 ---
+1: You can already enter the magic number for a specific EA you wish to monitor. I'll add multiple magic numbers to the list of potential enhancements. 2 and 3: This is not a trade management EA, it's a safety net, that is all.
+
+--- 帖子 #70 ---
+This is only for MT4 at the moment.
+
+--- 帖子 #71 ---
+Hit trigger for the first time. I wonder about trailing profit is 0.03% Settings I have put 1% Attached Image Next step Attached Image Step 3 Attached Image Finish Attached Image
+
+--- 帖子 #72 ---
+It is possible to turn off all other EAs without turning off automatic trading. Just switch to a profile where there is no EA. Or switch to a profile where there is only an EA that closes all positions.
+
+--- 帖子 #81 ---
+That doesn't turn off all other EAs, that removes all other EAs...bit of an overkill, don't you think?
+
+--- 帖子 #82 ---
+The 0.03% would be correct as that is the trigger kikcing in, but the others aren't railing as expected. I'll take a look at it.
+
+--- 帖子 #83 ---
+It's a reliable way to close all EAs and all positions. And don't cut the tree I'm sitting on.
+
+--- 帖子 #84 ---
+Sorry, but I don't see why this would be better.
+
+--- 帖子 #85 ---
+OK, I've reviewed the trailing profit, and it looks like it's working as intended. Two things to bear in mind: The market is always moving, so the values/percentages specified will not be exact because by the time the EA reacts, the market has already moved in one direction or the other. The Step value is used to give the basket some breathing space, and when triggered, the trailing profit will be moved up, not by the Step, but by the Distance. So, a move in the trailing step may get triggered, but the market will have moved, so when the trail is moved, is may be more or less than the specified Step amount. I hope this makes sense.
+
+--- 帖子 #86 ---
+HI Paul, Congats for this EA Equity and sharing it I used it specially for shutdown "AutoTrading button" inMT4 when loss limit reached...it works (close all trades pending) but when MT4 receives a new order from my alert TradingView, the order is still placed while I wish not placed because that AutoTrading is disabled (Note that when the loss limit is reached, "AutoTrading button" in MT4 still ON) See my parameters in attached file Thanks for your help Nico
+
+--- 帖子 #87 ---
+Are you saying that the info panel shows "Auto Trading is disabled" but the Auto Trading button is still on? If not, can you check the Journal or Experts tab in the Terminal? You should see something like this: Attached Image (click to enlarge) Where it says "Automated trading disabled" - that should be Equity Guardian turning off the button. If you see "Automated trading enabled" after tha, then something else is turning the Auto Trading button back on again...probably another EA.
+
+--- 帖子 #88 ---
+Many thanks to the author for that great tool! Do you have a plan to make it for mt5?
+
+--- 帖子 #89 ---
+What's the point of using MT5 when everybody is using MT4. There are plenty of EAs and indicators for MT4. I've tried MT5, it's full of bugs.
+
+--- 帖子 #90 ---
+Hi Paul, Thanks for replying....indeed, there is TradingConnector EA turning during my session (mandotory for connecting TradingView and my MT4) BUT in the Expet tab, I saw an error 2020.06.19 10:05:17.430 Cannot call 'user32.dll::GetAncestor', DLL is not allowed So I check the "allowed import DLL".....I have to re-test it ;-)
+
+--- 帖子 #91 ---
+Paul, Have you considered adding a news filter to your Equity Guardian EA? This would obviously be redundant with your MoTuBo_EA but I can see it being useful with other EAs that don't handle news events very well.
+
+--- 帖子 #92 ---
+This sounds like a good idea to me.
+
+--- 帖子 #93 ---
+Hmmm...I haven't no. And to be completely blunt, I don't see the point. I don't see how a news filter would work with this EA - this just monitors equity and doesn't interfere with trades opened either manually or by other EAs...could you elaborate on how you see a news filter working?
+
+--- 帖子 #94 ---
+Hello Paul. Thanks for the improvements on the equity Guardian EA so far. Kindly look into this observation I made today. Initially I had set my profit target to 20% on demo account. And, at a point during trading, I realized I could achieve 25% profit target easily. So I decided to change it to 25%, but noticed that it still showed 20% on my chart(information panel). That on it's own may be a bug. But further more, since it didn't reflect the change I made on the chart(information panel), I opened same version of the equity guardian to input the values afresh, but all my open trades just got exited immediately(prematurely) even without achieving the initially 20% profit target.
+
+--- 帖子 #95 ---
+Paul, I understand what you're saying. My thought was, impactful news events can often have a very negative effect on EA generated equity. A news filter would turn off "auto trading" temporarily. That could prevent a drawdown in equity that would trigger the Equity Guardian from shutting the EA down and closing all trades. Also, I tried using Equity Guardian with with the Profit Target set to zero but it immediately closed all trades without the Loss Limit being anywhere close to my setting. Thanks Paul. Keep up the good work!
+
+--- 帖子 #96 ---
+it count be nice addition to trailing sl and tp using ATR (dynamic trailing)
+
+--- 帖子 #97 ---
+Ouch, sorry about that...definitely not what it should be doing. I'll take a look and see if I can spot how this could happen.
+
+--- 帖子 #98 ---
+Oh I see. The issue with that is that although it might stop other EAs from opening more trades, it won't then be able to do anything if the equity on existing orders DOES take a dive - pretty much circumventing the purpose of the EA. Re the closing of the trades, that looks like a scenario I hadn't thought of, so I'll look into that and get back to you.
+
+--- 帖子 #99 ---
+What?
+
+--- 帖子 #100 ---
+dynamic trailing Stop loss and dynamic trailing take profit using ATR example use 1 day candle , xx pair , atr (14) = 80 1.5 x ATR SL = 120 pips 2 x ATR TP = 160 pips use 4h candle , yy pair , atr (14) = 22 1.5 x ATR SL = 33 pips 2 x ATR TP = 44 pips why you do that ? ... in each pair are in diff market conditions .. if you put in all the same Stop Loss and Take profit .. in 1, 2 pairs may be ok in others too tide in others to large ... each pair must have its own SL and TP dynamic trailing Stop Loss and Take profit can help ... ATR is one way ... there also others .. the above are just examples ... no trade advice backtest to find your sweet point ...
+
+--- 帖子 #101 ---
+Can you share how many% ATR (14) give PT and SL? If necessary, shift the SL according to% ATR. ATR is the best 14?
+
+--- 帖子 #102 ---
+usually i have seen many that use ATR between 0.5 to 3+ others change also ATR (14) to something else if you search there is a indicator that can print the SL or TP in the screen you choose that you want .. from how much you can loose ... also search ATR in youtube ...
+
+--- 帖子 #103 ---
+Have you even read this thread?
+
+--- 帖子 #104 ---
+Results for this week using EG on MoTuBo: 10% loss There were a couple of things that contributed to this: firstly the range was very small on a couple of pairs and trades were entered which, in hindsight, should have been avoided; secondly, things were going great into Tuesday when there was a major news spike which dipped my equity down to the 10% max loss I had specified, triggering EG to close all trades. The market subsequently recovered, and I believe that had I not already lost those two trades that shouldn't have been opened, I may have come out of this week with a nice profit. So...I've added a min range filter to MoTuBo in the hope to avoid that scenario again. I will be checking into a couple of bugs reported (above) and hope to have a new version of EG shortly.
+
+--- 帖子 #105 ---
+Hi, all my trades still run until 19:00, now around - 7%
+
+--- 帖子 #106 ---
+My demo turned out even worse. It may be set incorrectly. It's hard to find the same settings as yours. I will attach my settings.
+
+--- 帖子 #107 ---
+Mine would have ended up in profit if I had not interrupted with the trades. It's all a matter of settings. My stop loss was 100%.
+
+--- 帖子 #108 ---
+-7% or +7%?
+
+--- 帖子 #109 ---
+-7%, later hit - 10% Last 10 weeks I get around +90%
+
+--- 帖子 #110 ---
+Over all, it's a very strong performance. We're close to the end of the 2nd quarter of the year, so you can expect the markets to stall as financial institutions draw up there statements.
+
+--- 帖子 #111 ---
+Equity Guardian V1.14 has been uploaded to the first post. I recommend that all users upgrade to this new version.
+
+--- 帖子 #112 ---
+I have been going through the code and trying out various scenarios attempting to reproduce these bugs, but have not been able to do so. Although, I did get it to close all trades early, it was only because when I applied a new version to the chart, I forgot to set the date for the opening balance - could this have been what happened for you?
+
+--- 帖子 #113 ---
+As I suspected, I hadn't taken this (perfectly valid) scenario into account. I have now coded this in, so you should now be able to leave the profit target as zero, and simply let Equity Guardian close using the trailing profit.
+
+--- 帖子 #114 ---
+Does this EA use the balance or equity to determine when to close the basket? The reason is, sometimes I close some trades at profit which increases the balance but at the same time I'm still floating negative equity so I don't want to close the entire basket until there's an actual equity raise.
+
+--- 帖子 #115 ---
+Yes, It is. I didn't change the date. Thanks. But what about the issue of changing the profit target while it fails to reflect on the information panel?
+
+--- 帖子 #116 ---
+Thanks for the good work.
+
+--- 帖子 #117 ---
+Read the first post: https://www.forexfactory.com/showthread.php?t=1003301
+
+--- 帖子 #118 ---
+I tried to replicate this too, but no matter what I did, the change was reflected in the info panel. If you can force the bug to surface and can tell me exactly how you did it, I should be able to find it, but as of now, I can't seem to get it to go wrong.
+
+--- 帖子 #119 ---
+Hi, how to install this ea along with other ea which is running currently? When i click and drag to chart it ask whether to close pervious ea? pl guide me?
+
+--- 帖子 #120 ---
+Place it on a separate chart.
+
+--- 帖子 #115 ---
+@Paul.. do you have any EA which gives atleast 3-5% profit/day with very low drawdown? If any pl. let me know. Thanks!
+
+--- 帖子 #116 ---
+Hi PaulDV, That is Great EA, very userfull. Can add more function to filter News? EA will Disable Auto Trading before 30m when news come? Thanks very much!
+
+--- 帖子 #117 ---
+nice EA, but why can't I choose to only close the losing trades at equity and keep the good ones open ?
+
+--- 帖子 #118 ---
+Hi Paul, Many thanks for very useful EA! Would it be possible to add one simple feature to also protect equity by allowing user to set minimum % of free margin allowed for new deals. This should basically block user manually or another EA opening any new or new pending deals if FreeMarginPercent is below level X. Thanks in advance! andres
+
+--- 帖子 #119 ---
+Hi Paul and may I ask you again to let us have a field to close the trades by the end of the day and restart it again. "Start Guarding Equity at " " 0000(as an example) "Close All Trades at = " " 2259(as an example) - it already does this
+
+--- 帖子 #120 ---
+Thank you Paul
+
+--- 帖子 #121 ---
+Hi Paul I'm running your 3 strategies on a demo account (including your recent setup on the pairs you have chosen). The guardian still thinks trades linked to the magic number for the MoTu strategy are still running for this week when they are not. I've checked a number of times and I don't see any MoTu trades open, but the guardian is trailing profit? Any idea what could be happening here?
+
+--- 帖子 #122 ---
+Hi Paul; What a great EA you have here; just amazing. I was wondering how hard it would be to add an option to monitor each individual trade; for example; if I opened up like 20 trades and wanted to close each one when they reached say 20 pips or $20 instead of setting a holistic equity number for the entire account. Is this possible? If it's already been asked I apologize. Thank you, -Jeff
+
+--- 帖子 #123 ---
+Hi Paul, i would like to see this too.
+
+--- 帖子 #124 ---
+my mql5 isn't accepting the EA I get error that the EA uses user32.dll why ???
+
+--- 帖子 #125 ---
+Hi, Is there possible to turn on few equity guard on 1 mt4 with diffrents settings and diffrent magic numer? I did try but didnt work.
+
+--- 帖子 #126 ---
+It says Equity Gaurdian has expired and contact the owner to get the new update. How do we receive the new update that is not expired?
+
+--- 帖子 #127 ---
+Hi PaulDV's , Equity Gaurdian has expired Same Jclemon , How I do for your EA? Please Advise me. Fourmerge.
+
+--- 帖子 #128 ---
+Version 1.14 has expired. any chance to release an unexpired one or extend current version? Any other recommended Equity Managers as an alternative?
+
+--- 帖子 #129 ---
+Version 1.14 has expired HELP!!!
+
+--- 帖子 #130 ---
+Hi Paul, as the others have said both the Equity guardian and the MoTu ea have expired. I am busy managing live trades so Im pretty confused as to why this wasnt mentioned before that there is an expiry date. Could you please upload latest versions asap or let us know what is going on?
+
+--- 帖子 #131 ---
+Hi EveryBody, Who can advise me for EA that Same Equity guardian EA? Because I try Equity Sentry not work for me&gt; Please Please , I have problem for my account .
+
+--- 帖子 #132 ---
+Hello there Same question as above: Version 1.14 has expired. any chance to release an unexpired one or extend current version? Thank you!
+
+--- 帖子 #133 ---
+Does anybody know where Paul can be contacted? Here he wasn't active since October. He has also an account on myfxbook. What is strange that some EAs only have results in August lastly. I hope that nothing terrible happens! :/
+
+--- 帖子 #141 ---
+ya ..maybe the MM got him...
+
+--- 帖子 #142 ---
+Hopefully not! Does anybody know another good equity EA with a TS function?
+
+--- 帖子 #143 ---
+Try this one https://www.forexfactory.com/thread/...ity-guard-tool
+
+--- 帖子 #144 ---
+Thanks, Toppi. Next Week for test. Have a good weekend. Fourmerge.
+
+--- 帖子 #145 ---
+I test on yesterday but did not close anything, I think coders can fix
+
+--- 帖子 #146 ---
+This free, open-source Multi-purpose trade management EA https://www.forexfactory.com/thread/...-management-ea Basket trade management - has some nice options, I'm going to test next week
+
+--- 帖子 #147 ---
+No problem with this version, I think. Test next week Attached File(s) Multi purpose trade manager.ex4 74 KB | 566 downloads
+
+--- 帖子 #148 ---
+Hello PaulDV, I downloaded Equity Guardian 1.14. Unable to activate. I am getting an error message: "This EA has expired. Please contact the author for a new version." Please post the latest version or advise on how to solve the error message issue. Thank you for your contribution to FX
+
+--- 帖子 #149 ---
+Apologies to everyone for any inconvenience caused by my absence. As mentioned on another thread, a number of events came together to keep me from doing a number of things that are important to me, with Forex being one of them. I have uploaded a new version of the EA with an extended expiry date.
+
+--- 帖子 #150 ---
+Thanks Very much for you advise. Fourmerge.
+
+--- 帖子 #151 ---
+A very good tool to protect many that use 3rd party EAs! Good job
+
+--- 帖子 #152 ---
+hi nice its good one
+
+--- 帖子 #153 ---
+Hi PaulDV, good to have you back. Im running into a situation where my opening balance on Equity Gaurdian 1.141 runs out of synch with my account balance. I happens in the following situations; 1) When my individual EAs hit a TP or SL and close 2) When I have roll over commissions during inter trade breaks 3) fi I manually close trades. My work around is that I fiddle with the "Date of opening balance" in the Equity Guardian inputs Ideally what I would like is that my Opening Balance on the Equity Gaurdian refreshes every second to keep in synch with account balance. I thought he following inputs would help me avoid these situations; 1) Magic number to monitor = 0 (To account for my EAs and any manual closes I do or roll over amounts that affect my account balance) 2) Include commissions? - Im hoping this will take into account the roll over amount. To sum it all up, im looking for the opening balance to alwways be the same as my account balance Thanks for this amazing tool
+
+--- 帖子 #154 ---
+Hiya, This is not how EG is intended to work. EG is intended to monitor the gain (or loss) of an account over a period of time, and to terminate all trades once a specific profit level has been reached, or a specific loss limit has been reached. This is intended to be across a number of trades, with the balance changing in the interim. The Opening balance is how it keeps a track of how much equity has been gained or lost. If the opening balance changes every time the account balance does, then there's no way to determine how much equity has been gained or lost. EG is intended to monitor the gain (or loss) of an account over a period of time, and terminate all trades once a specific profit level has been reached, or a specific loss limit has been reached. This is intended to be across a number of trades, with the balance changing in the interim.
+
+--- 帖子 #155 ---
+Thanks PaulDV So I landed up creating my own EA that works off the difference between the balance and Equity to get the floating balance and then triggers the close order on all open trades once target has been reached. Thanks for the reply and hope you are doing well. Have a great week further
+
+--- 帖子 #156 ---
+Thank you for a useful tool. It's promising in combination with my new strategy I'm developing. However I seem to run into a problem more often than not. The current profit and trailing profit does not seem to always update, and I have to manually switch time frame for it to update, which kind of makes it out of sync with the values I've inserted in the options. I have "Refresh Interval" set at 1. One trade that got opened yesterday did not sync at all and I had to switch the time frame this morning for the trailing profit to trigger. Maybe I'm missing something? Some input would be highly appreciated. BR, Mr. Bank
+
+--- 帖子 #157 ---
+thank you paul for sharing it. when i used this EA something happened i thought report it, at first when added it to chart it was fine but as soon as i changed the input "Magic number to monitor" to 0 it closed all my trades immediately.
+
+--- 帖子 #158 ---
+Whenever you change the parameters of an EA (any EA), it restarts from scratch as though you had just dropped it onto the chart. This is always a very dangerous thing to do and can result in unexpected results. However, in this instance, what happened is not unexpected. When you amended the Magic Number to Monitor parameter from (I assume) "-1" (trades opened by any EA) to "0" (all trades), you were telling it to: Calculate the starting balance as at the Date of opening balance using the current balance minus all closed trades since that date. Calculate the current equity gain or loss since that date, looking at ALL trades regardless of whether submitted manually or by EAs. It would then have compared the equity gain or loss against the Close On Equity figures you had previously entered, and if either of those values were exceeded, it would trigger an automatic close of ALL outstanding trades. So, as I said, this is exactly what I would have expected.
+
+--- 帖子 #159 ---
+That sounds very odd behaviour, and isn't anything that I've encountered myself before. Switching timeframes would re-initialise the EA using the existing parameters, which would explain why that temporarily corrects the figures, but I can't see anything in the code which would cause the figures to go out of sync. The only thing which comes to mind is the use of timers: EQ uses a timer to 'wake up' and recalculate the current set of figures. It could be that this is being interfered with by some other process - do you have anything else running on the same chart?
+
+--- 帖子 #160 ---
+Yes, it seems strange. No I have no other things running on the same chart.
+
+--- 帖子 #161 ---
+Hello PAUL pls i just sent you a pm.Pls kindly check
+
+--- 帖子 #162 ---
+Hello PAUL CHECKOUT THIS SCREENSHOT,i just pm you in respect of this screenshot
+
+--- 帖子 #163 ---
+I hope that development on this. I just tried to today it works fantastic. Thank you for creating this
+
+--- 帖子 #164 ---
+Could you add a time filter in as well. Such as a start time and an stop time. Something like is shown in the picture. This would be fantastic as another safety.
+
+--- 帖子 #165 ---
+Hi there, just want to say thanks for this great EE and I have a question. Is there a setting whereby all the losing trades close and trail profit begins once equity hits a certain %? ie: target equity 5% Action: losing trades close out and profit trades begin trail profit by specified % instead of just closing out winning trades and limiting the potential for runners?
+
+--- 帖子 #166 ---
+any way to make the close all feature fifo compliant? So close all trades in the proper order when profit or loss equity is hit?
+
+--- 帖子 #167 ---
+Hi There, I have started using the EA and it is wonderful. Question, the last update you posted says it expires in June. Will you be posting a new version and if so have you made any adjustments to it? Thank you so much for this EA
+
+--- 帖子 #168 ---
+Trailing not Work on last version!
+
+--- 帖子 #169 ---
+Sorry Works!!!
+
+--- 帖子 #170 ---
+Expiry date extended to end June 2021. It's already gone, new updates? Meaning new expired date?
+
+--- 帖子 #171 ---
+Does the EA disable Trading after TP was hit on the particular Chart or on all charts together?
+
+--- 帖子 #172 ---
+Apologies to all regarding the expiry date having been passed without a new version being released. I had thought that the end of June would have been long enough for me to make some additional tweaks and features, but I've been so busy with work and other projects that I simply haven't had time to do what I wanted. I have posted an update with the expiry date set to the end of 2022, which is hopefully long enough for me to do what I ned to get done. Regards, Paul.
+
+--- 帖子 #173 ---
+Thank You.
+
+--- 帖子 #174 ---
+Hi, PaulDV. I tried to install the last version of the EA, but it says: "The EA has expired". Anybody else has seen it? Thank you.
+
+--- 帖子 #175 ---
+same here
+
+--- 帖子 #176 ---
+i has same issue
+
+--- 帖子 #177 ---
+Hi PaulDV. the latest version 1.142 also seems to be expired. Can you please upload a fresh copy with the extended expiry date?
+
+--- 帖子 #178 ---
+Ok, I have what may be the stupidest question in the world. I have literally spent HOURS today looking for an equity protection EA that would disable auto trading but NOT close all the open trades?! Does anyone make one with such an option? I mean it can't be that difficult and I have a desperate need for such an option.
+
+--- 帖子 #179 ---
+yeah still says expired for 1.142
+
+--- 帖子 #180 ---
+Hi there, I hope you are well. I have downloaded the version 1.142 but after installation the following dialogue box comes up "This EA has expired Please contact the author for a new version" It would be fantastic if you could please advise. Many thanks, Lucy
+
+--- 帖子 #181 ---
+I tried to attach it to a chart, it says the version is expired, I need to contact the author.
+
+--- 帖子 #182 ---
+He only pops on from time to time. So subscribe to here and await a month or so
+
+--- 帖子 #183 ---
+Same...expired
+
+--- 帖子 #184 ---
+Hello Paul I have the same issue as some other members i think that it always tells me, the version is expired i should contact the author. Can you help with that issue? Thank you in advance.
+
+--- 帖子 #185 ---
+Hey. So i have the same issue that it sayss the Expert is expired and i need to contact the author. Are you really serious that i need to suscribe and wait a month until it is working? Is it really depending on this? How did you solve the issue? Thank you in advance. Cheers, Carina
+
+--- 帖子 #186 ---
+Hey Paul. So i tried many times but it is still saying that the ea is expired i should contact the author. Do you have any solution for me? Thank you. Cheeers, Carina
+
+--- 帖子 #187 ---
+Hey there. Can i ask you which others Equity Guardian you can recommend? Because this one of Paul is not working, it says it is expired. So i wanted to ask you which others you found in the web where trades will be closed automatically? Thank you so much. Best Regards Carina
+
+--- 帖子 #188 ---
+Paul, thanks for Equity Guardian 1.142. When I try to install it said expired. you mentioned expiry Dec22
+
+--- 帖子 #189 ---
+Same issue here, the Equity Guardian 1.142 tells me expired. Can you please give us any update how to bypass this issue. Thanks
+
+--- 帖子 #190 ---
+I have the same problem What do I do or who do I contact Thanks
+
+--- 帖子 #191 ---
+Hi Paul I have the same problem What do I do or who do I contact How do I solve the problem with Equity guardian Can I do anything as I would love to try this out even as a trial Thanks
+
+--- 帖子 #192 ---
+Here. You can try these&gt; RMK
+
+--- 帖子 #193 ---
+Sir I want indicator can any body help Mtf candle with stochastic alert Month candle : Up (Green) Weekly candle : Up (Green) Daily candle :Up (Green) 4 Hours candle :Up (Green)5 5 Minutes : stochastic 14,3,3 is Below 20 I want indicator BUY alert When 4 mtf candle in Up side and 5Min stochastic below 20 Indicator sell alert when 4 mtf candle in down side and 5 Min stochastic above 80 Can any body create indicator with alert ? please Help me. Thank you
+
+--- 帖子 #194 ---
+Thanks a lot rskdev. That sounds great Will tell you if it goes well
+
+--- 帖子 #195 ---
+Is it possible I can get access to that EA? When it closes the trades does it also turn the auto trade button off?
+
+--- 帖子 #196 ---
+Hi, Thanks for this EA, tho I tried to use your laterst version 1.142. today(Jan 6, 2022) but it says expired. Can you upload an extended ver of your EA. Thank you!
+
+--- 帖子 #197 ---
+Apologies to everyone for the blunder on the expiry date - it was supposed to be until the end of 2022, but for some reason the change didn't take! I've uploaded a fresh copy which contains the correct date.
+
+--- 帖子 #198 ---
+Thanks for updating
+
+--- 帖子 #199 ---
+Very nice tool , start using it with my ea's with very good results . Do you sell this ea ? I mean in case you stop share in it on the forum . I check that all versions have expire date.
+
+--- 帖子 #200 ---
+Hi Paul DV Wonderful work on this EA. A couple of queries. Why is there an expiry on the ea. Does it mean it can be purchased later? If I have a profit close set to say $100 on a $10000 account and I make that and the ea closes all trades and pending orders Now my ea will continue placing trades Would the Equity Guardian then monitor the account again till the account reaches another$100 to $10200? Thank you Malcolm
+
+--- 帖子 #201 ---
+Hi Paul DV Thanks for updating the expiry It works well by closing on equity but I had a problem I am running 3 of BTC on 3 separate charts with diff magic numbers The way opens pending buy and sell on each Sometimes 1 trade is triggered and after a certain time about 30 min to an hour the other pending orders are closed but it leaves the open order running, without reaching the equity? Any ideas or help Thanks Malcolm
+
+--- 帖子 #202 ---
+Hi, That's exactly what I was looking for, thanks a lot! Installing worked without Problems after reading a couple of pages of trades, I'm unsure how to do that. I want the profit and Loss Target daily new calculated, means I WANT lets say 5% daily Profit and loss. Is that possible, and if yes, how do I do that? Thanks Johannes
+
+--- 帖子 #203 ---
+Hi Paul DV I'm sorry the closing trades was the other EA not the guardian. But the trailing stop I am not sure about
+
+--- 帖子 #204 ---
+Hello. Am new to EA. How to use this? Do I need to run it at the same chart wheres my working EA running or different chart? This file should go to Experts file yeah? Thank you so much for this EA.
+
+--- 帖子 #205 ---
+Hi PaulDV, hi everybody. I've found this EA. I hope it can change my life! Just a question: is there a MT5 version? Or something like this (for free)? Thank you
+
+--- 帖子 #206 ---
+I hope someone can explain to me how it works. I have attached screenshots. I don't understand the program that counts. Why are there hundreds of dollars in difference? Thanks
+
+--- 帖子 #207 ---
+Sorry man if I go on... Anyway, most important than the other 2 posts before: when Loss is triggered, is not possible close all, also the "waiting" trades (sell stop, etc... in queue)? If not, how can I do? Thank you
+
+--- 帖子 #208 ---
+Hi PaulDV! Installed, checked, everything works fine! Thank you, I have been looking for just such an adviser assistant for a long time!
+
+--- 帖子 #209 ---
+Hi There How could I use ur EA? It's endtime
+
+--- 帖子 #210 ---
+Hello, I just wanted to say that the EA really works great. Hope you keep developing it. But with everything that is already in it and how it works is already fantastic. Install, fill in parameters, and go. Excellent.
+
+--- 帖子 #211 ---
+Why must there be an expiration date? Why is there not an MT5 version? Why is there not source code?
+
+--- 帖子 #212 ---
+Hi Paul, great EA, May I ask if you would be open to a slight modification of the EA for a small charge? The EA doesn't necessarily close all my positions due to my ea's opening trades as the Equity Guardian attempts to close them. I do have a solution though that would be as simple as including a small script that I already have to run manually once the Equity Guardian has done it's bits. Thanks, Mark
+
+--- 帖子 #213 ---
+Hello Paul, thanks for your EA. Is it possible to add a feature that "CLOSE ALL OPENED TRADES" when the equity target is reached? Thank you very much. Victor.
+
+--- 帖子 #214 ---
+Who has live account trade with this ea?
+
+--- 帖子 #215 ---
+Many thanks Paul for this... very useful and handy. My observation is that you might need to always refresh account history. Is it possible to improve the EA to automatically refresh account history daily?? Many thanks.
+
+--- 帖子 #216 ---
+Hi Thanks for your EA. Working good on a daily basis. Is there a way to have a take profit / stop loss based on pips ? Thanks in advance
+
+--- 帖子 #217 ---
+Can this EA work without dll.Becouse it cant work mq5 server.
+
+--- 帖子 #218 ---
+The Equity Guardian EA 1.142 is expiring in Dec 2022. Is this a free EA or we can purchase this EA after Dec 2022? Any one with an answer to this question, can you please reply.
+
+--- 帖子 #219 ---
+This is due to expire soon. Will there be an extension to this EA or is there a possibility to buy this product?
+
+--- 帖子 #220 ---
+That's my question too to the developer. Ple. reply as to how we should proceed after Dec 31, 2022, in terms of using this EA.
+
+--- 帖子 #221 ---
+Good day, is there a setting that can set to reset the auto trading daily not weekly?
+
+--- 帖子 #222 ---
+Hi guys ! I’m wondering If the Guardian can be ran along side another EA ? for example , My primary EA doesn’t have a Max Equity Stop setting. So I was hoping to use the Guardian to provide equity protection while running my primary EA. Also Does the guardian have to be added to the Pair that I would like the Guardian to monitor? For example if my primary EA is trading Gold , then Should I have the guardian added to a gold chart ? Or does that matter at all ? thanks guys ,
+
+--- 帖子 #223 ---
+Hi Paul, Could you remove / amend the expiry on this EA please? It's really helpful to many of us. Thanks
+
+--- 帖子 #224 ---
+Any chance we could get an update on the Expiration date? I use this constantly. I'd be more than happy to pay for it or even a subscription fee. Just let me know what it'll take. Thanks!
+
+--- 帖子 #225 ---
+I dont see the option to change monitor manual pending/market orders? its only for EA? or will this monitor manual market and pending order as well&gt;?
+
+--- 帖子 #226 ---
+Thanks for this most valuable EA. PaulDV hasn't been on line here since February unfortunately, but I hope the expiry date, which has now past, can be extended.
+
+--- 帖子 #227 ---
+Waiting for uploaded version
+
+--- 帖子 #228 ---
+Hi Paul, Any way to update the expire date for us, please? Tks
+
+--- 帖子 #229 ---
+The EA has expired. any updates?
+
+--- 帖子 #230 ---
+Hi all does anyone know if there is an updated version as this expired Dec2022, or where it is available to buy? many thanks
+
+--- 帖子 #231 ---
+Hello, i was asking the same question, is there an update for 2023?
+
+--- 帖子 #232 ---
+There are no more updates for 2023?
+
+--- 帖子 #233 ---
+i think we have to start consider using an alternatives.
+
+--- 帖子 #234 ---
+Was hoping the author would return to update this but as he hasn’t logged on for a year it seems unlikely. I paid to have the expiry date removed by a programmer but won’t share here as it would be unfair on the author. If he returns I’ll pay his subscription fee but needed it in my every day trading.
+
+--- 帖子 #235 ---
+Hello, It looks like this is just what I need for my trading system. Do you have any plans to extend this through 2023? If not, is this available in the market place?
+
+--- 帖子 #236 ---
+Can anyone give me a ea that close all open order when a certain amount of floting losses reached
+
+--- 帖子 #237 ---
+Good day, can anyone help me adding mql4 code to my current ea to stop trading once a daily limit of $50 has been reached please? I dont want a code that delete orders or close any potential orders, I just want a code to add to my current ea that will stop any trading after the daily limit has been reached. Much appreciated if you could help Thanx
+
+--- 帖子 #238 ---
+I know it's been asked... but any change of heart on releasing this for MT5?
+
+--- 帖子 #239 ---
+hello , did you find an alternative ? i think we'll never get a fresh one ....
+
+--- 帖子 #240 ---
+Would you be willing to share the programmer as I too require this EA for my everyday trading. I have bought a few 'replacements' but they don't work as I intended.
+
+--- 帖子 #157 ---
+All I made somewhat an alternative to equity guardian. It works but not as good as Equity Guardian Good enough as a temporary replacement and guess what I made it through Chat GPT hahahaha Expiry April 30 2023 Let me know what you think.
+
+--- 帖子 #158 ---
+Hey is it possible to get new one for exipiry date end of 2023?
+
+--- 帖子 #159 ---
+too bad it is already expired, not able to test it. and share my feedback.
+
+--- 帖子 #160 ---
+Any update if this the expiry was extended?
+
+--- 帖子 #161 ---
+are there any EAs available like this that consider realized PnL
+
+--- 帖子 #162 ---
+I might have suitable one. Not fully free but not expensive either Check for the "PropAngel" in MQL5 MarketPlace. https://www.mql5.com/en/market/product/96948
+
+--- 帖子 #163 ---
+dear @jwhite8359, maybe you could help me provide the contact of this guy. please send me the contact through my emal : { email address deleted by staff } thank you in advance.
+
+--- 帖子 #164 ---
+Hi, sorry my English I use translators. I have an EA (with magic number) that manages TP and SL in pips and when it closes all the trades it has opened it stops. Instead, I would like it to be removed from the chart and put back on every time there are no more operations on the chart. And I would like to manage SL in the currency with your EA by disabling the SL of mine. your prop EA already does almost everything with amounts on a daily basis and for all EAs in the account, you can add options so it can always work and only stop my EA (not all MT4 EAs) if Does the sum of the day's trades exceed a certain loss amount of my EA?
+
+--- 帖子 #165 ---
+As Equity Guard is not coming back, try this fairly new FREE equity protector from MeetAlgo.com. Available for MT4 &amp; MT5. You have to register but the download is readily available. https://meetalgo.com/product/equity-guard-ea/
+
+--- 帖子 #166 ---
+Hello everyone! newby here and cannot create threats.. but I wanted to ask if any of you guys know of an EA/utility tool (or any external software?) that not only closes all trades when the max daily drawdown is hit, but also closes and blocks MT4/MT5 until the next day? (that way it's impossible to revenge trade)... This sounds like to much to ask, but I bet someone has already thought about this and am just curious to see if there's a tool out there that does this. thanks all for your guidance! have a safe trading day!
+
+--- 帖子 #167 ---
+Hi I have just come across this and it is brilliant for my purposes. I have just one request, could there be an additional setting which allows the EA to turn Auto-trading back on at a time we choose? You see, I would like my Grid EA to start trading again the next day without me having to wake uo at 00:30 to do it. I wonder if this may not be possible since this EA will be turned off when it turned Auto-trading off! Thank you so much for any help you can give.
+
+--- 帖子 #168 ---
+Hi JohnnyF60 Thank you so much for this link - it's a great EA. I am having trouble with the "Remove External Eas Template name" - does that mean the template I loaded onto the chart or the name of the EA? What I want it to do is remove the chart template for the rest of the day and reload it aftermidnight. Is that possible pleasse, and if so, how? Thanks again for the link!
+
+--- 帖子 #169 ---
+Hello, I am interested in the full version of Equity Guardian EA
+
+
+===== 附件下载链接 =====
+
+Equity Guardian 1.13.ex4: https://www.forexfactory.com/attachment/file/3657001?d=1591447588
+Equity Guardian 1.14.ex4: https://www.forexfactory.com/attachment/file/3676087?d=1593345520
+Equity Guardian 1.141.ex4: https://www.forexfactory.com/attachment/file/3871458?d=1614077594
+Equity Guardian 1.142.ex4: https://www.forexfactory.com/attachment/file/4133744?d=1643553917
+Multi purpose trade manager.ex4: https://www.forexfactory.com/attachment/file/3805572?d=1607163919

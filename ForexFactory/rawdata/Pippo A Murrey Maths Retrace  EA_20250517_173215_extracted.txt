@@ -1,0 +1,573 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+I've agreed with Steve to move Pippo to a new thread for the following reasons: 1) There are people who want to contribute but can't due to voucher/buddy limitations 2) There is the possibility that this EA will evolve away from the description on the front page 3) It's tricky ensuring the latest version is easily accessible. I strongly recommend readers of this thread to familiarise themselves with the original thread first. http://www.forexfactory.com/showthread.php?t=297805 I equally strongly recommend that you take note of Steve's health warnings regarding Auto trading EA's I got involved in this because I'm interested in Murrey Math lines as a support resistance indicator for lots of different trading systems and happened to be working on an improvement to the lines indicator which has been available elsewhere on FF. This post explains where I'm coming from in that respect. http://www.forexfactory.com/showthre...62#post4766462 and http://www.forexfactory.com/showthre...76#post4768676 The end result is a new Murrey indicator which doesn't redraw as frequently as the original and also displays how the lines would appear in the past. I have since worked this indicator into Steves pippo EA. I cannot yet advocate pippo for live trading just yet for the following reason(s) 1) Pippo is vulnerable to protracted trending moves which can quickly produce big drawdowns. There is a hedging option in there but this has problems of it's own particularly if the price chops afer the hedge is placed. To Install: Place the Pippo.mq4 in the "experts" folder of your metatrader installation Restart Metatrader One final note. As a programmer, I'm a tinkerer/optimiser/bugfixer. I'm crap at creating from scratch so I'm completely in Steve's debt for the EA code base he has selflessly contributed here.
+
+--- 帖子 #2 ---
+Thanks Dietcoke. Your work on this is greatly appreciated. Dave R.
+
+--- 帖子 #3 ---
+Thanks for opening this thread and to Steve for all his hard work. I will give it a try, just starting from scratch , do you have a set file for your version and I believed you said you were running it on m5 to get some activity. Thanks for any help. fishman356
+
+--- 帖子 #4 ---
+Set file attached I would not recommend M5 for live trading or even evaluation. The lines are just too close to together to be profitable and lots of trades would not be taken because the minimum stoplevel would prevent limit orders being generated. I used m5 just to prove the thing worked, not as a serious test. The shortest timeframe that I've heard of being used with v12 is 1 hour. For the MML indicator, the key parameter is P which is the period used to get the hi/lo range which should be set to a period which makes sense for the timeframe you use. The default is 118 which just happens to be the number of H1 bars in a week from my data provider. For H4, 1 week is 30 bars so P=60 or 120 makes sense. Lower values of P will generate more trades but also more troublesome redraws
+
+--- 帖子 #5 ---
+Just so everyone knows, this thread has my blessing and support. I hope Pippo evolves into something fantastic.
+
+--- 帖子 #6 ---
+Thank you for your help and I will follow and learn , Steve thanks for your support and blessing. fishman356
+
+--- 帖子 #7 ---
+Bon Voyage!
+
+--- 帖子 #8 ---
+Great to see this work continue I'm still new to understanding this movement, but so far its going well. My result on metals with mostly default settings on 15 min TF, haven't even started to try and optimize. IMO metals is the best market to trade this EA. Steady, low drawdown profit, due to their huge retracements and seeming respect for murrey. Attached Image (click to enlarge)
+
+--- 帖子 #9 ---
+Hi I have been following this this Ea for a number of weeks now and I am pleased you have started this new thread so I can contribute as a newbie I have been testing V12 for a couple of weeks and everything was going ok small profits but this week have seen a big difference with a big DD tried to use MPTM but not sure how to apply it, if someone could help or advise me that would be great Thanks Steve
+
+--- 帖子 #10 ---
+There are so many ways to use MPTM that it is difficult to answer your question. I strongly suggest that you download the instruction manual from the first post of the MPTM thread and read it several times so you fully understand what it can do and how it does it and then decide what it is that you actually want to do. Dave R.
+
+--- 帖子 #11 ---
+I am not sure if you mean how to apply it to Pippo or how to use MPTM, I am assuming you mean to apply it as an EA on the same MT4 to manage Pippo. I couldn't get it right as Pippo had its own TP settings and no SL except the death trade options. Have been away and still have to catch up V12 which is looking good ,well done guys. Not sure if a SL has been added , doubt it , as not many experienced traders like to use them. I wont trade without one. What I had to do to get Pippo to be managed by MPTM was to use a trade copier. Ronald Raygun has a few in his threads if I am not mistaken. 1) I trade with pippo on a demo account 2) copy the trades to a live account 3) Setup MPTM in live account and manage the trade look its the long way but it works for me. Hoped this info helps. I have been playing around with more different settings and ways to trade with Pippo using the basic Fabionici points ie 2/8 , 4/8 &amp; 6/8 where theoretically there should be more resistance more probability of a reversal = more pips, if any of it works , will post here. My old system setup performed really well this last week , cant really post results as I had two other EA's trading on the same platform so results will be confusing. Definitely going to try trading gold and silver with Pippo,as an ex commodity trader I was impressed with bud4oilprgm's results. Hope we all make millions with this one.
+
+--- 帖子 #12 ---
+Hi Dietcoke and crew. I'm aboard for this one. After a reset with the appropriate indicator as per Batemaps advice last week Pippo V12 came alive with a vengeance. A bit of DD at close on Friday but that doesn't bother me at the moment as I'm used to trading TB !!! Curious to see what will happen this week with all the USA hype that's going on. Cheers.
+
+--- 帖子 #13 ---
+@Blud4OilPrgm what's your setfile for the indi (see posts #1 and #4 in this thread) ? http://www.forexfactory.com/attachme...4&amp;d=1311978158 Did you change it for using on the TF M15 ? Especially the parameter "P" in the indis setfile ? Did you of course set "MMPeriod" to 15 ? You wrote in your post #8 "mostly default settings" - what changes did you do ?
+
+--- 帖子 #14 ---
+Lol no I didn't change that, maybe that explains why I was getting some of the same trades on my 15 min chart as 60 min on gold Friday. But I will leave this going as is and start a new demo with the period set correctly. One other thing, I used the default murrey math indi that came with my MT platform. Not all seem to offer it by default, so I've posted that here as well. Attached Image (click to enlarge)
+
+--- 帖子 #15 ---
+This was an experiment using version 12. For some reason the trades weren't closing. But it would enter trades fine. So in this exercise, I closed the trades manually at arbitrary times I felt profit was good. Obviously, manually closing didn't work too well on eur/usd but just fine for metals. Will post my set file shortly when my vps stops acting up.
+
+--- 帖子 #16 ---
+I will test.
+
+--- 帖子 #17 ---
+Subscribing
+
+--- 帖子 #18 ---
+Hmmm, I reloaded the EA from the 1st post and the problem went away
+
+--- 帖子 #19 ---
+Thanks for the starting the thread.
+
+--- 帖子 #20 ---
+Hi Guys thanks for your response to my last post I probably didnt explain my self properly I have read the manual but my biggest problem is actually setting the MPTM in motion when I have Death trade when using Pippo I just need someone to walk me through it and I will be ok from then on I am not sure for example do I take Pippo of and then add MPTM or set my self up a blank page and then apply it leaving Pippo on that paticular currency anyway hope someone can help Thanks Steve
+
+--- 帖子 #21 ---
+Hi sorry I did not say what I wanted it to do lets say break even or just take my losses back to an exceptable level Thanks Steve
+
+--- 帖子 #22 ---
+Hi All Great concept and super ideas to progress. Thanks Dietcoke et all in lovingly dedicating the time. In testing Pippo v12, what lot size should we be using? The usual Lot size of: 0.01 lots per $200 balance on a 100:1 demo? Any thoughts on this? Nicastro
+
+--- 帖子 #23 ---
+Anyone else finding that that V12 keeps cancelling and creating limit sells/buys etc every time the market moves? That's gonna wind up some brokers. Is it just me or are others finding the same?
+
+--- 帖子 #24 ---
+I've changed the code in "IsThisPairTradable" and i think this is fixed. There is also a new lines indicator which works a bit better when the indi is firat added to the screen Update in post 1
+
+--- 帖子 #25 ---
+seems to be working now. Thanks DC.
+
+--- 帖子 #26 ---
+subscribed and voted this thread...thanks to Steve, dietcoke and others to make this ea.
+
+--- 帖子 #27 ---
+V13 took a buy at 76.95 on the 1/8 line and closed it at the same price (76.95). I'll keep an eye on it to see if it happens again.
+
+--- 帖子 #28 ---
+Anyone who has downloaded v13 should do so again, as the file I uploaded had a bunch of Print statements switched on which will be filling your log file.
+
+--- 帖子 #29 ---
+What TF. It might just be a bad fill on the spike this afternoon
+
+--- 帖子 #30 ---
+Hi Dietcoke Can I do backtesting on live account with Pippo v13? Regards, Mr. Juliusss...
+
+--- 帖子 #31 ---
+Sorry, it was earlier this morning on an H1 TF.
+
+--- 帖子 #32 ---
+I've added a new filter which prevents trading in very narrow bands which have a higher than average chance of triggering a breakout redraw. MinBandSizeForTrading default = 30 pips The way MM works means thae bands can only have certain values and so the band widths can also only be certain values. Approx 9.75,19.5,39,78,156.... Setting MinBandSizeForTrading to 30 will prevent trading in any band that is 9.75 or 19.5 pips width I feel that this filter might need to be currency specific due to different ATR's. I'm sure that can be added in if this proves useful DC
+
+--- 帖子 #33 ---
+From post 1
+
+--- 帖子 #34 ---
+I tried but I couldn't get it to work. I ran into issues when the terminal was restarted or the indicator/EA recompiled. I will have another go at it at some point I put forward the idea that perhaps pippo should always use stop orders. That way you do not get screwed over by fast moves as the stop orders are never triggered. I will probably do this as it shouldn't be too hard to program. This is not a bad idea at all. Unfortunately, I can't see how to program it at the moment. It would definitely require that I find a way of preventing the lines redrawing during hedging and then a completely new hedging module.
+
+--- 帖子 #35 ---
+Thanks very much.
+
+--- 帖子 #36 ---
+How has everyone done with today's ridiculous US leadership display of dismal failure. I have to ask myself, are all these guys trading currencies and simply being intentionally ignorant to line their own pockets from the results of their stupidity. Anyway, let me know how everyone has done. This is an interesting example of what we need to know to avoid our own personal disasters. Dave R.
+
+--- 帖子 #37 ---
+Hello. Anyone home!!!! DR
+
+--- 帖子 #38 ---
+Well, My demo account suffered a 50 % drawdown yesterday. Although It didn't help that I was running two versions of Pippo
+
+--- 帖子 #39 ---
+PippoV13 on 15mins was a winner for me yesterday. I am selective which currencies I trade and when . Setup USDCHF GBPUSD EURUSD USDCAD XAUUSD XAGUSD AUDUSD. I am not a fan of NZD AUD CAD make sure the swap filters are on if I trade them. 22 Trades 8 losses and 14 wins Visible TP and SL set to true.
+
+--- 帖子 #40 ---
+Dietcoke 1) First Trade Line How exactly does the "First Trade Line" option work. If I enter 0 , will the first lot open at the 4/8 Octave ? If I enter 2 , will the first lot open at the 6/8 Octave ? I am trying to get PippoV14 to trade the Fabionici points 4/8 and 6/8 , will the above do it ? I found the 7/8 &amp; 1/8 (Lot1) not that profitable anyone else noticed that ? 2) Idea on SL I know alot of people probably dont use the "Visible SL" I love it . Is there anyway you could add a feature where we can choose what percentage SL we want, similar to the "TargetAsPercentageofOctave" but for SL. 3) Idea on Trend trading outer Octaves I also noticed there were alot of hedge trades taken on Drolands results , which worked in his favour . What if we were to trade a break of the -2/8 and +2/8 in favour of the trend. That way we could treat those breaks as profitable trades. Kind of making this a combination of counter trend trading with a bit of trend trading EA.
+
+--- 帖子 #41 ---
+1) It's all based on the bottom 4 mmls from [1/8] down. The -[2/8] is mml0. so with firsttradeline set to 3, the first trade will be taken at mml3 ([1/8]). MaxTrades determines which lots are traded so set to 3 it will open 0.01,0.02 and 0.06 trades. Use MaxTrades= 4 to include the 0.12 trade. The code ensures the equivalent configuration for the upper lines. Pippo is hard coded to only work on the lowest and highest 4 lines 2) Sure. I'll do that sometime today 3) I've running a prototype I'm calling oppip, which does exactly the reverse of pippo but it needs some issue sorting out at the moment.
+
+--- 帖子 #42 ---
+Thank you for explaining that. 0 = -2/8 &amp; +2/8 1 = -1/8 &amp; +1/8 2 = 0/8 &amp; 8/8 3 = 1/8 &amp; 7/8 Actually setup a reverse trade setup on a demo last night , reverse trade (1/8 &amp; 7/8) and (-/+ 2/8) , will see how that goes. Would be great to try oppip. Looking forward to that release.
+
+--- 帖子 #43 ---
+My 15 min demo of Pippo (12 July) continues to churn out the pips - with max of 6% DD so far (hedge on). There are a few bugs, which may have been corrected in the later versions, but I don't interfere any more - just let it run. So far, it's closed out all DD trades on its own. At one point one set of trades was in DD because the hedge trade failed to be placed (error 130) - but still Pippo closed out the trades profitably after a day or two. I've learned not to interfere. The current volatility seems to be good for this EA. https://www.myfxbook.com/fr/portfolio/pippo-demo/136675 I tried running this version on my live Activtrade account 15 mins, but it didn't work because there were too many missed trades with error 130 (pending trade price too close to current price). It would be great if the pending trades (especially the first of the sequence) could be added sooner to get around this problem.
+
+--- 帖子 #44 ---
+I also enjoy the 15 mins. Anyway you can send us a trade report of some sort , I like to do some basic quantitative analysis to see which currencies work best , times , which Octaves perform best etc. Do you have many open orders ? Ok blonde moment saw your myfxbook link , please ignore this request. Have you tried live trading with PippoV14 , it has the minbandsizefortrading setting , mine is set at 14. I don't get any "error130" codes.
+
+--- 帖子 #45 ---
+Not too good...my live account is at 55% margin..there are two hedge trade on Gold &amp; EURGBP so far keeping me in the trade...let's see!
+
+--- 帖子 #46 ---
+Now my mind is ticking 5M , who would have guessed . getting please keep us informed as to how this works out. Thanks for the tip to Bobs EA , I was always a follower of his Nanningbob v5 , the man is a forex legend in my eyes.
+
+--- 帖子 #47 ---
+This is an idea for how to deal with breakouts. Attached Image (click to enlarge) Squalor(sp?, the Smurf guy) has written this ingenious breakout indi. I say use it on the Vix index to guage market conditions. This is the VIX continuous future contract, free via Broco demo. Note the breakout zone between 20.10 and 20.42. If you could turn everything off before 20.10 you would have probably been safe. I'd be willing to bet most of us did a lot better with pippo from Jul. 18th - 27th than this week. Just an idea.
+
+--- 帖子 #48 ---
+Hi Sandovich. Can you post a set file for your 15min settings. I would like to give it a try. Dave R.
+
+--- 帖子 #49 ---
+done.
+
+--- 帖子 #50 ---
+I opened a new demo yester @ 04:42 and now (02:12) I'm up 18% on the account, with 7.5% DD, pretty good CHFJPY is getting close to the outer yellow line, so may hedge, but we'll see. I'm using the latest EA/MM indi and I'm pretty sure running OOTB. Paul
+
+--- 帖子 #51 ---
+Has anyone seen any bugs in V14 or higher?
+
+--- 帖子 #52 ---
+With pleasure , have attached my profile setting, copy to profile folder and load the profile , that should work . Have attached the Pippo V13 EA and Indi , just in case . If you want to double check settings : Visible TP and SL is set to True , and no hedge or Death trade. The rest is OTB I will be loading PippoV15 today on my demo account .
+
+--- 帖子 #53 ---
+If I remember right, using Visible TP does not close the basket so I would expect this to work quite well when things are very volatile.
+
+--- 帖子 #54 ---
+So far so good , PippoV14 on live acct , no problems from my side. Will test PippoV15 . Thank you for the SL adjustment . For someone who "tinkers" with programming , you doing a dam good job. Had some really good trading with reverse trading last night on the NZD , JPY , CAD pairs at first octave. Oppip has potential if last night was anything to go by. You are right when you say Visible TP does not close the basket . What I have been thinking of doing is by the outer lines +1/8 and +2/8 I adjust the profit to greater than 70 as the price is due for a decent reversal. So could squeeze in more pips ?
+
+--- 帖子 #55 ---
+Can you upload the set files for Pippo14 please...along with the pairs which you are running this on..... ur results looks impressive....
+
+--- 帖子 #56 ---
+Hi droland, Your account myfxbook is amazing !!! I got the RSI MA Scalper v1.02 modlordorly, you are using, but I didnot success to have similar performance. Could you contact me to discuss about the set files ? Best regards eagle911
+
+--- 帖子 #57 ---
+It will be cool, if when versions of pippo change we could have a brief (1 or 2 lines) changelog Thanks !
+
+--- 帖子 #58 ---
+Done.
+
+--- 帖子 #59 ---
+Dietcoke, I added Pippo15 to my Live account of $200USD, just to test, should it be run on default and/or should anything else be turned on? Not sure if its really getting ticks or hiccups
+
+--- 帖子 #60 ---
+Thanks, that's very nice
+
+--- 帖子 #61 ---
+It should run OOTB but you need to add the MurreyMath indicator to any chart runnng pippo. If the band high and and bandlow comments are showing -1 then the indicator is not there.
+
+--- 帖子 #62 ---
+DietCoke I am using the Hedge option with the Hedge starting at the +-2/8 Yellow line. I also have the option turned on to cancel the Hedge if the market moves back into the grid. I got caught with an oscillating market that opened and closed several hedges right at the yellow line and I lost the spread each time it closed. If we changed the following function, this would probably solve the problem by having the Ask Line move back into the Grid, not just the Bid line Inserted Code void LookForFailedHedging() { //Close an open hedge trade if the market has moved back inside the hedge lines double high = NormalizeDouble(mml[12] + (dmml * MMLSToHedgeLine) , Digits); double low = NormalizeDouble(mml[0] - (dmml * MMLSToHedgeLine) , Digits); int cc; if (Bid &lt; high &amp;&amp; Bid &gt; low) Change the last line from: if (Bid &lt; high &amp;&amp; Bid &gt; low) to: if (Ask &lt; high &amp;&amp; Ask &gt; low) I think now, the Hedge would close with no loss due to spread. Do you agree. Also, the hedge trade itself is closed if the option to close hedge trade if it re-enters the grid is turned on when the grid changes size. This shouldn't happen. Not sure how to solve that. Dave R.
+
+--- 帖子 #63 ---
+Ask &gt; low won't work as Ask&gt;low when the hedge trade is taken. This might be better? if (Ask &lt; high &amp;&amp; Bid &gt; low). I don't think you can avoid losing the spread though. Give it a try and let me know. If either change improves the way it works, I'll stick it in a new version. An alternative is to use a small value for MMLSToHedgeLine which would place the hedge line a few pips outside the yellow Taking a look at the function, at some point I'm going to need to rewrite it because I don't like the way it decides there is a hedge in place and also the "ReturnToGrid" is not very flexible. I feel it should be a parameter MMLSToHedgeStop, perhaps? I tried and failed to fix that earlier. I'm trying not to think about it in the hope my sub conscious will come to the rescue.
+
+--- 帖子 #64 ---
+I agree that this function isn't reliable. I have one 0.12 trade open and this function won't work with only one trade open. The ReturnToGrid function is something else. This moving Grid relative to open trades based on an earlier grid is extremely frustrating. I think your new Indicator is getting closer to the answer. If we can see what the grid was when the trades where entered, we should keep that grid until we reach the end of the open trades and hedges and we start new with the new grid once all the old trades are closed. Can we calculate a Shift value based on the current bar versus the shift number of the last open trade relative to the current Shift then use that shift value to calculate the grid. Dave R.
+
+--- 帖子 #65 ---
+I got an error when EA send trade command. " op_buylimit order send failed with error(131):invalid tade volume" my test platform trade lot is 0.1. So I think i want to set lot to 0.1. As long as set parameter "lot1"? then what mean is lot2 lot3 lot4. Thanks
+
+--- 帖子 #66 ---
+use 0.2,0.6 and 1.2
+
+--- 帖子 #67 ---
+Hello, to install it, we need to put these two .mq4 files in the custom indicators directory and then on MT4 drag and drop the MurreyMathLines_ShowHistory.mq4 to the chart we want to use it? when I try to drag and drop the other file pippov15 it does nothing. but with the murreymath it draw those lines.
+
+--- 帖子 #68 ---
+pippo is an EA. It goes in the experts folder.
+
+--- 帖子 #69 ---
+Thanks for u reply. I will test this ea next week.
+
+--- 帖子 #70 ---
+Ok makes sense now, thanks. one more question, If I want to trade manually with this system, Can I just avoid the pippo and use the murrey math indicators and enter the trades at the custom levels? What time frame do you usually trade these levels on? I'm testing it on GOLD 1H, but Im still waiting, because the levels where we are supposed to enter the trades, are not reached, will keep checking on monday when it resumes.
+
+--- 帖子 #71 ---
+V16 Lots of new Stuff here. Demo Mode only!!!! Attention: I have messed around with the values of many of the Parameters so you should ensure they are set to your preference #MurreyMathLines_ShowHistory indicator Added SaveExternsToGV Changed this to export some values via Global variables. Set to true when using the Indi with PippoV16 and beyond which needs some of the murrey math externs Pippo Functionality: Added new Parameter:- UseLimitOrders When true, Pippo creates pending orders in the same way as in V15 when false,Pippo only looks to create pendings on the open of a new bar. This should stop trades being opened in very fast markets. It should also help around news time It will open BUY_STOP orders but only when price closes below the entry point. I've spent a day testing this and it works but not yet quite in the way I envisaged. Feedback appreciated next week if possible. Added filter (OnlyTradeWhenRanging) If this filter is set true, pippo will not create a limit order unless the white line has already passed the entry point. Not sure how useful this will be. I plan to test next week This filter is irrelevant when used with UseLimitOrders = false Added F451's Trend Identifier (Shamelessly nicked from Trendstat). Currently it does just displays the trend status. I want to see if this would make a decent trade filter. Changed LookForFailedHedging to close upper line failed hedging based on Ask rather than bid Internals: Added 2 new functions to save or delete the values of the current MML lines to Global Variables. The GV's are only deleted if there are no open trades. On each EA pass through. the GV's are created if there is an open trade. On init, the lines are calculated from GV's if they exist otherwise they are calculated from the lines on the chart as normal The function which reads the MML's from the chart has been changed to preferentially read the Stored GV's The end result of this should be to hold the MML's while a trade basket is in play. Changed the internals around drawing and using hedgelines Changed the internals around the on screen comments. Added Comment to identify hedge, stop and limit orders. Changed LookForFailedHedging so that it uses the order comment to identify a hedge
+
+--- 帖子 #72 ---
+Pleasant greetings Dietcoke, Is there a way to BT with Pippo? I've made an attempt at it, but it is not working for me.
+
+--- 帖子 #73 ---
+Nice work DC. You have been working hard. I will set up a demo and see how it goes. Dave R.
+
+--- 帖子 #74 ---
+There are 3 trades today. follow as result: usdchf +72 closed eurusd -53 open usdchf +30 open well done.
+
+--- 帖子 #75 ---
+I've pulled v16 as it has some problems.
+
+--- 帖子 #76 ---
+Have V16 on my demo IBFX AU - no trades (even no limit orders) since midnight ?
+
+--- 帖子 #77 ---
+so long to wait V16 .....
+
+--- 帖子 #78 ---
+Pippo is going from strength to strength thanks to DietCoke. Just trying to get my head around how to use the Trend identifier as pippo is working on a counter trend trading style ? Does the trend identifier identify the longer term trend ie. Daily trend if trading 4H or the 4H trend if trading 15mins ? That way we can counter trade the small time frames and follow the longer time frame trend. Theoretically the probability of a successful trade should be in our favor.
+
+--- 帖子 #79 ---
+I'm using the indicator, is this chart correct?
+
+--- 帖子 #80 ---
+1. It doesn't look like you have the proper murray math lines indicator? 2. You dont have a smiley face in upper right corner which means you dont have it set to trade live.
+
+--- 帖子 #81 ---
+Anybody here getting trades using the V16 ?
+
+--- 帖子 #82 ---
+DC removed v16 due to problems. Use v15
+
+--- 帖子 #83 ---
+This currently does nothing except display how "trendy" the pair currently is. It does NOT and won't do anything else until there is some agreement that using it to filter trades is a good thing. I am looking at ways of filtering out trades which are likely to go bad and avoiding strong trends would be a good way of doing this. Another possibility is to avoid trading if the white hi-lo range lines are travelling in the wrong direction I've been trying to come up with a way to make the MM lines persist when there are open trades but I think the method I've chosen has some problems which make 16 unusable right now. I'm back at work now so a more stable V16 may have to wait a day or so.
+
+--- 帖子 #84 ---
+Im using the indicator that was attached in this post. I didn't set the EA Pippo to run automatically, because when I press START it starts loading but never finishes.. Do I need to adjust anything? can someone post a step by step to make this thing work? Or how did you learn to run it? is there a guide somewhere? I'm missing something here.. And why do you think my murrey math lines look bad? Can you please attach a chart to see how it looks on your end?
+
+--- 帖子 #85 ---
+Because no smile face in u chart. it represent EA is runing. So check u indicator and EA files input correct path.
+
+--- 帖子 #86 ---
+What version of Pippo are you running? If you are running version 16 then I would suggest you read the other posts in this thread to see why no one else is If you are running version 15, it should run very nicely OOTB but I would suggest redownloading the MurreyMath indi again. If performance is still slow then try: Check the NumBars parameter in the Murrey math Indi. It should be around 600 but you can reduce load by setting it to 300 run Pippo on fewer pairs and see if this improves things On pippo, Set debug = true on 1 pair, leave it for at least one full bar and then send me the log which you will find in Expertslogs compressed.
+
+--- 帖子 #87 ---
+The OOTB hedging does not show an obvious closure. What closes the hedge if one does not select the close on re-entry to grid? I note with interest that Droland was using the latter. I have the basket closure active at 50%. Is anyone using this? Glenn
+
+--- 帖子 #88 ---
+This is the OOTB hedging setup: extern bool UseHedging = true; extern double HedgeLotMultiplier = 1;//size of hedge relative to open lots extern double MMLSToHedgeLine = 0; //sets the distance from the bottom/top yellow line for the hedging line extern bool CloseHedgeOnReturnToGrid= false; the ootb setup means it will hedge at the yellow line but only 1:1 so the basket will not return to profit with this setup and therfore never close. This suits me as I manage these manually. If you want the hedge to close at breakeven, set HedgeLotMultiplier &gt; 1. There is currently no option to apply a profit target to a hedge. Yes he has been looking at it. I have an outstanding pice of work to fix a smal problem with it. Currently, for it to work as designed, MMLSToHedgeLine must be &gt; 0 I've not heard of anyone using that. 50% seems high?? (unless its a tiny account)
+
+--- 帖子 #89 ---
+These last few weeks have been a good test for this EA with some of these pairs, specifically AUDUSD. Will StopAsPercentOfOctave close out our trades at the specified stop loss even if visibleSL=false? Will it apply the that SL but just keep it internal and not show it to Crims? Thanks in advance!
+
+--- 帖子 #90 ---
+Guys, Can anyone help me. I got recurring problem with my computer hangging, and cannot log-on to mt4 with several pairs and indicator running on it. Forced to exit, uninstall the existing one and reinstall a new Mt4. When I logged on anew with the new installed ff after logging off, the same screen is appearing. The system somehow cannot free itself from the previous flatform. Any help is highly appreciated. Edd http://www.forexfactory.com/images/m...ading_dark.gif
+
+--- 帖子 #91 ---
+Try turning off wireless and unplugging your LAN cable. Restart the MT4 and remove all the EA's from each chart. One of them is hanging up your computer. Now you can turn on wireless again/LAN and then start adding the EA's back onto your charts 1 at a time. Allow them to connect before moving on to the next chart.
+
+--- 帖子 #92 ---
+No, it is connected to visibleSL
+
+--- 帖子 #93 ---
+Thanks DC
+
+--- 帖子 #94 ---
+Like most people, sometimes I have a ton of charts open and different indicators smattered across them. Sometimes my system hangs and sometimes when I restart it it won't load. One way around this is to go to your profiles folder in your MT4 platform folder and look for a file called "LastProfile". To get your system to restart and prove that it is a chart, EA or indicator hanging, open the file and change the word in there to "default" or what ever the name is of one of your more simple profiles were that was working. Save and close the folder, close platform and restart. The Mt4 platform will open with this new chart set. From there you can try to load the profile you were running. If it doesn't work then you may have to rebuild all of the charts and resave the profile. Another trick I have learned is that when building up a set of charts, I will add a few charts and indicators and then save save it as Prof-1, add some more and save it as Prof-2......prof-15 etc. This way if I need to restart my system I can go back and work my way through the different profiles until I find where the problem is and then rebuild from there. These methods have saved me a lot of headache and time reloading MT4 platforms, charts, indicators and EAs.
+
+--- 帖子 #95 ---
+I had some initial problems with trades being opened and closed quickly, as well as not being able to set stop loss and take profit levels. I did have the visibleTP and visibleSL set to TRUE. I've determined now that it was operator error I'm running it in Demo on Interbank FX. I thought these guys are an ECN crim. I was mistaken and have set CriminalsECN=false. So if anyone is experiencing problems with your orders not having stop loss or take profit set, this is probably what you need to do to fix it. We'll see how this baby performs over the next few weeks
+
+--- 帖子 #96 ---
+V17 And MurreyMath Indicator Added Steve's Order send fix Added Trading times code from reversi Fixed problem with minbandsizefortrading Changed LookForFailedHedging to close upper line failed hedging based on Ask rather than bid Changed the internals around drawing and using hedgelines Changed the internals around the on screen comments. Added Comment to identify hedge, stop and limit orders. Changed Hedging so that it uses the order comment is uded to identify a hedge Added new functions to save or delete the values of the current MML lines to Global Variables. The GV's are only deleted if there are no open trades. On each EA pass through. the GV's are created if there is an open trade. On init, the lines are calculated from GV's if they exist otherwise they are calculated from the lines on the chart as normal The function which reads the MML's from the chart has been changed to preferentially read the Stored GV's The end result of this should be to hold the MML's while a trade basket is in play. OK. I've finally managed to produce a stable version which holds the MML's as Global Variables (F3 from the terminal screen to view them). Some of the experimental stuff which messed up v16 I've removed and will revist when I've got Globals correct. known Issues OnlyTradeCurrencyTwice does not work There WILL be some issues with hedging
+
+--- 帖子 #97 ---
+Found that I'd broken the Winning position closure logic V17.1 in post 1
+
+--- 帖子 #98 ---
+Great work, D.C. Thanks. Glenn
+
+--- 帖子 #99 ---
+You should be able to do this in the next version
+
+--- 帖子 #100 ---
+Thank you DietCoke a job well done . I am already looking forward to the next version . Been waiting for this version to test the avoid trend filter you put in V16. What I started doing is use NanningBob's method of identifying when the market Trends and moves in a Range. Pippo works best in Range trading so I use his methods to find the CTR (counter trade range) pairs for the day and load pippo on them fewer trades as I trade only the pairs ranging but more winners with lower drawdown. I used the NB10 dashboard for this . If anyone wants more info here is the link. http://www.forexfactory.com/showthre...29#post4855729 In general the following pairs are good range trade pairs as per Nanningbob aud/jpy, aud/nzd, aud/usd, cad/jpy, chf/jpy, eur/gbp, gbp/cad, gbp/usd, nzd,chf, nzd/jpy, nzd/usd, usd/cad, usd/jpy Another idea , if level 7/8 and 1/8 are not profitable (probably because they pass through the Fibonacci point 6/8 and 2/8 ), what if we traded them in reverse ie with the trend to the 8/8 and 0/8 octaves which is a major support or resistance point. As usually price moves 2 octaves . Just a thought I had .
+
+--- 帖子 #101 ---
+Sandovich: Great contribution. The hedge worries the hell out of me, and this could make the robot safe enough for live trading.
+
+--- 帖子 #102 ---
+Hi, New to posting in this thread although I have been following both this and Steves original Pippo thread since the start. I am still using one of Steves versions of Pippo, the one where he added magic numbers, and have found it to be profitable for a month on demo and have now gone live with it. The demo grew from 3k to 10k in that month. 3k has increased to 3500 in under a week with only 1 hedge trade. My contributions if I may, I hope they will be of use to both Dietcokes and Steves users. Hedging: I use 1 as the multiplier to lock the loss at a limit and deal with it later when the market shows direction. I reset Pippo after a hedge trade happens by increasing the magic number by 1. This allows Pippo to create new MM lines,continue working and ignore the hedged trades. I do this twice a day as needed, when I get up in the morning which is around NY open and again at night after the NY close. I find that this gives the market time to settle down to a new set of levels. To reduce the deficit in the old trade I use NanningBobs methods, CTR or Trend when I can see a clear direction. I add to or reduce the profitable side of the hedge by 20-25% at a time until the deficit is cleared and then clear both sides of the hedge out. Winner and loser. The benefit to doing things this way, for me at least, is that the loss is limited and there is no rush to clear the trade as Pippo is still able to do it's work on that pair. I currently close all trades at the end of the week, but am considering whether to just let Pippo run over the weekends. Lot sizes: I use 01,03,08 and .12. These lot sizes make the 2nd level trades more profitable, which I have found to be the most common. 1st level trades have a lower success rate. 3rd level trades also. The 4th Level multiplier is lower (2X the other 3) as this level, if it succeeds, only closes out at breakeven and it reduces the size of hedging needed if it fails. I use a base of 70% for my take profit level, but vary this by a few % points in either direction to stop the broker seeing a pattern. P is set at 72 which is 3 days of bars on a 1hr chart. I also have the NB dashboard as Posted above by Sandovich and find it helpful in determining trade style required for clearing out failed hedges, although I don't use it to select which pairs to trade. I trade all the pairs available. I will look further into his method of only trading ranging pairs. My apologies to Dietcoke for not updating my version of Pippo to his system, but I like the simplicity and success rate of the older version. A template that combines both the MM lines and NB's TMA, RWB indicator and MA's is attached. Having both systems on chart lets Pippo do it's job and allows me to trade out of the hedge when conditions are right. Rik
+
+--- 帖子 #103 ---
+Wow, Panamax! Brilliant. D.C. has a slot for Magic number. May I presume this will work with the Panamax system?
+
+--- 帖子 #104 ---
+I would think so, but not having used DC's system I can only suggest you test it for yourself and report back for the benefit of others. I have set a base # of 11 in Pippo and also a comment of P1. I just change these to 12 and P2 so I can see at a glance which trades are which in my acct. Rik
+
+--- 帖子 #105 ---
+This is super stuff PanaMax and I'll respond in detail later. Just out of interest, what timeframe are you trading?
+
+--- 帖子 #106 ---
+I trade Pippo on the 1hr, but also look at the higher timeframes when having to recover from a hedge. Rik
+
+--- 帖子 #107 ---
+Just wondering about where the hedge trade came up. When I run my MML indicator with the period you use. I 2 potential hedge trades last week. see attached charts You've just made a lot of people very happy with this idea. Using a new magic number when the lines redraw will be dead easy to code. Fantastic idea. Thank you. Again. Spot on. I've considering adding some form of NB recovery to pippo but have not because sometimes increasing the hedge is best and there is no room in Pippo for a big big loser as the individual trade profits are too small to cover a real bad one. The template has 0.16 which one is the typo? I have done some work this weekend on which level gets the most winners. I've only done two pairs and have been working on M15 but I tend to agree that the second level does get the most completions. I found that the 1st level was second and not far behind and the 3rd and 4th were not very profitable. I don't think personally, the Lot4 is profitable and it's quite possible that lot3 is the same. I think this whole are of lot sizing and which levels to trade is an area for research. There are definitely some pairs which trade pippo better than others. However, this is only because they break the lines more often. You seem to have a very passable route out of troublesome trades which could make this much safer to trade. No problem. Although mine can set up to work in pretty much the same way. Could you post the indicators on the template please. I'm sure I could dig them up from one the NB threads but there are so many versions of these kicking around, there would be no guarantee I'd have the same one. One question. How do you deal with orpahaned trades, which have not reached the hedgelevel but the lines redraw and the new lines are not in the trading bands?
+
+--- 帖子 #108 ---
+Sorry for the late response, been away from the puter for a few hours having a bevvy. The trade that ended up in a hedge was on the EUR/GBP pair, the buy just got hit by the spike on aug 11th. I recovered about 1/3 of the defecit before closing both sides of the trade for the weekend. I'm not sure if coding in the reset of the magic# is a good idea or not, makes life simple, but allowing a few hours to elapse gives time for the market to settle down after a spike. Once the trade is locked into a hedge there is no rush to sort out the deficit apart from swap costs. The 12 at level 4 is a typo based on last weeks trading, although I am going to change to it this week once I get settled back in to trading. I've not had any orphaned trades yet so that is something I will have to work out when it happens. Looking at my acct tonight, a hedge trade has happened on GBP/JPY so that has got to be worked on during the week, Not sure why as pippo is showing it in band 12 without doing a reset. However, my total drawdown over 12 pairs is currently under 200 and my balance is up almost 90 since trading started 5hrs ago. The TMA indi is attached. The RWB is a stock metatrader Macd indi with the bars blanked out and 2 stoch oscilators overlaid on it, settings can be seen on the template. The MAs are a 240 to show an approximation of the daily trend and a 5 for the current direction. Rik
+
+--- 帖子 #109 ---
+Here's the GBP/JPY chart with the hedge trade. Like I said above I don't know why pippo made the buy but now I have to get out of the loss created. The hedge is at 0.24 lots. What I will wait for is the price going below the 5ma, and also the white stoch coming out of the oversold area. When that happens I will add a .06 sell with a target of the center TMA line as that is currently rising. If the center TMA was falling I would target the dotted green offset. This wont completely remove the deficit but will take a bite out of it. Then look for another setup to take another bite. The reason for looking to short is the 240 ma is still showing a downtrend on the daily, although it is not visible in the screenshot. Rik
+
+--- 帖子 #110 ---
+Panamax Are you suggesting that we use NB Trend trading system as a filter on Pippo? It's an interesting idea... maybe a higher timeframe NB TMA trend v1.0 signal stops a Pippo reversal trade?
+
+--- 帖子 #111 ---
+A friend suggested I visit this thread. It has been stated that the EA cannot be backtested. The reason given is not the only one and that one might be workable as well. It was stated that the EA can be tested in Visual mode. If that is the case then it should be able to test outside of visual mode with some changes. This is especailly true if the MM lines are be calculated in the EA which appears to be the case the v17. I will add code that will display the lines only in Visual mode when backtesting as a further test. This will speed up the tester as well. Any EA that looks at trades that have been closed by using MODE_HISTORY from OrderSwelect will not work because there is no history in the backtester. I coded an EA for a client that needed to know information from the most recent closed trade and using history did not work. I was able to fix the problem by saving the values from the recent open trade in Global Variables. When no trades were open I could then access the values. I also have a question about trading times. At present it looks like only morning and afternoon are available. I have code that allows trading three sessions and can even include times like 2300 to 200 for the Asian session. Would this be useful?? Robert Hill aka MrPip Professional MT4 Programmer
+
+--- 帖子 #112 ---
+Robert: It is a pleasure to see you here. We can all benefit from your experience and superb coding skills. Glenn
+
+--- 帖子 #113 ---
+The lines are not calulated the EA. I just save them to a GlobalVariable when a trade is opened. I tried to bring the indicator into the EA at one point but the way the indicator works, it only caluclates the lines under certain circumstances(ie. not on every tick). This means it needs some history(enough to ensure 1 redraw) to be accurate at the current point. Having said that, if you can come up with a way to allow backtesting, that would be really good news. If you have a better module for trading times, I'd be happy to use it. I just copy/pasted this from one of steve's other EA's. The mode_history stuff isn't really used by the code. It's there because Steve put it in the original code to deal with a situation which can occur when opening a trade. It shouldn't be too hard to wrap it in some "IsTesting" code to avoid problems in backtest
+
+--- 帖子 #114 ---
+For those who don't know it, Robert Hill is one of the most skilled and accomplished MT4 programmers I am aware of. It is extremely fortunate to have him offering to help. Believe me, this is a rare opportunity. I also belong to the Yahoo MT_E and I forum and there he has helped literally hundreds of people struggling to understand MT4 coding. Thanks Robert for your interest here. Dave R.
+
+--- 帖子 #115 ---
+Wow! What can I say except thanks for the offer of help?
+
+--- 帖子 #116 ---
+DietCoke I can't find any trend filter options in the V17.1 EA that were mentioned in V16 are they hidden ?
+
+--- 帖子 #117 ---
+I took them out as I thought they were hitting the performance of 16. They were never active anyway, just calculated for display with a view to possibly incorporating them as a filter I am currently considering exactly how Pippo should filter trades and i'm thinking of something completely different. If you really feel you need them back thiough, I'll put them in the next release provided they do not slow the EA down
+
+--- 帖子 #118 ---
+I think automating the Panamax grid reset when hedging occurs, sounds great, D.C. What do you think of that?
+
+--- 帖子 #119 ---
+No need to put them back , I was just going to test them for you, I am playing with incorporating some of NanningBobsV10 system into the way I trade Pippo. If this reaps any good rewards I will share how I do it.
+
+--- 帖子 #120 ---
+Hello dietcoke, Thanks for opening this thread. At first glance It seems very similar to one of my templates. I will give it a full read at my first chance. Thanks, Johnny
+
+--- 帖子 #121 ---
+Been a bit busy recently and then preoccupied with Mr Pips post, I took another look at resolving the problem of requiring a separate indicator on the chart. Changes: 1) Found a way to incorporate the modified MM indicator in the EA The MM lines are now drawn withing Pippo which means the separate indicator is no longer required on the chart. This should make it possible to backtest but the test I did last night took no trades. Hopefully I can fix that quickly 2) It is now possible to start pippo trading at levels other than the extremes This is done using "FirstTradeLine". Set to 5 to open first trade at the [2/8] Set to 3 to open first trade at the [0/8] and then use MaxTrades to determine how many trades are opened. This appears to work but I've not tested many of the numerous possibilites this new flexibility throws up. 3) Added new Parameter:- UseLimitOrders, UseStopOrders if UseStopOrders = true. Pippo will create BUYSTOPs and SELLSTOPs as suggested by DRoland and Gertje if UselimitOrders = true. Pippo will create BUYLIMITs and SELLLIMITs as suggested by DRoland and Gertje These two parameters can be used together to ensure you are pretty much always in when the price is meandering in the extreme bands 4) Changed the way pendings are chosen for deletion to allow both of the above to be used simultaneously. 5) Parameterised the saving of MML's when trades are open. This is now optional 6) Added: Code to change the magic number when a hedge is opened. This needs more work but won't break anything as it is 7) Added: code to prevent Mode_History stuff from running in test as recommended by MrPip 8) Added MrPip's 3 session code. (Thanks) The updated 3 trading session code, I found in one of Mr Pips EA's and very shamelessly nicked! I've included 2 set files in post 1. One of these is a standard scalping set. The other captures larger retracements TP set to 300. This allows you to trade with 0.01 lots at each level and still close the basket in good profit.
+
+--- 帖子 #122 ---
+I ve been demoing Pippo for a month (SteveHopwoods one) with quite good results on 4H on majors + EJ, GJ. It has good potential. Thank You for continuing in this work. I intend to trade this one live with nano lots. I appreciate the option of choosing levels to trade. So BIG THANKS..
+
+--- 帖子 #123 ---
+Thanks for this latest version. I will wait for you to solve the small bug you mentioned then I will set it up to test. I have noticed one small bug. When I load XAUUSD with the EA, the calculation of the Digits multiplier is wrong. Inserted Code double multiplier; if(Digits == 2 || Digits == 4) multiplier = 1; if(Digits == 3 || Digits == 5) multiplier = 10; if(Digits == 6) multiplier = 100; if(Digits == 7) multiplier = 1000; I am using Go Markets which is a five digit broker but for XAUUSD (and only XAUUSD), the Digits is 2 which gives it a multiplier of 1 but it should be 10. All other pairs are fine. XAUUSD is unique. It needs to be handled separately in the code string above. Also, on a 4 digit broker, Digits for XAUUSD would be 1 and therefore the multiplier would be 1. This needs to be included in the above code for XAUUSD. Dave R.
+
+--- 帖子 #124 ---
+Thanks for the latest version dietcoke. I have been testing v18 this morning, and I have noticed a small bug too. I am using scalp settings OOTB except set to trade all day for demo testing. A pending buy limit order was deleted when it was straddled by the bid/ask lines of the candle. The ask line crossed, but the bid line didn't move enough to trigger the pending trade. The limit order was then deleted, and not reinstated. When the candle crossed again sufficiently far, that trade was missed. Love Pippo, and very excited by this version!
+
+--- 帖子 #125 ---
+What was the murrey math interval? what was the stop level at the time this happened? Both of these can be found in the screen comments. (unless the lines have sinced changed)
+
+--- 帖子 #126 ---
+Hi dietcoke Looks like this EA is going really well, live soon? I was using you MM indi for a bit of manual trading and have somehow misplace/deleted it Can you please post it again and I'll make a backup this time. Cheers Paul
+
+--- 帖子 #127 ---
+Hi DietCoke I noticed that the first post has not been updated. Did you find that small bug that didn't allow any trades in your backtest that you mentioned in your post number 121. Thanks Dave R.
+
+--- 帖子 #128 ---
+Thanks,
+
+--- 帖子 #129 ---
+Hi Dietcoke, Sorry for the delay in replying. The lines have changed now, but the MM interval was over 35 pips (on M15). It was on the final yellow line (+2/8 Extreme) if that helps. Worse than the pending order which was deleted in error was the fact that many pairs had no pending orders and no trades at all, despite the price action criss-crossing over the MM lines. There's definitely a bug needing squishing somewhere with the placing/deleting of the pending orders.
+
+--- 帖子 #130 ---
+Here you go Paul
+
+--- 帖子 #131 ---
+No updates because I'm under it at work. Can't work on it evennings right now and weekends aren't great cos there are no ticks. I've broken something somewhere when I incorporated the lines into the EA and it's now not as reliable when opening pendings. I'll figure it out.
+
+--- 帖子 #132 ---
+That's cool DC. No rush. I am still playing with 17.1. Thanks Dave R.
+
+--- 帖子 #133 ---
+Hi Dietcoke, Take all the time you need - no worries. Pippo has such great potential it's worth waiting for. V18 looks great, and despite the bugs it is still bringing in the demo pips - just more slowly than it should.
+
+--- 帖子 #134 ---
+Pippo V18 was working well on EU M15 this morning (see pic). But curiously no trades on GU.
+
+--- 帖子 #135 ---
+I'm wondering if you are using the onlytradecurrencytwice setting and this is not behaving?
+
+--- 帖子 #136 ---
+Thanks very much for the indi. Paul
+
+--- 帖子 #137 ---
+I have 'UseZeljko' set to False, and also 'OnlyTradeCurrencyTwice' set to false too. I was wondering the same - whether there is a problem in the algorithm with these settings, because the trades I'm getting make it look as though Zeljko or similar is operational. I have just whizzed through my charts, and last night I got trades (all winning) on: U/J, E/U, U/CH, U/CAD, A/U, Missed winning trades on: G/U, E/G, E/J, CH/J (would still be in trade), G/CH, E/A, E/CAD, A/CAD, A/JPY, NZD/U, A/NZD, CAD/J, XAU/U Even on the winning trades, there is still the problem of deleted pendings which means some profit is left on the table, but this is a minor problem in comparison to the number of charts where there are no trades at all. Are you finding the same, Dietcoke, or is it just me with missing trades? I'm still waiting for a hedge trade to test whether that is working. I think I'll add some more currencies today in the hope of getting a runaway trade. Despite the niggling problems, V18 is a fantastic EA which reliably brings in the pips when it chooses to trade. I wish I could help you sort it out, but sadly I'm no coder. Happy to test though. Picture 1 - Pippo harvesting the pips, Picture 2 - Pippo refusing to pick up the pips
+
+--- 帖子 #138 ---
+Forgot to mention that the USDCHF chart above clearly shows what a fantastic addition the use of Sell Limits is to Pippo. It now makes pips both directions. Inspired idea.
+
+--- 帖子 #139 ---
+I think EURCHF did not trade because the stoplevel is large in relation to the width of the bands. This has to be taken into account when creatinga pending trade otherwise you get constant errors opening trades. There looks to be an error in the logic I have used to achieve that
+
+--- 帖子 #140 ---
+I checked the logs, and there were no errors reported attempting to open trades. Looks like it just didn't try.
+
+--- 帖子 #141 ---
+Well I got my wish, and the USDCHF trades ran north into a hedge trade. There was a problem: the MM lines redrew after the final +2/8 extreme line but before the hedge trade was made. The result of this was that an extra level 1 trade for 0.01 lots was made at what was now the new 7/8 level. The hedge trade was correctly made (after that) for the specified multiple (I set it to 1) including the erroneous extra level 1 trade. Hopefully I've explained it clearly, but the picture may help. Update: 2 other problems with hedging (may be related to the grid changing whilst hedged trades open) a) The hedge should have closed on return to grid and didn't b) More pending orders have been placed for the new grid whilst the original hedged trades are still open, using same magic number. I'm wondering how these trades will close - maybe take out all the hedged trades too? None has been triggered so far ....
+
+--- 帖子 #142 ---
+Has anyone else discovered any glitches, or has everyone given up on Pippo?
+
+--- 帖子 #143 ---
+peeps just being patient and waiting until bugs ironed out.
+
+--- 帖子 #144 ---
+The line drawing is not correct
+
+--- 帖子 #145 ---
+Strange occurrence with drawing of the MM lines last night on AUDUSD. Pippo still knew where the lines should be - just not being drawn properly on MT4. Is this what you mean when you say "The line drawing is not correct", Lamarsky?
+
+--- 帖子 #146 ---
+Hi there I've a slight glitch with V.18. Loaded it up yesterday. According to the trading hours it stopped trading last night at 2100 hrs. But it did not restart this morning. I had to reload it and everything was OK. Anyone else had this problem.
+
+--- 帖子 #147 ---
+I've not tested the time controls yet, but I'm glad you're putting Pippo through it's paces too.
+
+--- 帖子 #148 ---
+Thanks for all the valuable input guys. I have also seen a lot of the glitches you are reporting. Keep 'em coming I'm hopeful about being able to post a resolution to the more important issues soon.
+
+--- 帖子 #149 ---
+I prefer the older version v17.1. This is less than a month of forward test on 4 major pairs. OOTB setting. Start with 500usd demo account on GO trader and now it's 1150 balance. v18 hardly make any trades. I'll probably open another demo account with other crim to re-test v17.1 to make sure it has similar performance.
+
+--- 帖子 #150 ---
+Could you please post your version Pipo V17 and set file. I can't find it. I'm still testing version 15, but the results are not good. Thank you
+
+--- 帖子 #151 ---
+I found the hedging was lethal in v17.1 - it kept doubling and doubling the lot size as the price criss-crossed over the hedge band. I was trading 0.01, 0.02, etc lot sizes, yet hedge trades were being made for 5.2 lots! If you trade V17.1 live, be very careful and watch it like a hawk when the price action reaches the extremes.
+
+--- 帖子 #152 ---
+Oops. That's one of the things i'm fixing
+
+--- 帖子 #153 ---
+Hi, dietcoke . The Line are different from the default indicator. Please check that. PippoV18 is good, if can fix the Line bug.
+
+--- 帖子 #154 ---
+Oh, its only mini demo account as I mentioned. And, i had checked the account history. mostly trade according to default settings, meaning 0.01, 0.02, 0.06 and 0.12. Only one of the pair has gone up to 0.32, nothing more. Not much of doubling that you mentioned. and probably i set the max trade to 1 instead of default 3 that prevent doubling? i'm not sure. Somehow dietcoke may have has fixed this in V18 that it now trades alot lesser.
+
+--- 帖子 #155 ---
+when i debug this new version 18 from MQ4 to EX4, i have this in log 1;39;;;Function "GetRange1" is not referenced and will be removed from exp-file is everything OK?
+
+--- 帖子 #156 ---
+Hi Dietcoke, Breakthrough! The no-trading charts are not because of a logic problem, but because of memory/computer resource issues. I have 21 charts open on my MT4 demo, but Pippo works only the first 6 or so. I'm a bit slow in noticing that it's a chart order problem - sorry! Just to verify, I changed the chart order around on my MT4 session, and I got trades on charts which have never worked previously as long as they are in the first 6 charts opened. I closed down all other MT4 sessions in my VPS, but still couldn't persuade more charts to trade. Is there any way to make it more efficient at using computer resource? Good news - I was able to test the minimum band width logic, and it seems to work.
+
+--- 帖子 #157 ---
+That is not a problem hankeys
+
+--- 帖子 #158 ---
+I've fixed this problem in the version i'm testing. the ea was drawing the full lines history on evry pass
+
+--- 帖子 #159 ---
+In what way are they different?
+
+--- 帖子 #160 ---
+That's exciting news! Despite all its problems and trading limitations, V18 is doing really well on my demo account. It will really rock when it trades all currencies! Can't wait to test the new release .....
+
+--- 帖子 #161 ---
+Hi folks, how is it going? Is anybody using Pippo on a live account? If so how are your results so far? Best regards!
+
+--- 帖子 #162 ---
+Hi Dietoke! After some observations I made some progress trading MML manualy.. Is it possible to code Pippo as multi TF MML EA where on 4H TF price reaches 8 level and the pippo switch to lower 5 or 15 minTF to place a Pending order.? The same behavior with reentries when the price goes against us.. Choosing timeframes could be variable (generaly there is not too much difference between 4h+5min or 1H+15min) If it would be too complicated to code forget it.. I stick with my manual trading with less pairs.. Cheers
+
+--- 帖子 #163 ---
+I've put v18 on my live account (very conservative lot sizes) on just 6 pairs because of the resource/memory problems it creates. It's behaving perfectly so far - no pending trades missed and all trading logic seems fine. Love this EA - just can't wait for the new version which uses less computer resource so I can expand the number of pairs traded.
+
+--- 帖子 #164 ---
+Hi Carolco To clarify or me. You mean that once the price on the H4 TF reaches the MML8 line then switch to a lower TF (5 or 15 mins), where the MM Lines will be at different levels and look where the price is now in the grid. Set the pending orders to trigger based on the lower TF MM Lines. If yes, I guess you are using the higher TF as a filter and MML8 would be the trigger for short trades and MML4 would be the trigger for long trades? I'm not sure how difficult this would be to code, but if you can clarify I can check it out. Thanks Paul P.S. I'm assuming this manual method is working well for you?
+
+--- 帖子 #165 ---
+Did you try opening several installations of MT4 with the same account, running 6 pairs each?
+
+--- 帖子 #166 ---
+Hi Gertje, I thought about doing this, but haven't tried it yet. Dietcoke knows what the problem is, so I'm waiting for/hoping for the new release soon before I have to settle for work-arounds. As far as I can see, V18 is fine apart from this issue. I love the way it allocates a new magic number once a set of trades is hedged so it keeps on reaping the pips ... and the limit &amp; stop order combo maximises every pip of profit. Both are excellent additions to original Pippo
+
+--- 帖子 #167 ---
+Tnx for the reply. To be honest, I haven't tried any of DC's versions yet. I wasn't able to get the first operational due to the separate Indi needed. I wait for the new one to give it a try. In the meantime I'm still running a demo with Steve's very first version which performs great, especially on oil and gold using FXCM . See www.mt4i.com/users/gertje-fxcm
+
+--- 帖子 #168 ---
+Nice results ! We had a lot of versions here during the last months ... could you plz give a link again to your ea version/setfile YOU use ?
+
+--- 帖子 #169 ---
+The version I use is no longer available on the thread, has been overridden by Steve. I'll try to post it asap. Gertjan
+
+--- 帖子 #170 ---
+Gertje, looks very nice for your demo result, but in the meantime I try the Stev last version the performance not good compare with your result, could your share which versoin and the set file that you are running now.
+
+--- 帖子 #171 ---
+The version is the one attached, setfile is like it comes with the MM-period set to '0'. Open as much charts as possible, all on the H1 timeframe. With FXCM, Oil and Gold are only tradable with full size lots [which are 10 ounces, barrels or whatever. It's 0,10 lot compared with Markets etc.], so there I changed the lotsize to 1, 2, 6 and 12.
+
+--- 帖子 #172 ---
+Hi Paul. Yes. I trade MM Lines manualy (when I have time to check them). Sorry for not express this properly. Basicaly Im waiting for reversal on lower TF. Example: Price on 1H has reached 0/8 support line (I trade only 0/8-8/8 and extremes) so as the price are going down we are looking to place Buy pending order. I switch to 5M tf and im waiting for reversal. Im looking till the candle goes through the nearest MM Level, it is not important which one it is. Once the 5M candle breaks a level I place BuyStop pending 2 pips+spread above the high of that candle. If the pending is not filled it usualy means that trend continues and high of next 5M candle is a bit lower so I modify my pending and place it again 2pips+spread (this could be variable) above new lower high and i do it again and again till the pending is filled. Sometimes i place 20SL and MPTM to place BE when +20 pips or i let it run without SL. MPTM BE when +20 is running to manage all my trades all the time. Now as i am thinkig about it for EA you do not need to code MultiTF MM EA. I think we´ll get same result when price reaches extreme on Higher TF we can start place pendings above/bellow highs/lows of lower TF. It is just me who needs to see the lines all the time when im manual trading it..
+
+--- 帖子 #173 ---
+Hi dietcoke, I had done some demo on my vps and encountered a lot of errors: EURGBP - OP_SELLLIMIT order send failed with error(130):invalid stops. Could you solve it for us. See here for more info: http://www.forexfactory.com/showthread.php?t=275355 Also: http://www.forexfactory.com/showthread.php?t=217271 Answer from mladen: The most probable cause for the error you are having is that your broker is an ECN / STP broker When opening orders on ECN / STP broker you have to do it in 2 steps instead of the usual 1 :1. open an order WITHOUT SL and/or TP 2. Modify the order opened that way by setting your SL and/or TP
+
+--- 帖子 #174 ---
+hi i made this indicator that can go back in time, any interest in it?
+
+--- 帖子 #175 ---
+Yes, that is fantastic. I REALLY hope DC finds some time to work on this ea. Would you mind posting it? Thanks
+
+--- 帖子 #176 ---
+Hi Dietcoke. Could you give us an update on your current version Pippo (18 or higher). Thanks Dave R.
+
+--- 帖子 #177 ---
+Ok i made it yesterday becouse i was bored. Its free of course but if you get ritch becouse of it give me some money Good luck.
+
+--- 帖子 #178 ---
+Great! Thanks
+
+--- 帖子 #179 ---
+All, I won't be continuing any work with Pippo. Basically, having run it on test in various scenarios, eventually it "always" has you jumping through hoops to recover from massive drawdowns. I know that plenty of you are comfortable with this no stop type of trading and recovery but it's not something I can trade. I do believe that Murrey Math lines can work as S/R, just not in this format and it is likely that at some point, I will look to code something that uses them. If anyone is interested in taking this forward, I'll post the latest code. DC
+
+--- 帖子 #180 ---
+Thanks for your effort here and your observations. If you ever start a thread of your own on something, maybe post a note here so we can follow your work. Best Regards Dave R.
+
+--- 帖子 #82 ---
+Basically, having run it on test in various scenarios, eventually it "always" has you jumping through hoops to recover from massive drawdowns. The truth is " all martingale systems fail ". They let the loss run and only seek for small profit or breakeven. Can we turn this EA as a trend trader?
+
+--- 帖子 #83 ---
+I must disagree here. Since im not a fan of martingale i think it is a perfect tool not to suffer a loss. But this is a personal choice and individual degree of view. If you use it blindly, then yes, you loose like with any other system. I was very long with martingale because I thought this could be what i wanted: perfect mechanical system that never loose a penny. Then I realize that it could be but has two weaknesses: You need great balance (which I cant afford to risk) and fixed reentry zones are a big problem. And here we are again. Martingale system or whatewer system fail if you fail. In other words you are the one who determines if your system will be profitable or not whatever system you use.. So thats my 2 cents...
+
+--- 帖子 #84 ---
+So sorry to hear this. Please could you post the latest code, as I believe you were testing a version which didn't consume so much CPU resource? I love Pippo (my favourite EA), but am restricted to trading just a few pairs live because of this issue. I'd love to be able to trade many more pairs to spread the risk. I agree that sometimes the DD does get tiresome, but I find the key is to use very small lots for the account size so it never becomes a worry. Then, just as it's becoming an old friend and you're getting used to living with it, along comes a major move which clears out the DD. Anyway, thanks so much for your work on this DC - V18 was a huge improvement and very visionary. I'll certainly follow you in the future
+
+--- 帖子 #85 ---
+Hello Guys, I read the posts and got lost regarding the settings. If you can give me some help of what settings you are using that would be great. im using the v18 ea. Thanks, Paul
+
+--- 帖子 #86 ---
+Any feedback on individual account progress or improvements on this EA (new settings or updates)?
+
+--- 帖子 #87 ---
+great EA, thank you so much
+
+--- 帖子 #88 ---
+Hello, not so long ago on the Internet I came across some great online math papers. He immediately put his son to solve tests in specialized mathematics, since he is not very good at mathematics and grades. online math courses have helped us a lot, thanks to them my son has a better understanding of mathematics and can go to university.
+
+--- 帖子 #89 ---
+It's true that the Martingale system, like any trading strategy, can have both advantages and disadvantages. As you mentioned, the key to success with any system lies in how it's implemented and managed. Blindly following any strategy without a proper understanding of its risks and limitations can lead to losses. You've also pointed out the importance of having a sufficient account balance to withstand the potential drawdowns associated with strategies like Martingale. Risk management is a critical component of trading, and it's essential to ensure that your capital is not at excessive risk.
+
+--- 帖子 #90 ---
+Incorporating these principles into your trading approach can help mitigate the inherent risks associated with trading strategies like Martingale and enhance your overall chances of success. It's essential to approach trading with caution, discipline, and a well-thought-out strategy that aligns with your financial goals and risk tolerance.
+
+
+===== 附件下载链接 =====
+
+未找到附件

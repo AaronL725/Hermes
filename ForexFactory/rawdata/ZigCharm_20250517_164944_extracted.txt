@@ -1,0 +1,903 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+This thread is a reboot of zig zag charm thread . This thread will show examples in a systematic way on how to use this indi including the setting that I use. The new version _6 fixed issue with the Double_EMA_xover. It did not show the zig-zag in the previous version. The new version _7 fixed issue with the tempo. The value got switched when using custom tempo with 3 parameters i.e. 5,3,3 becomes 3,5,3 by mistake Version 8 Inserted Video Version 10 Inserted Video Excuse me for my babysitter funny noise.
+
+--- 帖子 #2 ---
+Great, thanks
+
+--- 帖子 #3 ---
+The soul of this indi is the ZIG-ZAG. Without it, it's nothing. So how does this Indi plot the zig-zag. The zig-zag is based on oscilator indis or moving averages. There are several options you can choose in this indi. You can select which music score you want to use in order to plot the zig-zag 1. MACD 2. Stochastic 3. Double_MA_Xover 4. Double_EMA_Xover 5. EMA_Price_Xover So let say you select Double_MA_Xover of 5 and 10. 5 MA is the fast MA and 10 is the slow MA. Make sure you select the tempo to "Custom" as seen in the screenshot. In this example you input 5,10 into the tempo field as seen in the screenshot Bullish crossover is whenever the fast MA is higher than the slow MA. Bearish crossover is whenever the fast MA is lower than the slow MA. so when ever there's a bullish crossover, the price will look for the lowest point between the previous crossover until the recent (new/fresh) crossover. This logic is apply to the bearish crossover, but it will look for the highest point. Attached Image (click to enlarge) Correction to the screenshot -_- Sorry
+
+--- 帖子 #4 ---
+Second component of this indi is the FIBEX or MOM (Momentum). Each ZigZag point has 2 FibExes; top and bottom. In the screenshot below the FibEx is highlighted in black circle Attached Image (click to enlarge) This act as a fence of a particular move. Let say the fibex is set to 1.382. The market moved 10 pips to the upside. So the FibEx is 10*1.382 = 13.8 pips or 0.00138 pips. So what does Fibex do? Fibex is a great way to identify breakout. This is very important to master because market doesn't always trending. Most of the time it moves sideway. So therefore you need a tool that you can rely to identify a breakout. Fibex is similar to bollinger band does. It has contraction and expansion. When there's expansion that mean the momentum is big. When there's contraction that mean the momentum is decrease. When there's a contraction in FibEx, that mean there is no clear up/down trend. We could be in a reversal or a trend continuation. This is a great opportunity to take side. I recommend to use 1.382, you can decrease or increase the FibEx to your own. Make sure it is set bigger than 1. Attached Image (click to enlarge)
+
+--- 帖子 #5 ---
+How can I see the ZigZag line? Well I set it to invisible. If you want to make it visible you should open the indi setting and go to the color tab. In Row #0, select the color option you want. Row #0 is for the zigzag graphic. Attached Image (click to enlarge)
+
+--- 帖子 #6 ---
+The 3rd component of this indicator is the FRAME OF REFERENCE. Basically it's a zigzag and drawn square between each point. Simple as that. Attached Image (click to enlarge) Here's how to enable it Attached Image (click to enlarge) So what's the function of it? This is a powerful tool to identify elliot wave manually. It is far more powerful when you combine it with a 2nd zig charm like in the example below In this example I combined a slow zigcharm (using MACD music score and set its tempo to MACD_MEDIUM) and fast zigcharm (using MACD music score and set its tempo to MACD_SOFT). Template attached. Please note that, you have to know the basic of elliot wave so that you can plot it manually. Attached Image (click to enlarge)
+
+--- 帖子 #7 ---
+great!! SIR ,I have a question, how do I use this system?What background is needed?
+
+--- 帖子 #8 ---
+The 4th component of this indi is the Volume. Here's how to enable the volume drawn into the chart Make sure "Draw Frame of reference" set to true (#1) Then you have to set "Draw volume on Frame of reference" to true (#2) Attached Image (click to enlarge) When you scroll down little bit lower, you will see options where you can set the color of each particular volume 1. Bullish with high volume 2. Bullish with low volume 3. Bearish with high volume 4. Bearish with low volume Attached Image (click to enlarge) Volume in action Attached Image (click to enlarge)
+
+--- 帖子 #9 ---
+What is the meaning of the following??? 1. Bullish with high volume 2. Bullish with low volume 3. Bearish with high volume 4. Bearish with low volume First we have to understand how it is calculated. Volume = SUM(Accumulation/Distribution indi + On Balance Volume) of that particular frame. Let say there are 15 candles. The indis will sum all 15 candle's AD and OBV indi value. HOWEVER , if the value of A/D or OBV value is &lt;0 or in a negative value, it will be multiplied by -1 in order to get the positive value. Let say there's a candle A/D indi value is -60000. Zigcharm will multiply it by -1 = 60000. In the screenshot below you can see 2 information highlighted in black box. Those information are the sum of volume and the difference between that frame to the previous frame. Attached Image (click to enlarge) About the calculation of volume diff data window Attached Image (click to enlarge) So let's get back to the question, Bullish with high volume....? When we have that, that mean that particular bullish frame has higher volume in relation to the previous bullish move. Attached Image (click to enlarge) In another example above. There are 2 frames labelled with A and B. Both frames are bullish but has different color. Frame B is colored in bright green which indicates a bullish with high volume. Frame A is drawn in pale green which indicate bearish with low volume. Frame B vol = 50311036 Frame A vol = 14831973 So clearly Frame B's vol &gt; Frame A's vol, so that is why Frame B is colored in bright green. All of this is applied to the 2. Bullish with low volume 3. Bearish with high volume 4. Bearish with low volume
+
+--- 帖子 #10 ---
+The 5th component of Zigcharm is Divergence and Hidden Divergence. Here's how to enable the feature and change the color of it. Attached Image (click to enlarge) Divergence is very important to identify a weakness in a trend. I personally use it in a higher time frame so that I can look for a sell/buy opportunity whenever there's a divergence/hidden divergence in a higher time frame. For higher time frame, I usually use a fast period/tempo music score. Usually MACD_SOFT because of its sensitivity. Attached Image (click to enlarge) Above screenshot is an example of recent bearish divergence in the daily time frame and the Tempo is set to MACD_SOFT. It is best to look for sell/buy opportunity after the candle close to avoid redraw .
+
+--- 帖子 #11 ---
+Divergence and hidden divergence is calculated based on the volume of each frame. Bearish divergence appears whenever we have a higher high (bullish frame is higher than the previous bullish frame). And the latest bullish frame volume is lower (colored in pale green) than the previous bullish frame, so that mean it's a bearish divergence. Bullish divergence is when we have a lower low and the frame color is pale red. Bullish hidden divergence is when we have a bullsih move and followed with a correction. That correction colored in pale red, that mean we have a bullish trend continuation or bullish hidden divergence. Bearish hidden divergence is when we have a bearish moveand followed with a correction. That correction colored in bright green, that mean we have a bearish trend continuation or bearish hidden divergence. Attached Image
+
+--- 帖子 #12 ---
+The 6th component of zig charm is Active S/R Here how to enable it Attached Image (click to enlarge) What's the logic of this? Active S/R takes the correction as the S/R. Let say we have an zigzag points of A,B,C,D or 1,2,3,4 Wave A,D and 1,4 are the impulse move. point B,C are the correction of A,B. So that mean, S/R will be drawn on point B and C Regarding the candle strength is based on how many candles are there between B and C. The higher the candle the stronger it is (Theoretically). In screenshot above the, resistance strength is set to 20, so the indi will look for B-C that has greater than or equal 20 candles in between B-C. Here are examples of Active S/R where there are &gt;=20 candles between B and C Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #13 ---
+The 7th Component is the SuperTrend. The supertrend is always on. If you want to turn it off, simply change the color #11 and 12 to None Attached Image (click to enlarge) Here is the logic/algorithm of super trend 1. Identify the last frame point 2. Retrieve it's MOM or the FibEx value 3. If it's bullish add the frame's+MOM For bearish case subtract it Bullish Dynamic SR = last frame's price - MOM Bearish Dynamic SR = last frame's price + MOM 4. Increase the Bullish dynamic SR every time the current price close is higher than the previous candle's high. Decrease the bearish dynamic SR every time the current price close is lower than the previous candle's low. Bullish Dynamic SR = (Current candle close - previous candle close)+dynamic SR Bearish Dynamic SR = (Previous candle close - current candle close)-dynamic SR 5. When a candle broke particular dynamic SR, repeat #1 What does it use for? It is use to identify the change of trend. It complements the frame of reference when it is drawn with volume on. It also can be use as S/R like in the example below. Attached Image (click to enlarge) The example above takes the end/tail part of the supertrend as the S/R, highlighted in black circle. Break below or close below the lowest/highest S/R of that, determine the trend. If it break the lowest part, that mean a bearish trend likely hood is higher therefore look for a short setup probably it is best to place trade after a correction. That is just one example on how to use SuperTrend indi.
+
+--- 帖子 #14 ---
+So above are just a prelude of ZigCharm. More to come. 7 components in ZigCharm. Next subject will be strategy using ZigCharm.
+
+--- 帖子 #15 ---
+Thanks for sharing it free. From the lot size you trade, I can say that it is a highly profitable system.
+
+--- 帖子 #16 ---
+Sorry I don't understand your question Boyce. What do you mean by background? Regarding how do i use this system? I will show it to you and everyone soon, but please know that I will not show you when to take the trade. I will show you opportunity that you should anticipate. I will also show you some examples of the past. Anyhow It's all about anticipation and when the anticipation did not meet (does not come true) then you should do the other way around and place the trade accordingly. By anticipate meaning that you have not place your money on it yet, but you're ready to pull the trigger whenever the prey appears in your sight or not.
+
+--- 帖子 #17 ---
+All I know is that the best things in life are free!
+
+--- 帖子 #18 ---
+All (I mean ALLLLLLLL) pro traders advise traders to buy/sell at the dip or correction. Why so? I will explain later in the next reply... So first how do you identify a correction or a dip? As this is a complicated subject, let me make it simple for you. First we have to identify a breakout. Let's safe this session later. So now let's presume that we just had a breakout of a trend reversal. Attached Image (click to enlarge) In the screenshot above pay attention to those Xs. What do they have in common? Answer: Small frame size! It's like &lt;=50% smaller than the previous frame. So that mean look for a sell setup there
+
+--- 帖子 #19 ---
+It sounds very interresting.
+
+--- 帖子 #20 ---
+You could spend some of your valuable time read my old thread https://www.forexfactory.com/showthread.php?t=660760 Probably you could learn something here and there.
+
+--- 帖子 #21 ---
+Why buy at the dip? Ok let's get back the truck up, take one step back outside the Forex world and crap like that. Let's go shopping. We all as a consumer wants to buy things a discount price right? Tell me how does a company increase their product price? Answer: They give a discount! Next question: Does the discount last long? Answer: No it doesn't. It could last for a week or a month. Here an example of a trick in a supermarket or any market world when they want to increase the price. Let say before the discount they sell a product at $1.5 Discount 30%, so the price becomes $1.05 for a short period of time or They'd offer you a promotion to buy the product at $1.95 for 2 similar products so that mean we have a (35% discount for each or $0.97 each). Then when the discount or promotion is over, the price becomes $1.8 or $1.95 or $2 for a piece depend on the store you buy it from. Hopefully you get what I mean. The discount is the correction at a short period of time before the price increase
+
+--- 帖子 #22 ---
+Thankyou yousername for you valuable work! it is appreciated! may ask you to share your template which will be used by your strategy in next?! Thanks again
+
+--- 帖子 #23 ---
+Bought at the dip after a breakout. Breakout will be explain soon Attached Image (click to enlarge)
+
+--- 帖子 #24 ---
+Thank you for sharing and working on this exceptional indicator! Is there a way to display multiple divergences on a single chart? For example I'd like to have Macd &amp; Stoch as Music Score settings. When plotting the same indicator twice to the chart it will overwrite the divergence of the first indicator. Greetings
+
+--- 帖子 #25 ---
+This suggestion may be awesome in a way! I trust the author of the indi may consider it but in the future?
+
+--- 帖子 #26 ---
+Hey WarrenPeace, if you want to enable the divergence only on multiple zigcharm indicator, yes you can do it. Simply put multiple zigcharm indi and disable all the feature except the divergence. You should also set the Zigzag (#0) and Supertrend (#11 &amp; #12) color to None. Here is a template of it including the preset (inside the zip file). When you insert the zigcharm indi, go load the preset and change the music score and tempo to anything you like.
+
+--- 帖子 #27 ---
+Thank you very much.
+
+--- 帖子 #28 ---
+Sideway market is often described as end of a market trend. So here's how you identify a sideway trend market Attached Image (click to enlarge) Attached Image (click to enlarge) When you see both images above. In those circles you should see 3 frames getting smaller and also notice that the FibEx Up and FibEx Down contracted. Then follow with frame "X" broke Y's FibEx to the upside. When the FibEx of the previous frame got broke, you should look for a long/short position depending on which FibEx does the current frame break. If it broke the FibEx low of the previous frame, that mean look for a short position. You could place the short position after a correction of the breakout. Attached Image (click to enlarge) From the screenshot above. It is clearly we are in a uptrend move. Notice we had a breakout to the upside already. Then follow with a correction. The correction is a sideway move (a triangle pattern). Also notice the FibExs are contracting. So expect a trend contiuation to the upside or a reversal to the downside. In summary When you notice there's a contraction in the FibEx for several frames (at least 3 frames). Then expect a breakout to either side (trend reversal or trend continuation). Attached File(s) stochastic.tpl 322 KB | 247 downloads
+
+--- 帖子 #29 ---
+Hello yousername. First of all, congratulations on this excellent presentation and one of the best oscillators i've ever seen. I would like to ask you if this big difference between the prices and the zizag/volume square suggests something important that comes. Thanks
+
+--- 帖子 #30 ---
+I presume your question why does that particular blue square has the price going out of the box? Attached Image (click to enlarge) If you see from the screenshot above. We had a bullish and bearish cross in the MACD. When it had bullish cross, it looked for a new low between the previous cross and the current cross. When it had a bearish cross, it will look for a new high between the previous cross and the current cross. It won't take account what happen in between regardless it continue going down like when we had a bullish cross like you see in the blue square in your screenshot. But this can be mitigate using the supertrend feature which allows you to give another confirmation to the trend change. Let me know if I have not answer your questions clearly because I don't quiet get it. Sorry.
+
+--- 帖子 #31 ---
+Attached Image (click to enlarge) Bought USD at the dip or sold EUR at the dip with 10K lot position. Was thinking to sell with 100K lot, but afraid of triggering a financial crisis SL 0.5 or 1 pip profit Got stopped out with 0.6 pips profit.
+
+--- 帖子 #32 ---
+Short again Attached Image (click to enlarge) Close the trade about an hour before the London Close.
+
+--- 帖子 #33 ---
+Step by step on why I shorted Attached Image (click to enlarge) Just to be clear The 3rd step, sideway move, I mean the market took a rest after it had a big move downward. Pay attention that the market discounted 50% of the big bearish move (50% correction after a high demand in the USD) which means it looked for a USD buyer or EUR seller
+
+--- 帖子 #34 ---
+yousername. Your answer was exactly what i was asking. Thanks
+
+--- 帖子 #35 ---
+0) Market broke FibEx Lo, it is a fake breakout because at #2 we had a 100% retracement of #1. 1) The red frame breaks below its previous frame's FibEx Lo 2) 100% retraced 3) No frames after #2 breaks its previous frame's FibEx Lo. Which indicate no recent breakout yet. When we have a breakout and follow with a small retracement, then that mean we have a clear new trend. Verdict we're in a sideway move with slightly bearish tone in it. Becareful because this is a gray area. Attached Image (click to enlarge)
+
+--- 帖子 #36 ---
+AUDUSD D1 0) The bright green frame broke previous frame FibEx Up. We had a breakout to the upside. 1) Market is retracing looking for a buyers in order to continue it's bullish momentum. Attached Image (click to enlarge) Verdict bullish, look for a buy setup.
+
+--- 帖子 #37 ---
+USDJPY D1 Attached Image (click to enlarge) If price able to move low to (4 red rectangle area), then the seller pressure resume
+
+--- 帖子 #38 ---
+EURUSD H4 Trend is sideway. We had A,B,C,D pattern Likely market will go slightly lower in order to form wave E When Wave E has formed and the market went up and broke X (bearish supertrend), then look for a long position. Attached Image (click to enlarge)
+
+--- 帖子 #39 ---
+AUDUSD H4 Bearish move is having doubt about themselves. You can tell by the candle size and its look with long wicks Looks like we have a good S/R at Fib Retracement .382 We may have a bull resume its push up when we have the bearish supertrend got broke (colored in purple and highlighted with red rectangle) Basically market is looking for buyer to continue its momentum to the upside. Attached Image (click to enlarge)
+
+--- 帖子 #40 ---
+GBPUSD D1 Looks for long when the market able to move above wave E or into wave B Currently it's in the correction phase of the bullish impulse move (colored in bright green square/rectangle/frame) The Supertrend is bullish. Attached Image (click to enlarge)
+
+--- 帖子 #41 ---
+Template included Attached File(s) GBPUSD study.tpl 770 KB | 213 downloads
+
+--- 帖子 #42 ---
+latest fix in the build _7. Had issue with the custom tempo. Now you will have a correct custom tempo when using i.e. stochastic 5,3,3 instead 3,5,3 (wrong). New indi can be downloaded from the 1st page. Template is provided using 2 zigcharms MACD with medium tempo and stochastic custom tempo 5,3,3
+
+--- 帖子 #43 ---
+Hi I will try to give my own approach, making an analysis using the volume the divergences and the Elliott Waves. Following the volume and color changes we have a five waves motion. These waves are confirmed by the divergences I have made on the map, as follows. (This information is not mentioned in any book but in knowledge gained by measuring the waves for ...many years.) The first HIDDEN DIV. functioned correctly by creating the third wave. The second HIDDEN DIV. however, differs from the first one. The reason is the DIV. that has already been created. This DIV. usually creates a weakness (whipsaw) of HIDDEN DIV. for a strong upward movement. That's exactly what happened in the 5th wave. Price weakness and volume weakness. The problem after the fifth wave is that the volume of the first wave is strong. The last one to be created is weak for a moment and this may mean another downward wave. That's for now. Have a good weekend.-
+
+--- 帖子 #44 ---
+Hi Grand pa, Thank you for sharing your insight. So you're anticipating a strong USD. Attached Image (click to enlarge) From the screenshot above that thing I circled is an oversold area. Why it's oversold? Because the frame size and FibEx are small compare to the previous frame BUT the sell volume is high. Usually when we have a a small frame size + oversold/overbought tends to follow with an explosion to the upside/downside and it became a good S/R. In this case it means that there are buyers there supporting AUD. I expect it to break the 2 supertrends (one belongs to Stochastic custom tempo 5,3,3 and the other belongs to MACD Medium tempo) in order to continue the upward momentum. If it goes lower than the oversold frame that I circled, then that oversold frame became a resistance instead a support. Template is provided inside the zip file Have a great weekend
+
+--- 帖子 #45 ---
+Recent overbought frame in the AUDUSD Attached Image (click to enlarge) Basically In the bullish trending market when we have oversold, we have a hidden bullish divergence (bullish convergence). In the bearish trending market, when we have overbought, we have a hidden bearish divergence (bearish convergence). I will show additional study regarding overbought and oversold beyond hidden divergence.
+
+--- 帖子 #46 ---
+Very interesting info.-
+
+--- 帖子 #47 ---
+As alternative, I'm anticipating Head and Shoulder pattern If the price able to broke the neckline and the bullish supertrend (inline with the neckline) then it's a confirmation of a Head and Shoulder pattern. Attached Image (click to enlarge) If price manages to break above the Head, then the Head and Shoulder pattern is void therefore presume long
+
+--- 帖子 #48 ---
+Enter long EURCHF.-
+
+--- 帖子 #49 ---
+Hey man that's awesome! Are you gonna hold the position?
+
+--- 帖子 #50 ---
+SL +5P Attached Image (click to enlarge)
+
+--- 帖子 #51 ---
+Have not opened any position on the EURUSD pair because it's been a mixbag. We've been moving sideway for 24 days or a month or so. Need more info on both end for clarity My bias is bullish for this pair. Waiting on the sideline like a hawk/shark watching its prey Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+Yes. I moved the stoploss.
+
+--- 帖子 #53 ---
+After 50 pips of profit this week from AUDUSD pair, looking for another long on this pair. Stoploss set with +1 pip profit Attached Image (click to enlarge)
+
+--- 帖子 #54 ---
+Enter due to divergence. We'll see.-
+
+--- 帖子 #55 ---
+This is my first time using the Trade Explorer feature. I have attached my TE into this thread and see if it will work ok. I'm noob
+
+--- 帖子 #56 ---
+COOL!!! Great job mate.
+
+--- 帖子 #57 ---
+Right now i'm working on converting this indi to MT5 (MQL5).
+
+--- 帖子 #58 ---
+Thank you my friend, but the "Great job" belongs to you.-
+
+--- 帖子 #59 ---
+update
+
+--- 帖子 #60 ---
+Testing my grid trading manual EA on the TE. Expert will be shared as soon as possible.
+
+--- 帖子 #61 ---
+Choo chooooo
+
+--- 帖子 #62 ---
+Hi username. I have a question. While the volume is down from 30/6, prices are somewhat upward. This is an indication that after the end of this movement we will again have a strong upward movement; Thanks.-
+
+--- 帖子 #63 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #64 ---
+To avoid confusion, you can turn off this feature (Draw Live Cube) by set it to false Attached Image
+
+--- 帖子 #65 ---
+Head and shoulder bullish reversal pattern. Attached Image (click to enlarge)
+
+--- 帖子 #66 ---
+Correction to the Head and Shoulder neckline Attached Image (click to enlarge)
+
+--- 帖子 #67 ---
+My grid trade was closed by it self because it has met its target "1000 pound". So now I'm out of the trade and looking for another opporutnity. By the way, the grid EA will be shared shortly. I will create a new thread sometime this week or next week.
+
+--- 帖子 #68 ---
+Onward I won't be sharing my live account trade with big lot but instead I will show grid trading on the demo account only and can be seen from the TE. I will leave my other trading live accounts to my self only.
+
+--- 帖子 #69 ---
+Thank you for your time and sharing.
+
+--- 帖子 #70 ---
+Hi username. Thank you for the answer. I'll study your explanations later because I'm in a hurry. Update Exit USDCHF with (+82.3) profit. At the same time enter short USDCHF We'll see.-
+
+--- 帖子 #71 ---
+I closed the position Friday night, (+8.5 pips) .-
+
+--- 帖子 #72 ---
+Which position? USDCHF/EURCHF? Anyhow whatever the pair it is, I congrats you for the win, time to celebrate and keep your head down I wish you a great weekend Granddad
+
+--- 帖子 #73 ---
+May I know what pairs do you usually trade with? Seems like you like to trade with CHF pairs
+
+--- 帖子 #74 ---
+username ! On #post 70# I closed the long position in the USDCHF and at the same time in the same pair I opened a short position. I closed this position on Friday night due to the weekend. No, I do not prefer the CHF. I usually watch the main pairs with EURUSD preference, but in combination with the opposite pair that is the USDCHF. In this case, the signal was more clear in the pair of USDCHF and that's why I decided to ...play with it. Have a wonderful weekend my grandson.-
+
+--- 帖子 #75 ---
+Original way to analyze market. It's good
+
+--- 帖子 #76 ---
+EURUSD H4 Usually when you will have a Yellen speech's level news, you'll have a range market. This time we could have a triangle pattern or a bull flag (trend continuation). Alternatively we could have a double top a bearish reversal. So let see how it'll play Attached Image (click to enlarge)
+
+--- 帖子 #77 ---
+Great thread, 1 question with 6 music score selection which do you recommend be use and on what scenario. tq
+
+--- 帖子 #78 ---
+It's recommend it on on all TF I usually use MACD with tempo MEDIUM and SOFT 2 ZigCharms into 1 chart. Thanks man for making this thread alive. So busy working on FG's thread.
+
+--- 帖子 #79 ---
+great thanks to you, you are a great contributor to FF. p/s thanks for the tip on using 2 ZigCharms
+
+--- 帖子 #80 ---
+Man I'm flattered. No problem man! Let me know if you need anything.
+
+--- 帖子 #81 ---
+I am also using urs , So please keep it up . If i dont answer , Tanx ,
+
+--- 帖子 #82 ---
+Entry to the dollar index. If the bottom is medium-term, (3 months) then there are opportunities for some of the pairs that have fallen significantly to date.
+
+--- 帖子 #83 ---
+Hi grandfather What broker do you use so we can have the same chart? Thanks
+
+--- 帖子 #84 ---
+Hello username ! broker : FXCM I wish you good success with the Flexy Grid EA.-
+
+--- 帖子 #85 ---
+Thanks Grand pa. This indi is still relevant to my trading and using it every day.
+
+--- 帖子 #86 ---
+hello sir, Super trend is good, could you pls. tell me how to get it's value by using "icustom" or sth like that? thanks!
+
+--- 帖子 #87 ---
+Inserted Code Alert(iCustom(Symbol(),0,"zigCharm3xdvl_7",4,101,10,false,-1,1,false,-1,0,-1,0,-1,false,-1,false,-1,1,-1,false,-1,1,false,-1,0,-1,0,false,1,-1,0,-1,0,false,20,-1,false,-1,1.382,false,12,1)); the last 2 param info 12 = The 12th buffer output for downtrend SR (super trend) 1 = The candle index If you want to get the upper Super Trend then use 11 instead 12 If you want to change the music score and tempo. You have to save the indi config to a .set file. And then you open it with a text editor and select the musicScore,sensitivity_inp and tempo and modify the icustom 3 values after the indi name. in this case "4,101,10" change that to your own setting
+
+--- 帖子 #88 ---
+If you use MACD and then use a custom tempo 14,30,7 4,101,"14,30,7"
+
+--- 帖子 #89 ---
+You are the most generous person i have ever met in this forum. If one day you need my help, I'm always ready at your service.
+
+--- 帖子 #90 ---
+I also noticed that most losing trades were held only for 1 minutes... Is this your tests or you just cut the loss short? Anyway, A Great system~
+
+--- 帖子 #91 ---
+I believe that was during testing lol
+
+--- 帖子 #92 ---
+could pls. do me a favor, my friend? i get the wrong value of up trend, should be 47.33 not 47.97... code: UP=iCustom(Symbol(),0,"zigCharm3xdvl_7",4,101,10,false,-1,1,false,-1,0,-1,0,-1,false,-1,false,-1,1,-1,false,-1,1,false,-1,0,-1,0,false,1,-1,0,-1,0,false,20,-1,false,-1,1.382,false,11,2); DN=iCustom(Symbol(),0,"zigCharm3xdvl_7",4,101,10,false,-1,1,false,-1,0,-1,0,-1,false,-1,false,-1,1,-1,false,-1,1,false,-1,0,-1,0,false,1,-1,0,-1,0,false,20,-1,false,-1,1.382,false,12,2);
+
+--- 帖子 #93 ---
+please provide the indi .set file Make sure both the icustom and the indi have the same music score,sensitivity and tempo setting
+
+--- 帖子 #94 ---
+OK
+
+--- 帖子 #95 ---
+For bullish supertrend Inserted Code Alert(iCustom(Symbol(),0,"zigCharm3xdvl_7",0,1,"12,26,9",false,-1,1,false,-1,0,-1,0,-1,false,-1,false,-1,1,-1,false,-1,1,false,-1,0,-1,0,false,1,-1,0,-1,0,false,20,-1,false,-1,1.382,false,11,1)); for bearish supertrend Inserted Code Alert(iCustom(Symbol(),0,"zigCharm3xdvl_7",0,1,"12,26,9",false,-1,1,false,-1,0,-1,0,-1,false,-1,false,-1,1,-1,false,-1,1,false,-1,0,-1,0,false,1,-1,0,-1,0,false,20,-1,false,-1,1.382,false,11,1));
+
+--- 帖子 #96 ---
+Pay attention to 0,1,"12,26,9" It's the same a your .set file musicScore=0 sensitivity_inp=1 tempo=12,26,9
+
+--- 帖子 #97 ---
+In the next build I will add a FIBONACCI retracement feature which will be shown when you click on particular frame.
+
+--- 帖子 #98 ---
+Thanks, problem solved. fibo is a good tool, but which lvl will you take?
+
+--- 帖子 #99 ---
+It will auto calculate how many % is the retracement
+
+--- 帖子 #100 ---
+oh, that's great! and i have no idea how can you locate the right lvl to trade automatically... As your programming skill is much better than mine, could u pls. give me a clue on this? I have 2 vertical lines and i don't know how to calculate the number of bars between them. I searched entire forum and there is no answer....pls. help. thanks!
+
+--- 帖子 #101 ---
+Inserted Code int h1=(iBarShift(Symbol(),0,ObjectGet("Vertical Line 59376",OBJPROP_TIME1))); int h2=(iBarShift(Symbol(),0,ObjectGet("Vertical Line 59429",OBJPROP_TIME1))); Alert(h1-h2);//Make sure h1 is bigger than h2 otherwise it becomes a negative number
+
+--- 帖子 #102 ---
+omg!!!??? looks like a piece of cake for you.... How could i ask a such stupid question like this...lol Thanks again, i wish your all the green pips!
+
+--- 帖子 #103 ---
+no problem man. Wish you the same too with abundant green pips.
+
+--- 帖子 #104 ---
+Hi, Do you allow me to post trades here by using your system? Some thread owners dont like to seem different things, they want follower make no change to their systems.
+
+--- 帖子 #105 ---
+Please go ahead mate. I appreciate it
+
+--- 帖子 #106 ---
+Combining my understanding with your system i found this one is worth trying: BUY/SELL First Signal: A big fat Box break at least 3 boxes &amp;&amp; 200MA, MACD SR must be broken before trade. If kicked out by market in the middle way, try re-entry when signal appears near 200MA. Attached Image Attached Image Add position Signals: if the first signal was profitable, every retracement after a obvious breakout will add more positions and use MACDSR to move SL at once. Attached Image (click to enlarge) Resistant to Consolidation (as a trend following system) : Attached Image (click to enlarge) MACD SR didnt break when price reaches the entry line and finally it caught a good sell signal.
+
+--- 帖子 #107 ---
+What is MACD SR? Are you referring to the Super Trend?
+
+--- 帖子 #108 ---
+Yes, but your super trend is much better than the original, that's why i ask you for the value of it.
+
+--- 帖子 #109 ---
+Do you have any criteria for A big fat Box or Skiny box?
+
+--- 帖子 #110 ---
+Usually when the supertrend is broke there's a correction... For instance here in the screenshot below Attached Image (click to enlarge) ST = Super Trend
+
+--- 帖子 #111 ---
+Identiying range market and breakout using FIBEXUP or FIBEXDOWN Attached Image (click to enlarge)
+
+--- 帖子 #112 ---
+NZDUSD Inserted Video
+
+--- 帖子 #113 ---
+Your NEW ST can filter the consolidation quite well. If we wait for the breakout, the first wave will be missed always.
+
+--- 帖子 #114 ---
+It's ok to miss the first wave beceause the 2nd wave will be a correction of the 1st and the 3rd wave is the money train
+
+--- 帖子 #115 ---
+About ZIGCHARM SUPERTREND I think there should be a bullish hidden divergence shown in the yellow circle in your screenshot.
+
+--- 帖子 #116 ---
+So you dont trade the 1st wave, that's good! If you and me use the same method, what can you learn from that? I'm always looking for someone with different systems, so that we can learn from each other. Anyway, i will try yo catch the first wave in testing, good or bad whatever, the market will tell. talking about the DIV, i'm not understand them at all. Some times DIV will help you to catch the bottom/top, but they are not reliable for EX:
+
+--- 帖子 #117 ---
+In the trending market, I use div as a signal that the impulse move is in exhaustion and about to take some rest. Then when we have a hidden bullish/bearish divergence, it indicates that the rest is done and time to kill some loser traders From your example, somehow the hidden divergence is not shown. Any how I can tell a hidden divergence from the color of the frame. If we're in a bearish trend, a hidden divergence is when we have a bearish correction with a high seller volume but it hardly touches the previous frame high. It appeared in your screenshot too many time Attached Image (click to enlarge) Those hidden divergence to me is an OVERBOUGHT in a bearish market. As usual, when we have overbought that mean it's time to sell. In this case it's true. The market has too much buyer in a small frame (too saturated with buyers) and no one wants to buy it. From that the result is it never reaches the previous impulse move high hence it continue moving downward.
+
+--- 帖子 #118 ---
+OVERBOUGHT in a bearish market Thanks for the brilliant insights and all the nice videos. it really helps~ So if you found OVERBOUGHT in a bearish market, will you sell immediately? You see sometimes bullish and bearish DIV happens together, is that mean sth for you?
+
+--- 帖子 #119 ---
+Yes I would sell it. A fundamental news would give me confidence as well in selling it when I see that bright green frame in a bearish trend. If the fundamental overall supports the bearish side but the market is making a higher low (bright green frame) then that is an opportunity to sell. You could also start selling it when it broke the low of the bright green frame.
+
+--- 帖子 #120 ---
+GBPUSD 2017 August 2 Inserted Video
+
+--- 帖子 #121 ---
+OK got it. one question, if G/U strongly go up and the NEWs for USD is obviously good. Do u consider this is false break? following the NEWs or the market? thanks!
+
+--- 帖子 #122 ---
+For such case when both are good then it's good for GBP I don't consider a false breakup because in the H1 chart, that bearish divergence could indicate that the market is taking a break before advancing higher. It's like when you rock climbing, you'd take a breathe before you want to grab the rock above you and climb higher.
+
+--- 帖子 #123 ---
+Attached Image (click to enlarge) From the screneshot above I took 50% of the bearish divergence or (2 points of higher high) and treat it as a S/R I'm selling on the demo and real
+
+--- 帖子 #124 ---
+Hi Username Great thread and thanks for all your hard work, it is in giving that we receive. Looking at the hard right of your volume blocks, how does one know that it is complete, that it wont carry on growing like zz can repaint. I see excellent trades after low volume blocks thats in hindsight. Being able to enter a trade immediately after a low volume block would be like picking tops and bottoms. Hope you understand my question. Kind regards Nev hi
+
+--- 帖子 #125 ---
+You know one is complete by looking at the BIAS info in the data window. When the bias changed, the previous frame completed. You can also know from news or candle stick pattern or anything that you are comfortable/trust with. Being able to enter a trade immediately after a low volume block would be like picking tops and bottoms &lt;- Agree But I don't do that. I trade trend continuation, breakout, reversal. BIAS Attached Image (click to enlarge)
+
+--- 帖子 #126 ---
+I just closed my GBPUSD with profits Inserted Video Looking for more opportunity after the US news release.
+
+--- 帖子 #127 ---
+Thanks for your prompt reply I am sure its past your bed time, am subscribed to all your hard work. Regards Nev
+
+--- 帖子 #128 ---
+Hahahaha I'm GMT+7 it's 7pm here
+
+--- 帖子 #129 ---
+Staying on the sideline looking for opportunity like a TERMINATOR. Inserted Video
+
+--- 帖子 #130 ---
+AUDUSD Analysis In here I talked about ZIGCHARM Overbought and Oversold as well Inserted Video
+
+--- 帖子 #131 ---
+I'm going to buy UC today, but it just 2 pips higher than my entry price. Just as you said if buy DIV appears, we should enter the market at once. So...again, could u pls. show me how to get the DIV by using icustom... Thanks!
+
+--- 帖子 #132 ---
+Recently, i met a gay using "Blinding Trading martingale". I have never seen such a strange system before...maybe you could help me to disclose the secret behind it. The ACC and PASSword has been sent to you by SMS. Don't be surprised, it always hold 100+ positions.
+
+--- 帖子 #133 ---
+hahahahaha a gay
+
+--- 帖子 #134 ---
+the NFP is against none-USD pairs
+
+--- 帖子 #135 ---
+Hello my friend, I have stupid questions again, pls. help... I get a vertical line, and i want to draw another vertical line 20 bars behind current one.
+
+--- 帖子 #136 ---
+Inserted Code //Look for an object name V1 if(ObjectFind(0,"V1")&gt;=0){ //Check if it is a vertical line if(ObjectGetInteger(0,"V1",OBJPROP_TYPE)==OBJ_VLINE){ //Retrieve the V1 index location int vOneIndex=iBarShift(Symbol(),0,ObjectGet("V1",OBJPROP_TIME1)); //Make V2 index 20 bars before v1 int vTwoIndex=vOneIndex+20; //Create V2 Vertical line ObjectCreate(0,"V2",OBJ_VLINE,0,iTime(Symbol(),0,vTwoIndex),0); //Set V2 color same as V1 color ObjectSet("V2",OBJPROP_COLOR,ObjectGet("V1",OBJPROP_COLOR)); } } Make sure you have a vertical object name V1. Run the script and it will make a vertical line 20 index before V1. If V1 index is at 11. V2 index is at 31.
+
+--- 帖子 #137 ---
+oh, thanks so much buddy! I asked every Chinese programmers on "taobao"(similar to Amazon), the reply is" you gonna pay " or no reply at all. I own you big time, will remember that!
+
+--- 帖子 #138 ---
+They are a cheap fucker. But If you asked too many times, I will be bothered as well . Hopefully from the code you can learn something mate.
+
+--- 帖子 #139 ---
+following NFP Direction
+
+--- 帖子 #140 ---
+sorry to bother you again.... My result was strange: int h1=iBarShift(Symbol(),0,t1); int h3=iBarShift(Symbol(),0,t3); int h5=iBarShift(Symbol(),0,t5); int E6=h5-(h1-h3)/2; ObjectCreate("E6",OBJ_VLINE,0,iTime(Symbol(),0,E6),0); t1 t3 t5 are vertical lines, E6 is a line which is 50% bars count of t1 and t3 after reached t5 sometimes E6 will earlier than t5, sometimes not, this make me so confused... is there any error in logic?
+
+--- 帖子 #141 ---
+Could you show me the screenshot of the issue? Also annotate the position of T1,T2,T3 etc and where do you expect E6 vertical line will be at.
+
+--- 帖子 #142 ---
+E6 should be there and it is not. D5+ (Bar count from X to B)/2 =E6 Both D5 and E6 are time in the future. If it takes your too much time to think, i will use an alternative way to finish it. (For you have already taught me how to count bars between 2 lines, i can use EA to count bars when reach D5)
+
+--- 帖子 #143 ---
+So are you trying to project the vertical line object to the future?
+
+--- 帖子 #144 ---
+Here is the code if you want to project it to the future. In this example it is projected 10Hr to the future. Please note that 1hour = 3600 second. Therefore 10hr = 36000 This code works on a H1 TF. If you want to use it on different TF you have to adjust the addition part. Meaning you have to know the hour and minute difference (delta) between index 0 to E6. Then you add iTime(0,0,0)+(delta(E6) in H1/M1/M5 etc) Inserted Code ObjectCreate(0,"123123213",OBJ_VLINE,0,iTime(0,0,0),0); ObjectSet("123123213",OBJPROP_TIME1,iTime(0,0,0)+36000);
+
+--- 帖子 #145 ---
+In the future, indi can not recognize weekends or holiday. So i think the best way is using EA to count bars after D5 was reached. dont you think so?
+
+--- 帖子 #146 ---
+Yes you are right, or pull the trigger when it has reached the E6.
+
+--- 帖子 #147 ---
+BUY GU
+
+--- 帖子 #148 ---
+ZigCharm latest update COMING SOON I'm sorry for the background noise as my baby daycare was bathing my baby. Inserted Video
+
+--- 帖子 #149 ---
+The seller managed to take lots of pips but the demand/volume is not big enough. There's likelihood the bear will continue selling after the correction of the recent bear rally. I will wait for a high impact news for clarity.
+
+--- 帖子 #150 ---
+Nice work mate like always thank you for your hard work...
+
+--- 帖子 #151 ---
+ok, will reduce TP. i found a interesting MM method from his EA. Let's say : 1 sell EU 2 buy EU multiple 1.5 times 3 BUY UJ multiple 1.5 times 4 Sell UJ multiple 1.5 times ......................................... until total winner &gt; XX pips (Average ATR of all traded pairs), you close all orders. no stop loss required
+
+--- 帖子 #152 ---
+hmmmmmmmmmmmmmmmmmm interesting. Probably we should chat about that or maybe please kindly draw certain scenarios of it.
+
+--- 帖子 #153 ---
+I like to bring back some old memory from my old ZIGZAGCHARM thread. Inserted Video Inserted Video Inserted Video Inserted Video
+
+--- 帖子 #154 ---
+Latest update V8 Inserted Video Attached File(s) zigCharm3xdvl_8.ex4 80 KB | 236 downloads
+
+--- 帖子 #155 ---
+those violent delights have violent ends Those violent EAs have violent ends...lol
+
+--- 帖子 #156 ---
+For loss on GU, i really should listen to you.... Now i know how important it is to follow the NEWs. unlike EU, GU bid rate released which created a stronger down trend. If this happens i should not trade against the news, even if it still in bullish trend.
+
+--- 帖子 #157 ---
+Ini EU notice the big pale red frame broke Its previous frame's FibEx Low. That indicates a breakout below. Usually it follows with a correction. Usually and most of the time the correction has high volume{bright green}. During that time it's a good time to sell just need the news medium to high impact news to trigger the fire (bearish trend continuation).
+
+--- 帖子 #158 ---
+I think you should enable the FibEx feature
+
+--- 帖子 #159 ---
+Hahahahahahaha Those violent EAs have violent ends
+
+--- 帖子 #160 ---
+SELL
+
+--- 帖子 #161 ---
+I'm not going to enter it yet for several reasons in the Daily TF 1. It has not broken the bright green's lower FibEx 2. We could have a bearish head and shoulder pattern this week or next week. So my verdict is: Not Sure 50% continue going down 50% forming a shoulder (side way move) Attached Image (click to enlarge)
+
+--- 帖子 #162 ---
+I recommend to watch this video about Head and Shoulder pattern Inserted Video
+
+--- 帖子 #163 ---
+ZCC is so powerful...
+
+--- 帖子 #164 ---
+I called that gay this morning, he said I got no chance to be his apprentice if i'm not a gay.
+
+--- 帖子 #165 ---
+HAHAHAHAHAHAHA If his EA is far more precious than your A** Hole then you should take it
+
+--- 帖子 #166 ---
+Yes indeed. I just quit my GBP Buy grid with profit this morning local time on the demo account. I'm happy to see you are winning!!!
+
+--- 帖子 #167 ---
+Pay attention to the slope of the Linear Regression Channels It was from steep slope to not so step (gradual) slope. Also pay attention to the size of the frame, it is experiencing some shrinking in momentum/force/whatever. That means there's a change in momentum or slow in momentum in the bearish side. This indicate that the likelihood of a reversal is high. So bears becareful. Bulls please control your ambition, do not let it choke you. (referring to Star Wars) Attached Image (click to enlarge) Inserted Video
+
+--- 帖子 #168 ---
+Yes Yes, that dot SR really helps a lot, from the green box it become flat so i will try to close on the edge of the consolidation. is that the right use of dot SR?
+
+--- 帖子 #169 ---
+I just got wounded but it's ok, small loss doesn't hurt the overall performance. That dot SR is not SR (presuming you're thinking it's a support resistance), it is called FibEx. It is used to identify contraction and expansion. It is also often use to identify breakout.
+
+--- 帖子 #170 ---
+Will become stronger and better.
+
+--- 帖子 #171 ---
+Thanks Actually the loss was on the demo. For the real account, I withdraw 80% of the money because I had a dispute with the broker. Now I have like 20% balance left which I will use it for FG.
+
+--- 帖子 #172 ---
+The piano can't kill the player if it doesn't like the sound of the music Attached Image (click to enlarge)
+
+--- 帖子 #173 ---
+Inserted Video Excuse me for my babysitter funny noise. Attached File(s) zigCharm3xdvl_10.ex4 83 KB | 212 downloads
+
+--- 帖子 #174 ---
+Inserted Video
+
+--- 帖子 #175 ---
+Inserted Video
+
+--- 帖子 #176 ---
+NZDUSD 2017 August 15 Inserted Video
+
+--- 帖子 #177 ---
+USDJPY Inserted Video
+
+--- 帖子 #178 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #179 ---
+Coming up video on Gold
+
+--- 帖子 #180 ---
+US Index Inserted Video
+
+--- 帖子 #181 ---
+GOLD USD Inserted Video
+
+--- 帖子 #182 ---
+that's what filter is for....
+
+--- 帖子 #183 ---
+Hello yousername. Firstly my congrats on creating a very powerful indy.... and sharing it with others, at the risk of sounding daft I just wanted to check I'm reading this right, I'm all for following the trend and your indy is a great visual tool to spot the trend etc... I'm just not 100% sure what the rule are to pulling the trigger. Understand the FibEx is key but notice on the live frame it moves, so I can only assume you use the previous frame as this is fixed? please can you confirm. Thanks once again will keep watching.
+
+--- 帖子 #184 ---
+Yes I use the previous frame. Sometimes the frames messed up and you need to change time frame in order to refresh it. lol i don't why it does this.... But it shouldn't be a problem. Regarding the live FibEx, it does grow on if in the live cube we have a candlestick with higher high or lower low. Then you will see the FibEx expanding accordingly. It is not a problem because it's called live , living frame. And it doesn't refresh (meaning shrink).
+
+--- 帖子 #185 ---
+Sorry bro for the late reply. What filter are you referring to? BTW how is the EA testing so far?
+
+--- 帖子 #186 ---
+If you wants trade major pair currencies (USD related) currencie, you have to pay attention to USDIndex. Unfortunately this video got not much love as the other. I can tell by the view, it has 5 views (400 to 500% smaller than most other videos)
+
+--- 帖子 #187 ---
+The filter is built in my EA, three different indis to open trades... we can see it mq4 file still in testing... SELL &amp; BUY Gold....lol Attachment g what will u do?
+
+--- 帖子 #188 ---
+GBPUSD Inserted Video
+
+--- 帖子 #189 ---
+EURUSD Inserted Video
+
+--- 帖子 #190 ---
+USDJPY Inserted Video
+
+--- 帖子 #191 ---
+USDCAD Inserted Video
+
+--- 帖子 #192 ---
+AUDUSD Inserted Video
+
+--- 帖子 #193 ---
+NZDUSD Inserted Video
+
+--- 帖子 #194 ---
+USD INDEX Inserted Video
+
+--- 帖子 #195 ---
+Hail ZZC!
+
+--- 帖子 #196 ---
+This is the broker killer... it records everything if they dare to sth bad on your ACC., just spread your records and ruin their name.
+
+--- 帖子 #197 ---
+hey jonirrenicus, congrats great move, may I ask what settings you use on ZZC.
+
+--- 帖子 #198 ---
+Thank you yousername, I just happened upon this thread ... really good !!! I will be reading this and your other thread this weekend .. love it !!!
+
+--- 帖子 #199 ---
+I just withdrew all the account with profit. Looking for another broker that can depo fast. With insta it took 24hr to deposit even if I use credit card lol. "Deposit via Kartu Kredit Biaya sistem. Deposit diproses dalam waktu 24 jam ." Credit card, deposit process in 24hr... Fucking crazy.... lol
+
+--- 帖子 #200 ---
+Inserted Video Inserted Video Inserted Video
+
+--- 帖子 #201 ---
+Congratz brother. I like to see green pips although not mine. Keep up the good work! On your trade screenshot I notice a bullish divergence and bullish hidden divergence which is not drawn. You made a good call to place plenty of long positions!
+
+--- 帖子 #202 ---
+you...you real care about waiting for one day long?.....
+
+--- 帖子 #203 ---
+1 Attached Image
+
+--- 帖子 #204 ---
+basically default music score. Awesome!
+
+--- 帖子 #205 ---
+Attached Image is that a good signal?...
+
+--- 帖子 #206 ---
+Last night i needed some cushion for my bullish grid trade to survive which luckly it did survived the FOMC. I wanted to deposit like 50K with a credit card but it takes like 1 day!!! Imagine when i'm at the edge of the cliff and about to fall and need a parachute immediately. Unfortunately it takes at least 24hr to be process. The next day I withdrew all with all the profit and bye bye.
+
+--- 帖子 #207 ---
+We have expanding FibEx but no FibEx breakout yet. Wait for a pull back or let it fall further. When we have a pullback, expect a small frame with high volume. Then there will be a breakout of the pullback's fibex afterward. Attached Image (click to enlarge)
+
+--- 帖子 #208 ---
+oh what is that? Attached Image
+
+--- 帖子 #209 ---
+lol what the hell. I don't experience that issue on my end. Perhaps try use the latest version.
+
+--- 帖子 #210 ---
+has nothing to do with your indi, my computer is out of memory... too many EA running at the same time....
+
+--- 帖子 #211 ---
+pls. help! the icustom() is causing the memory leak... if i turn it off, no problems at all... //SuperTrend UP=iCustom(Symbol(),0,"zigCharm3xdvl_7",0,2,"12,26,9",false,-1,1,false,-1,0,-1,0,-1,false,-1,false,-1,1,-1,false,-1,1,false,-1,0,-1,0,false,1,-1,0,-1,0,false,20,-1,false,-1,1.382,false,11,1); DN=iCustom(Symbol(),0,"zigCharm3xdvl_7",0,2,"12,26,9",false,-1,1,false,-1,0,-1,0,-1,false,-1,false,-1,1,-1,false,-1,1,false,-1,0,-1,0,false,1,-1,0,-1,0,false,20,-1,false,-1,1.382,false,12,1);
+
+--- 帖子 #212 ---
+Probably you should not call the iCustom so often (per tick) because the supertrend doen't update it self per tick. Inserted Code bool NewBar(int period){ static int iTime_0 = 0; if(iTime_0&lt;iTime( Symbol() ,period , 0 )) { iTime_0 = iTime(Symbol(),period,0); return(TRUE); } else{ return ( FALSE ) ; } } Try call it when a new bar has formed, probably every bar of 1 minute call the iCustom Inserted Code if(NewBar(PERIOD_M1)){ //Call i custom and other calculation }
+
+--- 帖子 #213 ---
+Gold Buy=sell, hedging cost interests
+
+--- 帖子 #214 ---
+Hello to everyone. The technique I follow (by applying only ZigCharm tools) is as follows. I only watch daily charts and when I get the signal, I get confirmation first from the weekly chart. (soft MACD) Then I go to a 4 hour chart and enter it from there. Finally I return to the daily chart where I stay until the exit. If I'm lucky and do not hit the stoploss, I'll handle the rest solely from the daily chart. Have a wonderful weekend yousername!
+
+--- 帖子 #215 ---
+Sweetttt You said "when I get the signal" That is interesting.... I wonder what is it. Enjoy your hard work buddy for the weekend.
+
+--- 帖子 #216 ---
+Thank you Elliott wave theory. Difficult to explain, it's not easy at all. The reason for my interest in your thread was the title and your reference to zigzag. In my humble opinion, all of the theory of Elliott is condensed there. In the zigzag formation... So, "when I get the signal" I measure waves, but it really helps me this extraordinary tool called ZigCharm. I hope my explanation helped you.-
+
+--- 帖子 #217 ---
+Yepp that explained a lot. May I know what particular wave do you seek first before pulling the trigger? Thanks for sharing!
+
+--- 帖子 #218 ---
+The B
+
+--- 帖子 #219 ---
+Inserted Video Bookmark and watch later
+
+--- 帖子 #220 ---
+only trade H1/H4, result is quite goooooood soooooo farrrrrrr....
+
+--- 帖子 #221 ---
+are the trades made by the EA or manually input?
+
+--- 帖子 #222 ---
+New ZigCharm version 11 with The EYE feature on or Supply and demand area. In the screenshot it is colored in dark gray. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #223 ---
+time to upgrade now
+
+--- 帖子 #224 ---
+It's a semi auto EA....require little manual input. I also found a serious problem which is neither your indi nor my EA....but it is a big problem need to be fixed. If i use icustom() to call your indi, the EA becomes extremely slow in backtesting and it will lead to MT4 crash. The more EAs i use, the higher the Chance of crash i get. So could you pls. do me a favor my friend? pls. Add a bool function (true=show lines, false=hide lines), that can draw 2 horizontal lines for Supertrend(UP and DN) on the chart. If the EA can get the value from the chart, it will never have out of memory or Crash problems.
+
+--- 帖子 #225 ---
+ZigCharm backtest with FG Inserted Video In the latest version below, it has BACKTEST mode which will update per tick. If you set to false, it will be updated per minute bar. Attached File(s) zigCharm3xdvl_11.ex4 88 KB | 274 downloads
+
+--- 帖子 #226 ---
+just remember ZZC is your best friend
+
+--- 帖子 #227 ---
+when the ST changed from bearish to bullish, the trades got close ya?
+
+--- 帖子 #228 ---
+Hi jonirrenicus. Thanks for sharing you ZZC settings in a previous post, I've been looking at your USDCAD chart trying to work out what you entry and exit strategy is using ZZC, please could you satisfy my curiosity and help me understand I can't see it.... what triggered the entry and like wise, why did you exit, Thanks in advance for you help.
+
+--- 帖子 #229 ---
+ZigCharm 11 bug fix 1. Supertrend color now must be change from there Attached Image Attached File(s) zigCharm3xdvl_11.ex4 89 KB | 363 downloads
+
+--- 帖子 #230 ---
+LIKE DISLIKE trading pattern (&lt;=H1 time frame) Inserted Video
+
+--- 帖子 #231 ---
+Bullish Dislike trading pattern using MACD Hard USDJPY M5 Attached Image (click to enlarge) Look for a long opportunity
+
+--- 帖子 #232 ---
+History Daily USDJPY Bearish LIKE pattern on Macd SOFT Attached Image (click to enlarge)
+
+--- 帖子 #233 ---
+GBPUSD H4, MACD Soft Bear Like and Bull disLike Patterns Attached Image (click to enlarge)
+
+--- 帖子 #234 ---
+Bull Dislike pattern Attached Image (click to enlarge)
+
+--- 帖子 #235 ---
+USDCHF H1 TF Macd SOFT LIKE bearish pattern Attached Image (click to enlarge)
+
+--- 帖子 #236 ---
+Forward testing the USDJPY signal Attached Image (click to enlarge)
+
+--- 帖子 #237 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #238 ---
+GBPUSD, M5, Bullish DISLIKE pattern. Attached Image (click to enlarge)
+
+--- 帖子 #239 ---
+Potential BULL DISLIKE Pattern in the M15. I think to avoid any confusion, I should call this BEAR DISLIKE because they hate the BULL is Winning Attached Image (click to enlarge)
+
+--- 帖子 #240 ---
+This is my like dislike template. FYI I use medium and soft MACD If you want to download the latest ZigCharm version, download from here https://www.forexfactory.com/showthr...2#post10221102 Attached File(s) likedislike1.tpl 2.0 MB | 329 downloads
+
+--- 帖子 #241 ---
+Inserted Video
+
+--- 帖子 #242 ---
+alright, after the late night movie, finally i'm updated with all your youtube video made by u for Zipcharm. Will give it a try
+
+--- 帖子 #243 ---
+Should i set the Draw live cube bias as true? But Live cube will not show Dark Grey cube for high supply and demand right?
+
+--- 帖子 #244 ---
+I will make a video response about this sometime today.
+
+--- 帖子 #245 ---
+I don't set the draw live cube bias for Thumbs up/Thumbs down pattern thing. Furthermorer I set the FibEx parameter to 1 instead 1.382. That mean the fibex is the high and low of the frame. Therefore the gray cube appears when the frame able to close lower/higher than the previous frame's high/low.
+
+--- 帖子 #246 ---
+The title should be ZigCharm (ZC) Supply and Demand instead FG. Typo, sorry Inserted Video
+
+--- 帖子 #247 ---
+Zigcharm LIVE SUPPLY and DEMAND feature Inserted Video
+
+--- 帖子 #248 ---
+Cleaner video Inserted Video
+
+--- 帖子 #249 ---
+This indicator isn't showing on my chart. Pls help
+
+--- 帖子 #250 ---
+Could you show me your indi setting and your chart. Hard to believe it's not showing on the chart. Thanks
+
+--- 帖子 #251 ---
+If I have &gt;150 FF subscribers/buddies, I will release the new version and bug free. So please subscribe!
+
+--- 帖子 #252 ---
+Inserted Video
+
+--- 帖子 #253 ---
+Market sentiment in H1 Timeframe display at the bottom centre of the chart Inserted Video
+
+--- 帖子 #254 ---
+Great indi, thanks! I'm back and this is the screen shot of Game of Thrones： season 8 I don't like Happy ending, do u?...lol
+
+--- 帖子 #255 ---
+NZDUSD Sentiment Monthly: 76% Bullish Attached Image (click to enlarge) Weekly: 82.62% Bullish Attached Image (click to enlarge) Daily: 58.33% Bearish Attached Image (click to enlarge) 4 Hour: 66.67% Bullish Attached Image (click to enlarge) 1 Hour: 71.11% Bullish Attached Image (click to enlarge) Overall: Bullish
+
+--- 帖子 #256 ---
+FIBEX BUY in Obvious Bullish trend
+
+--- 帖子 #257 ---
+FIBEX BUY again
+
+--- 帖子 #258 ---
+Which Fibex are you referring to? Top or Bottom fibex?
+
+--- 帖子 #259 ---
+Beauty of zigcharm on GBPJPY. Bearish divergence. Done
+
+--- 帖子 #260 ---
+buy = up fibex
+
+--- 帖子 #261 ---
+First live micro account trading using Zigcharm indi , +51pips.
+
+--- 帖子 #262 ---
+what is Warren Buffett always saying? Attached Image Attached Image (click to enlarge)
+
+--- 帖子 #263 ---
+What's Fibex? Is it a aphrodisiac? lol
+
+--- 帖子 #264 ---
+Praise the Lord!
+
+--- 帖子 #265 ---
+lol it is... FIBEX= First International Biomass Experiment
+
+--- 帖子 #266 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #267 ---
+Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #268 ---
+USDCAD will be very interesting.
+
+--- 帖子 #269 ---
+The correction is OVERSOLD already. Looking for a buy setup during the London session Attached Image (click to enlarge)
+
+--- 帖子 #270 ---
+Really interesting....UC jumped down without wiping out SL. why it is so kind? Attached Image (click to enlarge) Without NEWS release, AU was Disappointing. Attached Image (click to enlarge)
+
+--- 帖子 #271 ---
+Yes indeed AUDUSD was disappointing. Better wait and see for AUD GBP news release tomorrow
+
+--- 帖子 #272 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #273 ---
+Yesterday I had my downfall, Thanks God for ZZC, now I am a winner as usual Fell 20% and got up 30%
+
+--- 帖子 #274 ---
+Hello, Great Friend !!
+
+--- 帖子 #275 ---
+As I have earned the 1% status in FF, thanks to you guys for your support. Sometime tomorrow I will release the latest version for FG and ZC.
+
+--- 帖子 #276 ---
+Fibex buy(KC)
+
+--- 帖子 #277 ---
+Hi bro. How are you Were de can find that EA. Look pretty good. You are doing a nice job
+
+--- 帖子 #278 ---
+in
+
+--- 帖子 #279 ---
+Look for long if the news result today is beyond the expectation. Stay in the sideway if the news result today is as expected, mixed result. Get ready to short if the news result today is lower than expected The FIBEXes are contracting and waiting for a breakout. The recent bullish frame has a descending volume as ploted in the volume indicator in the screenshot. Me my self, I just closed my EURUSD long position and staying on the side line. Attached Image (click to enlarge)
+
+--- 帖子 #280 ---
+????????
+
+--- 帖子 #239 ---
+Closed due to signal reversed ...and no more trade due to Monday Gap.
+
+--- 帖子 #240 ---
+Rules for Entry: 1 Box Break FIBEX APB Close Candle must break previous or pevious+1 FIBEX Starting point near 200ma, trade @lv1 Attached Image Starting point far from 200ma,trade @lv2 Attached Image Starting point near 200ma,trade @lv1 Attached Image (click to enlarge) 2 FIBEX ambush after Strong move exclude very small boxes Attached Image (click to enlarge) 3 Second Chance market move sideway under obvious signals, trade again near last support Attached Image To be continue...
+
+--- 帖子 #241 ---
+From the performance this is a bad system. Pls everyone trade PA.
+
+--- 帖子 #242 ---
+This indi is to support the Price Action Analysis. It doesn't tell you what to do, it gives you insight about the market movement, market structure. Also you don't have to strained your eyes to look for little things i.e. divergence/convergence. The buy/sell signal is determined by the trader's experience and skill not zigcharm.
+
+--- 帖子 #243 ---
+Will this hindsight analysis help any trader? Please use demo account and do Before the Fact trading and in 4-5 months you will become a good trader yourself.
+
+--- 帖子 #244 ---
+How to get this indicator? How is the setting to get the clean view of SND level?
+
+--- 帖子 #245 ---
+Change the color of all things beside SND, to NONE
+
+--- 帖子 #246 ---
+I've tried but the result is negative. Or I'm doing the wrong this? The indicator is zigCharm3xdvl_11 right? The settings as per below?
+
+--- 帖子 #247 ---
+Use this one
+
+--- 帖子 #248 ---
+A BIG THANKS SIR!
+
+--- 帖子 #249 ---
+zzc V14 is a real pip hunter
+
+--- 帖子 #250 ---
+new signals
+
+--- 帖子 #251 ---
+Trade cancelled Attached Image Trade Exit
+
+--- 帖子 #252 ---
+ZZC &amp; NEWS Trading strategy(only for very high impact NEWS) Set SL at current strong S/R. Set TP at next fibo level. correct exp. Attached Image wrong exp.
+
+--- 帖子 #253 ---
+fibex buy
+
+--- 帖子 #254 ---
+normal SELL trade done
+
+--- 帖子 #255 ---
+normal buy Attached Image fibex buy...lol
+
+
+===== 附件下载链接 =====
+
+GBPUSD study.tpl: https://www.forexfactory.com/attachment/file/2367215?d=1498198420
+likedislike1.tpl: https://www.forexfactory.com/attachment/file/2453018?d=1503566871
+stochastic.tpl: https://www.forexfactory.com/attachment/file/2361860?d=1497938710
+zigCharm3xdvl_10.ex4: https://www.forexfactory.com/attachment/file/2439835?d=1502767130
+zigCharm3xdvl_11.ex4: https://www.forexfactory.com/attachment/file/2448149?d=1503296412
+zigCharm3xdvl_11.ex4: https://www.forexfactory.com/attachment/file/2452723?d=1503551218
+zigCharm3xdvl_8.ex4: https://www.forexfactory.com/attachment/file/2430350?d=1502186760

@@ -1,0 +1,921 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+OK, full props to Mladen and Mrtools for their constant effort to offer intelligent and interesting MTF non re-painting indicators. This system uses two indicators, taken from Forex Station (for free...incredible). The rules are, we wait for a dot to appear, from the Frama Ribbon indicator and take the trade in the appropriate direction then we close the trade when the first opposite coloured candle appears from the xSuperTrend candles indicator. Or an opposite dot appears. We can re-enter if the original colour candle returns and an opposite dot has not appeared. Seriously...that is it!!! Here are the set files for the indicators; Attachment g Attached Image Attached Image Here are a few charts with results; Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Here are the indicators; Attached File(s) frama ribbon 1.1 (arrows).ex4 40 KB | 6,179 downloads Attached File(s) xSuperTrend - candles (mtf).ex4 21 KB | 4,524 downloads | Uploaded Oct 10, 2019 6:16am Finally here is the template; Attached File(s) frama ribbon colored.tpl 2 KB | 4,101 downloads Attached Image The Frama Ribbon just needs to change the TF to 1 higher than the chart you place it on. Chris
+
+--- 帖子 #2 ---
+What is needed now is for me...someone to figure out good parameters for a lower TF. As you can see I am using daily charts (in the above examples) with the indicators set to weekly TF. Also an EA will be welcome. Here is a closer look at some of the trades from the above chart examples. Attached Image (click to enlarge) Chris
+
+--- 帖子 #3 ---
+Look promising. Will try it soon
+
+--- 帖子 #4 ---
+Chris, do you still enter if the new dot and the candle colour don’t correspond?
+
+--- 帖子 #5 ---
+I forgot to mention, in first post (now added), we will close a trade on opposite dot also. Here is a quick look at XAUUSD 30 min chart with indicators set to 4 hour TF from Sept, 1 2019. Set files and three charts are shown. There are 3 charts to show all the trades (I did not do a pips amount, but there are only 5 losses). Chris Attached Image Attached Image Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #6 ---
+YES I tried it with only if colour matches but missed some large wins and did not hurt the losses. I will also enter if dot candle is on wrong side of the frama line, again for above reasons.
+
+--- 帖子 #7 ---
+trying to understand entry rules
+
+--- 帖子 #8 ---
+Chris, how do you deal with the recalculation of FRAMA and candles which are set to weekly, but you are trading on the daily TF? There is a potential for dot or candle signals to occur when viewed daily that will not be there at the end of the week, when the FRAMA/candle colours calculations are finalized. Of course that will not show up in any visual backtest
+
+--- 帖子 #9 ---
+Congrats Chris on the new thread, Subscribed-Will be following keenly...
+
+--- 帖子 #10 ---
+Very effective in daily and 4H but it is not for small timeframe. Nice strategy .
+
+--- 帖子 #11 ---
+Hi cfudge, Sorry for maybe a dumb question, but did you try to count the pips using only xSuperTrend ? ... It seems to me that you would made more pips like this, but maybe I'm wrong on this ...
+
+--- 帖子 #12 ---
+Thank you cfugde, You mean take two charts same pair, one for indicators set up(4h) and another one (30m) is for trade set up?
+
+--- 帖子 #13 ---
+Hi, does these indicator repaint ?
+
+--- 帖子 #14 ---
+Technically, they don’t repaint. However, when you do multi-time frame analysis the indicators will ‘recalculate’. In this case the Frama ribbon and the SuperTrend candles are weekly indicators, and Chris is trading on the daily timeframe. So the indicators are ‘calculating’ each day, but their values only become final at the end of each week. So for example, a dot may appear on the Frama ribbon any day during the week and not be there at the end of the week. Nothing wrong with it, because that is how the indicators work in MTF analysis. However, doing a visual back test on MTF analysis always looks better than what it really is when trading forward on a day by day basis.
+
+--- 帖子 #15 ---
+Thank you cfudge, mladen &amp; mrtools, Really interesting strategy simple and effective. Try this configuration on M5 any pair.
+
+--- 帖子 #16 ---
+This seems ripe for an EA build. I wonder if someone will take it on, I know I would if I had any coding skills at all!
+
+--- 帖子 #17 ---
+DKRock, this is only true if you trade lower timeframes, in which case you will be glued to your screen with whatever you use. By using Weekly indicators to trade a daily TF you only need to look at your charts at the end of the trading day. There is also an alert function for the FRAMA ribbon dot so that can also be used. So, not really agreeing with your point on this post.
+
+--- 帖子 #18 ---
+Dkrock, Thank you for the candid answer. Considering the number of times, you have edited your posts,deleted, reposted, edited and deleted again,please don't take it personally if we take your thoughts with a pinch of salt. I have deleted my original post to prevent any digression from the main topic... Thanks
+
+--- 帖子 #19 ---
+@feex i'm waiting for you to create ea for this strategy Dont just read LOL
+
+--- 帖子 #20 ---
+Like already being said here, do not backtest that strategy with your eyes on chart. In reality the final signal appears at the end of upper (W1) timeframe, because you use MTF function. That means 5 candles later on current (D1) TF. And the real backtest result will be much much worse. And if I am wrong - man, please forgive me, you have found Holy Grail.
+
+--- 帖子 #21 ---
+I have put a weekly line separator indi on the daily chart and it seems like the entries won't be affected by re-calculations. Let me know if I still have it wrong. Now I need to see about the candle colour change. Stay tuned...if you like. I want to apologize for posting this strat without thinking it through and disregarding the fact that the indis would need to complete there respective TF. In my defense...I was very excited with what I was seeing and I couldn't wait to tell the other humans. LOL Chris Attached Image (click to enlarge)
+
+--- 帖子 #22 ---
+OK... Here are 2 GBPJPY daily charts. The one on the right is the chart I posted in the first post, which has both indicators set to the weekly TF. I have figured out that the weekly frama ribbon dots are fine being received from weekly TF. (See above quote). The chart on the left has the xSuperTrend indicator set to the daily chart TF...as you can see, with a few tweaks, it almost exactly matches the weekly TF signals (without the re-calculation). Again, if I have lost the plot...please point it out. Chris Attached Image (click to enlarge) Attached Image To be honest...I don't have a problem trading both off of the original weekly feeds because it will not affect the profit/loss that severely. Remember the 1-5 candles during the week will change colour as the weekly candle oscillates. If at some point during the week you get a colour to close your trade just close it. This gets a little trickier for re-entries but still not that big a deal.
+
+--- 帖子 #23 ---
+best way to find if is profitable or not,.is , start trading
+
+--- 帖子 #24 ---
+AMEN
+
+--- 帖子 #25 ---
+Fresh signals, I will follow on Demo, just curious) Higher TF D1, current TF 4H. Settings from post 1. Added: fresh sell dot appeared on EURGBP, I will close buy trade if this signal will remain upon 4H candle closure.
+
+--- 帖子 #26 ---
+Hi northwind, Do you have also the settings for xSuperTrend ?
+
+--- 帖子 #27 ---
+Hi forexcentric, Here you go.
+
+--- 帖子 #28 ---
+can anyone add an push alert to mtf candles indi for color change?
+
+--- 帖子 #29 ---
+Here is the two images of AUDNZD with weekly xsupertrend on the right (like post 1) and daily xsupertrend on the left. Surprisingly, it is the same settings as I had on GBPJPY. So hopefully all pairs will need the same settings. Chris Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #30 ---
+Here is XAUUSD tiny difference in the multiplier parameter than the other two. Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #31 ---
+I am satisfied with the three charts now. We need an EA set up for testing these three pairs, if anyone has the time. Chris
+
+--- 帖子 #32 ---
+can not use xsuper trend candle. any idea? (initialized)
+
+--- 帖子 #33 ---
+Do you mean you can't receive a signal from the indicator to use in the EA?
+
+--- 帖子 #34 ---
+I have figured out the parameters for the 4 hour charts using daily signals but mirroring the xsupertrend with 4hr settings. Still have AUDNZD to do ...will post when done Bed time now
+
+--- 帖子 #35 ---
+19-20 trades is very small sample in my opinion. its not that hard to curve fit parameters to make the strategy to appear profitable.
+
+--- 帖子 #36 ---
+what you are overlooking is the fact that those 19 trades encompass almost 5 years of market coverage, which highlights the robustness of the indicators to survive market conditions. How many times have you read, on this forum, how strategies will work now but when the market changes it stops working...well...how's 5 years? How many times have you read...this market is fractal...think about it...just saying.
+
+--- 帖子 #37 ---
+There are two mistakes: 1. You don't under estimate the market. There's no simple or easy trading method. 2. You don't expose your edge. This is zero sum game and market will quickly neutralize your edge.
+
+--- 帖子 #38 ---
+I don't think you can talk about robustness based on the fact that you have been using 5 years of data with 19 trades. What you are doing in this thread is similar to this: over past 5 years, whilst having breakfast, there were 19 instances of me seeing 4 green Toyota cars driving one after another in front of my house. it started raining within one hour in 15 cases out of 19 when I saw those green Toyota's. So now I am expecting it to rain every time I see 4 green Toyota's. But you know what, I want to know more frequently when it's going to rain. Maybe I should see how often it rains when I see 4 green cars of any make, right?!
+
+--- 帖子 #39 ---
+you show indicator on weekly signal but you want enter /exit trade on daily signal? see again pictures what i say regard your system have not EDG {long term quality} but thanks again
+
+--- 帖子 #40 ---
+As per the Toyota example, as long as you make money/come out nett positive in the end, i don't see why not. The key time frame here is Daily, 19 trades over a 5 year period considering the holding time is not bad. Chris is using it as the baseline and trying to figuring parameters for the lower time frames. Also, who gets to say what is the ideal sample size is, 100, why not 110 or 200? My feeling is every trader/almost every trader operates on hearsay vis a vis what moves the market. if really what moved the market was that abundantly clear, there would have been a greater consensus among the traders and wouldn't have spanned these many methodologies: From reading tea leaves, Fibonacci, moving averages, order flow etc... etc.... Based on your history, it looks like you used moving averages, the same argument used by you does apply to your thought process. I am all for criticism with the caveat it being "constructive", if you think the person is wrong- first and foremost please make sure you are qualified- show an alternative approach. The general theme is negative, "Hey what you are doing is wrong man...Let me get back to doing what i do which hasn't worked for me in decades"....shhhh
+
+--- 帖子 #41 ---
+Can not attach indicator to chart
+
+--- 帖子 #42 ---
+Hello! Very interesting, we are waiting !!
+
+--- 帖子 #43 ---
+Subscribed
+
+--- 帖子 #44 ---
+ok, my last thread on this thread - just to say what needs to be said... "As per the Toyota example, as long as you make money/come out nett positive in the end, i don't see why not." Because you don't want to flip the coin - equally you wouldn't want to flip coin 19 times. you are more likely to get 15 heads in a row (around 80% of the time) then it is to get 80 heads in a row if you flipped the coin 100 times. Wouldn't you agree? "Also, who gets to say what is the ideal sample size is, 100, why not 110 or 200?" Ehhhhmmm, it's called statistics... Honestly, opinions like yours are dangerous and are encouraging inexperienced traders to start trading real account after making couple of trades on demo. "Based on your history, it looks like you used moving averages, the same argument used by you does apply to your thought process." Moving averages can give you directional bias. Nothing more. I never traded their crossovers as such and would certainly not traded them on their own. I am all for criticism with the caveat it being "constructive", if you think the person is wrong- first and foremost please make sure you are qualified- show an alternative approach. The general theme is negative, "Hey what you are doing is wrong man...Let me get back to doing what i do which hasn't worked for me in decades"....shhhh You dont seem to be "all for criticism" and seems like you just want to be spoon fed. Not sure what you meant by qualified but doesn't matter. Also, you have no clue how successfully or not successfully i am trading and again, doesn't matter. I see you are from India where people drive on the left side of the road. If you told someone coming from Germany to India not to drive on the right-hand side of the road because you drive on the left, wouldn't that be constructive? I am afraid I am unable to provide what you deem as a "constructive" feedback on a system which tells you to buy or sell when a dot appears. And presenting other methods would be hijacking this thread... So in my view constructive part of saying "sample is small" is "YOUR SAMPLE SIZE NEEDS TO BE BIGGER" if you want more objective picture. wrote it in capitals since you have difficulties to read between the lines. With all that being said, I didn't say system isn't working. All the best
+
+--- 帖子 #45 ---
+Not exactly... What actually happened was that in 5 years I saw 4 Toyota trucks, in a row, 19 times. On 14 of those mornings it rained afterwards. Inter-spaced, randomly, were 5 mornings where it did not rain...my expectation is some mornings I will not see rain but mostly I can expect rain. Another factor is that all the mornings were consecutive, meaning that I had breakfast every time there were to be 4 Toyota trucks in a row.
+
+--- 帖子 #46 ---
+I do not have an answer for you, sorry
+
+--- 帖子 #47 ---
+Here is what I have figured out for the 4 hour chart with Frama Ribbon set to daily signals and xSuperTrend set to 4 hour signals but mirroring daily chart. The charts on the left are the adjusted ones, they are mirroring the ones on the right. I am going to set this up for trading this coming week (4 hour set up). It would be nice to have an EA...just saying. Chris Attached Image (click to enlarge) Attached Image Attached Image (click to enlarge) Attached Image Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #48 ---
+Well, my whole point is that with your sample being so small, it is quite possible that it started raining not because of Toyota's which were just coincidental but because of 3 blue Cadillacs that drove by at the same time and you haven't even thought of considering
+
+--- 帖子 #49 ---
+Tonny, it's true that i am yet to be a successful trader and my profile also states so. Yes, a bigger sample size is always better in any statistical analysis, but in this case it comes at a trade off- the freshness of data[in the context of trading a higher tf]. Does going back even further, say from year 2001 to present a better indication of robustness? The answer is we don't know- market has seen transformation with respect to volatility over the years. To his credit, Chris is a good system designer- in the not so recent past, we tested his system and i am sure he knows what he is doing and 5 years was a good balance between freshness of the data and duration of testing period. We need to keep in mind, this is just the starting reference point. I kinda felt your post was condescending and it seems you could have put your point across in a different way. Thanks
+
+--- 帖子 #50 ---
+Here are the respective .tpl files for the daily and 4 hour charts for AUDNZD GBPJPY and XAUUSD Attached File(s) frama ribbon audnzd daily.tpl 2 KB | 456 downloads Attached File(s) frama ribbon audnzd 4 hour.tpl 2 KB | 469 downloads Attached File(s) frama ribbon gbpjpy daily.tpl 2 KB | 438 downloads Attached File(s) frama ribbon gbpjpy 4 hour.tpl 2 KB | 523 downloads Attached File(s) frama ribbon xauusd daily.tpl 2 KB | 455 downloads Attached File(s) frama ribbon xauusd 4hour.tpl 2 KB | 546 downloads
+
+--- 帖子 #51 ---
+This is for DrDave... The numbers in highlighted boxes are showing your suggestion. Looks like, while no losses, very few trades. May be better if we can figure out a lower TF setting. Chris Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+Great Going Chris...
+
+--- 帖子 #53 ---
+does it repaint ?? whats the pairs to trade...
+
+--- 帖子 #54 ---
+As I mentioned to you, this was for consideration on smaller timeframes. On the D1, I see that this netted a mere 25% of what was made the standard way. Even though the price structure is fractal in nature, I suspect (no hard evidence to support this) that the few large winners with several smaller losers does not scale with the fractal scale. I suspect that as the timeframe gets smaller, the relative size of the big winners diminishes and the number of small losses increases, so that the pips win:loss of about 12:1 will drop significantly. Taking only continuation trades may scale the win:loss better as the timeframe gets smaller.
+
+--- 帖子 #55 ---
+Yes. Exactly, that was what I was hinting at. The lower TFs may benefit from your suggestion, a much lower trade frequency but a better win rate. I will have a look at 15min with 1hr signals. BRB
+
+--- 帖子 #56 ---
+DrDave Here are the results from the 15min GBPJPY with 1 hour signals. ( chart shown is 30 min so it could all fit). The top numbers are trades as in post 1 rules. The results and trade amounts with boxes are DrDave suggestion trades. Make of it what you will. I conclude that I would stick to rules on first page...and would not wish to pursue this any longer, as it will confuse the thread, but thanks for the input. What is encouraging is the fact that this can translate to the lower TFs without a drop in the win rate but with way more pips in a shorter amount of time. I am very happy with the way this thread is turning out and look forward to next week when I start trading the daily TFs. We would need an EA to trade the lower TFs because of the obvious time constraints. Chris Attached Image (click to enlarge)
+
+--- 帖子 #57 ---
+hi i just want to help this thread i will gave you Screen shot as you can see, the candle is repaint for 1 day (because it set to 1 day) so you will follow the arrow all day, and look for the result the next morning also the D indicator is repaint too
+
+--- 帖子 #58 ---
+Hey cfudge ! The Frama Ribbon is set to daily, meaning that the frama dot will appear 6 candles back (on a h4 chart), when the daily candle closes. So an EA must look back with shift 5, yes? Or am i missing something ? Regards
+
+--- 帖子 #59 ---
+I deleted the text and image from this posting. Go to post #62 for an update.
+
+--- 帖子 #60 ---
+Chris, Did you happen to evaluate exiting the D1 trade when the W1 closes a bar in the opposite direction rather than waiting for a color change of either D1 bar or dot? That is, if you went long on D1 because a blue dot was displayed, the next 2 W1 bars close as an up bar, then the 3rd W1 bar closes as a down bar, so immediately exit. I only looked at the examples that were posted on the thread, but it looks to me like you will exit with more of the unrealized pips in tact than if waiting for the color change of either the D1 bar or dot.
+
+--- 帖子 #61 ---
+Thanks DrDave for the explanation. So, to clarify....when the first D1 bar opens, in the second red/blue rectangles you have drawn, the dot is already there? it is NOT the second red/blue rectangle that draws the dot ?
+
+--- 帖子 #62 ---
+I loaded the frama dots indicator on H1 and set it for H4. I looked very closely at both H1 and H4 charts for how the lines and dots are drawn. The logic for placing the dot was not what I was expecting, so I made a close study of how it is drawn. From what I can see, the dot drawn on H1 is the BEGINNING of a new H4 bar. Therefore, the dot is signaling something occurred at the close of the last H4 bar (which corresponds to the close of the preceding H1 bar as well). This "something" appears to be the crossing of the frama lines. So this dot on H1 is displaying a confirmation that the just closed H4 bar had the lines cross and is the signal for immediate entry. (Typically, I see signal bars coded to have the indicator drawn on the closed signal bar rather than on the open of the following entry bar.)
+
+--- 帖子 #63 ---
+Hey again Dave Yes, i did a fast check aswell and saw the same thing. The close of the candle on the higher timeframe generates the dot
+
+--- 帖子 #64 ---
+Yes. And for this system, the dot is the TRIGGER to enter. On most systems, the dot would have been placed over the closed candle on the higher timeframe rather than above the new candle that is forming.
+
+--- 帖子 #65 ---
+Edge? There is no such thing.... you are not competing against other traders, or the market.. you are trading in agreement with the market. All this "you need to find an edge malarky" sends people down the rabbit hole. All you need is discipline, consistency and patience (on-top of your trading system).. you can call those 'edge' if you want, but they're not. anyway, good thread, i'm following and will test this out.
+
+--- 帖子 #66 ---
+Nice observation DrDave, jimsxxl This is great news...the earlier the signal the better, of course. I wonder if the namesakes for this thread could shed some light on this... I would like to know how you observed this, when markets are closed. Was it with the tester? Chris @DrDave I don't have a great deal of time this week to run a test like you suggested (post 60)...with the weekly close, do you have any preliminary results?
+
+--- 帖子 #67 ---
+Sorry, but no. Maybe I will be able to make a check on H4/H1 pair.
+
+--- 帖子 #68 ---
+I asked Mrtools about the printing of the Frama Ribbon dots, in MTF mode. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #69 ---
+Here is a chart with red dotted lines showing where the dots were with "Arrow on first MTF bar" set to true. The dots, as you see them now, are with it set to false. Attached Image (click to enlarge) With candles... Attached Image (click to enlarge)
+
+--- 帖子 #70 ---
+Nice observation. No signals for exit however, but you could factor in S/R for your SL or TP possibly. Look forward to your continued observations and development.
+
+--- 帖子 #71 ---
+Exit criteria is in post #1
+
+--- 帖子 #72 ---
+Here are the 6 charts setup for trading. 3 daily charts (on top) 3 4hour charts (on bottom) Two trades entered at opening. GL daily short AN 4hr long Already the dot on GJ has disappeared. I am going to trade this on every dot, so if at the close of the last daily/weekly candle we see a dot I will trade it. Let's see where we get. Chris Attached Image (click to enlarge) PS; The templates do not seem to work for me, not sure why??? If you +/- candle size the xSuperTrend does not show the candle colour properly, You have to turn "Auto adjust candle body" to false, close the set file window, re-open it and set it back to true to fix it.
+
+--- 帖子 #73 ---
+Yes Chris- The templates for some reason are not working...
+
+--- 帖子 #74 ---
+If you want the setfiles for the 3 daily charts go to posts 22 29 30 If you want the setfiles for the 3 4hr charts go to post 47 These are all for the xsupertrend indicator The frama ribbon set files are all the same as post 1
+
+--- 帖子 #75 ---
+when I combine this indicator with my strategy ;results are very promising...but for testing purpose I need push alert for color changing (mtf candles indi)..
+
+--- 帖子 #76 ---
+Thank You Chris...
+
+--- 帖子 #77 ---
+Chris, Could you help me understand this: For the 4HR charts, for the Frama Ribbon-"Time Frame To Use"-Do we use the Weekly Setting or do we use Daily Setting, because post#1 has settings for weekly and post#47 mentioned daily. Thanks
+
+--- 帖子 #78 ---
+Sorry guys...aaven is right, the Frama Ribbon is the same as post 1 set file but you need to have the TF 1 higher than the chart you place it on.
+
+--- 帖子 #79 ---
+XAUUSD dot just presented itself. The three red lines are the trades. Chris Attached Image (click to enlarge)
+
+--- 帖子 #80 ---
+I am very interested in seeing how the GBPJPY sell turns out, because my bias is for longs. D1 is already overdue to go up.
+
+--- 帖子 #81 ---
+Could be right... Looking at the 4hr and daily there might be a chance of a head and shoulders and a re-test of mid 130s.
+
+--- 帖子 #82 ---
+Hey, I have a long experience with indis from Mladen and MrTools, they are above and beyond anything you can get for mt4 (and mt5) and are all for free. That said .. I tested many many indicators from forex-station and from my experience, it's not good to test them on high TF, because the trade sample is just too small. Test it on lower tf, even 1m to see the failed trades faster. Optimizing a system from lower to higher tf is easier than vice versa. Also I think there are other interesting hidden gems on forex-station, like step indicators or the super-smoothed average (experiment by Mladen). They often come with mtf/nrp/alerts and different visualizations (lines, candles, dots).
+
+--- 帖子 #83 ---
+Monday is a trapping day and month end as well. GBp is not very reliable these days,be careful with buys,it will be buy eventually but we don't know when.monthly time frame is forming double bottom,i will enter buy when there is a good setup. gbp pairs are last on earth to be taken,if u don't have any setups on crosses.
+
+--- 帖子 #84 ---
+That is a key observation. That is why using LAGGING indicators works so well; you let the market TELL you where it is going, so you just FOLLOW after it without trying to guess (via things like "it's overbought now so I'll sell here", or "it's a double top, so it must fall now so I'll sell here") what will happen. GBPJPY has already told me that D1 is overdue to go up. Did I buy? No, because there is no confirmation yet that it is going up.
+
+--- 帖子 #85 ---
+I have also found that the template and set files don't work. If someone could post set files and corrected template files, especially for 1H and 4H on XAUUSD (though the same for other pairs would be great as well) that would be really appreciated.
+
+--- 帖子 #86 ---
+Post 1 At the bottom of post 1
+
+--- 帖子 #87 ---
+I am liking EMAVS Channels, I am looking to build a strategy just using this one indicator I also really like Reverse ema 2
+
+--- 帖子 #88 ---
+I want to let everyone know that northwind has set in motion with Joeef to write an EA for us. It should be posted here when completed. Chris
+
+--- 帖子 #89 ---
+Hi I had already seen and copied the settings from post 47 for the Super Candles indi but wasn't sure of the correct settings for the frama ribbon indo (hence my question). Or is that just always as shown at the start of post one regardless of pair or timeframe? Thanks David ADDED: Sorry. I have just read post one again. I completely missed the bit about only the Super Candles indi needing the settings changing, and that the Frama Ribbon always stays the same (apart from being set on timeframe forward from the one you are trading). I've been assuming there are some settings for that which I am missing!
+
+--- 帖子 #90 ---
+Thanks Chris, You deserve some help since you're doing the heavy lifting on this thread. Either your birthday or Christmas may come early this year. John
+
+--- 帖子 #91 ---
+HAHA maybe it will be early thanks giving...LOL
+
+--- 帖子 #92 ---
+Here is a tutorial (for those who need it) on how I am figuring out the xSuperTrend settings for various TFs. First- figure out the two TFs you wish to use. Second- open two charts with the lower TF. Third- put the Frama Ribbon on both charts with the settings from post 1 and change the TF (on the frama ribbon settings) to the higher TF you are using. Fourth- put xSupertrend on both charts with the settings from post 1, on one of the charts set to your desired higher TF and on the other chart set it to the current TF. Fifth- on the chart with the xsupertrend set to current TF change the settings until you get it to match the higher TF chart. Hope that is helpful. Chris
+
+--- 帖子 #93 ---
+Dear CFUDGE, I am trying to reach you with google translate but some thing missing to reach you. I want use 4H and 30m TF, can you please post settings for these two charts again please. hope understand my problem. Thank you.
+
+--- 帖子 #94 ---
+Post number 5 But you will have to change the settings on the xsupertrend 30 min chart to match the 4hr by following the steps in my last post
+
+--- 帖子 #95 ---
+I need those settings please.
+
+--- 帖子 #96 ---
+That's great news Chris... testing will become much easier...
+
+--- 帖子 #97 ---
+John, That's good news with regards to the EA.Many thanks for stepping up and helping Chris... Much appreciated... Thanks
+
+--- 帖子 #98 ---
+Ramana, Currently trading logic is in transition and as you can Chris has his hands full. For now, see if can figure out the settings by rereading all the posts- You can use combination of 30 Mins and 4HR or 15 Minutes and 1 Hourly. Another option is use the given settings on Daily and 4 Hour and try to better understand the strategy which will make it easier for you figure it out for your choice of tf's Thanks
+
+--- 帖子 #99 ---
+Hi cfudge I have set up XAUUSD as described in post 92, using the 4H settings you posted in post 47 but I can't seem to get my charts to match. Any idea what I might be doing wrong, or do I need to just try changing the xsupertrend settings on this machine? Thanks David
+
+--- 帖子 #100 ---
+These are the Set Files i am using for the three pairs in discussion- GBPJPY, AUDNZD and XAUUSD-People can find it and can be on the same page [I hope there are no errors- if so, feel free to correct] 1. GBPJPY- Daily Time Frame Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Edit-I made a Small Change wrt to GBPJPY-Daily-xSuper Trend- For the "Time Frame"-previous snapshot used "1 Day"-I replaced it with the above snapshot containing "Time Frame-Current" 4 Hour Time Frame Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #101 ---
+2. AUDNZD Daily Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) 4 Hour Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #102 ---
+3. XAUUSD: Daily Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) 4 Hour Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Thanks
+
+--- 帖子 #103 ---
+David, Please check my latest posts on the settings... Thanks
+
+--- 帖子 #104 ---
+I did, I was actually using the settings you posted (in post 47) to test whether I was setting things up correctly according to that latest post (post 92), hence my confusion that the posted settings didn't match up as described in post 92. Apologies, I am sure I am missing something obvious.
+
+--- 帖子 #105 ---
+Sorry, I thought that was a reply from cfudge, doh, I'll try your settings right now!
+
+--- 帖子 #106 ---
+As far as I can see my settings for Frama Ribbon are all as shown in the above posts. Thanks aavan, as far as I can tell those were the settings I already had. With both set to Frama Ribbon indis set to 1D, both placed on 4H charts. Hopefully that is correct? My xSupertrend settings are below. One on each 4H chart. The charts I get do not match (image in post 99). I'm sure there is some error in my understanding somewhere, but I can't figure out where.
+
+--- 帖子 #107 ---
+Great effort. Following with interest. Regards
+
+--- 帖子 #108 ---
+David, Are you trying to setup charts for testing like in Post#72 https://www.forexfactory.com/showthr...5#post12530865 (or) Are you trying to figure out how Chris is finding the settings for syncing a given time frame to a higher time frame like post #92 https://www.forexfactory.com/showthr...7#post12532987 Thanks
+
+--- 帖子 #109 ---
+Thanks for your posts, can please post settings for XAUUSD 4h and 30m charts?
+
+--- 帖子 #110 ---
+I'm trying to figure out how to sync them as shown in post 92. So I can trade XAUUSD on the 4hr chart.
+
+--- 帖子 #111 ---
+Looks like GBPJPY indeed went up, with H4 making the first attempt at getting D1 up. Pullback starting now. Will it go too far down, or remain a pullback? Only time will tell. Attached Image
+
+--- 帖子 #112 ---
+David you do not need to experiment for the daily of 4hr charts...aaven has posted them above. Thanks aaven. If you need another TF or another pair then you can use the tutorial.
+
+--- 帖子 #113 ---
+Last night I was wondering what we should do when an opposite dot appears...do we close the trade immediately or do we wait for the higher TF to complete? My initial thoughts were to wait, unlike my entries, where I enter at the appearance of the dot. I am asking this because that has just happened on the AUDNZD 4 hr trade. See below Please share your thoughts...I am going to let it run for now till EOD. Chris Attached Image (click to enlarge)
+
+--- 帖子 #114 ---
+I understand that cfudge. The part I don't understand is that my charts don't look the same with those settings, even though (as far as I understand) they should.
+
+--- 帖子 #115 ---
+According to the original rules: "The rules are, we wait for a dot to appear, from the Frama Ribbon indicator and take the trade in the appropriate direction then we close the trade when the first opposite coloured candle appears from the xSuperTrend candles indicator. Or an opposite dot appears . We can re-enter if the original colour candle returns and an opposite dot has not appeared. Seriously...that is it!!!" Try letting it run, maybe the rules will change.
+
+--- 帖子 #116 ---
+Remember I wrote those rules while disregarding the higher TF factor...LOL
+
+--- 帖子 #117 ---
+Yes, we are learning on the fly. Either way, what are the best rules for an EA?
+
+--- 帖子 #118 ---
+In the settings you can turn 'interpolate in MTF' on or off. So the EA will close the trade on the appearance of a dot either way
+
+--- 帖子 #119 ---
+Hi David That is weird...maybe it has to do with the broker feed. The key is to adjust the settings so they match for your charts. Chris
+
+--- 帖子 #120 ---
+Can you confirm which settings to work with? Is it the Super Trend Multiplier and Supertrend Period setting on the SuperTrend indi set to the time period you want to trade (current)?
+
+--- 帖子 #121 ---
+David, These are the settings for Gold. Can you enter the settings as is and tell us if it resolved. Also, be sure to change the color settings as well- you should just like one Frama Line. https://www.forexfactory.com/showthr...1#post12533791 Remember, the xsuper trend is always "current time frame' i.e. we do not use higher time frame for the super trend... Thanks
+
+--- 帖子 #122 ---
+Thanks. I have attached screenshots of my settings and what I am seeing. I have just noticed (after doing the screenshots) that you mention that supertrend is always current time frame. I have tried changing that as well but the charts still look very different. I feel sure I am missing something fundamental here!
+
+--- 帖子 #123 ---
+With both Supertrend set to 'current'.
+
+--- 帖子 #124 ---
+Just noticed something odd that might be the cause of the issue. The timeframes on the two charts don't sync up. No idea why, I opened them both at the same time. Both in the same MT4 screen etc.
+
+--- 帖子 #125 ---
+David, Do Like this- 1. Open a FRESH Daily XAUUSD chart. 2. Drag "Frama Ribbon" Indicator onto the XAUUSD Daily Chart and apply the settings like the below snapshot- Attached Image (click to enlarge) Attached Image (click to enlarge) 3. Drag "xSuper Trend" Indicator onto the same XAUUSD Daily Chart and apply the settings like the below snapshot- Attached Image (click to enlarge) ****************************************************** 1. Now Open a fresh 4 Hour XAUUSD Chart. 2. Drag "Frama Ribbon" Indicator onto the XAUUSD 4HR Chart and apply the settings like the below snapshot- Attached Image (click to enlarge) Attached Image (click to enlarge) 3. Drag "xSuper Trend" Indicator onto the same XAUUSD 4HR Chart and apply the settings like the below snapshot- Attached Image (click to enlarge) Thanks
+
+--- 帖子 #126 ---
+I'll do exactly that, step by step now. Sorry I'm being such a hassle, I'm usually much faster at picking stuff up than this and usually end up answering as many questions as I ask pretty quickly! This one seems have flummoxed me for some reason.
+
+--- 帖子 #127 ---
+I have done that and now have a 4H and a daily chart set up with the settings you posted.
+
+--- 帖子 #128 ---
+David-That's it- You now have charts just like Chris for XAUUSD- Post #72 https://www.forexfactory.com/showthr...5#post12530865 For GBPJPY and AUDNZD-do the same approach, but with my settings posts for GBPJPY and AUDNZD...
+
+--- 帖子 #129 ---
+Thanks. I assume I can now trade the dots on the 4H chart? I think I need to do a lot more work understanding these indicators. I would like to learn WHY they give those signals, and the hows behind setting them up. I won't get far learning simply by copying. It's great that i now have it set up, but I still don't really understand how. I'm doing pretty well trading using stochs, price action, RSI on the other pairs. I am hoping that this might help me add XUAAUD to my trading as well where I've found these indicators less reliable. But in order to do that I'm going to need a lot more understanding. Are there any good instructional pages and/or videos for these indis and this method I could study?
+
+--- 帖子 #130 ---
+Too many options get confusing.
+
+--- 帖子 #131 ---
+David, The method and trading logic is evolving and still work in progress. You can google the names of the indicators and i am sure there must be documentation or notes on their inner workings... Thanks
+
+--- 帖子 #132 ---
+Thanks. I'm not the type to ask without Googling first, you can be sure of that. I found some fairly basic info on fractal moving averages etc, which was useful. I just thought it was also worth asking since there are likely to be recommendations from people here The most interesting thing I found was the attached pdf which may be useful to people?
+
+--- 帖子 #133 ---
+David...we are trading the daily and the 4 hour seperately. We are not trading the 4 hour off of the daily chart.
+
+--- 帖子 #134 ---
+Just got home and realized something with regards to my earlier confusion about closing a trade when a dot appears or wait for higher TF to complete first. Because I have decided to set interpolation to true I must stay consistent and close as soon as the dot appears and open a new trade. I believe the saying is "Live by the sword die by the sword". Chris
+
+--- 帖子 #135 ---
+I honestly couldn't be more confused. I'm going to start reading the thread again and see if I can work it all out. I thought what I just created was a 4H and a Daily chart. Would trading off the 4H be trading off the daily? I'm genuinely so confused at this point.
+
+--- 帖子 #136 ---
+OK let's try this If we want to trade the daily chart the frama ribbon will need to take its signals from the weekly TF. The xsupertrend also wants to take its signals from the weekly TF, but doing this we get the colour change signals too late (having to wait for the weekly candle to close) So...we need to open 2 daily charts both as described above. Then on one chart you will change the TF of the xsupetrend to current (which will be the daily TF) On that same chart you will change the "supertrend period" and the "supertrend multiplier" until it looks close enough to the unaltered chart. When you are happy with how it looks close the other daily chart and the chart that is left (the adjusted one) is now ready to trade with. This is how you would set up charts for whatever TF you want to trade with. Chris
+
+--- 帖子 #137 ---
+I thought that's what I had done with aaven s help earlier today. I think I need to sleep on this one and come back fresh tomorrow. I normally find this stuff pretty easy to follow but some reason this one is just not in sync with my brain. I'm sure a lightbulb will come on sooner or later!
+
+--- 帖子 #138 ---
+Sleep on it man...I was confused yesterday but writing out the tutorial helped me. It really isn't that hard once you have done it a few times. BTW your charts posted above are exactly the same as mine. (your gold charts)
+
+--- 帖子 #139 ---
+Hello Chris On the weekly time frame to trade the daily, are you setting the "dot on the first bar" to true or false? Or any other higher time frame for that matter, for instance daily to trade 4 hourly?
+
+--- 帖子 #140 ---
+Hi Howard I am trading the daily with weekly settings and the 4hour with daily settings Yes all have interpolation set to true, so the dot appears early
+
+--- 帖子 #141 ---
+indi repaint, there is no more dot on the daily gold chart.
+
+--- 帖子 #142 ---
+Yes you are right in what you say. When you read the thread (or even the last few pages) you will understand what is happening with the dots and how to trade them (there are two ways). I encourage you to go back and see if you can see what I mean...
+
+--- 帖子 #143 ---
+Hi, It repaints because you use MTF If you use current it don't ? ! Cheers jf
+
+--- 帖子 #144 ---
+You can find initial release here: https://www.forexfactory.com/showthr...2#post12537512 Please read these posts too: https://www.forexfactory.com/showthr...9#post12536419 https://www.forexfactory.com/showthr...2#post12537482 regards
+
+--- 帖子 #145 ---
+Hi Joe, I just got home from work and saw your post. Fantastic. Thank you. I can't wait to try it.
+
+--- 帖子 #146 ---
+Hi, Without using MTF of indies. Only current And here on TF M15 but any TF &gt;= M15 seems good .... (between London Open / Close is the best) Santé jf
+
+--- 帖子 #147 ---
+Hi Joe, Thank you again for your generous work and contribution. Trying to forward test in demo account. All files placed in respective folders - checked and double checked. M15 timeframe. EA applied to three pairs EURUSD, GBPUSD, AUDUSD - checked and double checked. EA Smilely Face on all three pairs - checked and double checked. EA placing trace - no joy, not placing any trades. Looked at Journal and log files and no trades from JFFRST. I'm sure I have missed at least one or two steps in the set up process. Did not edit these - where do I find them to edit? Anything else needs doing? Thank you. In STRATEGY_EVENT_NEW_BAR tag you can configure required symbols/periods for trading. In STRATEGY_PARAMETERS tag configure appropriate parameters.
+
+--- 帖子 #148 ---
+When you put EA on the chart you can see in Terminal/ Experts tab: Attached Image (click to enlarge) Attached Image (click to enlarge) Please upload that log file here. regards
+
+--- 帖子 #149 ---
+In strategy tester: Attached Image (click to enlarge) Attached Image (click to enlarge) Here you've got one log file for every day.
+
+--- 帖子 #150 ---
+Never got the Files/JFFramework line in Experts. Everything on all three pairs "uninit reason 3."
+
+--- 帖子 #151 ---
+In Experts tab you should always see something as this: Attached Image (click to enlarge) So, you haven't got folder: \MQL4\Files\JFFramework . Is it true?
+
+--- 帖子 #152 ---
+Here is the link to the last EA version... I would like to keep all the discussion here now so we don't clutter the other thread. https://www.forexfactory.com/showthr...12538197#reply
+
+--- 帖子 #153 ---
+Thank you. Last update for 9 hours - have to go to work. Folder JFFramework is there for all three pairs.
+
+--- 帖子 #154 ---
+Edit: Please see my post below this. You can't use this version this way. Thank you.
+
+--- 帖子 #155 ---
+JoeeF, https://www.forexfactory.com/showthr...4#post12538494 Thank you much for considering my request...
+
+--- 帖子 #156 ---
+Joe, can you please confirm, if I am also using three diffirent EAs do I need to create three different .xml files with different magic numbers (different parameters for EAs) for each EA on each currency pair? I didn't see the way to change the number in es itself, unless I am overlooked it. Thanks a lot.
+
+--- 帖子 #157 ---
+Please don't use my EA on more than one chart. I'll explain this later today. If you want trade more symbols simply configure them in XML. For example: Attached Image (click to enlarge) One EA will trade all that symbols. Please use it this way till I fix some things. Thank you, regards
+
+--- 帖子 #158 ---
+Thank you for your responce Joe. This way we trade our chosen pairs with the same setting, correct. I am demoing few pairs on M15 and I think one setting can work for them. Interesting development. Much appreciated!
+
+--- 帖子 #159 ---
+Some important considerations. I've got my own framework. It's platform independent. So, I'm creating only one solution which is then compiled in MT4 and MT5. It's universal and fully configurable - this sometimes results to issues with proper configuration. This version 1.02 was tested as standalone application. So please use it only on one chart (in one terminal). The chart symbol/period aren't important. EA isn't using them. Everything is taken form XML config. One symbol/period. This is important for MT4 strategy tester. Attached Image (click to enlarge) You can use as many symbols as you want. Be careful - it's consuming computer resources: Attached Image (click to enlarge) All those symbols will be traded in this one EA. If you need different settings for example for indicators simply create another trading strategy: Attached Image (click to enlarge) Simply copy and paste. Don't forget to change magic number. Note: In principle there isn't issue to using it on more charts in one terminal. However, I've hard-coded XML file name and you can't change it. So, every EA on every chart would be using the same XML config file - the same magic number - and this is issue. Maybe in new release I'll change this (this weekend). For now, you can use it as standalone application with proper configuration. Firstly, we need prove that trading logic is proper implemented.
+
+--- 帖子 #160 ---
+Thanks a lot for your effort.
+
+--- 帖子 #161 ---
+Hi, It shows " 2019.10.04 09:02:04.323 Expert JFFRST XAUUSD,Daily: removed"
+
+--- 帖子 #162 ---
+Refer I use TF 4H for trading, I have to use MTF at "Day" right? when the Dot is appear, I can open order or I need to wait the Day is ending.
+
+--- 帖子 #163 ---
+Please look at this post and provide your log file. You've got bad configuration. regards
+
+--- 帖子 #164 ---
+I have gone through the thread from page one, and have critically examined all different configuration posted for different time frames. I discovered that 4 HOUR work for me better,. using all settings at default.So far iv'e used it to confirm my entries and they appear alright, i'm still test running the system and will post all my observation.
+
+--- 帖子 #165 ---
+This is true for the frama ribbon, yes take the trade as soon as you see the dot. The xsupertrend is set to current TF but is configured to mirror daily.
+
+--- 帖子 #166 ---
+Hello cfudge, Do you have a trade explorer to analyse the results of your trades? Do not get me wrong, I beleive the system can be successful, at least when the market is in a specific condition. My purpose is to check the results for the Money management purposes. Of course, seeing your success with the system would be so nice as well. Thanks Hüseyin.
+
+--- 帖子 #167 ---
+Noticed on the super trend candles there was a problem with the auto candle width, that should be fixed in this version.
+
+--- 帖子 #168 ---
+Brilliant...I noticed this too but didn't want to bug you..so thank you. Chris
+
+--- 帖子 #169 ---
+Hi. I am new to this thread and just read the entire thing last night. I traded it today in my futures account, trading oil, gold, and a few currencies on the 15M timeframe and the indicator set to look at H1. I didn't follow the rules of waiting until I was supposed to exit but got out quickly with profits. I made $470 in closed profits today, so I am very happy and thankful. I had a few losses and a few wins and I trailed the stop tight. That is a bad habit of mine. But I have a question. At 1:00 PM EST today I got a blue dot in NQ. (Tech Index) I had learned that a dot can disappear while the candle is still open and you should wait to enter on the candle after the dot to make sure it stays there. But it didn't stay there. At 1:45 the price began to decline and the dot underneath the 1:00 PM candle disappeared. It placed a new buy dot under the 2 PM candle and it is still there and the trade is in profit. So my only concern is looking back on the charts to test it, is it really real? Because the trades look almost too good to be true. I semi trust this system, but I worry if I will get a lot of false entries with it. Did I just get incredibly lucky today? How will an EA work if it replots the past? Thank you for this thread and what you have posted. I just want to know I can trust the signals because they look amazing, and even the dot that got erased and replotted was not a problem. In fact the entry on the now erased dot was better than the 2nd dot that appears to be now locked in place.
+
+--- 帖子 #170 ---
+We/I am trading when the dot shows up, if it disappears I live with the decision. This is only a situation if you have "Interpolate in MTF" set to true. If it is set to false all dots will be permanent but will require the higher TF candle to complete. Chris
+
+--- 帖子 #171 ---
+I do not have an explorer, but I will be posting results.
+
+--- 帖子 #172 ---
+I don't see why anyone would consider the dot disappearing as anything strange when it is placed at the open of the bar, because it is changeable until the bar closes, just like other attributes of the bar such as the high, low, and close.
+
+--- 帖子 #173 ---
+Thank you my friend.
+
+--- 帖子 #174 ---
+The EA is evaluating information at each bar open. At that time are made trading decisions. Yes, if indicator is repainted it might be issue to check entries later. regards
+
+--- 帖子 #175 ---
+Results for Sept 30 to Oct 4 2019 Going to take some time to see conclusive results due to TFs used. I believe I have shown proof of concept. I am going to try and get the charts for lower TFs figured out. I will require the EA for this and I do not understand the EA that JoeeF has provided, It does not make sense to me, right now, Can anyone show how to install it and show it running on the tester or a chart please. In fairness to JoeeF...I have not downloaded it yet. Chris Attached Image (click to enlarge)
+
+--- 帖子 #176 ---
+You have not downloaded it. Anyway you know it doesn't make sense. Hm... There is a lot of information about this EA there: https://www.forexfactory.com/showthr...9#post12536419 https://www.forexfactory.com/showthr...2#post12537482 https://www.forexfactory.com/showthr...2#post12537512 https://www.forexfactory.com/showthr...7#post12537767 https://www.forexfactory.com/showthr...6#post12537776 https://www.forexfactory.com/showthr...7#post12538197 https://www.forexfactory.com/showthr...9#post12539829 Take care, Joe
+
+--- 帖子 #177 ---
+can please explain the entry rule, i dont get how to use the lines. please answer this
+
+--- 帖子 #178 ---
+Hi JoeeF Sorry to sound rude...I only meant I do not understand how to install the EA. It seems complicated for Me. I was expecting an EA to place in the experts folder and put on a chart with my settings and away we go. If this is how it does work then excuse my ignorance.
+
+--- 帖子 #179 ---
+Hi cfudge, I'll try to explain. 1. download .zip or .rar compressed file and save in MT4 Indicators folder. 2. extract contents of whichever compressed file. Then 4 files will be in JFFRST_v1.02_MT4 folder. frama ribbon 1.1.ex4 . . . . . . . . . . .this is the FRAMA indicator - copy to MQL4/INDICATORS JFFRST.ex4 . . . . . . . . . . . . . . . . . . .this is the EA - copy to MQL4/EXPERTS JFFRST.xml . . . . . . . . . . . . . . . . . . .this is the configuration file. edit with NotePad. xSuperTrend candles (mtf).ex4 . . . this is the xSUPERTREND indicator - copy to MQL4/INDICATORS 3. Open JFFRST.xml in Notepad and edit the highlighted items (see screenshot below). THE OTHER STUFF IN THE XML FILE IS FOR HOUSEKEEPING AND PLACE HOLDERS This xml file is instead of separate ".set files" for the indicators and EA. Brilliant idea to make it portable to use in multiple applications and in MT4 and MT5. If you want EA to run on multiple pairs add more lines (copy &amp; paste) like the AUDNZD line in STRATEGY_EVENT_NEW_BAR in the top section. For example: &lt;STRATEGY_EVENT_NEW_BAR&gt; &lt;StrategySymbol&gt; EURUSD &lt;/StrategySymbol&gt;&lt;StrategyPeriod&gt;PERIOD_ M15 &lt;/StrategyPeriod&gt; &lt;StrategySymbol&gt; USDJPY &lt;/StrategySymbol&gt;&lt;StrategyPeriod&gt;PERIOD_ M15 &lt;/StrategyPeriod&gt; &lt;StrategySymbol&gt; GBPUSD &lt;/StrategySymbol&gt;&lt;StrategyPeriod&gt;PERIOD_ M15 &lt;/StrategyPeriod&gt; &lt;StrategySymbol&gt; USDCAD &lt;/StrategySymbol&gt;&lt;StrategyPeriod&gt;PERIOD_ M15 &lt;/StrategyPeriod&gt; &lt;StrategySymbol&gt; AUDUSD &lt;/StrategySymbol&gt;&lt;StrategyPeriod&gt;PERIOD_ M15 &lt;/StrategyPeriod&gt; &lt;StrategySymbol&gt; EURGBP &lt;/StrategySymbol&gt;&lt;StrategyPeriod&gt;PERIOD_ M15 &lt;/StrategyPeriod&gt; &lt;StrategySymbol&gt; EURJPY &lt;/StrategySymbol&gt;&lt;StrategyPeriod&gt;PERIOD_ M15 &lt;/StrategyPeriod&gt; &lt;/STRATEGY_EVENT_NEW_BAR&gt; Save your changes. 4. Copy JFFRST.xml to ..../AppData/Roaming/MetaQuotes/Terminal/Common/Files 5. Load EA, JFFRST.ex4, on one chart, (your settings are already in .xml) and away we go! Don't forget to Allow DLLs and Allow Live Trading.
+
+--- 帖子 #180 ---
+Hello John, Exactly. Thank you for your effort. I really appreciate it. It isn't so tough: 1) Put indicators in indicators folder: \MQL4\Indicators 2) Put EA in experts folder: \MQL4\Experts 3) Put XML config in common files folder: \MetaQuotes\Terminal\Common\Files (If someone isn't able to locate common files folder please look here .) For quick start change in XML config only: 1) Input requested symbol/symbols - You can trade as many symbols as you want. 2) Edit periods of indicators That's all. Two minutes. It's fully configurable system. Do you need trailing stop for your trades? Simply uncomment &lt;SimpleTrailingStop&gt; tag in your XML. Do you want restrict trading only for US session? Simply configure this in &lt;STRATEGY_STATES&gt; tag. Etc. Etc ... Last notes: 1) In MT4 strategy tester you can test only one symbol. This is limitation of the MT4 not mine. So, in this case put only one symbol to your XML config. 2) For editing of XML file try use better tool than Notepad. For example Notepad++. It'll be highlighting syntax, ... regards
+
+--- 帖子 #181 ---
+Hi Joe, Thanks again for your generous work. Notepad++ is much easier to work with - thanks for the suggestion. I have a question on settings in xml. As real example, trying to match cfudge's template for GBPJPY H4. This strategy uses two time frames D1 and H4. In the STRATEGY_EVENT_NEW_BAR for the PERIOD_ ??? , should this be the higher time frame D1 or lower time frame H4 ?
+
+--- 帖子 #182 ---
+If I'm able to understand this strategy properly your settings are right. If we're trading GJ on H4 we need Frama ribbon one period higher - D1 and Supertrend at the same period - H4. Hope someone will correct me if I'm wrong.
+
+--- 帖子 #183 ---
+Great - Thank you. This .xml can show basic example how to set up for other pairs and different time frames. Configure .xml with single pair for Strategy Tester, or multiple pairs for forward testing. As you mentioned, users can also play with other settings in .xml, i.e. days to trade, trailing SL, etc. All the best.
+
+--- 帖子 #184 ---
+yes exactly single pair for Strategy Tester - this is limitation of the MT4 As soon as we prove that EA is trading properly with trading strategy rules people start asking for money/strategy/time management.
+
+--- 帖子 #185 ---
+This is the brilliance of using the .xml file. Anticipating future feature/function requests and having placeholders ready to turn on and customize. Super-fast feature implementation. You are way ahead of the game. Great job Joe. Thanks.
+
+--- 帖子 #186 ---
+Thanks guys for your explanations, I just could not get my head around it. Still seems a little daunting but will give it a try. One question is can I just unzip to my desktop and then place the files in the appropriate folders or do they need to be unzipped in indicators folder. Also, when editing the .xml file do we have to delete the existing one in MT4 before copy/paste the new one.
+
+--- 帖子 #187 ---
+Another question to JoeeF... Is there only one setting possibility for all pairs. What I mean is, if I am trading more than one pair, do I only have one set of indicators parameters for all pairs or can each pair have its own set of parameters (for the frama ribbon and xsupertrend)
+
+--- 帖子 #188 ---
+Hi Chris, Unzip the files to some common folder. I have separate folders for different coders in MQL4/Indicators, e.g. JOEEF, MLADEN, MRTOOLS, SWINGMAN, etc. The code in the .xml file looks daunting, but just make the few edits from the example screenshot and save. Think of it as "set files" in a different format. Copy the indicators and EA to their usual respective folders - same as you always do. For the .xml file, edit and save with same file name. You have the .zip file and can always get the original .xml file. Copy the edited .xml file to Common/Files folder. Load EA on a chart. As Joe said in Post #180: 1) Put indicators in indicators folder: \MQL4\Indicators 2) Put EA in experts folder: \MQL4\Experts 3) Put XML config in common files folder: \MetaQuotes\Terminal\Common\Files (If someone isn't able to locate common files folder please look here .)
+
+--- 帖子 #189 ---
+Thanks northwind I asked because of this, did not sound right... Attached Image (click to enlarge)
+
+--- 帖子 #190 ---
+LOL, Download to any place will work. Sorry, just habit, wasn't thinking. I have my separate coder folders there. Thank you for sharing your strategy. All the best.
+
+--- 帖子 #191 ---
+Definitely yes. It can. Please don't complicate it for now. Start easy. Firstly we need prove basic functionality. Later we can create as many configurations as we want.
+
+--- 帖子 #192 ---
+Just realized I had the frama ribbon on my 4hr AUDNZD chart set to current. I was having several signals and it didn't seem right...LOL WHAT A BONE HEAD!!!
+
+--- 帖子 #193 ---
+We all make mistakes only liars never make mistakes
+
+--- 帖子 #194 ---
+Do these indicators exist with a 'max bars' option? It's extremely laggy with my fast laptop on 4 charts.
+
+--- 帖子 #195 ---
+So then what do we conclude if I never lie??
+
+--- 帖子 #196 ---
+Joe, First and foremost-thank you for the effort you are putting in creating the EA. As per the post: https://www.forexfactory.com/showthr...6#post12545296 I am trying to use the EA and i totally understand that the approach you are using is universal-using a standard framework that is coding language agnostic. From my end, i am little overwhelmed with the XML file-trying to plugging in the settings. This is purely a result of me technically handicapped compared to you. I hope i don't come across as being ungrateful and i understand being a coder on ff is a thankless job with some many requests being thrown at you wily-nily. I am hoping if it is possblle to get the parameters of 'xsuper trend' and 'frama ribbon' in the form of drop down. I am reattaching the images from post#1 Attached Image Attached Image Attached Image You can also do away with the alerts, money management at this point- Just a lean version that enters trades as per the settings and exits at opposite color with some position size- i know it is a big ask,i am hoping you would consider this request. Do take your time. Once again, We appreciate the effort... Thanks
+
+--- 帖子 #197 ---
+You're pointing to other EA I posted yesterday. It is built on a new version of the framework. And yes it has a possibility to enter some variables into inputs tab. This might be useful in strategy tester . However that EA is still using config XML file. It's easy: 1) Put indicators in indicators folder: \MQL4\Indicators 2) Put EA in experts folder: \MQL4\Experts 3) Put XML config in common files folder: \MetaQuotes\Terminal\Common\Files (If someone isn't able to locate common files folder please look here .) For quick start change in XML config only: 1) Input requested symbol/symbols - You can trade as many symbols as you want. 2) Edit periods of indicators That's all. Two minutes. Yes it is possible. And in new version I'll add a possibility to enter some settings of FramaRibbon and SuperTrend into Inputs tab too. TimeFrame for example. It'll be useful for strategy tester. Anyway, firstly I need see some real feedback . How EA works? Are entries/exits properly executed? Are re-entries OK? What about strategy tester? Log files screenshots ... etc ... etc ... regards
+
+--- 帖子 #198 ---
+Thanks Joe- I will take a stab at it...
+
+--- 帖子 #199 ---
+OK, I really need to re-kickstart this thread again...It's disappointing that we have 1300+ downloads and a free EA from our friend JoeeF and nobody (including me) has put in any effort to further this idea. Anyway, I have spent the last few hours setting up some set files for the 30 min chart with signals from the 4hr, that's 8 candles of difference. It went pretty good, the only one that is a little off (not much) is AUDNZD the rest are pretty close. I tried to get a broad spectrum of pairs to try currencies, commodities, and crypto. I wanted to use the 30 min charts so we could test in the EA, it would be nice if you decide to download these set files that you report back with any results...using the EA or not. Chris Attached File(s) Set files for 30 min charts.zip 313 KB | 482 downloads
+
+--- 帖子 #200 ---
+Here, in order are the indicators, the EA and the .xml file. Installation instructions are posted a few posts back, on this page. Chris Attached File(s) frama ribbon 1.1.ex4 35 KB | 538 downloads Attached File(s) xSuperTrend candles (mtf).ex4 24 KB | 527 downloads Attached File(s) JFFRST.ex4 257 KB | 576 downloads Attached File(s) JFFRST.xml 4 KB | 431 downloads
+
+--- 帖子 #201 ---
+Hi Chris, Thanks for the EA Joe. Have JFFRST running on GBPJPY M30, .xml file configured with your set file parameters.
+
+--- 帖子 #202 ---
+Once I am back home later this week I will download and test on VPS. I will have results for you to analyse soon. Thx for your efforts Chris and Joe.
+
+--- 帖子 #203 ---
+OK got this far Is this where I edit the .xml file How do I give each chart a different magic # and how do I give each chart a separate set of parameters? Do I need to edit and save an individual .xml file for each symbol and setfile. Attached Image (click to enlarge)
+
+--- 帖子 #204 ---
+Please do not complicate it for now. Use for now only one chart with one EA and one XML . Use for example five symbols. Please try it.
+
+--- 帖子 #205 ---
+You are failing to consider the typical mindset on FF: If it is simple, it can't POSSIBLY be profitable. So, add more indicators. And more instruments. Add more timeframes. Add more rules. Make the rules sound specific while also being vague. THEN you will finally have the readers' attention.
+
+--- 帖子 #206 ---
+Hi Dave I was asking because each TF and pair has a distinctive set file. because we are trying to mirror the HTF settings. I don't want a fucking spoon to be fed, I just want to ask questions and have answers...not condescension. But thanks anyway.
+
+--- 帖子 #207 ---
+Please, in XML that I've putted a post above edit your proper symbols and periods. Edit settings for FramaRibbon and xSuperTrend too. Yes those settings will be common for all those symbols. For now. Please try it. Check if EA is working properly. We need it. Later I'll show you how you can change configuration in few clicks.
+
+--- 帖子 #208 ---
+I've supposed that using XML configuration will be for people easy. Now I'm experiencing a lot of issues. regards
+
+--- 帖子 #209 ---
+Hi Joe, After some tinkering- I was able to make the EA work. My focus was on checking the functionality of the EA- to expedite the testing- i used only one symbol on 1 Minute Time Frame and the higher time frame being 5 Minutes. EDIT- Used this version of EA- https://www.forexfactory.com/showthr...7#post12538197 These are the settings: 1. Frama Ribbon: time frame- 5 minutes frama period- 2.0 frama multiplier- 1.0 signal multiplier-2.5 2. Super Trend: time frame-current super trend period-10 super trend multiplier-1.0 Attached: 1. XML file used- Attached File(s) JFFRST.xml 4 KB | 195 downloads 2. Log File by the JFF frame work- Attached File(s) JFFRST_EURUSD_2019.10.09.txt 7 KB | 219 downloads (changed the file extension from .log to .txt as ff wasn't allowing to upload) 3. Screen shot of trades taken by EA Attached Image (click to enlarge) Something is amiss in the EA- One sell trade it took after the close of orange dot, but closed it after some time i.e. even without dot of no opposite color- opened one sell order without any orange dot and closed it again- similarly next trade as well. It took me some time tinkering with the xml file-wanted to test multiple symbols, but in the end was able to do only for one symbol- One major request is, if you could convert the xml file parameters into drop-down options in the input sections- It is not due to lack of trying or effort-the xml file has many dots,commas, shifting here and there- Also the fact that it is made complex by the strategy requiring different settings for each symbol and time frame. I mean, the strategy creator{Chris} can focus on tweaking the functionality of strategy, while the rest can help in testing the functionality of EA etc... Once again-appreciate what you have done so far... Thanks
+
+--- 帖子 #210 ---
+Chris, you need to distinguish between sarcasm and condescension.
+
+--- 帖子 #211 ---
+Why. Simply add another one. One simple row. Attached Image (click to enlarge) Yes some inputs I'll put into inputs tab. Anyway, firstly we need to solve problem with repainting . More in my next post. It's as simple as copy and paste trading strategy: Attached Image (click to enlarge) I'll continue in the next post ...
+
+--- 帖子 #212 ---
+Thanks Joe- At this point- to test the EA- i feel one symbol is enough-Looking forward to your next post- about the repainting...
+
+--- 帖子 #213 ---
+One symbol for now is enough. Definitely yes. I agree. Anyway you've pointed: That was weird for me. You need to add only one simple row ...
+
+--- 帖子 #214 ---
+It's very tough to check proper functionality when FramaRibbon TimeFrame isn't the same as working timeframe. You cannot check it on the chart. Please look at this post . To check proper functionality you need use the same period. And it would be wise to use a little bit higher period. For example 30 minutes. Attached Image (click to enlarge) Attached Image (click to enlarge) Now you can check it on the chart.
+
+--- 帖子 #215 ---
+Joe, I want to apologize if i didn't make it clear... The trades which i attached were taken in real time{demo}- I did not use the strategy tester... My understanding is, though the higher time time frame is small i.e.{5 Minutes} the behavior of the EA shouldn't change, so i just watched the trades in real time. Strategy tester results are not that reliable- I feel it will make your job if we strip that layer away {strategy tester-not giving it focus} and just focus on the leanest version of working EA... This is my thinking: In the end it is about Efficiency of the strategy- How good the strategy is, that is something we will know as we keep getting the sample trades. This is something Chris{strategy creator} has to be in the driving seat- He can designate various permutation/combinations of time frames- Example-I can take one set of parameters and test in real time, others can take another set etc... Prior to this happening, we need to check whether the EA is working as per the logic and co-ordinate with you to sort out any logic errors or bugs- for this also, it makes sense to have multiple people testing the EA- As you can see, people are struggling a bit with the xml- what i mean to say is, by wrapping this-we will have uniformity-since we can just choose from the input parameters i.e. there is no scope to commit any errors or for you to keep replying and troubleshooting each person... I really hope, i do not come as a broken record... Thanks
+
+--- 帖子 #216 ---
+In short, scrap the EA with XML settings. Create EA that uses ex4 file only (using input settings from drop down i.e like 99% of EAs) we can iron out any bugs, test logic etc. As it's much easier to test. Then in future when bugs are ironed out, re-introduce the .XML version so we can then test an array of strategies. Well, that's how I read aaven's ever so polite reply. Basically we are simpletons who cant figure out computer stuff!
+
+--- 帖子 #217 ---
+1) I'm repeating this again and again and again ... 2) Please read what I'm writing. If you use different working period and FramaRibbon period (for example M1 and M5) you cannot check results on the chart. Regardless if it is live/demo/tester ... It's due to FramaRibbon behavior. Take care, Joe
+
+--- 帖子 #218 ---
+Joe, Can you Please help me understand: Can an ea be designed that can execute trades/orders in real time that uses different working period and Frama Ribbon period? Thanks
+
+--- 帖子 #219 ---
+Of course yes. Anyway you won't be able to check results on the chart due to repainting behavior of the indicator.
+
+--- 帖子 #220 ---
+Thank you Joe... I too agree- because of the repainting we cannot check the results based on the charts... We are on the same page... What i was trying to convey was: We let the EA take the trades in real time- after x number of trades-example- 20 trades- we look at the winning percentages-maximum draw down etc... this will give the efficiency of strategy... Really appreciate your patience so far... Thanks
+
+--- 帖子 #221 ---
+Be sure, you are wrong. It won't change behavior of used indicators.
+
+--- 帖子 #222 ---
+Sorry JoeeF I have just tried editing the file and trying to get it to work in the tester...abject failure on my end. Tjhis is my edited file Attached Image (click to enlarge)
+
+--- 帖子 #223 ---
+Interesting read. Keenly following cuz I'm a long time Alf follower. Keep up the good work, and Good word. Hope this doesn't fall into Pissing contest. Cheers, Darryl
+
+--- 帖子 #224 ---
+So now I just tried the .xml file as it was downloaded and I get the tester to run with the indicators on but frama ribbon does not change and the candles stay the same colour The test was from June 2016 to today on daily TF I am going to stop now because the laptop is going through the window...lol
+
+--- 帖子 #225 ---
+Hi Chris, Edited XAUUSD from your post. I think that it's correct. Set the two different time frames for the two indicators. Also, Joe mentioned earlier the indicators on the chart won't show what the EA is using.
+
+--- 帖子 #226 ---
+I just used the one I downloaded as is. EURUSD Daily If I edit the file in Notepad do I just save it or "save as" with a new name. The other problem is I do not know if when I am deleting/adding things I am just messing up the file. When I edited it and tried the tester...absolutely nothing happened.
+
+--- 帖子 #227 ---
+Yep that took some trades but why M5 for xsupertrend?
+
+--- 帖子 #228 ---
+M5 is just an example. Change the Period to what you want for each indicator. H1 &amp; M15, or whatever you have found for each pair. After editing save with the same file name in the same Common/Files folder. If you are editing the XML for several pairs, each with its own settings, then save them with unique file names. Then when you start the EA use the respective XML file name for that particular pair. For example: JFFRST_AUUS_M30.xml; JFFRST_GJ_M30.xml; JFFRST_GJ_H1.xml; etc. Also, as Joe suggested, download NotePad++. It's free. It is much easier understand the code and to edit the files.
+
+--- 帖子 #229 ---
+What I mean is, that it's much easier for other members to install and test, thus providing feedback for you. There's about 5 pages of members still figuring out how to install it. My point was, have the EA without XML so it can be easily tested by as many as possible. Then later on add the XML variant. By then we may have the hang of it.
+
+--- 帖子 #230 ---
+GM This is my the last post in this thread. I wrote everything. Who really wants to read might be able to find everything he needs. It's all about attitude. Good luck.
+
+--- 帖子 #231 ---
+[quote = cfudge; 12524747] Tôi quên đề cập đến, trong bài đăng đầu tiên (hiện đã được thêm), chúng tôi cũng sẽ đóng một giao dịch trên dấu chấm đối diện. Dưới đây là một cái nhìn nhanh về biểu đồ 30 phút XAUUSD với các chỉ số được đặt thành 4 giờ TF từ tháng 9, 1 năm 2019. Đặt tệp và ba biểu đồ được hiển thị. Có 3 biểu đồ để hiển thị tất cả các giao dịch (Tôi không thực hiện số tiền pips, nhưng chỉ có 5 thua lỗ). Chris {image} {image} {image} {image} {image} [/ quote] Hello Mr Chris .. I'm new, I like to trade XAUUSD, Can I ask you a question: with 4h setup and M30 chart view, so when the signal is a trend reversal dot from Frama, you can enter the order. Or wait for the same color Xsuper trend candle? And are there any caveats for this case? Thank you very much
+
+--- 帖子 #232 ---
+Hi xstock No other caveats just the opposite dot colour of candle is not important to enter. We enter with frama ribbon and exit with xsupertrend...unless there is a new dot.
+
+--- 帖子 #233 ---
+That's too bad JoeeF, I wanted to make it work, I know how much time goes into building these things. I really struggled to understand what the hell you were talking about and how to go about using the EA as presented. I wish you good success and I will try other avenues for the EA. Appreciate your time and effort, Chris.
+
+--- 帖子 #234 ---
+Hi Joe, Thank you for all your work and patience. Looks like the new approach was too much for the group to grasp the concept. All the best. John
+
+--- 帖子 #235 ---
+Today I have an entry at the frama Ribbon line and the SL stick. Why don't I wait for the dot to reverse on M30 or H1 when I close the candle? If I close the M30 candle with a dot, should I enter the order too? Thanks for answering. Wish you health Today I have an entry at the frama Ribbon line and the SL stick. Why don't I wait for the dot to reverse on M30 or H1 when I close the candle? If I close the M30 candle with a dot, should I enter the order too? Thanks for answering. Wish you health
+
+--- 帖子 #236 ---
+Mr Chris! In addition to the optimized version for Xauusd with H4 view m30. Do you have any other optimal versions for XAUUSD in a smaller TF? H1, M30 ... Thank you very much Mr Chris! In addition to the optimized version for Xauusd with H4 view m30. Do you have any other optimal versions for XAUUSD in a smaller TF? H1, M30 ... Thank you very much
+
+--- 帖子 #237 ---
+Thank You Joe for your time and appreciate your effort...
+
+--- 帖子 #238 ---
+Posts 92 and 136
+
+--- 帖子 #239 ---
+Had a signal show up on GJ daily. The dot showed up on the open of the fourth daily candle of this week, discouraging, so I closed the sell and opened a buy. Chris Attached Image (click to enlarge)
+
+--- 帖子 #240 ---
+When did you enter the sell?
+
+--- 帖子 #241 ---
+that mean is repaint, need to solve this problem. If the fourth daily candle become a red / down candle / doji star, that dot may be disappear again.
+
+--- 帖子 #242 ---
+We know....read the thread
+
+--- 帖子 #243 ---
+Sept. 30
+
+--- 帖子 #244 ---
+I use the 4 hr to monitor this system, I observed the blue dot it appear after the friday end, that mean It lag to entire around 1day and loss around 300 point
+
+--- 帖子 #245 ---
+This is serious lagging but you did not lose 300 pips you just did not make them.
+
+--- 帖子 #246 ---
+This is a good thing actually because I think the dots and crosses that appear close to the frama line are better entries anyway.
+
+--- 帖子 #247 ---
+Just restarted MT4 for the week and this is how I got the trade... Chris Attached Image (click to enlarge)
+
+--- 帖子 #248 ---
+Hi Hutch, Yes, It seriously lag, but if you look into the pink dot (sell signal), you will get loss. how we can close? If we use the day chart, the signal will better?
+
+--- 帖子 #249 ---
+Sorry but I'm also new with this system. Someone with more experience with this system needs to answer your query.
+
+--- 帖子 #250 ---
+Not much action I'm afraid, slow go on Daliy and 4hr. Had a few switches on Gold daily chart, gbpjpy daily trade in good profit and no trades on audnzd yet.
+
+--- 帖子 #251 ---
+Thank you Chris...
+
+--- 帖子 #252 ---
+Here is where we are at... All vertical lines are trades. Attached Image (click to enlarge)
+
+--- 帖子 #253 ---
+Hi, does these indicator repaint ?
+
+--- 帖子 #254 ---
+Please do your own research on this...either by yourself or read the thread.
+
+--- 帖子 #255 ---
+Results from Oct 7 to Nov 15 2019 Attached Image (click to enlarge)
+
+--- 帖子 #256 ---
+New week new result Oct 7 to Nov 22 2019 Open orders are positive... Chris Attached Image (click to enlarge)
+
+--- 帖子 #257 ---
+Result from Oct. 7 to Nov. 26 2019 Still positive on open orders and a few closes in profit and loss. Chris Attached Image (click to enlarge)
+
+--- 帖子 #258 ---
+Results for Oct. 7 to Dec. 6 2019 Open profit is a lot higher this week. Attached Image (click to enlarge) Here is a pic of all trades taken so far on 4hr and daily charts. Red lines are entry with dots and yellow are re-entry with xsupertrend. Chris Attached Image (click to enlarge)
+
+--- 帖子 #259 ---
+Thanks Chris for seeing a strategy through all the way...
+
+--- 帖子 #260 ---
+Oct. 7 to Dec 13 2019 Closed a nice trade this week still lots open Chris Attached Image (click to enlarge)
+
+--- 帖子 #261 ---
+Oct 7 to Dec 20 2019 Missed one sell on AZ and did not take the immediate buy on same pair because there was a buy open there already. Happy Holidays to everyone. Chris Attached Image (click to enlarge)
+
+--- 帖子 #262 ---
+Just closed a nice trade on GBPJPY D1 chart. Chris Attached Image (click to enlarge)
+
+--- 帖子 #263 ---
+Oct 7 to Dec 27 2019 Attached Image (click to enlarge)
+
+--- 帖子 #264 ---
+Oct 7 to Jan 2 2020 Progress... Chris Attached Image (click to enlarge)
+
+--- 帖子 #265 ---
+Oct 7 to Jan 10 2020 Just a recap these are results from only trading 3 pairs (XAUUSD GBPJPY AUDNZD) and only on the daily and H4 TFs. Chris Attached Image (click to enlarge)
+
+--- 帖子 #266 ---
+Nice Thread i will Test your idea!
+
+--- 帖子 #267 ---
+New result for Oct 7 to Jan 17 2020 No gain this week ...pretty slow. I am not selling Gold 4hr but I am buying it, there were several sells and buys popping up. Note; All the trades are set to 0.01 position size. If I get an EA working in the future I would have each trade set to equal risk. Chris Attached Image (click to enlarge)
+
+--- 帖子 #268 ---
+Results from Oct 7 to Jan 24 2020 Bit of a doldrums at the moment. Nice open profit though. Chris Attached Image (click to enlarge)
+
+--- 帖子 #269 ---
+Doldrum profits are always better than fast losses
+
+--- 帖子 #270 ---
+Hi Chris, I hope you are doing well. It is better if you can upload your trading chart so people like me can see your entry and exits. Thanks, Salim
+
+--- 帖子 #271 ---
+Results for Oct 7 to Jan 31 2020 Just sailing along at this level...not much happening at the moment. Chris Attached Image (click to enlarge)
+
+--- 帖子 #272 ---
+Here are all the trades so far Salim Attached Image (click to enlarge)
+
+--- 帖子 #273 ---
+Results from Oct 7 to Feb 7 2020 Just couldn't catch a break this week GBPJPY screwed me over. LOL Chris Attached Image (click to enlarge)
+
+--- 帖子 #274 ---
+Oh well … Inserted Video
+
+--- 帖子 #275 ---
+Results for Oct 7 to Feb 14 2020 Gonna keep going...see where I end up. Happy Valentines day Chris Attached Image (click to enlarge)
+
+--- 帖子 #276 ---
+Results from Oct 7 to Feb 21 2020 No change this week but lots in the open profit Chris Attached Image (click to enlarge)
+
+--- 帖子 #277 ---
+I'm thinking if it's possible for me to do a visual backtest. I'm interested in doing this for trading gold with D1 supertrend (and Weekly frama). Any suggestions? Thanks a lot. Although it seems quiet here but for me I think this one is quite promising. Green pips, Dewi
+
+--- 帖子 #278 ---
+Results from Oct 7 to Feb 28 2020 Back in the game but was too scared to take both Daily and 4Hr sells on GY ...so that sucks. I want to paint a more realistic picture in that this is just trading 3 pairs and 2 TFs. Using the same position size. So a 50 pip trade on AUDNZD would be much smaller than the same 50 pips on Gold or GBPJPY. Consequently the numbers would be much higher than reported. Chris Attached Image (click to enlarge)
+
+--- 帖子 #279 ---
+Hi Chris, First of all thank you for this thread, I'm definitely testing this strategy. I had a question for you, does this strategy still work according to the rules of the first post? Please tell me if there is a change or update. And as a second question: I want to use this strategy in a 5 minute time frame. (for entry) Can you please tell me the best indicators settings for this time frame? thank you so much
+
+--- 帖子 #280 ---
+Yes same as first post. Here is the method for adjusting TFs, just insert your desired TFs as you read. So if you want to trade off of M5 with signals from H1 then you will open two M5 charts and follow instructions. Chris Attached Image (click to enlarge)
+
+--- 帖子 #281 ---
+Results from Oct 7 to Mar 6 2020 Chris Attached Image (click to enlarge)
+
+--- 帖子 #282 ---
+Results from Oct 7 to Mar 15 2020 Chris Attached Image (click to enlarge)
+
+--- 帖子 #283 ---
+Just doing my part to "Flatten the Curve" LOL Chris Attached Image (click to enlarge)
+
+--- 帖子 #284 ---
+Hie Mladen, i have an indicator that is working in MT4, its an Elliot Wave and Fibonacci Indicator so would you help me converting to MT5.
+
+--- 帖子 #285 ---
+- This is not the appropriate thread for this request and any coding solution will probably remain unfulfilled. - see here for free coding services - https://www.forexfactory.com/showthr...6758&amp;page=8230
+
+--- 帖子 #286 ---
+thank you for the correction
+
+--- 帖子 #287 ---
+Hello Chris, I'm new to this thread. I searched about Mladen in Google and found out about this. I tried backtesting the strategy on GBPJPY 2018 using your settings. I'm a daily trader so I tested it on daily to find out the result. For that one year in 2018 the strategy got a total net loss of 30 pips. I'm disappointed about it. Could you tell if I did anything wrong on the backtest. Below I put a screenshot of the backtest and also my settings. Regards, Marzuki
+
+--- 帖子 #288 ---
+These are the settings for Xsupertrend for GBPJPY on daily TF Attached Image
+
+--- 帖子 #289 ---
+friend can help me which setting do I set for 1 minute? because I operate binary options
+
+--- 帖子 #290 ---
+friend can help me which setting do I set for 1 minute? because I operate binary options
+
+--- 帖子 #291 ---
+These indicators work very well on H4 with SL at 1.5X ATR and a tp1 at 1x ATR movign stops to BE as tp1 is reached
+
+--- 帖子 #292 ---
+Start at post 92
+
+--- 帖子 #293 ---
+which publication friend?
+
+--- 帖子 #294 ---
+????? If you are looking for instructions on how to set the different TFs then look at post 92 on page 5 of this thread.
+
+--- 帖子 #295 ---
+Hi i am from india. i am beginner using frama ribbon 1.1 arrow indicator with standard setting . I am using time frame of 5 min for day trading which is best setting for me ??? and please suggest me best non repainting and accurate indicators for avoid loss in early stage. thanks and reagards
+
+--- 帖子 #296 ---
+hi can anyone please say if this indicator works ?
+
+--- 帖子 #297 ---
+I just wanted to say than k you specially to cfudge , northwind , JoeeF , Mladen and Mrtools for all of your good will and help to others by sharing your insights publicly on here. Hopefully I will soon be able to share stuff as well. Jorge
+
+--- 帖子 #298 ---
+Just started to test with the next settings: (disregard the other indicators)
+
+--- 帖子 #299 ---
+As I understand, It will open the trade once the frama ribbon and the supertrend candle coincide the first time. Was the next functionality added to the EA? If supertrend candle changes color, operation closes, but if supertrend candle changes back to the right color, coinciding with frama direction, an operation should be opened again. Best regards, Jorge
+
+--- 帖子 #300 ---
+Hey friend, Are you okay? Could you please share this channel indicator in yellow and blue? My thanks in advance for your generosity! John
+
+
+===== 附件下载链接 =====
+
+frama ribbon 1.1 (arrows).ex4: https://www.forexfactory.com/attachment/file/3449341?d=1569452131
+frama ribbon 1.1.ex4: https://www.forexfactory.com/attachment/file/3459582?d=1570572780
+frama ribbon audnzd 4 hour.tpl: https://www.forexfactory.com/attachment/file/3451640?d=1569693869
+frama ribbon audnzd daily.tpl: https://www.forexfactory.com/attachment/file/3451639?d=1569693858
+frama ribbon colored.tpl: https://www.forexfactory.com/attachment/file/3449362?d=1569453159
+frama ribbon gbpjpy 4 hour.tpl: https://www.forexfactory.com/attachment/file/3451642?d=1569693891
+frama ribbon gbpjpy daily.tpl: https://www.forexfactory.com/attachment/file/3451641?d=1569693882
+frama ribbon xauusd 4hour.tpl: https://www.forexfactory.com/attachment/file/3451644?d=1569693908
+frama ribbon xauusd daily.tpl: https://www.forexfactory.com/attachment/file/3451643?d=1569693900
+JFFRST.ex4: https://www.forexfactory.com/attachment/file/3459584?d=1570572796
+JFFRST.xml: https://www.forexfactory.com/attachment/file/3459585?d=1570572802
+JFFRST.xml: https://www.forexfactory.com/attachment/file/3460267?d=1570632933
+JFFRST_EURUSD_2019.10.09.txt: https://www.forexfactory.com/attachment/file/3460269?d=1570633028
+Set files for 30 min charts.zip: https://www.forexfactory.com/attachment/file/3459580?d=1570572540
+xSuperTrend - candles (mtf).ex4: https://www.forexfactory.com/attachment/file/3461129?d=1570713407
+xSuperTrend candles (mtf).ex4: https://www.forexfactory.com/attachment/file/3459583?d=1570572787

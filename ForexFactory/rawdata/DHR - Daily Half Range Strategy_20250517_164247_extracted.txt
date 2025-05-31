@@ -1,0 +1,956 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+DHR - Daily Half Range Strategy Conditions: If price has moved half of the 10 day average range on a given day a trade is entered for 5 pips profit, stoploss 20-30 pips. One trade a day only . For a buy trade price must have moved half the daily average range (ADR(period 10)), measured from the LOW of the current day. For a sell trade price must have moved half the daily average range (ADR(period 10)), measured from the HIGH of the current day. No trades for the first 1-2 hours after market opens to avoid false breakouts. I trade this method live (small lot size) on EURUSD 15M chart. Rough and ready testing on EURUSD 15M Chart shows the following results for 2023 Jan to 11 May 2023 so far. Attached Image (click to enlarge) Still improvements to be made regarding the few losing trades; testing a few differet options; martingale is a potential option as appears to lose only one trade in a row and then win the next at least 3-4 trades. Potentially a filter for high impact news as whiplash can be more than half daily ATR(10). Maybe look at days of the week etc. Prefer no other indicators are to be used. Only price, and range such as highs and lows. The rest is via trade management. This is a pure rule based system. The template and indicator list and template in post 1 will be updated periodically as the method is made more precise. Attached File(s) DHR Template v1.tpl 15 KB | 347 downloads | Uploaded Jun 6, 2023 3:48am Attached File(s) Daily Range Half Line v12.ex4 87 KB | 524 downloads | Uploaded Jun 1, 2023 4:13pm Attached File(s) 0 - Chart Symbol.ex4 9 KB | 328 downloads | Uploaded Jun 6, 2023 3:47am Attached File(s) DHR ATR H1.ex4 11 KB | 375 downloads | Uploaded Jun 6, 2023 3:47am Attached File(s) Pip Counter (Andrea).ex4 20 KB | 314 downloads | Uploaded Jun 6, 2023 3:47am Attached File(s) pipsometer_5_decimal.ex4 15 KB | 306 downloads | Uploaded Jun 6, 2023 3:47am Attached File(s) SL TP-OE PIP CALC INDY.ex4 6 KB | 344 downloads | Uploaded Jun 6, 2023 3:47am Attached Image (click to enlarge) Use auto-refresh indicator to keep DHR lines updated. Attached File(s) AutoRefresh 509.ex4 7 KB | 403 downloads | Uploaded May 25, 2023 6:30am /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Legal Disclaimer Trading foreign exchange on margin carries a high level of risk, and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Before deciding to invest in foreign exchange you should carefully consider your investment objectives, level of experience, and risk appetite. No information or opinion contained on this forum / thread should be taken as a solicitation or offer to buy or sell any currency, equity or other financial instruments or services. Past performance is no indication or guarantee of future performance. Anything in this forum / thread in any medium (including but not limited to written, drawn, spoken), including but not limited to trading methods, indicators, templates, pictures, trades are for educational purposes only and should not be taken as any guarantee you will achieve the same or better results. Any references to orders placed, are for educational purposes only, and are not a recommendation to buy or sell. Any comments made in the forum / thread are for educational purpose only, and not buy or sell recommendations. //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+--- 帖子 #2 ---
+An example of trade yesterday and today: Attached Image (click to enlarge) The buy and sell line move dynamically during the course of the day as the High and Low of the day change. If the daily high increases so does the sell line. If the daily low decreases so does the buy line. Usually there is only one trade during the day. The strategy can not be eyeball backtested on the screen on most days due to the dynamic movement of the buy/sell lines. The finally resting place of the buy / sell lines each day has changed significantly from where the trade would have been taken. In the examples above, price has moved significantly more than the 5 pip target. However the rules remain, as taking 5 pips from a daily range of approximately 20-200 pips puts the probability of winning the trade more towards the trader than the broker. Attached Image (click to enlarge) In the picture above you can see how the buy / sell line have changed through the day until the trade is taken. The picture shows a trade hitting SL and TP.
+
+--- 帖子 #3 ---
+Interesting concept, thanks for sharing. Did you do the coding or know the coder? I think given that the strategy is only concerned with the current day, the lines should only be visible on today's chart. Also, if watching many pairs, a Pop-Up alert would be extremely helpful, or later down the track, a dashboard to monitor all the half ranges. Cheers, and good luck. Attached Image (click to enlarge)
+
+--- 帖子 #4 ---
+Thank you Erebus. The concept/idea and coding is of my design. I give credit to smilee89 who's threads and comments on FFF made me throw out the indicators (such as RSI, Bollinger Bands etc) as such, and concentrate only on price and think laterally about the problem. Agree. These can be coded in due course. But appears you have already done it! If you like to share that would be great and appreciated. I wanted members to grasp the concept first as it can mess with your brain sometimes when looking at the chart; hence your suggestion for the current day only. The current indicator provided can be restricted to current day by reducing Bars_Back variable.
+
+--- 帖子 #5 ---
+No, I didn't do anything, I used the bars back as you said, but that changes if you look at 15M vs H1 Another thing that I would do is use a user adjustable percentage of ADR to make the calculation for Take Profit That is logical to me at least, considering that ADR varies from pair to pair. And then, you nearly have the basis for an EA, how good and generous is this smilee89 character? Attached Image (click to enlarge)
+
+--- 帖子 #6 ---
+My version...
+
+--- 帖子 #7 ---
+Here is an existing ADR dashboard indicator; it is also on the earlier chart using the single setting Here I changed the settings to 1 to 49 as Aqua to show less than half-range At 50 to 74 they will be Green to represent half-range to 3/4-range; and ready to enter And from 75 and up to show the higher levels Attached Image (click to enlarge)
+
+--- 帖子 #8 ---
+Here is another thought, perhaps there could be a weekly version or included in the same indicator Nothing better than a trending week on H4 charts Attached Image (click to enlarge)
+
+--- 帖子 #9 ---
+Agreed. I had thought of that as probably more pips to gain. But focusing on Daily for now as need to perfect one time frame before going on to another. Using 15M time frame but focusing on daily; use the 15M to see the inner working of the strategy and if there is anything that can be improved. For example expert advisor testing showed that for a buy trade the last candle high must be below the the buy line. For a sell trade the last candle low must be above the sell line. A major finding to point out is that using anything other half the DHR (e.g divide by 1.9, 2.5, 3etc) leads to negative results. This was an unexpected finding.
+
+--- 帖子 #10 ---
+Updated and tested DHR Line indicator to include pip target and ADR Target. Will add multi time frame ADR at later date.
+
+--- 帖子 #11 ---
+Please could the indicator be shared or PM me. Thank you.
+
+--- 帖子 #12 ---
+Ronin, Indicator window screenprint. Indi's and Template to follow. cpfleger
+
+--- 帖子 #13 ---
+Indi's and latest Template with Daily V4 Indicator installed. cpfleger
+
+--- 帖子 #14 ---
+Thank you. Are you using S&amp;R for the TP?
+
+--- 帖子 #15 ---
+Ronin, I do because of my previous systems. cpfleger
+
+--- 帖子 #16 ---
+Cookin now...
+
+--- 帖子 #17 ---
+Rules....
+
+--- 帖子 #18 ---
+lol! Your welcome. The rule is because of morning fakeouts and as volatility kicks in so does whiplash and can be caught out. But great result!. I was in on the first trade too, but stuck to the rules. :-( The rules are based on backtesting over the last few years, showing one trade a day to be optimal for profit. But happy to be proved wrong, that is what sharing in this forum is about. The hypothesis of the strategy is that every market has an average / standard range over the day(s). If we find the half way mark of the day based on the average potentially there is some profit to be made on the other side of it. Some days the market moves in one direction for the whole day; this strategy can cope with that. More often, than not the market bounces around forming the standard range until it find a direction. This when to whiplash comes into play and can get caught out if taking too much of the pie.
+
+--- 帖子 #19 ---
+Ronin, Excellent system young man.... cpfleger
+
+--- 帖子 #20 ---
+I can't get any of tou indicators or template to attach to chart. Do you have any idea why this might happen?
+
+--- 帖子 #21 ---
+ct1942, A screenprint of your Indicator folder window like I did in the earlier post would help. cpfleger
+
+--- 帖子 #22 ---
+Thank you for the positive feedback. I think it is important to also show the losing trade days for a balanced view of the strategy. Attached Image (click to enlarge) The picture above is of a losing trade. Yes the trade could have been taken a few bars back and reach 5 pips, but the time filter prevented that occurring. Whilst it would have met the 5 pip target, trying for anymore pips leads to a loss. These spikes are the issue as price never returns below the level again on the day shown. It is my preference to close all trades on the day they were taken so swap charges are avoided. This why the filtering by time and pip target is important. Yes other filters can be used, but is not true to the strategy being presented. As it complicates the process and begins to move away from a pure rule based system. As stated in the first post, using time filter and pip target alone has shown 80-90% win rate. The losing trades can be dealt with via trade management.
+
+--- 帖子 #23 ---
+Not sure about the setting for this ADR If I put 10, is that using ADR(10) or 10% of ADR(??) Currently drawing a wavey line, possibly using today's data? Should be set to use only up until yesterday data to fix that. And of the pair I used for example earlier, goes completely opposite; however, it did break the Half-Range Buy line and complete at 100% ADR(10) Attached Image (click to enlarge)
+
+--- 帖子 #24 ---
+I saw cpfleger pictures and thought the DHR indicator may need some attention regarding the pip target. The target lines seemed on the wrong side! The ADR can be wavey as it is set to current chart time per bar. So reflects movement of ADR during the day. The ADR is based on period and not percentage. I will make the ADR multi time in due course; which will make a constant level dotted line. The trade on the chart looks good; if taken. The losing trade shown in Post 22# is based on using ATR target, which unfortunately thought there should be 7 pips instead of 5 pips.
+
+--- 帖子 #25 ---
+But my question; what does the setting mean? How do we know what ADR is being used, and how to set a percentage of that for the TP targets? Thanks
+
+--- 帖子 #26 ---
+Sorry added the answer to your question in Post 24# "The ADR is based on period and not percentage." ATR of other time frames below a Day will change over the day. If based on daily ATR, will have to use day+1 to prevent it changing through the day. Code: double atr_t = iATR(NULL,PERIOD_CURRENT,ATR_Period,i); Percentage will be added to the list of things to code. The actual ATR number in pips being used can be obtained via other available indicators.
+
+--- 帖子 #27 ---
+This may or may not help visualize the price action on the chart It draws the daily range into fixed 10% levels I know that your system has dynamic lines https://www.forexfactory.com/thread/...6#post13138916 And it shows the exact same calculations as the paid for indicator, so that should help most of you Attached Image (click to enlarge)
+
+--- 帖子 #28 ---
+Is this what you need?
+
+--- 帖子 #29 ---
+ct1942, See screenprint. cpfleger
+
+--- 帖子 #30 ---
+Why the Small Pip Target??????????? Firstly, this is a pure rule based method, so it can be scientifically and statistically measured in a r eproducible way. The goal is to have profitable trades consistently day after day. This needs to be based on probability and risk calculations. The small pip target is based on probability and risk. If a market moves on average, say 50-100 pips per day and a trader wants 100 pips the probability of achieving 100 pips is statistically very low. Due to spread, the inherent way price moves, where the trade is entered etc...... It is like trying to pin the tail on the donkey for trade entry and then saying ok price will now move 100 pips from this point in a certain direction. As the number of pips per trader decrease the probability of achieving those pips increases; inversley proportional. The obvious starting point is the minimum average range per day, as given the above, we are unlikely to get 100% of this value given trade entry is like pinning a tail on the donkey. Looking at standard distribution, mean, CV value etc.... a 5 pip target has a very high probability taking into account spread. Another way to look at the pip target is... If you knew the probability of reaching the 5 pip target was ~&gt;95%; how many lots would you trade per pip? This way of thinking allows for automation of the method with probability of success leaning towards the trader.
+
+--- 帖子 #31 ---
+Ronin, Agree and in my retirement words - Performance is King. cpfleger
+
+--- 帖子 #32 ---
+Todays trade on EURUSD 15M: Attached Image (click to enlarge) This is a perfect example of when the trade potentially will not work out. This does not happen often but be aware. Time will tell if price decides to come back down given it is Friday and there is USD data later today
+
+--- 帖子 #33 ---
+Some absolutely stunning results on NZD entries today Unfortunately, I was out most of the day when that happened Always next week, good luck all Attached Image (click to enlarge)
+
+--- 帖子 #34 ---
+That just barely touched yesterday's low, only showing 47% on my broker With a 5 pips TP, how negative is the risk reward ratio? Attached Image (click to enlarge)
+
+--- 帖子 #35 ---
+Erebus thanks for the comment. Good point and to take into account price in reference to previous day high and low. Please find Previous day High / Low indicators attached Attached File(s) 1D Lowest P.ex4 9 KB | 221 downloads Attached File(s) 1D Highest P.ex4 8 KB | 228 downloads
+
+--- 帖子 #36 ---
+I use Daily Line Boxes indicator, the updated version is awesome and free here on FF, also has an On/Off button function. Also watch last week's high and low for interest. Look at this GBPNZD just destroying the price action, now 200% ADR(10) Attached Image (click to enlarge)
+
+--- 帖子 #37 ---
+Trade worked out on EURUSD 15M. That was a bit scary but backtesting has shown the method works 80-90% of the time. The trade today was in essence a breakout of the previous day low. Note grey line at the red sell line. Trade entered at the daily low followed by pullback and then price returned to bear trend and formed lower low. This is why I have mentioned about restricting the trading time to avoid entry at the first test. I think it better to show live trades and then members can decide for themselves about the strategy. Thanks Erebus for the ADR % indicator really useful. Attached Image (click to enlarge)
+
+--- 帖子 #38 ---
+Also the curreny power indicator given by cpfleger was in favour of EUR weakness.
+
+--- 帖子 #39 ---
+Gents, My latest version...
+
+--- 帖子 #40 ---
+EURUSD continues...
+
+--- 帖子 #41 ---
+Hello All, I'm trying to learn this strategy. Thank you @ronin, @erebus and @cpfleger for all the inputs. I'm trying to run this indicator on backtest and it's little different to what you guys have on chart. Is this the right way to do it. Thank you for your help! much appreciated
+
+--- 帖子 #42 ---
+Every tick + visual mode = you will be there all day Use the close It's not an EA is it? Be just as easy to scroll back and visually check this last week I set up the Fibonacci Tool to do the measurement; here is AUDUSD on Friday Broke below Thursday low, and we know the NZD was getting whacked. Attached Image (click to enlarge)
+
+--- 帖子 #43 ---
+Updated DHR Line indicator v5 As requested ATR target is percentage of daily ATR(10). Obviously the target must be more than 50% ATR. Attached File(s) Daily Range Half Line v5.ex4 28 KB | 287 downloads
+
+--- 帖子 #44 ---
+Simple DHR Scanner. However this is not part of the method. The method is NOT to chase pips; like a dog chasing cars. In this method every part is rule based even the take profit. The scanner will not be developed further, it was coded in kind by me. Attached File(s) DHR Scanner v1.ex4 10 KB | 270 downloads
+
+--- 帖子 #45 ---
+Thanks mate ! yeah not an EA using it as an indicator for back testing.
+
+--- 帖子 #46 ---
+Only indicator at present time please. The markets are currently on the move so everything looks great and profitable if positioned correctly. Need to wait and see what happens when volatility decreases and price confined to narrow range. Then the methods value will be known.
+
+--- 帖子 #47 ---
+Price is moving upward and below price we have formed a temporary daily low. Now price moved half of ATR(10) from above low of the day. We enter a buy. Price reverses after the entry. It hits our SL and form a new daily low. We wait for next day. If TP was 5 pips and SL was 30 pips than we lost 6% of account. Am I interpreting correctly you strategy? Thanks
+
+--- 帖子 #48 ---
+Thanks for the feedback Merka. Yes. There are two ways of trading to my knowledge, but probably others: 1) A good risk to reward ratio for each trade. e.g. SL = 5 pips, TP = 10 pips. This requires finding an entry point where this ratio is possible. This can be difficult to find, otherwise we would all be on the beach by now. 2) Find an entry point where TP is reached significantly more times than SL and use trade management for losses. For example: https://www.forexfactory.com/thread/...o-trade-simple , where an SL is not used. For this method I use a TP of 20 pips, so takes 4 trades to recover; without trade management. The TP and SL will need to be emperically determined for each. At the moment I have only focused on EURUSD. Trades hitting SL are limited using time restrictions, like only trade between 9am - 4pm for example and now potentially price relative to previous day high and low. My experience with this method trading live is that their is only ever one trade reaching SL in a row and that significant more trades reach TP. Out of 63 trades, SL was reached 7 times (10%) as seen in graph below. After the trade reaching SL, I have doubled the lots on the next trade. I don't particularly like trading this way, for obvious reasons, but the evidence suggests it is feasible; so far only ever one losing trade in a row (this may change in the future). This method recovers SL trade in two trades. I think there are further improvements to be made.... I hope that answers your question. Attached Image (click to enlarge)
+
+--- 帖子 #49 ---
+Thanks guess you have an EA for your strategy. Did you managed to backtest over 5 or 10 years of data? You said 1 SL in a raw but do you know on average how many TPs in a raw?
+
+--- 帖子 #50 ---
+My preference is for rule based methods that remove human emotion and intuition, therefore can be measured, henced expert advisors. Yes I will find the results. On live trading it is 17 consecutive wins, 1 consecutive loss in a row. The average consecutive TP Trades is ~3-5. The main reasons for losing trades are: 1) Pullback in trend too deep and hits SL 2) Decreasing Daily ADR and therefore 50% ADR is just at the limit of the potential current days ADR, price goes just beyond 50% ADR and than retreats. 3) Price goes just beyond 50% ADR, hits resistance and retreats. 3) Spikes in price due to random events / news etc.. 4) Time filter causes trade to occur at less favourable price and reaches Sl first. Given the reasons for SL trades is mostly known (maybe other random causes), these events can potential be addressed by filtering in some cases to improve trades reaching TP. Currently looking at Previous day high and low for example. The EA will potentially be shared once some of the issues are resolved.
+
+--- 帖子 #51 ---
+Hi Ronin, interesting strategy in intraday... why not to take profit and stop loss based on adr ? like you entry on 50% of adr from high or low current session, why not to definite 55% of adr (an example) and 25% of adr (another example) like stop loss. In this case you will get TP and SL movable from situation of the market.
+
+--- 帖子 #52 ---
+Ronin has explained his strategy quite well in the thread and has been very accommodating with suggestions to improve the indicator. He did in fact add adjustable Profit Targets based on ADR percentage in the latest indicator update, in case you missed it - https://www.forexfactory.com/thread/...7#post14424817 As for Stop Loss, risk management is up to each trader, use whatever suits you. It's an indicator not an EA so specifying a SL is getting ahead of the game right now. Good Luck
+
+--- 帖子 #53 ---
+Oh i see, it was a suggestion from myself, and like im using my own on another platform, so i havent checked the mt4 version. Sorry :-) . Attached Image (click to enlarge)
+
+--- 帖子 #54 ---
+Agree TP and SL are up to the trader. I can only state my findings from back testing and live testing. The picture provided is of interest as it demonstrates my point about the 5 pip target. On the 10 mia (May), it can been seen price drops below the 50% ADR mark than met resistance at previous day low and price did a u-turn. The 5 pip target was reached. On 11 mia (May), there was room between 50% ADR and the previous day low. Price had room to move. The 5 pip target was reached. On 12 mia (May), the 50% ADR was approximately at the previous day low and price initial met resistance and was able to over come the resistance. I traded this move as documents in the thread. The 5 pip target was reached. The above demonstrates price may be rejected at the previous day low or might be able to over come it. This is why testing has shown a 5 pip target is the less stressful option in my opinion. At present the markets are on the move, which makes the DHR method look good. Experience has taught me that next week may be a different story.
+
+--- 帖子 #55 ---
+There are continuing questions around ADR percentage choice. So lets take a pause from DHR line trading for a moment. Given the purpose of this forum is to crowd peer review a method lets test which ADR percentage level and time restriction is best for trades. Please restrict your testing to eurusd 15M and post results with setting so we can decide. Find attach an expert advisor with the option to choose the ADR % level the trade is taken at for buy and sell trades. Normal TP and SL criteria apply in this first version with no added trade managment. Time restriction is provided as used in DHR line trading Please use the TP(5) and SL(20) of the DHR method for testing so we can compare results in the first round. The ADR is Daily ADR(10) as per the DHR method. This expert advisor is provided for testing purpose only using MT4 backtester and NOT demo and/or live trading. That would be very very foolish! Attached File(s) Percentage Daily ADR EA v1.ex4 119 KB | 196 downloads
+
+--- 帖子 #56 ---
+Inital testing: EURUSD 15M Chart TP (5) SL (20) No time restrictions Suggests a sweet spot around 65% ADR. Tested for this year only. Attached Image (click to enlarge) Please post your results as shown above. Thank you. Not surprised, as just past 50% ADR mark which tends to be the previous day low / high and S&amp;R.
+
+--- 帖子 #57 ---
+Inital testing: EURUSD 15M Chart TP (5) SL (20) No time restrictions Tested from 1st January 2021 till date Account blows as on 16th December 2022 Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #58 ---
+Thanks for the contribution. Please see article in link to understand why this back test is not valid. https://www.mql5.com/en/blogs/post/747844 For example: https://www.forexfactory.com/thread/...g-inaccuracies This is not to say the same result would not occur on accurate data. The data needs to be at a minimum 90% accurate in my experience. However most testers require the data quality to be 99.9%. I don't believe in 10 years of back testing as the market can change shape so much. Would anyone just leave an EA running for 10 years without altering its design???? Some traders optimize there EAs monthly etc so they stay relevant. Not saying I want to do that. I prefer 1-5 years back testing and then live testing. This is my preference. The crowd may not agree. Please find articles online to understand how to accurately test strategy with mt4 tester. Also note the below from IG Broker for example: The risks of backtesting Past data isn’t necessarily a good predictor of future market behaviour, so no strategy can guarantee accuracy You may be tempted to refine a model so that it best fits historical data, without accounting for the fact that future conditions may be different Past datasets may be skewed due to an adverse market event or uncharacteristically positive sentiment Insufficient datasets will likely produce models that do not account for a wide variety of market conditions A trading strategy that works well on several datasets from one market (eg forex) may not work well in another market (eg shares) Strategies that tested well in a bullish market may not perform in a bearish environment, and vice versa Back testing is a huge topic and is not the purpose of this thread
+
+--- 帖子 #59 ---
+Point taken... will do the needful to see if the result changes
+
+--- 帖子 #60 ---
+No worries. Trading is a very complex subject and we are all trying to be a Doctor of Philosophy (PhD), of the subject. I'm still learning; otherwise I would be on the beach or doing something else by now! Try eyeballing the test results. On a number of occassions I found the trade on the tester was not taken at the correct place according to live data. On one day the daily low from the tester was something like 1.06440 and the actual daily low was 1.06873. The data quality was above 90%. And sometimes when the test is re-run a different result is obtained. So I do not put too much faith in back testing. It is complex and time consuming to get 99.9% data quality in mt4 tester. Some traders prefer forward testing only by demo account and live trading. I added the expert advisor so some testing can be undertaken without distracting from the method presented in this thread. This year the DHR line method based on the rules has been profitable so far.. However as always this thread is for educational purposes only and is not a recommendation / endorsement etc..... to trade the method presented.
+
+--- 帖子 #61 ---
+EURUSD 15M, Done for today: Attached Image (click to enlarge) Was a slow day, ADR(10) decreasing, until the News spike: 07:30am US time (not broker time), USD Empire State Manufacturing Index -31.8- 3.71 0.8 USD &amp;&amp; FOMC Member Goolsbee Speaks
+
+--- 帖子 #62 ---
+Agree.....
+
+--- 帖子 #63 ---
+Good idea, simple volume indicator with multi time frame so daily volume can be seen on 15M chart. obviously the volume number will change over the course of the day. I would suggest adding the auto refresh indicator found in post 1 to the chart, as well, so multi time indicators display correctly as they have to be updated / refresh regularly. Attached File(s) avr_mtf.ex4 11 KB | 188 downloads Volume today only 42000 ish. Attached Image (click to enlarge)
+
+--- 帖子 #64 ---
+Hi Ronin, Thanks for your method, I realize it also work OK with gold, I've tried it today, with the absolute SL=3 price and TP ~ 2-4 price of gold. But most of the time it will hit the TP around 2 price of gold with high probability. Have you ever tried to test with another pairs, such as gold, indices like US500 or US30?
+
+--- 帖子 #65 ---
+Hi vanoxyz No just focused on EURUSD but does not mean anyone else has too. good luck
+
+--- 帖子 #66 ---
+I hope ths explains it better
+
+--- 帖子 #67 ---
+EURUSD 15M, loss for today. Attached Image (click to enlarge) Just shy of the 5 pip mark, not enough volume and momentum. Back testing the addition of volume as filter.
+
+--- 帖子 #68 ---
+Adjust the Recipe....
+
+--- 帖子 #69 ---
+Agree... Thank you for the encouragement. I have updated the ADR Percentage EA. There was a techincal issue with how % ADR was interpreted on backtesting and manually checking numbers; together with the usual issues with MT4 tester. Volume filter added. A daily volume of around 20,000 seems to be a minimum. In order to use this EA, the accompanying indicator: Daily Range Half Line EA v2, must be in the MT4 indicator folder. As before: This expert advisor is provided for testing purpose only using MT4 backtester and NOT demo and/or live trading. That would be very very foolish! As always this thread is for educational purposes only and is not a recommendation / endorsement etc..... to trade the method presented. Attached File(s) Daily Range Half Line EA v2.ex4 14 KB | 176 downloads Attachment 4 Attached File(s) Percentage Daily ADR EA v2.ex4 119 KB | 172 downloads
+
+--- 帖子 #70 ---
+Well that was an unexpected tester result! 2023 so far only on EURUSD 15M, 50% ADR(10), Volume 20000, TP 5, SL 20, Time Filter 1 to 18. Obviously tester result treated with extreme caution due to inherent issues with MT4 tester. Don't believe it, there are always losing trades. Attached Image (click to enlarge) For some unknown reason today's trade was left out and would have been a SL Trade. MT4 tester is trying to fool me again. I need to state for the record I do not believe the tester result but was fun to see.
+
+--- 帖子 #71 ---
+hello guys, I'm reading this strategy with interest, congratulations to all. I am a speculator and a few questions popped into my mind and I would like to share my thoughts with you. If we know that we have a negative RR but we have a very high probability in favor why not risk 70% per trade? if there is such an important consecutive win, it is better to take advantage of this.. I don't use the adr but the Asian box and I enter the breakout of a max or a min of the currency. Obviously yours is great sorry for the bad english i use a translator please don't get me wrong below I share my account roadmap with a 100% margin entry so as to have a 23% TP by making 4 few but constant levels per day and 121% per day which is not little
+
+--- 帖子 #72 ---
+Hi Js497, What is the name of the ind. in your screenshot?
+
+--- 帖子 #73 ---
+EURUSD 15M, Done for the day. Attached Image (click to enlarge) Maybe need to add break-even for those trades that don't quite make the 5 pip target.
+
+--- 帖子 #74 ---
+Eurusd
+
+--- 帖子 #75 ---
+European Session is a great session for this System. I do not wake up early enough but I watch and learn. cpfleger
+
+--- 帖子 #76 ---
+Thanks for sharing. Please could we have commentary to the image. This appears to be a totally different method to the DHR line method presented in this thread. The 50% ADR sell level was 1.08387 on EURUSD for a single 5 pip target in a day. It appears multiple trades where taken at the cross of the daily open line and under a consolidation zone and are all in profit (which is great!). Please stick to the method and rules presented in this thread. Thank you. If other % ADRs are proving more succussful for a particular currency pair / market, or your able to get more pips based on TP / SL or another means such a trailing stop please share. The method can always be developed further and made more accurate.
+
+--- 帖子 #77 ---
+DHR Line indicator updated. Version 6.00 available from post 1. Please add auto refresh to chart as well to keep indicator updated.
+
+--- 帖子 #78 ---
+I had a thought / question. The DHR Line indicator utilises todays ADR(10) value, but note the OGT ADR indicator uses yesterdays ADR value for today's value, is there a preference and what is the reason to use yesterdays value as we know todays ADR(10) value because it is an average. Todays value will include yesterdays value due to being a mean value.
+
+--- 帖子 #79 ---
+could you to post a graph with buy and sell setup entry?
+
+--- 帖子 #80 ---
+Post 61. Buy trade price crosses above blue line, dotted line above blue line is 5 pip target https://www.forexfactory.com/thread/...6#post14426056 Post 73. Sell trade price crosses below red line, dotted line below red line is 5 pip target https://www.forexfactory.com/thread/...0#post14428170
+
+--- 帖子 #81 ---
+EURUSD 15M, Done for the day. Attached Image (click to enlarge) After a few slow days of movement activity starting to show signs of increasing, big move as European market day starts. Price was returning too and testing the last major low of around 1.08145 which, was also around the previous day low, gave enough room for 5 pip target to be reached. But wary as ADR(10) around ~70 pips USD data later today. Attached Image (click to enlarge)
+
+--- 帖子 #82 ---
+Looking at the trades taken, maybe the retest of the 50% ADR(10) with strength might be a safer option to trade; just a thought. As I continue to find ways of reducing the number of trades hitting SL.
+
+--- 帖子 #83 ---
+Really I am at a loss to understand what is today value vs yesterday's value. This is an example of how I have always seen the ADR to be calculated - How to calculate the Average Daily Range value This indicator calculates the ADR value by taking the distance between the high and the low of the past 14-day period , summing them together, and finally dividing the result by 14. For example, if the daily range of a currency pair for the past 14-day period are 55,76,34,42,66,89,65,45,22,101,78,33,67, and 90, The ADR value will be (55+76+34+42+66+89+65+45+22+101+78+33+67+90)/14 =61.6 pips The ADR value is thus approximately 62 pips. I highlighted the section that contains the word "past" as it seems in your post that somehow today's pips are included in the reading. You would have to explain this in simple terms, I cannot grasp the concept. Thanks
+
+--- 帖子 #84 ---
+Maths understood, hopefully the picture explains what I mean: Value today for ADR(10) is 65 pips, but the indicator uses yesterdays value of 71 pips which is the average of the 10 days prior to yesterday, hence the question. In the DHR line indicator todays value is used calculated on the past 10 days prior to today. I hope that makes sense. Attached Image (click to enlarge)
+
+--- 帖子 #85 ---
+Still doesn't make sense to me; of course, using today range will ALWAYS make the calculation smaller, the range isn't complete Hopefully the picture explains, I'm leaving it there because just can't continue this discussion, sorry Attached Image (click to enlarge)
+
+--- 帖子 #86 ---
+Got it!! Went old school and used the calculator. Know the maths, was just thinking about it the wrong way, hence asking a question. Thank you Erebus. Attached Image (click to enlarge) Given that using ADR(10) including todays value gives a smaller value, I think that is what I was trying to elude to. In your experience would this give a small advantage on entries or not?
+
+--- 帖子 #87 ---
+In my experience, I simply just have not ever seen anyone do the calculation including today's price range, so there is no way for me to give advice. For me, it's just not done that way, and frankly, I doubt there is anything to gain, it could make it worse in fact. Say you set the target, then the range increases, so the target moves? I have reverted to my normal short-term trending day trading for now, good luck.
+
+--- 帖子 #88 ---
+Hi gold chart First entry is half range entry Eusd
+
+--- 帖子 #89 ---
+Additional rules for filtering out slow days. Will be added to post 1 in due course. -Current day not traded if Previous day ADR(1) &lt; 50 pips on EURUSD. The ADR(1) minimum will need to be determined for each market / pair being traded etc. -DHR Strength Meter coded based on cpfleger observations. A difference between the based currency and pair should be 0.5 and above. - Needs further coding to be user friendly, such as changing position on chart window etc.. - For the Strength Meter to work, add any prefix or post fix that your broker adds to the chart symbol into the indicator, if required. -DHR Strength Meter added to post 1. Attached Image (click to enlarge)
+
+--- 帖子 #90 ---
+Bundle of thanks Ronin
+
+--- 帖子 #91 ---
+Sir don't understand ADR% indicator can you explain?
+
+--- 帖子 #92 ---
+Well if the average ADR was 100 pips, 50% would be 50 pips. The definition of ADR can be found online.
+
+--- 帖子 #93 ---
+Thanks. We must open a trade at the close of the current bar which made the signal, do you confirm?
+
+--- 帖子 #94 ---
+I trade as soon as the closing price crosses the line. There must be sufficient strength and must take into account market structure and what the big picture is telling us. Not trading today as EURUSD made relatively big move yesterday (~85 pips), so there is potential for price to bounce around today or to recover some pips from yesterday. As writing the above, the expert advisor opened a buy trade on EURUSD and reached 5 pip target! So I guess recovering pips today. Trade manually and testing EA in the background. Forgot to turn the EA off. As stated, I was not going to trade today. Attached Image (click to enlarge)
+
+--- 帖子 #95 ---
+Thanks. Could you post all indicators (and EA) with template necesary for your strategy?
+
+--- 帖子 #96 ---
+Template for method will be added to post 1. Only 3 indicators: -Auto refresh -DHR line v6 -DHR Strength The EA is still being developed and tested so not for public consumption at current time. I prefer to trade manually to learn how a particular market behaves. The EA is used for back testing purposes, to understand how the method works, its' statistics (viability), some live testing as back testing is not always reliable and to determine if EA behaves as expected.
+
+--- 帖子 #97 ---
+In theory, is it right seput. Attached Image (click to enlarge)
+
+--- 帖子 #98 ---
+Yes. I trade as the close price (or ask / bid price depending), passes over the line, not the next candle. Remember this method can not be backtested on the screen as the lines are dynamic and change during the course of the day. Their final resting place each day could be significantly different from their start position. Their position is in relation to the high and low of the day, which chnage during the course of the day. In essence the method is: If the price has moved 50% of the ADR(10) on a particular day it may continue further in the same direction by at least 5 pips. The 50% ADR(10) seems to be an interesting area as the price either continues through, spikes, or decides to reverse. Therefore as stated before, the market picture must be taken into acccount such breakout of previous day high / low, was previous day move large or small relatively etc..... I find this method prevents over trading, does not use 3 million indicators on the screen, has a defined hypothesis, can potentially be automated, one trade a day (win or lose), has a defined point of entry and target so less stressful etc.... All that is required is to read the market to decide whether to enter trade or not at the line. The small pip target gives the method a higher probability of the 5 pip target. As with most methods the issue is the larger SL target of 20 pips. However the method seems to reach the 5 pip target signficantly more times than not in my experience so far. This could change in the future.
+
+--- 帖子 #99 ---
+What is the best timeframe for this strategy?
+
+--- 帖子 #100 ---
+The D in ADR means "Daily". As stated in last post, 50% of ADR. Therefore the method is daily, 15M chart utilized to visualize the internal movement of the day. Needs to be below Daily Chart. 5M - 1H
+
+--- 帖子 #101 ---
+Hello! Using 3 indicators from tpost#1 I see non changing hADR lines for days in strategy tester. Is it fixable? Or real time testing only? Thank you!
+
+--- 帖子 #102 ---
+see post 42
+
+--- 帖子 #103 ---
+Based right on it I tried to use every tick + visual mod. Indicators are in the template (tester is set to test some other ea with buttons for buy/sell). But there is what I posted above: range is not changing during days.
+
+--- 帖子 #104 ---
+I will have a look if adding refresh rate to indicator helps. It is a daily indicator on a lower frame chart so may not resolve. Hence needing auto refresh indicator on chart with DHR line indicator.
+
+--- 帖子 #105 ---
+Gents, A potential autorefresh Indicator that works. cpfleger
+
+--- 帖子 #106 ---
+Thank you
+
+--- 帖子 #107 ---
+Hm
+
+--- 帖子 #108 ---
+Thanks but the same
+
+--- 帖子 #109 ---
+They are two different tools displaying the same thing: The Fibonacci tool is set up to cover 100% ADR(10) for each day. But will have to adjust as the high and low change during the course of the day. At the end of the day the 50% will be marked. My indicator is setup only to find 50% mark as the high low range for the day develops (expands), and meets the ADR(10)/2. It is not known if the 50% line will be the buy or sell line. Hence dynamic and let the market tell us. I wanted the indicator to be a simple and easy to use tool hence only a buy / sell line and target lines For example. If the ADR(10) is 100 pips, the 50% is 50 pips. At the start of the day, the buy line will be 50 pips above the low of the first candle and the sell will be 50 pips below the high. If the during the day the price moves up by say 25 pips the sell line will move up by 25 pips, so will be now be 25 pips for the high of the first candle of the day. Therefore the final resting place of lines each day can potentially be further than the 50% mark Use the ocr adr indicator posted by erebus in this thread
+
+--- 帖子 #110 ---
+You mention the sell line moving up, that's fine, but you should also confirm that while price is moving up, and doesn't make any new low, the Buy line will remain fixed at the 50 pips in your example, and provide the level for a pending buy order, or did I miss something?
+
+--- 帖子 #111 ---
+That is correct. If pending orders with 15 minute expiry are utilised on the 15 minute time frame chart the changes in the level of the lines can be visualized as in post 2#. https://www.forexfactory.com/thread/...6#post14422456 ​​​​​​ Tend to trade the method manually as I want to see the price movement / action and if there are any improvements I can make / missing observations that would add value. The EA is used mainly to back test different ideas, such as incorporating currency strength etc...
+
+--- 帖子 #112 ---
+EURUSD 15M. Done for today. Waited for second test of 50% ADR(10). Attached Image (click to enlarge) No trade yesterday as no strength, price was ranging in narrow band with no obvious direction of travel. Attached Image (click to enlarge) When price starts touching emas and bouncing around time not to trade. Also on 1hr chart price is between 50 &amp; 100 ema. EMAs are not part of the method but help to determine whether to trade or not. I don't want to start adding indicators. Less is more. Difficult to code this in indicator.
+
+--- 帖子 #113 ---
+Done too: +5 pips Attached Image (click to enlarge)
+
+--- 帖子 #114 ---
+Is it possible to backtest this strategy with an EA or no?
+
+--- 帖子 #115 ---
+Yes using an EA based on pending orders. It does still need some filters for trades meeting SL. Hence trading manually. I have a list of work on indicator first as requested by others, such as refresh rate, and then will add the EA I use for testing so others can test and feedback improvements. I'm happy to share and work with others. The method is not prefect but has merit, there are improvements to be made regarding defining trading and non-trading days in code.
+
+--- 帖子 #116 ---
+Update to DHR Line Indicator v6.00 to v7.00. -Includes refresh rate for back testing. -Incorporated currency strength indicator. See post 1# https://www.forexfactory.com/thread/...range-strategy
+
+--- 帖子 #117 ---
+Thank you Ronin. will give it a try
+
+--- 帖子 #118 ---
+Observation and back testing has shown there is potentially an advantage to only enter buy trades when price is below the daily open price and vice versa. Attached Image (click to enlarge) Can anyone else spot what might be a potential advantage from the image?????? The research continues.......
+
+--- 帖子 #119 ---
+I am not able to find Daily Linex Boxes v2 in internet. Could you share your template file? Thanks.
+
+--- 帖子 #120 ---
+See here : https://www.forexfactory.com/search?searchid=43496810
+
+--- 帖子 #121 ---
+Found here Indicators with ON/OFF buttons | Page 41 | Forex Factory
+
+--- 帖子 #122 ---
+Slow day on EURUSD, no trade so far. Maybe news later will cause movement. Attached Image (click to enlarge) Price sitting in ~60 pip range for the last 4 days, including today so far, So walking away today.
+
+--- 帖子 #123 ---
+How annoying is that, after deciding not to trade today! But better than having an SL trade. Done for the day. News did the trick. Attached Image (click to enlarge)
+
+--- 帖子 #124 ---
+Dear, I am not able to get any output from this scanner indicator.
+
+--- 帖子 #125 ---
+Please explain. Output from buffers or indicator not displaying on chart etc.....?
+
+--- 帖子 #126 ---
+It works gents BUT us old timers do not wake up early enough.... cpfleger
+
+--- 帖子 #127 ---
+Attached to chart, but just dark screen. I have plain pair symbols, with no suffix. Tried in all TF to no avail as well.
+
+--- 帖子 #128 ---
+That is due to the text being black. Change the chart background to check. If time allows I will look at seeing if text color can be changed; but is not a priority.
+
+--- 帖子 #129 ---
+I couldn't take this trade because I wasn't in front of my computer
+
+--- 帖子 #130 ---
+Never mind, we tried ... Thanks.
+
+--- 帖子 #131 ---
+That is interesting. I'm not sure what is happening there. Will look at the code of the scanner. Thanks for letting me know.
+
+--- 帖子 #132 ---
+Expert advisor is coming..... still testing. It is difficult to filter out spike days, low ADR days (as only known after the event), and still trying to figure out the interact between the day low / high and the 50% ADR(10). Looking at currency strength, position of price relative to various market structures etc... The 50% ADR seems to occur around previous day high / low, which is considered the breakout zone and S/R. Progress is being made, but slow. I'm trading the method manually, so I can take into account market structure, news etc. There needs to be a plausible story for entering a trade. This is why I try to provide a few notes regarding each trade (whether TP or SL) and no-trade days. On occassion I will get it wrong.
+
+--- 帖子 #133 ---
+I missed too this trade today Attached Image (click to enlarge)
+
+--- 帖子 #134 ---
+Dear Ronin, Allow me to express my utmost admiration for your remarkable system. I have eagerly engaged in practicing and exploring its capabilities. In light of my profound admiration, I humbly beseech you to consider incorporating an alert function into the indicator. It would be an invaluable addition that, when the indicator touches the designated lines, could promptly dispatch a visually striking pop-up alert and phone alert. Such a feature would empower us to initiate trades manually, enhancing our control over the process. In my humble opinion, the implementation of a semi-automated system, complemented by this alert function, would undeniably elevate the overall functionality to perfection. It would strike an exquisite balance between automation and manual intervention, ensuring a harmonious fusion of efficiency and user control. Thanks a lot, SZABOLCS (neilpryde)
+
+--- 帖子 #135 ---
+I have roughly backtested it, maybe really work Attached Image (click to enlarge)
+
+--- 帖子 #136 ---
+Dear neilpryde, Thank you for the kind words of support and suggestions. Two buffers have been purposefully left in the indicator to add an alert function with pop up, email and notifications. This will be added in the next version of DHR Line Indicator. I agree that a semi-automated approach is preferable for now as some observations are difficult to describe in the language of maths; for me at least.
+
+--- 帖子 #137 ---
+Agree with rough back-test. Overall profitable but areas of improvement required for an automated system. Manual trading is different, as we can look at market structure etc.. before making a decision to trade or not. Continue to research filters for the automated system. Time of day filter does help.
+
+--- 帖子 #138 ---
+I personally prefer Algo/Auto since it more reliable. I will try to modify it and see what will happen.
+
+--- 帖子 #139 ---
+Firstly thank you to Ronin for starting this thread I have started testing the system it looks great. Hi Jeffho what parameters have you used on that test and is it Version5 ?
+
+--- 帖子 #140 ---
+Thank you. Please could I ask that test parameters are shared to allow testing by others. Thank you.
+
+--- 帖子 #141 ---
+Hi Both, I am now still trying to make it better and better. Currently I am using 20 ADR , 50 TP, 30SL with slippage 3pip (period 2010-2020) I will focus on the short part first since it look better: Attached Image (click to enlarge)
+
+--- 帖子 #142 ---
+Daily Line Boxes v2 is not on the internet, it's right here on ForexFactory Sharing a Template is useless if you don't have the indicator, in any case, I don't advise sharing Templates. They never work properly due to different brokers using different prefix or suffix. Much better to find the indicators and build the Template by yourself. That way, you know what you have and how it works. Good Luck
+
+--- 帖子 #143 ---
+Thank you. For EURUSD maybe of interest - Time filter 9am - 18pm UCT - Previous day ADR(1)&gt;48 - ADR[1](10) &gt; ADR[2](10) Other potentials -Volume -ATR(1)&gt;10-15 for breakout candle -ATR(10) H1 -The interaction with previous day low / high Looking at a few other options. This is without looking at trade management yet Also think Jan and potentially Dec months should not be traded.
+
+--- 帖子 #144 ---
+EURUSD H4, done for today. Attached Image (click to enlarge) M15 Chart still main timeframe, just checked the H4 for confirmation Currency strength -0.2 Below previous day low Price potentially trying to recapture / retake low of 24 Mar 23.
+
+--- 帖子 #145 ---
+EURUSD M15 done for today: +5 pips Attached Image (click to enlarge)
+
+--- 帖子 #146 ---
+Both caught the move today. ( ⌒o⌒)人(⌒-⌒ )v Time for a coffee
+
+--- 帖子 #147 ---
+GBPCHF 15M. Just to see..... Attached Image (click to enlarge) However due to spread being 3 pips, price had to move 8 pips above the buy line; 3 pips above the 5 pip target line. 5 pip target met. This is why I prefer currency pairs with the lowest spread possible, such as EURUSD depending on Broker.
+
+--- 帖子 #148 ---
+A good system...
+
+--- 帖子 #149 ---
+eurusd selling...
+
+--- 帖子 #150 ---
+As requested Major upgrade to DHR Line Indicator to version 9: -Addition of alerts (alert sound, email, pop up &amp; notifcation): a) Signal occurs when close of current bar crosses line. Please note: This maybe too late and need to look at Ask / Bid price or close is within x pips of line. Time will tell. Please note: If the close is on the line the trade is entered at Ask / bid line which could be 1-3 pips over the line (due to spread), and so profit (5 pip target) will be 2-4 pips. -Addition of filters (may help or not): a) Moving average (MA) filter based on fast MA above / below slow MA. (However there are inherent issues with MAs, a topic not for this thread). b) ATR H1 filter to ensure ADR for the day is increasing. c) Time filter (already added). d) Other filters will be added in due course As mentioned before the indicator is for educational purposes only. Indicator located in post 1# https://www.forexfactory.com/thread/...range-strategy Attached Image (click to enlarge)
+
+--- 帖子 #151 ---
+Thank you Ronin. Some questions: 1) Do you use always as filter the DHR Strenght Meter v1 indicator with your DHR Line Indicator v9? 2) Could you post the ATR H1 indicator? How to use this ATR H1 indicator? 3) Moving Average filter is included into DHR Line Indicator v9 signal or no? 4) How to place stop loss when we open order?
+
+--- 帖子 #152 ---
+Some questions: 1) Do you use always as filter the DHR Strenght Meter v1 indicator with your DHR Line Indicator v9? The strength meter is included to gauge whether the base currency or the pair has more strength. What strength value is considered of importance is up to the user. Currently I have it on the chart to see if it adds value or not. I find a difference between the two currencies of 0.2 seems reasonable. It is not coded into the filter for signals; just a visual on the chart. 2) Could you post the ATR H1 indicator? How to use this ATR H1 indicator? The ATR H1 visually shows how each day the range decreases and then increase as the market starts moving. Obviously we want to trade as the ATR is increasing. The DHR ATR is not needed as include in DHR Line Indicator. The less indicators, lines dots etc... on the chart, the better. The idea is a buy / sell line and good observation / interpretation of the market in question. Attached File(s) DHR ATR H1.ex4 11 KB | 155 downloads 3) Moving Average filter is included into DHR Line Indicator v9 signal or no? The filters are only taken into account for a signal if they are selected as true in the input tab of the indicator at the users discretion. Attached Image (click to enlarge) 4) How to place stop loss when we open order? The SL is as per the rules in post 1#, 20 pips. but is at your discretion. Please note: Twenty pips means four 5 pip trades are required to recover one SL trade; as previously stated in the thread
+
+--- 帖子 #153 ---
+Thank you very much for all your explanations
+
+--- 帖子 #154 ---
+Good point. Let's do the short side first: H15, time 8am-23pm, ADR 20 Attached Image (click to enlarge) H15, time 9am-18pm, ADR 20 Attached Image (click to enlarge) H15, time 8am-23pm, ADR 10 Attached Image (click to enlarge) H15, time 9am-18pm, ADR 10 Attached Image (click to enlarge) I think 8am-23pm with ADR10 is better. Will try other filter on your list too
+
+--- 帖子 #155 ---
+Hi j effho1992 Thank you for having a look at an EA for this method. I'm also using EA testing but realised the sleep function was interferring with the trade times leading to poor results! Sleep is utilised to ensure only one trade a day. I'm sure there is another way.
+
+--- 帖子 #156 ---
+EURUSD 15M currently slow as waiting for USD data today. Attached Image (click to enlarge)
+
+--- 帖子 #157 ---
+EURUSD 15M, Done for the day. Have a great weekend. See you next week. Attached Image (click to enlarge) Slow going today as waiting for news. Price returning to area of S/R from yesterday so wary. Price had some room to previous day high. Used strength to confirm trade, was + 0.3 difference. 1M chart suggested beginning to be over bought so was wary. Was looking to move SL manually to break even as price hovered around 3 pip profit mark for awhile.
+
+--- 帖子 #158 ---
+I dont use the sleep function Since we have a trading time range, I set a falt(T/F) for it
+
+--- 帖子 #159 ---
+Ronin, V9 Indicator did not paint an up arrow - see screenprint. cpfleger
+
+--- 帖子 #160 ---
+No Signal due to MA filter Attached Image (click to enlarge)
+
+--- 帖子 #161 ---
+Ronin, Green Arrow paints on 5M TF but not 15M. Please investigate asap. cpfleger
+
+--- 帖子 #162 ---
+Ronin, I will check MA's. cpfleger
+
+--- 帖子 #163 ---
+Is this after turning off the MA Filter?
+
+--- 帖子 #164 ---
+Ronin, MA Filter was set TRUE. I turned off MA Filter and removed Arrow colors to focus only on entry and TP Lines due to me previous Indicators and settings. Works better for my old eyes.. cpfleger
+
+--- 帖子 #165 ---
+Phew..... At least not a coding error. Good. I added some extras into the indicator to allow for filtering of signals. Trying to make the method as consistent as possible. Will add a boolean to ture the strength meter on / off on next version.
+
+--- 帖子 #166 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #167 ---
+When did you open this trade? My trade today: +5 pips. I opened the trade at the close of the M15 bar which made the buy signal. Attached Image (click to enlarge)
+
+--- 帖子 #168 ---
+Opened the trade as the candle crossed the line from below. I don't wait for the candle to close and then enter, that is my preference.
+
+--- 帖子 #169 ---
+Ronin, I agree with opening a trade when a candle touches either Line and I was wondering if there is an Alert that can be added to your system to open a trade automatically??? cpfleger
+
+--- 帖子 #170 ---
+Ok, in this case it would be preferable to trade with smaller timeframe (M1 or M5), no?
+
+--- 帖子 #171 ---
+Yes was thinking about that. A semi automated version. As still needs human input to determine if trade is worth taking. There are a few of us looked at an EA for the method. Maybe I will share my EA based on pending orders.
+
+--- 帖子 #172 ---
+Can do, makes no difference. The close will cross line on all timeframes at the same time. I prefer the 15M chart because lower timeframes have a lot of noise. I sometimes check the 1-5M chart or higher time frames, like today, as price was wandering about so wanted to check at lower time frame if there was enough momentum. Price was starting to level out and as the M1 counter trend method details price beginning to be at the high of a cycle. Also noticed what happened when the US Market opened.
+
+--- 帖子 #173 ---
+Ronin, Preferred is 5M TF.... cpfleger
+
+--- 帖子 #174 ---
+The Method is based on 15M timeframe as per rules in post 1# Thank you.
+
+--- 帖子 #175 ---
+Ronin, Is the EA hardcoded to work with EURUSD only or can I experiment with other pairs? Thanks for your work, grea idea !
+
+--- 帖子 #176 ---
+No the Indicator and EA are not. My preference is EURUSD. Please try other pairs, ensure they have low spread 1-2 pips.
+
+--- 帖子 #177 ---
+Thanks will give it a try.
+
+--- 帖子 #178 ---
+Hi, if we enter at touch of line instead of candle close above (or below) the line, the TF doesn't make any difference, right?
+
+--- 帖子 #179 ---
+If trading the method as per rules, the target is 5 pips. If the candles closes above / below and then enter trade, spread will mean the target is 2-3 pips, not 5 pips, depending on your broker as trade is entered at ask / bid price, not close price. I have stated this in a previous post regarding version 9 of indicator.
+
+--- 帖子 #180 ---
+Thanks for the answer and sorry.
+
+--- 帖子 #181 ---
+Sorry, I really don't understand the question. If touch of line and some pips your past the 5 pip target. Not discussing any further.
+
+--- 帖子 #182 ---
+Hi 8tango, Thanks for following the thread. I wanted to reply in more detail, but time did not allow. I hope this answers your questions. Apologises for typos, been a long day. Attached Image (click to enlarge) Also notice what happens when the US Market opens due to the news prior to market open. So it was safer to take 5 pips and go.... Fridays tend to be US news days so need to be wary.
+
+--- 帖子 #183 ---
+Thanks
+
+--- 帖子 #184 ---
+Please do you have the MT5 version of this indicator?
+
+--- 帖子 #185 ---
+pas à l'heure actuelle, peut-être dans le futur. Je n'ai pas encore migré vers mt5.
+
+--- 帖子 #186 ---
+EURUSD 15M, no trade yet.... Attached Image (click to enlarge) ATR Filter turned on: ATR(10) H1 still flat, so momentum lacking, no signal. Still a slow day, so no trade today. Done for the day. Attached Image (click to enlarge)
+
+--- 帖子 #187 ---
+Q&amp;A Session: Q5) Why Only One Trade a Day? A5) The 50% ADR(period) (or any other % ADR(period) chosen), point can only be reached / passed through once in a given day; therefore a single trade. Which ever line price crosses first will be the ADR(10) 50% mark. No guessing, price shows us the direction and potential entry point. Whether to take the trade depends on your probablity and risk analysis. Attached Image (click to enlarge) Q6) Why is buy line (blue) sometimes below the open price of the day and vice versa for the sell line (red)? A6) The buy line is calculated from the low of the day plus 50% of ADR(10). If the distance between the open of the day and the low of day is greater than the 50% ADR(10), (or any other % ADR(period) chosen), the buy line will be positioned below the open of day. Vice versa for the sell line. This is why the method can not be back tested by looking at charts. Attached Image (click to enlarge)
+
+--- 帖子 #188 ---
+EURUSD 15M, Done for the day: Attached Image (click to enlarge) Early European move today Strong downward trend and strength. ADR(10)H1 increasing.
+
+--- 帖子 #189 ---
+EURUSD 15M, TP Trade but missed as not in the room; it happens. May try and find a trdae on anothe pair.... Attached Image (click to enlarge) Another Early European move today Strong downward trend and strength. Trying to recapture yesterday 's low. ~1.06730 ADR(10)H1 increasing.
+
+--- 帖子 #190 ---
+May 2023 Stats: Attached Image (click to enlarge) Key: EA = Expert Advisor NT = No Trade Y = Trade opened N = No Trade opened Live manual and EA trading started on 11 May 23. The EA took three trades on days of low volatility, that I could see should not be traded. The 16 May SL trade was a market spike and could not be avoided. From the new schedule there was no high impact news on this day. The 23 May trade for EA hit SL due to pullback after first touch of sell line. Manual trade was taken on retest of the sell line. Hence EA hit SL, Manual hit TP. Manual trade missed on 31 May 23, but would have hit TP. Not included in stats. This means manual trading would be in profit and EA trading in loss for May 23; due to the required size of the SL. More work needed on EA. Ideas to improve the method are welcomed.
+
+--- 帖子 #191 ---
+I added some filters and add a money management system on it Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #192 ---
+That is impressive.
+
+--- 帖子 #193 ---
+Hi, I use RSI as a filter and as you see I only play with short part But I am sorry I cannot share my MM for free
+
+--- 帖子 #194 ---
+So you are happy to piggy back of a free system, but not share your improvements freely?! Haha
+
+--- 帖子 #195 ---
+Hi Ronin, For the RSI, I use RSI 14 &lt;80 entry
+
+--- 帖子 #196 ---
+Isn't normal to not share the MM part.....? haha
+
+--- 帖子 #197 ---
+JJJ bad boy
+
+--- 帖子 #198 ---
+The method was shared knowing that others may add value but not share any / all of the methodology improvements; that was the risk. If those that improve the method can share with me / us, either on the thread and/or via PM, that would be honourable and in the same spirit in which the method was shared; but can not be expected as everyone is different. Their decision to share or not too must also be honoured. Lets continue working together and improving the method. Personally, I would prefer the method to include buy and sell trades with money management but filter out the low volatility days. This is difficult as a low volatility day can only be known on the day and is multifactoral.
+
+--- 帖子 #199 ---
+EURUSD 15M. Attached Image (click to enlarge) Not as per rules as ADR significantly above the 50% mark, but made up for missing trade at start of European session. Done for the day.
+
+--- 帖子 #200 ---
+EURUSD slow day so far waiting for news: Attached Image (click to enlarge)
+
+--- 帖子 #201 ---
+EURUSD 15M trade not taken: Attached Image (click to enlarge) -Not enough strength / momentum. -Strength at -0.14 -ATR(1) also showing not enough momentum as below 15 pips -Market waiting for news later today -It is important to learn when not to trade and walk away. Will see if a trade appears later in the day.
+
+--- 帖子 #202 ---
+Today I took this EURUSD trade: -10 pips Attached Image (click to enlarge) Which indicator do you use for strength / momentum?
+
+--- 帖子 #203 ---
+The place a trade may occur is known. Whilst waiting for price to reach this point we need to build a story as to why the trade should be entered. The Hypothesis is I should not enter this trade. For each trade the hypothesis must be disproved with enough evidence each day, each trade. Hence the saying "Whenever there is any doubt, there is no doubt". We use our time to gather the evidence, look at market structure, recognise if the market is slow today e.g. ADR is expanding slowly, no true direction. If the market is slow why? The market maybe waiting for something to happen, look if there is news today based on the indice etc being traded. As part of gathering evidence I use the DHR ATR(10) H1, the DHR Strength Indicator and sometimes if not sure ATR(1) M15 with a level line at 0.0015. If you look at ATR(1) M15 over the past days, see that a spike of ~15 pips occurs when there is initial momentum / potential breakout. However at the time of the breakout the ATR(1) value will obviously be less in real time. The above is why my preference is to focus on one currency pair, as each day is part of a continuing story and so understand how the pair moves. I'm in the process of updating the DHR Line Indicator, with chart display of % ATR and strength with the option to select the currency pair. If you were trading manually, a breakeven could potentially have been set by moving the SL line as price did hang around the ~3-4 pip profit mark for awhile. The current move away from the line maybe a pullback within the downward trend, price will let us know. This is why I post / share my daily trade / no-trade everyday TP or SL with notes as to why a trade was entered or not. I hope it helps.
+
+--- 帖子 #204 ---
+EURUSD still slow...... waiting for news later.
+
+--- 帖子 #205 ---
+Thank you for your explanations. What is the name of the indicator which mesure the strenght on this picture below? How to use it to filter trade? Attached Image (click to enlarge) Is it better to filter trade with this strenght indicator or filter trader with only DHR ATR(10) H1 or use the 2 indicators togethers?
+
+--- 帖子 #206 ---
+The arrow points to the updated version of the DHR Line Indicator currently being tested before shared. Daily routine, my preference: 1) Big picture: - Market over all in trend or not, which direction, what is the bloomberg news say... 2) Daily picture: - Is the market slow? If so why? - Is the ADR over the last few days increasing or decrease? - Is there news today - What is the trend looking like today? 100 / 50 EMA. -If you look today on M15 chart for EURUSD, close together and flat, so not really any trend in place. Probably trying to decide if to continue downwards or reverse. - Daily Hi / Lo range is it narrow, skewed, etc..... 3) Indicators: - Is ADR % increasing slowly? - Is daily Hi / Lo range narrow? - Is ADR(10) H1 increasing? Is there enough room for trade e.g what is the pips reading - ADR(1) M15 is there momentum, increase in the ATR of each candle? - Can look at volume as well. I don't - DNR Strength meter reading still testing not sure if trust it yet. - Look at overall price pattern. I dont look for specific candles patterns, just overall structure. - Take into account previous day high and low to where trade line is. As known this is not a true science. However I have tried to make the method simple and rule based without 100s of indicators. Backtesting by myself and others show the rules work but there are improvements to be made. For example, I don't like the SL being at 20pips and want to improve this. I hope that helps.
+
+--- 帖子 #207 ---
+EURUSD 15M. Done for the day Attached Image (click to enlarge) . -Finally some strength ~0.30 on DHR Strength Meter -Room to move to previous day high -Overcome S/R -Bulls candles in a row -However market still ranging waiting for news, so was a risky trade.
+
+--- 帖子 #208 ---
+Red MA is below the blue, this is not a good setup for a buy, no?
+
+--- 帖子 #209 ---
+Correct, as stated it was a risky trade in my opinion. Also the MAs are close together and flat. So could be a reversal / pullback of the multi day downward trend. Based decision on Strength meter being 0.3, some room to previous day high and the run of bull candles before it suggesting some momentum to the upside. This trade is NOT strictly to the rules, as trade is only to be taken, or not, at the ADR(10) 50% mark, so was risky away.
+
+--- 帖子 #210 ---
+For Ronin.....
+
+--- 帖子 #211 ---
+LoL, soooo true. I should listen to Andreas, he knows...... Andreas Clenow is an amazing Hedge Fund Manager and Strategist. He has shown buying stocks just based on the letter of the alphabet can be profitable! It started out as joke made by another Fund Manager and Andreas, gave it a try. Achieving True Alpha(tm) True Alpha(tm) is a revolutionary portfolio construction algorithm, selecting stocks on the sole basis of the first letter in the stock ticker. What, what? Yes, yes, calm down and listen. To show you that we’re not just messing around here, let’s throw some simulations at the wall and see what sticks. As a baseline universe, we’ll use the S&amp;P 500 Index. The simulations take historical index membership into account of course, including the graveyard. If it didn’t, it would be kinda useless as a simulation, wouldn’t it. Dividends and the usual stuff is naturally handled properly as well. For now, we’ll allocate equal cash to all positions. The portfolio is rebalanced monthly to ensure that we maintain approximate cash parity. If not, the weights would go seriously out of whack with time. First we’ll try the obvious. Let’s run a simulation that buys only stocks starting with a certain letter. Have you ever considered what initial ticker letter is the most beneficial for long term price development? Why not? You probably considered what month is the best, or what weekday. The answer is of course Y. If you had bought all the stocks starting with Y, you would have more than doubled the return of the S&amp;P 500 for the past 15 years. Other good letters include B, H, P, T and W, all of which would have yielded double digit annualized returns since 2000. However, you should obviously stay away from Q and Z, where the annualized return for the same period was negative.
+
+--- 帖子 #212 ---
+haha very funny Ronny
+
+--- 帖子 #213 ---
+Here is the link: https://www.followingthetrend.com/20...of-the-sp-500/ The truth is as Andreas states: "The truth is that you can pick stocks at random and have a very high probability of outperforming the market. As long as you pick enough stocks to gain a decent diversification. Yes, I’ve done the research on that, and yes I will post an article on that soon too."
+
+--- 帖子 #214 ---
+Update to DHR Line Indicator, now v12. See Post 1#. https://www.forexfactory.com/thread/...range-strategy -Additon of ADR % value of the ADR(10) value with ability to turn off and on. -Addition of currency strength meter with ability to chose currency pair and turn off and on. (not all pairs included for now).
+
+--- 帖子 #215 ---
+Slow day on EURUSD so far.... not surprising given the size of the move yesterday. Also Friday high impact news later, so market waiting like yesterday. Attached Image (click to enlarge)
+
+--- 帖子 #216 ---
+Which others indicators is necesary to display correctly EURUSD Strength and Strength pairs because it's indicate 0.00 as value on my chart below? Attached Image (click to enlarge)
+
+--- 帖子 #217 ---
+Check the inputs, if there is a pre / post fix. May or may not be required for your broker. Hope this solves the issue. Attached Image (click to enlarge)
+
+--- 帖子 #218 ---
+Yes it is necesary to remove the "_SB into postix field to display Strength value, now it work fine, thanks.
+
+--- 帖子 #219 ---
+Great! Thanks for letting me know. Before you ask........ I'm in the process of coding the alert function for the strength indicator.
+
+--- 帖子 #220 ---
+Daily thank you to Ronin.....
+
+--- 帖子 #221 ---
+Thank you for the kind words. I realised yesterday this method may potentially have a role as a training aid; which was not my intention. It teaches patience, reading of the market, not to over trade, accepting some days are a write off / loss and being consistent; in my opinion. Others may not agree and that is ok. I'm still learning from the method and I invented it. It has helped me read the market better, deciding when not to trade and walk away for the day.
+
+--- 帖子 #222 ---
+HI. Could you put a set and minimum of procedure to test your EA? I put the exe on trading system; I put the indicator on indicators...but it doesn't make any trades. Thank you!
+
+--- 帖子 #223 ---
+Try MT4 Strategy Tester and look at tabs for errors. At the present time this is a manual method. The EA needs further work when time allows.
+
+--- 帖子 #224 ---
+EURUSD 15M. Done for the day. Have a great weekend. Attached Image (click to enlarge) Never trade the inital spike, too risky and spread too wide; going to get caught out. Wait for next candle see if there is a retest of the sell line.
+
+--- 帖子 #225 ---
+It really worked. i just enter orders... thn
+
+--- 帖子 #226 ---
+Hi all, I am still working on this. The bitter true is that we need to fliter/fix the "flating" issue since 2015, then it will become a very good strategy.
+
+--- 帖子 #227 ---
+Hi Ronin, Could you please share the template on 15min tf. thanks in advance
+
+--- 帖子 #228 ---
+Hi smartvin, I will add a template to post 1# in the next few days when time allows. Please be aware templates do not always load the same on different terminals. Currently trying to code alert for strength meter into DHR Line Indicator; but takes time.........
+
+--- 帖子 #229 ---
+EURUSD 15M: SL today, moved SL to 5 pips as price did not have enough momentum to reach TP. Done for today. Apologises no image as no access to computer.
+
+--- 帖子 #230 ---
+Thanks Ronin
+
+--- 帖子 #231 ---
+EURUSD 15M. Done for the day. Attached Image (click to enlarge) USD Strength Price below both MAs. Potential retest of yesterday's low. ATR(10) H1 increaseing a bit later....... Attached Image (click to enlarge)
+
+--- 帖子 #232 ---
+The main issue, when price is at the buy / sell line is whether there is enough momentum to carry price over the 5 pip target line or not. This can be difficult to assess on some occassions; when the market is wandering slowly in a direction or running out of energy. There will always be days the SL is hit, that is just how it is.... At present, I'm testing different filters for this issue. There are a large number of ways to resolve the issue.....
+
+--- 帖子 #233 ---
+One of the potential filters: Attached Image (click to enlarge) Testing more in the background but takes time.........
+
+--- 帖子 #234 ---
+Post 1# updated with template and all current indicators as requested. This is the setup used by me. Sometimes add on 100 and 50 ema to help decide. Less is more on the chart. https://www.forexfactory.com/thread/...range-strategy
+
+--- 帖子 #235 ---
+Nice one Ronin..... cpfleger
+
+--- 帖子 #236 ---
+Ronin, See screenprint. cpfleger
+
+--- 帖子 #237 ---
+Sharp eyes! Wondering if anyone else was paying attention. Has been corrected in the next version. Taking time to include strength alert.
+
+--- 帖子 #238 ---
+Ronin, Excellent, my old eyes still work - sometimes. cpfleger
+
+--- 帖子 #239 ---
+As stated eariler, yesterday's low retested and passed below.
+
+--- 帖子 #240 ---
+EURUSD 15M, slow day no trade so far as no strength.
+
+--- 帖子 #241 ---
+EURUSD 15M. Done for the day. Attached Image (click to enlarge) -The touch of the sell line eariler had no strength. -Strength at buy line. -Price in a range for 3rd day. -Resistance met at yesterday low. -ATR H1 greater than 10
+
+--- 帖子 #242 ---
+Hi Ronin, Just wanted to say thanks for sharing your idea for this method, I have had good success for the last couple weeks trying it out. The key I think is using some secondary confirmation to go with the buy sell lines. For me so far I mostly look at higher time frame support resistance and direction. Don't use the buy line at the top of a long daily uptrend which is approaching daily resistance for example. I also look for fresh crosses on the 200ema on the 15 min timeframe and a general bias using the 200 ema if price is above or below. I'll have to check out the ATR H1 indicator you have been using also.
+
+--- 帖子 #243 ---
+Hi feichkop, Thank you for the kind words and sharing how a trade is confirmed. Agree a secondary confirmation is required; I was naively hoping to avoid this. Still trying to figure out some solid filters to add to the rules. I will try your suggestions. The ATR(10) H1 is used to show that there is enough momentum. For example, for a 5 pip target the ATRT(10) H1 would need to have a value of more than 5 pips, probably around &gt; 8 pips. If the target is 5 pips and the ATR(10) H1 is 5 pips, unlikely there is enough room / momentum etc... used to filter out some of the SL trades; like yesterdays' touch of the sell line. The MT4 built-in ATR indicator can be used instead of the ATR MTF if preferred; using the calculation below: 60min chart = 10 15min chart = x 60min/15min = 4 4 * 10period = 40 period (40 period ATR on 15M == 10 period ATR on H1).
+
+--- 帖子 #244 ---
+EURUSD 15M. Done for the day. Attached Image (click to enlarge)
+
+--- 帖子 #245 ---
+Hi, if using the template provided in post #1 it appears at ATR (1), so we need to change that to ATR (40) I understand. Thanks Ronnie for your hard work on this.
+
+--- 帖子 #246 ---
+Hi BfromG, Yes can use ATR(40) instead of the DHR ATR(10) H1. However I also use ATR(1) so I can see spikes in range. Level drawn at 0.0015, i.e. 15 pips If you look at the attached image you will see there are maybe only one or few candles that reach above 15 pips per day on a 15M chart. These tend to be impulses / thrusts in movement. Note, the candles tends to reach the 15 pip mark at close of candle, so in realtime looking for around ~8-15 pips. Tend to put both ATRs in the same sub-window. We are looking for medium term and short term increasing momentum. i.e. increase in candle range The concept is simple, if you want a TP of 5 pips, there has to be a range greater than 5 pips, otherwise 5 pips is not available. The the greater the ATR value the better. The entire method is based on the high and low range of the day, the hour and the candle. Hope that makes sense. Attached Image (click to enlarge)
+
+--- 帖子 #247 ---
+EURUSD slow day so far, no news today, slowly trying to recover some of the gain yesterday.... wait and see at present. Maybe a non-trading day as not really any momentum at present. No trade today.
+
+--- 帖子 #248 ---
+EURUSD 15M. Done for the day. Attached Image (click to enlarge) The horizontal lines are zigzag hi lo points, just seeing if they add any value. The MAs used are 200, 100, 50 EMAs. However I prefer a less cluttered chart of the original idea / method
+
+--- 帖子 #249 ---
+Quick 8 pips this morning Attached Image (click to enlarge)
+
+--- 帖子 #250 ---
+Hi feichkop, please could I learn more about your approach to validate entry by other timeframe S/R and moving averages? Thank you.
+
+--- 帖子 #251 ---
+Hi Ronin, Sure, I'm no real expert and still learning but I'll do my best. Here's a trade I just closed. Looking at the 4hr there is solid support and price is starting to rise. On the 15 min chart I drew in the resistance trendline and actually placed this trade as a pending limit order thinking if price broke both the trendline and the purple 200ema it would have some momentum. That coupled with the idea that if price makes it to the 50% buy line of the 10 day adr it will likely go more in that direction. I have been placing limit orders with a 10 pip tp and a 30 pip sl. Hope that helps Attached Image (click to enlarge)
+
+--- 帖子 #252 ---
+Also BTW, when I placed the trades I was right on the blue buy line, but you can see on my screenshot they shifted a little by the time the trade closde.
+
+--- 帖子 #253 ---
+EURUSD 15M. Already done for the day!!! Attached Image (click to enlarge) -Early today. Strong trend from start of new day, so used pending stop order. -Currency strength &gt;= 0.5
+
+--- 帖子 #254 ---
+Thank you feichkop, very helpfully.
+
+--- 帖子 #255 ---
++5 pips fo today Attached Image (click to enlarge)
+
+--- 帖子 #256 ---
+Excellent! We are all getting there with consistent wins.
+
+--- 帖子 #257 ---
+Ronin, I have had faith since day 1 with your system. cpfleger
+
+--- 帖子 #258 ---
+EURUSD slow day so far awaiting news later today. Bloomberg radio on and listening...... Price near the buy line now (UCT 10:43), but no cigar yet. Price still wandering upwards with minor strength at 0.13
+
+--- 帖子 #259 ---
+EURUSD 15M. Done for the day. Slow day so far, could see strength was maintaining, however wary as US market about to open and news. Attached Image (click to enlarge)
+
+--- 帖子 #260 ---
+Hope the method is clear by the nearly two months of live manual trades showing ~91% win rate; handing the baton over...... Good Luck.
+
+--- 帖子 #261 ---
+I would like to test this strategy, but I no longer use the old Meta Trader. Ctrader is much better. Missing the indicators from the first post of this thread for Ctrader.
+
+--- 帖子 #262 ---
+I tested this morning my first trade works fine. Not enough strength but testing at the movment
+
+--- 帖子 #263 ---
+Two more winning trade
+
+--- 帖子 #264 ---
+Actually winning but hit ST before TP.
+
+--- 帖子 #265 ---
+Another winner
+
+--- 帖子 #266 ---
+The live testing has shown a secondary confirmation for entry is needed, such as support and resistance, looking at other time frames. This will depend on what the user prefers. This was not my preference as wanted the method to be as simple as possible for everyone, but the markets had other ideas. With time the method teaches to read the market more reliably as it has for me. This is what cpfleger who is a master at manual trading has stated. The method works and need patiences. Over the last two month I have only lost 1 trade as I have learnt when not to trade and walk away for the day. There will always be another day and another trade.
+
+--- 帖子 #267 ---
+USDCHF Winner
+
+--- 帖子 #268 ---
+why do you need secondary confirmation when your live testing results are 91%
+
+--- 帖子 #269 ---
+To try and avoid SL trades, that is why I have achieved 91%. Knew when not to trade. I mainly used currecny strength and direction / S&amp;R based on 50 &amp; 100 ema. Others are looking at different time frames for confirmation of S&amp;R etc.. Hope that makes sense.
+
+--- 帖子 #270 ---
+Ronin's finest work yet.....
+
+--- 帖子 #271 ---
+[quote=Amiraven;14464515]New Approach ... {image}[/quote If it is a new approach it should be a new thread as it is unrelated to the method being presented. I have asked for your post to be removed. Please start a new thread for your method. Don't hijack someone elses
+
+--- 帖子 #272 ---
+[quote=Ronin-;14464526] Sorry Ronin , I mistakenly Posted The screenprint , I removed it myself !
+
+--- 帖子 #273 ---
+Thanks. This post is related to the method of the thread. As I'm researching the buy / sell lines association with other data points and seeing if it improves the method. At present the buy / sell line are linked to the high and low of the day. What if they were linked to the mid of day for example
+
+--- 帖子 #274 ---
+For example, instead of having straight buy / sell lines, what about making them volatility lines: Attached Image (click to enlarge) There is a lot potentials to be analysed and it takes time.
+
+--- 帖子 #275 ---
+ive been here many years, usually when a system starts making too many changes, expecially uneccesary ones the system starts to slowly loose its essence and dies..many great syystems on the forum but they started loosing its essense due to too many uneccesary changes.
+
+--- 帖子 #276 ---
+Thank you for sharing your insight, it is appreicated. I have been lucky enough to have had constructure feedback by yourself and others who have years of experience; which has really helped. Maybe I'm trying to fix something that does not need fixing and stretching the method too far. Just blind to this fact as can't see outside of the situation. I will leave the method alone. It works as is...
+
+--- 帖子 #277 ---
+It’s called over fitting. We try to ask too much of a system, beyond its logical capabilities, and start to tinker with the methodology to a point where the logic becomes compromised. there’s a 1000 threads on this forum about simplicity for a reason!
+
+--- 帖子 #278 ---
+looks like a great method.. in my opinion, needs backtesting and forward testing, it needs to be understood wholly, the only changes need to be changes that have stats and probabilities backing it and changes that will improve the system statisticlly, not just gues work, but needs to be backed by lots of data and stats, not just 1-3months.. i like this system and id hate to see it die like the many great systems which some i still use and have advanced till today.
+
+--- 帖子 #279 ---
+EURUSD 15M, Still in narrow range after large move yesterday. So no trade today. Have a great weekend.
+
+--- 帖子 #280 ---
+Im Short EU
+
+--- 帖子 #281 ---
+market looks range bound though
+
+--- 帖子 #282 ---
+Agree, when I have doubt of price reaching the 5 pip target it is better to walk away and not hit SL; part of my continued training in the DHR Line Method. However, on an another project, still figuring out the coding and rules, was short on EU and already TP. This is not mentioned in this thread as a different method. A thread will be started on the method in due course.
+
+--- 帖子 #283 ---
+my TP just got hit!
+
+--- 帖子 #284 ---
+EURUSD 15M: Not traded. Prefer to get it wrong this way round than hit SL. Always another setup..... Attached Image (click to enlarge)
+
+--- 帖子 #285 ---
+If we consider the DOS Candle Method ( https://www.forexfactory.com/thread/...o-trade-simple ). The day after a significantly larger than average candle body in one direction, there is usually ~20 pips move in the other direction &gt;90% of cases. However in the DHR Line Method we are waiting for 50% ADR(10) to be reached, which I felt may be beyond the expected move and proved wrong today.
+
+--- 帖子 #286 ---
+My entry for EURUSD shows here , thoughts?
+
+--- 帖子 #287 ---
+For the DHR Line Method the sell line would be calculated as (High of the current Day-(ADR(10)/2)) which is 1.09328 currently as dynamic. Is this how the line was calculated? Or is that the mid line of the day? Apologises if I have not understood; I also code in pine script.
+
+--- 帖子 #288 ---
+hi there ronin, happy for your good work. but, the reward be risk of this strategy is 1/4. is it good u think? the wins must be 8 of 10 that the result would be 0. i think its not good, and for solving this issue, ive a proposal. u can enter the 1/3 of the ADR for tp of 3 and sl of low of the day. for this work, we must assume the trend of the day (means bullish or bearish) hope my suggestions can help.
+
+--- 帖子 #289 ---
+Thank you for the suggestion. The DHR Line method is one of a number of methods I use daily and have now moved on to other projects. Good luck.
+
+--- 帖子 #290 ---
+where to set stop-loss and take-profit Very please
+
+--- 帖子 #291 ---
+Haven't been able to trade for a few days, 10 pips from this morning Attached Image (click to enlarge)
+
+--- 帖子 #292 ---
+TP = dotted line which is 5 pips SL = 20 pips. I understand the risk ratio is not great but that is where learning when and when not to trade comes into play through observation of what the market is telling us. It has been shown through the live trades presented over approximately two months in this thread that once the market can be analysed the TP rate is in the &gt;90%. It is understood two months is a short period of time but in those two months the markets has changed shape a few times and the method still worked. Using a pending order EA I see that most months the method has significantly more TP trades occur over SL trades; as previously stated adding human market analysis takes the method to the next level
+
+--- 帖子 #293 ---
+Nice end to the week with another quick 10 pips as price was starting to break support and making new lows. Attached Image (click to enlarge)
+
+--- 帖子 #294 ---
+Thats great. Missed that one, too early for me. Always another trade
+
+--- 帖子 #295 ---
+Hi Ronin, Coud you explain the "Percentage of ADR" display on chart? Is there rule to trade or no (depending of the value of this ADR)? Attached Image (click to enlarge)
+
+--- 帖子 #296 ---
+i mate would you consider to create one dashboard based on failed high-low may be you see fhl indicator (wich was my idea though i have zero knoledge daniel bro created for me. Failed high low mean smart money liquidity sweep fhl mean darkclud and piercing ,fhl mean failed swing aka trap so one dashboard wiil be fantastic tool for any smc or price action trader ..imho.thanks in advance
+
+--- 帖子 #297 ---
+Hi 8tango, Apologises for the late response. The Percentage ADR tells us how close we are to the 50% mark at which a trade is taken if confirmed. The idea is when 50% of ADR(10) is reached a trade is taken if confirmed. The lines tells us if we are looking for a buy or sell trade at the 50% of ADR(10). The buy line is 50% of ADR from low of the day and vice versa for the sell. So it is a kind of a race to see which line is reached first. For reasons unknown to me, the 50% of ADR(10) region is where the action occurs; be it breakout or failure to breakout. I have tried all different ADR values and have always come back to ADR(10). Hope that makes sense.
+
+--- 帖子 #298 ---
+Hi classy, Thanks for contributing and sharing your idea. Let me have a look and see if it adds value.
+
+--- 帖子 #299 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #300 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #166 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #167 ---
+Hi, Have you tried using the daily open as reference for the adr?
+
+--- 帖子 #168 ---
+Sovy, Others have tried the ADR Indicator if you read the entire Forum. cpfleger
+
+--- 帖子 #169 ---
+Hi Sovy, The buy and sell trade line where attached the high and low of the day to be dynamic. By attaching to the daily open price it becomes a static system but may work, will give it a try. Find below a version based on Daily Open Price. Let me know how you get on. Initial tests suggest the ADR has to be less than 50% Attached File(s) Daily Open Range Half Line v6.ex4 33 KB | 168 downloads
+
+--- 帖子 #170 ---
+I kind of like it in the sense that it helps me with bias on dxy. Since if it will do as you say where 50% adr 10 then i know my pairs may go the opposing way because i trade usd pairs like euro, gbu and nzdusd. Reason why i like the open as base because the open of the daily will always be the same. Hehe. I will try the adr 10 daily open and then 50% value and see if i get a 5pip win and check the drawdown and see if i can use some pattern for entry 1. Euro +5 (today) 2. Friday no trade 3. Thursday +5 4. Wed trade 5. Tuesday +5 6. Monday no trade 7. Friday +5 either way 8. Thursday +5 9. Wednesday +5 10. Tuesday no trade 11. Monday +5 12. Friday +5 13. Thursday +5 14. Wednesday +5 15. Tuesday trade 16. Monday +5 17. Friday lost 18. Thursday lost 19. Wednesday +5 20. No trade 55 pips. Depending on how you set the losses. If it is 20 then thar is 15 pips win for the past 20 days.
+
+--- 帖子 #171 ---
+The win rate of the method is high. Unfortunately the problem is the larger SL which I have not been able to resolve. Open to suggestions. The 50% region of ADR (10) seems to be an interesting place as price tends to reverse or run in a direction. I am fond of this method as it is good for new traders. It teaches patience, reading the market and when to walk away and stop trading. Happy to work together to improve if needed.
+
+--- 帖子 #172 ---
+How to solve the big stop loss? That may alter your method. 1. There's always the idea of support and resistance 2. Supply and demand. 3. Entering after liquidity sweep or knowing the high low or fvg may be the target. 4. Time based entry 5. But hey if your method works, it is already good enough and altering it probably will lower the gains. I am a firm believer of less risk more reward. So, one simply needs the discipline. To not increase the lot size.
+
+--- 帖子 #173 ---
+yes. I asked only since i wondered what if the open was used as base.
+
+--- 帖子 #174 ---
+Another question, did you try using atr over adr?
+
+--- 帖子 #175 ---
+Tried today, i almost got killed. I had to use some mgt to get iout of the drawdown. Key, i suppose is, your method helps if it goes with the trend. Euro is bear and euro moved north 1/2 daily adr. I bougjt for 5pip win. It dove. No regrets. It's my money. And having forward tested the method i love it. I still ended up net positive, closing 2 losing trades with one having enough earnings for those 2 loses. And i made a 3rd which was a bear sell from above. I suppose you suggest your method at ny time?
+
+--- 帖子 #176 ---
+The idea was to find the half way point of total price movement in a day from high to low. Therefore we use the high and low of the day. As we are unable to predict the half way point, I used the average of the daily range for the last 10 days and calcaulte what is half of ADR(10). Hence the 50% mark. Testing showed this worked best. ATR and ADR are the same just that ADR is atr set to a time frame of a day. So we are waiting for the 50% of ADR to reached therefore there is no specific time just when the line has been touched. Whichever line is touched first determine if buy or sell. Only one trade a day.
+
+
+===== 附件下载链接 =====
+
+0 - Chart Symbol.ex4: https://www.forexfactory.com/attachment/file/4472920?d=1686048469
+1D Highest P.ex4: https://www.forexfactory.com/attachment/file/4456720?d=1683887497
+1D Lowest P.ex4: https://www.forexfactory.com/attachment/file/4456719?d=1683887481
+AutoRefresh 509.ex4: https://www.forexfactory.com/attachment/file/4465029?d=1685021408
+avr_mtf.ex4: https://www.forexfactory.com/attachment/file/4458014?d=1684160439
+Daily Open Range Half Line v6.ex4: https://www.forexfactory.com/attachment/file/4567964?d=1697447636
+Daily Range Half Line EA v2.ex4: https://www.forexfactory.com/attachment/file/4458761?d=1684244771
+Daily Range Half Line v12.ex4: https://www.forexfactory.com/attachment/file/4470249?d=1685661199
+Daily Range Half Line v5.ex4: https://www.forexfactory.com/attachment/file/4457165?d=1683940729
+DHR ATR H1.ex4: https://www.forexfactory.com/attachment/file/4472921?d=1686048469
+DHR ATR H1.ex4: https://www.forexfactory.com/attachment/file/4465045?d=1685022041
+DHR Scanner v1.ex4: https://www.forexfactory.com/attachment/file/4457169?d=1683942082
+DHR Template v1.tpl: https://www.forexfactory.com/attachment/file/4472926?d=1686048503
+Percentage Daily ADR EA v1.ex4: https://www.forexfactory.com/attachment/file/4457367?d=1684027199
+Percentage Daily ADR EA v2.ex4: https://www.forexfactory.com/attachment/file/4458810?d=1684247416
+Pip Counter (Andrea).ex4: https://www.forexfactory.com/attachment/file/4472922?d=1686048469
+pipsometer_5_decimal.ex4: https://www.forexfactory.com/attachment/file/4472923?d=1686048470
+SL TP-OE PIP CALC INDY.ex4: https://www.forexfactory.com/attachment/file/4472924?d=1686048470

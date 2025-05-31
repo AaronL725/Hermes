@@ -1,0 +1,561 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Attached Image (click to enlarge) RISK WARNING All Expert Advisors (Robots), Indicators, Trading Systems posted by me ​are Trading Tools developed for Experimental purposes. Using any of these tools on a real account carries a high degree of risk. I will not be held responsible for any losses incurred by any one uses these tools. Engulfer Trading System (ETS) uses engulfing as an entry method where trader can select the number (n) of engulfed candles (e.g. 1, 2, 3 ... etc). The system generates both trend reversal signals and trend continuation signals after pull backs. It uses high RR (Reward to Risk) ratio, 3 or higher. The engulfing method implemented here is as follows: - The system acts on the CURRENT candle to benefit from the break out momentum - Bullish Engulfer (LONG Signal --&gt; Buy): * The current candle price should exceed the Highs of all (n) previous candles * The immediate previous candle should be bearish * The Low of the current candle should be less or equal than the close of all (n) previous candles - Bearish Engulfer (SHORT Signal --&gt; Sell): * The current candle price should exceed the Lows of all (n) previous candles * The immediate previous candle should be bullish * The High of the current candle should be greater or equal than the close of all (n) previous candles // Entry &amp; Exit :-------------------------------------------- - Buy on Bullish Engulfer with stop loss at previous candle low , profit target = RR x Stop Loss - Sell on Bearish Engulfer, with stop loss at previous candle high , profit target = RR x Stop Loss // Position Sizing :----------------------------------------- - Position size can be fixed or automatically calculated by the EA based on Stop Loss and Risk percentage of account free margin, for each trade. // Trade Timing :--------------------------------------------- - EA has a trading time filter (start hour to end hour Inclusive) - Time filter is used only for opening trades. While closing is based on SL or TP which can happen any time. - Time used is Broker Time - I found better results during European Session GMT 6 to GMT 16, so for example my broker time is GMT + 3, my timing filter will be 9 to 19 ... and so on. // Constraints :--------------------------------------------- - Only one position at a time per pair/tf - Only one trade can be taken on the same candle Sample Chart : EUR/USD H1 with (n) candles set to 3 and RR set to 2 Attached Image (click to enlarge) Tester report : EUR/USD H1 - 2015 with (n) candles set to 2 and RR set to 5 Attached Image (click to enlarge) Enhancement Requests ; kohones : an option to close all positions at profit target "x" (Money / Equity Percentage) abokwaik : Min SL, Max SL, TS, Min Engulfer Range MathTrader7 : Break Even option. , No Trades on same bar where last trade was closed. wattaman : entry on retrace %
+
+--- 帖子 #2 ---
+EA Inputs: Magic Number (Unique for each chart) ( default = 40851) Lot Size, make 0 to use Risk Percentage (default = 0) Risk Percentage (default = 0.01) Number of Engulfed Bars (default = 2) Starting Hour (default = 9) broker time Ending Hour (default = 18) broker time Reward_to_Risk (default = 5) Max Lots (default = 3) The above inputs where used for EUR/USD H1.
+
+--- 帖子 #3 ---
+EUR/USD H1 2015, with Number of Engulfed bars = 3, other inputs as above Attached Image (click to enlarge)
+
+--- 帖子 #4 ---
+nice work abokwaik. i'm a fan of engulfs and have a number of indicators that point them out. However i have found all somewhat faulted. If your brokers candle opens a fraction out from the previous candles close then the indi's will not pick this up and an engulf is missed. I don't know if it would improve or hinder your system if you re-coded that the new candle can open 1 pip from previous candles close. I've placed a picture to show missed engulfs Attached Image (click to enlarge)
+
+--- 帖子 #5 ---
+Thanks kraven, For a bearish entry the HIGH (not the open) of the Current Candle should be greater or equal than the CLOSE of the previous candle. For a bullish entry the LOW (not the open) of the Current Candle should be less or equal than the CLOSE of the previous candle. This means if there was a Gap it should be closed before taking the signal. Which I think would be safer than taking the entry while the gap is not closed yet. Regards, Khalil
+
+--- 帖子 #6 ---
+ok Khalil.
+
+--- 帖子 #7 ---
+Hi Abokwaik, thanks for implementing this strategy. However, I've let it run through 2010-06-01 until 2015-10-09 on Dukascopy tick data and it failed on the long run because the hit rate went down to 13%. Note that 2010 and 2015 are the only years this strategy had been profitable, which also your backtest indicates. Attached Image (click to enlarge) BUT: When analyzing the trades using QuantAnalyzer4 it came up with some kind of surprise: Attached Image (click to enlarge) Note trading hours 09:00-10:00 Etc/GMT and 15:00 Etc/GMT. The first two hours are tradeable using an Asia-Range London-Open-Breakout. And the 15:00 Etc/GMT should be some kind of New York Open breakout or something similar.
+
+--- 帖子 #8 ---
+Valuable findings Naddmer I'll see how it can be used to improve the system. Thanks
+
+--- 帖子 #9 ---
+Hello; I really appreciate what you have done "abokwaik", I have a trading system called " Significant candle Price Action System " and I'm using it almost for 3 years, I made this system by my self and now I'm profitable with it so when I read this thread I found that your engulfing candle system has a lot of similarity with my Significant candle system so I decide to help you for making this system better, first of all trading based on normal engulfing candle as all of us know is not a profitable system so I recommend you to watch this video from "Walter Peters" and make your EA based on his rules for an engulfing candle: Inserted Video If u apply all of his rules for a candle your system win rate will increase significantly!
+
+--- 帖子 #10 ---
+Thanks a lot. I made a "What-If"-Szenario using QuantAnalyzer4 and discarded in the trade set of the failed backtest: All trades except (09:00 Etc/GMT to 10:00 Etc/GMT) and (15:00 Etc/GMT to 16:00 Etc/GMT) All trades on Mondays and Fridays. as that were the short term unprofitable seasons. This resulted in that szenario: Attached Image (click to enlarge) in which 2013 and 2015 are the only loss years now. The downside of this approach is, that it reduces the number of trades to an amount which is questionable to be statistical significant (126 trades instead of more than 800 trades in nearly 1000 trading days).
+
+--- 帖子 #11 ---
+Thanks afhacker for you comments and the video. My idea was a bit different, however, I am gonna post a special version of Engulfer that uses Walter Peters' big shadow engulfing candle rules.
+
+--- 帖子 #12 ---
+Thank you Naddmer for your efforts. I've ran the EA on the 3 majors (EU,GU and UJ) on Daily time frame from 2010 to 2015 with 1:1 RR. All inputs were the same for the 3 pairs, which minimizes over fitting. All resulted over 50% win rate. So I think we may have a positive expectancy system here Note : tests were using 4-digit broker Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #13 ---
+Thanks for the video. Interesting.
+
+--- 帖子 #14 ---
+Halo abokwaik, what do you mean by (n) candle? how do you trade it manually? please show with a chart. thanks and regards, anton
+
+--- 帖子 #15 ---
+(n) is the previous engulfed candles. Here is a screen shot with explanation. Attached Image (click to enlarge)
+
+--- 帖子 #16 ---
+a Valid Bearish Entry in the previous example was not taken due to Time Filter which was set to trade only from Hour 9 to 19. Notice the Yellow Circle Attached Image (click to enlarge)
+
+--- 帖子 #17 ---
+allow me to pass by and say this is one of the strongest structures to be in a trade i always keep an eye on such a structure keep it the good work folks this gonna be something i am sure
+
+--- 帖子 #18 ---
+This is an ALERT ONLY version of Engulfer_01 for people who might want to trade it manually.
+
+--- 帖子 #19 ---
+Thanks Issam, Its nice to see Jordanian fellows active here at ff. All the best, Khalil
+
+--- 帖子 #20 ---
+abokwaik, Thanks a lot for your kind and useful help &amp; explaination. It's great. Best Regards, anton
+
+--- 帖子 #21 ---
+abokwaik, Is this bearish engulfing still valid? Is the bearish candle not too big? Please give note where is the entry and stop loss. Thanks and Regards,
+
+--- 帖子 #22 ---
+I am re-attaching the referenced chart for easier follow up : Attached Image (click to enlarge) Yes it is valid. Remember that we are trading the current candle at the moment it breaks the lows in this case, exactly at the orange horizontal line. If we were using 2 for Reward to Risk ratio then this trade would have reached its profit target on the same candle (benefiting from momentum). This is the updated chart with Entry/SL/TP. Attached Image (click to enlarge) Again this trade was not taken by the EA because the EA was set to trade only from 9am to 7pm (19) (my broker time GMT+3).
+
+--- 帖子 #23 ---
+I've set the EA on all the 6 majors with same settings (shown in the picture below). first trade is already entered on EUR/USD. Attached Image (click to enlarge)
+
+--- 帖子 #24 ---
+My God, that was fast ! TP reached for the above trade. Attached Image (click to enlarge)
+
+--- 帖子 #25 ---
+GPB/USD short trade entered
+
+--- 帖子 #26 ---
+Hi abokwaik, Many thanks for this EA. For me it's extremely promising. I tested it with different periods and discovered, that there are much better results using 9-12 hours and 15-18 hours instead of 9-18 hours. Is it possible to implement a second timefield ?
+
+--- 帖子 #27 ---
+You can achieve this by running 2 EA instances, one with time 9-12 and the other with time 15-18. Just make sure to use different Magic Numbers.
+
+--- 帖子 #28 ---
+GBP/USD trade stopped at SL
+
+--- 帖子 #29 ---
+habibi ya 7'alil walao man any time but i tell u this structure is good indeed u need to fix the EA for it
+
+--- 帖子 #30 ---
+Two charts ?
+
+--- 帖子 #31 ---
+Yes. Each instance will go into a separate chart with different Magic Number.
+
+--- 帖子 #32 ---
+Demo Trade Explorer Added. Lets see how it performs on forward testing
+
+--- 帖子 #33 ---
+Have "earned" me approx. $320 today. Two EU trades, with OOTB settings ...
+
+--- 帖子 #34 ---
+I think this is not an engulfing pattern, it is outside candle. Please clarify. Thanks,
+
+--- 帖子 #35 ---
+I haven't mentioned anything about "engulfing pattern", or "outside bar or candle" ? on this thread. lorix referred to it as a "structure". What presented here is NOT a standard pattern. Anyway, call it whatever, My definition of the engulfing method used is clearly stated in post # 1, The engulfing method implemented is as follows: - The system acts on the CURRENT candle to benefit from the break out momentum - Bullish Engulfing: * The current candle price should exceed the Highs of all (n) previous candles * The immediate previous candle should be bearish * The Low of the current candle should be less or equal than the close of all (n) previous candles - Bearish Engulfing: * The current candle price should exceed the Lows of all (n) previous candles * The immediate previous candle should be bullish * The High of the current candle should be greater or equal than the close of all (n) previous candles During the life time of this thread this definition can be adjusted as we see to best fit the market. I hope this clarifies any doubts.
+
+--- 帖子 #36 ---
+OOTB Settings ???
+
+--- 帖子 #37 ---
+Another "word" for default settings....Out Of The Box
+
+--- 帖子 #38 ---
+out of the box
+
+--- 帖子 #39 ---
+AU M5 RR=1 NoEB=2 10wins 6 loses
+
+--- 帖子 #40 ---
+many Thanks
+
+--- 帖子 #41 ---
+Thank you, anton
+
+--- 帖子 #42 ---
+subscribe.. very useful system.. need to learn more.. u are rock abokwaik.. u are my fans..
+
+--- 帖子 #43 ---
+may you share the source code (mq4 file)? Thanks,
+
+--- 帖子 #44 ---
+This guy in the video didn't get a trade for 2months straight, we need to eat and pay bills we cant wait 2-3months to take a trade
+
+--- 帖子 #45 ---
+thats right, but this guy uses much more Setups to trade. There a several Videos , i think they are worth watching it
+
+--- 帖子 #46 ---
+Sorry for not being around yesterday (official holiday). I let the robot run without any intervention since started on Thursday and Friday. As I can see it returned around 2.5% over equity, which could translate to around 25% monthly return. But its still too early to judge that. I will take a deeper look at the trades taken if I have a chance today.
+
+--- 帖子 #47 ---
+Sorry guys, I should've known.
+
+--- 帖子 #48 ---
+Good Job M5 ! thats very aggressive.
+
+--- 帖子 #49 ---
+Nice to have you here moeda
+
+--- 帖子 #50 ---
+hmmmm .. why ?
+
+--- 帖子 #51 ---
+The robot took 11 trades in 2 days, on the majors except CHF (GU,EU,UC,UJ,AU,NU) 8 are already closed with 50% win ratio (4 winners vs 4 losers). Reward-to-Risk was set to 2. with Risk% = 0.01 (1%). The net result for closed trades was ~ $ 350. (3.5%) Notes on Net Result: I've noticed that spread was not considered in Profit Target, (i.e. profit is slightly less than 2%). I will check that and update in next release. Attached Image (click to enlarge) 3 trades are still running, 1 in profit (but far from target), and the other 2 are in loss and probably well get stopped out. Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+The BIG looser was GPB/USD, so lets take a closer look at that : Attached Image (click to enlarge)
+
+--- 帖子 #53 ---
+NZD a stubborn one Attached Image (click to enlarge)
+
+--- 帖子 #54 ---
+a Reeeal stubborn Attached Image (click to enlarge) This is a main difference between Auto and Manual Trading.
+
+--- 帖子 #55 ---
+An new trade is opened on EUR/USD H1. Attached Image (click to enlarge)
+
+--- 帖子 #56 ---
+A new long trade is opened on USD/JPY H1
+
+--- 帖子 #57 ---
+As expected GPB and AUD trades opened last week were closed as at stop loss today.
+
+--- 帖子 #58 ---
+So far EUR/USD is the BEST Engulfer. 3 Trades = 3 Wins at TP (2R) in 3 Days with Minimum Draw Down. Simply PERFECT Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #59 ---
+While GBP/USD is the WORST Engulfer, with 3 Trades = 3 Losses. (There is a trade in progress, but based on this performance I expect it to be a looser). Attached Image (click to enlarge) Attached Image (click to enlarge) This pair is leaving me with a Hard Homework to do.
+
+--- 帖子 #60 ---
+Broker time 9 to 18 meaning what time to what time? As in Euro open to close? Thanks
+
+--- 帖子 #61 ---
+Hi abokwaik, thank you for all your hard work, could you please put an option to close all positions at profit target "x" ? Thank you.
+
+--- 帖子 #62 ---
+Yes. Euro Open to Close. (GMT + 3).
+
+--- 帖子 #63 ---
+for EU pair, your risk reward is set to 2?
+
+--- 帖子 #64 ---
+I will add it to the improvement list, as I already have in mind a list of enhancements to be done. But I liked to try it RAW first. So any one testing this robot and have any requests (General ones of course), please do not hesitate to post it here. This is the purpose of forward testing anyway.
+
+--- 帖子 #65 ---
+My current list of added options include: Trailing Stop Minimum SL Pips Maximum SL Pips Minimum Engulfer Range (size)
+
+--- 帖子 #66 ---
+Additional Options/Enhancement requests are added at the bottom of Post # 1
+
+--- 帖子 #67 ---
+No 2R means Reward to Risk = 2. The settings I am using on all pairs are shown in Post # 23
+
+--- 帖子 #68 ---
+hi abokwaik! what is the best number of previous bars for engulfing?
+
+--- 帖子 #69 ---
+hello mr. abokwaik. subscribe with you. thanks and regards
+
+--- 帖子 #70 ---
+3 seems to be fine with H1 time frame. Maybe you should increase it if you want to trade lower time frames.
+
+--- 帖子 #71 ---
+Welcome aboard buddy, Greetings from Jeddah.
+
+--- 帖子 #72 ---
+I have a suggestion mr. Khalil. Can you put an option called one trade per candle. Since if you will implement the equity X dollar so the ea does not enter the same candle. Just some thing come up in my mind.
+
+--- 帖子 #73 ---
+This is already implemented in version 1. Check the Constraints Part on Post 1.
+
+--- 帖子 #74 ---
+And you will be waiting a long time also if you apply all of his criteria! Does he provide any trading results? Any backtest? I think not
+
+--- 帖子 #75 ---
+Hi abokwaik, first of all nice thread, like ever. Thanks for the effort and all the contributions... I would like to set up a forward test of this EA, the logic behind is good and looking at your backtests and your trade explorer (even if is just 1 week old) the results are promising. I have just a few questions, Start Time and End time 9:00 -&gt; 18:00 what would them be GMT time? I mean London Opens at 08:00 GMT time, when your EA is going to start his trading window? Thanks.
+
+--- 帖子 #76 ---
+You gotta be kidding me . NZD for the 3rd time came very close to target and bounced back. In real life when such thing happen I would close it manually even from the 2nd time. Attached Image (click to enlarge)
+
+--- 帖子 #77 ---
+Thanks, The time setting for my Trade Explorer is from 9:00 to 19:00 GMT+3 which translates to GMT 6:00 to 16:00. this time covers the European Session.
+
+--- 帖子 #78 ---
+EUR/USD is just an AMAZING Engulfer ! 4 trades = 4 wins in 4 days. What can I say .... Unbelievable Attached Image (click to enlarge)
+
+--- 帖子 #79 ---
+Thanks for the fast answer, I would also like to ask how do you plan to manage red news? If there are open trades will you close them before red news (don't care if in loss or gain) and if no trades are open would you suggest to stop the EA like 1 hours before and the reactivate it 1 hours later?
+
+--- 帖子 #80 ---
+Your welcome chucrut, During my back tests news were ignored. I will have to wait and see how it performs on red news in forward testing. Anyway with Reward to Risk of at least 2, I don't think that will be an issue. Remember also that I am not interfering with the EA whatsoever. All trades are opened by the EA and closed at either TP or SL determined by the EA. The last example was NSD/USD which almost reached TP three times in three days, and finally closed at SL today. The NZD trade cost me 1R = 1% as all other losing trades, However for this trade in particular which I could've closed i t manually near TP at the second or 3rd touch could have saved me 3R = 3%. Anyway I am happy it was closed even at SL. I am leaving the EA running on its own after setting the rules, because I am assuming that I will be away doing my usual job, and maybe check only once or twice a day. Have a good day.
+
+--- 帖子 #81 ---
+I think you should put distance between opening and closing prices of candles restrictions into account, you should add a trailing stop.
+
+--- 帖子 #82 ---
+I think you should put distance between opening and closing prices of candles restrictions into account, it should add a stop loss or profit on the mobile protection, that there are a lot of list found in the test from a profit a lot to later stop.I always used to do a single candle swallowed, the success rate is very high,
+
+--- 帖子 #83 ---
+Trailing stop point is clear, and already added to update list on post 1. Although I see the robot is doing well so far with out it. but the first point regarding "candles restrictions" is un-clear to me Can you elaborate more on that ?
+
+--- 帖子 #84 ---
+Hi Khalil, I'm following your great work! According to my experience, a trailing stop often stops out very good trades before letting them to hit the target profit. This highly affect the performance of the strategy. However, I have noticed that moving the stop loss to breakeven when the trade is in half profit avoids a considerable number of trades to end with a loss. Best, Math
+
+--- 帖子 #85 ---
+I agree Break Even option added to list.
+
+--- 帖子 #86 ---
+just passing by to say hi Good job Khalil habibi (y) all the best i am watching to see the final results so i can suggest something as a filter that could predicting the right structure direction from the wrong one lets just wait the forward test result as i said before this is the strongest structure and this thing is promising indeed
+
+--- 帖子 #87 ---
+Great ...But, I'm trading this on my liveacc. with the same settings that you are using. No trades opened so far on EU?
+
+--- 帖子 #88 ---
+Are you sure you are using the same settings as in post # 23 . ? 2 more questions : - what is your broker time ? - does your expert jorunal show any errors ?
+
+--- 帖子 #89 ---
+I use the exact same settings like you...But, I wonder that I maybe have set the timesetting wrong, my broker GMT offset is 0? (Myself have GMT+1) No errors in the log...
+
+--- 帖子 #90 ---
+Your time settings should 6 to 16 (to match mine).Last 3 EUR trades were taken between 9 to 10 my timing (6 to 7) your timing.Only the first trade (Wednesday) was made afternoon but I think your EA was not yet started.
+
+--- 帖子 #91 ---
+Thanks, will try this ...
+
+--- 帖子 #92 ---
+I can corroborate that. In my testing to date, Targets make more than Trailing Stops. BE also makes more than a simple stop. Great work you are dong here. I will keep watching from the sideline.
+
+--- 帖子 #93 ---
+hey abokwaik thanks for the EA, it has made a promising start on my Global Prime demo today. I just want some clarification on the time settings. is it broker time or local time? i am in uk currently GMT+1 but my broker is GMT+3. please advise, thanks
+
+--- 帖子 #94 ---
+Hey abokwaik, nice EA mate .......subscribed
+
+--- 帖子 #95 ---
+For your case blamshakk, your broker time is equal to mine, so if you want to trade the European session you can set the time from 9 to 19. Due to frequent questions regarding trade time filter, I have added a description on post # 1. This will be the last response regarding the time filter.
+
+--- 帖子 #96 ---
+subscribed, will try with BE. this strategy looks like turtle-ish...
+
+--- 帖子 #97 ---
+Engulfer completed 4 days of trading on 6 majors, with acceptable results. (9% return and 3% max dd). 17 trades were taken, 9 winners and 8 losers. with Reward to Risk of 2 to 1. Top performers were EURUSD and USDJPY Worst performers were GBPUSD and NZDUSD Attached Image (click to enlarge) Attached Image (click to enlarge) Pair Performance Attached Image (click to enlarge)
+
+--- 帖子 #98 ---
+Thanks for posting your system and EA, I'm forward testing on a small live account as per your set file and have it running on EUR/USD and USD/JPY.
+
+--- 帖子 #99 ---
+You're welcome Robasker, Engulfer is only a 4-days baby, Its too early to trade it on a live account. Please read the Risk Warning on post 1. I wouldn't go live with a robot unless it shows consistency over at least 200 trades, with min draw down, and acceptable return. All the best, Khalil
+
+--- 帖子 #100 ---
+It's all good bud, it's only a micro account.
+
+--- 帖子 #101 ---
+thanks man
+
+--- 帖子 #102 ---
+Walter doesn't seem to know what an engulfing candle is (I watched 3 minutes)
+
+--- 帖子 #103 ---
+Walter seems to look for a big candle to follow...
+
+--- 帖子 #104 ---
+Why this error???
+
+--- 帖子 #105 ---
+I am away from office. I will check it tomorrow.
+
+--- 帖子 #106 ---
+I believe there is a problem with the EA. It appears that it took a long trade but not according to the rules. - Bullish Engulfer (LONG Signal --&gt; Buy): * The current candle price should exceed the Highs of all (n) previous candles * The immediate previous candle should be bearish * The Low of the current candle should be less or equal than the close of all (n) previous candles
+
+--- 帖子 #107 ---
+Is this a M1 chart? I guess the price jumped at that long candle...
+
+--- 帖子 #108 ---
+Trade is correct and according to the rules.
+
+--- 帖子 #109 ---
+H1 on all 8 pairs.
+
+--- 帖子 #110 ---
+The previous candle wasn't bearish. Perhaps I am misinterpreting the rule.
+
+--- 帖子 #111 ---
+In the EA inputs, lot size is set to 0.0, so the risk percent should be used (set at 0.1). I noticed that all positions are 1 lot. Acct size is $10K. Does it need to be exactly 0 or is 0.0 ok to use? Thanks for sharing.
+
+--- 帖子 #112 ---
+Sorry I was replying through smartphone, I had to start my laptop in order to explain on the chart. Let me know if still not clear. Regards, Attached Image (click to enlarge)
+
+--- 帖子 #113 ---
+Your setting says Max Lots 1.0. The Robot follows your command Attached Image (click to enlarge)
+
+--- 帖子 #114 ---
+Its been a rough day for Engulfer. This is what I was waiting for.
+
+--- 帖子 #115 ---
+Hi Khalil, I think it may be reasonable to prevent the EA from opening more than one trade per candle. What do you think?
+
+--- 帖子 #116 ---
+Yes Math, its already already implemented. In this case the previius trade was opened few candles prior to this candle. I can add a condition though to not open a new trade on the same candle the previous trade closed on.
+
+--- 帖子 #117 ---
+Thanks for your explanation! :-) And I think this additional condition is necessary to be implemented into the EA.
+
+--- 帖子 #118 ---
+I know that you started this with the idea of trading engulfing bars only, but maybe you will consider adding pin bars, too, as they are also strong signals. I think engulfing bars and the pin bars are the strongest price action signals, from my knowledge. Combine them and maybe we'll have a good candlestick signals EA. What do you think? And an idea maybe to hard to implement: is it possible to modify the EA so it will open new trades when price retraces a little, let's say 50%, 25% (etc) of the signal candle? For example, if candle is BE, don't just sell at the close of that candle. Wait for the price to go higher to 50% of the candle's high (the signal candle) and then trigger a sell.
+
+--- 帖子 #119 ---
+Yes, but lot size was set to 0.0 so it should have used the risk percent (.1%) and not the max lot size of 1 as far as I can tell.
+
+--- 帖子 #120 ---
+Good Morning pip-boss, Risk Percentage in your settings is 0.1 = 10% not 1%. So the position size calculated by the EA was more than 1 lot, and since you limited the Max Lots to 1, it used 1 instead of the calculated lot size. I hope its clear now. Notes : 1- I think you were trailing the stop (MT4 trailing), because your stops are much less that 10%. 2- Using 1 for "Number of Engulfed Bars" will certainly give you more signals, but also more false ones 3- As per your results, although its very risky, you're doing good Have a nice day
+
+--- 帖子 #121 ---
+Hi wattaman, For the first part regarding pin bars, have a look at Robot Pinocchio from my Robots Lab. For the second part regrading entry on retrace %. The idea came to me many times, and in this first version I preferred to go with momentum. So may be I can have this option in next versions. Another option the some traders will prefer, is to wait for signal candle close, and trade the break out .
+
+--- 帖子 #122 ---
+GBP/USD proved to be the Big Loser for current Engulfer settings. 5 trades = 5 losses. During last 5 days the pair was trading with a range of less than 100 pips, which is a KILLER for Engufer. Any ideas on how to avoid such situations are welcomed. Attached Image (click to enlarge)
+
+--- 帖子 #123 ---
+OK, thanks. I'll stay close for the changes
+
+--- 帖子 #124 ---
+9.1% today with fxcm . Great work as usual. GU AU are not performing well but gonna let everything running for few weeks to see how it goes.
+
+--- 帖子 #125 ---
+Engulfer erased all returns made during the week. Analysis of robot performance coming next week. Have a nice weekend.
+
+--- 帖子 #126 ---
+my demo has done some swings, but has always been in the black and is overall is up. one thing about this EA is the entries are good, but some profit trades are turning back into a loss - someone mentioned earlier about breakeven settings - i think that would be good for results. also I am posting a screenshot of a long GU trade tha has it been left to run would have been a killer - any reason why it was such a small TP compared to other typical trades eg the sell on the right on this same pair which just closed out successfully? Attached Image (click to enlarge)
+
+--- 帖子 #127 ---
+Hi blamshakk, for a long trade SL is at the low of the previous candle, TP depends on the selected Reward to Risk ratio. In the trade you referred to : SL was too small, and EA calculated a higher lot size in order to compensate for the selected risk percentage, however setting Max Lots to 1 disabled the selected risk percentage. So although Reward to Risk ratio was applied, the Reward was too small because the risk was too small. My idea of adding the Max Lots input is to use after the accounts reaches high return percentage in order to limit the risk. Break Even and Stop trailing and other options will be considered in next releases. Best Regards
+
+--- 帖子 #128 ---
+thanks for the clarification in the meantime i may use a trade manager EA to play with BE, trailing etc as the entries show a lot of potential
+
+--- 帖子 #129 ---
+Engulfer Version 2 Input Screen Attached Image (click to enlarge) Sample Test on EU 2015 with above settings
+
+--- 帖子 #130 ---
+I do not have tickhistory but it seems to work on m5 with 3 or 5 engulfing candles. Someone with tickhistory may test again.
+
+--- 帖子 #131 ---
+This looks like the infamous [stuck in a range] problem, from the picture, the horizontal lines you drew clearly show the price consolidating withing that range. I would suggest, after the EA gets the first loss, it records the daily high &amp; low of the past 24 + current hours. There are now two choices. 1. No trade taken within this zone [recorded high and low]. 2. Only buy signals at price close to low [defined by? ATR maybe?], Sells vice-versa. P.S: You do immense work with these EA's, great concepts, tests &amp; sharing.
+
+--- 帖子 #132 ---
+Thank you sinqua for the suggestion.
+
+--- 帖子 #133 ---
+I have added a new trade explorer for a one-month contest account starting this week using Engulfer_02 on 16 pairs: GBPUSD, GBPAUD, GBPCAD, EURUSD, EURAUD, EURCAD, EURNZD, USDCAD, AUDUSD, NZDUSD, USDJPY, GBPJPY. EURJPY, CADJPY, AUDJPY,NZDJPY. With same settings as in post 129, except for min_stop and max_stop which I set in terms of ATR(200) for each pair where min_stop=2xatr(200) and max_stop 3xatr(200).
+
+--- 帖子 #134 ---
+Hi Khalil, Thanks for the second version with an enrichment of new features. Would you please let me know how I can set the EA such that, 1) trailing stop functionality is disabled; 2) move stop loss to break even will be done only if the price went half of the way towards the take profit level. Best, Math
+
+--- 帖子 #135 ---
+Hi Khalil, thanks for starting this thread, as I like approaches without indicators. One suggestion for your to-do-list: in addition to starting / ending hour, you should try to exclude specific hours from trading within this channel. My observation is, that some pairs show false breakouts on certain hours (e.g. the hour before NY open). I've made good experiences with this limitation on my current H1 Breakout EA project. Cheers, Oliver
+
+--- 帖子 #136 ---
+Hi MT7, You can disable trailing stop by setting it to 0 (zero). Same goes for Min Stop, Max Stop and Break Even Stop. To set Break Even at Half of Profit Target, simply set it at half of your Reward to Risk ratio. Example : If your Reward to Risk is 2, set BE to 1. If your Reward to Risk is 3, set BE to 1.5. and so on. Nice to have you on board
+
+--- 帖子 #137 ---
+Good insight Oliver , thanks for sharing, I can see you're doing v.good with your H1 Breakout EA. All the best
+
+--- 帖子 #138 ---
+osfx is there a way to obtain the H1 Breakout EA? thanks
+
+--- 帖子 #139 ---
+Engulfer_02 bug discovered Lot Size is not recalculated when Min Stop or Max Stop are set to a non-zero value, and they were used in case regular stop is less than Min Stop or Greater than Max Stop. I am gonna fix this and update asap. sorry for any inconvenience ...
+
+--- 帖子 #140 ---
+Engulfer_02 : Update version With Lot Size calculation fixed when custom stop loss is used.
+
+--- 帖子 #141 ---
+thanks for all your explanations.. I'll keep following this thread!
+
+--- 帖子 #142 ---
+The contest account was closed and TE deleted. I made few "manual" interventions which led to complete loss as broker does not support margin protection.
+
+--- 帖子 #143 ---
+Hey abokwaik, Perhaps a simple approach for avoiding a range, is a couple of filter options: Not sure what would work best, but both easy to code 1) The entry should be a new high/low of the last n bars. So if you get an engulf within that range it will skip it. 2) A filter on minimum distance price has to be from the previous entry. So if you lost a trade in the range, it won't enter again, until price is x pips up/down.
+
+--- 帖子 #144 ---
+Makes sense, Thank you I will try to implement in next release.
+
+--- 帖子 #145 ---
+Very quite here lately .... shhhh. No one's engulfing or what ? Big room for development, but I am letting the EA on its own for now to see how it can recover.
+
+--- 帖子 #146 ---
+Can you make the EA to use like this logic where i plan to get the indicator from the other post but if we get in the ea we can optomise and see the result here is the logic use super Bullish / Bearish candle which will draw middle line of that candle when the candle close ust he body length only .I can put the body length in inches like 1 ,1.5 ,2 inches to see extreme bullish bearish candle only and should draw 50% as centre line immediately of such candle and have alert when next candle breaks up or down of the centre line (50%) if this can be in external out put too will be great thanks
+
+--- 帖子 #147 ---
+If you're referring to entry on retrace. It's on my waiting list.
+
+--- 帖子 #148 ---
+Has anybody tried this EA on D1 TF? I have tried for couple days on 23 pairs and it looks promising.
+
+--- 帖子 #149 ---
+Engulfer failed to perform under Current Settings (H1 on Majors) : Attached Image (click to enlarge) I am gonna review it, and post my findings.
+
+--- 帖子 #150 ---
+looks good keep us posted
+
+--- 帖子 #151 ---
+I will not be able to post as much in the coming period as I going into some changes in my life/career.
+
+--- 帖子 #152 ---
+Good luck Kalil, wish u all the best
+
+--- 帖子 #153 ---
+This indicator does not work? I have a 5 digit broker is that why? Anyone else experience this?
+
+--- 帖子 #154 ---
+Its an Expert Advisor (EA). It should go under Experts Folder. But it acts as an Indicator, giving alerts and not opening any trades.
+
+--- 帖子 #155 ---
+Hi , you can use support resistance as to see clear enfulging like like the enfulging is bullish and break resistance take action as buy vise versa for sell . stoploss to be next previous highest candle or lowest candle from the position taken
+
+--- 帖子 #156 ---
+belka, please can you give an update on your D1 demo ? thanks
+
+--- 帖子 #157 ---
+Dear brother... if possible plz create an indicator version. It would be a great help. Thanks &amp; regards Sakib
+
+--- 帖子 #158 ---
+Hi Sakib, It's already done. Kindly check post # 18. All the best
+
+--- 帖子 #159 ---
+Yeah I used it right after you had uploaded this version and thanks for that. But I was actually looking for an indy version which would go in the indicators folder coz I feel more comfortable that way. Anyway thanks again. You're a great person.
+
+--- 帖子 #160 ---
+OK. I will post an indicator version as soon as I have some free time.
+
+--- 帖子 #161 ---
+Wow! I'll be looking forward.. All the best.
+
+--- 帖子 #162 ---
+Hello Sir, I think in order to get over the fact that a "small range" would be the death of your system, you should first should be able to identify when the market is in a confirmed range. I would first recommend you using the 7 daily pivots as take profit, instead of Entries. Why? Well because the daily highs and lows over 92% of the times occur at daily pivots. If you want proof here is an EA which will support my claim. Attached File(s) Pivot_Points_-_Daily_sShiftedd.ex4 20 KB | 357 downloads Simply load it to your mt4, restart and set the calculation time to when ASIA market opens based on your server time. The EA will back test the 7 daily pivots and you will see how the high and lows happen right at those one of those 7. One of the dumbest trades to make is trying to pick reverses at any given pivot. Also learn how to identify when the currency pair you are trading is in a confirmed range. You do that, and you will be able to save your self the horror of waiting hours for the breakout to occur.
+
+--- 帖子 #163 ---
+Engulfer - Pure Indicator This is an indicator file. It goes under Indicators Folder.
+
+--- 帖子 #164 ---
+Thank you very very much brother. May Allah bless you with pips. Best regards.
+
+--- 帖子 #165 ---
+hi, belka what settings are you using on D1 TF?
+
+--- 帖子 #166 ---
+i love engulfing too
+
+--- 帖子 #167 ---
+Hello ABUKWAIK, Thank you for all your work and for the Indicator you provided. I know you are using the 1 hour TF but I have been looking at the Daily and Weekly charts. As of this week the following charts are screaming BUY,BUY,BUY in the DAILY AND WEEKLY formats. EU/AU, EU/CA, EU/GP, EU/JP, EU/USD I am going to try at least a couple and see how it goes. I'll keep you informed. Don't worry, I use SL religiously. MAKE PIPS AND PROSPER!
+
+--- 帖子 #168 ---
+Dear ABUKWAIK, I forgot to ask if it would be possible to add an arrow when your indicator triggers.
+
+--- 帖子 #169 ---
+Please look at AUD/JPY weekly chart, is it a good set-up?
+
+--- 帖子 #170 ---
+Yes, I believe it is.
+
+--- 帖子 #171 ---
+from today's move, I strongly believe that AUD/JPY will go down further.
+
+--- 帖子 #172 ---
+got out of the trade.
+
+--- 帖子 #173 ---
+Hello Abowaik, I have been following you as programmer. I must say, you are a great programmer with analytical skills. A two penny share of mine to improve the system. (a) Engulfing patterns becomes more powerful when its is of some S/R level/zone/area. Possible S/R levels may be following. (i) Double Tops/bottoms (ii) Supply demand (iii) Round Numbers (iv) Weekly/Monthly Pivots (v) Fibos. (b) SL Settings Your SL must have two characteristics. Its should be logical and it should be affordable. In general sense, a logical SL would be a one which is few Pips(25% of your SL) behind recent low for long positions and above recent high for Short positions. Similarly affordable SLs are those which do not make your TP too high. Which if hit can cause serious damage to your gains and in case if your following an RR system, high SL will make your TP difficult to hit. If you are getting into situations where your SL is becoming high, then make the entry pending until it enters a zone where SL is affordable. For me, I will not enter on first rejection. because 95% of time the area from where price is rejected will be re-tested. I will wait till the price hit my area of liking where i can achieve lowest SL preferably for 1:3 or 1:4 RR. Some traders believe in a fix number of Pips for SL. but to me this is not the right approach. 10 PIPs for AUD pairs means too much and 10 PIPS for GBP pairs means nothing. Therefore, i almost always found it better to calculate the SL based on patterns i am entering. (c) Suitable Entry Point Entering straight into a position based on engulfing on previous bars will not bring too much fruit. I try to explain this with an example. Let's say we decided that we will set our SL below/above recent high/low. And we got entry setup whose SL is 20 PIPS. I will recommend to not enter straight on new candle. Wait for Price, it will almost always provide you a chance to enter in Place where you will be in position to set 25% of your SL(4 PIPS of 20 PIPS) to be below/above recent low or high. (D) Multiple-Entry Reasons: Making an entry based on engulfing from an S/R area is not enough. Its always better to have multiple reasons for it. Like checking whats going on higher TF. Lets say i am entering LONG based on H1 bullish engulfing but on Higher TF, Price is getting rejection or near a resistance level which is likely to stop your trade from hitting TP. Its always beneficial to avoid odds against your Trade on higher TF specially daily. (E) Target TFs higher than H1. Sorry for my bad English. I am a one who is being mixed in multiple languages. English, Turkish, Arabic, Urdu etc etc.
+
+--- 帖子 #174 ---
+Thank you Sajid, I agree with your analysis. Actually if we were able to do it like that it will become a holy grail. I am into few studies now, and will try to revisit this system soon and apply what I can. Regards, Khalil BTW:your English is better than mine.
+
+--- 帖子 #175 ---
+Hi abokwaik How can reduce the size. ? Each order decreased to .02 Do you have another system that this system is complete ? Thank you
+
+--- 帖子 #176 ---
+The EA has several for lot size. 1. you can fix the lot size. 2. you can let the EA auto calculate the size based on SL. 3. you can set the max lot size used. The system is complete as defined. But yes, I have so many other systems, of course not all are posted.
+
+--- 帖子 #177 ---
+This system is the best system I've tried. I'm working two weeks. I am satisfied . My English is not good. It is possible show. How do these changes do ( lot size). If you complementary system. It is possible to give your address. Thank you
+
+--- 帖子 #178 ---
+I am looking forward guidance Thanks
+
+--- 帖子 #179 ---
+You can play with the highlighted inputs in back testing and see the effect of each or combined. Attached Image (click to enlarge) Sorry no address, I have no financial interest in anything related to forex except trading. Whatever tools I like to share (open or closed source) I already shared in the open for everyone to test, try and use if he likes on his own risk.
+
+--- 帖子 #180 ---
+Thanks
+
+--- 帖子 #46 ---
+thanks
+
+--- 帖子 #47 ---
+@ abokwaik Hi, Can you modify it, so the trade opens at the begining of the new bar when the previous candle closes above/under the (n) candles? (Instead of following the momentum) I mean opening the trade not in the current candle but in the next one. I have been testing your EA in a demo account and actually it's a really good EA but most of the SL comes because open trades in a "fake" engulfing candle.
+
+--- 帖子 #48 ---
+hello belka, it looks promising. you are using Adjust Trail for that? do you still have the mql source file for this sir? if you allow me to look at and would love to modify it. thanks.
+
+--- 帖子 #49 ---
+hello,.. belka still there? i have crossed another code for engulfing. is this the right code condition? //bearish and bullish engulfing pattern bool C_DownTrend = true; bool C_UpTrend = true; bool overlay=true; double C_Len = 14; // ema depth for bodyAvg double C_ShadowPercent = 5.0; // size of shadows double C_ShadowEqualsPercent = 100.0; double C_DojiBodyPercent = 5.0; double C_Factor = 2.0; // shows the number of times the shadow dominates the candlestick body double C_BodyHi = iHigh(Symbol(),Period(),1); double C_BodyLo = iLow(Symbol(),Period(),1); double C_Body = C_BodyHi - C_BodyLo; double C_BodyAvg = PRICE_WEIGHTED; double C_SmallBody = C_Body &lt; C_BodyAvg; double C_LongBody = C_Body &gt; C_BodyAvg; double C_UpShadow = High[0] - C_BodyHi; double C_DnShadow = C_BodyLo - Low[0]; double C_HasUpShadow = (C_UpShadow &gt; C_ShadowPercent) / 100 * C_Body; double C_HasDnShadow = (C_DnShadow &gt; C_ShadowPercent) / 100 * C_Body; double C_WhiteBody = Open[0] &lt; Close[0]; double C_WhiteBody1 = Open[1] &lt; Close[1]; double C_BlackBody = Open[0] &gt; Close[0]; double C_BlackBody1 = Open[0] &gt; Close[0]; double C_Range = High[0]-Low[0]; double C_IsInsideBar = C_BodyHi &gt; C_BodyHi &amp;&amp; C_BodyLo &lt; C_BodyLo; double C_BodyMiddle = C_Body / 2 + C_BodyLo; double C_ShadowEquals = C_UpShadow == C_DnShadow || C_UpShadow == C_DnShadow; double C_IsDojiBody = C_Range &gt; 0 &amp;&amp; C_Body &lt;= C_Range * C_DojiBodyPercent / 100; double C_Doji = C_IsDojiBody &amp;&amp; C_ShadowEquals; double C_EngulfingBearish = C_UpTrend &amp;&amp; C_BlackBody &amp;&amp; C_LongBody &amp;&amp; C_WhiteBody1 &amp;&amp; C_SmallBody &amp;&amp; Close[0] &lt;= Open[1] &amp;&amp; Open[0] &gt;= Close[1] &amp;&amp; ( Close[0] &lt; Open[1] || Open[0] &gt; Close[1] ); //end bearish engulfing pattern //--- //bullish engulfing pattern double C_EngulfingBullish = C_DownTrend &amp;&amp; C_WhiteBody &amp;&amp; C_LongBody &amp;&amp; C_BlackBody1 &amp;&amp; C_SmallBody &amp;&amp; Close[0] &gt;= Open[1] &amp;&amp; Open[0] &lt;= Close[1] &amp;&amp; ( Close[0] &gt; Open[1] || Open[0] &lt; Close[1] );
+
+--- 帖子 #50 ---
+Not bad. Pretty good and consistent. Running on multiple pairs and tested on tick data shows good results. I'll be forward testing from here
+
+
+===== 附件下载链接 =====
+
+Pivot_Points_-_Daily_sShiftedd.ex4: https://www.forexfactory.com/attachment/file/1800810?d=1448590350

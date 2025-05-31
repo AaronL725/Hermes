@@ -1,0 +1,636 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+First, I would like to say that I have found an over-abundance of information here on FF. I hope this helps other people in their Arbitrage journey. Now, I've included a zip file that has the necessary components for Arbitrage EURUSD between IBFX and Alpari (you can use any 2 brokers you like, you just need to remember which is which). Instructions for installing are in the zip file. I've also included a zip file in the zip file that has the Visual Studio 2010 source code for the dll. What I'm hoping here is that we can improve on this. Here's the situation: It's successful. 18 out of every 19 trades, profit. The one loss is a doosy (big). So, what I'm hoping for is some help in refining the EA so that we can make that loss not so bad. And then I can create what's necessary for all other pairs. Rules of the EA: Entry: When Bid is greater than the other terminals ASK by amount of spread or freezelevel (which ever is greater), we enter one short (the Bid terminal) and one long (the ask terminal). In thoery, the prices should meet. Or at least come close. Exit: When prices become mixed (ie. Bid in one terminal is no longer greater than ask in the other). Or TP. Or SL. Now, in theory this sounds good. But I'd like some other people who have expierence in this to chime in. What could we improve? Update (8/26/2011 3:10 AZ USA) I've changed the code around now to be generic. Terminal 1 and Terminal 2 EA's in the generic folder w/ their include file for Brokers that allow a set value to be sent in the OrderSend() function for TP and SL. For those that REQUIRE 0's to be sent for TP and SL. Use the IBFX Terminal 1 and Terminal 2 EA's and include in the IBFX folder. These modify the SL and TP values AFTER the position has been opened. Thanks. -Non.
+
+--- 帖子 #2 ---
+I have done this before and here are the problems i have faced when using bucketshop retail brokers: i) It is against broker policy to Arbitrage, they will almost always find out and revoke all your profits from your account. I have had this happen several times. ii) both the orders should take place without fail like a transaction. Often, only 1 leg gets executed which leaves you naked and prone to losses. iii) This will not work in Live as smooth as it runs on demo. Live execution is very slow when compared to Demo. Overall, i would say unless brokers explicitly allow you to arbitrage(why would they ever ), this is a losing game and i believe you should move on to other things. Unless ofcourse you can try this on ECN and other big brokers.
+
+--- 帖子 #3 ---
+hes talking about using 2 brokers , probably one to buy another to sell . this does not cause any problems however things get rather complicated when pairs get less volatile . this kind of strategy is good for risk appetite pairs where pairs go sideways.
+
+--- 帖子 #4 ---
+you need exchange traded products if you want to try something like this... otc fx does not work this way.. + spread widen + volatility and your 'arbitrage' locks in a loss
+
+--- 帖子 #5 ---
+Hi, I tried your system but on IBFX is not possible to attached your EA to the chart. Also when you compile it it has some errors so I dont know how it was running on your site. Please check it.
+
+--- 帖子 #6 ---
+make a calculation, when u made two trades for a single win, 2 pips gone , so if u traded 30 trades u lost 60 pips
+
+--- 帖子 #7 ---
+This is kind of what I'm looking for. But could you explain better? Also, you were right in your previous post on what I was looking to do.
+
+--- 帖子 #8 ---
+"exchange traded products"?
+
+--- 帖子 #9 ---
+I think what he meant is exchanging tangible goods with a predetermined price. That way price doesn't change immediately and you can explore the difference with minimal risk. At least that is how it would work in theory. Applying it is a whole different story though.
+
+--- 帖子 #10 ---
+What sort of setup are you running the EA on? VPS or home pc with broadband? Network latency is the BIGGEST issue in trying to do these types of trades.. Based on my conversation with someone who has done this, you need to be at least in the 10 milisecond ping and lower from the lead broker in order to pull this off. Anything higher your wasting money.
+
+--- 帖子 #11 ---
+lol only if u have reuters u can do this
+
+--- 帖子 #12 ---
+not true at all ive seen it done using mt
+
+--- 帖子 #13 ---
+Well, most VPS's I can't use. Because I need access to the OS. @Home on Cox connection I get about 18ms to both brokers. @Rackspace I'm getting about 7ms.
+
+--- 帖子 #14 ---
+I'm doing this w/ MT.
+
+--- 帖子 #15 ---
+....and you are correct. I am talking about 2 brokers.
+
+--- 帖子 #16 ---
+You think try in live soon ?
+
+--- 帖子 #17 ---
+We'll see. I'm going to go about 2 weeks on demo on EURUSD. I have to create the other pairs code. Once I've done that, I'll go about a month or 2 on all pairs. If I'm happy w/ the results, I may go live.
+
+--- 帖子 #18 ---
+HI!! I can only suggest to you to avoid doing this in live with Alpari. I absume you take the feed from IBFX and trade on Alpari UK....Well I had problems with Alpari due to scalping arbitrage and to make this short they didn't pay the profits... Instead of taking the feed from IBFX take it from EESFX, their feed is the fastest I have ever seen and more it plots every tivks, it's impressivbe the diffrence you see on the tick chart on the order window.... PS how can I change your great ea to make it run on other brokers? Sorry for my English
+
+--- 帖子 #19 ---
+Hi There, I tried to use your EA but keeps asking for this: 09:30:20 EURUSD Arb-alpari EURUSD,M15: cannot load library 'c:4xArbEURUSD.dll' (error 126) Hence I was not able to test it yet. Rgds
+
+--- 帖子 #20 ---
+the dll goes in the c:4xArb directory. If the dll is in there, check the code in the EA. specifically the #import to make sure it says c:4xArbEURUSD.dll
+
+--- 帖子 #21 ---
+Actually, I trade on both. Thanks for the heads up on Alpari. I wasn't aware of that. Do you have a link to the EESFX website? Other brokers shouldn't be a problem. You could put the IBFX EA on say FXDD and the Alarpi EA on say Citi; and it would still work (you'd have to change the IBFX EA to handle orders like Alpari). Good point though. I should change the EA's to be more generic. The code isn't that hard to change in the EA's. You shouldn't have to make any changes to the DLL itself for EURUSD. Thanks!
+
+--- 帖子 #22 ---
+Hi. The problem is that I could not find 4xArbEURUSD.dll in the zip file. CAn you post it please? Thks a lot
+
+--- 帖子 #23 ---
+easy man...here you go: eesfx.com
+
+--- 帖子 #24 ---
+the file is EURUSD.dll. The directory it goes in is c:4xArb Sorry about that. I just looked at the zip. Hang on. I'll get up here in a few.
+
+--- 帖子 #25 ---
+Somehow I screwed up the zip in the first post. Here's the compiled DLL.
+
+--- 帖子 #26 ---
+Thanks a lot. I will test now.. You talked about EES, well I just got my hands on their demo acct. What I found out is that they have the same speed and quote as Master4x. So you can go to their Master site and download their MT and open an ECN acct and tested. Another thing that I found out is that the way to go is to get a FIX feed. check this fixprotocol.org I will post if get any news about this feed.
+
+--- 帖子 #27 ---
+Wow! Thanks! Keep us up to date on what you find. I'm going over to take a look.
+
+--- 帖子 #28 ---
+NO FREEZE LEVEL AT EES! That's a blessing! Now, I just need to find another broker like them, and maybe we can arb between those two.
+
+--- 帖子 #29 ---
+what do you mean by freeze level?
+
+--- 帖子 #30 ---
+Hi nondisclosure00, It's nice work no matter whether it works or not in real world. More than a half decade ago, I had a similar project to get arbitrage in stock markets. We had almost unlimited fund to make the system and at that time there were not that much competitors, allowing us an wonderful play ground. I had a look at your code. (I'm not a coder.) For this type of work, setting up the safety guard is most important. For example, in case one of your platform is disconnected from broker while another is running, Ask and Bid prices from the disconnected broker must be altered to such as Ask=10000 Bid=0 (for instance, you could use IsConnected()). In this way, you can prevent any unnecessary order while this grey period is continued. In your current setting, after you lose signals, I guess Ask and Bid will remain the previous prices which could possibly lead to huge loss. This is just one of many examples. You should consider many details. I encourage you to keep updating your code. I'll give you comments as much as I can.
+
+--- 帖子 #31 ---
+Thanks. I'll take a look at my code again and put in a '0' on disconnection. I'm curious how you did an arb on stocks considering they're centrally traded.
+
+--- 帖子 #32 ---
+http://kolier.li/dictionary/define-freeze-level Lets use the following example: EURUSD Ask:1.23450 Bid:1.23460 Freeze Level (FL) is 30. Your spread is 10. So let's say you go long. You set your take profit at 1.23470 (10 pips). The down side is that you won't be able to close your position at that price. Becuase w/ a FL of 30, you can't close until the Bid is either above 1.23490 or Below 1.23430. That, in brief, is a Freeze Level (FL).
+
+--- 帖子 #33 ---
+You can easily arb them simply playing with latency...If you wanna scalp the etf you can take a server at Nyse and scalp them all they long...It is really expensive but it worth...
+
+--- 帖子 #34 ---
+I am testing on 4 brokers at the same time activ, alapri uk, masterforex and youtrade. Question: is there a difference in which arb ea goes to the broker? arb-alpari is the slow one? so I should use the arb-ibfx on the quicker one? Still looking for the FIX feed.
+
+--- 帖子 #35 ---
+Yes, ScalperOne is right. It's a matter of speed and money for building up infrastructures..
+
+--- 帖子 #36 ---
+Essentially they're the same exact EA w/ one exception; the IBFX one handles sending orders differently because IBFX has a different way of fulfilling orders. I'm going to work on 'generic' EA's to be uses on brokers that aren't IBFX. I'll make the changes to the DLL too. I will be working on this as soon as I get the time. Stay tuned!
+
+--- 帖子 #37 ---
+Hi nondisclosure00, Have you replaced your codes on post 1? I've been playing with your codes and found several errors such as closeall() in Quick Scripts file for one of them is not a bool type function but at some point there was a place to require a return value from this function...and several more etc...(error in SymPoints value). But, it seems like the current version is okay with these issues. Anyway, I've noticed other issues (which are still there) in an ecn account (once an order is placed EA doesn't set up TL and SL immediately. I saw there is no ordermodify() is called right after sell or buy orders in IBFX-Quick Scripts file. You may notice that sell orders cannot be placed in your code. Please have a look at the condition inside funcGenerationSignal() for sell. if (Bid&gt;varOtherA&amp;&amp;varSpread&amp;&amp;(varOtherA-Bid)/Point &gt;varDistance) I believe (varOtherA-Bid)/Point &gt;varDistance should be changed to (Bid-varOtherA)/Point &gt;varDistance because of varOtherA-Bid&lt;0. I have seen other issues but I haven't figured out whether it made problems. You're in the states right ? If so, I think using MBT and IBFX would be an ideal place where MBT's spread is always less than 10 while IBFX's one &gt; 20. I've seen many events signaling 1 or 2 today. I have a quick question. I can't figure out why funcCheckTime() is necessary. I think I miss something.... Also, it seems to me we could face with cases which don't turn "CloseSucess" in EnterLong/EnterShort functions to true even after closing orders... Well, I'll dig up more tonight. Please let me know if you update your code.
+
+--- 帖子 #38 ---
+I'm curious as to what code your looking at. I've taken a look at the code and I don't see the issues. See comments inside the code. And don't forget. You're always more than welcome to change the code! I don't claim to have any copyrights on it. Well, all of my comments didn't make it. I'll be posting new code soon.
+
+--- 帖子 #39 ---
+See post #1 for new code in zip along w/ compiled DLL in the same zip.
+
+--- 帖子 #40 ---
+Hi nondisclosure00, Yes, your previous version was okay except the sell order issue. I've gone through your current codes and it seems logically okay. Your codes for "generic" are intended for non-ECN broker right ? I've changed it for my brokers. I'll test them in IBFX/MBT or MBT/FINFX next week. I'll ask my previous colleagues for basic functions/safe nets the system must have. NYC is preparing Irene and luckily my place is not in zone A, but I'll definitely try to add some features and let you know. (I can't send PM now because I'm a junior member.) May I ask you which brokers you're testing this system on ? ECN brokers don't have FL as far as I know. (I'm sure IBFX ECN and MBT don't have it.) Cheers, D
+
+--- 帖子 #41 ---
+Hello, I've checked out how funcCloseOrder(OrderType(),varSignal) acts in your codes. It seems to me that the above exit condition has not been implemented. (Close an order when prices become mixed (ie. Bid in one terminal is no longer greater than ask in the other)) Am I missing something here ? If my understanding is correct, two functions, funcGenerateSignal() and funcCloseOrder(int varOrderType, int varSig), would be modified to the below forms (there must be better way....) (Modified pieces are commented with // D: ) //------- int funcGenerateSignal() { static int varReturnValue=3; static bool varSpread=true; static int varDistance=0; varDistance=MathMax(MarketInfo(Symbol(),MODE_SPREAD),MarketInfo(Symbol(),MODE_FREEZELEVEL)); if (varOtherA==0 || varOtherB==0) {return(3);} //check spreads if (MarketInfo(Symbol(),MODE_SPREAD) &gt; varSpreadProtect) {varSpread=false;} //check directions if (Ask &lt; varOtherB &amp;&amp; varSpread &amp;&amp; (varOtherB-Ask)/Point &gt; varDistance)//long {varReturnValue=1;} if (Bid &gt; varOtherA &amp;&amp; varSpread &amp;&amp; (Bid-varOtherA)/Point &gt; varDistance)//short {varReturnValue=2;} if (Ask &lt; varOtherB &amp;&amp; varSpread &amp;&amp; (varOtherB-Ask)/Point &lt; varDistance)//long {varReturnValue=0;} if (Bid &gt; varOtherA &amp;&amp; varSpread &amp;&amp; (Bid-varOtherA)/Point &lt; varDistance)//short {varReturnValue=0;} if (Bid &lt;= varOtherA &amp;&amp; varSpread &amp;&amp; OrdersTotal()!=0) // D: for closing order when Bid in this terminal is no longer greater than Ask in another terminal {varReturnValue=5;} if (Ask &gt;= varOtherB &amp;&amp; varSpread &amp;&amp; OrdersTotal()!=0) // D: for closing order when Ask in this terminal is no longer greater than Bid in another terminal {varReturnValue=5;} return(varReturnValue); } bool funcCloseOrder(int varOrderType, int varSig) { static bool varReturnValue=false; if (varOrderType==OP_BUY &amp;&amp; varSig==5)//( || D: varSig==3 is changed to 5. { varReturnValue=CloseAll(Symbol(),varOrderMagicNumber,varOrderType,10,varSlippage," "); } if (varOrderType==OP_SELL &amp;&amp; varSig==5)//( || D: varSig==3 is changed to 5. { varReturnValue=CloseAll(Symbol(),varOrderMagicNumber,varOrderType,10,varSlippage," "); } return(varReturnValue); } //------ One more thing I suggest is to add one more condition for excuting procOpenOrder(varSignal). Inside start(), if (varNoOrder &amp;&amp; varOtherA != 0 &amp;&amp; varOtherB != 0) { varFridayOK=funcFridayOK(); varTimeOK=funcCheckTime(10); if (varStopEA || !varTimeOK || RefreshRates()==true) {return(0);} // D: Added one more condition to check whether the predefined variables such as Ask, Bid.. are still valid. If new tick has came during the operation, don't make any order. procOpenOrder(varSignal); } Please let me know what you think of them. -D
+
+--- 帖子 #42 ---
+I wish you and yours the best. From what I've seen on TV of Irene, she's been one big b*tch. They're meant to be used on any retail broker. I haven't seen why they can't be used on an ECN broker. Someone would have to tell me what the big differences are between ECN and retail. The IBFX account I'm using is retail.
+
+--- 帖子 #43 ---
+There is no signal value for 5. What is the condition that would generate that? Right now, if none of the 4 conditions are met in funcGenerateSignal(), that means the prices are mixed and it's time to close. Remember, this is called from the open order loop. OrdersTotal() in function funcGenerateSignal() is wasting time. I'll have to look at the RefreshRates()==true. Never got that one before. Remember, walk the code w/ an order in mind.
+
+--- 帖子 #44 ---
+Hi, Sure, we can use your work on both ECN and non-ECN brokers. What I meant was your codes for "generic" is intended for only non-ECN broker. In Quick Scripts.mqh for "generic", Ticket = OrderSend( FinalSymbol, OP_BUY, thisLot, SymAsk, Slippage, StopLong(SymBid,StopLoss, SymPoints,SymDigits), TakeLong(SymAsk,ProfitTarget,SymPoints,SymDigits) , Commentary, MagicNumber, Slippage * SymPoints, CLR_NONE ); Also, I found OrderModify() in both EnterLong() and EnterShrt() is commented out. (At this point, I saw one of your brokers is non-ecn.) For ECN broker, as you know, one cannot send an order with SL and TL but should modify an order right after ordersend(). That's all I meant. I agree with you. We can use your work with any brokers as long as we use the proper Quick Scripts file.
+
+--- 帖子 #45 ---
+Oh, I read your post again, I agree with your comments. My only concern is a function type of varReturnValue (static int varReturnValue=3 in funcGenerateSignal(). Because its type is static int, after signal value is changed from default 3 to any other value, 0, 1 or 2, the value doesn't come back again to 3. (varReturnValue is not initialized to 3 every time funcGenerateSignal() is called but keeps the previous defined value.) What do you think ?
+
+--- 帖子 #46 ---
+Also, how much is the cost ? Thanks
+
+--- 帖子 #47 ---
+OrderModify() is commented out in the generic EA. But in the IBFX folder, they're not commented out.
+
+--- 帖子 #48 ---
+GOOD CATCH!!! I didn't think about that.
+
+--- 帖子 #49 ---
+Interesting thread! I've done something like this before. Not this exactly but a similar concept. If I were to attempt another go at it (and I'm not saying I am planning to), I would do some things differently. I'll get to that in a second. But first I have to ask why both bid and ask prices aren't transferred in a single function call, rather than doing two calls (get_terminal_2_bid/get_terminal_2_ask ) to get these prices when presumably every millisecond counts? If I were to try this again I would add a third price feed and a controlling algorithm for the order in which trades are transmitted. The third price feed would be a fast ECN type feed that has reliable real market prices that I feel represent the actual cash market value (most of the time). The reason is this. Whether you realize it or not, this method relies on the fact that one (or both) of the br0kers has mis-priced its quote. It will usually just be one br0ker. This may be due to latency or some internal br0ker reason for shading prices, but it's usually going to be latency that drives profit. Reasons aside, on any given transaction you're taking advantage of one of the br0ker's prices. When push comes to shove and the br0kers start figuring out what you're doing (which probably won't take long), they will implement countermeasures. This is a virtual certainty. In that case, you will want to ensure that the br0ker's price that you're taking advantage of is executed first. If this trade doesn't execute, there is no reason to execute the second trade that is fairly priced according to the 3rd data feed because you have no edge there. I realize that you're probably seeing some things on demo testing that make your mouth water, but believe me when I say that it won't take long before you're forced to face up to these realities I just posted and to adapt in quick order. Word to the wise.
+
+--- 帖子 #50 ---
+Hello, could you be please more specific what kind of countermeasures broker can do against such a trading system? And how broker is figuring out that you are arbing against him? thanks. Teapeak
+
+--- 帖子 #51 ---
+" why both bid and ask prices aren't transferred in a single function call, rather than doing two calls " Because the only other way I saw to do was to return pointers. I wanted to return values.
+
+--- 帖子 #52 ---
+I really cant see why this wouldnt work.....if youre trading with two different brokers on two different platforms, then how in the world is it possible for your trades to appear as broker arb? if you are executing them at market, they will look like any old market order..... anyways the only time ive ever see broker spread larger than 3 or 4 pips bn broker is during news, when prices will obviously be distorted
+
+--- 帖子 #53 ---
+Countermeasures is really a topic for another thread, but you might start here to see what a Metatrader broker may be capable of (basically anything) from extra slippage to delayed fills to requotes, no fills, terminal lockups... you name it. Metatrader is designed to maximize broker control over how orders are handled. The plugin mentioned is just one way to methodically apply a method of adding an extra surcharge on orders placed. Brokers are in the information business. It is their job to know the real market price so that they can manage risk. They know if they are moving their quote slowly and getting picked off by orders, because they determine when they are moving their quote slowly. Even if the broker is not that sophisticated, just looking at consistent small profits with high frequency over a few days is enough for most to start monitoring your account. If the broker is losing $$$, they are aware of your account. And then it's just a matter of time.
+
+--- 帖子 #54 ---
+I've been trading retail w/ moderate success. Someone explain to me what the difference between the 2 is? I've always thought one of the differences was you needed like $1M to open an ECN account.
+
+--- 帖子 #55 ---
+This question was already answered - see below: and That said, there may be better odds of success with this method by using more brokers in the pool. More price quotes means there is a greater opportunity to spread your orders over various brokers, and more opportunities, though harder to debug and keep track, but easier to obfuscate your own orders.
+
+--- 帖子 #56 ---
+Excellent work. Could you share a multi-currency release? Thank you.
+
+--- 帖子 #57 ---
+Hi there any news on development?
+
+--- 帖子 #58 ---
+Check this out: http://forextrading.about.com/od/typ...ertypes_ro.htm and http://www.100forexbrokers.com/ How is the system doing?
+
+--- 帖子 #59 ---
+Hi nondisclosure00, It is generous for u to share your implementation. I have been exploring the same idea too. My implementation is different though. I used client-server structure, where each EA is only responsible for getting the quote from MT4 and taking trade operation. The server(in C++) is design to scan the price movement from multiple brokers (&gt;2). The reason for this architecture is to minimize the execution time and grab more opportunities. I just finished the prototype code and start to test on demo. The experience from you and other people are fully appreciated. If the system eventually reaches certain success, I can share it with all you guys. Pm me if you want. or sending email to me at {Email Address Removed}
+
+--- 帖子 #60 ---
+Here is a system from Romania they devopled. It works well but expensive Here is a pdf on how it works. I think this can be reprodced buy some experience programmers Must use these brokers Alpari UK AVA FX FXCC FxPro FXCM UK FX Open Varengold Bank Windsor Brokers Pepperstone AAA FX One Financial Classic One Financial DMA Forex.com FXDD GoMarkets HotForex TradingPoint TadawulFX FinEX FX Primus Markets.com RoboForex (NDD/STP) VPE FX Solutions
+
+--- 帖子 #61 ---
+Do you also have the option to read the openorderprice from the other broker terminal inside the DLL fiel? If not is it possible to add it also.
+
+--- 帖子 #62 ---
+How would it be utilized?
+
+--- 帖子 #63 ---
+Well, they're running w/ the idea. But they're taking a huge risk. They're willing to let positions run for a while. I mean, if you've haven't seen a profit in a short amount of time, you'll have to wait a long time. AND survive the downturn in the process. Add to that, the .exe just adds another layer and cuts down on the speed (not to mention running 10 terminals on the same system).
+
+--- 帖子 #64 ---
+I think I can make ScalperOne and dkwak's idea work in retail forex. Here's what I need from the group. 1. Best Master (fastest) and best Slave (slowest) data feeds. Give me ms time for each. 2. Price trigger. What would be the best price trigger between the 2? Take a look at my code now and you'll get an idea of what I used. It's most likely the worst case scenerio, but you get the idea. 3. Time diff trigger. This is the big one. What's the minimum ms latency difference btween the 2. In other words, the master has 2ms between the terminal and server, and the slave has 20ms. 20ms-2ms=18ms. Is that enough. 4. Tick capture. I'm toying w/ this idea. how many "ticks" behind is the slave from the master. Now, if every broker had the same exact tick prices, this would be simple. And we'd all be millionaires overnight. If someone can compare candle prices on 1min charts between 2 brokers and see how close they come. I'm willing to code this entire system. But I need help. I need some people to look into broker comparisons and some to look into price and time triggers. I'm a coder; not a system builder. I'm not that good at putting systems together (entry/exit criteria; trade management, etc.). But I can code a system. I think we can do this. Let's give it a shot. Anyone up for it? PS. Everyone here gets a copy of the resulting EA files and subsequent source codes for free. Successful or not. LOL! PPSS. If it is successful, I don't plan on selling it. I plan on releasing it here on FF w/ giving props to everyone who helped.
+
+--- 帖子 #65 ---
+Its used for comparison once both trades are placed in case of error. So they could be closed quickly
+
+--- 帖子 #66 ---
+I have been running for a whole day now see image. I made some changes in entry and closing orders. I removed the option to check spread value and made only 1 broker to SELL only and the other to BUY only. Exit when the reverse occurs
+
+--- 帖子 #67 ---
+Hi! I'd love to offer a helping hand, but can't even get past the first download. You mention some setup instructions in the post 1 zip file, but I found none. How can I install and test this system? I'd love to test on ACTIVTRADES , PEPPERSTONE , HOTFOREX and AAAFX (Which are the brokers I successfully use for my regular trading systems)
+
+--- 帖子 #68 ---
+Don't worry about those first downloads. That's a little different than what I'm trying to do here. I'll be posting instructions soon on how to get server times and track them. Keep posted.
+
+--- 帖子 #69 ---
+Great. Let me know how I can help. I got demo space available and live accounts with those brokers
+
+--- 帖子 #70 ---
+One of the most interesting "system" ever... I'm also working on it Good luck!
+
+--- 帖子 #71 ---
+I can test as well currently using VantageFX but have loads of different broker MT4s installed for testing.
+
+--- 帖子 #72 ---
+Folks, just a friendly reminder that every broker specifically forbids this type of trading in their customer agreement. When you open an account with any of them you agree to not trade this way. Brokers take this seriously because it amounts to theft akin to insider trading in the stock market. They do look for suspicious trading patterns and will suspend your account if they think your doing this sort of thing.
+
+--- 帖子 #73 ---
+Good luck dude! Let us know how you do.
+
+--- 帖子 #74 ---
+Your arb method is already available: See video: http://www.f0rexarb.c0m/access-arbitrage-in-acti0n/ change 0 to o.
+
+--- 帖子 #75 ---
+I'll watch from the sidelines, as quant algo's have done this since computer proliferation and it's something retail has Bob Hope and no hope of doing compared to their funds and execution speeds; there's a reason they are all complicit in the fraud by placing their servers a few feet away from the exchange.
+
+--- 帖子 #76 ---
+Inside the black box: the simple truth about quantitative trading Direct Market Access (DMA) - Source / Snippet... http://i.imgur.com/UDYfh.png
+
+--- 帖子 #77 ---
+Interesting. I could probably do this based on what I've already done. Instead of using 2 brokers, using more than 2. It would probably be easier to use Excel to short out prices that fast. Hmmmmm, got to think about this one.
+
+--- 帖子 #78 ---
+Hi nondisclosure, one of the broker show me this message on the terminal: EURUSD terminal_1 EURUSD,M5: Last Error on Long entry is: 130 What mean? Do you know the most fast/slow broker for run the arb tecnique? Is possible use this ea on multiple currency? Thank you for your work
+
+--- 帖子 #79 ---
+Have you ever experienced such situation, say the account is closed? Do they need any proof to say "you are using arbitrage?", or just simply close your account? This would be the biggest risk.
+
+--- 帖子 #80 ---
+Yes i have had my accounts closed due to Arb trading. I developed a decent fully automated Arb trading software about 6-7 years ago and tried with several brokers. Brokers close your accounts once they find out you are arbing. If you dont believe me, then contact your broker and find out for yourself.
+
+--- 帖子 #81 ---
+That particular arb method is fairly juvenile. It's more fun if you have direct liquidity provider access--bypass the broker(s).
+
+--- 帖子 #82 ---
+130 - invalid SL Your broker doesn't support SL so close to price (usually about 10 pips)
+
+--- 帖子 #83 ---
+I've developed arbitrage system on MT4 API (high speed) I need 4-5 betta testers with arbitrage trading experience
+
+--- 帖子 #84 ---
+Mine allows it.
+
+--- 帖子 #85 ---
+Absolutely! But not many people, including myself, have the capital to do it.
+
+--- 帖子 #86 ---
+I can plop it on my server in a VM and let it run. What do you need?
+
+--- 帖子 #87 ---
+First, thanks everyone for your support. I really appreciate the high interest in this subject / system / forthcoming EA. I've been incredibly busy lately. Holidays coming and w/ 2 kids, it's always a busy time. My job, which I actually love to do, has for some reason I still can't explain, has picked up by about 66%. It's keeping me on my toes. I hope to get the first part of the new arb program in the meantime posted up here. Until then, Here's how to test raw TCP latency from your pc to the 4x server: Ping: http://www.microsoft.com/resources/d....mspx?mfr=true what we need is the 'ms' average. If you read the article (it's short), it'll show you what to do. This will help give you an idea of what brokers would be best for this system. We also need to know what brokers allow 'scalping'. This one will take some research, but it'll come in handy to know. Why? I'm looking to do more than build a system and post it here. If we have brokers already found that allow scalping, we can use that information too. So, lets start building the list of brokers. The ping times keep for your records as when we get to testing; we'll have a good idea of what we need. So stay tuned! More to come!
+
+--- 帖子 #88 ---
+is it permitted to post e-mail address here?
+
+--- 帖子 #89 ---
+Care to share your broker name that allows arb trading, thanks. Over at forexarb.com , the guy claims that several US brokers are now ok with arb trading, which i do not believe. But i'll take a look and report back here.
+
+--- 帖子 #90 ---
+Quote from following thread. http://www.donnaforex.com/forum/inde...25521#msg25521 NO broker is gonna allow you to steal from them. Any broker that has a slower feed already knows that they lag the true interbank market and arbitrage trades are easy to spot. You might get away with it for a day or so but I doubt you'd ever get paid. They'll deleted the trades and kick you out fast. By their nature arbitrage trades wont last long enough for the broker to hedge them so they'll put you on manual execution as soon as they see this behavior and you'll be outta business.
+
+--- 帖子 #91 ---
+I absolutely agree with that statement.
+
+--- 帖子 #92 ---
+IBFX (which just got bought by tradestation).
+
+--- 帖子 #93 ---
+You can. But do at your own risk.
+
+--- 帖子 #94 ---
+blah blah blah. I hear it ALL the time. But when I ask these people who have gotten "kicked off" for doing this; I ask them for proof. Show your account being closed by the broker. Show me the letter/email stating WHY you were kicked off. Show me you weren't getting paid for your profitable trades. I've asked to about 14 so far that I've found telling me this. Out of those 14 ..... 0 have been able to provide proof. So, I'm going to continue until it either happens to me, or there is proof.
+
+--- 帖子 #95 ---
+Please read up experiences on forexpeacearmy.com . Also, based on what you say i believe you havent run Arbs on Live broker accounts for any extended period of time successfully (correct me if wrong).
+
+--- 帖子 #96 ---
+Interesting. I've also attempted a shot at an app like this before (c# + mt4 api) but when I didn't get the spectacular results I was hoping for I gave up on it.
+
+--- 帖子 #97 ---
+Oh here's an example of what you might get: Dear client, "It has been noted that you are continuously requesting to open orders at previous or wrong prices. This may be occurring either due to poor internet connection from your side or a misuse of an expert advisor. We will proceed to temporarily block your account as per clauses 5.6 of the Terms and Conditions. Please contact dealing@fxpro.com when you resolve this issue so we can re-activate your account." 5.6 The client accepts that FxPro reserves the right to terminate the client’s access to the trading platform(s) in order to ensure and/ or restore the orderly operation of the trading platform(s) and protect the interests of both the clients and the Firm; under such circumstances FxPro may, at its discretion, close any of the client’s trading account(s), according to paragraph 17.5 of the Client Agreement. If your internet connection is fine, then there must be a problem with your Expert Advisor. Once this issue is resolved inform us in order to reactivate your account. Regards, Dealing Desk
+
+--- 帖子 #98 ---
+A quick primer on arbitrage. After reading through this thread it seems there is a lack of the proper definition of "arbitrage" when applied to forex. Here is how I see it: True arbitrage happens when there are two separate markets offering the same product for different prices. Historically, the Chinese have favored silver, while the Europeans favored gold. A fairly popular method of trading back then would have merchants buying silver in Europe, trading silver for Gold in China, and trading that gold for more silver in Europe. So, numerically: Assume you get 2 silver for 1 gold in Europe, and you get 2 gold for 1 silver in China. I acquire 1000 pieces of silver in Europe. I trade the 1000 pieces of silver for 2000 pieces of gold in China I trade the 2000 pieces of gold for 4000 pieces of silver in Europe. I trade the 4000 pieces of silver for 8000 pieces of gold in China. And the cycle continues until the trader died, was robbed, or otherwise couldn't continue trading. When applying this to the Forex Market, remember that the forex market is made up of several liquidity providers each collaborating together to trade one currency for another. Let's say there is one bank in the US, and one bank in Australia. Both banks are liquidity providers in the Fx market. They therefore receive news at different times. So assume this bomb (true story!) actually went off in Germany, thus crippling the german economy, and further crippling the Euro. The US and the Australian liquidity providers generally find out about this information at different times, and their prices reflect this difference accordingly. This would give me an opportunity to buy some currency from one bank, and sell the same currency to another, all while profiting instantly. Traditional methods of 'arbitrage' in the retail forex world involve the speed at which information travels as opposed to true arbitrage. Retail brokers have to go through a liquidity provider, who themselves have to go through a liquidity provider, before reaching an interbank who ultimately fills an order. This leads to some lag in the true price in the broker's feed, and what also leads to some enterprising individuals who would get a faster currency feed, which can 'predict' a broker's price as much as 30 seconds in advance. The trader would then merely have to watch the faster movement, and apply the trades to the slower feed. This is what brokers do not like. Now, considering the events around the world as of late, arbitrage opportunities are actually more frequently occurring again because of the differences between the speed information travels from the source to the interbanks. The arbitrage opportunities are most obvious at the week's open, when each bank has factored in the weekend's news into their Bid/Ask. Thing is, each bank factors in the news differently, which leads to some instances where the Ask at one bank is greater than the Bid at another bank. So to implement this method, you would simply need to find two brokers who have different liquidity providers, and place arb-style trades with them.
+
+--- 帖子 #99 ---
+Over a year on 2 live accounts. Due to some strict settings, they've hardly made any money (putting in on average 2 trades per day doesn't garner that much attention). But, they've money.
+
+--- 帖子 #100 ---
+How in the world did you get c# to talk to MT4? MT4 can only handle unmanged code.
+
+--- 帖子 #101 ---
+And no where in there did they mention that you were Arbing. (yes, it's an example). The whole arguement was that the broker can tell your running arbitrage. No, they can't. They can detect EXACTLY what you have put down below. Which is why you need to write your EA carfully enough to avoid these situations.
+
+--- 帖子 #102 ---
+Try this link: Write a C# DLL for Metatrader
+
+--- 帖子 #103 ---
+I did some research on this "incorrect price" stuff and found this lengthy thread. Brokers are explicitly against this type of system and they can cancel orders at their wish... It is not a fair game~~~Bypassing the brokers, there may still have some chances? then, we have to compete with HFT systems from bigboys. any advice? http://www.forexfactory.com/showthread.php?t=299780
+
+--- 帖子 #104 ---
+Reverse engineered protocol. I know a guy who did it (fully managed c#) he sells the dll for $3000 and compiles me ones that last a month at a time, it is obfuscated to hell and gone with the license stuff and only that in a c++ dll.
+
+--- 帖子 #105 ---
+Any real ECN broker should be ok with this (i think) they charge you commission because they are not supposed to profit on you losing.
+
+--- 帖子 #106 ---
+Have you ever tried this before or ever really looked into it? Do you think this could be done using a STP/ECN and a MM? Do you think there are any MMs that would not catch on?
+
+--- 帖子 #107 ---
+Bank liquidity runs all the time, there is no week open/close unless if you use retail broker open/close.
+
+--- 帖子 #108 ---
+I've been doing it recently actually. You know Jason Fielder's new 'forexarb' system that's out? I've been doing that for almost a year now, basically since the euro crisis started. And I'd say he's still behind my developments. The bank traders have to sleep too you know. Weekend spreads do increase at institutional banks, and oftentimes, transactions are small enough that they can use their internal holdings of currency to exchange them.
+
+--- 帖子 #109 ---
+Interesting. I'll have to play w/ that after I get some other stuff done.
+
+--- 帖子 #110 ---
+Not really insane but close to it. I always knew something like this would exist but never investigated it, with the growing number of brokers and "liquidity providers" price differences and weekend open timing will occur, and it looks like we have the bots to do it. BUT WAIT, are you telling me that brokers will delete trades and refuse to payout profits on said trades because either: a) They discover you are arb'ing b) They use a part of their client agreement that puts them in the category of a private club casino ie we reserve the right to refuse service to anyone we choose). Brokers that allow automated trading and that are regulated by some body(NFA and CFTC in the U.S.) should honor any trades that have been completed on their platform, after all the only money they are supposed to be making is the spread right? The very notion they can withhold funds due to any reason is simply ill-legal. In such cases, complaints should be filed with the regulatory bodies and the public could be made aware of the practices of that broker, this would severly damage their reputation and rightfully should. What if my automatic EA was making these trades based on smoke signals or based on my own tech indicators, how could the broker prove that my trading with them had anything to do with other broker prices and why would that matter anyway? Can anyone link or site specific cases where arb trading account funds were suspended and/or withheld? If so, were complaints filed? If in fact brokers do shut down accounts for this reason, I would be on a crusade to expose this fraud if it happened to me.
+
+--- 帖子 #111 ---
+Dude, how possibly they can "discover" that? They can, perhaps, assume without any proof what so ever, cause they pretty much sure, that anyone who has Forex account in plus are Cheating, cause nobody should beat the "House" That's the only proof they have in that matter. All those 3rd party and 3-rd world countries brokers can not even bother with "Arbitrage" crap, they can just steal your money without any reason and nothing you can do about it. Conclusion? Play only with world-wide knowing Brokers with good reputation. Not some small junky 3 chairs, 2 computers, 2-pages website with no contact Phone, type of guys..
+
+--- 帖子 #112 ---
+They can discover you are arb'ing by getting a hold of your trades that are in your name from the other broker. My questions remain and I'm really hoping somone who has actually been banned from a forex broker by trading via their platform and legitmately can speak up and share the details. In the abscence of this, I'm very curious to see how this thread unfolds and especialy the comments on forexarb bot.
+
+--- 帖子 #113 ---
+I don't see how it's even remotely possible.. You think some Russian guys can call up broker in Switzerland and ask them for their trading records just because some guy made 200$ last night? Anyways, what if I have other account open as Corporate acc or on My wife or brother? It's impossible to track down.. Don't be paranoiac.
+
+--- 帖子 #114 ---
+Well, forexarb and Jason fielder came out with a $2000 price tag on the tool , so they better be sure it works on live with multiple brokers. The most important thing with arbing is that you have multiple live brokers that allow arbing, if that doesnt happen then it's all a waste of time.
+
+--- 帖子 #115 ---
+$2,000...holy 5hit, they couldn't even change the generic desktop icon, so God knows what spaghetti code lurks beneath. This snake oil is expensive stuff.
+
+--- 帖子 #116 ---
+It's not rocket science how they did it either. As soon as I can get some time, hopefully before the end of the year, I'll have the same thing in MS Excel.
+
+--- 帖子 #117 ---
+Already did it using Excel VBA. Takes 600ms round trip (incoming quote to trade decision). Did it in MQL, takes 200ms round trip. I used the named pipes example mentioned here ( http://www.forexfactory.com/showthre...47#post4134147 ) Doing it in C#, takes 150ms round trip. Trying to do it in assembly--aiming for 15ms round trip. My advice, Jason Fielder's method is juvenile, more benefits can be had if you build your own.
+
+--- 帖子 #118 ---
+We could bid this like "the price is right". LOL Excel would be a pig, but I need to do it that way as a POC. I might be able to speed up what you've got by not using VBA except to write/read from a C++ DLL. I used the named pipes once. Way to slow for me. C# can't be done unless you use a C++ wrapper. There is another method I just read about recenlty, but haven't played w/ it. I still say a pure C DLL (or C++ but unmanaged) will be the quickest way. Let us know how you do!
+
+--- 帖子 #119 ---
+Ya and the $2000 system is fully manual!??? What that means is that you have to be sitting on your chair and ready to click your mouse to enter the trade and exit it. You can't tell when it will give a signal to enter, it is like asking a guy to stare at the sky and take pictures of any shooting stars. You better not Blink or you might miss it. A good Arbitrage system should be automated with rules on when to enter and exit the trade.
+
+--- 帖子 #120 ---
+My suspicion behind the lack of automation is the potential for lawsuits. The brokers used in the example can slip an order by a few tenths of a pip.
+
+--- 帖子 #121 ---
+I started looking at this 3 years ago with a multiterminal dll which now appears to be no longer available. I am not a great programmer, and gave up. However, Fielder got me really p*** when I saw what he'd done and I have just built an automated system in 4 days using MQ4, http and xampp. Obviously too slow and still very rough but must be doable by some good coders
+
+--- 帖子 #122 ---
+Post #116. http://www.forexfactory.com/showthre...98#post5200398
+
+--- 帖子 #123 ---
+It's alive! http://ronaldraygunforex.com/Arbitrage/ Basically, this does everything the free version of Jason Fielder's ForexArb system does. It's not very difficult to add trading capability to this script. I'm planning to release this for free, but will only do so once I have the proper legal protections in place. I am currently collaborating with Twee to make sure everything I do from this point forward is within the rules of ForexFactory. [edit] To those programmers who are interested in working on this, kindly contact me via Skype (Brynmawr114). I have much to discuss with you. [another edit] What you see in the video is the Pair|Bid|Ask|Spread|Bid Broker|Ask Broker I use a different version of this tool to help my EAs get the best price for their entries. [athird edit] I updated the video to show you what happens every 2 hrs or so.
+
+--- 帖子 #124 ---
+Christmas already?
+
+--- 帖子 #125 ---
+I'm a coder by trade and I would love to help you out but I'm just wondering how much of a time commitment are you expecting from each coder? EDIT: I'm married with children, hope that explains why I'm asking
+
+--- 帖子 #126 ---
+Enough to beta-test and get a fully working auto arb off the ground. I am also working to improve my order matching software. I have no absolute time requirements, but I am looking for help using windows calls to do the various tasks necessary in these kinds of scripts. Custom dlls written by me are inherently slow and inefficient. Being able to run code at the system layer will ensure the speed needed.
+
+--- 帖子 #127 ---
+Sorry, not familiar with those things. I'll have enough time to beta-test at least.
+
+--- 帖子 #128 ---
+Well, you've seen my DLL (it could use some tweaking to stream line it. ie., getting rid of collections). If you want to collaborate, PM me. I don't currently have skype. Oh hey, it says here for pc to pc use, it's free! Guess it's time to learn it. LOL Let me know.
+
+--- 帖子 #129 ---
+I've got plenty of cpu power and bandwidth to offer for beta testing. Sorry, no coding ability / assistance from me. T
+
+--- 帖子 #130 ---
+As much as I appreciate the beta tester offers, I really need someone who can spot an error in the code, fix it, test it again to make sure it's stable, and repeat the cycle until the code is as efficient as we can get it on the metatrader platform. The likelihood that this script working as an arbitrage script will last is very slim. I'm more interested in using this script to generate a set of the best prices for my EAs. The infrastructure would look something like: Price Data -&gt; Aggregator -&gt; Best Bid and Best Ask -&gt; Offline chart with EA. This way, I can have the EAs work against the best data feed I can. I'm also looking for developers who are well versed in KDB. KDB is a very high power and high speed database used for these financial trading applications. It is also extremely notorious to set up, program and maintain.
+
+--- 帖子 #131 ---
+Well, I am then firmly in the observers camp. Sorry I could not be of any assistance. T.
+
+--- 帖子 #132 ---
+RR, It sounds like you're trying to create a single price feed out of the composite MT4 quotes and save it to disk. In which case a high speed / high maintenance database would appear to be overkill since most of the data is slow anyway as it is from MT4 brokers' smoothed datafeeds. Are you reading the quotes off the screen or pumping the quotes via an EA? I don't skype (yet) but yes there are a lot of things to discuss regarding this type of project, many of which are best done offline, but my time is limited. I'm not familiar with the method of populating an offline chart with ticks so there may be other options.
+
+--- 帖子 #133 ---
+That video above shows five brokers. I have relationships with 48. I basically would be looking to expand to a 48-broker price feed, and I am trying to capture all the data from every broker in real time. The data I'm currently pumping through is from MarketInfo() calls running from an infinitely looping script. If I can get millisecond or faster accuracy between brokers prices, I can see who is lagging--and by how much, I can compare broker prices with liquidity provider prices, which I am looking to capture in a parallel table, and I can see who gets affected by what news. Example? US brokers might be more sensitive to US news, while Australian brokers would not. Having worked on the institutional trading side, I can say they have incredibly smart people solving the problems I'm working on now, which also means that my smoothbore musket does not stand a chance against their nuclear ion cannon. So I'm focusing on a smaller pond.
+
+--- 帖子 #134 ---
+I wonder which is faster, the quote window refresh in MT4 or a looping EA refreshing the data every loop? edit: the question is semi-rhetorical in that I use the former method to retrieve quotes.
+
+--- 帖子 #135 ---
+What if you sniffed packets from multiple MT4's (each broker specific) using WireShark ? Collate packet data using an interim .NET app, then analyse price discrepancies with a simple: if (MathAbs(brokerA - brokerB) &gt; 10) Trade(); I created a .NET app to 'talk' to Metatrader, here's code: It just flicks through profiles and simulates AutoHotkey. I wonder if you can invoke a buy/sell script using above?
+
+--- 帖子 #136 ---
+If quotes flew across the wire in MT in the clear, people would have been writing their own clients for it and making bucko $. You can't "sniff off of the wire" on MT4. If so, prove it.
+
+--- 帖子 #137 ---
+You used to be able to telnet. Like so: $ telnet 216.93.169.220 443 Trying 216.93.169.220... Connected to 216.93.169.220. Escape character is '^]'. MetaTrader Server 4.00 build 391 Ava Financial Ltd. QUOTES-EURUSD,EURGBP, up EURUSD 1.4105 1.4106 2011.03.24 02:02:49 down EURGBP 0.8673 0.8675 2011.03.24 02:02:41 2011.03.24 02:02:49 LIST CONFIRMLISTS-EURUSDEURGBPAms.AEGNAms.AHLNAms.AKZOAms.ASMLAms.BAMNAms.BOSNAms.CORAms.DSMNAms.ELSNAms.FUGRcAms.HEINAms.INGAms.ISPAAms.KPNAms.PHGAms.RANDAms.RDSaAms.SBMOAms.TNTAms.TOM2Ams.UNcAms.WEHAAms.WLSNcCBOT.WFft.BMWGFft.VOWGHel.NOK1VLSE.AALLSE.ABFLSE.ADMLLSE.AMECLSE.ANTOLSE.AUTNLSE.AVLSE.AZNLSE.BAESLSE.BALFLSE.BARCLSE.BATSLSE.BAYLSE.BGLSE.BLTLSE.BNZLLSE.BPLSE.BSYLSE.BTLSE.CCLLSE.CNALSE.CNELSE.COBLSE.CPGLSE.CPILSE.CWLSE.DGELSE.ENRCLSE.EXPNLSE.FRCLLSE.FRESLSE.GFSLSE.GSKLSE.HOMELSE.HSBALSE.IAPLSE.IHGLSE.IIILSE.IMTLSE.IPRLSE.ISALSE.ISYSLSE.ITRKLSE.JMATLSE.KAZLSE.KGFLSE.LGENLSE.LMILSE.LSELSE.MKSLSE.MRWLSE.NGLSE.NXTLSE.OMLLSE.PFCLSE.PNNLSE.PRULSE.PSONLSE.RBLSE.RDSaLSE.RDSbLSE.RELLSE.REXLSE.RIOLSE.RRLSE.RRSLSE.RSALSE.SABLSE.SBRYLSE.SGELSE.SHPLSE.SLLSE.SMINLSE.SNLSE.SRPLSE.SSELSE.STANLSE.SVTLSE.TCGLSE.TLWLSE.TSCOLSE.TTLSE.ULVRLSE.UULSE.VEDLSE.VODLSE.WOSLSE.WPPLSE.XTAMad.ABEMad.ABGMad.ACSMad.ACXMad.ANAMad.BB
+
+--- 帖子 #138 ---
+If you're able to enter keystrokes, you can set up hotkeys in metatrader to trigger various scripts.
+
+--- 帖子 #139 ---
+F9 invokes the order form, but there's no shortcut to action the buy/sell buttons; i guess that's by design to avoid any mishaps. btw, your EA vid was mightily impressive - your CPU usage must go bat shit crazy crunching all that data per tick. @nondisclosure00 - you're right, the packets are encrypted.
+
+--- 帖子 #140 ---
+Sorry about my language on my reply to you. having a bad day.
+
+--- 帖子 #141 ---
+WOW! I had no idea they had a telnet deamon running in the MT4 server. Time to put my hacker hat back on!
+
+--- 帖子 #142 ---
+Not what I meant. You can program scripts to automatically place a predetermined buy/sell trade as necessary, and can have those scripts triggered using hotkeys defined by metatrader.
+
+--- 帖子 #143 ---
+Just to follow up, my quote capture architecture takes the processing outside of Metatrader and DOESN'T use OCR to read the quotes. I see moving the processing outside of MT4 as a benefit because I don't really trust that the developers of MT4 put speed of MQL4 code execution as one of their highest priorities. With this setup, the speed is only limited by two things: 1) rate at which Metatrader updates quotes in the terminal 2) speed of processing in quote capture program. I have my timer set to 10ms but this could probably be made faster by moving the code from vb6 to C#/C++ though it's fast enough for my purposes and I have too many projects... I then transmit the quotes over a network using mailslots, and am following 3 br0kers using one process for each br0ker with this setup.
+
+--- 帖子 #144 ---
+C++ is faster. But you're still reliant in MT4 to send your trades back and forth. MQL4 is good if you're doing simple calculations; and I do mean SIMPLE. Anything that resembles complex, should be done in a C++ DLL. Example: I still need to find the time to re-write my Least Squares slope Indicator to use a C++ DLL.
+
+--- 帖子 #145 ---
+Surprisingly, no. All terminals combined don't hit higher than 15%
+
+--- 帖子 #146 ---
+As I understand what we are trying to achieve here is to find Faster Source of real FX data (My guess direct ECN like Dukascopy compare to Slowest retail "Bucket Shop" broker), it's hardly an "Arbitrage". (I don't think technically it's possible overlaying charts from different sources), but the best approach is to Overlay charts lets say "EURUSD" from different Brokers on the 1 MT4 station M1 TF (FAST). Once 10+ pips in second move occurs (for example "UP") place buy on the slow moving broker and close the trade after 2-3 seconds. Downside: Several accounts must be open in order to get access to the real data.
+
+--- 帖子 #147 ---
+No. That is not arbitrage. See my previous arbitrage primer.
+
+--- 帖子 #148 ---
+If any of this would help out there. I've got some .net code for reading/writing the MT4 binary price files. EA and .net dll for doing anything you can do in mql or receiving the tick data in a .net application. I've got a .net dll that talks directly to mt4 server (reversed protocol) but its hard coded trial expiring on Wednesday.
+
+--- 帖子 #149 ---
+I'm playing around with the following formula. If anyone wants to help me out with refining or ideas about it. Profit = (Bid2_open - Ask1_open + Bid1_close - Ask2_close) * Amount
+
+--- 帖子 #150 ---
+Here is a live webinar with Jason Fielder on Wed Dec 14 that should answer some questions. http://www.freeforexwebinar.com...campaign=[FxArb][InternalWebReg1][12-12-11]&amp;Contact0LeadSourceId=169&amp;email=
+
+--- 帖子 #151 ---
+Great Codemeister. I read that RonaldRaygun is also holding a webinar too along the same kinda lines tonight and tomorrow too which will be cool. Might be a good idea to check out both. Here's the links to his one too. December 13, 9PM EST Webinar: http://www.anymeeting.com/PIID=EB50DD808749 December 14, 9AM EST Webinar: http://www.anymeeting.com/PIID=EB50DD80864C His arb thread is here: http://www.forexfactory.com/showthread.php?t=331106
+
+--- 帖子 #152 ---
+What profit are you looking to calculate? Current open orders, possible orders, etc.?
+
+--- 帖子 #153 ---
+Asinine email titles from Fielder's ArbFX: "No Charts Required - 22 Pips a minute"
+
+--- 帖子 #154 ---
+http://www.forexfactory.com/showthread.php?t=299780
+
+--- 帖子 #155 ---
+Take a look at his myfxbook page. In a span of 9 days, 9 DAYS, his account went from -109% to +600%. Hell yeah, that's gonna raise flags. That's like running through a murder scene w/ a bloody knife in your hand yelling "I did it, I did it". When doing Arb, you have to be smart. Not like what this guy did.
+
+--- 帖子 #156 ---
+So finely I found the right site. So the GUI on Jayson is fricking good and I see some one wants to Machine code this but the fact is have you tried this out? and if so how are you doing? also I have found (with help) a good Russian upload site that works. 50 meg or less and ten days . this could be interesting. http://zalil.ru/ Thanks all I hope this works! I don't want to spend 2000 if this wont work but if it did.. I would kiss and bow down ..you know the rest. Peace
+
+--- 帖子 #157 ---
+Hi nondiscosure00, first of all I want to congartulate for this great thread and the spendid job you , and some of other partecipants did. I have a problem to let run your EA (generic EURUSD terminal 1 &amp;2). I think i did everything you mention on post#1 i.e. I copied the EURUSD.dll in the c:4xarb directory I copied EURUSD_terminal1 on Alpari expert I copied EURUSD_terminal2 on ThinkForex expert I copied the Quick Script on Alpari expertinclude and in ThinkForex experinclude I started the 2 istances of MT4 and attached the EURUSD_terminal1 on MT4 Alpari and EURUSD_terminal2 on ThinkForex MT4. I have the smile ,but nothing appear on the screen. Reading the code there should be some objet appearing and some text isn'it? I receive the following error: 2011.12.19 21:25:04 EURUSD terminal_1 EURUSD,M1: cannot call function 'set_terminal_1' from dll 'c:\4xArb\EURUSD.dll' (error 127) Can you please help me? Thanks Fabio
+
+--- 帖子 #158 ---
+Hi nondisclosure00, forget my previous post, because I found the problem. I loaded a wrong EURUSD.dll ;-( Anyway yesterday I let run the EA's on Alpari UK and ThinkForex. It happen a strange thing. It open "buy" on Alpari with 1 pip TP , but in ThinkForex it did not enter anything ;-) Is it normal? Can you please help me. There is something wrong I guess ;-) Thanks Fabio
+
+--- 帖子 #159 ---
+What did the ThinkForex log say? There should be an error in there on why the position didn't open.
+
+--- 帖子 #160 ---
+Hi nondisclosure, I tried now between Alpari Na IBFX. On Alpari it entered a buy with TP=1 pip successfull. On IBFX I got the following error: 2011.12.21 01:02:38 EURUSD terminal_2 EURUSD,M1: Last Error on Short entry is: 130 Anyway I think it's a great EA ;-) I'm studying the code because I think there are somethind that can be improved. Great job Fabio
+
+--- 帖子 #161 ---
+There's a lot that can be improved. This error you're getting is one. What happened is that the order was put in w/ the TP too close to the opening price. It's something that retail brokers use called "freezelevel". Search Google for "what is freeze level" forex. It's hard to explain. I thought I caught it, evidentually not.
+
+--- 帖子 #162 ---
+I think you are right, but the strange thing is why on Alpari it enters the trade? If the problem is on freezelevel there should be the same on Alpari isn'it? In fact what's is shown on EA comments on both brokers : FreezeLevel=0. Just another question : with your EA are you betting on winning on both brokers ? I should expect that if you win on 1 broker , the other one is loosing. There should be a Close order on both brokers as soon as the profit between the 2 brokers is positive . I do think that we should implement some of the strategies applied by Jason Fileder in his ForexArb. I prefer to PM if it's ok for you. Krgrds Fabio
+
+--- 帖子 #163 ---
+Freeze level varies from broker to broker. In theory, you should win on both as both move to close the gap between them. Doesn't always happen. As far as Jason's "paid" app, check here: http://www.forexfactory.com/showthread.php?t=331106
+
+--- 帖子 #164 ---
+Anyone still playing with this out there??? Latest comments, experience appreciated. Jack
+
+--- 帖子 #165 ---
+I've stopped development on this to help out the development on this one: http://www.forexfactory.com/showthread.php?t=331106
+
+--- 帖子 #166 ---
+Can we test /see the advance? Thanks..
+
+--- 帖子 #167 ---
+I'm not sure I understand what you're asking. I'm old and blonde.
+
+--- 帖子 #168 ---
+Hello...sir...!!! i have put this arb ea on hot forex and think forex,but i got error 130 on both mt4.what to do?? thanks.
+
+--- 帖子 #169 ---
+what is latest development on this project
+
+--- 帖子 #170 ---
+See post #165
+
+--- 帖子 #171 ---
+Hello Sir, Pls guide me setup and use your ARB _ EU Program, i can not setup. Thank you very much
+
+--- 帖子 #172 ---
+Hey Nondisclosure00, How do I change the TP for Arb-EURUSD?
+
+--- 帖子 #173 ---
+Any updates on this subject
+
+--- 帖子 #174 ---
+Can you elaborate on this formula. How to use it and what do you refer to amount to be?
+
+--- 帖子 #175 ---
+You look for the event where (Broker1 Bid - Broker2 Ask) crosses a threshold you set then assuming the price will align again you jump into a trade. Amount is the quantity traded.
+
+--- 帖子 #176 ---
+Bid2_open - Ask1_open + Bid1_close - Ask2_close Is Bid2_open the bid price and Ask1_open the Ask price Bid1_close the ask price and Ask2_close the bid price
+
+--- 帖子 #177 ---
+Hows the Progress on this one..
+
+--- 帖子 #178 ---
+Has anyone created an excel spreadsheet where you can manually enter pairs along with the bid/ask and have it return profitable opportunities for arbitrage? This is just for self-study and obviously not for actual trade purposes. I've been trying to figure out how to go about creating this in excel and it's doing my head in. Thanks!
+
+--- 帖子 #179 ---
+I would like to share my input on this. As with all arbitrage, even in sports betting, it works fine and great in theory. In practical? You will lose money. Its not as "risk free" as you think. There are many many many factors, which i am too lazy to type out at this point. But i have tried, and i can tell you, dont waste your time, money and hope. Yes each time you put your hope on something and it fails, it demoralise you. So dont waste your hope on this. Waste it on something else. hahhaa
+
+--- 帖子 #180 ---
+You probably had no right tool and/or approach to do arbitrage, but it doesn't mean it is not doable.
+
+--- 帖子 #181 ---
+iI find brokers that provide 20 % bonus trading.Bonus can not be withdrawn.Arbitrage is 2 brokers with leverage equal and amount. First broker amount 1000usd and bonus 20% =1200 usd second broker 1000 usd and 20% bonus =1200 usd open position max.buy in first broker and max sell position in second broker or reverse. Anywhere market goes un account will be zero and the other one will be twice as big . Theoretical you earn 20% anyway the market goes . i need an expert advisor which can do this . Thank you ! I am waiting for your reply !
+
+--- 帖子 #182 ---
+First question I have is there arb opportunity between these two brokers?
+
+--- 帖子 #183 ---
+Google for "arbitrageur advanced" to open opposite orders precisely. It is arbitrage solution.
+
+--- 帖子 #184 ---
+This one works very good on high impact news http://offers.fxpartner.net/fix-api-...development-2/
+
+--- 帖子 #185 ---
+If somebody has data from rithmic. Please contact me.
+
+--- 帖子 #186 ---
+what do you think about arbitration 400% bonus broker first broker gives you a 400% bonus cashed out just to take a profit you must to do a great turnover I think about strategies will gain 200% establishment of the other 200 for the loss swaps spreads
+
+--- 帖子 #187 ---
+I have tested several types of arbitrage and brokers combinations. The best results were received (from best to worst) Hedge Arbitrage http://offers.fxpartner.net/2-legs-arbitrage/ 1. MT4 and FIX API broker - LMAX and any ecn broker 2. FIX API and FIX API - Lmax and CHF clearing 3. MT4 and MT4 - but both accounts with the same broker but different symbols name (EURUSD and EURUSDfx) 4. MT4 - MT4 - not profitable. Latency arbitrage http://offers.fxpartner.net/fix-api-...development-2/ fast feed fron software provider, vps CNS (LD4) and broker instaforex Hong Kong server - 3 month no problem and no problem with withdrawal, then execution time was increased. pepperstone - 2 weeks no problem and no problem with withdrawal, then execution time was increased I test now 5 more brokers.
+
+--- 帖子 #188 ---
+It's only with demo feed ? And with fees you are still positive ?
+
+--- 帖子 #189 ---
+They provide live feed from 2 sources (lmax live via fix api) and cqg I use latency arbitrage with several brokers now and performances very good. hedge (2-legs) - works good only with 2 fix api brokers. They recommended fix api brokers with initial depo 2000 and 5000.
+
+--- 帖子 #190 ---
+It is good idea to trade with other EAs for 3-4 weeks and then add arbitrage. Arbitrage trades should be 10% -20% in this case it is possible to use almost all brokers.
+
+--- 帖子 #191 ---
+this interview looks interesting http://offers.fxpartner.net/arbitrag...s-and-answers/
+
+--- 帖子 #192 ---
+Can arbitrage be done manually? I know that leaves a small window, but just curious? Could anyone tell me from the list, the fastest and slowest brokers. Thanks
+
+--- 帖子 #193 ---
+Simple answer is No. But yes if you can click twice within 15 milliseconds from your computer.
+
+--- 帖子 #194 ---
+Arbitrage between 2 brokers is really hard these days, because to get the price feed from fast broker is Nightmare, and even worse to find slow plugin-free brokers, and the worst happened when the broker do not pay your gained. All because the old technology do not allow retail trader to do so. To do Latency Arbitrage, you need at least 1-30 seconds lag time of price feed, which in the past was available only to Fund Managing Firms only (big guys), and that's where the real money is. So out off the box, quit using the noob tech, it's impossible. Look for next generation financial Tech, if you insist to speculate.
+
+--- 帖子 #195 ---
+Ok, this is easy set up 1 account with one broker and another 1 with another. Lets say you are trading GBB/JPY, you sell GBY with one broker and buy JPY with the other. Right the numbers, you need to calculate GBP into JPY and calculate how much you want to trade with, I would suggest you trade on a minimum 3 months expiry option so it gives time for the market to move, once in profit close and start again, otherwise you will pay the swap if you trade a daily option.
+
+--- 帖子 #196 ---
+Hi Folks, Lmax was the fastest FX broker and as u know it s not anymore. Which fx broker do you think reallt fast nowadays? Thanks in advance.. I will be gratefull if you guys share ur experiment. I already tested more than 10 Brokers in lthe ast 2 months with my electronic system and I can share the reulsts if you like.
+
+--- 帖子 #197 ---
+Hi, to know which is the fastest broker you need to understand that the feed come from major banks mostly from UK and NY market as LMAX (UK) FXCM Bank feed (US) Rithmic (UK) Rithmic (US) EUREX (UK) CQG (US) Bank feed ES (UK) Upon price volatility at certain part of economy and news, the fastest feed changes among them (if anyone can think of other faster feeds please add). So specific with just one feed may not be a good choice for long term trade. Plus, most of time MT4 platform is slower than API feed. My experiment is uploaded on MQL5 website. I just started not long ago https://www.mql5.com/en/signals/296234#!tab=history (PLEASE NOTE, DO NOT SUBSCRIBE THE SIGNAL, IT WILL NOT WORK OUT FOR YOU, SIGNAL IS ONLY TO HAVE VERIFIED TEST RESULT).
+
+--- 帖子 #198 ---
+What about this iticsoftware is it working in 2017. How safe to use will i get BAN from broker if i use this tool need some review.
+
+--- 帖子 #199 ---
+Hi fteller, you seems to know the arbitrage strategy, could you let me know why 2 leg arbitrage doesnt work well mt4-mt4? i have tried bjf 1 leg arbitrage, it doesnt go well because sometimes, the slow feed broker does not follow the fast feed broker. So even there are difference between the 2 brokers, the slow feed broker enter positions, but might went different directions.
+
+--- 帖子 #200 ---
+Hello I'm too an arbitrageur trader let me know how it's going
+
+--- 帖子 #101 ---
+I create indicator to find good brokers for arbitrage. I attached screenshot. Dots above central line (0.00) represent situation when price on fast feed higher then price on your MT4 broker - BUY signal . Dots bellow central line (0.00) represent situation when price on fast feed lower then price on your MT4 broker - Sell signal . Number of dots shows how big this price difference. Indicator draws green and red dots. Green dots shows current difference on current M1 bar. Red dots shows how smaller current difference on the same M1 bar comparing with previous. Numbers 0/16 show max and minimal price difference on current M1 bar. For example: Difference 5 points appear between fast feed and MT4 broker and price on fast feed higher then on MT4 broker - Indicator draws 5 green dots. On next tick from fast feed difference 7 points - indicator will add 2 green dots = tota; 7 green dots. On next tick from fast feed difference 4 points - indicator will change color for 3 upper dots from green to red. It means that arbitrage situation fades away. I will create Indicator for slippage (based on execution time and then upload ex4 here.
+
+--- 帖子 #102 ---
+The best symbols for lock arbitrage software for the last 2 month
+
+--- 帖子 #103 ---
+Hi Robertino, for me it's surprising that in 2019 these opportunities are in place
+
+--- 帖子 #104 ---
+good !, I wanted to know if they could specify some idea? do not lose the post !! let's go on, I can help.
+
+--- 帖子 #105 ---
+Just hope someone could help crack this arbitrage, curiously waiting.
+
+--- 帖子 #106 ---
+Hi, everybody. somebody now works arbitrage trading? I found a broker without plugins)))
+
+--- 帖子 #107 ---
+Please tell me which broker not use plugin tool. I will try.
+
+--- 帖子 #108 ---
+I have all tje things to work the Ea i use Wp 2019, with lmax api feed live, etcetc, i make good profit now! , but with my configs.
+
+--- 帖子 #109 ---
+Is this an empty promise or is there an indicator?
+
+--- 帖子 #110 ---
+LOL. You proved another EA result. This is not WP EA result.
+
+
+===== 附件下载链接 =====
+
+未找到附件

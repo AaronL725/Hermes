@@ -1,0 +1,738 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hello Everyone: &lt;?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /&gt;&lt;o &gt;&lt;/o &gt; I would like to introduce an EA I have developed called “Flyer!”. It is a moving average EA based upon the principles used in the “Sidus” method listed here in FF. Thanks goes to Sidus for the inspiration to write this. However, it does have some differences. I have finished backtesting Flyer! and am now ready for the forward testing. I would appreciate any help from anybody for assistance with the forward testing and further back testing on other currency pairs besides the ones I have done. &lt;o &gt;&lt;/o &gt; So why should you test this one? Well, for one thing the back testing results are excellent. 80-85% win ratios with maximum relative draw downs between 10-20% depending on the currency pair. The EA also adjusts lot sizes as the account grows. A 1 year back test on the GBP/USD resulted in $10000 turned into over $7 million. This high rate of return seems too good to be true, but other pairs also resulted in returns over $1 million. Note, in ranging markets, the EA will not gain a lot in value and may draw down some too, but once it starts trending, look out… the pips will come!! So, now with this kind of preliminary rate of return, I encourage everyone to try it out and see how it works and offer improvements where available. See the html files in the zip for the reports on each currency pair tested. &lt;o &gt;&lt;/o &gt; After you have tried it out, please post your results here on FF &lt;o &gt;&lt;/o &gt; Many thanks! &lt;o &gt;&lt;/o &gt; GirlFlyer
+
+--- 帖子 #2 ---
+Thanks, GirlFlyer, I'll start testing next week. Does your preliminary work suggest what account size is needed to trade this on the optimal pairs you indicate in the EA's text? I see you've set the default to 8%. I'm just wondering, for example, with a $10k account, how many pairs you would trade. I'd be curious to see what type of drawdown it experiences.
+
+--- 帖子 #3 ---
+Thanks, GirlFlyer, I use the Sidus method and will try this out and get back with the results.............
+
+--- 帖子 #4 ---
+BenQ, In the tests, an 8% usage of equity for 1 pair on a $10,000 account worked fine. Maximum relative drawdown averaged about 15%. None of my tests brought the account balance below $8000. If you change the percent used to 3-4%, you should be able to handle 2-3 pairs per $10000 in your account and grow rapidly. Of course, you can have larger or smaller accounts. If you want to run many pairs in the same account, set the equity to 1 or 2% or even lower. Half percents would be fine, too. Remember, the program will adjust your lot size according to the equity in your account and the percentage you choose. It is not a fixed lot size EA. If the drawdown on the account lowers the equity, the next trade will have a smaller lot size. If a profit is taken, the next trade will have a larger lot size, etc.. I used a relatively small equity size because money management tells us not to over leverage. Find an usage of equity per lot that suits your taste. GirlFlyer
+
+--- 帖子 #5 ---
+What's the suggested PointAdjust parameter setting for gbpusd? It's not listed in your suggested optimal settings.
+
+--- 帖子 #6 ---
+Hello Girl Flyer or BenQ Could you please let me know how to attach the EA to the MT4 platform? I also trade Sidus method on my Demo Senbanda
+
+--- 帖子 #7 ---
+you might want to import some historical data from http://www.alpari-idc.com/en/dc/databank.php the modeling quality is only 25%, you should be able to get it up to 90% with out proper data mt4 "fakes" what the interday data would be by splitting the daily bar into 12 pieces, so interday systems always looks like the holy grail. the first ea i made netted 65billion in 2 years. after i got the modeling quality to 90% it was only $1
+
+--- 帖子 #8 ---
+Ben, GBP/USD uses .0001
+
+--- 帖子 #9 ---
+Witchhazel... I've already had the Alpari Data. The EA uses the M1 dataset from Alpari along with the M30 data loaded from the server. I've seen the modelling quality issue and am working on that problem. The only data that I have don't have in my system is the M5 and the M15 so far. But working on that, too. Once I have them, I will see if it changes the modelling quality.
+
+--- 帖子 #10 ---
+Witchhazel, I've did another backtest using a timeframe in which I have all the historical data in my system on every timeframe. The modeling quality was still only 25%. But still had great success rate. Any further suggestions? Girlflyer
+
+--- 帖子 #11 ---
+Hi Everyone, I'm attaching an updated version of my Flyer!. This version will now allow you to switch chart timeframes while the EA is running without resetting the EA and causing multiple entries. It also allows for recovery in case of power failure and most importantly, during the weekend, you can shut down the program and then come back to it later. GirlFlyer
+
+--- 帖子 #12 ---
+Hi Girlflyer Just started testing your EA - have you got a pointadjust setting for Cable? Couldn't find it in the preamble! Andy
+
+--- 帖子 #13 ---
+Sorry, its missing the point adjust for GBP/USD. Use .0001 Thanks for testing. GirlFlyer
+
+--- 帖子 #14 ---
+Girl Flyer, EA looks like it has great potential! I have been testing it since market opened last evening. Thus far it has closed five trades as of 9:30 EST. Four of the five have been with GBP/USD, one with USD/CHF. All of the cable pairs have been for losses. The Swiss pair was only for $2.90. The USD/GBP has had the point adjust set at .0001 from the beginning of trading. Most of the entries/exits have not been at the EMA crossovers and have missed the trend. In most instances, when a pair should be exiting and the trend reverses, it should also buy and/or sell with the reversal. In other pairs (majors) there have been quite a few opportunities to enter and exit but the EA has failed to do so. I hope this helps in tweaking the entry/exit. You may also want to allow a TP with TS switch for the EA for those who want to ensure that a certain amount of PIPS is obtained rather than allowing the second crossover for the exit. Just a thought. I'm looking forward to working with you on this. Alas, I wish I was a programmer (I'm studying) but at this point can only offer my observations. I hope this helps. Mike Johnson 1Trader2
+
+--- 帖子 #15 ---
+Ok, I am getting quite a few responses about the 25% modelling quality of my tests which make people doubt the veracity of the EA which I can understand. However, further research shows that on the M1 chart which I am running the strategy tester it is impossible to get better than 25% according to the method strategy tester uses to calculate that percentage. Quoted from the Metatrader MQ4 website (see link at: http://articles.mql4.com/93 ) Quoted from above link: "Reasoning from the same formula, the one-minute data modelled cannot be of quality exceeding 25 per cent since data of a smaller period are not used for modelling of these data. For client terminal, there are simply no data of a smaller period, but there are tick data. However, tick data are not stored in the client terminal by standard means. In themselves, one-minute data are the most detailed data about the price movement. And, using them, one can model the price movement inside of bars of larger periods. At that, discrepancy between the real price movement and the ticks modelled will not be large due to presence of one-minute reference points: Open, High, Low, Close. These reference points form the first approximation of the price movement function (the first-order approximation). The higher is the value of the period modelled, the more there are reference points and the more exact is the modelling. And vice-versa, the lower the value of the modelled period is, the lower is the modelling quality. For example, up to 240 one-minute reference points can be used to model a one-hour bar. When modelling a 5-minute bar, the amount of reference points drops to 20. As we mentioned before, there are just 4 reference points for a one-minute bar to be formed! This is why the rating of modelling quality for one-minute bars does not exceed 25 per cent. However, if one uses signals received from data of a larger timeframe when testing on one-minute timeframe, the data modelled should, of course, be rated much higher because the price movement within the bar of timeframe larger than the on-minute one is considered." End of Quote So, if you read this and understand it, it is now shown that better than 25% on the M1 is impossible. Thus, the EA test results are probably about as accurate as they can get. I hope this helps for people to understand that my results are not bogus. GirlFlyer &lt;!-- / message --&gt;
+
+--- 帖子 #16 ---
+1Trader2, Hi, thanks for the testing. I'm running it as well. Currently at 9:40est I'm in 5 trades, USD/CHF,GBP/USD,EUR/USD,USD/JPY, and AUD/USD. All 5 positions are positive in value. Was stopped out on to USD/GBP positions earlier today when it bounced up and down twice for +50 pips which exceeded the stop loss. That can be expected to happen occasionally. As test results come in further, I will continue to post updates and tweaks as needed. GirlFlyer
+
+--- 帖子 #17 ---
+Girl Flyer, After having been involved in testing Firebird extensively as well as a couple of others, it has been stated many times by members of that thread, that backtesting especially with Strategy Tester is unreliable. It is better to do forward testing and use back testing with the best modeling quality you can get to get a sense of what the EA is capable of. I wouldn't fret over those who are requesting a better modeling performance. Lets go forward...see my previous post. 1Trader2
+
+--- 帖子 #18 ---
+Hi GirlFlyer, just to let you know I'm testing this EA as well. So far only the one trade opened on GBP/USD (I'm running a bunch of different pairs on demo account), its currently up after this mornings run on cable and the SL has been adjusted automatically by the EA. It will be interesting to see how much of that profit I'll retain by the time the current trend reverses a bit and the cross occurs. Nice EA so far.. Please keep tweaking it..
+
+--- 帖子 #19 ---
+Thanks Joker for the support. I agree with you on the profit taking. I'm up significantly on cable, too along with eur/usd and usd/chf. Looking forwards to seeing what the exit will be. GirlFlyer
+
+--- 帖子 #20 ---
+Hi Everybody, Update on my EA. I have been running live demo test since the market open Sunday night. The EA has done 8 trades for me so far since I started. Of those 8, 2 have been stopped out (they were on GBP/USD) and the rest remain open still having not hit the exit signal. Below is a synopsis of the current standings. For reference: My current time is 19:30GMT EUR/USD - Open Buy at 09:32 GMT Price - 1.2686 - Current Price 1.2739 - Up +53 pips USD/CHF - Open Sell at 08:30 GMT Price - 1.2500 - Current Price 1.2431 - Up +69 pips GBP/USD - Open Buy at 08:35 GMT Price - 1.8739 - Current Price 1.8867 - Up +128 pips USD/JPY - Open Sell at 13:00 GMT Price - 118.06 - Current Price 117.67 - Up +39 pips AUD/USD - Open Buy at 13:31 GMT Price - 0.7466 - Current Price 0.7481 - Up +15 pips USD/CAD - Open Sell at 13:47 GMT Price - 1.1160 - Current Price 1.1161 - Down - 1 pip Two GBP/USD trades earlier Open buy at 06:49 GMT, stopped out -50 pip loss at 07:40 GMT Open sell at 07:40 GMT, stopped out - 50 pip loss at 08:31GMT These two trades came when GBP went up and down and back up over 50 pips early this morning. Besides those two trades, the EA has performed quite well so far today. Waiting to see how the exits go. That's my standings so far. GirlFlyer
+
+--- 帖子 #21 ---
+Those are some promising results for just under 24 hours worth of activity. I hope you iron out the kinks and get to claim your spot among those who have successfuly built a profitable system. If I may ask, what are the conditions on which this is built? You said it is related to Sidus, but how? The only reason I ask is that is seems that EA's always turn out better if they start life as a tried and true manual system (kind of like how you can't tell a computer that 4*7=28 if you don't know how to calculate that yourself). If you'd rather not share, I would understand your reasoning.
+
+--- 帖子 #22 ---
+Hi Girl Flyer, About to start trialling your EA for you. May I humbly remind everyone that the GBP has much greater movements than most other pairs and a "standard" S/L will often trip out the GBP. The GBP/USD probably has the greatest potential, but we must remember it "paints with a broader brush." Kind regards to all, especially Girl Flyer. Grahame.
+
+--- 帖子 #23 ---
+Yep, that's why in my tests a higher Stop Loss value is necessary (2nd highest in my list, #1 is GBP/JPY). Otherwise you get whipped around like a seesaw. Happened this morning for that matter. But nevertheless, when it takes off and moves as we've seen over the last few days with Cable, it should catch much of that move... more than making up for 2 or 3 stop losses. Thanks for the help. GirlFlyer
+
+--- 帖子 #24 ---
+Has anyone been getting any kind of results on the back tests that compare with the ones that were in the first post. When I run this on GBPUSD using the same settings I end up with a huge loss. I am using the data from Alpari and have matched every setting but can not figure out why I am getting this loss. My trades don't even fire off at the same time as the ones in post one. Do you think it could be because I am using the interbank version of software to test?
+
+--- 帖子 #25 ---
+Girl Flyer, It is 11:00 PM EST, and none of my profitable trades closed out today. I am trading the major USD pairs. It appears that most of the trades crossed over around 6:00 PM EST but the trade did not exit. I am watching my profit slowly decline from what it was at that time. I realize of course that one can manually intervene; however that kind of flies in the face of the EA if you want to be a puritan. Since we know that the strongest &amp; major trends occur during the London &amp; US opens perhaps you should consider a switch that would allow the trade to be closed after so many hours to prevent a drift in the profit. In the Firebird v. 63H02-4 EA coding there is a function that allows trading between such and such hours. It contains four sets of to and from trading hours so that one can hone in on the hours to trade. I've included the coding for the FB version if you want to look at it. 1 Trader2
+
+--- 帖子 #26 ---
+Backtesting produces no trades. Is there something that needs to be set ? I'm trying to test on 1M GBP. thx
+
+--- 帖子 #27 ---
+Hi all, just some rambling on my part, hope there is 2pips worth in here... One of the things that i have noticed for myself w/backtesting is though i have modeling quality of 90% from say the 15m up (and sometimes even the 5m) what i find is that for every MAcross i've tested i've basicaly broken even for a two year period. So what i'll do is take notes. If a 5/13 cross on a 4hr chart (i'm just throwing numbers out here, don't trade these), has say -800, and i change the longer MA to 15 and now i have only -200, then change it to 17, and now i have +400 in the same 24mo period, then I'll take the 5/17 cross to the chart and trade it manually for several weeks and fill a notebook with my thoughts/ideas on this cross and how it might be traded. While the above is possibly a non-orthidox way to use the strategy tester, i have found that for myself this works. I will also do some other homework when the tester comes up with it's best-numbers. This homework might include (in the case of the 5/17 above) checking out a GANN Grid/Calculator, or reading up on some further FIBO studies or whatever to see if there may be more supportive evidence that a particular set of numbers migh have greater value than others. In a post (#25) there was mention of some possible "manual intervention" which i've found to assist in helping the EAs i've been studying/testing. Today i found myself looking at a major hour's long consolidation on the 5m chart and a GbpUsd trade sitting at +140ish and going nowhere...so i closed it out in profit. Was this a bad thing? Well maybe in the pure light of things, but a pip in the (demo) bank is always a good thing. That's all for now. Cheers, Thom
+
+--- 帖子 #28 ---
+If backtesting is creating no trades, make sure you have in your data history full and complete history in the 30 minute timeframe (or whatever you have TimePeriod set to). If you don't have this history, it will not trade. GirlFlyer
+
+--- 帖子 #29 ---
+Hi, I too have been trading these pairs... EUR/USD closed for me today at 09:00 GMT 1.2736 after opening at 1.2686. +50 pip gain USD/CHF closed at 08:32 GMT for +58 pip gain (opened at 1.2500, closed at 1.2442) USD/JPY closed at 10:00 GMT for + 30 pip gain (opened at 118.06, closed at 117.76) My GBP/USD entered yesterday at 08:35 GMT and is still in with current profit at +143 pips GirlFlyer P.S. I will have an update to the EA later today with a trailing stop feature in it which so far in tests is increasing the gains by the EA.
+
+--- 帖子 #30 ---
+i have the alpari data converted to all timeframes which is why i asked. I downloaded your second version of the ea. I guess I'll wait for the next version and try again. I have built my own EA's and backtest them just fine....dunno whats wrong.
+
+--- 帖子 #31 ---
+Hello All, Next program update as we go through the live testing process. This version incorporates a full trailing stop feature. You can set the TS level within the input parameters under "TrailingStopLevel". It does increase the profits taken by the EA by some degree. I have also modified some of the Point Adjust settings for the currency pairs as I have found some better settings for some. Some of these values are even now negative. This seems to have had a better effect on the gains than anything else. I've also added EUR/JPY and AUD/USD to the settings. Btw, 1st 24 hours live results overall including all pairs actively testing are: +144 pips profit taken -100 pips loss taken (stop losses on GBP/USD) ------ +44 net profit so far There is also an open GBP/USD position from yesterday with a profit currently of +152 pips and the Trailing Stop guarantees at least a 60 pip gain right now. Be back later with further updates... GirlFlyer
+
+--- 帖子 #32 ---
+I'm not sure either, check the Journal output from the Strategy Tester and see what messages it is giving you. There should be a line in there that looks similar to this if it is running the code: "2006.10.03 13:43:39 2006.07.28 15:01 Flyer! GBPJPY,M1: Account Equity = 739930.3105 Bid = 214.4 Ask = 214.49 OrderStat = 0" If that's not there, then the code isn't running. GirlFlyer
+
+--- 帖子 #33 ---
+The new TS version appears to be working but backtesting is not producing good results at all. AT least on 1M GBP using the 45 SL/50 TS and 0.0001 Pointadjust....starting 9/1/05 to 9/1/06 it turns $1000 into $822 ($188 loss). 6/1/04 to 7/1/05 is even worse turning $1000 into $123 ($877 loss). Is there a setting I am failing to adjust ? thx for your work on this....hopefully we can figure out how to make it work.
+
+--- 帖子 #34 ---
+Hey guys, My first four orders opened last night using the FLYER EA. But I noticed there is no value for T/P in the trade log. Is there a value I need to input on the EA? If not, when does it take profit? Thanks for your help.
+
+--- 帖子 #35 ---
+The better settings for GBP as I've noted in the code is: SL = 60, TS = 70, and point adjust can be either 0 or 0.0001. 0 is a little more aggressive than 0.0001 but may draw down further. Hope that helps.
+
+--- 帖子 #36 ---
+Hi Pie, Sorry for the delay getting back to you on this question. The EA does not have a predetermined take profit point. It will trade for as long as the position is trending in a positive profit direction. Its exit point after an entry is when the 5 WMA crosses back over the 28 EMA at what ever price as long as it is above the opening price. If the price goes below the opening price, then the Stop Loss becomes the exit. Also, if the price goes up enough, the trailing stop feature will kick in and put the S/L above the Opening Price and then you have guaranteed profit. Hope that helps! Girlflyer
+
+--- 帖子 #37 ---
+Hi GirlFlyer and others, Have had Flyer! active for about 2 days and nothing happening. Yes, everything is turned on. I'm using DEMO A/C for GBP/USD on M1. Expert Advisors is "on" and I have the smiley face in top right corner. Have left default settings except changed S/L to 100 (for GBP) Help, please. Kind Regards, Grahame
+
+--- 帖子 #38 ---
++90 pips profit, -11 pips loss from yesterday
+
+--- 帖子 #39 ---
+Hi Grahame! It depends on when you started running the EA for GBP/USD. If you started it after GBP/USD started going up yesterday, it probably would not have traded for the big run, but the EA should have entered a short position for you around 12:30pm EDT. Mine did. Btw, 100 is a bit of a big S/L for this EA on the GBP/USD. Backtesting showed 60-70 to work better, but try it out, maybe you'll hit on something. Oh, and I took a +123 pip gain on GBP from yesterday's rise using the EA. So it does work!!!
+
+--- 帖子 #40 ---
+Is this EA only working on full sized accounts? I have a mini account thru InterbankFX and when i use a small dollar amount like $200 in the tester it will not open any trades. I have even adjusted the settings to use 1% equity instead of the 8% default. Is there a change in the code that I can make to use it with smaller dollar amounts?
+
+--- 帖子 #41 ---
+Altapowder, I'm not familiar with how the mini account works on Interbank, but if you can tell me what the minimum lot size is, I can then tell you how to change the code to fit for it if need be. GirlFlyer
+
+--- 帖子 #42 ---
+What timeframe sould the EA run in?
+
+--- 帖子 #43 ---
+Palmer, on live trading you can run it in any timeframe. It does not matter. If you backtest it using Strategy Tester, it must be tested in the M1 setting. GirlFlyer
+
+--- 帖子 #44 ---
+OK, GirlFlyer, Happy to adjust S/L back to 60/70, as you suggest, but EA has been running for ages now with plenty of movement on the GBP, but still no trades. Will wait a little longer. Thanks for your help. Kind Regards, Grahame
+
+--- 帖子 #45 ---
+Grahame, One final thing if still no trades, check the Journal or the Experts tab on MT4 and see if you are having any errors. If EA is running fine, you should see something like this in the Experts output... "2006.10.04 01:30:44 Flyer! GBPUSD,M5: Account Equity = 50382.55 Bid = 1.8866 Ask = 1.887 OrderStat = 2" Thanks for trying it all out!
+
+--- 帖子 #46 ---
+Hi, again, GirlFlyer, I'm reasonably bright (I think) but I do have some trouble with the time zones. I'm in Australia and . . . oh, I give up! It's just very confusing. Thanks for listening. Bye, again Regards, Grahame
+
+--- 帖子 #47 ---
+I notice that when I load an EA I will get a pop up dialog box with "Input" and other options. When I click it off the EA is loaded and runs. BUT! When I load some other EAs they will NOT give me a dialog box and they don't run. What's the problem here??? YES, I am a relative newbie to MT4 though I've been a trader for about 8 years trading the emini futures on another platform. I like this ability to set alerts on longer TF with currencies but I've yet to figure out how so far. [quote=GirlFlyer]Grahame, One final thing if still no trades, check the Journal or the Experts tab on MT4 and see if you are having any errors. If EA is running fine, you should see something like this in the Experts output... "2006.10.04 01:30:44 Flyer! GBPUSD,M5: Account Equity = 50382.55 Bid = 1.8866 Ask = 1.887 OrderStat = 2"
+
+--- 帖子 #48 ---
+I don't have my exact numbers in front of me at the moment. I know the GBP/USD closed out for around 133 pips. At one stage was up in excess of +166. Had a EUR/JPY contract close due to its SL, or it might have been a cross over which closed the trade ahead of schedule, but I only glanced at the figures this morning before heading to the office. Still really too early to call how effective the EA is, I would like to see some further additions when it comes to taking profit. Girlflyer thanks for an interesting EA. Its been fun to play around with so far..
+
+--- 帖子 #49 ---
+The mini account trades in lot sizes of 10,000 instead of 100,000. It has a 200:1 leverage, so 1 full lot = $50 of real money. The account has approximately $200 in it so I would like to run this EA using a max of 2% equity or .2 lot size. What would you change to make it work?
+
+--- 帖子 #50 ---
+Hi Gee Seven and All, Yes, journal says "Expert Flyer!GBPUSD,M1:loaded successfully" But nothing happens. Thanks. Regards, Grahame.
+
+--- 帖子 #51 ---
+Just thinking out loud..... When you dragged the EA to the chart, was the chart on M1, M5, M15 or M30? It may not make many trades on the higher timeframes. Just a thought...
+
+--- 帖子 #52 ---
+Hi Again, Ah, also, the Expert tab shows a line similar to your example except Order Stat = 0 Regards, Grahame
+
+--- 帖子 #53 ---
+Hi Piece of the Pie, Actually loaded it on M1 and has been unchanged since then. Perhaps should start again? Regards, Grahame
+
+--- 帖子 #54 ---
+It's probably working ok. It just hasn't found a trade yet that it can make. Remember its looking to meet the criteria of the Sidus method before it enters a trade. Give it some time or if you are really impatient, drop it on a half dozen currencies and hope for the best..
+
+--- 帖子 #55 ---
+Thanks to GirlFlyer it's a good EA and a good idea but the running can be a lot of position , if there are a system to close all position at a profit it's a help to flooting . Are there some body have a program to close all position at the time. Thanks
+
+--- 帖子 #56 ---
+Good morning all, I'm glad to see everybody trying this out. Grahame, looks like you have it running fine. If you still don't get a trade eventually let me know. For everybody, be patient with the EA. This EA works mainly on a 30 minute timeframe which means you may not get a trade in a single day or you could get 1, 2, or even maybe 3 if market is really volatile. Also, if it opens a trade, you may not see it close it until the next day or several days later depending on the trade and how the trend is going. It is designed to get the most out of the trend. If GBP goes up +200 pips without retracing, it will catch that 200 pips, etc. The EA works best on slower moving markets. In fast situations, its profits might be limited. You can adjust the trailing stop level to smaller amounts if you want which will lock in profits in smaller increments for fast moving markets, but may very well cause you to miss the bigger move if it retraces quickly and then quickly jumps back up again. These are the kind of settings any kind of EA has to deal with. We can try to find optimal settings to match our personal preferences, but that takes time and testing. That being said, I want to thank everybody for their testing. Here are my Results so far through Wednesday morning (7:14 GMT) Monday: + 44 pips (144+, -100 loss) Tuesday: +88 pips (123+, -35 loss) So far Today" +36 pips, no losses GirlFlyer
+
+--- 帖子 #57 ---
+Altapowder, You're right. This program does have a problem working with mini-accounts since the lot value is different. In my next update, I will make a change to accomodate for the problem. In the meantime, you can fix the problem by changing the following line of code in the procedure called "CheckToOpen": LotSize = LotSize / 1000; change this line to LotSize = Lotsize / 100; This will fix your problem. Thanks for discovering this oversight. GirlFlyer
+
+--- 帖子 #58 ---
+Good Morning GirlFlyer, I am trying to test your EA and am running on a 5K demo with only the GBP/USD open. I have not gotten any trades, but am getting this message in the experts tab 2006.10.04 03:21:46 FLYER!-TS GBPUSD,M1: Account Equity = 5000 Bid = 1.8872 Ask = 1.8876 OrderStat = 0 2006.10.04 03:21:46 FLYER!-TS GBPUSD,M1: Equity Value Lower than Minimum Account Value Setting What settings do I need to change for this to run? And what would I do if I wanted to add more pairs to trade? Thanks!
+
+--- 帖子 #59 ---
+Hi JokerZ, Thanks for your input. What in specific would you prefer to see for a T/P addition?
+
+--- 帖子 #60 ---
+I am very focussed on money management when it comes to making my own trades. When I execute trades manually I like to keep a tight control on when I take profit from a trade. I don't really have any system that determines how and when I should do it but I never worry about trades that have gone up in value after I exit them. I figure I'll always be around to trade next time so I'll pick up more pips with my next trade. The stop loss settings in GirlFlyer! are more or less perfect for my trading, it just seems that when it comes to TP the EA has to wait for around a 30% (or more) downward movement before it can execute and TP. Part of the problem with lagging indicators I guess to determine an exit point. Depending on a currency I'm generally happy with 30-50 pips. Anything over that is generally a huge bonus for me and if the trade is trending down or up heavily then I will generally stay in a trade longer. If it seems to hover around a certain point for an extended period of time (just like GBP/USD did yesterday), then I'll generally exit the trade. That type of indeterminate price movement usually means a change is coming. An example of staying in a trade was also with an OIL future from last week, I got in below the peak. The trendlines I had drawn were telling me that a downward price move was potentially coming. I managed to wait it out until this morning, at which time when I TP it increased my account size by 25% If only they were real dollars I had used for that particular trade! I haven't really studied how to build EA's yet in any detail, so no idea how hard or easy it would be to incorporate time based evaluation of a price. I suppose it could be done by counting candles/bars and then averaging out price movement for a particular period. Hope that gives you some food for thought.
+
+--- 帖子 #61 ---
+Hi, Since you are using a 5000 account, you have to change the "MinVal" setting. The MinVal setting is the dollar amount of the minimum size you wish your account to become in case of drawdowns. If your account value is equal to or less than this value, the EA will no longer trade. If you don't care about drawdown, change it to zero. That way it will always trade. GirlFlyer
+
+--- 帖子 #62 ---
+2006.10.04 19:11:13 Flyer! AUDUSD,H1: Error Opening Trade: Error Code = 131, Lotsize: 0.225
+
+--- 帖子 #63 ---
+Downloaded your EA last night and it almost immediately made two trades.It bought EUR/USD at 1.2734 and sold USD/CAD at 1.222. This was around 7:30-8:30 PM EST Oct 3rd. Both trades were stopped out during the night for -90 pips.I'm trying to decide if my platform is functioning properly with the EA. Did your platform make these trades? I didn't see the 5,8 cross(on any time frame) on my chart when the trades were made.This might be a dumb question but is this EA making trades based on the 1min. or 30min chart? I'm assuming it's the 30min .I'm really excited about this EA . Just want to make sure I'm set up properly. Thanks for all your effort and for sharing this with us.
+
+--- 帖子 #64 ---
+By the way, I'm using The MT4 platform with InterBank FX. thanks
+
+--- 帖子 #65 ---
+This error is caused by the Lotsize being incorrect in relation to the account. I will need to know more to see why. Please tell me more about your account at this time. Need to know equity, and your settings you were using. Thanks
+
+--- 帖子 #66 ---
+Toothman, My EA did do the buy on EUR/USD at the same time. Unfortunately, there was a spike in the EUR at around that time that briefly caused the 5,8 WMA's to cross the 18,28 EMA'S going up which gave a false signal. The EA works off of the M30 timeframe. But it calculates the MA's tick by tick. So, while in the end, that bar may not show the MA's crossing, at some point within the bar, they crossed, and then came back across once again. This kind of action is what can fool EA's. Hence is why I have the "PointAdjust" feature in the EA. If you change the value up or down, it will affect how much the MA's have to cross before the decision to Open a trade is made. On my USD/CAD. It did not trade as you said. Have you changed the values for it to the ones that I suggested in the comments located in the header of the .MQ4 file? If not, that may be why it traded. There will always be these kind of signals occuring. EA's are not perfect, either. Nor are we humans. We can only make them so good, but as long as they average out over the long term to the good side, we're doing ok. So far for me this week on the EA its 11 good trades to 4 bad. I've been seeing some things that perhaps will help reduce the bad, but of course we will never get rid of them completely. Hope this all explains things for you GirlFlyer
+
+--- 帖子 #67 ---
+Hey GirlFlyer, I am using the Alpari Demo Account, $5000 equity and all your same settings
+
+--- 帖子 #68 ---
+Thank you for your swift reply. Yes, I have my point adjust feature adjusted to the settings you suggested in an earlier post.The USD/CAD is set for 0.0,EUR/USD and USD/CHF-.0001,GBP/USD-.02 USD/JPY-0.0.You haven't given a setting for the AUD/USD and the EUR/JPY. Should we assume they are .0001? Maybe your platform tick by tick is slightly different than mine. Were you close to making a trade on th USD/CAD last night around this time? thanks much
+
+--- 帖子 #69 ---
+I went back and looked at my 1min chart for USD/CAD and there was a cross down indication but it happened 20 min. earlier than when the trade happened. Maybe it was waiting for the 30min candle to close.
+
+--- 帖子 #70 ---
+Flygirl, Can you change it to specify the number of lots instead of a dollar amount? I think that may be easier for all to grasp since one may trade with different leverages.
+
+--- 帖子 #71 ---
+The MinVal setting has nothing to do with lotsize... The purpose of the MinVal setting is to prevent letting the EA draw your account down too far before it is unrecoverable. If the value of your account drops below this amount, it will stop trading. Demo accounts really don't matter much, but if you were to use this on a real account and you started with $10000... and didn't want to lose more than 50% of your money on the adventure, you would set the MinVal to 5000. If you're willing to risk it all, you would set it to zero (0). As to the lotsize being traded, that is controlled by the LotPercentage value. This EA dynamically adjusts the value of the lotsize depending on the balance in your account and the percentage you set in that parameter. The EA does not use fixed lotsizes. Perhaps in the future I will release a version that allows for fixed lot sizes instead of one that constantly changes. GirlFlyer
+
+--- 帖子 #72 ---
+Toothman, The difference may be Alpari vs. IBFX which is what I'm using. At the time you specified on the CAD, it looked like it might have been close, but never traded. One thing I have noticed in several of the trades this week is that price spikes are causing orders when they really shouldn't be taking place. In the near future I am going to post an update version to hopefully filter some of those transient spikes out and prevent that. GirlFlyer
+
+--- 帖子 #73 ---
+A filtered version might do the trick.I have two more trades that kicked in this am. (sell AUD/USD 5:45 AM and sell USD/JPY) 10:30AM EST. They're negative now but a long way from being stopped out. Will keep an eye. thanks
+
+--- 帖子 #74 ---
+Just dl the EA will be testing it soon. just one quick suggestion if you dont mind..... Would it be any trouble if you could post a setup doc.. in your first post...? thank you.... have a nice day
+
+--- 帖子 #75 ---
+Hi Everybody, I'm going to post these updates to the EA separately so that if some people are happy with other versions, you may hang on to them. This update does not make any changes to the settings. I have only made some code changes that have shown improvements in performance. Change #1 - Added a wait period to the Open Order routine to wait a certain time period (90 seconds) before opening a position. This is to eliminate false orders when a transient price spike occurs as I've seen happen in the live trading. Change #2 - Changed the amount of time the code looks backwards to make sure that the MA's have crossed. During slow moving markets, the signals were crossing but taking a very long time, thus the EA missed some trades even when they were valid buy signals. This was the most significant change. Some of my tests were increasing the final returns 20-40%. Plus, I now have a documentation file. Easier to read than opening the .mq4 file. Hope everyone enjoys and thanks for all the input. GirlFlyer
+
+--- 帖子 #76 ---
+Thanks for the new version. But.... I've all the docs and still am confused on what timeframe chart I am supposed to actually attach the EA. Is it M30? Or M1? Does it matter? Thanks for any clarification here.
+
+--- 帖子 #77 ---
+For live trading does not matter. If backtesting, use only M1 setting in Strategy Tester.
+
+--- 帖子 #78 ---
+this is from the post above....... frrom GirlFlyer: The EA works off of the M30 timeframe so 30 min.
+
+--- 帖子 #79 ---
+Well actually it works "internally" off of an M30 timeframe but what chart do we use for attaching the EA? I saw someone using M1 which has confused me. Firebird uses M30 internally but seems to work better on M5 or M1 charts. That was the reason for my question. Thanks for your reply. Guess I'll try the M30 for now.
+
+--- 帖子 #80 ---
+If there are any open positions coming into the close on Friday, should the EA be allowed to keep running through the weekend? I just downloaded the new version from post #75 but the old version just opened a position on the EUR/USD at 18:52 CST US so I'll let that one run for a while...
+
+--- 帖子 #81 ---
+Oh yeah, I'm using FXDD and the EA opened .46 lots...Didn't know that FXDD 'allowed' that. I trade through them live as well....
+
+--- 帖子 #82 ---
+Hi GirlFlier, I've been reading your thread for a few days now and I am really impressed with the way this ea works. As a matter of fact just put it on one of my live accounts with FXDD about 2 hours ago after reading about it and looking at the codeing. I put it on GBP/USD pair just 1 for now on a 1000.00 mini account. While I familiarize my self with it. I did my demo just to get the feel but in my opinion there is nothing like taking it live to really test drive it. But I only do this with the ones that seem to be very promising as yours seems to be. Thanks for the hard work you've put into this and I look forward to following this. I will give an update friday evening on the account after the markets close. AHHH!! one big question how does it fair through a big news releases (NFP) precisely??? Thanks once again. Valerie....
+
+--- 帖子 #83 ---
+should the ea have made a short trade here?
+
+--- 帖子 #84 ---
+nevermind, i figured it out
+
+--- 帖子 #85 ---
+Girl Flyer, Testing for today resulted in -113 pips on five pairs; the four majors and the EUR/JPY. Here are some of my observations: 1) Took two trades on USD/JPY, 45 minutes and 90 minutes after the cross, both entered on wrong side. 2) No USD/CHF trade taken on US open missing approximately 45 pips. 3) No GBP/USD trade taken on US open missing approximately 30 pips 4) No re-entry on GBP after above, missed 30 pips 5) No trade on EUR/USD missing 35 pips. Re-entered 90 minutes later after reversal missing 15 pips. 6) EUR/JPY-entered trade 6 hrs after crossover at the high of this trend and then entered on the wrong side with SL of 45 pips. 7) EUR/JPY-sold 45 minutes after cross but didn't exit at crossover-TS worked for 10 PIPS. 8) EUR/JPY- bought 2.5 hrs after crossover in wrong direction; then failed to exit/enter on next crossover. I know that it will take awhile to tweak things and you have already posted some adjustments prior to this post. One thing you might want to consider is hedging the trades with pending orders until trend direction is verified and then one cancels other. Just a thought. I will continue to test with the new changes. 1Trader2
+
+--- 帖子 #86 ---
+Hi GirlFlyer and Y'all, Still not one trade for me after about 60 hours of runtime. But I notice others saying they are going fine - take Post #85 for example. He may not be getting what he wants, but he is getting some. HeHe. Any clues anyone. The journal tells me it's loaded, the experts has its "data" and I have the smiley face top right hand corner. (I'm on GBPUSD M1 with default settings) Regards to a All. Grahame
+
+--- 帖子 #87 ---
+Hi Grahame, I've got the latest flier from post #75 on the same pair but I have it on the 30 minute chart. My settings are as follows :lot%=1.0, minval=500, stoplossval=60, time period= 30, pointadjust= -0.02, and trailingstoplevel=65. You can also put it on the 15 min chart as well but I'm not sure as with the other timeframes. I hope this is of some help. Valerie...
+
+--- 帖子 #88 ---
+anyone else using alpari and getting errors with lot size??
+
+--- 帖子 #89 ---
+Grahame, The only thing I can think of now for you is that your MinVal setting is higher than your account value. Check to make sure MinVal is set properly. If you're using a small account and have not changed that, that could explain things. Hope to solve this for you
+
+--- 帖子 #90 ---
+Hi, I trade some news trading EA (my own) using FXDD and I check that FXDD allow "micro lots" (.01) only in demo account. In live account it is not possible. Lot size should be rounded to one decimal place. However it is possible using Interbankfx (which is my second MT4 acccount) - they have "micro lots" in mini account, but it is still only one decimal place, but in mini thats means 0.1 mini lots or 0.01 full lot. Regards,
+
+--- 帖子 #91 ---
+Hi Valerie and GirlFlyer, Account is $10K DEMO, GirlFlyer. However, Valerie, my PointAdjust value is 0.0001. Will change to -0.02 as you suggest. Rather a difference, there, eh? Thanks. Kind Regards, Grahame
+
+--- 帖子 #92 ---
+1Trader2, Some explanations... Actually the EA is behaving exactly how it is programmed. Unfortunately, some of the cases are a result of some technical problems which I'm still trying to resolve, and others, its simply the market. I had the same conditions occur as you did. 1st - Let me try to explain how the EA makes its decisions, and then we can try to see what we can do to improve that. Entry Points - the 5 &amp; 8 WMA's must cross COMPLETELY through BOTH 18 &amp; 28 EMA'S. No partials or only through 1 or the other... AND they must make the complete crossover within 2.5 hours. (This is a factor I'm thinking though is most crucial... it was designed to filter things out in case of slow ranging market so it wouldn't get whipsawed around...) Note: Some of the cross overs in the market I'm seeing are taking much longer than 2.5 hours which is why it is missing trades occasionally. Will work on how to resolve this. Exit points... It will exit by 1 or 2 methods.... #1 - By Stop/Loss... Can be either the Stop Loss at a price lower than the opening price or by the adjusted trailing/stop. This is what happened with the Eur/Jpy for 10 pips. The T/S took over on the exit. #2 - The primary method of exit is: The 5 WMA (and only the 5WMA) must cross back over the 28 EMA. It also must be in a winning position (ie... it will not exit at a loss... that's left up to the Stop/Loss). So you can see, the exit rule is pretty simple. It's the entry which is being complicated. Now for my observations and thoughts.... Based on the preliminary results that I've seen running live this week... Best performance for each pair by win/loss ratios are: (Your performance may vary according to the settings you are using) #1 - AUD/USD - 2 Wins/0 losses #2 - USD/CHF - 1 Win/ 0 Loss #3 - EUR/JPY - 2 Wins/1 Loss - USD/JPY - 2 Wins/1 Loss #4 - GBP/USD - 3 Wins/2 Losses #5 - EUR/USD - 1 Win/1 Loss #6 - USD/CAD - 0 Wins/1 Loss Now for performance by Total Pips: USD/CHF, +58 Pips (+58 Win, 0 Loss) GBP/USD, +29 Pips (+129 WIN, - 100 LOSS) AUD/USD, +24 Pips (+24 Win, 0 Loss) USD/JPY, + 7 Pips (+45 Win, - 38 Loss) EUR/USD, +5 Pips (+50 Win, -45 Loss) EUR/JPY, -32 Pips (+13 Win, -45 Loss) USD/CAD, - 35 Pips (0 Win, -35 Loss) ----- Net Gain/Loss = + 56 Pips. After 3 days, up 56 pips... Even with the losses and the missed trades... Not too bad. Only time will tell if this holds up. --------------------------------- Finally, working on some ideas to help improve the entries, and even exits..., but these are only preliminary right now. Exit strategy... May look at trying to exit sooner after a sharp increase in value to preserve gains rather than letting some of those gains erode before getting out... However, this may limit the potential to make larger trades... (hmm.... could be a 50-50 idea... will have to run simulations to find out) Entries - Try to improve the entry points by evaluating the current situation better and adjust filter factors... This is of course the hardest part. 1Trader2, will consider the hedging idea, but will have to see if it will work in principle. Ok... That's all for now. Hope this article explains the process the EA uses to make its decisions and clarifies the performance. While the EA will miss trades (we all do), we cannot expect perfect performance. I get the feeling that many people think EA's are the miracle that will bring the money in without work, make us rich, and never make mistakes... It's an illusion that we all may fall under at times. But we have to remember, that EA's are only as good as the people behind them.
+
+--- 帖子 #93 ---
+I agree ; if that were the case we would all be millionaires. An Ea is exactly what you said you have to keep a close eye on them and be able to extinguish any fires they may cause....Valerie....
+
+--- 帖子 #94 ---
+A couple of things I've noticed in going over the threads... For those of you using older versions, if you update to a newer version... it will take over the trades from the previous version... no need to leave the old one running if you don't want. Second, Lot sizes... The EA does not round the lot sizes. The % could create lot sizes with decimal places beyond .01, such as .015684, etc. So far, in the demo accounts, the Server has been rounding those orders automatically and I have not experienced any problems. At least with IBFX. However, if anybody is getting an error #131 with trades... this may be a problem and I will have to resolve it. May even have to throw in a parameter in the settings to allow setting the minimum precision for lot size. GirlFlyer
+
+--- 帖子 #95 ---
+Grahame, I'm not sure what is going on then. If you have an IM service such as Yahoo or MSN, PM me with your address and perhaps we can discuss it. I would like to solve this problem for you.
+
+--- 帖子 #96 ---
+Thanks Valerie, I programmed this EA after doing the trades manually in both live and demo account with fair success. But I had never backtested it because of a lack of ability to do so. Once I found MT4 had the ability to do backtesting, I was off and running to prove my strategy worked out well. Until we get the kinks worked out of the EA, as you mentioned in a later post, a little babysitting and I think we have a good opportunity here. I appreciate the confidence. Marci (GirlFlyer)
+
+--- 帖子 #97 ---
+Thanks Marci.... Valerie.... ( pertaining to Pm)...
+
+--- 帖子 #98 ---
+Thanks Andrew. I recall somewhere that I saw FXDD allows for Micro's in demo trading. Flyer opened a long position last night in the E$ and a short position in the cable this morning. It'll be interesting to see how the EA reacts with the NFP on Friday. Markets should be flat today. Marci: Should the EA be kept running through the weekend?
+
+--- 帖子 #99 ---
+You can turn it off during the non market hours... but should turn it back on when the market opens Sunday night. It will pick up where it left off. BTW, on the news... If the EA is not already in a position and the news in this case NFP causes a trend change, it will get in. Otherwise it will ride it out. From there you get the idea.
+
+--- 帖子 #100 ---
+Just checking in with people... My test closed out 3 positions Thursday, all for gains even if they were small ones. GBP/USD - Meager +3 pips - It then immediately sold before the drop today. Sitting on a +58 pip gain right now. AUD/USD - +11 Pips USD/JPY - +8 Pips --------------- Anybody else with anything different?
+
+--- 帖子 #101 ---
+I just load the EA on the USD/JPY and USD/CHF and had a short position opened within seconds on both pairs. 1 trade closed so far: Long EUR/USD .46 lots at 1.2719, stopped out at 1.2674 for - 45 pips or a $207 loss.
+
+--- 帖子 #102 ---
+Palmer, How did you get a short position on USD/JPY? If anything it might have gone long.... USD/CHF shouldn't be trading at all right now...
+
+--- 帖子 #103 ---
+Current floating PL + $220
+
+--- 帖子 #104 ---
+OOPSY: Both those positions are longs.... .niaga aixelsyd ym s'tI.
+
+--- 帖子 #105 ---
+Ok, that's better... you had me worried.
+
+--- 帖子 #106 ---
+Hi GirlFlyer, I just wanted to let you know how cool I think Flyer! is. This little program that you have put together based (loosely) on the sidus system is a true 'diamond in the rough' I really like how accurate it is for entries. The biggest problem I see so far is having to watch in horror (Halloween is coming) as all the pips that have racked up slowly disappear because the run has temporarily ended and is retracing in consolidation mode. With various indicators we can usually determine when the trade will start its retrace but we know the original signal is still valid. Therefore all we really want to do is hop off the bus, take a break (collect some pips) and then hop back on and go for the rest of the ride. Wouldn't it be possible to, let's say, create a script that could be applied to individual pairs that would allow take profit but let the EA know not to reenter the trade until user input. That way we can sell the rallies in a downtrend and buy the dips in an uptrend and you know what that means... more pips in the bank. I wish I could code something, anything... but I think it would be easier to learn five languages simultaneously than to learn this code language. dooh! I'll get it eventually. Keep up the good work. All The Best P.S. I'm sittin here looking at the termional and it's nicely positive to the tune of 110 to 120 pips positive on a mini account with various lot sizes ranging from three cents to $.38 per lot equaling $29.63 positive. It would be great to be able to manually take profit and reestablish the trend based on the current signal. No kidding this EA has enormous potential. My humble opinion.
+
+--- 帖子 #107 ---
+Take a deep breath everyone . . . Flyer has finally launched for me. Yippee! If only it was going the right way. LOL Never mind, it's early days. I like your humour, Palmer :".niaga aixelsyd ym s'tI." Regards, All, Grahame
+
+--- 帖子 #108 ---
+GirlFlyer, My last 4 closed trades.... GBP/JPY -40 pips (stop loss) GBP/USD + 2 pips USD JPY + 12 pips GBP/JPY + 1 pip I am looking forward to more updates. Thanks for the hard work. Especially helping all of us thru the thread.
+
+--- 帖子 #109 ---
+Hi Marci, I truly have to commend you on this Ea. I have tried several and like quite a few of the ones I've tried but I have fell in love with this one. Thank you for the hard work if there is anything I can do feel free to ask. Thanks Valerie....
+
+--- 帖子 #110 ---
+can anyone post the latest update of the EA? I am waiting to test
+
+--- 帖子 #111 ---
+When I try to load it over chart complains "2006.10.05 23:30:32 Expert 'Flyer!' is not custom indicator and will be removed" Any body have a clue?
+
+--- 帖子 #112 ---
+Put Flyer! in your experts folder, not your indicators. It is an EA, not an indicator.
+
+--- 帖子 #113 ---
+Kenari, See Post #75... that has the latest update to the program. GirlFlyer
+
+--- 帖子 #114 ---
+Thanks for the great vote of confidence in my EA. I have to admit, I agree with you on the loss of pips after a great gain especially during rapid retracements. The problem doesn't occur so bad if the retracement occurs over a longer period of time because the MA's catch up with the price. It's one of the reasons why this EA works so well on GBP/USD. Cable seems to not retrace itself as fast as some of the other pairs... I don't know why on this yet, but the backtests certainly showed it as being the best performer over time. Of course it could also be because it moves the most over time, too. But I agree, it is disappointing sometimes to see the gains erode away... Anyway, there are a few solutions to the problem. #1 - Exit the trade manually. If you close the position, it won't hurt the EA. It will just wait until the next trade setup and enter again. Downfall... you may not catch the whole entire move. I've seen plenty of examples where it retraces a bit, then continues on further. Personally, this is what I'm doing with my real account right now as I'm just using it as what the original name means (Expert "ADVISOR"). It is advising me. Further note on #1--- you can do the same for bad positions, if you see the EA enter into what potentially and most probably will turn out to be a bad trade, close it..., but I try to remember that the statistics on the backtest showed a 85-90% success rate. #2 - For Demo accounts especially, let the EA run over time and just let it rack up the gains it makes however small or large. Hey after all, we're not being GREEDY are we??!! LOL - This is the purpose of testing it on the EA... see how well it performs by itself. #3 - Examine some different methods to try to maximize profit potential and stay in the trade for as long as reasonable. This is where input from others would be useful. I'm researching this as much as possible and have some possible solutions, but will take time and testing to figure them out. So there we have it! But again, thanks for the input and I'm working to resolve this, too. Take care and happy trading! GirlFlyer
+
+--- 帖子 #115 ---
+Hi there, thanks for the update... Something to consider, it looks like you have your Stop Loss on GBP/JPY at 40 points. While this is typical of other pairs, I have found this to be too small for this pair. GBP/JPY can bounce around within minutes for 40 pips jumping you out of trades very rapidly. The research showed a value of around 80 was more suitable for this pair. Hope that helps you. GirlFlyer
+
+--- 帖子 #116 ---
+This just happened to me with the GBP/USD. There was a short at about 1.8843 and the current price was 1.8760, $369 to the plus side. The EA did enter a SL at 1.833 after a certain amount of pips. Then price spiked up and the EA exited with a gain of about $220 for that position. Before that there was a current floating PL of about $500 on four positions. I'm sure that the spike was caused by the NFP jitters. Either way, it's good to know that the EA will exit whhen it 'sees' that happening. I'm not in front of my demo laptop right now but it'll be interesing to see how things work out with the NFP numbers if they are kinda wackey....
+
+--- 帖子 #117 ---
+Hi Palmer, Out of curiosity what time frame are you useing ?? Thanks in advance..Valerie..
+
+--- 帖子 #118 ---
+I've got the EA running on the 30min charts for the EUR/USD, GBP/USD, USD/CHF, and the USD/JPY....I won't know 'what's up' until I go home for lunch in a few hours....
+
+--- 帖子 #119 ---
+GirlFlier my ea has just stopped working on my live account I think. When the ma 5,8 both cross the 28 and 18 thats when it should either buy or sell right. The gbp/usd crossed and nothing happened. The only change I made to the setup is the time frame I went from 30 min to 15 min. Thanks in advance by the way Ive already booked 61 pips yesterday on my live account but it just stop working. Valerie.....
+
+--- 帖子 #120 ---
+Short Positions on GBP/USD and longs on USD/CHF &amp; USD/JPY going into NFP likely made a killing... However, probably with GBP/USD, it took profit before NFP on the spike up. Otherwise, CHF &amp; JPY are doing great. EUR/USD... well, my test was long on it from yesterday and got stopped out... but if you got short somehow, well, again, you're doing well. GirlFlyer
+
+--- 帖子 #121 ---
+Not sure what's up with yours, mine went ahead and made the trade..., but I run mine on the 1M charts, so maybe for the finer entry points, its necessary for the 1M. Good job on your live account! Marci
+
+--- 帖子 #122 ---
+Another quick question GirlFlier When you use another time frame do you set the ea up for that in other words when you pu your parimeters in do you change the time period from 30 to let say 15 or 1 or 5 for what ever your using. Thank you for such an excellent ea....Thanks Valerie..
+
+--- 帖子 #123 ---
+I'll post the current and closed when I get home around noonish EST....
+
+--- 帖子 #124 ---
+Valerie, Generally, I leave the Time Period in the parameters to 30 no matter what chart I run it on. Although I have been testing the USD/CAD using the 15 as backtesting shows slightly better results using the 15M time frame for it.
+
+--- 帖子 #125 ---
+Marci I swear just 1 more question and I will leave you alone. What I've done is made a template with the ea and the ma's that I'm using and I set all the paremeters for each individual 1 like you had recommended; that shouldn't stop it from executeing a trade should it ? Thanks again and have a wonderful weekend....Valerie....
+
+--- 帖子 #126 ---
+Not that I know of Valerie... There are several things to look for to see if there are errors. Look in the Experts tab and the Journal Tab to make sure no errors show up in there. The other possibility is that the crossing didn't quite fit the time parameters that judge whether or not to make a trade (not your parameters... the coding parameters... what I programmed). If that was the case, it wouldn't open the trade. This happens especially if it takes too long to cross the line. I designed it that way so that slow ranging markets wouldn't trigger trades. Hope all that helps and have a good weekend yourself!
+
+--- 帖子 #127 ---
+Closed PL - $406 Open PL $570 Since yesterday....I'll detail things later...
+
+--- 帖子 #128 ---
+I'm sorry I lied but I am getting error code 131 lotsize.2324 how do I get it to trade like .1 or .2 I've got this on a mini account with FXDD. I apologize and this will be the last....Valerie....
+
+--- 帖子 #129 ---
+Valerie, this is an issue I've found. Certain brokers do not round the lot size automatically I'm discovering. For instance, that would not cause an error with IBFX which is what I'm using. I'll be updating the program over the weekend for a fix to this problem. GirlFlyer
+
+--- 帖子 #130 ---
+can i make a request too. can you make it so if i set the risk to 0% it will just trade one mini lot per trade. i did it in my copy but i dont want to get different versions going here thats so much for all your work
+
+--- 帖子 #131 ---
+Since Wednesday: Closed positions short eyr/usd - $211.50 long usd/jpy $3.90 long gbp/usd $48.00 long gbp/usd - $282.00 Open positions long usd/chf $328.31 short gbp/usd $126.00 Net gain: $12.71 Till next week....see ya...
+
+--- 帖子 #132 ---
+12 closed winners 11 closed losers about 25 positive pips though. Looking forward to next weeks version. Thanks Flygirl
+
+--- 帖子 #133 ---
+Sorry.... GirlFlyer...
+
+--- 帖子 #134 ---
+Hello, I'm just discovering you guys, and I'm very interested. I have some qestion, can somebody explain me what is a EA and where I can find this program I can download for testing on my demo account. I will also appreciate If you explain me how I can integrate it in my demo platform (interbankfx) Thanks in advance
+
+--- 帖子 #135 ---
+Hey GirlFlyer, Read your entire thread (so easy to say when the thread is not 999 pages long!!!). Your EA sounds promising so I've loaded it in my MT4 testing platform and will join the party on Sunday. Looking forward to it!!
+
+--- 帖子 #136 ---
+Did anyone get a buy signal for USDJPY on 10/5/06 at 21:25 thereabouts or at least the one at 10/6/06 at 12:30-12:45(IBFX chart time)? I'm using the settings as recommended in the comments of the program: SLV 38, TimePeriod 30, PointAdjust 0.0, TrailingStopLevel 45, and running on a mini acct starting 10/4/06 @21:35. That was a nice move to miss! 135 pips +/- Lots of other trades...some good, some bad, some ugly but I still like it's potential. Wish I could help more!
+
+--- 帖子 #137 ---
+I really can't understand how people are getting positive trades with this EA. I have had it running since the third and it's made eight trades all losers.I started with a 50,000 demo account and it now stands at a little more than 37,000. Here are the trades it has made. 10/3 at 23:36 bought EUR/USD price 1.2734 st. out 10/4 at 8:36 10/4 at 9:45 sold AUD/USD price .7426 st. out 10/5 at 7:03 10/4 at 18:43 bought EUR/USD price 1.2708 st. out 10/6 at 11:59 10/3 at 23:55 sold USD/CAD price 1.222 st. out 10/4 at 8:32 10/4 at 14:30 sold USD/JPY price 117.84 st. out 10/6 at 12:51 10/4 at 19:30 bought EUR/JPY price 149.95 st. out 10/5 at 00:16 10/5 at 11:30 sold AUD/JPY price 87.77 st. out 10/6 at 12:31 10/4 at 19:00 sold USD/CHF price 1.2492 st. out 10/5 at 12:41 AfterI downloaded the EA I dragged it onto 30 min charts. Should I have dropped it onto 1min charts? Any help is appreciated. thank you
+
+--- 帖子 #138 ---
+Hi Toothman, I hope that I'm not stepping on anybodies toes; but I beleive it is what ever prefence that you may have. Myself I prefer the 15 min charts but I think it depends on you. I hope this is of some help....Valerie....
+
+--- 帖子 #139 ---
+Hi Toothman, I'm noticing some differences between your trades and mine... First I noticed was your USD/JPY trade on 10/4 at 14:30... mine made the exact same trade... but, took profit on 10/5 at 15:28 for a small 8 pips. My system never took the short USD/CHF trade on 10/4 at 19:00... don't know why yet... I'm working on that one. It picked up a buy shortly thereafter which was a winning trade. USD/CAD... Bad week on the CAD... I'm down two or 3 positions in a row on that one, too. Performance on the CAD is not that good with this EA on the 30M chart... I actually found a bit better performance by backtesting using TimePeriod = 15. AUD/USD - All winning trades until NFP hit and it whipsawed up and down so much that the S/L triggered... but was in it the right direction if the S/L had been a few points higher. EUR/JPY - This cross may prove to be difficult for this EA. I've had some winning trades this week, but 2 S/L's took those profits away. EUR/USD - 1 win, 2 losses.... - Had the same trade as you listed at a loss. GBP/USD - You didn't show anything there, so I'm assuming you didn't trade it. However, this was the best performer this week. It made 2 awesome trades with over +50 pips each... Same with USD/CHF in my case. Still holding on to one buy position of USD/CHF with a current 110 pip gain. USD/JPY has been profitable also. 1 loss and 2 wins ------------- Final Comments... the Euro this week has been a really up and down ranging currency with a lot of quick fluctuations. Consequently, pairs tied to the EUR seemed to perform poorly. I think that may have to do with the ECB announcements and NFP, etc. I knew going into this EA that it would perform poorly in a ranging market, but would catch major gains on trends. GBP/USD and USD/CHF proved that this week for me. The gains on those 2 pairs alone covered the losses on most of the other situations. Perhaps this upcoming week will see us get out ranges and start some trends and thus allowing the EA to show its strong potential. GirlFlyer P.S. - I'm trying to figure out if there is a difference running live with the EA in any chart setting. There have been quite a few instances where the trades have taken place exactly on the 30 minute mark of the hour if the EA is run on the 30M chart which is where I run it most of the time so I can view the trading signals it makes. Though, it is not supposed to make a difference. However, it may require running it on the M1 setting live as it does in the backtesting for the precise entry ... hmmm... test required this week. Will update you on it.
+
+--- 帖子 #140 ---
+what does party refer to
+
+--- 帖子 #141 ---
+The only reason why yours and Toothman is different is that you use different brokers. I had the same issue using other trading systems because of the timezone difference since it depended upon when a candle starts between the brokers.
+
+--- 帖子 #142 ---
+Girlflyer, Does your EA use any indocators other than the crossing of the EMAs? Maybe one way to get on the right side of the trend is to check RSI and CCI, I know that's not Sidus method, but its better to be going with the trend for the TF....
+
+--- 帖子 #143 ---
+Steve, Sorry, thought you were kidding in the PM you sent me. There is no online party on Sunday. The term "party" is American (as opposed to English) and refers to the group of traders already testing Flyer! So when I said I will join the "party", I was really saying I will become part of the group of traders testing this Expert Adviser known as Flyer!
+
+--- 帖子 #144 ---
+Thanks for your cery careful description of the difference between how the British vs. Americans use the work party. Perhaps we will all figure out a way to make the forex equally simple.
+
+--- 帖子 #145 ---
+Hi Everyone, I'm sorry for the late post I promised on my results form late Thursday evening to Friday' close. eur/usd 1pip gbp/usd 85 pips And it would have probably been alot more but my broker doesn't have micro lots so when it calculated above .1 lots it would just give an error and wouldn't trade. So I would say without a doubt this ea kicks some serious ass. There are alot of good ea's out there like phoenix, firebird just to name a few but this is a must demo for you. Like all ea's it's not a get rich quick thing but properly monitored you will not be dissatisfied. Just my 2 pips worth. Good luck to all and may the pips be with us....Valerie....
+
+--- 帖子 #146 ---
+Ok Everbody, Here we go into a new week with an updated version of Flyer!. I've been busy making changes and improvements. You can now set the minimum lot size your broker allows. Also, the use of fixed lot sizes is available in addition to the original which adjusts the lot sizes automatically. Error #131 problem. Should be fixed. Lots are now rounded to the appropriate values. Performance has been slightly increased. Main improvement is that Flyer! should NOT enter a trade now on a sharp change in the trend. I was noticing that often at news reports, the EA would get in a trade in the correct direction of the move, but at too late of a time frame to catch much profit and then ran the risk of reversal stopping it out. This problem should be reduced now. *** Note: PLEASE read the documentation to go with this updated version. It explains the answers to many questions. *** --------------------------------- Comments on last week's performance. We saw a mixed bag of trades last week and the NFP report really dealt some doozies on Friday. Overall, my account was slightly up in value after it was all over with. The good news is that I ran back tests with the EA for this last week and compared them to the actual trades and the back test results were nearly identical with only 2 or 3 pip price differences on entry and exit points. So, the EA is performing on the back tests with nearly the same accuracy as the live trading. This gives me added confidence in the ability of the EA to make decisions in the future that will turn out to be profitable. I will post my results in a different message. Good luck all and thanks for helping out! GirlFlyer P.S. This message edited to correct a problem with the code in the EA not allowing lot size to have fractions.
+
+--- 帖子 #147 ---
+Several members have requested that an indicator be built showing the signals that Flyer! uses. I am working on that indicator and hopefully will have it released soon. Hope this helps! GirlFlyer
+
+--- 帖子 #148 ---
+I'm always use caution with EA's and eco news releases on the horizon because the news can really do a number on EA performance. I'd rather clear out all trades before a release if they are showing any profit and maybe shorten SL on any negative open positions. Then again, news spikes run right through those stops...just my 2 pips.Nice work Marci.
+
+--- 帖子 #149 ---
+Thanks Palmer for the complement. I agree with you on the news and EA's. Things like NFP can pretty harmful to trading.
+
+--- 帖子 #150 ---
+Hi GirlFlyer! Is it possible to use micro lot sizes i.e. 0.01, i'd like to test it using a live account in IBFX? Could we set it such that we could put 0.01 in the MyLotSize? Thanks and great job with this EA Marci. armchang
+
+--- 帖子 #151 ---
+Hi Marci, JOB WELLDONE !!! THANK YOU !!!......Valerie......
+
+--- 帖子 #152 ---
+Yes, you can use any value you wish as long as it is not a value your broker does not accept. GirlFlyer
+
+--- 帖子 #153 ---
+You're welcome!
+
+--- 帖子 #154 ---
+Hi GirlFlyer, I set all the parameters per your instructions for it to trade.1 lot at a time and it is tradeing 1 full lot. What might I be doing wrong ? Thanks...Valerie...
+
+--- 帖子 #155 ---
+Did you remember to change the "FixedLots" parameter to "1"?
+
+--- 帖子 #156 ---
+Nevermind, figured out the problem... slight mistake in the code I didn't catch earlier... I'll have it fixed in a moment.
+
+--- 帖子 #157 ---
+Yes it has 1. I back tested with every sitting i could think of and it still trades full lots. It really has me stumped. Thanks valerie
+
+--- 帖子 #158 ---
+Must have been typing at the same time sorry
+
+--- 帖子 #159 ---
+Valerie, I fixed the problem and updated the original file that I recently posted. Just download it again and it should work fine now... The problem was I was using an integer value instead of a double value for the variable. Didn't catch it until now... guess I was tired when I punched that in last night. Thanks for catching it. Marci P.S. PM me sometime if you would like to chat privately about the market or anything else....
+
+--- 帖子 #160 ---
+Thanks once again Marci and I will...Valerie....
+
+--- 帖子 #161 ---
+Not at this time, may look into some additional indicators later.
+
+--- 帖子 #162 ---
+Girlflyer I wanna say thanks for all the great work you are doing. i am now testing the latest version to get the EA to work properly with the lot size additions. You rock
+
+--- 帖子 #163 ---
+Yup, this was what i also had in mind thanks again. I'll test it now. armchang
+
+--- 帖子 #164 ---
+Attached in the text file is the results of my tests for last week. Pip wise, it turned out to be a positive week, but the horrid ranging market killed us on in the EUR/JPY and the USD/CAD, however those were offset by the huge gains in GBP/USD and USD/CHF. Best peformance went to the USD/CHF. Worst went to the USD/CAD. I am encouraged though that in backtesting FLYER! for this last week that it performed very similar to the actual live results. With that in mind, I have further confidence as we go forwards, that the results from the EA will be more in line with the statistics modelled in the back tests. Unfortunately this was a volatile week for many pairs with NFP and ECB interest rates, etc. keeping the price action in the early part of the week restricted followed by large erratic movements at the end of the week. Tough time to be trading using any method. Given the difficulty of this week and the overall net positive performance, I look forward to the results as we go forwards further. For those of you still testing, thank you for your help and input. I will continue to update as things go along. Happy Trading to All!
+
+--- 帖子 #165 ---
+Hi GirlFlyer, Just to let you know this is how your results appear on my computer. I'll post last my last weeks results a little later. Need to go make some JOB money first.(yuk) Thanks for everything!
+
+--- 帖子 #166 ---
+Odd, it doesn't come out that way on mine... oh well, you get the idea though.
+
+--- 帖子 #167 ---
+here is an all-in-one indicator and template green arrow: buy red arrow: sell yellow X: false start, dinna cross with in 5 bars you should prolly put in your order 1 bar after the signal, but if you feel lucky ... vars: extern int xFastEMA = 18; // Fast EMA for Trend extern int xSlowEMA = 28; // Slow EMA for Trend extern int xFastWMA = 5; // Fast WMA for Cross extern int xSlowWMA = 8; // Slow WMA for Cross extern int xPoints = 1; // points to offset EMA/WMA Cross extern int xXBars = 5; // Cross has to happen with in this number of Bars
+
+--- 帖子 #168 ---
+Nice Job! Thanks WitchHazel!
+
+--- 帖子 #169 ---
+no problem i knew you were planning on making one but i figured you were really busy with the EA. making those EAs are like 10x harder for me then making indicators.
+
+--- 帖子 #170 ---
+hi GirlFlyer! I just want to know, does Flyer! generate false signals in M30, I know that this was Sidus method and works best at 1H time frames. What do you think, would 1H be also nice to use or not? if yes, could I use 1H with Flyer! to generate signals? armchang
+
+--- 帖子 #171 ---
+2006.10.10 07:38:43 '276294': order is open : #7936992 sell 0.10 AUDUSD at 0.7438 sl: 0.7483 tp: 0.0000 2006.10.09 20:26:27 '276294': order is open : #7925240 buy 0.10 EURUSD at 1.2606 sl: 1.2561 tp: 0.0000 First 2 open orders running the EA. not too good thus far..
+
+--- 帖子 #172 ---
+You're welcome to try it, just change "TimePeriod" to 60. However, I was not able to achieve better results on the 1Hr timeframe and the 30M with backtesting. But see if it does any better live.... maybe?
+
+--- 帖子 #173 ---
+First trade just closed : Opened on October 10 at 02:17 gmt+1, shorting 1.7 lots, GBP/JPY at 222.34; SL 222.79; TP 0. Closed October 10 at 16:39 for profit of $525.31 at a price 221.97. EA draws nice little dashed line between open and closing prices. Version used was straight out of the box, no modifications, just locked and loaded. Second trade on Eur/Jpy is in profit. Trading on 5 minute charts.
+
+--- 帖子 #174 ---
+Hey MM, This ea is pretty kickass, don't you think. I realize you can't win them all and I do babysit but I love this ea. Just my 2 pips....Valerie....
+
+--- 帖子 #175 ---
+hi MoneyMa$ter, Did you trade this live? Try to share some details. thnx armchang
+
+--- 帖子 #176 ---
+Hi all, I have been trying this EA on demo account for 4 days it has changed my 50 grand account now as 62,043. Quite impressive and glad if it has been on live account. I would be trying this on live from Monday. Before that i have quick quesiton on the indicator as well. The indicator comes with template in zip file. Please somebody let me know where can i place this template file. Thanks Aakif
+
+--- 帖子 #177 ---
+Hi! You can place template file to MetaTrade\temlplates\
+
+--- 帖子 #178 ---
+"Version used was straight out of the box, no modifications, just locked and loaded." Thanks armchang for the vote of confidence. We all know I'm an aggressive, Type A kinda guy who can hardly spell "risk averse". And we all know that everything I touch prospers. But to trade "live" with an untested EA, an EA the author wants tested, "straight out of the box, no modifications" would be a bit much, even for me. So I'm testing the EA as GirlFlyer asked traders to do..... testing it on a demo platform with SBFX's MT4, running two pairs on 5 minute charts. I chose those two pairs because they blew up while testing Firebird EAs...nothing mystical and for no other reason. What other details do you need?
+
+--- 帖子 #179 ---
+Hey Valerie, You know I always respect your 2 pips. That's my first "demo" trade so it's a wee bit early to reach conclusions. Particularly so when it seems the number of unsuccessful FLYER! test traders approximates the successful ones. That's an issue that needs resolution. Also weird seeing TP as "00.00"!!
+
+--- 帖子 #180 ---
+Hi Makron, Thanks for the information. --syedforex
+
+--- 帖子 #181 ---
+Hello all, Iam trying this EA on 30 min charts. When i attach this EA to audusd 30 min chart around 2.06pm today , he starts with buy signal. But when i attach the indicator to the same chart , it signal sell ...... Do you guys know why both are in conflict. Thanks SyedForex
+
+--- 帖子 #182 ---
+Buddy, we don't all live next door. Specify the time zone your in with the time of the signal in question.
+
+--- 帖子 #183 ---
+Hi, Iam in GMT -3 timezone ( this is my server feed). But how come that matter ? ( Iam sorry if iam wrong here). coz, iam attaching both the EA and the indicator to the same chart. Thanks SyedForex
+
+--- 帖子 #184 ---
+There are some slight differences between the EA and the indicator. In a very tight ranging situation, some mixing of signals may occur.
+
+--- 帖子 #185 ---
+An observation: I started Flyer! Sunday night and nothing of course moved very far Monday with the holiday. Consequently, the indicators were stuck on tight ranges giving out some false signals. Most of the time with any demo or real account, I try to get out my positions over the weekend. So, I started fresh. The EA opened a trade with nearly every pair I am testing and almost every one got stopped out when the market moved today. I'm thinking that in situations like this, it might be best not to start the EA in the middle of such flat markets. Once a trend develops, then start the EA... that way when the next trend starts, it will be more likely to enter the trade correctly. Has anyone ever experienced issues like this before with EA's? GirlFlyer
+
+--- 帖子 #186 ---
+Yes I have Marci. Thats the reason why I always babysit an ea that way if you see something going on I usually manually go in and take away the stoploss and I hedge that way I rarely have a losing position but the key to that is knowing when the markets going the other direction and collect on one and wait on the other but to do that it takes alot of analysis and sometimes it will still bite you. But don't fret because you have an outstanding ea. As long as it is done by machine you will still have to have human intervention. I've yet to see an ea that you can set and forget I guess if that day ever comes there will be alot of millionaires. In my humble opinion you've done an outstanding job...Valerie...
+
+--- 帖子 #187 ---
+Thanks Valerie! I think you're my #1 fan!
+
+--- 帖子 #188 ---
+Hello all, I am trying this EA ( Flyer _ TS ) on 15 min charts , started 5 Okt 2006 until now. so far so good . Thanks GirlFlayer .
+
+--- 帖子 #189 ---
+Sorry ...hee..he
+
+--- 帖子 #190 ---
+I have tested Flyer! live using 5M Charts with SL: 25, TS: 25, Fixed lot at 0.01: Using EUR/USD: Type Open Close Profit BUY 1.2540 1.2541 +1 SELL 1.2541 1.2540 +1 Floating: -16pips; Maybe if i'd set the TS: to 30 then I would have netted +15 by now plus a positive floating position.. just 2pips armchang
+
+--- 帖子 #191 ---
+I sorry..it may sound stupid to some, but I am a newbie and I have no idea what the Sidus method is and how to test your EA (?). care to explain and give more information? Thank you
+
+--- 帖子 #192 ---
+Silval, A better explanation has been discussed in this link: http://www.forexfactory.com/forexfor...t=sidus+method download and read the pdf file.. armchang
+
+--- 帖子 #193 ---
+Your results look good. Thanks for trying it out! GirlFlyer
+
+--- 帖子 #194 ---
+Just a side note: Flyer! will not enter into positions in a market that is rapidly moving on a low T/S. The larger the T/S, the more likely it is to enter into a rapidly moving position... just a feature I added to it to take advantage of the T/S a little.
+
+--- 帖子 #195 ---
+Marci: Did you see this reply that I posted to your other thread about the markets being quiet??? I think the FOMC news is keeping a lid on things along with the N. Koreans wanting to play spin the plutonium bottle. This channeling stuff is what hurts some EA's becuase of the MA's that they employ. The markets need to move for things to work. This is nothing new to you Marci I'm sure but I think these are just some of those good ol' patterns that some people say keep repeating themselves in the markets. They are as common as head and shoulder patterns, triangles, pennants....we just have to learn how to trade them. The best way to trade channels or 'quiet times' in the markets may be not to trade them at all. I'm running your Flyer and Hendrick's P4 right now and I'm thinking that it may have been a bad week to start them because of the 'red flags' on the FF calendar. Then again, if you have ever sold options these are the times you want so the option premium decays. I did that many times in the futures markets and made some good money but the FX is where I'm spending my time now. I think we just need to let the charts tell us when it's 'okay to go'....Don't get too disheartened, we just need the normal ebb and flow to return, and it will. It always does.
+
+--- 帖子 #196 ---
+Yes, and I agree with you. Just sometimes a little frustrating to just see the market jump from one news announcement to the next, then really do nothing in between. Makes for difficult trading. But I'm doing ok. Thanks
+
+--- 帖子 #197 ---
+Second Trade Closed ; 10/9 Eur/jpy, short 1.7 lots at 149.98; 10/11 closed at 149.97 1 pip profit Third Trade Opened : 10/11 Gbp/jpy, short 1.6 lots at 221.85; trading at -$213.90 (84 pips to the long side). Results Since Testing Began (October 8, 2006): +64 pips net
+
+--- 帖子 #198 ---
+Thanks MM for the info!
+
+--- 帖子 #199 ---
+I have a $3000 demo mini account and I'm using the mini account setting. I'm using the FLyer EA with the preset values for each specific currency. EA results for Oct 11. Four trades triggered at 7:45 AM Mountain time: 1. a buy on USD/JPY at 119.69 2. a sell on GBP/USD at 1.8550 3. a sell on EUR/USD at 1.2542 4. a buy on USD/CHF at 1.2711 All were ~ 2.3 lot trades. Low point was one hour later, all four were down for a total of -5.5%. Results in Chronological Order +++++++++++++++++++++++++++ a) 1.5 hours after first order opened: close buy EUR/USD at 1.2541, profit = +1 pip * b) The EA then did a new order a few minutes later: open sell EUR/USD at 1.2542 b2) 2.5 hours after that new order opened: close buy EUR/USD at 1.2541, profit = +1 pip * c) 4 hours after first order opened: close buy GBP/USD at 1.8548, profit = +2 pips * d) 6 hours after first order opened: new open sell GBP/USD at 1.8553 e) 6 hours after first order opened: new open sell EUR/USD at 1.2527 f) 10 hours after initial trade, I closed the following after seeing profit start to slip away. sell to close USD/JPY at 119.73, profit = +4 pips sell to close USD/CHF at 1.2719, profit = +8 pips buy to close GBP/USD at 1.8546, profit = +7 pips buy to close EUR/USD at 1.2522, profit = +5 pips Total trades for day: 7 profits, 0 losses, net of +28 pips per lot * I believe these are all examples where the MAs crossed during a loss. In that scenario the EA does not exit, it waits until 1) there is a profit or 2) it hits the stop/loss to exit. In these cases, once any profit was made, the EA exited the trade. Cheers, jdl
+
+--- 帖子 #200 ---
+Looks like another EA worth testing. How many EAs can MT4 handle before going loopy? I have about 24 EAs now on 11 pairs. Should it die soon?
+
+--- 帖子 #201 ---
+Jdl, What time frame you used for your trade. --syedforex
+
+--- 帖子 #202 ---
+I have read all the posts regarding the Flyer EA and am now testing it. I have been getting the following error message. Can someone please tell me what it means and how to correct the problem. 7:21:27 GBPFlyer!-3 GBPUSD,M30: Error Opening Trade: Error Code = 4109, Lotsize: 25 07:21:27 CHFFlyer!-3 USDCHF,M30: Error Opening Trade: Error Code = 4109, Lotsize: 25 Thanks, dbcmkx
+
+--- 帖子 #203 ---
+The EA uses 30 minutes. You can have your chart show a different period, I happen to use 30 minures for my chart.
+
+--- 帖子 #204 ---
+dbcmkx: The lot size of 25 may be the problem....that's a huge number to trade depending on what your leverage is. Check to make sure you have the equity to trade that many lots....
+
+--- 帖子 #205 ---
+I concur, that is probably the issue. Unless you have a huge account and are trading a large amount of the equity. But, the specifications for MT4 says error 4109 = Trade Not Allowed. So, you will have to find the parameters that fit within your account. GirlFlyer
+
+--- 帖子 #206 ---
+Thanks, Girlflyer. The demo account size I set is $50m. The following is copied from the Expert log: "10:43:18 EuroFlyer!-3 EURUSD,M30: Account Equity = 50000 Bid = 1.254 Ask = 1.2542 OrderStat = 0 10:44:27 EuroFlyer!-3 EURUSD,M30: Error Opening Trade: Error Code = 4109, Lotsize: 25" Any suggestions. Thanks, dbcmkx
+
+--- 帖子 #207 ---
+I had the same error message when the account was $5000. Thanks, dbcmkx
+
+--- 帖子 #208 ---
+Sorry. I had the same error message when the account size was $5000 but the lotsize was much smaller.
+
+--- 帖子 #209 ---
+Girlflyer, These are the inputs that I entered: "extern double LotPercentage =5; extern double MinVal=100; extern int StopLossVal = 45; extern int TimePeriod = 30; extern double PointAdjust = -0.0001; extern int TrailingStopLevel = 50; extern double BrokerMinLotSize = 0.01; extern int FixedLots = 0; extern double MyLotSize = 1; extern int LotValue = 1; extern int MarginVal = 100; For each pair I entered the appropriate PointAdjust. As I said the error message occurs with a $50,000 account and a $5,000 account. Thanks, dbcmkx
+
+--- 帖子 #210 ---
+Girlflyer, I see in the program code the line that generated the error message, but I don't understand why it happened. Thanks, dbcmkx
+
+--- 帖子 #211 ---
+girlflyer, i can't backtest since yesterday. i don't know what happened but now it isn't work(can't open any trade). uninstalled everything and setup again but not any result...
+
+--- 帖子 #212 ---
+Girl Flyer, I've been studying your method and one of the major problems with it is that it enters the trade too late or it fails to exit. I think I may have come up with an alternate way for the EA to exit and still catch most of the trend ensuring that a fair amount of pips will be captured provided that the trade is initiated correctly. I am not a programmer so that part will be left up to you or other programmers out there. Here is my suggestion: Rather than exiting at the crossover, my method would look at the separation difference in pips between the values of MA 28 and MA 5 or perhaps MA? and MA5. When the difference reaches x amount, say 15 pips, it would exit the trade. In my first example from a trade entered today on the eurusd, the trade entered 1 hr 15 mins after the crossover. An earlier entry would have been preferable, but that’s something we all are working on. Anyway, the MA separation values begin to decrease after the trade is entered and then after the spike begin to separate. Once the separation difference reaches a certain difference (let’s say 15 pips) the trade is exited. In the first example the MA5 is = 1.2556 and the MA 28 is = 1.2539, a difference of 17 pips. The exit point is @ 1.2555 and entry point is 1.2535 for a profit of 20 pips vs the actual gain of 9 pips.&lt;?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /&gt;&lt;o &gt;&lt;/o &gt; &lt;o &gt; &lt;/o &gt; In example #2-eurusd, the sell entry is on the down side of a spinning top. A good deal of separation of the MA’s has already occurred. In fact the next candle marked by the two X’s, MA separation difference is already &gt;15. We therefore would not want our trade to exit at this point, so a provision for the exit using the MA Separation Difference is that it cannot exit if the exit point would be below the entry point . Of course, a stop loss is set in case of reversal and this would stop us out. This provision would need to be programmed into the code. Provided that this could be done, the program would continue to search for the next exit point where the MA Separation Difference is &gt;15. This point is marked by the two opposing arrows. This would have resulted in a 1 pip gain rather than a loss. An earlier entry would have generated more profit. This trade went on for about 24 hours having crossed over several times without exiting. I finally exited this manually (for a profit).&lt;o &gt;&lt;/o &gt; &lt;o &gt; &lt;/o &gt; In example #3-eurusd, the sell entry was premature having not crossed over. Anyway, the pair wandered in a range and then exited about 16 hours later for a 4 pip profit. Following my exit strategy, the pair would have exited @ 1.2705 when the MA separation difference reached 15 pips, for a profit of 35 pips. In this example, I also experimented with a 30 pip TS, to see if this could be a point where the MA Separation Difference point could be reset or increased (like a pipstep?). In this case the difference would have to be greater than 15 to allow the trend to continue before being exited. Perhaps this could be triggered by the TS being initiated.&lt;o &gt;&lt;/o &gt; &lt;o &gt; &lt;/o &gt; In example #4-usd-cad, a slightly different approach was explored. In this example, the trade was initiated by the EA about two hours (late) after the crossover. The MA Separation difference becomes narrower and then wider but never reaches our &gt;15 parameter for exiting, but we are in a definite downtrend. In this situation, the MA Separation Difference has reversed or become lesser rather than greater. This is a signal for a probable reversal and an exit point. When the Separation Difference becomes less by 2?-x pips, an exit point would be indicated. In my example, the reversal and exit point is only one pip less in difference. At point “A” to point “B” the difference is 10 pips. At point “C” to point “D” the difference is 9 pips. The exit therefore is at point “D”. This results in a 12 pip profit rather than a 1 pip profit.&lt;o &gt;&lt;/o &gt; One area we may want to explore is using a combination of the ma crossover method with an and/or MA Separation Difference to enter trades, since so many are being missed, ie. , the usdcad 130 pip run that started at the Tokyo open on 10/10 and ending two days later. The MA Separation strategy would have captured most of this run had it been entered to begin with. The way this would work would be when the separation difference following the cross over became X pips (2-5?), the trade would be entered in the direction of the MA indicators. Just a thought.&lt;o &gt;&lt;/o &gt; &lt;o &gt; &lt;/o &gt; GirlFlyer, let me know what you think and if it can be done. Anyone else out there, I’d be glad to hear what you think.&lt;o &gt;&lt;/o &gt; &lt;o &gt; &lt;/o &gt; 1Trader2&lt;o &gt;&lt;/o &gt;
+
+--- 帖子 #213 ---
+DBCMKX, The problem is you have your account set to a "Mini" account instead of a "Standard" account. "Lotvalue" should be equal to zero (0). Not 1. This will drop your order down to 2.5 as it should be. Hope that helps. GirlFlyer
+
+--- 帖子 #214 ---
+I'll review what you have and get back to you soon. Thanks for the input. GirlFlyer
+
+--- 帖子 #215 ---
+I realized that just a while ago and changed it and was waiting to see if that would work. I want to thank you for all your hard work for writing the code and also for taking the time to answer all the posts from everyone. From what I have read, this seems to be an excellent EA and am anxious to test it . We just have to realize that it will be an continually evolving learning process just like trading. I think it is a could idea to babysit open positions when ever possible especially in a flat market and ahead of "news" that can play havoc with trading. Once again, thanks. dbcmkx
+
+--- 帖子 #216 ---
+Hi, Grahame Did you figure out what error 131 is? I'm still facing the same problem. Looks like it is trying to trade a lot size with 3 decimals. Is that it? Thanks, Dan
+
+--- 帖子 #217 ---
+Sorry to all...I uploaded Exit Strategy #4 twice and omitted Strategy #2. Here is #2 attached
+
+--- 帖子 #218 ---
+Dan, If you have the most recent version of Flyer! (see post #131), it resolves the Error #131 problem. GirlFlyer P.S. Just install it over the the older versions and will pick up any active trades you already have.
+
+--- 帖子 #219 ---
+the answer is at post #146
+
+--- 帖子 #220 ---
+My goof, had 131 on the brain
+
+--- 帖子 #221 ---
+I keep Flyer running during the night on my demo account. When I checked this morning two trades had already been opened and closed. The first was a sell/buy of EUR/USD. The EA's trailing stop loss feature kicked in, and the trade was closed when it hit the stop for a +10 pips per lot profit. The second was a buy/sell of USD/JPY. A TakeProfit feature I wrote kicked in, and the trade was closed for a +25 pips per lot profit. All of that while I was asleep. Pretty cool. jdl
+
+--- 帖子 #222 ---
+Thanks, Marci and Dreamer, I'll doublecheck. Thought I had the latest. - Dan
+
+--- 帖子 #223 ---
+Please forgive me if the following question has already been answered - I did scan through the entire thread but not word for word... What setting is used in the Model field when backtesting (open only, control points or every tick)? Thank you for an excellent EA, Marci Lou G
+
+--- 帖子 #224 ---
+Hi Marci, Nice week for Flyer! in 5min charts. so far i've let Flyer! open 4 trades and all were positive trades. With two trades at +1 pips and 1 at break-even.. Profits would have performed better during larger time frames maybe 1HR.. but never have tested it.. maybe next week. armchang
+
+--- 帖子 #225 ---
+Hi All, Time frame has a marked effect on performance of EA's. We should let ourselves be guided by the originator of Flyer! Thanks, GirlFlyer for all your help and guidance. Regards to All, Grahame.
+
+--- 帖子 #226 ---
+Every Tick is the best and you must test it using the M1 setting... any higher will not give good results. And thank you! GirlFlyer
+
+--- 帖子 #227 ---
+Marci, Just tried testing the most recent version (1.04). For me, the error code 131 is back. Flyer is trying to open a lot size of .79 and MT4 won't accept it. I can track this down and fix it but thought I should bring it to your attention. Best, Lou
+
+--- 帖子 #228 ---
+First let me thank Marci Dunn (girlflyer) for such a wonderful EA and all the efforts by everyone to test this out. I will join the testing too. I wish you all the best and $$$. Some questions: 1. I just noticed that there is a conflict between the settings for "PointAdjust" between the word doc and the comments noted on the actual coding for Flyer Version 1.04. B oth attached at post#146 . for instance the word doc says for GBP=-0.0001 and the notes on code show GBP= 0.0001 (no "-" sign) also the word doc shows USD/CHF = 0 and the notes on coding show USD/CHF = 0.0001 Can anyone advise and if you have a document with the non conflicting final settings please attach it . I wish you all the best and may the pips be with you, Thanks in advance for helping, Reuven
+
+--- 帖子 #229 ---
+I'll correct the settings in the code in my next release. However, I have updated the PointAdjust settings in the Word document to reflect the most recent better settings. I hope this helps.
+
+--- 帖子 #230 ---
+Lou, I think I have tracked the problem down, although I think it is an MT4 issue with the Math functions and not my coding issue as the problem only occured when the lot size value was between XXX.9 and XXX.0 and even then sporadically. I do have a fix for it and will have it in my next update. However, if you or anybody else wishes to correct it immediately, make the following change in the code: In the procedure "CheckToOpen", change the line "for(x=R2,flag=0;x&lt;=R1 &amp;&amp; flag==0;x+=BrokerMinLotSize)" to "for(x=R2,flag=0;x&lt;=R1+BrokerMinLotSize &amp;&amp; flag==0;x+=BrokerMinLotSize)" This seemed to fix the problem in my test runs as I never saw any more odd lot sizes in the order function afterwards.
+
+--- 帖子 #231 ---
+1Trader2, I am working on your ideas, but did you notice that your charts are on the M15 setting. Flyer works by default on the M30 setting internally. Therefore your charts are not representative of the calculations done by Flyer unless you are running it with "TimePeriod" set to 15. Which will change the entry and exit points considerably compared to what you are seeing on your charts. As for the idea of using the differences between the MA's, it has merit. I may work on some test versions of it and see how it comes out but it is going to take me some time to analyze it further and then code it. To let you know, I am putting together a Version B of Flyer already that will use a different exit strategy. This version will exit earlier than the current version thereby taking more immediate profit, but the tradeoff is that it does not catch the huge trend runs as easily and doesn't make as many trades. But its advantage is that it works better in a ranging market. So far on an annual test, version B shows about only 50% of the gains on back test compared to the current version. But each trade seems to have better profits at the same time. I will be updating more on this in the next few days. Thanks for your ideas. GirlFlyer
+
+--- 帖子 #232 ---
+t datat Withchazel, How exactly does one import this data for testing purposes? I'm using Interbank FX Trader and I don't see anything about importing or selecting a data set in the Strategy Tester part of the application. Thanks for any ideas, jdl
+
+--- 帖子 #233 ---
+Girl Flyer, Thanks for looking at my exit strategy. I did analyze one of the time frames on the 30 minute ...strategy #4, but only inadvertently. I run the 15 minute time frame, and that is why the other 3 are shown with it. Looking at the other three charts using 30 minute time frame only changes it slightly so it should not matter much. When you have time to study it more, of course look at it on the time frame that it is coded in. Please let me know how it goes. I sure wish I could program... 1Trader2
+
+--- 帖子 #234 ---
+I agree completely - MT4 seems to want lot size rounded to the nearest tenth or it throws 131. Thanks for your prompt attention to this. Lou
+
+--- 帖子 #235 ---
+Girlflyer, How do I find the point adjustment for currency pairs [eg., GBPJPY] not in your document? Is it the tick size, but where do I find such information?
+
+--- 帖子 #236 ---
+hi, I tried backtesting this EA, however, it doesn't give me any results in the M1 timeframe. I get the following log message: 2006.10.15 12:59:21 2006.09.20 23:55 Flyer!(2) EURUSD,M1: Account Equity = 10000 Bid = 1.2686 Ask = 1.2688 OrderStat = 0 and 2006.10.15 12:59:21 2006.09.20 23:56 Flyer!(2) EURUSD,M1: Error Opening Trade: Error Code = 131, Lotsize: 0.79. Anyone know why? thanks
+
+--- 帖子 #237 ---
+Dazed, See post #234. GirlFlyer
+
+--- 帖子 #238 ---
+I didn't test release 1.04 on GBP/JPY. That's why the setting is not in the documentation. However, I've had decent results with either .01 or .02 Girlflyer
+
+--- 帖子 #239 ---
+Hi Marci, I hope you've had a really good weekend. I noticed something in your posts about a new version of Flyer; have you put it out yet ?? Or just testing it yourself. If it's available I would like to have a copy if it's no trouble. I'm getting my arsenal ready for the battle this week, last week I had flyer give me a few trades that went 88 on me but no losses and sitting in good shape to start the week off. Thanks for everything....Valerie....
+
+--- 帖子 #240 ---
+Valerie, See my new thread! Marci
+
+--- 帖子 #49 ---
+Hi Marci and Forex Friends, Following (bellow this message) is some code that my friend put together according to my specific suggestions (new code lines are noted by "Added by rc ======" I am leaving it as an open discussion especially for Marci to decide if it will be added or not to current Flyer! Ea 1. Early exit: the exit is determined once the time frame 5 crosses the time frame 8 and not the 28 (It showed better results at least in my testing). After watching the visual mode of testing I noticed many times that the original exit strategy of Flyer was missing many opportunities I think this strategy works better. I noticed Marci you mentioned something about a new EA maybe this is what you had in mind? 2. No Farm News: on days of No Farm News all opened positions are closed. ALSO two day before no positions are opened until after the news day the idea is to eliminate opening new positions before the big news day that have a big risk of getting washed out. Testing this at least in the last few months has shown increase in pips. this definitely works with the big NoFarm but if we start eliminating all news periods we wont be left with trading days 3. Settings for stop loss (100) and trailing stop (80) are different. My testing showed better results but please do your own testing Bottom Line on my end Testing on the last 1 month with 90% modeling quality is giving a 1.97 profit factor but then again this is only for one month and only Euro/Dollar I would be interested in everyone's input. If you want to test these suggested changes you can just copy paste the code to a new ea. by the way news is a nice vehicle to make money (at least my testing shows potential on the "NoFarm") check out www.fxengines.com they have a nice automated system that does the job for you. Good Luck to all, Reuven ======================================= suggested code for Flyer added by rc (Reuven) ======================================= //+------------------------------------------------------------------+ //| FLYER! A Moving Average EA.mq4 | //| (GirlFlyer) Marci Dunn | //| email: girlflyer101@yahoo.com | //+------------------------------------------------------------------+ // Version 1.04; /* Please see accompanying documentation now for description and other information. Thanks for using Flyer! */ #property copyright "Marci Dunn" #property link "" //---- input parameters // Parameters are set for EUR/USD. Adjust for any other pairs. extern int barsDistance = 2; extern bool closeOnlyOnProfit = true; extern double LotPercentage =10; // Percentage of equity to be used for each position. extern double MinVal=5000; //Don't Let Equity drop below 5000 (example, can be set to whatever value you want. extern int StopLossVal = 100; //use ranges of 75-80*-100 for GBP/JPY, 35-40*-50 for USD/CHF, 45-50*-60 for GBP/USD, 40-45*-50 for EUR/USD // 30-35*-40 for USD/CAD, 35-38*-45 for USD/JPY, 35-40*-45 for AUD/USD, 40-45*-50 for EUR/JPY //The stoploss value here is key to the success rate of the EA... adjust as needed, but the values given are optimal. // Values marked by (*)asterisk are the best setting I found in the range given to achieve best profit with least Relative Drawdown %. extern int TimePeriod = 30; // Key Timeframe to base buy/sell decisions on!! Can be modified, but 30 min seems to be optimal; extern double PointAdjust = -0.0001; // This factor will help filter price static out on the timeframes for volatile pairs, especially GBP/JPY. // Use 0.0 for USD/JPY, -0.0001 (negative) for USD/CAD, and 0.0001 USD/CHF, .02 for GBP/JPY, 0.0001 for GBP/USD, and -0.0001 for EUR/USD. Yes, that is a negative! // -0.01 EUR/JPY (also negative), 0.0 FOR AUD/USD // Different values will help change entry points/profit levels and drawdowns... but do not adjust in increments larger than .0001 or .01 for JPY pairs. extern int TrailingStopLevel = 80; //For the trailing stop routine... I recommend using a value slightly larger than the StopLossVal, but try variations. //For me, 50 was best on EUR/USD. extern double BrokerMinLotSize = 0.01; //This is the minimum lotsize your broker can accept. If your broker uses 0.1 lots or 1 lot as // minimum, set it to that value. extern int FixedLots = 0; //Set to zero (0) if you want the EA to adjust your lot size automatically each trade //based on the equity in your account. Set to one (1) to trade the same size all the time. extern double MyLotSize = 1; //If Fixed Lots = 1, Use this size for each lot size. Set to the value you prefer. extern int LotValue = 0; //If lots are standard value of 1 = 100000, set to zero (0). If mini-account where lots are 10000, set to one (1). extern int MarginVal = 100; //Set your margin ratio. Default is 100 to 1. //*** IMPORTANT - DO NOT MODIFY ANY OPEN ORDERS OPENED BY THE EA MANUALLY AS THIS WILL LIKELY TO CAUSE PROBLEMS WITH EXECUTION //*** Do not modify anything below **** int OpenOrder; // DO NOT MODIFY! int OrderFlag = 0; // DO NOT MODIFY! datetime TimeofCross; // DO NOT MODIFY! int CrossFlag = 0; // DO NOT MODIFY! int WaitTime = 150; // Modify at your own risk! Waiting Time (in seconds) for placing orders after signal valid. // Keeps transient spikes from causing orders. // Added by rc ================================================== bool pausedStart = EMPTY_VALUE; bool pausedStop = EMPTY_VALUE; // ============================================================== double ILotVal; datetime AlertTimer; //+------------------------------------------------------------------+ //| expert initialization function | //+------------------------------------------------------------------+ int init() { //---- AlertTimer = CurTime(); if(LotValue==0) { ILotVal = 100000 / MarginVal; } else if(LotValue==1) { ILotVal = 10000 / MarginVal; } //---- return(0); } //+------------------------------------------------------------------+ //| expert deinitialization function | //+------------------------------------------------------------------+ int deinit() { //---- //---- return(0); } void CheckToOpenBuy(double LotSize2) // Checks to Open a Buy Position { int x,flag,TicketNum; double EMA18[6]; double EMA28[6]; double WMA5[6]; double WMA8[6]; datetime TimeNow; int MaxBars = 5; if(OrderFlag&gt;0) return; for(x=0;x&lt;MaxBars+1;x++) { EMA18[x]=iMA(NULL,TimePeriod,18,0,MODE_EMA,PRICE_CLOSE,MaxBars-x); EMA28[x]=iMA(NULL,TimePeriod,28,0,MODE_EMA,PRICE_CLOSE,MaxBars-x); WMA5[x]=iMA(NULL,TimePeriod,5,0,MODE_LWMA,PRICE_CLOSE,MaxBars-x); WMA8[x]=iMA(NULL,TimePeriod,8,0,MODE_LWMA,PRICE_CLOSE,MaxBars-x); } flag = 0; if(WMA5[MaxBars]&gt;EMA18[MaxBars]+PointAdjust &amp;&amp; WMA5[MaxBars]&gt;EMA28[MaxBars]+PointAdjust &amp;&amp; WMA8[MaxBars]&gt;EMA18[MaxBars]+PointAdjust &amp;&amp; WMA8[MaxBars]&gt;EMA28[MaxBars]+PointAdjust) { for(x=0;x&lt;MaxBars;x++) //Make sure the wma's have crossed the ema's completely within recent time frame so that flat markets don't cause trades.. { if(WMA5[x]&lt;=EMA18[x] &amp;&amp; WMA5[x]&lt;=EMA28[x] &amp;&amp; WMA8[x]&lt;=EMA18[x] &amp;&amp; WMA8[x]&lt;=EMA28[x]) flag=1; //Yes, they crossed within the last few periods. } if(flag==1) { if(CrossFlag==0) { TimeofCross = CurTime(); CrossFlag = 1; } else { TimeNow = CurTime(); if(TimeNow-TimeofCross&gt;WaitTime) //waiting period on orders... to prevent transient spikes in price from causing orders. { CrossFlag = 0; if(Ask-(TrailingStopLevel*0.25)*Point&lt;EMA28[MaxBars]) // Final check -- if price has jumped, don't order. { TicketNum = OrderSend(Symbol(),OP_BUY,LotSize2,Ask,3,Ask-StopLossVal*Point,0,Symbol(),0,0,Green); //Open the order. if(TicketNum&lt;0) { Print("Error Opening Trade: Error Code = ",GetLastError(),", Lotsize: ",LotSize2); } else { if(OrderSelect(TicketNum,SELECT_BY_TICKET)) { Print("Buy Order Opened at Price: ",OrderOpenPrice()); OpenOrder = TicketNum; OrderFlag = 1; } } } } } } } } void CheckToOpenSell(double LotSize2) //See comments in Open Buy routine for explanations. { int x,flag,TicketNum; double EMA18[6]; double EMA28[6]; double WMA5[6]; double WMA8[6]; datetime TimeNow; int MaxBars = 5; if(OrderFlag&gt;0) return; for(x=0;x&lt;MaxBars+1;x++) { EMA18[x]=iMA(NULL,TimePeriod,18,0,MODE_EMA,PRICE_CLOSE,MaxBars-x); EMA28[x]=iMA(NULL,TimePeriod,28,0,MODE_EMA,PRICE_CLOSE,MaxBars-x); WMA5[x]=iMA(NULL,TimePeriod,5,0,MODE_LWMA,PRICE_CLOSE,MaxBars-x); WMA8[x]=iMA(NULL,TimePeriod,8,0,MODE_LWMA,PRICE_CLOSE,MaxBars-x); } flag = 0; if(WMA5[MaxBars]&lt;EMA18[MaxBars]-PointAdjust &amp;&amp; WMA5[MaxBars]&lt;EMA28[MaxBars]-PointAdjust &amp;&amp; WMA8[MaxBars]&lt;EMA18[MaxBars]-PointAdjust &amp;&amp; WMA8[MaxBars]&lt;EMA28[MaxBars]-PointAdjust) { for(x=0;x&lt;MaxBars;x++) //Check to see if the wma's have crossed the ema's recently for an entry point. { if(WMA5[x]&gt;=EMA18[x] &amp;&amp; WMA5[x]&gt;=EMA28[x] &amp;&amp; WMA8[x]&gt;=EMA18[x] &amp;&amp; WMA8[x]&gt;=EMA28[x]) flag=1; } if(flag==1) { if(CrossFlag==0) { TimeofCross = CurTime(); CrossFlag = 1; } else { TimeNow = CurTime(); if(TimeNow-TimeofCross&gt;WaitTime) //Waiting period on orders... to prevent transient spikes in price from causing orders. { CrossFlag = 0; if(Bid+(TrailingStopLevel*0.25)*Point&gt;EMA28[MaxBars]) // Final check -- if price has jumped, don't order. { TicketNum = OrderSend(Symbol(),OP_SELL,LotSize2,Bid,3,Bid+StopLossVal*Point,0,Symbol(),0,0,Green); //Open the order. if(TicketNum&lt;0) { Print("Error Opening Trade: Error Code = ",GetLastError(),", Lotsize: ",LotSize2); } else { if(OrderSelect(TicketNum,SELECT_BY_TICKET)) { Print("Buy Order Opened at Price: ",OrderOpenPrice()); OpenOrder = TicketNum; OrderFlag = 2; } } } } } } } } void CheckToOpen() //Procedure to start the process to see if a trade can be opened. { double LotSize; double R1,R2,R3; double x; int flag; if(FixedLots==0) { LotSize = (LotPercentage/100) * AccountEquity(); LotSize = LotSize / ILotVal; R1 = MathCeil(LotSize); // Got to now round the lot size so that error 131 does not occur on some brokers. R2 = MathFloor(LotSize); for(x=R2,flag=0;x&lt;=R1 &amp;&amp; flag==0;x+=BrokerMinLotSize) { if(x&gt;LotSize) { LotSize = x-BrokerMinLotSize; // Round lot size to the smaller lot size value. flag = 1; } } } else { if(FixedLots==1) LotSize = MyLotSize; } if(LotSize&gt;100) //Check to see if lots have exceeded 100... good when account hits high enough equity to max out trade size. LotSize = 100; if(!OrderFlag) //If we haven't got an open order, then proceed. { if(AccountEquity()&gt;MinVal) //if equity is lower than the amount specified by user, don't trade. { if(LotSize*ILotVal&lt;AccountFreeMargin()) //do we have enough margin to open our trade? Should always be true unless errors. { CheckToOpenBuy(LotSize); CheckToOpenSell(LotSize); } else { Print("Not Enough Free Margin: ",LotSize,", ",AccountFreeMargin()); } } else { Print("Equity Value Lower than Minimum Account Value Setting"); } } } void CheckToCloseBuy() //Check to close any Long trades. { int TicketNum; datetime TimeOpened,Now; TicketNum = OpenOrder; //Check to see if WMA 5 has crossed EMA 28 for exit signal. //Original if(iMA(NULL,TimePeriod,5,0,MODE_LWMA,PRICE_CLOSE,0)&lt;iMA(NULL,TimePeriod,28,0,MODE_EMA,PRICE_CLOSE,0)) //Added by rc ========================================== if(iMA(NULL,TimePeriod,5,0,MODE_LWMA,PRICE_CLOSE,0)&lt;iMA(NULL,TimePeriod,8,0,MODE_LWMA,PRICE_CLOSE,0)) // =================================================== { if(OrderSelect(TicketNum,SELECT_BY_TICKET)) { TimeOpened = OrderOpenTime(); Now = CurTime(); if(Now-TimeOpened &gt; TimePeriod*60*barsDistance) //if position was opened within the last 2 periods, don't close. { if(Bid&gt;OrderOpenPrice() || !closeOnlyOnProfit) // Important to prevent being whipsawed all over the place, stoploss will close losing positions. { if(OrderClose(TicketNum,OrderLots(),Bid,3,Red)) { Print("Order#",TicketNum," Closed at ",OrderClosePrice()); OrderFlag = 0; } } } } else { Print("Error Closing Ticket#",TicketNum); OrderFlag = 0; } } } void CheckToCloseSell() //Check to close short positions. See CloseBuy procedure for details. { int TicketNum; datetime TimeOpened,Now; TicketNum = OpenOrder; //Original if(iMA(NULL,TimePeriod,5,0,MODE_LWMA,PRICE_CLOSE,0)&gt;iMA(NULL,TimePeriod,28,0,MODE_EMA,PRICE_CLOSE,0)) //Following Added by rc ========================================== if(iMA(NULL,TimePeriod,5,0,MODE_LWMA,PRICE_CLOSE,0)&gt;iMA(NULL,TimePeriod,8,0,MODE_LWMA,PRICE_CLOSE,0)) //========================================== { if(OrderSelect(TicketNum,SELECT_BY_TICKET)) { TimeOpened = OrderOpenTime(); Now = CurTime(); if(Now-TimeOpened &gt; TimePeriod*60*barsDistance) { if(Ask&lt;OrderOpenPrice() || !closeOnlyOnProfit) // Important to prevent being whipsawed all over the place, stoploss will close losing positions. { if(OrderClose(TicketNum,OrderLots(),Ask,3,Red)) { Print("Order#",TicketNum," Closed at ",OrderClosePrice()); OrderFlag = 0; } } } } else { Print("Error Closing Ticket#",TicketNum); OrderFlag = 0; } } } void CheckForStops() // This checks to see if the open order was stopped out. Needed to reset the open order flag. { datetime X; if(OrderFlag&gt;0) // Do/Did we have an open order? { if(OrderSelect(OpenOrder,SELECT_BY_TICKET)) { X = OrderCloseTime(); if(X&gt;0) //Is there a close time? if so, order was stopped out. { OrderFlag = 0; // reset open order flag. Allows next order to be placed. Print("Order# ",OpenOrder," StopLoss Close at price: ",OrderClosePrice()); } } } } void CheckToClose() //Calls the procedures to close positions if necessary. { if(OrderFlag==1) { CheckToCloseBuy(); } if(OrderFlag==2) { CheckToCloseSell(); } } void CheckForModify() // Adjust Stoploss upwards as profit increases. { if(OrderFlag==0) return; if(OrderFlag==1) //modify long position { if(OrderSelect(OpenOrder,SELECT_BY_TICKET)) { if(OrderStopLoss()&lt;OrderOpenPrice()) { if(Bid&gt;OrderOpenPrice()+TrailingStopLevel*Point) { //modify order for new stop loss. Set a bogus T/P level. Needed for the Ordermodify call. if(OrderModify(OpenOrder,OrderOpenPrice(),OrderOpenPrice()+10*Point,OrderOpenPrice()+700*Point,0,Yellow)==false) { Print("Error Modifying Order! Code: ",GetLastError()); } } } else { if(Bid&gt;(OrderStopLoss()-10*Point)+(TrailingStopLevel*Point*2)) { if(OrderModify(OpenOrder,OrderOpenPrice(),OrderStopLoss()+(TrailingStopLevel)*Point,OrderStopLoss()+700*Point,0,Yellow)==false) { Print("Error Modifying Order! Code: ",GetLastError()); } } } } } if(OrderFlag==2) // modify short position { if(OrderSelect(OpenOrder,SELECT_BY_TICKET)) { if(OrderStopLoss()&gt;OrderOpenPrice()) { if(Bid&lt;OrderOpenPrice()-(TrailingStopLevel*Point)) { //modify order for new stop loss. Set a bogus T/P level. Needed for the Ordermodify call. if(OrderModify(OpenOrder,OrderOpenPrice(),OrderOpenPrice()-(10*Point),OrderOpenPrice()-700*Point,0,Yellow)==false) { Print("Error Modifying Order! Code: ",GetLastError()); } } } else { if(Bid&lt;(OrderStopLoss()+10*Point)-(TrailingStopLevel*Point*2)) { if(OrderModify(OpenOrder,OrderOpenPrice(),OrderStopLoss()-(TrailingStopLevel)*Point,OrderStopLoss()-700*Point,0,Yellow)==false) { Print("Error Modifying Order! Code: ",GetLastError()); } } } } } } void CheckForOpenOrders() { //This routine becomes necessary in the event of power failures, program interruption, or chart change. int x,TotalOrders; TotalOrders = OrdersTotal(); for(x=0;x&lt;TotalOrders;x++) { if (OrderSelect(x, SELECT_BY_POS, MODE_TRADES)) { if(StringFind(OrderComment(),Symbol(),0)&gt;=0) { if(OrderType()==OP_BUY) OrderFlag = 1; else OrderFlag = 2; OpenOrder = OrderTicket(); break; } } } } void log(string s) { int h = FileOpen("Flyer.log", FILE_BIN|FILE_WRITE|FILE_READ); if (h &gt; 0) { FileSeek(h, 0, SEEK_END); string wrap = ""; if (FileSize(h) &gt; 0) wrap = "\n"; FileWriteString(h, wrap + s, StringLen(wrap + s)); FileClose(h); } } void setPause() { int TWO_DAYS = 2 * 24 * 60 * 60; datetime time = CurTime() + TWO_DAYS; int dayOfTheNonth = TimeDay(time); int dayOfTheWeek = TimeDayOfWeek(time); if (dayOfTheWeek == 5 &amp;&amp; dayOfTheNonth &lt;= 7) { pausedStart = CurTime(); pausedStop = time; } } // Added by rc ================================================================= bool paused(){ if (pausedStart == EMPTY_VALUE || pausedStop == EMPTY_VALUE) return (false); return (CurTime() &gt;= pausedStart &amp;&amp; CurTime() &lt;= pausedStop); } bool isNewsDay(){ if (pausedStart == EMPTY_VALUE || pausedStop == EMPTY_VALUE) return (false); return (TimeDay(CurTime()) == TimeDay(pausedStop)); } void closeAll(){ int total = OrdersTotal(); for (int i = 0; i &lt; total; i++) { if (OrderSelect(i, SELECT_BY_POS) &amp;&amp; OrderSymbol() == Symbol()) { if (OrderType() == OP_BUY) OrderClose(OrderTicket(), OrderLots(), Bid, 3); if (OrderType() == OP_BUYSTOP) OrderDelete(OrderTicket()); if (OrderType() == OP_SELL) OrderClose(OrderTicket(), OrderLots(), Ask, 3); if (OrderType() == OP_SELLSTOP) OrderDelete(OrderTicket()); } } OrderFlag = 0; } //============================================================================== //+------------------------------------------------------------------+ //| expert start function | //+------------------------------------------------------------------+ int start() { //---- HideTestIndicators(false); // Added by rc ================================================================= setPause(); if (isNewsDay()) closeAll(); if (!paused()) { // ============================================================================= CheckForOpenOrders(); CheckToOpen(); CheckToClose(); CheckForModify(); CheckForStops(); if(CurTime()&gt;=AlertTimer+300) { AlertTimer += 300; Print("Account Equity = ",AccountEquity()," Bid = ",Bid," Ask = ",Ask," OrderStat = ",OrderFlag); } if(OrderFlag&gt;0) Comment("1 Open Order, Equity = ",AccountEquity()); else Comment("No Open Orders! Waiting for Entry."); } //---- return(0); } //+------------------------------------------------------------------+
+
+--- 帖子 #50 ---
+Reuvenny, See my discussion in the new thread, "Flyer! EA - New Thread". I've already posted an alternative version that solves the late exit problem, but at the expense of overall longterm profits. Also, in my opinion the 5 and 8 WMA's are too volatile together to give accurate exit points. You can have multiple points where the 2 touch or cross very briefly on a run thereby giving false exit signals. Version B of mine exits using a new MA, the SMA 10. When the WMA 8 crosses the SMA 10, it will exit. This catches most of the move without the problem of losing profit to a bounce and when they do finally cross, the trend is over with...temporarily at least. But anyway, see my discussion. If you can post some strategy tester reports showing your results, though, I would be interested to see what happens. Thanks for your input. GirlFlyer
+
+--- 帖子 #51 ---
+thx GirlFLyer. but could you please post a new version of the EA that does not give error #131. Thx a million
+
+--- 帖子 #52 ---
+I guess you did not read theis entire thread, she had created another thread since who likes to read long threads.
+
+
+===== 附件下载链接 =====
+
+未找到附件

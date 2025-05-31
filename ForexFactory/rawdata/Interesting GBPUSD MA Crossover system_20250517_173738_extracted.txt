@@ -1,0 +1,543 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hey guys, this is part of a system I've been working on, I thought I'd share it so everyone could point out faults and help me find make it better. GBP/USD - 1 Hour charts. 48 EMA 72 EMA Buy or Sell when candle opens below/above 48 ema and closes above/below 72 ema(so it crosses through the channel in one candle). Keep trade open till opposite happens, ie, it crosses channel in other direction. You get 1-2 trades a week, with the trades giving you between 30-200+ pips. I'm working on a stop that will place stop at break even after a certain number of pips, and/or only allow stop to be negative so many pips and hours after opening trade. there are a few other additions I'm considering but I want to hear other people's ideas first. Also it's okay if it takes maybe 1.5 candles to pass through the channel, or if one of the candles starts right on the other side of the 48 ema inside the channel.
+
+--- 帖子 #2 ---
+hmmm....people don't seem to be biting... The strategy gives a 1000% to 1500% ROR since the beginning of October, with drawdowns between 15%-25%. I'm working on keeping the drawdowns lower than 15% with a spike detector and stops. With further testing I believe I can get those ROR's any four months. A rule of thumb I follow is to keep the max drawdown below the % of account I risk per trade, which is determined by the kelly formula.
+
+--- 帖子 #3 ---
+We all read a lot of claims from folks. The bottom line is, show us your P and L. Post it up and lets see the real numbers and the real trades.
+
+--- 帖子 #4 ---
+okay. It would be backtesting though with an EA, not actual trading but I hope it's good enough.
+
+--- 帖子 #5 ---
+How did you discover this system? Why those particular EMA's? This looks very similar to just plotting a 21SMA and taking trades when prices closes above or below. A simple trend following system but things can get ugly when the chop starts.
+
+--- 帖子 #6 ---
+through many many months of observation and testing
+
+--- 帖子 #7 ---
+Can you please post a chart of your system Thanks
+
+--- 帖子 #8 ---
+Or how about posting your backtesting results?
+
+--- 帖子 #9 ---
+I don't know if I got it from you serveral months ago, but i've been using a 45EMA instead of a 48, and it's a pretty solid line. Good resistance and support on some charts. When it breaks a certain amount, I buy or sell the next candle. Sometimes it works, sometimes it doesn't. It seems to work more than it doesn't, but the percentage isn't great yet. I'm working on what time of day is best, how big the previous candle should be or something else to give a better clue for success. You added a target for close. I don't know how much different 45 is over 48, but there definately seems like there's something to it. I need to backcheck all the penetrations over the last month one of these days.
+
+--- 帖子 #10 ---
+Backtesting is fine. As long as everything is set up as if you were making real trades with real money. For me, the P and L is everything, it tells the real story.
+
+--- 帖子 #11 ---
+open the xml with excel. If there's an easier way to post this stuff let me know.
+
+--- 帖子 #12 ---
+Are you using any RSI setting at all? RSI 21 or RSI 14 ect) kevin
+
+--- 帖子 #13 ---
+no I don't believe in rsi, stochastics....they seem too arbitrary. They indicate when a pair is over/undersold, but since being over/undersold doesn't mean they may be about to change direction. And even if I did, I'd never use their default values.
+
+--- 帖子 #14 ---
+It sounds like it is worth a look, I will study this for a while and see how it does. kevin
+
+--- 帖子 #15 ---
+worth observing ... to see if it might rake in the pips. Is there an EA that you can share?
+
+--- 帖子 #16 ---
+Here is the perfect EA for that.
+
+--- 帖子 #17 ---
+aicccia, can you use this thread to post your entries from this week? from there we can evaluate where to improve on.
+
+--- 帖子 #18 ---
+maybe jamdown....GBP/USD is a more of a trending pair, and this is a trending system so I'm more partial to leaving the whole trade open till the very end. I was thinking of using my original stop method that I developed for an ealier system. http://www.forexfactory.com/showpost...5&amp;postcount=81
+
+--- 帖子 #19 ---
+sure...I only expect 1-3 trades a week but I'll list them. The lastest entry would have been on feb 8th, 3:00 am ET, @ 1.9669.
+
+--- 帖子 #20 ---
+Good stuff. Thanks for sharing. Will be interested to see your weekly trades.
+
+--- 帖子 #21 ---
+Why not try wma 6-12 channel...
+
+--- 帖子 #22 ---
+why even bother with the 72? make your entry on the cross of the 48.....
+
+--- 帖子 #23 ---
+well what would I do on the 16th of january then?
+
+--- 帖子 #24 ---
+here is a EA that works with this strategy as the baseline strategy, but it includes a sophisticated spike detector and a stop loss min-system plus many other entry conditions to make it more precise. the EA as a whole is very complicated as a whole as you can see if you take a look at it but it's very logical in the sense of price action once you work it all out. It has 12 optimized parameters, and the whole EA should be re-optimized every weekend over the last 4 months. I'll post the best parameters here every Sunday. With the default parameters, which are the current ones for this week, with 10% invested each trade, it turns 200 into around 4600, with just a 7.9% max drawdown. You may think this must be curve fitting, but I've done that before and this is nothing like it. When you curve fit, you change the parameters so you get the highest balance, but the parameters don't make sense from a logical, price action point of view. These parameters make sense, which you'll see if you can figure out the EA, and these are not the only parameters that give me good results. When genetically optimizing, out of the 10,000 possibilities tried, 1/4 to 1/3 gave me over a 2000 profit from 200, and around 1/10, gave me a balance of over 3000. So even if these parameters were the best for the last 4 months, but not for this next week, they'll still work out very well. I've posted a few systems before that therotically gave me very high profits, but this is the first time I've turned one into an EA. I also am not done with this EA and I'm improving it daily. The one big fault I have with this systems reliability is that all of this is based on just 16 trades. But they're long, logical trending trades so I think it's okay. And I almost forgot, this EA and system use a custom indicator I call OSAMA that is just an Osma indicator turned into two ma lines, averaged out to the period you choose, so you can see if the general trend of the osma is up or down. It's an excellent indicator for momentum and that's what I use it for in my EA.
+
+--- 帖子 #25 ---
+People will only pay attention when they see that %1000 - %1500 ROR. How would you handle when news time causes the price to move up/down like crazy?
+
+--- 帖子 #26 ---
+I know...the spike detector tells the rest of the EA when there are large candles in certain spots, like when the ma's are crossing, and the EA doens't open or close trades.
+
+--- 帖子 #27 ---
+200 to 4600 is over 2000% ROR, so it's still a high performing system.
+
+--- 帖子 #28 ---
+How to set up 6-12 wma channel on metatrader? Is this the right way setting on first wma(pls see the pic)?
+
+--- 帖子 #29 ---
+yes but I would apply it to just close, but it probably doens't matter that much.
+
+--- 帖子 #30 ---
+also the EA only looks at the close of each candle, so it doesn't care what the candle does between it's open and close.
+
+--- 帖子 #31 ---
+Close Trade #1 Febuary 14th, 3:00 AM ET @ 1.9512 P/L= +156 pips
+
+--- 帖子 #32 ---
+Open Trade #2 Febuary 14th, 3:00 AM ET BUY @1.9512
+
+--- 帖子 #33 ---
+Does this go on a H1 chart? And to see visually what it's doing, what needs to be placed on a chart -- the MAs from your first post? Anything else? Can you post a template? Thx.
+
+--- 帖子 #34 ---
+Sure, this is all on 1-Hour charts, GBP-USD. 1)Three MA lines. a)Period 3, EMA b)Period fastma(which right now is 44) EMA c)Period slowma(which right now is 79) EMA 2)Three Osama Indictor windows. It's just the same indicator with each window having different settings. a)First window- Mafast:4(this means this ma line averages the last 4 osma bars) Maslow:6(this means this ma line averages the last 6 osma bars) Pandaslow:Currency Momentum(which right now is 43) Pandafast:1 Pandasignal:Currency Momentum(which right now is 43) b)Second window- Mafast:4(this means this ma line averages the last 4 osma bars) Maslow:6(this means this ma line averages the last 6 osma bars) Pandaslow:trend momentum(which right now is 28) Pandafast:1 Pandasignal:trend momentum(which right now is 28) Mafast, Maslow and Pandafast will always always be the same for the first two osama indicators. The only things that change for these two windows are Pandaslow and Pandasignal, which will always be the same number. Then this is the third, final Osama window. c)third window- Mafast:6(this means this ma line averages the last 6 osma bars) Maslow:8(this means this ma line averages the last 8 osma bars) Pandaslow:slowma*3(which right now is 79, so your value would be 237) Pandafast:currency momentum*3(which right now is 43 so your value would be 129) Pandasignal:currency momentum*3(which right now is 43 so your value would be 129) And again for the third window, the Mafast and Maslow values will always always be the same, only the Pandaslow, Pandafast, and Pandasignal lines will change week to week.
+
+--- 帖子 #35 ---
+Here is an example of what it would look like.
+
+--- 帖子 #36 ---
+Yes, mine looks same -- except for that blue line across the top. is that a trendline you drew or what? And how are you reading the OSAMAs? I can see where you took the last trade, long at 1.9512 - the candle opened right above the MA there. Did the EA open the trade okay?
+
+--- 帖子 #37 ---
+and what do you think about tomorrow???
+
+--- 帖子 #38 ---
+yes the blue line across is a daily trend line. And the EA opened that trade, not me. lol, so yes it worked just fine this time. What do you mean by how am I reading the osamas?
+
+--- 帖子 #39 ---
+well the osama's are already showing the upward momentum drying up, and since we're right up against a strong daily trend line acting as resistance, and we have some GBP negative news coming out in 12 hours, I think we're headed down. But I have no idea how far.
+
+--- 帖子 #40 ---
+Hi aicccia, thanks for sharing this EA, I will forward test on demo and will let you know results. I have a problem with the EA, it gives me a sound alert everytime the GBPUSD moves a pip! It is definately the EA since the sound alerts stop if I take it off. Any thoughts?
+
+--- 帖子 #41 ---
+I mean are you just looking for red above blue for longs and vice versa? Or are you reading anything into the angle, etc?
+
+--- 帖子 #42 ---
+Backtesting this EA gives me problems for some reason. On a backtest going back to January of last year, it only shows one trade, the first one of the year. It only shows one trade no matter what period I start with.
+
+--- 帖子 #43 ---
+no, it nowhere near that simple. It's complicated but if it follow this on the charts it should make a little sense. To open a buy for a new trend: 1)the open of the 2nd to last candle must have been below fasst, which is right now 44. 2)the close of the last candle must have been above sloww, which right now is 79 3)there can be no spikes detected in the last 3 candles. 4)fasst(44) must be below sloww(79) 5)currency momentum(1,44) must be above 0 6)the currency momentum(1,44) three candles ago must have been below 0 OR the slow trend momentum(129,237) as of now must be greater then the slow trend momentum(129,237) three candles ago 7)the absolute difference between the ASK and sloww(79) must be less than 2* the difference between slow(79) and fastt(44) OR the absolute difference between the ASK and sloww(79) must be less than maxpipsfromEMA(26 as of now) 8)the absolute value of the slow trend momentum(129,237) must be greater than trending(14 as of now) all 8 of these conditions must be met for a BUY for a new trend. for a sell, they're just reversed.
+
+--- 帖子 #44 ---
+it only works going back 4 months at a time. If you want to test it for the first four months of last year, you'd have to first optimize all the settings for the mood and characteristics of the market back then. And the system is just designed for the 1-hour period. The market changes too much every few months in speed, and size of waves, choppyness, that you can't have one set of settings that will give you good results for over 6-8 months. After 6-8 months if your system is strictly mechanical, your profts will go down and your drawdowns will go up. I've found that the last 3-4 months is the optimal period to optimize your EA on. If you doubt what I say, you can optimize this EA for the last 4 months preciding any time you wish(it will take about 24 hours though, I'd recommend turning the stop setting off and just optimizing the general and spike settings first, and the stop settings after the others have been optimized) and you'll find once optimized it does very nicely for that period of time.
+
+--- 帖子 #45 ---
+try disabling the alerts on the EA pop-up window...besides that I have no idea, it's only supposed to alert you once when it opens or closes a trade, and thats all it's done for me. the EA is set up for a mini account with 1-200 leverage...so maybe it's trying to place a trade but can't because your account isn't a mini or 1-200 leverage. But I doubt thats the problem.
+
+--- 帖子 #46 ---
+So what is most important here? For instance, on a long, you say to look for a candle that opens below the 48 and closes above the 72, correct? What happens if a candle opens above the 48 but still closes above the 72? Is that a non trade? Looking at your long entry today at 9512, the candle opened about 1 pip higher (at least on my eSignal charts) than the 48 ema but you still entered the trade. Could you just reduce this to using the 72 ema for similar/same results?
+
+--- 帖子 #47 ---
+I had the 'one trade only' problem also. I started December 1st. and ran up to last week. The journal showed no errors. It took a quick trade for a profit and that was it.
+
+--- 帖子 #48 ---
+No for that exact reason it looks two candles back, so basically if the gap is crossed in two, not just one candle, then so far it's a trade.
+
+--- 帖子 #49 ---
+December 1st 2006? I don't know what to tell you except make sure you have 90% modeling quality for GBP-USD, make sure it's one hour period, and that these are the values you have for the parameters. extern string General_Settings = "---------- General Settings"; extern int fastma=44; extern int slowma=79; extern int currency_momentum=43; extern int trend_momentum=28; extern int maxpipfromEMA=26; extern int trending=14; extern double risk_percent=0.10; extern string Stop_Settings = "---------- Stop Settings"; extern bool use_stop=true; extern double buy_maxhoursNeg=53; extern double buy_maxpipsNeg=68; extern double sell_maxhoursNeg=68; extern double sell_maxpipsNeg=87; extern string Spike_Settings = "---------- Spike Settings"; extern bool use_spike=true; extern int SpikeHeight=71;
+
+--- 帖子 #50 ---
+here is the most recent strategy tester report for the most recent EA which you guys have. For some reason I accidentally gave you the report for an older version of the EA. The main difference is the max drawdown has been cut from around 21% to 8%.
+
+--- 帖子 #51 ---
+Well I found out 2 things at least on my platforms. It backtests on an IBFX mini account and gets several trades in January of 07. On MetaQuotes and Alpari it only takes 1 trade. Also Risk_Percent has to be set at .01 on a full size account. With a 10,000 balance and risk set at .1 it tries to open 20 lots.
+
+--- 帖子 #52 ---
+yes....it is set up for a mino account with 1 to 200 leverage...I'll add options to change all that tonight. sorry.
+
+--- 帖子 #53 ---
+I understand that it's optimized for the last few months. That isn't what I was referring to. Even if I start the backtest starting in January of this year, it shows one trade on January 11 to the 16th and that's it. If I started the backtest in December of 06, it only shows one trade on December 5th that's closed on the 11th. Obviously, more trades were generated than that.
+
+--- 帖子 #54 ---
+By just eyeballing the chart, I believe one period of time where this system might have suffered large drawdowns was August of last year. Can someone optimize for April through July and use those results to backtest August? I would do it myself, but the backtester isn't working correctly. Trying to figure out what's wrong with it now.
+
+--- 帖子 #55 ---
+it's set up for a mini account with 1 to 200 leverage and I think thats causing the problem, if your account is different
+
+--- 帖子 #56 ---
+Nicholas could you please tell me what indicators need to be set up on the charts with the moneymaker01 EA to get it to work properly? I was got one of your other posts on another thread and I had the idea that all that was need was the EA activated and the Osama indicator on a 30 min chart with candlesticks. Is this right? Thanks. Appreciate the effort and the thread.
+
+--- 帖子 #57 ---
+How do you determine parameters week to week?
+
+--- 帖子 #58 ---
+by genetically optimizing them with metatrader but I'm wanting to find a way for the EA to find all the values on it's own, based off if the pair is trending or randing.
+
+--- 帖子 #59 ---
+this system works great when GBP/USD is trending on a daily period...but if it starts ranging bad, like within 100 pips for a few days, and then down 200 and then range for another 100 pips for a few days, and if you do this for a month more like from February 2006 to july 2006, this system has problems. I was thinking ranging is just trending on a smaller scale, but during that period the price was doing some pretty crazy things. For example I found a 4 day period during april 2006 where the GBP/USD had a range of around 40 pips. And the candles were all much smaller than they are now. It was like a completely different currency. Nowadays we think a range of 100 is tight. So I'm trying to think of a way to make money out of price action like that, so I can have that mini-system going on in the background always making some change, while the main trending part makes the real money when the GBP/USD trends.
+
+--- 帖子 #60 ---
+So you reoptimize every week using data from the past 4 months, or you reoptimize every 4 months?
+
+--- 帖子 #61 ---
+the idea right now is optimize every week over the past 4 months...but I'm going to try to make it optimize itself continuously. Or not so much optimize, but find correlations, such as: take the average difference between open and close over the last x periods, multiply that by y and you get z, and z becomes the period for one of the ma lines. And have formulas like that for all the parameters. And it will probably be much more complicated by that.
+
+--- 帖子 #62 ---
+I like the idea of the spike detector i'll give a try on a test account
+
+--- 帖子 #63 ---
+Thanks for sharing aicccia! I'm testing your system now. For the moment I have still no trades (since 1st dec. and I'm in january), we will see. Do you already try to backtest it since 1st dec? If yes when do you have trades? PS: Why this thread is not in "trading system" instead of "Forex discussion" ?
+
+--- 帖子 #64 ---
+Since 1st of december until now I had only one trade and in the journal I see that: 2007.02.17 11:05:20 2006.12.11 20:00 MoneyMaker01 GBPUSD,H1: close #5 sell 1.00 GBPUSD at 1.9533 at price 1.9574 2007.02.17 11:04:59 2006.12.11 00:00 MoneyMaker01 GBPUSD,H1: zero divide 2007.02.17 11:04:12 2006.12.07 00:00 MoneyMaker01 GBPUSD,H1: zero divide 2007.02.17 11:03:40 2006.12.05 17:00 MoneyMaker01 GBPUSD,H1: open #1 sell 1.00 GBPUSD at 1.9709 ok The problem comes may be from the zero divide? Any coments?
+
+--- 帖子 #65 ---
+The EA doesn't seem to reopen a trade after the first one (in backtest). So each time a trade is closed I stoped the EA and restart it from the previous closing date. Results are good for the moment: 3 winning trades with an average result of 150 pips. Could you share how do you determine all the entry parameters so we could test it on other currency pairs? (I would like to test it on GBP/JPY) Many thanks!
+
+--- 帖子 #66 ---
+could you tell me why it didn't open a trade there (see attach.)?
+
+--- 帖子 #67 ---
+because of the spike settings. but I've adjusted some other things so the next version would have taken that trade.
+
+--- 帖子 #68 ---
+set your beginning balance to less then 500. I set mine to 200.
+
+--- 帖子 #69 ---
+This is the next version. I've added: 1)An equity checker that will close the trade if you lose a certain percentage of the max equity. For example if things go well and you're up 200 pips, and then something happens and it drops to 130 pips and stays there for a few candles, and if you had your max equity to lose set at 75%, then the trade would be close. Keep in mind it measures all of the pip movements off a 3 EMA, so to keep spikes from messing this up. 2)Now the EA looks back up to 6 candles to see if there was a jump across the two MA lines. thats it for now, but there might be a new one coming out tomorrow night. keep in mind this EA does not get every move, it does not even get every big move, but when it does make a trade, there are several conditions saying "yes, yes, open now" so it's very unsual for things to go wrong in a big way. It is sensitive to ranging markets and it's possible to go 4-5 days without a trade if ranging is what it is detecting. The bottom line is the EA opens trades only in perfect conditions. The EA was developed with the GBP/USD in min so I haven't tried it at all on other charts but if you want to optimize it for other currencies be my guest. Make sure you check "genetic algorithm", have 90% quality data, and test at least 3-4 months. Optimize the parameters in two sets. The first set being: start stop fastma 6 92 slowma 6 144 currency_momentum 6 92 trend_momentum 6 144 maxpipsfromEMA 1 50 trending 1 50 SpikeHeight 25 150 and the second set: buy_maxhoursNeg 3 60 buy_maxpipsNeg 20 100 sell_maxhoursNeg 3 60 sell_maxpipsNeg 20 100 startcountpips 30 150 startcounthours 3 48 maxEquitytoLose .2 .8 when optimizing the first set, disable the stop settings and save equity settings but setting their values to false. For the pairs that move very fast such as GBP/JPY, you might want to increase the numbers to stop optimizing to.
+
+--- 帖子 #70 ---
+Close Trade #2 Febuary 15th, 11:00 AM @ 1.9540 P/L= +28 pips I'm just going to post the trades once a night instead of trying to post them right as they happen since they often happen very early in the morning or late at night. That last trade fell pretty abruptly, I saw it coming just from the trendlines but from the systems point of view, it wasn't close to be closed. So with the first version, I got just 28 pips out of it. But with the second version's equity saver, I would have gotten out at 1.9575 and earned 35 more pips, for a total of 63 pips. Though that was only about half of the wave, it was still a nice easy 63 pips in 24 hours.
+
+--- 帖子 #71 ---
+Hi Aicccia, thanks for very promising EA. It`s really interesting system. Here are my results for 14.02 with 0.2 lots on backtest (MM2). And with 0.1 from jan. 2007.
+
+--- 帖子 #72 ---
+idk...I don't like it. There should be three trades. I'll have to add some more things.
+
+--- 帖子 #73 ---
+I have been forward testing the first EA posted with the input recommended, its not so good - keeps losing. It seems to open one trade after a losing trade gets stopped out.
+
+--- 帖子 #74 ---
+make sure the equity save is set to false. I don't have the best values for it yet.
+
+--- 帖子 #75 ---
+thx a lot for all your responses. I'll try this as soon as I can
+
+--- 帖子 #76 ---
+hello, i've downloaded the EA, and tried to backtest it for Jan 07 on GBP/USD 1 HR (and I have not changed any settings) but there are no trades ?? Could you please advise ? Anthony
+
+--- 帖子 #77 ---
+Hi Body Please, why this is happened? 2007.02.19 08:45:59 2004.07.01 15:28 MoneyMaker_02 GBPUSD,H1: invalid price 1.81654997 for OrderSend function I'm use MoneyMaker_02 with all configurations. Thanks.
+
+--- 帖子 #78 ---
+Try with risk percent at 0.001 (I think it's because the EA is developped for mini account)
+
+--- 帖子 #79 ---
+I have still the problem that the EA doesn't want to reopen a trade after a losing one. On the picture I think that I would have a Sell after the first one (losing). Or maybe I missed something in the rules?
+
+--- 帖子 #80 ---
+We are go for breakout! Open Trade #3 Febuary 19th, 1:00 PM ET BUY @1.9527
+
+--- 帖子 #81 ---
+According the strategy that I've got in my head, you're right it should have opened a trade there. But it's very hard to get an EA to think like us and see when it should and shouldn't open a trade. A chart is like a crime scene and if you look hard enough you can always find clues to pointing to what's going to happen next. We as people analyze many different parameters without even knowing it when we glance at charts, like the the steepness of all the ma lines, the steepness of the osama lines, where all the lines are crossing 0, candlestick price action, trend lines that may be draw on on the chart, knowledge of news coming out, ect. But it's very hard to step back and recognize what exactly is telling you the trade should have been made at a certain place. It's never just one or two variables, it's always at least 4 and usually more. I know that specific time period well because that missed trade and then that point where it should have taken a trade, but didn't, has been bugging me too. It isn't taking the trade the second time because of some parameter isn't met that normally is required for a good trade but wasn't here. I'm still trying to figure out what to change so the EA will see the charts as I do and realize it should be placing a trade there.
+
+--- 帖子 #82 ---
+it better be a breakout.... whoever is selling don't make me come find you.
+
+--- 帖子 #83 ---
+breakouts can happen this late in the day right?
+
+--- 帖子 #84 ---
+I personally have already closed that out. But we can pretend I didn't and see where it goes. Looks like its going down. lol. This Sucks!
+
+--- 帖子 #85 ---
+Aicccia, I have bookmarked your thread. For those that are not believers of the starter of the thread or that MA systems work, this is from a contest that Aicccia is in. aicccia 2969,969,804-5.820.30 57.09 The 57 is for % gain on the account in just about 3 weeks. Dude, you are rocking! I know MM isnt the same on the demo, but still. When I get a free day I will certainly read through it. My single % returns monthly aren't worth the time.
+
+--- 帖子 #86 ---
+hmm 57% most have been from a few days ago. In the contest the trades are more discretionary while I'm just relying on the system for assurance that I'm trading in the right direction. Like I said in the other post, it's many things, not just one like MAs, that are influencing my decisions. For example, I closed out my last trade just a few minutes after I opened it because it was clear the breakout wasn't going to happen. But there is some GBP favorable news coming out in the next 24 hours and since the price seems to be slowly wanderer acroingss the trendline instead of shooting up it, I'll probably buy again before then. Momentum is still up, at least right now it is. My ROR in the contest as of today should be around 92%. But that's with putting the whole account behind each trade, which I don't do with my real account. But thanks for the complement.
+
+--- 帖子 #87 ---
+Why are there two set of settings for each variable? Am I suppose to have two charts open with group 1 settings, and the other with group 2. ET
+
+--- 帖子 #88 ---
+no no those two sets are just if you want to optimize the EA on your own, on maybe another currency. The numbers are the two numbers you would let the optimizer optimize in between. For example, the optimizer would look for the best value for fastma between 6 and 92.
+
+--- 帖子 #89 ---
+Here's the next EA version. 1)Added support for standard accounts and leverages of all shapes and sizes. Just set "mini_account" to true or false depending if your account is mini or not and set "leverage_1_to_" to the leverage amount. For example I have a mini account with 1:200 leverage so I'd set "mini_acount" to true and "leverage_1_to_" to 200. 2)the equity save doesn't seem to be helping save money any, in fact when I let it run, my profits are about $1000 lower. Since this seems counter-intuitive, I'm going to keep checking the code and try to get it to work better. So for now just leave it on false, so the EA won't run it, till I figure out whether to just delete it or how to make it better. 3)All the values for the parameters are the updated optimized parameters for this week. So all you need to change is the account setting to suit you account I will be out of town most of this week so I won't get much work done on the EA
+
+--- 帖子 #90 ---
+I only see the EA taking half of the trades that it should be taking so it will be getting much better.
+
+--- 帖子 #91 ---
+it looks like this trade is going to turn out okay after all
+
+--- 帖子 #92 ---
+Can not to make MA open 0.1 lot while backtesting. May be it would be better to make changeable lot size in variables?
+
+--- 帖子 #93 ---
+forgive me forig but I'm not sure what you mean. The size of the lot the EA opens is whatever % of your account that you wish. Look for "risk_percent", that's the parameter you'd edit to change trade sizes.
+
+--- 帖子 #94 ---
+OK, then try make backtest for 3 month with 0.1 lot. EA opens only 1 trade in november and that all. I made % = 0.01 and leverage = 100.
+
+--- 帖子 #95 ---
+How do you back test it. When I do it I get no results.
+
+--- 帖子 #96 ---
+try my next version tomorrow, the previous versions had problems with adjusting to different accounts. I've found a pretty damn good way to tell the difference between ranging and trending markets so I've added that, so now my trending system takes it's trending trades only in trending markets, which made it a whole lot better since 75% of the losses came from attempted trades in stagnant, ranging markets. I was in NYC all last week but I'm back now so sorry for the absence. My goal from here is to 1)tweak the trending aspect of the EA but more importantly 2)create a satisfactory ranging system so I can switch back and forth depending on the market's behavior. My idea for the ranging markets is that ranging is just trending on a smaller scale, so it will basically be the same system that I use for the trending markets, just on a 1/3, 1/4 or 1/5 scale with quicker close mechanisms. The 4th version will be out within 12 hours.
+
+--- 帖子 #97 ---
+Thanks Aicccia, waiting your new version.
+
+--- 帖子 #98 ---
+lol boys and girls, let me explain something. The EA has two main parts, one part that trades when it's trending and one when it's ranging. They're almost the exact same code, just the ranging code is all on 15 minute timeframes instead of hourly timeframes. This "Code" is made up of 3 different types of entries. I call them the jump trades, the swing trades and the waterfall trades. The Jump trades signal the beginning of a new trend when the price jumps two MA lines and changes momentum at the same time. Swing trade are when the price in a trend retraces and then resumes the trend. When the trend resumes, a swing trade is placed. The waterfall trades signal the beginning of a new trend also but the price, instead of jumping MA lines and changing momentum all at the same time, slowly slowly changes momentum and like a waterfall or see-saw the price slowly falls or rises into the new trend. Right now I have those three types of trades under true/false conditions so I can watch the EA perform opening only one type of order and tweak each of the different order settings without confusing distractions. Now here's the really exciting part. I believe I've got the jump trades working pretty well, maybe 90% complete, so they see through all the noise confusion and skip the bad trades and grab the good ones. From end of august of last year to end of november, 3 months, with my standard 20% per trade, all wins, and a 3600% ROR!! And that's therotically with the EA performing at only 1/6 capacity! Pumped?? Good, so am I! lol
+
+--- 帖子 #99 ---
+granted we did have that huge 1000 pip uptrend in the last half of November, but still, I think I'm making progress.
+
+--- 帖子 #100 ---
+are you THE man who will do the perfect EA? ...I'm so curious! very great work btw
+
+--- 帖子 #101 ---
+thank you thank you
+
+--- 帖子 #102 ---
+I've just noticed something very ominous. According to my strategy, the core components being a 48 EMA, 72 EMA, and a couple momentum indicators, as of this Friday's close, the long daily trend on GBP/USD which started October of 2006 and at 1.8740 is OVER. You can see this illustrated by the plunge from the 48 EMA through the 72 EMA in one solid candle. Further more, for the first time since April of 2006 when the even larger daily trend began at 1.7520, my system is calling for a strong sell on the daily charts. Now fundamentally on the daily time frame, I'm not sure why the trend is over since everyone seems to be losing faith in the dollar, maybe this is just indicating all faith is not lost yet.
+
+--- 帖子 #103 ---
+A very interesting observation. The price broke yesterday out of the daily SHI channel border (1.9469), and now sits right on what I identify as a support line (1.9433), and right below what DownRiverTrader here calls "zone -1" line (1.9443). So, Monday should be an interesting day...
+
+--- 帖子 #104 ---
+Any progress with it? Let me know if you need help. Thanks for sharing your strategy and thoughts with us.
+
+--- 帖子 #105 ---
+yes I'm making progress. slowly but surely. If you want to help, tell me a good way to determine if the market is trending or ranging, besides looking at the width between two MA lines.
+
+--- 帖子 #106 ---
+I know "0" about programming, so don't know if something like this is possible to program. Each pair has an average daily range. If it is trading at 50% of that range (variable) then it is ranging. Try different % figures like 50, 60 70, 75 to see how much difference it makes in # of trades and profit. Also maybe difference in daily closes could indentify if market is trending! If it is so many percent above/ below previous day it is trending. Just thoughts, Paul
+
+--- 帖子 #107 ---
+Exactly what I was going to write. It's somehow connected to the daily range. The bad thing is that it won't tell you the future. For example if yesterday's range was only 50pips on cable, it's not a guarantee that it won't go 300pips in the same direction... It's hard to do this, but if you figure out, you'll get rich in no time ) EDIT: Maybe you could use a volatility indicator! If that is in a downtrend, your EA is slowly switching to range-market but if it's starting to rise, you're switching back to trending mechanism... EDIT: You could use the Bollinger Bands, and measure it's width. If it's ranging it's narrow, if it's trending, it's broad. Or something.
+
+--- 帖子 #108 ---
+aicccia, have been unable to get any buys during backtesting. Could you post the settings for 03. Thanks lj
+
+--- 帖子 #109 ---
+nice call hmm? it probably will retrace tomorrow some. On another note, I'm basically done with the code for this version. Right now I'm optimizing it again(its been a while since I've done that) and doubling everything for ranging markets on the 15 minute charts. As of now, the EA is 19kb where as the previous version was 13kb. Since it's grown and evolved so much, once I feel real good about this version I'll start a new thread with a more appropriate title in the Systems folder.
+
+--- 帖子 #110 ---
+I thought I would give an update since things keep taking longer than expected. The trending part of the EA is done. Right now it's optimized over the last 6 months and with 20% invested per trade, its taking $10 to around $17,000 with around a 5% drawdown(one bad trade out of 18 or 19). So the trending code does quite well. And this is not curve-fitting. Out of the 3000 passes during the optimization, at least half are giving me profits over $3000(remember, from just $10). Even I'm a bit amazed. As I've said before, the ranging side is basically the trending code on the 15 minute timeframe. So today I doubled everything, marking everything with either an "H" for the hourly trades or "M" for the 15 minute trades. Then I ran into some problems. Apparently though you can run an EA with parameters working on different periods, you can't backtest an EA like that. This confused me and I was kind of overwhelmed. The EA is huge, it's only 600 lines but it feels like 6000. So anyway, I pulled myself together and realized I'm going to optimize all this on two separate EAs, trending on one, ranging on another, then stick them together at the very end. Hopefully it will be as easy as it sounds. This means I'll never be able to backtest the whole thing as one, which would be very nice so I could make sure the ranging trades which turn into trend trades end up getting processed as trend trades. We'll have to forward test the EA on a demo for a few weeks to make sure everything is working as planned. Hopefully I'll be finished with this monster tomorrow. Oh yeah and the trending has a profit factor of over a 1000. Beat that! lol
+
+--- 帖子 #111 ---
+Aicccia, Bravo!! I have been reading this thread anxiously. I must take my hat off to you ! You and the other members here are doing excellent work! When you post the latest EA, I will tests it as well and post what results I get to contribute to this thread. Keep up the great work! Many Thanks from all of us.. Theo
+
+--- 帖子 #112 ---
+Hey guys, this is the trending part of the MoneyMaker system, only the trending part. Right now I'm getting 24 trades, optimized over 6 months. ROR seems to be around 75% to %100 per month on my standard account with 1:100 leverage, so for all you guys with higher leverage, your returns will be much higher. That is for about 20% invested per trade with 10% drawdowns. More to come later. Test it yourself and tell everyone what kind of results your getting. A word of caution, on mini accounts on the strategy tester, some brokers(at least Interbank) put some kind of limit on the max trade size. And once it reaches this limit, the EA won't make anymore trades. So don't use too high of your account per trade. So when backtesting on mini accounts, test it out first on lower percentages, no higher than 5%, to see how many trades you should be getting. And remember, you need the Osama indicator to help make the magic happen.
+
+--- 帖子 #113 ---
+I'm not happy though with this version. It misses too many trades.
+
+--- 帖子 #114 ---
+I have made some modification to it: 1. Add dynamic magic numbering, let it co-exist with other EA, and may attach multiple same EA with difference pair and timeframe in the same time. 2. Add trade comment to show program name and version number within trade record. 3. Add NormalizeDouble() function to OrderSend() parameter, to avoid be jammed when backtest with some un-normalized tick data. (as someone happened in page 7) 4. Add fixlots external variable, if set fixlots=0, the lot number strategy will follow the original design. When you set fixlots as non-zero such as: 1, 0.2, 1.5,....etc, the system will use this number as a fixed trading lot, and ignore the original risk_percent calculation. This will avoid to be jammed in backtest if the risk_percent become too large when equity going lower. (as someone happened in page 7) I also found this EA perform good since 2006-Nov to now, but looks bad since 2004-Jul to 2006-Oct. ------- Updated New version -dsy1.1 released as following: 1. Bug fix of dynamic magic numbering 2. Add deinit() function to release resource after EA end. without this function, this EA will eat up all of your memory when running optimization. Next version to do: speed improvement. ------- Updated New version -dsy1.2 released as following: 1. Speed improved up to 500% (50sec vs original 240sec test from 2004-Jul) 2. Add Normalization to OrderClose function. 3. Add TF external variable for more flexible trial. 4. Change exist trade searching from ascending to descending. Since ascending search will produce a bug if there are multiple trades generated by this EA.
+
+--- 帖子 #115 ---
+cool, thanks for the interesting additions. It was only optimized over the last 6 months, so if you have good data, you should have excellent results since september.
+
+--- 帖子 #116 ---
+Yes, I believe it is good from last 6 months. But I would like to see it more adaptive to difference market condition from last 2 year. I am trying to optimize some external variable as you provided, and will post my result when it is finished.
+
+--- 帖子 #117 ---
+the market conditions of this last spring were entirely different from the market conditions of this past fall, so I doubt you'll be able to have it perform well with the same parameters over a years time. The EA is designed to fit to the current market conditions like a glove, and with optimizing once a week, the EA should always fit the market snugly. I believe 4 months is a good time period to optimize it to, but just to optimize over a few more trades, it was optimized over 6 months.
+
+--- 帖子 #118 ---
+Also remember that this is a trending EA so it can be very harder to fit it to ranging markets, no matter how much you optimize it. The final EA for this system will work for ranging and trending markets.
+
+--- 帖子 #119 ---
+Hmmm.....I think that would be better to wait for your complete system which include both ranging and trending condition......
+
+--- 帖子 #120 ---
+Aicccia/Ray tracy Since some of us maybe new to Optimizing EAs, Is there any way you can provide instructions or provide a link for where we might find info on learning how to optimize an EA. Since this EA needs to be optimized weekly might be a good excersise if we all know the Optimization procedure. I know that their is an optimization feature in MT4 but dont know how to invoke optimized settings and then save the new optimized version. This will be helpful so as more of us have this skill set, we all can work more collectively in Optimizing and Testing this EA. Thanks Theo
+
+--- 帖子 #121 ---
+Here maybe a good start reading: http://www.strategybuilderfx.com/sho...t=optimization More detail information: http://www.strategybuilderfx.com/sho...t=optimization You may also reading this book for overall concept: Design, Testing, and Optimization of Trading Systems ISBN: 0471554464 Refer to MT4 official site for step-by-step tutorial: http://articles.mql4.com/192 Programming consideration in testing: http://articles.mql4.com/72 If you are interesting about internal algorithm of tester: http://articles.mql4.com/134 A sample of complete MT4 EA development cycle: http://articles.mql4.com/163 Since there are too many things to be care when you are doing optimization, I think here are some things you must keep in mind: 1. Get historical M1 tick data as long as you can. 2. Watch out the timezone difference between your M1 tick data and your broker's server. Difference timezone may produce difference result sometime. 3. Make sure each testing produce 90% modeling quality result, and don't trust any result if MQ&lt;90%. 4. Beside to M1 tick data, make sure you have also download all timeframe (M5, M15, H1, Hxxx.....) data from your broker. If the downloaded data cannot cover your testing period (ex: you want test 2 year, but broker only provide 6 months data), you may produce all timeframe data from your M1 historical tick via period_convert script which build-in with your MT4. 5. Make sure your computer has fastest cpu and largest memory, or you may waste you life.... 6. Do not use OVER-OPTIMIZED result (someone call it CURVE-FITTED). Since over-optimized result only perform good to historical data, and will make very bad performance in live trade. 7. More longer testing period (ex: more than 3 year) will produce more reliable result. The hardest part is: how do I know which result is over-optimized? I have no answer too, but if your result can be used with difference pairs (or testing period) with only a little parameter shifting, that may be a good result. In other word, if you get very difference result with difference data pattern, or get very weird parameter number, especially if you get very HIGH PROFIT with only FEW TRADE times, that may be a very bad result. By the way, someone's optimization result may not fit to your live trade style, since you may using: difference historical data, difference broker timezone, difference broker price, difference risk strategy.....I have found many times that someone published optimized parameter cannot produce same result with my backtesting.
+
+--- 帖子 #122 ---
+New version -dsy1.2 released as following: 1. some speed improvement 2. Add Normalization to OrderClose function. 3. Add TF external variable for more flexible trial. 4. Change exist trade search from ascending to descending. Since ascending search will produce a bug if there are multiple trades generated by this EA. Please refer to release post #114 for attachment. By the way, I won't change any original idea or design from Aicccia, I just doing some things which let this EA worked faster and smother. It is not necessary to bind my code into the Aicccia original one. I do it only for my private usage, and I may made any unexpected mistake inside the modification, please use as your risk.
+
+--- 帖子 #123 ---
+I would suggest that you speak to Vegas for some ideas, seeing that he has been using the tunnel method for more than 19 years using 12,144,169 ema's just a thought
+
+--- 帖子 #124 ---
+Raytracy, thank you so much for adding these little extras to the EA. I don't have much experience in computer programming so I sometimes skip things in the EA that aren't relevant to the strategy but relevant to the EA as a little computer program. You probably don't relize this but the only places in the whole EA where I call on Bid or Ask is when placing an order, and I only place an order at the start of a new candle. All my other variables run off the last close. This is very important in the backtesting because it means you can choose the "Open Prices Only" model when backtesting and optimizing, since my EA doesn't look at what goes on between a candle's open and close. For me to backtesting over half a year's worth of data on the "Every Tick" model(the slowest) takes about 40 seconds. To backtest on the "Open Prices only" model (the fastest), it takes less than 1 second. If you don't believe me, test the strategy over a period using both modeling types and you'll get the same exact results. But thanks again for the additions. Hopefully the whole thing will be done by tomorrow.
+
+--- 帖子 #125 ---
+No, dear Aicccia, You have did great job than me. I have said this is my private modify, since it running very slow in my elder computer and got some trouble with my tick data. I believe that running well with you, and hope you continue to improve this EA. I am a newbie in FX, and just like to share some programming skill with everybody. I have not try to interfere with you or your EA. I am appreciate that you have share your system with us, and just like to make some help if someone like it. You are very nice guy, and I would like to see your next version. Please don't let me interrupt your great job.
+
+--- 帖子 #126 ---
+aicccia, based on your original system, how may trades should have the EA taken in 2007? By the way thanks for the updated versions, they're working fine for me! Great!
+
+--- 帖子 #127 ---
+Raytracy, Thanks so much for the optimization articles, I will start reading these and get familar with optimizatiuon process. This information is valuable as look to try to aid in contributing to this EA. Theo
+
+--- 帖子 #128 ---
+You are welcome! By the way, aicccia has made a good strategy to design this system which worked with " Open Prices only " model. You may find that backtesting or optimized with this model are super fast and still accurate. I believe many other EA cannot get accurate result with this model, most of them must deal with " Everytick " model only. I did not realize about it at first, until Acccia remind me in above post. This design save all of our time. Thanks to aicccia!
+
+--- 帖子 #129 ---
+13 trades as of this morning.
+
+--- 帖子 #130 ---
+Okay then I got everything right. I've made a little change to the code, because the automatic lot size determination didn't work for me, only the fixedlot one. I made the change to the version of raytracy, should I post it, or just toy with it myself? I'm currently testing if the every tick - open price are really the same, if yes, that would be great I haven't looked into the code deeply enough yet, I guess the EA is only using completed bars, that's why "open price" method is enough. EDIT: Ok i just read through the posts, and found that this has been already answered. Great work guys!
+
+--- 帖子 #131 ---
+Hello Aicccia, I have just started reading this thread but you are right, 16 trades is definitely not enough if you want to judge the profitability of a system, even if it took 50 years for a system to generate these 16 trades. I have seen FX systems make tons of cash after 300 trades, only to give it all back the next 50 trades, even though the logic behind these systems looked absolutely perfect and sound. Ok, I am going to read the rest of this interesting thread now...
+
+--- 帖子 #132 ---
+I have made some quick backtests to optimize the performance, the best result was +3266 pips from 1st September 2006 to 8th March 2007 (last trade was closed on 6th March). Total trades: 35. I think this is the maximum of this system for this period, I ran 75 937 500 000 variations (genethic algorythm of course ). The biggest and most important question is that how often should one optimize this system to achieve maximum (or at least medium) live results? And how long the sample period should be? If anyone can answer these simple-looking questions, we're on our way to get rich, automatically....
+
+--- 帖子 #133 ---
+If don't mind, you may tell me the changed part or code, I would like to integrate into my version, and then publish it to all. Maybe Aicccia would also like to do the same change. Or, you may also publish your complete version, just remember changing the filename to reflect your modification.
+
+--- 帖子 #134 ---
+By the way, I do not understand what do you mean about the number? Would you like to teach me more? Is it about external variable? But I have found 5 related external, not 4?
+
+--- 帖子 #135 ---
+It means the number of setups I ran to get the best result, (75 thousand billion different variations of the external variables!), but I think I don't need to teach you anything, you already know much more than me, I just read through the links you posted below, for a long time I was searching for a genetic algorythm explanation, thanks for that link -- but to tell the truth I don't understand a word from that article By the way I changed the original code to this one: Inserted Code if (fixlots==0) lot=NormalizeDouble(AccountFreeMargin()*MaximumRisk*0.001/100,1); The "100" at the end should be an external variable and it was meant to be the user-set maximal Stop Loss, but I hardcoded my decision instead. You can change that of course. I still can't figure why doesn't the original want to work for me!? I can't think of anything that works on one platform and doesn't work on an other!? Anyways, this is 100% works on every platform. Keep up the good work guys, this system has a very good potential! (And I'm really curious about that optimization question I brought up earlier! What is your opinion, guys?) Have a good night everyone!
+
+--- 帖子 #136 ---
+OK.....I did not realize that you running so much variation at one pass.....Since I often separate them into several difference group to help me get a quick glance. You have created a good idea about risk management. I just start to thinking about how to reduce or limit the drawdown and stoploss with this EA. I will coding you idea into my code as next version. Thanks for this great thought. By the way, maybe Aicccia will have difference thought regarding your idea. I would also like to hear any advice about stoploss from Aicccia.
+
+--- 帖子 #137 ---
+Hello All, My first post as a FF member! I'm new to Metatrader, and like the idea of autotrading. I've read this thread, downloaded the ea's and found the same good results. When I look thru the trades the ea makes, there are a few that don't make sense to me according to aicccia's descriptions. I've attached a chart showing one of the trades. It seems that when a trade goes in the wrong direction, sometimes (not all) it goes very wrong and many pips lost. Obviously I don't completely understand how the exit is supposed to occur, but maybe the chart picture will allow someone to see a potential fix for this problem.
+
+--- 帖子 #138 ---
+Jackinabox, I can't see the dates on that window, when was that trade?
+
+--- 帖子 #139 ---
+On a full size account most brokers consider 1 lot = 100k and if offered .1 lots to be a mini lot = 10k. There are accounts from some brokers where .1 lots = 1k. IBFX for example uses both types depending on if you get a standard or mini account. Several other brokers trade like the IBFX mini using 1 lot = 10k and .1 lot = 1k etc. for all their accounts.
+
+--- 帖子 #140 ---
+I did a backtest from 6/1/06 to now. This trade was on 6/21. I know the ea isn't optimized for that far back.... My thinking was that maybe you can get some added information by analyzing the results without optimization?? I don't know if that makes any sense or not. I only brought it to attention to see if an improved exit strategy on losing trades can be thought out. Maybe something like- If the entry was for a buy and price is above all 4 ema's then any time price crosses below all four ema's get out of the trade... Just a thought.
+
+--- 帖子 #141 ---
+Thanks to everyone for your input and thoughts over these last 24 hours. There have been some questions asked. MarkGavalda, how often to optimize? how large of a sample to optimize over? My beginning benchmark has been once a week over the last 6 months. As I make the EA better, we should be to optimize it over longer and longer periods. I believe though that the market wave's height and length will be substantially different from the waves 4-5 from now. So until I have a expert that can basically optimize itself continuously, I wouldn't optimize it over 8 months. But I don't want curve-fitting. When I optimize, I make the majority of the passes gave still gave me significant returns, and that there many many passes with similar parameters that got similar returns. When the next version comes out, I'll make sure to add all the additions to it. I spent today moving the declaring and defining above the start(), and then getting rid of all the ranging code. Before I had crudely just doubled all the trend code for the ranging side of the EA, doubling the size of the EA, and making the EA define 80 parameters with every tick. It was extremely crude. So I got ride of all the range code, made all the code standard, (so now the EA has 40 parameters) and I move the defining above the start() function so it's only being called(and define) once for every bar. The end result is optimizations are much much quicker and the EA is much easier to work with since it's only half as long. Thanks a million to raytracy, I'd have no idea any of that was even possible without him. Tonight I'm going to be loosening up on the entry conditions in some areas. With the range and trend trades I'm looking for at least 6-10 trends a month and we're not there yet. This trade that was opened this morning looks like its about to be closed with a loss. I don't know whether the market is going up or down tomorrow, but the EA should, so obviously its still not as smart as it should be.
+
+--- 帖子 #142 ---
+Guys I've been watching the price for the last 6 hours and I've gotten some great ideas, I'm excited. To determine ranging, I'm adding the possibility if the average distance between the high and low of the last 8 candles is greater than the width between the 2 main EMAs.
+
+--- 帖子 #143 ---
+Sounds great, but please include as many extern variables as possible, that way it will be easier to find the correct values with optimization.
+
+--- 帖子 #144 ---
+but the more variables you have, the more prone you are to over-optimizing. I'd like to keep the number of variables to no more than 5, and have the system determine the rest.
+
+--- 帖子 #145 ---
+hello aiccia, FIrstly, thanks for posting this EA ! It looks good. I downloaded the EA and ran it to see what it does. My understanding is that is a moving average EA (based on the crosses + the OSNA indicators). What I don't quite understand is that there are no SL or TP set in the orders ? SO how does this EA close the trade ? Also with the optimisation, the EA will perform well because you have optimised it, but what about for example if you optimise it for the Jan and then using those settings see how it performs in Feb ? Cheers, Anthony
+
+--- 帖子 #146 ---
+You can have a look at that yourself you said you had downloaded and ran the EA already. Optimization is for finding better values for an already profit-making EA, I didn't believe this and a week (or two) ago I started to find out if it's true for myself, and yes it is. The big question is that which period should you use when optimizing and for how long will those values work? aicccia! You're right about that, by the way I started an MQL4 topic in the MetaTrader 4 sub-forum, it's about auto-optimization. Have a look and comment if you have time! (That goes to all of you, of course!) Have a good weekend!
+
+--- 帖子 #147 ---
+For info., my moneymaker just opened a buy on GBP/USD at 1.9374 (demo on alpari). We'll see the result...
+
+--- 帖子 #148 ---
+I was up 56 pips and after lunch (CET) I'm down 55pips ... I knew I had to close my position!
+
+--- 帖子 #149 ---
+I suppose I should give some sort of an update. I haven't been posting here because I've been working on this dumb EA which I'm getting sick and tired of. I've worked on it 6 hours and counting today, 8 hours yesterday, maybe 4 hours on saterday, and a similar rate for the last 2 weeks. The huge headache has been getting the EA to switch back and forth between timeframes, trying to figure out why your metatrader suddenly stops backtesting, spending a day or two going crazy only to realize that it was issues you'd only run into doing 30,000+ optimization passes an hour(so no one else had idea what your talking about), running out of memory, huge logs files, running out of hard drive space, figuring out how get around these problems and still optimize that much, try again and again and again and again to get the EA to switch timeframes using only one variable as your timeframe, then giving up and making two complete identical function defining all your parameters with the only difference being Period_H1 for the period for one function and Period_M15 for the period for the other function, finally getting this to all work and then realizing this switching back forth of the timeframes slows the time of one pass from 1 second to 10-15+ seconds, and optimization times go from 30 minutes to 16 hours, trying this once and realizing this is not going to work because it will take me a week to try out just 4 ideas if I have a problem(which I always do), and then FINALLY giving up on ONE EA and splitting everything into two EAs; MoneyMaker-Trend as one and MoneyMaker_Range as the other. So you see, I'm getting sick and tired of anything to do with metatrader. BUT, I'm almost done. I can see what to do. Before, I was just guessing, trying it, guessing again and trying another thing because the coding was just beyond my skill level. So I'm almost done. I know I said that a week ago but this time I mean it. thanks for waiting. it will be worth it.
+
+--- 帖子 #150 ---
+yes. yesterday was a ranging market. it would not have happened with the versions coming. with the new versions, it would have bought around 1.9338, closed at 1.9402, sold at 1.9389 and closed at 1.9300, for around 150 pips. Approximately, Approximately, but you get the general idea, it would have caught both moves beautifully. It's very hard to make something work that well, thats why its taking me longer than expected, forgive me.
+
+--- 帖子 #151 ---
+But let me say this again, the new version,first complete version will actually be two EAs, on two charts. Of course if there's someone really good at MQ4 out there who'd want to combine it all very well so it would still optimize fast, I'd be eternally grateful because then the optimizing and backtesting could be more efficient and accurate. Or maybe not, maybe this is all a blessing in disguise. It will be easier to fit the ranging just right if it's a separate EA.
+
+--- 帖子 #152 ---
+Many thanks for the great work, it's amazing. Take a good rest and clear your mind if you need! Everybody here is searching for the best EA for a long long time ago so if we have to wait one more week it's not that bad! thx again
+
+--- 帖子 #153 ---
+noo I don't want to rest, I want it to be done!
+
+--- 帖子 #154 ---
+I'd say the new version would put in a buy for GBP/USD at 1.9296. we can see where it would go. This is just a guess though made on default values for my EMAs, without them being optimized. Anyone listen to Enya? Imagine her softly chanting.... "Go up, Go up, Go up!" yeah I'm pretty sure I'm going crazy now, time for some sleep, time for some sleep...goodnight forex world
+
+--- 帖子 #155 ---
+I was a professional programmer once (web development), I can understand what you're talking about, mate. Your EA looks promising, we can easily tell that you have a very smart brain, so don't give up, this kind of work will have its rewards sooner or maybe later, but for sure. I'm really looking forward to your next version, I have some Core2duo processor time if you need some for speeding up the optimizations.
+
+--- 帖子 #156 ---
+Aicccia, Nothing to forgive. You have done an oustanding job and we all applaud you! Many thanks for taking so much time and effort to formulate what has been a Herculean effort. The actual possibility of designing an EA to work in both Ranging and Trend markets is nothing short of miraculous! Thank you again for such a great job... Theo
+
+--- 帖子 #157 ---
+New Update. Sadly, but predictably the 15 minute timeframe has about as much in common with the hourly charts as a house cat does with a cheetah. I was uneducated enough to think I could apply my hourly, trending code to the much more unpredictable 15 minutes and with just a few tweaks and optimizing, get it to work up to my standards. After about a day I realized I was all the way back at square one with this new system. I had just spent months working on the GBP/USD system for the hourly charts and I felt I was going to have to start all over and make a whole new system, very demoralizing. Now the whole reason I need another system is so I could be in the market when it was ranging for two reasons, in this order: 1)be in the market in case a small range trend develops into a large hourly trend, 2)to make money when on the hourly charts the price is just moving sideways. So though I already do have a fully working, functional hourly system, its not good enough for me because I know I could make 2x as much money and get at least a third more trades with a 2nd 15 minute mini-system working in concert with the hourly one. Fast forward a week of frustrating dead-ends and I've had several good ideas, but either the drawdown was too high(around 20% for fixed lot MM) or the optimization produced illogical results. And that's a big thing for me, I don't care how profitable a system is, if it's not logical, I'm not trading it. So I wasn't happy, not happy at all, and I was in the very frustrating part of system development when I'm looking for something but I have no idea what it looks like, so I'm reduced to guessing and trying random ideas. It's like old school non-genetic optimization. So anyway, I was playing around with my osama indicator and becoming more familiar with the effects of changing the parameters (it has 5). By the way, it has a few very interesting, almost magical characteristics. For example if you make the Panda_Fast parameter equal to 1 and the Panda_Slow and Panda_Signal the same number, then enter and exit when it crosses 0 then in a ranging market and it always gets in and out at around the same price. So I was hunting around around for more magical properties and when I realized I could get it to cross 0 the same time of my jumps using the ma lines. This was huge. Remember half of my reason for needing a ranging 15 minute system was because on the hourly markets the two MA lines got too close together and I start having bad jumps constantly. With these settings, the osama cleanly crosses once even in a severe ranging market. And, even more importantly this meant I could get rid of every bit of code that was related to MA lines, making the whole EA much more simple, and much more logical. In fact I got rid of over 75% of the EA. The spike detector is gone, the jump trades, waterfall trades, and spring trades are all gone, and all their supporting code. The EA was around 500 lines, now it's less than 150 and it's much more precise and accurate. So I've definitely made another huge leap this week in improving the MoneyMaker.
+
+--- 帖子 #158 ---
+Hey Aicccia, I havent yet tried your system, but its clear to me you're putting a great effort into this project. Therefore, I must say I really admire what you are doing, and I'm definitely gonna be following your progress. Keep it coming! Matt
+
+--- 帖子 #159 ---
+Aiccia - Looks like you're tuning that lemon into lemonade. Congratulations!
+
+--- 帖子 #160 ---
+Hello Aicccia... When I came across your nickname... and noticed your mind goes by "Nothing is Impossible"... I wanted to learn more about who this person is... red the post... and find your thread... You are an amazing individual... I am convinced you will never give up... you'll get what you want... and what you want will always evolve... so you will be always vibrant and young person till the end of your days on this earthly trip... Congratulations! I am still a pilgrim without a house [in this forex adventure]... so am glad to find your open house... and your round table guests... I am not a programmer... my demo MT4 [mig]... so I could only test your EA there... I know, its not much, but that's all what I can do for now... am looking forward to install and test your new versions... Thank YOU... and ALL... for sharing... thank you for being there...
+
+--- 帖子 #153 ---
+I have been watching this tread for a while and would like to try this system in a demo acct. Would someone be so kind to direct me where to find the EMA indicator for this program. I have two different MT4's installed and I have search the net, but I have not found EMA that have the same options that are required here. Thanks
+
+--- 帖子 #154 ---
+thanks a lot for your compliments, it means alot. At first I was hoping to share this new idea for a great system, but I quickly saw many areas for improvement and one thing led to another and now the thread is more of a journal on developing an system/EA. It's not that exciting and I only post now and then, at the most twice a week, but some people seem to find it very meaningful. I'm also not sure if I feel ready to release the next version. It's certainly different and better enough to be a new version, it's just that for example the week of feb 5th through 10th there would be no trades, and I find it hard to go a week without any action. But to get action I'd have to descend into the treacherous 15 minute charts and I don't know if the extra pips are worth the extra risk...or work.
+
+--- 帖子 #155 ---
+there is no ema indicator...you must be talking about the osama indicator. However if I were you I'd just wait till the next version comes out. The one you have now is embarrassingly inadequate.
+
+--- 帖子 #156 ---
+Hello Aicccia... Like I said I traveled this forex land for a while... set at different round tables... as an apprentice... and have learn a bit... What expert fx traders are saying the larger timeframes H1/H4 are the most profitable to trade... so your H1 is right there... less trades... less risk... less headaches... but more PIPs each... stay with it... Candlestick patterns seams not to do that well in fx... but the general chart patterns are quite good... impulsive and contractive waves... like with the Aligator [Bill Willliams on Alpari]... when it sleeps one can set the limit BUY and Limit SELL outside the band... or... better yet, wait for the break... enter the trend at the end of the 1st Contractive Wave and ride the trend with Trailing Stops until stopped out... I know, I am talking here like a 1st grade student talking to a professor... *smile* ... I know you know all this, but let me talk a bit... I guess you covered all this already in your 1H EA... so trending market is covered... there is one system I am getting ready to look at now that works on Elliot Wave and Fibonacci principals... it's 1H/4H timeframe... I will let you know how it will show up... For last few months I was trying to learn the most simple fx system on the planet... RAINBOW by LinuxTroll... short timeframe S30/M1 up to any frame... short time frames give the opportunity to see how the Rainbow flies... I call it a Flying Dragon... the latest from LinuxTroll is just one color... WMA 5 to 143 [build every 3 up] in blue... the principal is that what goes UP must come DOWN... the base/belly of this dragon [WMA 144], that it slides along, act as line around which Dragon's wings are flapping UP and DOWN... the best observation is on the shortest frame... no indicators needed... maybe CCI... LinuxTroll is using it for scalping as well as for longer frames and... according to him, is doing extremely well... I though, lost much more than won... ... The above, with 1st contractive wave entry... possibly... if captured in a mathematical formula... could give us the short frames solution... Your mind would probably find the way to make the Flying Dragon a success and make it into EA... actually it can be make very simply with only WMA 21, 34, and 144 [I know you don't like MAs, but why not to give it a try]... I will try again... WMA 21.34 are like Alogator... WMA 144 is the baseline... entry at the end of 1st contractive wave... when Aligator sleeps - no trading... there would need to be Support/Resistance lines for the "sleeping band" put in place... and when one broken... enter only at the end of the 1st contractive wave... provided the CCI confirms the reversal from its TOP or LOW extreme... There is also DeMark trend lines break-out indicator that is quite interesting [have learned about it from MiniMe - http://www.forex-tsd.com/95248-post18.html] So I guess... this should be enough of my rumbling for now... Does the above make any sense to you...? I'll appreciate your input... Thanks!
+
+--- 帖子 #157 ---
+Hey guys, I have come to the realization this this system is way too complicated to be that good. The more indicators and variables a system has the more tweaking and optimizing you have to do to get it to work. That's why the ultimate system is just trend lines and price action. So I'm starting over on something else, and limiting myself to just a few MAs and an osma indicator. If it performs to my standards I'll let you know. But here is as far as I got on the MoneyMaker system. I would only optimize the system variables rarely. I'll answer questions on it if needed but I won't be working on it anymore. It works great over the last 6 months but I couldn't get it to work from march 2006 to September 2006, and that's why I'm dropping it.
+
+--- 帖子 #158 ---
+Sorry about what file format does one open these files with. Thank you.
+
+--- 帖子 #159 ---
+these are metatrader files so you need metatrader to open them....
+
+--- 帖子 #160 ---
+Thank you but could you point me to the link where I could get MetaTrader please.
+
+--- 帖子 #161 ---
+http://www.metaquotes.net/downloads/
+
+--- 帖子 #162 ---
+Thanks very much.
+
+--- 帖子 #163 ---
+Looks like someone is now selling this EA on eBay (search for MoneyMaker Forex), but for pairs other than GBPUSD - are you aware of this aicccia?
+
+--- 帖子 #164 ---
+yeah my dad was. I told him it didn't work but the bastard still kept trying to sell it on ebay. goddamn idiot...
+
+--- 帖子 #165 ---
+Hi Aicccia, I am not sure why you are so negative about your trading system: I backtested it with GBPJPY from 1 Jan 09 onwards on the 5 min, 15 min, 30 min and 60 min timeframe and the profitability is terrific! I couldn't get your EAs to run (never figured out why) so I use the Money-Maker-Trending-04-dsy1.2 EA which one of the contributors here posted some time ago. Am I the only one who runs this system profitably, given that the forum went dead some time ago? Each of the above mentioned time frames gave me some 6-9 signals since the start of this year but the system has generated only one single signal since late March. Always appreciate your comments! Cheers, Daniel
+
+--- 帖子 #166 ---
+i am new in forex, please teach me more on this. Buy or Sell when candle opens below/above 48 ema and closes above/below 72 ema(so it crosses through the channel in one candle). Keep trade open till opposite happens, ie, it crosses channel in other direction. What is candle.
+
+--- 帖子 #167 ---
+hi it's really work great when i folow the croosing and keeping directions over 0 macd for good buy and below 0 macd for sell this is my understanding about the cross of ma in OSMAMA indicaror i'll try the system thanks
+
+--- 帖子 #168 ---
+I also use MA for trading.... And your method seems very dedicated. So the old EA you post still work or you already make the new one? (maybe i missed the new version in the middle of the post). If yes i will give it a try at demo for one month and let it run along... I always like MA crossover ^^ great work, aicccia
+
+--- 帖子 #169 ---
+Hi aicccia nice work even if you decided to quit it at the end I'm sure you'll come up with something fantastic soon So keep it coming I read your thread while I was working on MA Cross a while ago and I recently fell on a highly profitable EA+Optimization combination I highly recommend it if you're interested in MA Cross EA used: MA_cross_Method_PriceMode by Duke3D [attached] My parameters are: JPY H1 with MA1_Period = 12, MA2_Period = 44, default for the rest Backtesting Results: I use high quality 1 min data from fxdd 90% modeling I use a different way of testing than most here in the forum I tested individually on 40 months from DEC06 to MAR10 Initial Deposit: 500$ Percentage of winning months: 68% Average Net Profit per month [inc. losses by losing months]: 218$ Percentage of months where Balance &lt; 250$ : 15% [6 over 40] I choose the minimum deposit amount to better assess risk I test individual months simply because I think that the order of the events/patterns happening during several years renders the testing very specific to one particular sequence Therefore breaking the sequence and taking months individually increases the sampling quality Attached are the results details For those who prefer the "traditional" way of testing I've also attached back-to-back straight test results for DEC06-MAR10 Cheers!
+
+--- 帖子 #170 ---
+Hi Can You post Your EA with the setfile for this very promising result? Which pair have You backtested? Elovv
+
+--- 帖子 #171 ---
+Sure thing Elovv Use them on USDJPY H1 Please let me know what you think Cheers
+
+
+===== 附件下载链接 =====
+
+未找到附件

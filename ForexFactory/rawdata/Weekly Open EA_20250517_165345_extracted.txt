@@ -1,0 +1,882 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+I was asked to start my own thread and so I would like to keep this thread about the EA I've developed. I would not like to start mixing different versions of EAs written by several others. Hopefully in doing this we all stay on track and of one mind and I will implement all the ideas I can for the EA as long as they enhance the original system and remain true to where it came from. New EAs can be written for other ideas so let's keep on track for each of the ones I've developed. Rules: Week's open price is the starting point EA places 3 pending long positions 50 points above EA places 3 pending short positions 50 points below For each of these sets of pending orders... 1st order: TP 25 / SL 50 2nd order: TP 50 / SL 50 3rd order: TP None / SL 50 Long example: Pending long positions are triggered Pending short orders are moved up 50 pips to the week's open price If the long positions hit 50 (also closing trade 1 &amp; 2) then the 3rd order is set to break even on the stop loss and the short positions are moved up another 50 pips (now 50 above week's open price) Short positions will be moved up 50 each time another 50 is gained on the long trades (my defaults but can be changed). The 3rd long trade also moves it's stop loss up by 50 pips at a time (i.e. 100+ then stop loss locks in 50 and so on to the extent of where the Short orders follow). If the long trades double back and hit the stop loss then the short trades are triggered and exactly the opposite happens. Source Code (Very Important): Poll: Do I have to share my source code? Want a version that will work on live and demo accounts? Send me an e-mail: matt@tabonetech.com Settings: Inserted Code //+------------------------------------------------------------------+ //| Input variables | //+------------------------------------------------------------------+ extern string TradingParameters = "------------------------------------------------------------"; extern bool BrokerHasSundayBar = true; //Some brokers like FXDD have no Sunday bar and other's like IBFX do. Figure out if yours has one and set to True/False extern int BrokerCloseHour = 19; //Set this to 1 hour before your broker actually closes and the EA will close everything for you on Friday (19 for IBFX, 22 for FXDD, etc.) extern int OrderDistance = 50; //Distance from week's open price then after one is triggered becomes distance between opposite orders extern bool MoveOpposites = true; //If false then shorts and longs stay above or below close of previous week by 50/OrderDistance pips extern string Order01Parameters = "------------------------------------------------------------"; extern double Order01LotSize = 0.01; //Order lot size (Not placed if = 0) extern int Order01TP = 25; //Take profit (Not placed if = 0) extern int Order01BE = 0; //When is the order set to break even? extern int Order01TrailStopTrigger = 0; //When is trailing stop triggered? extern int Order01TrailStopAmount = 0; //Trail by how many pips? extern string Order02Parameters = "------------------------------------------------------------"; extern double Order02LotSize = 0.01; //Order lot size (Not placed if = 0) extern int Order02TP = 50; //Take profit (Not placed if = 0) extern int Order02BE = 0; //When is the order set to break even? extern int Order02TrailStopTrigger = 0; //When is trailing stop triggered? extern int Order02TrailStopAmount = 0; //Trail by how many pips? extern string Order03Parameters = "------------------------------------------------------------"; extern double Order03LotSize = 0.01; //Order lot size (Not placed if = 0) extern int Order03TP = 1000; //Take profit (Not placed if = 0) extern int Order03BE = 50; //When is the order set to break even? extern int Order03TrailStopTrigger = 0; //When is trailing stop triggered? extern int Order03TrailStopAmount = 0; //Trail by how many pips? extern string Order04Parameters = "------------------------------------------------------------"; extern double Order04LotSize = 0.00; //Order lot size (Not placed if = 0) extern int Order04TP = 0; //Take profit (Not placed if = 0) extern int Order04BE = 0; //When is the order set to break even? extern int Order04TrailStopTrigger = 0; //When is trailing stop triggered? extern int Order04TrailStopAmount = 0; //Trail by how many pips? extern string Order05Parameters = "------------------------------------------------------------"; extern double Order05LotSize = 0.00; //Order lot size (Not placed if = 0) extern int Order05TP = 0; //Take profit (Not placed if = 0) extern int Order05BE = 0; //When is the order set to break even? extern int Order05TrailStopTrigger = 0; //When is trailing stop triggered? extern int Order05TrailStopAmount = 0; //Trail by how many pips? extern string EmailParameters = "------------------------------------------------------------"; extern bool EmailNewOrdersPlaced = false; //Send e-mail whenever an order is placed (even limit and stop orders) extern bool EmailProfitLossSummary = false; //Send profit/loss summary anytime order count changes (does not count pending orders) extern string MiscParameters = "------------------------------------------------------------"; extern bool DisplayProfitLoss = true; //Display history of trades? extern int OrderSlippage = 3; //How many pips can the order placement vary? extern int EAMagicNumber = 20080622; //Used to determine orders placed by this EA Revision Notes: Inserted Code //+------------------------------------------------------------------+ //| Revision notes | //+------------------------------------------------------------------+ /* Version 1.0b: * Merged v1.0a versions together where the EA determines your broker and uses the right bar count. * Fixed a bug related to closing and reopening the EA/MT4 where SL would be set to nothing. * You will want to remove/delete the original EA as it contains bugs and the new EA will not overwrite it because the name is different. Any charts that had the old EA will need to be updated with the new one. From now on this should not be an issue as the name will not change anymore. Version 1.0c: * Fixed a bug where the update to break even was being set even if stop loss was set higher/lower securing profit. Now as it was intended... if pending short trades (entry) is greater than the break even on the long trades, then the long order stop loss is moved up securing more pips and vice versa. * EA now uses the open price for the week rather than the close of the previous week. * MoveInfinite variable added which overrides Move01 - Move04 if set to True. Orders will be adjusted everytime price moves by the OrderDistance. * EA now closes open and pending orders on Sunday as long as the EA is running. Version 1.0d: * Reworked how orders are placed/maintained * Removed MoveInfinite and Move01 through Move04 Version 1.0e: * Fixed bug with order calculation Version 1.0f (68 downloads): * Reworked how orders are placed/maintained (again...) * replaced stop loss setting with order distance * Added BrokerCloseHour Version 1.0g (95 downloads): * DisplayProfitLoss added (Display Profit/Loss on Chart comments?) * Send E-mail when new orders are placed * Send E-mail when order total changes (does not count pending orders) Version 2.0: * Fixed bug with pip calculation on profit display * Fixed problem with E-mail display text * Modified key areas to work with live accounts * Live version made available Pending additions/changes: * E-mail status of EA * Order modified, closed, deleted, etc.? (Not sure how far to go just yet) */ string Version = "WeeklyOpen AutoTrader v2.0"; Special Notes : This system should start on Sunday when the market opens. This should be run on Daily charts. I do not guarantee any results especially if you decide to change the default settings or run this in another time frame. The EA looks back by bars so if it's not on a Daily chart you will get the wrong price. The EA may work (place trades) if turned on during the week but not what I envisioned and results are not guaranteed. It's really meant to start on Sunday and run through Friday's close. It is extremely important that MT4 run all week with the charts open and EA attached. No EA can do its thing unless everything is running. That's why you have an EA to trade for you. The EA will only run on demo accounts. I will release a live version if it pans out to be something. I will try to post weekly updates at least of the results. Currently supported brokers : All as long as you specify whether your broker has a Sunday bar or not ( BrokerHasSundayBar = True/False ). Here are some of my other threads you might find interesting... "The Pip Nailer" (EA - MTaboneWeb) AshFX Daily (EA - MTaboneWeb) DailyHighLow (EA - MTaboneWeb) GrabMyOrders (EA - MTaboneWeb) TossUp (EA - MTaboneWeb) Weekly Open EA The EA attached to the 2nd post is out of date. Please use the EA on this post (#1). A special thanks to all who have supported this EA and continue to support it.
+
+--- 帖子 #2 ---
+Here is the EA for this system. This should be run on Daily charts. I do not guarantee any results especially if you decide to change the default settings or run this in another time frame. The EA looks back by bars so if not on Daily you will get the wrong price. Also at this point the EA will only run on demo accounts. I will release a live version if it pans out to be something. I will try to post weekly updates at least of the results. Thank you in advance for any help I can get in testing this. As long as I'm not blocked from doing so I will always keep the second post up to date with revision information and the latest version of the EA. Currently supported brokers: Interbank FX FXDD If you would like to see a broker added to this list please post which broker and whether or not they have a bar for Sunday or not. I will be more than happy to incorporate them for you. Version 1.0b: Merged v1.0a versions together where the EA determines your broker and uses the right bar count. Fixed a bug related to closing and reopening the EA/MT4 where SL would be set to nothing. You will want to remove/delete the original EA as it contains bugs and the new EA will not overwrite it because the name is different. Any charts that had the old EA will need to be updated with the new one. From now on this should not be an issue as the name will not change anymore. Thank you.
+
+--- 帖子 #3 ---
+Thank you, mtaboneweb. It looks good. I'll demo it. Thanks again.
+
+--- 帖子 #4 ---
+Good stuff mate, I'll be testing for you and will post my results every week. I will be running the IBFX one on all the majors and the gbp/jpy to see what kind of results we get. Cheers,
+
+--- 帖子 #5 ---
+My thanks to everyone who joins the testing. Let's see how it all works out.
+
+--- 帖子 #6 ---
+Addition... This system should start on Sunday when the market opens and the EA should be disabled on Friday before market close. All open and pending trades should be closed before market close on Friday. Re-enable the EA before market open on Sunday so it can set the initial trades right away. It may work if turned on during the week but not what I envisioned and results are guaranteed. Also, It is extremely important the MT4 run all week with the charts open and EA attached. No EA can do its thing unless everything is running. That's why you have an EA to trade for you. Thanks again for the support.
+
+--- 帖子 #7 ---
+Looking forward to testing this...thank you. Any particular pairs recommended?
+
+--- 帖子 #8 ---
+I've only checked out the EUR/USD but that's why we're here. It would be nice if we could test any and all pairs with the default settings but I programmed the EA so people could play with the settings (up to 5 trades in each direction buy/sell). Feel free to try anything you like. If anyone comes up with a good idea for an addition let me know and we'll see what can be done.
+
+--- 帖子 #9 ---
+hello there, I like this set up, but I get the unhappy face when I try to put the EA on,?
+
+--- 帖子 #10 ---
+Are you running a demo or live account?
+
+--- 帖子 #11 ---
+how do i only run the EA on a demo account, i have a live and a demo, and for me to run it, it seems like i have to have it on both accounts running. how should i do this
+
+--- 帖子 #12 ---
+I have visually traded this system as far back as January 2008. What I mean is I methodically went from week to week looking at the close of the previous week and adding lines based on that price to the charts so I could see where they were. I did this on an hourly chart to get a better idea of how the market flowed that week and made sure I could see the whole week. Then I took a screen shot and brought it into MS Paint (I hate this program but was quick to draw on the images). Then I just followed the movement of the hourly bars being as careful as I could to trade under my rules moving positions, calculating TPs and SLs and found in the end that most weeks were profitable and in the end was profitable over all. That's why I wrote the EA and why I'm eager to try it.
+
+--- 帖子 #13 ---
+Hello Mtaboneweb, Many thanks for all the ea's you have put out in the last few days. I am very impressed. I will be testing this one and your other ea's that you published as well. I will wait until Sunday though before I start this one as per your instructions. Thank You, Jeff
+
+--- 帖子 #14 ---
+You are running a live account and demo under the same install of MetaTrader? If thats the case then I would install another instance of MetaTrader and give it a new directory so it doesn't overwrite your original. Then just copy the EA into the Experts directory, setup a new demo on the new install, open any charts you want to run it on and attach the EA. Example: C:\Program Files (x86)\Interbank FX Trader 4-001 C:\Program Files (x86)\Interbank FX Trader 4-002 C:\Program Files (x86)\Interbank FX Trader 4-003 C:\Program Files (x86)\Interbank FX Trader 4-004 C:\Program Files (x86)\Interbank FX Trader 4-005 5 complete copies of MetaTrader installed on my computer each with their own directory. You will be prompted for this during the install process. Important: be sure to rename the shortcut that's placed on your desktop after each install otherwise it will overwrite the last shortcut with the new. I've just renamed mine accordingly as IBFX-001, IBFX-002, etc. Each time you install it again it will place a new shortcut. I am currently running 7 instances of MetaTrader on my server each testing different systems.
+
+--- 帖子 #15 ---
+Do you live in Arizona too?
+
+--- 帖子 #16 ---
+I am running it on a demo.
+
+--- 帖子 #17 ---
+i just checked the allow live trading and got the happy face.
+
+--- 帖子 #18 ---
+Hello Mtaboneweb, Yes, I do. If you message me I will give you some very good information if you are interested. Jeff
+
+--- 帖子 #19 ---
+You're quicker than I am. I was just going to suggest that. Glad it's working now.
+
+--- 帖子 #20 ---
+in the navigator window, the EA has no colour its just grey. some other ea's are yellow and blue..?
+
+--- 帖子 #21 ---
+Thanks Matt, This is great work you are doing I have installed a copy of FXDD for your EA specifically so nothing will be trading there except your EA. So we will wait and see. Account $3000, Leverage 1:100 Always SmartKenya
+
+--- 帖子 #22 ---
+Not sure what you mean color? Most likely the foreground color of the chart and nothing more. You can check by right clicking the chart and choose properties. There you can change all the colors you like. As long as the face is smiling on the EA then you should be good to go.
+
+--- 帖子 #23 ---
+Thanks for joining us here. Glad to have you.
+
+--- 帖子 #24 ---
+mtaboneweb , thanks for shering your work, I have placet the ea on my charts today set it up but it did place only a short order were Im shure it has to place short &amp; long, under the ea property both long&amp;short positions are enabled,,,, do you have any idea wat is wrong here ??? thanks again,, o k , not to bother , it took a bit of price movment probebly toch the last week closing price &amp; placet the long order to ,,, will do my best to test this interesting stretagy &amp; comeup with resolts,,,,,
+
+--- 帖子 #25 ---
+Okay, I have a 5k account with 1:100 leverage I have my first trigger ever on the GBP/JPY @ 212.03 for a BUY. This is through Interbank FX. Anyone else confirm that they got the same trade? All the best, Cheers,
+
+--- 帖子 #26 ---
+This is the graph of strategy tester from the beginning of the year. The profit is very small but the DD is only 0.60 %. Maybe increase the lots ?
+
+--- 帖子 #27 ---
+I have verry little expiriance with EA's but it looks like tht this EA dosent close the trades on fridays , the orders go thru to next week until sl hit, so beter check again your test,,,,, I can be wrong,,,,,
+
+--- 帖子 #28 ---
+Could u post the statement too?
+
+--- 帖子 #29 ---
+EUR/USD triggered a BUY @ 1.5696 All seems to be working so far Looking good,
+
+--- 帖子 #30 ---
+that means you only have the .ex4 file. Doesn't mean the EA won't work. It only means you can't edit the code.
+
+--- 帖子 #31 ---
+I have tested this the way you just did and found the results weren't accurate. I ran it week by week and found that stops and take profits were not honored through the tester. In other words, if it went to 26 pips + but didn't exactly land on 25 then the trade might not be stopped with TP like it should and sometimes doubled back to hit the SL. In a live trade this would not have happened or at least it shouldn't. I don't put any stock into the strategy tester but thanks for running it anyways. I'm not trying to discourage anyone.
+
+--- 帖子 #32 ---
+Yes I added this a bit late but it's all in the first post. Please check there always for any new additions. As long as I can edit that post I will keep it up to date. Close trades manually on Friday before close and restart EA first thing on Sunday. Close orders whether positive or negative. Each weeks trades should be placed and decided by that weeks data.
+
+--- 帖子 #33 ---
+That's true. I misunderstood about the color/area they were referring too. By the way, thanks for joining us Ronald.
+
+--- 帖子 #34 ---
+It's my pleasure mtaboneweb. I have a couple questions: Do you have any particular limit on stop and reverses? If say 4 sets of trades are stopped out what happend? Let's assume that the trade has a strong buy-side, and the first 2 TPs are hit. Then the trade goes to the sell-side, stopping out the original direction. Do you reopen all three trades on the sell side?
+
+--- 帖子 #35 ---
+I noticed an issue this morning. I had short positions that should have hit the stop loss when the long orders got triggered some time last night. For whatever reason the Short orders don't have a SL set and investigation shows that the EA told it to do that. Needless to say it shouldn't have happened and I will work on it and repost the fix ASAP. Current status should be: short1: +25 short2: -50 short3: -50 Long1: +25 Long2: +50 Long3: 0 (break even) Short4: +25 Short5: +50 Short6: 0 (break even) Long4: +25 Long5: +50 Long6: 0 (break even) Short7: -50 (should have been stopped out here) Short8: -50 (should have been stopped out here) Short9: -50 (should have been stopped out here) Long7: 25 Long8: 50 Long9: currently around 50+ pips but stop loss is set to break even by EA 75 pips positive for the week locked in if it worked right and the open long trade is set to break even. If the last trade doesn't hit the SL at break even then it may be very profitable at the end of the week although I'd be happy if it just doesn't hit the SL again. I will add this to the first post to help people understand my mind set. The idea of this is to try and capture some smaller pips but help strengthen the last trade which may catch a trend and ride the week out. Ideally I would like to see the first 2 orders TP at 25 and 50 (75 total) and then close the last trade at the end of the week manually because it stayed positive and hopefully bagged a lot more pips. But the opposite orders are there to either recover pips or ride the change is the market swings the opposite way. Ultimately I'm trying to catch the trend for the week and ride it out.
+
+--- 帖子 #36 ---
+Check out my last post. I was typing while you asked the question but I will also update the 1st post for new people. There is no limit. The idea is to try and catch the trend and recover some lost pips if any along the way. That's why I don't go infinitely +/- from the previous close. At some point I want it to ride things until the end of the week.
+
+--- 帖子 #37 ---
+Ok, and I guess you open all three trades per side regardless of historic TPs?
+
+--- 帖子 #38 ---
+sorry I didnt get you,, is the EA close trades by friday ? shurly if it doesn't then you canot test it on the stretegy tester over time, only week by week ,,,
+
+--- 帖子 #39 ---
+Correct.
+
+--- 帖子 #40 ---
+At this point the EA does not close the trades on Friday. Difficult to say if it will since brokers vary along with holidays and other things. May be possible to close them on Sunday if the EA still sees trades from the week before. I'll check into it. The EA should handle everything for you in the end and that's what I'm working on. I don't really support testing this EA in the strategy tester. I don't believe it's accurate enough to be helpful.
+
+--- 帖子 #41 ---
+I have to admit I'm not an advocate of EA's, but this one has caught my attention. I'll be testing it from next week and will post my results here.
+
+--- 帖子 #42 ---
+Post # 2 has been updated with the fixed EA. As long as I can I will strive to keep Posts 1 &amp; 2 up to date with the latest information. I'm not sure if there will come a point when I'm not allowed to change my owns posts. Does anyone know for sure if this is the case?
+
+--- 帖子 #43 ---
+OMG I'm not the only nutjob living in this state writing EA's!
+
+--- 帖子 #44 ---
+Your profile says Scottsdale, welcome to the thread neighbor.
+
+--- 帖子 #45 ---
+Thanks for the ea. It looks promising too but I have to wait until Sunday (argh), to test it. I'm excited to see how it does.
+
+--- 帖子 #46 ---
+Me too, thanks for coming.
+
+--- 帖子 #47 ---
+let me get this straight then, on e/u righ tnow u r long at 5748, 1 and 2 hit TP, so ur SL is b/e at 5748. so the pending shorts should be at 5748 right now correct? cuz i started this mid week, cuz of when u posted and right now i have a pending short at 5698. which is 50 off, b/c it has gone those 50 pips in TP. so something is off!
+
+--- 帖子 #48 ---
+I have posted an update to the EA and it dealt with SL troubles. I also do not recommend starting this EA mid week. You should start on Sunday open, run all week long, close trades on Friday afternoon before close, rinse and repeat. The 2nd post will always contain the latest EA as long as I can continue to edit that post. I will add a post when it's updated to alert people but you will always find the latest in post #2.
+
+--- 帖子 #49 ---
+Hello mtaboneweb, I just want to thank you again for your work and wonderful contribution to this project and the other projects you are taking on here at FF. I will be testing this on Sunday and will report how it goes. Thank You, Jeff
+
+--- 帖子 #50 ---
+Also, I am another nutjob from the Phoenix area. LOL Jeff
+
+--- 帖子 #51 ---
+hello again, When do you close these trades out? around 330 est on friday?i set this up on wednesday and Im +108!!
+
+--- 帖子 #52 ---
+alright all, for the week with this system, it should have produced 225 pips e/u 50 pips g/u 80 pips u/c now this is a little discretion, as far as the time you closed the trade, also for one pair it came within one pip of the new level, and kind of dropped and hung around so i used some discretion and played it as tho it hit, now that being said an ea wouldnt do that, so either way those pairs were all b/e at worst or in undeniable profit, e/u!! actually at second look it was u/c i was referring to here, and if not for discretion it would have been around -75 to -100 for the week. this being said might have to be modified for g/u and u/c i did some modifying on u/j and here are my results!! i modified it to a movement of 30 on this pair not 50, everything the same, 1st tp at 15, second at 30, move s/l every 30 step along the way, same rules. this pair did 510 pips this week. which seems great to me because the pair played in a 150 pip range this week, until a nice break today! again 510 pips on u/j this week modified! no idea what it would have been with the 50 level, but i will guarantee most likely not even half of this. does the ea have to be modified at all with these rules, cuz if so it might need to be done with the week on u/j! good week all
+
+--- 帖子 #53 ---
+That's great... Here are my results for the week ( EUR/USD ): short1: +25 short2: -50 short3: -50 Long1: +25 Long2: +50 Long3: 0 (break even) Short4: +25 Short5: +50 Short6: 0 (break even) Long4: +25 Long5: +50 Long6: 0 (break even) Short7: -83 (problem with EA / should have been -50 / fixed) Short8: -83 (problem with EA / should have been -50 / fixed) Short9: -83 (problem with EA / should have been -50 / fixed) Long7: +25 Long8: +50 Long9: +143 (closed this manually shortly before Friday's close) Total: +119 pips This would have been +218 if the bug in the EA hadn't of cost me -99 pips in error.
+
+--- 帖子 #54 ---
+That's amazing! This is why I started the thread because there are so many tweaks that could be tried but I think you nailed something on the USD/JPY. Thanks for joining us and I look forward to your future results. Make sure you're using the latest EA from post 2 as it stands right now. Future updates may have to go on the 1st post since I can't seem to edit the 2nd. Thanks again.
+
+--- 帖子 #55 ---
+Im geting ready to set up for next week I download the new EA vertion, 1- do I need to do any adjustment on the orderStop Triger + orderTrail Amount for the 3rd order so the EA will folow your discription from post 1, or just live them on "0" as the defult ? 2- what is your reson for plascing sl at 55 &amp; not 50 (be. the spred) ? thanks,
+
+--- 帖子 #56 ---
+Everything in the EA is the default that I'm running.
+
+--- 帖子 #57 ---
+I will be out of town on business from 7/13 through 7/18. I will try to respond as much as I can but will be limited to nights when I can. I will be running the EA on my Server only on the EUR/USD (IBFX and FXDD). When I get back I'm planning an overhaul to the 1st post. It appears I can no longer edit post 2 which is what I was thinking but not sure. I have big plans for this thread and others I'm planning to start although right now I have very little time. Keep in mind that during my paper trading this strategy there were losing weeks but over all it came out positive for a nice amount.
+
+--- 帖子 #58 ---
+Wow MTA, four pages already! Well, I'll read through them tonight, and will place some trades tonight for the week. I'm going to try and learn your ideas and then apply them.. thanks for continuing a good weekly strategy and trying to improve it.
+
+--- 帖子 #59 ---
+just started this on week open, and it only has either a sell or a buy trigger for the pair not both, but we need both to start the week, so what is the problem here
+
+--- 帖子 #60 ---
+Ok, I'm starting my tests for the EU this week. Just uploaded the EA and I'll be posting my results as well. I love the simplicity of this system. If we can effectively enter trends early and ride them out for the remainder of the week, I can see potential. I want to learn more about the system and find ways to limit the risk. GL we'll see how this plays out. Graham
+
+--- 帖子 #61 ---
+also should it be close of last week or open, with this huge gap that we just opened with it could cause problems, so im not sure about using the close, i mean normally the close and open are similar within 5 pips, but when it opens a week 20-35 pips away from that close, seems to me that the open would be a better price and if we deviate away from that price we have rellay started something for the week, i mean this big difference from end of friday til now, opening this week against the dollar can tell us more than last weeks close. just trying to get this straight. becuz if we were to modify u/j to 30 pips, the open this week would have been far below 30 pips, so i dont know how the ea would handle this, would it recognize this and only look for a long, thinking it missed its short, and then if this did continue to go south, although it didnt right now, when would it get us in to catch this downtrend. some ideas to think about, i dont have experience with EA's, but seems to me like it would throw the week off from the begininng
+
+--- 帖子 #62 ---
+The open of the week might be a good idea. Do others here feel the same way? Through my paper trading past weeks I haven't really seen a big problem especially using 50 pip difference but I'm open to suggestions and I see where the problems could happen if it's too far off on the open.
+
+--- 帖子 #63 ---
+Your welcome, thanks for joining us.
+
+--- 帖子 #64 ---
+In my past paper trading it did very well. Thanks for coming.
+
+--- 帖子 #65 ---
+well right now we would be +25 on u/c, +25 on g/u and +25 and +50 w/ s/l move to b/e on e/u. with the u/j (50) we would be in long, with u/j (30) we would have locked in +15 and +30 with s/l at b/e. so we would be up 165 pips right now, which looks nice, with last week close, we would be looking at no profit, couple open trades, maybe even down idk. but if u r riskin 1% per trade meanig 3% per pair cuz we have three trades per pair, we would be up 4% on the account, with half our trades riding with no risk. just something to think about also right now i am currently long u/c and short e/u. on the short e/u i have my pending by at the s/l like it should be. but on the long u/c my pending short is at its original level still, which is 100 pips away from my current entry, and it should be at my s/l of the open long. what can we do about this in the ea?
+
+--- 帖子 #66 ---
+Hi guys I placed the EA last night, thats what I find this morning, look at the pfices my orders are at,,, LOL did any one got the same ? I have try it on another mt4 platform it does the same, must be a bug init,,,
+
+--- 帖子 #67 ---
+You stated that the EA has to be disabled on Friday and turned back on on Sunday. What times? and why doesn't the EA just halt all trading at these times?
+
+--- 帖子 #68 ---
+hello there, I turned the EA on sunday evening, and let it run.. I am presently at +136 the pairs ar ethe first 5 when you hit the currency list on IBFX
+
+--- 帖子 #69 ---
+Hello, Which broker are you using and what version of the ea are you using? If you do not mind sharing that info? Thank You, Jeff
+
+--- 帖子 #70 ---
+I got the same results. I think the ea has a problem with some brokers. I am using Alpari to demo test the ea and I got the same issues as Hunky did. Jeff
+
+--- 帖子 #71 ---
+The next version will most likely do this for you but for now it doesn't. Please refer to the 1st post for the latest revisions. I've updated it today since I can no longer edit the 2nd post.
+
+--- 帖子 #72 ---
+Please refer to the 1st post. I've recently updated it to include the information from post 2 and it will be where I post updates to the EA and revision history. Thanks.
+
+--- 帖子 #73 ---
+Hello mtaboneweb, I appreciate all the hard work you are doing on this thread and other threads. The ea posted on the 2nd message is the ea that I used. When you get time would you take a look at it? I know it maybe sometime before you do as you are away. No hurries. Thank You, Jeff
+
+--- 帖子 #74 ---
+That one is the latest but I also placed it on the 1st post. I will be updating the 1st post from this point out.
+
+--- 帖子 #75 ---
+i think you are right, i also used alpari demo and it came out same way, it hasent executed any trade since sunday evening mtaboneweb, could you download an alpari demo and confirm this thanks for the good work
+
+--- 帖子 #76 ---
+mtaboneweb, Can you version number the EA in the file name? This way we can all know when the latest version is.
+
+--- 帖子 #77 ---
+Well, if you're not sure how to code it, just let me know.
+
+--- 帖子 #78 ---
+this strategy is looking great, nice start on the week already
+
+--- 帖子 #79 ---
+I'll check it out.
+
+--- 帖子 #80 ---
+I would rather keep the file name the same this way people can update it very easily by just overwriting their existing EA. Also, it says the version on the chart comments when the EA is attached.
+
+--- 帖子 #81 ---
+hello, what if i turn of when market is closed? ex. holiday, weekend, and get it activated at sunday open? thank you for sharing bro, could you make it possibly used on fxpro ? thanks a lot
+
+--- 帖子 #82 ---
+Just turning it off wont cancel any pending trades or open orders. Closing the positions is the next thing on my list.
+
+--- 帖子 #83 ---
+hey mta.. we are going to have to change the ea, cuz we are going to lose major money with it this way, the g/u has risen so far over the past day and a half, and has just dropped, im in at buy 1.9867, and my S/L amd pending order is 1.9917, although if u go in increments of 50 price topped out 2.0156, meaning most recent penetration of every 50 would have been 2.0117, meaning s/l at 2.0067, as well as new short pending order. this short would have already reached first two t/p. this 150 pip difference will kill our week here, i believe u said b4 that it will move at most two time, meaning if we originally entered long at 1.9867 and it was as high as it went, the lowest s/l and pending would be at 1.9967. while that isnt even good enough for our profits, mine is still at 1.9917. i think u r gonna need to change it so that if it hits a new 50 pip level increment from the open, then the s/l and pending order need to be at the previous 50 pip level increment. no matter if it shoots up 300 pips like it has. i know we r about profits here, and we have to lock them in someway, and letting over 150 pips go away is a lot to handle. so this is going to have to be checked out, cuz this is looking great, and performance seems to be there, but the tweaks will have to be made for all of us to profit
+
+--- 帖子 #84 ---
+I agree, I'll think about some options and post later today.
+
+--- 帖子 #85 ---
+I am presently at +292 for this week and theres still 3 more days to go..
+
+--- 帖子 #86 ---
+That's great. Which pairs/settings are you using?
+
+--- 帖子 #87 ---
+Any luck on this yet?
+
+--- 帖子 #88 ---
+I'm out of town at a training right now. Probably wont get to look until this weekend.
+
+--- 帖子 #89 ---
+im using E/U U/J G/U U/CHF U/CAD im not reporting dollars, im reporting pips. cheers!
+
+--- 帖子 #90 ---
+Pips can be grown with lot sizes and that all I pay attention to as well. Nice results.
+
+--- 帖子 #91 ---
+Here are my results so far http://brotraders.bravehost.com/ I will keep it updated every week or so All the best to everyone Cheers,
+
+--- 帖子 #92 ---
+Thanks for helping.
+
+--- 帖子 #93 ---
+Please see post #1 for the newest EA and the revision notes. I am limited on time this week so I didn't do much with it yet. Extra broker support should be on the next release. Also, I know I promised but I had to change the EA name so you will need to re-attach it to your charts. This way all of my EAs will follow a naming standard. My apologies. Remember to delete the old EA since it has bugs. Other than that have I missed anything?
+
+--- 帖子 #94 ---
+Hello, No worries. You are an asset to this forum and the work you do is very generous. Regards, Jeff
+
+--- 帖子 #95 ---
+Thanks Jeff, that means a lot to me. We're all here for the same reason (hopefully). I think most people here help in what ways they can and for me that's programming. To me testing the EA is just as important as writing it. If it has bugs then how much good is it. Also, where would we be without everyone else having their own ideas, changing settings, etc. People will ultimately help me too by discovering pairs and settings that work and I didn't have time to test on my own. Thanks again to everyone who chooses to participate.
+
+--- 帖子 #96 ---
+if we remove ea right now, and put newly update one on, it will not mess up any of the weeks settings, and where it puts its orders and everything, will it?
+
+--- 帖子 #97 ---
+Wait until Sunday. Remember it works on the open now rather than close.
+
+--- 帖子 #98 ---
+why there's so many canceled order, did it automaticly or you executed it?
+
+--- 帖子 #99 ---
+It's all handled by the EA.
+
+--- 帖子 #100 ---
+shouldnt we close all order son friday instead of sunday, say 3pm est or so?
+
+--- 帖子 #101 ---
+Hi mtaboneweb, thanks for all your affort, I try this new update still doesnot work with my broker(IKON GM) but it does work on INTERBANK,,,
+
+--- 帖子 #102 ---
+@mtaboneweb Please can you include FXopen and Alpari Uk in your Broker list. i'll apreciate that a lot as i intend testing the system. it looks promising.
+
+--- 帖子 #103 ---
+I didn't see any of cancelled ordered. But here is an issue I'd like to bring it to your attaintion: The EA (AshFX_AutoTrader) just add another pair to my account, and it is at the matket time 16:53 (FXDD). The trade is not even a good trade (GBPCHF). Can you set a checking for the EA not to open any trade at any time?
+
+--- 帖子 #104 ---
+Additional broker support is coming soon. Thanks for your support.
+
+--- 帖子 #105 ---
+Additional broker support is coming soon. Thanks for your support.
+
+--- 帖子 #106 ---
+Please post this question on the other thread and I'll be more than happy to check it out. I'm just trying to prevent cross-thread posts. AshFX Daily (EA - MTaboneWeb)
+
+--- 帖子 #107 ---
+meaboneweb if I may suggest , insted of adding broker list, just put an option of a price to start running from or a date , wont that be easier ? only suggesting,,,
+
+--- 帖子 #108 ---
+It all boils down to whether your broker has a Sunday bar or not. What I had planned on doing was a variable. SundayBar = True/False But that would have to be set by the end user. FXDD has no Sunday bar and IBFX does. The EA has to be able to find the open on Sunday whether you actually have a Sunday bar or not.
+
+--- 帖子 #109 ---
+Hi there, E/U triggered last night and the first lot took 50 profit, however the remaining two were for a loss. Meaning it was actually -100 for the day on that pair. I was wondering, do you think it would be beneficial if the break even was triggered after the first lot hits 50 pips, I know we may miss out on a few more pips if price does retrace, you'd think that once it hit 50 that chances are it will hit 100 and if not it doesn't matter, you've still booked 50 pips, if you think about it that's not bad for a day. There would be fewer losses. Also I was thinking, do you think it would be a good idea if the stop loss was raised 50 pips everytime it reaches another 50 pips, to lock on profit so to say. Good example on that is the G/U this week, which I think was as high as 300 pips, that could have been taken for 250 pips if the stop loss was moved when it hit 300. So .. it would be like this: Trade goes 50 pips stop loss is set to break even and 1 lot is taken for profit Trade goes 100 pips stop loss is set to +50 and 1 lot is taken for profit Trade goes 150 pips and stop loss is set to +100 and 1 lot is left to run untill a) it hits +100 stop loss (resulting in 100 pips profit on last order) b) it runs and runs and runs with the stop loss being set every 50 pips as an increment and you close it at the end of the week regardless (or if you really liked you could leave it going and use the stop loss which is set in profit anyway) Let me know what you think guys, Cheers, Blah - off to work again...
+
+--- 帖子 #110 ---
+From the results your getting I would say you changed the default settings? The other stuff can already be done through the settings and in fact described that way in the first post.
+
+--- 帖子 #111 ---
+i am not getting the ea to fully move 50 as long as it as moved to the next 50 level, i have a couple where it should have been moved another 50 in my favor but it hasnt, anybody else having this, maybe i will just have to see until i can run it from start next week idk, but it seemed to be on track i started the new ea middle week to see, and it actually caught to same price it should have been in, but now it isnt moving the increments it should when it has hit the next 50 level also have modified u/j to 30 and that is phenominal, might not even need other pairs!
+
+--- 帖子 #112 ---
+How about just putting this statement: if(DayOfWeek==0) retiurn(0);
+
+--- 帖子 #113 ---
+question on the order we have to tp at 50, how come we dont have the BE on 50 on that order as well, cuz we only have it on the one we let ride, but we move it for that order too, just not any order where the tp is less than the sl. is the right here, and why isnt that one on 50 as well? thanks
+
+--- 帖子 #114 ---
+I'll comb over the code again this weekend. If I find something I'll try to post early Sunday. This is why we demo test.
+
+--- 帖子 #115 ---
+Because when it reaches 50 it takes it's profit. No sense in updating a stop loss. only on the last order because it doesn't close.
+
+--- 帖子 #116 ---
+I am very interested in the system like break-out. Thank you for your sharing! and I am testing in demo account now! I will forward test and post the result in weekend. plz pardon my ugly english!
+
+--- 帖子 #117 ---
+New version on post #1. Also, original post has been updated to reflect the current state of the system.
+
+--- 帖子 #118 ---
+Well, it looks like the EA did things right on the open of this week. I'm excited about some of the changes and hope everyone is still with me here. Please give me some feedback about how you're all doing throughout the week. Also, if I missed something someone asked for please remind me so I can give it some attention. I started a new thread also today and things have been kind of crazy but I hope to be caught up this week. New thread - DailyHighLow (EA - MTaboneWeb) If you feel like it you can give it a look and let me know what you think. It's an older EA that I've been testing heavily since March 11th this year.
+
+--- 帖子 #119 ---
+Can i now use it on Alpari brokers?
+
+--- 帖子 #120 ---
+Yes. You just have to determine if they have a Sunday bar and set that to True/False in the EA.
+
+--- 帖子 #121 ---
+mtaboneweb, the new EA looks good so far working for me on 2 platforms with &amp; without sun bar,on gbpusd,eurusd,usdjpy,eurjpy but on the usdcad it didnt place any orders I wonder why ? &amp; I try on gold (xauusd) funny things happening her, a lot &amp; lots of orders are canceled evry other minet continuacely so I have canceld it,,, will keep you updated,,, thanks again,
+
+--- 帖子 #122 ---
+meta Do you change the magic number when placing the EA on different pairs you have the default seeting as 20080622, when placing on another pair do i change the number after using the default on one pair?
+
+--- 帖子 #123 ---
+I'm aware of the problem and I think it's working now. I'll post as soon as I'm satisfied it's gone. Thanks for letting me know.
+
+--- 帖子 #124 ---
+The magic number only has to be different if you wanted to run 2 or more charts of the same pair.
+
+--- 帖子 #125 ---
+Is anyone else having problems with the EA occasionally setting S/L on the wrong side of the original order price? I've had two occassions where the S/L for say a buy order was placed above the order price. So if the market turned against me, it would never hit the S/L which would obviously be bad. In one instance on the gbpusd (7/22/08 20:14) the order price was a buy at 1.9998 with a S/L of 2.0048 and a take profit of 2.0998. Another was with the eurusd with a sell order executed at 1.5893 and a S/L of 1.5843 and a T/P of 1.4893 (7/22/08 at 12:28). Anyone else see this happening. Actually, I think I'm a ding dong. The EA probably moved those stop losses up to keep gains. Duh. Sorry.
+
+--- 帖子 #126 ---
+As far as I know that's impossible. Any broker would not allow the trade to even be placed if the TP and SL are not on the right sides of the trade. Other than that, I have not experienced it myself. I do have a newer version I will be posting soon which works out a few bugs the EA had with changing direction, adjusting to break even, moving opposite orders, etc. but nothing to do with what you mentioned.
+
+--- 帖子 #127 ---
+You're correct. My bad, sorry. I wasnt thinking. It's just the break even being moved upwards on the 3rd order.
+
+--- 帖子 #128 ---
+You had me worried for a second.
+
+--- 帖子 #129 ---
+great job
+
+--- 帖子 #130 ---
+so far this week Im up 521 points, curious is a point a pip,, in the profit column I always pick points as profit.
+
+--- 帖子 #131 ---
+Yes, points are pips. What settings/pairs are you trading. It's great that you're having good results even with the version posted. I've since reworked to be much more solid on managing the trades and tested everything vigorously. Sometime today or tomorrow I will post the update and revision notes. Thank you for sharing your results with us.
+
+--- 帖子 #132 ---
+Please refer to 1st post for revision notes and new EA download.
+
+--- 帖子 #133 ---
+Im using gbp/usd usd/chf usd/cad gpb/jpy eur/usd usd/jpy
+
+--- 帖子 #134 ---
+Hello, Very nice results. Are you using default settings or different settings for each pair. If you are using different settings would you mind posting your set file for each one or tell everyone the different settings. Thank You, Jeff
+
+--- 帖子 #135 ---
+I have been making a lot of changes this week on this EA and have found some very possible hole that were patched. The latest version has been updated on the 1st post. Even through all of my testing, closing MT4 and reopen, knowing the the EUR/USD missed a couple of things this week due to the bugs, and stating the GBP/CHF on Wednesday just to see another pair and how it was performing... I'm still positive! Of course I feel all the problems have been resolved now but there was some heavy changes this week and through it all the EA is in profit. I can't wait to see what next week brings when I start a fresh week and a new demo.
+
+--- 帖子 #136 ---
+Trading gbpusd,eurusd and usdjpy, i'm at +44 pips for the week July 21-25. Stock settings except usdjpy where i used 30 pips for distance.
+
+--- 帖子 #137 ---
+Thanks for sharing your results. If you haven't already done so, remember to download the latest version. Thank again.
+
+--- 帖子 #138 ---
+Just downloaded the new EA. Thx for all the hardwork. Cheers, Pete
+
+--- 帖子 #139 ---
+Hello everyone, Here are my demo results using default settings on Alpari-US.The testing was done on the following pairs. Eur/USD. Gbp/Usd, Usd/Jpy, and Usd/CHF I am impressed with the results so far. I look forward to testing the new version next week. Regards, Jeff
+
+--- 帖子 #140 ---
+Jeff, Thanks for posting your results. What was the final pips (+/-). Did you download the latest for next week? Matt
+
+--- 帖子 #141 ---
+hi you must be very hardworking. my prayer for all your hardwork that you will be repaid in abundance and peace of mind so you make more money and guided all the time
+
+--- 帖子 #142 ---
+That's very nice of you. Actually we're all doing this together and I appreciate everyone's help with all the EAs I've been working on and the creators of those systems. It would be difficult to think of everything and test all the possibilities so it's nice to have help which benefits me as well. Can you believe I had the chance to do anything I wanted to tonight and this is what I chose. I don't feel bad. Actually I'm feeling very motivated tonight and updating some of the EAs. I actually started playing LOTRO and decided to do this instead. Have a great weekend.
+
+--- 帖子 #143 ---
+I'm planning on running IBFX and FXDD with all the possible pairs that match between the two brokers. I will use the default settings. The reason for both brokers is to see, over time, if one performs better than the other. By testing all pairs I hope to see some rise to the surface as money makers and others to do poorly. My overall results may be negative but I'll be checking closely to see which ones shine. Once we've seen some of the poor performers then we may want to consider tweaking the settings for those. Of course I hope all here will try what the like and experiment. I value everyones time/resources. Thanks for everyone's help. Hey look... We're pushing 10 pages now and it feels good. Thanks to everyone who's spoken up and contributed with results, feedback, suggestions, or just to say thanks. Looking forward to next week.
+
+--- 帖子 #144 ---
+Here are my past week results on 4 majors @ alpari-uk &amp; ibfx, with available latest version as July,20, with default settings: ibfx GBP/USD +61 EUR/USD -503 USD/JPY +214 USD/CHF +471 total: +243 pips alpari-uk GBP/USD +372 EUR/USD -379 USD/JPY +44 USD/CHF -384 total: -347 pips I will not make any comments about brokers so diferent results, because i'm sure mtaboneweb fixed some problems happened with no sunday bar brokers. It seems EUR/USD needs a different aproach on settings, but we are still in the beggining of testing, and i feel it's too soon to change the settings for only one pair. I will test again next week with the latest available version. Thanks mtaboneweb for your great work!
+
+--- 帖子 #145 ---
+Yes, I made a lot of tweaks to the EA this past week and have the latest version posted. I found a few potential problem and think I have it rock solid now. A reminder to all, Don't forget to set the " BrokerHasSundayBar " to true/false on the new EA. Also remember to consider changing the " BrokerCloseHour " setting. For me I set it to 19 for IBFX and 22 for FXDD since they are 3 hours different from each other and those times are 1 hour before market close . As for the EUR/USD, it did very well for me when I was paper trading over the past 7 months although it did have an occasional bad week here and there. Thanks for sharing your results.
+
+--- 帖子 #146 ---
+More info for my week. Broker was IBFX. Here's how the individual pairs faired. Just to note, i tweaked the distance for jpy to 30, and then change some of the sl tp by about 5 pips one way or another for some of them. Going forward, i'm going to use all defaults for awhile to get a good baseline before tweaking anything. swap profit eurusd 0.00 -4.58 gbpusd -0.10 6.59 usdjpy -0.02 -1.45 Total profit (pips) = 44 for the week.
+
+--- 帖子 #147 ---
+Thanks for the feedback.
+
+--- 帖子 #148 ---
+why wont this work right now on a live account?
+
+--- 帖子 #149 ---
+I have not released a version that will run on a live account.
+
+--- 帖子 #150 ---
+Good day... I am trying out the EA for fun and its opening orders and then removing the pending orders... it has done this like 200 times in the last few hours. I don't think a broker would let you run this EA for long. You need to fix this. When price gets 15 pips from the trigger area then it can put back on the pending order. To see it go up and down within a 10 pip range and open and remove pending orders all day and night is crazy! IMHO 69
+
+--- 帖子 #151 ---
+I've been running the EA on 6 pairs since Sunday's open and only have 9 canceled orders. I'm also using the default settings with OrderDistance set to 50. What settings are you using and with how many pairs?
+
+--- 帖子 #152 ---
+I am running it on the EURUSD only. here is the statement.
+
+--- 帖子 #153 ---
+I think you forgot to post the statement.
+
+--- 帖子 #154 ---
+Please see post #1 for EA, settings, revision notes.
+
+--- 帖子 #155 ---
+Yes.... I can post pictures ok but not the statement... trust me it did about 200 pending orders... no fooling ...
+
+--- 帖子 #156 ---
+You may want to download the latest version I just posted. Here is a screen shot of my entire history for 6 pairs since Sunday's open using the default settings. 18 canceled orders.
+
+--- 帖子 #157 ---
+Hello Matt, Yes terrific results on the new version. Here are my demo results using default settings. Please see attached word doc. Regards, Jeff
+
+--- 帖子 #158 ---
+Thanks for sharing.
+
+--- 帖子 #159 ---
+12 days of trading completed, since 10th of july i believe account is up over 20%, all default settings, except u/j at 30, in process of reworking settings for the other 3 as they work better. talkin about 4 majors here! so a little over two weeks, and up over 20%, although in the process of modifying the approach with this thing, and we can easily be over 25% a week, risking only 1% per trade. play around with this thing, look at some atr data, and average deviation from open price daily, and you can come up with an order distance that will achieve supreme results, and also an optimum pip total to end the week early in some circumstances!
+
+--- 帖子 #160 ---
+[/quote] It is extremely important the MT4 run all week with the charts open and EA attached. No EA can do its thing unless everything is running. That's why you have an EA to trade for you. [/quote] Hi mtaboneweb Thanks for all your works just to improve the life of others. Please I am new to forex trade. And I want to join to test run your EA. Please kindly explain to me, do you also mean that my computer and internet connection should not be put off all week, to get the EA working ? Once again, thanks for sharing. markpips.
+
+--- 帖子 #161 ---
+I have the latest version running also...seems to be working fine.
+
+--- 帖子 #162 ---
+It is extremely important the MT4 run all week with the charts open and EA attached. No EA can do its thing unless everything is running. That's why you have an EA to trade for you. [/quote] Hi mtaboneweb Thanks for all your works just to improve the life of others. Please I am new to forex trade. And I want to join to test run your EA. Please kindly explain to me, do you also mean that my computer and internet connection should not be put off all week, to get the EA working ? Once again, thanks for sharing. markpips.[/quote] Whichever computer is running the EA should remain running with internet, MetaTrader running, with charts and EA attached. Think of it this way... Your alarm clock waits for the right time to sound the alarm. Would your alarm sound if you unplug the alarm clock? I know that a very simple example but it's to the point. Each tick of the chart (current value is updated) is when the code fires. During that time it goes through all the logic to place new trades, close existing one, update stop losses, take profits, etc. None of that can happen if it's not running. I think people get confused thinking once you've got everything setup then it just runs on your account somewhere in cyberspace and that's not the case. It manages your account for you as if you were doing it yourself but it needs to tools running to do that.
+
+--- 帖子 #163 ---
+Thanks mtaboneweb, I have got it.
+
+--- 帖子 #164 ---
+Testing EA started on Jul 27/08. First results attached. This system may not be suited for G/J.
+
+--- 帖子 #165 ---
+Thank you for contributing. The more we can test the better off we'll be. I appreciate your help and all the others here as well.
+
+--- 帖子 #166 ---
+EUR/USD current... -70 pips closed with +105 floating Stop loss has been moved to +50 since it's over 100 now. If it doubled back now then -20 on closed. If it moves to +150 then it'll lock in +100.
+
+--- 帖子 #167 ---
+GBP/JPY current... -225 pips closed with -42 floating I don't see where this pair is doing very well under the default settings. It may do better if we tweaked the settings. Any ideas?
+
+--- 帖子 #168 ---
+GBP/USD current... 0 pips closed with +98 floating Stop loss has been moved to +50 since it must have gone over 100 at some point. If it doubled back now then +50 on closed. If it moves to +150 then it'll lock in +100.
+
+--- 帖子 #169 ---
+USD/CAD current... +25 pips closed with +46 floating Stop loss is still at -50 since +50 hasn't been hit yet. If it doubled back now then -75 on closed. If it moves to +50 then it'll lock in +75. This would also leave the 3rd order open with break even and floating around +50.
+
+--- 帖子 #170 ---
+USD/CHF current... -75 pips closed with +84 floating Stop loss has been moved to 0 since it's over 50 now. If it doubled back now then -75 on closed. If it moves to +100 then it'll lock in -25.
+
+--- 帖子 #171 ---
+USD/JPY current... -125 pips closed with +70 floating Stop loss is still at -50 since +50 hasn't been hit yet. If it doubled back now then -225 on closed. If it moves to +50 then it'll lock in -75. This would also leave the 3rd order open with break even and floating around +50.
+
+--- 帖子 #172 ---
+Started EA on Sunday with IBFX. Trading gb/usd,eur/usd,usd/jpy,usd/chf,usd/cad all default settings. Closed profit is -236 bpips, open profit is ~395 pips.
+
+--- 帖子 #173 ---
+Cool, without the GBP/JPY it looks like you may end in a very good week. Thanks for sharing.
+
+--- 帖子 #174 ---
+Yeah, things look good today. Thinking it may be smart to set the trailing stop on the 3rd order. Anyone else using trailing stops? Although i want to give it enough room without stopping out prematurely.
+
+--- 帖子 #175 ---
+If you are using the default settings it should be closing the gap with stop loss and opposite orders every time it moves another +50 pips. Check some of your trades that are +50, +100, etc. and you should see the stop loss has been adjusted and opposite orders moved to those same levels. I you are +50 then break even, +100 then +50 locked in, +150 then +100 locked in, etc. The first order would close at +25 and the second at +50 leaving the third to keep going. So even if you just reach 50 then you've already locked in +75 on the first 2 orders.
+
+--- 帖子 #176 ---
+Good points. I did see that with every +50 pips it'll move the BE. I think I'll leave it as is. Here's hoping for a good week. Off topic, i just started testing the ashfx ea too, how often do you normally see trades with that one? I'm assuming they're not real frequent.
+
+--- 帖子 #177 ---
+No their not very frequent at all. But it has been in profit.
+
+--- 帖子 #178 ---
+i have the latest EA installed and am presently @ +302, all default settings.
+
+--- 帖子 #179 ---
+Awesome, thanks.
+
+--- 帖子 #180 ---
+EUR/USD: +25 (6 closed trades) GBP/JPY: -150 (9 closed trades) GBP/USD: +125 (10 closed trades) USD/CAD: +25 (1 closed trade) USD/CHF: +25 (6 closed trades) USD/JPY: -125 (4 closed trades) Total: -75 (36 closed trades) Obviously the GBP/JPY and USD/JPY need tweaking. Some here have had luck with the USD/JPY and OrderDistance of 30? All are running default settings. Current open trades below...
+
+--- 帖子 #181 ---
+I've created another thread for a very simple EA I wrote for a friend. Check it out if you like. GrabMyOrders (EA - MTaboneWeb)
+
+--- 帖子 #182 ---
+EUR/USD: +225 (11 closed trades) GBP/JPY: -600 (21 closed trades) GBP/USD: +300 (14 closed trades) USD/CAD: +25 (1 closed trade) USD/CHF: +125 (10 closed trades) USD/JPY: -50 (7 closed trades) Total: +25 (64 closed trades) Total would be +675 (for the week ) without the GBP/JPY and USD/JPY. I think those need some tweaking. Obviously the GBP/JPY and USD/JPY need tweaking. Some here have had luck with the USD/JPY and OrderDistance of 30? All are running default settings. Current open trades below...
+
+--- 帖子 #183 ---
+Same pairs this week, all default settings on the EA. Still on version f, closed profit thus far +337 pips, with +51 in open trades. What time should I close out tomorrow in AZ time?
+
+--- 帖子 #184 ---
+Version f has the BrokerCloseHour setting in it. For IBFX I have it set to 19 and 22 for FXDD which are both 1 hour before trading ends on Friday. Check the setting and it should close everything for you and prevent new trades until Sunday's open. Great results, thanks for sharing.
+
+--- 帖子 #185 ---
+I've created another thread for a very simple EA I wrote for a friend. Check it out if you like. TossUp (EA - MTaboneWeb)
+
+--- 帖子 #186 ---
+Your are correct sir. You are the friggin man. We'll see how things end tomorrow. So far, so good. I'll check out the other EA too. Still waiting for some trades on the AshFX EA, looks like there may be some soon looking at the trends of the indicators. Mucho gracias.
+
+--- 帖子 #187 ---
+No problem, thank you.
+
+--- 帖子 #188 ---
+Be honest and tell me what you think... Poll: Do I have to share my source code?
+
+--- 帖子 #189 ---
+It would be nice to see it in order to learn. I've been meaning to try and start making my own EAs, just finding the time. Haha, I shouldn't complain to you from the sounds of it, you have a lot going on too. Being able to see how others are doing something rather than starting from scratch is nice. I also wonder if there are any devious things one (not saying you) could do inside the code in an EA. It might be sorta tough to putting real money up without being able to see the guts. Plus, being a techie, it's nice to not have to reinvent the wheel if there are examples out there. Also, sometimes someone may look at your code and catch something or have a good suggestion for improvments. On the other hand, I understand having put forth the effort and not wanting to just 'give' it away. But what if down the road, someone knows something that you don't and you'd like them to share. It sorta goes both ways. I guess I can argue either way. Ultimately though, it's your decision and I respect that. I did vote yes though ;-)
+
+--- 帖子 #190 ---
+Update on my weekly results +465 pips. I'll update with more detailed results. Same major pairs though with default settings and version f. Will use the updated version starting next week. Good job my friend, results thus far have been nice.
+
+--- 帖子 #191 ---
+Honesty is exactly what I want. You have to cast your vote for what your heart says otherwise it's not your vote. I fully expect some people to vote Yes but it will not change my opinion and I'm not trying to change yours. I respect your vote and wish for it to stand.
+
+--- 帖子 #192 ---
+Hi guys , the ea preform acording to plan this week didnt see any problem with v.f , just close all orders, last week I put to many pares on than I coudnt keep trac so this week I use 3 platforms 1- with gbpusd+ usdcad, that was runing on INTERBANK (with a sunday bar) , 2-with gbpusd + eurjpy on IKON ( no sunday bar) 3- with xauusd (gold) on IKON , all with defult setings, on xauusd I had to add "0" to all i.e. 50pip=500pip on gold,,,,, results for "1" = gbpusd = +254 usdcad = -33.9 results for "3", xauusd = 364.5 continu in the next post,,,,,
+
+--- 帖子 #193 ---
+Here are my past week results on 4 majors @ ibfx &amp; alpari-uk, with version 1.0f, with default settings: ibfx GBP/USD +245 EUR/USD +306 USD/JPY -244 USD/CHF +163 total: +470 pips alpari-uk GBP/USD +364 EUR/USD +306 USD/JPY +25 USD/CHF +161 total: +856 pips I'm still comparing ibfx/alpary charts to determine why so diferent USD/JPY results. My plan for next week is making a testing grid using diferent parameters.
+
+--- 帖子 #194 ---
+EUR/USD: +321 (12 closed trades) GBP/JPY: -1275 (45 closed trades / awful, will not use next week with defaults ) GBP/USD: +247 (21 closed trades) USD/CAD: -33 (6 closed trade / a lot of ranging this week) USD/CHF: +193 (12 closed trades) USD/JPY: -258 (15 closed trades / needs tweaking from defaults) Total: -805 (111 closed trades) Total would be +728 (for the week ) without the GBP/JPY and USD/JPY. I think those need some tweaking ( absolutely ). Obviously the GBP/JPY and USD/JPY need tweaking. Some here have had luck with the USD/JPY and OrderDistance of 30? All are running default settings on IBFX . All pending and open orders were closed by the EA like they should so I'd say this week went well as for the EA functioning properly. Thanks to everyone for sharing and testing.
+
+--- 帖子 #195 ---
+the result on IKON platform for gbpusd are better gbpusd = +431 eurjpy = 126.4 it is a big defrence betwin the sun &amp; no sun platform but verry erly to judg, will look at it tomorow try to analise the defrences,,,, mtaboneweb , about the sorce code isue , I dont think you need to publish it after so much effort you put into it be. I have seen before some kroocs that took codes from other &amp; sold them like it was there owen , but I hope you will still let us use it ,,,, have grate weekend all .
+
+--- 帖子 #196 ---
+Is it me, or is it strange that Alpari and IBFX have such extreme differences on some pairs? Looks like good gbpusd and eurusd are the most profitable at the moment with this system. Looks like usdjpy is the one that differs so greatly.
+
+--- 帖子 #197 ---
+I didn't look at any other pairs when developing the system and defaults. I just looked at the EUR/USD and all of my testing witht the defaults was in that direction. GBP/USD is similar and probably why that one does weel too. I'm sure the settings can be tweaked for the other pairs to make them more profitable.
+
+--- 帖子 #198 ---
+This week I'm running the default settings on: EUR/USD GBP/USD USD/CAD USD/CHF I will be running modified settings on: GBP/JPY USD/JPY Mods: OrderDistance = 30 Take profits are 15, 30 and 1000 for orders 1, 2, and 3 Order 3 has break even set to 30
+
+--- 帖子 #199 ---
+for TP3 standard and the mod, does it has trailing stop?
+
+--- 帖子 #200 ---
+Yes, it trails by the OrderDistance.
+
+--- 帖子 #201 ---
+wow, it rocks !
+
+--- 帖子 #202 ---
+mtaboneweb, pls look at this attechet report , only on the xauusd the ea v. g , place only 2 orders for short &amp; for long 3, thats only on the xauusd with the others no problems so far . I wonder why ???
+
+--- 帖子 #203 ---
+I'm not sure... It may have something to do with the spread? Are you using the defaults (50 OrderDistance)? That may be too tight for that pair.
+
+--- 帖子 #204 ---
+last week I use this pair (you can see report from last week)it was all good with previos version,,,
+
+--- 帖子 #205 ---
+It could have been that the price was just too close for the third order to be placed. It doesn't place all three at the exact same time although that is what I've tried to accomplish with any of my EAs. Dealing with brokers and placing, modifying orders can be tricky sometimes. There's a large portion of extra coding in all of my EAs just to make up for things that should not happen but in reality they do.
+
+--- 帖子 #206 ---
+it does not look like a timing &amp; price isue be. olso the pending orders for short are 2 not 3 ,,,,,
+
+--- 帖子 #207 ---
+Hi, I've tested the latest version of the EA on some main pairs and it worked. I like the idea which it is supposed to do. Now I would like to try it on real acct. with lot size 0.01 and watch it carefully with only one pair at a time. Any strategy with hard stop loss (the money management) may be a winning one (according to my experience). Thank you very much
+
+--- 帖子 #208 ---
+I'm very sorry but at this moment I'm not offering a live version.
+
+--- 帖子 #209 ---
+when you release it to live account for free? and if i wish to play it with 0,1 lot, how much minimum balance should we have?
+
+--- 帖子 #210 ---
+mtaboneweb, must be something wrong with the ea v. g, this morning I see it didnt place any orders on the IKON (no sunday) platform were Im runing the gbpusd+eurjpy,same broker with the xauusd,,, the IBFX platform runing good. pls chek ,,, have a nice day
+
+--- 帖子 #211 ---
+The first post's information has been updated.
+
+--- 帖子 #212 ---
+it was said that u/j and g/j are on modified settings this week of 30 instead of 50. i understand u/j at 30, but i cant imagine g/j being 30, maybe 70-80, can u clarify mtabone!
+
+--- 帖子 #213 ---
+I've cut both for the week since they weren't doing well with 30. I'm waiting to see if others have had any luck with other settings.
+
+--- 帖子 #214 ---
+Yen results so far: settings 50/25/50 USD/JPY: +25 GBP/JPY: -625 EUR/JPY: +275 settings 40/20/40 USD/JPY: +60 GBP/JPY: N/A EUR/JPY: N/A settings 30/15/30 USD/JPY: -195 GBP/JPY: -825 EUR/JPY: +195 Surprisingly, e/j is doing well ! Maybe we should try larger settings next week on u/j and g/j
+
+--- 帖子 #215 ---
+Thank you very much for testing new settings and sharing them with us here.
+
+--- 帖子 #216 ---
+Here is the current status for this week on the EUR/USD. Combined history and open trades: +78 pips
+
+--- 帖子 #217 ---
+Here is the current status for this week on the GBP/USD. Combined history and open trades: +282 pips
+
+--- 帖子 #218 ---
+Here is the current status for this week on the USD/CAD. Combined history and open trades: +226 pips
+
+--- 帖子 #219 ---
+Here is the current status for this week on the USD/CHF. Combined history and open trades: +35 pips
+
+--- 帖子 #220 ---
+I noticed you are now running 2.0 and the revision notes show 2.0 as well, but I can't find the attachment anywhere?? Do we have to email you now for v2.0? I started reading this post last week, mid-week and didn't want to start running it mid-week, as suggested. I've been running only the EUR/USD since Sunday and have the exact same results as you so far. At least consistancy is there. Just wondering how to get the upgrade to v2.0 now is all (also, is v2.0 the version for live accounts?)
+
+--- 帖子 #221 ---
+Here is the current status for this week on the EUR/USD. Combined history and open trades: +118 pips
+
+--- 帖子 #222 ---
+Here is the current status for this week on the GBP/USD. Combined history and open trades: +323 pips
+
+--- 帖子 #223 ---
+Here is the current status for this week on the USD/CAD. Combined history and open trades: +278 pips
+
+--- 帖子 #224 ---
+Here is the current status for this week on the USD/CHF. Combined history and open trades: -60 pips
+
+--- 帖子 #225 ---
+Attached is details of trades for week ended Aug 01. E/J +$2.05 220 pips E/U +$5.28 528 pips G/J -$7.66 -998 pips G/U +$0.99 99 pips Total +$0.66 -151 pips Without G/J it would have been a great week. Tested on IBFx, set sunday candle to false, part way through week set TSL at 25 trigger and 25 distance (got tired of seeing first trade gain 25 pips and than having the last 2 trades retrace for 50 pip lost).
+
+--- 帖子 #226 ---
+I'm really not liking the GBP/JPY but EUR/USD and GBP/USD has been doing well the last couple of weeks. I hope no one here thinks any pair will always be positive every week. During my paper trading the EUR/USD did have bad weeks but all in all was a winner in the end. With good money management it could grow an account nicely. I will be trading this live next week and will post results. My thought is to only risk 3% on any set of trades (possible -150 pips with defaults). Lot sizes below are based on an InterbankFX mini account where 0.01 lot size is $0.01 cents per pip. Start with $400.00 account: 400 x 0.03 = 12.00 (potential loss per set of 3 trades) 12.00 / 150 = 0.08 (lot size) My results from last week: EUR/USD: +321 GBP/USD: +247 USD/CAD: -33 USD/CHF: +193 +728 pips at 0.08 lots is a gain of $58.24 New account balance would be $458.24 Repeat: 458.24 x 0.03 = 13.75 (13.7472) 13.75 / 150 = 0.09 (lot size / 0.09166666666....7) Take the last results I posted here which is not the close this week: EUR/USD: +118 GBP/USD: +323 USD/CAD: +278 USD/CHF: -60 +659 pips at 0.09 lots is a gain of $59.31 New account balance would be $517.55 The last 2 weeks have been kind but it will not always be so but if you base your lot sizes on your account balance then losses and profits will scale accordingly. Then if your winning more weeks than loosing your doing good. Money management is next in the revisions.
+
+--- 帖子 #227 ---
+Final numbers for this week. I hope no one here thinks any pair will always be positive every week. During my paper trading the EUR/USD did have bad weeks but all in all was a winner in the end. With good money management it could grow an account nicely. I will be trading this live next week and will post results. My thought is to only risk 3% on any set of trades (possible -150 pips with defaults). Lot sizes below are based on an InterbankFX mini account where 0.01 lot size is $0.01 cents per pip. Start with $400.00 account: 400 x 0.03 = 12.00 (potential loss per set of 3 trades) 12.00 / 150 = 0.08 (lot size) My results from last week: EUR/USD: +321 GBP/USD: +247 USD/CAD: -33 USD/CHF: +193 +728 pips at 0.08 lots is a gain of $58.24 New account balance would be $458.24 Repeat: 458.24 x 0.03 = 13.75 (13.7472) 13.75 / 150 = 0.09 (lot size / 0.09166666666....7) End of this weeks totals: EUR/USD: + 435 GBP/USD: + 556 USD/CAD: + 440 USD/CHF: + 15 + 1,446 pips at 0.09 lots is a gain of $130.14 New account balance would be $588.38 The last 2 weeks have been kind but it will not always be so but if you base your lot sizes on your account balance then losses and profits will scale accordingly. Then if your winning more weeks than loosing your doing good. Money management is next in the revisions. The pips above are correct but dollar amounts may vary because only certain pairs pay $1 per pip while other pairs are worth less than $1 per pip. Results for each pair below.
+
+--- 帖子 #228 ---
++435 pips -5.53 swap $429.47 total
+
+--- 帖子 #229 ---
++556 pips -8.00 swap $548.00 total
+
+--- 帖子 #230 ---
++440 pips -1.40 swap $412.81 total
+
+--- 帖子 #231 ---
++15 pips +1.05 swap $12.41 total Not fantastic, was better last week, still positive though.
+
+--- 帖子 #232 ---
+Would have been $1,402.69 playing full mini lots for the week. Remember, things don't always go well every week.
+
+--- 帖子 #233 ---
+Here are my results as pdf doc. For now, it seems the best pairs are: default settings (50/25/50) GBP/USD, EUR/USD, USD/CAD, EUR/JPY. 40/20/40 USD/JPY 30/15/30 USD/CHF Next week I'll test larger settings on not major pairs, trying to optimize it.
+
+--- 帖子 #234 ---
+Oz, Thank you very much. Very helpful.
+
+--- 帖子 #235 ---
+mtaboneweb, i sent you a mail, thanks in anticipation
+
+--- 帖子 #236 ---
+[quote=mtaboneweb;2100773] Version 1.0g (95 downloads): * DisplayProfitLoss added (Display Profit/Loss on Chart comments?) * Send E-mail when new orders are placed * Send E-mail when order total changes (does not count pending orders) Version 2.0: * Fixed bug with pip calculation on profit display * Fixed problem with E-mail display text * Modified key areas to work with live accounts * Live version made available The EA attached to the 2nd post is out of date. Please use the EA on this post (#1). I am testing version 1.0f and wanted to update to 1.0g or 2.0 for next week but I don't see the link to d/l the latest version on post #1. Can you put the link up again? Thanks.
+
+--- 帖子 #237 ---
+[quote=fxtrader2k7;2156582] There is an email link in the first post to contact me about getting the latest version.
+
+--- 帖子 #238 ---
+ok, I started on a new demo now, I will post results, using the latest version, i hope it works as well as 1g!! cheers all, may this week be as good or close as last week..
+
+--- 帖子 #239 ---
+Big differences between demo and live account this week. Please refer to the following posts. You will notice that the weekly opening prices vary from demo accounts to live. I'm sure they are not always one to one at each tick of the chart as well. It's important to remember that the last 2 weeks have been very good and last week's live account test made $97.70 in real money. I don't pretend to think that every week will be a winner but obviously it's hoped that it's a long term winner over all. It's only Tuesday and could still go either way. I am still running this live this week as well as demo.
+
+--- 帖子 #240 ---
+EUR/USD Demo.
+
+--- 帖子 #241 ---
+EUR/USD Live.
+
+--- 帖子 #242 ---
+GBP/USD Demo.
+
+--- 帖子 #243 ---
+GBP/USD Live.
+
+--- 帖子 #244 ---
+USD/CAD Demo.
+
+--- 帖子 #245 ---
+USD/CAD Live.
+
+--- 帖子 #246 ---
+USD/CHF Demo.
+
+--- 帖子 #247 ---
+USD/CHF Live.
+
+--- 帖子 #248 ---
+mtaboneweb, I noted also diferent results between demo and live... but fortunely for me, live is better than demo! We still have 3 days to go. Usually the last 2 days are very good. Attached Image Attached Image
+
+--- 帖子 #249 ---
+They've even had a different amount of trades. That's what I hate about brokers. Why should live and demo differ so much? It's crazy.
+
+--- 帖子 #250 ---
+I've noticed something very odd. EUR/USD Live account Open price for Sunday on Daily chart: 1.4945 Demo account Open price for Sunday on Daily chart: 1.4940 5 pip difference... Live account Open price for Sunday on Weekly chart: 1.4934 Demo account Open price for Sunday on Weekly chart: 1.4934 Same price...
+
+--- 帖子 #251 ---
+I've noticed something very odd. GBP/USD Live account Open price for Sunday on Daily chart: 1.9134 Demo account Open price for Sunday on Daily chart: 1.9125 9 pip difference... Live account Open price for Sunday on Weekly chart: 1.9136 Demo account Open price for Sunday on Weekly chart: 1.9136 Same price...
+
+--- 帖子 #252 ---
+Maybe using Weekly charts would be better than Daily? Live and demo accounts at least match. Just a thought...
+
+--- 帖子 #253 ---
+I've notice some strange transactions on my live account. Does anyone know what these may be? When I looked up a couple of the numbers they were orders that hit a stop loss for -$3.00 and these look like refunds for those. I'm not sure why they're in there but I'm not exactly complaining except if they were refunds because they should have been losers then they might have been winners and should have been more than $3.00 or at least could have been. The same number of transactions have shown up on my father's live account as well. Strange...
+
+--- 帖子 #254 ---
+mtaboneweb, am a newbie and i noticed this live/demo discrepancies some months ago. one thing that that helped was that i had acces to both live and demo charts with my broker even before depositing funds in the live account)not too many brokers allow this). i found these differences and one excuse i learnt here at FF was that they usually do not pay too much attention to thier demo servers. i had to backest my strategy all over again. and since that time all strategies i hope to develop has been tested on live data feeds. good luck
+
+--- 帖子 #255 ---
+Week ending 2008-08-15 (EUR/USD Demo). +17 pips
+
+--- 帖子 #256 ---
+Week ending 2008-08-15 (GBP/USD Demo). +258 pips
+
+--- 帖子 #257 ---
+Week ending 2008-08-15 (USD/CAD Demo). -207 pips
+
+--- 帖子 #258 ---
+Week ending 2008-08-15 (USD/CHF Demo). -507 pips
+
+--- 帖子 #259 ---
+Final numbers for this week. Week ending 2008-08-01 : EUR/USD: +321 GBP/USD: +247 USD/CAD: -33 USD/CHF: +193 +728 pips Week ending 2008-08-08 : EUR/USD: +435 GBP/USD: +556 USD/CAD: +440 USD/CHF: +15 +728 pips Week ending 2008-08-15 : EUR/USD: +17 GBP/USD: +258 USD/CAD: -207 USD/CHF: -507 -439 pips Pair totals : EUR/USD: +773 GBP/USD: +1,061 USD/CAD: +200 USD/CHF: -299
+
+--- 帖子 #260 ---
+Week ending 2008-08-15 (EUR/USD Live). Please not that I did turn this off for a day because it was taking such a hit and when I turned it back on last night I downed the lots from 0.06 to 0.01 which is why the pips/dollars will not match up. Live account was on an InterbankFX account but some with other brokers had better results. Please refer to previous posts to see how there were differences in price between live and demo this week. That is most certainly the cause for such different results. Previously I did note that Daily start of the week price for demo/live did not match but Weekly charts match on both live and demo accounts. Using this price may have yielded more similar results between live and demo and may be an option I would add to the EA (Choice to use Daily or Weekly charts). -532 pips
+
+--- 帖子 #261 ---
+Week ending 2008-08-15 (GBP/USD Live). Please not that I did turn this off for a day because it was taking such a hit and when I turned it back on last night I downed the lots from 0.06 to 0.01 which is why the pips/dollars will not match up. Live account was on an InterbankFX account but some with other brokers had better results. Please refer to previous posts to see how there were differences in price between live and demo this week. That is most certainly the cause for such different results. Previously I did note that Daily start of the week price for demo/live did not match but Weekly charts match on both live and demo accounts. Using this price may have yielded more similar results between live and demo and may be an option I would add to the EA (Choice to use Daily or Weekly charts). +85 pips
+
+--- 帖子 #262 ---
+Week ending 2008-08-15 (USD/CAD Live). Please not that I did turn this off for a day because it was taking such a hit and when I turned it back on last night I downed the lots from 0.06 to 0.01 which is why the pips/dollars will not match up. Live account was on an InterbankFX account but some with other brokers had better results. Please refer to previous posts to see how there were differences in price between live and demo this week. That is most certainly the cause for such different results. Previously I did note that Daily start of the week price for demo/live did not match but Weekly charts match on both live and demo accounts. Using this price may have yielded more similar results between live and demo and may be an option I would add to the EA (Choice to use Daily or Weekly charts). -429 pips
+
+--- 帖子 #263 ---
+Week ending 2008-08-15 (USD/CHF Live). Please not that I did turn this off for a day because it was taking such a hit and when I turned it back on last night I downed the lots from 0.06 to 0.01 which is why the pips/dollars will not match up. Live account was on an InterbankFX account but some with other brokers had better results. Please refer to previous posts to see how there were differences in price between live and demo this week. That is most certainly the cause for such different results. Previously I did note that Daily start of the week price for demo/live did not match but Weekly charts match on both live and demo accounts. Using this price may have yielded more similar results between live and demo and may be an option I would add to the EA (Choice to use Daily or Weekly charts). -827 pips
+
+--- 帖子 #264 ---
+I will be trading this live again next week but with 0.01 lots instead of 0.06 and will be cutting out the USD/CAD and USD/CHF pairs.
+
+--- 帖子 #265 ---
+Here are my results. My plan for next week is adding a new broker and go live again with GBP/USD only at Alpari. the testing settings will be 30/15/30, 40/20/40, 50/25/50, 60/30/60, 70/35/70 and 80/40/80. Oz
+
+--- 帖子 #266 ---
+Fantastic Oz, Thanks for sharing.
+
+--- 帖子 #267 ---
+on my side this week was bad verry bad- IKON (no sunday bar) = gbp/usd = -524 eur/jpy = +460 IBFX = gbp/usd= -942 usd/cad= -192 big defrenses betwin the 2 brokers,,,
+
+--- 帖子 #268 ---
+Hunky, Thanks for sharing with us.
+
+--- 帖子 #269 ---
+A new testing week coming.... good luck all!
+
+--- 帖子 #270 ---
+I don't understand how there could be such a discrepency in pip totals between demo and live?? A few pips different start of the week doesn't make sense?? I demo'd EUR/USD and GBP/USD on IBFX (second week was last week). Sure, the pairs had a lil trouble early on, but both finished the week off with positive results in the end! How could the live version be sooo off??!!?
+
+--- 帖子 #271 ---
+perhaps there is more resources. bandwidth in regards to the real money accounts, even a millisecond could result in a few pips difference?
+
+--- 帖子 #272 ---
+did anyone had similar results ?? this week was a kik in the,,,
+
+--- 帖子 #273 ---
+I am in the process of testing this strategy with a number of different take profit levels and OrderDistance levels. Anyone trading live should always be careful. I am live this week on the EUR/USD and GBP/USD using 0.01 lots on an IBFX account. I will post my progress in a day or two. Thanks again, Matt
+
+--- 帖子 #274 ---
+I understand and agree that there should be a differance of a few pips between demo vs live, but that doesn't explain why such a dramatic differance in total pip profit/loss? You would think a system that deals with 50pip stops and 50-100pip take profits wouldn't be THAT bothered with just a few pips off here and there!??
+
+--- 帖子 #275 ---
+EUR/USD +75 pips locked in and floating around +96 (stop loss secured at +50).
+
+--- 帖子 #276 ---
+GBP/USD -175 pips locked in and floating around +78 (stop loss secured at +0).
+
+--- 帖子 #277 ---
+For a Tuesday, I would say there is still hope for a positive week.
+
+--- 帖子 #278 ---
+I have a couple EA's on one account, is there any software that can tally the results of the weekly EA by magic number?
+
+--- 帖子 #279 ---
+Not at the moment but that would be a nice idea for an EA. It wouldn't take to much for me to write it and you'd just have to attach it to a chart and give it the magic number. I think I'll do that. Thanks.
+
+--- 帖子 #280 ---
+Current status for the EUR/USD Live account for this week.
+
+--- 帖子 #169 ---
+Current status for the GBP/USD Live account for this week.
+
+--- 帖子 #170 ---
+Current status for the EUR/USD Live account for this week.
+
+--- 帖子 #171 ---
+Current status for the GBP/USD Live account for this week.
+
+--- 帖子 #172 ---
+Current status for the EUR/USD Live account since going live on 8/3/2008.
+
+--- 帖子 #173 ---
+Current status for the GBP/USD Live account since going live on 8/3/2008.
+
+--- 帖子 #174 ---
+My Live account with GBP/USD only, took a big hit today: 5 S/L, and 700 pips down. In 8 seconds S/L has hitted 2 times. In 1h, 4 times. Again, very diferent results from demo. Nothing to do against it! For now i will compare the data of diferent brokers and trying to achieve an explanation for this.
+
+--- 帖子 #175 ---
+Done. You can find the EA on my forum.
+
+--- 帖子 #176 ---
+That is harsh Oz, this week my GBP/USD is not doing that well either although it's not that bad. The EUR/USD is doing good though.
+
+--- 帖子 #177 ---
+Here is my current status for EUR/USD and GBP/USD for this week on my live account. 0.01 lot sizes (1 cent per pip)
+
+--- 帖子 #178 ---
+Here are my past week results. This time i saw different behavior and results, even on twin accounts on same broker! I´m still investigating what may cause this. If after the next 3 weeks, the patterns between the diferent brokers/Live/demo, continues erraticly, I will consider not testing demo anymore and focus only on a 2 or 3 pairs live, and only on 1 broker. Oz
+
+--- 帖子 #179 ---
+has anyone tried this on fxdd?
+
+--- 帖子 #180 ---
+To all, I appreciate your time, support, and feedback. Due to certain circumstances I am closing down all my threads here because I can no longer support them. Not because I mentally can't but my purpose here has become skewed and I'm now in a gray area. I really don't want to say more than that so I hope you'll forgive me for being quick. Thanks again, Matt
+
+
+===== 附件下载链接 =====
+
+未找到附件

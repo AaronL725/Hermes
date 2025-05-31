@@ -1,0 +1,753 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+This thread is dedicated to a a particular breakout idea I've had but never really traded. I imagine it would suit autotraders very well but unfortunately I don't have the coding skills to explore this further. I believe it has similarities to a Donchian Breakout. The basic rules are as follows: Longs: If the current bar's close is higher than the highs of the previous 2 bars, then enter at a break of this bar. Shorts: If the current bar's close is lower than the lows of the previous 2 bars, then enter at a break of this bar. If the trade isn't executed on the very next bar, then it is cancelled. Take Profit and Stop Loss: Both set at whatever value ATR(50) is at the close of the current bar. An option could be to set TP at 2xATR. The theory is that although there will be less winners, in times of big movements, the profits can stack on. In this way, BE could be occur when the trade is in profit by 1xATR. Pairs to Trade: I anticipate this works better on pairs that tend to trend more than others or break out at different market opening times. Time Frame: I like the look of the 1 hour charts but signals occur on any time frame. This is a trading idea that I'd like to experiment with and see if a profitable system could be made out of it. I welcome all constructive contributions! examples to follow...
+
+--- 帖子 #2 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #3 ---
+In the 2nd example above, we can see that according to the rules, Breakouts 1, 4, 5, 6 , 7 were all valid and would have hit at least 1x the ATR. Breakouts 2 and 3 didn't trigger on the immediate next bars and so would have been cancelled.
+
+--- 帖子 #4 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #5 ---
+Of course losses will occur especially during ranging times, but the beauty of this method is the breakout in itself acts as a filter and can place you at the start of big movements where a succession of trades can occur. I welcome anybody and everybody to backtest this and tinker around, especially with timeframes, best times during the day to enter, stop/profit placement.
+
+--- 帖子 #6 ---
+Live trade. Let's see how it works out. Attached Image
+
+--- 帖子 #7 ---
+It's a neat and simple method... well done....I like it
+
+--- 帖子 #8 ---
+thanks!
+
+--- 帖子 #9 ---
+Simple mechanical system that doesn't require any interpretation, I think it has a lot of potential. Long term you will probably have less then a 50% win rate, which will require a lot of discipline and a good RR. When you forward test it, think about using a trade copier and setup multiple demo accounts and try different RRs as well as using ATR. Watch your win rate and RR and I'm sure you can make this work. Here is a chart for RR to break even, basically if you use a 1 risk: 2 reward you need a 34% win rate to break even and anything over 34% will be profit. Something to think about.
+
+--- 帖子 #10 ---
+AUD/USD live trade Attached Image
+
+--- 帖子 #11 ---
+Good thread. Thanks HarryPlopper. Dear generous coders, please help an indicator for the signal. Best Exciter135.
+
+--- 帖子 #12 ---
+yes, you're completely right. that's why I'm welcoming all suggestions on how to tweak it to minimize the losses and reap the gains.
+
+--- 帖子 #14 ---
+Inserted Code //+------------------------------------------------------------------+ //| Basic Arrow Signal.mq4 | //| Teamcashflow | //| Email: contact@teamcashflow.info | // Website: www.Teamcashflow.info | | //+------------------------------------------------------------------+ // comment #property copyright "www.Teamcashflow.info" #property link "http://www.teamcashflow.info" #property description " indicator does this ..... " #property indicator_chart_window #property indicator_buffers 2 int barsToProcess=100000; //---- buffers double Up_Arrow[]; // double Dn_Arrow[]; input color Dn_Arrow_Color = clrRed; // color for down signal input color Up_Arrow_Color = clrDodgerBlue; // color for up signal input int Arrow_Size = 2; //+------------------------------------------------------------------+ //| Custom indicator initialization function | //+------------------------------------------------------------------+ int init() { //---- indicators SetIndexStyle(0,DRAW_ARROW,0,Arrow_Size,Up_Arrow_Color); SetIndexArrow(0,83); SetIndexBuffer(0,Up_Arrow); SetIndexEmptyValue(0,0.0); SetIndexLabel(0,"Up_Arrow"); SetIndexStyle(1,DRAW_ARROW,0,Arrow_Size,Dn_Arrow_Color); SetIndexArrow(1,83); SetIndexBuffer(1,Dn_Arrow); SetIndexEmptyValue(1,0.0); SetIndexLabel(1,"Dn_Arrow"); //---- return(0); } //+------------------------------------------------------------------+ //| Custom indicator deinitialization function | //+------------------------------------------------------------------+ int deinit() { //---- //---- return(0); } //+------------------------------------------------------------------+ //| Custom indicator iteration function | //+------------------------------------------------------------------+ int start() { int counted_bars=IndicatorCounted(), limit; if(counted_bars&gt;0) counted_bars--; limit=Bars-counted_bars; if(limit&gt;barsToProcess) limit=barsToProcess; for(int i=0;i&lt;limit;i++) { if( Close[i] &lt; Low[i+2] &amp;&amp; Close[i] &lt; Low[i+1]) { Dn_Arrow[i-1]=High[i-1]+5*Point; } // Pullback calculation if(Close[i]&gt; High[i+2] &amp;&amp; Close[i]&gt; High[i+1]) { Up_Arrow[i-1]=Low[i-1]-5*Point; } } return(0); } //+------------------------------------------------------------------+ This should give you a visual representation of what you propose (ATR part not included). Not a coder but I understand enough to tweak stuff, did a quick EA on something similar it wasvinteresting but not profitable. You can try though, your idea's will be different from mine. P.S: This code was modified by me, original code is not mine, developer details left intact.
+
+--- 帖子 #15 ---
+I'm going to try the strategy next week (small positions of course for now), with a slightly different take on your idea. I think finding the directional bias from the daily or 4hr t/f is the first thing to establish. I usually prefer finding a "value" level for my entries, and I can do that with your strategy by use of pending orders. For the purposes of explanation, I've attached an h1 AU chart that doesn't strictly follow your rules, and uses 2 bars instead of 3 to decide whether I will have a set-up or not, and I will be simply looking for a lower low bar than the previous lower low bar if I'm selling and vice versa if I'm buying. The example attached is not the finished product for me yet but gives an idea of my thinking along HPs idea. I'm thinking at this stage that stops and tps will require further thought, but initially I'm planning to use the previous trigger candles high/low plus a couple of pips, and my t/ps pre-set at say 10 pips for 50-75% of the total position for now say, and let the rest run, or something along those lines. This way I think it's quite possible to build up some free positions as add on trades are made. The chart shows 4 horizontal lines which would have been the pending sells in this case. Using the method I've briefly described would have triggered 3 of these, and would have produced some tidy profits. As I said earlier, I like HPs idea and as he said, it can be effective on all t/fs and I feel that with a little bit of thought concerning a directional bias in particular and the obvious mm aspects, then it could develop into a nice and tidy strategy. Well done to HP, and keep posting your thoughts to help oneanother to get this working LL Attached Image (click to enlarge)
+
+--- 帖子 #16 ---
+Here's another example...GJ longs this time. I realise these are all hind sights at present, but seems promising and simple which is the best part of it. Once again these could have been all pending long orders (based only on my view that that the bias is likely up in this case ref the green rectangle I drew), and again they are approx based upon 1/3 previous candle retracement to get a "value" trade. 8 trades could have been made, and portions of each kept for a potential "runner" until stopped. I'll post some live ones maybe Monday if enough interest is shown Attached Image (click to enlarge)
+
+--- 帖子 #17 ---
+sure, go for it.
+
+--- 帖子 #18 ---
+This looks very interesting, thanks Landline!
+
+--- 帖子 #19 ---
+[quote=sinqua; This should give you a visual representation of what you propose (ATR part not included). Not a coder but I understand enough to tweak stuff, did a quick EA on something similar it wasvinteresting but not profitable. You can try though, your idea's will be different from mine. P.S: This code was modified by me, original code is not mine, developer details left intact.[/quote] Thanks Singua, is his just going to show where each breakout occurs?
+
+--- 帖子 #20 ---
+this we can use scaping?
+
+--- 帖子 #21 ---
+It's a simple method... More explore.. I like it
+
+--- 帖子 #22 ---
+I have 2 sets of pending longs at this point, (more may be signalled depending on pa) on NU based on my slightly adapted version of HPs idea as described briefly earlier. Nothing much more to say at this stage until they trigger and then the interest begins particularly with regard to managing the trades in my case.
+
+--- 帖子 #23 ---
+Nothing triggered yesterday, but 2 out of my 3 have today. NU simply took off without me, but my levels are still valid for now so those pendings will remain for the time being. Anyway I've used h4 instead of h1 for now because it's easier in terms of monitoring once every 4 hrs if nothing else, here's GU. I have several pending long sets. I set is in play. Further longs are waiting to trigger. As I said earlier, my plan (along the lines of HPs idea) is still being developed, but in general I think it is a relatively safe concept that he has, providing the directional bias is determined, and it's that particular point that really is the key to his idea I think. Of course trades lose, we all know that, but his concept and applying it to pending orders at value levels I believe will improve success. Some are bound to say...ah but it didn't trigger etc etc. which happens to be the case for me with NU as mentioned..... Well a no trade, whilst not a winning trade, is definitely not a losing trade either, and I accept it can be frustrating to see the train leave without me on board, but patience may still reward...time will tell. I won't complicate this more than HP intended, so I'll keep my planning to myself for the time being. I notice HP has not posted recently, nor has anybody else bothered to give their thoughts or ideas for that matter, so if no further interest, then I see no reason to post further either. LL Attached Image (click to enlarge)
+
+--- 帖子 #24 ---
+hi Landline, thanks very much for your contribution! I'd be most interested to know what TP,SL you're using on 4hr. Or any other filters you might be using. I've been working on a different system past few days using fractals and these perhaps could be used in conjunction with the main setup covered in this thread. Still investigating!
+
+--- 帖子 #25 ---
+Hi Here's an image of GU from earlier which has developed pretty well. It will not be clear to you from this what my approach is to be fair, but the core of it is based upon your approach actually, but with my own slant on it. I have 2 pending sets (I use 3 orders at same price for a single set btw with 3 separate tp's and all with the same s/l initially) that have not triggered at this point. One set did trigger and I hit my tp1 (10 pips) and tp2 (20 pips). The stop on TP3 has been adjusted to BE, and I've moved the tp to 150 pips which is now flexible enough to allow me a free trade at this point and/or take profit earlier depending on pa. MM is very different for most people, but my objective is always to hit a reasonably easy target of tp1 and tp2, then do what I need to do with tp3. My preference (with using your core idea) is still to use pending orders at a value price, and once again, those aspects are quite different for everyone which I realise. I haven't finalised my own approach fully yet, but it's getting there, and I'll be fairly close I'd imagine by the weeks end once more trades are running. The key however still remains determining a directional bias no matter how it's traded, and viewers need to put their focus into that as much as anything else imo. Attached Image (click to enlarge)
+
+--- 帖子 #26 ---
+Landline, very good! On 4hr charts, I think there could be quite a high probability of trades running for at least 10 pips upon the break of the breakout bar. Another option to explore could be to enter trade at the open of the next bar following the breakout bar, rather than the break of its high or low
+
+--- 帖子 #27 ---
+Yeah there are plenty of approaches I must admit. In my case, I suppose it could be called conservative in some ways, and by that I mean price has to work a bit to get back to the level I want because pending orders of course requires a retracement... and as I said earlier NU left without me but I can live with that lol...it happens. Most people are eager to get into a trade for fear of missing the bus. Often they enter at a poor price for that very reason and then stops need to be bigger and tps are that much more difficult to hit. But each to their own way
+
+--- 帖子 #28 ---
+i want to trade on the daily chart,what would be the best ATR setting?
+
+--- 帖子 #29 ---
+Several of mine have triggered, and some have already hit tp1 or/and tp2. Even NU retraced enough to trigger my first set, so pretty happy at present. UC attached is a typical example as described before. TP1 &amp; TP2 hit, s/l now adjusted on tp3 and tp3 target adjusted. The set is completely safe now with profit guaranteed, I need do nothing much now other than see whether I get into enough of a favourable position to consider another add on set, or whether the s/l gets hit first, I'll know that probably later today I expect, either way zero pressure now on this pair for me. I won't bore everybody by posting all the trades I have in play, it's more to do with seeing/exploring some possibilities which have been prompted by HPs core idea, and in my case slightly adapting it to suit what I want to see out of it. It would be interesting to see others join in with ideas along HPs concept for discussion. Attached Image (click to enlarge)
+
+--- 帖子 #30 ---
+An ATR is an ATR (Average True Range)...explain what you mean
+
+--- 帖子 #31 ---
+Landline: good stuff! hope it keeps working out
+
+--- 帖子 #32 ---
+sorry I confused,has harryplopper got his ATR set at 50?
+
+--- 帖子 #33 ---
+yes
+
+--- 帖子 #34 ---
+Well so far so good anyway. The rationale behind it makes sense for me at least. Identify a likely directional bias from a higher t/f (can be any dual t/fs...ie h1 + m15. or h4 + h1, or d1 + h4 etc) go to the lower t/f for signals in the same direction. Find hh or ll depending whether buying or selling (this is the part that is slightly different to yours, plus I prefer p/o's instead of m/o's). Make po's at a value level (this part is still being tuned for me). Continue making po's as above....then await retracement to start triggering the po's. As mentioned before, the directional bias of the higher of the 2 t/fs used is the main key element for me which improves a retracement only likelihood , as opposed to a trend reversal, and therefore it is essential that that aspect is correct more times than it isn't! So far I happen to have got it about right on the pairs I've selected the last couple of days. Btw, how is the fractal system going that you mentioned before that you felt might enhance your method further, any progress?
+
+--- 帖子 #35 ---
+A short entry set has triggered on retracement on CADJPY this morning from the m15 t/f in this instance. This is some small evidence for now that smaller t/fs can still be effective. Tp1 was nearly hit on the initial continuation.....we will see what happens Attached Image (click to enlarge)
+
+--- 帖子 #36 ---
+A quick update in running on above trades, It is now under some pressure there's no question about it, and perhaps I ought to have exited when in reasonable profit. I didn't, and I'm sticking to my guns, and letting the stop do it's job if it has to instead. This is a perfectly good example and a lesson of understanding that we cannot control the market but we can control our risk, and provided our perceived edge is still present, then that risk always remains (for me at least) until the trade becomes favourable or not as the case may be. Attached Image (click to enlarge)
+
+--- 帖子 #37 ---
+hi Landline, glad to see you're refining this to a method that works for you. The fractal idea was something I looked at a bit as a kind of filter but I think it might produce far too many false signals or let pips get away. Basic idea was is to wait for a fractal break to occur first followed by the 2 bar close. The 2bar close can actually be the bar that breaks the fractal. Just an idea... Attached Image (click to enlarge)
+
+--- 帖子 #38 ---
+I don't actually use fractals myself, but I can see there is potential depending how they are applied and what they are coupled with. I notice you have a t/l drawn for example (I happen to use t/l's also but in a quite unique way outside of this thread for now), anyway the way you use your t/l can be coupled as I said with fractals. Essentially, first determine the likely directional bias of either selling or buying, which in the case of AJ as in your image would be selling. Then draw your t/l as you have done, connecting the last 2 fractals, then when an opposing fractal appears and cuts a candle, then immediately place a market order sell trade. This way, you should still be getting a reasonable "value" trade level and more importantly still in line with the directional bias. These are just ideas for you to consider further if you are looking to take your fractal concept further. Here's a screen shot of AJ with fractals as per your post which shows 2 possible trade set ups as an example of entries for sells using ur t/l idea. Note, for some reason I only have SFractals on my platform but the signal is identical to your fractals nevertheless. Hopefully I haven't confused the whole issue, it's more of a food for thought post concerning your own ongoing improvement to your method really. Disregard if of no use ok. LL Attached Image (click to enlarge)
+
+--- 帖子 #39 ---
+i am not sure why this thread isn't attracting more attention,its very interesting to hear about a system from senior members of FF :-]
+
+--- 帖子 #40 ---
+Hi Harry, I've been looking to make an EA for this and initially it wasn't looking particularly positive. I've now added an option to use EMA so that we only trade with the general trend and it's looking more positive. So far I've tested on the 4hr against USDCAD and EURGBP and results are potentially promising. Now I could do with some input from others as to whether they feel it could be worthwhile and if there's anything we could add to it. Anyway, see what you think, Mark.
+
+--- 帖子 #41 ---
+Great! Thanks mbolton. I won't be able to test any EAs for the tiem being. What SL and TP did you test with? Why those pairs?
+
+--- 帖子 #42 ---
+Hi Landline, I'm just curious. Do you still trade the semaphore and stochzzmismatch you introduced in Al's system? If yes, is it still profitable today as it was when you developed the system? I ask because I see merit in it but would like to know for sure from the developer of that strategy. Thanks.
+
+--- 帖子 #43 ---
+SL and TP are based on ATR as you defined. I have added multipliers for each of the SL and TP so you could have for example a TP of 2x ATR and an SL of 1x ATR. No logic around the currencies I have tested -they were just the first ones I ran against. Mark.
+
+--- 帖子 #44 ---
+Just letting everybody know who is/was interested in thsi thread that I won't be posting here any more. Focusing on other methods now, more long term trading due to time limitations
+
+--- 帖子 #45 ---
+A new twist! Been looking at lots of breakout ideas of late, combining fractals, swings, various indicators etc. Stumbled across the 10 pip stretchy which basically involves identifying a 3bar swing high or low and then buying the open of the next bar. I like the idea of it and decided to see how it stacks up when combined with the 2bar close rule that is the main them of this thread. Upon first glance on a few pairs it seems to look pretty nice although I have no idea how it would hold up on a thorough backtest. The original pdf I found here: http://masrukhin.yolasite.com/resources/10%20PIPS.pdf You can see in on the attached chart the 1s represent the bars which formed a higher high or low compared with the 2 bars on either side. Unlike in the pdf, I have named the bar to the left of the swing high/low as Bar 1. For a buy, Bar 2 needs to close above the highs of both bar 1 and the Swing Low. Entry is at open of Bar 3, stop placed just under the low of Bar 2. Take profit can be personal preference. Perhaps 1:1 or 1:1.5. Reverse this for a sell. Bar 2 close should be lower than the lows of bar 1 and the swing high. Stop placed just above the high of bar 2, Entry at open of Bar 3. Please take a look. I think this has more promise than what was initially outlined earlier in this thread. Have a nice weekend!
+
+--- 帖子 #46 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #47 ---
+not without losses of course. in the UCAD example above, there was a buying opportunity right before the first selling one. the bar 3 buy is actually the bar 1 at top of the image, and would have stopped out.
+
+--- 帖子 #48 ---
+Hi, there are many options to trade for sure, but for now I'm sticking with my variation which has worked well for me lately
+
+--- 帖子 #49 ---
+Hi guys. I like the look of this version - at least enough to give it a run round the block. Will have a look and will stick around here if the interest in the thread is maintained going forward. EDIT: Is this in fact, a red-haired-second-cousin of the 1-2-3 trade?
+
+--- 帖子 #50 ---
+No. 1-2-3 is a reversal. This is a breakout. Are you going to tell them about the NY 7 AM BO?
+
+--- 帖子 #51 ---
+GJ, some 1 hour trade setups. Using ATR(50) of Bar 2 as the take profit, the first maybe would have stopped out, the rest all hit target.
+
+--- 帖子 #52 ---
+It's a breakout from a reversal, lol! 1-2-3 gets in earlier but I suppose these don't have to occur at an extreme H/L. I didn't think the NY 7am method had much relevance to this one.
+
+--- 帖子 #53 ---
+nice work harryplopper :]
+
+--- 帖子 #54 ---
+i think most of the times the breakout will be from a reversal but because the key part is the close, the breakout could be a sign of trend continuation
+
+--- 帖子 #55 ---
+thanks have asked in the indicator coding thread if someone could create an indicator based on an even more specific version of what i wrote a few posts earlier. Basically bearish bullish bullish pattern or bullish bearish bearish pattern. I think this has great potential but still tinkering around, an indicator would make spotting the setup much easier for a manual backtest
+
+--- 帖子 #56 ---
+awesome! would love to see an example of how you're using multi-timeframes!
+
+--- 帖子 #57 ---
+http://www.forexfactory.com/showthread.php?t=589242
+
+--- 帖子 #58 ---
+Had a look across various pairs over the weekend and on the Daily tf as a set-and-(kinda)-forget you are looking at a robust method for sure. I binned all directional-bias filters as they were causing us to miss too many huge moves. All you need to do is think of the pattern as an arrow. If the arrow points up, trade down. Arrow points down, trade up. The pattern appears over all tfs but higher up you do get a chance for a set-and-forget, as I said and this is attractive to a lot of traders who have to work a day job. The ultimate in naked-chart trading.
+
+--- 帖子 #59 ---
+Google "two bar reversal" / "two bar reversal indicator". Truly there is nothing (completely) new under the sun. It's all good...
+
+--- 帖子 #60 ---
+As a taster, here's Cable. I have not marked up those patterns that did not trigger. I had looked originally at entry on the break of the box. You could make more by entering on the open of the trigger candle, often substantially more. However there would be some losses added in doing that as well. Having said that, those losses could be offset by counter-trading. Swings-and-Roundabouts. Attached Image (click to enlarge)
+
+--- 帖子 #61 ---
+There are clearly numerous methods that can be applied to HPs main theme, and all most probably have their merits. In my case, I have chosen to play "retracement breaks", which is similar but not exactly the same as the methods shown in this thread. All the ideas are great, but I think each person should specialise their chosen technique personally, and fully understand it to avoid being derailed by all the alternatives available, otherwise you'll be forever hopping around without actually developing a system, settle into it, and effectively trade it. For instance, my version suits me, but I know that one size does not fit all, so I'd advise adopting the main theme as per HP, choose the way that looks easiest for you, and adjust it to suit your own taste, which is exactly what I have done. I'll post a chart or two during the week, but I emphasise, my take does not need to be the same as anybody elses, so long as I fully understand my own rules is all that matters, and the same should really apply to all traders imo. LL
+
+--- 帖子 #62 ---
+Absolutely agree, Landline. Even this one I'm looking at is close to one I already trade on the daily tf, Daily Colour Change. The reason I went with the variant I have here, is that not only is it one I have looked at before called ''Three Wise Men'' but more importantly that it is the one HP himself introduced via the PDF ''10 Pips Anytime You Want'', so I figured it had the official thumbs up. I will post these last two charts (GBPNZD) as I have done the work - for what it is - and perhaps HP could give a yay or a nay to continuing. I do not wish in any way to hijack his thread and will start a separate one if that's best. As for the GBPNZD below, it's two charts overlapped to give a bit of extra detail once I'd come across the interesting new stuff. That interesting new stuff comes up in a number of points: 1: I reckon entry on the trigger candle open is the way to go. 2: There are occasions when you will get overlapping boxes. 3: There is a weird ''double-signal'' that rears its head - a diamond pattern - which has a smaller/bigger/smaller configuration. You will see that where the trigger candle has an entry both long and short. 4: Certain pairs will work way better than others. Attached Image (click to enlarge) Attached Image (click to enlarge) Anyway, over to HP for the final word.
+
+--- 帖子 #63 ---
+no problem at all! , ultimately what I'd like from this thread is an EA that could be left alone, mining away....so if there is a variation that is consistently profitable then all good. I've done a bit of manual backtesting on GJ 1 hour, seems to be around 1 setup each day on average. Lemercenaire, sure this is nothing new really. Have done some searches for 3bar reversal and have found similar things but at the moment can't find one indicator that I can use to test out my latest variation of bullish bearish bearish or bearish bullish bullish.... Saw one indicator that applied it to the close and not the highs/lows... Poruchik, thanks for the link, another interesting concept! Landline, glad it's working out!
+
+--- 帖子 #64 ---
+This code follows the entry conditions above if( Close[i] &lt; Low[i+3] &amp;&amp; Close[i] &lt; Low[i+2] &amp;&amp; Close[i] &lt; Low[i+1] ) { Dn_Arrow[i-1]=High[i-1]+5*Point; } if( Close[i]&gt; High[i+3] &amp;&amp; Close[i]&gt; High[i+2] &amp;&amp; Close[i]&gt; High[i+1] ) { Up_Arrow[i-1]=Low[i-1]-5*Point; }
+
+--- 帖子 #65 ---
+thanks TooSlow, unfortunately I have no idea how to use raw code. I imagine it's a bit more complicated than copying and pasting into the MQL Editor
+
+--- 帖子 #66 ---
+That's very generous of you, HP, thanks. With your ok then, I'll continue on (for now at least ). Here's EURCAD, which at initial viewing seems well suited. There was a manic period in the middle of August but nothing one couldn't manage. Attached Image (click to enlarge)
+
+--- 帖子 #67 ---
+You are now immortalized.
+
+--- 帖子 #68 ---
+GBPCAD Gets a bit weird at the end there - however you would have been short leading into that spike, so how you'd have played the next trade which came after a gapped weekend, is open to discussion and whether you would have taken any of the following trades which came inside that huge bar, ditto. Attached Image (click to enlarge)
+
+--- 帖子 #69 ---
+GBPCAD Missed a short on that last section... Attached Image (click to enlarge)
+
+--- 帖子 #70 ---
+ahh thanks! just tried it out, unfortunately it's putting arrows randomly on the chart
+
+--- 帖子 #71 ---
+EMA144 increase the number of bar
+
+--- 帖子 #72 ---
+USDCAD Seems like a good fit...
+
+--- 帖子 #73 ---
+OK then...EURCAD has a set-up coming for tomorrow. Long on open of next bar. Attached Image (click to enlarge)
+
+--- 帖子 #74 ---
+Attached Image (click to enlarge) Follows the logic you provided.
+
+--- 帖子 #75 ---
+Hi mbolton, how is your EA working out? still trying it? I am still interested in the original concept I presented in this thread as well as the new swing breakout variation. I'm wondering if a time filter would enhance your EA (note I haven't used it so not sure what parameters exist). Perhaps being able to choose market hours to let the EA run and stop could be a good filter to try capture any trends occurring at London/New York open.
+
+--- 帖子 #76 ---
+I'm more after what's in the pics. longs: bearish, bullish (with lowest low of 3 bars, high can be higher or lower than high of 1st bar) followed by a bullish bar whose close is higher than the last 2 highs. or for shorts, bullish, bearish (highest high of 3 bars, with low being higher or lower than low of 1st bar) followed by a bearish bar whose close is lower than the last 2 lows.
+
+--- 帖子 #77 ---
+EUR/USD 4hour has many setups occurring.
+
+--- 帖子 #78 ---
+Not the logic in post #1. You have different logic now.
+
+--- 帖子 #79 ---
+Attached Image (click to enlarge) if( Close[i+3]&gt;Open[i+3] &amp;&amp; Close[i+2]&lt;Open[i+2] &amp;&amp; High[i+2]&gt;High[i+3] &amp;&amp; Close[i+1]&lt;Low[i+3] &amp;&amp; Close[i+1]&lt;Low[i+2] &amp;&amp; Close[i]&lt;Low[i+1] ) { Dn_Arrow[i]=High[i]+5*Point; } if( Close[i+3]&lt;Open[i+3] &amp;&amp; Close[i+2]&gt;Open[i+2] &amp;&amp; Low[i+2]&lt;Low[i+3] &amp;&amp; Close[i+1]&gt;High[i+3] &amp;&amp; Close[i+1]&gt;High[i+2] &amp;&amp; Close[i]&gt;High[i+1] ) { Up_Arrow[i]=Low[i]-5*Point; }
+
+--- 帖子 #80 ---
+Oops, I see where I stuffed up. Thanks for coding for the intital strategy! Riht now I'm specifically after an indicator for a variation of this breakout.
+
+--- 帖子 #81 ---
+I don't see how, ie "Longs: If the current bar's close is higher than the highs of the previous 2 bars ,". Looking at the blue dot highlighted bars on you chart, very few of them close above the extreme high of the two previous bars. Edit: referring to your second last chart. I see you have kindly reworked the indi.
+
+--- 帖子 #82 ---
+fantastic! I think we're finally getting somewhere! Is there a way to make it look back x number of bars and indicate every setup? Also able to specify x distance arrow is away from the bar? Gotta go to work now...
+
+--- 帖子 #83 ---
+Is there a way to make it look back x number of bars and indicate every setup? It already does. Also able to specify x distance arrow is away from the bar? Will have to add an input.
+
+--- 帖子 #84 ---
+Ok, for those new to this thread, welcome! To avoid any confusion, I have presented 3 trade ides here. Method 1 is presented in the first few posts of the thread and involves a close being higher (lower) than the highs (lows) of the previous 2 bars. Buy upon a break of the last candle. Method 2 involved the sismilar logic regarding close price, however we're trading on a break of a 3 bar reversal. The 2nd bar makes a higher high (low) then the 2 bars on either side. The 3rd bar closes below the lows of the first 2 bars. Enter at open of the next bar. Reverse this for longs. Method 3 is a variation of the 2nd method. It is more specific in that the pattern is either bearish bullish bullish OR bullish bearish bearish.
+
+--- 帖子 #85 ---
+I think it's ignoring some outside bars. It's OK if the 2nd bar that makes the lowest low or highest high is an outside bar, as long as bar 3 closes beyond it. It's also skipping some trades that are valid according to the rules.
+
+--- 帖子 #86 ---
+The code follows your logic. Unless there is a coding error.
+
+--- 帖子 #87 ---
+EURCAD The Law-of-Sod of course, gives a loss. It was a pretty distorted pattern, blah, blah, blah - but hey, moving on... Attached Image (click to enlarge)
+
+--- 帖子 #88 ---
+TS - It's a 1-2-3 pattern (with highs only relative to each other) but entering on the close of the 3rd bar, not the open.
+
+--- 帖子 #89 ---
+This variant definitely seems to be the most robust.
+
+--- 帖子 #90 ---
+as a newbie I see the sense in this system,you are trying to catch the 'v' and '^' of the movement of the market,thanks a lot everyone ! :]
+
+--- 帖子 #91 ---
+Yes. Think of the pattern as arrows - trade away from the point.
+
+--- 帖子 #92 ---
+@lemercenaire,what is your advice for TP? wait for a opposite candle to stop you out?
+
+--- 帖子 #93 ---
+I always think that stops and tps are an individuals choice, depending on a number of factors....risk tolerance, size of acc, number of positions, t/f traded, patience level, and general confidence in the analysis to name but a few. Everyone is different and as such will see the market quite differently, so whilst I may post a trade with my entries, stops and targets shown, it certainly doesn't mean it will be suitable for everyone for the kind of reasons I've mentioned. An EG h4 example trade of mine is attached, based on my version of HPs theme as I've previously described before, and has been further tuned to my liking. As I've stated before, there are numerous ways to trade HPs method I believe, and it becomes more or less a question of what an individual finds the easiest to profit from, and as in my case, it does not strictly follow HPs rules, but it does follow the theme. LL Attached Image (click to enlarge)
+
+--- 帖子 #94 ---
+Hi TooSlow, again thanks so much for the indicator! Just used it for backtesting on GJ 4hr chart. The earliest signal was from November last year. No signals appeared prior to that. I did notice a couple of strange things. In the pic with the blue shaded areas, the first one is using the low of the 3rd bar, not the middle bar. The next shaded box shows a clear signal but the indicator didn't place an arrow. On the other unshaded pic, the down arrow was placed but the 3rd bar is making the highest high, not the middle of the 3. All in all though, I checked every signal that it did place, on GJ 4hr timeframe, until November last year when it gave out AND it had 25 trades, all winners, all went up at least 30 pips!
+
+--- 帖子 #95 ---
+for(int i=0;i&lt;limit;i++) { if( Close[i+3]&gt;Open[i+3] &amp;&amp; Close[i+2]&lt;Open[i+2] &amp;&amp; High[i+2]&gt;High[i+3] &amp;&amp; Close[i+1]&lt;Low[i+3] &amp;&amp; Close[i+1]&lt;Low[i+2] &amp;&amp; Close[i]&lt;Low[i+1] ) { Dn_Arrow[i]=High[i]+5*Point; } if( Close[i+3]&lt;Open[i+3] &amp;&amp; Close[i+2]&gt;Open[i+2] &amp;&amp; Low[i+2]&lt;Low[i+3] &amp;&amp; // LOW OF BAR 2 LESS THAN LOW OF BAR 3 Close[i+1]&gt;High[i+3] &amp;&amp; Close[i+1]&gt;High[i+2] &amp;&amp; Close[i]&gt;High[i+1] ) { Up_Arrow[i]=Low[i]-5*Point; } }
+
+--- 帖子 #96 ---
+Million dollar question. So far, I have been looking for the pattern and not thinking too much about the practicalities of actually trading it. That PDF was originally looking at a TP of +10pips. Now on the Daily tf, you are hard-pressed not to be able to get that at some point no matter where you enter from - if you are prepared to counter-trade. My initial gut is to go for the +10 and move stop/close half, whatever and have a free trade either on the whole position or on half, with half-bagged. That's not so much of the issue but as you suggest, the sl. Again going on gut and a bit more experience counter-trading candle/wick/box-breakouts recently than I previously had, I would be more likely to counter-trade than let it go all the way to the other end of the box - that's just horrible r:r. As I said though, until I start running it live, or at least ''as-live'', it's only theory. I'll let you know, don't worry.
+
+--- 帖子 #97 ---
+GU 4hr: 20 wins, 1 loss, last signal 3rd December 2015 EU: 4hr around 15 wins, 1 loss (ignored a few of the setups), last signal 25th Nov 2015 Defining a win as being the entry bar moving in positive direction by at least 10 pips. Losses occurred when entry was on first bar of new week that gapped This is becoming really promising!
+
+--- 帖子 #98 ---
+EJ 4hr: 23 wins, 1 loss, last signal 26th Nov 2015
+
+--- 帖子 #99 ---
+Away from the Daily, I had a quick look at your H4 and only on Cable so far - boom! OK, not too shabby, either, lol. More trades, obviously and not so worrisome on the sl front. One thing I think I have noticed - as I said, a quick look, so only think I have noticed - is that I don't really think it matters the structure that makes up the pattern. You were liking, Bull, Bear, Bear and Bear, Bull, Bull...but so far as I can see, Bull, Bull, Bear and Bear, Bear, Bull work just as well. The only possible fly in the ointment would possibly be if they alternate in sequence, ie Bull, Bear, Bull or Bear, Bull, Bear. Those two combos look a little less robust...but even then, only a little.
+
+--- 帖子 #100 ---
+AUDUSD H4 as sitting on my screen just now - quick visual 8 win, 2 loss since 7th Oct. Losses were tiny and wins included two big multiple bar runs.
+
+--- 帖子 #101 ---
+Lemercenaire, sure, in time I'm going to widen the criteria a bit, for example, 3 bears or 3 bulls also seems to work well. I'm wondering if the relationship of the 3rd bar's close to the previous bar has any baring on the validity of the setup... Regarding TP options, another is to exit the trade upon the close of the trigger bar. Or some kind of pre-defined amount such as 10 pips, or an ATR(50) multiple.... In time I'd like to check how the results on 1hr stack up, whether overall it's a better win/loss rate vs amount of trades occurring. Also thinking not to take any trade if any of the bars in the pattern have gapped.
+
+--- 帖子 #102 ---
+AU 4hr: 26 wins, 0 losses, last signal 26 Dec 2015 way past bedtime now
+
+--- 帖子 #103 ---
+May only be a small blip sample but the times I have scanned for H1 trades, they don't seem anywhere near as robust. I would certainly agree about the gap situation. A possible TP option could be a fib-map of some kind built around the trigger bar or the whole pattern.
+
+--- 帖子 #104 ---
+One other situation that may need another look-see, is when the bar immediately before the pattern (for a short) is higher than the first bar of the pattern - and vice versa. I don't know if it is anything or nothing, as this is only something I have just come across - but the couple that I have seen form like that have failed.
+
+--- 帖子 #105 ---
+GBPCAD Long for us today... Attached Image (click to enlarge) GBPUSD Long... Attached Image (click to enlarge) GBPNZD Long... Attached Image (click to enlarge) GBPJPY Long... Attached Image (click to enlarge) EURGBP Short... Attached Image (click to enlarge)
+
+--- 帖子 #106 ---
+EURUSD Long... Attached Image (click to enlarge) GBPCHF Long... Attached Image (click to enlarge) AUDCHF Long... Attached Image (click to enlarge) AUDJPY Long... Attached Image (click to enlarge) NZDJPY Long... Attached Image (click to enlarge)
+
+--- 帖子 #107 ---
+Missed this cracker on my previous look backs - AUDNZD Short, from a couple of days ago... Attached Image (click to enlarge)
+
+--- 帖子 #108 ---
+@lemercenaire,i saw that last trade but was a little scared to take it ,the candles were a little stacked up ,indicating maybe a start of a ranging period,what do you guys think?
+
+--- 帖子 #109 ---
+The market doesn't always play ball the way we'd like it even when our conditions appear to be met to take a trade on, irrespective of what strategy is being applied, that's just a fact of trading and we can't know for sure which ones will do as we expect them to. Obviously it would be great if all our trades were winners straight off the bat, but we have to be realistic and satisfied that a perceived edge will produce more winners than losers in the long run. I have placed 7 trades this week using my version, of which 4 are doing quite well, and 3 are struggling for example. Here's a chart of one of my strugglers from EN h1, which as we know is a notoriously tricky pair at the best of times, but nevertheless it fulfilled my entry conditions when the trade triggered. As I said, it hasn't become a favourable trade at this stage, but the stops have not been hit, so some patience from me will need to be exercised for it to become green (if it does that is). Anyhow, we tend to only see successful trades posted on FF across the board, and I thought I'd post this as evidence to show that that is not the case no matter what level of experience a trader has. LL Attached Image (click to enlarge)
+
+--- 帖子 #110 ---
+@ nozzer and landline (and HP of course). Don't worry about the ''only showing winners on FF'' angle - I have a feeling that the last collection there are going to contain a share of those. There are for sure certain variants of the patterns that stack up better than others. It then comes down to your preferred method of TP. If we are looking at the +10-a-go version, then tbh even these less-than-stellar ones will usually get that on the Daily tf. Other variants of tp maybe not so good. As we get into this deeper, we will begin to see these subtleties appear, I think. I may have stumbled onto an angle as well. The lower TFs (under H4 and certainly H1) have not been of real interest to me so far, however in the interests of research-for-research's-sake, I looked at the m30. Now, it just so happens that I had an sma5 on in the background of these charts - you'll see it here. No connection to the method at all, by the way, just a hold over from another. However, if you use this sma5 and only take the patterns that point toward the line and trade away from it, well, that make a solid difference down on the lower TFs... maybe, lol. I'll need to do some proper analysis to be sure but it may be something, certainly to filter out those trades that maybe just fail to hit the +10 mark for instance.
+
+--- 帖子 #111 ---
+''... However, if you use this sma5 and only take the patterns that point toward the line and trade away from it, well, that make a solid difference down on the lower TFs... maybe, lol....'' Well - as an edit to this. Just had a quick look at how we're doing so far today on my Daily. All the losers - and there were losers - were pointing the wrong way, away from the 5sma. All the winners, yep, pointing toward the line. Also. ..I managed to miss a handful of set-ups somehow (distinct lack of sleep, probably a factor lol) and all have bagged big pips so far...and all faced the right way. Interesting.
+
+--- 帖子 #112 ---
+Nozzer, yes, I must admit that in the Land of Elsewhere, I would be looking to buy this on pullbacks after, yes, a probably/hopefully small ranging period.
+
+--- 帖子 #113 ---
+Right then. Here we go with the day's moves - or lack of - in the bag. GBPUSD Attached Image (click to enlarge) GBPNZD Attached Image (click to enlarge) EURCAD - Missed this from this morning's post. Attached Image (click to enlarge) GBPCAD - First Loss...though I suppose it should be described more as first-not-to-make-ten , as the trade hasn't been stopped out yet... Attached Image (click to enlarge) USDCAD - Another missed. Attached Image (click to enlarge)
+
+--- 帖子 #114 ---
+GBPJPY Attached Image (click to enlarge) EURGBP Attached Image (click to enlarge) EURUSD Attached Image (click to enlarge) GBPCHF Attached Image (click to enlarge) AUDUSD - Another I missed and another big move. Attached Image (click to enlarge)
+
+--- 帖子 #115 ---
+AUDCAD - I missed a lot! Another win. Attached Image (click to enlarge) AUDCHF Attached Image (click to enlarge) AUDJPY Attached Image (click to enlarge) NZDJPY Attached Image (click to enlarge) Phew...anyway, as you can see - and as far as I can tell, we would have bagged those +10 pips on all the trades except one. Now don't get me wrong, there were a good few that look like they would have sat in negative territory for part of the day before coming good but at the end of it all, they did come good. One thing it does show is that - at least for this first day of tracking - the idea of the best/strongest trades coming from those set-ups that pointed at the 5-sma seems to be ringing true. Certainly of those ''better'' trades, these contained the ones that went for big pips after bagging the initial +10.
+
+--- 帖子 #116 ---
+Lemercenaire, nice trades. Nice use of the 5sma.
+
+--- 帖子 #117 ---
+Manual backtest: Using an indicator that plots an arrow whenever a 3 bar swing occurs and the 3rd bar's close is higher or lower than the previous 2 bars' highs (lows). ie, Method 2 I wrote about earlier. Going back to January 1st, 2016 on GJ 4hr, I counted 68 trades with 57 wins (in which price went up at least 10 pips) and 11 losses (where price would have breached the previous bars' high (low). Not too shabby! I'd be interested in other backtests to know how many trades would have been successful if automatically exiting on the close of the 4th bar.
+
+--- 帖子 #118 ---
+EU: 49 trades since Jan 1st, 33 winners, 16 losses. Lowing winning percentage than Method 3 but 3 times as many trades
+
+--- 帖子 #119 ---
+At this kind of strike-rate, you'd need to take a close look at your r:r, bearing in mind that the pdf version (the one I have been looking at) looks for a tp which is relatively small in relation to the sl, though I haven't had a chance to really get into that side of things yet.
+
+--- 帖子 #120 ---
+No PDF in the attachments.
+
+--- 帖子 #121 ---
+It's a link to the webpage, here: http://masrukhin.yolasite.com/resources/10%20PIPS.pdf (post #45)
+
+--- 帖子 #122 ---
+OK, so here's how it all looked today: GBPCAD Attached Image (click to enlarge) GBPJPY Attached Image (click to enlarge) EURUSD Attached Image (click to enlarge) GBPCHF Attached Image (click to enlarge) EURJPY Attached Image (click to enlarge)
+
+--- 帖子 #123 ---
+Thank you, Mate. Cheers!
+
+--- 帖子 #124 ---
+AUDJPY Attached Image (click to enlarge) GBPAUD Attached Image (click to enlarge) At a quick look, it seems like 8 trades and 7 Wins, 1 probable Loss (EURJPY). Only one faced the ''wrong'' way - and it was a winner. USDCHF had a diamond formation and could have been triggered both directions. I only recorded the one in the right direction away from the sma. As it turned out the other direction would have been a winner too.
+
+--- 帖子 #125 ---
+You're welcome, Buddy.
+
+--- 帖子 #126 ---
+unfortunately I don't think I have the computing power nor the expertise in running various automatic backtests, shopuld an EA be developed. Placing the stop above (below) the 3rd bar may not give the best R:R at all if aiming for 10 pips because the distance from the entry at open of 4th bar to the low of 3bar (if going long) is quite often quite large, in excess of 50 pips depending on which pair and timeframe. I would ultimately like to compare results from different setups with different stop loss and take profit combinations. Different setups could be Method 2 and Method 3 I outlined earlier, ie any 3 bar swing with a lower 3rd close, or a more specific 3 bar swing with lower 3rd close or incorporating a filter to these such as an MA. However, I don't wish to alter the rules to much so that the initial concepts look nothing like they did! using 2 different stops - the one just mentioned, and for profit testing out: 1. a set target of 10, 20, 30+ pips 2. an ATR(50) of the 3rd bar with take profit options including an ATR(50) multiple of say x1 or x2 3. exiting at the close of the entry bar whether in profit or not 4. exiting on close after x number of bars (time based close) im sure there's lot of other methods that might be viable options as well. And I'd also like to be able to automatically backtest the first method outlined in this thread which might need to be a thread all on its own.
+
+--- 帖子 #127 ---
+Yeah. There are almost as many questions now posed by the sl question as there have been on all other topics so far. One way I had looked at it, was a counter-trend strategy if your +10 wasn't hit on the first move and price pulls back over the entry. However, on the daily, that can happen a lot early and do you have a hard stop -10 back and simply re-enter? You could use a fib-map on the last bar, or the pattern overall instead of the ATR option? No matter what, I think we would all agree that having the sl at the end of the 3rd bar is just not going to work as a bare strategy. The only way to use the end of the bar, I think, would be a counter-trade halfway down that bar and trade it like a Wick-Zone trade - but then we are away on a completely different track on a completely different strategy, lol.
+
+--- 帖子 #128 ---
+actually I don't agree because the majority of trades I saw on 4hr did not get stopped out from breaching the 3rd bar, using Method 3 which was either the bullish, bearish, bearish or bearish bullish bullish pattern. Although less trades than taking every kind of 3bar swing pattern, this method had a higher win rate. If this was found to occur on more currencies than the ones I did a rudimentary manual backtest with, then I'm inclined to have an EA professionally created for this emthod. ANother option regarding stop losss and 10 pips could be to move stop to breakeven immediately when up 10pips, or up a proportion of the ATR figure All this could lead to a discussion/test of which is the optimal timeframe....
+
+--- 帖子 #129 ---
+What is the difference exacty between method 1,2,3? I think I got lost along the way lol.
+
+--- 帖子 #130 ---
+sorry it's got a bit confusing now, Method 1 starts off in Post 1 I then applied the closing bar concept to 3bar swing highs and lows, and called it Method 2, from Post 45 . I narrowed down Method 2 to a more specific pattern for swing highs and lows and called it Method 3, from Post 55 . So far Method 3 on my backtests seems to have the best win rate, with a win being defined as being at least 10 pips in profit.
+
+--- 帖子 #131 ---
+Yeah, sorry HP, I was still thinking more about the Daily TF, not H4. I do like the +10 pips lock in though.
+
+--- 帖子 #132 ---
+On 1-2-3, or on TooSlow's version of it anyway and that's the one I trade, you wait for a bar to test a new daily high/low made by the previous bar. If that move fails and drops back, you enter on the cross over the failed bar's open. On HP's, basically, you enter at the close of the bar which forms the third part of the ''arrow'' shape (or again, on the version I like best, you do, lol.)
+
+--- 帖子 #133 ---
+hi Gince, sorry I mised your earlier post. Thanks for your contribution! I tried using the indicator but nothing happens when I load it, unsure what the Step, Maximum, Precision and price inputs are...
+
+--- 帖子 #134 ---
+Sorry, HP, that's probably a lot to do with me. Got all excited! Never my intention to hijack your thread and of course, the direction this goes is entirely up to yourself. This is your baby! I do thank you for sending me to the PDF version along the way and I think what I may do is step back a bit and concentrate my testing on that for a bit on my own and let things settle down a bit here for you. I will keep the 5-sma add-on and see if there is something there when tested as-live. Maybe at some stage, the best bits can be pulled together into some uber-version. I will continue to drop by and say hi and will keep you up to date on anything I find worth sharing...just without all the charts, lol.
+
+--- 帖子 #135 ---
+Thank you for the clarification. Do you mind posting some images with examples of your strategy? If I understood correctly, the method is very similar but takes place at key levels. Is that correct?
+
+--- 帖子 #136 ---
+Thanks for clarification. I did this EA very quick in what I believe is what you meant for method 3. Can you please check? It might be similar to TooSlow, not sure.
+
+--- 帖子 #137 ---
+AU 4hr Method 2 backtest to January 1st 2016: 52 signals, 38 wins, 14 losses. However, the indicator I'm using an indicator for Method 2 I got from another forum but it's not including outside bars, and I did see around another 4 wins if they'd been included. I think it was 26 wins, no losses for Method 3.
+
+--- 帖子 #138 ---
+no problem
+
+--- 帖子 #139 ---
+thanks JAKammus, just tried it, not sure what all the MA settings are. I'm not using any MA filters at present, so just left the default settings as is. It placed arrows all over the place,. I think you've based it on Lemercenaire's adaptation ("On 1-2-3, or on TooSlow's version of it anyway and that's the one I trade, you wait for a bar to test a new daily high/low made by the previous bar. If that move fails and drops back, you enter on the cross over the failed bar's open.") which is different to Method 3.
+
+--- 帖子 #140 ---
+I forgot to mention to ignore the settings (MAs) lol. I used that from another indicator I did previously. I did pop arrows all over the place which is why I'm trying to understand how you are filtering the entries.. I put this image below and numbered the trades. Can you please tell me which ones are good or bad entries and why accordingly to method 3 if that is the most profitable one. In addition, I've been working on some filters based in your strategy (which I apparently got it wrong lol). Take a look and let me know what you think.
+
+--- 帖子 #141 ---
+Picture 3 is the only one that matches Method 3. It has a bullish candle then 2 bearish candles. The 2nd candle makes the highest high. The 3rd candle closes below the lows of the first two. The basis of this thread is having a 3rd candle close below the highs or lows of the 2 previous bars. Method 2 and 3 combine this using a 3bar swing high or low. Method 3 is a specific pattern in which the bars will be either bullish bearish bearish for shorts or bearish bullish bullish for longs. It is ok if the 2nd bar is an outside bar as well I've attached my original example pics of Method 3
+
+--- 帖子 #142 ---
+So in this version the rules are as follow.. Close 1 &lt; Open 1 --- Bearish Candle Close 2 &gt; Open 2 --- Bullish Candle Close 3 &gt; Open 3 --- Bullish Candle Close 3 &gt; High 1 --- Engolf candle 1&amp;2 High 3 &gt; High 2 --- Ensure pin candle is smaller Low 2 &lt; Low of previous 10 candles Is everything correct?
+
+--- 帖子 #143 ---
+not sure what you mean by "ensure the pin candle is smaller". "High 3 &gt; High 2" isn't part of the rules. It's all about the Close 3. Close 3 &gt; High 1, High 2 Low of 2 &lt; Low of 1, Low of 3, not previous 10 candles. the setup is based on a 3bar swing high or low. also High 2 for the moment is irrelevant. in other words High 2 can be &gt; or &lt; than High 1
+
+--- 帖子 #144 ---
+TooSlow already made an indicator for Method 3, but new versions are always welcome
+
+--- 帖子 #145 ---
+RIGHT!!! Lol - this is the version I like and have been testing. Entering on the close of the third bar. We have consensus!!! Having said that, I haven't been paying attention to the part: Low 2 &lt; Low of previous 10 candle and have been simply taking any appearance of the pattern (and how great is that - as it still works!). How about adding that 5-sma parameter to that and have the pattern pointing at the sma and trade away from it?
+
+--- 帖子 #146 ---
+Hi JAKammus, yes, you are correct. It revolves around price making a higher high/lower low on one bar, which is then tested by the following bar. All you will ever need to understand TooSlow's version of the 1-2-3 trade that I use (different from HP's remember) can be found on his thread here: ''Trading is as simple as 1-2-3''.
+
+--- 帖子 #147 ---
+GBP/CHF 4hr: Method 3 manual backtest to 1st January 2016: 24 wins, 1 loss. The entry bar for all wins closed positive in direction of breakout. GBP/CHF 1hr Method 3 manual backtest to 10th August 2016: 16 wins, 0 losses, where a win = the entry bar closing positive. (Using an indicator that doesn't look at all bars, seemed to cut out on 10th August.) I think I will pay a profesional coder to make an EA with options of Method 2 or just Method 3 and hard set take profit input, or exit at close of entry bar.
+
+--- 帖子 #148 ---
+GJ 1 hour backtest, Method 3 to Jan 1st 2016: approximately 118 trades, 88 wins, 30 losses.
+
+--- 帖子 #149 ---
+I agree Lem, HP is working hard to find his best way to trade his versions. I too have stepped aside lately for fear of polluting his thought process and to allow him to develop his method without my interference/version. I'm continuing nevertheless quietly in the background, with my own way which I've outlined previously, and it will be interesting to see how/whether HPs method improves on how I do it as time passes. All the methods including your own btw, are closely related imo, but it was HPs initial concept which caught my eye and prompted me to adjust it to suit my style of trading, so hats off to him for that. LL
+
+--- 帖子 #150 ---
+Yeah, LL - we all seem to be on the same page on this, so fair do's. Those results look extremely encouraging HP - going by them, it would certainly seem that version 3 may be the way to go and the H4 tf would be a very attractive ''compromise'' between longer Daily and the lower ones. There is always a market/user-base for methods that work on the H4. Nice one.
+
+--- 帖子 #151 ---
+HarryPlopper, Here is the indicator kindly provided by TooSlow in post #79. I removed the following code to allow the indicator to show all setups of your method 3. Bear/Bull/Bull for longs, Bull/Bear/Bear for shorts. (as outlined in your post #45/#76). And enter on bar open. &amp;&amp; Close[i]&lt;Low[i+1] / &amp;&amp; Close[i]&gt;High[i+1] I also added the following code so that for short setups candle 1 and 3 both have lower highs than candle 2 and vice versa for longs. (Previously candle 3 could have had a higher high than candle 2 for short setups, and vice versa for longs. &amp;&amp; High[i+2]&gt;High[i+1] / &amp;&amp; Low[i+2]&lt;Low[i+1] The version posted in #79 only showed setups that were followed by a candle that closed in the direction of the trade. So if you planned to enter at the open of the bars with arrows, and exit at the close of the same bar, the indicator appeared to only show winners But the arrows would only paint after the bar close, so you could only enter on 'bar 5'. The attached version will let you trade 'bar 4' and see all setups in backtesting. Rgds.
+
+--- 帖子 #152 ---
+Thanks very much for this Spu!
+
+--- 帖子 #153 ---
+Outstanding!
+
+--- 帖子 #154 ---
+thanks for the work on the indicator ,but it doesn't show all the method 3 set ups...
+
+--- 帖子 #155 ---
+I'm not sure I can fix difficult problems. But can you post a picture of a couple missed setups? Or at least tell us the pair and three days(if on daily tf) that were missed?
+
+--- 帖子 #156 ---
+here you go...
+
+--- 帖子 #157 ---
+that's not a method 3 setup which would be bullish bearish bearish with the 3rd bar closing lower than the lows of the other ones
+
+--- 帖子 #158 ---
+ok harry.sorry for the confusion
+
+--- 帖子 #159 ---
+how many Rs gained from these trades?
+
+--- 帖子 #160 ---
+I think I was counting a win as being 10 pips in profit and/or waiting for the first bar to close psoitive from entry. cant remember exactly
+
+--- 帖子 #161 ---
+I thought I'd throw in a 200SMA filter, only taking longs above and shorts below, aiming for 10 pips profit. GU 4hr, Method 3, from now to Jan 1st 2016: 26 wins, 6 losses GJ: 28 wins, 4 losses
+
+--- 帖子 #162 ---
+Yeah, I'm pretty sure the simple sma filter is as complex as you'd need. Great results.
+
+--- 帖子 #163 ---
+thanks! I'm not sure if I have something here or not. I'm not really experienced in automated trading/optimization. I welcome any input that could help put something together based with what I've shown. I'm also swamped with my day job now so have very limited time
+
+--- 帖子 #164 ---
+May I suggest you use a 240 sma OPEN instead. This is equivalent to a 2 sma OPEN on the Monthly. This monthly direction only changes a couple of times a year! Please try it on a monthly chart. This is used successfully in another forum.
+
+--- 帖子 #165 ---
+great but where do you place your SL?
+
+--- 帖子 #166 ---
+This is one reason for posting .mq4 files. Others can advance the code. No one can hold the others hostage. That is what happens when only .ex4 files are posted. You must bow down and beg the coder who thinks they're a guru.
+
+--- 帖子 #167 ---
+SL is placed a couple of pips above/below the extreme of Bar #2 (thought there was some talk of using atr in some way).
+
+--- 帖子 #168 ---
+mentioned a few times in the thread. placed at the high of the 2nd bar if going short or the low of the second bar if going long. another option I'd like to experiment with is using an ATR(50) of the 3rd bar
+
+--- 帖子 #169 ---
+so if your SL is let's say 100 pips away, your TP will still be 10 pips?
+
+--- 帖子 #170 ---
+Not the way I would do it or even will end up being HP's way but pretty sure that was the original rule. We're still working on formalising the pattern etc to a certain extent and fine tuning exits etc will come later. My own personal way of doing it would probably involve using some kind of counter trade if it turned but I also prefer the Daily tf and not the H4, so subtle differences come into play. HP is doing a power of work on this with limited time - be patient
+
+--- 帖子 #171 ---
+For those who were up-and-about, there was a nailed-on buy on AUDUSD this morning. Used the Bear, Bear, Bull pattern and traded away from the sma 240...H4 Long. Sweet.
+
+--- 帖子 #172 ---
+Like this simple strategy. Will work on it and let you know my experience.
+
+--- 帖子 #173 ---
+thanks! yes, probably spending far too much time than I should be doing my head in at the moment!
+
+--- 帖子 #174 ---
+hi Karemi-Trade, no most likley I won't be using a 100 stop for 10 profit in this thread I've been largely throwing out a bunch of trading ideas which some people have adapted to their own style and seem to be working ok for them. I've suggested various stop and profit possibilities but I have no real knowledge or experience with proper, in-depth system testing, let alone using Strategy Tester, if an EA were to be created. I'm welcoming all suggestions on how to optimis any or all of the ideas put forward so far in order to create a winning system.
+
+--- 帖子 #175 ---
+Today I opened a bunch of charts to see how method 3 stacks up on the daily timeframe. Upon first glance, it seems like half the time the signals work great with the entry bar closing closing profitably. However, it also seems that a lot of bars move favourably at first then close in the opposite direction. So this got me thinking quite a lot and trying to see if patterns are occurring in the seamingless random nature of things. And I broke Method 3 down into its various constants needed for a valid signal. In other words, these constants must form 100% of the time otherwise the signal isn't valid. So I wondered if there was a way to 'jump the gun'' and enter at the start of bar 3. This would require a different approach altogether, which deviates from the initial concept of this thread (being the 2 bar close idea). Upon further examination, I realised that if we have a bullish bar (bar 1) and then a bearish bar (bar 2) with it's high higher than bar 1's, then quite possibly we could enter at the open of the 3rd bar and exit at it's close. I would also guess that in at least half of these setups, bar 2 would be an outside bar, the very basic of price action trading..... Perhaps this is another method for someone to explore.....
+
+--- 帖子 #176 ---
+I then remembered a kind person developed for me some years ago a reversal indicator that showed me when a bearish swing high had formed for x number of bars back and oppositely for a bullish swing low. And for fun I placed it on the daily chart, looking back 5 bars (and no, doing this is not the same as a fractal but smells similar), and have come up with a potential swing trading system which I'm also inclined to test out as upon first glance appears to give great RR. I don't imagine it's anything particularly new, probably been done a million times before. I've attached the indicator that was developed. Screenshot what I'm talking about next
+
+--- 帖子 #177 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #178 ---
+the indicator needs to be modified to show only bullish reversals with lowest lows and bearish reversals with highest highs entry on immediate bar following the reversal, stop placed just below the reversal bar, take profit set at 2,3,4 x the stop OR til you get a reversal in opposite direction. cherry-picked chart to clearly show example of riding out the swings. could add on to positions using the 2 bar close method mentioned at the beginning of this thread... (haven't abandoned/given up previous methods, just doing some exploration from one thing leading to another!)
+
+--- 帖子 #179 ---
+here have set the look back to 3 bars, daily GJ. some nice moves perhaps a new thread for this new system to avoid clutter and confusion?
+
+--- 帖子 #180 ---
+Do the triangles repaints?
+
+--- 帖子 #181 ---
+I had a laugh when I had a quick look back at the beginning and you posted how you weren't going to be posting here anymore! Best laid plans, eh?!
+
+--- 帖子 #182 ---
+Now we're really getting tangled! Here is a trade I took today. This is when I was late to the party on a TooSlow 1-2-3 trade and instead of entering at open #2, I went in at entry open #3. I do this often now to great success and although we're talking about the Daily, this is on the H1 just to illustrate the process as it shows it so clearly. Attached Image (click to enlarge)
+
+--- 帖子 #183 ---
+Hi All, I am fairly new to Fx trading and I like this post the most from all the ones I have read. Daily charts will suit me best as I dont have the time to monitor charts during the day. I dont have a large balance and found that for beginners the larger TF are more reliable. I will go through the thread again to see which method is best for the daily charts. Thanks again HP, LL, lemercenaire, TooSLow and anyone else helping to develop these methods.
+
+--- 帖子 #184 ---
+Hi Kakmaker. You will find that using the longer TF charts will energise your trading, as you will become so much more relaxed in your decision making. Hopefully we can all work together here to help HP come out the other side with a method that does the job. Stick around, it should be fun!
+
+--- 帖子 #185 ---
+hand drawn for illustrative purposes
+
+--- 帖子 #186 ---
+LOL If Kakmaker has the same meaning in South African as in Dutch, which might well be the case, then I have a justification for PMSL EDIT Hi Kakmaker, I'm not familiar with this thread (yet) but the fact that a few of my buddies are posting here is reason enough for me to believe you're in the right spot. Enjoy !
+
+--- 帖子 #187 ---
+Ah hahahahaha - my girlfriend is South African lol!
+
+--- 帖子 #188 ---
+Sal hulle om kan lag
+
+--- 帖子 #189 ---
+Agreed H, there seems to be a lot of ideas flying around now, and various different inputs. I stepped back in order to minimise the thread becoming distorted too much, and to allow it time to find it's feet. I guess it becomes a question of what direction you want to take it at the end of the day, I'll continue to monitor anyway to see how things develop. LL
+
+--- 帖子 #190 ---
+hi there Gents first post for me ( recently signed up after stalking the forum for awhile) also a Saffa boy ! just wanted to chime in quick and say that so far these methods are very promosing, using a varaition of method 3. need to do some more testing but so far so good. thanks so much! really helped me out by opeing some doors and new thoughts to my method. cheers
+
+--- 帖子 #191 ---
+Hi friends it look's interesting i just entered on green arow up afteer yellow candles on same direction. Look's interesting and better for me on 30 min
+
+--- 帖子 #192 ---
+For the time being, I'll ignore the Reversals stuff of my recent posts and focus on the following system: Look for both Method 2 and 3 signals. I don't have an indicator that does this, just one for each. One places an arrow on bar 2, one places an arrow on bar 4.... System Name: undecided as yet. perhaps 'The Plopper' or 3-Bar Swing Break' Trade Setup: Bar 2 makes a higher high than Bar 1 and Bar 3. Bar 3 closes below the low of Bar 1 and the low of Bar 2. Bar 3 closes below an MA filter (at the moment I have an 18 sma) At close of Bar 3 check the ATR(50). This is the value of the Stoploss . Entry at open of Bar 4. Move stop to breakeven when up 50% of Stoploss value. Take Profit: risk:reward either 1:1, or 1:1.5, or the range from Bar 2 high to Bar 3 close, or no set Take Profit but trailing stop placed above high of each last closed bar. Timeframe: daily, 4hr, possibly lower % Risk: Set at own discretion For those who have followed the development of this thread, I believe the '3bar swing enhanced mm' indicator attached covers the Method 2 setups. It places an arrow on the high or low of Bar 2. The only difference between it and the 'Harryplopper m3 all' indicator is that it doesn't give a signal if Bar 2 is an outside bar. This system has no backtesting at all. I welcome anyone to test it, see if it holds up or not. At the moment it is only an idea
+
+--- 帖子 #193 ---
+Hi there, Dylboy, welcome! Straight in with a quick question - what time-frame are you using?
+
+--- 帖子 #194 ---
+hi Landline, no problem Right now, the last system is the one I'm most happy with and I think it's the most comprehensive, most promising and combines all the initial ideas/themes I've thrown around
+
+--- 帖子 #195 ---
+Hi mizi - have you entered your trade on the break of the bar and not on the close?
+
+--- 帖子 #196 ---
+'' System Name: undecided as yet. perhaps 'The Plopper' or 3-Bar Swing Break''' The Plopper, love it! - Are you sure you're not Rowan Atkinson?
+
+--- 帖子 #197 ---
+just a frustrated, over-worked, under-paid university teacher
+
+--- 帖子 #198 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #199 ---
+Thanks bud ! And using the 1H as main focus for testing and trying, but also dabbling with the 30M as well. Trying to figure out which one may be best for me.
+
+--- 帖子 #200 ---
+hi Dylboy, glad you found some inspiration! Please be careful, none of this is tested, validated, just ideas at the moment!
+
+--- 帖子 #201 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #202 ---
+Yea ya, still testing it my self as well. Seems promising but only gone back a few months and then I see somewhere were I need to refine it to how I feel comfy etc haha. But really is great and really appreciate it man. Onwards and upwards and keep learning
+
+--- 帖子 #203 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #204 ---
+Hi H....I've had a quick look at the 3 bar swing and yes it looks pretty good I've gotta say (an understatement actually!. I have added a main semaphore to determine direction instead of a MA, and at first glance if I took the signal direction corresponding to the semahore direction, then it seems to provide very accurate potential entries, purely based on my understanding of the 3 bar swings intention. Signals may not be as often as some would like I've no doubt, but if the quality is there, then the quantity of signals isn't necessary. Good stuff LL
+
+--- 帖子 #205 ---
+HP - would you have taken the pattern that appeared on the left, starting the count from the third bar showing from the left, so Bull, Bear (crossing the sma), Bear (closing over the sma)? I would have, probably...maybe...lol...
+
+--- 帖子 #206 ---
+hmm, sounds interesting, no idea what a semaphore is, never used before! if it is a better filter, then excellent!
+
+--- 帖子 #207 ---
+nope, coz the third bear didn't close lower than the other 2 bars
+
+--- 帖子 #208 ---
+HP, simpple question does DLL have to be ticked to make arrows work Please, my arrows dont seem to renew unless I edit the indi , Thank You SP
+
+--- 帖子 #209 ---
+hi starpro, mine aren't ticked. not sure why the arrows aren't working
+
+--- 帖子 #210 ---
+Harry -what does the blue tear drop signify? The red arrow is a short signal ? Thanks H.
+
+--- 帖子 #211 ---
+hi turnip, explained in the system rules. signals from 2 different indicators (that need to be combined into 1). teardrop is method 3 signal and enter at open of that bar. arrow is method 2 and appears when bar 3 closes above or below bars 1 and 2. the arrow is showing the swing high or low point
+
+--- 帖子 #212 ---
+EJ 4HR recent trade signals. win, loss win, win, BE (using a more relaxed stop would have resulted in a win), win, win (wins meaning price going for at least 1R)
+
+--- 帖子 #213 ---
+Thanks HP - Excellent summary
+
+--- 帖子 #214 ---
+Good work HarryPlopper.
+
+--- 帖子 #215 ---
+Gidday HarrPlopper, the !!pivot hi lo isnt repainting unless i go to "edit and refresh still ...any ideas ? thanks in advanbce SP is it supposed to work on any time frame?
+
+--- 帖子 #216 ---
+hi starpro, am not really developing the system that i posted the pivot hi lo indicator for. I think it actually was the wrong indicator i put up, by mistake. The attached one is better
+
+--- 帖子 #217 ---
+OK thanks 2 million ....SP
+
+--- 帖子 #218 ---
+Where's everybody gone?! Just so happens I was in the right place at the right time and saw this unfold - Bull/Bull/Bear on the H1 Cable... Attached Image (click to enlarge)
+
+--- 帖子 #219 ---
+Another right-place-right-time set-up in amongst the chaos... CADJPY Attached Image (click to enlarge)
+
+--- 帖子 #220 ---
+nice trade!
+
+--- 帖子 #221 ---
+E/U hourly trade. Looks like another one is shaping up to go short.
+
+--- 帖子 #222 ---
+live demo trade EU 1 hour. TP set at 1:1.5
+
+--- 帖子 #223 ---
+Nicely done yourself, HP... Attached Image (click to enlarge) Not using the sma any more if the price has made a new H/L, then you could have had had this one as well from earlier (assuming you were awake at the right time, of course!). Attached Image (click to enlarge)
+
+--- 帖子 #224 ---
+You could have had a EURCAD in the same situation at around the same time. Was there something happening last night? Attached Image (click to enlarge)
+
+--- 帖子 #225 ---
+AUDUSD Attached Image (click to enlarge) AUDNZD Attached Image (click to enlarge) CADJPY Attached Image (click to enlarge) NZDUSD Attached Image (click to enlarge) Taken when middle bar is at a new extreme H or L (irrespective of any sma weighting), c/w those that are not but point toward the sma (trade away from).
+
+--- 帖子 #226 ---
+I've stayed away from the markets for a few days. There's no doubt of course that there's mountains of volatility ahead of us, and I've chosen to take what I can with the expectation of being in and out of markets for the time being, rather than my usual swing style approach where I normally stay for 1-3 days on average, it's just too risky for me taking that approach at this time. I've taken some positions, and an example has recently triggered my longs on AU via the m15 chart attached, on a 30% bar retracement. As usual, I've looked at the higher t/f, h1 in this case, to help with my directional bias and a hidden t/l, but nothing is certain and more care and attention regarding the mm is going to be required than usual, until we can see that the markets have stabilised, which is not the case right now, and imo won't be for a few weeks. Attached Image (click to enlarge)
+
+--- 帖子 #227 ---
+Hi friends what do you think about these indi he repaint him self when opportunity ocurs can you chek pls today 5 opportunitys on eur/usd on 5 min!???
+
+--- 帖子 #228 ---
+Hi mizi123. can you upload that indi?
+
+--- 帖子 #229 ---
+Yes miroslav sure we are friends here is indi with template together.
+
+--- 帖子 #230 ---
+Hi all I would share the attached Indi ..... it may be interesting ... Draw into the chart and insert two horizontal lines .... then look at the upper left corner Res and Sup are read. .... move the lines and look at the values I think this could help in implementing in an EA if needed Regards Giorgio
+
+--- 帖子 #231 ---
+can you attach a foto pls?
+
+--- 帖子 #232 ---
+lemercenaire, nice but as you know I wouldn't ave taken most of those trades coz they don't fit in with my system
+
+--- 帖子 #233 ---
+Hi sure but I have all the matter running on VPS ...... nothing has remained on PC .... so please be patience ..... I'll post before monday Have a good week end Giorgio
+
+--- 帖子 #234 ---
+Perhaps I am on time Found an EA too for working on ...... of course it will have to be adapted TradeRS is EA Keep the Lines_4 in the Indicator folder and don't attach it to the chart Draw the lines and attach the EA ...... Let me know your think Thanks Giorgio
+
+--- 帖子 #235 ---
+Yep, I know - it's my preferred version. I felt like I wanted to post something though, as the thread had seemed a tad lonely lately!
+
+--- 帖子 #236 ---
+Hi Mizi123. Is the third one (counting from left) a bar early? The last one should have entered two bars earlier?
+
+--- 帖子 #237 ---
+yep been busy with work then was travelling and also focusing a bit on ADX trading. I really would like to develop my system here more. I figure the first step is to unify the 2 indicators, then come up with other time based filters and perhaps some kind of multi time frame approach for trading lower time frames. But I also feel this thread will totally deviate now into nothing resembling my initial theme of a lower 2nd close and setups people post wont resemble my system at all!
+
+--- 帖子 #238 ---
+Lol - your baby left home! I hear what you're saying though. I'll leave you to it. I think perhaps if you could get an indicator that only showed exactly your preferred version, then the whole thing would settle down - at the moment there is, I think you'd agree, still a fair bit of if-buts-and-maybes about it. I hope you can pull it together because I feel there is definitely something there. I'll keep watching with interest.
+
+--- 帖子 #239 ---
+I tend to agree with you, however, in the quest of improvement, a method is very likely to evolve over time, and in my case, it is always to ease the process to suit my particular style, whilst still maintaining the core principle that you introduced, but adapted to fit the way I prefer. For me, nothing has changed in that respect, and I am still pursuing that goal. Others have their own reasons I presume, and most simply want an "off the shelf" atm machine lol, where you do all the work and they reap the benefits when you have proved everything! Your ADX method btw may take off, who knows, it could be interesting and I'll keep an eye on that thread, but for now as I said, I am still quietly developing my version of your theme from this thread, and I've achieved mixed results thus far, and although promising, is still not consistent enough for my liking, and that is the area I'm working towards. Of course in these crazy topsy turvy times we presently have, finding consistency could be impossible, and it's one of the reasons that my own expectations are currently tempered with the reality of unpredictability, and with that in mind, allows balance for me both in successful and failed trades at this time. Anyhow, enough waffle from me. Here's an EG m30 chart based on things I've discussed previously. LL Attached Image (click to enlarge)
+
+--- 帖子 #240 ---
+It took it's time, but TP's 1, 2 and 3 all hit whilst I was asleep during Asian for decent profit.
+
+--- 帖子 #121 ---
+Several other set ups left without me, but a couple of others triggered and are still in play. AC attached is one of those going up and down at present. Attached Image (click to enlarge)
+
+--- 帖子 #122 ---
+GU now triggered longs with conservative targets based on much uncertainty in current market conditions as mentioned earlier. Attached Image (click to enlarge)
+
+--- 帖子 #123 ---
+TP 1 immediately hit, adjusted stops on TP2 AND TP3 and taken 50%. No pressure now. Attached Image (click to enlarge)
+
+--- 帖子 #124 ---
+That market uncertainty I mentioned earlier spiked me out of AC.....tough to control at that speed!
+
+--- 帖子 #125 ---
+One from my stable (I've started to call them ''Ploppers'' - I can't help it!). Coming down from a new extreme (here High). EURJPY H4 Attached Image (click to enlarge)
+
+--- 帖子 #126 ---
+I will now be taking a back seat with this thread. I'll maybe post a trade now and then and see if someone can make the system more relaible/consistent but will be concentrating more on my ADX trading(easier and more reliable), partly due to time limitations and not being able to develop my system in a manner I would have liked At the moment it's a working concept that still requires lots of tinkering. I'm finding my method of trading ADX easier and more enjoyable with multiple setups occurring every da, although I'm a bit reluctant to start a systems thread devoted to it, rather I'll post traes in a journal. Happy trading!
+
+--- 帖子 #127 ---
+[quote=HarryPlopper;9264488]I will now be taking a back seat with this thread. I'll maybe post a trade now and then and see if someone can make the system more relaible/consistent but will be concentrating more on my ADX trading(easier and more reliable), partly due to time limitations and not being able to develop my system in a manner I would have liked At the moment it's a working concept that still requires lots of tinkering. I'm finding my method of trading ADX easier and more enjoyable with multiple setups occurring every da, although I'm a bit reluctant to start a systems thread devoted to it, rather I'll post traes in a journal. Happy trading![/quote No worries, HP. Sorry it didn't work out the way you had hoped. If it's any consolation (probably not ) I am sure my own and Landline's preferred variants will continue to produce the goods. Hope your ADX brings you pips anyway and maybe our paths will cross somewhere along the way.
+
+--- 帖子 #128 ---
+Hi H, I fully understand you, and I think we are all to blame, mainly due to each individuals preference to the kind of signal that each trader trades. I'm no different in that respect, and whilst I am continuing with your core principle from the beginning, I have made adjustments to suit the way that I like to trade, and I have found your comments rewarding, along with a particular liking for your 3 Bar Swing indicator that you posted a while back, which makes the signal detection a lot easier to spot (at least in the way I use it anyway!) Anyhow, thanks for your inputs throughout this thread, (I like your thinking), and as I said previously, I'll keep an eye on your ADX thread, as I'm sure many will, to see whether it can complement my current approaches to the various techniques I currently use. Good luck LL
+
+--- 帖子 #129 ---
+sure, no problem Landline and lemercenaire glad to have provided some inspiration for you good luck with your trading
+
+--- 帖子 #130 ---
+Is this strategy profitable?
+
+
+===== 附件下载链接 =====
+
+未找到附件

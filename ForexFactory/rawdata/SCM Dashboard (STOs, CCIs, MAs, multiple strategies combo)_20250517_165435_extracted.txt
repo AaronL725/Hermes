@@ -1,0 +1,886 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hi Guys, You can find in this thread a Dashboard which can be used as an EA. Attached Image (click to enlarge) This dashboard was initially coded to trade Al strategy shared in this thread (previous DB are there also): http://www.forexfactory.com/showthread.php?t=635469 Considering the new features available in the DB EA, Forexpinbars strategy from this thread can also be traded: http://www.forexfactory.com/showthread.php?t=631956 New options since latest version are highlighted in Yellow. To summarized, this DB EA can trade and give complex signals combinations of 4 stochastics, 5 CCIs and 2 MAs. Which mean you can trade Als strategy, Forexpinbars strategy, or a combination of Sto only or CCI only or MA only ============================= Dashboard Settings: ============================= Dashboard settings are really straight forward. Here is a quick description of the main functions. This Dashboard comes as an EA so please install it in your MT4 experts directory. In OOTB (Out Of the Box Settings): - During initialisation, the Dashboard will download historical data from your broker to make sure you have enough data to have the correct calculations. If you are using a fresh MT4 installation, it might take a little bite of time the first time you launch the Dashboard. - You can place the Dashboard on any timeframe as the settings for the timeframes used for indis calculation are coded in the EA (inside EA settings). - This Dashboard EA can be used as a Dashboard only which generates signals or as an EA as well. In OOTB settings EA mode is turned off. Use Dashboard as EA ?. - You can change the list of pairs to display the 28 standards, for this first version I have hardcoded the list of pairs suggested by Al. - Displayed results: the pip count for all displayed results is showing only the L1 in trend orders pip count (the previous DB was showing the net of both legs orders and was a bite messy). The total is displayed also. The various results panels are showing: (Win/Loss trades counter per pair, L1 pips counts, cash). - in the floating results panel, when trades are open you will notice small red crosses, a click on it would close the open orders. On the right side a small B mean the we have a buy in trend trade, a small S mean that we have a sell in trend trade. - In the info panel the dashboard displays: The current spread (in Orange if it is higher than the average spread) The average Spread Today ADR (in Orange if it is higher than the average ADR) The average ADR - I have included some buttons just after the pairs label. Green = trading on, red off for Buy/Sell. On init there are turned ON by default, you can switch all buttons status with the 2 buttons at the bottom. You have various alert modes available in the Dashboard. A click on the pair label or on the signal square (when there is a signal) will open the chart of the selected pair, you can specify the template in the DB settings. I am using Al template as default, if you want the template to be opened correctly make sure to install al Indis, save a template, and specify its name in the settings. Dashboard is movable anywhere on your screen. 01 - Click to select the dashboard (a little square will appear in the top left corner) 02 - Let shift keyboard button pressed and left mouse clicked and drag and drop the DB where you want. 03 Unselect the dashboard to make sure display is correct If you are displaying the 28 standards pairs you have an option to display separators lines to make the informations more visible. The file comes as a compiled file as I am using some helpers (mqh) to code. ============================= EA Settings and filters: ============================= You can filter trades with trading hours, settings are really straight forward. Time filter is using LOCAL HOURS (I can see the questions coming already) as specified in settings. You can also filter trades per sessions. The dashboard is using an automatic GMT offset calculation, no need to change sessions time. The DB is using windows OS to get those values, tested on W10 and on my VPS running W server 2012. Open sessions are highlighted in colours below the dashboard. You can specify which currency are tradable during each session. I tried to keep the EA settings as simple as possible, using Al suggestions and trade management, however I have added a couple of options (possibility to place SL and TP with trades, options to use a second leg trade as Al is doing). ==&gt; Stochastics settings available in the DB ==&gt; CCIs settings available in the DB ==&gt; MAs settings available in the DB. In this latest DB version, you have a MA filter. If fast MA &gt; slow MA trend up, which mean you can trade Forexpinbars strategy ==&gt; TP: take profit can be placed with trades ==&gt; SL: stop loss can be placed with trades ==&gt; Second leg trade: option to use or not a second leg trade ==&gt; Opposite trades: option to use or not opposite trades ==&gt; Stealth TP to close both legs trades at xx pips value ==&gt; Dynamic Stealth TP to close both legs trades at xx % of average ADR. In OOTB setting the % is set at 25 % the average ADR value which is, from my point of view, roughly the TP that Al is using for the recommended pairs. I have also included a minimal and maximal value for this Dynamic ADR TP in order to avoid abnormal value when there is an abnormally low or high average ADR (which occurs from time to time). There is also an option to display those Dynamic ADR TP value on the right side of the DB (as in my previous pic). On default this option is on false to avoid cluttering the DB. You can also see this value if you hover your mouse over the various average ADR values. ==&gt; Breakeven option: Breakeven can be set in fixed pips or as an ADR value. If you are using the ADR value please make sure to have an ADR value for TP &gt; ADR value for BE threshold &gt; ADR value for BE buffer. I have also included a minimal and maximal value in pips for this Dynamic ADR BE in order to avoid abnormal value when there is an abnormally low or high average ADR (which occurs from time to time). ==&gt; Limit trading to 1 profitable trade a day ==&gt; Limit trading to x in trend buy trade ==&gt; Limit trading to x in trend sell trade ==&gt; Limit trading to 1 in trend trade (buy or sell) ============================= New alerts/signals system ============================= In the previous DB EA, the alerts/signals were hardcoded and so it was not possible for users to tweak them. The standard alerts/signal was to have e.g for a buy signal: all stochastics above 90 and all CCI green. All conditions needed to be true. In this new DB EA version, you have a more complex alerts/signals system that you can completely customize. For each Sto, CCI and MA, you can decide whether it is part of the signals or not. You can choose to have: Sto 1 and/or Sto 2 and/or Sto 3 and/or Sto 4 and/or CCI 1 and/or CCI 2 and/or CCI 3 and/or CCI 4 and/or CCI 5 and/or Trend MA You can notice 2 lines below the DB: - @ entry: display if alerts are on or not for each indis - @ oppos: display if alerts are on or not for opposite signals for each indis It means that you can have different conditions for initial entries and opposite signals. ============================= Additional info: ============================= I wont include any news filter in the DB. I did that in the past and it is always a nightmare as you rely on website informations and formatting and for any reason if something change the function wont work anymore. You have various functions which can help you to avoid trading during news: Trading hour filter, Session filter, now the buttons to allow buy or sell. Trade are open when a signal is generated on last closed candle. There is an option to use the current open candle instead. In the dashboard, the signals are checked this way: If the previous closed bar has a signal and the bar before do not have a signal, then this is a valid signal and it is highlighted in Red or Lime on the DB. If the previous closed bar has a signal and the bar before has a signal, then this is a continuation signal (not a valid signal to enter a trade) and it is highlighted in Teal or Pink. The dashboard is not checking for the first signal of the day (for CPU issue). If your dashboard is running 24/24 a day, as the dashboard is limiting trading to 1 in trend buy and 1 in trend sell a day only the first valid signals would trigger a trade. It also means that if your guys are launching the DB in the middle of the day the DB might trigger a trade with a signal which is not the first signal of the day. Working perfectly on MT4 build 1049, windows 10, coded with editor 1529. Dashboard tested on TradersWay which has a suffix i and working fine. I HAVE CODED SOME NEW OPTIONS IN THE DASHBOARD AND I HAVE COMPLETELY CHANGED THE CODE TO GENERAL SIGNALS, SO PLEASE DOUBLE CHECK IN DEMO IF THE DB IS WORKING AS INTENDED. More informations about OOTB settings and potential presets will come later. ============================= OOTB settings ============================= - Use Dashboard as EA: is off to avoid users who wants to use the DB EA only as a dashboard to make mistakes. - Dashboard pairs: 8 pairs recommended by Al - Signals per indi are all on off - all individual SL and TP are on off. - Fixed MM is used First leg with 0.1 lot and second leg with 0.03 lot. - Both legs will be closed if leg 1 reach 40 pips. - No breakeven - Opposite orders will be opened if the dashboard generates an opposite signal. - Spread filter is on (if current spread is higher than average spread the trade is not open), only applicable for the first initial trade to open. - ADR filter is off (if on and today ADR &gt; average ADR or distance between Today ADR and average ADR &lt; inputs in EA settings the trade is not open), only applicable for the first initial trade to open. - Limit trading to 1 profitable trade a day is on - Limit trading to 1 buy or 1 sell a day is on - Trading hours are empty (as input is LOCAL time and we all have different local time) - Session filter is off Test, test and test. Hope it make sense. Have fun, G
+
+--- 帖子 #2 ---
+Reserved for further information's ;-)
+
+--- 帖子 #3 ---
+Subscribed, looking for trade entry
+
+--- 帖子 #4 ---
+Congrat for your new thread mate,you are very talented and very kind soul, i hope only good for you mate Cheers Al.
+
+--- 帖子 #5 ---
+i have Q, did you considered the new indi that i gave for the pre reverse option ?
+
+--- 帖子 #6 ---
+Yep, with the new signals settings which are completely customizable you can have the same signals. More on this during the week-end, the time to prepare presets ;-) I will also probably post a quick DB update with minor modifications to clean OOTB settings. Have a great week-end
+
+--- 帖子 #7 ---
+http://www.forexfactory.com/showthre...47#post9554247 like the linked post?
+
+--- 帖子 #8 ---
+Very nice! Will test on a small live account for you and report back with feedback soon! Thanks
+
+--- 帖子 #9 ---
+The MAN deliver again ...Thank you for this, gringoh ...
+
+--- 帖子 #10 ---
+============================= 2 legs trades ============================= Here is a quick explanation about how the 2 legs trades are managed in the DB (as Al rules), as I see some questions coming: example for a buy: - In OOTB settings (as Al) we never use SL. We have a Buy signal: - Buy Leg 1 in trend trade open with 0.1 lot - Sell Leg 2 CTT trade open with 0.03 lot If TP is hit, trades are closed If we have an opposite Sell signal: - Initial Buy Leg 1 trade is closed (in loss) - Initial Sell Leg 2 remain open - Opposite Sell Leg 1 in trend trade is open with 0.1 lot - Opposite Buy Leg 2 CTT trade is open with 0.03 lot So exposure is now: - Buy: 0.03 lot - Sell: 0.13 lot That’s it for a basic scenario with 1 opposite signal, if it hit TP, trades are closed. Now if TP is not hit and we have another opposite signal with a Buy signal: It would do the same thing: - First Close the Sell Orders (in loss) - Opposite Buy Leg 1 in trend trade is open with 0.1 lot - Opposite Sell Leg 2 CTT trade is open with 0.03 lot Trade will be closed once TP is hit.
+
+--- 帖子 #11 ---
+Post 1 updated with latest DB version (minor updates). I have cleaned the DB EA OOTB settings, and I have added some comments about those OOTB settings in post 1. I have added an option to close trade on opposite signals without opening new orders: - if “Use_Opposite_Signal_Mode” is true and “Open_Opposite_Orders” is false, all pair’s trades will be close. - if “Use_Opposite_Signal_Mode” is true and “Open_Opposite_Orders” is true, leg 1 trade will be close and opposite orders will be open. I have also included an option to display some manual comments on the DB. If like me, you are testing multiple instances of the DB EA with various settings it makes it easier to know which DB has which settings: Here a screenshot to show what I mean: Attached Image (click to enlarge)
+
+--- 帖子 #12 ---
+================================ About signals/alerts ================================ As described in post 1 this new DB EA has more flexible signals mode. In the previous DB EA, the alerts/signals were hardcoded and so it was not possible for users to tweak them. The standard alerts/signal was to have e.g for a buy signal: all stochastics above 90 and all CCI green. All conditions needed to be true. In this new DB EA version, you have a more complex alerts/signals system that you can completely customize. For each Sto, CCI and MA, you can decide whether it is part of the signals or not. You can choose to have: Sto 1 and/or Sto 2 and/or Sto 3 and/or Sto 4 and/or CCI 1 and/or CCI 2 and/or CCI 3 and/or CCI 4 and/or CCI 5 and/or Trend MA You can notice 2 lines below the DB: - @ entry: display if alerts are on or not for each indis - @ oppos: display if alerts are on or not for opposite signals for each indis It means that you can have different conditions for initial entries and opposite signals. To summarized, this DB EA can trade and give complex signals combinations of 4 stochastics, 5 CCIs and 2 MAs. Which mean you can trade Als strategy, Forexpinbars strategy, or a combination of Sto only or CCI only or MA only ================================ Example of Al’s initial strategy ================================ Al’s initial strategy was to take a buy if: - Sto 1 &gt; 90 - Sto 2 &gt; 90 - Sto 3 &gt; 90 - Sto 4 &gt; 90 - CCI 1 &gt; 150 - CCI 2 &gt; 150 - CCI 3 &gt; 150 - CCI 4 &gt; 125 - CCI 5 &gt; 0 The same settings were used to generate opposite signals. Here how it would look like in the DB EA once all indis settings option are adjusted: Attached Image (click to enlarge) You can note that @ entry and @ oppos signals are the same which mean that we have the same conditions for initial entry signals and for opposite signals. ================================ Example of Al’s with second opposite signal ================================ The entry signal remains the same. This opposite exit signal was suggested in Forexpinbar’s thread. If I am correct the indicator coded by lokopata is giving a buy signals when: EAM 200 &gt; EMA 365 CCI 555 &gt; 155 CCI 1333 &gt; 155 CCI 2333 &gt; 0 The opposite for a sell signal Cf Al’s post: http://www.forexfactory.com/showthre...56#post9454856 The CCI settings are almost the same in both strategies so the settings in the DB EA would look like this for an opposite signal: Attached Image (click to enlarge) To mimic exactly the indicator you can note that for opposite signals I have turned On the MA filter. ================================ … ================================ So I think it should clear some questions about : - initial trades signals settings - opposite trades signals settings Considering the number of indis in the DB EA you understand that there are multiple potential combinations. We can even imagine using only the MA to take trades…
+
+--- 帖子 #13 ---
+Here are the presets I am going to test NEXT week: Magic Number 5001: Al’s strategy with 2nd opposite signal, 8 pairs MN: 5001, TP: 40, no SL, 2 legs, 1 am to 5 pm local Attached Image (click to enlarge) Magic Number 5002: Al’s strategy with 2nd opposite signal, 28 pairs MN: 5002, TP: ADR, no SL, 2 legs, 1 am to 5 pm local Attached Image (click to enlarge) Magic Number 5003: Forexpinbar strategy: FBP strategy with opposite signal, 28 pairs MN: 5003, TP: ADR, BE: ADRL, 1 leg, 1 am to 5 pm local Attached Image (click to enlarge) PS: I will add a couple of other things in DB EA later, specially to try to limit losses. But before to do that DB EA needs intensive testing to be sure that latest modifications are ok. I have finished to code it late on Friday and I haven’t tested all combinations yet. That’s it for this week guys, chat next week Enjoy your week-end. G
+
+--- 帖子 #14 ---
+Can the dashboard work with currency strength difference signals?
+
+--- 帖子 #15 ---
+Looking forward to Next week ...Have a Nice weekend
+
+--- 帖子 #16 ---
+Subscribed!
+
+--- 帖子 #17 ---
+Amazing job you are doing on FF....I feel very humbled that you modified your new dashboard EA to trade my strategy "Catch the 1min trend" ..That means a lot to me...You are a blessing to the ForexFactory community..I will test your new DB and share results...Green pips to you..
+
+--- 帖子 #18 ---
+Hi mate i want to suggest something , the manual back test that i made for GCAD,GU,GN,GA,GJ,GCHF for the past two years i noticed something very strong and i think its worth a change with the dash let me explain:' lets say that the main signal is going wrong and if we get the opposite signal with the #2 indicator i gave, the probability to win in this case is about 90%! so what i normally do in this scenario, i double the lot size from the first that i lost and i don't put in this case 2 trades only one to our favour signal direction, what i mean : if i got major signal long and put there 2 trades one long for 1 lot and one short 0.3(as normal case) and the trade go wrong and we got by the #2indicator the opposite signal what i do is close the only the 1lot long and open 2lot short and we have also the 0.3 from above and put both targets to the tp point of the 2lot (i measure 50 pips from the 2lot size) i hope you understand what i mean, Cheers Al.
+
+--- 帖子 #19 ---
+Hi mate , the values for the opposite signal provided by the #2 indicator is not the same as the dash please look and its very effective for the opposite signals we need value of 155/-155 for #1 and #3 cci and only zero for #4 cci, if we want the very accurate for the opposite signal its very very important my friend, i again tell you from my experience on back testing that its must be very accurate as i told like the indicator #2 please refer to this post my friend http://www.forexfactory.com/showthre...56#post9454856 Cheers and thanks for your efforts Al.
+
+--- 帖子 #20 ---
+Hi Forexpinbar, My pleasure ;-) You have probably already noticed that in my preset files to trade your strategy, I have modified a little bite the rules to trade 28 pairs, and so I am using ADR multiple. With the latest DB EA which is coming in a minute you should be able to trade your exact rules also. Cheers, G
+
+--- 帖子 #21 ---
+Hi guys, Post 1 updated with new DB EA, modifications are: ==&gt; Stealth SL: The DB EA already had a stealth SL mode (in pips or ADR, so I thought it would make sense to have this option available for Stop Loss also. It is done and available now (please remember that those stealth TP/SL will close all your Pair’s orders whatever the leg). ==&gt; Opposite Orders: - In the first DB EA shared in Al’s thread, the various filters (trading hour, Spread, ADR…) were used only for initial trades, not for the opposite trades. Now in this new update you can select if you want to use those filters also for opposite trades (in OOTB settings only Spread is activated). - Now you can select different lots size for opposite trades (as per one of Al’s last post above). Which mean you can use a kind of martingale for your first opposite trade. Please note that I have coded this field as a fix value which mean that next opposite trades will use this value. In standard rules, only 1 opposite trade will be allowed (limitation to 1 buy and 1 sell per day) which mean that if some users tweak the settings to allow more opposite trades a day do not expect to have martingale on the third trade ( a third trade which would be a second opposite trade will use the same lot size than first opposite trade). As you know a martingale above would kill your account one of those days. - Now you decide to have an L2 CTT trade with your opposite trade or not (as per one of Al’s last post above). ==&gt; Opposite orders TP: As per one of your latest post Al, I understand that you would use a different TP for initial trade and for opposite trades: - Initial trade, TP = 40 pips - Opposite trade, TP = 50 pips I have not yet implemented this option, let’s test all the DB options first to make sure that they are working as intended, and I purpose that you get back to me in a few days once we are sure that everything is ok. Then I will make the mod. That’s it for this update. Cheers, G
+
+--- 帖子 #22 ---
+Hi Al, I need a quick clarification here concerning the CCI threshold values. ================================ In your initial strategy: ================================ A buy Initial trade is triggered if: - Sto 1, 2, 3 and 4 are above 90 - CCI 1 (555) &gt; 150 - CCI 2 (777) &gt; 150 - CCI 3 (1300) &gt; 150 - CCI 4 (2333) &gt; 125 - CCI 5 (777) &gt; 0 A Sell Opposite trades would be triggered as per the indi shared in Forexpinbar thread: http://www.forexfactory.com/showthre...56#post9454856 - CCI 1 (555) &lt; -155 - CCI 2 (1333) &lt; - 155 - CCI 3 (2333) &lt; 0 - MA 1 (200) &lt; MA 2 (365) So here the thing : - We have 2 CCIs with the same period values, but we have different threshold values for them, CCI 1 and CCI 4 (150 compared to 155), I can adjust the DB EA easily by adding a different threshold value for initial entry trades and opposite trades. - We have a new CCI, period 1300 compared to 1333, which mean I would have to add a new CCI in the DB EA. To keep it simple what do you suggest? Does it really makes a difference from 1300 to 1333? If really needed I will add another CCI in the DB EA. I am just trying to keep things easy and simple ;-) Once I understand the thing I will adjust the DB EA accordingly and I will also prepare some new preset files. Cheers, G
+
+--- 帖子 #23 ---
+Hi mate,the big difference is the 2333 cci that only need zero to be cross and not need to wait till deeper value to cross. Cheers. Al.
+
+--- 帖子 #24 ---
+Oups forgot this one, so I am going to implement this suggestion right now: “I can adjust the DB EA easily by adding a different threshold value for initial entry trades and opposite trades.”
+
+--- 帖子 #25 ---
+and i start to look for 25%adr also for the opposite trade so if it can be also an option its can be great i think its make very sense p.s if you can do please new preset for the 8 pairs trade with my strategy to enter with fix lot and tp 25%adr, sl on reverse but with the new reverse(#2indi) that i told with double the lot size without open #2leg and tp set to 25%adr also trading hours from 3am to 6pm monday to thu and on friday from 3am to 11am Cheers and thanks so much mate Al.
+
+--- 帖子 #26 ---
+Ok post 1 updated with new DB which have conditions for each CCIs for entry and opposite threshold: Attached Image (click to enlarge) In OOTB settings the values are the same. I think that now, with this latest version we have a good candidate for a test? If it seems ok for you, I am going to prepare new preset files?
+
+--- 帖子 #27 ---
+Sure it can be an option, but that's already a lot of modifications since the lastest version in your thread. I propose to run a first test to see if those new options are working fine, and then we will add those options. PS: if you use ADR TP, it will work for entry and opposite trades (just to confirm). Which mean if we want to have different TP for entry trades and opposite trades, the DB will need further modifications (once first test ok).
+
+--- 帖子 #28 ---
+i think its kind problem cause if we change the value it also reflect on the entry i think you need to add new 2333 cci with only option of zero cross and only for reverse
+
+--- 帖子 #29 ---
+Will be done in a few minutes (after a quick lunch). The only thing which I won't include in the preset to avoid confusions are trading hours filter. As all of us have different local time and that the filter is using local hours for this filter, I will let each user set this option. PS: in Friday hour just input 99 to avoid trading during this specific day. @ all: Also make sure to perfectly respect the case for trading hours (double check the difference between . and ,). Be back a little bite later.
+
+--- 帖子 #30 ---
+I think that with the latest modification it should be ok: Attached Image (click to enlarge) With the settings above: For entry threshold is set at +/- 125 For opposite at +/- 0
+
+--- 帖子 #31 ---
+perfectly! will wait for the update Cheers Al.
+
+--- 帖子 #32 ---
+The latest DB version updated in post 1 is already ok. Next thing is to prepare the preset files. I am going to prepare that right now. I am going to delete the previous preset posted and post new ones in post 2 once ready with explanations about them. I will tell you once ready and posted.
+
+--- 帖子 #33 ---
+Here a summary of the rules if ok I prepare the preset: Attached Image (click to enlarge)
+
+--- 帖子 #34 ---
+Great!You are so kind and generous..If you dont mind me asking , what is ADR multiple?
+
+--- 帖子 #35 ---
+Avergae Daily Range mutliplied by a % As each pair has a different range in pips it makes it more dynamic: Attached Image (click to enlarge) ADR option are available for TP, BE and SL
+
+--- 帖子 #36 ---
+In this post, you can find the preset files that I am going to use for my tests. Everything is set up excepted the trading hours. The trading hours filter in the DB is using LOCAL HOURS. As all of us have different local time and that the filter is using local hours for this filter, I will let each user set up this option. Al's hour which are GMT + 2 are: trading hours from 3am to 6pm monday to thu and on friday from 3am to 11am. You can ask questions about trading hours filter, but do not expect an answer for me to know what is GMT 2 time converted in Mars time ;-) Also make sure to perfectly respect the case for trading hours (double check the difference between . and ,). Here some examples (double check the difference between . and ,): +8.05,-08.45,+9.05,-11.00 +8.00,-17.00 ================================ 5001: Als settings (8 pairs) ================================ Attached Image (click to enlarge) ================================ 5002: Als settings ================================ Same settings than 5001 but with 28 pairs ================================ 5003: Forexpinbars strategy settings ================================ In his strategy, FBP is using a TP of 100 pips, a SL of 20 pips, a BE of 20 pips when 40 pips reached. (which mean that RR from TP and SL is 5). As I am going to test this strategy with 28 pairs to get some stats, and that all pairs have different ADR, a fix TP and SL would not make sense, so I am going to use ADR multiples. I kept the RR multiple of 5 constant with ADR values, here the approach: Attached Image (click to enlarge) And here the settings: Attached Image (click to enlarge) PS: I cannot edit post 2 anymore so preset files are here.
+
+--- 帖子 #37 ---
+Hope that make sense for you guys, if no feedback I will set up those preset files on my VPS later.
+
+--- 帖子 #38 ---
+Great job once again..Can your dashboard trade Gold and Silver?
+
+--- 帖子 #39 ---
+Yep but let's keep it basic for a first week test. To trade other instruments, Pipfactor needs to be adjusted according to Brokers pip/tick value. I will explain more about this later once we have tested this new update ;-)
+
+--- 帖子 #40 ---
+Cool
+
+--- 帖子 #41 ---
+Hi mate i setup the trading time and its show me red switch that tell me that trade time is off..,any clue? Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #42 ---
+It will turn green when trading time is on ;-)
+
+--- 帖子 #43 ---
+o // lol! thanks so much mate, lets c if everything will work, Cheers Al.
+
+--- 帖子 #44 ---
+What you can do to test if trading hours are ok is to turn off autotrading and once market is open set hours at your current hour or 1 min after to see if it is ok. The clock colour will turn green. Once test ok just set your trading hours as you wish and do not forget to turn on autotrading.
+
+--- 帖子 #45 ---
+Thanks again, gringoh ...
+
+--- 帖子 #46 ---
+There are my parameters set with the Almo2312 option does not seem to be the same, this is why? thank you Attached Image (click to enlarge)
+
+--- 帖子 #47 ---
+Small alarm clock is green, what is the problem? Attached Image (click to enlarge)
+
+--- 帖子 #48 ---
+it means that the ea is trading currently, on your specified hours
+
+--- 帖子 #49 ---
+i think when using Al's strategy SELL EA alerts/trades opened when 7777, is still blue
+
+--- 帖子 #50 ---
+Hi, Here is quick update of today’s results: =========================================================== 5002: Al’s strategy with 28 pairs (same settings than for 8 pairs) =========================================================== Not great setup today, let’s wait to see this night and tomorrow if we have some moves to push those trades into profit. Attached Image (click to enlarge) =========================================================== 5003: FBP strategy with 28 pairs =========================================================== All pairs with GBP in base were closed in profit at BE. A lot of pairs have hit SL (20 pips do not let the price breathe that much). I will push the test further and might tweak the SL settings later. Attached Image (click to enlarge) Cheers, G
+
+--- 帖子 #51 ---
+I do not understand is why the total resistance to buy, it needs to wait for a callback, very dangerous Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+Good morning, week and green pips to everybody! I have tried the new version of the DB. It is so complete, but it has too many variables! And it is going too far far from initial Almo's idea. SO i have re-installed the previous version. it goes greatly to me! here my updated results. bye for now, Sal
+
+--- 帖子 #53 ---
+Many thanks for sharing your results. Yep the new DB EA is more complete than the previous versions, but just as a clarification if needed for other users, this new version can do all the things that the previous version was doing, and more. Now it is just that we have a kind of "universal" tool to trade various combinations of Sto, CCI and MA Keep on sharing results and ideas guys, that's great. Cheers, G
+
+--- 帖子 #54 ---
+Why the old version of it would suggest that almost all currencies have no signal Attached Image (click to enlarge)
+
+--- 帖子 #55 ---
+You have a broker with strange suffix aren't you? I haven't tested all suffixes which are existing, can you try with a standard broker and let us know.
+
+--- 帖子 #56 ---
+OK I just flagged a bug in opposite trades logic, which open more trades than expected. Expect an update later once ok. I think the problem is coming when we have more than 1 opposite signal a day, at the moment there is no logic to limit that: Attached Image (click to enlarge) I am going to limit opposite trades to 1 trade a day also whatever the direction, if we have more signals it would mean that we have a range.
+
+--- 帖子 #57 ---
+Update available in post 1. I will start a fresh demo after London Close. For demo 5003 I will increase the SL to let the price breather a little bit.
+
+--- 帖子 #58 ---
+Hi Gringoh, this is off topic issue but i will put it here cause i closed my thread (for non activity issue) here i put 15min time frame strategy base only on one cci and one stochastic (you can use jagg #2 indicator ) follow the arrows i setup the jagg indi for the 15 min tf as well , ibeen tested it for the GJ and works fine with 100 tp Sl on reverse trading hours from 3am to 7pm (gmt+2)// from JPY open till UK close Cheers Attached File(s) Almo_CSC_with_Alert_v1.02j.mq4 69 KB | 504 downloads Attached File(s) alcsc15min.tpl 38 KB | 402 downloads Attached Image (click to enlarge) p.s you can test it on other pairs but notice that tp need to be change as each pair have differ moves Al.
+
+--- 帖子 #59 ---
+Many thanks Al, I will have a look once DB EA is working as intented ;-) PS: now the DB can be used for this setup
+
+--- 帖子 #60 ---
+Champion you are!! Cheers Al.
+
+--- 帖子 #61 ---
+GJ on progress, lets c ,100 pips is the goal, Attached Image (click to enlarge) Cheers, Al.
+
+--- 帖子 #62 ---
+thanks for the DB i see the almo cc1 -2 indicator run a cci in 1333 and on the DB is 1300 wich one we need
+
+--- 帖子 #63 ---
+FXCM is standard, since 5003 of the previous day's results of less than 5001 and 5002, so the main test of the 5001 and 5002, does not seem ideal I will test your new version, thank you for your efforts Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #64 ---
+Hi, The last update seems to work fine now, additional testing is needed to make sure that opposite trades are ok but so far so good 5002 Attached Image (click to enlarge) 5003 Attached Image (click to enlarge)
+
+--- 帖子 #65 ---
+I love the color of green ...
+
+--- 帖子 #66 ---
+gringoh, will u post updates today?
+
+--- 帖子 #67 ---
+Hi mate how are you. today GJ opened 4 trades on reverse instead one,..any chance to fix the bug? thanks Al.
+
+--- 帖子 #68 ---
+My results with 5001 settings!
+
+--- 帖子 #69 ---
+it seems you have to remove fastly all CHF's related pairs happy weekend Sal
+
+--- 帖子 #70 ---
+Hi guys, I am here don’t worry, I was busy the end of this week and didn’t had time to post result’s updates. Here they are: Here 5002: The test is running since mid-week as the DB EA was buggy before the latest update. Since the latest update everything is working as intended here ;-) As the opposite trades conditions are less restrictive than the original ones (with same conditions for entries and opposite trades), the win rate has dropped… I am going to let this test running one more week before to conclude anything. (PS: GBPCAD is the worst contributor !). Attached Image (click to enlarge) Here 5003: This test is not performing well, the SL is too tight and even with a bigger SL the strategy is not profitable. I am going to stop this test the time to think at something else. Attached Image (click to enlarge) More later ;-)
+
+--- 帖子 #71 ---
+Lucky you, my GBPCAD is a big looser. If you keep only the pairs recommended by Al in my 5002 test the result would be a loss.
+
+--- 帖子 #72 ---
+Hi Al, I have identified this bug at the beginning of the week with the DB EA version that I have posted last week-end. The latest version posted on Tuesday is working fine here. I haven't changed the version number in the EA (my fault I have forgotten) so we cannot check which version you are using. Can you make sure to remove your DB EA version and use the latest one in post 1. Let's monitor this week if the bug appear again, here so far so good. Cheers, G
+
+--- 帖子 #73 ---
+I will remove and reload the last posted from post#1,i decided to go only on GJ and UJ min one and min5 start hours from 4am to 6pm gmt+2 and on friday only from 4 to 12 pm.
+
+--- 帖子 #74 ---
+That's what your signature report? Results from this test? Normally DB EA is working fine, fun should begin with various test
+
+--- 帖子 #75 ---
+hi trading people! I have noticed that gbpcad ia a big loser in this system. I am trying again the old dashboard basic version, yesterday morning i have pumped the leverage to 6 ( more or less) here my actual results: is it visible GBPCAD loocked. i dont like USDJPY si far too using this strategy, it looks positive at the moment just because the system has closed a trade with high leverage, i think it risks to become red at soon again. Sal
+
+--- 帖子 #76 ---
+Here my today's results, i am really satisfied!
+
+--- 帖子 #77 ---
+Impressive, 5001 settings? Would like to see long time results
+
+--- 帖子 #78 ---
+Hi softrader, what are your settings??5001 or 5002 or 5003
+
+--- 帖子 #79 ---
+Thank you. 5001 to 5003 settings are about the new dashboard. i am using the previous version, after a small period using a very low leverage, friday i set it around 6 for pair. ( it is a demo accont for now)
+
+--- 帖子 #80 ---
+Hi, To mimic the previous Dashboard, you would have to use 5001 settings and use the same conditions for initial entries and opposite entries. Cheers, G
+
+--- 帖子 #81 ---
+Here is a quick update of 5002 test. (I will continue the test with the same settings this week and I will probably change the opposite trade conditions to be same ones than for the entries, as per the original dashboard). Attached Image (click to enlarge)
+
+--- 帖子 #82 ---
+Hi, gringoh. First of all thank you for your work. I came to the same idea and already changed the opposite trade conditions. Made them the same as the initial trade. In initial trade I enabled the MA filter. So, actually all the filters are enabled both for initial trade and the opposite trade. Also, I changed the lot size of the 1 leg trade to 0.05 and the opposite trade to 0.02. But when I loaded this setup for test, the bot opened only the first leg trade and didn't open the opposite trade at all. I checked the experts tab, no errors there and no attempt to open the opposite trade. In settings it is enabled of course. So, I'm writing this to let you know that there is probably a bug somewhere. Regards.
+
+--- 帖子 #83 ---
+Hi, Can you post your set file, I am going to double check. Just a dumb question, your broker allow hedging? We are going to fix that. Cheers, Greg
+
+--- 帖子 #84 ---
+Here is the modified set file. Leg 1 in Trend Order opens normally, but Counter Trend Order doesn't open though it is enabled. The original 5001 set worked ok. The broker allows hedging. Regards.
+
+--- 帖子 #85 ---
+Hi Gringoh, Thank you to you and Almo for such a wonderful work you guys are doing. Also wanted to thank you Forexpinbar for his strategy. I have manually traded Almo strategy and my problem was not enough time to sit infront of screen so this dashboard EA eliminate that issue and it is currently working exactly how it described by Almo. I am using 5001 set file. I am also testing forexpinbar strategy but i am not sure how that works because i have never studied it. Here are my results from yesterday... Attached Image (click to enlarge) Attached Image (click to enlarge) So far good from Almo strategy but Forexpinbar strategy didnt work. I didnt change anything in set file provided by Gringoh ... thanks
+
+--- 帖子 #86 ---
+Hi, I have just loaded your setfile, I have only changed the list of pairs to have all 28 pairs (to have more signals to test the settings) and here i don't have any issues with your setfile, orders are open correctly: Attached Image (click to enlarge) Can you test on a fresh MT4 installation... (ps: what is your broker ?)
+
+--- 帖子 #87 ---
+Well, I loaded the same set which I sent you for test again. And again the bot opened the in trend orders and didn't open the counter trend orders. No errors in the experts tab and no attempts to open them. This surely looks weird. The original set worked ok. I made only 3 changes to it. Changed the pairs, enabled all filters and changed the lot sizes. Could you test my set exactly as it is (without changing the list of pairs)? My broker is Alpari. Regards.
+
+--- 帖子 #88 ---
+Sure I launch a test with your exact setfile right now.
+
+--- 帖子 #89 ---
+Attached Image (click to enlarge) 5 min setup also i have great strategy to share for the min1 and we can code it into EA if Gringoh is in i am in Cheers Al.
+
+--- 帖子 #90 ---
+Here my test with your setfile. Not probs, I really don't knwo what could be the issue??? Attached Image (click to enlarge)
+
+--- 帖子 #91 ---
+Hi Al, I am in, the hard work is done now that the core structure of the Dashboard is done ;-) Any ideas are always welcome. Cheers, Greg
+
+--- 帖子 #92 ---
+Hi , first of all here is my set please notice that i trade it from 8am till 6pm and on friday its from 8am till 11am (gmt+2) and for the strategy if its ok from your side i will upload here (its base only on one indicator and for the min one time frame its strategy for AU, EU,GU,UCAD and for i trade it from 2:00am to 1:30pm (GMT+2) Attached File(s) 5min.rar 3 KB | 532 downloads
+
+--- 帖子 #93 ---
+Hi guys, this is myfxbook account following this strategy's EA: https://www.myfxbook.com/members/FXS...hod-db/1996239 I'm using 5001 settings, I didn't touch anything, not even trading hours. GBPUSD and USDCAD are doing bad, the rest is good. Thank you for the hard work!
+
+--- 帖子 #94 ---
+Well, probably this simply means that this bot is not for me. Mysterious things sometimes happen in our lives. Thank you, gringoh, for trying to help. I won't bother you any more. Good luck.
+
+--- 帖子 #95 ---
+Hi Guys here are the results for yesterday... Attached Image (click to enlarge) 20 Pairs Almo strategy...wanted to see how 8 main pairs perform separately so i kept 20 here... Attached Image (click to enlarge) Forexpinbar strategy... Attached Image (click to enlarge) 8 main pairs Almo Strategy...
+
+--- 帖子 #96 ---
+Hi gringoh , i think we have bug in ea. all time result value is not coming up correct right now...as day changed the total value is showing incorrectly... thanks
+
+--- 帖子 #97 ---
+SO Almo in your set file trading hours are sett or do i have to set manually and if i have to set manually then is it my broker time or my pc time...and where do i set that please? let me know thanks
+
+--- 帖子 #98 ---
+cool dashboard, i give many benefit from it, thank bro
+
+--- 帖子 #99 ---
+Thanks for your work Gringoh. I've downloaded it and put it on a new demo account. I haven't got a clue how it works yet - I guess I've got some catching up to do! m
+
+--- 帖子 #100 ---
+the all time result changes as you change your historical viewing period. if you set it as "show complete historical", u will see all the operations results on the DB. If you set "show last three days", you will see your last 3 day on the DB too. Sal
+
+--- 帖子 #101 ---
+Thanks for your reply...got it...
+
+--- 帖子 #102 ---
+Hi mate , regard to our conversation i want you to look at this strategy , this strategy is for the one min time frame and its for the EU,UCAD,GU pairs(this pairs i tested from 2011! the logic taken from Quantum strategy with some modification from my side trading hours are from 2am to 2pm but can be tested also till 7pm from (one hour before Asian open till one hour before USA OPEN) and optional test till UK close the strategy based on 2 indicators and i think its not complicate to make it an EA
+
+--- 帖子 #103 ---
+Hi Al, If you can post a screenshot and a quick description of the strategy I will try to look if I can code something ;-) Also, which indicator are you using for this strat? Cheers, Greg
+
+--- 帖子 #104 ---
+ok mate, Short example Attached Image (click to enlarge) Long example Attached Image (click to enlarge) Cheers Al.
+
+--- 帖子 #105 ---
+Attached File(s) Quantum - Stochastic OB_OS.ex4 11 KB | 484 downloads Attached File(s) Quantum - Stochastic OB_OS.mq4 3 KB | 531 downloads Attached File(s) Quantum_CCI OBOS - Alert.ex4 12 KB | 481 downloads Attached File(s) Quantum_CCI OBOS - Alert.mq4 4 KB | 541 downloads Attached File(s) Quantum_RSI OBOS - Alert.ex4 13 KB | 476 downloads Attached File(s) Quantum_RSI OBOS - Alert.mq4 4 KB | 525 downloads Attached File(s) QMIN1AL.tpl 49 KB | 436 downloads
+
+--- 帖子 #106 ---
+also about the dash , i think we have bug there cause i limited the trades for one trade per day but as i see its opened another trades even though i limited it.. look at the GCAD and GA section Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #107 ---
+i forgot to mention that for short we must all red (3 out from 4 ) to aligned at the same time together and for blue (long) same criteria Cheers Al.
+
+--- 帖子 #108 ---
+Thanks for all those infos Al, I am going to check everything asap and get back to you ;-) Cheers, Greg
+
+--- 帖子 #109 ---
+thanks mate i am available for any Q Cheers AL.
+
+--- 帖子 #110 ---
+Almo, i was checking the system with template but when loading its showing only one indicator and not 4 so can you please reupload the template file...? thanks
+
+--- 帖子 #111 ---
+Hi mate its same tpl i use.. i dont know what the problem Cheers Al.
+
+--- 帖子 #112 ---
+missed the GU entry Attached Image (click to enlarge)
+
+--- 帖子 #113 ---
+Hi Almo, I've got the same problem as @shg.
+
+--- 帖子 #114 ---
+did u loaded all the indis + the exe?
+
+--- 帖子 #115 ---
+look .. Attached Image (click to enlarge)
+
+--- 帖子 #116 ---
+yes u both right my mistake here is the one Attached File(s) QAlmin1.tpl 48 KB | 470 downloads Cheers Al.
+
+--- 帖子 #117 ---
+HI mate please go to post #116 for the right tpl cause i confuse a bit Cheers Al.
+
+--- 帖子 #118 ---
+HI mate please go to post #116 for the right tpl cause i confuse a bit Cheers Al.
+
+--- 帖子 #119 ---
+thank you Al
+
+--- 帖子 #120 ---
+thanks almo for your help... best regards
+
+--- 帖子 #121 ---
+EU..05:31 am (gmt+2) Attached Image (click to enlarge)
+
+--- 帖子 #122 ---
+lets short the EU Attached Image (click to enlarge)
+
+--- 帖子 #123 ---
+and long the cable Attached Image (click to enlarge)
+
+--- 帖子 #124 ---
+interesting strategy Al. is the trade explorer in your signature for this method?
+
+--- 帖子 #125 ---
+what is your criteria for for choosing pairs and times to trade? same as CCI method?
+
+--- 帖子 #126 ---
+experience and back testing , doing home work very hard.. i wait for maybe an EA for this method Cheers Al.
+
+--- 帖子 #127 ---
+good new strategy , Thank you Almo
+
+--- 帖子 #128 ---
+HI mate please go to post #116 for the right tpl
+
+--- 帖子 #129 ---
+the trade explorer mix with another Q theory, simple EA with grid issue that i done to modified with my setups and i trade it only on EU but the large lots are represent the rectangle Q theory , the small lots represents the EU expert Cheers Al.
+
+--- 帖子 #130 ---
+scalped the UCAD Attached Image (click to enlarge) Cheers Al.
+
+--- 帖子 #131 ---
+and lets ride short EU again Cheers Attached Image (click to enlarge)
+
+--- 帖子 #132 ---
+was this a failed trade?
+
+--- 帖子 #133 ---
+nope,i still there did your sl hitted?
+
+--- 帖子 #134 ---
+I didn't take that one because the broker froze! but if i did the 20 pip SL would be hit these are today trades, using 10 pip tp and 20 sl. (just experimenting)
+
+--- 帖子 #135 ---
+notice that this pairs i dont trade for this method i trade only EU , GU , UCAD but mostly EU
+
+--- 帖子 #136 ---
+we need to build EA or indicator that give arrow message and push notifications for each specific pair when all criteria meet together if anyone can help its will be great Cheers Al.
+
+--- 帖子 #137 ---
+why only these?
+
+--- 帖子 #138 ---
+Dear Almo, thank you for another system. Today all winners. What if market go wrong direction? SL or Grid? Please write something more. Thank you.
+
+--- 帖子 #139 ---
+we have 20/30 as SL so i dont worry Cheers Al.
+
+--- 帖子 #140 ---
+back testing from 2011! Cheers Al.
+
+--- 帖子 #141 ---
+excellent!
+
+--- 帖子 #142 ---
+lets short the EU Attached Image (click to enlarge)
+
+--- 帖子 #143 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #144 ---
+Attached Image (click to enlarge) now we have above 80% to success in this trade Cheers Al.
+
+--- 帖子 #145 ---
+Al, can you share this indi?
+
+--- 帖子 #146 ---
+shorted the EU aND bought the UCAD
+
+--- 帖子 #147 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #148 ---
+where do we find this indicator?
+
+--- 帖子 #149 ---
+Posts 106 and 116 for template
+
+--- 帖子 #150 ---
+they are for the other strategies. im talking about the indicator in that specific post. looks like similar to the quantum indicator but not seen one with the white arrow
+
+--- 帖子 #151 ---
+Thanks for highlight.. Looking for the template.
+
+--- 帖子 #152 ---
+@gringoh Cograts on what you have created here, my deepest respect for sharing it with us. I will be testing it next week and give my feedback. @ almo2312 Using quantum M1 entry exit is very promising, thanks for sharing. There is a FF thread for quantum EA here https://www.forexfactory.com/showthread.php?t=551382 , with quite amazing results and a great team, as this one is.
+
+--- 帖子 #153 ---
+Hi Greg thank you for your time and this ea. Going to test this later. Did you manage to iron out the trade limit bug? Many thanks
+
+--- 帖子 #154 ---
+GU - short
+
+--- 帖子 #155 ---
+closed GU
+
+--- 帖子 #156 ---
+Hi Guys, I am still here but I had some other work to do and so limited time for coding. I will try to catch up with the latest great ideas shared in this thread and also have a look at the bug issue. Cheers, G
+
+--- 帖子 #157 ---
+Quantum by Al - Today +3.6%
+
+--- 帖子 #158 ---
+Thanks Greg. Also with 5002 and 5003 quite a few pairs have failed to connect with ST1 to ST4 being zero... Attached Image (click to enlarge) Any thoughts please? I'm using Hotforex.
+
+--- 帖子 #159 ---
+Quantum by Al - today + 2.9%. Cheers!
+
+--- 帖子 #160 ---
+Hi mate do u use grid or its tp/sl? this is mine for today Attached Image (click to enlarge)
+
+--- 帖子 #161 ---
+Hi mate, I use grid, distance betwin orders 10-15 pips. TP is 1% of initial capital. I'm still wondering when to stop if market goes wrong direction... Your trading is amazing Almo! cheers
+
+--- 帖子 #162 ---
+Hi mate i have some ideas about Q sys i mix it with 3 cci's i will update soon my idea's Cheers Al.
+
+--- 帖子 #163 ---
+Sounds great Almo. Can't wait cheers!
+
+--- 帖子 #164 ---
+Grid is greed..lol today stats Attached Image (click to enlarge) Cheers Al.
+
+--- 帖子 #165 ---
+And mine Yours is better!
+
+--- 帖子 #166 ---
+which settings? thanks
+
+--- 帖子 #167 ---
+the old version DB has touched its max today. but it is hard to let it work: during rangng periods, the EA loses enough, but when prices have good diretional moving, like today,then it works really better. Sal
+
+--- 帖子 #168 ---
+Almo, i saw you are follower of Quantum Thread too, i want to publish this way to enter using the DB as signal and the Quantum as trigger, hope it can be useful to you. I want to try this way but today i was far from my pc, so busy; i hope i will experiment it next days. Greeting, Sal
+
+--- 帖子 #169 ---
+I like it meanwhile here is the daily stats Attached Image (click to enlarge) Cheers Al.
+
+--- 帖子 #170 ---
+Can u explain what is "DB"? Thank you in advance.
+
+--- 帖子 #171 ---
+@Almo, can you give me some examples of grid in your trades? I'm still on GU short... Thank you...
+
+--- 帖子 #172 ---
+hi mate, i trade differ with Q,something similar as Sal explained in this post https://www.forexfactory.com/showthr...85#post9672685 Cheers Al. p.s for the grid i trade only EU and specific schedule time and with Robot (EA)
+
+--- 帖子 #173 ---
+Can I read somewhere about it? I don't understand Sal explaining. Cheers
+
+--- 帖子 #174 ---
+your both experts look nice(EU/UJ) can you share them?
+
+--- 帖子 #175 ---
+sure... the same settings for both, turn off before red news
+
+--- 帖子 #176 ---
+@Almo, can you help me with Q trading? I'll be gratfull...
+
+--- 帖子 #177 ---
+Thanks for sharing. On which timefrime do you use this EA?
+
+--- 帖子 #178 ---
+I forgot - TF = H1
+
+--- 帖子 #179 ---
+First week +9.9% (only Almo Q system). Cheers!
+
+--- 帖子 #180 ---
+i think that you need to teach me how to use the Q you doing great! can you share the method you use for the Q theory Cheers Al.
+
+--- 帖子 #181 ---
+Al, don't joke with me some facts: 1. Al 58% vs Strom 9.9% ... 2. Experience: Almo - 7-8 years ? vs Strom 11 months 3. Al, we need you to teach us. Your systems are great! My method is your method from this thread (TP is smaller - 10 pips or when using grid my TP in money = 1% of initial deposit). Please continue your great job on this forum. I appreciate your hard work hire. Have a good weekend for all! Strom.
+
+--- 帖子 #182 ---
+Almo, can you explain idea from post 168?
+
+--- 帖子 #183 ---
+I will also probably post a quick DB update with minor modifications to clean OOTB settings.
+
+--- 帖子 #184 ---
+Soon i will explain my major Q strategies i have two of them. One based for EU and proved work since 2011!. The other is still in check mode. Cheers. Al.
+
+--- 帖子 #185 ---
+this test based regarding my idea of using the Q 2012/till now EU min one time frame from 1am to 11:55am GMT+2 Cheers Al. Attached Image (click to enlarge) P.s DD never reached the initial deposit!!
+
+--- 帖子 #186 ---
+Al, I can't wait... Thank you for all
+
+--- 帖子 #187 ---
+DB is the Gringoh's Dashboard
+
+--- 帖子 #188 ---
+For good understanding: 1. First wait for 3 CCI signal 2. Open position (the same direction as in point 1 signal) when Quantum signal occurs. Am I right? Cheers!
+
+--- 帖子 #189 ---
+but we need to know the best Q value for the retrace
+
+--- 帖子 #190 ---
+Can you share template?
+
+--- 帖子 #191 ---
+Yes Strom, u right. but i don't know the best Q value as Almo says. Almo can you explain how to understand it? Thank you, Sal
+
+--- 帖子 #192 ---
+i trade 4 pairs with the CS strategy (one min time frame) and trade with an EA with 3 differents setfiles only on EU pair and for the one min time frame Cheers Al. i still wait for Gringoh ...then i will share
+
+--- 帖子 #193 ---
+also i checked your EA for the long run its not good mate trade safely with that Cheers Al.
+
+--- 帖子 #194 ---
+OK. Cheers.
+
+--- 帖子 #195 ---
+Yes I know, it's my first EA. I can't be good It's only on demo account.
+
+--- 帖子 #196 ---
+Nice curve on your backtest. What EA is that?
+
+--- 帖子 #197 ---
+hmmm..., yours better,can u able to share it? Attached Image (click to enlarge)
+
+--- 帖子 #198 ---
+You can buy this EA - 250 USD This one is free for demo account.
+
+--- 帖子 #199 ---
+o ..., i thought we are on the share spirit here.. lol i don't buy systems , i build and share.. Cheers Al.
+
+--- 帖子 #200 ---
+so when will you share yours
+
+--- 帖子 #201 ---
+Some are to share, some are to sell their ideas...
+
+--- 帖子 #202 ---
+i think i shared more than enough Cheers Al.
+
+--- 帖子 #203 ---
+Hi Almo the Quantum RSI here shows the label "Quantum CCI" on the chart ( as quantum CCI). It would be better editing it, using the meta editor, to modify the "label" shown on the chart. I have done it. Am i wrong? here the modified version: moreover, it seems that quantum RSI 555 18 never shows a signal ...
+
+--- 帖子 #204 ---
+that certainly no one can disagree with sir.
+
+--- 帖子 #205 ---
+Silent in this thread... 2weeks + 23% (missed 50% of signals). I started filtering signals by MTF RSI. Trades are better now. Cheers.
+
+--- 帖子 #206 ---
+Hi mate, can you share and explain,entries/tp/sl? Cheers Al.
+
+--- 帖子 #207 ---
+Hi mate, I'll do it to the end of the weekend. Cheers
+
+--- 帖子 #208 ---
+Ok . Thanks mate. Cheers. Al.
+
+--- 帖子 #209 ---
+Hi, some modifications of Almo Q system. Very good signals 7:00 - 9:00 GMT + 1 Pairs: EU - M1, TP 7-10 pips, grid 12 pips UCAD - M1, TP 10-15 pips, grid 15 pips GU - M5, TP 15-20 pips, grid 20 pips GJ - M5, TP 15-20 pips, grid 20 pips I don't use SL I use grid. But if you want use SL, you can. Below examples of buy and sell trades. Hope it's clear. Cheers.
+
+--- 帖子 #210 ---
+Thanks mate,just one question . By meaninig grid 12 pips you meant that every 12 pips u add another trade ?. And if so than what the new tp wil be? Thanks in advance. Al.
+
+--- 帖子 #211 ---
+[quote=Almo2312;9708982]{quote} Thanks mate,just one question . By meaninig grid 12 pips you meant that every 12 pips u add another trade ?. - yes (the same lot size) And if so than what the new tp wil be? For example: my TP is 10 pips = 5 USD, when I use a grid my TP is in money = 5 USD . Cheers.
+
+--- 帖子 #212 ---
+Today +5% Cheers!
+
+--- 帖子 #213 ---
+Wow nice work mate, been back testing GU 5mins and looks very good Almo also great work, these system are amazing Keep it up the great work guys and thanks for sharing you hard work with us all
+
+--- 帖子 #214 ---
+contribute from you says all Cheers mate Al.
+
+--- 帖子 #215 ---
+Its been a while hope you are keeping well Having testing it could be very profitable, you take trades every RSI mtf signal and TP at reversal signal, will test some more but looks pretty good...
+
+--- 帖子 #216 ---
+thanks for kind words mate! cheers.
+
+--- 帖子 #217 ---
+Hi mate, for the Q system i trade via EA cause i dont have the time to be in front pc all the time.. and for my CSC system i decided to trade one pair only i trade the GU one min time frame and get one or two signals a day about 15/25 pips tp Cheers Al.
+
+--- 帖子 #218 ---
+This so far in testing looks good, Strom can u make an EA to test results? looks promising
+
+--- 帖子 #219 ---
+Almo, can you share indicator to CSC. I've got few, and I don't know which one is the best. Thank you. Cheers.
+
+--- 帖子 #220 ---
+sorry mate, but I'm not a coder
+
+--- 帖子 #221 ---
+Ok mate, I am sorry thought you was, take a look its really nice, will manually trade it and see how it goes cheers
+
+--- 帖子 #222 ---
+I made a visual becktest from january 2017 (GJ M5), and it's look very nice we need a coder
+
+--- 帖子 #223 ---
+@Gringoh, we need you to help as with code an EA. We waiting for the best coder
+
+--- 帖子 #224 ---
+UCAD - quick pips
+
+--- 帖子 #225 ---
+last 2 days +9.2% Cheers!
+
+--- 帖子 #226 ---
+Well done mate,still waiting for any coder.. Cheers. Al.
+
+--- 帖子 #227 ---
+So almo and strom, what is the difference between your two strategies?
+
+--- 帖子 #228 ---
+Just read: # post 104 and 105 (Almo) # post 209 (mine) Cheers.
+
+--- 帖子 #229 ---
+Al, can you share indicator for GU? Thank you in advance. Take care my friend!
+
+--- 帖子 #230 ---
+i will during the weekend with explanations Cheers Al.
+
+--- 帖子 #231 ---
+Thank you Al.
+
+--- 帖子 #232 ---
+Hi Almo I have read through this thread and the previous posts with your indies and template, I'm interested to try your strategies and will gladly share results and aid in testing. I have downloaded your indies and templates from posts 104 and 105....have you made any changes since then? or do I still use these, please can you advise best pairs etc. Also regards to finding a coder you could try this thread on FF... I will code your EAs and Indicators for no charge And if you look at this thread and see what the coder has done creating the EA.... CCFp weekly signals (set and forget basket trading) the coder is XMESS7 (Jess). He/She has done a fantastic job there...you could try approaching to see if He/She is interested in developing your ideas. I hope you get an EA created for this, I would definately try it out. Good luck J
+
+--- 帖子 #233 ---
+good dashboard, i will try it, thanks
+
+--- 帖子 #234 ---
+@JFphuket, @Almo, I think @josh11 conception is good for EA. Please take a look below. Cheers!
+
+--- 帖子 #235 ---
+Alfter 3 weeks +45%
+
+--- 帖子 #236 ---
+Hi Strom, Looks good to me, if you want some ideas for the trade monitor have a look at the one on the link below https://www.forexfactory.com/showthr...35#post9724335 Maybe the possibility to set this up as a basket style EA making trades based on the signals provided on any pairs that are selected? I'm not a coder and don't have too much experience with this but I'm keen to see where this goes. The coder was XMESS7, did a great job with this EA, always available for questions and to input new ideas etc. Cheers
+
+--- 帖子 #237 ---
+Some other fresh example of entering the trade at right moment
+
+--- 帖子 #238 ---
+Hi @Softrader , how can I get db signals, can you share this indicator and template? Please give more explanation. Thank you in advance. Cheers.
+
+--- 帖子 #239 ---
+Hello Strom, thank you about your interest. Just take a look on the first page of this thread. https://www.forexfactory.com/showthread.php?t=641297 there is the Gringoh Dashboard and some good settings too. Buy and sell signals are calculated using an Almo's strategy. my template uses just simply colors and some EMA's, it is not important in this thread. here you can see the dashboard, i have stopped using it as EA cause normally the trades are very riskyous, so i prefire using it as signal provider and entering more safely when the quantum indicator shows a right momento to trade. I am not full time trader , so i lose some trade when im not in front of my pc. Cheers, Sal
+
+--- 帖子 #240 ---
+this is the one min time frame GU system Rules on chart Cheers Al. Attached Image (click to enlarge) Attached File(s) cci-alert-mtf.ex4 24 KB | 534 downloads Attached File(s) cci-alert-mtf.mq4 8 KB | 618 downloads Attached File(s) algu1.tpl 67 KB | 553 downloads Cheers Al.
+
+--- 帖子 #241 ---
+Somebody would please add a push Notif. feature on the 3RSIMTF Indicator for me , your help is appreciated . It completes my SnD H4 n above trading system as well Thank you all .
+
+--- 帖子 #242 ---
+done tp-ed 40 pips .
+
+--- 帖子 #243 ---
+another easy 40 pips again . Trade with a proper simple lifestyle i wish with the push notif.(3MTFRSI) on phone .
+
+--- 帖子 #244 ---
+Another 80pips . just too simple I need the feature push notification on 3MTFRSI please , guys . Thank you so much all . I am not the kind of thread hijacker but I really need a help from coders here from worldwide . AIMST.
+
+--- 帖子 #245 ---
+This is the indicator I mentioned earlier , credits to Strom . But I really wish a coder here code a new feature push notif. on this indicator for me .
+
+--- 帖子 #246 ---
+@MathTrader7 @hannover
+
+--- 帖子 #247 ---
+Nice work as always mate
+
+--- 帖子 #248 ---
+Thanks mate Cheers
+
+--- 帖子 #249 ---
+Hi mate, just a question are you only entering at the first colour change for higher probability trades? I see you adding but with my back testing I see that the first colour change are the better trades and a SL of 20pips also looks good or reversal signal whichever comes first.... Will do more testing tonight, nice work
+
+--- 帖子 #250 ---
+@Al, thank you for your next system!
+
+--- 帖子 #251 ---
+now when i look further more back in time i figured out that 3 out of 3 looks more safer and remove lot of false signals! Cheers Al.
+
+--- 帖子 #252 ---
+I agree with you, but... STOP &amp; REVERSE is far far away from our entry.
+
+--- 帖子 #253 ---
+yes but we can choose close b4 the reversal,last H/L for example Cheers Al
+
+--- 帖子 #254 ---
+What do U think about replacement SL with recovery mode? On last H/L we can put opposite pending order. For ex. oryginal lot size 0.1 - oposite pending 0.2 (close both position with 0 or with small profit). Take a look on the chart. Cheers!
+
+--- 帖子 #255 ---
+once again, i got just the GBPJPY Dasboard signal today , and here we go over 31 pips as DB target Few minutes ago, the DB has released a new long signal on USDCAD. So i am waiting some quantum blu rectangle to enter.
+
+--- 帖子 #256 ---
+2 trades - one with RSI, second with CCI. Cheers!
+
+--- 帖子 #257 ---
+Can u able to share your tpl?, Thanks. Al.
+
+--- 帖子 #258 ---
+Hi mate, What is your Q value ?
+
+--- 帖子 #259 ---
+done!
+
+--- 帖子 #260 ---
+sure
+
+--- 帖子 #261 ---
+And GJ trade Today + 5%. Cheers.
+
+--- 帖子 #262 ---
+Q value? i don't know what are you speaaking about, mate Al...sorry. But if you are speaking about Quantum value, it is default 300. regards, Sal
+
+--- 帖子 #263 ---
+Can u share indicators and teplate mate?
+
+--- 帖子 #264 ---
+UCAD 2 x shorted
+
+--- 帖子 #265 ---
+sure. there is a new signal and i am waiting the long opportunity to enter. after it, the template
+
+--- 帖子 #266 ---
+Hi, Storm, Your GJ graph is not like your UCAD graph. Do you use 2 templates? Did you short UCAD each time you saw a red square? (what's the rule for entry?) There are no squares on the GJ graph? What about the exit rule? Is it when you reach one of the Fib levels? Hi, Softrader, Which square do you decide to be the one to enter the trade? What about your exit rule as well? Thanks
+
+--- 帖子 #267 ---
+Hi, go to post #256. TP is usually 7-15 pips. All my templates are in this thread. In post #260 is teplate from post # 256 (it's only for GU). You can scalp extreme with RSI and trade with trend continuation with CCI filters. cheers
+
+--- 帖子 #268 ---
+UCAD in progress
+
+--- 帖子 #269 ---
+UCAD - done Today +9%.
+
+--- 帖子 #270 ---
+Hi Strom, Quick question. What was it that made you take that particular entry? Thanks!
+
+--- 帖子 #271 ---
+hi Strom. what leverage are you using? regards, Sal
+
+--- 帖子 #272 ---
+Hi, Softrader, Which square do you decide to be the one to enter the trade? What about your exit rule as well? Thanks[/quote] Hi, i chose the square when i feel it is happening some inversion. the exit rule is the opposite square but some time i exite before, some time later. i am not full time trader so i leave positions opened when i am far from pc, making my actual job. regards, Sal
+
+--- 帖子 #273 ---
+Hi Sal, 1:100 Cheers!
+
+--- 帖子 #274 ---
+Can you share indicator from DB?
+
+--- 帖子 #275 ---
+good morning everybody! Today i am ready on my pc. First of all i want to say that i higly apreciate the efforces of Almo, Strom and also the disappeared Gringo. I will show possible trades today, according to Gringoh's DB and quantum indicator.
+
+--- 帖子 #276 ---
+closed position(s)
+
+--- 帖子 #278 ---
+there is a new signal on eurgbp, I love that pair cause it is storically reliable using the DB
+
+--- 帖子 #279 ---
+[quote=Softrader;9745276]{quote} there is a new signal on eurgbp, I love that pair cause it is storically reliable using the DB {image}[/quote long using a first size 0.25L
+
+--- 帖子 #280 ---
+[quote=Softrader;9745453] One question - how can I get DB signal? Do you use dashboard? Thank you in advance. Cheers!
+
+--- 帖子 #141 ---
+[quote=Strom;9745470] just take a look on the first post of this thread
+
+--- 帖子 #142 ---
+[quote=Softrader;9746502] what a Pity this thread looks dead
+
+--- 帖子 #143 ---
+[quote=Softrader;9772253] yes as usual .. we put efforts and all gone with the wind , what a shame but hey..there is a lot of "better" systems here.. Cheers Al Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #144 ---
+[quote=Softrader;9772253] Takes a lot of time to test. I did some testing with a mix of your input and Strom's on a real cent account and my results were less than stellar. In real, they were quite bad (but on a cent acct, it's ok). Still trying to figure out what I got wrong. Things were either very quiet last week or really volatile like today so adding to a lot to the false signals. Almo, this system you're talking about, is it somewhere here on FF? Cheers
+
+--- 帖子 #145 ---
+[quote=Nobody-yet;9773035] yes mate i very close to the man who made it but really get tired from unfaithful peoples so i retired from all of my threads including this one and got back to the private channel Cheers Al.
+
+--- 帖子 #146 ---
+[quote=Almo2312;9773060] No problem, whish you luck
+
+--- 帖子 #147 ---
+Good morning everybody. Sorry but I was a little bit busy in my job. My improvment of Almo Q system don't work in long term..
+
+--- 帖子 #148 ---
+@Al, is it an improvement of your last system? Can you share it? Take care!
+
+--- 帖子 #149 ---
+Hi Guys, Sorry I was not as available as before to code various systems (personal issues to manage). At the same time, I have received tons of PM with various request… It is not easy to answer every single message, days are only 24 hours long, so I stayed away for a while… Sorry again. I have checked the thread and PMs, and I can note a lot of ideas with a lot of different indicators and tweaks, and at the end, I cannot see any proof of a system which works. Those last weeks I have decided to experiment Naked trading, as, most of you I have tested and coded tons of indis and EAs and nothing really works on the long term. I start to be really tired / fed up to code new ideas every single day (nothing personal to anybody here). I am always happy to help and code but now I try to take my time, and double check if a system really works before to spend time on it, I check for proof, results and tests… I am still working on with this Naked trading stuff to see if there is a real added value. Take care guys, I am still here monitoring and hopping for a real system which could help generating consistent cash. And then off course I would code something ;-) So for now, I am using only my main tools for trading (Blast and CDM) with a Naked trading approach. Cheers, G
+
+--- 帖子 #150 ---
+HI ok that is understandable no more improvement on this dashboards,,, however will it keep on working for some more time or ? Also pls let us know if you have any version that could be used for MT5 , if not never mind as i am slowly switching all to there dues to Mt4 last update ever ... Could you let me know as well if any of your recent systems being proposed can also be used for Mt5 ? Started to gather few indis for Mt5 but in terms of dashboards i found none yet to play with... Thanx a lot _
+
+
+===== 附件下载链接 =====
+
+5min.rar: https://www.forexfactory.com/attachment/file/2210901?d=1488482126
+alcsc15min.tpl: https://www.forexfactory.com/attachment/file/2195786?d=1487691646
+algu1.tpl: https://www.forexfactory.com/attachment/file/2253702?d=1491016839
+Almo_CSC_with_Alert_v1.02j.mq4: https://www.forexfactory.com/attachment/file/2195777?d=1487691235
+cci-alert-mtf.ex4: https://www.forexfactory.com/attachment/file/2253700?d=1491016822
+cci-alert-mtf.mq4: https://www.forexfactory.com/attachment/file/2253701?d=1491016822
+QAlmin1.tpl: https://www.forexfactory.com/attachment/file/2219649?d=1488986532
+QMIN1AL.tpl: https://www.forexfactory.com/attachment/file/2217661?d=1488897927
+Quantum - Stochastic OB_OS.ex4: https://www.forexfactory.com/attachment/file/2217663?d=1488897928
+Quantum - Stochastic OB_OS.mq4: https://www.forexfactory.com/attachment/file/2217664?d=1488897928
+Quantum_CCI OBOS - Alert.ex4: https://www.forexfactory.com/attachment/file/2217667?d=1488897929
+Quantum_CCI OBOS - Alert.mq4: https://www.forexfactory.com/attachment/file/2217669?d=1488897929
+Quantum_RSI OBOS - Alert.ex4: https://www.forexfactory.com/attachment/file/2217671?d=1488897929
+Quantum_RSI OBOS - Alert.mq4: https://www.forexfactory.com/attachment/file/2217673?d=1488897930

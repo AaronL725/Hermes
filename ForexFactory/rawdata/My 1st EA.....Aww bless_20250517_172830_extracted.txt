@@ -1,0 +1,613 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+THE THREAD This a continued thread from what has already been said here.... http://www.forexfactory.com/showthread.php?t=197033 This area of the forum is more appropriate for where the thread is going. Here's my plan for this thread. In the spirit of FF I going to share my EA with you all, if it wasn't for the help of some FF members, the EA wouldn't exist is in the 1st place. I'm releasing the compiled EA and not the code, I feel this will help keep the thread organised rather than having 20 versions of the same EA. If you download and test the EA, I would like you to post and let everyone know what settings you are using and also give a link to an mt4stats page for us all to see how that particular .set is performing. I will then take this info from each post and add it to post No.1 with links for us all to easily see and evaluate. This should help reduce duplicated efforts. I hope you agree this seems a good plan and lets keep it productive and the thread active with lots of results. THE SYSTEM The idea for this system 1st came to me when I was experimenting with a variant of 10p3. With 10p3 I saw lots of little profits and then eventually the system did as martingale does and bombed out with a huge loss. I thought to myself, why not reverse this, take lots of little losses, and rather a huge loss when the system goes wrong, a huge profit when it goes right. The entry is as the 10p3 I first used, from there on in all the logic is reversed. Here are the input variables at default values and their meanings explained: ALL profit and loss prices are in the format of 0.00150, this way it works on 4 and 5 digit brokers, also my programming skills are not up to scratch. TakeProfit = 0.01500; This value is the ultimate goal, ALL your placed orders will have this value. StopLoss = 0.00100; From the 2nd order onwards, all orders will be modified to have a SL of this many pips. InitialStopLoss = 0.00100; The first order only can have a different value from the rest, when the 2nd order is placed the stoploss will be as the "StopLoss" value. Multiplier = 2; The next order will be this many times bigger than the last, set to 1 if you dont want order sizes to increase. If can be 1.1 or 2.34, whatever you want, but not zero. LotSize = 0.01; The size of the first order. MagicNumber = 801369; I'm sure you all know about these by now. Pips = 0.00300; When your 1st order is in profit by this much, your 2nd order will open and 3rd 4th etc until your TakeProfit value hits(or is so close the order is not valid) ReverseSignal = false; This reverses the entry trade from a buy to a sell and vice versa. slippage = 0; Slippage, remember in 0.0001 format. THE RESULTS I'll start the ball rolling with my results and my settings. ===================================================================== I did have MT4 stats charts here but the site is down far too often, I have switched to http://www.myfxbook.com/members/BenScoobert ======================================================================================= Hope to hear from you soon and see some results to put on this page. http://benscoob100100.mt4stats.com
+
+--- 帖子 #2 ---
+what pair and tf did you use to get those results? I tried EU with various tf and settings and can't get a dime. looks like the other ea would be better
+
+--- 帖子 #3 ---
+On systems such as this, sometimes one ea is better, sometimes the other. How about counting profitable trades using each ea settings within a new ea (probably using arrays and a small lookback period) and take trades using the more recent profitable ea? This could keep you on the right side the majority of the time. Just my 2 pips. Best wishes, Cat Preacher
+
+--- 帖子 #4 ---
+Why dont you tell us how the EA decides to enter the trades. May be that may be improved too rather than just testing something in the dark. I can see a big drop in profits there in your chart after a profit of about 20, 000 has been reached. It does not look good.
+
+--- 帖子 #5 ---
+Hey Ben, Good luck to you Dan
+
+--- 帖子 #6 ---
+to benscoobert : do you think this strategy may work (produce profit) longterm to the moderators: why aren't you approving most of the comments that i make ? what was wrong with the last 2 comments?...
+
+--- 帖子 #7 ---
+Ah yes sorry I forgot to post some details, I'll add them to the 1st post too. I used 1 min timeframe, my thinking on this was: The trick with this EA is in the trade management and catching the trend, if it can be profitable on what is effectively a coin toss, then the logic can be applied to any entry. My initial tests were on EURGBP and EURUSD, simply because on the lowest spreads on Alpari UK.
+
+--- 帖子 #8 ---
+The EA uses the 10p3 entry ie. double MACDMainCurr=iMACD(NULL,0,Fast_EMA,Slow_EMA,Signal_SMA,PRICE_CLOSE,MODE_MAIN,Shift); double MACDSigCurr=iMACD(NULL,0,Fast_EMA,Slow_EMA,Signal_SMA,PRICE_CLOSE,MODE_SIGNAL,Shift); double MACDMainPre=iMACD(NULL,0,Fast_EMA,Slow_EMA,Signal_SMA,PRICE_CLOSE,MODE_MAIN,Shift+1); double MACDSigPre=iMACD(NULL,0,Fast_EMA,Slow_EMA,Signal_SMA,PRICE_CLOSE,MODE_SIGNAL,Shift+1); double SellRange=TradingRange*Point; double BuyRange=(TradingRange-(TradingRange*2))*Point; if(MACDMainCurr&gt;MACDSigCurr &amp;&amp; MACDMainPre&lt;MACDSigPre &amp;&amp; MACDSigPre&lt;BuyRange &amp;&amp; MACDMainCurr&lt;0 &amp;&amp; TimeStamp!=iTime(NULL,0,0)) {myOrderType=2; TimeStamp=iTime(NULL,0,0);} if(MACDMainCurr&lt;MACDSigCurr &amp;&amp; MACDMainPre&gt;MACDSigPre &amp;&amp; MACDSigPre&gt;SellRange &amp;&amp; MACDMainCurr&gt;0 &amp;&amp; TimeStamp!=iTime(NULL,0,0)) {myOrderType=1; TimeStamp=iTime(NULL,0,0);} Although my attention is really on the trade management and not the entry right now. Yes there is a big drop in profits, but that is just 1 lot of settings, with a group effort maybe we can iron this out a little. There is also 7k of profit after 3 weeks.
+
+--- 帖子 #9 ---
+Hey Dan Hope you join in with my EA.
+
+--- 帖子 #10 ---
+I'm looking at this way. I'm sure martingale loses long term, so im hopeful that reversing the logic of that will profit long term. The only way to see is to test, and I don't mean backtests as the results are not realistic. I mean proper forward tests like I am trying.
+
+--- 帖子 #11 ---
+If you set both SLs and Pips to the same number wouldn't that reduce the drawdown? I'm gonna try that. My settings: TakeProfit=0.0040 StopLoss=0.0010 InitialStopLoss=0.0010 Multiplier=2.00000000 LotSize=0.01 MagicNumber=801369 Pips=0.0010 Fast_EMA=12 Slow_EMA=26 Signal_SMA=9 Shift=1 TradingRange=0 ReverseSignal=0 slippage=0.00000000 We all should use a $5k starting balance for sake of uniformity https://www.myfxbook.com/portfolio/r...tingaleea/1520
+
+--- 帖子 #12 ---
+Interesting set, i see the largest trade will never be more than 8x the starting which is less risky which is good, the problem i see is everytime it reverses the biggest trade will outweigh all the others with its loss. Only time will tell if it works long run. I had a similar idea of making the sl 1/3 of the pips value and multiplier of 2, this way if it reverses the 1st trade covers the loss of the 2nd. If it gois to 3 trades and reverses then the 2nd covers the loss of the 3rd and the 1st makes profit. I set up a set like this and put it on post 1. I agree 5k starting point for consistancy. What is that link you provided lolpie? Should it be a stats page?
+
+--- 帖子 #13 ---
+Something which just came to mind which i didnt mention. If you run the EA on more than 1 pair, it will wait until all trades are closed before opening with new entries. I thought this was a good idea to help reduce having too many trades open in drawdown.
+
+--- 帖子 #14 ---
+Ive added 4 sets to post 1, we'll see how they perform over the next few weeks. It would be encouraging to see someone else have a set on there too.
+
+--- 帖子 #15 ---
+Yeah it's basically MT4stats but since I was already registered on there I just used them
+
+--- 帖子 #16 ---
+Wow, that website looks to be a very useful statistical tool.
+
+--- 帖子 #17 ---
+it doesn't work when i click it :-(
+
+--- 帖子 #18 ---
+The link or the stats on the website? The stats won't work because the market's closed and I'm not running MT4 bro
+
+--- 帖子 #19 ---
+I'm just checking out the site right now, looks indepth.
+
+--- 帖子 #20 ---
+Ok Ben I'm in. BTW what is the does the 'Range' input do? I did'nt see any info in post one about it. New 5000 FXDD account. . . Attached Image (click to enlarge)
+
+--- 帖子 #21 ---
+Good to hear it Dan, TradingRange is from the 10p3 calculation, not sure how it is applied but the code shows the calculation on the 1st page. A MACD calculation about post 7 or so.
+
+--- 帖子 #22 ---
+I registered and uploaded my stats, I have to say, I prefer mt4stats analysis page. Although I like the idea of the ranking of systems, sadly you can see it is already misused by some nonsense scalping system which produces false figures. Also I cant link to the stats graphs to put them on the 1st post.
+
+--- 帖子 #23 ---
+i feel that 1 min. time frame is too short to you to ctch a good trend, if at all you are making money , your heart will be in your heart while you wait. i trade on one hour chart and within 7 days i have been able to build my $3000 to $14 150.40 with my simple applicable trading system i EMA 5, 10 , 14 ,21, 50 with the support of MACD . it is been great , this my system is an award winning system.
+
+--- 帖子 #24 ---
+forex trading has never been so sweet as knowing that your system is sure and simple to catch trends either in a bullish or bearish trebd. i trade forex on 1 hour chat . since i discovered my award winning trading system FXDD9 i have become confident and i have to recover all i have lost to this market. the simplicity of the system makes it the more increasing for me. do you believe this testimony? i use EMA 5, 10 , 14 , 21 ,50 . i support it with MACD . unbeliveable you will think , not all the high sounding terms like fibs, stoch or s&amp;r. this my sytem has become a top secret creating a revolution in our trading room . nevertheless only good discipline, good money management and keeping to your system can actually make you to be successful. fashola
+
+--- 帖子 #25 ---
+Hi ya My EA is not trading. Here is my preset. If you don't mind couldja take a quick peek at it? EA has smiley face and there are no messages in the experts or journal tab. It must be the settings. Attached File(s) 1.zip &lt; 1 KB | 415 downloads Thanks
+
+--- 帖子 #26 ---
+It makes trades based off of MACD or something, so maybe it just hasn't found a good signal yet? I'm also running it right now and it hasn't made any trades
+
+--- 帖子 #27 ---
+Oh I see LOLPIE thanks. I'll just wait for a while then.
+
+--- 帖子 #28 ---
+It should have opened one overnight, did it?
+
+--- 帖子 #29 ---
+Nope. Been running for 8hrs now. . .no trades. Attached Image (click to enlarge)
+
+--- 帖子 #30 ---
+Really? I had no issues using the graph. Where did you see ranking of systems? Am I missing something?
+
+--- 帖子 #31 ---
+I just looked through your .set file. I see no reason why it didn't take a trade unless your broker requires a bigger SL than 10 pips. One thing I did notice is, your Pips value is greater then you Takeprofit value, this means it will never take a 2nd trade as the tp will be hit before it gets to that level. What does your journal say?
+
+--- 帖子 #32 ---
+I cant add the graph as a live link in a post, I could download it and post it, but that defeats the object, it should be live data. http://www.myfxbook.com/systems is where the systems are all listed
+
+--- 帖子 #33 ---
+Thanks for checking out my set file. Still no trades placed not sure why. Thanks for pointing out the pips value thingy. attached is a screen shot of the journal. Attached Image (click to enlarge)
+
+--- 帖子 #34 ---
+I SEE WHY, too many decimal places on jpy pairs, move your decimal point, its mostly my shyt programming really
+
+--- 帖子 #35 ---
+Hi Ben Ok this my new .set file. If you see any problem as far as taking trades goes please let me know. Attached File(s) 1.zip &lt; 1 KB | 311 downloads Thanks
+
+--- 帖子 #36 ---
+I don't see the problem, you can post the graph, it even says on their website "Use these self updating widgets to link to your system's page." Regarding the systems, yes I saw it but there is no ranking system, you can just look by parameters, thanks.
+
+--- 帖子 #37 ---
+Hey Ben ....where did you go with your EA? Been a month since a post?? What has happened since the last Sept. 23d post? Like to catch up! Atlas1
+
+--- 帖子 #38 ---
+I put it on here for people to download and share results, good or bad, so far 185 downloaded the EA and not one person comments. Anyway, the EA has had a couple of revisions and my favourite setting's results are in my sig.
+
+--- 帖子 #39 ---
+Sorry Ben but I did give it a try and did post my results. . .Can't get it to trade for me. I hope you are doing well with it on your end with it. . . Dan
+
+--- 帖子 #40 ---
+I think that is down to fxdd not doing 0.01 lots, there's a new version of the EA on the "other" thread, I think you'll like it Dan. If mt4stats ever gets back online you can view what in my sig........
+
+--- 帖子 #41 ---
+"Other" thread?
+
+--- 帖子 #42 ---
+I can't post links to a commercial site i believe, try benscoobert new zealand ea in google and it mightbe on page 2, 3rd post down...maybe
+
+--- 帖子 #43 ---
+mt4stats seems to be down lately, ive moved to myfxbook http://www.myfxbook.com/members/BenScoobert
+
+--- 帖子 #44 ---
+hi, ur BenScoobert's grail all pairs reverse entry looks promising.. may i know what r the indicators involved? and can we test it out for the EA?
+
+--- 帖子 #45 ---
+hi,BenScoobert nice to see u here.
+
+--- 帖子 #46 ---
+sure the EA is as 4 posts up ^^ with reverse entry set to false, funny you prefer that version, i prefer the swing rather than the trend
+
+--- 帖子 #47 ---
+I really dont want to see a new low on the GBPUSD
+
+--- 帖子 #48 ---
+may i know the EA for that? and what setting or indicators u using? thanks////
+
+--- 帖子 #49 ---
+the ea can be found in my sig, the entry i use is 80 pips away from an 80MA(stolen from nanningbob) but the rest is very different from there it seems some people are having trouble using this, i use it on alpari uk 15m and im having no problems
+
+--- 帖子 #50 ---
+ive just been testing it on fxdd and there are problems, until i fix it i recommend alpariuk for testing
+
+--- 帖子 #51 ---
+So does only the ea trade? Or do you mix it with your own trades?
+
+--- 帖子 #52 ---
+100% automated, it opens, manages and closes
+
+--- 帖子 #53 ---
+you were saying ur EA can be found in you sig? what is sig? sorry about it. Can i test it out using yr EA? i am using IBFX... thanks
+
+--- 帖子 #54 ---
+signature
+
+--- 帖子 #55 ---
+Hi, I backtested the EA from 2009/06/20 till today and could see that, it made continuos losses. Attached is the graph of testing. I did this on EUR/USD on 15mins. Please tell me, whats wrong with this. Thanks, Prakash
+
+--- 帖子 #56 ---
+what's wrong is backtesting is useless, the results are unusable and totally misleading, the only thing i use backtest for is confirming that the ea is doing as i programmed you need to forward test on a demo account and have the patience to sit there and see how the system works, refine it to your liking, retest, refine etc what i have posted is not the optimal code or settings, it is up to us as a group to make it more profitable than it already is hope to see some forward results from you soon, maybe open a myfxbook account for easy sharing
+
+--- 帖子 #57 ---
+hi would you mind tell more details? I mean how do you entry and place s/l, t/p. thanks.
+
+--- 帖子 #58 ---
+yo... manage to find ur EA from ur signature.. the file name is it called THE_EA.ex4 ? I know how to let it run... but what time frame do i set it? is it suitable for all time frame? so i just let it run and do not need to do anything?
+
+--- 帖子 #59 ---
+It is all written out in detail in the threads, read through that, if you have any questions or i have missed anything, let me know.
+
+--- 帖子 #60 ---
+Can you please give the settings please..... so that I can start using it on a demo account. As you told, dont want to do a backtest so will do live testing only... Thanks, Prakash
+
+--- 帖子 #61 ---
+What settings? it is set up, try out different settings, play around with it, set up more than one demo and see what works best for you
+
+--- 帖子 #62 ---
+but does it works for all pairs? thanks... i trying it out on my pc tomolo and test it out..
+
+--- 帖子 #63 ---
+By asking that question it shows me you have not read the thread, here is a copy of a post which you would have seen if you read it QUOTE (stevegee58 @ October 23, 2009 04:03 pm) Hey there Ben, the link works fine. Are the 4 systems listed there all running this EA? If so, what are the settings for each? I beleive the grail original one is default with pairs with less than 4 pips spread All pairs is as above but all pairs except scandinavian ridiculous spreads The reverse is as above plus reverse to false the 4th goes twice as far before opening a 2nd trade (80pips) so is more reserved there, but is more aggressive on the profit using a 3x multiplier and 40 pip tp
+
+--- 帖子 #64 ---
+Does anyone mind if I'm smug today?
+
+--- 帖子 #65 ---
+what do u mean? i have not try on ur EA yet as my PC is down. Can u give more guide on what is the pairs to run? thanks
+
+--- 帖子 #66 ---
+Im tesing all pairs with spread less than 4 pips on 1 test and on another im testing all pairs
+
+--- 帖子 #67 ---
+thanks for the prompt reply... i cant test it anywhere.. so frustrating.. bro, can let me know the results of ur testing? thanks
+
+--- 帖子 #68 ---
+wont it work for you? try alpari uk demo
+
+--- 帖子 #69 ---
+i using ibfx.. but now is that i dun have a PC for it to run 24 hours.. still trying to fix up a PC first.... do you mind if u can post the results? thanks
+
+--- 帖子 #70 ---
+Name Gain Drawdown Pips Trading Leverage BenScoobert's Grail 28.41% 11.28% -729.7 Automated - BenScoobert's grail all pairs 6.85% 1.59% -1318.7 Automated - BenScoobert's grail all pairs reverse entry 1.46% 0.20% 805.7 Automated - BenScoobert's Grail aggressive 0.58% 0.39% -0.7 Automated -
+
+--- 帖子 #71 ---
+Smug away buddy, smug away
+
+--- 帖子 #72 ---
+click on the link at the bottom of Ben's posts. . . to see updates
+
+--- 帖子 #73 ---
+Lol I did..... Has anyone else got this setup and working? I'd like to hear your results
+
+--- 帖子 #74 ---
+I'm gonna setup it and will share the results here..
+
+--- 帖子 #75 ---
+hi wilkinson, hope to hear from u soon.. thanks
+
+--- 帖子 #76 ---
+Anyone have this working on IBFX by some chance?
+
+--- 帖子 #77 ---
+OK, I'll play along using alpari. So far I'm only using default settings. I'm really not sure how The EA works yet so I don't want too mess around too much with inputs. Once I get the hang of it I may make some adjustments. . . Attached Image (click to enlarge)
+
+--- 帖子 #78 ---
+Sorry, I haven't tried it on IBFX. If they are an 'extra digit' broker The EA should work there. Give it a go and let us know. . .
+
+--- 帖子 #79 ---
+By extra digit you mean 5 digits for what's normally a 4 digit? On my IBFX demo and live accounts I deliberately *don't* use 5 digits and only set up using 4 digits. This may be why it doesn't work.
+
+--- 帖子 #80 ---
+I just dont understand why it wouldn't work on 4 digits. When I get a bit of time i'll look through it. Busy setting up different types of settings to test. Oh and work too, that gets in the way of my trading, luckily only 35 hours a week. And hopefully not for much longer looking at the stats.
+
+--- 帖子 #81 ---
+Hi It seems some brokers express price 1 extra decimal further then others. These are the one that the EA is working on. For instance I could not get the EA to work on my FXDD (less decimals) account. When I attached it to Alpari (more decimals) it started working right away. Happy pippin!
+
+--- 帖子 #82 ---
+Thank you Ben ! for sharing your EA with us!! I think you got the right idea, most EA and systems in this forum is usually like this: 1:1 P/L ratio, and try to win via probability. Some systems even win small and lose big ! And yet so many people fall for that. Your system on the other hand bet small and try to win big, your target p/l ratio is like 15:1. So my question is what is your average wining ratio? the second question is what is your Maximum TP/SL that gives you the maximized winning ratio? I am looking forward to your reply
+
+--- 帖子 #83 ---
+You are welcome, the ratio is wahatever you set it at, the ea "stacks" trades when in profit and catches big moves for huge gains which are risk free once you get to the 2nd level. Also remember the "re-entry" side of the EA, it works in a martingale style but you restrict it to how many levels deep you are prepared to go rather than leaving yourself open to a martingale death trade. The winning trade ratio for a "set" of trades is 100% for october so far, if you look at the history listed by the time they closed you will see they are in "sets" and although some are losses, the sets close together for a nett profit.
+
+--- 帖子 #84 ---
+Hey Ben, Nice work on this EA. Your results speak for themselves. The real genius is in the stacking. I see you are actually in negative pips but positive money. I am not clear on how the stacking functions. I looked at your trades but because the EA changes the SL it is hard to tell just what has gone on. I will run a demo to see what I can deduce. I am using FXDD. I don't see how it will accept a TP of 0.01500 and a SL of 0.00100 in the settings. Do you mean a TP of 150 pips and 10 pip stoploss? Thanks. I hope this works out for you.
+
+--- 帖子 #85 ---
+yes, 0.015 is 150 pips, and 0.001 is 10 pips, i did it this way for 2 reasons, it should work on a 4 or 5 digit broker and i didnt know how to code it to convert it
+
+--- 帖子 #86 ---
+I think the EA needs a rule to stop it opening fresh sets of trades at Thursday midnight so it can wind up the few remaining trades over the course of Firday and reduce weekend gap risk.
+
+--- 帖子 #87 ---
+This shows how profit is locked in there's a 2nd and 3rd level now on different pairs, I love this method!!!
+
+--- 帖子 #88 ---
+Wow, I see Matt's version beta test is up 80% this month. Does he have a set file somewhere? And has anyone gotten this to work on IBFX yet?
+
+--- 帖子 #89 ---
+Dont get too excited by the settings on Matt's version, I purposely set it volotile to see how it copes, but yes it is looking nice. It will either make huge amounts or lose it all, but it gives me an idea of limitations of the system. it running tp350, pips 100, sl30, 1.5 multi then the 2nd set of settings, sl600, dpips 30, tp30, multi 2.5, 3 extra orders and FFS dont trade that live, as Matts version is also on a coin toss entry, not the MA im using, but he said he will add it
+
+--- 帖子 #90 ---
+I have been running the EA for a day on IBXF and so far all it is doing is losing trades. Waiting for it to turn around.
+
+--- 帖子 #91 ---
+you've done well, others couldnt get it open anything at all on IBFX
+
+--- 帖子 #92 ---
+Hi Ben. any particular pairs you like best on this system???
+
+--- 帖子 #93 ---
+for the grail on my signature stats i just picked all the ones with spread lower than 4 and tried not to duplicate too much like only 2 jpy pairs, not all available jpy pairs
+
+--- 帖子 #94 ---
+Ben. My spreads are too high on IBFX so I will open a new account on the same broker that you use.Alpari. Thanks I will keep you updated with my new results.
+
+--- 帖子 #95 ---
+I have it running on FXDD and it is opening trades okay. Ben, are you still running it on an M1 chart? Looking at the trades it has been opening for me, it seems rather random. Of course wouldn't you expect that on an M1 chart? I mean, how much of a MA signal can you get from from M1? It seems to be a coin toss. I have gotten only false starts - losers so far. I opened up the initial SL to 30 pips because I kept getting kicked out on random noise. We will see where that goes. I also have noticed that if you make changes to the system (such as jump between time frames) it will start over and open new trades based on the MA rather that the stacking. I will keep an eye on it. I think you have a something going here on the stacking. It is like averaging up (rather than down) which according to twoblink makes mathematical sense. www.forexfactory.com/showthread.php?t=201100
+
+--- 帖子 #96 ---
+Your initial sl need to be more than dpips value, the method re-enters when you are negative pips
+
+--- 帖子 #97 ---
+"dpips"? Why do you call it that? (Are we running the same EA? My EA says it is named "profitable") I think I know what you are saying and it is a good point. I will make the adjustments. Is there a way to force open a trade and then have the EA take over on the SL and stacking?
+
+--- 帖子 #98 ---
+do you ahve the ea from this thread or the other?
+
+--- 帖子 #99 ---
+to quote a fellow member
+
+--- 帖子 #100 ---
+I am using the one from this thread on your first post. It is still there and called "profitable". So I have the wrong one?
+
+--- 帖子 #101 ---
+thats a very early version, it does catch trends, but the later version is better
+
+--- 帖子 #102 ---
+just entered a 4th level, now the profit really stacks
+
+--- 帖子 #103 ---
+it just reversed and closed, trade 3 almost covered the loss of trade 4 and trade 1 and 2 were pure profit
+
+--- 帖子 #104 ---
+Is there a description of exactly what this EA is doing under the hood? There have been references to adding to winning positions (pyramiding) and adding to losing positions (martingaling). I'm leery of using EAs unless I know exactly what it's doing.
+
+--- 帖子 #105 ---
+Ok Steve, here goes, from the top, a brief description you are using my version so i will describe that the entry is when you get 80 pips away from the 80 MA, it enters towards the MA once open, 2 scenarios if the trade goes with you, it opens a 2nd trade which is "Multiplier" (3) times bigger than the initial trade at "Pips" value (i'm using 0.005 or 50 pips), it then moves the sl of both trades to the "StopLoss" value (0.0012 12 pips), if it reverses after that you have profit locked in and are safe, it will keep opening trades at these intervals, if it carries on to your "TakeProfit" value without retracing then all open trades will close for a tidy sum if the trade moves against you, it opens a 2nd trade which is "DMultiplier" time bigger than the initial trade at "DPips" value, if it reverses it will close all trades at "DTakeProfit" with the latest trade covering the loss of the others, it will keep opening these trades at "DPips" intervals up to the "InitialStopLoss" or you limit it by setting "extraorders" to as many as you are prepared to go I think that covers it, I'll be unavailable for a few hours from now so I hope its clear enough
+
+--- 帖子 #106 ---
+Hi Ben. Where can we get your latest version of this EA???
+
+--- 帖子 #107 ---
+Get it here: http://mtabonewebforex.9.forumer.com...e=post&amp;id=2575
+
+--- 帖子 #108 ---
+Thank Porky.
+
+--- 帖子 #109 ---
+Hey Ben. I noticed that your chart is on the 15 min time frame. I thought we were on the 1 min.
+
+--- 帖子 #110 ---
+I looked at the USDCAD you posted recently showing a 3 deep and 4 deep and I'm trying to reconcile what I'm seeing there with your description. The first trade opened about 80 pips below the MA (MA is approx 1.07750, trade entry = 1.06787) so that looks OK. I was expecting the 3 orders above this first trade to be 50 pips apart but they're 62, 41 and 50 resp. Is this due to slippage? Also, as each level is added how is the stop moved? It appears that the SL for all orders is placed 12 pips below the currently top-most one. Is this correct?
+
+--- 帖子 #111 ---
+The 1st order slipped to 62, the way I programmed it is actually 50+50 pips from the 1st order, so the 2nd is pretty much in the right place relative to the initial order and the 3rd was bang on. Yes Im using a 12 pip sl for this one, after every new order it locks in profit by movingthe stoploss up to 12 pips from the latest order.
+
+--- 帖子 #112 ---
+just a little question, the ea discussed in this thread is the one pictured in your myfxbook account?
+
+--- 帖子 #113 ---
+All are, except Matt's beta version, although that is the same system but not the same EA
+
+--- 帖子 #114 ---
+I'm confused. Are you trading the EA called profitable or the one called The_EA? Also when I click on your signature, I see no settings just trading results. thank you
+
+--- 帖子 #115 ---
+Profitable was an early version of what is now The_EA. The stock settings are fine and what I am using for some of my testing, testing is at an early stage and the more people play aournd with it and post their own findings the less we will duplicate each others work.
+
+--- 帖子 #116 ---
+Thanks for clarifying Ben. Your results so far are very impressive. It would be interesting to see how well this EA would have done with last October's volatility trading the EUR/USD.
+
+--- 帖子 #117 ---
+You cant plan for stuff like that, theres no substitute for proper money managent and common sense, if the market got silly like that id probably just turn the eas off and close all trades. Remember to withdraw your profits regularly, the broker cant take it if you have taken the money off the table. Im looking forward to how it will cope with an interest rate change.
+
+--- 帖子 #118 ---
+Ok, EA has taken it's first two trades on the EUR/USD and currently both are still open. I'm using the default settings. Ben, how did you make 1.2% yesterday? Maybe you're trading more than on pair? Are you using default settings?
+
+--- 帖子 #119 ---
+Im trading pairs with spreads 4 pips or less, here are my settings on those 2 grail accounts. Obviously the all pairs has every pair form my broker except scandinavian silly spreads TP 0.15 SL 0.0012 InitialSL 0.08 multi 3 lot 0.01 pips 0.005 dpips 0.004 dtp 0.004 dmulti 2 extraorders 6
+
+--- 帖子 #120 ---
+Has anyone converted the latest crazy pyramid EA to EXE format??? I am sorry as I have no idea on how to change it.
+
+--- 帖子 #121 ---
+Hi All, this is my first update on The EA. . So far in profit, default settings. Pairs are obvious. Attached Image (click to enlarge)
+
+--- 帖子 #122 ---
+Just use the inputs.
+
+--- 帖子 #123 ---
+Andante. Just use the inputs does not help me. I will have to learn some code I guess.
+
+--- 帖子 #124 ---
+Hi Ben. Thanks for your EA.
+
+--- 帖子 #125 ---
+Ben could you post the Crazy Pyramid in EXE format???
+
+--- 帖子 #126 ---
+I dont know what you mean, the EA is not an exe, it is .ex4 compiled or .mq4 as code. The linked file is compiled
+
+--- 帖子 #127 ---
+Ben . I need it in EX4 version as I do not know how to change it.
+
+--- 帖子 #128 ---
+look back to post 107, someone linked it
+
+--- 帖子 #129 ---
+Gerry, I don't understand what you are saying. Let me show you what I mean when I say use the inputs. . .
+
+--- 帖子 #130 ---
+Gerry, Here is a new chart I have opened. . . Attached Image (click to enlarge)
+
+--- 帖子 #131 ---
+Now I wil drag an EA onto the chart. Double click will also do the same thing. . .
+
+--- 帖子 #132 ---
+Attached Image (click to enlarge) Now after I drag (or double click) the EA - I see the following. . .notice that there are 2 tabs at the top of the insert box.. . make sure you are on the one labelled 'inputs'. This is what I was referring to when I said use the inputs. . .in this box you can decide how many lots to trade, when to take profit and many other thing depending on the EA you are using. . . So there is no need to modify the code of the EA. . .just use the 'inputs'. . .
+
+--- 帖子 #133 ---
+If this is not clear . . .just ask again. . .
+
+--- 帖子 #134 ---
+It gives me goosebumps thinking that people try to trade that dont know how to use their platform. Imagine the losses............ Gerry, look here http://mtabonewebforex.9.forumer.com...p?showtopic=39 A video tutorial, careful though, his voice is really soothing, you might fall asleep lmao
+
+--- 帖子 #135 ---
+Im looking forward to seeing how the EA handles the Euro news release today.
+
+--- 帖子 #136 ---
+Everybody is not understanding my problem. I know how to trade I have been doing it for over a year. What I am looking for is not Ben's THE EA but the Crazy Pyramid EA on Metabone's page to be in EX4 file format.
+
+--- 帖子 #137 ---
+CrazyPyramid AutoTrader v1.1.0
+
+--- 帖子 #138 ---
+What you are suggesting is you are trying to get hold of a version which you have pay for, for free. My version is free, Matt charges for his programming, if its piracy you are after you got the wrong forum.
+
+--- 帖子 #139 ---
+I was under the impression that the Crazy Pyramid was your EA and was a version of THE Ea. I am not looking to pirate an EA. Nowhere did I see a for sale sign on a Ben Scoobert EA. Now I undesrstand what you and Matt are trying to do. I am not interested.
+
+--- 帖子 #140 ---
+Im not sure what you get, you have taken up 2 pages of a thread with your inane ramblings. The crazypyramid is my idea, i made the ea called The_EA and offered it for free to FF members. The fact that I was asked someone else minded if they made a better version doesn't affect me. I acheived what I wanted to acheive by teaching myself to program and making a profitable EA. If you dont like my version, dont use it. Rant over.... How is everyone else doing with this? Care to post any results? My all pairs account is doing better than I thought it would, I thought some pairs might be too high spread to work. But so far so good.
+
+--- 帖子 #141 ---
+Thanks Ben for the EA just loaded it on and am wondering which time period is the best for trading. I have run through the thread and there has been a few different ones used, M1, M15 etc. Which do you like the best and which currency have you found that it works best on..... Thanks Mate
+
+--- 帖子 #142 ---
+I ran a demo test on Ben's EA last week using the trend method w/o reversal on the M5 and m15 chart with ten pairs having less than 4 spread. The M15 substantially outperformed the M5 which was about flat at weekend. Yesterday I started two charts, same ten pairs, both charts on M15. One chart is trending and the other is with reversal setting (the default). So far the reversal default setting is winning! It's made 27 full trades and has one open position where both closed and open are plus. The other chart using regular is losing a little. Regarding the previous post comparing "The EA" to Matt's "Crazy" looks like the user misunderstood the two versions to be the same EA. Really, Ben has given what to me is a very valuable tool to the community. Matt, with Ben's permission, took The EA as a base and made it into "Matt's Crazy Pyramid" which is similar but yet a new approach on Ben's Robot. Frankly, I was happy to pay to receive Matt's Robot since "The EA" is working profitably for me and by joining Matt gives the user access to 14 other free EA's plus any in the future! What a deal! Just try to get that one anywhere else online or offline! These gentlemen are most ethical and reliable.....not to mention talented and generous to boot! Atlas1
+
+--- 帖子 #143 ---
+ta thanks for the update!!!
+
+--- 帖子 #144 ---
+Well put. I agree 100% to everything you've said here. And thank you for sharing your testing results!
+
+--- 帖子 #145 ---
+Gerry, When you see an EA that appears 'grey' in the navigator that means that the code is not available for you to edit. Sometimes writers will choose to publish code in this format for various reasons. Mostly they do not want anyone to mess around with their coding.
+
+--- 帖子 #146 ---
+I'm hovering around BE on the account.
+
+--- 帖子 #147 ---
+Ive been re-reading my code to refresh my memory, the EA enters on the weighed 80MA of an hourly chart, so I figure whichever chart you are using it is entering on hourly, may as well use that one, the M1 discussed earlier in the thread was for the old "profitable" EA.
+
+--- 帖子 #148 ---
+Ben, i've checked out your FXbook stats and was interested to see that your nanningbob equity curve looks almost exactly like mine. Bizarrely i've been trading it almost exactly from when you started in Feb. The July fall was a sickener. I've been trying to get nanningbob's reverse settings to work but never quite managed it for one reason or another, but from my initial read of your thread this looks exactly like the sort of thing i was after. I'll give it a go. Any chance you could edit your first post of this thread whenever you get a new version of the EA? That way it's easy to find exactly where everyone is with this.
+
+--- 帖子 #149 ---
+Hi Ben There's something I don't understand - when I ran a backtest using your settings and also looked at your completed trades, the multiplied x3 trades always stop after just the 2nd trade is opened. I thought these were trying to catch the trends and run and run. On the other hand there are the standard x2 countertrend orders that just keep doubling and one of these will run away at some point and damage the account badly. Can you shed some light please? Thanks Jim
+
+--- 帖子 #150 ---
+I can think of 3 reasons, firstly backtester is useless, very unreliable results. Secondly, it opens with the trend, but if it reverses it closes, if you want to try hold a trend longer then try reduce the multiplier and increase the SL so it doesnt close out so often. Thirdly, it may just be my bad programming. If you prefer it not to martingale when it goes against you, set the initialSL to less than the Dpips value, it will only martingale as far as you let it, i use 6 extra orders.
+
+--- 帖子 #151 ---
+Just to clarify,I only use the backtester to see how the ea functions - it's much quicker than waiting for trades on fwd test. I was under the impression that you felt that normal martingales are flawed in that they blow up the account at some point, and so you had decided to reverse the tables and wait for the long run to give you a massive profit (while accepting lots of small losses). But when I look at your fxbook results, the vast majority of the gains are from the standard counter-trend martingale whilst the 3x trend catcher results in very small 2 level gains (exactly my backtest results also) This is where my query lies. Thanks for your time.
+
+--- 帖子 #152 ---
+Yes that was the original plan, but the EA evolved into an EA that can do both. Stack with you and re-enter against you, strictly it isnt true martingale, martingale increases until you hit, this method you decide how deep you are prepared to go. Hope this clarifys it.
+
+--- 帖子 #153 ---
+Hi Ben, I found this screenshot of The EA in action interesting. . . Attached Image (click to enlarge)
+
+--- 帖子 #154 ---
+hi ben, may i have the mql of The_EA? i wanna combine with 1 of my ea that i'm using now.
+
+--- 帖子 #155 ---
+I'd rather not give my code out, sorry
+
+--- 帖子 #156 ---
+then can i send u my ea and u add it in??? mine ea also is a martingale type, and so far is very good result but sometimes when it continuous tp for the 1st trade for few times i got float for many days.... i think with ur ea concept it might fix the weak point of mine.
+
+--- 帖子 #157 ---
+So let clarify, you want to use the trade management of my EA, but you have a different entry rule? If that is what you mean, what is your entry rule?
+
+--- 帖子 #158 ---
+actually the ea that i'm using is not create from me, i get it from my friend. not sure what is the entry rule, but is different from other martingale ea. this will stop open when the trend change. i can send to u for u to check, as i'm dun understand about coding
+
+--- 帖子 #159 ---
+hello bem do u have new ver EA?
+
+--- 帖子 #160 ---
+Why would a new version be due when the old one is doing fine? . . . Attached Image (click to enlarge)
+
+--- 帖子 #161 ---
+dono why, the_ea doesnt work with fxopen. try to test but not open any trade.
+
+--- 帖子 #162 ---
+Oh yes right that! I couldn't get it to work with FXDD either. I forgot about that problem. Seems it works with brokers that use the extra decimal place.
+
+--- 帖子 #163 ---
+Ben, I am really impressed with this EA. Good work! And it is awesome that you have shared it. I haven't been able to test it myself. I was able to get the first one (named "profitable") to work on FXDD by adjusting the settings but no luck with this one. I am no programmer but I have modified a few. I think you could change the number of decimal places in the "extern double" code and get it to work with a 4 digit broker. But who am I to ask for a favor???
+
+--- 帖子 #164 ---
+Due to the format I have used in the settings, it should work on 4 or 5 digit, 0.10000 is the same as 0.1000, so logically it should work
+
+--- 帖子 #165 ---
+Hello! Ben, congratulations! I was looking for something like THE EA. While I was watching Blessing 2 EA trading, it seemed obvious that while it can cope with counter trend, I wondered how come it does not cope with trend, since it closes initial (small lots) trades at 1 level. Because of my insuficient coding knowledge I stayed with simple MA EA, which evolved into usefull code. Now that I see this can be coded, I am inspired to try it myself. If only I could get a look at your code, that would be something! But I guess you are right about keeping it not available for public, since, just like you said, this often leads to millions of versions, which mostly derive from original code... into unknown... and unsefull... Although I do encourage you to make it user-friendly - those settings are hard to dig. Best wishes, Have fun, Simon Slovenia
+
+--- 帖子 #166 ---
+Finally EA opens 1 trade (using default settings). As I see stop loss set to 10 pips and TP to 150??? Is this real? Maybe it should be 15 pips instead of 150? Thanks.
+
+--- 帖子 #167 ---
+Thank you, I'm feeling good about it, although I'm having 2nd thoughts on my original settings, but if I threw some initial test settings on and thet were perfect I'd be damn lucky. As for user-friendly, I agree, when Matt wrote his version he asked me for better names for the variables to relate them to the job they actually do. We sat down for an evening and came up with better names, I said I would rename mine to the same logical names and to prevent confusion if someone went from 1 version to the other and for my sanity when advising, but I have yet to do it.
+
+--- 帖子 #168 ---
+If initialSL is set to 0.001 then it will be 10 pips.
+
+--- 帖子 #169 ---
+hi Ben, Thank for your share EA i have some problem plz help Today i test the ea,but have error information? 2009.11.22 02:00:402008.01.16 14:00 profitable EURUSD,M15: OrderSend error 131 it this my MT4 setting problem?
+
+--- 帖子 #170 ---
+Did you even notice that Market closed on Saturday and Sunday (most of the day)? How you possibly can send the Order, when Market is closed..? Try to place manual BUY or SELL and see what you get.
+
+--- 帖子 #171 ---
+thx i am newbie ha
+
+--- 帖子 #172 ---
+Ben, few problems.. So far "profitable" EA only works with pairs which displays like 1.2456 In other words have 4 digits after . (dot) How to get it working on pairs like CHFJPY or EURJPY when price have 2 digits after . dot like 88.20 or 133.29 Other thing: InitialStopLoss set to 0.001 I'm trying to set SL to 15 pips so I'm placing StopLoss 0.0015 , but EA with this settings placing 10 pips stop loss In order to work with 88.20 format pairs I took ZEROS out like Take profit 0.2 Stop loss 0.15 InitialStopLoss 0.1 Pips 0.3 Still, so far no luck and on those pairs no Orders has been placed.. If you could specify what should we use in settings with pair format like 88.20 or 127.89 and so on.. Thanks
+
+--- 帖子 #173 ---
+Both of you start by reading post 107
+
+--- 帖子 #174 ---
+Ok, just installed new EA and used settings you specified on Page 8 "TP 0.15 SL 0.0012 InitialSL 0.08 multi 3 lot 0.01 pips 0.005 dpips 0.004 dtp 0.004 dmulti 2 extraorders 6" Load EA on 10 pairs, not a single trade so far for few hours, - definitely something is wrong again.. Anybody get that EA ("THE_EA")working? Please share your settings and what pair and TF you are using it on.. Thanks.
+
+--- 帖子 #175 ---
+just because it hasnt traded, doesnt mean it doesnt work check your journal and experts log
+
+--- 帖子 #176 ---
+Ok, sure it's possible.. Will wait till tomorrow.. Thank you.
+
+--- 帖子 #177 ---
+I think we both have the same problem. I have not been able to get it to trade with my broker who has uses 4 digits after the decimal rather than the 5 digits this was programmed for. I left it running all week without any trades.
+
+--- 帖子 #178 ---
+"I left it running all week without any trades." Yes, confirmed EA doesn't trade at least on 4-digit brokers
+
+--- 帖子 #179 ---
+Default settings. Attached Image (click to enlarge)
+
+--- 帖子 #180 ---
+loaded it up, lets see what happens. The logic kinda makes sense...i mean...if martingale makes systems fail so much then why cant it be reversed to make a big profit? Ive always wondered about this...
+
+--- 帖子 #181 ---
+pish taker
+
+--- 帖子 #182 ---
+Dude, there is 5-digits broker you are using on that Screen Shot 5-digits after .(dot) And on 4-digit broker that EA don't work. And there is more 4-digit brokers than 5 out there. Ben, anyways, it is possible to fix that problem, so EA also works on 4-digit brokers? Thanks.
+
+--- 帖子 #183 ---
+I dont see why it doesnt work, 0.0015 lot is exactly the same as 0.00150 lot, that is the reason i coded it that way. Why not test it out on a 5 digit broker, then if you like it and want to trade it live it is not a good idea to use my version on real money, it was simply a rough version to test if my logic worked, Matt has programmed a very solid version which can be trusted on a live account, unlike my rough version.
+
+--- 帖子 #184 ---
+Where can i have the Matt version for test? Thank you
+
+--- 帖子 #185 ---
+http://www.forexfactory.com/showthread.php?t=205935 This is Matt's forex factory introduction.
+
+--- 帖子 #186 ---
+I know it doesn't work on 4 digit broker, I've known that for a long time. So I started a test on 5 and the results there have been very good so far. Maybe if I am so impressed then I would also open an account on a 5 digit broker. As a rule though I do not use EA on live account (so far. ..) so I simply enjoy testing on demo account.
+
+--- 帖子 #187 ---
+LOL! Jeez, I thought you wanted someone to share results. . . I dunno how this EA does what it does but it has been impressive so far. Nice job Ben. Attached Image (click to enlarge)
+
+--- 帖子 #188 ---
+haha thanks, its progressed nicely, the original 40x40 settings were too aggressive and I see it running into trouble, but im liking the 150x150 multi 1 and only allow 3 levels deep, it hits stops more often, but they aint account breakers like on my original 40x40 idea
+
+--- 帖子 #189 ---
+1st thing i have to say thank you to ben for sharing the idea to us, but i cant use the ea in my broker and i don't know what is the error.... but just now i set pending buy order for my trade in ej following ben's idea and use the martinangale ea that i use for avoid floating... lets c how this can work....
+
+--- 帖子 #190 ---
+I wish my crystal ball worked that well all of the time, the Dubai news today cause the JPY to plummet and the EA was long, hoping for a reversal......It didn't reverse soon enough. The 150x150, one account hit sl and bailed for a limited loss, the other rode out the spike. When I used the reverse entry to false(true on Matt's version) it milked the spike for profit. For those of you who cant get The_EA to work, click this http://www.alpari.co.uk/files/site_u...MT4_set_up.exe get their platform, it works on this, you can test it and see if you like it. If you do like it, it is not a good idea to use my version on a live account, the coding is rough and it is too risky, Matt has written a rock solid version, for the safety of your account, get that version. My latest settings, for what I feel are the most likely to make profit are TakeProfit 0.05 StopLoss 0.0025 InitialStopLoss 0.045 Multiplier 1 Lotsize 0.01 pips 0.01 ReverseSignal false DPips 0.015 DTakeProfit 0.015 DMultiplier 1 ExtraOrders 2 for jpy pairs, move the decimal 2 places to the left
+
+--- 帖子 #191 ---
+Hi all, someone is testing this EA with success under FxPro , currently i'm getting no trades.
+
+--- 帖子 #192 ---
+hi. Has anyone backtested this EA? i have backtested it from jan 2008. Its lost money over all. Am i missing something?
+
+--- 帖子 #193 ---
+Yup, the backtester is useless. I've said it about 5 times in the thread. Thanks for reading.......
+
+--- 帖子 #194 ---
+sorry mate. I have read the bits you said that the back tester is useless (but I meant you were saying that back tests were poor!!). My bad. Good job with the EA! So, this EA is a simpler version of the crazy pyramid. Correct? However, on your fxbook page, what EA is 'all pairs reverse entry'?
+
+--- 帖子 #195 ---
+yes it is basically my beta before matt took it on, all my tests are on cp ea but can be replicated with The_EA if you dont turn your machine off
+
+--- 帖子 #196 ---
+You legend.
+
+--- 帖子 #197 ---
+Hey Ben.. i am gonna sound a bit dumb again, so apologies in advance. The £1200 is your 'The EA', right? So which is the 'grail reverse entry' EA?
+
+--- 帖子 #198 ---
+They are ALL on Matt's verision, but Matt's version is replicating what I post earlier(the previous page). I am only using reverse entry now. The trend appears to be my friend.
+
+--- 帖子 #199 ---
+http://www.myfxbook.com/widgets/7281/large.jpg My current The EA test results. Last week I changed d-pips from default 40x40 to 80x80. I won't know for a while how that will work out but so far the results are looking good.
+
+--- 帖子 #200 ---
+I'm new to EA'a and just trying some different ones out now. How different is using an fx EA from a high frequency trader set up at a hedge fund. I've seen some of the more sophisticated tools used by hedge funds in equities but am not sure if the same tools would be available for Forex?
+
+--- 帖子 #21 ---
+Sorry I'm not familiar with high frequency hedge fund operations
+
+--- 帖子 #22 ---
+seems this all lost its momentum :-( seems people want things handed to them, backtested, forward tested, live tested, polished and pre-configured sadly i'm not that guy, I'll pull my (significant) weight, but not everyone elses
+
+
+===== 附件下载链接 =====
+
+1.zip: https://www.forexfactory.com/attachment/file/318186?d=1253483737
+1.zip: https://www.forexfactory.com/attachment/file/320762?d=1253668096

@@ -1,0 +1,522 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Sometimes you have to be in right place in the right time
+
+--- 帖子 #2 ---
+some more details n close up charts showing what u mean
+
+--- 帖子 #3 ---
+hi mikkom, is this an indicator or an EA? i dont see anything on my chart, can u help me?
+
+--- 帖子 #4 ---
+It's indicator. Use normal fractals if that doesn't work for some reason (sorry can't give any technical support). All that matters is already at the first post. Read it second time.
+
+--- 帖子 #5 ---
+Great simple system, Mikkom. I like these kind. I'll be following your thread. Thanks for posting it. Bill
+
+--- 帖子 #6 ---
+hi bill, do u see the fractals on your chart?
+
+--- 帖子 #7 ---
+I'm setting it up now. I'll let you know in a minute.
+
+--- 帖子 #8 ---
+No. It doesn't work on my charts. I'm not sure why.
+
+--- 帖子 #9 ---
+mikkom there is bug on the indicator. 2009.04.28 17:13:21 Cannot open file '..experts\indicators\mikko_fractal.ex4' on the EURUSD,Daily I change the indicator name to mikko_fractal and it crash my mt4.
+
+--- 帖子 #10 ---
+mikko_mtf_fractal.ex4 needs to load the mikko_fractal.ex4 indicator to operate correctly!!! Where is the mikko_fractal.ex4 indicator ?
+
+--- 帖子 #11 ---
+Whoops I'll post it later. Just use normal fractal, it will give you few false fractals if you have sunday bars but otherwise works okay.
+
+--- 帖子 #12 ---
+Here is the non mtf version - nothing fancy here, just a usual fractal with sunday bars ignored (also on calculation). edit: use the one attached at the first post
+
+--- 帖子 #13 ---
+Mikkom, I don't quite understand this. By "open buy/sell orders" do you mean open trades- trades in progress? If I hit a buy stop today, do I wait until the open of the next day to set a TP? Do I let it run on the day it is triggered without a TP? Thanks
+
+--- 帖子 #14 ---
+For what it's worth, it does use the Sunday bar.
+
+--- 帖子 #15 ---
+Great system! I'm having problems understanding the below questions too, and it would be nice to have an indicator that ignores Sunday bars as many of us use IBFX. Thank you.
+
+--- 帖子 #16 ---
+what is the TP and the SL?
+
+--- 帖子 #17 ---
+Take profit and stop loss are listed on the first page. 20 pips target and stop loss is half way between the two fractals. There is a HUGE risk to reward with this system, which means its hit rate is probably very high.
+
+--- 帖子 #18 ---
+This system looks like it will have multiple orders open, both buy and sell at same time. "close order if not hit TP or SL after 30 days". This doesn't sound like it will work with US brokers after May 15th (New NFA rule) or am I understanding the system incorrectly.
+
+--- 帖子 #19 ---
+Sorry, went back and read, realized you meant PENDING orders close after 30 days if not triggered, not actual orders.
+
+--- 帖子 #20 ---
+Yes, no tp's on the day the trade is triggered. On the next candle tp is set to +20 pips (if long) or -20 pips (if short) of candle open. If tp is not hit on that candle (very unlikely) then you'll wait for sl or the same thing on next daily candle open.
+
+--- 帖子 #21 ---
+.. uh, I think I posted the wrong version again. I'll check the correct version later, I have it somewhere on the computer but not just sure where. edit: Let's try this one, I also changed the one in the first post.
+
+--- 帖子 #22 ---
+Example setup pic below (I'm not very good in explaining this stuff)
+
+--- 帖子 #23 ---
+I think I understand. Thank you.
+
+--- 帖子 #24 ---
+No, the tp is +20 pips from open of next daily candle, not from the entry. Risk is just as large as you define it to be. "Win trade ratio" is only 45.26% in one of my tests (and win ratio usually doesn't mean a thing anyway).
+
+--- 帖子 #25 ---
+One more question- Do you continue resetting the TP with each new bar, or do you only do it with the bar after entry? Do you ever move your SL?
+
+--- 帖子 #26 ---
+SL will remain where it is for the duration of the trade so no trails at this method. If tp is not hit on next bar, it's set to +20 from the open of the next daily bar exactly the same way as in the previous bar. There is a reason for both of these but I don't go there at least yet.
+
+--- 帖子 #27 ---
+Thanks for posting - I am going to give this a whirl on the 4 main ones I have Eu buy @ 1.3300 UJ buy @99.74 GU buy @ 1.4771 U/CHF sell @ 1.1349 So I now just wait until they get taken, nothing else - right or wrong. Cheers Punta
+
+--- 帖子 #28 ---
+So let me understand; let's say that there is an up fractal placed on the bar, so I enter a buy stop at that price (and a stop loss half way between this up fractal and the last down fractal--which let's say in this case is 197 pips). Once the order enters, we place a take profit order 20 pips above the next day's open price. Is this all correct?
+
+--- 帖子 #29 ---
+I believe you should have a pending BUY and SELL for each pair, except UJ.
+
+--- 帖子 #30 ---
+And you also need stop losses: E/U buy: stop loss is 1.3242 E/U sell: stop loss is 1.2942 Agree?
+
+--- 帖子 #31 ---
+I haven't looked at EU, but shouldn't the SL be the same for both Buy and Sell? The SL is the midpoint between the Buy point and the Sell point.
+
+--- 帖子 #32 ---
+Here is how I have it: E/U: Buy at 1.3300 Last down fractal 1.2885 (on 4/22). Difference between the two equals 415. 415 divided by 2 equals 207.5 Buy order at 1.3300 minus 207.5 equals stop loss order at 1.30925 (I was wrong on my previous post). This should also be the same stop loss for the short order as well. Is this all correct?
+
+--- 帖子 #33 ---
+It looks good to me. That's what I get. I would add the spread to my Buy Order and add the spread to the SL on my Sell Order.
+
+--- 帖子 #34 ---
+200+ pip stop for 20 pip gain? I guess I better read that part again. So far seems like any other fractal breakout strat.
+
+--- 帖子 #35 ---
+That's what I thought too, but it's not exactly a 20 pip gain. It could end up a lot more than that. You wait until the end of the bar that the order triggered on, and then add 20 to that. Make sense?
+
+--- 帖子 #36 ---
+Either start a new thread if this is a real system, or if you are being facetious then at least learn the system presented here. It is not a 200 to 20 system.
+
+--- 帖子 #37 ---
+ok, thanks. I'll have a closer look then.
+
+--- 帖子 #38 ---
+1. Place buy/stop orders on all up fractals and sell/stop on all down fractals with a stop loss halfway between the two fractals. So stop loss will be the same for both long and short orders. 2. The day AFTER the order triggers, place a take profit order of 20 pips above the open of that day for a buy, and below the open of that day for a sell. That seems to be all I understand of this system. If anyone gets it better, please let us know.
+
+--- 帖子 #39 ---
+He also said to keep moving the TP, with every daily bar.
+
+--- 帖子 #40 ---
+1. Decide what percentage of your account you want to risk with each trade. You will risk the number of lots that equal that should your SL be hit. Example: You want to risk 3% of your account with each trade. Your account size is $1000. 3% = $30 We'll say the SL on a particular trade is 100 pips. You want each pip to be equal to $.30 or 30 cents. On a standard account you would make the order for .03 lots. On a mini account it would be .3 lots.
+
+--- 帖子 #41 ---
+I don't understand this, Bill. Does he mean if the 20 pips aren't hit one day move it accordingly the next?
+
+--- 帖子 #42 ---
+Right. If it isn't hit on one day, move it the next day to the open of the next daily bar +/- 20 pips. Here's the post where he told me that: http://www.forexfactory.com/showpost...3&amp;postcount=26
+
+--- 帖子 #43 ---
+We put the Buy Stop at the last up fractal (+1 pip, I suppose) also + the spread. If the last up fractal is at 1.3300, I would make a Buy Stop at 1.3303, (assumng a 2 pip spread). Put a Sell Stop order for the last down fractal - 1 pip. If the last down fractal is at 1.2800 I would make the order for 1.2799. The system doesn't include any price action, other than breaking the fractals. He didn't mention pivot points as being a part of it.
+
+--- 帖子 #44 ---
+No price patterns, no pivots, nothing like that, this is simple. This is based on something totally different - cumulation of stops at certain levels.
+
+--- 帖子 #45 ---
+any BACK TEST RESULT?
+
+--- 帖子 #46 ---
+Not at this thread [anymore] In my HUMBLE opinion everyone should do their own homework especially when they are spoonfed with caviar and truffles . Also it's dangerous to trade systems that you personally aren't totally confident of and only way to be totally confident is to study and test the system over and over again. For everyone else I humbly ask don't post the backtest results to this thread if you have them, people should do their homework themselves. Otherwise it's cheating.
+
+--- 帖子 #47 ---
+Mikkom, Finally you started a little piece of your infinite yield!! ?????? ??????? Always a little mysterious! BTW thanks. Lubo.
+
+--- 帖子 #48 ---
+What to do if price breaks through fractal, Buystop and then closes below fractal? If we add +20 to open of the next bar for TP we could end up with a loss. Please advise. TimeFreedom
+
+--- 帖子 #49 ---
+I think it is in this way:
+
+--- 帖子 #50 ---
+In general I find Mikkom to be a very interesting poster, but this thread ranks very high in the "what on earth is he talking about" dept ! ... but I suspect there's gold in them thar' hills...
+
+--- 帖子 #51 ---
+SL is in half between up and down fractals. Lubo. P.s. Mikkom correct me if i'm wrong.
+
+--- 帖子 #52 ---
+I don't know if I understood weel your question, but this is how stop orders work.
+
+--- 帖子 #53 ---
+Yes i know Mikkon is a really focused trader, with a big knowledge. I believe that he thinks that everyone should study himself on inputs which others propose, and I am quite agree with him. Lubo.
+
+--- 帖子 #54 ---
+Ya, i think it's correct.
+
+--- 帖子 #55 ---
+what do u mean for sell and buy fractals? Upper and lower?
+
+--- 帖子 #56 ---
+Rastaman, don't you think is better if you sleep and after you re-read this thread when you are more bright?
+
+--- 帖子 #57 ---
+Hi Mikkom, You mentioned if an order hasn't been triggered in 30 days, then cancel it. I'm not sure if it's super important or not, but do you mean 30 trading days, or just 30 calendar days. Thanks for an interesting system. B
+
+--- 帖子 #58 ---
+As you like, but keep it simple (like Mikkom says). Buy at Upper Fractal (with Buy Stop), Sell at Lower Fractal (with Sell Stop), do this for each fractal will appear. Put SL on the middle between last Upper and Lower Fractal. Put TP only when next Day bar, of the open positions, starts, at +20 pips from its opening(of the new day bar, not of the open positions) if the position is a buy, and at -20 pips if position is a sell. IF TP or SL are not hit, wait next day and do the same. IF within 30 days the stop orders will not be open, delete them. Lubo.
+
+--- 帖子 #59 ---
+I didn't thought to this detail!
+
+--- 帖子 #60 ---
+The RED fractal above the bars on my chart is a signal to SELL, the BLUE fractal below the bars is a signal to buy. Yet, we are putting a buy stop order at the RED fractal, where one would normally SELL, not buy! That is the whole point of the StopHunter, is it not. I know it sounds crazy but I am open to anything, on Demo! Here we go again....More Coffeeeeeeeeeeeee!!
+
+--- 帖子 #61 ---
+I think I have got my head round this (NEARLY)- but the question above seems a good one. ARE we just going of the open price of the new day candle for our +20 whatever the day before closed at ???? cheers Punta
+
+--- 帖子 #62 ---
+I think your confusion is due to your Fractals colors being the opposite. Just reverse the colors and that should help. TimeFreedom
+
+--- 帖子 #63 ---
+This is one of the most important questions that needs answering by Mikkom. It looks like it is happening right now with Cable. Thank you.
+
+--- 帖子 #64 ---
+Yes, this is correct. Rastaman, this is one of the simplest systems there are. Go long at last up fractal, and short at the last low. Why make it so hard?
+
+--- 帖子 #65 ---
+Ok, I will try to explain the confusion. Normally at a fractal at point A on this chart, we expect the price to go DOWN. so, we would, or rather I would go SHORT at point A. At point B we expect price to go UP so we would go LONG. Why are we putting a LONG order at point A and a SHORT order at point B?
+
+--- 帖子 #66 ---
+Dreamliner, I think the answer is this: Put TP only when next Day bar, of the open positions, starts, at +20 pips from its opening(of the new day bar, not of the open positions) if the position is a buy, and at -20 pips if position is a sell. IF TP or SL are not hit, wait next day and do the same. Lubo.
+
+--- 帖子 #67 ---
+Yes, I see what you mean, Rastaman. I guess this is probably more of a "breakout" method, where the price breaks out through the fractal, rather than a "range" method where the price bounces off the fractal. That's just a guess .
+
+--- 帖子 #68 ---
+Hi to all. I post indicator, hope it'll help to trade with this type of fractal system. Mikkom, did you open open another trade in the same direction if one still open? Did you open buy when sell is opened, and what if current trade is in loss- do we move TP to open+20pip? In this case we will be more likeley stoped out by tp but with a loss.
+
+--- 帖子 #69 ---
+Simple, this is the system. If u don't like it stop follow. I think the Mikkom's aim for this thread wuold be discuss on ideas people might come up with. You have filled two pages with the same question, which has already been well answer. I believe that if this thread continues in this way, Mikkom give up and and close it. I invite everyone to read 10 times the posts n.1 and n.10 of Mikkom, try the method, before asking more questions. Lubo.
+
+--- 帖子 #70 ---
+Thank the STARS someone has understood me at LAST! I wasn't losing my mind, either me or you guys were thinking upside down. The Red fractal on the top of a candle is normally a signal to go SHORT and LONG if the Blue is underneath the candle. So, it is a rather unusual breakout system using the fractals for support or resistance once it breaks out beyond the fractal. I suppose it makes sense as it has to break out at some time, either up or down. Phew........
+
+--- 帖子 #71 ---
+Possibly, but I was not the one confused! And neither did I say "I did not like it"! So, how about you lay off it! Genuine questions were being asked and finally we all know what we wanted to know. I have deleted the questions, your highness.
+
+--- 帖子 #72 ---
+Yes.
+
+--- 帖子 #73 ---
+Thanks - appreciated. i have a BUY order on cable taken now. SL in place and -53 at the mo lets see what tomorrow brings. Punta
+
+--- 帖子 #74 ---
+Same with me.
+
+--- 帖子 #75 ---
+You're doing right. Unless it hits the SL, when tomorrow's candle opens, add 20 pips to it for the TP. You may wind up hitting the TP and still take a loss.
+
+--- 帖子 #76 ---
+LuboLabo, I think this is the most unclear part of this method. How can the "next day bar start at 20 pips from its opening"? I'm sure I'm not understanding this, but a bar can not open (or start) 20 pips from its opening.
+
+--- 帖子 #77 ---
+If you're in a long, have not been stopped out, and tomorrow's bar opens at 1.3000, you set your TP at 1.3020. That is 20 pips above tomorrows open. If tomorrows bar goes up 20 pips, you're out of the trade.
+
+--- 帖子 #78 ---
+Maybe i wasn't clear, when a stop order is opens, wait the start of the next day candle, and then put a TP +20 pips (if long) or -20 pips (if short) from the opening value of the bar. I hope I was more clear this time. I am not so sure if this system must take into account the time zone you're in?!?!? Lubo.
+
+--- 帖子 #79 ---
+Another system to watch and test! Gray.
+
+--- 帖子 #80 ---
+TP is always 20 pips? The risk reward ratio seems a little unbalanced for anyone as the SL is currently over 200 pips on EUR/USD. There must be more to this than meets the eye.
+
+--- 帖子 #81 ---
+TP is always 20 pips from the open of the new daily bar. You may make much more than 20 pips, overall. If you lose, your loss may be much less than the SL. There is no way to calculate the R/R ratio without actually testing it.
+
+--- 帖子 #82 ---
+Rastaman, would you be willing to take a suggestion without taking offense? The suggestion is to read the first post. If you do, you will discover that take profit is not 20 pips, but 20 pips in addition to the open of the next day's bar, which could be hundreds of pips. The suggestion is to read.
+
+--- 帖子 #83 ---
+I read the post. But I think I get it now from what you are saying. The next day's bar gets to run it's course, and the 20 TP is on the the open of the next bar? Hey, even you were not clear about this initially how is anyone less experienced supposed to know without asking questions?
+
+--- 帖子 #84 ---
+The bar you enter on gets to run its course. From then on, place a TP at the next bar's open +20 pips.
+
+--- 帖子 #85 ---
+This is EUR/USD with just over 9 hours left on the current bar. I have drawn the next bar (optimistically) and the TP will be at the red horizontal line then. Obviously we have to time the entry correctly or we could be sleeping when the next bar opens. Also, I am not sure how fractals work but is it possible to get a new fractal before the current fractal high and low are broken? If so what do we do if we get a new one? And thanks Bill for having patience.
+
+--- 帖子 #86 ---
+The way you have it, I can't tell when the entry is. If it is today's bar, then the TP will be the open of tomorrow's bar +20 pips. If the up fractal is not broken until tomorrow, then we let the bar run it's course tomorrow and place the TP at the next day's open +20 pips. There is no way we can time an entry. We have to enter when the fractal is broken. We set Buy Stop and Sell Stop orders to do that for us. We don't have to be there when it happens. If new fractals appear while we are in a trade, we do as we always do. We make pending orders to buy or sell if the fractals are broken.
+
+--- 帖子 #87 ---
+(about cumulation of stops) Not really, in fact it's quite simple. People tend to place their stops above peaks and below bottoms. When the price touches there, the stop orders will trigger as market orders meaning they move the price. This is a short term method that tries to benefit from that effect. About 30 days rule when you delete the stop orders, it's not really an exact number.
+
+--- 帖子 #88 ---
+Exactly. Thanks bill. I warned on the first post that this is a bit different than other systems didn't I
+
+--- 帖子 #89 ---
+Sometimes you have to take a small loss to avoid bigger one - just take the loss if +20 is a loss (I have tested this rule quite a bit).
+
+--- 帖子 #90 ---
+Add another buy stop there but don't remove the previous one unless the two trades combined have too big risk for your taste.
+
+--- 帖子 #91 ---
+You can't have a negative TP? How do I set my TP +20 pips if it's a loss? Edit: I would have to move my SL then? TimeFreedom
+
+--- 帖子 #92 ---
+I could do with knowing this as i have 3 trades open all in the red. I will get a new candle in 1hr 45 mins on my broker FXDD, as they are two hours in front of GMT. regards Punta
+
+--- 帖子 #93 ---
+Strangely no it isn't. I have no idea what my point on this thread was Maybe it was just temporary insanity or maybe I just felt that this site has given so much that I should give something [very] valuable back. Btw, this is one of the 16 systems that I trade live. Combination of simple daily systems with positive long term expextancy is IMHO the best way to trade but that's just me.
+
+--- 帖子 #94 ---
+I just picked up your words from the first post. I hope that in future you would like to share other systems. Thanks. Lubo.
+
+--- 帖子 #95 ---
+Today's EUR/USD is a good example. It broke the upper fractal at 1.3303 (including spread) I entered long. Right now it's at 1.3245. It's down 58 pips. If the tomorrow's bar opens at that price, I will set my TP at 1.3265. (Open +20 pips.) If price goes up, tomorrow, to 1.3265- I'm out. I'll have a 38 pip loss for the trade. No. I don't adjust the SL.
+
+--- 帖子 #96 ---
+Just a hint to everyone - there is also another way of adjusting the aggressiveness of the method than the r% trade risk size. Because the system uses r%, the risk is always proportionate to the sl. If you want to be more aggressive, you can use tighter stop level, for example 40% or 30% down from the top between up fractal and down fractal (long trade, opposite meaning 40% or 30% up from the last downfractal with short). Because of the r% position sizing, the trade size will be bigger and the risk will remain the same.
+
+--- 帖子 #97 ---
+Do we set pending order only once per fractal? For ex - fractal formed 2 bars ago so we set buystop.Buystop triggered but price go down and we get sl. Question is do we set new buy stop to the last (same) fractal?
+
+--- 帖子 #98 ---
+Just once per fractal. When it's triggered, the stops that were cumulated above that fractal (or below if it's downfractal) are triggered and there is no point in using the same level again.
+
+--- 帖子 #99 ---
+but your rules are a lot more clearly defined than mine ever were. Anyway, I back tested this on Forex Tester 2 (well worth the investment) with the default fractals (I don't know how to code in C or Delphi) and I only had what appeared to be 2 losers on cable. I tested from January this year to 5 days ago. I will run some more tests with FT2 when I have more time... Nice and clean.
+
+--- 帖子 #100 ---
+You would add losses today on all pairs. GBP/USD, EUR/USD, and USD/CHF.
+
+--- 帖子 #101 ---
+Hey Fella, Today would have been a loser on Cable? I have the midpoint between the last fractal 24/04/09 and 22/04/09 as 1.45832 which hasn't been hit yet. The trade would not have been filled until today at about 10:30 London time and is currently losing but the next day candle hasn't opened just yet (will do so in about 20 mins on my platform). Did I not read the rules right? Would Cable have been an outright loser today?
+
+--- 帖子 #102 ---
+You're correct. All of them are losing, but none of them are final losers, yet. Also, the exact status of them depends on what time your chart turns over a new day. My day starts at 00:00 GMT. All of them are minus, at this time.
+
+--- 帖子 #103 ---
+Cheers, I thought I had misread the first post. OK, so I have Cable as currently losing but not lost completely yet. In this instance, rather than end of play of the day (as this differs for everyone), why not end of sessions? Is this worth considering?
+
+--- 帖子 #104 ---
+It would make sense. Mikkom would have to bless it, for the purposes of his thread.
+
+--- 帖子 #105 ---
+@ Mikkom I would like your thoughts on my question quoted below. Thanks in advance, TimeFreedom
+
+--- 帖子 #106 ---
+Mikkom, Thank you for sharing your extremely valuable knowledge! I look forward to learning as much as you are willing to share with us about this system you worked hard to create. Thank you for giving us tips so we can work to learn to trade profitably ourselves. If you don't mind me asking, what time do your daily bars close? Also, it seems like changing the location of the stop loss (as a % of the distance between fractals) would lower the hit % of the system. Is this true? Thanks again, and I look forward to contributing whatever I can to the thread as I learn the system.
+
+--- 帖子 #107 ---
+Results for today (using IBFX): Eur/Usd: Loss of 14 pips plus spread Usd/Chf: Gain of 12 pips minus spread Gbp/Usd: Gain of 19 pips minus spread I hope I figured this correctly.
+
+--- 帖子 #108 ---
+Thanks for clarifying the new fractal position, I was afraid of asking again in case some of these guys jumped on me again. Glad to see someone else in on EUR/USD. I am still in that trade and bending the rules a little bit because 1: I got up too late to do anything about it and secondly we are 100 pips away from a major pivot. Adjusted the SL though.
+
+--- 帖子 #109 ---
+Decided to trail it with a 35 TS after Break Even as it broke out. PS: Got stopped out at just over break even. It may pop though and I will keep my eye on it, could just be the pullback. Now, I see why Bill made the 1.3265 call. This resistance level also showed up clearly on the Weekly.
+
+--- 帖子 #110 ---
+Sure, feel free to try it. The problem with that method for me is that I can't easily backtest it for 20 years (I don't have detail data that far). There is a very good reason I use the opening and 20 pip tp there, I quote mark fisher a bit http://www.investopedia.com/printabl.../04/032404.asp (ACD system linked is also worth reading as is his whole "logical trader" book) Note the bolded section. As the opening range tends to be the point where the market decides its daily direction, it's also one of the lowest risk exit point for the day - violent moves almost always happen AWAY from the opening range. Why then not just close there, why set the 20 pip tp? I want to exploit the random nature of the markets. The 20 pip is there to squeeze some extra pips out of the market and as opening range tends to be the place where the price tries to decide it's direction, it almost always fluctuates 20 pips to the correct direction during the day. How many times you have seen a candle with open nearer than 20 pips around the high or low? If one of these happens during the day [to the wrong direction] then you have a miss on tp but this is very rare. edit: Just to clarify, opening range of london session could very well be very good point as well but it doesn't fit my system, someone else might want to use it.
+
+--- 帖子 #111 ---
+Just set the tp to open +20 pips from open (long) or -20 pips from open (short) - It shouldn't matter that sometimes the tp will be below the opening price.
+
+--- 帖子 #112 ---
+My broker uses london time (which I like a lot). Yes. That's true. But as the system mostly closes on open tp, the hit rate will not be linearly affected as it is on methods that rely on trailing stops or something like that.
+
+--- 帖子 #113 ---
+Was doing some reading on market profile theory and practice and ORB falls in line with this. I'll start testing session close but as the data source is from metaquotes for back data I don't know how reliable the results will be (I cant download full Alpari history for some reason, I think their site is having a few issues).
+
+--- 帖子 #114 ---
+Just a note: None of my systems is written in stone which means that if someone comes up with something with better results than the current system (I can test the suggestions as long as it's daily stuff - I always want my 20 years of test ) then I'm all for it. If you want more comfort to this method [meaning less trades and less drawdown, well the last one not guaranteed], one method that I have tested andfound reliable is to only enter on fractals that form 123-pattern. This reduces the amount of trades [and is not something I would use for that reason - remember, this is quant system] but if you want to be risk averse then you can try it. JI did a fast check to quantify this, on 123 filter there are 163 trades on one pair, without there are over 600 trades [20 years of data]. I want everyone to remember that this is a "quant" system meaning that on long term the expectancy is positive but on short term you might take losses (I have yet to see a system with no losses) so even if this system would lose next 20-100 trades, I would still use it until it's negative for a long period of time. ps. always remember that win rate tells nothing, what is really important is the relation of losses to wins (edit: and of course sharpe ratio or something like that).
+
+--- 帖子 #115 ---
+Hi, mikkom What will you do in accordance to your system when for ex new low fractal formed and last high fractal is lower then new low fractal. Will you set sellstop for new fractal and what initial sl will be in this case? this situation happens in strong and long trends. Hope you understand what i'm talking about, if not i'll post example
+
+--- 帖子 #116 ---
+I am just experimenting with the M5 TF just to get me familiarized with entries and exits. Seems to work but you have to move the SL 2 pips above and below to account for the spread.
+
+--- 帖子 #117 ---
+Hi guys, Well i ended up about break even on those last three trades. QUICK question can we use the same fractal again when it becomes available, as the usd/chf sell order @ 1.1349 i used last time is now OK to trade off again??? Punta
+
+--- 帖子 #118 ---
+No, we use fractal only one time.
+
+--- 帖子 #119 ---
+very nice, could you please choose one or two pairs and regulary show us your trade and pending orders- maybe other thread? thy bj
+
+--- 帖子 #120 ---
+Looks good to go on the H1. And before anyone goes on about this being a D1 system, I am simply testing it on lower TF to see how well it holds water and to slowly get used to this higher TF as I am not used to trading such a long time frame. Plus I don't want to wait 2 days for a new fractal to test.
+
+--- 帖子 #121 ---
+Thank you - appreciate the help
+
+--- 帖子 #122 ---
+Hi, mikkom It's very strange for me that this thread is not so popular. People are too lasy Thanks for your system! I've made my homework and my EA shows good results from 2000. I'll continue testing on other pairs. I still have some questions and i'll ask if you would not minde.
+
+--- 帖子 #123 ---
+. I know Mikkom asked to don't post EA here, but maybe if u would like to share it, and Mikkom is agree, we could start a new thread for the EA, maybe on others section like rokie or programming discussion. Thanks. Lubo. P.s. I am really interested in doing some backtest.
+
+--- 帖子 #124 ---
+At this stage i do not want to share EA cos it's raw and mikkom asked not to post any EA or backtest results. Also i have some questions to mikkom.
+
+--- 帖子 #125 ---
+I'm not looking for popularity so it really doesn't bother me at all. Laziness is exactly the reason I don't want people to post EAs or backtests - if people are too lazy to test a method then they don't understand what [systematic] trading is all about and shouldn't even be reading this thread. Feel free to ask questions, I'll try to answer them as soon as I can.
+
+--- 帖子 #126 ---
+I missed this question - Yes, I add a new buy/sell for each fractal. The stop is always middle between the entry fractal and last opposite fractal.
+
+--- 帖子 #127 ---
+First question. Look at the picture. As you see last low fractal is higher then last high fractal. Will you take this trade (set sellstop order) and what stop loss will be in this case?
+
+--- 帖子 #128 ---
+I came across this several times in back testing cable. I found the safest option was not to place the order stop until a new fractal in the opposite side had been formed (this would be an indication that we were in a trend). As soon as an opposite fractal had been formed, I would then place the stop. This method worked pretty well.
+
+--- 帖子 #129 ---
+It could be worth considering that 2-3 fractals on the daily chart without an opposite fractal indicates a trend and a trade could be taken in the direction of the trend to supplement the trading methodology?
+
+--- 帖子 #130 ---
+Now i'm testing USDJPY with both types to compare results. Interesting to know are you satisfied with testing results on cable? EURUSD is vere very good but cable (at least by my results) is looser
+
+--- 帖子 #131 ---
+There was another method that I tried, where I placed the order and the SL was at the next fractal. This too worked well. To be honest, I could draw no definitive conclusions as to which was better. The method in this post, obviously had a tighter stop, which considering the trading system, in some cases worked at a disadvantage and in other scenarios worked out to be advantageous.
+
+--- 帖子 #132 ---
+when cable produced a lot of whipsaws, but overall turned out to be quite profitable. I think that the methods described here should be taken as a basis for a trading method, but it produces better results when applied with a little discretion. An EA might be able to take the trades, but I think human intervention should be applied when you use the robot. Ronald Raygun (a fantastic programmer on FF and well respected by many) by his own volition uses about 30 odd EA's applying different strategies over numerous pairs, but he manages them manually. This is the key, I believe, if you go down the EA route.
+
+--- 帖子 #133 ---
+I'm testing from 2000 to 2009
+
+--- 帖子 #134 ---
+Good question - I wouldn't take that trade because there is no way to calculate sl correctly according the rules.
+
+--- 帖子 #135 ---
+The method should be clearly profitable with quite low DD with cable on that period [I assume you are not using too high risk per trade].
+
+--- 帖子 #136 ---
+Mikkom could you please look at picture that i posted earlier. and maybe you would be very kinde and mark at my example picture the level of SL. P.S. good equity qurve but modeling quality is "n/a"
+
+--- 帖子 #137 ---
+Well there are different opinions about this but I use my systems all the time without any human intervention - in fact I try not to touch the algos even in times of drawdowns or at the times when I think I'm more right than my algos. I don't believe in discretion in systematic trading (I have made and lost a lot of money with my discretionary trading), my opinion is that all "discretionary" feeling based trading can be quantified [translated to rules] and then tested on long term data to see if it really works or not.
+
+--- 帖子 #138 ---
+One of my question is about risk per trade issue. i'm testing from initial capital 10000$. Min lot in this case is 0.1 (broker default). The fact is that if i set risk for ex 3% while SL ais big i get lot size less then 0.1. So i have to break the rules fot this trade and set lot to min 0.1 or i have to not to take this trade at all. How do you handle this?
+
+--- 帖子 #139 ---
+(I deleted the original post - I realized that I don't want to break my own rules about backtests) I know, I don't have quality 20 year data for cable. Anyway, modeling quality is not really important if initial sl is almost always outside the daily range.
+
+--- 帖子 #140 ---
+I would find another broker that allows smaller positions. Risk issue is one of the most critical things and you have to be very exact with it.
+
+--- 帖子 #141 ---
+Will it be right SL at this short trade? SL=C+(B-A)/2
+
+--- 帖子 #142 ---
+I wouldn't take the trade before there is opposite fractal on the correct direction.
+
+--- 帖子 #143 ---
+But I think the outcome is the same if you have a decent approach to discretion and a workable system in the first place (which your stophunter system obviously is).
+
+--- 帖子 #144 ---
+I did exactly this in one series of testing as I mentioned before. This helps to define your initial risk value. As a variation in my own approach, once the opposite fractal had formed, I was then able to define where the stop should be placed and then placed all the stop orders that were previously missed based on the new, opposite fractal.
+
+--- 帖子 #145 ---
+did you get better results with this? Or better to miss this type of trades? What is your choice?
+
+--- 帖子 #146 ---
+If you read the first post Mikkom only makes a trade after 2 fractals have formed. A lower fractal and a higher fractal. I presume this is to protect the SL, but it makes sense considering you are making opposite trades to the fractal signal.
+
+--- 帖子 #147 ---
+Yes, that guarantees that the stop is at the current middle point of the current swing which is quite an important point in determining direction.
+
+--- 帖子 #148 ---
+I suppose it also acts as a buffer keeping us out of most of the flac swings but allows us to catch the big moves. Very clever, I am liking it more and more after the penny actually dropped! Mikkom have you also traded this on a shorter TF like H4, if so how did it do. I was just checking this on other pairs and GBP/USD seems to hit the SL quite a lot.
+
+--- 帖子 #149 ---
+I don't personally trade anything under daily candles but feel free to experiment. I assume that if you trade under dailies there is much more things you have to look at like how the breakout on fractal level was and where you should exit.
+
+--- 帖子 #150 ---
+A similar system was posted on a shorter TF on the April/22 interestingly enough. http://www.forexfactory.com/showthread.php?t=164704
+
+--- 帖子 #151 ---
+Mikkom, what broker do you use for testing? What is GMT start hour for daily bars?
+
+--- 帖子 #152 ---
+ActivTrades , London time, gmt+1 (I don't just test, this is one of the systems I trade live). I have used IB in the past (great broker) but their platform is not exactly top notch. edit: Oh and I have used alpari in the past to test 1 min data.
+
+--- 帖子 #153 ---
+Hi Dezil, There were times when stop orders were not originally placed because there was no opposite fractal. However, when the opposite fractal had formed, I could then determine position size and place any stop orders that were missed out initially. This returned more trades on the reversal of a trend or retracement of a large trend (obviously) but had the same expectancy (no better or worse than a standard trade setup.) It's the greater number of trades overall which had a positive outcome that leads me to the conclusion that as long as an opposite fractal had formed and position size can be determined, it is worth doing. However, the same cannot be said for using a non-opposite fractal (e.g. using the distance between a lower fractal and another lower fractal when the trend is bullish and visa versa in a bearish trend). This returned a lower positive expectancy, I think because the distance between fractals was too small on occasion and was therefore more prone to whipsaws.
+
+--- 帖子 #154 ---
+The reason i asked it is that i still do not get good results with GBPUSD. Buy this time i'm shure that my EA works 100% with all rules posted in this thread but results for this pair from 2000. EA hardly stay at BE to the end of 2008. So my thoughts was there is difference in daystart hour which affect this system. And without any testing data from other people who 100% know this system i do not know what else can i done wrong in my EA
+
+--- 帖子 #155 ---
+Are you using r%? What is your risk level per trade?
+
+--- 帖子 #156 ---
+With 3% risk the result is 700$ profit on 10000 account from 2000 till 01/01/09
+
+--- 帖子 #157 ---
+I'm a bit puzzled if I should allow backtest curves here.. The problem is that I don't want to - the rules are so simple that anyone should be able to reproduce the system and I checked my code - all is on the first post. On 3% risk since 2000 on alpari data (that's my highest resolution data for GBPUSD and I still don't have full 1 min data - alpari databank doesn't have it for some reason), my result is very different than yours. As I'm bored to discuss about the implementation of the method and not the actual method, here is EA that works on testing mode only . Don't ask for the live version thank you (I'm not going to give it). [sorry, it's removed. I don't want people decompiling and selling my stuff - again more homework for everyone if you didn't download it already]
+
+--- 帖子 #158 ---
+Thanks a lot Mikkom! That is all i need to find where i was wrong (if i was). I can easily make my own live version of EA.
+
+--- 帖子 #159 ---
+I wonder how many PM's you will now receive, even though you asked not to contacted for the live version My manual cable testing (including my discretion) performed better than your EA did (I wish I knew how to quantify my discretion as this would be ideal). However, the E/U results are simply incredible with your EA (with both every tick and control points). I tend to stick to cable as it is the pair that I am most familiar with but maybe I will back test my discretionary version of your stophunter with E/U to see if I can achieve similar results. You might want to consider removing your EA's from the thread if you are worried about some unscrupulous people decompiling your code. Anyway, I think congratulations are in order what appears to be a completely self-sustaining and viable EA and system.
+
+--- 帖子 #160 ---
+Never thought about decompiling and I don't want anyone selling my stuff so sorry everyone - EA's are removed. Hope I helped Dezil and now we can move on.. I have no idea where. Maybe I should discuss a bit more about why I only trade daily systems and why multiple systems combined produce much smoother curve than any system on itself? By the way do anyone know why this kind of system works best on EURUSD? I might have some ideas but I want to see some discussion
+
+--- 帖子 #97 ---
+I'm very much interested in how you used discretion to make the system better. To be honest, I already know a few more "advanced" tricks to squeeze even more from the system but I would be very interested to hear more ideas [they could eventually even evolve into their own systems].
+
+--- 帖子 #98 ---
+I will think about how I used discretion with your system and attempt to put this into words (its more something I just did rather than thought about), but you will need to give me sometime to formulate this. Please be aware that I don't use fractals in my everyday trading any more and this was more of a mental exercise to see if your system and my original methods of using fractals could be combined.
+
+--- 帖子 #99 ---
+Fractal is IMHO actually just a mechanic definition of a "top" or "bottom". I don't use fractals in my trading either but I do use tops and bottoms and stops that are lurking above and below them Most of the "breakout" systems actually unknowingly exploit the same thing.
+
+--- 帖子 #100 ---
+It might make sense to open a new thread for your thoughts on multiple systems, so that others who aren't interested in reading about your stophunter system but might be interested in this might participate. Possibly due to the amount of volume this pair alone is traded?
+
+--- 帖子 #101 ---
+I'm intersted in your discretion too. As mikkom i believe that almost any discretion can be formalized and included in EA code
+
+--- 帖子 #102 ---
+Hi, could you please send us your pending orders now? which pairs? Thx
+
+--- 帖子 #103 ---
+brainjt, Read the thread. Mikko has outlined his pairs already. Send you his pending orders? Do your own work. Put the indicator on the charts and you work out what pending orders he has. He has outlined one of his systems, it's down to you to utilize it... or not.
+
+--- 帖子 #104 ---
+Anybody in long on EURUSD and AUDUSD? TimeFreedom
+
+--- 帖子 #105 ---
+You must have a Sunday bar. I use IBFX and the Sunday bar will fool you. There isn't really a fractal.
+
+--- 帖子 #106 ---
+Has anyone tried putting a Sell Stop order slightly below the previous Buy Stop order on a Long trade that has been successful and the new short SL slightly above the old buy stop order,with TP at the original SL point, once the market is on the turn?
+
+--- 帖子 #107 ---
+Please dont answer like mikkom, your notes are not correct, certainly Ive read thread peace bj
+
+--- 帖子 #108 ---
+I think it's about time to wrap the thread.. Everything about the system is already described and I don't think providing signals will help anyone. In fact I was wondering how long this would go on when everything was already told on the first post. Thanks for reading and let's see on other threads :nerd: I might start a new thread about general system development but we'll see. Just a hint for everyone, if you spend some time and really try to understand how this system works there are few very simple tricks to squeeze even more from it. Have fun!
+
+
+===== 附件下载链接 =====
+
+未找到附件

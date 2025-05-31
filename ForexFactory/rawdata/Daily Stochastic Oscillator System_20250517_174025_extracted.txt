@@ -1,0 +1,522 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Objective: To average 100 pips per day each week Setup: 1hr chart with Stochastic Oscillator set at 7,3,3, Low/High, Simple Pairs Traded: Figures below are for GBPJPY since it has the bigest swings - havent tested on others, their SL &amp; TP would have to be adjusted. Trade Execution: At the 9:00 GMT and 13:00 GMT each day place a buy/sell according to the location of the Stochastic. If the Stoch is BELOW the signal level you would SELL, if above you would BUY. For EA settings and performance results see next posting. I would apprecieate any input on refining the process for more optimal results.
+
+--- 帖子 #2 ---
+Latest Version: 1.1 Version Release Date: Jan 13, 2008 NOTE: This EA is for TESTING PURPOSES only and NOT to be traded on a live account. I have attached a PILIMINARY EA which will handle a single session (London/USA) for testing purposes. I think that we could improve our profit if some EA wizzard out there would like to add a Trailing Stop routine. Also, I have attached an indicator that would probabbly be better than the Stoch to trigger a buy/sell but I'm not a savy enough programmer to figure out how to detect the levels. If the SHI indicator is UP prior to the entry time it would BUY... if DOWN it would SELL. For backtesting period of 8/1/2007 through 12/31/2007 on GPB/JPY pair the results are: PHP Code == London === ===== USA ===== v1.0 v1.1 v1.0 v1.1 == Settings = === Settings == StopLoss 70 70 60 75 Stop2BE n / a 70 n / a 90 TakeProfit 140 140 130 130 TrailStop n / a 110 n / a 70 == Results == === Results === Aug 8961 8961 10691 7319 Sep 8279 6963 1490 3172 Oct 3292 3912 5505 4599 Nov - 53 1872 1268 4183 Dec 1317 3222 911 2714 TOTAL 24933 33203 19062 30264
+
+--- 帖子 #3 ---
+GBPJPY Chart Sample: (keep in mind that my broker is +2 GMT so 11:00 is 9:00 GMT and 15:00 is 13:00 GMT)
+
+--- 帖子 #4 ---
+If the Stoch is BELOW the signal level you would SELL, if above you would BUY. Can you Explain little more about buy/sell signal please? which one is the buy signal and sell signal? Thanks Nagen
+
+--- 帖子 #5 ---
+The BLUE line is your signal (in the above graph). When it below the red dotted line it indicates a SELL... when above the red dotted line it would be a BUY.
+
+--- 帖子 #6 ---
+Do you close the 0900 position before opening the 1300 position?
+
+--- 帖子 #7 ---
+I didn't in testing - I only tested 1 session (London or USA) at a time - didn't test on both sessions in one trading day.
+
+--- 帖子 #8 ---
+Okay. Did you close the trade at the end of the session or let it run until either SL or TP?
+
+--- 帖子 #9 ---
+Let it run till Stop Loss or Take Profit closed the trade. Usually since this is the heavy trading times, it only takes 2-3 hours at the most to hit one or the other.
+
+--- 帖子 #10 ---
+There's is one small issue with your entry and the way show them in your picture! You show the stoch on the entrybar AFTER the bar has closed! The stoch should be on the bar before. The time stated on the bar you have marked on the chart is when the bar started. A bar the 15:00 marked bar.. started at 15:00 but ended at 15:59 and the stoch value on that bar is valid when the bar closed at 16:00 the same for the 11:00 bar.. the stochvalue you use should be that of the bar before the red highlighted... Soo.. for your charts, if you would like to enter at 11:00 you look at the bar that started 10:00 and the value of that stoch when it closes at 11:00, the question is, do you get the same results? have your thinking been wrong? Don't worry, many has done that misstake with indicators.. especially stoch..including me.. Open you MT platform, look at the last bar you have.. se what time you get on that and look at your last ticktime..
+
+--- 帖子 #11 ---
+I caught that too. If you look at the charts it would change very few trades.
+
+--- 帖子 #12 ---
+frankiev2, Indicators are "guides" use for entry/exit recommendations. Sometimes they aren't always used the way the creator of the indicator intended. Stoch was the best method I found on giving a reasonable indication of which direction (BUY/SELL) to go into the trade via automation. I tried running it an hour before 13:00 GMT and an hour after and both wiped out the account.
+
+--- 帖子 #13 ---
+What he is saying is that it is not accurate to look back on a chart and see the condition of the stochastic at the close of the 1300 bar and judge whether that would have been a trade. You have to look at the stochastic's condition on the close of the previous bar.
+
+--- 帖子 #14 ---
+Hi: I have a day job 8 - 6pm, can I use this setup, will the EA help me, please explain. Thanks Zee
+
+--- 帖子 #15 ---
+At this point the EA is for TESTING PURPOSES only and NOT to be traded on a live account. Perhaps in a few weeks once it is refined it may be possible.
+
+--- 帖子 #16 ---
+Version update: v1.2 Release Date: Jan 13, 2008 Lots of changes from v1.0 to v1.2, many of them produce significant improvement in performance and reducing whipsaw of monthly profit (i.e. one month being high and the next month low or even negative). ==== ADDED FEATURES ==== Stop2BE - when number of pips is reached it will set the S/L to break even TrailStop - AFTER Stop2BE has been reached it will begin looking for the number of pips set here and start excuting a trailing stop. CloseOrdersDaily - if TRUE it will close all orders at 00:00 according to your broker's time (I added this but performence was less if set to TRUE) MoneyManagement - (off by default) Allows the EA to scale your SPEND/BUY amounts according to the set RISK factor and the balance of your account ==== PERFORMANCE INCREASE ==== v1.2 has been tuned to have better performance than v1.0 For backtesting period of 8/1/2007 through 12/31/2007 on GPB/JPY pair the results are: PHP Code == London === ===== USA ===== v1.0 v1.2 v1.0 v1.2 == Settings = === Settings == StopLoss 70 70 60 75 Stop2BE n / a 70 n / a 90 TakeProfit 140 140 130 130 TrailStop n / a 110 n / a 70 == Results == === Results === Aug 8961 8961 10691 7319 Sep 8279 6963 1490 3172 Oct 3292 3912 5505 4599 Nov - 53 1872 1268 4183 Dec 1317 3222 911 2714 TOTAL 24933 33203 19062 20264 Attached below are the LONDON and USA performance charts for GBP/JPY for 8/1/2007 through 12/31/2007 (as well as the EA itself):
+
+--- 帖子 #17 ---
+It's easy to trade multiple sessions with the existing setup, just open this EA on two separate charts and give each a different magic number. That way, one EA trades the London on one chart, and the other EA trades the New York on the other.
+
+--- 帖子 #18 ---
+Correct. I thought about doing that and then I thought about combining the two sessions into one EA.
+
+--- 帖子 #19 ---
+your going to need another indicator to help screen fakes because a lot of fakes appear.
+
+--- 帖子 #20 ---
+In the process of doing just that. Most likely will be switching indicators to one that has less lag and better performance. Will test a few days before releasing a new EA. It is the Solar Winds indicator (attached).
+
+--- 帖子 #21 ---
+how about a elliot oscillator. While i think a 100 pip move a day is unreasonable, and move of 10+spread a day could not be far off. jms
+
+--- 帖子 #22 ---
+also is there any reason you choose 9am GMT to place the order and not 8am the london open time?
+
+--- 帖子 #23 ---
+Hi nealc99 Thx For sharing does it matter if the Stoc gives us a buy/Sell signal @ 9:00 GMT and it is above/Below 20/80 Regards
+
+--- 帖子 #24 ---
+Solar Winds repaints.
+
+--- 帖子 #25 ---
+The time to open on the EA is default 1300. I'm using fxdd gmt +2. Should I set the open time on the EA to 1100? Thanks, Paris I had this set last night but the EA v.2 didn't open any trades.
+
+--- 帖子 #26 ---
+This system is tricky to work with. Ive done some looking around and my experience is to use 8am GMT instead of 9 as this is the true open of london. If a signal is above 80/20 i will ignore it if it gives a signal that doesnt make sense. IE if its at 98 something and says buy still, its weird as i clearly expect it to drop. Also a good secondary indicator is needed to clear fakes and give a cleaner entry. Other than that about 1 or 2 trades since nov were losers. cheers PS last night (az time) at 8am the trade easily netted 50 points
+
+--- 帖子 #27 ---
+Hi nealc99! Would you please explain your settings? The 7-3-3 is a kind of unusual (instead of 5-3-3). I think you have your reasons to change this. Can you please also explain why you are using median and not closing price?
+
+--- 帖子 #28 ---
+I'm using another EA on my charts with GBP/JPY. I've found with this daily100 EA that it won't open a trade at the same time if you're already in a trade with the GBP/JPY . Last night the London session EA didn't trigger at all. Is this normal or a quirk? Thanks, Paris
+
+--- 帖子 #29 ---
+I think this is a good system if we can get the bugs out of the EA. I have it on fxdd and northfinance. No trades were taken last night on the north finance account. Took the new york trade on FXDD but neglected to set the take profit , only the trailing stop . I checked the properties on the EA and I did have the take profit on there but the EA didn't set it. I did get out of the trade with a 145 pip profit but I believe the take profit is 130 pips. I had to close it manually. Thanks, Paris
+
+--- 帖子 #30 ---
+I had this EA running since January 9, and trades were opened on two days. The 14th and the 17th. Is there something in the system I'm missing?
+
+--- 帖子 #31 ---
+No sorry, It's me that didn't understand the system. I'll continue practicing with the EA on demo. I just don't undertand why it didn't set the take profit. I did have it set as I checked the properties on the EA and I had it set take profit to 130 but it opened on my chart with no take profit. Thanks again and have a nice weekend. Paris
+
+--- 帖子 #32 ---
+I did back test this method for the month of November GBP/JPY 1 hour chart and got the new york and london combined totals of +715 pips profit. Still very good for about 15 minutes of work per day. But i think we're seeing exaggerated results on the forum here. 20 trades in all with 9 winning and reaching their take profits, 4 hitting the trailing stops and 7 trades outright stopping out. I'll continue some more back testing. Think of a very bad month and I'll back test that one just to see what the damage could be like. Paris
+
+--- 帖子 #33 ---
+I just got done manually testing August on GBP/JPY 1 hour chart both london and new york combined at the hours of 9:00 gmt and 1300 gmt mine is fxdd gmt+2 so it's the same hours as tested. Sorry , I didn't get any 8000 pips like recorded here. I did get a total of +378 pips profit with both time 9:00 and 13:00 combined. 7 trades went to take profit 3 went to trailing stop and 8 stopped out. For a total of 18 trades for the month. Is anyone else getting different or similar results in their backtests? Thanks, Paris
+
+--- 帖子 #34 ---
+Took a profit of +140 pip take profit hit at 0900 trade. 1300 trade trailing stop activated to bring in +12 more pips profit today. This was using the EA. Paris
+
+--- 帖子 #35 ---
+my 2 cents on the solar winds indy id imagine alot of ppl abandon a indy soon as they switch time frames a few times n see that the indy signal you had has dissapeared if you never switch tf or anything to re initialize the indy it dont repaint below is a pic of the indy when never touched a 2nd indy is added fresh to show the diference bottom line is visually backtesting this indy is useless unless youv had it on the chart all along and never restarted mt4 or switched the time frame so i wouldnt say the indy is useless also after testing ur ea and then looking at the chart the indy may not match ur trades because the indy is added after the test youd need to make a template with the same name as the expert and test in visual mode, or add indy at beginning of test if you minimize the chart while testing it will go fast as if it does not in visual mode as you can see in the pic, the real performance of the indy in real life is lagged more you also get more false signals but could still be good maybe
+
+--- 帖子 #36 ---
+I've used the stochastics oscillator to visually back test this strategy using 7,3,3. Paris
+
+--- 帖子 #37 ---
+Visual manual backtest for December on the 0900 and 1300 times was +534 pips profit. 9 wins of take profit, 9 hitting trailing stop and 10 that stopped out. So far every month I bactested so far with this strategy has been profitable. Paris
+
+--- 帖子 #38 ---
+Paris, The 0900 and 1300 times that you are using is that the open of London and open of US markets? Thanks, dro
+
+--- 帖子 #39 ---
+Not absolutely sure. I do know these are times for this system. If your charts are on gmt time then it needs to be 1100 and 1500 to test. I use fxdd.com and their charts are gmt+2, so are North Finance's. Paris
+
+--- 帖子 #40 ---
+Paris, I tried this morning at the opening of the US time, which is 1500 on my charts. Set t/p at 100 pips and it was reached before I could get ready to go to work. I have not tried the london open, it would mean me getting up at 3 a.m. just not something I am real interested in doing right now. I think this is a good system for someone that has a day job. Thanks, dro
+
+--- 帖子 #41 ---
+You have to make sure your charts from your broker are on gmt time to trade that time. I know fxdd and north finance are gmt+2 so you would need to trade at 0900 and 1300 with these brokers. Interbankfx and Velocityfx are on gmt. 1100 and 1500. My first trade at 0900 hit break even so no profit on that one. My next trade at 1300 I hit take profit for +130 pips profit. This was using the EA and it worked very well and just perfect. I'll do some more backtesting of this system today. Yes it's a good system if you have a day job even if you're manually trading it but you probably won't be able to move the stop to break even unless you're watching the charts. I'm demo trading with the EA and it's doing well. The FED lowered interst rates 3/4 of a point today so the dollar and yen are weakening alot. Paris
+
+--- 帖子 #42 ---
+Hi I download the EA and put them in indicator folder of UGM mt4. I did attach them to the chart but i don't see any thing. I have stochastic oscillator setup 7 3 3. can u help
+
+--- 帖子 #43 ---
+EAs go in the "expert" folder.
+
+--- 帖子 #44 ---
+How are you doing with this system Ronnie? Any testing? I put the stochastic oscillator on the chart 7,3,3 and the EA's been working fine since. Thanks again, Paris
+
+--- 帖子 #45 ---
+The SolarWind (or properly known as Fisher Tranform) commonly going rounds is a repainter. The whole idea of Fisher Transform is for smoothing (with supposedly less delay than other indicators). someone coded it wrongly to use future bars for that smothing, instead of past bars. If you want to use without re-initializing, you are basically not using Fisher Transform (still there will be small repainting bby upto 2 bars, because of the way MT4 works). If you dont use that smoothing effect, you can as well use Stochoistics crossing 50 level, both calculations become nearly same in that case!. The first link below has the repainter and the second link has non-repainter (both with alerts: pop-up, text-signal, email, sound): http://www.forexfactory.com/showpost...8&amp;postcount=10 http://www.forexfactory.com/showpost...3&amp;postcount=15 I have worked/wasted quite sometime on this codes, actually the one called Fisher/Fish (but both codes are same, SolarWind is just a fancy name for the same wrong version). You can read more about it in my old post: http://www.forexfactory.com/showpost...&amp;postcount=555 I just hope nobody wastes too much time on this. Regards, chandra
+
+--- 帖子 #46 ---
+My trading computer crashed, but in the limited testing I could do on my backup computer, it doesn't open trades every day.
+
+--- 帖子 #47 ---
+I am wondering about TOTALs . could you please explain how are the sum of 8961+8279+3292-53+1317 = 24933 !! and ....? maybe I am wrong !
+
+--- 帖子 #48 ---
+Has anyone looked at trading this on the tokyo session? Might have to use different t/p, s/l etc. But just wondering. I will try it on demo.
+
+--- 帖子 #49 ---
+The numbers in the v.2 new york column don't add up either. It would be more but my back testing doesn't show this kind of success. The 3.5 months I've back tested so far have all been very profitable though. Paris
+
+--- 帖子 #50 ---
+wait so what are the correct times to trade this method in GMT, 0900 1300, or what the times seems conflicting jms
+
+--- 帖子 #51 ---
+If your charts are at exactly gmt then it would be 1100 and 1500. If the charts are at gmt+2 such as fxdd or north finance then it would be 0900 and 1300. Paris
+
+--- 帖子 #52 ---
+ahh so its not the london and newyork open. thats where i was confused. because london opens at 800gmt, and newyork at 1300gmt. he states those times at the beginning of this thread 0900gmt and 1300 gmt
+
+--- 帖子 #53 ---
+May you please show yesterday chart and mark candels that we should entered to the position at the begining of them.
+
+--- 帖子 #54 ---
+Today the EA didn't take any trades however I did back test it and it would have the 0900 stopping out and the 1300 trade taking profit. I don't really understand why the EA didn't trade last night. Perhaps it needs more fine tuning. Paris
+
+--- 帖子 #55 ---
+You'll find that FORWARD trading acts slightly different than BACKTESTING so that something that may have picked up due to a fully formed candle (backtesting) may not trigger with a candle &amp; indicators that are being updated every tick (vs every 1M or 5M).
+
+--- 帖子 #56 ---
+Well I can say that the trades that the EA is taking have been profitable most of the time. I had one loss , one break even, a traling stop and a few winners taking profit. So far it's profitable. How's everyone else doing? I think a real test would be to back test the EA for the years 2004 and 2005 when the GBP/JPY was ranging alot. That would be a fair test. Thanks, Paris
+
+--- 帖子 #57 ---
+I think this system works well and I have no idea why it's not getting more attention here. Most other systems here on FF seem to fail in the long run. Last night The EA triggered both 0900 trade and1300 trade. 0900 stopped out. The 1300 the EA set the trade without a take profit again!!! Anyway I had to close it manually and it did make +130 pips. So it was a profitable day again except the EA failed to set the TP. Paris
+
+--- 帖子 #58 ---
+Not 100% sure of your situation but I know if the Trailing Stop kicks in it will remove the Take Profit figure.
+
+--- 帖子 #59 ---
+It's just the opposite. If your charts are exactly GMT it's 0900 and 1300. If you are offset by +2 it will be 1100 and 1500.
+
+--- 帖子 #60 ---
+oops!!!!!! Sorry about that I had a blonde moment. I re-read the posts here on the first page of this thread. Now I'll have to start my testing again. No wonder I'm getting different figures. Sorry! Paris
+
+--- 帖子 #61 ---
+Hi nealc99 do you have SHI MQ4 file? Best Regards, Marcelo Marques
+
+--- 帖子 #62 ---
+Hi Neal, Do you count a trade in the backtests that you did, a buy in the overbought and a sell in the over sold areas or do you exclude these trades? Thanks, Paris
+
+--- 帖子 #63 ---
+Does the Silver Trend indicator repaint? thanks, Paris
+
+--- 帖子 #64 ---
+[deleted] my bad, thought there is only one page! keep going, good job me is looking for such a systems because oanda don't have lot of indicators.
+
+--- 帖子 #65 ---
+Thaks for the clarification, I keep getting confused.
+
+--- 帖子 #66 ---
+I have the same question. If the stoch is already in the overbought/oversold area do you still buy/sell? It seems like it is kind of 50/50 on what to do in these areas. Thanks, dro
+
+--- 帖子 #67 ---
+i would say no trade when in overbought oversold areas. It seems to be iffy when taking a trade in these areas as it may or may not go where you want it to go. What ive seen from some visual backtesting is that when you are in a clearly defined up/down movement of the stoch it will win alot. but if its flat at the time of entry i would urge caution as the market is not decided and probably has been consolidating before open and waiting for news or something. cheers, jms
+
+--- 帖子 #68 ---
+I would like to back test this method with the EA for the full years of 2005 and 2006. Is there a way i can do this on metatrader 4? Is the strategy tester the tool i use to test the EA ? Thanks, Paris
+
+--- 帖子 #69 ---
+Yep, big time.
+
+--- 帖子 #70 ---
+What was the modelling quality percentage to back test this EA? Anymore bact test results for this EA? Paris
+
+--- 帖子 #71 ---
+A nice +189 pip profit trade yesterday with the New York TF. Is anyone still following this system? Any updates? Paris
+
+--- 帖子 #72 ---
+Modeling Quality was arround 80-90% for the backtesting. Been a rather slow week for almost any method due to slow moving market.
+
+--- 帖子 #73 ---
+Locked in some more profit for the NY session this morning. Let's see how much the market will give. .I'm only testing on the New York TF since I'm awake at this time and it's many pips positive so far in foward tests. How's in doing on 0900 London TF? This has been the most profitable method I have so far On the Forex Factory forum that I'm using. Paris
+
+--- 帖子 #74 ---
+What was the drawdown like in the EA back testing? My broker is FXDD GMT+2 so I've set the EA to 1500 for NY session.
+
+--- 帖子 #75 ---
+Maximum drawdown was about 200 pips. Below is the resultes for GBP/JPY for July-Dec 2007 http://26z.net/forex/1.htm
+
+--- 帖子 #76 ---
+NY trade finished today trailed stop at +40 pips. Paris
+
+--- 帖子 #77 ---
+I don't get it, the EA that was posted at the beginning of the trade isn't opening orders for me...Are you all doing this manually?
+
+--- 帖子 #78 ---
+I,m only using it on the NY tf since I'm awake at this time. This is on FXDD. When I had the EA on North Finance it traded randomly. Works better on FXDD. Had a trade yesterday for +189 pips, today +40 and the day before yeaterday there was no trade .Monday morning was +59 trailing stop profits on this TF. FXDD is GMT+2 so it opens the trade at 1500. The EA's been working flawlessly with this broker. Paris
+
+--- 帖子 #79 ---
+Ronald, Make sure you are using the version 1.2 posted on Jan 13 and not one of the older ones.
+
+--- 帖子 #80 ---
+I have been trading this system, although I have not been able to this week because of work schedule. When I have had time to trade it seems to be very profitable. I could not get the EA to work either so I enter all my trades manually and move the stop loss when I can while at work, So I just trade the NY time. Paris - How do you trade when the stoch is already in the overbought/sold areas? Thanks, dro
+
+--- 帖子 #81 ---
+I'm just following the EA and the EA will buy and sell in the overbought/oversold area. Today's NY time frame 1300 looked to be +130 pips. Paris
+
+--- 帖子 #82 ---
+No losing trades this week on the NY TF 4 wins 0 losses. A total of +418 pips this week. Paris
+
+--- 帖子 #83 ---
+Jeez I just saw this post with the report. That's fantastic!!!!! And a modelling quality of 90%. Terrific. It should work out well. Thanks Neal and Ronald. Paris
+
+--- 帖子 #84 ---
+Updated version 1.3 includes better overall preformance. Need Solar Winds Alert indicator saved to your /experts/indicators folder. For use on GPB/JPY currency pair (others have not been tested and the default settings for the expert would have to be adjusted). The following URL has the EA's results: http://26z.net/forex/1.htm Backtesting indicates 67% win percentage with a total $20,192 profit for the period of Jul-Dec 2007.
+
+--- 帖子 #85 ---
+Hi nealc99, thankk's for all your work on this simple but effective system. I have a few questions, sorry if I missed the info somewhere else in the thread. The EA backtest report runs on 5 min chart, but in post 1 you mention 1 hr chart? So if I were to trade this manually would I trade from the stochs on a 5 min chart at i.e. 13.00 or at a 1 hr chart? What effect has the solar wind indicator? I mean what excact parameters have to be indicated, before a trade is valid and on what timeframe? Thank's a lot neal, keep up the good work PC
+
+--- 帖子 #86 ---
+Edit. Do we use the EA on 5 min or 1 hour chart with this new version? Thanks, Paris
+
+--- 帖子 #87 ---
+Hi Paris, Gross profit 40653.66, minus gross loss -20461.50 = total profit 20192.16. PC
+
+--- 帖子 #88 ---
+hi nearc i have noticed that you have shown us some results for differnts versions but when i add numbers in any column i find totlas are differnt from yours plz clarify it thank you
+
+--- 帖子 #89 ---
+You can run EA on any time frame. It is hardwired to use 1M Solar Winds to trigger it's trade.
+
+--- 帖子 #90 ---
+No longer uses Stoch for trigger - uses Solar Wind Alert hardwired to 1M timeframe. Does not matter what timeframe the EA is placed on.
+
+--- 帖子 #91 ---
+All other results are supersceeded by the v1.3 results located at: http://26z.net/forex/1.htm
+
+--- 帖子 #92 ---
+I did some backtesting for USD/JPY pair on EA v1.3 and DON'T RECOMMEND them. I guess there is not enough volitility in the pair. While it does profit with almost 73% win ratio and the drawdown is lower, the rewards are lower as well Backtesting for Jul-Dec 2007 results: http://26z.net/forex/2.htm Net Profit over the period: $3,933 --- SETTINGS for USD/JPY --- StopLoss=70; Stop2BE=35; TakeProfit=35; TrailStop=0;
+
+--- 帖子 #93 ---
+Hi I just came across the post with your strategy and would like some assistance. For clarity can you say what is EA. Secondly, what Trading platform are you using. I was using MTI 4.0 and dropped them last month because I have to pay $150 every month (too expensive).
+
+--- 帖子 #94 ---
+EA = Expert Advisor which does automated trading through the MetaQuotes platform. I use FXOpen.com which is a white label verson that uses MIG as the broker.
+
+--- 帖子 #95 ---
+stop loss is double of tp ? are the rules just like gbp jpy ? did you use this strategy in real ? demo ? for how long time did you forward test it? thank you
+
+--- 帖子 #96 ---
+Thanks Necal Just downloaded that platform and looking at testing your technique...will i have to upload the indicators you recommended? Or are they built in?
+
+--- 帖子 #97 ---
+pretty impressive but couldn't reproduce your results by backtesting. computer almost hangs up and Metaquotes server goes offline, apparently too much data being requested used Daily1.0.3 and solar winds so tried modelling from 01/10/08 till today and got like $4k drawdown
+
+--- 帖子 #98 ---
+do you still use stoch 7,3,3 for entry ? or do you change it ? result of ea are based stoch or something else ? thank you
+
+--- 帖子 #99 ---
+Read post #90. PC
+
+--- 帖子 #100 ---
+Neacl, how do you insert the solar and daily indicators?
+
+--- 帖子 #101 ---
+Hi Simon, u might want to read about MT4 in general, here is a good place to start : http://www.metaquotes.net/userguides/ PC
+
+--- 帖子 #102 ---
+Thanks pipcruiser!
+
+--- 帖子 #103 ---
+It's not profitable if I turn the risk management on. And why doesn't it allow to trade with less than $5000, say $1000?
+
+--- 帖子 #104 ---
+Hey Pipcruiser, cant view the userguide at all!!!
+
+--- 帖子 #105 ---
+Hi Neal, Have you done any foward testing with the 1.3 EA version yet or is this brand new? How did the EA function? Any bugs? Paris
+
+--- 帖子 #106 ---
+hello nealc, can u pls tell me, where did u find MIG is the broker for FXOpen?? i asked the admin for FXopen about this in other forum..and this is the answer: Quote: Originally Posted by PopIsDead http://carigold.com/portal/forums/im...s/viewpost.gif FXOpen.com which is a white label verson that uses MIG as the broker is this info correct.. No, it is not correct. FXOpen has own trading terminal which is not a white label of any brokerage company.
+
+--- 帖子 #107 ---
+No forward testing as of yet - just backtesting to fine tune.
+
+--- 帖子 #108 ---
+All I know is that when you download and install FXOpen's version of Metatrader it comes up as MIG uses Belvedere, Inc for the server when you sign up for an account.
+
+--- 帖子 #109 ---
+what do you use now for entry signal ? what is the rules of exit in your system if i dont want to use EA and want to trade manually thank you
+
+--- 帖子 #110 ---
+Neal., The 1.2v ea has a take profit of 130 on the NY TF . However when it hits the trailing stop the take profit disappears and then the trailing stop indicates what profit will be. So what is the point of having a take profit? Also the Solar winds indy repaints. So how can an accurate back test be done with that indicator? Thanks, Paris
+
+--- 帖子 #111 ---
+Repainting is not an issue. I use the last 1m candle just closed for the signal (not the current candle which does repaint). Yes, I agree that Take Profit could be a mute point and as long as it is under the value of the trailing stop could be ignored.
+
+--- 帖子 #112 ---
+ENTRY SIGNAL : Latest closed 1m candle.... if value of the Solar Wind is LESS THAN -0.20 trigger a SELL, if GREATER THAN 0.20 then trigger a BUY. EXIT : Trailing Stop, Break Even and Stop Loss based on backtesting results from July-December 2007 as being the most optimum. It could be possible to base exit on manual transactions on an exiting indicator you may have had expierence with in the past.
+
+--- 帖子 #113 ---
+neal, while profit is amazing there are few quirks you might think of changing: 1. seems like it enters completely randomly the order. I can't quite figure that out. Check the imaged I attached: it just enters in the middle of the positive indicator zone. It's apparent that bunch of indicators before that one were more than 0.2, so why didn't it enter then? Had it entered at the beginning of the wave, it might have gotten away from the trade with a profit, not with a loss 2. why are there so many zones where it doesn't enter at all? huge profitable gaps are left between the orders. I tried StartHr 00 to encompass all 24 hours a day for testing purposes, but the same thing: sometimes there are days without trades, whereas in Solar wind indicator blue and red waves change in the matter of hours I looked at the code but couldn't figure that out thanks for the good job, though Jasius
+
+--- 帖子 #114 ---
+Probabbly because your comparing apples to oranges. The signal is based on 1 minute (hardcoded) and the chart is based on 5 minutes so the 1 min signal will not show in the appropriate place on a 5 min chart.
+
+--- 帖子 #115 ---
+can you show it and explain it with some pictures ? and what happened to stoch entry and exit ? is that a different system ? what based is your EA ?stoch or solar wind ? thank you
+
+--- 帖子 #116 ---
+Old indicator was Stoch - v1.3 now uses Solar Winds Usually the 2nd bar of the crossing (above/below) would trigger an entry in the appropriate direction. Attached is a sample entry. Exit would be controlled by the EA's stop loss or trailing stop. Manual exit would normally be when the Solar Winds turned in the opposite direction.
+
+--- 帖子 #117 ---
+neal, comparison aside, it's never entered on a second candle during the back testing, in contrast to your last post. again, it entered in the middle of the wave. it would be nice to have it really entering on a second candle correction: it has entered on a second candle in the above graph since it's M1 graph. mine was M5, as you recommended in the very beginning of the thread. so which one is the best? Jasius
+
+--- 帖子 #118 ---
+Does the solar wind indicator change in value once the candle is closed? EX: Once the indicator value is &gt; .20 based on the close of a candle, a long position would be taken correct? What is the repainting element? Are you guys/gals saying that the value of solar wind will change after the latest close of a candle? Thanks for any explanation.
+
+--- 帖子 #119 ---
+Am I missing something?.. I attached M1 chart with back test, trade entered in second part of the wave for a loss Jasius
+
+--- 帖子 #120 ---
+Solar Winds repaints durring the current candle. Does not repaint after a candle has closed. Signal is taken from the most recient closed 1M candle.
+
+--- 帖子 #121 ---
+I appologize for not being able to explain the behavior on backtesting charts (would think 1M chart with the 1M Solar Wind) should coninside as long as the Solar Wind signal on the previous closed candle is GREATER than 0.20 or LESS THAN -0.20. All I know for sure is the indicator is set to read the most recient close 1M candle and then determin entry based on the value of the Solar Wind being &gt; 0.20 or &lt; -0.20 to enter a trade. Inserted Code double sw=iCustom(NULL, 1, "Solar_Winds_alert", 10, false, 0,1); The first "1" indicates the TIME FRAME (1 minute) and the last "1" indicates to use the last closed candle (1 minute).
+
+--- 帖子 #122 ---
+So based on this statement, a back-test can be performed with 100% accuracy by visually looking at the charts? Would it be correct to say that all indicators repaint until the close of a candle due to recalculating based on price movement?
+
+--- 帖子 #123 ---
+Solar Winds doesn't repaint after candle close. All indicators repaint durring an open candle, most do not after a candle has closed. Some indicators like Silver Trend repaint even after a candle close depending on the circumstances. Visual backtesting on a 1M chart should be fairly accurate. Keeping in mind that the candle it would trigger a trade not only has to be either blue or red, but has to be ABOVE/BELOW +0.20/-0.20 to trigger.
+
+--- 帖子 #124 ---
+Are you sure about this? From what I remember over at Forex TSD, is that Solar Wind is one of those indicators that repaints AFTER candle close.
+
+--- 帖子 #125 ---
+Neal I believe that is incorrect. The Solar Wind I have seen does repaint after the candle is closed- big time. I know that for a fact. Yours may be a different version.
+
+--- 帖子 #126 ---
+If this indicator does not change after the candle close, then it gives very good entry signals based on the settings .2 &amp; -.2 on a M5 GBY/JPY chart. How do you prove/disprove that it repaints after the close of a candle?
+
+--- 帖子 #127 ---
+Watch it in real time. It won't take long to see it using a 1M chart.
+
+--- 帖子 #128 ---
+Copy that. I will report back shortly with the answer.
+
+--- 帖子 #129 ---
+v1.3 EA is doing great so far today in forward testing. Opened up 3 trades: 2/4/2008 01:20 @ 209.51 BUY - closed manually +74 pips 2/4/2008 15:02 @ 211.28 SELL - closed manually +38 pips 2/4/2008 19:43 @ 211.00 BUY - just now opened.... Attached is the v1.3 EA - forgot to change the version number in the transaction comments field (no other changes made).
+
+--- 帖子 #130 ---
+Just a note on my trading style. I will let an EA OPEN a trade, but many times I will manually close a trade if it is showing that the strength of the trade is failing and I am in profit. I noticed that many times with the EA in this thread that it will go in the NEGATIVE 15-30 pips before it starts going up. This is a could be a sign that you are getting in just ahead of the trend change
+
+--- 帖子 #131 ---
+I had one open at 2300 hours and stopped out. Isn't this suppose to work at 0900 and 1300 gmt like the other versions? Paris
+
+--- 帖子 #132 ---
+The START hour can be set, but it will go to 23:59 for that day... sounds like a rare occurance to open at 23:00.
+
+--- 帖子 #133 ---
+Just wondering about the settings with the new version v1.3 on my older version v1.2 London 70 SL 70 B/E 140 TP 110 TS USA 75 SL 90 B/E 130 TP 70 TS I have noticed that v1.3 has different settings. Do I need to change the settings to revert as above that you have optimized or not? Is the new back-testing result based on the new settings on v1.3 for both TF (London and USA)? Thanks!
+
+--- 帖子 #134 ---
+Great question: Version 1.3 settings are: LONDON SESSION StopLoss: 55 BreakEven: 80 TakeProfit: 120 TrailingStop: 80 NEW YORK SESSION StopLoss: 90 BreakEven: 90 TakeProfit: 130 TrailingStop: 90
+
+--- 帖子 #135 ---
+Thanks very much!
+
+--- 帖子 #136 ---
+The indicator will change values after the candle is closed. Are you aware of this? If so, does it pose an issue for your trigger?
+
+--- 帖子 #137 ---
+During London session, the new version v1.3 will not open new trade. It has never happened to me before when I was using v1.2. I don't know if v1.3 is set only for the USA session. Also, I noticed that after I installed v1.3 on my platform, it opened the trade at 23:20 but it was supposed to be at 13:00. I quickly manually closed the 23:20 trade so the loss is very minimal. Does anyone know why v1.3 would not open the new trade during the London session?
+
+--- 帖子 #138 ---
+No trade during London session. Is that right?
+
+--- 帖子 #139 ---
+That's right, my platform did not enter a trade during the London session. I don't know why. I am still waiting to find out.
+
+--- 帖子 #140 ---
+You just need to use the London Session settings: http://www.forexfactory.com/showpost...&amp;postcount=134 EA v1.3 is set to USA Session by default. If you want to trade both sessions you would want to open up 2 charts and put the EA on one with London settings and EA on the 2nd chart with the USA settings. Don't forget to set the StartHr to 9:00 GMT for London and 13:00 GMT for USA (add your broker offset to these times if necessary)
+
+--- 帖子 #141 ---
+Yes thats what I did... I have two seperate charts.. one EA on for London and one for the USA. I did set the StartHr to 9:00 GMT for London but it did not work.
+
+--- 帖子 #142 ---
+It is 30 minutes past 13:00 GMT and the USA session EA still not opening a trade? Now both USA and LONDON sessions are not working. Should I go back to v1.2? I never had any problems with v1.2 in the past.
+
+--- 帖子 #143 ---
+You also need to make the MagicNumber different. If it is the same on both it would not enter a trade if one was already open. (unless you don't want it to open a trade if one is currently open - then you would leave them the same).
+
+--- 帖子 #144 ---
+Hmmm... I had a SELL open at 13:00 GMT and is currently +1 pips
+
+--- 帖子 #145 ---
+Lovley (speedy) trade - in at 13:00 GMT @ 211.41 and manually closed at 14:02 GMT at 210.40 for +101 pips
+
+--- 帖子 #146 ---
+hello, nice work. and thank you for sharing it too. but i av noticed that the 1.3version enters at the wrong time irrespective of the time you set on the EA i.e 9gmt or 13gmt. please kindly look into this.
+
+--- 帖子 #147 ---
+Also make sure that the magic number is a non 0 number. If it is 0, then any manually opened trades will affect it.
+
+--- 帖子 #148 ---
+If it did open a trade, check with your broker. I suspect that they are offset from GMT
+
+--- 帖子 #149 ---
+Are you saying that we need to use the exact settings as posted here for it to trade in that session at all?
+
+--- 帖子 #150 ---
+If you are trading the London session - you would use the London settings.... the USA session - use the USA settings. If you are trading both sessions you would need 2 charts with a seperate EA on each.
+
+--- 帖子 #151 ---
+2006-01-01 to 2008-02-01 EDIT: London session http://upl.vs-hs.com/i/2c.gif
+
+--- 帖子 #152 ---
+The EA seems to work differently with different brokers. v1.3 isn't working right at all. I'm back to v1.2. North Finace which is also gmt+2, the ea's don't work well on their platforms. FXDD which is also gmt+2 it works well with. v1.3 I have on North Finance and it only opened 1 trade 1 day which was set for New york session and it opened it instead at 2300 hours and the magic number is 222222 and no ther trades were running. I don't trust the v1.3 at all so I'm sticking with v1.2 that works perfectly on FXDD but not qhite perfect on north finance. Paris
+
+--- 帖子 #153 ---
+Yesterday v1.2 I closed manually up +62 pips when price bounced off of the daily pivot. Today I trailed stop for a +87 pips. This was new york tf. Paris
+
+--- 帖子 #154 ---
+my broker time is GMT+2. i tried visual backtesting the EA for one year using new york 15.00 my broker's time although the result was good but i saw that some of the trades were excuted at 23:00 18:00 etc. i think there is still something wrong with this version 1.3. i tested it with FXDD and liteforex and it keeps execting trades at wrong times.(even on forward testing). is there any differnce between the version 1.2 and 1.3. if there is no difference maybe i should jut get the 1.2. i will apprieciate any suggestions
+
+--- 帖子 #155 ---
+1 year back test(newyork)
+
+--- 帖子 #156 ---
+If it is set to 15:00 you could get trades anytime between 15:00-23:59. If it is set to 11:00 (London) you could get trades anytime between 11:00-23:59. There is no "stop" time till 00:00.
+
+--- 帖子 #157 ---
+I don't get it, is the delay in time a fault of the EA or the broker? I know sometimes in my forward testing my broker takes some time to fill the order. (Sometimes it has to do with my internet connection.)
+
+--- 帖子 #158 ---
+I'm new to this thread afew days ago And forward testing the 1,3 version. Can i close the trade only in manual?
+
+--- 帖子 #159 ---
+does this mean the EA can have more than a trade even within a session or more than two for the two sessions combined. or is the EA program to execute one trade per session. from your statement if i am right the london EA can even execute a trade during newyork. if that is the case why not just combine every thing(EA) has one and find an average target maybe around 120pips since its the least. and the EA can be executed at anytime between 11 and 23:59
+
+--- 帖子 #160 ---
+this is between 01-01-2007 to 30-12-2007(one year) with Money management set to TRUE. this is too good to be true. please how do i post the detail report analysis? i could have posted it but dont know how
+
+--- 帖子 #97 ---
+Hi bimbo, nice results, what risk % did you use and what session, london or USA? I think you post the report the same way as the picture. Thank's PC
+
+--- 帖子 #98 ---
+moneymanagement was set to 7% risk(0.7mini)(that is the default on the EA) and its Newyork. i think newyork is more profitable overall that london. i still can not post the analysis becos its html file and it doesnt accept html.
+
+--- 帖子 #99 ---
+Bimboforex, Is your New York session testing result based on the trade entered at 13:00 precisely or is it based on a new setting that Neal created for v1.3 that the trade would be opened anytime between 13:00 to 23:59?
+
+--- 帖子 #100 ---
+Hey Folks! How does 89% win percentage sound? Version 1.4 in the works. EA Results: http://26z.net/forex/3.htm CHANGES/FEATURES Return to using Stochastics Oscillator due to many having concerns about the Solar Winds dispute as to repainting for closed candles AutoClose = will monitor and take you out of a bad trade or failing one via a 12/24 EMA crossover signal (is giving better results than with AutoClose turned off) Well back to work - hope to have 1.4 available later today or tomarrow! Just have to track down why it's not closing certain trades if they get into trouble. Neal
+
+--- 帖子 #101 ---
+Awesome neal, keep up the good work, looking forward to do some testing PC
+
+--- 帖子 #102 ---
+Neal, in the version 1.4 could you elaborate on the timing of trading: For example I am in US Central time, using Metatrader UK Alpari and am totaly confused which time settings should be EA... Or can I just let it run manually, neglecting the time of the session at my own discretion?
+
+--- 帖子 #103 ---
+I wanna forward-test immediately Thanks for your sharing and effort!
+
+--- 帖子 #104 ---
+http://26z.net/forex/4.gif OMG!!!!! What a system! Jul-Dec 2007 a whopping $28,609 profit! http://26z.net/forex/4.htm Well looks like we're going to have to settle for 79% win percentage (will try to live with it). I'll go into more detail in the morning (brain dead at the moment) but wanted to get it to those of you who wish to start FORWARD testing. This version is quite different than the previous versions and will probabbly start a new thread in the morning (will put the link here to the new thread). First of all THERE IS NO SESSION TIMES. Set the Starthr variable to 10:00 GMT (kind of early London session) Leave the rest of the settings as they are - will explain them in detail tomarrow. DO NOT RECOMMEND a TrailingStop - if you have to have one set it to 60. Your results will be better without one. There will only be 1 trade per day. It may/may not start exactlly at 10:00 GMT - if market conditions are not exactly as it wants it will wait for a bit then enter. Most times it will go in at exactlly 10:00 GMT.
+
+--- 帖子 #105 ---
+v1.2 at new york time now has stopped out 3 days in a row. -225 pips. Let's hope the new EA performs better. Paris
+
+--- 帖子 #106 ---
+once again this is mindblowing. at leaset it looks good on one year backtesting 01-01-2007 to 30-12-2007. with 10% risk money management(although its on the high side). it gave a huge profit of $113,630.
+
+--- 帖子 #107 ---
+Did anyone get the same entry and result today? the v1.4 EA bought @ 209.18 at 19:00 GMT and was stopped out @ 208.43. It's on the IBFX platform. Only need to make sure that the EA on my platform is right and match the result with others.
+
+--- 帖子 #108 ---
+This thread is now closed - please go to the new thred located at: http://www.forexfactory.com/showthread.php?t=69151 Daily Stochastic Oscillator System (#2)
+
+
+===== 附件下载链接 =====
+
+未找到附件

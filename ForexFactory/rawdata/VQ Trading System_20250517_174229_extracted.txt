@@ -1,0 +1,504 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+With few changes I have found VQ indicator to be the best in detecting a trend. With many tweaking and testing hours. I have changed the default value of length from 5 to 7 to give better hold of the trend. The system works in both choppy as well as trendy environment. The TF that I use is 1M, 5M and 15M with Length 7,7 and 35 respectively. If you do not have much time for intra day trading, you can change the Length to 35 and use it on 15M chart. The values i have found is after hours and hours of manual testing. The only difference from the standard VQ indicator that has been around for a long time is the change of length. You could use the jumping stop loss feature from EA MPTM with this indicator that Steve Hopwood has wonderfully created else use the standard SL and TP. With small TP in 1M TF with length 7, The trading system is almost 90% effective in EURUSD, if you loose a trade, the next trade you can raise the lots linearly. It sounds martingale but it rarely ever crosses 3-4 lots before hitting the Take Profit. just test it manually for couple of days and you will know the results will speak for itself. It has huge potential to work as an EA to trade on multiple pairs in lower time frame with small TP. If someone could code it as an EA would be great. Try it manually for a day or two and you will see the huge potential of this indicator just by changing the length, then we could all go to Steve and beg for an EA to be created based on VQ indicator Attach please find the indicator vq7 for 1M and 5M charts and vq35 for 15M chart. Thanks. ===== EDIT vq7 indicator settings changed from real time=true to real time=false ======== Guys Important... Always keep Real Time=False else the indicator will show multiple signals. You can tweak the length, method. smoothing, filter...main change comes only with length, other changes does not effect the indicator much. Signal Price=true....show the price when signal changes. does not effect anything. =================
+
+--- 帖子 #2 ---
+thank you for sharing this system,it seems very promising,i will give a shot
+
+--- 帖子 #3 ---
+Looks good, thanks!
+
+--- 帖子 #4 ---
+ty for sharing spider..did you ever experienced repainting issue while using the indicator?[well i hope not].i just test it with the simulator it seem so nice.
+
+--- 帖子 #5 ---
+Good to see someone find a way to really use this indie. Always was a fan of it. Quick question: What are your ways of managing stop loss and take profit? I believe the EA guys will need to know this before they could even attempt to program it for you. Anyway good luck with it. Will play around with it.
+
+--- 帖子 #6 ---
+What are the other indicators you are using, by the way? EDIT: the indicator doesn't seem to work quite as it should, it'll daw in EUR/USD 5m, but not 1m, works in GBP/USD every timeframe nothing at all in USD/JPY or something
+
+--- 帖子 #7 ---
+Downloaded indicator but does not draw in either EUR/USD OR GBP/USD 5min
+
+--- 帖子 #8 ---
+Here is EA based on VQ indicator and VQ bars. If you choose 'stable' in the parameters...it seems to be better.
+
+--- 帖子 #9 ---
+Hi, thanks for sharing this indicator. I have a question though. Does it work like step moving averages do? What I mean is, does it give signal when price moves x pips in one direction?
+
+--- 帖子 #10 ---
+Dear Kkeskar92, any chance you could make this EA ECN OrderSend friendly? I get the classic "invalid stops" errors all over the place ... Thanks for considering. Vlado
+
+--- 帖子 #11 ---
+[quote=spiderforex;4883867]With few changes I have found VQ indicator to be the best in detecting a trend. With many tweaking and testing hours. I have changed the default value of length from 5 to 7 to give better hold of the trend. The system works in both choppy as well as trendy environment. Looks like a good system. I will give it a shot.
+
+--- 帖子 #12 ---
+Hi I found this EA on mql forum. I am not a programmer, so you may put your request on mql forum. Let me know if you find a better one. Thanks.
+
+--- 帖子 #13 ---
+I do not seem to catch good trends on my chart with your settings. don't know if I did something wrong. so I have tried to tweak it. Still working on the best settings. I like the inidi because it does not repaint. Cheers
+
+--- 帖子 #14 ---
+Here is another chart. the green lines are my buys and the red lines are my sells. Cheers
+
+--- 帖子 #15 ---
+hello dear,it seems it doesnt work on 5m,can you explain about the real time and steady mode at seeting area? it works at 1m but needs an extra filter.
+
+--- 帖子 #16 ---
+spiderforex, thank you very much! What a nice M1 system! Have you ever tried different "filter" settings for VQ? Right now you have 5. I don't want to mislead anyone, but it seems to me that 3 would work a little better. Can we use your system for trading GBPUSD, AUDUSD, EURJPY, GBPJPY? What is your SL and TP for M1?
+
+--- 帖子 #17 ---
+I think an extra filter is not such a good idea. When we start adding "filter"-indicators to a good system we just confuse ourselves and complicate things. I think we'd better just not trade M1 against M5/M15 trend, that's it. Just my 2 cents.
+
+--- 帖子 #18 ---
+thank you for your input,last night i tried the indi on eur/usd 1m and i had 23 trade which was 13 win and 10 loss,we need the good sl and tp.
+
+--- 帖子 #19 ---
+Hello, There are no re-painting issues....Just put real-time=false in the options if you face any...Again, the indicator does not re-paint ....Thanks
+
+--- 帖子 #20 ---
+yes, As mentioned, we could use MPTM indicator from Steve Hopwood if we are going manual. In case of EA. We could use multiple options, if you are using 15M chart with 35 length, you could use Jumping Stop Loss or trailing Stop loss. If we are using 1m or 5m chart for scalping, better to use Take Profit with Break Even and Jumping Stop Loss. The best possibility to get a trend is to use Jumping Stop loss with break even and break even pips..so that we never lose yet catch the trend as much we can...Thanks I would suggest Jumping Stop Loss or Trailing Stop Loss PLUS martingale function with either linear or double lots. Linear lots would do...however, in my experience martingale rarely crosses 3-4 lots before hitting TP or Jumping Stop Loss.
+
+--- 帖子 #21 ---
+Yes. There is problem with some metatrader that it does not draw 1m and 5m chart...I'm using alpari and it works fine.. What you could do is....squeeze the charts with - sign that as you can see in the attached image...just click minus sign until you see the chart...thanks
+
+--- 帖子 #22 ---
+thanks for the EA. I will check it out. Yes. It works similar to Step Indicator, i have also heard its similar to CCI indicator. One good thing about this indi is, it does not re-paint at all but gives signals almost as fisher without any re-painting. Yes. Better to tweak the settings what suits you best. I have tried 1000's of indicators and with this hours of testing and found the settings to be better.This indicator is by far the best IMHO. good luck. yes. some metatrader have issues with showing VQ indicator.I'm using alpari and it works fine. If the indicator does not show up. Use the Minus sign to squeeze the charts and it will show up, as described above in the image.. If you choose Real Time=true, the indicator signals every time price changes, in short, it re-paints, always put it as false. Steady Mode=false has to do with some error handling. better to keep it false. Yes. you can tweak anyway you like it. i found the best settings after hours of testing. IMHO. I found changes in length that makes bigger difference to the indicator. other settings does not have much effect, that's just my opinion. I'm using tight SL and TP as its in scalping mode...In EURUSD...I'm using 6 SL and 6 TP but as said better to use Steve Hopwoods MPTM trade manager. Good Luck
+
+--- 帖子 #23 ---
+yes. if we use a good linear martingale set up with jumping stop loss and break even..like MPTM that Steve hopwood made...their would be minimal losses. However, its not a martingale indicator , without martingale also, it works fine but the profit is lower.. The key is to run on multiple pairs and use very tight take profits, 'cos once VQ shows the signal, 90% of the time, the trends remains the same for 5 to 6 pips in 1M and 5M time frame.. We could easily get 5-6 pips in 1m and 5m tf in multiple pairs using an EA. Thats is the reason i suggested an EA for maximum profitability. I had few EA's from other forums, but its not effective in implementing the strategy. If someone is willing to create an EA. i could post the old EA's and changes could be made. Thanks
+
+--- 帖子 #24 ---
+Spider forex, Thanks for sharing such a good indicator. I'm trading in Daily chart, do you have any experience what is the best setting for daily chart?
+
+--- 帖子 #25 ---
+Hey Spider , would be nice if you could go into details about your Trademangement . So you use 6SL(isnt it realy to tight for 5m?) 6TP close half of Position , move stop to BE and start trailing . But how you set the jump sp/trailing stop? Thanks
+
+--- 帖子 #26 ---
+Hi Android, I have not traded Daily Chart, however, while testing, i have used 77 or 60 ..around that values...The indicator seems to catch nice trends on these values in daily chart. The higher the TF you go..you can increase the length......Good Luck
+
+--- 帖子 #27 ---
+Hi Blu, Please find the attached trade management. Use BreakEven at 6, Jumping Stop loss at 6, break even pips at 2 and trailing stop at 6 for 1M and 5M chart. you can increase upto 8 to 10 pips for 5M chart though... For 15M use Break Even at 15, Break Even pips at 5, trailing stop at 15, jumping stop loss at 15. keep everything else false, Use true, if you want to manage all trades with a single EA option. pdf instructions is attached also, scripts for buy and sell...edit the scripts firsts according to the lots you desire... Yes. That is the tricky part for maximum profit. i suggest to trade on multiple pairs...However, after a while, it could get tedious as you are basically scalping 3-4 currencies at once. That's the reason i mentioned, if we could get an EA, it would be great, otherwise, its better to start with one pairs, i would suggest EURUSD. The beauty of this indicator is, you can trade choppy as well as trendy markets and once the signal shows, 70 to 80% of the time, it stays for 5-6 pips in the trend direction before going down and hitting the open price...thats why we can keep stop loss as tight as possible. And also, we can adjust the indi to suit our trading style in any time frame and any SL and TP...just testing is needed. Good Luck...All EAs and scripts were created by Steve...Thanks a lot to Steve
+
+--- 帖子 #28 ---
+Thanks for your detailed answer . So am i right that you dont use any trendfilter on the tf1 and 5 ? You basicly take very signal the VQ gives you?
+
+--- 帖子 #29 ---
+I'm just looking into 1 min scalping and find Heiken Ashi candles useful in conjunction with s/r levels and the 5/15/1 hour trend. I currently use stochs 8,3,3/simple/low/high for confirmation and have tried cci 20 also but I will look into this indicator over the next week. Thanks for posting it. I wonder if anyone else is using HA candles?
+
+--- 帖子 #30 ---
+Just taken a look at a nice clear reversal and it seems VQ gets you in a couple of bars behind stochs and cci. Obviously one trade isn't a representative sample of trades but it doesn't look good for me at the moment.
+
+--- 帖子 #31 ---
+Yes, it appears to me that this indie is always at least one bar behind stochs and cci. This isn't necessarily a bad thing as we're interested in the "meat in the middle" of a trend but if you're scalping you want to be in at the earliest opportunity!
+
+--- 帖子 #32 ---
+Yes, you're absolutely right, length=7 makes it a great system, other settings don't make big difference. Your SL 6 pips and TP 6 pips sound very reasonable and very profitable. I was going to trade M1 according the M5/M15 trend, but with these TP and SL I'm sure I can take ANY M1 signal (like you recommended). In other words: I'll just follow ALL your recommendations. Like they say: IF IT AIN'T BROKEN - DON'T FIX IT! Once again thank you for your great indicator and very detailed explanations.
+
+--- 帖子 #33 ---
+Thank you for sharing! As you already read, spiderforex has TP 6 pips and SL 6 pips, probably with these TP and SL the results will be much better.
+
+--- 帖子 #34 ---
+spiderforex, one more question: in your opinion, what is the best time for trading M1? Do you trade only London Open-NY Open or just any time you can? Thank you!
+
+--- 帖子 #35 ---
+As i understand it its a bid more complicated in terms ofTrademanagement Its SL 6, half Position and BE+2 at 6 Jumping stop kicking in at 6 too .. That goes for 1m TF So youre out if the trade doesnt go into your direction right from the beginning , which is of course one of the better scalping philosophies Correct me if iam wrong
+
+--- 帖子 #36 ---
+spiderforex said: "I'm using tight SL and TP as its in scalping mode...In EURUSD...I'm using 6 SL and 6 TP but as said better to use Steve Hopwoods MPTM trade manager." He also said: "once VQ shows the signal, 90% of the time, the trends remains the same for 5 to 6 pips in 1M and 5M time frame." So, blutkehlchen, you're correct if you want to use MPTM trade manager. But I'm planning to trade manually, without any EA or trade manager, so for me 6 SL and 6 TP is correct.
+
+--- 帖子 #37 ---
+i am visually back tested the indi with stochastic (20.3.3),looks very good,it seems is a good filter,any idea? regards
+
+--- 帖子 #38 ---
+we can ignore the signals that are in 30 and 80 area,just follow the signal between them,looks promising.
+
+--- 帖子 #39 ---
+I still dont understand why people DO NOT look in the code to see why and how the indicator work...its not using Stoch or CCI...it uses MOVING AVERAGES.........ITs pretty simple.....heres the part of the code for the indicator to see WHY and HOW it works. For those that know nothing about codes iMA...means it calls on the MOVING AVERAGE..if it was stoch it would be istoch, if cci...icci //+------------------------------------------------------------------+ int start() { if (Bars &lt; 100) {IndicatorShortName("Bars less than 100"); return(0);} if(timeprev1&lt;iTime(NULL,TimeFrame,0)) {TurnedDn = false; TurnedUp = false; timeprev1=iTime(NULL,TimeFrame,0);} if (!RealTime) { if(timeprev2==iTime(NULL,TimeFrame,0)) return(0); timeprev2=iTime(NULL,TimeFrame,0); p=TimeFrame/Period()+1; if (p==0) p=1; } double TR = 0, MH = 0, ML = 0, MO = 0, MC = 0, MC1 = 0; if (CountBars&gt;iBars(NULL,TimeFrame) || CountBars&gt;Bars-Length-1) CountBars=MathMin(Bars-Length-1,iBars(NULL,TimeFrame)-Length-1); if (Crash &amp;&amp; CountBars&gt;0){CountBars=CountBars-10; IndicatorShortName("Crash: "+CountBars+" ");} if (Crash &amp;&amp; CountBars&lt;0) IndicatorShortName("Crash"); int i = CountBars; SumVQ[i + 1] = Close[i + 1]; SumVQ_MTF[i + 1] = Close[i + 1]; while (i &gt;= 0) { MH = iMA(NULL,TimeFrame,Length,0,Method,PRICE_HIGH,i); ML = iMA(NULL,TimeFrame,Length,0,Method,PRICE_LOW,i); MO = iMA(NULL,TimeFrame,Length,0,Method,PRICE_OPEN,i); MC = iMA(NULL,TimeFrame,Length,0,Method,PRICE_CLOSE,i); MC1 = iMA(NULL,TimeFrame,Length,0,Method,PRICE_CLOSE,i + Smoothing); if (Steady==true) {MC=iMA(NULL,TimeFrame,Length,0,Method,PRICE_MEDIAN,i); MC1=iMA(NULL,TimeFrame,Length,0,Method,PRICE_MEDIAN,i+Smoothing);} VQ[i] = MathAbs(((MC - MC1) / MathMax(MH - ML,MathMax(MH - MC1,MC1 - ML)) + (MC - MO) / (MH - ML)) * 0.5) * ((MC - MC1 + (MC - MO)) * 0.5); SumVQ[i] = SumVQ[i + 1] + VQ[i]; if (Filter &gt; 0) if (MathAbs(SumVQ[i] - SumVQ[i + 1]) &lt; Filter * Point) SumVQ[i] = SumVQ[i + 1]; if (TimeFrame &gt; Period()) SumVQ_MTF[i] = SumVQ[i]; i--; } if (TimeFrame&gt;Period()) { datetime TimeArray1[]; ArrayCopySeries(TimeArray1,MODE_TIME,Symbol(),TimeFrame); int limit=CountBars+TimeFrame/Period(); for(i=0, int y=0;i&lt;limit;i++) {if (Time[i]&lt;TimeArray1[y]) y++; SumVQ[i]=SumVQ_MTF[y];} } for (i = CountBars; i &gt;= 0; i--) { DIR[i] = DIR[i + 1]; if (SumVQ[i] - SumVQ[i + 1] &gt; 0) DIR[i] = 1; if (SumVQ[i + 1] - SumVQ[i] &gt; 0) DIR[i] = -1; if (Color == true) { if (DIR[i] &gt; 0) { UpBuffer[i] = SumVQ[i]; if (DIR[i + 1] &lt; 0) UpBuffer[i + 1] = SumVQ[i + 1]; DnBuffer[i] = EMPTY_VALUE; } else { if (DIR[i] &lt; 0) { DnBuffer[i] = SumVQ[i]; if (DIR[i + 1] &gt; 0) DnBuffer[i + 1] = SumVQ[i + 1]; UpBuffer[i] = EMPTY_VALUE; } } }
+
+--- 帖子 #40 ---
+So in other words the indicator is just looking to see if all the MAs open,close,high,low and close +1 are moving together the same way... I do NOT code but somethings are just SIMPLE to see.
+
+--- 帖子 #41 ---
+[quote=Dredding82;4887254] I still dont understand why people DO NOT look in the code to see why and how the indicator work...its not using Stoch or CCI...it uses MOVING AVERAGES.........ITs pretty simple.....heres the part of the code for the indicator to see WHY and HOW it works. For those that know nothing about codes iMA...means it calls on the MOVING AVERAGE..if it was stoch it would be istoch, if cci...icci //+------------------------------------------------------------------+ An unnecessary post. Thread owner should look into deleting this post. TF
+
+--- 帖子 #42 ---
+[quote=TradeForexFx;4887283] "Unnecessary post"? Everyone is compairng the indicator to the stoch or cci...when its just simple moving averages...If you want to use an indicator and be PROFITABLE then you need to atleast understand how or why the indicator works...not that it draws a pretty colored line with arrows. My comment was not an attack on this thread or the OP...it was just to inform people of what they are using.
+
+--- 帖子 #43 ---
+Yes. In my experience, one indicator is enough, if we go with multiple indicators, we get confused in the longer run. I have tested 1000's of indicators and it depends upon once trading style and how he uses the indicator properly. If you just trade with VQ....you will be profitable...however, trading style is also important. I will trade live tommaorw and post some of the results. good luck Hi Hugh, You can change the length and the bars would shift, however, the trading would be very choppy, the default value on length is 5, i have changed it to 7. If you use 5, you will see the bar opens ahead or with stochs and CCI. Thanks Good luck for tommaorw, looking forward to your feedback . Start with EURUSD, it depends on your trading style also, it asks for lots of patience and constantly staring at the monitor ..if you can stick for 5 hours on a PC and check the trades..I'm sure...This indicator will bring you profit... Yes. Trade when the volatility is high, else you will be bored to death staring at the monitor and no pips move. generally, Asian session just begining, then london and new york merge times are good... However, that been said...Once you enter a trade, you are pretty much locked and have to wait for the market to move...it could take two minutes or five minutes or 15 minutes before some pips move...I would say in the long term...all times are good...Its trading style that matters ...one has to be really patient in trading intraday..good luck Hi persia, I have personally tested 1000's of combinations of indicators and filters etc in course of five years. The lesson i leared is to Keep it as simple as possible...One indicator is enogh...Its the trading style that matters...Im only using one indicator and nothing else...and concentrating more on my trading style...good luck Thanks for the clarification. As you have coding skills, If you have time, could you change it to an EA...I don't have coding skills, but this indicator has very good profitabiltiy trading manually...Thanks
+
+--- 帖子 #44 ---
+I was tried to use this indi in EA couple of months ago (with combination of many other indis). Its looks good but not perfect. Sometimes it repaint because MTF MAs. When retrace movement will be very strong be careful also. The other name of this indi: Snake trend
+
+--- 帖子 #45 ---
+I don't think anyone was suggesting that the indicator uses stochs or cci in it's calculation but merely comparing the buy or sell signals given by the respective indicators. For my part my point was that if you were using stochastics you would get a signal earlier than the VQ indicator. It's method of calculation is neither here nor there. Spiderforex... Thanks for your reply, I will perhaps watch your indicator a bit longer and see if it complements or exceeds what I am currently using.
+
+--- 帖子 #46 ---
+Another idea that hasn't been discussed in the thread so far is to wait for a signal on the 15 min chart (VQ set at 35 I believe?) and then go to the 1 min and only take trades in the direction of the 15 min trend. Would this not increase the probability even higher? I know you all like the 6sl and 6tp idea but I prefer to use a 10 pips trailing stop until at breakeven and then to just hold the trade open until an opposite signal forms. Even on 1 min charts a good run can be 40 to 80 pips. Obviously the average would be around 15 to 25. Just putting ideas on the table.
+
+--- 帖子 #47 ---
+Thank you very much! I'll start with EURUSD (London Open-NY Open), I'm sure I can stick for at least 5-6 hours and I look forward to trading this M1 system! spiderforex, it is a great system and a great thread, I really appreciate what you're doing here!
+
+--- 帖子 #48 ---
+Some traders prefer histograms. This modification came from one of the Russian forums. Just don't forget: you have to change "Length" to 7 (M1, M5) or to 35 (M15).
+
+--- 帖子 #49 ---
+Hi, I need some help. I downloaded the two indis VQ7 and VQ0.5 (p.4 #48) but nothing happens inside the window on the chart. Anybody can give me any suggestion? Thanks a lot.
+
+--- 帖子 #50 ---
+Peretola, I'm not sure what is wrong, my indicators work just fine. Try to restart your Metatrader and see what happens.
+
+--- 帖子 #51 ---
+I restarted my MT4 but nothing to be done. I instaled the indis into Alpari UK and MT4 (from Metaquotes) and works fine but nothing to do with my broker (XTB). Thanks anyway Favorite. Cheers
+
+--- 帖子 #52 ---
+I see. Peretola, I think it depends on the build you are using for MT4. Mine is 402. It is possible that your Alpari UK and Metaquotes builds are up-to-date, but your broker XTB has the older version. If it's the case you have to get the latest version from your broker. You can check the build of any Metatrader if you go to "Menu"-"Help"-"About". Mine says: "Version:4.00 Build 402 (11 May 2011)"
+
+--- 帖子 #53 ---
+Thanks for the indi..good luck with trading today
+
+--- 帖子 #54 ---
+Try to squeeze the chart with Minus and Plus sign you see on the menu top right...Sometimes due to MT4 built, it does not show up on lower time frame...however, if you squeeze the chart, it shows up..good luck
+
+--- 帖子 #55 ---
+great idea...As i said before..the indicator compliments once trading style...if you have good trading style...this indicator will benefit you a lot... The problem is, if we see a indicator not working to our desires, we abandon it and move to the next indi...the trick is trading style more than indicator in the long run...good luck
+
+--- 帖子 #56 ---
+Guys..If you are using MPTM EA for stop loss and take profit...leave break even pips to false and usse jumping stop loss and trialling stop loss only in 5M chart...it seems to be profitable and catching the whole trend..thanks
+
+--- 帖子 #57 ---
+Is anybody trading this today? I'd be interested to know how you are getting on in a very sideways market.
+
+--- 帖子 #58 ---
+Unfortunately bad results
+
+--- 帖子 #59 ---
+My broker doesn't allow TP and SL less than 10 pips. I discovered it yesterday. I never needed such a small TP/SL before because I never traded M1 before. Too bad... I really like the system.
+
+--- 帖子 #60 ---
+Then try it on m5 or m15
+
+--- 帖子 #61 ---
+Yes, I think I'll try M5 with TP 10 and SL 10.
+
+--- 帖子 #62 ---
+That's a shame, what timeframe, settings, sl and tp were you using?
+
+--- 帖子 #63 ---
+I've been watching today and you may want to try this... Use Heiken Ashi candles and take every trade in every direction with a 20 pip trailing stop loss but close the trade when the first Heiken Ashi candles closes against your trade. If you don't understand any of this ask me. I've just been through AudUsd and it gave 18 pips today in 5 trades. 1 winner, 3 small losers and 1 BE. It may not sound much but the winner was +40 pips and the biggest loser was -12 so good r/r. I'm just checking EurUsd now. GbpUsd and UsdChf just don't trade smoothly enough, they look a lot choppier than the other two.
+
+--- 帖子 #64 ---
+hi Hugh Briss - using other order manager ea's, I'm not very conversant with the MPTM EA - so could you plz post your setfile for the TF M1/M5, M15 ?
+
+--- 帖子 #65 ---
+There was a 54 pip trade just after 8am on eurusd that would have been enough for me thanks. A few little losses and wins for the rest of the day but after a 54 pip gain on the first trade I wouldn't have bothered trading anything else. Eurgbp looks nice and smooth too but the moves are smaller. Of course the gains are similar because the pip value is higher. Anyway, I've seen enough and I'll be trying this out with small positions as from tomorrow on eurusd, audusd and eurgbp. 7am to 5pm (BST). Also the more I look at it the more I am inclined to let the 20 pip trailing stop get me out.
+
+--- 帖子 #66 ---
+Hello, I'm only trading minute 5 and I'm not using that EA, just a simple trailing stop EA which can be found all over the forum.
+
+--- 帖子 #67 ---
+Thank you, using Heiken Ashi for closing sounds interesting, I'll think it over. And about the currencies: I think right now EURUSD is the most attractive dollar-based currency, I wouldn't trade AUDUSD, GBPUSD or USDCHF if I can trade EURUSD. However yen-crosses are different, I think EURJPY and GBPJPY could be a good addition.
+
+--- 帖子 #68 ---
+Maybe but I think yen pairs tend to be too spiky, unpredictable ups and downs. Also gbpjpy has too high a spread.
+
+--- 帖子 #69 ---
+I like yen-crosses because they usually have very good movements. As to spikes, I pay attention: I usually trade GBPJPY when GBPUSD and USDJPY go in the same direction, I usually trade EURJPY when EURUSD and USDJPY go in the same direction. My broker gives me a very good spread, 1 pip for GBPJPY and EURJPY.
+
+--- 帖子 #70 ---
+Fair enough, I'm not sure what difference the direction of the two makes but if it works for you. Seems like a lot to be watching. That's a good spread for gbpjpy, who is your broker and what type of account do you have?
+
+--- 帖子 #71 ---
+It is InvestTechFX, they have 0.5 pips majors and 1.0 pip most other currencies - for any account bigger than $1,000.
+
+--- 帖子 #72 ---
+Hi , Dredding82, What do you mean by i in cci ... i cci, ma... i ma?
+
+--- 帖子 #73 ---
+Yes. Better, go with 5M and set Trailing SL or Jumping SL at 10...no worries, this system is very fexible to our trading style...good luck
+
+--- 帖子 #75 ---
+VQ as a filter for 1hr
+
+--- 帖子 #76 ---
+What button do you press to shoot the space invaders?
+
+--- 帖子 #77 ---
+Proof this indicator does sometimes repaint. Audusd gave a sell signal, indicated by the blue price printed on the chart but the indicator itself no longer shows the short signal. Oh dear, not good.
+
+--- 帖子 #78 ---
+I push what ever button I need to make 218 pips. you? And if this vq indicator slightly repaints. ( by re-paint did you mean after the current bar has closed, the it re-painted the closed bar?) Then why not back it up with other filters? ish
+
+--- 帖子 #79 ---
+Making pips is fine, it's your eyesight I'm concerned for ;-) I'm using other indicators as well thanks but it was stated at the start of the thread that it definitely doesn't repaint and it definitely does.
+
+--- 帖子 #80 ---
+My eye sight is fine. How about yours? How many pips do you see? In my pocket before the night is over?
+
+--- 帖子 #81 ---
+You better not blink! 657 pips
+
+--- 帖子 #82 ---
+It's very hard to tell what's going on looking at that mess but if you're used to using it and it makes you pips then good for you.
+
+--- 帖子 #83 ---
+Yeah it's a hot mess. But me who point was I was thinking that maybe I could use the vq as a filter for me trade taking. but now., Im not so sure. 779 PIPs!
+
+--- 帖子 #84 ---
+This might help, gives great signals rgds peter
+
+--- 帖子 #85 ---
+Hugh, I took a look at the code. If you set "Smoothing" == 0, it will not repaint.
+
+--- 帖子 #86 ---
+Hi Hugh, I can assure you, this indicator never re-paints. What is happening is, we have opted for show signal price = true. If you don't want the signal price to show up simply change signal price=false. Yes. When you watch it constantly, it does appear that signal changes due to show signal price= true, but only confirmed signal appears with a alert. I have been traded this indicator for over a year now. and it never repaints. Good Luck..no worries
+
+--- 帖子 #87 ---
+Great trade! I don't know how you did it though ;-) . Good luck.
+
+--- 帖子 #88 ---
+Hi Ismael, I have also used x'ard777 trading system and the latest one is xps v8. However, its good for 1H or more trading style IMHO. I have tried that also, however, my trading style suits better with 5M and VQ. I agree, if ones wants more filters, confirmation etc, one can use xard777 system...personally, i feel to trade with one single indicator. ====== For those who don't know about xard777, he is a very good trading system maker and programmer in another popular forum.. just google...Trading system by xard777 and you will get all his manual trading systems. thanks
+
+--- 帖子 #89 ---
+Thanks!
+
+--- 帖子 #90 ---
+Ok, I'll give it a try.
+
+--- 帖子 #91 ---
+Ok, thanks, I'll try it out.
+
+--- 帖子 #92 ---
+I cannot post the direct link to his trading system but you would be aware of another popular forum hehehe Just Google Trading system by xard777 and you will get all his latest system xps v8 etc as shown above...however, The below image you see is of Inverse Fisher which repaints, its just for confirmation only.....If you don't get to his system..PM me i will send you the link...good luck
+
+--- 帖子 #93 ---
+Thanks but I wouldn't want to trade anything like that, far too much information. VQ looks better today with a trending market.
+
+--- 帖子 #94 ---
+Sorry Spider Forex. I didn't mean to interfere with this thread. I really do believe the vq can be useful. I use to build all kinds of setups with vq alone. But in the end I learned that I couldn't depend on vq all by its self. I wish I can, becuase it use to be a favorite of mine. So your thread had got my attention. Yeah Xards setups are mainly good for 30m and above. But I am always open to learning on how to take some quick pips on the smaller time frames. I will keep watching this thread in hopes to see how you take your trades. If you can maybe post some charts of your actually trades. Ish
+
+--- 帖子 #95 ---
+Check this out. I'll try the 5m taking trades with a 30m vq. So I got a 5m vq and I will only take the trades that go along witht the 30m vq. I will test tonight and see how it goes. ish http://i1096.photobucket.com/albums/...60/vqmania.jpg
+
+--- 帖子 #96 ---
+I think the stoploss should increased to 10 pips, and we aim for 10pips as well, not sure about increasing stake upon a losing trade as this may become dangerous and bad emotions can wipe out an account.
+
+--- 帖子 #97 ---
+I did suggest a few pages ago to take trades only in the direction of a higher timeframe. I'd be interested to know the result. Thanks for taking the time to try it out. I have been working solid so not much time for proper uninterrupted trading.
+
+--- 帖子 #98 ---
+Hi now I am a litle confused, so do we use this parameters? real itme = false steady = false signal price = false Regards
+
+--- 帖子 #99 ---
+Hey spider - I trade binary options, not sure if you know what those are or not, but this indicator is very very nice for binaries, thanks a lot! I'm trying to find an indicator to go with it to make it more accurate, I'm thinking just trading it only if it gives a pb. Just wanted to say thanks a lot and I love the indicator! I find changing the settings to 3 is a lot nicer then 7.. imo though! With forex I like trading this indicator with 3/6 settings - only trade in the direction of the 6. Have a good one, ill keep checking by!
+
+--- 帖子 #100 ---
+Yes...keep it all false...accept alert and color..good luck
+
+--- 帖子 #101 ---
+Yes...that's the beauty of this indicator...you can change the settings according the underlying pairs etc...good luck
+
+--- 帖子 #102 ---
+spiderforex: howlong have you traded this system, can post some results please. also do you trade vq on its own or do you have another filer???
+
+--- 帖子 #103 ---
+Yeah....Its the trading style that matters, more than indicators...if i take info from many indicators, i get confused..that's my psych.. ,,,i prefer to go with one indicator...I generally trade during the Asian session...I use length 8 for AUDUSD... the attached trading chart below
+
+--- 帖子 #104 ---
+Here are two versions of the EA for VQ...from another forum.....there seems to be some issue with the EA's, In that sometims, the EA, does not open another trade on trend change when the take profit or trailing stop has hit the current trade bar.... Also, the martingale does not seem to work... I have tested it on AUDUSD in alpari nz demo account....if some coder can look at the codes..it would be great.. remember to put the volatility quality indicator attached &gt;&gt; in the indicator folder as well....otherwise the EA wont work...good luck
+
+--- 帖子 #105 ---
+your on more forums than me now! francis.
+
+--- 帖子 #106 ---
+Hello, spiderforex. I want to use your indi, but I have a problem, which was in the beginning of this theme. For example AUDUSD doesn't shows same picture as you get with settings 8,3,1,5. What should I do to fix that problem? Minus sign does not the solution Thanks Attached Image (click to enlarge)
+
+--- 帖子 #107 ---
+Hi spiderforex Try this one...maybe Make sure your indy is called VQ and no VQ7. You can also use the EA to trigger the trade ( it works well ) and manage with another EA attached. This EA allows to take 50 % profit after 7 pips for example and to use trailing stop for 50% remaining.
+
+--- 帖子 #108 ---
+Hi ismael360 , What is the other indi you have in the VQ window? Thanks.
+
+--- 帖子 #109 ---
+Yes. It seems in some mt4 brokers terminal, even with minus sign it refuses to show up...not sure why You can use alpari demo account, it works there and make trade in live account...mostly it happens in live trading terminal not in demo terminal....May be the broker ticks have some effect not sure... Try with alpari demo ...good luck
+
+--- 帖子 #110 ---
+Thanks a lot madscalp...I will check it out ...
+
+--- 帖子 #111 ---
+Now using the Alpari demo, the indi works fine. Thank You
+
+--- 帖子 #112 ---
+I think there is a bug in the TrailingStopWithPartialClose with option 1 (trailing immediatly). It works properly for buy and no for sell. If a coder could check that ....
+
+--- 帖子 #113 ---
+ya..i had the same issue, also with opening and closing of trades in one bar on some charts, also martingale seems to not work...thanks
+
+--- 帖子 #114 ---
+so how do people trade this indicator??? as mentioned earlier 6pip stop loss that doesnt work. martingale doesnt work, if we trade every signal, then we may have the chance of catching the big move however the fake signals need filtering. (i still like this indictor as it doesnt repaint)
+
+--- 帖子 #115 ---
+please answer viperone39's question in post 108. Thank you.
+
+--- 帖子 #116 ---
+Ismael said it was a 30m VQ. However, the VQ on my charts do not look like his or like those of the thread originator......., I can't understand reason why even though I tried similar and several other settings.
+
+--- 帖子 #117 ---
+Hey guys. spiderforex asked me to code an EA for this system. Find it at http://www.forexfactory.com/showthre...84#post4936684 Please sing out there if the details are not quite correct. All I did was read spiderforex's pm and the first post in this thread, so I am no expert.
+
+--- 帖子 #118 ---
+adding the vq35 to any charts only gives me a blank window!? the vq7 is working fine. Can anybody help please edit: ok, here is what I`ve found out: the VQ7 indicator only works for me on m15 and above the VQ35 only works on H4 and above. below that timeframes it gives me a black window. But, if i scroll back two days or so, i can the the indicator. so it stops at a time and does not show me the actual data if i choose a higher timefrage. Why is that? Can anybody help me with that?
+
+--- 帖子 #119 ---
+well... all i can show you is that image.... i tried all i can... i squeezed the chart to the last point... but still no indi in m1 and m5 chart!!! Yes it appears in m15 and more... but what to do with m1 and m5 ??? i want steve to look at the code of this indi. i think you can solve this problem. and if anyone using the EA steve coded please show your result. i am looking for a reliable and safe EA to use as my family fixed deposit! thanks kader http://i.imgur.com/TEgAy.gif
+
+--- 帖子 #120 ---
+Hello spider and before all, thanks for sharing your system along with indicators. I've been reading this thread and many doubts came to my mind. You said that this system will provide a 90% accuracy. Well I don't know nothing with a proven more then 70% accuracy. Of course if we do things like 50 pip SL for a 10 pip TP we can get that accuracy but i think u are talking of a 1:1 RR ratio so my doubts stand still. Can u detail please what are your targets and your stops in each trade? More, u said that if one trade is stopped we can double the next. Well I'm pretty sure that if i had such a 90% accuracy system I could do that. BUT, in my testings, and i test all the entry's of a few days, u can easily have 4 losses in a row... so something is not well explained here. Thanks in advance for your answers. Regards and best to your trading. PH
+
+--- 帖子 #121 ---
+thanks spider for what you have share... can you give some detail for the 15m chart, i backtest with no TP and no SL. just use the change of the color from buy to sell to buy... and i saw that much have loss when it don't trending. can you give me advice, how to have much win rate? do you have any filter for the situation that i back test (no tp, no sl, just buy when green and sell when red) ??? i'm nubie and still don't understand how to using EA, if you don't mind. plz share in detail how to trade in 5m or 15m which can have win ratio bigger than the loss thanks bro
+
+--- 帖子 #122 ---
+Dear spiderforex, I have been following Steve Spider and this thread. Having read more carefully what you wrote in the first post, I discovered that you suggested raising the number of lots linearly , instead of doubling them as in a "normal" martingale. However, I'm not too sure how to use this "semi-martingale". Note that Steve's spider EA: Is based on normal martingale, where the lots are doubled each time until a winning trade happens. Does not attempt to perform jumping stop, etc, but exit at a fixed 1:1 target when in martingale phase. Even in applying the "semi-martingale" approach, I would also like to reduce the number of consecutive losing trades, so that I would have confidence in applying the approach. Here are my enquiries (assuming EURUSD 5min on VQ 7): Let's say we are on semi-martingale and we placed 4 lots for the 4th trade. If the 4th trade hits 1:1 target, I will still not breakeven, because prior to this, there are 3 consecutive losing trades which lost a size of (1+2+3= 6) lots. So the question is do we exit at 1:1 target or still continue to apply BE, jump stop etc, for martingale trades? Since in either case (whether using 1:1 target or other forms of trade managament), using "semi-martingale" may not breakeven with the losing trades, do we go back to 1 lot after the winning trade, or continue using 4 lots until breakeven? In reducing the number of consecutive losing trades to 4 or 5, May I know your trading time? Do you enter based on stop orders after the VQ signals or based on market? What is your stoploss, and BE point? I suppose you use jumping stop, so there is no target set? When you are not using Steve EA to trade, do you use discretion to decide that the market is congesting, and therefore, you do not take the signal? I have taken a look at 5mins and there is a good chance that the number of consecutive losing trades could be greater than usual, when it is a long drawn congestion. Since you have traded using just this indicator by itself, I try not to add more filters. So I ask those questions above in order to understand the thinking. Thanks for your advice and sharing!
+
+--- 帖子 #123 ---
+well dear spider.... thanks for introducing us with this nice indicator. well i am using it in m15 and the settings 5 3 1 5. i have been demoing for last 1 month. 15% account up. what are the best combinations have you found yet for this indicator ? i mean best time frame with settings ? thanks kader
+
+--- 帖子 #124 ---
+Has anyone tried the Spiderforex system in Renko Charts? just an idea, because to many noise are avoided in this kind of charts, potentializing VQ. Could also be a good filter. Hope hear comments.
+
+--- 帖子 #125 ---
+Jusjur. Would you please share the Rengo settings or any recommendations? Thanks
+
+--- 帖子 #126 ---
+Nothing special, just we need to play with it (brick sizes) and VQ leng, to find the best approach. For now Box 5 and 13, VQ 8. Spider advise me that the high the leng the best (15-35). Lets wait until Sp come back to town . . . Keep in touch with renko_VQ pd. Do you like this 13 Renko chart with 8VQ Bars?
+
+--- 帖子 #127 ---
+Hi could you post this temple and indi, as this is very good modification of xard777 system which I currently using (so maybe the temple will be enought). Thank you.
+
+--- 帖子 #128 ---
+Hi, I have some knowledge about MQL4 and I have looked at the code of EAs posted in thread to gain some knowledge about how to use this VQ indicator in an EA. I think I still do not understand what values does the indicator output. For example moving average gives you the numeric value of the MA at that time and you can use the value of the MA relatic=ve to other MA or to the price value. I would appreciate if someone can explain how to read/use the output from this indicator in an EA. Thanks.
+
+--- 帖子 #129 ---
+Hi, I tried to use simple spider no my GoMarkets MT4 but I got error that stop loss is not correct (error 130). Can anybody help me to get this done, please. m
+
+--- 帖子 #130 ---
+I created this simple VQ EA because the ones I kept finding never did what they were supposed to or were way to slow in strategy tester. The VQEA2 posts trades when arrows change. It does this continuously, never missing a trend change. The EA also has a Break Even function. This EA has lots of potential for anyone wishing to implement their trading strategy into it. It also was built using the very simple to use MACD sample EA template. I hope this can help someone.
+
+--- 帖子 #131 ---
+Thanks for taking your time to build this, i have also tested few ea's made out of this indicator but got mixed results (not trading according to rules). I will test and post my findings
+
+--- 帖子 #132 ---
+The EA doesn't appear to be trading with VQ, its looking for 'HeikenAshiSmoothed2' indicator
+
+--- 帖子 #133 ---
+The EA trades only with VQ. It places orders based upon arrow change. The heiken ashi smoothed code is not referenced beyond the variables section in the code. It is therefore just there for reference. This EA is a starter EA. I would not recommend using the VQ indicator alone. You can alter VQ by changing its length, method, smoothing and filter inputs to your specifications. I have attached below the EA without Heiken Ashi smoothed code to prevent confusion. This EA currently uses a 30,5,4,3 input setting for VQ.
+
+--- 帖子 #134 ---
+Ok thanks Otis, this one works in StrategyTester the previous one you posted was looking for HeikenAshi
+
+--- 帖子 #135 ---
+hi, can you help me? do you know an indicator to binary options?
+
+--- 帖子 #136 ---
+Kindly provide me the Indicators used in your Chart with TPL Thanks &amp; Regards
+
+--- 帖子 #137 ---
+Hi all, I am not sure if anyone would be reading this thread. I have tried to decipher few EAs posted in threads since I am trying to incorporate VQ indicator in my EA. But I am not clear how to read the output from the VQ indi? Here are icustom calls used in an EA: iCustom(NULL,0,"VQ",PRICE_CLOSE,0,30,5,4,3, 3, 1); iCustom(NULL,0,"VQ",PRICE_CLOSE,0,30,5,4,3, 4, 1); What is difference in #3 and #4 highlighted in the above icustom calls. Can someone please give me a tip on how the double value obtained by VQ icustom call is interpreted? Thanks.
+
+--- 帖子 #138 ---
+Suggest that you look at the syntex of the iCustom call in the MQL4 Reference Manual. You can find the MQL Documentation by doing a web search from your search engine. You will find the iCustom call under "Terchnical Indicators". Each MQL indicator provides 8 index regesters that can be populated in the indicator code. If you open the MT4 "Data Window" and scroll down to the VQ Window, you will see the values in the index registers for VQ. Index registers are numbered 0 through 7. So what you see in the data window as "Value 3" is really index register 2. You want to deduce the meaning of the values in index registers 3 and 4, since these are the registers that you have highlighted in the iCustom calls. If you mouse over to an up-arrow in the VQ window, you will see that a value appears in index register 3. If you mouse over to a down-arrow in the VQ window, you will see that a value appears in register 4. Additionally, you can open the VQ parameter box and pull down the "Colors" tab. You will see that an up arrow is the same color as the color for register 3, and a down-arrow is the same color as the color for register 4. So there you have it. In the EA code that you are looking at, when index register 3 is not equal to the EMPTY_VALUE, you have a VQ up-arrow. When index register 4 != EMPTY_VALUE, you have a VQ down-arrow. Hope this explanation helps.
+
+--- 帖子 #139 ---
+I was not sure if anyone would be replying to my post. Your response is just what I needed to know. Thanks for helping me out.
+
+--- 帖子 #140 ---
+Hi all, I do like this VQ7 indi and have been using it for a while,it's always the first indi I put on a chart. I was wondering if someone could modify the indi so that it shows multi timeframes and does not need refreshing ? What I would ideally be looking for is the indi as an ea printing an arrow on the chart red/green when multiple,selectable timframes match up. For instance A VQ7 (length 7) on the following timeframes Daily/4hr/1hr/30m/15m/5m/1m all show down, it would print a red arrow and green for up I have tried using multiple versions but it takes up too much room and needs refreshing hence the ea idea.The ea would not trade just print the arrows,a popup elert/email would also be cool. There should be an option to select/deselt any timeframes. Anyone fancy the challenge?
+
+--- 帖子 #141 ---
+Here you go Dude.
+
+--- 帖子 #142 ---
+Thanks profitmoni but it's not quite what i'm looking for I would like a multiple TF version printing arrows on the chart when the signals from all the selected TF's match Thanks anyway
+
+--- 帖子 #143 ---
+Nice Indi. Could you make it work for the lower TF's also. So that in example the M15-line appears in the H4-Chart? Thanks for any idea. greeds Zack
+
+--- 帖子 #144 ---
+There is already the option for the TF ,if you leave the TF option at 0 it will apply to the current TF of the chart otherwise you can enter any TF you wish 240m on the 15m chart for example. Anyone able to modify the indi as my request above?
+
+--- 帖子 #145 ---
+Thanks for your answer. But that's not I want as I have mentioned it in my post. What I want is the lower TF to be shown in the higher TF. So I mean the opposite of what you have posted. I.E.: The M15 should be shown in the H4 . And not the H4 in the M15. And the Indi has not the possibility to show that. Thanks again for any help and progress regarding this. Greeds Zack
+
+--- 帖子 #146 ---
+hi,it's very hard to show lower TF in higher TF cause some coding issuses. for example,you will have two or three or more different values for one bar in high TF and which one will u take?If you take the newest one the indi will repaint and hard to code. And what's the meaning to do so?I mean if you can see everything in M15 why you care about H4?Do you need some indi that is not MTF?If so,PM me and I can help you to code the MTF xxx. Hanxiong M.
+
+--- 帖子 #147 ---
+You should know this is not possible. Really, you should...
+
+--- 帖子 #148 ---
+Hi everyone, I'd like to know if someone has tested this indi VQ7 in 1h Time Frame ? If so, Could someone tell me what are the optimal settings he has tested . Thanks in advance.
+
+--- 帖子 #149 ---
+I,m curious about the same thing too..it.s been nearly 3months, unanswered Anybody ever done a research for VQ Indy on H1 TF ?
+
+--- 帖子 #150 ---
+The way I set it up is to have 4 instances on the same chart ,has to be the 5 min chart (shows higher timeframes on a lower timeframe but not the other way round) so I have a 5 min -15 m 1 hour and 4 hour and when all 4 line up you have a strong trend across the board I use the VQZZ2 which shows as coloured bars
+
+--- 帖子 #151 ---
+When set to "RealTime = false" the indicator line doesn´t refresh anymore.... and I keep missing the entry points... How do you guys handle this matter?
+
+--- 帖子 #152 ---
+Hello guys.Why any of this EA which you put here dont work and dont test ...or even if test blown account VQ settings all like you put...this system is good but for a day trading its very unstable...only EA can trade good on VPS Please anybody help me and I can share with you part of my profits
+
+--- 帖子 #153 ---
+dear traders and coders pls upload best template and tf good pairs thank you advance
+
+--- 帖子 #154 ---
+Dear Ismael 360 the system u show is very good an is like what i am look for can you please send me the complete system i e the zip.Thaks in Advance.
+
+--- 帖子 #155 ---
+Hello, I am not able to use this indicator. Do we have any setting which needs to be changed. I downloaded the indicator and attached MQL4/Indicator, but when i tried to add the indicator to my chart. I am not able to see it. Attachment
+
+--- 帖子 #156 ---
+The indicator deos not work on The last mt4 platform, it would be nice if someone is able to adapt it to The last mt4 Thanks
+
+--- 帖子 #157 ---
+[Quote = bypasssbo; 8381184] L'indicatore deos non funzionano sull'ultima piattaforma MT4, sarebbe bello se qualcuno è in grado di adattarlo alle ultime MT4 Grazie [/ quote] THANK YOU
+
+--- 帖子 #158 ---
+@ Steve: I love the VQ indicator and also the Trade Manager by you Steve. But I have a question about the Trade Manager that I am testing at the moment. I noticed that when Basket Trades is put to true (and a dollar amount profit is set for example to 5 usd) that it closes ALL my trades, even from other EA's. And that is NOT what I want. I would like it to ONLY close the EA's with the magic number of 12345 for example. I open all the VQ EA traes on other currencies with this MagicNo in the settings as well. With my other Ea's I use other Magic Numbers. So the Basket Trades would need additional settings, such as what baskets to close (MagicNumber, All Currencies of current chart, All same comment trades, All trades even from other EA's (if wanted), etc). Can that be implemented by you, Steve? That would be awesome. I just LOVE this EA and I am amazed at what it all can do. So my compliments and thanks for that. If you could improve it with my wish, that would be even greater. Keep up the good work! May the pips be with you! John
+
+--- 帖子 #159 ---
+Subs. Thanks and Regards
+
+--- 帖子 #160 ---
+started using this indicator in lower tf .. very good in momentum stocks
+
+--- 帖子 #57 ---
+I have the same problem....indicator (vq 35 and 7) will not load to the charts....
+
+--- 帖子 #58 ---
+it works for me i just inputted 7 only as i scalp in 5 minutes timeframe
+
+--- 帖子 #59 ---
+same for me, dont work.
+
+--- 帖子 #60 ---
+have the same problem too
+
+--- 帖子 #61 ---
+I don't know how I got here, I downloaded the indies and they didn't load, i adjusted tem and now they compile and load, good luck
+
+--- 帖子 #62 ---
+Thank you very much !!!
+
+--- 帖子 #63 ---
+Hello, Does anyone here have a VQ EA that only opens trades long short without closing the opposite direction trade. Just opens trades non stop at every signal? Thank you
+
+
+===== 附件下载链接 =====
+
+未找到附件

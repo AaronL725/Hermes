@@ -1,0 +1,945 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+HI Guys, I hope you will like my EA and help me improve it. This EA is an auto-trading program designed to take multiple trades per pair if the conditions are met based on the guiding strategy below. Strategy: Use Larger Time Frames to determine if conditions are “Buy Ready” or “Sell Ready”. Decisions on Large Time Frames are guided by MACD and RSI. Use Smaller Time Frames to determine if trades are “Buy Ready” or “Sell Ready” and execute trades based on TMA and EMA (based on NanningBob's 6.0 strategy). Buy Criteria: Buy Ready1: If MACD is below zero and Current MACD is less than Signal MACD and Previous MACD is greater than Previous Signal MACD. Buy Ready2: If Bid is less than Small Time Frame TMA buy line and Small Time Frame EMA. Buy Signal: If BuyReady1 is true and BuyReady2 is true and Bid is greater than Small Time Frame TMA &amp; EMA. Sell Criteria: Sell Ready1: If MACD is above zero and Current MACD is greater than Signal MACD and Previous MACD is less than Previous Signal MACD. Sell Ready2: If Ask is greater than Small Time Frame TMA buy line and Small Time Frame EMA. Sell Signal: If SellReady1 is true and SellReady2 is true and Ask is less than Small Time Frame TMA &amp; EMA. TP &amp; SL There a multiple ways to manage exits. There are ATR based TP and SL. Jump stops, breakeven stops and trailing stops, all that also have ATR based parameters if desired. This program will close all Buys when the first Sell Ready1 Signal is given and vice versa. Most of the parameters are pretty standard. These parameters might need more explanation. MaxTrades = 50 - number of buys or sells allowed to open. This EA only trades in 1 direction at a time Buy or Sell. I would allow multiple trades - makes the bot more profitable, but all depends on your account size and lot size. TradeLotMult = 10 - Will increase Lot size every 10 trades. Watch how this works in back testing and forward testing. First 10 trades, lotsize = 1*0.01 = .01, next 10 trades 11-20, lotsize = 2*0.01 = .02 etc. Play with this in your testing. SetBuyReady1 = false - At start up if you think BuyReady1 conditions have been met, you can set this to true and it will look for BuyReady2 condtions. SetSellReady1 = false At start up if you think SellReady1 conditions have been met, you can set this to true and it will look for SellReady2 condtions. LargeTimeFrame = 60 - 1H, use what works for you. 4H would be 240, D1 would be 1440. I use 60 for 60 minutes SmallTimeFrame = 5 - 5M, use what works for you, just make it is lower than the LargeTimeFrame. I use 5 for 5 minutes. Buys_Below_Zero_Only = true - Only will perform Buys when MACD is below zero - safer more conservative approach Sells_Above_Zero_Only = true - Only will perform Sells when MACD is above zero - safer more conservative approach Use_RSIFilter = true - Only performs Buys if RSI is above zero - safer more conservative approach; Only performs Sells if RSI is below zero - safer more conservative approach; My Settings are the defaults, but I'm looking at Optimizing the MACD, RSI, and ATR profit and stop losses in the future. This is basically it. Please feel free to ask any questions. I will try to answer. I'm attaching the EA, my template, TMA Centered indicator and a picture of a 1H chart and 5M chart for GBPJPY. My day time job is mainframe programming. I bought a book on EA writing and have used that with many ideas from the group here at FF - so thanks to all of you. TallCoolOne NEW STUFF. I have created a small time frame template with the TMA and buy and sell MA. You will need the MARI EA V3.0 to work with this template. Coding changes were required. You can still use MARI EA V2.0 on the mari tpl and the your trading will be the same. The smaller time frame template and new EA allow you to see the trades execute because of the TMA &amp; MA criteria.
+
+--- 帖子 #2 ---
+Thanks for the sistem. What are your results?
+
+--- 帖子 #3 ---
+Hi Marcuss, none, I just started testing it. But I see what it is capable in backtesting. I think it has a lot of potential. I'm thinking about putting it on a cent account with RobotForex and just let it go. I'm starting to optimize pairs, but I think the default settings will work good. I'm using Trailing Stop of 20/10. It grabs the profit for alot of trades. I just need others to help with testing and improving the bot. Thanks &amp; good luck.
+
+--- 帖子 #4 ---
+Cheers TallCoolOne I have been trading manually based on the same macd rules but on 1 min chart usually going for 5 pip tp. I have then used NB's recovert for any trades that go wrong. I have used 4hr rsi simply to help me gauge were the market was going. I will set this up on demo - I have tried backtesting but cant get it to work. Paul
+
+--- 帖子 #5 ---
+Hi Paul, Hmmm..not sure why it won't work on backtesting. I have been getting it work fine on all my backtesting so far. I did leave some print statements in there so you can look at the journal and see if you are getting some BuyReady1 or SellReady2 flags set. You may want to put more prints in the diagnose the problem if you are comfortable with that. Thanks.
+
+--- 帖子 #6 ---
+Hi Paul, Set CheckOncePerBar = false when backtesting. This should give better results. Also use tickdata. I hope that helps. Thanks!
+
+--- 帖子 #7 ---
+Hi Guys, Correction in post one. I found a small bug. Thanks!
+
+--- 帖子 #8 ---
+Congrats on the bouncing baby EA! Will be following with interest. Thank you!
+
+--- 帖子 #9 ---
+Thanks for sharing the EA. It does seem to me that the HUD is disappearing when there is a pip movement. Then reappearing when there is no market movement, then disappearing again etc.
+
+--- 帖子 #10 ---
+Do you attach EA to the larger or smaller TF? Thanks
+
+--- 帖子 #11 ---
+To the larger TF.
+
+--- 帖子 #12 ---
+I have your EA running on my live IBFX account. Received two signals for GBP/JPY pair that band had been penetrated to the downside. Why didn't the EA trade that information?
+
+--- 帖子 #13 ---
+Reminds me of Christmas trees and lights, blinking on and off.......
+
+--- 帖子 #14 ---
+Hi Guys, Please download the EA and TMA CENTERED MARI.ind from the 1st post. This should clear up the blinking HUD and the alerts from the TMA indicator. The indicator would send alerts eventhough the BuyReady1 or SellReady1 conditions were not met. This was confusing. Thanks for the feed back.
+
+--- 帖子 #15 ---
+Hi TallCoolOne, I read your system with great interest and I believe it will work very well. Could you help me with how did the 5 min trade trigger the signals?
+
+--- 帖子 #16 ---
+The STF trigger is based on the TMA and EMA. If you do a search on NanningBobs 6.0 system which is in the 5.0 thread, you will see it outlined. When the price dips below the buy line for the TMA and EMA it is ready to buy, when the price goes about the TMA buy line and EMA the buy is triggered. Vice Versa for the Sell. If you look at the Charts zip that attached in post one you will see what the 5 minute chart would have looked like at the same time the 1 hour chart was happening for GBPJPY. The three lines on the chart are the TMA indicator. I hope this helps. Thanks!
+
+--- 帖子 #17 ---
+How often will the EA trade on average?
+
+--- 帖子 #18 ---
+May I know what are the currency pairs we can test this EA on? I am currently attaching it to EURUSD and GBPJPY. Stay tune. Ian
+
+--- 帖子 #19 ---
+You can try testing on any pairs. I'm currently testing on AUDJPY, AUDUSD, CADJPY, CHFJPY, EURCHF, EURGBP, EURJPY, EURUSD, GBPCHF, GBPJPY, GBPUSD, NZDJPY, NZDUSD, USDCAD, USDCHF, USDJPY. Thanks!
+
+--- 帖子 #20 ---
+If you open up Max trades a lot, you could get 10-50 trades a day, trading 10+ pairs.
+
+--- 帖子 #21 ---
+I realized I have to set manually SetBuyReady1=true/false and SetSellReady1=true/false. So we have to do this all the time by looking at the MACD?
+
+--- 帖子 #22 ---
+No,I would set them to false. The program will set the BuyReady1 and SellReady1 automatically for you. These parameters are for you to use, if you don't want to wait for the program to set the flags. Maybe you look at the chart when you first attach the EA to the chart and you notice that the BuyReady1 conditions would have been met a few bars ago. Then you can manually set the flag to true and the program will start looking for BuyReady2 conditions. This is just a way to start trading right away if you think conditions are right. I would leave them at false if you have any doubt about current trading conditions. The program will automatically figure out the trading conditions. I hope that helps. Please let me know if you need any further clarification. Thanks!
+
+--- 帖子 #23 ---
+Hi all, i tried backtesting 01/01/2010 -&gt; now, with EUR/USD 1H, changing only SL and TP 100 and lots to 0.1 (in Alpari UK can't use 0.01) There are problems with OrderModify : 2010.11.17 21:45:14 2010.02.10 08:37 MARI_EA V1.0 EURUSD,H1: Bid: 1.3778 Ticket: 65 Stop: 1.3768 Trail: 1.3768 2010.11.17 21:45:14 2010.02.10 08:37 MARI_EA V1.0 EURUSD,H1: Alert: Buy Trailing Stop - Error 1: no error 2010.11.17 21:45:14 2010.02.10 08:37 MARI_EA V1.0 EURUSD,H1: OrderModify error 1 So i don't know if i can use backtesting. Bye
+
+--- 帖子 #24 ---
+hey tallcoolone,what for a book do you bought? i know only the free mql4.com book. thanks, derox
+
+--- 帖子 #25 ---
+hi, not sure why you are getting this error in backtesting. I didn't have this issue during my back test.
+
+--- 帖子 #26 ---
+Hi Derox, the book is called Expert Advisor Programming, written by Andrew Young.
+
+--- 帖子 #27 ---
+I am relatively new to Forex. I have been demo trading for a couple of years. I am interested in MARI .. How the heck do I install and run it?
+
+--- 帖子 #28 ---
+Backtesting gave the same errors on my Alpari demo as EK24. Loaded it on a EURUSD 1hr chart and let it run this night. Let's see what happens. I like the idea! @rfarris: search on you tube "how to load an Expert Adviser" or install instead of load. Or search on this forum.... The "Mari EA" goes in the expert-folder of your broker, the "tma centered mari" goes in expert/indicators. Template goes in /templetes of your brokers folder. Restart MT4, open an 1hr chart, load the mari templete. That should do the trick.
+
+--- 帖子 #29 ---
+Hi TCO, Thanks for the EA. I love trying new ones out. I hope you'll forgive my ignorance though, but I can't get it to backtest. Could you please iterate a step by step setup? Thanks in advance
+
+--- 帖子 #30 ---
+1. Decide what pair you want to back test. 2. Go to TOOLS/HISTORY CENTER - this should bring up a list of all the pairs 3. Double click on the pair you want to test - this should list all the time frames 4. Double click on 1 minute - then press the download button - this will load one minute data for that pair. 5. When the progress bar has completed..hit the download button again and this will ask you if you want to recalculate all the timeframes - yes you do. 6. Now you will have all the data you need to back test. 7. Now press the magnifying glass icon at the top - this will bring up strategy tester 8. Under Expert Advisor - Select Mari 9. Under Symbol - Select the pair you just download data for. 10. Under Period - Select your large time frame - i would use 1H....but you can test other ones. 11. Click the Use Date box and select a range of testing dates....i have been testing with 1/1/2009 to present. 12. Under Model - select tick data 13. Go to the Expert Properties button at the right and click it. 14. This will bring up all the external parameters that you can set for the EA, I would keep everything default except, change the CheckOncePerBar to false and you might want to set Use_RSIFilter to false. 15. Then press start 16. If you check the journals tab - you will see some displays of some of the internal variables of the program. 17. The results and graph tab will show you how the EA is performing. 18. When the testing has completed. check the Report tab. This will give your some statistics of how the EA performed. I hope this helps.
+
+--- 帖子 #31 ---
+Tallcoolone, can you post 5min template, that naningbot thread is monster to figured out. Thank you in advance
+
+--- 帖子 #32 ---
+No trades done for EURUSD and GBPJPY for the whole GMT 17-Nov. Is this normal? Ian
+
+--- 帖子 #33 ---
+hi Altoronto, go the the nanningbob thread and click on the attachments paperclip in the corner. nanningbob has posted a template for the TMA. I think it is basic 6.0 template for something like that. Just attach that to a 5 minute chart and you will see basically what my program is looking at. If some could figure out how to put the 5 min TMA on the 1 hour chart. That would be great. Thanks!
+
+--- 帖子 #34 ---
+Hi, it is hard to say. I have had some trades on both those pairs. Does it look like the trading conditions are right for a ReadyBuy1 or ReadySell1? The HUD should also tell you if those indicators have been set or not. The HUD will also tell you if the ReadyBuy2 and ReadySell2 conditons have been met. Hopefully you are not trying this on a live account but testing it on a demo account. If you are testing it on a demo account, load up with more than 2 pairs and see what pairs are working well with this strategy - just my 2 cents.
+
+--- 帖子 #35 ---
+Hi, here is a template for the 5 minute chart. It looks like it is lining up with where my tradies occur.
+
+--- 帖子 #36 ---
+I have had this running now for 1 1/2 days on GBPJPY demo account and have not had any trades either. Is there something maybe in the parameters that we have to switch on or off?
+
+--- 帖子 #37 ---
+Thank you TallCoolOne for 5 min. template. Have a question, on 5min. screenshot you show us yellow lines buy/sell points (possible sell/buy trade decisions), is that from EA or indicator if so can you provide it? Thank you in advance
+
+--- 帖子 #38 ---
+No,that was just be demonstrating where the EA would possible take trades. The yellow &amp; green lines were put in there by me using Paint.
+
+--- 帖子 #39 ---
+Not sure. You could try turning off the conservative settings and see if you get any trades kicked off. The EA button at the top is green? You have a smiley face in the corner correct? Also try some other pairs, let see if you get any trades at all.
+
+--- 帖子 #40 ---
+Hi all, anyone gets this error while backtesting? 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: Alert: Sell Trailing Stop - Error 1: no error 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: OrderModify error 1 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: Ask: 1.3808 Ticket: 349 Stop: 1.3818 Trail: 1.3818 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: Alert: Sell Trailing Stop - Error 1: no error 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: OrderModify error 1 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: modify #350 sell 0.10 EURUSD at 1.38382 sl: 1.38176 tp: 1.37382 ok
+
+--- 帖子 #41 ---
+So is this essentially just V6 of Nanningbob automated robot? You might want to take a look in the original V5 thread. Maxou has been doing some amazing development with it that I think you could also try implementing in this.
+
+--- 帖子 #42 ---
+I have been through the whole tread. My EA is alittle differrent. I have tried Maxou program also. Thanks!
+
+--- 帖子 #43 ---
+on 28 pairs, FXopen, 4 digit non-ECN, Standard-Demo for 30 minutes. No trades. A great deal of blinking. Can Strat tester be used effectively on MTF EAs?
+
+--- 帖子 #44 ---
+Hi All Broker is FXDD The account is a a demo account. Are there some parameters which we will need to set? Currency Pairs which I am testing on EURUSD, USDJPY, USDCAD, GBPUSD, USDCHF, GBPJPY. Regards Ian
+
+--- 帖子 #45 ---
+Hi Guys, I thought I would start posting my results from my demo account. This is just one day of trades, $63+.
+
+--- 帖子 #46 ---
+Hi Ian, You can go with default. It will trade pretty conservatively. I have turned off the RSI filter. I attached my results in previous post.
+
+--- 帖子 #47 ---
+I`m impressed with your results, with only 0.01 lots. Seems like it has real potential, and using higher lots, the sky`s the limit(for now). However doesn`t seem it trades on my account. Any chance you can post your set file to see if it makes a difference?
+
+--- 帖子 #48 ---
+Hi Tommy, I'm sorry it doesn't seem to be kicking off trades. I'm getting a lot. Here is the set file. I hope this helps.
+
+--- 帖子 #49 ---
+Thanks. I`ll check the settings vs those I have. I`ll let you know how it goes.
+
+--- 帖子 #50 ---
+Took a look at your results. If you're looking at the 4H TF to get the direction movement, shouldn't you let your trades run? All trades will range for a bit but it seems like you're stopping out on more potential profits if you let it run.
+
+--- 帖子 #51 ---
+I don't know..pretty hard to argue with $63 in 24 hour period mainly with .01 lot size. How greedy are we going to get.
+
+--- 帖子 #52 ---
+Do you need to change the magic number for each pair?
+
+--- 帖子 #53 ---
+No that shouldn't be required. Only if you running another EA.
+
+--- 帖子 #54 ---
+Do you have a list of the pairs you are using?
+
+--- 帖子 #55 ---
+Read the thread i have them listed. Thanks!
+
+--- 帖子 #56 ---
+is it normal for the EA to open many orders at once. I get lots of multiple pair orders couple minutes apart, I think this G/U has 26 EDIT: maybe I should change MaxTrades = 2; instead of 50
+
+--- 帖子 #57 ---
+Sorry, I missed it! Thanks for your support!
+
+--- 帖子 #58 ---
+It probably needs a sleep after trade condition. It's not greedy when your biggest win trade is a little over 40 pips and your biggest floating loss is 170 pips. When I used to trade 4H GY exclusively I usually targetted about 70-80 pips for TP with a hard 60pips SL. For pairs not as volatile it would obviously be less than that. Just saying it doesn't make much sense to look at a 4H for direction and prematurely close out a trade after a 10pip profit when it could possibly run for much more.
+
+--- 帖子 #59 ---
+It makes sense for you to trade the way you want to trade and for me to trade the way I want to trade. Thanks for your help. But i'm happy with my current settings.
+
+--- 帖子 #60 ---
+Hey TallCoolOne, My broker is GFT and I am running their DealBook trading platform. I cannot find the folders that I was told to install the MARI files. Will MARI work on this platform? Thanks
+
+--- 帖子 #61 ---
+Hi, you will need MT4 to use this program. Thanks!
+
+--- 帖子 #62 ---
+fxopen has 28 pairs? Impressive.
+
+--- 帖子 #63 ---
+Here are my testings results: Total Open Trades = 5 Total Pips in Open Trades = -1060 All the trades are related to GBPJPY. Next week, I will load up the set file I spotted here and see how it goes.
+
+--- 帖子 #64 ---
+Nice....hope it goes well. Thanks!
+
+--- 帖子 #65 ---
+I don't wish to sound clueless here, but where do I find MT4?
+
+--- 帖子 #66 ---
+MT4 is a forex trading platform. GFT is using dealbook and not MT4. Try FXPro : http://downloads.fxpro.com/mt4
+
+--- 帖子 #67 ---
+Hi there, Looks good from the outset. I have a couple questions.. Is there a way to turn TradeLotMult OFF? For whatever reason, this ea takes a very long time to backtest. From I have seen of it has led me to believe that it would be very worthwhile to forwardtest. With US leverage limited to 50-1, I prefer to increase lot size manually. So, I have set TradeLotMult = 0. It appears as if this does the trick. I just wanted to confirm. So, I am testing it on a demo account with 14 of the 15 pairs available to me that you have listed. Of those 15 pairs, have you found any that are not profitable and can be disregarded? ScottyB
+
+--- 帖子 #68 ---
+Hi TallCoolOne, I like your system of referencing higher 1H timeframe for MACD direction before we zoom into the 5min chart for entry. I was trying to manual trade on the 5mins but the TMA Centered MARI indicator which you have shared with us seems to have a tendancy to repaint. Is this how the indicator should work? I was thinking of along the line of opening a long position when the price went below the green line and vice versa a short position when the price went above the red line. Potential profit target could be on the other side of the line. Do you think it's feasible?
+
+--- 帖子 #69 ---
+[quote=minut3s;4187341]Hi TallCoolOne, I like your system of referencing higher 1H timeframe for MACD direction before we zoom into the 5min chart for entry. I was trying to manual trade on the 5mins but the TMA Centered MARI indicator which you have shared with us seems to have a tendancy to repaint. Is this how the indicator should work? I was thinking of along the line of opening a long position when the price went below the green line and vice versa a short position when the price went above the red line. Potential profit target could be on the other side of the line. Do you think it's feasible?[/quote The indicator does repaint some. What you outlined above is basically how we trade it. Except I don't take profit at the opposite side. The line may keeping going away from you though since it does repaint some.
+
+--- 帖子 #70 ---
+so when are you going to come up with your system on FF obnoxious2?
+
+--- 帖子 #71 ---
+I have loaded the MT4 platform and have MARI installed. I am unable to adjust any of MARI's settings. I was trying to reduce the max trades to a lower value, but MARI won't save the settings I edit?? What am I doing wrong?
+
+--- 帖子 #72 ---
+Don't be a douchebag. Take your nutsucking somewhere else. I was referencing this system since it essentially mimics Bob's method albeit with some slight modifications. Tall asked for suggestions in the 1st post and I was just giving my 2 cents from experience and using Bob's method. But you obviously wouldn't know. So I suggest you go read the threads before making assumptions.
+
+--- 帖子 #73 ---
+Hi Rharris. I don't know what that could be. Your trying to change the settings in the EA properties? I'm able to change all my settings. Sorry I know that isn't much help.
+
+--- 帖子 #74 ---
+Okay guys lets be civil. We wouldn't talk to each other that way if we were in the same room - I hope not. No reason to be rude to each other just because we are on a forum. I understand what obnoxious is saying about letting the profits run. It may have merit. I have been experimenting with many different kind of settings. I backtested with GBPJPY and made $7000 starting with 0.01 lot in one month letting the "buy" trades close on the opening of the "sell" trades and vice versa - with 1000 stop loss and 1000 take profit. it makes a ton of $ when the trend is on. But you can lose alot when the trend is off. So that is why I like to grab the quick profits when I can. I will keep experimenting with it. Obnoxious if you come up with some good settings please share - lets help each other out. Thanks! TCO.
+
+--- 帖子 #75 ---
+Hi TCO, I will be testing MARI and I read your code (nice to read BTW) and I noticed this function: Inserted Code void GetSTFema() { stfEMASell = iMA(NULL, SmallTimeFrame, 3, 2, MODE_LWMA, PRICE_HIGH, 0); stfEMABuy = iMA(NULL, SmallTimeFrame, 3, 2, MODE_LWMA, PRICE_LOW, 0); } Did you really mean to use LWMA or should it be EMA? Cheers!
+
+--- 帖子 #76 ---
+Hi I just noticed that the trades which are opened on 19-Nov have no SL and TP. Is this normal? If it is not, I will proceed to call off the dangling trades... I am running on Alpari Demo.
+
+--- 帖子 #77 ---
+I apologise!
+
+--- 帖子 #78 ---
+Hi TCO, If I want to use a larger TF pair such as Daily and H1, do I need to find out the best MACD EA settings or will the defaults be fine? How did you choose those MACD(68,136,12) settings compared to the default of MACD(12,26,9)? Thanks.
+
+--- 帖子 #79 ---
+I've actually answered my own question. Seems like your settings are the best for "keeping in the trend" and works well with the Daily TF on GBPJPY as it is a trending pair.
+
+--- 帖子 #80 ---
+Hi TCO, Found the first bug. Basically if Buys_Below_Zero_Only or Sells_Above_Zero_Only are set to FALSE then your code will still set either BuyReady1 to true only if CurrentMACD is below zero / set SellReady1 to true only if CurrentMACD is above zero due to the code I have pointed out below: Inserted Code if((Buys_Below_Zero_Only == true) &amp;&amp; (MacdCurrent &gt; 0)) { BuyReady1 = false; BuyReady2 = false; BuySignal = false; } if((Sells_Above_Zero_Only == true) &amp;&amp; (MacdCurrent &lt; 0)) { SellReady1 = false; SellReady2 = false; SellSignal = false; } if(/* ==&gt; */ (MacdCurrent &gt; 0) /* &lt;== */ &amp;&amp; (MacdCurrent &lt; SignalCurrent) &amp;&amp; (MacdPrevious &gt; SignalPrevious)) { SellReady1 = true; BuyReady1 = false; BuyReady2 = false; BuySignal = false; } if(/* ==&gt; */(MacdCurrent &lt; 0) /* &lt;== */ &amp;&amp; (MacdCurrent &gt; SignalCurrent) &amp;&amp; (MacdPrevious &lt; SignalPrevious)) { BuyReady1 = true; SellReady1 = false; SellReady2 = false; SellSignal = false; } Fix below: Inserted Code if((Buys_Below_Zero_Only == true) &amp;&amp; (MacdCurrent &gt; 0)) { BuyReady1 = false; BuyReady2 = false; BuySignal = false; } if((Sells_Above_Zero_Only == true) &amp;&amp; (MacdCurrent &lt; 0)) { SellReady1 = false; SellReady2 = false; SellSignal = false; } if((!Sells_Above_Zero_Only || (Sells_Above_Zero_Only &amp;&amp; MacdCurrent &gt; 0)) &amp;&amp; (MacdCurrent &lt; SignalCurrent) &amp;&amp; (MacdPrevious &gt; SignalPrevious)) { SellReady1 = true; BuyReady1 = false; BuyReady2 = false; BuySignal = false; } if((!Buys_Below_Zero_Only || (Buys_Below_Zero_Only &amp;&amp; MacdCurrent &lt; 0)) &amp;&amp; (MacdCurrent &gt; SignalCurrent) &amp;&amp; (MacdPrevious &lt; SignalPrevious)) { BuyReady1 = true; SellReady1 = false; SellReady2 = false; SellSignal = false; }
+
+--- 帖子 #81 ---
+Maybe I am doing it wrong as I am new to MT4 and MARI. I am going to the Navigator and double clicking on MARI under "Expert Advisors" The properties box opens and I can edit the choices but the settings won't stay set when I click save. It always reverts to the default. Am I doing it correctly? .... thanks for your patience
+
+--- 帖子 #82 ---
+I also just noticed in the upper right hand of the chart I see "MARI_EA V1.0 X" I am sssuming the X means its not actuall running. Am I correct?
+
+--- 帖子 #83 ---
+Correct... you need to press the Expert Advisors button to activate the EA
+
+--- 帖子 #84 ---
+Would it be possible to set the EA to continue where it left off when and if it is interrupted for whatever reason; instead of it closing all positions when it resumes operation?
+
+--- 帖子 #85 ---
+Results - posted here this is basically 3 days of trading on my Roboforex demo account. Up $458.00 DD - $46.33
+
+--- 帖子 #86 ---
+My apologies to everyone, I had caught that and I thought I posted the correction in post 1. Post 1 should have the correction now. Thank for catching this.
+
+--- 帖子 #87 ---
+Hi the-game, I think those are okay settings for the MACD, it would be nice to optimize them per pair, but i don't know how good optimization would be with just "open prices". I wish i had a faster puter and i could optimize on tick data. Thanks for your question. I hope we can fine tune the setting as we go. TCO
+
+--- 帖子 #88 ---
+Hi JCF, I'm not sure how I would do that. I do have the external parms that you can set "BuyReady1 = true" or "SellReady1 = true". Then the program will start looking at the smaller time frame criteria.
+
+--- 帖子 #89 ---
+guys, get the the latest ea in post 1 - much needed bug fix.
+
+--- 帖子 #90 ---
+Hi, TCO Thank you for sharing the EA. I've attached it to H1 timeframe on a forex.com demo account for a number of pair of currencies. I've noticed that it gives out continuous signals reading 'BuyReady2=0, SellReady2=0". I hope there's not something wrong. Best regards,
+
+--- 帖子 #91 ---
+No those are print statements that I left in the program. They are just stating that BuyReady2 and BuyReady1 conditions have not been met.
+
+--- 帖子 #92 ---
+I think we need a sleep after trade function. I'm getting multiple same pair trades within seconds of each other.
+
+--- 帖子 #93 ---
+The fix is still not in the EA attachment on post 1
+
+--- 帖子 #94 ---
+This EA is supposed to open multiple trades. You can limit trades using the max trades parameter.
+
+--- 帖子 #95 ---
+EA version 2 added to post 1.
+
+--- 帖子 #96 ---
+TCO, v2.0 is exactly the same as V1.0 You must be doing something wrong. You have to Remove the attachment first before uploading the new attachment.
+
+--- 帖子 #97 ---
+god the wonders of mt4. Updated earlier today to "updated ver 1" and now to ver 2 and been getting old tick errors. Wasn't happening before. Infact this thing was trading like a banshee.
+
+--- 帖子 #98 ---
+i usually get Old Tick errors if I download history... just don't download history, or if you did, just install another MT4 in another folder.
+
+--- 帖子 #99 ---
+Here are my results so far. $783.00 Floating DD - $83 Might take a hit on AUDUSD trades.
+
+--- 帖子 #100 ---
+Verison 2 is what I'm using. Everything should be corrected and it seems to be working fine for me. What bugs are you encountering? Thanks!
+
+--- 帖子 #101 ---
+Mine hasn`t traded yet either. It did before the weekend when I set the RSI filter to false, but not anymore. It opened nearly 10 trades in a couple of hours.
+
+--- 帖子 #102 ---
+I think he's saying that you need to delete the original EA attachment and attach ver2. Cause looking at the source code, it is exactly the same? I've had old ticker errors in the past. I usually delete my history in the history folder so it redownloads and its fine but not this time...
+
+--- 帖子 #103 ---
+I must confess that I have never had much faith in EAs until I came across your thread TallCoolOne. Have you ever considered running your system via a PAMM or other places such as Zulutrade? Perhaps you could help others like myself while making a bit extra coin for yourself. Incidentally the word "MARI" means money, in my Shona language. Wish you many more happy green pips.
+
+--- 帖子 #104 ---
+Hi Tsotsi. Thanks! My wifes name is Mary - so it kinda a play on that. This EA will have trouble sometimes when you get a double dip on the MACD. I'm experiencing that now on EURGBP and AUDUSD. Currently I'm up $886 with a DD of -198. I could cut those trades loose and take a $60-70$ hit, but i may just let them go and see how it plays out. I think for this EA to be profitable, you have to let it trade as much as it wants. You have to let it up the lotsize(this acts as kind of a recovery element) and you need to trade a lot of pairs to spread the risk. So I think to go live with this you will need a good size account and keep your lot size small. We we will see how it plays out. I'm going to post my results everyday and I'm sure I will take some hits. Hopefully we can make it better and fine tune the setting some. I hope you guys share your results also. Thanks!
+
+--- 帖子 #105 ---
+TCO could you just post version 2 on your next post? I'm not sure if I have ver 2 or not after messing around. Before it stopped trading I'd been messing with a slightly higher trailing stop and seemed to still do pretty well. It would be nice if you could let all your trades run unattended just to see how the EA responds. Be interesting to see how the month of Dec. plays out since Bob notes that it usually goes into long trends.
+
+--- 帖子 #106 ---
+Here is version 2. It should be error free (hopefully?) If you find some errors let me know. The only errors I seem to get are trailing stop errors when the EA is trying to set the TS for multiple trades - it seems to work it's way out. I will be interested to see how it plays out in demo over the next couple of months. If I get to 20,000 account bal, I will probably up my starting fixed lot size to 0.02. Thanks!
+
+--- 帖子 #107 ---
+Hi all, so I have the set file from a few pages back. But not getting any trades. Do I place the EA on the 1h or 5M TF? Also, can you back test this in strategy tester or no? Thanks!
+
+--- 帖子 #108 ---
+Guys I've read the whole thread but still couldn't figure something out. TCO mentions along the thread that the EA should be attached to the higher TF (H1)... though it has been said several times that the EA only gauges direction using the higher TF (H1 right?) and triggers entries using M5 Please correct me if I'm wrong, but shouldn't this be attached to the M5 to trigger entries then? Also TCO, one question: I want to test the EA but without increasing any lot sizes (for now). Is there a way to set the parameter to not increase lot sizes at all after X trades (Or should I just set it to 0? or 781862812?) Cheers Diego
+
+--- 帖子 #109 ---
+Probably setting the lot size mulitplier higher than max trades would keep lot size at initial lot size.
+
+--- 帖子 #110 ---
+You probably could put it on the smaller time frame chart, and also put TMA indicator on the chart and watch it trade that way. You may want to multiple the parameters for MACD and RSI on the template by 12 if you are using 5 mins for your small time frame and 1 hour for your large time frame.
+
+--- 帖子 #111 ---
+Yeah I figured I could also try this and see how it works, but is this the way you're trading it? I want to get similar results from the ones you're getting and start tweaking from there. Thanks for sharing your work, I think it has great potential and if we all work together here we could get it working even better in no time
+
+--- 帖子 #112 ---
+Hi TCO, Are you using default true for conservative filter settings of Buy Above/sell below zero? Thank you.
+
+--- 帖子 #113 ---
+Yes and I have the RSI filter off. Thanks!
+
+--- 帖子 #114 ---
+[quote=pilotui;4193579]Hi all, so I have the set file from a few pages back. But not getting any trades. Do I place the EA on the 1h or 5M TF? Also, can you back test this in strategy tester or no? Thanks![/quot Hi Pilotui, place the EA on the larger time frame chart. You really don't need the smaller time frame chart. How many pairs are you trading on? Do you have the smiley face in the right hand corner? Do you see any of the BuyReady1 or SellReady1 indicators displayed on the screen set to "1"? This EA can be backtested. I would use tick data and set the CheckOncePerBar parameter to false.
+
+--- 帖子 #115 ---
+No bugs. I've just done a code compare with both v1.0 and v2.0 and they are exactly the same (from post 1 updates)
+
+--- 帖子 #116 ---
+As TCO mentioned on Post 1, if you think the Buy Ready 1 signal or Sell Ready 1 signal should be true, there is a setting in the EA to do so, then it will look for Buy Ready 2 or Sell Ready 2 conditions.
+
+--- 帖子 #117 ---
+Hi Guys, I created the small time frame template with the TMA, but you will have to use MARI V3.0 with it. I had the MACD code with a zero for the period, so it would the smaller time frame instead of the larger time frame. I changed it so it uses the LargerTimeFrame variable that we set at and external parm. Please let me know if you find any issues with it. I'm back testing it now on GBPJPY and my results look the same as they did with the old template and program. The are two MA on the template. The Dodger Blue is the Sell EMA and the Aqua is the Buy EMA. Your Large Time Frame and Small Time Frames would still be the same, you would attach the EA and the template to the smaller TF. Please let me know if you have any questions. This was suggested by Pilotui and I think it is a good idea. Thanks!
+
+--- 帖子 #118 ---
+Should this be attached to M5 or M15? Thanks Ian
+
+--- 帖子 #119 ---
+TCO - great system. Involved in many EA developments and this is one of the best systems that wins and can be scaled easily to your account size. I just love what it can do with 0.01 lot sizes. That combined with high accuracy is are real winning system. I have back tested this on nearly 20 pairs short term and out to a year and all produced positive results on default settings. Put it on a demo account this week and again positive results. I'm going to put it on one of my live penny accounts next week just to make sure it doesn't annoy the trade desk some way. Due to fear of over exposure I have cut the numbers of trades back to 5. I also find myself moving the SL line down manually fairly soon after the trade goes positive. I can't stand to give the crims back any of the hard pips we've earned. I would rather take a zero and start again as I'm confident in this bots trade picking. One thing I found with lot sizes. There is an optimum lot size and number of trades for each account size that provides the most pips. If you want to maximize your pips and run the lot size up, you margin out real quick and it actually reduces the number of total pips produced. For me the answer looks like a moderate lot size and moderate number of active trades produces a nice return. You could go with 0.01 lot size and allow 100 trades but when you have a loser, for me the phsycological effect of seeing 100 losers is totally depressing..I know the cup is half empty. Middle of the road works the best for me and gives me the staying power on the trades without feeling account balance challenged. Pip On! ej5
+
+--- 帖子 #120 ---
+TCO, please don't hate me, but I did a code compare again with this attachment with V1.0 and they are still the same. For example the fix I posted for the bug I found a couple of days ago is still not in the attachment, which you said was going to be when you posted in that very large font. Here's the same coding but just with my proposed fix for handling the true/false settings on the Sells_Above_Zero_Only and Buys_Above_Zero_Only EA settings.
+
+--- 帖子 #121 ---
+Hi Buddy, I don't hate you. I guess I don't understand. Is this actually fixing a bug or just making the the logic cleaner for not allowing buys if MACD is above zero and not allowing sells if MACD is below zero? My backtests seem to be working great - so I'm confused? Thanks!
+
+--- 帖子 #122 ---
+Now I'm confused too. Anyway, if you'd just look at my modification, you will understand what I was trying to do.
+
+--- 帖子 #123 ---
+The following post is what I'm talking about...
+
+--- 帖子 #124 ---
+Yeah i think our code is both doing the same thing. I'm going to leave my program as is. i have tested with both flags on and off in backtesting and have gotten the results I have expected so I think we are good. Are you coming up with different results?
+
+--- 帖子 #125 ---
+I read the code like I'm running it in my head myself. It's just that those conditions before my change didn't make sense to me as I thought it would stop the flags being used. I guess I'm wrong on that.
+
+--- 帖子 #126 ---
+Hi, I saw in your code that you are using shift "0" for the MACD. Shift "0" is the current MACD bar - which is still moving... It can end up (when bar close) in wrong signal. Is there a reason for that?
+
+--- 帖子 #127 ---
+[quote=TallCoolOne;4194301] TallCoolOne, thanks for that. Although I think with your advice to turn the checkeachbar parameter to false, the back testing is starting to work. I have a smiley face and everything is set up...so we'll see how it goes. So with the default settings, during backtesting I see a lot of modify orders, is that what your system is designed around? So each modify order is another trade which would then require more margin? (I've only used 1 EA before this) Is that why you have the max # of trades param? Also, I can only backtest 1 pair at a time, or is there a way to test more? Thanks for your patience. -Darren
+
+--- 帖子 #128 ---
+I do the MACD calculation in the loop that only performs once per bar. I think it is fine. Thanks!
+
+--- 帖子 #129 ---
+[quote=pilotui;4194918] The mulitple modify orders that you see in backtesting is the Trailing Stop loss. Because the default is Trailing Stop 20/10 once the trade is 20 pips in the profit the EA will start modifying the orders with a 10 pip trailing stop loss. When you see a lot of modifies this means your are locking in more and more profit. You aren't opening new trades, you are modifying the current trades that you already have. Yes you can only backtest one pair at a time. That is why we need to forward test with multiple pairs and see what the burden of drawdown is. I hope this helps. Good questions. Thanks!
+
+--- 帖子 #130 ---
+Here are my current results since starting my demo $10,000 demo account on 11/18/2010. The profit has been increasing 300-400+ daily. It will be interesting to see if we stay hot, I think it will slow down a little because a lot of the MACDs have gone throught the zero zone and are crossing over to the other side. P/L = $1169 Floating DD = 341.87 This is the most DD I've experienced. I'm thinking that maybe I should close any straggling orders when the MACD takes a double dip. We will see how these play out. Thanks!
+
+--- 帖子 #131 ---
+[quote=TallCoolOne;4195886] Ok, that makes great sense. Thanks for your time. I have it running on a demo now 6 pairs, each EA set to Max of 6 trades w/ TP @ 30 pips SL @ 50, BE @ 20 using .1 lots. We'll see how it goes. -Darren
+
+--- 帖子 #132 ---
+Hey TCO, I have MARI V2 installed per these instructions I received on this forum: " The "Mari EA" goes in the expert-folder of your broker, the "tma centered mari" goes in expert/indicators. Template goes in /templetes of your brokers folder. Restart MT4, open an 1hr chart, load the mari templete. That should do the trick." I have had it running for 24 hours on 4 pairs. All the settingd are at the default except I set max trades to 10. MARI has not made any trades, and BUY/SELL READY 1 is still showing 0 Is there something I am missing?
+
+--- 帖子 #133 ---
+Hi rharris, does it look like the MACD conditions have been met. Check the charts that I show in the first post. See where I have the little circles on the chart. Those are the conditions you need to set BuyReady1 or SellReady1 to true. Thanks!
+
+--- 帖子 #134 ---
+Backtesting and forward are not qualified for a statement if an EA is profitable or not. Because look and read the attachment. The executions are not from me. Meta1
+
+--- 帖子 #135 ---
+But unfortunately backtesting and forward testing is all we have. I think forward testing is a reasonablly good indicator if the EA will be profitable. All my results that I have posted so far are forward tests using a demo account. I'm definately not going to go live with the EA if the EA doesn't perform reasonably well in back testing or forward testing. I think we all know that though, so I don't know that your post is really for. Thanks!
+
+--- 帖子 #136 ---
+TCO for max trades allow I'm assuming that is max trades allowable per pair? So for ex. if I set max trades to 10 then that is 10 open trades allowed for say EURUSD. So if I have it on the 4 majors then that is a total of 40 max trades at once?
+
+--- 帖子 #137 ---
+You are correct. Sorry I didn't make that clear before. Thanks!
+
+--- 帖子 #138 ---
+Well guys the EA is 402-1 I had my first loss for the EA and it was on CADJPY, the BuyReady1 flag was set to true and that will close all open Sell Orders. So I took a hit for -$10.67. I'm sure there will be more, hopefully we can keep the win/loss ratio up there. Thanks - TCO.
+
+--- 帖子 #139 ---
+This only explains why there is a difference between backtests and forward tests. Forward testing uses tickdata so it should allow a valid statement. Potential difference between demo tickdata and live tickdata is another problem though, although I dont know if such a difference exists.
+
+--- 帖子 #140 ---
+Okay..thanks for the info. TCO.
+
+--- 帖子 #141 ---
+Meta1 As TCO points out, unless you are ready to throw money to the wind, backtests and forward tests on Demo accounts is all we have. One thing I have found is that if an EA doesn't do well in backtesting and forward testing, it will get destroyed on a live account. An EA that does well in back testing and forward demo testing stands a reasonable chance at that point to peform positively on a live account. I have a small penny account that I test EAs on that perform well on backtests and demos just to make sure it will work in a live trading environment. I have seen some good EAs get totally banned from the trading desk for a multitude of reasons. That is why I like to get them on this penny account once I feel comfortable with them just to make sure they will really be useable. This EA will be on my penny account next week. I too suffered my first losses with the EA this week on the CAD/JPY. I use Alpari just for comparison. Big spike up against my multiple positions. EA still very positive regardless of this blip.
+
+--- 帖子 #142 ---
+Hi EJ, I've been thinking about going with a penny account also. Just curious what you think a safe starting bal would be and how many pairs. Thanks! TCO
+
+--- 帖子 #143 ---
+With 50:1 leverage, you would be limiting yourself to about 20 open trades total. So either have to cut down on max trades or the # of pairs you trade. This is with a 1k account.
+
+--- 帖子 #144 ---
+Roboforex is an overseas broker and has penny accounts. I believe they will allow a higher leverage ratio than that. Thanks!
+
+--- 帖子 #145 ---
+TCO - I don't have a lot experience with different brokers. I'm currently using an Alpari US account with 0.01 lot sizes. They are running a special right now where if you put in $500 they will give you $500 giving you a $1000. They take the $500 back (if any left) at the end of Feb. Again, they are really the only broker I have much experience with but have been happy. I would trade 0.01 lots on $1000 account with max trades at 5. I have the bot on 10 pairs (trying to get as little correlation as possible) and have yet to have enough trades at one time to get a margin call. I have never had 10 open trades at a time. ej5
+
+--- 帖子 #146 ---
+The only problem with that is with a US broker you might not be able to run the EA because of the FIFO rules.
+
+--- 帖子 #147 ---
+TCO - I'll be live with the bot on Monday to find out for sure. However, I have other bots that ran live that opened multiple trades in the same direction and closed them up without a problem. I don't think there was any special coding in the bot to do so following FIFO but rather I think the platform just closes them in the order they are taken. If you call up a specific ticket to close it may bounce back to you as failed for FIFO but just closing open positions I have not seen an issue. I will not be the first to say that I have been wrong before, my wife reminds me of that often....
+
+--- 帖子 #148 ---
+Okay EJ. I hope it works. Keep us posted. Thanks for the feedback. P.S. So does my wife. But I named this EA after her. Lets just hope it works.
+
+--- 帖子 #149 ---
+Hi TCO I just noticed an alert screen that opoed up on my platform screen. I posted it here with a couple of chart screenshots. The Alert says: "Open Buy Order_Error 131:invalid trade volume." What does that mean?
+
+--- 帖子 #150 ---
+I just noticed ver 3.0 on post 1. What has changed from ver 2?
+
+--- 帖子 #151 ---
+I've had it running on 7 pairs for 24 hours, and no trades were taken...anyone get any trades during the last 24?
+
+--- 帖子 #152 ---
+I keep getting old tick errors. I have no idea why. Usually I just delete history folder and clear global variables. TCO does you have a loop around the trade function where it will keep trying to place trades until the trade is filled?
+
+--- 帖子 #153 ---
+Hi TCO I downloaded the ea .But what must i do to prevent he flashing of the text I did install everything from post 1 as well as intalling the indi Thank you
+
+--- 帖子 #154 ---
+Hi rfarris, it's because your platform/broker is not allowed for ordering 0.01 lot (pls, press F9 in your chart and see, what's the smallest possible amount of volume), you should change it probably to 0.1 lot.
+
+--- 帖子 #155 ---
+Attached backtest result for EURUSD The backtest is really slow, so I applied it only on last and this month for now. Looks not bad..
+
+--- 帖子 #156 ---
+Thanks Kapybara for answering.
+
+--- 帖子 #157 ---
+The screen flash is from the show settings which occurs every new bar.
+
+--- 帖子 #158 ---
+Hello and Congratulation for EA improvement and development. Is it ok for v3 to attach it to any TF? Only need is to adapt the template smtf bby taking into account that visual settings are for 5m. In other words, I ve put v3 on 1h TF and had the rsi and macd settings for template smtf divided by 12.. Am I correct?
+
+--- 帖子 #159 ---
+Post 117. This ea is for the small time frame chart. It should work the same exact way as V2.0, but I created it so you can see the trades triggered on STF chart with TMA. There is a template also.
+
+--- 帖子 #160 ---
+V3 should be attached to the STF chart. So if you decide you are going to use H1 for the MACD trade conditions and M15 for the TMA trade triggers, you attach the V3 EA to a M15 chart, you will still need to set the largetimeframe and smalltimeframe parameters accordingly. If you use the mari stf template, you should be all set for, your largetimeframe will be H1 and your smalltimeframe will be M5. Attach it to the M5 chart for each pair you want to trade. Thanks - TCO.
+
+--- 帖子 #161 ---
+Made a little profit over yesterday. We had a lot of MACD cross overs. DD is still up there. Hopefully it will get all sorted out. Thanks!
+
+--- 帖子 #162 ---
+Backtest looks good. Hopefully we will see this continue with forward testing. Thanks for sharing.
+
+--- 帖子 #163 ---
+TCO, if I'm just running the EA as you originally intended on the 1H with the original template on ver3 it should just work normally correct?
+
+--- 帖子 #164 ---
+Hi TCO, may I ask you, how were your 3 lost trade closed? I can see, that they didn't hit SL. So what was the reason of closing them? Is there any other rule for closing trade, than SL? Thank you. Green pips to all of you guys
+
+--- 帖子 #165 ---
+Hi guys, I've had it going overnight on 27 pairs, its closed 3 pairs by SL at a profit, and has another 30ish open trades, about 25 winning, very exciting EA! See attached statement. My settings are as per the set file previously uploaded, at 1hr timeframe
+
+--- 帖子 #166 ---
+Excellent stuff! Look forward to testing this myself.
+
+--- 帖子 #167 ---
+I think so. The EA bases all indicator calculations on what you enter for largetimeframe and smalltimeframe.
+
+--- 帖子 #168 ---
+I closed the EURGBP on my own. The other closed because the opposite BuyReady1 or SellReady1 signal was given.
+
+--- 帖子 #169 ---
+Good results but that is a lot of pairs for a $500 balance. I hope that is demo. Remember if you don't limit max trades - this ea will open a lot of trades and your margin can go down to 100, which will cause a margin call. So you might want to practice the way you intend to play. Thanks!
+
+--- 帖子 #170 ---
+Great advice, cheers TCO, i'll reduce the number of pairs
+
+--- 帖子 #171 ---
+Looks like great potential. I will be running some back tests and see how it looks. So far I am very impressed and grateful for your work!
+
+--- 帖子 #172 ---
+Thanks! It has potential I think. Just need to get the rules worked out when the MACD crosses over...that seems to be when losses are have a greater chance.
+
+--- 帖子 #173 ---
+Hi TCO, i running the EA on alpari uk (using 0.1 lot), 5 TF ver 3.0 no trades same settings as yours with Buy/Sell true. please advise thanks sami
+
+--- 帖子 #174 ---
+You realize that today is a holiday in the US right? So the volume of trading will be down = less volatility = less trade setups. You can assume tomorrow will be the same since most people take off black friday.
+
+--- 帖子 #175 ---
+Version = 2.0 (deployed under H1 TF) Trades Closed = 3 (all at SL) Total Pips = +45 One small issues - can we get to change the comment? I am running a few EAs at the same account, the current comment makes it a bit difficult to sniff out the trades. Happy Thanksgiving
+
+--- 帖子 #176 ---
+The EA finally started trading on wednesday after letting it run for three days. Doesn't look good for me at the moment, closed profit is 89 pips but floating trades are -359 lol. Started with 0.01 lots, will continue to let it run to see how it pans out. Version 2 on 1H timeframe.
+
+--- 帖子 #177 ---
+I ran a couple backtests. If you look at the last couple months, it has done well on the EUR/USD. I also did one for 2008 becasue that is when a lot of EA's crashed and burned becasue of the near financial meltdown. Unfortunately, so did this one, losing over half the equity. August was a real nightmare. I do think this has great potential if we can find the right settings. The SL may be too high or the TP too low. Maybe the RSI filter will help. I will try some other combinations to see if I can find something that is robust.
+
+--- 帖子 #178 ---
+The pdf is too large to post, but I can e-mail it to anyone who is interested. I will run another backtest overnight using ATR for TP and SL
+
+--- 帖子 #179 ---
+Hi everyone i hav the ea running on 14 pairs, do i need to run backtesting on every single pair? OR do u really need the backtest or not? thank u in advance sami
+
+--- 帖子 #180 ---
+Mari EA v.2 - on H1 TF Default settings 0.1 lots Alpari UK (5 digits) - Live acct. Running from 23 Nov, 2010 on EURUSD, GBPUSD, USDCHF, AUDUSD, USDJPY, EURGBP 5 Trades opened (Long) on 26.11.2010: 01:21, 03:13, 03:17, 03:18, 04:03, 06:49 Currently each trade is about ~ -$50 (Loss).
+
+--- 帖子 #181 ---
+Ooops, forgot to state from previous post: All trades are on GBPUSD.
+
+--- 帖子 #182 ---
+Just like to clarify something: The max trade option is applicable to all open trades right? Is it possible to tweak it such that we can adjust the max trade for each currency pair instead? I think it would be alot better since there might be a case whereby: You set max trades at 10 9 of them are gbp/usd while 1 of them is EUR/USD because the long/short signal is triggered earlier for the former. However, gbp/usd is heading for a loss while eur/usd is heading for a TP, which results in an unpleasant situation. I think we might need tighter stop losses as I notice that winners are usually 20-30 pips while losers are around 100-150. Regards.
+
+--- 帖子 #183 ---
+4 trades since last nite (midnite-uk time) 3 losses and 1 win no mores trades taken. please advise thank u in advance sam
+
+--- 帖子 #184 ---
+Hello TCO and others. Thanks for sharing an interesting EA and a nice job of coding. I have been runnung on $5000 demo for the past three days. 14 pairs. The first two days it knocked of two sets of winning trades each day, about 10 trades each time. 0.01 lots, 50 trades maximum. Yesterday, however was a diaster. At the moment, it has over 100 trades open all under water. Drawdown at the moment is -$1400. I would not be surprised if it closed these trades at a big loss today based upon a 1H signal change. The EA went long on the EURO pairs while the EUR is in free fall. The lesson for me at the moment is to reduce the max trades to perhaps 10. And something has to be done with the MACD change of signal stop. Not sure what. Going to let it play out and see where it goes. Margin level is a 179%.
+
+--- 帖子 #185 ---
+Using the ATR the profits were bigger, but the account crashed and burned in March. It still needs some tweaking. I will try a few other parameters.
+
+--- 帖子 #186 ---
+I am still running version 2. Lets make sure I am doing it correctly, I have 1 hour charts opened on 4 pairs with MARI V2 running on those charts. I have all setting at default except max trades set to 10. Is that all that I need to do to use MARI? Also should I move to V3 and do I run it exactly the same? Sorry to sound naive, but I am new to EA's
+
+--- 帖子 #187 ---
+Scroll back a page or 2. I asked that question already. Pleaes read thru the thread your answer is there. It's black friday, what do you expect? Markets are calm cause nobody in the US is working. When will traders first learn to understand manual trading? Idiots assume that EAs will work constantly regardless of market conditions and special days such as holidays, bank announcements, and major news releases. Try to figure out which one it is today.
+
+--- 帖子 #188 ---
+Obnoxious2, now I understand your name -- you are obnoxious. been trading Forex manually for about three years now, with some success. Thought about not running this EA on the hoilday, but made a conscious decision to let it run just to see what it would do. That is what demo accounts are for. Just trying to make a contribution to the thread. Some people don't seem to be able to get the EA to open trades. I sure did not have that problem yesterday. So if I am an idiot to you, just don't read my posts.
+
+--- 帖子 #189 ---
+Mav - assign a magic number to each of your pairs. Then the EA will only watch that pair. If you are trading five pairs and you set the number of trades to 5 the max trades you will have is 25 or 5 per each pair. Once you get 5 on one pair it will not open up any others for that pair but will still be looking to open trades on the other pairs. My demo account took a nasty draw down yesterday and today. $500 demo account went down almost $200. I have 10 pairs trading 0.01 lot 5 trades max. I think I need to do some work on the SL settings as they seem to big and I'm concerned that a few of the trades went through them and didn't close. This big ding has me a little concerned to move it over to the live account just yet. I will probably put it on at least one pair just to make sure it works on my live account. I'm also considering moving my signal generating time frame to M30 but keeping my trend filter at H1. I would also like to experiment a little with using signals from H1 and trend from H4. NB and SH do a lot of their trading on the H4 for more reliable signals. Also, I believe the major reason why the EA takes so long to backtest is the print function to the screen. It has to do this constantly between every tick or bar analysis. We need to add a switch to the EA to turn the print off for backtesting.
+
+--- 帖子 #190 ---
+And you just confirmed your idioticy. If you really have been trading for 3 years then you SHOULD have expected crazy things to happen on a holiday. Think before you talk. I didn't see a useful thing in your post regarding the EA. Just sounded like some greedy person who wanted an "easy ride".
+
+--- 帖子 #191 ---
+Is there anything useful in either of your posts? Ignorance is all I see. i will not dignify any more of your posts with a comment. good buy dbag.
+
+--- 帖子 #192 ---
+EJ, the last external parameter in the properties box for the EA is "Show Settings". If you set it to false when you run the strategy tester, the print to screen is disabled. This speeds it up a little, but it still crawls along.
+
+--- 帖子 #193 ---
+ok! we get the point! keep a cool head, we'll see what happens on manic monday! mate. "Try to figure out which one it is today."- Doh its friday - that weekend feeling
+
+--- 帖子 #194 ---
+Maybe there is a lesson here... Fridays are always "crazy". "Normal" fridays are like riding a crazy horse. NFP (once a month) is like getting kicked by a crazy horse. "Black friday" (once a year) is just getting another kick. For all the "naive", rookies and the ones that just forget to turn the EA off: Put an extern parameter in the EA: "Trade on Friday" and set the default to "false".
+
+--- 帖子 #195 ---
+Please do not use this on a live account yhet. I have done a few backtests and found out some encouraging but also important information: It has a very high win rate. When it starts losing it can lose most of your account in a couple days. Jan through Feb 2008 gained 60% in just 2 months. In March it loses almost the entire account. It still needs tweaking. I think the SL is too high and there might be other adjustments that can be made, but it is not ready for a live account.
+
+--- 帖子 #196 ---
+Well, if I see something that looks promising - I'm using it on live account. Please - don't follow my lead... From my humble ecperience - backtesting is only good for debugging. Forward testing on DEMO account leads to only half the truth (sometime ago I was testing same EA simultaneusly on demo and live account - and guess what? different results! So what I'm doing is testing only on live account - with every trade hedged by a special EA. This way I'm only loosing the spread - I'm calling it a learning fee... My results for this EA so far (since Nov. 23) is 6 loosing trades (not yet closed).
+
+--- 帖子 #197 ---
+TCO, hope you had a great weekend. Spent some time trying to understand where the big losses come from time-to-time. You mentioned an MACD double dip, so I started there. The attached pic is from a Strategy Tester run from June 1, 2010 to the end of November. The pic is of the 1H timeframe, while the run is on the 5m timeframe. You can see that the EURUSD market was in a rise for all of September. According to the SellReady 1 rules, sells are permited everytime the above-zero MACD dips down below the red MACD signal line. I have annotated several sell trades that the Strategy Tester took with red vertical lines. There were actuall 10 sell trades initiated over those few bars marked with vertical lines. All 10 of those trades ended up taking 500 pip stop losses. This happened several times during the test period, destroying the P/L. We need to give some thought on how to correct this. Here are a couple of obvious options: 1. Simply employ one of the stop loss features available in the MARI EA; 2. Have the EA close all sell trades when the MACD moves back above the signal line. negating the validity of the SellReady1 signal. Likewise for Buys; 3. Have the EA close all sell trades when currentMACD &gt; previousMACD. 3. Do both 1 and 2 or 1 and 3. It would be beneficial if we could figure out a way to solve this on the 5m chart. There is so much time lag on the 1H chart. Every bar on the 1H chart is twelve bars on the 5m chart.It takes hours to sense the change in trend on the 1H chart. Anyway, my thoughts.
+
+--- 帖子 #198 ---
+I agree here on the shorter time frame signals for turning off trades. We are using the long term signals to validate the trend and the short term signals for entering the trade. IMO we should be using those same short term signals to tell us it's time to bail. Even if the hourly trend is still correct, I don't like holding numerous positions through a retace and bounce back in the direction of the trend....if it happens. The trend could be reversing on us before the H1 time frame finally catches up. I think the EA should be allowed to turn of trades on the shorter time frame. Also, I did some testing on higher time frames. If the EA is set to conservative mode, it makes about 4 trades (all winners) a year on H4. If you turn off RSi and zero line settings, it will make more like 12 trades but they are wild and mostly losers. I think I'm going to stick to the lower time frames, but it does look like the H1 setting is a good baseline for determining the higher TF trend with this system. ej5
+
+--- 帖子 #199 ---
+Hi Guys, Sorry I haven't been on the thread at all this weekend. I have been sick with sore throat and ear infection and I just needed sometime away. Friday was not very good for the system. Big DD, but we will see how the EA does this week and recovers. I have been thinking about closing the trades like Easyrider suggested or maybe waiting for better confirmation of trades and not buying or selling until price goes beyond the middle TMA line, I don't know if that has any merit. I appreciate you guys testing it and coming up with suggestions. When it wins - it has a high winning percentage, we just need to figure out where the loss threshold is and take our lumps when we have to take our lumps. We will keep at it. Thanks!
+
+--- 帖子 #200 ---
+All the loosing trades we are carrying are Eur based buys. Looks like the bailout of Ireland is complete, so the Eur pairs will probably take off at the open tonight. So they might all recover. Buit that still does not solve the systemic problem with the EA on large trends where 1H MACD corrects even though the trend is still up (or down). I have been testing some changes. Lets see if anybody can come up with an answer.
+
+--- 帖子 #201 ---
+In MARI's setup, the TakeProfit=500 and the StopLoss=500, does that 500 indicate the number of PIPS above/below the entry point?
+
+--- 帖子 #202 ---
+Pips.
+
+--- 帖子 #203 ---
+Thanks TCO
+
+--- 帖子 #204 ---
+Hi I observe that MARI likes to open multiple trades on a same price. Can we indicate a Minimum Distance parameter such that the trade will not be open on the same price? Thanks Ian
+
+--- 帖子 #205 ---
+Just set max trades to 1 for each currency pair.
+
+--- 帖子 #206 ---
+I am asking this is because I am not very sure what is the purpose of max trades if max trades means the maximum number of open trades the EA can open, then the Minimum Distance parameter can help to ensure that multiple trades are not being open on the same price. Or is it intentionally being design this way? To be able to open multiple trades on the same price? Ian
+
+--- 帖子 #207 ---
+Millam, maximum number of trades is the number of trades that can be made on a single currency pair. So if you are trading 10 pairs, in theory you can have a lot of trades open. Multiple trades on a single pair is intended to increase profit and reduce risk by taking small increments of profit on multiple trades, rather than risk riding the trend with one larger trade. Take small increments of profit up the trend. But I agree that it doesn't seem to be very effective in practice. In my backtesting, either the multiple trades are all winners or they are all losers. Multiple trades are initiated any time the small-time-frame signal conditions are met. If price happens to be oscillating around the signal point on the small time frame, then you could get more than one trade initiated at the same price. I agree that this defeats the purpose of multiple trades, if I am understanding it corrrectly. Your suggestion for a minimum price spacing might have merit. TCO should probably respond to this issue. I am still trying to understand the stf trigger mechanism in the code.
+
+--- 帖子 #208 ---
+No doubt this EA wins and wins a lot. The problem is how to deal with the few scattered days or weeks within a year that it goes on an out of controll losing streak smashing the account quickly. In my visual back testing of the bot, once again focusing on the macd and rsi, it appears that we get into serious trouble when these are oscillating back and forth. Trade after trade gets opened when there is really no reason to open 3-50 trades at that moment. We are stuck in the mud and getting set up for a big spill. In the middle of this whipsaw of indicators is no time to be throwing more trades at the account. My ideas for this are as follows. 1 - After a trade is entered, no additional trades can be entered until x pips of profit obtained. After x pip profit, second trade opens...etc. This would only add trades when trade is going our way an not because the indicators or blinking like a christmas tree..order, order, order... 2 - Signals on stf reverse, exit trade. This could provide lots of quick in and out toe dips until real signal direction is determined but losses of this type should be very small in pippage. ej5
+
+--- 帖子 #209 ---
+An EA I saw did something similar. The EA got the following related parameters: 1) Minimum Distance measured in pips 2) Target Profit 3) Maximum Loss Effectively the number of trades being open will be much more reduce. And the target profit will be more consistent without causing large DD if the target profit is at a reasonable level. Just my humble opinion Ian
+
+--- 帖子 #210 ---
+Looks like several people have come up with similar ideas on how to deal with the out of control losing streaks when they occur. TCO or other coders, could we get an updated version with Min pip to rentry or min profit prior to entry and/or close down trades when one or more of the stf signals turns against us. I have also seen the global close on percent loses or percent profits but sometimes have found them difficult to deal with when there are lots of trades on multiple currencies. This idea may be better handled with direct SL and TP settings. For me the real problem looks like the root issue is throwing lots more trades at an already losing position. This is where losses stack up fast. If we could limit that point to one bad trade, take our loss and go the EA would be way more profitable. Also, live account update. I have Ver 3.0 on an Alpari-US account. It worked fine today. Closed two trades on USD/CAD for +$2.97 and +$1.10. First successful day of live trading for this EA.
+
+--- 帖子 #211 ---
+What are the settings you used? Did you restrict the max trades to be 1? My demo don't have a very good run. I closed all the trades and shut MARI down until further notice
+
+--- 帖子 #212 ---
+TCO, Is everything in post #1 up to date? I would like to help test V2 on demo account then move to small penny account. thx
+
+--- 帖子 #213 ---
+Yes version 2 should be good to go. I would test only at this point. The EA is very streaky and the DD can be very bad. I'm working on some new stuff and testing at the moment. Please do not put this on a live account yet. Thanks!
+
+--- 帖子 #214 ---
+hi TCO, whilst your online, please provide me with your settings for ver3 EA coz i have no trades going. if u can a preset txt that will be great. thanx sami
+
+--- 帖子 #215 ---
+I changed my disaster stop to 50pips instead of the default 500. will see how it works (whether the SL is too small or it can be further trimmed).
+
+--- 帖子 #216 ---
+I've been using a SL of 40 pips with MPTM as a hidden stop. I get alot of popups saying error1: No Error probably because TCO copied part of the MPTM into the EA already and I'm running a global MPTM on the pairs. Except for the popups which are a minor annoyance everything still works. It does seem to hit the SL quite often however. About once every 5-6 trades. Seems like a win but in reality when you have a tight SL of trailing 10 pips my profits have always been around 10 pips. So in reality the demo is barely breaking even.
+
+--- 帖子 #217 ---
+All, as Obnoxious I believe said, last week was a difficult week for the markets. You had holidays, low volume, and intervention by outside influences on the currencies. Very difficult time for any bot. Lots of bots out there had trouble last week, mine included. The next couple of weeks should be a little more real. After that as we get close to Christmas a lot of traders once again leave the market which means all bets are off again. As for the bot settings, I have max trades at 3, SL100, TP 300. All conservative settings on (RSI, Trade above zero), lots 0.01, all ATR stuff off, Trail Stop on with 50 min profit, 50 TS. The SL/TPs of this EA are very important. Have to find a balance with cutting losers short but giving the trades a little room to develop. This is again where the problems occur. Trade is trying to devlop but as it is trying, the bot seems to throw more trades at it when Lord only knows where it is going to go. STF M15, LTF M60. The TF is probably the only real deviation as I have seen better signals and not as much fluctuation with signals in M15 as M5. I give up some trades but the ones I get seem to be better quality.
+
+--- 帖子 #218 ---
+I have MARI V2 running on fours pairs for about 4 days total and it hasn't entered any trades at all. I am running all default setting except FIXEDLOTSIZE=.1 and MAXTRADES= 5 ANy ideas why I have no trades at all?
+
+--- 帖子 #219 ---
+All, the markets are a little bit of a mess after last week. If you look at your charts you will see that there are no trade setups. There were a lot of signals last week and almost nill this week so far. I have had one but I have the EA on 10 pairs. Be patient. If your EA is attached to the rigth TF chart, the little smiley face is on, you're getting tick data and print outs are flashing no signals buy or sell then believe it or not, there just isn't anything to trade. If your print outs to the screen are saying buy,buy,buy and nothing is happening then there could be a problem with the bot. Otherwise if all you want to do is trade, pick a pair, flip a coin and go with it, there ya go, trade on. I know it is hard to wait for a trade to develop but we have to let the bot do it's job and keep us out of trouble most of the time....at least for me. If nothing happens by the end of the week then I would be more concerned.
+
+--- 帖子 #220 ---
+I have 4 1hr charts open with MARI attached to each one. Is that all that I need to do to have it set up correctly?
+
+--- 帖子 #221 ---
+Pls, check Use_RSIfilter setting - I would set it to false.
+
+--- 帖子 #222 ---
+Other than the two trades I had on Monday it has been a pretty quiet week for the bot. I see it flashing buy and sell level 1s and even seen a level 2 but no full scale triggers. I would be careful with RSI off. In testing I have done you get more trades but you don't get more good trades. The bot has been profitable in testing with RSI on but seems to be more random and less dependable with RSI off IMO.
+
+--- 帖子 #223 ---
+My systems has been hanging from time to time over the past few days -- since I have been running this EA. Anybody having system hangs? The only way to gain control again is to do a hard boot. The TMA indicator is a real resource dog. Wonder if it could be there.
+
+--- 帖子 #224 ---
+Hi Easy, I should bring the calculation for the TMA in the EA itself and remove the indicator all together.
+
+--- 帖子 #225 ---
+Hi Guys, sorry that I have been quiet lately. I have been testing a new version of Mari using OsMA instead of MACD (TurboTommy's Idea). I have been setting BuyReady1 to true when OsMA is greater than zero and vice versa for SellReady1 and still using TMA on smaller time frame. I closeout buys when SellReady1 is triggered and vice versa. I get some losses but the DD seems to be very manageable and I'm currently at a 86% win percentage. I'm going to test this more and see how it goes. Thanks - TCO.
+
+--- 帖子 #226 ---
+That sounds like the business, TCO.
+
+--- 帖子 #227 ---
+TCO - In the new updated version you are working on, I think it would be very beneficial to only add poistions to profitable trades. This would hold the losers to one bad trade and thorw more positions at those moving our direction. We could use current exit systems to protect those profits as they move. If they move against us we will get stopped out on the good side. It just kills me when I see 3-10 losing trades all within a very close time frame and pippage and they are all losers. Build the trade ladder on profitable trades, refuse to play when the market won't provide. Also, just for fun while waiting on trades this week and an updated version of the EA, I turned your wife, I mean Mari into a M1 pip scalping monster. Using all your triggers and safety settings but taking small fixed profits. I have several instances where trading 0.01 lots I have made $50 in a week on one pair. Optimization takes a long time and I need to run some extended back testing but it looks very interesting..... Let me know when Mari2 is ready for test driving. I have a terminal waiting and ready. I believe we are on the right track with this EA, but as it stands now it is going to be streaky until we take care of the multiple losing trade pyramid. ej5
+
+--- 帖子 #228 ---
+TCO going back to the original Mari, possible to have a sleep for X amount of time function when the MACD crosses? Or make it do the complete opposite trade than what Mari would usually do when the MACD crosses?
+
+--- 帖子 #229 ---
+Hi TCO, Forward tested your EA in Alpari demo. It's a combination of V1 and V2. Can't remember when did I last change it to V2. It looks good for both anyway. Experienced some crashes and some errors but I just restart it and kept it going. Attached is my forward testing demo statement. Seems good without any losing trade. Drawdown was manageable, possible wipe away profit but definitely not the whole account. Keep up the excellent work and progress
+
+--- 帖子 #230 ---
+Minut3s - Looks real solid. Can you share your set file with us? It is interesting that you generated trades on demo account this week where my live account has not. I have it set up on both 60/15 and 60/5 TFs for comparison. Also I'm suprised you didn't get scuffed last week when I had a string of losing trades. Maybe you had different SL/TP settings? ej5
+
+--- 帖子 #231 ---
+Wow looks good. No losses in your statement.
+
+--- 帖子 #232 ---
+EasyRyder - if your system is crashing try lowering your chart history. Tools -&gt; Options -&gt; Charts. My system was having the same issues and I read somewhere on FF about it and they said use Max bars in history 2000 and Max bars in chart 5000. Since then, my system hasn't had any more crashes. You can always increase them again to do extensive backtesting.
+
+--- 帖子 #233 ---
+Go back and run a backtest for January through June 2010. November was a great month. Try some not so great months and you will see the risk in the current EA. If not, let us know what you did.
+
+--- 帖子 #234 ---
+Hell--just do the 1st 3 months of 2008 and you will see
+
+--- 帖子 #235 ---
+I did not make any modification to the set file except for RSI filter = false as recommended by TCO. There was a thread TCO was recommending to open up 2 TF(1h and 5m) and insert the EA. I am not sure if I done this correctly. Can TCO advise? MARI_EA V2.0 - 1 hour (EUR/USD, GPB/USD,USD/JPY, EUR/JPY, USD/CHF, USD/CAD, AUD/USD) MARI_EA V3.0 - 5 min (EUR/USD and USE/CHF - Just try for 2 pair and check for how they trade) Alpari spread was so tight on demo but on live, spread wasn't so fantastic. Not sure if it will work well. A friend of mine analysed my statement and this is what he has to say “Trading tactic is unsound. Risk/Reward ratio is screwed. Profit is too low, easy to get eaten by spreads and requotes. Its running for 2 weeks, you are nearly 6.6% profit. It has almost never hit a TP but closes with SL which is shifted just to close it with a small profit. A month will bring in 13%. 12 mths = 156%. Don't it sound too unreal? “ TCO, can you help to advise?
+
+--- 帖子 #236 ---
+Ha ha...yeah you are screwed. Just kidding. I don't know what to tell you. I'm not sure I put too much stock in backtesting. I makes sure that my EA works with it, but the data integrity can be to sketchy. Also, it doesn't take in account all the pairs at the same time. All I can say is lets me keep forward testing and see how it goes. Thanks!
+
+--- 帖子 #237 ---
+TCO, I think we need to pull the TMA into the EA as optimizing and backtesting takes nearly a day to run. On top of this, in my live penny account running 8 charts and printing to the screen is using almost 80% of my cpu at all times when the market is open. I think this has been done successfully with several other systems out there for this very reason. So far in 8 live EUR/USD trades on a 1M chart I am 6 wins 2 loses but down $1.40. Slow painful backtesting of a 1M chart showed $90 profit in one week. REally would like to do a lot more backtesting to furether define correct settings but smoke is already coming out of my machine.
+
+--- 帖子 #238 ---
+Yeah..I will work on the for Mari V4 - which I'm currently foward testing right now. Thanks!
+
+--- 帖子 #239 ---
+still no trades
+
+--- 帖子 #240 ---
+got some, 4 atm on GBPJPY. Yippieh ^^ couldn't await it... running default settings v3 on M5 Alpari UK 1:500 demo.
+
+--- 帖子 #241 ---
+Hi xxl i'll try running v3 on 5m. i'm also using alpari uk. sam
+
+--- 帖子 #242 ---
+nice start today, here you may follow, it is v3 on m5, standard settings but lotsize set to 0.02 @2000 starting balance. Leverage 1:500. Crim is Alpari UK. http://www.myfxbook.com/id/members/s...ri-v3-m5/68904 Let's see how far this one runs. Interesting times to come with the holidays and ireland / euro discussions. Going live 2nd week of January, if it behaves brave like that ^^ Cheers, xxl205 btw TCO, I am 6'8.5", maybe a tall one too, at least ^^
+
+--- 帖子 #243 ---
+One thing I will mention as a suggestion... I run another EA that opens trades similar to the Mari and after playing with it, I found that it was much more profitable to only run during certain hours; (6:00 to 19:00 GMT) I had a programer add this to the EA and it helped increase profitability. Just a thought. TCO... One of these days someone is going to "crack the code" on a EA so it may as well be you! Thanks for the fun!!!
+
+--- 帖子 #244 ---
+[quote=ek24;4183170]Hi all, anyone gets this error while backtesting? 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: Alert: Sell Trailing Stop - Error 1: no error 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: OrderModify error 1 2010.11.18 00:01:42 2010.10.12 15:50 MARI_EA V1.0 EURUSD,H1: Ask: 1.3808 Ticket: 349 Stop: 1.3818 Trail: 1.3818 Did anyone figure this error message out? I am getting it and do not know why...? Thanks!
+
+--- 帖子 #245 ---
+I have attached the error msg that I am getting. I am running MARI 2 What does this error mean?
+
+--- 帖子 #246 ---
+I have been getting that error message also. Plus I'm getting Error 130 - invalid stops
+
+--- 帖子 #247 ---
+[quote=widegap;4228200] This error message means that the EA tried to modify the trailing stop loss when the trailing value did not change. It is not a problem, although it should be cleaned up if the EA turns out to be for real.
+
+--- 帖子 #248 ---
+Hi, I think this error about invalid stops is real problem compare to Error 1: no error. I'm getting Error 1: no error on Mari V3 on M5 TF, which is just annoying, nothing more. Worse problem is on MARI V2 on 1H TF, where it gives me invalid stops - it cannot create Trailing stops and move them, after the price reaches Trailing stop treshold. Probably TCO could bring some light to this ... Green pips to all of you guys
+
+--- 帖子 #249 ---
+Hey guys, I just wanted to give a short update on my running v3 m5 demo. I have been watching it this morning until around 1pm GMT+1 german time, and what I saw was mostly stunning ... but I have major concerns about the settings I had running. Fact : it cranked up some unbelievable 1582 pips !!! But floating DD was down to around 1650 (coming from 2000) Euro. Thus I have to change something here, gets too scary ... I will change lot settings and maybe give only 3-4 pairs on one demo account to give it the space to breathe it needs. Alpari limits me to 100 running trades per account, so 3-4 pairs is maximum. Will check out if the limit is reached. Also I have a 2.0 lots max on a micro account running 0.01 lots ... so I cannot let the lot double effect take place after 10 trades like in the standard settings. So I will set up some new demo accounts with 3-4 pairs, which have to be determined to have small basket variations or give one higly volatile pair and some lower other ones onto it. Comclusion : TCO, you have done a marvellous job, even until now. I have NEVER seen something taking off this way ... just good MM required and maybe some other little tweaks like a pip step / news calendar etc ... and off we go ...
+
+--- 帖子 #250 ---
+still no trades, everythng on default, enabled live trading. no action boys please advise sam
+
+--- 帖子 #251 ---
+XX - This EA is a two edged sword, it can compound winnings AND/OR losers very fast. It does a good job on catching winners but it is the vigor which it throws more trades at a losing position that will wipe out the profits. It won't blow the account as my demo and live accounts have held above water but I have seen the profits dissappear twice each. The only thing holding this EA back is a code requirement that will not allow the bot to throw more trades at a position that is negative and the feature to set a break even to protect trades that are profitable. Only allow another trade after X pips profit. Otherwise it's ability to pick good trades is exceptional! On the error codes, you are just going to have to set your TSL to larger numbers. When the bot tries to modify the SL, if you are moving it within your brokers allowable range for SL it will bounce back an error. This is not the bots fault, this is your brokers fault. Two choices, find a broker with tighter allowable ranges or increase your SL values. How we coming with Mari4? ej5
+
+--- 帖子 #252 ---
+Sam, Who is your broker. Which version are you using and what is your htf and ltf settings. Which chart do you have the EA attached to. Do you have any other EAs running? Have you checked your experts and journal tabs for errors? Are the trade signals flashing on the screen for signal 1,2,3? Do any of them say 1 at times or do they all stay zero? Do you have the box checked for true-check every bar? Smiley face on EA? EAs active button on the MT4 platform clicked on? Do you have allow live trades on?
+
+--- 帖子 #253 ---
+Hi Johnston here are my pictures for journal and experts please advise thanks sam
+
+--- 帖子 #254 ---
+Who is your broker. alpari uk Which version are you using and what is your htf and ltf settings. ltf Which chart do you have the EA attached to. gbpjpy, usdchf and eurusd Do you have any other EAs running? NO Have you checked your experts and journal tabs for errors? yes, pls see attached pictures see 253 Are the trade signals flashing on the screen for signal 1,2,3? i dont know where they are located on screen, sorry Do any of them say 1 at times or do they all stay zero? zero Do you have the box checked for true-check every bar? yes Smiley face on EA? yes EAs active button on the MT4 platform clicked on? yes Do you have allow live trades on? yes Please advise thanks sam
+
+--- 帖子 #255 ---
+Sam, Which version are you using...1,2, or 3? Can you take a screen shot of your EA settings. What are you using for times entered on your LTF and HTF? These need to be numbers like HTF=60 and LTF=5 meaing find trend on H1 chart and take signals on M5 chart. I use HTF60 and LTF15 as I get a few less signals but they are better quality signals. I have also experimented with HTF15 and LTF1 and set max trades to 1. This is very interesting as well. If you are using version one you need to have EA attached to HTF. IF you are using verison three it needst to be attached to LTF. Don't remember version2 as I haven't used it. Unless you have it turned off, there should be a bunch of text flashing on your screen with what seems like every tick. This has all you settings and readings for signal 1, 2, 3 which all need to agree to trigger a trade. My guess is if you have the smiley face and no errors in your logs, but it is not taking trades either you have the chart on the wrong TF or you have entered the TFs (HTF and LTF) incorrectly, or you don't have the EA set to true for check every bar.
+
+--- 帖子 #256 ---
+Hi Johnston here is the picture i'm using version 3 on LTF
+
+--- 帖子 #257 ---
+it will trade after 1 day
+
+--- 帖子 #258 ---
++1. Made 70 pips in a day and subsequently lost 90 pips the next 3 hrs. Talk about some crazy rollercoaster.
+
+--- 帖子 #259 ---
+sorry my friend but this isn't working for me at all. sam
+
+--- 帖子 #260 ---
+Sam, the only thing positive you can say is you haven't lost any money with the non trading bot. Looking at your log files, and screen shots, I really can't see anything wrong with your setup at all. I'm using a real criminal Alpari-US and it has been streak trading. Indicators trigger, indicators go their own way, indicators come back. Seems to trade streaky which is fine, I just don't like the compounding of losing trades (I may have said this once already. ) Your chart and print out look fine. Just keep watching the 3 trade signals at the bottom of the screen text. If all three indicate a "1" for buy or sell and no trade gets taken then there is something wrong with the bot. If you never get three signals in a row then there could be something wrong with an indicator or indicator settings. I will admit, you have me stumped as well. Anyone else have suggestions?
+
+--- 帖子 #261 ---
+ok guys not to worry, thanks anyway for your help especially u ejohnston. anyway i'm trying it with fxpro . watch this space... thank u again sam
+
+--- 帖子 #262 ---
+Hello. Wanted to inform TCO of an change that I have been trying out. I added a 4H confirmation trend to the code, requiring the MACD 4H to agree with the trade by confirming the trend direction before setting BuyReady1 and SellReady1. This was an attempt to filter out the "double dip" on the 1H MACD that has been causing killer losses. I have been running it on 15 pairs forward demo since Dec 2. It has taken 36 trades, all winners for 1380 pips. It took 2 sets of trades on the USDJPY and three sets of trades on the EURJPY. These were the only trades taken. USE_RSI_Filter = false. I am going to open it up a little by setting Buys_Below_Zero_Only = false and Sell_Above_Zero_Only = false and see if it will take more trades on more pairs. I don't totally understand the logic behind the opening multiple trades, and increasing the lot size. Is this a Martingale attempt to recover losses? If it is, it isn't working. I do not think that I will ever be comfortable with your great EA with this feature in there. With the 4H confirmation trend addition, I did see it take 10 winning trades on three occasions. In the past, the only time it took ten trades was when it was losing (I have Max Trades set to 10). I agree with ej5 when he suggests that we find a way to stop the EA from taking multiple trades when it is under water. But most of the time when it takes winning trades, it is in drawdown when it opens the additional trades. I have thought about adding a test that would not open additional trades unles the open trades were running a profit. But this will probably limit most of the winning multiple trades because they start out in a loss before going to profit. Perhaps this note will give you some ideas to share.
+
+--- 帖子 #263 ---
+Any body trading this system? TX.
+
+--- 帖子 #264 ---
+I am running MARI V2. I have had it running on 4 pairs on a demo account for about 3 weeks. I have some conservative setting with Take Profit, Stop Loss and Max Trades. So far I am at even steven on the trades. It has made several winners, but has lost everything it made. Right now I am up $5.00, with 3 trades open each with a loss as of right now.
+
+--- 帖子 #265 ---
+That is an interesting idea. Thanks!
+
+--- 帖子 #266 ---
+TCO could you post the new version you was testing already? I think many of us have concluded that in the current state it would be unfeasible due to its greatest strength also being its greatest weekend.
+
+--- 帖子 #267 ---
+The lot multiplier and multiple trades was not designed to martingale or double down to try and recover losses. This was orginally intended to amplify winning trades. The problem is it does a better job at throwing lots of trades at already losing trades. There should be a only add another position after x pips of profit. I really like the idea of the even longer term check to block the double dipping/whipsaw effect we see sometimes. I have been running Mari live for about 3 weeks on four pair with 60/15 settings and two pair with 15/1. So far I am at break even, even after a significant number of winning trades. A losing pyramid of trades Knocks me down after I work my way up. I am in agreement at this stage that the bot will not go any farther until we address the multiple losing trades and whipsaw effect.
+
+--- 帖子 #268 ---
+Easyrider, could you post your code modified version of Mari that reduces the whipsaw effect. I would like to run some tests with it as I think it is on the right track.
+
+--- 帖子 #269 ---
+TCO gave up on us? lol.
+
+--- 帖子 #270 ---
+Great Thread TCO...hats off to everyone pulling together here.I have 2 suggestions to limit the big losses and wiping out accounts.I have some of my Ea's where a "close all at dollar amount" is an option.If I want to bank lets say $100 and I have it set on the EU then no matter how many trades it takes to get the job done once it overall reaches $100 for that pair it closes all trades and then starts over.You can set different amounts based on the pair also so the beast GJ you can set at $200 and another quiet pair at $75.00 The second suggestion is an Equity protect.I have this also in some martingales and it begins at 50% equity protect then as the account increases in profit I move the equity protect up also thus protecting profits.So if there is a collapse instead of loosing all gained it will close all trades to save at the required equity protect percent.They usually also shut down for a set amount of hours that you have control of until the dust settles. I hope these suggestions become an option.
+
+--- 帖子 #271 ---
+ej5, I have attached the version of the MARI code that I modified to provide for confirmation of the trend on a higher timeframe in an attempt to filter out the times when the MACD on the LTF "double dips". Go through the code to see what I did -- pretty simple, really. You will now see three timeframes in the external parameters box: the original MARI LargeTimeFrame and SmallTimeFrame and a "ConfirmationTimeFrame" that I added. I have been running with 60 - 5 - 240 for these timeframes. You will also see an external parameter called "MacdConfirmMinSlope = 0.00001" This is the minimun MACD slope that must be sensed for trend to be established on the Confirmation Timeframe. The slope is the change in MACD bar from the previous bar to the current bar. You will recall that the MACD parameter are 68, 136, 12, so the MA's wiil be very smooth because they are so long. So the slope will be quite accurate when determined simply by subtracting previous from current. The goal in implementing a minimum slope on the Confirmation Timeframe was to keep the EA out of the market when the 240 MACD was flat and/or changing trend on the largest timeframe. The problem that I encountered is that the MACD varies in magnatude from currency pair to currency pair. So you must optimize this parameter for each currency pair. I have been thinking about trying to "normalize" the MACD values so that they are the same from one pair to the next, but I first wanted to confirm the merit of the approach. The lack of a rapid backtest facility with this EA is a problem. Note that if you set MacdConfirmMinSlope = 0.0, the EA will function as if the minimum slope feature was not present. TCO is working on his modification, and we must be patient. It takes time to test and gain confidence in a revised model. If it is released too soon, than one becomes burdened with responding to the thread with questions that may be unnecessary if testing takes place first. My opinion. I simply that TCO for an EA that still has great potential. I am going to add some code to implement your (ej5) suggestion to open additional position only when the EA is running a profit. I have concerns that this will also limit winning trades, because they all start out negative. We will see.
+
+--- 帖子 #272 ---
+still no trades, default settings etc etc sam
+
+--- 帖子 #273 ---
+In alpari.uk. for me also no trades.
+
+--- 帖子 #274 ---
+Sami, do you have Use_RSI_Filter = false??
+
+--- 帖子 #275 ---
+easy ur ea still attach at tf5m ???
+
+--- 帖子 #276 ---
+EasyRyder, Thanks for posting this as I feel the EA as it currently stands is stuck. I know TCO is working on an updated version but he should use us as his legs to do a ton of testing. We will find bugs and fixes that may take a single person a long time to find. I agree if he is still trying out basic concepts you want to wait until the bot is mostly water tight so you don't spend time on distracting stuff instead of the meat of the EA. I have seen cases where the original thread starter gets distracted or life calls and the thread just kind of dwindles. I have also seen cases where the creator finds the final fix and never comes back to the forum. I'm not saying TCO is any of these but we need a few people such as yourself to keep the momentum and bot moving forward. Thanks so much for sharing.
+
+--- 帖子 #277 ---
+Yes, When the timeframes are 60, 5, and 240 I attach to the 5m.
+
+--- 帖子 #278 ---
+hi easy yes rsi filter is false sami
+
+--- 帖子 #279 ---
+Here is my 2 day result which unfortunately my computer isn't letting the statement come up in account history so I took a pic of my results and attached the sceenshot.The demo account is 50K (i know not like I trade..now)using 60/5 with RSI false.I have one trade still in play usdcad at -28.Lots are .1.My broker is Think Forex and minimum lot size is .05 but it did nothing.As soon as I upped the lots to .1 then it started trading.
+
+--- 帖子 #280 ---
+Spiritfriends, which version and timeframe are you using? Is everything else set at default?
+
+--- 帖子 #281 ---
+I am using the setup of v2 on the H1 and v3 for small pairs on the m5.I have lots set to 10 and presently this morning I have 10 trades on the usd cad.
+
+--- 帖子 #282 ---
+Hey guys .. in the MARI setup can we set the amount of pips to be used when MARI attempts to move the stop? For instance with my broker the AUD/USD minimum is 00005.0 .... Is this value settable in MARI and if so where? Setting this would prevent the ERROR I get when MARI trys to move the stop. Thanks All.
+
+--- 帖子 #283 ---
+Should be able to adjust the stops in the Trailing Stop section of variables. The number of pips in the TS will vary from currency pair to currency pair. Some of mine are 10 some are 50. IMO this is how the crim brokers keep us from scalpipng with tight stops and small profit targets. You should know that due to minute by minute fluctuations within the market that it is not unusual to get some stop movement errors, especially when you are trying to hug profits.
+
+--- 帖子 #284 ---
+Would you know what the verbage would be for the settings? I have looked at them but couldn't really decide which ones would be the correct ones to edit.
+
+--- 帖子 #285 ---
+I have tried MARI EA V.3 during last week (from Monday December 13 to last Friday) with default parameters of TallCoolOne. Datas: Broker: ROBOFOREX Lot: 0.01 Demo Account 10 K$ 10 Currencies. Benefits Closed Trades: +933 $ Opened Trades: Over 100 Benefits Open Trades: -1,328 $ I will trie the modification of EasyRider this week with his default parameters over the same 10 currencies. Greetings. JdD
+
+--- 帖子 #286 ---
+I have been working with V3.0a mod by EasyRyder and in backtesting it looks pretty good. Have it on a demo account but it hasn't taken a trade in the last 10 days. Market is a little choppy so maybe it's doing a good job keeping me out. Anyone have any additional results or info to post?
+
+--- 帖子 #287 ---
+Hello ej5 -- hope you are doing well. I have been concentrating on my manual trading, and have not spent any time on the MARI EA in a couple of weeks. If I make some time after the first of the year, I will modify my version of the EA to include an option to add positions only when in profit. Please give some thought regarding a set of rules for implementing this option. Two or more heads are better than one -- that is why we are still on this thread. I have become disappointed in TallCoolOne. If you start a thread, you have an obligation to service it or tell people you are going to other things. I do not want to pre-judge him, perhaps he is working hard on a revised solution. But at the moment, he might be tall, I do not know, but he sure as hell is not cool.
+
+--- 帖子 #288 ---
+ER, I tend to agree, we have been holding off with making mods to the bot so as to not hijack the thread. It would be great if TCO would just check in to continue the thread or turn it loose to those wanting to participate. He started a good thing. Maybe he is wealthy now and forgot about us. I like the idea of only adding to a position when the signals align again and we are 20-50 pips in the money. Getting in several more times on repeat signals is ok as long as we are moving into th money each time. The bigger my position gets, the tighter I like my stop to move up to prevent an avalanch should they all reverse at the same time.
+
+--- 帖子 #289 ---
+ej5, I wonder why we need the 'TradeLotMultiplier'? If we are not going to add an additional position until the existing position(s) is/are up a significant number of pips (say 20), then it makes no sense to me to increase the lot size since every added position is opened at an ever greater risk of a reversal. And we wll never have more than a handful of positions opened, assuming we are on a 5m chart. 100 to 150 pips is the most we will ever see on a 5m chart. I am inclined to add an external parameter 'PipsToAddPosition'. After every increment of PipsToAddPosition, a new position would be opened. If PipsToAddPosition = 20, and MaxTrades = 3, than no positions can be added after a move of 60 pips. If, on the other hand, PipsToOpenPosition = 5, and MaxTrades = 5, then at 25 pips profit we would have five positions opened. Given this strategy, I see no need for the TradeLotMultiplier and am inclined to remove the logic unless someone convinces me otherwise.
+
+--- 帖子 #290 ---
+I agree in that I do not see the need for the multiplier. I also agree that the max trades, and pips to new trade need to be user entered parameters. As you indicate that 20 pips might be a lot on M5 charts but not appropriate for higher time frames should someone decide to do so. It might also be that we use a different pips to add trade for various currency pairs dependant on their volatility and noise in a day.
+
+--- 帖子 #291 ---
+Another thing that really needs to be done is TMA Centered needs to be brought inside the EA. The only way this EA is going to be optimized is to be able to effectively backtest it. I am not convinced that bringing TMA inside the EA code will accomplish that objective, but it is worth a try. I will take a shot at doing that, although it might be above my pay-grade.
+
+--- 帖子 #292 ---
+My experience has been that writing the indicator directly into the EA speeds up the EA considerably. Otherwise the EA has to load and unload it each time which is where it eats tons of time. SH and NB will usually write the indicators into the EA eventually once they are nearing the final stages to speed it up and reduce resource usage. I have seen this make a big difference. I agree, the way the EA sits right now it is very difficult to run significant backtests on to see if it is truly profitable. I do have it on forward testing but it trades so little with the additional filter (at least recently anyway) that it will take some time for it to prove itself this way as well. I am in the same boat as well. I have a forex program that lets me construct crude EAs for idea testing but it is not flexible enough to import other EAs and requires some detailed indicator knowledge to add them to the program. I am a picture click programmer at best.
+
+--- 帖子 #293 ---
+hello just wanna ask bout using this EA . i allredy follow all step, but i can use this EA .. where i can find setting to use this MARI EA? and how to automated MARI its self.. thnks
+
+--- 帖子 #294 ---
+Settings for EA are pretty much out of the box. However, with the way the EA currently trades it is about a break even bot. Has a nice string of winners only to be axed back to reality with a string of big losers. Discussions are on going as to how to add an additional filter to reduce losers, and step functions to prevent throwing more trades at already losing positions. The EA you simply copy to your experts folder. Restart your platform. Drag the EA to your chart, click on all the live trading boxes and you're done. Should have a smiley face in the right hand corner of the chart that tells you it is working.
+
+--- 帖子 #295 ---
+in what condition this EA will open trades its self? thanks .. really apreciate your help
+
+--- 帖子 #296 ---
+After placing on chart and smiley face appears in upper right corner the bot is on its own for you to watch. It will open the trades and close them on it's own however never leave a bot to run on its own. If you trust a piece of software to be careful with your money, you might as well just send it to me for safe keeping. I would never run a bot on a live account until you get a feel for it and know what it is going to do. If you want to know the conditions the bot uses you need to read post one. On most of the forums the most up to date version and method is usually kept there.
+
+--- 帖子 #297 ---
+just suggestion from newbie trader could we include the protect profit method in this ea
+
+--- 帖子 #298 ---
+TCO definitely ditched us. Makes me kind of annoyed mad that he just used us a guinea pigs and then when he possibly found a somewhat better solution version to not post it but just bail.
+
+--- 帖子 #299 ---
+Seems as though our date left us at the prom with no ride home. Shame as the bot is close to being something good. My problem is I'm not much of a coder so I'm more of just a paper weight at this time. If anyone can make any of the updates to the EA that have been discussed in the thread I would be happy to try them out on both demo and my live penny account.
+
+--- 帖子 #300 ---
+ej how health your acc now ......
+
+--- 帖子 #196 ---
+As it stands now the bot is about a break even bot. Unless someone else has some noteable results I moving on as the thread has evidently been ditched by the creator. ej5
+
+--- 帖子 #197 ---
+so far this ea has good performance DD too much but keep profit
+
+--- 帖子 #198 ---
+Ive tried to backtest both the 2.0 and 3.0 and get the following errors on both... Cannot open file 'c rogram files (x86)metatrader - fxopenexpertsmari_ea v2.1.ex4 on the ... Any ideas, ive never run into any problems testing EA's like this before.
+
+--- 帖子 #199 ---
+Hey all, Just a quick head's up to a technique I've been using with pretty good results using the "TMA centered Mari" with this system. Basically it's just Buy when price hits the green dotted line, sell when it hits the red dotted line, and close your trade when price hits the solid green line. H1, EU and GU for the moment, but really want to try some other pairs soon. Check it out! Thoughts?
+
+--- 帖子 #200 ---
+Hello. Thank u. What is TMA centered Mari?
+
+--- 帖子 #201 ---
+It's one of the indicators that come with this thread's system. Maybe this is not the best place to be writing this, but it's a pretty powerful little idea.
+
+--- 帖子 #202 ---
+Here is a little screen shot of EU, just so you can get a little better visual example.
+
+--- 帖子 #203 ---
+Hey TCO, I didn't know you had a thread already! Just had a quick read of the EA parameters, not sure if I got it right, for the first qualification on the longer time frame, does the EA read the HISTOGRAM of the MACD - is that correct? If so, I guess it would be easy to convert the second condition on the lower time frame to take signals from the W%R as we are doing in the 100_pips threads? I am thinking of Third Screen Strategy, but instead of waiting for MACD to cross center line, start taking trades when the histogram changes direction. Seems to me, couple this with a much lower Take Profit, say 1 ATR, instead of 100_pips longer term 320 pips TP, more trades will be taken and hopefully more will reach TP. All the best, E.
+
+--- 帖子 #204 ---
+Hi Erebus, This is an old thread for an EA that I wrote a long time ago. This has nothing to do with the Third Screen Strats. If there is a thread for the new EA, I will create a new thread. Thanks For the Third Screen EA. You set the Large TF for the trend determination method, which can be the Ichimoku, the EMA or the MACD method(macd_adjustable). The Lower TF is used for the Williams% signal. So theoretically you could make the Larger TF weekly and the Small TF as daily.
+
+--- 帖子 #205 ---
+Hai Tall sorry i'm new in MT4 and his indicators. I dont undestand what links your EA V3 or V2 with TMA centered Mari. The ea works witout TMA centered Mari? and TMA centered Mari needs EA v2 or V3? tahnks Armyda
+
+--- 帖子 #206 ---
+Hi Armyda, i'm not really supporting this EA any longer. thanks!
+
+--- 帖子 #207 ---
+so...doens't work any more?
+
+--- 帖子 #208 ---
+Yes, I think it would be great if you opened a new thread to support your latest EA, especially because it has the 3 trading type options. Now, I think you misunderstand what I was asking here - can this EA or your current EA made to read the actual Histogram of the MACD? Right now, the criteria is if the MACD is either above or below the center line, but if you look to the the Histogram, you can see trades can be entered much earlier - I guess it would nearly be the same as trading the MA crossover? If you have ever read Philip NELS 4 Hour MACD trading thread, you would know what I mean - they have moved him to the Commercial Forum now. Thanks, E.
+
+
+===== 附件下载链接 =====
+
+未找到附件

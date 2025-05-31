@@ -1,0 +1,813 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+previouse versions have expired sorry about that heres the source with no limitations
+
+--- 帖子 #2 ---
+ok hold up, i have the tf hardcoded to h1, i have to reoptimize everything n submit updated version sorry bout that
+
+--- 帖子 #3 ---
+What do we do with the *.chr files? Do they need to be downloaded some where? Thank You
+
+--- 帖子 #4 ---
+wait till i upload new version(bout 1 hr) thats a profile, in your program files/mt4 directory there is a folder called profiles to load the profile lokk in the file menu of mt4 under profiles the profile is named trendchaser psar
+
+--- 帖子 #5 ---
+the first post has been updated
+
+--- 帖子 #6 ---
+during the backtest, every pair is profitable though not all has such a perfect slope up but several do all test are done on 15 minute exept 2 gbp-chf is 30m eur-gbp is 5m i advise you run a test on each 1 and decide which pairs you want to trade then you can adjust your risk, i wouldnt go to high though because in a drawdown if all pairs go against you at the same time you could have margin calls id keep it at 1-2 or lower by default it is at .5
+
+--- 帖子 #7 ---
+I'll do some testing for ya.
+
+--- 帖子 #8 ---
+thanks marty, let me know how it goes
+
+--- 帖子 #9 ---
+later today i will make the ea so it doesnt reenter a trade if its closed, and so it doesnt open in the middle of a trade that means il be adding sl, tp, ts also
+
+--- 帖子 #10 ---
+ok this version has single entry mode, sl, tp, and ts if single entry is enabled the ma is not used and will not enter a trade until it crosses psar dont use tp, sl, ts without using single entry i have also updated the zip file in the first post oops found a bug in single entry, its fixed
+
+--- 帖子 #11 ---
+now that we have single entry, the ea can be optimized on tick data with ts and tp, sl im not up to the chore right now i also dont trust tick data but if any1 does this pls share your findings
+
+--- 帖子 #12 ---
+the first post has been updated with a cleaned up version, plus its the source code
+
+--- 帖子 #13 ---
+Can this be applied as an indicator and not an EA? If so, please explain how to do so. Thanks.
+
+--- 帖子 #14 ---
+the ea uses the psar indicator which comes with mt4 im not sure what your asking do you mean youd like the comments on the screen without trading?
+
+--- 帖子 #15 ---
+What I was asking was what the settings are so that I can use your technique as a manual trading system. Thanks.
+
+--- 帖子 #16 ---
+if you place the expert on the screen, the settings are displayed in the comments, if you load the profile, the charts are set per settings im re optimizing everything for 5 minute charts now, which is better
+
+--- 帖子 #17 ---
+iv also completely re coded the expert, its like 10x better, i havent posted it yet
+
+--- 帖子 #18 ---
+heres the new settings so far but im not using the ma anymore il post the expert after iv optimised the rest of the pairs if (Symbol()=="GBPJPYm"){ StopLoss = 155; TakeProfit = 2000; TrailingStop = 125; psar = 0.0004; ma=7; time_frame_for_signal=5; } else if (Symbol()=="GBPUSDm"){ //FGBPUSDm StopLoss = 2000; TakeProfit = 2000; TrailingStop = 75; psar = 0.0004; ma=19; time_frame_for_signal=5; } else if (Symbol()=="EURUSDm"){ //FEURUSDm psar = 0.0006; ma=14; time_frame_for_signal=5; StopLoss = 30; TakeProfit = 2000; TrailingStop = 75; } else if (Symbol()=="USDJPYm"){ //FUSDJPYm psar = 0.0002; ma=26; StopLoss = 75; TakeProfit = 85; TrailingStop = 75; time_frame_for_signal=5; } else if (Symbol()=="USDCHFm"){ //FUSDCHFm psar = 0.0001; ma=6; time_frame_for_signal=5; StopLoss = 90; TakeProfit = 30; TrailingStop = 2000; } else if (Symbol()=="EURCHFm"){ //FEURCHFm psar = 0.0004; ma=54; time_frame_for_signal=5; StopLoss = 50; TakeProfit = 65; TrailingStop = 30; } else if (Symbol()=="AUDUSDm"){ //FAUDUSDm psar = 0.0003; ma=5; time_frame_for_signal=5; StopLoss = 65; TakeProfit = 185; TrailingStop = 105; } else if (Symbol()=="USDCADm"){ //FUSDCADm psar = 0.0005; ma=85; time_frame_for_signal=5; StopLoss = 45; TakeProfit = 95; TrailingStop = 65; } else if (Symbol()=="NZDUSDm"){ //FNZDUSDm psar = 0.0001; ma=95; time_frame_for_signal=5; StopLoss = 60; TakeProfit = 2000; TrailingStop = 105; } else if (Symbol()=="EURGBPm"){ //FEURGBPm psar = 0.0001; ma=32; time_frame_for_signal=5; StopLoss = 30; TakeProfit = 2000; TrailingStop = 20; } else if (Symbol()=="EURJPYm"){ //FEURJPYm psar = 0.0004; ma=90; time_frame_for_signal=5; StopLoss = 50; TakeProfit = 70; TrailingStop = 2000; } else if (Symbol()=="CHFJPYm"){ //FCHFJPYm psar = 0.0003; ma=30; time_frame_for_signal=5; StopLoss = 65; TakeProfit = 30; TrailingStop = 75; }
+
+--- 帖子 #19 ---
+I'm not a programmer. But I was looking over your code here and noticed that some of the stops and take-profit levels are pretty large. Forgive me if I'm completely off-base here, but do you really want a 2000 pip stop loss?
+
+--- 帖子 #20 ---
+2000 pip means im not using it
+
+--- 帖子 #21 ---
+the ea opens n closes trades, im optimizing tp, sl, ts to make it more profitable. if it doesnt make it better i dont use it
+
+--- 帖子 #22 ---
+I see. Thanks!
+
+--- 帖子 #23 ---
+the first post has been updated
+
+--- 帖子 #24 ---
+hello, i tried your ea with default settings. i closed one trade manually, and after sometime the ea open trade in the same direction, shouldnt ea wait for the change in direction to take next trade ?
+
+--- 帖子 #25 ---
+heres a newere version, it is supposed to wait for a new direction though i havent forward tested that, i set the tp and sl to 15 in the back tester and it works fine, could you post the chart that this happened on
+
+--- 帖子 #26 ---
+i just thought of some things that could cause that the ea is set to use a mini account, the symbols have a m beside them (GBPJPYm) the comments on the chart display the settings being used you should check that the psar indicators settings match what the comments say, and also that the comment says single entry
+
+--- 帖子 #27 ---
+extern psar, is it used if full_Auto_settings=true ? also MaximumRisk is it used if full_Auto_settings=true ?
+
+--- 帖子 #28 ---
+full_auto sets psar, tp, ts, sl, &amp; the tf for signal changing any of those 5 settings will have no effect if full_auto is true maximum_risk can be changed
+
+--- 帖子 #29 ---
+do run the ea 24hrs ? how to best use the ea ?
+
+--- 帖子 #30 ---
+hey peter heres the way im running the ea, stop n reverse style i look at chart to see psar settings i input them in the ea properties i set auto to false single entry to false normal entry to true now there is no tp sl or ts im letting it run 24/7 i dont manually interear in any way oh yeah im only trading the 6 best pairs from the test usd-jpy usd-cad nzd-usd eur-jpy gbp-jpy usd-chf far as a best way, i think much testing i did make it so that a experienced trader can interveen you might even wanna do this set up the ea the way i just described exept leave single entry true normal entry false check the charts every so often, manually adjust your stops close trades manually you can use mt4's trailing stop if you wish that way your using this ea as a entry only, and your managing the exits but on the psar cross the ea will still close the trade unless you disable it the auto settings is what the tester shows best over a long period of time that doesnt mean its the best at this exact moment you can adjust psar on the chart, then set ea to that the use of the ea is pretty much unlimited im running 6 diferent installs of mt4 2 of these are manual trading so im not focused on this ea that i interfear but if it turns out profitable after running a few months i will open a sub account for it good luck
+
+--- 帖子 #31 ---
+Any chance of coding in a Magic Number so I can run this EA yet still trade another type of system without conflict?
+
+--- 帖子 #32 ---
+it already has the magic number coded in, it uses a diferent magic number for each pair the magic number being used is displayed on the chart in the comments
+
+--- 帖子 #33 ---
+also in the order, theres a comment field so that you can see which trades this ea placed
+
+--- 帖子 #34 ---
+this is the version you should be using
+
+--- 帖子 #35 ---
+Thank you Trendchaser, For clarification, I had an active trade open from another strategy, I then "engaged" the EA and it promptly closed the trade and placed the trade in the direction of the downward PSAR. These were the settings: auto entry : false single entry : false normal entry : true ma entry : false I would love to just set this as a stop &amp; reverse system, like you are running it, but naturally without interfering with other trades I run on the same currency. Would this sequence of switches allow this? auto : false single : true normal : false ma entry : false Thank you for any additional insight.
+
+--- 帖子 #36 ---
+sorry about that i fixed it, it will not close any trades that dont have the mn
+
+--- 帖子 #37 ---
+Wow, thank you for such a quick update.
+
+--- 帖子 #38 ---
+none of the settings will interfear, both ways will stop n reverse the important thing is that you dont use auto just because it puts a sl,tp and ts single entry and normal entry will give simular results the diference is single entry enters a bar later and you can close trades without it reentering normal entry is more precise as it enters on the completion of the current bar but if you close a trade it will reenter again at the completion of the bar it will enter over n over ma entry is same as normal entry, but it wont reenter until the low touches the ma for longs or the high touches the ma for shorts, you can close trades long as your clear above the ea for longs clear below for shorts if price goes back n touches the ma it will reenter at the completion of the bar for a accurate entry at the ma use tick mode so that it enters at contact instead of at the completion of the bar hope this helps
+
+--- 帖子 #39 ---
+What is PSAR? Please explain how to use it. Thanks
+
+--- 帖子 #40 ---
+psar is a indicator that comes with mt4 load it on a chart and its self explanatory probly made for exits but here im using it as a system
+
+--- 帖子 #41 ---
+report
+
+--- 帖子 #42 ---
+this weeks psar statement
+
+--- 帖子 #43 ---
+Hi Trendchaser, I've just started testing your PSAR experts and had a great trade today on a demo account. I'm not clear, however, on what caused it to close out at near perfect timing? I manually closed half the position up where the small red x is on the chart but then let the rest ride to see where the expert would exit. I thought it was set to stop and reverse so wouldn't close until it retraced back to hit the PSAR? But fortunatally it closed near the 55sma line. I didn't think closing at the 55sma was an option and if so it seems it would have stopped out much earlier in the trade. I used your posted template file for the EURJPY which set the PSAR at .0005/.005, quite far away from the price bars and wouldn't explain this exit. How would you interpret it? Thanks. LeoM
+
+--- 帖子 #44 ---
+i have no idea why that trade closed psar is the only close logics in the ea it can reopen at ma but not close are you sure you didnt turn off auto settings i wish i could get it to close there though lol
+
+--- 帖子 #45 ---
+http://www.forexfactory.com/images/misc/progress.gif Thanks trendchaser, but I really need a psar ea that I can use on the 4 hr. time frame since this is the most reliable timeframe and the one where it back tested over 14,000 pips on the GBP/JPY in the last 11 months. I also need the psar ea to trade from the moment the dot appears at the beginning of the candle and automatically close the trade when the dot appears again in the opposite direction at the same time open another trade to continue in the new direction and on and on and on. Do you have any psar ea's that do this and that I can use on the 4 hr. TF? Thankyou, Paris http://www.forexfactory.com/images/buttons/edit.gif
+
+--- 帖子 #46 ---
+to use on the h4 chart do this 1. enter the psar settings you wish to use 2. set auto settings to false 3. set tickmode to true the rest of the settings you need are already correct at default youl have to test in tick mode to see the entry exactly on the dot
+
+--- 帖子 #47 ---
+Can you add a Lot trade amount for 0.01 so I can disable money management? Thanks
+
+--- 帖子 #48 ---
+done
+
+--- 帖子 #49 ---
+Dear Trendchaser, First thanks for sharing these information with us.Second I am lookind for an indicator which alert me(Sound or E-mail) when SAR changes. Could you please help me with that?I am new so sorry if my request looks very basic to you .I don't need EA's for now. Thank you Mike
+
+--- 帖子 #50 ---
+heres 1 mike
+
+--- 帖子 #51 ---
+Thank you so much.I'll give it try today Mike
+
+--- 帖子 #52 ---
+Hi trendchaser, Thanks for this EA and the many others you have shared! When I looked at the statement you posted in post #41 and analyzed it, I found you had made 461 pips on gbpjpy from 11/11/07 - 11/18/07. That is excellent! So, I loaded the v3.1 today on IBFX and used the gbpjpy .chr profile from the v2 zip file on the first page post (changed the .chr so the expert showed as "trendchaser_psar_v3.1" so it would load). You can see the live (on demo) results here: http://www.3rdstreetconsulting.com/ea1/statement.htm My question is are the settings from the gbpjpy .chr profile from the v2 zip file in the first post the ones you used to get the great performance you posted in post #40 and #41? Also, I noticed in the thread originally you were using 15m time frame for almost all the pairs, then you optimized all of them (post #18) for the 5m time frame and added a 155 pip stop loss, 125 pip trailing stop, and changed the MA to 7. I have the one above running on 5m time frame with a 2000 pip stop loss, 2000 pip trailing stop (so basically no stop loss or trailing stop), and the MA at 55 on the 5m time frame and wonder if those are correct. Also, if you want me to test it with a different set of parameters, just tell me which ones you want to try and I will run them for you. Thanks again, Kevin
+
+--- 帖子 #53 ---
+Dear Trendchaser, I tried it.thank you.I got a question here.it gives me only one time buzz.I was wondering is there any way to make it longer?I mean it keep buzzing untill i turn it off or buzzing for 1 minutes. The other thing which would be perfect, sending me an email and I recieve it on my Cell. Sorry to bother you,and thanks for help. Regards Mike
+
+--- 帖子 #54 ---
+newest version is on the first post 3.4
+
+--- 帖子 #55 ---
+the ea has been updated from now on i will just name it trendchaser psar and i will always update the first post
+
+--- 帖子 #56 ---
+Hi, I'm sharing my experience with the trend chaser psar v3.3 version for the past 4 days or so. I'm up about $224 using .10 lots on the GBP/JPY on the 5 minute chart with trend chasers settings. I believe it's .00041 setting default with tick mode true and auto settings true. Current trade is up about +130 pips. It's working well. I have it on two diffent computers and it's making money on both computers. So far so good, looks like good potential. Paris
+
+--- 帖子 #57 ---
+I just checked my work computer and the psar v3.3 is up more than $464 using .10 lots since Nov. 26th.!!!!!!!!!!! Amazing results. Paris
+
+--- 帖子 #58 ---
+im glad to hear that because i cant post a weekly statement when i was working on the ea and compiling it on the account it messed up opened about 100 trades n closed them im using the envelopes now thinking it will be even better but id hoped some1 will keep running the original settings n post the results thanks
+
+--- 帖子 #59 ---
+trendchaser, Thanks for your great job. I forward test v3.1 for a week and the result is very good. But I have a few questions. 1) About the new version , only the ex4 and tpl file can download. Is that I need to apply it manually to each pair? (I remember the old version have profile) 2) From the the first post you said we need to adjust the psar by following if we set auto = false. If set auto = true, is that I do not need to adjust settings in different pairs? 3) About the envelopes, does the ea have internal SL on it? 4) In the fist post, I see " all settings being used are displayed in the comments on the chart" but when I load the template, i didn;t see any comments, is there anything I go wrong? Attached my screenshot. Thanks very much.
+
+--- 帖子 #60 ---
+with default settings you can just apply the ea to the charts of the old templates auto is the psar settings i optimised in the 5 min chart its never changed if you wanna set ur own, turn auto off you must choose your exit, theres nothing internal or hidden you wont see any comments because the market is closed
+
+--- 帖子 #61 ---
+Thx for your quick answer Everything seems solved expect the psar settings. I used auto , the default is 0.2. When I applied to USD/CAD in the attached chat, comments shown psar should 0.00088 and 0.008, so I need to change the settings for this pairs, right? Or ea will done it for me since i choose auto? If yes, how often do I need to change? Should I need to check it everyday? Thanks gain for your help.
+
+--- 帖子 #62 ---
+auto settings overides the ea's properties the settings displayed on the chart are the settings being used you cannot change them if auto is true if you wish to change them turn auto to false
+
+--- 帖子 #63 ---
+All pairs works well expect USD/JPY. From the chart, I short at 110.36. Normal entry = true, single entry = false. When it comes to a long signal at around 12.25. The order does not stop and reverse. And sell holding my short now. Please kindly advice if I misunderstand something. Thx.
+
+--- 帖子 #64 ---
+the psar settings the ea is using does not match the psar on the chart, correct the psar on the chart to see when ea will exit, ur chart says 0.0002-0.08 is what ea is using
+
+--- 帖子 #65 ---
+Sorry I am need to MT4. As I said before I use full auto setting, so no need to set the psar settings, right? So now, how to correct this?
+
+--- 帖子 #66 ---
+the psar setting in the comment are being used, to see these on the chart you need to edit the indicator to match, then youl see why the trade hasnt closed the indicator your looking at has incorrect settings
+
+--- 帖子 #67 ---
+It will be great if you can post the profile file. I remember in v3.2 when I load the profile, all the settings is done.
+
+--- 帖子 #68 ---
+Hello Trendchaser, I've noticed that the latest version of Trendchaser_PSAR closes other open trades on the same currency pair. Is there something I can do to avoid this? I double checked and it will close even manually opened trades. So I don't think this is due to a mix-up on the magic numbers. Suggestions? Thanks. LeoM
+
+--- 帖子 #69 ---
+the profile is now on the first post
+
+--- 帖子 #70 ---
+im ready to post a system using the psar expert this is a manually traded system using the ea as a tool we all trade diferent, so the outcome will vary below is my 2 templates im trading gbp-jpy open 2 charts m1 and h1 we look to h1 for main system rules we look on m1 to scalp in trading direction of h1 since the market is forever changing so is the rules rule 1: main trend direction this i decide by looking at the chart i can manipulate psar settings n ma n envelope in the ea to go with this rule2: only enter at ma is the safest but this means no counter trend trading so its up to you again rule 3: managing the exits is where the money is the ea can make the entries fine but the exits is our job rule 4: never trade sober, you just cant think right rule 5: send me money lol ok enough rules to break, so on with it we use psar or best instinct as trend direction we use the yellow ma and the envelopes to get rich we also get greedy n just close trades because there in profit no other reason needed lol oh yeah theres a osma indicator on bottom i dont realy use it but it looks good, it lags this system has made me great pips in the last 10 minutes so im going live haha, well truth is its new i did open a $200 sub account though my posts will be of a real account heres my current chart, system says short
+
+--- 帖子 #71 ---
+well i know i didnt say enough and i 4got the templates ok im going short because price has hit resistance at the ma theres no guarantee but i think probability is in my favour if i happen to be wrong then this thread will convert to(how to recover from a hedge) my plan is to show you how you can use this ea for variouse stuff i have 3 systems now that i use this ea on its combinations make it very useful
+
+--- 帖子 #72 ---
+current expectations
+
+--- 帖子 #73 ---
+actually this is what iv been praying for
+
+--- 帖子 #74 ---
+LOL ! Never trade sober??? Just how much do I need to drink before trading ??
+
+--- 帖子 #75 ---
+thats a hard question? usually enough till you use one eye
+
+--- 帖子 #76 ---
+Hi Trendchaser, I just happened to stumble across your thread always looking for a better ea than the ones i have got already. I read it and thought yeah right like you do, but I always give new ea idea a chance so i downloaded it and set it up on my mt4. This was on 5-12-2007 at 13:01 to be precise. i placed a $50.000 demo account with IBFX and started it without changing any setting or uploading any profiles. So I just left it to run 24/7 without any manual intervention. I returned to my computer on the late afternoon of 7-12-2007 just to see how it was going. Well I spent about half an hour looking for my eyeballs after they jumped out of my head after what they saw. After i put my eyeballs back i thought this a dream and said I would check it on Monday just make sure. Well i had covered my eyes this time to stop them jumping out. So I had to show you Trendchaser the results since 5-12-2007 at 13:01 . The system is so simple and to date work great. Enough of me going on, here are the results and keep up the great great work. Regards JTH yeah you are seeing right!
+
+--- 帖子 #77 ---
+That is an amazing statement. I attached it to a chart this morning, but so far no trades. I didn't change anything, but after a few hours I read trendchaser's first post and he said to change a couple of things. I did and another couple of hours later, still no trades. What time frame are you using to get those results? hmmmmmmmmmm....not sure what I'm doing wrong.
+
+--- 帖子 #78 ---
+Update: I got my first trade a few minutes ago.
+
+--- 帖子 #79 ---
+Hi Eureka , I use tf 15min, i am also trying it with a $500 mini account with the same time frame. I started this on 7-12-2007 at 05:49 gmt not bad for a day and a half. But we will see over next two to three weeks. See where it goes from there. Regards JTH
+
+--- 帖子 #80 ---
+Thanks. Did you make the changes that trendchaser suggested in the first post? drag ea to chart set auto false set psar to 0.02 wait till you have a trade and then set to normal entry
+
+--- 帖子 #81 ---
+no just as is no profile or anything i just use the template and go. the pairs i use is; GBP/USD, EUR/USD, USD/JPY, USD/CHF, USD/CAD, AUD/USD, NZD/USD I might thin it out later don't know. JTH
+
+--- 帖子 #82 ---
+OK.......thanks for your help. I'll try that. Best of luck to you. Carol
+
+--- 帖子 #83 ---
+Best of trading luck to you too. JTH
+
+--- 帖子 #84 ---
+very nice results on the first post where i stated to set auto to false that was for one person who wanted to use psar default settings my ea comes default on m5 chart its looking at psar on m5 regardless which tf your using the auto settings are the setting i optimized in tester im glad there performing well
+
+--- 帖子 #85 ---
+exact instructions are drag ea to m5 chart thats it, theres nothing to change but if you dont wanna enter half way threw a trade, turn on single entry
+
+--- 帖子 #86 ---
+iv been focussing on one pair and manually managing exits i believe this will work best iv got great entries, but exits are lagged theres new version on first post called trendchaser psar test theres template also to use original ea settings, just turn on auto by default the settings are for this technique il be sharing theres only a few things to do drag ea to chart wait for trade adjust tp or stops i look for breaks of old s&amp;r because we often retrace to them il try to post charts often as i go so that you understand and can match my results after we have a trade, and weve taken profit you can optionally reenter to do this open ea properties set single entry false set open with envelope true now on envelope retracement wel reenter the chart below shows current i closed my short and im waiting on a long after we have a new entry il post my exit strategy and analysis
+
+--- 帖子 #87 ---
+when i first optimized this ea i noticed in the tester, anytime the balance was above 30,000-40,000 the lots were maxed out, and it showed very much profit just like you made since the lots are maxed, if u start with 50,000 once u make 50,000, withdraw it you should be able to do this often but there is periods of time that the ea breaks even
+
+--- 帖子 #88 ---
+see mm changes the equity curve if in tester you set risk to 0 youl see good profit the more mm added the worse the line gets trading a exact lot size and not using mm will yield the best equity curve you recover from losses much faster is the diference
+
+--- 帖子 #89 ---
+Hi Trendchaser, Thanks for sharing your EAs. What are the differences between psar and psar_test? Which one should be used for auto trading? Is the time frame for psar_test 15m? Please kindly clarify. Thanks. Regards, hksweeper
+
+--- 帖子 #90 ---
+we have a new long my exit is on the chart below my tp is at previouse break
+
+--- 帖子 #91 ---
+in psar test, i removed normal entry true false cleaned up some stuff, no major changes but the test ea comes defaultly setup for the 15m chart iv been posting either ea will still trade the m5 chart from original, with auto settings
+
+--- 帖子 #92 ---
+i moved my stop to be incase we dont hit the tp iv manually closed the trade at 227.04
+
+--- 帖子 #93 ---
+i expect a down retracement before we go up il check later, if we go down and i want to enter i will set enter at envelope true wel enter because were below the envelope i may set exit on psar false because this is that kinda situation that the ea maybe lose a trade price may hit lower sar
+
+--- 帖子 #94 ---
+Hi, I am still using version3.2. I use it coz its simple. I am using normal entry, the result is good. Everything is automated. Now I want to manual trade. I use single entry = true, normal = false. So after ea enters a trade, i manually input tp and sl. My question, if my tp is not touch, and reverse signal appears for single entry. What will happed? 1) nothing happened? 2) closed my first trade only? 3) open a reverse trade only? 4) closed my first trade and open a reverse trade? Thanks.
+
+--- 帖子 #95 ---
+Good EA Gem. NIce job... More Grease to your elbo. Thomas. -Sc.david-
+
+--- 帖子 #96 ---
+4) closed my first trade and open a reverse trade? newer version is coded better n uses tick mode all this will happen immediate older version isnt coded right, bar behind, skip trades possibly in my latest version, set auto true thats it single entry already true, tick mode is on
+
+--- 帖子 #97 ---
+the first post has been updated i made many improvements on the ea for those firmiliar youl see on the post i put detailed instructions for the ea there and think iv covered most questions any1 has asked
+
+--- 帖子 #98 ---
+Hi Trendchaser, Thanks for the update. Is the new version using 15m time frame for GBPJPY? Please kindly clarify. hksweeper
+
+--- 帖子 #99 ---
+So when I manual trade using trade_at_cross_only, I need to change tick mode to false? Since as you said it will reopen when I tp if tick if true. It will only affect ONE bar only?
+
+--- 帖子 #100 ---
+yes, this will only happen if you close the trade on the same bar it opened i very rarely do that so its not a problem to me
+
+--- 帖子 #101 ---
+Thx for your quick answer. I am using this ea with other money management ea (swiss army). It will close all open positions when I make every 10% profit. So if I use tick mode, after I gain 10% ea will close all positions. When single entry mode = true, ea will repeatly open orders while swiss army ea will repeatly close orders in that bar.
+
+--- 帖子 #102 ---
+the ea will open a maximum of 2 orders in that bar it wont open repeatedly if you gain 10% in one bar id say ur over leveraged this probably wont happen unless its a gbp-jpy beast move the odds are slim that many of the charts will be on the exact signal bar also i think your ok
+
+--- 帖子 #103 ---
+Hi cashfinder, plz i would love to know more about the swiss army ea, and plz u could kindly attach it to this thread or simply send it to my box.&gt; david_32003@yahoo.com Thanx. -Sc.david-
+
+--- 帖子 #104 ---
+i had a late entry on this trade i had left the ea in envelope mode, oops this time im going to move sl to top of the range after a big move theres usually a ranging period then we continue or reverse iml try to catch the bigger moves
+
+--- 帖子 #105 ---
+i should have tp at 227.5 because i knew it would bounce the rentered with envelope il do it that way next time
+
+--- 帖子 #106 ---
+Since the thread is in another forum, i am not sure I can post it in here or not. I have PM you http://www.forex-tsd.com/expert-advi...anagement.html
+
+--- 帖子 #107 ---
+hi trendchaser, Not 10% in one bar, its from the beginning. Swiss army or other MM ea can set a beginning balance, and a % target balance. When % of profit reached, it can close all open positions to protect the profit. Thanks again
+
+--- 帖子 #108 ---
+i dont see a problem with postin a ea
+
+--- 帖子 #109 ---
+i was out of the trade but reentered nice looking pin bar on h1
+
+--- 帖子 #110 ---
+maybe il look into adding these features to the psar
+
+--- 帖子 #111 ---
+i went all out today i made another psar version its on the first post the options are endless now youl love it theres a brief description at the beggining of the post
+
+--- 帖子 #112 ---
+Wow another beta, thx for your work. For second parabolic, is it second position open VS second close? ie position opened by second parabolic entry will closed by second parabolic exits? Can you explain a liitle more about reverse_second_psar_entry and exits, and how to apply in trades. Thanks a lot
+
+--- 帖子 #113 ---
+the ea only makes 1 trade at a time the 2nd psar can be used same as the first, it can be used on higher tf as filters just any use u find for it
+
+--- 帖子 #114 ---
+this weekend i am optimizing the ea all over there will be a new version so that these settings are automatic i will post a text document listing these settings these settings will replace the original m5 settings as iv found better settings
+
+--- 帖子 #115 ---
+if u want to use this as manual trading just use psar it comes in mt4
+
+--- 帖子 #116 ---
+Pardon me trendchaser, if this is a stoopid question! What is the difference between the psar ea and BETA psar ea? I've been reading all over here and cant find an explanation. Thanks...
+
+--- 帖子 #117 ---
+hey man, BETA is the most recent version.
+
+--- 帖子 #118 ---
+i went through n changed all the trading logics to provide more trading options in the beta added a second psar and you can choose between upper and lowere envelope lines for opening and closing trades its beta cause there may be bugs, i found one already this weekend and need to update first post il do that now
+
+--- 帖子 #119 ---
+My question should have been whats the difference and why would someone use one or the other? I guess I'm wondering if beta is for a mac or something, as beta sounds like a "techie" term. I set up psar last night, and it took one late trade immediately that I closed manually, after that nothing on 7 pairs...Can you take a look when youv'e got a minute? Where can I review the "rules for this system? I not real clear about when EA is supposed to trade, and I like to know. I feel I can use it more effectively when I know what it's supposed to do. That, and I like to compete with my EA's by trading manually right beside them ya know? Thanks
+
+--- 帖子 #120 ---
+the psar settings being used is 0.00038-o.011 there didplayed on the chart set the psar indicator on the chart to the same
+
+--- 帖子 #121 ---
+I've been running the psar EA for over a week now and it is up 20.9 %. Unlike some of the other supernova EA's, this one seems to do better if you just leave it alone and let psar manage the trades. http://i5.photobucket.com/albums/y170/orion70/psar.jpg
+
+--- 帖子 #122 ---
+the ea trades at the psar dot theres not realy a system i provided optimized m5 settings for most pairs i put all the lines on the chart as likely targets i close the trades manually for gbp-jpy the template is default for m15 since your using the m5 just correct the indicator on the chart to see where its trading the profile is for m5 theres templates for several pairs in the profile there set correctly optionaly use the envelope lines for reentry or exit but if you use for exit, use entry to as a filter to prevent open n closing multiple trades the current envelopes are good on m15-m30-h1 a good setting for h4 try 30 with dev 1 for m5 add a env of 100 with dev 0.3 so realy you can switch between settings for diferent conditions n trading styles a multi system a good tip always disable ea before changing tf when changing settings, set ea to only trade in the desired direction first its easy to make a mistake in the settings this started as just a psar ea after seeing lots of trades go into good profit then come back to breakeven before trade closed i added envelopes but theres drawback to everything i find it best to use psar only on m5 as in the profile and close trades manually when in good place or move stops behind them i let the ea manage the losing trade i just manage winning trades by default this ea uses one psar only very simple
+
+--- 帖子 #123 ---
+Isn't that what my chart says? I'm confused....
+
+--- 帖子 #124 ---
+the indicator isnt the same the indy is set at 0.0023 0.3 (m15 settings)
+
+--- 帖子 #125 ---
+Hey TC, thanks for your patience here. Attached is my chart as of right now. If I want to run the 5m psar, which settings do I want? In the last couple of posts, you've given me two different set-ups, I want the 5M set-up. I also have another question about the profiles, but I'll save that for next. Thanks Update: Ok dude, I got it. You meant the indi under properties! So I changed it the way you said. I had thought you mean the indi on the chart. I had forgotton that the visible indis do nothing for the EA. Thanks http://www.forexfactory.com/images/misc/progress.gif
+
+--- 帖子 #126 ---
+deleted
+
+--- 帖子 #127 ---
+For TC or anybody else who knows: Regarding the profiles suppied with the EA- It appears to me that these profiles load automatically when I bring up a chart and add the template. Am I correct here? Using a preset profile is new to me (I'm used to bringing up a chart and adding the EA, changing the properties, etc...) I ask this because I tried to add one of the profiles that came with the EA and couldn't get to it. They are installed in the MT4 profile folder, by the way. I have 7 charts up on my platform right now, all the psar numbers are different, but I didn't change them. They just came up that way, that's what makes me assume the profiles load automatically. Correct?? Thanks
+
+--- 帖子 #128 ---
+i think you still dont have it lol changing the settings in the ea has no effect because your using auto if you correct the indicator settings on the chart, the psar on the chart will hit where that buy arrow is on the first chart you posted youv had the ea set correctly from the beginning and its still correct your using the 5m settings but looking at m15 indy settings is all
+
+--- 帖子 #129 ---
+yes, a profile is a set of charts if you change anything, there changed permanantly the profile saves everything so if you mess it up close mt4, overwrite profile with original dl after you load the profile thats it, nothing to do now exept the risk is set to 3% this is high for running so many pairs im using 1 for risk
+
+--- 帖子 #130 ---
+Good stuff man, thanks. So, if I change my ea properties, does this change the profile? Or, do I have to actually OPEN up a profile and manually change it? I ask this because (as you know) I have messed with my psar settings some...I can't even find the profiles via the MT4 profiles button, it just shows the default MT4 majors. But your profiles are in there, I put 'em in myself and double checked 'em.
+
+--- 帖子 #131 ---
+the profile is changed then you have always used a profile called default profile saves the whole workspace just as mt4 does normally basically i sent you my workspace any changes youv made are permanant to restore the settings you gotta re download the profile again
+
+--- 帖子 #132 ---
+Will do. Thanks Trendchaser!!
+
+--- 帖子 #133 ---
+Hey TC What does the 'BreakEven' parameter do ?
+
+--- 帖子 #134 ---
+it moves the sl to breakeven after specified pips
+
+--- 帖子 #135 ---
+Hi Trendchaser! I'm following a bit a progression of your EA. Nice concept and thanks for sharing it. In the beginning I wanted to see how it works with basic settings opening a trade on psar cross and closing a trade on next cross. I just compose it on IBFX mini demo acc. First the profiles of 8 charts 5min, and just run it with default. I noticed that it doesn't open trades on the psar cross. Then I tried without profiles just with charts and your template - same thing happened. Finally I did it with naked chart and mt4 indicator psar with same settings as EA. Still weird openings. And the trades are mostly losers. Also didn't have success with beta2. I consider that the feature 'use optimized psar' overrides manual settings. And optimized psar is not working in accordance with indicator on the chart then. Am I wright? If not, must be doing something wrong then, so kindly asking you to guide me just through that basic step. Mark
+
+--- 帖子 #136 ---
+hey mark by default tick mode is off it done better in the tester that way so the trade opens after the bar closes if that didnt fix the problem verify that the psar you see on the chart matches the settings being used by the ea in the comments the psar indy doesnt like more than 4 digits past the decimal so if ea says were using 0.00038 but the indicator says 0.0004 correct the indy, youl see it change on the chart iv noticed that the indy resets its self often i guess everytime i close mt4 n reopen
+
+--- 帖子 #137 ---
+Hey Trendchaser, so I reloaded the profiles as you suggested, changed only the psar to optimized and tick mode true. The ea works now, but seems to be doing exactly the wrong thing. Enters late after a move starts and exits are well after retracement is underway. Out of 25 trades 21 were losses. I must be doing something else wrong, any ideas?
+
+--- 帖子 #138 ---
+I've noticed the same thing. Maybe TC can help out here.
+
+--- 帖子 #139 ---
+Hey Orion I've noticed you around here a lot lately, working with the EA's and the like. Have you had any luck with the EA's? For me- Glen's not yet, psar not yet, original supernova pretty good 'till just recently ( I figure it's the holidays, as the market is flat the last several days)
+
+--- 帖子 #140 ---
+Actually, the psar EA was working really well for me until yesterday. In just under 2 weeks it took a $3k demo account up to $3724. In the last 24 hours, it has given every bit of that back. My luck with the supernova ea's was just so-so. I am going to wait until rick and skyline have had a chance to go over the code a bit before resuming tests on those. I have had the best luck with psar but even it seems to have gone snakey the last day or two. I was rather surprised to see it take longs at peaks and shorts at troughs!
+
+--- 帖子 #141 ---
+Yea,it's kinda funny right now. I know that many seasoned traders shut their computers off around Dec. 15th or so, and wait for the new year. It's starting to make sense....But I just can't help it!!! I guess I'll just have to see it for myself, and roll with the punches.......
+
+--- 帖子 #142 ---
+I'm just taking extremely small positions right now. More out of boredom than anything else.
+
+--- 帖子 #143 ---
+yeah its not good when we have a range on higher tf this happens at times looking back in history this is where you need to move up a tf until volatilty returns
+
+--- 帖子 #144 ---
+it must be the account your auto settings are not working your actually using default settings in ea, 0.0023 0.3 i guess youl have to input the settings from the comment to the ea in beta 2 i believe this wouldnt be a problem as iv added auto settings to both acc types but if you dont tell the ea the acc is normal then they wont work
+
+--- 帖子 #145 ---
+So...beta2 is the current EA ?
+
+--- 帖子 #146 ---
+yes
+
+--- 帖子 #147 ---
+but if you have a normal account set normal true for auto to work
+
+--- 帖子 #148 ---
+what does beta mean? I mean why that title? Just the name suggests some fancy scmancy computer stuff...and I'm, well, less than a techie. Why are there two anyway? Thanks
+
+--- 帖子 #149 ---
+That's what I had done that caused the ea to not trade a couple of days ago...do you remember that? After reading the first post where it says the comments are always the correct settings, I went through properties and reset them all according to the comments- the ea just sat there for 12 hours, no trades. I am using an IBFX mini account. What have your results been like the last day or so- with a fairly flat market and all?
+
+--- 帖子 #150 ---
+i named it beta because it coulda had bugs beta means not tested completely
+
+--- 帖子 #151 ---
+well i havent been running any ea,s the past few days iv been manually trading the day chart since theres so many nice ranges right now playing video games n watching movies
+
+--- 帖子 #152 ---
+alpha and beta are terms used in software development. An alpha version is a first shot attempt. A beta is slightly more refined and meant for testing before the final version is released. There may be more than one beta versions released, each an attempt to improve on previous versions.
+
+--- 帖子 #153 ---
+if u have ibfx mini i dont see what could be wrong, i havent had any problems you should run in tester n verify the charts and if it traded correct
+
+--- 帖子 #154 ---
+what every1 needs to do is look at 4h n daily charts at these ranges you may want to restrict ea trading direction, maybe even increase a tf to get through less volatile times you need to always have a sence of what the markets doing along side using a ea
+
+--- 帖子 #155 ---
+But the optimized settings are specifically designed for a 5m TF ?
+
+--- 帖子 #156 ---
+youd need to adjust the ea for market conditions if you dont wanna suffer these ranging periods maybe just knowing when to turn it off?you can use envelopes on h4 a good setting now is period 30, smoothed, median price dev about 1 for exit entry could be narrowed
+
+--- 帖子 #157 ---
+Still trying to figure this out....
+
+--- 帖子 #158 ---
+heres what usd-jpy looks like the psar on your chart is incorrect
+
+--- 帖子 #159 ---
+Thanks mfor the EA Trendchaser. I just put it on my charts and I noticed the PSAR is different for each pair. How did you calculate these PSAR values? Thanks again.
+
+--- 帖子 #160 ---
+i optimized in the tester you may find better settings on diferent tf per pair i did some testing the other day n these were what was best gbp-jpy m30 0.003 eur-usd m15 0.0001 usd-jpy h1 0.0016 gbp-usd m30 0.004 not that im running these settings the best settings i think. are what looks good on the chart good entry, n tp manually use pivots n draw your own s&amp;r
+
+--- 帖子 #161 ---
+Hi trendchaser, Are you still using m5 psar=0.00038 max=0.011 for GBPJPY? I think this is already very good. Is the m30 setting that you just mentioned even better? hksweeper
+
+--- 帖子 #162 ---
+im using the m5, the m30 showed better in tester but i close trades manually n the m5 looks like better entries
+
+--- 帖子 #163 ---
+any1 been running this ea on real account its been doing pretty good just using gbp-jpy
+
+--- 帖子 #164 ---
+I am also running it on GBPJPY only. I use your auto M5 setting, and I close part of the trade manually. The result is quite good. Hope it will keep going. Once again, thanks for this EA.
+
+--- 帖子 #165 ---
+Hey TC how have you been? I popped a Guiness in your honor... Quick question.. I loaded the beta2 PSAR onto an AUD/USD 5 min and set to auto, changed the Indy settings to match the EA, it hit and went through the PSAR but no trade?? I have an ODL demo, and I think it is a regular, and I set the EA for regular. I have attached screen shot. Thanks for all the hard work. Also the guy that posted the killer results that put it on some charts with no changes, was that the beta version or a previous? Thanks
+
+--- 帖子 #166 ---
+one thing i notice is it says auto tf settings that dont work on that pair, that was a experimant on gbp-jpy which dont work anyway, it should be false n use classic settings true whats ur brokers minimum lot size, the way the ea is set up a mini is 0.01 norm is 0.1 if yours is 1 then its a problem if thats the case then you gotta manually set it up set normal acc =false dis_mm_if_lots_under =1 lots =1 the risk % will be incorect so you may need to add a decimal like instead of 3 try 0.3 run in tester n see if it trades
+
+--- 帖子 #167 ---
+i should point out to all that gbp-jpy is the most profitable and you only need trade the 1 pair
+
+--- 帖子 #168 ---
+Thanks TC I will make changes and run tester.
+
+--- 帖子 #169 ---
+TC I have no I dea what I,m doing wrong but it is not working for me. Tester gives one trade in 6 months. I have tried multiple setting. I am going to open an IB demo and try it on there.
+
+--- 帖子 #170 ---
+check ur pm pipsqeaker
+
+--- 帖子 #171 ---
+the ea recognises two types of symbols GBPJPYm GBPJPY if your symbols are diferent like GBPJPY-pro then auto settings dont work and alot of other things to
+
+--- 帖子 #172 ---
+in the tester if your testing with open price and the ea is set to treade at cross only the entries n exits are getting skipped 2 options, set trade at cross false or use tick data TC I have no I dea what I,m doing wrong but it is not working for me. Tester gives one trade in 6 months. I have tried multiple setting. I am going to open an IB demo and try it on there.
+
+--- 帖子 #173 ---
+i added a ea on the first post for closing trades it doesnt open trades it closes any trade on the same pair that your running the ea it uses psar this has made my manual trading convenient just turn on n off when u need default is 0.007-o.2 on m5 doesnt matter which tf you have ea on as long as you set a timeframe 0 for current
+
+--- 帖子 #174 ---
+Hi, I downloaded trendchaser_psar.tpl and this template using 0.0023-0.3 default settings.I'm trading g/j.Should i use 0.007-0.2 settings on m5 for g/j? Thanks
+
+--- 帖子 #175 ---
+i wasnt alerted there was a post here or i would ha replied sooner the psar close is a edited version of psar ea it will close any and all trades on the pair your running regardless of magic number itl try every tick regardless of requotes i created this ea as a tool for manual trades it will not open a trade i use this when im in a trade n must leave or sleep
+
+--- 帖子 #176 ---
+i would like to share how i am using the psar ea i will upload multiple versions every version is identicle except the default settings are diferent as i explain my system youl see why i made multiple versions il upload 7eral files the system is best explained in screenshots this is not 100% automated by default alerts are on, i like to be woken up when i have a trade every ea has alerts on exept psar close 90%+ every trade goes into profit the trick to this system is the art of the exit entry is easy, its the exits that get us im using three versions of the ea the first is trendchaser psar this ea opens and closes based on parabolic stop and reverse indicator which comes with metatrader its instant, soon as you touch a psar dot, it trades this ea will only open 1 trade per signal but in order to handle requotes, the ea will retry repeatedly during the same bar of the signal, so lets say u get a buy, and u manually close it, the ea will reopen it immediatly if your still on the sames bar but after you get a new bar it will not open any more trades untill it touches a new psar dot then theres trendchaser psar instant entry this ea will open trades no matter when so do not close a trade while this ea is running, it will re-enter i use this ea for reentry finally theres psar close this ea will close trades only unlike the other 2 ea,s it will close any trade regardless of the magic number i use this ea when im done for the day but have a trade open it will retry every tick the first 2 ea,s will only close the trades they opened so any other robot or manual trades are safe but psar close will close all trades on whatever symbol ur running it on now for the art of exiting im using the t3 indicator from the supernova thread, cause its smooth im also using fibo indicators that i edited, using a indicator i found on bobokus thread and a couple of mtf moving averages these are set to the h4 chart there values are 10 and 5 to the open these show me trend direction and possible targets on retracements now for the best knowlege youl ever hear i have lost money repeatedly thinking i missed the boat so the first thing u do is jump on thats a mistake 90% of the time if youv missed the trade, wait for the next, i dont care if its move 1000 pips soon as u enter itl reverse entering late in a trade usually is high risk, your stop is a mile away going by the rules and if u break the rules, retracement gets ya live to trade another day, wait on a new trade now for the fibos 80% of the time, when 0 or 100 is broken we will hit target 1 trendchaser is already in the trade by then also iv noticed the weekly and monthly fibo are very strong price will touch them and reverse these are your exits so to sumarise this, were on a 15 minute chart every 15 minutes you update ur sl according to t3 but if the trend is strong, we can let psar have it when we hit monthly or weekly fib levels, we tp n call it a day youl be surprised how price will hit them to the exact pip in the next few post il upload the indicators and robots and post some screen shots
+
+--- 帖子 #177 ---
+heres the rest on the indies
+
+--- 帖子 #178 ---
+and finally the template iml skip the screenshots as i think i explained it well but ask any questions u have i also put all scripts and experts in my favorites tab so i can switch easily, il upload scripts now the buy and sell script uses same mn as the experts any orders you place with these scripts the ea will manage i always use these scripts to place manual orders cause my robots will manage them
+
+--- 帖子 #179 ---
+also the risk is 5 by defailt, in ea and scripts they all work together to make this system
+
+--- 帖子 #180 ---
+for you that know me, you know i made a supernova ea load supernova on your chart and youl see that psar gets you in a few bars sooner in some cases means 100 or so pips
+
+--- 帖子 #181 ---
+also this is not meant to be run 100% automated but this is what iv been using to manually trade after i make 1 good trade, atleast 80 pips, i call it a day
+
+--- 帖子 #182 ---
+Thank Trendchaser, Could you show some chart picture for explain more with your system please. Cheer. Cha.
+
+--- 帖子 #183 ---
+ok i will do that, gimme a little bit
+
+--- 帖子 #184 ---
+the chart below displays my setup i have all scripts, experts in my favorites in seconds i can left click n drag them to the chart
+
+--- 帖子 #185 ---
+now that i have a trade il watch it and do whats necesary every 15 minutes i updat my sl with t3
+
+--- 帖子 #186 ---
+youl notice in the previose chart, my sl is right on t3
+
+--- 帖子 #187 ---
+youl also see i have a psar open only i dont have use for it so i didnt post it
+
+--- 帖子 #188 ---
+this is realy all u gotta do, once u have a trade, just manage the stops il probly just move sl to t3 every 15 minutes since im using a 15 minute chart win or lose i stick to these rules unless i touch a weekly or monthly fib line, then i close the trade and im done for the day iv been winning most trades, the ones i lose are no more than 20-30 pips the winners are much more
+
+--- 帖子 #189 ---
+this trade im posting can easily lose, but thats ok, thats how it goes i know a big winner is coming up
+
+--- 帖子 #190 ---
+that trade just lost
+
+--- 帖子 #191 ---
+now il wait hrs, if i dont see a A trade im done for the day i will not force a reentry unless im very sure to force a reentry, drag instant entry to the chart
+
+--- 帖子 #192 ---
+in the mean time, i still have trendchaser psar on the chart i might get another trade before i sleep but when im ready to sleep, i turn off all ea's one easy way is just drag psar close to the chart
+
+--- 帖子 #193 ---
+psar close will not open any trades all logics for opening trades are deleted from this ea but it will trail with psar, any open trades and close them
+
+--- 帖子 #194 ---
+next trade il post it here to show how i manage it
+
+--- 帖子 #195 ---
+i found a bug with the alert, i wasnt alerted on previose trade il have to re upload 2 ea's
+
+--- 帖子 #196 ---
+What is profit factor with Forward testing??? Me, like many people who likes to see profit factors as soon as I see a new strategy or system Thanks
+
+--- 帖子 #197 ---
+Do you use the data window to get the precise T3 setting of the previous bar? My first demo trade using your system is currently +32
+
+--- 帖子 #198 ---
+managing the exits is the heart of the system so wel all have a diferent profit factor it depends when u tp one may win while another loses if you truly undrstood the system you wouldnt ask this i advise you to re-read the system il repeat this again THIS IS NOT A 100% AUTOMATED SYSTEM the art of the system is in the exits i might use s/r for a exit, maybe a fib, maybe t3? how can i give a factor when my brain is half the system also the time of day, i start looking at charts a few hrs before london, n i sleep when im done what time do u trade its impossible for us both to have the same results my personal profit factor would blow ur mind too many ppl say its impossible me personaly, i shoot for 20%+ a week on a good week i can make 200% it all depends on what the pair offers, and if u follow the rules and if you trade the right time of day me making 200% while u losing 100% is very posible my goal is just a few % but i take whatever the pair offers while im here
+
+--- 帖子 #199 ---
+i lost tonight orion and it dont look like il get another trade any time soon im glad urs is in profit i use the current bar on t3 if ur going short, dont 4get to add the spread
+
+--- 帖子 #200 ---
+the exits are what seperates winners from losers if using the past bar works for you then stick to it just because i use the current bar dont mean its best, this system is in experimental stages i apreciate any input or improvements that any1 has to offer im trying to make a half human half bot system
+
+--- 帖子 #201 ---
+like tonight i used t3 for my sl and i got stopped out, now the pair is doing good its ur judgment are u willing to let that trade go against u 100 pips?
+
+--- 帖子 #202 ---
+Pretty good start there buddy My trade closed out at +11....better than a poke in the eye with a sharp stick. One thing I noticed, both in your posted chart and on my platform, "entry mode=ERROR MORE THAN ONE MODE IS SELECTED". Is that anything to be concerned about?
+
+--- 帖子 #203 ---
+ERROR MORE THAN ONE MODE IS SELECTED ignore this il clean it up later i disabled some features from a older version, i never updated the comments is all it means nothing
+
+--- 帖子 #204 ---
+by default the risk is 5 do not let a trade go against u to much i trade very aggressive if this is to aggressive i can upload a safer version of the ea's
+
+--- 帖子 #205 ---
+even on gbp jpy i cant let a trade run more than 50 pips just depends on the situation i should have probly used a lower risk before uploading the ea's but i personally love the risk
+
+--- 帖子 #206 ---
+heres a sample of what i see i got stopped out going long the reason i wont reenter is cause were at the daily high on the fib if we break that, and i feel good bout it, i might ride it up to target 1 but unless we break that, im done for the day so we can each have diferent results you may see it diferently
+
+--- 帖子 #207 ---
+but remember, piercing the high is not breaking the high after we pierce the high it usually retraces some thats why everytime u enter it goes against u after you see the high pierced, let it go down some then enter
+
+--- 帖子 #208 ---
+see that ppl, right after i said it, it happened it happens almost every time but we didnt make new high so dont trade it
+
+--- 帖子 #209 ---
+all we did was test the high we didnt break nor pierce it
+
+--- 帖子 #210 ---
+looks like were making a pin bar, but since this goes against my bots and my rules, i have no trade im no good at picking tops n bottoms in fact iv lost alot of money trying that thats why i use these bots with firm rules
+
+--- 帖子 #211 ---
+im half drunk below i see a name: pipopatamous wow thats cool wish id thought of that
+
+--- 帖子 #212 ---
+trendchaser sucks compared to that lol
+
+--- 帖子 #213 ---
+im willing to trade live here if some1 joins in but dont expect me to post live trades alone i already posted live trades on the supernova thread and they were good trades done live but no1 replies im looking for ppl to share analysis with id like to share with other traders or ppl interested so we can learn from each other dont matter what system u use the more views we have the better only thing that matters is its gbp-jpy
+
+--- 帖子 #214 ---
+I re-entered at 211.30 and exited as price neared weekly pivot for +57. Probably exited too soon but I am just trying to get a feel for this system.
+
+--- 帖子 #215 ---
+i have late entry, im in at 212.27
+
+--- 帖子 #216 ---
+thanks otion for pitchin in most days i do have good analysis just looking to share it
+
+--- 帖子 #217 ---
+the fibo indicator i supplied says wel hit 213.92 iv found it to be correct very often, lets see
+
+--- 帖子 #218 ---
+though t3 is far away, i still put sl there incase some freaky news, i usualy mark news on my chart, i better do that now
+
+--- 帖子 #219 ---
+i put psar close on, il just kick back n watch for now
+
+--- 帖子 #220 ---
+Hello from Tampa :-) ok TC...I'm not nearly as good as you...so I do not know what I have to "offer" BUT, just to keep the dialog going :-) so you don't feel you are all along in this :-) ...and to encourage you to keep posting :-) here is my chart with my MANUAL entry on the PSAR...I closed it right away when I saw it went against...for me SMA50 low / hight act as a S/R as well...if in the upper trend the price may go down to the lower SMA50 then bounce right up again...and viceversa...so let's see how this is going on latter...I just exited though :-)
+
+--- 帖子 #221 ---
+ooops...I see my PSAR was set wrong (0.06 instead of 0.006)...it was a huge difference!...I downloaded your tpl....so I saw my chart parallel to yours...well I fix it...my logic of SMA50 low/Hi still remains though :-)
+
+--- 帖子 #222 ---
+hello from auburndale i just woke up n turned on the bot
+
+--- 帖子 #223 ---
+TC...is my EA setting correct?...I just changed a few things... Trailing 75, SL 100 I want GJ 15 min with PSAR 0.006 and only one entry/signal at end of candle... reverse at next opozite PSAR or manual... Can you please check my settings :-)
+
+--- 帖子 #224 ---
+well just wanted to say hi on here as I will be following this thread closely...I use the qqe alert with a t3 ma (standard) and bollinger bands for profit targets, psar and chaos awesome oscillator... Does anyone see the double top that formed and now the regular divergence? My analysis is that if it breaks below the uptrend tl I see a 297 point drop
+
+--- 帖子 #225 ---
+I see the double top...if goes down I think it will stop at the daily Pivot? if goes that low...then who knows?
+
+--- 帖子 #226 ---
+if you set each tick mode false, u can enter at end of candle, otherwise it enters soon as it hits the dot if u leave ea running it will reverse at next psar automatic
+
+--- 帖子 #227 ---
+yeah pivot looks like a good target no telling how long we might range
+
+--- 帖子 #228 ---
+i tp for 30 pips at the 10 ma from h4
+
+--- 帖子 #229 ---
+heres the trades iv had today, all winners just been watching tv n waiting for the alert
+
+--- 帖子 #230 ---
+im just trading signal to signal but thought id minchine the good reentry measuring this swing, weve retraced %50 if a bar breaks low of previouse bar you can re-enter im not re-entering just bringing it up incase ur interested in a good re-entry you can also pull the fib from the high before this one
+
+--- 帖子 #231 ---
+since fibs arent perfect, i dont even put it on there, i just watch pa for the reverse sighns not need for a fib, but it helps explain it
+
+--- 帖子 #232 ---
+also theres 3 charts i look at, each one is dif setup, one chart has heiken ashi cause its pretty lol and s&amp;r and another chart that just has 3 sma 50 100 200 i draw trend lines on this chart and study multiple time frames theres also a h1 chart on a dif monitor that im always watching pa on candles theres still 10 minutes left, but looking like a 2 hr pin bar might form so watch out trying to re-enter
+
+--- 帖子 #233 ---
+checking all these dif charts helps me to know when to exit, and when to pass up a trade
+
+--- 帖子 #234 ---
+if not a 2hr bullish pin we might have a 30 min bearish pin
+
+--- 帖子 #235 ---
+Last night I left thw EA on to see what it will do...very weird entryes and exits...so today I put the EA to ask me for confirmation so I hope to see what's going on...so many choices to these EA's :-) Talk you you latter oh...I just got a permision sound...for no reason...or just because I closed manually the last one and now I got a new entry in the same direction of the move at the opening of a new candle.... P.S. I will email soon to ask you for the settings again :-)...but for now...(trend chaser psar) the " Use Single Entry " option will enter only 1 trade then then "go dead" ? or uses only one trade per move/signal without reentry if you close manually?
+
+--- 帖子 #236 ---
+TC...I checked the settings from your template....The EA from your template is set by you at TF 15 min...but I see that the first line is s 0.02 ? these is the PSAR correct?....why is not 0.006 as the setting of the PSAR? Aren't they supposed to mach? Q1: I do need to set both the PSAR from the window Indicator the same value as the PSAR value of the EA, corect? and that will be 0.00 6 on the TF 15 min ? TY :-)
+
+--- 帖子 #237 ---
+your using a very old version most recent version is on previouse page, or 2 back
+
+--- 帖子 #238 ---
+that looks like one of the first versions i made probly full of bugs
+
+--- 帖子 #239 ---
+That's what I thought too It's the one that comes with your template...where is your LAST version of the Template? so, they do need to be the same value, correct?...both PSAR in the EA and on the chart...
+
+--- 帖子 #240 ---
+the ea trades whatever setting its set to if youd like to see ahead of time when itl open a trade youl need psar on the chart to see but the psar is not needed on the chart for the ea to function correctly
+
+--- 帖子 #241 ---
+on the first post there is a link to where the system starts, there youl find the latest template and ea be sure to check 7eral post as i updated the ea soon after posting
+
+--- 帖子 #242 ---
+here it is http://www.forexfactory.com/showpost...&amp;postcount=195
+
+--- 帖子 #243 ---
+be sure to start reading here, it answeres all the questions youv asked http://www.forexfactory.com/showpost...&amp;postcount=176
+
+--- 帖子 #244 ---
+Nice system....+100 on current trade. EDIT: Closed trade for +152
+
+--- 帖子 #245 ---
+Thanks...I did that...and I uploaded all the newer versions I thought :-) Thanks again and have a nice weekend!
+
+--- 帖子 #246 ---
+Hi Trendchaser I´m a little confused. The best time frame is 5m or 15m for GY ? What set you recommend ? Best Regards.
+
+--- 帖子 #247 ---
+the m5 has a big dd im using the m15
+
+--- 帖子 #248 ---
+Thanks Trendchaser, The set for 15 m is the same of 5m, in the first post, or you recommend any changes ? Best Regards
+
+--- 帖子 #249 ---
+theres a link in the first post that goes to what im using, it includes a dif version of ea, only dif is its default settings it explains how im using the ea
+
+--- 帖子 #250 ---
+---------------------- Thanks Trendchaser. Best Regards
+
+--- 帖子 #251 ---
+Any perfomances since the last post??? the thread just died??? Any1!! oOOOHOOO?
+
+--- 帖子 #252 ---
+its been performing well
+
+--- 帖子 #253 ---
+these have been very good market conditions for psar m5 settings
+
+--- 帖子 #254 ---
+iv just updated the ea on the first post, many many new features just loader up n see
+
+--- 帖子 #255 ---
+Does your EA run/signal with EachTick or Closed bar? Want to test it with the Strategy Tester. Thank you
+
+--- 帖子 #256 ---
+Hi Trendchaser, Is this EA fully automatic or could be manual trading. Coz, I just want to see/know the signal, I trade with another broker, doesn't use MT4. So I will take this as indicators? Take the signal, trade by myself. Thanks for the info
+
+--- 帖子 #257 ---
+dl ea on first post again, had to fix some things it does either way, use tick mode for that tick mode is accurate for testing, open price is accurate if you have tick mode false, and use indy to close if you use equity or tp or ts then only tick mode for testing is good
+
+--- 帖子 #258 ---
+it can be a tool to assist you or automated you have options of psar, or envelopes many combinations you can trade multiple pairs and use the equity to close trades the ea can close trades for you to at equity
+
+--- 帖子 #259 ---
+Dear TrendChaser, Actually that's my question too.How could I install EA with no automatic execution. I just want to get the signals and do that manually.Sorry if it's stupid but I have no idea about EA's and take time for me to trust them. Thank you for your effort Mike
+
+--- 帖子 #260 ---
+you can disable live trading and enable alerts this is built into mt4
+
+--- 帖子 #118 ---
+also to use the ea alerts which i like better, i let the ea run live on a demo, and when i hear the alert i can trade it on my real account the ea has option for popup or just sound and email
+
+--- 帖子 #119 ---
+Is there actually any point to backtesting though?
+
+--- 帖子 #120 ---
+well i ran the ea live a while, and bactested to see if the results were same, there very close but i dont realy have a answere i think recent data is somewhat accurate, but as you get farther back i dont know this ea does good, but like most all ea's the range can hurt backtest still shows the ea coming out on top but markets changing all the time do i trust backtest, no is there any point backtesting any ea, i dont know
+
+--- 帖子 #121 ---
+id like to add that backtesting this ea for me is pointless iv said many times that i use this ea as a tool to help me trade if you have a system that uses these indies then itl be good to you but if your looking for 100% auto bot keep looking backtest to learn how the ea operates and to see it works correctly but i dont pay much attention to the results almost everyday a new settings is needed, maybe even switching the tf i look at the chart, see what psar is doing good the past few trades, and use that i dont try to find some magic setting thats worked forever
+
+--- 帖子 #122 ---
+theres many bugs in the new features it can be used but mm is all screwed up and few other things heres oldewr stable version untill i have time to fix it
+
+--- 帖子 #123 ---
+i made a super ea, look for trendchaser super ea
+
+--- 帖子 #124 ---
+mr trendchaser, i trade using 0.015/0.1 , where do i change that setting on your ea. thank you.
+
+--- 帖子 #125 ---
+I know they're not reliable bla bla bla. I just wish that it wouldn't blow up completely in backtests no matter what settings I throw at it. Can someone point me to some settings that keep some of the money for a few months?
+
+--- 帖子 #126 ---
+Hi Trendchaser, i stumbled upon this thread and found it fantastic, i have always been a fan of parabolics, and the assisted EA that you talk of is ingenius! i down loaded it and tried to work it on my MT4 but it states that "the trial version has expired." Is a working version available somehow ? cheers !
+
+
+===== 附件下载链接 =====
+
+未找到附件

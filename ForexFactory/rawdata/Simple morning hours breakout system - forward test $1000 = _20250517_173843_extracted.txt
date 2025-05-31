@@ -1,0 +1,536 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hey there and a good new year 2016! In this thread I want to introduce and forward test a dead simple breakout approach where I take the 30min candle from 9:00-9:30 (CET =&gt; GMT+1) and place stop buy and stop sell orders above and below. That's it. Traded pairs are EUR/USD and GBP/JPY... Alright, here are the rules in a more readable form: Traded pairs: EUR/USD and GBP/JPY. Take the 30m candle from 9:00-9:30 (CET =&gt; GMT+1) and place two stop buy orders above that candle and two stop sell orders below (0.5% risk each). SL is 90% of the size of the candle for all orders. TP for one of the orders is 100% of the size of the candle, no TP for the other one (let it run). Order duration is 1 day. Once the buy or sell order is filled, place one additional buy order 1/2 below the entry. SL and TP have the same settings. Reason for this is to increase the position in case of an initial retracement. If one target is reached, clear the opposite order. The idea behind this is to use the usual volatility in the first hours of the european trading session. I will see that I show some example trades later on. Initial risk will be 1.5% per trade. Cheers!
+
+--- 帖子 #2 ---
+Sounds good , waiting for examples
+
+--- 帖子 #3 ---
+it's simple and will work sometimes.. Examples would be good, I back tested it right now. When the candle is too small, there won't be a good trade, when the wicks are too big or bigger than the candle, there is no good trade. Do you set the orders at both ends of the candle or at the ends of the wicks? Mon
+
+--- 帖子 #4 ---
+Subscribed
+
+--- 帖子 #5 ---
+Hi Xaron ! Nice to meet you here again. Your approach in post #1 sounds very mechanically. So could you perhaps write an EA ? I think it's not so intricately to create such an instrument ?
+
+--- 帖子 #6 ---
+This is just another London Breakout strategy, nothing new, it's all been done before.
+
+--- 帖子 #7 ---
+Do you look for new stuff or stuff that works? Why does it have to be new? I could add some funny indicators (which are completely useless btw because they do NOT add any new information).
+
+--- 帖子 #8 ---
+An EA is very possible and shouldn't be that hard to do. I'm just too lazy atm, might do it later. This is for sure not even close to a holy grail but it's simple and might work in the long run. I actually don't know.
+
+--- 帖子 #9 ---
+some examples would be good, your trade history of the explorer isn't really helpfull...
+
+--- 帖子 #10 ---
+I will post some... Tomorrow.
+
+--- 帖子 #11 ---
+Good to hear, see you tomorrow!
+
+--- 帖子 #12 ---
+will it work on another pair?
+
+--- 帖子 #13 ---
+@Xaron In fact - that would be quite enough ! Btw - a good start you have made in the test account above, documented by the trade report !
+
+--- 帖子 #14 ---
+Missed your examples too. Btw: I back tested EUR/USD today and it doesn't look good.... It's more a 50/50
+
+--- 帖子 #15 ---
+Right, a live example: EUR/USD orders are set, let's see how this plays out: Attached Image (click to enlarge)
+
+--- 帖子 #16 ---
+After a while the sell stop order got filled. One has a TP, the other not, both have SLs. Added a sell limit order in the middle to catch a possible retracement. Attached Image (click to enlarge)
+
+--- 帖子 #17 ---
+First target almost hit... Attached Image (click to enlarge) ...and hit. So now we remove all pending orders and trail the stop for the remaining open position. For trailing I use just the high of the last two finished candles. Attached Image (click to enlarge)
+
+--- 帖子 #18 ---
+Next candle started. Trailing the stop above the highest high of the last two candles... Attached Image (click to enlarge)
+
+--- 帖子 #19 ---
+Trailing... Attached Image (click to enlarge)
+
+--- 帖子 #20 ---
+Hi mate ! So plz, you are a nice guy - I know it - code that EA for this KISS strategy .... come on !
+
+--- 帖子 #21 ---
+Yeah, I might do that! Continue trailing... Attached Image (click to enlarge)
+
+--- 帖子 #22 ---
+Stopped out. Done for the day.
+
+--- 帖子 #23 ---
+Good morning. New day, new examples. EUR/USD: Attached Image (click to enlarge) GBP/JPY: Attached Image (click to enlarge)
+
+--- 帖子 #24 ---
+EUR/USD sell stop filled. Now added a sell limit at 50% of the candle to enter another position for a possible retracement: Attached Image (click to enlarge)
+
+--- 帖子 #25 ---
+EUR/USD target hit. All pending orders are removed. Stop for the remaining position will be trailed: Attached Image (click to enlarge) GBP/JPY stop sell filled. Added a sell limit order at 50% of the candle size for a possible retracement: Attached Image (click to enlarge)
+
+--- 帖子 #26 ---
+Nice trades for you today....well done. Gbp news tonight....do you take notice of that....or just let it play out how it does? If your first lot of orders is stopped out.....do you leave the other ones to run....... So you get a sell opened and stopped out. The buy orders are left there and open.....managed in the same way ? Thanks.
+
+--- 帖子 #27 ---
+News doesn't bother me at all. Usually I skip the NFP friday because there is just range trading till that news which often lead to bad trades. Beside that I don't care, even though that spread widening sometimes hurt my trades as well. Yes. The opposite order (today the stop buy ones) stays in place as long as the initial target of the other side is not reached. As soon as it's reached like for EUR/USD all pending orders in that pair are removed. If it's stopped out before it reached its target, the stop buy stays there and is managed the same way. In bad days this can lead to 4 losses in a row of course.
+
+--- 帖子 #28 ---
+Trailing the stop... (as usual the highest high/low of the last two closed candles): Attached Image (click to enlarge)
+
+--- 帖子 #29 ---
+Thank you for your clear reply. Wonder if it will last....have tried many versions of this before myself.....some good days....some bad. Over all not great. Your money management with the multiple orders may help. Keep it up....
+
+--- 帖子 #30 ---
+Hi Xaron, Interesting approach, will follow...
+
+--- 帖子 #31 ---
+Trailing the stop... Looks like it will be hit soon: Attached Image (click to enlarge) No change in GBP/JPY: Attached Image (click to enlarge)
+
+--- 帖子 #32 ---
+Nice, Simple and Logical Xaron. I might automate in the weekend if you don't mind. All the best , Khalil
+
+--- 帖子 #33 ---
+Sure, please do it!
+
+--- 帖子 #34 ---
+GBP/JPY missed the target quite just a bit. Let's see what happens next... Attached Image (click to enlarge)
+
+--- 帖子 #35 ---
+Well that one took a while. GBP/JPY hit its target, remove all pending orders and trail the stop: Attached Image (click to enlarge)
+
+--- 帖子 #36 ---
+Well done Xaron, Seams to work well, I shall try it next week. On the setup candle, how far above/below do you put your entry, is it like 1 pip + spread?
+
+--- 帖子 #37 ---
+I use 2 Pips + Spread.
+
+--- 帖子 #38 ---
+Great ! This one becomes more and more attractive ! I'm curious about the EA of this beautiful KISS strategy !
+
+--- 帖子 #39 ---
+thank you.
+
+--- 帖子 #40 ---
+I love breakout strategy i will try this out for sure This is my favorite box indicator can come in handy for manual back testing and live trading Just set your charts time in gmt in the settings and then put 8:00 - 8:25 GMT and it will add the high and low for you attached
+
+--- 帖子 #41 ---
+This is how the Early Bird EA traded GBPJPY in the last three days. @Xaron, please confirm. Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #42 ---
+And here is the Early Bird EA for you to test. Attached Image Attached File(s) Early_Bird_01.ex4 20 KB | 458 downloads
+
+--- 帖子 #43 ---
+Just out of curiosity why don't you trade g/u with it? Good thread and thanks to abokwaik for the ea.
+
+--- 帖子 #44 ---
+I think I have a good system but don't know how to code.
+
+--- 帖子 #45 ---
+If your system has nothing to do with Xarons System - plz dont start here any discussion about your System !!
+
+--- 帖子 #46 ---
+Thanks abokwaik
+
+--- 帖子 #47 ---
+The first EA version posted was actually trailing by last candle. This one trails by last 2 candles as per Xaron rules. Attached File(s) Early_Bird_01.1.ex4 20 KB | 429 downloads The EA can run on any time frame, just make sure you set the start time correctly. All trades/pending orders will get closed at the close hour/minute
+
+--- 帖子 #48 ---
+@abokwaik: Looks good! Should be correct. And thanks for the EA! Will check it out asap. I think there is still a lot of potential for optimization. Especially for the trailing and/or the position sizing.
+
+--- 帖子 #49 ---
+Will work as well. I just do not want to trade too many pairs. EUR/USD and GBP/JPY are not that big correlated like EUR/USD and GBP/USD. That's the only reason.
+
+--- 帖子 #50 ---
+Orders are set. Pretty tiny bars... Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #51 ---
+GBP/JPY stop sell filled. Added the sell limit at 50%: Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+...same for EUR/USD: Attached Image (click to enlarge)
+
+--- 帖子 #53 ---
+EUR/USD sell limit filled... Attached Image (click to enlarge)
+
+--- 帖子 #54 ---
+EUR/USD stopped out. Now let's see if this is one of these stupid cases where my stop got hit but the pair runs after that into the right direction. Attached Image (click to enlarge) GBP/JPY reached it's target. Removed pending orders. Attached Image (click to enlarge)
+
+--- 帖子 #55 ---
+Isn't a candle of say, less then 15pips a bit too risky for this? EU was only 8.7 on my chart.
+
+--- 帖子 #56 ---
+hello everyone and thanks Xaron and Abowaik for your support i agree too that small candles could sometimes trigger ''random'' trades but i think that a possible solution to this problem could be to use the double or triple of the ATR applyed to the close of the signal candle i also noticed that the ''recovery'' trade on those candle activate too quickly cause it is too close to first trade and that could be another source of overexposure that could be limited by activating ''recovery'' trades only when the price has gone further our way ( could be also ATR based ) last thing, trailing stop based on pips or atr i guess its more profitable than candle trailing so we are sure we don't lose a lot of pips in a big retracement candle good job again by the way! this looks interesting
+
+--- 帖子 #57 ---
+Might be. But IF this breaks out and works in my direction this can lead to huge gains. You never know...
+
+--- 帖子 #58 ---
+Totally agree with that, it's just a tiny SL of 7 pip and even 3.5 for the limit order; maybe skip the limit one for small candles...
+
+--- 帖子 #59 ---
+GBP/JPY remaining position stopped out and look at that EUR/USD. DAMNIT! Ok, we have that special case now that the EUR/USD has reached its short target, so we will remove all remaining stop buy orders in that pair now. See ya tomorrow!
+
+--- 帖子 #60 ---
+good work sir. Thank You
+
+--- 帖子 #61 ---
+Very valid points Kunay. I totally agree
+
+--- 帖子 #62 ---
+Now look at that beautiful EUR/USD short. We still would be in that trade, trailing it... A pity!
+
+--- 帖子 #63 ---
+Right. I believe we should incorporate a min/max stop loss relative to each pair using ATR as Kunay suggested. And since lot size is variable and calculated based on fixed risk, I think it will give better results.
+
+--- 帖子 #64 ---
+How do you want to use the ATR when the opposite order is that close?
+
+--- 帖子 #65 ---
+Suppose the trigger candle range is 10 pips, and our selected ATR is 20 pips, so we have a shortage of 10 pips, we split into 2 parts, 5 added to the candle high, and 5 pips subtracted from candle low, creating a phantom candle. see chart (red rectangle is the phantom candle replacing the actual trigger candle). Just an opinion.
+
+--- 帖子 #66 ---
+yep i mean that
+
+--- 帖子 #67 ---
+Ah got it. Of course, makes sense! Let's try that
+
+--- 帖子 #68 ---
+i backtested the whole february with e/u, i set orders 4 pips away from the high and low of the candle and the results are stunning, it's 15 winners and 3 losers, if you would risk 5% per trade, that should be 60% gain of your investment and the month isn't over yet.
+
+--- 帖子 #69 ---
+++++++++++++++++++++++++++++++++ Good catch Xaron. abokwaik &amp; Kanay9, I think you may be onto something. Usually false BO's are minimal pips. I'll be on the testing circuit myself. Thanks, Darryl
+
+--- 帖子 #70 ---
+My indicator that I posted has this built in, its called offset take a look back to page 2 you should try it out makes life easier lol
+
+--- 帖子 #71 ---
+Hey Abokwaik, How do you use this EA? can you help me out with the settings and where do i put the file to? Thanks a milliion!
+
+--- 帖子 #72 ---
+Early Bird : Version 2 Added Options : Attached Image Test on Yesterday's EUR/USD trade. Attached Image (click to enlarge) Attached File(s) Early_Bird_02.ex4 21 KB | 375 downloads
+
+--- 帖子 #73 ---
+Bravo Abokwaik , I can´t wait to try it ! Thank you for sharing your talent and your work, never change ! Cherss!
+
+--- 帖子 #74 ---
+All details available in the thread. The files goes into Experts folder. Attached Image
+
+--- 帖子 #75 ---
+Back test on EUR/USD 1/1/2016 till today without additional options: Attached Image (click to enlarge) with additional options - settings 1 Attached Image (click to enlarge) with additional options - settings 2 Attached Image (click to enlarge)
+
+--- 帖子 #76 ---
+Id start from maybe jan 18th due to new year and the market changing
+
+--- 帖子 #77 ---
+Interesting and thanks for the results, abokwaik. Just some questions: Min Candle Size 300 means that the minimum distance between low and high will be 30 pips, right? What does min_trailing_pips mean and that step size? How do you trail the stop?
+
+--- 帖子 #78 ---
+Yes. 1. The EA will check the size of the Trigger Candle, is its size (high-low) is greater than "Min Candle Size" it will use the Actual Trigger Candle. 2. If the Trigger Candle Size is less than "Min Candle Size", it will use a Phantom Candle of size equal to "Min Candle Size" around the actual trigger candle, and all trading will be based on the Phantom Candle. For 4-digit brokers 30 means 30 pips. For 5-digit brokers 300 means 30 pips.
+
+--- 帖子 #79 ---
+The EA will by default tail by the high/low of the last 2 candles. If the distance (trailing stop) is less than "Min Trailing Stop" it will use "Min Trailing Stop" instead. Trailing Step is used to minimize order modification requests sent to the broker's server. If you set it to 10 points (1 pip), it will send 1 order modify request when price moves 10 points in your favor. If not set (set to 0), the EA will send 10 order modify requests.
+
+--- 帖子 #80 ---
+Thanks, that min trailing stop makes much sense indeed! To avoid stopped out due to noise. Great!
+
+--- 帖子 #81 ---
+Could you check how different position sizing would change the results? I mean atm I have 0.5% per order, maybe it's much better to have the first one with TP with 0.75% and the trailing one with 0.25%?
+
+--- 帖子 #82 ---
+I will. What about the limit order ? will it be also at @ 0.75% or we leave it at 0.5%.
+
+--- 帖子 #83 ---
+Hmm just leave it at 0.5% for now.
+
+--- 帖子 #84 ---
+Another question about this one for clarification. What is the distance (trailing stop)? The distance to the current price or the distance to the current low (in terms of a short position)? Edit: Nevermind, the latter I guess. Does make sense.
+
+--- 帖子 #85 ---
+Isn't the risk for the limit order set to 0.25% right now?
+
+--- 帖子 #86 ---
+Khalil, I believe the trailing stops in backtesting gives artificially good results, when compared to live testing. For backtesting it is much better to use structural trailing stops, like lowest of last X candles, or fractals etc. That gives much more realistic results. Just my 2 cents...
+
+--- 帖子 #87 ---
+I made it completely flexible, where you can set risk% for each of the 3 orders. This is a test on EUR/USD comparable to the 3rd test on post # 75 Attached Image (click to enlarge) Kindly use this version for testing as previous one had few bugs in stop trailing (when stop was very close to bid/ask price).
+
+--- 帖子 #88 ---
+Yes. Actually the Limit order shares Lot Size, SL price, TP price with the 1st Order. However since it's open price is 50% better than the 1st order, the reward to risk ratio for it is double than the 1st order.
+
+--- 帖子 #89 ---
+Both options are available now, however using last candles trailing is fixed to the last 2 candles high/low. In next version I'll make an input where user can input x number of candles to trail the stop.
+
+--- 帖子 #90 ---
+Hi, Thanks for this method. This morning I got some whipsaw but I was setting trades manually in a haste before rushing to work so my fault Abokwaik, can you add an option to set the lot size manually, please? What happens if my account can't sustain a 0.5% trade? Will the EA open a trade using the minimum lot size my broker demands (my broker changed it recently, that's why I'm not sure about the actual percent calculation anymore)? Thanks.
+
+--- 帖子 #91 ---
+You can control the lot size using the risk %. 0.5% is already small = 0.005 of account balance, but if you like you can even use a smaller % (e.g. 0.1%). AND Yes, if the calculated lot size is less than minimum lot allowed by the broker, the EA will use the minimum lot instead. Same goes for Max Lot.
+
+--- 帖子 #92 ---
+Hi Abotwaik, What about to add a field for pips above/below entry/exit? Something like M0ndm4nn18 is writing. With this field we can deal with spreads , etc. Regards
+
+--- 帖子 #93 ---
+Already handled by the EA. Buy Stop Order @ candle high + 2*spread. Sell Stop Order @ candle low - 1*spread. In addition of course to your control over the trigger candle by the phantom candle. P.S: I have no idea on what's M0ndm4nn18 is writing.
+
+--- 帖子 #94 ---
+jajaja... don't worry. M0ndm4nn18 is in post #68. Thanks a lot for you support!!!!
+
+--- 帖子 #95 ---
+Oh, yeh. I missed that post.
+
+--- 帖子 #96 ---
+++++++++++++++++++++++++++++++++ Running the risk of sounding like I'm just blowing smoke (frivolous compliments) what's going on underneath the hood (of your EA) is absolutely brilliant. This not only performs all functions specific to Xaron's guidance, but makes operation of the EA dead simple. Kudos to you both.
+
+--- 帖子 #97 ---
+Thanks abokwik. Can i change the risk size to 0.05 or 5% risk? thanks!
+
+--- 帖子 #98 ---
++2*spread and - 1*spread i think, many brokers have less than 1 pip, it won't work though most of the times, the distance should be higher in my opinion and like the backtest showed.
+
+--- 帖子 #99 ---
+No problem. I will add an input for pip shift.
+
+--- 帖子 #100 ---
+Its up to you. for a 5% you enter 5 in risk percentage.
+
+--- 帖子 #101 ---
+Hello, if you want to trade manually this strategy I've created a simple indicator to help you. Please, be aware that this is my first mql4 development , don't be bad with me. Any help or suggestions are welcome. Regards
+
+--- 帖子 #102 ---
+Hey Khalil, Any idea why I can't get this EA to enable? Attached Image I have enabled dll's and made sure under tools, experts all is enabled but it is not giving me any luck. Let me know. thanks, Spencer
+
+--- 帖子 #103 ---
+How about other EAs, are they working ?
+
+--- 帖子 #104 ---
+@SpencerBizze - I have absolutely no prob loading this EA it works nice .... obviously the probe is at your site
+
+--- 帖子 #105 ---
+I dont understand it... at 8:30 we set Buy and Set stop orders ? How much pips above candle SET BUY STOP ORDER and SELL ORDERS ? Where SL ??
+
+--- 帖子 #106 ---
+What about post # 1 ?
+
+--- 帖子 #107 ---
+I READ THAT. Can you upload clearlier screens?
+
+--- 帖子 #108 ---
+Thanks Abokwik. Do you run this EA all day? 24/5?
+
+--- 帖子 #109 ---
+It's all in this thread. I even uploaded live screens for 3 days. It's really a simple approach. No indicators.
+
+--- 帖子 #110 ---
+is this correct entry? Attached Image (click to enlarge)
+
+--- 帖子 #111 ---
+Hi, Can't post charts since I'm at work but I took the same trade, with the limit order and all and got stopped out GJ, on the other hand, had already reached TP1 and is looking rather nice (will not cover the EU trades but still nice).
+
+--- 帖子 #112 ---
+Looks valid, Kubiasty. On that GBP/JPY short I got stopped out of course.
+
+--- 帖子 #113 ---
+Mine is still running happily, from the looks of it, it might cover most of the EU trades. [EDIT] I'm not in front of my charts but I saw the GJ trade closed for 85 pips which covered the EU trades and a few extra pips, as well. Does this method only works for GJ and EU? Thanks. It's been my only green day in quite some time now.
+
+--- 帖子 #114 ---
+The EarlyBird v2.1 did not take any trades (no error msg either)...?
+
+--- 帖子 #115 ---
+Mine took trades. Do you have the correct trading hours set?
+
+--- 帖子 #116 ---
+The same as yesterday (previous version) when it worked OK.. But it must be something on my side then, thanks.
+
+--- 帖子 #117 ---
+confirm that the new version of the ea posted yesterday worked good this morning and i also confirm that its good to trade also on eur/gbp and eur/usd
+
+--- 帖子 #118 ---
+[quote=crkjl;8772174]Hello, if you want to trade manually this strategy I've created a simple indicator to help you. Please, be aware that this is my first mql4 development , don't be bad with me. Any help or suggestions are welcome. Regards {file}[/quote Hi Crkjl I have but your indicator on my charts gives quite a lot of information, Could you tell me if I was to trade manually would it be the same entry points as the early bird EA. And could you show me a picture of your setting's. Thank you
+
+--- 帖子 #119 ---
+[quote=redfan;8774350] Hi Redfan, if the indicator is working fine, it only show you the levels to open positions with the corresponding SL and TP following the system. You must open orders manually and they must be the same as EA if you use the same parameters, for example, the EA open positions two pips+spread away from levels, in the indicator you can define this also (I will add the spread automatically in next version, meanwhile you can add the spread manually, for example, let's say your spread is 2pips, you can define 40 points or 4pips as separator, 2+2). Regarding the other parameter in EA, minimum size candle, the indicator is showing the last candle size and you can decide to enter or not. Regards
+
+--- 帖子 #120 ---
+Hello, I had two trades today, 4 trades on EU were losers. I've opened the trades using my phone so the entries are not precise. I think that I wouldn't have taken the long where I took it given the high of the previous candle and would have opted for the short, instead. I'm also not clear on what happens if both short and long trades are hit and opened, if some one can shed some light on this matter it would be great. Attached Image (click to enlarge) Here's the GJ trades, first trade had a TP of 1xATR the 2nd I trailed using 360 points. Attached Image (click to enlarge)
+
+--- 帖子 #121 ---
+I add GBP/USD to my basket starting today. BTW: Does someone know what's wrong with this trade explorer syncing stuff? I've always have to re-enable it in the settings to get a new sync. Manual syncing doesn't work either...
+
+--- 帖子 #122 ---
+Sell EU: Attached Image (click to enlarge)
+
+--- 帖子 #123 ---
+Hello, How did everyone's trades went today? I tried EU, GJ, GU, UCH, EG and AC and nearly all had hit the SL. Thanks.
+
+--- 帖子 #124 ---
+I don't think it makes sense to trade EG, UCHF and AC during London open. UCHF is mostly the reverse of EU, EG is ranging a lot and AC is more active in the US and Asian session.
+
+--- 帖子 #125 ---
+Noted and will be removed from my list. Any suggestions (someone on the thread mentioned EG, that's why I've added it and thought about adding more). Thanks.
+
+--- 帖子 #126 ---
+Today was indeed a black day for this system.
+
+--- 帖子 #127 ---
+It's a pity, but for me, using the EA, this week ended black as well .... @Xaron: What about you ? Your TE is switched off unfortunately ....
+
+--- 帖子 #128 ---
+Hi Abokwaik, you make a great job with your EA, i tried this one, and i modified the setting, here i think i found a good setting that works very nicely. Test from 2014 til now. I know that the setting is not usual, but the result is good i think, and also the drandown.
+
+--- 帖子 #129 ---
+Where is Xaron ? What does he think about these unusual settings ? (Hmmm .... a BT is a BT .... what will happen in forward test ? This is/will be the only proof !)
+
+--- 帖子 #130 ---
+Man this trade explorer stuff sets me up. I always have to re-enable everything, syncing doesn't work. Well yes, the last week ended bad.
+
+--- 帖子 #131 ---
+Thanks for these settings. Could you please post them in a readable way as I don't use MT? Thanks!
+
+--- 帖子 #132 ---
+Hi Xaron, what do you mean "in readable ?I put the file set in the winrar attached, is it not ok?
+
+--- 帖子 #133 ---
+Can you see the strategy report?
+
+--- 帖子 #134 ---
+Yes I see it. I meant that you could write the parameters just as a post in this thread as I don't use MT4.
+
+--- 帖子 #135 ---
+Ok, here we are! The time is referred to my broker GMT+1
+
+--- 帖子 #136 ---
+Thanks for that!
+
+--- 帖子 #137 ---
+Welcome! I will start soon a live demo test with those parameters. In the next two weeks i cannot do that because i will not be at home, but my plan is to make a forward test for a month on demo test just to see that the EA works properly with the traling stop, then maybe live real account with small money. Anyone of you is using this EA on real? Anyway it looks promising. Thanks! Syl
+
+--- 帖子 #138 ---
+@abokwaik's Hey is there any chance you can add a offset spread into the EA like an option to add a 10 pip gap Would really appreciate it for back testing purposes. I trade all the opens but generally leave a 10 pip gap in between candle and my entry and go for longer trends also its at 90% win rate this year
+
+--- 帖子 #139 ---
+Hi Cizz, Can't you use Min Candle Size option for that ? Or do you want it as a separate option regardless of trigger candle size ?
+
+--- 帖子 #140 ---
+Hi there, I'll pause this for a moment. Don't have time for manual entries all the time and don't use MT4. Please go ahead and thanks for the EA!
+
+--- 帖子 #141 ---
+Thank you Xaron for sharing your method. I will continue the EA development in the Elite thread. All the best, Khalil
+
+--- 帖子 #142 ---
+really i always quarrel with my friend for opening trades and us time trades .. i am from india.. i said morning 10 am mcx exchange is opens and trade is set.. but he always do at 7 pm ist because thats us time .. max moves are caught in that session but initiation point is at open.... but here what i said is seeing.. really thank you for this page... actually i dont know this page. but abokwaik's reply take me here because i subscribed him... any way. i will try with that manual indicator as i dont know how to use EA but i like this strategy .. i read over all .. but have to put concentration on this thread to read...
+
+--- 帖子 #143 ---
+Yeah regardless would love to add usually around 10 pip gap from selected highs and lows of candles to eliminate fakeouts
+
+--- 帖子 #144 ---
+Here is an example of what I would like to use the EA for very similar but just more range in the channel to avoid fakeouts
+
+--- 帖子 #145 ---
+yea.... i guess you meant something like this.
+
+--- 帖子 #146 ---
+Yeah that looks preety good! are the setting adjustable?
+
+--- 帖子 #147 ---
+Can you please send me this?
+
+--- 帖子 #148 ---
+Please check here.
+
+--- 帖子 #149 ---
+sorry guys for late reply. i posted and went to bed. just woke up and saw your post. will reply in a few minutes. cheers.
+
+--- 帖子 #150 ---
+this is i have .. this is for 3 market times ... asian london and newyork.. if any one wants means can take from attachment.... but the method here discussed is different... thats our local market morning hrs breakout..
+
+--- 帖子 #151 ---
+I have a higher version of it. I mentioned it and posted a picture just to buttress the point that Cizz was trying to make..... that is...to have different TP. I didn't post the indicator out of respect for the thread starter. Cheers.
+
+--- 帖子 #152 ---
+oh sorry if i did mistakenly posted.... but now i want for mt5 not for mt4 but search gives me negative results... for pivot atleast.. all gives big big dots.. i cant even change to line or dotted lines to save chart area to be visible... its sad for me and i dont know any coder will help me too....
+
+--- 帖子 #153 ---
+I do not have Signal Bars for MT5 and before you ask I am not interested in coding it for MT5 in fact I personally think MT5 is a total waste of time with the imposed US trading restrictions. If you have the choice to use MT4 or MT5 why would you choose MT5? or am I missing something obvious here? The above is the answer to a question from a very very well respected member of this community by name CJA (cja). Cheers.
+
+--- 帖子 #154 ---
+i read this too dear baba.... really thank u
+
+--- 帖子 #155 ---
+Do yourself a favor and do NOT trade this breakout system today as today is NFP day which results in a lot of ranging usually...
+
+--- 帖子 #156 ---
+Hi Xaron and Khalil, I've been testing the early bird 02_2 EA but have noticed that the buy/sell entries are being placed far above/below the 9:00-9:30 candle. Could you please take a look at this and let me know what I'm doing wrong? TF should be M30, right?? Thanks, Shem Attached Image (click to enlarge)
+
+--- 帖子 #157 ---
+Hi mate ! Look the TE above here .... peeps sailed away ... atm nothing to do here, I think you wont get answers anymore ...
+
+--- 帖子 #158 ---
+why do you only want to trade gbp/jpy and eur/usd?
+
+--- 帖子 #159 ---
+I test it in many pair and have excelents results! Thank you so much
+
+--- 帖子 #160 ---
+Ups ! That's intriguingly and unexpectedly ! So far all tests here following the remarks of the TO as well have been not very promising ? So could you describe your approach/setfile in more detail plz ?
+
+--- 帖子 #129 ---
+Here some BT in differents pairs.
+
+--- 帖子 #130 ---
+Some more
+
+--- 帖子 #131 ---
+Now I'm testing all pairs, GBP pairs looks so bad, I'm testing all 2015 each pairs and modifying some parameters to determine which pairs will works better with this EA. About 1%-5% of gain per month per pair, so if we can find a group of the best pairs we can make a lot of money each month.
+
+--- 帖子 #132 ---
+nope it won't happen
+
+--- 帖子 #133 ---
+Hmmm .... @Ivermac: I thought you made at least some forward tests ? But your BTs for 1-2 weeks mean absolutely nothing .... Dude ! Look the TE above ... what do you think - why the hell the thread starter leaved this thread ...? A lot of similar BO Systems are out ... it seems to me none of them works or works only with additional manual interventions.
+
+--- 帖子 #134 ---
+not even close to the thruth i agree that only gbpusd and gbpjpy are worthy i backtested february investing 1% per trade with my own mod and this are the results: eurusd +25% eurgbp +9% eurjpy +9% gbpusd +9% gbpjpy +10% also tested this pairs and removed from list of pairs i'm gonna trade: gbpaud +2% gbpcad -4% gbpchf +12% gbpnzd +5% euraud +8% eurcad +2% eurchf -2% same system same settings works also on us open on usd pairs all you need its to commit to the system, trust it and trade it everyday i writed to abowailk to code my own mod but he didn't text me back so i coded my ea on mql5.. wish you the best
+
+--- 帖子 #135 ---
+@Kunay9 That sounds surprisingly ! So, if you could improve this EA/settings would you share some more details ?
+
+--- 帖子 #136 ---
+That's right Kunay9, If you change the open time for each country coin you will have better results, try AUD pair in Australian open whit your EA. I think is very profitable.
+
+--- 帖子 #137 ---
+i'm using m30 atr to draw the box at the close of candle right before the session of interest so my pendings are equidistant from the market work good with m15 atr too but results may be more spikey not using any other filter better explanation and picture on my thread: http://www.forexfactory.com/showthread.php?t=580892
+
+--- 帖子 #138 ---
+Well I left because I can do better manually: http://www.forexfactory.com/showthread.php?t=582831 http://www.forexfactory.com/showthread.php?t=578504 But this does not mean that this simple approach won't work in the long run.
+
+--- 帖子 #139 ---
+hi Xaron, How many pips above and below do you set the stop orders at? I have a system which I want to automate, which is similar to yours, but takes two boxes from 7 to 7:55 GMT, and from 15:15 to 15:55, on M5, and the SL for the buy stop is the same as the sell stop level. ON GJ my buy stop is 5.8 pips above the high of the range, and for the sell stop it is 3 pips below the low of the range. I like your idea of the retrace, and I would like to try that with a limit order. Also a trailing stop is the way to go, as sometimes you can have up to 7:1 Reward to Risk. Could someone automate this system? Ideally, the times of the box would be a variable, so that one can test it on different pairs, with different times. My two breakouts per day idea seems to work on gold and EU/AUD, but an EA would be good to test it properly. My TP is the same as the SL range on the stop orders. on GU a box from 23:00 GMT to 8 a.m. GMT works well, on the same principle but stop orders are 1.7 and 1 pip away.
+
+--- 帖子 #140 ---
+Hi, I placed the indicator on my chart, but did not get anything - no box, nor any prices like you say - high and low. Please message me. I want to use this, and also would like to know how I can use this indicator to backtest.
+
+--- 帖子 #141 ---
+http://assets.forexfactory.net/nfs/c...tar37532_9.gif Xaron Status: Evil Kraut Last Online: Apr 19, 2016 not sure you will get answer...
+
+--- 帖子 #142 ---
+Naaa. sorry for that. I had quite a tough time, had to stop everything! :/
+
+--- 帖子 #143 ---
+Hi, Wondering if anyone still trades this? or something similar?
+
+--- 帖子 #144 ---
+https://www.forexfactory.com/showthread.php?t=646790 something similar
+
+
+===== 附件下载链接 =====
+
+Early_Bird_01.1.ex4: https://www.forexfactory.com/attachment/file/1861874?d=1456121322
+Early_Bird_01.ex4: https://www.forexfactory.com/attachment/file/1861484?d=1456064474
+Early_Bird_02.ex4: https://www.forexfactory.com/attachment/file/1863012?d=1456215767

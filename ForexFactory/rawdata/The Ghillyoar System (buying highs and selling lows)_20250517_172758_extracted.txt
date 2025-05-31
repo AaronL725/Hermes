@@ -1,0 +1,615 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+All you need to know about me... A few years ago I started a satirical thread on Forex Factory. The thread argued that money management is more important than the entry technique. It was largely ignored. This new thread will introduce The Ghillyoar Trading System. The Ghillyoar Trading System is quite simple. To summarise: 1. It buys higher highs and sells lower lows. 2. You open a maximum of one new trade per day. 3. It has two exit rules you use the rule that occurs first.
+
+--- 帖子 #2 ---
+The Strategy Tester available with MetaTrader is of no value to a sensible trader. The longer the period of the test the less the reliability. So here is a test result for The Ghillyoar Trading System covering the last 21 years. The trading period is from 2000.01.01 to 2021.03.23
+
+--- 帖子 #3 ---
+The Ghillyoar System employs a number of variables. I will reveal the variables that I used in the test but I am hoping that you will use your own and share them here. In other words …………….I am publishing this system so that you can improve it……………..not swallow it whole.
+
+--- 帖子 #4 ---
+I will run through the rules of the system. Instead of a long list I will break it up into bite size chunks. I am definitely not a coder, However in places where I think it might help I will cut and paste some code from my E.A. I am not publishing my E.A. The rules are very simple and if you want an E.A. you know what to do.
+
+--- 帖子 #5 ---
+Before I start I need to define some of terms that I will be using to describe the system. Candle 0……………….is the current candle. Candle 1……………….is the previous candle….the candle that has just closed. Candle 2……………….is the candle that closed before the previous candle. I will not be repeating these definitions every time that I mention them.
+
+--- 帖子 #6 ---
+The Ghillyoar System: Buys when the price is above the “Buy Bench”. Sells when the price is below the “Sell Bench”.
+
+--- 帖子 #7 ---
+How to work out the initial value “Buy Bench”. The initial value of the “Buy Bench” is: ( the closing price of candle 2 ) plus 30 pips How to work out the initial value “Sell Bench”. The initial value of the “Sell Bench” is: ( the closing price of candle 2 ) minus 30 pips
+
+--- 帖子 #8 ---
+The value of the Buy Bench changes. If the price of candle number 2 is higher than the current value of the “Buy Bench” then a new Buy Bench is created. The new “Buy Bench” will be equal to the value of candle 2 plus 30 pips. if ( iClose(NULL,0,2)&gt;Buy_Bench { Buy_Bench=iClose(NULL,0,2) +30 * myPoint; } The value of the Sell Bench changes. If the price of candle number 2 is lower than the current value of the “Sell Bench” then a new “Sell Bench is created. The new “Sell Bench” will be equal to the value of candle 2 minus 30 pips. if ( iClose(NULL,0,2)&lt;Sell_Bench ) { Sell_Bench=iClose(NULL,0,2) - 30 * myPoint ; }
+
+--- 帖子 #9 ---
+The Ghillyoar System: Trades are filtered: Buys are only allowed if the previous candle closed higher than the 23ema. iClose(NULL,0,1)&gt; iMA(NULL,1440,23,MaShift,MODE_EMA,MaPrice,0) Sells are only allowed if the previous candle closed lower than the 23 ema iClose(NULL,0,1)&lt; iMA(NULL,1440,23,MaShift,MODE_EMA,MaPrice,0)
+
+--- 帖子 #10 ---
+Exit Rule Number One When you start trading you need to write down your opening equity e,g. 1000$ You need to use a profit target . For my back test I used a profit target of 50$ ( far from optimal ). Rule number one will only exit if the Account Equity hits 1050$. As soon as the 1050$ equity level is hit the new Equity Target is set and it is 1050$ plus 50$ = 1100$
+
+--- 帖子 #11 ---
+What Does Exit Rule Number One make of losing tades? Exit Rule Number One ignores losing trades. If The Ghillyoar System has closed a series of losing trades and our equity is now 900$ rule number one is not going to close trades when the open equity is plus 50$. Rule Number One is going to wait until the Account Equity hits the original Account Equity Target of 1050$ Very Important If Rule Number One closes all of the open trades and the system is flat then the current “Buy Bench” and the “current Sell Bench” are abandoned and are re-calculated. If Ghillyoar closes all of it’s open trades using methods 2 or 3 or 4 …………..100 then it does not re-calculate the “Buy Bench” and “The Sell Bench”.
+
+--- 帖子 #12 ---
+Exit Rule Number Two One of the two following conditions has to be satisfied. The total Open profit on buys has to be higher than 20$. or The total Open profit on sells has to be higher than 20$ In addition the following condition must be satisfied: The number of open buys must be equal to the number of open sells. Example1. We have four open trades ……….. 1 Buy and 3 sells. We are losing but Ghillyoar does nothing, After a while we open 2 more buys. We now have 3 open Buys and 3 three open sells. Either the buys or the sells are likely to be in profit by 20$ We are losing. Ghillyoar has had enough……….. we are getting no where. Ghillyoar closes all of the open trades. Important We are flat but the system does not recalculate the “Buy Bench” or the “Sell Bench” if ( ( TotalOpenProfitLong&gt;20 || TotalOpenProfitShort &gt; 20) &amp;&amp; TradesCount(OP_BUY) -TradesCount(OP_SELL) ==0 ) { myOrderClose(OP_BUY, 100, ""); myOrderClose(OP_SELL, 100, "");}
+
+--- 帖子 #13 ---
+Good day, thanks for sharing. Always working with the CLOSE of candle 2, I assume. Also wanted to say that its nice seeing a quality trend strategy, very nice work. Samej principle as one Ive been using, one almost as long as your backtest s age, so Ill probably enjoy popping in from time to time and give my 2 cents.
+
+--- 帖子 #14 ---
+in my backtest,i have few sell orders at floor but many buy orders at top,and buy orders != sell orders,so my orders not have chance to exit.... i follow your two exit rules 1+2, use 0.01lot every time
+
+--- 帖子 #15 ---
+You couldnt have followed exit rule 1, because he didnt give us the volume, and it is profit based... At least if he did am sorry, I am blind. I suspect that with the optimized mm, you got a few 0.5% profit on all those buys. Could be wrong...
+
+--- 帖子 #16 ---
+I should have mentioned that in my back test , I could have used any permutation of my variable values. However the ones used in the above example were: Daily Chart Lot size 0.10 Profit target step 50$ If I had used lots of 0.001 it would have been more difficult to hit my 50$ targets. You can of course use smaller lot sizes and simply reduce the Target Step.
+
+--- 帖子 #17 ---
+Here is a picture of The Ghillyoar System in action. We are looking at the USDJPY for the first 3 months of this year. We started with a loss and then the system caught the uptrend.
+
+--- 帖子 #18 ---
+Thanks for sharing. We will test and see results, and if necessary, if it can be improved
+
+--- 帖子 #19 ---
+This is really interesting, at first thought you were trolling with buying high and selling low. How long is your backtest?
+
+--- 帖子 #20 ---
+I am glad that you find the system interesting. Ghillyoar has no traditional stop loss and no traditional take profit,,,,,,,,,, but we do accept losses..........and I have not seen exit rule two anywhere else . Who knows the system might be better with a traditional TP and SL, maybe some one will run a test. The published back test is for EURUSD and was for 21 years. However if you read my second post you will see that I believe that MetaTrader back tests are very unreliable.
+
+--- 帖子 #21 ---
+As long as the data is good, it should be okay. And I suggest using MT5
+
+--- 帖子 #22 ---
+Shift is 0, if it is checked at the beginning of each trading day, there's no difference between a shift of 1 or 0. But if is checked over the whole trading day, it is in fact looking for the moment when the ema dips below/rise above yesterday's close. But I think there is little difference for a long term strategy.
+
+--- 帖子 #23 ---
+Hi guys i think i don't understand the rules. Maybe it is because my bad english. Can someone clarify this. In the screen below i marked the buy setup. Is this a good setup or i missed something?
+
+--- 帖子 #24 ---
+EURGBP first 3 months of the year.
+
+--- 帖子 #25 ---
+Have you thought to maybe use ATR for the buy and sell bench instead of fixed 30 pips? Maybe it would be more suitable if we were to use it on many pairs.
+
+--- 帖子 #26 ---
+suscribed, thank you very much Paddy9, very interesting, there are a couple more threads related it in ff ( https://www.forexfactory.com/thread/...rning-to-hedge ) What is Ghillyoar? i have been developing a "strategy" similar to this for a while, very similar concept it seems that I am not the only "crazy" who buy highs and sell lows... there are differences with what I do... i don't use indicators, no EAs, most of the time pending orders, and don't use SL i consider important the control over the weight of each trade, and the control in the distance between the average of trades in short: risk control a few months ago I started in real, the results: impressive (at least for me) and 0 stress (when you know where you are and what to do) keep it, regards
+
+--- 帖子 #27 ---
+Also do you enter on the tick that your price hits bench or you enter only on the start of the candles? I am guessing on the tick, but let me know
+
+--- 帖子 #28 ---
+without wishing to bother the thread, in my case, it is not too important whether it is at the start of the candle or not, most of the time pending orders, the decisions to take a trade, it is based on my "line in the sand" (daily opening, also interesting weekly and monthly), statistical prices (personal develop) and PA (also taking into account the appetite of "market makers" for SL) Price above open remains buyers, price below open remains sellers nothing complicated (but yes effective), something "simple" works better... as encouraged/suggested in this thread, approx 70-80% MM and 20-30% TA regards
+
+--- 帖子 #29 ---
+1. The answer to everything is in the first 2 lines of this thread. 2. I am pleased that people are now ( after only 24 hours ) starting to ask some of the right questions. 3. Like Eric Morecombe I will give all the right answers, but not neccessarily in the right order. 4. I am hoping that once we get past the stage where people understand Ghillyoar... they will tell me how to improve it. ATR sounds good , worth testing. I use Bench plus or minus 30 pips because in all of my tests I use a spread of 30 pips. When I wrote the buy trigger I know what I intended...... in case I coded something different that works better here is the trigger: iClose(NULL,0,1)&gt;Buy_Bench &amp;&amp; iClose(NULL,0,1)&gt; iMA(NULL,1440,23,MaShift,MODE_EMA,MaPrice,0) If there is a coder out there who can explain I would be grateful.
+
+--- 帖子 #30 ---
+I intended to query the trigger conditions earlier because your description omitted the bench levels in the entry filters and basically made the bench calcs completely pointless, but I'm glad you've now clarified that point. The logic is actually to enter at the start of a [0] bar if the close of bar[1] exceeds the bench value AND the close of bar[1] is above the 23 EMA. However, I'm still confused by the "+/- 30" aspect - I initially thought you meant 30 pips, but from your "spread of 30 pips" comment above, I think you actually mean 30 POINTS i.e. just 3 pips, because no-one trades with a 30-pip spread unless it's something like Gold or Bitcoin... hopefully you will confirm.
+
+--- 帖子 #31 ---
+Yeah, this is what I just wanted to ask, but fxtrue asked the questions. By 30 pips spread, you probably mean points? Please clarify
+
+--- 帖子 #32 ---
+I am so glad that you are here and are being helpful . I am relieved that my intentions were exactly reflected in the coding, Thanks for the confirmation. I use a spread of 30 ( pips ?) in back tests. I am attaching a back test that shows the 30 setting ( top right corner just under the period setting). Here is the coding that I used to calculate the Buy Bench if ( iClose(NULL,0,2)&gt;Buy_Bench ) { Buy_Bench=iClose(NULL,0,2) +30 * myPoint; } As a complete aside, in the picture I like the way Ghillyoar sold until the sell off was completed.........and then it bought,,,,, probably a very lucky coincidence.
+
+--- 帖子 #33 ---
+Could you expand a bit more on the " not recalculate" part? For example, in your UJ chart (post #17) - after the short in loss we get a long which gets to +20 and all is closed. The next new buy trade however seems to start from a recalculated bench?
+
+--- 帖子 #34 ---
+Points ;-) As Sexobeat recommended, a variable range would be better. Especially when applying on different pairs. Take for example this table: Attached Image (click to enlarge) https://www.mataf.net/en/forex/tools/volatility What I love with this approach is the fact, that it sounds like against all odds. But isn't that what the brokers do? They manipulate the market in a way that everyone loses who thinks rationally. "It must go down"... strike: it goes up. "Haha, fooled y'all again!" The system looks like an anti-grid-trader...
+
+--- 帖子 #35 ---
+Certainly. Take a look at the screenshot with the strategy tester. He uses 30 (points).
+
+--- 帖子 #36 ---
+Thanks for your interest. I will try to explain. We have 2 systems of exit, Number One , Number one checks to see if we have successfully hit our target. If we have it says thanks very much we can now start afresh. New Buy Bench. New Sell Bench and a new profit target which is 50$ higher than our current equity. So in this case there is a re-calculation, Number Two Ghillyoar gets fed up if the number of sells is the same as the number of buys. So if we have the same number of buys as sells we exit all trades. However the system remembers the initial equity target and will not effect a complete reset of Buy Bench and Sell Bench until the targets are hit. So in this case there is a recalculation. In post 17. The sell is losing and a new buy opens. Rule 2 Kicks in and we close everything. We are flat. Price moves up and creates a new Buy Bench, The Buy Bench is exceded. We are in long. Our target is the original profit target.
+
+--- 帖子 #37 ---
+Sorry for the typo in my previous post. Exit two should read " so in this case there is no recalculation.
+
+--- 帖子 #38 ---
+Well, if we use points and not pips, then 3 pips can be a benchmark for all pairs. It is really small tho, if it was 30 pips as we thought, then ATR would serve a better purpose!
+
+--- 帖子 #39 ---
+I did not dive in deeper into the strategy, nor do I have details of the code. I just saw the 30 in the strategy tester and that is imho 30 points and not pips. Please correct me if I am wrong. For the entry conditions I do no know whether it is points of pips, have to see the code. 300 points difference sounds alot though for a trend following grid. Something like half of a daily candle. But might work with this strategy. Maybe the system works with 30 pips, he just used 3 pips in the tester... and that's why the results were good. But that's a shot in the dark. Code snippets please.
+
+--- 帖子 #40 ---
+Todays last post. USD CHF for first 3 months,
+
+--- 帖子 #41 ---
+USDCHF
+
+--- 帖子 #42 ---
+All of the examples that I have shown including this one have the same settings. The ones that I have published. These settings are no where near optimal. But they suit my purpose here. This example is for Gold. It shows Exit Rule two taking us out of the market, because we are going nowhere. Ghillyoar re -enters the market and remembers the original targets which are hit. It then continues hitting some more targets. I do not know the ATR for Gold or Brent Crude oil and nor does Ghillyoar.
+
+--- 帖子 #43 ---
+Having mentioned Brent Crude Oil (which I never do). I thought it might be interesting to see if identical settings work on black gold.
+
+--- 帖子 #44 ---
+Okay, I have recoded my version of this EA to help you with some more developing and hopefully, improving it to make a most out of it! So, I have done a test on EURUSD for past 6 years. Here are results: Attached Image (click to enlarge) Attached Image (click to enlarge) So, from my perspective it looks like I did it right! But, still need to check completely if it is okay. What my 1st goal is going to be is to avoid these big falls in equity in any way possible without reducing the overall profitability. 2nd goal is going to be to find a scaling process that can automatically calculate the best lot sizes/profit targets to get the automated process of selecting it on any account with any equity(min dd, max gains). OF course, it wont be easy but this system has a lot of potential so why not try it out. Thanks Paddy for this system, looking forward to developing it further
+
+--- 帖子 #45 ---
+Thanks. So when you say recalculate you actually mean the equity target levels, not the Buy/Sell- Bench levels, correct?
+
+--- 帖子 #46 ---
+I will make this my last example. You don't need any more. Its The German 30 ( whatever that is). This instrument is very unsuitable for us to trade because even with a reduced lot size the contract size is huge. A 50$ target on this thing is a complete waste of time. From memory the period covered is approx one year ending a few days ago.
+
+--- 帖子 #47 ---
+Hi, Paddy I was just wondering why you decided against sharing your EA / source code - the idea of this thread was to find ways of improving your system so it would make sense for improvements to be made to a common-core EA rather than new EAs being developed which may not follow the strategy rules 100% and/or have unidentified bugs.
+
+--- 帖子 #48 ---
+Fully agreed. I think it has potential because it is against all odds... just like in real life. But if we are not even sure if we talk about points or pips (I would know if I had the source...) Until then I will focus on "normal" grid traders. Just had the idea to use a normal EA and change buy&lt;--&gt;sell
+
+--- 帖子 #49 ---
+Thank you for your input, which is valued. I am not able to publish my private E.A. and will not discuss the matter. However I think that you make a very valid point. I would like to make the following offer: 1. I have already given my readers a lot of my code. 2. I could make a post containing all of what I consider to be the remaining relevant coding snippets. 3. A single coder can then work with me to make sure that his version of my E.A. is the one that 100% reflects my original intentions. A half decent coder could only improve on the original. Any volunteers ? 4. He or she would need to undertake not to sell any aspect of my system now or in the future. 5. Anyone who downloads our E.A. would by doing so agree not to sell it. 6. The coder must agree that any changes that he makes to The Ghillyoar E.A. are authorised by me only. 7. Anyone uploading an unauthorised E.A.s would be banned. I am making this offer so that as many people as possible can backtest the system and tweak the settings. I am hoping that in the coming days people will suggest possible changes/ improvements to our system. That’s the only reason that I am here.
+
+--- 帖子 #50 ---
+Fxtrue has kindly offered to code our new E.A. I will be working with him behind the scenes and we will make the end result freely available. On behalf of all of us I would like to thank him for his kind offer. Paddy
+
+--- 帖子 #51 ---
+Good choice! If you need any help (coding or testing) just let me know. I am only too busy at the moment to focus on a new project. I have enough constructions ahead...
+
+--- 帖子 #52 ---
+I have previously shown the following back test elsewhere...............I don't think anyone saw it .... At the start of this thread I talked about long term back tests as being unreliable. That didn't stop me immediately thereafter showing a 21 year back test. No one laughed at me....... or pointed out the hypocrisy. They looked at the graph and saw a fishing rod...........which is what they wanted to see. They wanted to see a perfect system that was .....free ..........and here........a system that works. Anyway........... here is The Ghillyoar System pretending to trade eurusd (using very iffy data ) for the period 2/6/1971 to 6/3/2021. 50 years .............half a century…………wow……..get out the fancy yacht brochures. Apart from providing me with some mild amusement............I suppose it once and for all removes any possible question of “cherry picked charts”......
+
+--- 帖子 #53 ---
+I dont understand that rule one ignores losing trades, and then we say the system has closed a serie of losing trades... could you help me with exit rules? Thanks! Awesome work by the way
+
+--- 帖子 #54 ---
+I love fairy stories ........do you ? Here is a completely hypothetical scenario………….you can trust me on that . Imagine a trader who thought it might be good fun to create a bang average forex system and then turn it into a world beater by giving it away and asking the people to improve it. This imaginary…..naive…. trader decides to give it all away…to hold nothing back. Gradually using the thinking of the many instead of the one…..there would be incremental improvements. Obviously, he would need to make the base system profitable. He would need to demonstrate that it was profitable or people would be critical instead of helpful. He can see a problem though………………..what if the people thank him for “sharing”, write down his trade rules ……..and move on without giving any thought or help to developing the project. Obviously if no one is going to help him………….he is the one that should be moving on………..and on his own. But how does he know if the readers are actually looking closely at the basic system with a critical eye ? How does he know if they are trying…………….. He comes up with an idea! What if he includes in the rules a totally stupid and pointless feature. An unnecessary feature. A feature that would systematically and regularly reduce the profits. He smiles to himself…………the first ever system on Forex factory that intentionally places losing trades……………….and still wins So he would be giving everyone an easy improvement to make. I bet you are thinking it’s hard enough for him to create a system that wins…. It’s virtually impossible to make a winning system THAT DELIBERATELY places losing trades. In this imaginary story it turns out that it was quite easy really. …………………..and they all lived happily ever after
+
+--- 帖子 #55 ---
+Many thanks for your interest in the system. I have looked at it again, and I honestly cannot explain the exits any better than I have already. If someone else would like to explain it to you...........I would very grateful to them. Some of our readers have already written their own code so I am assuming that they have the exits down to a "T" They will probably explain things more clearly than me. Thanks for the compliment.
+
+--- 帖子 #56 ---
+Congratulations as far as I am aware you are the first person to code his own Ghillyoar E.A. And it looks like it makes a profit……… well done ! Its starting to look as if I am not sitting here photo shopping back tests ! From my standpoint the most interesting aspect of your post is what you plan to do next. You are ignoring the entry mechanism and are going straight to the heart of the matter the exit mechanism. I could not possibly agree more. The current exit mechanisms for The Ghillyoar System came out of my own very limited brain. I am constantly looking to find new and better exit strategies. I invite you to join me using the following methodology: 1. Sift through every system that you can find on Forex Factory. Make the assumption that the system does not work ……and look only at their exit strategy . If the exit looks half decent try it …..first of all instead of my exits …….and then alongside my exits. 2. Search the internet for free forex systems…….do not worry….they do not work……you do not care ………. look ONLY at the exits……….try them instead of my exits and then alongside my exits. 3. Search the internet for best forex exits. 4. Go to Youtube……….please do not……get hooked into parting with a single penny of your hard earned. If they could make money trading ( they can’t) they would be making money trading not teaching. I am reminded of the aphorism “Those who can do….. those who cannot teach” Look only at their exit strategy. 5. Dig out all of those waste of money forex courses that you bought. Look only at the exits. And lastly join me in asking people who visit this thread to give us a list ........or a single exit strategy that they have come across. We do not care if it is rubbish or not ………….you are not endorsing it ........you are making it available for testing. I do not know how many unique visitors that we get..............but if everyone of them gave us just one exit strategy....wow !
+
+--- 帖子 #57 ---
+Here's an exit strategy that works with some systems (haven't delved deeply into yours, so might not be applicable here, or you may have tried it, but for what it's worth): Exit when you get an opposing signal. If your trade is short, exit when you get a long signal.
+
+--- 帖子 #58 ---
+So even if I dont know if you are trolling or not anymore, I actually have something that is not bad and has potential. And if you think id use a possibility of blowing account with that exit strategy, you're far off. I didn't build my portfolio by using destructive strategies, but I did by taking ideas from those. Anyways, good work.
+
+--- 帖子 #59 ---
+Hi dchristi Many thanks for the exit strategy that you have put forward for consideration. To some people it may sound too simple. I firmly disagree. I have a feeling that the exit rule that I am looking for is going to be so common that we ignore it, as not sophisticated enough or............ it is so "way out" that we have never heard of it. I have tried this on its own. I rejected it, because it was too slow in getting me out. But now that you mention it ..............I want to try it as exit 3. We already have Exit Rule One and Exit Rule Two and we know that using them we seem to do well. If we trial your idea as exit three and the profit and or draw down are improved its a no brainer its in......and I will give you full credit here on the thread. I do not need a fast exit.....I get them from rules one and two..........I am looking for a slower exit which does not get in the way of the first two rules ..........but protects me from the larger draw downs. Many thanks for entering into the spirit of this project........I only hope that you inspire some others to do the same. Paddy
+
+--- 帖子 #60 ---
+Hi Mr.Sexobeat Have I inadvertently offended you ? If I have it was certainly not my intention. In my previous post replying to you I thought I was congratulating you on your progress with the coding of my system. I was also pleased to note that you agreed with me on the importance of exit strategies ( these being more important than entry strategies in my view ). I then went on to tell you the sources that I study when I am looking for exit strategies. You mention the possibility of me" trolling". I am not a social media expert but I understand that "trolling"means picking on someone using the internet and being horrible to them. If you can prove to my satisfaction that I have isolated and have been horrible to any individual . I will be mortified and this thread will be over instantly. I will not be taking any further part in this thread until this matter is resolved.
+
+--- 帖子 #61 ---
+It must have been a missunderstanding. I went through posts again and realised I read something wrong, that's where conclusion of your possibility of trolling came to my mind. Sorry for that, it gets like that sometimes. Let's just continue working on this and improve it where it can be improved.
+
+--- 帖子 #62 ---
+I have actually missed whole second part of one of your latest posts. So don't worry, everything is okay. I did a mistake there.
+
+--- 帖子 #63 ---
+Exit strategy? Close half of your position at a specified TP. Trail the other half by specified number of pips until the market takes you out.
+
+--- 帖子 #64 ---
+I do not really see the benefit of exit rule #2 if the initial equity target remains the same (except perhaps releasing some margin or reducing swap-fees). Instead of closing a fully hedged position you could just as well keep the X buy / X sell trades open and add buy / sell benches until the target is reached. But maybe that's just part of the fairy tale mentioned in post #54.
+
+--- 帖子 #65 ---
+It’s been an interesting week for me. I have learned the difference between pips and points. Unfortunately this did not increase the profitability of Ghillyoar by a single penny………oh well I have been forced to check the meaning of the term” trolling”…………now I know. I made the mistake of coming to the Systems Forum and appealing for help on the basis that hundreds of people working on a single trading system would be a powerful force for the benefit of all. I do not blame my readers it was my mistake……………having read other threads……….. now I appreciate ………that in this section of Forex Factory the idea is that the system creator provides a complete system ………….he does not ………request significant input from his readers. Sorry guys I have been the awkward guest at the party…he doesn’t know …the required etiquette…………………...its ok….I will get my coat. I have handed over all of the code for Ghillyoar …I expect that it will be tidied up and posted in due course. I will make a couple more posts to cover some final house keeping………and then it will be time to say…………..so long and thanks for all the fish.
+
+--- 帖子 #66 ---
+Hi Paddy, The thing is your system is based on hedging, just like martingale or averaging solution, this is well known and is very complicate to use on real account. I'm also curious that you didn't the difference between points and pips !! ...
+
+--- 帖子 #67 ---
+Hi fellow trader, I personally dont think you made a mistake. I think it just takes more time to get a team going! There is clearly interest. Also, we all have what we have been working on ourselves at the moment, so no one will be bringing forth anything conclusive in a couple of days alone. I think you re off to a good start. Would be a much better start if you would be using mt5 for optimization and make ALL params dynamic from the start. Ill come back to gladly contribute when I have more time. P.S you post was a great read !
+
+--- 帖子 #68 ---
+it is an antigrid (i.e. antimartingale) system. However it is still not clear to me the meaning of the exit in loss when you get an equal number of longs and shorts; why you only exit when the total open profit of the long (or short) positions gets higher then 20$ (or whatever it is)
+
+--- 帖子 #69 ---
+correct..I too used to think recalculations were referred to benches.....no they are referred to target equity!!
+
+--- 帖子 #70 ---
+agree ...that's the unnecessary feature he is referreing to in his fairy tale
+
+--- 帖子 #71 ---
+The above statement ..........which may or may not be true .............does not talk about the management of existing trades....it talks about the deliberate placement of a new trade knowing with 100% certainty it will lose. I said 2 more posts............... and then ..................so long and thanks for all the fish.................... This counts as one of them. 1. It does make money in a real account..........it makes money in mine. 2. Most people who download the code............will not use it like me....and they will lose.. be careful... 3. In the back tests to maintain the integrity of the thing.. I changed no settings..... whatever the instrument........don't be daft.. 3. If this is a Martingale system...........it clearly has no idea of how a Martingale works. 4 .I would say that..... it is not averaging down......I would say that when we are winning we add trades. 5. One more post to go...just a little time to enjoy my sad little jokes....for those who want to know what Ghillyoar is. I gave a massive clue in my favorite thread.....the way things are going I may be the only............... Hopefully you will agree ...........my thread may have been garbage.............but it has been different.
+
+--- 帖子 #72 ---
+This is an hedging system? correct? If you read what i wrote : You understand that if it was that simple everybody would be rich. At a moment you will have to open a trade and will miss money. Also when you open positions for long time you have to pay interest on your position, you never mention this. Ghillyoar is not Holy grail Also you show a backtest from 2000, trust you can try almost any system from this date and show millions of dollar at the end. Your post about fairy tale is probably the reason why some think you are trolling.
+
+--- 帖子 #73 ---
+O.K. Guys, The week has flown by............. I gave you back tests from 1970 I gave you back tests from 2000 I gave you back tests covering the first 3 months of this year. I gave you back tests covering all sorts of instruments ............and all the back tests ...foolishly had the same settings. So long and thanks for all the fish.......................
+
+--- 帖子 #74 ---
+Maybe if you stop talking mysteriously, be simple explain your work and progress, where you are etc ... I'am sure that very valuable people (and i do not count me in) will get interest into your work. I said my feelings here, wish you luck.
+
+--- 帖子 #75 ---
+Guys.. paddy9 gave to my opinion all rules for entries and exits....so the full system. Its up to us to think on it...to experiment and finally to verify it is profitable....and (what puddy really asked for) to try to contribute with improving ideas
+
+--- 帖子 #76 ---
+all of this is very strange...... I thought I would have some serious enjoyment here, since my very first consistently profitable strats were based on directional trading also, and I always like new puzzles to crack.. Instead feels like children tantrum space now just weird that a good sound base for a strategy got completely overlooked by many who have not even begun to work with it or understand it. oh well. Take care all, and thanks Paddy9 sharing and trying
+
+--- 帖子 #77 ---
+If it is possible I would concentrate on the periods when the system experience drawdown....that is during lateral periods....would be nice to get the list of trades during one of those periods
+
+--- 帖子 #78 ---
+As promised, I attach Paddy9's (moderately) cleaned-up code for the Ghilly Oar system that generated the provided test results. Paddy9 explained that the purpose of this thread was to encourage some "thinkers" (rather than "takers") get involved and try adding additional exit rules that might benefit the system and be adopted if useful. You will therefore find example code at lines 600-602 than can be copied and used to add additional rules. I hope that useful rules will be shared ...just as I hope that the source code of other EAs for this strategy will be shared freely to assist the community. For those unwilling to share their discoveries / code, please consider carefully where you would be now if others had not freely shared their discoveries / code with you!
+
+--- 帖子 #79 ---
+Thanks fxtrue! And I need to apologize to Paddy for a former post of mine, which I already deleted after "talking" to Paddy. There was a misunderstanding, the problem was between my ears (my brain)...
+
+--- 帖子 #80 ---
+Just to clarify for those who can't understand the strategy ... 1) it trades with fixed lots 2) it's trying to pyramid i.e. add to a winning position, it's not averaging / Martingaling (adding to a losing position) 3) exit rule #2 is to get out of a stalemate situation where price has triggered trades in one direction and then reversed - this is especially relevant during flat market conditions where a growing number of buys and sells could accumulate without achieving the target profit 4) more exit rules are required to improve the strategy's ability to exit from losing positions with a smaller (or no) loss
+
+--- 帖子 #81 ---
+Hi Fxtrue, Again i mention averaging / Martingaling and that's the only part of what i said that have been kept, anyway i asked Paddy if it was a hedging system. From my experience, and some others ... in real market condition, hedging strategies can give very different results from backtest. Thanks for your work, you code better than i do
+
+--- 帖子 #82 ---
+Based on the pyramid that "FXTRUE" comments and as he says, the biggest problem I see is that the price enters the range, so we would accumulate many operations that freeze each other. Or that the price goes in one direction and turns around which would leave us with some operations in favor and more against and further away, so the price should move too much in the direction of the turn. In my opinion, we should never allow positive trades to go negative and drag them, so when opening an order, a breakeven (+ minimum pip) could be placed in the previous one and successively, so we would never carry many trades behind against, waiting that the price takes a direction and adds in the pyramid. We would always have an operation at the peak of the turn, but with a little movement we would be compensated for the new orders in favor of the turn, it is like following the price until it decides to move in one direction. To exit automatically, a trailing could be used with the balance of all open operations that would recalculate a profit, looking for a configurable profit. We are trying to pyramid, therefore we must wait for the trend with logical benefits and come out as best as possible in the ranges, waiting for the movement that takes us in favor of the pyramid. "Paddy9" don't leave us at this point
+
+--- 帖子 #83 ---
+thanks fxtrue.....analysis of your code shows that Buy_Bench and Sell_Bench is updated at every bar; I understood they were to be updated once the system exit from all positions in gain (rule#1)..while they re kept constant when the system exits all positions in loss (rule#2).
+
+--- 帖子 #84 ---
+hey gerval....genasea and I have a discussion about these very topics in "Grid trading system, keeping DD to a minimum"....hope you get something out of it
+
+--- 帖子 #85 ---
+Looking at a different timeframes, 4H or 1H it could be very interesting too, without limiting 1 trade per day,
+
+--- 帖子 #86 ---
+This is actually Paddy9's code - I simply cleaned it up so it would be more useful / less confusing for the group. As for the buy / sell bench checks you mention, the operation is correct ...it's just not optimal - since the closing price two candles back only changes when a new bar opens, that code could be updated to evaluate only at the start of a new bar.
+
+--- 帖子 #87 ---
+This is not quite correct as it's not really possible to accumulate "many positions"... remember that the system is trading 0.1 lots and shooting for a $50 target - that's only a 50-pip move for a single entry and the target has been achieved. Also, since rule #2 closes the batch if "buys = sells" and "buy profit or sell profit &gt; 20" then it's unlikely that there would ever be more than 2 buys locked by 2 sells.
+
+--- 帖子 #88 ---
+Hi, Neosqualls ...as I assume Paddy9 explained, it's not averaging or Martingaling because buys are only added as price goes up, and sells are only added as price goes down (i.e. pyramiding). It's also not really a hedging system because as soon as buys = sells and the buy or sell trades have a profit of $20 then everything is closed out with a net loss. I do agree that there would be differences between live trading and what the strategy tester presents (mostly due to the fixed spread of the tester), but I think the differences would be minimal because there are seldom more than 4 trades in a basket, it's not a particularly spread-sensitive strategy, and the main target (rule 1) / bail-out target (rule 2) are quite minimal considering the default 0.1 lot trade size. The real issue is, as Paddy9 stated early on, getting the exit right, as entries are really just a secondary consideration when you start to dig into things - I remember reading about a famous trader who entered a position each day based on the flip of a coin... and proved that exits defined profitability
+
+--- 帖子 #89 ---
+I agree at 1000% that money management is the biggest part of trading and entry is just a small part of the entire trade. I has the bad idea to say that just like martingale, hedging can also be dangerous (because according to my definition of hedging when you own 2 positions or plus of the same instrument in two different direction it's hedging). I'am definitely not saying this system is a martingale system. Also when you trade you must consider the psychological effect of your current positions. Even if the EA might be able to recover the loss what is the impact of having like -800$ when your initial target is 50$ ? If you trade live, you know you also have to pay interest on open positions and for example if i go to regular account with IG market and want to activate the hedging you say good bye to stop loss gurantee. I am just asking things, and to be honest i have seen so many people coming here with "Ghillyoar" (anagram of holy grail) .... A lot of very very smart people have been looking for high profit 100% win rate system and as far as i know nobody get it. Also, maybe paddy has "writing style" which is a little bit complexe to me, i like when things are straight and simple ... Anyway, i looked at the code you posted and using the normal distribution as target or filtering instead of the EMA might help
+
+--- 帖子 #90 ---
+is it correct (from a backtesting point of view) to allow an entry soon after (i.e. within the same bar) the exit, or viceversa an exit soon after (i.e. wihin the same bar) the entry? your EA shows this can be possible. my system which (should) implement your exact rules (apart from not allowing entry and exit in the same bar) sometimes shows different results, which is quite strange for simulations on the long run (months).
+
+--- 帖子 #91 ---
+I'm not sure that it matters (Paddy9 can always comment if so), and instant re-entry (if conditions are met) may improve profitability if the market is moving in the trend direction.
+
+--- 帖子 #92 ---
+Looks like rule #2 has to go - new targets grow out of sight... Also a "Re-Bench" after a candle close under the EMA seems useful. Attached Image (click to enlarge)
+
+--- 帖子 #93 ---
+ok, maybe what I mentioned was not exactly the strategy, but more generally the pyramid. I will reread the strategy to adjust to it.
+
+--- 帖子 #94 ---
+Hi Gerval the system is a typical antigrid (google it to know how it works). In trending markets it works ok...in lateral it freezes. Rule#2 is designed to exit when the system freezes..and paddy is asking us to contribute with other ideas on how to exit from such situations
+
+--- 帖子 #95 ---
+@neosqualls That's an interesting thought - how would you suggest the normal distribution be calculated (for a coder, my maths ability is oddly minimal ) Is anyone else using normal distribution? If so, please share your thoughts &amp; experiences.
+
+--- 帖子 #96 ---
+Here is a piece of code i used. There was a very interesting thread by Ceeso, he no longer come on forexfactory. So for example : you calculate that over the last X days, 80% of price was between +0.5% and -0.5%. Using this, you might have a take profit for the initial trade with better probability. I don't know yet how to calculate the second take profit exit The use of normal distribution is mostly interesting to set stop loss and take profit. Inserted Code int period = PERIOD_D1; double x = 0; double normDist = 0; for (int i = 1; i &lt;= Population; i++) { x += (MathAbs(iHigh(Symbol(),period, i) - iLow(Symbol(),period, i)) / ((iHigh(Symbol(),period, i) + iLow(Symbol(),period, i)) / 2)) * 100; } x *= (1 / Population); for (int j = 1; j &lt;= Population; j++) { normDist += MathPow(((MathAbs(iHigh(Symbol(),period, j) - iClose(Symbol(),period, j)) / ((iHigh(Symbol(),period, j) + iLow(Symbol(),period, j)) / 2)) * 100) - x, 2); } normDist= MathSqrt((1 / Population) * normDist);
+
+--- 帖子 #97 ---
+Also, what do you think about reverse the bench if we have for example 2 buys, 2 sells, we buy at the sell bench and sell at the buy bench ?
+
+--- 帖子 #98 ---
+Hi Paddy9 (if you still bother to read this thread), thanks for sharing your strategy. A quick back test shows it's got legs. Just a case of finding the optimal settings in terms of target step, exit profit and possibly the pips added/subtracted from the close of candle 2 to determine the buy/sell bench. Although you did mention some where that the 30pips you use appears to be the best from your back test. Read your other satirical thread. Quite entertaining! You are definitely nuts with a wicked sense of humour Poor Lucas! A possible idea of exit strategy could be if there is way to lock-in profits en route to the 'TargetStep'?
+
+--- 帖子 #99 ---
+First up, thanks for that normal distribution example - will be interesting to see how that can be applied. As for the reversal idea, my first thought is that it turns the strategy into a martingale system as we'd be adding to a locked loss at that point. Sure, there's a 50/50 chance that price would rise, but it would need to move a long way in my view to have any meaningful impact on the original locked loss, and the bigger question would be what happens if price continues to fall now rule #2 no longer applies and there's no mechanism to add additional sells? I guess the best thing to do is try it and see what kind of results you get.
+
+--- 帖子 #100 ---
+What about a time limit based on average time for a winning trade ? For example cut loss after X days if nothing happen ?
+
+--- 帖子 #101 ---
+Hi fxtrue, firstly thanks for the attached EA. Just an observation, I think the EA, in terms of pips calculation etc. does not appear to work accurately with Yen pairs. When it is attached to say USDJYP, the sell bench or buy bench instead of being 30 pips away from the close of the candle 2, does not appear to be the case.
+
+--- 帖子 #102 ---
+Thanks for uploading for us.
+
+--- 帖子 #103 ---
+In the image attached we have a case where we open much more sell trades than buy trades. So exit rule #2 won't apply and we are in danger, i suggest to try to cut loss if we have the double of open trade in one direction. Let say for example : 2 buy, 4 sell, close all open order
+
+--- 帖子 #104 ---
+Really strange behaviour....also order 107 has a profit of 20 in 10 pips with a size of 0.24. You seem to have changed parameters in lot side, profit target for rule#1 and maybe (what could explain your results) also the profit exit in rule#2
+
+--- 帖子 #105 ---
+No, i didn't change lot size, only played with "TargetStep" &amp; "ExitProfit". No order 107 on my screenchot.
+
+--- 帖子 #106 ---
+eurusd Sept 2013 to 23.3.21
+
+--- 帖子 #107 ---
+Hi! I just read the whole thread and want to thank Paddy9 for sharing the system, the rules and the code! And fxtrue for cleaning and posting the EA. I downloaded and quick test the EA and looks promising and from my humble point of view, has a lot of potential. I'll be working on it to improve it and share here any idea that enhance the results. Right now I want to understand it 100% before tweaking it. But, I agree that the main focus should be reducing the big loss trades without reducing the overall profitability of the system. Paddy9 please don't leave so soon your thread, you sparked interest in the matter and I believe that even if just a few traders works on it and share the results, the system could be better for all of us. Thanks again!!
+
+--- 帖子 #108 ---
+Not easy to tell from the screenshot but i feel like ExitProfit &amp; TargetStep are dynamic. I will try to add normal distribution to set ExitProfit &amp; TargetStep maybe it can give good results. If then i will put it on real account to forward test.
+
+--- 帖子 #109 ---
+Hi all, no news from backtests? paddy9 asked for suggestions of new exit rules to replace (or to add to) rule#2 of the system. At the moment I'm not able to propose any "reasoned" alternative to rule#2. On the other hand, I would propose some kind of "modification" to the update of the Buy bench and sell bench which sometimes get very far apart (typically when the the first entry is just after a parabolic growth/drop which makes the entry price quite distant from the moving average). A condition to reduce the gap between buy and sell benches when they exceed some given (or computed) value could be implemented to see whether this brings some improvement or not. Any thought on this?
+
+--- 帖子 #110 ---
+The use of dynamic ExitProfit and TargetStep is not the way to go. Backtesting is a long process ...
+
+--- 帖子 #111 ---
+Here are some parameters i will focus on for the next backtesting : Inserted Code double Target1 = 0; double Highest_Ever_Funds = 0; double Buy_Bench = 0; double Sell_Bench = 10001; int NextOpenTradeAfterDays = 1; //next open trade after time int MaxSlippage = 3; //adjusted in OnInit int MaxOpenTrades = 1000; int MaxLongTrades = 1000; int MaxShortTrades = 1000;
+
+--- 帖子 #112 ---
+Those are inner variables used by the EA code. You need to focus on the input parameters (those defined by the keyword "input").
+
+--- 帖子 #113 ---
+I disagree, there is interesting parameters like the "NextOpenTradeAfterDays" or the number of max open trades. If you only focus only changing ExitProfit &amp;&amp; TargetStep are you not just doing over optimization for a specific period which obviously can be different in the future ?
+
+--- 帖子 #114 ---
+Here is a backtest using default parameters but same period as Paddy's last post. I have around 3 times less of trades.
+
+--- 帖子 #115 ---
+Something that baffles me! Did a quick backtest using MT4 strategy tester (I know it's not completely reliable) using the following settings (Tradesize=0.05, ExitProfit=20, TargetStep=50, MaMethod=1) on USD5000 starting balance, on GBPUSD, USDCAD and EURUSD between 01/12/2019 to 10/03/2021. GBPUSD and USDCAD returned decent profits with decent max drawdown, but EURUSD returned a massive loss with big drawdown. What gives! GBPUSD: net profit = 1405.10 Max DD = 952.34 (18.16%) USDCAD: net profit = 719.39 Max DD = 803.48 (14.05%) EURUSD: net profit = -3550.66 Max DD = 3934.48 (77.60%)
+
+--- 帖子 #116 ---
+Hello If there are dependencies, for example, on a currency pair, timeframe, time, news, etc., then this is not an algorithm, but just a coincidence. Best wishes in mastering ...
+
+--- 帖子 #117 ---
+Nice work. My 2 cents. First off, period of testing is not nearly large enough. Second, every pair needs completely different params for every single condition applied. Hope it helps. Good luck.
+
+--- 帖子 #118 ---
+Hi mtako. Thanks for your feedback. I agree the period of testing is too small. It was just a quick test (as I am using 'every tick' mode which can be painfully slow for long periods), and the EU and GU were trending similarly during that period (images attached. The first is GU, and the second is EU). I could have lived with slight differences but just completely baffled why one returned decent profit with low DD and the other would have actually blown the account! Inserted Code Second, every pair needs completely different params for every single condition applied. And herein lies the big problem! How does one go about determining what params are optimum for what pairs! You can do an extensive back tests and come up with what you think are the optimal params but that does not guarantee it will not blow your account in future! Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #119 ---
+Its a pleasure danjuma Every single thing from such backtest is completely meaningless so no need to be baffled. You need to work with minimum +1000(the more the better of course) of trades throughout as long a period as possible. Or else it is not even worth it. At beginning, no need to use tick mode when you have barely begun optimizing such a strategy.... 1min OHLC is more than enough. i would actually start with open price of an even bigger than 1m TF at beginning, for this strat. The work has to be done, as simple as that. Go with mt5 and you will save yourself time and headaches. Of course, and the chance is much greater if you dont do all the necessary work. The work has to be done and only then will you know the stategys true potential and risk. I agree the past do not guarantee future results. That is why, at minimum, all the possible work has to be done. Only then, according to the results, comes the time to adapt it to its own optimal mm, then compliment it with other strategies and/or versions of the same strategy with different params from different TFs that have also done good enough for as long as it is possible to test. Also, everything has to be dynamic... no fixed anything.... Its always a big job, that is why many just give up and convince themselves of all sorts of theories that there is no potential in eas.. The internet scammers dont help. But Ive been doing this a while and can tell you that, if the work is done, and in a smart, innovative way, and thoroughly, it is possible to get a consistently profitable and safe strategy going with good longterm return/drawdown ratio... Just dont forget to diversify in the very end ! Every strategy has partner or more that makes it better!
+
+--- 帖子 #120 ---
+Many thanks for the feedback and tips mtako!
+
+--- 帖子 #121 ---
+Here is my backtest using the same settings, thats why i believe in forward test much more than backtest. 2 people doing the same backtest very very different result !
+
+--- 帖子 #122 ---
+Which pair was this for?
+
+--- 帖子 #123 ---
+It was EURUSD from 01/12/2019 to 10/03/2021. ExitProfit = 20, TargetStep = 50, MaMathod = 1 I set initial capital de 5000EUR.
+
+--- 帖子 #124 ---
+Thanks
+
+--- 帖子 #125 ---
+eurusd 1.12.19 to 10.3.21 ..............with adjusted lot size
+
+--- 帖子 #126 ---
+hi people, buy the highs - sell the lows at certain intervals.= a directional grid sorry, but you all look in the wrong places......it is very profitable, BUT you got to trade the right instruments which are trending like crazy......unfortunately the forex world is not trending that much......all those backtests on E/U etc. are completely useless.....did you look if those pairs were trending during that period???....look at equities and commodities..... oil last year $16, now around $60....lumber up 50% in 1 year.....and the list goes on....I`ll go out on a limb and say that you all can be millionaires within 5-10 years.....just do backtests on oil, lumber etc and you see what I mean.....
+
+--- 帖子 #127 ---
+About the stoploss... If we use the "original" SL we know, it will be bad. It works like this: 1. Your trade will go downhill 2. You will get a SL and trade will be closed 3. Price will reverse where You wanted it to be before. Or margin call will happen in the worst scenario and same thing happens. Price will reverse immediately. Everyone knows this also happened to everyone. Why we still do it? Glad it is not here. SF
+
+--- 帖子 #128 ---
+Thanks Paddy9! Good tip - adjust lot size / be conservative with lot size in relation to account size!
+
+--- 帖子 #129 ---
+Hi yonnie. Thanks for stopping by and gracing us with your usual solid tips in relation to grid trading. My question, you mention things like equities, how do you apply grid trading to equities (where you cannot easily sell as such like in forex but short - subtle difference)? Oil, commodities, metals etc have their own issues as well in terms of working out pip sizes etc.
+
+--- 帖子 #130 ---
+Arround 81 trades, arround 63 trades direct to target step. Total profit arround 3200$ Average win per trade is 50$ 3200/63=50.7$ Parameters are the same as original post, except the lot size. Will have to go back from work to search more.
+
+--- 帖子 #131 ---
+Hmmm! strange, same params with USD5000 starting balance and 0.02 lots but I got: 488.54 total net profit, and 56 total trades, max DD 243.09 (4.6%)
+
+--- 帖子 #132 ---
+Hi All! I've been doing some testing, and have a couple of ideas to improve, maybe too obvious for some, but I wanted to bring them anyway, in case it helps anyone. I like to do extreme parameters experiments first to test the EA limits, and using TargetStep = 150 (01.01.2018 - 31.03.2021), the system was doing fine until a couple of death trades blew the account (see the picture). I'm still just scratching the surface, but here a couple of ideas that I'll try to add to the code: - Emergency StopLoss. One way is to set a wide SL per trade, to avoid taking too much loss per trade, or as the Exit Rule, implement an Amount / Percentage Loss of the Account that will trigger and cut early a potential extreme dent. - Adding the option to use the TargetStep /TradeSize as Percentage of the Account, to be more flexible, and avoid using a lot that its too high for the account size. - And, still trying to figure out one of the Paddy's questions, the exit rule, that avoid large losses without reducing profitability. In the example would have been better to close early all sell orders because the price closed above EMA, but in other cases it resumed the trend and the orders turned out as profitable.. So still thinking..
+
+--- 帖子 #133 ---
+Maybe Paddy changed the frequency of trading ? less than a trade per day?
+
+--- 帖子 #134 ---
+So taking last paddy's backtest : eurusd 1.12.19 to 10.3.21 Account = 100000 Trade Size = 0.5 Exit Profit = 20 Target step = 50
+
+--- 帖子 #135 ---
+EURUSD 1st January 2018 to 1st April 2021
+
+--- 帖子 #136 ---
+From 1st January 2013 to 1st April 2021 Drawdown is 9% Net profit 1727 (Initial account 10000)
+
+--- 帖子 #137 ---
+From 1st January 2013 to 1st April 2021 Drawdown is 33% Net profit 8613 (Initial account 10000)
+
+--- 帖子 #138 ---
+What is an acceptable drawdown for you ?
+
+--- 帖子 #139 ---
+Hi! I don't know if Paddy's is still reading the Thread, but as promised and I hope it can help some of you, I did an interesting tweak that has brought me good results in backtesting, but first a little introduction. I firmly believe that a great system has to work across all pairs, do NOT has to be profitable in every one all the time, because it would be a truly Holy Grail, but suming all together must be better than running it in just one or two pairs. So, I'm testing the EA in different pairs and Timeframes, and found out that sometimes Rules#1 and Rule#2 do NOT get triggered for LONG periods of time, I mean, months, acumulating swaps and unrealized drawdowns if there are open positions. What happens is that the Buy and Sell Benchs get to Wide and the price oscillate in between indefinitely, so: 1. The tweak consist in adding a Rule #3, that consist in resetting the Buy and Sell Benches if X amount of Bars has passed, so the system can get moving again and either Rule#1 or #2 can be trigger. 2. I added a few visual helps, as a Horizontal Buy/Sell Bench and HighestEverFunds. The tweak improved some currencies, like EURUSD (see the images), I used 140 Bars as a Parameter.. But, I still have problems when the system opens too many trades in a peak or bottom, and when the price reverses, struggle to match the Buys and Sells to exit with Rule#2.. Still figuring this one out. Anyone has more ideas to try?
+
+--- 帖子 #140 ---
+Hi JoanGuz, You have done great work I totally agree about the swap and unrealized drawdown. Do you think the bench should be adapted to average range ? Also here is an idea coming from a friend of mine : Exit rule #3 : Exit if account equity is less than highest equity * 95%. Reset the highest equity level after the exit. Regards.
+
+--- 帖子 #141 ---
+Hi Neosqualls! Thanks for the feedback and ideas!! I do think that the bench should be dynamic, and the average range is a great place to start. I have manually changed the default (30) value, sometimes works great with a smaller value and sometimes with a bigger one. So, adding the range should be better to adapt to differet currencies with distinct volatility. About Exit Rule #3, I added that exact rule in the weekend and the results were worse almost everytime, I say "almost" but I don't remember any pair that improved the results jeje. Look an example, first image is the system with default rules, and the second one is with Rule#3, parameters: EURSUD 2017-2021, Daily TF. Its worse because the rule realizes losses that will turn profitable ahead. Attached Image (click to enlarge) Attached Image (click to enlarge) Right now I'm experimenting the system without rule #2, and looks super interesting! Obviously with smaller TimeFrames (to let the recovery happen faster) and smaller Lot Sizes, because the system sometimes opens a lot of trades before hitting the target. I'm doing that because I do think that we need a rule to exit when the system is flat and opening a lot of trades without going anywhere, but this rule sometimes closes losers with a terrible timing and realizing big drawdowns. Regards!
+
+--- 帖子 #142 ---
+removing rule#2 you let the system only exit when in gain, so you implement a plane antigrid system...which suffers of long/indefinite "frozen" periods with the cross wandering between the average long price and the average short price. dynamically redefining the benches can unblock the "system freezing"...but what rule have you used to recompute the benches?
+
+--- 帖子 #143 ---
+I totally agree, I was testing how the system does without rule#2, to watch under what circumstances it tends to get "frozen" and think a for a better alternative, which I haven't found. The rule that I have used to recompute the benches is to record when the "Last Bench" (could be the Sell or Buy, either count) was recalculated, and if X amount of bars pass, I used the original rule to add / substract the pips from Candle 2.
+
+--- 帖子 #144 ---
+Hi Joan, So far from my tests, the risk/reward ratio with reasonable drawdown is not good. 90% of the time profit will be touch fast and secure but the 10% remaining will kill the concept. As i already said backtest doesn't proof a strategy will work but proof a strategy would have worked in the past... Having multiple position open at the same time for a long term will cost more than it pays. So what about killing an order after X period for example ?
+
+--- 帖子 #145 ---
+....or implement a "classical" grid (not antigrid) sized so as to: 1- compensate with some gains the "dead" times (and swap expenses) when the original system is "frozen" and 2- not to loose too much when the cross decides to lift off again
+
+--- 帖子 #146 ---
+You want to remove the interesting part of this. The acceptancy of loss is needed, no free lunch theoreme. From what i found so far the profit factor is very low. Check paddy's backtest eurusd 1.12.19 to 10.3.21 arround 3000$ with 100k capital for this period.... Risk is high return is low. What do you guys think?
+
+--- 帖子 #147 ---
+the return is very low......why??? like I said in post 126, you`re all concentrating on a few pairs, whether they are trending or not......so the profits are good when its trending, losses when price is not going anywhere....what is so difficult to understand??? so what should you all be doing?!?.....concentrating on instruments which are trending.... you might be trading 5 trending instruments and switch to others when 1 is stalling... you`re making it far too difficult....no need for an EA....keep an eye out for trends on a weekly basis.... look at your trades once a day with the occasional trade thrown in during the week..... you dont have to do much......the trend will do it for you..... this way is only for lazy people, who are not trigger happy....but have enough energy to look for trends on a weekly basis... but not lazier than lazy and only want an EA to trade for them... that`s all it takes to make major profits.....
+
+--- 帖子 #148 ---
+You are certainly right in principle...but what about your exit (stop loss) management? When do you think the trend is not in place anymore? Or how large needs to be' the loss acceptance?
+
+--- 帖子 #149 ---
+I`m not going into how to trade this much.....most of you are just readers and not traders....certainly not profitable traders....so I wont waste my time... but for the few who really want to learn, go to "Grid trading system, keeping DD to a minimum" and you`ll see a few examples....to make it even easier, you can trade only long in a uptrend and short in a downtrend.... but yeah, you got to put some effort in to start and that is already too much for most people......
+
+--- 帖子 #150 ---
+Why is the return very low ? if it's not clear enough ... i can't do anything more Who said i am concentrating on few pairs? Are you talking about you? Best regards.
+
+--- 帖子 #151 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #152 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #153 ---
+what do those backtest refer to? I mean start and end time, EA parameters etc thanks
+
+--- 帖子 #154 ---
+My apologies, I should have said. Both are: eurusd: 1.1.2000 to 23.3.2021. Ghillyoar : with a tweak.
+
+--- 帖子 #155 ---
+Exit rule number two states: Exit Rule Number Two One of the two following conditions has to be satisfied. The total Open profit on buys has to be higher than 20$. or The total Open profit on sells has to be higher than 20$ In addition the following condition must be satisfied: The number of open buys must be equal to the number of open sells. Trying to understand why is this condition " The number of open buys must be equal to the number of open sells " paramount! For example, in the image attached below (demo of the EA), GU has a sell that is -£121.23, and 3 buys that are in total +£132.68, so +£11.45 profit overall. So, would it not make more sense to close at an overall total profit (off both sells and buys irrespective of the number of buys or sells) instead of waiting until number of buys equals number of sells? Just wondering why this condition by Paddy9. I am obviously missing something! Attached Image (click to enlarge)
+
+--- 帖子 #156 ---
+What is the tweak? Thanks
+
+--- 帖子 #157 ---
+maybe the use of a higher lotsize (not 0.1 but 1) ....mhhhh...no....there's also something which makes drastically increase the frequency of the trades (around 1200 trades in 1 year)
+
+--- 帖子 #158 ---
+It is 1200 trades in 20 years my friend. Probably the TargetStep is not fixed but based on account balance as percentage
+
+--- 帖子 #159 ---
+you're right ...sorry
+
+--- 帖子 #160 ---
+don't think so...in such case I would expect an exponential (at least a non linear) growth of the equity...like when you apply money management techniques to a succesful strategy the equity growth is completely linear...so fixed parameters..ora at least not linked to something constantly growing
+
+--- 帖子 #161 ---
+Who knows
+
+--- 帖子 #162 ---
+I have not "sort of" returned to answer any questions at all.................and I will not. If questions are asked by an individual ...........the community can answer ..............if they wish. If provoked ............I may from time to time ask questions.............I would rather not. I have already asked my first question................by posting 2 charts.....I should have included words. I did not ...........because I did not want to offend some of the kind people who have supported the thread from the start. I am starting to annoy even myself now..............in future I will articulate the question properly ............or remain silent. My first question was : "" You are all saying the returns are very low.........how do you know that.?......have you really tested........ all ......or any ........of the variables that I gave you ? The two back tests that I gave you .........politely ...........pointed out that other outcomes are available. There was a third back test ......I am not going to post it..........I am definitely not promising to make anyone a millionaire.....
+
+--- 帖子 #163 ---
+To all people interested in the system kindly given by paddy in this thread We should first try to backtest the system as it was given (rule#2 included) and only modify the value of each single parameter one by one, in a defined range, while keeping all the others fixed. We can define a table to identify all the simulation scenarios and maybe distribute the "load" of the backtests of all scenarios among us. Let me prepare such table and propose to you for agreement and conseguente backtests execution
+
+--- 帖子 #164 ---
+ok...sorry for the delay in here below a tentative table which identifies possible scenarios to be backtested, in order for us to collect all results and to assess the "dependence" or "sensitivity" of the EA to the change of basic input parameters. Parameters kept fixed in all the simulated scenarios are: 1- the backtest period is 10 years (this choise will allow us to investigate the trend of the equity on long (10 years) periods as well as to correlate the equity trend to different market behaviors (ranging, trending etc.) on shorter periods (months, few years, etc.) 2- the TradeSize is 0.1...this parameter is directly related to TargetStep and ExitProfit, so there is no need to modify it when you are going to modify the other two So find attached the table with the various proposed scenarios...all results should be collected and stored somehow to perform a final analysis to see what seems to be a "good" setting for the EA One last comment: the simulations are to be done on one single instrument (e.g. EURUSD) on the same time period (e.g. 2000 to 2010 or 2010 to 2020 etc); the (reliable) historical bars should be shared among all people wanting to contribute to the execution of the backteststhe history ...I hope some of you have some good historical time series to be used and shared rather than the one I for example use from my demo account
+
+--- 帖子 #165 ---
+No reply...wow.
+
+--- 帖子 #166 ---
+Trying to over optimize is probably not the way to go. What you will get is the perfect set of parameters for a period of time that doesn't mean the market will be the same in the future. Being good (or very good) for a specific range of time doesn't mean you will be good in the future. For me, parameters have to be adapted to dynamically fit the market.
+
+--- 帖子 #167 ---
+Hi tesiag Thank you very much on behalf of the friends of Ghillyoar.............you did your best for us.
+
+--- 帖子 #168 ---
+Hello Paddy, Could you kindly show live result of your strategy? We know with backtest how it works but can you show us 6 months or more of live results ? Thanks
+
+--- 帖子 #169 ---
+We thank you for sharing your system. Following your suggestion to experiment with different settings of the EA I proposed a number of possible settings (called scenarios in the attached word file ) to try.... Don't know if some of you think it would be' worth to peform backtests with such settings or we need to redirect out efforts. In the first case we could distribute the backtest burden among people willing to contribute.... Any idea is welcome
+
+--- 帖子 #170 ---
+neosqualls is my harshest critic............and without him .........no one would read the thread...........including me. I am interested to know which parameters you would be dynamically changing ........and how often. I ask you this because I believe that you have given my system the sort of critical appraisal that I was hoping for when I started the thread. Your opinion should be worth hearing.
+
+--- 帖子 #171 ---
+tesiag, neosqualls reply (post 166) nails it! Trying your different scenarios is probably going to end up optimizing the EA settings based on some past data which would not necessarily be optimal in future live trading. From my few backtests, I am convinced Paddy9's strategy has legs. I have tried the bench mark with 10, 15, 20 and 30 (the default by Paddy9) pips above/below the second candle, and 30pips for some reason produced the best result. So, Paddy9 must sure have his reason for choosing 30 pips. With the other settings, lot size (in relation to your account balance) appears to affect different pairs differently, so this would be one setting to me that needs to be considered depending on which pair you are trading, and targetstep and exitprofit can then be adjusted accordingly to lot size.
+
+--- 帖子 #172 ---
+Guys I never meant to suggest different scenarios backtesting in order to find the magic settings who always make the system an overall winner. Different scenarios allow, in my opinion, to anallyze the EA behavior in the same market context (same time period, same instrument) in response to different parameters... This would help to answer questions like..."which parameters you would be dynamically changing..and.how often" (or even."when" I would add) A backtest is not simply useful to see whether at the end of the day you will turn positive or negative in balance....but it mostly helps to assess when the system works well and in what circumstances it performs poorly (and thus other settings / tweaking appears necessary). You can get to such assessments or by analytical thinking/investigation or by experimental backtesting ....don't see many other ways to get any useful hint about a given EA.
+
+--- 帖子 #173 ---
+The question seems to be "what if anything is the point of back testing" ? If I was the manager of Manchester United ......and I needed a centre forward I could throw in the boy who lives next door to Paddy9. ................I could forward test him........looking at his previous results ...........is after all pointless........is it not ? On the other hand I could look at the previous performaces of Haaland........and give him a shot......... Of course they could both fail...........nothing in life can be taken for granted. I have seen many trading systems that perform well in a back test...........and badly in real life. On the other hand: I have never seen a system that peformed poorly in a back test...............and well in real life.
+
+--- 帖子 #174 ---
+I am not saying backtest is useless, it give you the overall view of how a system can be good or bad. But, Trying to find the best targetStep, the best exitProfit, the best LotSize will lead you to loose, in my opinion. I am more looking in that way : - if i know that 80% of the time the price move between +0.5% and -0.5% of the daily open, i should calculate to have my target inside this range. - the bench could be calculated with this too. I repeat, this is my opinion, i can be wrong ... or not.
+
+--- 帖子 #175 ---
+that's why I guess backtesting is always needed...not to get the supersmart (i.e. overoptimized) set of parameters to be blindly applied in real life...but to learn when and where the background logic of the EA is robust enough to make the trader survive the market (if not even make him gain something) opinions as well as ideas and proposals can be quite different among the followers of this thread..and that's perfectly ok and very welcome ....but the final objective should however be pretty much converging...that is to see how the Paddy9 trading system can be fruitfully exploited in the market
+
+--- 帖子 #176 ---
+I agree....trading is some kind of balance between a forecast exercise and (maybe more importantly) a "control technique". Apart from this, I understand you're proposing not to backtest the EA as it is now but to do it after having made an adjustment of the setting of the benck level, so as to make it dynamically adapted (directly or inversely?) to the volatility of the market . am I mistaken?
+
+--- 帖子 #177 ---
+So here is an idea : Let's assume 80% of High/Low is inside +/- 0.5% for the last 10 days ( has to be calculated by a function) - So the Target could be +/- 0.5%. - The bench could also be calculated using the SD I don't think it's very complicate to code. What is your opinion ?
+
+--- 帖子 #178 ---
+Hello friend, Thank you very much! Today I found this thread. And hopes keep in touch with you guys!
+
+--- 帖子 #179 ---
+If I understand him correctly Neoqualls has suggested the following two tweaks to Ghillyoar: 1. Add 0.5% to the opening price and that is your buy target..............replacing the target of 50$ profit for the basket of open trades. I think that this means that ........he is discarding the basket concept .......and is replacing it with individual targets for individual trades. 2. At present we add 30 to the buy/sell bench. I think that Neosqualls is saying why not replace "30" with 0.5% of the opening price. Is my understanding correct ?
+
+--- 帖子 #180 ---
+Yes the standard deviation gives you interesting data, here is an example : if i know that the price will, 80% of time, going above or below open +/- 0.5% i can use this to set my take profit and lot size. Example : I calculate that over the last X days, the price have been above/below daily open +/- 0.5% i can use this level has target and set my lot size according to 2% or 4% (or whatever you want) of my account balance. If anyone want to try to code this, i'm interesting to see the results, my coding skills are not good enough i'm afraid.
+
+--- 帖子 #181 ---
+I thought that it might be fun to see how many people (apart from me) think that the basic Ghillyoar system wins. So I have started a poll.........and hastily.... voted for myself.
+
+--- 帖子 #182 ---
+subscribed to this thread. One question, i try the EA provide from this thread on a demo account, but the EA wont close on a profit target. any idea why ? is it the ea just for the backtest ?
+
+--- 帖子 #183 ---
+Great thread man. My question is not about strategy. Where you get history data to do backtest?
+
+--- 帖子 #184 ---
+Hi Cryptofunk.............thanks for your interest in the system. I think that the published version of Ghillyoar probably works o.k. Please remember that Ghillyoar is working on two profit targets............... and they are different. 1. If the previous basket of trades was closed with a "basket profit" of 50$ then the target for the next basket ( i.e.the current basket) is a profit is 50$. When the current basket of trades hits a profit of 50$, then all open trades are closed. 2. If the last bunch of trades closed at a loss...............say 200$............then Ghillyoar will be aiming for a basket of profits that covers the previous 200$ loss....plus 50$. This device means that we are very happy to close a bunch of losing trades because there is a very high degree of probability that Ghillyoar will eventually clear the losses ............and then add on a small profit. I have tried countless variations to the published Ghillyoar...........some of them produce results that are not world shattering...............however over the long run, every single one made a profit. Of course these back tests were based on freely available data which may not be entirely trustworthy.
+
+--- 帖子 #185 ---
+One or two people have pointed out that from time to time The Ghillyoar Trading System goes a long time without opening a new trade. Other people have beaten themselves up trying to invent a wonder exit strategy to replace rule two. I think that there are probably people out there making money from the basic idea...............but not necessarily sharing their insights or results with the rest of you. For example ..........am I really the only person who opens up mt4 and places Ghillyoar on several charts at the same time ?
+
+--- 帖子 #186 ---
+The Ghillyoar Trade Explorer appears on my other thread. I opened up about 20 different charts and placed on each an E.A. that uses the original Ghillyoar logic made available on this thread. I have to say that I am astonished at the level of information that The Forex Factory Trade Explorer supplies. My initial thoughts are: 1. Running multiple instances of Ghillyoar removes the problem of the E.A. becoming "stuck" without trades for extended periods. 2. It has yet to be confirmed , but I am hoping that multiple instances will help Ghillyoar to exit the market without waiting for ages as a single Ghillyoar suffers an increasing drawdown.
+
+--- 帖子 #187 ---
+Hi Paddy! Nice experiment! I have tried to find a better exit strategy but with not success. I have the system in a 1k demo account and have made $113 so far, trading EURUSD exclusively on 15min TF. More than 10% in less than two months is great! The only issue for me is that the system has the potential for big drawdowns (unless you trade a big account with small lot sizes), maybe your experiment on multiple currencies can overcome one being in DD with the others profiting well, but also it increases the chances of more of one pair being on DD. I'll follow your results! Thanks for sharing!
+
+--- 帖子 #188 ---
+A third exit idea could be to close and stop trading when the equity hits a pre-defined amount, take out the profit and then start again (like a reset). Eg. say you start with a balance of $1000 and set a target of say 10% of the account. So, if the equity hits $1100. EA closes all trades and stops trading. You take out the $100, and start the EA again at $1000.
+
+--- 帖子 #189 ---
+Hi, Paddy. Very interesting Thread and method; thanks for sharing. I attach for your kind perusal and comments, my US30-H4 screenshot with my annotations as I was not sure of the placements of the ORDERS at the time. My reason for wanting to be proficient in using your system, is not only to get to understand and practice it, but also to see if one could not perhaps see changes in direction sooner. Thursday's entries on the left marked "A" and Friday's "B" as they were fairly similar in appearance. First and foremost, Thursday morning opened for me with price belowe 23-EMA; therefore looking for shorts. Bottom Yellow horizontal line active only. Top Yellow just for completion sake. 3 candles later the price dropped down eventually for 70 pts (my TP +100 not reached, but closed with +50 profit) Friday morning, 9th: Candle marked "B" is the candle we take our readings from and in this case I drew Aqua-dotted line for LONG and SHORT with the CLOSED price in Yellow. Long was triggered when the price cut through the 23-EMA, but this is obviously not legitimate according to my understanding of the rules. Would you please be kind enough to help me understand the nuances of this method? Thanking you most sincerely, Hercs.
+
+--- 帖子 #190 ---
+This is an agrressive martingale ea. Are all martingale ea dangerous
+
+--- 帖子 #191 ---
+Sounds like a sensible strategy.
+
+--- 帖子 #192 ---
+Thanks for your post. 1. Do you know how many trades ( usually ) you have to open in order to hit your 50$..............this could be an important number 2. Do you know how many trades are open ( usually ) when you are looking at an unacceptable loss. 3. Some people might say if the floating loss is greater than "x" just close all. Call it a basket loss number. 4. Some people might say if the number of open trades is 1 then the basket loss number is x number of dollars. 5. The same people could add another rule.......if the number of open trades is 2 then the basket loss number is y number of dollars. 6. The same people could add another rule.......if the number of open trades is 3 then the basket loss number is z number of dollars. 7. The same people could add another rule.......if the number of open trades is 4 then the basket loss number is w number of dollars. 8. The same people could add another rule.......if the number of open trades is 5 then the basket loss number is V number of dollars. etc etc
+
+--- 帖子 #193 ---
+Thanks for your interest in The Ghillyoar Forex System. I am sorry to say that I do not understand your chart. Lots of horizontal lines It looks like a 4 hour chart. The system is for a Daily Chart. The best way to understand the system is to download it and observe it in the strategy tester mode on mt4. That should help you to understand the nuances. Then you can post...............and tell me how to improve the basic template.
+
+--- 帖子 #194 ---
+Hi, Thanks for taking a look at my Ghillyoar Forex System. I am guessing that you don't like it ............which is ok. In the early days of the thread there was a discussion going backwards and forwards between people who were trying to decide if it was a Martingale System or not. After just a few exchanges the people who had stated that it was a Martingale stood down .
+
+--- 帖子 #195 ---
+Time for an update. My idea was to demo trade Ghillyoar on a large number of pairs at the same time. I started off with Pepperstone .......we were in profit ......and then after 30 days they froze the account. It seems that Pepperstone demo accounts have a life span of 30 days. Not much good for my purposes. Then I tried an Oanda demo account.....we were in profit ..........but then Oanda froze the account because Ghillyoar was trying to place trades that are not allowed by American forex traders. Forty six hours ago I opened a demo account witm XM . At this early stage, we are in profit.............fingers crossed.
+
+--- 帖子 #196 ---
+My Ghillyoar Basket Trading experiment is still up and running. I have placed a Trade Explorer at the top of this page...........so anyone who is interested can follow our progress. Hopefully you can all see it. So far the Ghillyoar E.A. seems to be working..........it is opening and closing trades according to my rules. Because the E.A. has been planted on approx 20 charts we are getting plenty of trades. I think that we are averaging about 4 new trades a day. As expected Ghillyoar is opening trend following trades and slowly but surely increasing the account's profits. We are.... of course......... only just at the very start of this experiment........however, so far I am enjoying the ride.
+
+--- 帖子 #197 ---
+Sorry for beating the dead dog with $2000 in his pocket, but something just hit me. This is a martingale system, because time=money. If you want to recover without increasing lot size, then you'll have to wait a bit longer. With lot martingale you hope you don't run out of money, and with time martingale you hope you don't run out of time. Is time on your side?
+
+--- 帖子 #198 ---
+This thread is probably one of the most under evaluated thread here on forex factory. I would be happy to know what happened to paddy's experiment.
+
+--- 帖子 #199 ---
+When the TE is deleted another one isn't posted then it means the experiment failed.
+
+--- 帖子 #200 ---
+Maybe ... Maybe not ... Why would you let a trade explorer open if nobody is interested ? Let's hope paddy is on his way to success !
+
+--- 帖子 #31 ---
+Yes, everyone is on their way to success. It's just a matter of speed, some are slower or faster than others.
+
+--- 帖子 #32 ---
+Is it possible to change low timeframe to trade?
+
+--- 帖子 #33 ---
+yep, while number of buys not equals number of sells it means false breakout, it would be better to close all trade while abs(the overall total profit) higher than 20$.
+
+
+===== 附件下载链接 =====
+
+未找到附件

@@ -1,0 +1,574 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Here is a little system I'd like to share. It is something I came up with recently and I don't have any live trading results and have only completed some very minor manual backtesting. It is a work in progress. Chart setup: 1. Open a EUR/USD 5minute bar chart. 2. Place a vertical line at 6am GMT and a vertical line at 19:00 GMT. My broker is GMT+1 so I place the lines on my chart where the chart reads 7:00 and 20:00. 3. Wait for an inside bar to form. 3a. Trades are only taken between the times listed above in step 2. Long entry: 4. IF the inside bar is bullish, place a pending buy order .5pips above the high. 5. Set Take profit to 3pips and Stop Loss to the low of the inside bar. 6. Risk no more than 1% of account balance on the trade. 7. The trade must trigger within 2 bars following the inside bar, otherwise the pending order is cancelled. Short entry: 8. reverse above - IF the inside bar is bearish, place a pending sell order .5 pips below the low. 9. Set Take profit to 3pips and Stop Loss to the high of the inside bar. EA Ideas. It would be great to have an EA to trade this setup as the screentime is quite long. Custom inputs: set the start and end times money management functionality on/off. If off, then manual lotsize to be inputted max equity gain/loss %cutoff (to turn the EA off when a set total equity gain or loss for the day has been reached). have the stop loss equal to the range of the inside bar OR 9pips, whichever is smaller. this is to counter gaps/spikes during news and limit any resulting losses to 3%. UPDATES: just confirmed that Go Markets is actually GMT +2, so I'm looking at taking trades between 5am GMT and 18:00 GMT, which corresponds to 07:00-20:00 on my charts. link to v1.2 EA by Ananthhh: http://www.forexfactory.com/showthre...38#post5702438 (27th May 2012) 30th May 2012 link to v1.3 EA can be found here: http://www.forexfactory.com/showthre...13#post5712813 If the inside bar has the same open and close, then a pending order is placed in the direction of the previous bar's close. PLEASE NOTE ONE SHOULD NOT TRADE THE EA IN DEVELOPMENT ON A LIVE ACCOUNT. IT IS A WORK IN PROGRESS WITH VARIOUS BUGS DUE TO BE IRONED OUT. TRADING USING THE EA ON A LIVE ACCOUNT IS AT ONE'S OWN RISK.
+
+--- 帖子 #2 ---
+purple boxes are winning trades. blue boxes are inside bars which didn't trigger.
+
+--- 帖子 #3 ---
+following the rules in post 1 above would have made a return of at least 5% a day every day last week
+
+--- 帖子 #4 ---
+and also today by 11am GMT, despite 2 small losing trades as well.
+
+--- 帖子 #5 ---
+You're an hour off on your time. You're starting at 5:00 AM GMT.
+
+--- 帖子 #6 ---
+really? I was under the impression my charts were GMT+1. I'm using GoMarkets. Either way, I'm looking at potential trades between the 7:00 and 20:00 on my MT4. So I should change post 1 to read start at 5am GMT and finish 6pm GMT?
+
+--- 帖子 #7 ---
+If that's what you want. The chart you posted started at 5 AM GMT.
+
+--- 帖子 #8 ---
+what I want actually is an EA to better forward test this
+
+--- 帖子 #9 ---
+Take profit 3 pips ?? Dont you think its rather mad :}
+
+--- 帖子 #10 ---
+what are your times based on london u.k. time ? take profit 3 pips aint cutting it. your sl could well be 3-4 times that number. all you need is 2-3 losses in a row and you are thrown back to oblivion. good luck anyway.
+
+--- 帖子 #11 ---
+no I don't. Obviously this is a scalping system...
+
+--- 帖子 #12 ---
+a 5 minute inside bar that has a range of 12 pips? where? based on your maths, if such a scenario happened (3 losses in a row, losing 4% of account balance each time) is not being thrown to oblivion. $100 - 4% = $96. $96-4%........
+
+--- 帖子 #13 ---
+a 5 min inside bar could well have a range of 12 pips, on a regular basis. especially during news release. your method is just inside bar trading. during the london market. anyway dont let me discourage you. go for it.
+
+--- 帖子 #14 ---
+Here is an EA. This EA is built in 40 mins. So prone to error. I didn't tested this EA too. I didn't implement the emergency stoploss(I don't understand it). If you need further modifications or any doubt in the parameters, don't hesitate to pm me. PM me if you need source code(with reason). Enjoy trading buddies. Cheers Ananth
+
+--- 帖子 #15 ---
+wow! thanks Ananth! Going to play around with this today and see how it looks. thanks for your contribution
+
+--- 帖子 #16 ---
+hai TC, saw this thread yesterday, i'm a newbie in this forex business, and the simplicity of this system attract me to learn more. I've browse around to learn more about inside bar trading and if you dont mind I have several questions: 1. is there any particular reason to the following points: a. why dont you use filter like higher TF trend or indicator (MAs, sigh etc) like in the other system? b. why do you choose EU and M5 timeframe? c. why do you choose scalping as a MM strategy (why dont go for long tail instead)? d. about the choice of trading session, I'm not too familiar with the GMT difference, but I take it that you begin trading about 3 hour since London Open? any particular reason? I'm going to try your method since the beginning of London Open today. (its just because it will be convinient for me to trade the whole london session) 2. I stumble to DIBS thread, I notice you also participated in it several years back (I notice you have a trading journal too based on DIBS method) so out of curiosity, I am wondering what made you decide to develop this new thread, whatever happen to your DIBS trading? sorry for all these questions, its not that I doubt your system, as a newbie I just want to have a better understanding of the reasoning/parameter of your system PS: sorry for my English, its not my native language
+
+--- 帖子 #17 ---
+responses below:
+
+--- 帖子 #18 ---
+I agree with you that too many indicator is not a good thing btw, after I look it up, I realize that your trading time of 6 am GMT starts now, that explain why you already standby I will look for signals starting of now, will post the result later if I can thanks
+
+--- 帖子 #19 ---
+hi Ananthhh, I've loaded the EA but it didn't recognise the last 2 inside bars that formed over the past 11 bars.
+
+--- 帖子 #20 ---
+MMMMMM..... Can anyone say CRASH &amp; BURN...............
+
+--- 帖子 #21 ---
+why did you say that? was it because the scalping and R/R ratio? if it is the case, I agree with TC that is is a personal choice and should be dealt with each trader discretion, but I personally know someone who could make consistent profit with scalping even with an R/R of 1:12 (unfortunately his system is too complicated for me to understand ) or was it because your personal experience trading inside bar? if it were so, I'd love to learn more from your experience
+
+--- 帖子 #22 ---
+hai TC, back again I attach my current trade results, it already hit TP, but I need your comments if I got it right or not I use an inside bar indicator from DIBS thread to help me quickly recognize if there is an inside bar, but the indicator doesnt recognize that candle highlighted (the red candle after the long blue one) as an inside bar, so maybe I was mistaken? thank you
+
+--- 帖子 #23 ---
+hi bedul, if the high of the red bearish candle is higher than the high of the previous candle, then it is not an inside bar! I'm identifying inside bars as being at least .1pip inside the previous bar. I'm using two different brokers and both show that red bar as an inside bar. So far today I'm seeing a loss, then a win, then a no trade, then a win
+
+--- 帖子 #24 ---
+anyone tried using Ananthhh's EA? is it opening trades according to the rules?
+
+--- 帖子 #25 ---
+Check whether the min and max time you set are right. If you have to trade between 6 to 10 of your server time, then set the min time to 6 and max time to 10. Note the word server time. It will be in the market watch window of the MT4 terminal. EA will take trades only within this time(This is one of the rule you mentioned). Regarding money management, if you put mm --&gt; false, then it won't calculate lots automatically, it will take lots set as user input. If mm --&gt; true, then lot size is calculate based on account free margin, stoploss and risk(user input). Please update if there are any strange behaviours in the EA. I will update it tonight( in my local time ). Cheers Ananth
+
+--- 帖子 #26 ---
+Is it opening trades now ?
+
+--- 帖子 #27 ---
+Yes, BUY
+
+--- 帖子 #28 ---
+loaded the EA again. waiting to see if it will work for me
+
+--- 帖子 #29 ---
+Hello ananthhh; Pending orders are not canceled Thanks
+
+--- 帖子 #30 ---
+not sure why but my EA isnt placing the trades. an IB to go long just formed but no pending order was placed. not sure what I'm doing wrong
+
+--- 帖子 #31 ---
+yup, same here, so I took it manually
+
+--- 帖子 #32 ---
+For me I´ts OK.
+
+--- 帖子 #33 ---
+did you guys catch that last sell IB two candles back? I think I'm gonna hold on to this sell position once it goes risk free since I think that the EU will continue its rally down I am currently experimenting on not to have a set fix TP for each trade, but rather analyze case per case, who knows maybe the odds will be better what do you guys think?
+
+--- 帖子 #34 ---
+I know that this bug will be reported. Problem is we cannot give expiration time less than an hour to the pending order. So i have to write code to implement it. I will do it and will update the post. Please be patient. Thanks.
+
+--- 帖子 #35 ---
+which prest do you use?
+
+--- 帖子 #36 ---
+I am at work, so i cannot open MT4 terminal. I will put more information in the screen in the next update. So that its easy to find whats the problem. I got lot of to-do list for the next update. You can expect the update soon. Thanks for all who are testing this EA. Cheers Ananth
+
+--- 帖子 #37 ---
+it went all the way to 22 pips, I close it manually at +19 (R/R 1:2.7) because a new buy IB has formed, now riding the buy trade, let see how it goes btw, since this is only experiment, I dont care about the trend, I'll go with every signal, my orientation is to try to ride the trend by using the IB signal.
+
+--- 帖子 #38 ---
+a big thanks to all those testing the EA and the system Remember this is a work in progress and as Ananthhh has pointed out, it's early days yet for the EA so please only use it on a demo account. I don't mind experimenting with take profit levels, I'll be sticking with the original rules so as not to confuse things. My ideal target is a net of 5 wins per day or 5% net gain. So far on my Go Markets account, there's been 5 wins and 2 losses today. On my FXDD demo, there would have been 6 wins.
+
+--- 帖子 #39 ---
+Sounds like a good scalping strategy. Just wondering since the sl is generally larger than the tp, what is your net gain so far today?
+
+--- 帖子 #40 ---
+my current position (since 2 hours before LO) is now 6 win and 1 loss. I am using instaforex. my current experiment is that I prepare to lose every trade (worst case scenario) and set a somewhat trailing SL and TP manually once the R/R has become 1:1 will keep demo this system atleast for 3 months ahead, thx TC
+
+--- 帖子 #41 ---
+mannai70: I'm not even trading this at the moment - just indicating where trades would have taken place. right now my internet connectivity is complete and utter BS (i'm competing against the Great Firewall of CHina while sitting in a dodgy hostel) I wouldn't necessarily agree that the stops are always larger than the wins.... Of the 2 losses showing so far today on my Go Markets platform, one was about 5 pips and the other was about 1.5 pips. Remember, max loss on a trade should only be 9 pips or 3% of account if sticking to the original rules in post 1
+
+--- 帖子 #42 ---
+bedul: glad to hear and thanks for the update!
+
+--- 帖子 #43 ---
+The EA seems to crash my mt4?
+
+--- 帖子 #44 ---
+Anyone have an inside bar alert indicator that could make a sound alert and or have a popup window appear? Also an indicator that clearly marks all inside bars that have previously occurred? (good for backtesting)
+
+--- 帖子 #45 ---
+Sorry, I do not understand you question
+
+--- 帖子 #46 ---
+use this
+
+--- 帖子 #47 ---
+thanks Arnold49, have tried this one - would like one that can show the whole inside bar as a different colour, not just the body. Also looking for an indicator with an alert.
+
+--- 帖子 #48 ---
+I use the same indy, got it from DIBS thread, but only sound alert, doesnt have a pop-up window, and today there was 2 IB that this indy doesnt recognize as IB and I have to took the trade manually I'll try this one you provide. thanks
+
+--- 帖子 #49 ---
+Strange, it works perfectly for me, pop &amp; alert are fine. For settings I have the line width set to 2 &amp; both colours white so when I get an inside bar the whole candle body is white.
+
+--- 帖子 #50 ---
+Attached Image (click to enlarge) like this
+
+--- 帖子 #51 ---
+hmmm, actually that indicator is quite good alerted nicely! think I'll use it for the time being!
+
+--- 帖子 #52 ---
+Hi Trumpcard, Really nice system. I have tried IB´s a long time ago but on H1 with mixed results. Following Arnold´s indicator today I have 3 winners, 0 losers. The EA doesn´t work for me, I have this error: "2012.05.22 15:30:00 insideBarEA v1.0 EURUSD,M5: Type :5 Lots: 1 price : 1.2708 stopLoss: 1.2762 takeprofit: 1.2678 expiryTime: 16:25:00" Thank you very much. Will look at it these days......
+
+--- 帖子 #53 ---
+Updates: 1.Emergency stop loss added. Use maxSL parameter to set the emergency stoploss. 2.Delete orders which are 2bars old function is added. 3.priceDist parameter is added. This is no. of pips from which the order should be opened from the high/low of the IB. According to the rules it is 5 pips. 4.Added some comments in the window. usage of priceDist and maxSL plays very important role in opening orders. Usually stoploss will be higher than 9 pips. For example, 1. Bullish inside bar formed with high--&gt; 1.00090, low--&gt;1.00030 2. Order will be placed at high+50(for 5 digit broker, 5 pips will be 50pips) --&gt;1.00140 and sl --&gt;low--&gt;1.0030, which 11 pips of stoploss So the above trade wont be taken since maxSL allowed is only 9 pips. So be careful about this input. Also remember that this EA is built for 5 digits broker, so all your pip input should be multiplied by 10. For ex, 9 pip maxSL should be given as 90. Regards Ananth
+
+--- 帖子 #54 ---
+Thank you very much Ananth. I think the pending order must be 0.5 pips from High/Low of the IB (please correct me if I´m wrong). Unafortunaly, my crim has a 5 pips minimum for pending orders. Would it be very hard to have a modified EA with market orders when price reaches High/Low + 1 pip instead of pending orders? No problem if you don´t have time, thank you anyway. Regards
+
+--- 帖子 #55 ---
+No problem now, I have just openend a new Pro account with the same broker with 0 pips distance for pending orders..... Maybe that was the problem with other traders before: the EA doesn´t open trades because of the min pending orders distance...
+
+--- 帖子 #56 ---
+Inside bar + divergance..
+
+--- 帖子 #57 ---
+Ananthhh: mighty big thanks for your hard work - will eagerly play around with the updated EA tomorrow forexsaint: great to see you here my friend. thanks for stopping by! your wisdom and experience is valued any time
+
+--- 帖子 #58 ---
+glad to hear! keep posting your results!
+
+--- 帖子 #59 ---
+There is nothing to hide. Enjoy Cheers Ananth
+
+--- 帖子 #60 ---
+just one more winner and I'm pretty sure that 5% would have been achieved today based on post 1 rules
+
+--- 帖子 #61 ---
+bunch of ibs formed, I do believe that on Go Markets platform at least, a daily net gain of 5% would have been achieved...
+
+--- 帖子 #62 ---
+hi Ananthhh here's the screenshot with the inputs you suggested.
+
+--- 帖子 #63 ---
+Good morning, First winner today 25 min ago......
+
+--- 帖子 #64 ---
+hai cail, my first IB signal today was a lost, as the attached pic mind if I ask what broker you are using, I am using instaforex edit: from the pic below, you could see that its not clasify as an entry what happen was I set a sell stop below the signal candle but the sell stop was executed even when the next candle's low didnt went through it? has anyone experience anything like this before?
+
+--- 帖子 #65 ---
+Hi Caillou, Are you using the EA or manually entering at Market price?
+
+--- 帖子 #66 ---
+Hi, Sure, brokers differences, I have the same IB candle but bullish for me (red arrow). See attached picture. I´m using Admiral Markets Pro Account.
+
+--- 帖子 #67 ---
+I´m not using the EA right now because it is a demo account, and my demo account doesn´t allow pending orders at less than 5 pips away from market price, so I enter manually. If the system goes ok, I will use the EA with my live account (Pro Account) with no limit for pending orders.
+
+--- 帖子 #68 ---
+check this out in tools options of your mt4 platform. If its not replicating the picture, then tick and un-tick the necessary options. Cheers Ananth
+
+--- 帖子 #69 ---
+If you are sure that you put sell stop then better change the broker.
+
+--- 帖子 #70 ---
+That should be a bullish candle. I don't why it is showing as bearish. Since close of previous candle matches with close of IB candle. Open of IB candle is above the close of previous candle.This is strange.
+
+--- 帖子 #71 ---
+hmmm seems I had the confirm DLL function calls ticked... unticked it now - maybe this was the culprit!
+
+--- 帖子 #72 ---
+ay caramba,, just realized that i've made a very stupid mistake I'm used to use HA candles with all the colors, so I forgot how to read clean /normal candlestick (my usual template for using this IB is also colored, but today I'm using normal candlestick and add the indicator ) thank you cail, if you didnt post your chart, maybe I'll spend the rest of the day taking the wrong direction btw, I'm still curious as why my sell stop got taken out even when its not supposed to? hmm, maybe if this continue, I'll cosider changing my broker *PS: sorry if my grammar is far from perfect thx again cail and ananthh
+
+--- 帖子 #73 ---
+maybe your broker has a high spread?
+
+--- 帖子 #74 ---
+I already factor that into consideration but its not the case, the spread is 3 pips, yet the range between the next candle's low and my sell stop was 5 pips? I guess I'll have to wait and see whether this continue or not
+
+--- 帖子 #75 ---
+For now: EUR/USD: Win, Loss, Win GBP/USD: Win, Win, Win (I´m testing this pair too, hope you don´t mind Trumpcard)
+
+--- 帖子 #76 ---
+have just put in an update, something I forgot to mention earlier. If the inside bar has the same open and close, then a pending order is placed in the direction of the previous bar's close
+
+--- 帖子 #77 ---
+no poblem Cailou
+
+--- 帖子 #78 ---
+still have no idea why the EA isn't working on my FXDD demo so going to set up a demo with OANDA and FXPro .
+
+--- 帖子 #79 ---
+Do you have pending orders at 0.5 pips from High/Low of IB?
+
+--- 帖子 #80 ---
+the EA isn't placing any pending orders. Maybe it's some small checkbox I have incorrectly ticked somewhere, but the EA smiley face is appearing in top right of my screen! Only thing that appears in the journals tab related to the EA is when it's loaded.
+
+--- 帖子 #81 ---
+Does your broker allow placing pending orders with no min distance from market price?
+
+--- 帖子 #82 ---
+Calilou, yeah, I went for a walk thinking it over then realised FXDD requires pending orders to be placed at least 3 pips away from market price. Maybe that's why no tradesn were ever taken. What brokers do you know of allow no min distance for pending orders?
+
+--- 帖子 #83 ---
+Admiral Markets Pro Accounts allows pending orders with no min distance according to their website and chat, but I have to check it....
+
+--- 帖子 #84 ---
+hi AnanthhhThe rules were meant to be half a pip above the high or below the low, but due to the pending orders issue I'm going to play around with the price distance input and expire bars input. The maxSL is configured differently to what I had in mind. I was intending for the trade's stop loss to EITHER be the high/low of the inside bar OR a set 9pips, whichever is the smaller value. So in the example above, the trade would be taken at 1.00140 with the stop set to 1.00050. cheers, Trumpcard
+
+--- 帖子 #85 ---
+Have just downloaded Admiral Markets MT4 and set up a Pro demo account. Admiral looks quite reputable. The EA is working! Great news!
+
+--- 帖子 #86 ---
+I thought demo accounts were only standard accounts...... good to know
+
+--- 帖子 #87 ---
+I will make this update and i will add the provision to chose between market and pending orders. Cheers Ananth
+
+--- 帖子 #88 ---
+with the right broker setup, the daily target would have again been achieved. 2 losses totaling around 10 pips and 8 winners. Manual backtesting on Go Markets . I'm going to switch testing however to Admiral Markets.
+
+--- 帖子 #89 ---
+just to confirm....your daily target is 5 percent?
+
+--- 帖子 #90 ---
+I have a live pro account at Admiral (4 month ago). I'm satisfied with them so far...
+
+--- 帖子 #91 ---
+thanks Ananthhh, goofd luck, can't wait
+
+--- 帖子 #92 ---
+this morning(after london open) untill now their were 2 setups but the EA didnt take them ...my question is why? pic is detached
+
+--- 帖子 #93 ---
+Hollandpippi, I think Ananthhh is working on an update that will address the issue. cheers, Trumpcard
+
+--- 帖子 #94 ---
+Ok, thanks coz i like this system very much Greetz
+
+--- 帖子 #95 ---
+glad to hear! but remember, it's a work in progress - I'm pretty much watching and recording where trades would have occurred. It all could end up being a waste of time...
+
+--- 帖子 #96 ---
+Today's trades
+
+--- 帖子 #97 ---
+Waiting for updated version from Ananthhh..... I have made some backtests with "9 pips SL wrong version" EA and results are not very good. I don´t believe in a good backtest result but I believe in bad backtest result. Anyway since the 9 pips max range is not correctly coded, let´s wait.....
+
+--- 帖子 #98 ---
+Hi anannth and cailou, I traded in demo using this EA, in 5 min chart it does nt work well. In 15 min chart it took 3 trades and all in profit. It takes trades very rarely though in 15 min
+
+--- 帖子 #99 ---
+Look at the statement. The last three trades were made in 15 min chart
+
+--- 帖子 #100 ---
+Hi Navk, How are you? Such a long time since "Phantom" EAs..... I can´t find your statement......
+
+--- 帖子 #101 ---
+Actually the inside bar can have a range greater than 9 pips - could be 25 pips! A pending order should still be placed in the direction of the inside bar's close, example if close is bearish then a pending sell should be placed 0.5 pips below the low. The stop should be a size of 9 pips. If the inside bar's range was 6 pips, and the low was 1.2550, (high 1.2556) pending order would be 1.25495 with the stop placed at 1.2556. Hope this clarifies things! I would also like to see down the track the option of turning on max gain/loss with %input as it would be nice to have the EA stop trading once a preset daily gain or perhaps net pips has been achieved....
+
+--- 帖子 #102 ---
+Friday had a low amount of inside bars form compared to the previous 2 weeks. I counted 6 winners and 7 losses.
+
+--- 帖子 #103 ---
+Updates: 1.Changed emergency stoploss function as mentioned by trumpcard. 2. EA will stop trading when daily gain goes above daily gain%(New parameter gain is added) or daily loss goes below daily loss%(New parameter loss is added). Everyday the free margin is initialized at the prefixed time(New parameter daily open time is added). PS --&gt; please update the link in first post cheers Ananthhh
+
+--- 帖子 #104 ---
+धन्यवाद ananthhh;
+
+--- 帖子 #105 ---
+Ananthhh, your a champion! thanks very much! looking forward to testing it out!
+
+--- 帖子 #106 ---
+You are welcome
+
+--- 帖子 #107 ---
+Actually i am busy with some personal work this weekend. I couldn't do any backtesting on the modified code. Looking forward for the results. Cheers Ananthhh
+
+--- 帖子 #108 ---
+anyone else having trouble like me with the EA download? my computer is recognising the EA as a .gif file...
+
+--- 帖子 #109 ---
+Hi Ananthh; Today,the EA has not opened any position. Are my settings wrong?. Another doubt, the EA detects these two rules ?: . "If the inside bar has the same open and close, then a pending order is placed in the direction of the previous bar´s close". . Have the stop loss equal to the range of the inside bar OR 9 pips,whichever is smaller. Thanks
+
+--- 帖子 #110 ---
+The manual backtest of this shows it's a disaster, don't waste your time creating an EA for a crazy system which will not work. Why didn't the op do a years worth of backtesting before starting a thread on a system that's been posted lots of times on here before and has never worked?
+
+--- 帖子 #111 ---
+Why not test in a live market, just demo it. I remember seeing something about the inside bar a while back, I think on youtube. Looks good in detail but trading it is very, very difficult. 30 50 and 100 pips (5th) is not that much for scalping. Inside bar to me you need a little more guidance on the chart to help navigate. Looks good but looks risky, thats must my opinion!
+
+--- 帖子 #112 ---
+thanks for your opinion. please read the first post very very carefully. then read it again. then the rest of the thread.
+
+--- 帖子 #113 ---
+thanks for your opinion! this is a public test of an idea. it is currently being demod. that is the whole point of this thread.
+
+--- 帖子 #114 ---
+To all who are throwing discouraging thoughts to this thread, please remember that this is not the thread with complete strategy which will only give profit to you. This thread is started to get more view from public and based on those views, we can tweak the strategy to work with more accuracy. This thread is started only with inside bar, but no-where it is mentioned like, this strategy will use only inside bar. If the author is really serious about developing a good strategy with this thread as a base, then for sure you will see well and good strategy soon. Please wait for some months before throwing any discouraging thought.
+
+--- 帖子 #115 ---
+Been out of internet action for a bit but now back! Still have connectivity issues though but excited to be back. Now using Admiral Markets to test this out. Just got online, loaded the EA for forward testing. Manual backtesting so far today shows 9 winners (purple), 2 losers (2.1 pips and 9 pips - red) and 2 no trades (blue).
+
+--- 帖子 #116 ---
+which would be about a 9%gain and a 3.66% loss.
+
+--- 帖子 #117 ---
+Hello; Sorry, but for you, the last EA you opened an order? Thanks.
+
+--- 帖子 #118 ---
+Not opening trades for me either. I've sent Ananthhh a message.
+
+--- 帖子 #119 ---
+Order send error 130.
+
+--- 帖子 #120 ---
+thanks todder, what's causing the error specifically?
+
+--- 帖子 #121 ---
+There is a small bug in gain and loss % calculation in the previous version. That is why it is not opening any trades. Attached is the new ea. Try this. Thanks Ananth
+
+--- 帖子 #122 ---
+Hello, Forgive me but how do I know if an IB is bullish or bearish?
+
+--- 帖子 #123 ---
+Dear friends, the Strategy seems interesting and I would be grateful if I could help you in developing this strategy. unfortunately, The EA does not take any position and I got errors like these: TestGenerator: unmatched data error (volume limit 270 at 2012.04.20 21:05 exceeded) TestGenerator: unmatched data error (low value 1.30886 at 2012.04.18 15:20 is not reached from the least timeframe, low price 1.30936 mismatches) I'm using FXpro demo account. can any one help me? Thanks
+
+--- 帖子 #124 ---
+mario777: if the close is higher than the open then it's bullish. if the close is lower than the open then it's bearish. The James16 chart thread - first 100 posts will be of great help to you
+
+--- 帖子 #125 ---
+wow that was fast work! thanks Ananth!
+
+--- 帖子 #126 ---
+thank you!
+
+--- 帖子 #127 ---
+anyone has opening trades?
+
+--- 帖子 #128 ---
+follow the 1.3v ,total 11 trades,win 3,cancelled 3,loss 5,25pips lossed.last session.
+
+--- 帖子 #129 ---
+Great to see some forward test results of the EA. Finally it worked
+
+--- 帖子 #130 ---
+Its a simple bug fix
+
+--- 帖子 #131 ---
+These errors usually occurs in backtesting. Don't mind these errors. Its good if you can help us forward testing the EA and giving some good tweaks to the strategy. Cheers Ananthhh
+
+--- 帖子 #132 ---
+hi ylxww: could you post what settings you're using and what broker?
+
+--- 帖子 #133 ---
+I can't get the EA to work - is anyone else using v1.3 on Admiral Markets?
+
+--- 帖子 #134 ---
+yep, I've tried to backtest the strategy. Also I could not run the EA for forward testing. the smiley icon appears in my Metatrader but there is no trade. Im using FXpro demo account.
+
+--- 帖子 #135 ---
+I think the problem is in pending orders, change the PriceDist parameter to 60, and check that whether the EA puts any pending orders or not. Dear Annanth, Is it possible to not use pending orders? It will be great if we could code the pending orders condition in EA, so in my opinion this problem will be solved. For example, if we are going to put a pending order at 1.00000, the EA could check the condition and put order if the price achieves 1.00000. Best
+
+--- 帖子 #136 ---
+hi Neoman, a price distance of 60 is 6 pips away? I want to be able to capture the momentum burst immediately following the inside bar, having the order placed as close as possible. I'm all for not using pending orders, IF the original rules can be duplicated as closely as possible. (The only broker so far mentioned in this thread allowing orders to be placed with no minimum distance away from market price is Admiral Markets.)
+
+--- 帖子 #137 ---
+hi, I'm aware what is your strategy, I said let PriceDist as 60 just for checking whether EA works or not and check that whether the EA recognizes the IBs or not. in price distance 6 pips no order will be triggered it is just for checking. thanks I will check the Admiral Markets. maybe we could use the EA itself to put orders to catch the market momentum instead of using pending orders.
+
+--- 帖子 #138 ---
+oa default setting only but gmtmin=3 gmtmax=17.
+
+--- 帖子 #139 ---
+thanks to all those helping out testing this strategy Manually, I've counted 10 winners, 4 losers and 2 no trades.
+
+--- 帖子 #140 ---
+This error is a history data error. You need to download new history. Go to Tools/History Center and download M1 data for the pair you want.
+
+--- 帖子 #141 ---
+manual backtest 31-5-2012 18 winners, 5 losers, 5 no trades
+
+--- 帖子 #142 ---
+Testing the EA in 5 min Ananth. Had one winner untill now. 5 trades got cancelled. I shall continue to post the results. This EA had good results earlier in 15 min. Thanks a lot Ananth.
+
+--- 帖子 #143 ---
+EA update: Pending orders are changed to market order. All other functions are same. Cheers Ananthhh
+
+--- 帖子 #144 ---
+I hope the last update will fix all the problems and i hope it is working exactly as per the strategy mentioned in the post 1. Waiting for forward test results. Cheers Ananthhh
+
+--- 帖子 #145 ---
+Dear Annanth Many thanks for your efforts, I have tried to backtest the EA. I have just two little problems: 1-I got error number 131 for trade volume. I have changed the Lot parameter to 0.1 but the problem remains. I think we have a volume calculator in EA that is not compatible with my broker. is it possible to deactivate volume calculator temporarily? 2- also I am facing with error number 130 which is about invalid stop loss. my broker does not allow stop losses lower than 5 pips. maybe we could solve this problem by adding a constraint to not have stop losses lower than 5-6 pips. Thanks for your consideration.
+
+--- 帖子 #146 ---
+this indicator doesn't work with me. I tried with IBFX (5 digits) and Migtrader (4 digits). only with me?
+
+--- 帖子 #147 ---
+Good to see the backtest results ForexSaint. 1. I totally forget to update that entry criteria. You will get that in next update. 2. I coded with the idea, if regular SL exeeds maxSL then maxSL will be the stoploss. If you find any bug in this logic, please mention that. I will check that and fix it in next update. 3. I didn't spend more time to test the code or to check the working of EA. I was just adding modules what the author is suggesting. If you can post the error codes, it will be helpful in finding those strage errors. Rome is not built in a day. I have to mention 1 thing, the ordersend module i built is not for scalping strategy. I have to rebuilt that module to suit for scalping. Most of the errors will occur due to the stopLoss less than the stop level allowed by the crim. Don't forget to put a reminder, when you start your new thread. I am eager to participate in the journey of building your EA. Cheers Ananth
+
+--- 帖子 #148 ---
+Poor internet again. Limiting my participation in this thread. Ananth: thanks again, good po ROme not being built in a day. Forexsaint: many times you've said this strategy is crap and you even stated in your second last post that you wouldn't be following this thread anymore. But thanks for taking the time to backtest and sharing your opinion again. Good luck with your new thread - glad this one inspired you somehow. I actually believe there are in-built filters in the strategy that may or may not give it an edge. The filters being: time of day - if one puts an average daily range on the chart, the value tends to be larger during the specified times to trade. Trading in the direction of the IB is a filter in itself playing on short-term momentum following a pause or breather. The EUR/USD tends to have lower spreads than other pairs making it ideal. As yet I'm completely unconvinced by any backtests simply because the EA hasn't replicated the original rules and as already mentioned, the only broker an EA could work on by default is Admiral Markets. Every now and then I will ost manual screenshots of where trades would have occured in the hope that an EA can replicate it eventually. Only then will I consider backtests and further filters/tinkering.
+
+--- 帖子 #149 ---
+Hello everyone, I'm pretty much out of action internet wise all this week. How are the forward tests going? Any issues? cheers, Trumpcard
+
+--- 帖子 #150 ---
+i did a quick visual backtest for the last few days and it was a total fiasco... at the point that even with negative R:R, there was more losses than wins.
+
+--- 帖子 #151 ---
+intersting. thanks for the feedback. I haven't been able to check lately but surprised by your RESULTS! My visual backtests were fiascos, as previously posted.
+
+--- 帖子 #152 ---
+Look simple, made an EA that have more features. Let me know if you need to adjust something. I haven't test it at all. Just write it, compile and posted it. But I think it should work like you want to. Sorry, I don't want to see the EA I made sold by someone irresponsible so I didn't post the mq4 and put some decompile protection there. Edit: Almost forgot this one: - For ECN/5 digit broker set ECN=true if not the EA will not put SL and TP(MT4 limitation). Pips will be used 0.000 0 0 for ECN and 0.000 0 , so 9 pips in non ECN equal to 9 pips on ECN(displayed as 90), no need to adjust anything. - It will read the starting equity at 00:03 GMT or if you choose time range (UseHourTrade = true) at the 3 min on the first hour of that time range. This EA assumed to be working 24/7. When EA read starting equity, the staring equity entered by user will be discarded. It is recommended to enter your starting equity in EA setting. Your profit/loss won't stop exactly here, but if the limit has reached it won't take anymore trades until the next day or you restart the EA or EA adjust the starting equity according to schedule. - UseHighLow_as_SL = True will use inside bar range as SL(Plus entry and PipAdditionForSL). - if above setting set to true and MaxSL9 = True, SL max will be 9. If inside bar + Entry + PipAdditionForSL = 7 it will use 7, if If inside bar + Entry + PipAdditionForSL = 12 EA will use 9 for SL. - Risk is limited to a maximum of 2(2%) hard coded in EA, if risk entered more than 2 then 2% will be used. Disclaimer: The EA is provided as it is, the creator couldn't held responsible in any way related to the EA usage. Update: - Repaired some wrongly placed &gt; and &lt;. - New BreakProtection: if it was 2 bar ahead and price goes below low of inside bar for long or price goes above high no trade will be taken. If this is enabled then the move to the other side and back to the direction of inside bar, no trade will be made. - UseMAProtection: Buy only taken only if it is below 5 smoothed MA, this is to take consideration that inside bars are traded as reversal signal. Update2: Tested it, look at the pic attached. I use MAFilter on that one. If the EA only makes few trades in a day on backtest, just look at max profit or max loss. For backtest purpose set this to 90%.
+
+--- 帖子 #153 ---
+@Anath For ECN broker you couldn't put TP and SL when you open trades. Instead you modify the order with TP and SL after the order is open. And slippage will be ignored on ECN broker. Take a look here: if (ECN) Ticket = OrderSend(Symbol(), OP_SELL, Lots, Bid, Slippage, 0 , 0 , TradeComment, MagicNumber, 0, DeepPink); &gt;&gt;To open order if it is an ECN broker. else Ticket = OrderSend(Symbol(), OP_SELL, Lots, Bid, Slippage, StopLossLevel, TakeProfitLevel, TradeComment, MagicNumber, 0, DeepPink); &gt;&gt;If it was not ECN TP and SL is sent with initial order. if(Ticket &gt; 0) { &lt;---- to see if an order is opened. &gt;&gt;Then you modifty it and put TP and SL. if (OrderSelect(Ticket, SELECT_BY_TICKET, MODE_TRADES)) { OrderModify(OrderTicket(), OrderOpenPrice(), StopLossLevel, TakeProfitLevel, OrderExpiration(), CLR_NONE); Hope this would be useful.
+
+--- 帖子 #154 ---
+I am not aware of how ECN thing will work, since i didn't traded with those brokers. Thank you very much for providing this valuable information. I will take a look at this and also i need to read more about ECN brokers. Thanks a lot bro.
+
+--- 帖子 #155 ---
+You're welcomed . I also new to MT4 coding, starting on Feb this year. This ECN thing makes me a bit frustrated back then. And like they said sharing is caring. EA works better in ECN broker, as your order will be executed even if price moves when the order being sent to the broker server.
+
+--- 帖子 #156 ---
+Many thanks Passerby, much appreciated. I will dabble with your EA this coming week. Trading is on the backbench for me at the moment due to work committments.
+
+--- 帖子 #157 ---
+Anyone tried using the latest EA from Passerby?
+
+--- 帖子 #158 ---
+Just got PM from Trumpcard and after I look back at the EA I think I made a mistake. The MA filter will always set true even if you deactive the filter. The EA I attached to this post have those bug repaired. I also have my own version attached. It's a bit different. @Trumpcard: This is your thread and my other EA works a bit different, I know I am off topic by posting my version here. So, if you think I shouldn't post it here I will remove it. Add: - My EA work best in H1 TF or longer, it have move SL to BE and close half feature. - All my EA are made that they won't interfere your manual trade. It won't manage or close the trade that open manually.
+
+--- 帖子 #159 ---
+no problem at all, Passerby, thanks for sharing your method. Sent you another pm but you pre-empted me!
+
+--- 帖子 #160 ---
+Hi Passerby, thank you for sharing your work here! However, I would like to ask wether you could share the source code (as mq4 file) of your EA as it is not possible to understand (change, improve, fix etc.) an EA when it is only in compiled form (ex4). I would never trade compiled EAs. In order to understand better what you have been looking at I would also like to see the backtest results that you got. The backtest results depend on many things (data, broker, settings etc.) so someone else might get completely different results. Also, you said your version is different. Please be more specific. What is different? Ok, I am demanding some things from you, but as a result you might also get back something. You might look at it as a trade :-) Regards, TraderJF
+
+--- 帖子 #161 ---
+Yup, read that one, here is the EA as described in your request. In this one you will be able to choose the MA period and MA type, if you enter other than 1-4(1=SMA,2=EMA,3=Smoothed, 4=Linear Weighted), it will be use 1(SMA).
+
+--- 帖子 #162 ---
+BTW, my EA is a bit big compared to others. But in fact it will run faster on backtest, because the optimization I put there. In backtest it will skip calculation that It doesn't need.
+
+--- 帖子 #163 ---
+attached. Passerby Insidebar
+
+--- 帖子 #164 ---
+Misuderstand something, the ea in this post have filter in the direction of the previous bar if the open and close difference of the inside bar is &lt;2 pips. As for my version on EA, I didn't put optimized parameter. You should choose the parameter yourself. EA run on unoptimized parameter won't be profitable at all. No free lunch here on FX .
+
+--- 帖子 #165 ---
+The EA is provided as it is, the main difference is that it wont take signal from inside bar 2 bars behind. I you don't like it just leave it.
+
+--- 帖子 #166 ---
+Yet another misunderstanding, fixed that one.
+
+--- 帖子 #167 ---
+what a machine!
+
+--- 帖子 #168 ---
+Could you make an EA to draw the inside Bars please?
+
+--- 帖子 #169 ---
+Passerby, are you still around? I have a question for you. Has anyone else used the EA?
+
+--- 帖子 #170 ---
+Sorry, not feeling very good lately. Just send PM if you need me, I will reply as soon I got back at the forum. Currently I am experimenting to detect big player positioning, as it could bring 300+ pips in one trade. But I am having problem removing news event.
+
+--- 帖子 #171 ---
+no problem, get well soon
+
+--- 帖子 #172 ---
+Btw, I fixed some bug, hard coded how trades managed in my version, restructure the EA, and removing unnecessary feature. Now, it close half if price goes in the trade direction equal to SL(TP1) which is below IB making the trade a freeride. The only thing to do is to select when the EA take trades(after market open recommended) and choose how TP2 managed(twice SL, fix pips, trail, or candle trailing). The EA will adjust to 2,3,4,5, or 6 digits pairs. Look here for a start: http://www.forexfactory.com/showthread.php?t=86766 Pairs that I recommend is the one which tends to trend like AU, UJ, and UC. Have fun while I recovering, I hope tomorrow I am ready to beat the market once more . Out for today have a nice weekend ! Edit: EA removed, the repaired EA is attached in the following post.
+
+--- 帖子 #173 ---
+this indy will highlight both inside and outside bars - if thats what you are looking for. and the daily open one can be set to any time you like to indicate the start of your prefered trading period. Attached File(s) in&amp;out.mq4 4 KB | 545 downloads Attached File(s) daily_open_line.mq4 2 KB | 367 downloads
+
+--- 帖子 #174 ---
+MPP: thanks for sharing! I've actually been looking for an outside bar indicator for another method. Passerby: Again thanks! Realised there was a problem with my demo account with Admiral Markets. I'm pretty sure they're a 4 digit broker, so I should set ECN to false? Timeframe should be set to 5 (for 5 minutes)? Under String 2 inputs, there is an Hour Start. Is this option referring to the previous Follow Day Trend/Inside Bar inputs? Entry Point I've set to 0.5 - I'm confused about the Use Take Profit true/false and then entering a value. Default is set to 1000, 3 would equal 3 pips? You mentioned taking half the profit off when TP1 is reached, (ie DIBS) and that now we need to manage how TP2 is handled. I can't see any reference to TP2 in the inputs... Is there an option to turn off taking half profits when TP1 is reached? No rush at all in answering! Hope you've had a good weekend. TC
+
+--- 帖子 #175 ---
+Oppsie, the rebuild that I do is a mess. I do not bother to try it, after run it on backtes I notice heaps of problem. Already re-upload the EA with bug fixed on my previous post. I think some are want to play with some EA on weekend, the market is closed after all. Addition: Some broker didn't allow to put SL or TP below certain pips from current price, if the SL/TP is below this number EA will be failed to open trade/modify the order. As a workaround I add MinAllowed_SLTP option, put the min pips away from current price you are allowed to put TP or SL on this option. If the difference between entry price and High/low of previous IB plus spread is below MinAllowed_SLTP, it will be overwrite by the number inputted there. For non ECN broker 7 pips=0.000 7 , for ECN 7 pips=0.000 70 . Edit: Moved the repaired version of the EA to this post.
+
+--- 帖子 #176 ---
+Passerby, does the latest version close half the profits at breakeven? If yes, can this be optional? Also, what does "Use TakeProfit = True" and "TP = 100.00" mean?
+
+--- 帖子 #177 ---
+This thread is less about trading and all about coding. Goodbye all.
+
+--- 帖子 #178 ---
+that's right. I want to forward test using an EA due to the time constraints involved manually testing.
+
+--- 帖子 #179 ---
+I will wait patiently untill you are through
+
+--- 帖子 #180 ---
+Your trading system with 3 pips profit will not be working properly in real account. Because that have requotes and delays with execution. This is a problem for most brokers. You couldn't make auto take profit 3 pips because min distance as usual 10 pips. Also brokers don't like pips strategy. Also be attention near levels don't try fight with them. But mostly - don't try to cheat yourself. Market will teach you very fast.
+
+--- 帖子 #82 ---
+thanks Sepramfx Could someone tell me what settings I'd need to put into the latest EA in order to replicate the rules in Post 1, using a 4 digit broker? Just can't get it to open trades
+
+--- 帖子 #83 ---
+intraday chart using a Standard demo account with Admiral. the feed seems a bit strange - price gapping all over the place. Nonetheless, a quick manual backtest today shows some nice trades.
+
+--- 帖子 #84 ---
+Sorry wrong lot size calculation after I account for spread and use Ctrl+H and put another variable that mess position size calculator. This one should fix this. We couldn't do anything about requotes and delays, but for TP we could use hidden TP. We just don't set tp but when it is reached the EA will send close order request. In theory the one attached will work on any 4,5, or 6 digit broker if you put the right option. @Trumpcard: I put Trumpcard version as option to automaticly set TF to 5, turn off trailing stop and other filters&amp;features, EA will only follow inside bar direction, and use hidden TP(3 pips exclude spread) and SL(high/low with max 9pips include spread). Seems that i catch a flu, my nose is running and I felt that world spin a bit too fast these past 2 days. When I am in a better condition, I will spin off your version as dedicated EA. For now just stick to the modified version of mine(now mine takes two IB behind just like yours). Btw, to use in your broker do not forget to set ECN=false, adjust server time to GMT, and the hours when the EA operates(from hour &amp; to hour). I set ServerTime = 0 by default which means EA will think your broker timezone is exactly at GMT+0, to adjust this just look here: www.forexmarkethours.com Add: - for your version MinAllowed_SLTP will be ignored as EA will use hidden tp and sl. - I don't really catch what u mean by if the price goes 0.5 pips above or below the high or low. I mean 0,5 pips in 4 digit broker? In this EA if bid goes 1 pips above the high long trade will be opened and closed for tp if price goes 3 pips+spread. But I put if Bid&gt;(High of IB + 0.5 pips) or Bid&lt;(Low of IB + 0.5 pips) depend of the direction of the ib just in case anyone use this EA in a 5 digit broker.
+
+--- 帖子 #85 ---
+I also use admiral market, I just notice that broker server is operating at GMT+0. It was GMT+1 several month ago.
+
+--- 帖子 #86 ---
+dzhini: it was determined a few pages back that Admiral Markets has no minimum distance required for orders. I'm having problems with their demo accounts now. The Pro account won't allow any orders to be placed. The Standard Account's feed is really choppy. Passerby - get better soon! I actually got the 2nd last version to make some trades yesterday, so getting somewhere! Are you sure about Admiral being GMT 0? I'd based my assumption of being +1 when comparing my charts to a GMT +2 broker recently! I guess the 0.5 pips breakout rule applies to a 5 digit broker. eg: high 1.24400, enter at 1.24405.
+
+--- 帖子 #87 ---
+passeby your EA work on an 1h chart. is it base on the current candle moveing passe previose low of the IB?
+
+--- 帖子 #88 ---
+Inside bar trading is easy. Wait for trend . Take IB break in the direction of trend only.[attach]1382677
+
+--- 帖子 #89 ---
+In this chart, should we only take the large white arrows? What are your targets and stops on these trades? Thanks, Carlor
+
+--- 帖子 #90 ---
+Just thought I'd throw in my two cents worth, suggest you use this when the market is wound up. Like the originator used to call the "hot hand". It makes sense... news = sharp move = pause/indecision = inside bar = new direction or continuation/confirmation = go with it... I usually find inside bars during other times are... opps i've said too much already hehe
+
+
+===== 附件下载链接 =====
+
+daily_open_line.mq4: https://www.forexfactory.com/attachment/file/988060?d=1340518039
+in&out.mq4: https://www.forexfactory.com/attachment/file/988055?d=1340517752

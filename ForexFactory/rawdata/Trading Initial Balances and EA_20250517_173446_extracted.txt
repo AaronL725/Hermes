@@ -1,0 +1,558 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+What Are Initial Balances? Initial balances refer to a specific time frame at the beginning of a trading session, typically the first few minutes or hours when a market opens. During this period, traders closely observe price movements and volume to gauge market sentiment and establish trading strategies for the rest of the session. How Initial Balance Trading Works The concept of initial balance trading is rooted in the idea that the price and volume behavior during the initial balance period can provide valuable insights into the day's trading potential. Here's how it works: 1. Observation: Traders closely watch the price action and volume during the initial balance period, which often includes the first 30 minutes to one hour of a trading session. This is a critical phase for assessing market dynamics. 2. Key Levels: Traders identify key price levels during the initial balance period, such as the high and low points. These levels can serve as significant reference points for the day's trading activities. 3. Breakouts: Breakouts above or below the initial balance range can signal potential trading opportunities. A breakout above the initial balance high may suggest bullish momentum, while a breakout below it may indicate bearish sentiment. The Expert Advisor So with the EA I've created you trade the initial balance of the currency or index. So say you're trading the NY session. The initial balance would be from 9:30am EST to 10:30am EST. The EA will take the high and low of that time, and if price trades above the high it buys and if price trades below the low it sells. Attached Image (click to enlarge) Trading_Time_Start : What time the EA should start trading. For example if you're trading NY session you want it to trade AFTER the IB is established so for example at 10:31am EST. (You would have to convert to your server time) Trading_Time_End: Time the EA should top trading. Default is 23:55 server time. Initial_Balance_Start: From what time you want the EA to start calculating the IB (convert to your server time and what session you want to trade) Initial_Balance_End: From what time you want the EA to stop calculating the IB (convert to your server time and what session you want to trade) Lot_Size: Pretty straight forward, this is the lot size you want to trade. Take_Profit_Percent: The take profit is by default 2x the size of the SL, you can edit this. SL_IB_Start: The SL is set at the opposite side of the IB. So, if a buy position is opened the SL is set at the low of the IB. If a sell position is opened, the SL is placed a the high of the IB. So this variable is for you to indicate the start of the IB. SL_IB_End: This variable is for you to indicate the end of the IB so it can calculate where to set the SL when a position is opened. Percent_Away: This variable is for the trailing stop. When your position is say 50% or 80% into profit it will send the signal to the trailing stop to start. Percent_For_Trailing_Stop: When your position is say 50% or 80% into profit it will send the signal to the trailing stop to start. This percentage is used as a way to determine how far away you want the SL to trail price.
+
+--- 帖子 #2 ---
+Here's an example of the EA working on S&amp;P futures today. When price broke out below IB a short was taken, then hit SL when price broke above IB and immediately took a long position which eventually hit TP. Attached Image (click to enlarge)
+
+--- 帖子 #3 ---
+Well done. Do you mainly trade indices or gold too?
+
+--- 帖子 #4 ---
+So I tested this on Nasdaq and Nikkei but it does better on S&amp;P500. I tried on WTI, not bad but needs a lot of over sight. I use it now on GBPUSD, but I also like to combine it with Market Profile.
+
+--- 帖子 #5 ---
+Thanks! I appreciate your feedback.
+
+--- 帖子 #6 ---
+Here's trading today's GBPUSD initial balance on the NY session. U.S. CPI news brought the price down below yesterday's low of 1.22672 and I manually entered a short position at IB low with target around 1.22000. Attached Image (click to enlarge)
+
+--- 帖子 #7 ---
+Today's S&amp;P 500 Futures short after breaking out of IB. Trailing stop closed it early, but still pretty good profits made on this trade. Done for the week! Attached Image (click to enlarge)
+
+--- 帖子 #8 ---
+Nice thread. Going further into auction market theory what can help forecast the days trading range/direction is if todays IB is within or out of yesterdays/last weeks value area etc. From this you can determine if you can expect responsive or initiative activity that day/week etc and trade accordingly.
+
+--- 帖子 #9 ---
+Thanks makingmoves! Yeah I was actually reading earlier this week about the Volume in the IB and how that will signal in a way if the day will range or trend. The difficult part is creating an expert advisor around a market profile indicator.
+
+--- 帖子 #10 ---
+Absolutely tis the the problem when trying to be 100% objective, I myself trade manually but as robot like as possible (90% objective maybe) but the subjectivity is still there and plays a role. However ill be interested to see what you could do especially including value/fair value, ill be following the thread
+
+--- 帖子 #11 ---
+Today's S&amp;P500 futures trade. Trailing stop loss triggered, trailed and stopped out. Attached Image (click to enlarge)
+
+--- 帖子 #12 ---
+Hi , Fortyfve20 . Nice to see this ea . if you dont mind Can shear template of opened chart . Thanks bro
+
+--- 帖子 #13 ---
+Sure, what exactly do you need?
+
+--- 帖子 #14 ---
+The Template of chart
+
+--- 帖子 #15 ---
+Hmmm so it's a few indicators and then personal preferences. So I'll leave links instead: Initial Balances Indicator: https://www.forexfactory.com/thread/...07#post7832007 Set to your time zone and market preference. You can choose Asia, Europe and US sessions. Market Sessions: https://www.forexfactory.com/thread/...22#post6983422 Again set to your time zone and market preference. You can choose Asia, Europe and US sessions. Grid Round Numbers: https://www.mql5.com/en/code/downloa...zontalgrid.mq4 Set to your preference Multi-Timeframe High/Low: https://fxssi.com/mtf-high-low This one is pretty cool because you can choose A LOT of options for high and lows of many time periods and even custom time periods. That's basically it man. And of course download the EA in this thread which by the way, I made it so it draws a rectangle for the IB that you choose. Hope it helps!
+
+--- 帖子 #16 ---
+Another good day for the EA on the S&amp;P500. I closed manually early in the morning but there was more money to be made. Attached Image (click to enlarge)
+
+--- 帖子 #17 ---
+S&amp;P 500 and S&amp;P500 futures keep trading lower. IB EA took a short today, that almost got taken out (SL is set at IB high) but I got stopped out with trailing stop. Done for the day. Attached Image (click to enlarge)
+
+--- 帖子 #18 ---
+S&amp;P 500 and S&amp;P 500 futures a bit choppy today at the beginning. The EA took a short position first, then stopped out and opened a long position right away as price briefly traded above the IB. That long was stopped out. The EA is programed to take only 1 trade, per signal, per day. So I set a pending order at the bottom of the IB if the long position was stopped out. I managed to cover losses. Attached Image (click to enlarge)
+
+--- 帖子 #19 ---
+Do you maintain position to hit sl or tp or close it every day?
+
+--- 帖子 #20 ---
+Personally, I let the SL, trailing SL or TP take care of themselves. Today, the position was left open because neither the SL, trailing SL or TP were hit. But you can try it out as you wish and see what works for you.
+
+--- 帖子 #21 ---
+any recent results fortyfive20? thanks, blam
+
+--- 帖子 #22 ---
+Hey Blam, I'm trying not to trade on days with high impact news. You know beginning of the month is full of them, but I will try and continue to post screenshots when I can. Below is a current open position on S&amp;P500 futures. Price bike above IB yesterday, chopped around all day. One position is a manual position and the other is opened by the EA. Attached Image (click to enlarge)
+
+--- 帖子 #23 ---
+There's some real potential, for other pairs also, would like to see fixed stoploss option some pairs you dont need full stoploss calculated, adds to your RR. also if possible adding % to lot size as an option would help RR . I see that spx usually goes 100% of IB, but sometimes stoploss is 10pips sometimes 20p then ive seen a loss at 35p, so with fixed a big SL can wipe multiple trades but with % loss or win is same RR hope this makes sense. Just some suggestions. def trying the system out THx for sharing
+
+--- 帖子 #24 ---
+Yama49, thanks for downloading the EA and taking the time to back test it. I appreciate all and any feedback. So, let me address your message: 1. Fixed stop loss: okay, would it be a RR % stop loss or a pip amount? 2. % Lot Size instead of fixed lot size: I've thought about this before, but since I feel the EA does better in Index Futures, I set it as fixed lot size. 3. You're right about setting the SL as fixed can sometimes wipe out profits. 4. You can deactivate the trailing stop loss by setting those settings to 0. I'll find a way to be able to offer the option of selecting different ways of calculating stop loss and lot size.
+
+--- 帖子 #25 ---
+Today's S&amp;P500 futures trade. Price broke out below IB, I think it may have trapped sellers because it almost reached IB high and if you look at the daily chart, price broke by a few pips previous highs. I exited early before Powell's speech just to avoid volatility but there was potential for more profits. Attached Image (click to enlarge)
+
+--- 帖子 #26 ---
+4520 Thx for the reply 1. I would pip amount then anyone can figure out there risk to reward pretty easily. 2. i would offer both if you can I backtested us30 for 3 months manually sometimes 250 pip sl crazy but my results were no trading Monday or Friday 70 pip SL 85 pip tp yields 80% win ratio i would like to set tp higher then have TSL hit at 85 with very tight trail cause us 30 can run hard so i think u could pick xtra pips that way just running TSL needs to b 80-100 and it wiped out profits to many times Anways thx for the reply hopefully we can make this better, going to backtest gold manually next.
+
+--- 帖子 #27 ---
+S&amp;P500 Coming in strong today. EA took a short, stopped out and then took a long position that played out well. Done for the day. Attached Image (click to enlarge)
+
+--- 帖子 #28 ---
+Today's S&amp;P500 futures moves. Price broke above IB, and almost reached TP. But my trailing SL was triggered. Attached Image (click to enlarge)
+
+--- 帖子 #29 ---
+Nice one fortyfive. Can I ask if the upper green dashed line was the TP? Also, would it be possible for you to share the template thanks, blam
+
+--- 帖子 #30 ---
+Thanks Blamshakk for following and participating in the thread man! So the TP is that little blue dash that's right below the 4430 price level. It's hard to see but I don't know how to change that with MT4 EAs. Also I think it might be just the way it looks on MT4 for Mac. Regarding the template, check out this post: https://www.forexfactory.com/thread/...6#post14622446
+
+--- 帖子 #31 ---
+great thanks fortyfive! blam
+
+--- 帖子 #32 ---
+hey fortyfive You mentioned that you don't trade on days with high impact news. Would it be possible to implement a news filter on the EA, maybe using forex factory's own news feed, to avoid the EA trading on days with really high impact news events eg NFP Second question, I noticed in the screenshots that it's placed on an M1 timeframe, does timeframe matter for this EA or is it chart timeframe independent Third question, the intial balance period starts 9.30am EST although NY starts at 8am EST. Just checking that was all correct? I'm sure it is, would be nice to know that it's a rule and that we don't need to know all the whys and wherefores thanks, blam
+
+--- 帖子 #33 ---
+Hey man, so the news filter, I have thought about it but my building skills aren't that advanced yet. I have changes I want to make to the EA, both personal and from previous suggestions in this thread, but with work and other personal projects I will probably get to them over Thanksgiving and Christmas time so that 2024 I can take this project live. Remember that the initial balance is the first hour of trading. That can vary from market to market and time zone to time zone. I'm using this EA on S&amp;P500 futures, which rely on the NY trading session. That session starts at 9:30am EST. So I set initial balances for 9:30am EST to 10:30am EST. Now, FX market does open a little earlier. The U.S. forex trading hours start at 8:00am EST. You can use this website to compare times: https://www.babypips.com/tools/forex-market-hours
+
+--- 帖子 #34 ---
+hey man sounds like you've got some nice improvements on the horizon for this system. Thanks for the information about the market hours, (SP500 is different opening time from US forex) that makes sense now - I wasn't aware of the distinction before, mostly because I'm more used to forex The other question was about the chart timeframes - I noticed from your screenshots that it looks like you're using an m1 chart is that right? Can you speak at all about what timeframes if any we should be using for the EA, or if the EA is timeframe independent? PS also please check your pm thanks, blam
+
+--- 帖子 #35 ---
+Blamshakk, yeah I use M1 timeframe but just because it's futures, so I just basically look at the chart from 9:30am EST to 4:00pm EST, and I like seeing any sudden moves. I've backtested the EA up to the 30min chart but in theory, yeah the EA is timeframe independent.
+
+--- 帖子 #36 ---
+So if I'm reading you correctly, you use m1 purely as a visual aid. When you backtested the EA over different timeframes, there was no difference in results, hence the EA is timeframe independent, is that correct blam
+
+--- 帖子 #37 ---
+Very interesting
+
+--- 帖子 #38 ---
+Can I get mql4 code?
+
+--- 帖子 #39 ---
+Why?
+
+--- 帖子 #40 ---
+I'm interested in incorporating a feature into the code that would automatically close orders each day and back testing or if possible, I would greatly appreciate it if you could add this enhancement.
+
+--- 帖子 #41 ---
+Hi everyone, apologies for the radio silence. Lot of work this time of year. So here's the EA with one of the modifications requested: risk by percent instead of lot size. Remember to back test, remember that this isn't a magical, miracle, golden millionaire strategy. Attached File(s) Initial_Balances_V2.0.ex4 211 KB | 448 downloads
+
+--- 帖子 #42 ---
+Ok, so I'm working on modifications for the EA. One of the suggested modifications was to close positions at the end of the day. I liked it, makes sense since this is an EA that basically day trades. Here's a look at the EA performance from April to November (daylight savings time) of this year on the S&amp;P500 futures market. Not bad, but also not great. Attached Image (click to enlarge)
+
+--- 帖子 #43 ---
+Try to implement a dynamic stop loss to account in for the instrument’s recent volatility of the market you trade. Something like ATR/ADR, don’t use a fixed stop distance in points, it’s meaningless. Regarding to exits. My own backtests showed best outcomes trailing the stop/profit. A time based stop e.g at end of the day could be useful too. Overall I couldn’t find any combination of parameters to make it profitable for me but maybe you have some more luck than me. I will be interested and keep watching the topic.
+
+--- 帖子 #44 ---
+You won’t be able to effectively forecast rather you get a trending or sideways day. Nobody can, otherwise trading would be easy and we would only enter on trending days and ride the trend as long as possible and stay out for most other days. About 80% sideways days vs 20% trending. I also tried to increase the profitability with market condition based filters but always ended up filtering out a lot of winners too.
+
+--- 帖子 #45 ---
+Hi IDD! Thanks for taking the time to read through this and test out the EA. So, about using the ATR as a dynamic targets, I've heard about this before a lot. What has been your experience and recommendations on using it? Meaning what time frames, what parameters etc.
+
+--- 帖子 #46 ---
+No experience myself but it just makes sense to me to have a more dynamic approach for defining a protective stop. The markets are dynamic and so setting your stop loss at a fixed number of x pips/points away your entry in every situation might be not a good idea. I haven't tried implementing such a stop myself because it takes a bit of time manually testing it and I don't have the MT4 coding skills myself. But I think there are already a few approaches here and existing EAs that have such stops. Maybe you can learn something from there. My idea would be to try using trailing stop like "1,5 times ATR below the previous candle's low" - for a BUY entry. "1,5 times ATR above the previous candle's high" - for a BUY entry. Regarding to time frames. Price/time is the same on all time frames and you basically trade the breakout of x pre-defined period of time (range) here. Timeframe doesn't really matters. Typical ATR time periods used vary between 5 and 21 days. Wilder originally suggested using 7 days, short-term traders use 5, and longer term traders 21 days. Multiples between 2.5 and 3.5 x ATR are normally applied for trailing stops, with lower multiples more prone to whipsaws. You will probably have to experiment/backtest which are the "best" parameters here.
+
+--- 帖子 #47 ---
+Btw, this version doesn't work for me on the MT4 strategy tester. The version on post 1 works.
+
+--- 帖子 #48 ---
+Here this might give you a few more ideas to improve your EA. For the entry, consider the following ideas/filters: - Wait for a retest of x bar's close after the breakout level (first M5/M15 bar close above/below the high/low of the initial balance) before entering a buy/sell order. The reason for this is, often the price will retest the initial balance highs and lows. This may help to avoid some whipsaws and/or place a tighter stop. E.g. in the case of a break and retest directly above/below the closed retest bar where you place the order instead of the previous initial balance. - Wait for a break/retest of the breakout level with volume, e.g. The bar that breaks or retests the breakout level should have a certain minimum size, if possible no wicks etc. - No entry if price already moved over 50% of the daily ATR(14). The reason for this is, it might not make sense trying to capture a larger part of a potential daily move in one direction if a large price move already happened earlier in the day. This makes particular sense if you are looking to make a bigger profit by the end of the day instead of having a very narrow fixed take profit level. - No buy/sell entry if the initial balance is below/above yesterdays daily high/low. I've never tested this myself, but might also help. The idea here is to only buy if you have buyers behind you and only sell if you have sellers behind you. For the exit: - ATR based trailing stop (like mentioned earlier). The reason for this is, you don't want to get stopped out by "noise" and price fluctuating around. You want to give it some room to actually work out, on the other hand, not too much and, if possible, in line with the prevailing volatility. With the ATR you might able to solve this. You have a tighter stop on calmer days and a wider stop when volatility is high. Since this is a day trading strategy where you want to realize profit at the end of the day and don't want to have any overnight risk, it makes sense to weight the ATR on the first X bars of the day or so rather than those of the past days/weeks. On the other hand, why not let winners run regardless of whether the day is over or not? Most traders seem to do the opposite and drag on losses and cut off profits... - A way to add to your winning trades in some objective/logical/repeatable procedure. From all my experiences, this is a crucial difference between truly successful traders. They have no problem increasing their winners, but keep their losers small with iron discipline - Take profit targets based on Fibonacci levels that are plotted above/below the initial balance. Other: - A parameter to define the maximum trades per day - A parameter to define the minimum/maximum size of the initial balance range high-low (in points) - A parameter to define the max. spread at time of an entry - A parameter to define a entry buffer/offset of x points above/below the initial balance.
+
+--- 帖子 #49 ---
+You should look into rebates. Signing up through a parter link and receiving commissions for the Volume you create. Such a breakeven EA would be good for that. Ofcurse it would be more profitable with a higher trade freqeuncy (volume), but the point is it can be a edge for you. Some brokerages pay 3$ - 8$ per standart lot or 50% - 60% of your spread revenue. with such EAs it can be the diffrence between profit or loss.
+
+--- 帖子 #50 ---
+Hi Thomas, not sure what that is. I'll send you a direct message and maybe you can explain a little better yeah? Thank you!
+
+--- 帖子 #51 ---
+Partial take-profits might be good for the EA, and moving SL to break even, so in case price reverses, you would bank some profit already.
+
+--- 帖子 #52 ---
+Hi, I would like V1 with close positions at the end of the day Please, thanks for help.
+
+--- 帖子 #53 ---
+Pretty good day for the initial balance on S&amp;P500 futures today. Attached Image (click to enlarge)
+
+--- 帖子 #54 ---
+Loving this EA Thanks, One thing that lends it hand to big losses is the Stop Loss is above/below the IB range, Can there be an adjustable stop loss please instead of whatever size the range is? . I would greatly appreciate that. Thank you. )
+
+--- 帖子 #55 ---
+Great day in the S&amp;P500 for initial balances. All time highs and then a pull back that triggered a sell order at the bottom of the IB low. Attached Image (click to enlarge)
+
+--- 帖子 #56 ---
+S&amp;P500 Futures trade from today. So along with using IB, I used a fib retracement for my entry. TP was hit and I'm done for the day. Attached Image (click to enlarge)
+
+--- 帖子 #57 ---
+Decided to implement Fib Retracement today on S&amp;P500 futures. IB was negative, I saw a rejection of the 0.50 Fib level in the IB and took a short position. Done for the day! Attached Image (click to enlarge)
+
+--- 帖子 #58 ---
+Initial Balance EA used today. The Fib Retracement could have also been used as a pretty good entry. Position closed by trailing SL. Attached Image (click to enlarge)
+
+--- 帖子 #59 ---
+Pretty good day for the EA. I had a pending sell order at the 0.50 Fib Retracement level but today's S&amp;P500 moves were just straight down. I cut profits a little early and left a little on the table. Attached Image (click to enlarge)
+
+--- 帖子 #60 ---
+On day's like today with big moves before the IB has even formed, I like to use the Fib Retracement levels. I shorted today below the 50 level of the IB. Set targets at IB low. Attached Image (click to enlarge)
+
+--- 帖子 #61 ---
+It's been a while since I've posted on here and it's because I'm trying to stay away from actively trading the markets and have started moving towards just letting my Expert Advisors do the work. Also, I'm now running the Initial Balances EA on S&amp;P 500 futures, Nasdaq futures and Dow Jones futures. Here's the trades from today, which all hit TP. (Also shown in the profits are DCA positions) Attached Image (click to enlarge)
+
+--- 帖子 #62 ---
+Awesome day for the Initial Balance EA on U.S. markets. Attached Image (click to enlarge)
+
+--- 帖子 #63 ---
+Hello, thanks for uploading the EA, I've a quick question. my EA doesn't draw the rectangular box to specify the high and low of the IB. I will highly appreciate any help, thank you.
+
+--- 帖子 #64 ---
+hey fortyfive20 Overall the EA is doing good on my demo with the specified pairs and timeframes. One question about entries though. If I'm right, then the buy or sell should be as soon as price breaks out of the initial balance range if the time is within the start time. Sometimes though entry is delayed a bit as you can see from the screenshot - can you let me know what I might be doing wrong? Is it that it fell outside of the start time hour when price broke out, hence entry is delayed? And sorry for the stupid question, can you confirm for me for the EA inputs, does the server time mean broker time or local machine time? I'm assuming the server time = broker time? Because I've checked my broker time against EDT / EST and the EA time settings are correct if server time means broker time on my end Attached Image (click to enlarge) thanks, blam
+
+--- 帖子 #65 ---
+Hey Blam, First of all, I'm actually honored that you're testing out the EA. Thank you! Second, I'm having the same issue but haven't had the time to see what the problem is. I'm not sure if it's a time frame issue or what. But I will try and get it fixed as soon as I can. The thing would be that I would have to forward test it instead of backtest it to see if the issue is fixed.
+
+--- 帖子 #66 ---
+not at all, the honour's mine, the EA is very good. Would be great if you could take a look at the bug when you get a chance, because it's preventing it from being profitable overall IMO blam
+
+--- 帖子 #67 ---
+Hey everyone, So I managed to at least fix the issue with the levels and times that the EA takes positions. The rectangle, is something I'm still working on. But okay, back to the levels and times the EA takes positions, no need to download a new EA or reinstall anything, it's an issue of setting the times. For starters, the EA works on the server time. So, go to your 30 min chart &gt; identify the candle where the NY session starts ( We're going to be trading U.S. indices on U.S. market times for this example ) &gt; Set that candle as your "Initial_Balance_Start". In my case, on my server it's the 16:30 candle. Now, we have to set the correct "Initial_Balance_End". Remember that the Initial Balance is the first hour of the trading session (9:30am EST to 10:30am EST). So in theory, according to my server time that would be the 16:30 and the 17:00 candle. Previously, the EA had the "Initial_Balance_End" as 17:30. Which is in theory correct, but what the EA was doing was also counting the high and low of the 17:30 candle, when in reality the 17:30 candle is where we want to start trading. So how do we set the correct "Initial_Balance_End"? Well, it's really simple, set it to one minute before the "Trading_Time_Start". So, in my case, if my trading start time is 17:30, I will set my "Initial_Balance_End"as 17:29. What will this do? What does this do? With the above changes what the EA will do is take the high and low of the 16:30 and 17:00 candle, and on candle 17:30 open, it will start trading if price goes above or below the high or low of the 16:30 and 17:00 candle. I'm attaching an image that I hope will help you guys understand the concept of how the EA will work. I sometimes tend to complicate explanations more than I should. Lastly, thank you everyone that has downloaded this EA and has backtested it and played around with it. You guys are awesome. Attached Image (click to enlarge)
+
+--- 帖子 #68 ---
+brilliant, thanks for the fix fortyfive20, have amended my settings, let's see what next week brings. Have a great weekend blam
+
+--- 帖子 #69 ---
+A lot of volatility in U.S. markets all week and it will probably be like this until after the elections. But managed to make a couple of good trades today with the EA. Nasdaq futures: broke below IB, trailing stop triggered and then hit. Still managed to take a profit. Dow Jones futures: IB breakout to the upside, TP hit. S&amp;P 500 futures: IB breakout to the downside, SL hit. Attached Image (click to enlarge)
+
+--- 帖子 #70 ---
+Hey everyone I've been working on a variation of the EA but that I won't make public, I'll tell you why. The variation of the EA is that, since it's being used on U.S. futures which statistically in a time frame of 5 years is always positive, I deleted the stop loss from the buy order and made the lot size 1% of the account equity, then I set a smaller target profit of only 10 pips. For sell positions everything stays the same. Because this trades with no stop-loss, I won't make it public. But here's a little bit of what it did today. One position was manual at the IB high, the other was the EA with a 1 pip slippage and then the third position was an accident because I restarted the EA. Attached Image (click to enlarge)
+
+--- 帖子 #71 ---
+Late snapshot of the EA on U.S. futures today. Attached Image (click to enlarge)
+
+--- 帖子 #72 ---
+Why are the backtest results using USD accounts and Cent accounts different?
+
+--- 帖子 #73 ---
+Nice brother I would like to Thank you for such a good trading concept. i have placed this on Demo MT4 and testing now I love to have Mt5 also if it's possible. Thanks
+
+--- 帖子 #74 ---
+Not even sure what a cent account is. Can you explain a little better?
+
+--- 帖子 #75 ---
+EA working on S&amp;P 500 futures yesterday and today. 10 pip take profit. In and out quick. Attached Image (click to enlarge)
+
+--- 帖子 #76 ---
+Today's S&amp;P 500 and Dow Jones initial balance trades. Attached Image (click to enlarge)
+
+--- 帖子 #77 ---
+Today's S&amp;P 500 and Dow Jones initial balance trades. Attached Image (click to enlarge)
+
+--- 帖子 #78 ---
+Today's S&amp;P 500 and Dow Jones initial balance trades. Happy Thanksgiving! Attached Image (click to enlarge)
+
+--- 帖子 #79 ---
+Yesterday's trades on all U.S. futures. Targets hit over night. 2 wins and 2 losses. Attached Image (click to enlarge)
+
+--- 帖子 #80 ---
+Today's S&amp;P 500 and Nasdaq IB Trades. Nasdaq position still open. Attached Image (click to enlarge)
+
+--- 帖子 #81 ---
+Today's positions from left to right: - S&amp;P 500 futures: One loss, one open position. - Nasdaq: yesterday's position closed in profit, one loss today and one open position today. - Dow Jones: short position hit TP. Attached Image (click to enlarge)
+
+--- 帖子 #82 ---
+Today's Nasdaq and Dow Jones IB trades. The Nasdaq position from yesterday was closed at TP and new Dow Jones short position opened and hit within 30min. Attached Image (click to enlarge)
+
+--- 帖子 #83 ---
+Today's S&amp;P 500 and Nasdaq IB trades. One closed one still open. Attached Image (click to enlarge)
+
+--- 帖子 #84 ---
+Had an early day today. Here are today's S&amp;P500 and Nasdaq IB EA trades. Attached Image (click to enlarge)
+
+--- 帖子 #85 ---
+Today's IB trades on U.S. futures. Pretty short trades, 10 pips each. Attached Image (click to enlarge)
+
+--- 帖子 #86 ---
+Today's U.S. futures IB trades. Got some bullish break a bit late in the day, the Nasdaq trade left open. Attached Image (click to enlarge)
+
+--- 帖子 #87 ---
+Today's U.S. futures trades. S&amp;P 500 and Dow Jones 10 pip targets were hit pretty quick but Nasdaq long position didn't have enough juice to make it hit the 10 pip target. Attached Image (click to enlarge)
+
+--- 帖子 #88 ---
+Not all trades are winners, and not all trades are closed within the trading day. Today's trades on U.S. futures: Short S&amp;P 500 and short Dow Jones. None closed. Attached Image (click to enlarge)
+
+--- 帖子 #89 ---
+Today's IB trades on U.S. futures. Manual positions were placed since I had a bit of a lot sizing issue. The Dow Jones position was manual and placed with a very short target but a bigger than usual lot size. Attached Image (click to enlarge)
+
+--- 帖子 #90 ---
+Hi, Been following your forum for some time i want to make a request if you can make an option in the EA that THURSDAYS the EA does NOT open trade! Why because been backtesting and seeing that thursdays are trap days and the EA loses most of the time in those days because of fakeouts! If you can add the 5 days of the week like monday-tuesday-wednesday-thursday-friday and i can select if i want to put it on true or false if i want it to trade for that day in specific etc. Thank you in advance your EA its very good just need to improve it more!
+
+--- 帖子 #91 ---
+Gentles sirs, before thank you for sharing the EA. It is what I was looking for, but I am confused. Please what may be the setup for opening the trade at 12:00 hours of own broker? Thank you in advance.
+
+--- 帖子 #92 ---
+Hey Luis, thank you for downloading and testing the EA! Really interesting point you make there! I've actually been diving a little into using statistics when trading. Example: what days of the week have higher volume than others, what months are better or have a more positive change and more cyclical statistics. Example: first and last few days of the month are good days to buy into U.S. indexes like the S&amp;P 500. I'll look into adding a days filter when I get a chance.
+
+--- 帖子 #93 ---
+Flashpaul, thanks for downloading and testing the EA man! Check out this post: https://www.forexfactory.com/thread/...1#post14997571 Maybe this will solve your question?
+
+--- 帖子 #94 ---
+Today's U.S. futures trades. S&amp;P 500 broke to the upside, hit TP then broke out to the downside and hit SL. Here's where the importance of risk management comes in, my loss was a little smaller than the previous profit made. So I managed to make a little profit from the S&amp;P 500. Dow Jones broke to the upside, hit 10 pip TP done for the day. One open position on Nasdaq futures. Attached Image (click to enlarge)
+
+--- 帖子 #95 ---
+Sir, I guess I have found the way. My ideia is to set the EA at 12:00 of my broker for all pairs and close all the trades with a global profit for all the trades. But it should be better to have a martingale progression where a new trade with maior lote is opened al the same level of the stop loss. If one trade is opened at one side, at the other side there is the stop loss of the first trade and a new opposite trade with doubled lote. Another way is without stop loss and to set a trade with higher lote. For example 1 lote - 3 lotes. I know that if one trades with all pairs you pay a lot of commissions, but the goal is to catch a fixed global gain all the days with the algebric sum of the trades. I have an EA for this purpose. I know that it is a deviation from your original strategy and if it's inconvenient for you, don't consider it. Thank you for your attention.
+
+--- 帖子 #96 ---
+flashpaul, yeah you're going a whole different direction here. I only use this EA to trade U.S. futures based on a part of auction market theory. I try not to mess with martingale either.
+
+--- 帖子 #97 ---
+Yesterday's S&amp;P 500 trade. Attached Image (click to enlarge) Today's S&amp;P 500 trade. Attached Image (click to enlarge)
+
+--- 帖子 #98 ---
+Thank you for your answer.
+
+--- 帖子 #99 ---
+U.S. futures trades today. S&amp;P 500 and Dow Jones trades. 10 pips each, done for the week. Attached Image (click to enlarge)
+
+--- 帖子 #100 ---
+Today's trades. S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) Nasdaq Futures (TP no hit during today's session so this one is left open) Attached Image (click to enlarge) And now I'm starting to test the IB EA on stocks. For now my logic for choosing which stocks to use the EA on is choosing the "Big Seven". Here's an example: Attached Image (click to enlarge) On Friday Google price broke out above the IB, not enough momentum to close on Friday but at today's market open TP was hit.
+
+--- 帖子 #101 ---
+great keeps us posted fortyfive20. If you have success then I may add some of those stock pairs to my demo blam
+
+--- 帖子 #102 ---
+Hi.. Been trying the EA, but noticed, if placed on M1, the trade keeps failing to open when triggered. If placed on M5, it does open but not every time too; there are days, it fails to open the trade.
+
+--- 帖子 #103 ---
+Hey Sam, Thanks for downloading and testing the EA. That seems strange that it won't open the trade. What does your MT4 journal say when you test it and the order doesn't open? Can you share a video or your settings please? Just overall details would help out a lot.
+
+--- 帖子 #104 ---
+NVIDIA IB long that was triggered on Friday closed at today's U.S. open Attached Image (click to enlarge)
+
+--- 帖子 #105 ---
+Thanks for this thread and idea, forty. Not using EAs myself atm but I'm following your posts as some quick cursory back testing shows some good potential.
+
+--- 帖子 #106 ---
+Rob, thank you for following and commenting!
+
+--- 帖子 #107 ---
+There isn't any error though; the settings I follow them exactly as per your post on the modified settings. Will keep on testing and observe the results for some weeks....
+
+--- 帖子 #108 ---
+Today's trades. Not every day is there enough momentum for targets to get hit and not all trades are profitable. S&amp;P 500 Futures Attached Image (click to enlarge) Nasdaq Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge)
+
+--- 帖子 #109 ---
+Yesterday's positions closed and managed to pick up a trade today on Dow Jones. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #110 ---
+Today's S&amp;P 500 short trade. Stopped out the first time, I had to reset my computer for an external reason and the EA reset itself so it took the second short trade that hit profit. Attached Image (click to enlarge)
+
+--- 帖子 #111 ---
+Today's trades. S&amp;P 500 Futures I once again accidentally reset the EA so two positions were taken but they both hit TP. Attached Image (click to enlarge) Nasdaq Futures Simple and easy 10 pips. Attached Image (click to enlarge) NVDIA Long position taken, still open until tomorrow's session. Attached Image (click to enlarge)
+
+--- 帖子 #112 ---
+Hi.. So I made some observations: - Trades seem to only execute if triggered after the initial 1 hr range, and it has to be within 30 mins; means 17:30 to 18:00. - If trades trigger after the mentioned time range of 18:00, the SL calculation always seem to be wrong. - Most of the times, the trades won't trigger if it happens after 18:00.
+
+--- 帖子 #113 ---
+Hi Sam, sounds like the you're having time setting troubles. Here's a more thorough explanation: https://www.forexfactory.com/thread/...1#post14997571 SL is set at the high or low of the period given.
+
+--- 帖子 #114 ---
+Hi, Yes, I know on the time settings, but the error in SL as mentioned, doesn't happen all the time; it happens only if trade opens beyond the 30 minutes windows after the IB time frame. And it's very random, most times it doesn't open the trade if it's after the 30 minutes window, but by chance if it does, then the SL will be wrongly stated. Other than these random occasions, it runs fine. But why only 30 minute window frame after the IB and the wrong SL calculation seems to be puzzling me here...
+
+--- 帖子 #115 ---
+An example today, US30. Interestingly, it did not take the trade at the break above but in the middle with a Sell and SL is just above it. Trade was triggered after the 30 minute window I mentioned in my other post.
+
+--- 帖子 #116 ---
+That could be due to slippage, try changing your slippage to "0.01", don't go down to "0.00" or it won't work. Also, please show me your settings and the candles that you're trying to get the high and lows of. Maybe I can help you out.
+
+--- 帖子 #117 ---
+Today's trades were mostly manual. S&amp;P 500 Futures Attached Image (click to enlarge) EA triggered the short position, but was stopped out. I didnt reset the EA and manually traded it instead with a 10 pip target. NASDAQ Futures Attached Image (click to enlarge) This Nasdaq short was also manual with an 8 pip target. Meta Stock Attached Image (click to enlarge) This long position was taken on Monday and closed today at market open.
+
+--- 帖子 #118 ---
+As attached is my setting used on the M5. My TP is 0.0 as it's inserted by another EA.
+
+--- 帖子 #119 ---
+Sam, I see everything is okay but the TP shouldn't be zero. The TP is calculated as a percent of the SL. Here's an example of how the TP works and why it shouldn't be zero. Attached Image (click to enlarge)
+
+--- 帖子 #120 ---
+But, with the TP as 0, it shouldn't caused the entry to be triggered in the middle of the IB instead at the breakout and the SL to be few pips away instead of the full range of IB right?
+
+--- 帖子 #121 ---
+What? No! The whole point of the EA is to take trades when there is a break out above the high or below the low of the initial balance. That's the whole idea of trading initial balances. Here's a little more if you need a refresher: https://www.forexfactory.com/thread/...alances-and-ea Again, the TP is the SL multiplied. That being said: There will always be a SL (RISK MANAGEMENT) The SL is always going to be the opposite side of the break out. Example: if price breaks above the IB high and a long position is taken the SL will always be the IB low and if price breaks below the IB low and a short position is taken the SL will always be the IB high. Explanation of TP calculation: TP is the SL multiplied. So again as explained in the image that I sent you, let's set an example where the pips from the position to the SL is 10 pips. If the "Take_Profit_Percent" in the EA is set to 100 then the TP will be 100% of the SL. So in this case: 10 pips (SL) x 1 = 10 pips. If the "Take_Profit_Percent" in the EA is set to 200 then the TP will be 200% of the SL. 10 pips (SL) x 2 = 20 pips. If the "Take_Profit_Percent" in the EA is set to 0 then there will be an error. Why? In math something x zero equals zero. 10 pips (SL) x 0 = 0 pips. This will throw off an error and no position will be taken because the EA will not be able to calculate a TP. The "Take_Profit_Percent" in the EA has nothing to do with where an entry is made, it's only designed for you to calculate your take profit levels. That's why it's labeled as "Take_Profit_Percent". Hope that helps clear things up a little.
+
+--- 帖子 #122 ---
+Ok, I think you understood the issue wrongly here. The issue is the entry is not taken on break of the IB. It's in the middle of the IB. And SL for the entry isn't at the opposite side of the entry, but instead at the middle of the IB, which doesn't make sense too. Also, this issue happens only if trigger of the entry is made after 30 mins of the IB. If it's within 30 mins of the IB, all no issues at all. Nothing about the TP, as if entries are triggered within the 30mins of the IB, all runs well. Problem only arise when it is triggered if entry is triggered after the 30 mins timeframe from the IB range. FYI, though my TP is inserted by another EA, if entries are triggered within the 30 mins timeframe of the IB, then it runs well like clockwork. All the issues start when entry is out of this 30 mins timeframe.
+
+--- 帖子 #123 ---
+Today's trades after the huge drop over the weekend over tariff news. S&amp;P 500 Futures Quick 10 pips Attached Image (click to enlarge) Dow Jones Futures Another quick 10 pips Attached Image (click to enlarge) Nasdaq Futures This trade took a little more time but finally got there. Attached Image (click to enlarge)
+
+--- 帖子 #124 ---
+Yesterday's trades. Forgot to post them. S&amp;P 500 and Dow Jones gave us 10 pips pretty quickly but Nasdaq didnt have enough momentum so a buy position stayed open there. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #125 ---
+Today's trades. S&amp;P 500 Futures I managed to get 20 pips from this index because again for external reasons I reset my MT5 and the EA reset, so when the first position closed the EA took another position. Attached Image (click to enlarge) Dow Jones Futures Dow Jones with another 10 pips. Attached Image (click to enlarge) Nasdaq Futures Yesterday's position closed at today's close. Attached Image (click to enlarge) NVDIA Yesterday the IB EA opened a long position that closed at today's open and another long position opened today. Attached Image (click to enlarge)
+
+--- 帖子 #126 ---
+Today's trades. Remember that not all trades are winners and no strategy is 100% profitable. S&amp;P 500 Futures Price broke out to the IB low early in the session, then hit SL. I took another manual position when price broke below and was stopped out. Price moved around inside the IB range throughout the session and broke below IB low again but I was not going to trade any more. Attached Image (click to enlarge) Dow Jones Futures Dow Jones broke out to the IB low early in the session and hit TP quickly. Attached Image (click to enlarge) NVDIA Long position from yesterday's IB break out hit TP LITERALLY at the last minute of today's session. Attached Image (click to enlarge) Nasdaq Futures I had turned off the IB EA earlier so the breakout below the IB low was not triggered, also since price chopped around so much I didnt take it manually. But I took a manual long on the break out to the upside on the last 5 minutes of the session, will leave over night and close before tomorrow's NFP print. Attached Image (click to enlarge)
+
+--- 帖子 #127 ---
+Using Initial Balances on Stocks One thing about trading the Initial balance on stocks is that stocks gap. This can be good, or it can be really bad. Here's an example of Google. Tuesday's price action broke above the IB and the EA took a long position with the SL at the IB low. Normal right? Well, earnings reports came out, Google disappointed and Wednesday's open was a huge gap down. When this happens the position does not close at the SL, it closes where it opens. In this case, way below the the SL. Attached Image (click to enlarge)
+
+--- 帖子 #128 ---
+Friday's trades hitting profit with overnight/weekend open. A lot of volatility between data and tariff news. This coming week will be another volatile one. S&amp;P 500 Futures Attached Image (click to enlarge) Nasdaq Future Thursday's long position was closed at Friday's open with NFP news, then a short position taken after an IB low breakout. Attached Image (click to enlarge) Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge)
+
+--- 帖子 #129 ---
+Yesterday's trades. One with the EA and one manually. S&amp;P 500 Futures Tuesday's EA long position was still open so the EA would not open a new position, so I opened a long position manually at the IB high break out. Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge)
+
+--- 帖子 #130 ---
+Ran this yesterday on a number of pairs but no trades entered.. I’m not getting the boxes like your images show and no errors in the journal either. Anyone else used this and it’s working?
+
+--- 帖子 #131 ---
+Today's trades. A few from earlier this week closed. S&amp;P 500 Futures Attached Image (click to enlarge) Nasdaq Futures Positions from Tuesday and yesterday closed at today's open with the core PPI data. Attached Image (click to enlarge) Dow Jones Attached Image (click to enlarge)
+
+--- 帖子 #132 ---
+Is it possible, that you upload EA Updates also in #post1? Is there also an overview of all trades from you, done by the EA, e.g. via Myfxbook?
+
+--- 帖子 #133 ---
+No new updates to the EA have been published. Only post #1 and the one in post #41 ( https://www.forexfactory.com/thread/...7#post14691267 ) Also, my profile has a few trade explorers where you can see my trades and testing.
+
+--- 帖子 #134 ---
+EA does not work for me, using default settings as per image one. I dont have the indicators used so perhaps this is the reason why I do not know. Anyone using this successfully?
+
+--- 帖子 #135 ---
+The EA doesnt use any indicators.
+
+--- 帖子 #136 ---
+Could you post the mql4 code so I can take a look to see why trades aren’t opening despite the correct settings
+
+--- 帖子 #137 ---
+Today's trades. Yesterday markets were closed for President's Day so today we had one stock position from last week close in profit at the open. S&amp;P 500 Futures Attached Image (click to enlarge) Nasdaq Futures I accidentally reset the EA today which led to these two loosing positions being taken. Remember that the EA only takes 1 trade, per direction, per day. Attached Image (click to enlarge) Dow Jones Futures This trade was taken early in the day and was left open since no TP was hit. Attached Image (click to enlarge) NVDIA This position was opened last week and with today's open the TP was hit. Attached Image (click to enlarge) TSLA This short position was opened on Friday of last week. Stopped out at today's open. Attached Image (click to enlarge)
+
+--- 帖子 #138 ---
+Today's trades. S&amp;P 500 Futures This was a quick and easy trade. 10 pips in and done. Attached Image (click to enlarge) Dow Jones Futures Yesterday's long position closed today. Attached Image (click to enlarge) Nasdaq Futures Long position triggered, not enough momentum to make the full 10 pip TP. Attached Image (click to enlarge) TSLA Yesterday's short position closed at today's open. Attached Image (click to enlarge)
+
+--- 帖子 #139 ---
+Thursday and Friday trades. S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Thursday's short Attached Image (click to enlarge) Friday's short Attached Image (click to enlarge) NVDIA Short Attached Image (click to enlarge) APPL Whiplashed on this stock Attached Image (click to enlarge)
+
+--- 帖子 #140 ---
+Gentle Sirs, can you help me to configure your EA from 12:00 to 15:59?
+
+--- 帖子 #141 ---
+Your settings should look like this: Attached Image (click to enlarge)
+
+--- 帖子 #142 ---
+Today's trades. S&amp;P 500 Futures Stopped out on a short position Attached Image (click to enlarge) Dow Jones Futures Yesterday's positions closed. I opened a manual position, then the EA kicked in and I forgot to turn it off today so once today's TP hit another position opened. Attached Image (click to enlarge) GOOG Short Google short position from last week closed. IB trading with stocks is a little more long term than with futures. Attached Image (click to enlarge)
+
+--- 帖子 #143 ---
+Thank you!!
+
+--- 帖子 #144 ---
+Hi fortyfive20, firstly thanks for posting your system! A quick question if you have time, the system states the stop loss should be the other end of the initial initial balance, so in the case of a long the bottom of the grey box and inf the case of a short the top of the grey box, however in some of your screenshots is seems like you're setting the stop manually. The S&amp;P500 screenshot in the post I've quoted looks that way as the position was stopped out well within the grey box. I notice occasionally your posts mention entering manually so I assume in some cases you use discretion for your stop loss but could you confirm? And if you do sometimes use discretion are there any rough guidelines you try to follow? Thanks!
+
+--- 帖子 #145 ---
+Hey Alan, thanks for commenting! So yes a while back I posted a little something about this. https://www.forexfactory.com/thread/...5#post15037085 For short positions the SL is calculated as the mid price of the 17:00 candle. As far as manual trades, yeah I take them every now and then. The EA won't open a new position if there's already a position open. So for example, if a long position was placed yesterday, with no SL, and today price is lower but there's and IB break out the EA won't place the trade. So I'll do it manually.
+
+--- 帖子 #146 ---
+Today's trades. Dow Jones Futures Yesterday's positions closed today. Another long position opened today and left opened. Attached Image (click to enlarge) APPL Yesterday's long position stopped out at today's open. Attached Image (click to enlarge)
+
+--- 帖子 #147 ---
+Yesterday's NVDIA short from earlier this week closed out. Attached Image (click to enlarge)
+
+--- 帖子 #148 ---
+Yesterday's trades. All last minute Hail-Marys with U.S. futures making a comeback. S&amp;P 500 Futures Attached Image (click to enlarge) Nasdaq Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge)
+
+--- 帖子 #149 ---
+Is it possible to have a montly balance of your tradind system? I am not interested how much money, but only percentage up your deposit. Thank you.
+
+--- 帖子 #150 ---
+This is February's report. Keep in mind, Initial Balances are not my only strategy. Attached Image (click to enlarge)
+
+--- 帖子 #151 ---
+Today's trades: one loss, one win and some missed opportunities. Missed Opportunities: S&amp;P 500, Nasdaq and NVDIA Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Dow Jones Futures: Stopped out Attached Image (click to enlarge) APPL Friday's long position closed at open today. Attached Image (click to enlarge)
+
+--- 帖子 #152 ---
+Today's trades. S&amp;P 500 Futures Attached Image (click to enlarge) Nasdaq Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) META Attached Image (click to enlarge) NVDIA Attached Image (click to enlarge)
+
+--- 帖子 #153 ---
+Today's trades. U.S. futures had a bit of a whiplash early in the day and I was stopped out of short positions. But long positions made up for it. S&amp;P 500 Futures Attached Image (click to enlarge) Nasdaq Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) APPL Yesterday's Apple short closed at today's open. Attached Image (click to enlarge)
+
+--- 帖子 #154 ---
+Thank you. Having more than one strategy in your arsenal helps offset any losses.
+
+--- 帖子 #155 ---
+Today's Trades S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge)
+
+--- 帖子 #156 ---
+Today's trades. Recouped losses with manual trades. S&amp;P 500 Futures First break out was stopped out, then a manual trade hit a quick 10 pips. Attached Image (click to enlarge) Dow Jones Futures First break out was stopped out, then another manual trade hit a quick 10 pips. Attached Image (click to enlarge) APPL Yesterday's short position hit target today. Attached Image (click to enlarge) META Yesterday's Meta short was stopped out at today's open. Attached Image (click to enlarge) NVDIA Yesterday's short was also stopped out at today's open. Attached Image (click to enlarge)
+
+--- 帖子 #157 ---
+Today's trades: all shorts. One loss. S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) APPL Attached Image (click to enlarge) NVDIA Attached Image (click to enlarge)
+
+--- 帖子 #158 ---
+Today's trades. Only two closed and a few left open. Dow Jones Futures Attached Image (click to enlarge) APPL Attached Image (click to enlarge)
+
+--- 帖子 #159 ---
+Hello fortyfive20, glad to finally find this thread. I’ve developed a similar system but using PVSRA, trading manually without a robot. It’s an evolution of my trading system after years of refinement. If you have time, feel free to drop by and leave a comment. Happy to see your EA doing well. https://www.forexfactory.com/thread/...9#post15182869
+
+--- 帖子 #160 ---
+Trades from Friday, March 14th S&amp;P 500 Futures Thursday's short position closed out over night before NY open. Attached Image (click to enlarge) Friday's long position was a quick 10 pips. Attached Image (click to enlarge) Nasdaq Futures Thursday's short position also closed out before NY open. Attached Image (click to enlarge) NY session provided a 10 pip win. Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge)
+
+--- 帖子 #161 ---
+Roels, thanks for commenting! I'm trying to find in your thread what PVSRA is. can you explain a little better?
+
+--- 帖子 #162 ---
+hey just to chime in, it stands for price volume support resistance analysis. Here's the famous ff thread on the system: https://www.forexfactory.com/thread/...-with-cigarguy blam
+
+--- 帖子 #163 ---
+Sorry for late reply, PVSRA is Price Volume Support Resistance Analysis by Tah and Fisher. See this link: https://www.forexfactory.com/thread/...me-sr-analysis Thanks Bro. But that is version of cigarguy, Scalping PVSRA.
+
+--- 帖子 #164 ---
+Trades for Monday, March 17th. Missed opportunity on S&amp;P 500 futures, I was just away from the computer. Nasdaq Futures One loss, one profit. Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) APPL Attached Image (click to enlarge)
+
+--- 帖子 #165 ---
+Today's Trades. Not enough momentum, stopped out of some positions. S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge)
+
+--- 帖子 #166 ---
+Today's trades. FOMC rate decision helped hit today's targets. S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) Nasdaq Futures Attached Image (click to enlarge) APPL Yesterday's short position closed at today's open. Attached Image (click to enlarge)
+
+--- 帖子 #167 ---
+Today's trades. (Didn't trade yesterday, I was away from the computer) S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) Nasdaq Futures Attached Image (click to enlarge)
+
+--- 帖子 #168 ---
+Yesterday's Trades (Monday, March 24th 2025) S&amp;P 500 Futures Attached Image (click to enlarge) Dow Jones Futures Attached Image (click to enlarge) APPL Attached Image (click to enlarge)
+
+--- 帖子 #169 ---
+Trades from yesterday and today. No specific order, sorry!
+
+--- 帖子 #170 ---
+incredible, @ fortyfive20 do you have MT5 ver?
+
+--- 帖子 #171 ---
+Hi everyone, work and personal stuff has kept me busy but I try and keep the EAs on. Below are trades from the past few days in no particular order.
+
+--- 帖子 #172 ---
+Here's the tricky part of using Initial Balances on stocks... Attached Image (click to enlarge) Attached Image (click to enlarge) If market opens much lower, in this case yesterday's Liberation Day/tariff news which tanked the U.S. markets a little more, the trade closes at the opening price and not at the SL. So losses can be bigger than expected.
+
+--- 帖子 #173 ---
+Yesterday's trades and today's NVDIA open. Faked out in yesterday's IB. I took a manual second position in Nasdaq.
+
+--- 帖子 #174 ---
+One trade from yesterday and all of today's trades. Stocks and indices.
+
+--- 帖子 #175 ---
+All done for today. Here are today's trades helped out by the tariff volatility.
+
+--- 帖子 #176 ---
+All done for today. The S&amp;P 500 short was a manual trade. Something happening with the EA that I gotta reset so it'll stop doing the really short SL on shorts. It was happening on the Nasdaq a few weeks ago too.
+
+--- 帖子 #177 ---
+All done for today! got faked out by the break out to the downside, but made it up with the bullish moves.
+
+--- 帖子 #178 ---
+Some of yesterday and the day before's trades. Also, forward testing a scalper EA so that's why there's so many trades on the charts.
+
+--- 帖子 #179 ---
+Yesterday's trades.
+
+--- 帖子 #180 ---
+Today's trades. Losses on the shorts, wins on the longs.
+
+--- 帖子 #37 ---
+Yesterday's trades.
+
+--- 帖子 #38 ---
+Today's trades. Also going to start testing IB concept on WTI.
+
+--- 帖子 #39 ---
+This week's trades.
+
+--- 帖子 #40 ---
+Today's trades.
+
+
+===== 附件下载链接 =====
+
+Initial_Balances_V2.0.ex4: https://www.forexfactory.com/attachment/file/4612959?d=1702672550

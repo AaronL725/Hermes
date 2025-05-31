@@ -1,0 +1,693 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+This is a thread dedicated to the discussion of the Monster Muncher EA, which the illustrious Steve Hopwood has coded and I have designed. All kudos to Steve for a great job on this EA. I personally don't like putting robots on my account, so I only trade this manually. I have done some studies of the backtests results, which were good, but in practice it may have some problems as an auto-trader. Truth be told, I haven't utilized it enough forward testing as a robot to be able to give any kind of comprehensive reporting. My own interests have been in the manual trading aspects alone, and so that is what I hope to cover here: how to trade MM for the best manually. I have forwarded tested it manually and have done very well on my live account after a little practice on demo. ===================================================== Important : This EA counts according to the GMT offset time of your broker. A broker with a GMT offset time of +2 will give different projections than a broker running on GMT. I use IBFX which counts according to GMT. Any other GMT broker will give close projections to that. I can't recommend using a non-GMT time broker for this system. I only have experience with IBFX. Brokers with a GMT offset time can seriously alter the results. Best suggestion if you have a non-GMT time broker: Get a demo from a GMT time broker and take your signals off that. Important #2 : There is a bug in the EA which causes the charts to offshift every hour. You must refresh the template every hour-this will restore it to its original setting. Now that this info is up top and highlighted, I will be ignoring any further questions about it on the thread. I have written this 5 or 6 times in the thread itself, even though it was already stated below in this first post. I can do no more. One last time: You must refresh the template every hour. Important #3: This is a strategy in development-I am urging people as they learn this strategy to either trade demo, or trade for a penny a point. This is common sense-use caution with your funds. Nothing in FX is certain and all trades involve some element of risk. This is about creating a system which establishes favorable probabilities over time-not a holy grail. It takes time, study, and practice to become successful with any method. ========================================================================================================================= So here is the basic breakdown of the system: First I'll explain the lines. The center Red line, or Average line is the heart of the system. Here is how it is calculated: It calculates the average range of the first 6 bars of the week( point #1), then it calculates the average range of the second six bars of the week(point #2), then the average range of the 3rd six bars of the week(point #3). Then it takes the average of #1 and #2 and produces a fourth point, #4. The it takes the average of #2 and #3 produces a fifth point #5. The red line is a straight line starting from point #4 going through the center of point #5. This gives you the average trajectory of the first 18 bars of the week. It updates automatically every week. Therefore it take 4.5 hours after the start of the week to calculate the red line on the 15 min chart, 9 hours for the 30 min chart to calculate, and 18 hours for the 1hr chart to calculate. The top of the weekly ATR (Blue line) is placed above the Red line. The bottom of the weekly ATR (Green line) is placed below the Red line. The Yellow lines which are very close to the Red Line are not used for signals, just for helping with observation of price action around the red line. They are not essential, but I find them helpful. So, this system can give you four kinds of trades. Buy #1: Price closes above Red line RSI is oversold. Buy #2: Price closes at or below Green line RSI oversold. Sell #1: Price closes below Red line RSI is overbought. Sell #2: Price closes at or above Blue line RSI is overbought. The 1Hr chart is the most reliable chart to trade in my exp. 15 min gives you a few more trades but can cause drawdown. I like to watch 15 min, 30 min, and H1 to see if they are giving me aligned signals, but only take my acutal signal off the H1. You don't have to watch all three TF's, up to you. You can trade just off the H1. ======================================================= Charts, EA, and template posted below. EA goes in your broker&gt;experts. template goes in your broker&gt;templates. Template #1 is already set to disable live trading and alerts. Template #2: also has lives trading and alerts disabled, but has user feedback turned off, and the ADR indicator removed. Its just the lines with the RSI, without any other kind of text. It looks cleaner. Final Note: You have to refresh the template every hour if trading on the 1hr chart, every 1/2 hour if trading on the 30 min chart, every 15 min if trading on the 15 min chart. It will recaculate on each new bar it makes- just a bug-so to restore it to its original setting just refresh the template. Also, obviously use common sense and practice on demo before any live trading. If downloading only the EA and not the template, make sure to uncheck allow live trading. Aside from that, enjoy! ==================================================== Types of set-ups to avoid coming in next post. ==================================================== More info concerning this system as a Robot and other Steve Hopwood Creations can be found here: http://www.forexfactory.com/showthread.php?t=243432 =================================================== Updates: 8/7/10: Put up a corrected version of MM (mq4 file below titled 'breakoutv4), which has the yellow line settings correctly entered. The settings were entered rightly on the templates posted, but not on the bot itself. "ATR Breakout Mulitplier" setting should read 0.162. This sets them at a distance from the red line where price action does significant things. It also sets them at a distance where if you draw a trendline halfway between the lower yellow line and the green line, and one halfway between the upper yellow line and the blue line, you will get equal divisions of 6 sections. Significant action can also occur around these 50% levels between the yellow and green, and yellow and blue lines. None of this changes the rules of the system, but its good for observation and perhaps in the future something more will come of it. This new version also has magic #'s set to 0, and trade comments set to 'none', to disguise them from brokers. ================================================================================= 8/21/10: Have refined the type 2 Retrace trading method using fibos. See post #120 . Important improvements not to be missed. ================================================================================== 8/24/10: Have refined the type 1 Red line trades. Thanks to Ian for his help with this. See post #138. ===================================================================
+
+--- 帖子 #2 ---
+Types of set-ups to avoid: I've had a very high percentage of winners trading this system. There is one kind of set-up though which I have been able to isolate which can fool the system. So you will want to avoid this type of scenario. When you have a pair trading in a steep trend, either bullish or bearish, you can get this very steep angle created from the first 18 bars. What can happen then is that a steep trending pair can move accross the chart and the Red line horizontally, so its basically already oversold or overbought at the moment it crosses the Red line. The GU for example this week moved from left to right horizontally across the red line in an overbought state. Then it went bullish "under the red line" triggering a sell and just kept going bullish. Anyway, a picture is worth a thousand words. I have two examples of this. You can spot it easily by the horizontal movement across the Red line and the steepness of the lines. This is the exception rather than the rule, but you should know how to spot these kinds of false set-ups.
+
+--- 帖子 #3 ---
+That includes the most important things I wanted to say about this system in my experience so far. Emphasize- 1) take your signals off the H1 rather than the lower TF's. 2) avoid the bad set-ups. 3) practice demo and get green pip experience before any live trading. 4) don't ask me questions about its functionality as a live robot. I won't be able to answer you. This is a thread about manual trading of this EA. 5) do ask any questions you have about manually trading it. Thanks!
+
+--- 帖子 #4 ---
+Thank you very much for your efforts, Steve! Some questions: Which pairs do you trade? And which SL/TP do you use? I hope I haven´t read something over. Best regards!
+
+--- 帖子 #5 ---
+Hi Meister- I trade EU, GU, EJ, GJ, UJ, AU, UCHF. Pretty much any pair seems to be tradeable but those are the ones I keep my eye on the most. It cuts down on waiting time to have several up there. But again, if a pair is in some kind of super-steep trending mode, like the EUR/CHF is right now, be on alert for the horizontal walk and the bad set-up situation. My experience with SL is that it has been useful to have as much as a 50 point stop in certain cases. Most of the time though my SL is not that high. If you take a sell under the red line, and price breaks up through it, give it some room-maybe half way or a little more between the red line and the yellow line above it. There's a good chance its going to come back down and then sell off big time. Thankfully, this doesn't happen too often (breaking up through it once its closed under in an overbought state). Aside from that be mindful of the volatility of the pair and act accordingly. If your buying on a retrace below the green line on GJ, which is a very volatile pair, a 25 point drawdown is nothing unusual and nothing to be worried about. I keep my positions small and usually scatter the entries on a drawdown(if I feel like it might draw down after my first entry), as opposed to entering all at once. TP I'm working on improving as I tend to take the money and run, rather than maximizing my positions. You can catch some really big trades with this system-100, 150, 200 pip trades. So I'm looking at using the RSI as an exit signal. Ex, perhaps if in a buy exit when RSI hits 63 or so on the H1. Or if in a sell exit when RSI is 35 or so. This is just an idea I had and is not really practiced yet. Other than that its all situational, according to your style of trading, and etc. Hope that helps! PS-I should emphasize one point. You are waiting to see that a bar closes under the red line after hitting overbought, or closes over the red line after hitting oversold. Take your signal on the close of the bar not just its entering a state of OB or OS.
+
+--- 帖子 #6 ---
+Hi Steve, Thanks for sharing the system. It seems the red line is only drawn once a week. Do you see any advantage in redrawing it every 18 hours for the hourly etc.? Thanks.
+
+--- 帖子 #7 ---
+Thank you SteveFX for sharing this manual strategy. I'll put it up on some charts on demo and give it a whirl.
+
+--- 帖子 #8 ---
+Hi Yesbee, Yes I do see advantage in doing something like that..not every 18 hours, but maybe twice a week. Sun/Wed. I am not a coder though. As long as the price stays in the range of the lines you still have trades. After you take your first retrace trade on a pair your generally done with that pair for the week. Each week a given pair generally has the ability to give two really good trades-one from the Red line, and one from the retrace area. But like- two really big trades-if it generates the signal. Watching a number of pairs you can find maybe 6 to 10 big trades a week. This comes to a lot of pips. If there was a redraw feature you'd have fresh data til the end of the week-it might extend your trading time or increase the number of trades you can get. However as it is, there is already plenty of opportunity. Thanks for your question-
+
+--- 帖子 #9 ---
+Thanks for coming by octo- Best of luck!
+
+--- 帖子 #10 ---
+I can confirm that it appears to be a failure; it made a brilliant start and then gave back all the profits and gradually drained the account. I intended giving this a go as a manual trader but was sidetracked by Nanningbob's thread. These two trading methods should give us a formidable couple of strategies to take on the markets with. Thanks for starting this, Steve. It has given me just the impetus I need to start practising this method again; I took a few successful demos whilst developing the robot. Here is a thought for consideration. I am using mptm to send an Atr take profit to my NB 5 trades; it might be a help here also.
+
+--- 帖子 #11 ---
+Excellent suggestion Steve-thanks! I will look more deeply into mptm (woefully ignorant of this most useful tool)-I know I'm giving up a lot of pips leaving TP to my own discretion thus far-though of course I might be able to work that out. Just chicken . Also got to look more into NB's stuff-will be about that business soon. -Cheers!
+
+--- 帖子 #12 ---
+Here is a mptm set file to get you started: manages all trades sends a stop of Atr * 2 sends a tp of Atr * 3 moves stop to breakeven + 2 at +30 moves stop in jumps of 50 pips It could turn out that the stops and tp's are better calculated using the distance between the average and the retrace lines, but that is for people to play with.
+
+--- 帖子 #13 ---
+are u sure about Buy#1?
+
+--- 帖子 #14 ---
+Hi, Mistersimple- I'm not sure what you are asking. I am sure that the Buy #1 is triggered under the conditions I've described. Price closes over the average line (red line) when RSI is oversold. This triggers buy.
+
+--- 帖子 #15 ---
+Cool Steve, thanks very much. I'm going to get it on there and start checking it out. Was just catching a few Zzz's. I think around 80-130 points is your typical profit. This makes sense when you think about the RSI on the H1 moving from OB to OS-usually takes about the much to move from one to the other. Taking trades from the red line typically yield around 75-110 points. Retrace more like 100 to 150. Point is thats the range we're talking about, where as I'm bailing at like 45 points. So yeah jumping from 50 to 75 to 100 to 125 to 150 would definitely work. Anyway I'm going to play around with it and just get more familiar with the functionality.
+
+--- 帖子 #16 ---
+I'm just going to cover the basic ranges of SL and TP that I have observed trading this system. Nothing is set in stone here. If you are trading on a type 1 buy or sell, which is close to the red line, for the most part you can place tighter stops if the price crosses the red line in the wrong direction after your trade entry. You might decide to use a 50% level between the red line and yellow line, for example. Most of the time that would work out to be about 30 points. Your min TP on these types of trades is around 50 points. Average realistic TP 75-110 or 120 points, in that ballpark. But then you know I have used stops as big as 50 points to my advantage even on a type 1 trade. So this is to a large extent a matter of personal preference and risk tolerance. Retrace trades tend to pay off a little more-more like 90 to 150 points. So a 45 point stop in this kind of type 2 trade gives very favorable RR. I don't mean to suggest that this type of drawdown is the typical story on most trades. In my experience it has not been-its been a lot smaller. Again, the pair's volatility is a factor. GJ always backtested better with wider stops and tp's than most other pairs because its volatile. Basically, getting all this right is just a matter of practice and observation. I also have to work on holding out for bigger TP's than I've been taking. But thats the general idea.
+
+--- 帖子 #17 ---
+Hi Steve, Loaded everything and charts look like the ones you use. I have none of the red, green, or blue lines on any of them. Does it make a difference if my broker uses 4 or 5 digit charts? Thanks. pipsacker
+
+--- 帖子 #18 ---
+Hi Stevefx, Thanks to you and Steve Hopwood for putting together this system! I'm looking forward to giving it a go. Question on RSI's OB/OS aspect of the system. I was curious as to how strict you were about OB/OS levels. -- for going short, would RSI near 60 be too low? Or do you wait until RSI &gt;= 70? -- for going long, would RSI near 40 be ok? Or do you wait until RSI &lt;= 30? Thanks! Leftcoaster
+
+--- 帖子 #19 ---
+Hi, I also have problems with loading the indicator on the chart...I even compiled it again and set ECN=false. But nothing happens on my chart... BTW, I am with Alpari UK. Regards, Oliver ---- EDIT: Failure found, it is an EA NOT and indicator!
+
+--- 帖子 #20 ---
+Hi Leftcoaster, I try to stick to the 30 70 settings, because it reduces drawdown. Having a system with lower drawdown lets you be a little more aggressive after you get comfortable with what you are doing, and I think is ultimately more profitable. 40 60 would be too loose. 32 68 would be about the loosest that I personally would dream of going. That said, I'm not trying to say that everything I do is what everyone should do. There may even be other ways to use the lines to find different kinds of trades. This is just whats worked for me. -thanks for your question
+
+--- 帖子 #21 ---
+Make sure you have the EA loaded into your broker&gt;experts. And the template loaded into your broker&gt;templates. Right click a blank chart and select the template. Should work weather or not your broker is a 4 or 5 digit.
+
+--- 帖子 #22 ---
+Thanks Steve for your quick response! I'm glad I asked so I won't be overly eager to hit the entry button when it approaches 40/60. I've been taking a look at the charts and I'm liking the simplicity of your whole system. I'm getting a glimpse of the kinds of pips you can capture. Simply awesome! When you talk about retracement, just want to clarify -- for example, price under the green line, RSI = 30 so you're looking to go long. But say you missed that first entry, then if price continues to stay below the green line, RSI =30 again, you enter long again. Is that correct? Quick confirmation, at the beginning of every hour, reload the template to refresh the charts? Thanks again...looking forward to next week and it's not even Friday! Best, Leftcoaster
+
+--- 帖子 #23 ---
+Yes, if you missed your first entry because the RSI didn't hit your mark, then it comes back and triggers you are definitely good to go long in that situation. Or if you mean that price hit the RSI mark the first time, but you just missed the trade because you aren't watching, and then it comes back and hits 30 again, then I would also say yes, I don't see why you couldn't take the second trade. Yes refresh 1Hr charts every hour. You will see a shift in the chart because for some reason it recalculates, maybe because it was originally designed to count 18 four hour bars. By the way 4 hour data is ready to go at Thurs 12 AM ET, I think. Its possible to find retrace trades on the 4 hour charts. Don't think I would use them for breakout/red line trades though.
+
+--- 帖子 #24 ---
+To be honest, I was actually thinking the missed trade was because I wasn't awake when it occurred (sleeping always gets in the way of a 24 hour market!) Which brings up my next question. Have you noticed if there are preferrable market hours for your strategy? Also do you stand aside in front of news like tomorrow's NFP? Thanks for replying so quickly and thoroughly! Much appreciated! Leftcoaster
+
+--- 帖子 #25 ---
+8 PM Est to 5 AM Est is when I'm watching the charts. European session is the height of things during those times, but Asian sessions have also been pretty active lately. I'd watch NY too if could stay awake, but like you said, a person has to sleep. But yeah you know, the major session times are always the best times of activity.
+
+--- 帖子 #26 ---
+8pm - 5am EST is quite doable for me as well then my eyes start feeling heavier and the body.... I'm looking forward to next week and your strategy's continuing success! Many pips to all!
+
+--- 帖子 #27 ---
+u can try RSI 4 .. to test...
+
+--- 帖子 #28 ---
+Hi SteveFx, Downloaded exactly like you said. Charts look like the ones you use, except never any lines to trade. All the charts have the same readings on the left side. ADR Not Reached is on all of them too. Any ideas? Thanks. pipsacker
+
+--- 帖子 #29 ---
+The ADR not reached is from another indy I have which I'd put on that template. I don't really use it though its useful. It measures Daily Average Range, and shows how many more pips are needed to reach the average Daily High and Average Daily Low. It says ADR not reached when it hasn't met its overall average Daily Range movement. I'll post the indy below. Goes to your broker&gt;experts&gt;indicators As far as why you aren't getting any lines I'm not totally sure. I'll post a couple diiferent versions and you can see if they work any better. But before doing anything else, just try dragging the EA onto your chart from the Experts section without using the template.
+
+--- 帖子 #30 ---
+steve what are these files? i use the breakout 4 you posted first.. really amazing strategy.. i like.. thanks
+
+--- 帖子 #31 ---
+The top file is just an indicator which shows the Average Daily Range. Its included with the template I posted earlier, so if you download it to: your broker&gt;experts&gt;indicators, then load the template it show up in the bottom left hand corner. It will show you how much room up and how much room down you have before you hit the expected Average Daily Movement for a specific pair. Theoretically it could be incorporated into a TP strategy. But I haven't used it yet as such. I was just playing around with it when I included the template on the first page, and forgot I had it there. So is optional. The rest of the files below that are just different versions of the Monster Mucher system. They go to: your broker&gt;experts You don't need them if everything is already working for you. I'm just posting them because this fellow above is having some trouble with the latest version. So maybe one of these others will do the trick for him. -Cheers
+
+--- 帖子 #32 ---
+Hi SteveFx, Thanks for all your help. It just does not work for me. The Breakout v.4 shows up on the custom indicators, but clicking on it does not add it to the chart. I will keep watching the thread. Maybe someone else will have the problem and a remedy. pipsacker
+
+--- 帖子 #33 ---
+It should not show up on custom indicators. It should show up in Expert Advisors, with the sort of blue flying saucer images next to them. If it is showing up in Custom Indicators then you have it placed in the wrong file. Again, it goes in: your broker&gt;experts Not your broker&gt;experts&gt;indicators This could be your problem. -Cheers
+
+--- 帖子 #34 ---
+UJ is giving the long signal on the retrace. We'll see how it works out.
+
+--- 帖子 #35 ---
+thnks steve.. but i have different pic for usdjpy .. my green line is at 85.48
+
+--- 帖子 #36 ---
+Refresh the template, see if you get a different pic.
+
+--- 帖子 #37 ---
+still doesnt change.. thnks anyway..
+
+--- 帖子 #38 ---
+Hi SteveFX, Finally got it working. Put into experts and refreshed the template. Thanks. My USD/JPY is a bit different, too. Probably broker thing. Mine never closed on or below the green line. It spiked through it a couple of pips and went back up. Would this be an acceptable trade? pipsacker
+
+--- 帖子 #39 ---
+Glad to hear you got it working. Is a little troublesome that people are getting different takes UJ. If you can do me a favor and download the "stevefx" version which I posted a few posts back. Again place it into: your broker&gt;experts then drag it onto your screen, and uncheck "allow live trading" then see if you get the same pic as me. -Thanks
+
+--- 帖子 #40 ---
+Hi Steve my green line is at 86.475 with the stevefx and breakout 4 versions. Im using fx pro . may i ask which broker you have the charts on, so I may download the demo and see if I get the same price for the green line on USDJPY 1 hr chart. All the best Ian
+
+--- 帖子 #41 ---
+Hi Ian, I'm using IBFX. It may be an issue of the GMT offset times. IBFX runs on GMT. I'll check the charts to see about other brokers. Thanks.
+
+--- 帖子 #42 ---
+Yeah, Fxpro is GMT +2. Since Monster Muncher is programmed to start its counting at midnight at the start of the week, Fxpro is starting two hours later than IBFX. This is throwing the charts off. (Actually is starting two hours earlier if its GMT +2)
+
+--- 帖子 #43 ---
+Hi stevefx, It does not matter. Green line at 84.97 on both. I am using Forex.com , it is GMT time. pipsacker
+
+--- 帖子 #44 ---
+Hrm, all I can suggest for now is to download an IBFX demo.
+
+--- 帖子 #45 ---
+Im having trouble with my IBFX demo freezing when I load the template. I will post again when its working and check the line levels. Its past sleeping time here in Japan Good night Ian
+
+--- 帖子 #46 ---
+Hi stevefx, I don't think there will be a problem with just a couple of pips difference. Just make sure it is overbought/oversold. pipsacker
+
+--- 帖子 #47 ---
+Hi pipsacker-this would be acceptable. Your green line is a lot closer to mine than ian's on FXpro, so it does matter that you are using a GMT offset broker. We are only about 10 points apart. Fxpro is more like 50, way off. Each broker can also represent the price data slightly different, which can also account for some discrepancy. They are all market makers, imitating actual FX exchange prices, so there will be minor discrepancies from one to the other.
+
+--- 帖子 #48 ---
+Thanks, stevefx. pipsacker
+
+--- 帖子 #49 ---
+Green line just dropped about 30 pips on the new hour. pipsacker
+
+--- 帖子 #50 ---
+Refresh the template. It will go back. The template needs to be refreshed each hour.
+
+--- 帖子 #51 ---
+Yep, thanks. pipsacker
+
+--- 帖子 #52 ---
+Anyway I've updated the front page to give a warning about the GMT offset time. This is a serious issue. GMT time brokers only recommended.
+
+--- 帖子 #53 ---
+Ya Stevefx I gave up trying to get your system working on MB Trading Metatrader and so downloaded the IBFX demo and it works perfect so far. Look forward to trying it out next week. Thanks for sharing!!!
+
+--- 帖子 #54 ---
+Good deal Poocher, your very welcome!
+
+--- 帖子 #55 ---
+I'm out of the JPY trade +30, only because its too late in the day on Friday and I'm not going to hold a position over the weekend. Happy Weekend to All-
+
+--- 帖子 #56 ---
+adr: if move up less pips than move down for example =&gt; then probably move down?
+
+--- 帖子 #57 ---
+What you're talking about is using it as an entry strategy. I wouldn't go that far with it, at least using it by itself without another form of confirmation. When I was looking at it, I was considering it more as an exit strategy. So yeah, if ADR is showing only 10 pips left up before the average upward movement of the day is complete, you'd want to think about taking profit if you are in a long position. Thats the basic idea. Some kind of entry system could probably be worked out with it, if it was used with another indicator.
+
+--- 帖子 #58 ---
+stevefx, this looks very promising, I will be following along. 1) On the UJ 1hr is the high lighted area a valid sell signal? 2) The other high lighted area's, Is it possible to get rid of all the text?
+
+--- 帖子 #59 ---
+To answer your first question-not only is it a valid sell signal, but its one I took this week and made some nice pips off of To answer your second question-just right click the chart, select Expert Advisors, then select "remove". This will leave the lines in place but take away the text. To take away the ADR indicator in the bottom left corner, right click the chart, select indicators list, then select "ADR no sunday bar", then "delete" Thanks for following along! -Cheers
+
+--- 帖子 #60 ---
+I noticed that the template does not include the EA, so just loading the template will not add the EA to the chart, and therefore, no lines will be drawn. I think this may have caused some confusion in loading the setup on the chart. SteveFX, have you considered revising the template to include the EA with the setting "Allow Live Trading" *unchecked* to make it easier for followers of the thread to more easily load the indys and EA? Also, for clarification, do any of the settings in the EA affect the drawings of lines on the chart? If so, please advise the settings since they are not currently incorporated into the template file. Regards, Octo
+
+--- 帖子 #61 ---
+I think a better way to remove the text on the chart is to go into the EA properties and set "ShowUserFeedback" to false. This will take the text off the chart and will not require removing the EA from the chart. Otherwise I think you would have to add the EA back to the chart when you want to refresh the lines, and then remove it again to remove the text.
+
+--- 帖子 #62 ---
+SteveFX, I hope it is not too presumptuous of me, but attached are two revised templates: 00_stevefx monstermuncher setup: This template includes only the EA and the RSI indy. It removes the ADR indy text remnants left in the original template. 001_stevefx monstermuncher setup: This template includes the EA. the RSI indy and the ADR indy. After loading the template to the chart, use "refresh" to be sure the lines are drawn on the chart. PLEASE CHECK BOTH TEMPLATES FOR ERRORS!!!! But I think they are what you intended for your setups. ALSO NOTE: these templates do not incorporate any setting changes in the EA except to set "ShowUserFeedback" to false. So, if there any settings changes that you use in the EA, these templates do not reflect them. Regards, Octo
+
+--- 帖子 #63 ---
+Thanks very much Octo-the 00 works fine, but the 001 doesn't show the lines. I want to wait til next week to put up a template with the EA removed, just to make sure that a template like that is going to recalculate the new settings for the new week. Otherwise there will be confusion. Have a great weekend!
+
+--- 帖子 #64 ---
+This one should work. It has user feedback turned off, but the expert is still on the chart. The ADR indy is completely gone.
+
+--- 帖子 #65 ---
+Hi Octo, Sorry, I missed this post.- Hopefully the templates I provided already had the 'allow live trading' unchecked. They load on my own system that way. But if there is any problem with the latest template I provided let me know. The only setting that can affect the drawing of the lines is the "ATR Breakout Multiplier", which can only affect how far the yellow lines are from the center red line. I have this set to 0.162, which is the aprox. of the golden mean rounded up. This way if you draw a line manually between a yellow line and the blue or green line you will get even divisions of 6 sections. I wanted to mention that 50% levels between yellow and blue, or yellow and green, can be significant bounce points. Anyway, I did think that these settings were all included in the templates. If this is not the case, let me know. Thanks! -Stephen
+
+--- 帖子 #66 ---
+Ok, problem spotted. ATR Breakout Mult. is set correctly on template but not on the bot itself. I had it changed to 0 on the bot, and forgot about it. So, I'm updating the bot on the first page, and will provide the corrected version here. I'm not sure if this will make a difference, but it could if anyone is having problems getting the yellow lines to show up. This version also has the magic numbers set to 0, and trade comments set to none, so should be undetectable by brokers.
+
+--- 帖子 #67 ---
+Hi Steve, Thanks for the update. Can a RSI sound alert be added to the EA or do you know of a separate RSI sound alert that we could add on without interferring with your EA? I missed the UJ trade on Friday (sleeping on the job again ) but with an alert, I'd definitely may have caught the trade. Thanks! Leftcoaster
+
+--- 帖子 #68 ---
+Hi Leftcoaster, You can check out this thread here. They have something, but I don't know if it works. I put it up on a chart and haven't been able to figure it out 100%. I don't know-give it a shot, play with the inputs, and maybe it will work for you. This is what I got from doing a search on FF. You might also try a google search to find something better. http://www.forexfactory.com/showthread.php?t=10835
+
+--- 帖子 #69 ---
+Thanks. I'll check it out! I also found this that I'm checking out too (post #157). http://www.forexfactory.com/showthre...168808&amp;page=11
+
+--- 帖子 #70 ---
+Hi stevefx, With the 18 hour setup time for the 1H charts, I guess it would be best to wait until the Asian session on Monday? What kind of experience have you had with the 30M charts? Thanks. pipsacker
+
+--- 帖子 #71 ---
+Hi Pipsacker. This is a correct assessment-best to start trading Monday evening Asian session. Mon, Tues, Wed get most of your pips, some lingering trades Thurs and even Fri as with UJ retrace trade yesterday. Lower TF's are riskier, will cause more drawdown, but can also work. I don't trade them myself and I don't recommend others to trade them. My goal is to have a system which creates a lot of pips with small drawdown. The drawdown factor is extremely important to your overall profitability, as it directly affects how much risk you can take on per trade. You can only bet very small if your system has a high DD. If its low and you know its low, and you've confirmed that through your own experience, then eventually you can get more aggressive and make more money. So, my advice is to wait til Monday night and trade the H1. -Cheers
+
+--- 帖子 #72 ---
+Good advice, stevefx. Thanks. pipsacker
+
+--- 帖子 #73 ---
+Great Thread! Thanx to stevefx and Steve Hopwood. I don't know if it will help, but, I've often been waiting for a candle to close at a certain point. While waiting I get busy with something else and miss the close of candle. I modified an indicator to make a sound at the close/open of each candle. I find it very useful. Perhaps some of you might want to use it. Looking forward to next week
+
+--- 帖子 #74 ---
+Thanks for your contribution wobstix, best of luck this week!
+
+--- 帖子 #75 ---
+I just want to clarify a point about waiting for the closing of the bar before you take your trade. It is more essential to wait for a close when it comes to type 1 trades-trades taken near the Red line. The point of this is to keep you out of trouble when price is testing the red line. If price is trading under the Red line for example, this shows an indication that its going to go bearish. At some point its going to test that indication. If it passes that test it will be OB and close under. If it fails that test it will break up through it and close over. Type 2 trades (blue line, green line retrace trades) do not involve these same exact dynamics. In type two trades its just straining its average weekly range plus the OB OS indication. Its not really testing anything. Since this is true, its not as important to wait for a close on type 2 trades. It is still of course very important to wait to see that price has hit or gone below/above green/blue line and RSI is reading 30- or 70+. To summarize: Type 1 Red Line Trades: Very important to wait for close of bar. Type 2 Blue/Green Line Trades: Not important to wait for close of bar, but still important to wait for contact and RSI indication.
+
+--- 帖子 #76 ---
+Hi All, Here is an RSI alert indicator for anyone interested. It sends out a single sound alert. Does anyone know how to modify this indicator so the sound alert is in a loop until you tell it to stop? Thank you in advance, Leftcoaster
+
+--- 帖子 #77 ---
+Hi leftcoaster, I know I can do better, but need more time. It's a bit crude, but, anyway here it is. Good luck.
+
+--- 帖子 #78 ---
+Hi guys, Just letting everyone know that i won't be on til tommorrow afternoon. Lightning struck near my house and blew out the cable/phone/internet. One of the benefits of living in Florida, lightning capital of the world. Good luck this week to all.
+
+--- 帖子 #79 ---
+Thanks Wobstix! I'll give it a go. It's a bit early here but I heard the RSI alert go off (USDCHF's first one to go off, hitting 68). The lines have not been fully been drawn yet but it certainly was a good test for the H1 charts. Thank you for working on the loop. (This is all for that 'sleeping on the job' issue that I sometimes have daily ). Now I'm even more excited for the week ahead! BTW, I like your NewCandleSound indicator! Success to all this week! Leftcoaster ps. Happy to report, UCHF is sounding off like a wake-up alarm. I happy to hit the 'snooze' button. I like the added feature of the RSI. Any suggestion on the best way to deactivate the alarm without deleting it or muting it? I might forget to reload it! Perhaps a finite loop (user input)? If this is your crude version, refined should be a beauty! Thanks! FYI: My first H1 lines appeared at 3pm EST. Did anyone else's appear any earlier?
+
+--- 帖子 #80 ---
+Hi Steve. The EA BreakoutV4 loads but does not draw any lines. There is a Message in the top right hand corner ".... Waiting for candle no 19 to form.....". I get the same with BreakoutV3, While Breakout V2 did not draw any lines but entered a trade immediately. (Forgot to take live trading off http://cdn.forexfactory.com/images/icons/icon9.gif ) My guess is that it cannot determine the start of week bar on my platform for some reason. I have the EA on a 15 min chart. Is there something I must change in in this part of the code perhaps? void GetWeekStart() { //Thanks to sq for this //Finds the start-of-week candle on the current tf and draws a vline to mark it static int OldStartOfWeekBar; if (OldStartOfWeekBar == StartOfWeekBar) return; datetime today_start_time = Time[0]-(TimeHour(Time[0])*3600+TimeMinute(Time[0])*60+TimeSeconds(Time[0])); int today_start_bar = iBarShift(NULL,0,today_start_time,true); int today_start_H4_bar = iBarShift(NULL,PERIOD_H4,today_start_time,true); datetime week_start_time = today_start_time - (TimeDayOfWeek(Time[0])-1)*86400; StartOfWeekBar = iBarShift(NULL,Period(),week_start_time,true); OldStartOfWeekBar = StartOfWeekBar; [IMG]file:///C:/Users/Duane/AppData/Local/Temp/moz-screenshot-2.png[/IMG] [IMG]file:///C:/Users/Duane/AppData/Local/Temp/moz-screenshot.png[/IMG][IMG]file:///C:/Users/Duane/AppData/Local/Temp/moz-screenshot-1.png[/IMG]
+
+--- 帖子 #81 ---
+Hi scottyds, I had that problem. I put the Breakout v4 in indicators, under the experts file. Download to experts only, not indicators. Also, the system works best in GMT broker charts. IBFX and Forex.Com are two GMT brokers. Stevefx uses IBFX. Hope this helps. pipsacker
+
+--- 帖子 #82 ---
+Just got on. Anyone catch the GU trade? Its the only one i've noticed get triggered so far this week. Its already up 70 points. UJ trade from last friday was worth 110 points, as it turns out.
+
+--- 帖子 #83 ---
+Good your power's back Stevefx! I just updated the template so I see the GU trade now. I gotta remember to refresh every hour for new signals too.
+
+--- 帖子 #84 ---
+how can something like that happen? second pic after reload!! regards mtbf40
+
+--- 帖子 #85 ---
+I don't know how many times I can write it. You must refresh the template each hour. There is a bug. When you reload the template it restores it to its original, proper setting. Once per hour folks. It will offshift on each new bar it makes. Refresh each hour, thanks.
+
+--- 帖子 #86 ---
+Hi Steve, So glad you're back! I caught the ride both on demo and real! I had an alert going off at 1.5750 but I slept through them til 1.5720, which turned out well. It's amazing that price came right down to the line as if to say hello and bounced from there. Being my first, I closed out the trade at 70 pips. This strategy really ROCKS! Can't seem to thank you enough! What I'm also liking a lot about this strategy is the entry. It's the best I've seen so far (but then again I haven't been around that long...) I'm also curious where in the 30-50 range are you setting your stop loss? How about target? In your loosest definition of RSI &lt; 32, would you have also taken the GJ trade? I had my alert set at 135.00 and it got as low as 135.019. Perhaps I need to give it more room. Thank you kindly, Leftcoaster ps. What a ride on UJ! Would you consider holding over the weekend say if you moved your position to breakeven?
+
+--- 帖子 #87 ---
+Hi Leftcoaster, I missed this trade-the cable guy was still repairing my system when all this was happening. 70 pips is great! Keep an eye on GU as it might keep going up til its right under the Red line and go OB, at which point we'd have a sell signal. Not sure where I would have put my stop on that trade, probably 30 pips or so, as its a pretty steep downtrend. As far as holding over the weekend. I don't really believe that brokers can guarantee SL's on weekend trades. They say they can, but i've heard some pretty spooky stories about that stuff. I'd rather avoid. Anyway glad someone got the trade. Week is starting a bit slow. Should pick up-I'll try to call the trades I see as they happen.
+
+--- 帖子 #88 ---
+The Friday usdjpy trade and this gbpusd set-up were beauties Stevefx! I'll be demo-ing for a while to get a feel for your system. Impressive so far. Thanks for your guidance.
+
+--- 帖子 #89 ---
+Thanks! I'll keep an eye out on GU just to get a feel of everything. Not sure if you saw my edited post and the GJ question. Would you, in your loosest definition of RSI &lt;32, taken the GJ trade as well? Looking foward to your calls! Onward &amp; upward, Leftcoaster
+
+--- 帖子 #90 ---
+Anytime Poocher- hope to see a whole bunch of Monster Muncher experts kicking ass in a couple of weeks time -talking about kicking ass, GU went nuts, its up 140 points already...
+
+--- 帖子 #91 ---
+WOW! Definitely have to work on that refining that exit! Awesome!
+
+--- 帖子 #92 ---
+Yikes, had my eyes on the message boards, missed that I would have taken that on the basis that RSI already hit 30 and even though is showing higher than 30 when it hit green line-its a divergence signal. I was going to cover divergence signals later-is a little more advanced, but I think you get the idea already.
+
+--- 帖子 #93 ---
+Hi, Does anyone know what to modify in order to thicken the Red/Blue/Green lines? I found the section of the code that draws the lines if that's helpful: //6)Draw a straight line through point #3 (avg of 1st and 2nd six bar averages) and #5 (average of 2nd and 3rd //six bar averages) if(ObjectFind(TrendLine) != -1) ObjectDelete(TrendLine); ObjectCreate(TrendLine, OBJ_TREND, 0, TlStart, P3, TlEnd, P5); ObjectSet(TrendLine, OBJPROP_COLOR, Red ); //Draw the sell trend line if(ObjectFind(SellLine) != -1) ObjectDelete(SellLine); ObjectCreate(SellLine, OBJ_TREND, 0, TlStart, SellTrendLineP1, TlEnd, SellTrendLineP2); ObjectSet(SellLine, OBJPROP_COLOR, Blue ); //Draw the buy trend line if(ObjectFind(BuyLine) != -1) ObjectDelete(BuyLine); ObjectCreate(BuyLine, OBJ_TREND, 0, TlStart, BuyTrendLineP1, TlEnd, BuyTrendLineP2); ObjectSet(BuyLine, OBJPROP_COLOR, Green ); Thank you! Leftcoaster
+
+--- 帖子 #94 ---
+Looks like GJPY might give us all another chance. Keep an eye on it, already hitting green line, just need RSI indication to complete signal.
+
+--- 帖子 #95 ---
+Eur/Jpy is there, giving long signal.
+
+--- 帖子 #96 ---
+EJ long signal.
+
+--- 帖子 #97 ---
+Try to add this line to the code after each ObjectCreate (the name should also be the same as in ObjectCreate), where n=1-5. I guess 1 is default so start from 2. ObjectSet(TrendLine, OBJPROP_WIDTH, n);
+
+--- 帖子 #98 ---
+Hi Steve, i always get this error - but only with the GU - not in another pairs which settings are meant here? thx Inserted Code BreakoutV4 GBPUSD,H1: GBPUSD OP_SELL SteveFx order send failed with error(4109): trade is not allowed in the expert properties
+
+--- 帖子 #99 ---
+Thank you z01z! It worked like a charm! I input '3' to be sure I could visibly see the difference and wa-la, done! Mucho gracias, Leftcoaster
+
+--- 帖子 #100 ---
+Oh well, MM threw up a brick with EJ. Can't win them all-is why we use stops. Notice a couple other correlated yen pairs also threw up bricks. Yen was just crazy strong last night. But no sense in taking multiple trades where pairs are running together. Its basically the same as doubling or tripling your bet on one pair. Better luck next time..
+
+--- 帖子 #101 ---
+Short usdcad from 1.0430 with 25 s.l. and 75 t.p. Attached Image (click to enlarge)
+
+--- 帖子 #102 ---
+Hi All, I got burned good on that EJ trade. I have a suggestion that could help. How about waiting until the RSI crosses the 70/30 and recrosses, then take the trade at the close of the candle? Any comments or other ideas? pipsacker
+
+--- 帖子 #103 ---
+Thats a good spot Poocher-but right now I'm not trading against the Dollar or the Yen for the time being. The markets are too strong-this is major stuff happening, people are running for cover for some reason.
+
+--- 帖子 #104 ---
+You could try that pipstacker. I lost the one EJ trade, and now I'm stepping back to see signs of recovery in the Eur. When the markets as a whole are running this strong its better to step back and take it easy with the retrace. Or use further methods of confirmation for reversal.
+
+--- 帖子 #105 ---
+Glad you think it was a good looking set-up under normal conditions Stevefx. The FOMC statement had things looking goofy for a while. I'm demo-ing trying to get a hang of the lines and appreciate your feedback.
+
+--- 帖子 #106 ---
+No problem Poocher- Monster Muncher is built on looking at price averages. In weeks of extreme activity H1 retraces will take a beating. I'm looking at modifying the trading methods to handle these situations. Will post some more about this soon but need to test a little first. For now though, just to say that there is no reason to lose more than 1 retrace trade in a week. Usually if one pair is exceeding its weekly limit, then most of the rest are going to do the same. So, if I lose a retrace trade on H1 I'm done for the week. I am holding UCAD Short right now myself. For some other reasons. I'll post a chart.
+
+--- 帖子 #107 ---
+Hi stevefx, The lines on all my H1 charts, except AUD/USD, have been redrawn. Is this because they have fallen so far from the retrace lines? pipsacker
+
+--- 帖子 #108 ---
+They should not redraw til next week. Of course you know about the bug that makes them redraw each new bar. Just refresh the template and it will go back. Aside from that bug, there is no reason it should redraw til Monday.
+
+--- 帖子 #109 ---
+Hi stevefx, You were correct. Have not traded it in several days, forgot to refresh. pipsacker
+
+--- 帖子 #110 ---
+Hi folks, I just want to caution against taking retrace trades this week, as we might be in for some more frenzied selling. GU and EU are going to be testing important Daily trendlines. If these get broken then they could sell off another 300 to 400 points without too much trouble. Green lines are likely low targets if the trendlines get broken. My own bias is that they will break, but will be waiting for confirmation and bounce before I do any selling. Will be posting more later about using MM to do trend following instead of retrace. Charts below.
+
+--- 帖子 #111 ---
+Thanks for the heads-up.
+
+--- 帖子 #112 ---
+Any buyers? Attached Image (click to enlarge)
+
+--- 帖子 #113 ---
+Hi Poocher, try using I-trend. This is one of the indis I'm considering adding to the template. Wait til green is on top of red to confirm your long position. Or red is on top of green to confirm a short. Or if you want to be more aggressive, just wait til they draw very close to each other. This should keep people out of trouble entering too early on retrace trades.
+
+--- 帖子 #114 ---
+I'll check it out.
+
+--- 帖子 #115 ---
+Your UCAD long is real close Poocher. Stuck under the 19.1 fibo for the moment but I think its going to go. I'm going to wait for a clean bullish cross on I-trend, then give it a go.
+
+--- 帖子 #116 ---
+Hi Steve I really enjoy using your system. I went back and reread the 1st post and I had not been refreshing the chart hourly or whatever. As a result, I am getting a large DD - I don't know if that's the cause or not. I can be up 100 or 200 pips and give it all back with 1 or 2 bad trades. I was wondering if it's still necessary to refresh the chart? Thanks for your help.
+
+--- 帖子 #117 ---
+Hi Mr Chips, Yes the chart must be refreshed each hour if you are trading on the 1 hour TF. That won't change unless someone fixes the code. I think what its doing when it shifts is taking into account new data, and instead of getting the first 18 bars of the week you get 2-19, or 3-20, or something like that. Anyway this will throw the projections way off. That said, sometimes stuff just draws down. The UCAD drew down 50 points before it finally came through. The GU this week barely drew down anything, and it delivered a nice 150 point trade. The UJ drew down 13 points, and delivered 100. So try to think of Monster Muncher as a tool that will show you a likely place where price is going reverse-its not magic-any other skills you have a trader will help evaluate a potential position-use other tools with it, pivot points, fibos, good money management, and etc... Hope that is helpful!
+
+--- 帖子 #118 ---
+Hi Steve Thanks for your quick reply. Good job with the system.
+
+--- 帖子 #119 ---
+Sure thing Mr Chips. Here is another tool which may be helpful for finding retrace targets. First add these extension levels to your fib tool on MT4. How to do this: 1) put a set of fibs on a chart. 2) double click the dotted red line so it gets highlighted. 3) right click the dotted red line. 4) select fibo properties. the fibo box will pop up. 5) select fibo levels. then select add. 6) fill in the level box with -0.3409. 7) double click the description box and enter -34.09. 8) press OK, then add again. 9) fill in the level box with 1.34. double click description, enter 134. 10) press OK This will add the extension levels -34.09 and 134. These are important extension levels. If you fib from the high of the week to the point where price hits the green line, it will show you the likely target if there is going to be a drawdown. Or if price is moving up, fib from the low of the week to the point where price hits the blue line. The charts below show how well this works. All of these charts are from this week. If you want to add further extension levels. The next levels to add are -0.55 and 1.55. I would say that if price is moving past these -55/155 extension levels you have a runaway, and forget about it.
+
+--- 帖子 #120 ---
+Hi All- I'm going to go through a series of three examples which I thought were good trading opportunities this week. In each of these examples I am incorporating Fibonacci levels to complete the trading strategy for Retrace trades. A more complete entry and stop loss system is required-this I see. So I am using Fibo extension levels to complete the picture, and to provide an exact trading method. To work with this, add the Fibo extension levels. I showed how to do this in the previous post. Add: -0.3409, 1.34, -0.55, 1.55, -0.786, 0.191, 0.809 =========================================== In the chart below is example #1, the USD/JPY trade. This was a short opportunity. 1) If price is moving down to the green line from above-place the fibs from the high of the week to the point of first contact with the green line, 100 to 0. High of week = 100%, point of contact with green line = 0%. 2) If the price is moving up from below to the blue line, place the fibs from the low of the week, 100%, to the point of first contact with blue line, 0%. Low of week = 100%, point of contact with blue line = 0%. ================================================== In the case of the UJ trade price is moving from below to the blue line, so I placed the 100% at the low of the week, and the 0% at the point of first contact with the blue line. In this case, when price hit the blue line I had no RSI Overbought reading-so there was no trade at that time. However, later in the week price hit my first extension target the -34.09% fibo extension. When it hit that extension level I did get an Overbought signal on the RSI. So thats my signal to sell. Once the sell order is placed, my strategy is to place my SL behind the next extension level, the -55% fibo extension level. Once the price hits the next level and I am in profit-in this case the 0% fib line, I want to move my SL to Break Even. After that just let it run. TP on the UJ Retrace is usually around 100 points. In this case you can see that the 134% fibo extension level was a perfect take profit area.
+
+--- 帖子 #121 ---
+Here's an example where the system did produce an aligned signal with RSI oversold when price hit the green line. So I place my fibs from the high of the week, 100%, to the point where the price hits the green line 0%. I have the RSI signal at point of contact with green line so I place my buy order. Since I am buying from the 0% line in this case, I put my SL at 50% of the way down to the first fibo extension level, the -34%. Once the price hits the next level, in this case 19.1% fibo, I place my SL to BE. In this case, you can see that price did come back and stop the order out at BE. Later in the week, it hit the -34.09% extension target. There was no Oversold signal at the time. There was however a bullish divergence signal. This I can use instead of an Oversold signal. Regular Bullish Divergence: When price is making a lower low, but the RSI higher low. So hitting my extension level plus the RSI divergence sign, was my signal to go long. Again in this case, I placed my SL behind the next lower extension level, the -55%, and when price hit the next higher level the 0% fibo, placed my SL to BE.
+
+--- 帖子 #122 ---
+In this case, when price hit the green line there was no RSI Oversold reading, so no signal. Later in the week there was an aligned RSI OS signal when price hit the negative 55% extension level. I placed my SL behind the next level down, which is the -78.6%. Once price hits the next level up, in this case the -34.09%, place the SL to BE. For me, placing Long or Short orders at the -55% or 155% levels is the limit. After that your getting into levels that are too Bearish or Bullish to be trading against. So I won't be placing any buys at the -78.6% level, for example. Thats about it-I hope all is clear. I think this will help to coordinate this trading method a lot, and make it all a lot more profitable.
+
+--- 帖子 #123 ---
+Nice trade well done
+
+--- 帖子 #124 ---
+Thanks, but I wasn't in on this trade-I was doing other stuff. I was just giving the 'I' perspective in the examples out of habit. These are all examples of how it should be done. I will be trading this method myself in the coming week.
+
+--- 帖子 #125 ---
+Hi Steve Thanks for posting many helpful charts for this system. Here is what I have been playing with on H1. When a signal comes from red, blue or green line with RSI supporting or when any combination of RSI, (COG) Centre of Gravity indicator, weekly pivot, weekly S1, S2, S3, R1, R2, R3 Six Sixth indicator forms as in the chart examples posted I take a trade with 30-50 pip SL. TP often comes at green Centre of Gravity line. There are a few versions of Centre of Gravity, but this one does not appear to be repainting to me. Thanks for sharing happy pipping Ian
+
+--- 帖子 #126 ---
+Hi Steve the highest 2 six sixth lines did not show up in the USDJPY 1 hr chart attachment for some reason, but the indicator had lines at 85.88 and 86.28. I hope this chart shows them correctly after I post it. Thankyou Ian
+
+--- 帖子 #127 ---
+Thanks very much for posting Ian. I like the way the center of gravity indi really pulls the chart together-and you can indeed find many points of confluence with those lines and the MM lines. I've been looking for ways to add additional trading opps to the charts-because I know they are there. So I'll definitely give that indi some study and see what methods can be produced with reliablility. I don't want to put too much on at once, just to avoid kind of dilating the whole thing. I always encourage creativity and exploration in order to find the pips-so a big thanks again for your contribution!
+
+--- 帖子 #128 ---
+Hi Steve I really appreciate you sharing this intelligent well thought out method. Your posts have put me on a good learning curve. My creativity continues to be inspired. I will be trying to take some lines off the chart as I explore and find the ones which produce the most accurate points of confluence. All the best Ian
+
+--- 帖子 #129 ---
+You had any success with this COG???
+
+--- 帖子 #130 ---
+Yes from green line to green line on the GBPUSD 1 Hr chart I have posted, the COG is nicely catching the waves in price. For the pairs that are moving like this the COG is great. With the COG I have found most success with the points/places of confluence on the chart in combination with this excellent ATR method as the base signal together with weekly pivots and PRICE ACTION. See this AUDJPY today, I loaded up a 30 min chart with a fresh template, then changed the period to H1 as 18 hrs was not complete yet to show the 1 Hr weekly ATR lines. You can see 3 points of confluence at 76.38 ,the weekly pivot, the red ATR line and the green COG line. RSI is not at 70 but price action also supported so I took a short. All the best Ian
+
+--- 帖子 #131 ---
+inetresting. When I fisrt started trading forex about three years ago all I ahd on my charts was COG and I doubled my account in about two months scince then I have been trouhg many systems books etc and have lost every time might be time to go back to COG PS The pivot auto pirate i'm having trouble loading it what folder do you have it in???
+
+--- 帖子 #132 ---
+the pivot auto pirate goes in experts/indicators as usual. It is a little difficult, almost every time I load it on the chart or load up a fresh template it shows only the labels but not dotted lines. Therefore I have to right click on the chart, then click on indicators list, then click on pivot auto pirate, then click ok, then click close. It always makes the indicator work correctly after that. The easy way is to just change period to 30 mins then back to 1Hr, but this messes up the ATR lines from the EA. The AUDJPY has RSI very close to 30 now and price has bounced off weekly S1 so I will exit at 75.46. From trying many systems/indicators myself in the last year and just losing money, I studied up on Mark Douglas and learned that trading over a series of 20 trades following one system was a vitally important step for me to become a break even trader. Trading on a trade by trade basis trying different systems was a big mistake I learned. Steve has gained wisdom in trading as I read his posts and gain insight from his charts. He is very generous in sharing. Im grateful to learn and contribute to this thread. Im going live with this system at 0.1 lots or 0.05 lots a trade after taking a series of 20 trades on demo. So far my demo account is up 570 pips with 2 weeks 2 days trading this system. In my last post I wrote, With the COG I have found most success with the points/places of confluence on the chart in combination with this excellent ATR method as the base signal together with weekly pivots and PRICE ACTION. This is working great. All the best Ian
+
+--- 帖子 #133 ---
+Nice trades Ian-I'm glad to see that its working out for you. I just wanted to point out that these 50% levels between the red and green lines, and the red and blue lines, can be powerful bounce and/or reversal points, as the chart shows with your AJ trade. Usually price at least gives them a nod unless downward momentum is very strong, just places to be aware of. Keep up the great work-best of luck going live!
+
+--- 帖子 #134 ---
+Thankyou Steve its working well. I really like these ATR lines, great method. Yes price hit the 50% level nicely. I wonder if its possible in the EA to show these 50% levels with the yellow lines by playing around with the ATR breakout multiplier numbers. Im trying now to find the right numbers. happy pipping Steve.
+
+--- 帖子 #135 ---
+Hi Steve I changed the ATR breakout multiplier levels in the EA from 0.162 to 0.262. Its looking close. Thankyou Ian
+
+--- 帖子 #136 ---
+Yep you can do that, price will play off the lines differently in different kinds of ranges. Last week for ex, the GJ was pretty much range bound within the the .162 lines, so you would have wanted to have that setting then for that pair. Mostly though you don't get range-bound weeks within the .162 settings, so mostly I guess its more useful to set them to the 50% area. The .162 are also significant, however. Always happy to help! -I think .25 is the correct setting for 50% lines. Once you set the EA for those lines, you can just save the template under another name, then easily load the .162 or .25 version to get quick access to both views.
+
+--- 帖子 #137 ---
+Cheers Ian Still having trouble with the EA but I don't think I need it as am using COG and have two great days trading plus following the news out of the US. I have stopped fighting the markets
+
+--- 帖子 #138 ---
+Hello, hope everyone is having a good week. I thought retrace on JPY pairs did respectably well yesterday. This is a post about revising the type 1, Red line trades. I've been looking for a way to trade from the Red line to the outer green/blue lines that occurs more frequently than what is already in place, and is also reliable. Getting the price to get overbought under the red line, or oversold over the red line works when it happens, but its just too infrequent, and I'm watching too many pips go by. I want to get those first pips that happen before retrace time, in the earliest part of the week. So I've been looking at a couple of the tools Ian proposed, and the most reliable of them, and also the easiest to integrate, seems to be the Weekly pivot. ===================================================== What I'm suggesting then is simple. These rules will apply to earliest part of the week, before price hits the outer lines: 1)If price is under weekly pivot, and under red line, go short. 2)If price is over weekly pivot, and over red line, go long. If signals are mixed, stay out. Anyway this is what I will be testing myself starting next week. It seems to work pretty well. Thanks to Ian for his contribution, and helping to revise MM type 1 trades! ================================================= Charts and template, and the pivot tool are attached below. Be aware that most of the time you load this template, only the labels will show up on the pivots, not the lines. Just another MT4 bug. To fix: Right click chart, select indicators list, select Pivot Auto pirate, select Edit, select OK. Also remember this is the first intro to these revisions, testing, so you know, be careful with live trading of real funds with this, go demo to start is alway my advice.
+
+--- 帖子 #139 ---
+Hi Stevefx, I have a question about managing your trades. Do you still use mptm? If so which settings are you using? Thank you! Best regards!
+
+--- 帖子 #140 ---
+Hi Meister, no I haven't graduated to mptm just yet. Still making improvements to the basic system. After I feel like I've got the best thing possible, then I'll check on the feasability with mptm. Sorry couldn't be of more help with that one.
+
+--- 帖子 #141 ---
+Hi Steve The template is looking even better now with the 50% levels and weekly, monthly pivots. A BIG THANKYOU for your creativity. "These rules will apply to earliest part of the week, before price hits the outer lines: 1)If price is under weekly pivot, and under red line, go short. 2)If price is over weekly pivot, and over red line, go long." These new rules are a big help at the earliest part of the week. On Monday I watched the GBPUSD in the London session go up through the weekly pivot &amp; red line (30 min chart) to 156.19, then go down again. My intuition was saying take a short, but I stayed out as I had no certain clear rules for the trade as RSI was not setup. With these new rules for the earliest part of the week, now that trade will be possible to try. From looking at my charts now GBPUSD, GBPJPY, AUDJPY, USDJPY, EURJPY, AUDUSD, USDCHF all had good moves down with 100 pip+ gains possible on almost all of these pairs. A break of the monthly S1 on USDJPY &amp; EURJPY provided clear confluence points with the red line too. I turned on the EA for an experiment on Monday New York stock market open time &amp; it took 160 pips out of the market by shorting all pairs for 1 hr that had price under the red line. The week following Non-Farm Payrolls seems to be the best for big moves at the start of the week from my recent observation. I found the pivot indicator from member forex11, the co-founder of "follow the bouncing pip" thread at Forex TSD. An indicator with a different name but, its the same except its named SRwithPivs.mq4, I have attached below. Member Saxon here at forex factory who started the "Nearly Naked (Simple Trades)" thread (the thread that has helped me to learn to wait for trading targets) is using it to good effect, as part of his trading methodology. "The most certain way to succeed is always to try just one more time." Thomas Edison Ian
+
+--- 帖子 #142 ---
+Im trying these 3 pairs for shorts now. RSI is oversold on all 3 &amp; they are close or over the blue ATR line. GBPJPY is at Monthly S1 &amp; Weekly S1. GBPUSD is at Weekly Pivot &amp; EURJPY is at Weekly S1. I am checking a new indicator on my chart. Its from the synergy system. Its traders dynamic index &amp; includes RSI. Traders Dynamic Index This hybrid indicator is developed to assist traders in their ability to decipher and monitor market conditions related to trend direction, market strength, and market volatility. Even though comprehensive, the T.D.I. is easy to read and use. Green line = RSI Price line Red line = Trade Signal line Blue lines = Volatility Band Yellow line = Market Base Line Trend Direction - Immediate and Overall Immediate = Green over Red...price action is moving up. Red over Green...price action is moving down. Overall = Yellow line trends up and down generally between the lines 32 &amp; 68. Watch for Yellow line to bounces off these lines for market reversal. Trade long when price is above the Yellow line, and trade short when price is below. Market Strength &amp; Volatility - Immediate and Overall Immediate = Green Line - Strong = Steep slope up or down. Weak = Moderate to Flat slope. | Overall = Blue Lines - When expanding, market is strong and trending. When constricting, market is weak and in a range. When the Blue lines are extremely tight in a narrow range, expect an economic announcement or other market condition to spike the market. Entry conditions Scalping - Long = Green over Red, Short = Red over Green Active - Long = Green over Red &amp; Yellow lines Short = Red over Green &amp; Yellow lines Moderate - Long = Green over Red, Yellow, &amp; 50 lines Short= Red over Green, Green below Yellow &amp; 50 line Exit conditions* Long = Green crosses below Red Short = Green crosses above Red * If Green crosses either Blue lines, consider exiting when when the Green line crosses back over the Blue line. IMPORTANT: The default settings are well tested and proven. But, you can change the settings to fit your trading style. Price &amp; Line Type settings: RSI Price settings 0 = Close price [DEFAULT] 1 = Open price. 2 = High price. 3 = Low price. 4 = Median price, (high+low)/2. 5 = Typical price, (high+low+close)/3. 6 = Weighted close price, (high+low+close+close)/4. RSI Price Line &amp; Signal Line Type settings 0 = Simple moving average [DEFAULT] 1 = Exponential moving average 2 = Smoothed moving average 3 = Linear weighted moving average Ian
+
+--- 帖子 #143 ---
+GU and GY are both close their 38% retrace mark. I'm still way bearish on GU. 1.49XX is my down target on this one. Lets see... Good luck on those trades Ian!
+
+--- 帖子 #144 ---
+149 for GBPUSD is a nice target Steve, thanks for the heads up on that one. All 3 trades were losing at first, now slightly positive pips. Im learning its really good after I have set my SL &amp; TP to walk away &amp; check the trades a few hours latter. If I watch the trades I can close them out early before they hit the SL if they are losing, Or I can close the winners out too early before they hit the TP which is bad as it is producing a right or wrong mentality. I have learned that a good trade is if I execute it correctly and follow the rules. Trading the probabilities over a series of trades with a clearly defined edge. Mark Douglas. Transferring knowledge into skill is the hard part with the result of good execution on every trade. I did make one execution error in that I opened the GBPUSD trade before the blue line was hit. On another note I like the TDI indicator as it looks to be based on RSI &amp; Standard Deviation. I personally will not use anything else from the Synergy system. Its easy to fall into the trap of relying on indicators, as I can easily do rather than learning to understand PRICE ACTION. Ian
+
+--- 帖子 #145 ---
+The only further change I want to suggest, in light of this last weeks activities, is in the entry method on retrace trades. Retrace trades are potentially hugely profitable. This week has shown that on mulitple pairs. The problem with them is that you can't be sure to what extent they are going to draw down before making their gains, so they're difficult to trade, difficult during entry time. The levels I set on the fibs hold up very well-but to those which I have suggested adding, I will suggest one more: -0.1704 . This is half way between 0 and -34.09. What I am going to be doing starting next week is placing entries at the point where I get my signal with 40% of my normal trading size. If I draw down to the next fib level I will enter another 40%. And if I draw down to the third level, the last 20%. So if I get a signal at the 0% fibo, I'll go in with .4, then if it draws down to the -17%, I'll enter with another .4, then if it draws down to -34% fibo, I'll enter with the last .2. This will make the drawdown more tolerable when it occurs. The other thing I would suggest to anyone trading retrace is to do your homework over the weekend on the 4hr TF and try to isolate any important trendlines that price might be targeting on pairs that you trade. This way if you see an important trendline at the -34% fibo, you know to hold up your entry until that point. Otherwise, the best way that I can see to trade it, is to step into it.
+
+--- 帖子 #146 ---
+Hi Steve GBPUSD, GBPJPY &amp; EURJPY returned a total of 175 pips. My total was 400 pips for the week for this excellent system. My best in forex to date. I tried an idea with RSI. I loaded RSI periods 6-24 in different colours on the indicator chart window with yellow being RSI 14. Its the same idea from a template that I like from member Spudfyre "Spuds Stochastic Thread Theory" thread here at Forex Factory. The idea is explained in the 1st ten posts of that thread and also in the thread. I have uploaded 2 templates one has the stoch included just for comparison with the original idea. AUDJPY is at an interesting place at the monthly pivot with RSI oversold, I will be watching it carefully.
+
+--- 帖子 #147 ---
+Hi Steve I was searching high and low this weekend to find a fibs indicator that I liked &amp; also that is easy to change the levels on from inside the code after reading your last educational post on retrace entry strategy &amp; your other fib levels posts. The levels look nice for this indicator on the gbpusd 1 Hr chart I have posted. member cobraforex stated : "OK, let’s talk one moment about one of the indicators, The Fibonacci Pivot level indicator. Those levels are calculated on the broker’s prior day HLC data, they are respected points where the PA may pause, bounce back or break and retest. They are calculated on your brokers daily open and close time, now what will be the best broker time to watch them? I have the Fibonacci Pivot indicator since more than 2 years on my chart and found it absolutely best on GMT London time (ex. ODL, IBFX etc.) All TL, HL, pivot and Psych lines work well because they are seen and respected by traders, not only retail traders like we are. They take profit, set SL or simply buy and sell at those levels, that’s why they are working. Now why London time? London moves the biggest part of the FX cake. I highly recommend not changing the Pivot indicator that is standard on the THV chart; it is very accurate." anyway there is six numbers for the levels in the code as shown below. double r3 = p + (R * 1.000); double r2 = p + (R * 0.618); double r1 = p + (R * 0.382); double s1 = p - (R * 0.382); double s2 = p - (R * 0.618); double s3 = p - (R * 1.000); I put these numbers in the code in the indicator posted below to try. double r3 = p + (R * 0.5500); double r2 = p + (R * 0.3409); double r1 = p + (R * 0.1704); double s1 = p - (R * 0.1704); double s2 = p - (R * 0.3409); double s3 = p - (R * 0.5500); chart attachment gbpusd1 shows the changed levels. Any thoughts appreciated for what numbers to put for these levels from the numbers you have posted already on fib levels? Ian
+
+--- 帖子 #148 ---
+Hi Ian, I honestly wouldn't know how to get those levels to match the ones I specified for the fibs. I'm not sure if there is a way to. I just use the fib tool. High/low of the week to contact with green/blue lines. Sorry I couldn't be more help with that one. I wish it all could be easier too, . Good luck this week!
+
+--- 帖子 #149 ---
+Congrats on the 400 pip week Ian, btw, thats a great accomplishment. Hopefully we can rack up even more now that type 1 trades have been revised for more trading. AJ is bouncing between its Daily TL's, and has broken up through the 4hr TL resistance. Here is the most likely scenario I see for this pair at the moment. Anything can happen though. I try to limit the extent that I speculate on what a pair will do inasmuch that I want to know weather or not its likely to be a big mover for the week, or something that is going to be mainly caught up in a consolidation phase. MM will catch true bear and true bull moves well, but most likely keep us out of consolidation trading, at least with present rules. We'll see what we'll see, eh?
+
+--- 帖子 #150 ---
+Hi Steve There was intervention I think this morning on all the JPY pairs, they went up at first. Then around lunch time here in Japan all of them started dropping. On the 5 min chart the Red ATR line was nicely placed where CHFJPY, GBPJPY, EURJPY and AUDJPY all started dropping from. The drop started so quickly I did not enter I was too late I thought by the time I seen it. Now all these 4 pairs are 100 or more pips down for the day. I managed to find a weekly/monthly pivot indicator that is the same as Pivot Auto Pirate. It is loading correctly when the template is loaded. I have attached it for the thread. Many pips to you this week Steve. Ian
+
+--- 帖子 #151 ---
+Strange opening this week. Price is moving straight across the red line on nearly every pair. pipsacker
+
+--- 帖子 #152 ---
+Too much steep early selling, making it tough to gauge. I got shook out on GY before it fell again. Way it goes sometimes, I guess.
+
+--- 帖子 #153 ---
+I just made 200 pips between AJ, NJ, NU, EU and GU. Now up 4% on the week. Only wish I held onto the GY trade. Obviously when the lines are this steep crossing the red line doesn't mean as much. After I got stopped out on the GY trade I decided to hold AJ even though it crossed the line. A lot of these pairs aren't going to hit the green line this week, its too steep. NU might. Retrace will be tough. Possible bear flag forming on Eur/Aud.
+
+--- 帖子 #154 ---
+Hey Stevefx, Thanks again for introducing your setup in the RTFG thread, &amp; here. I haven't started using it much yet since my broker is about 3 hrs off the GMT time as you can see in my screen shot with the clock indi installed. Was wondering why exactly did you move away from your original SHI channel setup in favor of this one too. I usually watch renko range bars charts during the week but when I tested SHI channels, along side zigzag channels, and demarker trend lines, I was able to do about 500 pips in a trade simulator on 4hr chart which covered just a few days on one pair/cross. Guess I should have saved my test results so I could post them here. Posted screen shot just to show a nice long signal with your setup I missed very early this morning on eurchf, &amp; to compare the SHI &amp; zigzag channel indis with yours. May keep an eye on it for a potential sell signal soon.
+
+--- 帖子 #155 ---
+Hi Fxguy. Thanks for stopping by and posting. There wasn't really any reason in particular I moved from SHI with Pivots to this, except I became interested in period studies, started experimenting with price averages and ATR, mentioned my ideas to Steve H and he became interested in programming it. After that it required a certain amount of time for study and further development. Last week this this system would have returned over 2400 pips on the 12 pairs I'm watching with current rules. This week was weird with all the early selling but it still grabbed around 1100 to 1200 pips between the 12 pairs, on the initial movement of the week. We're into round 2 of retrace now, some overshooting, but we'll see. SHI is great though, with a lot of potential. I can't go back to do further work on it until I'm satisfied I've made the most of this system. We're getting there! Keep up the great work, looks like your solution with zigzag and demarker is working out really well!
+
+--- 帖子 #156 ---
+Your welcome... Sounds good, figured it must be pretty good to catch Steve H's attention. That's a lot of pairs to watch, how often would you look at them with this setup on H1 charts, and when do you start &amp; end your trading day? Do you start @ NY open 8am EST, &amp; scan through the H1 charts every 15 to 30 mins for example?
+
+--- 帖子 #157 ---
+Monday at 3pm Est is the first important time to watch, when the first projections on the 1hr charts come in. You want to get in on those first positions as early as possible. These are trades under/over the red line and also under/over weekly pivot. Or if it doesn't look good immediately then keep an eye on them from 3-8 Est on monday. I just look through the pairs to see which set-ups look best-don't have to follow them all, all the time. Then it cycles into round 1 retrace, and possibly round 2 retrace. You just need to be watching during these transition times. Usually you can get everything done in two days, movement out plus round 1 retrace. Moday, Tues, done. Round 2 retrace gets into Wed. Usually two or three days work a week, this is all.
+
+--- 帖子 #158 ---
+sorry Steve, I am new here.... and your system looks good ..... tell me does Steve's bot working well ??? cheers ps. sure I will look better this strategy...and try bot
+
+--- 帖子 #159 ---
+tell me please , should I use 1H or 30 M charts??? cheers
+
+--- 帖子 #160 ---
+and yes, thanks very much for shearing .... cheers
+
+--- 帖子 #161 ---
+-Argon, please read the first post. The bot has problems-this is a thread for discussing the manual trading of this strategy only. -Use 1 hr charts. -Thanks for joining the discussion. I suggest you read through the thread, there is quite a bit of valuable information throughout.
+
+--- 帖子 #162 ---
+thanks Steve... will do for sure.... I have seen that bot has problems .... cheers
+
+--- 帖子 #163 ---
+Well this was a week for steep lines, not the usual thing but it will happen from time to time. I'm just going to post two exceptions which will occur when you get pairs with steep lines, and which I have noticed play out on more than one ocassion. #1 is continuation signals when the price makes a horizontal movement accross the red line. Normally when price moves accross the red line you are worried about reversal and want to get out of your trade. However, when the lines are steep, and price moves in a straight line accross the red line, and is also still above its weekly S1, or for a long trade still below its weekly R1, then this will produce a likely continuation signal, and you will want to stay in trade. First two charts below are perfect examples of this. #2 is a reversal signal when you have a long drive above weekly R1. Price is never going to hit the blue line because the lines are too steep. So you get a drive over the weekly R1 like on UCAD this week, which is respecting the red line the whole way, then you get an overbought signal on the RSI, then you see it start to fail below the red line. This is a reversal signal. I want to emphasise that these are special situations, and they shouldn't be confused with other situations which don't meet all the same criteria which I have mentioned here. But put to their proper use these examples will enhance trading weeks when you get steep line projections.
+
+--- 帖子 #164 ---
+The 5 min red ATR line came in an interesting place on all these charts at the start of the week. The time was around 8.30am or 9.30am Japan time. The green MA is the SMA25 &amp; the white dotted MA is the EMA200.
+
+--- 帖子 #165 ---
+At the same time here is a view of the 1 Hr charts. (Note, the red ATR lines had not came up until many hours later) I want to show the position of the RSI in the opening/first few hours of the start of the week. 1. the RSI is either overbought or oversold on all almost all of the 1 hr charts when the yellow line marking 00:00 time comes up at the start of the week. 2. the red ATR lines come up on the 5 min charts 1.5 hrs later. then the major price move began soon after at 3:00am AUG 30th on the Interbank FX Trader charts. 3. possible conclusion: a combination of RSI oversold or overbought on the 1 hr charts &amp; price breaking the red ATR line on the 5 min chart at the very start of the week looks interesting to keep an eye out for. The red &amp; blue candles on the chart are created from the indicator attached below: rsi chart bars
+
+--- 帖子 #166 ---
+Hi Steve Today I put a yellow line on some pairs on the 1 hr charts at a close angle &amp; price level as the red ATR lines when they first came up after 18 candles on the 5 min charts. I placed most importance around the price level first given by these red ATR lines. I applied the start of the week rule of being under/over the weekly pivot and red ATR line to see how tradeable this idea was. Results from the 1hr charts I monitored for most of the day carefully. eurjpy was above the weekly pivot. It did cross below the monthly pivot &amp; below the line I drew for a total of 30 pips, but it did not meet the above weekly pivot rule. nzdjpy was above the weekly pivot it crossed above the line for a total of 20 pips so far. gbpusd crossed below the weekly pivot and line &amp; a trade of 80 pips was possible. gbpjpy was below the weekly pivot. after crossing below the line a trade of 80 pips was possible. 180 pips was possible from three tradeable pairs today. I am curious to see the price level given by the beginning of the red ATR lines on the 1 hr charts when they come up in a few hours from now.
+
+--- 帖子 #167 ---
+Nice work on that stuff Ian. I'm not totally enthusiastic about most of what I'm seeing right now on 1hr charts. Lots of mixed signals. I have some small short positions open on GY, GC, and UC. Thats about it. GY is trading over red line but have that horizontal crossing action with the steep lines. Some weird stuff happening with GC, broker spread just went to 20 points. Dunno. Good luck this week. Good luck to all.
+
+--- 帖子 #168 ---
+All my positions worked out, also caught ride down on EJ. Total +4% so far for the week. Love this system.
+
+--- 帖子 #169 ---
+Hi Steve well done 4% already this week. yes love this system too. This system is mechanical &amp; effective. Its provides an excellent chance for me to now integrate all my learning &amp; apply it correctly to become a successful trader as this system fits my personality. My demo was 700 pips profit for 1 month, which is good for a learner as myself. I know this system is capable of giving more pips in one week than 700. As you have pointed out &amp; I have also seen consistently from the charts. My experiment from yesterday now with the 1 Hr lines up. The chart price levels of the beginning of the red ATR lines are close enough. Just a good understanding of price action &amp; I think some early pips can be caught before the 19th candle 1 Hr lines come up. good pipping for the rest of this week.
+
+--- 帖子 #170 ---
+Hi Steve I currently watch GBPUSD, GBPJPY, EURJPY, AUDUSD, AUDJPY, NZDJPY. which pairs make up the 12 for you? A useful indicator I found coded by a well know coder I have attached below. (Note I have changed the default pairs) Enter the pairs to watch &amp; it shows them all together in the form of HA in the indicator window. I had 3 JPY pairs or 3 GBP pairs or 3 USD pairs.
+
+--- 帖子 #171 ---
+Hi Ian, I watch GY, GU, GC, EJ, EU, EA, UCHF, UCAD, UJ, AJ, AU, NJ, NU, CJ I think I just added Eur/Aud recently, since that seems to be 14. I'll check out the indy, thanks! Good pips to you also this week!
+
+--- 帖子 #172 ---
+Yes yesterday the indi I set it for some JPY pairs on 1 chart &amp; some GBP pairs on another chart. The GBP pairs were GBPUSD, GBPJPY &amp; GBPCHF. It was helpful to see them all moving in a group &amp; they all moved down for some nice pips. Here is a chart with the indi set for those 3 GBP pairs now.
+
+--- 帖子 #173 ---
+Potential long set-up on GJpy, oversold over red line.
+
+--- 帖子 #174 ---
+AJ on H1 has came within 6 pips of the blue line at 78.13 &amp; RSI overbought on H1 &amp; H4. now price at 77.85
+
+--- 帖子 #175 ---
+Nice spot on that one Ian. Looks like its gonna have to wait til next week to play out. I stopped trading this week on Wednesday, since I was already up 7% on my account. Like your work has shown though, this system is capable of giving trades throughout the week, in a lot of different ways aside from those which have been formally introduced. You can bring other tools and look for places of confluence and agreement. -------------------------------------------------------------- I've pretty much stopped trying to use the outer lines with the RSI alone as signals to enter on retrace. I've come to the conclusion that there is just too much drawdown, too frequently. A better approach is to just watch what happens after price hits the outer lines. You need to observe price action to find your entry. If there is a target of confluence, price is usually going to hit it. Example USD/CAD this week: weekly pivot and monthly pivot within 7 points of each other above blue line. Together with -55% fibo extension and -78% with shakeout. Thats how retrace entries have to be found. On the low side use the Weekly S1. GC this week gave a big morning star below the S1 together with classic bullish divergence. GBP/JPY got bought up below the S1 early in the week, and I was waiting for it to return. Below the S1, when you see that "returning to the scence of the crime" action, just wait to see if it starts to get bought up again in the same place, then if it does you can enter long. When the distance between the low point of the week and contact with the blue line is shallow, it suggests that the bull is going to be strong, and it will exceed the blue line by quite a lot. The reverse applies to green line trades. With a little observation and study anyone can find these trades. --------------------------------------------------------------- Throughout this thread I've shared a good deal, if not most of what I know about this system. I consider it to be a success and I've profited regularly with it since its creation. I know a lot of new traders got shaken off it because of drawdown on retrace. Entry on retrace isn't always easy to find, but thats the normal course of price action throughout the week-initial movement followed by retrace. Study the variations on that basic theme, learn to spot areas of confluence, practice, and anyone can get it. A canned approach can be used on Red line trades, but not on retrace-that takes a little practice and a little skill. Even Red line trade rules have exceptions such as the horizontal crossing/continuation signals. You learn this stuff by doing the same thing week after week, doing away with what doesn't work and keeping what does. Continuously moving from one system to another though doesn't pay. Things rarely work on the first try, before you've mastered the various nuances and exceptions. For success, persistance is required, not a whole ton of it, but some. Anyway, best wishes for continuous success to all.
+
+--- 帖子 #176 ---
+Hi Steve Thankyou for your last post. It is reality &amp; some good straight thinking. "Stopped trading on Wednesday &amp; up by 7%" is awesome. "Stay humble, work at it, you'll get it." Its great to see you putting your phrases into action week after week. A great learning experience for a learner like me. ....................................... "I've pretty much stopped trying to use the outer lines with the RSI alone as signals to enter on retrace." "watch what happens after price hits the outer lines. You need to observe price action to find your entry. If there is a target of confluence, price is usually going to hit it." Yes I agree (conclusion: AREAS of CONFLUENCE are VERY Important.) The evidence of this being the wisest approach going forward is the success I believe of your new start of the week rules with the red line &amp; weekly pivot for red line trades. ........................................................ May I ask the percentage of your account that is risked for each trade? Books &amp; traders that I have read/learned from are 1 or 2% risk each trade, I like learning from Larry Williams &amp; from memory he trades around 5%. "Risk level must equal the traders skill level" is some knowledge I learned recently. Now is a great time for me to internalise that. I did not have a good week. I went live &amp; I over leveraged. I think I was over confident from trading on demo. Secondly I went from monitoring 6 pairs to 9 pairs which just ended up being too much for me to monitor. Thirdly I have been doing a lot of experimenting, which has been creative &amp; productive, but now as you summed up nicely (PERSISTANCE, DOING THE SAME THING WEEK AFTER WEEK &amp; master the various nuances) Which translates for me as a series of 20 or 30 trades with this system &amp; the best way of trading it at this time. This week I will also go back to 6 pairs, do my very best to keep my rules &amp; not over leverage.
+
+--- 帖子 #177 ---
+Hi Ian, On a single position my risk is generally less than 1%, or around 1%. At the start of the week I'm looking for the best set-ups on red line trades. Maybe I'll get in on three to four pairs that look good. This is what I did last week, and they all came through and I bailed out, though there was a lot more money to be made by staying in. So I made about 1% on each trade. My next trade was GJ for a 35 point scalp when I saw it get oversold over the red line. Then I saw it spike and I realized it was coming back down to S1 so I bailed. That was another 1%. I waited for it to come back to S1 and I bought it-that was a big trade that I stayed in for, 110 pips. That was 2 to 3%. I had my eye on the USD/CAD trade but didn't take it for some reason, maybe because I already had money in trade elsewhere. The only trades I lost were at the start of the week-a couple of trades I tried to take off the 15 min charts-around 1/3 of a percent each. They came back around to profit but I don't have much faith in the 15 min. so I bailed early. A lot of it is how much confidence you have in your setup. If you doubt it too much, it probably won't work out, even if it is technically correct. In essence, every week I'm focused on winning two or three big trades. 1)Initial Movement 2)Correction 3)Second Correction Now I may go in for multiple pairs on the first trade, or any of them, so that by the time I'm done for the week I've made 10 or 12 trades. I might also spot smaller trades here and there like with the GJPY scalp last week. But essentially, winning those first two or three trades is my focus. Nothing more is required to make substantial gains every week. Those are big movements-100 to 200 pip trades. This week I'm really going to try to hold off on taking profits on the Initial movement trade unitl it hits weekly S1 or R1. Or at least cut my entry into smaller parts and hold a part of it until it goes that much. I may also up my risk level some. Good luck this week. Keep it simple.
+
+--- 帖子 #178 ---
+My opening trade this week was GJ short. I already took some profit and I'm going to try to hold the rest at least to the S1, like I said. This week was tough because EJ and GJ were giving opposite signals, which is not usual. I considered that the EJ was being upheld by the strength of its brother the EU which had a big bull. The EU I consider to be at critical resistance and its likely done. Aside from that GJ was just a more definitive signal, with steeper lines, and also selling farther below the red line. Also giving signal with the larger trend, so I went with GJ. EJ is now breaking below its red line and is approaching its weekly pivot. Its still a contender for a nice big bearish move down to the S1. I will be keeping an eye on it and trade it if it gets below weekly pivot. Why not?
+
+--- 帖子 #179 ---
+Hi Steve nice trades on the GBPJPY &amp; EURJPY. I entered AUDJPY at 78.08 as it was below the monthly pivot/red line on 30 min &amp; I exited at 77.65. RSI was oversold. Now waiting for another entry. CHFJPY is setting up very close to weekly pivot too. GBPUSD is looking good too near its weekly pivot now.
+
+--- 帖子 #180 ---
+09.00/9.30 GMT when the 30 min red lines come up. GBPCHF this was a nice one I missed, but there is certainly next time. I notice the price level of the start of the red line on 30 min does not really change, its within 5 pips usually of H1, but the line trajectory of 30 min is different from H1 when it comes. When there is good confluence : (weekly pivot/red line/Price Action/200ema/25sma) &amp; the start of the week rules are met, as in this case with GBPCHF its worth a try I think.
+
+--- 帖子 #181 ---
+Hi Steve By the way thankyou very much for your encouraging &amp; helpful post #178. I like this currency meter/ news combination CHF is showing strength now. I entered GBPCHF at 154.95 &amp; exited around 3-6 mins later at 154.46 for a very quick 49 pips. CHFJPY &amp; USDCHF &amp; AUDCHF &amp; NZDCHF all had nice moves at the same time. I currently have an open position in AUDCHF lets see if it will go down to weekly S1.
+
+--- 帖子 #182 ---
+Hey Ian, Good trades man. GC went nuts to the downside. Was watching that one earlier but my focus has been on JPY pairs so missed it. Nasty bounce off that 50% level on Jpy pairs. But offered reasonable re-entry for shorts. Most Jpy pairs in the right place IMHO. Aud/Chf looks good Keep up the good trades!
+
+--- 帖子 #183 ---
+Hi Steve It was post #177 that was very helpful. Yes JPY pairs looking interesting now. I have been using this currency meter for a few months. The thread is over at Forex TSD. "IN10TION NewsReader" http://www.forex-tsd.com/news-signal...ewsreader.html
+
+--- 帖子 #184 ---
+Hi Steve Today has been another really nice day for the red ATR line on M15 or M30. GBPCHF awesome. GBPUSD &amp; GBPJPY &amp; USDCHF were all movers too with the red ATR on M15. From 1 hr 30 before London open was when I started to monitor the M15 &amp; the red line had set up nicely on the 4 pairs. The currency meter I attached was very useful today, just 4 candles on the M15 on GBPCHF &amp; I received close on 100 pips. It is late now here in Japan, but I think the GBPCHF may continue down to weekly S1. I know almost for certain the red ATR line at the start of the week = pips. What I have been working on is a trending template for the lower time frames, especially M15 for enabling nice high probability entries after a point of confluence sets up. With the attached indicators &amp; template in MT4 you can see what I have been working on thus far. happy pipping
+
+--- 帖子 #185 ---
+Yeah you said it, red line means pips at the beginning of the week. After that you're on your own, lol. But it starts my week out +100 or 120 every week, so I count it all as worth the trouble. I've been working on different stuff with fractal channels and Supertrend to cover the rest of the week. Also a trending system, no countertrend. Good luck this week-
+
+--- 帖子 #186 ---
+All the big ones, GY, GU, EU, EJ, all under red line. So you know where I'm at.
+
+--- 帖子 #187 ---
+I figured I'd post what I've been working on here. I could start another thread for this but whatever. I've given this system a very cheesey name, trendstar. The point of this system is to try and get in at the start of new trends based on the hourly charts. There is an exact method for doing so, but the rules can be stretched a little after some practice. The exact method applies to textbook type entries which don't always happen, although when they do it is certainly a good idea to take advantage of them. So the basic process is to wait until Supertrend changes color after a long run. Say it changes from Bull to Bear, or Blue to Red as the chart shows. The next step is to wait for a fractal break in the indicated direction. So Supertrend color changes from Blue to Red, I'm waiting for a low fractal break. Low fractal break occurs, next step is to wait for a pullback to or behind the 21 ema. Sell at or behind the 21 ema. Supertrend line can be your ultimate SL. Basic idea is: new trend just established, get into it on first pullback. You can also use it to try and get in on a trend in motion by waiting for another pullback behind the 21 ema. Chart, indies and template below.
+
+--- 帖子 #188 ---
+Here are my trades for trendstar so far. We'll see how they go.
+
+--- 帖子 #189 ---
+I'm out +55 on GU, and +57 on GC. GU is going to be hitting major 4hr support at 1.5500. It might break but I'll take the profits. I'm up EA +15, letting that run, but set SL to BE +2. Trendstar looks good so far.
+
+--- 帖子 #190 ---
+Hi Steve thankyou for posting your new idea. I have been experimenting with it for hours. the candles are made up from williams% candles and labtrend. HMA non repaint &amp; HMA histo is also non repaint both coded by mladen from Forex TSD. the supertrend nrp is also coded by the same coder. mladen is an excellent gifted coder. the HMA set to 30 method 2 looks interesting in comparision to the supertrend. rule 1 : top or bottom of fractual channel is touched. rule 2 : 21 ema crosses HMA 30 method 2 at the same time the candle crosses both MA. rule 3 : HMA changed colour to correct colour for the trade direction on the H1 or M30. these charts show a nice move just happened on GBPCHF on M5. M30 had the HMA change colour correctly. also of interest was that price hit the yellow ATR line on H1 with breakout ea and reversed.
+
+--- 帖子 #191 ---
+First thanks Ian for sharing your mods on trendstar. I think I get the gist of what your trying to say: 1) high fractal touch 2) HMA changes red 3) price crosses down through MA's = sell position. Opposite for buys. I think thats fine as long as it leads you to only trade with the larger trend. Trendstar has been hitting positions accurately left and right. If you look through the history though, you can see you will get stopped out from time to time. No magic here, but it does seem pretty solid-a fine beginning! ---------------------------------------------------------------- I'm going to be sharing some historical price workups for certain pairs. I've done three so far. EJ, EU, and GU. These show color coded price levels based on original opening price, historical high, and historical low of the respective pairs. These are not really systems in themselves-they are meant to add to whatever system you might be working with. With study a system might be developed out of them-but for now I'm just using them as added feature. ---------------------------------------------------------------- So historical Opening, High and Low are the red lines. Then I placed lines between them at 50% levels, these are the Bisque colored lines. Then between each of these new levels I placed another set of lines at the 50% mark. The idea is that as you go down the line, the levels get less important, so some price levels are more magnetic and important than others. Price tends to move through the less important levels to the more important levles. At the very least, they can help take profit strategies. The ranks of the lines are printed in text form on the chart according to their colors, from most important to least important. -----------------------------------------------------------------------
+
+--- 帖子 #192 ---
+hi steve amaziing things what you share here! thanks for all this you also have a template for UsdJPY....? i tried to figure your lines out but something is missing...too much colours...can you explain again how you come to this lines? thanks for sharing regards lodol
+
+--- 帖子 #193 ---
+Hi lodol, I haven't done UJ yet. You can do the workup yourself. Here is how: 1)Go to your monthly chart on UJ, and find opening price of first candle. Mark it with a red line. 2)Mark the historical high and historical low with red lines. 3)Place lines halfway between high and opening, and low and opening. Make those lines a different color (the same as each other but different than red) 4)Place lines halfway between each new level and make them a different color (the same as each other but different than previous level lines). 5)Continue the process until the lines are around 100 points apart, or keep going as long as you want. Each new 50% level gets a different color. New 50% levels are less important than previous 50% levels. Thanks for posting!
+
+--- 帖子 #194 ---
+hi steve thanks for quick answer...perfekt i will do it like this.... when you have time you can also explain me the logic behind.........smile that a 50% level of a high and low should be strong i understand but why all other 50 should also be strong?? and what are your blue numbers on the right side? thanks again for this thread ...i really appreatiate your work all the best lodol
+
+--- 帖子 #195 ---
+Blue numbers are ultimate fibs. That is a fib from the historical low = 0% to the historical high = 100%. When you have an ultimate fib level correspond with another price level it makes it stronger, especially 38.2, 50, and 62.8 fibs. 50% levels are always important. But the more you slice up the chart by adding more 50% levels, they become less and less important. This is why I color coded them. So you can see that some levels are more important than others. First 50% levels have more pull than say 4rth rank 50% levels. But still 4rth rank might become a support/resistance level and come into play. Any level has the power to stop price and reverse it, just some are more likely to. This why they are ranked by color.
+
+--- 帖子 #196 ---
+hi steve thanks for answer ...i understand..... i will colour my way through...smile regards lodol
+
+--- 帖子 #197 ---
+Hi lodol, I had a chance to a historical workup on UJ. Here you go...
+
+--- 帖子 #198 ---
+This is just some long term UJ analysis. Chart shows most of the action taking place between light green line on top and olive line on bottom. These massive spikes are most likely intervention related. Japan doesn't want UJ falling to new lows, hurting exports. But check out the massive gap between the high fractal and the low fractal on the Daily Chart. This implies that after some correction there will be further selling. If I was a long term trader looking to buy and hold UJ, I would want to get in at Daily Support level, 83.46. I've marked this level in yellow. It is a 50% level between my two historical price levels, the violet and olive.
+
+--- 帖子 #199 ---
+I'm trading against the H1 on this one, but with the H4. Even for the H1, I'm buying on the right side of the 21 EMA. This is a RR trade. Aside from that I'm see this pattern of accumulation taking place just below important Monthly and Weekly support levels, which I boxed in green.
+
+--- 帖子 #200 ---
+hi Steve Thankyou for posting some historical price workups for some pairs. excellent. Sorry it was 3.50am when I finished posting that last post. I really needed to post some more charts of the specific setup on H1 (but the 7 attachment limit was reached for my post). &amp; I was trying to preserve my train of thought before going to sleep. The trendstar template you posted set off a trigger of creativeness for me, so I ran with that to see what I could create. here are some more charts &amp; thoughts. I srcolled through AUDJPY on H1 &amp; I discovered something very interesting. I even set up an EA that was in my MT4. I had to use a LMWA 30 period for this as the EA did not have HMA, but it turned out to work nicely on a few short tests I did on AUDJPY H1. these charts speak my main idea, much clearer than I can explain it. Here are 2 examples on GBPUSD. these are big charts, please left click on them 1 or 2 times for the correct size. 1. Sept 14 from around the times 6:00 fractual channel touch &amp; 11:00 - 13:00 at 154 price level for the cross. a touch of the fractual channel occurs. followed by ema21 crossing HMA 30 method 2. the bar closes up above the cross a higher low is formed, (HMA is green at 12:30 on M30) then lift off. 2. Sept 21 from around the times 8:00 fractual channel touch &amp; 15:00 - 18:00 at 155.50 price level for the cross. a touch of the fractual channel. followed by ema21 crossing HMA 30 method 2. 2 bars close down below the cross a higher low is formed, then the bar goes up through the crossed MAs &amp; 155.62 -155.70 entry zone as price clears the last 4-5 bars highs. (HMA is green on 18:00 bar on M30) then lift off. Finally the last 2 M30 charts posted I put on a HMA 15 method 3 with a 240 minute setting showing the H4 trend. In both cases it turned green &amp; started moving up before the major price move took place. If you get time to run through a trendstar trade explaining in more detail that would be much appreciated for me to understand clearer what you are seeing. happy pipping Ian
+
+--- 帖子 #201 ---
+Hey Ian, the way I have the system set up is pretty simple. Basically when Supertrend is blue you want to buy below the 21 EMA. When Supertrend is red you want to sell above the 21 EMA. I'll post a chart with GU showing some possible entries for this week. When a pair is consolidating on the hourly level, if you get stopped out on a move-it might be better to switch to the lower time frame like 5 min and scalp. When pairs are trending nicely, use the H1. I'm pretty sure I understand your set up, though I don't understand all the different indies that you are using, but I get the basic process. Looks good I just prefer to make my entry zone on pullbacks, rather than waiting to clear a level and buy from higher, or sell from lower. Keep up the good work!
+
+--- 帖子 #202 ---
+hi steve thanks for usdjpy template...you are quicker with hundred lines than im with some few...smile...and thanks again for explanation and creative thoughts int this thread. regards lodol
+
+--- 帖子 #203 ---
+GC is in a potenitally profitable accumulation zone. I'm not saying to buy it, I'm saying to keep on eye on it tonight. If the lower TF's start to turn blue and I see its getting bought up at this level, I might try to get in on first pullback.
+
+--- 帖子 #204 ---
+Hi Steve, Thanks for posting your latest setup , it looks very good , can you tell me how you use the fractal channels with this method ?
+
+--- 帖子 #205 ---
+Hi Ian, Yes. The fractal channel break is like an alert which works with the Supertrend indicator. Depending on where Supertrend has placed its Support or Resistance line, the fractal channel might break before Supertrend changes color, or Supertrend might change color first, then you'll get the fractal break. Those two events happening in close succession, fractal break and Supertend S/R break/color change, is your alert to that the trend is changing. At that point you want to wait for a pullback to or behind the 21 EMA. Once the new trend is underway, then you are just trying to get in on further pullbacks to or behind the 21 EMA. Your sell/ buy zone is at the 21 EMA, or between the 21 EMA and the Supertrend S/R line. Sometimes it will advance past the 21 EMA, sometimes it will just barely touch it, etc. And also, Supertrend isn't perfect. Unless the bar closes past its line, it won't change color permanently. It can change color, then change color back it price just spikes its S/R line. So this can lead to shakeout. These issues like, where exactly to enter around the 21 EMA, and dealing with shakeout, this is the stuff that requires practice to master. I try to use good Money Management-with less at risk, less stress, higher chance of success. Good luck to you!
+
+--- 帖子 #206 ---
+Hey Steve, I like what you're doing man. This latest strategy of yours works even on M5 time frame. By the way what do you use for exits and stops?
+
+--- 帖子 #207 ---
+Hi Max, sorry didn't have a chance to reply til now. You have to judge every trade by its own merits and positioning within the range. Most of the time if Supertrend changes color against you, you are going to want to use that as your stop. But like I said Supertrend isn't perfect. Sometimes price can advance past the Supertrend line by just 5 points and close under it then reverse. So the move works out even though you get a color change. Thats the exception though. If your in at a good place, say a long position, and you keep getting high fractal breaks, and Supertrend stays blue, then keep riding it. A lot of that SL TP is just subjective and personal, there's no really absolute way to answer it. But using the Supertrend S/R line as a stop is usually a pretty good bet. Its just a lot of times you can get out of a bad postion at break-even if you hang in there a little bit. Its needs practice to determine for yourself. One thing I can add to this though, is to start looking at fractal lines, and previous fractal lines as additional levels of support and resistance. A lot of time if there is a pullback, and it exceeds the 21 EMA, it is headed to retouch its high or low fractal, or within a few points of that area. Again, thats not an absolute, but this can be helpful in many situations.
+
+--- 帖子 #208 ---
+Hi Steve I have been working a lot on being creative with trendstar, especially on the M15 time frame. There seems to be a great deal of success so far on GBPCHF M15 together with an H4 bar/candle trend starting. It may take 2 or 3 posts today or over the next 1-2 days to complete posting all the information. so I will state when all is uploaded &amp; complete for a correct understanding. The stratman zip needs to be extracted with winRAR. then the stratman font needs to go: 1st start menu / my computer / C: / windows / fonts the little mini chart on the templates is statman mini chart showing the bars on H4 or H1 for example from the M15 chart. the MA ribbon filled is set to 150ema &amp; 200sma + a 21ema &amp; 35sma. the williamspr alert v2. williams % R is set to 30 on all time frames from M15 up. the daily open line I have set to a dashed purple line on the template. HLC bars show only the High Low &amp; Close of the bar. pivot points multi timeframe has already been posted but to keep as many indicators together as possible on this post here it is again with one or two small line style changes in the indi. The other indicators necessary are already posted which need to be in the indicators folder of MT4. they are : williams % R candles labtrend grid builder fractal channel(2) I think that is all the indicators on the template. There is one more not on the template as yet which is a MA cross email alert.
+
+--- 帖子 #209 ---
+Here are some templates and the MA cross email alert. I compared the channel that Labtrend creates to the fractal channel &amp; they are similar. Without the channels the Labtrend itself changes colors for showing trend. The Labtrend is based basically on williams % R and was made for MT4 to do the same function of ASC trend/ able trend created by John Wang who was a former student of Larry Williams. If you are interested more about this indi there is a Russian document attached that can be translated piece by piece on bablefish from the Labtrend coder. I think combined at the start of the week especially on M15/M30 with the breakout EA ATR weekly lines this trendstar mod will bring in many pips as well as throughout the week when traded with the H4 trend. I have posted 2 charts. one has the fractal channel &amp; one has the Labtrend channel. the charts are big please left click on them for the correct size. .................................................................... From this link below pages 590 &amp; 591 of this thread is very helpful &amp; necessary to see what I have been working on the last few days especially in regard to the MA ribbon &amp; many charts showing its effectiveness. Member MarcVum posts are important as well as my ones. MarcVum is a very gifted experienced trader as well as member Saxon who started this thread. http://www.forexfactory.com/showthre...30625&amp;page=590 this thread is my favourite on forex factory and I post here if not on this thread.
+
+--- 帖子 #210 ---
+Hi Steve By the way those two charts on USDCAD H4 &amp; GBPCHF H1 were execellent. I entered USDCAd at the weekly S1 for a nice ride up. GBPCHF made a nice move on Friday too. As a result of my successful GBPCHF trade at the start of the week &amp; the USDCAD trade I had my 1st positive week of live trading with 150 pips gained. Awesome. ...................................................................... Trendstar mod My favourite teacher for price patterns in the market is Larry Williams. I have posted three photos of what Larry calls a "Smash Down Day". This is the price pattern &amp; 1 variation of it that I will be looking for before entering a trade with the trendstar mod templates posted. I will give rules &amp; explain about smash down/smash up days/bars 1st of all. rules: Smash down day. 1. The market starts to rally, then we are looking for a day with : 2. A close lower than the previous days low. 3. If the very next day the new bar reverses and takes out the previous days high then buy. rules : Smash up day. 1. The market starts to rally, then we are looking for a day with : 2. A close higher than the previous days high. 3. If the very next day the new bar reverses and takes out the previous days low then sell. my variation of these rules is regarding point 3 : If the very next days new bar does not close on a new high or new low then disregard it &amp; go on to the next bar to see if it meets rule 3. chart examples &amp; explaination to follow on next post.
+
+--- 帖子 #211 ---
+MISTAKE on point 1 rules : Smash up day. 1. The market starts to rally, then we are looking for a day with : 2. A close higher than the previous days high. 3. If the very next day the new bar reverses and takes out the previous days low then sell. .................................................. CORRECTED rules : Smash up day. 1. The market starts to decline, then we are looking for a day with : 2. A close higher than the previous days high. 3. If the very next day the new bar reverses and takes out the previous days low then sell.
+
+--- 帖子 #212 ---
+rules: Smash down day. 1. The market starts to rally, then we are looking for a day with : 2. A close lower than the previous days low. 3. If the very next day the new bar reverses and takes out the previous days high then buy.
+
+--- 帖子 #213 ---
+rules: Smash down day. 1. The market starts to rally, then we are looking for a day with : 2. A close lower than the previous days low. 3. If the very next day the new bar reverses and takes out the previous days high then buy. my variation of these rules is regarding point 3 : If the very next days new bar does not close on a new high or new low then disregard it &amp; go on to the next bar to see if it meets rule 3. In this example my variation to rule three applies. a rally started . then we have a close lower than the previous days/bars low. then the next new bar does not close on a new high or new low so disregard it. going on to the next bar yes the next bar meets rule 3 so we have a buy at 154.30
+
+--- 帖子 #214 ---
+Thanks for all that stuff Ian-its gonna take me a while to go through it. I'm trying to focus this week more on trading and less on developing. Made 50 pips last night on EJ long off trendstar recommendation. Right now I'm very cautious with taking further trendstar trades on EJ and GU. Looking at historical charts, both of these are in pretty powerful stopping places. Monster Muncher says they go down, trendstar says to buy. The thing about trendstar is you will always get one wrong trade as it transitions from blue to red or red to blue. But you may get an average of 4 winners before that wrong trade comes. Anyway, as per GU trade-check historical charts. Stopped under upper blue level with 30.9 ultimate fib confluence, and just generally overextended and looking toppish. Monster Muncher agrees, down. EJ stopped under green line on hisorical charts, 114.34. This level has turned bull around 3 or 4 times in the last couple of years. MM likes down too on this one. Keeping my profit targets modest 50 to 70 pips. -Good luck this week
+
+--- 帖子 #215 ---
+Here are some results of historical analysis since Jan 5, 2010, for the trendstar system on the EJpy H1. What I am looking at here is after Supertrend changes color, from Red to Blue or Blue to Red, how many trips to the 21 EMA and into profit it made before failing. Where you see the series of numbers, it means it failed on that number of trips. Where you see a 5, it means it failed on its 5th pullback to the 21 EMA. Overall the Bulls have better results than Bears. This is due to the way Bulls and Bears move. Bears tend to move faster and retrace less than Bulls. So they show more failures. Both Bulls and Bears show very good numbers for first pullback trades. If you only traded first pullback for both Bulls and Bears, its 88% winners. If you only traded first pullback for Bulls, its 93% winners. But always taking first pullback trades for either bulls or bears makes a lot of sense from a statistical point of view. --------------------------------------------- See corrected stats below
+
+--- 帖子 #216 ---
+Hi Steve thankyou for posting those percentages &amp; information. I am working on a M15 set up specifically. See how it goes. The Smash down/up days/bars as an entry requirement that really interesting. The most effective tested idea so far is the time when 150ema &amp; 200sma cross with 21ema &amp; 35sma crossing at the same time or very soon afterwards. There was a potential 500 pips last week with the MA crossings like this on GBPCHF M15. This idea comes from member MarcVUM who has kindly shared his full MA setup that He effectively utilizes as a professional full time trader. These 4 MA are just part of it. post #8575 , post #8576 http://www.forexfactory.com/showthre...30625&amp;page=572 Yes it is important to focus on trading now. I like creating as a hobby. happy pipping this week. Im bullish GBPCAD by the way.
+
+--- 帖子 #217 ---
+The MA have crossed on H4 on GBPCAD. This is the best template I have created so far. I have created it for M15 at present, but it has potential on H1 + H4. Keep up the great work Steve. Excellent high percentage of trades for first pull back on H1 EURJPY 93.8%. By the way Steve do you trade live with Interbank FX ? I am thinking of changing to them for my micro account.
+
+--- 帖子 #218 ---
+Hi Ian, yes I do trade with IBFX. They treat me fine-very good customer service. The platform works as it should just about all the time. I screwed up the percentages on the stats, with overall totals. They are better than I figured at first, since I was only considering losers versus winners instead of losers versus total trades. Corrected stats below. Good looking setup by the way. I like the ribbons. It seems like a lot of times the area of the upper ribbon finds the pullback zone spot on...
+
+--- 帖子 #219 ---
+Hi Steve, Thanks for posting your test results. I was wondering what you define as a winning trade did you look at 1:1 RR and use a stop under the last low/high ? or did you use a fixed stop.?
+
+--- 帖子 #220 ---
+Hi Ian, I used Supertrend S/R line as a stop. I counted it a failure when there was a close under/over the Supertrend line. I made sure every trade had at least 25 to 30 points potential profit. Most had more, some had a great deal more... Cheers
+
+--- 帖子 #100 ---
+Just checking in. Currently have GU short, and UJpy long. UJ hit my price target which I posted earlier in the week, around 83.45. This is a longish term trade, trendstar says go in off the Daily Chart, very good RR, getting in right over support. Gu is first pullback on trendstar on the hourly, has some good potential. We shall see.
+
+--- 帖子 #101 ---
+Hi Steve Thanks for posting the charts &amp; I appreciate you sharing your experience with InterbankFX as a broker. The "supertrend volty like" indi" gives exactly the same signals as the supertrend nrp indi I checked it on M1 for a while. Mladen the coder of supertrend nrp stated that it did not repaint. http://www.forex-tsd.com/indicators-...tml#post221993 I found a supertrend nrp new with alert &amp; email alert too. This divergence indi has demark trendlines coded into it. It looks awesome. GBPCAD H4 is pulling back to some significant points of confluence at weekly pivot 161.41 with 150ema, 200ema + 200sma + sma365.
+
+--- 帖子 #102 ---
+Thanks Ian, I'll check those out. I don't get GBPCAD for some reason. IBFX has about 30 pairs but thats not one of them. I cashed out last night on the GU trade +60, nice and easy. This GU trade might be good for a lot more sales. Will be watching it. The UJ trade is +6 right now. No idea if support will hold.. About Supertrend, He wrote the NRP does not repaint, but it does. People see "repaint" and its almost immediately like, oh thats no good. But if the support levels work and are meaningful, which they are, who cares if it repaints in a situation where there is no close upon penetration? You just have to know that it can change back if there isn't a close under the S/R line (ie don't get shaken out if penetration is only a few points). Maybe the volty-like really doesn't repaint-i'll check it out. How is your week going?
+
+--- 帖子 #103 ---
+I think its a buy now on M15
+
+--- 帖子 #104 ---
+Hi Steve my week was not quite as bad as this chart. lesson learned always check for the upcoming news on the pair traded before entering a position. I started Japanese lessons again this week until early December, so I did not have as much time for trading this week. I traded GBPCHF on Monday but that was a break even &amp; today I took a long on GBPCHF &amp; that did not go as planned either. I did try the USDJPY earlier today too, but I ended up exiting with a 5 pip loss as I was not happy with the price action after entering the trade.
+
+--- 帖子 #105 ---
+Hey Ian, That's cool. I meant to warn you about that tweezer on the GC. Plus that expanding pattern had already broken to the downside on the larger charts. But yeah I've been caught trading the GU during bad news announcements and experienced a 50 point drop in less than 2 seconds. Check fx360.com, they have really good summary of all important news coming out, and release times. I try to avoid trading during those times if the news is related to the pair I'm interested in. UJ was just a punt, it may still work out though. I got out of the position in decent shape. GJ had great results on trendstar this week. Wish I traded it . Good luck with your Japanese lessons.
+
+--- 帖子 #106 ---
+Shorting at top of Daily Channel. SHI is an important indy for finding Daily and H4 channels. Everyone should have one.
+
+--- 帖子 #107 ---
+I'm putting this thread to bed. It was fun while it lasted. I've developed my historical charts considerably, and will be starting a new thread soon to talk about that stuff, if anybody has an interest. Thanks.
+
+--- 帖子 #108 ---
+Why will the channel not show on a renko range bar chart? Indicator attached in case you need it - the setting is 5 if you need to know this too. Thanks George
+
+
+===== 附件下载链接 =====
+
+未找到附件

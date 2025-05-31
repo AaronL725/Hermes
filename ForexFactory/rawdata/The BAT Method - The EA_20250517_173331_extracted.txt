@@ -1,0 +1,567 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Please find attached my first version of the EA for the BAT Method . This is a canonical version. No, that has nothing to do with war. It means, that it observes the actual rules slaveishly, not offering anything to play with. It shall serve for back- and fronttesting. As you can see I publish it only in compiled form. Fear not, that I shall try to suddenly sell the canonical EA. The method used is intellectual property of TeamAlphid and I have a job which pays my bills already. My main reason for doing that, is that I had some annoying experiences (people messing up my code and publishing it, people selling my EA without my approval, people Complaining that my EA that someone else sold them without my approval does not bring the promised BIG BUCKS etc. etc.). Since there are not many features there is not much to explain. You can change the Lotsize and the Slippage. That is it.When you backtest and especially if you want to compare your results, with these discussed in the main thread , make sure that you have the Alpari data and 90% modelquality. I should mention, that the EA does not rely on the BAT Indicator. I have put it in a function, which imitates the indicator, to speed up backtesting (factor ~ 10) and lower the systemload when actually running the EA (fronttesting). There is one issue everyone, who wants to use this EA should know about. The banal expression "recent or significant low(high)" is laden with problems for a EA. The trained human eye is much more fit to find this low/high, then a robot. Now, being a fan of DeMark this should be done by fractals. After some backtesting I found the best is to look for the most recent 2nd level fractal (I tried 1st to 3rd level and the max out of 1-3 fractals, but the aforementioned seems the best). You might nevertheless sometimes disagree with the EA. Post 55 for BAT EA v1.3 10 Feb 07
+
+--- 帖子 #2 ---
+The canonical version is not all I wanted to accomplish: Again I find that using the BAT is one of the best entry signals I have found (maybe besides the Fozzy Method). Now the canonical maintenance and exits of the trades are not bad, but I think they can be improved. I have programmed a EA which lets you open up to 10 different trades with configurable Entries, Stops, TakeProfits and Exit Methods. All these are based on the standard, that means they are in a % relation to the open trade The Entries can be above (Stoporder) or below (Limitorder) the original market order. The BAT Stopline as single exit (no TakeProfits, Trailingstop) is as well foreseen. I experimented already a bit with a very early beta and I can tell you that this might exploit a nice potential. I am not yet ready to publish that EA . 1. It is still buggy 2. I fear a negative impact on the dynamic of the original thread, if we start he to already deviated of the canonical version before having fully exploited it.That would be a shame.
+
+--- 帖子 #3 ---
+fuki, thanks for the EA, I want to offer some suggestions: 1. Lots var, can you make it as double, I am using micro account demo 2. can you create object Fibo Ret Line with %$ as accrete mentioned, prefereably unique name, so we still can see the old fibo lines 3. Swing point, can we override with manual price or hard pips It has been my pleasure to follow the bat method and this EA, hope the best we can make it.
+
+--- 帖子 #4 ---
+hey fukinagashi , thank you so much. It's so great that this time I didn't have to do the work on my own - as I would have coded the EA, too. However, you started it and I am very grateful. Keep up the good work. I'll will forward test the EA, now...we'll see how it works BTW, why didn't you post the sources? Since I am a programer, too I really like to have the sources to see how it works or how you made it work. So please post the sources, too or send them to me by mail.
+
+--- 帖子 #5 ---
+wow..I just saw the results of forwardTesting BAT (Demo-MIGFX): it's 7-0 WOW! EURCHF was a full Monty trade - big money . USDCHF was a 2-trade and EURJPY, too. USDJPY is only one position, two are pending. The two floats are +58 and +34 pips! Thank's for coding this.
+
+--- 帖子 #6 ---
+That was a mistake to put Lots as Integer. I'll switch that to double (with comma) tonight. Sure, good idea! All lines or just some specific? Which ones preferably? I have not the slightest idea what you want to say there ... Maybe you can be a bit more explicit here? Thanks in advance!
+
+--- 帖子 #7 ---
+I will post tonight the actual manual for the future version (2.X) , showing it's features, which will be like a rfc (request for comments document). I hope to accomplish through this to minimze the need for changes or maximize the impact of your suggestions. The rfc-paper will be up until saturday evening and about monday you should find the version 2 with the suggested features here in this thread. Thank you in advance for your constructive cooperation!
+
+--- 帖子 #8 ---
+fukinagashi, Thanks for coding this EA! What is the logic for taking profit? Long cable trade was closed today at 1.9661 - don't know why. Thanks! Den
+
+--- 帖子 #9 ---
+fukinagashi Thanks for the EA, very much appreciated. I attached it to about a dozen pairs and its working on some but not on others. USDCHF and EURGBP opened orders but GBPUSD, GBPJPY and CHFJPY did not open orders. I attached the BAT ATR V1 indicator to the charts just to check how everything was working and I used the defaults suggested by Team Aphid, ATRPeriod 5 and Factor 4. According to my chart: GBPUSD crossed down thru the Bat at 1.9588 GBPJPY crossed down thru the Bat at 238.06 and CHFJPY crossed down thru the Bat at 96.85 What defaults are you using for the Bat indicator (embedded in the EA as a function)?
+
+--- 帖子 #10 ---
+We all agree about the great quality of the BAT ATR entry and some might feel like me, that it would be nice to increase the potential of this method, by choosing a different strategy to enter / maintain / exit the trades. To give you a maximum freedom (especially independent of you programming skills) I thought up the folloing system. The EA does offer up to 9 different trades, where the entires / stops / exits can be modified quite freely. To explain how this works, let me go back to the base of the actual system. Once one of the BAT ATR Line is broken, we find the next recent or significant low/high and draw a Fib Retracement with 0 % at the low/high and 100% at the break of the line. The trades of the official method are the following: Inserted Code [font=Courier New]Entry Exit Stop[/font] [font=Courier New]1 100 161.8 0[/font] [font=Courier New]2 61.8 100 0[/font] [font=Courier New]3 32.8 100 0[/font] Imagine now we could trade up to 9 different trades with varialble Entries and Exits Inserted Code [font=Courier New]Entry Exit Stop[/font] [font=Courier New]1 100 123.6 -100[/font] [font=Courier New]2 100 132.8 0[/font] [font=Courier New]3 100 161.8 23.6[/font] [font=Courier New]4 100 200 0 [/font] [font=Courier New]5 123.6 161.8 0[/font] [font=Courier New]6 61.8 123.6 0[/font] [font=Courier New]7 61.8 132.8 0[/font] ... etc. I think you get the point. Thats what Version 2.X will offer. You can put Entries, Stops and Exits in Percentage (even negative if you want). The system will take itself if it needs to mak a Market Order, a Stoporder or a Limitorder. Special Rules: Trade 1 must enter as Marketorder at the time of the breach of the BAT ATR line. Since you don't want to leave the pending orders open until eternity, they can be made depended on the Trade 1. The parameter Trade1WillClose influences the behaviour. It has 3 values: 0 - Do Nothing 1 - Close all pending orders (Default) 2 - Close all orders If you put the Exit to 0, the Trade will only be closed by the (Trailing) Stoploss. OK, why do I give you the draft of the "manual", but not the EA? So that you can comment on actual features and request eventual additional features. I will take all suggestions until saturday evening, evaluate them and implement the ones which make sense and are doable and publish the 2.X probably on monday. That is if my snowboarding that weekend does not have a too detrimental effect on my ability to programm (broken arms/hands, koma, etc.)
+
+--- 帖子 #11 ---
+yeah. thank you a lot! I am using the EA right now, and it's already quite profitable it's just a good system...
+
+--- 帖子 #12 ---
+Thanks for all the work putting together the EA Fuki. I'm really diving into this strategy and learning a lot from your feedback as well as all the others in the main thread.
+
+--- 帖子 #13 ---
+I'd like to express my appreciation for creating this EA and sharing it. My one request at the moment would be to have the option in V.2 for "move stop loss to breakeven after X number of pips". Thanks again.
+
+--- 帖子 #14 ---
+fukinagashi, Can the lot size be changed to .01 to trade it on a mini account? Thank you for sharing the EA.
+
+--- 帖子 #15 ---
+You can do that. The parameter "Lots" is double and allows all variables with or without comma. So 0.01 is no problem.
+
+--- 帖子 #16 ---
+When I try to change the lot size to .01 it won't let me use a decimal point and goes back to 1 when I click OK. One other question, ( thanks for your patience) will the EA kick in if the price passes by a Bat line or does price have to actually touch the line? For example this morning the EUR/USD didn't trade at 10:00 on the MT4 platform when the price passed by but didn't touch the line.Thanks again.
+
+--- 帖子 #17 ---
+Mine does the same thing as Toothman ie. when I try to change 1 to .1 or to .01 it goes back to 1 when I click ok. Thanks for any help on the lots change.
+
+--- 帖子 #18 ---
+I also would like to change the lots to 0.1 or 0.01, but it won't let me type in the dot...
+
+--- 帖子 #19 ---
+Could you add a [3% risk] money management to the EA and so that it only opens orders according to how much is in the account? I would like to only risk 3% at any time. Maybe you could have 2 versions ... one with it and one without? Thanks! Thank you so much ..... for making available this EA for us!
+
+--- 帖子 #20 ---
+Could you please tell me what defaults you are using for the Bat indicator. I have the EA running on 1 account and I am manually trading the Bat manually on another account. I'm finding that the trades on the 2 accounts are very different.
+
+--- 帖子 #21 ---
+I have this EA on my platform with smiley face and it isn't making trades. At least it's not trading on the EUR/USD and the GBP/USD this am. As I'm typing, trade has just kicked in on the USD/JPY. Don't know why it wouldn't be working on the other pairs.
+
+--- 帖子 #22 ---
+EA probably not taking trades where price doesn't actually touch Bat line. If price goes by(around) the line=no trade. Can EA be changed to include these trades? I'm pretty sure TeamAphid are taking these trades.Thank you
+
+--- 帖子 #23 ---
+Another good EA, I can hardly wait to test V2.
+
+--- 帖子 #24 ---
+is it just me, or i cant see the EA makign any SEll orders either
+
+--- 帖子 #25 ---
+http://i19.tinypic.com/2evdcwm.jpg look @ that sell that it missed out on. i hope this is fixed in v2
+
+--- 帖子 #26 ---
+There have been concerns with missed entries of v1. I take them serious, and thus - unfortunatly - cannot publish the v2 before the basic problems in v1 are fixed. Have some patience and bear with me. At the same time thanks for pointing these problems out to me. I try to go through that as systematic as possible. The parameters: 5 and 4 as forseen in the original method. The entry method: The formula for a long is: "Ask&gt;=Upper &amp;&amp; High[1]&lt;=Upper" (where Upper is the actual position of the BAT ATR line) The formula for a short is: "Bid&lt;=Lower &amp;&amp; Low[1]&gt;=Lower" (where Lower is the actual position of the BAT ATR line) To explain the meaning of the formula on the example of a long entry. The EA calculates first the position of the BAT ATR line and checks if the actual Ask is greater then or equal to the BAT ATR line and at the same time the High of the previous candle is smaller then or equal to the BAT ATR line. In my humble opinion I should get all prices touching or passing the line and it should be therefore conform with the method. But please feel free to comment. So why don't we get (seemingly) all trades? Possibility 1: The systems tries to trade, but it cannot (wrong trade parameters etc.) =&gt; This means: If you see that a trade was not taken please check the expert and the journal tab and post eventual error messages. Possibility 2: My function which replaces the actual external Indicator makes mistakes. I backtested the two functions tickwise against each other and compared (automatically) the results; all was ok. It would astonish me, if it would calculate wrong, but it is still possible. To give you independence of that issue, you will have in future versions of the EA a parameter ( Use_BATATR_Indicator ) which allows you to switch between my function and the original Indicator. OPEN ISSUES: The Fibo retracement gets sometimes redrawn after the signal takes place. This has no impact on the actual trades, but it looks ugly. I will try to fix that soon too.
+
+--- 帖子 #27 ---
+As promised the version 1.1. The major change. Introduction of the variable Use_BATATR_Indicator . If you put it to true, it will use the original external BAT ATR Indicator. Besides that you have the values UseAlert and UseMail , which allow you to switch Alerts and Mails according to signals on and off. The parameters debug does not have any function yet. The variable Lots is double (now?!?!). Please check, it should now allow 0.01 Lot etc. Moneymanagement will be introduced in the next mini release.
+
+--- 帖子 #28 ---
+thanks a lot. I still get very promising results testing your EA on a demo account? What about you guys?
+
+--- 帖子 #29 ---
+Thanks for sharing the EA. I have tried backtesting this on 1hr GBPUSD through 2006 to compare to the results in the main thread. However, I am getting a neutral result / small loss. I have used Alpari 1m data converted to 5m,15m, &amp; 1hr, every tick to get 90% modelling quality. I get 50% profitable trades, but the average loss is slightly bigger than the average gain. Any idea what I'm doing wrong?
+
+--- 帖子 #30 ---
+Again an update. That is actually quite important. I found the real reason why the EA didn't take all trades. It is actually quite obvious once you are aware of it. So again thanks to the testers mentioning that. As a little recompensation the v1.2 has a few nice new features: We start with Moneymanagement (RiskPercent) . This value can receive any value between 0 and 100 and will take care of your Moneymanagement. If it is 0, it will use the value which is in the variable Lot . If it is for example 3 it will risk 3% of you equity per trade etc. Please be aware that you broker might have the free choice of Lots restricted. A little warning: The Function I use here is clever. If the minimum Lotsize you could open, is 1 Lot, it will open 1 Lot, even if you have only an account equity of 1000 $ and a RiskPercent of 3. It all depends on MinLot, MaxLot and LotStep. If you are not sure about these run this script: http://codebase.mql4.com/972 . The function should as well able to deal with Mini, Micro and other ForexAccounts if you Broker sends the right MarketInfos to your instance of MT. The Parameter MultipleFibos will influence if the system keeps only one Fibo (the actual) with MultipleFibos =false or if you want to leave all Fibos once drawn on the charts MultipleFibos =true. This feature is only optical and has no influence on the trading. The parameter debug is now very chatative. Leave it off until you really need it (= I ask you for it) After I have found now the real reason for the bug, I personally will run my EA with Use_BATATR_Indicator =false which means that the system will use again my optimized function in place of the external indicator. The results should/must/will be the same. ATRPeriod and Factor are the same parameters as used in the original method. They can be changed, but I only made them external so everyone can really be sure that I use these very, original values. Trade1VolumeFactor , Trade2VolumeFactor and Trade3VolumeFactor are the factors for the lotsize you use for trades 1 (Entry 100%), 2 (61.8%) and 3 (38.2%). The very original method foresaw to enter with 1 Lot, then to enter a retrace to 61.8% with 1 Lot and then a retrace to 38.2% with 2 Lots. Here you have the chance to parameterize that. It would be kind if you guys would check this version again and come back with me, if you think the EA does not react as it should (canonical ).
+
+--- 帖子 #31 ---
+Fukinagashi, I think the reason that the results are different is that your EA has a TP at 161% on the first trade. I believe TeamAphid have no TP, they just trail the stop at the BAT line.
+
+--- 帖子 #32 ---
+Nice work fuckinagashi, it is getting the SElls right now
+
+--- 帖子 #33 ---
+yes, if price hits the 161% and than should retrace back to an entry fib level, no further position should be taken. No TP at 161%. (Based on TA guideline) However, on manual backtesting I found it profitable more consistantly if I don't care about the 61.8% and 32.8% retracement entries, but focus my whole position on the break of the bat line and take partial profit on this 161% fib extension, and then trail the stop at BAT line. There several possibilities of stop losses and profit taking, I experimented with a second tp level, but these are just minor adjustments. It would be awesome if this Indicator could be set to define stop losses and TP levels, as a non programmer I don't know how difficult this would be. But for backtesting different strategies it would be of much help. I've been manually backtesting so much and it is so tedious, just to backtest a slightly different idea I have to do it all again.... a modifyable EA would be great... Thanks Fukinagashi for this cool EA
+
+--- 帖子 #34 ---
+Ahhhhhhhhhhhhhhhhhhhhh! A fine canonical EA programmer am I . I completly misunderstood that part. And I had constantly that in my had, that it is a shame to finish trade 1 at 161.8% TP . Ok, I propose you guys cease the testing of the V1.2. For some technical reasons, this is a bit more then just removing the TP. So stay tune for the V1.3. I am quite happy though. All this corrections done before the V2.0 will greatly improve the overall quality of the EA for this great method. So again, thank you for you positive input!
+
+--- 帖子 #35 ---
+I know and I do agree ... in a trending market. In a ranging market you should rather fade the retracements. Since you cannot really foresee what the market means to do tomorrow, the team alphid does the right thing by entering at certain levels of retracement. And that is what the whole version 2 is about. I am not sure if I made that clear. The break of the BAT ATR line will remain the backbone of the EA, but how to trade that, that I will leave up to you. If you want to open 9 trades at 100% (the break of the line) and close them all at different TP levels =&gt; fine. You want to trace any imaginable level of retracement =&gt; fine. I even consider allowing a future version (V3?) to trade against the signal if wanted. We'll see how things work out, but by all means I need your support. Oh, you are welcome!
+
+--- 帖子 #36 ---
+Just a question, I have had v1 and v1.1 running now for the week and it has not opened any positions. I have it on a 1hr tf chart, the little simily is working any idea's. Glenn
+
+--- 帖子 #37 ---
+Hi Glenn, 1. Any error messages in expert / journal tab? 2. Does the system run 24/24? 3. Please try further tests at least with the v1.2. It does probably not yet exploit the full potential (see my post above), but it will trade when it is supposed to.
+
+--- 帖子 #38 ---
+I have similar issue with another EA but not this one. What I had to do is keep the source in the same directory as the executable.
+
+--- 帖子 #39 ---
+Hi fukinagashi and everybody, Have a look at the EUR/AUD trade which triggered today February 6th at 22:30 gmt. The EA bought at 1.6723, see green arrow... price didn't move up there, if the spread widened it would have been a 30 pip spread. IBFX said it's unlikely that the spread widened this much, even though exactly at 22:30 gmt there was the AUD interest statement. As price on the charts didn't show any sign of volatility I don't think the entry was due to spread widening either. Did this happen to anybody else too, or similar things before? Maybe it was a bad tick, I mean even if there's a bug in the EA the broker wouldn't be able to fill the requested price... does anybody have an idea what happened here? ps. just demo, no drama, but I wouldn't like it to happen on the live account
+
+--- 帖子 #40 ---
+fukinagashi, now the EA bought another lot at the entry level, the middle red arrow... Just thought you might be interested for your new version 1.3 in case there is still some bug lurking in a corner.... I'm looking forward to 1.3 ...
+
+--- 帖子 #41 ---
+fukinagashi Thankyou for the reply, Yes its on 24/24 and the message in the journel tab 2007.02.07 13:24:44 Expert BAT EA V 1.1 GBPUSD,H1: loaded successfully. I will leave it running and see if it opens any trade's over the rest of the week. Glenn
+
+--- 帖子 #42 ---
+I dont know why, but I have just loaded it on to another platform and I have under the expert tab two different readings... Maybe my problem... North Finance: 2007.02.07 13:34:41 BAT EA V 1.1 GBPUSD,H1 inputs: Lots=1; Slipage=3; debug=false; Use_BATATR_Indicator=true; UseAlert=false; UseMail=true; Stragetybuilder: 2007.02.07 13:41:48 Cannot open file 'C:\Program Files\StrategyBuilderFX 4\experts\indicators\BAT ATR v1.ex4' on the GBPUSD,H1 ... So I will let it run and see what happens...
+
+--- 帖子 #43 ---
+The ea running on NF platform is now opening positions, so for some reason it will not work on stragetybuilderFX.... I wonder if there are any other MT4 platforms it will not work on...
+
+--- 帖子 #44 ---
+You don't have the indicator BAT ATR v1 (see the original thread).
+
+--- 帖子 #45 ---
+I see, just woken up (lol) I need the indicator loaded for the ea to work... Thanks for your help...
+
+--- 帖子 #46 ---
+EA is not working for me either .... stragetybuilderFX .... would there be a reason it is not working with stragetybuilderFX ..... I have the one Bat indicator on the Chart.
+
+--- 帖子 #47 ---
+Shortened to save space: fuginagasi - is this version &lt;&gt; BAT EA V 1.2.zip ...... the latest version ..... and the one I should be using, or do you update the latest to page one, post one? Let me ask then do I need to have the Bat indicator on the Chart and do I have to have this on the 1hr Chart? This is the Zip I put in experts and so far no orders. Thanks anyone and all!
+
+--- 帖子 #48 ---
+I got this error. 2007.02.08 03:57:18 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:last error: 129:invalid price 2007.02.08 03:57:18 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:failed trade: OP_BUY USDCHFm@1.24240000 tp@1.24530000 sl@1.23670000 2007.02.08 03:57:18 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:failed to execute OP_BUY/OP_SELL, after 11 retries 2007.02.08 03:57:18 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retry attempts maxed at 10 2007.02.08 03:57:18 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:non-retryable error: 129:invalid price 2007.02.08 03:43:32 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (10/10): 129:invalid price 2007.02.08 03:38:32 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (9/10): 129:invalid price 2007.02.08 03:38:20 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (8/10): 129:invalid price 2007.02.08 03:32:41 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (7/10): 129:invalid price 2007.02.08 03:31:35 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (6/10): 129:invalid price 2007.02.08 03:25:56 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (5/10): 129:invalid price 2007.02.08 03:22:07 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (4/10): 129:invalid price 2007.02.08 03:22:00 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (3/10): 129:invalid price 2007.02.08 03:18:48 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (2/10): 129:invalid price 2007.02.08 03:16:40 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3:retryable error (1/10): 129:invalid price 2007.02.08 03:16:30 stdlib USDCHFm,H1: loaded successfully 2007.02.08 03:16:13 BAT EA V 1.2 USDCHFm,H1: OrderSendReliable V0_2_3: attempted OP_BUY 0.10000000 lots @1.24240000 sl:1.23670000 tp:1.24530460
+
+--- 帖子 #49 ---
+EA buy at 1.2446,indicator at 1.2425.
+
+--- 帖子 #50 ---
+Not working means what in detail? Do you get error messages? Not as to my knowledge. For the time being it is the latest version. I wish I could update the first post to put all actual information in there, but it seems this message board forbide to edit postings after few hours. Thus you must check the thread for the newest version. Sorry. No, you only need to have the indicator in the regarding instance of Metatrader (..\experts\idicators\). Nevertheless it helps you to understand what is going on if you have the indicator on the chart. You can have it on any timeframe, but if you want to let it run according to the classical rules you need to have it on the H1 chart. Did you have between the start of the EA and the moment you posted that any signal for orders according to the indicator?
+
+--- 帖子 #51 ---
+Actually the fact that the EA didn't buy any close to the indicatedt price is explained by the error messages. "129:invalid price" basically means the EA tried to make a buy at 1.2424 when the price was not anywhere near. Since I use simply the actual Ask (Bid) price here, the price must have jumped considerably there ... . The EA still tries to open the order, but will eventually "get late" (1.2446) This can happen depending on daytime of a trade, quality of broker connection and price movement speed. You fix that by increasing the slipage in the parameters of the EA. If even after am increase of the slipage you have this problem let me please know!
+
+--- 帖子 #52 ---
+hi, thanks for your hard work at BAT EA, fukinagashi ! When backtesting your EA how are the results compared to those TA posted? IIRC you use a different approach to find the "recent low/high" since you can't use the human eye.
+
+--- 帖子 #53 ---
+demo trading for the week results useing batv1.1. pips 111+ pips 136- a lost for the week of 25 pips. traded the four major plus GBPJPY.
+
+--- 帖子 #54 ---
+Yes, their trades are my refrences. You obviously don't get their trades to the minute and on the last pip, but over all does my EA prove their manual backtest and their backtest proves my EA. The actual algorhythm seems to find the right spot either very well or it misses it only hardly. I am quite happy. I find that not the exit is important (thanks to the TS via BAT ATR), but rather the entry/ies. You must be "on the ball" to enter in time. Many setups go right away where they belong, so if you miss 1/2 hour, you are out of the profitable.
+
+--- 帖子 #55 ---
+I am now going for one week snowboarding close to "Porte de soleil" in the Haute Savoir in France. Thus you will not here of me for AT LEAST that time. So I better publish the actual productive version (1.3). MUCH closer to the rules. There is a 1.4 in testing and it so imitates TA that it is scary, but it is not ready for publishing yet. Big KUDOS to TeamAlphid for this great system!!!
+
+--- 帖子 #56 ---
+Fukinagashi, first enjoy your vacation. I just 'discovered' this BAT system and while I like it a lot I realized I will not be able to trade it, since you need to wait on the signal, what is not perfect combination if you have a job. But your EA changes this. So thank you very much for your EA for sharing your work! Mario
+
+--- 帖子 #57 ---
+Have a great time snowboarding and thanks for all your hard work on this EA. Much appreciated!
+
+--- 帖子 #58 ---
+fukinagashi I have version 3 on my charts and am looking forward to seeing how it does. Will this version take trades that don't actually touch the Bat line but pass by it? For example, when price comes near the line without touching it during the present hour candle and then on the next hour candle price goes past the line. I'm pretty sure TeamAlphid is taking these trades. Thanks much.
+
+--- 帖子 #59 ---
+Quote: Originally Posted by mason http://www.forexfactory.com/images/buttons/viewpost.gif 3. Swing point, can we override with manual price or hard pips I have not the slightest idea what you want to say there ... Maybe you can be a bit more explicit here? Thanks in advance! Attached Image Sorry for late reply, If you look at at swing point between the EA (black arrow) and manual choosing (red arrow), there is quite a difference. I don't know how we implement this into the EA, but perhaps we get additional parameter that define manually the swing point. also, can we get another option of placing order after break of the bar that touch BAT line, like the above chart, if we enable this feature, there will be no order, since the next bar after "touching bar" cannot break the high of "touching bar". This could be usefule to avoid spike. I don't want to complicate things, but I saw this idea before.
+
+--- 帖子 #60 ---
+Version 1.3 EA apparently not making trades when price passes by Bat line without touching it. See EUR/USD 1hr. chart on 2/12/07 when price passed line at 1.2998. How can the EA be changed to include these trades?
+
+--- 帖子 #61 ---
+can you please give MAGIC for Orders ? i will make orders analyse i have more EA run thanks
+
+--- 帖子 #62 ---
+I can see Magic id for v1.3 = 666666, while for v1.2 = 666, just move your cursor to open trade window, and tooltip will appear saying the magic id and order description.
+
+--- 帖子 #63 ---
+Attached Image I have one more example about swing point, I can see you use fractal to determine the swing high. Black arrow = EA swing point Red arrow = Manual swing point
+
+--- 帖子 #64 ---
+Trialling V1.3 I see that pending orders at 61.8 &amp; 38.2 fibs are cancelled when price passes 61.8% ... Shouldn't that be 161.8%? Else we're missing the 2 &amp; 3 trades! Or have I gotten it wrong?
+
+--- 帖子 #65 ---
+Did anyone using version 1.3 get a trade on the EUR/USD at 1.2983 (2:00 EST 2/13/07? My EA didn't trade here when price crossed the Bat line. The GBP/USD should have traded at about the same time and didn't. The USD/CHF should have traded an hour earlier and didn't. Anyone else with same results? Thanks.
+
+--- 帖子 #66 ---
+Thanks
+
+--- 帖子 #67 ---
+BAT EA V 1.3 EURUSD,H1: attempted OP_BUYLIMIT 0.01000000 lots @1.29795740 sl:1.29430000 tp:1.29960000 BAT EA V 1.3 EURUSD,H1: open #2663111 buy limit 0.01 EURUSD at 1.2980 sl: 1.2943 tp: 1.2996 ok BAT EA V 1.3 EURUSD,H1: attempted OP_BUYLIMIT 0.02000000 lots @1.29694260 sl:1.29430000 tp:1.29960000 BAT EA V 1.3 EURUSD,H1: open #2663112 buy limit 0.02 EURUSD at 1.2969 sl: 1.2943 tp: 1.2996 ok BAT EA V 1.3 EURUSD,H1: Price passed 61.8%, closing LimitOrder 2663112 BAT EA V 1.3 EURUSD,H1: delete #2663112 buy limit 0.02 EURUSD at 1.2969 sl: 1.2943 tp: 1.2996 ok BAT EA V 1.3 EURUSD,H1: Price passed 61.8%, closing LimitOrder 2663111 BAT EA V 1.3 EURUSD,H1: delete #2663111 buy limit 0.01 EURUSD at 1.2980 sl: 1.2943 tp: 1.2996 ok I check my expert log, it says something about deleting after passing 61.8%, but I was not around, I guess we should get latest rules about this EA to confirm that.
+
+--- 帖子 #68 ---
+BAT EA V 1.3 EURUSD,H1: retryable error (10/10): 129:invalid price BAT EA V 1.3 EURUSD,H1: non-retryable error: 129:invalid price BAT EA V 1.3 EURUSD,H1: retry attempts maxed at 10 BAT EA V 1.3 EURUSD,H1: failed to execute OP_BUY/OP_SELL, after 11 retries BAT EA V 1.3 EURUSD,H1: failed trade: OP_BUY EURUSD@1.29960000 tp@0.00000000 sl@1.29430000 BAT EA V 1.3 EURUSD,H1: last error: 129:invalid price Look for "invalid price" in expert log, fuki once told to increase slippage to overcome this, so I will use 10 instead of 3. my usd/chf make it, but gbp/usd didn't.
+
+--- 帖子 #69 ---
+Page 8 from PDF file "The BAT by TA" ... Once price hits the 161.8 level then this type of trade can no longer be valid. ... Attached Image First, both sell limits didn't cancelled out, according to the description about The BAT range trade, those sell limits orders were no longer valid Second, SL for trade #1 is below the BAT line, while it should be the same as BAT line. Third, Fibo ret line didn't show up EA Setting : MultipleFibos = true Use_BATATR_Indicator = false I find slippage=10 makes easier for EA to trade, I run the v1.2 EA with slippage=3 with 2 fail trades, while v1.3 (like the above chart) run with all successful trades.
+
+--- 帖子 #70 ---
+Current Trades : eventhough I draw myself the fibo lines. Attached Image Attached Image Attached Image Previous trades also resulting positive pips, we're getting it slowly.
+
+--- 帖子 #71 ---
+Hi Fuki, I believe you were able to enjoy snowboarding this week and you are back in good shape and in one piece! I am already one of your "bag-it" followers in a demo acc. and I appreciate very much your EA's results so far! I also decided to demo the BAT EA 1.3 which you recently released , but this is a peculiar situation as I cannot be sure if the EA is working correctly. Please check the attached entries and judge by your self. Hope you can soon find what was going wrong. regards Sotos
+
+--- 帖子 #72 ---
+It will be nicer if you tell us your settings, and compare it to your manual trade with BAT system. If you do then you can be more specific to what you're requesting.
+
+--- 帖子 #73 ---
+Hi Mason I do not follow up manually the BAT EA and my settings are: Slipage: 5 Use Bat ATR indicator: True ATR period: 5 Factor: 4 I believe above settings have nothing to do with EA's opening of a sort position at 1.1621, while the "Long" BAT line was at 1.1660, and there was no "Sort" Bat line in the Horizon. That is what I was asking Fuki about it. regards Sotos
+
+--- 帖子 #74 ---
+Attached Image I pull up a chart, it looks different from yours. Setting is also 5 &amp; 4 Red arrow is I think where your EA took trades, I can't find any reason why it does that. You're right the EA needs some adjustment. Since I don't run EA on USDCAD, may I suggest you to use another datafeed, since the nature of the BAT indicator is to determine the direction from the first early bar. Does it happen too in other pairs ?
+
+--- 帖子 #75 ---
+Thanks for posting your chart, as this helped me to see that all my charts, although they were originally adjusted to 5 &amp; 4, after a couple of weeks were disorganized, and consequently, relevant BAT lines have been wrongly placed. Now everything is correctly placed, however I am not so sure that it will not happen again, so I will check the BAT lines indicator every day to see whether it is functioning correctly or not. cheers Sotos
+
+--- 帖子 #76 ---
+I'm starting a north finance demo with 10K, 500:1, 1hr chatrs, 24 Hrs a day, and will post results on v1.3. BTW I will run on all major pairs, but is there a consensus on what pairs are best?
+
+--- 帖子 #77 ---
+Toothman, there is no "price passing without touching it". The algorhythm checks for equal or greater/smaller. So your problem must be something else. Did you check expert and journal tab. You can do that still now if you look into the folders ..\logs and ..\expert\logs\ and open the file of the regarding date.
+
+--- 帖子 #78 ---
+Aye that is a good counter example. The Manual swing Point is obviously no 2nd level fractal at the moment where the trade was taken. In this specific case though I am rather happy with my method. A opposite extreme which is less then 2 candles away from the entry cannot be valid IMHO.
+
+--- 帖子 #79 ---
+fuki, Glad you're back, we're eagerly waiting for your next EA. Suggestions are already lined up, are there any features you want us to know first before building it into production. I did a little experiment with original BAT indicator, you can see at original thread.
+
+--- 帖子 #80 ---
+Hello fukinagashi, nice to have you back. First of all, great job of writing this EA for the BAT Method. I have been testing it and there seems a few problems. The EA doesn't place new orders once tp has reached for both the 38.2 and 61.8 fib levels. And there is no way to change the settings for testing. Is this because of the ex4 file? (instead of the usual mq4 file) I can't remember why you did this, but it would be great if you could post a mq4 file so we could change the settings for testing etc. Keep up the good work and profitable trading!
+
+--- 帖子 #81 ---
+The EA place a GBPUSD sell order but don't have stoploss,it is right? 2007.02.21 17:33:27 BAT EA V 1.3 GBPUSD,H1: modify #6892053 sell 0.10 GBPUSD at 1.9518 sl: 0.0000 tp: 0.0000 ok 2007.02.21 17:33:23 BAT EA V 1.3 GBPUSD,H1: open #6892070 sell limit 0.20 GBPUSD at 1.9548 sl: 1.9576 tp: 1.9518 ok 2007.02.21 17:33:23 BAT EA V 1.3 GBPUSD,H1: attempted OP_SELLLIMIT 0.20000000 lots @1.95476640 sl:1.95760000 tp:1.95180000 2007.02.21 17:33:23 BAT EA V 1.3 GBPUSD,H1: open #6892059 sell limit 0.10 GBPUSD at 1.9536 sl: 1.9576 tp: 1.9518 ok 2007.02.21 17:33:20 BAT EA V 1.3 GBPUSD,H1: attempted OP_SELLLIMIT 0.10000000 lots @1.95363360 sl:1.95760000 tp:1.95180000 2007.02.21 17:33:20 BAT EA V 1.3 GBPUSD,H1: open #6892053 sell 0.10 GBPUSD at 1.9518 sl: 1.9576 ok 2007.02.21 17:33:16 BAT EA V 1.3 GBPUSD,H1: attempted OP_SELL 0.10000000 lots @1.95180000 sl:1.95760000 tp:0.00000000 2007.02.21 17:33:16 BAT EA V 1.3 GBPUSD,H1: BAT ATR: SHORT GBPUSD@1.95180000 SL:1.95660000
+
+--- 帖子 #82 ---
+Fukinagashi, In the main thread there has been discussion about adding the spread to the buy orders to avoid being triggered too early. Today, GBPJPY BAT line at 236.85 was triggered when high (bid) was 236.80. Can the EA be updated to do this? Also, I have noticed that pending orders are left in the market even when they are outside the BAT line. There is a danger these could be triggered by a spike. I think it would be better to delete orders (if appropriate) when the BAT lines are adjusted. Thanks
+
+--- 帖子 #83 ---
+Fukinagashi, I noticed today that the EA v1.3 did not cancel pending orders (at 62% &amp; 38% retrace) when price passed the 161% extension (GBPUSD chart 28/2). Although it is quite a simple strategy, I suspect it is very tricky to program it. " See chart 3…it shows that price just continues to go north. Once price hits the 161.8 level then you can cancel your pending orders. "
+
+--- 帖子 #84 ---
+hi, next week I am going live with BAT EA (GBPUSD, EURAUD, GBPJPY). Is anyone else live with BAT-EA already?
+
+--- 帖子 #85 ---
+be careful, gbpjpy is not good with bat strategy. try usd jpy or cadjpy for very good trades
+
+--- 帖子 #86 ---
+well...don perry, why is Team Aphid trading GBPJPY with BAT then?
+
+--- 帖子 #87 ---
+hi fukinagashi, today I realized that some positions don't have a S/L. How can that be? In my account about one third of the positions are without S/L. BTW, it's crazy....more than 1400 pips on one GBPJPY position which is without S/L too .
+
+--- 帖子 #88 ---
+Grrrrrr, I just wrote a lengthy explanation about, why I am so rarely present, which bugs were fixed and everything and then decides my Internet Explorer to forget the POST submission . Ok, since I have not much time. Here is the Version 1.5 (expiry 01.05.2007) which should address most of the recent issues (bugs). Please test it. If it does now what it is supposed to do (reference the original BAT document), we can move on to the next generation, where we will distance ourselves from the canon and develop our own trading tactics within the BAT method. Give me your feedback, please
+
+--- 帖子 #89 ---
+dude, this is SOO GREAT! I thought you wouldn't be available for any further development Please have a look @ your PMs, fukinagashi.
+
+--- 帖子 #90 ---
+You're a legend! Just loaded for some forward testing on GBPUSD
+
+--- 帖子 #91 ---
+That's because jpy was trending. Bat is great for trending market, but when the market is ranging, then you have a problem. gbpusd can be very profitable when you narrow the ATRPeriod and Factor. There will be more lossing trades than profitables ones, but when you catch a profitable trade, it's going to be a huge profit! I had problems with EA v.1, so I quit after a few days of testing. Looking forward to test 1.5
+
+--- 帖子 #92 ---
+Hi humax, not trying to counter you, but the great thing about BAT is actually that it is supposed to do well in a trending and ranging market. Check the canonical rules: Trending: Enter 1 trade and stay on it until we hit TS Ranging: Enter 2-3 trades and even if first trade never gets out of the water the trades 2 and 3 are going to gain the pips. Obviously no system can only win. Especially with a fronttest you must be really patient before judging the results!!!
+
+--- 帖子 #93 ---
+BAT EA V1.5 only open trade2 and trade3,didn't open trade1. I changed ATR factor to 4.4,but the EA still open trade according to 4.0. 2007.03.08 13:07:47 BAT EA V 1.5 GBPJPYm,H1: BAT ATR: LONG GBPJPYm@225.62000000 SL:222.82000000 2007.03.08 13:06:39 BAT EA V 1.5 GBPJPYm,H1: BAT ATR: LONG GBPJPYm@225.65000000 SL:222.82000000 2007.03.08 13:06:33 BAT EA V 1.5 GBPJPYm,H1: BAT ATR: LONG GBPJPYm@225.63000000 SL:222.82000000 2007.03.08 13:06:33 BAT EA V 1.5 GBPJPYm,H1: open #26984461 buy limit 0.20 GBPJPYm at 223.8900 sl: 222.7200 tp: 225.6200 ok 2007.03.08 13:06:32 BAT EA V 1.5 GBPJPYm,H1: attempted OP_BUYLIMIT 0.20000000 lots @223.88960000 sl:222.72000000 tp:225.62000000 2007.03.08 13:06:32 BAT EA V 1.5 GBPJPYm,H1: open #26984451 buy limit 0.10 GBPJPYm at 224.5500 sl: 222.7200 tp: 225.6200 ok 2007.03.08 13:06:30 BAT EA V 1.5 GBPJPYm,H1: attempted OP_BUYLIMIT 0.10000000 lots @224.55040000 sl:222.72000000 tp:225.62000000 2007.03.08 13:06:18 BAT EA V 1.5 GBPJPYm,H1: BAT ATR: LONG GBPJPYm@225.62000000 SL:222.82000000 2007.03.08 13:06:12 BAT EA V 1.5 GBPJPYm,H1: BAT ATR: LONG GBPJPYm@225.66000000 SL:222.82000000 2007.03.08 13:06:12 BAT EA V 1.5 GBPJPYm,H1: close #26813977 sell 0.20 GBPJPYm at 225.3000 sl: 226.3100 tp: 223.8400 at price 225.6600 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: attempted close of #26813977 price:225.66000000 lots:0.20000000 slippage:5 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: last error: 130:invalid stops 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: failed modification: 26813977 @225.30000000 tp@223.84000000 sl@225.60000000 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: failed to execute modify after 0 retries 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: non-retryable error: 130:invalid stops 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: attempted modify of #26813977 price:225.30000000 sl:225.60000000 tp:223.84000000 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: Change Order: 26813977 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: last error: 130:invalid stops 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: failed modification: 26813977 @225.30000000 tp@223.84000000 sl@225.60000000 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: failed to execute modify after 1 retries 2007.03.08 13:06:09 BAT EA V 1.5 GBPJPYm,H1: non-retryable error: 130:invalid stops 2007.03.08 13:03:54 BAT EA V 1.5 GBPJPYm,H1: retryable error (1/10): 128:trade timeout 2007.03.08 13:03:54 stdlib GBPJPYm,H1: loaded successfully 2007.03.08 13:02:33 BAT EA V 1.5 GBPJPYm,H1: attempted modify of #26813977 price:225.30000000 sl:225.60000000 tp:223.84000000 2007.03.08 13:02:33 BAT EA V 1.5 GBPJPYm,H1: Change Order: 26813977 2007.03.07 23:00:05 BAT EA V 1.5 GBPJPYm,H1: modify #26813834 sell 0.10 GBPJPYm at 223.8400 sl: 225.6000 tp: 0.0000 ok 2007.03.07 23:00:04 BAT EA V 1.5 GBPJPYm,H1: attempted modify of #26813834 price:223.84000000 sl:225.60000000 tp:0.00000000 2007.03.07 23:00:04 BAT EA V 1.5 GBPJPYm,H1: Change Order: 26813834 2007.03.07 23:00:04 BAT EA V 1.5 GBPJPYm,H1: modify #26813949 sell 0.10 GBPJPYm at 224.7500 sl: 225.6000 tp: 223.8400 ok 2007.03.07 23:00:01 BAT EA V 1.5 GBPJPYm,H1: attempted modify of #26813949 price:224.75000000 sl:225.60000000 tp:223.84000000 2007.03.07 23:00:01 BAT EA V 1.5 GBPJPYm,H1: Change Order: 26813949 2007.03.07 21:00:05 BAT EA V 1.5 GBPJPYm,H1: modify #26813834 sell 0.10 GBPJPYm at 223.8400 sl: 225.6300 tp: 0.0000 ok
+
+--- 帖子 #94 ---
+Happened to me too. I fixed that already a few hours ago, but needed to test the new version before I would publish it. Thank you nonetheless for noticing and documenting that! The bug was caused by a racing conditiion with the timeout variable. It seems fixed now. (Since the expiry is now visible in the comment a quick reminder: Why the expiry? I want to know if the community activly uses the EA and I want people to use the newest possible versions. The expiry will be extended timely as long as there is sufficient interest of the communtiy. Please trust me in this: If I base an EA on someone else's method, then I am honorable enough to not make money on that.)
+
+--- 帖子 #95 ---
+Fixed
+
+--- 帖子 #96 ---
+alright, fukinagashi, thank you very much for your efforts. And also thanks for your explanation on the expiry, I was wondering, too. BTW, are you trading your EA? with trading, I mean live. From now on I can support you and the community by sharing my live trading results. My broker is MIG, traded pairs are GBPJPY, GBPUSD, EURAUD as TA's recommendation. I am really curious if this EA work live as good as on demo.
+
+--- 帖子 #97 ---
+thanks fukinagashi for v1.5, now it even runs on my mini account!
+
+--- 帖子 #98 ---
+I started trading it about 2+ weeks ago. For the time being only GBPJPY and 0.1 lots as standard lot. I am about 1 TUSD in positive but it is unfortunatly no real BAT trade. : My broker needed to freeze the accounts because the have an audit from the swiss banking commission. (Yeah that sounds fishy, but I trust them). So basically the trade was entered short just before the big fall of 1000+ pips. I could advise them to close the position a few days ago, but that was obviosuly not really a BAT trade, you see. This could have been as well in the wrong direction. But otherwise I trust this method with real money (small amounts nevertheless :-) )
+
+--- 帖子 #99 ---
+I as well run a forward demo test. Please do not mix that up with my real results. I tream of having gained 13 TUSD with that method as much as I dream of having 100 TUSD which I could put down to trade . Anyway, the test is real and looks very nice. If you look exactly you find a little pollution arround the 1st of march where I lost some few hundred $ to a oscillation bug. Trust me that bug was fixed less then half an hour later. Still nice the results, eh?
+
+--- 帖子 #100 ---
+hi, Do I need to attach the BAT indicator to the chart for the EA to work? If so where can I download the latest BAT indicator? Thanks a lot, Kingmaker
+
+--- 帖子 #101 ---
+Open Time Type Lots Item Price S / L T / P Close Time Price Profit 2007.02.13 09:09 buy 1 audusd 0.7747 0.7878 0.0000 2007.02.22 09:38 0.7878 1310 2007.02.22 09:38 sell 1 audusd 0.7876 0.0000 0.0000 2007.02.23 15:22 0.7911 -350 2007.02.22 13:27 sell 1 audusd 0.7891 0.7911 0.7876 2007.02.23 15:22 0.7911 -200 2007.02.22 15:24 sell 2 audusd 0.7899 0.7911 0.7876 2007.02.23 15:22 0.7911 -240 2007.02.23 15:28 buy 1 audusd 0.7911 0.7906 0.0000 2007.02.27 20:11 0.7906 -50 2007.02.27 20:11 sell 1 audusd 0.7906 0.7747 0.0000 2007.03.06 03:51 0.7747 1590 2007.03.06 14:41 buy 1 audusd 0.7721 0.7669 0.7747 2007.03.06 20:55 0.7747 260 2320 2007.02.08 09:48 sell 1 eurusd 1.2981 0.0000 0.0000 2007.02.19 07:16 1.3156 -1750 2007.02.08 12:48 sell 1 eurusd 1.2998 1.3036 1.2981 2007.02.08 13:20 1.2981 170 2007.02.08 14:35 sell 2 eurusd 1.3009 1.3036 1.2981 2007.02.08 16:41 1.3036 -540 2007.02.13 08:17 buy 1 eurusd 1.2996 1.3104 0.0000 2007.02.16 14:45 1.3104 1080 2007.02.16 14:50 sell 1 eurusd 1.3100 1.3155 0.0000 2007.02.19 00:00 1.3155 -550 2007.02.16 15:47 sell 1 eurusd 1.3117 1.3155 1.3100 2007.02.19 00:00 1.3155 -380 2007.02.16 17:09 sell 2 eurusd 1.3128 1.3155 1.3100 2007.02.19 00:00 1.3155 -540 2007.02.20 03:29 buy 1 eurusd 1.3183 1.3134 0.0000 2007.02.20 09:34 1.3134 -490 2007.02.21 14:39 sell 1 eurusd 1.3115 1.3150 0.0000 2007.02.23 15:19 1.3150 -350 2007.02.21 16:10 sell 1 eurusd 1.3134 1.3161 1.3115 2007.02.22 08:34 1.3115 190 2007.02.23 15:19 sell 2 eurusd 1.3146 1.3175 1.3115 2007.02.23 15:20 1.3151 -100 2007.02.23 15:20 buy 1 eurusd 1.3151 1.3180 0.0000 2007.03.01 16:17 1.3180 290 2007.03.01 16:17 sell 1 eurusd 1.3180 0.0000 0.0000 2007.03.01 16:18 1.3183 -30 2007.03.01 16:18 sell 1 eurusd 1.3178 1.3245 0.0000 2007.03.01 16:18 1.3181 -30 2007.03.01 16:18 sell 1 eurusd 1.3178 1.3245 0.0000 2007.03.01 16:18 1.3181 -30 2007.03.01 16:18 sell 1 eurusd 1.3174 1.3245 0.0000 2007.03.01 16:19 1.3177 -30 2007.03.01 16:18 sell 1 eurusd 1.3178 1.3245 0.0000 2007.03.01 16:18 1.3180 -20 2007.03.01 16:18 sell 1 eurusd 1.3177 1.3245 0.0000 2007.03.01 16:18 1.3179 -20 2007.03.01 16:18 sell 1 eurusd 1.3180 1.3245 0.0000 2007.03.01 16:18 1.3181 -10 2007.03.01 16:18 sell 1 eurusd 1.3176 1.3245 0.0000 2007.03.01 16:18 1.3177 -10 2007.03.01 16:19 sell 1 eurusd 1.3169 1.3245 0.0000 2007.03.01 16:19 1.3174 -50 2007.03.01 16:19 sell 1 eurusd 1.3168 1.3245 0.0000 2007.03.01 16:19 1.3172 -40 2007.03.01 16:19 sell 1 eurusd 1.3169 1.3245 0.0000 2007.03.01 16:19 1.3173 -40 2007.03.01 16:19 sell 1 eurusd 1.3171 1.3245 0.0000 2007.03.01 16:19 1.3175 -40 2007.03.01 16:19 sell 1 eurusd 1.3170 1.3245 0.0000 2007.03.01 16:19 1.3172 -20 2007.03.01 16:19 sell 1 eurusd 1.3170 1.3245 0.0000 2007.03.01 16:19 1.3171 -10 2007.03.01 16:19 sell 1 eurusd 1.3174 1.3245 0.0000 2007.03.01 16:19 1.3173 10 2007.03.01 16:19 sell 1 eurusd 1.3172 1.3137 0.0000 2007.03.07 00:12 1.3137 350 -2990 2007.02.08 16:11 sell 1 gbpjpy 237.18 237.60 0.00 2007.02.09 02:26 237.60 -242.25 2007.02.09 06:47 buy 1 gbpjpy 237.82 237.20 0.00 2007.02.09 08:32 237.20 -357.26 2007.02.12 09:06 sell 1 gbpjpy 237.66 0.00 0.00 2007.02.14 09:39 236.75 525.1 2007.02.14 09:39 buy 1 gbpjpy 236.75 236.28 0.00 2007.02.15 00:50 236.28 -273.39 2007.02.15 00:50 sell 1 gbpjpy 236.21 233.72 0.00 2007.02.19 10:49 233.72 1456.14 2007.02.19 18:28 buy 1 gbpjpy 233.73 233.87 0.00 2007.02.21 04:49 233.87 81.83 2007.02.21 05:13 sell 1 gbpjpy 233.87 235.82 0.00 2007.02.21 09:00 235.82 -1132.97 2007.02.21 06:22 sell 1 gbpjpy 234.58 235.82 233.87 2007.02.21 09:00 235.82 -720.45 2007.02.21 06:25 sell 2 gbpjpy 235.01 235.82 233.87 2007.02.21 09:00 235.82 -941.23 2007.02.22 12:04 buy 1 gbpjpy 236.88 236.94 0.00 2007.02.26 09:49 236.94 34.82 2007.02.26 09:49 sell 1 gbpjpy 236.92 223.49 0.00 2007.03.06 02:14 223.49 8092.45 2007.03.07 23:33 sell 1 gbpjpy 223.87 225.17 0.00 2007.03.08 04:50 225.17 -780.51 5742.28 2007.02.08 09:42 sell 1 gbpusd 1.9661 0.0000 0.0000 2007.02.19 07:16 1.9548 791 2007.02.08 11:07 sell 1 gbpusd 1.9687 1.9740 1.9661 2007.02.08 13:00 1.9661 182 2007.02.08 12:49 sell 2 gbpusd 1.9704 1.9740 1.9661 2007.02.08 13:00 1.9661 602 2007.02.12 07:02 buy 1 gbpusd 1.9551 1.9502 0.0000 2007.02.12 09:15 1.9502 -343 2007.02.13 10:30 sell 1 gbpusd 1.9437 1.9490 0.0000 2007.02.14 05:39 1.9490 -371 2007.02.13 10:33 sell 1 gbpusd 1.9453 1.9490 1.9437 2007.02.13 10:34 1.9437 112 2007.02.13 14:41 sell 2 gbpusd 1.9464 1.9490 1.9437 2007.02.13 15:25 1.9437 378 2007.02.14 09:10 buy 1 gbpusd 1.9531 1.9599 0.0000 2007.02.15 10:30 1.9599 476 2007.02.15 10:31 sell 1 gbpusd 1.9597 1.9561 0.0000 2007.02.19 03:59 1.9561 252 2007.02.15 15:08 sell 1 gbpusd 1.9613 1.9649 1.9597 2007.02.15 15:29 1.9597 112 2007.02.19 03:59 buy 1 gbpusd 1.9561 1.9481 0.0000 2007.02.19 11:18 1.9481 -560 2007.02.19 11:22 sell 1 gbpusd 1.9460 0.0000 0.0000 2007.02.20 16:27 1.9560 -700 2007.02.19 17:21 sell 1 gbpusd 1.9497 1.9558 1.9460 2007.02.20 16:27 1.9558 -427 2007.02.19 18:27 sell 2 gbpusd 1.9521 1.9558 1.9460 2007.02.20 16:27 1.9558 -518 2007.02.20 16:35 buy 1 gbpusd 1.9560 1.9506 0.0000 2007.02.21 10:35 1.9506 -378 2007.02.21 10:35 sell 1 gbpusd 1.9506 1.9554 0.0000 2007.02.22 17:18 1.9554 -336 2007.02.21 13:08 sell 1 gbpusd 1.9530 1.9578 1.9506 2007.02.21 14:38 1.9506 168 2007.02.21 14:08 sell 2 gbpusd 1.9544 1.9578 1.9506 2007.02.21 14:38 1.9506 532 2007.02.22 17:18 buy 1 gbpusd 1.9555 1.9588 0.0000 2007.02.28 08:07 1.9588 231 2007.03.06 03:29 buy 1 gbpusd 1.9263 1.9274 0.0000 2007.03.08 15:21 1.9274 77 2007.03.06 15:00 buy 1 gbpusd 1.9233 1.9175 1.9263 2007.03.06 15:59 1.9263 210 2007.03.08 17:01 sell 1 gbpusd 1.9304 1.9348 1.9274 2007.03.09 10:30 1.9274 210 2007.03.09 04:59 sell 2 gbpusd 1.9322 1.9348 1.9274 2007.03.09 10:30 1.9274 672 1372 2007.02.08 19:34 sell 1 usdcad 1.1831 1.1844 0.0000 2007.02.09 08:40 1.1844 -109.76 2007.02.09 11:15 sell 1 usdcad 1.1848 1.1885 1.1831 2007.02.09 13:00 1.1831 143.8 2007.02.13 00:02 buy 1 usdcad 1.1771 1.1696 0.0000 2007.02.13 14:31 1.1696 -641.24 2007.02.15 10:36 buy 1 usdcad 1.1668 1.1633 0.0000 2007.02.15 15:08 1.1633 -300.87 2007.02.21 14:31 sell 1 usdcad 1.1662 0.0000 0.0000 2007.02.22 08:59 1.1633 249.29 2007.02.22 09:38 buy 1 usdcad 1.1633 1.1582 0.0000 2007.02.23 14:41 1.1582 -440.34 2007.02.27 08:39 buy 1 usdcad 1.1619 1.1766 0.0000 2007.03.06 09:21 1.1766 1249.36 2007.03.06 10:16 sell 1 usdcad 1.1785 1.1825 1.1766 2007.03.06 13:43 1.1766 161.48 2007.03.07 17:20 sell 2 usdcad 1.1796 1.1825 1.1766 2007.03.07 19:06 1.1795 16.96 328.68 2007.02.07 20:15 buy 1 usdchf 1.2427 1.2387 0.0000 2007.02.14 16:02 1.2387 -322.92 2007.02.13 08:13 sell 1 usdchf 1.2509 0.0000 0.0000 2007.02.16 12:04 1.2379 1050.17 2007.02.16 12:04 buy 1 usdchf 1.2379 1.2322 0.0000 2007.02.19 00:00 1.2322 -462.81 2007.02.22 19:29 sell 1 usdchf 1.2370 0.0000 0.0000 2007.02.23 10:37 1.2414 -354.44 2007.02.23 03:46 sell 1 usdchf 1.2395 1.2414 1.2370 2007.02.23 10:37 1.2414 -153.05 2007.02.23 10:37 buy 1 usdchf 1.2414 1.2371 0.0000 2007.02.23 15:05 1.2371 -347.59 2007.02.23 15:05 sell 1 usdchf 1.2368 0.0000 0.0000 2007.03.01 07:21 1.2193 1435.25 2007.03.01 14:02 sell 1 usdchf 1.2157 0.0000 0.0000 2007.03.05 19:25 1.2221 -523.69 2007.03.01 14:30 sell 1 usdchf 1.2177 0.0000 1.2157 2007.03.01 15:33 1.2157 164.51 2007.03.01 16:01 sell 2 usdchf 1.2189 1.2219 1.2157 2007.03.01 16:18 1.2219 -491.04 -5.61 2007.02.12 14:48 sell 1 usdjpy 121.58 0.00 0.00 2007.02.20 01:38 119.77 1511.23 2007.02.12 15:57 sell 1 usdjpy 121.76 122.15 121.58 2007.02.13 02:38 121.58 148.05 2007.02.12 20:48 sell 2 usdjpy 121.87 122.15 121.58 2007.02.13 02:38 121.58 477.05 2007.02.20 01:38 buy 1 usdjpy 119.77 121.07 0.00 2007.02.23 15:22 121.07 1073.76 2007.02.23 15:22 sell 1 usdjpy 121.06 116.31 0.00 2007.03.06 03:09 116.31 4083.91 7294 14061.35
+
+--- 帖子 #102 ---
+No offend taken and nice to see you again around here fukinagashi. What I meant was when the first trade gets triggered and the market turns around. Then you have 3 losing trades. After triggering the other side, it does the same thing again. Our worse scenario Best situation is when the price goes up then down (triggering trade 2+3) without hitting the sl. Letting us take the profits and shoots up! Same goes for the opposite. Btw. if forward testing is good for some people to go live with it. What do we need to do? I can't write EA myself. Will you sell it?
+
+--- 帖子 #103 ---
+Fuki, two quickies: 1 - thank you for your sharing! 2 - If memory serves me well, you said for some earlier EA version, to set Use_BATATR_Indicator to False. Is this still valid or should be now set to True? Thank you, Mario
+
+--- 帖子 #104 ---
+what are you talking about, humax? You can go live with BAT EA! You just take this EA and let it run on your live account. You don't have to write EAs yourself.
+
+--- 帖子 #105 ---
+hi fukinagashi, today I realized that after limit orders are triggered and the market is moving in the right direction so that you can take your profits for these orders at "Enter" there will be a pendling again that you will be reentered if the price reaches this certain level again. So that is that this one fibLevelSet which is set when the new BAT line is formed is valid for eternity and pending orders will always be at these points. Probably that's what TA wanted but I didn't know that and maybe they didn' mean it that way and you're wrong (but I doubt it And BTW, could you add a feature that allows the user to change the fibLevels colors? Because the colors you chose are only good for white background, many users, however, prefer the "Green on Black" settings so then they can't see the fib levels.
+
+--- 帖子 #106 ---
+True, but only about a month. As fuki said in post#88, it will expire on 1 May 2007.
+
+--- 帖子 #107 ---
+humax, see this post:
+
+--- 帖子 #108 ---
+I'd be guessing slippage ... Your 'Experts' log should show the attempted trade
+
+--- 帖子 #109 ---
+hi fuki, why did you add trade2' and trade3'? Today I had a sum of 0.7 (7 * 0.1) BUYS in GBPUSD, that's most probably not what TA wanted. And also, it hasn't moved into the right direction .
+
+--- 帖子 #110 ---
+hi tradeigel, I'm using v1.5c, and it works how it's supposed to. Are you using it too? Also, regarding your post #105, the entries at the 61.8% and 38.2% fibs are only valid until price reached the fib extension of 161.8%, after this these pending orders are deleted.
+
+--- 帖子 #111 ---
+yeah, I am using this version, too. As I posted in the BAT thread, I find it would make sense to put the S/L a few pips beyond the BATline so that the price can bounce off the line and we're still in. It happened to me today, I was stopped out by around 2-3 pips right at the BATline then the price took off again - without me!
+
+--- 帖子 #112 ---
+Since I'm trading mini lots, I set Lot=0.1 Because of this EA didn't place orders. There was Error: 131 Invalid Trade Volume I changed Lot=1 and now is OK. I keept TradeVolumeFactor at 0.1 and EA is placing mini orders, so all is OK, I'm just posting this for info. Fukinagashi wrote this in the post number 30: "I personally will run my EA with Use_BATATR_Indicator =false" In the meantime there were few version changes. So, would someone be so kind and answer, what setting you are using now, false or true or it doesn't matter (they are the same?) Thx, Mario Fukinagashi, did I thank you lately for a great EA? Thank you!
+
+--- 帖子 #113 ---
+I am having some trouble with this EA on a mini account. It seems that no matter what %risk I set this EA to, it still only opens 0.01 lots on my mini account. Everything else seems to be working fine. Perhaps I have mucked up some settings somewhere. Wiz.
+
+--- 帖子 #114 ---
+Attached in a text file is The Bat Preset, that should work with 0.1 Lots, using this in Velocity4x Demo. To use just change txt to set Note Velocity accounts are all the same using 1.0, 0.1, &amp; 0.01, thus their is no m.
+
+--- 帖子 #115 ---
+Hi Fuki I set the EA on IBFX (GBPUSD) and it hasn't taken a trade since Mar 14. All settings are at default. I have a few questions: Is this normal If EA set at default, then all useres of IBFX (with default settings)should be in a trade at the same time: Is this correct: have IBFX useres had any trades I have attached a pic of GBPUSD. Am I understanding this EA correctly. A position should not be taken until the price action hits the BAT line. In the pic the red BAT line was hit, so we go long and stay long until a new signal. The EA will not initiate any trades till then. I did not include the fibos (less clutter) Thanks for a great thread, many knowledgeable members here. I am hopeful that the EA will work: It is brilliant and simple viewing. Jay Jay
+
+--- 帖子 #116 ---
+Exactly at the point JayJay drew th eyellow square on my EA tried to open a position. However, after many retries it gave up - always "invalid price"...DAMMIT...it would have been so nice to get some pips back after this huge drawdown
+
+--- 帖子 #117 ---
+Tradeigel, I'm kinda new to this (one year) how do you see the attempts that is being made. All I see in the "Journal" tabe is that "BAT...... loaded successfully". Yea woulda been nice to get in on that signal.... Also I get no results from the "Strategy Tester". I'm obviously doin somethin wrong...can some one help. Many thanks....JJ/.
+
+--- 帖子 #118 ---
+I am using IBFX and have a position open on GBP/USD, GBP/JPY and EUR/AUD. My GBP/USD. All of them opened according to plan, so I don;t know why others are having difficulties.
+
+--- 帖子 #119 ---
+If i set the lot size to 1.0 on an IBFX mini account i assume that will mean it will open 1 mini lot per position. i thought the RiskPercent was supposed to take care of the position size but it doesn;t seem to affect it. At least on my mini account it doesn't. So how do i get this to actually trade the correct size based on my account size? Wiz.
+
+--- 帖子 #120 ---
+Hey Wiz, Did yu make any changes to the default settings? JJ/.
+
+--- 帖子 #121 ---
+The only thing i changed was the percentrisk. Everything else is the same. Have you run any other EAs on your platform? Once you setup the EA it should just work. I don;t know why you are not getting any trades. Wiz.
+
+--- 帖子 #122 ---
+Wiz May be that's the problem. I can't seem to run any EA's. I don't get it.... the smiley face appears.... although the EA is greyed out on the navigator menu????? JJ/.
+
+--- 帖子 #123 ---
+The Bat EA is an ex4. File, these ALWAYS appear greyed out on the MT4 Platforms, although they will work.
+
+--- 帖子 #124 ---
+Where did you copy the EA? I assume it must be in your experts subfolder. Wiz.
+
+--- 帖子 #125 ---
+so it will exire after we helped him build this?
+
+--- 帖子 #126 ---
+He said in an earlier post that he will provide an update. It seems to be to discourage people from selling his EA , which people have unfortunately done to others in the past. it won;t be a problem for those of us using the EA. We will just need to keep it up to date.
+
+--- 帖子 #127 ---
+i assume you have tried registering for a new demo account and/or reinstalling the software. You could also download a different MT4 based platform like alpari and see if it will work on that one. This is all I can suggest. i have tried this and other EAs on various platforms and they all work. If you have the smiley face then it should be working.
+
+--- 帖子 #128 ---
+I´m having similar problems with the ea. ON 03/15/07 I attached it to eight currency pairs. Since then it only opened trades in EURCHF and GBPCHF. I didn´t get no trades in GBPJPY, GBPUSD, USDJPY, USDCHF, EURAUD and AUDUSD. I did also use the email-alert function. It keeps sending 90+ mails per interval (stating positions in GBPJPY and USDJPY). I tried the following to solve these issues: - close all charts - restart metatrader - reset settings on every chart - deactivate mail-alert Maybe I should test it on another new installation of metatrader. Any other ideas?
+
+--- 帖子 #129 ---
+Hi Fukinagashi Thankyou for your fine work on this EA. As this is my first post I'm not sure where it will end up and what it might look like..so please bear with me. Some feedback for you. My short USDCAD trade today was closed before the price had gone back up to touch the higher BAT line (it is currently still below it). Then another short position was opened? I have attached a chart (I hope?) I also noticed yesterday that when in a positive trade the BAT line moved up to the original SL level. The EA then attempted to change the SL to that level. 11:03:08 BAT EA V 1.5c USDCHF,H1: attempted modify of #7536322 price:1.21070000 sl:1.20860000 tp:0.00000000 11:03:08 BAT EA V 1.5c USDCHF,H1: Server reported modify order did not actually change parameters. 11:03:08 BAT EA V 1.5c USDCHF,H1: redundant modification: 7536322 @1.21070000 tp@0.00000000 sl@1.20860000 11:03:08 BAT EA V 1.5c USDCHF,H1: Suggest modifying code logic to avoid. Undeterred the EA tried again soon after, with the same result. The SL was eventually changed some hours later and the only negative seems to be a daily log just 4 pages shorter than War and Peace. Anyway, if this post does indeed arrive at the intended destination I hope it helps you develop what for me is a fantastic EA based on the excellent strategy of TA mas
+
+--- 帖子 #130 ---
+Wiz, Thanks for taking the time to respond. I did try everything....without going into details. I'll try what you suggested.....download new Alpari apps. Again Thank you....and Fuki for a great EA. JJ/.
+
+--- 帖子 #131 ---
+Hi all, I am following this interesting system some time ago. Today we had several signals and I am showing their charts. Sometimes, forex seems one of the most difficult financial instruments to trade. Specially if we are trying to trade using a system. I am saying this because of the news... There is any sistem that can survive to this big news price movements?? Take care! Pip
+
+--- 帖子 #132 ---
+Wiz, Again thanks for your help. The EA appears to be working. Got some good pips during the news GBPUSD 37 still open: ASDUSD 17 still open. I have been following this thread for a while . Please let me know if I could contribute i.e. testing, developing stratagies etc. Jay Jay
+
+--- 帖子 #133 ---
+FUKI, Take a look at my screen shot. A small "blip" occured @ the BAT ATR (AUD/USD) .8050. (Hi-lited with yellow box and red arrow) The EA initiated a short . Is this a bug?? Just so you know. Has this happened to any one else. Thanks... JJ/.
+
+--- 帖子 #134 ---
+hi (fukinagashi), these screenshot shows what happened to me three time now. You probably can imagine how much that sucks. Maybe we can do sth. against that issue - I don't really have an idea yet...
+
+--- 帖子 #135 ---
+Yes, same happened to me. I think it's due to buy orders triggered exactly at the red bat line. The MT4 bars show the bid price, therefore the long orders should be triggered when the bid reaches the red bat line: bid + spread. This at least should have avoided the last few premature long positions. Also, this is most visible on EUR/AUD as the spread is at least 8 pips with IBFX, and this is quite a distance for a 1 hour chart.
+
+--- 帖子 #136 ---
+I am in agreeance with tradeigel and islandtrader. Orders should be triggered when the Bid hits the BAT line. This will avoid entering long positions prematurely. If we were trading manually this is how it would be done. I would also like to suggest another amendment. Recently the EA attempted to initiate a short without success as the price had retraced north quite quickly. The server would not accept the order - "Invalid Price". If I was trading manually and this retracement occurred I would happily still go short at the higher price. The rules for a short have been met - ie the BAT line has been hit by the bid price - and if I can short it at a higher price I'm happy. Can the EA be changed then to enter even if the price has retraced?? Fukinagashi, please keep up your great work with this EA as it's the best I've seen (for my trading psychology that is) Good trading everyone mas
+
+--- 帖子 #137 ---
+Anybody seen Fuki lately? Maybe he's super busy? Hopefully we'll see him back here again as I think this EA has so much potential. Hope you're all "in the pips"
+
+--- 帖子 #138 ---
+yeah....well...I am totally all out of the pips! It's about : 50:5 (losses:wins). Sucks, right? Yeah, it really does... Well...it's only on a live account...DAMMIT
+
+--- 帖子 #139 ---
+Never say always tradeigel. Haven't seen fuki lately. I am curious when he will post a new version. As you know, this version will expire at end of this month. The question is, how long will he keep coming back posting another version with another 1-2 month to use before it expires again? I doubt if anybody is able to do that forever. So here are the options: 1)Have faith in him. He will post a updated version for the rest of his life. 2)He can post a version that won't expire. 3)Stop waisting our time with this. 4)Tradeigel can write a version since you can program or anybody who can write EA. I am not being rude or trying to put fuki and this thread in a bad spotlight. He has done a good job making this EA. Unfortunately he is a bit overprotective by posting only the ex4 file+expire date. I am not able to use different settings than default. Changing setting has no effect at all because it is hardcoded in the ex4 file. So we can't even optimize it. And for those who can't face the facts, sue me. Regards
+
+--- 帖子 #140 ---
+Here are my statements for BAT. Results are good but could be improved with manual control. I often hesitate to close orders when technical analysis said so but decide to let it run to see what happen. Usually I would have better results if I had close orders. thierry
+
+--- 帖子 #141 ---
+Hello, I am very sorry that I am so rarely present here. I am very busy job &amp; familywise. Since I do not want to slow down the development of this method I have decided to publish the source code. The expiry is already removed, so everyone can use it right away and unlimited. Please feel free to modify the code, publish it etc. Please nevertheless respect that this is supposed to be free software. Thank you in advance. ====================================================== Late edit: To run this expert in it's uncompiled form you need to unpack the attached file OrderReliable.zip into your folder ..\experts\include.
+
+--- 帖子 #142 ---
+Bravo! My heart is rejoice, you have no idea how it meant to me, hope your good deed will be repayed hundred fold times.
+
+--- 帖子 #143 ---
+The Bat EA posted is greyed out and DOES NOT ATTACH to the MT4 Platform can anyone get this corrected, thanks
+
+--- 帖子 #144 ---
+Thanks fuki. I appreciate your work, even that I don't use this strategy. Hope you are busy doing well job &amp; familywise. Regards, Humax
+
+--- 帖子 #145 ---
+I cannot get the free version to attach to a chart...any help?
+
+--- 帖子 #146 ---
+I think I did the same mistake as you or you did same mistake as I Pay attention because he said: "To run this expert in it's uncompiled form you need to unpack the attached file OrderReliable.zip into your folder ..\ experts\include ." &lt;- not in experts. Place the EA in Experts folder and the OrderReliable.mqh (from the zip) in Experts/include folder. It should appear colored and not in gray color, that means he's active. For me it's not working in Strategy Tester. Edited: And if I don't compile it it doesn't appear colored. After I compile it and after it gives 2 warnings it shows colored. Here are the warnings after compilation: Compiling 'BAT EA V 1.5 free version.mq4'... Function "OrderModifyReliableSymbol" is not referenced and will be removed from exp-file Function "OrderReliableLastErr" is not referenced and will be removed from exp-file Uncompiled it doesn't work. I mention that I test this during weekends, does it matter ?
+
+--- 帖子 #147 ---
+I'm able to run the EA &amp; use in Strategy Tester I simply placed the BAT-V1.5.mq4 file in ..\experts &amp; the OrderReliable.mqh file from zip file in the ..\experts\include Restarted MetaTrader &amp; it works beautifully! I was even able to change the code so that the Fib lines were drawn in yellow so that I can see them on my preferred black background. I'm still forward testing this EA on 4 pairs - too early for results
+
+--- 帖子 #148 ---
+Hi Everyone, Feel a bit silly writing this, however, have loaded the EA onto the charts, have the smiley face, run the zip file from the Order Reliable folder, etc. etc.. but still receive the error, I have also installed from the first zip EA, the file BAT ATR v1.ex4 and still nothing, still get an error, and unable to run the EA Cannot open file 'C:\Program Files\MetaTrader 4\experts\indicators\BAT ATR v1.ex4' on the GBPUSD,H1 Is there anyone out there that can help Rgds
+
+--- 帖子 #149 ---
+In needs to go in C:\Program Files\ MetaTrader 4 \experts NOT C:\Program Files\ MetaTrader 4 \experts\indicators
+
+--- 帖子 #150 ---
+I have checked that the file is not in the indicators folder and definately in the experts folder but still get the same error, I have other EA's running correctly, but for some reason this EA does not seem to work correctly. Sorry, anyone out there that can help?? Help &amp; Happy Pips
+
+--- 帖子 #151 ---
+no, for me it's not working. Not in MT4 from Migfx and not for Interbank FX MT4. It shows colored in Experts but doesn't work in Strategy Tester. Does anyone know more about this ? Thanks
+
+--- 帖子 #152 ---
+Try setting Use_BATATR_Indicator=false
+
+--- 帖子 #153 ---
+Hello fukinagashi &amp; all !! Great work being done here, some very nice programming and top notch community effort. I want to help test this thing, I have it working but I need the best settings found so far. I am using the external indicator (i.e useBAT_ATR = true) and testing on various pairs. Do you change anything from one pair to another? What settings did you use for the forward test, fukinagashi ? And did you need to recompile the original indicator with new hard coded values, or are you using it as is? I refer to this code here: http://www.forexfactory.com/showpost...7&amp;postcount=35 13000 in one month is not bad at all, but lets see if it can be improved eh ? Again, nice job, well done, keep us posted on your live trades. Regards, -P
+
+--- 帖子 #154 ---
+That seems to have done the trick, thanks mate..
+
+--- 帖子 #155 ---
+I can't seems to compile the latest EA. It keeps giving me error. I've already placed the "OrderReliable" unzip file to the expert/include folder. What are the other step? Can anyone tell me what to put in the question mark (?) or rather how it suppose to look like before compiling the EA? #include &lt;OrderReliable_V?_?_?.mqh&gt;
+
+--- 帖子 #156 ---
+Million thanks to the authors of this strategy firstly, and to the author of this fantastic EA and all those who gave a helping hand with its improvement although its not yet over Thumbs up...
+
+--- 帖子 #157 ---
+Anyone have any ideas why when I run the latest version of the EA thru the strategytester on my mt4 that it is only opening up buys and no sells what so ever?
+
+--- 帖子 #158 ---
+How in the world did you get 13000 in one month? No matter what I trade on the 1.5 free version? I can't get it up to 10 in profit.
+
+--- 帖子 #159 ---
+I have a question about the EA. I was taken in to a trade by price touching the BAT line heading down. This touch did not take me in to a short, however it did close my long. It has opened positions on the retrace, but I am wondering why it didn't open my trade 1. here is a picture, you can see the 2 arrows where the retracements were opened, but there is no arrow at the BAT line. Is there something in the code that only opens past a certain amount of pips after the BAT line, maybe the spread? I am not a programmer btw, i failed that class so much props to those who do and those who coded this.
+
+--- 帖子 #160 ---
+Suggest you check the journal tab for error messages
+
+--- 帖子 #161 ---
+Thanks charlies for the suggestion. The journal tab does not show any errors encountered. Maybe just a glitch with the broker?
+
+--- 帖子 #162 ---
+I am still having the same problem as above. When trade #1 is stopped out (either for profit or loss) the EA does not enter me into trade #1 going the opposite direction. It happened once again on June 12/13. Any suggestions. Also, there were no failures in the Journal tab and MT4 was running the whole time.
+
+--- 帖子 #163 ---
+Heard in the Herd, I was reading another post where I saw another similar complaint about the broker, disabling EA's , just being bastards and so forth, yet I don't believe the broker is at fault, sure if every trader was using this very EA or this particular strategy they would indeed have problems filling orders, so maybe they are having problems filling the orders ? This is the forex market and every single trade has an opposing trade or otherwise the trade is not filled, brokers are a function of the orders they recieve or otherwise maybe you, like me could contribute to this excellent EA by making modifications ? mattfx
+
+--- 帖子 #164 ---
+Increase slippage, around news time I have seen brokers increase the spread by up to 17 pips in order to place trades at news time, if slippage is set to 3 pips it will not function when broker has set spread beyond this. I have set slippage to 10 and do not have this problem. Just to mention that this EA has gained 178 pips from the entry at 9730 gbpusd till exit at atr today mattfx
+
+--- 帖子 #165 ---
+is the latest version EA 1.3? can i use it for live trading now? or it is just for backtesting?
+
+--- 帖子 #166 ---
+I am using the latest BAT EA 1.5 free version as well and have the exact same problem plus a couple more... I setup a new Alpari Demo account and ran one backtest on GBP/USD using downloaded Alpari M1 data from their history page and I set the Strategy Tester time-frame to H1. It appeared that Strategy Tester was automatically converting the M1 Alpari data into H1 data. I had selected "Every Tick" on the modeling selection. (Is this correct or do you have to convert the M1 data to H1 and import it separately before running the test?) The test completed with a 90% modeling quality, so I figured it was good. However, on the GBP/USD test, the BAT EA opened BUY orders ONLY. I then attempted to test the GBP/JPY and the test ran, but NO ORDERS were opened whatsoever. When I tried testing the EUR/AUD pair, this test would not even begin at all. The journal tab for the EUR/AUD test showed the message: Test Generator: no history data "EURAUD60", even though I had uploaded it exactly as with GBP/USD and GBP/JPY. I've posted 2 pics from the GBP/JPY and GBP/USD tests (with BAT indy attached) which shows no orders being opened for any of the GBP/JPY signals and only the BUY orders for the GBP/USD. My BAT EA parameters used were: INPUTS: Changed Risk to "5" value, Use_BATATR_Indicator = "false", ATRPeriod = "5", Factor = "4" TESTING: $10000 USD and "Long &amp; Short" were selected Any help here? P.S. Will be starting demo testing on Alpari demo account today. Hopefully, will get better results than on Strategy Tester.
+
+--- 帖子 #167 ---
+Guys? I am new to this thread, and got this problem with the indicator. I copied the extracted file from post 1 to the lattest post, but I couldn't used it. the MT4 I used stated that it had system crash on it. the extracted file I got has extension :.ex4, while other file has Meta quotes languange 4. What can I do to change it so I can use it in my MT4 terminal? Thank you
+
+--- 帖子 #168 ---
+The BAT works well by catching trends. You can look at a chart with just the BAT ATR indicator and see this. I have tried using the BAT EA without the trades 2 and 3, but can't get the EA to work. I changed the "tradevolume" on 2 and 3 to "0" but get an invalid parameter error. Anyone know how we can turn off the 2nd and 3rd trades but keep the ea taking all of the 1st trades. If we can do this, then I believe there will be a lot of money to be made by all.
+
+--- 帖子 #169 ---
+Fukinagashi, I have been using this set up for a few trades and it's very good. Take a look and see if you can set up an EA from the one you created before. Its a variation from the BAT EA from team APHID. The Fib position additions are not needed because they never get triggered. The risk is substantially less then the original settings. I tried setting it up but I can't get it to work could you please take a look and see if you notice whats wrong. I really appretiate your input on this since I have been using and reading your threads for a while now and your knowledge and input are a big plus in FF. The only variables are: ATR Period =2 Factor = 1 Look at the difference and tell me what you think.
+
+--- 帖子 #170 ---
+I compiled V1.1.5 free version and got the same errors: Function "OrderModifyReliableSymbol" is not referenced and will be removed from exp-file Function "OrderReliableLastErr" is not referenced and will be removed from exp-file I see it in my charts with happy face also but doesn't take any trades . please help someone. Thank you in advance
+
+--- 帖子 #171 ---
+Fuki, Common man someone help here in this thread. Where is the comaderie?
+
+--- 帖子 #172 ---
+I have the same problem with compilation, and no trades opened so far.
+
+--- 帖子 #173 ---
+snap! It must be an ea problem.
+
+--- 帖子 #174 ---
+Which broker's data feed does this ea work best on? I know ea's are optimised for particular data, and I believe ibfx has different data feeds for their mini micro and standard. EDIT: i see he uses alpari 1hr data which is simmilar to NF data
+
+--- 帖子 #175 ---
+I noticed indicators on everyone's charts which i don't have ... i do have a smile in the top right hand corner. ... do i need to attach additional indicators, or do they appear once the trade is initiated?
+
+--- 帖子 #176 ---
+Adam the indicators you see are from the indicator below. This EA doesn't work at least for me and lots of other people here. It has flaws and never takes orders. I use the system manually and it works good for me. I have made some changes though. I m posting the indicatorbelow.
+
+--- 帖子 #177 ---
+Did you copy the enclosed file into the expert\include folder? TimeFreedom
+
+--- 帖子 #178 ---
+I got it to work using atr to false then it works. I wonder how to set it up to : 1. Enter the trade 10 pips past the ATR . 2. Instead of one lot enter 2 and close 1 taking profit at the 144 Fib and the second to trail it. It works good for me but I have to set up the orders manually I wish I could use the EA because the best moves happen when I m sleeping.
+
+--- 帖子 #179 ---
+I am sorry if I overlooked this somewhere in the forum. But am I to understand that there is an "automatic" BAT? I just spent the last week trading the BAT manually (which is ok, seeing as how I am in front of a computer 12 hours a day anyway). But I was thinking how nice it would be for this indicator to execute on it's own. If I missed it, please excuse me. But is there a current indicator that will execute these trades for me? If so, is the current indicator located in this forum, and how is it installed?? Any information would be greatly appreciated! Rick
+
+--- 帖子 #180 ---
+If I drag the EA into my graph, the EA is immediately removed -can't understand
+
+--- 帖子 #64 ---
+Can someone please help to explain how to put this indicator into MT4? I have no idea how to do this. I mean zero clue, but I am good at following instructions. I need to know once it is installed, how do I make any changes to it to make it this profitable system. Any help???
+
+--- 帖子 #65 ---
+Hi Gem's plz i am not in line with this thread,although i use the MT4 trading platform, but i dont get ur terms BAT, i want to know if its an indicator under the Experts Advisors?. Thanks man.
+
+--- 帖子 #66 ---
+Broker File&gt;Experts&gt;indicator. it's indicator. sorry if i'm wrong.
+
+--- 帖子 #67 ---
+the EA don't close the trade at 161.8% could anyone correct this?
+
+--- 帖子 #68 ---
+Mango is online &amp; he might have info. Mango go to Bagovino thread.
+
+--- 帖子 #69 ---
+Is this a dead issue now?
+
+--- 帖子 #70 ---
+Can someone take control and re-start this thread again. This EA seems to be a nice one but Fukinagashi the EA creater left on 17th of April 2007 and ever since the thread slowly died away. Can someone revive it? Now it is the year 2019 about 12 years after the creation of this EA, in my opinion it should still work. Those of you who were there in 2007, is this EA still working? Can you leave your feedback here? Could we start testing it again? Cheers!
+
+
+===== 附件下载链接 =====
+
+未找到附件

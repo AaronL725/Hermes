@@ -35,9 +35,10 @@ Output "0": Future data is used OR lack of prevention mechanisms
 Only answer 0 or 1. Do not explain the reason.
 """
     
+    # Use explicit placeholders in the prompt template
     prompt = ChatPromptTemplate.from_messages([
         ("system", system_prompt),
-        ("human", f"Function name: {function_name}\n\n```python\n{function_code}\n```")
+        ("human", "Function name: {func_name_placeholder}\n\n```python\n{func_code_placeholder}\n```")
     ])
     
     llm = ChatXAI(
@@ -50,7 +51,11 @@ Only answer 0 or 1. Do not explain the reason.
     chain = prompt | llm | StrOutputParser()
     
     try:
-        result = chain.invoke({})
+        # Provide the actual values for the placeholders in the invoke call
+        result = chain.invoke({
+            "func_name_placeholder": function_name,
+            "func_code_placeholder": function_code
+        })
         # 确保结果是0或1
         if result.strip() in ["0", "1"]:
             return int(result.strip())
@@ -106,10 +111,10 @@ def get_xai_api_key():
     
     # 加载环境变量
     load_dotenv(env_path)
-    xai_api_key = os.environ.get("XAI_API_KEY_WT")
+    xai_api_key = os.environ.get("XAI_API_KEY_Aaron")
     
     if not xai_api_key:
-        raise ValueError("在.env文件中未找到XAI_API_KEY_WT")
+        raise ValueError("在.env文件中未找到XAI_API_KEY")
     
     return xai_api_key
 

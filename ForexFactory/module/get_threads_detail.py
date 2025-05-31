@@ -1,3 +1,7 @@
+'''
+需要打开代理才能运行
+'''
+
 import undetected_chromedriver as uc
 import time
 import os
@@ -7,6 +11,8 @@ from bs4 import BeautifulSoup
 import datetime
 from concurrent.futures import ThreadPoolExecutor
 import concurrent.futures
+import json
+from get_threads_link import get_threads_link
 
 class ForexFactoryCrawler:
     def __init__(self, thread_link, thread_title):
@@ -536,18 +542,28 @@ def crawl_thread(thread_data):
     crawler.crawl_pages()
 
 if __name__ == "__main__":
-    # 测试入口
-    threads_list = [
-        {
-            "title": "Gold (XAU/USD) with BiteFX",
-            "link": "https://www.forexfactory.com/thread/1328362-gold-xauusd-with-bitefx"
-        },
-        {
-            "title": "The Skill Check",
-            "link": "https://www.forexfactory.com/thread/741060-the-skill-check"
-        }
-    ]
+    # 从get_threads_link获取需要爬取的帖子列表
+    # 你可以在这里设置需要爬取的页码范围，例如从第1页到第5页
+    start_page_links = 1
+    end_page_links = 5
     
-    for thread in threads_list:
-        print(f"\n开始爬取: {thread['title']}")
-        crawl_thread(thread)
+    print(f"开始从get_threads_link获取从第 {start_page_links} 页到第 {end_page_links} 页的线程链接...")
+    json_threads_data = get_threads_link(start_page_links, end_page_links)
+    
+    try:
+        threads_list = json.loads(json_threads_data)
+        print(f"成功获取到 {len(threads_list)} 个线程链接")
+    except json.JSONDecodeError as e:
+        print(f"解析get_threads_link输出时发生错误: {e}")
+        threads_list = []
+
+    if not threads_list:
+        print("没有获取到任何线程链接，详细爬取中止。")
+    else:
+        for thread in threads_list:
+            print(f"\n开始详细爬取: {thread['title']}")
+            try:
+                crawl_thread(thread)
+            except Exception as e:
+                print(f"爬取线程 {thread['title']} 时发生错误: {e}")
+        print("\n所有计划的线程详细爬取任务完成。")

@@ -1,0 +1,772 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+10 feb 18 pdate this is a trend chasing basket trader. from last week observations .Big thanks to majamvice 14 day simple moving average is perfect. other observation initial trade should be opened when volatility has squeezed. that is when Bollinger bands are close together not far apart. Day 20 deviation 1 band. day 4.4 update also in post 1 https://www.mql5.com/en/signals/397848 the equity trailer took long to correct To start in the right way, please let me know this: - I install the "DAX" on multiple Charts H4 all with the same Magic number (Default 0) - I drag equity manager EA on another Chart (TF doesn´t matter?) and let it run with the given set? correct . make sure charts are clean. the template with moving average is for seeing what EA is seeing .it already is seeing so if you done analysing chart clear it, if you using vps. you can actually put DAX on any time frame if tick mode is true. For others reading tick mode tells EA not to wait for candle open or close to trade. candles are time chart dependent I use 5/10 EMA cross over on H4 to identify the trend. H4: Up trend : 5/10 EMA cross up Down trend : 5/10 EMA cross down the modification done is this .only send a buystop only when the price of that buystop is above 50 simple moving average on a 5 min chart. vice versa for sells this morning it has the following trades open . also jumping stop loss was calculating wrongly which caused big drawdown yesterday lastly buy trades will closed if 50 SMA is 80 pips above buy price and bid is 30pips below 50SMA.vice versa sells the modification done is this .only send a buystop only when the price of that buystop is above 50 simple moving average on a 5 min chart. vice versa for sells I observed EA close two GBPCHF sell positions while there was a buy with huge draw down . I have increased the number of pips needed to open a second position .91 pips Also observed GBPCAD rightly close two sell position when price went north at news but failed to open a sell when price within 5 min turned back south . have written code for that Now in forex there has been two blood bath .swiss franc depeg from euro and brexit. these events blew trading accounts. alpari uk closed. I have tried to protect your account from these disasters. The EA will open a sell when moving average indicate sell trend. Then at same time three buystops open . the distance is such that under normal trading conditions The trade never occur but if you have brexit situation they open hopefully saving your account from blowing . so in your situation a sell open and then closed . the buystops expire after 720 hours or deleted if moving average indicate the trend has now turned to buy its up to you . the ea closes a trade after a trend started and the trend exhausted . if ea opens a buy it means moving average have analysed a up trend but as happens in forex the trend does not start and moving average indicate a down trend the ea will open a sell. eventually a trend will start and that trend will exhaust and ea will close trade . if trend restarts it will reopen. so key point is how I have determined exhaustion level . here it is example a buy if simple moving average 50 SMA on 5 min chart is 80 pips above the buy' open price also if market price moves 30 pips below 50SMA close buy only . Fellow traders if you have better way to determine exhaustion please share
+
+--- 帖子 #2 ---
+thanx for share. what is your experience about this EA
+
+--- 帖子 #3 ---
+still test
+
+--- 帖子 #4 ---
+Thank you . Are you a member of Steve Hopwood's forum? If so, please share the updates here ...
+
+--- 帖子 #5 ---
+updates shared here. I have added extra reversal condition.
+
+--- 帖子 #6 ---
+https://www.mql5.com/en/signals/390160 test so far
+
+--- 帖子 #7 ---
+Which Time Frame do i use?
+
+--- 帖子 #8 ---
+Subs. thanks and Regards
+
+--- 帖子 #9 ---
+Can you upload 10.4 SSG 20only also? its in the template but can't be found here
+
+--- 帖子 #10 ---
+the title included the timeframe 4hr.
+
+--- 帖子 #11 ---
+Hi cannot run, why? Thankx
+
+--- 帖子 #12 ---
+Hi Candyman, MT4 expert cannot open the files, tried #1 &amp; #5 files. Pls find the attachment herewith. Regards, kkb2k8
+
+--- 帖子 #13 ---
+Missing files
+
+--- 帖子 #14 ---
+Thanks for sharing the code. I'm very new to forex. I just tried to compile your SDA.mq4 but got the error in reversal part. Would you mind re-uploading that mq4 file? Attached Image
+
+--- 帖子 #15 ---
+When are the trades closed, if they fail?
+
+--- 帖子 #16 ---
+done
+
+--- 帖子 #17 ---
+when Moving Average cross to opposite trend
+
+--- 帖子 #18 ---
+Thank you. Which MA ? Is there any description of the EA's settings? Which settings do you use? Is your EA running all the day?
+
+--- 帖子 #19 ---
+////////xxxxxxx if(MarketBuysCount &gt;= 1) if(Bid &lt; SMA30A4H - NormalizeDouble(35/factor,Digits)) if(SMA15A4H &gt; SMA30A4H) {DeleteBuyOpen = true;}//} /////xxxxxxx if(MarketSellsCount &gt;= 1) if(Ask &gt; SMA30A4H + NormalizeDouble(35/factor,Digits)) if(SMA15A4H &lt; SMA30A4H) { DeleteSellOpen = true;}//} ////////xxxxxxx if(MarketBuysCount &gt;= 1) if(Bid &lt; SMA15A4H - NormalizeDouble(14/factor,Digits)) if(SMA15A4H &lt; SMA30A4H) {DeleteBuyOpen = true;}//} /////xxxxxxx if(MarketSellsCount &gt;= 1) if(Ask &gt; SMA15A4H + NormalizeDouble(14/factor,Digits)) if(SMA15A4H &gt; SMA30A4H) { DeleteSellOpen = true;}//} line 2123 is were above code to close is SMA15A4H equals SMooth Moving Average 15 4Hr SMA30A4H equals SMooth Moving Average 30 4Hr
+
+--- 帖子 #20 ---
+Which settings do you use? OOTB Is your EA running all the day? yes
+
+--- 帖子 #21 ---
+Thank you. Sorry, what's OOTB?
+
+--- 帖子 #22 ---
+when you place ea on chart and don't change the inputs is ootb
+
+--- 帖子 #23 ---
+I'm really not a newbie, but I never heard that, thank you again.
+
+--- 帖子 #24 ---
+OOTB=Out of the Box meaning default settings with no changes...
+
+--- 帖子 #25 ---
+How often the EA trades and what is the recommended account size per 0.01 lot if to run all pairs. and is there away of backtesting it
+
+--- 帖子 #26 ---
+Thanks candyman. I can compile the code now and will test it. Btw, as you mentioned in #1 to attach ea to XAUUSD, will ea work if I attach to other currency pair chart?
+
+--- 帖子 #27 ---
+Just read the title of this thread
+
+--- 帖子 #28 ---
+candyman, how do you handle red news?
+
+--- 帖子 #29 ---
+Hi candyman, thanks very much for sharing this. I tested your EA today and so far it opened and closed two BUY 0.01 trades today (GBPUSD, EURUSD) within 20mins, both closed with profit of $1.16 and $0.48. Another 3 trades (EURUSD, GBPUSD, NZDUSD) are ongoing and each of them are ITM. Looks promising, may I ask if this EA can withstand high volatility conditions, or when major news is out. Perhaps if you can explain the logic of your EA in better details that will be great in helping me to understand its workings. Thanks again, I am new to FF and it's nice to experience little Green Pips on the 2nd day of my membership here! Cheers!
+
+--- 帖子 #30 ---
+https://www.mql5.com/en/signals/390160 doing forward testing .when I started tthe ea it was able to open sell trades but now I see buys.
+
+--- 帖子 #31 ---
+This EA is placed on one chart and then trades all other pairs. This is to save you opening 28 charts. The EA is placed pair you don't want traded then in the input section of EA you will see a part xauusd change that to what pair you choose . This EA trades forex pairs. YOU ONLY NEED TO PLACE ON ONE CHART YOU DON'T WANT TO TRADE
+
+--- 帖子 #32 ---
+no stress bro its fine to ask OOTB=Out of the Box meaning default settings with no changes
+
+--- 帖子 #33 ---
+i leave the trades open to face news
+
+--- 帖子 #34 ---
+i wrote code to when price is above moving average buy.vice versa for sell. but i don't know why it is not taking sell trades. what has surprised me is it is rakinng in healthy profit. $35 on 0.01 lot with 10 % draw down is good .
+
+--- 帖子 #35 ---
+if you look at the code in the EA and mathematics was not a problem you understand its workings the logic below ///xxxxxxxacececerere cuurve pozapoza if (SMA7A4H &gt; SMA7AD1 )if( chighD1A &gt; SMA7A4H )if( copenD1A &gt; SMA7AD1) if (SMA3A4H &gt; SMA7A1H )if(SMA7A1H &gt; SMA7AM30) if (SMA7A4H -SMA7AD1&gt; NormalizeDouble(30/factor,Digits)) if (SMA7AD1 - clowD1A &gt; NormalizeDouble(30/factor,Digits)) if (Bid &gt; SMA7AD1)if (Bid &gt; SMA3A4H)if (Bid &gt; SMA7A1H)if (Bid &gt; SMA7AM30) if(Bid &gt; SMA15A4H - NormalizeDouble(7/factor,Digits)) { MaStatus[PairIndex] = longtrend; }//if (bid &gt; val) ///xxxxxxxacececerere cuurve pozapoza if (SMA7A4H &lt; SMA7AD1 )if( clowD1A &lt; SMA7A4H )if( copenD1A &lt; SMA7AD1) if (SMA3A4H &lt; SMA7A1H )if(SMA7A1H &lt; SMA7AM30) if (SMA7AD1 - SMA7A4H &gt; NormalizeDouble(30/factor,Digits)) if (chighD1A - SMA7AD1 &gt; NormalizeDouble(30/factor,Digits)) if(Ask &lt; SMA15A4H + NormalizeDouble(7/factor,Digits)) if (Ask &lt; SMA7AD1)if (Ask &lt; SMA3A4H)if (Ask &lt; SMA7A1H)if (Ask &lt; SMA7AM30) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) ///xxxxxxxacececerere cuurve ballzakzak if (SMA7AD1 &gt; SMA7A4H )if( SMA7A4H &gt; SMA7A1H)if( SMA7A4H &gt; SMA7AM30) if (SMA7AD1 - clowD1A &gt; NormalizeDouble(100/factor,Digits)) if (SMA7A4H - clowD1A &gt; NormalizeDouble(50/factor,Digits)) if (Bid &gt; SMA7A4H)if (Bid &gt; SMA7A1H)if (Bid &gt; SMA7AM30) if(Bid &gt; SMA15A4H - NormalizeDouble(7/factor,Digits)) { MaStatus[PairIndex] = longtrend; }//if (bid &gt; val) ///xxxxxxxacececerere cuurve ballzakzak if (SMA7AD1 &lt; SMA7A4H )if( SMA7A4H &lt; SMA7A1H)if( SMA7A4H &lt; SMA7AM30) if (chighD1A - SMA7AD1 &gt; NormalizeDouble(100/factor,Digits)) if (chighD1A -SMA7A4H &gt; NormalizeDouble(50/factor,Digits)) if (Ask &lt; SMA7A4H)if (Ask &lt; SMA7A1H)if (Ask &lt; SMA7AM30) if(Ask &lt; SMA15A4H + NormalizeDouble(7/factor,Digits)) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) ///xxxxxxxacececerere cuurve ballxaxaxa if (SMA7H4H &gt; SMA7BD1)if( SMA3A4H &lt; SMA7A4H)if(SMA3H4H &gt; SMA7H4H) if (chighD1B - clowD1B &gt; NormalizeDouble(70/factor,Digits)) if (SMA7H4H - clowD1B &gt; NormalizeDouble(50/factor,Digits)) if (chighD1B &gt; SMA7H4H) if (Bid &gt; SMA7A4H)if (Bid &gt; SMA7A1H)if (Bid &gt; SMA7AM30) if(Bid &gt; SMA15A4H - NormalizeDouble(7/factor,Digits)) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) ///xxxxxxxacececerere cuurve ballxaxaxa if (SMA7H4H &lt; SMA7BD1)if( SMA3A4H &gt; SMA7A4H)if(SMA3H4H &lt; SMA7H4H) if (chighD1B - clowD1B &gt; NormalizeDouble(70/factor,Digits)) if (chighD1B -SMA7H4H &gt; NormalizeDouble(50/factor,Digits)) if ( clowD1B &lt; SMA7H4H) if (Ask &lt; SMA7A4H)if (Ask &lt; SMA7A1H)if (Ask &lt; SMA7AM30) if(Ask &lt; SMA15A4H + NormalizeDouble(7/factor,Digits)) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) ///xxxxxxxacececerere cuurve ball if(SMA7Z4H &gt; SMA7DD1)if(SMA7Z4H &lt; SMA7DD1 - NormalizeDouble(100/factor,Digits)) if(SMA7AM30 &gt; SMA7A1H)if(SMA7A1H &gt; SMA7A4H)if(Bid &gt; SMA7A4H + NormalizeDouble(40/factor,Digits)) if(clowH1A &lt; SMA7AM30) if(Bid &gt; SMA15A4H - NormalizeDouble(7/factor,Digits)) { MaStatus[PairIndex] = longtrend; }//if (bid &gt; val) ///xxxxxxxacececerere cuurve ball if(SMA7Z4H &lt; SMA7DD1)if(SMA7Z4H &gt; SMA7DD1 + NormalizeDouble(100/factor,Digits)) if(SMA7AM30 &lt; SMA7A1H)if(SMA7A1H &lt; SMA7A4H)if(Ask &lt; SMA7A4H - NormalizeDouble(40/factor,Digits)) if(chighH1A &gt; SMA7AM30) if(Ask &lt; SMA15A4H + NormalizeDouble(7/factor,Digits)) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) ////xxxxxxx///xxxxxxx_01 if(clowH4A &lt; SMA15A4H)if(clowH4A &lt; EMA18A4H) if(SMA15A4H &gt; SMA30A4H) if(EMA4A4H &gt; SMA30A4H) if(Bid &gt; EMA4A4H)if(Bid &gt; SMA15A4H)if(Bid &gt; EMA18A4H) if(Bid &lt; EMA4A4H + NormalizeDouble((15.5+spread)/factor,Digits)) { MaStatus[PairIndex] = longtrend; }//if (bid &gt; val) ////xxxxxxx_01 if(chighH4A &gt; SMA15A4H)if(chighH4A &gt; EMA18A4H) if(SMA15A4H &lt; SMA30A4H) if(EMA4A4H &lt; SMA30A4H) if(Ask &lt; EMA4A4H)if(Ask &lt; SMA15A4H)if(Ask &lt; EMA18A4H) if(Ask &gt; EMA4A4H - NormalizeDouble((15.5+spread)/factor,Digits)) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) ////xxxxxxx///xxxxxxx_02 if(clowH4A &lt; EMA4A4H) if(SMA15A4H &lt; SMA30A4H) if(EMA4A4H &gt; SMA30A4H) if(Bid &gt; EMA4A4H)if(Bid &gt; SMA7A1H) if(Bid &lt; SMA7A1H + NormalizeDouble((15.5+spread)/factor,Digits)) { MaStatus[PairIndex] = longtrend; }//if (bid &gt; val) ////xxxxxxx_02 if(chighH4A &gt; EMA4A4H) if(SMA15A4H &gt; SMA30A4H) if(EMA4A4H &lt; SMA30A4H) if(Ask &lt; EMA4A4H)if(Ask &lt; SMA7A1H) if(Ask &gt; SMA7A1H - NormalizeDouble((15.5+spread)/factor,Digits)) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) /////xxxxxxx ////xxxxxxx///xxxxxxx_03 if(copenW1A - clowW1A &gt; NormalizeDouble((150.5+spread)/factor,Digits)) if(SMA15A4H &lt; EMA18A4H)if(copenH4A &lt; SMA15A4H) { MaStatus[PairIndex] = longtrend; }//if (bid &gt; val) ////xxxxxxx_03 if(chighW1A - copenW1A &gt; NormalizeDouble((150.5+spread)/factor,Digits)) if(SMA15A4H &gt; EMA18A4H)if(copenH4A &gt; SMA15A4H) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val) ////xxxxxxx///xxxxxxx_04 if(clowH4A &lt; SMA15A4H)if(SMA15A4H &gt; EMA18A4H) if(SMA15A4H &gt; SMA30A4H) if(EMA4A4H &gt; SMA30A4H) if(Bid &gt; SMA15A4H)if(Bid &gt; SMA15A4H)if(Bid &gt; EMA18A4H) if(Bid &lt; SMA15A4H + NormalizeDouble((15.5+spread)/factor,Digits)) { MaStatus[PairIndex] = longtrend; }//if (bid &gt; val) ////xxxxxxx_04 if(chighH4A &gt; SMA15A4H)if(SMA15A4H &lt; EMA18A4H) if(SMA15A4H &lt; SMA30A4H) if(EMA4A4H &lt; SMA30A4H) if(Ask &lt; SMA15A4H)if(Ask &lt; SMA15A4H)if(Ask &lt; EMA18A4H) if(Ask &gt; SMA15A4H- NormalizeDouble((15.5+spread)/factor,Digits)) { MaStatus[PairIndex] = shorttrend; }//if (bid &lt; val)
+
+--- 帖子 #36 ---
+SMA =simple moving average 4H= 4HR D1 = Day clowD1 = candle low D1 todays lowest price
+
+--- 帖子 #37 ---
+You close the trades, no matter if win or loss?
+
+--- 帖子 #38 ---
+EA close the trades some win some loss
+
+--- 帖子 #39 ---
+Thanks for details. It's clear now. I'm testing EA and 5 trades win now. Looking at your code (quite hard to me since no programming background ) and trying to understand how EA move trailing stop. So far EA looks interesting. I like it.
+
+--- 帖子 #40 ---
+Sorry, that is clear (my fault). I don't understand what you mean with "to face news". F.e. what do you do this afternoon, when ISM Manufacturing PMI happens or especially tomorrow NFP? Do you nothing and let the EA work or do you stop the EA before the news and enter again after the news?
+
+--- 帖子 #41 ---
+i Do nothing and let the EA work
+
+--- 帖子 #42 ---
+hi candyman, thanks for sharing. possible for backtested?
+
+--- 帖子 #43 ---
+steve hopwoods ea's are open source . i got it and put the conditions for buy and sell as stated earlier . my idea was if pair was ranging it would end up hedging then the trending pairs would take the drawdown out and bring profit. but now the ea is not able to hedge . what I see it do if two pair open and fail to come out of dd it open another possible trending pair and bam that pair trends and makes profit to cover the loss pairs and spare change . i never have thought to trade this way but heck its working big time . so i am going to leave it to do it's thing .hopefully after three weeks if the drawdown is less than 20 % on 200usd demo then this toy is deadly .
+
+--- 帖子 #44 ---
+maybe you are a coder here is link to steve hopwood page where I got ea http://www.stevehopwoodforex.com/php...p?f=104&amp;t=5371 to encourage and motivate others i am not a coder but just good at logic . if you see a good setup on your chart think of the logic behind kapish. get someones open source ea remove their setup put yours
+
+--- 帖子 #45 ---
+right there's two pair open see screen one loss other profit. the profit pair nearly gapped it just putting profit on overall account .the close all profit is $3.meaning if the overall profit of all open pair is $3 close all trades winners and losers together
+
+--- 帖子 #46 ---
+not even 5 minutes and see screen short
+
+--- 帖子 #47 ---
+Why is the close all profit 3$?
+
+--- 帖子 #48 ---
+you r able to change it . i choose $3 because I want to bank my money quick . i don't have space to test higher amounts. all open trades close friday even if loss
+
+--- 帖子 #49 ---
+it's easy to move price 30 pips for a pair. 30pips equals $3 on 0.01 lot
+
+--- 帖子 #50 ---
+Where can I change it? It's EquityIncreaseTargetCash , right?
+
+--- 帖子 #51 ---
+arrows show where you can change
+
+--- 帖子 #52 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #53 ---
+this is very weird,as soon as i placed this EA on profile,it changed all charts and replaced them with default tpl,is this normal?
+
+--- 帖子 #54 ---
+i see this ea setting MaxAllowableCashLoss=-20; it is to big. compare the equitytargetcash 3 or 7, if the loss went to it, all profit gone.
+
+--- 帖子 #55 ---
+you had other charts open .(better to only have one) those other charts templates will have been changed to template inputted in ea
+
+--- 帖子 #56 ---
+true better to have lower loss maybe 10
+
+--- 帖子 #57 ---
+change input where arrows are in screenshot put SDA
+
+--- 帖子 #58 ---
+the ea will put SDA template on any other charts open
+
+--- 帖子 #59 ---
+i bobod equity close all was $7 i have changed to $5
+
+--- 帖子 #60 ---
+Hi. Thanks for EA. Where is this equity close all?
+
+--- 帖子 #61 ---
+post 51 see the screenshot its called equity basket closure
+
+--- 帖子 #62 ---
+Ok,thanks.
+
+--- 帖子 #63 ---
+My actual loss is -85, although the setting of MaxAllowableCashLoss 0 -20 ?????
+
+--- 帖子 #64 ---
+Close all profit is $7 default
+
+--- 帖子 #65 ---
+hi Candyman, can you help upload the EA shell from steve hopwood? http://www.stevehopwoodforex.com/phpBB3/viewtopic.php?f=15&amp;t=79 I can't download it or register in their forum.
+
+--- 帖子 #66 ---
+Please post your set file for the EA linked to mql5. As i can see u had no trade overnight - i had 6 trades- 2 closed in profit and 4 floating -10 So even u use different EA or have some special settings....
+
+--- 帖子 #67 ---
+4ok
+
+--- 帖子 #68 ---
+i have uploaded ea from vps with ea linked to mql5. interesting is it also opening sells . if it's doing so &gt;&gt;&gt;???????????
+
+--- 帖子 #69 ---
+mistakenly said $3
+
+--- 帖子 #70 ---
+this loss is for a pair .effectively its a 200 pip loss
+
+--- 帖子 #71 ---
+thank a lot!!
+
+--- 帖子 #72 ---
+urgent-alert-fx-losers-2-billion-approved-distribution-get-your-pennies https://www.zerohedge.com/news/2018-...t-your-pennies If you have traded FX in the past 10 years, you have probably lost and lost big. Not because you are a bad investor or trader, but because most of the FX institutions have been run by ponzi scammers like Russ Wasendorf or Phillip Bennett. The Fed has been quiet because their corporate owners and masters - the big banks - were making a killing from this state of existence.
+
+--- 帖子 #73 ---
+r u also av deez results
+
+--- 帖子 #74 ---
+very good result. Candyman!! I will it on demo tonight.!
+
+--- 帖子 #75 ---
+hi All i see is this but i don't see the EA running can you send the EA file?
+
+--- 帖子 #76 ---
+Attached File(s) Baluda.SuperSlope.v.2.2.mq4 44 KB | 308 downloads
+
+--- 帖子 #77 ---
+candyman, can you upload your setting file?? default setting from SDA-X is not same as yours. thank.
+
+--- 帖子 #78 ---
+ok
+
+--- 帖子 #79 ---
+good day i put the ea on the meta trader on my pc . it opens sells. this means my vps cpu can't handle this ea. i am ending the test. i also had ea which you place on many charts .its using same strategy as SDA. it also has done well
+
+--- 帖子 #80 ---
+SDA_x.txt above
+
+--- 帖子 #81 ---
+hi, candyman, your new ea need to attach in one chart or need to attach to many chart?
+
+--- 帖子 #82 ---
+wicks 4 u
+
+--- 帖子 #83 ---
+new ea to have own thread. latest files attach in one chart
+
+--- 帖子 #84 ---
+then SDA-X AND SDA-Q version , what about difference between them?
+
+--- 帖子 #85 ---
+Q has more conditional setups
+
+--- 帖子 #86 ---
+need to attach to many chart. wen in profit also close losers
+
+--- 帖子 #87 ---
+https://www.mql5.com/en/signals/391137 DAX performance a week U have to close with profit U happ with not EA
+
+--- 帖子 #88 ---
+what set file for this DAX?
+
+--- 帖子 #89 ---
+ok
+
+--- 帖子 #90 ---
+wick 4 u
+
+--- 帖子 #91 ---
+DAX need the above indicator superslope?
+
+--- 帖子 #92 ---
+no
+
+--- 帖子 #93 ---
+What time frame for DAX EA?
+
+--- 帖子 #94 ---
+set file 4hr
+
+--- 帖子 #95 ---
+In EA settings trading time is 5 minutes.
+
+--- 帖子 #96 ---
+strategy 4hr traded on 5m
+
+--- 帖子 #97 ---
+SDA-X performance on my account yesterday. All profit except 1 loss, Candyman do you know how the EA handled EURNZD trade which resulted in loss?
+
+--- 帖子 #98 ---
+and EA should be attached to 4h or 5m chart then ?
+
+--- 帖子 #99 ---
+does not matter. EA code is not chart time dependant
+
+--- 帖子 #100 ---
+draw down on DAX at MoMent
+
+--- 帖子 #101 ---
+wow. do you know how the EA handled EURNZD trade ......no i requesting coder assistance .....help WindChaser
+
+--- 帖子 #102 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #103 ---
+all trades closed
+
+--- 帖子 #104 ---
+i like dis EA ...dax
+
+--- 帖子 #105 ---
+hi, candyman, i notice your mql5 link of this SDA ea test seems stop, and you replace dax ea to trade, why you stop the test SDA?
+
+--- 帖子 #106 ---
+sda was running on vps.it was only sending buy orders when I put it on my pc sell orders were opening .i concluded vps cpu was blocking sda. i then stopped tests . i am comtinuing dax. maybe a kind soul could put it on their vps and post results
+
+--- 帖子 #107 ---
+I am running SDA on a my account the operations from the black arrow are operations only made by SDA Sorry for my English, he's terrible.
+
+--- 帖子 #108 ---
+thanks . that shows ea not doing well . sadly can't work on it to improving
+
+--- 帖子 #109 ---
+could you run DAX? post results
+
+--- 帖子 #110 ---
+I will create a new account tonight and put it to run, you have a set for the DAX.
+
+--- 帖子 #111 ---
+friend you testing on real account . its a test. SDA need to be made better .from your results the EA is closing on moving average cross . i have removed that from dax. after testing trades are best closed when account in profit. or have 70 pip breakeven pip . drawdown needs to be low . DAX ea has had $35 drawdown so a $100 account can survive and grow. it survived new york session yesterday it has gone in draw down now of $10. lets how it plays out .
+
+--- 帖子 #112 ---
+for DAX...i should follow and close manual or EA will do this ?
+
+--- 帖子 #113 ---
+Dax - from yesterday to today, let's see how long the account holds.
+
+--- 帖子 #114 ---
+if equity is above balance let below ea close.attach xauusd. if equity is below balance follow and close manual
+
+--- 帖子 #115 ---
+when eequity is below balance follow and close manual when equity goes above $1000
+
+--- 帖子 #116 ---
+yesterday dax was at $267 today balance went to $380 equity $216. equity then went to $283. i closed all trades
+
+--- 帖子 #117 ---
+so the week opening balance was $223 and now finishing $283 a profit of $60
+
+--- 帖子 #118 ---
+when you close all trades you disable EA and also delete all the pendings ? And after that enable the ea again ? Is that the correct procedure ?
+
+--- 帖子 #119 ---
+correct
+
+--- 帖子 #120 ---
+modifications to dax. to reduce draw downs like gbp pairs yesterday
+
+--- 帖子 #121 ---
+Hi CM subscribed yesterday. Might be good idea to have a suffix on each version to avoid confusion and better monitoring. i.e DAX v1,2 etc/
+
+--- 帖子 #122 ---
+ok
+
+--- 帖子 #123 ---
+Hi Candyman, thank you for your great work, but can you put those update to first post?
+
+--- 帖子 #124 ---
+have you put update version ?
+
+--- 帖子 #125 ---
+done
+
+--- 帖子 #126 ---
+the modification done is this .only send a buystop only when the price of that buystop is above 50 simple moving average on a 5 min chart. vice versa for sells this morning it has the following trades open . also jumping stop loss was calculating wrongly which caused big drawdown yesterday lastly buy trades will closed if 50 SMA is 80 pips above buy price and bid is 30pips below 50SMA.vice versa sells
+
+--- 帖子 #127 ---
+Hi candyman. Thanks for sharing your work. As a mostly silent reader I jump in the thread and give it a try. If there is any Need of testing, let me know. Would like to help in the matters I am able. To start in the right way, please let me know this: - I install the "DAX" on multiple Charts H4 all with the same Magic number (Default 0) - I drag awesome EA on another Chart (TF doesn´t matter?) and let it run with the given set? Thank you for your help and keep on the hard work. Bulli
+
+--- 帖子 #128 ---
+correct . make sure charts are clean. the template with moving average is for seeing what EA is seeing .it already is seeing so if you done analysing chart clear it, f you using vps. you can actually put DAX on any time frame if tick mode is true. For others reading tick mode tells EA not to wait for candle open or close to trade. candles are time chart dependent
+
+--- 帖子 #129 ---
+try to reverse it where you buy then sell there
+
+--- 帖子 #130 ---
+the modification done is this .only send a buystop only when the price of that buystop is above 50 simple moving average on a 5 min chart. vice versa for sells
+
+--- 帖子 #131 ---
+the modification done is this .only send a buystop only when the price of that buystop is above 50 simple moving average on a 5 min chart. vice versa for sells
+
+--- 帖子 #132 ---
+dude are you watching the account right now you're $15 below a thousand .it should keep climbing until banks open in usa.
+
+--- 帖子 #133 ---
+9$ to $1000
+
+--- 帖子 #134 ---
+candyman752 How to turn on SDA EA trading on Friday ? Thanks you
+
+--- 帖子 #135 ---
+lk
+
+--- 帖子 #136 ---
+Yes i did like you from 14 hour ago but no trade come , i don't know why
+
+--- 帖子 #137 ---
+Here it is some simple equity manager EA if you want to close all trades when equity reach your desired level.
+
+--- 帖子 #138 ---
+good tool
+
+--- 帖子 #139 ---
+if true it does not trade fridaY if You want Friday put false
+
+--- 帖子 #140 ---
+Candyman, thanks for this. Is it wise to close trades manually when in profit or better let it handle the trades. For instance i see on chf jpy it has 5.50 profit on the sell and 8.14 on the by trade.
+
+--- 帖子 #141 ---
+Why does it open a buystop so far from the actual price? The trade never occur. Is it something wrong that I have done? I'm using candyman's setfile...
+
+--- 帖子 #142 ---
+update version in post 1. DAX v1.3 I observed EA close two GBPCHF sell positions while there was a buy with huge draw down . I have increased the number of pips needed to open a second position .91 pips Also observed GBPCAD rightly close two sell position when price went north at news but failed to open a sell when price within 5 min turned back south . have written code for that .
+
+--- 帖子 #143 ---
+Now in forex there has been two blood bath .swiss franc depeg from euro and brexit. these events blew trading accounts. alpari uk closed. I have tried to protect your account from these disasters. The EA will open a sell when moving average indicate sell trend. Then at same time three buystops open . the distance is such that under normal trading conditions The trade never occur but if you have brexit situation they open hopefully saving your account from blowing . so in your situation a sell open and then closed . the buystops expire after 720 hours or deleted if moving average indicate the trend has now turned to buy
+
+--- 帖子 #144 ---
+hi candyman, am trying to backtest, but the EA didn't open the trade.
+
+--- 帖子 #145 ---
+which one ? send screenshot
+
+--- 帖子 #146 ---
+i use the default setting download from post 1 running on 5 minutes in strategy tester.
+
+--- 帖子 #147 ---
+its up to you . the ea closes a trade after a trend started and the trend exhausted . if ea opens a buy it means moving average have analysed a up trend but as happens in forex the trend does not start and moving average indicate a down trend the ea will open a sell. eventually a trend will start and that trend will exhaust and ea will close trade . if trend restarts it will reopen. so key point is how I have determined exhaustion level . here it is example a buy if simple moving average 50 SMA on 5 min chart is 80 pips above the buy' open price also if market price moves 30 pips below 50SMA close buy only . Fellow traders if you have better way to determine exhaustion please share
+
+--- 帖子 #148 ---
+friend I have just tested on GBPCHF see screenshots below Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) I need screenshots like the above to be able to help you
+
+--- 帖子 #149 ---
+i have uploaded what i did in backtest using default setting. thanks.
+
+--- 帖子 #150 ---
+here is results from our friend testing this on live account from brazil Attached Image (click to enlarge) he started with a $1000. equity went as low as $ 960, if you were reading my posts yesterday I said during new York session the equity will go above $1000. the green arrows shows when equity went above $1000. the red arrow show when I would have closed . on my demo ea the is observed to have done a bad job of closing all trades before market closes
+
+--- 帖子 #151 ---
+the period you testing is 2015. Who is your broker ? Do you have historical 5M data? Actually send me screenshot of your 5 M chart AUDUSD showing from 01/01/2015
+
+--- 帖子 #152 ---
+I using tickstory for the 2015 historical data.
+
+--- 帖子 #153 ---
+Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) definitely working with 2018 data . anybody able to assist happytrade38
+
+--- 帖子 #154 ---
+your observation is right, i tried in 2018 data which pull data from broker is working, but same EA doesn't open trade for the data from tickstory.
+
+--- 帖子 #155 ---
+I encourage you to read happytrade thread https://www.forexfactory.com/showthread.php?t=733567 he has led me to read https://www.forexfactory.com/showthread.php?t=635569 at the end of the DAX is a trend follower basket trading strategy
+
+--- 帖子 #156 ---
+happytrade start an encourage thread, hope any of you can join, but i can not test others eas due to my vps limited usage. from my view, DAX is potential ea, but the drawdown too high, if possible, this ea need a good filter and a good exite method, it will be stable.
+
+--- 帖子 #157 ---
+excellent post . have gone and added more filters and improved exit features version updated in post 1 and here .
+
+--- 帖子 #158 ---
+DAX v1.4 modifications were done after a back test on GBPJPY. I am happy with how it is opening trades on a single pair . basket trading will bring greater synergy.
+
+--- 帖子 #159 ---
+do you have a set file
+
+--- 帖子 #160 ---
+trying to get this into my EA
+
+--- 帖子 #161 ---
+I have added majamivice equity manager to post 1 with my set file very nice tool. thanks
+
+--- 帖子 #162 ---
+Hello sir, if you can update the code to v1.4. thank you .
+
+--- 帖子 #163 ---
+are you also using equity manager ?
+
+--- 帖子 #164 ---
+Thank you for the new version, candyman752 ...Is the setfile you kindly shared in post #89 still valid in this version?
+
+--- 帖子 #165 ---
+here is latest ssset file . I also will put it in post 1
+
+--- 帖子 #166 ---
+Hi. Sorry I don't have set file. I didn't use trailing part, just simple equity target.
+
+--- 帖子 #167 ---
+https://www.forexfactory.com/showthr...=712429&amp;page=8 v1.5 update in post 1 fine tuned setup for opening or adding 2nd position also changed break even for 2nd from 14 pips to 70pips
+
+--- 帖子 #168 ---
+another fine tuning of a setup . post 1 also updated
+
+--- 帖子 #169 ---
+post 1 now includes various explanations given to questions asked in this thread
+
+--- 帖子 #170 ---
+happytrader38 here is interesting fibo trader https://www.forexfactory.com/showthr...74515&amp;page=660 Here is my Final notes on my trading plan: Final Notes for all charts: The 3 lower charts are showing a full blown downtrend. But also – all three charts are showing a stopper at the 132.925 along with the Daily showing a double bottom. The 132.925 is holding support at the zero of the Fibo on the 3 lower charts. There are two prospective entries: One with the opening on the new daily for the Fibo flip going long – and two – wait on the SAR for an entry going short. Notes for readjustments: Entry: New Daily opening at 1900 had also flipped the Fibo for the up. With a strong Fibo support and a Double Bottom entered long at 133.207 looking at the H4 Purple as resistance for 40. ******************************************** The rule that applies for this trade is one I do not teach – it is called Market Correctness. The reason I do not teach it is because most traders do not recognize the power of the Fibo; or does not even know to use it properly. It has a lot to do with the market increments according to the bar spread on the charts; which is 40 with 39 showing, and using the right Fibo. On a standard day of trading the increments on a 2 hour bar is roughly 30 pips. On a market that is being corrected can be as much as 100+ pips on a 2 hour bar. On a market that is correcting itself is when your 4 charts are being corrected in using the Fibo's. Once the correction has been complete is when your 4 Fibo charts are sync as they are now. And this correction had ended on the 1900 opening Daily bar turning Green which places all 4 Fibo charts Green for the UP. As you notice there were two options for an entry after the correction. The reason is because the increments will also begin to widen from being so tight; and the charts will rally back in being standard which calls for a major consolidation. So everyone knows – the correction began with last Friday's High and the Daily Fibo Red.
+
+--- 帖子 #171 ---
+PRICE ACTION CHANNEL read these 3 old posts by the OP and you will find the two yellow lines aka Price Action Channel is on one of the templates he posted. No need additional indicator and you can create the PAC in any trading platform using two 5-period Smoothed Moving Average set to High and Low
+
+--- 帖子 #172 ---
+DAX is a low winning percentage EA https://www.tradingwithrayner.com/st...itable-trader/ Initially, my first impression of Trend Following was simply trading with the trend. But as I read more books and studied research papers , I realized it is much more than that. As a trend follower, there are 5 distinct traits that make it stand out from the crowd The 5 traits are: 1) Trend follower does not predict where the market is heading 2) Trend follower has low winning % 3) Trend follower has no profit targets 4) Trend follower trades all markets 5) Trend follower buys high and sell low After being a losing trader for 4 years, it took me 6 months to make back everything and more.
+
+--- 帖子 #173 ---
+thanks candyman for compliment.
+
+--- 帖子 #174 ---
+https://www.tradingwithrayner.com/free-course-download/ trend trader book my philosophy
+
+--- 帖子 #175 ---
+thanks mate. will take a look.
+
+--- 帖子 #176 ---
+hi, candyman, if possible, can you open a new demo account to test the DAX 1.6 and link to mq5 site? it will help us clear know the new version ea perfomance and better to analayis. and also thanks for sharing valuable sites to us.
+
+--- 帖子 #177 ---
+its like you reading my thoughts . I have created trade explorer which you can see at the top of the thread. DAX v1.6
+
+--- 帖子 #178 ---
+humble request I am running DAX on 28 pairs on a vps. the vps cannot handle another account for testing . I have loaded DAY v1.1 It is DAX v1.6 but with one major filter. I have introduced Simple Moving Average 14 from day chart. In the EA inputs section its MaPeriod = 14 I then have coded the EA to only open the initial trade if HR4 trend and DAY trend agree . So an initial buy will only open if HR 4 is up and DAY 14 SMA is UP. after that it can open a sell if HR 4 is down is there any kind soul who can run DAY EA on 28 pairs with equity manager in post 1and setfile there . Then we can compare DAX v1.6 and DAY v1.1 by Friday to see which is the better
+
+--- 帖子 #179 ---
+pretty please
+
+--- 帖子 #180 ---
+I can run on my VPS.
+
+--- 帖子 #181 ---
+I chose 14 SMA day because a trader on stevehopwood found it most profitable of tests he did
+
+--- 帖子 #182 ---
+excellent .thanks
+
+--- 帖子 #183 ---
+Is there set file for DAY EA or shall I run just default?
+
+--- 帖子 #184 ---
+default
+
+--- 帖子 #185 ---
+I choose 14 SMA others could try 7 and the famous 5 SMA
+
+--- 帖子 #186 ---
+in order to compare apple for apple , we will not intervene manually . let robots trade
+
+--- 帖子 #187 ---
+Ok
+
+--- 帖子 #188 ---
+https://www.zerohedge.com/news/2018-...sts-were-right Attached Image (click to enlarge) the markets are rigged says article but an interesting point hedge funds trade when the banks have told the results of an announcement before the announcement
+
+--- 帖子 #189 ---
+https://www.forexfactory.com/majamivice#acct.37 DAY EA trade explorer
+
+--- 帖子 #190 ---
+Attached Image (click to enlarge)
+
+--- 帖子 #191 ---
+the equity manager is not doing a good job . please remove it . I have removed it from mine
+
+--- 帖子 #192 ---
+also click on the sync button .last sync was 18 hrs ago
+
+--- 帖子 #193 ---
+hi, candyman, please post majamivice TE in your first thread post.
+
+--- 帖子 #194 ---
+done
+
+--- 帖子 #195 ---
+Why it not doing good job. Equity target is set to 60 in money and trailing start at 2. Equity wasn't in profit at all as I can see. Attached Image (click to enlarge)
+
+--- 帖子 #196 ---
+the problem is when it comes to closing . the EA does not disable itself and then close all orders . what is happening is it is closing orders and the other EAs are opening orders at same they orders have been closed which the equity manager tries to close also. just an hour ago the ea closed $6 profit .but new orders would open and the equity manager closed them reducing profit to $2
+
+--- 帖子 #197 ---
+https://www.mql5.com/en/signals/395700 dax v1.6
+
+--- 帖子 #198 ---
+Ok. I closed equity manager. Now we trade just with DAY EA.
+
+--- 帖子 #199 ---
+yes
+
+--- 帖子 #200 ---
+from tests going on between DAY and DAX DAY has lower draw down and got in to profit quicker. DAY ea has 14 simple moving average as a filter. the next testing should be on different day filters I suggest 5 SMA 7 SMA and 40 SMA 40 equals 240 on 4 HR chart. Anyone familiar with HGI on stevehopwood site are aware of BOB MA. Anyone able help carry out the different day MA tests
+
+--- 帖子 #201 ---
+majamivice DAY ea equity reached 21 and has dropped to 10. should a trailing width of 5 be used . such that when equity dropped to 15 all trades close
+
+--- 帖子 #202 ---
+Yes I know but we don't have equity manager now.
+
+--- 帖子 #203 ---
+day EA has shown to be more successful than DAX I have changed the account on my vps and have begun SMA 40 DAY test. I realized that no need to test 5 AND 7 SMA because the HR4 trends finder is based on that . I won't open trade explorer for DAy 40 https://www.mql5.com/en/signals/396023
+
+--- 帖子 #204 ---
+DAY EA has been uploaded to post 1 the default is 40 period or 40 SMA
+
+--- 帖子 #205 ---
+from the testing right now, day ea has big potential than dax, i think the 14 sma has working for this ea, but we need at least 3 weeks to see how this ea behavious to make some clusion and changes.
+
+--- 帖子 #206 ---
+I have another equity manager. Attached File(s) -closeatprofit.mq4 14 KB | 223 downloads
+
+--- 帖子 #207 ---
+the code is super. it doesn't trail. maybe consolidation of the trail code from other EA
+
+--- 帖子 #208 ---
+It can close all pending orders also.
+
+--- 帖子 #209 ---
+its excellent . i
+
+--- 帖子 #210 ---
++00.00,-10.00,+13.00,-15.20,+19.00,-23.20 I have a suggestion to let the EA sleep in times we expect big moves . when it sleeps it monitor trades but doesn't open . this makes it safe for any type equity EA. I have suggested the hours shown in first line. the screen shot show where you can paste
+
+--- 帖子 #211 ---
+use it . we mentioned earlier $5 gap is good I am going to put hours ea should sleep. this I believe will allow other EA I stopped using to work . trail will start at $ 7 and trail width $ 5
+
+--- 帖子 #212 ---
+spoke to soon the other equity EA is problematic. I will use yours
+
+--- 帖子 #213 ---
+Which one equity EA should we use?
+
+--- 帖子 #214 ---
+the one you posted
+
+--- 帖子 #215 ---
+I have posted 2. Closeatprofit or the other one?
+
+--- 帖子 #216 ---
+Closeatprofit
+
+--- 帖子 #217 ---
+I've set to close all at $10 in profit.
+
+--- 帖子 #218 ---
+ok
+
+--- 帖子 #219 ---
+I have modified EA so it can trail. it missed commission and swap when adding profit fixed use default .
+
+--- 帖子 #220 ---
+there was a nice move in asia session .sadly having a $10 fixed target lost out $30. anyway hope modified EA will avoid missing out on big moves
+
+--- 帖子 #221 ---
+post 1 updated with basket trailing equity EA
+
+--- 帖子 #222 ---
+Yes, thanks.
+
+--- 帖子 #223 ---
+day 40 sma https://www.mql5.com/en/signals/396115 started yesterday I have put basket equity trail default I will edit post 1
+
+--- 帖子 #224 ---
+test now is day 14 &amp; 40. the dax trade explorer. I reclogged in account and closed trades .this is how I knew day 14 missed out on profit taking
+
+--- 帖子 #225 ---
++00.00,-04.00,+08.00,-10.05,+13.00,-15.25,+19.15 adjusted for moves that happens in asia session . concept is let EA look for setups when market is calmer less volatile
+
+--- 帖子 #226 ---
+its going to be interesting to see how the next three weeks play out . I believe the tools are now perfect . and the tools won't be an excuse for any poor performance. results will tell us about the strategy .
+
+--- 帖子 #227 ---
+hi I am a newbie here .... for -closeatTrailprofit, should we running by manually or by attach to one chart like gold/usd to running it.. ?
+
+--- 帖子 #228 ---
+equity ea modified .it didn't kick in when my equity went $5 above account balance . the modified should currently break even is 93 pips while jump stop is 7 pips. from observing how markets move this should change . break even 28 pips and jumps should be 63 pips majamivice please change or update EA accordingly with files below
+
+--- 帖子 #229 ---
+attach to one chart like gold/usd to run it
+
+--- 帖子 #230 ---
+finally figured out where to put price action channel as a filter . post 1 updated
+
+--- 帖子 #231 ---
+my ea's upto now have been based by looking at charts look for a setup and code it. the changes I made today based on something different . it is from observing the market impact on ea. the market sent the ea into draw down. the move reminded of rinse and repeat. well I changed the break even and jumping pips. I believed that this would help the ea claw itself out of a draw down. the screenshot shows this is happening
+
+--- 帖子 #232 ---
+Thanks, updated. Is it default setting?
+
+--- 帖子 #233 ---
+correct default
+
+--- 帖子 #234 ---
+looking good now. I am still running the original v1 and 5 days its 752 pips up and currently 51 eu profit @0.01 /1000 eur account demo. will put the 3.3 on another demo tomorrow and let them both run parallel.
+
+--- 帖子 #235 ---
+equity stop loss trailer basket trailing basket trader trailing basket trailing equity EA I have done tests it works perfect
+
+--- 帖子 #236 ---
+what are your settings ?
+
+--- 帖子 #237 ---
+from last week observations .Big thanks to majamvice 14 day simple moving average is perfect. other observation initial trade should be opened when volatility has squeezed. that is when Bollinger bands are close together not far apart. Day 20 deviation 1 band. day 4.4 update also in post 1 https://www.mql5.com/en/signals/397848 the equity trailer took long to correct
+
+--- 帖子 #238 ---
+https://www.sendspace.com/file/cla1tf day4.4 link failed to upload slow internet connection
+
+--- 帖子 #239 ---
+I have added this traders pullback concept https://www.forexfactory.com/showthread.php?t=731122
+
+--- 帖子 #240 ---
+Hi, default wihout adding other indis
+
+--- 帖子 #181 ---
+CM i have both the SDAY_X and the DAX as they were default. havent added the equity stops etc to either. SDAY v1. is currently 59 euros profit closed and with W/L 57-23and 846mpips banked. today it had 3 substantial losses on eur pairs of over 5 eur each. DAY 3.3 started trading yesterday, monday and still has all trades around 20, open for a current loss of around 15 eurs. 3 trades from yesterday, GBPJPY running over 10 eur loss , GBP AUD over 8 eur loss,NZD JPY 3 eur loss and USD CHF nearly 8 loss.
+
+--- 帖子 #182 ---
+https://www.fxblue.com/users/forexcandy
+
+--- 帖子 #183 ---
+trade explorer created
+
+--- 帖子 #184 ---
+--------------------------------------------------------------------------------- To: candyman752 | From: John-Wick | Sent: Feb 21, 2018 17:04 --------------------------------------------------------------------------------- Hi Candyman, Sorry to ask you one more favor. I still did't get accsess to Steve but can you download the following EA for me and provide me. http://www.stevehopwoodforex.com/php...p?f=104&amp;t=5383 my email is: Thanks in advance. --------------------------------------------------------------------------------- To: John-Wick | From: candyman752 | Sent: Feb 6, 2018 3:15pm --------------------------------------------------------------------------------- css also there --------------------------------------------------------------------------------- To: candyman752 | From: John-Wick | Sent: Feb 6, 2018 14:10 --------------------------------------------------------------------------------- Thanks. Candyman for your help. I wrote steve about registration but no response yet from him. If I manage to make a good EA I will share it with you. --------------------------------------------------------------------------------- To: John-Wick | From: candyman752 | Sent: Feb 6, 2018 12:53pm --------------------------------------------------------------------------------- https://www.forexfactory.com/showthr...6#post10747766 --------------------------------------------------------------------------------- To: candyman752 | From: John-Wick | Sent: Feb 3, 2018 11:32 --------------------------------------------------------------------------------- Thanks for answering my mail. I see no link. Also I will write steveabout registration. Could please proide me the lattest indicators. CSS and SuperSlope. --------------------------------------------------------------------------------- To: John-Wick | From: candyman752 | Sent: Feb 2, 2018 11:52am --------------------------------------------------------------------------------- page link of CSS and Blauda indicators u want --------------------------------------------------------------------------------- To: candyman752 | From: John-Wick | Sent: Feb 1, 2018 16:01 --------------------------------------------------------------------------------- Hi Candyman, I see you have files from Steve forum. How do I register to there forum. Or could you provide me the latest versions of CSS and Blauda indicators in mq4 format. I ma tryin to build a EA.
+
+--- 帖子 #185 ---
+https://www.sendspace.com/file/1hwwp0
+
+--- 帖子 #186 ---
+ok
+
+--- 帖子 #187 ---
+ok
+
+--- 帖子 #188 ---
+new thread created .I polished up the EA using info garnered in the testing in this thread https://www.forexfactory.com/showthr...5#post10818625
+
+--- 帖子 #189 ---
+I'm looking for someone who can code an EA for me - it's for use as part of an MA crossover strategy that I use manually, but I want to automate entries. Once I have identified a suitable trade the EA should simply trail the pending order along an MA so that when price revisits the mean, the trade will get triggered wherever the MA happens to be at the time. Can someone advise on this? Thanks.
+
+--- 帖子 #190 ---
+subscribed!
+
+--- 帖子 #191 ---
+I can help you if you require it still .
+
+--- 帖子 #192 ---
+great to know you ready to assist. I will let you know soon
+
+--- 帖子 #193 ---
+give more detail
+
+--- 帖子 #194 ---
+ok
+
+--- 帖子 #195 ---
+Sir, is that everyone can use this Ea?
+
+
+===== 附件下载链接 =====
+
+-closeatprofit.mq4: https://www.forexfactory.com/attachment/file/2675833?d=1518539440
+Baluda.SuperSlope.v.2.2.mq4: https://www.forexfactory.com/attachment/file/2664481?d=1517915303

@@ -268,8 +268,8 @@ def get_threads_link(start_page=1, end_page=1):
 
 if __name__ == "__main__":
     # 处理命令行参数
-    start_page = 1
-    end_page = 1
+    start_page = 3
+    end_page = 20
     
     if len(sys.argv) > 1:
         try:

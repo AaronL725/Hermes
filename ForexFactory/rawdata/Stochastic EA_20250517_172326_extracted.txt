@@ -1,0 +1,670 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hello I Created a expert adviser based on the stochastic.It opens a trade when stochastic and rsi is low or high.And when price is above maxprice and below lowprice.latest version is Rijfie stochastic rsi 4 uur versie 002 test.ex4 font color (breakevenline)font/size (breakevenline)fictiveloss (can be used with martingale starts trading after 0-6 losses)balans (only buys when tradebalans is over balans)Maxprice (sell order above this level trade is taken)Lowprice (buy order below this level trade is taken)lossbeforetradingkperiod (RSI)dperiod (RSI)slowing (RSI)steplevel (with martingale price must be lower before buying again)rsitime (select timeframe)rsihighrsilowhighlevel (stochastic)lowlevel (stochastic)stoploss (0 means no stoploss)takeprofit (0 means no takeprofit in version 009 thit doesn't work because of trail) (in version 011 you can set the takeprofit now trail doesn't work)magicnumberdifference (here you can change the difference between last stochastic and present stochastic )range (range between ma50 and price )lot ( if all lot are 0.01 then every buy or sell is 0.01 when double lot then you can use it as martingal) Attached Image (click to enlarge) This is the way i set up my tradings. - I am using Rijfie stochastic rsi 4 uur versie 002 test.mq4 - Set high and low price in ea.(So you won't take any trades inside your defined price.)- When ea opens trade then you can set your takeprofit (low risk) to the first line from your pivot lines.- see pivot trading for indicators (special thanks to Davit).- if you like to post use Donald.tpl please. New version since 16-11-2020&lt;/p&gt;&lt;/p&gt;&lt;/p&gt; Attached File(s) Rijfie stochastic versie 014 test.mq4 40 KB | 1,486 downloads | Uploaded Aug 7, 2016 10:53am &lt;/p&gt; Attached File(s) Rijfie stochastic versie 023 test.mq4 56 KB | 2,036 downloads | Uploaded Dec 12, 2016 5:50am Attached File(s) Rijfie stochastic rsi 4 uur versie 001 test.mq4 64 KB | 867 downloads | Uploaded May 10, 2020 8:47am Attached Image Attached File(s) Donald.tpl 28 KB | 524 downloads | Uploaded May 24, 2020 4:00am
+
+--- 帖子 #2 ---
+Have a trade open now. Many times when in profit i just close the trade.
+
+--- 帖子 #3 ---
+Why.? Surely if the EA is efficient your SL &amp; TP should be automatic without the need of manual intervention. Does this EA work on other time frames. If placed on another time frame will it recognize the time frame.? Cheers
+
+--- 帖子 #4 ---
+Yes it works on all timeframes. No it is not profitable. I haven't found the best setting. And i hope that there is a programmer who also likes to work on it and willing to share. But it does filter out some bad trades.
+
+--- 帖子 #5 ---
+OK Thanks. I will play with the settings. Looks to be a good candidate for the 15m
+
+--- 帖子 #6 ---
+I made some back test setting martingala and my test is on course from January 2000 till now. I started from 0.01 lot (x2 martingala) and 1500 euro base account. Test is not finish but at the moment I have great result. Next days I will post the final result with report.
+
+--- 帖子 #7 ---
+My setting is TP 200 SL 200 and TF M1
+
+--- 帖子 #8 ---
+Hello rijfie, I don't have time to look at the EA, sorry about that, but next time I have done one EA, which requirement are still the same, so i repost it. Here is the backtest, same TP same SL, and it will be a pure martingale because entries on stochastic 5 3 3 are ramdom entries. one's can see that there is small profit but very big drawdown, and it allways end up crashing the acccount, because ot consecutive loss, over 13 or more. (40 lots starting with 0.01 lot) Have a look at it, the code is not difficult Attached Image (click to enlarge) the problem is the number of loss in a row. If someone is able to decrease the number of loss, using indicator, it will be safer. Even if people of MT4 say it is better to increase lot on winning orders than on losing one. , Attached File(s) sto_rijfie_II.mq4 5 KB | 2,303 downloads
+
+--- 帖子 #9 ---
+Hi machine25 No problem. But just take a look at mine ea. You are able to change lot. So instead off double it you can put a 1.4 factor in it. just try it.
+
+--- 帖子 #10 ---
+Hi rijfie, I have a look at the code, i see a lot of improvement and new thing which can be useful in futur EA. To modify the lot it is sufficient to use a formula, i think it is something like this lot = MathPow(consecutive_loss, factor); It's quite easy, then replace it in each one of the loop and that"s it. This will be a minor change which will slightly affect the behaviour of the EA. The Pyramid EA was a much better idea, it deserve to be studied, unfortunately, coding is very much time consuming, even simple thing take days ... Have nice day.
+
+--- 帖子 #11 ---
+i realized on big sl , ea suddenly open trade with high lot . i mean trade was with lot 0.03 and next trade is with 2 lot , and next trade again 0.03 lot .
+
+--- 帖子 #12 ---
+Then there is a bug, Saztv, check the code where consecutive loss give 0.03 lot, should be 2 or 3 consecutive loss, may be there is an error there, add a line to check when the error occur, just after the order is taken : Inserted Code if( ticket &gt; 0 ) { Print( " lots =", DoubleToString(lots_loser,2), " consecutive_loss ", (string) consecutive_loss, " Error ", ErrorDescription(GetLastError()) ); }
+
+--- 帖子 #13 ---
+There are many ways to use this ea as martingale. But ther is always the risk from to many losses in a row. So let´s try to let the lot on 0.01 and find a way to make it work. I really would like to know if this is even possible. Already tried many backtests on 1 min chart but no luck sofar. 15 min looks promissing. If there is someone who has already profitable ea then it will be great if you like to share.
+
+--- 帖子 #14 ---
+Here is one stochastic EA from the past. Maybe you can re-use code, idea or something... http://www.forexfactory.com/showthre...46#post7031446
+
+--- 帖子 #15 ---
+Attached File(s) WhiteHorse Stoch fixed.modi01.mq4 6 KB | 1,945 downloads Attached Image (click to enlarge) Attached File(s) xyz.zip 286 KB | 1,322 downloads
+
+--- 帖子 #16 ---
+Here is a martingale test with following settings and reports eur/usd 1min chart for about 6 weeks.
+
+--- 帖子 #17 ---
+hello version 011 test uploaded. Now trail is not working but you can set takeprofit.
+
+--- 帖子 #18 ---
+hello Backtest on 1min eur/usd.
+
+--- 帖子 #19 ---
+​Need some help with coding. I need the expert to stop trading after a profit. And if i like to trade again i can switch bool to true manual. I guess i need a bool but don't know how. I hope there is a programmer who would like to check Attached File(s) Rijfie stochastic versie 011 test.mq4 37 KB | 842 downloads
+
+--- 帖子 #20 ---
+New version checks account amount. If new profit is higher then account the expert stops trading. You have to change balans (just 1 euro or dollar above your balance) You can also put a much higher value with balans then the expert keeps on trading. Attached File(s) Rijfie stochastic versie 012 test.mq4 39 KB | 1,082 downloads
+
+--- 帖子 #21 ---
+a option for the setting of the stochastik and a buy sell level would be great
+
+--- 帖子 #22 ---
+With new vesion 012 a new plan. Use it as a martingale system but only for 6 times 00.1 0.02 0.04 0.08 0.16 0.32 (you can even decide to set it on 4 or 11 depends on the risk you like to take) 1----backtest for last 3 weeks on the 15 min chart eurusd.(or any other currecy) 2---if last 4 trades are losses and there is no new trade then put the expert on the chart for livetrading.(for higher risk look for 3 losses) 3---set balans 1 euro or dollar above your balans. 4---expert start martingale and stops when in profit. It is possible to use it on one chart don,t use on multible charts. I don't know how to code this so any help is welcom. And if some one can programm and make the code to look for losses before entering with the expert that would be awesome. settings Attached Image (click to enlarge)
+
+--- 帖子 #23 ---
+​Have the expert on audusd now. in backtest 6 losses. Let's see what will happen.
+
+--- 帖子 #24 ---
+Stochastic versie 013 in post 1 with setting for stochastic
+
+--- 帖子 #25 ---
+Hey great, thank you
+
+--- 帖子 #26 ---
+No problem
+
+--- 帖子 #27 ---
+Sorry stochastic versie 013 is not working as it should be. Have uploaded stochastic versie 014 this one is doing just fine.
+
+--- 帖子 #28 ---
+i see Expert has placed a buy trade at 0.76711 time 17:00. And hit profit at 23:45
+
+--- 帖子 #29 ---
+placed the expert on the chfjpy chart after 6 losses. Will martingale now until profit. Lost first trade wait for second trade.
+
+--- 帖子 #30 ---
+Expert placed second trade now it is a buy. Lost second trade wait for third trade now. Opend third trade buy. Third trade is a winner (8 losing trades in a row entered after 6 trades)
+
+--- 帖子 #31 ---
+Placed the expert on the eurjpy after 4 losses, start martingale from this point. Stopped trading for this week closed last trade manual with profit. Starting next week again. Nice weekend.
+
+--- 帖子 #32 ---
+Need some help I have the next line in my program this will work if i have only one chart open if( AccountBalance()&gt;balans) but what if i want to check symbol() profit what do i have to use then?? Attached File(s) Rijfie stochastic versie 022 test.mq4 53 KB | 550 downloads
+
+--- 帖子 #33 ---
+Post 1 updated with newest version 023. Possible to start trading after 0 to 6 fictitive losses. Try it out on backtest.
+
+--- 帖子 #34 ---
+On the EA, there are bugs and things I don't understand : - it appears that the SL is not taken into account, although there is an entry requiring to put your SL. - What is the entry "MODE" with " 0 MAIN" and " 1 SIGNAL" to choose from ? - It also looks like the EA is trading when not required : it is supposed to open a trade a the beginning of the candle, but in some pairs I see trades at xx:45, , xx:15, but I trade only H4... This EA is still profitable for me until now. For those interested, my settings on file attached,
+
+--- 帖子 #35 ---
+I have a challenge for coders. I would like to adjust version 023 as follow When you use it like matringale by changing lot like 0.01 lota 0.02 lotb 0.04 .... then it doubles after every loss. And returns and start again after 1 win. What i like is this as follow. The system must have 2 wins in a row after starting over again. Hope someone would like to take a look at this
+
+--- 帖子 #36 ---
+hi guys.. im new here.. i found an EA which is quite profitable for me.. this EA is based on stochastic.. but the problem is the lot is fixed to 0.01.. can anybody help so that can customize the lot.. thanks..
+
+--- 帖子 #37 ---
+I did a quick backtest, EA not so profitable. What settings you are using?
+
+--- 帖子 #38 ---
+Opened those trades based on new stochastic ea Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #39 ---
+Looking at babypips calender the following advice i get. How to trade this is up to you. I should set trading on long or short or both. Attached Image
+
+--- 帖子 #40 ---
+gbdaud hit takeprofit
+
+--- 帖子 #41 ---
+the EA is based on one single timeframe. I would add an MTF or 2 and trade in the direction of the mtf sto. You may add a condition that the difference between the 2 mtf sto lines is above a given number to ascertain the strength of the move. my 2 cents.
+
+--- 帖子 #42 ---
+Thanks for comment. I just leave it like it is for now to see how things work out. If you wish you can chance rsi 240 (4 hour) into rsi 1200 (daily). double RsiCurrent = iRSI(240,0,14,PRICE_CLOSE,1); double RsiPrevious = iRSI(240,0,14,PRICE_CLOSE,2); Already changed ea. Now by chancing rsitime you can chance time. with rsi high and rsilow you can also chance those values.
+
+--- 帖子 #43 ---
+ea opend 2 more trades Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #44 ---
+and gbpcad Attached Image (click to enlarge)
+
+--- 帖子 #45 ---
+gbpnzd hit takeprofit
+
+--- 帖子 #46 ---
+gbpcad hit takeprofit
+
+--- 帖子 #47 ---
+EURCAD hit takeprofit
+
+--- 帖子 #48 ---
+eurnzd open yesterday Attached Image (click to enlarge)
+
+--- 帖子 #49 ---
+Gbdaud open buy Attached Image (click to enlarge)
+
+--- 帖子 #50 ---
+next trades opned by ea. Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) closed with profit
+
+--- 帖子 #51 ---
+gbpcad was also opend by expert. Attached Image (click to enlarge)
+
+--- 帖子 #52 ---
+Hello Rijfie, I would have the same idea : is it possible to transform (that strategy) into your own Ea? The strategy : entry point@ open next m5 candle (chart @ m1 ) when ... ... the GREEN line cuts UP ( or ... vice versa down) the 50% line @ close its MTF (m5) candle TP,SL points ... fixed Regards mag00 P.S.
+
+--- 帖子 #53 ---
+Hello mag00, I am not a coder and i like to work with the code i have. and to try this out for a couple of weeks. Any idee is welcom. Some idees i put in the code if i succeed in it. Ofcourse your are free to try it yourself. Maybey there is a good coder who can make improvemends to the code. Looking at mine code it is just a mess but it works.
+
+--- 帖子 #54 ---
+gbpcad just hit profit eurnzd and audnzd still open and in red.
+
+--- 帖子 #55 ---
+Question about calender. how would you see low, mid and high if you had to put a value to it. meaning by movement of pips i would think low =1 pip movement mid =2 pips movement high =3 pips movement or should it be more like low =1 mid = 3 high = 9
+
+--- 帖子 #56 ---
+next week directions Attached Image
+
+--- 帖子 #57 ---
+Attached Image Looking at calender at babypips i see these directions for next week.
+
+--- 帖子 #58 ---
+ea opend usdchf buy Attached Image (click to enlarge)
+
+--- 帖子 #59 ---
+eurnzd from last week closed with little profit.
+
+--- 帖子 #60 ---
+cadchf opend by ea 19-11 Attached Image (click to enlarge) aud chf and nzdchf opend 20-11 Attached Image (click to enlarge) Attached Image (click to enlarge) also next trades are open usdchf buy audnzd buy
+
+--- 帖子 #61 ---
+next week fundamentel directions from babypips. Attached Image
+
+--- 帖子 #62 ---
+Subs. Thanks and Regards
+
+--- 帖子 #63 ---
+Just looking at your portfolio constituents alone shows how diversified you have it!
+
+--- 帖子 #64 ---
+usdchf hit tp audnzd buy nzdchf buy audchf buy cadchf buy are still open the chf orders are opend last week. This week signal Strong long. audnzd also opend last week. This week signal hold. No new orders opend so far by ea. today eurchf buy opend by ea. Lot of chf orders open now. Just wait and see.
+
+--- 帖子 #65 ---
+nzdchf hit tp usdjpy opend by ea
+
+--- 帖子 #66 ---
+usdjpy hit tp Ea seems to do good job
+
+--- 帖子 #67 ---
+Looks like a promising EA which version shall I use?
+
+--- 帖子 #68 ---
+I am using Rijfie stochastic rsi 4 uur versie 001 test.mq4 See page 1 for further instructions to see how i am using this. Chart 4 hours.
+
+--- 帖子 #69 ---
+eurchf and audchf booth hit tp usdchf, cadchf and audnzd are still open. Attached Image (click to enlarge) usdchf hit tp
+
+--- 帖子 #70 ---
+Calculating fundamentel data from tradingecomics from now. Lot more data to compare. Setting the ea to trade only in calculated direction. Attached Image
+
+--- 帖子 #71 ---
+new week starting with opening 3 orders by ea. Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #72 ---
+Question is will currencies reverse soon after gap opening and turn the other way up to weekly pivot or further. (at least for a while)
+
+--- 帖子 #73 ---
+ea just opend 2 more trades. Attached Image (click to enlarge) Attached Image (click to enlarge) closed cadchf direction is short but currencie went up and i could get a little profit out of it.
+
+--- 帖子 #74 ---
+aud and nzd still strong. Waiting for reverse.
+
+--- 帖子 #75 ---
+usdcad opend by ea. Attached Image (click to enlarge)
+
+--- 帖子 #76 ---
+EURCAD opend by ea. Attached Image (click to enlarge)
+
+--- 帖子 #77 ---
+audjpy and eurcad hit tp. opend usdjpy.
+
+--- 帖子 #78 ---
+euraud and usdcad hit tp. gbpaud hit tp audnzd gbpnzd eurnzd usdjpy those orders still open. Still waiting for nzd to reverse.
+
+--- 帖子 #79 ---
+eurnzd hit tp. opend audchf Attached Image (click to enlarge)
+
+--- 帖子 #80 ---
+new directions for coming week. Attached Image
+
+--- 帖子 #81 ---
+Results from ea last month. Attached Image
+
+--- 帖子 #82 ---
+audcad opend by ea. Attached Image (click to enlarge) aud cad hit tp cadchf gbpusd gbpchf opend by ea
+
+--- 帖子 #83 ---
+gbpusd and gbpchf hit tp also closed usdjpy manual
+
+--- 帖子 #84 ---
+the next trades are still open audchf gbpnzd and audnzd nice week till now
+
+--- 帖子 #85 ---
+What EA version you trade now ?
+
+--- 帖子 #86 ---
+i am using Rijfie stochastic rsi 4 uur versie 001 test.mq4 see page 1 for instructions
+
+--- 帖子 #87 ---
+Closed some trades i took earlier with some losses. Also closed gbpnzd profit 2,82 and audnzd loss 8,35 have only audchf open for now. still from last week. Realy thinking about to close trades at and of the week due to swap. and when wrong, price can realy travel away.
+
+--- 帖子 #88 ---
+Thank you Now I see it
+
+--- 帖子 #89 ---
+closed audchf with loss 6,22 All trades closed now. Nice weekend all.
+
+--- 帖子 #90 ---
+new directions for next week. Attached Image
+
+--- 帖子 #91 ---
+And here the results till now. Attached Image
+
+--- 帖子 #92 ---
+first trade open this week. usdjpy opend by ea. Attached Image (click to enlarge)
+
+--- 帖子 #93 ---
+2 more trades opend by ea. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #94 ---
+4 more trades opend by ea Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #95 ---
+new directions for next week Attached Image
+
+--- 帖子 #96 ---
+bad last week but still have orders open hoping for a reversal. results till now. Attached Image
+
+--- 帖子 #97 ---
+had the wrong directions just replaced those with the right ones. Attached Image
+
+--- 帖子 #98 ---
+ea opend a new trade eurjpy Attached Image (click to enlarge)
+
+--- 帖子 #99 ---
+new directions for next week Attached Image
+
+--- 帖子 #100 ---
+eurgbp opend by ea. Attached Image (click to enlarge)
+
+--- 帖子 #101 ---
+new directions for this week Attached Image
+
+--- 帖子 #102 ---
+Hi Rijfie: I have read every post of this thread. I will be glad to help periodically on your EA. I am a beginner-intermediate MT4 coder. The first thing I did with your code is just clean it up and aligned it for readability. I made no other changes. I note that the code throws multiple warnings for different reasons such as type casting, and other function errors. I believe I can clean up all warnings, so that the code compiles with no warnings on next pass if ok with you. Would you like me to resolve all warnings? Please take a look at this version and see if you like it: Attached File(s) Rijfie stochastic rsi 4 uur versie 008-A.mq4 79 KB | 592 downloads
+
+--- 帖子 #103 ---
+New directions for this week Attached Image
+
+--- 帖子 #104 ---
+Oke checked it out good job. You are welcom to clean it up as you like.
+
+--- 帖子 #105 ---
+Opend all orders that is above 0,5 or below - 0,5 let see what happens this week. audnzd, eurusd and nzdjpy not included Attached Image (click to enlarge)
+
+--- 帖子 #106 ---
+I have a sell for eurcad where would you place your takeprofit and stoploss. Attached Image (click to enlarge)
+
+--- 帖子 #107 ---
+The new directions i have calculated with the data from tradingeconomics. I only trade in the directions calculated. When position is open then set takeprofit to first pivot line and stoploss under second pivotline. Just a afford to automate pivots trading. Any idea or afford to get this automated in the expert is welcome. Attached Image
+
+--- 帖子 #108 ---
+New fundamentel direction for this week. Calculated from tradingeconomics low impact 1 point, med impact 3 points and high impact 9 points. Attached Image
+
+--- 帖子 #109 ---
+Direction coming week. Attached Image
+
+--- 帖子 #110 ---
+Once more i wil see if system can work. Placed orders this morning not used expert. when stochastic is above 90 or under 10 and revers then with first candle place order. sl at low or high last candle and tp at half the distance. And making use of directions for this week. Have some starting luck i guess. Attached Image (click to enlarge) 2 orders still open but have sl near break even. Attached Image (click to enlarge)
+
+--- 帖子 #111 ---
+One more closed in profit. Attached Image (click to enlarge)
+
+--- 帖子 #112 ---
+And the last one closed in profit. Attached Image (click to enlarge) Now waiting for next 4 hour candle to see if there can be placed orders.
+
+--- 帖子 #113 ---
+New trade see what happens Attached Image (click to enlarge) Hit sl
+
+--- 帖子 #114 ---
+EA opend trade. Attached Image (click to enlarge) Yoy can see i place sl under low and tp at half the distance from sl. And already hit tp
+
+--- 帖子 #115 ---
+Just opend 2 trades. Attached Image (click to enlarge) Hit tp Attached Image (click to enlarge) Hit tp
+
+--- 帖子 #116 ---
+Expert opend order nzdjpy. If awake tp should have been taken but i was asleep. Have to wait for now. Attached Image (click to enlarge) And hit tp
+
+--- 帖子 #117 ---
+Not all trades are winners. Attached Image (click to enlarge)
+
+--- 帖子 #118 ---
+2 more trades opend by expert. Attached Image (click to enlarge) Attached Image (click to enlarge) audchf and euraud hit sl.
+
+--- 帖子 #119 ---
+New directions for coming week. Hopefully it will help to plan your trades. Attached Image
+
+--- 帖子 #120 ---
+I have just modified the expert Attached File(s) Rijfie stochastic rsi 4 uur versie 001 test.mq4 64 KB | 379 downloads . Have inserted maxprice and lowprice. Now it is possible to let expert only to buy/sell when price is above or below a certain price. Every new week you have to adjust only buy or sell and fill in the maxprice and lowprice. (r38 line!) Set low price at 69.650 and high at 100 then expert will only buy trade above the R38 line. From directions advice is to only sell. So when stochastic gets below 90 and price is above R38 then sell trade will take place. tp and sl can be set in expert but change it like you wish. I am on the ignore list from Davit but feel free to test it out if you like. (it's not possible to backtest because you need directions calculated each week) Let me now if you like it. Attached Image (click to enlarge)
+
+--- 帖子 #121 ---
+aud directions works out fine at the start of the week.
+
+--- 帖子 #122 ---
+Expert did this trade while i was sleeping. Already take profit. One trade i did manual last night. Attached Image (click to enlarge)
+
+--- 帖子 #123 ---
+placed some buy trades manual based on directions in gbdusd and nzdusd. Till today currencies dropped while indicator says buy. So let's see. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #124 ---
+New directions for next week. Try to update every day instead of once a week. If you use expert then change if neccasary only buy or only sell. Attached Image
+
+--- 帖子 #125 ---
+Not have to wait for expert. Can place trade manual if neccesary. Attached Image (click to enlarge)
+
+--- 帖子 #126 ---
+Focus on gbp and nzd pairs.
+
+--- 帖子 #127 ---
+Placed trade gbpnzd yesterday after update from directions. Maybe it is just luck. Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #128 ---
+gbp news coming up. and nzd retrace. Hope trades work out. Maybe take tp earlier. Attached Image (click to enlarge) Closed all. Onze without little loss but compensed by the order trades.
+
+--- 帖子 #129 ---
+One trade opend by expert gbpchf already closed manual with profit
+
+--- 帖子 #130 ---
+Take a change on usdjpy buy.
+
+--- 帖子 #131 ---
+Sad to see that Davit from pivottrading decides to quit. Learnd a lot from him.
+
+--- 帖子 #132 ---
+New directions from today. Remember when using expert Change maxprice and lowprice if direction changes. Attached Image (click to enlarge) Attached Image
+
+--- 帖子 #133 ---
+With new directions opend several orders. Nzdusd was opend before by expert Attached Image (click to enlarge) .
+
+--- 帖子 #134 ---
+The trades are stil in dd. Have to wait for reversal.
+
+--- 帖子 #135 ---
+Trades going great.
+
+--- 帖子 #136 ---
+new directions. Attached Image
+
+--- 帖子 #137 ---
+Finally it seems gbp and nzd reverse trend
+
+--- 帖子 #138 ---
+cashesd in some trades. Attached Image (click to enlarge) And a couple of trades still open Attached Image (click to enlarge)
+
+--- 帖子 #139 ---
+could have closed the open trades but was sleeping now hoping it retest low to go up again. opend audcad for sell, when looking at directions there is some oppertunity. Didn't follow my one rules just (pure on directions)
+
+--- 帖子 #140 ---
+Sell usdjpy (more like the rules i figured out.)
+
+--- 帖子 #141 ---
+nzdusd nzdcad and gbdusd in big dd now. Will it bounch back or not.
+
+--- 帖子 #142 ---
+Who can explain why nzdusd went down while the economics where in favour for nzd. (see green lines) Attached Image (click to enlarge) One trade should have had sl loss would have been 300 point. Second trade was asleep when in profit also should have had sl loss 200 points. Third trade should have take profit 280 points. Or sl at 300 points. Fourth and fifth trade should have take profit 280 points. Or sl at 300 points.
+
+--- 帖子 #143 ---
+New directions for the start of the week. Attached Image
+
+--- 帖子 #144 ---
+Open trades by expert.(opend last night whit pivot numbers from last week ) Attached Image (click to enlarge)
+
+--- 帖子 #145 ---
+Attached Image (click to enlarge) Any suggestions for other sl and tp.
+
+--- 帖子 #146 ---
+closed gj and nj
+
+--- 帖子 #147 ---
+closed gc
+
+--- 帖子 #148 ---
+Attached Image (click to enlarge) Closed all trades taken last night by Expert.
+
+--- 帖子 #149 ---
+new directions from today. Attached Image
+
+--- 帖子 #150 ---
+cadchf sell opend by Expert. Attached Image (click to enlarge) Attachment G
+
+--- 帖子 #151 ---
+opend while asleep. Attached Image (click to enlarge)
+
+--- 帖子 #152 ---
+New directions. Attached Image
+
+--- 帖子 #153 ---
+New directions. Attached Image
+
+--- 帖子 #154 ---
+New directions. Attached Image
+
+--- 帖子 #155 ---
+Waiting for nzd to weaken.
+
+--- 帖子 #156 ---
+Just a little more weakness for nzd.
+
+--- 帖子 #157 ---
+do you have any template? thanks
+
+--- 帖子 #158 ---
+All you need is on page 1. - see pivot trading page 1 for indicators (special thanks to Davit). Attached Image Attached File(s) Donald.tpl 18 KB | 251 downloads
+
+--- 帖子 #159 ---
+thanks
+
+--- 帖子 #160 ---
+New directions. Attached Image Greetings, Donald
+
+--- 帖子 #161 ---
+The following trades i still have open from last week. Placed manual. Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge) Attached Image (click to enlarge)
+
+--- 帖子 #162 ---
+New directions. Attached Image
+
+--- 帖子 #163 ---
+Open gbjpy sell. Closed expert chart was 1 mnt instead of 4 hours
+
+--- 帖子 #164 ---
+New directions. Attached Image
+
+--- 帖子 #165 ---
+To note it in a brief way, stochastic is a momentum indicator. Momentum is suitable for breakout trades. Hence, your EA should be working towards the direction of Breakout/Momentum trading. The settings that I've tested and experimented for years and have found it to be consistently reliable with data's imported from the future market is; 14/3/3. Good luck
+
+--- 帖子 #166 ---
+Thanks for letting me know. I use it with swing trading. But it's possible to use expert the way you suggest.
+
+--- 帖子 #167 ---
+You're most welcome
+
+--- 帖子 #168 ---
+One more example how i use this expert. Attached Image (click to enlarge)
+
+--- 帖子 #169 ---
+If anyone using expert with other settings or in a different way your welcom to share.
+
+--- 帖子 #170 ---
+On a side note, you could also apply the Heikin Ashi chart to help dictate the anatomy of market movement with the assistance of Stoch on the sideline. I personally loves the Heikin Ashi as it provides a quick glimpse on where the low and highs of the markets without having to draw a trendline/channel or to locate an imbalances of SnD with my own naked eyes. Having said that, confirmation can also be applied with stoch to further validate the lows and highs or perhaps, the reversals. Good luck!
+
+--- 帖子 #171 ---
+Stil waiting for nzd to reverse.
+
+--- 帖子 #172 ---
+Is it realy happening.
+
+--- 帖子 #173 ---
+New directions. Attached Image
+
+--- 帖子 #174 ---
+New directions. Attached Image
+
+--- 帖子 #175 ---
+Analyse trade. Order opend by Expert toke profit near R38. Looks like it was a good trade. Attached Image (click to enlarge)
+
+--- 帖子 #176 ---
+Analyse trade. Placed a buy order, should have been sell order. Had long instead off short. Little misstake.(got out with a little profit) Attached Image (click to enlarge)
+
+--- 帖子 #177 ---
+Analyse trade. Trade placed by Expert. Taken profit near R78. Looks good. Attached Image (click to enlarge)
+
+--- 帖子 #178 ---
+Analyse trade. Opend by Expert. taken profit near S100. Looks good. Attached Image (click to enlarge)
+
+--- 帖子 #179 ---
+Removed wrong trade.
+
+--- 帖子 #180 ---
+Analyse trade. Expert 26-5 a trade. have taken a little profit . Don`t know what to think of this. Could it have it run till now to wait for reaching pivot. Attached Image (click to enlarge)
+
+--- 帖子 #181 ---
+New directions. Attached Image
+
+--- 帖子 #182 ---
+oreder opend by expert. Audnzd sell. Attached Image (click to enlarge)
+
+--- 帖子 #183 ---
+New directions. Attached Image
+
+--- 帖子 #184 ---
+Expert opend another trade audusd sell. Attached Image (click to enlarge)
+
+--- 帖子 #185 ---
+7 new orders opend by Expert while sleeping. nzdusd sell nzdjpy sell gbpchf sell eurnzd buy eurgbp buy euraud buy audjpy sell
+
+--- 帖子 #186 ---
+All trade in dd now.
+
+--- 帖子 #187 ---
+Hi Rijfie, 1- use Stoch for entry 2- Define an Init lot size "0.01", define interval to add-up "1 or 2 Pips", define trail 3- When open pos strt gain the interval then add up more init size 4- Once the price retract for te trail value, bank the profit. and repeat.... for SL there is two scenarios 5 or 6 5- Put a fixed SL, almost very small. So loses will be calculated based on init size which is very small * SL. on the other hand profit to be based on greater size "multiply of init size" 6- Keep the lose pos, and let the size do the job. I am trading in this way for a long time, manually. I think it made a good result. But it is not easy to manage it manually, and almost all failed trades are upon to my execution mistakes in manual trading. Example: init size of 1 S. lot, SL 5 Pip and Interval to add-up is 5 Pip If the price travel for 30 pips before retracting for 5 pips = profit of 75 pip* init size (30+20+15+10+5-5) On the other hand, loss trade = 5 pips Means we need price travel for 30 pips before retracting for 5 pips, one time to recover 15 lose trades. This last line is the main concept all other settings and methods can be enhanced upon try. I noticed that may be intersted in automating new ideas. I am not sure about the result, that also automation may make us sure. think about and let me know if you have any ideas to convert this into EA, if you are not mind, bro.
+
+--- 帖子 #188 ---
+Hi Rijfie or anyone, Where to download the indicator file?
+
+--- 帖子 #189 ---
+buy usdjpy by expert 6-11 closed
+
+--- 帖子 #190 ---
+Hi Rijfie, could we get SS_SupportResistance v07.53? and Davits Pivot V3.2 Auto? Thank you.....
+
+--- 帖子 #191 ---
+see page 1 or go to pivot trading page 1.
+
+--- 帖子 #192 ---
+eurusd seel and usdcad buy placed by expert.
+
+--- 帖子 #193 ---
+already closed eurusd
+
+--- 帖子 #194 ---
+Usdcad did go to support 61 line no bouncing back to above support 38 Attached Image (click to enlarge)
+
+--- 帖子 #195 ---
+closed usdcad with profit.
+
+--- 帖子 #196 ---
+lot of opend orders last night. Attached Image (click to enlarge) Closed eurnzd
+
+--- 帖子 #197 ---
+Attached Image (click to enlarge) This order was opend and closed last night while i was sleeping.
+
+--- 帖子 #198 ---
+Cadjpy closed in profit
+
+--- 帖子 #199 ---
+Some trades in dd. Any ideas how to handle this? Attached Image (click to enlarge)
+
+--- 帖子 #200 ---
+Closed cadchf with profit.
+
+--- 帖子 #171 ---
+Closed audjpy with profit.
+
+--- 帖子 #172 ---
+Closed gbpjpy with profit.
+
+--- 帖子 #173 ---
+Stil some trades open. Attached Image (click to enlarge)
+
+--- 帖子 #174 ---
+can you post your statement of the period since you are using this EA?
+
+--- 帖子 #175 ---
+No still work out how to deal with dd. Now try to give it time to go back to profit and some time take manual extra trades to midle a bit.
+
+--- 帖子 #176 ---
+Closed nzdjpy and usdjpy with profit. Only have Usdchf open for now.
+
+--- 帖子 #177 ---
+Closed usdchf with profit. All trades closed now. Starting to allow autotrading ea again and wait which trade it will take this week.
+
+--- 帖子 #178 ---
+Closed usdchf with profit. All trades closed now. Starting to allow autotrading ea again and wait which trade it will take this week. Attached Image (click to enlarge)
+
+--- 帖子 #179 ---
+Profit trade when away from computer. Attached Image (click to enlarge)
+
+--- 帖子 #180 ---
+Start with new version from expert from here. see page 1 for instructions how to use it and for ea. Just some little changes in maxprice and low price. Attached File(s) Rijfie stochastic rsi 4 uur versie 002 test.mq4 64 KB | 720 downloads
+
+--- 帖子 #181 ---
+Ea placed sell trade gbpaud. Attached Image (click to enlarge)
+
+--- 帖子 #182 ---
+Closed gbpaud with little profit.
+
+--- 帖子 #183 ---
+Expert opend sell order gbpchf. Attached Image (click to enlarge)
+
+--- 帖子 #184 ---
+closed gbpchf with a little profit.
+
+--- 帖子 #185 ---
+Hey Rifjie just caught up on all your post and just downloaded your lasted version. I started trading this year and had the same idea in regards to RSI, Stoch, and combined it with the MACD and some wedge indicators was doing it all manually and making very good profit but then I wondered to myself there's gotta be someone who's already programmed an ea for this. So I did some google searching and came across your post, looking forward to trying it next week!!
+
+--- 帖子 #186 ---
+Hi Rifjie,Thank you for initiating a thread for trading robot (TR) based on stochastic indicator plus sharing the trading robot.Before i came to know this thread, i have been testing PZ Stochastic EA on XAUUSD and XAGUSD since last week, which is simple version of stochastic TR.So far with few changes to the TR, it looks quite good, could be due to gold and silver were on bullish trend last week.But since I came across your thread, I would be testing your TR as well, along side with PZ's.I usually trade on TF M1, so my stoch settings would be 15,9,9; OB is 89, OS is 9, For RSI OB is 69, OS is 29. Attached the ea for others to have a look.
+
+--- 帖子 #187 ---
+Attached Image (click to enlarge)
+
+
+===== 附件下载链接 =====
+
+Donald.tpl: https://www.forexfactory.com/attachment/file/3644755?d=1590318044
+Donald.tpl: https://www.forexfactory.com/attachment/file/3644090?d=1590174868
+Rijfie stochastic rsi 4 uur versie 001 test.mq4: https://www.forexfactory.com/attachment/file/3630543?d=1589125664
+Rijfie stochastic rsi 4 uur versie 001 test.mq4: https://www.forexfactory.com/attachment/file/3630551?d=1589126044
+Rijfie stochastic rsi 4 uur versie 002 test.mq4: https://www.forexfactory.com/attachment/file/3790133?d=1605537927
+Rijfie stochastic rsi 4 uur versie 008-A.mq4: https://www.forexfactory.com/attachment/file/3184439?d=1548424297
+Rijfie stochastic versie 011 test.mq4: https://www.forexfactory.com/attachment/file/1988374?d=1470303679
+Rijfie stochastic versie 012 test.mq4: https://www.forexfactory.com/attachment/file/1990178?d=1470572922
+Rijfie stochastic versie 014 test.mq4: https://www.forexfactory.com/attachment/file/1990315?d=1470592397
+Rijfie stochastic versie 022 test.mq4: https://www.forexfactory.com/attachment/file/2099297?d=1481461000
+Rijfie stochastic versie 023 test.mq4: https://www.forexfactory.com/attachment/file/2100452?d=1481550639
+sto_rijfie_II.mq4: https://www.forexfactory.com/attachment/file/1818628?d=1450960255
+WhiteHorse Stoch fixed.modi01.mq4: https://www.forexfactory.com/attachment/file/1819175?d=1451199923
+xyz.zip: https://www.forexfactory.com/attachment/file/1819177?d=1451200051

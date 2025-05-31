@@ -1,0 +1,507 @@
+===== 帖子内容 =====
+
+--- 帖子 #1 ---
+Hello, I would like to draw your attention to this trend following system. The advantage of this system is that during ranging periods it suffers much less losses than other MA cross system that I used. Here are the rules : Time frame: 1 hour + Currency pair: any. Indicators: 80 EMA 21 EMA 13 EMA 5 EMA 3 EMA RSI (21) Trading rules: 80 EMA indicates a major trend direction. When the price above 80 EMA – uptrend, opposite - downtrend. 21 EMA and 13 EMA give us a current trend direction. While 13 EMA stays above 21 EMA – uptrend, opposite - downtrend. RSI (21) above 50 suggests an uptrend, below – downtrend. Entries are made on a cross of 3 and 5 EMA in the direction of a trend: BUY : when 3 EMA crosses 5 EMA upward in an uptrend market AND both 3 and 5 EMA cross a channel of 13 and 21 EMA AND RSI is above 50 AND both 21EMA and 13EMA are above 80EMA SELL : when 3 EMA crosses 5 EMA downward in a downtrend market, AND both 3 and 5 EMA cross the 13, AND both 21EMA and 13EMA are below 80EMA, AND RSI is below 50. Exit rules: Just Trailing stop, TP or SL. Additional rules for the attached EA : After a trade in a certain direction is closed, another trade in the same direction can be opened only if a cross of 3 and 5 EMAs occurres in the OPPOSITE direction. Meaning that if, for example, LONG position has just closed, the EA will wait till a cross of 3 and 5 EMAs suggests that uptrend is finished. Only after this happens, another LONG trade is allowed (when all other conditions are met) I have not backtested this EA since I don't trust backtesting EAs in Metatrader. I used this EA on my demo account for about a month very successfully. Unfortunately, the server I ran this EA on had crashed and I am unable to show any statements from Metatrader. Attached are the EA and the template with all the indicators. Please copy log.mq4 to Experts/Include folder. Without it the EA won't run. Enjoy! (any comments will be highly appreciated) P.S. I am not taking credit for this system. It was not invented by me. I only took advantage of it and wrote the EA.
+
+--- 帖子 #2 ---
+Thanks for posting your system with the EA. I like Moving Average systems. I'll test it and see how it goes. Carol
+
+--- 帖子 #3 ---
+2 trades from the last 2 days (eur/usd)
+
+--- 帖子 #4 ---
+hey ,bro,your RSI(14) is wrong, the rule shows that RSI(21)
+
+--- 帖子 #5 ---
+Do you take the trade after the ema cross and candle close?
+
+--- 帖子 #6 ---
+That's right - RSI in the template is incorrect. It should be 21. No, I do not wait for candle close after the cross. But I do wait till the distance between 2 EMAs is 1 pip or more.
+
+--- 帖子 #7 ---
+thanks for the EA.
+
+--- 帖子 #8 ---
+who invented the system? u know?
+
+--- 帖子 #9 ---
+What trailing stop do you used? maby 30 pips or... Thankz
+
+--- 帖子 #10 ---
+Anyone having any luck with it placing trades in backtester? Mines not placing trades. I don't trust backtest results either but i wanted to see how it functions. It's placing comments in journal so I know its loaded right.
+
+--- 帖子 #11 ---
+The trailing stop that I am using is 25. I am not really sure about who exactly invented this system. I found it on some forum a few months ago. BTW, the EA has just generated another 39 pips on EUR/USD.
+
+--- 帖子 #12 ---
+Thanks for sharing your EA and the source code. After 3 closed trades it is profitable. I'm not sure about the new short trade shown below. I don't know why the EA took the new trade. I thought it had to wait based on what you said; Could you explain if this is the normal operation.
+
+--- 帖子 #13 ---
+Hi Domchik, thanks a lot for sharing this EA. I do as you did: currently I'm letting the EA run eight pairs (four Euro pairs, three Yen pairs and the Loony) on a demo account. We'll see how I fare... What do you mean with that server crash, can't you generate a new statement for your demo account? Perhaps you can give us a rough idea about how often this system traded and with which approximate result? cheers Ohka
+
+--- 帖子 #14 ---
+hmm... it wasn't supposed to happen.. my EA hasn't opened another order. is it possible that you closed and reopened your Metatrader while the EA was running? Please take a look at the Global Variables in your Metatrader. This EA created 2 : allowLong and allowShort allowShort should be equal to 0. I am using global variables on purpose. They allow me to influence manually the way it trades. If you close and reopen your Metatrader while the EA is running, these global variables are initialized and the situation you describe might happen. I suggest you that at this point while there is no trade, set allowShort variable to be equal to 0. It will stop the EA from opening short orders till the next cross. Again, if you restart Metatrader, you should make sure that these variables are set correctly. allowShort = 0 - no short trades till next signal, allowShort = 1 - short trades are allowed. the same goes for allowLong. let me know if something is not clear.
+
+--- 帖子 #15 ---
+it means that i don't have the number of the account I ran it on . as well as the numbers of 3 other accounts with 3 other EAs. a source code of one of them was lost and i am rewriting it. as for this EAs behaviour and result : It usually trades once in 2-3 days. November was good for him - more than 200 pips in profit. The thing is that during November I tried to run it with different settings and part of the time I also used RAVI indicator, but eventually I reached the conclusion that RAVI wasn't efficient. So far, the default settings in the EA look like the best configuration (for now) We'll see what will be this month..
+
+--- 帖子 #16 ---
+Thanks for sharing your EA and your feedback on the development thus far. I'll will test it out and report the positives and negatives.
+
+--- 帖子 #17 ---
+Great! thanks.
+
+--- 帖子 #18 ---
+Does this mean you can only use the EA on one chart per platform?
+
+--- 帖子 #19 ---
+I have the EA managing 8 pairs since last Friday. One negative thing I noticed is that the EA is re-entering the market after hitting a stop loss quite often. This happens when the entry rules still apply but price action ran into a stop. This also happens when the trailed stop was trailed enough to protect current profit. In my opinion, the EA shouldn't re-enter in the same bar a position ran into a stop. I'll let the EA run till the end of the week and publish a result then. After 34 closed trades and currently six open trades the demo account suffered a mild loss (appr. 850$ on a 50K demo account, using 0.5 lot position sizes). bye Ohka
+
+--- 帖子 #20 ---
+No it does not mean that. On a single demo account, I have the EA activated on eight pairs and the EA's seem to handle the positions well - that is not to say that the account is increasing, see my prior post... Ohka
+
+--- 帖子 #21 ---
+what would happen if you're on a DSL account that forcibly gets disconnected by the ISP - in my case once every 24 hours. I end up with a new ip address after one or two minutes, all the while MT4 cannot access the account. How are network outages handled in the context of running an EA? Perhaps this is one more argument to get a fixed ip address or finally rent a vps somewhere? bye Ohka
+
+--- 帖子 #22 ---
+this system is very similar to the Schubert accuracy method.
+
+--- 帖子 #23 ---
+im my openion this ea could be sucesfull in the 4 hr timefram if if would just not re open and modify...... perhaps a new version?? but seriously i have faith in this system because i have seen it work in manual trading but getting a ea to work will be tricky
+
+--- 帖子 #24 ---
+also shubert fond these moving averages to be key #'s SMA=100 200 cross EMA=62 50 25 EMA=3 5 13 if you look at when these cross usually big trends are afoot Just tring 2 help u guys out i have no intention of programming the ea
+
+--- 帖子 #25 ---
+400 pips in 2 days om 4 hr timeframe 50sl 45 trailing 100tp
+
+--- 帖子 #26 ---
+MoM, are you referring to the Shubert system here, or did you apply these settings to the multi EMA system this thread is about? take care Ohka
+
+--- 帖子 #27 ---
+this is standard settings on this ea with previous posted exit parameters on 4hr
+
+--- 帖子 #28 ---
+also i was traiding 9 pairs
+
+--- 帖子 #29 ---
+Hey!! Great EA!! So far I have been testing it on a 1,000 demo for 1 day on 5 pairs EUR USD GBP USD USD CHF USD JPY USD CAD Great results so far, it is similar to the system I trade already so this is nice to have around Few things I have noticed: As soon as it is activated it trades no matter if it has a fresh cross on the EMAs here is a picture: http://i205.photobucket.com/albums/b...t/example1.jpg Note that it entered many times even though the cross had already occurred. It would be nice if we could program it to jump in on a lower time frame if we have already missed it on the 1 hr or 4 hr This issue also brings up this problem: when you close a trade manually it will reopen a position right away. anyways.....there is great potential here just maybe a few bugs to work out.....I am up 10% on my account for the day.....can't complain
+
+--- 帖子 #30 ---
+that is what happens when price action runs into the trailing stop whilst the entry requirements are still true. Then it will re-open a position right away. For this reason, I proposed to let the EA only open a single position per candle. When this position runs into the trailing stop, don't re-open that position again, at least not within that same candle. cheers Ohka
+
+--- 帖子 #31 ---
+yea i agree!! prehaps we can fix the problem with changing the max cross distance? i have no idea though pleas get back with us EA CREATOR!
+
+--- 帖子 #32 ---
+It needs to only be related to crosses of MAs only.....only take a fresh cross that way when the stop is hit it will will wait for the 3 and 5 to cross again i think the BEST way to take profit with this would be this..... Entry: when the 3 and 5 cross Exit: when the 3 and 5 cross Is that possible to make happen?
+
+--- 帖子 #33 ---
+I think it's a very good idea not to allow multiple trades on the same candle. I will prepare a version that does just that. thanks for the suggestion
+
+--- 帖子 #34 ---
+it is possible of course. the problem is that i noticed that very often ema3 and ema5 crosses to early. meaning that the trend continues and you are being stop too early. i have another idea. let me know what you think about it : after an order was closed, reopen only if ema13 and ema21 are crossed in the opposite direction. this will reduce the number of trades, but will also reduce the number of loosing trades.
+
+--- 帖子 #35 ---
+well, i can tell you this : if your metatrader is disconnected from the server and the EA needs to send an order, it will retry 60 times with the delay of 10 sec between the retries. I put a lot of efforts in ths EA in order for it to be able to deal with various server errors like requotes, "context is busy", disconnections and so on.
+
+--- 帖子 #36 ---
+I do like that idea.....But when you FIRST put the bot on.....if it is at the bottom of a trend it will enter on the next candle b/c there is still space between the emas correct? In which case you will have losers. I was not sure how to do global variations when i first put it on to make it wait for a new cross......any help there would rule! anyways im still making money on it........up ANOTHER 10% 20% total on a 1,000 account
+
+--- 帖子 #37 ---
+what tf do you use Bro?
+
+--- 帖子 #38 ---
+yes, you are right about that. the entry point is very important. like you said, if you enter at the end of a trend it will loose. in order to avoid it, if you are ,say, at the end of downternd, in the global variables set allowShort to 0. it will not allow short trends until the trend will be changed to UP and then to DOWN again. this manual intervention is necessary when you start it at the first time. and also when you restart your metatrader! BTW, on what TF are you running it? 1h or 4h ?
+
+--- 帖子 #39 ---
+Hello again guys, I would like to form an improved set of rules that will make this EA more profitable based on what you have suggested so far. Please let me know if you have any other ideas. i can prepare different versions of the EA in order to test them all. thanks.
+
+--- 帖子 #40 ---
+oh ok global variables is the box that says "allow long and short" i would just choose the opposite of the trend? In the box that pops up when you drag the EA on the chart I am using the 1 hr time frame on these pairs: EUR USD GBP USD USD CHF USD JPY USD CAD
+
+--- 帖子 #41 ---
+I still have a question about how the EA can trade more than one chart per platform. Based on your answer to me earlier about changing the global variables to make the EA trade the correct direction after restarting the platform.
+
+--- 帖子 #42 ---
+it can't. global variables are shared between all the charts. I think that what I will do in the next version is adding a pair of global variables for different currency pairs. something like allowShortEUR-USD, allowShortGBP-USD and so on for the majors.
+
+--- 帖子 #43 ---
+Hi - first of all I would like to thank all who have contributed to this system which appears to a newbie like myself to be fairly straightforward and without too many confusing indicators. However I set up the ea earlier today and have so far have had the following results. GBPJPY 11.58 sell - 45pips GBPJPY 12.14 sell - 45 GBPJPY 12.34 sell - 45 " " 12.49 sell - 45 " " 14.23 sell -45 EURUSD 11.54 sell - 45 Currently 3 trades open USDJPY buy - 16 EURUSD sell -37 GBPCHF sell - 20 Am I doing something wrong here or is it one of those days !!
+
+--- 帖子 #44 ---
+That would constitue a market reversal system, as each exit would also be a new entry. Think about what it will do in a narrow trading range... Ohka
+
+--- 帖子 #45 ---
+I am attaching Version 2 of the EA. The following changes have been made : 1. It can be traded on multiple charts. (every chart has its own global variables) 2. RSI level can be customizable. 3. After a trade in a certain direction is closed, another trade in that direction can be opened only after EMA13 and EMA21 are crossed in the OPPOSITE direction (instead of EMA3 and EMA5 in the previous version) 4. Conditions: for opening SELL order : ema21 &gt; ema13 AND ema5 &gt; ema3 AND ema80 &gt; ema3 AND rsi &lt;= 50 for opening BUY order : ema3 &gt; ema5 AND ema3 &gt; ema80 AND ema13 &gt; ema21 AND rsi &gt;= 50 5. In addition to the trailing stop and SL, the order will be closed if EMA13 and EMA21 are crossed in the opposite direction.
+
+--- 帖子 #46 ---
+I have just been checking the EURUSD sell order that was opened at 13.46 at 1.4594 looking at the chart the 3 ema had crossed over the 5ema going long and it appears that it should therefore have opened a long order not a short especially as the candle had just moved above the 13 ema , sorry to be a pain but I would like any advice as to if its me or poss a glitch with the ea many thanks
+
+--- 帖子 #47 ---
+Since a new EA is out, it's no use to continue testing the old one. This is how the old one performed: Since last week Friday, it opened 83 positions and managed to take a demo account down from 50.160 to 48.055. These 83 positions were opened while monitoring eight pairs. Each position was 0.5 lot. Please not that the first 11 trades on this chart were trades I did manually, testing another approach. As you can seen, from the account high 50.160 there were a number of positive trades that were followed by a larger number of negative trades. Most of the negative trades were caused by re-entering the market after the prior position ran into a trailed stoploss which is part of the system. Next week, I'll do a similar run with the new EA. Ohka
+
+--- 帖子 #48 ---
+you rock domchik. i will begin testing the new version. Your contribution is greatly apreciated.
+
+--- 帖子 #49 ---
+I have a few suggestions 4 Version 3 a option to trade on ma cross only, Rather than if ones under the other For example you could say, if current MA is under MA go short but only if past bar has MA over 10 this will solve all the problems with the entry this would make it so you only trade at cross instead of always this is called single entry mode in my ea's Just a suggestion.
+
+--- 帖子 #50 ---
+I'd like to test a set of rules that I'm already using manualy: EMA 5, SMA 8, EMA 21, EMA 55 and EMA 200 Stochastic cross up + EMA5/SMA8 cross up = buy Stochastic cross down + EMA5/SMA8 cross down = Sell The other EMAs are in the same set up (buy with 5/8/21/55/200 and sell 200/55/21/8/5) The stop that i'm using is the Manage Take profit EA (in metatrader forum) This EA move the stops and take profit at some levels. When @ 12 pips it goes to Breakeven. With 25 goes to 15. The increment is 10 pips and the take profit is 10% every 10 pips. Could you please write down the EA for this rules? I'm very profitable with this.
+
+--- 帖子 #51 ---
+Domchik, thanks a lot for integrating my suggestions into the new version. I'm testing it on the 1HR timeframe with USDJPY, EURJPY, AUDJPY and GBPUSD. This time I have activated money management. Right now I have another suggestion: the fixed SL per pair is an improvement, but a better way still would be to make the initial SL dependent on the volatility at that moment. For another system Banzai implemented an indicator that takes the ATR[100] on the 4HR timeframe and uses a fraction of this value to dynamically determine the stop loss level at the time of the entry. I've attached this code, perhaps it can give you some ideas on how to integrate something similar into your EA. B.t.w. Banzai's code displays the calculated SL-level, it does not set these automatically. It would be cool to integrate something similar, especially together with the MM your EA has. take care Ohka
+
+--- 帖子 #52 ---
+Domchik, one question about changing variables while your EA is running: I just noticed that I didn't change the risk level, so it's running at 10.0 (which I take to mean 10% maximum risk per individual trade ) and I would like to reduce this. Can this be done safely while the EA is running? cheers, Ohka
+
+--- 帖子 #53 ---
+the reason that I don't enter only at the cross of ema3 and ema5 is that i wanted to make sure that in ADDITION to this condition EMA3 is above EMA80 AND EMA13 and 21 are crossed in the same direction. Very often it happens that after EMA3 and EMA5 cross, the EA waits until other conditions are met. HOWEVER, i can definitely give it a try. Could you just explain what do you mean by "but only if past bar has MA over 10" ? what exactly the rules should be ?
+
+--- 帖子 #54 ---
+if the EA doesn't have open orders, then you can change it.
+
+--- 帖子 #55 ---
+I will definitely take a look at the attached code. Thanks!
+
+--- 帖子 #56 ---
+your setup sounds very good. can you please attach here this Manage Take profit EA so i can learn how it works? I hope that in a week or 2 the EA i am currently working on will be in a stable condition and i will get to the one you described here. I'll send you PM before I get started to clarify some details about the rules. Thanks!
+
+--- 帖子 #57 ---
+Domchik, just this hourly bar, the new EA closed a USDJPY position and re-opened it a few seconds later, so I reckon this old issue hasn't gone away entirely... As you can see, the new version works better, it recouped the losses of last week already.... Also visible by the large positions opened so far is the fact that I didn't reduce risk per trade, it was still at 10% during those trades... bye Ohka
+
+--- 帖子 #58 ---
+I've seen a number of EMA cross-over systems that worked considerably better when the shorter of the crossing pair is taken from the close, and the longer one from the open. Your current code uses the close only. My proposal is to let EMA(5) and EMA(21) refer to the open. Attached you'll find your code modified with this proposal. Another idea is to let the user limit trading times. On Friday afternoon, I'd rather not open new positions - and perhaps I'd rather not trade on Sunday evenings either. What do you think about having two variables (containing time &amp; day of week) that define the personal start and end of the trading week? take care Ohka
+
+--- 帖子 #59 ---
+hmm... i will have to try and reproduce it.. it's supposed to be able to open a new order only after ema13 and ema21 are crossed in the opposite direction. must be a bug in the code.. i'll fix it .. do you mean that you tried to change the risk from 10 to somrthing else, but it didn't work?
+
+--- 帖子 #60 ---
+sure, it can be done easily
+
+--- 帖子 #61 ---
+say ohka, what timeframe, sl, tp, ot trailling are you using on those stated results?
+
+--- 帖子 #62 ---
+These results were created with the EA's default settings, the only thing I changed was to activate money management. Please note that I forgot to reduce the risk per trade from its default setting of 10%, meaning that the position sizes were far too large... Today the EA was activated for USDJPY, AUDJPY, EURJPY and GBPUSD. What was impressive today was to see how the EA managed the open positions quite nicely during the NFP period. For your enjoyment, I attached the demo account's final report for today. As I don't like to keep positions during the weekend, I closed the last two trades manually. Take these single day results with a big grain of salt, statistically it's insignificant. Come Monday morning, I'll restart the EA's (with a risk setting of 2%) and I'll report next week's result on Friday evening... take care Ohka
+
+--- 帖子 #63 ---
+No, I didn't touch it, as I didn't want to disturb the EA. Now that I have closed the two open positions before market close, I've adapted the settings to 2%. Ohka
+
+--- 帖子 #64 ---
+Thanks! Ohka
+
+--- 帖子 #65 ---
+Here is the link to the Manage Take profit forum: http://www.forexfactory.com/showthread.php?t=9553 I tried to upload it but there was an error... In the link you will see some description and the EA. I'm using this EA in one chart and yours in other one with the same pair and time frame to manage the stop. It's working fine. When the EA puts an order, the stop manager EA do this: @ 12 pips -&gt; stop @ Break even @ 15 Pips -&gt; take profit of 10% @ 22 pips -&gt; move stop to 15 pips @ 25 Pips -&gt; Take profit 10%... Very nice results... if you want, please send me a msg pipsologia at gmail dot com Thanks. I'll be very happy to help you with this set of rules.
+
+--- 帖子 #66 ---
+Hi guys ,thanks to all for this system. Macfx , with your modified ea i can trade only one pair per platform ? Thanks
+
+--- 帖子 #67 ---
+Yes. You MUST use Magic Numbers to control your orders. Use one magic Number (EXPERT ID) to each pair you want. The only limit is your computer. Because there's a huge number of calculations, in fast markets it may froze or delay to send orders and you will loose opportunities. As the system is based in trend directions, choose the better pair (better trend) and be happy. Don't be greedy. Use it to avarage your pip count in a good number (as 15 - 20 pips a day/month). With good money management it's all you need to be free in a couple of years.
+
+--- 帖子 #68 ---
+Ohka, can you please post a screen shot of that situation when the order was reopened right after the previous one was closed (if you still have it)? I am trying to understand why did it happen and I think if I see it happens on the chart it might help me... thanks a lot
+
+--- 帖子 #69 ---
+hi, I am attaching V3 of the EA. i haven't tested it at all because the trade have not started yet. If you discover any bug before I do, please let me know right away! the following changes have been made: 1. ema21 and ema5 are set to PRICE_OPEN mode 2. I combined the Take Profit Manager EA inside of this one. (I hope that the creator of this GREAT EA doesn't mind) . I will check if it works properly on Tuesday. In order to use it, set useProfitManager to true (it's false by default. in this case, it will use a regular trailing stop as before) 3. There is an option now to calculate the stop loss (when Take Profit Manager is off) according to ATR as ohka suggested. Thanks to Banzai for the piece of code. To use it, set useATRStopLoss=true. 4. The EA will not trade on SUN, SAT and FRI. Again, I still haven't tested it. Bugs may exist. The reason I am posting it prior to testing it properly, is that I will not be near my computer on Monday. If anyone finds any bug before i do it (on Tuesday), please let me know! Your help is greatly appreciated!!!
+
+--- 帖子 #70 ---
+Hi Domchik, because I've restarted my client a number of times since this transpired, I can't give you a screenshot. However, in post #57 you'll find a PDF file with information about what happened when. In the 'open trades' section you'll find a USDJPY position that was opened at 16:53 (all times from NorthFinance). In the closed transactions - the upper line - you'll find a USDJPY position that was closed in the same minute. This position ran into the trailing stop, at that time set at +25 pips. Since I ran your EA on the hourly chart, I didn't expect the second position being opened in the same minute. bye Ohka
+
+--- 帖子 #71 ---
+So far the version 3 is working very well today. the statement is attached. ohka, as you can see it hasn't reopened orders immediately after it closed it the only problem that I see now is the exits. I am using trailing stop, but for example the last trade on EUR/USD was stopped too early because of the trailing stop.. Take Profit Manager EA that is combined inside of my EA now, would have been useful if i had used multiple lots entries. but since I don't, as i can see it doesn't help me a lot.. so any idea regarding improving the exits will be highly appreciated
+
+--- 帖子 #72 ---
+I really appreciate your effort on this ea and the way you are perfecting it. Pls, I opened a an demo account of $200 capital but I disovered that the EA was not activated whereas working well on $50000 demo account. can the ea work only particular range of capital?
+
+--- 帖子 #73 ---
+Hi Denis, over 1% in a couple of hours is good, too bad this is no indication of future behavior... Forward testing will tell us what we need to know. Please find attached my today's statement - the EA's are still running but have no open position at the moment, so this is an ad hoc snapshot. I've set both useProfitManager and useATRStopLoss to true. Also, use MM is set to true with a Risk of 2.0. I'll have to mull over the exits, these are the most difficult parts of manual trading as well... take care Ohka
+
+--- 帖子 #74 ---
+i would suggest you to trade micro lots with $200 account. depending on your leverage, 0.1 lot orders might not be executed. either increase the leverage or trade micro lots. (i would suggest the second option)
+
+--- 帖子 #75 ---
+well, you are absolutely right. i will be satisfied if it gives me only 15-20pips once in 2 days (with no losses ) i am considering to start running it on my live account with micro lots. we'll see how it performs till the end of this week .
+
+--- 帖子 #76 ---
+Guys i started today using the new version Here the statment
+
+--- 帖子 #77 ---
+hope that is possible to read
+
+--- 帖子 #78 ---
+shouldnt the ea only take trade if for example LONG if 21 is over 80 not if 3 is over 21 and 80. because 21 could be under 80 yet 3 is barely above 21 and 80. http://i205.photobucket.com/albums/b...lnight/ggg.jpg
+
+--- 帖子 #79 ---
+I changed the rules in order to allow earlier entries. From manual backtesting i concluded that it gives much better results. the new rule is to wait only till EMA3 is above ema80 (long) or below it (short)
+
+--- 帖子 #80 ---
+are you running it with ATR stop enabled or disabled ?
+
+--- 帖子 #81 ---
+hi, I got an idea this morning. please tell me what you think. the idea is to manage the trades this EA opens on all charts (say, EUR/USD, USD/JPY, USD/CHF, GBP/USD, AUD/USD) as a single trade that will have a common take profit and a common stop loss. as i can see it, this system in general gives more winners than losers. If we run it on 5 pairs there is a good probability that it will in average win more often than only on 1 pair. so, if the total profit of all open trades reaches , say, 50 pips, then close all open orders, set the global variables to 0, and wait for the next opportunity for opening trades. it's possible to write an additional EA that will handle this task. what do you think ?
+
+--- 帖子 #82 ---
+Hi ,is disable
+
+--- 帖子 #83 ---
+The most import is to check the currency correlation for the pairs. The USD/CHF is the opposite do EUR/USD. The GBP/USD is the opposite do USD/JPY. In the last days there was a lack of correlation. The risk to trade a basket of currencies is when there's NO correlation. Then the price runs to the side it wants. In this case, when in correlation the profit will be the same (ou quite the same) of one currency with more lots. In this case the risk is higher in one single currency. But when out of correlation, the hisk is higher to have a basket of currencies running to different sides and Suports and resistences... I read a little about EA trading in the internet and people are looking for a single pair. I agree with them. It's easier to follow a trend, it's easier to look for opportunities (safe way). But, let's test it. That's the reason to have DEMO accounts!
+
+--- 帖子 #84 ---
+This morning trades
+
+--- 帖子 #85 ---
+hi Gioviforex, Yah, I went through your trading result posted, I discovered that you manually influenced the closing of most of your trading. Did you?
+
+--- 帖子 #86 ---
+I really appreciate the efforts of domchick to create a useful EA. I have tested the various versions with mixed results. This method works best when trending. This may seem an obvious statement but what I would propose is that the EA looks at the daily chart, same indicators, before inception of the trade. This would seem to give it a chance. As things stand, too many variables need to be assessed before a trade can be safely entered on the H1 chart alone, with real money, defeating the whole object of a robot EA and losing a large part of the moves. If the daily parameters were set for a trade - i.e. all 5 ema's in position an instruction could be made to trade long only, or short only, to the H1 section of the EA. Then it would be a matter of using 3/5 crossovers with trailing stops and money management. Hopefully taking advantage of longer trends. I am looking forward to going on holiday and leaving this running. Thanks again domchick.
+
+--- 帖子 #87 ---
+Hi , i closed manually only euro trade
+
+--- 帖子 #88 ---
+gioviforex, what are you using to close trades? are you using MM, if so what risk? Are you using take profit ea? is it defalt?
+
+--- 帖子 #89 ---
+hi, Domchick, Thanks for the last reply. And again, I discover that the EA does not take care of the news time as my demo account was cleared off today. Pls, what do I do when a big news is coming or a big move is expected by the time the current position is not favourable?
+
+--- 帖子 #90 ---
+The EA is working very good!, thanks to Domchicks. I believe it can work better, if it can be modified considering this observation. My observation, most of the trades entered by the Ea is almost at the exhaustion of trend and this contributes a lot to loss it incurs. I think it will be better if enters early. Thanks again.
+
+--- 帖子 #91 ---
+well, what i did was closing all open orders 1 hour before the news release yesterday. some of them with a little loss, but it was worth it as i saw afterwards
+
+--- 帖子 #92 ---
+Who can explain the inputs of multima_3 EA? Thanks in advance.
+
+--- 帖子 #93 ---
+What is the definition of slippage applied to this ea?
+
+--- 帖子 #94 ---
+It's all in the source MoM! Study it and you'll discover that it is used for OrderOpen and OrderClose. This variable defines how much the actual execution price may deviate from the current price (i.e. from the moment the order is executed from the EA). All the best Ohka
+
+--- 帖子 #95 ---
+Great system!! Really love it. Thanks for making the post! Does anyone know why only the sell criteria involve the 80EMA and not the buy? As this is something puzzling me and I am unable to think of a reason as to why this would be so. Thanks Bob
+
+--- 帖子 #96 ---
+both buy and sell involve 80EMA.
+
+--- 帖子 #97 ---
+Ok great, thanks for the reply! You might like to edit post #1 to say that. Cheers Bob
+
+--- 帖子 #98 ---
+hi, this is the latest version of this EA. i made a few changes to it. Now I use RAVI indicator (attached) to avoid bad entrances. it also uses a more advanced version of Take Profit Manager EA (thanks to its creator) if this version is not profitable, probably no other version of this EA will be
+
+--- 帖子 #99 ---
+Hi Domchik, thanks for continuing this EA and making it available to all of us. One suggestion about your usage of the RAVI indicator. You're checking RAVI for being below or above a border value as in: Inserted Code ravi &lt; raviHighestBorder This produces rather wide windows on the timeline where (in this case) going long would be ok. Perhaps you want to add an extra condition that ensures that (in this case) RAVI is rising, i.e. current value &gt; value of prior RAVI. For shorts it's of course the mirror image... What do you think? One last thing: on my terminal, activating the Fisher transform doesn't have a significant effect on how the graph is displayed, hence I switched it off. thanks again Ohka
+
+--- 帖子 #100 ---
+well, the purpose of this condition is just to make sure that RAVI is not too high or too low. what you suggest is to check the direction of this indicator. that wasn't my intention, but i can try what do you mean by that ?
+
+--- 帖子 #101 ---
+Thanks for trying my suggestion. As to the FisherTransform stuff: Checking the code I assumed the apply_IFT boolean variable to be a switch that activates or de-activates a Fisher transform on RAVI. Your question suggest it doesn't? Whatever, activating it didn't make any noticable difference, so I switched it off. bye Ohka
+
+--- 帖子 #102 ---
+oh, sorry, I haven't understood what you meant. Yes it does. and I guess you are right - it doesn't really change anything.
+
+--- 帖子 #103 ---
+This RAVI implementation seems to also show the direction of the trend, whereas Chande's original definition works more like ADX, i.e. only shows the existence and strenghts of a trend, but not it's direction. According to Chande's definition, we're not really talking about a RAVI indicator here, are we? Is this assertion correct or am I missing the boat? bye Ohka
+
+--- 帖子 #104 ---
+I have used RAVI in the past [not the version posted here] to determine whether the trend is good or not to get into a trade. I have found RAVI to miss a lot of good movement if one waits on it. I hope the final version posted here will be better.....
+
+--- 帖子 #105 ---
+personally I don't care about a lot of good movements, as long as those that remain are solid trades. One will not be able to profit from each and every chance, for me it's more about weeding out the bad trades, even if this will keep me out of some good trades. Ohka
+
+--- 帖子 #106 ---
+Dear Domchik, Thanks for the New EA. I tried backtesting (using default settings) on TF 30 minutes on IBFX and it regularly makes loss in every trade - It opens a trade and immediately in the next candle it closes the trade. Please tell me : 1 - What time frame to run this on ? 2 - Is IBFX (Interbank FX) OK for trading ? 3 - This should work on all pairs - Right ? 4 - Is this system based on this -&gt; http://5emas-forex-trading-system.co....htm?hop=omtop Thanks Domchik. Humble Trader
+
+--- 帖子 #107 ---
+i trade it on FXDD demo account. 1h chart. i am not familiar with the system you mentioned, so i guess the answer is no or not exactly. i have never tried to backtest it. in my forward testing, it doesn't close the order on the next candle. i am not sure why it happens in backtesting. the last week was pretty good for this EA . i'll try to post the statement in later today or tomorrow.
+
+--- 帖子 #108 ---
+Dear Donchik, Thanks for your quick reply. Yesterday while waiting for your reply I opened FXDD Demo Account and did start trading on 1 Hour TF. With in 24 hours my $ 3000.00 account turned into $ 3102.00. This EA works very well. However, I missed out several good moves on atleast 4 or 5 Pairs - See attached chart for GBPUSD. The screen displays : Distance = 22, MinDistsance = 1, isCrossed = 1, Shortok = 0 and longok = 1. This per my understanding of the program is a correct BUY signal. However it did not open this trade for the past 3 hours - as the buy signal continued. Looks like there is some Bug that needs to be fixed or some option that must be set right. Also it opened and closed closed EURJPY and USDJPY instantly in the same candle - Keep wondering why ? I am using these default settings : extern bool UseProfitManager = true; extern bool tradeOnHolidays = false; extern bool useATRStopLoss = true; extern int trailingStop=15; extern int takeProfit=100; extern double lots=0.1; extern int slippage = 3; extern int ema3_period=3; extern int ema5_period=5; extern int ema13_period=13; extern int ema21_period=21; extern int ema80_period=80; extern string ExpertName = "MultiEma_4"; extern int ExpertID = 15445631; extern bool UseMM = true; extern double Risk = 4; extern int minCrossDistance = 1; extern bool UseRavi = true; extern double raviMax = 0.08; extern double raviMin = -0.08; extern double raviLowestBorder = -0.4; extern double raviHighestBorder = 0.4; //extern int maxCrossDistance = 7; extern int rsiPeriod = 21; Please advise. My email - adil_syed at yahoo dot com. Thanks and best regards and Have a great new year and God bless you. Humble Trader
+
+--- 帖子 #109 ---
+Guys, I have been testing this system and modifying the EA to be a smiple crossover buy/sell. I'll share the EA once is ready but for now i need to confirm one thing. Do we only trader on CROSSOVERS??? if YES then which ones should trigger the trade? as not all MA does it at the same time? Thanks
+
+--- 帖子 #110 ---
+for a simple cross-over system, I'd only trade at the cross-overs of the shortest MA's, but only in the direction of the longer MA's. Ohka
+
+--- 帖子 #111 ---
+hi, thanks a lot for your feedback. i got the similar results for this week. i also saw this bug when it closes the trade on the same candle. unfortunately, i had to close and reopen my MT and i missed one very important thing that can help me to understand why it happens : can you tell me please what was the color of a short line on MT chart when the EA closed the order on the same candle? it can be either PLUM or LIME. according to this color i will understand which function caused this bug. maybe you can post a screen shot of this moment when it happened? it would be really great if you still have it! i think that this problem is caused by Take Profit Manager EA that I have combined inside my EA. that's why i will run it next week with extern bool UseProfitManager = false; meaning that the EA will just use a regular trailing stop. as for the missed entries - have you noticed what were the values of RSI21 and RAVI indicators? if RSI is higher than 70 , the EA won't open a BUY order (the same for SELL when RSI below 30) . Aslo, if RAVI indicator value is between 0.08 and -0.08 - it won't open any order either. in addition, the rule says that after the EA closes LONG order, it will wait till ema13 and ema21 are crossed in SELL direction, and only AFTER this happens, it will be able to open BUY order when ema13 and ema21 are crossed in BUY direction again.
+
+--- 帖子 #112 ---
+yes, that's what i would do too. Ohka suggested this idea, but unfortunately I had no time to implement it. it would be great if anyone could do this.
+
+--- 帖子 #113 ---
+already done, wait for a day or so and i'll post it here ... its time to give something back to you guys thanks heaps ...
+
+--- 帖子 #114 ---
+Alright my friends, finally I am posting my EA which is still being developed but seems to be in "working" state right now. it uses the same system as multi cross over but with the following additions/subtractions YES - Trade ONLY on a crossover of 3EMA and 5EMA in the direction on main trend YES - RSI confirmation YES - Sound Alerts YES - Screen indicators YES - Time based trading YES - One trade at a time per symbol NO - RAVI NO - Money management NO - Auto TS I always like EAs to be simple and only to be able to take trade automatically without the need of being in front of the monitor all the time. My EAs also need human supervision once trades being done - humans are better money and risk managers .... Happy to see your comments, advice and any changes that you would like to do. In future this EA will email/sms/text msg one a trade and few other bits and pieces... enjoy. - Syed
+
+--- 帖子 #115 ---
+Hi domchik, Unfortunately I also lost all the screen settings and am not able to locate the actual colors as desired by you. Tonight I'll watch it carefully and post the snap shot on this message. Best regards Humble.
+
+--- 帖子 #116 ---
+Hi! I want to join to you. Can you tell me: - The cross are you using? - The time chart? - Are you changing any EA setup? Thanks!
+
+--- 帖子 #117 ---
+I've just made 24 pips on EURCAD using my EA ... but lossing 45 pips now - found a bug I'll repost it onces it fixed, until then - DONT USE IT.
+
+--- 帖子 #118 ---
+thanks a lot! i am pretty sure that the problem is with Take Profit Manager logic. Therefore, i am going to set UseProfitManager = false and use a regular trailing stop. In addition, I am working on the version that implements Helon's suggestion to exit when Simple MA (8) crosses EMA(5) in the opposite direction. looks like this exit rule is better than a trailing stop. I am almost finished with it. Will post this version later today.
+
+--- 帖子 #119 ---
+attached is a version that doesn't use Profit Manager (UseProfitManager=fasle) and instead of trailing stop, it exits upon Simple MA(8) and EMA(5) cross in the opposite direction. trailingStop in this version is set to 0. if you change it to another value, it will use trailing stop in addition to the above exit rule. Please notice that it's VERY IMPORTANT to set the global variables for all the pairs before the EA starts working. For example, if you are starting to run it on EUR/USD at the end of the uptrend, set the global variable for this pair in such a way that it will not allow to open BUY orders and will wait for the reversal. (allowLongEURUSD = 0 )
+
+--- 帖子 #120 ---
+this EA is being tested on 1h on all major pairs. Currently i am using the default setting as they appear in the version 4_1.
+
+--- 帖子 #121 ---
+Dom, mate can I get some info about Ravifisher indicator - what does it do? how does it work etc? thanks
+
+--- 帖子 #122 ---
+sure, RAVI is an indicator that shows the strength of the current trend. I am using the version from www.fx fisher man.com forum. there are 2 parallel lines on it. when the signal line is between these 2 lines, it means that the trend is weak. these lines are at 0.08 and -0.08 levels. when the trend is weak there is a good chance for whipsaws. I am using it as a filter. hope it helps.
+
+--- 帖子 #123 ---
+Dom, why shouldnt we use MACD??? I have never used ravi so cant say much right now but just applying MACD on your emas make it pretty good. just a thought.
+
+--- 帖子 #124 ---
+It's a good idea. I'll prepare a version that uses MACD instead of RAVI and we'll see how is it going .
+
+--- 帖子 #125 ---
+Yah, lets do it. +ve MACD will be LONG and -ve will be SHORT - correct? I was even thinking about MACD corssovers its wild ... but lets stick to ema main trend, 3and 5 crossover with RSI and MACD confirmation. and yes, one trade per bar .... that was the bug in my EA - its fixed and i'll repost it tomorrow with MACD ... until then take care and have a great new year ...
+
+--- 帖子 #126 ---
+Hi Domchik, Thanks for the new release. Works very well - All 3 trades doign great - 100+ pips in 6 hours today. However some errors are diplayed. Please see the attchment. Can you please highlight how to take care of Global variables before loading the EA ? Thanks and a happy new Year to you. Humble.
+
+--- 帖子 #127 ---
+PHP Code int Distance = MathFloor ( MathAbs (( ema3 - ema5 )/ Point )); int Distance2 = MathFloor ( MathAbs (( ema13 - ema21 )/ Point )); //maxCrossDistance isCrossed = Crossed ( ema3 , ema5 ); isCrossedBig = Crossed ( ema13 , ema21 ); .... .... .... if ( isCrossedBig == 1 &amp;&amp; Distance2 &gt;= minCrossDistance ) { GlobalVariableSet ( "allowShort" + Symbol (), 1 ); Comment ( "allowShort = true" + " " + "Distance = " + Distance2 + " mincrossDistance = " + minCrossDistance ); } if ( isCrossedBig == 2 &amp;&amp; Distance2 &gt;= minCrossDistance ) { GlobalVariableSet ( "allowLong" + Symbol (), 1 ); } In the above code, allowshort gets set to 1 or true when 13ema is greater then 21ema, in other words, heading up!! isnt that mean it should be LONG not SHORT??? Dom is being very helpful and replying to my PMs but i just wanted to ask you guys if you have noticed it too??? thanks
+
+--- 帖子 #128 ---
+syedks I agree that it should be LONG also...
+
+--- 帖子 #129 ---
+Guys, let me try to explain my twisted logic again It's not a bug - trust me the flow of the EA goes like this : 1. when it's initialized, the variables allowShort and allowLong are set to 1 It means : "Allow both long and short trades" 2. When LONG conditions are met according to : if (longOk &amp;&amp; isCrossed == 1 &amp;&amp; Distance &gt;= minCrossDistance &amp;&amp; GlobalVariableGet("allowLong"+ Symbol()) == 1 ) , allowLong variable is set to 0 and allowShort still equals to 1 (as it was set in Init function) And we send a BUY order. Am I correct so far ? 3. the trend according to ema13 and ema21 changes to DOWN ( isCrossedBig = 2) when it happens I DO WANT TO ALLOW long trades again ONLY when ALL other conditions are met. Of course, these conditions are NOT met when isCrossedBig = 2. allowLong is only a flag that says "hey, since in the past we already had a down trend, we can in the FUTURE when all the criteria for LONG are met, send a BUY order." The purpose of this flag is to prevent 2 consecutive BUYs. 4 . our previous BUY order hits trailing stop at some point. 5. a downtrend continues and we make SELL order. allowShorts is being set to 0 (allowLong already equals 1 at this point) 6. Our SELL order is closed by trailing stop. What do we have now ? allowLong = 1 allowShort = 0 6. The trend reverses and now it's uptrend again. we still have : allowLong = 1 allowShort = 0 - no changes. 7. EA waits until all the conditions for LONG are met and it sends BUY order (since allowLong = 1, BUY order is allowed. and so on and so forth let me know if my explanations suck P.S. I made these variables global, because i want to be able to intervene the trade manually. if all conditions are met and EA is going to ,say, open BUY , BUT I see visually that this is the end of the trend, then i will change allowLong = 0. EA will wait for the trend reversal (remember, that when ema13 and ema21 cross DOWN, allowLong is set to 1 ? ) So, when i set allowLong manually to be equal 1, the EA's next order can be ONLY SELL. AFTER this SELL is closed, allowLong will be automatically set to 1, and will be allowed to send BUY orders again .
+
+--- 帖子 #130 ---
+domchik Your logic now makes sense..... Thanks, ET
+
+--- 帖子 #131 ---
+Thanks Dom, but there is still one problem. I really dont want to be pain, but rather want to be part of this EA to make it more efficient and helpful for others. Let me explain.. what I am trying to say... you said: Fine, but according to the following code, which runs way before any other code and right after the start and indicator values:
+
+--- 帖子 #132 ---
+Domchik Using the latest EA, why did this open and close [see the order picture at bottom of chart]? -2.00 PROFIT
+
+--- 帖子 #133 ---
+that's because there is a bug in Take Profit Manager that is combined with this EA. use usetakeprofitmanager = false until i fix it
+
+--- 帖子 #134 ---
+The "UseProfitManager = false" was set in all cases on all the pairs I had attached it to which showed a loss.
+
+--- 帖子 #135 ---
+MultEma_4_1.mq4 i already placed the EA in expert folder and the smiley is smiling for 24hours with out fail. But so far no trade at all.. any other things i should do...
+
+--- 帖子 #136 ---
+i am working on fixing it... very annoying bug..
+
+--- 帖子 #137 ---
+Please check your Experts log file for any errors, and also be sure you have not checked the box that requires confirmation of a trade.
+
+--- 帖子 #138 ---
+Okay. What is the point of RSI, if anytime the MA's that u want to cross r going to cross will always be at 50 RSI?????????
+
+--- 帖子 #139 ---
+Hi thank you domchik for this simple ea; and i think profitable ea. iam reading your thread for two days ago. i hope that i will be helpful in this,,
+
+--- 帖子 #140 ---
+hopefully the bug that caused the trades to get closed right after the opening is fixied in this version. Also, i added a log file that will help to understand what goes wrong. please run this version from the next week. I recommend to use the default settings. you will have to copy log.mq4 to /Experts/Include folder.
+
+--- 帖子 #141 ---
+the check of RSI(50) can be redundant in most cases. what's more important is NOT to open long orders when RSI &gt; 70 and NOT to open short orders when RSI &lt; 30 .
+
+--- 帖子 #142 ---
+A great looking system domchik. I'm looking forward to seeing how the new EA performs. rgs mike
+
+--- 帖子 #143 ---
+I am getting a compile error, see screen shot. I had also tried copying the log.mq4 into the include directory, no luck....
+
+--- 帖子 #144 ---
+The EA installed fine on a chart for me. I tried manually compiling it and it showed two warnings and no errors. I just clicked save on the download and directed the log.mq4 to the experts\include directory. The screenshot shows you are trying to compile an indicator. MultEma_4_2.mq4 is an expert.
+
+--- 帖子 #145 ---
+Too early, oversight on my part.... I would've thought I could compile from anywhere....
+
+--- 帖子 #146 ---
+Hi. I hope your hard work will have a good result. i just want to ask if we need to set the global variables to 0 or 1 to start the ea correctly. thanks
+
+--- 帖子 #147 ---
+Domchik, I like this EA working with MA, and have implement your last version 4.2 to night. Till now open and close two trades with a loss :usdjpy and euraud. I guess the reason is because the MA is in the opposite direction of the trade euraud buy MA 3 previous hour : 1,6889 next hour (trade) 1,6886 usdjpy sell MA 3 previous hr : 108,54... next hr (trade) 108,67 Same thing with the trades in progress at the moment I write eurchf, eurgbp,and gbpusd, all losses, but not because of opposite direction between EA and MA3 trend May be the real explanation is because restarting the EA, EA opens trade as soon as all conditions are fullfilled, even if trend is opposite, so let's see evolution during this week. Again Domchik,thanks a lot this EA should be profitable by me
+
+--- 帖子 #148 ---
+my manual trade using TF30 is working great.. thanks domchik.. maybe next week can try real account!
+
+--- 帖子 #149 ---
+what time and on what pair did you get a signal? thxs
+
+--- 帖子 #150 ---
+I had opened the 4.2 EA at start of Asian Session last night using the defaults on the one hour chart, all positions were stopped out with a loss: EURCHF / EURJPY[twice] / GBPJPY[twice] / GBPUSD In all cases, the MAs were practically flat when the trades were triggered.
+
+--- 帖子 #151 ---
+I have more or less the same results, no open trades at the moment
+
+--- 帖子 #152 ---
+Sorry, I forgot some trades, see modified image
+
+--- 帖子 #153 ---
+It's a great system but I personally like to trade manually and you can bet that the results are better too this way.
+
+--- 帖子 #154 ---
+It is too early to say that this EA version works fine or not, with automatic system, you are not beaten by your emotions, and don't need to be under your screen full time
+
+--- 帖子 #155 ---
+You are right about being under the screen but it is always possible to use EA just for signals and then confirm and open the trade manually. But hey, it's just my opinion. Others may like to us EA's. There is just so many factors that EA can't recognize, like price patterns etc. I'm not saying that this EA wouldn't work, I think it's a great EA. Another thing I find useful regardless the system is to use support and resistance lines. I actually set my TP's according to them.
+
+--- 帖子 #156 ---
+I agree.. so far manual is much better than the EA!
+
+--- 帖子 #157 ---
+For sure, I stop now testing this version, results are awful
+
+--- 帖子 #158 ---
+Hi guys,, dont give up, try it on defferent instrument on defferent TF... while testing i used G/Y on 5 min and its well done and try to use it also on 1 min ,, i know its not logic to use 1 min but i have 4 success trade yesterday night and one fail.. tell me your result guys.
+
+--- 帖子 #159 ---
+I want to add that i have change only the tp value that i think 80 pip big value so i put it 50 on gbpjpyand 40 on others... but no change on the other parameters .
+
+--- 帖子 #160 ---
+till this point i am in -49 pips this week on 5 pairs alltogether. this week is the worst week possible for trend following EA and so far i am not dissapointed with it at all! it hasn't lost a lot despite all the whipsaws and i am pretty sure it will close the gap of -49 pips easily. Again, it's impossible for trend following system to win when there is no trend. The best it can do is not to loose too much and so far i am satisfied with the results. please notice that it's very important to set the global variables for each pair manually before the EA starts running and after you restart MT.
+
+--- 帖子 #57 ---
+I have the same opinion. This is a Trend following EA. The only reason to keep it running this week for me is to see how it will manage times like these. I have 3 charts running and my largest stop was 25 pips. It's absolutely normal to poor trade Daily ranges (50-60) pips. I'm sure that it's profitable since it was in the tests last december. Domchik, count on me for the tests buddy! Don't give up... mat the pips be with you all!
+
+--- 帖子 #58 ---
+I have been demo'ing the EA, it still has not been good except for one day. I would like to use the EA as a heads up, and not to actually trade, but those SL are a killer. Has anyone try any other sessions? I basically let the EA run 24HRs a day on 4 pairs..... Anyone doing any other filtering manually instead of it autotrading?
+
+--- 帖子 #59 ---
+Nice system. I will be testing it. I usually trade when the 5/8 EMA and 8EMA /13SMA crossover.
+
+--- 帖子 #60 ---
+I guess its time for me to not bother with the EA, just a consistent loser [99%] even if using the default settings. It needs to perform more filtering other than just following the rules as posted since I leave the EA running 24hrs a day, and most trades occur during the Asian/European sessions.
+
+--- 帖子 #61 ---
+I download all files of this great system,but I do not know how to install in MT4 FILES to make it automatically run 24hours/5day,should I keep my computer and MT4 System always power on? How to ensure EA perfectly run? tks for your kind help ele:eleforex@163.com
+
+--- 帖子 #62 ---
+Hi Domchik Are you stll using your v4_2 EA? What are the latest results? With regards, Pramod
+
+--- 帖子 #63 ---
+My idea is very simple (I think) I want an indicator draw, buy and sell arrows in graphic, It is based on two EMAs, with some important rules. EMAs are the periods of 100 and 13, with the SHIFT 8. Buy Rules: Only draw an arrow, to buy in the chart when the price closes above the 13 EMA and 13 EMA is above the 100 EMA periods, also liked that there was a alert in a window, with the stop loss calculated in the last low, and the profit target 2x larger than the stop loss, and also Alert out of trading when the price closes below the EMA 13. Sell ​​Rules: Only draw an arrow, sales in the chart when the price closes below the EMA 13 EMA and 13 EMA is below the 100, I also wish there was a alert in a window, with the stop loss calculated on the last high , and the target profit 2x larger than the stop loss, and also Alert out of trading when the price closes above the 13 EMA. Tahank you.
+
+
+===== 附件下载链接 =====
+
+未找到附件
